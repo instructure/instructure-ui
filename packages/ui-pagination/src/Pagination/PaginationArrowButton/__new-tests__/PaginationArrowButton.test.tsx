@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { PaginationArrowButton } from '../index'
@@ -38,7 +39,7 @@ describe('<PaginationArrowButton />', () => {
   })
 
   it('should provide a ref to the button element', async () => {
-    const buttonRef = jest.fn()
+    const buttonRef = vi.fn()
 
     render(
       <PaginationArrowButton

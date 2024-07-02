@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
@@ -32,6 +34,24 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { RatingIcon } from '../index'
 
 describe('<RatingIcon />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('transitions when filled on render and animateFill is true', async () => {
     const { container } = render(
       <InstUISettingsProvider

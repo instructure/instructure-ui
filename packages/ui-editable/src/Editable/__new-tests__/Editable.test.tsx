@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -33,7 +35,7 @@ import type { EditableRenderProps } from '../props'
 const TEXT_VIEW = 'text-view'
 const TEXT_EDIT = 'text-edit'
 
-const childRender = jest.fn(
+const childRender = vi.fn(
   ({
     mode,
     getContainerProps,
@@ -68,14 +70,27 @@ const childRender = jest.fn(
 )
 
 describe('<Editable />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
   afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
     childRender.mockClear()
   })
 
   it('should render view mode', async () => {
-    render(
-      <Editable mode="view" onChangeMode={jest.fn()} render={childRender} />
-    )
+    render(<Editable mode="view" onChangeMode={vi.fn()} render={childRender} />)
     const currentMode = childRender.mock.calls[0][0].mode
     const viewModeText = screen.getByText(TEXT_VIEW)
     const editButton = screen.getByRole('button', { name: TEXT_EDIT })
@@ -88,9 +103,7 @@ describe('<Editable />', () => {
   })
 
   it('should render edit mode', async () => {
-    render(
-      <Editable mode="edit" onChangeMode={jest.fn()} render={childRender} />
-    )
+    render(<Editable mode="edit" onChangeMode={vi.fn()} render={childRender} />)
     const currentMode = childRender.mock.calls[0][0].mode
     const inputForEdit = screen.getByTestId('edit-mode-input')
     const editButton = screen.getByRole('button', { name: TEXT_EDIT })
@@ -103,7 +116,7 @@ describe('<Editable />', () => {
   })
 
   it('should change to edit mode on button click', () => {
-    const onChangeModeSpy = jest.fn()
+    const onChangeModeSpy = vi.fn()
 
     render(
       <Editable
@@ -123,7 +136,7 @@ describe('<Editable />', () => {
   })
 
   it('should change to edit mode on component click', async () => {
-    const onChangeModeSpy = jest.fn()
+    const onChangeModeSpy = vi.fn()
 
     render(
       <Editable
@@ -140,7 +153,7 @@ describe('<Editable />', () => {
   })
 
   it('should set the button to visible on mouse over', async () => {
-    const onChangeModeSpy = jest.fn()
+    const onChangeModeSpy = vi.fn()
 
     render(
       <Editable
@@ -167,7 +180,7 @@ describe('<Editable />', () => {
   })
 
   it('should change to view mode on editor blur', () => {
-    const onChangeModeSpy = jest.fn()
+    const onChangeModeSpy = vi.fn()
 
     render(
       <Editable
@@ -185,7 +198,7 @@ describe('<Editable />', () => {
   })
 
   it('should change to view mode on escape', () => {
-    const onChangeModeSpy = jest.fn()
+    const onChangeModeSpy = vi.fn()
 
     render(
       <Editable
@@ -202,12 +215,12 @@ describe('<Editable />', () => {
   })
 
   it('should call onChange when the user is finished editing', () => {
-    const onChangeSpy = jest.fn()
+    const onChangeSpy = vi.fn()
 
     const { rerender } = render(
       <Editable
         mode="edit"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         render={childRender}
         value="initial_value"
         onChange={onChangeSpy}
@@ -223,7 +236,7 @@ describe('<Editable />', () => {
     rerender(
       <Editable
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         render={childRender}
         value="updated_value"
         onChange={onChangeSpy}
@@ -234,14 +247,14 @@ describe('<Editable />', () => {
   })
 
   it('should warn if readOnly + mode="edit"', () => {
-    const consoleWarningSpy = jest
+    const consoleWarningSpy = vi
       .spyOn(console, 'warn')
       .mockImplementation(() => {})
 
     render(
       <Editable
         mode="edit"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         render={childRender}
         value="foo"
         readOnly

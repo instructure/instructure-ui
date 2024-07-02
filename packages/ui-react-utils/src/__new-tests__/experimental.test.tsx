@@ -23,6 +23,7 @@
  */
 
 import React, { Component } from 'react'
+import { vi } from 'vitest'
 import PropTypes from 'prop-types'
 
 import { render } from '@testing-library/react'
@@ -59,7 +60,7 @@ describe('@experimental', () => {
     const ExperimentalComponent = experimental(['bar'])(TestComponent)
 
     it('should warn when using an experimental prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
       render(<ExperimentalComponent bar="Jane" />)
@@ -76,7 +77,7 @@ describe('@experimental', () => {
     })
 
     it('should not output a warning using a non-experimental prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
       render(<ExperimentalComponent qux="Jane" />)
@@ -87,7 +88,7 @@ describe('@experimental', () => {
     })
 
     it('should not output a warning for an experimental prop when dangerously ignored', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -108,7 +109,7 @@ describe('@experimental', () => {
     const ExperimentalComponent = experimental()(TestComponent)
 
     it('should warn that the entire component is experimental if no props are supplied', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
       render(<ExperimentalComponent />)
@@ -125,7 +126,7 @@ describe('@experimental', () => {
     })
 
     it('should not output a warning for a component when dangerously ignored', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
       render(<ExperimentalComponent __dangerouslyIgnoreExperimentalWarnings />)

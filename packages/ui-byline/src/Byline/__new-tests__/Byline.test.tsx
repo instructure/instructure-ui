@@ -24,6 +24,7 @@
 
 import React, { ComponentType } from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { Byline } from '../index'
@@ -55,6 +56,24 @@ const renderByline = (props: Partial<BylineProps> = { ...initProps }) => {
 const originalOmitViewProps = View.omitViewProps
 
 describe('<Byline />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   beforeAll(() => {
     // View component read Component.name instead of Component.displayName
     // causing [undefined] in error messages
@@ -117,7 +136,6 @@ describe('<Byline />', () => {
   })
 
   describe('when passing down props to View', () => {
-    let spyOnConsoleError: jest.SpyInstance
     const customAllowedProps: { [key: string]: string } = { margin: 'small' }
     const customIgnoredProps = ['elementRef', 'children']
 
@@ -127,19 +145,11 @@ describe('<Byline />', () => {
       return !(prop in customAllowedProps) && !customIgnoredProps.includes(prop)
     })
 
-    beforeEach(() => {
-      spyOnConsoleError = jest.spyOn(console, 'error').mockImplementation()
-    })
-
-    afterEach(() => {
-      spyOnConsoleError.mockRestore()
-    })
-
     testPropsToAllow.forEach((prop) => {
       it(`should allow the '${prop}' prop`, () => {
         renderByline({ [prop]: customAllowedProps[prop] })
 
-        expect(spyOnConsoleError).not.toHaveBeenCalled()
+        expect(consoleErrorMock).not.toHaveBeenCalled()
       })
     })
 
@@ -147,10 +157,10 @@ describe('<Byline />', () => {
       it(`should NOT allow the '${prop}' prop`, () => {
         renderByline({ [prop]: 'foo' })
         const expectedWarningMessage = `Warning: [Byline] prop '${prop}' is not allowed.`
-        const warningMessage = spyOnConsoleError.mock.calls[0][0]
+        const warningMessage = consoleErrorMock.mock.calls[0][0]
 
         expect(warningMessage).toBe(expectedWarningMessage)
-        expect(spyOnConsoleError).toHaveBeenCalledTimes(1)
+        expect(consoleErrorMock).toHaveBeenCalledTimes(1)
       })
     })
   })

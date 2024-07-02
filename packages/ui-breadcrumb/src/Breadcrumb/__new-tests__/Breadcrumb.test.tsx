@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 // eslint-disable-next-line no-restricted-imports
@@ -37,16 +39,23 @@ const TEST_TEXT_01 = 'Account'
 const TEST_TEXT_02 = 'Settings'
 const TEST_LINK = 'http://instructure-test.com'
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<Breadcrumb />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
 
   it('should be accessible', async () => {
@@ -101,9 +110,5 @@ describe('<Breadcrumb />', () => {
 
     expect(icon).toBeInTheDocument()
     expect(icon).toHaveAttribute('aria-hidden', 'true')
-  })
-
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
   })
 })

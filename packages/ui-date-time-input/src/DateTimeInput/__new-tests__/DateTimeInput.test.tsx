@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -31,14 +32,21 @@ import { DateTimeInput } from '../index'
 import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
 
 describe('<DateTimeInput />', () => {
-  let consoleErrorMock: jest.SpyInstance
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
-    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation()
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
   })
 
   afterEach(() => {
+    consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
   })
 
@@ -68,7 +76,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should use the value', () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T23:30Z', locale, timezone)
@@ -99,7 +107,7 @@ describe('<DateTimeInput />', () => {
     const timezone = 'US/Eastern'
     const value = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const defaultValue = DateTime.parse('2016-04-01T17:00Z', locale, timezone)
-    const onChange = jest.fn()
+    const onChange = vi.fn()
 
     render(
       <DateTimeInput
@@ -150,7 +158,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should call invalidDateTimeMessage if time is set w/o a date and is required', async () => {
-    const invalidDateTimeMessage = jest.fn((_rawd) => 'whoops')
+    const invalidDateTimeMessage = vi.fn((_rawd) => 'whoops')
 
     const { container } = render(
       <DateTimeInput
@@ -177,7 +185,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should not call invalidDateTimeMessage if time is set w/o a date', async () => {
-    const invalidDateTimeMessage = jest.fn((_rawd) => 'whoops')
+    const invalidDateTimeMessage = vi.fn((_rawd) => 'whoops')
 
     render(
       <DateTimeInput
@@ -204,7 +212,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should fire the onChange event when TimeInput value changes', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
 
     const locale = 'en-US'
     const timezone = 'US/Eastern'
@@ -332,7 +340,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should update message when value prop changes', () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -358,7 +366,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should update message when locale changed', () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -384,7 +392,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should update message when timezone changed', () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -561,7 +569,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should read locale and timezone from context', () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const { container } = render(
       // Africa/Nairobi is GMT +3
@@ -583,7 +591,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should format date according to dateFormat', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const props = {
       description: 'date_time',
@@ -616,7 +624,7 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should format bottom message according to messageFormat', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const props = {
       description: 'date_time',

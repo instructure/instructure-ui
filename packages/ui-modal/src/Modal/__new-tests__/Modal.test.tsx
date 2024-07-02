@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -31,9 +32,35 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from '../index'
 import type { ModalProps } from '../props'
 
 describe('<Modal />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+  const originalScroll = window.scroll
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
   afterEach(() => {
-    jest.clearAllMocks()
-    jest.restoreAllMocks()
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
+  beforeAll(() => {
+    // Mocking window.scroll to prevent test output pollution
+    Object.defineProperty(window, 'scroll', {
+      value: vi.fn(),
+      writable: true
+    })
+  })
+
+  afterAll(() => {
+    window.scroll = originalScroll
   })
 
   it('should render nothing and have a node with no parent when closed', () => {
@@ -154,9 +181,9 @@ describe('<Modal />', () => {
   })
 
   it('should use transition', async () => {
-    const onEnter = jest.fn()
-    const onEntering = jest.fn()
-    const onEntered = jest.fn()
+    const onEnter = vi.fn()
+    const onEntering = vi.fn()
+    const onEntered = vi.fn()
 
     const { findByRole } = render(
       <Modal
@@ -183,7 +210,7 @@ describe('<Modal />', () => {
   })
 
   it('should support onOpen prop', async () => {
-    const onOpen = jest.fn()
+    const onOpen = vi.fn()
     const { findByRole } = render(
       <Modal
         open
@@ -204,7 +231,7 @@ describe('<Modal />', () => {
   })
 
   it('should support onClose prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
 
     const { findByRole, rerender } = render(
       <Modal
@@ -237,7 +264,7 @@ describe('<Modal />', () => {
   })
 
   it('should dismiss when overlay clicked by default', async () => {
-    const onDismiss = jest.fn()
+    const onDismiss = vi.fn()
     const { findByText } = render(
       <Modal
         open
@@ -259,8 +286,8 @@ describe('<Modal />', () => {
   })
 
   it('should NOT dismiss when overlay clicked with shouldCloseOnDocumentClick=false', async () => {
-    const onDismiss = jest.fn()
-    const onClickOuter = jest.fn()
+    const onDismiss = vi.fn()
+    const onClickOuter = vi.fn()
 
     const { findByRole, getByTestId } = render(
       <div>
@@ -308,10 +335,6 @@ describe('<Modal />', () => {
 
   describe('children validation', () => {
     it('should pass validation when children are valid', async () => {
-      const consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-
       const { findByRole } = render(
         <Modal open label="Modal Dialog" shouldReturnFocus={false}>
           <Modal.Header>Hello World</Modal.Header>
@@ -324,16 +347,10 @@ describe('<Modal />', () => {
       const dialog = await findByRole('dialog')
 
       expect(dialog).toBeInTheDocument()
-      expect(consoleErrorSpy).not.toHaveBeenCalled()
-
-      consoleErrorSpy.mockRestore()
+      expect(consoleErrorMock).not.toHaveBeenCalled()
     })
 
     it('should not pass validation when children are invalid', async () => {
-      const consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-
       const { findByRole } = render(
         <Modal open label="Modal Dialog" shouldReturnFocus={false}>
           <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -348,14 +365,12 @@ describe('<Modal />', () => {
         'Expected children of Modal in one of the following formats:'
 
       expect(dialog).toBeInTheDocument()
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect(consoleErrorMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.any(String),
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleErrorSpy.mockRestore()
     })
 
     it('should pass inverse variant to children when set', async () => {

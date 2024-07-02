@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
@@ -39,6 +40,24 @@ const renderBadge = (props: Partial<BadgeProps> = { count: 100 }) => {
 }
 
 describe('<Badge />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should be accessible', async () => {
     const { container } = renderBadge()
     const axeCheck = await runAxeCheck(container)
@@ -111,7 +130,7 @@ describe('<Badge />', () => {
   })
 
   it('should call elementRef function', () => {
-    const refMock = jest.fn()
+    const refMock = vi.fn()
     const { container } = renderBadge({ elementRef: refMock })
 
     expect(refMock).toHaveBeenCalledWith(container.firstChild)

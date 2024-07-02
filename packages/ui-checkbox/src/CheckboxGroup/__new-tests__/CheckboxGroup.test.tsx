@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -56,6 +57,24 @@ const renderCheckboxGroup = (props?: Partial<CheckboxGroupProps>) => {
 }
 
 describe('<CheckboxGroup />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('adds the name props to all Checkbox types', () => {
     renderCheckboxGroup({ name: TEST_NAME })
     const checkboxes = screen.getAllByRole('checkbox')
@@ -86,7 +105,7 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('does not call the onChange prop when disabled', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderCheckboxGroup({ onChange, disabled: true })
     const checkboxElement = screen.getAllByRole('checkbox')[0]
 
@@ -99,7 +118,7 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('does not call the onChange prop when readOnly', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderCheckboxGroup({ onChange, readOnly: true })
     const checkboxElement = screen.getAllByRole('checkbox')[0]
 
@@ -112,7 +131,7 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('should not update the value when the value prop is set', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderCheckboxGroup({ onChange, value: ['tester'] })
     const checkboxes = screen.getAllByRole('checkbox')
 
@@ -129,7 +148,7 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('should add the checkbox value to the value list when it is checked', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderCheckboxGroup({ onChange })
     const checkboxes = screen.getAllByRole('checkbox')
 
@@ -156,7 +175,7 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('should remove the checkbox value from the value list when it is unchecked', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const defaultValue = [TEST_VALUE_1, TEST_VALUE_2]
     renderCheckboxGroup({ onChange, defaultValue })
     const checkboxes = screen.getAllByRole('checkbox')
@@ -174,7 +193,7 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('passes the array of selected values to onChange handler', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const defaultValue = [TEST_VALUE_2]
     renderCheckboxGroup({ onChange, defaultValue })
     const checkboxes = screen.getAllByRole('checkbox')

@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -35,6 +37,19 @@ import { Tooltip } from '../index'
 import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', async () => {
     render(
       <Tooltip renderTip="Hello">
@@ -153,7 +168,7 @@ describe('<Tooltip />', () => {
 
   describe('using children', () => {
     it('should call onClick of child', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <Tooltip renderTip={<h2>Hello</h2>}>

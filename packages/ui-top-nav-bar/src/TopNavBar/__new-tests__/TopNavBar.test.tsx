@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 // eslint-disable-next-line no-restricted-imports
@@ -34,33 +36,23 @@ import TopNavBarExamples from '../__examples__/TopNavBar.examples'
 
 const TEST_MENU_ITEM_TEXT = 'Test menu item text'
 
-let originalResizeObserver: typeof ResizeObserver
 let originalMatchMedia: typeof window.matchMedia
 
 beforeAll(() => {
-  originalResizeObserver = global.ResizeObserver
   originalMatchMedia = window.matchMedia
 
-  class MockResizeObserver {
-    observe = jest.fn()
-    unobserve = jest.fn()
-    disconnect = jest.fn()
-  }
-  global.ResizeObserver = MockResizeObserver
-
-  window.matchMedia = jest.fn().mockImplementation((query) => {
+  window.matchMedia = vi.fn().mockImplementation((query) => {
     return {
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn()
+      addListener: vi.fn(),
+      removeListener: vi.fn()
     }
   })
 })
 
 afterAll(() => {
-  global.ResizeObserver = originalResizeObserver
   window.matchMedia = originalMatchMedia
 })
 
@@ -93,6 +85,24 @@ const BaseExample = () => {
 }
 
 describe('<TopNavBar />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     const { getByText } = render(<BaseExample />)
 

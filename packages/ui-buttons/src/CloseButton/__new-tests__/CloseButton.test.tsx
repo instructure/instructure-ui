@@ -24,17 +24,20 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { CloseButton } from '../index'
 
 describe('<CloseButton />', () => {
-  let consoleWarningMock: jest.SpyInstance
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution
-    consoleWarningMock = jest.spyOn(console, 'warn').mockImplementation()
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
   })
 
   afterEach(() => {
@@ -55,7 +58,7 @@ describe('<CloseButton />', () => {
   })
 
   it('should pass the `onClick` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
 
