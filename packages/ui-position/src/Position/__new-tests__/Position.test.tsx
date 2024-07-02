@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { within } from '@instructure/ui-utils'
 
@@ -85,7 +86,7 @@ describe('<Position />', () => {
   })
 
   it('should render right of target', async () => {
-    const onPositionChanged = jest.fn()
+    const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
@@ -118,7 +119,7 @@ describe('<Position />', () => {
   })
 
   it('should render below target', async () => {
-    const onPositionChanged = jest.fn()
+    const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
@@ -151,7 +152,7 @@ describe('<Position />', () => {
   })
 
   it('should render left of target', async () => {
-    const onPositionChanged = jest.fn()
+    const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
@@ -184,7 +185,7 @@ describe('<Position />', () => {
   })
 
   it('should render above target', async () => {
-    const onPositionChanged = jest.fn()
+    const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
@@ -215,7 +216,7 @@ describe('<Position />', () => {
   })
 
   it('should center vertically', async () => {
-    const onPositionChanged = jest.fn()
+    const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
@@ -251,7 +252,7 @@ describe('<Position />', () => {
   })
 
   it('should center horizontally', async () => {
-    const onPositionChanged = jest.fn()
+    const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
         <div style={{ ...parentDefaults }}>
@@ -288,7 +289,7 @@ describe('<Position />', () => {
 
   describe('when constrained to scroll-parent', () => {
     it('should re-position below target', async () => {
-      const onPositionChanged = jest.fn()
+      const onPositionChanged = vi.fn()
 
       render(
         <div style={{ padding: '50px' }}>
@@ -332,7 +333,7 @@ describe('<Position />', () => {
     })
 
     it('should re-position above target', async () => {
-      const onPositionChanged = jest.fn()
+      const onPositionChanged = vi.fn()
 
       render(
         <div style={{ padding: '50px' }}>
@@ -376,7 +377,7 @@ describe('<Position />', () => {
     })
 
     it('should re-position after target', async () => {
-      const onPositionChanged = jest.fn()
+      const onPositionChanged = vi.fn()
 
       render(
         <div style={{ padding: '50px' }}>
@@ -420,7 +421,7 @@ describe('<Position />', () => {
     })
 
     it('should re-position before target', async () => {
-      const onPositionChanged = jest.fn()
+      const onPositionChanged = vi.fn()
 
       render(
         <div style={{ padding: '50px' }}>

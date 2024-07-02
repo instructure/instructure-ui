@@ -24,12 +24,13 @@
 
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { addEventListener } from '../addEventListener'
 
 describe('addEventListener', () => {
   it('should add an event listener and provide a remove method', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
 
     const { container } = render(<div />)
     const node = container.firstChild as HTMLDivElement

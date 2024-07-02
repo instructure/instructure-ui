@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -33,16 +34,23 @@ const TEST_TEXT_01 = 'Account'
 const TEST_LINK = 'http://instructure-test.com'
 const TEST_TO = '/example'
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<BreadcrumbLink />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
 
   it('should render an anchor tag when given a href prop', () => {
@@ -53,7 +61,7 @@ describe('<BreadcrumbLink />', () => {
   })
 
   it('should render as a button and respond to onClick event', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(<BreadcrumbLink onClick={onClick}>{TEST_TEXT_01}</BreadcrumbLink>)
     const button = screen.getByRole('button')
@@ -64,7 +72,7 @@ describe('<BreadcrumbLink />', () => {
   })
 
   it('should respond to mouseEnter event when provided with onMouseEnter prop', () => {
-    const onMouseEnter = jest.fn()
+    const onMouseEnter = vi.fn()
 
     render(
       <BreadcrumbLink onMouseEnter={onMouseEnter} href={TEST_LINK}>
@@ -129,9 +137,5 @@ describe('<BreadcrumbLink />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
-  })
-
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
   })
 })

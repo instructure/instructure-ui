@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { InPlaceEdit } from '../index'
@@ -61,11 +62,29 @@ const renderEditButton: InPlaceEditProps['renderEditButton'] = (props) => {
 }
 
 describe('<InPlaceEdit />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render view mode', () => {
     render(
       <InPlaceEdit
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -83,7 +102,7 @@ describe('<InPlaceEdit />', () => {
     const { container } = render(
       <InPlaceEdit
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -105,7 +124,7 @@ describe('<InPlaceEdit />', () => {
     render(
       <InPlaceEdit
         mode="edit"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -122,7 +141,7 @@ describe('<InPlaceEdit />', () => {
     render(
       <InPlaceEdit
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={() => {
@@ -142,7 +161,7 @@ describe('<InPlaceEdit />', () => {
     const { rerender, container } = render(
       <InPlaceEdit
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -155,7 +174,7 @@ describe('<InPlaceEdit />', () => {
     rerender(
       <InPlaceEdit
         mode="edit"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -172,7 +191,7 @@ describe('<InPlaceEdit />', () => {
     const { rerender, container } = render(
       <InPlaceEdit
         mode="edit"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -187,7 +206,7 @@ describe('<InPlaceEdit />', () => {
     rerender(
       <InPlaceEdit
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -209,7 +228,7 @@ describe('<InPlaceEdit />', () => {
     const { container } = render(
       <InPlaceEdit
         mode="view"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}
@@ -224,7 +243,7 @@ describe('<InPlaceEdit />', () => {
     const { container } = render(
       <InPlaceEdit
         mode="edit"
-        onChangeMode={jest.fn()}
+        onChangeMode={vi.fn()}
         renderViewer={renderViewer}
         renderEditor={renderEditor}
         renderEditButton={renderEditButton}

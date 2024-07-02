@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -56,6 +57,24 @@ describe('<DateInput />', () => {
 
     return days
   }
+
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
 
   it('should render an input and a calendar', async () => {
     const { container, findByRole } = render(
@@ -105,7 +124,7 @@ describe('<DateInput />', () => {
         <DateInput
           renderLabel="Choose date"
           value={value}
-          onChange={jest.fn()}
+          onChange={vi.fn()}
           renderWeekdayLabels={weekdayLabels}
         >
           {generateDays()}
@@ -117,7 +136,7 @@ describe('<DateInput />', () => {
     })
 
     it('should call onChange with the updated value', async () => {
-      const onChange = jest.fn()
+      const onChange = vi.fn()
       const value = 'May 18, 2022'
 
       render(
@@ -144,7 +163,7 @@ describe('<DateInput />', () => {
     })
 
     it('should call onBlur', () => {
-      const onBlur = jest.fn()
+      const onBlur = vi.fn()
 
       render(
         <DateInput
@@ -257,7 +276,7 @@ describe('<DateInput />', () => {
     })
 
     it('should provide inputRef', () => {
-      const inputRef = jest.fn()
+      const inputRef = vi.fn()
 
       render(
         <DateInput
@@ -351,7 +370,7 @@ describe('<DateInput />', () => {
 
     describe('onRequestShowCalendar', () => {
       it('should call onRequestShowCalendar when label is clicked', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         const { container } = render(
           <DateInput
@@ -374,7 +393,7 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestShowCalendar when input is clicked', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         const { container } = render(
           <DateInput
@@ -395,7 +414,7 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestShowCalendar when input receives space event', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -416,7 +435,7 @@ describe('<DateInput />', () => {
       })
 
       it('should not call onRequestShowCalendar when input receives space event if calendar is already showing', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -438,7 +457,7 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestShowCalendar when input receives down arrow event', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -459,7 +478,7 @@ describe('<DateInput />', () => {
       })
 
       it('should not call onRequestShowCalendar when input receives down arrow event if calendar is already showing', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -481,7 +500,7 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestShowCalendar when input receives up arrow event', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -502,7 +521,7 @@ describe('<DateInput />', () => {
       })
 
       it('should not call onRequestShowCalendar when input receives up arrow event if calendar is already showing', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -524,7 +543,7 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestShowCalendar when input receives onChange event', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -545,7 +564,7 @@ describe('<DateInput />', () => {
       })
 
       it('should not call onRequestShowCalendar when disabled', async () => {
-        const onRequestShowCalendar = jest.fn()
+        const onRequestShowCalendar = vi.fn()
 
         render(
           <DateInput
@@ -575,8 +594,8 @@ describe('<DateInput />', () => {
 
     describe('onRequestHideCalendar and onRequestValidateDate', () => {
       it('should call onRequestHideCalendar and onRequestValidateDate input receives onBlur event', async () => {
-        const onRequestHideCalendar = jest.fn()
-        const onRequestValidateDate = jest.fn()
+        const onRequestHideCalendar = vi.fn()
+        const onRequestValidateDate = vi.fn()
 
         render(
           <DateInput
@@ -600,8 +619,8 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives esc event', async () => {
-        const onRequestHideCalendar = jest.fn()
-        const onRequestValidateDate = jest.fn()
+        const onRequestHideCalendar = vi.fn()
+        const onRequestValidateDate = vi.fn()
 
         render(
           <DateInput
@@ -625,8 +644,8 @@ describe('<DateInput />', () => {
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives enter event', async () => {
-        const onRequestHideCalendar = jest.fn()
-        const onRequestValidateDate = jest.fn()
+        const onRequestHideCalendar = vi.fn()
+        const onRequestValidateDate = vi.fn()
 
         const days = generateDays()
         days[4] = (
@@ -811,7 +830,7 @@ describe('<DateInput />', () => {
 
   describe('with minimal config', () => {
     it('should render 44 buttons (a calendar) when clicked', async () => {
-      const onChange = jest.fn()
+      const onChange = vi.fn()
       render(
         <DateInput
           renderLabel="Choose date"

@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import { vi } from 'vitest'
 import { fireEvent, render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
@@ -31,7 +32,6 @@ import type { PopoverProps } from '../props'
 
 describe('<Popover />', () => {
   afterEach(() => {
-    jest.resetAllMocks()
     cleanup()
   })
 
@@ -76,7 +76,7 @@ describe('<Popover />', () => {
     eventType: 'focusOut' | 'blur' | 'click' | 'focus'
   ) {
     it(`should fire ${handler} handler for ${eventType} event`, () => {
-      const handlerSpy = jest.fn()
+      const handlerSpy = vi.fn()
       const props = {
         [handler]: handlerSpy
       }
@@ -138,7 +138,7 @@ describe('<Popover />', () => {
   })
 
   it('should hide content when trigger is clicked', () => {
-    const onHideContent = jest.fn()
+    const onHideContent = vi.fn()
     render(
       <Popover
         on="click"
@@ -232,7 +232,7 @@ describe('<Popover />', () => {
     })
 
     it('should call onShowContent', () => {
-      const onShowContent = jest.fn()
+      const onShowContent = vi.fn()
 
       render(
         <Popover
@@ -253,7 +253,7 @@ describe('<Popover />', () => {
     })
 
     it('should call onHideContent', () => {
-      const onHideContent = jest.fn()
+      const onHideContent = vi.fn()
 
       render(
         <Popover

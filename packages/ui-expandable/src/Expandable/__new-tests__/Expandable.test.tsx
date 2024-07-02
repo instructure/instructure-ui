@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { Expandable } from '../index'
@@ -31,7 +32,7 @@ import { Expandable } from '../index'
 describe('<Expandable />', () => {
   it('should set expanded to false by default', () => {
     type RenderArgs = { expanded: boolean }
-    const renderContent = jest.fn((_args: RenderArgs) => <div>hello</div>)
+    const renderContent = vi.fn((_args: RenderArgs) => <div>hello</div>)
 
     render(<Expandable render={renderContent} />)
 
@@ -43,7 +44,7 @@ describe('<Expandable />', () => {
       getToggleProps: () => { 'aria-expanded': boolean }
     }
 
-    const renderContent = jest.fn((args: RenderArgs) => {
+    const renderContent = vi.fn((args: RenderArgs) => {
       const toggleProps = args.getToggleProps()
       return <div {...toggleProps}>Toggle</div>
     })
@@ -57,7 +58,7 @@ describe('<Expandable />', () => {
   })
 
   it('should provide the toggle and details with a shared, unique id', () => {
-    const renderContent = jest.fn(({ getToggleProps, getDetailsProps }) => (
+    const renderContent = vi.fn(({ getToggleProps, getDetailsProps }) => (
       <>
         <div {...getToggleProps()}>Toggle</div>
         <div {...getDetailsProps()}>Details</div>
@@ -78,9 +79,9 @@ describe('<Expandable />', () => {
   })
 
   it('should call onToggle when onClick is called', () => {
-    const onToggle = jest.fn()
+    const onToggle = vi.fn()
 
-    const renderContent = jest.fn(({ getToggleProps }) => (
+    const renderContent = vi.fn(({ getToggleProps }) => (
       <button {...getToggleProps()}>Toggle</button>
     ))
 
@@ -98,7 +99,7 @@ describe('<Expandable />', () => {
   })
 
   it('should set expanded to true when defaultExpanded is true', () => {
-    const renderContent = jest.fn(({ expanded }) => (
+    const renderContent = vi.fn(({ expanded }) => (
       <div>{expanded ? 'Expanded' : 'Collapsed'}</div>
     ))
 

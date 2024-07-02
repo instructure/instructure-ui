@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -51,6 +52,24 @@ const renderCheckbox = (props?: Partial<CheckboxProps>) => {
 }
 
 describe('<Checkbox />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('renders an input with type "checkbox"', () => {
     renderCheckbox()
     const inputElem = screen.getByRole('checkbox')
@@ -88,8 +107,8 @@ describe('<Checkbox />', () => {
 
   describe('events', () => {
     it('when clicked, fires onClick and onChange events', async () => {
-      const onClick = jest.fn()
-      const onChange = jest.fn()
+      const onClick = vi.fn()
+      const onChange = vi.fn()
       renderCheckbox({ onClick, onChange })
       const checkboxElement = screen.getByRole('checkbox')
 
@@ -102,8 +121,8 @@ describe('<Checkbox />', () => {
     })
 
     it('when clicked, does not call onClick or onChange when disabled', async () => {
-      const onClick = jest.fn()
-      const onChange = jest.fn()
+      const onClick = vi.fn()
+      const onChange = vi.fn()
       renderCheckbox({ onClick, onChange, disabled: true })
       const checkboxElement = screen.getByRole('checkbox')
 
@@ -117,8 +136,8 @@ describe('<Checkbox />', () => {
     })
 
     it('when clicked, does not call onClick or onChange when readOnly', async () => {
-      const onClick = jest.fn()
-      const onChange = jest.fn()
+      const onClick = vi.fn()
+      const onChange = vi.fn()
       renderCheckbox({ onClick, onChange, readOnly: true })
       const checkboxElement = screen.getByRole('checkbox')
 
@@ -131,7 +150,7 @@ describe('<Checkbox />', () => {
     })
 
     it('calls onChange when enter key is pressed', async () => {
-      const onChange = jest.fn()
+      const onChange = vi.fn()
       renderCheckbox({ onChange })
       const checkboxElement = screen.getByRole('checkbox')
 
@@ -143,7 +162,7 @@ describe('<Checkbox />', () => {
     })
 
     it('responds to onBlur event', async () => {
-      const onBlur = jest.fn()
+      const onBlur = vi.fn()
       renderCheckbox({ onBlur })
 
       userEvent.tab()
@@ -155,7 +174,7 @@ describe('<Checkbox />', () => {
     })
 
     it('responds to onFocus event', async () => {
-      const onFocus = jest.fn()
+      const onFocus = vi.fn()
       renderCheckbox({ onFocus })
 
       userEvent.tab()
@@ -178,7 +197,7 @@ describe('<Checkbox />', () => {
     })
 
     it('calls onMouseOver', async () => {
-      const onMouseOver = jest.fn()
+      const onMouseOver = vi.fn()
       renderCheckbox({ onMouseOver })
       const checkboxElement = screen.getByRole('checkbox')
 
@@ -190,7 +209,7 @@ describe('<Checkbox />', () => {
     })
 
     it('calls onMouseOut', async () => {
-      const onMouseOut = jest.fn()
+      const onMouseOut = vi.fn()
       renderCheckbox({ onMouseOut })
       const checkboxElement = screen.getByRole('checkbox')
 

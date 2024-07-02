@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 // eslint-disable-next-line no-restricted-imports
@@ -32,20 +33,18 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { AppNav } from '../index'
 import AppNavExamples from '../__examples__/AppNav.examples'
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<AppNav />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
   })
 
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
   })
 
   describe('for a11y', () => {

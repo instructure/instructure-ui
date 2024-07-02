@@ -23,11 +23,12 @@
  */
 
 import { waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import { requestAnimationFrame } from '../requestAnimationFrame'
 
 describe('requestAnimationFrame', () => {
   it('should provide a cancel method', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const raf = requestAnimationFrame(callback)
 
     await waitFor(() => {

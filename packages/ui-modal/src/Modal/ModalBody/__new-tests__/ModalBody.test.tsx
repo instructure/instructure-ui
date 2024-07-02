@@ -25,6 +25,7 @@
 import React from 'react'
 
 import { render } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { color2hex } from '@instructure/ui-color-utils'
@@ -85,7 +86,7 @@ describe('<ModalBody />', () => {
     allProps.forEach((prop) => {
       if (prop in allowedProps) {
         it(`should allow the '${prop}' prop`, () => {
-          const consoleErrorSpy = jest
+          const consoleErrorSpy = vi
             .spyOn(console, 'error')
             .mockImplementation(() => {})
           const props = { [prop]: allowedProps[prop] }
@@ -98,7 +99,7 @@ describe('<ModalBody />', () => {
       } else {
         it(`should NOT allow the '${prop}' prop`, () => {
           const expectedErrorMessage = `prop '${prop}' is not allowed.`
-          const consoleErrorSpy = jest
+          const consoleErrorSpy = vi
             .spyOn(console, 'error')
             .mockImplementation(() => {})
 

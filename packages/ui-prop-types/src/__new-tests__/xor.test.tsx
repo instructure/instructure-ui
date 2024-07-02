@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { vi } from 'vitest'
 import PropTypes, { checkPropTypes } from 'prop-types'
 import '@testing-library/jest-dom'
 import { xor } from '../index'
@@ -34,11 +35,11 @@ type XorTestProps = {
 
 describe('xor', () => {
   afterEach(() => {
-    jest.restoreAllMocks()
+    vi.restoreAllMocks()
   })
 
   it('should accept when only one of the specified props is set', () => {
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     const props: XorTestProps = {
       foo: 'foo',
@@ -210,7 +211,7 @@ describe('xor', () => {
   })
 
   it('should still validate the prop', () => {
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     const props = {
       foo: 27,

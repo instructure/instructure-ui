@@ -23,6 +23,7 @@
  */
 
 import { render } from '@testing-library/react'
+import { vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { NumberInput } from '../index'
@@ -31,6 +32,24 @@ import NumberInputExamples from '../__examples__/NumberInput.examples'
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 
 describe('<Breadcrumb />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   const generatedComponents = generateA11yTests(
     NumberInput,
     NumberInputExamples

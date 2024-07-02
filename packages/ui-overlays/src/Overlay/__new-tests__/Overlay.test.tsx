@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { Overlay } from '../index'
@@ -48,9 +49,9 @@ describe('<Overlay />', () => {
   })
 
   it('should fire transition callback props', async () => {
-    const onEnter = jest.fn()
-    const onEntering = jest.fn()
-    const onEntered = jest.fn()
+    const onEnter = vi.fn()
+    const onEntering = vi.fn()
+    const onEntered = vi.fn()
 
     render(
       <Overlay
@@ -71,7 +72,7 @@ describe('<Overlay />', () => {
   })
 
   it('should support onOpen prop', async () => {
-    const onOpen = jest.fn()
+    const onOpen = vi.fn()
 
     render(<Overlay open label="Overlay Example" onOpen={onOpen} />)
 
@@ -81,7 +82,7 @@ describe('<Overlay />', () => {
   })
 
   it('should support onClose prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
 
     const { rerender } = render(
       <Overlay open label="Overlay Example" onClose={onClose} />

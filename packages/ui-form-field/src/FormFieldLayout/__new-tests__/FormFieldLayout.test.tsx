@@ -24,12 +24,31 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FormFieldLayout } from '../index'
 
 describe('<FormFieldLayout />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     const { container } = render(<FormFieldLayout label="Username" />)
 
@@ -54,7 +73,7 @@ describe('<FormFieldLayout />', () => {
   })
 
   it('should provide a ref to the input container', () => {
-    const inputContainerRef = jest.fn()
+    const inputContainerRef = vi.fn()
 
     render(
       <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>

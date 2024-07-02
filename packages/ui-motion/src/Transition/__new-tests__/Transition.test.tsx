@@ -28,6 +28,8 @@ import {
   waitFor,
   waitForElementToBeRemoved
 } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { Transition } from '../index'
@@ -52,6 +54,24 @@ class ExampleComponent extends Component {
 }
 
 describe('<Transition />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   const types: TransitionType[] = [
     'fade',
     'scale',
@@ -131,7 +151,7 @@ describe('<Transition />', () => {
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', async () => {
-    const onEntering = jest.fn()
+    const onEntering = vi.fn()
 
     const { rerender } = render(
       <Transition
@@ -161,7 +181,7 @@ describe('<Transition />', () => {
   })
 
   it('should not execute exit transition with `transitionExit` set to false', async () => {
-    const onExiting = jest.fn()
+    const onExiting = vi.fn()
 
     const { rerender } = render(
       <Transition
@@ -191,9 +211,9 @@ describe('<Transition />', () => {
   })
 
   it('should correctly call enter methods', async () => {
-    const onEnter = jest.fn()
-    const onEntering = jest.fn()
-    const onEntered = jest.fn()
+    const onEnter = vi.fn()
+    const onEntering = vi.fn()
+    const onEntered = vi.fn()
 
     render(
       <Transition
@@ -215,9 +235,9 @@ describe('<Transition />', () => {
   })
 
   it('should correctly call exit methods', async () => {
-    const onExit = jest.fn()
-    const onExiting = jest.fn()
-    const onExited = jest.fn()
+    const onExit = vi.fn()
+    const onExiting = vi.fn()
+    const onExited = vi.fn()
 
     const { rerender } = render(
       <Transition

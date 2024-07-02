@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -42,16 +44,23 @@ import { TopNavBarMenuItems } from '../index'
 import type { TopNavBarItemProps } from '../../TopNavBarItem/props'
 import TopNavBarMenuItemsExamples from '../__examples__/TopNavBarMenuItems.examples'
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<TopNavBarMenuItems />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
 
   it('should render', () => {
@@ -419,10 +428,6 @@ describe('<TopNavBarMenuItems />', () => {
 
       nonDefaultVariants.forEach((variant) => {
         it(`when the active item is "${variant}" variant`, async () => {
-          const consoleWarningSpy = jest
-            .spyOn(console, 'warn')
-            .mockImplementation(() => {})
-
           render(
             getMenuItems({
               menuItemsCustomIdList: [
@@ -442,12 +447,10 @@ describe('<TopNavBarMenuItems />', () => {
 
           const expectedErrorMessage = `Warning: Only \`variant="default"\` items can be set to current/active, but the item with id "TestItem3" is "${variant}" variant.`
 
-          expect(consoleWarningSpy).toHaveBeenCalledWith(
+          expect(consoleWarningMock).toHaveBeenCalledWith(
             expect.stringContaining(expectedErrorMessage),
             expect.any(String)
           )
-
-          consoleWarningSpy.mockRestore()
 
           // TODO convert to e2e
           // const items = await component.findAllMenuItems()
@@ -464,9 +467,6 @@ describe('<TopNavBarMenuItems />', () => {
 
         // TODO: this test is super flaky, breaks even with the try catch fix below. Turned it off for now, try to fix later.
         it(`when the active item is "${variant}" variant and in the hidden item dropdown`, async () => {
-          const consoleWarningSpy = jest
-            .spyOn(console, 'warn')
-            .mockImplementation(() => {})
           render(
             <div style={{ width: variant === 'icon' ? '80px' : '400px' }}>
               {getMenuItems({
@@ -489,12 +489,10 @@ describe('<TopNavBarMenuItems />', () => {
           )
           const expectedErrorMessage = `Warning: Only \`variant="default"\` items can be set to current/active, but the item with id "TestItem5" is "${variant}" variant.`
 
-          expect(consoleWarningSpy).toHaveBeenCalledWith(
+          expect(consoleWarningMock).toHaveBeenCalledWith(
             expect.stringContaining(expectedErrorMessage),
             expect.any(String)
           )
-
-          consoleWarningSpy.mockRestore()
 
           // TODO convert to e2e
           // const component = await TopNavBarMenuItemsLocator.find()
@@ -541,9 +539,6 @@ describe('<TopNavBarMenuItems />', () => {
       })
 
       it('when the active item is disabled', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         render(
           getMenuItems({
             menuItemsCustomIdList: [
@@ -563,12 +558,10 @@ describe('<TopNavBarMenuItems />', () => {
         )
         const expectedErrorMessage = `Warning: Disabled items can not be set to current/active, but the item with id "TestItem2" is disabled.`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleWarningSpy.mockRestore()
 
         // TODO convert to e2e
         // const component = await TopNavBarMenuItemsLocator.find()
@@ -586,9 +579,6 @@ describe('<TopNavBarMenuItems />', () => {
 
       // TODO: this test is super flaky, breaks even with the try catch fix below. Turned it off for now, try to fix later.
       it('when the active item is disabled and in the hidden item dropdown', async () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         render(
           <div style={{ width: '400px' }}>
             {getMenuItems({
@@ -612,12 +602,10 @@ describe('<TopNavBarMenuItems />', () => {
         )
         const expectedErrorMessage = `Warning: Disabled items can not be set to current/active, but the item with id "TestItem5" is disabled.`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleWarningSpy.mockRestore()
 
         // TODO convert to e2e
         // const component = await TopNavBarMenuItemsLocator.find()
@@ -647,7 +635,7 @@ describe('<TopNavBarMenuItems />', () => {
 
   describe('elementRef prop', () => {
     it('should return with the root list element', async () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(
         getMenuItems({
           menuItemsProps: { elementRef }
@@ -660,9 +648,6 @@ describe('<TopNavBarMenuItems />', () => {
   })
 
   it('should not allow "renderAvatar" prop on items', async () => {
-    const consoleErrorSpy = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => {})
     render(
       getMenuItems({
         menuItemsCustomIdList: [
@@ -681,12 +666,10 @@ describe('<TopNavBarMenuItems />', () => {
     )
     const expectedErrorMessage = `Warning: Items in <TopNavBar.MenuItems> are not allowed to have avatars, but item with id: "TestItem2" has \`renderAvatar\` prop.`
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
+    expect(consoleErrorMock).toHaveBeenCalledWith(
       expect.stringContaining(expectedErrorMessage),
       expect.any(String)
     )
-
-    consoleErrorSpy.mockRestore()
 
     // TODO convert to e2e
     // const items = await component.findAllMenuItems()
@@ -723,9 +706,5 @@ describe('<TopNavBarMenuItems />', () => {
         }
       )
     })
-  })
-
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
   })
 })

@@ -23,6 +23,7 @@
  */
 
 import '@testing-library/jest-dom'
+import { vi } from 'vitest'
 import { createChainedFunction } from '../createChainedFunction'
 
 describe('createChainedFunction', () => {
@@ -42,7 +43,7 @@ describe('createChainedFunction', () => {
   })
 
   it('should execute all the functions', () => {
-    const spies = Array.from({ length: 5 }, () => jest.fn())
+    const spies = Array.from({ length: 5 }, () => vi.fn())
     const chain = createChainedFunction(...spies)
 
     chain!()

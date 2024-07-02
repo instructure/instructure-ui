@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -33,37 +35,45 @@ import {
 } from '../../utils/exampleHelpers'
 import { TopNavBarLayout } from '../index'
 
-let originalResizeObserver: typeof ResizeObserver
 let originalMatchMedia: typeof window.matchMedia
 
 beforeAll(() => {
-  originalResizeObserver = global.ResizeObserver
   originalMatchMedia = window.matchMedia
 
-  class MockResizeObserver {
-    observe = jest.fn()
-    unobserve = jest.fn()
-    disconnect = jest.fn()
-  }
-  global.ResizeObserver = MockResizeObserver
-
-  window.matchMedia = jest.fn().mockImplementation((query) => {
+  window.matchMedia = vi.fn().mockImplementation((query) => {
     return {
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn()
+      addListener: vi.fn(),
+      removeListener: vi.fn()
     }
   })
 })
 
 afterAll(() => {
-  global.ResizeObserver = originalResizeObserver
   window.matchMedia = originalMatchMedia
 })
 
 describe('<TopNavBarLayout />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   describe('in "desktop" mode', () => {
     it('should render DesktopLayout', () => {
       render(

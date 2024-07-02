@@ -26,6 +26,9 @@ import React from 'react'
 
 import { Tabs } from '../index'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+
 import '@testing-library/jest-dom'
 
 const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
@@ -39,16 +42,42 @@ const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
       variant="default"
       margin="medium"
     >
-      <Tabs.Panel renderTitle="First Tab" id="first" isSelected={selectedIndex === 0} active>
+      <Tabs.Panel
+        renderTitle="First Tab"
+        id="first"
+        isSelected={selectedIndex === 0}
+        active
+      >
         <p>CONTENT</p>
       </Tabs.Panel>
-      <Tabs.Panel renderTitle="Second Tab" id="second" isSelected={selectedIndex === 1} />
-      <Tabs.Panel renderTitle="Third Tab" id="third" isSelected={selectedIndex === 2} />
+      <Tabs.Panel
+        renderTitle="Second Tab"
+        id="second"
+        isSelected={selectedIndex === 1}
+      />
+      <Tabs.Panel
+        renderTitle="Third Tab"
+        id="third"
+        isSelected={selectedIndex === 2}
+      />
     </Tabs>
   )
 }
 
 describe('<Tabs />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render the correct number of panels', () => {
     const { container } = render(
       <Tabs>
@@ -87,7 +116,7 @@ describe('<Tabs />', () => {
   })
 
   it('should render the same content in second tab when selected', () => {
-    const onIndexChange = jest.fn()
+    const onIndexChange = vi.fn()
 
     const { container } = render(<TabExample onIndexChange={onIndexChange} />)
     expect(container).toBeInTheDocument()
@@ -104,7 +133,6 @@ describe('<Tabs />', () => {
   })
 
   it('should warn if multiple active tabs exist', () => {
-    const consoleMock = jest.spyOn(console, 'error').mockImplementation()
     const { container } = render(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab" active>
@@ -121,7 +149,7 @@ describe('<Tabs />', () => {
 
     expect(container.firstChild).toBeInTheDocument()
 
-    expect(consoleMock.mock.calls[0][0]).toEqual(
+    expect(consoleErrorMock.mock.calls[0][0]).toEqual(
       'Warning: [Tabs] Only one Panel can be marked as active.'
     )
   })

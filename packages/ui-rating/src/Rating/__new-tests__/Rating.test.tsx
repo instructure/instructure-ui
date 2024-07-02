@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render } from '@testing-library/react'
+import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -106,7 +107,7 @@ describe('<Rating />', () => {
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, () => {
-            const consoleErrorSpy = jest
+            const consoleErrorSpy = vi
               .spyOn(console, 'error')
               .mockImplementation(() => {})
             const expectedErrorMessage = `Warning: [undefined] prop '${prop}' is not allowed.`
@@ -125,7 +126,7 @@ describe('<Rating />', () => {
         } else {
           it(`should allow the '${prop}' prop`, () => {
             const props = { [prop]: allowedProps[prop] }
-            const consoleErrorSpy = jest
+            const consoleErrorSpy = vi
               .spyOn(console, 'error')
               .mockImplementation(() => {})
 

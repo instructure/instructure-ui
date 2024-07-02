@@ -25,6 +25,7 @@
 import React from 'react'
 
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -40,6 +41,24 @@ const icon = (
 )
 
 describe('<AppNav.Item />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render label text', async () => {
     render(<Item renderLabel="Some label" href="#" />)
     const item = screen.getByRole('link')
@@ -86,7 +105,7 @@ describe('<AppNav.Item />', () => {
   })
 
   it('should respond to an onClick event', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     render(<Item renderLabel="Some label" onClick={onClick} />)
 
     const button = screen.getByRole('button')
@@ -99,7 +118,6 @@ describe('<AppNav.Item />', () => {
   })
 
   it('should output a console error if icon is used with non-screenreader label text', async () => {
-    const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation()
     render(
       <Item
         renderIcon={icon}
@@ -115,8 +133,6 @@ describe('<AppNav.Item />', () => {
       expect.stringContaining(expectedErrorMessage),
       expect.any(String)
     )
-
-    consoleErrorMock.mockRestore()
   })
 
   it('should meet a11y standards', async () => {
