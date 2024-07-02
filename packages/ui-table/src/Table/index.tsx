@@ -25,11 +25,7 @@
 /** @jsx jsx */
 import { Component, Children } from 'react'
 
-import {
-  matchComponentTypes,
-  safeCloneElement,
-  omitProps
-} from '@instructure/ui-react-utils'
+import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
@@ -48,8 +44,6 @@ import { Cell } from './Cell'
 import type {
   TableProps,
   HeadChild,
-  BodyChild,
-  RowChild,
   ColHeaderChild,
   RowHeaderChild,
   CellChild
@@ -105,22 +99,15 @@ class Table extends Component<TableProps> {
   getHeaders() {
     const { children } = this.props
     const [head] = Children.toArray(children) as HeadChild[]
+    const [row]: any = Children.toArray(head.props.children)
+    if (!row) return undefined
 
-    if (matchComponentTypes<HeadChild>(head, [Head])) {
-      const [row] = Children.toArray(head.props.children)
-
-      if (matchComponentTypes<RowChild>(row, [Row])) {
-        return Children.map(
-          row.props.children as (ColHeaderChild | RowHeaderChild | CellChild)[],
-          (colHeader) => {
-            return matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])
-              ? colHeader.props.children
-              : undefined
-          }
-        )
+    return Children.map(
+      row.props.children as (ColHeaderChild | RowHeaderChild | CellChild)[],
+      (colHeader) => {
+        return colHeader.props.children
       }
-    }
-    return undefined
+    )
   }
 
   render() {
@@ -146,22 +133,13 @@ class Table extends Component<TableProps> {
             <ScreenReaderContent>{caption}</ScreenReaderContent>
           </caption>
         )}
-        {Children.map(children, (child) => {
-          if (matchComponentTypes<HeadChild>(child, [Head])) {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              isStacked
-            })
-          }
-          if (matchComponentTypes<BodyChild>(child, [Body])) {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              isStacked,
-              hover,
-              headers
-            })
-          }
-          return null
+        {Children.map(children, (child: any) => {
+          return safeCloneElement(child, {
+            key: child.props.name,
+            isStacked,
+            hover,
+            headers
+          })
         })}
       </View>
     )

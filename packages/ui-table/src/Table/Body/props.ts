@@ -24,9 +24,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
-import { Row } from '../Row'
 import type { TableRowProps } from '../Row/props'
 
 import type {
@@ -57,7 +54,7 @@ type TableBodyProps = TableBodyOwnProps &
 type TableBodyStyle = ComponentStyle<'body'>
 
 const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([Row]),
+  children: PropTypes.node,
   hover: PropTypes.bool,
   isStacked: PropTypes.bool,
   headers: PropTypes.arrayOf(

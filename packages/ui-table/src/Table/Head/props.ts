@@ -25,10 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
-import { Row } from '../Row'
-
 import type {
   OtherHTMLAttributes,
   PropValidators,
@@ -56,7 +52,7 @@ type TableHeadProps = TableHeadOwnProps &
 type TableHeadStyle = ComponentStyle<'head'>
 
 const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([Row]),
+  children: PropTypes.node,
   isStacked: PropTypes.bool,
   renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
