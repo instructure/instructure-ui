@@ -170,7 +170,6 @@ const DateInput2 = ({
           onShowContent={() => setShowPopover(true)}
           onHideContent={() => setShowPopover(false)}
           on="click"
-          // screenReaderLabel={this.props.popoverScreenReaderLabel} TODO
           shouldContainFocus
           shouldReturnFocus
           shouldCloseOnDocumentClick
@@ -179,6 +178,7 @@ const DateInput2 = ({
             withYearPicker={withYearPicker}
             onDateSelected={handleDateSelected}
             selectedDate={selectedDate}
+            visibleMonth={selectedDate}
           />
         </Popover>
       }
