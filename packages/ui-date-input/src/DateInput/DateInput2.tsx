@@ -103,7 +103,7 @@ const DateInput2 = ({
         .isValid() ||
       value === ''
     ) {
-      setSelectedDate(value)
+      setSelectedDate(value || '')
       setInputMessages([])
       return
     }
