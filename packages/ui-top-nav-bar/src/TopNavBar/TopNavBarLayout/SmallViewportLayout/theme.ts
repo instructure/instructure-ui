@@ -50,7 +50,7 @@ const generateComponentTheme = (
 
     smallViewportTrayPosition: 'fixed',
     smallViewportTrayFixTopPosition: undefined,
-    smallViewportTrayZIndex: stacking?.topmost + 1,
+    smallViewportTrayZIndex: stacking?.topmost - 1, // -1 so it is below tray/modal/popover/etc TODO find a better solution
 
     smallViewportDropdownMenuActiveOptionFontWeight: typography?.fontWeightBold,
     smallViewportDropdownMenuActiveOptionIndicatorSpacing: '0.25rem',

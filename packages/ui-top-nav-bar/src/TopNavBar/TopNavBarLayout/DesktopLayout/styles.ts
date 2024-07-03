@@ -66,6 +66,7 @@ const generateStyle = (
       alignItems: 'stretch',
       justifyContent: 'space-between',
       height: componentTheme.desktopHeight,
+      position: 'relative',
       zIndex: componentTheme.desktopZIndex,
       maxWidth: '100%',
       overflow: 'hidden',
