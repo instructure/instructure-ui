@@ -125,20 +125,25 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     return this.interaction === 'disabled' || this.interaction === 'readonly'
   }
 
-  get hasMessages() {
-    return this.props.messages && this.props.messages.length > 0
-  }
-
   get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  get invalid() {
-    return (this.hasMessages &&
-      this.props.messages!.findIndex((message: FormMessage) => {
-        return message.type === 'error'
-      }) >= 0) as boolean
+  get hasMessages() {
+    return this.props.messages ? this.props.messages.length > 0 : false
   }
+
+  get invalid() {
+    if (this.hasMessages) {
+      return (
+        this.props.messages!.findIndex((message: FormMessage) => {
+          return message.type === 'error'
+        }) >= 0
+      )
+    }
+    return false
+  }
+
   getDataTransferItems(
     e: React.ChangeEvent | React.DragEvent,
     shouldEnablePreview?: boolean
@@ -383,6 +388,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
           accept={this.acceptStr()}
           onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : undefined}
+          aria-invalid={this.invalid}
           disabled={this.functionallyDisabled}
         />
         {this.hasMessages ? (
