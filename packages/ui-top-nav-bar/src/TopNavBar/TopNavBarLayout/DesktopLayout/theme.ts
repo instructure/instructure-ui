@@ -43,7 +43,7 @@ const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
     desktopBottomBorder: 'none',
     desktopBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
     desktopHeight: '4rem',
-    desktopZIndex: stacking?.topmost + 1,
+    desktopZIndex: stacking?.topmost - 1, // -1 so it is below tray/modal/popover/etc TODO find a better solution
 
     desktopInlinePadding: spacing.small,
     desktopBrandContainerInlineMargin: `0 ${spacing.medium}`,
