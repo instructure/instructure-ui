@@ -23,24 +23,31 @@
  */
 
 import React from 'react'
-import { expect, find, mount, within } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Text } from '../index'
 
-describe('<Text />', async () => {
+describe('<Text />', () => {
   it('should render', async () => {
-    const subject = await mount(<Text />)
-    expect(subject.getDOMNode()).to.exist()
+    const { container } = render(<Text />)
+    const text = container.querySelector("span[class$='-text']")
+
+    expect(text).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<Text />)
-    const text = within(subject.getDOMNode())
-    expect(await text.accessible()).to.be.true()
+    const { container } = render(<Text />)
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    await mount(<Text as="li" />)
-    expect(await find('li')).to.exist()
+    const { container } = render(<Text as="li" />)
+    const text = container.querySelector("[class$='-text']")
+
+    expect(text?.tagName).toBe('LI')
   })
 })
