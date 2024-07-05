@@ -89,12 +89,12 @@ describe('<NumberInput />', () => {
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
 
-    const event = { target: { value: 'foo' } }
+    const event = { target: { value: '10' } }
     await input.change(event)
 
     expect(onChange).to.have.been.calledOnce()
     expect(onChange).to.have.been.calledWithMatch(event)
-    expect(onChange.lastCall.args[1]).to.equal('foo')
+    expect(onChange.lastCall.args[1]).to.equal('10')
   })
 
   it('passes keyboard events to the onKeyDown handler', async () => {

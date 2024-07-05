@@ -848,7 +848,7 @@ describe('<Pagination />', () => {
       )
       const numberInput = container.querySelector('input')
 
-      expect(numberInput).toHaveValue('3')
+      expect(numberInput).toHaveValue(3)
     })
 
     it('should display all arrow buttons', async () => {
