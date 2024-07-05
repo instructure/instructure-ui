@@ -176,7 +176,10 @@ const generateStyle = (
       label: 'numberInput_input',
       ...inputStyle,
       '&:is(input)[type]': inputStyle,
-      '&:-webkit-any(input)[type]': inputStyle
+      '&:-webkit-any(input)[type]': inputStyle,
+      '&::-webkit-inner-spin-button': { display: 'none' },
+      '&::-webkit-outer-spin-button': { display: 'none' },
+      '&:is(input)[type="number"]': { MozAppearance: 'textfield' }
     }
   }
 }

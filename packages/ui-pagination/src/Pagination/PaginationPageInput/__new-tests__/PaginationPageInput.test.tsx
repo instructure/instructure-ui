@@ -42,7 +42,7 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('spinbutton')
 
     expect(input).toBeInTheDocument()
     expect(input.tagName).toBe('INPUT')
@@ -58,7 +58,7 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('spinbutton')
 
     expect(input).toHaveAttribute('value', '4')
   })
@@ -73,7 +73,7 @@ describe('<PaginationPageInput />', () => {
         screenReaderLabel={defaultSRLabel}
       />
     )
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('spinbutton')
 
     expect(input).toHaveAttribute('value', '4')
 
@@ -117,7 +117,7 @@ describe('<PaginationPageInput />', () => {
         disabled
       />
     )
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('spinbutton')
 
     expect(input).toHaveAttribute('disabled')
   })
