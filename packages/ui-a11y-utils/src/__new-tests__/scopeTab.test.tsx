@@ -23,86 +23,84 @@
  */
 
 import React from 'react'
-import { expect, mount, within, stub, wait } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
+
 import { scopeTab } from '../scopeTab'
+
 
 const MOCK_EVENT = new KeyboardEvent('mockEvent', { shiftKey: false })
 MOCK_EVENT.preventDefault = () => {}
 
-describe('scopeTab', async () => {
+describe('scopeTab', () => {
   it('should scope tab within container', async () => {
-    const subject = await mount(
+    render(
       <div>
-        <div id="container">
-          <input id="first" />
-          <input id="second" />
+        <div data-testid="container">
+          <input data-testid="first" />
+          <input data-testid="second" />
         </div>
       </div>
     )
 
-    const fixture = within(subject.getDOMNode())
+    const container = screen.getByTestId('container')
+    const first = screen.getByTestId('first')
+    const second = screen.getByTestId('second')
 
-    const container = await fixture.find('#container')
-    const first = await fixture.find('#first')
-    const second = await fixture.find('#second')
+    second.focus()
 
-    await second.focus()
-
-    await wait(() => {
-      expect(second.focused()).to.be.true()
+    await waitFor(() => {
+      expect(document.activeElement).toBe(second)
     })
 
-    scopeTab(container.getDOMNode(), MOCK_EVENT)
+    scopeTab(container, MOCK_EVENT as any)
 
-    await wait(() => {
-      expect(first.focused()).to.be.true()
+    await waitFor(() => {
+      expect(document.activeElement).toBe(first)
     })
   })
 
   it('should not attempt scoping when no tabbable children', async () => {
-    const subject = await mount(
+    render(
       <div>
-        <div id="container">Hello</div>
+        <div data-testid="container">Hello</div>
         <input />
       </div>
     )
 
-    const fixture = within(subject.getDOMNode())
+    const input = screen.getByRole('textbox')
+    const container = screen.getByTestId('container')
 
-    const input = await fixture.find('input')
-    const container = await fixture.find('#container')
+    input.focus()
 
-    await input.focus()
+    scopeTab(container, MOCK_EVENT as any)
 
-    scopeTab(container.getDOMNode(), MOCK_EVENT)
-
-    await wait(() => {
-      expect(input.focused()).to.be.true()
+    await waitFor(() => {
+      expect(document.activeElement).toBe(input)
     })
   })
 
   it('should execute callback when provided instead of default behavior', async () => {
-    const cb = stub()
+    const cb = vi.fn()
 
-    const subject = await mount(
+    render(
       <div>
-        <div id="container">
+        <div data-testid="container">
           <input />
         </div>
       </div>
     )
 
-    const fixture = within(subject.getDOMNode())
+    const input = screen.getByRole('textbox')
+    const container = screen.getByTestId('container')
 
-    const container = await fixture.find('#container')
-    const input = await fixture.find('input')
+    input.focus()
 
-    await input.focus()
+    scopeTab(container, MOCK_EVENT as any, cb)
 
-    scopeTab(container.getDOMNode(), MOCK_EVENT, cb)
-
-    await wait(() => {
-      expect(cb).to.have.been.called()
+    await waitFor(() => {
+      expect(cb).toHaveBeenCalled()
     })
   })
 })

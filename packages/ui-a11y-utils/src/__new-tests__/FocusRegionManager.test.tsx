@@ -22,16 +22,19 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { expect, mount, wait, within } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
 import { FocusRegionManager } from '../FocusRegionManager'
 
-describe('FocusRegionManager', async () => {
+
+describe('FocusRegionManager', () => {
   beforeEach(async () => {
     FocusRegionManager.clearEntries()
   })
 
   it('should focus the first tabbable element when focused', async () => {
-    const subject = await mount(
+    render(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
           <span>test alert</span>
@@ -40,7 +43,7 @@ describe('FocusRegionManager', async () => {
           <div data-test-descendant></div>
           <div data-test-descendant>
             <div data-test-descendant>
-              <button data-test-button>click me</button>
+              <button data-testid="button">click me</button>
             </div>
           </div>
         </div>
@@ -52,9 +55,9 @@ describe('FocusRegionManager', async () => {
             data-test-parent
             id="test-parent1"
           >
-            <div data-test-content>
+            <div data-testid="content">
               <div>Hello world</div>
-              <button data-test-first-tabbable>click me</button>
+              <button data-testid="first-tabbable">click me</button>
               <button>or click me</button>
             </div>
             <span data-test-child>
@@ -74,28 +77,23 @@ describe('FocusRegionManager', async () => {
       </div>
     )
 
-    const main = within(subject.getDOMNode())
-    const button = (
-      await main.find('[data-test-button]')
-    ).getDOMNode() as HTMLButtonElement
-    const content = (await main.find('[data-test-content]')).getDOMNode()
-    const firstTabbable = (
-      await main.find('[data-test-first-tabbable]')
-    ).getDOMNode()
+    const button = screen.getByTestId('button')
+    const content = screen.getByTestId('content')
+    const firstTabbable = screen.getByTestId('first-tabbable')
 
-    await button.focus()
+    button.focus()
 
-    expect(document.activeElement).to.equal(button)
+    expect(document.activeElement).toBe(button)
 
     FocusRegionManager.focusRegion(content)
 
-    await wait(() => {
-      expect(document.activeElement).to.equal(firstTabbable)
+    await waitFor(() => {
+      expect(document.activeElement).toBe(firstTabbable)
     })
   })
 
   it('should return focus when blurred', async () => {
-    const subject = await mount(
+    render(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
           <span>test alert</span>
@@ -104,7 +102,7 @@ describe('FocusRegionManager', async () => {
           <div data-test-descendant></div>
           <div data-test-descendant>
             <div data-test-descendant>
-              <button data-test-button>click me</button>
+              <button data-testid="button">click me</button>
             </div>
           </div>
         </div>
@@ -116,7 +114,7 @@ describe('FocusRegionManager', async () => {
             data-test-parent
             id="test-parent1"
           >
-            <div data-test-content>
+            <div data-testid="content">
               <div>Hello world</div>
               <button data-test-first-tabbable>click me</button>
               <button>or click me</button>
@@ -137,20 +135,18 @@ describe('FocusRegionManager', async () => {
         <iframe id="frame" title="frame"></iframe>
       </div>
     )
+    const button = screen.getByTestId('button')
+    const content = screen.getByTestId('content')
 
-    const main = within(subject.getDOMNode())
-    const button = (
-      await main.find('[data-test-button]')
-    ).getDOMNode() as HTMLButtonElement
-    const content = (await main.find('[data-test-content]')).getDOMNode()
+    button.focus()
 
-    await button.focus()
-
-    expect(document.activeElement).to.equal(button)
+    expect(document.activeElement).toBe(button)
 
     FocusRegionManager.focusRegion(content)
     FocusRegionManager.blurRegion(content)
 
-    expect(document.activeElement).to.equal(button)
+    await waitFor(() => {
+      expect(document.activeElement).toBe(button)
+    })
   })
 })
