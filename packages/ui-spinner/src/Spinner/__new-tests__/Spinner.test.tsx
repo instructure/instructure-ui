@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 
 import '@testing-library/jest-dom'
 import Spinner from '../index'
@@ -30,24 +30,19 @@ import Spinner from '../index'
 describe('<Spinner />', () => {
   describe('with the delay prop', () => {
     it('should delay rendering', async () => {
-      const { container } = render(
-        <Spinner renderTitle="Loading" delay={300} />
-      )
+      render(<Spinner renderTitle="Loading" delay={300} />)
 
-      const spinnerElements = container.querySelectorAll('[data-cid="Spinner"]')
-
-      expect(spinnerElements.length).toBe(0)
+      expect(screen.queryByText('Loading')).not.toBeInTheDocument()
 
       await waitFor(
-        () => {
-          const spinnerElements = container.querySelectorAll(
-            '[data-cid="Spinner"]'
-          )
-          expect(spinnerElements.length).toBe(1)
+        async () => {
+          const title = await screen.findByText('Loading')
+          const icon = await screen.findByRole('img')
+
+          expect(title).toBeInTheDocument()
+          expect(icon).toBeInTheDocument()
         },
-        {
-          timeout: 400
-        }
+        { timeout: 400 }
       )
     })
   })

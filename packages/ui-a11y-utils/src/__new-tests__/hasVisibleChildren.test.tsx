@@ -23,17 +23,18 @@
  */
 
 import React from 'react'
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { hasVisibleChildren } from '../hasVisibleChildren'
 
-describe('hasVisibleChildren', async () => {
+describe('hasVisibleChildren', () => {
   it('should not count ScreenReaderContent as visible content', async () => {
     expect(
       hasVisibleChildren(<ScreenReaderContent>Foo</ScreenReaderContent>)
-    ).to.be.false()
+    ).toBe(false)
   })
   it('should count everything else as visible', async () => {
-    expect(hasVisibleChildren(<div>Foo</div>)).to.be.true()
+    expect(hasVisibleChildren(<div>Foo</div>)).toBe(true)
   })
 })
