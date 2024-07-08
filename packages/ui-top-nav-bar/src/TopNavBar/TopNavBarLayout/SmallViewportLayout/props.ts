@@ -113,6 +113,11 @@ type SmallViewportLayoutOwnProps = {
    * Callback fired when an item is selected in the dropdown menu
    */
   onDropdownMenuSelect?: DrilldownProps['onSelect']
+
+  /**
+   * A way to add generic html/react content to the start (left side) of the nav bar. This is a temporary workaround if you are using a design that is not possible to achive in the TopNavBar normally.
+   */
+  renderNavbarStartDangerousHack?: React.ReactNode
 }
 
 type TopNavBarSmallViewportLayoutOwnProps = CommonTopNavBarLayoutProps &
