@@ -167,7 +167,8 @@ const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
   }),
   trayMountNode: PropTypes.oneOfType([element, PropTypes.func]),
   onDropdownMenuToggle: PropTypes.func,
-  onDropdownMenuSelect: PropTypes.func
+  onDropdownMenuSelect: PropTypes.func,
+  renderNavbarStartDangerousHack: PropTypes.node
 }
 
 const propTypes: PropValidators<PropKeys> = {

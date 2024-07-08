@@ -601,6 +601,8 @@ class TopNavBarSmallViewportLayout extends Component<
 
         {!this.hasBreadcrumbBlock && !this.isInPlaceDialogOpen && (
           <div css={styles?.navbar}>
+            {this.props.renderNavbarStartDangerousHack &&
+              this.props.renderNavbarStartDangerousHack}
             {this.renderMenuTrigger()}
             {this.hasActionItemsBlock(renderActionItems) && renderActionItems}
           </div>
