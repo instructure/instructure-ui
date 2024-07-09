@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
+
+
+### Features
+
+* **ui-tray:** add optional mask overlay to tray ([8616638](https://github.com/instructure/instructure-ui/commit/8616638d275c82724660ffd29842660aefa36688))
+
+
+
+
+
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 **Note:** Version bump only for package @instructure/ui-tray

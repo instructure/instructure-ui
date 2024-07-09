@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* **ui-drilldown:** index drilldown options to always preserve the correct order ([3159d06](https://github.com/instructure/instructure-ui/commit/3159d06eb7aad8573c2227f379af1e716b09e391))
+
+
+
+
+
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 **Note:** Version bump only for package @instructure/ui-drilldown

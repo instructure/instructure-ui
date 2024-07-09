@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* **ui-drilldown:** index drilldown options to always preserve the correct order ([3159d06](https://github.com/instructure/instructure-ui/commit/3159d06eb7aad8573c2227f379af1e716b09e391))
+* **ui-file-drop:** set aria-invalid to true when there are error messages ([67fce51](https://github.com/instructure/instructure-ui/commit/67fce51baa4c0b90409f487a5ad0f6b007ad6831))
+* **ui-number-input,ui-pagination:** set numberinput type to number ([19f27f5](https://github.com/instructure/instructure-ui/commit/19f27f57470b4c9c5728009eae6b1fddcbb78695))
+* **ui-top-nav-bar:** fix topnavbar item width changing ([88993e2](https://github.com/instructure/instructure-ui/commit/88993e2729f74d8991bcd4d1d215efeac0d7e510))
+* **ui-top-nav-bar:** lowered topnavbar zindex so it goes below trays/popovers/modals/etc ([bcfcb84](https://github.com/instructure/instructure-ui/commit/bcfcb844f13c29934ffc4286c6bd51e05a9aaf15))
+
+
+### Features
+
+* **ui-table:** remove restriction for children types and add documentation ([00e3026](https://github.com/instructure/instructure-ui/commit/00e30266d178c977fe828868b5dc000717dd8e1d))
+* **ui-tray:** add optional mask overlay to tray ([8616638](https://github.com/instructure/instructure-ui/commit/8616638d275c82724660ffd29842660aefa36688))
+
+
+
+
+
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 
