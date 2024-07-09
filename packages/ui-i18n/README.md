@@ -4,8 +4,8 @@ category: packages
 
 ## ui-i18n
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 Helper components and utilities for internationalization.

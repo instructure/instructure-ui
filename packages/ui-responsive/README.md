@@ -4,8 +4,8 @@ category: packages
 
 ## ui-responsive
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A component that allows for rendering a component differently based on either the element or the viewport size.

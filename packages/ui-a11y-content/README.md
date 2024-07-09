@@ -4,8 +4,8 @@ category: packages
 
 ## ui-a11y-content
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 Utility components that help provide a good experience for users who navigate the web with a screen reader or keyboard.

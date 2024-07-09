@@ -4,8 +4,8 @@ category: packages
 
 ## browserslist-config-instui
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A shared browserslist config made to work with the Instructure UI components and libraries.

@@ -4,7 +4,7 @@ id: instructure-ui
 
 ## Instructure UI
 
-[![MIT License][license-badge]][license]&nbsp;&nbsp;&nbsp;[![Code of Conduct][coc-badge]][coc]
+[![MIT License][license-badge]][license] [![Code of Conduct][coc-badge]][coc]
 
 Instructure UI is an open source UI framework and design system for React. Its components are used by millions of learners every day when they use Instructure products like Canvas LMS.
 

@@ -4,8 +4,8 @@ category: packages
 
 ## ui-axe-check
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A wrapper around the [axe-core](https://axe-core.org/) accessibility testing tool.

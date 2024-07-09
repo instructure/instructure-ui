@@ -4,8 +4,8 @@ category: packages
 
 ## eslint-plugin-instructure-ui
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 An eslint configuration for Instructure UI.
