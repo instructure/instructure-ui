@@ -77,7 +77,7 @@ module.exports = function (
   // Remove this once that babel issue is fixed
   let babelHelperVersion = {}
   try {
-    // eslint-disable-next-line import/no-extraneous-dependencies
+    // eslint-disable-next-line import-x/no-extraneous-dependencies
     const version = require('@babel/helpers/package.json').version
     babelHelperVersion.version = version
   } catch (e) {

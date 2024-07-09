@@ -22,12 +22,15 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-const which = require('which')
-const rl = require('readline')
-const chalk = require('chalk')
-const crossSpawn = require('cross-spawn')
+import fs from 'fs'
+import { createRequire } from 'module'
+import path from 'path'
+import which from 'which'
+import rl from 'readline'
+import chalk from 'chalk'
+import crossSpawn from 'cross-spawn'
+
+const require = createRequire(import.meta.url)
 
 function info(...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
@@ -97,13 +100,12 @@ async function runCommandsConcurrently(commands) {
 }
 
 function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
-  const result = crossSpawn.sync(bin, args, {
+  return crossSpawn.sync(bin, args, {
     env: { ...process.env, ...envVars },
     stdio: 'inherit',
     windowsHide: true,
     ...opts
   })
-  return result
 }
 
 /**
@@ -201,12 +203,14 @@ async function confirm(question) {
   })
 }
 
-exports.confirm = confirm
-exports.resolveBin = resolveBin
-exports.runCommandAsync = runCommandAsync
-exports.runCommandSync = runCommandSync
-exports.runCommandsConcurrently = runCommandsConcurrently
-exports.getCommand = getCommand
-exports.error = error
-exports.warn = warn
-exports.info = info
+export {
+  confirm,
+  resolveBin,
+  runCommandAsync,
+  runCommandSync,
+  runCommandsConcurrently,
+  getCommand,
+  error,
+  warn,
+  info
+}

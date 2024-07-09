@@ -25,7 +25,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 const createRoot = async () => {
-  // eslint-disable-next-line import/no-unresolved
+  // eslint-disable-next-line import-x/no-unresolved
   return import('react-dom/client')
 }
 import PropTypes from 'prop-types'

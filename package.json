@@ -71,7 +71,6 @@
     "@commitlint/config-conventional": "^17.8.1",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
-    "@instructure/ui-scripts": "8",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^14.3.1",
@@ -84,9 +83,9 @@
     "cross-spawn": "^7.0.3",
     "cypress": "^13.9.0",
     "cypress-real-events": "^1.12.0",
-    "danger": "^11.3.1",
     "esbuild": "^0.21.3",
     "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
     "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
@@ -94,11 +93,12 @@
     "lint-staged": "^15.2.2",
     "npm-run-all": "^4.1.5",
     "react": "^18.3.1",
-    "ts-jest": "^29.1.2",
+    "ts-jest": "^29.1.5",
     "typescript": "5.4.5",
     "webpack": "^5.91.0"
   },
   "//dependency-comments": {
+    "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",
     "chalk": "IMPORTANT: Chalk 5 is ESM. If you want to use Chalk with TypeScript or a build tool, you will probably want to use Chalk 4 for now."
   },
   "engines": {
