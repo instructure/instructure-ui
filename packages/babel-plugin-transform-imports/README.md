@@ -21,8 +21,8 @@ Note that any default imports you are currently using will not be transformed:
 import Text from '@instructure/ui-elements/lib/Text'
 ```
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A babel plugin made by Instructure Inc.

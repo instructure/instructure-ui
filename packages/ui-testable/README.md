@@ -4,8 +4,8 @@ category: packages
 
 ## ui-testable
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A decorator that adds a `data-` attribute to the React component root node

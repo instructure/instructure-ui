@@ -4,8 +4,8 @@ category: packages
 
 ## ui-flex
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 Flex is a component that makes it easy to align content using flexbox CSS.

@@ -4,8 +4,8 @@ category: packages
 
 ## ui-pill
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 Use Pills to communicate concise status with an identifiable color and supportive text.

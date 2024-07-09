@@ -4,8 +4,8 @@ category: packages
 
 ## ui-options
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A view-only component for composing interactive lists and menus.

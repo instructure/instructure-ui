@@ -6,8 +6,8 @@ title: debounce
 
 ## debounce
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A debounce utility based on [lodash.debounce](https://www.npmjs.com/package/lodash.debounce).
