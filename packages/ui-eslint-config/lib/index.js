@@ -25,9 +25,10 @@
 module.exports = {
   extends: [
     'eslint:recommended',
+    // TODO use 'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
+    'plugin:import-x/recommended',
+    'plugin:import-x/typescript',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:instructure-ui/recommended',
@@ -50,6 +51,11 @@ module.exports = {
     es6: true
   },
   parser: '@typescript-eslint/parser',
+  // TODO https://typescript-eslint.io/getting-started/typed-linting
+  //parserOptions: {
+  //  project: true,
+  //  tsconfigRootDir: __dirname,
+  //},
   rules: {
     '@typescript-eslint/ban-ts-comment': [
       'error',
@@ -57,6 +63,8 @@ module.exports = {
     ],
     '@typescript-eslint/no-var-requires': 1,
     '@typescript-eslint/no-empty-function': 1,
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 0,
     'no-explicit-type-exports/no-explicit-type-exports': 2,
     'react/no-deprecated': 0,
@@ -85,7 +93,7 @@ module.exports = {
         templateFile: require.resolve('./copyright.js')
       }
     ],
-    'import/no-extraneous-dependencies': 'error',
+    'import-x/no-extraneous-dependencies': 'error',
     'no-restricted-imports': [
       'error',
       {
@@ -115,10 +123,10 @@ module.exports = {
     react: {
       version: process.env.REACT_VERSION || '18.2.0'
     },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
-      }
+    'import-x/resolver': {
+      // See https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#typescript
+      typescript: true,
+      node: true
     }
   }
 }

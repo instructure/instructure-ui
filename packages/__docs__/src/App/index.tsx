@@ -141,7 +141,7 @@ class App extends Component<AppProps, AppState> {
       docData.componentInstance = everyComp[components[0]][components[1]]
     } else {
       docData.componentInstance =
-        // eslint-disable-next-line import/namespace
+        // eslint-disable-next-line import-x/namespace
         EveryComponent[docId as keyof typeof EveryComponent]
     }
     return docData
