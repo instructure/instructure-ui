@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-metric",
-  "version": "9.1.0",
+  "version": "9.2.0",
   "description": "A UI component for displaying Metrics",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,20 +24,20 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/console": "9.1.0",
-    "@instructure/emotion": "9.1.0",
-    "@instructure/shared-types": "9.1.0",
-    "@instructure/ui-prop-types": "9.1.0",
-    "@instructure/ui-react-utils": "9.1.0",
-    "@instructure/ui-testable": "9.1.0",
+    "@instructure/console": "9.2.0",
+    "@instructure/emotion": "9.2.0",
+    "@instructure/shared-types": "9.2.0",
+    "@instructure/ui-prop-types": "9.2.0",
+    "@instructure/ui-react-utils": "9.2.0",
+    "@instructure/ui-testable": "9.2.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "9.1.0",
-    "@instructure/ui-color-utils": "9.1.0",
-    "@instructure/ui-test-locator": "9.1.0",
-    "@instructure/ui-test-utils": "9.1.0",
-    "@instructure/ui-themes": "9.1.0"
+    "@instructure/ui-babel-preset": "9.2.0",
+    "@instructure/ui-color-utils": "9.2.0",
+    "@instructure/ui-test-locator": "9.2.0",
+    "@instructure/ui-test-utils": "9.2.0",
+    "@instructure/ui-themes": "9.2.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
