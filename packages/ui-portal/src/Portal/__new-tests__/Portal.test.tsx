@@ -24,114 +24,127 @@
  */
 
 import React from 'react'
-import { find, expect, mount, stub } from '@instructure/ui-test-utils'
+import { vi } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Portal } from '../index'
 
-describe(`<Portal />`, async () => {
+describe(`<Portal />`, () => {
   it('should render', async () => {
-    await mount(<Portal open>Hello World</Portal>)
-    const portal = await find(':contains(Hello World)')
-    expect(portal.getDOMNode()).to.exist()
+    render(<Portal open>Hello World</Portal>)
+    const portal = screen.getByText('Hello World')
+
+    expect(portal).toBeInTheDocument()
   })
 
   it('should be accessible', async () => {
-    await mount(
-      <Portal open id="portal">
+    const { container } = render(
+      <Portal open data-testid="portal">
         Hello World
       </Portal>
     )
-    const portal = await find('#portal')
-    expect(await portal.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 
   it('should support onOpen prop', async () => {
-    const onOpen = stub()
-    await mount(
-      <Portal open onOpen={onOpen} id="portal">
+    const onOpen = vi.fn()
+    render(
+      <Portal open onOpen={onOpen} data-testid="portal">
         Hello World
       </Portal>
     )
+    const portal = screen.getByTestId('portal')
 
-    const portal = await find('#portal')
-
-    expect(onOpen).to.have.been.calledWith(portal.getDOMNode())
+    expect(onOpen).toHaveBeenCalledWith(portal)
   })
 
   it('should support onClose prop', async () => {
-    const onClose = stub()
-
-    const subject = await mount(
+    const onClose = vi.fn()
+    const { rerender } = render(
       <Portal open onClose={onClose}>
         Hello World
       </Portal>
     )
 
-    await subject.setProps({ open: false })
+    expect(onClose).not.toHaveBeenCalled()
 
-    expect(onClose).to.have.been.called()
-  })
-
-  it('should add a dir attribute to the root DOM node', async () => {
-    const onOpen = stub()
-    await mount(
-      <Portal open onOpen={onOpen} id="portal">
+    rerender(
+      <Portal open={false} onClose={onClose}>
         Hello World
       </Portal>
     )
-    const portal = await find('#portal')
-    expect(portal.getAttribute('dir')).to.equal('ltr')
+
+    expect(onClose).toHaveBeenCalled()
+  })
+
+  it('should add a dir attribute to the root DOM node', async () => {
+    const onOpen = vi.fn()
+    render(
+      <Portal open onOpen={onOpen} data-testid="portal">
+        Hello World
+      </Portal>
+    )
+    const portal = screen.getByTestId('portal')
+
+    expect(portal).toHaveAttribute('dir', 'ltr')
   })
 
   it('should not render if children are empty', async () => {
-    await mount(<Portal open id="portal" />)
-    const portal = await find('#portal', { expectEmpty: true })
-    expect(portal).to.not.exist()
+    render(<Portal open data-testid="portal" />)
+    const portal = screen.queryByTestId('portal')
+
+    expect(portal).not.toBeInTheDocument()
   })
 
   describe('without a mountNode prop', () => {
     it('should render nothing when closed', async () => {
-      await mount(<Portal>Hello World</Portal>)
-      const portal = await find('#portal', { expectEmpty: true })
-      expect(portal).to.not.exist()
+      render(<Portal>Hello World</Portal>)
+      const portal = screen.queryByTestId('portal')
+
+      expect(portal).not.toBeInTheDocument()
     })
 
     it('should render children and have a node with a parent when open', async () => {
-      const onKeyDown = stub()
-
-      await mount(
-        <Portal open id="portal">
+      const onKeyDown = vi.fn()
+      render(
+        <Portal open data-testid="portal">
           <button onKeyDown={onKeyDown}>Hello World</button>
         </Portal>
       )
+      const portal = screen.getByTestId('portal')
+      const button = screen.getByRole('button', { name: 'Hello World' })
 
-      const portal = await find('#portal')
-      const button = await find('button:label(Hello World)')
+      await userEvent.type(button, '{enter}')
 
-      await button.keyDown('Enter')
+      await waitFor(() => {
+        expect(onKeyDown).toHaveBeenCalled()
+      })
 
-      expect(onKeyDown).to.have.been.called()
-
-      expect(portal.getParentNode()).to.equal(button.getOwnerDocument().body)
+      expect(portal).toContainElement(button)
     })
   })
 
   describe('when a mountNode prop is provided', () => {
     it('should render nothing when closed', async () => {
-      await mount(
+      render(
         <div>
           <Portal
             mountNode={() => document.getElementById('portal-mount-node')!}
-            id="portal"
+            data-testid="portal"
           >
             Hello World
           </Portal>
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = await find('#portal', { expectEmpty: true })
+      const portal = screen.queryByTestId('portal')
 
-      expect(portal).to.not.exist()
+      expect(portal).not.toBeInTheDocument()
     })
 
     it('should render children and have a node with a parent when open', async () => {
@@ -139,15 +152,15 @@ describe(`<Portal />`, async () => {
       mountNode.setAttribute('id', 'portal-mount-node')
       document.body.appendChild(mountNode)
 
-      await mount(
-        <Portal open mountNode={mountNode} id="portal">
+      render(
+        <Portal open mountNode={mountNode} data-testid="portal">
           Hello World
         </Portal>
       )
+      const portal = screen.getByTestId('portal')
 
-      const portal = await find('#portal')
-
-      expect(portal).to.have.exactly(1).ancestors('#portal-mount-node')
+      expect(portal.parentElement).toBe(mountNode)
+      expect(mountNode.parentElement).toBe(document.body)
     })
   })
 })
