@@ -270,30 +270,36 @@ class Theme extends Component<ThemeProps> {
         <Description
           id={`${themeKey}ApplicationUsage`}
           content={`
-            ### Usage (before mounting your application)
-            ##### Global theming
-            ${'```js'}
-            import { theme } from '${this.props.requirePath}'
+### Usage (before mounting your application)
+##### Global theming
+${'```javascript\n \
+---\n \
+type: code\n \
+---'}
+import { theme } from '${this.props.requirePath}'
 
-            theme.use({ overrides: { colors: { brand: 'red' } }})
+theme.use({ overrides: { colors: { brand: 'red' } }})
 
-            ${'```'}
+${'```'}
 
-            ##### Application level theming
-            ${'```js'}
-            import { theme } from '${this.props.requirePath}'
-            const themeOverrides = { colors: { brand: 'red' } }
+##### Application level theming
+${'```javascript\n \
+---\n \
+type: code\n \
+---'}
+import { theme } from '${this.props.requirePath}'
+const themeOverrides = { colors: { brand: 'red' } }
 
-            ReactDOM.render(
-              <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
-                <App />
-              </InstUISettingsProvider>,
-              element
-            )
-            ${'```'}
+ReactDOM.render(
+  <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+${'```'}
 
 
-            > You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
+> You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
           `}
           title={`${themeKey} Theme Usage in applications`}
         />
@@ -301,39 +307,42 @@ class Theme extends Component<ThemeProps> {
         <Description
           id={`${themeKey}ComponentThemeUsage`}
           content={`
-            ### Usage in component themes
+### Usage in component themes
 
-            ${'```js'}
-            // my-component/theme.js
+${'```javascript\n \
+---\n \
+type: code\n \
+---'}
+// my-component/theme.js
 
-            /**
-             * Generates the theme object for the component from the theme and provided additional information
-             * @param  {Object} theme The actual theme object.
-             * @return {Object} The final theme object with the overrides and component variables
-             */
-            const generateComponentTheme = (theme) => {
-              const { colors, key: themeName } = theme
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, key: themeName } = theme
 
-              // define the theme for ${themeKey}:
-              const themeSpecificStyle = {
-                '${themeKey}': {
-                  color: colors.textLightest
-                }
-              }
+  // define the theme for ${themeKey}:
+  const themeSpecificStyle = {
+    '${themeKey}': {
+      color: colors.textLightest
+    }
+  }
 
-              // define the default theme:
-              const componentVariables = {
-                color: colors.textBrand
-              }
+  // define the default theme:
+  const componentVariables = {
+    color: colors.textBrand
+  }
 
-              return {
-                ...componentVariables,
-                ...themeSpecificStyle[themeName]
-              }
-            }
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
+}
 
-            export default generateComponentTheme
-            ${'```'}
+export default generateComponentTheme
+${'```'}
           `}
           title={`${themeKey} Theme Usage in applications`}
         />
