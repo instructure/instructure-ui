@@ -32,9 +32,10 @@ import type { DescriptionProps } from './props'
 class Description extends Component<DescriptionProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
-  private compiledMarkdown: ReactElement | null = null
+  compiledMarkdown: ReactElement | null = null
 
-  componentDidMount() {
+  constructor(props: DescriptionProps) {
+    super(props)
     this.compiledMarkdown = compileMarkdown(
       this.props.content,
       this.props.title
