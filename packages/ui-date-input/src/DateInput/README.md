@@ -2,38 +2,9 @@
 describes: DateInput
 ---
 
+> **Important:** You can now use are updated version [`DateInput2`](/#DateInput2) which is easier to configure for developers, has a better UX, better accessibility features and a year picker. We recommend using that instead of `DateInput` which will be deprecated in the future.
+
 The `DateInput` component provides a visual interface for inputting date data.
-
-### Default config
-
-For ease of use in most situations, the `DateInput` component provides a default
-configuration. The default configuration can be overridden by providing props
-to the `DateInput` component.
-
-```javascript
----
-type: example
----
-class Example extends React.Component {
-  state = { value: '' }
-
-  render () {
-    return (
-      <DateInput
-        renderLabel="Choose a date"
-        assistiveText="Type a date or use arrow keys to navigate date picker."
-        width="20rem"
-        isInline
-        value={this.state.value}
-        onChange={(e, value)=> this.setState({value:value.value})}
-        invalidDateErrorMessage="Invalid date"
-      />
-    )
-  }
-}
-
-render(<Example />)
-```
 
 ### Composing a DateInput in your Application
 

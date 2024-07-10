@@ -58,7 +58,7 @@ export {
   ColorContrast,
   ColorIndicator
 } from '@instructure/ui-color-picker'
-export { DateInput } from '@instructure/ui-date-input'
+export { DateInput, DateInput2 } from '@instructure/ui-date-input'
 export { DateTimeInput } from '@instructure/ui-date-time-input'
 export { Dialog } from '@instructure/ui-dialog'
 export { DrawerLayout, DrawerContent } from '@instructure/ui-drawer-layout'

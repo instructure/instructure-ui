@@ -23,4 +23,5 @@
  */
 
 export { DateInput } from './DateInput'
+export { DateInput2 } from './DateInput2'
 export type { DateInputProps } from './DateInput/props'
