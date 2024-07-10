@@ -23,7 +23,8 @@
  */
 
 /** @jsx jsx */
-import { Component, ReactNode } from 'react'
+import { Children, Component, ReactNode, isValidElement } from 'react'
+import type { ReactElement } from 'react'
 
 import {
   getElementType,
@@ -71,6 +72,55 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
   ref: Element | null = null
 
+  // TEMP - START
+
+  hasChildren = (
+    element: ReactNode
+  ): element is ReactElement<{ children: ReactNode | ReactNode[] }> =>
+    isValidElement<{ children?: ReactNode[] }>(element) &&
+    Boolean(element.props.children)
+
+  childToString = (child?: ReactNode): string => {
+    if (
+      typeof child === 'undefined' ||
+      child === null ||
+      typeof child === 'boolean'
+    ) {
+      return ''
+    }
+
+    if (JSON.stringify(child) === '{}') {
+      return ''
+    }
+
+    return (child as number | string).toString()
+  }
+
+  onlyText = (children: ReactNode | ReactNode[]): string => {
+    if (!(children instanceof Array) && !isValidElement(children)) {
+      return this.childToString(children)
+    }
+
+    return Children.toArray(children).reduce(
+      (text: string, child: ReactNode): string => {
+        let newText = ''
+
+        if (this.hasChildren(child)) {
+          newText = this.onlyText(child.props.children)
+        } else if (isValidElement(child)) {
+          newText = ''
+        } else {
+          newText = this.childToString(child)
+        }
+
+        return text.concat(newText)
+      },
+      ''
+    )
+  }
+
+  // TEMP - END
+
   handleRef = (el: Element | null) => {
     this.ref = el
     if (typeof this.props.elementRef === 'function') {
@@ -105,9 +155,10 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   renderTrigger() {
     const { children, as } = this.props as TooltipProps
     const { hasFocus } = this.state
-
+    const toolTipRawText = this.onlyText(this.props.renderTip as any)
     const triggerProps = {
-      'aria-describedby': this._id
+      'aria-describedby': this._id,
+      'aria-label': toolTipRawText
     }
 
     if (as) {
