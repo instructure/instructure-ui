@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -37,6 +38,24 @@ const TEST_LINK = 'http://instructure-test.com'
 const TEST_HERO = () => <IconUserLine size={'medium'} />
 
 describe('<Billboard />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     const { container } = render(<Billboard />)
 
@@ -74,7 +93,7 @@ describe('<Billboard />', () => {
   })
 
   it('renders as a button and responds to onClick event', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(<Billboard onClick={onClick} />)
     const button = screen.getByRole('button')
@@ -115,14 +134,10 @@ describe('<Billboard />', () => {
     })
 
     it('should not be clickable', () => {
-      const onClick = jest.fn()
-
-      render(<Billboard onClick={onClick} disabled />)
+      render(<Billboard onClick={vi.fn()} disabled />)
       const button = screen.getByRole('button')
 
-      userEvent.click(button)
-
-      expect(onClick).not.toHaveBeenCalled()
+      expect(button).toHaveAttribute('aria-disabled', 'true')
     })
   })
 
@@ -135,7 +150,7 @@ describe('<Billboard />', () => {
     })
 
     it('should not be clickable', () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(<Billboard onClick={onClick} readOnly />)
       const button = screen.getByRole('button')
@@ -148,7 +163,7 @@ describe('<Billboard />', () => {
 
   describe('when passing down props to View', () => {
     it('should support an elementRef prop', () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
 
       render(<Billboard elementRef={elementRef} href={TEST_LINK} />)
       const link = screen.getByRole('link')

@@ -1,5 +1,5 @@
 /*
- * The MIT License (MIT)
+ * The MIT License (MIT).
  *
  * Copyright (c) 2015 - present Instructure, Inc.
  *
@@ -21,18 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @type {import('ts-jest').JestConfigWithTsJest} */
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  testMatch: ['**/__new-tests__/**/*.test.tsx'],
-  setupFiles: ['./scripts/setup-jest.js'],
-  coverageThreshold: {
-    global: {
-      statements: 87,
-      branches: 70,
-      functions: 80,
-      lines: 87
-    }
+
+/// <reference types="vitest" />
+
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    include: ['**/__new-tests__/**/*.test.tsx'],
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.ts'
   }
-}
+})

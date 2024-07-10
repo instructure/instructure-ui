@@ -43,7 +43,8 @@
     "@instructure/ui-test-utils": "9.2.0",
     "@instructure/ui-themes": "9.2.0",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.2"
+    "@testing-library/react": "^14.1.2",
+    "vitest": "^1.6.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

@@ -23,6 +23,7 @@
  */
 
 import React, { Component } from 'react'
+import { vi } from 'vitest'
 import PropTypes from 'prop-types'
 
 import { render } from '@testing-library/react'
@@ -59,7 +60,7 @@ describe('@hack', () => {
     const HackComponent = hack(['bar'])(TestComponent)
 
     it('should warn when using an hack prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
       render(<HackComponent bar="Jane" />)
@@ -76,7 +77,7 @@ describe('@hack', () => {
     })
 
     it('should not output a warning using a non-hack prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 

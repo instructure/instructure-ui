@@ -24,12 +24,28 @@
 
 import React from 'react'
 import { render, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Mask } from '../index'
 
 describe('<Mask />', () => {
+  let originalScroll: any
+
+  beforeAll(() => {
+    // Mocking window.scroll to prevent test output pollution
+    originalScroll = window.scroll
+    Object.defineProperty(window, 'scroll', {
+      value: vi.fn(),
+      writable: true
+    })
+  })
+
+  afterAll(() => {
+    window.scroll = originalScroll
+  })
+
   it('should render', () => {
     render(<Mask />)
 
@@ -39,7 +55,7 @@ describe('<Mask />', () => {
   })
 
   it('should have tabIndex -1 when onClick is provided', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(<Mask onClick={onClick} />)
     const mask = document.querySelector("span[class$='-mask']")
@@ -48,7 +64,7 @@ describe('<Mask />', () => {
   })
 
   it('should call onClick prop when clicked', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(<Mask onClick={onClick} />)
 
@@ -69,7 +85,7 @@ describe('<Mask />', () => {
   })
 
   it('should provide an elementRef', async () => {
-    const elementRef = jest.fn()
+    const elementRef = vi.fn()
 
     render(<Mask elementRef={elementRef} />)
     const mask = document.querySelector("span[class$='-mask']")

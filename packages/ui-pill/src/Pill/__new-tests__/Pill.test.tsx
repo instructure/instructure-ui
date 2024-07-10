@@ -31,18 +31,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Pill } from '../index'
 import { IconEyeLine } from '@instructure/ui-icons'
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<Pill />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
-  })
-
   it('should render', async () => {
     const { container } = render(<Pill>Overdue</Pill>)
 
@@ -78,9 +67,5 @@ describe('<Pill />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
-  })
-
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
   })
 })

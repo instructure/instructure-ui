@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 import {
@@ -41,6 +43,23 @@ import { TopNavBarUser } from '../index'
 import TopNavBarUserExamples from '../__examples__/TopNavBarUser.examples'
 
 describe('<TopNavBarUser />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
   describe('children prop', () => {
     const variants: TopNavBarItemProps['variant'][] = [
       'default',
@@ -53,9 +72,6 @@ describe('<TopNavBarUser />', () => {
     variants.forEach((variant) => {
       if (variant === 'icon' || variant === 'forceIconWithLabel') {
         it(`should not allow "${variant}" variant`, () => {
-          const consoleErrorSpy = jest
-            .spyOn(console, 'error')
-            .mockImplementation(() => {})
           const { container } = render(
             getUser({
               // @ts-expect-error intentionally wrong
@@ -69,12 +85,10 @@ describe('<TopNavBarUser />', () => {
           const expectedErrorMessage = `Warning: Item with id "UserTest" has "${variant}" variant, but only the following variants are allowed in <TopNavBarUser>: default, button, avatar.`
 
           expect(container.firstChild).not.toBeInTheDocument()
-          expect(consoleErrorSpy).toHaveBeenCalledWith(
+          expect(consoleErrorMock).toHaveBeenCalledWith(
             expect.stringContaining(expectedErrorMessage),
             expect.any(String)
           )
-
-          consoleErrorSpy.mockRestore()
         })
       } else {
         it(`should allow "${variant}" variant`, () => {
@@ -125,7 +139,7 @@ describe('<TopNavBarUser />', () => {
 
   describe('elementRef prop', () => {
     it('should return with the root element', () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(getUser({ userProps: { elementRef } }))
 
       expect(elementRef).toHaveBeenCalledWith(container.firstChild)

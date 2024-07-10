@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { PaginationPageInput } from '../index'
@@ -33,7 +34,7 @@ const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
 
 describe('<PaginationPageInput />', () => {
   it('should render', async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     render(
       <PaginationPageInput
         numberOfPages={10}
@@ -49,7 +50,7 @@ describe('<PaginationPageInput />', () => {
   })
 
   it('should display the current page number', async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     render(
       <PaginationPageInput
         numberOfPages={10}
@@ -64,7 +65,7 @@ describe('<PaginationPageInput />', () => {
   })
 
   it('should correctly update page number', async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     const { rerender } = render(
       <PaginationPageInput
         numberOfPages={10}
@@ -90,7 +91,7 @@ describe('<PaginationPageInput />', () => {
   })
 
   it("shouldn't display the arrow keys of NumberInput", async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     const { container } = render(
       <PaginationPageInput
         numberOfPages={10}
@@ -107,7 +108,7 @@ describe('<PaginationPageInput />', () => {
   })
 
   it("should disable the input on 'disabled'", async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     render(
       <PaginationPageInput
         numberOfPages={10}
@@ -123,7 +124,7 @@ describe('<PaginationPageInput />', () => {
   })
 
   it('should set the ScreenReaderLabel for the input', async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     const { container } = render(
       <PaginationPageInput
         numberOfPages={10}
@@ -138,7 +139,7 @@ describe('<PaginationPageInput />', () => {
   })
 
   it('should display the number of pages in the label', async () => {
-    const defaultOnChange = jest.fn()
+    const defaultOnChange = vi.fn()
     const { container } = render(
       <PaginationPageInput
         numberOfPages={10}

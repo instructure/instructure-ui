@@ -7,11 +7,11 @@ order: 4
 ## Converting old tests
 
 This guide explains how to convert current InstUI tests written with the `@instructure/ui-test-utils` testing library to
-use Jest + React Testing Library.
+use Vitest + React Testing Library.
 
-### Running Jest
+### Running Vitest
 
-Jest can be run from the project root with the `npm run test:new` command. It's configured in our CI pipeline so pushing a
+Vitest can be run from the project root with the `npm run test:vitest` command. It's configured in our CI pipeline so pushing a
 branch to remote runs these tests together with the legacy tests automatically.
 
 ### Adding new tests to a package

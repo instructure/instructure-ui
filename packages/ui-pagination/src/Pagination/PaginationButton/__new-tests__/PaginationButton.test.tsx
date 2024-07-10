@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { PaginationButton } from '../index'
@@ -37,7 +38,7 @@ describe('<PaginationButton />', () => {
   })
 
   it('should navigate using button when onClick provided', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     render(<PaginationButton onClick={onClick}>1</PaginationButton>)
 
     const button = screen.getByRole('button', { name: '1' })
@@ -50,7 +51,7 @@ describe('<PaginationButton />', () => {
   })
 
   it('should disable navigation to current page', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     render(
       <PaginationButton onClick={onClick} current>
         1

@@ -23,6 +23,8 @@
  */
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -53,24 +55,25 @@ const getOptions = (
     </Select.Option>
   ))
 
-jest.mock('@instructure/ui-utils', () => {
-  const originalModule = jest.requireActual('@instructure/ui-utils')
-
+vi.mock('@instructure/ui-utils', async (importOriginal) => {
+  const originalModule = (await importOriginal()) as any
   return {
     __esModule: true,
     ...originalModule,
-    isSafari: jest.fn(() => true)
+    isSafari: vi.fn(() => true)
   }
 })
 
-const mockUtils = utils as jest.Mocked<typeof utils>
+const mockUtils = utils as any
 
 describe('<Select />', () => {
-  let consoleErrorMock: jest.SpyInstance
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
-    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation()
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
   })
 
   afterEach(() => {
@@ -86,7 +89,7 @@ describe('<Select />', () => {
   })
 
   it('should have role combobox in different browsers than Safari without onInputChange', async () => {
-    mockUtils.isSafari = jest.fn(() => false)
+    mockUtils.isSafari = vi.fn(() => false)
 
     const { container } = render(
       <Select renderLabel="Choose an option">{getOptions()}</Select>
@@ -366,7 +369,7 @@ describe('<Select />', () => {
     })
 
     it('should provide a ref to the input element', async () => {
-      const inputRef = jest.fn()
+      const inputRef = vi.fn()
 
       render(
         <Select renderLabel="Choose an option" inputRef={inputRef}>
@@ -419,7 +422,7 @@ describe('<Select />', () => {
     })
 
     it('should provide a ref to the list element', async () => {
-      const listRef = jest.fn()
+      const listRef = vi.fn()
 
       render(
         <Select
@@ -442,7 +445,7 @@ describe('<Select />', () => {
   describe('with callbacks', () => {
     describe('should fire onRequestShowOptions', () => {
       it('when root is clicked', async () => {
-        const onRequestShowOptions = jest.fn()
+        const onRequestShowOptions = vi.fn()
 
         const { container, rerender } = render(
           <Select
@@ -486,7 +489,7 @@ describe('<Select />', () => {
       })
 
       it('when input is clicked', async () => {
-        const onRequestShowOptions = jest.fn()
+        const onRequestShowOptions = vi.fn()
 
         const { rerender } = render(
           <Select
@@ -521,7 +524,7 @@ describe('<Select />', () => {
       })
 
       it('when up/down arrows are pressed', async () => {
-        const onRequestShowOptions = jest.fn()
+        const onRequestShowOptions = vi.fn()
 
         render(
           <Select
@@ -546,7 +549,7 @@ describe('<Select />', () => {
       })
 
       it('when space is pressed', async () => {
-        const onRequestShowOptions = jest.fn()
+        const onRequestShowOptions = vi.fn()
 
         const { rerender } = render(
           <Select
@@ -583,7 +586,7 @@ describe('<Select />', () => {
 
     describe('should fire onRequestHideOptions', () => {
       it('when root is clicked and isShowingOptions is true', async () => {
-        const onRequestHideOptions = jest.fn()
+        const onRequestHideOptions = vi.fn()
 
         const { container } = render(
           <Select
@@ -613,7 +616,7 @@ describe('<Select />', () => {
       })
 
       it('when root is clicked and isShowingOptions is false should NOT fire onRequestHideOptions', async () => {
-        const onRequestHideOptions = jest.fn()
+        const onRequestHideOptions = vi.fn()
 
         render(
           <Select
@@ -636,7 +639,7 @@ describe('<Select />', () => {
       })
 
       it('when input is clicked', async () => {
-        const onRequestHideOptions = jest.fn()
+        const onRequestHideOptions = vi.fn()
 
         const { rerender } = render(
           <Select
@@ -671,7 +674,7 @@ describe('<Select />', () => {
       })
 
       it('when escape is pressed', async () => {
-        const onRequestHideOptions = jest.fn()
+        const onRequestHideOptions = vi.fn()
 
         render(
           <Select
@@ -694,7 +697,7 @@ describe('<Select />', () => {
 
     describe('should fire onRequestHighlightOption', () => {
       it('when options are hovered', async () => {
-        const onRequestHighlightOption = jest.fn()
+        const onRequestHighlightOption = vi.fn()
 
         render(
           <Select
@@ -731,7 +734,7 @@ describe('<Select />', () => {
 
     describe('input callbacks', () => {
       it('should fire onInputChange when input is typed in', async () => {
-        const onInputChange = jest.fn()
+        const onInputChange = vi.fn()
 
         render(
           <Select renderLabel="Choose an option" onInputChange={onInputChange}>
@@ -748,7 +751,7 @@ describe('<Select />', () => {
       })
 
       it('should fire onFocus when input gains focus', async () => {
-        const onFocus = jest.fn()
+        const onFocus = vi.fn()
 
         render(
           <Select renderLabel="Choose an option" onFocus={onFocus}>

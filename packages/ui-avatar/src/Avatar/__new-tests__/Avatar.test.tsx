@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
@@ -72,7 +73,7 @@ describe('<Avatar />', () => {
     })
 
     it('should return the underlying component', async () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(
         <Avatar name="Avatar Name" elementRef={elementRef} />
       )
@@ -137,7 +138,7 @@ describe('<Avatar />', () => {
     })
 
     it('should call onImageLoaded once the image loads', async () => {
-      const onImageLoaded = jest.fn()
+      const onImageLoaded = vi.fn()
       const { container } = render(
         <Avatar name="Avatar Name" onImageLoaded={onImageLoaded} />
       )

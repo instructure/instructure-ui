@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "baseUrl": "./packages",
     "paths": {
       "@instructure/*": ["*/src"],
@@ -23,5 +24,6 @@
       "@instructure/ui-stylelint-config": ["ui-stylelint-config/lib"],
       "@instructure/ui-webpack-config": ["ui-webpack-config/config"]
     }
-  }
+  },
+  "include": ["./vitest.setup.ts", "./vitest.config.ts"]
 }

@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 import {
@@ -49,16 +51,23 @@ const defaultBlocks: Pick<
   renderUser: getUser()
 }
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<TopNavBarDesktopLayout />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
 
   describe('renderBreadcrumb', () => {
@@ -89,8 +98,6 @@ describe('<TopNavBarDesktopLayout />', () => {
     })
 
     it('should not render breadcrumb if inverseColor is false', () => {
-      const consoleMock = jest.spyOn(console, 'error').mockImplementation()
-
       const { queryByText, queryByLabelText } = render(
         <TopNavBarContext.Provider
           value={{
@@ -115,7 +122,7 @@ describe('<TopNavBarDesktopLayout />', () => {
       expect(crumb2).not.toBeInTheDocument()
       expect(crumb3).not.toBeInTheDocument()
 
-      expect(consoleMock.mock.calls[0][0]).toEqual(
+      expect(consoleErrorMock.mock.calls[0][0]).toEqual(
         'Warning: [TopNavBarBreadcrumb] If the inverseColor prop is not set to true, TopNavBarBreadcrumb fails to render.'
       )
     })
@@ -415,7 +422,7 @@ describe('<TopNavBarDesktopLayout />', () => {
 
   describe('elementRef prop', () => {
     it('should return the root nav element', () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(
         <TopNavBarDesktopLayout {...defaultBlocks} elementRef={elementRef} />
       )
@@ -433,9 +440,5 @@ describe('<TopNavBarDesktopLayout />', () => {
 
       expect(axeCheck).toBe(true)
     })
-  })
-
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
   })
 })

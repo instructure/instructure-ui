@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
+import { vi } from 'vitest'
 import PropTypes, { checkPropTypes } from 'prop-types'
 import '@testing-library/jest-dom'
 import { controllable } from '../index'
 
 describe('controllable', () => {
   afterEach(() => {
-    jest.restoreAllMocks()
+    vi.restoreAllMocks()
   })
 
   it('should accept when prop type is correct and handler is provided', () => {
-    const errorSpy = jest.spyOn(console, 'error')
+    const errorSpy = vi.spyOn(console, 'error')
 
     const props = {
       selected: true,
@@ -64,7 +65,7 @@ describe('controllable', () => {
   })
 
   it('should reject when the prop type is incorrect', () => {
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     const props = {
       selected: 'wrong type supplied',

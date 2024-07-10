@@ -30,6 +30,7 @@ import React, {
   useState
 } from 'react'
 import { fireEvent, render, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -156,7 +157,7 @@ describe('<Dialog />', () => {
   })
 
   it('should call onDismiss prop when Esc key pressed', async () => {
-    const onDismiss = jest.fn()
+    const onDismiss = vi.fn()
     const { getByRole } = renderDialog({ onDismiss })
     const dialog = getByRole('dialog')
 
@@ -172,7 +173,7 @@ describe('<Dialog />', () => {
   })
 
   it('should call onDismiss prop when the document is clicked', async () => {
-    const onDismiss = jest.fn()
+    const onDismiss = vi.fn()
     renderDialog({ onDismiss, shouldCloseOnDocumentClick: true })
 
     await waitFor(() => {
@@ -205,7 +206,7 @@ describe('<Dialog />', () => {
     })
 
     it('should warn when trying to focus or blur a closed dialog', () => {
-      const consoleError = jest
+      const consoleError = vi
         .spyOn(console, 'error')
         .mockImplementation(() => {})
       let ref
@@ -333,7 +334,7 @@ describe('<Dialog />', () => {
 
     describe('when focus leaves the first and last tabbable', () => {
       it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, async () => {
-        const onBlur = jest.fn()
+        const onBlur = vi.fn()
         const { getByTestId } = render(
           <DialogExample
             open
@@ -357,7 +358,7 @@ describe('<Dialog />', () => {
       })
 
       it('should NOT call onBlur when shouldContainFocus=true and Shift+Tab pressing first tabbable', async () => {
-        const onBlur = jest.fn()
+        const onBlur = vi.fn()
 
         const { getByTestId } = render(
           <DialogExample
@@ -387,7 +388,7 @@ describe('<Dialog />', () => {
       })
 
       it('should call onBlur when shouldContainFocus=false and tab pressing last tabbable', async () => {
-        const onBlur = jest.fn()
+        const onBlur = vi.fn()
 
         const { getByTestId } = render(
           <DialogExample
@@ -414,7 +415,7 @@ describe('<Dialog />', () => {
       })
 
       it('should call onBlur when shouldContainFocus=false and pressing Shift+Tab on the first tabbable', async () => {
-        const onBlur = jest.fn()
+        const onBlur = vi.fn()
 
         const { getByTestId } = render(
           <DialogExample

@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 import {
@@ -37,16 +39,23 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TopNavBarActionItems } from '../index'
 import TopNavBarActionItemsExamples from '../__examples__/TopNavBarActionItems.examples'
 
-const originalResizeObserver = global.ResizeObserver
-
 describe('<TopNavBarActionItems />', () => {
-  beforeAll(() => {
-    // Mock for ResizeObserver browser API
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
 
   it('should render', () => {
@@ -70,7 +79,7 @@ describe('<TopNavBarActionItems />', () => {
 
   describe('elementRef prop should return a ref to the root element', () => {
     it('in desktop mode', () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(
         getActionItems({
           actionItemsCount: 6,
@@ -86,7 +95,7 @@ describe('<TopNavBarActionItems />', () => {
     })
 
     it('in smallViewport mode', () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(
         <SmallViewportModeWrapper>
           {getActionItems({
@@ -266,9 +275,6 @@ describe('<TopNavBarActionItems />', () => {
 
   describe('item types:', () => {
     it('should not allow avatars', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       render(
         getActionItems({
           actionItemsCount: 1,
@@ -280,18 +286,13 @@ describe('<TopNavBarActionItems />', () => {
       const expectedErrorMessage =
         'Warning: Items in <TopNavBar.ActionItems> are not allowed to have avatars, please remove it from item with the id "Search".'
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
 
     it('should render items without icons in smallViewport mode', () => {
-      const consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
       const { container } = render(
         <SmallViewportModeWrapper>
           {getActionItems({
@@ -312,12 +313,10 @@ describe('<TopNavBarActionItems />', () => {
 
       expect(listItems.length).toEqual(5)
       expect(icons.length).toEqual(5)
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect(consoleErrorMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleErrorSpy.mockRestore()
     })
 
     it('should be converted to icon variant in smallViewport mode', () => {
@@ -368,9 +367,5 @@ describe('<TopNavBarActionItems />', () => {
         expect(axeCheck).toBe(true)
       }
     )
-  })
-
-  afterAll(() => {
-    global.ResizeObserver = originalResizeObserver
   })
 })
