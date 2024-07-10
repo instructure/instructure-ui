@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -32,6 +33,24 @@ import { CheckboxFacade } from '../index'
 const TEST_TEXT = 'test-text'
 
 describe('<CheckboxFacade />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     render(<CheckboxFacade>{TEST_TEXT}</CheckboxFacade>)
     const facade = screen.getByText(TEST_TEXT)

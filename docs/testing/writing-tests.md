@@ -5,7 +5,7 @@ order: 3
 ---
 
 > This section uses [`@instructure/ui-test-utils`](/#ui-test-utils) testing library which will be sunset in our next
-> release in favor of Jest + React Testing Library. See [our guide](/#converting-old-tests) on how to convert legacy tests to use the new
+> release in favor of Vitest + React Testing Library. See [our guide](/#converting-old-tests) on how to convert legacy tests to use the new
 > frameworks.
 
 ## The anatomy of a test

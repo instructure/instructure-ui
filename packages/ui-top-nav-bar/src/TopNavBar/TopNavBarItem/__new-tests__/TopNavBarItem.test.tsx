@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -51,6 +53,24 @@ const variants: ('default' | 'button' | 'icon' | 'avatar')[] = [
 ]
 
 describe('<TopNavBarItem />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   describe('variant prop', () => {
     // TODO convert to e2e
     // describe('should have "inverse" color focus ring', () => {
@@ -185,9 +205,6 @@ describe('<TopNavBarItem />', () => {
 
     describe('with "icon" variant', () => {
       it('should throw error if no icon is provided', () => {
-        const consoleErrorSpy = jest
-          .spyOn(console, 'error')
-          .mockImplementation(() => {})
         render(
           <TopNavBarItem id="item" variant="icon">
             Menu Item
@@ -197,12 +214,10 @@ describe('<TopNavBarItem />', () => {
         const expectedErrorMessage =
           'The "renderIcon" prop is required for the `variant="icon"` type <TopNavBar.Item> components, but the item with id "item" is missing it.'
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect(consoleErrorMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleErrorSpy.mockRestore()
       })
 
       it('should render the icon', () => {
@@ -252,9 +267,6 @@ describe('<TopNavBarItem />', () => {
       // })
 
       it('should not allow the "renderAvatar" prop', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -272,15 +284,13 @@ describe('<TopNavBarItem />', () => {
         const expectedErrorMessage =
           'Warning: <TopNavBar.Item> components with icons cannot display avatars, so the "renderAvatar" config prop will be ignored for item with id "item".'
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
 
         expect(avatar).not.toBeInTheDocument()
         expect(icon).toBeVisible()
-
-        consoleWarningSpy.mockRestore()
       })
 
       // TODO convert to e2e
@@ -303,9 +313,6 @@ describe('<TopNavBarItem />', () => {
 
     describe('with "avatar" variant', () => {
       it('should throw error if no avatar is provided', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         const { container } = render(
           <TopNavBarItem id="item" variant="avatar">
             Menu Item
@@ -315,19 +322,14 @@ describe('<TopNavBarItem />', () => {
         const avatar = container.querySelector("[class$='inlineBlock-avatar']")
         const expectedErrorMessage = `Warning: The "renderAvatar" config is required for the 'variant="avatar"' type <TopNavBar.Item> components, but received none for the item with id "item".`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
         expect(avatar).not.toBeInTheDocument()
-
-        consoleWarningSpy.mockRestore()
       })
 
       it('should throw error if no "renderAvatar.avatarName" is provided', () => {
-        const consoleErrorSpy = jest
-          .spyOn(console, 'error')
-          .mockImplementation(() => {})
         const { container } = render(
           // @ts-expect-error We are passing it incorrectly on purpose
           <TopNavBarItem id="item" variant="avatar" renderAvatar={{}}>
@@ -338,13 +340,11 @@ describe('<TopNavBarItem />', () => {
         const avatar = container.querySelector("[class$='inlineBlock-avatar']")
         const expectedErrorMessage = `Warning: The "avatarName" prop is required for for <TopNavBar.Item> components with avatar, but the item with id "item" is missing it.`
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect(consoleErrorMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
         expect(avatar).not.toBeInTheDocument()
-
-        consoleErrorSpy.mockRestore()
       })
 
       it('should render the avatar', () => {
@@ -382,9 +382,6 @@ describe('<TopNavBarItem />', () => {
       // })
 
       it('should have either string type "children" or "avatarAlt"', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         render(
           <SmallViewportModeWrapper>
             <TopNavBarItem
@@ -400,12 +397,10 @@ describe('<TopNavBarItem />', () => {
         const expectedErrorMessage =
           'Warning: Please supply a label for the avatar with either the "renderAvatar.avatarAlt" or the "children" (as string) prop. It is needed for screen reader support, but missing on the item with the id: "item".'
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleWarningSpy.mockRestore()
       })
     })
   })
@@ -467,9 +462,6 @@ describe('<TopNavBarItem />', () => {
         it(`should be${
           !isDefaultVariant ? ' not' : ''
         } allowed for "${variant}" variant items`, () => {
-          const consoleWarningSpy = jest
-            .spyOn(console, 'warn')
-            .mockImplementation(() => {})
           render(
             <TopNavBarItem
               id="item"
@@ -487,33 +479,27 @@ describe('<TopNavBarItem />', () => {
           // const activeIndicatorStyle = await component.getActiveIndicatorStyle()
 
           if (isDefaultVariant) {
-            expect(consoleWarningSpy).not.toHaveBeenCalled()
+            expect(consoleWarningMock).not.toHaveBeenCalled()
             // expect(activeIndicatorStyle?.backgroundColor).to.equal('rgb(255, 255, 255)')
-            consoleWarningSpy.mockRestore()
           } else {
             const expectedErrorMessage = `Warning: Only \`variant="default"\` <TopNavBar.Item> components can be set to active, but item with id "item" has variant: "${variant}".`
-            expect(consoleWarningSpy).toHaveBeenCalledWith(
+            expect(consoleWarningMock).toHaveBeenCalledWith(
               expect.stringContaining(expectedErrorMessage),
               expect.any(String)
             )
             // expect(activeIndicatorStyle?.backgroundColor).to.equal('rgba(0, 0, 0, 0)')
-
-            consoleWarningSpy.mockRestore()
           }
         })
       })
 
       it('should not be allowed with avatar + text items', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         render(
           <TopNavBarItem id="item" status="active" renderAvatar={avatarExample}>
             Menu Item
           </TopNavBarItem>
         )
         const expectedErrorMessage = `Warning: <TopNavBar.Item> components with avatar cannot have "active" status, so the "active" status on the item with id "item" will be ignored.`
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
@@ -523,7 +509,6 @@ describe('<TopNavBarItem />', () => {
         // expect(activeIndicatorStyle?.backgroundColor).to.equal(
         //   'rgba(0, 0, 0, 0)'
         // )
-        consoleWarningSpy.mockRestore()
       })
     })
 
@@ -586,9 +571,6 @@ describe('<TopNavBarItem />', () => {
 
   describe('renderSubmenu prop', () => {
     it('should not accept non-Drilldown elements', () => {
-      const consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
       const { container } = render(
         <TopNavBarItem id="item" renderSubmenu={<div>submenu</div>}>
           Menu Item
@@ -600,9 +582,7 @@ describe('<TopNavBarItem />', () => {
       )
 
       expect(submenuTrigger).not.toBeInTheDocument()
-      expect(consoleErrorSpy).toHaveBeenCalled()
-
-      consoleErrorSpy.mockRestore()
+      expect(consoleErrorMock).toHaveBeenCalled()
     })
 
     it('should render submenu', async () => {
@@ -657,14 +637,11 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should throw warning about controlled Drilldown', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       render(
         <TopNavBarItem
           id="item"
           renderSubmenu={
-            <Drilldown rootPageId="root" onToggle={jest.fn()} show>
+            <Drilldown rootPageId="root" onToggle={vi.fn()} show>
               <Drilldown.Page id="root">
                 <Drilldown.Option id="linkExampleOption1" href="/#One">
                   Link One
@@ -679,18 +656,13 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: TopNavBar.Item Drilldown submenus are controlled by the component. The "show" prop will be ignored on the submenu of the item with id: "item".`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
 
     it('should throw warning when trigger is passed to Drilldown', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       render(
         <TopNavBarItem
           id="item"
@@ -710,12 +682,10 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: TopNavBar.Item submenus have the item itself as their trigger. The "trigger" prop will be ignored on the Drilldown submenu of item with id: "item".`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
 
     it('should open on ArrowDown', async () => {
@@ -801,9 +771,6 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should throw error when passed to item with submenu', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       render(
         <TopNavBarItem
           id="item"
@@ -821,18 +788,13 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: TopNavBar.Items are not allowed to have both the "renderSubmenu" and "customPopoverConfig" props. For submenus, pass a Drilldown component via the "renderSubmenu" prop, and only use "customPopoverConfig" for custom features. Item with id: "item" will ignore the "customPopoverConfig" prop.`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
 
     it('should throw warning when no content is passed', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       const { container } = render(
         <TopNavBarItem
           id="item"
@@ -852,18 +814,13 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: Pass the content of the custom Popover as "customPopoverConfig.children" for the item with id: "item".`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
 
     it('should throw warning when renderTrigger is passed in the config', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       render(
         <TopNavBarItem
           id="item"
@@ -878,12 +835,10 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: TopNavBar.Item popovers have the item itself as their trigger. The "renderTrigger" prop will be ignored on the popover of item with id: "item".`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
 
     describe('should not put aria-expanded on the popover trigger, just the button', () => {
@@ -1449,9 +1404,6 @@ describe('<TopNavBarItem />', () => {
 
     describe('throws warning', () => {
       it('when not passed to "avatar" variant', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         const { container } = render(
           <TopNavBarItem id="item" variant="avatar">
             Menu Item
@@ -1465,18 +1417,13 @@ describe('<TopNavBarItem />', () => {
 
         const expectedErrorMessage = `Warning: The "renderAvatar" config is required for the 'variant="avatar"' type <TopNavBar.Item> components, but received none for the item with id "item".`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleWarningSpy.mockRestore()
       })
 
       it('when passed to item with "renderIcon"', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -1494,18 +1441,13 @@ describe('<TopNavBarItem />', () => {
 
         const expectedErrorMessage = `Warning: <TopNavBar.Item> components with icons cannot display avatars, so the "renderAvatar" config prop will be ignored for item with id "item".`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleWarningSpy.mockRestore()
       })
 
       it('when passed to item with "active" status', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         const { container } = render(
           <TopNavBarItem id="item" renderAvatar={avatarExample} status="active">
             Menu Item
@@ -1519,7 +1461,7 @@ describe('<TopNavBarItem />', () => {
 
         const expectedErrorMessage = `Warning: <TopNavBar.Item> components with avatar cannot have "active" status, so the "active" status on the item with id "item" will be ignored.`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
@@ -1530,14 +1472,9 @@ describe('<TopNavBarItem />', () => {
         // expect(activeIndicatorStyle?.backgroundColor).to.equal(
         //     'rgba(0, 0, 0, 0)'
         // )
-
-        consoleWarningSpy.mockRestore()
       })
 
       it('when there is no string type "children" or "avatarAlt" passed', () => {
-        const consoleWarningSpy = jest
-          .spyOn(console, 'warn')
-          .mockImplementation(() => {})
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -1554,12 +1491,10 @@ describe('<TopNavBarItem />', () => {
 
         const expectedErrorMessage = `Warning: Please supply a label for the avatar with either the "renderAvatar.avatarAlt" or the "children" (as string) prop. It is needed for screen reader support, but missing on the item with the id: "item".`
 
-        expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect(consoleWarningMock).toHaveBeenCalledWith(
           expect.stringContaining(expectedErrorMessage),
           expect.any(String)
         )
-
-        consoleWarningSpy.mockRestore()
       })
     })
   })
@@ -1685,9 +1620,6 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should not be allowed for items with submenu', () => {
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
       const { container } = render(
         <TopNavBarItem
           id="item"
@@ -1706,19 +1638,17 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: TopNavBar.Items with submenus are not allowed to have 'href' property, but received href "/#TopNavBar" for item with the id: "item".`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
   })
 
   describe('onClick prop', () => {
     it('should render item as button', () => {
       render(
-        <TopNavBarItem id="item" onClick={jest.fn()}>
+        <TopNavBarItem id="item" onClick={vi.fn()}>
           Menu Item
         </TopNavBarItem>
       )
@@ -1729,7 +1659,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should fire onClick on click', () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
       render(
         <TopNavBarItem id="item" onClick={onClick}>
           Menu Item
@@ -1743,7 +1673,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should work combined with "href" prop', () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
       const { container } = render(
         <TopNavBarItem id="item" onClick={onClick} href="/#TopNavBar">
           Menu Item
@@ -1758,10 +1688,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should not be allowed for items with submenu', () => {
-      const onClick = jest.fn()
-      const consoleWarningSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
+      const onClick = vi.fn()
 
       render(
         <TopNavBarItem
@@ -1779,18 +1706,16 @@ describe('<TopNavBarItem />', () => {
 
       const expectedErrorMessage = `Warning: TopNavBar.Items with submenus are not allowed to have 'onClick' property, but received onClick for item with the id: "item".Use the \`onSubmenuToggle\` prop instead. OnClick:`
 
-      expect(consoleWarningSpy).toHaveBeenCalledWith(
+      expect(consoleWarningMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleWarningSpy.mockRestore()
     })
   })
 
   describe('onSubmenuToggle prop', () => {
     it('should be called on submenu toggle', () => {
-      const onSubmenuToggle = jest.fn()
+      const onSubmenuToggle = vi.fn()
 
       render(
         <TopNavBarItem
@@ -1821,8 +1746,8 @@ describe('<TopNavBarItem />', () => {
 
   describe('other event handlers', () => {
     it('onMouseOver and onMouseOut should be called', () => {
-      const onMouseOver = jest.fn()
-      const onMouseOut = jest.fn()
+      const onMouseOver = vi.fn()
+      const onMouseOut = vi.fn()
 
       render(
         <TopNavBarItem
@@ -1843,8 +1768,8 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('onFocus and onBlur should be called', () => {
-      const onFocus = jest.fn()
-      const onBlur = jest.fn()
+      const onFocus = vi.fn()
+      const onBlur = vi.fn()
 
       render(
         <TopNavBarItem id="item" onFocus={onFocus} onBlur={onBlur}>
@@ -1861,8 +1786,8 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('onKeyDown and onKeyUp should be called', () => {
-      const onKeyDown = jest.fn()
-      const onKeyUp = jest.fn()
+      const onKeyDown = vi.fn()
+      const onKeyUp = vi.fn()
 
       render(
         <TopNavBarItem id="item" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
@@ -1881,7 +1806,7 @@ describe('<TopNavBarItem />', () => {
 
   describe('refs', () => {
     it('elementRef should return root element', () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
       const { container } = render(
         <TopNavBarItem id="item" elementRef={elementRef}>
           Menu Item
@@ -1893,7 +1818,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('itemRef should return the button element', () => {
-      const itemRef = jest.fn()
+      const itemRef = vi.fn()
       render(
         <TopNavBarItem id="item" itemRef={itemRef}>
           Menu Item

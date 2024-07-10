@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { MenuItem } from '../index'
@@ -63,7 +64,7 @@ describe('<MenuItem />', () => {
   })
 
   it('should call onSelect after click', () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     render(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -82,7 +83,7 @@ describe('<MenuItem />', () => {
   })
 
   it('should call onClick after click', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     render(
       <MenuItem onClick={onClick} value="foo">
         Hello
@@ -129,7 +130,7 @@ describe('<MenuItem />', () => {
 
   it('should set the aria-checked attribute when selected prop is true', () => {
     render(
-      <MenuItem type="checkbox" selected onSelect={jest.fn()}>
+      <MenuItem type="checkbox" selected onSelect={vi.fn()}>
         Hello
       </MenuItem>
     )

@@ -24,12 +24,13 @@
 
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { addInputModeListener } from '../addInputModeListener'
 
 describe('addInputModeListener', () => {
   it('should handle input mode changes', () => {
-    const handleInputModeChange = jest.fn()
+    const handleInputModeChange = vi.fn()
 
     render(
       <div>

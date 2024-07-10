@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -125,7 +126,7 @@ describe('<IconButton/>', () => {
   })
 
   it('should pass the `elementRef` prop', () => {
-    const elementRef = jest.fn()
+    const elementRef = vi.fn()
     render(
       <IconButton
         screenReaderLabel="some action"
@@ -194,7 +195,7 @@ describe('<IconButton/>', () => {
   })
 
   it('should pass the `onClick` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(
       <IconButton

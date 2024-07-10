@@ -24,7 +24,8 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.2.0",
     "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^15.0.7"
+    "@testing-library/react": "^15.0.7",
+    "vitest": "^1.6.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.5",

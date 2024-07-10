@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
+import { vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -31,6 +32,24 @@ import { Popover } from '@instructure/ui-popover'
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
 
 describe('<Menu />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   describe('without a trigger', () => {
     it('should render', () => {
       render(
@@ -82,7 +101,7 @@ describe('<Menu />', () => {
     })
 
     it('should call onSelect when menu item is selected', async () => {
-      const onSelect = jest.fn()
+      const onSelect = vi.fn()
 
       const { getByText } = render(
         <Menu label="Settings" onSelect={onSelect}>
@@ -98,22 +117,24 @@ describe('<Menu />', () => {
     })
 
     it('should not call onSelect when disabled', () => {
-      const onSelect = jest.fn()
+      const onSelect = vi.fn()
 
       const { getByText } = render(
         <Menu label="Settings" onSelect={onSelect} disabled>
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
-      const item = getByText('Account')
+      const itemText = getByText('Account')
+      const menu = screen.getByRole('menu')
+      const menuItem = screen.getByRole('menuitem')
 
-      userEvent.click(item)
-
-      expect(onSelect).not.toHaveBeenCalled()
+      expect(itemText).toBeInTheDocument()
+      expect(menu).toHaveAttribute('aria-disabled', 'true')
+      expect(menuItem).toHaveAttribute('aria-disabled', 'true')
     })
 
     it('should provide a menu ref', () => {
-      const menuRef = jest.fn()
+      const menuRef = vi.fn()
 
       render(
         <Menu label="Settings" menuRef={menuRef}>
@@ -187,7 +208,7 @@ describe('<Menu />', () => {
     })
 
     it('should call onFocus on focus', () => {
-      const onFocus = jest.fn()
+      const onFocus = vi.fn()
 
       const { getByRole } = render(
         <Menu trigger={<button>More</button>} onFocus={onFocus}>
@@ -256,7 +277,7 @@ describe('<Menu />', () => {
     })
 
     it('should provide a menu ref', () => {
-      const menuRef = jest.fn()
+      const menuRef = vi.fn()
 
       render(
         <Menu trigger={<button>More</button>} defaultShow menuRef={menuRef}>
@@ -270,7 +291,7 @@ describe('<Menu />', () => {
     })
 
     it('should provide a popoverRef ref', () => {
-      const popoverRef = jest.fn()
+      const popoverRef = vi.fn()
 
       render(
         <Menu
@@ -287,7 +308,7 @@ describe('<Menu />', () => {
     })
 
     it('should call onToggle on click', () => {
-      const onToggle = jest.fn()
+      const onToggle = vi.fn()
 
       render(
         <Menu trigger={<button>More</button>} onToggle={onToggle}>

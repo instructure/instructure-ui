@@ -24,12 +24,31 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FormField } from '../index'
 
 describe('<FormField />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     render(<FormField label="foo" id="bar" />)
     const formField = screen.getByText('foo').closest('label')

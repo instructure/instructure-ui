@@ -24,12 +24,32 @@
 
 import React, { CSSProperties } from 'react'
 import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { View } from '../../index'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<View />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     const { container } = render(
       <View>
@@ -116,7 +136,7 @@ describe('<View />', () => {
   })
 
   it('should provide an elementRef', () => {
-    const elementRef = jest.fn()
+    const elementRef = vi.fn()
 
     const { container } = render(
       <View elementRef={elementRef}>
@@ -216,10 +236,6 @@ describe('<View />', () => {
 
   describe('withFocusOutline', () => {
     it('should warn when withFocusOutline is true without position=relative', () => {
-      const consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-
       render(
         <View withFocusOutline>
           <h1>View Content</h1>
@@ -228,19 +244,13 @@ describe('<View />', () => {
       const expectedErrorMessage =
         'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect(consoleErrorMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleErrorSpy.mockRestore()
     })
 
     it('should warn when withFocusOutline is `true`, display is set to `inline`, and focusPosition is set to `offset`', () => {
-      const consoleErrorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-
       render(
         <View withFocusOutline display="inline" focusPosition="offset">
           <h1>View Content</h1>
@@ -250,12 +260,10 @@ describe('<View />', () => {
       const expectedErrorMessage =
         'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect(consoleErrorMock).toHaveBeenCalledWith(
         expect.stringContaining(expectedErrorMessage),
         expect.any(String)
       )
-
-      consoleErrorSpy.mockRestore()
     })
   })
 

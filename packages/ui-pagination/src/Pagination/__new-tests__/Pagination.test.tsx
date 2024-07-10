@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import userEvent from '@testing-library/user-event'
 
@@ -43,14 +44,21 @@ const buildPages = (count = 4, current = 0) => {
 }
 
 describe('<Pagination />', () => {
-  let consoleErrorMock: jest.SpyInstance
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
-    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation()
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
   })
 
   afterEach(() => {
+    consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
   })
 
@@ -795,7 +803,7 @@ describe('<Pagination />', () => {
     })
 
     it(`should pass down the elementRef prop`, async () => {
-      const elementRef = jest.fn()
+      const elementRef = vi.fn()
 
       const { container } = render(
         <Pagination
@@ -811,7 +819,7 @@ describe('<Pagination />', () => {
     })
 
     it('should navigate to adjacent pages', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
@@ -914,8 +922,8 @@ describe('<Pagination />', () => {
     })
 
     it('should change pages on input change', async () => {
-      const onClick1 = jest.fn()
-      const onClick2 = jest.fn()
+      const onClick1 = vi.fn()
+      const onClick2 = vi.fn()
 
       const { container } = render(
         <Pagination

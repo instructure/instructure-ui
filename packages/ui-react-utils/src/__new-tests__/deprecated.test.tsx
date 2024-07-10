@@ -23,6 +23,7 @@
  */
 
 import React, { Component } from 'react'
+import { vi } from 'vitest'
 import PropTypes from 'prop-types'
 
 import { render } from '@testing-library/react'
@@ -62,7 +63,7 @@ describe('@deprecated', () => {
     })(TestComponent)
 
     it('should warn when suggesting new prop when using old prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -80,7 +81,7 @@ describe('@deprecated', () => {
     })
 
     it('should warn when using old prop with no new prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -98,7 +99,7 @@ describe('@deprecated', () => {
     })
 
     it('should not output a warning using new prop', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -114,7 +115,7 @@ describe('@deprecated', () => {
     const DeprecatedComponent = deprecated('3.4.0')(TestComponent)
 
     it('should warn that the entire component is deprecated if no old props are supplied', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -140,7 +141,7 @@ describe('@deprecated', () => {
     )(TestComponent)
 
     it('should warn that the component is deprecated and output a warning that the package changed', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -160,7 +161,7 @@ describe('@deprecated', () => {
 
   describe('component with deprecated prop values', () => {
     it('should not warn when an allowed prop value is supplied', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
       type DeprecatedPropValueComponentProps = {
@@ -191,7 +192,7 @@ describe('@deprecated', () => {
     })
 
     it('should warn when a forbidden prop value is supplied', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -229,7 +230,7 @@ describe('@deprecated', () => {
     })
 
     it('should warn with additional message text when a forbidden prop value is supplied and has message text', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
@@ -269,10 +270,10 @@ describe('@deprecated', () => {
     })
 
     it('should call functional message with the correct props', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
-      const messageMock = jest.fn()
+      const messageMock = vi.fn()
 
       const color = 'gold'
       type DeprecatedPropValueComponentProps = {
@@ -309,7 +310,7 @@ describe('@deprecated', () => {
     })
 
     it('should warn with a completely custom message when provided message is functional and prop value is forbidden', () => {
-      const consoleWarningSpy = jest
+      const consoleWarningSpy = vi
         .spyOn(console, 'warn')
         .mockImplementation(() => {})
 

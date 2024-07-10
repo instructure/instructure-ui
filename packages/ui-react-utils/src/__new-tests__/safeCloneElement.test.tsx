@@ -23,6 +23,7 @@
  */
 
 import React, { ReactElement, ReactNode } from 'react'
+import { vi } from 'vitest'
 
 import { createChainedFunction } from '@instructure/ui-utils'
 import { render, screen } from '@testing-library/react'
@@ -44,8 +45,8 @@ describe('safeCloneElement', () => {
   }
 
   it('should preserve refs', () => {
-    const origRef = jest.fn()
-    const cloneRef = jest.fn()
+    const origRef = vi.fn()
+    const cloneRef = vi.fn()
 
     render(
       <SafeClone element={<div ref={origRef} />} props={{ ref: cloneRef }} />
@@ -56,8 +57,8 @@ describe('safeCloneElement', () => {
   })
 
   it('should preserve event handlers', () => {
-    const onClickA = jest.fn()
-    const onClickB = jest.fn()
+    const onClickA = vi.fn()
+    const onClickB = vi.fn()
 
     render(
       <SafeClone
@@ -74,9 +75,9 @@ describe('safeCloneElement', () => {
   })
 
   it('should preserve already chained functions', () => {
-    const onClickA = jest.fn()
-    const onClickB = jest.fn()
-    const onClickC = jest.fn()
+    const onClickA = vi.fn()
+    const onClickB = vi.fn()
+    const onClickC = vi.fn()
 
     render(
       <SafeClone

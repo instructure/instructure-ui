@@ -24,6 +24,8 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -31,15 +33,22 @@ import { BaseButton } from '../index'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<BaseButton/>', () => {
-  let consoleWarningMock: jest.SpyInstance
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    // Mocking console to prevent test output pollution
-    consoleWarningMock = jest.spyOn(console, 'warn').mockImplementation()
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
   })
 
   afterEach(() => {
     consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
 
   it('should render a button and the children as button text', () => {
@@ -88,7 +97,7 @@ describe('<BaseButton/>', () => {
   })
 
   it('should set role="button"', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     const { container } = render(
       <BaseButton as="span" onClick={onClick}>
@@ -103,7 +112,7 @@ describe('<BaseButton/>', () => {
   })
 
   it('should set tabIndex="0"', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
 
     render(
       <BaseButton as="span" onClick={onClick}>
@@ -118,7 +127,7 @@ describe('<BaseButton/>', () => {
   })
 
   it('should pass down the type prop to the button element', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     render(
       <BaseButton type="submit" onClick={onClick}>
         Hello World
@@ -155,7 +164,7 @@ describe('<BaseButton/>', () => {
   })
 
   it('should provide an  elementRef prop', async () => {
-    const elementRef = jest.fn()
+    const elementRef = vi.fn()
     render(<BaseButton elementRef={elementRef}>Hello World</BaseButton>)
 
     const button = screen.getByRole('button', { name: 'Hello World' })
@@ -165,7 +174,7 @@ describe('<BaseButton/>', () => {
 
   describe('onClick', () => {
     it('should call onClick when clicked', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
       render(<BaseButton onClick={onClick}>Hello World</BaseButton>)
 
       const button = screen.getByRole('button', { name: 'Hello World' })
@@ -178,7 +187,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when interaction is "disabled"', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton interaction="disabled" onClick={onClick}>
@@ -195,7 +204,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when disabled is set"', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton disabled onClick={onClick}>
@@ -212,7 +221,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when interaction is "readonly"', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton interaction="readonly" onClick={onClick}>
@@ -229,7 +238,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when readOnly is set', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton readOnly onClick={onClick}>
@@ -246,7 +255,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when button is disabled and an href prop is provided', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(<BaseButton href="#">Hello World</BaseButton>)
 
@@ -260,7 +269,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when interaction is "readonly" and an href prop is provided', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton interaction="readonly" onClick={onClick} href="#">
@@ -278,7 +287,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should call onClick when space key is pressed if href is provided', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton onClick={onClick} href="#">
@@ -296,7 +305,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should call onClick when enter key is pressed when not a button or link', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton as="span" onClick={onClick}>
@@ -314,7 +323,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when interaction is "disabled" and space key is pressed', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton interaction="disabled" onClick={onClick} href="#">
@@ -332,7 +341,7 @@ describe('<BaseButton/>', () => {
     })
 
     it('should not call onClick when interaction is "readonly" and space key is pressed', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(
         <BaseButton interaction="readonly" onClick={onClick} href="#">
@@ -371,7 +380,7 @@ describe('<BaseButton/>', () => {
 
   describe('for a11y', () => {
     it('should meet standards when onClick is given', async () => {
-      const onClick = jest.fn()
+      const onClick = vi.fn()
 
       render(<BaseButton onClick={onClick}>Hello World</BaseButton>)
 

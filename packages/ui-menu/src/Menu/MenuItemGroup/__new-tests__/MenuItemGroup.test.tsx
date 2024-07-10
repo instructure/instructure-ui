@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { MenuItem } from '../../MenuItem'
@@ -139,7 +140,7 @@ describe('<MenuItemGroup />', () => {
 
   it('should set selected from selected prop', () => {
     render(
-      <MenuItemGroup label="Select one" onSelect={jest.fn()} selected={[1]}>
+      <MenuItemGroup label="Select one" onSelect={vi.fn()} selected={[1]}>
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
         <MenuItemSeparator />
@@ -158,7 +159,7 @@ describe('<MenuItemGroup />', () => {
         <MenuItem key="foo" defaultSelected>
           Foo
         </MenuItem>
-        <MenuItem key="bar" selected onSelect={jest.fn()}>
+        <MenuItem key="bar" selected onSelect={vi.fn()}>
           Bar
         </MenuItem>
       </MenuItemGroup>
@@ -174,7 +175,7 @@ describe('<MenuItemGroup />', () => {
     render(
       <MenuItemGroup label="Select one">
         <MenuItem defaultSelected>Foo</MenuItem>
-        <MenuItem selected onSelect={jest.fn()}>
+        <MenuItem selected onSelect={vi.fn()}>
           Bar
         </MenuItem>
       </MenuItemGroup>
@@ -187,7 +188,7 @@ describe('<MenuItemGroup />', () => {
   })
 
   it('calls onSelect when items are selected', () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     render(
       <MenuItemGroup label="Select one" onSelect={onSelect} selected={[1]}>
         <MenuItem>Item 1</MenuItem>
@@ -205,7 +206,7 @@ describe('<MenuItemGroup />', () => {
   })
 
   it('does not call onSelect when disabled', () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     render(
       <MenuItemGroup label="Select one" onSelect={onSelect} disabled>
         <MenuItem>Item 1</MenuItem>

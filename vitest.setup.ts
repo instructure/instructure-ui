@@ -1,5 +1,5 @@
 /*
- * The MIT License (MIT)
+ * The MIT License (MIT).
  *
  * Copyright (c) 2015 - present Instructure, Inc.
  *
@@ -22,45 +22,27 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom/vitest'
+import { cleanup } from '@testing-library/react'
 import { vi } from 'vitest'
-import '@testing-library/jest-dom'
-import { addPositionChangeListener } from '../addPositionChangeListener'
 
-const mockRect = {
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  width: 0,
-  height: 0,
-  x: 0,
-  y: 0,
-  toJSON: vi.fn()
-}
+const originalResizeObserver = global.ResizeObserver
 
-describe('addPositionChangeListener', () => {
-  it('should provide a remove method', async () => {
-    const callback = vi.fn()
-    Element.prototype.getBoundingClientRect = vi.fn(() => mockRect as DOMRect)
+beforeAll(() => {
+  const ResizeObserverMock = vi.fn(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn()
+  }))
 
-    const { container } = render(<div />)
-    const node = container.firstChild as HTMLDivElement
+  vi.stubGlobal('ResizeObserver', ResizeObserverMock)
+})
 
-    const listener = addPositionChangeListener(node, callback)
+afterAll(() => {
+  global.ResizeObserver = originalResizeObserver
+})
 
-    // Manually trigger a position change (since JSDOM won't)
-    Element.prototype.getBoundingClientRect = vi.fn(() => {
-      return { ...mockRect, top: 200 } as DOMRect
-    })
-
-    await waitFor(() => {
-      expect(callback).toHaveBeenCalledTimes(1)
-      expect(typeof listener.remove).toBe('function')
-    })
-
-    listener.remove()
-    vi.restoreAllMocks()
-  })
+afterEach(() => {
+  cleanup()
+  vi.restoreAllMocks()
 })

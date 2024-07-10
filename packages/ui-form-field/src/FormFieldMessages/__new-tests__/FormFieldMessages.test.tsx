@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { render } from '@testing-library/react'
+import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'
 import '@testing-library/jest-dom'
@@ -32,6 +33,24 @@ import { FormFieldMessages } from '../index'
 import { FormMessage } from '../../FormPropTypes'
 
 describe('<FormFieldMessages />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', () => {
     const messages: FormMessage[] = [
       { text: 'Invalid name', type: 'error' },
