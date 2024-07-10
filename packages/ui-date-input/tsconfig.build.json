@@ -11,6 +11,9 @@
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
     {
+      "path": "../ui-buttons/tsconfig.build.json"
+    },
+    {
       "path": "../ui-test-utils/tsconfig.build.json"
     },
     {

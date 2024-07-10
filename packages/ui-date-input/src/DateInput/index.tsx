@@ -59,8 +59,6 @@ import type { FormMessage } from '@instructure/ui-form-field'
 ---
 category: components
 ---
-The `DateInput` component provides a visual interface for inputting date data.
-See <https://instructure.design/#DateInput/>
 **/
 @withStyle(generateStyle, null)
 @testable()
