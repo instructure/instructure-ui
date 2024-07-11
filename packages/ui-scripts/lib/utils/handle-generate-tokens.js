@@ -24,7 +24,7 @@
 
 import fse from 'fs-extra'
 import path from 'path'
-import styleDictionary from 'style-dictionary'
+import StyleDictionary from 'style-dictionary'
 
 export async function handleGenerateTokens({
   themeKey,
@@ -35,7 +35,7 @@ export async function handleGenerateTokens({
   return fse
     .outputFile(sourcePath, JSON.stringify(styleDictionarySource))
     .then(() => {
-      const dictionary = styleDictionary.extend({
+      const dictionary = new StyleDictionary({
         source: [sourcePath],
         platforms: {
           scss: {
@@ -66,6 +66,9 @@ export async function handleGenerateTokens({
           // }
         }
       })
-      dictionary.buildAllPlatforms()
+      return dictionary.buildAllPlatforms()
+    })
+    .then((builds) => {
+      return builds
     })
 }

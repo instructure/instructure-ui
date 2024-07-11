@@ -39,7 +39,7 @@
     "@instructure/ui-react-utils": "9.2.0",
     "@instructure/ui-themes": "9.2.0",
     "@instructure/ui-view": "9.2.0",
-    "keycode": "^2.2.1",
+    "keycode": "^2",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

@@ -25,10 +25,10 @@
 import type {
   Collection,
   JSCodeshift,
-  JSXElement,
   JSXExpressionContainer,
   StringLiteral
 } from 'jscodeshift'
+import type { JSXChild } from '../helpers/codemodHelpers'
 import {
   findElements,
   findImport,
@@ -72,7 +72,7 @@ export default function updateV7Popover(
       // should have 0 or 1 child
       isUpdated = true
       const theChild = trigger[0]
-      let toAdd = theChild as JSXExpressionContainer | StringLiteral
+      let toAdd = theChild as StringLiteral | JSXExpressionContainer
       if (isJSXText(theChild)) {
         toAdd = j.stringLiteral(theChild.value)
       }
@@ -112,11 +112,7 @@ export default function updateV7Popover(
  * Removes the child of the given array that is named like `Name1.Name2`
  * It returns the first child of the child that has this name (if any)
  */
-function getChildrenByName(
-  name1: string,
-  name2: string,
-  array?: JSXElement['children']
-) {
+function getChildrenByName(name1: string, name2: string, array?: JSXChild[]) {
   if (!array) {
     return
   }

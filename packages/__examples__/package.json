@@ -48,7 +48,7 @@
     "prop-types": "^15.8.1",
     "react-docgen": "6.0.4",
     "storybook": "^7.6.19",
-    "webpack": "^5.91.0"
+    "webpack": "^5.92.1"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

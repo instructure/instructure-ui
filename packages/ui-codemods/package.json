@@ -13,7 +13,8 @@
   "scripts": {
     "test:jest": "jest",
     "lint": "ui-scripts lint",
-    "lint:fix": "ui-scripts lint --fix"
+    "lint:fix": "ui-scripts lint --fix",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {
@@ -24,8 +25,11 @@
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "jscodeshift": "^0.15.2",
+    "jscodeshift": "^0.16.1",
     "prettier": "^2.8.8"
+  },
+  "//dependency-comments": {
+    "prettier": "Prettier 3 is async, https://prettier.io/blog/2023/07/05/3.0.0.html#api-1"
   },
   "publishConfig": {
     "access": "public"

@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+// https://www.npmjs.com/package/@testing-library/jest-dom#with-vitest
+// this allows custom jest matchers to be used
 import '@testing-library/jest-dom/vitest'
 import { cleanup } from '@testing-library/react'
 import { vi } from 'vitest'

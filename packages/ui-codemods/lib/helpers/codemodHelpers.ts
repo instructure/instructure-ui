@@ -37,21 +37,17 @@ import {
   JSXIdentifier,
   JSXMemberExpression,
   JSXSpreadAttribute,
-  JSXSpreadChild,
   JSXText,
   Literal,
   MemberExpression,
   SpreadElement
 } from 'jscodeshift'
-import type { LiteralKind } from 'ast-types/gen/kinds'
 import fs from 'fs'
 
-type JSXChild =
-  | JSXElement
-  | JSXExpressionContainer
-  | JSXSpreadChild
-  | JSXFragment
-  | LiteralKind
+type GetArrayType<T extends any[] | undefined> = T extends (infer U)[]
+  ? U
+  : never
+export type JSXChild = GetArrayType<JSXElement['children']>
 
 type Attribute = {
   name: string
@@ -544,6 +540,7 @@ function removeAllChildren(element: JSXElement) {
 
 // type checkers
 type astElem = { type: string }
+
 function isSpreadElement(elem?: astElem | null): elem is SpreadElement {
   return elem !== null && elem !== undefined && elem.type === 'SpreadElement'
 }
@@ -582,12 +579,22 @@ function isJSXAttribue(elem?: astElem | null): elem is JSXAttribute {
   return elem !== null && elem !== undefined && elem.type === 'JSXAttribute'
 }
 
-function isJSXElement(elem?: astElem | null): elem is JSXElement {
-  return elem !== null && elem !== undefined && elem.type == 'JSXElement'
+function isJSXElement(elem?: astElem | astElem[] | null): elem is JSXElement {
+  return (
+    elem !== null &&
+    elem !== undefined &&
+    !Array.isArray(elem) &&
+    elem.type == 'JSXElement'
+  )
 }
 
-function isJSXText(elem?: astElem | null): elem is JSXText {
-  return elem !== null && elem !== undefined && elem.type == 'JSXText'
+function isJSXText(elem?: astElem | astElem[] | null): elem is JSXText {
+  return (
+    elem !== null &&
+    elem !== undefined &&
+    !Array.isArray(elem) &&
+    elem.type == 'JSXText'
+  )
 }
 
 function isJSXIdentifier(elem?: astElem | null): elem is JSXIdentifier {
