@@ -30,7 +30,7 @@
     "@instructure/ui-test-utils": "9.2.0",
     "@instructure/ui-themes": "9.2.0",
     "@testing-library/react": "^15.0.7",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.5",
@@ -42,7 +42,7 @@
     "@instructure/ui-testable": "9.2.0",
     "@instructure/ui-utils": "9.2.0",
     "@instructure/uid": "9.2.0",
-    "keycode": "^2.2.1",
+    "keycode": "^2",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

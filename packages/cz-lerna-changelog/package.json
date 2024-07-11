@@ -33,7 +33,7 @@
     "@types/inquirer": "^8.2.10"
   },
   "peerDependencies": {
-    "lerna": "^8"
+    "lerna": "^7"
   },
   "//dependency-comments": {
     "cz-cli": "This module cannot be ESM because cz-cli can only import CommonJS, see https://github.com/commitizen/cz-cli/issues/916",

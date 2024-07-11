@@ -36,8 +36,8 @@
     "@instructure/ui-test-sandbox": "9.2.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "chai": "^4.4.1",
-    "chai-as-promised": "^7.1.2",
-    "chai-exclude": "^2.1.0",
+    "chai-as-promised": "^8.0.0",
+    "chai-exclude": "^2.1.1",
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",
     "nanoid": "^4.0.2",
@@ -47,6 +47,9 @@
   "peerDependencies": {
     "react": ">=16.8 <=18",
     "react-dom": ">=16.8 <=18"
+  },
+  "//dependency-comments": {
+    "chai": "v5 cannot be used because 'dirty-chai' needs chai v4 (and maybe other plugins too)"
   },
   "publishConfig": {
     "access": "public"

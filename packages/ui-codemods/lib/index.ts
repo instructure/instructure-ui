@@ -23,6 +23,18 @@
  */
 
 import updatePropNames from './updatePropNames'
+import updateImports from './updateImports'
+import updateV7Props from './updateV7Props'
+import updateV8Breaking from './updateV8Breaking'
+import UpdateV8ReactDOM from './updateV8ReactDOM'
+import updateV9Breaking from './updateV9Breaking'
 
-export { updatePropNames }
+export {
+  updatePropNames,
+  updateImports,
+  updateV7Props,
+  updateV8Breaking,
+  UpdateV8ReactDOM,
+  updateV9Breaking
+}
 export default updatePropNames

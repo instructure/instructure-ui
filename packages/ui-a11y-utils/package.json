@@ -29,7 +29,7 @@
     "@instructure/ui-dom-utils": "9.2.0",
     "@instructure/ui-react-utils": "9.2.0",
     "@instructure/uid": "9.2.0",
-    "keycode": "^2.2.1"
+    "keycode": "^2"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.2.0",

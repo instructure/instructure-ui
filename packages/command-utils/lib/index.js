@@ -28,7 +28,7 @@ import path from 'path'
 import which from 'which'
 import rl from 'readline'
 import chalk from 'chalk'
-import crossSpawn from 'cross-spawn'
+import { sync, spawn } from 'cross-spawn'
 
 const require = createRequire(import.meta.url)
 
@@ -100,7 +100,7 @@ async function runCommandsConcurrently(commands) {
 }
 
 function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
-  return crossSpawn.sync(bin, args, {
+  return sync(bin, args, {
     env: { ...process.env, ...envVars },
     stdio: 'inherit',
     windowsHide: true,
@@ -118,7 +118,7 @@ function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
  * @returns {Promise<{stdout: string, stderr: string, code:number}>}
  */
 async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
-  const result = crossSpawn.spawn(bin, args, {
+  const result = spawn(bin, args, {
     env: { ...process.env, ...envVars },
     stdio: 'inherit',
     windowsHide: true,
@@ -168,8 +168,9 @@ function resolveBin(
   }
   try {
     // returns the full path to this package.json
-    // TODO this might break in Node 18!
-    // https://nodejs.dev/en/api/v18/packages/#main-entry-point-export
+    // TODO this might break in Node 18+ if a package uses "exports" field and
+    // does not export its package.json
+    // https://nodejs.org/api/packages.html#package-entry-points
     const modPkgPath = require.resolve(`${modName}/package.json`)
     const modPkgDir = path.dirname(modPkgPath)
     const { bin } = require(modPkgPath)

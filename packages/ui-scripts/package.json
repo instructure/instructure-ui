@@ -20,25 +20,24 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.24.5",
+    "@babel/cli": "^7.24.7",
     "@instructure/command-utils": "9.2.0",
     "@instructure/pkg-utils": "9.2.0",
     "@lerna/project": "^6.4.1",
     "dotenv": "^16.4.5",
-    "find-up": "^6.3.0",
+    "find-up": "^7.0.0",
     "fs-extra": "^11.2.0",
     "http-server": "^14.1.1",
-    "jscodeshift": "^0.15.2",
+    "jscodeshift": "^0.16.1",
     "karma-cli": "^2.0.0",
     "lerna": "^7.4.2",
     "lodash.isplainobject": "^4.0.6",
-    "mocha": "^10.4.0",
-    "prettier": "^3.2.5",
+    "mocha": "^10.6.0",
     "semver": "^7.6.2",
-    "style-dictionary": "3.9.2",
-    "stylelint": "^15.11.0",
+    "style-dictionary": "4.0.0",
+    "stylelint": "^16.6.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.2",
+    "webpack-dev-server": "^5.0.4",
     "yargs": "^17.7.2"
   },
   "optionalDependencies": {
@@ -47,7 +46,8 @@
   "peerDependencies": {
     "eslint": "^8",
     "react": ">=16.8 <=18",
-    "webpack": "^5"
+    "webpack": "^5",
+    "prettier": "^2"
   },
   "publishConfig": {
     "access": "public"

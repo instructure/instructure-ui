@@ -26,7 +26,7 @@
     "@instructure/debounce": "9.2.0",
     "@instructure/ui-axe-check": "9.2.0",
     "@instructure/ui-test-sandbox": "9.2.0",
-    "keycode": "^2.2.1",
+    "keycode": "^2",
     "pretty-format": "^29.7.0",
     "sizzle": "^2.3.10"
   },
