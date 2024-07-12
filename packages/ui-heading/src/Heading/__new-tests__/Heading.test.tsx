@@ -23,38 +23,45 @@
  */
 
 import React from 'react'
-
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { Heading } from '../index'
-import { HeadingLocator } from '../HeadingLocator'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {
-    await mount(<Heading>Hello World</Heading>)
-    expect(await HeadingLocator.find('h2')).to.exist()
+    const { container } = render(<Heading>Hello World</Heading>)
+    const heading = container.querySelector('[class$="-heading"]')
+
+    expect(heading!.tagName).toBe('H2')
   })
 
   it('should render the children as text content', async () => {
-    await mount(<Heading>Hello World</Heading>)
-    expect(await HeadingLocator.find(':contains(Hello World)')).to.exist()
+    const { container } = render(<Heading>Hello World</Heading>)
+    const heading = container.querySelector('[class$="-heading"]')
+
+    expect(heading).toHaveTextContent('Hello World')
   })
 
   it('should render as a SPAN if level is `reset`', async () => {
-    await mount(<Heading level="reset">Hello World</Heading>)
-    const heading = await HeadingLocator.find()
-    expect(heading.getTagName()).to.equal('span')
+    render(<Heading level="reset">Hello World</Heading>)
+    const heading = screen.getByText('Hello World')
+
+    expect(heading.tagName).toBe('SPAN')
   })
 
   it('should meet a11y standards', async () => {
-    await mount(<Heading>Hello World</Heading>)
-    const heading = await HeadingLocator.find()
-    expect(await heading.accessible()).to.be.true()
+    const { container } = render(<Heading>Hello World</Heading>)
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    await mount(<Heading as="div">Hello World</Heading>)
-    const heading = await HeadingLocator.find()
-    expect(heading.getTagName()).to.equal('div')
+    render(<Heading as="div">Hello World</Heading>)
+    const heading = screen.getByText('Hello World')
+
+    expect(heading.tagName).toBe('DIV')
   })
 })
