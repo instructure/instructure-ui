@@ -23,17 +23,33 @@
  */
 
 import React from 'react'
-import { mount, expect } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 import { Badge } from '@instructure/ui-badge'
 import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { SideNavBar, SideNavBarItem } from '../index'
-import { SideNavBarLocator } from '../SideNavBarLocator'
 
-describe('<SideNavBar />', async () => {
+describe('<SideNavBar />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', async () => {
-    await mount(
+    const { container } = render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -48,13 +64,21 @@ describe('<SideNavBar />', async () => {
         />
       </SideNavBar>
     )
+    const nav = screen.getByRole('navigation')
+    const icons = container.querySelectorAll('svg')
 
-    const nav = await SideNavBarLocator.find()
-    expect(nav).to.exist()
+    expect(icons.length).toBe(2)
+    expect(icons[0]).toHaveAttribute('name', 'IconDashboard')
+    expect(icons[1]).toHaveAttribute('name', 'IconMoveStart')
+
+    expect(nav).toBeInTheDocument()
+    expect(nav.tagName).toBe('NAV')
+    expect(nav).toHaveAttribute('aria-label', 'Main navigation')
+    expect(nav).toHaveTextContent('Minimize SideNavBar')
   })
 
   it('should render a single semantic nav element', async () => {
-    await mount(
+    render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -69,12 +93,17 @@ describe('<SideNavBar />', async () => {
         />
       </SideNavBar>
     )
-    const nav = await SideNavBarLocator.find()
-    expect(nav).to.contain('nav')
+    const nav = screen.getByRole('navigation')
+    const navElements = screen.getAllByRole('listitem')
+
+    expect(nav).toBeInTheDocument()
+    expect(nav.tagName).toBe('NAV')
+    expect(navElements.length).toBe(1)
+    expect(navElements[0]).toHaveTextContent('Dashboard')
   })
 
   it('should render a semantic list for the nav content', async () => {
-    await mount(
+    render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -98,16 +127,16 @@ describe('<SideNavBar />', async () => {
         />
       </SideNavBar>
     )
-    const nav = await SideNavBarLocator.find()
-    const list = await nav.findAll('ul')
-    const items = await nav.findAll('li')
+    const list = screen.getAllByRole('list')
+    const navElements = screen.getAllByRole('listitem')
 
-    expect(list).to.have.length(1)
-    expect(items).to.have.length(2)
+    expect(list[0].tagName).toBe('UL')
+    expect(list.length).toBe(1)
+    expect(navElements.length).toBe(2)
   })
 
   it('should switch aria-expanded when the Toggle SideNavBar button is clicked', async () => {
-    await mount(
+    render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -131,15 +160,25 @@ describe('<SideNavBar />', async () => {
         />
       </SideNavBar>
     )
-    const nav = await SideNavBarLocator.find()
-    const toggle = await nav.find(':contains(Minimize SideNavBar):focusable')
-    expect(toggle).to.have.attribute('aria-expanded', 'true')
-    await toggle.click()
-    expect(toggle).to.have.attribute('aria-expanded', 'false')
+    const nav = screen.getByRole('navigation')
+    const toggleBtn = screen.getByRole('button')
+
+    expect(nav).toHaveTextContent('Minimize SideNavBar')
+    expect(toggleBtn).toHaveAttribute('aria-expanded', 'true')
+
+    userEvent.click(toggleBtn)
+
+    await waitFor(() => {
+      const updatedToggleBtn = screen.getByRole('button')
+      const updatedNav = screen.getByRole('navigation')
+
+      expect(updatedNav).toHaveTextContent('Expand SideNavBar')
+      expect(updatedToggleBtn).toHaveAttribute('aria-expanded', 'false')
+    })
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
+    const { container } = render(
       <SideNavBar
         label="Main navigation"
         toggleLabel={{
@@ -163,7 +202,8 @@ describe('<SideNavBar />', async () => {
         />
       </SideNavBar>
     )
-    const nav = await SideNavBarLocator.find()
-    expect(await nav.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })
