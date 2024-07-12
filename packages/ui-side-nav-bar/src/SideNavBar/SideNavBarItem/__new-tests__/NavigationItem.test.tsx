@@ -23,46 +23,50 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
-import { IconAdminLine } from '@instructure/ui-icons'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { IconAdminLine } from '@instructure/ui-icons'
 import { SideNavBarItem } from '../index'
 
-import { SideNavBarItemLocator } from '../SideNavBarItemLocator'
+describe('<SideNavBarItem />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
-describe('<SideNavBarItem />', async () => {
-  it('should render', async () => {
-    await mount(
-      <SideNavBarItem icon={<IconAdminLine />} label="Admin" href="#" />
-    )
-    const navItem = await SideNavBarItemLocator.find()
-    expect(navItem).to.exist()
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
   })
 
-  it('should show a tooltip when the nav is minimized ', async () => {
-    const onClick = stub()
-    await mount(
-      <div style={{ width: 100 }}>
-        <SideNavBarItem
-          icon={<IconAdminLine />}
-          label="Admin"
-          onClick={onClick}
-          minimized={true}
-        />
-      </div>
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
+  it('should render', async () => {
+    const { container } = render(
+      <SideNavBarItem icon={<IconAdminLine />} label="Admin" href="#" />
     )
-    const item = await SideNavBarItemLocator.find()
-    const button = await item.find('button')
-    await button.focus()
-    const tooltip = await item.findTooltipContent()
-    expect(tooltip).to.exist()
+    const navItem = screen.getByRole('link')
+    const icon = container.querySelector('svg')
+
+    expect(icon).toBeInTheDocument()
+    expect(icon).toHaveAttribute('name', 'IconAdmin')
+
+    expect(navItem).toBeInTheDocument()
+    expect(navItem.tagName).toBe('A')
+    expect(navItem).toHaveAttribute('href', '#')
+    expect(navItem).toHaveTextContent('Admin')
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
+    const { container } = render(
       <SideNavBarItem icon={<IconAdminLine />} label="Dashboard" href="#" />
     )
-    const navItem = await SideNavBarItemLocator.find()
-    expect(await navItem.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })

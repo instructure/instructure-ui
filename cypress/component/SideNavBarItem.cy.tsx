@@ -21,7 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { SideNavBarItemLocator } from './SideNavBarItemLocator'
+import React from 'react'
+import 'cypress-real-events'
 
-export { SideNavBarItemLocator }
-export default SideNavBarItemLocator
+import { SideNavBarItem } from '../../packages/ui-side-nav-bar'
+import { IconAdminLine } from '../../packages/ui-icons'
+import '../support/component'
+
+describe('<SideNavBarItem/>', () => {
+  it('should show a tooltip when the nav is minimized ', async () => {
+    const onClick = cy.spy()
+    cy.mount(
+      <div data-testid="navBarItemWrapper" style={{ width: 300 }}>
+        <SideNavBarItem
+          icon={<IconAdminLine />}
+          label="Admin"
+          onClick={onClick}
+          minimized={true}
+        />
+      </div>
+    )
+    cy.get('body').find('span[role="tooltip"]').should('contain', 'Admin')
+    cy.get('body').find('span[role="tooltip"]').should('not.be.visible')
+
+    cy.get('button').realHover().wait(100)
+
+    cy.get('body').find('span[role="tooltip"]').should('be.visible')
+  })
+})
