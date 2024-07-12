@@ -121,7 +121,7 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   as: PropTypes.elementType,
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  color: PropTypes.oneOf(['primary', 'primary-inverse', 'secondary']),
   margin: ThemeablePropTypes.spacing,
   cursor: PropTypes.string,
   href: PropTypes.string,
