@@ -21,48 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
-import { expect, mount, wait } from '@instructure/ui-test-utils'
+import { Pill } from '../../packages/ui'
 
-import { Pill } from '../index'
-import { PillLocator } from '../PillLocator'
+import '../support/component'
+import 'cypress-real-events'
 
-describe('<Pill />', async () => {
-  it('should render', async () => {
-    await mount(<Pill>Overdue</Pill>)
-    expect(await PillLocator.find()).to.exist()
-  })
-
-  it('should display text', async () => {
-    await mount(<Pill>Overdue</Pill>)
-    const pill = await PillLocator.find()
-    expect(await pill.find(':contains(Overdue)')).to.exist()
-  })
-
+describe('<Pill/>', () => {
   it('should render without a Tooltip when text does not overflow max-width', async () => {
-    await mount(<Pill>hello</Pill>)
-    const pill = await PillLocator.find()
-    expect(await pill.findTooltipContent({ expectEmpty: true })).to.not.exist()
+    cy.mount(<Pill>hello</Pill>)
+
+    cy.contains('div', 'hello').realHover().wait(100)
+    cy.get('body').find('span[role="tooltip"]').should('not.exist')
   })
 
   it('should render a Tooltip when text overflows max-width', async () => {
     const text =
       'some really super incredibly long text that will force overflow'
-    await mount(<Pill>{text}</Pill>, { strictMode: false })
+    cy.mount(<Pill>{text}</Pill>)
+    cy.get('span[data-popover-trigger="true"]').should('contain', text)
+    cy.get('body').find('span[role="tooltip"]').should('not.be.visible')
 
-    const pill = await PillLocator.find()
+    cy.get('span[data-popover-trigger="true"]').realHover().wait(100)
 
-    const tooltipTrigger = await pill.find('[data-popover-trigger="true"]')
-
-    await wait(() => {
-      expect(tooltipTrigger).to.exist()
-    })
-  })
-
-  it('should meet a11y standards', async () => {
-    await mount(<Pill>Overdue</Pill>)
-    const pill = await PillLocator.find()
-    expect(await pill.accessible()).to.be.true()
+    cy.get('body').find('span[role="tooltip"]').should('contain', text)
+    cy.get('body').find('span[role="tooltip"]').should('be.visible')
   })
 })

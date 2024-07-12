@@ -34,6 +34,14 @@ import { IconEyeLine } from '@instructure/ui-icons'
 describe('<Pill />', () => {
   it('should render', async () => {
     const { container } = render(<Pill>Overdue</Pill>)
+    const pill = container.querySelector('div[class$="-pill"]')
+
+    expect(pill).toBeInTheDocument()
+    expect(pill).toHaveTextContent('Overdue')
+  })
+
+  it('should display text', async () => {
+    const { container } = render(<Pill>Overdue</Pill>)
 
     expect(container).toHaveTextContent('Overdue')
   })
