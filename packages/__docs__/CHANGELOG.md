@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
+
+
+### Features
+
+* **ui,ui-date-input:** add new DateInput2 component ([9c893fc](https://github.com/instructure/instructure-ui/commit/9c893fc6ac1ae5ef4648f573b648cad78997ac86))
+
+
+
+
+
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package docs-app
