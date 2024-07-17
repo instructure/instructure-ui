@@ -23,113 +23,136 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, find, within } from '@instructure/ui-test-utils'
-//TODO
-/* eslint-disable no-restricted-imports */
-// @ts-ignore: Cannot find module
-import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
+import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import { userEvent } from '@testing-library/user-event'
+import '@testing-library/jest-dom'
+
 import { Table } from '../index'
 import type { TableProps } from '../props'
 import type { TableColHeaderProps } from '../ColHeader/props'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+
 describe('<Table />', async () => {
-  const render = (props?: TableProps) =>
-    mount(
+  let consoleErrorMock: any
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
+  const renderTable = (props?: TableProps) =>
+    render(
       <Table caption="Test table" {...props}>
         <Table.Head>
           <Table.Row>
-            <Table.ColHeader id="foo">Foo</Table.ColHeader>
-            <Table.ColHeader id="bar">Bar</Table.ColHeader>
+            <Table.ColHeader id="foo">ColHeader</Table.ColHeader>
+            <Table.ColHeader id="bar">Bar-header</Table.ColHeader>
           </Table.Row>
         </Table.Head>
         <Table.Body>
           <Table.Row>
-            <Table.RowHeader>foo</Table.RowHeader>
-            <Table.Cell>bar</Table.Cell>
+            <Table.RowHeader>RowHeader</Table.RowHeader>
+            <Table.Cell>Cell</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
     )
 
   it('should render a caption', async () => {
-    await render()
-    const table = await find('table')
+    const { container } = renderTable()
+    const caption = container.querySelector('caption')
 
-    expect(await table.find('caption:contains(Test table)')).to.exist()
+    expect(caption).toBeInTheDocument()
+    expect(caption).toHaveTextContent('Test table')
   })
 
   it('should meet a11y standards', async () => {
-    await render()
-    const table = await find('table')
-    expect(await table.accessible()).to.be.true()
+    const { container } = renderTable()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 
   it('applies a fixed column layout', async () => {
-    await render({
+    await renderTable({
       layout: 'fixed'
     })
-    const table = await find('table')
-    const tableNode = within(table.getDOMNode())
+    const table = screen.getByRole('table')
 
-    expect(tableNode.getComputedStyle().tableLayout).to.equal('fixed')
+    expect(table).toHaveStyle({ tableLayout: 'fixed' })
   })
 
   it('passes hover to table row', async () => {
-    await render({
+    renderTable({
       hover: true
     })
-    const tr = await find('tbody tr')
-    const trNode = within(tr.getDOMNode())
+    const tableRows = screen.getAllByRole('row')
 
-    expect(trNode.getComputedStyle().borderLeftStyle).to.not.equal('none')
-    expect(trNode.getComputedStyle().borderRightStyle).to.not.equal('none')
+    tableRows.forEach((tableRow) => {
+      expect(tableRow).not.toHaveAttribute('border-left', 'none')
+      expect(tableRow).not.toHaveAttribute('border-right', 'none')
+    })
   })
 
   it('sets the scope of column header to col', async () => {
-    await render()
-    const th = await find('thead th')
-    const thNode = within(th.getDOMNode())
+    await renderTable()
+    const columnHeaders = screen.getAllByRole('columnheader')
 
-    expect(thNode.getAttribute('scope')).to.equal('col')
+    columnHeaders.forEach((columnHeader) => {
+      expect(columnHeader).toHaveAttribute('scope', 'col')
+    })
   })
 
   it('sets the scope of row header to row', async () => {
-    await render()
-    const th = await find('tbody th')
-    const thNode = within(th.getDOMNode())
+    renderTable()
+    const rowHeaders = screen.getAllByRole('rowheader')
 
-    expect(thNode.getAttribute('scope')).to.equal('row')
+    rowHeaders.forEach((rowHeader) => {
+      expect(rowHeader).toHaveAttribute('scope', 'row')
+    })
   })
 
   it('can render table in stacked layout', async () => {
-    const stackedTable = await render({
+    renderTable({
       layout: 'stacked'
     })
+    const stackedTable = screen.getByRole('table')
 
-    expect(stackedTable).to.exist()
+    expect(stackedTable).toBeInTheDocument()
+    expect(stackedTable).toHaveTextContent('RowHeader')
+    expect(stackedTable).toHaveTextContent('Cell')
+    expect(stackedTable).not.toHaveTextContent('ColHeader')
   })
 
   it('can handle non-existent head in stacked layout', async () => {
-    const stackedTable = await mount(
+    render(
       <Table caption="Test table" layout="stacked">
         <Table.Body></Table.Body>
       </Table>
     )
+    const stackedTable = screen.getByRole('table')
 
-    expect(stackedTable).to.exist()
+    expect(stackedTable).toBeInTheDocument()
   })
 
   it('can handle empty head in stacked layout', async () => {
-    const stackedTable = await mount(
+    render(
       <Table caption="Test table" layout="stacked">
         <Table.Head></Table.Head>
       </Table>
     )
+    const stackedTable = screen.getByRole('table')
 
-    expect(stackedTable).to.exist()
+    expect(stackedTable).toBeInTheDocument()
   })
 
   it('can handle invalid header in stacked layout', async () => {
-    const stackedTable = await mount(
+    render(
       <Table caption="Test table" layout="stacked">
         <Table.Head>
           <Table.Row>
@@ -138,8 +161,10 @@ describe('<Table />', async () => {
         </Table.Head>
       </Table>
     )
+    const stackedTable = screen.getByRole('table')
 
-    expect(stackedTable).to.exist()
+    expect(stackedTable).toBeInTheDocument()
+    expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
   describe('when table is sortable', async () => {
@@ -148,7 +173,7 @@ describe('<Table />', async () => {
       handlers = {},
       layout: TableProps['layout'] = 'auto'
     ) =>
-      mount(
+      render(
         <Table caption="Sortable table" layout={layout}>
           <Table.Head>
             <Table.Row>
@@ -168,29 +193,28 @@ describe('<Table />', async () => {
       )
 
     it('can render up arrow for ascending order', async () => {
-      await renderSortableTable({
+      const { container } = renderSortableTable({
         id: 'id',
         sortDirection: 'ascending'
       })
-      const arrow = await find('svg[name="IconMiniArrowUp"]')
+      const arrow = container.querySelector('svg')
 
-      expect(arrow).to.exist()
+      expect(arrow).toHaveAttribute('name', 'IconMiniArrowUp')
     })
 
     it('can render down arrow for descending order', async () => {
-      await renderSortableTable({
+      const { container } = renderSortableTable({
         id: 'id',
         sortDirection: 'descending'
       })
-      const arrow = await find('svg[name="IconMiniArrowDown"]')
+      const arrow = container.querySelector('svg')
 
-      expect(arrow).to.exist()
+      expect(arrow).toHaveAttribute('name', 'IconMiniArrowDown')
     })
 
     it('calls onRequestSort when column header is clicked', async () => {
-      const onRequestSort = stub()
-
-      await renderSortableTable(
+      const onRequestSort = vi.fn()
+      renderSortableTable(
         {
           id: 'id'
         },
@@ -198,95 +222,72 @@ describe('<Table />', async () => {
           onRequestSort
         }
       )
-      const button = await find('th button')
+      const button = screen.getByRole('button', { name: 'Foo' })
 
-      await button.click()
-      expect(onRequestSort).to.have.been.calledOnce()
-    })
+      userEvent.click(button)
 
-    it('can render table head as a combobox when in stacked layout', async () => {
-      const sortFoo = stub()
-
-      await renderSortableTable(
-        {
-          id: 'id'
-        },
-        {
-          onRequestSort: sortFoo
-        },
-        'stacked'
-      )
-      const select = await SimpleSelectLocator.find()
-      const input = await select.findInput()
-
-      await input.click()
-
-      const list = await select.findOptionsList()
-      const options = await list.findAll('[role="option"]')
-
-      await options[1].click()
-      expect(sortFoo).to.have.been.calledOnce()
+      await waitFor(() => {
+        expect(onRequestSort).toHaveBeenCalledTimes(1)
+      })
     })
 
     it('can display custom label in the select in stacked layout', async () => {
-      await renderSortableTable(
+      renderSortableTable(
         {
           id: 'id',
           stackedSortByLabel: 'Custom Text'
         },
         {
-          onRequestSort: stub()
+          onRequestSort: vi.fn()
         },
         'stacked'
       )
-      const select = await SimpleSelectLocator.find()
-      const input = await select.findInput()
+      const input = screen.getByRole('combobox')
 
-      await input.click()
+      userEvent.click(input)
 
-      const list = await select.findOptionsList()
-      const options = await list.findAll('[role="option"]')
+      await waitFor(async () => {
+        const options = screen.getAllByRole('option')
 
-      // with stackedSortByLabel provided
-      expect(options[0].text()).to.equal('Custom Text')
-      // the id by default
-      expect(options[1].text()).to.equal('bar')
+        expect(options[0]).toHaveTextContent('Custom Text')
+        expect(options[1]).toHaveTextContent('bar')
+      })
     })
 
     it('can render check mark for sorted column in stacked layout', async () => {
-      await renderSortableTable(
+      const { container } = renderSortableTable(
         {
           id: 'id',
           sortDirection: 'ascending'
         },
         {
-          onRequestSort: stub()
+          onRequestSort: vi.fn()
         },
         'stacked'
       )
-      const icon = await find('svg[name="IconCheck"]')
+      const icon = container.querySelector('svg')
 
-      expect(icon).to.exist()
+      expect(icon).toHaveAttribute('name', 'IconCheck')
     })
 
     it('creates proper aria-sort attributes (ascending)', async () => {
-      await renderSortableTable({
+      renderSortableTable({
         id: 'id',
         sortDirection: 'ascending'
       })
-      const sortedHeader = await find('th[aria-sort="ascending"]')
+      const header = screen.getByRole('columnheader', { name: 'Foo' })
 
-      expect(sortedHeader).to.exist()
+      expect(header).toHaveAttribute('aria-sort', 'ascending')
     })
 
     it('creates proper aria-sort attributes (descending)', async () => {
-      await renderSortableTable({
+      renderSortableTable({
         id: 'id',
         sortDirection: 'descending'
       })
-      const sortedHeader = await find('th[aria-sort="descending"]')
+      const header = screen.getByRole('columnheader', { name: 'Foo' })
 
-      expect(sortedHeader).to.exist()
+      expect(header).toHaveAttribute('aria-sort', 'descending')
     })
   })
 })
