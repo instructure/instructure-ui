@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
+
+
+### Features
+
+* **ui-top-nav-bar:** add workaround hack for new topnav design with the old api ([e5b34c0](https://github.com/instructure/instructure-ui/commit/e5b34c0298cc6b45c82f5d2ee3b5ce4c9ff07c28))
+
+
+
+
+
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 
