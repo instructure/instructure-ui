@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
+
+
+### Bug Fixes
+
+* **ui-buttons:** do not emit failed prop type warning when setting CondensedButton's color to 'secondary' ([a3587df](https://github.com/instructure/instructure-ui/commit/a3587df46cd86d22cb037694bc397d48196a33d4))
+
+
+### Features
+
+* **ui-top-nav-bar:** add workaround hack for new topnav design with the old api ([e5b34c0](https://github.com/instructure/instructure-ui/commit/e5b34c0298cc6b45c82f5d2ee3b5ce4c9ff07c28))
+* **ui,ui-date-input:** add new DateInput2 component ([9c893fc](https://github.com/instructure/instructure-ui/commit/9c893fc6ac1ae5ef4648f573b648cad78997ac86))
+
+
+
+
+
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 
