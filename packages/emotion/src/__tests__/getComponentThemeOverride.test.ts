@@ -86,7 +86,7 @@ describe('@getComponentThemeOverride', async () => {
         {
           themeOverride: (componentTheme, currentTheme) => ({
             backgroundBlue: componentTheme.backgroundGreen,
-            backgroundDark: currentTheme.colors.backgroundDark
+            backgroundDark: currentTheme.colors.contrasts.white1010
           })
         },
         theme
@@ -94,7 +94,7 @@ describe('@getComponentThemeOverride', async () => {
 
       expect(override).to.deep.equal({
         backgroundBlue: 'rgb(0, 150, 0)',
-        backgroundDark: '#6B7780'
+        backgroundDark: '#FFFFFF'
       })
     })
 

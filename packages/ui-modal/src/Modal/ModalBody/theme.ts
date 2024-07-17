@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): ModalBodyTheme => {
   const { colors } = theme
 
   return {
-    inverseBackground: colors?.backgroundBrandSecondary
+    inverseBackground: colors?.contrasts?.grey100100
   }
 }
 

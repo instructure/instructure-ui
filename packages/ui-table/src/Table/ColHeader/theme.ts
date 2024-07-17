@@ -37,15 +37,15 @@ const generateComponentTheme = (theme: Theme): TableColHeaderTheme => {
     fontSize: typography?.fontSizeMedium,
     fontFamily: typography?.fontFamily,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010,
 
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
 
     lineHeight: typography?.lineHeightCondensed,
     padding: `${spacing?.xSmall} ${spacing?.small}`,
 
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineWidth: borders?.widthMedium,
     focusOutlineStyle: borders?.style
   }

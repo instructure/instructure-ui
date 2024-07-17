@@ -48,13 +48,13 @@ const generateComponentTheme = (theme: Theme): TabsTabTheme => {
     lineHeight: typography?.lineHeightCondensed,
     fontSize: typography?.fontSizeMedium,
 
-    defaultColor: colors?.textDarkest,
-    defaultHoverBorderColor: colors?.borderMedium,
-    defaultSelectedBorderColor: colors?.borderBrand,
+    defaultColor: colors?.contrasts?.grey125125,
+    defaultHoverBorderColor: colors?.contrasts?.grey1214,
+    defaultSelectedBorderColor: colors?.contrasts?.blue4570,
 
-    secondaryColor: colors?.textDarkest,
-    secondarySelectedBackground: colors?.backgroundLightest,
-    secondarySelectedBorderColor: colors?.borderMedium,
+    secondaryColor: colors?.contrasts?.grey125125,
+    secondarySelectedBackground: colors?.contrasts?.white1010,
+    secondarySelectedBorderColor: colors?.contrasts?.grey1214,
 
     zIndex: stacking?.above
   }

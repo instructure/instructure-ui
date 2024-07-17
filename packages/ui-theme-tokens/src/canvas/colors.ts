@@ -22,26 +22,43 @@
  * SOFTWARE.
  */
 
-import { functionalColors } from '../utils/functionalColors'
-import { BaseColors, Colors } from '@instructure/shared-types'
+import primitives from '../common/colors/primitves'
+import getUIColors from '../utils/getUIColors'
 
-const baseColors: BaseColors = {
-  brand: '#0374B5',
-  link: '#0374B5',
-  electric: '#0374B5',
-  shamrock: '#0B874B',
-  barney: '#BF32A4',
-  crimson: '#E0061F',
-  fire: '#FC5E13',
-  licorice: '#2D3B45',
-  oxford: '#394B58',
-  ash: '#6B7780',
-  slate: '#8B969E',
-  tiara: '#C7CDD1',
-  porcelain: '#F5F5F5',
-  white: '#FFFFFF'
+import type { Colors, Contrasts, UI } from '@instructure/shared-types'
+
+const contrasts: Contrasts = {
+  white1010: primitives.white,
+
+  grey1111: primitives.grey11,
+  grey1214: primitives.grey12,
+  grey1424: primitives.grey14,
+  grey2424: primitives.grey24,
+  grey4570: primitives.grey45,
+  grey5782: primitives.grey57,
+  grey100100: primitives.grey100,
+  grey125125: primitives.grey125,
+
+  blue1212: primitives.blue12,
+  blue4570: primitives.blue45,
+  blue5782: primitives.blue57,
+
+  green1212: primitives.green12,
+  green4570: primitives.green45,
+  green5782: primitives.green57,
+
+  orange1212: primitives.orange12,
+  orange3045: primitives.orange30,
+  orange4570: primitives.orange45,
+  orange5782: primitives.orange57,
+
+  red1212: primitives.red12,
+  red4570: primitives.red45,
+  red5782: primitives.red57
 }
 
-const colors: Colors = Object.freeze(functionalColors(baseColors))
+const ui: UI = getUIColors(contrasts)
+
+const colors: Colors = { primitives, contrasts, ui }
 export default colors
 export { colors }

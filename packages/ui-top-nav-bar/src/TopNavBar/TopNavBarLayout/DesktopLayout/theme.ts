@@ -38,10 +38,10 @@ const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
     desktopFontFamily: typography?.fontFamily,
     desktopFontWeight: typography?.fontWeightNormal,
 
-    desktopBackground: colors?.backgroundBrandSecondary,
-    desktopBackgroundInverse: colors?.backgroundLight,
+    desktopBackground: colors?.contrasts?.grey100100,
+    desktopBackgroundInverse: colors?.contrasts?.grey1111,
     desktopBottomBorder: 'none',
-    desktopBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
+    desktopBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.contrasts?.grey1214}`,
     desktopHeight: '4rem',
     desktopZIndex: stacking?.topmost - 1, // -1 so it is below tray/modal/popover/etc TODO find a better solution
 
@@ -54,8 +54,8 @@ const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
     desktopUserSeparatorGap: spacing?.xSmall,
     desktopUserSeparatorHeight: '1.5rem',
     desktopUserSeparatorWidth: borders?.widthSmall,
-    desktopUserSeparatorColor: colors.borderMedium,
-    desktopUserSeparatorColorInverse: colors.borderMedium
+    desktopUserSeparatorColor: colors?.contrasts?.grey1214,
+    desktopUserSeparatorColorInverse: colors?.contrasts?.grey1214
   }
 
   return {

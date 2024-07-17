@@ -37,11 +37,11 @@ const generateComponentTheme = (theme: Theme): AppNavItemTheme => {
     fontFamily: typography?.fontFamily,
     fontSize: '1.125rem',
     fontWeight: typography?.fontWeightBold,
-    textColor: colors?.textLink,
-    textColorSelected: colors?.textDarkest,
+    textColor: colors?.contrasts?.blue4570,
+    textColorSelected: colors?.contrasts?.grey125125,
     height: '2.25rem',
     padding: spacing?.small,
-    backgroundColor: colors?.backgroundLightest
+    backgroundColor: colors?.contrasts?.white1010
   }
 
   return {

@@ -22,16 +22,29 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  presets: [
-    [
-      require('@instructure/ui-babel-preset'),
-      {
-        coverage: Boolean(process.env.COVERAGE),
-        esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
-      }
-    ]
-  ]
-}
+import type { Contrasts } from '@instructure/shared-types'
+
+export const getUIColors = (contrasts: Contrasts) => ({
+  surfacePagePrimary: contrasts?.white1010,
+  surfacePageSecondary: contrasts?.grey1111,
+  surfaceCardPrimary: contrasts?.white1010,
+  surfaceCardSecondary: contrasts?.grey1111,
+  surfaceDark: contrasts?.grey100100,
+
+  textTitle: contrasts?.grey125125,
+  textDescription: contrasts?.grey125125,
+  textBody: contrasts?.grey125125,
+  textTimestamp: contrasts?.grey5782,
+  textAuthor: contrasts?.grey5782,
+  textDatapoint: contrasts?.grey5782,
+  textLink: contrasts?.blue4570,
+  textPlaceholder: contrasts?.grey1424,
+  textSuccess: contrasts?.green4570,
+  textWarning: contrasts?.orange4570,
+  textError: contrasts?.red4570,
+
+  stroke: contrasts?.grey1424,
+  divider: contrasts?.grey1214
+})
+
+export default getUIColors

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import type { Theme } from '@instructure/ui-themes'
-import type { InstructureTheme } from '@instructure/instructure-theme'
 import { ColorBandTheme } from './props'
 /**
  * Generates the theme object for the component from the theme and provided additional information
@@ -33,13 +32,9 @@ const generateComponentTheme = (theme: Theme): ColorBandTheme => {
   const { colors } = theme
 
   const componentVariables = {
-    colorAlert:
-      (colors as InstructureTheme['colors'])?.inaccessibleAlert ||
-      colors?.backgroundAlert,
-    colorWarning:
-      (colors as InstructureTheme['colors'])?.inaccessibleWarning ||
-      colors?.backgroundWarning,
-    colorDanger: colors?.backgroundDanger
+    colorAlert: colors?.contrasts?.blue4570,
+    colorWarning: colors?.contrasts?.orange4570,
+    colorDanger: colors?.contrasts?.red4570
   }
 
   return {

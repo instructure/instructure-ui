@@ -44,11 +44,11 @@ const generateComponentTheme = (theme: Theme): MetricTheme => {
     padding: `0 ${spacing?.xSmall}`,
     fontFamily: typography?.fontFamily,
 
-    valueColor: colors?.textDarkest,
+    valueColor: colors?.contrasts?.grey125125,
     valueFontSize: typography?.fontSizeXLarge,
     valueFontWeight: typography?.fontWeightBold,
 
-    labelColor: colors?.textDarkest,
+    labelColor: colors?.contrasts?.grey125125,
     labelFontSize: typography?.fontSizeXSmall
   }
 

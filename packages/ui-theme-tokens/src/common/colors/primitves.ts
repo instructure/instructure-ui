@@ -22,45 +22,46 @@
  * SOFTWARE.
  */
 
-import { functionalColors } from '../utils/functionalColors'
-import { BaseColors, Colors } from '@instructure/shared-types'
+import { Primitives } from '@instructure/shared-types'
 
-const values: BaseColors = {
-  brand: '#287A9F',
-  link: '#287A9F',
-  electric: '#287A9F',
-  shamrock: '#24A159',
-  barney: '#143D50',
-  crimson: '#E72429',
-  fire: '#F76400',
-  licorice: '#0D323F',
-  oxford: '#143D50',
-  ash: '#156380',
-  slate: '#156380',
-  tiara: '#CCDCE4',
-  porcelain: '#F2F8FA',
-  white: '#FFFFFF'
+const primitives: Primitives = {
+  white: '#FFFFFF',
+
+  grey11: '#F2F4F4',
+  grey12: '#E8EAEC',
+  grey14: '#D7DADE',
+  grey24: '#9EA6AD',
+  grey45: '#6A7883',
+  grey57: '#586874',
+  grey70: '#4A5B68',
+  grey82: '#3F515E',
+  grey100: '#334451',
+  grey125: '#273540',
+
+  blue12: '#DDECF5',
+  blue45: '#117CBA',
+  blue57: '#046BA6',
+  blue70: '#035D91',
+  blue82: '#035381',
+
+  green12: '#DDEEE6',
+  green45: '#108751',
+  green57: '#017640',
+  green70: '#016738',
+  green82: '#015B32',
+
+  orange12: '#FFE5D7',
+  orange30: '#F06E26',
+  orange45: '#CB4E15',
+  orange57: '#AE4515',
+  orange70: '#973D14',
+  orange82: '#853714',
+
+  red12: '#FCE4E7',
+  red45: '#E4263B',
+  red57: '#CE061C',
+  red70: '#B40519',
+  red82: '#A10416'
 }
 
-/**
- * Two Inst colors are not accessible, so adding them for display purposes only in decorative elements
- */
-type InaccessibleColors = {
-  inaccessibleAlert: string
-  inaccessibleWarning: string
-}
-
-// Two Inst colors are not accessible, so adding them for display purposes only
-// in decorative elements
-const appendInaccessibleColors: Colors & InaccessibleColors = {
-  ...functionalColors(values),
-  inaccessibleAlert: '#fccb0e',
-  inaccessibleWarning: '#f68e1f'
-}
-
-const colors: Colors & InaccessibleColors = Object.freeze(
-  appendInaccessibleColors
-)
-
-export default colors
-export { colors }
+export default primitives

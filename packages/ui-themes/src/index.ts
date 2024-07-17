@@ -27,17 +27,14 @@ import type {
   CanvasTheme,
   CanvasBrandVariables
 } from '@instructure/canvas-theme'
-import type { InstructureTheme } from '@instructure/instructure-theme'
 import type { BaseTheme } from '@instructure/shared-types'
 
 import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
 import { theme as canvas } from '@instructure/canvas-theme'
-import { theme as instructure } from '@instructure/instructure-theme'
 
 type ThemeMap = {
   canvas: CanvasTheme
   'canvas-high-contrast': CanvasHighContrastTheme
-  instructure: InstructureTheme
 
   // needed for custom theme support
   [k: string]: BaseTheme
@@ -53,7 +50,7 @@ type ThemeSpecificStyle<ComponentTheme> = {
   [themeKey in ThemeKeys]?: Partial<ComponentTheme>
 }
 
-export { canvas, canvasHighContrast, instructure }
+export { canvas, canvasHighContrast }
 export default canvas
 export type {
   ThemeMap,
@@ -63,6 +60,5 @@ export type {
   ThemeSpecificStyle,
   CanvasTheme,
   CanvasBrandVariables,
-  CanvasHighContrastTheme,
-  InstructureTheme
+  CanvasHighContrastTheme
 }

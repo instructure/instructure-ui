@@ -44,11 +44,11 @@ const generateComponentTheme = (theme: Theme): TableRowTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010,
 
-    borderColor: colors?.borderMedium,
-    hoverBorderColor: colors?.borderBrand,
+    borderColor: colors?.contrasts?.grey1214,
+    hoverBorderColor: colors?.contrasts?.blue4570,
 
     padding: `${spacing?.xSmall} 0`
   }

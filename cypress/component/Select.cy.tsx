@@ -77,8 +77,8 @@ describe('<Select/>', () => {
           return window.getComputedStyle(icon).fill
         })
 
-        expect(iconStyles[0]).to.equal('rgb(252, 94, 19)')
-        expect(iconStyles[1]).to.equal('rgb(3, 116, 181)')
+        expect(iconStyles[0]).to.equal('rgb(203, 78, 21)')
+        expect(iconStyles[1]).to.equal('rgb(17, 124, 186)')
       })
   })
 

@@ -34,8 +34,8 @@ const generateComponentTheme = (theme: Theme): TrayTheme => {
   const { colors, borders, shadows, breakpoints, stacking } = theme
 
   const componentVariables: TrayTheme = {
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
+    background: colors?.contrasts?.white1010,
+    borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     boxShadow: shadows?.depth3,

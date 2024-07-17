@@ -52,17 +52,6 @@ const tokenScriptsConfig = [
     themeKey: 'canvas-high-contrast',
     sourceTokens: '@instructure/ui-theme-tokens/lib/canvasHighContrast',
     outputPackage: '@instructure/canvas-high-contrast-theme'
-  },
-  {
-    themeKey: 'instructure',
-    sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
-    outputPackage: '@instructure/ui-theme-tokens',
-    groupOutput: true
-  },
-  {
-    themeKey: 'instructure',
-    sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
-    outputPackage: '@instructure/instructure-theme'
   }
 ]
 

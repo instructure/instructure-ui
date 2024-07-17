@@ -44,7 +44,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ThemeProps = ThemeOwnProps & WithStyleProps<ThemeTheme, ThemeStyle>
 
 type ThemeTheme = {
-  convertedValueTextColor: Colors['textDark']
+  convertedValueTextColor: Colors['contrasts']['grey100100']
   convertedValueFontSize: Typography['fontSizeSmall']
 }
 export type ThemeStyle = ComponentStyle<'convertedValue'>

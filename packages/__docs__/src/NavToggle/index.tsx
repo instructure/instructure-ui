@@ -28,7 +28,6 @@ import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { InstUISettingsProvider } from '@instructure/emotion'
-import { instructure } from '@instructure/ui-themes'
 import type { NavToggleProps } from './props'
 import { propTypes, allowedProps } from './props'
 
@@ -69,7 +68,7 @@ class NavToggle extends Component<NavToggleProps> {
         padding="x-small none"
         margin={isSection ? 'none' : 'none none none x-small'}
       >
-        <InstUISettingsProvider theme={instructure}>
+        <InstUISettingsProvider>
           <ToggleDetails
             ref={(c: ToggleDetails) => {
               this._toggle = c

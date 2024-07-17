@@ -45,9 +45,11 @@ type State = { clearBackground?: boolean }
 type Theme = {
   key: string
   colors: {
-    textBrand: string
-    textDark: string
-    backgroundLight: string
+    contrasts: {
+      grey1111: string
+      green4570: string
+      blue4570: string
+    }
   }
 }
 
@@ -58,24 +60,26 @@ type ComponentTheme = {
 }
 
 describe('@withStyle', async () => {
-  const textBrand = 'rgb(0, 128, 0)'
-  const textDark = 'rgb(10, 10, 10)'
-  const backgroundLight = 'rgb(255, 255, 0)'
+  const grey1111 = 'rgb(0, 128, 0)'
+  const green4570 = 'rgb(10, 10, 10)'
+  const blue4570 = 'rgb(255, 255, 0)'
   const exampleTheme: Theme = {
     key: 'exampleTheme',
     colors: {
-      textBrand,
-      textDark,
-      backgroundLight
+      contrasts: {
+        grey1111,
+        green4570,
+        blue4570
+      }
     }
   }
 
   const generateComponentTheme = function (theme: Theme): ComponentTheme {
     const { colors } = theme
     return {
-      textColor: colors.textBrand,
-      textColorInverse: colors.textDark,
-      backgroundColor: colors.backgroundLight
+      textColor: colors.contrasts.grey1111,
+      textColorInverse: colors.contrasts.green4570,
+      backgroundColor: colors.contrasts.blue4570
     }
   }
 
@@ -181,8 +185,8 @@ describe('@withStyle', async () => {
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
-      expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+      expect(computedStyle.color).to.equal('rgb(0, 128, 0)')
+      expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
     })
 
     describe('should allow configuration through the themeOverride prop', async () => {
@@ -200,7 +204,7 @@ describe('@withStyle', async () => {
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).to.equal('rgb(128, 0, 128)')
-        expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+        expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
       })
 
       it('when it is a function', async () => {
@@ -216,8 +220,8 @@ describe('@withStyle', async () => {
         const component = subject.getDOMNode()
         const computedStyle = getComputedStyle(component)
 
-        expect(computedStyle.color).to.equal(backgroundLight)
-        expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+        expect(computedStyle.color).to.equal('rgb(255, 255, 0)')
+        expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
       })
     })
 
@@ -230,8 +234,8 @@ describe('@withStyle', async () => {
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
-      expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+      expect(computedStyle.color).to.equal('rgb(0, 128, 0)')
+      expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
     })
   })
 
@@ -245,19 +249,19 @@ describe('@withStyle', async () => {
         <ThemeableComponent
           inverse={false}
           themeOverride={{
-            textColor: textBrand,
-            textColorInverse: textDark,
-            backgroundColor: backgroundLight
+            textColor: grey1111,
+            textColorInverse: blue4570,
+            backgroundColor: green4570
           }}
         />
       )
       const component = subject.getDOMNode()
 
-      expect(getComputedStyle(component).color).to.equal(textBrand)
+      expect(getComputedStyle(component).color).to.equal(grey1111)
 
       await subject.setProps({ inverse: true })
 
-      expect(getComputedStyle(component).color).to.equal(textDark)
+      expect(getComputedStyle(component).color).to.equal(blue4570)
     })
 
     it('when state is updated', async () => {
@@ -271,14 +275,14 @@ describe('@withStyle', async () => {
       const component = main.getDOMNode()
 
       expect(getComputedStyle(component).backgroundColor).to.equal(
-        backgroundLight
+        'rgb(255, 255, 0)'
       )
 
       await clearBackgroundButton.click()
 
       expect(getComputedStyle(component).backgroundColor).to.equal(
         'rgba(0, 0, 0, 0)'
-      ) // transparent
+      )
     })
   })
 
@@ -324,7 +328,7 @@ describe('@withStyle', async () => {
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
+      expect(computedStyle.color).to.equal(grey1111)
     })
 
     it('makeStyles', async () => {
@@ -345,7 +349,7 @@ describe('@withStyle', async () => {
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
+      expect(computedStyle.color).to.equal(grey1111)
       expect(consoleLog).not.to.have.been.called()
     })
   })

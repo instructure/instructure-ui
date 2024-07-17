@@ -50,27 +50,27 @@ const generateComponentTheme = (theme: Theme): RangeInputTheme => {
     minWidth: '12.5rem',
 
     handleSize: '1.5rem',
-    handleBackground: colors?.backgroundBrand,
-    handleBorderColor: colors?.borderLightest,
+    handleBackground: colors?.contrasts?.blue4570,
+    handleBorderColor: colors?.contrasts?.white1010,
     handleBorderSize: borders?.widthMedium,
     handleShadow:
       '0 0.0625rem 0.125rem rgba(0, 0, 0, .2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
 
     handleFocusInset: borders?.widthSmall,
     handleFocusRingSize: borders?.widthMedium,
-    handleFocusRingColor: colors?.backgroundLightest,
+    handleFocusRingColor: colors?.contrasts?.white1010,
 
-    handleFocusBackground: colors?.backgroundBrand,
-    handleHoverBackground: colors?.backgroundBrand,
+    handleFocusBackground: colors?.contrasts?.blue4570,
+    handleHoverBackground: colors?.contrasts?.blue4570,
 
     // Deprecated, remove with "deprecated" thumbVariant
-    handleShadowColor: darken(colors?.borderBrand, 15),
-    handleFocusOutlineColor: alpha(colors?.borderBrand, 40),
+    handleShadowColor: darken(colors?.contrasts?.blue5782, 10),
+    handleFocusOutlineColor: alpha(colors?.contrasts?.blue4570, 40),
     handleFocusOutlineWidth: '0.75em',
 
-    trackBackground: colors?.backgroundDark,
+    trackBackground: colors?.contrasts?.grey4570,
 
-    valueColor: colors?.textLightest,
+    valueColor: colors?.contrasts?.white1010,
     valueFontFamily: typography?.fontFamily,
     valueFontWeight: typography?.fontWeightNormal,
 

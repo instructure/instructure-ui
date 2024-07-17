@@ -40,7 +40,7 @@ const generateComponentTheme = (theme: Theme): FormFieldLabelTheme => {
   }
 
   const componentVariables: FormFieldLabelTheme = {
-    color: colors?.textDarkest,
+    color: colors?.contrasts?.grey125125,
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightBold,
     fontSize: typography?.fontSizeMedium,

@@ -309,7 +309,7 @@ describe('<Drilldown.Option />', async () => {
       const option = await drilldown.find('#option1')
       const style = getComputedStyle(option.getDOMNode())
 
-      expect(style.color).to.equal('rgb(45, 59, 69)')
+      expect(style.color).to.equal('rgb(39, 53, 64)')
       expect(style.cursor).to.equal('not-allowed')
     })
   })

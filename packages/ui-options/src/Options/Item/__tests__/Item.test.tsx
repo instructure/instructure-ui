@@ -188,7 +188,7 @@ describe('<Item />', async () => {
     const icon = await content.find('svg[name="IconCheck"]')
     const iconStyle = getComputedStyle(icon.getDOMNode())
 
-    expect(iconStyle.fill).to.equal('rgb(252, 94, 19)')
+    expect(iconStyle.fill).to.equal('rgb(203, 78, 21)')
   })
 
   it('should render colored icon after highlighted label', async () => {
@@ -211,7 +211,7 @@ describe('<Item />', async () => {
     const icon = await content.find('svg[name="IconCheck"]')
     const iconStyle = getComputedStyle(icon.getDOMNode())
 
-    expect(iconStyle.fill).to.equal('rgb(11, 135, 75)')
+    expect(iconStyle.fill).to.equal('rgb(16, 135, 81)')
   })
 
   it('should render nested lists', async () => {

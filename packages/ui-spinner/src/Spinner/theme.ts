@@ -35,7 +35,7 @@ const generateComponentTheme = (theme: Theme): SpinnerTheme => {
 
   const themeSpecificStyle: ThemeSpecificStyle<SpinnerTheme> = {
     'canvas-high-contrast': {
-      inverseColor: colors?.backgroundLightest
+      inverseColor: colors?.contrasts?.white1010
     },
     canvas: {
       color: theme['ic-brand-primary']
@@ -43,8 +43,8 @@ const generateComponentTheme = (theme: Theme): SpinnerTheme => {
   }
 
   const componentVariables: SpinnerTheme = {
-    trackColor: colors?.backgroundLight,
-    color: colors?.backgroundBrand,
+    trackColor: colors?.contrasts?.grey1111,
+    color: colors?.contrasts?.blue4570,
 
     xSmallSize: '1.5em',
     xSmallBorderWidth: '0.25em',
@@ -58,7 +58,7 @@ const generateComponentTheme = (theme: Theme): SpinnerTheme => {
     largeSize: '7em',
     largeBorderWidth: '0.75em',
 
-    inverseColor: colors?.backgroundBrand
+    inverseColor: colors?.contrasts?.blue4570
   }
 
   return {

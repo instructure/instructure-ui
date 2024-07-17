@@ -47,30 +47,30 @@ const generateComponentTheme = (theme: Theme): ToggleFacadeTheme => {
       labelColor: theme['ic-brand-font-color-dark']
     },
     'canvas-high-contrast': {
-      background: colors?.backgroundDarkest,
-      borderColor: colors?.borderDarkest
+      background: colors?.contrasts?.grey125125,
+      borderColor: colors?.contrasts?.grey125125
     }
   }
 
   const componentVariables: ToggleFacadeTheme = {
-    color: colors?.textLightest,
-    background: colors?.backgroundLight,
-    borderColor: colors?.borderMedium,
+    color: colors?.contrasts?.white1010,
+    background: colors?.contrasts?.grey1111,
+    borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,
     borderRadius: '4rem',
     marginEnd: spacing?.small,
     marginStart: spacing?.small,
     marginVertical: spacing?.xSmall,
-    checkedBackground: colors?.backgroundSuccess,
-    uncheckedIconColor: colors?.textDarkest,
-    checkedIconColor: colors?.textSuccess,
-    focusOutlineColor: colors?.borderBrand,
+    checkedBackground: colors?.contrasts?.green4570,
+    uncheckedIconColor: colors?.contrasts?.grey125125,
+    checkedIconColor: colors?.contrasts?.green4570,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusBorderWidth: borders?.widthMedium,
     focusBorderStyle: borders?.style,
-    toggleBackground: colors?.backgroundLightest,
+    toggleBackground: colors?.contrasts?.white1010,
     toggleShadow: shadows?.depth1,
     toggleSize: forms?.inputHeightSmall,
-    labelColor: colors?.textDarkest,
+    labelColor: colors?.contrasts?.grey125125,
     labelFontFamily: typography?.fontFamily,
     labelFontWeight: typography?.fontWeightNormal,
     labelLineHeight: typography?.lineHeightCondensed,

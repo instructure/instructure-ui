@@ -38,13 +38,14 @@ const generateComponentTheme = (theme: Theme): SearchStatusTheme => {
   }
 
   return {
-    colorBrand: colors?.backgroundBrand,
-    colorDanger: colors?.backgroundDanger,
-    colorAlert: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFaceSuccess: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorFaceFailure: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFeatures: colors?.backgroundDarkest
+    colorBrand: colors?.contrasts?.blue4570,
+    colorDanger: colors?.contrasts?.red4570,
+    colorAlert: colors?.inaccessibleAlert || colors?.contrasts?.blue4570,
+    colorWarning: colors?.inaccessibleWarning || colors?.contrasts?.orange4570,
+    colorFaceSuccess: colors?.inaccessibleAlert || colors?.contrasts?.blue4570,
+    colorFaceFailure:
+      colors?.inaccessibleWarning || colors?.contrasts?.orange4570,
+    colorFeatures: colors?.contrasts?.grey125125
   }
 }
 

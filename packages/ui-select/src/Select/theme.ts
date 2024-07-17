@@ -41,8 +41,8 @@ const generateComponentTheme = (theme: Theme): SelectTheme => {
     mediumIconSize: typography?.fontSizeSmall,
     largeIconSize: typography?.fontSizeMedium,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010
   }
 
   return {

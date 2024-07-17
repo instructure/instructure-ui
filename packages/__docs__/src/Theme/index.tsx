@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import React, { Component } from 'react'
-
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { px } from '@instructure/ui-utils'
@@ -32,6 +31,7 @@ import { Table } from '@instructure/ui-table'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { Alert } from '@instructure/ui-alerts'
+import { primitives } from '@instructure/ui-theme-tokens'
 
 import { Heading } from '../Heading'
 import { Description } from '../Description'
@@ -146,7 +146,6 @@ class Theme extends Component<ThemeProps> {
     const margin = sub ? 'small none small' : 'small none large'
     const padding = 'small'
     const label = name + 'variables'
-
     return (
       <View key={label} as="div" padding={sub ? padding : 'none'}>
         <Heading as={headingElement} level={headingLevel}>
@@ -181,9 +180,8 @@ class Theme extends Component<ThemeProps> {
     const subSections = []
     let baseColors = {}
     const newData = Object.assign({}, data)
-
-    if (name === 'colors' && data.values) {
-      baseColors = data.values
+    if (name === 'colors' && data.primitives) {
+      baseColors = data.primitives
       delete newData.values
 
       this._colorMap = this.mapColors(baseColors)
@@ -191,6 +189,15 @@ class Theme extends Component<ThemeProps> {
     }
 
     Object.keys(newData).forEach((key) => {
+      //primitives are the color palette above
+      if (key === 'primitives') {
+        return
+      }
+
+      // if (key === 'contrasts') {
+      //   subSections.push(this.renderContrastsTable())
+      //   return
+      // }
       const item = data[key]
       if (typeof item === 'object') {
         const subData: Record<string, { text: string; color: string }> = {}
@@ -236,7 +243,6 @@ class Theme extends Component<ThemeProps> {
 
   render() {
     const sections: React.ReactElement[] = []
-    const vars: React.ReactElement[] = []
 
     const { themeKey, variables, description } = this.props
 
@@ -245,8 +251,6 @@ class Theme extends Component<ThemeProps> {
 
       if (value && typeof value === 'object') {
         sections.push(this.renderSection(name, value))
-      } else {
-        vars.push(this.renderVariable(name, value))
       }
     })
 
@@ -265,7 +269,6 @@ class Theme extends Component<ThemeProps> {
         </Alert>
 
         {sections}
-        {vars.length > 0 && this.renderTable('brand variables', vars)}
 
         <Description
           id={`${themeKey}ApplicationUsage`}
