@@ -94,7 +94,7 @@ describe('<Calendar />', () => {
       expect(selectedDay).toBeDefined()
       if (selectedDay) {
         expect(window.getComputedStyle(selectedDay)?.background).toBe(
-          'rgb(11, 135, 75)'
+          'rgb(3, 137, 61)'
         )
       }
     })

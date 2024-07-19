@@ -45,25 +45,25 @@ const generateComponentTheme = (theme: Theme): CheckboxFacadeTheme => {
   }
 
   const componentVariables: CheckboxFacadeTheme = {
-    color: colors?.textLightest,
+    color: colors?.contrasts?.white1010,
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
     borderRadius: borders?.radiusMedium,
-    background: colors?.backgroundLightest,
+    background: colors?.contrasts?.white1010,
     marginRight: spacing?.xSmall,
     padding: spacing?.xxxSmall,
 
-    checkedBackground: colors?.backgroundDarkest,
-    checkedBorderColor: colors?.borderDarkest,
+    checkedBackground: colors?.contrasts?.grey125125,
+    checkedBorderColor: colors?.contrasts?.grey125125,
 
-    hoverBorderColor: colors?.borderDarkest,
+    hoverBorderColor: colors?.contrasts?.grey125125,
 
-    focusBorderColor: colors?.borderBrand,
+    focusBorderColor: colors?.contrasts?.blue4570,
     focusBorderWidth: borders?.widthMedium,
     focusBorderStyle: borders?.style,
 
-    labelColor: colors?.textDarkest,
-    checkedLabelColor: colors?.textDarkest,
+    labelColor: colors?.contrasts?.grey125125,
+    checkedLabelColor: colors?.contrasts?.grey125125,
     labelFontFamily: typography?.fontFamily,
     labelFontWeight: typography?.fontWeightNormal,
     labelLineHeight: typography?.lineHeightCondensed,

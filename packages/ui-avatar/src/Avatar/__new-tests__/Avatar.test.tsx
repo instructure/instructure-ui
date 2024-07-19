@@ -69,7 +69,7 @@ describe('<Avatar />', () => {
     it('should display the initials in brand color', async () => {
       render(<Avatar name="Jessica Jones" />)
       const initials = screen.getByText('JJ')
-      expect(getComputedStyle(initials).color).toBe('rgb(3, 116, 181)')
+      expect(getComputedStyle(initials).color).toBe('rgb(43, 122, 188)')
     })
 
     it('should return the underlying component', async () => {
@@ -176,7 +176,7 @@ describe('<Avatar />', () => {
     it('should display the initials in green (shamrock)', async () => {
       render(<Avatar name="Jessica Jones" color="shamrock" />)
       const initials = screen.getByText('JJ')
-      expect(getComputedStyle(initials).color).toBe('rgb(11, 135, 75)')
+      expect(getComputedStyle(initials).color).toBe('rgb(3, 137, 61)')
     })
 
     it('should display the icon in green (shamrock)', async () => {
@@ -190,7 +190,7 @@ describe('<Avatar />', () => {
         </Avatar>
       )
       const avatarSvg = container.querySelector('svg')
-      expect(avatarSvg).toHaveStyle({ fill: '#FC5E13' })
+      expect(avatarSvg).toHaveStyle({ fill: '#CF4A00' })
     })
   })
 
@@ -200,7 +200,7 @@ describe('<Avatar />', () => {
         render(<Avatar name="Jessica Jones" color="shamrock" hasInverseColor />)
         const initials = screen.getByText('JJ')
         expect(initials.parentNode).toHaveStyle({
-          backgroundColor: 'rgb(11, 135, 75)'
+          backgroundColor: 'rgb(3, 137, 61)'
         })
       })
 
@@ -222,7 +222,7 @@ describe('<Avatar />', () => {
           />
         )
         const element = container.querySelector('span')
-        expect(element).toHaveStyle({ backgroundColor: 'rgb(11, 135, 75)' })
+        expect(element).toHaveStyle({ backgroundColor: 'rgb(3, 137, 61)' })
       })
 
       it('should display the icon in white', async () => {

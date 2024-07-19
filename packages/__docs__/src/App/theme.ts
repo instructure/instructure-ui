@@ -34,8 +34,8 @@ const generateComponentTheme = (theme: Theme): AppTheme => {
   const { spacing, borders, colors, stacking, shadows, typography } = theme
 
   const componentVariables = {
-    background: colors?.backgroundLightest,
-    color: colors?.textDarkest,
+    background: colors?.contrasts?.white1010,
+    color: colors?.contrasts?.grey125125,
     fontFamily: typography?.fontFamily,
     fontFamilyMonospace: typography?.fontFamilyMonospace,
     lineHeight: typography?.lineHeight,
@@ -47,9 +47,9 @@ const generateComponentTheme = (theme: Theme): AppTheme => {
     quoteMargin: `${spacing?.large} ${spacing?.medium}`,
     borderWidth: borders?.widthLarge,
     borderStyle: borders?.style,
-    borderColor: colors?.tiara,
+    borderColor: colors?.contrasts?.grey1111,
     menuToggleZIndex: stacking?.above,
-    navBorderColor: colors?.borderMedium,
+    navBorderColor: colors?.contrasts?.grey1214,
     navBorderWidth: borders?.widthSmall
   }
 

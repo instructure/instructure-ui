@@ -34,27 +34,25 @@ import { AvatarTheme } from '@instructure/shared-types'
 const generateComponentTheme = (theme: Theme): AvatarTheme => {
   const { colors, borders, typography } = theme
 
-  const { brand, shamrock, barney, crimson, fire, licorice, ash } = colors
-
   const componentVariables: AvatarTheme = {
-    background: colors?.backgroundLightest,
+    background: colors?.contrasts?.white1010,
     borderWidthSmall: borders?.widthSmall,
     borderWidthMedium: borders?.widthMedium,
-    borderColor: colors?.borderMedium,
-    boxShadowColor: alpha(colors?.backgroundDarkest, 12),
+    borderColor: colors?.contrasts?.grey1214,
+    boxShadowColor: alpha('#2d3b45', 12),
     boxShadowBlur: '1rem',
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightBold,
 
     // these colors have sufficient contrast with the white background
     // in the normal and high contrast themes
-    color: brand,
-    colorShamrock: shamrock,
-    colorBarney: barney,
-    colorCrimson: crimson,
-    colorFire: fire,
-    colorLicorice: licorice,
-    colorAsh: ash
+    color: colors?.contrasts.blue4570,
+    colorShamrock: colors?.contrasts?.green4570,
+    colorBarney: colors?.contrasts?.blue4570,
+    colorCrimson: colors?.contrasts?.red4570,
+    colorFire: colors?.contrasts?.orange4570,
+    colorLicorice: colors?.contrasts?.grey125125,
+    colorAsh: colors?.contrasts?.grey4570
   }
 
   return {

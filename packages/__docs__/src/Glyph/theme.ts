@@ -41,7 +41,7 @@ const generateComponentTheme = (theme: Theme): GlyphTheme => {
     padding: spacing?.small,
     glyphMinWidth: breakpoints?.xSmall,
     borderRadius: borders?.radiusMedium,
-    backgroundColor: colors?.backgroundLightest,
+    backgroundColor: colors?.contrasts?.white1010,
     border: `${borders?.widthSmall} solid #eee`,
     backgroundColorInverse: '#333',
     gradientCheckerboardSize: '1rem',
@@ -59,9 +59,9 @@ const generateComponentTheme = (theme: Theme): GlyphTheme => {
       transparent 75%,
       ${colorCheckerboardInverse} 75%,
       ${colorCheckerboardInverse}`,
-    glyphColor: colors?.textDarkest,
-    glyphHoverBackgroundColor: alpha(colors?.textDarkest, 10),
-    glyphFocusBorderColor: colors?.borderBrand
+    glyphColor: colors?.contrasts?.grey125125,
+    glyphHoverBackgroundColor: alpha(colors?.contrasts?.grey125125, 10),
+    glyphFocusBorderColor: colors?.contrasts?.blue4570
   }
 
   return {

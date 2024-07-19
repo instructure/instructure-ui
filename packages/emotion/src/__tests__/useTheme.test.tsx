@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '@instructure/theme-registry'
 
@@ -65,7 +65,7 @@ describe('useTheme hook', () => {
     })
     it('should use global theme when no "theme" is provided', async () => {
       const callback = spy()
-      const theme = ThemeRegistry.registerTheme(instructure)
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
       theme.use()
 
       await mount(
@@ -89,7 +89,7 @@ describe('useTheme hook', () => {
     })
     it('should use provided theme when theme is provided', async () => {
       const callback = spy()
-      const theme = ThemeRegistry.registerTheme(instructure)
+      const theme = ThemeRegistry.registerTheme(canvas)
       theme.use()
 
       await mount(
@@ -103,40 +103,42 @@ describe('useTheme hook', () => {
     it('should override the default theme when no other theme is available', async () => {
       const callback = spy()
       await mount(
-        <InstUISettingsProvider theme={{ colors: { brand: 'red' } }}>
+        <InstUISettingsProvider
+          theme={{
+            colors: {
+              primitives: {
+                white: 'red'
+              }
+            }
+          }}
+        >
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
       )
 
       expect(callback).to.have.been.calledWithMatch({
         ...canvas,
-        colors: { brand: 'red' }
+        colors: {
+          primitives: {
+            white: 'red'
+          }
+        }
       })
     })
     it('should override the global theme if that is the only theme available', async () => {
       const callback = spy()
-      const theme = ThemeRegistry.registerTheme(instructure)
-      theme.use()
-
-      await mount(
-        <InstUISettingsProvider theme={{ colors: { brand: 'red' } }}>
-          <ExampleComponent callback={callback}></ExampleComponent>
-        </InstUISettingsProvider>
-      )
-
-      expect(callback).to.have.been.calledWithMatch({
-        ...theme,
-        colors: { brand: 'red' }
-      })
-    })
-    it('should override the global theme with the "themeOverrides" option if that is the only theme available', async () => {
-      const callback = spy()
-      const theme = ThemeRegistry.registerTheme(instructure)
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
       theme.use()
 
       await mount(
         <InstUISettingsProvider
-          theme={{ themeOverrides: { colors: { brand: 'red' } } }}
+          theme={{
+            colors: {
+              primitives: {
+                white: 'red'
+              }
+            }
+          }}
         >
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
@@ -144,18 +146,60 @@ describe('useTheme hook', () => {
 
       expect(callback).to.have.been.calledWithMatch({
         ...theme,
-        colors: { brand: 'red' }
+        colors: {
+          primitives: {
+            white: 'red'
+          }
+        }
+      })
+    })
+    it('should override the global theme with the "themeOverrides" option if that is the only theme available', async () => {
+      const callback = spy()
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
+      theme.use()
+
+      await mount(
+        <InstUISettingsProvider
+          theme={{
+            themeOverrides: {
+              colors: {
+                primitives: {
+                  white: 'red'
+                }
+              }
+            }
+          }}
+        >
+          <ExampleComponent callback={callback}></ExampleComponent>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWithMatch({
+        ...theme,
+        colors: {
+          primitives: {
+            white: 'red'
+          }
+        }
       })
     })
     it('should override the theme from context when provided', async () => {
       const callback = spy()
-      const theme = ThemeRegistry.registerTheme(instructure)
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
       theme.use()
 
       await mount(
         <InstUISettingsProvider theme={canvasHighContrast}>
           <InstUISettingsProvider
-            theme={{ themeOverrides: { colors: { brand: 'red' } } }}
+            theme={{
+              themeOverrides: {
+                colors: {
+                  primitives: {
+                    white: 'red'
+                  }
+                }
+              }
+            }}
           >
             <ExampleComponent callback={callback}></ExampleComponent>
           </InstUISettingsProvider>
@@ -164,14 +208,18 @@ describe('useTheme hook', () => {
 
       expect(callback).to.have.been.calledWithMatch({
         ...canvasHighContrast,
-        colors: { brand: 'red' }
+        colors: {
+          primitives: {
+            white: 'red'
+          }
+        }
       })
     })
   })
   describe('without using InstUISettingsProvider', () => {
     it('should use theme from global ThemeRegistry', async () => {
       const callback = spy()
-      const theme = ThemeRegistry.registerTheme(instructure)
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
       theme.use()
 
       await mount(<ExampleComponent callback={callback}></ExampleComponent>)
@@ -185,26 +233,29 @@ describe('useTheme hook', () => {
       expect(callback).to.have.been.calledWith(canvas)
     })
   })
+
   describe('with InstUISettingsProvider and global theme', () => {
     it('overrides should work correctly', async () => {
       const [cb1, cb2, cb3, cb4, cb5, cb6] = Array(6)
         .fill(0)
         .map(() => spy())
 
-      const theme = ThemeRegistry.registerTheme(instructure)
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
       theme.use({
         overrides: {
           colors: {
-            backgroundLight: 'red',
-            borderLight: 'yellow',
-            textDarkest: 'magenta'
+            primitives: {
+              red12: 'red',
+              green12: 'yellow',
+              blue12: 'magenta'
+            }
           }
         }
       })
 
       await mount(
         <>
-          {/* no provider -> instructure theme */}
+          {/* no provider -> canvasHighContrast theme */}
           <ExampleComponent callback={cb1}></ExampleComponent>
           <InstUISettingsProvider theme={canvasHighContrast}>
             {/* theme provided -> canvasHighContrast */}
@@ -215,11 +266,15 @@ describe('useTheme hook', () => {
               <InstUISettingsProvider
                 theme={{
                   colors: {
-                    backgroundLight: 'orange'
+                    primitives: {
+                      red12: 'orange'
+                    }
                   },
                   themeOverrides: {
                     colors: {
-                      borderLight: 'olive'
+                      primitives: {
+                        green12: 'olive'
+                      }
                     }
                   }
                 }}
@@ -230,21 +285,25 @@ describe('useTheme hook', () => {
             </InstUISettingsProvider>
           </InstUISettingsProvider>
           <InstUISettingsProvider>
-            {/* no theme provided -> instructure theme */}
+            {/* no theme provided -> canvasHighContrast theme */}
             <ExampleComponent callback={cb5}></ExampleComponent>
             <InstUISettingsProvider
               theme={{
                 colors: {
-                  backgroundLight: 'brown'
+                  primitives: {
+                    red12: 'brown'
+                  }
                 },
                 themeOverrides: {
                   colors: {
-                    borderLight: 'pink'
+                    primitives: {
+                      green12: 'pink'
+                    }
                   }
                 }
               }}
             >
-              {/* no theme provided -> instructure theme with overrides */}
+              {/* no theme provided -> canvasHighContrast theme with overrides */}
               <ExampleComponent callback={cb6}></ExampleComponent>
             </InstUISettingsProvider>
           </InstUISettingsProvider>
@@ -254,9 +313,11 @@ describe('useTheme hook', () => {
       expect(cb1).to.have.been.calledWithMatch({
         ...theme,
         colors: {
-          backgroundLight: 'red',
-          borderLight: 'yellow',
-          textDarkest: 'magenta'
+          primitives: {
+            red12: 'red',
+            green12: 'yellow',
+            blue12: 'magenta'
+          }
         }
       })
       expect(cb2).to.have.been.calledWith(canvasHighContrast)
@@ -264,24 +325,30 @@ describe('useTheme hook', () => {
       expect(cb4).to.have.been.calledWithMatch({
         ...canvas,
         colors: {
-          backgroundLight: 'orange',
-          borderLight: 'olive'
+          primitives: {
+            red12: 'orange',
+            green12: 'olive'
+          }
         }
       })
       expect(cb5).to.have.been.calledWithMatch({
         ...theme,
         colors: {
-          backgroundLight: 'red',
-          borderLight: 'yellow',
-          textDarkest: 'magenta'
+          primitives: {
+            red12: 'red',
+            green12: 'yellow',
+            blue12: 'magenta'
+          }
         }
       })
       expect(cb6).to.have.been.calledWithMatch({
         ...theme,
         colors: {
-          backgroundLight: 'brown',
-          borderLight: 'pink',
-          textDarkest: 'magenta'
+          primitives: {
+            red12: 'brown',
+            green12: 'pink',
+            blue12: 'magenta'
+          }
         }
       })
     })
@@ -290,7 +357,7 @@ describe('useTheme hook', () => {
     const callback1 = spy()
     const callback2 = spy()
 
-    const theme = ThemeRegistry.registerTheme(instructure)
+    const theme = ThemeRegistry.registerTheme(canvasHighContrast)
     theme.use()
 
     //first react tree
@@ -307,7 +374,7 @@ describe('useTheme hook', () => {
     const callback2 = spy()
     const callback3 = spy()
 
-    const theme = ThemeRegistry.registerTheme(instructure)
+    const theme = ThemeRegistry.registerTheme(canvasHighContrast)
     theme.use()
 
     //first react tree

@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): ColorSwatchTheme => {
   const { colors } = theme
 
   const componentVariables = {
-    borderColor: colors?.borderMedium
+    borderColor: colors?.contrasts?.grey4570
   }
   return {
     ...componentVariables

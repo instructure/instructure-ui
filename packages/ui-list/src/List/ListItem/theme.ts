@@ -46,7 +46,7 @@ const generateComponentTheme = (theme: Theme): ListItemTheme => {
     fontSizeSmall: typography?.fontSizeSmall,
     fontSizeMedium: typography?.fontSizeMedium,
     fontSizeLarge: typography?.fontSizeLarge,
-    color: colors?.textDarkest,
+    color: colors?.contrasts?.grey125125,
     spacingXXXSmall: spacing?.xxxSmall,
     spacingXXSmall: spacing?.xxSmall,
     spacingXSmall: spacing?.xSmall,
@@ -55,8 +55,8 @@ const generateComponentTheme = (theme: Theme): ListItemTheme => {
     spacingLarge: spacing?.large,
     spacingXLarge: spacing?.xLarge,
     spacingXXLarge: spacing?.xxLarge,
-    delimiterDashedBorder: `${borders?.widthSmall} dashed ${colors?.borderMedium}`,
-    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.borderMedium}`
+    delimiterDashedBorder: `${borders?.widthSmall} dashed ${colors?.contrasts?.grey1214}`,
+    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.contrasts?.grey1214}`
   }
 
   return {

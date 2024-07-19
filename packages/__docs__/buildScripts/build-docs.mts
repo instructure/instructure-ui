@@ -29,7 +29,6 @@ import { processFile } from './processFile.mjs'
 import fs from 'fs'
 import { theme as canvasTheme } from '@instructure/canvas-theme'
 import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
-import { theme as instructureTheme } from '@instructure/instructure-theme'
 import type {
   IconFormat,
   LibraryOptions,
@@ -102,7 +101,6 @@ const pathsToIgnore = [
   // packages to ignore:
   '**/canvas-theme/**',
   '**/canvas-high-contrast-theme/**',
-  '**/instructure-theme/**',
   '**/ui-theme-tokens/**',
   '**/ui-test-*/src/**',
   '**/ui-scripts/src/**',
@@ -237,10 +235,6 @@ function parseThemes() {
   parsed[canvasHighContrastTheme.key] = {
     resource: canvasHighContrastTheme,
     requirePath: '@instructure/canvas-high-contrast-theme'
-  }
-  parsed[instructureTheme.key] = {
-    resource: instructureTheme,
-    requirePath: '@instructure/instructure-theme'
   }
   return parsed
 }

@@ -31,7 +31,6 @@
     "@instructure/console": "9.5.1",
     "@instructure/debounce": "9.5.1",
     "@instructure/emotion": "9.5.1",
-    "@instructure/instructure-theme": "9.5.1",
     "@instructure/shared-types": "9.5.1",
     "@instructure/ui": "9.5.1",
     "@instructure/ui-a11y-content": "9.5.1",

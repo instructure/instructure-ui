@@ -43,8 +43,8 @@ const generateComponentTheme = (theme: Theme): MenuGroupTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightBold,
     padding: `${spacing?.xSmall} ${spacing?.small}`,
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010
   }
 
   return {

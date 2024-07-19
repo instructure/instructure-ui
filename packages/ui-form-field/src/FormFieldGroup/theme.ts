@@ -39,7 +39,7 @@ const generateComponentTheme = (theme: Theme): FormFieldGroupTheme => {
     borderColor: 'transparent',
     borderRadius: borders?.radiusMedium,
 
-    errorBorderColor: colors?.borderDanger,
+    errorBorderColor: colors?.contrasts?.red4570,
     errorFieldsPadding: spacing?.xSmall
   }
 

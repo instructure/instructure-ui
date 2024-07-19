@@ -50,14 +50,14 @@ To override the variables:
   ```js
   import { theme } from '@instructure/canvas-high-contrast-theme'
 
-  theme.use({ overrides: { colors: { brand: 'red' } } })
+  theme.use({ overrides: { spacing: { xxxSmall: '0.3rem' } } })
   ```
 
 - application level:
 
   ```jsx
   import { theme } from '@instructure/canvas-high-contrast-theme'
-  const themeOverrides = { colors: { brand: 'red' } }
+  const themeOverrides = { spacing: { xxxSmall: '0.3rem' } }
 
   ReactDOM.render(
     <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>

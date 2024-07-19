@@ -22,121 +22,101 @@
  * SOFTWARE.
  */
 
-type BaseColors = {
-  brand: string
-  link: string
-  electric: string
-  shamrock: string
-  barney: string
-  crimson: string
-  fire: string
-  licorice: string
-  oxford: string
-  ash: string
-  slate: string
-  tiara: string
-  porcelain: string
+type Primitives = {
   white: string
+  grey11: string
+  grey12: string
+  grey14: string
+  grey24: string
+  grey45: string
+  grey57: string
+  grey70: string
+  grey82: string
+  grey100: string
+  grey125: string
+
+  blue12: string
+  blue45: string
+  blue57: string
+  blue70: string
+  blue82: string
+
+  green12: string
+  green45: string
+  green57: string
+  green70: string
+  green82: string
+
+  orange12: string
+  orange30: string
+  orange45: string
+  orange57: string
+  orange70: string
+  orange82: string
+
+  red12: string
+  red45: string
+  red57: string
+  red70: string
+  red82: string
 }
 
-type TextColors = {
-  textDarkest: BaseColors['licorice']
-  textDark: BaseColors['ash']
-  textLight: BaseColors['porcelain']
-  textLightest: BaseColors['white']
-  textBrand: BaseColors['brand']
-  textLink: BaseColors['link']
-  textAlert: BaseColors['barney']
-  textInfo: BaseColors['brand']
-  textSuccess: BaseColors['shamrock']
-  textDanger: BaseColors['crimson']
-  textWarning: BaseColors['fire']
+type Contrasts = {
+  white1010: Primitives['white']
+  grey1111: Primitives['grey11']
+  grey1214: Primitives['grey12'] | Primitives['grey14']
+  grey1424: Primitives['grey14'] | Primitives['grey24']
+  grey2424: Primitives['grey24']
+  grey4570: Primitives['grey45'] | Primitives['grey70']
+  grey5782: Primitives['grey57'] | Primitives['grey82']
+  grey100100: Primitives['grey100']
+  grey125125: Primitives['grey125']
+
+  blue1212: Primitives['blue12']
+  blue4570: Primitives['blue45'] | Primitives['blue70']
+  blue5782: Primitives['blue57'] | Primitives['blue82']
+
+  green1212: Primitives['green12']
+  green4570: Primitives['green45'] | Primitives['green70']
+  green5782: Primitives['green57'] | Primitives['green82']
+
+  orange1212: Primitives['orange12']
+  orange3045: Primitives['orange30'] | Primitives['orange45']
+  orange4570: Primitives['orange45'] | Primitives['orange70']
+  orange5782: Primitives['orange57'] | Primitives['orange82']
+
+  red1212: Primitives['red12']
+  red4570: Primitives['red45'] | Primitives['red70']
+  red5782: Primitives['red57'] | Primitives['red82']
 }
 
-type BackgroundColors = {
-  backgroundDarkest: BaseColors['licorice']
-  backgroundDark: BaseColors['ash']
-  backgroundMedium: BaseColors['tiara']
-  backgroundLight: BaseColors['porcelain']
-  backgroundLightest: BaseColors['white']
-  backgroundBrand: BaseColors['brand']
-  backgroundBrandSecondary: BaseColors['oxford']
-  backgroundAlert: BaseColors['barney']
-  backgroundInfo: BaseColors['brand']
-  backgroundSuccess: BaseColors['shamrock']
-  backgroundDanger: BaseColors['crimson']
-  backgroundWarning: BaseColors['fire']
-}
+type UI = {
+  surfacePagePrimary: Contrasts['white1010']
+  surfacePageSecondary: Contrasts['grey1111']
+  surfaceCardPrimary: Contrasts['white1010']
+  surfaceCardSecondary: Contrasts['grey1111']
+  surfaceDark: Contrasts['grey100100']
 
-type BorderColors = {
-  borderLightest: BaseColors['white']
-  borderLight: BaseColors['porcelain']
-  borderMedium: BaseColors['tiara']
-  borderDark: BaseColors['ash']
-  borderDarkest: BaseColors['licorice']
-  borderBrand: BaseColors['brand']
-  borderAlert: BaseColors['barney']
-  borderInfo: BaseColors['brand']
-  borderSuccess: BaseColors['shamrock']
-  borderDanger: BaseColors['crimson']
-  borderWarning: BaseColors['fire']
-  borderDebug: BaseColors['crimson']
+  textTitle: Contrasts['grey125125']
+  textDescription: Contrasts['grey125125']
+  textBody: Contrasts['grey125125']
+  textTimestamp: Contrasts['grey5782']
+  textAuthor: Contrasts['grey5782']
+  textDatapoint: Contrasts['grey5782']
+  textLink: Contrasts['blue4570']
+  textPlaceholder: Contrasts['grey2424']
+  textSuccess: Contrasts['green4570']
+  textWarning: Contrasts['orange4570']
+  textError: Contrasts['red4570']
+
+  stroke: Contrasts['grey1424']
+  divider: Contrasts['grey1214']
 }
 
 type Colors = {
-  values: BaseColors
-  text: TextColors
-  background: BackgroundColors
-  border: BorderColors
-  brand: string
-  link: string
-  electric: string
-  shamrock: string
-  barney: string
-  crimson: string
-  fire: string
-  licorice: string
-  oxford: string
-  ash: string
-  slate: string
-  tiara: string
-  porcelain: string
-  white: string
-  borderLightest: BaseColors['white']
-  borderLight: BaseColors['porcelain']
-  borderMedium: BaseColors['tiara']
-  borderDark: BaseColors['ash']
-  borderDarkest: BaseColors['licorice']
-  borderBrand: BaseColors['brand']
-  borderAlert: BaseColors['barney']
-  borderInfo: BaseColors['brand']
-  borderSuccess: BaseColors['shamrock']
-  borderDanger: BaseColors['crimson']
-  borderWarning: BaseColors['fire']
-  borderDebug: BaseColors['crimson']
-  backgroundDarkest: BaseColors['licorice']
-  backgroundDark: BaseColors['ash']
-  backgroundMedium: BaseColors['tiara']
-  backgroundLight: BaseColors['porcelain']
-  backgroundLightest: BaseColors['white']
-  backgroundBrand: BaseColors['brand']
-  backgroundBrandSecondary: BaseColors['oxford']
-  backgroundAlert: BaseColors['barney']
-  backgroundInfo: BaseColors['brand']
-  backgroundSuccess: BaseColors['shamrock']
-  backgroundDanger: BaseColors['crimson']
-  backgroundWarning: BaseColors['fire']
-  textDarkest: BaseColors['licorice']
-  textDark: BaseColors['ash']
-  textLight: BaseColors['porcelain']
-  textLightest: BaseColors['white']
-  textBrand: BaseColors['brand']
-  textLink: BaseColors['link']
-  textAlert: BaseColors['barney']
-  textInfo: BaseColors['brand']
-  textSuccess: BaseColors['shamrock']
-  textDanger: BaseColors['crimson']
-  textWarning: BaseColors['fire']
+  primitives: Primitives
+  contrasts: Contrasts
+  ui: UI
 }
 
-export type { BaseColors, TextColors, BorderColors, BackgroundColors, Colors }
+export type { Colors, Primitives, Contrasts, UI }

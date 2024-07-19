@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): ThemeTheme => {
   const { colors, typography } = theme
 
   return {
-    convertedValueTextColor: colors?.textDark,
+    convertedValueTextColor: colors?.contrasts?.grey100100,
     convertedValueFontSize: typography?.fontSizeSmall
   }
 }

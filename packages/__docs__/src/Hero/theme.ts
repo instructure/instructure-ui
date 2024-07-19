@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): HeroTheme => {
   const themeSpecificStyle: Record<string, any> = {}
 
   const componentVariables = {
-    backgroundColor: colors?.backgroundBrand
+    backgroundColor: colors?.contrasts?.blue4570
   }
 
   return {

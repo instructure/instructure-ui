@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canvas, canvasHighContrast, instructure } from '..'
+import { canvas, canvasHighContrast } from '..'
 import '@testing-library/jest-dom'
 
-const themes = [canvas, canvasHighContrast, instructure]
+const themes = [canvas, canvasHighContrast]
 
 describe('themes are backwards compatible', () => {
   describe("should be able to access theme variables with 'theme.variables.x'", () => {
     for (const theme of themes) {
       it(`${theme.key}`, () => {
-        const brandColor = theme.variables.colors.brand
+        const brandColor = theme.colors.contrasts.white1010
 
         expect(brandColor).toBeDefined()
         expect(brandColor).not.toBe('')
@@ -41,7 +41,7 @@ describe('themes are backwards compatible', () => {
   describe("should be able to access theme variables with 'theme.x'", () => {
     for (const theme of themes) {
       it(`${theme.key}`, () => {
-        const brandColor = theme.colors.brand
+        const brandColor = theme.colors.contrasts.white1010
 
         expect(brandColor).toBeDefined()
         expect(brandColor).not.toBe('')

@@ -47,8 +47,8 @@ const generateComponentTheme = (theme: Theme): AlertTheme => {
   }
 
   const componentVariables: AlertTheme = {
-    background: colors?.backgroundLightest,
-    color: colors?.textDarkest,
+    background: colors?.contrasts?.white1010,
+    color: colors?.contrasts?.grey125125,
     marginTop: spacing?.small,
 
     borderRadius: borders?.radiusMedium,
@@ -64,19 +64,19 @@ const generateComponentTheme = (theme: Theme): AlertTheme => {
     closeButtonMarginTop: spacing?.xSmall,
     closeButtonMarginRight: spacing?.xxSmall,
 
-    iconColor: colors?.textLightest,
+    iconColor: colors?.contrasts?.white1010,
 
-    successBorderColor: colors?.borderSuccess,
-    successIconBackground: colors?.backgroundSuccess,
+    successBorderColor: colors?.contrasts?.green4570,
+    successIconBackground: colors?.contrasts?.green4570,
 
-    infoBorderColor: colors?.borderInfo,
-    infoIconBackground: colors?.backgroundInfo,
+    infoBorderColor: colors?.contrasts?.blue4570,
+    infoIconBackground: colors?.contrasts?.blue4570,
 
-    warningBorderColor: colors?.borderWarning,
-    warningIconBackground: colors?.backgroundWarning,
+    warningBorderColor: colors?.contrasts?.orange4570,
+    warningIconBackground: colors?.contrasts?.orange4570,
 
-    dangerBorderColor: colors?.borderDanger,
-    dangerIconBackground: colors?.backgroundDanger,
+    dangerBorderColor: colors?.contrasts?.red4570,
+    dangerIconBackground: colors?.contrasts?.red4570,
 
     boxShadow: shadows?.depth2
   }

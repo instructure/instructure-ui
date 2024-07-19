@@ -95,7 +95,7 @@ describe('<DateInput/>', () => {
         cy.get('span[class$="-calendarDay__day"]').should(
           'have.css',
           'background-color',
-          'rgb(11, 135, 75)'
+          'rgb(3, 137, 61)'
         )
       })
   })

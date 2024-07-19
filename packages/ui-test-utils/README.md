@@ -18,7 +18,10 @@ npm install @instructure/ui-test-utils
 
 ### Usage
 
-```javascript
+```js
+---
+type: code
+---
 import { mount, expect, find } from '@instructure/ui-test-utils'
 
 import MyComponent from '../'

@@ -44,9 +44,9 @@ const generateComponentTheme = (theme: Theme): TabsPanelTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeight,
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010,
+    borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     defaultOverflowY: 'auto'

@@ -22,45 +22,29 @@
  * SOFTWARE.
  */
 
-import { functionalColors } from '../utils/functionalColors'
-import { BaseColors, Colors } from '@instructure/shared-types'
+import type { Contrasts } from '@instructure/shared-types'
 
-const values: BaseColors = {
-  brand: '#287A9F',
-  link: '#287A9F',
-  electric: '#287A9F',
-  shamrock: '#24A159',
-  barney: '#143D50',
-  crimson: '#E72429',
-  fire: '#F76400',
-  licorice: '#0D323F',
-  oxford: '#143D50',
-  ash: '#156380',
-  slate: '#156380',
-  tiara: '#CCDCE4',
-  porcelain: '#F2F8FA',
-  white: '#FFFFFF'
-}
+export const getUIColors = (contrasts: Contrasts) => ({
+  surfacePagePrimary: contrasts?.white1010,
+  surfacePageSecondary: contrasts?.grey1111,
+  surfaceCardPrimary: contrasts?.white1010,
+  surfaceCardSecondary: contrasts?.grey1111,
+  surfaceDark: contrasts?.grey100100,
 
-/**
- * Two Inst colors are not accessible, so adding them for display purposes only in decorative elements
- */
-type InaccessibleColors = {
-  inaccessibleAlert: string
-  inaccessibleWarning: string
-}
+  textTitle: contrasts?.grey125125,
+  textDescription: contrasts?.grey125125,
+  textBody: contrasts?.grey125125,
+  textTimestamp: contrasts?.grey5782,
+  textAuthor: contrasts?.grey5782,
+  textDatapoint: contrasts?.grey5782,
+  textLink: contrasts?.blue4570,
+  textPlaceholder: contrasts?.grey2424,
+  textSuccess: contrasts?.green4570,
+  textWarning: contrasts?.orange4570,
+  textError: contrasts?.red4570,
 
-// Two Inst colors are not accessible, so adding them for display purposes only
-// in decorative elements
-const appendInaccessibleColors: Colors & InaccessibleColors = {
-  ...functionalColors(values),
-  inaccessibleAlert: '#fccb0e',
-  inaccessibleWarning: '#f68e1f'
-}
+  stroke: contrasts?.grey1424,
+  divider: contrasts?.grey1214
+})
 
-const colors: Colors & InaccessibleColors = Object.freeze(
-  appendInaccessibleColors
-)
-
-export default colors
-export { colors }
+export default getUIColors

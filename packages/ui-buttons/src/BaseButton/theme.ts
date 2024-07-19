@@ -22,71 +22,11 @@
  * SOFTWARE.
  */
 
-import { alpha, darken } from '@instructure/ui-color-utils'
-import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 import { BaseButtonTheme } from '@instructure/shared-types'
+import { alpha } from '@instructure/ui-color-utils'
 
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
-
-type Variants =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'primaryInverse'
-
-type VariantValues =
-  | 'Color'
-  | 'BorderColor'
-  | 'Background'
-  | 'HoverBackground'
-  | 'ActiveBackground'
-  | 'ActiveBoxShadow'
-  | 'GhostColor'
-  | 'GhostBorderColor'
-  | 'GhostBackground'
-  | 'GhostHoverBackground'
-  | 'GhostActiveBackground'
-  | 'GhostActiveBoxShadow'
-
-type VariantMap<Variant extends Variants> = Record<
-  `${Variant}${VariantValues}`,
-  string
->
-
-const generateButtonThemeVars = <Variant extends Variants>({
-  style,
-  textColor,
-  ghostTextColor,
-  backgroundColor,
-  borderColor,
-  ghostBorderColor = borderColor
-}: {
-  style: Variant
-  textColor: string
-  ghostTextColor: string
-  backgroundColor: string
-  borderColor: string
-  ghostBorderColor?: string
-}) =>
-  ({
-    [`${style}Color`]: textColor,
-    [`${style}BorderColor`]: darken(borderColor, 10),
-    [`${style}Background`]: backgroundColor,
-    [`${style}HoverBackground`]: darken(backgroundColor, 10),
-    [`${style}ActiveBackground`]: darken(backgroundColor, 10),
-    [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(borderColor, 20)}`,
-
-    [`${style}GhostColor`]: ghostTextColor,
-    [`${style}GhostBorderColor`]: ghostBorderColor,
-    [`${style}GhostBackground`]: 'transparent',
-    [`${style}GhostHoverBackground`]: alpha(ghostTextColor, 10),
-    [`${style}GhostActiveBackground`]: 'transparent',
-    [`${style}GhostActiveBoxShadow`]: `${activeShadow} ${alpha(
-      ghostBorderColor,
-      28
-    )}`
-  } as VariantMap<Variant>)
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
@@ -94,37 +34,7 @@ const generateButtonThemeVars = <Variant extends Variants>({
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
-  const { borders, colors, forms, spacing, typography, key: themeName } = theme
-
-  const themeSpecificStyle: ThemeSpecificStyle<BaseButtonTheme> = {
-    canvas: {
-      ...generateButtonThemeVars({
-        style: 'primary',
-        backgroundColor: theme['ic-brand-button--primary-bgd']!,
-        borderColor: theme['ic-brand-button--primary-bgd']!,
-        textColor: theme['ic-brand-button--primary-text']!,
-        ghostTextColor: theme['ic-brand-button--primary-bgd']!
-      }),
-      primaryGhostHoverBackground: alpha(
-        theme['ic-brand-button--primary-bgd']!,
-        10
-      )
-    },
-    'canvas-high-contrast': {
-      secondaryBorderColor: colors?.borderMedium,
-      primaryInverseBorderColor: colors?.borderMedium
-    },
-    instructure: {
-      borderRadius: '999em',
-      smallPaddingTop: '0.5rem',
-      smallPaddingBottom: '0.4375rem',
-      mediumPaddingTop: '0.75rem',
-      mediumPaddingBottom: '0.75rem',
-      largePaddingTop: '1rem',
-      largePaddingBottom: '1rem',
-      largeFontSize: '1.125rem'
-    }
-  }
+  const { borders, colors, forms, spacing, typography } = theme
 
   const componentVariables: BaseButtonTheme = {
     transform: 'none',
@@ -163,63 +73,89 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     iconTextGap: spacing.xSmall,
     iconTextGapCondensed: spacing.xxSmall,
 
-    ...generateButtonThemeVars({
-      style: 'primary',
-      backgroundColor: colors?.backgroundBrand,
-      borderColor: colors?.borderBrand,
-      textColor: colors?.textLightest,
-      ghostTextColor: colors?.textBrand
-    }),
-
-    ...generateButtonThemeVars({
-      style: 'secondary',
-      backgroundColor: colors?.backgroundLight,
-      borderColor: colors?.borderLight,
-      ghostBorderColor: colors?.borderDarkest,
-      textColor: colors?.textDarkest,
-      ghostTextColor: colors?.textDarkest
-    }),
-
-    ...generateButtonThemeVars({
-      style: 'success',
-      backgroundColor: colors?.backgroundSuccess,
-      borderColor: colors?.borderSuccess,
-      textColor: colors?.textLightest,
-      ghostTextColor: colors?.textSuccess
-    }),
-
-    ...generateButtonThemeVars({
-      style: 'danger',
-      backgroundColor: colors?.backgroundDanger,
-      borderColor: colors?.borderDanger,
-      textColor: colors?.textLightest,
-      ghostTextColor: colors?.textDanger
-    }),
-
-    ...generateButtonThemeVars({
-      style: 'primaryInverse',
-      backgroundColor: colors?.backgroundLightest,
-      borderColor: colors?.borderLightest,
-      textColor: colors?.textDarkest,
-      ghostTextColor: colors?.textLightest
-    }),
-
-    // Overrides for primary-inverse to match what was previously the `light` button variant
-    primaryInverseBorderColor: darken(colors?.borderLight, 10),
-    primaryInverseHoverBackground: darken(colors?.backgroundLightest, 5),
-    primaryInverseActiveBackground: colors?.backgroundLightest,
-    primaryInverseActiveBoxShadow: `${activeShadow} ${darken(
-      colors?.borderLightest,
-      25
+    primaryColor: colors?.contrasts?.white1010,
+    primaryBorderColor: colors?.contrasts?.blue5782,
+    primaryBackground: colors?.contrasts?.blue4570,
+    primaryHoverBackground: colors?.contrasts?.blue5782,
+    primaryActiveBackground: colors?.contrasts?.blue5782,
+    primaryActiveBoxShadow: `${activeShadow} "#013451"}`,
+    primaryGhostColor: colors?.contrasts?.blue4570,
+    primaryGhostBorderColor: colors?.contrasts?.blue4570,
+    primaryGhostBackground: 'transparent',
+    primaryGhostHoverBackground: alpha(colors?.contrasts?.blue4570, 10),
+    primaryGhostActiveBackground: 'transparent',
+    primaryGhostActiveBoxShadow: `${activeShadow} ${alpha(
+      colors?.contrasts?.blue1212,
+      28
     )}`,
 
-    // Overrides for ghost hover states to ensure correct color contrast for a11y
-    successGhostHoverBackground: alpha(colors?.textSuccess, 1)
+    secondaryColor: colors?.contrasts?.grey125125,
+    secondaryBorderColor: colors?.contrasts?.grey1214,
+    secondaryBackground: colors?.contrasts?.grey1111,
+    secondaryHoverBackground: colors?.contrasts?.grey1214,
+    secondaryActiveBackground: colors?.contrasts?.grey1214,
+    secondaryActiveBoxShadow: `${activeShadow} ${colors?.contrasts?.white1010}`,
+    secondaryGhostColor: colors?.contrasts?.grey125125,
+    secondaryGhostBorderColor: colors?.contrasts?.grey125125,
+    secondaryGhostBackground: 'transparent',
+    secondaryGhostHoverBackground: alpha(colors?.contrasts?.grey125125, 10),
+    secondaryGhostActiveBackground: 'transparent',
+    secondaryGhostActiveBoxShadow: `${activeShadow} ${alpha(
+      colors?.contrasts?.grey125125,
+      28
+    )}`,
+
+    successColor: colors?.contrasts?.white1010,
+    successBorderColor: colors?.contrasts?.green5782,
+    successBackground: colors?.contrasts?.green4570,
+    successHoverBackground: colors?.contrasts?.green5782,
+    successActiveBackground: colors?.contrasts?.green5782,
+    successActiveBoxShadow: `${activeShadow} ${colors?.contrasts?.white1010}`,
+    successGhostColor: colors?.contrasts?.green4570,
+    successGhostBorderColor: colors?.contrasts?.green4570,
+    successGhostBackground: 'transparent',
+    successGhostHoverBackground: alpha(colors?.contrasts?.green4570, 10),
+    successGhostActiveBackground: 'transparent',
+    successGhostActiveBoxShadow: `${activeShadow} ${alpha(
+      colors?.contrasts?.green4570,
+      28
+    )}`,
+
+    dangerColor: colors?.contrasts?.white1010,
+    dangerBorderColor: colors?.contrasts?.red5782,
+    dangerBackground: colors?.contrasts?.red4570,
+    dangerHoverBackground: colors?.contrasts?.red5782,
+    dangerActiveBackground: colors?.contrasts?.red5782,
+    dangerActiveBoxShadow: `${activeShadow} ${colors?.contrasts?.white1010}`,
+    dangerGhostColor: colors?.contrasts?.red4570,
+    dangerGhostBorderColor: colors?.contrasts?.red4570,
+    dangerGhostBackground: 'transparent',
+    dangerGhostHoverBackground: alpha(colors?.contrasts?.red4570, 10),
+    dangerGhostActiveBackground: 'transparent',
+    dangerGhostActiveBoxShadow: `${activeShadow} ${alpha(
+      colors?.contrasts?.red4570,
+      28
+    )}`,
+
+    primaryInverseColor: colors?.contrasts?.grey125125,
+    primaryInverseBorderColor: colors?.contrasts?.grey1214,
+    primaryInverseBackground: colors?.contrasts?.white1010,
+    primaryInverseHoverBackground: colors?.contrasts?.grey1111,
+    primaryInverseActiveBackground: colors?.contrasts?.white1010,
+    primaryInverseActiveBoxShadow: `${activeShadow} ${colors?.contrasts?.white1010}`,
+    primaryInverseGhostColor: colors?.contrasts?.white1010,
+    primaryInverseGhostBorderColor: colors?.contrasts?.white1010,
+    primaryInverseGhostBackground: 'transparent',
+    primaryInverseGhostHoverBackground: alpha(colors?.contrasts?.white1010, 10),
+    primaryInverseGhostActiveBackground: 'transparent',
+    primaryInverseGhostActiveBoxShadow: `${activeShadow}  ${alpha(
+      colors?.contrasts?.white1010,
+      28
+    )}`
   }
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    ...componentVariables
   }
 }
 

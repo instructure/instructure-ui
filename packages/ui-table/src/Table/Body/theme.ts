@@ -37,8 +37,8 @@ const generateComponentTheme = (theme: Theme): TableBodyTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010
   }
 
   return {

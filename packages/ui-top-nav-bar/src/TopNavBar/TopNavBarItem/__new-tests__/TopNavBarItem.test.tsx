@@ -452,7 +452,7 @@ describe('<TopNavBarItem />', () => {
       //   const activeIndicatorStyle = await component.getActiveIndicatorStyle()
 
       //   expect(activeIndicatorStyle?.backgroundColor).to.equal(
-      //     'rgb(45, 59, 69)'
+      //     'rgb(39, 53, 64)'
       //   )
       // })
 
@@ -1350,7 +1350,7 @@ describe('<TopNavBarItem />', () => {
     //   expect(
     //     getComputedStyle(tooltipContent.getDOMNode().childNodes[0])
     //       .backgroundColor
-    //   ).to.equal('rgb(45, 59, 69)')
+    //   ).to.equal('rgb(39, 53, 64)')
     // })
   })
 
@@ -1531,11 +1531,11 @@ describe('<TopNavBarItem />', () => {
         expect(icon).toBeVisible()
         expect(icon).toHaveAttribute('name', 'IconSearch')
         // TODO convert to e2e
-        // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(45, 59, 69)')
+        // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(39, 53, 64)')
 
         const button = screen.getByRole('button')
         expect(button).toHaveTextContent('Menu Item')
-        expect(window.getComputedStyle(button).color).toEqual('rgb(45, 59, 69)')
+        expect(window.getComputedStyle(button).color).toEqual('rgb(39, 53, 64)')
       })
     })
 
@@ -1553,11 +1553,11 @@ describe('<TopNavBarItem />', () => {
         expect(icon).toBeVisible()
         expect(icon).toHaveAttribute('name', 'IconSearch')
         // TODO convert to e2e
-        // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(45, 59, 69)')
+        // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(39, 53, 64)')
 
         const button = screen.getByRole('button')
         expect(button).toHaveTextContent('Menu Item')
-        expect(window.getComputedStyle(button).color).toEqual('rgb(45, 59, 69)')
+        expect(window.getComputedStyle(button).color).toEqual('rgb(39, 53, 64)')
       })
 
       it('for button variant', () => {
