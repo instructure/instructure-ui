@@ -99,7 +99,18 @@ type DateInput2Props = {
    */
   onRequestHideCalendar?: (event: SyntheticEvent) => void
   /**
-   * The message shown to the user when the date is invalid.
+   * Callback fired when the input is blurred. Feedback should be provided
+   * to the user when this function is called if the selected date or input
+   * value is invalid. The component has an internal check whether the date can
+   * be parsed to a valid date.
+   */
+  onRequestValidateDate?: (
+    value?: string,
+    internalValidationPassed?: boolean
+  ) => void | FormMessage[]
+  /**
+   * The message shown to the user when the date is invalid. If this prop is not set, validation is bypassed.
+   * If it's set to an empty string, validation happens and the input border changes to red if validation hasn't passed.
    **/
   invalidDateErrorMessage?: string
   /**
@@ -165,6 +176,7 @@ const propTypes: PropValidators<PropKeys> = {
   messages: PropTypes.arrayOf(FormPropTypes.message),
   onRequestShowCalendar: PropTypes.func,
   onRequestHideCalendar: PropTypes.func,
+  onRequestValidateDate: PropTypes.func,
   invalidDateErrorMessage: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string

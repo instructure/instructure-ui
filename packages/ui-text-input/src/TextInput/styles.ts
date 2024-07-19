@@ -220,6 +220,11 @@ const generateStyle = (
       ...flexBase
     },
     afterElement: {
+      // TODO this is added for the case when there is an IconButton inside a TextInput (like in the DateInput2 component)
+      // and the button size makes the whole input 2px larger (because of the borders)
+      // this is not the best solution and in the long term we should work with the design team to figure out how to handle such cases
+      marginTop: '-1px',
+      marginBottom: '-1px',
       label: 'textInput__afterElement',
       ...flexItemBase,
       paddingInlineEnd: componentTheme.padding,

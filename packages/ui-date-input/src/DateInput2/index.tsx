@@ -56,17 +56,7 @@ function isValidMomentDate(
   return moment
     .tz(
       dateString,
-      [
-        moment.ISO_8601,
-        'llll',
-        'LLLL',
-        'lll',
-        'LLL',
-        'll',
-        'LL',
-        'l',
-        'L'
-      ],
+      [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'],
       locale,
       true,
       timezone
@@ -92,6 +82,7 @@ const DateInput2 = ({
   onChange,
   onBlur,
   withYearPicker,
+  onRequestValidateDate,
   invalidDateErrorMessage,
   locale,
   timezone,
@@ -130,6 +121,7 @@ const DateInput2 = ({
     })
     handleInputChange(e, formattedDate)
     setShowPopover(false)
+    onRequestValidateDate?.(formattedDate, true)
   }
 
   const validateInput = (onlyRemoveError = false): boolean => {
@@ -145,14 +137,16 @@ const DateInput2 = ({
       setInputMessages(messages || [])
       return true
     }
-    if (!onlyRemoveError) {
-      setInputMessages([
+    if (!onlyRemoveError && typeof invalidDateErrorMessage === 'string') {
+      setInputMessages((messages) => [
         {
           type: 'error',
-          text: invalidDateErrorMessage || '',
-        }
+          text: invalidDateErrorMessage
+        },
+        ...messages
       ])
     }
+
     return false
   }
 
@@ -176,17 +170,18 @@ const DateInput2 = ({
   }
 
   const handleBlur = (e: SyntheticEvent) => {
-    onBlur?.(e)
     const isInputValid = validateInput(false)
     if (isInputValid && value) {
-    const formattedDate = new Date(value).toLocaleDateString(getLocale(), {
-      month: 'long',
-      year: 'numeric',
-      day: 'numeric',
-      timeZone: getTimezone()
-    })
-    handleInputChange(e, formattedDate)
+      const formattedDate = new Date(value).toLocaleDateString(getLocale(), {
+        month: 'long',
+        year: 'numeric',
+        day: 'numeric',
+        timeZone: getTimezone()
+      })
+      handleInputChange(e, formattedDate)
     }
+    onRequestValidateDate?.(value, isInputValid)
+    onBlur?.(e)
   }
 
   return (

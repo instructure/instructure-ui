@@ -1,5 +1,5 @@
 ---
-describes: DateInput
+describes: DateInput2
 ---
 
 This component is an updated version of [`DateInput`](/#DateInput) that's easier to configure for developers, has a better UX, better accessibility features and a year picker. We recommend using this instead of `DateInput` which will be deprecated in the future.
@@ -74,7 +74,7 @@ This component is an updated version of [`DateInput`](/#DateInput) that's easier
           invalidDateErrorMessage="Invalid date"
           withYearPicker={{
             screenReaderLabel: 'Year picker',
-            startYear: 1999,
+            startYear: 1900,
             endYear: 2024
           }}
         />
@@ -103,7 +103,7 @@ This component is an updated version of [`DateInput`](/#DateInput) that's easier
         invalidDateErrorMessage="Invalid date"
         withYearPicker={{
           screenReaderLabel: 'Year picker',
-          startYear: 1999,
+          startYear: 1900,
           endYear: 2024
         }}
       />
@@ -112,3 +112,54 @@ This component is an updated version of [`DateInput`](/#DateInput) that's easier
 
   render(<Example />)
   ```
+
+### With custom validation
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [value, setValue] = useState('')
+  const [messages, setMessages] = useState([])
+
+  const handleDateValidation = (dateString, isValidDate) => {
+    if (!isValidDate) {
+      setMessages([{
+        type: 'error',
+        text: 'This is not a valid date'
+      }])
+    } else if (new Date(dateString) < new Date('January 1, 1900')) {
+      setMessages([{
+        type: 'error',
+        text: 'Use date after January 1, 1900'
+      }])
+    } else {
+      setMessages([])
+    }
+  }
+
+  return (
+    <DateInput2
+      renderLabel="Choose a date after January 1, 1900"
+      screenReaderLabels={{
+        calendarIcon: 'Calendar',
+        nextMonthButton: 'Next month',
+        prevMonthButton: 'Previous month'
+      }}
+      width="20rem"
+      value={value}
+      messages={messages}
+      onRequestValidateDate={handleDateValidation}
+      onChange={(e, value) => setValue(value)}
+      withYearPicker={{
+        screenReaderLabel: 'Year picker',
+        startYear: 1900,
+        endYear: 2024
+      }}
+    />
+  )
+}
+
+render(<Example />)
+```
