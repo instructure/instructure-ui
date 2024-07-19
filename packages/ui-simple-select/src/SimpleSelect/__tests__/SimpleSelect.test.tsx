@@ -345,10 +345,10 @@ describe('<SimpleSelect />', async () => {
     const itemIcons = await listbox.findAll('li [role="presentation"] svg')
 
     expect(getComputedStyle(itemIcons[0].getDOMNode()).fill).to.equal(
-      'rgb(252, 94, 19)'
+      'rgb(207, 74, 0)'
     )
     expect(getComputedStyle(itemIcons[1].getDOMNode()).fill).to.equal(
-      'rgb(3, 116, 181)'
+      'rgb(43, 122, 188)'
     )
   })
 

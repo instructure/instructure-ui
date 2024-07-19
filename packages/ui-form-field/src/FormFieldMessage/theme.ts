@@ -40,9 +40,9 @@ const generateComponentTheme = (theme: Theme): FormFieldMessageTheme => {
   }
 
   const componentVariables: FormFieldMessageTheme = {
-    colorHint: colors?.textDarkest,
-    colorError: colors?.textDanger,
-    colorSuccess: colors?.textSuccess,
+    colorHint: colors?.contrasts?.grey125125,
+    colorError: colors?.contrasts?.red4570,
+    colorSuccess: colors?.contrasts?.green4570,
 
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,

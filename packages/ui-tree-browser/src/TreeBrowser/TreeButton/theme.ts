@@ -44,23 +44,23 @@ const generateComponentTheme = (theme: Theme): TreeBrowserButtonTheme => {
   }
 
   const componentVariables: TreeBrowserButtonTheme = {
-    hoverBackgroundColor: colors?.backgroundBrand,
-    hoverTextColor: colors?.textLightest,
+    hoverBackgroundColor: colors?.contrasts?.blue4570,
+    hoverTextColor: colors?.contrasts?.white1010,
 
     focusOutlineWidth: borders?.widthMedium,
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineStyle: borders?.style,
 
-    iconColor: colors?.textDarkest,
+    iconColor: colors?.contrasts?.grey125125,
     iconsMarginRight: spacing?.xSmall,
 
     descriptorMarginTop: spacing?.xxxSmall,
-    descriptorTextColor: colors?.textDarkest,
+    descriptorTextColor: colors?.contrasts?.grey125125,
     descriptorFontSizeSmall: typography?.fontSizeXSmall,
     descriptorFontSizeMedium: typography?.fontSizeXSmall,
     descriptorFontSizeLarge: typography?.fontSizeSmall,
 
-    nameTextColor: colors?.textBrand,
+    nameTextColor: colors?.contrasts?.blue4570,
     nameFontSizeSmall: typography?.fontSizeXSmall,
     nameFontSizeMedium: typography?.fontSizeSmall,
     nameFontSizeLarge: typography?.fontSizeMedium,
@@ -71,12 +71,12 @@ const generateComponentTheme = (theme: Theme): TreeBrowserButtonTheme => {
 
     borderWidth: borders?.widthSmall,
     borderRadius: borders?.radiusMedium,
-    borderColor: colors?.borderDark,
+    borderColor: colors?.contrasts?.grey4570,
 
     textLineHeight: typography?.lineHeightCondensed,
 
-    selectedTextColor: colors?.textLightest,
-    selectedBackgroundColor: colors?.backgroundDark,
+    selectedTextColor: colors?.contrasts?.white1010,
+    selectedBackgroundColor: colors?.contrasts?.grey4570,
     selectedOutlineWidth: borders?.widthLarge
   }
 

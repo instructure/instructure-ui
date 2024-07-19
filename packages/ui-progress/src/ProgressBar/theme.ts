@@ -38,12 +38,12 @@ const generateComponentTheme = (theme: Theme): ProgressBarTheme => {
       meterColorBrand: theme['ic-brand-primary']
     },
     'canvas-high-contrast': {
-      meterColorBrandInverse: colors?.backgroundLightest,
-      meterColorSuccessInverse: colors?.backgroundLightest,
-      meterColorInfoInverse: colors?.backgroundLightest,
-      meterColorAlertInverse: colors?.backgroundLightest,
-      meterColorWarningInverse: colors?.backgroundLightest,
-      meterColorDangerInverse: colors?.backgroundLightest
+      meterColorBrandInverse: colors?.contrasts?.white1010,
+      meterColorSuccessInverse: colors?.contrasts?.white1010,
+      meterColorInfoInverse: colors?.contrasts?.white1010,
+      meterColorAlertInverse: colors?.contrasts?.white1010,
+      meterColorWarningInverse: colors?.contrasts?.white1010,
+      meterColorDangerInverse: colors?.contrasts?.white1010
     }
   }
 
@@ -69,32 +69,32 @@ const generateComponentTheme = (theme: Theme): ProgressBarTheme => {
 
     // variables are split out for inverse to allow
     // color value changes for inverse-high-constrast
-    meterColorBrand: colors?.backgroundBrand,
-    meterColorBrandInverse: colors?.backgroundBrand,
+    meterColorBrand: colors?.contrasts?.blue4570,
+    meterColorBrandInverse: colors?.contrasts?.blue4570,
 
-    meterColorInfo: colors?.backgroundInfo,
-    meterColorInfoInverse: colors?.backgroundInfo,
+    meterColorInfo: colors?.contrasts?.blue4570,
+    meterColorInfoInverse: colors?.contrasts?.blue4570,
 
-    meterColorSuccess: colors?.backgroundSuccess,
-    meterColorSuccessInverse: colors?.backgroundSuccess,
+    meterColorSuccess: colors?.contrasts?.green4570,
+    meterColorSuccessInverse: colors?.contrasts?.green4570,
 
-    meterColorDanger: colors?.backgroundDanger,
-    meterColorDangerInverse: colors?.backgroundDanger,
+    meterColorDanger: colors?.contrasts?.red4570,
+    meterColorDangerInverse: colors?.contrasts?.red4570,
 
-    meterColorAlert: colors?.backgroundAlert,
-    meterColorAlertInverse: colors?.backgroundAlert,
+    meterColorAlert: colors?.contrasts?.blue4570,
+    meterColorAlertInverse: colors?.contrasts?.blue4570,
 
-    meterColorWarning: colors?.backgroundWarning,
-    meterColorWarningInverse: colors?.backgroundWarning,
+    meterColorWarning: colors?.contrasts?.orange4570,
+    meterColorWarningInverse: colors?.contrasts?.orange4570,
 
     meterBorderWidthInverse: borders?.widthSmall,
     meterBorderColorInverse: 'transparent',
 
-    trackColor: colors?.backgroundLightest,
+    trackColor: colors?.contrasts?.white1010,
     trackColorInverse: 'transparent',
     trackBottomBorderWidth: borders?.widthSmall,
-    trackBottomBorderColor: colors?.borderMedium,
-    trackBottomBorderColorInverse: colors?.borderLightest
+    trackBottomBorderColor: colors?.contrasts?.grey1214,
+    trackBottomBorderColorInverse: colors?.contrasts?.white1010
   }
 
   return {
@@ -102,5 +102,4 @@ const generateComponentTheme = (theme: Theme): ProgressBarTheme => {
     ...themeSpecificStyle[themeName]
   }
 }
-
 export default generateComponentTheme

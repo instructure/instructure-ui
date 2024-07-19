@@ -15,96 +15,275 @@
   ],
   "exclude": ["__build__/**/*"],
   "references": [
-    { "path": "../canvas-high-contrast-theme/tsconfig.build.json" },
-    { "path": "../canvas-theme/tsconfig.build.json" },
-    { "path": "../console/tsconfig.build.json" },
-    { "path": "../debounce/tsconfig.build.json" },
-    { "path": "../emotion/tsconfig.build.json" },
-    { "path": "../instructure-theme/tsconfig.build.json" },
-    { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui/tsconfig.build.json" },
-    { "path": "../ui-a11y-content/tsconfig.build.json" },
-    { "path": "../ui-a11y-utils/tsconfig.build.json" },
-    { "path": "../ui-alerts/tsconfig.build.json" },
-    { "path": "../ui-avatar/tsconfig.build.json" },
-    { "path": "../ui-badge/tsconfig.build.json" },
-    { "path": "../ui-billboard/tsconfig.build.json" },
-    { "path": "../ui-breadcrumb/tsconfig.build.json" },
-    { "path": "../ui-buttons/tsconfig.build.json" },
-    { "path": "../ui-byline/tsconfig.build.json" },
-    { "path": "../ui-calendar/tsconfig.build.json" },
-    { "path": "../ui-checkbox/tsconfig.build.json" },
-    { "path": "../ui-code-editor/tsconfig.build.json" },
-    { "path": "../ui-color-utils/tsconfig.build.json" },
-    { "path": "../ui-date-input/tsconfig.build.json" },
-    { "path": "../ui-date-time-input/tsconfig.build.json" },
-    { "path": "../ui-dialog/tsconfig.build.json" },
-    { "path": "../ui-dom-utils/tsconfig.build.json" },
-    { "path": "../ui-drawer-layout/tsconfig.build.json" },
-    { "path": "../ui-drilldown/tsconfig.build.json" },
-    { "path": "../ui-editable/tsconfig.build.json" },
-    { "path": "../ui-expandable/tsconfig.build.json" },
-    { "path": "../ui-file-drop/tsconfig.build.json" },
-    { "path": "../ui-flex/tsconfig.build.json" },
-    { "path": "../ui-focusable/tsconfig.build.json" },
-    { "path": "../ui-form-field/tsconfig.build.json" },
-    { "path": "../ui-grid/tsconfig.build.json" },
-    { "path": "../ui-heading/tsconfig.build.json" },
-    { "path": "../ui-i18n/tsconfig.build.json" },
-    { "path": "../ui-icons/tsconfig.build.json" },
-    { "path": "../ui-img/tsconfig.build.json" },
-    { "path": "../ui-link/tsconfig.build.json" },
-    { "path": "../ui-list/tsconfig.build.json" },
-    { "path": "../ui-menu/tsconfig.build.json" },
-    { "path": "../ui-metric/tsconfig.build.json" },
-    { "path": "../ui-modal/tsconfig.build.json" },
-    { "path": "../ui-motion/tsconfig.build.json" },
-    { "path": "../ui-navigation/tsconfig.build.json" },
-    { "path": "../ui-number-input/tsconfig.build.json" },
-    { "path": "../ui-options/tsconfig.build.json" },
-    { "path": "../ui-overlays/tsconfig.build.json" },
-    { "path": "../ui-pages/tsconfig.build.json" },
-    { "path": "../ui-pagination/tsconfig.build.json" },
-    { "path": "../ui-pill/tsconfig.build.json" },
-    { "path": "../ui-popover/tsconfig.build.json" },
-    { "path": "../ui-portal/tsconfig.build.json" },
-    { "path": "../ui-position/tsconfig.build.json" },
-    { "path": "../ui-progress/tsconfig.build.json" },
-    { "path": "../ui-prop-types/tsconfig.build.json" },
-    { "path": "../ui-radio-input/tsconfig.build.json" },
-    { "path": "../ui-range-input/tsconfig.build.json" },
-    { "path": "../ui-rating/tsconfig.build.json" },
-    { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-responsive/tsconfig.build.json" },
-    { "path": "../ui-select/tsconfig.build.json" },
-    { "path": "../ui-selectable/tsconfig.build.json" },
-    { "path": "../ui-side-nav-bar/tsconfig.build.json" },
-    { "path": "../ui-simple-select/tsconfig.build.json" },
-    { "path": "../ui-source-code-editor/tsconfig.build.json" },
-    { "path": "../ui-spinner/tsconfig.build.json" },
-    { "path": "../ui-svg-images/tsconfig.build.json" },
-    { "path": "../ui-table/tsconfig.build.json" },
-    { "path": "../ui-tabs/tsconfig.build.json" },
-    { "path": "../ui-tag/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
-    { "path": "../ui-text/tsconfig.build.json" },
-    { "path": "../ui-text-area/tsconfig.build.json" },
-    { "path": "../ui-text-input/tsconfig.build.json" },
-    { "path": "../ui-themes/tsconfig.build.json" },
-    { "path": "../ui-time-select/tsconfig.build.json" },
-    { "path": "../ui-toggle-details/tsconfig.build.json" },
-    { "path": "../ui-tooltip/tsconfig.build.json" },
-    { "path": "../ui-top-nav-bar/tsconfig.build.json" },
-    { "path": "../ui-tray/tsconfig.build.json" },
-    { "path": "../ui-tree-browser/tsconfig.build.json" },
-    { "path": "../ui-truncate-list/tsconfig.build.json" },
-    { "path": "../ui-truncate-text/tsconfig.build.json" },
-    { "path": "../ui-utils/tsconfig.build.json" },
-    { "path": "../ui-view/tsconfig.build.json" },
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-eslint-config/tsconfig.build.json" },
-    { "path": "../ui-scripts/tsconfig.build.json" },
-    { "path": "../ui-stylelint-config/tsconfig.build.json" },
-    { "path": "../ui-webpack-config/tsconfig.build.json" }
+    {
+      "path": "../canvas-high-contrast-theme/tsconfig.build.json"
+    },
+    {
+      "path": "../canvas-theme/tsconfig.build.json"
+    },
+    {
+      "path": "../console/tsconfig.build.json"
+    },
+    {
+      "path": "../debounce/tsconfig.build.json"
+    },
+    {
+      "path": "../emotion/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-a11y-content/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-a11y-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-alerts/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-avatar/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-badge/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-billboard/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-breadcrumb/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-buttons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-byline/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-calendar/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-checkbox/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-code-editor/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-color-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-date-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-date-time-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-dialog/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-dom-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-drawer-layout/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-drilldown/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-editable/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-expandable/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-file-drop/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-flex/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-focusable/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-form-field/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-grid/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-heading/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-i18n/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-icons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-img/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-link/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-list/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-menu/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-metric/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-modal/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-motion/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-navigation/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-number-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-options/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-overlays/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-pages/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-pagination/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-pill/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-popover/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-portal/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-position/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-progress/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-prop-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-radio-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-range-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-rating/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-responsive/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-select/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-selectable/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-side-nav-bar/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-simple-select/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-source-code-editor/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-spinner/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-svg-images/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-table/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tabs/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tag/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-testable/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-text/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-text-area/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-text-input/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-themes/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-time-select/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-toggle-details/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tooltip/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-top-nav-bar/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tray/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tree-browser/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-truncate-list/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-truncate-text/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-view/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-eslint-config/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-scripts/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-stylelint-config/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-webpack-config/tsconfig.build.json"
+    }
   ]
 }

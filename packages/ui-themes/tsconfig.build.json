@@ -17,9 +17,6 @@
       "path": "../canvas-theme/tsconfig.build.json"
     },
     {
-      "path": "../instructure-theme/tsconfig.build.json"
-    },
-    {
       "path": "../shared-types/tsconfig.build.json"
     },
     {

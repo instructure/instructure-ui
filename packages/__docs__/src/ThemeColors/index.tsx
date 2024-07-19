@@ -37,7 +37,6 @@ import { ColorCard } from '../ColorCard'
 import { Heading } from '../Heading'
 
 import type { ThemeColorsProps, ThemeColorsState } from './props'
-import type { ColorCardProps } from '../ColorCard/props'
 
 class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
   constructor(props: ThemeColorsProps) {
@@ -50,9 +49,25 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
     }
   }
 
-  renderColorCards() {
+  groupColors() {
     const { colors } = this.props
 
+    return Object.keys(colors).reduce((res: any, color) => {
+      const category = color
+        .split('')
+        .filter((char) => isNaN(Number(char)))
+        .join('')
+
+      return {
+        ...res,
+        [category]: [...(res[category] ? res[category] : []), color]
+      }
+    }, {})
+  }
+
+  renderColorCards() {
+    const { colors } = this.props
+    const colorGroups = this.groupColors()
     return (
       <Responsive
         query={{
@@ -68,31 +83,28 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
           large: { colWidth: `${100 / 5}%`, minimal: false }
         }}
         render={(props) => {
-          const cards: React.ComponentElement<ColorCardProps, ColorCard>[] = []
-          Object.keys(colors).forEach((color) => {
-            cards.push(
-              <ColorCard
-                hex={colors[color]}
-                name={color}
-                minimal={props && props.minimal}
-              />
-            )
-          })
           return (
             <View as="div" padding="small">
               <Heading level="h3" as="h4">
-                theme palette
+                Color palette (Primitive colors)
               </Heading>
-              <Flex wrap="wrap">
-                {React.Children.map(cards, (child) => (
-                  <Flex.Item
-                    size={props && props.colWidth}
-                    padding="small xx-small"
-                  >
-                    {child}
-                  </Flex.Item>
-                ))}
-              </Flex>
+              {Object.keys(colorGroups).map((colorGroup) => (
+                <Flex key={colorGroup} wrap="wrap" margin="0 0 large 0">
+                  {colorGroups[colorGroup].map((color: string) => (
+                    <Flex.Item
+                      key={`${color}-flex`}
+                      size={props && props.colWidth}
+                      padding="small xx-small"
+                    >
+                      <ColorCard
+                        hex={colors[color]}
+                        name={color}
+                        minimal={props && props.minimal}
+                      />
+                    </Flex.Item>
+                  ))}
+                </Flex>
+              ))}
             </View>
           )
         }}
@@ -120,113 +132,8 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
     }
   }
 
-  renderContrastChecker() {
-    const { colors } = this.props
-    const { contrastRatio } = this.state
-    const values: string[] = []
-    const options = Object.keys(colors).map((color) => {
-      const val = colors[color]
-      if (values.indexOf(val) === -1) {
-        values.push(val)
-        return (
-          <SimpleSelect.Option
-            key={color}
-            id={val}
-            value={val}
-            renderBeforeLabel={() => <ColorSwatch color={val} />}
-          >
-            {color}
-          </SimpleSelect.Option>
-        )
-      }
-      return
-    })
-
-    const ratio = `${contrastRatio}:1`
-    const pass = (
-      <Text size="large" color="success">
-        PASS
-      </Text>
-    )
-    const fail = (
-      <Text size="large" color="danger">
-        FAIL
-      </Text>
-    )
-
-    const normalWCAG = {
-      canvascontrast: Number(contrastRatio) > 3.0,
-      aa: Number(contrastRatio) > 4.5
-    }
-
-    return (
-      <View as="div" padding="small small none">
-        <Heading level="h3" as="h4">
-          contrast
-        </Heading>
-        <Flex as="div" margin="small 0" alignItems="center" wrap="wrap">
-          <Flex.Item padding="small">
-            <SimpleSelect
-              name="color-1"
-              defaultValue={this.state.backgroundColor}
-              renderLabel="Background Color"
-              renderBeforeInput={
-                <ColorSwatch color={this.state.backgroundColor} />
-              }
-              onChange={(_e, { value }) =>
-                this.handleContrastChange(value ? `${value}` : '', 'background')
-              }
-            >
-              {React.Children.map(options, (option) => option)}
-            </SimpleSelect>
-          </Flex.Item>
-          <Flex.Item padding="small">
-            <SimpleSelect
-              name="color-2"
-              defaultValue={this.state.foregroundColor}
-              renderLabel="Foreground Color"
-              renderBeforeInput={
-                <ColorSwatch color={this.state.foregroundColor} />
-              }
-              onChange={(_e, { value }) =>
-                this.handleContrastChange(`${value}`, 'foreground')
-              }
-            >
-              {React.Children.map(options, (option) => option)}
-            </SimpleSelect>
-          </Flex.Item>
-          {this.state.contrastRatio && (
-            <Flex.Item padding="small">
-              <ContextView padding="small" placement="center start">
-                <MetricGroup>
-                  <Metric
-                    renderLabel={<div>Contrast Ratio</div>}
-                    renderValue={<Text size="large">{ratio}</Text>}
-                  />
-                  <Metric
-                    renderLabel={<div>Canvas 3:1</div>}
-                    renderValue={normalWCAG.canvascontrast ? pass : fail}
-                  />
-                  <Metric
-                    renderLabel={<div>WCAG AA</div>}
-                    renderValue={normalWCAG.aa ? pass : fail}
-                  />
-                </MetricGroup>
-              </ContextView>
-            </Flex.Item>
-          )}
-        </Flex>
-      </View>
-    )
-  }
-
   render() {
-    return (
-      <div>
-        {this.renderColorCards()}
-        {this.renderContrastChecker()}
-      </div>
-    )
+    return <div>{this.renderColorCards()}</div>
   }
 }
 

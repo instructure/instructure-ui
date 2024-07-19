@@ -46,12 +46,12 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeightCondensed,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
-    highlightedLabelColor: colors?.textLightest,
-    highlightedBackground: colors?.backgroundBrand,
-    selectedLabelColor: colors?.textLightest,
-    selectedBackground: colors?.backgroundDark,
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010,
+    highlightedLabelColor: colors?.contrasts?.white1010,
+    highlightedBackground: colors?.contrasts?.blue4570,
+    selectedLabelColor: colors?.contrasts?.white1010,
+    selectedBackground: colors?.contrasts?.grey4570,
 
     padding: `${spacing?.xSmall} ${spacing?.small}`,
     iconPadding: spacing?.small,
@@ -64,7 +64,7 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     descriptionFontWeight: typography.fontWeightNormal,
     descriptionLineHeight: typography.lineHeight,
     descriptionPaddingStart: '0.25em',
-    descriptionColor: colors.textDark
+    descriptionColor: colors?.contrasts?.grey4570
   }
 
   return {

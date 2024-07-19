@@ -30,7 +30,6 @@ import { Link } from '@instructure/ui-link'
 import { List } from '@instructure/ui-list'
 import { View } from '@instructure/ui-view'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { instructure } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { SpacingValues } from '@instructure/emotion'
 
@@ -164,7 +163,7 @@ class TableOfContents extends Component<
     })
 
     return (
-      <InstUISettingsProvider theme={instructure}>
+      <InstUISettingsProvider>
         <View as="div" margin="medium 0">
           <ToggleDetails
             summary="Table of Contents"

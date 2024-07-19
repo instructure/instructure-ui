@@ -47,6 +47,8 @@ import iconExample from './buildScripts/samplemedia/heart_lg.svg'
 import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
+// eslint-disable-next-line no-restricted-imports
+import ThemeColors from './src/ThemeColors'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -79,7 +81,8 @@ const globals = {
   ReactDOM,
   useEffect,
   useState,
-  useRef
+  useRef,
+  ThemeColors
 }
 
 Object.keys(globals).forEach((key) => {

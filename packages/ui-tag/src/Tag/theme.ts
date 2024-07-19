@@ -22,27 +22,8 @@
  * SOFTWARE.
  */
 
-import { darken } from '@instructure/ui-color-utils'
 import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { TagTheme } from '@instructure/shared-types'
-
-type Variants = 'default' | 'inline'
-
-type VariantValues =
-  | 'BackgroundHover'
-  | 'Background'
-  | 'BorderColor'
-  | 'BorderRadius'
-  | 'BorderStyle'
-  | 'BorderWidth'
-  | 'Color'
-  | 'IconColor'
-  | 'IconHoverColor'
-
-type VariantMap<Variant extends Variants> = Record<
-  `${Variant}${VariantValues}`,
-  string
->
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
@@ -54,8 +35,8 @@ const generateComponentTheme = (theme: Theme): TagTheme => {
 
   const themeSpecificStyle: ThemeSpecificStyle<TagTheme> = {
     'canvas-high-contrast': {
-      defaultBackground: colors.backgroundLightest,
-      defaultBorderColor: colors.borderDarkest
+      defaultBackground: colors?.contrasts?.white1010,
+      defaultBorderColor: colors?.contrasts?.grey125125
     },
     canvas: {
       focusOutlineColor: theme['ic-brand-primary'],
@@ -64,46 +45,6 @@ const generateComponentTheme = (theme: Theme): TagTheme => {
       defaultColor: theme['ic-brand-font-color-dark']
     }
   }
-
-  const tagVariant = function <Variant extends Variants>(
-    style: Variant,
-    {
-      borderColor,
-      borderRadius,
-      borderStyle,
-      borderWidth,
-      hoverColor,
-      iconColor,
-      iconHoverColor,
-      mainColor,
-      textColor
-    }: {
-      borderColor: string
-      mainColor: string
-      textColor: string
-      borderRadius?: string | 0
-      borderStyle?: string
-      borderWidth?: string | 0
-      hoverColor?: string
-      iconColor?: string
-      iconHoverColor?: string
-    }
-  ) {
-    return {
-      [`${style}BackgroundHover`]: hoverColor || darken(mainColor, 5),
-      [`${style}Background`]: mainColor,
-      [`${style}BorderColor`]: borderColor,
-      // For 'pill'-style rounded corners
-      // https://stackoverflow.com/questions/22578979/border-radius-50-vs-border-radius-999em
-      [`${style}BorderRadius`]: borderRadius || '999rem',
-      [`${style}BorderStyle`]: borderStyle || borders.style,
-      [`${style}BorderWidth`]: borderWidth || borders.widthSmall,
-      [`${style}Color`]: textColor,
-      [`${style}IconColor`]: iconColor || textColor,
-      [`${style}IconHoverColor`]: iconHoverColor || iconColor || textColor
-    } as VariantMap<Variant>
-  }
-
   const componentVariables: TagTheme = {
     fontFamily: typography.fontFamily,
     heightSmall: '1.3125rem', // matches Pill component height
@@ -114,29 +55,32 @@ const generateComponentTheme = (theme: Theme): TagTheme => {
     fontSizeLarge: typography.fontSizeMedium,
     padding: `0 ${spacing.xSmall}`,
     paddingSmall: `0 ${spacing.xSmall}`,
-    focusOutlineColor: colors.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineWidth: borders.widthMedium,
     focusOutlineStyle: borders.style,
     maxWidth: '10rem',
     iconMargin: spacing.xSmall,
     transitionTiming: '0.2s',
 
-    ...tagVariant('default', {
-      borderColor: colors.borderMedium,
-      iconColor: colors.textDarkest,
-      iconHoverColor: colors.textBrand,
-      mainColor: colors.textLight,
-      textColor: colors.textDarkest
-    }),
+    defaultBackgroundHover: colors?.contrasts?.grey1214,
+    defaultBackground: colors?.contrasts?.grey1111,
+    defaultBorderColor: colors?.contrasts?.grey1214,
+    defaultBorderRadius: '999rem',
+    defaultBorderStyle: borders.style,
+    defaultBorderWidth: borders.widthSmall,
+    defaultColor: colors?.contrasts?.grey125125,
+    defaultIconColor: colors?.contrasts?.grey125125,
+    defaultIconHoverColor: colors?.contrasts?.blue4570,
 
-    ...tagVariant('inline', {
-      borderColor: colors.borderDark,
-      borderRadius: borders.radiusMedium,
-      iconColor: colors.textDark,
-      iconHoverColor: colors.textDark,
-      mainColor: colors.textLightest,
-      textColor: colors.textDarkest
-    })
+    inlineBackgroundHover: colors?.contrasts?.grey1111,
+    inlineBackground: colors?.contrasts?.white1010,
+    inlineBorderColor: colors?.contrasts?.grey4570,
+    inlineBorderRadius: borders.radiusMedium,
+    inlineBorderStyle: borders.style,
+    inlineBorderWidth: borders.widthSmall,
+    inlineColor: colors?.contrasts?.grey125125,
+    inlineIconColor: colors?.contrasts?.grey4570,
+    inlineIconHoverColor: colors?.contrasts?.blue4570
   }
 
   return {

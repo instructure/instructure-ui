@@ -47,29 +47,29 @@ const generateComponentTheme = (theme: Theme): NumberInputTheme => {
 
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
     borderRadius: borders?.radiusMedium,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010,
 
     padding: `0 ${spacing?.small}`,
 
     arrowsContainerWidth: '2rem',
-    arrowsColor: colors?.textDarkest,
-    arrowsBackgroundColor: colors?.backgroundLight,
-    arrowsHoverBackgroundColor: colors?.backgroundMedium,
-    arrowsBorderColor: colors?.borderMedium,
-    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors?.borderMedium}`,
+    arrowsColor: colors?.contrasts?.grey125125,
+    arrowsBackgroundColor: colors?.contrasts?.grey1111,
+    arrowsHoverBackgroundColor: colors?.contrasts?.grey1214,
+    arrowsBorderColor: colors?.contrasts?.grey1214,
+    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors?.contrasts?.grey1214}`,
 
     focusOutlineWidth: borders?.widthMedium,
     focusOutlineStyle: borders?.style,
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
 
-    errorBorderColor: colors?.borderDanger,
-    errorOutlineColor: colors?.borderDanger,
+    errorBorderColor: colors?.contrasts?.red4570,
+    errorOutlineColor: colors?.contrasts?.red4570,
 
-    placeholderColor: colors?.textDark,
+    placeholderColor: colors?.contrasts?.grey4570,
 
     mediumFontSize: typography?.fontSizeMedium,
     mediumHeight: forms?.inputHeightMedium,

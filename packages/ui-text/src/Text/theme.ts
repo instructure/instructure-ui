@@ -43,17 +43,16 @@ const generateComponentTheme = (theme: Theme): TextTheme => {
   const componentVariables: TextTheme = {
     ...typography,
 
-    primaryInverseColor: colors?.textLightest,
-    primaryColor: colors?.textDarkest,
+    primaryInverseColor: colors?.contrasts?.white1010,
+    primaryColor: colors?.contrasts?.grey125125,
 
-    secondaryColor: colors?.textDark,
-    secondaryInverseColor: colors?.textLight,
+    secondaryColor: colors?.contrasts?.grey4570,
+    secondaryInverseColor: colors?.contrasts?.grey1111,
 
-    brandColor: colors?.textBrand,
-    dangerColor: colors?.textDanger,
-    successColor: colors?.textSuccess,
-    alertColor: colors?.textAlert,
-    warningColor: colors?.textWarning, // deprecated, remove in v9
+    brandColor: colors?.contrasts?.blue4570,
+    dangerColor: colors?.contrasts?.red4570,
+    successColor: colors?.contrasts?.green4570,
+    alertColor: colors?.contrasts?.blue4570,
 
     paragraphMargin: `${spacing.medium} 0`
   }

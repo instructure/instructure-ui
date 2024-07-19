@@ -52,22 +52,22 @@ const generateComponentTheme = (theme: Theme): SideNavBarItemTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
 
-    fontColor: colors?.textLightest,
+    fontColor: colors?.contrasts?.white1010,
     iconSize: '1.625rem',
-    iconColor: colors?.textLightest,
+    iconColor: colors?.contrasts?.white1010,
     lineHeight: typography?.lineHeight,
     backgroundColor: 'transparent',
     linkTextDecoration: 'none',
 
-    hoverBackgroundColor: colors?.backgroundDarkest,
-    outerFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderDarkest}`,
-    innerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderLightest}`,
+    hoverBackgroundColor: colors?.contrasts?.grey125125,
+    outerFocusOutline: `inset 0 0 0 0.125rem ${colors?.contrasts?.grey4570}`,
+    innerFocusOutline: `inset 0 0 0 0.25rem ${colors.contrasts?.white1010}`,
 
-    selectedFontColor: colors?.textBrand,
-    selectedIconColor: colors?.textBrand,
-    selectedBackgroundColor: colors?.backgroundLightest,
-    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderLightest}`,
-    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderBrand}`,
+    selectedFontColor: colors?.contrasts?.blue4570,
+    selectedIconColor: colors?.contrasts?.blue4570,
+    selectedBackgroundColor: colors?.contrasts?.white1010,
+    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors.contrasts?.white1010}`,
+    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors.contrasts?.blue4570}`,
 
     contentPadding: spacing?.xxSmall
   }

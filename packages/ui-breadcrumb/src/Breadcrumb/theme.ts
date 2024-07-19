@@ -35,7 +35,7 @@ const generateComponentTheme = (theme: Theme): BreadcrumbTheme => {
 
   const componentVariables: BreadcrumbTheme = {
     fontFamily: typography?.fontFamily,
-    separatorColor: colors?.borderDark,
+    separatorColor: colors?.contrasts?.grey4570,
 
     smallSeparatorFontSize: '0.5rem',
     smallFontSize: typography?.fontSizeSmall,

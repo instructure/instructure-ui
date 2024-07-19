@@ -42,16 +42,16 @@ const generateComponentTheme = (theme: Theme): SideNavBarTheme => {
   }
 
   const componentVariables: SideNavBarTheme = {
-    fontColor: colors?.textLightest,
-    backgroundColor: colors?.backgroundBrandSecondary,
+    fontColor: colors?.contrasts?.white1010,
+    backgroundColor: colors?.contrasts?.grey100100,
     width: '5.25rem',
     minimizedWidth: '3.375rem',
-    fill: colors?.textLightest,
+    fill: colors?.contrasts?.white1010,
 
     focusOutlineInnerWidth: borders?.widthMedium,
     focusOutlineOuterWidth: borders?.widthSmall,
-    focusOutlineInnerColor: colors?.borderBrand,
-    focusOutlineOuterColor: colors?.borderLightest,
+    focusOutlineInnerColor: colors?.contrasts?.blue4570,
+    focusOutlineOuterColor: colors?.contrasts?.white1010,
 
     marginBottom: spacing?.small,
     toggleTransition: transitions?.duration

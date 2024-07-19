@@ -43,28 +43,28 @@ const generateComponentTheme = (theme: Theme): TextAreaTheme => {
   const componentVariables: TextAreaTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
-    color: colors?.textDarkest,
+    color: colors?.contrasts?.grey125125,
 
-    background: colors?.backgroundLightest,
+    background: colors?.contrasts?.white1010,
 
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
-    borderTopColor: colors?.borderMedium,
-    borderRightColor: colors?.borderMedium,
-    borderBottomColor: colors?.borderMedium,
-    borderLeftColor: colors?.borderMedium,
+    borderTopColor: colors?.contrasts?.grey1214,
+    borderRightColor: colors?.contrasts?.grey1214,
+    borderBottomColor: colors?.contrasts?.grey1214,
+    borderLeftColor: colors?.contrasts?.grey1214,
     borderRadius: borders?.radiusMedium,
 
     padding: spacing?.small,
 
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineWidth: borders?.widthMedium,
     focusOutlineStyle: borders?.style,
 
-    errorBorderColor: colors?.borderDanger,
-    errorOutlineColor: colors?.borderDanger,
+    errorBorderColor: colors?.contrasts?.red4570,
+    errorOutlineColor: colors?.contrasts?.red4570,
 
-    placeholderColor: colors?.textDark,
+    placeholderColor: colors?.contrasts?.grey4570,
 
     smallFontSize: typography?.fontSizeSmall,
     smallHeight: forms?.inputHeightSmall,

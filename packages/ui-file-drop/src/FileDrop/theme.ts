@@ -41,14 +41,14 @@ const generateComponentTheme = (theme: Theme): FileDropTheme => {
   }
 
   const componentVariables: FileDropTheme = {
-    backgroundColor: colors?.backgroundLightest, // needed for testing
+    backgroundColor: colors?.contrasts?.white1010,
     borderRadius: borders?.radiusLarge,
     borderWidth: borders?.widthMedium,
     borderStyle: 'dashed',
-    borderColor: colors?.borderMedium,
-    hoverBorderColor: colors?.borderBrand,
-    acceptedColor: colors?.textBrand,
-    rejectedColor: colors?.textDanger
+    borderColor: colors?.contrasts?.grey1214,
+    hoverBorderColor: colors?.contrasts?.blue4570,
+    acceptedColor: colors?.contrasts?.blue4570,
+    rejectedColor: colors?.contrasts?.red4570
   }
 
   return {

@@ -35,12 +35,12 @@ const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
   const { colors, borders, stacking } = theme
 
   const componentVariables = {
-    indicatorBorderColor: colors.licorice,
+    indicatorBorderColor: colors?.contrasts?.grey125125,
 
-    checkerboardBackgroundImage: `linear-gradient(45deg, ${colors.tiara} 25%, transparent 25%),
-    linear-gradient(-45deg, ${colors.tiara} 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, ${colors.tiara} 75%),
-    linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
+    checkerboardBackgroundImage: `linear-gradient(45deg, ${colors?.contrasts?.grey1111} 25%, transparent 25%),
+    linear-gradient(-45deg, ${colors?.contrasts?.grey1111} 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, ${colors?.contrasts?.grey1111} 75%),
+    linear-gradient(-45deg, transparent 75%, ${colors?.contrasts?.grey1111} 75%)`,
     checkerboardBackgroundSize: '.5rem .5rem',
     checkerboardBackgroundPosition:
       '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',

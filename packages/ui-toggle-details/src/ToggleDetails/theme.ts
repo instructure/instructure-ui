@@ -45,7 +45,7 @@ const generateComponentTheme = (theme: Theme): ToggleDetailsTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeight,
-    textColor: colors?.textDarkest,
+    textColor: colors?.contrasts?.grey125125,
 
     fontSizeSmall: typography?.fontSizeSmall,
     fontSizeMedium: typography?.fontSizeMedium,
@@ -55,18 +55,18 @@ const generateComponentTheme = (theme: Theme): ToggleDetailsTheme => {
     mediumIconSize: '0.75rem',
     largeIconSize: '1rem',
     iconMargin: spacing?.xxSmall,
-    iconColor: colors?.textDarkest,
+    iconColor: colors?.contrasts?.grey125125,
 
     togglePadding: spacing?.xxSmall,
     toggleBorderRadius: borders?.radiusMedium,
     toggleBorderWidth: borders?.widthMedium,
     toggleBorderStyle: borders?.style,
-    toggleFocusBorderColor: colors?.borderBrand,
+    toggleFocusBorderColor: colors?.contrasts?.blue4570,
 
-    filledBackgroundColor: colors?.backgroundLight,
+    filledBackgroundColor: colors?.contrasts?.grey1111,
     filledBorderWidth: borders?.widthSmall,
     filledBorderStyle: borders?.style,
-    filledBorderColor: colors?.borderMedium,
+    filledBorderColor: colors?.contrasts?.grey1214,
     filledBorderRadius: borders?.radiusMedium,
     filledPadding: spacing?.small
   }

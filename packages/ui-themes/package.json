@@ -31,7 +31,6 @@
   "dependencies": {
     "@instructure/canvas-high-contrast-theme": "9.5.1",
     "@instructure/canvas-theme": "9.5.1",
-    "@instructure/instructure-theme": "9.5.1",
     "@instructure/shared-types": "9.5.1"
   },
   "publishConfig": {

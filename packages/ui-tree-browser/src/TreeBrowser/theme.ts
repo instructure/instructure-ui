@@ -36,7 +36,7 @@ const generateComponentTheme = (theme: Theme): TreeBrowserTheme => {
   const componentVariables: TreeBrowserTheme = {
     borderRadius: borders?.radiusMedium,
     focusOutlineWidth: borders?.widthMedium,
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineStyle: borders?.style
   }
 

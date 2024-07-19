@@ -43,7 +43,7 @@ const generateComponentTheme = (theme: Theme): MaskTheme => {
     zIndex: stacking.topmost,
     background: 'rgba(255, 255, 255, 0.75)',
     borderColor: 'transparent',
-    focusBorderColor: colors?.borderBrand,
+    focusBorderColor: colors?.contrasts?.blue4570,
     borderRadius: borders?.radiusMedium,
     borderWidth: borders?.widthSmall
   }

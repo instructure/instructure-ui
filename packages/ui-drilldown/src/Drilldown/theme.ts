@@ -35,7 +35,7 @@ const generateComponentTheme = (theme: Theme): DrilldownTheme => {
 
   const componentVariables: DrilldownTheme = {
     headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors.textLink,
+    headerActionColor: colors?.contrasts?.blue4570,
     labelInfoPadding: spacing?.small
   }
 

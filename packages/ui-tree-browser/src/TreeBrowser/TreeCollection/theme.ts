@@ -39,7 +39,7 @@ const generateComponentTheme = (theme: Theme): TreeBrowserCollectionTheme => {
     baseSpacingMedium: spacing?.small,
     baseSpacingLarge: '1rem',
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.borderDark
+    borderColor: colors?.contrasts?.grey4570
   }
 
   return {

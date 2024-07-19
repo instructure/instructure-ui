@@ -35,8 +35,8 @@ const generateComponentTheme = (theme: Theme): ColorMixerPaletteTheme => {
   const { colors, borders, stacking } = theme
 
   const componentVariables = {
-    indicatorBorderColor: colors.licorice,
-    whiteColor: colors.white,
+    indicatorBorderColor: colors?.contrasts?.grey125125,
+    whiteColor: colors?.contrasts?.white1010,
     colorIndicatorBorderColor,
     indicatorBorderWidth: borders.widthSmall,
     paletteBorderRadius: borders.radiusMedium,

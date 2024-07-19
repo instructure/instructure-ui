@@ -40,10 +40,10 @@ const generateComponentTheme = (
     smallViewportFontFamily: typography?.fontFamily,
     smallViewportFontWeight: typography?.fontWeightNormal,
 
-    smallViewportBackground: colors?.backgroundBrandSecondary,
-    smallViewportBackgroundInverse: colors?.backgroundLight,
+    smallViewportBackground: colors?.contrasts?.grey100100,
+    smallViewportBackgroundInverse: colors?.contrasts?.grey1111,
     smallViewportBottomBorder: 'none',
-    smallViewportBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
+    smallViewportBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.contrasts?.grey1214}`,
     smallViewportHeight: '3.5rem',
     smallViewportInlinePadding: `0.25rem`,
     smallViewportZIndex: stacking?.topmost + 1,

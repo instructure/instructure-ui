@@ -78,12 +78,12 @@ const generateComponentTheme = (theme: Theme): ProgressCircleTheme => {
       meterColorBrand: theme['ic-brand-primary']
     },
     'canvas-high-contrast': {
-      meterColorBrandInverse: colors?.backgroundLightest,
-      meterColorSuccessInverse: colors?.backgroundLightest,
-      meterColorInfoInverse: colors?.backgroundLightest,
-      meterColorAlertInverse: colors?.backgroundLightest,
-      meterColorWarningInverse: colors?.backgroundLightest,
-      meterColorDangerInverse: colors?.backgroundLightest
+      meterColorBrandInverse: colors?.contrasts?.white1010,
+      meterColorSuccessInverse: colors?.contrasts?.white1010,
+      meterColorInfoInverse: colors?.contrasts?.white1010,
+      meterColorAlertInverse: colors?.contrasts?.white1010,
+      meterColorWarningInverse: colors?.contrasts?.white1010,
+      meterColorDangerInverse: colors?.contrasts?.white1010
     }
   }
 
@@ -120,34 +120,34 @@ const generateComponentTheme = (theme: Theme): ProgressCircleTheme => {
     largeStrokeWidth: `${strokeWidth.large}em`,
     largeBorderOffset: `${borderOffsetRadius.large}em`,
 
-    color: colors?.textDarkest,
-    colorInverse: colors?.textLightest,
+    color: colors?.contrasts?.grey125125,
+    colorInverse: colors?.contrasts?.white1010,
 
-    trackColor: colors?.backgroundLightest,
+    trackColor: colors?.contrasts?.white1010,
     trackColorInverse: 'transparent',
 
-    trackBorderColor: colors?.borderMedium,
-    trackBorderColorInverse: colors?.borderLightest,
+    trackBorderColor: colors?.contrasts?.grey125125,
+    trackBorderColorInverse: colors?.contrasts?.white1010,
 
     // variables are split out for inverse to allow
     // color value changes for inverse-high-contrast
-    meterColorBrand: colors?.backgroundBrand,
-    meterColorBrandInverse: colors?.backgroundBrand,
+    meterColorBrand: colors?.contrasts?.blue4570,
+    meterColorBrandInverse: colors?.contrasts?.blue4570,
 
-    meterColorInfo: colors?.backgroundInfo,
-    meterColorInfoInverse: colors?.backgroundInfo,
+    meterColorInfo: colors?.contrasts?.blue4570,
+    meterColorInfoInverse: colors?.contrasts?.blue4570,
 
-    meterColorSuccess: colors?.backgroundSuccess,
-    meterColorSuccessInverse: colors?.backgroundSuccess,
+    meterColorSuccess: colors?.contrasts?.green4570,
+    meterColorSuccessInverse: colors?.contrasts?.green4570,
 
-    meterColorDanger: colors?.backgroundDanger,
-    meterColorDangerInverse: colors?.backgroundDanger,
+    meterColorDanger: colors?.contrasts?.red4570,
+    meterColorDangerInverse: colors?.contrasts?.red4570,
 
-    meterColorAlert: colors?.backgroundAlert,
-    meterColorAlertInverse: colors?.backgroundAlert,
+    meterColorAlert: colors?.contrasts?.blue4570,
+    meterColorAlertInverse: colors?.contrasts?.blue4570,
 
-    meterColorWarning: colors?.backgroundWarning,
-    meterColorWarningInverse: colors?.backgroundWarning
+    meterColorWarning: colors?.contrasts?.orange4570,
+    meterColorWarningInverse: colors?.contrasts?.orange4570
   }
 
   return {

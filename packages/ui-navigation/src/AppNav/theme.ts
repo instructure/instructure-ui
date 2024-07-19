@@ -36,7 +36,7 @@ const generateComponentTheme = (theme: Theme): AppNavTheme => {
   const componentVariables: AppNavTheme = {
     fontFamily: typography?.fontFamily,
     height: '3.75rem', // 60px per product design
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
     borderStyle: borders?.style,
     borderWidth: borders?.widthSmall,
     horizontalMargin: spacing?.xxSmall,

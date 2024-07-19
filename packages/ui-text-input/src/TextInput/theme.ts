@@ -46,22 +46,22 @@ const generateComponentTheme = (theme: Theme): TextInputTheme => {
 
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
     borderRadius: borders?.radiusMedium,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    color: colors?.contrasts?.grey125125,
+    background: colors?.contrasts?.white1010,
 
     padding: spacing?.small,
 
     focusOutlineWidth: borders?.widthMedium,
     focusOutlineStyle: borders?.style,
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
 
-    errorBorderColor: colors?.borderDanger,
-    errorOutlineColor: colors?.borderDanger,
+    errorBorderColor: colors?.contrasts?.red4570,
+    errorOutlineColor: colors?.contrasts?.red4570,
 
-    placeholderColor: colors?.textDark,
+    placeholderColor: colors?.contrasts?.grey4570,
 
     smallFontSize: typography?.fontSizeSmall,
     smallHeight: forms?.inputHeightSmall,

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { canvas, functionalColors } from '@instructure/ui-theme-tokens'
+import { canvas } from '@instructure/ui-theme-tokens'
 import { ThemeRegistry } from '@instructure/theme-registry'
 import { BaseTheme } from '@instructure/shared-types'
 
@@ -43,23 +43,24 @@ const key = 'canvas'
 
 const brandVariables = {
   /* Defaults for Canvas account branding variables: */
-  'ic-brand-primary': colors.textBrand,
-  'ic-brand-font-color-dark': colors.textDarkest,
+  'ic-brand-primary': colors?.contrasts?.blue4570,
+  'ic-brand-font-color-dark': colors?.contrasts?.grey125125,
 
-  'ic-link-color': colors.textLink,
+  'ic-link-color': colors?.contrasts?.blue4570,
   'ic-link-decoration': 'none',
 
-  'ic-brand-button--primary-bgd': colors.backgroundBrand,
-  'ic-brand-button--primary-text': colors.textLightest,
-  'ic-brand-button--secondary-bgd': colors.backgroundDarkest,
-  'ic-brand-button--secondary-text': colors.textLightest,
+  'ic-brand-button--primary-bgd': colors?.contrasts?.blue4570,
+  'ic-brand-button--primary-text': colors?.contrasts?.white1010,
+  'ic-brand-button--secondary-bgd': colors?.contrasts?.grey125125,
+  'ic-brand-button--secondary-text': colors?.contrasts?.white1010,
 
-  'ic-brand-global-nav-bgd': colors.backgroundBrandSecondary,
-  'ic-global-nav-link-hover': colors.backgroundDarkest,
-  'ic-brand-global-nav-ic-icon-svg-fill': colors.textLightest,
-  'ic-brand-global-nav-ic-icon-svg-fill--active': colors.textBrand,
-  'ic-brand-global-nav-menu-item__text-color': colors.textLightest,
-  'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
+  'ic-brand-global-nav-bgd': colors?.contrasts?.grey100100,
+  'ic-global-nav-link-hover': colors?.contrasts?.grey125125,
+  'ic-brand-global-nav-ic-icon-svg-fill': colors?.contrasts?.white1010,
+  'ic-brand-global-nav-ic-icon-svg-fill--active': colors?.contrasts?.blue4570,
+  'ic-brand-global-nav-menu-item__text-color': colors?.contrasts?.white1010,
+  'ic-brand-global-nav-menu-item__text-color--active':
+    colors?.contrasts?.blue4570
 }
 
 export type CanvasBrandVariables = typeof brandVariables
@@ -74,13 +75,13 @@ const __theme: CanvasTheme = {
   ...canvas,
   ...brandVariables
 }
+
 const theme = ThemeRegistry.registerTheme(__theme)
 
 export default theme
 export {
   theme,
   key,
-  functionalColors,
   borders,
   breakpoints,
   colors,

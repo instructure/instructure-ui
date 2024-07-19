@@ -48,23 +48,23 @@ const generateComponentTheme = (theme: Theme): RadioInputTheme => {
       labelColor: theme['ic-brand-font-color-dark']
     },
     'canvas-high-contrast': {
-      toggleBackgroundOff: colors?.backgroundDarkest
+      toggleBackgroundOff: colors?.contrasts?.grey125125
     }
   }
 
   const componentVariables: RadioInputTheme = {
-    labelColor: colors?.textDarkest,
+    labelColor: colors?.contrasts?.grey125125,
     labelFontFamily: typography?.fontFamily,
     labelFontWeight: typography?.fontWeightNormal,
     labelLineHeight: typography?.lineHeightCondensed,
 
-    background: colors?.backgroundLightest,
+    background: colors?.contrasts?.white1010,
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.borderMedium,
-    hoverBorderColor: colors?.borderDarkest,
+    borderColor: colors?.contrasts?.grey1214,
+    hoverBorderColor: colors?.contrasts?.grey125125,
     controlSize: '0.1875rem',
 
-    focusBorderColor: colors?.borderBrand,
+    focusBorderColor: colors?.contrasts?.blue4570,
     focusBorderWidth: borders?.widthMedium,
     focusBorderStyle: borders?.style,
 
@@ -81,11 +81,11 @@ const generateComponentTheme = (theme: Theme): RadioInputTheme => {
 
     toggleBorderRadius: borders?.radiusSmall,
     toggleBorderWidth: borders?.widthLarge,
-    toggleBackgroundSuccess: colors?.backgroundSuccess,
-    toggleBackgroundOff: colors?.backgroundDark,
-    toggleBackgroundDanger: colors?.backgroundDanger,
-    toggleBackgroundWarning: colors?.backgroundWarning,
-    toggleHandleText: colors?.textLightest,
+    toggleBackgroundSuccess: colors?.contrasts?.green4570,
+    toggleBackgroundOff: colors?.contrasts?.green4570,
+    toggleBackgroundDanger: colors?.contrasts?.orange4570,
+    toggleBackgroundWarning: colors?.contrasts?.orange4570,
+    toggleHandleText: colors?.contrasts?.white1010,
 
     toggleSmallHeight: forms?.inputHeightSmall,
     toggleMediumHeight: forms?.inputHeightMedium,

@@ -22,16 +22,46 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  presets: [
-    [
-      require('@instructure/ui-babel-preset'),
-      {
-        coverage: Boolean(process.env.COVERAGE),
-        esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
-      }
-    ]
-  ]
+import { Primitives } from '@instructure/shared-types'
+
+const primitives: Primitives = {
+  white: '#FFFFFF',
+
+  grey11: '#F2F4F4',
+  grey12: '#E8EAEC',
+  grey14: '#D7DADE',
+  grey24: '#9EA6AD',
+  grey45: '#6A7883',
+  grey57: '#586874',
+  grey70: '#4A5B68',
+  grey82: '#3F515E',
+  grey100: '#334451',
+  grey125: '#273540',
+
+  blue12: '#E0EBF5',
+  blue45: '#2B7ABC',
+  blue57: '#0E68B3',
+  blue70: '#0A5A9E',
+  blue82: '#09508C',
+
+  green12: '#DCEEE4',
+  green45: '#03893D',
+  green57: '#027634',
+  green70: '#02672D',
+  green82: '#015B28',
+
+  orange12: '#FCE5D9',
+  orange30: '#F06E26',
+  orange45: '#CF4A00',
+  orange57: '#B34000',
+  orange70: '#9C3800',
+  orange82: '#8B3200',
+
+  red12: '#FCE4E5',
+  red45: '#E62429',
+  red57: '#C71F23',
+  red70: '#AE1B1F',
+  red82: '#9B181C'
 }
+
+export default primitives

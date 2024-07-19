@@ -41,8 +41,8 @@ const generateComponentTheme = (theme: Theme): BylineTheme => {
 
   const componentVariables: BylineTheme = {
     fontFamily: typography?.fontFamily,
-    background: colors?.backgroundLightest,
-    color: colors?.textDarkest,
+    background: colors?.contrasts?.white1010,
+    color: colors?.contrasts?.grey125125,
 
     figureMargin: spacing?.small,
     titleMargin: `0 0 ${spacing?.xSmall} 0`,

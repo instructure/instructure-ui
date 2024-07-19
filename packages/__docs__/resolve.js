@@ -207,10 +207,6 @@ module.exports = {
       __dirname,
       '../canvas-high-contrast-theme/src/'
     ),
-    '@instructure/instructure-theme$': path.resolve(
-      __dirname,
-      '../instructure-theme/src/'
-    ),
     '@instructure/ui-react-utils$': path.resolve(
       __dirname,
       '../ui-react-utils/src/'

@@ -39,8 +39,8 @@ const generateComponentTheme = (theme: Theme): PreviewTheme => {
   return {
     padding: spacing?.small,
     borderRadius: borders?.radiusMedium,
-    backgroundColorLight: colors?.backgroundLightest,
-    backgroundColorInverse: colors?.backgroundDarkest,
+    backgroundColorLight: colors?.contrasts?.white1010,
+    backgroundColorInverse: colors?.contrasts?.grey125125,
     borderWidth: borders?.widthSmall,
     borderColor: '#eee',
     gradientCheckerboardSize: '1rem',
@@ -60,9 +60,9 @@ const generateComponentTheme = (theme: Theme): PreviewTheme => {
       ${colorCheckerboardInverse}`,
     fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
     fontSizeError: typography?.fontSizeSmall,
-    backgroundError: colors?.backgroundDanger,
-    colorError: colors?.textLightest,
-    toolbarColor: colors?.textLightest,
+    backgroundError: colors?.contrasts?.red4570,
+    colorError: colors?.contrasts?.white1010,
+    toolbarColor: colors?.contrasts?.white1010,
     toolbarBackground: '#0084D1'
   }
 }

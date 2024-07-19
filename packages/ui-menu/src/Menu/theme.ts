@@ -36,11 +36,11 @@ const generateComponentTheme = (theme: Theme): MenuTheme => {
   const componentVariables: MenuTheme = {
     minWidth: breakpoints?.xxSmall,
     maxWidth: breakpoints?.xSmall,
-    background: colors?.backgroundLightest,
+    background: colors?.contrasts?.white1010,
     borderRadius: borders?.radiusMedium,
     focusBorderStyle: borders?.style,
     focusBorderWidth: borders?.widthMedium,
-    focusBorderColor: colors?.borderBrand,
+    focusBorderColor: colors?.contrasts?.blue4570,
     focusBorderRadius: borders?.radiusMedium
   }
 
