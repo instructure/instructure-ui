@@ -78,7 +78,7 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     primaryBackground: colors?.contrasts?.blue4570,
     primaryHoverBackground: colors?.contrasts?.blue5782,
     primaryActiveBackground: colors?.contrasts?.blue5782,
-    primaryActiveBoxShadow: `${activeShadow} "#013451"}`,
+    primaryActiveBoxShadow: `${activeShadow} ${colors?.contrasts?.white1010}`,
     primaryGhostColor: colors?.contrasts?.blue4570,
     primaryGhostBorderColor: colors?.contrasts?.blue4570,
     primaryGhostBackground: 'transparent',
