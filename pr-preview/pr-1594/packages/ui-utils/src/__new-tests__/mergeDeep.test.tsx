@@ -1,0 +1,133 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import '@testing-library/jest-dom'
+import { mergeDeep } from '../mergeDeep'
+
+describe('mergeDeep', () => {
+  it('should merge object properties without affecting any object', () => {
+    const obj1 = { a: 0, b: 1 }
+    const obj2 = { c: 2, d: 3 }
+    const obj3 = { a: 4, d: 5 }
+
+    const expected = { a: 4, b: 1, c: 2, d: 5 }
+
+    expect(mergeDeep({}, obj1, obj2, obj3)).toStrictEqual(expected)
+    expect(obj1).not.toStrictEqual(expected)
+    expect(obj2).not.toStrictEqual(expected)
+    expect(obj3).not.toStrictEqual(expected)
+  })
+
+  it('should do a deep merge', () => {
+    const obj1 = { a: { b: 1, c: 1, d: { e: 1, f: 1 } } }
+    const obj2 = { a: { b: 2, d: { f: 'f' } } }
+
+    expect(mergeDeep(obj1, obj2)).toStrictEqual({
+      a: { b: 2, c: 1, d: { e: 1, f: 'f' } }
+    })
+  })
+
+  it('should not merge strings', () => {
+    const obj1 = { a: 'foo' }
+    const obj2 = { a: { b: 2, d: { f: 'f' } } }
+    const obj3 = { a: 'bar' }
+
+    const result = mergeDeep(obj1, obj2, obj3)
+
+    expect(result.a).toEqual('bar')
+  })
+
+  it('should clone objects during merge', () => {
+    const obj1 = { a: { b: 1 } }
+    const obj2 = { a: { c: 2 } }
+
+    const result = mergeDeep({}, obj1, obj2)
+
+    expect(result).toStrictEqual({ a: { b: 1, c: 2 } })
+    expect(result.a).not.toStrictEqual(obj1.a)
+    expect(result.a).not.toStrictEqual(obj2.a)
+  })
+
+  it('should not merge an object into an array', () => {
+    const obj1 = { a: { b: 1 } }
+    const obj2 = { a: ['foo', 'bar'] }
+
+    const result = mergeDeep({}, obj1, obj2)
+
+    expect(result).toStrictEqual({ a: ['foo', 'bar'] })
+  })
+
+  it('should deep clone arrays during merge', () => {
+    const obj1 = { a: [1, 2, [3, 4]] }
+    const obj2 = { b: [5, 6] }
+
+    const result = mergeDeep(obj1, obj2)
+
+    expect(result.a).toStrictEqual([1, 2, [3, 4]])
+    expect(result.a[2]).toStrictEqual([3, 4])
+    expect(result.b).toStrictEqual(obj2.b)
+  })
+
+  it('should union when both values are array', () => {
+    const obj1 = { a: [1, 2, [3, 4]] }
+    const obj2 = { a: [5, 6] }
+
+    const result = mergeDeep(obj1, obj2)
+
+    expect(result.a).toStrictEqual([1, 2, [3, 4], 5, 6])
+    expect(result.a[2]).toStrictEqual([3, 4])
+  })
+
+  it('should union when the first value is an array', () => {
+    const obj1 = { a: [1, 2, [3, 4]] }
+    const obj2 = { a: 5 }
+    const obj3 = { a: 6 }
+
+    const result = mergeDeep(obj1, obj2, obj3)
+
+    expect(result.a).toStrictEqual([1, 2, [3, 4], 5, 6])
+    expect(result.a[2]).toStrictEqual([3, 4])
+  })
+
+  it('should uniquify array values', () => {
+    const obj1 = { a: ['foo'] }
+    const obj2 = { a: ['bar'] }
+    const obj3 = { a: 'foo' }
+
+    const result = mergeDeep(obj1, obj2, obj3)
+
+    expect(result.a).toStrictEqual(['foo', 'bar'])
+  })
+
+  it('should copy source properties', () => {
+    expect(mergeDeep({ test: true }).test).toBe(true)
+  })
+
+  it('should not clone objects created with custom constructor', () => {
+    function TestType() {}
+    // @ts-expect-error intentional "new"
+    const func = new TestType()
+    expect(mergeDeep(func)).toEqual(func)
+  })
+})

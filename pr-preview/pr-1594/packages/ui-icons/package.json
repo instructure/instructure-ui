@@ -1,0 +1,42 @@
+{
+  "name": "@instructure/ui-icons",
+  "version": "9.3.0",
+  "description": "Icon set for Instructure, Inc. products",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "clean": "gulp clean && ui-scripts clean",
+    "prepare-build": "npm run build-icons",
+    "build-icons": "ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js && gulp",
+    "build": "ui-scripts build __build__ --copy-files --modules es,cjs",
+    "export": "npm run build-icons && npm run build:types",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "9.3.0",
+    "@instructure/ui-icons-build": "9.3.0",
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.5",
+    "@instructure/ui-svg-images": "9.3.0",
+    "prop-types": "^15.8.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8 <=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

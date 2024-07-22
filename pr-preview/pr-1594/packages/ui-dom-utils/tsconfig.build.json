@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "outDir": "./types",
+    "composite": true,
+    "rootDir": "./src"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/__tests__/**/*"],
+  "references": [
+    { "path": "../ui-babel-preset/tsconfig.build.json" },
+    { "path": "../console/tsconfig.build.json" },
+    { "path": "../shared-types/tsconfig.build.json" }
+  ]
+}

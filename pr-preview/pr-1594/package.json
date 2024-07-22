@@ -1,0 +1,128 @@
+{
+  "name": "instructure-ui",
+  "description": "A design system by Instructure Inc.",
+  "private": true,
+  "version": "9.3.0",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.design",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prestart": "npm run bootstrap",
+    "start": "npm run start --workspace=docs-app",
+    "start:watch": "npm run start:watch --workspace=docs-app",
+    "dev": "npm run start:watch",
+    "test:patchset": "npm-run-all lint:commit lint:changes test:vitest test test:jest",
+    "pretest:merge": "npm run bootstrap && npm run check",
+    "test:merge": "npm-run-all lint:commit lint test",
+    "test:all": "npm-run-all test:jest test",
+    "test:watch": "ui-scripts test --watch --no-headless",
+    "test:changes": "ui-scripts test --changed --randomize",
+    "test": "ui-scripts test --randomize",
+    "test:jest": "lerna run test:jest --stream",
+    "cy:component": "cypress run --component",
+    "test:vitest": "vitest --watch=false",
+    "test:vitest-watch": "vitest",
+    "lint": "lerna run lint --stream",
+    "lint:changes": "npm run lint -- --since HEAD^",
+    "lint:fix": "lerna run lint:fix --stream",
+    "lint:commit": "commitlint --from=HEAD^1",
+    "lint:staged": "lint-staged",
+    "update:package:list": "lerna run generate:package:list --stream --scope @instructure/instui-config",
+    "commit:package:list": "git add packages/instui-config/package-lists/**/package-list.json",
+    "generate:component": "npm run instui create component --workspace=@instructure/instui-cli",
+    "generate:package": "npm run instui create package --workspace=@instructure/instui-cli",
+    "bootstrap": "node scripts/bootstrap.js",
+    "build": "lerna run build --stream",
+    "build:watch": "lerna run build:watch --stream",
+    "build:docs": "lerna run bundle --stream --scope docs-app",
+    "build:tokens": "ui-scripts generate-all-tokens",
+    "build:types": "tsc -b tsconfig.references.json",
+    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && npm run build:types --verbose",
+    "clean": "node scripts/clean.js",
+    "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
+    "bump": "ui-scripts bump",
+    "release": "ui-scripts publish",
+    "dev:examples": "lerna run start:watch --stream --scope docs-examples",
+    "prestart:examples": "npm run bootstrap",
+    "start:examples": "lerna run start --stream --scope docs-examples",
+    "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged ts:check:references",
+    "husky:pre-push": "npm run lint:commit",
+    "build-storybook": "lerna run bundle --stream --scope docs-examples",
+    "postinstall": "husky",
+    "ts:check": "lerna run ts:check --stream",
+    "ts:check:references": "node scripts/checkTSReferences.js"
+  },
+  "license": "MIT",
+  "resolutions": {
+    "react": "^18",
+    "react-dom": "^18",
+    "@types/react": "^18",
+    "@storybook/react/webpack": "^5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.8.1",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^14.3.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react-dom": "^18.3",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "chai": "^4.4.1",
+    "chalk": "^4.1.2",
+    "commitizen": "^4.3.0",
+    "cross-spawn": "^7.0.3",
+    "cypress": "^13.13.0",
+    "cypress-real-events": "^1.13.0",
+    "esbuild": "^0.23.0",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.11",
+    "lerna": "^7.4.2",
+    "lint-staged": "^15.2.7",
+    "npm-run-all": "^4.1.5",
+    "react": "^18.3.1",
+    "typescript": "5.5.3",
+    "vitest": "^2.0.2",
+    "webpack": "^5.92.1"
+  },
+  "//dependency-comments": {
+    "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",
+    "chalk": "Chalk 5 is ESM. (used here by the scripts/ folder)",
+    "lerna": "Lerna 8.1.6 doesnt seem to work, we're hitting this fixed(?) bug: https://github.com/lerna/lerna/issues/4005"
+  },
+  "engines": {
+    "node": ">=18",
+    "yarn": "YARN NO LONGER USED - use npm instead."
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@instructure/cz-lerna-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint",
+      "prettier --write"
+    ],
+    "*.css": [
+      "stylelint"
+    ],
+    "*.{json,jsx,md,mdx,html}": [
+      "prettier --write"
+    ]
+  },
+  "browserslist": [
+    "extends @instructure/browserslist-config-instui"
+  ]
+}

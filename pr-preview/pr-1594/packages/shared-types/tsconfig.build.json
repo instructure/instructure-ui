@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "outDir": "./types",
+    "rootDir": "./src",
+    "composite": true
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@instructure/shared-types",
+  "version": "9.3.0",
+  "description": "Shared TypeScript typings for Instructure UI packages.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "homepage": "https://instructure.design/#shared-types",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "types": "types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instructure/instructure-ui.git"
+  },
+  "scripts": {
+    "lint": "ui-scripts lint",
+    "lint:fix": "ui-scripts lint --fix",
+    "build:types": "tsc -p tsconfig.build.json"
+  },
+  "bugs": {
+    "url": "https://github.com/instructure/instructure-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8 <=18"
+  }
+}

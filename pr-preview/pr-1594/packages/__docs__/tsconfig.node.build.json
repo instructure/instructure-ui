@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.node.json",
+  "compilerOptions": {
+    "declarationDir": "./types",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "outDir": "./lib",
+    "resolveJsonModule": true
+  },
+  "include": ["buildScripts/**/*"]
+}
