@@ -1,0 +1,19 @@
+name: Deploy docs from master commit
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci && npm run bootstrap
+      - name: Build docs-app
+        run: npm run build:docs
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./packages/__docs__/__build__
+          branch: gh-pages
+          clean-exclude: pr-preview
+          force: false

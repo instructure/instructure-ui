@@ -8,43 +8,13 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
-        name: Install Node 20
+        name: Install Node 22
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
-      - name: Install netlify-cli
-        run: npm install --save-dev netlify-cli@13.2.2
       - name: Install dependencies
         run: npm ci
       - name: Bootstrap project
         run: npm run bootstrap
       - name: Run test for the patchset
-        run: USE_REACT_STRICT_MODE=1 npm run test:patchset
-# commented out because our danger script needs the same version of yarn on master and on a branch.
-# TODO uncomment when this PR is merged
-#      - name: Calculate bundle size
-#        run: yarn danger ci
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build docs-app
-        run: npm run build:docs
-      - name: Deploy preview docs
-        # only run this step if the PR is not from a fork since repository
-        # secrets are not passed to forks and we need the repo secrets for the below steps
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        id: deploy_to_netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        # set <preview_url> variable to be available for the following steps
-        run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ --alias ${{ github.event.pull_request.number }} | grep "Website Draft URL" | awk '{print $4}')"
-      - name: Add Comment to PR with the preview URL
-        # only run this step if the previous step has not failed
-        # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
-        if: ${{ steps.deploy_to_netlify.outcome == 'success' }}
-        uses: mshick/add-pr-comment@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]'
-          message: |
-            Preview URL: ${{ steps.deploy_to_netlify.outputs.preview_url }}
+        run: USE_REACT_STRICT_MODE=1 npm run test:patchset # TODO run individual checks and tests instead so when one fails the cause is easier to track down
