@@ -1,5 +1,0 @@
-# Ignore all ejs files:
-*.ejs
-# Ignore codemod test files
-*.input.js
-*.output.js

@@ -1,7 +1,0 @@
-[build]
-  publish = "packages/__docs__/__build__"
-  command = "npm run bootstrap && npm run build:docs"
-
-[context.production]
-  # ignore the build & deploy from the master branch
-  ignore = "git diff HEAD master --quiet --exit-code"

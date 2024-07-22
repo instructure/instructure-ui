@@ -1,7 +1,0 @@
-lib/
-types/
-node_modules/
-npm-debug.log
-__build__/
-.babel-cache/
-docs-data.json
