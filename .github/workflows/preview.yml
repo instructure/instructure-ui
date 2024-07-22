@@ -15,10 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run bootstrap
+      - name: Build docs-app
+        run: npm run build:docs
         if: github.event.action != 'closed'
       - uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: .
+          source-dir: ./packages/__docs__/__build__
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
