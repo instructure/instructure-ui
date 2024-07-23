@@ -7,9 +7,5 @@
     "outDir": "./types"
   },
   "include": ["lib"],
-  "references": [
-    {
-      "path": "../babel-plugin-transform-imports/tsconfig.build.json"
-    }
-  ]
+  "references": []
 }
