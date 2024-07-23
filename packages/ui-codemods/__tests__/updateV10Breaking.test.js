@@ -22,21 +22,27 @@
  * SOFTWARE.
  */
 
-import updatePropNames from './updatePropNames'
-import updateImports from './updateImports'
-import updateV7Props from './updateV7Props'
-import updateV8Breaking from './updateV8Breaking'
-import UpdateV8ReactDOM from './updateV8ReactDOM'
-import updateV9Breaking from './updateV9Breaking'
-import updateV10Breaking from './updateV10Breaking'
+const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
-export {
-  updatePropNames,
-  updateImports,
-  updateV7Props,
-  updateV8Breaking,
-  UpdateV8ReactDOM,
-  updateV9Breaking,
-  updateV10Breaking
-}
-export default updatePropNames
+const tests = ['colors', 'colors2']
+
+// eslint-disable-next-line no-undef
+jest.autoMockOff()
+
+describe('updateV10Breaking', () => {
+  tests.forEach((test) => {
+    defineTest(
+      __dirname,
+      'lib/updateV10Breaking',
+      undefined,
+      `updateV10Breaking/colors`
+    )
+  })
+  defineTest(
+    __dirname,
+    'lib/updateV10Breaking',
+    {},
+    `updateV10Breaking/colors2`,
+    { parser: 'tsx' }
+  )
+})
