@@ -22,21 +22,33 @@
  * SOFTWARE.
  */
 
-import updatePropNames from './updatePropNames'
-import updateImports from './updateImports'
-import updateV7Props from './updateV7Props'
-import updateV8Breaking from './updateV8Breaking'
-import UpdateV8ReactDOM from './updateV8ReactDOM'
-import updateV9Breaking from './updateV9Breaking'
-import updateV10Breaking from './updateV10Breaking'
+import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
+import { writeWarningsToFile } from './helpers/codemodHelpers'
+import formatSource from './utils/formatSource'
+import { updateToV10Colors } from './utils/updateToV10Colors'
 
-export {
-  updatePropNames,
-  updateImports,
-  updateV7Props,
-  updateV8Breaking,
-  UpdateV8ReactDOM,
-  updateV9Breaking,
-  updateV10Breaking
+export default function updateV10Breaking(
+  file: FileInfo,
+  api: API,
+  options?: { fileName: string; usePrettier?: boolean }
+) {
+  const j = api.jscodeshift
+  const root = j(file.source)
+  const hasModifications = doUpdate(j, root, file.path)
+  if (options && options.fileName) {
+    writeWarningsToFile(options.fileName)
+  }
+
+  if (hasModifications) {
+    const shouldUsePrettier = options?.usePrettier !== false
+    return shouldUsePrettier
+      ? formatSource(root.toSource(), file.path)
+      : root.toSource()
+  } else {
+    return null
+  }
 }
-export default updatePropNames
+
+function doUpdate(j: JSCodeshift, root: Collection, filePath: string) {
+  return updateToV10Colors(j, root, filePath)
+}
