@@ -39,8 +39,8 @@ import type { ViewOwnProps } from '@instructure/ui-view'
 
 type OnMenuItemSelect = (
   e: React.MouseEvent<ViewOwnProps>,
-  value: MenuItemOwnProps['value'],
-  selected: MenuItemOwnProps['selected'],
+  value: MenuItemProps['value'],
+  selected: MenuItemProps['selected'],
   args: MenuItem
 ) => void
 
@@ -74,8 +74,20 @@ type MenuItemOwnProps = {
    * the element type to render as (will default to `<a>` if href is provided)
    */
   as?: AsElementType
+  /**
+   * How this component should be rendered. If it's `checkbox` or `radio` it will
+   * display a checkmark based on its own 'selected' state, if it's `flyout` it will
+   * render an arrow after the label.
+   */
   type?: 'button' | 'checkbox' | 'radio' | 'flyout'
+  /**
+   * Arbitrary value that you can store in this component. Is sent out by the
+   * `onSelect` event
+   */
   value?: string | number
+  /**
+   * Value of the `href` prop that will be put on the underlying DOM element.
+   */
   href?: string
 }
 
