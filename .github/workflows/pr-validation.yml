@@ -1,7 +1,14 @@
 name: AUTO Pull Request validation
 on: [pull_request]
 jobs:
-  pr_validation:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint commit
+        run: npm run lint:commit
+      - name: Lint code
+        run: npm run lint:changes
+  setup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,13 +23,17 @@ jobs:
         run: npm ci
       - name: Bootstrap project
         run: npm run bootstrap
-      - name: Lint commit
-        run: npm run lint:commit
-      - name: Lint code
-        run: npm run lint:changes
+  vitest-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Run vitest unit tests
+        run: npm run test:vitest
+  legacy-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: Run legacy unit tests
         run: npm run test
       - name: Run legacy jest tests
         run: npm run test:jest
-      - name: Run vitest unit tests
-        run: npm run test:vitest
