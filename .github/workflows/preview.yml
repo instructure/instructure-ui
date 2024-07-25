@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci && npm run bootstrap
+      - name: Npm install and bootstrap
+        run: npm ci && npm run bootstrap
+        if: github.event.action != 'closed' # don't run install and bootstrap unnecessarily when pr is closed
       - name: Build docs-app
         run: npm run build:docs
         if: github.event.action != 'closed'
