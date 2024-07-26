@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
+
+
+### Features
+
+* **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
+
+
+
+
+
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 

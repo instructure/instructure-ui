@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
+
+
+### Bug Fixes
+
+* **ui-menu:** menuItem's onSelect type did not expose its value and selected types ([c58fff8](https://github.com/instructure/instructure-ui/commit/c58fff8736ac430a8992bce1caa11bf3a1f3f5b7))
+
+
+### Features
+
+* **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
+
+
+
+
+
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 
