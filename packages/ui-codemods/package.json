@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-codemods",
-  "version": "9.4.0",
+  "version": "9.5.0",
   "description": "Codemod scripts to help upgrade Instructure UI libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "9.4.0",
+    "@instructure/ui-babel-preset": "9.5.0",
     "@types/jscodeshift": "^0.11.11",
     "@types/prettier": "^2.7.3",
     "jest": "^29.7.0"

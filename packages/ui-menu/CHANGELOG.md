@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
+
+
+### Bug Fixes
+
+* **ui-menu:** menuItem's onSelect type did not expose its value and selected types ([c58fff8](https://github.com/instructure/instructure-ui/commit/c58fff8736ac430a8992bce1caa11bf3a1f3f5b7))
+
+
+
+
+
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
 
