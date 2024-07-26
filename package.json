@@ -60,8 +60,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.24.7",
-    "@commitlint/cli": "^17.8.1",
-    "@commitlint/config-conventional": "^17.8.1",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@testing-library/dom": "^9.3.4",

@@ -10,7 +10,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "generate:package:list": "./scripts/generate-package-list-command.mjs"
+    "generate:package:list": "node ./scripts/generate-package-list-command.mjs"
   },
   "license": "MIT",
   "publishConfig": {
