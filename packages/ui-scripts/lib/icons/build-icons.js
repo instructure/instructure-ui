@@ -28,6 +28,7 @@ import process from 'process'
 import getGlyphData from './get-glyph-data.js'
 import generateReactComponents from './generate-react-components.js'
 import generateSvgIndex from './generate-svg-index.js'
+import { pathToFileURL } from 'url'
 
 export default {
   command: 'build-icons',
@@ -42,9 +43,9 @@ export default {
   },
   handler: async (argv) => {
     const configFile = path.join(process.cwd(), argv.config)
-    const config = await import(configFile)
+    const configFileURL = pathToFileURL(configFile)
+    const config = await import(configFileURL)
     const svgSourceDir = path.join(process.cwd(), config.source)
-
     const svgoConfigFile =
       argv.svgoConfig && path.join(process.cwd(), argv.svgoConfig)
     const svgoConfigOption = svgoConfigFile ? ['--config', svgoConfigFile] : []
