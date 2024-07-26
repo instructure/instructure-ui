@@ -1,7 +1,5 @@
 name: AUTO npm release, docs deploy and ssr regression - on master
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
   push:
     branches:
       - master
@@ -10,19 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     name: Release to npm
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - name: Install packages.
         run: npm ci
       - name: Set up project.
         run: npm run bootstrap
       - name: Run tests.
-        run: USE_REACT_STRICT_MODE=0 npm run test:patchset
+        run: USE_REACT_STRICT_MODE=0 npm run test && npm run test:vitest && npm run test:jest && npm run cy:component
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
