@@ -29,11 +29,8 @@ import React, { Component } from 'react'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console'
-import {
-  contrast as getContrast,
-  colorToRGB,
-  colorToHex8
-} from '@instructure/ui-color-utils'
+import { contrast as getContrast } from '@instructure/ui-color-utils'
+import conversions from '@instructure/ui-color-utils'
 import type { RGBAType } from '@instructure/ui-color-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -169,15 +166,19 @@ class ColorContrast extends Component<ColorContrastProps> {
   //We project the firstColor onto an opaque white background, then we project the secondColor onto
   //the projected first color. We calculate the contrast of these two, projected colors.
   get calcContrast() {
-    const c1RGBA = colorToRGB(this.props.firstColor)
-    const c2RGBA = colorToRGB(this.props.secondColor)
+    const c1RGBA = conversions.colorToRGB(this.props.firstColor)
+    const c2RGBA = conversions.colorToRGB(this.props.secondColor)
     const c1OnWhite = this.calcBlendedColor(
       { r: 255, g: 255, b: 255, a: 1 },
       c1RGBA
     )
     const c2OnC1OnWhite = this.calcBlendedColor(c1OnWhite, c2RGBA)
 
-    return getContrast(colorToHex8(c1OnWhite), colorToHex8(c2OnC1OnWhite), 2)
+    return getContrast(
+      conversions.colorToHex8(c1OnWhite),
+      conversions.colorToHex8(c2OnC1OnWhite),
+      2
+    )
   }
 
   render() {

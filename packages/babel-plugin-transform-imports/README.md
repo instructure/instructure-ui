@@ -21,6 +21,8 @@ Note that any default imports you are currently using will not be transformed:
 import Text from '@instructure/ui-elements/lib/Text'
 ```
 
+Note that this plugin will fail if the exported name is not the filename! This means that it cannot handle multiple exports from the same file.
+
 [![npm][npm]][npm-url]
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]

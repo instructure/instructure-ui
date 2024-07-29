@@ -31,7 +31,7 @@ import '@testing-library/jest-dom'
 // eslint-disable-next-line no-restricted-imports
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { color2hex, colorToRGB } from '@instructure/ui-color-utils'
+import conversions from '@instructure/ui-color-utils'
 
 import ColorPickerExamples from '../__examples__/ColorPicker.examples'
 import type { ColorPickerProps } from '../props'
@@ -56,8 +56,12 @@ describe('<ColorPicker />', () => {
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
-    consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {}) as any
-    consoleWarningMock = vi.spyOn(console, 'warn').mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
   })
 
   afterEach(() => {
@@ -507,7 +511,7 @@ describe('<ColorPicker />', () => {
         const greenInput = screen.getByLabelText(
           'Green input'
         ) as HTMLInputElement
-        const convertedColor = colorToRGB(`#${color}`)
+        const convertedColor = conversions.colorToRGB(`#${color}`)
 
         const actualColor = {
           r: parseInt(redInput.value),
@@ -563,7 +567,7 @@ describe('<ColorPicker />', () => {
 
         fireEvent.click(addBtn)
 
-        expect(onChange).toHaveBeenCalledWith(color2hex(rgb))
+        expect(onChange).toHaveBeenCalledWith(conversions.color2hex(rgb))
       })
     })
   })
