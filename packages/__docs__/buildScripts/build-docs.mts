@@ -37,7 +37,7 @@ import type {
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
 import { createRequire } from "module"
-import { fileURLToPath } from 'url'
+import { fileURLToPath, pathToFileURL } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -112,6 +112,12 @@ const pathsToIgnore = [
   '**/regression-test/**',
   '**/packages/cz-lerna-changelog/**'
 ]
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  // This line is executed if this file is run directly in Node, see
+  // https://stackoverflow.com/a/75760840
+  buildDocs()
+}
 
 function buildDocs() {
   // eslint-disable-next-line no-console
