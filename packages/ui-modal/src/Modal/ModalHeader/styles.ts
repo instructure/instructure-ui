@@ -74,6 +74,8 @@ const generateStyle = (
 
   return {
     modalHeader: {
+      borderTopLeftRadius: 'inherit',
+      borderTopRightRadius: 'inherit',
       label: 'modalHeader',
       boxSizing: 'border-box',
       flex: '0 0 auto',
