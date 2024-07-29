@@ -88,6 +88,10 @@ type MenuItemOwnProps = {
    * Value of the `href` prop that will be put on the underlying DOM element.
    */
   href?: string
+  /**
+   * Where to display the linked URL, as the name for a browsing context (a tab, window, or <iframe>).
+   */
+  target?: string
 }
 
 type PropKeys = keyof MenuItemOwnProps
@@ -115,7 +119,8 @@ const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
   type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  href: PropTypes.string
+  href: PropTypes.string,
+  target: PropTypes.string,
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -132,7 +137,8 @@ const allowedProps: AllowedPropKeys = [
   'as',
   'type',
   'value',
-  'href'
+  'href',
+  'target'
 ]
 type MenuItemState = {
   selected: boolean

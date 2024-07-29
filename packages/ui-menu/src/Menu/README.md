@@ -53,7 +53,7 @@ class Example extends React.Component {
         mountNode={() => document.getElementById('main')}
       >
         <Menu.Item value="mastery">Learning Mastery</Menu.Item>
-        <Menu.Item href="https://instructure.github.io/instructure-ui/">Default (Grid view)</Menu.Item>
+        <Menu.Item href="https://instructure.github.io/instructure-ui/" target="_blank">Default (Grid view)</Menu.Item>
         <Menu.Item disabled>Individual (List view)</Menu.Item>
         <Menu label="More Options">
           <Menu.Group
