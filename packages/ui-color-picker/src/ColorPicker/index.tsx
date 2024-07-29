@@ -30,12 +30,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import {
-  colorToHex8,
-  isValid,
-  contrast as getContrast
-} from '@instructure/ui-color-utils'
-
+import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
+import conversions from '@instructure/ui-color-utils'
 import { TextInput } from '@instructure/ui-text-input'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Button, IconButton } from '@instructure/ui-buttons'
@@ -444,7 +440,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           children(
             `#${this.mixedColorWithStrippedAlpha}`,
             (newColor: string) => {
-              this.setState({ mixedColor: colorToHex8(newColor).slice(1) })
+              this.setState({
+                mixedColor: conversions.colorToHex8(newColor).slice(1)
+              })
             },
             () => {
               this.setState({
@@ -470,7 +468,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           <ColorMixer
             value={`#${this.state.mixedColor}`}
             onChange={(newColor: string) =>
-              this.setState({ mixedColor: colorToHex8(newColor).slice(1) })
+              this.setState({
+                mixedColor: conversions.colorToHex8(newColor).slice(1)
+              })
             }
             withAlpha={this.props.colorMixerSettings.colorMixer.withAlpha}
             rgbRedInputScreenReaderLabel={

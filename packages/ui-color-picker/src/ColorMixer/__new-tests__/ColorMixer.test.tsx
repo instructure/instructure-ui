@@ -32,7 +32,7 @@ import '@testing-library/jest-dom'
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { deepEqual } from '@instructure/ui-utils'
-import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
+import conversions from '@instructure/ui-color-utils'
 
 import { ColorMixer } from '../'
 import ColorMixerExamples from '../__examples__/ColorMixer.examples'
@@ -73,7 +73,9 @@ describe('<ColorMixer />', () => {
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
-    consoleWarningMock = vi.spyOn(console, 'warn').mockImplementation(() => {}) as any
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
   })
 
   afterEach(() => {
@@ -195,7 +197,7 @@ describe('<ColorMixer />', () => {
         const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
-        const colorHex = colorToHex8({ r, g, b, a })
+        const colorHex = conversions.colorToHex8({ r, g, b, a })
         expect(colorHex).toBe(color)
       })
     })
@@ -217,7 +219,7 @@ describe('<ColorMixer />', () => {
         const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
-        const rgba = colorToRGB(colorInput)
+        const rgba = conversions.colorToRGB(colorInput)
         rgba.a = Math.round(rgba.a * 100)
         expect(deepEqual(rgba, { r, g, b, a })).toBe(true)
       })
@@ -238,7 +240,7 @@ describe('<ColorMixer />', () => {
       const [r, g, b, a] = inputs.map((input: any) =>
         Number(input.getAttribute('value'))
       )
-      const colorHex = colorToHex8({ r, g, b, a })
+      const colorHex = conversions.colorToHex8({ r, g, b, a })
       expect(colorHex).toBe('#000000FF')
 
       await waitFor(() => {
