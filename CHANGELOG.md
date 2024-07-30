@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
+
+
+### Bug Fixes
+
+* **ui-color-picker,ui-color-utils:** fix corrupted CJS build ([e1016be](https://github.com/instructure/instructure-ui/commit/e1016be3bc32307f8b05fdf1d4176e4915cc8dd6))
+* **ui-modal:** inherit border radius for ModalHeader ([03cf94d](https://github.com/instructure/instructure-ui/commit/03cf94d2d2a2c8f639c9e23eb9af78e38945db60))
+
+
+
+
+
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only
