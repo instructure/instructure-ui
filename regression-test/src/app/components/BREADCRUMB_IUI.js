@@ -28,7 +28,7 @@ import React from 'react'
 const BREADCRUMB_IUI = () => {
   return (
     <Breadcrumb label="You are here:">
-      <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">
+      <Breadcrumb.Link href="https://instructure.design">
         English 204
       </Breadcrumb.Link>
       <Breadcrumb.Link
@@ -38,7 +38,7 @@ const BREADCRUMB_IUI = () => {
       >
         Exploring John Updike
       </Breadcrumb.Link>
-      <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">
+      <Breadcrumb.Link href="https://instructure.design">
         The Rabbit Novels
       </Breadcrumb.Link>
       <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
