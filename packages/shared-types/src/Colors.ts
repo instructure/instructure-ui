@@ -24,6 +24,8 @@
 
 type Primitives = {
   white: string
+  white10op75: string
+
   grey11: string
   grey12: string
   grey14: string
@@ -33,6 +35,7 @@ type Primitives = {
   grey70: string
   grey82: string
   grey100: string
+  grey100op75: string
   grey125: string
 
   blue12: string
@@ -63,6 +66,8 @@ type Primitives = {
 
 type Contrasts = {
   white1010: Primitives['white']
+  white1010op75: Primitives['white10op75']
+
   grey1111: Primitives['grey11']
   grey1214: Primitives['grey12'] | Primitives['grey14']
   grey1424: Primitives['grey14'] | Primitives['grey24']
@@ -70,6 +75,7 @@ type Contrasts = {
   grey4570: Primitives['grey45'] | Primitives['grey70']
   grey5782: Primitives['grey57'] | Primitives['grey82']
   grey100100: Primitives['grey100']
+  grey100100op75: Primitives['grey100op75']
   grey125125: Primitives['grey125']
 
   blue1212: Primitives['blue12']
@@ -109,8 +115,12 @@ type UI = {
   textWarning: Contrasts['orange4570']
   textError: Contrasts['red4570']
 
-  stroke: Contrasts['grey1424']
-  divider: Contrasts['grey1214']
+  lineStroke: Contrasts['grey1424']
+  lineDivider: Contrasts['grey1214']
+
+  surfaceOverlayGrey: Contrasts['grey100100op75']
+  surfaceOverlayWhite: Contrasts['white1010op75']
+  surfaceDivider: Contrasts['grey1424']
 }
 
 type Colors = {
