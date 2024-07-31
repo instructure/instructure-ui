@@ -86,6 +86,17 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV9Breaking.ts <pa
 
 This codemod addresses breaking changes following a v9 upgrade. Notably, it updates `EmotionThemeProvider` to `InstUISettingsProvider`. Execute this in your project post-upgrade to InstUI v9. Prettier is turned on by default for output formatting, and you can also use the `usePrettier` flag. Additionally, the parser flag can specify the parser for jsx and tsx files.
 
+### Codemod for changing the color palette to the v10 color palette
+
+```sh
+---
+type: code
+---
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV10Breaking.ts <path> --parser=tsx --usePrettier=false
+```
+
+This codemod updates the `canvas` and `canvas-high-contrast` color palettes. Execute this in your project post-upgrade to InstUI v10. Prettier is turned on by default for output formatting, and you can also use the `usePrettier` flag. Additionally, the parser flag can specify the parser for jsx and tsx files.
+
 ### Codemod for adding a wrapper to ReactDOM.render()
 
 ```sh
