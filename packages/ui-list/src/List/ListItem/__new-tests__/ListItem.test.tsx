@@ -23,30 +23,25 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 
-import { InlineListItem } from '../index'
-import { InlineListItemLocator } from '../InlineListItemLocator'
+import { ListItem } from '../index'
 
-describe('<InlineListItem />', async () => {
+describe('<ListItem />', () => {
   it('should render children', async () => {
-    await mount(<InlineListItem>hello</InlineListItem>)
-    const listItem = await InlineListItemLocator.find()
-    expect(await listItem.find(':contains(hello)')).to.exist()
-  })
+    render(<ListItem>hello</ListItem>)
+    const listItem = screen.getByRole('listitem')
 
-  it('should render delimiter', async () => {
-    await mount(<InlineListItem delimiter="slash">List item</InlineListItem>)
-    const listItem = await InlineListItemLocator.find()
-    expect(await listItem.find('[aria-hidden="true"]')).to.exist()
+    expect(listItem).toHaveTextContent('hello')
   })
 
   it('should call elementRef', async () => {
-    const elementRef = stub()
-    await mount(
-      <InlineListItem elementRef={elementRef}>List item</InlineListItem>
-    )
-    const listItem = await InlineListItemLocator.find()
-    expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())
+    const elementRef = vi.fn()
+    render(<ListItem elementRef={elementRef}>List item</ListItem>)
+    const listItem = screen.getByRole('listitem')
+
+    expect(elementRef).toHaveBeenCalledWith(listItem)
   })
 })

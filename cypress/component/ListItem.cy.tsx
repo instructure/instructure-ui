@@ -21,19 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import React from 'react'
+import 'cypress-real-events'
 
-import { InlineList } from './index'
+import { ListItem } from '../../packages/ui'
+import '../support/component'
 
-import { InlineListItemLocator } from './InlineListItem/InlineListItemLocator'
+describe('<ListItem/>', () => {
+  it('should not render delimiter by default', async () => {
+    cy.mount(
+      <div>
+        <ListItem>List item 1</ListItem>
+        <ListItem>List item 2</ListItem>
+      </div>
+    )
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const InlineListLocator = locator(InlineList.selector, {
-  findAllItems: (...args: any[]) => {
-    return InlineListItemLocator.findAll(...args)
-  },
+    cy.contains('List item 2').should('have.css', 'border-top-style', 'none')
+  })
 
-  findItem: (...args: any[]) => {
-    return InlineListItemLocator.find(...args)
-  }
+  it('should render delimiter', async () => {
+    cy.mount(
+      <div>
+        <ListItem>List item 1</ListItem>
+        <ListItem delimiter="solid">List item 2</ListItem>
+      </div>
+    )
+
+    cy.contains('List item 2').should('have.css', 'border-top-style', 'solid')
+  })
 })

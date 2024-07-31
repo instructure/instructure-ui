@@ -23,14 +23,34 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 
 import { InlineList } from '../index'
-import { InlineListLocator } from '../InlineListLocator'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
-describe('<InlineList />', async () => {
+describe('<InlineList />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as any
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as any
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render list items and filter out null/falsy children', async () => {
-    await mount(
+    render(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -40,14 +60,13 @@ describe('<InlineList />', async () => {
         {false && <InlineList.Item>ignore me 2</InlineList.Item>}
       </InlineList>
     )
+    const listItems = screen.getAllByRole('listitem')
 
-    const list = await InlineListLocator.find()
-    const listItems = await list.findAllItems()
-    expect(listItems.length).to.equal(4)
+    expect(listItems.length).toEqual(4)
   })
 
   it('should render a delimiter when delimiter="pipe"', async () => {
-    await mount(
+    const { container } = render(
       <InlineList delimiter="pipe">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -55,16 +74,18 @@ describe('<InlineList />', async () => {
         <InlineList.Item>List item 4</InlineList.Item>
       </InlineList>
     )
+    const delimiters = container.querySelectorAll('span[aria-hidden="true"]')
 
-    const list = await InlineListLocator.find()
-    const delimiters = await list.findAll('[aria-hidden="true"]')
-    expect(delimiters.length).to.equal(4)
+    expect(delimiters.length).toEqual(4)
+    delimiters.forEach((delimiter) => {
+      expect(delimiter.getAttribute('class')).toContain(
+        'inlineListItem__delimiter'
+      )
+    })
   })
 
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
-    const consoleError = stub(console, 'error')
-    const warning = `Warning: [InlineList] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
-    await mount(
+    render(
       <InlineList delimiter="pipe" itemSpacing="large">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -72,12 +93,13 @@ describe('<InlineList />', async () => {
         <InlineList.Item>List item 4</InlineList.Item>
       </InlineList>
     )
+    const warning = `Warning: [InlineList] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
 
-    expect(consoleError).to.be.calledWith(warning)
+    expect(consoleErrorMock.mock.calls[0][0]).toBe(warning)
   })
 
   it('should render an ordered list', async () => {
-    await mount(
+    render(
       <InlineList as="ol">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -85,12 +107,13 @@ describe('<InlineList />', async () => {
         <InlineList.Item>List item 4</InlineList.Item>
       </InlineList>
     )
-    const list = await InlineListLocator.find()
-    expect(list.getTagName()).to.equal('ol')
+    const list = screen.getByRole('list')
+
+    expect(list.tagName).toBe('OL')
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
+    const { container } = render(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
@@ -98,8 +121,8 @@ describe('<InlineList />', async () => {
         <InlineList.Item>List item 4</InlineList.Item>
       </InlineList>
     )
+    const axeCheck = await runAxeCheck(container)
 
-    const list = await InlineListLocator.find()
-    expect(await list.accessible()).to.be.true()
+    expect(axeCheck).toBe(true)
   })
 })

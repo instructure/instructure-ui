@@ -21,7 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { InlineListItemLocator } from './InlineListItemLocator'
 
-export { InlineListItemLocator }
-export default InlineListItemLocator
+import React from 'react'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+
+import { InlineListItem } from '../index'
+
+describe('<InlineListItem />', () => {
+  it('should render children', async () => {
+    render(<InlineListItem>hello</InlineListItem>)
+    const listItem = screen.getByRole('listitem')
+
+    expect(listItem).toHaveTextContent('hello')
+  })
+
+  it('should render delimiter', async () => {
+    const { container } = render(
+      <InlineListItem delimiter="slash">List item</InlineListItem>
+    )
+    const listItem = container.querySelector('span[class$="delimiter"]')
+
+    expect(listItem).toHaveAttribute('aria-hidden', 'true')
+  })
+
+  it('should call elementRef', async () => {
+    const elementRef = vi.fn()
+    render(<InlineListItem elementRef={elementRef}>List item</InlineListItem>)
+    const listItem = screen.getByRole('listitem')
+
+    expect(elementRef).toHaveBeenCalledWith(listItem)
+  })
+})
