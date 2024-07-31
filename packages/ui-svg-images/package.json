@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-svg-images",
-  "version": "9.5.1",
+  "version": "10.0.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,19 +23,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "9.5.1",
-    "@instructure/ui-test-locator": "9.5.1",
-    "@instructure/ui-test-utils": "9.5.1",
-    "@instructure/ui-themes": "9.5.1"
+    "@instructure/ui-babel-preset": "10.0.0",
+    "@instructure/ui-test-locator": "10.0.0",
+    "@instructure/ui-test-utils": "10.0.0",
+    "@instructure/ui-themes": "10.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/emotion": "9.5.1",
-    "@instructure/shared-types": "9.5.1",
-    "@instructure/ui-react-utils": "9.5.1",
-    "@instructure/ui-testable": "9.5.1",
-    "@instructure/ui-utils": "9.5.1",
-    "@instructure/uid": "9.5.1",
+    "@instructure/emotion": "10.0.0",
+    "@instructure/shared-types": "10.0.0",
+    "@instructure/ui-react-utils": "10.0.0",
+    "@instructure/ui-testable": "10.0.0",
+    "@instructure/ui-utils": "10.0.0",
+    "@instructure/uid": "10.0.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

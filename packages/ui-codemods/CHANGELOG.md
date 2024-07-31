@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
+
+
+### Features
+
+* **ui-codemods:** add codemod for v10 color update ([566751b](https://github.com/instructure/instructure-ui/commit/566751b602114752591e5d0cf2fe7d1ab01543f2))
+
+
+
+
+
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-codemods
