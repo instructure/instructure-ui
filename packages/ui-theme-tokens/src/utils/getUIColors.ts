@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import type { Contrasts } from '@instructure/shared-types'
+import type { Contrasts, UI } from '@instructure/shared-types'
 
-export const getUIColors = (contrasts: Contrasts) => ({
+export const getUIColors = (contrasts: Contrasts): UI => ({
   surfacePagePrimary: contrasts?.white1010,
   surfacePageSecondary: contrasts?.grey1111,
   surfaceCardPrimary: contrasts?.white1010,
@@ -43,8 +43,12 @@ export const getUIColors = (contrasts: Contrasts) => ({
   textWarning: contrasts?.orange4570,
   textError: contrasts?.red4570,
 
-  stroke: contrasts?.grey1424,
-  divider: contrasts?.grey1214
+  lineStroke: contrasts?.grey1424,
+  lineDivider: contrasts?.grey1214,
+
+  surfaceOverlayGrey: contrasts?.grey100100op75,
+  surfaceOverlayWhite: contrasts?.white1010op75,
+  surfaceDivider: contrasts?.grey1424
 })
 
 export default getUIColors

@@ -26,6 +26,7 @@ import { Primitives } from '@instructure/shared-types'
 
 const primitives: Primitives = {
   white: '#FFFFFF',
+  white10op75: '#FFFFFFBF',
 
   grey11: '#F2F4F4',
   grey12: '#E8EAEC',
@@ -36,6 +37,7 @@ const primitives: Primitives = {
   grey70: '#4A5B68',
   grey82: '#3F515E',
   grey100: '#334451',
+  grey100op75: '#334451BF',
   grey125: '#273540',
 
   blue12: '#E0EBF5',

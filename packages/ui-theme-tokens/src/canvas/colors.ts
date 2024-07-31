@@ -29,6 +29,7 @@ import type { Colors, Contrasts, UI } from '@instructure/shared-types'
 
 const contrasts: Contrasts = {
   white1010: primitives.white,
+  white1010op75: primitives.white10op75,
 
   grey1111: primitives.grey11,
   grey1214: primitives.grey12,
@@ -37,6 +38,7 @@ const contrasts: Contrasts = {
   grey4570: primitives.grey45,
   grey5782: primitives.grey57,
   grey100100: primitives.grey100,
+  grey100100op75: primitives.grey100op75,
   grey125125: primitives.grey125,
 
   blue1212: primitives.blue12,
