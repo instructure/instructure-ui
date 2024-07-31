@@ -24,17 +24,17 @@ During the interactive project generation phase, please choose React and either 
 
 We recommend that you add the `@instructure/ui` meta-package, this contains all of our UI components (substitute the version number with the latest one):
 
-```md
+```js
 ---
 type: code
 ---
 
 {
-...
-"dependencies": {
-...
-"@instructure/ui": "^10"
-}
+  ...
+  "dependencies": {
+    ...
+    "@instructure/ui": "^10"
+  }
 }
 ```
 
