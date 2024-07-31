@@ -34,8 +34,7 @@ If you were using it, you need to switch to the `canvas` or the `canvas-high-con
 
 ### Component level color overrides
 
-If you had component level overrides of colors you need to migrate using the following table
-(codemods to automate this are coming soon):
+If you had component level overrides of colors you need to migrate using the following table:
 
 | Old                | New (v10)                     |
 | ------------------ | ----------------------------- |
@@ -53,6 +52,8 @@ If you had component level overrides of colors you need to migrate using the fol
 | `colors.Tiara`     | `colors.contrasts.grey1214`   |
 | `colors.Porcelain` | `colors.contrasts.grey1111`   |
 | `colors.White`     | `colors.contrasts.white1010`  |
+
+You can use the latest [codemod](#ui-codemods) to automate this process.
 
 InstUI v9:
 
