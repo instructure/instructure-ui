@@ -98,9 +98,9 @@ import 'moment/min/locales'
     const dependencies = JSON.stringify(
       {
         dependencies: {
-          '@instructure/debounce': '^9',
-          '@instructure/ui': '^9',
-          '@instructure/ui-icons': '^9',
+          '@instructure/debounce': '^10',
+          '@instructure/ui': '^10',
+          '@instructure/ui-icons': '^10',
           'lorem-ipsum': '^2.0.8',
           react: '18.2.0',
           'react-dom': '18.2.0',
