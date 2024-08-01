@@ -23,14 +23,14 @@
  */
 
 import PropTypes from 'prop-types'
-import type { SyntheticEvent } from 'react'
+import type { SyntheticEvent, InputHTMLAttributes } from 'react'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { Renderable, PropValidators } from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable, PropValidators } from '@instructure/shared-types'
 
-type DateInput2Props = {
+type DateInput2OwnProps = {
   /**
    * Specifies the input label.
    */
@@ -159,7 +159,13 @@ type DateInput2Props = {
   }
 }
 
-type PropKeys = keyof DateInput2Props
+type PropKeys = keyof DateInput2OwnProps
+
+type DateInput2Props = DateInput2OwnProps &
+  OtherHTMLAttributes<
+    DateInput2OwnProps,
+    InputHTMLAttributes<DateInput2OwnProps & Element>
+  >
 
 const propTypes: PropValidators<PropKeys> = {
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
