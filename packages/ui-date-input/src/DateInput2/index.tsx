@@ -25,7 +25,6 @@
 /** @jsx jsx */
 import { useState, useEffect, useContext } from 'react'
 import type { SyntheticEvent } from 'react'
-import moment from 'moment-timezone'
 import { Calendar } from '@instructure/ui-calendar'
 import { IconButton } from '@instructure/ui-buttons'
 import {
@@ -43,25 +42,12 @@ import { jsx } from '@instructure/emotion'
 import { propTypes } from './props'
 import type { DateInput2Props } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
+import type { Moment } from '@instructure/ui-i18n'
 
-function isValidDate(dateString: string): boolean {
-  return !isNaN(new Date(dateString).getTime())
-}
-
-function isValidMomentDate(
-  dateString: string,
-  locale: string,
-  timezone: string
-): boolean {
-  return moment
-    .tz(
-      dateString,
-      [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'],
-      locale,
-      true,
-      timezone
-    )
-    .isValid()
+function parseDate(dateString: string): string {
+  const date = new Date(dateString)
+  // return empty string if not a valid date
+  return isNaN(date.getTime()) ? '' : date.toISOString()
 }
 
 /**
@@ -97,6 +83,8 @@ const DateInput2 = ({
   const localeContext = useContext(ApplyLocaleContext)
 
   useEffect(() => {
+    // when `value` is changed, validation runs again and removes the error message if validation passes
+    // but it's NOT adding error message if validation fails for better UX
     validateInput(true)
   }, [value])
 
@@ -106,11 +94,15 @@ const DateInput2 = ({
 
   const handleInputChange = (e: SyntheticEvent, value: string) => {
     onChange?.(e, value)
+    // blur event formats the input which should trigger parsing
+    if (e.type !== 'blur') {
+      setSelectedDate(parseDate(value))
+    }
   }
 
   const handleDateSelected = (
     dateString: string,
-    _momentDate: any, // real type is Moment but used `any` to avoid importing the moment lib
+    _momentDate: Moment,
     e: SyntheticEvent
   ) => {
     const formattedDate = new Date(dateString).toLocaleDateString(getLocale(), {
@@ -120,30 +112,29 @@ const DateInput2 = ({
       timeZone: getTimezone()
     })
     handleInputChange(e, formattedDate)
+    setSelectedDate(dateString)
     setShowPopover(false)
-    onRequestValidateDate?.(formattedDate, true)
+    onRequestValidateDate?.(dateString, true)
   }
 
+  // onlyRemoveError is used to remove the error msg immediately when the user inputs a valid date (and don't wait for blur event)
   const validateInput = (onlyRemoveError = false): boolean => {
-    // TODO `isValidDate` and `isValidMomentDate` basically have the same functionality but the latter is a bit more strict (e.g.: `33` is only valid in `isValidMomentDate`)
-    // in the future we should get rid of moment but currently Calendar is using it for validation too so we can only remove it simultaneously
-    // otherwise DateInput could pass invalid dates to Calendar and break it
-    if (
-      (isValidDate(value || '') &&
-        isValidMomentDate(value || '', getLocale(), getTimezone())) ||
-      value === ''
-    ) {
-      setSelectedDate(value || '')
+    // don't validate empty input
+    if (!value || parseDate(value) || selectedDate) {
       setInputMessages(messages || [])
       return true
     }
-    if (!onlyRemoveError && typeof invalidDateErrorMessage === 'string') {
-      setInputMessages((messages) => [
+    // only show error if there is no user provided validation callback
+    if (
+      !onlyRemoveError &&
+      typeof invalidDateErrorMessage === 'string' &&
+      !onRequestValidateDate
+    ) {
+      setInputMessages([
         {
           type: 'error',
           text: invalidDateErrorMessage
-        },
-        ...messages
+        }
       ])
     }
 
@@ -171,13 +162,16 @@ const DateInput2 = ({
 
   const handleBlur = (e: SyntheticEvent) => {
     const isInputValid = validateInput(false)
-    if (isInputValid && value) {
-      const formattedDate = new Date(value).toLocaleDateString(getLocale(), {
-        month: 'long',
-        year: 'numeric',
-        day: 'numeric',
-        timeZone: getTimezone()
-      })
+    if (isInputValid && selectedDate) {
+      const formattedDate = new Date(selectedDate).toLocaleDateString(
+        getLocale(),
+        {
+          month: 'long',
+          year: 'numeric',
+          day: 'numeric',
+          timeZone: getTimezone()
+        }
+      )
       handleInputChange(e, formattedDate)
     }
     onRequestValidateDate?.(value, isInputValid)
