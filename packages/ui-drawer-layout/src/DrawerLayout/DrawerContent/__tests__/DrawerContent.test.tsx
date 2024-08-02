@@ -45,7 +45,7 @@ describe('<DrawerContent />', async () => {
     )
 
     const style = getComputedStyle(subject.getDOMNode())
-    expect(style.transition).to.equal('all 0s ease 0s')
+    expect(style.transition).to.equal('all')
 
     subject.setProps({
       label: 'test'
@@ -53,7 +53,7 @@ describe('<DrawerContent />', async () => {
 
     await wait(() => {
       const style = getComputedStyle(subject.getDOMNode())
-      expect(style.transition).to.not.equal('all 0s ease 0s')
+      expect(style.transition).to.not.equal('all')
     })
   })
 
