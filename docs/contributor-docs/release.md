@@ -182,10 +182,14 @@ type: code
 ##### 4. Update version references in the docs app
 
 1. In `docs/getting-started/usage.md` update the version in the code snippet for `package.json`
-2. In `packages/__docs__/src/Hero/index.tsx` update the url and title of the Upgrade Guide button 
+2. In `packages/__docs__/src/Hero/index.tsx` update the url and title of the Upgrade Guide button
 3. In `packages/__docs__/src/Hero/index.tsx` update the url and title of the Upgrade Guide link in the "What's new?" section
 4. In `packages/__docs__/src/CodeSandboxButton/index.tsx` update the `@instructure/` dependencies to the latest version
 
 ##### 5. Do a release like it was a minor update
 
 Follow the same process as it's described above. The `npm run bump` command should automatically recognise that there were a breaking commit and it should be a major version change.
+
+##### 6. Deploy the docs for the maintenance branch
+
+Make sure that previous versions of the docs are accessible. If not, deploy them on Netlify using the `Docs deploy to Netlify` GitHub action.
