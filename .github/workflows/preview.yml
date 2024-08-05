@@ -13,7 +13,7 @@ jobs:
   deploy-preview:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Npm install and bootstrap
         run: npm ci && npm run bootstrap
         if: github.event.action != 'closed' # don't run install and bootstrap unnecessarily when pr is closed
