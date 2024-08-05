@@ -160,23 +160,25 @@ class Modal extends Component<ModalProps, ModalState> {
   renderChildren() {
     const { children, variant, overflow } = this.props
 
-    return Children.map(
-      children as (HeaderChild | BodyChild | FooterChild)[],
-      (child) => {
-        if (!child) return // ignore null, falsy children
+    return Children.map(children, (child) => {
+      if (!child) return // ignore null, falsy children
 
-        if (matchComponentTypes<BodyChild>(child, [ModalBody])) {
-          return safeCloneElement(child, {
-            variant: variant,
-            overflow: child.props.overflow || overflow
-          })
-        } else {
-          return safeCloneElement(child, {
-            variant: variant
-          })
-        }
+      if (matchComponentTypes<BodyChild>(child, [ModalBody])) {
+        return safeCloneElement(child, {
+          variant: variant,
+          overflow: child.props.overflow || overflow
+        })
+      } else if (
+        matchComponentTypes<HeaderChild>(child, [ModalHeader]) ||
+        matchComponentTypes<FooterChild>(child, [ModalFooter])
+      ) {
+        return safeCloneElement(child, {
+          variant: variant
+        })
+      } else {
+        return child
       }
-    )
+    })
   }
 
   renderDialog(
