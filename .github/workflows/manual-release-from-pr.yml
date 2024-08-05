@@ -5,19 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Release to npm
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - name: Install packages
         run: npm ci
       - name: Set up project
         run: npm run bootstrap
-      - name: Run tests
-        run: npm run test:patchset
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}

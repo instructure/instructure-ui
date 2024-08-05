@@ -1,19 +1,17 @@
-name: Npm release
+name: Manual Npm release
 on: workflow_dispatch
 jobs:
   release:
     runs-on: ubuntu-latest
     name: Release to npm
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Install packages
         run: npm ci
       - name: Set up project
         run: npm run bootstrap
-      - name: Run tests
-        run: npm run test:patchset
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}

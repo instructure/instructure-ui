@@ -1,4 +1,4 @@
-name: Deploy docs from master commit
+name: Deploy docs from master commit to gh pages
 on:
   push:
     branches:

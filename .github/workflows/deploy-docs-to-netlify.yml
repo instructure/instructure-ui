@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy docs to Netlify.
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install netlify-cli
         run: npm install --save-dev netlify-cli@13.2.2
       - name: Install packages.
