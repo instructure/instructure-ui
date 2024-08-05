@@ -28,7 +28,7 @@ import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
+import conversions from '@instructure/ui-color-utils'
 
 import { IconButton, Button } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
@@ -101,7 +101,10 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   isSelectedColor(color: string) {
     const { selected } = this.props
-    return !!selected && colorToHex8(selected) === colorToHex8(color)
+    return (
+      !!selected &&
+      conversions.colorToHex8(selected) === conversions.colorToHex8(color)
+    )
   }
 
   onMenuItemSelected =
@@ -149,9 +152,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     >
       <div css={this.props.styles?.popoverContent}>
         <ColorMixer
-          value={colorToHex8(this.state.newColor)}
+          value={conversions.colorToHex8(this.state.newColor)}
           onChange={(newColor: string) =>
-            this.setState({ newColor: colorToRGB(newColor) })
+            this.setState({ newColor: conversions.colorToRGB(newColor) })
           }
           withAlpha={this.props?.colorMixerSettings?.colorMixer?.withAlpha}
           rgbRedInputScreenReaderLabel={
@@ -189,7 +192,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
               firstColor={
                 this.props.colorMixerSettings.colorContrast.firstColor
               }
-              secondColor={colorToHex8(this.state.newColor)}
+              secondColor={conversions.colorToHex8(this.state.newColor)}
               label={this.props.colorMixerSettings.colorContrast.label}
               successLabel={
                 this.props.colorMixerSettings.colorContrast.successLabel
@@ -220,7 +223,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <Button
           onClick={() => {
             this.props?.colorMixerSettings?.onPresetChange([
-              colorToHex8(this.state.newColor),
+              conversions.colorToHex8(this.state.newColor),
               ...this.props.colors
             ])
             this.setState({ openAddNew: false })

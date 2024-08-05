@@ -27,11 +27,31 @@ export { darken } from './darken'
 export { lighten } from './lighten'
 export { contrast } from './contrast'
 export { isValid } from './isValid'
-export { color2hex } from './conversions'
 export {
+  color2hex,
   colorToHex8,
   colorToHsva,
   colorToHsla,
   colorToRGB
 } from './conversions'
+
+import {
+  color2hex,
+  colorToHex8,
+  colorToHsva,
+  colorToHsla,
+  colorToRGB
+} from './conversions'
+
+// TODO remove when we get rid of babel-plugin-transform-imports
+// This default export is needed because babel-plugin-transform-imports will
+// fail if the exported name is not the same as the filename
+export default {
+  color2hex: color2hex,
+  colorToHex8: colorToHex8,
+  colorToHsva: colorToHsva,
+  colorToHsla: colorToHsla,
+  colorToRGB: colorToRGB
+}
+
 export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
