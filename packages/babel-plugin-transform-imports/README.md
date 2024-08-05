@@ -21,8 +21,10 @@ Note that any default imports you are currently using will not be transformed:
 import Text from '@instructure/ui-elements/lib/Text'
 ```
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+Note that this plugin will fail if the exported name is not the filename! This means that it cannot handle multiple exports from the same file.
+
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 A babel plugin made by Instructure Inc.
