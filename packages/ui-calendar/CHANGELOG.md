@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.5.2](https://github.com/instructure/instructure-ui/compare/v9.5.1...v9.5.2) (2024-08-05)
+
+
+### Bug Fixes
+
+* **ui-calendar,ui-date-input:** fix year picker for non latin based locales; return iso date string in onRequestValidateDate ([d7df0e8](https://github.com/instructure/instructure-ui/commit/d7df0e8d9fc0656e877bd243d9858dc3e5a47198))
+
+
+
+
+
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-calendar

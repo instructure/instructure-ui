@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-byline",
-  "version": "9.5.1",
+  "version": "9.5.2",
   "description": "A Byline component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,19 +24,19 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/emotion": "9.5.1",
-    "@instructure/shared-types": "9.5.1",
-    "@instructure/ui-react-utils": "9.5.1",
-    "@instructure/ui-testable": "9.5.1",
-    "@instructure/ui-view": "9.5.1",
+    "@instructure/emotion": "9.5.2",
+    "@instructure/shared-types": "9.5.2",
+    "@instructure/ui-react-utils": "9.5.2",
+    "@instructure/ui-testable": "9.5.2",
+    "@instructure/ui-view": "9.5.2",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "9.5.1",
-    "@instructure/ui-babel-preset": "9.5.1",
-    "@instructure/ui-color-utils": "9.5.1",
-    "@instructure/ui-test-utils": "9.5.1",
-    "@instructure/ui-themes": "9.5.1",
+    "@instructure/ui-axe-check": "9.5.2",
+    "@instructure/ui-babel-preset": "9.5.2",
+    "@instructure/ui-color-utils": "9.5.2",
+    "@instructure/ui-test-utils": "9.5.2",
+    "@instructure/ui-themes": "9.5.2",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^15.0.7",
     "vitest": "^2.0.2"
