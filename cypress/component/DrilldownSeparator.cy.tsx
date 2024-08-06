@@ -21,8 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import 'cypress-real-events'
 
-import { DrilldownLocator } from './DrilldownLocator'
+import { Drilldown } from '../../packages/ui'
+import '../support/component'
 
-export { DrilldownLocator }
-export default DrilldownLocator
+describe('<DrilldownSeparator/>', () => {
+  it('themeOverride prop should pass overrides to Option.Separator', async () => {
+    cy.mount(
+      <Drilldown rootPageId="page0">
+        <Drilldown.Page id="page0">
+          <Drilldown.Separator
+            id="separator1"
+            themeOverride={{ height: '16px', background: 'rgb(0, 128, 0)' }}
+          />
+        </Drilldown.Page>
+      </Drilldown>
+    )
+    cy.get('#separator1')
+      .should('have.css', 'height', '16px')
+      .and('have.css', 'backgroundColor', 'rgb(0, 128, 0)')
+  })
+})
