@@ -1,6 +1,6 @@
 {
   "name": "@instructure/theme-registry",
-  "version": "8.56.1",
+  "version": "8.56.2",
   "description": "Package for global ThemeRegistry.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "types": "./types",
@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/console": "8.56.1",
-    "@instructure/shared-types": "8.56.1",
-    "@instructure/ui-utils": "8.56.1"
+    "@instructure/console": "8.56.2",
+    "@instructure/shared-types": "8.56.2",
+    "@instructure/ui-utils": "8.56.2"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.56.1",
-    "@instructure/ui-test-utils": "8.56.1"
+    "@instructure/ui-babel-preset": "8.56.2",
+    "@instructure/ui-test-utils": "8.56.2"
   }
 }
