@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.2](https://github.com/instructure/instructure-ui/compare/v8.56.1...v8.56.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* **ui-color-picker,ui-color-utils:** fix corrupted CJS build ([ba5965f](https://github.com/instructure/instructure-ui/commit/ba5965f1b4b21067b1122a490183252868916f1a))
+
+
+
+
+
 ## [8.56.1](https://github.com/instructure/instructure-ui/compare/v8.56.0...v8.56.1) (2024-06-13)
 
 **Note:** Version bump only for package @instructure/ui-color-utils

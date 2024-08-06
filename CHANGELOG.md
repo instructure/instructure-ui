@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.2](https://github.com/instructure/instructure-ui/compare/v8.56.1...v8.56.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* **ui-color-picker,ui-color-utils:** fix corrupted CJS build ([ba5965f](https://github.com/instructure/instructure-ui/commit/ba5965f1b4b21067b1122a490183252868916f1a))
+* **ui-menu:** menuItem's onSelect type did not expose its value and selected types ([98ca20e](https://github.com/instructure/instructure-ui/commit/98ca20e215808283b891b13a47b2bb54e12967e2))
+
+
+
+
+
 ## [8.56.1](https://github.com/instructure/instructure-ui/compare/v8.56.0...v8.56.1) (2024-06-13)
 
 
