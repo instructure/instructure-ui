@@ -511,7 +511,7 @@ render(<Example />)
 
 ### Using custom children
 
-Occasionally, you might find it useful to incorporate custom components within a `Modal`, such as a higher-order component for `Modal.Header` or `Modal.Body` or not using built in child components at all. Although this approach is typically not advised, it can sometimes aid in code splitting or achieving more streamlined code, especially for more intricate and sizable `Modal`s. In these instances, it is crucial to ensure that the necessary props are consistently passed down manually.
+Occasionally, you might find it useful to incorporate custom components within a `Modal`, such as a higher-order component for `Modal.Header` or `Modal.Body` or not using built in child components at all. Although this approach is typically not advised, it can sometimes aid in code splitting or achieving more streamlined code, especially for more intricate and sizable `Modal`s. In these instances, it is crucial to ensure that the necessary props - `variant`, `overflow` - are consistently passed down manually.
 
 ```js
 ---
