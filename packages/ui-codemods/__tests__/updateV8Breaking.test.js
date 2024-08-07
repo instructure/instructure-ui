@@ -26,9 +26,6 @@ const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
 const tests = ['applyTheme', 'themeStaticVariable', 'themeProp']
 
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
-
 describe('updateV8Breaking', () => {
   tests.forEach((test) => {
     defineTest(

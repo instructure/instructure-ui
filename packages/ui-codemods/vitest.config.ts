@@ -1,5 +1,5 @@
 /*
- * The MIT License (MIT)
+ * The MIT License (MIT).
  *
  * Copyright (c) 2015 - present Instructure, Inc.
  *
@@ -22,12 +22,33 @@
  * SOFTWARE.
  */
 
-const path = require('path')
+/// <reference types="vitest" />
 
-module.exports = {
-  testEnvironment: 'node',
-  collectCoverage: true,
-  collectCoverageFrom: ['lib/**/*.js'],
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-codemods'),
-  coverageReporters: ['lcov']
-}
+import { defineConfig } from 'vitest/config'
+import path from 'path'
+
+export default defineConfig({
+  test: {
+    include: ['**/__tests__/**/*.test.{js,ts}'],
+    globals: true,
+    environment: 'node'
+  },
+  resolve: {
+    alias: {
+      '@lib': path.resolve(__dirname, 'lib')
+    },
+    extensions: ['.ts', '.js']
+  },
+  esbuild: {
+    loader: 'ts',
+    target: 'esnext'
+  }
+})
+
+// export default defineConfig({
+//   test: {
+//     include: ['**/__tests__/**/*.test.js'],
+//     globals: true,
+//     environment: 'node'
+//   }
+// })

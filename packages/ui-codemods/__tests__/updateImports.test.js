@@ -35,9 +35,6 @@ const tests = [
   'noSpecifiers'
 ]
 
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
-
 describe('updateImports', () => {
   tests.forEach((test) => {
     defineTest(

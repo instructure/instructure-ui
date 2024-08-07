@@ -26,9 +26,6 @@ const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
 const tests = ['colors', 'colors2']
 
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
-
 describe('updateV10Breaking', () => {
   tests.forEach((test) => {
     defineTest(

@@ -26,9 +26,6 @@ const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
 const tests = ['reactDOMRender', 'reactDOMRender2']
 
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
-
 describe('updateV8ReactDOM', () => {
   tests.forEach((test) => {
     defineTest(

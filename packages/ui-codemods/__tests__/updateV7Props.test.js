@@ -40,9 +40,6 @@ const tests = [
   'v7ComponentDeprecations'
 ]
 
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
-
 describe('updateV7Props', () => {
   tests.forEach((test) => {
     defineTest(
