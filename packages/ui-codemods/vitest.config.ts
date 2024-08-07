@@ -29,7 +29,7 @@ import path from 'path'
 
 export default defineConfig({
   test: {
-    include: ['**/__tests__/**/*.test.{js,ts}'],
+    include: ['**/__tests__/**/*.test.{js,ts,tsx}'],
     globals: true,
     environment: 'node'
   },
@@ -37,7 +37,8 @@ export default defineConfig({
     alias: {
       '@lib': path.resolve(__dirname, 'lib')
     },
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    mainFields: ['main']
   },
   esbuild: {
     loader: 'ts',

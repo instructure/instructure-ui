@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const defineTest = require('jscodeshift/dist/testUtils').defineTest
+import { defineTest } from 'jscodeshift/dist/testUtils'
 
 const tests = ['applyTheme', 'themeStaticVariable', 'themeProp']
 

@@ -3,6 +3,7 @@
   "version": "10.0.0",
   "description": "Codemod scripts to help upgrade Instructure UI libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "module",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
