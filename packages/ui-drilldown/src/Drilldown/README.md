@@ -166,67 +166,204 @@ type: example
 
 Additionally, the `renderLabelInfo` prop can render text or other elements next to the label.
 
-```js
----
-type: example
----
+- ```js
+  class VideoSettingsExample extends React.Component {
+    state = {
+      selectedCaption: 'English',
+      selectedSpeed: 'Normal',
+      selectedQuality: '720p',
+      isCommentsOn: true
+    }
 
-class VideoSettingsExample extends React.Component {
-  state = {
-    selectedCaption: 'English',
-    selectedSpeed: 'Normal',
-    selectedQuality: '720p',
-    isCommentsOn: true
-  }
+    renderTrigger() {
+      return <Button renderIcon={IconSettingsSolid}>Video Settings</Button>
+    }
 
-  renderTrigger() {
-    return (
-      <Button renderIcon={IconSettingsSolid}>
-        Video Settings
-      </Button>
-    )
-  }
+    renderSelected(props, value) {
+      return (
+        <span
+          style={{ color: props.variant === 'default' ? '#6B7780' : undefined }}
+        >
+          {value}
+        </span>
+      )
+    }
 
-  renderSelected(props, value) {
-    return (
-      <span style={{ color: props.variant === 'default' ? '#6B7780' : undefined }}>
-        {value}
-      </span>
-    )
-  }
+    renderSelectGroup(options, stateName) {
+      return (
+        <Drilldown.Group
+          id={`${stateName}Group`}
+          selectableType="single"
+          defaultSelected={[this.state[stateName]]}
+          onSelect={(_event, { value }) => {
+            this.setState({ [stateName]: value[0] })
+          }}
+        >
+          {options.map((option, idx) => (
+            <Drilldown.Option
+              key={idx}
+              id={option}
+              value={option}
+              onOptionClick={(_event, { goToPreviousPage }) => {
+                goToPreviousPage()
+              }}
+            >
+              {option}
+            </Drilldown.Option>
+          ))}
+        </Drilldown.Group>
+      )
+    }
 
-  renderSelectGroup(options, stateName) {
-    return (
-      <Drilldown.Group
-        id={`${stateName}Group`}
-        selectableType="single"
-        defaultSelected={[this.state[stateName]]}
-        onSelect={(_event, { value }) => {
-          this.setState({ [stateName]: value[0] })
-        }}
-      >
-        {options.map((option, idx) => (
-          <Drilldown.Option
-            key={idx}
-            id={option}
-            value={option}
-            onOptionClick={(_event, { goToPreviousPage }) => {
-              goToPreviousPage()
-            }}
+    render() {
+      const { captionOptions, speedOptions, qualityOptions } = this.props
+
+      return (
+        <Drilldown
+          rootPageId="videoSettings"
+          width="18.5rem"
+          maxHeight="26.5rem"
+          shouldHideOnSelect={false}
+          trigger={this.renderTrigger()}
+          onToggle={(_event, { shown, goToPage }) => {
+            shown && goToPage('videoSettings')
+          }}
+        >
+          <Drilldown.Page
+            id="videoSettings"
+            renderTitle="Video Settings"
+            withoutHeaderSeparator
           >
-            {option}
-          </Drilldown.Option>
-        ))}
-      </Drilldown.Group>
-    )
+            <Drilldown.Option
+              id="captions"
+              subPageId="captions"
+              renderLabelInfo={(props) =>
+                this.renderSelected(props, this.state.selectedCaption)
+              }
+            >
+              Captions
+            </Drilldown.Option>
+            <Drilldown.Option
+              id="speed"
+              subPageId="speed"
+              renderLabelInfo={(props) =>
+                this.renderSelected(props, this.state.selectedSpeed)
+              }
+            >
+              Speed
+            </Drilldown.Option>
+            <Drilldown.Option
+              id="quality"
+              subPageId="quality"
+              renderLabelInfo={(props) =>
+                this.renderSelected(props, this.state.selectedQuality)
+              }
+            >
+              Quality
+            </Drilldown.Option>
+            <Drilldown.Option
+              id="comments"
+              themeOverride={{ padding: '0.25rem 0.75rem' }}
+              afterLabelContentVAlign="center"
+              onOptionClick={() => {
+                this.setState((state) => ({
+                  isCommentsOn: !state.isCommentsOn
+                }))
+              }}
+              role="checkbox"
+              aria-checked={this.state.isCommentsOn ? 'true' : 'false'}
+              // prevents reading the label of the checkbox too (duplicated)
+              aria-describedby={['']}
+              renderLabelInfo={
+                <Checkbox
+                  label={<ScreenReaderContent>Comments</ScreenReaderContent>}
+                  variant="toggle"
+                  readOnly
+                  checked={this.state.isCommentsOn}
+                  onChange={() => {
+                    // needed for controlled Checkbox,
+                    // but the state is handled on the Drilldown.Option
+                  }}
+                  labelPlacement="start"
+                  tabIndex={-1}
+                />
+              }
+            >
+              Comments
+            </Drilldown.Option>
+          </Drilldown.Page>
+
+          <Drilldown.Page id="captions" renderTitle="Captions">
+            {this.renderSelectGroup(captionOptions, 'selectedCaption')}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="speed" renderTitle="Speed">
+            {this.renderSelectGroup(speedOptions, 'selectedSpeed')}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="quality" renderTitle="Quality">
+            {this.renderSelectGroup(qualityOptions, 'selectedQuality')}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+    }
   }
 
-  render() {
-    const {
-      captionOptions,
-      speedOptions,
-      qualityOptions
-    } = this.props
+  render(
+    <VideoSettingsExample
+      captionOptions={['Off', 'English', 'German', 'Spanish', 'Durtch']}
+      speedOptions={['0.5x', 'Normal', '1.25x', '1.5x', '2x']}
+      qualityOptions={['Auto', '360p', '480p', '720p', '1080p']}
+    />
+  )
+  ```
+
+- ```js
+  const VideoSettingsExample = (props) => {
+    const [selectedCaption, setSelectedCaption] = useState('English')
+    const [selectedSpeed, setSelectedSpeed] = useState('Normal')
+    const [selectedQuality, setSelectedQuality] = useState('720p')
+    const [isCommentsOn, setIsCommentsOn] = useState(true)
+
+    const renderTrigger = () => {
+      return <Button renderIcon={IconSettingsSolid}>Video Settings</Button>
+    }
+
+    const renderSelected = (props, value) => {
+      return (
+        <span
+          style={{ color: props.variant === 'default' ? '#6B7780' : undefined }}
+        >
+          {value}
+        </span>
+      )
+    }
+
+    const renderSelectGroup = (options, selectedState, setSelectedState) => {
+      return (
+        <Drilldown.Group
+          id={`${selectedState}Group`}
+          selectableType="single"
+          defaultSelected={[selectedState]}
+          onSelect={(_event, { value }) => {
+            setSelectedState(value[0])
+          }}
+        >
+          {options.map((option, idx) => (
+            <Drilldown.Option
+              key={idx}
+              id={option}
+              value={option}
+              onOptionClick={(_event, { goToPreviousPage }) => {
+                goToPreviousPage()
+              }}
+            >
+              {option}
+            </Drilldown.Option>
+          ))}
+        </Drilldown.Group>
+      )
+    }
 
     return (
       <Drilldown
@@ -234,7 +371,7 @@ class VideoSettingsExample extends React.Component {
         width="18.5rem"
         maxHeight="26.5rem"
         shouldHideOnSelect={false}
-        trigger={this.renderTrigger()}
+        trigger={renderTrigger()}
         onToggle={(_event, { shown, goToPage }) => {
           shown && goToPage('videoSettings')
         }}
@@ -247,27 +384,21 @@ class VideoSettingsExample extends React.Component {
           <Drilldown.Option
             id="captions"
             subPageId="captions"
-            renderLabelInfo={
-              (props) => this.renderSelected(props, this.state.selectedCaption)
-            }
+            renderLabelInfo={(props) => renderSelected(props, selectedCaption)}
           >
             Captions
           </Drilldown.Option>
           <Drilldown.Option
             id="speed"
             subPageId="speed"
-            renderLabelInfo={
-              (props) => this.renderSelected(props, this.state.selectedSpeed)
-            }
+            renderLabelInfo={(props) => renderSelected(props, selectedSpeed)}
           >
             Speed
           </Drilldown.Option>
           <Drilldown.Option
             id="quality"
             subPageId="quality"
-            renderLabelInfo={
-              (props) => this.renderSelected(props, this.state.selectedQuality)
-            }
+            renderLabelInfo={(props) => renderSelected(props, selectedQuality)}
           >
             Quality
           </Drilldown.Option>
@@ -276,19 +407,18 @@ class VideoSettingsExample extends React.Component {
             themeOverride={{ padding: '0.25rem 0.75rem' }}
             afterLabelContentVAlign="center"
             onOptionClick={() => {
-              this.setState((state) => ({ isCommentsOn: !state.isCommentsOn }))
+              setIsCommentsOn((state) => !state)
             }}
             role="checkbox"
-            aria-checked={this.state.isCommentsOn ? 'true' : 'false'}
+            aria-checked={isCommentsOn ? 'true' : 'false'}
             // prevents reading the label of the checkbox too (duplicated)
             aria-describedby={['']}
-
             renderLabelInfo={
               <Checkbox
                 label={<ScreenReaderContent>Comments</ScreenReaderContent>}
-                variant='toggle'
+                variant="toggle"
                 readOnly
-                checked={this.state.isCommentsOn}
+                checked={isCommentsOn}
                 onChange={() => {
                   // needed for controlled Checkbox,
                   // but the state is handled on the Drilldown.Option
@@ -302,221 +432,388 @@ class VideoSettingsExample extends React.Component {
           </Drilldown.Option>
         </Drilldown.Page>
 
-        <Drilldown.Page
-          id="captions"
-          renderTitle="Captions"
-        >
-          {this.renderSelectGroup(captionOptions, 'selectedCaption')}
+        <Drilldown.Page id="captions" renderTitle="Captions">
+          {renderSelectGroup(
+            props.captionOptions,
+            selectedCaption,
+            setSelectedCaption
+          )}
         </Drilldown.Page>
 
-        <Drilldown.Page
-          id="speed"
-          renderTitle="Speed"
-        >
-          {this.renderSelectGroup(speedOptions, 'selectedSpeed')}
+        <Drilldown.Page id="speed" renderTitle="Speed">
+          {renderSelectGroup(
+            props.speedOptions,
+            selectedSpeed,
+            setSelectedSpeed
+          )}
         </Drilldown.Page>
 
-        <Drilldown.Page
-          id="quality"
-          renderTitle="Quality"
-        >
-          {this.renderSelectGroup(qualityOptions, 'selectedQuality')}
+        <Drilldown.Page id="quality" renderTitle="Quality">
+          {renderSelectGroup(
+            props.qualityOptions,
+            selectedQuality,
+            setSelectedQuality
+          )}
         </Drilldown.Page>
       </Drilldown>
     )
   }
-}
 
-render(<VideoSettingsExample
-  captionOptions={['Off', 'English', 'German', 'Spanish', 'Durtch']}
-  speedOptions={['0.5x', 'Normal', '1.25x', '1.5x', '2x']}
-  qualityOptions={['Auto', '360p', '480p', '720p', '1080p']}
-/>)
-```
+  render(
+    <VideoSettingsExample
+      captionOptions={['Off', 'English', 'German', 'Spanish', 'Durtch']}
+      speedOptions={['0.5x', 'Normal', '1.25x', '1.5x', '2x']}
+      qualityOptions={['Auto', '360p', '480p', '720p', '1080p']}
+    />
+  )
+  ```
 
 ### Displaying Drilldown in a Popover
 
 Just like [Menu](#Menu), Drilldown accepts a `trigger` property: it will render a toggle button which, when clicked, shows or hides the Drilldown in a [Popover](#Popover). Drilldown passes many of its props to Popover in this case (`mountNode`, `shouldContainFocus`, `withArrow`, etc.).
 
-```js
----
-type: example
----
+- ```js
+  class SelectContactsExample extends React.Component {
+    state = {
+      selected: []
+    }
 
-class SelectContactsExample extends React.Component {
-  state = {
-    selected: []
-  }
+    getCategoryById(id) {
+      return this.props.contactsData.find((cat) => cat.id === id)
+    }
 
-  getCategoryById(id) {
-    return this.props.contactsData.find(cat => cat.id === id)
-  }
+    selectContacts(values) {
+      this.setState({ selected: values })
+    }
 
-  selectContacts(values) {
-    this.setState({ selected: values })
-  }
+    renderContacts(contacts) {
+      return contacts.map((contact, idx) => {
+        const { id, name, email } = contact
 
-  renderContacts(contacts) {
-    return contacts.map((contact, idx) => {
-      const { id, name, email } = contact
-
-      return (
-        <Drilldown.Option
-          key={idx}
-          id={id}
-          value={name}
-          description={
-            <TruncateText>
-              #{idx + 1} | {email}
-            </TruncateText>
-          }
-          onOptionClick={() => {
-            this.selectContacts([contact])
-          }}
-        >
-          {name}
-        </Drilldown.Option>
-      )
-    })
-  }
-
-  renderSubCategoryOptions(subCategories = []) {
-    return subCategories.map((subCatId, idx) => {
-      const category = this.getCategoryById(subCatId)
-      const { id, title } = category
-
-      return (
-        <Drilldown.Option key={idx} id={id} subPageId={id}>
-          {title}
-        </Drilldown.Option>
-      )
-    })
-  }
-
-  renderPage(category, key) {
-    const { id, title, subCategories = [], options = [] } = category
-
-    const allContacts = this.getAllContactsFromCategory(category)
-
-    return (
-      <Drilldown.Page
-        key={key}
-        id={id}
-        renderTitle={title}
-        renderActionLabel={`Send to All (${allContacts.length})`}
-        onHeaderActionClicked={() => {
-          this.selectContacts(allContacts)
-        }}
-      >
-        {[
-          ...this.renderSubCategoryOptions(subCategories),
-          ...this.renderContacts(options)
-        ]}
-      </Drilldown.Page>
-    )
-  }
-
-  getAllContactsFromCategory(category) {
-    let allContacts = []
-
-    const addOptions = (cat) => {
-      const { subCategories = [], options = [] } = cat
-      allContacts.push(...options)
-
-
-      subCategories.forEach((subCatId) => {
-        addOptions(this.getCategoryById(subCatId))
+        return (
+          <Drilldown.Option
+            key={idx}
+            id={id}
+            value={name}
+            description={
+              <TruncateText>
+                #{idx + 1} | {email}
+              </TruncateText>
+            }
+            onOptionClick={() => {
+              this.selectContacts([contact])
+            }}
+          >
+            {name}
+          </Drilldown.Option>
+        )
       })
     }
 
-    addOptions(category)
-    return allContacts
+    renderSubCategoryOptions(subCategories = []) {
+      return subCategories.map((subCatId, idx) => {
+        const category = this.getCategoryById(subCatId)
+        const { id, title } = category
+
+        return (
+          <Drilldown.Option key={idx} id={id} subPageId={id}>
+            {title}
+          </Drilldown.Option>
+        )
+      })
+    }
+
+    renderPage(category, key) {
+      const { id, title, subCategories = [], options = [] } = category
+
+      const allContacts = this.getAllContactsFromCategory(category)
+
+      return (
+        <Drilldown.Page
+          key={key}
+          id={id}
+          renderTitle={title}
+          renderActionLabel={`Send to All (${allContacts.length})`}
+          onHeaderActionClicked={() => {
+            this.selectContacts(allContacts)
+          }}
+        >
+          {[
+            ...this.renderSubCategoryOptions(subCategories),
+            ...this.renderContacts(options)
+          ]}
+        </Drilldown.Page>
+      )
+    }
+
+    getAllContactsFromCategory(category) {
+      let allContacts = []
+
+      const addOptions = (cat) => {
+        const { subCategories = [], options = [] } = cat
+        allContacts.push(...options)
+
+        subCategories.forEach((subCatId) => {
+          addOptions(this.getCategoryById(subCatId))
+        })
+      }
+
+      addOptions(category)
+      return allContacts
+    }
+
+    render() {
+      const { contactsData } = this.props
+      const { selected = [] } = this.state
+
+      return (
+        <Flex alignItems="start">
+          <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+            <Drilldown
+              rootPageId="contacts"
+              width="18.5rem"
+              maxHeight="26.5rem"
+              trigger={<Button>Select Contacts</Button>}
+              onToggle={(_event, args) => {
+                args.shown && selectContacts([])
+              }}
+            >
+              {contactsData.map((page, idx) => this.renderPage(page, idx))}
+            </Drilldown>
+          </Flex.Item>
+
+          <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+            <View as="div" padding="small" background="primary">
+              <div>
+                <Text weight="bold">
+                  Selected ({selected ? selected.length : 0}):
+                </Text>
+              </div>
+              <div>{selected.map((a) => a.name).join(', ')}</div>
+            </View>
+          </Flex.Item>
+        </Flex>
+      )
+    }
   }
 
-  render() {
-    const { contactsData } = this.props
-    const { selected = [] } = this.state
+  const generateCategory = (name, count) => {
+    return Array(count)
+      .fill(name)
+      .map((category, idx) => {
+        const id = category.replace(/(-|\s)/g, '').toLowerCase()
+        return {
+          id: `${id}${idx + 1}`,
+          category,
+          name: `${category} ${idx + 1}`,
+          email: `${id}${idx + 1}@randommail.com`
+        }
+      })
+  }
+
+  const contactsData = [
+    {
+      id: 'contacts',
+      title: 'Contacts',
+      subCategories: ['administrators', 'teachers', 'students']
+    },
+    {
+      id: 'administrators',
+      title: 'Administrators',
+      subCategories: ['accountAdmins', 'subAccountAdmins']
+    },
+    {
+      id: 'accountAdmins',
+      title: 'Account Admins',
+      options: generateCategory('Account Admin', 8)
+    },
+    {
+      id: 'subAccountAdmins',
+      title: 'Sub-Account Admins',
+      options: generateCategory('Sub-Account Admin', 12)
+    },
+    {
+      id: 'teachers',
+      title: 'Teachers',
+      options: generateCategory('Teacher', 23)
+    },
+    {
+      id: 'students',
+      title: 'Students',
+      options: generateCategory('Student', 34)
+    }
+  ]
+
+  render(<SelectContactsExample contactsData={contactsData} />)
+  ```
+
+- ```js
+  const SelectContactsExample = (props) => {
+    const [selected, setSelected] = useState([])
+
+    const getCategoryById = (id) => {
+      return props.contactsData.find((cat) => cat.id === id)
+    }
+
+    const selectContacts = (values) => {
+      setSelected(values)
+    }
+
+    const renderContacts = (contacts) => {
+      return contacts.map((contact, idx) => {
+        const { id, name, email } = contact
+
+        return (
+          <Drilldown.Option
+            key={idx}
+            id={id}
+            value={name}
+            description={
+              <TruncateText>
+                #{idx + 1} | {email}
+              </TruncateText>
+            }
+            onOptionClick={() => {
+              selectContacts([contact])
+            }}
+          >
+            {name}
+          </Drilldown.Option>
+        )
+      })
+    }
+
+    const renderSubCategoryOptions = (subCategories = []) => {
+      return subCategories.map((subCatId, idx) => {
+        const category = getCategoryById(subCatId)
+        const { id, title } = category
+
+        return (
+          <Drilldown.Option key={idx} id={id} subPageId={id}>
+            {title}
+          </Drilldown.Option>
+        )
+      })
+    }
+
+    const renderPage = (category, key) => {
+      const { id, title, subCategories = [], options = [] } = category
+
+      const allContacts = getAllContactsFromCategory(category)
+
+      return (
+        <Drilldown.Page
+          key={key}
+          id={id}
+          renderTitle={title}
+          renderActionLabel={`Send to All (${allContacts.length})`}
+          onHeaderActionClicked={() => {
+            selectContacts(allContacts)
+          }}
+        >
+          {[
+            ...renderSubCategoryOptions(subCategories),
+            ...renderContacts(options)
+          ]}
+        </Drilldown.Page>
+      )
+    }
+
+    const getAllContactsFromCategory = (category) => {
+      let allContacts = []
+
+      const addOptions = (cat) => {
+        const { subCategories = [], options = [] } = cat
+        allContacts.push(...options)
+
+        subCategories.forEach((subCatId) => {
+          addOptions(getCategoryById(subCatId))
+        })
+      }
+
+      addOptions(category)
+      return allContacts
+    }
 
     return (
-      <Flex alignItems='start'>
-        <Flex.Item width="20rem" textAlign="center" padding='x-small 0 0'>
+      <Flex alignItems="start">
+        <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
           <Drilldown
             rootPageId="contacts"
             width="18.5rem"
             maxHeight="26.5rem"
             trigger={<Button>Select Contacts</Button>}
             onToggle={(_event, args) => {
-              args.shown && this.selectContacts([])
+              args.shown && selectContacts([])
             }}
           >
-            {contactsData.map((page, idx) => this.renderPage(page, idx))}
+            {props.contactsData.map((page, idx) => renderPage(page, idx))}
           </Drilldown>
         </Flex.Item>
 
-        <Flex.Item padding='0 0 0 large' shouldGrow shouldShrink>
-          <View as="div" padding='small' background='primary'>
+        <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+          <View as="div" padding="small" background="primary">
             <div>
-              <Text weight='bold'>Selected ({selected ? selected.length : 0}):</Text>
+              <Text weight="bold">
+                Selected ({selected ? selected.length : 0}):
+              </Text>
             </div>
-            <div>
-              {selected.map((a) => a.name).join(', ')}
-            </div>
+            <div>{selected.map((a) => a.name).join(', ')}</div>
           </View>
         </Flex.Item>
       </Flex>
     )
   }
-}
 
-const generateCategory = (name, count) => {
-  return Array(count)
-    .fill(name)
-    .map((category, idx) => {
-      const id = category.replace(/(-|\s)/g, '').toLowerCase()
-      return {
-        id: `${id}${idx + 1}`,
-        category,
-        name: `${category} ${idx + 1}`,
-        email: `${id}${idx + 1}@randommail.com`
-      }
-    })
-}
-
-const contactsData = [
-  {
-    id: 'contacts',
-    title: 'Contacts',
-    subCategories: ['administrators', 'teachers', 'students']
-  },
-  {
-    id: 'administrators',
-    title: 'Administrators',
-    subCategories: ['accountAdmins', 'subAccountAdmins']
-  },
-  {
-    id: 'accountAdmins',
-    title: 'Account Admins',
-    options: generateCategory('Account Admin', 8)
-  },
-  {
-    id: 'subAccountAdmins',
-    title: 'Sub-Account Admins',
-    options: generateCategory('Sub-Account Admin', 12)
-  },
-  {
-    id: 'teachers',
-    title: 'Teachers',
-    options: generateCategory('Teacher', 23)
-  },
-  {
-    id: 'students',
-    title: 'Students',
-    options: generateCategory('Student', 34)
+  const generateCategory = (name, count) => {
+    return Array(count)
+      .fill(name)
+      .map((category, idx) => {
+        const id = category.replace(/(-|\s)/g, '').toLowerCase()
+        return {
+          id: `${id}${idx + 1}`,
+          category,
+          name: `${category} ${idx + 1}`,
+          email: `${id}${idx + 1}@randommail.com`
+        }
+      })
   }
-]
 
-render(<SelectContactsExample contactsData={contactsData} />)
-```
+  const contactsData = [
+    {
+      id: 'contacts',
+      title: 'Contacts',
+      subCategories: ['administrators', 'teachers', 'students']
+    },
+    {
+      id: 'administrators',
+      title: 'Administrators',
+      subCategories: ['accountAdmins', 'subAccountAdmins']
+    },
+    {
+      id: 'accountAdmins',
+      title: 'Account Admins',
+      options: generateCategory('Account Admin', 8)
+    },
+    {
+      id: 'subAccountAdmins',
+      title: 'Sub-Account Admins',
+      options: generateCategory('Sub-Account Admin', 12)
+    },
+    {
+      id: 'teachers',
+      title: 'Teachers',
+      options: generateCategory('Teacher', 23)
+    },
+    {
+      id: 'students',
+      title: 'Students',
+      options: generateCategory('Student', 34)
+    }
+  ]
+
+  render(<SelectContactsExample contactsData={contactsData} />)
+  ```
 
 ### Page header
 
@@ -538,36 +835,137 @@ The label can be changed with `renderBackButtonLabel` prop (defaults to "Back").
 
 This option will always display on the page when needed and cannot be disabled.
 
-```js
----
-type: example
----
-class BackNavigationExample extends React.Component {
-  state = {
-    showTitle: true,
-    showAction: true,
-    showAlternativeBackLabel: false
+- ```js
+  class BackNavigationExample extends React.Component {
+    state = {
+      showTitle: true,
+      showAction: true,
+      showAlternativeBackLabel: false
+    }
+
+    render() {
+      const { showTitle, showAction, showAlternativeBackLabel } = this.state
+
+      return (
+        <Flex alignItems="start">
+          <Flex.Item>
+            <Drilldown rootPageId="root" width="20rem" maxHeight="30rem">
+              <Drilldown.Page
+                id="root"
+                renderTitle={showTitle && 'Root page'}
+                renderActionLabel={showAction && 'Action!'}
+              >
+                <Drilldown.Option
+                  id="BackNavigationRoot1"
+                  subPageId="secondPage"
+                >
+                  Option
+                </Drilldown.Option>
+                <Drilldown.Option
+                  id="BackNavigationRoot2"
+                  subPageId="secondPage"
+                >
+                  Option
+                </Drilldown.Option>
+                <Drilldown.Option
+                  id="BackNavigationRoot3"
+                  subPageId="secondPage"
+                >
+                  Option
+                </Drilldown.Option>
+              </Drilldown.Page>
+
+              <Drilldown.Page
+                id="secondPage"
+                renderTitle={showTitle && 'Second page'}
+                renderActionLabel={showAction && 'Action!'}
+                renderBackButtonLabel={
+                  showAlternativeBackLabel
+                    ? (prevPageTitle) =>
+                        prevPageTitle ? `Back to ${prevPageTitle}` : 'Back'
+                    : undefined
+                }
+              >
+                <Drilldown.Option id="BackNavigationSecondPage1">
+                  Option
+                </Drilldown.Option>
+                <Drilldown.Option id="BackNavigationSecondPage2">
+                  Option
+                </Drilldown.Option>
+                <Drilldown.Option id="BackNavigationSecondPage3">
+                  Option
+                </Drilldown.Option>
+              </Drilldown.Page>
+            </Drilldown>
+          </Flex.Item>
+
+          <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+            <FormFieldGroup description="Drilldown Group example settings">
+              <Checkbox
+                checked={
+                  !this.state.showTitle
+                    ? false
+                    : this.state.showAlternativeBackLabel
+                }
+                disabled={!this.state.showTitle}
+                label='Display previous page title in back navigation ("Show page title" needs to be turned on)'
+                variant="toggle"
+                onChange={() => {
+                  this.setState({
+                    showAlternativeBackLabel:
+                      !this.state.showAlternativeBackLabel
+                  })
+                }}
+              />
+              <Checkbox
+                checked={this.state.showTitle}
+                label="Show page title"
+                variant="toggle"
+                onChange={() => {
+                  this.setState({ showTitle: !this.state.showTitle })
+                }}
+              />
+              <Checkbox
+                checked={this.state.showAction}
+                label="Show action label"
+                variant="toggle"
+                onChange={() => {
+                  this.setState({ showAction: !this.state.showAction })
+                }}
+              />
+            </FormFieldGroup>
+          </Flex.Item>
+        </Flex>
+      )
+    }
   }
 
-  render() {
-    const { showTitle, showAction, showAlternativeBackLabel } = this.state
+  render(<BackNavigationExample />)
+  ```
+
+- ```js
+  const BackNavigationExample = () => {
+    const [showTitle, setShowTitle] = useState(true)
+    const [showAction, setShowAction] = useState(true)
+    const [showAlternativeBackLabel, setShowAlternativeBackLabel] =
+      useState(false)
 
     return (
-      <Flex alignItems='start'>
+      <Flex alignItems="start">
         <Flex.Item>
-          <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
+          <Drilldown rootPageId="root" width="20rem" maxHeight="30rem">
             <Drilldown.Page
               id="root"
               renderTitle={showTitle && 'Root page'}
               renderActionLabel={showAction && 'Action!'}
             >
-              <Drilldown.Option id="BackNavigationRoot1" subPageId='secondPage'>
+              <Drilldown.Option id="BackNavigationRoot1" subPageId="secondPage">
                 Option
               </Drilldown.Option>
-              <Drilldown.Option id="BackNavigationRoot2" subPageId='secondPage'>
+              <Drilldown.Option id="BackNavigationRoot2" subPageId="secondPage">
                 Option
               </Drilldown.Option>
-              <Drilldown.Option id="BackNavigationRoot3" subPageId='secondPage'>
+              <Drilldown.Option id="BackNavigationRoot3" subPageId="secondPage">
                 Option
               </Drilldown.Option>
             </Drilldown.Page>
@@ -576,9 +974,12 @@ class BackNavigationExample extends React.Component {
               id="secondPage"
               renderTitle={showTitle && 'Second page'}
               renderActionLabel={showAction && 'Action!'}
-              renderBackButtonLabel={showAlternativeBackLabel
-                ? ((prevPageTitle) => prevPageTitle ? `Back to ${prevPageTitle}` : 'Back')
-                : undefined}
+              renderBackButtonLabel={
+                showAlternativeBackLabel
+                  ? (prevPageTitle) =>
+                      prevPageTitle ? `Back to ${prevPageTitle}` : 'Back'
+                  : undefined
+              }
             >
               <Drilldown.Option id="BackNavigationSecondPage1">
                 Option
@@ -596,70 +997,128 @@ class BackNavigationExample extends React.Component {
         <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
           <FormFieldGroup description="Drilldown Group example settings">
             <Checkbox
-              checked={!this.state.showTitle ? false : this.state.showAlternativeBackLabel}
-              disabled={!this.state.showTitle}
+              checked={!showTitle ? false : showAlternativeBackLabel}
+              disabled={!showTitle}
               label='Display previous page title in back navigation ("Show page title" needs to be turned on)'
               variant="toggle"
-              onChange={
-                () => {
-                  this.setState({ showAlternativeBackLabel: !this.state.showAlternativeBackLabel })
-                }
-              }
+              onChange={() => {
+                setShowAlternativeBackLabel(!showAlternativeBackLabel)
+              }}
             />
             <Checkbox
-              checked={this.state.showTitle}
+              checked={showTitle}
               label="Show page title"
               variant="toggle"
-              onChange={
-                () => {
-                  this.setState({ showTitle: !this.state.showTitle })
-                }
-              }
+              onChange={() => {
+                setShowTitle(!showTitle)
+              }}
             />
             <Checkbox
-              checked={this.state.showAction}
+              checked={showAction}
               label="Show action label"
               variant="toggle"
-              onChange={
-                () => {
-                  this.setState({ showAction: !this.state.showAction })
-                }
-              }
+              onChange={() => {
+                setShowAction(!showAction)
+              }}
             />
           </FormFieldGroup>
         </Flex.Item>
       </Flex>
     )
   }
-}
 
-render(<BackNavigationExample />)
-```
+  render(<BackNavigationExample />)
+  ```
 
 ### Option Groups
 
 Wrapping the Options in `<Drilldown.Group>` will separate these options with separators. These separators can be hidden, and you can provide a label with the `renderGroupTitle` prop.
 
-```js
----
-type: example
----
-class GroupsExample extends React.Component {
-  state = {
-    showSeparators: true,
-    showTitles: true
+- ```js
+  class GroupsExample extends React.Component {
+    state = {
+      showSeparators: true,
+      showTitles: true
+    }
+
+    render() {
+      return (
+        <Flex alignItems="start">
+          <Flex.Item>
+            <Drilldown rootPageId="root" width="20rem" maxHeight="30rem">
+              <Drilldown.Page id="root">
+                <Drilldown.Group
+                  id="italy"
+                  renderGroupTitle={this.state.showTitles && 'Italy'}
+                  withoutSeparators={!this.state.showSeparators}
+                >
+                  <Drilldown.Option id="item11">Milano</Drilldown.Option>
+                  <Drilldown.Option id="item12">Florence</Drilldown.Option>
+                </Drilldown.Group>
+
+                <Drilldown.Group
+                  id="france"
+                  renderGroupTitle={this.state.showTitles && 'France'}
+                  withoutSeparators={!this.state.showSeparators}
+                >
+                  <Drilldown.Option id="item21">Lyon</Drilldown.Option>
+                  <Drilldown.Option id="item22">Bordeaux</Drilldown.Option>
+                </Drilldown.Group>
+
+                <Drilldown.Group
+                  id="germany"
+                  renderGroupTitle={this.state.showTitles && 'Germany'}
+                  withoutSeparators={!this.state.showSeparators}
+                >
+                  <Drilldown.Option id="item31">Frankfurt</Drilldown.Option>
+                  <Drilldown.Option id="item32">Dortmund</Drilldown.Option>
+                </Drilldown.Group>
+              </Drilldown.Page>
+            </Drilldown>
+          </Flex.Item>
+
+          <Flex.Item padding="0 0 0 large">
+            <FormFieldGroup description="Drilldown Group example settings">
+              <Checkbox
+                checked={this.state.showSeparators}
+                label="Show separators"
+                variant="toggle"
+                onChange={() => {
+                  this.setState({ showSeparators: !this.state.showSeparators })
+                }}
+              />
+              <Checkbox
+                checked={this.state.showTitles}
+                label="Show group titles"
+                variant="toggle"
+                onChange={() => {
+                  this.setState({ showTitles: !this.state.showTitles })
+                }}
+              />
+            </FormFieldGroup>
+          </Flex.Item>
+        </Flex>
+      )
+    }
   }
 
-  render() {
+  render(<GroupsExample />)
+  ```
+
+- ```js
+  const GroupsExample = () => {
+    const [showSeparators, setShowSeparators] = useState(true)
+    const [showTitles, setShowTitles] = useState(true)
+
     return (
-      <Flex alignItems='start'>
+      <Flex alignItems="start">
         <Flex.Item>
-          <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
+          <Drilldown rootPageId="root" width="20rem" maxHeight="30rem">
             <Drilldown.Page id="root">
               <Drilldown.Group
                 id="italy"
-                renderGroupTitle={this.state.showTitles && 'Italy'}
-                withoutSeparators={!this.state.showSeparators}
+                renderGroupTitle={showTitles && 'Italy'}
+                withoutSeparators={!showSeparators}
               >
                 <Drilldown.Option id="item11">Milano</Drilldown.Option>
                 <Drilldown.Option id="item12">Florence</Drilldown.Option>
@@ -667,8 +1126,8 @@ class GroupsExample extends React.Component {
 
               <Drilldown.Group
                 id="france"
-                renderGroupTitle={this.state.showTitles && 'France'}
-                withoutSeparators={!this.state.showSeparators}
+                renderGroupTitle={showTitles && 'France'}
+                withoutSeparators={!showSeparators}
               >
                 <Drilldown.Option id="item21">Lyon</Drilldown.Option>
                 <Drilldown.Option id="item22">Bordeaux</Drilldown.Option>
@@ -676,8 +1135,8 @@ class GroupsExample extends React.Component {
 
               <Drilldown.Group
                 id="germany"
-                renderGroupTitle={this.state.showTitles && 'Germany'}
-                withoutSeparators={!this.state.showSeparators}
+                renderGroupTitle={showTitles && 'Germany'}
+                withoutSeparators={!showSeparators}
               >
                 <Drilldown.Option id="item31">Frankfurt</Drilldown.Option>
                 <Drilldown.Option id="item32">Dortmund</Drilldown.Option>
@@ -689,34 +1148,29 @@ class GroupsExample extends React.Component {
         <Flex.Item padding="0 0 0 large">
           <FormFieldGroup description="Drilldown Group example settings">
             <Checkbox
-              checked={this.state.showSeparators}
+              checked={showSeparators}
               label="Show separators"
               variant="toggle"
-              onChange={
-                () => {
-                  this.setState({ showSeparators: !this.state.showSeparators })
-                }
-              }
+              onChange={() => {
+                setShowSeparators(!showSeparators)
+              }}
             />
             <Checkbox
-              checked={this.state.showTitles}
+              checked={showTitles}
               label="Show group titles"
               variant="toggle"
-              onChange={
-                () => {
-                  this.setState({ showTitles: !this.state.showTitles })
-                }
-              }
+              onChange={() => {
+                setShowTitles(!showTitles)
+              }}
             />
           </FormFieldGroup>
         </Flex.Item>
       </Flex>
     )
   }
-}
 
-render(<GroupsExample />)
-```
+  render(<GroupsExample />)
+  ```
 
 #### Selectable Groups
 
@@ -759,80 +1213,263 @@ type: example
 
 ##### Multi-select Group
 
-```js
----
-type: example
----
+- ```js
+  class SelectMembersExample extends React.Component {
+    state = {
+      selected: {}
+    }
 
-class SelectMembersExample extends React.Component {
-  state = {
-    selected: {}
-  }
+    selectMembers(groupValues) {
+      this.setState(({ selected }) => {
+        return { selected: { ...selected, ...groupValues } }
+      })
+    }
 
-  selectMembers(groupValues) {
-    this.setState(({ selected }) => {
-      return { selected: { ...selected, ...groupValues }}
-    })
-  }
+    renderGroups(groups) {
+      return groups.map((group, idx) => {
+        const { id, label, members, selectableType } = group
 
-  renderGroups(groups) {
-    return groups.map((group, idx) => {
-      const { id, label, members, selectableType } = group
+        return (
+          <Drilldown.Group
+            id={id}
+            key={idx}
+            renderGroupTitle={label}
+            selectableType={selectableType}
+            onSelect={(_e, { value }) => {
+              this.selectMembers({ [id]: value })
+            }}
+          >
+            {members.map((member, idx) => {
+              const { id, name } = member
+              return (
+                <Drilldown.Option key={idx} id={id} value={name}>
+                  {name}
+                </Drilldown.Option>
+              )
+            })}
+          </Drilldown.Group>
+        )
+      })
+    }
+
+    renderSubPageOptions(subPages = []) {
+      return subPages.map((subPage, idx) => {
+        const { id, label } = subPage
+
+        return (
+          <Drilldown.Option key={idx} id={id} subPageId={id}>
+            {label}
+          </Drilldown.Option>
+        )
+      })
+    }
+
+    renderPage(category, key) {
+      const { id, subPages = [], groups = [] } = category
 
       return (
-        <Drilldown.Group
-          id={id}
-          key={idx}
-          renderGroupTitle={label}
-          selectableType={selectableType}
-          onSelect={(_e, { value }) => {
-            this.selectMembers({ [id]: value })
-          }}
-        >
-          {members.map((member, idx) => {
-            const { id, name } = member
-            return (
-              <Drilldown.Option key={idx} id={id} value={name}>
-                {name}
-              </Drilldown.Option>
-            )
-          })}
-
-        </Drilldown.Group>
+        <Drilldown.Page key={key} id={id}>
+          {subPages.length > 0 && this.renderSubPageOptions(subPages)}
+          {groups.length > 0 && this.renderGroups(groups)}
+        </Drilldown.Page>
       )
-    })
-  }
+    }
 
-  renderSubPageOptions(subPages = []) {
-    return subPages.map((subPage, idx) => {
-      const { id, label } = subPage
+    render() {
+      const { pages } = this.props
+      const { selected = {} } = this.state
 
       return (
-        <Drilldown.Option key={idx} id={id} subPageId={id}>
-          {label}
-        </Drilldown.Option>
+        <Flex alignItems="start">
+          <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+            <Drilldown
+              rootPageId="root"
+              width="18.5rem"
+              maxHeight="26.5rem"
+              trigger={<Button>Select Members</Button>}
+              shouldHideOnSelect={false}
+              onToggle={(_event, { shown }) => {
+                shown && this.selectMembers({})
+              }}
+            >
+              {pages.map((page, idx) => this.renderPage(page, idx))}
+            </Drilldown>
+          </Flex.Item>
+
+          <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+            <View as="div" padding="small" background="primary">
+              <div>
+                <Text weight="bold">Selected members:</Text>
+              </div>
+              <div>
+                <List>
+                  {Object.entries(selected).map(([groupId, values], idx) => {
+                    return values.length > 0 ? (
+                      <List.Item key={idx}>
+                        <b>{groupId}</b>: {values.join(', ')}
+                      </List.Item>
+                    ) : null
+                  })}
+                </List>
+              </div>
+            </View>
+          </Flex.Item>
+        </Flex>
       )
-    })
+    }
   }
 
-  renderPage(category, key) {
-    const { id, subPages = [], groups = [] } = category
+  const pages = [
+    {
+      id: 'root',
+      subPages: [
+        { id: 'courses', label: 'Courses' },
+        { id: 'groups', label: 'Groups' },
+        { id: 'consortiums', label: 'Consortiums' }
+      ]
+    },
+    {
+      id: 'courses',
+      groups: [
+        {
+          id: 'course1',
+          label: 'Course 1',
+          selectableType: 'multiple',
+          members: [
+            { id: 'course1_1', name: 'Hanna Septimus' },
+            { id: 'course1_2', name: 'Kadin Press' },
+            { id: 'course1_3', name: 'Kaiya Botosh' }
+          ]
+        },
+        {
+          id: 'course2',
+          label: 'Course 2',
+          selectableType: 'multiple',
+          members: [
+            { id: 'course2_1', name: 'Leo Calzoni' },
+            { id: 'course2_2', name: 'Gretchen Gouse' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'groups',
+      groups: [
+        {
+          id: 'group1',
+          label: 'Group 1',
+          selectableType: 'multiple',
+          members: [
+            { id: 'groups1_1', name: 'Penka Okabe' },
+            { id: 'groups1_2', name: 'Ausma Meggyesfalvi' },
+            { id: 'groups1_3', name: 'Endrit Höfler' },
+            { id: 'groups1_4', name: 'Ryuu Carey' },
+            { id: 'groups1_5', name: 'Daphne Dioli' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'consortiums',
+      groups: [
+        {
+          id: 'consortium1',
+          label: 'Consortium 1',
+          selectableType: 'multiple',
+          members: [
+            { id: 'consortium1_1', name: 'Brahim Gustavsson' },
+            { id: 'consortium1_2', name: 'Elodia Dreschner' }
+          ]
+        },
+        {
+          id: 'consortium2',
+          label: 'Consortium 2',
+          selectableType: 'multiple',
+          members: [
+            { id: 'consortium2_1', name: 'Darwin Peter' },
+            { id: 'consortium2_2', name: 'Sukhrab Burnham' }
+          ]
+        },
+        {
+          id: 'consortium3',
+          label: 'Consortium 3',
+          selectableType: 'multiple',
+          members: [
+            { id: 'consortium3_1', name: 'Jeffry Antonise' },
+            { id: 'consortium3_2', name: 'Bia Regenbogen' }
+          ]
+        }
+      ]
+    }
+  ]
+
+  render(<SelectMembersExample pages={pages} />)
+  ```
+
+- ```js
+  const SelectMembersExample = (props) => {
+    const [selected, setSelected] = useState({})
+
+    const selectMembers = (groupValues) => {
+      setSelected((selected) => ({
+        ...selected,
+        ...groupValues
+      }))
+    }
+
+    const renderGroups = (groups) => {
+      return groups.map((group, idx) => {
+        const { id, label, members, selectableType } = group
+
+        return (
+          <Drilldown.Group
+            id={id}
+            key={idx}
+            renderGroupTitle={label}
+            selectableType={selectableType}
+            onSelect={(_e, { value }) => {
+              selectMembers({ [id]: value })
+            }}
+          >
+            {members.map((member, idx) => {
+              const { id, name } = member
+              return (
+                <Drilldown.Option key={idx} id={id} value={name}>
+                  {name}
+                </Drilldown.Option>
+              )
+            })}
+          </Drilldown.Group>
+        )
+      })
+    }
+
+    const renderSubPageOptions = (subPages = []) => {
+      return subPages.map((subPage, idx) => {
+        const { id, label } = subPage
+
+        return (
+          <Drilldown.Option key={idx} id={id} subPageId={id}>
+            {label}
+          </Drilldown.Option>
+        )
+      })
+    }
+
+    const renderPage = (category, key) => {
+      const { id, subPages = [], groups = [] } = category
+
+      return (
+        <Drilldown.Page key={key} id={id}>
+          {subPages.length > 0 && renderSubPageOptions(subPages)}
+          {groups.length > 0 && renderGroups(groups)}
+        </Drilldown.Page>
+      )
+    }
 
     return (
-      <Drilldown.Page key={key} id={id}>
-        {subPages.length > 0 && this.renderSubPageOptions(subPages)}
-        {groups.length > 0 && this.renderGroups(groups)}
-      </Drilldown.Page>
-    )
-  }
-
-  render() {
-    const { pages } = this.props
-    const { selected = {} } = this.state
-
-    return (
-      <Flex alignItems='start'>
-        <Flex.Item width="20rem" textAlign="center" padding='x-small 0 0'>
+      <Flex alignItems="start">
+        <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
           <Drilldown
             rootPageId="root"
             width="18.5rem"
@@ -840,21 +1477,21 @@ class SelectMembersExample extends React.Component {
             trigger={<Button>Select Members</Button>}
             shouldHideOnSelect={false}
             onToggle={(_event, { shown }) => {
-              shown && this.selectMembers({})
+              shown && selectMembers({})
             }}
           >
-            {pages.map((page, idx) => this.renderPage(page, idx))}
+            {props.pages.map((page, idx) => renderPage(page, idx))}
           </Drilldown>
         </Flex.Item>
 
-        <Flex.Item padding='0 0 0 large' shouldGrow shouldShrink>
-          <View as="div" padding='small' background='primary'>
+        <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+          <View as="div" padding="small" background="primary">
             <div>
-              <Text weight='bold'>Selected members:</Text>
+              <Text weight="bold">Selected members:</Text>
             </div>
             <div>
               <List>
-                {Object.entries(selected).map(([ groupId, values ], idx) => {
+                {Object.entries(selected).map(([groupId, values], idx) => {
                   return values.length > 0 ? (
                     <List.Item key={idx}>
                       <b>{groupId}</b>: {values.join(', ')}
@@ -868,111 +1505,228 @@ class SelectMembersExample extends React.Component {
       </Flex>
     )
   }
-}
 
-const pages = [
-  {
-    id: 'root',
-    subPages: [
-      { id: 'courses', label: 'Courses' },
-      { id: 'groups', label: 'Groups' },
-      { id: 'consortiums', label: 'Consortiums' }
-    ]
-  },
-  {
-    id: 'courses',
-    groups: [
-      {
-        id: 'course1',
-        label: 'Course 1',
-        selectableType: 'multiple',
-        members: [
-          { id: 'course1_1', name: 'Hanna Septimus' },
-          { id: 'course1_2', name: 'Kadin Press' },
-          { id: 'course1_3', name: 'Kaiya Botosh' },
-        ]
-      },
-      {
-        id: 'course2',
-        label: 'Course 2',
-        selectableType: 'multiple',
-        members: [
-          { id: 'course2_1', name: 'Leo Calzoni' },
-          { id: 'course2_2', name: 'Gretchen Gouse' },
-        ]
-      }
-    ]
-  },
-  {
-    id: 'groups',
-    groups: [
-      {
-        id: 'group1',
-        label: 'Group 1',
-        selectableType: 'multiple',
-        members: [
-          { id: 'groups1_1', name: 'Penka Okabe' },
-          { id: 'groups1_2', name: 'Ausma Meggyesfalvi' },
-          { id: 'groups1_3', name: 'Endrit Höfler' },
-          { id: 'groups1_4', name: 'Ryuu Carey' },
-          { id: 'groups1_5', name: 'Daphne Dioli' },
-        ]
-      }
-    ]
-  },
-  {
-    id: 'consortiums',
-    groups: [
-      {
-        id: 'consortium1',
-        label: 'Consortium 1',
-        selectableType: 'multiple',
-        members: [
-          { id: 'consortium1_1', name: 'Brahim Gustavsson' },
-          { id: 'consortium1_2', name: 'Elodia Dreschner' },
-        ]
-      },
-      {
-        id: 'consortium2',
-        label: 'Consortium 2',
-        selectableType: 'multiple',
-        members: [
-          { id: 'consortium2_1', name: 'Darwin Peter' },
-          { id: 'consortium2_2', name: 'Sukhrab Burnham' },
-        ]
-      },
-      {
-        id: 'consortium3',
-        label: 'Consortium 3',
-        selectableType: 'multiple',
-        members: [
-          { id: 'consortium3_1', name: 'Jeffry Antonise' },
-          { id: 'consortium3_2', name: 'Bia Regenbogen' },
-        ]
-      }
-    ]
-  }
-]
+  const pages = [
+    {
+      id: 'root',
+      subPages: [
+        { id: 'courses', label: 'Courses' },
+        { id: 'groups', label: 'Groups' },
+        { id: 'consortiums', label: 'Consortiums' }
+      ]
+    },
+    {
+      id: 'courses',
+      groups: [
+        {
+          id: 'course1',
+          label: 'Course 1',
+          selectableType: 'multiple',
+          members: [
+            { id: 'course1_1', name: 'Hanna Septimus' },
+            { id: 'course1_2', name: 'Kadin Press' },
+            { id: 'course1_3', name: 'Kaiya Botosh' }
+          ]
+        },
+        {
+          id: 'course2',
+          label: 'Course 2',
+          selectableType: 'multiple',
+          members: [
+            { id: 'course2_1', name: 'Leo Calzoni' },
+            { id: 'course2_2', name: 'Gretchen Gouse' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'groups',
+      groups: [
+        {
+          id: 'group1',
+          label: 'Group 1',
+          selectableType: 'multiple',
+          members: [
+            { id: 'groups1_1', name: 'Penka Okabe' },
+            { id: 'groups1_2', name: 'Ausma Meggyesfalvi' },
+            { id: 'groups1_3', name: 'Endrit Höfler' },
+            { id: 'groups1_4', name: 'Ryuu Carey' },
+            { id: 'groups1_5', name: 'Daphne Dioli' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'consortiums',
+      groups: [
+        {
+          id: 'consortium1',
+          label: 'Consortium 1',
+          selectableType: 'multiple',
+          members: [
+            { id: 'consortium1_1', name: 'Brahim Gustavsson' },
+            { id: 'consortium1_2', name: 'Elodia Dreschner' }
+          ]
+        },
+        {
+          id: 'consortium2',
+          label: 'Consortium 2',
+          selectableType: 'multiple',
+          members: [
+            { id: 'consortium2_1', name: 'Darwin Peter' },
+            { id: 'consortium2_2', name: 'Sukhrab Burnham' }
+          ]
+        },
+        {
+          id: 'consortium3',
+          label: 'Consortium 3',
+          selectableType: 'multiple',
+          members: [
+            { id: 'consortium3_1', name: 'Jeffry Antonise' },
+            { id: 'consortium3_2', name: 'Bia Regenbogen' }
+          ]
+        }
+      ]
+    }
+  ]
 
-render(<SelectMembersExample pages={pages} />)
-```
+  render(<SelectMembersExample pages={pages} />)
+  ```
 
 ### Disabled prop
 
 You can disable the whole Drilldown or its sub-components with the `disabled` prop. The only option that can not be disabled is the Back navigation.
 
-```js
----
-type: example
----
-class DisabledExample extends React.Component {
-  state = {
-    disabled: 'None',
-    withTrigger: false
+- ```js
+  class DisabledExample extends React.Component {
+    state = {
+      disabled: 'None',
+      withTrigger: false
+    }
+
+    render() {
+      const { disabled, withTrigger } = this.state
+
+      const disabledDrilldown = disabled === 'Drilldown'
+      const disabledPages = disabled === 'Pages'
+      const disabledGroups = disabled === 'Groups'
+      const disabledOptions = disabled === 'Options'
+
+      return (
+        <Flex alignItems="start">
+          <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+            <View textAlign="start">
+              <Drilldown
+                rootPageId="root"
+                width="20rem"
+                maxHeight="30rem"
+                trigger={withTrigger && <Button>Toggle button</Button>}
+                disabled={disabledDrilldown}
+              >
+                <Drilldown.Page
+                  id="root"
+                  renderTitle="Root page"
+                  renderActionLabel="Action"
+                  disabled={disabledPages}
+                >
+                  <Drilldown.Option
+                    id="disabledOption1"
+                    subPageId="secondPage"
+                    disabled={disabledOptions}
+                  >
+                    Option with subPage navigation
+                  </Drilldown.Option>
+                  <Drilldown.Option
+                    id="disabledOption2"
+                    disabled={disabledOptions}
+                  >
+                    Option
+                  </Drilldown.Option>
+                  <Drilldown.Group
+                    id="group1"
+                    renderGroupTitle="Selectable Group"
+                    selectableType="multiple"
+                    disabled={disabledGroups}
+                  >
+                    {['Apple', 'Orange', 'Banana', 'Strawberry'].map((item) => (
+                      <Drilldown.Option
+                        id={item}
+                        key={item}
+                        value={item}
+                        defaultSelected={item === 'Apple'}
+                        disabled={disabledOptions}
+                      >
+                        {item}
+                      </Drilldown.Option>
+                    ))}
+                  </Drilldown.Group>
+                </Drilldown.Page>
+
+                <Drilldown.Page
+                  id="secondPage"
+                  renderTitle="Second page"
+                  disabled={disabledPages}
+                >
+                  {['Option 1', 'Option 2', 'Option 3', 'Option 4'].map(
+                    (item) => (
+                      <Drilldown.Option
+                        id={item}
+                        key={item}
+                        disabled={disabledOptions}
+                      >
+                        {item}
+                      </Drilldown.Option>
+                    )
+                  )}
+                </Drilldown.Page>
+              </Drilldown>
+            </View>
+          </Flex.Item>
+
+          <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+            <FormFieldGroup
+              description={<ScreenReaderContent>Settings</ScreenReaderContent>}
+              colSpacing="medium"
+              layout="columns"
+              vAlign="top"
+            >
+              <RadioInputGroup
+                onChange={(_event, value) => {
+                  this.setState({ disabled: value })
+                }}
+                defaultValue="None"
+                name="disabledPart"
+                description="Select disabled"
+              >
+                {['None', 'Drilldown', 'Pages', 'Groups', 'Options'].map(
+                  (part) => (
+                    <RadioInput key={part} value={part} label={part} />
+                  )
+                )}
+              </RadioInputGroup>
+
+              <Checkbox
+                checked={this.state.withTrigger}
+                label="With toggle button"
+                variant="toggle"
+                onChange={() => {
+                  this.setState({ withTrigger: !this.state.withTrigger })
+                }}
+              />
+            </FormFieldGroup>
+          </Flex.Item>
+        </Flex>
+      )
+    }
   }
 
-  render() {
-    const { disabled, withTrigger } = this.state
+  render(<DisabledExample />)
+  ```
+
+- ```js
+  const DisabledExample = () => {
+    const [disabled, setDisabled] = useState('None')
+    const [withTrigger, setWithTrigger] = useState(false)
 
     const disabledDrilldown = disabled === 'Drilldown'
     const disabledPages = disabled === 'Pages'
@@ -980,11 +1734,11 @@ class DisabledExample extends React.Component {
     const disabledOptions = disabled === 'Options'
 
     return (
-      <Flex alignItems='start'>
-        <Flex.Item width="20rem" textAlign='center' padding='x-small 0 0'>
-          <View textAlign='start'>
+      <Flex alignItems="start">
+        <Flex.Item width="20rem" textAlign="center" padding="x-small 0 0">
+          <View textAlign="start">
             <Drilldown
-              rootPageId='root'
+              rootPageId="root"
               width="20rem"
               maxHeight="30rem"
               trigger={withTrigger && <Button>Toggle button</Button>}
@@ -998,33 +1752,34 @@ class DisabledExample extends React.Component {
               >
                 <Drilldown.Option
                   id="disabledOption1"
-                  subPageId='secondPage'
+                  subPageId="secondPage"
                   disabled={disabledOptions}
                 >
                   Option with subPage navigation
                 </Drilldown.Option>
-                <Drilldown.Option id="disabledOption2" disabled={disabledOptions}>
+                <Drilldown.Option
+                  id="disabledOption2"
+                  disabled={disabledOptions}
+                >
                   Option
                 </Drilldown.Option>
                 <Drilldown.Group
                   id="group1"
                   renderGroupTitle="Selectable Group"
-                  selectableType='multiple'
+                  selectableType="multiple"
                   disabled={disabledGroups}
                 >
-                  {['Apple', 'Orange', 'Banana', 'Strawberry'].map(
-                    item => (
-                      <Drilldown.Option
-                        id={item}
-                        key={item}
-                        value={item}
-                        defaultSelected={item === 'Apple'}
-                        disabled={disabledOptions}
-                      >
-                        {item}
-                      </Drilldown.Option>
-                    )
-                  )}
+                  {['Apple', 'Orange', 'Banana', 'Strawberry'].map((item) => (
+                    <Drilldown.Option
+                      id={item}
+                      key={item}
+                      value={item}
+                      defaultSelected={item === 'Apple'}
+                      disabled={disabledOptions}
+                    >
+                      {item}
+                    </Drilldown.Option>
+                  ))}
                 </Drilldown.Group>
               </Drilldown.Page>
 
@@ -1034,7 +1789,7 @@ class DisabledExample extends React.Component {
                 disabled={disabledPages}
               >
                 {['Option 1', 'Option 2', 'Option 3', 'Option 4'].map(
-                  item => (
+                  (item) => (
                     <Drilldown.Option
                       id={item}
                       key={item}
@@ -1058,34 +1813,35 @@ class DisabledExample extends React.Component {
           >
             <RadioInputGroup
               onChange={(_event, value) => {
-                this.setState({ disabled: value })
+                setDisabled(value)
               }}
               defaultValue="None"
               name="disabledPart"
               description="Select disabled"
             >
-              {['None', 'Drilldown', 'Pages', 'Groups', 'Options'].map(part => <RadioInput key={part} value={part} label={part} />)}
+              {['None', 'Drilldown', 'Pages', 'Groups', 'Options'].map(
+                (part) => (
+                  <RadioInput key={part} value={part} label={part} />
+                )
+              )}
             </RadioInputGroup>
 
             <Checkbox
-              checked={this.state.withTrigger}
+              checked={withTrigger}
               label="With toggle button"
               variant="toggle"
-              onChange={
-                () => {
-                  this.setState({ withTrigger: !this.state.withTrigger })
-                }
-              }
+              onChange={() => {
+                setWithTrigger(!withTrigger)
+              }}
             />
           </FormFieldGroup>
         </Flex.Item>
       </Flex>
     )
   }
-}
 
-render(<DisabledExample />)
-```
+  render(<DisabledExample />)
+  ```
 
 ### shouldHideOnSelect
 
@@ -1232,179 +1988,400 @@ type: example
 
 The following example showcases an editable drilldown that can add or delete options.
 
-```js
----
-type: example
----
+- ```js
+  class EditableStructureExample extends React.Component {
+    constructor(props) {
+      super(props)
 
-class EditableStructureExample extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      districtsData: {
-        d1: {
-          label: 'District 1',
-          schools: ['s1']
-        }
-      },
-      schoolsData: {
-        s1: {
-          label: 'School 1',
-          districtId: 'd1',
-          isSelected: false
+      this.state = {
+        districtsData: {
+          d1: {
+            label: 'District 1',
+            schools: ['s1']
+          }
+        },
+        schoolsData: {
+          s1: {
+            label: 'School 1',
+            districtId: 'd1',
+            isSelected: false
+          }
         }
       }
+
+      this.districtCounter = Object.keys(this.state.districtsData).length
+      this.schoolCounter = Object.keys(this.state.schoolsData).length
     }
 
-    this.districtCounter = Object.keys(this.state.districtsData).length
-    this.schoolCounter = Object.keys(this.state.schoolsData).length
+    toggleSelectedSchool(id, school) {
+      this.setState({
+        schoolsData: {
+          ...this.state.schoolsData,
+          [id]: { ...school, isSelected: !school.isSelected }
+        }
+      })
+    }
+
+    renderSelectedIcon(isSelected) {
+      return <IconCheckSolid style={{ opacity: isSelected ? 1 : 0 }} />
+    }
+
+    renderAddAction(label) {
+      return (
+        <span>
+          <IconAddSolid />
+          <View as="span" margin="0 0 0 x-small">
+            New {label}
+          </View>
+        </span>
+      )
+    }
+
+    addDistrict() {
+      const { districtsData } = this.state
+      this.districtCounter++
+      const districtNumber = this.districtCounter
+      const districtId = `d${districtNumber}`
+
+      this.setState({
+        districtsData: {
+          ...districtsData,
+          [districtId]: {
+            label: `District ${districtNumber}`,
+            schools: []
+          }
+        }
+      })
+    }
+
+    addSchool(districtId) {
+      const { districtsData, schoolsData } = this.state
+      const district = districtsData[districtId]
+
+      this.schoolCounter++
+      const schoolNumber = this.schoolCounter
+      const schoolId = `s${schoolNumber}`
+
+      this.setState({
+        districtsData: {
+          ...districtsData,
+          [districtId]: {
+            ...district,
+            schools: [...district.schools, schoolId]
+          }
+        },
+        schoolsData: {
+          ...schoolsData,
+          [schoolId]: {
+            label: `School ${schoolNumber}`,
+            districtId,
+            isSelected: false
+          }
+        }
+      })
+    }
+
+    renderDeleteOption(type, label, idToDelete) {
+      const id = type === 'school' ? 'deleteSchool' : 'deleteDistrict'
+      const callback =
+        type === 'school' ? this.deleteSchool : this.deleteDistrict
+      const separatorId = `${idToDelete}__separator`
+
+      return [
+        <Drilldown.Separator id={separatorId} key={separatorId} />,
+        <Drilldown.Option
+          id={id}
+          key={`${idToDelete}__${id}`}
+          onOptionClick={() => {
+            callback(idToDelete)
+          }}
+          themeOverride={(_componentTheme, currentTheme) => {
+            return { color: currentTheme.colors.textDanger }
+          }}
+        >
+          <IconTrashLine />
+          <View as="span" margin="0 0 0 x-small">
+            Delete {label}
+          </View>
+        </Drilldown.Option>
+      ]
+    }
+
+    deleteSchool = (id) => {
+      const { districtsData, schoolsData } = this.state
+      const { [id]: school, ...restSchools } = schoolsData
+      const { districtId } = school
+      const district = districtsData[districtId]
+
+      this.setState({
+        schoolsData: restSchools,
+        districtsData: {
+          ...districtsData,
+          [districtId]: {
+            ...district,
+            schools: district.schools.filter((schoolId) => schoolId !== id)
+          }
+        }
+      })
+    }
+
+    deleteDistrict = (id) => {
+      const { districtsData, schoolsData } = this.state
+      const { [id]: district, ...restDistricts } = districtsData
+
+      const filteredSchools = {}
+
+      Object.entries(schoolsData).forEach(([schoolId, school]) => {
+        if (school.districtId !== id) {
+          filteredSchools[schoolId] = school
+        }
+      })
+
+      this.setState({
+        districtsData: restDistricts,
+        schoolsData: filteredSchools
+      })
+    }
+
+    render() {
+      const { districtsData, schoolsData } = this.state
+      const districts = Object.entries(districtsData)
+      const schools = Object.entries(schoolsData)
+
+      return (
+        <Drilldown rootPageId="root" width="18.5rem" maxHeight="26.5rem">
+          <Drilldown.Page
+            id="root"
+            renderTitle="Districts"
+            renderActionLabel={this.renderAddAction('District')}
+            onHeaderActionClicked={() => {
+              this.addDistrict()
+            }}
+          >
+            {districts.map(([id, district]) => {
+              const { label } = district
+              return (
+                <Drilldown.Option
+                  key={`districtOption__${id}`}
+                  id={id}
+                  subPageId={id}
+                >
+                  {label}
+                </Drilldown.Option>
+              )
+            })}
+          </Drilldown.Page>
+
+          {districts.map(([districtId, district]) => {
+            const { label, schools } = district
+            return (
+              <Drilldown.Page
+                key={`districtPage__${districtId}`}
+                id={districtId}
+                renderTitle={label}
+                renderActionLabel={this.renderAddAction('School')}
+                onHeaderActionClicked={() => {
+                  this.addSchool(districtId)
+                }}
+              >
+                {schools.map((id) => {
+                  const { label, isSelected } = this.state.schoolsData[id]
+                  return (
+                    <Drilldown.Option
+                      key={`schoolOption__${districtId}--${id}`}
+                      id={id}
+                      subPageId={id}
+                      renderBeforeLabel={this.renderSelectedIcon(isSelected)}
+                    >
+                      {label}
+                    </Drilldown.Option>
+                  )
+                })}
+                {this.renderDeleteOption('district', label, districtId)}
+              </Drilldown.Page>
+            )
+          })}
+
+          {schools.map(([id, school]) => {
+            const { label, isSelected } = school
+            return (
+              <Drilldown.Page
+                key={`schoolPage__${id}`}
+                id={id}
+                withoutHeaderSeparator
+              >
+                <Drilldown.Option
+                  id="toggleSchool"
+                  renderBeforeLabel={this.renderSelectedIcon(isSelected)}
+                  onOptionClick={() => {
+                    this.toggleSelectedSchool(id, school)
+                  }}
+                >
+                  {isSelected ? 'Deselect' : 'Select'} {label}
+                </Drilldown.Option>
+                {this.renderDeleteOption('school', label, id)}
+              </Drilldown.Page>
+            )
+          })}
+        </Drilldown>
+      )
+    }
   }
 
-  toggleSelectedSchool(id, school) {
-    this.setState({ schoolsData: {
-      ...this.state.schoolsData,
+  render(<EditableStructureExample />)
+  ```
+
+- ```js
+  const EditableStructureExample = () => {
+    const [districtsData, setDistrictsData] = useState({
+      d1: {
+        label: 'District 1',
+        schools: ['s1']
+      }
+    })
+    const [schoolsData, setSchoolsData] = useState({
+      s1: {
+        label: 'School 1',
+        districtId: 'd1',
+        isSelected: false
+      }
+    })
+
+    const [districtCounter, setDistrictCounter] = useState(
+      Object.keys(districtsData).length
+    )
+    const [schoolCounter, setSchoolCounter] = useState(
+      Object.keys(schoolsData).length
+    )
+
+    const districts = Object.entries(districtsData)
+    const schools = Object.entries(schoolsData)
+
+    const toggleSelectedSchool = (id, school) => {
+      setSchoolsData({
+        ...schoolsData,
         [id]: { ...school, isSelected: !school.isSelected }
-    } })
-  }
+      })
+    }
 
-  renderSelectedIcon(isSelected) {
-    return (
-      <IconCheckSolid
-        style={{ opacity: isSelected ? 1 : 0 }}
-      />
-    )
-  }
+    const renderSelectedIcon = (isSelected) => {
+      return <IconCheckSolid style={{ opacity: isSelected ? 1 : 0 }} />
+    }
 
-  renderAddAction(label) {
-    return (
-      <span>
-        <IconAddSolid />
-        <View as="span" margin="0 0 0 x-small">New {label}</View>
-      </span>
-    )
-  }
+    const renderAddAction = (label) => {
+      return (
+        <span>
+          <IconAddSolid />
+          <View as="span" margin="0 0 0 x-small">
+            New {label}
+          </View>
+        </span>
+      )
+    }
 
-  addDistrict() {
-    const { districtsData } = this.state
-    this.districtCounter++
-    const districtNumber = this.districtCounter
-    const districtId = `d${districtNumber}`
+    const addDistrict = () => {
+      const newDistrictCounter = districtCounter + 1
+      const districtNumber = newDistrictCounter
+      const districtId = `d${newDistrictCounter}`
+      setDistrictCounter(newDistrictCounter)
 
-    this.setState({
-      districtsData: {
+      setDistrictsData((districtsData) => ({
         ...districtsData,
         [districtId]: {
           label: `District ${districtNumber}`,
           schools: []
         }
-      }
-    })
-  }
+      }))
+    }
 
-  addSchool(districtId) {
-    const { districtsData, schoolsData } = this.state
-    const district = districtsData[districtId]
+    const addSchool = (districtId) => {
+      const newSchoolCounter = schoolCounter + 1
+      const district = districtsData[districtId]
+      const schoolNumber = newSchoolCounter
+      const schoolId = `s${newSchoolCounter}`
+      setSchoolCounter(newSchoolCounter)
 
-    this.schoolCounter++
-    const schoolNumber = this.schoolCounter
-    const schoolId = `s${schoolNumber}`
-
-    this.setState({
-      districtsData: {
+      setDistrictsData((districtsData) => ({
         ...districtsData,
         [districtId]: {
-          ...district,
+          ...districtsData[districtId],
           schools: [...district.schools, schoolId]
         }
-      },
-      schoolsData: {
+      }))
+
+      setSchoolsData((schoolsData) => ({
         ...schoolsData,
         [schoolId]: {
           label: `School ${schoolNumber}`,
           districtId,
           isSelected: false
         }
-      }
-    })
-  }
+      }))
+    }
 
-  renderDeleteOption(type, label, idToDelete) {
-    const id = type === 'school' ? "deleteSchool" : "deleteDistrict"
-    const callback = type === 'school' ? this.deleteSchool : this.deleteDistrict
-    const separatorId = `${idToDelete}__separator`
+    const renderDeleteOption = (type, label, idToDelete) => {
+      const id = type === 'school' ? 'deleteSchool' : 'deleteDistrict'
+      const callback = type === 'school' ? deleteSchool : deleteDistrict
+      const separatorId = `${idToDelete}__separator`
 
-    return [
-      <Drilldown.Separator id={separatorId} key={separatorId} />,
-      <Drilldown.Option
-        id={id}
-        key={`${idToDelete}__${id}`}
-        onOptionClick={() => { callback(idToDelete) }}
-        themeOverride={(_componentTheme, currentTheme) => {
-          return { color: currentTheme.colors.textDanger }
-        }}
-      >
-        <IconTrashLine />
-        <View as='span' margin='0 0 0 x-small'>
-          Delete {label}
-        </View>
-      </Drilldown.Option>
-    ]
-  }
+      return [
+        <Drilldown.Separator id={separatorId} key={separatorId} />,
+        <Drilldown.Option
+          id={id}
+          key={`${idToDelete}__${id}`}
+          onOptionClick={() => {
+            callback(idToDelete)
+          }}
+          themeOverride={(_componentTheme, currentTheme) => {
+            return { color: currentTheme.colors.textDanger }
+          }}
+        >
+          <IconTrashLine />
+          <View as="span" margin="0 0 0 x-small">
+            Delete {label}
+          </View>
+        </Drilldown.Option>
+      ]
+    }
 
-  deleteSchool = (id) => {
-    const { districtsData, schoolsData } = this.state
-    const { [id]: school, ...restSchools } = schoolsData
-    const { districtId } = school
-    const district = districtsData[districtId]
+    const deleteSchool = (id) => {
+      const { [id]: school, ...restSchools } = schoolsData
+      const { districtId } = school
+      const district = districtsData[districtId]
 
-    this.setState({
-      schoolsData: restSchools,
-      districtsData: {
+      setSchoolsData(restSchools)
+      setDistrictsData({
         ...districtsData,
         [districtId]: {
           ...district,
-          schools: district.schools.filter(schoolId => schoolId !== id)
+          schools: district.schools.filter((schoolId) => schoolId !== id)
         }
-      }
-    })
-  }
+      })
+    }
 
-  deleteDistrict = (id) => {
-    const { districtsData, schoolsData } = this.state
-    const { [id]: district, ...restDistricts } = districtsData
+    const deleteDistrict = (id) => {
+      const { [id]: district, ...restDistricts } = districtsData
 
-    const filteredSchools = {}
+      const filteredSchools = {}
 
-    Object.entries(schoolsData).forEach(([schoolId, school]) => {
-      if (school.districtId !== id) {
-        filteredSchools[schoolId] = school
-      }
-    })
+      Object.entries(schoolsData).forEach(([schoolId, school]) => {
+        if (school.districtId !== id) {
+          filteredSchools[schoolId] = school
+        }
+      })
 
-    this.setState({
-      districtsData: restDistricts,
-      schoolsData: filteredSchools
-    })
-  }
-
-  render() {
-    const { districtsData, schoolsData } = this.state
-    const districts = Object.entries(districtsData)
-    const schools = Object.entries(schoolsData)
+      setDistrictsData(restDistricts)
+      setSchoolsData(filteredSchools)
+    }
 
     return (
-      <Drilldown
-        rootPageId="root"
-        width="18.5rem"
-        maxHeight="26.5rem"
-      >
+      <Drilldown rootPageId="root" width="18.5rem" maxHeight="26.5rem">
         <Drilldown.Page
           id="root"
           renderTitle="Districts"
-          renderActionLabel={this.renderAddAction('District')}
+          renderActionLabel={renderAddAction('District')}
           onHeaderActionClicked={() => {
-            this.addDistrict()
+            addDistrict()
           }}
         >
           {districts.map(([id, district]) => {
@@ -1421,32 +2398,32 @@ class EditableStructureExample extends React.Component {
           })}
         </Drilldown.Page>
 
-        {districts.map(([districtId , district]) => {
+        {districts.map(([districtId, district]) => {
           const { label, schools } = district
           return (
             <Drilldown.Page
               key={`districtPage__${districtId}`}
               id={districtId}
               renderTitle={label}
-              renderActionLabel={this.renderAddAction('School')}
+              renderActionLabel={renderAddAction('School')}
               onHeaderActionClicked={() => {
-                this.addSchool(districtId)
+                addSchool(districtId)
               }}
             >
               {schools.map((id) => {
-                const { label, isSelected } = this.state.schoolsData[id]
+                const { label, isSelected } = schoolsData[id]
                 return (
                   <Drilldown.Option
                     key={`schoolOption__${districtId}--${id}`}
                     id={id}
                     subPageId={id}
-                    renderBeforeLabel={this.renderSelectedIcon(isSelected)}
+                    renderBeforeLabel={renderSelectedIcon(isSelected)}
                   >
                     {label}
                   </Drilldown.Option>
                 )
               })}
-              {this.renderDeleteOption('district', label, districtId)}
+              {renderDeleteOption('district', label, districtId)}
             </Drilldown.Page>
           )
         })}
@@ -1461,24 +2438,23 @@ class EditableStructureExample extends React.Component {
             >
               <Drilldown.Option
                 id="toggleSchool"
-                renderBeforeLabel={this.renderSelectedIcon(isSelected)}
+                renderBeforeLabel={renderSelectedIcon(isSelected)}
                 onOptionClick={() => {
-                  this.toggleSelectedSchool(id, school)
+                  toggleSelectedSchool(id, school)
                 }}
               >
                 {isSelected ? 'Deselect' : 'Select'} {label}
               </Drilldown.Option>
-              {this.renderDeleteOption('school', label, id)}
+              {renderDeleteOption('school', label, id)}
             </Drilldown.Page>
           )
         })}
       </Drilldown>
     )
   }
-}
 
-render(<EditableStructureExample />)
-```
+  render(<EditableStructureExample />)
+  ```
 
 ### Guidelines
 
