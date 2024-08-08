@@ -25,31 +25,17 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vitest/config'
-import path from 'path'
 
 export default defineConfig({
   test: {
-    include: ['**/__tests__/**/*.test.{js,ts,tsx}'],
+    include: ['**/__tests__/**/*.test.js'],
+    setupFiles: ['./ts-require-transform'],
     globals: true,
     environment: 'node'
   },
-  resolve: {
-    alias: {
-      '@lib': path.resolve(__dirname, 'lib')
-    },
-    extensions: ['.ts', '.js'],
-    mainFields: ['main']
-  },
+  // esbuild config for ts-require-transform
   esbuild: {
-    loader: 'ts',
-    target: 'esnext'
-  }
+    target: 'node20',
+    format: 'cjs'
+  },
 })
-
-// export default defineConfig({
-//   test: {
-//     include: ['**/__tests__/**/*.test.js'],
-//     globals: true,
-//     environment: 'node'
-//   }
-// })

@@ -25,9 +25,6 @@
 import path from 'path'
 import { defineTest } from 'jscodeshift/dist/testUtils'
 
-import { expect } from 'vitest'
-import updateImports from '../lib/updateImports.ts'
-
 const tests = [
   'defaultToDefault',
   'defaultToNamed',
@@ -39,22 +36,10 @@ const tests = [
 ]
 
 describe('updateImports', () => {
-  describe('Test', () => {
-    it('should be green', () => {
-      const x = 1
-      const y = 1
-      expect(x + y).toBe(2)
-    })
-
-    it('should import updateImports without errors', () => {
-      expect(updateImports).toBeDefined()
-    })
-  })
-
   tests.forEach((test) => {
     defineTest(
       __dirname,
-      'lib/updateImports.ts', // with .ts extension !!!!
+      'lib/updateImports',
       {
         config: path.join(__dirname, `../__testfixtures__/${test}.config.js`)
       },

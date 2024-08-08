@@ -3,8 +3,7 @@
   "version": "10.0.0",
   "description": "Codemod scripts to help upgrade Instructure UI libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
-  "main": "./lib/index.js",
+  "main": "./lib/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -22,7 +21,8 @@
     "@instructure/ui-babel-preset": "10.0.0",
     "@types/jscodeshift": "^0.11.11",
     "@types/prettier": "^2.7.3",
-    "vitest": "^2.0.2"
+    "vitest": "^2.0.2",
+    "@xn-sakina/phoenix": "^1.0.3"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",

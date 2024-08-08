@@ -1,21 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "./",
-    "outDir": "./dist",
-    "module": "ESNext", // Ensures ES module compatibility
-    "target": "ESNext", // Ensures modern JavaScript target
-    "esModuleInterop": true, // Allows default imports from CommonJS modules
-    "skipLibCheck": true, // Skips type checking of declaration files
-    "strict": true, // Enables all strict type-checking options
-    "baseUrl": "./", // Ensures the base URL is set correctly for this package
-    "paths": {
-      "@lib/*": ["lib/*"] // Maps '@lib' alias to 'lib' directory
-    }
-  },
-  "include": [
-    "lib/**/*.ts",
-    "__tests__/**/*.test.ts",
-    "__testfixtures__/**/*.ts"
-  ]
+  "compilerOptions": {}
 }
