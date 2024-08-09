@@ -38,6 +38,7 @@
     "build:types": "tsc -b tsconfig.references.json",
     "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && npm run build:types --verbose",
     "clean": "node scripts/clean.js",
+    "clean-node": "node scripts/clean.js --nuke_node",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts bump",
     "release": "ui-scripts publish",

@@ -25,6 +25,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const url = require('url')
 
 const NODE_PACKAGES = [
   'ui-icons-build',
@@ -57,6 +58,7 @@ function deleteDirs(dirs = []) {
     fs.rmSync(dir, { force: true, recursive: true })
   })
 }
+// deletes built files from tooling packages (NODE_PACKAGES const)
 function clean() {
   const packagesPath = path.resolve('./packages')
   const dir = fs.opendirSync(packagesPath)
@@ -74,8 +76,27 @@ function clean() {
     }
   }
 }
+// deletes node_modules recursively
+function removeNodeModules() {
+  const dirs = fs.readdirSync('.', { recursive: true, withFileTypes: true })
+  const toRemove = []
+  for (const dir of dirs) {
+    if (dir.isDirectory() && dir.name.toLowerCase() === 'node_modules') {
+      toRemove.push(url.pathToFileURL(path.join(dir.parentPath, dir.name)))
+    }
+  }
+  deleteDirs(toRemove)
+}
+
 // eslint-disable-next-line no-console
-console.info('cleaning packages...')
+console.info('Deleting built files from tooling packages...')
 clean()
+const args = process.argv.slice(2)
+if (args.length > 0 && args[0] === '--nuke_node') {
+  // eslint-disable-next-line no-console
+  console.info('Deleting node_modules recursively...')
+  removeNodeModules()
+}
+
 // eslint-disable-next-line no-console
 console.info('clean finished')
