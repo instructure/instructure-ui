@@ -465,7 +465,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     return DateTime.browserTimeZone()
   }
 
-  // date is returned es a ISO string, like 2021-09-14T22:00:00.000Z
+  // date is returned as an ISO string, like 2021-09-14T22:00:00.000Z
   handleDayClick = (event: MouseEvent<any>, { date }: { date: string }) => {
     if (this.props.onDateSelected) {
       const parsedDate = DateTime.parse(date, this.locale(), this.timezone())

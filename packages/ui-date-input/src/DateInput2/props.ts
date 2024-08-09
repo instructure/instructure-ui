@@ -28,7 +28,11 @@ import type { SyntheticEvent, InputHTMLAttributes } from 'react'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { OtherHTMLAttributes, Renderable, PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  Renderable,
+  PropValidators
+} from '@instructure/shared-types'
 
 type DateInput2OwnProps = {
   /**
@@ -56,7 +60,11 @@ type DateInput2OwnProps = {
   /**
    * Callback fired when the input changes.
    */
-  onChange?: (event: React.SyntheticEvent, value: string) => void
+  onChange?: (
+    event: React.SyntheticEvent,
+    inputValue: string,
+    dateString: string
+  ) => void
   /**
    * Callback executed when the input fires a blur event.
    */
@@ -157,6 +165,18 @@ type DateInput2OwnProps = {
     startYear: number
     endYear: number
   }
+
+  /**
+   * Formatting function for how the date should be displayed inside the input field. It will be applied if the user clicks on a date in the date picker of after blur event from the input field.
+   */
+  formatDate?: (isoDate: string, locale: string, timezone: string) => string
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  // margin?: Spacing TODO enable this prop
 }
 
 type PropKeys = keyof DateInput2OwnProps
@@ -189,7 +209,8 @@ const propTypes: PropValidators<PropKeys> = {
   ]),
   locale: PropTypes.string,
   timezone: PropTypes.string,
-  withYearPicker: PropTypes.object
+  withYearPicker: PropTypes.object,
+  formatDate: PropTypes.func
 }
 
 export type { DateInput2Props }
