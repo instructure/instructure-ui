@@ -65,5 +65,3 @@ jobs:
         run: npm run bootstrap
       - name: Run legacy unit tests
         run: npm run test
-      - name: Run legacy jest tests
-        run: npm run test:jest

@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const defineTest = require('jscodeshift/dist/testUtils').defineTest
+import path from 'path'
+import { defineTest } from 'jscodeshift/dist/testUtils'
 
 const tests = ['elements', 'updateValues']
-
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
 
 describe('updatePropNames', () => {
   tests.forEach((test) => {
