@@ -46,8 +46,20 @@ import type { Moment } from '@instructure/ui-i18n'
 
 function parseDate(dateString: string): string {
   const date = new Date(dateString)
-  // return empty string if not a valid date
   return isNaN(date.getTime()) ? '' : date.toISOString()
+}
+
+function defaultDateFormatter(
+  dateString: string,
+  locale: string,
+  timezone: string
+) {
+  return new Date(dateString).toLocaleDateString(locale, {
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric',
+    timeZone: timezone
+  })
 }
 
 /**
@@ -73,6 +85,8 @@ const DateInput2 = ({
   locale,
   timezone,
   placeholder,
+  formatDate = defaultDateFormatter,
+  // margin, TODO enable this prop
   ...rest
 }: DateInput2Props) => {
   const [selectedDate, setSelectedDate] = useState<string>('')
@@ -83,7 +97,7 @@ const DateInput2 = ({
   const localeContext = useContext(ApplyLocaleContext)
 
   useEffect(() => {
-    // when `value` is changed, validation runs again and removes the error message if validation passes
+    // when `value` is changed, validation removes the error message if passes
     // but it's NOT adding error message if validation fails for better UX
     validateInput(true)
   }, [value])
@@ -92,12 +106,20 @@ const DateInput2 = ({
     setInputMessages(messages || [])
   }, [messages])
 
-  const handleInputChange = (e: SyntheticEvent, value: string) => {
-    onChange?.(e, value)
-    // blur event formats the input which should trigger parsing
+  useEffect(() => {
+    setSelectedDate(parseDate(value || ''))
+  }, [])
+
+  const handleInputChange = (
+    e: SyntheticEvent,
+    newValue: string,
+    parsedDate: string = ''
+  ) => {
+    // blur event formats the input which shouldn't trigger parsing
     if (e.type !== 'blur') {
-      setSelectedDate(parseDate(value))
+      setSelectedDate(parseDate(newValue))
     }
+    onChange?.(e, newValue, parsedDate)
   }
 
   const handleDateSelected = (
@@ -105,14 +127,10 @@ const DateInput2 = ({
     _momentDate: Moment,
     e: SyntheticEvent
   ) => {
-    const formattedDate = new Date(dateString).toLocaleDateString(getLocale(), {
-      month: 'long',
-      year: 'numeric',
-      day: 'numeric',
-      timeZone: getTimezone()
-    })
-    handleInputChange(e, formattedDate)
-    setSelectedDate(dateString)
+    const formattedDate = formatDate(dateString, getLocale(), getTimezone())
+    const parsedDate = parseDate(dateString)
+    setSelectedDate(parsedDate)
+    handleInputChange(e, formattedDate, parsedDate)
     setShowPopover(false)
     onRequestValidateDate?.(dateString, true)
   }
@@ -163,16 +181,8 @@ const DateInput2 = ({
   const handleBlur = (e: SyntheticEvent) => {
     const isInputValid = validateInput(false)
     if (isInputValid && selectedDate) {
-      const formattedDate = new Date(selectedDate).toLocaleDateString(
-        getLocale(),
-        {
-          month: 'long',
-          year: 'numeric',
-          day: 'numeric',
-          timeZone: getTimezone()
-        }
-      )
-      handleInputChange(e, formattedDate)
+      const formattedDate = formatDate(selectedDate, getLocale(), getTimezone())
+      handleInputChange(e, formattedDate, selectedDate)
     }
     onRequestValidateDate?.(value, isInputValid)
     onBlur?.(e)
@@ -181,6 +191,7 @@ const DateInput2 = ({
   return (
     <TextInput
       {...passthroughProps(rest)}
+      // margin={'large'} TODO add this prop to TextInput
       renderLabel={renderLabel}
       onChange={handleInputChange}
       onBlur={handleBlur}
@@ -219,8 +230,8 @@ const DateInput2 = ({
             onDateSelected={handleDateSelected}
             selectedDate={selectedDate}
             visibleMonth={selectedDate}
-            locale={locale}
-            timezone={timezone}
+            locale={getLocale()}
+            timezone={getTimezone()}
             role="listbox"
             renderNextMonthButton={
               <IconButton
