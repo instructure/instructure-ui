@@ -350,29 +350,6 @@ describe('<Modal />', () => {
       expect(consoleErrorMock).not.toHaveBeenCalled()
     })
 
-    it('should not pass validation when children are invalid', async () => {
-      const { findByRole } = render(
-        <Modal open label="Modal Dialog" shouldReturnFocus={false}>
-          <Modal.Body>Foo Bar Baz</Modal.Body>
-          <Modal.Footer>
-            <button>Cancel</button>
-          </Modal.Footer>
-          <Modal.Header>Hello World</Modal.Header>
-        </Modal>
-      )
-      const dialog = await findByRole('dialog')
-      const expectedErrorMessage =
-        'Expected children of Modal in one of the following formats:'
-
-      expect(dialog).toBeInTheDocument()
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.any(String),
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
-    })
-
     it('should pass inverse variant to children when set', async () => {
       let headerRef: ModalHeader | null = null
       let bodyRef: ModalBody | null = null

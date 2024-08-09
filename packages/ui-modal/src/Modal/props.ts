@@ -25,17 +25,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  element,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
+import { element } from '@instructure/ui-prop-types'
 import { transitionTypePropType } from '@instructure/ui-motion'
 
 import { Dialog } from '@instructure/ui-dialog'
-
-import { ModalHeader } from './ModalHeader'
-import { ModalBody } from './ModalBody'
-import { ModalFooter } from './ModalFooter'
 
 import type {
   AsElementType,
@@ -205,12 +198,7 @@ type ModalState = {
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
-  children: ChildrenPropTypes.enforceOrder(
-    [ModalHeader, ModalBody, ModalFooter],
-    [ModalHeader, ModalBody],
-    [ModalBody, ModalFooter],
-    [ModalBody]
-  ),
+  children: PropTypes.node,
   as: PropTypes.elementType,
   size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
   variant: PropTypes.oneOf(['default', 'inverse']),

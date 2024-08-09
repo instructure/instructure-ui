@@ -509,6 +509,73 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+### Using custom children
+
+Occasionally, you might find it useful to incorporate custom components within a `Modal`, such as a higher-order component for `Modal.Header` or `Modal.Body` or not using built in child components at all. Although this approach is typically not advised, it can sometimes aid in code splitting or achieving more streamlined code, especially for more intricate and sizable `Modal`s. In these instances, it is crucial to ensure that the necessary props - `variant`, `overflow` - are consistently passed down manually.
+
+```js
+---
+type: example
+---
+
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      open: false
+    }
+  }
+
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  };
+
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="small"
+        onClick={this.handleButtonClick}
+        screenReaderLabel="Close"
+      />
+    )
+  }
+
+  render () {
+    return (
+      <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
+        <Button onClick={this.handleButtonClick}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Modal
+          as="form"
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          size="large"
+          label="Modal Dialog: Hello World"
+          shouldCloseOnDocumentClick
+        >
+          <View
+            as="div"
+            margin="small"
+            padding="large"
+            textAlign="center"
+            background="primary">
+            {this.renderCloseButton()}
+            <Text>As a developer and user of InstUI Modal, I fully understand that deviating from the recommended order of children components - Modal.Header, Modal.Body, and Modal.Footer - may lead to unintended side effects, and I accept full responsibility for this choice.</Text>
+          </View>
+        </Modal>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
