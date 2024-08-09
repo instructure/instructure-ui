@@ -169,54 +169,85 @@ type: example
 
 It's best practice to make the complete text of a truncated element available via a [Tooltip](#Tooltip).
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  state = {
-    isTruncated: false
-  }
+- ```js
+  class Example extends React.Component {
+    state = {
+      isTruncated: false
+    }
 
-  handleUpdate = (isTruncated) => {
-    if (this.state.isTruncated !== isTruncated) {
-      this.setState({ isTruncated })
+    handleUpdate = (isTruncated) => {
+      if (this.state.isTruncated !== isTruncated) {
+        this.setState({ isTruncated })
+      }
+    }
+
+    renderLink() {
+      return (
+        <Link href="#">
+          <TruncateText onUpdate={this.handleUpdate}>
+            {this.props.message}
+          </TruncateText>
+        </Link>
+      )
+    }
+
+    render() {
+      return (
+        <View as="div" padding="xx-small none" maxWidth="230px" withVisualDebug>
+          {this.state.isTruncated ? (
+            <Tooltip
+              renderTip={this.props.message}
+              mountNode={() => document.getElementById('main')}
+            >
+              {this.renderLink()}
+            </Tooltip>
+          ) : (
+            this.renderLink()
+          )}
+        </View>
+      )
     }
   }
+  render(
+    <Example message="A tooltip will display only when this text is truncated" />
+  )
+  ```
 
-  renderLink () {
-    return (
+- ```js
+  const Example = (props) => {
+    const [isTruncated, setIsTruncated] = useState(false)
+
+    const handleUpdate = (newIsTruncated) => {
+      if (isTruncated !== newIsTruncated) {
+        setIsTruncated(newIsTruncated)
+      }
+    }
+
+    const renderLink = () => (
       <Link href="#">
-        <TruncateText onUpdate={this.handleUpdate}>
-          {this.props.message}
-        </TruncateText>
+        <TruncateText onUpdate={handleUpdate}>{props.message}</TruncateText>
       </Link>
     )
-  }
 
-  render () {
     return (
-      <View
-        as="div"
-        padding="xx-small none"
-        maxWidth="230px"
-        withVisualDebug
-      >
-        {this.state.isTruncated ? (
+      <View as="div" padding="xx-small none" maxWidth="230px" withVisualDebug>
+        {isTruncated ? (
           <Tooltip
-            renderTip={this.props.message}
+            renderTip={props.message}
             mountNode={() => document.getElementById('main')}
           >
-            { this.renderLink() }
+            {renderLink()}
           </Tooltip>
-        ) : this.renderLink()}
+        ) : (
+          renderLink()
+        )}
       </View>
     )
   }
-}
-
-render(<Example message="A tooltip will display only when this text is truncated" />)
-```
+  render(
+    <Example message="A tooltip will display only when this text is truncated" />
+  )
+  ```
 
 ### Guidelines
 
