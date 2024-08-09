@@ -23,99 +23,103 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { vi } from 'vitest'
 
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { MetricGroup } from '../index'
 import { Metric } from '../../Metric'
-import { MetricGroupLocator } from '../MetricGroupLocator'
 
-describe('<MetricGroup />', async () => {
+describe('<MetricGroup />', () => {
+  let consoleErrorMock: any
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render children', async () => {
-    await mount(
+    const { container } = render(
       <MetricGroup>
         <Metric renderLabel="Grade" renderValue="80%" />
         <Metric renderLabel="Late" renderValue="4" />
         <Metric renderLabel="Missing" renderValue="2" />
       </MetricGroup>
     )
-    const list = await MetricGroupLocator.find()
 
-    expect(list.getTextContent()).to.equal('Grade80%Late4Missing2')
+    expect(container).toHaveTextContent('Grade80%Late4Missing2')
   })
 
   it('passes props through to MetricGroup element', async () => {
-    await mount(
-      <MetricGroup data-automation="foo">
+    render(
+      <MetricGroup data-testid="metric-group" data-automation="foo">
         <Metric renderLabel="Grade" renderValue="80%" />
         <Metric renderLabel="Late" renderValue="4" />
         <Metric renderLabel="Missing" renderValue="2" />
       </MetricGroup>
     )
 
-    expect(await MetricGroupLocator.find()).to.have.attribute(
-      'data-automation',
-      'foo'
-    )
+    const metric = screen.getByTestId('metric-group')
+    expect(metric).toHaveAttribute('data-automation', 'foo')
   })
 
-  describe('for a11y', async () => {
+  describe('for a11y', () => {
     it('should meet standards', async () => {
-      await mount(
+      const { container } = render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
+      const axeCheck = await runAxeCheck(container)
 
-      const metricGroup = await MetricGroupLocator.find()
-      expect(await metricGroup.accessible()).to.be.true()
+      expect(axeCheck).toBe(true)
     })
 
     it('should have role=grid with aria-readonly=true', async () => {
-      await mount(
+      render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
+      const grids = screen.getAllByRole('grid')
 
-      const metricGroup = await MetricGroupLocator.find()
-      const grids = await metricGroup.findAll('[role="grid"]')
-
-      expect(grids.length).to.equal(1)
-      expect(grids[0].getAttribute('aria-readonly')).to.equal('true')
+      expect(grids.length).toBe(1)
+      expect(grids[0]).toHaveAttribute('aria-readonly', 'true')
     })
 
     it('should have role=row', async () => {
-      await mount(
+      render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
+      const rows = screen.getAllByRole('row')
 
-      const metricGroup = await MetricGroupLocator.find()
-      const rows = await metricGroup.findAll('[role="row"]')
-
-      expect(rows.length).to.equal(3)
+      expect(rows.length).toBe(3)
     })
 
     it('should have role=gridcell', async () => {
-      await mount(
+      render(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
           <Metric renderLabel="Late" renderValue="4" />
           <Metric renderLabel="Missing" renderValue="2" />
         </MetricGroup>
       )
+      const cells = screen.getAllByRole('gridcell')
 
-      const metricGroup = await MetricGroupLocator.find()
-      const cells = await metricGroup.findAll('[role="gridcell"]')
-
-      expect(cells.length).to.equal(3)
+      expect(cells.length).toBe(3)
     })
   })
 })

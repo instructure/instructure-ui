@@ -23,65 +23,59 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { Metric } from '../index'
-import { MetricLocator } from '../MetricLocator'
 
-describe('<Metric />', async () => {
+describe('<Metric />', () => {
   it('should render the label', async () => {
-    await mount(<Metric renderLabel="Grade" renderValue="80%" />)
+    const { container } = render(
+      <Metric renderLabel="Grade" renderValue="80%" />
+    )
 
-    const metric = await MetricLocator.find()
-
-    expect(await metric.findWithText('Grade')).to.exist()
+    expect(container).toHaveTextContent('Grade')
   })
 
   it('should render the value', async () => {
-    await mount(<Metric renderLabel="Grade" renderValue="80%" />)
+    const { container } = render(
+      <Metric renderLabel="Grade" renderValue="80%" />
+    )
 
-    const metric = await MetricLocator.find()
-
-    expect(await metric.findWithText('80%')).to.exist()
+    expect(container).toHaveTextContent('80%')
   })
 
   it('passes props through to Metric element', async () => {
-    await mount(
-      <Metric data-automation="foo" renderLabel="Grade" renderValue="80%" />
+    render(
+      <Metric
+        data-testid="metric"
+        data-automation="foo"
+        renderLabel="Grade"
+        renderValue="80%"
+      />
     )
+    const metric = screen.getByTestId('metric')
 
-    expect(await MetricLocator.find()).to.have.attribute(
-      'data-automation',
-      'foo'
-    )
+    expect(metric).toHaveAttribute('data-automation', 'foo')
   })
 
   it('should not have role="gridcell" for the value', async () => {
-    await mount(<Metric renderLabel="Grade" renderValue="80%" />)
-
-    const metric = await MetricLocator.find()
-    const value = await metric.findWithText('80%')
-
-    expect(
-      await value.find('[role="gridcell"]', { expectEmpty: true })
-    ).to.not.exist()
+    render(<Metric renderLabel="Grade" renderValue="80%" />)
+    const value = screen.getByText('80%')
+    screen.debug()
+    expect(value).not.toHaveAttribute('role', 'gridcell')
   })
 
   it('should not have role=rowheader for the label', async () => {
-    await mount(<Metric renderLabel="Grade" renderValue="80%" />)
+    render(<Metric renderLabel="Grade" renderValue="80%" />)
+    const label = screen.getByText('Grade')
 
-    const metric = await MetricLocator.find()
-    const label = await metric.findWithText('Grade')
-
-    expect(
-      await label.find('[role="rowheader"]', { expectEmpty: true })
-    ).to.not.exist()
+    expect(label).not.toHaveAttribute('role', 'rowheader')
   })
 
   it('should allow methods and ReactNodes as labels and values', async () => {
-    await mount(<Metric renderLabel={<div>hello</div>} />)
-    const metric = await MetricLocator.find()
-    const label = await metric.findWithText('hello')
-    expect(label).to.exist()
+    const { container } = render(<Metric renderLabel={<div>hello</div>} />)
+
+    expect(container).toHaveTextContent('hello')
   })
 })
