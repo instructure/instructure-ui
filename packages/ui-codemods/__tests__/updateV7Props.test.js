@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const defineTest = require('jscodeshift/dist/testUtils').defineTest
+import { defineTest } from 'jscodeshift/dist/testUtils'
 
 const tests = [
   'helpers',
@@ -39,9 +39,6 @@ const tests = [
   'focusableView',
   'v7ComponentDeprecations'
 ]
-
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
 
 describe('updateV7Props', () => {
   tests.forEach((test) => {

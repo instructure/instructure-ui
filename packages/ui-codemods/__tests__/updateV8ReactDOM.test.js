@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-const defineTest = require('jscodeshift/dist/testUtils').defineTest
+import { defineTest } from 'jscodeshift/dist/testUtils'
 
 const tests = ['reactDOMRender', 'reactDOMRender2']
-
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
 
 describe('updateV8ReactDOM', () => {
   tests.forEach((test) => {

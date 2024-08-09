@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const defineTest = require('jscodeshift/dist/testUtils').defineTest
+import path from 'path'
+import { defineTest } from 'jscodeshift/dist/testUtils'
 
 const tests = [
   'defaultToDefault',
@@ -34,9 +34,6 @@ const tests = [
   'namedToNamed',
   'noSpecifiers'
 ]
-
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
 
 describe('updateImports', () => {
   tests.forEach((test) => {

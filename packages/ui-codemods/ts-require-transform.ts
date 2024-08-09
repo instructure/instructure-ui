@@ -22,24 +22,31 @@
  * SOFTWARE.
  */
 
-import { defineTest } from 'jscodeshift/dist/testUtils'
+import { transformSync } from 'esbuild'
+import { addHook } from 'pirates'
+import { extname } from 'path'
 
-const tests = ['applyTheme', 'themeStaticVariable', 'themeProp']
+/**
+ * This function is called as a hook by pirates when a `require` call is made. It transforms typescript code to
+ * javascript during the dynamic import process. It is a necessary workaround because vitest does not support
+ * importing typescript files with `require`.
+ * @param code code to transform
+ * @param filename file name of the code
+ */
+function transformCode(code: string, filename: string): string {
+  const ext = extname(filename).slice(1)
 
-describe('updateV8Breaking', () => {
-  tests.forEach((test) => {
-    defineTest(
-      __dirname,
-      'lib/updateV8Breaking',
-      undefined,
-      `updateV8Breaking/${test}`
-    )
+  const result = transformSync(code, {
+    loader: ext as 'ts' | 'tsx',
+    target: 'es2019',
+    format: 'cjs',
+    sourcefile: filename
   })
-  defineTest(
-    __dirname,
-    'lib/updateV8Breaking',
-    undefined,
-    `updateV8Breaking/tsFile`,
-    { parser: 'tsx' }
-  )
+
+  return result.code
+}
+
+addHook(transformCode, {
+  exts: ['.ts', '.tsx'],
+  ignoreNodeModules: true
 })
