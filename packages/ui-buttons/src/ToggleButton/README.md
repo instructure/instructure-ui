@@ -5,23 +5,43 @@ describes: ToggleButton
 `ToggleButton` is a controlled button component used for toggling a status or setting
 between one of two states (locked/unlocked, published/unpublished, etc.).
 
-```javascript
----
-type: example
----
-class Example extends React.Component {
-  state = {
-    locked: 'off'
-  }
+- ```javascript
+  class Example extends React.Component {
+    state = {
+      locked: false
+    }
 
-  handleLocked = (e) => {
-    this.setState(function(prevState) {
-      return {locked: prevState.locked === 'on' ? 'off' : 'on'}
-    })
-  }
+    handleLocked = (e) => {
+      this.setState((prevState) => ({ locked: !prevState.locked }))
+    }
 
-  render () {
-    const locked = this.state.locked === 'on'
+    render() {
+      const locked = this.state.locked
+
+      return (
+        <View as="div" padding="x-large" id="toggleContainer">
+          <ToggleButton
+            status={locked ? 'pressed' : 'unpressed'}
+            color={locked ? 'danger' : 'secondary'}
+            renderIcon={locked ? IconLockSolid : IconUnlockLine}
+            screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
+            renderTooltipContent={locked ? 'Unlock' : 'Lock'}
+            onClick={this.handleLocked}
+          />
+        </View>
+      )
+    }
+  }
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [locked, setLocked] = useState(false)
+
+    const handleLocked = () => {
+      setLocked(!locked)
+    }
 
     return (
       <View as="div" padding="x-large" id="toggleContainer">
@@ -31,53 +51,80 @@ class Example extends React.Component {
           renderIcon={locked ? IconLockSolid : IconUnlockLine}
           screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
           renderTooltipContent={locked ? 'Unlock' : 'Lock'}
-          onClick={this.handleLocked}
-          mountNode={() => document.getElementById('toggleContainer')}
+          onClick={handleLocked}
         />
       </View>
     )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 ### Inverse ToggleButton
 
-```javascript
----
-type: example
----
-class InverseExample extends React.Component {
-  state = {
-    locked: 'off'
-  }
+- ```javascript
+  class InverseExample extends React.Component {
+    state = {
+      locked: false
+    }
 
-  handleLocked = (e) => {
-    this.setState(function(prevState) {
-      return {locked: prevState.locked === 'on' ? 'off' : 'on'}
-    })
-  }
+    handleLocked = (e) => {
+      this.setState((prevState) => ({ locked: !prevState.locked }))
+    }
 
-  render () {
-    const locked = this.state.locked === 'on'
+    render() {
+      const locked = this.state.locked
+
+      return (
+        <View
+          as="div"
+          padding="xx-large"
+          background="primary-inverse"
+          id="inverseToggleContainer"
+        >
+          <ToggleButton
+            status={locked ? 'pressed' : 'unpressed'}
+            color="primary-inverse"
+            renderIcon={locked ? IconLockSolid : IconUnlockLine}
+            screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
+            renderTooltipContent={locked ? 'Unlock' : 'Lock'}
+            onClick={this.handleLocked}
+          />
+        </View>
+      )
+    }
+  }
+  render(<InverseExample />)
+  ```
+
+- ```js
+  const InverseExample = () => {
+    const [locked, setLocked] = useState(false)
+
+    const handleLocked = () => {
+      setLocked(!locked)
+    }
 
     return (
-      <View as="div" padding="xx-large" background="primary-inverse" id="inverseToggleContainer">
+      <View
+        as="div"
+        padding="xx-large"
+        background="primary-inverse"
+        id="inverseToggleContainer"
+      >
         <ToggleButton
           status={locked ? 'pressed' : 'unpressed'}
           color="primary-inverse"
           renderIcon={locked ? IconLockSolid : IconUnlockLine}
           screenReaderLabel={locked ? 'Unlock assignment' : 'Lock assignment'}
           renderTooltipContent={locked ? 'Unlock' : 'Lock'}
-          onClick={this.handleLocked}
-          mountNode={() => document.getElementById('inverseToggleContainer')}
+          onClick={handleLocked}
         />
       </View>
     )
   }
-}
-render(<InverseExample />)
-```
+  render(<InverseExample />)
+  ```
 
 ### Guidelines
 
