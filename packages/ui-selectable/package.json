@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-selectable",
-  "version": "9.5.2",
+  "version": "9.6.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,17 +23,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "9.5.2",
-    "@instructure/ui-test-utils": "9.5.2"
+    "@instructure/ui-babel-preset": "9.6.0",
+    "@instructure/ui-test-utils": "9.6.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/console": "9.5.2",
-    "@instructure/shared-types": "9.5.2",
-    "@instructure/ui-dom-utils": "9.5.2",
-    "@instructure/ui-react-utils": "9.5.2",
-    "@instructure/ui-testable": "9.5.2",
-    "@instructure/ui-utils": "9.5.2",
+    "@instructure/console": "9.6.0",
+    "@instructure/shared-types": "9.6.0",
+    "@instructure/ui-dom-utils": "9.6.0",
+    "@instructure/ui-react-utils": "9.6.0",
+    "@instructure/ui-testable": "9.6.0",
+    "@instructure/ui-utils": "9.6.0",
     "keycode": "^2",
     "prop-types": "^15.8.1"
   },

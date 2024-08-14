@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.6.0](https://github.com/instructure/instructure-ui/compare/v9.5.2...v9.6.0) (2024-08-14)
+
+
+### Features
+
+* **ui-calendar,ui-date-input:** improve DateInput2 onChange callback, add date formatting option, extend docs ([4e2c23c](https://github.com/instructure/instructure-ui/commit/4e2c23c3288885e49030f1f471d61b2fed29b54c))
+
+
+
+
+
 ## [9.5.2](https://github.com/instructure/instructure-ui/compare/v9.5.1...v9.5.2) (2024-08-05)
 
 
