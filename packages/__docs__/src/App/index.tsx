@@ -27,8 +27,7 @@ import {
   createContext,
   LegacyRef,
   ReactElement,
-  SyntheticEvent,
-  createRef
+  SyntheticEvent
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
@@ -37,7 +36,7 @@ import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
-import { Mask } from '@instructure/ui-overlays'
+import { MobileTopNav } from '@instructure/ui-top-nav-bar'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { Link } from '@instructure/ui-link'
@@ -58,7 +57,7 @@ import { Nav } from '../Nav'
 import { Theme } from '../Theme'
 import { Select } from '../Select'
 import { Section } from '../Section'
-import IconsPage from '../Icons'
+import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 
 import { fetchVersionData, versionInPath } from '../versionData'
@@ -71,11 +70,9 @@ import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { propTypes, allowedProps } from './props'
 import type {
   LibraryOptions,
-  MainDocsData,
-  ParsedDocSummary
+  MainDocsData
 } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
-import type { Spacing } from '@instructure/emotion'
 
 type AppContextType = {
   themeKey: keyof MainDocsData['themes']
@@ -102,10 +99,6 @@ class App extends Component<AppProps, AppState> {
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
   _controller?: AbortController
-  _heroRef: React.RefObject<Hero>
-  _navRef: React.RefObject<Nav>
-  _skipToMainButtonRef?: HTMLElement
-  _mainContentRef?: HTMLElement
 
   constructor(props: AppProps) {
     super(props)
@@ -124,12 +117,9 @@ class App extends Component<AppProps, AppState> {
       themeKey: undefined,
       layout: 'large',
       docsData: null,
-      versionsData: undefined,
+      versionsData: null,
       iconsData: null
     }
-
-    this._heroRef = createRef()
-    this._navRef = createRef()
   }
 
   fetchDocumentData = async (docId: string) => {
@@ -144,6 +134,7 @@ class App extends Component<AppProps, AppState> {
       docData.componentInstance = everyComp[components[0]][components[1]]
     } else {
       docData.componentInstance =
+        // eslint-disable-next-line import-x/namespace
         EveryComponent[docId as keyof typeof EveryComponent]
     }
     return docData
@@ -152,16 +143,6 @@ class App extends Component<AppProps, AppState> {
   fetchVersionData = async (signal: AbortController['signal']) => {
     const versionsData = await fetchVersionData(signal)
     return this.setState({ versionsData })
-  }
-
-  mainContentRef = (el: Element | null) => {
-    this._mainContentRef = el as HTMLElement
-  }
-
-  focusContent = () => {
-    if (this._mainContentRef) {
-      this._mainContentRef.focus()
-    }
   }
 
   scrollToElement() {
@@ -176,6 +157,35 @@ class App extends Component<AppProps, AppState> {
       // If we don't have an id, scroll the content back to the top
       this._content.scrollTop = 0
     }
+  }
+
+  /**
+   * Get every static prop from an object (inherited ones too)
+   * @param object The object to check
+   * @returns {Set<string>} the properties
+   */
+  getAllPropNames(object: Record<string, any>) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    let obj: object | null = object
+    const props: Set<string> = new Set()
+    // exclude some common static props for performance
+    const invalidKeys = [
+      '$$typeof',
+      'render',
+      'propTypes',
+      'selector',
+      'defaultProps',
+      'displayName',
+      'generateComponentTheme'
+    ]
+    while (obj) {
+      const keys = Object.keys(obj)
+      keys.forEach((k) => {
+        if (!invalidKeys.includes(k)) props.add(k)
+      })
+      obj = Reflect.getPrototypeOf(obj)
+    }
+    return props
   }
 
   componentDidMount() {
@@ -205,7 +215,6 @@ class App extends Component<AppProps, AppState> {
     const errorHandler = (error: Error) => {
       logError(error.name === 'AbortError', error.message)
     }
-    document.addEventListener('keydown', this.handleTabKey)
 
     fetch('icons-data.json', { signal })
       .then((response) => response.json())
@@ -216,10 +225,13 @@ class App extends Component<AppProps, AppState> {
     fetch('markdown-and-sources-data.json', { signal })
       .then((response) => response.json())
       .then((docsData) => {
-        this.setState({
-          docsData,
-          themeKey: Object.keys(docsData.themes)[0]
-        })
+        this.setState(
+          {
+            docsData,
+            themeKey: Object.keys(docsData.themes)[0]
+          },
+          this.scrollToElement
+        )
       })
       .catch(errorHandler)
   }
@@ -299,9 +311,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   handleMenuOpen = () => {
-    this.setState({ showMenu: true }, () => {
-      this._navRef.current?.focusTextInput()
-    })
+    this.setState({ showMenu: true })
   }
 
   handleMenuClose = () => {
@@ -329,33 +339,6 @@ class App extends Component<AppProps, AppState> {
       return true
     } else {
       return showMenu
-    }
-  }
-
-  focusMainContent = () => {
-    if (this._heroRef?.current?.focusMainContent) {
-      this._heroRef.current.focusMainContent()
-    } else if (this._mainContentRef?.focus) {
-      this._mainContentRef.focus()
-    }
-  }
-
-  handleTabKey = (event: KeyboardEvent) => {
-    if (event.key === 'Tab') {
-      if (document.activeElement === document.body) {
-        event.preventDefault()
-        this.focusSkipToMainButton()
-      }
-    }
-  }
-
-  skipToMainButtonRef = (el: Element | null) => {
-    this._skipToMainButtonRef = el as HTMLElement
-  }
-
-  focusSkipToMainButton = () => {
-    if (this._skipToMainButtonRef) {
-      this._skipToMainButtonRef.focus()
     }
   }
 
@@ -428,9 +411,13 @@ class App extends Component<AppProps, AppState> {
         }
       >
         <Heading level="h1" as="h2" margin="0 0 medium">
-          Icons
+          Iconography
         </Heading>
-        <IconsPage glyphs={iconsData!.glyphs} />
+        <Icons
+          packageName={iconsData!.packageName}
+          selectedFormat={key}
+          formats={iconsData!.formats}
+        />
       </View>
     )
 
@@ -451,12 +438,7 @@ class App extends Component<AppProps, AppState> {
         }
         // eslint-disable-next-line no-param-reassign
         data.children = children
-        this.setState(
-          {
-            currentDocData: data
-          },
-          this.scrollToElement
-        )
+        this.setState({ currentDocData: data })
       })
       return (
         <View as="div" padding="xx-large 0">
@@ -467,45 +449,44 @@ class App extends Component<AppProps, AppState> {
     const { themes } = this.state.docsData!
     const { layout, themeKey, versionsData } = this.state
     const { olderVersionsGitBranchMap } = versionsData || {}
-    let legacyGitBranch: string | undefined = undefined
+    let legacyGitBranch
 
-    if (olderVersionsGitBranchMap && versionInPath) {
+    if (olderVersionsGitBranchMap) {
       legacyGitBranch = olderVersionsGitBranchMap[versionInPath]
     }
 
     const themeVariables = themes[themeKey!].resource
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
-      <View as="div" padding="x-large none none">
+      <View
+        as="div"
+        padding={
+          layout === 'small' || layout === 'medium'
+            ? 'x-large none none large'
+            : 'x-large none none'
+        }
+      >
         {this.renderThemeSelect()}
-        <View
-          elementRef={this.mainContentRef}
-          tabIndex={0}
-          aria-label="main content"
-        >
-          <Section id={currentData.id} heading={heading}>
-            <Document
-              doc={{
-                ...currentData,
-                legacyGitBranch
-              }}
-              description={currentData.description}
-              themeVariables={themeVariables}
-              repository={repository}
-              layout={layout}
-            />
-          </Section>
-        </View>
+        <Section id={currentData.id} heading={heading}>
+          <Document
+            doc={{
+              ...currentData,
+              legacyGitBranch
+            }}
+            description={currentData.description}
+            themeVariables={themeVariables}
+            repository={repository}
+            layout={layout}
+          />
+        </Section>
       </View>
     )
-    const padding: Spacing =
-      layout === 'small' ? 'large small large small' : 'large'
-    return this.renderWrappedContent(documentContent, padding)
+    return this.renderWrappedContent(documentContent)
   }
 
   renderWrappedContent(
     content: ReactElement[] | ReactElement,
-    padding: Spacing = 'large'
+    padding: any = 'large'
   ) {
     return <ContentWrap padding={padding}>{content}</ContentWrap>
   }
@@ -514,11 +495,10 @@ class App extends Component<AppProps, AppState> {
     const { library, docs, themes } = this.state.docsData!
     const { layout } = this.state
 
-    const themeDocs: ParsedDocSummary = {}
+    const themeDocs: Record<string, any> = {}
 
     Object.keys(themes).forEach((key) => {
       themeDocs[key] = {
-        title: key,
         category: 'themes'
       }
     })
@@ -530,7 +510,6 @@ class App extends Component<AppProps, AppState> {
           repository={library.repository}
           version={library.version}
           layout={layout}
-          ref={this._heroRef}
         />
       </InstUISettingsProvider>
     )
@@ -590,54 +569,28 @@ class App extends Component<AppProps, AppState> {
   renderContent(key?: string) {
     const doc = this.state.docsData!.docs[key!]
     const theme = this.state.docsData!.themes[key!]
+    let icon
+    if (this.state.iconsData && this.state.iconsData.formats) {
+      icon =
+        this.state.iconsData.formats[
+          key as 'icons-svg' | `icons-react` | 'icons-font'
+        ]
+    }
     const { repository } = this.state.docsData!.library
 
     if (!key || key === 'index') {
       return this.renderHero()
     }
     if (key === 'CHANGELOG') {
-      return (
-        <View
-          elementRef={this.mainContentRef}
-          tabIndex={0}
-          aria-label="changelog page main content"
-        >
-          {this.renderChangeLog()}
-        </View>
-      )
-    } else if (key === 'icons') {
-      return (
-        <View
-          elementRef={this.mainContentRef}
-          tabIndex={0}
-          aria-label="icons page main content"
-          as={'div'}
-        >
-          {this.renderIcons(key)}
-        </View>
-      )
+      return this.renderChangeLog()
+    } else if (key === 'iconography' || icon) {
+      return this.renderIcons(key)
     } else if (theme) {
-      return (
-        <View
-          elementRef={this.mainContentRef}
-          tabIndex={0}
-          aria-label="theme page main content"
-        >
-          {this.renderTheme(key)}
-        </View>
-      )
+      return this.renderTheme(key)
     } else if (doc) {
       return this.renderDocument(key!, repository)
     } else {
-      return (
-        <View
-          elementRef={this.mainContentRef}
-          tabIndex={0}
-          aria-label="error page main content"
-        >
-          {this.renderError()}
-        </View>
-      )
+      return this.renderError()
     }
   }
 
@@ -690,7 +643,6 @@ class App extends Component<AppProps, AppState> {
               shape="circle"
               color="secondary"
               size="medium"
-              aria-expanded={true}
             />
           </InstUISettingsProvider>
         </View>
@@ -706,7 +658,7 @@ class App extends Component<AppProps, AppState> {
           sections={this.state.docsData!.sections}
           docs={this.state.docsData!.docs}
           themes={this.state.docsData!.themes}
-          ref={this._navRef}
+          icons={this.state.iconsData}
         />
       </View>
     )
@@ -765,24 +717,6 @@ class App extends Component<AppProps, AppState> {
     ) : null
   }
 
-  renderSkipToMainButton = () => {
-    return (
-      <View
-        as={'button'}
-        onClick={this.focusMainContent}
-        tabIndex={0}
-        css={this.props.styles?.skipToMainButton}
-        borderRadius="small"
-        display="inline-block"
-        padding="small"
-        background="primary"
-        elementRef={this.skipToMainButtonRef}
-      >
-        Skip to main content
-      </View>
-    )
-  }
-
   render() {
     const key = this.state.key
     const { showMenu, layout, docsData, iconsData } = this.state
@@ -790,6 +724,29 @@ class App extends Component<AppProps, AppState> {
     if (!docsData || !iconsData) {
       return <LoadingScreen />
     }
+
+    const brandSvg = (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a
+        style={{
+          width: '28px',
+          height: '28px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        href="#"
+      >
+        <svg
+          viewBox="0 0 1920 1920"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#fff"
+        >
+          <path d="M958.568 277.97C1100.42 277.97 1216.48 171.94 1233.67 34.3881 1146.27 12.8955 1054.57 0 958.568 0 864.001 0 770.867 12.8955 683.464 34.3881 700.658 171.94 816.718 277.97 958.568 277.97ZM35.8207 682.031C173.373 699.225 279.403 815.285 279.403 957.136 279.403 1098.99 173.373 1215.05 35.8207 1232.24 12.8953 1144.84 1.43262 1051.7 1.43262 957.136 1.43262 862.569 12.8953 769.434 35.8207 682.031ZM528.713 957.142C528.713 1005.41 489.581 1044.55 441.31 1044.55 393.038 1044.55 353.907 1005.41 353.907 957.142 353.907 908.871 393.038 869.74 441.31 869.74 489.581 869.74 528.713 908.871 528.713 957.142ZM1642.03 957.136C1642.03 1098.99 1748.06 1215.05 1885.61 1232.24 1908.54 1144.84 1920 1051.7 1920 957.136 1920 862.569 1908.54 769.434 1885.61 682.031 1748.06 699.225 1642.03 815.285 1642.03 957.136ZM1567.51 957.142C1567.51 1005.41 1528.38 1044.55 1480.11 1044.55 1431.84 1044.55 1392.71 1005.41 1392.71 957.142 1392.71 908.871 1431.84 869.74 1480.11 869.74 1528.38 869.74 1567.51 908.871 1567.51 957.142ZM958.568 1640.6C816.718 1640.6 700.658 1746.63 683.464 1884.18 770.867 1907.11 864.001 1918.57 958.568 1918.57 1053.14 1918.57 1146.27 1907.11 1233.67 1884.18 1216.48 1746.63 1100.42 1640.6 958.568 1640.6ZM1045.98 1480.11C1045.98 1528.38 1006.85 1567.51 958.575 1567.51 910.304 1567.51 871.172 1528.38 871.172 1480.11 871.172 1431.84 910.304 1392.71 958.575 1392.71 1006.85 1392.71 1045.98 1431.84 1045.98 1480.11ZM1045.98 439.877C1045.98 488.148 1006.85 527.28 958.575 527.28 910.304 527.28 871.172 488.148 871.172 439.877 871.172 391.606 910.304 352.474 958.575 352.474 1006.85 352.474 1045.98 391.606 1045.98 439.877ZM1441.44 1439.99C1341.15 1540.29 1333.98 1697.91 1418.52 1806.8 1579 1712.23 1713.68 1577.55 1806.82 1418.5 1699.35 1332.53 1541.74 1339.7 1441.44 1439.99ZM1414.21 1325.37C1414.21 1373.64 1375.08 1412.77 1326.8 1412.77 1278.53 1412.77 1239.4 1373.64 1239.4 1325.37 1239.4 1277.1 1278.53 1237.97 1326.8 1237.97 1375.08 1237.97 1414.21 1277.1 1414.21 1325.37ZM478.577 477.145C578.875 376.846 586.039 219.234 501.502 110.339 341.024 204.906 206.338 339.592 113.203 498.637 220.666 584.607 378.278 576.01 478.577 477.145ZM679.155 590.32C679.155 638.591 640.024 677.723 591.752 677.723 543.481 677.723 504.349 638.591 504.349 590.32 504.349 542.048 543.481 502.917 591.752 502.917 640.024 502.917 679.155 542.048 679.155 590.32ZM1440 475.712C1540.3 576.01 1697.91 583.174 1806.8 498.637 1712.24 338.159 1577.55 203.473 1418.51 110.339 1332.54 217.801 1341.13 375.413 1440 475.712ZM1414.21 590.32C1414.21 638.591 1375.08 677.723 1326.8 677.723 1278.53 677.723 1239.4 638.591 1239.4 590.32 1239.4 542.048 1278.53 502.917 1326.8 502.917 1375.08 502.917 1414.21 542.048 1414.21 590.32ZM477.145 1438.58C376.846 1338.28 219.234 1331.12 110.339 1415.65 204.906 1576.13 339.593 1710.82 498.637 1805.39 584.607 1696.49 577.443 1538.88 477.145 1438.58ZM679.155 1325.37C679.155 1373.64 640.024 1412.77 591.752 1412.77 543.481 1412.77 504.349 1373.64 504.349 1325.37 504.349 1277.1 543.481 1237.97 591.752 1237.97 640.024 1237.97 679.155 1277.1 679.155 1325.37Z" />
+        </svg>
+      </a>
+    )
+
     return (
       <AppContext.Provider
         value={{
@@ -798,40 +755,136 @@ class App extends Component<AppProps, AppState> {
           themes: docsData.themes
         }}
       >
-        <div css={this.props.styles?.app}>
-          <Global styles={this.props.styles?.globalStyles} />
-          {showMenu && layout === 'small' && (
-            <Mask onClick={this.handleMenuClose} />
-          )}
-          {this.renderSkipToMainButton()}
-          {this.renderNavigation()}
-          <div
-            css={this.props.styles?.content}
-            aria-label={key || docsData.library.name}
-            ref={this.handleContentRef}
-          >
-            {!showMenu && (
-              <div css={this.props.styles?.hamburger}>
-                <InstUISettingsProvider>
-                  <IconButton
-                    themeOverride={{
-                      secondaryBorderColor: '#343434'
-                    }}
-                    onClick={this.handleMenuOpen}
-                    elementRef={this.handleMenuTriggerRef}
-                    renderIcon={IconHamburgerSolid}
-                    screenReaderLabel="Open Navigation"
-                    shape="circle"
-                    aria-expanded={false}
-                  />
-                </InstUISettingsProvider>
-              </div>
-            )}
-            {this.renderContent(key)}
-            {this.renderFooter()}
-          </div>
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box'
+          }}
+        >
+          <MobileTopNav brand={brandSvg} />
+          <p>
+            1 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            2 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            3 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            4 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            5 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            6 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            7 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            8 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            9 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            10 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            11 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            12 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            13 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            14 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            15 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            16 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            17 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            18 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            19 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
+          <p>
+            20 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Molestias excepturi a blanditiis, aspernatur repellat repellendus
+            dolores cum labore eligendi architecto asperiores, dolor quisquam
+            sequi mollitia quibusdam, cumque id ab amet?
+          </p>
         </div>
-        {this.renderLegacyDocWarning()}
       </AppContext.Provider>
     )
   }
