@@ -19,8 +19,7 @@
     "build": "ui-scripts build --modules es,cjs",
     "build:watch": "npm run ts:check -- --watch & ui-scripts build --watch",
     "build:types": "tsc -p tsconfig.build.json",
-    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
-    "test:jest": "jest"
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {
@@ -100,9 +99,7 @@
     "@instructure/ui-view": "10.2.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.2.1",
-    "@instructure/ui-test-utils": "10.2.1",
-    "jest": "^29.7.0"
+    "@instructure/ui-babel-preset": "10.2.1"
   },
   "publishConfig": {
     "access": "public"
