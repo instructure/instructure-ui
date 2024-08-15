@@ -17,103 +17,207 @@ will find examples.
 Using `Editable` gives you complete control, over how in-place editing
 should look.
 
-```js
----
-type: example
----
-class Example extends React.Component {
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      mode: props.mode || 'view',
-      value: props.value || '',
-      buttonHasFocus: false,
-      readOnly: false
-    }
-    this.onFocusEditButton = null;
-  }
-
-  renderButton ({ isVisible, onClick, onFocus, onBlur, buttonRef }) {
-    if(this.state.readOnly) {
-      return null
+      this.state = {
+        mode: props.mode || 'view',
+        value: props.value || '',
+        readOnly: false
+      }
     }
 
-     // To correctly handle focus, always return the Button, but
-     // only visible if isVisible (if you want the UI to work in the standard way)
-    return (
-      <span style={{opacity: isVisible ? 1 : 0}}>
-        <Button
-          size="small"
-          margin="0 0 0 x-small"
-          onClick={onClick}
-          onFocus={onFocus}
+    renderButton({ isVisible, onClick, onFocus, onBlur, buttonRef }) {
+      if (this.state.readOnly) {
+        return null
+      }
+
+      // To correctly handle focus, always return the Button, but
+      // only visible if isVisible (if you want the UI to work in the standard way)
+      return (
+        <span style={{ opacity: isVisible ? 1 : 0 }}>
+          <Button
+            size="small"
+            margin="0 0 0 x-small"
+            onClick={onClick}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            elementRef={buttonRef}
+          >
+            Do it!
+          </Button>
+        </span>
+      )
+    }
+
+    renderViewer() {
+      return <span>{this.state.value}</span>
+    }
+
+    handleValueChange = (event) => {
+      this.setState({ value: event.target.value })
+    }
+
+    handleModeChange = (newMode) => {
+      this.setState({ mode: newMode })
+    }
+
+    renderEditor({ onBlur, editorRef }) {
+      return (
+        <input
+          ref={editorRef}
           onBlur={onBlur}
-          elementRef={buttonRef}
-        >
-          Do it!
-        </Button>
-      </span>
-    )
-  }
+          value={this.state.value}
+          onChange={this.handleValueChange}
+        />
+      )
+    }
 
-  renderViewer () {
-    return <span>{this.state.value}</span>
-  }
+    renderMe = ({
+      mode,
+      getContainerProps,
+      getViewerProps,
+      getEditorProps,
+      getEditButtonProps
+    }) => {
+      return (
+        <View {...getContainerProps()}>
+          {mode === 'view' ? this.renderViewer(getViewerProps()) : null}
+          {mode === 'edit' ? this.renderEditor(getEditorProps()) : null}
+          {this.renderButton(getEditButtonProps())}
+        </View>
+      )
+    }
 
-  handleValueChange = (event) => {
-    this.setState({value: event.target.value})
-  }
+    onChangeReadOnly = (event) => {
+      this.setState({ readOnly: event.target.checked })
+    }
 
-  handleModeChange = (newMode) => {
-    this.setState({mode: newMode})
+    render() {
+      return (
+        <View as="div">
+          <View as="div" margin="0 0 small 0">
+            <Checkbox
+              size="small"
+              label="Read Only"
+              checked={this.state.readOnly}
+              onChange={this.onChangeReadOnly}
+            />
+          </View>
+          <Editable
+            mode={this.state.mode}
+            onChangeMode={this.handleModeChange}
+            render={this.renderMe}
+            value={this.state.value}
+            readOnly={this.state.readOnly}
+          />
+        </View>
+      )
+    }
   }
+  render(<Example value="you can edit me" />)
+  ```
 
-  renderEditor ({ onBlur, editorRef }) {
+- ```js
+  const Example = (props) => {
+    const [mode, setMode] = useState(props.mode || 'view')
+    const [value, setValue] = useState(props.value || '')
+    const [readOnly, setReadOnly] = useState(false)
+
+    const renderButton = ({
+      isVisible,
+      onClick,
+      onFocus,
+      onBlur,
+      buttonRef
+    }) => {
+      if (readOnly) {
+        return null
+      }
+
+      // To correctly handle focus, always return the Button, but
+      // only visible if isVisible (if you want the UI to work in the standard way)
+      return (
+        <span style={{ opacity: isVisible ? 1 : 0 }}>
+          <Button
+            size="small"
+            margin="0 0 0 x-small"
+            onClick={onClick}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            elementRef={buttonRef}
+          >
+            Do it!
+          </Button>
+        </span>
+      )
+    }
+
+    const renderViewer = () => {
+      return <span>{value}</span>
+    }
+
+    const handleValueChange = (event) => {
+      setValue(event.target.value)
+    }
+
+    const handleModeChange = (newMode) => {
+      setMode(newMode)
+    }
+
+    const renderEditor = ({ onBlur, editorRef }) => {
+      return (
+        <input
+          ref={editorRef}
+          onBlur={onBlur}
+          value={value}
+          onChange={handleValueChange}
+        />
+      )
+    }
+
+    const renderMe = ({
+      mode,
+      getContainerProps,
+      getViewerProps,
+      getEditorProps,
+      getEditButtonProps
+    }) => {
+      return (
+        <View {...getContainerProps()}>
+          {mode === 'view' ? renderViewer(getViewerProps()) : null}
+          {mode === 'edit' ? renderEditor(getEditorProps()) : null}
+          {renderButton(getEditButtonProps())}
+        </View>
+      )
+    }
+
+    const onChangeReadOnly = (event) => {
+      setReadOnly(event.target.checked)
+    }
+
     return (
-      <input
-        ref={editorRef}
-        onBlur={onBlur}
-        value={this.state.value}
-        onChange={this.handleValueChange}
-      />
-    )
-  }
-
-  renderMe = ({mode, getContainerProps, getViewerProps, getEditorProps, getEditButtonProps}) => {
-    return (
-      <View
-        {...getContainerProps()}
-      >
-        {mode === 'view' ? this.renderViewer(getViewerProps()) : null}
-        {mode === 'edit' ? this.renderEditor(getEditorProps()): null}
-        {this.renderButton(getEditButtonProps())}
-      </View>
-    )
-  }
-
-  onChangeReadOnly = (event) => {
-    this.setState({readOnly: event.target.checked})
-  }
-
-  render () {
-    return  (
       <View as="div">
         <View as="div" margin="0 0 small 0">
-          <Checkbox size="small" label="Read Only" checked={this.state.readOnly} onChange={this.onChangeReadOnly}/>
+          <Checkbox
+            size="small"
+            label="Read Only"
+            checked={readOnly}
+            onChange={onChangeReadOnly}
+          />
         </View>
         <Editable
-          mode={this.state.mode}
-          onChangeMode={this.handleModeChange}
-          render={this.renderMe}
-          value={this.state.value}
-          readOnly={this.state.readOnly}
+          mode={mode}
+          onChangeMode={handleModeChange}
+          render={renderMe}
+          value={value}
+          readOnly={readOnly}
         />
       </View>
     )
   }
 
-}
-render(<Example value="you can edit me" />)
-```
+  render(<Example value="you can edit me" />)
+  ```
