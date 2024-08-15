@@ -19,71 +19,127 @@ type: example
 
 ### Default config with additional props
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  state = {
-      selectedDate: "",
-      visibleMonth:"2025-05"
+- ```js
+  class Example extends React.Component {
+    state = {
+      selectedDate: '',
+      visibleMonth: '2025-05'
     }
 
-  setVisibleMonth = () => {
-    this.setState({visibleMonth: "2028-09"})
+    render = () => (
+      <Calendar
+        visibleMonth={this.state.visibleMonth}
+        currentDate="2023-12-15"
+        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+        selectedDate={this.state.selectedDate}
+        onRequestRenderNextMonth={(_e, requestedMonth) =>
+          this.setState({ visibleMonth: requestedMonth })
+        }
+        onRequestRenderPrevMonth={(_e, requestedMonth) =>
+          this.setState({ visibleMonth: requestedMonth })
+        }
+        onDateSelected={(date) => {
+          this.setState({ selectedDate: date })
+        }}
+      />
+    )
   }
-  render = () =>
-<Calendar
-  visibleMonth={this.state.visibleMonth}
-  currentDate="2023-12-15"
-  disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-  selectedDate={this.state.selectedDate}
-  onRequestRenderNextMonth={(_e, requestedMonth) => this.setState({visibleMonth: requestedMonth})}
-  onRequestRenderPrevMonth={(_e, requestedMonth) => this.setState({visibleMonth: requestedMonth})}
-  onDateSelected={(date)=>{
-    this.setState({selectedDate: date})
-  }}
-/>
-}
-render(<Example />)
-```
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [selectedDate, setSelectedDate] = useState('')
+    const [visibleMonth, setVisibleMonth] = useState('2025-05')
+
+    return (
+      <Calendar
+        visibleMonth={visibleMonth}
+        currentDate="2023-12-15"
+        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+        selectedDate={selectedDate}
+        onRequestRenderNextMonth={(_e, requestedMonth) =>
+          setVisibleMonth(requestedMonth)
+        }
+        onRequestRenderPrevMonth={(_e, requestedMonth) =>
+          setVisibleMonth(requestedMonth)
+        }
+        onDateSelected={(date) => {
+          setSelectedDate(date)
+        }}
+      />
+    )
+  }
+  render(<Example />)
+  ```
 
 ### With year picker
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  state = {
-      selectedDate: "",
-      visibleMonth:"2024-02"
+- ```js
+  class Example extends React.Component {
+    state = {
+      selectedDate: '',
+      visibleMonth: '2024-02'
     }
 
-  setVisibleMonth = () => {
-    this.setState({visibleMonth: "2028-09"})
+    render = () => (
+      <Calendar
+        visibleMonth={this.state.visibleMonth}
+        currentDate="2024-02-29"
+        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+        selectedDate={this.state.selectedDate}
+        onRequestRenderNextMonth={(_e, requestedMonth) =>
+          this.setState({ visibleMonth: requestedMonth })
+        }
+        onRequestRenderPrevMonth={(_e, requestedMonth) =>
+          this.setState({ visibleMonth: requestedMonth })
+        }
+        onDateSelected={(date) => {
+          this.setState({ selectedDate: date })
+        }}
+        withYearPicker={{
+          screenReaderLabel: 'Year picker',
+          startYear: 1999,
+          endYear: 2024,
+          maxHeight: '200px'
+        }}
+      />
+    )
   }
-  render = () =>
-<Calendar
-  visibleMonth={this.state.visibleMonth}
-  currentDate="2024-02-29"
-  disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-  selectedDate={this.state.selectedDate}
-  onRequestRenderNextMonth={(_e, requestedMonth) => this.setState({visibleMonth: requestedMonth})}
-  onRequestRenderPrevMonth={(_e, requestedMonth) => this.setState({visibleMonth: requestedMonth})}
-  onDateSelected={(date)=>{
-    this.setState({selectedDate: date})
-  }}
-  withYearPicker={{
-    screenReaderLabel: "Year picker",
-    startYear:1999,
-    endYear:2024,
-    maxHeight: "200px"
-  }}
-/>
-}
-render(<Example />)
-```
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [selectedDate, setSelectedDate] = useState('')
+    const [visibleMonth, setVisibleMonth] = useState('2024-02')
+
+    return (
+      <Calendar
+        visibleMonth={visibleMonth}
+        currentDate="2024-02-29"
+        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+        selectedDate={selectedDate}
+        onRequestRenderNextMonth={(_e, requestedMonth) =>
+          setVisibleMonth(requestedMonth)
+        }
+        onRequestRenderPrevMonth={(_e, requestedMonth) =>
+          setVisibleMonth(requestedMonth)
+        }
+        onDateSelected={(date) => {
+          setSelectedDate(date)
+        }}
+        withYearPicker={{
+          screenReaderLabel: 'Year picker',
+          startYear: 1999,
+          endYear: 2024,
+          maxHeight: '200px'
+        }}
+      />
+    )
+  }
+  render(<Example />)
+  ```
 
 ### Composing a Calendar in your Application
 
