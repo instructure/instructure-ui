@@ -166,7 +166,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       this.state.visibleMonth
         .clone()
         .locale('en')
-        .subtract({ months: 1 })
+        .add({ months: 1 })
         .format('YYYY')
     )
     return (
@@ -318,6 +318,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             <SimpleSelect
               width="90px"
               renderLabel=""
+              placeholder="--"
               assistiveText={withYearPicker.screenReaderLabel}
               value={visibleMonth.format('YYYY')}
               onChange={(

@@ -44,35 +44,88 @@ import type { DateInput2Props } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { Moment } from '@instructure/ui-i18n'
 
-function parseDate(dateString: string): string {
-  const date = new Date(dateString)
-  return isNaN(date.getTime()) ? '' : date.toISOString()
-}
+function parseLocaleDate(dateString: string = '', locale: string, timeZone: string): Date | null {
+  // This function may seem complicated but it basically does one thing:
+  //   Given a dateString, a locale and a timeZone. The dateString is assumed to be formatted according
+  //   to the locale. So if the locale is `en-us` the dateString is expected to be in the format of M/D/YYYY.
+  //   The dateString is also assumed to be in the given timeZone, so "1/1/2020" in "America/Los_Angeles" timezone is
+  //   expected to be "2020-01-01T08:00:00.000Z" in UTC time.
+  //   This function tries to parse the dateString taking these variables into account and return a javascript Date object
+  //   that is adjusted to be in UTC.
 
-function defaultDateFormatter(
-  dateString: string,
-  locale: string,
-  timezone: string
-) {
-  return new Date(dateString).toLocaleDateString(locale, {
-    month: 'long',
-    year: 'numeric',
-    day: 'numeric',
-    timeZone: timezone
+  // Split string on '.', whitespace, '/', ',' or '-' using regex: /[.\s/.-]+/.
+  // The '+' allows splitting on consecutive delimiters.
+  // `.filter(Boolean)` is needed because some locales have a delimeter at the end (e.g.: "hu-hu")
+  const splitDate = dateString.split(/[,.\s/.-]+/).filter(Boolean)
+
+  // create a locale formatted new date to later extract the order and delimeter information
+  const localeDate = new Intl.DateTimeFormat(locale).formatToParts(new Date())
+
+  let index = 0
+  let day: number | undefined, month: number | undefined, year: number | undefined
+  localeDate.forEach((part) => {
+    if (part.type === 'month') {
+      month = parseInt(splitDate[index], 10)
+      index++
+    } else if (part.type === 'day') {
+      day = parseInt(splitDate[index], 10)
+      index++
+    } else if (part.type === 'year') {
+      year = parseInt(splitDate[index], 10)
+      index++
+    }
   })
+
+  // sensible year limitations
+  if (!year || !month || !day || year < 1000 || year > 9999) return null
+
+  // create utc date from year, month (zero indexed) and day
+  const date = new Date(Date.UTC(year, month - 1, day))
+
+  // Format date string in the provided timezone
+  const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    }).formatToParts(date)
+
+  // Extract the date and time parts from the formatted string
+  const dateStringInTimezone: {
+    [key: string]: number
+  } = parts.reduce((acc, part) => {
+    return part.type === 'literal' ? acc : {
+      ...acc,
+      [part.type]: part.value,
+    }
+  }, {})
+
+  // Create a date string in the format 'YYYY-MM-DDTHH:mm:ss'
+  const dateInTimezone = `${dateStringInTimezone.year}-${dateStringInTimezone.month}-${dateStringInTimezone.day}T${dateStringInTimezone.hour}:${dateStringInTimezone.minute}:${dateStringInTimezone.second}`
+
+  // Calculate time difference for timezone offset
+  const timeDiff = new Date(dateInTimezone + 'Z').getTime() - date.getTime()
+  const newTime = new Date(date.getTime() - timeDiff)
+  // Return the UTC Date corresponding to the time in the specified timezone
+  return newTime
 }
 
 /**
 ---
 category: components
 ---
+
+@module experimental
 **/
 const DateInput2 = ({
   renderLabel,
   screenReaderLabels,
   isRequired = false,
   interaction = 'enabled',
-  size = 'medium',
   isInline = false,
   value,
   messages,
@@ -80,84 +133,16 @@ const DateInput2 = ({
   onChange,
   onBlur,
   withYearPicker,
-  onRequestValidateDate,
   invalidDateErrorMessage,
   locale,
   timezone,
   placeholder,
-  formatDate = defaultDateFormatter,
+  dateFormat,
+  onRequestValidateDate,
   // margin, TODO enable this prop
   ...rest
 }: DateInput2Props) => {
-  const [selectedDate, setSelectedDate] = useState<string>('')
-  const [inputMessages, setInputMessages] = useState<FormMessage[]>(
-    messages || []
-  )
-  const [showPopover, setShowPopover] = useState<boolean>(false)
   const localeContext = useContext(ApplyLocaleContext)
-
-  useEffect(() => {
-    // when `value` is changed, validation removes the error message if passes
-    // but it's NOT adding error message if validation fails for better UX
-    validateInput(true)
-  }, [value])
-
-  useEffect(() => {
-    setInputMessages(messages || [])
-  }, [messages])
-
-  useEffect(() => {
-    setSelectedDate(parseDate(value || ''))
-  }, [])
-
-  const handleInputChange = (
-    e: SyntheticEvent,
-    newValue: string,
-    parsedDate: string = ''
-  ) => {
-    // blur event formats the input which shouldn't trigger parsing
-    if (e.type !== 'blur') {
-      setSelectedDate(parseDate(newValue))
-    }
-    onChange?.(e, newValue, parsedDate)
-  }
-
-  const handleDateSelected = (
-    dateString: string,
-    _momentDate: Moment,
-    e: SyntheticEvent
-  ) => {
-    const formattedDate = formatDate(dateString, getLocale(), getTimezone())
-    const parsedDate = parseDate(dateString)
-    setSelectedDate(parsedDate)
-    handleInputChange(e, formattedDate, parsedDate)
-    setShowPopover(false)
-    onRequestValidateDate?.(dateString, true)
-  }
-
-  // onlyRemoveError is used to remove the error msg immediately when the user inputs a valid date (and don't wait for blur event)
-  const validateInput = (onlyRemoveError = false): boolean => {
-    // don't validate empty input
-    if (!value || parseDate(value) || selectedDate) {
-      setInputMessages(messages || [])
-      return true
-    }
-    // only show error if there is no user provided validation callback
-    if (
-      !onlyRemoveError &&
-      typeof invalidDateErrorMessage === 'string' &&
-      !onRequestValidateDate
-    ) {
-      setInputMessages([
-        {
-          type: 'error',
-          text: invalidDateErrorMessage
-        }
-      ])
-    }
-
-    return false
-  }
 
   const getLocale = () => {
     if (locale) {
@@ -165,6 +150,7 @@ const DateInput2 = ({
     } else if (localeContext.locale) {
       return localeContext.locale
     }
+    // default to the system's locale
     return Locale.browserLocale()
   }
 
@@ -178,16 +164,84 @@ const DateInput2 = ({
     return Intl.DateTimeFormat().resolvedOptions().timeZone
   }
 
-  const handleBlur = (e: SyntheticEvent) => {
-    const isInputValid = validateInput(false)
-    if (isInputValid && selectedDate) {
-      const formattedDate = formatDate(selectedDate, getLocale(), getTimezone())
-      handleInputChange(e, formattedDate, selectedDate)
+  const [inputMessages, setInputMessages] = useState<FormMessage[]>(
+    messages || []
+  )
+  const [showPopover, setShowPopover] = useState<boolean>(false)
+
+  useEffect(() => {
+    setInputMessages(messages || [])
+  }, [messages])
+
+  useEffect(() => {
+    const [, utcIsoDate] = parseDate(value)
+    // clear error messages if date becomes valid
+    if (utcIsoDate || !value) {
+      setInputMessages(messages || [])
     }
-    onRequestValidateDate?.(value, isInputValid)
-    onBlur?.(e)
+  }, [value])
+
+  const parseDate = (dateString: string = ''): [string, string] => {
+    let date: Date | null = null
+    if (dateFormat) {
+      if (typeof dateFormat === 'string') {
+        // use dateFormat instead of the user locale
+        date = parseLocaleDate(dateString, dateFormat, getTimezone())
+      } else if (dateFormat.parser) {
+        date = dateFormat.parser(dateString)
+      }
+    } else {
+      // no dateFormat prop passed, use locale for formatting
+      date = parseLocaleDate(dateString, getLocale(), getTimezone())
+    }
+    return date ? [formatDate(date), date.toISOString()] : ['', '']
   }
 
+  const formatDate = (date: Date): string => {
+    // use formatter function if provided
+    if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
+      return dateFormat.formatter(date)
+    }
+    // if dateFormat set to a locale, use that, otherwise default to the user's locale
+    return date.toLocaleDateString(typeof dateFormat === 'string' ? dateFormat : getLocale(), {timeZone: getTimezone(), calendar: 'gregory', numberingSystem: 'latn'})
+  }
+
+  const handleInputChange = (e: SyntheticEvent, newValue: string) => {
+    const [, utcIsoDate] = parseDate(newValue)
+    onChange?.(e, newValue, utcIsoDate)
+  }
+
+  const handleDateSelected = (
+    dateString: string,
+    _momentDate: Moment,
+    e: SyntheticEvent
+  ) => {
+    setShowPopover(false)
+    const newValue = formatDate(new Date(dateString))
+    onChange?.(
+      e,
+      newValue,
+      dateString
+    )
+    onRequestValidateDate?.(e, newValue, dateString)
+  }
+
+  const handleBlur = (e: SyntheticEvent) => {
+    const [localeDate, utcIsoDate] = parseDate(value)
+    if (localeDate) {
+      if (localeDate !== value) {
+        onChange?.(e, localeDate, utcIsoDate)
+      }
+    } else if (value && invalidDateErrorMessage) {
+      setInputMessages([
+        {type: 'error', text: invalidDateErrorMessage}
+      ])
+    }
+    onRequestValidateDate?.(e, value || '', utcIsoDate)
+    onBlur?.(e, value || '', utcIsoDate)
+  }
+
+  const selectedDate = parseDate(value)[1]
   return (
     <TextInput
       {...passthroughProps(rest)}
@@ -199,7 +253,6 @@ const DateInput2 = ({
       value={value}
       placeholder={placeholder}
       width={width}
-      size={size}
       display={isInline ? 'inline-block' : 'block'}
       messages={inputMessages}
       interaction={interaction}
@@ -211,7 +264,6 @@ const DateInput2 = ({
               withBorder={false}
               screenReaderLabel={screenReaderLabels.calendarIcon}
               shape="circle"
-              size={size}
               interaction={interaction}
             >
               <IconCalendarMonthLine />

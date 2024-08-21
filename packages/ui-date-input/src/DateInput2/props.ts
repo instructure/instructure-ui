@@ -45,13 +45,9 @@ type DateInput2OwnProps = {
     nextMonthButton: string
   }
   /**
-   * Specifies the input value.
+   * Specifies the input value *before* formatting. The `formatDate` will be applied to it before displaying. Should be a valid, parsable date.
    */
-  value?: string // TODO: controllable(PropTypes.string)
-  /**
-   * Specifies the input size.
-   */
-  size?: 'small' | 'medium' | 'large'
+  value?: string
   /**
    * Html placeholder text to display when the input has no value. This should
    * be hint text, not a label replacement.
@@ -62,13 +58,13 @@ type DateInput2OwnProps = {
    */
   onChange?: (
     event: React.SyntheticEvent,
-    inputValue: string,
-    dateString: string
+    value: string,
+    utcDateString: string
   ) => void
   /**
    * Callback executed when the input fires a blur event.
    */
-  onBlur?: (event: React.SyntheticEvent) => void
+  onBlur?: (event: React.SyntheticEvent, value: string, utcDateString: string) => void
   /**
    * Specifies if interaction with the input is enabled, disabled, or readonly.
    * When "disabled", the input changes visibly to indicate that it cannot
@@ -98,24 +94,6 @@ type DateInput2OwnProps = {
    * }`
    */
   messages?: FormMessage[]
-  /**
-   * Callback fired requesting the calendar be shown.
-   */
-  onRequestShowCalendar?: (event: SyntheticEvent) => void
-  /**
-   * Callback fired requesting the calendar be hidden.
-   */
-  onRequestHideCalendar?: (event: SyntheticEvent) => void
-  /**
-   * Callback fired when the input is blurred. Feedback should be provided
-   * to the user when this function is called if the selected date or input
-   * value is invalid. The component has an internal check whether the date can
-   * be parsed to a valid date.
-   */
-  onRequestValidateDate?: (
-    value?: string,
-    internalValidationPassed?: boolean
-  ) => void | FormMessage[]
   /**
    * The message shown to the user when the date is invalid. If this prop is not set, validation is bypassed.
    * If it's set to an empty string, validation happens and the input border changes to red if validation hasn't passed.
@@ -165,18 +143,19 @@ type DateInput2OwnProps = {
     startYear: number
     endYear: number
   }
+  /**
+  * By default the date format is determined by the locale but can be changed via this prop to an alternate locale (passing it in as a string) or a custom parser and formatter (both as functions)
+  */
+  dateFormat?: {
+    parser: (input: string) => Date
+    formatter: (date: Date) => string
+  } | string
 
   /**
-   * Formatting function for how the date should be displayed inside the input field. It will be applied if the user clicks on a date in the date picker of after blur event from the input field.
+   * Callback executed when the input fires a blur event or a date is selected from the picker.
    */
-  formatDate?: (isoDate: string, locale: string, timezone: string) => string
-
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
-  // margin?: Spacing TODO enable this prop
+  onRequestValidateDate?: (event: React.SyntheticEvent, value: string, utcDateString: string) => void
+  // margin?: Spacing // TODO enable this prop
 }
 
 type PropKeys = keyof DateInput2OwnProps
@@ -191,7 +170,6 @@ const propTypes: PropValidators<PropKeys> = {
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   screenReaderLabels: PropTypes.object.isRequired,
   value: controllable(PropTypes.string),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -200,9 +178,6 @@ const propTypes: PropValidators<PropKeys> = {
   isInline: PropTypes.bool,
   width: PropTypes.string,
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  onRequestShowCalendar: PropTypes.func,
-  onRequestHideCalendar: PropTypes.func,
-  onRequestValidateDate: PropTypes.func,
   invalidDateErrorMessage: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string
@@ -210,7 +185,11 @@ const propTypes: PropValidators<PropKeys> = {
   locale: PropTypes.string,
   timezone: PropTypes.string,
   withYearPicker: PropTypes.object,
-  formatDate: PropTypes.func
+  dateFormat: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  onRequestValidateDate: PropTypes.func,
 }
 
 export type { DateInput2Props }
