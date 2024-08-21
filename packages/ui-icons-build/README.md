@@ -24,7 +24,6 @@ npm install --dev @instructure/ui-icons-build
 
 ## Requirements
 
-- Node >= 8
 - Mac OSX
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-icons-build.svg
