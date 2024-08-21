@@ -44,35 +44,52 @@ import type { DateInput2Props } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { Moment } from '@instructure/ui-i18n'
 
-function parseDate(dateString: string): string {
-  const date = new Date(dateString)
-  return isNaN(date.getTime()) ? '' : date.toISOString()
-}
+function parseLocaleDate(dateString: string = '', locale: string): Date | null {
+  const localeDate = new Intl.DateTimeFormat(locale).formatToParts(new Date())
 
-function defaultDateFormatter(
-  dateString: string,
-  locale: string,
-  timezone: string
-) {
-  return new Date(dateString).toLocaleDateString(locale, {
-    month: 'long',
-    year: 'numeric',
-    day: 'numeric',
-    timeZone: timezone
+  // Split string on '.', whitespace, '/', ',' or '-' using regex: /[.\s/.-]+/.
+  // The '+' allows splitting on consecutive delimiters.
+  const splitDate = dateString.split(/[,.\s/.-]+/)
+
+  if (splitDate.length !== 3) return null
+
+  let index = 0
+  let day: number | undefined, month: number | undefined, year: number | undefined
+  localeDate.forEach((part) => {
+    if (part.type === 'month') {
+      month = parseInt(splitDate[index], 10)
+      index++
+    } else if (part.type === 'day') {
+      day = parseInt(splitDate[index], 10)
+      index++
+    } else if (part.type === 'year') {
+      year = parseInt(splitDate[index], 10)
+      index++
+    }
   })
+
+  // sensible year limitations
+  if (!year || !month || !day || year < 1000 || year > 9999) return null
+
+  const date = new Date(`${year}-${month}-${day}`)
+
+  if (isNaN(date.getTime())) return null
+
+  return date
 }
 
 /**
 ---
 category: components
 ---
+
+@module experimental
 **/
 const DateInput2 = ({
   renderLabel,
   screenReaderLabels,
   isRequired = false,
   interaction = 'enabled',
-  size = 'medium',
   isInline = false,
   value,
   messages,
@@ -80,84 +97,16 @@ const DateInput2 = ({
   onChange,
   onBlur,
   withYearPicker,
-  onRequestValidateDate,
   invalidDateErrorMessage,
   locale,
   timezone,
   placeholder,
-  formatDate = defaultDateFormatter,
+  dateFormat,
+  onRequestValidateDate,
   // margin, TODO enable this prop
   ...rest
 }: DateInput2Props) => {
-  const [selectedDate, setSelectedDate] = useState<string>('')
-  const [inputMessages, setInputMessages] = useState<FormMessage[]>(
-    messages || []
-  )
-  const [showPopover, setShowPopover] = useState<boolean>(false)
   const localeContext = useContext(ApplyLocaleContext)
-
-  useEffect(() => {
-    // when `value` is changed, validation removes the error message if passes
-    // but it's NOT adding error message if validation fails for better UX
-    validateInput(true)
-  }, [value])
-
-  useEffect(() => {
-    setInputMessages(messages || [])
-  }, [messages])
-
-  useEffect(() => {
-    setSelectedDate(parseDate(value || ''))
-  }, [])
-
-  const handleInputChange = (
-    e: SyntheticEvent,
-    newValue: string,
-    parsedDate: string = ''
-  ) => {
-    // blur event formats the input which shouldn't trigger parsing
-    if (e.type !== 'blur') {
-      setSelectedDate(parseDate(newValue))
-    }
-    onChange?.(e, newValue, parsedDate)
-  }
-
-  const handleDateSelected = (
-    dateString: string,
-    _momentDate: Moment,
-    e: SyntheticEvent
-  ) => {
-    const formattedDate = formatDate(dateString, getLocale(), getTimezone())
-    const parsedDate = parseDate(dateString)
-    setSelectedDate(parsedDate)
-    handleInputChange(e, formattedDate, parsedDate)
-    setShowPopover(false)
-    onRequestValidateDate?.(dateString, true)
-  }
-
-  // onlyRemoveError is used to remove the error msg immediately when the user inputs a valid date (and don't wait for blur event)
-  const validateInput = (onlyRemoveError = false): boolean => {
-    // don't validate empty input
-    if (!value || parseDate(value) || selectedDate) {
-      setInputMessages(messages || [])
-      return true
-    }
-    // only show error if there is no user provided validation callback
-    if (
-      !onlyRemoveError &&
-      typeof invalidDateErrorMessage === 'string' &&
-      !onRequestValidateDate
-    ) {
-      setInputMessages([
-        {
-          type: 'error',
-          text: invalidDateErrorMessage
-        }
-      ])
-    }
-
-    return false
-  }
 
   const getLocale = () => {
     if (locale) {
@@ -165,6 +114,7 @@ const DateInput2 = ({
     } else if (localeContext.locale) {
       return localeContext.locale
     }
+    // default to the system's locale
     return Locale.browserLocale()
   }
 
@@ -178,16 +128,81 @@ const DateInput2 = ({
     return Intl.DateTimeFormat().resolvedOptions().timeZone
   }
 
-  const handleBlur = (e: SyntheticEvent) => {
-    const isInputValid = validateInput(false)
-    if (isInputValid && selectedDate) {
-      const formattedDate = formatDate(selectedDate, getLocale(), getTimezone())
-      handleInputChange(e, formattedDate, selectedDate)
+  const [inputMessages, setInputMessages] = useState<FormMessage[]>(
+    messages || []
+  )
+  const [showPopover, setShowPopover] = useState<boolean>(false)
+
+  useEffect(() => {
+    setInputMessages(messages || [])
+  }, [messages])
+
+  const parseDate = (dateString: string): [string, string] => {
+    let date: Date | null = null
+    if (dateFormat) {
+      if (typeof dateFormat === 'string') {
+        // use dateFormat instead of the user locale
+        date = parseLocaleDate(dateString, dateFormat)
+      } else if (dateFormat.parser) {
+        date = dateFormat.parser(dateString)
+      }
+    } else {
+      // no dateFormat prop passed, use locale for formatting
+      date = parseLocaleDate(dateString, getLocale())
     }
-    onRequestValidateDate?.(value, isInputValid)
-    onBlur?.(e)
+    return date ? [formatDate(date), date.toISOString()] : ['', '']
   }
 
+  const formatDate = (date: Date): string => {
+    if (typeof dateFormat === 'string') {
+      // use dateFormat instead of the user locale
+      return date.toLocaleDateString(dateFormat)
+    } else if (dateFormat?.formatter) {
+      return dateFormat.formatter(date)
+    }
+    // no dateFormat prop passed, use locale for formatting
+    return date.toLocaleDateString(getLocale())
+  }
+
+  const handleInputChange = (e: SyntheticEvent, newValue: string) => {
+    const [localeDate, utcIsoDate] = parseDate(newValue)
+    if (localeDate) {
+      setInputMessages(messages || [])
+    }
+    onChange?.(e, newValue, utcIsoDate)
+  }
+
+  const handleDateSelected = (
+    dateString: string,
+    _momentDate: Moment,
+    e: SyntheticEvent
+  ) => {
+    setShowPopover(false)
+    const newValue = formatDate(new Date(dateString))
+    onChange?.(
+      e,
+      newValue,
+      dateString
+    )
+    onRequestValidateDate?.(e, newValue, dateString)
+  }
+
+  const handleBlur = (e: SyntheticEvent) => {
+    const [localeDate, utcIsoDate] = parseDate(value || '')
+    if (localeDate) {
+      if (localeDate !== value) {
+        onChange?.(e, localeDate, utcIsoDate)
+      }
+    } else if (value && invalidDateErrorMessage) {
+      setInputMessages([
+        {type: 'error', text: invalidDateErrorMessage}
+      ])
+    }
+    onRequestValidateDate?.(e, value || '', utcIsoDate)
+    onBlur?.(e, value || '', utcIsoDate)
+  }
+
+  const selectedDate = parseDate(value || '')[1]
   return (
     <TextInput
       {...passthroughProps(rest)}
@@ -199,7 +214,6 @@ const DateInput2 = ({
       value={value}
       placeholder={placeholder}
       width={width}
-      size={size}
       display={isInline ? 'inline-block' : 'block'}
       messages={inputMessages}
       interaction={interaction}
@@ -211,7 +225,6 @@ const DateInput2 = ({
               withBorder={false}
               screenReaderLabel={screenReaderLabels.calendarIcon}
               shape="circle"
-              size={size}
               interaction={interaction}
             >
               <IconCalendarMonthLine />
