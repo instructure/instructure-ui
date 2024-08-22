@@ -37,18 +37,32 @@ export const getUIColors = (contrasts: Contrasts): UI => ({
   textTimestamp: contrasts?.grey5782,
   textAuthor: contrasts?.grey5782,
   textDatapoint: contrasts?.grey5782,
-  textLink: contrasts?.blue4570,
+  textLink: contrasts?.blue5782,
   textPlaceholder: contrasts?.grey2424,
-  textSuccess: contrasts?.green4570,
-  textWarning: contrasts?.orange4570,
-  textError: contrasts?.red4570,
+  textSuccess: contrasts?.green5782,
+  textWarning: contrasts?.orange5782,
+  textError: contrasts?.red5782,
 
   lineStroke: contrasts?.grey1424,
   lineDivider: contrasts?.grey1214,
 
   surfaceOverlayGrey: contrasts?.grey100100op75,
   surfaceOverlayWhite: contrasts?.white1010op75,
-  surfaceDivider: contrasts?.grey1424
+  surfaceAttention: contrasts?.blue4570,
+  surfaceSuccess: contrasts?.green4570,
+  surfaceWarning: contrasts?.orange4570,
+  surfaceError: contrasts?.red4570,
+  surfaceDivider: contrasts?.grey1214,
+
+  textSurfaceColored: contrasts?.white1010,
+
+  iconDefault: contrasts?.grey125125,
+  iconSuccess: contrasts?.green4570,
+  iconWarning: contrasts?.orange4570,
+  iconError: contrasts?.red4570,
+  iconSurfaceColored: contrasts?.white1010,
+
+  lineConnector: contrasts?.grey1424
 })
 
 export default getUIColors

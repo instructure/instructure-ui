@@ -26,6 +26,7 @@ import PropTypes from 'prop-types'
 
 type ThemeColorsOwnProps = {
   colors: Record<string, string>
+  label: string
 }
 
 type PropKeys = keyof ThemeColorsOwnProps
@@ -35,7 +36,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ThemeColorsProps = ThemeColorsOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
-  colors: PropTypes.objectOf(PropTypes.string).isRequired
+  colors: PropTypes.objectOf(PropTypes.string).isRequired,
+  label: PropTypes.string
 }
 
 type ThemeColorsState = {

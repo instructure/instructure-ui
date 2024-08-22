@@ -28,7 +28,7 @@ import grayMatter from 'gray-matter'
 import { v4 as uuid } from 'uuid'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 
 import { View } from '@instructure/ui-view'
 import { Table } from '@instructure/ui-table'

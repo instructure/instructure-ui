@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { canvasHighContrast } from '@instructure/ui-theme-tokens'
-import { BaseTheme } from '@instructure/shared-types'
-import { ThemeRegistry } from '@instructure/theme-registry'
+import { canvasHighContrast } from '@instructure/ui-themes'
+import type { CanvasHighContrastTheme } from '@instructure/ui-themes'
 
 const {
   borders,
@@ -41,16 +40,7 @@ const {
 
 const key = 'canvas-high-contrast'
 
-export type CanvasHighContrastTheme = BaseTheme & {
-  key: 'canvas-high-contrast'
-} & typeof canvasHighContrast
-
-const __theme: CanvasHighContrastTheme = {
-  key,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  ...canvasHighContrast
-}
-const theme = ThemeRegistry.registerTheme(__theme)
+const theme = canvasHighContrast
 
 export default theme
 export {
@@ -67,3 +57,5 @@ export {
   shadows,
   stacking
 }
+
+export type { CanvasHighContrastTheme }

@@ -27,7 +27,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
 
 import { ModalHeader } from '../index'

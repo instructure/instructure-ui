@@ -21,7 +21,7 @@ npm install @instructure/ui-themes
 - global theming:
 
   ```js
-  import { canvas } from '@instructure/ui-themes'
+  import canvas from '@instructure/ui-themes'
 
   canvas.use()
   ```
@@ -29,7 +29,7 @@ npm install @instructure/ui-themes
 - application level theming:
 
   ```jsx
-  import { canvas } from '@instructure/ui-themes'
+  import canvas from '@instructure/ui-themes'
 
   ReactDOM.render(
     <InstUISettingsProvider theme={canvas}>
@@ -44,7 +44,7 @@ npm install @instructure/ui-themes
 - globally:
 
   ```js
-  import { canvas } from '@instructure/ui-themes'
+  import canvas from '@instructure/ui-themes'
 
   canvas.use({ overrides: { colors: { brand: 'red' } } })
   ```
@@ -52,7 +52,7 @@ npm install @instructure/ui-themes
 - application level:
 
   ```jsx
-  import { canvas } from '@instructure/ui-themes'
+  import canvas from '@instructure/ui-themes'
   const themeOverrides = { colors: { brand: 'red' } }
 
   ReactDOM.render(

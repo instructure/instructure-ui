@@ -34,7 +34,7 @@ export function handleMapJSTokensToSource(tokens) {
     return Object.entries(tokenGroup).reduce((mapped, [key, value]) => {
       if (isPlainObject(value)) {
         // Ignore nested objects
-        return mapped
+        return { ...mapped, [key]: mapTokenGroup(value) }
       }
 
       return {

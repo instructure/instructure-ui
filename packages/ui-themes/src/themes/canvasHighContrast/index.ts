@@ -22,48 +22,23 @@
  * SOFTWARE.
  */
 
-import { Primitives } from '@instructure/shared-types'
+import sharedThemeTokens from '../../sharedThemeTokens'
+import { BaseTheme, Colors } from '@instructure/shared-types'
+import { ThemeRegistry } from '@instructure/theme-registry'
+import colors from './colors'
 
-const primitives: Primitives = {
-  white: '#FFFFFF',
-  white10op75: '#FFFFFFBF',
+const key = 'canvas-high-contrast'
 
-  grey11: '#F2F4F4',
-  grey12: '#E8EAEC',
-  grey14: '#D7DADE',
-  grey24: '#9EA6AD',
-  grey45: '#6A7883',
-  grey57: '#586874',
-  grey70: '#4A5B68',
-  grey82: '#3F515E',
-  grey100: '#334451',
-  grey100op75: '#334451BF',
-  grey125: '#273540',
+export type CanvasHighContrastTheme = BaseTheme & {
+  key: 'canvas-high-contrast'
+} & typeof sharedThemeTokens & { colors: Colors }
 
-  blue12: '#E0EBF5',
-  blue45: '#2B7ABC',
-  blue57: '#0E68B3',
-  blue70: '#0A5A9E',
-  blue82: '#09508C',
-
-  green12: '#DCEEE4',
-  green45: '#03893D',
-  green57: '#027634',
-  green70: '#02672D',
-  green82: '#015B28',
-
-  orange12: '#FCE5D9',
-  orange30: '#F06E26',
-  orange45: '#CF4A00',
-  orange57: '#B34000',
-  orange70: '#9C3800',
-  orange82: '#8B3200',
-
-  red12: '#FCE4E5',
-  red45: '#E62429',
-  red57: '#C71F23',
-  red70: '#AE1B1F',
-  red82: '#9B181C'
+const __theme: CanvasHighContrastTheme = {
+  key,
+  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
+  ...sharedThemeTokens,
+  colors
 }
+const theme = ThemeRegistry.registerTheme(__theme)
 
-export default primitives
+export default theme

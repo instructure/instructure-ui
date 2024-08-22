@@ -23,15 +23,13 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.0.0",
-    "@instructure/ui-theme-tokens": "10.0.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^15.0.7",
     "vitest": "^2.0.2"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "10.0.0",
-    "@instructure/canvas-theme": "10.0.0",
-    "@instructure/shared-types": "10.0.0"
+    "@instructure/shared-types": "10.0.0",
+    "@instructure/theme-registry": "10.0.0"
   },
   "publishConfig": {
     "access": "public"

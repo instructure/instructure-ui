@@ -21,30 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { PropValidators } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
 
-import { borders } from './borders'
-import { colors } from './colors'
-import { transitions } from './transitions'
-import { typography } from './typography'
-import { spacing } from './spacing'
-import { forms } from './forms'
-import { media } from './media'
-import { breakpoints } from './breakpoints'
-import { shadows } from './shadows'
-import { stacking } from './stacking'
-
-const canvas = {
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
+type ColorTableOwnProps = {
+  colors: any
+  colorNames: any
 }
 
-export default canvas
-export { canvas }
+type PropKeys = keyof ColorTableOwnProps
+
+type ColorTableProps = ColorTableOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+const propTypes: PropValidators<PropKeys> = {
+  colors: PropTypes.object.isRequired,
+  colorNames: PropTypes.object.isRequired
+}
+
+const allowedProps: AllowedPropKeys = ['colors', 'colorNames']
+
+export type { ColorTableProps }
+export { propTypes, allowedProps }

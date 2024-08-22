@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 import { ThemeRegistry } from '@instructure/theme-registry'
 import { isBaseTheme, mergeDeep } from '@instructure/ui-utils'
 

@@ -57,7 +57,7 @@ InstUI's color palette is the same for every theme. The numbers in the color nam
 ---
 type: example
 ---
-<ThemeColors colors={canvas.colors.primitives}></ThemeColors>
+<ThemeColors colors={canvas.colors.primitives} label=""></ThemeColors>
 ```
 
 Every theme in InstUI is built using these colors. Ideally users should never interact directly with this palette, here it's only displayed only for reference.

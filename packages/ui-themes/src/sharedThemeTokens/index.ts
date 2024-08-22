@@ -22,13 +22,27 @@
  * SOFTWARE.
  */
 
-import { canvas } from '../canvas'
-import { colors } from './colors'
+import { borders } from './borders'
+import { transitions } from './transitions'
+import { typography } from './typography'
+import { spacing } from './spacing'
+import { forms } from './forms'
+import { media } from './media'
+import { breakpoints } from './breakpoints'
+import { shadows } from './shadows'
+import { stacking } from './stacking'
 
-const canvasHighContrast = {
-  ...canvas,
-  colors
+const canvas = {
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking
 }
 
-export default canvasHighContrast
-export { canvasHighContrast }
+export default canvas
+export { canvas }
