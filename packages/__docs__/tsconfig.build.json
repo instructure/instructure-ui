@@ -274,9 +274,6 @@
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
     {
-      "path": "../ui-eslint-config/tsconfig.build.json"
-    },
-    {
       "path": "../ui-scripts/tsconfig.build.json"
     },
     {

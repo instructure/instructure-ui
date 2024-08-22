@@ -114,7 +114,7 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   formatOverflowText: PropTypes.func,
   formatOutput: PropTypes.func,
-  as: PropTypes.elementType // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType
 }
 
 const allowedProps: AllowedPropKeys = [

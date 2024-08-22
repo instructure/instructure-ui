@@ -116,11 +116,11 @@ const propTypes: PropValidators<PropKeys> = {
   onMouseOver: PropTypes.func,
   controls: PropTypes.string,
   disabled: PropTypes.bool,
-  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType,
   type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   href: PropTypes.string,
-  target: PropTypes.string,
+  target: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [

@@ -119,7 +119,6 @@ describe('<Avatar />', () => {
   })
 
   describe('when an image src url is provided', () => {
-    // eslint-disable-next-line max-len
     const src =
       'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 

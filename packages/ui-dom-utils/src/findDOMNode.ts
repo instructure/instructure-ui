@@ -78,7 +78,6 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
         ? (reactNode as any).constructor.componentId
         : (reactNode as any).constructor.name
 
-      // eslint-disable-next-line no-console
       console.warn(
         `Warning: ${elName} doesn't have "ref" property.\nReactDOM.findDOMNode is deprecated in Strict mode, consider using refs instead. From InstUI v9, components must have the "ref" property for findDOMNode to work.\nSee more here: https://instructure.design/#accessing-the-dom`
       )

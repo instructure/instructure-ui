@@ -26,6 +26,7 @@ import IconSVG from './placeholder.svg'
 
 export default function placeholderImage(width = 512, height = 512) {
   // We need to base64 encode this because otherwise FF will add extra escape chars
+  // eslint-disable-next-line no-undef
   const dataUri = Buffer.from(
     IconSVG.replace(/{{w}}/g, width).replace(/{{h}}/g, height).trim()
   ).toString('base64')

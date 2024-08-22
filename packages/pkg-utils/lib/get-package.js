@@ -46,7 +46,6 @@ exports.getPackagePath = function getPackagePath(options) {
 }
 
 function readPackage(options) {
-  // eslint-disable-next-line no-param-reassign
   const opts = {
     cwd: process.cwd(),
     normalize: false,

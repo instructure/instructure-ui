@@ -185,7 +185,6 @@ function getViewportRects(element: Element): ClientRectangle[] {
 function getPositionedParents(element: Element) {
   const parents = []
   let parent: (Node & ParentNode) | null = element
-  // eslint-disable-next-line no-cond-assign
   while (
     (parent = parent.parentNode) &&
     parent &&

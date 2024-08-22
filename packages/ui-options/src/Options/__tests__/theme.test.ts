@@ -28,7 +28,6 @@ import { expect } from '@instructure/ui-test-utils'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('Options.theme', () => {
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
@@ -50,4 +49,3 @@ describe('Options.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

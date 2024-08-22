@@ -29,7 +29,7 @@ export default {
   sectionProp: 'size',
   propValues: {
     messages: [
-      undefined, // eslint-disable-line no-undefined
+      undefined,
       [{ text: 'error example', type: 'error' }],
       [{ text: 'hint example', type: 'hint' }],
       [{ text: 'success example', type: 'success' }]

@@ -28,7 +28,9 @@ const path = require('path')
 const { esBuild, gzip } = require('./scripts/calculateBundleSize')
 
 const META_FILE = path.resolve('./packages/ui/src/index.ts')
-const SIZE_DIFF_THRESHOLD = process.env.SIZE_DIFF_THRESHOLD || 3
+const SIZE_DIFF_THRESHOLD = process.env.SIZE_DIFF_THRESHOLD
+  ? parseInt(process.env.SIZE_DIFF_THRESHOLD)
+  : 3
 
 const git = async (command: string) => {
   return new Promise((resolve, reject) => {

@@ -60,8 +60,7 @@ interface WithStyleComponent extends InstUIComponent {
 type WithStylePrivateProps<
   Style extends ComponentStyle | null = ComponentStyle
 > = Style extends null
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    {}
+  ? object
   : {
       styles?: Style
       makeStyles?: (extraArgs?: Record<string, unknown>) => void

@@ -49,12 +49,7 @@ export default {
     const commands = {}
 
     if (jspaths.length) {
-      commands['eslint'] = getCommand('eslint', [
-        ...jspaths,
-        '--ext',
-        '.js,.jsx,.ts,.tsx',
-        '--no-error-on-unmatched-pattern'
-      ])
+      commands['eslint'] = getCommand('eslint', [...jspaths])
     }
 
     if (csspaths.length) {

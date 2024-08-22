@@ -23,7 +23,6 @@
  */
 
 /** @jsx jsx */
-// eslint-disable-next-line no-unused-vars
 import { Component } from 'react'
 
 import { Img } from '@instructure/ui-img'

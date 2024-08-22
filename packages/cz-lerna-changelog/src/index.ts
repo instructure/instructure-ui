@@ -22,14 +22,11 @@
  * SOFTWARE.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore not typed
 import commitAnalyzer from '@semantic-release/commit-analyzer'
 import chalk from 'chalk'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore not typed
 import buildCommit from 'cz-customizable/lib/build-commit'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore not typed
 import { getChangedPackages, getPackages } from '@instructure/pkg-utils'
 import { makeDefaultQuestions } from './make-default-questions'
@@ -107,12 +104,10 @@ const prompter = (
           commit(message)
         })
         .catch((error: any) => {
-          // eslint-disable-next-line no-console
           console.error(error)
         })
     })
     .catch((error: any) => {
-      // eslint-disable-next-line no-console
       console.error(error)
     })
 }

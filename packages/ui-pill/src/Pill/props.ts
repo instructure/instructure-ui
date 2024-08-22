@@ -76,7 +76,7 @@ type PillStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType,
   children: PropTypes.node.isRequired,
   color: PropTypes.oneOf([
     'primary',

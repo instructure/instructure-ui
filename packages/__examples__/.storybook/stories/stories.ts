@@ -166,6 +166,7 @@ additionalExamples.forEach((example) => {
     })
     numStories++
   })
+  // eslint-disable-next-line no-console
   console.log(
     `Generated ${stories.length} ${
       stories.length === 1 ? 'story' : 'stories'

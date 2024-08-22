@@ -266,8 +266,6 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       `[Checkbox] The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`
     )
 
-    /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-
     return (
       <div
         css={styles?.checkbox}
@@ -298,8 +296,6 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         </label>
       </div>
     )
-
-    /* eslint-enable jsx-a11y/mouse-events-have-key-events */
   }
 }
 

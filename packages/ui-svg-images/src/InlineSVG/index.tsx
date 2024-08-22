@@ -205,7 +205,7 @@ function parseAttributes(src: InlineSVGProps['src']) {
         attributes[match[1]] =
           match[2] ||
           (match[3] ? match[3] : match[4] ? match[4] : match[5]) ||
-          match[1] // eslint-disable-line no-nested-ternary, max-len
+          match[1]
       }
       match = namesAndValuesRegExp.exec(attributesString)
     }

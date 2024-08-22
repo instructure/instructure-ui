@@ -101,7 +101,7 @@ const propTypes: PropValidators<PropKeys> = {
     'inherit'
   ]),
   level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
-  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType,
   margin: ThemeablePropTypes.spacing,
   elementRef: PropTypes.func
 }

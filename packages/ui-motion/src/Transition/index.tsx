@@ -25,7 +25,6 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 // test is breaking without importing React here
-// eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
 
 import { ms } from '@instructure/ui-utils'

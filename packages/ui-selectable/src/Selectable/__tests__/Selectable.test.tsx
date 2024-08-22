@@ -38,7 +38,6 @@ import {
 import { Selectable } from '../index'
 import { SelectableRender } from '../props'
 
-/* eslint-disable jsx-a11y/label-has-associated-control */
 describe('<Selectable />', async () => {
   const lastCall = (spy: any) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
@@ -404,7 +403,6 @@ describe('<Selectable />', async () => {
         let defaultPrevented = false
 
         await mount(
-          /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
           <div
             onKeyUp={(e) => {
               defaultPrevented = e.defaultPrevented
@@ -1452,4 +1450,3 @@ describe('<Selectable />', async () => {
     })
   })
 })
-/* eslint-enable jsx-a11y/label-has-associated-control */

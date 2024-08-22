@@ -84,7 +84,7 @@ function is(x: unknown, y: unknown) {
     return x !== 0 || y !== 0 || 1 / x === 1 / y
   } else {
     // Step 6.a: NaN == NaN
-    return x !== x && y !== y // eslint-disable-line no-self-compare
+    return x !== x && y !== y
   }
 }
 

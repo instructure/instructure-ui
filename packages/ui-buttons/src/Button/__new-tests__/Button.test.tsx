@@ -74,13 +74,14 @@ describe('<Button/>', () => {
     expect(button).toHaveTextContent(children)
   })
 
-  it('should render a button', () => {
+  it('should render a button', async () => {
     render(<Button>Hello World</Button>)
 
-    const button = screen.getByRole('button', { name: 'Hello World' })
+    const button = screen.getByRole('button')
 
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('type', 'button')
+    expect(button).toHaveTextContent('Hello World')
   })
 
   it('should provide a focused getter', () => {
@@ -221,16 +222,6 @@ describe('<Button/>', () => {
     const button = screen.getByRole('button')
 
     expect(button).toBeInTheDocument()
-    expect(button).toHaveTextContent('Hello World')
-  })
-
-  it('should render a button', async () => {
-    render(<Button>Hello World</Button>)
-
-    const button = screen.getByRole('button')
-
-    expect(button).toBeInTheDocument()
-    expect(button).toHaveAttribute('type', 'button')
     expect(button).toHaveTextContent('Hello World')
   })
 

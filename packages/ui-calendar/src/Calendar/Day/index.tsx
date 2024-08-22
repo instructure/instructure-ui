@@ -89,7 +89,7 @@ class Day extends Component<CalendarDayProps> {
   }
 
   shouldApplyAriaSelected() {
-    const { role } = this.props // eslint-disable-line react/prop-types
+    const { role } = this.props
     return !!role && ['option', 'gridcell'].indexOf(role) > -1
   }
 

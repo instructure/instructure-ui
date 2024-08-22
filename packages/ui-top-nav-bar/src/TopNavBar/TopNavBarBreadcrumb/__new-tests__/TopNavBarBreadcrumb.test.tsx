@@ -28,7 +28,6 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TopNavBarBreadcrumb } from '../index'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'

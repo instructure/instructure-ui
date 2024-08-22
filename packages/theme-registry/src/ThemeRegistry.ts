@@ -216,7 +216,6 @@ function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
       if (property === 'variables') {
         return variables as BaseThemeVariables
       }
-      // eslint-disable-next-line prefer-rest-params
       return Reflect.get(target, property)
     }
   }) as RegisteredTheme<T>

@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-// eslint-disable-next-line no-unused-vars
 import React, { Component, ReactElement, SyntheticEvent } from 'react'
 
 import { testable } from '@instructure/ui-testable'
@@ -235,8 +234,6 @@ class TreeCollection extends Component<
     return (
       <li
         id={key}
-        // it's complaining about the aria-selected type which is there
-        // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
         role="treeitem"
         css={styles?.item}
         tabIndex={-1}
@@ -317,8 +314,6 @@ class TreeCollection extends Component<
       <li
         key={`i${position}`}
         tabIndex={-1}
-        // it's complaining about the aria-selected type which is there
-        // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
         role="treeitem"
         aria-label={item.name}
         css={styles?.item}
@@ -389,8 +384,6 @@ class TreeCollection extends Component<
         }}
         css={styles?.treeCollection}
         tabIndex={-1}
-        // it's complaining about the aria-selected type which is there
-        // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
         role="treeitem"
         aria-label={this.props.name}
         aria-level={level}

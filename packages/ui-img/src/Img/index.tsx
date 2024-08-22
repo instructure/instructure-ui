@@ -120,9 +120,7 @@ class Img extends Component<ImgProps> {
 
       return (
         <View {...rootProps} as="span" css={styles?.container}>
-          {
-            <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
-          }
+          {<img {...imageProps} {...a11yProps} />}
           {overlay && <span css={styles?.overlay} />}
         </View>
       )

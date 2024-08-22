@@ -169,7 +169,7 @@ class Dialog extends Component<DialogProps> {
         {...omitProps(this.props, Dialog.allowedProps)}
         role={role}
         aria-label={this.props.label}
-        className={this.props.className} // eslint-disable-line react/prop-types
+        className={this.props.className}
         ref={this.getRef}
       >
         {this.props.children}

@@ -33,6 +33,8 @@ import type { TableProps } from '../props'
 import type { TableColHeaderProps } from '../ColHeader/props'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
+// see https://github.com/vitest-dev/eslint-plugin-vitest/issues/511
+// eslint-disable-next-line vitest/valid-describe-callback
 describe('<Table />', async () => {
   let consoleErrorMock: any
 
@@ -167,6 +169,8 @@ describe('<Table />', async () => {
     expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
+  // see https://github.com/vitest-dev/eslint-plugin-vitest/issues/511
+  // eslint-disable-next-line vitest/valid-describe-callback
   describe('when table is sortable', async () => {
     const renderSortableTable = (
       props: TableColHeaderProps | null,

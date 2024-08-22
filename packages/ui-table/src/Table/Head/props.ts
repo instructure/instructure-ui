@@ -34,6 +34,7 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableHeadOwnProps = {
+  hover?: boolean // needed because it needs the same API as `Table.Body`
   isStacked?: boolean
   renderSortLabel?: Renderable
   /**
@@ -53,12 +54,14 @@ type TableHeadStyle = ComponentStyle<'head'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
+  hover: PropTypes.bool,
   isStacked: PropTypes.bool,
   renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 const allowedProps: AllowedPropKeys = [
   'children',
+  'hover',
   'isStacked',
   'renderSortLabel'
 ]

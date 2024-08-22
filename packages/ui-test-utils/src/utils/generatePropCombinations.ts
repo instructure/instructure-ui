@@ -68,7 +68,6 @@ export function generatePropCombinations<T extends Record<string, unknown>>(
           // Check against the keys of the object here. `combo[propName]` could
           // evaluate to a boolean value which will mess up this logic.
           if (!Object.keys(combo).includes(propName)) {
-            // eslint-disable-next-line no-param-reassign
             combo[propName as keyof Props<T>] = propValue
           } else {
             combos.push({ ...combo, [propName]: propValue })

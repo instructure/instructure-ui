@@ -124,7 +124,7 @@ const propTypes: PropValidators<PropKeys> = {
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   elementRef: PropTypes.func,
-  as: PropTypes.elementType // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType
 }
 
 const allowedProps: AllowedPropKeys = [

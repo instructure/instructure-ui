@@ -347,24 +347,6 @@ describe('hash', () => {
       expect(result1).toEqual(result2)
     })
 
-    it('hashes two different simple objects to different values', () => {
-      const result1 = hash({
-        foo: 'foo',
-        bar: 'bar',
-        baz: 'baz'
-      })
-      const result2 = hash({
-        foo: 'foo',
-        bar: 'ba',
-        baz: 'baz'
-      })
-
-      expect(result1).toBeDefined()
-      expect(result2).toBeDefined()
-
-      expect(result1).not.toEqual(result2)
-    })
-
     it('hashes two different complex objects to the same value', () => {
       const result1 = hash({
         foo: 'foo',

@@ -190,20 +190,17 @@ describe('queries', async () => {
 
   describe('by label', async () => {
     it('can find an input with an aria-labelledby attribute', async () => {
-      /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
         <div>
           <label id="name-label">Name</label>
           <input aria-labelledby="name-label" id="name-id" />
         </div>
       )
-      /* eslint-enable jsx-a11y/label-has-associated-control */
       expect(await findAll(':withLabel(Name)')).to.have.length(1)
       expect(await findWithLabel('Name')).to.exist()
     })
 
     it('can find an input with a complex aria-labelledby attribute', async () => {
-      /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
         <div>
           <label id="name-label-one">Name</label>
@@ -211,7 +208,6 @@ describe('queries', async () => {
           <input aria-labelledby="name-label-one name-label-two" id="name-id" />
         </div>
       )
-      /* eslint-enable jsx-a11y/label-has-associated-control */
       expect(await findAll(':label(Name)', { exact: false })).to.have.length(1)
       expect(await findAll(':withLabel("(Last, First)")', { exact: false }))
         .to.have.length(1)
@@ -261,13 +257,11 @@ describe('queries', async () => {
     })
 
     it('handles a label with no form control', async () => {
-      // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label>First name</label>)
       expect(await find(':withLabel(Name)', { expectEmpty: true })).to.be.null()
     })
 
     it('handles a totally empty label', async () => {
-      // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label />)
       expect(await find(':withLabel(" ")', { expectEmpty: true })).to.be.null()
     })
@@ -459,8 +453,9 @@ describe('queries', async () => {
 
         await button.focusIn({ bubbles: true })
 
-        const nativeEvent = (handleFocus.getCall(0)
-          .args[0] as BaseSyntheticEvent<Event>).nativeEvent
+        const nativeEvent = (
+          handleFocus.getCall(0).args[0] as BaseSyntheticEvent<Event>
+        ).nativeEvent
 
         expect(nativeEvent.bubbles).to.be.true()
       })

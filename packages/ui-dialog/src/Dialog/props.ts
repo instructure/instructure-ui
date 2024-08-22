@@ -69,7 +69,7 @@ type DialogProps = DialogOwnProps & OtherHTMLAttributes<DialogOwnProps>
 // they are in another package
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
-  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType,
   display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
   label: PropTypes.string,
   open: PropTypes.bool,

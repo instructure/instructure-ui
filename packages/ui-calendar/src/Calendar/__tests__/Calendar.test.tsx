@@ -197,12 +197,10 @@ describe('<Calendar />', async () => {
     expect(await calendar.findWithLabel('prev month')).to.exist()
     expect(await calendar.findWithLabel('next month')).to.exist()
 
-    /* eslint-disable react/display-name */
     await subject.setProps({
       renderPrevMonthButton: () => <button>prev month</button>,
       renderNextMonthButton: () => <button>next month</button>
     })
-    /* eslint-enable react/display-name */
 
     expect(await calendar.findWithLabel('prev month')).to.exist()
     expect(await calendar.findWithLabel('next month')).to.exist()

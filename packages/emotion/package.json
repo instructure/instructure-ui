@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@emotion/react": "^11.11.4",
+    "@emotion/react": "^11",
     "@instructure/console": "10.0.0",
     "@instructure/shared-types": "10.0.0",
     "@instructure/theme-registry": "10.0.0",

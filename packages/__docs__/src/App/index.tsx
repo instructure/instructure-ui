@@ -140,7 +140,6 @@ class App extends Component<AppProps, AppState> {
       docData.componentInstance = everyComp[components[0]][components[1]]
     } else {
       docData.componentInstance =
-        // eslint-disable-next-line import-x/namespace
         EveryComponent[docId as keyof typeof EveryComponent]
     }
     return docData
@@ -171,7 +170,6 @@ class App extends Component<AppProps, AppState> {
    * @returns {Set<string>} the properties
    */
   getAllPropNames(object: Record<string, any>) {
-    // eslint-disable-next-line @typescript-eslint/ban-types
     let obj: object | null = object
     const props: Set<string> = new Set()
     // exclude some common static props for performance

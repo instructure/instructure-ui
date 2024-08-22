@@ -22,7 +22,7 @@
     "eslint-plugin-import": "^2.29.1"
   },
   "peerDependencies": {
-    "eslint": "^8"
+    "eslint": "^9"
   },
   "publishConfig": {
     "access": "public"

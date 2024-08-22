@@ -88,6 +88,7 @@ class Controlled extends React.Component<IControlledCodeMirror, any> {
 
     if (optionDelta) {
       Object.keys(userDefinedOptions).forEach((key) => {
+        // eslint-disable-next-line no-prototype-builtins
         if (_options.hasOwnProperty(key)) {
           if (this.editor.getOption(key as any) !== userDefinedOptions[key]) {
             this.editor.setOption(key as any, userDefinedOptions[key])
@@ -210,8 +211,7 @@ class Controlled extends React.Component<IControlledCodeMirror, any> {
 
       this.deferred = data
 
-      let phantomChange = this.mirrorChange(this.deferred)
-
+      const phantomChange = this.mirrorChange(this.deferred)
       if (this.props.onBeforeChange)
         this.props.onBeforeChange(this.editor, this.deferred, phantomChange)
     })
@@ -249,8 +249,7 @@ class Controlled extends React.Component<IControlledCodeMirror, any> {
 
   /** @internal */
   public componentDidUpdate(prevProps: IControlledCodeMirror) {
-    let preserved: IPreservedOptions = { cursor: undefined }
-
+    const preserved: IPreservedOptions = { cursor: undefined }
     if (this.props.value !== prevProps.value) {
       this.hydrated = false
     }
@@ -283,10 +282,9 @@ class Controlled extends React.Component<IControlledCodeMirror, any> {
 
   /** @internal */
   public render() {
-    let className = this.props.className
+    const className = this.props.className
       ? `react-codemirror2 ${this.props.className}`
       : 'react-codemirror2'
-
     return <div className={className} ref={(self) => (this.ref = self!)} />
   }
 }
