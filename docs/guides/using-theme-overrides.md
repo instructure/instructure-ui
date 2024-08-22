@@ -1,7 +1,7 @@
 ---
 title: Using theme overrides
 category: Guides
-order: 4
+order: 2
 ---
 
 ## Using theme overrides
@@ -40,7 +40,7 @@ InstUI leverages the [ThemeRegistry](/#ThemeRegistry) package to achieve global 
 type: code
 ---
 // app/init sets the global theme
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 
 canvas.use()
 ```

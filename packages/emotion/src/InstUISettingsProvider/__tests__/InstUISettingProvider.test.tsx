@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React from 'react'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '../index'
 import { jsx } from '../../index'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'

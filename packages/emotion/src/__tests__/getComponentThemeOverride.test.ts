@@ -23,7 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 
 import { getComponentThemeOverride } from '../getComponentThemeOverride'
 

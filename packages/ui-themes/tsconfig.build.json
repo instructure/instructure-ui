@@ -11,16 +11,10 @@
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
     {
-      "path": "../canvas-high-contrast-theme/tsconfig.build.json"
-    },
-    {
-      "path": "../canvas-theme/tsconfig.build.json"
-    },
-    {
       "path": "../shared-types/tsconfig.build.json"
     },
     {
-      "path": "../ui-theme-tokens/tsconfig.build.json"
+      "path": "../theme-registry/tsconfig.build.json"
     }
   ]
 }

@@ -10,12 +10,11 @@
     {
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
-
     {
       "path": "../shared-types/tsconfig.build.json"
     },
     {
-      "path": "../ui-theme-tokens/tsconfig.build.json"
+      "path": "../ui-themes/tsconfig.build.json"
     },
     {
       "path": "../theme-registry/tsconfig.build.json"

@@ -183,17 +183,25 @@ class Theme extends Component<ThemeProps> {
       baseColors = data.primitives
       delete newData.values
 
-      this._colorMap = this.mapColors(baseColors)
-      subSections.push(<ThemeColors colors={baseColors} />)
+      this._colorMap = this.mapColors({
+        ...baseColors,
+        ...data.additionalPrimitives
+      })
+      subSections.push(<ThemeColors colors={baseColors} label="primitives" />)
     }
 
     Object.keys(newData).forEach((key) => {
       //primitives are the color palette above
-      if (key === 'primitives') {
+      if (
+        key === 'primitives' ||
+        key === 'additionalPrimitives' ||
+        key === 'dataVisualization'
+      ) {
         return
       }
 
       const item = data[key]
+
       if (typeof item === 'object') {
         const subData: Record<string, { text: string; color: string }> = {}
         const subKeys = Object.keys(item) as string[]
@@ -241,13 +249,15 @@ class Theme extends Component<ThemeProps> {
 
     const { themeKey, variables, description } = this.props
 
-    Object.keys(variables).forEach((name) => {
-      const value = variables[name]
+    Object.keys(variables)
+      .sort((a, b) => (a === 'colors' ? -1 : b === 'colors' ? 1 : 0))
+      .forEach((name) => {
+        const value = variables[name]
 
-      if (value && typeof value === 'object') {
-        sections.push(this.renderSection(name, value))
-      }
-    })
+        if (value && typeof value === 'object') {
+          sections.push(this.renderSection(name, value))
+        }
+      })
 
     return (
       <div>

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { canvas } from '@instructure/ui-theme-tokens'
-import { ThemeRegistry } from '@instructure/theme-registry'
-import { BaseTheme } from '@instructure/shared-types'
+import canvas from '@instructure/ui-themes'
+
+import type { CanvasTheme } from '@instructure/ui-themes'
 
 const {
   borders,
@@ -38,47 +38,10 @@ const {
   transitions,
   typography
 } = canvas
-
+const theme = canvas
 const key = 'canvas'
 
-const brandVariables = {
-  /* Defaults for Canvas account branding variables: */
-  'ic-brand-primary': colors?.contrasts?.blue4570,
-  'ic-brand-font-color-dark': colors?.contrasts?.grey125125,
-
-  'ic-link-color': colors?.contrasts?.blue4570,
-  'ic-link-decoration': 'none',
-
-  'ic-brand-button--primary-bgd': colors?.contrasts?.blue4570,
-  'ic-brand-button--primary-text': colors?.contrasts?.white1010,
-  'ic-brand-button--secondary-bgd': colors?.contrasts?.grey125125,
-  'ic-brand-button--secondary-text': colors?.contrasts?.white1010,
-
-  'ic-brand-global-nav-bgd': colors?.contrasts?.grey100100,
-  'ic-global-nav-link-hover': colors?.contrasts?.grey125125,
-  'ic-brand-global-nav-ic-icon-svg-fill': colors?.contrasts?.white1010,
-  'ic-brand-global-nav-ic-icon-svg-fill--active': colors?.contrasts?.blue4570,
-  'ic-brand-global-nav-menu-item__text-color': colors?.contrasts?.white1010,
-  'ic-brand-global-nav-menu-item__text-color--active':
-    colors?.contrasts?.blue4570
-}
-
-export type CanvasBrandVariables = typeof brandVariables
-
-export type CanvasTheme = BaseTheme & {
-  key: 'canvas'
-} & typeof canvas &
-  CanvasBrandVariables
-
-const __theme: CanvasTheme = {
-  key,
-  ...canvas,
-  ...brandVariables
-}
-
-const theme = ThemeRegistry.registerTheme(__theme)
-
-export default theme
+export default canvas
 export {
   theme,
   key,
@@ -93,3 +56,5 @@ export {
   transitions,
   typography
 }
+
+export type { CanvasTheme }

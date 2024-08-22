@@ -22,10 +22,14 @@
  * SOFTWARE.
  */
 
-import primitives from '../common/colors/primitves'
-import getUIColors from '../utils/getUIColors'
+import {
+  primitives,
+  additionalPrimitives
+} from '../../sharedThemeTokens/colors/primitives'
+import dataVisualization from '../../sharedThemeTokens/colors/dataVisualization'
+import getUIColors from '../../utils/getUIColors'
 
-import type { Colors, Contrasts, UI } from '@instructure/shared-types'
+import type { Contrasts, UI } from '@instructure/shared-types'
 
 const contrasts: Contrasts = {
   white1010: primitives.white,
@@ -61,6 +65,12 @@ const contrasts: Contrasts = {
 
 const ui: UI = getUIColors(contrasts)
 
-const colors: Colors = { primitives, contrasts, ui }
-export default colors
+const colors = {
+  primitives,
+  additionalPrimitives,
+  contrasts,
+  ui,
+  dataVisualization
+}
+export default { primitives, contrasts, ui }
 export { colors }

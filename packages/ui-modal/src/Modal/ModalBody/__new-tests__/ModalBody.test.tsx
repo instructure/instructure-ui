@@ -29,7 +29,7 @@ import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { color2hex } from '@instructure/ui-color-utils'
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 

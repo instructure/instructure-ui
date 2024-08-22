@@ -23,7 +23,7 @@
  */
 
 import { useTheme as useEmotionTheme } from '@emotion/react'
-import { canvas } from '@instructure/ui-themes'
+import canvas from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
 import { ThemeRegistry } from '@instructure/theme-registry'
 

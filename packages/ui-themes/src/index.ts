@@ -22,15 +22,24 @@
  * SOFTWARE.
  */
 
-import type { CanvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
+import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
+import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
 import type {
-  CanvasTheme,
-  CanvasBrandVariables
-} from '@instructure/canvas-theme'
-import type { BaseTheme } from '@instructure/shared-types'
+  BaseTheme,
+  Primitives,
+  AdditionalPrimitives,
+  DataVisualization,
+  UI
+} from '@instructure/shared-types'
 
-import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
-import { theme as canvas } from '@instructure/canvas-theme'
+import canvasHighContrast from './themes/canvasHighContrast'
+import canvas from './themes/canvas'
+
+import {
+  primitives,
+  additionalPrimitives
+} from './sharedThemeTokens/colors/primitives'
+import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
 
 type ThemeMap = {
   canvas: CanvasTheme
@@ -50,7 +59,13 @@ type ThemeSpecificStyle<ComponentTheme> = {
   [themeKey in ThemeKeys]?: Partial<ComponentTheme>
 }
 
-export { canvas, canvasHighContrast }
+export {
+  canvas,
+  canvasHighContrast,
+  primitives,
+  additionalPrimitives,
+  dataVisualization
+}
 export default canvas
 export type {
   ThemeMap,
@@ -60,5 +75,9 @@ export type {
   ThemeSpecificStyle,
   CanvasTheme,
   CanvasBrandVariables,
-  CanvasHighContrastTheme
+  CanvasHighContrastTheme,
+  Primitives,
+  AdditionalPrimitives,
+  DataVisualization,
+  UI
 }

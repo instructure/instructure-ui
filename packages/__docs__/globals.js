@@ -48,6 +48,10 @@ import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
 // eslint-disable-next-line no-restricted-imports
 import ThemeColors from './src/ThemeColors'
+// eslint-disable-next-line no-restricted-imports
+import ColorTable from './src/ColorTable'
+
+import { additionalPrimitives, dataVisualization } from '@instructure/ui-themes'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -81,7 +85,10 @@ const globals = {
   useEffect,
   useState,
   useRef,
-  ThemeColors
+  additionalPrimitives,
+  dataVisualization,
+  ThemeColors,
+  ColorTable
 }
 
 Object.keys(globals).forEach((key) => {

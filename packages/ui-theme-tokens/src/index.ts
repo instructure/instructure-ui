@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { canvas } from './canvas'
-import { canvasHighContrast } from './canvasHighContrast'
-import primitives from './common/colors/primitves'
+import { canvas, canvasHighContrast, primitives } from '@instructure/ui-themes'
 
 export { canvas, canvasHighContrast, primitives }

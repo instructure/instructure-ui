@@ -24,15 +24,10 @@
 
 import React, { Component } from 'react'
 
-import { MetricGroup, Metric } from '@instructure/ui-metric'
-import { Text } from '@instructure/ui-text'
-import { ContextView, View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
 import { Responsive } from '@instructure/ui-responsive'
 import { contrast } from '@instructure/ui-color-utils'
-import { SimpleSelect } from '@instructure/ui-simple-select'
-
-import { ColorSwatch } from '../ColorSwatch'
 import { ColorCard } from '../ColorCard'
 import { Heading } from '../Heading'
 
@@ -55,8 +50,19 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
     return Object.keys(colors).reduce((res: any, color) => {
       const category = color
         .split('')
-        .filter((char) => isNaN(Number(char)))
-        .join('')
+        .reduce(
+          (acc: { hadNumber: boolean; res: string[] }, char: any) => {
+            if (acc.hadNumber) {
+              return acc
+            }
+            if (isNaN(char)) {
+              return { ...acc, res: [...acc.res, char] }
+            }
+            return { ...acc, hadNumber: true }
+          },
+          { hadNumber: false, res: [] }
+        )
+        .res.join('')
 
       return {
         ...res,
@@ -86,7 +92,7 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
           return (
             <View as="div" padding="small">
               <Heading level="h3" as="h4">
-                Color palette (Primitive colors)
+                {this.props.label}
               </Heading>
               {Object.keys(colorGroups).map((colorGroup) => (
                 <Flex key={colorGroup} wrap="wrap" margin="0 0 large 0">
