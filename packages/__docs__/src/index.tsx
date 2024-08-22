@@ -29,10 +29,8 @@ import { App } from './App'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
-createRoot(document.getElementById('app')!).render(
-  <React.StrictMode>
-    <InstUISettingsProvider>
-      <App />
-    </InstUISettingsProvider>
-  </React.StrictMode>
+createRoot(document.getElementById('app')).render(
+  <InstUISettingsProvider>
+    <App />
+  </InstUISettingsProvider>
 )

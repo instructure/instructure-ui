@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ReactNode } from 'react'
+import type { ReactNode, PropsWithChildren } from 'react'
 
 type MobileTopNavOwnProps = {
   lightMode?: boolean
@@ -30,11 +30,22 @@ type MobileTopNavOwnProps = {
 }
 
 type MobileTopNavStyle = {
-  container: {
+  container: (open: boolean) => {
+    [key: string]: string | number
+  }
+  content: (open: boolean) => {
+    [key: string]: string | number
+  }
+  topBar: {
+    [key: string]: string | number
+  }
+  btnRow: {
     [key: string]: string | number
   }
 }
 
-type MobileTopNavProps = MobileTopNavOwnProps & { styles: MobileTopNavStyle }
+type MobileTopNavProps = MobileTopNavOwnProps & {
+  styles: MobileTopNavStyle
+} & PropsWithChildren
 
 export type { MobileTopNavProps, MobileTopNavOwnProps }
