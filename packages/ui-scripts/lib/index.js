@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { error, info } from '@instructure/command-utils'
+
 import yargs from 'yargs'
 import { yargCommands } from './commands/index.js'
 import { hideBin } from 'yargs/helpers'
@@ -32,5 +32,4 @@ import { readEnv } from './utils/readEnv.js'
 readEnv()
 
 // https://github.com/yargs/yargs/blob/main/docs/advanced.md#example-command-hierarchy-using-indexmjs
-// eslint-disable-next-line no-unused-expressions
 yargs(hideBin(process.argv)).strictOptions(true).command(yargCommands).argv

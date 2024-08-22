@@ -53,7 +53,6 @@ function getOffsetParents(el?: UIElement) {
   if (node) {
     let parent: Node | Window | null = node
 
-    // eslint-disable-next-line no-cond-assign
     while (
       (parent = (parent as Node).parentNode) &&
       parent &&

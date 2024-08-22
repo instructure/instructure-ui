@@ -483,7 +483,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     const { styles } = this.props
 
     if (!styles?.theme || !styles.highlightStyle) {
-      return
+      return undefined
     }
 
     const theme = EditorView.theme(styles?.theme)

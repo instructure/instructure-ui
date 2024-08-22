@@ -103,20 +103,17 @@ describe('assertions', async () => {
 
   describe('#label', async () => {
     it('matches an input with an aria-labelledby attribute', async () => {
-      /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
         <div>
           <label id="name-label">Name</label>
           <input aria-labelledby="name-label" id="name-id" />
         </div>
       )
-      /* eslint-enable jsx-a11y/label-has-associated-control */
 
       expect(await find('input')).to.have.label('Name')
     })
 
     it('matches an input with a complex aria-labelledby attribute', async () => {
-      /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
         <div>
           <label id="name-label-one">Name</label>
@@ -124,7 +121,6 @@ describe('assertions', async () => {
           <input aria-labelledby="name-label-one name-label-two" id="name-id" />
         </div>
       )
-      /* eslint-enable jsx-a11y/label-has-associated-control */
 
       expect(await find('input')).to.have.label('Name (Last, First)')
     })

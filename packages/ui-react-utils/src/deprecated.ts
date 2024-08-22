@@ -41,7 +41,6 @@ const deprecated = (() => {
     const deprecated: DeprecatedDecorator = function () {
       return (ComposedComponent: ComponentClass) => ComposedComponent
     }
-    // eslint-disable-next-line react/display-name
     deprecated.deprecatePropValues = () => () => null
     deprecated.warnDeprecatedProps = () => {}
     deprecated.warnDeprecatedComponent = () => {}

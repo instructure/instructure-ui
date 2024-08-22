@@ -32,6 +32,7 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
+  isStacked?: boolean // needed because it needs the same API as `Table.RowHeader`
   /**
    * A unique id for this column. The `id` is also used as option in combobox,
    * when sortable table is in stacked layout,
@@ -85,6 +86,7 @@ type TableColHeaderStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
+  isStacked: PropTypes.bool,
   id: PropTypes.string.isRequired,
   stackedSortByLabel: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -97,6 +99,7 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'id',
+  'isStacked',
   'stackedSortByLabel',
   'children',
   'width',

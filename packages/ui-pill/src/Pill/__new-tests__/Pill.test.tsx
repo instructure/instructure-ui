@@ -26,7 +26,6 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Pill } from '../index'
 import { IconEyeLine } from '@instructure/ui-icons'

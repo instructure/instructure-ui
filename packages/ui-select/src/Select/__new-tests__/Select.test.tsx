@@ -103,7 +103,6 @@ describe('<Select />', () => {
       <Select renderLabel="Choose an option" onInputChange={() => {}}>
         {getOptions()}
       </Select>
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
     )
     const input = container.querySelector('input')
     expect(input).toHaveAttribute('role', 'combobox')

@@ -132,7 +132,7 @@ describe('<View />', () => {
 
     const view = container.querySelector("span[class$='-view']")
 
-    expect(view!.classList.contains(className))
+    expect(view!.classList.contains(className)).toEqual(true)
   })
 
   it('should provide an elementRef', () => {

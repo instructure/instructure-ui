@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore no typing :(
 import jsdoc from 'jsdoc-api'
-import type { JsDocResult } from '../DataTypes.mts'
+import type { JsDocResult } from '../DataTypes.mjs'
 
 export function getJSDoc(source: Buffer, error: (err: Error) => void) {
   // note: JSDoc seems to be abandoned, we should use TypeScript:

@@ -42,7 +42,6 @@ import '@instructure/ui-icons/es/font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'
 
-// eslint-disable-next-line import-x/no-unresolved
 import iconExample from './buildScripts/samplemedia/heart_lg.svg'
 import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'

@@ -29,7 +29,6 @@ const url = require('url')
 
 const NODE_PACKAGES = [
   'ui-icons-build',
-  'ui-eslint-config',
   'ui-babel-preset',
   'ui-codemods',
   'ui-karma-config',

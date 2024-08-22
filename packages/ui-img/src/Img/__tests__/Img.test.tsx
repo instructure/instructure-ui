@@ -28,7 +28,6 @@ import { Img } from '../index'
 import { ImgLocator } from '../ImgLocator'
 
 describe('<Img />', () => {
-  // eslint-disable-next-line max-len
   const image =
     'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 

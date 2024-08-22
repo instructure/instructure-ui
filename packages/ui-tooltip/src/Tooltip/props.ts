@@ -198,7 +198,7 @@ const propTypes: PropValidators<PropKeys> = {
   renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   isShowingContent: PropTypes.bool,
   defaultIsShowingContent: PropTypes.bool,
-  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  as: PropTypes.elementType,
   on: PropTypes.oneOfType([
     PropTypes.oneOf(['click', 'hover', 'focus']),
     PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))

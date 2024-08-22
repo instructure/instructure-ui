@@ -234,7 +234,6 @@ class Search extends Component<SearchProps, SearchState> {
     return Object.keys(groups).map((group) => (
       <Select.Group renderLabel={group} key={group}>
         {groups[group].map(
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           ({
             id,
             label,

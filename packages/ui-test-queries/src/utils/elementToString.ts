@@ -32,7 +32,6 @@ function formatElement(
 ): string {
   let htmlElement: HTMLElement = element as HTMLElement
   if ((element as Document).documentElement) {
-    // eslint-disable-next-line no-param-reassign
     htmlElement = (element as Document).documentElement
   }
 

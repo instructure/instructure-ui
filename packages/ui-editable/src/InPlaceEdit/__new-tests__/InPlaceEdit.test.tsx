@@ -39,7 +39,6 @@ const renderEditor: InPlaceEditProps['renderEditor'] = ({
   editorRef,
   onBlur
 }) => {
-  // eslint-disable-line react/prop-types
   return (
     <input
       data-testid="input-editor"

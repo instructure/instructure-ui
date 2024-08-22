@@ -459,7 +459,7 @@ describe('<TimeSelect />', async () => {
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
     await input.change({ target: { value: '' } })
-    await input.typeIn('04:45:55 AM')
+    await input.typeIn('4:45:55 AM')
     await input.focusOut() // sends onChange event
     expect(input.getAttribute('value')).to.equal('4:45:00 AM')
   })

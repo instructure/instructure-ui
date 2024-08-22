@@ -22,8 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-var-requires */
 
 /**
  * This simple script will check if there is any discrepancies between the listed instui related

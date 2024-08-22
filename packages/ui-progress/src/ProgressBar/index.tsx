@@ -113,7 +113,6 @@ class ProgressBar extends Component<ProgressBarProps> {
       valueMax: valueMax!
     })
 
-    /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <View
         {...passthroughProps(props)}

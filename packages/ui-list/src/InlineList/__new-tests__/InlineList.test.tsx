@@ -56,7 +56,9 @@ describe('<InlineList />', () => {
         <InlineList.Item>List item 2</InlineList.Item>
         <InlineList.Item>List item 3</InlineList.Item>
         <InlineList.Item>List item 4</InlineList.Item>
+        {/* eslint-disable-next-line no-constant-binary-expression */}
         {null && <InlineList.Item>ignore me 1</InlineList.Item>}
+        {/* eslint-disable-next-line no-constant-binary-expression */}
         {false && <InlineList.Item>ignore me 2</InlineList.Item>}
       </InlineList>
     )

@@ -53,7 +53,7 @@ export default {
   sectionProp: 'size',
   propValues: {
     placement: [
-      undefined, // eslint-disable-line no-undefined
+      undefined,
       'bottom center',
       'start center',
       'end center',

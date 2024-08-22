@@ -201,7 +201,6 @@ describe('<Tray />', async () => {
 
     for (const dir in placements) {
       describe(`when text direction is '${dir}'`, () => {
-        // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].enteringPlacements) {
           const val = placements[dir].enteringPlacements[placement]
           it(`returns ${val} for ${placement} when entering`, async () => {
@@ -225,7 +224,6 @@ describe('<Tray />', async () => {
           })
         }
 
-        // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].exitingPlacements) {
           const val = placements[dir].exitingPlacements[placement]
           it(`returns ${val} for ${placement} when exiting`, async () => {

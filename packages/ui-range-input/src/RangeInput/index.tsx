@@ -198,7 +198,6 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
 
     const props = omitProps(this.props, RangeInput.allowedProps)
 
-    /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
@@ -232,7 +231,6 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
         </div>
       </FormField>
     )
-    /* eslint-enable jsx-a11y/no-redundant-roles */
   }
 }
 

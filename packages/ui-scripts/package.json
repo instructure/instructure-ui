@@ -44,7 +44,7 @@
     "@storybook/react": "^7.6.19"
   },
   "peerDependencies": {
-    "eslint": "^8",
+    "eslint": "^9",
     "prettier": "^2",
     "react": ">=16.8 <=18",
     "webpack": "^5"

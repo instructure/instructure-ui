@@ -18,7 +18,6 @@
       "@instructure/pkg-utils": ["pkg-utils/lib"],
       "@instructure/ui-babel-preset": ["ui-babel-preset/lib"],
       "@instructure/ui-codemods": ["ui-codemods/lib"],
-      "@instructure/ui-eslint-config": ["ui-eslint-config/lib"],
       "@instructure/ui-icons-build": ["ui-icons-build/lib"],
       "@instructure/ui-karma-config": ["ui-karma-config/lib"],
       "@instructure/ui-stylelint-config": ["ui-stylelint-config/lib"],

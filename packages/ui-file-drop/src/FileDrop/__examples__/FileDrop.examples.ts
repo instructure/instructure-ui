@@ -27,7 +27,6 @@ import type { FileDropProps } from '../props'
 
 export default {
   propValues: {
-    // eslint-disable-next-line no-undefined
     messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
   },
   getComponentProps: () => {

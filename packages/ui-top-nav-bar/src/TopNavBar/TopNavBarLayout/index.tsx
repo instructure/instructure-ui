@@ -126,7 +126,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
       styles,
       // @ts-expect-error prevents it to be passed
       makeStyles,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ...restProps
     } = this.props
 

@@ -109,9 +109,6 @@
       "path": "./packages/ui-editable/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-eslint-config/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-expandable/tsconfig.build.json"
     },
     {

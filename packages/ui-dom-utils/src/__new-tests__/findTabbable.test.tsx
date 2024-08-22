@@ -30,8 +30,6 @@ import { findTabbable } from '../findTabbable'
 describe('findTabbable', () => {
   describe('tabbable content', () => {
     it('should find tabbable descendants', () => {
-      /* eslint-disable jsx-a11y/tabindex-no-positive */
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       const { container } = render(
         <div>
           <a href="https://instructure-test">Tabbable</a>

@@ -111,8 +111,6 @@ describe('<Focusable />', async () => {
 
   it('should handle conditionally rendered focus elements', async () => {
     const props = {
-      /* eslint-disable react/display-name */
-      /* eslint-disable react/prop-types */
       render: ({ focused }: { focused: boolean }) => {
         return (
           <div>
@@ -124,8 +122,6 @@ describe('<Focusable />', async () => {
           </div>
         )
       }
-      /* eslint-enable react/prop-types */
-      /* eslint-enable react/display-name */
     }
 
     const renderSpy = spy(props, 'render')
@@ -171,11 +167,9 @@ describe('<Focusable />', async () => {
 
   it('should maintain focus when the focus element changes', async () => {
     const props = {
-      /* eslint-disable react/display-name */
       render: () => {
         return <a href="http://focus.net">Click</a>
       }
-      /* eslint-enable react/display-name */
     }
 
     const renderSpy = spy(props, 'render')
@@ -193,11 +187,9 @@ describe('<Focusable />', async () => {
       )
     })
 
-    /* eslint-disable react/display-name */
     const nextProps = {
       render: () => <button>Click</button>
     }
-    /* eslint-enable react/display-name */
 
     const nextRenderSpy = spy(nextProps, 'render')
     await subject.setProps(nextProps)
@@ -241,7 +233,6 @@ describe('<Focusable />', async () => {
     })
 
     await subject.setProps({
-      // eslint-disable-next-line react/display-name
       children: (args: FocusableRenderOptions) => {
         renderSpy(args)
         return (
