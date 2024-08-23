@@ -64,11 +64,9 @@ function buildProject() {
       console.error("'npm run build' failed :(")
       process.exit(code)
     }
-    if (process.env.CI) {
-      const result = execSync('npm run build:tokens', opts)
-      // eslint-disable-next-line no-console
-      console.info('npm run build:tokens result', result)
-    }
+    const result = execSync('npm run build:tokens', opts)
+    // eslint-disable-next-line no-console
+    console.info('npm run build:tokens result', result)
   })
 }
 function bootstrap() {
