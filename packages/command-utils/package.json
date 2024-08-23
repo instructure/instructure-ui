@@ -1,6 +1,6 @@
 {
   "name": "@instructure/command-utils",
-  "version": "10.0.0",
+  "version": "10.1.0",
   "description": "Node CLI utilities made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
