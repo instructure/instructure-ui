@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
+
+
+### Features
+
+* **ui-icons:** add new AI icon ([44b02ce](https://github.com/instructure/instructure-ui/commit/44b02ce1dc7123a293793ebc493f9e8446dcc7b2))
+
+
+
+
+
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
 
