@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
+
+
+### Features
+
+* **many:** add data visualization colors, refactor theme code ([c395e17](https://github.com/instructure/instructure-ui/commit/c395e17a43be9fd7ec9d6854f28ae8584c3667bc))
+* **ui-icons:** add new AI icon ([44b02ce](https://github.com/instructure/instructure-ui/commit/44b02ce1dc7123a293793ebc493f9e8446dcc7b2))
+
+
+
+
+
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
 
 
