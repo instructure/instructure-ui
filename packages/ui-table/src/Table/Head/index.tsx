@@ -25,11 +25,7 @@
 /** @jsx jsx */
 import { Component, Children, ContextType } from 'react'
 
-import {
-  omitProps,
-  matchComponentTypes,
-  callRenderProp
-} from '@instructure/ui-react-utils'
+import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
 import type { SimpleSelectProps } from '@instructure/ui-simple-select'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -41,11 +37,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { Row } from '../Row'
-import { ColHeader } from '../ColHeader'
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
-import type { ColHeaderChild, RowChild } from '../props'
+import type { RowChild } from '../props'
 import { allowedProps, propTypes } from './props'
 import TableContext from '../TableContext'
 
@@ -66,18 +60,20 @@ class Head extends Component<TableHeadProps> {
     children: null
   }
 
+  /**
+   * Returns `true` if the first child's children have a `onRequestSort` prop
+   */
   get isSortable() {
-    const [row] = Children.toArray(this.props.children) as RowChild[]
+    const [firstRow] = Children.toArray(this.props.children) as RowChild[]
     let sortable = false
-
-    if (row) {
-      Children.forEach(row.props.children as ColHeaderChild[], (colHeader) => {
-        if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
-          if (colHeader.props.onRequestSort) sortable = true
+    if (firstRow && firstRow.props && firstRow.props.children) {
+      Children.forEach(firstRow.props.children, (grandchild) => {
+        if (grandchild.props.onRequestSort) {
+          sortable = true
+          return
         }
       })
     }
-
     return sortable
   }
 
@@ -95,13 +91,19 @@ class Head extends Component<TableHeadProps> {
     this.props.makeStyles?.()
   }
 
+  /**
+   * This `Select` is used in `stacked` layout. Its populated by iterating trough
+   * the first child's children and reading there the
+   * `id, stackedSortByLabel, sortDirection, onRequestSort` props
+   */
   renderSelect() {
     const { children, renderSortLabel } = this.props
-    const [row] = Children.toArray(children) as RowChild[]
+    const [firstRow] = Children.toArray(children) as RowChild[]
 
-    if (!matchComponentTypes<RowChild>(row, [Row])) {
+    if (!firstRow || !firstRow.props.children) {
       return null
     }
+
     const options: {
       id: TableColHeaderProps['id']
       label:
@@ -114,21 +116,17 @@ class Head extends Component<TableHeadProps> {
     > = {}
     let selectedOption: TableColHeaderProps['id'] | undefined
     let count = 0
-
-    Children.forEach(row.props.children, (colHeader) => {
+    Children.forEach(firstRow.props.children, (grandchild) => {
       count += 1
-      if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
-        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
-          colHeader.props
-
+      if (!grandchild.props) return
+      const { id, stackedSortByLabel, sortDirection, onRequestSort } =
+        grandchild.props
+      if (id && onRequestSort) {
         const label = stackedSortByLabel || id
-
-        if (onRequestSort) {
-          options.push({ id, label })
-          clickHandlers[id] = onRequestSort
-          if (sortDirection !== 'none') {
-            selectedOption = id
-          }
+        options.push({ id, label })
+        clickHandlers[id] = onRequestSort
+        if (sortDirection !== 'none') {
+          selectedOption = id
         }
       }
     })
@@ -182,14 +180,12 @@ class Head extends Component<TableHeadProps> {
     return this.context.isStacked ? (
       this.renderSelect()
     ) : (
-      // TODO remove 'hover' in the next version, its passed down for compatibility with custom components
+      // TODO remove 'hover' exclude in the next version, its passed down for compatibility with custom components
       <thead
         {...omitProps(this.props, Head.allowedProps, ['hover'])}
         css={styles?.head}
       >
-        {Children.map(children, (child) =>
-          matchComponentTypes<RowChild>(child, [Row]) ? child : null
-        )}
+        {children}
       </thead>
     )
   }

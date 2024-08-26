@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ContextType } from 'react'
+import { Component, Children, ContextType, isValidElement } from 'react'
 
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -83,14 +83,18 @@ class Row extends Component<TableRowProps> {
       >
         {Children.toArray(children)
           .filter(Boolean)
-          .map((child: any, index) => {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in next version
-              isStacked,
-              header: headers && headers[index]
-            })
+          .map((child, index) => {
+            if (isValidElement(child)) {
+              return safeCloneElement(child, {
+                key: child.props.name,
+                // Sent down for compatibility with custom components
+                // TODO DEPRECATED, remove in next version
+                isStacked,
+                // used by `Cell` to render its column title in `stacked` layout
+                header: headers && headers[index]
+              })
+            }
+            return child
           })}
       </View>
     )

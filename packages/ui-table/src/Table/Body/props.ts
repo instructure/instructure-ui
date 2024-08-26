@@ -33,7 +33,9 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableBodyOwnProps = {
   /**
-   * `Table.Row`
+   * Body's children should be some container component where each child represents
+   * a row.
+   * `Table.Row` by default
    */
   children?: React.ReactNode
 }

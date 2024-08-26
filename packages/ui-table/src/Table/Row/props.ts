@@ -34,9 +34,14 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowOwnProps = {
   /**
-   * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
+   * A row's children should be table cells. It should have the following
+   * props:
+   * - `isStacked:boolean`: whether its in stacked mode
+   * - `header:Renderable`: extra data to render in `stacked` layout
+   *
+   * By default `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`
    */
-  children?: React.ReactNode
+  children?: React.ReactElement | React.ReactElement[]
 }
 
 type PropKeys = keyof TableRowOwnProps

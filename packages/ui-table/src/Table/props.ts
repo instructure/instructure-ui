@@ -39,8 +39,6 @@ import type {
 
 import { Head } from './Head'
 import type { TableHeadProps } from './Head/props'
-import { Row } from './Row'
-import type { TableRowProps } from './Row/props'
 import { ColHeader } from './ColHeader'
 import type { TableColHeaderProps } from './ColHeader/props'
 import { RowHeader } from './RowHeader'
@@ -49,7 +47,7 @@ import { Cell } from './Cell'
 import type { TableCellProps } from './Cell/props'
 
 type HeadChild = React.ComponentElement<TableHeadProps, Head>
-type RowChild = React.ComponentElement<TableRowProps, Row>
+type RowChild = React.ReactElement<{ children: React.ReactElement }>
 type ColHeaderChild = React.ComponentElement<TableColHeaderProps, ColHeader>
 type RowHeaderChild = React.ComponentElement<TableRowHeaderProps, RowHeader>
 type CellChild = React.ComponentElement<TableCellProps, Cell>

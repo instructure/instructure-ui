@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ContextType } from 'react'
+import { Component, Children, ContextType, isValidElement } from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -71,20 +71,23 @@ class Body extends Component<TableBodyProps> {
         css={styles?.body}
         role={isStacked ? 'rowgroup' : undefined}
       >
-        {Children.map(children as any[], (child) =>
-          safeCloneElement(child, {
-            key: child.props.name,
-            // Sent down for compatibility with custom components
-            // TODO DEPRECATED, remove in next version
-            hover,
-            // Sent down for compatibility with custom components
-            // TODO DEPRECATED, remove in next version
-            isStacked,
-            // Sent down for compatibility with custom components
-            // TODO DEPRECATED, remove in next version
-            headers
-          })
-        )}
+        {Children.map(children, (child) => {
+          if (isValidElement(child)) {
+            return safeCloneElement(child, {
+              key: child.props.name,
+              // Sent down for compatibility with custom components
+              // TODO DEPRECATED, remove in next version
+              hover,
+              // Sent down for compatibility with custom components
+              // TODO DEPRECATED, remove in next version
+              isStacked,
+              // Sent down for compatibility with custom components
+              // TODO DEPRECATED, remove in next version
+              headers
+            })
+          }
+          return child
+        })}
       </View>
     )
   }
