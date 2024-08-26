@@ -92,6 +92,10 @@ type MenuItemOwnProps = {
    * Where to display the linked URL, as the name for a browsing context (a tab, window, or <iframe>).
    */
   target?: string
+  /**
+   * Content to render in the label's info region
+   */
+  renderLabelInfo?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof MenuItemOwnProps
@@ -103,7 +107,7 @@ type MenuItemProps = MenuItemOwnProps &
   OtherHTMLAttributes<MenuItemOwnProps> &
   WithDeterministicIdProps
 
-type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'label'>
+type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'labelInfo' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
@@ -120,7 +124,8 @@ const propTypes: PropValidators<PropKeys> = {
   type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   href: PropTypes.string,
-  target: PropTypes.string
+  target: PropTypes.string,
+  renderLabelInfo: PropTypes.node
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -138,7 +143,8 @@ const allowedProps: AllowedPropKeys = [
   'type',
   'value',
   'href',
-  'target'
+  'target',
+  'renderLabelInfo'
 ]
 type MenuItemState = {
   selected: boolean

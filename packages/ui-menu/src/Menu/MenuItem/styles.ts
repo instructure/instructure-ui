@@ -138,6 +138,13 @@ const generateStyle = (
       ...roleIconStyles,
       ...flyoutIconStyles
     },
+    labelInfo: {
+      label: 'menuItem__labelInfo',
+      height: '100%',
+      float: 'right',
+      clear: 'right',
+      paddingRight: '1.75rem'
+    },
     label: {
       label: 'menuItem__label',
       color: componentTheme.labelColor

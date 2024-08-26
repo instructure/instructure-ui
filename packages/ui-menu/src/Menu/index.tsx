@@ -407,6 +407,7 @@ class Menu extends Component<MenuProps> {
                     tabIndex={isTabbable ? 0 : -1}
                     type="flyout"
                     disabled={submenuDisabled}
+                    renderLabelInfo={child.props.renderLabelInfo}
                   >
                     {child.props.title || child.props.label}
                   </MenuItem>
