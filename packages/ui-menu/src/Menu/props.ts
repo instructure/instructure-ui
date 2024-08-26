@@ -171,6 +171,10 @@ type MenuOwnProps = {
    * scroll and will be as tall as the content requires
    */
   maxHeight?: string | number
+  /**
+   * Content to render in the label's info region
+   */
+  renderLabelInfo?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof MenuOwnProps
@@ -218,7 +222,8 @@ const propTypes: PropValidators<PropKeys> = {
   withArrow: PropTypes.bool,
   offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxHeight: PropTypes.string
+  maxHeight: PropTypes.string,
+  renderLabelInfo: PropTypes.node
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -248,7 +253,8 @@ const allowedProps: AllowedPropKeys = [
   'withArrow',
   'offsetX',
   'offsetY',
-  'maxHeight'
+  'maxHeight',
+  'renderLabelInfo'
 ]
 
 export type { MenuProps, MenuStyle }
