@@ -169,6 +169,43 @@ describe('<Table />', async () => {
     expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
+  // TODO fix code
+  it.skip('does not crash for text children', async () => {
+    render(
+      <Table caption="Test table" layout="stacked">
+        test1
+        <span>test</span>
+        <Table.Head>
+          <span>test</span>
+          test2
+          <Table.Row>
+            test3
+            <span>test</span>
+            <Table.Cell>Foo</Table.Cell>
+          </Table.Row>
+          test4
+          <span>test</span>
+        </Table.Head>
+        test5
+        <Table.Body>
+          test
+          <span>test</span>
+          <Table.Row>
+            test
+            <span>test</span>
+            <Table.Cell>Foo</Table.Cell>
+            test
+            <span>test</span>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    )
+    const stackedTable = screen.getByRole('table')
+
+    expect(stackedTable).toBeInTheDocument()
+    expect(stackedTable).not.toHaveTextContent('Foo')
+  })
+
   // see https://github.com/vitest-dev/eslint-plugin-vitest/issues/511
   // eslint-disable-next-line vitest/valid-describe-callback
   describe('when table is sortable', async () => {

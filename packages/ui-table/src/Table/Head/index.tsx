@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ContextType } from 'react'
 
 import {
   omitProps,
@@ -47,6 +47,7 @@ import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
 import type { ColHeaderChild, RowChild } from '../props'
 import { allowedProps, propTypes } from './props'
+import TableContext from '../TableContext'
 
 /**
 ---
@@ -57,10 +58,10 @@ id: Table.Head
 @withStyle(generateStyle, generateComponentTheme)
 class Head extends Component<TableHeadProps> {
   static readonly componentId = 'Table.Head'
-
+  static contextType = TableContext
+  declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
   static propTypes = propTypes
-
   static defaultProps = {
     children: null
   }
@@ -177,12 +178,15 @@ class Head extends Component<TableHeadProps> {
   }
 
   render() {
-    const { children, isStacked, styles } = this.props
-
-    return isStacked ? (
+    const { children, styles } = this.props
+    return this.context.isStacked ? (
       this.renderSelect()
     ) : (
-      <thead {...omitProps(this.props, Head.allowedProps)} css={styles?.head}>
+      // TODO remove 'hover' in the next version, its passed down for compatibility with custom components
+      <thead
+        {...omitProps(this.props, Head.allowedProps, ['hover'])}
+        css={styles?.head}
+      >
         {Children.map(children, (child) =>
           matchComponentTypes<RowChild>(child, [Row]) ? child : null
         )}

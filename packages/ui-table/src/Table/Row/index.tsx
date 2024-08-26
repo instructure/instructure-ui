@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ContextType } from 'react'
 
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -35,6 +35,7 @@ import generateComponentTheme from './theme'
 
 import type { TableRowProps } from './props'
 import { allowedProps, propTypes } from './props'
+import TableContext from '../TableContext'
 
 /**
 ---
@@ -45,7 +46,8 @@ id: Table.Row
 @withStyle(generateStyle, generateComponentTheme)
 class Row extends Component<TableRowProps> {
   static readonly componentId = 'Table.Row'
-
+  static contextType = TableContext
+  declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
   static propTypes = propTypes
 
@@ -54,15 +56,23 @@ class Row extends Component<TableRowProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({
+      isStacked: this.context.isStacked,
+      hover: this.context.hover
+    })
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({
+      isStacked: this.context.isStacked,
+      hover: this.context.hover
+    })
   }
 
   render() {
-    const { children, styles, isStacked, headers } = this.props
+    const { children, styles } = this.props
+    const isStacked = this.context.isStacked
+    const headers = this.context.headers
 
     return (
       <View
@@ -76,6 +86,8 @@ class Row extends Component<TableRowProps> {
           .map((child: any, index) => {
             return safeCloneElement(child, {
               key: child.props.name,
+              // Sent down for compatibility with custom components
+              // TODO DEPRECATED, remove in next version
               isStacked,
               header: headers && headers[index]
             })

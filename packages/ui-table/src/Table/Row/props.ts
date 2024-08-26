@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { TableCellProps } from '../Cell/props'
-
 import type {
   OtherHTMLAttributes,
   PropValidators,
@@ -35,9 +33,6 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowOwnProps = {
-  hover?: boolean
-  isStacked?: boolean
-  headers?: TableCellProps['header'][]
   /**
    * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
    */
@@ -55,20 +50,10 @@ type TableRowProps = TableRowOwnProps &
 type TableRowStyle = ComponentStyle<'row'>
 
 const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  hover: PropTypes.bool,
-  isStacked: PropTypes.bool,
-  headers: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  )
+  children: PropTypes.node
 }
 
-const allowedProps: AllowedPropKeys = [
-  'children',
-  'hover',
-  'isStacked',
-  'headers'
-]
+const allowedProps: AllowedPropKeys = ['children']
 
 export type { TableRowProps, TableRowStyle }
 export { propTypes, allowedProps }

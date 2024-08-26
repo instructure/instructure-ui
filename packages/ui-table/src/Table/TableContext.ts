@@ -21,38 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import PropTypes from 'prop-types'
 
-import type {
-  OtherHTMLAttributes,
-  PropValidators,
-  TableBodyTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { createContext } from 'react'
+import { Renderable } from '@instructure/shared-types'
 
-type TableBodyOwnProps = {
+type TableContextType = {
   /**
-   * `Table.Row`
+   * If `true` the table gets rendered in one column to be more readable on
+   * narrow screens.
    */
-  children?: React.ReactNode
+  isStacked: boolean
+  /**
+   * Highlight each row on hover.
+   */
+  hover: boolean
+  /**
+   * Array of first row of UI elements. Used if `isStacked` is `true`.
+   */
+  headers?: Renderable[]
 }
 
-type PropKeys = keyof TableBodyOwnProps
+const TableContext = createContext<TableContextType>({
+  isStacked: false,
+  hover: false
+})
 
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-type TableBodyProps = TableBodyOwnProps &
-  WithStyleProps<TableBodyTheme, TableBodyStyle> &
-  OtherHTMLAttributes<TableBodyOwnProps>
-
-type TableBodyStyle = ComponentStyle<'body'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node
-}
-
-const allowedProps: AllowedPropKeys = ['children']
-
-export type { TableBodyProps, TableBodyStyle }
-export { propTypes, allowedProps }
+export default TableContext
+export { TableContext }
+export type { TableContextType }
