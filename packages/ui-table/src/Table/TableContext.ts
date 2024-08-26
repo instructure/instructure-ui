@@ -39,6 +39,11 @@ type TableContextType = {
    * Array of first row of UI elements. Used if `isStacked` is `true`.
    */
   headers?: Renderable[]
+  // TEST idea: allow children to add themselves here to prevent looking up stuff in children
+  // Likely it won't work because it will need to manage unmounting,
+  // and we would need to determine the order too
+  //headers2?: Renderable[],
+  //addHeader?: (header: Renderable) => void
 }
 
 const TableContext = createContext<TableContextType>({

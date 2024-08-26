@@ -170,14 +170,16 @@ describe('<Table />', async () => {
   })
 
   // TODO fix code
-  it.skip('does not crash for text children', async () => {
+  it('does not crash for invalid children', async () => {
     render(
       <Table caption="Test table" layout="stacked">
         test1
         <span>test</span>
+        {/* @ts-ignore error is normal here */}
         <Table.Head>
           <span>test</span>
           test2
+          {/* @ts-ignore error is normal here */}
           <Table.Row>
             test3
             <span>test</span>
@@ -190,6 +192,7 @@ describe('<Table />', async () => {
         <Table.Body>
           test
           <span>test</span>
+          {/* @ts-ignore error is normal here */}
           <Table.Row>
             test
             <span>test</span>
@@ -200,10 +203,10 @@ describe('<Table />', async () => {
         </Table.Body>
       </Table>
     )
-    const stackedTable = screen.getByRole('table')
+    const table = screen.getByRole('table')
 
-    expect(stackedTable).toBeInTheDocument()
-    expect(stackedTable).not.toHaveTextContent('Foo')
+    expect(table).toBeInTheDocument()
+    expect(table).toHaveTextContent('Foo')
   })
 
   // see https://github.com/vitest-dev/eslint-plugin-vitest/issues/511

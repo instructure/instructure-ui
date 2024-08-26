@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, isValidElement } from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -41,13 +41,7 @@ import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
 
-import type {
-  TableProps,
-  HeadChild,
-  ColHeaderChild,
-  RowHeaderChild,
-  CellChild
-} from './props'
+import type { TableProps } from './props'
 
 import { allowedProps, propTypes } from './props'
 import TableContext from './TableContext'
@@ -77,6 +71,9 @@ class Table extends Component<TableProps> {
   static RowHeader = RowHeader
   static Cell = Cell
 
+  state = {
+    rows: []
+  }
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -99,16 +96,14 @@ class Table extends Component<TableProps> {
 
   getHeaders() {
     const { children } = this.props
-    const [head] = Children.toArray(children) as HeadChild[]
-    const [row]: any = Children.toArray(head.props.children)
-    if (!row) return undefined
-
-    return Children.map(
-      row.props.children as (ColHeaderChild | RowHeaderChild | CellChild)[],
-      (colHeader) => {
-        return colHeader.props.children
-      }
-    )
+    const [headChild] = Children.toArray(children)
+    if (!headChild || !isValidElement(headChild)) return undefined
+    const [firstRow] = Children.toArray(headChild.props.children)
+    if (!firstRow || !isValidElement(firstRow)) return undefined
+    return Children.map(firstRow.props.children, (colHeader) => {
+      if (!isValidElement<{ children?: any }>(colHeader)) return undefined
+      return colHeader.props.children
+    })
   }
 
   render() {
@@ -141,16 +136,19 @@ class Table extends Component<TableProps> {
               <ScreenReaderContent>{caption}</ScreenReaderContent>
             </caption>
           )}
-          {Children.map(children, (child: any) => {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in next version
-              hover,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in next version
-              headers
-            })
+          {Children.map(children, (child) => {
+            if (isValidElement(child)) {
+              return safeCloneElement(child, {
+                key: child.props.name,
+                // Sent down for compatibility with custom components
+                // TODO DEPRECATED, remove in next version
+                hover,
+                // Sent down for compatibility with custom components
+                // TODO DEPRECATED, remove in next version
+                headers
+              })
+            }
+            return child
           })}
         </View>
       </TableContext.Provider>

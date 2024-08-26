@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -32,13 +31,20 @@ import type {
   TableHeadTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { RowChild } from '../props'
 
 type TableHeadOwnProps = {
   renderSortLabel?: Renderable
   /**
-   * `Table.Row`
+   * Default type: `Table.Row`
+   *
+   * Its first child is treated specially in `stacked` mode:
+   * A `Select` is created which reads options from the first child's
+   * children, the code is looking for the following props: `id` (required),
+   * `stackedSortByLabel`,`sortDirection`, `onRequestSort` (required).
+   * These are used to sort the table in this mode.
    */
-  children?: React.ReactNode
+  children?: RowChild
 }
 type PropKeys = keyof TableHeadOwnProps
 
