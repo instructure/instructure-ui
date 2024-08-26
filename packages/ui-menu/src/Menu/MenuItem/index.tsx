@@ -29,7 +29,8 @@ import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import {
   omitProps,
   getElementType,
-  withDeterministicId
+  withDeterministicId,
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
@@ -209,7 +210,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   }
 
   renderContent() {
-    const { children, type } = this.props
+    const { children, type, renderLabelInfo } = this.props
 
     return (
       <span>
@@ -224,6 +225,11 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         {type === 'flyout' && (
           <span css={this.props.styles?.icon}>
             <IconArrowOpenEndSolid />
+          </span>
+        )}
+        {renderLabelInfo && (
+          <span css={this.props.styles?.labelInfo}>
+            {callRenderProp(renderLabelInfo)}
           </span>
         )}
       </span>
