@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ContextType } from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -32,8 +32,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TableBodyProps } from './props'
-import type { RowChild } from '../props'
 import { allowedProps, propTypes } from './props'
+import TableContext from '../TableContext'
 
 /**
 ---
@@ -44,10 +44,10 @@ id: Table.Body
 @withStyle(generateStyle, generateComponentTheme)
 class Body extends Component<TableBodyProps> {
   static readonly componentId = 'Table.Body'
-
+  static contextType = TableContext
+  declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
   static propTypes = propTypes
-
   static defaultProps = {
     children: null
   }
@@ -61,7 +61,8 @@ class Body extends Component<TableBodyProps> {
   }
 
   render() {
-    const { children, hover, isStacked, headers, styles } = this.props
+    const { children, styles } = this.props
+    const { isStacked, hover, headers } = this.context
 
     return (
       <View
@@ -70,11 +71,17 @@ class Body extends Component<TableBodyProps> {
         css={styles?.body}
         role={isStacked ? 'rowgroup' : undefined}
       >
-        {Children.map(children as RowChild[], (child) =>
+        {Children.map(children as any[], (child) =>
           safeCloneElement(child, {
             key: child.props.name,
+            // Sent down for compatibility with custom components
+            // TODO DEPRECATED, remove in next version
             hover,
+            // Sent down for compatibility with custom components
+            // TODO DEPRECATED, remove in next version
             isStacked,
+            // Sent down for compatibility with custom components
+            // TODO DEPRECATED, remove in next version
             headers
           })
         )}

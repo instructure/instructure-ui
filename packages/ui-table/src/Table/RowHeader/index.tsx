@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, ContextType } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -34,6 +34,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TableRowHeaderProps } from './props'
 import { allowedProps, propTypes } from './props'
+import TableContext from '../TableContext'
 
 /**
 ---
@@ -44,7 +45,8 @@ id: Table.RowHeader
 @withStyle(generateStyle, generateComponentTheme)
 class RowHeader extends Component<TableRowHeaderProps> {
   static readonly componentId = 'Table.RowHeader'
-
+  static contextType = TableContext
+  declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
   static propTypes = propTypes
 
@@ -62,8 +64,8 @@ class RowHeader extends Component<TableRowHeaderProps> {
   }
 
   render() {
-    const { children, isStacked, styles } = this.props
-
+    const { children, styles } = this.props
+    const isStacked = this.context.isStacked
     return (
       <View
         {...View.omitViewProps(

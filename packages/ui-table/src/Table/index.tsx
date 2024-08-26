@@ -50,6 +50,7 @@ import type {
 } from './props'
 
 import { allowedProps, propTypes } from './props'
+import TableContext from './TableContext'
 
 /**
 ---
@@ -116,32 +117,43 @@ class Table extends Component<TableProps> {
     const headers = isStacked ? this.getHeaders() : undefined
 
     return (
-      <View
-        {...View.omitViewProps(
-          omitProps(this.props, Table.allowedProps),
-          Table
-        )}
-        as={isStacked ? 'div' : 'table'}
-        margin={margin}
-        elementRef={this.handleRef}
-        css={styles?.table}
-        role={isStacked ? 'table' : undefined}
-        aria-label={isStacked ? (caption as string) : undefined}
+      <TableContext.Provider
+        value={{
+          isStacked: isStacked,
+          hover: hover!,
+          headers: headers
+        }}
       >
-        {!isStacked && (
-          <caption>
-            <ScreenReaderContent>{caption}</ScreenReaderContent>
-          </caption>
-        )}
-        {Children.map(children, (child: any) => {
-          return safeCloneElement(child, {
-            key: child.props.name,
-            isStacked,
-            hover,
-            headers
-          })
-        })}
-      </View>
+        <View
+          {...View.omitViewProps(
+            omitProps(this.props, Table.allowedProps),
+            Table
+          )}
+          as={isStacked ? 'div' : 'table'}
+          margin={margin}
+          elementRef={this.handleRef}
+          css={styles?.table}
+          role={isStacked ? 'table' : undefined}
+          aria-label={isStacked ? (caption as string) : undefined}
+        >
+          {!isStacked && (
+            <caption>
+              <ScreenReaderContent>{caption}</ScreenReaderContent>
+            </caption>
+          )}
+          {Children.map(children, (child: any) => {
+            return safeCloneElement(child, {
+              key: child.props.name,
+              // Sent down for compatibility with custom components
+              // TODO DEPRECATED, remove in next version
+              hover,
+              // Sent down for compatibility with custom components
+              // TODO DEPRECATED, remove in next version
+              headers
+            })
+          })}
+        </View>
+      </TableContext.Provider>
     )
   }
 }

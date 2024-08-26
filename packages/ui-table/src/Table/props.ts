@@ -39,8 +39,6 @@ import type {
 
 import { Head } from './Head'
 import type { TableHeadProps } from './Head/props'
-import { Body } from './Body'
-import type { TableBodyProps } from './Body/props'
 import { Row } from './Row'
 import type { TableRowProps } from './Row/props'
 import { ColHeader } from './ColHeader'
@@ -51,7 +49,6 @@ import { Cell } from './Cell'
 import type { TableCellProps } from './Cell/props'
 
 type HeadChild = React.ComponentElement<TableHeadProps, Head>
-type BodyChild = React.ComponentElement<TableBodyProps, Body>
 type RowChild = React.ComponentElement<TableRowProps, Row>
 type ColHeaderChild = React.ComponentElement<TableColHeaderProps, ColHeader>
 type RowHeaderChild = React.ComponentElement<TableRowHeaderProps, RowHeader>
@@ -79,12 +76,14 @@ type TableOwnProps = {
   hover?: boolean
   /**
    * `auto` lets the browser determine table column widths based on cell content,
-   * while `fixed` forces columns of equal width. `stacked` renders table in one
+   * while `fixed` forces columns of equal width (sets the
+   * [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout)
+   * CSS prop to `fixed`). `stacked` renders table in one
    * column to be more readable on narrow screens
    */
   layout?: 'auto' | 'fixed' | 'stacked'
   /**
-   * Build table via `Table.Head` and `Table.Body`
+   * `Table.Head` or `Table.Body` by default
    */
   children?: React.ReactNode
 }
@@ -122,7 +121,6 @@ export type {
   TableStyle,
   // children
   HeadChild,
-  BodyChild,
   RowChild,
   ColHeaderChild,
   RowHeaderChild,
