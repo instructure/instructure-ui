@@ -31,352 +31,610 @@ the space it consumes in the app.
 Use `InPlaceEdit` to edit `Text` using `Text as="input"`. Also demonstrates how you might wish to handle
 the case when the text is empty. Use the checkbox to switch between inline and block layout.
 
-```js
----
-type: example
----
-class Example extends React.Component {
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        mode: props.mode || 'view',
+        value: 'This is some text',
+        inline: true
+      }
+    }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      mode: props.mode || 'view',
-      value: 'This is some text',
-      inline: true
+    // You must provide this to Editable to be
+    // notified of mode changes
+    handleChangeMode = (mode) => {
+      this.setState({ mode })
+    }
+
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    handleChange = (event) => {
+      this.setState({ value: event.target.value })
+    }
+
+    // Renders the view component
+    // Be sure to give it the current value
+    renderView = () => (
+      <Text
+        color={this.state.value ? 'primary' : 'secondary'}
+        weight={this.state.value ? 'normal' : 'light'}
+        size="large"
+      >
+        {this.state.value || 'Enter some text'}
+      </Text>
+    )
+
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        color="primary"
+        size="large"
+        as="input"
+        type="text"
+        value={this.state.value}
+        onChange={this.handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
+
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    renderEditButton = (props) => {
+      props.label = `Edit title "${this.state.value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
+
+    onChangeLayout = (event) => {
+      this.setState({ inline: event.target.checked })
+    }
+
+    render() {
+      return (
+        <View as="div">
+          <InPlaceEdit
+            renderViewer={this.renderView}
+            renderEditor={this.renderEdit}
+            renderEditButton={this.renderEditButton}
+            onChangeMode={this.handleChangeMode}
+            mode={this.state.mode}
+            value={this.state.value}
+            inline={this.state.inline}
+          />
+          <View as="div" margin="small 0">
+            <Checkbox
+              label="inline"
+              checked={this.state.inline}
+              onChange={this.onChangeLayout}
+            />
+          </View>
+        </View>
+      )
     }
   }
+  render(<Example />)
+  ```
 
-  // You must provide this to Editable to be
-  // notified of mode changes
-  handleChangeMode = (mode) => {
-    this.setState({mode})
-  }
+- ```js
+  const Example = (props) => {
+    const [mode, setMode] = useState(props.mode || 'view')
+    const [value, setValue] = useState('This is some text')
+    const [inline, setInline] = useState(true)
 
-  // You attach an event handler to your edit component
-  // to be notified of value changes from user interactions
-  handleChange = (event) => {
-    this.setState({value: event.target.value})
-  }
+    // You must provide this to Editable to be
+    // notified of mode changes
+    const handleChangeMode = (mode) => {
+      setMode(mode)
+    }
 
-  // Renders the view component
-  // Be sure to give it the current value
-  renderView = () => (
-    <Text
-      color={this.state.value ? 'primary' : 'secondary'}
-      weight={this.state.value ? 'normal' : 'light'}
-      size="large"
-    >
-      {this.state.value || 'Enter some text'}
-    </Text>
-  )
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    const handleChange = (event) => {
+      setValue(event.target.value)
+    }
 
-  // Renders the edit component.
-  // You have to forward the props on, which
-  // includes an onBlur property to help manage
-  // the mode changes.
-  // Be sure to give it the current value
-  renderEdit = ({onBlur, editorRef}) => (
-    <Text
-      color="primary"
-      size="large"
-      as="input"
-      type="text"
-      value={this.state.value}
-      onChange={this.handleChange}
-      aria-label="The title"
-      onBlur={onBlur}
-      elementRef={editorRef}
-    />
-  )
+    // Renders the view component
+    // Be sure to give it the current value
+    const renderView = () => (
+      <Text
+        color={value ? 'primary' : 'secondary'}
+        weight={value ? 'normal' : 'light'}
+        size="large"
+      >
+        {value || 'Enter some text'}
+      </Text>
+    )
 
-  // Renders the edit button.
-  // Leverage the default implementation provided by InPlaceEdit
-  renderEditButton = (props) => {
-    props.label = `Edit title "${this.state.value}"`
-    return InPlaceEdit.renderDefaultEditButton(props)
-  }
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    const renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        color="primary"
+        size="large"
+        as="input"
+        type="text"
+        value={value}
+        onChange={handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
 
-  onChangeLayout = (event) => {
-    this.setState({inline: event.target.checked})
-  }
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    const renderEditButton = (props) => {
+      props.label = `Edit title "${value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
 
-  render () {
+    const onChangeLayout = (event) => {
+      setInline(event.target.checked)
+    }
+
     return (
       <View as="div">
         <InPlaceEdit
-          renderViewer={this.renderView}
-          renderEditor={this.renderEdit}
-          renderEditButton={this.renderEditButton}
-          onChangeMode={this.handleChangeMode}
-          mode={this.state.mode}
-          value={this.state.value}
-          inline={this.state.inline}
+          renderViewer={renderView}
+          renderEditor={renderEdit}
+          renderEditButton={renderEditButton}
+          onChangeMode={handleChangeMode}
+          mode={mode}
+          value={value}
+          inline={inline}
         />
         <View as="div" margin="small 0">
-          <Checkbox label="inline" checked={this.state.inline} onChange={this.onChangeLayout} />
+          <Checkbox label="inline" checked={inline} onChange={onChangeLayout} />
         </View>
       </View>
     )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 A readOnly `InPlaceEdit`
 
-```js
----
-type: example
----
-class Example extends React.Component {
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        mode: props.mode || 'view',
+        value: 'This is some text'
+      }
+    }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      mode: props.mode || 'view',
-      value: 'This is some text',
+    // You must provide this to Editable to be
+    // notified of mode changes
+    handleChangeMode = (mode) => {
+      this.setState({ mode })
+    }
+
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    handleChange = (event) => {
+      this.setState({ value: event.target.value })
+    }
+
+    // Renders the view component
+    // Be sure to give it the current value
+    renderView = () => <Text size="large">{this.state.value}</Text>
+
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        size="large"
+        as="input"
+        type="text"
+        value={this.state.value}
+        onChange={this.handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
+
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    renderEditButton = (props) => {
+      props.label = `Edit title "${this.state.value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
+
+    render() {
+      return (
+        <InPlaceEdit
+          readOnly
+          renderViewer={this.renderView}
+          renderEditor={this.renderEdit}
+          renderEditButton={this.renderEditButton}
+          onChangeMode={this.handleChangeMode}
+          mode={this.state.mode}
+          value={this.state.value}
+        />
+      )
     }
   }
+  render(<Example />)
+  ```
 
-  // You must provide this to Editable to be
-  // notified of mode changes
-  handleChangeMode = (mode) => {
-    this.setState({mode})
-  }
+- ```js
+  const Example = (props) => {
+    const [mode, setMode] = useState(props.mode || 'view')
+    const [value, setValue] = useState('This is some text')
 
-  // You attach an event handler to your edit component
-  // to be notified of value changes from user interactions
-  handleChange = (event) => {
-    this.setState({value: event.target.value})
-  }
+    // You must provide this to Editable to be
+    // notified of mode changes
+    const handleChangeMode = (mode) => {
+      setMode(mode)
+    }
 
-  // Renders the view component
-  // Be sure to give it the current value
-  renderView = () => (
-    <Text size="large">
-      {this.state.value}
-    </Text>
-  )
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    const handleChange = (event) => {
+      setValue(event.target.value)
+    }
 
-  // Renders the edit component.
-  // You have to forward the props on, which
-  // includes an onBlur property to help manage
-  // the mode changes.
-  // Be sure to give it the current value
-  renderEdit = ({onBlur, editorRef}) => (
-    <Text
-      size="large"
-      as="input"
-      type="text"
-      value={this.state.value}
-      onChange={this.handleChange}
-      aria-label="The title"
-      onBlur={onBlur}
-      elementRef={editorRef}
-    />
-  )
+    // Renders the view component
+    // Be sure to give it the current value
+    const renderView = () => <Text size="large">{value}</Text>
 
-  // Renders the edit button.
-  // Leverage the default implementation provided by InPlaceEdit
-  renderEditButton = (props) => {
-    props.label = `Edit title "${this.state.value}"`
-    return InPlaceEdit.renderDefaultEditButton(props)
-  }
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    const renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        size="large"
+        as="input"
+        type="text"
+        value={value}
+        onChange={handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
 
-  render () {
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    const renderEditButton = (props) => {
+      props.label = `Edit title "${value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
+
     return (
       <InPlaceEdit
         readOnly
-        renderViewer={this.renderView}
-        renderEditor={this.renderEdit}
-        renderEditButton={this.renderEditButton}
-
-        onChangeMode={this.handleChangeMode}
-        mode={this.state.mode}
-
-        value={this.state.value}
+        renderViewer={renderView}
+        renderEditor={renderEdit}
+        renderEditButton={renderEditButton}
+        onChangeMode={handleChangeMode}
+        mode={mode}
+        value={value}
       />
     )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 To edit end-justified text, wrap `<InPlaceEdit />` in a
 `<View>` component, as follows:
 
-```js
----
-type: example
----
-class Example extends React.Component {
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        mode: props.mode || 'view',
+        value: 'This is some text'
+      }
+    }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      mode: props.mode || 'view',
-      value: 'This is some text',
+    // You must provide this to Editable to be
+    // notified of mode changes
+    handleChangeMode = (mode) => {
+      this.setState({ mode })
+    }
+
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    handleChange = (event) => {
+      this.setState({ value: event.target.value })
+    }
+
+    // Renders the view component
+    // Be sure to give it the current value
+    renderView = () => <Text size="large">{this.state.value}</Text>
+
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        size="large"
+        as="input"
+        type="text"
+        value={this.state.value}
+        onChange={this.handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
+
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    renderEditButton = (props) => {
+      props.label = `Edit title "${this.state.value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
+
+    render() {
+      return (
+        <View as="div" textAlign="end">
+          <InPlaceEdit
+            renderViewer={this.renderView}
+            renderEditor={this.renderEdit}
+            renderEditButton={this.renderEditButton}
+            onChangeMode={this.handleChangeMode}
+            mode={this.state.mode}
+            value={this.state.value}
+            editButtonPlacement="start"
+          />
+        </View>
+      )
     }
   }
+  render(<Example />)
+  ```
 
-  // You must provide this to Editable to be
-  // notified of mode changes
-  handleChangeMode = (mode) => {
-    this.setState({mode})
-  }
+- ```js
+  const Example = (props) => {
+    const [mode, setMode] = useState(props.mode || 'view')
+    const [value, setValue] = useState('This is some text')
 
-  // You attach an event handler to your edit component
-  // to be notified of value changes from user interactions
-  handleChange = (event) => {
-    this.setState({value: event.target.value})
-  }
+    // You must provide this to Editable to be
+    // notified of mode changes
+    const handleChangeMode = (mode) => {
+      setMode(mode)
+    }
 
-  // Renders the view component
-  // Be sure to give it the current value
-  renderView = () => (
-    <Text size="large">
-      {this.state.value}
-    </Text>
-  )
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    const handleChange = (event) => {
+      setValue(event.target.value)
+    }
 
-  // Renders the edit component.
-  // You have to forward the props on, which
-  // includes an onBlur property to help manage
-  // the mode changes.
-  // Be sure to give it the current value
-  renderEdit = ({onBlur, editorRef}) => (
-    <Text
-      size="large"
-      as="input"
-      type="text"
-      value={this.state.value}
-      onChange={this.handleChange}
-      aria-label="The title"
-      onBlur={onBlur}
-      elementRef={editorRef}
-    />
-  )
+    // Renders the view component
+    // Be sure to give it the current value
+    const renderView = () => <Text size="large">{value}</Text>
 
-  // Renders the edit button.
-  // Leverage the default implementation provided by InPlaceEdit
-  renderEditButton = (props) => {
-    props.label = `Edit title "${this.state.value}"`
-    return InPlaceEdit.renderDefaultEditButton(props)
-  }
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    const renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        size="large"
+        as="input"
+        type="text"
+        value={value}
+        onChange={handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
 
-  render () {
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    const renderEditButton = (props) => {
+      props.label = `Edit title "${value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
+
     return (
       <View as="div" textAlign="end">
         <InPlaceEdit
-          renderViewer={this.renderView}
-          renderEditor={this.renderEdit}
-          renderEditButton={this.renderEditButton}
-          onChangeMode={this.handleChangeMode}
-          mode={this.state.mode}
-          value={this.state.value}
-          editButtonPlacement='start'
+          renderViewer={renderView}
+          renderEditor={renderEdit}
+          renderEditButton={renderEditButton}
+          onChangeMode={handleChangeMode}
+          mode={mode}
+          value={value}
+          editButtonPlacement="start"
         />
       </View>
     )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 Same as the first example, but notifies `Editable`'s `onChange`
 when the user has finished editing and the value has changed.
 
-```js
----
-type: example
----
-class Example extends React.Component {
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        mode: props.mode || 'view',
+        value: 'Edit me',
+        onChangeValue: undefined
+      }
+    }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      mode: props.mode || 'view',
-      value: 'Edit me',
-      onChangeValue: undefined,
+    // typically provided by the application so it can
+    // be notified of value changes when the user is
+    // finished editing
+    onChange = (newValue) => {
+      this.setState({ onChangeValue: newValue })
+    }
+
+    // You must provide this to Editable to be
+    // notified of mode changes
+    handleChangeMode = (mode) => {
+      this.setState({ mode })
+    }
+
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    handleChange = (event) => {
+      this.setState({ value: event.target.value })
+    }
+
+    // Renders the view component
+    // Be sure to give it the current value
+    renderView = () => <Text size="large">{this.state.value}</Text>
+
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        size="large"
+        as="input"
+        type="text"
+        value={this.state.value}
+        onChange={this.handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
+
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    renderEditButton = (props) => {
+      props.label = `Edit title "${this.state.value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
+
+    render() {
+      return (
+        <View as="div">
+          <InPlaceEdit
+            renderViewer={this.renderView}
+            renderEditor={this.renderEdit}
+            renderEditButton={this.renderEditButton}
+            onChangeMode={this.handleChangeMode}
+            mode={this.state.mode}
+            value={this.state.value}
+            onChange={this.onChange}
+          />
+          <div>
+            <Text fontStyle="italic">
+              {this.state.onChangeValue !== undefined
+                ? `onChange said: ${this.state.onChangeValue}`
+                : `You haven't edited me yet!`}
+            </Text>
+          </div>
+        </View>
+      )
     }
   }
+  render(<Example />)
+  ```
 
-  // typically provided by the application so it can
-  // be notified of value changes when the user is
-  // finished editing
-  onChange = (newValue) => {
-    this.setState({onChangeValue: newValue})
-  }
+- ```js
+  const Example = (props) => {
+    const [mode, setMode] = useState(props.mode || 'view')
+    const [value, setValue] = useState('Edit me')
+    const [onChangeValue, setOnChangeValue] = useState(undefined)
 
+    // typically provided by the application so it can
+    // be notified of value changes when the user is
+    // finished editing
+    const onChange = (newValue) => {
+      setOnChangeValue(newValue)
+    }
 
-  // You must provide this to Editable to be
-  // notified of mode changes
-  handleChangeMode = (mode) => {
-    this.setState({mode})
-  }
+    // You must provide this to Editable to be
+    // notified of mode changes
+    const handleChangeMode = (mode) => {
+      setMode(mode)
+    }
 
-  // You attach an event handler to your edit component
-  // to be notified of value changes from user interactions
-  handleChange = (event) => {
-    this.setState({value: event.target.value})
-  }
+    // You attach an event handler to your edit component
+    // to be notified of value changes from user interactions
+    const handleChange = (event) => {
+      setValue(event.target.value)
+    }
 
-  // Renders the view component
-  // Be sure to give it the current value
-  renderView = () => (
-    <Text size="large">
-      {this.state.value}
-    </Text>
-  )
+    // Renders the view component
+    // Be sure to give it the current value
+    const renderView = () => <Text size="large">{value}</Text>
 
-  // Renders the edit component.
-  // You have to forward the props on, which
-  // includes an onBlur property to help manage
-  // the mode changes.
-  // Be sure to give it the current value
-  renderEdit = ({onBlur, editorRef}) => (
-    <Text
-      size="large"
-      as="input"
-      type="text"
-      value={this.state.value}
-      onChange={this.handleChange}
-      aria-label="The title"
-      onBlur={onBlur}
-      elementRef={editorRef}
-    />
-  )
+    // Renders the edit component.
+    // You have to forward the props on, which
+    // includes an onBlur property to help manage
+    // the mode changes.
+    // Be sure to give it the current value
+    const renderEdit = ({ onBlur, editorRef }) => (
+      <Text
+        size="large"
+        as="input"
+        type="text"
+        value={value}
+        onChange={handleChange}
+        aria-label="The title"
+        onBlur={onBlur}
+        elementRef={editorRef}
+      />
+    )
 
-  // Renders the edit button.
-  // Leverage the default implementation provided by InPlaceEdit
-  renderEditButton = (props) => {
-    props.label = `Edit title "${this.state.value}"`
-    return InPlaceEdit.renderDefaultEditButton(props)
-  }
+    // Renders the edit button.
+    // Leverage the default implementation provided by InPlaceEdit
+    const renderEditButton = (props) => {
+      props.label = `Edit title "${value}"`
+      return InPlaceEdit.renderDefaultEditButton(props)
+    }
 
-  render () {
     return (
       <View as="div">
         <InPlaceEdit
-          renderViewer={this.renderView}
-          renderEditor={this.renderEdit}
-          renderEditButton={this.renderEditButton}
-
-          onChangeMode={this.handleChangeMode}
-          mode={this.state.mode}
-
-          value={this.state.value}
-          onChange={this.onChange}
+          renderViewer={renderView}
+          renderEditor={renderEdit}
+          renderEditButton={renderEditButton}
+          onChangeMode={handleChangeMode}
+          mode={mode}
+          value={value}
+          onChange={onChange}
         />
         <div>
           <Text fontStyle="italic">
-            {this.state.onChangeValue !== undefined
-              ? `onChange said: ${this.state.onChangeValue}` : `You haven't edited me yet!`}
+            {onChangeValue !== undefined
+              ? `onChange said: ${onChangeValue}`
+              : `You haven't edited me yet!`}
           </Text>
         </div>
       </View>
     )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
