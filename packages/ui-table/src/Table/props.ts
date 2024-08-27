@@ -37,20 +37,7 @@ import type {
   TableTheme
 } from '@instructure/shared-types'
 
-import { Head } from './Head'
-import type { TableHeadProps } from './Head/props'
-import { ColHeader } from './ColHeader'
-import type { TableColHeaderProps } from './ColHeader/props'
-import { RowHeader } from './RowHeader'
-import type { TableRowHeaderProps } from './RowHeader/props'
-import { Cell } from './Cell'
-import type { TableCellProps } from './Cell/props'
-
-type HeadChild = React.ComponentElement<TableHeadProps, Head>
 type RowChild = React.ReactElement<{ children: React.ReactElement }>
-type ColHeaderChild = React.ComponentElement<TableColHeaderProps, ColHeader>
-type RowHeaderChild = React.ComponentElement<TableRowHeaderProps, RowHeader>
-type CellChild = React.ComponentElement<TableCellProps, Cell>
 
 type TableOwnProps = {
   /**
@@ -118,10 +105,6 @@ export type {
   TableProps,
   TableStyle,
   // children
-  HeadChild,
-  RowChild,
-  ColHeaderChild,
-  RowHeaderChild,
-  CellChild
+  RowChild
 }
 export { propTypes, allowedProps }
