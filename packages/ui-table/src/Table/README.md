@@ -877,7 +877,9 @@ render(
 
 In some cases you might want to use custom components in a `Table`, e.g. a HOC for `Table.Row` or `Table.Cell`. This is generally not recommended, but sometimes it could be beneficial for codesplitting or writing cleaner code for larger and more complex Tables.
 
-Custom HOCs:
+> Do not replace `Table.Body` and `Table.Head` with custom components
+
+Wrapper HOCs are simple:
 
 ```javascript
 ---
@@ -987,20 +989,16 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+#### Fully custom components
+
 If you want to use fully custom components you have to pay attention to the following:
-
-#### `Table.Body`, `Table.Head`
-
-Do not replace these components.
-
-#### Other components
 
 - Render them as the appropriate HTML Table tags (`tr`, `th`, ...)
 - Read the `hover` prop from `TableContext` to customize hover behaviour
 - A11y: Row header cells must have the `scope='row'` HTML attribute
 - A11y: Column header cells must have the `scope='col'` and `aria-sort` (if sortable) HTML attribute
 
-Basic custom table
+Basic custom table sample
 
 ```javascript
 ---
@@ -1118,25 +1116,25 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-#### Custom `stacked` layout
+#### Custom children with `stacked` layout
 
 This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in `TableContext`), so they can display what column they are rendering.
-For a11y in this case you should not render HTML table tags, just plain DOM elements (e.g. `div`) and use the appropriate ARIA role that it's actually a `Table` (e.g. [`cell`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/cell_role), [`row`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/row_role), [`rowheader`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/rowheader_role)).  
+In this layout for accessibility not render HTML table tags, just plain DOM elements (e.g. `div`) and use the appropriate ARIA role to signify that it's actually a `Table` (e.g. [`cell`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/cell_role), [`row`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/row_role), [`rowheader`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/rowheader_role)).  
 Also you need the following props on the components:
 
-##### Table.Row
+##### Table rows
 
 - It should read the `headers` array from `TableContext` and pass its nth element to its nth child (if they have such prop).
 
-##### Table.ColHeader (the children of the first row in `Table.Head`)
+##### The children of the first row in `Table.Head` (`Table.ColHeader` by default)
 
-- If the table is sortable it needs an `id` and `onRequestSort`, `sortDirection` and `stackedSortByLabel` props to render a `Select` to choose how to sort the `Table`
+- If the table is sortable the Table needs `id`, `onRequestSort`, `sortDirection` and `stackedSortByLabel` props to render a `Select` to choose how to sort the `Table` (see the props of `Table.ColHeader` for types)
 
-##### Table.Cell
+##### Table cells
 
-- It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to.
+- It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to (you can read whether the table is using `stacked` layout from `TableContext`.
 
-Custom table with `stacked` layout enabled
+Custom table with `stacked` layout support:
 
 ```javascript
 ---
@@ -1192,7 +1190,7 @@ class CustomTableRow extends React.Component {
           .map((child, index) => {
             return React.cloneElement(child, {
               key: child.props.name,
-              // used by `Cell` to render its column title in `stacked` layout
+              // used by `CustomTableCell` to render its column title in `stacked` layout
               header: headers && headers[index]
             })
           })

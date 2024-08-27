@@ -32,7 +32,10 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
-  isStacked?: boolean // needed because it needs the same API as `Table.RowHeader`
+  /**
+   * DEPRECATED. Use `TableContext` to read this value
+   */
+  isStacked?: boolean
   /**
    * A unique id for this column. The `id` is also used as option in combobox,
    * when sortable table is in stacked layout,
@@ -53,18 +56,18 @@ type TableColHeaderOwnProps = {
    */
   textAlign?: 'start' | 'center' | 'end'
   /**
-   * The string of sorting direction
+   * The sorting direction
    */
   sortDirection?: 'none' | 'ascending' | 'descending'
   /**
-   * Callback fired when column header is clicked. Parameters: `(event, { id })`
+   * Callback fired when column header is clicked.
    */
   onRequestSort?: (
     event: React.SyntheticEvent,
     param: { id: TableColHeaderOwnProps['id'] }
   ) => void
   /**
-   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
+   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#scope
    */
   scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
   children?: React.ReactNode

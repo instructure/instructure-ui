@@ -92,8 +92,7 @@ class Table extends Component<TableProps> {
   }
 
   getHeaders() {
-    const { children } = this.props
-    const [headChild] = Children.toArray(children)
+    const [headChild] = Children.toArray(this.props.children)
     if (!headChild || !isValidElement(headChild)) return undefined
     const [firstRow] = Children.toArray(headChild.props.children)
     if (!firstRow || !isValidElement(firstRow)) return undefined

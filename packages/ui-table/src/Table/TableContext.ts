@@ -36,7 +36,7 @@ type TableContextType = {
    */
   hover: boolean
   /**
-   * Array of first row of UI elements. Has value if `isStacked` is `true`.
+   * Contents of the first row of cells. Has value if `isStacked` is `true`.
    */
   headers?: Renderable[]
 }

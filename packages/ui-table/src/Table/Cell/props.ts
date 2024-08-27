@@ -40,7 +40,7 @@ type TableCellOwnProps = {
    */
   header?: Renderable
   /**
-   * Control the text alignment in cell
+   * Controls the text alignment in cell.
    */
   textAlign?: 'start' | 'center' | 'end'
   children?: Renderable
