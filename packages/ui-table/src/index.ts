@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export { Table } from './Table'
+export { TableContext } from './Table/TableContext'
 
 export type { TableProps } from './Table/props'
 export type { TableBodyProps } from './Table/Body/props'

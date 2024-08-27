@@ -36,16 +36,14 @@ type TableContextType = {
    */
   hover: boolean
   /**
-   * Array of first row of UI elements. Used if `isStacked` is `true`.
+   * Array of first row of UI elements. Has value if `isStacked` is `true`.
    */
   headers?: Renderable[]
-  // TEST idea: allow children to add themselves here to prevent looking up stuff in children
-  // Likely it won't work because it will need to manage unmounting,
-  // and we would need to determine the order too
-  //headers2?: Renderable[],
-  //addHeader?: (header: Renderable) => void
 }
 
+/**
+ * React context created by the `Table` component to hold its data
+ */
 const TableContext = createContext<TableContextType>({
   isStacked: false,
   hover: false

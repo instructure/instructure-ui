@@ -71,9 +71,6 @@ class Table extends Component<TableProps> {
   static RowHeader = RowHeader
   static Cell = Cell
 
-  state = {
-    rows: []
-  }
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -138,15 +135,7 @@ class Table extends Component<TableProps> {
           )}
           {Children.map(children, (child) => {
             if (isValidElement(child)) {
-              return safeCloneElement(child, {
-                key: child.props.name,
-                // Sent down for compatibility with custom components
-                // TODO DEPRECATED, remove in next version
-                hover,
-                // Sent down for compatibility with custom components
-                // TODO DEPRECATED, remove in next version
-                headers
-              })
+              return safeCloneElement(child, { key: child.props.name })
             }
             return child
           })}

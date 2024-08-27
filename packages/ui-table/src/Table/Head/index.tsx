@@ -92,15 +92,15 @@ class Head extends Component<TableHeadProps> {
   }
 
   /**
-   * This `Select` is used in `stacked` layout. Its populated by iterating trough
-   * the first child's children and reading there the
-   * `id, stackedSortByLabel, sortDirection, onRequestSort` props
+   * This `Select` is used in `stacked` layout. It's populated by iterating
+   * through the first child's children (by default `ColHeader`) and reading
+   * there the `id`, `stackedSortByLabel`, `sortDirection`, `onRequestSort` props
    */
   renderSelect() {
     const { children, renderSortLabel } = this.props
     const [firstRow] = Children.toArray(children) as RowChild[]
 
-    if (!firstRow || !firstRow.props.children) {
+    if (!firstRow?.props?.children) {
       return null
     }
 

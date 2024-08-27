@@ -67,7 +67,7 @@ export {
   FormFieldLayout,
   FormFieldGroup
 } from '@instructure/ui-form-field'
-export { Table } from '@instructure/ui-table'
+export { Table, TableContext } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
 export { ApplyLocale, TextDirectionContext } from '@instructure/ui-i18n'
 export { MetricGroup, Metric } from '@instructure/ui-metric'

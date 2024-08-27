@@ -40,8 +40,8 @@ type TableHeadOwnProps = {
    *
    * Its first child is treated specially in `stacked` mode:
    * A `Select` is created which reads options from the first child's
-   * children, the code is looking for the following props: `id` (required),
-   * `stackedSortByLabel`,`sortDirection`, `onRequestSort` (required).
+   * children, the code is looking for the following props: `id`,
+   * `stackedSortByLabel`,`sortDirection`, `onRequestSort`.
    * These are used to sort the table in this mode.
    */
   children?: RowChild
