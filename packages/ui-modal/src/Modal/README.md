@@ -1051,6 +1051,100 @@ On smaller viewports (like mobile devices or scaled-up UI), we don't want to los
   render(<Example />)
   ```
 
+### Using custom children
+
+Occasionally, you might find it useful to incorporate custom components within a `Modal`, such as a higher-order component for `Modal.Header` or `Modal.Body` or not using built in child components at all. Although this approach is typically not advised, it can sometimes aid in code splitting or achieving more streamlined code, especially for more intricate and sizable `Modal`s.
+
+Below example demonstrates how to use a higher-order component for `Modal.Body`. `Modal` consists of a `Modal.Header`, a custom `WrappedModalBody` component, and a `View` component. Properties `variant` and `overflow` are passed down to child components. While the original `Modal.Header`, `Modal.Body` and `Modal.Footer` components use these properties, please note that these might cause unpredictable side effects for custom components.
+
+```js
+---
+type: example
+---
+
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      open: false
+    }
+  }
+
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  };
+
+  renderCloseButton () {
+    return (
+      <CloseButton
+        color="primary-inverse"
+        placement="end"
+        offset="small"
+        onClick={this.handleButtonClick}
+        screenReaderLabel="Close"
+      />
+    )
+  }
+
+  render () {
+    return (
+      <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
+        <Button onClick={this.handleButtonClick}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Modal
+          as="form"
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          size="large"
+          label="Modal Dialog: Hello World"
+          shouldCloseOnDocumentClick
+          variant='inverse'
+          overflow='scroll'
+        >
+          <Modal.Header>
+            {this.renderCloseButton()}
+            <Heading>This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
+          </Modal.Header>
+          <WrappedModalBody>
+            <Heading level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
+            <Text lineHeight="double">{lorem.paragraphs(5)}</Text>
+          </WrappedModalBody>
+          <View
+            as="div"
+            margin="small"
+            padding="large"
+            background="primary">
+            <Heading level='h3'>This View child does not inherit the variant and overflow properties</Heading>
+            <Text>{lorem.paragraphs(5)}</Text>
+          </View>
+        </Modal>
+      </div>
+    )
+  }
+}
+
+const withLogger = (WrappedComponent) => {
+  class WithLogger extends React.Component {
+    componentDidMount() {
+      console.log('WrappedModelBody mounted');
+    }
+    render() {
+      return <WrappedComponent {...this.props} />;
+    }
+  }
+
+  return WithLogger;
+}
+
+const WrappedModalBody = withLogger(Modal.Body)
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js

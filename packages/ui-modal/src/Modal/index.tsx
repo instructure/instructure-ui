@@ -23,13 +23,9 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component } from 'react'
+import { Children, Component, isValidElement, ReactElement } from 'react'
 
-import {
-  passthroughProps,
-  safeCloneElement,
-  matchComponentTypes
-} from '@instructure/ui-react-utils'
+import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -40,11 +36,8 @@ import { Dialog } from '@instructure/ui-dialog'
 import { Mask } from '@instructure/ui-overlays'
 
 import { ModalHeader } from './ModalHeader'
-import type { ModalHeaderProps } from './ModalHeader/props'
 import { ModalBody } from './ModalBody'
-import type { ModalBodyProps } from './ModalBody/props'
 import { ModalFooter } from './ModalFooter'
-import type { ModalFooterProps } from './ModalFooter/props'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -58,10 +51,6 @@ import type {
   ModalPropsForPortal,
   ModalPropsForTransition
 } from './props'
-
-type HeaderChild = React.ComponentElement<ModalHeaderProps, ModalHeader>
-type BodyChild = React.ComponentElement<ModalBodyProps, ModalBody>
-type FooterChild = React.ComponentElement<ModalFooterProps, ModalFooter>
 
 /**
 ---
@@ -160,23 +149,18 @@ class Modal extends Component<ModalProps, ModalState> {
   renderChildren() {
     const { children, variant, overflow } = this.props
 
-    return Children.map(
-      children as (HeaderChild | BodyChild | FooterChild)[],
-      (child) => {
-        if (!child) return // ignore null, falsy children
+    return Children.map(children as ReactElement, (child) => {
+      if (!child) return // ignore null, falsy children
 
-        if (matchComponentTypes<BodyChild>(child, [ModalBody])) {
-          return safeCloneElement(child, {
-            variant: variant,
-            overflow: child.props.overflow || overflow
-          })
-        } else {
-          return safeCloneElement(child, {
-            variant: variant
-          })
-        }
+      if (isValidElement(child)) {
+        return safeCloneElement(child, {
+          variant: variant,
+          overflow: (child?.props as { overflow: string })?.overflow || overflow
+        })
+      } else {
+        return child
       }
-    )
+    })
   }
 
   renderDialog(
