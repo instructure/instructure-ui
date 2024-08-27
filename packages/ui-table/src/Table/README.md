@@ -875,7 +875,119 @@ render(
 
 ### Using Custom Components as Children
 
-In some cases you might want to use custom components in a `Table`, e.g. a HOC for `Table.Row` or `Table.Cell`. This is generally not recommended, but sometimes it could be beneficial for codesplitting or writing cleaner code for larger and more complex Tables. In those cases you have to pay attention to the following:
+In some cases you might want to use custom components in a `Table`, e.g. a HOC for `Table.Row` or `Table.Cell`. This is generally not recommended, but sometimes it could be beneficial for codesplitting or writing cleaner code for larger and more complex Tables.
+
+Custom HOCs:
+
+```javascript
+---
+type: example
+---
+
+class CustomTableCell extends React.Component {
+  render () {
+    return (
+        <Table.Cell {...this.props}>{this.props.children}</Table.Cell>
+    )
+  }
+}
+
+class CustomTableRow extends React.Component {
+  render () {
+    return (
+        <Table.Row {...this.props}>
+          <Table.RowHeader>1</Table.RowHeader>
+          <Table.Cell>The Shawshank Redemption</Table.Cell>
+          <Table.Cell>1994</Table.Cell>
+          <CustomTableCell>9.3</CustomTableCell>
+        </Table.Row>
+    )
+  }
+}
+
+class Example extends React.Component {
+  state = {
+    layout: 'auto',
+    hover: false,
+  }
+
+  handleChange = (field, value) => {
+    this.setState({
+      [field]: value,
+    })
+  }
+
+  renderOptions () {
+    const { layout, hover } = this.state
+
+    return (
+      <Flex alignItems="start">
+        <Flex.Item margin="small">
+          <RadioInputGroup
+            name="layout2"
+            description="layout2"
+            value={layout}
+            onChange={(e, value) => this.handleChange('layout', value)}
+          >
+            <RadioInput label="auto" value="auto" />
+            <RadioInput label="fixed" value="fixed" />
+            <RadioInput label="stacked" value="stacked" />
+          </RadioInputGroup>
+        </Flex.Item>
+        <Flex.Item margin="small">
+          <Checkbox
+            label="hover"
+            checked={hover}
+            onChange={(e, value) => this.handleChange('hover', !hover)}
+          />
+        </Flex.Item>
+      </Flex>
+    )
+  }
+
+  render() {
+    const { layout, hover } = this.state
+    return (
+      <div>
+        {this.renderOptions()}
+        <Table
+          caption='Top rated movies'
+          layout={layout}
+          hover={hover}
+        >
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="Rank">Rank</Table.ColHeader>
+              <Table.ColHeader id="Title">Title</Table.ColHeader>
+              <Table.ColHeader id="Year">Year</Table.ColHeader>
+              <Table.ColHeader id="Rating">Rating</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <CustomTableRow/>
+            <Table.Row>
+              <Table.RowHeader>2</Table.RowHeader>
+              <Table.Cell>The Godfather</Table.Cell>
+              <Table.Cell>1972</Table.Cell>
+              <Table.Cell>9.2</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.RowHeader>3</Table.RowHeader>
+              <Table.Cell>The Godfather: Part II</Table.Cell>
+              <Table.Cell>1974</Table.Cell>
+              <Table.Cell>9.0</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
+If you want to use fully custom components you have to pay attention to the following:
 
 #### `Table.Body`, `Table.Head`
 
@@ -912,7 +1024,7 @@ class CustomTableRow extends React.Component {
     this.setState({isHovered: true})
   }
   render() {
-    // super ugly way to change CSS om hover
+    // super ugly way to change CSS on hover
     let css = {backgroundColor: 'white'}
     if (this.context.hover && this.state.isHovered) {
       css = {backgroundColor: 'SeaGreen'}
@@ -1006,21 +1118,21 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-#### `stacked` layout
+#### Custom `stacked` layout
 
 This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in `TableContext`), so they can display what column they are rendering.
 For a11y in this case you should not render HTML table tags, just plain DOM elements (e.g. `div`) and use the appropriate ARIA role that it's actually a `Table` (e.g. [`cell`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/cell_role), [`row`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/row_role), [`rowheader`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/rowheader_role)).  
 Also you need the following props on the components:
 
-##### `Table.Row`
+##### Table.Row
 
 - It should read the `headers` array from `TableContext` and pass its nth element to its nth child (if they have such prop).
 
-##### `Table.ColHeader` (the children of the first row in `Table.Head`)
+##### Table.ColHeader (the children of the first row in `Table.Head`)
 
 - If the table is sortable it needs an `id` and `onRequestSort`, `sortDirection` and `stackedSortByLabel` props to render a `Select` to choose how to sort the `Table`
 
-##### `Table.Cell`
+##### Table.Cell
 
 - It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to.
 
@@ -1032,7 +1144,23 @@ type: example
 ---
 
 class CustomTableCell extends React.Component {
+  static contextType = TableContext
+
   render() {
+    const isStacked = this.context.isStacked
+    if (isStacked) {
+      let headerTxt
+      if (typeof this.props.header === 'function') {
+        headerTxt = React.createElement(this.props.header)
+      } else {
+        headerTxt = this.props.header
+      }
+      return <div role="cell">
+        {headerTxt && headerTxt}
+        {headerTxt && ': '}
+        {this.props.children}
+      </div>
+    }
     return <td>{this.props.children}</td>
   }
 }
@@ -1047,15 +1175,18 @@ class CustomTableRow extends React.Component {
   toggleHoverOn = () => {
     this.setState({isHovered: true})
   }
-  render() {return "TODO"// TODO
-    // super ugly way to change CSS om hover
+  render() {
+    // super ugly way to change CSS on hover
     let css = {backgroundColor: 'white'}
     if (this.context.hover && this.state.isHovered) {
       css = {backgroundColor: 'SeaGreen'}
     }
     const headers = this.context.headers
+    const isStacked = this.context.isStacked
+    const Tag = isStacked ? 'div' : 'tr'
     return (
-      <tr style={css} onMouseOver={this.toggleHoverOn} onMouseOut={this.toggleHoverOff}>
+      <Tag style={css} role={isStacked ? 'row' : undefined}
+           onMouseOver={this.toggleHoverOn} onMouseOut={this.toggleHoverOff}>
         {React.Children.toArray(this.props.children)
           .filter(React.isValidElement)
           .map((child, index) => {
@@ -1066,7 +1197,7 @@ class CustomTableRow extends React.Component {
             })
           })
         }
-      </tr>
+      </Tag>
     )
   }
 }
@@ -1143,118 +1274,6 @@ class Example extends React.Component {
               <CustomTableCell>1974</CustomTableCell>
               <CustomTableCell>9.0</CustomTableCell>
             </CustomTableRow>
-          </Table.Body>
-        </Table>
-      </div>
-    )
-  }
-}
-
-render(<Example />)
-```
-
-============
-Custom HOCs:
-
-```javascript
----
-type: example
----
-
-class CustomTableCell extends React.Component {
-  render () {
-    return (
-        <Table.Cell {...this.props}>{this.props.children}</Table.Cell>
-    )
-  }
-}
-
-class CustomTableRow extends React.Component {
-  render () {
-    return (
-        <Table.Row {...this.props}>
-          <Table.RowHeader>1</Table.RowHeader>
-          <Table.Cell>The Shawshank Redemption</Table.Cell>
-          <Table.Cell>1994</Table.Cell>
-          <CustomTableCell>9.3</CustomTableCell>
-        </Table.Row>
-    )
-  }
-}
-
-class Example extends React.Component {
-  state = {
-    layout: 'auto',
-    hover: false,
-  }
-
-  handleChange = (field, value) => {
-    this.setState({
-      [field]: value,
-    })
-  }
-
-  renderOptions () {
-    const { layout, hover } = this.state
-
-    return (
-      <Flex alignItems="start">
-        <Flex.Item margin="small">
-          <RadioInputGroup
-            name="layout2"
-            description="layout2"
-            value={layout}
-            onChange={(e, value) => this.handleChange('layout', value)}
-          >
-            <RadioInput label="auto" value="auto" />
-            <RadioInput label="fixed" value="fixed" />
-            <RadioInput label="stacked" value="stacked" />
-          </RadioInputGroup>
-        </Flex.Item>
-        <Flex.Item margin="small">
-          <Checkbox
-            label="hover"
-            checked={hover}
-            onChange={(e, value) => this.handleChange('hover', !hover)}
-          />
-        </Flex.Item>
-      </Flex>
-    )
-  }
-
-  render() {
-    const { layout, hover } = this.state
-    return <span>dfff</span>
-    return (
-      <div>
-        {this.renderOptions()}
-        <Table
-          caption='Top rated movies'
-          layout={layout}
-          hover={hover}
-        >
-          <Table.Head>
-            <Table.Row>
-              <Table.ColHeader id="Rank">Rank</Table.ColHeader>
-              <Table.ColHeader id="Title">Title</Table.ColHeader>
-              <Table.ColHeader id="Year">Year</Table.ColHeader>
-              <Table.ColHeader id="Rating">Rating</Table.ColHeader>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>
-            <CustomTableRow/>
-            <Table.Row>
-              <Table.RowHeader>2</Table.RowHeader>
-              <Table.Cell>The Godfather</Table.Cell>
-              <Table.Cell>1972</Table.Cell>
-              <Table.Cell>9.2</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.RowHeader>3</Table.RowHeader>
-              <Table.Cell>The Godfather: Part II</Table.Cell>
-              <Table.Cell>1974</Table.Cell>
-              <Table.Cell>9.0</Table.Cell>
-            </Table.Row>
           </Table.Body>
         </Table>
       </div>

@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
+import { MockInstance, vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -36,7 +36,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 // see https://github.com/vitest-dev/eslint-plugin-vitest/issues/511
 // eslint-disable-next-line vitest/valid-describe-callback
 describe('<Table />', async () => {
-  let consoleErrorMock: any
+  let consoleErrorMock: MockInstance<typeof console.error>
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution
@@ -169,7 +169,6 @@ describe('<Table />', async () => {
     expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
-  // TODO fix code
   it('does not crash for invalid children', async () => {
     render(
       <Table caption="Test table" layout="stacked">
@@ -332,6 +331,96 @@ describe('<Table />', async () => {
       const header = screen.getByRole('columnheader', { name: 'Foo' })
 
       expect(header).toHaveAttribute('aria-sort', 'descending')
+    })
+  })
+
+  describe('when using custom components', () => {
+    it('should render wrapper HOCs', () => {
+      class CustomTableCell extends React.Component<any> {
+        render() {
+          return <Table.Cell {...this.props}>{this.props.children}</Table.Cell>
+        }
+      }
+      class CustomTableRow extends React.Component {
+        render() {
+          return (
+            <Table.Row {...this.props}>
+              <Table.RowHeader>1</Table.RowHeader>
+              <Table.Cell>The Shawshank Redemption</Table.Cell>
+              <CustomTableCell>9.3</CustomTableCell>
+            </Table.Row>
+          )
+        }
+      }
+      const table = render(
+        <Table caption="Test custom table">
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="foo">ColHeader</Table.ColHeader>
+              <Table.ColHeader id="bar">Bar-header</Table.ColHeader>
+              <Table.ColHeader id="baz">Bar-header</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <CustomTableRow />
+            <Table.Row>
+              <Table.RowHeader>RowHeader</Table.RowHeader>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell>Cell2</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      )
+      const stackedTable = screen.getByRole('table')
+
+      expect(stackedTable).toBeInTheDocument()
+      const { container } = table
+      expect(container).toBeInTheDocument()
+      expect(container).toHaveTextContent('The Shawshank Redemption')
+      expect(container).toHaveTextContent('9.3')
+    })
+
+    it('should render fully custom components', () => {
+      class CustomTableCell extends React.Component<any> {
+        render() {
+          return <td>{this.props.children}</td>
+        }
+      }
+
+      class CustomTableRow extends React.Component<any> {
+        render() {
+          return <tr>{this.props.children}</tr>
+        }
+      }
+
+      const table = render(
+        <Table caption="Test custom table">
+          <Table.Head>
+            <CustomTableRow>
+              <CustomTableCell id="foo">ColHeader</CustomTableCell>
+              <CustomTableCell id="bar">Bar-header</CustomTableCell>
+              <Table.ColHeader id="baz">Bar-header</Table.ColHeader>
+            </CustomTableRow>
+          </Table.Head>
+          <Table.Body>
+            <CustomTableRow>
+              <Table.RowHeader>RowHeader2</Table.RowHeader>
+              <CustomTableCell>Cell</CustomTableCell>
+              <Table.Cell>Cell2</Table.Cell>
+            </CustomTableRow>
+          </Table.Body>
+        </Table>
+      )
+      const stackedTable = screen.getByRole('table')
+
+      expect(stackedTable).toBeInTheDocument()
+      const { container } = table
+      expect(container).toBeInTheDocument()
+      expect(container).toHaveTextContent('ColHeader')
+      expect(container).toHaveTextContent('Bar-header')
+      expect(container).toHaveTextContent('RowHeader2')
+      expect(container).toHaveTextContent('Cell')
+      expect(container).toHaveTextContent('Cell2')
     })
   })
 })
