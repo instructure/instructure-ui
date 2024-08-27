@@ -25,17 +25,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  element,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
+import { element } from '@instructure/ui-prop-types'
 import { transitionTypePropType } from '@instructure/ui-motion'
 
 import { Dialog } from '@instructure/ui-dialog'
-
-import { ModalHeader } from './ModalHeader'
-import { ModalBody } from './ModalBody'
-import { ModalFooter } from './ModalFooter'
 
 import type {
   AsElementType,
@@ -154,9 +147,9 @@ type ModalPropsForDialog = {
 
 type ModalOwnProps = {
   /**
-   * The children to be rendered within the `<Modal />`. Children must be type of: `Modal.Header`, `Modal.Body`, `Modal.Footer`. The `Modal.Body` child is required, and they have to follow this order.
+   * Recommended children types are: `Modal.Header`, `Modal.Body`, `Modal.Footer`. Custom children can be used as well. `Variant` and `overflow` properties are always passed down to children.
    */
-  children: React.ReactNode // TODO: enforceOrder([ModalHeader, ModalBody, ModalFooter], [ModalHeader, ModalBody], [ModalBody, ModalFooter], [ModalBody])
+  children: React.ReactNode
 
   /**
    * The size of the `<Modal />` content
@@ -205,12 +198,7 @@ type ModalState = {
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
-  children: ChildrenPropTypes.enforceOrder(
-    [ModalHeader, ModalBody, ModalFooter],
-    [ModalHeader, ModalBody],
-    [ModalBody, ModalFooter],
-    [ModalBody]
-  ),
+  children: PropTypes.node,
   as: PropTypes.elementType,
   size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
   variant: PropTypes.oneOf(['default', 'inverse']),

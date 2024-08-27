@@ -30,6 +30,7 @@ import '@testing-library/jest-dom'
 
 import { Modal, ModalHeader, ModalBody, ModalFooter } from '../index'
 import type { ModalProps } from '../props'
+import { View } from '@instructure/ui-view'
 
 describe('<Modal />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -166,6 +167,23 @@ describe('<Modal />', () => {
     const modalBody = await findByText(bodyText)
 
     expect(modalBody).toBeInTheDocument()
+  })
+
+  it('should handle custom children', async () => {
+    const bodyText = 'Modal-body-text'
+    const { findByText } = render(
+      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
+        <View>
+          This is a custom child
+        </View>
+        <Modal.Body>{bodyText}</Modal.Body>
+      </Modal>
+    )
+    const modalBody = await findByText(bodyText)
+    const customChild = await findByText('This is a custom child')
+
+    expect(modalBody).toBeInTheDocument()
+    expect(customChild).toBeInTheDocument()
   })
 
   it('should apply the aria attributes', async () => {
@@ -348,29 +366,6 @@ describe('<Modal />', () => {
 
       expect(dialog).toBeInTheDocument()
       expect(consoleErrorMock).not.toHaveBeenCalled()
-    })
-
-    it('should not pass validation when children are invalid', async () => {
-      const { findByRole } = render(
-        <Modal open label="Modal Dialog" shouldReturnFocus={false}>
-          <Modal.Body>Foo Bar Baz</Modal.Body>
-          <Modal.Footer>
-            <button>Cancel</button>
-          </Modal.Footer>
-          <Modal.Header>Hello World</Modal.Header>
-        </Modal>
-      )
-      const dialog = await findByRole('dialog')
-      const expectedErrorMessage =
-        'Expected children of Modal in one of the following formats:'
-
-      expect(dialog).toBeInTheDocument()
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.any(String),
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
     })
 
     it('should pass inverse variant to children when set', async () => {
