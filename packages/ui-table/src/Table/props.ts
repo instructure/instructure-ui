@@ -63,12 +63,13 @@ type TableOwnProps = {
    * `auto` lets the browser determine table column widths based on cell content,
    * while `fixed` forces columns of equal width (sets the
    * [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout)
-   * CSS prop to `fixed`). `stacked` renders table in one
-   * column to be more readable on narrow screens
+   * CSS prop to `fixed`).
+   *
+   * `stacked` renders table in one column to be more readable on narrow screens
    */
   layout?: 'auto' | 'fixed' | 'stacked'
   /**
-   * `Table.Head` or `Table.Body` by default
+   * `Table.Head` or `Table.Body`
    */
   children?: React.ReactNode
 }

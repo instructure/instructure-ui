@@ -34,15 +34,25 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { RowChild } from '../props'
 
 type TableHeadOwnProps = {
+  /**
+   * The sort `Select`'s label when using `stacked` layout and the table is
+   * sortable.
+   * If you don't want to display anything you should use `ScreenReaderContent`
+   * so screen readers can read the `Select`'s purpose
+   */
   renderSortLabel?: Renderable
   /**
+   * The header row(s).
    * Default type: `Table.Row`
    *
-   * Its first child is treated specially in `stacked` mode:
+   * Its first child is treated specially if the table is sortable and has
+   * `stacked` layout:
+   *
    * A `Select` is created which reads options from the first child's
-   * children, the code is looking for the following props: `id`,
-   * `stackedSortByLabel`,`sortDirection`, `onRequestSort`.
-   * These are used to sort the table in this mode.
+   * children, that tries to read the following props: `id`,
+   * `stackedSortByLabel`,`sortDirection`, `onRequestSort` (Available on
+   * `Table.ColHeader`).
+   * These are used to sort the table in this layout.
    */
   children?: RowChild
 }

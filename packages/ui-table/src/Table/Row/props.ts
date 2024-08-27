@@ -34,10 +34,8 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowOwnProps = {
   /**
-   * A row's children should be table cells. It should have the following
-   * props:
-   * - `isStacked:boolean`: whether its in stacked mode
-   * - `header:Renderable`: extra data to render in `stacked` layout
+   * A row's children should be table cells. Its children should have the
+   * `header` prop to render the column header in `stacked` layout
    *
    * By default `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`
    */
