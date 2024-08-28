@@ -879,7 +879,7 @@ In some cases you might want to use custom components in a `Table`, e.g. a HOC f
 
 > Do not replace `Table.Body` and `Table.Head` with custom components
 
-Wrapper HOCs are simple:
+Wrapper HOCs are simple, just return the original component:
 
 ```javascript
 ---
@@ -998,7 +998,7 @@ If you want to use fully custom components you have to pay attention to the foll
 - A11y: Row header cells must have the `scope='row'` HTML attribute
 - A11y: Column header cells must have the `scope='col'` and `aria-sort` (if sortable) HTML attribute
 
-Basic custom table sample
+Basic fully custom table:
 
 ```javascript
 ---
@@ -1116,7 +1116,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-#### Custom children with `stacked` layout
+#### Fully custom components with `stacked` layout
 
 This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in `TableContext`), so they can display what column they are rendering.
 In this layout for accessibility not render HTML table tags, just plain DOM elements (e.g. `div`) and use the appropriate ARIA role to signify that it's actually a `Table` (e.g. [`cell`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/cell_role), [`row`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/row_role), [`rowheader`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/rowheader_role)).  
