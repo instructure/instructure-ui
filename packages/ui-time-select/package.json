@@ -31,15 +31,19 @@
     "@instructure/ui-prop-types": "10.2.1",
     "@instructure/ui-react-utils": "10.2.1",
     "@instructure/ui-select": "10.2.1",
-    "@instructure/ui-test-locator": "10.2.1",
     "@instructure/ui-testable": "10.2.1",
     "@instructure/ui-utils": "10.2.1",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
+    "@instructure/ui-axe-check": "10.2.1",
     "@instructure/ui-babel-preset": "10.2.1",
     "@instructure/ui-test-utils": "10.2.1",
-    "moment-timezone": "^0.5.45"
+    "moment-timezone": "^0.5.45",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
+    "vitest": "^2.0.2"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
