@@ -35,13 +35,27 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputOwnProps = {
+  /**
+   * The label displayed next to the checkbox
+   */
   label: React.ReactNode
+  /**
+   * This maps to the low level HTML attribute
+   * [with the same name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#value)
+   */
   value?: string | number
   id?: string
+  /**
+   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group)
+   * defines which group it belongs to, it's managed by the `RadioInputGroup`
+   * this component belongs to.
+   *
+   * Do not set it manually.
+   */
   name?: string
   checked?: boolean
   /**
-   * Whether or not to disable the input
+   * Whether to disable the input
    */
   disabled?: boolean
   /**

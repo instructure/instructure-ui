@@ -6,6 +6,8 @@ A RadioInputGroup is a group of RadioInput components. It will handle setting
 the name property on the RadioInput components for you and will set the selected item
 based on the `value` property.
 
+The `name` prop sets the [same low level HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group) which **must be unique across the DOM** otherwise groups with the same name will interfere with each other.
+
 Adjust the size of the radio button and label text via the `size` prop. The default size is
 `medium`.
 
