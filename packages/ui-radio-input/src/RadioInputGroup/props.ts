@@ -36,6 +36,13 @@ import type {
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputGroupOwnProps = {
+  /**
+   * This prop sets the
+   * [same low level HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group)
+   *
+   * **Must be unique across the DOM** otherwise groups will interfere with
+   * each other
+   */
   name: string
 
   description: React.ReactNode
@@ -48,7 +55,7 @@ type RadioInputGroupOwnProps = {
   /**
    * the selected value (must be accompanied by an `onChange` prop)
    */
-  value?: string | number // TODO: controllable( PropTypes.oneOfType([PropTypes.string, PropTypes.number]) )
+  value?: string | number
 
   /**
    * when used with the `value` prop, the component will not control its own state
@@ -70,7 +77,7 @@ type RadioInputGroupOwnProps = {
    */
   messages?: FormMessage[]
 
-  variant?: 'simple' | 'toggle' // TODO: split toggle out to its own component
+  variant?: 'simple' | 'toggle'
 
   size?: 'small' | 'medium' | 'large'
 
@@ -87,7 +94,8 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
-  OtherHTMLAttributes<RadioInputGroupOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<RadioInputGroupOwnProps> &
+  WithDeterministicIdProps
 
 type RadioInputGroupState = {
   value?: string | number

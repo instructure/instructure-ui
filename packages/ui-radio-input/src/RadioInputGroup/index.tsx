@@ -152,7 +152,6 @@ class RadioInputGroup extends Component<
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
         description={description}
-        // TODO: split out toggle variant into its own component
         layout={
           layout === 'columns' && variant === 'toggle' ? 'stacked' : layout
         } // toggles already display in cols
