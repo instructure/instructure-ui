@@ -162,7 +162,7 @@ Popover and Tooltip attach mouse and focus event listeners to their render trigg
   ```
 
 - ```js
-  const MyComponent = React.forwardRef((props, ref) => {
+  const MyComponent = forwardRef((props, ref) => {
     return (
       <div {...props} ref={ref} style={{ width: '10rem' }}>
         My custom component
