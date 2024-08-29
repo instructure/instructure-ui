@@ -19,41 +19,120 @@ type: example
 
 #### Controlled TextInput
 
-```javascript
----
-type: example
----
-class ControlledTextInputExample extends React.Component {
-  constructor (props) {
-    super(props)
+- ```javascript
+  class ControlledTextInputExample extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      value: 'Supertramp',
-      disabled: false,
-      readOnly: false,
-      inline: false,
-      messages: null
+      this.state = {
+        value: 'Supertramp',
+        disabled: false,
+        readOnly: false,
+        inline: false,
+        messages: null
+      }
     }
-  }
 
-  handleChange = (e, value) => this.setState({
-    value,
-    messages: null
-  })
-
-  handleBlur = (e) => {
-    if (this.state.value === 'Supertramp') {
+    handleChange = (e, value) =>
       this.setState({
-        messages: [{ text: `Come on. There's no way your favorite band is really Supertramp.`, type: 'error' }]
+        value,
+        messages: null
       })
+
+    handleBlur = (e) => {
+      if (this.state.value === 'Supertramp') {
+        this.setState({
+          messages: [
+            {
+              text: `Come on. There's no way your favorite band is really Supertramp.`,
+              type: 'error'
+            }
+          ]
+        })
+      }
+    }
+
+    toggleDisabled = (e) => this.setState({ disabled: !this.state.disabled })
+    toggleReadOnly = (e) => this.setState({ readOnly: !this.state.readOnly })
+    toggleInline = (e) => this.setState({ inline: !this.state.inline })
+
+    render() {
+      return (
+        <div>
+          <FormFieldGroup
+            description="Controlled TextInput state"
+            layout="columns"
+          >
+            <Checkbox
+              checked={this.state.disabled}
+              label="disabled"
+              onChange={this.toggleDisabled}
+            />
+            <Checkbox
+              checked={this.state.readOnly}
+              label="readOnly"
+              onChange={this.toggleReadOnly}
+            />
+            <Checkbox
+              checked={this.state.inline}
+              label="inline display"
+              onChange={this.toggleInline}
+            />
+          </FormFieldGroup>
+          <View display="block" margin="medium 0 0">
+            <TextInput
+              renderLabel="What is your favorite band?"
+              display={this.state.inline ? 'inline-block' : null}
+              value={this.state.value}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              interaction={
+                this.state.disabled
+                  ? 'disabled'
+                  : this.state.readOnly
+                  ? 'readonly'
+                  : 'enabled'
+              }
+              messages={this.state.messages}
+              renderAfterInput={<SVGIcon src={iconExample} />}
+            />
+          </View>
+        </div>
+      )
     }
   }
 
-  toggleDisabled = (e) => this.setState(({ disabled: !this.state.disabled }))
-  toggleReadOnly = (e) => this.setState(({ readOnly: !this.state.readOnly }))
-  toggleInline = (e) => this.setState(({ inline: !this.state.inline }))
+  render(<ControlledTextInputExample />)
+  ```
 
-  render () {
+- ```javascript
+  const ControlledTextInputExample = () => {
+    const [value, setValue] = useState('Supertramp')
+    const [disabled, setDisabled] = useState(false)
+    const [readOnly, setReadOnly] = useState(false)
+    const [inline, setInline] = useState(false)
+    const [messages, setMessages] = useState(null)
+
+    const handleChange = (e, value) => {
+      setValue(value)
+      setMessages(null)
+    }
+
+    const handleBlur = (e) => {
+      if (value === 'Supertramp') {
+        setMessages([
+          {
+            text: "Come on. There's no way your favorite band is really Supertramp.",
+            type: 'error'
+          }
+        ])
+      }
+    }
+
+    const toggleDisabled = () => setDisabled((prev) => !prev)
+    const toggleReadOnly = () => setReadOnly((prev) => !prev)
+    const toggleInline = () => setInline((prev) => !prev)
+
     return (
       <div>
         <FormFieldGroup
@@ -61,43 +140,41 @@ class ControlledTextInputExample extends React.Component {
           layout="columns"
         >
           <Checkbox
-            checked={this.state.disabled}
+            checked={disabled}
             label="disabled"
-            onChange={this.toggleDisabled}
+            onChange={toggleDisabled}
           />
           <Checkbox
-            checked={this.state.readOnly}
+            checked={readOnly}
             label="readOnly"
-            onChange={this.toggleReadOnly}
+            onChange={toggleReadOnly}
           />
           <Checkbox
-            checked={this.state.inline}
+            checked={inline}
             label="inline display"
-            onChange={this.toggleInline}
+            onChange={toggleInline}
           />
         </FormFieldGroup>
         <View display="block" margin="medium 0 0">
           <TextInput
             renderLabel="What is your favorite band?"
-            display={this.state.inline ? 'inline-block' : null}
-            value={this.state.value}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            interaction={this.state.disabled
-              ? 'disabled'
-              : this.state.readOnly ? 'readonly' : 'enabled'
+            display={inline ? 'inline-block' : null}
+            value={value}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            interaction={
+              disabled ? 'disabled' : readOnly ? 'readonly' : 'enabled'
             }
-            messages={this.state.messages}
+            messages={messages}
             renderAfterInput={<SVGIcon src={iconExample} />}
           />
         </View>
       </div>
     )
   }
-}
 
-render(<ControlledTextInputExample />)
-```
+  render(<ControlledTextInputExample />)
+  ```
 
 ### Prepending and appending content
 
@@ -108,79 +185,121 @@ Focusable content will be focused separately from the input itself.
 > Note: For any content larger than an icon or small avatar (multiple [Tags](#Tag), for example),
 > use the `renderBeforeInput` property.
 
-```javascript
----
-type: example
----
-class ExtraContentExample extends React.Component {
-  constructor (props) {
-    super(props)
+- ```javascript
+  class ExtraContentExample extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      value: ''
+      this.state = {
+        value: ''
+      }
+    }
+
+    handleChange = (e, value) => this.setState({ value })
+
+    render() {
+      return (
+        <View as="div">
+          <TextInput
+            renderLabel="What are Paula Panda's favorite ice cream flavors?"
+            value={this.state.value}
+            onChange={this.handleChange}
+            renderBeforeInput={
+              <View display="block" padding="xxx-small 0">
+                {this.state.value !== '' && (
+                  <Tag
+                    text={this.state.value}
+                    margin="xxx-small xxx-small xxx-small none"
+                    onClick={() => console.log(this.state.value)}
+                  />
+                )}
+                <Tag
+                  text="Rocky road"
+                  margin="xxx-small xxx-small xxx-small none"
+                  onClick={() => console.log('Rocky road')}
+                />
+                <Tag
+                  text="Vanilla"
+                  margin="xxx-small xxx-small xxx-small none"
+                  onClick={() => console.log('Vanilla')}
+                />
+                <Tag
+                  text="Coffee"
+                  margin="xxx-small xxx-small xxx-small none"
+                  onClick={() => console.log('Coffee')}
+                />
+                <Tag
+                  text="Strawberry"
+                  margin="xxx-small xxx-small xxx-small none"
+                  onClick={() => console.log('Strawberry')}
+                />
+              </View>
+            }
+            renderAfterInput={() => (
+              <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />
+            )}
+          />
+        </View>
+      )
     }
   }
 
-  handleChange = (e, value) => this.setState({ value })
+  render(<ExtraContentExample />)
+  ```
 
-  render () {
+- ```javascript
+  const ExtraContentExample = () => {
+    const [value, setValue] = useState('')
+
+    const handleChange = (e, value) => setValue(value)
+
     return (
       <View as="div">
         <TextInput
           renderLabel="What are Paula Panda's favorite ice cream flavors?"
-          value={this.state.value}
-          onChange={this.handleChange}
+          value={value}
+          onChange={handleChange}
           renderBeforeInput={
             <View display="block" padding="xxx-small 0">
-              {
-                (this.state.value !== '') &&
+              {value !== '' && (
                 <Tag
-                  text={this.state.value}
+                  text={value}
                   margin="xxx-small xxx-small xxx-small none"
-                  onClick={function () {
-                    console.log(this.state.value)
-                  }}
+                  onClick={() => console.log(value)}
                 />
-              }
+              )}
               <Tag
                 text="Rocky road"
                 margin="xxx-small xxx-small xxx-small none"
-                onClick={function () {
-                  console.log('Rocky road')
-                }}
+                onClick={() => console.log('Rocky road')}
               />
               <Tag
                 text="Vanilla"
                 margin="xxx-small xxx-small xxx-small none"
-                onClick={function () {
-                  console.log('Vanilla')
-                }}
+                onClick={() => console.log('Vanilla')}
               />
               <Tag
                 text="Coffee"
                 margin="xxx-small xxx-small xxx-small none"
-                onClick={function () {
-                  console.log('Coffee')
-                }}
+                onClick={() => console.log('Coffee')}
               />
               <Tag
                 text="Strawberry"
                 margin="xxx-small xxx-small xxx-small none"
-                onClick={function () {
-                  console.log('Strawberry')
-                }}
+                onClick={() => console.log('Strawberry')}
               />
             </View>
           }
-          renderAfterInput={() => <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
+          renderAfterInput={() => (
+            <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />
+          )}
         />
       </View>
     )
   }
-}
 
-render(<ExtraContentExample />)
-```
+  render(<ExtraContentExample />)
+  ```
 
 ### Setting width and display
 

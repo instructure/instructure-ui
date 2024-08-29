@@ -458,47 +458,210 @@ The focus outline adjusts to account for the shape of the View. For example, the
 to match the border radius of the corresponding View. For Views with irregular border radius (e.g., `borderRadius="small large none medium"`), the focus outline will appear with square edges. The color of the focus outline can be
 changed for different contexts via the `focusColor` property.
 
-```javascript
----
-type: example
----
-class FocusedExample extends React.Component {
-  constructor (props) {
-    super(props)
+- ```javascript
+  class FocusedExample extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      isFocused: true,
-      inset: false
+      this.state = {
+        isFocused: true,
+        inset: false
+      }
+    }
+
+    updateFocused = (event) => {
+      this.setState({ isFocused: event.target.checked })
+    }
+
+    updateInset = (event) => {
+      this.setState({ inset: event.target.checked })
+    }
+
+    render() {
+      return (
+        <View as="div">
+          <View
+            as="div"
+            background="primary"
+            padding="small"
+            margin="0 0 small"
+            borderWidth="small"
+          >
+            <FormFieldGroup
+              rowSpacing="small"
+              description={
+                <ScreenReaderContent>
+                  View focus outline examples
+                </ScreenReaderContent>
+              }
+            >
+              <Checkbox
+                label="withFocusOutline"
+                checked={this.state.isFocused}
+                onChange={this.updateFocused}
+              />
+              <Checkbox
+                label="focusPosition = inset"
+                checked={this.state.inset}
+                onChange={this.updateInset}
+              />
+            </FormFieldGroup>
+          </View>
+          <View as="div">
+            <code>borderRadius =</code>
+            <View
+              display="inline-block"
+              margin="small"
+              padding="small"
+              background="primary"
+              borderRadius="small"
+              borderWidth="small"
+              position="relative"
+              withFocusOutline={this.state.isFocused}
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              small
+            </View>
+            <View
+              display="inline-block"
+              margin="small"
+              padding="small"
+              background="primary"
+              borderRadius="medium"
+              borderWidth="small"
+              position="relative"
+              withFocusOutline={this.state.isFocused}
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              medium
+            </View>
+            <View
+              display="inline-block"
+              margin="small"
+              padding="small"
+              background="primary"
+              borderRadius="large"
+              borderWidth="small"
+              position="relative"
+              withFocusOutline={this.state.isFocused}
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              large
+            </View>
+            <View
+              display="inline-block"
+              height="100px"
+              width="100px"
+              margin="small"
+              background="primary"
+              borderRadius="circle"
+              borderWidth="small"
+              position="relative"
+              withFocusOutline={this.state.isFocused}
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              <Flex
+                width="100%"
+                height="100%"
+                alignItems="center"
+                justifyItems="center"
+              >
+                <Flex.Item>circle</Flex.Item>
+              </Flex>
+            </View>
+            <View
+              background="primary-inverse"
+              display="inline-block"
+              padding="small"
+            >
+              <View
+                display="block"
+                margin="small"
+                padding="small"
+                background="primary-inverse"
+                borderRadius="large"
+                borderWidth="small"
+                position="relative"
+                withFocusOutline={this.state.isFocused}
+                focusColor="inverse"
+                focusPosition={this.state.inset ? 'inset' : 'offset'}
+              >
+                medium
+              </View>
+            </View>
+            <View
+              display="inline-block"
+              margin="small"
+              padding="small"
+              background="primary"
+              borderRadius="pill"
+              borderWidth="small"
+              position="relative"
+              focusColor="success"
+              width="100px"
+              textAlign="center"
+              withFocusOutline={this.state.isFocused}
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              pill
+            </View>
+            <View
+              display="inline-block"
+              margin="small"
+              padding="small"
+              background="primary"
+              borderWidth="small"
+              borderRadius="none large"
+              focusColor="danger"
+              position="relative"
+              withFocusOutline={this.state.isFocused}
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              none large
+            </View>
+          </View>
+        </View>
+      )
     }
   }
 
-  updateFocused = (event) => {
-    this.setState({isFocused: event.target.checked})
-  }
+  render(<FocusedExample />)
+  ```
 
-  updateInset = (event) => {
-    this.setState({inset: event.target.checked})
-  }
+- ```javascript
+  const FocusedExample = () => {
+    const [isFocused, setIsFocused] = useState(true)
+    const [inset, setInset] = useState(false)
 
-  render () {
-    const { isFocused, focusPosition } = this.state
+    const updateFocused = (event) => setIsFocused(event.target.checked)
+    const updateInset = (event) => setInset(event.target.checked)
 
     return (
       <View as="div">
-        <View as="div" background="primary" padding="small" margin="0 0 small" borderWidth="small">
+        <View
+          as="div"
+          background="primary"
+          padding="small"
+          margin="0 0 small"
+          borderWidth="small"
+        >
           <FormFieldGroup
             rowSpacing="small"
-            description={<ScreenReaderContent>View focus outline examples</ScreenReaderContent>}
+            description={
+              <ScreenReaderContent>
+                View focus outline examples
+              </ScreenReaderContent>
+            }
           >
             <Checkbox
               label="withFocusOutline"
-              checked={this.state.isFocused}
-              onChange={this.updateFocused}
+              checked={isFocused}
+              onChange={updateFocused}
             />
             <Checkbox
               label="focusPosition = inset"
-              checked={this.state.inset}
-              onChange={this.updateInset}
+              checked={inset}
+              onChange={updateInset}
             />
           </FormFieldGroup>
         </View>
@@ -512,8 +675,8 @@ class FocusedExample extends React.Component {
             borderRadius="small"
             borderWidth="small"
             position="relative"
-            withFocusOutline={this.state.isFocused}
-            focusPosition={this.state.inset ? 'inset' : 'offset'}
+            withFocusOutline={isFocused}
+            focusPosition={inset ? 'inset' : 'offset'}
           >
             small
           </View>
@@ -525,8 +688,8 @@ class FocusedExample extends React.Component {
             borderRadius="medium"
             borderWidth="small"
             position="relative"
-            withFocusOutline={this.state.isFocused}
-            focusPosition={this.state.inset ? 'inset' : 'offset'}
+            withFocusOutline={isFocused}
+            focusPosition={inset ? 'inset' : 'offset'}
           >
             medium
           </View>
@@ -538,8 +701,8 @@ class FocusedExample extends React.Component {
             borderRadius="large"
             borderWidth="small"
             position="relative"
-            withFocusOutline={this.state.isFocused}
-            focusPosition={this.state.inset ? 'inset' : 'offset'}
+            withFocusOutline={isFocused}
+            focusPosition={inset ? 'inset' : 'offset'}
           >
             large
           </View>
@@ -552,8 +715,8 @@ class FocusedExample extends React.Component {
             borderRadius="circle"
             borderWidth="small"
             position="relative"
-            withFocusOutline={this.state.isFocused}
-            focusPosition={this.state.inset ? 'inset' : 'offset'}
+            withFocusOutline={isFocused}
+            focusPosition={inset ? 'inset' : 'offset'}
           >
             <Flex
               width="100%"
@@ -561,12 +724,14 @@ class FocusedExample extends React.Component {
               alignItems="center"
               justifyItems="center"
             >
-              <Flex.Item>
-                circle
-              </Flex.Item>
+              <Flex.Item>circle</Flex.Item>
             </Flex>
           </View>
-          <View background="primary-inverse" display="inline-block" padding="small">
+          <View
+            background="primary-inverse"
+            display="inline-block"
+            padding="small"
+          >
             <View
               display="block"
               margin="small"
@@ -575,9 +740,9 @@ class FocusedExample extends React.Component {
               borderRadius="large"
               borderWidth="small"
               position="relative"
-              withFocusOutline={this.state.isFocused}
+              withFocusOutline={isFocused}
               focusColor="inverse"
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
+              focusPosition={inset ? 'inset' : 'offset'}
             >
               medium
             </View>
@@ -593,8 +758,8 @@ class FocusedExample extends React.Component {
             focusColor="success"
             width="100px"
             textAlign="center"
-            withFocusOutline={this.state.isFocused}
-            focusPosition={this.state.inset ? 'inset' : 'offset'}
+            withFocusOutline={isFocused}
+            focusPosition={inset ? 'inset' : 'offset'}
           >
             pill
           </View>
@@ -607,8 +772,8 @@ class FocusedExample extends React.Component {
             borderRadius="none large"
             focusColor="danger"
             position="relative"
-            withFocusOutline={this.state.isFocused}
-            focusPosition={this.state.inset ? 'inset' : 'offset'}
+            withFocusOutline={isFocused}
+            focusPosition={inset ? 'inset' : 'offset'}
           >
             none large
           </View>
@@ -616,52 +781,118 @@ class FocusedExample extends React.Component {
       </View>
     )
   }
-}
 
-render(<FocusedExample />)
-```
+  render(<FocusedExample />)
+  ```
 
 Handle vertical and horizontal content overflow with the `overflowX` and `overflowY`
 props.
 
 > **Important CSS note:** Setting one axis to `visible` and setting the other to a different value results in `visible` behaving as `auto`.
 
-```javascript
----
-type: example
----
-class OverflowExample extends React.Component {
-  constructor (props) {
-    super(props)
+- ```javascript
+  class OverflowExample extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      overflowY: 'visible'
+      this.state = {
+        overflowY: 'visible',
+        overflowX: 'visible'
+      }
+    }
+
+    updateOverflowY = (event, value) => {
+      this.setState({
+        overflowY: value
+      })
+    }
+
+    updateOverflowX = (event, value) => {
+      this.setState({
+        overflowX: value
+      })
+    }
+
+    render() {
+      return (
+        <View as="div">
+          <FormFieldGroup
+            description={
+              <ScreenReaderContent>Overflow example</ScreenReaderContent>
+            }
+            rowSpacing="small"
+            vAlign="top"
+            layout="columns"
+          >
+            <RadioInputGroup
+              onChange={this.updateOverflowY}
+              name="overflowY"
+              defaultValue="visible"
+              variant="toggle"
+              description="overflowY ="
+            >
+              <RadioInput label="visible" value="visible" />
+              <RadioInput label="auto" value="auto" />
+              <RadioInput label="hidden" value="hidden" />
+            </RadioInputGroup>
+            <RadioInputGroup
+              onChange={this.updateOverflowX}
+              name="overflowX"
+              defaultValue="visible"
+              variant="toggle"
+              description="overflowX ="
+            >
+              <RadioInput label="visible" value="visible" />
+              <RadioInput label="auto" value="auto" />
+              <RadioInput label="hidden" value="hidden" />
+            </RadioInputGroup>
+          </FormFieldGroup>
+          <View
+            as="div"
+            height="7rem"
+            width="20rem"
+            margin="medium none x-large"
+            overflowY={this.state.overflowY}
+            overflowX={this.state.overflowX}
+            withVisualDebug
+          >
+            <div style={{ width: '30rem', height: '10rem' }}>
+              <Img src={avatarSquare} constrain="cover" />
+            </div>
+          </View>
+        </View>
+      )
     }
   }
 
-  updateOverflowY = (event, value) => {
-    this.setState({
-      overflowY: value
-    })
-  }
+  render(<OverflowExample />)
+  ```
 
-  updateOverflowX = (event, value) => {
-    this.setState({
-      overflowX: value
-    })
-  }
+- ```javascript
+  const OverflowExample = () => {
+    const [overflowY, setOverflowY] = useState('visible')
+    const [overflowX, setOverflowX] = useState('visible')
 
-  render () {
+    const updateOverflowY = (event, value) => {
+      setOverflowY(value)
+    }
+
+    const updateOverflowX = (event, value) => {
+      setOverflowX(value)
+    }
+
     return (
       <View as="div">
         <FormFieldGroup
-          description={<ScreenReaderContent>Overflow example</ScreenReaderContent>}
+          description={
+            <ScreenReaderContent>Overflow example</ScreenReaderContent>
+          }
           rowSpacing="small"
           vAlign="top"
           layout="columns"
         >
           <RadioInputGroup
-            onChange={this.updateOverflowY}
+            onChange={updateOverflowY}
             name="overflowY"
             defaultValue="visible"
             variant="toggle"
@@ -672,7 +903,7 @@ class OverflowExample extends React.Component {
             <RadioInput label="hidden" value="hidden" />
           </RadioInputGroup>
           <RadioInputGroup
-            onChange={this.updateOverflowX}
+            onChange={updateOverflowX}
             name="overflowX"
             defaultValue="visible"
             variant="toggle"
@@ -688,22 +919,20 @@ class OverflowExample extends React.Component {
           height="7rem"
           width="20rem"
           margin="medium none x-large"
-          overflowY={this.state.overflowY}
-          overflowX={this.state.overflowX}
+          overflowY={overflowY}
+          overflowX={overflowX}
           withVisualDebug
         >
-          <div style={{width: '30rem', height: '10rem'}}>
+          <div style={{ width: '30rem', height: '10rem' }}>
             <Img src={avatarSquare} constrain="cover" />
           </div>
-
         </View>
       </View>
     )
   }
-}
 
-render(<OverflowExample />)
-```
+  render(<OverflowExample />)
+  ```
 
 ### Debugging
 
