@@ -33,64 +33,105 @@ type: example
 
 To use `SimpleSelect` controlled, simply provide the `value` prop the string that corresponds to the selected option's `value` prop. The `onChange` callback can be used to update the value stored in state.
 
-```javascript
----
-type: example
----
-class Example extends React.Component {
-  state = {
-    value: 'Alaska'
+- ```javascript
+  class Example extends React.Component {
+    state = {
+      value: 'Alaska'
+    }
+
+    handleSelect = (e, { id, value }) => {
+      this.setState({ value })
+    }
+
+    render() {
+      return (
+        <SimpleSelect
+          renderLabel="Controlled Select"
+          assistiveText="Use arrow keys to navigate options."
+          value={this.state.value}
+          onChange={this.handleSelect}
+        >
+          {this.props.options.map((opt, index) => (
+            <SimpleSelect.Option key={index} id={`opt-${index}`} value={opt}>
+              {opt}
+            </SimpleSelect.Option>
+          ))}
+        </SimpleSelect>
+      )
+    }
   }
 
-  handleSelect = (e, { id, value }) => {
-    this.setState({ value })
-  }
+  render(
+    <Example
+      options={[
+        'Alaska',
+        'American Samoa',
+        'Arizona',
+        'Arkansas',
+        'California',
+        'Colorado',
+        'Connecticut',
+        'Delaware',
+        'District Of Columbia',
+        'Federated States Of Micronesia',
+        'Florida',
+        'Georgia',
+        'Guam',
+        'Hawaii',
+        'Idaho',
+        'Illinois'
+      ]}
+    />
+  )
+  ```
 
-  render () {
+- ```javascript
+  const Example = ({ options }) => {
+    const [value, setValue] = useState('Alaska')
+
+    const handleSelect = (e, { id, value }) => {
+      setValue(value)
+    }
+
     return (
       <SimpleSelect
         renderLabel="Controlled Select"
         assistiveText="Use arrow keys to navigate options."
-        value={this.state.value}
-        onChange={this.handleSelect}
+        value={value}
+        onChange={handleSelect}
       >
-        {this.props.options.map((opt, index) => (
-          <SimpleSelect.Option
-            key={index}
-            id={`opt-${index}`}
-            value={opt}
-          >
-            { opt }
+        {options.map((opt, index) => (
+          <SimpleSelect.Option key={index} id={`opt-${index}`} value={opt}>
+            {opt}
           </SimpleSelect.Option>
         ))}
-
       </SimpleSelect>
     )
   }
-}
-render(
-  <Example
-    options={[
-      'Alaska',
-      'American Samoa',
-      'Arizona',
-      'Arkansas',
-      'California',
-      'Colorado',
-      'Connecticut',
-      'Delaware',
-      'District Of Columbia',
-      'Federated States Of Micronesia',
-      'Florida',
-      'Georgia',
-      'Guam',
-      'Hawaii',
-      'Idaho',
-      'Illinois'
-    ]}
-  />
-)
-```
+
+  render(
+    <Example
+      options={[
+        'Alaska',
+        'American Samoa',
+        'Arizona',
+        'Arkansas',
+        'California',
+        'Colorado',
+        'Connecticut',
+        'Delaware',
+        'District Of Columbia',
+        'Federated States Of Micronesia',
+        'Florida',
+        'Georgia',
+        'Guam',
+        'Hawaii',
+        'Idaho',
+        'Illinois'
+      ]}
+    />
+  )
+  ```
 
 ### Groups
 

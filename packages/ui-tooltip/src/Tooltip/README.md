@@ -59,74 +59,121 @@ type: example
 
 #### Controlled Tooltips
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      isShowingContent: false
+      this.state = {
+        isShowingContent: false
+      }
+    }
+
+    render() {
+      return (
+        <>
+          <p>
+            <Tooltip
+              renderTip="Hello. I'm a tool tip"
+              isShowingContent={this.state.isShowingContent}
+              onShowContent={(e) => {
+                console.log('expecting to show tooltip')
+              }}
+              onHideContent={(e) => {
+                console.log('expecting to hide tooltip')
+              }}
+            >
+              <Link href="#">This link has a tooltip</Link>
+            </Tooltip>
+          </p>
+          <Checkbox
+            label="show tooltip?"
+            variant="toggle"
+            value="toggled"
+            onChange={(event) => {
+              this.setState({ isShowingContent: event.target.checked })
+            }}
+          />
+        </>
+      )
     }
   }
 
-  render () {
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [isShowingContent, setIsShowingContent] = useState(false)
+
     return (
       <>
         <p>
-        <Tooltip
-          renderTip="Hello. I'm a tool tip"
-          isShowingContent={this.state.isShowingContent}
-          onShowContent={(e) => {
-            console.log("expecting to show tooltip")
-          }}
-          onHideContent={(e) => {
-            console.log("expecting to hide tooltip")
-          }}
-        >
-          <Link href="#">This link has a tooltip</Link>
-        </Tooltip>
+          <Tooltip
+            renderTip="Hello. I'm a tool tip"
+            isShowingContent={isShowingContent}
+            onShowContent={(e) => {
+              console.log('expecting to show tooltip')
+            }}
+            onHideContent={(e) => {
+              console.log('expecting to hide tooltip')
+            }}
+          >
+            <Link href="#">This link has a tooltip</Link>
+          </Tooltip>
         </p>
         <Checkbox
           label="show tooltip?"
           variant="toggle"
           value="toggled"
           onChange={(event) => {
-            this.setState({isShowingContent: event.target.checked})
+            setIsShowingContent(event.target.checked)
           }}
         />
-    </>
-  )
+      </>
+    )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
 
 ### Custom elements as renderTrigger
 
 Popover and Tooltip attach mouse and focus event listeners to their render trigger components via props. These need to be propagated to the component for the listeners to work:
 
-```js
----
-  type: example
----
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props)
-    this.ref = React.createRef()
+- ```js
+  class MyComponent extends React.Component {
+    constructor(props) {
+      super(props)
+      this.ref = React.createRef()
+    }
+    render() {
+      //  Spread the props to the underlying DOM element
+      return (
+        <div {...this.props} ref={this.ref} style={{ width: '10rem' }}>
+          My custom component
+        </div>
+      )
+    }
   }
-  render() {
-    //  Spread the props to the underlying DOM element
-    return <div {...this.props} ref={this.ref} style={{width:"10rem"}}>My custom component</div>
-  }
-}
-<Tooltip renderTip="Tooltip text to display" >
-  <MyComponent />
-</Tooltip>
-```
+  ;<Tooltip renderTip="Tooltip text to display">
+    <MyComponent />
+  </Tooltip>
+  ```
+
+- ```js
+  const MyComponent = React.forwardRef((props, ref) => {
+    return (
+      <div {...props} ref={ref} style={{ width: '10rem' }}>
+        My custom component
+      </div>
+    )
+  })
+
+  ;<Tooltip renderTip="Tooltip text to display">
+    <MyComponent />
+  </Tooltip>
+  ```
 
 ### Guidelines
 
