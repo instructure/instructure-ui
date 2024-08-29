@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useContext, useEffect, useMemo, useState, useRef } from 'react'
+import React, { forwardRef, useContext, useEffect, useMemo, useState, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
 import { LoremIpsum } from 'lorem-ipsum'
@@ -87,6 +87,7 @@ const globals = {
   useMemo,
   useState,
   useRef,
+  forwardRef,
   additionalPrimitives,
   dataVisualization,
   ThemeColors,
