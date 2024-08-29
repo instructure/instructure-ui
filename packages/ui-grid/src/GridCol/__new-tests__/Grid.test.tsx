@@ -23,16 +23,18 @@
  */
 
 import React from 'react'
-
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 import { GridCol } from '../index'
 
-describe('<GridCol />', async () => {
+describe('<GridCol />', () => {
   it('should render content in each column', async () => {
-    const elementRef = stub()
-    const subject = await mount(<GridCol elementRef={elementRef}>Foo</GridCol>)
+    const elementRef = vi.fn()
+    const { container } = render(<GridCol elementRef={elementRef}>Foo</GridCol>)
 
-    expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    expect(container).toHaveTextContent('Foo')
+    expect(elementRef).toHaveBeenCalledWith(container.firstChild)
   })
 })
