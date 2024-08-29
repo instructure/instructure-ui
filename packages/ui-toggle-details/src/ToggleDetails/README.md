@@ -20,42 +20,73 @@ type: example
 
 ToggleDetails can be controlled:
 
-```js
----
-type: example
----
+- ```js
+  class Example extends React.Component {
+    state = {
+      expanded: true
+    }
 
-class Example extends React.Component {
-  state = {
-    expanded: true
-  };
+    handleChange = (event, expanded) => this.setState({ expanded })
 
-  handleChange = (event, expanded) => this.setState({ expanded });
+    handleToggle = () => this.setState({ expanded: !this.state.expanded })
 
-  handleToggle = () => this.setState({ expanded: !this.state.expanded });
+    render() {
+      return (
+        <div>
+          <Button onClick={this.handleToggle}>
+            This Button {this.state.expanded ? 'Collapses' : 'Expands'}
+          </Button>
+          <br />
+          <br />
+          <ToggleDetails
+            summary="Click to hide me!"
+            expanded={this.state.expanded}
+            onToggle={this.handleChange}
+          >
+            <Text weight="bold">I am controlled and expanded!</Text>{' '}
+            {lorem.paragraph()}
+          </ToggleDetails>
+        </div>
+      )
+    }
+  }
 
-  render () {
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [expanded, setExpanded] = useState(true)
+
+    const handleChange = (event, expanded) => {
+      setExpanded(expanded)
+    }
+
+    const handleToggle = () => {
+      setExpanded((prevExpanded) => !prevExpanded)
+    }
+
     return (
       <div>
-        <Button onClick={this.handleToggle}>
-          This Button {this.state.expanded ? 'Collapses' : 'Expands'}
+        <Button onClick={handleToggle}>
+          This Button {expanded ? 'Collapses' : 'Expands'}
         </Button>
         <br />
         <br />
         <ToggleDetails
           summary="Click to hide me!"
-          expanded={this.state.expanded}
-          onToggle={this.handleChange}
+          expanded={expanded}
+          onToggle={handleChange}
         >
-          <Text weight="bold">I am controlled and expanded!</Text> {lorem.paragraph()}
+          <Text weight="bold">I am controlled and expanded!</Text>
+          {lorem.paragraph()}
         </ToggleDetails>
       </div>
-      )
+    )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
 
 Setting ToggleDetails to `filled` will make the toggle use a full-width [Button](#Button) component.
 
