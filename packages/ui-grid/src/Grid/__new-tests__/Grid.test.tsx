@@ -23,14 +23,14 @@
  */
 
 import React from 'react'
-
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { Grid } from '../index'
 
-describe('<Grid />', async () => {
+describe('<Grid />', () => {
   it('should render content in each column', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Grid>
         <Grid.Row>
           <Grid.Col>Foo</Grid.Col>
@@ -40,24 +40,25 @@ describe('<Grid />', async () => {
       </Grid>
     )
 
-    expect(subject.getDOMNode().textContent).to.equal('FooBarBaz')
+    expect(container).toHaveTextContent('FooBarBaz')
   })
 
   it('should pass aria and role attributes to underlying DOM elements', async () => {
-    const subject = await mount(
-      <Grid role="grid" aria-hidden="true">
-        <Grid.Row aria-live="polite" role="presentation">
-          <Grid.Col aria-disabled="true">Foo</Grid.Col>
+    render(
+      <Grid data-testid="grid" role="grid" aria-hidden="true">
+        <Grid.Row data-testid="grid-row" aria-live="polite" role="presentation">
+          <Grid.Col data-testid="grid-col" aria-disabled="true">
+            Foo
+          </Grid.Col>
         </Grid.Row>
       </Grid>
     )
 
-    const grid = within(subject.getDOMNode())
-
-    expect(await grid.find('[role="grid"][aria-hidden]')).to.exist()
-    expect(
-      await grid.find('[role="presentation"][aria-live="polite"]')
-    ).to.exist()
-    expect(await grid.find('[aria-disabled]')).to.exist()
+    expect(screen.getByTestId('grid')).toHaveAttribute('aria-hidden')
+    expect(screen.getByTestId('grid-row')).toHaveAttribute(
+      'aria-live',
+      'polite'
+    )
+    expect(screen.getByTestId('grid-col')).toHaveAttribute('aria-disabled')
   })
 })
