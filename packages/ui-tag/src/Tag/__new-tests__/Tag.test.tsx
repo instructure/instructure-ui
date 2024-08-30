@@ -35,8 +35,6 @@ import { View } from '@instructure/ui-view'
 
 const originalOmitViewProps = View.omitViewProps
 
-// https://github.com/vitest-dev/eslint-plugin-vitest/issues/511
-// eslint-disable-next-line vitest/valid-describe-callback
 describe('<Tag />', async () => {
   beforeAll(() => {
     // View component read Component.name instead of Component.displayName
@@ -95,8 +93,6 @@ describe('<Tag />', async () => {
     expect(axeCheck).toBe(true)
   })
 
-  // https://github.com/vitest-dev/eslint-plugin-vitest/issues/511
-  // eslint-disable-next-line vitest/valid-describe-callback
   describe('when passing down props to View', async () => {
     const allowedProps: Partial<ViewProps> = {
       margin: 'small',
