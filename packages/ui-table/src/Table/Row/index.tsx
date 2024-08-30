@@ -88,7 +88,7 @@ class Row extends Component<TableRowProps> {
               return safeCloneElement(child, {
                 key: child.props.name,
                 // Sent down for compatibility with custom components
-                // TODO DEPRECATED, remove in next version
+                // TODO DEPRECATED, remove in v11
                 isStacked,
                 // used by `Cell` to render its column title in `stacked` layout
                 header: headers && headers[index]
