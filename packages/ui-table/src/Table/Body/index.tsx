@@ -76,13 +76,13 @@ class Body extends Component<TableBodyProps> {
             return safeCloneElement(child, {
               key: child.props.name,
               // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in next version
+              // TODO DEPRECATED, remove in v11
               hover,
               // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in next version
+              // TODO DEPRECATED, remove in v11
               isStacked,
               // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in next version
+              // TODO DEPRECATED, remove in v11
               headers
             })
           }

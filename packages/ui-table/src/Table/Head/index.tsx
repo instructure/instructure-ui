@@ -180,7 +180,7 @@ class Head extends Component<TableHeadProps> {
     return this.context.isStacked ? (
       this.renderSelect()
     ) : (
-      // TODO remove 'hover' exclude in the next version, its passed down for compatibility with custom components
+      // TODO remove 'hover' exclude in v11, its passed down for compatibility with custom components
       <thead
         {...omitProps(this.props, Head.allowedProps, ['hover'])}
         css={styles?.head}
