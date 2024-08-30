@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-prop-types",
-  "version": "10.2.0",
+  "version": "10.2.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.2.0",
+    "@instructure/ui-babel-preset": "10.2.1",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^15.0.7",
     "vitest": "^2.0.2"
