@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y-utils",
-  "version": "10.2.0",
+  "version": "10.2.1",
   "description": "A collection of utilities for managing focus and screen reader behavior",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,17 +23,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/console": "10.2.0",
-    "@instructure/shared-types": "10.2.0",
-    "@instructure/ui-a11y-content": "10.2.0",
-    "@instructure/ui-dom-utils": "10.2.0",
-    "@instructure/ui-react-utils": "10.2.0",
-    "@instructure/uid": "10.2.0",
+    "@instructure/console": "10.2.1",
+    "@instructure/shared-types": "10.2.1",
+    "@instructure/ui-a11y-content": "10.2.1",
+    "@instructure/ui-dom-utils": "10.2.1",
+    "@instructure/ui-react-utils": "10.2.1",
+    "@instructure/uid": "10.2.1",
     "keycode": "^2"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.2.0",
-    "@instructure/ui-color-utils": "10.2.0",
+    "@instructure/ui-babel-preset": "10.2.1",
+    "@instructure/ui-color-utils": "10.2.1",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
     "vitest": "^2.0.2"
