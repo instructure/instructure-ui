@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ReactElement, ReactNode } from 'react'
+import React, { Children, isValidElement, ReactElement, ReactNode } from 'react'
 import Markdown from 'marked-react'
 import grayMatter from 'gray-matter'
 import { v4 as uuid } from 'uuid'
@@ -41,6 +41,21 @@ import { Heading } from './Heading'
 import { Link } from './Link'
 import { trimIndent } from './trimIndent'
 
+const getHeadingId = (children: ReactNode): string => {
+  const headingId = Children.toArray(children).reduce((id, child) => {
+    if (typeof child === 'string') return id + child
+
+    if (isValidElement(child) && typeof child.props.children === 'string') {
+      return id + child.props.children
+    }
+
+    return id
+  }, '') as string
+
+  // fallback to uuid if headingId is empty
+  return headingId || uuid()
+}
+
 const headingVariants: Record<
   string,
   (key: string, children: ReactNode) => ReactElement
@@ -48,7 +63,7 @@ const headingVariants: Record<
   h1: (key, children) => {
     return (
       <Heading
-        id={(children as [string])?.[0]}
+        id={getHeadingId(children)}
         key={key}
         level="h1"
         margin="0 0 large"
@@ -59,7 +74,7 @@ const headingVariants: Record<
   },
   h2: (key, children) => (
     <Heading
-      id={(children as [string])?.[0]}
+      id={getHeadingId(children)}
       key={key}
       level="h1"
       as="h2"
@@ -70,7 +85,7 @@ const headingVariants: Record<
   ),
   h3: (key, children) => (
     <Heading
-      id={(children as [string])?.[0]}
+      id={getHeadingId(children)}
       key={key}
       level="h2"
       as="h3"
@@ -79,20 +94,22 @@ const headingVariants: Record<
       {children}
     </Heading>
   ),
-  h4: (key, children) => (
-    <Heading
-      id={(children as [string])?.[0]}
-      key={key}
-      level="h3"
-      as="h4"
-      margin="large 0 medium 0"
-    >
-      {children}
-    </Heading>
-  ),
+  h4: (key, children) => {
+    return (
+      <Heading
+        id={getHeadingId(children)}
+        key={key}
+        level="h3"
+        as="h4"
+        margin="large 0 medium 0"
+      >
+        {children}
+      </Heading>
+    )
+  },
   h5: (key, children) => (
     <Heading
-      id={(children as [string])?.[0]}
+      id={getHeadingId(children)}
       key={key}
       level="h4"
       as="h5"
