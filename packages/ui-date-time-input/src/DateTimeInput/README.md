@@ -19,82 +19,163 @@ The component is localized via its `locale` and `timezone` parameters. Both are 
 
 #### A DateTimeInput with `columns` layout and a default value:
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  render () {
+- ```js
+  class Example extends React.Component {
+    render() {
+      return (
+        <div style={{ height: '10rem', width: '40em' }}>
+          <DateTimeInput
+            description="Pick a date and time"
+            datePlaceholder="Choose a date"
+            dateRenderLabel="Date"
+            timeRenderLabel="Time"
+            invalidDateTimeMessage="Invalid date!"
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
+            defaultValue="2018-01-18T13:30"
+            layout="columns"
+          />
+        </div>
+      )
+    }
+  }
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
     return (
-      <div style= { {height: '10rem',width: '40em'}}>
+      <div style={{ height: '10rem', width: '40em' }}>
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"
           dateRenderLabel="Date"
           timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          prevMonthLabel='Previous month'
-          nextMonthLabel='Next month'
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
           defaultValue="2018-01-18T13:30"
           layout="columns"
         />
-    </div>)
+      </div>
+    )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 #### A required DateInput with `stacked` layout that warns if the value in the past:
 
 This sample code also allows the user to enter an arbitrary time value by setting `allowNonStepInput` to `true`.
 
-```js
----
-type: example
----
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        value: undefined,
+        messages: []
+      }
+    }
 
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      value: undefined,
-      messages: []
+    onChange = (e, isoDate) => {
+      let messages = []
+      if (!isoDate) {
+        // this happens if an invalid date is entered
+        this.setState({ messages: messages, value: undefined })
+        return
+      }
+      const now = new Date()
+      const newValue = new Date(isoDate)
+      if (newValue.valueOf() <= now.valueOf()) {
+        messages = [{ text: 'That date-time is in the past', type: 'hint' }]
+      }
+      this.setState({ value: isoDate, messages })
+    }
+
+    render() {
+      const text = this.state.value
+        ? new Date(this.state.value).toString()
+        : 'N/A'
+      return (
+        <div style={{ width: '25em' }}>
+          <div style={{ marginBottom: '1em', fontStyle: 'italic' }}>
+            You entered:
+            <br />
+            {text}
+          </div>
+          <div style={{ height: '14rem' }}>
+            <DateTimeInput
+              description={
+                <ScreenReaderContent>Pick a date and time</ScreenReaderContent>
+              }
+              datePlaceholder="Choose"
+              dateRenderLabel="Date"
+              timeRenderLabel="Time"
+              prevMonthLabel="Previous month"
+              nextMonthLabel="Next month"
+              onChange={this.onChange}
+              layout="stacked"
+              value={this.state.value}
+              invalidDateTimeMessage="Invalid date!"
+              messages={this.state.messages}
+              allowNonStepInput={true}
+              isRequired
+            />
+          </div>
+        </div>
+      )
     }
   }
+  render(<Example />)
+  ```
 
-  onChange = (e, isoDate) => {
-    let messages = []
-    if (!isoDate) {
-      // this happens if an invalid date is entered
-      this.setState({ messages:messages, value:undefined })
-      return
-    }
-    const now = new Date()
-    const newValue = new Date(isoDate)
-    if ( newValue.valueOf() <= now.valueOf()) {
-      messages = [{text: 'That date-time is in the past', type: 'hint'}]
-    }
-    this.setState({ value: isoDate, messages })
-  }
+- ```js
+  const Example = () => {
+    const [value, setValue] = useState(undefined)
+    const [messages, setMessages] = useState([])
 
-  render () {
-    const text = this.state.value ? new Date(this.state.value).toString() : 'N/A'
+    const onChange = (e, isoDate) => {
+      let newMessages = []
+      if (!isoDate) {
+        // this happens if an invalid date is entered
+        setValue(undefined)
+        setMessages(newMessages)
+        return
+      }
+      const now = new Date()
+      const newValue = new Date(isoDate)
+      if (newValue.valueOf() <= now.valueOf()) {
+        newMessages = [{ text: 'That date-time is in the past', type: 'hint' }]
+      }
+      setValue(isoDate)
+      setMessages(newMessages)
+    }
+
+    const text = value ? new Date(value).toString() : 'N/A'
+
     return (
-      <div style={{width: '25em'}}>
-        <div style={{marginBottom: '1em', fontStyle: 'italic'}}>You entered:<br/>{text}</div>
-        <div style={{height: '14rem'}}>
+      <div style={{ width: '25em' }}>
+        <div style={{ marginBottom: '1em', fontStyle: 'italic' }}>
+          You entered:
+          <br />
+          {text}
+        </div>
+        <div style={{ height: '14rem' }}>
           <DateTimeInput
-            description={<ScreenReaderContent>Pick a date and time</ScreenReaderContent>}
+            description={
+              <ScreenReaderContent>Pick a date and time</ScreenReaderContent>
+            }
             datePlaceholder="Choose"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            prevMonthLabel='Previous month'
-            nextMonthLabel='Next month'
-            onChange={this.onChange}
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
+            onChange={onChange}
             layout="stacked"
-            value={this.state.value}
+            value={value}
             invalidDateTimeMessage="Invalid date!"
-            messages={this.state.messages}
+            messages={messages}
             allowNonStepInput={true}
             isRequired
           />
@@ -102,9 +183,9 @@ class Example extends React.Component {
       </div>
     )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 #### A disabled DateTimeInput:
 
@@ -128,12 +209,35 @@ type: example
 
 #### A DateTimeInput in a different locale and timezone where these are set from the React `context`:
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  render() {
+- ```js
+  class Example extends React.Component {
+    render() {
+      return (
+        <ApplyLocale locale="fr" timezone="Africa/Nairobi">
+          <div style={{ height: '12rem', width: '40em' }}>
+            <DateTimeInput
+              description="Pick a date and time"
+              datePlaceholder="Choose a date"
+              dateRenderLabel="Date"
+              timeRenderLabel="Time"
+              prevMonthLabel="Previous month"
+              nextMonthLabel="Next month"
+              invalidDateTimeMessage={(dvalue) => {
+                return `'${dvalue} is not valid.`
+              }}
+              layout="columns"
+              defaultValue="2018-01-18T16:00"
+            />
+          </div>
+        </ApplyLocale>
+      )
+    }
+  }
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
     return (
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
         <div style={{ height: '12rem', width: '40em' }}>
@@ -142,8 +246,8 @@ class Example extends React.Component {
             datePlaceholder="Choose a date"
             dateRenderLabel="Date"
             timeRenderLabel="Time"
-            prevMonthLabel='Previous month'
-            nextMonthLabel='Next month'
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
             invalidDateTimeMessage={(dvalue) => {
               return `'${dvalue} is not valid.`
             }}
@@ -151,11 +255,12 @@ class Example extends React.Component {
             defaultValue="2018-01-18T16:00"
           />
         </div>
-      </ApplyLocale>)
+      </ApplyLocale>
+    )
   }
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
 
 #### A `DateTimeInput` with some disabled dates that are supplied via a `string` array:
 
@@ -182,43 +287,94 @@ type: example
 
 #### A `DateTimeInput` with some disabled dates that are supplied via a `function`:
 
-```js
----
-type: example
----
-const locale = 'en-us'
-const timezone = 'America/Denver'
+- ```js
+  const locale = 'en-us'
+  const timezone = 'America/Denver'
 
-class Example extends React.Component {
-  getDisabledDates(isoDateToCheck) {
-    const parsed = moment.tz(isoDateToCheck, [moment.ISO_8601], locale, timezone)
-    const now = moment().locale(locale).tz(timezone)
-    return parsed.isBefore(now)
+  class Example extends React.Component {
+    getDisabledDates(isoDateToCheck) {
+      const parsed = moment.tz(
+        isoDateToCheck,
+        [moment.ISO_8601],
+        locale,
+        timezone
+      )
+      const now = moment().locale(locale).tz(timezone)
+      return parsed.isBefore(now)
+    }
+    render() {
+      return (
+        <div style={{ height: '12rem', width: '40em' }}>
+          <DateTimeInput
+            description="Pick a date and time"
+            datePlaceholder="Choose a date"
+            dateRenderLabel="Date"
+            timeRenderLabel="Time"
+            invalidDateTimeMessage={(rawDateValue) =>
+              'Invalid date: ' + rawDateValue
+            }
+            disabledDateTimeMessage={(rawDateValue) =>
+              'Disabled date: ' + rawDateValue
+            }
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
+            defaultValue="2022-04-08T13:30"
+            layout="columns"
+            disabledDates={this.getDisabledDates}
+            locale={locale}
+            timezone={timezone}
+          />
+        </div>
+      )
+    }
   }
-  render() {
+
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const locale = 'en-us'
+    const timezone = 'America/Denver'
+
+    const getDisabledDates = (isoDateToCheck) => {
+      const parsed = moment.tz(
+        isoDateToCheck,
+        [moment.ISO_8601],
+        locale,
+        timezone
+      )
+      const now = moment().locale(locale).tz(timezone)
+      return parsed.isBefore(now)
+    }
+
     return (
-      <div style= { {height: '12rem', width: '40em'}}>
+      <div style={{ height: '12rem', width: '40em' }}>
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"
           dateRenderLabel="Date"
           timeRenderLabel="Time"
-          invalidDateTimeMessage={(rawDateValue) => 'Invalid date: ' + rawDateValue}
-          disabledDateTimeMessage={(rawDateValue) => 'Disabled date: ' + rawDateValue}
+          invalidDateTimeMessage={(rawDateValue) =>
+            'Invalid date: ' + rawDateValue
+          }
+          disabledDateTimeMessage={(rawDateValue) =>
+            'Disabled date: ' + rawDateValue
+          }
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
           defaultValue="2022-04-08T13:30"
           layout="columns"
-          disabledDates={this.getDisabledDates}
+          disabledDates={getDisabledDates}
           locale={locale}
           timezone={timezone}
         />
-    </div>)
+      </div>
+    )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
 
 #### Programatically reset `DateTimeInput`
 
