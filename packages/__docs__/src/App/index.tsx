@@ -229,13 +229,10 @@ class App extends Component<AppProps, AppState> {
     fetch('markdown-and-sources-data.json', { signal })
       .then((response) => response.json())
       .then((docsData) => {
-        this.setState(
-          {
-            docsData,
-            themeKey: Object.keys(docsData.themes)[0]
-          },
-          this.scrollToElement
-        )
+        this.setState({
+          docsData,
+          themeKey: Object.keys(docsData.themes)[0]
+        })
       })
       .catch(errorHandler)
   }
@@ -443,7 +440,12 @@ class App extends Component<AppProps, AppState> {
         }
         // eslint-disable-next-line no-param-reassign
         data.children = children
-        this.setState({ currentDocData: data })
+        this.setState(
+          {
+            currentDocData: data
+          },
+          this.scrollToElement
+        )
       })
       return (
         <View as="div" padding="xx-large 0">
