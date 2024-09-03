@@ -131,6 +131,89 @@ type: example
 </ToggleDetails>
 ```
 
+### Example to demonstrate more properties
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [state, setState] = useState({
+    expanded: true,
+    fluidWidth: true,
+    iconPosition: 'start',
+    size: 'small',
+    variant: 'default'
+  });
+
+  const handleChange = (field, value) => setState(prevState => ({ ...prevState, [field]: value }));
+  const handleToggle = () => setState(prevState => ({ ...prevState, expanded: !prevState.expanded }));
+
+  const renderOptions = () => {
+    const { fluidWidth, iconPosition, size, variant } = state;
+    const options = [
+      { name: 'iconPosition', values: ['start', 'end'] },
+      { name: 'size', values: ['small', 'medium', 'large'] },
+      { name: 'variant', values: ['default', 'filled'] },
+    ];
+
+    return (
+      <Flex alignItems="start">
+        {options.map(({ name, values }) => (
+          <Flex.Item margin="small" key={name}>
+            <RadioInputGroup
+              name={name}
+              description={name}
+              value={state[name]}
+              onChange={(e, value) => handleChange(name, value)}
+            >
+              {values.map(val => (
+                <RadioInput label={val} value={val} key={val} />
+              ))}
+            </RadioInputGroup>
+          </Flex.Item>
+        ))}
+        <Flex.Item margin="small">
+          <Checkbox
+            label="fluidWidth"
+            checked={fluidWidth}
+            onChange={() => handleChange('fluidWidth', !fluidWidth)}
+          />
+        </Flex.Item>
+      </Flex>
+    );
+  };
+
+  const { expanded, iconPosition, size, variant, fluidWidth } = state;
+
+  return (
+    <div>
+      {renderOptions()}
+      <Button onClick={handleToggle}>
+        This Button {expanded ? 'Collapses' : 'Expands'}
+      </Button>
+      <br />
+      <br />
+      <ToggleDetails
+        summary="Click to hide me!"
+        expanded={expanded}
+        onToggle={(_, expanded) => handleChange('expanded', expanded)}
+        fluidWidth={fluidWidth}
+        iconPosition={iconPosition}
+        size={size}
+        variant={variant}
+      >
+        <Text weight="bold">
+          I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!
+        </Text>
+      </ToggleDetails>
+    </div>
+  );
+};
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
