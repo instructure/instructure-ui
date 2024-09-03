@@ -49,10 +49,9 @@ const contentAnimation = keyframes`
 const generateStyle = (
   componentTheme: ToggleDetailsTheme,
   props: ToggleDetailsProps,
-  state: ToggleDetailsStyleProps
+  _state: ToggleDetailsStyleProps
 ): ToggleDetailsStyle => {
   const { fluidWidth, iconPosition, size, variant } = props
-  const { animate } = state
 
   const positionIconAtEnd =
     iconPosition === 'end' && (variant === 'filled' || fluidWidth)
@@ -178,15 +177,13 @@ const generateStyle = (
       ...fontSizeStyles[size!],
       ...indentDetailsStyles[size!]
     },
-    content: animate
-      ? {
-          label: 'toggleDetails__content',
-          opacity: 0.01,
-          animationName: contentAnimation,
-          animationFillMode: 'forwards',
-          animationDuration: '.3s'
-        }
-      : {}
+    content: {
+      label: 'toggleDetails__content',
+      opacity: 0.01,
+      animationName: contentAnimation,
+      animationFillMode: 'forwards',
+      animationDuration: '.3s'
+    }
   }
 }
 

@@ -36,7 +36,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
+import type { ToggleDetailsProps } from './props'
 import { allowedProps, propTypes } from './props'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 
@@ -75,11 +75,11 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.({ animate: false } as ToggleDetailsStyleProps)
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.({ animate: true } as ToggleDetailsStyleProps)
+    this.props.makeStyles?.()
   }
 
   getButtonRef = (el: Element | null) => (this._button = el as HTMLElement)
@@ -169,7 +169,6 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     if (typeof this.props.onToggle === 'function') {
       this.props.onToggle(event, expanded)
     }
-    this.props.makeStyles?.({ animate: true })
   }
 
   render() {
