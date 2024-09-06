@@ -87,7 +87,7 @@ type RadioInputProps = RadioInputOwnProps &
   WithDeterministicIdProps
 
 type RadioInputStyle = ComponentStyle<
-  'radioInput' | 'input' | 'control' | 'facade' | 'label'
+  'radioInput' | 'input' | 'control' | 'facade' | 'label' | 'container'
 >
 
 type RadioInputState = {
