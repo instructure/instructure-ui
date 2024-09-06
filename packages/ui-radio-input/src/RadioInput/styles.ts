@@ -273,6 +273,10 @@ const generateStyle = (
         ...(disabled && { cursor: 'not-allowed' })
       }
     },
+    // this container is added to reduce the clickable area to the size of the radio button and label
+    container: {
+      width: 'fit-content'
+    },
     input: {
       label: 'radioInput__input',
       ...inputStyles,

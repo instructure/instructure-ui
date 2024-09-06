@@ -87,9 +87,12 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CheckboxProps = CheckboxOwnProps &
   WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle> &
-  OtherHTMLAttributes<CheckboxOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<CheckboxOwnProps> &
+  WithDeterministicIdProps
 
-type CheckboxStyle = ComponentStyle<'checkbox' | 'input' | 'control'>
+type CheckboxStyle = ComponentStyle<
+  'checkbox' | 'input' | 'control' | 'container'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,

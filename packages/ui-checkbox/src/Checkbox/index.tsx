@@ -273,27 +273,29 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
         ref={this.handleRef}
       >
-        <input
-          {...props}
-          id={this.id}
-          value={value}
-          type="checkbox"
-          ref={(c) => {
-            this._input = c
-          }}
-          disabled={disabled || readOnly}
-          aria-checked={indeterminate ? 'mixed' : undefined}
-          css={styles?.input}
-          onChange={this.handleChange}
-          onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
-          onFocus={createChainedFunction(onFocus, this.handleFocus)}
-          onBlur={createChainedFunction(onBlur, this.handleBlur)}
-          checked={this.checked}
-        />
-        <label htmlFor={this.id} css={styles?.control}>
-          {this.renderFacade()}
-          {this.renderMessages()}
-        </label>
+        <div css={styles?.container}>
+          <input
+            {...props}
+            id={this.id}
+            value={value}
+            type="checkbox"
+            ref={(c) => {
+              this._input = c
+            }}
+            disabled={disabled || readOnly}
+            aria-checked={indeterminate ? 'mixed' : undefined}
+            css={styles?.input}
+            onChange={this.handleChange}
+            onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
+            onFocus={createChainedFunction(onFocus, this.handleFocus)}
+            onBlur={createChainedFunction(onBlur, this.handleBlur)}
+            checked={this.checked}
+          />
+          <label htmlFor={this.id} css={styles?.control}>
+            {this.renderFacade()}
+            {this.renderMessages()}
+          </label>
+        </div>
       </div>
     )
   }

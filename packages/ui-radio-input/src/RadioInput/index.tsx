@@ -141,26 +141,28 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
           this.ref = el
         }}
       >
-        <input
-          {...props}
-          id={this.id}
-          ref={(c: HTMLInputElement | null) => {
-            this._input = c
-          }}
-          value={value}
-          name={name}
-          checked={this.checked}
-          type="radio"
-          css={styles?.input}
-          disabled={disabled || readOnly}
-          aria-disabled={disabled || readOnly ? 'true' : undefined}
-          onChange={this.handleChange}
-          onClick={this.handleClick}
-        />
-        <label css={styles?.control} htmlFor={this.id}>
-          <span css={styles?.facade} aria-hidden="true" />
-          <span css={styles?.label}>{label}</span>
-        </label>
+        <div css={styles?.container}>
+          <input
+            {...props}
+            id={this.id}
+            ref={(c: HTMLInputElement | null) => {
+              this._input = c
+            }}
+            value={value}
+            name={name}
+            checked={this.checked}
+            type="radio"
+            css={styles?.input}
+            disabled={disabled || readOnly}
+            aria-disabled={disabled || readOnly ? 'true' : undefined}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+          />
+          <label css={styles?.control} htmlFor={this.id}>
+            <span css={styles?.facade} aria-hidden="true" />
+            <span css={styles?.label}>{label}</span>
+          </label>
+        </div>
       </div>
     )
   }

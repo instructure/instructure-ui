@@ -57,6 +57,10 @@ const generateStyle = (
         width: 'auto'
       })
     },
+    // this container is added to reduce the clickable area of the checkbox to the actual checkbox and label
+    container: {
+      width: 'fit-content'
+    },
     input: {
       label: 'checkbox__input',
       padding: 0,
