@@ -73,14 +73,16 @@ import 'moment/min/locales'
       ', '
     )}} from "@instructure/ui"\n\n`
 
-    const codeLines = this.props.code.split('\n')
-    const shouldRender = !codeLines[codeLines.length - 1]
-      .split(' ')
-      .join('')
-      .includes('render(<')
-    const codeBlock = shouldRender
-      ? `render(${this.props.code})`
-      : this.props.code
+    // removes all whitespace (spaces, tabs, newlines, etc.) from the code string
+    const cleanedCode = this.props.code.replace(/\s+/g, '')
+    const lastRenderIndex = cleanedCode.lastIndexOf('render(<')
+    const endsWithRenderStatement =
+      lastRenderIndex !== -1 && cleanedCode.endsWith('>)')
+
+    const codeBlock = endsWithRenderStatement
+      ? this.props.code
+      : `render(${this.props.code})`
+
     const renderStatement = `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n`
     const codeSandboxData = {
       title: this.props.title,
