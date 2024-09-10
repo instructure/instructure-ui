@@ -167,60 +167,147 @@ type: example
 
 The `shouldAnimate` prop makes the progress bar animate the transition between value changes, giving it a smoother look.
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  MIN = 0
-  MAX = 100
+- ```js
+  class Example extends React.Component {
+    MIN = 0
+    MAX = 100
 
-  state = {
-    value: 25,
-    shouldAnimate: true
-  }
-
-  bound (n) {
-    if (n < this.MIN) return this.MIN
-    if (n > this.MAX) return this.MAX
-    return n
-  }
-
-  setNumber (n) {
-    return { value: this.bound(n) }
-  }
-
-  handleChange = (event, value) => {
-    const newValue = Number(value)
-
-    if (isNaN(newValue)) {
-      return
+    state = {
+      value: 25,
+      shouldAnimate: true
     }
 
-    this.setState({
-      value: newValue
-    })
+    bound(n) {
+      if (n < this.MIN) return this.MIN
+      if (n > this.MAX) return this.MAX
+      return n
+    }
+
+    setNumber(n) {
+      return { value: this.bound(n) }
+    }
+
+    handleChange = (event, value) => {
+      const newValue = Number(value)
+
+      if (isNaN(newValue)) {
+        return
+      }
+
+      this.setState({
+        value: newValue
+      })
+    }
+
+    handleDecrement = (event) =>
+      this.setState(({ value }) => {
+        if (Number.isInteger(value)) {
+          return this.setNumber(value - 1)
+        }
+        return this.setNumber(Math.floor(value))
+      })
+
+    handleIncrement = (event) =>
+      this.setState(({ value }) => {
+        if (Number.isInteger(value)) {
+          return this.setNumber(value + 1)
+        }
+        return this.setNumber(Math.ceil(value))
+      })
+
+    handleBlur = (event) =>
+      this.setState(({ value }) => {
+        return this.setNumber(Math.round(value))
+      })
+
+    render() {
+      return (
+        <div>
+          <View
+            as="div"
+            background="primary"
+            padding="medium"
+            margin="0 0 large 0"
+          >
+            <FormFieldGroup
+              description={<ScreenReaderContent>Settings</ScreenReaderContent>}
+            >
+              <Checkbox
+                label="Should animate"
+                checked={this.state.shouldAnimate}
+                onChange={() => {
+                  this.setState({ shouldAnimate: !this.state.shouldAnimate })
+                }}
+                variant="toggle"
+              />
+
+              <NumberInput
+                renderLabel={`ProgressBar value (${this.MIN}-${this.MAX})`}
+                display="inline-block"
+                onBlur={this.handleBlur}
+                onChange={this.handleChange}
+                onDecrement={this.handleDecrement}
+                onIncrement={this.handleIncrement}
+                showArrows
+                value={this.state.value}
+              />
+            </FormFieldGroup>
+          </View>
+
+          <ProgressBar
+            screenReaderLabel="Loading completion"
+            valueNow={this.state.value}
+            valueMax={this.MAX}
+            shouldAnimate={this.state.shouldAnimate}
+          />
+        </div>
+      )
+    }
   }
 
-  handleDecrement = (event) => this.setState(({ value }) => {
-    if (Number.isInteger(value)) {
-      return this.setNumber(value - 1)
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const MIN = 0
+    const MAX = 100
+
+    const [value, setValue] = useState(25)
+    const [shouldAnimate, setShouldAnimate] = useState(true)
+
+    const bound = (n) => {
+      if (n < MIN) return MIN
+      if (n > MAX) return MAX
+      return n
     }
-    return this.setNumber(Math.floor(value))
-  })
 
-  handleIncrement = (event) => this.setState(({ value }) => {
-    if (Number.isInteger(value)) {
-      return this.setNumber(value + 1)
+    const handleChange = (event, value) => {
+      const newValue = Number(value)
+      if (isNaN(newValue)) {
+        return
+      }
+      setValue(newValue)
     }
-    return this.setNumber(Math.ceil(value))
-  })
 
-  handleBlur = (event) => this.setState(({ value }) => {
-    return this.setNumber(Math.round(value))
-  })
+    const handleDecrement = () => {
+      if (Number.isInteger(value)) {
+        setValue((value) => bound(value - 1))
+      }
+      setValue((value) => bound(Math.floor(value)))
+    }
 
-  render() {
+    const handleIncrement = () => {
+      if (Number.isInteger(value)) {
+        setValue((value) => bound(value + 1))
+      }
+      setValue((value) => bound(Math.ceil(value)))
+    }
+
+    const handleBlur = () => {
+      setValue((value) => bound(Math.round(value)))
+    }
+
     return (
       <div>
         <View
@@ -234,36 +321,35 @@ class Example extends React.Component {
           >
             <Checkbox
               label="Should animate"
-              checked={this.state.shouldAnimate}
+              checked={shouldAnimate}
               onChange={() => {
-                this.setState({ shouldAnimate: !this.state.shouldAnimate })
+                setShouldAnimate((shouldAnimate) => !shouldAnimate)
               }}
               variant="toggle"
             />
 
             <NumberInput
-              renderLabel={`ProgressBar value (${this.MIN}-${this.MAX})`}
+              renderLabel={`ProgressBar value (${MIN}-${MAX})`}
               display="inline-block"
-              onBlur={this.handleBlur}
-              onChange={this.handleChange}
-              onDecrement={this.handleDecrement}
-              onIncrement={this.handleIncrement}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              onDecrement={handleDecrement}
+              onIncrement={handleIncrement}
               showArrows
-              value={this.state.value}
+              value={value}
             />
           </FormFieldGroup>
         </View>
 
         <ProgressBar
           screenReaderLabel="Loading completion"
-          valueNow={this.state.value}
-          valueMax={this.MAX}
-          shouldAnimate={this.state.shouldAnimate}
+          valueNow={value}
+          valueMax={MAX}
+          shouldAnimate={shouldAnimate}
         />
       </div>
     )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
