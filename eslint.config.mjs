@@ -29,6 +29,7 @@ import notice from "eslint-plugin-notice"
 import eslintConfigPrettier from "eslint-config-prettier"
 import vitest from "@vitest/eslint-plugin"
 import globals from 'globals'
+import instructurePlugin from './scripts/eslint/no-relative-imports-plugin.mjs'
 
 const COPYRIGHT_NOTICE = "/*\n" +
   " * The MIT License (MIT)\n" +
@@ -64,7 +65,6 @@ const NODE_PACKAGES = [
   'ui-scripts',
   'ui-webpack-config',
   'command-utils',
-  'eslint-plugin-instructure-ui',
   'instui-cli',
   'babel-plugin-transform-imports',
   'pkg-utils'
@@ -89,6 +89,7 @@ const finalConfig = tseslint.config(
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
+    ...instructurePlugin.configs.recommended,
   {
     name: "instUI-eslint-config",
     linterOptions: {
@@ -100,8 +101,7 @@ const finalConfig = tseslint.config(
     plugins: {
       ...reactPlugin.configs.flat.recommended.plugins,
       //'jsx-a11y', // TODO add this back if it supports ESLint v9
-      notice,
-      //'instructure-ui'
+      notice
     },
     rules: {
       ...reactPlugin.configs.flat.recommended.rules,
