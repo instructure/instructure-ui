@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import SimpleSelect from '../index'
@@ -72,5 +72,65 @@ describe('<SimpleSelect />', () => {
     )
     const input = container.querySelector('input')
     expect(input).toHaveAttribute('role', 'combobox')
+  })
+
+  describe('children', () => {
+    const initialOptions: ExampleOption[] = ['foo', 'bar']
+    const updatedOptions: ExampleOption[] = ['bar', 'baz']
+
+    const getOptions = (options: string[]) =>
+      options.map((opt) => (
+        <SimpleSelect.Option id={opt} key={opt} value={opt}>
+          {opt}
+        </SimpleSelect.Option>
+      ))
+
+    const renderSimpleSelect = (options: ExampleOption[]) => {
+      return render(
+        <SimpleSelect renderLabel="Choose an option">
+          {getOptions(options)}
+        </SimpleSelect>
+      )
+    }
+
+    it('should clear selection if selected option does not exist in updated options', () => {
+      const { rerender } = renderSimpleSelect(initialOptions)
+
+      const input = screen.getByRole('combobox', { name: 'Choose an option' })
+      fireEvent.click(input)
+
+      const fooOption = screen.getByRole('option', { name: 'foo' })
+      fireEvent.click(fooOption)
+
+      expect(input).toHaveValue('foo')
+
+      rerender(
+        <SimpleSelect renderLabel="Choose an option">
+          {getOptions(updatedOptions)}
+        </SimpleSelect>
+      )
+
+      expect(input).toHaveValue('')
+    })
+
+    it('should persist selected option if it exists in updated options', () => {
+      const { rerender } = renderSimpleSelect(initialOptions)
+
+      const input = screen.getByRole('combobox', { name: 'Choose an option' })
+      fireEvent.click(input)
+
+      const barOption = screen.getByRole('option', { name: 'bar' })
+      fireEvent.click(barOption)
+
+      expect(input).toHaveValue('bar')
+
+      rerender(
+        <SimpleSelect renderLabel="Choose an option">
+          {getOptions(updatedOptions)}
+        </SimpleSelect>
+      )
+
+      expect(input).toHaveValue('bar')
+    })
   })
 })
