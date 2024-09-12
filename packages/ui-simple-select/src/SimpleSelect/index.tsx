@@ -130,7 +130,33 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     return getInteraction({ props: this.props })
   }
 
+  hasOptionsChanged(
+    prevChildren: SimpleSelectProps['children'],
+    currentChildren: SimpleSelectProps['children']
+  ) {
+    const getValues = (children: SimpleSelectProps['children']) =>
+      React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          return child.props.value
+        }
+        return null
+      })
+
+    const prevValues = getValues(prevChildren)
+    const currentValues = getValues(currentChildren)
+
+    return JSON.stringify(prevValues) !== JSON.stringify(currentValues)
+  }
+
   componentDidUpdate(prevProps: SimpleSelectProps) {
+    if (this.hasOptionsChanged(prevProps.children, this.props.children)) {
+      const option = this.getOption('value', this.state.inputValue)
+      this.setState({
+        inputValue: option ? option.props.children : undefined,
+        selectedOptionId: option ? option.props.id : ''
+      })
+    }
+
     if (this.props.value !== prevProps.value) {
       let option = this.getOption('value', this.props.value)
       if (typeof this.props.value === 'undefined') {
