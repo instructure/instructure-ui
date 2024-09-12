@@ -45,6 +45,7 @@ const require = createRequire(import.meta.url)
 
 // This needs to be required otherwise TSC will mess up the directory structure
 // in the output directory
+// eslint-disable-next-line @instructure/no-relative-imports
 const rootPackage = require('../../../package.json') // root package.json
 
 const buildDir = './__build__/'

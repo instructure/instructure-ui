@@ -29,22 +29,23 @@ const Package = require('@lerna/package').Package
 
 exports.getPackage = function getPackage(options) {
   const result = readPackage(options)
-
   return new Package(result.packageJson, path.dirname(result.path))
 }
 
 exports.getPackageJSON = function getPackageJSON(options) {
-  const pkg = readPackage(options).packageJson
-
-  return pkg
+  return readPackage(options).packageJson
 }
 
 exports.getPackagePath = function getPackagePath(options) {
   const packageJson = readPackage(options)
-
   return packageJson.path
 }
 
+/**
+ * Returns the closest Node project in the path upward
+ * @param options {readPkgUp.NormalizeOptions}
+ * @returns {readPkgUp.NormalizedReadResult}
+ */
 function readPackage(options) {
   const opts = {
     cwd: process.cwd(),
