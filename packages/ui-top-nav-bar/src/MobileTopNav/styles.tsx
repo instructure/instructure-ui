@@ -23,6 +23,7 @@
  */
 import type { MobileTopNavProps } from './props'
 
+//TODO use theme variables for spacing
 const generateStyles = (props: MobileTopNavProps, theme: any) => {
   const { lightMode } = props
   return {
@@ -36,7 +37,8 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
         color: lightMode
           ? theme.colors.contrasts.grey125125
           : theme.colors?.contrasts?.white1010,
-        width: '100%'
+        width: '100%',
+        zIndex: '1000'
       }
     },
     topBar: {
