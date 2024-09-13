@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
+
+
+### Bug Fixes
+
+* **docs:** ensure page scrolls to anchor on load when linked ([6928c97](https://github.com/instructure/instructure-ui/commit/6928c972bbbed0073c37c93b4434f4505e80e374))
+* **docs:** fix compileMarkdown heading id generation ([ef97c7c](https://github.com/instructure/instructure-ui/commit/ef97c7c034ed712085c69d2a4b575da1da6e2c66))
+
+
+
+
+
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package docs-app

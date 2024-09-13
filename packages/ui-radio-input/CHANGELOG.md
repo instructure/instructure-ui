@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
+
+
+### Bug Fixes
+
+* **ui-checkbox,ui-radio-input:** reduce clickable area of checkbox and radioinput ([77b2a7d](https://github.com/instructure/instructure-ui/commit/77b2a7d18da19f28328486e53a31f7ca5ec37e74))
+
+
+
+
+
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-radio-input
