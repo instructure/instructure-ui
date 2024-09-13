@@ -174,7 +174,7 @@ function getWebEnvConfig(opts) {
     },
     useBuiltIns: 'entry',
     // this version has to match the version in package.json
-    corejs: '3.26.1',
+    corejs: '3.37.1',
     modules: opts.esModules ? false : 'commonjs',
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
     exclude: ['transform-typeof-symbol'],
