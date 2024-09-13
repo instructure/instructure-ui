@@ -804,21 +804,21 @@ class App extends Component<AppProps, AppState> {
               <MobileTopNav.Item
                 leftIcon={<IconUserLine />}
                 rightIcon={<IconArrowOpenDownLine />}
-                onClick
+                onClick={() => alert('Account clicked')}
               >
                 Account
               </MobileTopNav.Item>
               <MobileTopNav.Item
                 leftIcon={<IconAdminLine />}
                 rightIcon={<IconArrowOpenDownLine />}
-                onClick
+                onClick={() => alert('Admin clicked')}
               >
                 Admin
               </MobileTopNav.Item>
               <MobileTopNav.Item
                 leftIcon={<IconDashboardLine />}
                 rightIcon={<IconArrowOpenDownLine />}
-                onClick
+                onClick={() => alert('Dashboard')}
               >
                 Dashboard
               </MobileTopNav.Item>
