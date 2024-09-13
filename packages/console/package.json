@@ -23,13 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.2.2",
-    "@types/babel-plugin-macros": "^3.1.3"
-  },
-  "dependencies": {
-    "@babel/helper-annotate-as-pure": "^7.22.5",
-    "@babel/helper-module-imports": "^7.24.3",
-    "babel-plugin-macros": "^3.1.0"
+    "@instructure/ui-babel-preset": "10.2.2"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

@@ -31,16 +31,6 @@ import {
   debug
 } from './console'
 
-import {
-  error as logError,
-  warn as logWarn,
-  warnDeprecated as logWarnDeprecated,
-  info as logInfo,
-  assert as logAssert,
-  debug as logDebug,
-  log as consoleLog
-} from './macro'
-
 export {
   error,
   warn,
@@ -49,11 +39,12 @@ export {
   info,
   assert,
   debug,
-  logError,
-  logWarn,
-  logWarnDeprecated,
-  logInfo,
-  logDebug,
-  logAssert,
-  consoleLog
+  // kept for backwards compatibility, will be removed later
+  error as logError,
+  warn as logWarn,
+  warnDeprecated as logWarnDeprecated,
+  info as logInfo,
+  debug as logDebug,
+  assert as logAssert,
+  log as consoleLog
 }
