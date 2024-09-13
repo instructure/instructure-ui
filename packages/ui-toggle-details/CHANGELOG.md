@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
+
+
+### Bug Fixes
+
+* **ui-toggle-details:** fix ToggleDetails flickering ([cbab3be](https://github.com/instructure/instructure-ui/commit/cbab3befb43f37f5df8b981f757dd857388502e0))
+
+
+
+
+
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
