@@ -97,6 +97,7 @@ type AppState = {
   changelogData?: DocData
   // the currently shown document
   currentDocData?: DocData
+  lightMode: boolean
 }
 
 type ThemeFunctionsClassic = {
