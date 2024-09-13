@@ -23,7 +23,7 @@
  */
 import type { MobileTopNavProps } from './props'
 
-export const generateStyles = (props: MobileTopNavProps, theme: any) => {
+const generateStyles = (props: MobileTopNavProps, theme: any) => {
   const { lightMode } = props
   return {
     container: (open: boolean) => {
@@ -70,7 +70,7 @@ export const generateStyles = (props: MobileTopNavProps, theme: any) => {
     }
   }
 }
-export const generateItemListStyles = (_props: any, theme: any) => {
+const generateItemListStyles = (_props: any, theme: any) => {
   return {
     divider: {
       height: '0.0625rem',
@@ -79,13 +79,17 @@ export const generateItemListStyles = (_props: any, theme: any) => {
     }
   }
 }
-export const generateItemStyles = (_props: any, _theme: any) => {
+const generateItemStyles = (_props: any, _theme: any) => {
   return {
     container: {
       margin: '16px 0',
-      display: 'flex'
+      display: 'flex',
+      cursor: 'pointer',
+      alignItems: 'flex-end'
     },
     leftIcon: { paddingRight: '8px', fontSize: '18px' },
     rightIcon: { marginLeft: 'auto', paddingRight: '8px', fontSize: '18px' }
   }
 }
+
+export { generateStyles, generateItemListStyles, generateItemStyles }
