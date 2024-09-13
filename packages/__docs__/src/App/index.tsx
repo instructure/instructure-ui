@@ -33,6 +33,7 @@ import {
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
+import { Checkbox } from '@instructure/ui-checkbox'
 import { InstUISettingsProvider, withStyle, jsx } from '@instructure/emotion'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
@@ -55,7 +56,6 @@ import {
   IconUserLine,
   IconXSolid
 } from '@instructure/ui-icons'
-
 import { ContentWrap } from '../ContentWrap'
 import { Document } from '../Document'
 import { Header } from '../Header'
@@ -69,7 +69,6 @@ import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 
 import { fetchVersionData, versionInPath } from '../versionData'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { LoadingScreen } from '../LoadingScreen'
@@ -126,7 +125,8 @@ class App extends Component<AppProps, AppState> {
       layout: 'large',
       docsData: null,
       versionsData: null,
-      iconsData: null
+      iconsData: null,
+      lightMode: true
     }
   }
 
@@ -734,7 +734,6 @@ class App extends Component<AppProps, AppState> {
       return <LoadingScreen />
     }
 
-    const lightMode = false
     const brandSvg = (
       <IconButton
         screenReaderLabel="Canvas Brand"
@@ -770,13 +769,13 @@ class App extends Component<AppProps, AppState> {
             boxSizing: 'border-box'
           }}
         >
-          <MobileTopNav brand={brandSvg} lightMode={lightMode}>
+          <MobileTopNav brand={brandSvg} lightMode={this.state.lightMode}>
             <MobileTopNav.BtnRow>
               <IconButton
                 withBackground={false}
                 withBorder={false}
                 screenReaderLabel="burgir"
-                color={lightMode ? 'secondary' : 'primary-inverse'}
+                color={this.state.lightMode ? 'secondary' : 'primary-inverse'}
               >
                 <IconAnalyticsLine />
               </IconButton>
@@ -784,13 +783,13 @@ class App extends Component<AppProps, AppState> {
                 withBackground={false}
                 withBorder={false}
                 screenReaderLabel="burgir"
-                color={lightMode ? 'secondary' : 'primary-inverse'}
+                color={this.state.lightMode ? 'secondary' : 'primary-inverse'}
               >
                 <IconAlertsLine />
               </IconButton>
             </MobileTopNav.BtnRow>
             <MobileTopNav.BreadCrumb>
-              <Link href="#" isWithinText={false} color="link-inverse">
+              <Link href="#" isWithinText={false} color={this.state.lightMode ? 'link' : 'link-inverse'}>
                 <div
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
@@ -822,8 +821,28 @@ class App extends Component<AppProps, AppState> {
               >
                 Dashboard
               </MobileTopNav.Item>
+              <MobileTopNav.Item
+                rightIcon={<IconArrowOpenDownLine />}
+                onClick={() => alert('Simple option with no left icon')}
+              >
+                Simple option with no left icon
+              </MobileTopNav.Item>
             </MobileTopNav.ItemList>
           </MobileTopNav>
+          <div style={{ marginTop: '600px' }}>
+            <Checkbox
+              label="Light mode"
+              value="small"
+              variant="toggle"
+              size="large"
+              checked={this.state.lightMode}
+              onChange={(e) => {
+                this.setState((prevState) => {
+                  return { ...prevState, lightMode: !prevState.lightMode }
+                })
+              }}
+            />
+          </div>
           <p>
             1 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             Molestias excepturi a blanditiis, aspernatur repellat repellendus
