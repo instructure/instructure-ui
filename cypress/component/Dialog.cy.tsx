@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React, { useState, useRef } from 'react'
-import { Dialog } from '../../packages/ui'
+import { Dialog } from '@instructure/ui'
 import 'cypress-real-events'
 
 import '../support/component'
@@ -96,7 +96,7 @@ describe('<Dialog/>', () => {
 
         cy.get('[data-testid="nested-input-one"]').click().should('have.focus')
 
-        cy.realPress(['Shift', 'Tab'])
+        cy.realPress(['Shift', 'Tab']).wait(100)
         cy.get('[data-testid="nested-input-two"]').should('have.focus')
         cy.wrap(onBlur).should('not.have.been.called')
       })
@@ -114,7 +114,7 @@ describe('<Dialog/>', () => {
 
         cy.get('[data-testid="nested-input-two"]').click().should('have.focus')
 
-        cy.realPress(['Tab'])
+        cy.realPress(['Tab']).wait(100)
         cy.wrap(onBlur).should('have.been.called')
       })
 

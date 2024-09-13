@@ -21,10 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
-import { DrawerLayoutLocator } from './DrawerLayoutLocator'
+import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
 
-export { DrawerContentLocator, DrawerTrayLocator } from './DrawerLayoutLocator'
+describe('<DrawerLayout />', () => {
+  it('should render', () => {
+    const { container } = render(<DrawerLayoutFixture />)
 
-export { DrawerLayoutLocator }
-export default DrawerLayoutLocator
+    const layout = container.querySelector('div[class$="-drawerLayout"]')
+
+    expect(layout).toBeInTheDocument()
+  })
+
+  it('should render a DrawerTray and DrawerContent', async () => {
+    const { container } = render(
+      <DrawerLayoutFixture open={true} layoutWidth="800px" trayWidth="250px" />
+    )
+
+    const tray = screen.getByText('Hello from tray')
+    const contentWrapper = container.querySelector(
+      'div[class$="drawerLayout__content"]'
+    )
+
+    expect(tray).toBeInTheDocument()
+    expect(contentWrapper).toHaveTextContent('Hello from content')
+    expect(contentWrapper).toHaveAttribute('aria-label', 'Test DrawerContent')
+  })
+})

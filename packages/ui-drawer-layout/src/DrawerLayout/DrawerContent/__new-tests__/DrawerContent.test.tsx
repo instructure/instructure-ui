@@ -22,50 +22,49 @@
  * SOFTWARE.
  */
 import React from 'react'
-
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 import { DrawerContent } from '../index'
 
-import { DrawerContentLocator } from '../DrawerContentLocator'
-
-describe('<DrawerContent />', async () => {
+describe('<DrawerContent />', () => {
   it('should render', async () => {
-    await mount(
-      <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
-    )
-    const drawerContent = await DrawerContentLocator.find()
+    render(<DrawerContent label="DrawerContentTest">Hello World</DrawerContent>)
+    const drawerContent = screen.getByLabelText('DrawerContentTest')
 
-    expect(drawerContent).to.exist()
-  })
-
-  it('should not transition on mount, just on update', async () => {
-    const subject = await mount(
-      <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
-    )
-
-    const style = getComputedStyle(subject.getDOMNode())
-    expect(style.transition).to.equal('all')
-
-    subject.setProps({
-      label: 'test'
-    })
-
-    await wait(() => {
-      const style = getComputedStyle(subject.getDOMNode())
-      expect(style.transition).to.not.equal('all')
-    })
+    expect(drawerContent).toBeInTheDocument()
+    expect(drawerContent).toHaveTextContent('Hello World')
   })
 
   it('should call the content ref', async () => {
-    const contentRef = stub()
-    await mount(
+    const contentRef = vi.fn()
+    render(
       <DrawerContent label="DrawerContentTest" contentRef={contentRef}>
         Hello World
       </DrawerContent>
     )
-    const drawerContent = (await DrawerContentLocator.find()).getDOMNode()
+    const drawerContent = screen.getByLabelText('DrawerContentTest')
 
-    expect(contentRef).to.have.been.calledWith(drawerContent)
+    expect(contentRef).toHaveBeenCalledWith(drawerContent)
+  })
+
+  it('should not transition on mount, just on update', async () => {
+    const { rerender } = render(
+      <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
+    )
+    const drawerContent = screen.getByLabelText('DrawerContentTest')
+
+    const styleOnMount = getComputedStyle(drawerContent)
+    expect(styleOnMount.transition).toBe('')
+
+    rerender(<DrawerContent label="test">Hello World</DrawerContent>)
+
+    await waitFor(() => {
+      const drawerContentUpdated = screen.getByLabelText('test')
+      const updatedStyle = getComputedStyle(drawerContentUpdated)
+
+      expect(updatedStyle.transition).not.toBe('')
+    })
   })
 })
