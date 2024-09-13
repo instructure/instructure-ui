@@ -32,7 +32,7 @@ import {
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
-import { InstUISettingsProvider, withStyle, Global } from '@instructure/emotion'
+import { InstUISettingsProvider, withStyle } from '@instructure/emotion'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
@@ -44,8 +44,14 @@ import { Link } from '@instructure/ui-link'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
 import type { QueriesMatching } from '@instructure/ui-responsive'
 import {
-  IconHamburgerSolid,
+  IconAdminLine,
+  IconAlertsLine,
+  IconAnalyticsLine,
+  IconArrowOpenDownLine,
+  IconArrowOpenStartLine,
+  IconDashboardLine,
   IconHeartLine,
+  IconUserLine,
   IconXSolid
 } from '@instructure/ui-icons'
 
@@ -377,6 +383,7 @@ class App extends Component<AppProps, AppState> {
 
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
+
     const themeContent = (
       <View
         as="div"
@@ -792,6 +799,29 @@ class App extends Component<AppProps, AppState> {
               </Link>
             </MobileTopNav.BreadCrumb>
             <MobileTopNav.Title>Courses</MobileTopNav.Title>
+            <MobileTopNav.ItemList>
+              <MobileTopNav.Item
+                leftIcon={<IconUserLine />}
+                rightIcon={<IconArrowOpenDownLine />}
+                onClick
+              >
+                Account
+              </MobileTopNav.Item>
+              <MobileTopNav.Item
+                leftIcon={<IconAdminLine />}
+                rightIcon={<IconArrowOpenDownLine />}
+                onClick
+              >
+                Admin
+              </MobileTopNav.Item>
+              <MobileTopNav.Item
+                leftIcon={<IconDashboardLine />}
+                rightIcon={<IconArrowOpenDownLine />}
+                onClick
+              >
+                Dashboard
+              </MobileTopNav.Item>
+            </MobileTopNav.ItemList>
           </MobileTopNav>
           <p>
             1 Lorem ipsum dolor sit, amet consectetur adipisicing elit.

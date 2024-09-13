@@ -24,13 +24,23 @@
  */
 
 /** @jsx jsx */
-import { Children, Fragment, useState, useEffect } from 'react'
-import type { PropsWithChildren } from 'react'
+import React, {
+  Children,
+  Fragment,
+  PropsWithChildren,
+  useEffect,
+  useState
+} from 'react'
 import { jsx, useTheme } from '@instructure/emotion'
 import type { MobileTopNavProps } from './props'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { IconHamburgerLine, IconXLine } from '@instructure/ui-icons'
+import {
+  generateItemListStyles,
+  generateItemStyles,
+  generateStyles
+} from './styles'
 
 /**
 ---
@@ -57,10 +67,10 @@ const MobileTopNav = ({
   }
 
   return (
-    <div css={styles.container(open)}>
-      <div css={styles.topBar}>
+    <div style={styles.container(open)}>
+      <div style={styles.topBar}>
         {brand}
-        <span css={styles.btnRow}>
+        <span style={styles.btnRow}>
           {!open && getSubComponent('BtnRow')}
           <IconButton
             withBackground={false}
@@ -77,6 +87,7 @@ const MobileTopNav = ({
       <div style={styles.content(open)}>
         {getSubComponent('BreadCrumb')}
         {getSubComponent('Title')}
+        {getSubComponent('ItemList')}
         <p>
           1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
           excepturi a blanditiis, aspernatur repellat repellendus dolores cum
@@ -148,54 +159,6 @@ const MobileTopNav = ({
   )
 }
 
-const generateStyles = (props: MobileTopNavProps, theme: any) => {
-  const { lightMode } = props
-  return {
-    container: (open: boolean) => {
-      return {
-        height: '54px',
-        position: open ? 'fixed' : 'relative',
-        backgroundColor: lightMode
-          ? theme.colors.ui.surfacePageSecondary
-          : theme.colors.ui.surfaceDark,
-        color: lightMode
-          ? theme.colors.contrasts.grey125125
-          : theme.colors?.contrasts?.white1010,
-        width: '100%'
-      }
-    },
-    topBar: {
-      padding: `0 ${theme.spacing.small}`,
-      height: '54px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between'
-    },
-    content: (open: boolean) => {
-      return {
-        padding: `0 ${theme.spacing.small}`,
-        height: open ? '100%' : '0px',
-        top: '54px',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        overflow: open ? 'scroll' : 'hidden',
-        position: 'fixed',
-        backgroundColor: lightMode
-          ? theme.colors.ui.surfacePageSecondary
-          : theme.colors.ui.surfaceDark,
-        color: lightMode
-          ? theme.colors.contrasts.grey125125
-          : theme.colors?.contrasts?.white1010
-      }
-    },
-    btnRow: {
-      display: 'flex',
-      gap: '12px'
-    }
-  }
-}
-
 const BtnRow = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
@@ -203,16 +166,58 @@ const BtnRow = ({ children }: PropsWithChildren) => {
 BtnRow.displayName = 'BtnRow'
 
 const BreadCrumb = ({ children }: PropsWithChildren) => {
-  return <div css={{ margin: '24px 0' }}>{children}</div>
+  return <div style={{ margin: '24px 0' }}>{children}</div>
 }
 
 BreadCrumb.displayName = 'BreadCrumb'
 
 const Title = ({ children }: PropsWithChildren) => {
-  return <div css={{ margin: '32px 0' }}>{children}</div>
+  return <div style={{ margin: '32px 0' }}>{children}</div>
 }
 
 Title.displayName = 'Title'
+
+const ItemList = ({
+  children,
+  styles
+}: PropsWithChildren & { styles: any }) => {
+  return (
+    <Fragment>
+      {Children.map(children, (child, index) => (
+        <Fragment>
+          {child}
+          {index < React.Children.count(children) - 1 && (
+            <div style={styles.divider}></div>
+          )}
+        </Fragment>
+      ))}
+    </Fragment>
+  )
+}
+
+ItemList.displayName = 'ItemList'
+
+const Item = ({
+  children,
+  leftIcon,
+  rightIcon,
+  onClick,
+  styles
+}: PropsWithChildren & {
+  leftIcon: any
+  rightIcon: any
+  onClick: any
+  styles: any
+}) => {
+  return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+    <div style={styles.container} onClick={onClick}>
+      {leftIcon && <div style={styles.leftIcon}>{leftIcon}</div>}
+      {children}
+      {rightIcon && <div style={styles.rightIcon}>{rightIcon}</div>}
+    </div>
+  )
+}
 
 const withStyles =
   <ComponentOwnProps, ComponentStyle>(
@@ -233,6 +238,11 @@ const SC: any = withStyles(generateStyles)(MobileTopNav)
 SC.BtnRow = BtnRow
 SC.BreadCrumb = BreadCrumb
 SC.Title = Title
+SC.ItemList = withStyles(generateItemListStyles)(ItemList)
+// TODO investigate whether displayName should be added to the original component
+SC.ItemList.displayName = 'ItemList'
+SC.Item = withStyles(generateItemStyles)(Item) //withStyles(generateItemStyles)(Item)
+SC.Item.displayName = 'Item'
 
 export { SC as MobileTopNav }
 export default SC
