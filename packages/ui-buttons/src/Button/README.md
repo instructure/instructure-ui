@@ -213,6 +213,90 @@ type: example
 </View>
 ```
 
+### Styling buttons
+
+[Button](#Button) and [IconButton](#IconButton) share the same styling mechanics (they are `BaseButton`s underneath). You need to set the theme based on their `color` and `withBackground` prop:
+
+```js
+---
+type: example
+---
+  class Example extends React.Component {
+    state = {
+      withBackground: true,
+      color : "secondary"
+    }
+    toggleWithBackground = (event) => this.setState({ withBackground: !this.state.withBackground })
+    changeColor = (event,color) =>  {this.setState({color})}
+    render() {
+      const overrides = {
+        borderWidth: "0.3rem",
+        // what to override depends on the 'color' value (by default 'secondary')
+        // if withBackground is true:
+        secondaryColor: '#000000', // icon color
+        secondaryBackground: '#ff00ff',
+        secondaryBorderColor: 'brown',
+
+        secondaryActiveBackground: '#000000', // &:active CSS, e.g. space is pressed, not hovered, see https://developer.mozilla.org/en-US/docs/Web/CSS/:active
+        secondaryActiveBoxShadow: '10px 5px 5px red',
+
+        secondaryHoverBackground: '#00FF00',
+        // if withBackground is false:
+        secondaryGhostColor: '#0000FF',
+        secondaryGhostBackground: 'transparent',
+        secondaryGhostBorderColor: '#FF00FF',
+
+        secondaryGhostActiveBackground: '#FF0000',
+        secondaryGhostActiveBoxShadow: '10px 5px 5px green',
+
+        secondaryGhostHoverBackground: '#00FFFF'
+      }
+      return (
+        <>
+          <FormFieldGroup description="In this example 'secondary' colors are overridden">
+            <Checkbox
+              checked={this.state.withBackground}
+              label="withBackground?"
+              onChange={this.toggleWithBackground}
+            />
+          </FormFieldGroup>
+          <View display="block" margin="small none">
+            <RadioInputGroup
+              name="color"
+              defaultValue="secondary"
+              description="Color:"
+              variant="toggle"
+              size="small"
+              onChange={this.changeColor} >
+              <RadioInput label="Primary" value="primary"/>
+              <RadioInput label="secondary" value="secondary" />
+            </RadioInputGroup>
+          </View>
+          <Flex margin="none none medium" gap="medium">
+            <Flex.Item>
+              <Button withBackground={this.state.withBackground}
+                      color={this.state.color}
+                      themeOverride={overrides}
+              >
+                Button
+              </Button>
+            </Flex.Item>
+            <Flex.Item>
+              <IconButton screenReaderLabel="View user profile"
+                          withBackground={this.state.withBackground}
+                          color={this.state.color}
+                          themeOverride={overrides}>
+                <IconUserLine />
+              </IconButton>
+            </Flex.Item>
+          </Flex>
+        </>
+      )
+    }
+  }
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js

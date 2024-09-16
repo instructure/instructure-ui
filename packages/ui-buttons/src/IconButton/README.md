@@ -72,3 +72,7 @@ type: example
   </View>
 </View>
 ```
+
+### Styling
+
+For an example see [Button](#Button/#Styling%20buttons)
