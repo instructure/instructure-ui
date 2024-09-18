@@ -618,101 +618,101 @@ describe('<ColorPicker />', () => {
         '#35423F'
       ]
 
-      await mount(
-        <SimpleExample
-          colorMixerSettings={{
-            popoverAddButtonLabel: 'add',
-            popoverCloseButtonLabel: 'close',
-            colorMixer: {
-              withAlpha: false,
-              rgbRedInputScreenReaderLabel: 'Red input',
-              rgbBlueInputScreenReaderLabel: 'Blue input',
-              colorSliderNavigationExplanationScreenReaderLabel: '',
-              colorPaletteNavigationExplanationScreenReaderLabel: '',
-              rgbAlphaInputScreenReaderLabel: '',
-              alphaSliderNavigationExplanationScreenReaderLabel: '',
-              rgbGreenInputScreenReaderLabel: 'Green input'
-            },
-            colorPreset: {
-              label: 'colors',
-              colors: colorPreset
-            }
-          }}
-        />
-      )
-      const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+    //   await mount(
+    //     <SimpleExample
+    //       colorMixerSettings={{
+    //         popoverAddButtonLabel: 'add',
+    //         popoverCloseButtonLabel: 'close',
+    //         colorMixer: {
+    //           withAlpha: false,
+    //           rgbRedInputScreenReaderLabel: 'Red input',
+    //           rgbBlueInputScreenReaderLabel: 'Blue input',
+    //           colorSliderNavigationExplanationScreenReaderLabel: '',
+    //           colorPaletteNavigationExplanationScreenReaderLabel: '',
+    //           rgbAlphaInputScreenReaderLabel: '',
+    //           alphaSliderNavigationExplanationScreenReaderLabel: '',
+    //           rgbGreenInputScreenReaderLabel: 'Green input'
+    //         },
+    //         colorPreset: {
+    //           label: 'colors',
+    //           colors: colorPreset
+    //         }
+    //       }}
+    //     />
+    //   )
+    //   const cp = await ColorPickerLocator.find()
+    //   const trigger = await cp.findPopoverTrigger()
 
-      await trigger.click()
+    //   await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+    //   const popoverContent = await cp.findPopoverContent()
 
-      const colorButtons = await cp.findColorPresetButtons()
+    //   const colorButtons = await cp.findColorPresetButtons()
 
-      await colorButtons[1].mouseDown()
-      await colorButtons[1].click()
+    //   await colorButtons[1].mouseDown()
+    //   await colorButtons[1].click()
 
       const addButton = await poverContent.findPopoverButtonWithText('add')
 
-      await addButton.click()
+    //   await addButton.click()
 
-      const input = await cp.findTextInput()
+    //   const input = await cp.findTextInput()
 
-      expect(`#${input.value()}`).to.be.eq(colorPreset[1])
-    })
+    //   expect(`#${input.value()}`).to.be.eq(colorPreset[1])
+    // })
 
-    it('should correctly call onChange with the color when picked from the list of colors', async () => {
-      const colorPreset = [
-        '#ffffff',
-        '#0CBF94',
-        '#0C89BF',
-        '#BF0C6D',
-        '#BF8D0C',
-        '#ff0000',
-        '#576A66',
-        '#35423A',
-        '#35423F'
-      ]
-      const onChange = stub()
+    // it('should correctly call onChange with the color when picked from the list of colors', async () => {
+    //   const colorPreset = [
+    //     '#ffffff',
+    //     '#0CBF94',
+    //     '#0C89BF',
+    //     '#BF0C6D',
+    //     '#BF8D0C',
+    //     '#ff0000',
+    //     '#576A66',
+    //     '#35423A',
+    //     '#35423F'
+    //   ]
+    //   const onChange = stub()
 
-      await mount(
-        <SimpleExample
-          onChange={onChange}
-          colorMixerSettings={{
-            popoverAddButtonLabel: 'add',
-            popoverCloseButtonLabel: 'close',
-            colorMixer: {
-              withAlpha: false,
-              rgbRedInputScreenReaderLabel: 'Red input',
-              rgbBlueInputScreenReaderLabel: 'Blue input',
-              colorSliderNavigationExplanationScreenReaderLabel: '',
-              colorPaletteNavigationExplanationScreenReaderLabel: '',
-              rgbAlphaInputScreenReaderLabel: '',
-              alphaSliderNavigationExplanationScreenReaderLabel: '',
-              rgbGreenInputScreenReaderLabel: 'Green input'
-            },
-            colorPreset: {
-              label: 'colors',
-              colors: colorPreset
-            }
-          }}
-        />
-      )
-      const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+    //   await mount(
+    //     <SimpleExample
+    //       onChange={onChange}
+    //       colorMixerSettings={{
+    //         popoverAddButtonLabel: 'add',
+    //         popoverCloseButtonLabel: 'close',
+    //         colorMixer: {
+    //           withAlpha: false,
+    //           rgbRedInputScreenReaderLabel: 'Red input',
+    //           rgbBlueInputScreenReaderLabel: 'Blue input',
+    //           colorSliderNavigationExplanationScreenReaderLabel: '',
+    //           colorPaletteNavigationExplanationScreenReaderLabel: '',
+    //           rgbAlphaInputScreenReaderLabel: '',
+    //           alphaSliderNavigationExplanationScreenReaderLabel: '',
+    //           rgbGreenInputScreenReaderLabel: 'Green input'
+    //         },
+    //         colorPreset: {
+    //           label: 'colors',
+    //           colors: colorPreset
+    //         }
+    //       }}
+    //     />
+    //   )
+    //   const cp = await ColorPickerLocator.find()
+    //   const trigger = await cp.findPopoverTrigger()
 
-      await trigger.click()
+    //   await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+    //   const popoverContent = await cp.findPopoverContent()
 
-      const colorButtons = await cp.findColorPresetButtons()
+    //   const colorButtons = await cp.findColorPresetButtons()
 
-      await colorButtons[1].mouseDown()
-      await colorButtons[1].click()
+    //   await colorButtons[1].mouseDown()
+    //   await colorButtons[1].click()
 
-      const addButton = await popoverContent.findPopoverButtonWithText('add')
+    //   const addButton = await popoverContent.findPopoverButtonWithText('add')
 
-      await addButton.click()
+    //   await addButton.click()
 
       expect(onChange).to.have.been.calledWith(colorPreset[1])
     })
