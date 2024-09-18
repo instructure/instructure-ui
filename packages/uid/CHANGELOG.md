@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.3](https://github.com/instructure/instructure-ui/compare/v8.56.2...v8.56.3) (2024-09-18)
+
+**Note:** Version bump only for package @instructure/uid
+
+
+
+
+
 ## [8.56.2](https://github.com/instructure/instructure-ui/compare/v8.56.1...v8.56.2) (2024-08-06)
 
 **Note:** Version bump only for package @instructure/uid
