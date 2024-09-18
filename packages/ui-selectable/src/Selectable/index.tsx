@@ -49,6 +49,11 @@ class Selectable extends Component<SelectableProps> {
     isShowingOptions: false
   }
 
+  state = {
+    onFocus: false,
+    onSelect: false
+  }
+
   _id = this.props.id || this.props.deterministicId!()
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
@@ -154,6 +159,28 @@ class Selectable extends Component<SelectableProps> {
     }
   }
 
+  handleFocus = () => {
+    this.setState({
+      onFocus: true
+    })
+  }
+
+  handleSelect = () => {
+    this.setState({
+      onSelect: true
+    })
+  }
+
+  getMessage = () => {
+    const { onFocus, onSelect } = this.state
+    if (onFocus && !onSelect) {
+      /* eslint-disable no-console */
+      console.log('success') // Show success if only onFocus is triggered
+    }
+    /* eslint-disable no-console */
+    console.log('no success')
+  }
+
   render() {
     const {
       isShowingOptions,
@@ -213,12 +240,13 @@ class Selectable extends Component<SelectableProps> {
           }
         },
 
-        getInputProps: ({ readOnly, ...rest } = {}) => {
+        getInputProps: ({ readOnly, onFocus, ...rest } = {}) => {
           return {
             role: 'combobox',
             'aria-autocomplete': readOnly ? 'none' : 'both',
             autoComplete: 'off',
             readOnly,
+            onFocus: () => this.getMessage(),
             ...rest
           }
         },
