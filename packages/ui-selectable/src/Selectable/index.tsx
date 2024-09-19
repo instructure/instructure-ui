@@ -200,7 +200,6 @@ class Selectable extends Component<SelectableProps> {
             )!,
             'aria-haspopup': 'listbox',
             'aria-expanded': isShowingOptions,
-            'aria-owns': isShowingOptions ? this._listId : undefined,
             'aria-controls': isShowingOptions ? this._listId : undefined,
             'aria-describedby': this._descriptionId,
             'aria-activedescendant': isShowingOptions

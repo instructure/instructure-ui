@@ -802,14 +802,12 @@ describe('<Selectable />', async () => {
 
       expect(input.getAttribute('aria-expanded')).to.equal('false')
       expect(input.getAttribute('aria-controls')).to.not.exist()
-      expect(input.getAttribute('aria-owns')).to.not.exist()
 
       await subject.setProps({ isShowingOptions: true })
       expect(input.getAttribute('aria-expanded')).to.equal('true')
       expect(input.getAttribute('aria-controls')).to.equal(
         list.getAttribute('id')
       )
-      expect(input.getAttribute('aria-owns')).to.equal(list.getAttribute('id'))
     })
 
     it('should set appropriate props based on highlightedOptionId', async () => {
