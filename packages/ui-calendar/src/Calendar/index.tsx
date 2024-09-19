@@ -510,7 +510,14 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         <Calendar.Day
           key={dateStr}
           date={dateStr}
-          isSelected={selectedDate ? date.isSame(selectedDate, 'day') : false}
+          isSelected={
+            selectedDate
+              ? date.isSame(
+                  DateTime.parse(selectedDate, this.locale(), this.timezone()),
+                  'day'
+                )
+              : false
+          }
           isToday={date.isSame(today, 'day')}
           isOutsideMonth={!date.isSame(visibleMonth, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
