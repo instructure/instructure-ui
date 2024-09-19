@@ -430,8 +430,21 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     const currDate = DateTime.getFirstDayOfWeek(renderedDate.startOf('month'))
     const arr: Moment[] = []
     for (let i = 0; i < Calendar.DAY_COUNT; i++) {
-      arr.push(currDate.clone())
-      currDate.add({ days: 1 })
+      // This workaround is needed because moment's `.add({days: 1})` function has a bug that happens when the date added lands perfectly onto the DST cutoff,
+      // in these cases adding 1 day results in 23 hours added instead,
+      // so `moment.tz('2024-09-07T00:00:00', 'America/Santiago').add({days: 1})` results
+      // in "Sat Sep 07 2024 23:00:00 GMT-0400" instead of "Sun Sep 08 2024 00:00:00 GMT-0400".
+      // which would cause duplicate dates in the calendar.
+      // More info on the bug: https://github.com/moment/moment/issues/4743
+      // Please note that this causes one hour of time difference in the affected timezones/dates and to
+      // fully solve this bug we need to change to something like luxon which handles this properly
+      if (currDate.clone().format('HH') === '23') {
+        arr.push(currDate.clone().add({hours: 1}))
+      } else {
+        arr.push(currDate.clone())
+      }
+
+      currDate.add({days: 1})
     }
     return arr.map((date) => {
       const dateStr = date.toISOString()

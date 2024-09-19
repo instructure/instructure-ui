@@ -29,7 +29,7 @@ import moment, { Moment } from 'moment-timezone'
  * category: utilities/i18n
  * ---
  * @deprecated
- * #### DEPRECATION WARNING: Will be removed in v9, which wil include a
+ * #### DEPRECATION WARNING: Will be removed in a future version, which will include a
  * time library agnostic API.
  * A wrapper for [moment](https://momentjs.com/) utils.
  * @module DateTime
