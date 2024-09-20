@@ -29,7 +29,9 @@ import {
   createContext,
   LegacyRef,
   ReactElement,
-  SyntheticEvent
+  SyntheticEvent,
+  useEffect,
+  useState
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
@@ -92,6 +94,30 @@ export const AppContext = createContext<AppContextType>({
   themeKey: '',
   library: undefined
 })
+
+const WrapperComponent = (props) => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+  const SmallScreen = () => <h1>Small screen</h1>
+  const BigScreen = () => <h1>Big screen</h1>
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 768)
+    }
+
+    // Check on component mount
+    handleResize()
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize)
+
+    // Cleanup listener on component unmount
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return <>{isSmallScreen ? <SmallScreen /> : <BigScreen />}</>
+}
 
 @withStyle(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
@@ -769,6 +795,7 @@ class App extends Component<AppProps, AppState> {
             boxSizing: 'border-box'
           }}
         >
+          <WrapperComponent />
           <MobileTopNav brand={brandSvg} lightMode={this.state.lightMode}>
             <MobileTopNav.BtnRow>
               <IconButton
@@ -789,7 +816,11 @@ class App extends Component<AppProps, AppState> {
               </IconButton>
             </MobileTopNav.BtnRow>
             <MobileTopNav.BreadCrumb>
-              <Link href="#" isWithinText={false} color={this.state.lightMode ? 'link' : 'link-inverse'}>
+              <Link
+                href="#"
+                isWithinText={false}
+                color={this.state.lightMode ? 'link' : 'link-inverse'}
+              >
                 <div
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
