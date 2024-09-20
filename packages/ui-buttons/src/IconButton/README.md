@@ -3,6 +3,7 @@ describes: IconButton
 ---
 
 An IconButton can be used when the Button only renders an Icon and does not have other visual elements or text content.
+It is not recommended to set the size of an icon inside an IconButton. Only use the `size` property of the IconButton.
 
 ```js
 ---
