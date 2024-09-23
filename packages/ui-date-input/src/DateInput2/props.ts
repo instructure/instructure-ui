@@ -23,14 +23,18 @@
  */
 
 import PropTypes from 'prop-types'
-import type { SyntheticEvent } from 'react'
+import type { SyntheticEvent, InputHTMLAttributes } from 'react'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { Renderable, PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  Renderable,
+  PropValidators
+} from '@instructure/shared-types'
 
-type DateInput2Props = {
+type DateInput2OwnProps = {
   /**
    * Specifies the input label.
    */
@@ -43,24 +47,27 @@ type DateInput2Props = {
   /**
    * Specifies the input value.
    */
-  value?: string // TODO: controllable(PropTypes.string)
+  value?: string
   /**
-   * Specifies the input size.
-   */
-  size?: 'small' | 'medium' | 'large'
-  /**
-   * Html placeholder text to display when the input has no value. This should
-   * be hint text, not a label replacement.
+   * Placeholder text for the input field. If it's left undefined it will display a hint for the date format (like `DD/MM/YYYY`).
    */
   placeholder?: string
   /**
    * Callback fired when the input changes.
    */
-  onChange?: (event: React.SyntheticEvent, value: string) => void
+  onChange?: (
+    event: React.SyntheticEvent,
+    inputValue: string,
+    utcDateString: string
+  ) => void
   /**
    * Callback executed when the input fires a blur event.
    */
-  onBlur?: (event: React.SyntheticEvent) => void
+  onBlur?: (
+    event: React.SyntheticEvent,
+    value: string,
+    utcDateString: string
+  ) => void
   /**
    * Specifies if interaction with the input is enabled, disabled, or readonly.
    * When "disabled", the input changes visibly to indicate that it cannot
@@ -91,24 +98,6 @@ type DateInput2Props = {
    */
   messages?: FormMessage[]
   /**
-   * Callback fired requesting the calendar be shown.
-   */
-  onRequestShowCalendar?: (event: SyntheticEvent) => void
-  /**
-   * Callback fired requesting the calendar be hidden.
-   */
-  onRequestHideCalendar?: (event: SyntheticEvent) => void
-  /**
-   * Callback fired when the input is blurred. Feedback should be provided
-   * to the user when this function is called if the selected date or input
-   * value is invalid. The component has an internal check whether the date can
-   * be parsed to a valid date.
-   */
-  onRequestValidateDate?: (
-    value?: string,
-    internalValidationPassed?: boolean
-  ) => void | FormMessage[]
-  /**
    * The message shown to the user when the date is invalid. If this prop is not set, validation is bypassed.
    * If it's set to an empty string, validation happens and the input border changes to red if validation hasn't passed.
    **/
@@ -135,7 +124,7 @@ type DateInput2Props = {
    * This property can also be set via a context property and if both are set
    * then the component property takes precedence over the context property.
    *
-   * The web browser's timezone will be used if no value is set via a component
+   * The system timezone will be used if no value is set via a component
    * property or a context property.
    **/
   timezone?: string
@@ -157,15 +146,39 @@ type DateInput2Props = {
     startYear: number
     endYear: number
   }
+  /**
+   * By default the date format is determined by the locale but can be changed via this prop to an alternate locale (passing it in as a string) or a custom parser and formatter (both as functions)
+   */
+  dateFormat?:
+    | {
+        parser: (input: string) => Date | null
+        formatter: (date: Date) => string
+      }
+    | string
+
+  /**
+   * Callback executed when the input fires a blur event or a date is selected from the picker.
+   */
+  onRequestValidateDate?: (
+    event: React.SyntheticEvent,
+    value: string,
+    utcDateString: string
+  ) => void
+  // margin?: Spacing // TODO enable this prop
 }
 
-type PropKeys = keyof DateInput2Props
+type PropKeys = keyof DateInput2OwnProps
+
+type DateInput2Props = DateInput2OwnProps &
+  OtherHTMLAttributes<
+    DateInput2OwnProps,
+    InputHTMLAttributes<DateInput2OwnProps & Element>
+  >
 
 const propTypes: PropValidators<PropKeys> = {
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   screenReaderLabels: PropTypes.object.isRequired,
   value: controllable(PropTypes.string),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -174,16 +187,15 @@ const propTypes: PropValidators<PropKeys> = {
   isInline: PropTypes.bool,
   width: PropTypes.string,
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  onRequestShowCalendar: PropTypes.func,
-  onRequestHideCalendar: PropTypes.func,
-  onRequestValidateDate: PropTypes.func,
   invalidDateErrorMessage: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string
   ]),
   locale: PropTypes.string,
   timezone: PropTypes.string,
-  withYearPicker: PropTypes.object
+  withYearPicker: PropTypes.object,
+  dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  onRequestValidateDate: PropTypes.func
 }
 
 export type { DateInput2Props }

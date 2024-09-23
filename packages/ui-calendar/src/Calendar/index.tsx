@@ -145,22 +145,34 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   }
 
   get hasPrevMonth() {
+    // this is needed for locales that doesn't use the latin script for numbers e.g.: arabic
+    const yearNumber = Number(
+      this.state.visibleMonth
+        .clone()
+        .locale('en')
+        .subtract({ months: 1 })
+        .format('YYYY')
+    )
     return (
       !this.props.withYearPicker ||
       (this.props.withYearPicker &&
-        Number(
-          this.state.visibleMonth.clone().subtract({ months: 1 }).format('YYYY')
-        ) >= this.props.withYearPicker.startYear)
+        yearNumber >= this.props.withYearPicker.startYear)
     )
   }
 
   get hasNextMonth() {
+    // this is needed for locales that doesn't use the latin script for numbers e.g.: arabic
+    const yearNumber = Number(
+      this.state.visibleMonth
+        .clone()
+        .locale('en')
+        .add({ months: 1 })
+        .format('YYYY')
+    )
     return (
       !this.props.withYearPicker ||
       (this.props.withYearPicker &&
-        Number(
-          this.state.visibleMonth.clone().add({ months: 1 }).format('YYYY')
-        ) <= this.props.withYearPicker.endYear)
+        yearNumber <= this.props.withYearPicker.endYear)
     )
   }
 
@@ -227,16 +239,21 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   handleYearChange = (
     e: React.SyntheticEvent<Element, Event>,
-    year: number
+    year: string
   ) => {
     const { withYearPicker } = this.props
     const { visibleMonth } = this.state
+    const yearNumber = Number(
+      DateTime.parse(year, this.locale(), this.timezone())
+        .locale('en')
+        .format('YYYY')
+    )
     const newDate = visibleMonth.clone()
     if (withYearPicker?.onRequestYearChange) {
-      withYearPicker.onRequestYearChange(e, year)
+      withYearPicker.onRequestYearChange(e, yearNumber)
       return
     }
-    newDate.year(year)
+    newDate.year(yearNumber)
     this.setState({ visibleMonth: newDate })
   }
 
@@ -261,12 +278,19 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       ...(prevButton || nextButton ? [styles?.navigationWithButtons] : [])
     ]
 
-    const yearList: number[] = []
+    const yearList: string[] = []
 
     if (withYearPicker) {
       const { startYear, endYear } = withYearPicker
       for (let year = endYear; year >= startYear!; year--) {
-        yearList.push(year)
+        // add the years to the list with the correct locale
+        yearList.push(
+          DateTime.parse(
+            year.toString(),
+            this.locale(),
+            this.timezone()
+          ).format('YYYY')
+        )
       }
     }
 
@@ -294,8 +318,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             <SimpleSelect
               width="90px"
               renderLabel=""
+              placeholder="--"
               assistiveText={withYearPicker.screenReaderLabel}
-              value={Number(visibleMonth.format('YYYY'))}
+              value={visibleMonth.format('YYYY')}
               onChange={(
                 e: React.SyntheticEvent<Element, Event>,
                 {
@@ -304,7 +329,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                   value?: string | number | undefined
                   id?: string | undefined
                 }
-              ) => this.handleYearChange(e, Number(value))}
+              ) => this.handleYearChange(e, `${value}`)}
             >
               {yearList.map((year) => (
                 <SimpleSelect.Option key={year} id={`opt-${year}`} value={year}>
@@ -441,7 +466,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     return DateTime.browserTimeZone()
   }
 
-  // date is returned es a ISO string, like 2021-09-14T22:00:00.000Z
+  // date is returned as an ISO string, like 2021-09-14T22:00:00.000Z
   handleDayClick = (event: MouseEvent<any>, { date }: { date: string }) => {
     if (this.props.onDateSelected) {
       const parsedDate = DateTime.parse(date, this.locale(), this.timezone())
