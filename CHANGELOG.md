@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.7.0](https://github.com/instructure/instructure-ui/compare/v9.6.0...v9.7.0) (2024-09-23)
+
+
+### Bug Fixes
+
+* **ui-calendar:** fix code to remove unnecessary warnings ([d139bd4](https://github.com/instructure/instructure-ui/commit/d139bd4e6f156744d5bd4f2fb6e7acacf58804d6))
+* **ui-selectable:** fix Select options not being selectable on iOS Safari with VoiceOver on ([7f04bb4](https://github.com/instructure/instructure-ui/commit/7f04bb47f952e37f95533db00f7eac6d1cba82f0))
+* **ui-toggle-details:** fix ToggleDetails flickering ([4c55bc9](https://github.com/instructure/instructure-ui/commit/4c55bc9cf751944cae4fceda983ea060f9398c54))
+
+
+### Features
+
+* **ui-date-input:** improve DateInput2 api, extend docs ([f369604](https://github.com/instructure/instructure-ui/commit/f3696040d59f9baf9b9a27070e6fbc3d458e4495))
+
+
+
+
+
 # [9.6.0](https://github.com/instructure/instructure-ui/compare/v9.5.2...v9.6.0) (2024-08-14)
 
 
