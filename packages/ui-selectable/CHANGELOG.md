@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.7.0](https://github.com/instructure/instructure-ui/compare/v9.6.0...v9.7.0) (2024-09-23)
+
+
+### Bug Fixes
+
+* **ui-selectable:** fix Select options not being selectable on iOS Safari with VoiceOver on ([7f04bb4](https://github.com/instructure/instructure-ui/commit/7f04bb47f952e37f95533db00f7eac6d1cba82f0))
+
+
+
+
+
 # [9.6.0](https://github.com/instructure/instructure-ui/compare/v9.5.2...v9.6.0) (2024-08-14)
 
 **Note:** Version bump only for package @instructure/ui-selectable

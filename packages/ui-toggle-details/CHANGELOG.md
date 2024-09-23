@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.7.0](https://github.com/instructure/instructure-ui/compare/v9.6.0...v9.7.0) (2024-09-23)
+
+
+### Bug Fixes
+
+* **ui-toggle-details:** fix ToggleDetails flickering ([4c55bc9](https://github.com/instructure/instructure-ui/commit/4c55bc9cf751944cae4fceda983ea060f9398c54))
+
+
+
+
+
 # [9.6.0](https://github.com/instructure/instructure-ui/compare/v9.5.2...v9.6.0) (2024-08-14)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details
