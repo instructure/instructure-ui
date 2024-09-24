@@ -12,6 +12,8 @@ Instructure UI is an open source UI framework and design system for React. Its c
 
 ## Contributing
 
+hehe
+
 Before contributing please read our [code of conduct](https://instructure.design/#CODE_OF_CONDUCT) and read the [contribution guidelines](https://instructure.design/#contributing).
 
 ## React Support
