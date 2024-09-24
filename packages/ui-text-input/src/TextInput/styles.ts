@@ -199,6 +199,8 @@ const generateStyle = (
       ...(!shouldNotWrap && { flexWrap: 'wrap' })
     },
     beforeElement: {
+      display: 'inline-flex',
+      alignItems: 'center',
       label: 'textInput__beforeElement',
       ...flexItemBase,
       paddingInlineStart: componentTheme.padding,
