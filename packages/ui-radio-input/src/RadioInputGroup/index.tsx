@@ -161,6 +161,7 @@ class RadioInputGroup extends Component<
         startAt={variant === 'toggle' ? 'small' : undefined}
         messagesId={this._messagesId}
         elementRef={this.handleRef}
+        role="radiogroup"
       >
         {this.renderChildren()}
       </FormFieldGroup>
