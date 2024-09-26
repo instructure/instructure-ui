@@ -1,19 +1,41 @@
-name: Deploy docs from master commit
-on:
-  push:
-    branches:
-      - master
+name: Deploy docs to gh-pages
+on: workflow_dispatch
 jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run bootstrap
+
+      # Conditional build depending on branch
+      - name: Set build directory based on branch
+        id: set-build-dir
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            echo "::set-output name=build_dir::./packages/__docs__/__build__"
+            echo "::set-output name=deploy_dir::./"
+          elif [ "${{ github.ref }}" == "refs/heads/v7_maintenance" ]; then
+            echo "::set-output name=build_dir::./packages/__docs__/__build__"
+            echo "::set-output name=deploy_dir::v7"
+          elif [ "${{ github.ref }}" == "refs/heads/v8_maintenance" ]; then
+            echo "::set-output name=build_dir::./packages/__docs__/__build__"
+            echo "::set-output name=deploy_dir::v8"
+          elif [ "${{ github.ref }}" == "refs/heads/v9_maintenance" ]; then
+            echo "::set-output name=build_dir::./packages/__docs__/__build__"
+            echo "::set-output name=deploy_dir::v9"
+          elif [ "${{ github.ref }}" == "refs/heads/gh_pages_d" ]; then
+            echo "::set-output name=build_dir::./packages/__docs__/__build__"
+            echo "::set-output name=deploy_dir::v9"
+          fi
       - name: Build docs-app
         run: npm run build:docs
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - name: Copy redirects config file to the __build__ directory.
+        run: cp ./packages/__docs__/_redirects ./packages/__docs__/__build__
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./packages/__docs__/__build__
+          folder: ${{ steps.set-build-dir.outputs.build_dir }}
           branch: gh-pages
+          target-folder: ${{ steps.set-build-dir.outputs.deploy_dir }}
           clean-exclude: pr-preview
           force: false

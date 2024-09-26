@@ -33,17 +33,14 @@
  * @returns {Promise<null|object>}
  */
 const fetchVersionData = async (signal) => {
-  // eslint-disable-next-line compat/compat
   const isLocalHost = window.location.hostname === 'localhost'
 
   if (!isLocalHost) {
-    // eslint-disable-next-line compat/compat
-    const result = await fetch(`${window.location.origin}/versions.json`, {
-      signal
-    })
-    const versionsData = await result.json()
-
-    return versionsData
+    let input = window.location.hostname.includes('github.io')
+      ? `${window.location.origin}/instructure-ui/versions.json`
+      : `${window.location.origin}/versions.json`
+    const result = await fetch(input, { signal })
+    return await result.json()
   }
 
   return null
