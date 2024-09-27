@@ -341,6 +341,8 @@ class DateInput extends Component<DateInputProps, DateInputState> {
     const noChildrenProps = this.props.children
       ? {}
       : {
+          timezone: this.timezone(),
+          locale: this.locale(),
           disabledDates,
           currentDate,
           selectedDate: isValidDate ? value : undefined,

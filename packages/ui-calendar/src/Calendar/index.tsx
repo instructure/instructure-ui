@@ -342,7 +342,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   locale(): string {
     if (this.props.locale) {
       return this.props.locale
-    } else if (this.context && this.context.locale) {
+    } else if (this?.context?.locale) {
       return this.context.locale
     }
     return Locale.browserLocale()

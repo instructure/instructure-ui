@@ -842,5 +842,31 @@ describe('<DateInput />', () => {
         expect(calendarDays).toHaveLength(42)
       })
     })
+    it('should change weekdays according to locale', async () => {
+      const onChange = jest.fn()
+      render(
+        <DateInput
+          renderLabel="Choose date"
+          assistiveText="Type a date or use arrow keys to navigate date picker."
+          width="20rem"
+          isInline
+          value={'2023-11-23'}
+          onChange={onChange}
+          currentDate="2023-12-23"
+          disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+          disabledDateErrorMessage="disabled date"
+          invalidDateErrorMessage="invalid date"
+          locale="fr"
+        ></DateInput>
+      )
+      const dateInput = screen.getByLabelText('Choose date')
+
+      fireEvent.click(dateInput)
+
+      const frenchMonday = screen.getByText('lu')
+      await waitFor(() => {
+        expect(typeof frenchMonday).toBe('object')
+      })
+    })
   })
 })
