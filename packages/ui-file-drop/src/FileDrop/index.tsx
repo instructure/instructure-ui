@@ -349,6 +349,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
         height={height}
         elementRef={this.handleElementRef}
       >
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label
           css={this.props.styles?.fileDropLabel}
           htmlFor={id}

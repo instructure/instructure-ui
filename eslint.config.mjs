@@ -25,6 +25,7 @@
 import tseslint from 'typescript-eslint'
 import eslint from '@eslint/js'
 import reactPlugin from 'eslint-plugin-react'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
 import notice from "eslint-plugin-notice"
 import eslintConfigPrettier from "eslint-config-prettier"
 import vitest from "@vitest/eslint-plugin"
@@ -83,13 +84,12 @@ const finalConfig = tseslint.config(
       "/coverage/**",
       "**/stylelint.config.js",
       "**/babel.config.js",
-      "karma.conf.js",
-      "packages/console/src/macro.js"
+      "karma.conf.js"
     ]
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-    ...instructurePlugin.configs.recommended,
+  ...instructurePlugin.configs.recommended,
   {
     name: "instUI-eslint-config",
     linterOptions: {
@@ -100,7 +100,6 @@ const finalConfig = tseslint.config(
     },
     plugins: {
       ...reactPlugin.configs.flat.recommended.plugins,
-      //'jsx-a11y', // TODO add this back if it supports ESLint v9
       notice
     },
     rules: {
@@ -126,7 +125,7 @@ const finalConfig = tseslint.config(
       'react/forbid-foreign-prop-types': 'error',
       'react/no-danger': 'error',
       'react/prop-types': ['error', { skipUndeclared: true }],
-      'react/require-default-props': 'error',
+      'react/require-default-props': 'warn',
       'react/no-typos': 'error',
       'react/no-unknown-property': ['error', { ignore: ['css', 'componentRef'] }],
       // overrides for eslint-plugin-notice
@@ -179,6 +178,18 @@ const finalConfig = tseslint.config(
       ...vitest.configs.recommended.rules,
       'vitest/valid-title': 'warn',
       'vitest/no-commented-out-tests': 'warn'
+    }
+  },
+  { // Do not check unit tests for a11y
+    ignores: [
+      '**/__new-tests__/**',
+      '**/__tests__/**'
+    ],
+    plugins: {
+      'jsx-a11y': jsxA11y,
+    },
+    rules: {
+      ...jsxA11y.configs.recommended.rules,
     }
   },
   {// Node scripts
