@@ -23,3 +23,19 @@
  */
 
 export { locator } from './utils/locator'
+
+export type {
+  QueriesHelpersEventsType,
+  QueryTypes,
+  HelperTypes,
+  CutFirstArg,
+  EventMapTypes,
+  ObjWithCutFirstArg,
+  QueryArguments,
+  QueryFunction,
+  SelectorOptions,
+  FireEvent,
+  FireEventMethod,
+  FireEventInit,
+  AxeCheckOptions
+} from '@instructure/ui-test-queries'

@@ -10,20 +10,17 @@
   },
   "homepage": "https://instructure.design",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "prestart": "npm run bootstrap",
-    "start": "npm run start --workspace=docs-app",
-    "start:watch": "npm run start:watch --workspace=docs-app",
-    "dev": "npm run start:watch",
+    "prestart": "pnpm run bootstrap",
+    "start": "pnpm --filter=docs-app run start",
+    "start:watch": "pnpm --filter=docs-app run start:watch ",
+    "dev": "pnpm run start:watch",
     "test": "ui-scripts test --randomize",
     "cy:component": "cypress run --component",
-    "test:vitest": "vitest --watch=false && npm run test:vitest --workspace=@instructure/ui-codemods",
+    "test:vitest": "vitest --watch=false && pnpm --filter=@instructure/ui-codemods run test:vitest",
     "test:vitest-watch": "vitest",
     "lint": "lerna run lint --stream",
-    "lint:changes": "npm run lint -- --since HEAD^",
+    "lint:changes": "pnpm run lint -- --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
     "lint:commit": "commitlint --from=HEAD^1",
     "lint:staged": "lint-staged",
@@ -35,17 +32,17 @@
     "build:docs": "lerna run bundle --stream --scope docs-app",
     "build:tokens": "ui-scripts generate-all-tokens",
     "build:types": "tsc -b tsconfig.references.json",
-    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && npm run build:types --verbose",
+    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && pnpm run build:types --verbose",
     "clean": "node scripts/clean.js",
     "clean-node": "node scripts/clean.js --nuke_node",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts bump",
     "release": "ui-scripts publish",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
-    "prestart:examples": "npm run bootstrap",
+    "prestart:examples": "pnpm run bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "husky:pre-commit": "npm run update:package:list && npm run commit:package:list && npm run lint:staged && npm run ts:check:references",
-    "husky:pre-push": "npm run lint:commit",
+    "husky:pre-commit": "pnpm run update:package:list && pnpm run commit:package:list && pnpm run lint:staged && pnpm run ts:check:references",
+    "husky:pre-push": "pnpm run lint:commit",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "postinstall": "husky",
     "ts:check": "lerna run ts:check --stream",
@@ -55,8 +52,7 @@
   "resolutions": {
     "react": "^18",
     "react-dom": "^18",
-    "@types/react": "^18",
-    "@storybook/react/webpack": "^5"
+    "@types/react": "^18"
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "10.2.2",
@@ -131,5 +127,6 @@
   },
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
-  ]
+  ],
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
 }

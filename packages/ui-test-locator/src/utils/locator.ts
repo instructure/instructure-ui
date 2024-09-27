@@ -28,10 +28,13 @@ import {
   querySelectorAllWithin,
   firstOrNull
 } from '@instructure/ui-test-queries'
-import { SelectorOptions } from '@instructure/ui-test-queries/src/utils/selectors'
-import { QueryArguments } from '@instructure/ui-test-queries/src/utils/parseQueryArguments'
-import { QueriesHelpersEventsType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
-import { ObjWithCutFirstArg } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
+
+import type {
+  QueriesHelpersEventsType,
+  ObjWithCutFirstArg,
+  QueryArguments,
+  SelectorOptions
+} from '@instructure/ui-test-queries'
 
 export function locator<K, T extends Record<string, K>>(
   containerSelector: string,
@@ -84,10 +87,8 @@ export function locator<K, T extends Record<string, K>>(
     return find(element, `:withLabel("${selector}")`, options)
   }
 
-  const methods: Record<
-    keyof T,
-    (...args: QueryArguments) => Promise<K>
-  > = {} as any
+  const methods: Record<keyof T, (...args: QueryArguments) => Promise<K>> =
+    {} as any
   Object.keys(customMethods).forEach((methodKey: keyof T) => {
     methods[methodKey] = async (...args: QueryArguments) => {
       const { element, selector, options } = parseQueryArguments(...args)
@@ -110,3 +111,15 @@ export function locator<K, T extends Record<string, K>>(
     ...methods
   }
 }
+
+export type {
+  QueriesHelpersEventsType,
+  ObjWithCutFirstArg,
+  QueryArguments,
+  QueryFunction,
+  SelectorOptions,
+  FireEvent,
+  FireEventMethod,
+  FireEventInit,
+  AxeCheckOptions
+} from '@instructure/ui-test-queries'

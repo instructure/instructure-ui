@@ -24,13 +24,14 @@
 
 import { firstOrNull } from './firstOrNull'
 import { getQueryResult } from './queryResult'
-import { parseQueryArguments, QueryArguments } from './parseQueryArguments'
+import { parseQueryArguments } from './parseQueryArguments'
 import {
   querySelectorAll,
   querySelectorFrames,
-  querySelectorParents,
-  SelectorOptions
+  querySelectorParents
 } from './selectors'
+import type { QueryArguments } from './parseQueryArguments'
+import type { SelectorOptions } from './selectors'
 
 export type QueryFunction = (
   element: Element,

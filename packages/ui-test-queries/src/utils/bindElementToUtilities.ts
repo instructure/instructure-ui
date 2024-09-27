@@ -38,11 +38,11 @@ export type CutFirstArg<F> = F extends (_: any, ...tail: infer TT) => infer R
   ? (...args: TT) => R
   : never
 
-type QueryTypes = {
-  [K in Extract<keyof typeof queries, string>]: typeof queries[K]
+export type QueryTypes = {
+  [K in Extract<keyof typeof queries, string>]: (typeof queries)[K]
 }
-type HelperTypes = {
-  [K in Extract<keyof typeof helpers, string>]: CutFirstArg<typeof helpers[K]>
+export type HelperTypes = {
+  [K in Extract<keyof typeof helpers, string>]: CutFirstArg<(typeof helpers)[K]>
 }
 
 export type QueriesHelpersEventsType = QueryTypes & HelperTypes & EventMapTypes

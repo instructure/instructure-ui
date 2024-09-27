@@ -11,10 +11,10 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "npm run bundle",
+    "prestart": "pnpm run bundle",
     "start": "ui-scripts server -p 9001",
-    "start:watch": "npm run build:examples && npm run watch:examples",
-    "bundle": "npm run build:examples && npm run build:storybook",
+    "start:watch": "pnpm run build:examples && pnpm run watch:examples",
+    "bundle": "pnpm run build:examples && pnpm run build:storybook",
     "clean": "ui-scripts clean",
     "build:examples": "node buildScripts/build-examples-json.mjs",
     "build:storybook": "ui-scripts examples",
@@ -49,8 +49,5 @@
     "react-docgen": "6.0.4",
     "storybook": "^7.6.19",
     "webpack": "^5.93.0"
-  },
-  "resolutions": {
-    "@storybook/react/webpack": "^5"
   }
 }

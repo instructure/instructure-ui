@@ -72,4 +72,16 @@ export {
   debug
 }
 
-export type { QueriesHelpersEventsType } from './utils/bindElementToUtilities'
+export type {
+  QueriesHelpersEventsType,
+  QueryTypes,
+  HelperTypes,
+  CutFirstArg
+} from './utils/bindElementToUtilities'
+export type { EventMapTypes } from './utils/bindElementToEvents'
+export type { ObjWithCutFirstArg } from './utils/bindElementToMethods'
+export type { QueryArguments } from './utils/parseQueryArguments'
+export type { QueryFunction } from './utils/queries'
+export type { SelectorOptions } from './utils/selectors'
+export type { FireEvent, FireEventMethod, FireEventInit } from './utils/events'
+export type { AxeCheckOptions } from '@instructure/ui-axe-check'
