@@ -1,19 +1,41 @@
-name: Deploy docs from master commit
+name: Deploy docs to gh-pages
 on:
   push:
     branches:
       - master
+      - v8_maintenance
+      - v9_maintenance
+  workflow_dispatch:
 jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run bootstrap
+      - name: Set build directory and deployment path based on branch
+        id: set-build-dir
+        run: |
+          echo "::set-output name=build_dir::./packages/__docs__/__build__"
+          case "${{ github.ref }}" in
+            "refs/heads/master")
+              echo "::set-output name=deploy_dir::./"
+              ;;
+            "refs/heads/v8_maintenance")
+              echo "::set-output name=deploy_dir::v8"
+              ;;
+            "refs/heads/v9_maintenance")
+              echo "::set-output name=deploy_dir::v9"
+              ;;
+          esac
       - name: Build docs-app
         run: npm run build:docs
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - name: Copy redirects config file to the __build__ directory.
+        run: cp ./packages/__docs__/_redirects_gh_pages ./packages/__docs__/__build__
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./packages/__docs__/__build__
+          folder: ${{ steps.set-build-dir.outputs.build_dir }}
           branch: gh-pages
+          target-folder: ${{ steps.set-build-dir.outputs.deploy_dir }}
           clean-exclude: pr-preview
           force: false

@@ -69,15 +69,16 @@ class Header extends Component<HeaderProps> {
     // If we select the latest version from the dropdown,
     // then navigate to the index (instructure.design/#currentHash).
     // In every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
-    const versionToNavigate = isSelectedLatestVersion
-      ? `/${window.location.hash}`
-      : `/${selectedVersion}/${window.location.hash}`
-
+    // Add `ghPagesPrefix` if we are not on https://instructure.design/
+    const ghPagesPrefix = window.location.origin === 'https://instructure.github.io'
+      ? '/instructure-ui'
+      : ''
+    const versionToNavigate = `${ghPagesPrefix}/${isSelectedLatestVersion ? window.location.hash : `${selectedVersion}/${window.location.hash}`}`
     return window.location.replace(versionToNavigate)
   }
 
   renderVersionsBlock = () => {
-    const { versionsData } = this.props
+    const { versionsData, name, version } = this.props
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
@@ -92,11 +93,11 @@ class Header extends Component<HeaderProps> {
           trigger={
             <CondensedButton>
               <Text size="large">
-                {(
+                {(name && version) ? (
                   <span>
-                    {this.props.name} {this.props.version}
+                    {name} {version}
                   </span>
-                ) || 'Documentation'}
+                ) : 'Documentation'}
               </Text>
               <IconMiniArrowDownLine size="x-small" />
             </CondensedButton>
