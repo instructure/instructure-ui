@@ -53,6 +53,7 @@ category: components
 @testable()
 class RangeInput extends Component<RangeInputProps, RangeInputState> {
   static readonly componentId = 'RangeInput'
+  static outputLocatorAttribute = 'data-range-output'
 
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -174,18 +175,14 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
           false,
           'RangeInput should have a `value` or `defaultValue` set for the value to be displayed. If no value has to be displayed, set `displayValue={false}`.'
         )
-
         return null
       }
-
+      const props = { [RangeInput.outputLocatorAttribute]: this.id }
       return (
         <ContextView background="inverse" placement="end center">
-          <output
-            htmlFor={this.id}
-            css={this.props.styles?.rangeInputInputValue}
-          >
+          <div {...props} css={this.props.styles?.rangeInputInputValue}>
             {this.props.formatValue!(this.value, this.props.max)}
-          </output>
+          </div>
         </ContextView>
       )
     }
@@ -212,16 +209,12 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
               this._input = c
             }}
             type="range"
-            role="slider"
             id={this.id}
             min={this.props.min}
             max={this.props.max}
             step={this.props.step}
             value={this.value}
             onChange={this.noopChange}
-            aria-valuenow={this.value}
-            aria-valuemin={this.props.min}
-            aria-valuemax={this.props.max}
             aria-valuetext={formatValue!(this.value, this.props.max)}
             {...props}
             disabled={disabled || readOnly}

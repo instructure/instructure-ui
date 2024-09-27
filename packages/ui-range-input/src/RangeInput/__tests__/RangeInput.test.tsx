@@ -208,7 +208,7 @@ describe('<RangeInput />', async () => {
       />
     )
     const rangeInput = await RangeInputLocator.find()
-    const output = await rangeInput.findOutput('output', { expectEmpty: true })
+    const output = await rangeInput.findOutput({ expectEmpty: true })
 
     expect(output).to.not.exist()
   })
@@ -246,62 +246,6 @@ describe('<RangeInput />', async () => {
       )
       const rangeInput = await RangeInputLocator.find()
       expect(await rangeInput.accessible()).to.be.true()
-    })
-
-    it('sets the input role to "slider"', async () => {
-      stub(console, 'warn')
-      await mount(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={100}
-          min={0}
-          defaultValue={50}
-        />
-      )
-      const rangeInput = await RangeInputLocator.find()
-      const input = await rangeInput.findInput('input[type="range"]')
-
-      expect(input).to.have.attribute('role', 'slider')
-    })
-
-    it('sets the aria-valuenow attribute', async () => {
-      stub(console, 'warn')
-      await mount(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={100}
-          min={0}
-          defaultValue={40}
-        />
-      )
-      const rangeInput = await RangeInputLocator.find()
-      const input = await rangeInput.findInput()
-
-      expect(input).to.have.attribute('aria-valuenow', '40')
-    })
-
-    it('sets the aria-valuemin attribute', async () => {
-      stub(console, 'warn')
-      await mount(
-        <RangeInput label="Opacity" name="opacity" max={100} min={20} />
-      )
-      const rangeInput = await RangeInputLocator.find()
-      const input = await rangeInput.findInput()
-
-      expect(input).to.have.attribute('aria-valuemin', '20')
-    })
-
-    it('sets the aria-valuemax attribute', async () => {
-      stub(console, 'warn')
-      await mount(
-        <RangeInput label="Opacity" name="opacity" max={80} min={0} />
-      )
-      const rangeInput = await RangeInputLocator.find()
-      const input = await rangeInput.findInput()
-
-      expect(input).to.have.attribute('aria-valuemax', '80')
     })
 
     it('formats the aria-valuetext attribute', async () => {
@@ -344,7 +288,6 @@ describe('<RangeInput />', async () => {
       await input.change({ target: { value: '30' } })
 
       expect(output).to.have.text('30')
-      expect(input).to.have.attribute('aria-valuenow', '30')
     })
 
     it('should call the onChange prop', async () => {

@@ -2,7 +2,7 @@
 describes: ProgressCircle
 ---
 
-`<ProgressCircle />` is a <span role="img" aria-hidden="true" style="font-size: 2rem; vertical-align: middle;">🍩</span> styled HTML `<progress />` element, complete
+`<ProgressCircle />` is a 🍩 styled HTML `<progress />` element, complete
 with the aria attributes required to support screen readers.
 
 ### `size`, `shouldAnimateOnMount`, `animationDelay`

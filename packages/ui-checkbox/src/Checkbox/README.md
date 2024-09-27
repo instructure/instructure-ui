@@ -273,3 +273,14 @@ type: embed
   </Figure>
 </Guidelines>
 ```
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>Do not add business logic to `onMouseOver` or `onMouseOut` events. These events are not triggered by keyboard navigation</Figure.Item>
+  </Figure>
+</Guidelines>
+```

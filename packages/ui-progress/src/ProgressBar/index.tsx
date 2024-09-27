@@ -126,11 +126,7 @@ class ProgressBar extends Component<ProgressBarProps> {
             css={styles?.htmlProgress}
             max={valueMax}
             value={valueNow}
-            role="progressbar"
-            aria-valuetext={valueText}
-            aria-valuenow={valueNow}
-            aria-valuemax={valueMax}
-            aria-label={labelAndValueText}
+            aria-valuetext={labelAndValueText}
           />
 
           <span css={styles?.track} role="presentation" aria-hidden="true">

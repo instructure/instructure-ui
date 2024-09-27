@@ -269,7 +269,9 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     return (
       <div
         css={styles?.checkbox}
+        /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
         onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
+        /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
         ref={this.handleRef}
       >

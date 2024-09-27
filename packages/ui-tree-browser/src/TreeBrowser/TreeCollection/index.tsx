@@ -230,10 +230,10 @@ class TreeCollection extends Component<
       focused: this.state.focused === `child_${key}`,
       level: this.itemsLevel
     })
-
     return (
       <li
         id={key}
+        /* eslint-disable-next-line jsx-a11y/role-has-required-aria-props */
         role="treeitem"
         css={styles?.item}
         tabIndex={-1}
@@ -314,6 +314,7 @@ class TreeCollection extends Component<
       <li
         key={`i${position}`}
         tabIndex={-1}
+        /* eslint-disable-next-line jsx-a11y/role-has-required-aria-props */
         role="treeitem"
         aria-label={item.name}
         css={styles?.item}
@@ -384,6 +385,7 @@ class TreeCollection extends Component<
         }}
         css={styles?.treeCollection}
         tabIndex={-1}
+        /* eslint-disable-next-line jsx-a11y/role-has-required-aria-props */
         role="treeitem"
         aria-label={this.props.name}
         aria-level={level}

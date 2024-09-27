@@ -54,27 +54,6 @@ describe('<ProgressBar />', async () => {
 
     expect(progress).to.exist()
     expect(progress.getAttribute('value')).to.equal('30')
-    expect(progress.getAttribute('aria-valuemax')).to.equal('60')
-    expect(progress.getAttribute('aria-valuetext')).to.equal('30 / 60')
-  })
-
-  it('should format aria-valuetext', async () => {
-    await mount(
-      <ProgressBar
-        screenReaderLabel="Chapters read"
-        valueMax={60}
-        valueNow={30}
-        formatScreenReaderValue={({ valueNow, valueMax }) =>
-          `${valueNow} chapters out of ${valueMax}`
-        }
-      />
-    )
-    const componentRoot = await ProgressBarLocator.find()
-    const progress = await componentRoot.find('progress')
-
-    expect(progress.getAttribute('aria-valuetext')).to.equal(
-      '30 chapters out of 60'
-    )
   })
 
   it('should format the displayed text', async () => {
