@@ -709,6 +709,7 @@ class Select extends Component<SelectProps> {
               mountNode={mountNode}
               positionTarget={this._inputContainer}
               isShowingContent={isShowingOptions}
+              shouldContainFocus={['screenreader']}
               shouldReturnFocus={false}
               withArrow={false}
             >

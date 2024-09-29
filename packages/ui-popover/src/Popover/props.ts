@@ -176,7 +176,7 @@ type PopoverOwnProps = {
   /**
    * Whether focus should contained within the `<Popover/>` when it is open
    */
-  shouldContainFocus?: boolean
+  shouldContainFocus?: boolean | ("keyboard" | "screenreader")[] | undefined
 
   /**
    * Whether focus should be returned to the trigger when the `<Popover/>` is closed
