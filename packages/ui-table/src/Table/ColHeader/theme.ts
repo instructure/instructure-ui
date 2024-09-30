@@ -47,7 +47,10 @@ const generateComponentTheme = (theme: Theme): TableColHeaderTheme => {
 
     focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineWidth: borders?.widthMedium,
-    focusOutlineStyle: borders?.style
+    focusOutlineStyle: borders?.style,
+
+    unSortedIconColor: colors?.contrasts?.grey4570,
+    sortedIconColor: colors?.contrasts?.blue4570
   }
 
   return {

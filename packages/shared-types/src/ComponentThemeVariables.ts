@@ -1214,6 +1214,8 @@ export type TableColHeaderTheme = {
   focusOutlineColor: Colors['contrasts']['blue4570']
   focusOutlineWidth: Border['widthMedium']
   focusOutlineStyle: Border['style']
+  unSortedIconColor: Colors['contrasts']['grey4570']
+  sortedIconColor: Colors['contrasts']['blue4570']
 }
 
 export type TableHeadTheme = {

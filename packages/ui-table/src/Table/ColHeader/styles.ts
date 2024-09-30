@@ -86,6 +86,14 @@ const generateStyle = (
       label: 'colHeader__buttonContent',
       display: 'flex',
       alignItems: 'center'
+    },
+    unSortedIconColor: {
+      label: 'colHeader__unSortedIconColor',
+      color: componentTheme.unSortedIconColor
+    },
+    sortedIconColor: {
+      label: 'colHeader__sortedIconColor',
+      color: componentTheme.sortedIconColor
     }
   }
 }

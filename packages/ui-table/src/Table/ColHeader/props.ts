@@ -85,7 +85,11 @@ type TableColHeaderProps = TableColHeaderOwnProps &
   >
 
 type TableColHeaderStyle = ComponentStyle<
-  'colHeader' | 'button' | 'buttonContent'
+  | 'colHeader'
+  | 'button'
+  | 'buttonContent'
+  | 'unSortedIconColor'
+  | 'sortedIconColor'
 >
 
 const propTypes: PropValidators<PropKeys> = {

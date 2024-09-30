@@ -74,16 +74,16 @@ class ColHeader extends Component<TableColHeaderProps> {
   }
 
   renderSortArrow() {
-    const { sortDirection, onRequestSort } = this.props
+    const { sortDirection, onRequestSort, styles } = this.props
 
     if (sortDirection === 'ascending') {
-      return <IconMiniArrowUpLine />
+      return <IconMiniArrowUpLine css={styles?.sortedIconColor} />
     }
     if (sortDirection === 'descending') {
-      return <IconMiniArrowDownLine />
+      return <IconMiniArrowDownLine css={styles?.sortedIconColor} />
     }
     if (onRequestSort) {
-      return <IconMiniArrowDoubleLine css={{ opacity: '30%' }} />
+      return <IconMiniArrowDoubleLine css={styles?.unSortedIconColor} />
     }
     return undefined
   }
