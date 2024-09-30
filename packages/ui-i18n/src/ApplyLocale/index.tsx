@@ -45,10 +45,4 @@ export const ApplyLocale = ({
   )
 }
 
-ApplyLocale.defaultProps = {
-  locale: undefined,
-  timezone: undefined,
-  children: undefined
-}
-
 export default ApplyLocale

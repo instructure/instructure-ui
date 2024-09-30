@@ -27,10 +27,7 @@ import PropTypes from 'prop-types'
 import { ThemeProvider } from '@emotion/react'
 
 import { TextDirectionContext } from '@instructure/ui-i18n'
-import {
-  DeterministicIdContextProvider,
-  getElementType
-} from '@instructure/ui-react-utils'
+import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
 
 import { getTheme } from '../getTheme'
 
@@ -99,7 +96,7 @@ function InstUISettingsProvider({
   )
 
   if (dir) {
-    const Element = getElementType(InstUISettingsProvider, { as })
+    const Element = as || 'span'
     providers = <Element dir={finalDir}>{providers}</Element>
   } else if (as && process.env.NODE_ENV !== 'production') {
     console.warn(
@@ -119,11 +116,6 @@ InstUISettingsProvider.propTypes = {
   as: PropTypes.string
   /* eslint-enable react/require-default-props */
 }
-
-InstUISettingsProvider.defaultProps = {
-  theme: {},
-  as: undefined
-} as const
 
 export default InstUISettingsProvider
 export { InstUISettingsProvider }
