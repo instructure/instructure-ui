@@ -164,7 +164,9 @@ class PaginationPageInput extends Component<
   }
 
   handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    this.setNewPage(event, Math.round(this.state.number))
+    if (Math.round(this.state.number) !== this.currentPage) {
+      this.setNewPage(event, Math.round(this.state.number))
+    }
   }
 
   getNumberWithinRange(n: number) {
