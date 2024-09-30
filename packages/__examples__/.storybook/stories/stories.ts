@@ -84,6 +84,8 @@ const additionalExamples: AdditionalExample[] = [
   }
 ]
 
+// Note: require.context causes Webpack to have huge compile times (and often
+// fail with out of memory errors) when switching to `pnpm`
 const examplesContext = require.context(
   '../../../', // bug: This causes start:watch to recompile endlessly in SB 6.2+
   true,
