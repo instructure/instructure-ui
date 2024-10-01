@@ -228,6 +228,7 @@ const allowedProps: AllowedPropKeys = [
 type CalendarState = {
   visibleMonth: Moment
   today: Moment
+  dayRefs: React.RefObject<Element>[]
 }
 
 export type { CalendarProps, CalendarStyle, CalendarState }
