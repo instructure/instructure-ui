@@ -265,7 +265,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
             this.timezone()
           )
             .subtract(1, 'day')
-            .format('MMMM D, YYYY')
+            .format('LL')
         })
         this.setState({ messages: [] })
       }
@@ -282,7 +282,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
             this.timezone()
           )
             .add(1, 'day')
-            .format('MMMM D, YYYY')
+            .format('LL')
         })
         this.setState({ messages: [] })
       }
@@ -354,9 +354,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
           ) => {
             // @ts-expect-error TODO
             onChange?.(e, {
-              value: `${momentDate.format('MMMM')} ${momentDate.format(
-                'D'
-              )}, ${momentDate.format('YYYY')}`
+              value: momentDate.format('LL')
             })
             this.handleHideCalendar(e, dateString)
           }
