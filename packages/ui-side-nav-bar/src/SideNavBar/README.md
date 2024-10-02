@@ -43,7 +43,15 @@ type: example
         href="#"
       />
       <SideNavBar.Item
-        icon={<Badge count={99}><IconInboxLine /></Badge>}
+        icon={<Badge count={99}
+                     formatOutput={function (formattedCount) {
+                       return (
+                         <AccessibleContent alt={`You have ${formattedCount} unread messages.`}>
+                           {formattedCount}
+                         </AccessibleContent>
+                       )
+                     }}
+        ><IconInboxLine /></Badge>}
         label="Inbox"
         href="#"
       />
