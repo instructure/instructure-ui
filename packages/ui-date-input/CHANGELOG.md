@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.4](https://github.com/instructure/instructure-ui/compare/v8.56.3...v8.56.4) (2024-10-02)
+
+
+### Bug Fixes
+
+* **ui-calendar,ui-date-input:** fix locale and timezone for simple api ([94209df](https://github.com/instructure/instructure-ui/commit/94209dfdfaeca8c8ae452771c4bf2688e6345272))
+* **ui-date-input:** fix date format and validation when locale isn't us english ([67e6d1f](https://github.com/instructure/instructure-ui/commit/67e6d1fb4aedda60ab430b69e14a0c93ac57f2bc))
+
+
+
+
+
 ## [8.56.3](https://github.com/instructure/instructure-ui/compare/v8.56.2...v8.56.3) (2024-09-18)
 
 **Note:** Version bump only for package @instructure/ui-date-input
