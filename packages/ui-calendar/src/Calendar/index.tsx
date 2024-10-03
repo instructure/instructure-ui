@@ -23,7 +23,15 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component, ReactElement, MouseEvent } from 'react'
+import React, {
+  Children,
+  Component,
+  ReactElement,
+  MouseEvent,
+  KeyboardEvent,
+  createRef,
+  FocusEvent
+} from 'react'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -90,16 +98,89 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   }, {})
   constructor(props: CalendarProps) {
     super(props)
-
-    this.state = this.calculateState(
-      this.locale(),
-      this.timezone(),
-      props.currentDate
+    const dayRefs = Array.from({ length: Calendar.DAY_COUNT }, () =>
+      createRef<HTMLElement>()
     )
+
+    this.state = {
+      ...this.calculateState(this.locale(), this.timezone(), props.currentDate),
+      dayRefs
+    }
+  }
+
+  setFirstDayTabIndex = (tabIndex: number) => {
+    const firstDay = this.state.dayRefs[0]?.current?.firstChild as HTMLElement
+    firstDay.tabIndex = tabIndex
   }
 
   handleRef = (el: Element | null) => {
     this.ref = el
+  }
+
+  handleOnBlur = (e: FocusEvent<Element>) => {
+    const dataCid = e.relatedTarget?.getAttribute('data-cid')
+
+    if (dataCid !== 'Day') {
+      this.setFirstDayTabIndex(0)
+    }
+  }
+
+  handleKeyDown = (e: KeyboardEvent<Element>, dayIndex?: number) => {
+    const totalDays = Calendar.DAY_COUNT
+    const daysPerWeek = 7
+
+    const moveFocus = (targetIndex: number) => {
+      const targetDay = this.state.dayRefs[targetIndex]?.current
+        ?.firstChild as HTMLElement
+
+      targetDay?.focus()
+      this.setFirstDayTabIndex(-1)
+    }
+
+    if (typeof dayIndex === 'number') {
+      let targetIndex: number
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault()
+          targetIndex =
+            dayIndex % daysPerWeek === 0
+              ? dayIndex + daysPerWeek - 1
+              : dayIndex - 1
+          moveFocus(targetIndex)
+          break
+
+        case 'ArrowRight':
+          e.preventDefault()
+          targetIndex =
+            (dayIndex + 1) % daysPerWeek === 0
+              ? dayIndex - (daysPerWeek - 1)
+              : dayIndex + 1
+          moveFocus(targetIndex)
+          break
+
+        case 'ArrowUp':
+          e.preventDefault()
+          targetIndex =
+            dayIndex < daysPerWeek
+              ? dayIndex + totalDays - daysPerWeek
+              : dayIndex - daysPerWeek
+          moveFocus(targetIndex)
+          break
+
+        case 'ArrowDown':
+          e.preventDefault()
+          targetIndex =
+            dayIndex >= totalDays - daysPerWeek
+              ? dayIndex - totalDays + daysPerWeek
+              : dayIndex + daysPerWeek
+          moveFocus(targetIndex)
+          break
+
+        default:
+          break
+      }
+    }
   }
 
   componentDidMount() {
@@ -115,8 +196,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       prevProps.visibleMonth !== this.props.visibleMonth
 
     if (isUpdated) {
-      this.setState(() => {
+      this.setState((prevState) => {
         return {
+          ...prevState,
           ...this.calculateState(
             this.locale(),
             this.timezone(),
@@ -347,7 +429,13 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     return (
       <table role={this.role}>
         <thead>{this.renderWeekdayHeaders()}</thead>
-        <tbody>{this.renderDays()}</tbody>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <tbody
+          onBlur={(e) => this.handleOnBlur(e)}
+          onKeyDown={(e) => this.handleKeyDown(e)}
+        >
+          {this.renderDays()}
+        </tbody>
       </table>
     )
   }
@@ -433,17 +521,33 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         days[index].push(day)
         return days // 7xN 2D array of `Day`s
       }, [])
-      .map((row) => (
+      .map((row, rowIndex) => (
         <tr key={`row${row[0].props.date}`} role={role}>
-          {row.map((day, i) => (
-            <td key={day.props.date} role={role}>
-              {role === 'presentation'
-                ? safeCloneElement(day, {
-                    'aria-describedby': this._weekdayHeaderIds[i]
-                  })
-                : day}
-            </td>
-          ))}
+          {row.map((day, i) => {
+            const dayIndex = rowIndex * 7 + i
+            const dayRef = this.state.dayRefs[
+              dayIndex
+            ] as React.LegacyRef<HTMLTableCellElement>
+
+            return (
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              <td
+                key={day.props.date}
+                role={role}
+                ref={dayRef}
+                onKeyDown={(e) => this.handleKeyDown(e, dayIndex)}
+              >
+                {role === 'presentation'
+                  ? safeCloneElement(day, {
+                      'aria-describedby': this._weekdayHeaderIds[i],
+                      tabIndex: dayIndex === 0 ? 0 : -1
+                    })
+                  : safeCloneElement(day, {
+                      tabIndex: dayIndex === 0 ? 0 : -1
+                    })}
+              </td>
+            )
+          })}
         </tr>
       ))
   }
@@ -468,6 +572,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   // date is returned as an ISO string, like 2021-09-14T22:00:00.000Z
   handleDayClick = (event: MouseEvent<any>, { date }: { date: string }) => {
+    this.setFirstDayTabIndex(-1)
+
     if (this.props.onDateSelected) {
       const parsedDate = DateTime.parse(date, this.locale(), this.timezone())
       this.props.onDateSelected(parsedDate.toISOString(), parsedDate, event)
@@ -506,6 +612,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
     return arr.map((date) => {
       const dateStr = date.toISOString()
+
       return (
         <Calendar.Day
           key={dateStr}
