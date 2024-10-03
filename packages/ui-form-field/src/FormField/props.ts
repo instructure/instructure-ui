@@ -36,7 +36,8 @@ import type { FormMessage } from '../FormPropTypes'
 type FormFieldOwnProps = {
   label: React.ReactNode
   /**
-   * the id of the input (to link it to its label for a11y)
+   * the id of the input (to link it to its label for a11y).
+   * Applied as the `for` HTML prop on the label.
    */
   id: string
   /**
