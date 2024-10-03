@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.24.5",
+    "@babel/runtime": "^7.25.6",
     "@instructure/console": "10.2.2",
     "@instructure/shared-types": "10.2.2",
     "@instructure/ui-a11y-content": "10.2.2",
@@ -35,8 +35,8 @@
     "@instructure/ui-babel-preset": "10.2.2",
     "@instructure/ui-color-utils": "10.2.2",
     "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^15.0.7",
-    "vitest": "^2.0.2"
+    "@testing-library/react": "^16.0.1",
+    "vitest": "^2.1.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

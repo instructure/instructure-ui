@@ -196,7 +196,8 @@ const finalConfig = tseslint.config(
     files: [
       "packages/+(" + NODE_PACKAGES + ")/**/*",
       'packages/__docs__/*.js', // docs is a mess
-      '!packages/**', // every file not in packages
+      '**/gulpfile.js',
+      '!packages/**' // every file not in packages
     ],
     languageOptions: {
       globals: {

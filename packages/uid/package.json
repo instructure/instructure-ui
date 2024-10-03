@@ -24,10 +24,10 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.2.2",
     "@testing-library/jest-dom": "^6.4.6",
-    "vitest": "^2.0.2"
+    "vitest": "^2.1.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.5"
+    "@babel/runtime": "^7.25.6"
   },
   "publishConfig": {
     "access": "public"

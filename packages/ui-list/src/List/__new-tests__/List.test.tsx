@@ -56,10 +56,8 @@ describe('<List />', () => {
         <List.Item>List item 2</List.Item>
         <List.Item>List item 3</List.Item>
         <List.Item>List item 4</List.Item>
-        {/* eslint-disable-next-line no-constant-binary-expression */}
-        {null && <List.Item>ignore me 1</List.Item>}
-        {/* eslint-disable-next-line no-constant-binary-expression */}
-        {false && <List.Item>ignore me 2</List.Item>}
+        {null}
+        {false}
       </List>
     )
     const listItems = screen.getAllByRole('listitem')

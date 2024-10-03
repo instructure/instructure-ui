@@ -277,9 +277,6 @@
       "path": "../ui-scripts/tsconfig.build.json"
     },
     {
-      "path": "../ui-stylelint-config/tsconfig.build.json"
-    },
-    {
       "path": "../ui-webpack-config/tsconfig.build.json"
     }
   ]

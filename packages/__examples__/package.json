@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.24.5",
+    "@babel/runtime": "^7.25.6",
     "@instructure/ui-babel-preset": "10.2.2",
     "@instructure/ui-buttons": "10.2.2",
     "@instructure/ui-i18n": "10.2.2",
@@ -35,7 +35,7 @@
     "chromatic": "^10.9.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "webpack-merge": "^5.10.0"
+    "webpack-merge": "^6.0.1"
   },
   "devDependencies": {
     "@instructure/ui-scripts": "10.2.2",
@@ -46,9 +46,9 @@
     "@types/webpack-env": "^1.18.5",
     "globby": "^13.2.2",
     "prop-types": "^15.8.1",
-    "react-docgen": "6.0.4",
+    "react-docgen": "7.0.3",
     "storybook": "^7.6.19",
-    "webpack": "^5.93.0"
+    "webpack": "^5.95.0"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

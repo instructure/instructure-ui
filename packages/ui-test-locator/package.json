@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.24.5",
+    "@babel/runtime": "^7.25.6",
     "@instructure/ui-test-queries": "10.2.2"
   },
   "devDependencies": {

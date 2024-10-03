@@ -52,10 +52,11 @@ export default {
 
     // optimize svgs in place
     runCommandSync('svgo', [
-      '-r',
-      '-f',
+      '--quiet',
+      '--recursive',
+      '--folder',
       svgSourceDir,
-      '-o',
+      '--output',
       svgSourceDir,
       ...svgoConfigOption
     ])

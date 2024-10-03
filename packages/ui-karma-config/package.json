@@ -22,7 +22,7 @@
     "buffer": "^6.0.3",
     "choma": "^1.2.1",
     "globby": "^11.1.0",
-    "karma": "^6.4.3",
+    "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
     "karma-coverage-istanbul-reporter": "3.0.3",
     "karma-firefox-launcher": "^2.1.3",

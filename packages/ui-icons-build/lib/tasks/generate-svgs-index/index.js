@@ -47,7 +47,7 @@ gulp.task('generate-svgs-index', (cb) => {
   const deprecated = config.deprecated || {}
 
   glob
-    .sync(path.normalize(`${config.svg.destination}/**/*.svg`))
+    .globSync(path.normalize(`${config.svg.destination}/**/*.svg`))
     .forEach((file) => {
       const baseName = path.basename(file, '.svg')
       const name = toComponentName(baseName)

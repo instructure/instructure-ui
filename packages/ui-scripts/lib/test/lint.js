@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+import { runCommandSync } from '@instructure/command-utils'
 
 export default {
   command: 'lint',
@@ -33,7 +33,6 @@ export default {
   handler: async (argv) => {
     const paths = argv._.slice(1)
     let jspaths = ['.']
-    let csspaths = ['**/*.css']
 
     if (paths.length) {
       jspaths = paths.filter((path) =>
@@ -41,23 +40,9 @@ export default {
           (ext) => path.split('.').slice(-1)[0] === ext
         )
       )
-      csspaths = paths.filter((path) =>
-        ['.css'].some((ext) => path.split('.').slice(-1)[0] === ext)
-      )
     }
-
-    const commands = {}
-
     if (jspaths.length) {
-      commands['eslint'] = getCommand('eslint', [...jspaths])
+      runCommandSync('eslint', jspaths)
     }
-
-    if (csspaths.length) {
-      commands['stylelint'] = getCommand('stylelint', [
-        ...csspaths,
-        '--allow-empty-input'
-      ])
-    }
-    runCommandsConcurrently(commands)
   }
 }
