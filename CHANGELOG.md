@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
+
+
+### Bug Fixes
+
+* **console:** remove __PURE__ annotation from console to fix warnings in Vite/Rollup ([48e78bb](https://github.com/instructure/instructure-ui/commit/48e78bbd7c6830bc73aa1916970f3d656ccb54f8))
+* **shared-types,ui-table:** fix color contrast for table sorting icons ([b5a60bf](https://github.com/instructure/instructure-ui/commit/b5a60bf4b682e100912d686524a7c4c04f828ea9))
+* **ui-pagination:** fix pagination with numberinput when onBlur it calls  onPage change every time, even where there are no changes ([38e75c4](https://github.com/instructure/instructure-ui/commit/38e75c4f610455128d0c3d19181a14823e150f4f))
+* **ui-progress,ui-range-input:** use just the native HTML elements instead of ARIA tags ([f0fa72c](https://github.com/instructure/instructure-ui/commit/f0fa72c7d716ab2cb0af191debe27db1e911c19a))
+* **ui-radio-input:** fixing the issue of TalkBack reading the radio grop options incorrectly ([ff2618e](https://github.com/instructure/instructure-ui/commit/ff2618e517ddf6ed37ec5d7dce65b51e5c133504))
+* **ui-simple-select:** ensure input value updates correctly when options change ([4dc7cb2](https://github.com/instructure/instructure-ui/commit/4dc7cb2cfde69d28baaaced32a5e63aea9a48ee1))
+* **ui-text-input:** icon in SimpleSelect is vertically centered ([13790d1](https://github.com/instructure/instructure-ui/commit/13790d14ac6eb6135d7ae22b2a29f542ddf95333))
+
+
+### Features
+
+* **ui-calendar,ui-date-input:** update DateInput2 api, add placeholder hint ([ee9dfab](https://github.com/instructure/instructure-ui/commit/ee9dfab8cb5cff76d829bd24163d2052a7da46a9))
+* **ui-menu:** add renderLabelInfo to Menu ([2bc8554](https://github.com/instructure/instructure-ui/commit/2bc85544b5c51aba4a98bc5082b98b8e2e08b06e))
+
+
+
+
+
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 

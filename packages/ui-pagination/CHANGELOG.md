@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
+
+
+### Bug Fixes
+
+* **ui-pagination:** fix pagination with numberinput when onBlur it calls  onPage change every time, even where there are no changes ([38e75c4](https://github.com/instructure/instructure-ui/commit/38e75c4f610455128d0c3d19181a14823e150f4f))
+
+
+
+
+
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-pagination
