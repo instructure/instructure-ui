@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
+
+
+### Bug Fixes
+
+* **ui-simple-select:** ensure input value updates correctly when options change ([4dc7cb2](https://github.com/instructure/instructure-ui/commit/4dc7cb2cfde69d28baaaced32a5e63aea9a48ee1))
+
+
+
+
+
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-simple-select

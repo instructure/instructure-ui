@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
+
+
+### Bug Fixes
+
+* **ui-text-input:** icon in SimpleSelect is vertically centered ([13790d1](https://github.com/instructure/instructure-ui/commit/13790d14ac6eb6135d7ae22b2a29f542ddf95333))
+
+
+
+
+
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-text-input
