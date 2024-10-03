@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.24.7",
+    "@babel/cli": "^7.25.6",
     "@instructure/command-utils": "10.2.2",
     "@instructure/pkg-utils": "10.2.2",
     "@lerna/project": "^6.4.1",
@@ -30,14 +30,13 @@
     "http-server": "^14.1.1",
     "jscodeshift": "^0.16.1",
     "karma-cli": "^2.0.0",
-    "lerna": "^7.4.2",
+    "lerna": "^8.1.8",
     "lodash.isplainobject": "^4.0.6",
-    "mocha": "^10.6.0",
-    "semver": "^7.6.2",
-    "style-dictionary": "4.0.0",
-    "stylelint": "^16.6.1",
+    "mocha": "^10.7.3",
+    "semver": "^7.6.3",
+    "style-dictionary": "4.1.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4",
+    "webpack-dev-server": "^5.1.0",
     "yargs": "^17.7.2"
   },
   "optionalDependencies": {

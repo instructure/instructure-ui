@@ -32,7 +32,6 @@ const path = require('path')
 const formatName = require('../../util/format-name')
 const readDirectories = require('../../util/read-directories')
 const config = require('../../config')
-const handleErrors = require('../../util/handle-errors')
 
 const GLYPHS = {}
 
@@ -97,22 +96,20 @@ const createFontTask = function (variant) {
         gulp
           .src(require.resolve('./css.ejs'))
           .pipe(consolidate('lodash', options))
-          .on('error', handleErrors)
           .pipe(rename({ basename: fontName, extname: '.css' }))
           .pipe(gulp.dest(destination))
         // build sass map with icon names and font unicode characters
         gulp
           .src(require.resolve('./scss.ejs'))
           .pipe(consolidate('lodash', options))
-          .on('error', handleErrors)
           .pipe(rename({ basename: `${fontName}_icon-map`, extname: '.scss' }))
           .pipe(gulp.dest(destination))
       })
-      .on('error', handleErrors)
       .pipe(gulp.dest(destination))
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 gulp.task('generate-font-index-files', (cb) => {
   const glyphs = Object.keys(GLYPHS).map((glyph) => {
     return {
@@ -135,7 +132,6 @@ gulp.task('generate-font-index-files', (cb) => {
       })
     )
     .pipe(rename({ basename: 'index', extname: '.js' }))
-    .on('error', handleErrors)
     .pipe(gulp.dest(config.fonts.destination))
 })
 

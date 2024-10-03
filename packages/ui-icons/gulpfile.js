@@ -23,6 +23,7 @@
  */
 
 const gulp = require('gulp')
-const { buildFonts } = require('@instructure/ui-icons-build')
+const { buildFonts, clean } = require('@instructure/ui-icons-build')
 
 gulp.task('default', buildFonts)
+gulp.task('clean', clean)

@@ -23,10 +23,9 @@
     "file-loader": "^6.2.0",
     "process": "^0.11.10",
     "style-loader": "^4.0.0",
-    "stylelint": "^16.6.1",
     "terser-webpack-plugin": "^5.3.10",
-    "thread-loader": "^4.0.2",
-    "webpack": "^5.93.0"
+    "thread-loader": "^4.0.4",
+    "webpack": "^5.95.0"
   },
   "publishConfig": {
     "access": "public"

@@ -29,7 +29,7 @@
     "react-dom": "^18.3.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.5",
+    "@babel/runtime": "^7.25.6",
     "@instructure/shared-types": "10.2.2",
     "@instructure/ui-decorator": "10.2.2",
     "@instructure/ui-dom-utils": "10.2.2",

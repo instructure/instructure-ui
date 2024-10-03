@@ -232,9 +232,6 @@
       "path": "./packages/ui-spinner/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-stylelint-config/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-svg-images/tsconfig.build.json"
     },
     {

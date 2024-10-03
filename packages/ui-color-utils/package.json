@@ -27,7 +27,7 @@
     "@types/tinycolor2": "^1.4.6"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.5",
+    "@babel/runtime": "^7.25.6",
     "tinycolor2": "^1.6.0"
   },
   "publishConfig": {
