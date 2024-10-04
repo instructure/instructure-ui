@@ -748,7 +748,6 @@ class App extends Component<AppProps, AppState> {
           <div
             css={this.props.styles?.content}
             aria-label={key || docsData.library.name}
-            role="main"
             ref={this.handleContentRef}
           >
             {!showMenu && (
