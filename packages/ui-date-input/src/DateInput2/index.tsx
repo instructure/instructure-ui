@@ -183,8 +183,8 @@ const DateInput2 = ({
   const [showPopover, setShowPopover] = useState<boolean>(false)
 
   useEffect(() => {
-    // don't set input messages if there is an error set already
-    if (!inputMessages) {
+    // don't set input messages if there is an internal error set already
+    if (!inputMessages.length && !invalidDateErrorMessage) {
       setInputMessages(messages || [])
     }
   }, [messages])
