@@ -36,9 +36,10 @@ import type { ThemeOrOverride } from './EmotionTypes'
  * A hook that will return the currently applied theme object from the nearest Context.
  * If there is no Context, then it tries to get the current theme from the global ThemeRegistry.
  * If there is no theme provided to the Context and ThemeRegistry it will return the default `canvas` theme.
- * @returns {object} the theme object
+ * @returns The theme object
  */
 const useTheme = () => {
+  // This reads the theme from Emotion's ThemeContext
   let theme = useEmotionTheme() as ThemeOrOverride
 
   if (isEmpty(theme)) {
