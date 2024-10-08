@@ -25,7 +25,11 @@
 /** @jsx jsx */
 import { Component, Children } from 'react'
 
-import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  safeCloneElement,
+  matchComponentTypes
+} from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -33,8 +37,12 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+import { Cell } from '../Cell'
+import { RowHeader } from '../RowHeader'
+
 import type { TableRowProps } from './props'
 import { allowedProps, propTypes } from './props'
+import type { RowHeaderChild, CellChild } from '../props'
 
 /**
 ---
@@ -73,12 +81,22 @@ class Row extends Component<TableRowProps> {
       >
         {Children.toArray(children)
           .filter(Boolean)
-          .map((child: any, index) => {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              isStacked,
-              header: headers && headers[index]
-            })
+          .map((child, index) => {
+            if (matchComponentTypes<RowHeaderChild>(child, [RowHeader])) {
+              return safeCloneElement(child, {
+                key: index,
+                isStacked
+              })
+            }
+            if (matchComponentTypes<CellChild>(child, [Cell])) {
+              return safeCloneElement(child, {
+                key: index,
+                isStacked,
+                header: headers && headers[index]
+              })
+            }
+
+            return child
           })}
       </View>
     )
