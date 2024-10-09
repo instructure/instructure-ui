@@ -63,4 +63,23 @@ const isFirefox = () => {
   return getBrowser().name === 'Firefox'
 }
 
-export { getBrowser, isSafari, isEdge, isIE, isFirefox, isChromium }
+const isAndroidOrIOS = (): boolean => {
+  const parser = new UAParser()
+  const result = parser.getResult()
+  const device = parser.getDevice()
+  return result.os.name === 'Android' ||
+    device.model === 'iPhone' ||
+    device.model === 'iPad'
+    ? true
+    : false
+}
+
+export {
+  getBrowser,
+  isSafari,
+  isEdge,
+  isIE,
+  isFirefox,
+  isChromium,
+  isAndroidOrIOS
+}
