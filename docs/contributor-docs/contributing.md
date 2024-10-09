@@ -33,7 +33,7 @@ Please follow the steps on the [how to build guide page](#building-instui).
 ### Development
 
 1. Run `npm run build:watch` to build all of the packages for a development environment and watch for changes.
-1. Run `npm run dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should see the page auto-reload.
+1. Run `npm run dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:9090](http://localhost:9090) in a browser. When you make changes to the source code you should see the page auto-reload.
 1. Run `npm run test:watch -- --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
 1. Run `npm run test` to run all the tests for every package.
 
@@ -79,7 +79,7 @@ Please update the documentation and examples with any changes.
    2. Add the dependency in `packages/__docs__/package.json`.
    3. Add the reference in `packages/__docs__/tsconfig.build.json`.
 6. Stop the dev server (if you have it running), and run `npm run dev` to pick up the new package.
-7. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package listed in the docs.
+7. Visit [http://localhost:9090](http://localhost:9090) in a browser. You should see your package listed in the docs.
 
 ### Adding a component
 
@@ -99,7 +99,7 @@ Please update the documentation and examples with any changes.
 8. Run `npm run bootstrap` to generate the `es`, `lib` and `types` directories for your component.
 9. Add your component to `packages/__docs__/components.js`.
 10. Stop the dev server (if you have it running), and run `npm run dev` to pick up the new component.
-11. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
+11. Visit [http://localhost:9090](http://localhost:9090) in a browser. You should see your component listed in the docs.
 12. Start making changes to your component, and watch it update in the browser automatically.
 13. Resolve all `FIXME` comments in the generated code (except in the `MyComponentLocator.ts`).
 

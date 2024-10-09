@@ -35,7 +35,7 @@ export default {
   handler: async (argv) => {
     const { NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
-    let port = argv.port || '8080'
+    let port = argv.port || '9090'
 
     let command, webpackArgs
 
