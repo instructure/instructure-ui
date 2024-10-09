@@ -22,23 +22,24 @@
  * SOFTWARE.
  */
 
-import TerserWebpackPlugin from 'terser-webpack-plugin'
+const webpack = require('webpack')
 
-export default {
-  splitChunks: {
-    chunks: 'all'
-  },
-  sideEffects: true,
-  minimizer: [
-    new TerserWebpackPlugin({
-      parallel: true,
-      // sourceMap: true, // this breaks storybook in production env
-      terserOptions: {
-        mangle: false,
-        output: {
-          semicolons: false
-        }
-      }
-    })
-  ]
+const ENV = process.env.NODE_ENV || 'production'
+const DEBUG = process.env.DEBUG || ENV === 'development'
+const OMIT_INSTUI_DEPRECATION_WARNINGS =
+  process.env.OMIT_INSTUI_DEPRECATION_WARNINGS || false
+
+const envVars = {
+  NODE_ENV: ENV,
+  DEBUG,
+  OMIT_INSTUI_DEPRECATION_WARNINGS
 }
+
+module.exports = [
+  // fix Buffer/process is not defined errors:
+  new webpack.ProvidePlugin({
+    process: 'process/browser',
+    Buffer: ['buffer', 'Buffer']
+  }),
+  new webpack.EnvironmentPlugin(envVars)
+]

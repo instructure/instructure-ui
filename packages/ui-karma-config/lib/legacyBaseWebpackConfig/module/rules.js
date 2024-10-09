@@ -21,24 +21,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const ENV = process.env.NODE_ENV || 'production'
+const DEBUG = process.env.DEBUG || ENV === 'development'
+const exclude = [/node_modules/, /\/lib\//, /\/es\//]
 
-import TerserWebpackPlugin from 'terser-webpack-plugin'
-
-export default {
-  splitChunks: {
-    chunks: 'all'
-  },
-  sideEffects: true,
-  minimizer: [
-    new TerserWebpackPlugin({
-      parallel: true,
-      // sourceMap: true, // this breaks storybook in production env
-      terserOptions: {
-        mangle: false,
-        output: {
-          semicolons: false
-        }
-      }
-    })
-  ]
+const babelLoader = {
+  loader: require.resolve('babel-loader'),
+  options: {
+    cacheDirectory: !DEBUG ? false : '.babel-cache'
+  }
 }
+
+const rules = [
+  {
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
+    exclude: [...exclude],
+    use: [
+      {
+        loader: require.resolve('thread-loader'),
+        options: {
+          workers: 2,
+          workerParallelJobs: 50,
+          workerNodeArgs: ['--max-old-space-size=8192'],
+          poolRespawn: false,
+          poolTimeout: 2000,
+          name: 'babel-loader-pool'
+        }
+      },
+      babelLoader
+    ]
+  },
+  {
+    test: /\.css$/,
+    include: [/ui-icons/],
+    use: [require.resolve('style-loader'), require.resolve('css-loader')]
+  },
+  {
+    // eslint-disable-next-line no-useless-escape
+    test: /\.(eot|woff2?|otf|ttf)([\?]?.*)$/,
+    type: 'asset/resource'
+  },
+  {
+    test: /\.svg$/,
+    type: 'asset/source'
+  },
+  {
+    test: /\.(png|jpg|jpeg|gif)$/,
+    type: 'asset/resource'
+  }
+]
+
+module.exports = rules
