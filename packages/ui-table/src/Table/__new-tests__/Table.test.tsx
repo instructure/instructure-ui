@@ -167,6 +167,42 @@ describe('<Table />', async () => {
     expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
+  it('does not crash for invalid children', async () => {
+    render(
+      <Table caption="Test table" layout="stacked">
+        <Table.Head>
+          <span>test</span>
+          test2
+          {/* @ts-ignore error is normal here */}
+          <Table.Row>
+            test3
+            <span>test</span>
+            <Table.Cell>Foo</Table.Cell>
+          </Table.Row>
+          test4
+          <span>test</span>
+        </Table.Head>
+        test5
+        <Table.Body>
+          test
+          <span>test</span>
+          {/* @ts-ignore error is normal here */}
+          <Table.Row>
+            test
+            <span>test</span>
+            <Table.Cell>Foo</Table.Cell>
+            test
+            <span>test</span>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    )
+    const table = screen.getByRole('table')
+
+    expect(table).toBeInTheDocument()
+    expect(table).toHaveTextContent('Foo')
+  })
+
   describe('when table is sortable', async () => {
     const renderSortableTable = (
       props: TableColHeaderProps | null,
