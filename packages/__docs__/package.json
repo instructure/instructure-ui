@@ -131,7 +131,7 @@
     "@instructure/ui-babel-preset": "10.3.0",
     "@instructure/ui-scripts": "10.3.0",
     "@instructure/ui-webpack-config": "10.3.0",
-    "chokidar": "^4.0.1",
+    "chokidar": "^3.6.0",
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "html-webpack-plugin": "^5.6.0",
@@ -143,6 +143,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "//dependency-comments": {
-    "jsdoc-api": "v9 removes explainSync, its async only"
+    "jsdoc-api": "v9 removes explainSync, its async only",
+    "chokidar": "4.0.1 seems to have issues watching an array of paths. Check later if fixed..."
   }
 }

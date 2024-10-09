@@ -21,24 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+require('dotenv').config({ path: process.cwd() })
+const DEBUG = process.env.DEBUG
+const ENV = process.env.NODE_ENV || 'production'
 
-import TerserWebpackPlugin from 'terser-webpack-plugin'
-
-export default {
-  splitChunks: {
-    chunks: 'all'
+module.exports = {
+  mode: ENV === 'production' ? 'production' : 'development',
+  cache: ENV !== 'production',
+  bail: !DEBUG,
+  devtool: ENV === 'production' ? false : 'cheap-module-source-map',
+  module: {
+    rules: require('./module/rules')
   },
-  sideEffects: true,
-  minimizer: [
-    new TerserWebpackPlugin({
-      parallel: true,
-      // sourceMap: true, // this breaks storybook in production env
-      terserOptions: {
-        mangle: false,
-        output: {
-          semicolons: false
-        }
-      }
-    })
-  ]
+  plugins: require('./plugins'),
+  optimization: require('./optimization'),
+  performance: {
+    hints: ENV === 'production' ? 'warning' : false
+  },
+  resolve: {
+    fallback: {
+      fs: false,
+      module: false,
+      path: false,
+      process: false // needed for Sinon 12+
+    },
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  }
 }

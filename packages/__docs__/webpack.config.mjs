@@ -1,0 +1,90 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import { resolve as resolvePath } from 'path'
+import baseConfig from '@instructure/ui-webpack-config'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import chokidar from 'chokidar'
+import { globbySync } from 'globby'
+import { merge } from 'webpack-merge'
+import { processSingleFile } from './lib/build-docs.mjs'
+import resolve from './resolve.mjs'
+
+const ENV = process.env.NODE_ENV || 'production'
+const DEBUG = process.env.DEBUG || ENV === 'development'
+
+const outputPath = resolvePath(import.meta.dirname, '__build__')
+const resolveAliases = DEBUG ? { resolve } : {}
+
+const config = merge(baseConfig, {
+  entry: {
+    main: './src/index.js',
+  },
+  module: {
+    exprContextCritical: false,
+    rules: [
+      {
+        test: /\.svg/,
+        type: 'asset/source',
+      },
+    ],
+  },
+  output: {
+    path: outputPath,
+    filename: '[name].js',
+  },
+  devServer: {
+    static: {
+      directory: outputPath,
+    },
+    host: '0.0.0.0',
+    onListening: function () {
+      // devServer is watching source files by default and hot reloading the docs page if they are changed
+      // however markdown files (i.e. README.md) need to be recompiled hence the need for chokidar
+      const paths = globbySync(['packages/**/*.md', 'docs/**/*.md'], { cwd: '../../' }).map(p => '../../' + p)
+      chokidar
+        .watch(paths)
+        .on('change', (evt) => {
+          const fullPath = resolvePath(import.meta.dirname, evt)
+          processSingleFile(fullPath)
+        })
+    },
+    client: {
+      overlay: false,
+    },
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      chunks: ['main'],
+    }),
+  ],
+  optimization: {
+    usedExports: true,
+  },
+  ...resolveAliases,
+  mode: 'production',
+})
+
+export default config

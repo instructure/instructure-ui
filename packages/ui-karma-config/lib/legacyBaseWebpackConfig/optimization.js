@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import TerserWebpackPlugin from 'terser-webpack-plugin'
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
-export default {
+module.exports = {
   splitChunks: {
     chunks: 'all'
   },
