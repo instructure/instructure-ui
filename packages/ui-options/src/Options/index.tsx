@@ -48,6 +48,7 @@ import type { OptionsSeparatorProps } from './Separator/props'
 
 import type { OptionsProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { isAndroidOrIOS } from '@instructure/ui-utils'
 
 type ItemChild = React.ComponentElement<OptionsItemProps, Item>
 type SeparatorChild = React.ComponentElement<OptionsSeparatorProps, Separator>
@@ -108,7 +109,8 @@ class Options extends Component<OptionsProps> {
       <span
         id={this._labelId}
         role="presentation"
-        aria-hidden="true"
+        // because TalkBack and iOS VoiceOver don't announce sub-menu labels, aria-hidden needs to be false to achive that
+        aria-hidden={isAndroidOrIOS() ? 'false' : 'true'}
         css={styles?.label}
       >
         {callRenderProp(renderLabel)}
