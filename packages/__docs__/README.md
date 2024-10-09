@@ -8,4 +8,4 @@ From the root of the `instructure-ui` repo:
 
 1. Run `npm install`
 1. Run `npm run dev`
-1. Open [http://localhost:8080](http://localhost:8080) in your browser
+1. Open [http://localhost:9090](http://localhost:9090) in your browser
