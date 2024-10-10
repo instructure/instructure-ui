@@ -3,242 +3,164 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [9.7.1](https://github.com/instructure/instructure-ui/compare/v9.7.0...v9.7.1) (2024-10-10)
-
+## DO NOT USE! An error occured during npm release .[9.7.1](https://github.com/instructure/instructure-ui/compare/v9.7.0...v9.7.1) (2024-10-10)
 
 ### Bug Fixes
 
-* **ui-table:** non standrd Row children props ([700e462](https://github.com/instructure/instructure-ui/commit/700e462cc8de0cfb68f0ed8a442dcd23961e4b77))
-
-
-
-
+- **ui-table:** non standrd Row children props ([700e462](https://github.com/instructure/instructure-ui/commit/700e462cc8de0cfb68f0ed8a442dcd23961e4b77))
 
 # [9.7.0](https://github.com/instructure/instructure-ui/compare/v9.6.0...v9.7.0) (2024-09-23)
 
-
 ### Bug Fixes
 
-* **ui-calendar:** fix code to remove unnecessary warnings ([d139bd4](https://github.com/instructure/instructure-ui/commit/d139bd4e6f156744d5bd4f2fb6e7acacf58804d6))
-* **ui-selectable:** fix Select options not being selectable on iOS Safari with VoiceOver on ([7f04bb4](https://github.com/instructure/instructure-ui/commit/7f04bb47f952e37f95533db00f7eac6d1cba82f0))
-* **ui-toggle-details:** fix ToggleDetails flickering ([4c55bc9](https://github.com/instructure/instructure-ui/commit/4c55bc9cf751944cae4fceda983ea060f9398c54))
-
+- **ui-calendar:** fix code to remove unnecessary warnings ([d139bd4](https://github.com/instructure/instructure-ui/commit/d139bd4e6f156744d5bd4f2fb6e7acacf58804d6))
+- **ui-selectable:** fix Select options not being selectable on iOS Safari with VoiceOver on ([7f04bb4](https://github.com/instructure/instructure-ui/commit/7f04bb47f952e37f95533db00f7eac6d1cba82f0))
+- **ui-toggle-details:** fix ToggleDetails flickering ([4c55bc9](https://github.com/instructure/instructure-ui/commit/4c55bc9cf751944cae4fceda983ea060f9398c54))
 
 ### Features
 
-* **ui-date-input:** improve DateInput2 api, extend docs ([f369604](https://github.com/instructure/instructure-ui/commit/f3696040d59f9baf9b9a27070e6fbc3d458e4495))
-
-
-
-
+- **ui-date-input:** improve DateInput2 api, extend docs ([f369604](https://github.com/instructure/instructure-ui/commit/f3696040d59f9baf9b9a27070e6fbc3d458e4495))
 
 # [9.6.0](https://github.com/instructure/instructure-ui/compare/v9.5.2...v9.6.0) (2024-08-14)
 
-
 ### Features
 
-* **ui-calendar,ui-date-input:** improve DateInput2 onChange callback, add date formatting option, extend docs ([4e2c23c](https://github.com/instructure/instructure-ui/commit/4e2c23c3288885e49030f1f471d61b2fed29b54c))
-
-
-
-
+- **ui-calendar,ui-date-input:** improve DateInput2 onChange callback, add date formatting option, extend docs ([4e2c23c](https://github.com/instructure/instructure-ui/commit/4e2c23c3288885e49030f1f471d61b2fed29b54c))
 
 ## [9.5.2](https://github.com/instructure/instructure-ui/compare/v9.5.1...v9.5.2) (2024-08-05)
 
-
 ### Bug Fixes
 
-* **ui-calendar,ui-date-input:** fix year picker for non latin based locales; return iso date string in onRequestValidateDate ([d7df0e8](https://github.com/instructure/instructure-ui/commit/d7df0e8d9fc0656e877bd243d9858dc3e5a47198))
-
-
-
-
+- **ui-calendar,ui-date-input:** fix year picker for non latin based locales; return iso date string in onRequestValidateDate ([d7df0e8](https://github.com/instructure/instructure-ui/commit/d7df0e8d9fc0656e877bd243d9858dc3e5a47198))
 
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
-
 ### Bug Fixes
 
-* **ui-color-picker,ui-color-utils:** fix corrupted CJS build ([e1016be](https://github.com/instructure/instructure-ui/commit/e1016be3bc32307f8b05fdf1d4176e4915cc8dd6))
-* **ui-modal:** inherit border radius for ModalHeader ([03cf94d](https://github.com/instructure/instructure-ui/commit/03cf94d2d2a2c8f639c9e23eb9af78e38945db60))
-
-
-
-
+- **ui-color-picker,ui-color-utils:** fix corrupted CJS build ([e1016be](https://github.com/instructure/instructure-ui/commit/e1016be3bc32307f8b05fdf1d4176e4915cc8dd6))
+- **ui-modal:** inherit border radius for ModalHeader ([03cf94d](https://github.com/instructure/instructure-ui/commit/03cf94d2d2a2c8f639c9e23eb9af78e38945db60))
 
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only
 
-
-
-
-
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
-
 
 ### Bug Fixes
 
-* **ui-menu:** menuItem's onSelect type did not expose its value and selected types ([c58fff8](https://github.com/instructure/instructure-ui/commit/c58fff8736ac430a8992bce1caa11bf3a1f3f5b7))
-
+- **ui-menu:** menuItem's onSelect type did not expose its value and selected types ([c58fff8](https://github.com/instructure/instructure-ui/commit/c58fff8736ac430a8992bce1caa11bf3a1f3f5b7))
 
 ### Features
 
-* **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
-
-
-
-
+- **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
 
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
-
 ### Bug Fixes
 
-* **ui-buttons:** do not emit failed prop type warning when setting CondensedButton's color to 'secondary' ([a3587df](https://github.com/instructure/instructure-ui/commit/a3587df46cd86d22cb037694bc397d48196a33d4))
-
+- **ui-buttons:** do not emit failed prop type warning when setting CondensedButton's color to 'secondary' ([a3587df](https://github.com/instructure/instructure-ui/commit/a3587df46cd86d22cb037694bc397d48196a33d4))
 
 ### Features
 
-* **ui-top-nav-bar:** add workaround hack for new topnav design with the old api ([e5b34c0](https://github.com/instructure/instructure-ui/commit/e5b34c0298cc6b45c82f5d2ee3b5ce4c9ff07c28))
-* **ui,ui-date-input:** add new DateInput2 component ([9c893fc](https://github.com/instructure/instructure-ui/commit/9c893fc6ac1ae5ef4648f573b648cad78997ac86))
-
-
-
-
+- **ui-top-nav-bar:** add workaround hack for new topnav design with the old api ([e5b34c0](https://github.com/instructure/instructure-ui/commit/e5b34c0298cc6b45c82f5d2ee3b5ce4c9ff07c28))
+- **ui,ui-date-input:** add new DateInput2 component ([9c893fc](https://github.com/instructure/instructure-ui/commit/9c893fc6ac1ae5ef4648f573b648cad78997ac86))
 
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
-
 ### Bug Fixes
 
-* **ui-drilldown:** index drilldown options to always preserve the correct order ([3159d06](https://github.com/instructure/instructure-ui/commit/3159d06eb7aad8573c2227f379af1e716b09e391))
-* **ui-file-drop:** set aria-invalid to true when there are error messages ([67fce51](https://github.com/instructure/instructure-ui/commit/67fce51baa4c0b90409f487a5ad0f6b007ad6831))
-* **ui-number-input,ui-pagination:** set numberinput type to number ([19f27f5](https://github.com/instructure/instructure-ui/commit/19f27f57470b4c9c5728009eae6b1fddcbb78695))
-* **ui-top-nav-bar:** fix topnavbar item width changing ([88993e2](https://github.com/instructure/instructure-ui/commit/88993e2729f74d8991bcd4d1d215efeac0d7e510))
-* **ui-top-nav-bar:** lowered topnavbar zindex so it goes below trays/popovers/modals/etc ([bcfcb84](https://github.com/instructure/instructure-ui/commit/bcfcb844f13c29934ffc4286c6bd51e05a9aaf15))
-
+- **ui-drilldown:** index drilldown options to always preserve the correct order ([3159d06](https://github.com/instructure/instructure-ui/commit/3159d06eb7aad8573c2227f379af1e716b09e391))
+- **ui-file-drop:** set aria-invalid to true when there are error messages ([67fce51](https://github.com/instructure/instructure-ui/commit/67fce51baa4c0b90409f487a5ad0f6b007ad6831))
+- **ui-number-input,ui-pagination:** set numberinput type to number ([19f27f5](https://github.com/instructure/instructure-ui/commit/19f27f57470b4c9c5728009eae6b1fddcbb78695))
+- **ui-top-nav-bar:** fix topnavbar item width changing ([88993e2](https://github.com/instructure/instructure-ui/commit/88993e2729f74d8991bcd4d1d215efeac0d7e510))
+- **ui-top-nav-bar:** lowered topnavbar zindex so it goes below trays/popovers/modals/etc ([bcfcb84](https://github.com/instructure/instructure-ui/commit/bcfcb844f13c29934ffc4286c6bd51e05a9aaf15))
 
 ### Features
 
-* **ui-table:** remove restriction for children types and add documentation ([00e3026](https://github.com/instructure/instructure-ui/commit/00e30266d178c977fe828868b5dc000717dd8e1d))
-* **ui-tray:** add optional mask overlay to tray ([8616638](https://github.com/instructure/instructure-ui/commit/8616638d275c82724660ffd29842660aefa36688))
-
-
-
-
+- **ui-table:** remove restriction for children types and add documentation ([00e3026](https://github.com/instructure/instructure-ui/commit/00e30266d178c977fe828868b5dc000717dd8e1d))
+- **ui-tray:** add optional mask overlay to tray ([8616638](https://github.com/instructure/instructure-ui/commit/8616638d275c82724660ffd29842660aefa36688))
 
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
-
 ### Bug Fixes
 
-* **ui-buttons:** allow `secondary` option for CondensedButton color ([eca60d3](https://github.com/instructure/instructure-ui/commit/eca60d31b5a083ad60a77d1635c8bc24ef8e3a5f))
-* **ui-color-picker:** add styling for disabled state ([7d6d3ad](https://github.com/instructure/instructure-ui/commit/7d6d3ad80a20fe325b397f83a01ac3ae62d0b6ec))
-* **ui-react-utils:** remove defaultProps from DeterministicContextProvider ([5c89612](https://github.com/instructure/instructure-ui/commit/5c89612ceb4227f26462929068045bc06f3c080b))
-* **ui-tabs:** fix horizontal scrolling with keyboard navigation ([a25c7db](https://github.com/instructure/instructure-ui/commit/a25c7db1ebede622f489dd65872ed8fc5a1b9651))
-* **ui-tabs:** fix id generation when null is present as children ([85765ae](https://github.com/instructure/instructure-ui/commit/85765ae3183ac121714cd814a322dcc012ed2f72))
-* **ui-top-nav-bar:** keep width unchanged when active status is set to topnavbar.item ([9770827](https://github.com/instructure/instructure-ui/commit/9770827de8968745d9b1c71cea19b3dd94315d0f))
-* **ui-top-nav-bar:** show nothing in smallviewportlayout when there is one crumb link ([1c380a9](https://github.com/instructure/instructure-ui/commit/1c380a9943ffc1213d19961dc840181fb26a0308))
-
+- **ui-buttons:** allow `secondary` option for CondensedButton color ([eca60d3](https://github.com/instructure/instructure-ui/commit/eca60d31b5a083ad60a77d1635c8bc24ef8e3a5f))
+- **ui-color-picker:** add styling for disabled state ([7d6d3ad](https://github.com/instructure/instructure-ui/commit/7d6d3ad80a20fe325b397f83a01ac3ae62d0b6ec))
+- **ui-react-utils:** remove defaultProps from DeterministicContextProvider ([5c89612](https://github.com/instructure/instructure-ui/commit/5c89612ceb4227f26462929068045bc06f3c080b))
+- **ui-tabs:** fix horizontal scrolling with keyboard navigation ([a25c7db](https://github.com/instructure/instructure-ui/commit/a25c7db1ebede622f489dd65872ed8fc5a1b9651))
+- **ui-tabs:** fix id generation when null is present as children ([85765ae](https://github.com/instructure/instructure-ui/commit/85765ae3183ac121714cd814a322dcc012ed2f72))
+- **ui-top-nav-bar:** keep width unchanged when active status is set to topnavbar.item ([9770827](https://github.com/instructure/instructure-ui/commit/9770827de8968745d9b1c71cea19b3dd94315d0f))
+- **ui-top-nav-bar:** show nothing in smallviewportlayout when there is one crumb link ([1c380a9](https://github.com/instructure/instructure-ui/commit/1c380a9943ffc1213d19961dc840181fb26a0308))
 
 ### Features
 
-* **shared-types,ui-calendar,ui-select:** add yearpicker functionality to calendar ([2c0c6e0](https://github.com/instructure/instructure-ui/commit/2c0c6e081d96fc821c1296df5c4f1fba9a8c162c))
-* **ui-menu:** add maxHeight functionality to Menu ([6494c4a](https://github.com/instructure/instructure-ui/commit/6494c4a78522e5c2a16d55ed5f000b8b7647c47d))
-* **ui-tabs:** add option for persisting tabpanels ([6fe73a3](https://github.com/instructure/instructure-ui/commit/6fe73a3ec76c88fcc7baf2f587276de595316dbc))
-
-
-
-
+- **shared-types,ui-calendar,ui-select:** add yearpicker functionality to calendar ([2c0c6e0](https://github.com/instructure/instructure-ui/commit/2c0c6e081d96fc821c1296df5c4f1fba9a8c162c))
+- **ui-menu:** add maxHeight functionality to Menu ([6494c4a](https://github.com/instructure/instructure-ui/commit/6494c4a78522e5c2a16d55ed5f000b8b7647c47d))
+- **ui-tabs:** add option for persisting tabpanels ([6fe73a3](https://github.com/instructure/instructure-ui/commit/6fe73a3ec76c88fcc7baf2f587276de595316dbc))
 
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package instructure-ui
 
-
-
-
-
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
-
 
 ### Features
 
-* **instui-cli,ui-codemods,ui-top-nav-bar:** remove desktopConfig prop from TopNavBar.Layout ([d5efe5f](https://github.com/instructure/instructure-ui/commit/d5efe5f76b5af15db6ff9224a501121f35bf1ed9))
-* **instui-config,ui-codemods:** remove instui-cli and template packages ([17a4442](https://github.com/instructure/instructure-ui/commit/17a4442b917d0516d6977ab8bc845dd609a84e49))
-* set tooling packages to private ([17ab811](https://github.com/instructure/instructure-ui/commit/17ab81187c0ad7778bf3afd1426ece7ee3ca1136))
-* **shared-types,ui,ui-navigation:** remove deprecated component Navigation ([0173c76](https://github.com/instructure/instructure-ui/commit/0173c761f050d801f4191b823d423e6e29abedd5))
-* **ui-buttons,ui-text:** remove deprecated prop values ([f6b27d8](https://github.com/instructure/instructure-ui/commit/f6b27d84fe9dfbd2987dc5af7edefb093bcb4e1b))
-* **ui-dom-utils,ui-react-utils,ui-utils:** remove deprecated utils ([0a8c8e3](https://github.com/instructure/instructure-ui/commit/0a8c8e3230db7a7ec107bb726d1f98375c9446c4))
-* **ui-overlays:** remove deprecated props from Mask and Overlay ([e079b81](https://github.com/instructure/instructure-ui/commit/e079b81859dc9dfe69e16ba65a1e1f5c24740640))
-* **ui-top-nav-bar:** remove renderName and nameBackground prop from TopNavBar.Brand ([8e48ab5](https://github.com/instructure/instructure-ui/commit/8e48ab5d0302d6205f372a6ddd833cae860aee5b))
-
+- **instui-cli,ui-codemods,ui-top-nav-bar:** remove desktopConfig prop from TopNavBar.Layout ([d5efe5f](https://github.com/instructure/instructure-ui/commit/d5efe5f76b5af15db6ff9224a501121f35bf1ed9))
+- **instui-config,ui-codemods:** remove instui-cli and template packages ([17a4442](https://github.com/instructure/instructure-ui/commit/17a4442b917d0516d6977ab8bc845dd609a84e49))
+- set tooling packages to private ([17ab811](https://github.com/instructure/instructure-ui/commit/17ab81187c0ad7778bf3afd1426ece7ee3ca1136))
+- **shared-types,ui,ui-navigation:** remove deprecated component Navigation ([0173c76](https://github.com/instructure/instructure-ui/commit/0173c761f050d801f4191b823d423e6e29abedd5))
+- **ui-buttons,ui-text:** remove deprecated prop values ([f6b27d8](https://github.com/instructure/instructure-ui/commit/f6b27d84fe9dfbd2987dc5af7edefb093bcb4e1b))
+- **ui-dom-utils,ui-react-utils,ui-utils:** remove deprecated utils ([0a8c8e3](https://github.com/instructure/instructure-ui/commit/0a8c8e3230db7a7ec107bb726d1f98375c9446c4))
+- **ui-overlays:** remove deprecated props from Mask and Overlay ([e079b81](https://github.com/instructure/instructure-ui/commit/e079b81859dc9dfe69e16ba65a1e1f5c24740640))
+- **ui-top-nav-bar:** remove renderName and nameBackground prop from TopNavBar.Brand ([8e48ab5](https://github.com/instructure/instructure-ui/commit/8e48ab5d0302d6205f372a6ddd833cae860aee5b))
 
 ### BREAKING CHANGES
 
-* **instui-config,ui-codemods:** instui-cli and template packages has been removed
-* **ui-top-nav-bar:** renderName and nameBackground props have been removed
-* following packages have been set to private:
-- cz-lerna-changelog
-- slint-plugin-instructure-ui
-- pkg-utils
-- ui-babel-preset
-- ui-eslint-config
-- ui-karma-config
-- ui-scripts
-- ui-stylelint-config
-- ui-webpack-config
-* **instui-cli,ui-codemods,ui-top-nav-bar:** desktopConfig prop from TopNavBar.Layout has been removed
-* **ui-dom-utils,ui-react-utils,ui-utils:** deprecated utils has been removed
-* **ui-overlays:** removed onDismiss prop from Mask and applicationElement from Overlay
-* **ui-buttons,ui-text:** deprecated property values has been removed
+- **instui-config,ui-codemods:** instui-cli and template packages has been removed
+- **ui-top-nav-bar:** renderName and nameBackground props have been removed
+- following packages have been set to private:
 
+* cz-lerna-changelog
+* slint-plugin-instructure-ui
+* pkg-utils
+* ui-babel-preset
+* ui-eslint-config
+* ui-karma-config
+* ui-scripts
+* ui-stylelint-config
+* ui-webpack-config
 
-
-
+- **instui-cli,ui-codemods,ui-top-nav-bar:** desktopConfig prop from TopNavBar.Layout has been removed
+- **ui-dom-utils,ui-react-utils,ui-utils:** deprecated utils has been removed
+- **ui-overlays:** removed onDismiss prop from Mask and applicationElement from Overlay
+- **ui-buttons,ui-text:** deprecated property values has been removed
 
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
-
 ### Features
 
-* **ui-top-nav-bar:** add onclick prop for hidden menu item ([7228ae1](https://github.com/instructure/instructure-ui/commit/7228ae160a449939f0427222b009b747b0daf926))
-
-
-
-
+- **ui-top-nav-bar:** add onclick prop for hidden menu item ([7228ae1](https://github.com/instructure/instructure-ui/commit/7228ae160a449939f0427222b009b747b0daf926))
 
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
-
 ### Bug Fixes
 
-* **ui-dialog:** revert ecc0ee8 ([deb44dd](https://github.com/instructure/instructure-ui/commit/deb44ddbe05c472af0ba13d00cc2fa410f15a212))
-* **ui-top-nav-bar:** change topnavbar secondary color to porcelaine ([4284cc0](https://github.com/instructure/instructure-ui/commit/4284cc0084b9302335717a52868d8de0a5d26bea))
-
-
-
-
+- **ui-dialog:** revert ecc0ee8 ([deb44dd](https://github.com/instructure/instructure-ui/commit/deb44ddbe05c472af0ba13d00cc2fa410f15a212))
+- **ui-top-nav-bar:** change topnavbar secondary color to porcelaine ([4284cc0](https://github.com/instructure/instructure-ui/commit/4284cc0084b9302335717a52868d8de0a5d26bea))
 
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
-
 ### Bug Fixes
 
-* **ui-dialog:** menu closes when clicking on submenu ([7e7d1aa](https://github.com/instructure/instructure-ui/commit/7e7d1aae54f5649f0dd2b8c5974bb27f23a9956b))
-* **ui-drawer-layout:** fix drawerlayout transition bug ([27ae4f1](https://github.com/instructure/instructure-ui/commit/27ae4f1acda8dd127ff55f2acd44790d7558ebe2))
-* **ui-tabs:** fix automatic id generation ([4645981](https://github.com/instructure/instructure-ui/commit/464598168ff9a2fd76fe2e02a8bc7b89f9c1f68f))
-* **ui-tray:** make focus trapping work ([048b9b4](https://github.com/instructure/instructure-ui/commit/048b9b436f6c4d9f4a82b47496a7beea774e82a9))
-
+- **ui-dialog:** menu closes when clicking on submenu ([7e7d1aa](https://github.com/instructure/instructure-ui/commit/7e7d1aae54f5649f0dd2b8c5974bb27f23a9956b))
+- **ui-drawer-layout:** fix drawerlayout transition bug ([27ae4f1](https://github.com/instructure/instructure-ui/commit/27ae4f1acda8dd127ff55f2acd44790d7558ebe2))
+- **ui-tabs:** fix automatic id generation ([4645981](https://github.com/instructure/instructure-ui/commit/464598168ff9a2fd76fe2e02a8bc7b89f9c1f68f))
+- **ui-tray:** make focus trapping work ([048b9b4](https://github.com/instructure/instructure-ui/commit/048b9b436f6c4d9f4a82b47496a7beea774e82a9))
 
 ### Features
 
-* **ui-buttons:** add stronger css rules for focused links ([84f2306](https://github.com/instructure/instructure-ui/commit/84f23068c5c03bb4ac64e539ec15abee35c33467))
-
-
-
-
+- **ui-buttons:** add stronger css rules for focused links ([84f2306](https://github.com/instructure/instructure-ui/commit/84f23068c5c03bb4ac64e539ec15abee35c33467))
 
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
