@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -32,14 +31,30 @@ import type {
   TableHeadTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { RowChild } from '../props'
 
 type TableHeadOwnProps = {
-  isStacked?: boolean
+  /**
+   * The sort `Select`'s label when using `stacked` layout and the table is
+   * sortable.
+   * If you don't want to display anything you should use `ScreenReaderContent`
+   * so screen readers can read the `Select`'s purpose
+   */
   renderSortLabel?: Renderable
   /**
-   * `Table.Row`
+   * The header row(s).
+   * Default type: `Table.Row`
+   *
+   * Its first child is treated specially if the table is sortable and has
+   * `stacked` layout:
+   *
+   * A `Select` is created which reads options from the first child's
+   * children, that tries to read the following props: `id`,
+   * `stackedSortByLabel`,`sortDirection`, `onRequestSort` (Available on
+   * `Table.ColHeader`).
+   * These are used to sort the table in this layout.
    */
-  children?: React.ReactNode
+  children?: RowChild
 }
 type PropKeys = keyof TableHeadOwnProps
 
@@ -53,15 +68,10 @@ type TableHeadStyle = ComponentStyle<'head'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
-  isStacked: PropTypes.bool,
   renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
-const allowedProps: AllowedPropKeys = [
-  'children',
-  'isStacked',
-  'renderSortLabel'
-]
+const allowedProps: AllowedPropKeys = ['children', 'renderSortLabel']
 
 export type { TableHeadProps, TableHeadStyle }
 export { propTypes, allowedProps }

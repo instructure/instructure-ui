@@ -23,13 +23,9 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ContextType, isValidElement } from 'react'
 
-import {
-  omitProps,
-  safeCloneElement,
-  matchComponentTypes
-} from '@instructure/ui-react-utils'
+import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -37,12 +33,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { Cell } from '../Cell'
-import { RowHeader } from '../RowHeader'
-
 import type { TableRowProps } from './props'
 import { allowedProps, propTypes } from './props'
-import type { RowHeaderChild, CellChild } from '../props'
+import TableContext from '../TableContext'
 
 /**
 ---
@@ -53,7 +46,8 @@ id: Table.Row
 @withStyle(generateStyle, generateComponentTheme)
 class Row extends Component<TableRowProps> {
   static readonly componentId = 'Table.Row'
-
+  static contextType = TableContext
+  declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
   static propTypes = propTypes
 
@@ -62,15 +56,23 @@ class Row extends Component<TableRowProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({
+      isStacked: this.context.isStacked,
+      hover: this.context.hover
+    })
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({
+      isStacked: this.context.isStacked,
+      hover: this.context.hover
+    })
   }
 
   render() {
-    const { children, styles, isStacked, headers } = this.props
+    const { children, styles } = this.props
+    const isStacked = this.context.isStacked
+    const headers = this.context.headers
 
     return (
       <View
@@ -82,20 +84,16 @@ class Row extends Component<TableRowProps> {
         {Children.toArray(children)
           .filter(Boolean)
           .map((child, index) => {
-            if (matchComponentTypes<RowHeaderChild>(child, [RowHeader])) {
+            if (isValidElement(child)) {
               return safeCloneElement(child, {
-                key: index,
-                isStacked
-              })
-            }
-            if (matchComponentTypes<CellChild>(child, [Cell])) {
-              return safeCloneElement(child, {
-                key: index,
+                key: child.props.name,
+                // Sent down for compatibility with custom components
+                // TODO DEPRECATED, remove in v11
                 isStacked,
+                // used by `Cell` to render its column title in `stacked` layout
                 header: headers && headers[index]
               })
             }
-
             return child
           })}
       </View>

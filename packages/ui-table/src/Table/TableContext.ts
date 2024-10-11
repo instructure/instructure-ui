@@ -22,41 +22,33 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import { createContext } from 'react'
+import { Renderable } from '@instructure/shared-types'
 
-import type {
-  OtherHTMLAttributes,
-  PropValidators,
-  TableRowTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-
-type TableRowOwnProps = {
+type TableContextType = {
   /**
-   * A row's children should be table cells. Its children should have the
-   * `header` prop to render the column header in `stacked` layout
-   *
-   * By default `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`
+   * If `true` the table gets rendered in one column to be more readable on
+   * narrow screens.
    */
-  children?: React.ReactElement | React.ReactElement[]
+  isStacked: boolean
+  /**
+   * Highlight each row on hover.
+   */
+  hover: boolean
+  /**
+   * Contents of the first row of cells. Has value if `isStacked` is `true`.
+   */
+  headers?: Renderable[]
 }
 
-type PropKeys = keyof TableRowOwnProps
+/**
+ * React context created by the `Table` component to hold its data
+ */
+const TableContext = createContext<TableContextType>({
+  isStacked: false,
+  hover: false
+})
 
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-type TableRowProps = TableRowOwnProps &
-  WithStyleProps<TableRowTheme, TableRowStyle> &
-  OtherHTMLAttributes<TableRowOwnProps>
-
-type TableRowStyle = ComponentStyle<'row'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node
-}
-
-const allowedProps: AllowedPropKeys = ['children']
-
-export type { TableRowProps, TableRowStyle }
-export { propTypes, allowedProps }
+export default TableContext
+export { TableContext }
+export type { TableContextType }

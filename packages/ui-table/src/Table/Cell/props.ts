@@ -33,10 +33,14 @@ import type {
 } from '@instructure/shared-types'
 
 type TableCellOwnProps = {
-  isStacked?: boolean
+  /**
+   * Contains the column header for this cell.
+   * This gets rendered in `stacked` layout to identify the column the data
+   * belongs to.
+   */
   header?: Renderable
   /**
-   * Control the text alignment in cell
+   * Controls the text alignment in cell.
    */
   textAlign?: 'start' | 'center' | 'end'
   children?: Renderable
@@ -54,17 +58,11 @@ type TableCellStyle = ComponentStyle<'cell'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  isStacked: PropTypes.bool,
   header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   textAlign: PropTypes.oneOf(['start', 'center', 'end'])
 }
 
-const allowedProps: AllowedPropKeys = [
-  'children',
-  'isStacked',
-  'header',
-  'textAlign'
-]
+const allowedProps: AllowedPropKeys = ['children', 'header', 'textAlign']
 
 export type { TableCellProps, TableCellStyle }
 export { propTypes, allowedProps }

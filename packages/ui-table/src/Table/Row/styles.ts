@@ -32,15 +32,14 @@ import type { TableRowProps, TableRowStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} extraArgs the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: TableRowTheme,
-  props: TableRowProps
+  _props: TableRowProps,
+  extraArgs: { isStacked: boolean; hover: boolean }
 ): TableRowStyle => {
-  const { hover, isStacked } = props
-
   return {
     row: {
       label: 'row',
@@ -54,7 +53,7 @@ const generateStyle = (
       borderBottomWidth: '0.0625rem',
       borderBottomColor: componentTheme.borderColor,
 
-      ...(hover && {
+      ...(extraArgs.hover && {
         borderLeft: '0.1875rem solid transparent',
         borderRight: '0.1875rem solid transparent',
 
@@ -64,7 +63,7 @@ const generateStyle = (
         }
       }),
 
-      ...(isStacked && { padding: componentTheme.padding })
+      ...(extraArgs.isStacked && { padding: componentTheme.padding })
     }
   }
 }
