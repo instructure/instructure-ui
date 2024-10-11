@@ -29,8 +29,6 @@ jobs:
           esac
       - name: Build docs-app
         run: npm run build:docs
-      - name: Copy redirects config file to the __build__ directory.
-        run: cp ./packages/__docs__/_redirects_gh_pages ./packages/__docs__/__build__
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
