@@ -131,7 +131,7 @@ type TextAreaProps =
     WithDeterministicIdProps
 
 type TextAreaStyle = ComponentStyle<
-  'textArea' | 'textAreaLayout' | 'textAreaOutline'
+  'textArea' | 'textAreaLayout' | 'textAreaOutline' | 'requiredInvalid'
 >
 
 const propTypes: PropValidators<PropKeys> = {

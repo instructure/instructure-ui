@@ -136,7 +136,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     if (this.hasMessages) {
       return (
         this.props.messages!.findIndex((message: FormMessage) => {
-          return message.type === 'error'
+          return message.type === 'error' || message.type === 'newError'
         }) >= 0
       )
     }

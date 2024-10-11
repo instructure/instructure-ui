@@ -197,6 +197,7 @@ type NumberInputStyle = ComponentStyle<
   | 'inputWidth'
   | 'inputContainer'
   | 'input'
+  | 'requiredInvalid'
 >
 
 const propTypes: PropValidators<PropKeys> = {

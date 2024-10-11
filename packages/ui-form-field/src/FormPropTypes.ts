@@ -27,13 +27,19 @@ import PropTypes from 'prop-types'
 
 const formMessageTypePropType = PropTypes.oneOf([
   'error',
+  'newError',
   'hint',
   'success',
   'screenreader-only'
 ])
 const formMessageChildPropType = PropTypes.node
 
-type FormMessageType = 'error' | 'hint' | 'success' | 'screenreader-only'
+type FormMessageType =
+  | 'newError'
+  | 'error'
+  | 'hint'
+  | 'success'
+  | 'screenreader-only'
 type FormMessageChild = React.ReactNode
 
 /**

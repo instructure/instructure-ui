@@ -40,6 +40,7 @@ import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { CheckboxProps, CheckboxState } from './props'
@@ -57,7 +58,7 @@ tags: toggle, switch
 **/
 
 @withDeterministicId()
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
@@ -181,6 +182,16 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     return isActiveElement(this._input)
   }
 
+  get isNewError() {
+    return !!this.props.messages?.find((m) => m.type === 'newError')
+  }
+
+  get invalid() {
+    return !!this.props.messages?.find(
+      (m) => m.type === 'newError' || m.type === 'error'
+    )
+  }
+
   focus() {
     this._input && this._input.focus()
   }
@@ -194,7 +205,9 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       readOnly,
       indeterminate,
       labelPlacement,
-      themeOverride
+      themeOverride,
+      isRequired,
+      styles
     } = this.props
 
     const { hovered, focused } = this.state
@@ -214,8 +227,12 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           readOnly={readOnly}
           labelPlacement={labelPlacement}
           themeOverride={themeOverride as Partial<ToggleFacadeTheme>}
+          invalid={this.invalid}
         >
           {label}
+          {isRequired && (
+            <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+          )}
         </ToggleFacade>
       )
     } else {
@@ -227,18 +244,31 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           checked={this.checked}
           indeterminate={indeterminate}
           themeOverride={themeOverride as Partial<CheckboxFacadeTheme>}
+          invalid={this.invalid}
         >
           {label}
+          {isRequired && (
+            <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+          )}
         </CheckboxFacade>
       )
     }
   }
 
   renderMessages() {
-    const { messages } = this.props
+    const { messages, styles, variant } = this.props
 
     return messages && messages.length > 0 ? (
-      <View display="block" margin="small 0 0">
+      <View
+        display="block"
+        margin="small 0 0"
+        css={
+          this.isNewError &&
+          (variant === 'toggle'
+            ? styles?.indentedToggleError
+            : styles?.indentedError)
+        }
+      >
         <FormFieldMessages messages={messages} />
       </View>
     ) : null
@@ -256,7 +286,8 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       onMouseOut,
       indeterminate,
       variant,
-      styles
+      styles,
+      isRequired
     } = this.props
 
     const props = omitProps(this.props, Checkbox.allowedProps)
@@ -284,6 +315,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             ref={(c) => {
               this._input = c
             }}
+            required={isRequired}
             disabled={disabled || readOnly}
             aria-checked={indeterminate ? 'mixed' : undefined}
             css={styles?.input}

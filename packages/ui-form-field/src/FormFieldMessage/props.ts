@@ -46,7 +46,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type FormFieldMessageProps = FormFieldMessageOwnProps &
   WithStyleProps<FormFieldMessageTheme, FormFieldMessageStyle>
 
-type FormFieldMessageStyle = ComponentStyle<'formFieldMessage'>
+type FormFieldMessageStyle = ComponentStyle<'formFieldMessage' | 'errorIcon'>
 
 const propTypes: PropValidators<PropKeys> = {
   variant: formMessageTypePropType,

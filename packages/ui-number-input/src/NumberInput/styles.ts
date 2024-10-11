@@ -98,6 +98,9 @@ const generateStyle = (
   }
 
   return {
+    requiredInvalid: {
+      color: componentTheme.requiredInvalidColor
+    },
     numberInput: {
       label: 'numberInput'
     },
