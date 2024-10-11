@@ -101,7 +101,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   get invalid() {
     return (
       !!this.props.messages &&
-      this.props.messages.some((message) => message.type === 'error')
+      this.props.messages.some((message) => message.type === 'error' || message.type === 'newError')
     )
   }
 
@@ -232,7 +232,8 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       isRequired,
       showArrows,
       value,
-      width
+      width,
+      styles
     } = this.props
 
     const { interaction } = this
@@ -240,7 +241,14 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
-        label={callRenderProp(renderLabel)}
+        label={
+          <React.Fragment>
+            {callRenderProp(renderLabel)}
+            {isRequired && (
+              <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+            )}
+          </React.Fragment>
+        }
         inline={display === 'inline-block'}
         id={this.id}
         elementRef={this.handleRef}

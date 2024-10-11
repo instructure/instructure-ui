@@ -31,7 +31,7 @@ import { FormFieldMessageTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): FormFieldMessageTheme => {
-  const { colors, typography, key: themeName } = theme
+  const { colors, typography, key: themeName, spacing } = theme
 
   const themeSpecificStyle: ThemeSpecificStyle<FormFieldMessageTheme> = {
     canvas: {
@@ -47,7 +47,8 @@ const generateComponentTheme = (theme: Theme): FormFieldMessageTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     fontSize: typography?.fontSizeSmall,
-    lineHeight: typography?.lineHeight
+    lineHeight: typography?.lineHeight,
+    errorIconMarginRight: spacing.xxSmall
   }
 
   return {

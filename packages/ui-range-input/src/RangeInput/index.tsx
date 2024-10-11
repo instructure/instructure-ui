@@ -155,11 +155,12 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
     return typeof value === 'string' ? parseInt(value) : value
   }
 
+  // TODO is this getter even user for anything?
   get invalid() {
     return (
       this.props.messages &&
       this.props.messages.findIndex((message) => {
-        return message.type === 'error'
+        return message.type === 'error' || message.type === 'newError'
       }) >= 0
     )
   }

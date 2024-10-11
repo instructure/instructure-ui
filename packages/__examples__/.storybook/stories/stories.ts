@@ -35,6 +35,7 @@ import { renderPage } from './renderPage'
 // @ts-ignore TODO figure out why this is an error
 import propJSONData from '../../prop-data.json'
 import TooltipPositioning from './TooltipPositioning'
+import FormErrors from './FormErrors'
 import SourceCodeEditorExamples from './SourceCodeEditorExamples'
 
 type AdditionalExample = {
@@ -65,6 +66,15 @@ const additionalExamples: AdditionalExample[] = [
       {
         storyName: 'Tooltip positions',
         storyFn: () => TooltipPositioning()
+      }
+    ]
+  },
+  {
+    title: 'Form errors',
+    stories: [
+      {
+        storyName: 'Form errors',
+        storyFn: () => FormErrors()
       }
     ]
   },

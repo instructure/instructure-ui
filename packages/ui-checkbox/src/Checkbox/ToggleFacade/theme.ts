@@ -54,6 +54,7 @@ const generateComponentTheme = (theme: Theme): ToggleFacadeTheme => {
 
   const componentVariables: ToggleFacadeTheme = {
     color: colors?.contrasts?.white1010,
+    errorBorderColor: colors?.ui?.textError,
     background: colors?.contrasts?.grey1111,
     borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,

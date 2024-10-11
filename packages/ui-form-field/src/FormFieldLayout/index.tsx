@@ -179,9 +179,12 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     // any cast is needed to prevent Expression produces a union type that is too complex to represent errors
     const ElementType = this.elementType as any
 
-    const { makeStyles, styles, ...props } = this.props
+    const { makeStyles, styles, messages, isGroup, ...props } = this.props
 
     const { width, layout, children } = props
+
+    const hasNewErrorMsg =
+      !!messages?.find((m) => m.type === 'newError') && isGroup
     return (
       <ElementType
         {...omitProps(props, [
@@ -208,10 +211,13 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
               width={this.inlineContainerAndLabel ? 'auto' : undefined}
               elementRef={this.handleInputContainerRef}
             >
+              {hasNewErrorMsg && (
+                <div css={styles?.groupErrorMessage}>{this.renderVisibleMessages()}</div>
+              )}
               {children}
             </Grid.Col>
           </Grid.Row>
-          {this.renderVisibleMessages()}
+          {!hasNewErrorMsg && this.renderVisibleMessages()}
         </Grid>
       </ElementType>
     )

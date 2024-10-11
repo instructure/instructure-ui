@@ -39,6 +39,10 @@ type ToggleFacadeOwnProps = {
   focused?: boolean
   size?: 'small' | 'medium' | 'large'
   labelPlacement?: 'top' | 'start' | 'end'
+  /**
+   * Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly.
+   */
+  invalid?: boolean
 }
 
 type PropKeys = keyof ToggleFacadeOwnProps
@@ -59,7 +63,8 @@ const propTypes: PropValidators<PropKeys> = {
   readOnly: PropTypes.bool,
   focused: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
+  labelPlacement: PropTypes.oneOf(['top', 'start', 'end']),
+  invalid: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

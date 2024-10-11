@@ -54,6 +54,9 @@ const generateStyle = (
   }
 
   return {
+    requiredInvalid: {
+      color: componentTheme.requiredInvalidColor
+    },
     textArea: {
       label: 'textArea',
       all: 'initial',

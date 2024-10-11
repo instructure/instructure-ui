@@ -191,7 +191,7 @@ describe('<SimpleSelect />', () => {
 
     it('should render required when isRequired={true}', async () => {
       render(<SimpleSelect renderLabel="Choose an option" isRequired />)
-      const input = screen.getByLabelText('Choose an option')
+      const input = screen.getByLabelText('Choose an option *')
 
       expect(input).toHaveAttribute('required')
     })

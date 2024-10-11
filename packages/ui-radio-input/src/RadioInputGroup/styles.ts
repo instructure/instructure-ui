@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import type { FormFieldMessageTheme } from '@instructure/shared-types'
-import type { FormFieldMessageProps, FormFieldMessageStyle } from './props'
-import type { FormMessageType } from '../FormPropTypes'
+import type { RadioInputGroupTheme } from '@instructure/shared-types'
+import type { RadioInputGroupStyle } from './props'
 
 /**
  * ---
@@ -32,38 +31,14 @@ import type { FormMessageType } from '../FormPropTypes'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  componentTheme: FormFieldMessageTheme,
-  props: FormFieldMessageProps
-): FormFieldMessageStyle => {
-  const { variant } = props
-
-  const variants: Record<FormMessageType, { color?: string }> = {
-    hint: { color: componentTheme.colorHint },
-    error: { color: componentTheme.colorError },
-    newError: { color: componentTheme.colorError },
-    success: { color: componentTheme.colorSuccess },
-    'screenreader-only': {}
-  }
+const generateStyle = (componentTheme: RadioInputGroupTheme): RadioInputGroupStyle => {
+  const { invalidAsteriskColor } = componentTheme
 
   return {
-    errorIcon: {
-      fontSize: componentTheme.fontSize,
-      marginRight: componentTheme.errorIconMarginRight,
-      lineHeight: 1.25,
-    },
-    formFieldMessage: {
-      label: 'formFieldMessage',
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      fontSize: componentTheme.fontSize,
-      lineHeight: componentTheme.lineHeight,
-      display: 'block',
-      ...variants[variant!]
+    invalidAsterisk: {
+      color: invalidAsteriskColor
     }
   }
 }

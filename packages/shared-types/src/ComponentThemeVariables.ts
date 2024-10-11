@@ -316,6 +316,7 @@ export type CheckboxFacadeTheme = {
   iconSizeSmall: string
   iconSizeMedium: string
   iconSizeLarge: string
+  errorBorderColor: Colors['contrasts']['red4570']
 }
 
 export type ToggleFacadeTheme = {
@@ -343,6 +344,7 @@ export type ToggleFacadeTheme = {
   labelFontSizeSmall: Typography['fontSizeSmall']
   labelFontSizeMedium: Typography['fontSizeMedium']
   labelFontSizeLarge: Typography['fontSizeLarge']
+  errorBorderColor: Colors['contrasts']['red4570']
 }
 
 export type CodeEditorTheme = {
@@ -584,6 +586,7 @@ export type FormFieldMessageTheme = {
   fontWeight: Typography['fontWeightNormal']
   fontSize: Typography['fontSizeSmall']
   lineHeight: Typography['lineHeight']
+  errorIconMarginRight: Spacing['xxSmall']
 }
 
 export type FormFieldMessagesTheme = {
@@ -879,6 +882,7 @@ export type NumberInputTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['contrasts']['red5782']
 }
 
 export type OptionsItemTheme = {
@@ -1365,6 +1369,7 @@ export type TextAreaTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['contrasts']['red5782']
 }
 
 export type TextInputTheme = {
@@ -1389,6 +1394,7 @@ export type TextInputTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['contrasts']['red5782']
 }
 
 export type ToggleDetailsTheme = {
@@ -1659,6 +1665,10 @@ export type ViewTheme = {
   borderStyle: string
 }
 
+export type RadioInputGroupTheme = {
+  invalidAsteriskColor: Colors['contrasts']['red5782']
+}
+
 export interface ThemeVariables {
   Avatar: AvatarTheme
   Alert: AlertTheme
@@ -1797,4 +1807,5 @@ export interface ThemeVariables {
   TruncateText: TruncateTextTheme
   ContextView: ContextViewTheme
   View: ViewTheme
+  RadioInputGroup: RadioInputGroupTheme
 }

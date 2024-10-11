@@ -22,48 +22,25 @@
  * SOFTWARE.
  */
 
-import type { FormFieldLayoutProps, FormFieldLayoutStyle } from './props'
+import type { Theme } from '@instructure/ui-themes'
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (
-  _componentTheme: null,
-  props: FormFieldLayoutProps
-): FormFieldLayoutStyle => {
-  const { inline } = props
+const generateComponentTheme = (theme: Theme): any => {
+  const { colors, forms, spacing } = theme
+
+  const componentVariables: any = {
+    requiredInvalidColor: colors?.contrasts?.red5782,
+    toggleErrorInsetWidth: `calc(${forms?.inputHeightSmall}*1.5 + ${spacing?.small})`,
+    checkErrorInsetWidth: `calc(1.25em + ${spacing?.xSmall})`,
+  }
 
   return {
-    groupErrorMessage: {
-      margin: '0.5rem',
-    },
-    formFieldLayout: {
-      label: 'formFieldLayout',
-      all: 'initial',
-      border: '0',
-      padding: '0',
-      margin: '0',
-      minWidth: '0',
-      direction: 'inherit',
-      textAlign: 'start',
-      opacity: 'inherit',
-      display: 'block',
-      width: '100%',
-
-      ...(inline && {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        width: 'auto'
-      })
-    }
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

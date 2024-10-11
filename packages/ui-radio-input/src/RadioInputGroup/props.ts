@@ -28,10 +28,15 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
+import type {
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  RadioInputGroupTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -72,7 +77,7 @@ type RadioInputGroupOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['error', 'newError', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -87,6 +92,11 @@ type RadioInputGroupOwnProps = {
    * any children (ones that aren't `RadioInput` are passed through)
    */
   children?: React.ReactNode
+
+  /**
+   * Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change.
+   */
+  isRequired?: boolean
 }
 
 type PropKeys = keyof RadioInputGroupOwnProps
@@ -94,12 +104,15 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
+  WithStyleProps<RadioInputGroupTheme, RadioInputGroupStyle> &
   OtherHTMLAttributes<RadioInputGroupOwnProps> &
   WithDeterministicIdProps
 
 type RadioInputGroupState = {
   value?: string | number
 }
+
+type RadioInputGroupStyle = ComponentStyle<'invalidAsterisk'>
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,
@@ -115,7 +128,8 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   variant: PropTypes.oneOf(['simple', 'toggle']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
+  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
+  isRequired: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -133,5 +147,5 @@ const allowedProps: AllowedPropKeys = [
   'layout'
 ]
 
-export type { RadioInputGroupProps, RadioInputGroupState }
+export type { RadioInputGroupProps, RadioInputGroupState, RadioInputGroupStyle }
 export { propTypes, allowedProps }
