@@ -90,6 +90,12 @@ class RadioInputGroup extends Component<
     return !!this.props.messages && this.props.messages.length > 0
   }
 
+  get invalid() {
+    return !!this.props.messages?.find(
+      (m) => m.type === 'newError' || m.type === 'error'
+    )
+  }
+
   handleChange: RadioInputProps['onChange'] = (e) => {
     const value = e.target.value
 
@@ -145,13 +151,22 @@ class RadioInputGroup extends Component<
   }
 
   render() {
-    const { variant, layout, description } = this.props
+    const { variant, layout, description, isRequired } = this.props
+
+    const descriptionWithRequired = (
+      <>
+        {description}
+        {isRequired && (
+          <span style={this.invalid ? { color: '#C71F23' } : {}}> *</span>
+        )}
+      </>
+    )
 
     return (
       <FormFieldGroup
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
-        description={description}
+        description={descriptionWithRequired}
         layout={
           layout === 'columns' && variant === 'toggle' ? 'stacked' : layout
         } // toggles already display in cols

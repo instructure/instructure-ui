@@ -290,7 +290,7 @@ describe('<Select />', () => {
 
     it('should render required when isRequired={true}', () => {
       render(<Select renderLabel="Choose an option" isRequired />)
-      const input = screen.getByLabelText('Choose an option')
+      const input = screen.getByLabelText('Choose an option *')
 
       expect(input).toHaveAttribute('required')
     })

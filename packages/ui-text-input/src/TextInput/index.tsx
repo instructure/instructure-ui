@@ -179,7 +179,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     return (
       !!this.props.messages &&
       this.props.messages.findIndex((message) => {
-        return message.type === 'error'
+        return message.type === 'error' || message.type === 'newError'
       }) >= 0
     )
   }
@@ -314,6 +314,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       renderAfterInput,
       messages,
       inputContainerRef,
+      isRequired,
       styles
     } = this.props
 
@@ -329,7 +330,14 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     return (
       <FormField
         id={this.id}
-        label={callRenderProp(renderLabel)}
+        label={
+          <React.Fragment>
+            {callRenderProp(renderLabel)}
+            {isRequired && (
+              <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+            )}
+          </React.Fragment>
+        }
         messagesId={this._messagesId}
         messages={messages}
         inline={display === 'inline-block'}

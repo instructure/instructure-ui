@@ -197,6 +197,7 @@ type TextInputStyle = ComponentStyle<
   | 'innerWrapper'
   | 'inputLayout'
   | 'afterElement'
+  | 'requiredInvalid'
 >
 
 const propTypes: PropValidators<PropKeys> = {

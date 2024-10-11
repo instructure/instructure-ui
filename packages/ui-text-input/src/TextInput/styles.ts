@@ -157,6 +157,9 @@ const generateStyle = (
   }
 
   return {
+    requiredInvalid: {
+      color: componentTheme.requiredInvalidColor
+    },
     textInput: {
       label: 'textInput',
       ...inputStyle,
