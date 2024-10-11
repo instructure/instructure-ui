@@ -45,11 +45,16 @@ const generateStyle = (
   const variants: Record<FormMessageType, { color?: string }> = {
     hint: { color: componentTheme.colorHint },
     error: { color: componentTheme.colorError },
+    newError: { color: componentTheme.colorError },
     success: { color: componentTheme.colorSuccess },
     'screenreader-only': {}
   }
 
   return {
+    errorIcon: {
+      fontSize: componentTheme.fontSize,
+      marginRight: componentTheme.errorIconMarginRight,
+    },
     formFieldMessage: {
       label: 'formFieldMessage',
       fontFamily: componentTheme.fontFamily,

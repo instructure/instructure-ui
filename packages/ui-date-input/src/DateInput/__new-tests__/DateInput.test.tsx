@@ -270,7 +270,7 @@ describe('<DateInput />', () => {
           {generateDays()}
         </DateInput>
       )
-      const dateInput = screen.getByLabelText('Choose date')
+      const dateInput = screen.getByLabelText('Choose date *')
 
       expect(dateInput).toHaveAttribute('required')
     })

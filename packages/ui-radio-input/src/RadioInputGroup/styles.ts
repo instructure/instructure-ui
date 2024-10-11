@@ -22,39 +22,25 @@
  * SOFTWARE.
  */
 
-import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
-import { FormFieldMessageTheme } from '@instructure/shared-types'
+import type { RadioInputGroupTheme } from '@instructure/shared-types'
+import type { RadioInputGroupStyle } from './props'
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme: Theme): FormFieldMessageTheme => {
-  const { colors, typography, key: themeName, spacing } = theme
-
-  const themeSpecificStyle: ThemeSpecificStyle<FormFieldMessageTheme> = {
-    canvas: {
-      colorHint: theme['ic-brand-font-color-dark']
-    }
-  }
-
-  const componentVariables: FormFieldMessageTheme = {
-    colorHint: colors?.contrasts?.grey125125,
-    colorError: colors?.contrasts?.red4570,
-    colorSuccess: colors?.contrasts?.green4570,
-
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-    fontSize: typography?.fontSizeSmall,
-    lineHeight: typography?.lineHeight,
-    errorIconMarginRight: spacing.xxSmall
-  }
+const generateStyle = (componentTheme: RadioInputGroupTheme): RadioInputGroupStyle => {
+  const { invalidAsteriskColor } = componentTheme
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    invalidAsterisk: {
+      color: invalidAsteriskColor
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
