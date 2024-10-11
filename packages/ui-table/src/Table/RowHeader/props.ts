@@ -33,7 +33,6 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowHeaderOwnProps = {
-  isStacked?: boolean
   /**
    * Control the text alignment in row header
    */
@@ -53,11 +52,10 @@ type TableRowHeaderStyle = ComponentStyle<'rowHeader'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  isStacked: PropTypes.bool,
   textAlign: PropTypes.oneOf(['start', 'center', 'end'])
 }
 
-const allowedProps: AllowedPropKeys = ['children', 'isStacked', 'textAlign']
+const allowedProps: AllowedPropKeys = ['children', 'textAlign']
 
 export type { TableRowHeaderProps, TableRowHeaderStyle }
 export { propTypes, allowedProps }

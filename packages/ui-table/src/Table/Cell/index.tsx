@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, ContextType } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -34,6 +34,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TableCellProps } from './props'
 import { allowedProps, propTypes } from './props'
+import TableContext from '../TableContext'
 
 /**
 ---
@@ -44,7 +45,8 @@ id: Table.Cell
 @withStyle(generateStyle, generateComponentTheme)
 class Cell extends Component<TableCellProps> {
   static readonly componentId = 'Table.Cell'
-
+  static contextType = TableContext
+  declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
   static propTypes = propTypes
 
@@ -62,7 +64,8 @@ class Cell extends Component<TableCellProps> {
   }
 
   render() {
-    const { children, styles, isStacked, header } = this.props
+    const { children, styles, header } = this.props
+    const isStacked = this.context.isStacked
 
     return (
       <View

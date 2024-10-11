@@ -33,6 +33,10 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
   /**
+   * DEPRECATED. Use `TableContext` to read this value
+   */
+  isStacked?: boolean
+  /**
    * A unique id for this column. The `id` is also used as option in combobox,
    * when sortable table is in stacked layout,
    * and no `stackedSortByLabel` is provided.
@@ -52,18 +56,18 @@ type TableColHeaderOwnProps = {
    */
   textAlign?: 'start' | 'center' | 'end'
   /**
-   * The string of sorting direction
+   * The sorting direction
    */
   sortDirection?: 'none' | 'ascending' | 'descending'
   /**
-   * Callback fired when column header is clicked. Parameters: `(event, { id })`
+   * Callback fired when column header is clicked.
    */
   onRequestSort?: (
     event: React.SyntheticEvent,
     param: { id: TableColHeaderOwnProps['id'] }
   ) => void
   /**
-   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
+   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#scope
    */
   scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
   children?: React.ReactNode
@@ -85,6 +89,7 @@ type TableColHeaderStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
+  isStacked: PropTypes.bool,
   id: PropTypes.string.isRequired,
   stackedSortByLabel: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -97,6 +102,7 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'id',
+  'isStacked',
   'stackedSortByLabel',
   'children',
   'width',
