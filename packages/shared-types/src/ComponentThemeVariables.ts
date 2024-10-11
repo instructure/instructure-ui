@@ -316,6 +316,7 @@ export type CheckboxFacadeTheme = {
   iconSizeSmall: string
   iconSizeMedium: string
   iconSizeLarge: string
+  errorBorderColor: Colors['contrasts']['red4570']
 }
 
 export type ToggleFacadeTheme = {
@@ -343,6 +344,7 @@ export type ToggleFacadeTheme = {
   labelFontSizeSmall: Typography['fontSizeSmall']
   labelFontSizeMedium: Typography['fontSizeMedium']
   labelFontSizeLarge: Typography['fontSizeLarge']
+  errorBorderColor: Colors['contrasts']['red4570']
 }
 
 export type CodeEditorTheme = {
@@ -1389,6 +1391,7 @@ export type TextInputTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['contrasts']['red5782']
 }
 
 export type ToggleDetailsTheme = {

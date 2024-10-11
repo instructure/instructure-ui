@@ -22,45 +22,23 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
-
-const formMessageTypePropType = PropTypes.oneOf([
-  'error',
-  'newError',
-  'hint',
-  'success',
-  'screenreader-only'
-])
-const formMessageChildPropType = PropTypes.node
-
-type FormMessageType =
-  | 'newError'
-  | 'error'
-  | 'hint'
-  | 'success'
-  | 'screenreader-only'
-type FormMessageChild = React.ReactNode
+import type { Theme } from '@instructure/ui-themes'
 
 /**
- * ---
- * category: utilities/form
- * ---
- * Custom prop types for React components.
- * @module FormPropTypes
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const FormPropTypes = {
-  message: PropTypes.shape({
-    type: formMessageTypePropType,
-    text: formMessageChildPropType
-  })
+const generateComponentTheme = (theme: Theme): any => {
+  const { colors } = theme
+
+  const componentVariables: any = {
+    requiredInvalidColor: colors?.contrasts?.red5782
+  }
+
+  return {
+    ...componentVariables
+  }
 }
 
-type FormMessage = {
-  type: FormMessageType
-  text: FormMessageChild
-}
-
-export default FormPropTypes
-export { FormPropTypes, formMessageTypePropType, formMessageChildPropType }
-export type { FormMessage, FormMessageType, FormMessageChild }
+export default generateComponentTheme

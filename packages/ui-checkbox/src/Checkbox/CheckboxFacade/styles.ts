@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: CheckboxFacadeTheme,
   props: CheckboxFacadeProps
 ): CheckboxFacadeStyle => {
-  const { size, checked, focused, hovered, indeterminate } = props
+  const { size, checked, focused, hovered, indeterminate, error } = props
 
   const isChecked = checked || indeterminate
 
@@ -87,7 +87,9 @@ const generateStyle = (
       boxSizing: 'border-box',
       flexShrink: 0,
       transition: 'all 0.2s',
-      border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
+      border: error
+        ? `${componentTheme.borderWidth} solid ${componentTheme.errorBorderColor}`
+        : `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
       borderRadius: componentTheme.borderRadius,
       marginInlineEnd: componentTheme.marginRight,
       marginInlineStart: '0',
