@@ -7,7 +7,8 @@ on:
       - v9_maintenance
   workflow_dispatch:
 jobs:
-  deploy-docs:
+  deploy-release:
+    if: startsWith(github.event.head_commit.message, 'chore(release)')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,4 +41,19 @@ jobs:
           branch: gh-pages
           target-folder: ${{ steps.set-build-dir.outputs.deploy_dir }}
           clean-exclude: pr-preview
+          force: false
+  deploy-latest:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run bootstrap
+      - name: Build docs-app
+        run: npm run build:docs
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./packages/__docs__/__build__
+          branch: gh-pages
+          target-folder: latest
           force: false
