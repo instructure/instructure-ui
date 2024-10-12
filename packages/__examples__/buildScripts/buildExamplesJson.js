@@ -23,14 +23,14 @@
  */
 
 const outputName = 'prop-data.json'
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console, no-undef
 console.log('starting to build example prop combinations to ' + outputName)
 
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { globby } from 'globby'
-import parsePropValues from './parsePropValues.mjs'
+import parsePropValues from './parsePropValues.js'
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../')
 
 async function buildExamplesJSON() {
@@ -42,9 +42,7 @@ async function buildExamplesJSON() {
     '**/es/**',
     '**/template/**'
   ]
-  const ignore = ignorePaths.map(
-    (file) => '!' + resolve(projectRoot, file)
-  )
+  const ignore = ignorePaths.map((file) => '!' + resolve(projectRoot, file))
   const matches = await globby([files, ...ignore])
   const componentProps = matches.reduce((result, absoluteExampleFilePath) => {
     // path to the component that is tested, e.g. /ui-tag/src/Tag/index.js
@@ -81,7 +79,7 @@ async function buildExamplesJSON() {
 
   writeFileSync(outputName, everything)
 
-  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console, no-undef
   console.log('finished generating example prop combinations.')
 }
 

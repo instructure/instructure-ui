@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
-import { dirname, join } from 'path'
+// import { dirname, join } from 'path'
+import type { StorybookConfig } from '@storybook/react-webpack5'
 
-module.exports = {
+const config: StorybookConfig = {
   stories: ['./stories/stories.ts'],
   typescript: {
     check: false,
     reactDocgen: false
   },
-  framework: getAbsolutePath('@storybook/react-webpack5'),
+  framework: '@storybook/react-webpack5',
   docs: {
     autodocs: false
   },
@@ -41,6 +42,8 @@ module.exports = {
   }
 }
 
-function getAbsolutePath(value: string) {
-  return dirname(require.resolve(join(value, 'package.json')))
-}
+// function getAbsolutePath(value: string) {
+//   return dirname(require.resolve(join(value, 'package.json')))
+// }
+
+export default config

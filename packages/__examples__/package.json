@@ -4,6 +4,7 @@
   "private": true,
   "version": "10.3.0",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -16,7 +17,7 @@
     "start:watch": "npm run build:examples && npm run watch:examples",
     "bundle": "npm run build:examples && npm run build:storybook",
     "clean": "ui-scripts clean",
-    "build:examples": "node buildScripts/build-examples-json.mjs",
+    "build:examples": "node buildScripts/buildExamplesJson.js",
     "build:storybook": "ui-scripts examples",
     "watch:examples": "ui-scripts examples --watch -p 9090"
   },

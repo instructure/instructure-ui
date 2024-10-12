@@ -65,21 +65,16 @@ import { builtinResolvers, parse, makeFsImporter } from 'react-docgen'
 export default function parsePropValues(fileSource, fileName) {
   let parsedSrc = {}
   try {
-    parsedSrc = parse(
-      fileSource,
-      {
-        resolver: new builtinResolvers.FindExportedDefinitionsResolver(),
-        filename: fileName,
-        importer: makeFsImporter()
-      }
-    )
+    parsedSrc = parse(fileSource, {
+      resolver: new builtinResolvers.FindExportedDefinitionsResolver(),
+      filename: fileName,
+      importer: makeFsImporter()
+    })
     if (Array.isArray(parsedSrc)) {
       parsedSrc = parsedSrc.shift()
     }
   } catch (error) {
-    throw new Error(
-      `[__examples__] Could not parse component source: ${error}`
-    )
+    throw new Error(`[__examples__] Could not parse component source: ${error}`)
   }
 
   return getPropValuesFromParsedProps(parsedSrc.props)
