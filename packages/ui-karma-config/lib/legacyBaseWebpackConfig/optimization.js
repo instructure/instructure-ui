@@ -21,19 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-/* eslint-disable no-restricted-imports */
-// @ts-ignore: Cannot find module
-import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
-/* eslint-enable no-restricted-imports */
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
-import { SimpleSelect } from './index'
-
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const SimpleSelectLocator = locator(SimpleSelect.selector, {
-  findInput: SelectLocator.findInput as (...args: any) => Promise<any>, // TODO these dont work because TS doesnt find its type declarations,
-  findOptionsList: SelectLocator.findOptionsList as (
-    ...args: any
-  ) => Promise<any>
-})
+module.exports = {
+  splitChunks: {
+    chunks: 'all'
+  },
+  sideEffects: true,
+  minimizer: [
+    new TerserWebpackPlugin({
+      parallel: true,
+      // sourceMap: true, // this breaks storybook in production env
+      terserOptions: {
+        mangle: false,
+        output: {
+          semicolons: false
+        }
+      }
+    })
+  ]
+}

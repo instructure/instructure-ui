@@ -24,7 +24,7 @@
 
 const constants = require('karma').constants
 const choma = require.resolve('choma')
-const baseWebpackConfig = require('@instructure/ui-webpack-config')
+const baseWebpackConfig = require('./legacyBaseWebpackConfig')
 const webpack = require('webpack')
 const filePathCalculator = require('./FilePathCalculator')
 

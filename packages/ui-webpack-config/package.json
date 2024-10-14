@@ -5,6 +5,8 @@
   "description": "A shared webpack config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./config/index.js",
+  "module": "./config/index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"

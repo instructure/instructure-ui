@@ -21,20 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-require('dotenv').config({ path: process.cwd() })
+
+import dotenv from 'dotenv'
+import rules from './module/rules.js'
+import plugins from './plugins.js'
+import optimization from './optimization.js'
+
+dotenv.config({ path: process.cwd() })
+
 const DEBUG = process.env.DEBUG
 const ENV = process.env.NODE_ENV || 'production'
 
-module.exports = {
+const config = {
   mode: ENV === 'production' ? 'production' : 'development',
   cache: ENV !== 'production',
   bail: !DEBUG,
   devtool: ENV === 'production' ? false : 'cheap-module-source-map',
   module: {
-    rules: require('./module/rules')
+    rules
   },
-  plugins: require('./plugins'),
-  optimization: require('./optimization'),
+  plugins,
+  optimization,
   performance: {
     hints: ENV === 'production' ? 'warning' : false
   },
@@ -48,3 +55,5 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.json']
   }
 }
+
+export default config

@@ -206,3 +206,14 @@ type: example
   valueNow={33}
 />
 ```
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>If the progress bar conveys more information than just an approximate progress of a task (for example "5 or 23 items downloaded") then show this information as text too.</Figure.Item>
+  </Figure>
+</Guidelines>
+```

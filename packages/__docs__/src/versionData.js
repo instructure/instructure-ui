@@ -36,12 +36,10 @@ const fetchVersionData = async (signal) => {
   const isLocalHost = window.location.hostname === 'localhost'
 
   if (!isLocalHost) {
-    const result = await fetch(`${window.location.origin}/versions.json`, {
-      signal
-    })
-    const versionsData = await result.json()
-
-    return versionsData
+    const isGhPages = window.location.origin === 'https://instructure.github.io'
+    const versionsDataUrl = window.location.origin + (isGhPages ? '/instructure-ui' : '') + '/versions.json'
+    const result = await fetch(versionsDataUrl, { signal })
+    return await result.json()
   }
 
   return null
@@ -51,7 +49,8 @@ const fetchVersionData = async (signal) => {
  * if we are on the docs page of a legacy version,
  * the path includes the version number, e.g. `/v7` or `/v8`
  */
-const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
+const versionMatch = window.location.pathname.match(/\/(v\d+)(\/|$)/)
+const versionInPath =  versionMatch ? versionMatch[1] : null
 
 export default fetchVersionData
 export { fetchVersionData, versionInPath }

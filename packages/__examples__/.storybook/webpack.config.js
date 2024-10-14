@@ -22,10 +22,13 @@
  * SOFTWARE.
  */
 
-const { merge } = require('webpack-merge')
-const baseConfig = require('@instructure/ui-webpack-config')
+import { merge } from 'webpack-merge'
+import baseConfig from '@instructure/ui-webpack-config'
+import { createRequire } from 'module'
 
-module.exports = ({ config }) => {
+const require = createRequire(import.meta.url)
+
+export default ({ config }) => {
   // Storybook does not like thread-loader, see
   // https://github.com/storybookjs/storybook/issues/12864
   const rules = baseConfig.module.rules
@@ -41,6 +44,7 @@ module.exports = ({ config }) => {
       }
     }
   }
+
   rules.push({
     test: /\.stories\.[tj]sx?$/,
     use: [
@@ -51,14 +55,17 @@ module.exports = ({ config }) => {
     ],
     enforce: 'pre'
   })
+
   config = merge(config, baseConfig)
 
-  // need to override this instead of merge for these...
+  // Need to override this instead of merge for these...
   config.module.rules = baseConfig.module.rules
   config.optimization = baseConfig.optimization
+
   if (process.env.NODE_ENV === 'production') {
     config.devtool = false
   }
+
   console.log(`Building Storybook...`, config.module)
   return config
 }

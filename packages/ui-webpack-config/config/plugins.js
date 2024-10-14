@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const webpack = require('webpack')
+import webpack from 'webpack'
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
@@ -35,7 +35,7 @@ const envVars = {
   OMIT_INSTUI_DEPRECATION_WARNINGS
 }
 
-module.exports = [
+export default [
   // fix Buffer/process is not defined errors:
   new webpack.ProvidePlugin({
     process: 'process/browser',

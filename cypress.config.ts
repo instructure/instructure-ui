@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 import { defineConfig } from 'cypress'
-import webpackConfig from './packages/ui-webpack-config/config'
+
+// TODO figure out why this isn't working:
+// import webpackConfig from '@instructure/ui-webpack-config'
+// eslint-disable-next-line @instructure/no-relative-imports
+import webpackConfig from './packages/ui-karma-config/lib/legacyBaseWebpackConfig'
 
 export default defineConfig({
   retries: {
