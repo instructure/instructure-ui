@@ -63,9 +63,14 @@ export const isReleaseCommit = (version) => {
   }
 }
 
+/**
+ * Checks whether the folder has any changes with `git status`.
+ * If there are any the process exits with an error code
+ */
 export function checkWorkingDirectory() {
   let result
   try {
+    // --porcelain outputs in a machine-readable format
     result = runGitCommand(['status', '--porcelain'])
   } catch (e) {
     error(e)

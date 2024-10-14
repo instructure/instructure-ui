@@ -87,12 +87,12 @@ export async function bumpPackages(packageName, requestedVersion) {
     await runCommandAsync('lerna', [
       'version',
       ...args,
-      '--exact',
-      '--include-merged-tags',
-      '--no-push',
-      '--no-git-tag-version',
-      '--force-publish=*',
-      '--conventional-commits'
+      '--exact', // exact versions, no ^ when bumping
+      '--include-merged-tags', // Include tags from merged branches
+      '--no-push', // do not execute `git push`
+      '--no-git-tag-version', // do not add git tag or commit
+      '--force-publish=*', // bump all packages even if they have no changes
+      '--conventional-commits' // determines new version and updates Changelog
     ])
 
     releaseVersion = await syncRootPackageVersion(true)
