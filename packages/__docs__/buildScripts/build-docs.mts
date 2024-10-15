@@ -30,10 +30,8 @@ import fs from 'fs'
 import { theme as canvasTheme } from '@instructure/canvas-theme'
 import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
 import type {
-  IconFormat,
   LibraryOptions,
   MainDocsData,
-  MainIconsData
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
 import { createRequire } from "module"
@@ -153,11 +151,11 @@ function buildDocs() {
         buildDir + 'markdown-and-sources-data.json',
         markdownsAndSources
       )
+
       // eslint-disable-next-line no-console
-      console.log('Parsing icons...')
-      const icons: MainIconsData = parseIcons()
-      const iconJSON = JSON.stringify(icons)
-      fs.writeFileSync(buildDir + 'icons-data.json', iconJSON)
+      console.log('Copying icons data...')
+      fs.copyFileSync(projectRoot + '/packages/ui-icons/__build__/icons-data.json', buildDir + 'icons-data.json')
+
       // eslint-disable-next-line no-console
       console.log('Finished building documentation data')
     })
@@ -244,48 +242,6 @@ function parseThemes() {
     requirePath: '@instructure/canvas-high-contrast-theme'
   }
   return parsed
-}
-
-function parseIcons() {
-  const packageName = '@instructure/ui-icons'
-  const iconFormats = {
-    React: '',
-    SVG: 'svg',
-    Font: 'font'
-  }
-  type FormatName = 'icons-svg' | `icons-react` | 'icons-font'
-  const formats = {} as Record<FormatName, IconFormat>
-  let format: keyof typeof iconFormats
-  for (format in iconFormats) {
-    const pathEnd =
-      iconFormats[format].length > 0 ? '/' + iconFormats[format] : ''
-    const requirePath = packageName + '/lib' + pathEnd
-    let glyphs = require(requirePath)
-    if (format === 'React') {
-      const formats: Record<string, any> = {}
-      Object.keys(glyphs).forEach(function (key) {
-        const IconClass = glyphs[key]
-        formats[key] = {
-          name: key,
-          variant: IconClass.variant,
-          glyphName: IconClass.glyphName,
-          deprecated: !!IconClass.deprecated
-        }
-      })
-      glyphs = formats
-    }
-    const formatName = `icons-${format.toLowerCase()}` as FormatName
-    formats[formatName] = {
-      format: format,
-      glyphs: glyphs,
-      packageName: packageName,
-      requirePath: packageName + '/es' + pathEnd
-    }
-  }
-  return {
-    packageName: packageName,
-    formats: formats
-  }
 }
 
 export { pathsToProcess, pathsToIgnore, processSingleFile, buildDocs }

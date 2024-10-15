@@ -28,6 +28,8 @@ import process from 'process'
 import getGlyphData from './get-glyph-data.js'
 import generateReactComponents from './generate-react-components.js'
 import generateSvgIndex from './generate-svg-index.js'
+import generateIconFonts from './generate-icon-fonts.js'
+import generateIconsData from './generate-icons-data.js'
 import { pathToFileURL } from 'url'
 
 export default {
@@ -67,6 +69,14 @@ export default {
     }
     fs.mkdirSync(config.destination)
 
+    // directories for icon fonts
+    const fantasticonBaseDir = `${config.destination}icon-font`
+    const fantasticonLineDir = fantasticonBaseDir + '/Line'
+    const fantasticonSolidDir = fantasticonBaseDir + '/Solid'
+    fs.mkdirSync(fantasticonBaseDir)
+    fs.mkdirSync(fantasticonLineDir)
+    fs.mkdirSync(fantasticonSolidDir)
+
     const glyphs = getGlyphData(
       svgSourceDir,
       config.deprecated,
@@ -81,5 +91,28 @@ export default {
 
     // generate react components
     generateReactComponents(glyphs, config.destination)
+
+    // generate icon fonts: Line
+    generateIconFonts({
+      inputDir: `${svgSourceDir}/Line`,
+      outputDir: fantasticonLineDir,
+      name: 'InstructureIcons-Line',
+      prefix: 'icon-line'
+    })
+
+    // generate icon fonts: Solid
+    generateIconFonts({
+      inputDir: `${svgSourceDir}/Solid`,
+      outputDir: fantasticonSolidDir,
+      name: 'InstructureIcons-Solid',
+      prefix: 'icon-solid'
+    })
+
+    // generate icons-data.json for the docs
+    const iconsData = generateIconsData(glyphs)
+    fs.writeFileSync(
+      `${config.destination}icons-data.json`,
+      JSON.stringify(iconsData)
+    )
   }
 }
