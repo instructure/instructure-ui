@@ -106,14 +106,14 @@ type CalendarOwnProps = {
    * A button to render in the navigation header. The recommendation is to
    * compose it with the [IconButton](#IconButton) component by setting the `size`
    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenEnd](#iconography).
+   * `renderIcon` to [IconArrowOpenEnd](#icons).
    */
   renderNextMonthButton?: Renderable
   /**
    * A button to render in the navigation header. The recommendation is to
    * compose it with the [IconButton](#Button) component by setting the `size`
    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenStart](#iconography).
+   * `renderIcon` to [IconArrowOpenStart](#icons).
    */
   renderPrevMonthButton?: Renderable
   /**
