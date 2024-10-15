@@ -162,7 +162,7 @@ basic `Calendar` might be created using utilities from
 
       return Array.apply(null, Array(Calendar.DAY_COUNT)).map(() => {
         const currentDate = date.clone()
-        date.add({days: 1})
+        date.add({ days: 1 })
 
         // This workaround is needed because moment's `.add({days: 1})` function has a bug that happens when the date added lands perfectly onto the DST cutoff,
         // in these cases adding 1 day results in 23 hours added instead,
@@ -173,7 +173,7 @@ basic `Calendar` might be created using utilities from
         // Please note that this causes one hour of time difference in the affected timezones/dates and to
         // fully solve this bug we need to change to something like luxon which handles this properly
         if (currentDate.clone().format('HH') === '23') {
-          return currentDate.clone().add({hours: 1})
+          return currentDate.clone().add({ hours: 1 })
         }
 
         return currentDate.clone()
@@ -287,7 +287,7 @@ basic `Calendar` might be created using utilities from
 
       return Array.apply(null, Array(Calendar.DAY_COUNT)).map(() => {
         const currentDate = date.clone()
-        date.add({days: 1})
+        date.add({ days: 1 })
 
         // This workaround is needed because moment's `.add({days: 1})` function has a bug that happens when the date added lands perfectly onto the DST cutoff,
         // in these cases adding 1 day results in 23 hours added instead,
@@ -298,7 +298,7 @@ basic `Calendar` might be created using utilities from
         // Please note that this causes one hour of time difference in the affected timezones/dates and to
         // fully solve this bug we need to change to something like luxon which handles this properly
         if (currentDate.clone().format('HH') === '23') {
-          return currentDate.clone().add({hours: 1})
+          return currentDate.clone().add({ hours: 1 })
         }
 
         return currentDate.clone()
@@ -431,5 +431,5 @@ the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>,
 
 The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
 [IconButton](#IconButton) component with the `size` prop set to
-`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](#iconography) or
-[IconArrowOpenEnd](#iconography).
+`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](#icons) or
+[IconArrowOpenEnd](#icons).

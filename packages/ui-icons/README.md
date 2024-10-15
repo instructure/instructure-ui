@@ -99,7 +99,7 @@ type: code
 
 - Finally, run `npm run dev` from the repository root directory to start the local server and check the generated output.
 
-- Verify icons display correctly by checking under [iconography](/#iconography) in the main nav. Check all 3 versions (React, SVG and icon font).
+- Verify icons display correctly by checking under [Icons](/#icons) in the main nav. Check all 3 versions (React, SVG and icon font).
 
 (Note: The fonts are sometimes not rendered correctly, but we decided not to fix them, because they are not really used anywhere, and we might stop supporting icon fonts in the future in general.)
 

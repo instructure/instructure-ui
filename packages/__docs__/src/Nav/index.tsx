@@ -55,7 +55,6 @@ class Nav extends Component<NavProps, NavState> {
   static defaultProps = {
     docs: [],
     themes: [],
-    icons: {},
     selected: undefined
   }
 
@@ -398,33 +397,11 @@ class Nav extends Component<NavProps, NavState> {
     return link ? [link] : []
   }
 
-  renderIcons() {
-    const { icons } = this.props
-    if (!icons?.formats) {
-      return []
-    }
-    const formats = Object.keys(icons.formats).filter(
-      (key) =>
-        this.matchQuery(icons.formats[key].format) ||
-        this.matchQuery('iconography')
-    )
-
-    return formats.length > 0
-      ? [
-          <NavToggle
-            key={'iconography'}
-            summary={'Iconography'}
-            href="#iconography"
-          />
-        ]
-      : []
-  }
-
   render() {
     const sections = this.renderSections()
     const themes = this.renderThemes()
-    const icons = this.renderIcons()
-    const matches = [...sections, ...themes, ...icons]
+    const icons = <NavToggle key={'icons'} summary={'Icons'} href="#icons" />
+    const matches = [...sections, ...themes, icons]
     const hasMatches = matches.length > 0
     const errorMessage = [
       { text: `No matches for '${this.state.queryStr}'`, type: 'hint' as const }

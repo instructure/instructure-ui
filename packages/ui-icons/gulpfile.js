@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// TODO deprecated: remove in v11
 const gulp = require('gulp')
 const { buildFonts, clean } = require('@instructure/ui-icons-build')
 

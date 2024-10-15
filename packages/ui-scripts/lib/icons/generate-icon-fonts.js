@@ -22,47 +22,30 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators, Breakpoints } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+import { generateFonts } from 'fantasticon'
 
-type IconsOwnProps = {
-  selectedFormat: string
-  formats: Record<string, any>
-  packageName: string
+const config = {
+  // inputDir: './src/icons',  // Directory where SVG files are located
+  // outputDir: './dist/fonts',  // Directory where fonts will be generated
+  // prefix: 'icon',  // Prefix for icon CSS classes
+  // name: 'my-icon-font',  // Name of the generated font
+  fontTypes: ['woff2'], // Font formats to generate
+  assetTypes: ['css'], // Additional assets like CSS, HTML preview
+  normalize: true // Normalize SVG sizes
 }
 
-type PropKeys = keyof IconsOwnProps
-
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-type IconsProps = IconsOwnProps & WithStyleProps<IconsTheme, IconsStyle>
-
-const propTypes: PropValidators<PropKeys> = {
-  selectedFormat: PropTypes.string.isRequired,
-  formats: PropTypes.object.isRequired,
-  packageName: PropTypes.string.isRequired
+export default function generateIconFonts({
+  inputDir,
+  outputDir,
+  prefix,
+  name
+}) {
+  generateFonts({ ...config, inputDir, outputDir, prefix, name })
+    .then((result) => {
+      // eslint-disable-next-line no-console
+      console.log('Icon font generated:', result)
+    })
+    .catch((error) => {
+      console.error('Error generating icon font:', error)
+    })
 }
-
-const allowedProps: AllowedPropKeys = [
-  'formats',
-  'packageName',
-  'selectedFormat'
-]
-
-type IconsStyle = ComponentStyle<'header' | 'glyphs'>
-
-type IconsTheme = {
-  gridMaxWidth: Breakpoints['xLarge']
-  gridBreakpoint: Breakpoints['small']
-}
-type IconsState = {
-  query: string
-  name: string | null
-  variant: string | null
-  glyph: Record<string, any> | null
-  rtl: boolean
-}
-export type { IconsStyle, IconsTheme }
-export type { IconsProps, IconsState }
-export { allowedProps, propTypes }
