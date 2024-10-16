@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
+
+
+### Bug Fixes
+
+* **ui-progress,ui-side-nav-bar:** improve a11y for Progress and SideNavBar examples ([2160fdd](https://github.com/instructure/instructure-ui/commit/2160fdd79f0ac671b8f42f06b2f8ec1f4f8b1577))
+
+
+
+
+
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
+
+
+### Features
+
+* **ui-modal:** modify modal to support less strict children ([40f8ca2](https://github.com/instructure/instructure-ui/commit/40f8ca24e80ceb41e8c5d05d1f9d5e8f77113370))
+
+
+
+
+
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 **Note:** Version bump only for package @instructure/ui-modal
