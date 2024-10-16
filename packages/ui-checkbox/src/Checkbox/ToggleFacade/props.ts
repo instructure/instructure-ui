@@ -39,6 +39,7 @@ type ToggleFacadeOwnProps = {
   focused?: boolean
   size?: 'small' | 'medium' | 'large'
   labelPlacement?: 'top' | 'start' | 'end'
+  error?: boolean
 }
 
 type PropKeys = keyof ToggleFacadeOwnProps
@@ -59,7 +60,8 @@ const propTypes: PropValidators<PropKeys> = {
   readOnly: PropTypes.bool,
   focused: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
+  labelPlacement: PropTypes.oneOf(['top', 'start', 'end']),
+  error: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

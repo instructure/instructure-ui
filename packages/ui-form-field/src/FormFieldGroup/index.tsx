@@ -145,6 +145,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
         aria-disabled={props.disabled ? 'true' : undefined}
         aria-invalid={this.invalid ? 'true' : undefined}
         elementRef={this.handleRef}
+        isGroup
       >
         {this.renderFields()}
       </FormFieldLayout>
