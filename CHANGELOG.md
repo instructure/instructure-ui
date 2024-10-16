@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.8.0](https://github.com/instructure/instructure-ui/compare/v9.7.2...v9.8.0) (2024-10-16)
+
+
+### Features
+
+* **ui-table:** expand table api ([8f03e48](https://github.com/instructure/instructure-ui/commit/8f03e48eb38d9608bed6f98984c66ab1679294aa))
+
+
+
+
+
 ## [9.7.2](https://github.com/instructure/instructure-ui/compare/v9.7.0...v9.7.2) (2024-10-10)
 
 
