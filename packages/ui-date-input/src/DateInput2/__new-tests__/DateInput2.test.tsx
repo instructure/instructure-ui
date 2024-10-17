@@ -29,12 +29,10 @@ import '@testing-library/jest-dom'
 
 import { DateInput2 } from '../index'
 
-const ERROR_MSG = 'Invalid date'
 const LABEL_TEXT = 'Choose a date'
 
 const DateInputExample = () => {
   const [inputValue, setInputValue] = useState('')
-  const [dateString, setDateString] = useState('')
 
   return (
     <DateInput2
@@ -47,9 +45,7 @@ const DateInputExample = () => {
       value={inputValue}
       onChange={(_e, inputValue, _dateString) => {
         setInputValue(inputValue)
-        setDateString(dateString)
       }}
-      invalidDateErrorMessage={ERROR_MSG}
     />
   )
 }
@@ -62,31 +58,15 @@ describe('<DateInput2 />', () => {
     // Mocking console to prevent test output pollution
     consoleWarningMock = vi.spyOn(console, 'warn').mockImplementation(() => {})
     consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {})
-
-    // Mock the time zone to always be UTC
-    // vi.useFakeTimers() // freeze animations too, continue with vi.advanceTimersByTime(500)
-    const mockDate = new Date(Date.UTC(2022, 2, 26))
-    vi.setSystemTime(mockDate)
   })
 
   afterEach(() => {
     consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
-    vi.useRealTimers()
   })
 
   it('should render an input', async () => {
-    const { container } = render(
-      <DateInput2
-        renderLabel="Choose a date"
-        screenReaderLabels={{
-          calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
-        }}
-        value=""
-      />
-    )
+    const { container } = render(<DateInputExample />)
     const dateInput = container.querySelector('input')
 
     expect(dateInput).toBeInTheDocument()
@@ -94,26 +74,18 @@ describe('<DateInput2 />', () => {
   })
 
   it('should render an input label', async () => {
-    const { container } = render(
-      <DateInput2
-        renderLabel="Choose a date"
-        screenReaderLabels={{
-          calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
-        }}
-        value=""
-      />
-    )
+    const { container } = render(<DateInputExample />)
+
     const dateInput = container.querySelector('input')
     const label = container.querySelector('label')
 
     expect(label).toBeInTheDocument()
-    expect(label).toHaveTextContent('Choose a date')
-    expect(dateInput!.id).toBe(label!.htmlFor)
+    expect(label).toHaveTextContent(LABEL_TEXT)
+    expect(dateInput?.id).toBe(label?.htmlFor)
   })
 
   it('should render an input placeholder', async () => {
+    const placeholder = 'Placeholder'
     render(
       <DateInput2
         renderLabel="Choose a date"
@@ -122,21 +94,22 @@ describe('<DateInput2 />', () => {
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month'
         }}
-        placeholder="Placeholder"
-        value="2024-03-26"
+        placeholder={placeholder}
+        value=""
       />
     )
     const dateInput = screen.getByLabelText('Choose a date')
 
-    expect(dateInput).toHaveAttribute('placeholder', 'Placeholder')
+    expect(dateInput).toHaveAttribute('placeholder', placeholder)
   })
 
   it('should render a calendar icon with screen reader label', async () => {
+    const iconLabel = 'Calendar icon Label'
     const { container } = render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
-          calendarIcon: 'Calendar icon Label',
+          calendarIcon: iconLabel,
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month'
         }}
@@ -146,41 +119,21 @@ describe('<DateInput2 />', () => {
     const calendarIcon = container.querySelector(
       'svg[name="IconCalendarMonth"]'
     )
-    const calendarLabel = screen.getByText('Calendar icon Label')
+    const calendarLabel = screen.getByText(iconLabel)
 
     expect(calendarIcon).toBeInTheDocument()
     expect(calendarLabel).toBeInTheDocument()
   })
 
   it('should not show calendar table by default', async () => {
-    render(
-      <DateInput2
-        renderLabel="Choose a date"
-        screenReaderLabels={{
-          calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
-        }}
-        value=""
-      />
-    )
+    render(<DateInputExample />)
     const calendarTable = screen.queryByRole('listbox')
 
     expect(calendarTable).not.toBeInTheDocument()
   })
 
   it('should show calendar table when calendar button is clicked', async () => {
-    render(
-      <DateInput2
-        renderLabel="Choose a date"
-        screenReaderLabels={{
-          calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
-        }}
-        value=""
-      />
-    )
+    render(<DateInputExample />)
     const calendarButton = screen.getByRole('button')
 
     expect(calendarButton).toBeInTheDocument()
@@ -195,13 +148,16 @@ describe('<DateInput2 />', () => {
   })
 
   it('should render navigation arrow buttons with screen reader labels', async () => {
+    const nextMonthLabel = 'Next month'
+    const prevMonthLabel = 'Previous month'
+
     render(
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
           calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          nextMonthButton: nextMonthLabel,
+          prevMonthButton: prevMonthLabel
         }}
         value=""
       />
@@ -212,15 +168,17 @@ describe('<DateInput2 />', () => {
 
     await waitFor(() => {
       const prevMonthButton = screen.getByRole('button', {
-        name: 'Previous month'
+        name: prevMonthLabel
       })
-      const nextMonthButton = screen.getByRole('button', { name: 'Next month' })
+      const nextMonthButton = screen.getByRole('button', {
+        name: nextMonthLabel
+      })
 
       expect(prevMonthButton).toBeInTheDocument()
       expect(nextMonthButton).toBeInTheDocument()
 
-      const prevButtonLabel = screen.getByText('Previous month')
-      const nextButtonLabel = screen.getByText('Next month')
+      const prevButtonLabel = screen.getByText(prevMonthLabel)
+      const nextButtonLabel = screen.getByText(nextMonthLabel)
 
       expect(prevButtonLabel).toBeInTheDocument()
       expect(nextButtonLabel).toBeInTheDocument()
@@ -237,7 +195,8 @@ describe('<DateInput2 />', () => {
     })
   })
 
-  it('should set value', async () => {
+  it('should programmatically set and render the initial value', async () => {
+    const value = '26/03/2024'
     render(
       <DateInput2
         renderLabel="Choose a date"
@@ -246,16 +205,19 @@ describe('<DateInput2 />', () => {
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month'
         }}
-        value="2024-03-26"
+        locale="en-GB"
+        timezone="UTC"
+        value={value}
       />
     )
     const dateInput = screen.getByLabelText('Choose a date')
 
-    expect(dateInput).toHaveValue('2024-03-26')
+    expect(dateInput).toHaveValue(value)
     expect(dateInput).toBeInTheDocument()
   })
 
   it('should set interaction type to disabled', async () => {
+    const interactionDisabled = 'disabled'
     const { container } = render(
       <DateInput2
         renderLabel="Choose a date"
@@ -264,16 +226,17 @@ describe('<DateInput2 />', () => {
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month'
         }}
-        value={'2024-03-26'}
-        interaction="disabled"
+        value=""
+        interaction={interactionDisabled}
       />
     )
     const dateInput = container.querySelector('input')
 
-    expect(dateInput).toHaveAttribute('disabled')
+    expect(dateInput).toHaveAttribute(interactionDisabled)
   })
 
   it('should set interaction type to readonly', async () => {
+    const interactionReadOnly = 'readonly'
     const { container } = render(
       <DateInput2
         renderLabel="Choose a date"
@@ -282,14 +245,14 @@ describe('<DateInput2 />', () => {
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month'
         }}
-        value={'2024-03-26'}
-        interaction="readonly"
+        value=""
+        interaction={interactionReadOnly}
       />
     )
     const dateInput = container.querySelector('input')
     const calendarButton = screen.getByRole('button')
 
-    expect(dateInput).toHaveAttribute('readonly')
+    expect(dateInput).toHaveAttribute(interactionReadOnly)
     expect(calendarButton).toBeInTheDocument()
 
     await userEvent.click(calendarButton)
@@ -302,7 +265,6 @@ describe('<DateInput2 />', () => {
   })
 
   it('should set required', async () => {
-    const value = '2024-03-26'
     const { container } = render(
       <DateInput2
         renderLabel="Choose a date"
@@ -311,7 +273,7 @@ describe('<DateInput2 />', () => {
           nextMonthButton: 'Next month',
           prevMonthButton: 'Previous month'
         }}
-        value={value}
+        value=""
         isRequired
       />
     )
@@ -343,86 +305,31 @@ describe('<DateInput2 />', () => {
     })
   })
 
-  it('should call onChange with the new value', async () => {
-    const newValue = '26/03/2024'
-    const onChange = vi.fn()
-    render(
-      <DateInput2
-        renderLabel="Choose a date"
-        screenReaderLabels={{
-          calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
-        }}
-        value=""
-        locale="en-GB"
-        timezone="UTC"
-        onChange={onChange}
-      />
-    )
-    const dateInput = screen.getByLabelText('Choose a date')
-
-    fireEvent.change(dateInput, { target: { value: newValue } })
-
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalledTimes(1)
-      expect(onChange.mock.calls[0][1]).toEqual(newValue)
-      expect(onChange.mock.calls[0][2]).toEqual('2024-03-25T00:00:00.000Z') // TODO why 25? system diff?
-    })
-  })
-
-  it('should dateFormat prop pass necessary props to the callback', async () => {
-    const userDate = '03/26/2024'
-    const date = new Date(1111, 10, 10)
-    const parserSpy = vi.fn()
-    const formatterSpy = vi.fn()
-
-    parserSpy.mockReturnValue(date)
-    formatterSpy.mockReturnValue('2222-11-11')
-
+  it('should validate if the invalidDateErrorMessage prop is provided', async () => {
+    const errorMsg = 'errorMsg'
     const Example = () => {
-      const [value1, setValue1] = useState('')
+      const [inputValue, setInputValue] = useState('')
 
       return (
         <DateInput2
-          renderLabel="Choose a date"
+          renderLabel={LABEL_TEXT}
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month'
           }}
-          value={value1}
-          locale="en-GB"
-          timezone="UTC"
-          dateFormat={{
-            parser: parserSpy,
-            formatter: formatterSpy
+          value={inputValue}
+          onChange={(_e, inputValue, _dateString) => {
+            setInputValue(inputValue)
           }}
-          onChange={(_e, value) => setValue1(value)}
+          invalidDateErrorMessage={errorMsg}
         />
       )
     }
 
     render(<Example />)
 
-    const dateInput = screen.getByLabelText('Choose a date')
-
-    await userEvent.type(dateInput, userDate)
-
-    await waitFor(() => {
-      const lastCallIndex = parserSpy.mock.calls.length - 1
-      expect(parserSpy).toHaveBeenCalled()
-      expect(parserSpy.mock.calls[lastCallIndex][0]).toEqual(userDate)
-
-      expect(formatterSpy).toHaveBeenCalled()
-      expect(formatterSpy.mock.calls[0][0]).toEqual(date)
-    })
-  })
-
-  it('should validate if the invalidDateErrorMessage prop is provided', async () => {
-    render(<DateInputExample />)
-
-    expect(screen.queryByText(ERROR_MSG)).not.toBeInTheDocument()
+    expect(screen.queryByText(errorMsg)).not.toBeInTheDocument()
 
     const dateInput = screen.getByLabelText(LABEL_TEXT)
 
@@ -432,92 +339,7 @@ describe('<DateInput2 />', () => {
     dateInput.blur()
 
     await waitFor(() => {
-      expect(screen.getByText(ERROR_MSG)).toBeInTheDocument()
-    })
-  })
-
-  it('should onRequestValidateDate prop pass necessary props to the callback when input value is not a valid date', async () => {
-    const dateValidationSpy = vi.fn()
-
-    const Example = () => {
-      const [value1, setValue1] = useState('')
-
-      return (
-        <DateInput2
-          renderLabel="Choose a date"
-          screenReaderLabels={{
-            calendarIcon: 'Calendar',
-            nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
-          }}
-          value={value1}
-          locale="en-GB"
-          timezone="Europe/London"
-          onChange={(_e, value) => setValue1(value)}
-          onRequestValidateDate={dateValidationSpy}
-        />
-      )
-    }
-
-    render(<Example />)
-
-    const dateInput = screen.getByLabelText('Choose a date')
-
-    await userEvent.type(dateInput, 'not a date')
-    fireEvent.blur(dateInput)
-
-    await waitFor(() => {
-      const lastCallIndex = dateValidationSpy.mock.calls.length - 1
-
-      expect(dateValidationSpy).toHaveBeenCalled()
-
-      expect(dateValidationSpy.mock.calls[lastCallIndex][1]).toEqual(
-        'not a date'
-      ) // value
-      expect(dateValidationSpy.mock.calls[lastCallIndex][2]).toEqual('') // dateString
-    })
-  })
-
-  it('should onRequestValidateDate prop pass necessary props to the callback when input value is a valid date', async () => {
-    const dateValidationSpy = vi.fn()
-
-    const Example = () => {
-      const [value1, setValue1] = useState('')
-
-      return (
-        <DateInput2
-          renderLabel="Choose a date"
-          screenReaderLabels={{
-            calendarIcon: 'Calendar',
-            nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
-          }}
-          value={value1}
-          locale="en-GB"
-          timezone="UTC"
-          onChange={(_e, value) => setValue1(value)}
-          onRequestValidateDate={dateValidationSpy}
-        />
-      )
-    }
-
-    render(<Example />)
-
-    const dateInput = screen.getByLabelText('Choose a date')
-
-    await userEvent.type(dateInput, '26/03/2024')
-    fireEvent.blur(dateInput)
-
-    await waitFor(() => {
-      const lastCallIndex = dateValidationSpy.mock.calls.length - 1
-
-      expect(dateValidationSpy).toHaveBeenCalled()
-      expect(dateValidationSpy.mock.calls[lastCallIndex][1]).toEqual(
-        '26/03/2024'
-      ) // value
-      expect(dateValidationSpy.mock.calls[lastCallIndex][2]).toEqual(
-        '2024-03-25T00:00:00.000Z'
-      ) // dateString
+      expect(screen.getByText(errorMsg)).toBeInTheDocument()
     })
   })
 

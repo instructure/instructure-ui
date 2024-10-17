@@ -27,6 +27,7 @@ import 'cypress-real-events'
 import '../support/component'
 import { DateInput2, ApplyLocale } from '@instructure/ui'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
+import { SinonSpy } from 'cypress/types/sinon'
 
 const TIMEZONES_DST = [
   { timezone: 'UTC', expectedDateIsoString: '2020-04-17T00:00:00.000Z' }, // Coordinated Universal Time UTC
@@ -183,27 +184,22 @@ const LOCALES = [
   { locale: 'zu', textDirection: 'ltr' } // Zulu
 ]
 
-const Example = ({ initialValue = '' }) => {
-  const [value1, setValue1] = useState(initialValue)
-
-  return (
-    <DateInput2
-      renderLabel="Choose a date"
-      screenReaderLabels={{
-        calendarIcon: 'Calendar',
-        nextMonthButton: 'Next month',
-        prevMonthButton: 'Previous month'
-      }}
-      value={value1}
-      locale="en-GB"
-      timezone="UTC"
-      onChange={(_e, value) => setValue1(value)}
-    />
-  )
+type DateInputExampleProps = {
+  initialValue?: string
+  timezone?: string
+  locale?: string
+  onChange?: SinonSpy
+  onRequestValidateDate?: SinonSpy
 }
 
-const DateInputExample = (props) => {
-  const [inputValue, setInputValue] = useState(props.initialValue)
+const DateInputExample = ({
+  initialValue = '',
+  timezone = 'UTC',
+  locale = 'en-GB',
+  onChange = cy.spy(),
+  onRequestValidateDate
+}: DateInputExampleProps) => {
+  const [inputValue, setInputValue] = useState(initialValue)
 
   return (
     <DateInput2
@@ -214,12 +210,13 @@ const DateInputExample = (props) => {
         prevMonthButton: 'Previous month'
       }}
       value={inputValue}
-      timezone={props.timezone}
-      locale={props.locale}
+      timezone={timezone}
+      locale={locale}
       onChange={(_e, newInputValue, newDateString) => {
         setInputValue(newInputValue)
-        props.onChange?.(_e, newInputValue, newDateString)
+        onChange(_e, newInputValue, newDateString)
       }}
+      {...(onRequestValidateDate && { onRequestValidateDate })}
     />
   )
 }
@@ -366,7 +363,6 @@ const transformDate = ({ date, locale, shouldRemoveRTL = true }) => {
   return shouldRemoveRTL ? rtlFree : normalized
 }
 
-// TODO mounted examples refaktor, kiszervezés
 describe('<DateInput/>', () => {
   it('should have screen reader labels for weekday headers', () => {
     const expectedWeekdays = [
@@ -378,17 +374,7 @@ describe('<DateInput/>', () => {
       'Saturday',
       'Sunday'
     ]
-    cy.mount(
-      <DateInput2
-        renderLabel="Choose a date"
-        screenReaderLabels={{
-          calendarIcon: 'Calendar',
-          nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
-        }}
-        value="2024-03-08"
-      />
-    )
+    cy.mount(<DateInputExample />)
 
     cy.get('button[data-popover-trigger="true"]').click()
 
@@ -400,7 +386,7 @@ describe('<DateInput/>', () => {
   })
 
   it('should have screen reader labels for calendar days', () => {
-    cy.mount(<Example />)
+    cy.mount(<DateInputExample />)
 
     // set system date to 2022 march
     const testDate = new Date(2022, 2, 26)
@@ -431,8 +417,8 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should set value when select date from calendar', () => {
-    cy.mount(<Example />)
+  it('should open and close calendar properly and set value when select date from calendar', () => {
+    cy.mount(<DateInputExample />)
 
     cy.get('input').should('have.value', '')
     cy.get('table').should('not.exist')
@@ -447,7 +433,7 @@ describe('<DateInput/>', () => {
   })
 
   it('should select and highlight the correct day on Calendar when value is set', () => {
-    cy.mount(<Example initialValue="08/03/2022" />)
+    cy.mount(<DateInputExample initialValue="08/03/2022" />)
 
     cy.get('input').should('have.value', '08/03/2022')
 
@@ -477,7 +463,26 @@ describe('<DateInput/>', () => {
     })
   })
 
-  it('should respect given local and timezone information', async () => {
+  it('should call onChange with the new typed value', async () => {
+    const newValue = '26/03/2021'
+    const expectedDateIsoString = new Date(Date.UTC(2021, 2, 26)).toISOString()
+    const onChange = cy.spy()
+    cy.mount(
+      <DateInputExample onChange={onChange} locale={'en-GB'} timezone={'UTC'} />
+    )
+
+    cy.get('input').clear().realType('26/03/2021')
+    cy.get('input').blur()
+
+    cy.wrap(onChange).should(
+      'have.been.calledWith',
+      Cypress.sinon.match.any,
+      newValue,
+      expectedDateIsoString
+    )
+  })
+
+  it('should respect given local and timezone', async () => {
     const expectedFormattedValue = '17/10/2022'
     const expectedDateIsoString = '2022-10-16T21:00:00.000Z' // Africa/Nairobi is GMT +3
     const onChange = cy.spy()
@@ -647,8 +652,8 @@ describe('<DateInput/>', () => {
   })
 
   it('should dateFormat prop respect the provided local', async () => {
-    const Example2 = () => {
-      const [value1, setValue1] = useState('')
+    const Example = () => {
+      const [value, setValue] = useState('')
 
       return (
         <DateInput2
@@ -658,16 +663,16 @@ describe('<DateInput/>', () => {
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month'
           }}
-          value={value1}
+          value={value}
           locale="en-GB"
           timezone="UTC"
           dateFormat="hu"
-          onChange={(_e, value) => setValue1(value)}
+          onChange={(_e, value) => setValue(value)}
         />
       )
     }
 
-    cy.mount(<Example2 />)
+    cy.mount(<Example />)
 
     // set system date to 2022 march
     const testDate = new Date(2022, 2, 26)
@@ -747,8 +752,8 @@ describe('<DateInput/>', () => {
     const customValue = 'customValue'
     const date = new Date(2020, 10, 10)
 
-    const Example2 = () => {
-      const [value1, setValue1] = useState('')
+    const Example = () => {
+      const [value, setValue] = useState('')
 
       return (
         <DateInput2
@@ -758,18 +763,18 @@ describe('<DateInput/>', () => {
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month'
           }}
-          value={value1}
+          value={value}
           locale="en-GB"
           timezone="UTC"
           dateFormat={{
             parser: () => date,
             formatter: () => customValue
           }}
-          onChange={(_e, value) => setValue1(value)}
+          onChange={(_e, value) => setValue(value)}
         />
       )
     }
-    cy.mount(<Example2 />)
+    cy.mount(<Example />)
 
     cy.get('input').should('have.value', '')
 
@@ -826,8 +831,8 @@ describe('<DateInput/>', () => {
   })
 
   it('should set correct value using calendar year picker', () => {
-    const Example2 = () => {
-      const [value1, setValue1] = useState('')
+    const Example = () => {
+      const [value, setValue] = useState('')
 
       return (
         <DateInput2
@@ -837,10 +842,10 @@ describe('<DateInput/>', () => {
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month'
           }}
-          value={value1}
+          value={value}
           locale="en-GB"
           timezone="UTC"
-          onChange={(_e, value) => setValue1(value)}
+          onChange={(_e, value) => setValue(value)}
           withYearPicker={{
             screenReaderLabel: 'Year picker',
             startYear: 2022,
@@ -850,7 +855,7 @@ describe('<DateInput/>', () => {
       )
     }
 
-    cy.mount(<Example2 />)
+    cy.mount(<Example />)
 
     // set system date to 2023 march
     const testDate = new Date(2023, 2, 26)
@@ -879,8 +884,8 @@ describe('<DateInput/>', () => {
   })
 
   it('should display correct year in year picker after date is typed into input', () => {
-    const Example2 = () => {
-      const [value1, setValue1] = useState('')
+    const Example = () => {
+      const [value, setValue] = useState('')
 
       return (
         <DateInput2
@@ -890,10 +895,10 @@ describe('<DateInput/>', () => {
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month'
           }}
-          value={value1}
+          value={value}
           locale="en-GB"
           timezone="UTC"
-          onChange={(_e, value) => setValue1(value)}
+          onChange={(_e, value) => setValue(value)}
           withYearPicker={{
             screenReaderLabel: 'Year picker',
             startYear: 2020,
@@ -903,7 +908,7 @@ describe('<DateInput/>', () => {
       )
     }
 
-    cy.mount(<Example2 />)
+    cy.mount(<Example />)
 
     cy.get('input').should('have.value', '')
 
@@ -919,8 +924,8 @@ describe('<DateInput/>', () => {
   })
 
   it('should display -- sign in yearPicker if no date value or date is out of range', () => {
-    const Example2 = () => {
-      const [value1, setValue1] = useState('')
+    const Example = () => {
+      const [value, setValue] = useState('')
 
       return (
         <DateInput2
@@ -930,10 +935,10 @@ describe('<DateInput/>', () => {
             nextMonthButton: 'Next month',
             prevMonthButton: 'Previous month'
           }}
-          value={value1}
+          value={value}
           locale="en-GB"
           timezone="UTC"
-          onChange={(_e, value) => setValue1(value)}
+          onChange={(_e, value) => setValue(value)}
           withYearPicker={{
             screenReaderLabel: 'Year picker',
             startYear: 2020,
@@ -943,7 +948,7 @@ describe('<DateInput/>', () => {
       )
     }
 
-    cy.mount(<Example2 />)
+    cy.mount(<Example />)
 
     cy.get('button[data-popover-trigger="true"]').as('calendarBtn')
     cy.get('input[id^="TextInput_"]').as('input')
@@ -971,27 +976,7 @@ describe('<DateInput/>', () => {
   it('should trigger onRequestValidateDate callback on date selection or blur event', () => {
     const dateValidationSpy = cy.spy()
 
-    const Example2 = () => {
-      const [value1, setValue1] = useState('')
-
-      return (
-        <DateInput2
-          renderLabel="Choose a date"
-          screenReaderLabels={{
-            calendarIcon: 'Calendar',
-            nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
-          }}
-          value={value1}
-          locale="en-GB"
-          timezone="UTC"
-          onChange={(_e, value) => setValue1(value)}
-          onRequestValidateDate={dateValidationSpy}
-        />
-      )
-    }
-
-    cy.mount(<Example2 />)
+    cy.mount(<DateInputExample onRequestValidateDate={dateValidationSpy} />)
 
     cy.get('button[data-popover-trigger="true"]').as('calendarBtn')
     cy.get('input[id^="TextInput_"]').as('input')
@@ -1005,5 +990,92 @@ describe('<DateInput/>', () => {
     cy.get('@input').blur()
 
     cy.wrap(dateValidationSpy).should('have.been.calledTwice')
+  })
+
+  it('should pass necessary props to parser and formatter via dateFormat prop', () => {
+    const userDate = '26/03/2021'
+    const parserReturnedDate = new Date(1111, 11, 11)
+    const formatterReturnedValue = '12/12/1212'
+
+    const parserSpy = cy.spy(() => parserReturnedDate)
+    const formatterSpy = cy.spy(() => formatterReturnedValue)
+
+    const Example = () => {
+      const [value, setValue] = useState('')
+
+      return (
+        <DateInput2
+          renderLabel="Choose a date"
+          screenReaderLabels={{
+            calendarIcon: 'Calendar',
+            nextMonthButton: 'Next month',
+            prevMonthButton: 'Previous month'
+          }}
+          value={value}
+          locale="en-GB"
+          timezone="UTC"
+          dateFormat={{
+            parser: parserSpy,
+            formatter: formatterSpy
+          }}
+          onChange={(_e, value) => setValue(value)}
+        />
+      )
+    }
+
+    cy.mount(<Example />)
+
+    cy.get('input').as('input')
+    cy.get('@input').clear().realType(userDate)
+    cy.get('@input').blur()
+
+    cy.wrap(parserSpy).should('have.been.calledWith', userDate)
+    cy.wrap(formatterSpy).should('have.been.calledWith', parserReturnedDate)
+
+    cy.get('input[id^="TextInput_"]').should(
+      'have.value',
+      formatterReturnedValue
+    )
+    cy.get('input[id^="TextInput_"]').should(
+      'have.attr',
+      'placeholder',
+      formatterReturnedValue
+    ) // TODO Is placeholder set is ok?
+  })
+
+  it('should onRequestValidateDate prop pass necessary props to the callback when input value is not a valid date', async () => {
+    const dateValidationSpy = cy.spy()
+    const newValue = 'not a date'
+    const expectedDateIsoString = ''
+
+    cy.mount(<DateInputExample onRequestValidateDate={dateValidationSpy} />)
+
+    cy.get('input').clear().realType(newValue)
+    cy.get('input').blur()
+
+    cy.wrap(dateValidationSpy).should(
+      'have.been.calledWith',
+      Cypress.sinon.match.any,
+      newValue,
+      expectedDateIsoString
+    )
+  })
+
+  it('should onRequestValidateDate prop pass necessary props to the callback when input value is a valid date', async () => {
+    const dateValidationSpy = cy.spy()
+    const newValue = '26/03/2021'
+    const expectedDateIsoString = new Date(Date.UTC(2021, 2, 26)).toISOString()
+
+    cy.mount(<DateInputExample onRequestValidateDate={dateValidationSpy} />)
+
+    cy.get('input').clear().realType(newValue)
+    cy.get('input').blur()
+
+    cy.wrap(dateValidationSpy).should(
+      'have.been.calledWith',
+      Cypress.sinon.match.any,
+      newValue,
+      expectedDateIsoString
+    )
   })
 })
