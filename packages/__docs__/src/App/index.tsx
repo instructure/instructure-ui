@@ -63,7 +63,7 @@ import { Nav } from '../Nav'
 import { Theme } from '../Theme'
 import { Select } from '../Select'
 import { Section } from '../Section'
-import { Icons } from '../Icons'
+import IconsPage from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 
 import { fetchVersionData, versionInPath } from '../versionData'
@@ -413,13 +413,9 @@ class App extends Component<AppProps, AppState> {
         }
       >
         <Heading level="h1" as="h2" margin="0 0 medium">
-          Iconography
+          Icons
         </Heading>
-        <Icons
-          packageName={iconsData!.packageName}
-          selectedFormat={key}
-          formats={iconsData!.formats}
-        />
+        <IconsPage glyphs={iconsData.glyphs} />
       </View>
     )
 
@@ -576,13 +572,6 @@ class App extends Component<AppProps, AppState> {
   renderContent(key?: string) {
     const doc = this.state.docsData!.docs[key!]
     const theme = this.state.docsData!.themes[key!]
-    let icon
-    if (this.state.iconsData && this.state.iconsData.formats) {
-      icon =
-        this.state.iconsData.formats[
-          key as 'icons-svg' | `icons-react` | 'icons-font'
-        ]
-    }
     const { repository } = this.state.docsData!.library
 
     if (!key || key === 'index') {
@@ -590,7 +579,7 @@ class App extends Component<AppProps, AppState> {
     }
     if (key === 'CHANGELOG') {
       return this.renderChangeLog()
-    } else if (key === 'iconography' || icon) {
+    } else if (key === 'icons') {
       return this.renderIcons(key)
     } else if (theme) {
       return this.renderTheme(key)
@@ -665,7 +654,6 @@ class App extends Component<AppProps, AppState> {
           sections={this.state.docsData!.sections}
           docs={this.state.docsData!.docs}
           themes={this.state.docsData!.themes}
-          icons={this.state.iconsData}
         />
       </View>
     )

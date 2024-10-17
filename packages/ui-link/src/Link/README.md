@@ -72,7 +72,7 @@ type: example
 
 ### Using icons
 
-Use the `renderIcon` property to put an [icon](#iconography) inside a Link. To position the
+Use the `renderIcon` property to put an [icon](#icons) inside a Link. To position the
 icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
 render a Link with just an icon. Don't forget to add text for screen readers, though.
 

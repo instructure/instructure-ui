@@ -21,7 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { forwardRef, useCallback, useContext, useEffect, useMemo, useState, useRef } from 'react'
+import React, {
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useRef
+} from 'react'
 import ReactDOM from 'react-dom'
 
 import { LoremIpsum } from 'lorem-ipsum'
@@ -36,9 +44,9 @@ const Components = require('./components')
 import { debounce } from '@instructure/debounce'
 
 // eslint-disable-next-line no-restricted-imports
-import '@instructure/ui-icons/es/font/Solid/InstructureIcons-Solid.css'
+import '@instructure/ui-icons/es/icon-font/Solid/InstructureIcons-Solid.css'
 // eslint-disable-next-line no-restricted-imports
-import '@instructure/ui-icons/es/font/Line/InstructureIcons-Line.css'
+import '@instructure/ui-icons/es/icon-font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'
 

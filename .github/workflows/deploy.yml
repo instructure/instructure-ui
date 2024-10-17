@@ -10,7 +10,11 @@ jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - run: npm ci && npm run bootstrap
       - name: Set build directory and deployment path based on branch
         id: set-build-dir

@@ -185,14 +185,14 @@ type DateInputOwnProps = {
    * A button to render in the calendar navigation header. The recommendation is
    * to compose it with the [Button](#Button) component, setting the `variant`
    * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
-   * [IconArrowOpenEnd](#iconography).
+   * [IconArrowOpenEnd](#icons).
    */
   renderNextMonthButton?: Renderable
   /**
    * A button to render in the calendar navigation header. The recommendation is
    * to compose it with the [Button](#Button) component, setting the `variant`
    * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
-   * [IconArrowOpenStart](#iconography).
+   * [IconArrowOpenStart](#icons).
    */
   renderPrevMonthButton?: Renderable
   /**

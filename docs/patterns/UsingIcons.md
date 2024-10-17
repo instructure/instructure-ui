@@ -21,7 +21,7 @@ type: example
 
 ### Line vs Solid
 
-The default choice for iconography is the `Line` version. However, when an icon appears on a dark or colored background, the `Solid` version should be used.
+The default choice for icons are the `Line` version. However, when an icon appears on a dark or colored background, the `Solid` version should be used.
 
 ```js
 ---

@@ -22,21 +22,28 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { IconsTheme } from './props'
+export default function generateIconsData(glyphs) {
+  // merging line and solid icons so the file size is smaller
+  const mergedIcons = Object.values(
+    glyphs.reduce(
+      (
+        prevAcc,
+        { name, glyphName, bidirectional, deprecated, variant, src }
+      ) => {
+        const acc = prevAcc
+        if (!deprecated) {
+          acc[glyphName] ||= { name, glyphName, bidirectional }
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): IconsTheme => {
-  const { breakpoints } = theme
-
-  return {
-    gridMaxWidth: breakpoints?.xLarge,
-    gridBreakpoint: breakpoints?.small
+          if (variant === 'Line') acc[glyphName].lineSrc = src
+          if (variant === 'Solid') acc[glyphName].solidSrc = src
+        }
+        return acc
+      },
+      {}
+    )
+  )
+  const iconsData = {
+    glyphs: mergedIcons
   }
+  return iconsData
 }
-
-export default generateComponentTheme
