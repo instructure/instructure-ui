@@ -67,3 +67,5 @@ const __theme: CanvasTheme = {
 const theme = ThemeRegistry.registerTheme(__theme)
 
 export default theme
+// theme without the use() function and `variables` prop
+export { __theme as canvasThemeLocal }

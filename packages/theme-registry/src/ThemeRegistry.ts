@@ -26,6 +26,7 @@
  * ---
  * category: utilities/themes
  * ---
+ * DEPRECATED. This will be deleted, please use InstUISettingsProvider instead.
  * A global theme registry used for registering theme objects, setting globally available themes
  * and receiving the currently used theme.
  * @module ThemeRegistry
@@ -52,7 +53,9 @@ type Registry<T extends RegisteredTheme> = {
 }
 
 type RegisteredTheme<T extends BaseTheme = BaseTheme> = T & {
+  // DEPRECATED. Use InstUISettingsProvider instead
   use(arg?: { overrides: DeepPartial<BaseThemeVariables> }): void
+  // DEPRECATED. Read its variables dirrectly from the theme object.
   variables: BaseThemeVariables
 }
 
@@ -225,7 +228,8 @@ function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
  * Registers the passed theme into the ThemeRegistry.
  * @param {BaseTheme} theme - the theme object to register into the ThemeRegistry
  * @returns {RegisteredTheme} If the given theme is already in the ThemeRegistry then simply return that theme.
- * Otherwise returns the theme with a wrapper around it, so it can be `.use()`-ed to activate the given theme from the registry.
+ * Otherwise, returns the theme with a wrapper around it, so it can be `.use()`-ed to activate the given theme from the registry.
+ * This function also adds a `variables` prop for backwards compatibility (deprecated).
  * @module registerTheme
  */
 function registerTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
