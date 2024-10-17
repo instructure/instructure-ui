@@ -291,7 +291,7 @@ class Hero extends Component<HeroProps> {
 
     const sidebarContent = (
       <View as="aside">
-        <View as="div" background="secondary" padding="large">
+        <View as="div">
           <Flex>
             <Flex.Item>
               <IconAnnouncementLine inline={false} size="small" />
