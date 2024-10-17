@@ -151,6 +151,10 @@ type: example
 </div>
 ```
 
+### Accessibility
+
+Avatars use the `aria-hidden="true"` property and therefore are hidden from screenreaders. Make sure if you are using them stand-alone it's accompanied with [ScreenReaderContent](#ScreenReaderContent).
+
 ### Guidelines
 
 ```js
