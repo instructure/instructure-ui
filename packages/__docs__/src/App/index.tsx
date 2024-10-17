@@ -747,6 +747,7 @@ class App extends Component<AppProps, AppState> {
                     renderIcon={IconHamburgerSolid}
                     screenReaderLabel="Open Navigation"
                     shape="circle"
+                    aria-expanded={false}
                   />
                 </InstUISettingsProvider>
               </div>

@@ -70,10 +70,15 @@ class Header extends Component<HeaderProps> {
     // then navigate to the index (instructure.design/#currentHash).
     // In every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
     // Add `ghPagesPrefix` if we are not on https://instructure.design/
-    const ghPagesPrefix = window.location.origin === 'https://instructure.github.io'
-      ? '/instructure-ui'
-      : ''
-    const versionToNavigate = `${ghPagesPrefix}/${isSelectedLatestVersion ? window.location.hash : `${selectedVersion}/${window.location.hash}`}`
+    const ghPagesPrefix =
+      window.location.origin === 'https://instructure.github.io'
+        ? '/instructure-ui'
+        : ''
+    const versionToNavigate = `${ghPagesPrefix}/${
+      isSelectedLatestVersion
+        ? window.location.hash
+        : `${selectedVersion}/${window.location.hash}`
+    }`
     return window.location.replace(versionToNavigate)
   }
 
@@ -93,11 +98,13 @@ class Header extends Component<HeaderProps> {
           trigger={
             <CondensedButton>
               <Text size="large">
-                {(name && version) ? (
+                {name && version ? (
                   <span>
                     {name} {version}
                   </span>
-                ) : 'Documentation'}
+                ) : (
+                  'Documentation'
+                )}
               </Text>
               <IconMiniArrowDownLine size="x-small" />
             </CondensedButton>
@@ -157,6 +164,7 @@ class Header extends Component<HeaderProps> {
           <Link href="#index" isWithinText={false} display="block">
             <View display="block" textAlign="center">
               {corpLogo}
+              <ScreenReaderContent>Instructure logo</ScreenReaderContent>
             </View>
           </Link>
           <View display="block" textAlign="center">
