@@ -108,6 +108,7 @@ class Panel extends Component<TabsPanelProps> {
         {...passthroughProps(props)}
         css={styles?.panel}
         role="tabpanel"
+        tabIndex={0}
         id={id}
         aria-labelledby={labelledBy}
         aria-hidden={this.isHidden ? 'true' : undefined}
