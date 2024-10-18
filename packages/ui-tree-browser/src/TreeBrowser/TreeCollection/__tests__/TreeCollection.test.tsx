@@ -360,7 +360,9 @@ describe('<TreeCollection />', async () => {
       const collection = await TreeCollectionLocator.find()
       const childs = await collection.findAllItems()
       const childNameArr = childs.map((child) => {
-        return child.getDOMNode().ariaLabel
+        return child
+          .getDOMNode()
+          .querySelector('span[class$="treeButton__textName"]')?.textContent
       })
       expect(childNameArr.slice(1)).deep.equal([
         'A',
@@ -410,7 +412,9 @@ describe('<TreeCollection />', async () => {
       const collection = await TreeCollectionLocator.find()
       const childs = await collection.findAllItems()
       const childNameArr = childs.map((child) => {
-        return child.getDOMNode().ariaLabel
+        return child
+          .getDOMNode()
+          .querySelector('span[class$="treeButton__textName"]')?.textContent
       })
       expect(childNameArr.slice(1)).deep.equal([
         'Item A',
