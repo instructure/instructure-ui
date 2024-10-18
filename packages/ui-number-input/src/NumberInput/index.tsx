@@ -260,7 +260,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
               css={this.props.styles?.input}
               aria-invalid={this.invalid ? 'true' : undefined}
               id={this.id}
-              type={allowStringValue ? 'string' : 'number'}
+              type={allowStringValue ? 'text' : 'number'}
               inputMode={this.props.inputMode}
               placeholder={placeholder}
               ref={this.handleInputRef}
