@@ -449,7 +449,7 @@ class Nav extends Component<NavProps, NavState> {
             shouldNotWrap
           />
         </View>
-        <View role="navigation" margin="medium none none" display="block">
+        <View margin="medium none none" display="block">
           {hasMatches && matches}
         </View>
       </View>
