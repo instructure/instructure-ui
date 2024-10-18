@@ -387,7 +387,9 @@ class TreeCollection extends Component<
         tabIndex={-1}
         /* eslint-disable-next-line jsx-a11y/role-has-required-aria-props */
         role="treeitem"
-        aria-label={this.props.name}
+        aria-label={`${this.props.name}${
+          this.props.descriptor ? ` ${this.props.descriptor}` : ''
+        }`}
         aria-level={level}
         aria-posinset={position}
         aria-setsize={this.props.numChildren}
