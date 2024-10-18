@@ -28,7 +28,7 @@ import { element } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes } from '@instructure/ui-position'
 
-import type { Shadow, Stacking } from '@instructure/emotion'
+import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
 
 import type {
   PlacementPropValues,
@@ -41,7 +41,8 @@ import type {
   PropValidators,
   LiveRegion,
   UIElement,
-  Renderable
+  Renderable,
+  PopoverTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -278,7 +279,8 @@ type PopoverOwnProps = {
 
 type PopoverProps = PopoverOwnProps &
   TextDirectionContextConsumerProps &
-  WithDeterministicIdProps
+  WithDeterministicIdProps &
+  WithStyleProps<PopoverTheme, PopoverStyle>
 
 type PopoverState = {
   placement: PopoverOwnProps['placement']
@@ -290,6 +292,8 @@ type PopoverState = {
 type PropKeys = keyof PopoverOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PopoverStyle = { borderColor: string }
 
 const propTypes: PropValidators<PropKeys> = {
   isShowingContent: PropTypes.bool,
@@ -388,5 +392,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { PopoverOwnProps, PopoverProps, PopoverState }
+export type { PopoverOwnProps, PopoverProps, PopoverState, PopoverStyle }
 export { propTypes, allowedProps }

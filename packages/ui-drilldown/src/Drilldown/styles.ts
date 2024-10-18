@@ -80,7 +80,8 @@ const generateStyle = (
       flexShrink: 0,
       height: '100%',
       alignItems: 'center',
-      paddingInlineStart: componentTheme.labelInfoPadding
+      paddingInlineStart: componentTheme.labelInfoPadding,
+      color: componentTheme.labelInfoColor
     },
     optionContent: {
       label: 'drilldown__optionContent',
@@ -88,7 +89,8 @@ const generateStyle = (
     },
 
     // we use it in the index file
-    headerActionColor: componentTheme.headerActionColor
+    headerActionColor: componentTheme.headerActionColor,
+    borderColor: componentTheme.borderColor
   }
 }
 

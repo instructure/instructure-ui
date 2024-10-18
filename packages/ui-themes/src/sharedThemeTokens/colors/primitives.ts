@@ -32,6 +32,7 @@ export const primitives: Primitives = {
   grey12: '#E8EAEC',
   grey14: '#D7DADE',
   grey24: '#9EA6AD',
+  grey30: '#8D959F',
   grey45: '#6A7883',
   grey57: '#586874',
   grey70: '#4A5B68',

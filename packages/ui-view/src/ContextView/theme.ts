@@ -37,7 +37,8 @@ const generateComponentTheme = (theme: Theme): ContextViewTheme => {
     arrowBackgroundColor: theme?.colors?.contrasts?.white1010,
     arrowBorderColor: theme?.colors?.contrasts?.grey1214,
     arrowBackgroundColorInverse: theme?.colors?.contrasts?.grey125125,
-    arrowBorderColorInverse: 'transparent'
+    arrowBorderColorInverse: 'transparent',
+    borderColorForView: ''
   }
 
   return {

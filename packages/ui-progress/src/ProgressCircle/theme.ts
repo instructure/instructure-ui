@@ -126,7 +126,7 @@ const generateComponentTheme = (theme: Theme): ProgressCircleTheme => {
     trackColor: colors?.contrasts?.white1010,
     trackColorInverse: 'transparent',
 
-    trackBorderColor: colors?.contrasts?.grey125125,
+    trackBorderColor: colors?.contrasts?.grey3045,
     trackBorderColorInverse: colors?.contrasts?.white1010,
 
     // variables are split out for inverse to allow

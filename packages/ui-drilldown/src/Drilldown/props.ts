@@ -280,7 +280,7 @@ type DrilldownStyle = ComponentStyle<
   | 'optionContainer'
   | 'optionLabelInfo'
   | 'optionContent'
-> & { headerActionColor: string }
+> & { headerActionColor: string; borderColor: string }
 
 type DrilldownStyleProps = {
   hasHighlightedOption: boolean

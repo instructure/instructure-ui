@@ -38,7 +38,7 @@ const generateComponentTheme = (theme: Theme): AvatarTheme => {
     background: colors?.contrasts?.white1010,
     borderWidthSmall: borders?.widthSmall,
     borderWidthMedium: borders?.widthMedium,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
     boxShadowColor: alpha('#2d3b45', 12),
     boxShadowBlur: '1rem',
     fontFamily: typography?.fontFamily,

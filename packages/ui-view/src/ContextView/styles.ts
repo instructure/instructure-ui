@@ -312,7 +312,8 @@ const generateStyle = (
       }
     },
     arrowSize: componentTheme.arrowSize,
-    arrowBorderWidth: componentTheme.arrowBorderWidth
+    arrowBorderWidth: componentTheme.arrowBorderWidth,
+    borderColorForView: componentTheme.borderColorForView
   }
 }
 
