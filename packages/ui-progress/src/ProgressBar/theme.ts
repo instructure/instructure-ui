@@ -93,7 +93,7 @@ const generateComponentTheme = (theme: Theme): ProgressBarTheme => {
     trackColor: colors?.contrasts?.white1010,
     trackColorInverse: 'transparent',
     trackBottomBorderWidth: borders?.widthSmall,
-    trackBottomBorderColor: colors?.contrasts?.grey1214,
+    trackBottomBorderColor: colors?.contrasts?.grey3045,
     trackBottomBorderColorInverse: colors?.contrasts?.white1010
   }
 

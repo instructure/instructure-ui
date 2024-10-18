@@ -1377,6 +1377,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           getDisabledOptionProps
         }) => (
           <View
+            themeOverride={{
+              borderColorPrimary: styles?.borderColor
+            }}
+            borderWidth="small"
             as="div"
             elementRef={this.handleDrilldownRef}
             tabIndex={0}
@@ -1418,6 +1422,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             })}
           >
             <View
+              themeOverride={{
+                borderColorPrimary: 'red'
+              }}
               as="div"
               overflowY={overflowY}
               overflowX={overflowX}

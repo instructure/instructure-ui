@@ -55,7 +55,7 @@ const generateComponentTheme = (theme: Theme): ToggleFacadeTheme => {
   const componentVariables: ToggleFacadeTheme = {
     color: colors?.contrasts?.white1010,
     background: colors?.contrasts?.grey1111,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
     borderWidth: borders?.widthSmall,
     borderRadius: '4rem',
     marginEnd: spacing?.small,
@@ -63,7 +63,7 @@ const generateComponentTheme = (theme: Theme): ToggleFacadeTheme => {
     marginVertical: spacing?.xSmall,
     checkedBackground: colors?.contrasts?.green4570,
     uncheckedIconColor: colors?.contrasts?.grey125125,
-    checkedIconColor: colors?.contrasts?.green4570,
+    checkedIconColor: colors?.contrasts?.green5782,
     focusOutlineColor: colors?.contrasts?.blue4570,
     focusBorderWidth: borders?.widthMedium,
     focusBorderStyle: borders?.style,
@@ -76,7 +76,9 @@ const generateComponentTheme = (theme: Theme): ToggleFacadeTheme => {
     labelLineHeight: typography?.lineHeightCondensed,
     labelFontSizeSmall: typography?.fontSizeSmall,
     labelFontSizeMedium: typography?.fontSizeMedium,
-    labelFontSizeLarge: typography?.fontSizeLarge
+    labelFontSizeLarge: typography?.fontSizeLarge,
+    uncheckedIconBorderColor: colors?.contrasts?.grey5782,
+    checkedIconBorderColor: colors?.contrasts?.green5782
   }
 
   return {

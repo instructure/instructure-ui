@@ -22,40 +22,23 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import { TableColHeaderTheme } from '@instructure/shared-types'
+import type { PopoverTheme } from '@instructure/shared-types'
+import type { PopoverStyle } from './props'
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme: Theme): TableColHeaderTheme => {
-  const { typography, colors, borders, spacing } = theme
-
-  const componentVariables: TableColHeaderTheme = {
-    fontSize: typography?.fontSizeMedium,
-    fontFamily: typography?.fontFamily,
-
-    color: colors?.contrasts?.grey125125,
-    background: colors?.contrasts?.white1010,
-
-    borderColor: colors?.contrasts?.grey1214,
-
-    lineHeight: typography?.lineHeightCondensed,
-    padding: `${spacing?.xSmall} ${spacing?.small}`,
-
-    focusOutlineColor: colors?.contrasts?.blue4570,
-    focusOutlineWidth: borders?.widthMedium,
-    focusOutlineStyle: borders?.style,
-
-    unSortedIconColor: colors?.contrasts?.grey3045,
-    sortedIconColor: colors?.contrasts?.blue4570
-  }
-
+const generateStyle = (componentTheme: PopoverTheme): PopoverStyle => {
   return {
-    ...componentVariables
+    borderColor: componentTheme.borderColor
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

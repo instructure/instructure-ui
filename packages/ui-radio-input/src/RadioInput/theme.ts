@@ -60,7 +60,7 @@ const generateComponentTheme = (theme: Theme): RadioInputTheme => {
 
     background: colors?.contrasts?.white1010,
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
     hoverBorderColor: colors?.contrasts?.grey125125,
     controlSize: '0.1875rem',
 
