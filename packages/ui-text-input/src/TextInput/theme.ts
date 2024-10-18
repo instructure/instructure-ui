@@ -52,6 +52,8 @@ const generateComponentTheme = (theme: Theme): TextInputTheme => {
     color: colors?.contrasts?.grey125125,
     background: colors?.contrasts?.white1010,
 
+    requiredInvalidColor: colors?.contrasts?.red5782,
+
     padding: spacing?.small,
 
     focusOutlineWidth: borders?.widthMedium,

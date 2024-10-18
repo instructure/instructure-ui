@@ -87,6 +87,10 @@ type RadioInputGroupOwnProps = {
    * any children (ones that aren't `RadioInput` are passed through)
    */
   children?: React.ReactNode
+  /*
+   * Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change.
+   */
+  isRequired?: boolean
 }
 
 type PropKeys = keyof RadioInputGroupOwnProps
@@ -115,7 +119,8 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   variant: PropTypes.oneOf(['simple', 'toggle']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
+  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
+  isRequired: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
