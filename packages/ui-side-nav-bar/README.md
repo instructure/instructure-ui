@@ -48,6 +48,6 @@ For detailed usage and documentation, see individual component examples.
 [npm]: https://img.shields.io/npm/v/@instructure/ui-side-nav-bar.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-side-nav-bar
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
-[license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
+[license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE.md
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md
