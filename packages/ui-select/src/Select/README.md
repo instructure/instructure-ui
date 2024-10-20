@@ -14,77 +14,187 @@ describes: Select
 
 `Select` is a controlled-only component. The consuming app or component must manage any state needed. A variety of request callbacks are provided as prompts for state updates. `onRequestShowOptions`, for example, is fired when `Select` thinks the `isShowingOptions` prop should be updated to `true`. Of course, the consumer can always choose how to react to these callbacks.
 
-```javascript
----
-type: example
----
-
-class SingleSelectExample extends React.Component {
-  state = {
-    inputValue: this.props.options[0].label,
-    isShowingOptions: false,
-    highlightedOptionId: null,
-    selectedOptionId: this.props.options[0].id,
-    announcement: null
-  }
-
-  getOptionById (queryId) {
-    return this.props.options.find(({ id }) => id === queryId)
-  }
-
-  handleShowOptions = (event) => {
-    this.setState({
-      isShowingOptions: true
-    })
-  }
-
-  handleHideOptions = (event) => {
-    const { selectedOptionId } = this.state
-    const option = this.getOptionById(selectedOptionId).label
-    this.setState({
+- ```javascript
+  class SingleSelectExample extends React.Component {
+    state = {
+      inputValue: this.props.options[0].label,
       isShowingOptions: false,
       highlightedOptionId: null,
-      inputValue: selectedOptionId ? option : '',
-      announcement: 'List collapsed.'
-    })
+      selectedOptionId: this.props.options[0].id,
+      announcement: null
+    }
+
+    getOptionById(queryId) {
+      return this.props.options.find(({ id }) => id === queryId)
+    }
+
+    handleShowOptions = (event) => {
+      this.setState({
+        isShowingOptions: true
+      })
+    }
+
+    handleHideOptions = (event) => {
+      const { selectedOptionId } = this.state
+      const option = this.getOptionById(selectedOptionId).label
+      this.setState({
+        isShowingOptions: false,
+        highlightedOptionId: null,
+        inputValue: selectedOptionId ? option : '',
+        announcement: 'List collapsed.'
+      })
+    }
+
+    handleBlur = (event) => {
+      this.setState({
+        highlightedOptionId: null
+      })
+    }
+
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const optionsAvailable = `${this.props.options.length} options available.`
+      const nowOpen = !this.state.isShowingOptions
+        ? `List expanded. ${optionsAvailable}`
+        : ''
+      const option = this.getOptionById(id).label
+      this.setState((state) => ({
+        highlightedOptionId: id,
+        inputValue: event.type === 'keydown' ? option : state.inputValue,
+        announcement: `${option} ${nowOpen}`
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      const option = this.getOptionById(id).label
+      this.setState({
+        selectedOptionId: id,
+        inputValue: option,
+        isShowingOptions: false,
+        announcement: `"${option}" selected. List collapsed.`
+      })
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        highlightedOptionId,
+        selectedOptionId,
+        announcement
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            renderLabel="Single Select"
+            assistiveText="Use arrow keys to navigate options."
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            onBlur={this.handleBlur}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+          >
+            {this.props.options.map((option) => {
+              return (
+                <Select.Option
+                  id={option.id}
+                  key={option.id}
+                  isHighlighted={option.id === highlightedOptionId}
+                  isSelected={option.id === selectedOptionId}
+                >
+                  {option.label}
+                </Select.Option>
+              )
+            })}
+          </Select>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            liveRegionPoliteness="assertive"
+            screenReaderOnly
+          >
+            {announcement}
+          </Alert>
+        </div>
+      )
+    }
   }
 
-  handleBlur = (event) => {
-    this.setState({
-      highlightedOptionId: null
-    })
-  }
+  render(
+    <View>
+      <SingleSelectExample
+        options={[
+          { id: 'opt1', label: 'Alaska' },
+          { id: 'opt2', label: 'American Samoa' },
+          { id: 'opt3', label: 'Arizona' },
+          { id: 'opt4', label: 'Arkansas' },
+          { id: 'opt5', label: 'California' },
+          { id: 'opt6', label: 'Colorado' },
+          { id: 'opt7', label: 'Connecticut' },
+          { id: 'opt8', label: 'Delaware' },
+          { id: 'opt9', label: 'District Of Columbia' },
+          { id: 'opt10', label: 'Federated States Of Micronesia' },
+          { id: 'opt11', label: 'Florida' },
+          { id: 'opt12', label: 'Georgia (unavailable)' },
+          { id: 'opt13', label: 'Guam' },
+          { id: 'opt14', label: 'Hawaii' },
+          { id: 'opt15', label: 'Idaho' },
+          { id: 'opt16', label: 'Illinois' }
+        ]}
+      />
+    </View>
+  )
+  ```
 
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const optionsAvailable = `${this.props.options.length} options available.`
-    const nowOpen = !this.state.isShowingOptions ? `List expanded. ${optionsAvailable}` : ''
-    const option = this.getOptionById(id).label
-    this.setState((state) => ({
-      highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option : state.inputValue,
-      announcement: `${option} ${nowOpen}`
-    }))
-  }
+- ```js
+  const SingleSelectExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState(options[0].label)
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
+    const [announcement, setAnnouncement] = useState(null)
 
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id).label
-    this.setState({
-      selectedOptionId: id,
-      inputValue: option,
-      isShowingOptions: false,
-      announcement: `"${option}" selected. List collapsed.`
-    })
-  }
+    const getOptionById = (queryId) => {
+      return options.find(({ id }) => id === queryId)
+    }
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      highlightedOptionId,
-      selectedOptionId,
-      announcement
-    } = this.state
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+    }
+
+    const handleHideOptions = (event) => {
+      const option = getOptionById(selectedOptionId).label
+      setIsShowingOptions(false)
+      setHighlightedOptionId(null)
+      setSelectedOptionId(selectedOptionId ? option : '')
+      setAnnouncement('List collapsed.')
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const optionsAvailable = `${options.length} options available.`
+      const nowOpen = !isShowingOptions
+        ? `List expanded. ${optionsAvailable}`
+        : ''
+      const option = getOptionById(id).label
+      setHighlightedOptionId(id)
+      setInputValue(event.type === 'keydown' ? option : inputValue)
+      setAnnouncement(`${option} ${nowOpen}`)
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      const option = getOptionById(id).label
+      setSelectedOptionId(id)
+      setInputValue(option)
+      setIsShowingOptions(false)
+      setAnnouncement(`"${option}" selected. List collapsed.`)
+    }
 
     return (
       <div>
@@ -93,13 +203,13 @@ class SingleSelectExample extends React.Component {
           assistiveText="Use arrow keys to navigate options."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          onBlur={this.handleBlur}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
+          onBlur={handleBlur}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
         >
-          {this.props.options.map((option) => {
+          {options.map((option) => {
             return (
               <Select.Option
                 id={option.id}
@@ -107,7 +217,7 @@ class SingleSelectExample extends React.Component {
                 isHighlighted={option.id === highlightedOptionId}
                 isSelected={option.id === selectedOptionId}
               >
-                { option.label }
+                {option.label}
               </Select.Option>
             )
           })}
@@ -117,38 +227,36 @@ class SingleSelectExample extends React.Component {
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )
   }
-}
-
-render(
-  <View>
-    <SingleSelectExample
-      options={[
-        { id: 'opt1', label: 'Alaska' },
-        { id: 'opt2', label: 'American Samoa' },
-        { id: 'opt3', label: 'Arizona' },
-        { id: 'opt4', label: 'Arkansas' },
-        { id: 'opt5', label: 'California' },
-        { id: 'opt6', label: 'Colorado' },
-        { id: 'opt7', label: 'Connecticut' },
-        { id: 'opt8', label: 'Delaware' },
-        { id: 'opt9', label: 'District Of Columbia' },
-        { id: 'opt10', label: 'Federated States Of Micronesia' },
-        { id: 'opt11', label: 'Florida' },
-        { id: 'opt12', label: 'Georgia (unavailable)' },
-        { id: 'opt13', label: 'Guam' },
-        { id: 'opt14', label: 'Hawaii' },
-        { id: 'opt15', label: 'Idaho' },
-        { id: 'opt16', label: 'Illinois' }
-      ]}
-    />
-  </View>
-)
-```
+  render(
+    <View>
+      <SingleSelectExample
+        options={[
+          { id: 'opt1', label: 'Alaska' },
+          { id: 'opt2', label: 'American Samoa' },
+          { id: 'opt3', label: 'Arizona' },
+          { id: 'opt4', label: 'Arkansas' },
+          { id: 'opt5', label: 'California' },
+          { id: 'opt6', label: 'Colorado' },
+          { id: 'opt7', label: 'Connecticut' },
+          { id: 'opt8', label: 'Delaware' },
+          { id: 'opt9', label: 'District Of Columbia' },
+          { id: 'opt10', label: 'Federated States Of Micronesia' },
+          { id: 'opt11', label: 'Florida' },
+          { id: 'opt12', label: 'Georgia (unavailable)' },
+          { id: 'opt13', label: 'Guam' },
+          { id: 'opt14', label: 'Hawaii' },
+          { id: 'opt15', label: 'Idaho' },
+          { id: 'opt16', label: 'Illinois' }
+        ]}
+      />
+    </View>
+  )
+  ```
 
 #### Providing autocomplete behavior
 
@@ -156,153 +264,342 @@ It's best practice to always provide autocomplete functionality to help users ma
 
 > Note: Select makes some conditional assumptions about keyboard behavior. For example, if the list is NOT showing, up/down arrow keys and the space key, will show the list. Otherwise, the arrows will navigate options and the space key will type a space character.
 
-```javascript
----
-type: example
----
-
-class AutocompleteExample extends React.Component {
-  state = {
-    inputValue: '',
-    isShowingOptions: false,
-    highlightedOptionId: null,
-    selectedOptionId: null,
-    filteredOptions: this.props.options,
-    announcement: null
-  }
-
-  getOptionById (queryId) {
-    return this.props.options.find(({ id }) => id === queryId)
-  }
-
-  getOptionsChangedMessage (newOptions) {
-    let message = newOptions.length !== this.state.filteredOptions.length
-      ? `${newOptions.length} options available.` // options changed, announce new total
-      : null // options haven't changed, don't announce
-    if (message && newOptions.length > 0) {
-      // options still available
-      if (this.state.highlightedOptionId !== newOptions[0].id) {
-        // highlighted option hasn't been announced
-        const option = this.getOptionById(newOptions[0].id).label
-        message = `${option}. ${message}`
-      }
-    }
-    return message
-  }
-
-  filterOptions = (value) => {
-    return this.props.options.filter(option => (
-      option.label.toLowerCase().startsWith(value.toLowerCase())
-    ))
-  }
-
-  matchValue () {
-    const {
-      filteredOptions,
-      inputValue,
-      highlightedOptionId,
-      selectedOptionId
-    } = this.state
-
-    // an option matching user input exists
-    if (filteredOptions.length === 1) {
-      const onlyOption = filteredOptions[0]
-      // automatically select the matching option
-      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
-        return {
-          inputValue: onlyOption.label,
-          selectedOptionId: onlyOption.id,
-          filteredOptions: this.filterOptions('')
-        }
-      }
-    }
-    // allow user to return to empty input and no selection
-    if (inputValue.length === 0) {
-      return { selectedOptionId: null }
-    }
-    // no match found, return selected option label to input
-    if (selectedOptionId) {
-      const selectedOption = this.getOptionById(selectedOptionId)
-      return { inputValue: selectedOption.label }
-    }
-    // input value is from highlighted option, not user input
-    // clear input, reset options
-    if (highlightedOptionId) {
-      if (inputValue === this.getOptionById(highlightedOptionId).label) {
-        return {
-          inputValue: '',
-          filteredOptions: this.filterOptions('')
-        }
-      }
-    }
-  }
-
-  handleShowOptions = (event) => {
-    this.setState(({ filteredOptions }) => ({
-      isShowingOptions: true,
-      announcement: `List expanded. ${filteredOptions.length} options available.`
-    }))
-  }
-
-  handleHideOptions = (event) => {
-    const { selectedOptionId, inputValue } = this.state
-    this.setState({
+- ```javascript
+  class AutocompleteExample extends React.Component {
+    state = {
+      inputValue: '',
       isShowingOptions: false,
       highlightedOptionId: null,
-      announcement: 'List collapsed.',
-      ...this.matchValue()
-    })
-  }
-
-  handleBlur = (event) => {
-    this.setState({ highlightedOptionId: null })
-  }
-
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const option = this.getOptionById(id)
-    if (!option) return // prevent highlighting of empty option
-    this.setState((state) => ({
-      highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option.label : state.inputValue,
-      announcement: option.label
-    }))
-  }
-
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id)
-    if (!option) return // prevent selecting of empty option
-    this.setState({
-      selectedOptionId: id,
-      inputValue: option.label,
-      isShowingOptions: false,
+      selectedOptionId: null,
       filteredOptions: this.props.options,
-      announcement: `${option.label} selected. List collapsed.`
-    })
+      announcement: null
+    }
+
+    getOptionById(queryId) {
+      return this.props.options.find(({ id }) => id === queryId)
+    }
+
+    getOptionsChangedMessage(newOptions) {
+      let message =
+        newOptions.length !== this.state.filteredOptions.length
+          ? `${newOptions.length} options available.` // options changed, announce new total
+          : null // options haven't changed, don't announce
+      if (message && newOptions.length > 0) {
+        // options still available
+        if (this.state.highlightedOptionId !== newOptions[0].id) {
+          // highlighted option hasn't been announced
+          const option = this.getOptionById(newOptions[0].id).label
+          message = `${option}. ${message}`
+        }
+      }
+      return message
+    }
+
+    filterOptions = (value) => {
+      return this.props.options.filter((option) =>
+        option.label.toLowerCase().startsWith(value.toLowerCase())
+      )
+    }
+
+    matchValue() {
+      const {
+        filteredOptions,
+        inputValue,
+        highlightedOptionId,
+        selectedOptionId
+      } = this.state
+
+      // an option matching user input exists
+      if (filteredOptions.length === 1) {
+        const onlyOption = filteredOptions[0]
+        // automatically select the matching option
+        if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+          return {
+            inputValue: onlyOption.label,
+            selectedOptionId: onlyOption.id,
+            filteredOptions: this.filterOptions('')
+          }
+        }
+      }
+      // allow user to return to empty input and no selection
+      if (inputValue.length === 0) {
+        return { selectedOptionId: null }
+      }
+      // no match found, return selected option label to input
+      if (selectedOptionId) {
+        const selectedOption = this.getOptionById(selectedOptionId)
+        return { inputValue: selectedOption.label }
+      }
+      // input value is from highlighted option, not user input
+      // clear input, reset options
+      if (highlightedOptionId) {
+        if (inputValue === this.getOptionById(highlightedOptionId).label) {
+          return {
+            inputValue: '',
+            filteredOptions: this.filterOptions('')
+          }
+        }
+      }
+    }
+
+    handleShowOptions = (event) => {
+      this.setState(({ filteredOptions }) => ({
+        isShowingOptions: true,
+        announcement: `List expanded. ${filteredOptions.length} options available.`
+      }))
+    }
+
+    handleHideOptions = (event) => {
+      const { selectedOptionId, inputValue } = this.state
+      this.setState({
+        isShowingOptions: false,
+        highlightedOptionId: null,
+        announcement: 'List collapsed.',
+        ...this.matchValue()
+      })
+    }
+
+    handleBlur = (event) => {
+      this.setState({ highlightedOptionId: null })
+    }
+
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = this.getOptionById(id)
+      if (!option) return // prevent highlighting of empty option
+      this.setState((state) => ({
+        highlightedOptionId: id,
+        inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+        announcement: option.label
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      const option = this.getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      this.setState({
+        selectedOptionId: id,
+        inputValue: option.label,
+        isShowingOptions: false,
+        filteredOptions: this.props.options,
+        announcement: `${option.label} selected. List collapsed.`
+      })
+    }
+
+    handleInputChange = (event) => {
+      const value = event.target.value
+      const newOptions = this.filterOptions(value)
+      this.setState((state) => ({
+        inputValue: value,
+        filteredOptions: newOptions,
+        highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
+        isShowingOptions: true,
+        selectedOptionId: value === '' ? null : state.selectedOptionId,
+        announcement: this.getOptionsChangedMessage(newOptions)
+      }))
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        highlightedOptionId,
+        selectedOptionId,
+        filteredOptions,
+        announcement
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            renderLabel="Autocomplete"
+            assistiveText="Type or use arrow keys to navigate options."
+            placeholder="Start typing to search..."
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            onBlur={this.handleBlur}
+            onInputChange={this.handleInputChange}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+            renderBeforeInput={<IconUserSolid inline={false} />}
+            renderAfterInput={<IconSearchLine inline={false} />}
+          >
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option) => {
+                return (
+                  <Select.Option
+                    id={option.id}
+                    key={option.id}
+                    isHighlighted={option.id === highlightedOptionId}
+                    isSelected={option.id === selectedOptionId}
+                    isDisabled={option.disabled}
+                    renderBeforeLabel={
+                      !option.disabled ? IconUserSolid : IconUserLine
+                    }
+                  >
+                    {!option.disabled
+                      ? option.label
+                      : `${option.label} (unavailable)`}
+                  </Select.Option>
+                )
+              })
+            ) : (
+              <Select.Option id="empty-option" key="empty-option">
+                ---
+              </Select.Option>
+            )}
+          </Select>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            liveRegionPoliteness="assertive"
+            screenReaderOnly
+          >
+            {announcement}
+          </Alert>
+        </div>
+      )
+    }
   }
 
-  handleInputChange = (event) => {
-    const value = event.target.value
-    const newOptions = this.filterOptions(value)
-    this.setState((state) => ({
-      inputValue: value,
-      filteredOptions: newOptions,
-      highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
-      isShowingOptions: true,
-      selectedOptionId: value === '' ? null : state.selectedOptionId,
-      announcement: this.getOptionsChangedMessage(newOptions)
-    }))
-  }
+  render(
+    <View>
+      <AutocompleteExample
+        options={[
+          { id: 'opt0', label: 'Aaron Aaronson' },
+          { id: 'opt1', label: 'Amber Murphy' },
+          { id: 'opt2', label: 'Andrew Miller' },
+          { id: 'opt3', label: 'Barbara Ward' },
+          { id: 'opt4', label: 'Byron Cranston', disabled: true },
+          { id: 'opt5', label: 'Dennis Reynolds' },
+          { id: 'opt6', label: 'Dee Reynolds' },
+          { id: 'opt7', label: 'Ezra Betterthan' },
+          { id: 'opt8', label: 'Jeff Spicoli' },
+          { id: 'opt9', label: 'Joseph Smith' },
+          { id: 'opt10', label: 'Jasmine Diaz' },
+          { id: 'opt11', label: 'Martin Harris' },
+          { id: 'opt12', label: 'Michael Morgan', disabled: true },
+          { id: 'opt13', label: 'Michelle Rodriguez' },
+          { id: 'opt14', label: 'Ziggy Stardust' }
+        ]}
+      />
+    </View>
+  )
+  ```
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      highlightedOptionId,
-      selectedOptionId,
-      filteredOptions,
-      announcement
-    } = this.state
+- ```js
+  const AutocompleteExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState('')
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(null)
+    const [filteredOptions, setFilteredOptions] = useState(options)
+    const [announcement, setAnnouncement] = useState(null)
+
+    const getOptionById = (queryId) => {
+      return options.find(({ id }) => id === queryId)
+    }
+
+    const getOptionsChangedMessage = (newOptions) => {
+      let message =
+        newOptions.length !== filteredOptions.length
+          ? `${newOptions.length} options available.` // options changed, announce new total
+          : null // options haven't changed, don't announce
+      if (message && newOptions.length > 0) {
+        // options still available
+        if (highlightedOptionId !== newOptions[0].id) {
+          // highlighted option hasn't been announced
+          const option = getOptionById(newOptions[0].id).label
+          message = `${option}. ${message}`
+        }
+      }
+      return message
+    }
+
+    const filterOptions = (value) => {
+      return options.filter((option) =>
+        option.label.toLowerCase().startsWith(value.toLowerCase())
+      )
+    }
+
+    const matchValue = () => {
+      // an option matching user input exists
+      if (filteredOptions.length === 1) {
+        const onlyOption = filteredOptions[0]
+        // automatically select the matching option
+        if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+          setInputValue(onlyOption.label)
+          setSelectedOptionId(onlyOption.id)
+          setFilteredOptions(filterOptions(''))
+        }
+      }
+      // allow user to return to empty input and no selection
+      else if (inputValue.length === 0) {
+        setSelectedOptionId(null)
+      }
+      // no match found, return selected option label to input
+      else if (selectedOptionId) {
+        const selectedOption = getOptionById(selectedOptionId)
+        setInputValue(selectedOption.label)
+      }
+      // input value is from highlighted option, not user input
+      // clear input, reset options
+      else if (highlightedOptionId) {
+        if (inputValue === getOptionById(highlightedOptionId).label) {
+          setInputValue('')
+          setFilteredOptions(filterOptions(''))
+        }
+      }
+    }
+
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+      setAnnouncement(
+        `List expanded. ${filteredOptions.length} options available.`
+      )
+    }
+
+    const handleHideOptions = (event) => {
+      setIsShowingOptions(false)
+      setHighlightedOptionId(false)
+      setAnnouncement('List collapsed.')
+      matchValue()
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = getOptionById(id)
+      if (!option) return // prevent highlighting of empty option
+      setHighlightedOptionId(id)
+      setInputValue(event.type === 'keydown' ? option.label : inputValue)
+      setAnnouncement(option.label)
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      const option = getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      setSelectedOptionId(id)
+      setInputValue(option.label)
+      setIsShowingOptions(false)
+      setFilteredOptions(options)
+      setAnnouncement(`${option.label} selected. List collapsed.`)
+    }
+
+    const handleInputChange = (event) => {
+      const value = event.target.value
+      const newOptions = filterOptions(value)
+      setInputValue(value)
+      setFilteredOptions(newOptions)
+      setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
+      setIsShowingOptions(true)
+      setSelectedOptionId(value === '' ? null : selectedOptionId)
+      setAnnouncement(getOptionsChangedMessage(newOptions))
+    }
 
     return (
       <div>
@@ -312,36 +609,36 @@ class AutocompleteExample extends React.Component {
           placeholder="Start typing to search..."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          onBlur={this.handleBlur}
-          onInputChange={this.handleInputChange}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
+          onBlur={handleBlur}
+          onInputChange={handleInputChange}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
           renderBeforeInput={<IconUserSolid inline={false} />}
           renderAfterInput={<IconSearchLine inline={false} />}
         >
-          {filteredOptions.length > 0 ? filteredOptions.map((option) => {
-            return (
-              <Select.Option
-                id={option.id}
-                key={option.id}
-                isHighlighted={option.id === highlightedOptionId}
-                isSelected={option.id === selectedOptionId}
-                isDisabled={option.disabled}
-                renderBeforeLabel={!option.disabled ? IconUserSolid : IconUserLine}
-              >
-                {!option.disabled
-                  ? option.label
-                  : `${option.label} (unavailable)`
-                }
-              </Select.Option>
-            )
-          }) : (
-            <Select.Option
-              id="empty-option"
-              key="empty-option"
-            >
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((option) => {
+              return (
+                <Select.Option
+                  id={option.id}
+                  key={option.id}
+                  isHighlighted={option.id === highlightedOptionId}
+                  isSelected={option.id === selectedOptionId}
+                  isDisabled={option.disabled}
+                  renderBeforeLabel={
+                    !option.disabled ? IconUserSolid : IconUserLine
+                  }
+                >
+                  {!option.disabled
+                    ? option.label
+                    : `${option.label} (unavailable)`}
+                </Select.Option>
+              )
+            })
+          ) : (
+            <Select.Option id="empty-option" key="empty-option">
               ---
             </Select.Option>
           )}
@@ -351,219 +648,436 @@ class AutocompleteExample extends React.Component {
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )
   }
-}
 
-render(
-  <View>
-    <AutocompleteExample
-      options={[
-        { id: 'opt0', label: 'Aaron Aaronson' },
-        { id: 'opt1', label: 'Amber Murphy' },
-        { id: 'opt2', label: 'Andrew Miller' },
-        { id: 'opt3', label: 'Barbara Ward' },
-        { id: 'opt4', label: 'Byron Cranston', disabled: true },
-        { id: 'opt5', label: 'Dennis Reynolds' },
-        { id: 'opt6', label: 'Dee Reynolds' },
-        { id: 'opt7', label: 'Ezra Betterthan' },
-        { id: 'opt8', label: 'Jeff Spicoli' },
-        { id: 'opt9', label: 'Joseph Smith' },
-        { id: 'opt10', label: 'Jasmine Diaz' },
-        { id: 'opt11', label: 'Martin Harris' },
-        { id: 'opt12', label: 'Michael Morgan', disabled: true },
-        { id: 'opt13', label: 'Michelle Rodriguez' },
-        { id: 'opt14', label: 'Ziggy Stardust' }
-      ]}
-    />
-  </View>
-)
-```
+  render(
+    <View>
+      <AutocompleteExample
+        options={[
+          { id: 'opt0', label: 'Aaron Aaronson' },
+          { id: 'opt1', label: 'Amber Murphy' },
+          { id: 'opt2', label: 'Andrew Miller' },
+          { id: 'opt3', label: 'Barbara Ward' },
+          { id: 'opt4', label: 'Byron Cranston', disabled: true },
+          { id: 'opt5', label: 'Dennis Reynolds' },
+          { id: 'opt6', label: 'Dee Reynolds' },
+          { id: 'opt7', label: 'Ezra Betterthan' },
+          { id: 'opt8', label: 'Jeff Spicoli' },
+          { id: 'opt9', label: 'Joseph Smith' },
+          { id: 'opt10', label: 'Jasmine Diaz' },
+          { id: 'opt11', label: 'Martin Harris' },
+          { id: 'opt12', label: 'Michael Morgan', disabled: true },
+          { id: 'opt13', label: 'Michelle Rodriguez' },
+          { id: 'opt14', label: 'Ziggy Stardust' }
+        ]}
+      />
+    </View>
+  )
+  ```
 
 #### Highlighting and selecting options
 
 To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](#Tag) for each selected option via the `renderBeforeInput` prop.
 
-```javascript
----
-type: example
----
-
-class MultipleSelectExample extends React.Component {
-  state = {
-    inputValue: '',
-    isShowingOptions: false,
-    highlightedOptionId: null,
-    selectedOptionId: ['opt1', 'opt6'],
-    filteredOptions: this.props.options,
-    announcement: null
-  }
-
-  getOptionById (queryId) {
-    return this.props.options.find(({ id }) => id === queryId)
-  }
-
-  getOptionsChangedMessage (newOptions) {
-    let message = newOptions.length !== this.state.filteredOptions.length
-      ? `${newOptions.length} options available.` // options changed, announce new total
-      : null // options haven't changed, don't announce
-    if (message && newOptions.length > 0) {
-      // options still available
-      if (this.state.highlightedOptionId !== newOptions[0].id) {
-        // highlighted option hasn't been announced
-        const option = this.getOptionById(newOptions[0].id).label
-        message = `${option}. ${message}`
-      }
-    }
-    return message
-  }
-
-  filterOptions = (value) => {
-    const { selectedOptionId } = this.state
-    return this.props.options.filter(option => (option.label.toLowerCase().startsWith(value.toLowerCase())
-    ))
-  }
-
-  matchValue () {
-    const {
-      filteredOptions,
-      inputValue,
-      highlightedOptionId,
-      selectedOptionId
-    } = this.state
-
-    // an option matching user input exists
-    if (filteredOptions.length === 1) {
-      const onlyOption = filteredOptions[0]
-      // automatically select the matching option
-      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
-        return {
-          inputValue: '',
-          selectedOptionId: [...selectedOptionId, onlyOption.id],
-          filteredOptions: this.filterOptions('')
-        }
-      }
-    }
-    // input value is from highlighted option, not user input
-    // clear input, reset options
-    if (highlightedOptionId) {
-      if (inputValue === this.getOptionById(highlightedOptionId).label) {
-        return {
-          inputValue: '',
-          filteredOptions: this.filterOptions('')
-        }
-      }
-    }
-  }
-
-  handleShowOptions = (event) => {
-    this.setState({ isShowingOptions: true })
-  }
-
-  handleHideOptions = (event) => {
-    this.setState({
-      isShowingOptions: false,
-      ...this.matchValue()
-    })
-  }
-
-  handleBlur = (event) => {
-    this.setState({
-      highlightedOptionId: null
-    })
-  }
-
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const option = this.getOptionById(id)
-    if (!option) return // prevent highlighting empty option
-    this.setState((state) => ({
-      highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option.label : state.inputValue,
-      announcement: option.label
-    }))
-  }
-
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id)
-    if (!option) return // prevent selecting of empty option
-    this.setState((state) => ({
-      selectedOptionId: [...state.selectedOptionId, id],
-      highlightedOptionId: null,
-      filteredOptions: this.filterOptions(''),
+- ```javascript
+  class MultipleSelectExample extends React.Component {
+    state = {
       inputValue: '',
       isShowingOptions: false,
-      announcement: `${option.label} selected. List collapsed.`
-    }))
-  }
+      highlightedOptionId: null,
+      selectedOptionId: ['opt1', 'opt6'],
+      filteredOptions: this.props.options,
+      announcement: null
+    }
 
-  handleInputChange = (event) => {
-    const value = event.target.value
-    const newOptions = this.filterOptions(value)
-    this.setState({
-      inputValue: value,
-      filteredOptions: newOptions,
-      highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
-      isShowingOptions: true,
-      announcement: this.getOptionsChangedMessage(newOptions)
-    })
-  }
+    getOptionById(queryId) {
+      return this.props.options.find(({ id }) => id === queryId)
+    }
 
-  handleKeyDown = (event) => {
-    const { selectedOptionId, inputValue } = this.state
-    if (event.keyCode === 8) {
-      // when backspace key is pressed
-      if (inputValue === '' && selectedOptionId.length > 0) {
-        // remove last selected option, if input has no entered text
-        this.setState((state) => ({
-          highlightedOptionId: null,
-          selectedOptionId: state.selectedOptionId.slice(0, -1)
-        }))
+    getOptionsChangedMessage(newOptions) {
+      let message =
+        newOptions.length !== this.state.filteredOptions.length
+          ? `${newOptions.length} options available.` // options changed, announce new total
+          : null // options haven't changed, don't announce
+      if (message && newOptions.length > 0) {
+        // options still available
+        if (this.state.highlightedOptionId !== newOptions[0].id) {
+          // highlighted option hasn't been announced
+          const option = this.getOptionById(newOptions[0].id).label
+          message = `${option}. ${message}`
+        }
+      }
+      return message
+    }
+
+    filterOptions = (value) => {
+      return this.props.options.filter((option) =>
+        option.label.toLowerCase().startsWith(value.toLowerCase())
+      )
+    }
+
+    matchValue() {
+      const {
+        filteredOptions,
+        inputValue,
+        highlightedOptionId,
+        selectedOptionId
+      } = this.state
+
+      // an option matching user input exists
+      if (filteredOptions.length === 1) {
+        const onlyOption = filteredOptions[0]
+        // automatically select the matching option
+        if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+          return {
+            inputValue: '',
+            selectedOptionId: [...selectedOptionId, onlyOption.id],
+            filteredOptions: this.filterOptions('')
+          }
+        }
+      }
+      // input value is from highlighted option, not user input
+      // clear input, reset options
+      if (highlightedOptionId) {
+        if (inputValue === this.getOptionById(highlightedOptionId).label) {
+          return {
+            inputValue: '',
+            filteredOptions: this.filterOptions('')
+          }
+        }
       }
     }
-  }
-  // remove a selected option tag
-  dismissTag (e, tag) {
-    // prevent closing of list
-    e.stopPropagation()
-    e.preventDefault()
 
-    const newSelection = this.state.selectedOptionId.filter((id) => id !== tag)
-    this.setState({
-      selectedOptionId: newSelection,
-      highlightedOptionId: null,
-      announcement: `${this.getOptionById(tag).label} removed`,
-    }, () => {
-      this.inputRef.focus()
-    })
+    handleShowOptions = (event) => {
+      this.setState({ isShowingOptions: true })
+    }
+
+    handleHideOptions = (event) => {
+      this.setState({
+        isShowingOptions: false,
+        ...this.matchValue()
+      })
+    }
+
+    handleBlur = (event) => {
+      this.setState({
+        highlightedOptionId: null
+      })
+    }
+
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = this.getOptionById(id)
+      if (!option) return // prevent highlighting empty option
+      this.setState((state) => ({
+        highlightedOptionId: id,
+        inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+        announcement: option.label
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      const option = this.getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      this.setState((state) => ({
+        selectedOptionId: [...state.selectedOptionId, id],
+        highlightedOptionId: null,
+        filteredOptions: this.filterOptions(''),
+        inputValue: '',
+        isShowingOptions: false,
+        announcement: `${option.label} selected. List collapsed.`
+      }))
+    }
+
+    handleInputChange = (event) => {
+      const value = event.target.value
+      const newOptions = this.filterOptions(value)
+      this.setState({
+        inputValue: value,
+        filteredOptions: newOptions,
+        highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
+        isShowingOptions: true,
+        announcement: this.getOptionsChangedMessage(newOptions)
+      })
+    }
+
+    handleKeyDown = (event) => {
+      const { selectedOptionId, inputValue } = this.state
+      if (event.keyCode === 8) {
+        // when backspace key is pressed
+        if (inputValue === '' && selectedOptionId.length > 0) {
+          // remove last selected option, if input has no entered text
+          this.setState((state) => ({
+            highlightedOptionId: null,
+            selectedOptionId: state.selectedOptionId.slice(0, -1)
+          }))
+        }
+      }
+    }
+    // remove a selected option tag
+    dismissTag(e, tag) {
+      // prevent closing of list
+      e.stopPropagation()
+      e.preventDefault()
+
+      const newSelection = this.state.selectedOptionId.filter(
+        (id) => id !== tag
+      )
+      this.setState(
+        {
+          selectedOptionId: newSelection,
+          highlightedOptionId: null,
+          announcement: `${this.getOptionById(tag).label} removed`
+        },
+        () => {
+          this.inputRef.focus()
+        }
+      )
+    }
+    // render tags when multiple options are selected
+    renderTags() {
+      const { selectedOptionId } = this.state
+      return selectedOptionId.map((id, index) => (
+        <Tag
+          dismissible
+          key={id}
+          title={`Remove ${this.getOptionById(id).label}`}
+          text={this.getOptionById(id).label}
+          margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
+          onClick={(e) => this.dismissTag(e, id)}
+        />
+      ))
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        highlightedOptionId,
+        selectedOptionId,
+        filteredOptions,
+        announcement
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            renderLabel="Multiple Select"
+            assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            inputRef={(el) => (this.inputRef = el)}
+            onBlur={this.handleBlur}
+            onInputChange={this.handleInputChange}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+            onKeyDown={this.handleKeyDown}
+            renderBeforeInput={
+              selectedOptionId.length > 0 ? this.renderTags() : null
+            }
+          >
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option, index) => {
+                if (selectedOptionId.indexOf(option.id) === -1) {
+                  return (
+                    <Select.Option
+                      id={option.id}
+                      key={option.id}
+                      isHighlighted={option.id === highlightedOptionId}
+                    >
+                      {option.label}
+                    </Select.Option>
+                  )
+                }
+              })
+            ) : (
+              <Select.Option id="empty-option" key="empty-option">
+                ---
+              </Select.Option>
+            )}
+          </Select>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            liveRegionPoliteness="assertive"
+            screenReaderOnly
+          >
+            {announcement}
+          </Alert>
+        </div>
+      )
+    }
   }
-  // render tags when multiple options are selected
-  renderTags () {
-    const { selectedOptionId } = this.state
-    return selectedOptionId.map((id, index) => (
-      <Tag
-        dismissible
-        key={id}
-        title={`Remove ${this.getOptionById(id).label}`}
-        text={this.getOptionById(id).label}
-        margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
-        onClick={(e) => this.dismissTag(e, id)}
+
+  render(
+    <View>
+      <MultipleSelectExample
+        options={[
+          { id: 'opt1', label: 'Alaska' },
+          { id: 'opt2', label: 'American Samoa' },
+          { id: 'opt3', label: 'Arizona' },
+          { id: 'opt4', label: 'Arkansas' },
+          { id: 'opt5', label: 'California' },
+          { id: 'opt6', label: 'Colorado' },
+          { id: 'opt7', label: 'Connecticut' },
+          { id: 'opt8', label: 'Delaware' },
+          { id: 'opt9', label: 'District Of Columbia' },
+          { id: 'opt10', label: 'Federated States Of Micronesia' },
+          { id: 'opt11', label: 'Florida' },
+          { id: 'opt12', label: 'Georgia (unavailable)' },
+          { id: 'opt13', label: 'Guam' },
+          { id: 'opt14', label: 'Hawaii' },
+          { id: 'opt15', label: 'Idaho' },
+          { id: 'opt16', label: 'Illinois' }
+        ]}
       />
-    ))
-  }
+    </View>
+  )
+  ```
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      highlightedOptionId,
-      selectedOptionId,
-      filteredOptions,
-      announcement
-    } = this.state
+- ```js
+  const MultipleSelectExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState('')
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(['opt1', 'opt6'])
+    const [filteredOptions, setFilteredOptions] = useState(options)
+    const [announcement, setAnnouncement] = useState(null)
+    const inputRef = useRef(null)
+
+    const getOptionById = (queryId) => {
+      return options.find(({ id }) => id === queryId)
+    }
+
+    const getOptionsChangedMessage = (newOptions) => {
+      let message =
+        newOptions.length !== filteredOptions.length
+          ? `${newOptions.length} options available.` // options changed, announce new total
+          : null // options haven't changed, don't announce
+      if (message && newOptions.length > 0) {
+        // options still available
+        if (highlightedOptionId !== newOptions[0].id) {
+          // highlighted option hasn't been announced
+          const option = getOptionById(newOptions[0].id).label
+          message = `${option}. ${message}`
+        }
+      }
+      return message
+    }
+
+    const filterOptions = (value) => {
+      return options.filter((option) =>
+        option.label.toLowerCase().startsWith(value.toLowerCase())
+      )
+    }
+
+    const matchValue = () => {
+      // an option matching user input exists
+      if (filteredOptions.length === 1) {
+        const onlyOption = filteredOptions[0]
+        // automatically select the matching option
+        if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+          setInputValue('')
+          setSelectedOptionId([...selectedOptionId, onlyOption.id])
+          setFilteredOptions(filterOptions(''))
+        }
+      }
+      // input value is from highlighted option, not user input
+      // clear input, reset options
+      else if (highlightedOptionId) {
+        if (inputValue === getOptionById(highlightedOptionId).label) {
+          setInputValue('')
+          setFilteredOptions(filterOptions(''))
+        }
+      }
+    }
+
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+    }
+
+    const handleHideOptions = (event) => {
+      setIsShowingOptions(false)
+      matchValue()
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = getOptionById(id)
+      if (!option) return // prevent highlighting empty option
+      setHighlightedOptionId(id)
+      setInputValue(event.type === 'keydown' ? option.label : inputValue)
+      setAnnouncement(option.label)
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      const option = getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      setSelectedOptionId([...selectedOptionId, id])
+      setHighlightedOptionId(null)
+      setFilteredOptions(filterOptions(''))
+      setInputValue('')
+      setIsShowingOptions(false)
+      setAnnouncement(`${option.label} selected. List collapsed.`)
+    }
+
+    const handleInputChange = (event) => {
+      const value = event.target.value
+      const newOptions = filterOptions(value)
+      setInputValue(value)
+      setFilteredOptions(newOptions)
+      sethHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
+      setIsShowingOptions(true)
+      setAnnouncement(getOptionsChangedMessage(newOptions))
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 8) {
+        // when backspace key is pressed
+        if (inputValue === '' && selectedOptionId.length > 0) {
+          // remove last selected option, if input has no entered text
+          setHighlightedOptionId(null)
+          setSelectedOptionId(selectedOptionId.slice(0, -1))
+        }
+      }
+    }
+
+    // remove a selected option tag
+    const dismissTag = (e, tag) => {
+      // prevent closing of list
+      e.stopPropagation()
+      e.preventDefault()
+
+      const newSelection = selectedOptionId.filter((id) => id !== tag)
+
+      setSelectedOptionId(newSelection)
+      setHighlightedOptionId(null)
+      setAnnouncement(`${getOptionById(tag).label} removed`)
+
+      inputRef.current.focus()
+    }
+
+    const renderTags = () => {
+      return selectedOptionId.map((id, index) => (
+        <Tag
+          dismissible
+          key={id}
+          title={`Remove ${getOptionById(id).label}`}
+          text={getOptionById(id).label}
+          margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
+          onClick={(e) => dismissTag(e, id)}
+        />
+      ))
+    }
 
     return (
       <div>
@@ -572,33 +1086,32 @@ class MultipleSelectExample extends React.Component {
           assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          inputRef={(el) => this.inputRef = el}
-          onBlur={this.handleBlur}
-          onInputChange={this.handleInputChange}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
-          onKeyDown={this.handleKeyDown}
-          renderBeforeInput={selectedOptionId.length > 0 ? this.renderTags() : null}
+          inputRef={(el) => (inputRef.current = el)}
+          onBlur={handleBlur}
+          onInputChange={handleInputChange}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
+          onKeyDown={handleKeyDown}
+          renderBeforeInput={selectedOptionId.length > 0 ? renderTags() : null}
         >
-          {filteredOptions.length > 0 ? filteredOptions.map((option, index) => {
-            if (selectedOptionId.indexOf(option.id) === -1) {
-              return (
-                <Select.Option
-                  id={option.id}
-                  key={option.id}
-                  isHighlighted={option.id === highlightedOptionId}
-                >
-                  { option.label }
-                </Select.Option>
-              )
-            }
-          }) : (
-            <Select.Option
-              id="empty-option"
-              key="empty-option"
-            >
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((option, index) => {
+              if (selectedOptionId.indexOf(option.id) === -1) {
+                return (
+                  <Select.Option
+                    id={option.id}
+                    key={option.id}
+                    isHighlighted={option.id === highlightedOptionId}
+                  >
+                    {option.label}
+                  </Select.Option>
+                )
+              }
+            })
+          ) : (
+            <Select.Option id="empty-option" key="empty-option">
               ---
             </Select.Option>
           )}
@@ -608,169 +1121,332 @@ class MultipleSelectExample extends React.Component {
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )
   }
-}
 
-render(
-  <View>
-    <MultipleSelectExample
-      options={[
-        { id: 'opt1', label: 'Alaska' },
-        { id: 'opt2', label: 'American Samoa' },
-        { id: 'opt3', label: 'Arizona' },
-        { id: 'opt4', label: 'Arkansas' },
-        { id: 'opt5', label: 'California' },
-        { id: 'opt6', label: 'Colorado' },
-        { id: 'opt7', label: 'Connecticut' },
-        { id: 'opt8', label: 'Delaware' },
-        { id: 'opt9', label: 'District Of Columbia' },
-        { id: 'opt10', label: 'Federated States Of Micronesia' },
-        { id: 'opt11', label: 'Florida' },
-        { id: 'opt12', label: 'Georgia (unavailable)' },
-        { id: 'opt13', label: 'Guam' },
-        { id: 'opt14', label: 'Hawaii' },
-        { id: 'opt15', label: 'Idaho' },
-        { id: 'opt16', label: 'Illinois' }
-      ]}
-    />
-  </View>
-)
-```
+  render(
+    <View>
+      <MultipleSelectExample
+        options={[
+          { id: 'opt1', label: 'Alaska' },
+          { id: 'opt2', label: 'American Samoa' },
+          { id: 'opt3', label: 'Arizona' },
+          { id: 'opt4', label: 'Arkansas' },
+          { id: 'opt5', label: 'California' },
+          { id: 'opt6', label: 'Colorado' },
+          { id: 'opt7', label: 'Connecticut' },
+          { id: 'opt8', label: 'Delaware' },
+          { id: 'opt9', label: 'District Of Columbia' },
+          { id: 'opt10', label: 'Federated States Of Micronesia' },
+          { id: 'opt11', label: 'Florida' },
+          { id: 'opt12', label: 'Georgia (unavailable)' },
+          { id: 'opt13', label: 'Guam' },
+          { id: 'opt14', label: 'Hawaii' },
+          { id: 'opt15', label: 'Idaho' },
+          { id: 'opt16', label: 'Illinois' }
+        ]}
+      />
+    </View>
+  )
+  ```
 
 #### Composing option groups
 
 In addition to `<Select.Option />` Select also accepts `<Select.Group />` as children. This is meant to serve the same purpose as `<optgroup>` elements. Group only requires you provide a label via its `renderLabel` prop. Groups and their associated options also accept icons or other stylistic additions if needed.
 
-```javascript
----
-type: example
----
-
-class GroupSelectExample extends React.Component {
-  state = {
-    inputValue: this.props.options['Western'][0].label,
-    isShowingOptions: false,
-    highlightedOptionId: null,
-    selectedOptionId: this.props.options['Western'][0].id,
-    announcement: null
-  }
-
-  getOptionById (id) {
-    const { options } = this.props
-    let match = null
-    Object.keys(options).forEach((key, index) => {
-      for (let i = 0; i < options[key].length; i++) {
-        const option = options[key][i]
-        if (id === option.id) {
-          // return group property with the object just to make it easier
-          // to check which group the option belongs to
-          match = { ...option, group: key }
-          break
-        }
-      }
-    })
-    return match
-  }
-
-  getGroupChangedMessage (newOption) {
-    const currentOption = this.getOptionById(this.state.highlightedOptionId)
-    const isNewGroup = !currentOption || currentOption.group !== newOption.group
-    let message = isNewGroup ? `Group ${newOption.group} entered. ` : ''
-    message += newOption.label
-    return message
-  }
-
-  handleShowOptions = (event) => {
-    this.setState({
-      isShowingOptions: true,
-      highlightedOptionId: null
-    })
-  }
-
-  handleHideOptions = (event) => {
-    const { selectedOptionId } = this.state
-    this.setState({
+- ```javascript
+  class GroupSelectExample extends React.Component {
+    state = {
+      inputValue: this.props.options['Western'][0].label,
       isShowingOptions: false,
       highlightedOptionId: null,
-      inputValue: this.getOptionById(selectedOptionId).label
-    })
-  }
+      selectedOptionId: this.props.options['Western'][0].id,
+      announcement: null
+    }
 
-  handleBlur = (event) => {
-    this.setState({
-      highlightedOptionId: null
-    })
-  }
+    getOptionById(id) {
+      const { options } = this.props
+      let match = null
+      Object.keys(options).forEach((key, index) => {
+        for (let i = 0; i < options[key].length; i++) {
+          const option = options[key][i]
+          if (id === option.id) {
+            // return group property with the object just to make it easier
+            // to check which group the option belongs to
+            match = { ...option, group: key }
+            break
+          }
+        }
+      })
+      return match
+    }
 
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const newOption = this.getOptionById(id)
-    this.setState((state) => ({
-      highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? newOption.label : state.inputValue,
-      announcement: this.getGroupChangedMessage(newOption)
-    }))
-  }
+    getGroupChangedMessage(newOption) {
+      const currentOption = this.getOptionById(this.state.highlightedOptionId)
+      const isNewGroup =
+        !currentOption || currentOption.group !== newOption.group
+      let message = isNewGroup ? `Group ${newOption.group} entered. ` : ''
+      message += newOption.label
+      return message
+    }
 
-  handleSelectOption = (event, { id }) => {
-    this.setState({
-      selectedOptionId: id,
-      inputValue: this.getOptionById(id).label,
-      isShowingOptions: false,
-      announcement: `${this.getOptionById(id).label} selected.`
-    })
-  }
+    handleShowOptions = (event) => {
+      this.setState({
+        isShowingOptions: true,
+        highlightedOptionId: null
+      })
+    }
 
-  renderLabel (text, variant) {
-    return (
-      <span>
-        <Badge
-          type="notification"
-          variant={variant}
-          standalone
-          margin="0 x-small xxx-small 0"
-        />
-        { text }
-      </span>
-    )
-  }
+    handleHideOptions = (event) => {
+      const { selectedOptionId } = this.state
+      this.setState({
+        isShowingOptions: false,
+        highlightedOptionId: null,
+        inputValue: this.getOptionById(selectedOptionId).label
+      })
+    }
 
-  renderGroup () {
-    const { options } = this.props
-    const { highlightedOptionId, selectedOptionId } = this.state
+    handleBlur = (event) => {
+      this.setState({
+        highlightedOptionId: null
+      })
+    }
 
-    return Object.keys(options).map((key, index) => {
-      const badgeVariant = key === 'Eastern' ? 'success' : 'primary'
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const newOption = this.getOptionById(id)
+      this.setState((state) => ({
+        highlightedOptionId: id,
+        inputValue:
+          event.type === 'keydown' ? newOption.label : state.inputValue,
+        announcement: this.getGroupChangedMessage(newOption)
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      this.setState({
+        selectedOptionId: id,
+        inputValue: this.getOptionById(id).label,
+        isShowingOptions: false,
+        announcement: `${this.getOptionById(id).label} selected.`
+      })
+    }
+
+    renderLabel(text, variant) {
       return (
-        <Select.Group key={index} renderLabel={this.renderLabel(key, badgeVariant)}>
-          {options[key].map((option) => (
-            <Select.Option
-              key={option.id}
-              id={option.id}
-              isHighlighted={option.id === highlightedOptionId}
-              isSelected={option.id === selectedOptionId}
-            >
-              { option.label }
-            </Select.Option>
-          ))}
-        </Select.Group>
+        <span>
+          <Badge
+            type="notification"
+            variant={variant}
+            standalone
+            margin="0 x-small xxx-small 0"
+          />
+          {text}
+        </span>
       )
-    })
+    }
+
+    renderGroup() {
+      const { options } = this.props
+      const { highlightedOptionId, selectedOptionId } = this.state
+
+      return Object.keys(options).map((key, index) => {
+        const badgeVariant = key === 'Eastern' ? 'success' : 'primary'
+        return (
+          <Select.Group
+            key={index}
+            renderLabel={this.renderLabel(key, badgeVariant)}
+          >
+            {options[key].map((option) => (
+              <Select.Option
+                key={option.id}
+                id={option.id}
+                isHighlighted={option.id === highlightedOptionId}
+                isSelected={option.id === selectedOptionId}
+              >
+                {option.label}
+              </Select.Option>
+            ))}
+          </Select.Group>
+        )
+      })
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        highlightedOptionId,
+        selectedOptionId,
+        filteredOptions,
+        announcement
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            renderLabel="Group Select"
+            assistiveText="Type or use arrow keys to navigate options."
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            onBlur={this.handleBlur}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+            renderBeforeInput={
+              <Badge
+                type="notification"
+                variant={
+                  this.getOptionById(selectedOptionId).group === 'Eastern'
+                    ? 'success'
+                    : 'primary'
+                }
+                standalone
+                margin="0 0 xxx-small 0"
+              />
+            }
+          >
+            {this.renderGroup()}
+          </Select>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            liveRegionPoliteness="assertive"
+            screenReaderOnly
+          >
+            {announcement}
+          </Alert>
+        </div>
+      )
+    }
   }
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      highlightedOptionId,
-      selectedOptionId,
-      filteredOptions,
-      announcement
-    } = this.state
+  render(
+    <View>
+      <GroupSelectExample
+        options={{
+          Western: [
+            { id: 'opt5', label: 'Alaska' },
+            { id: 'opt6', label: 'California' },
+            { id: 'opt7', label: 'Colorado' },
+            { id: 'opt8', label: 'Idaho' }
+          ],
+          Eastern: [
+            { id: 'opt1', label: 'Alabama' },
+            { id: 'opt2', label: 'Connecticut' },
+            { id: 'opt3', label: 'Delaware' },
+            { id: '4', label: 'Illinois' }
+          ]
+        }}
+      />
+    </View>
+  )
+  ```
+
+- ```js
+  const GroupSelectExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState(options['Western'][0].label)
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(
+      options['Western'][0].id
+    )
+    const [announcement, setAnnouncement] = useState(null)
+
+    const getOptionById = (id) => {
+      let match = null
+      Object.keys(options).forEach((key, index) => {
+        for (let i = 0; i < options[key].length; i++) {
+          const option = options[key][i]
+          if (id === option.id) {
+            // return group property with the object just to make it easier
+            // to check which group the option belongs to
+            match = { ...option, group: key }
+            break
+          }
+        }
+      })
+      return match
+    }
+
+    const getGroupChangedMessage = (newOption) => {
+      const currentOption = getOptionById(highlightedOptionId)
+      const isNewGroup =
+        !currentOption || currentOption.group !== newOption.group
+      let message = isNewGroup ? `Group ${newOption.group} entered. ` : ''
+      message += newOption.label
+      return message
+    }
+
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+      setHighlightedOptionId(null)
+    }
+
+    const handleHideOptions = (event) => {
+      setIsShowingOptions(false)
+      setHighlightedOptionId(null)
+      setInputValue(getOptionById(selectedOptionId).label)
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const newOption = getOptionById(id)
+      setHighlightedOptionId(id)
+      setInputValue(event.type === 'keydown' ? newOption.label : inputValue)
+      setAnnouncement(getGroupChangedMessage(newOption))
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      setSelectedOptionId(id)
+      setInputValue(getOptionById(id).label)
+      setIsShowingOptions(false)
+      setAnnouncement(`${getOptionById(id).label} selected.`)
+    }
+
+    const renderLabel = (text, variant) => {
+      return (
+        <span>
+          <Badge
+            type="notification"
+            variant={variant}
+            standalone
+            margin="0 x-small xxx-small 0"
+          />
+          {text}
+        </span>
+      )
+    }
+
+    const renderGroup = () => {
+      return Object.keys(options).map((key, index) => {
+        const badgeVariant = key === 'Eastern' ? 'success' : 'primary'
+        return (
+          <Select.Group
+            key={index}
+            renderLabel={renderLabel(key, badgeVariant)}
+          >
+            {options[key].map((option) => (
+              <Select.Option
+                key={option.id}
+                id={option.id}
+                isHighlighted={option.id === highlightedOptionId}
+                isSelected={option.id === selectedOptionId}
+              >
+                {option.label}
+              </Select.Option>
+            ))}
+          </Select.Group>
+        )
+      })
+    }
 
     return (
       <div>
@@ -779,196 +1455,342 @@ class GroupSelectExample extends React.Component {
           assistiveText="Type or use arrow keys to navigate options."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          onBlur={this.handleBlur}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
+          onBlur={handleBlur}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
           renderBeforeInput={
             <Badge
               type="notification"
-              variant={this.getOptionById(selectedOptionId).group === 'Eastern'
-                ? 'success'
-                : 'primary'
+              variant={
+                getOptionById(selectedOptionId).group === 'Eastern'
+                  ? 'success'
+                  : 'primary'
               }
               standalone
               margin="0 0 xxx-small 0"
             />
           }
         >
-          {this.renderGroup()}
+          {renderGroup()}
         </Select>
         <Alert
           liveRegion={() => document.getElementById('flash-messages')}
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )
   }
-}
 
-render(
-  <View>
-    <GroupSelectExample
-      options={{
-        'Western': [
-          { id: 'opt5', label: 'Alaska' },
-          { id: 'opt6', label: 'California' },
-          { id: 'opt7', label: 'Colorado' },
-          { id: 'opt8', label: 'Idaho' }
-        ],
-        'Eastern': [
-          { id: 'opt1', label: 'Alabama' },
-          { id: 'opt2', label: 'Connecticut' },
-          { id: 'opt3', label: 'Delaware' },
-          { id: '4', label: 'Illinois' }
-        ]
-      }}
-    />
-  </View>
-)
-```
+  render(
+    <View>
+      <GroupSelectExample
+        options={{
+          Western: [
+            { id: 'opt5', label: 'Alaska' },
+            { id: 'opt6', label: 'California' },
+            { id: 'opt7', label: 'Colorado' },
+            { id: 'opt8', label: 'Idaho' }
+          ],
+          Eastern: [
+            { id: 'opt1', label: 'Alabama' },
+            { id: 'opt2', label: 'Connecticut' },
+            { id: 'opt3', label: 'Delaware' },
+            { id: '4', label: 'Illinois' }
+          ]
+        }}
+      />
+    </View>
+  )
+  ```
 
 ##### Using groups with autocomplete on Safari
 
 Due to a WebKit bug if you are using `Select.Group` with autocomplete, the screenreader won't announce highlight/selection changes. This only seems to be an issue in Safari. Here is an example how you can work around that:
 
-```javascript
----
-type: example
----
-
-class GroupSelectAutocompleteExample extends React.Component {
-  state = {
-    inputValue: '',
-    isShowingOptions: false,
-    highlightedOptionId: null,
-    selectedOptionId: null,
-    filteredOptions: this.props.options,
-    announcement: null
-  }
-
-  getOptionById (id) {
-    const options = this.props.options
-    return Object.values(options)
-      .flat()
-      .find((o) => o?.id === id);
-  }
-
-  filterOptions (value, options) {
-    const filteredOptions = {};
-    Object.keys(options).forEach((key) => {
-      filteredOptions[key] = options[key]?.filter(
-          (option) =>
-            option.label.toLowerCase().includes(value.toLowerCase())
-          );
-      });
-    const optionsWithoutEmptyKeys = Object.keys(filteredOptions)
-                                      .filter((k) => filteredOptions[k].length > 0)
-                                      .reduce((a, k) => ({ ...a, [k]: filteredOptions[k] }), {});
-    return optionsWithoutEmptyKeys;
-  };
-
-  handleShowOptions = (event) => {
-    this.setState({
-      isShowingOptions: true,
-      highlightedOptionId: null
-    })
-  }
-
-  handleHideOptions = (event) => {
-    const { selectedOptionId } = this.state
-    this.setState({
+- ```javascript
+  class GroupSelectAutocompleteExample extends React.Component {
+    state = {
+      inputValue: '',
       isShowingOptions: false,
-      highlightedOptionId: null
-    })
-  }
-
-  handleBlur = (event) => {
-    this.setState({
-      highlightedOptionId: null
-    })
-  }
-
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const option = this.getOptionById(id)
-    setTimeout(() => {
-      this.setState((state) => ({
-        announcement: option.label
-      }))
-    }, 0)
-    this.setState((state) => ({
-      highlightedOptionId: id,
-    }))
-  }
-
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id)
-    if (!option) return // prevent selecting of empty option
-    this.setState({
-      selectedOptionId: id,
-      inputValue: option.label,
-      isShowingOptions: false,
+      highlightedOptionId: null,
+      selectedOptionId: null,
       filteredOptions: this.props.options,
-      announcement: option.label
-    })
-  }
+      announcement: null
+    }
 
-  handleInputChange = (event) => {
-    const value = event.target.value
-    const newOptions = this.filterOptions(value, this.props.options)
-    this.setState((state) => ({
-      inputValue: value,
-      filteredOptions: newOptions,
-      highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
-      isShowingOptions: true,
-      selectedOptionId: value === '' ? null : state.selectedOptionId,
-    }))
-  }
+    getOptionById(id) {
+      const options = this.props.options
+      return Object.values(options)
+        .flat()
+        .find((o) => o?.id === id)
+    }
 
-  renderGroup () {
-    const filteredOptions = this.state.filteredOptions
-    const { highlightedOptionId, selectedOptionId } = this.state
+    filterOptions(value, options) {
+      const filteredOptions = {}
+      Object.keys(options).forEach((key) => {
+        filteredOptions[key] = options[key]?.filter((option) =>
+          option.label.toLowerCase().includes(value.toLowerCase())
+        )
+      })
+      const optionsWithoutEmptyKeys = Object.keys(filteredOptions)
+        .filter((k) => filteredOptions[k].length > 0)
+        .reduce((a, k) => ({ ...a, [k]: filteredOptions[k] }), {})
+      return optionsWithoutEmptyKeys
+    }
 
-    return Object.keys(filteredOptions).map((key, index) => {
+    handleShowOptions = (event) => {
+      this.setState({
+        isShowingOptions: true,
+        highlightedOptionId: null
+      })
+    }
+
+    handleHideOptions = (event) => {
+      const { selectedOptionId } = this.state
+      this.setState({
+        isShowingOptions: false,
+        highlightedOptionId: null
+      })
+    }
+
+    handleBlur = (event) => {
+      this.setState({
+        highlightedOptionId: null
+      })
+    }
+
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = this.getOptionById(id)
+      setTimeout(() => {
+        this.setState((state) => ({
+          announcement: option.label
+        }))
+      }, 0)
+      this.setState((state) => ({
+        highlightedOptionId: id
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      const option = this.getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      this.setState({
+        selectedOptionId: id,
+        inputValue: option.label,
+        isShowingOptions: false,
+        filteredOptions: this.props.options,
+        announcement: option.label
+      })
+    }
+
+    handleInputChange = (event) => {
+      const value = event.target.value
+      const newOptions = this.filterOptions(value, this.props.options)
+      this.setState((state) => ({
+        inputValue: value,
+        filteredOptions: newOptions,
+        highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
+        isShowingOptions: true,
+        selectedOptionId: value === '' ? null : state.selectedOptionId
+      }))
+    }
+
+    renderGroup() {
+      const filteredOptions = this.state.filteredOptions
+      const { highlightedOptionId, selectedOptionId } = this.state
+
+      return Object.keys(filteredOptions).map((key, index) => {
+        return (
+          <Select.Group key={index} renderLabel={key}>
+            {filteredOptions[key].map((option) => (
+              <Select.Option
+                key={option.id}
+                id={option.id}
+                isHighlighted={option.id === highlightedOptionId}
+                isSelected={option.id === selectedOptionId}
+              >
+                {option.label}
+              </Select.Option>
+            ))}
+          </Select.Group>
+        )
+      })
+    }
+
+    renderScreenReaderHelper() {
+      const announcement = this.state.announcement
       return (
-        <Select.Group key={index} renderLabel={key}>
-          {filteredOptions[key].map((option) => (
-            <Select.Option
-              key={option.id}
-              id={option.id}
-              isHighlighted={option.id === highlightedOptionId}
-              isSelected={option.id === selectedOptionId}
-            >
-              { option.label }
-            </Select.Option>
-          ))}
-        </Select.Group>
+        window.safari && (
+          <ScreenReaderContent>
+            <span role="alert" aria-live="assertive">
+              {announcement}
+            </span>
+          </ScreenReaderContent>
+        )
       )
-    })
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        highlightedOptionId,
+        selectedOptionId,
+        filteredOptions
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            placeholder="Start typing to search..."
+            renderLabel="Group Select with autocomplete"
+            assistiveText="Type or use arrow keys to navigate options."
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            onBlur={this.handleBlur}
+            onInputChange={this.handleInputChange}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+          >
+            {this.renderGroup()}
+          </Select>
+          {this.renderScreenReaderHelper()}
+        </div>
+      )
+    }
   }
 
-  renderScreenReaderHelper () {
-    const announcement = this.state.announcement
-    return window.safari && (
-      <ScreenReaderContent>
-        <span role="alert" aria-live="assertive">{announcement}</span>
-      </ScreenReaderContent>
-    )
-  }
+  render(
+    <View>
+      <GroupSelectAutocompleteExample
+        options={{
+          Western: [
+            { id: 'opt5', label: 'Alaska' },
+            { id: 'opt6', label: 'California' },
+            { id: 'opt7', label: 'Colorado' },
+            { id: 'opt8', label: 'Idaho' }
+          ],
+          Eastern: [
+            { id: 'opt1', label: 'Alabama' },
+            { id: 'opt2', label: 'Connecticut' },
+            { id: 'opt3', label: 'Delaware' },
+            { id: '4', label: 'Illinois' }
+          ]
+        }}
+      />
+    </View>
+  )
+  ```
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      highlightedOptionId,
-      selectedOptionId,
-      filteredOptions
-    } = this.state
+- ```js
+  const GroupSelectAutocompleteExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState('')
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(null)
+    const [filteredOptions, setFilteredOptions] = useState(options)
+    const [announcement, setAnnouncement] = useState(null)
+
+    const getOptionById = (id) => {
+      return Object.values(options)
+        .flat()
+        .find((o) => o?.id === id)
+    }
+
+    const filterOptions = (value, options) => {
+      const filteredOptions = {}
+      Object.keys(options).forEach((key) => {
+        filteredOptions[key] = options[key]?.filter((option) =>
+          option.label.toLowerCase().includes(value.toLowerCase())
+        )
+      })
+      const optionsWithoutEmptyKeys = Object.keys(filteredOptions)
+        .filter((k) => filteredOptions[k].length > 0)
+        .reduce((a, k) => ({ ...a, [k]: filteredOptions[k] }), {})
+      return optionsWithoutEmptyKeys
+    }
+
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+      setHighlightedOptionId(null)
+    }
+
+    const handleHideOptions = (event) => {
+      setIsShowingOptions(false)
+      setHighlightedOptionId(null)
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = getOptionById(id)
+      setTimeout(() => {
+        setAnnouncement(option.label)
+      }, 0)
+      setHighlightedOptionId(id)
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      const option = getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      setSelectedOptionId(id)
+      setInputValue(option.label)
+      setIsShowingOptions(false)
+      setFilteredOptions(options)
+      setAnnouncement(option.label)
+    }
+
+    const handleInputChange = (event) => {
+      const value = event.target.value
+      const newOptions = filterOptions(value, options)
+      setInputValue(value)
+      setFilteredOptions(newOptions)
+      setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
+      setIsShowingOptions(true)
+      setSelectedOptionId(value === '' ? null : selectedOptionId)
+    }
+
+    const renderGroup = () => {
+      return Object.keys(filteredOptions).map((key, index) => {
+        return (
+          <Select.Group key={index} renderLabel={key}>
+            {filteredOptions[key].map((option) => (
+              <Select.Option
+                key={option.id}
+                id={option.id}
+                isHighlighted={option.id === highlightedOptionId}
+                isSelected={option.id === selectedOptionId}
+              >
+                {option.label}
+              </Select.Option>
+            ))}
+          </Select.Group>
+        )
+      })
+    }
+
+    const renderScreenReaderHelper = () => {
+      return (
+        window.safari && (
+          <ScreenReaderContent>
+            <span role="alert" aria-live="assertive">
+              {announcement}
+            </span>
+          </ScreenReaderContent>
+        )
+      )
+    }
 
     return (
       <div>
@@ -978,193 +1800,379 @@ class GroupSelectAutocompleteExample extends React.Component {
           assistiveText="Type or use arrow keys to navigate options."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          onBlur={this.handleBlur}
-          onInputChange={this.handleInputChange}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
+          onBlur={handleBlur}
+          onInputChange={handleInputChange}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
         >
-          {this.renderGroup()}
+          {renderGroup()}
         </Select>
-        {this.renderScreenReaderHelper()}
+        {renderScreenReaderHelper()}
       </div>
     )
   }
-}
 
-render(
-  <View>
-    <GroupSelectAutocompleteExample
-      options={{
-        'Western': [
-          { id: 'opt5', label: 'Alaska' },
-          { id: 'opt6', label: 'California' },
-          { id: 'opt7', label: 'Colorado' },
-          { id: 'opt8', label: 'Idaho' }
-        ],
-        'Eastern': [
-          { id: 'opt1', label: 'Alabama' },
-          { id: 'opt2', label: 'Connecticut' },
-          { id: 'opt3', label: 'Delaware' },
-          { id: '4', label: 'Illinois' }
-        ]
-      }}
-    />
-  </View>
-)
-```
+  render(
+    <View>
+      <GroupSelectAutocompleteExample
+        options={{
+          Western: [
+            { id: 'opt5', label: 'Alaska' },
+            { id: 'opt6', label: 'California' },
+            { id: 'opt7', label: 'Colorado' },
+            { id: 'opt8', label: 'Idaho' }
+          ],
+          Eastern: [
+            { id: 'opt1', label: 'Alabama' },
+            { id: 'opt2', label: 'Connecticut' },
+            { id: 'opt3', label: 'Delaware' },
+            { id: '4', label: 'Illinois' }
+          ]
+        }}
+      />
+    </View>
+  )
+  ```
 
 #### Asynchronous option loading
 
 If no results match the user's search, it's recommended to leave `isShowingOptions` as `true` and to display an "empty option" as a way of communicating that there are no matches. Similarly, it's helpful to display a [Spinner](#Spinner) in an empty option while options load.
 
-```javascript
----
-type: example
----
+- ```javascript
+  class AsyncExample extends React.Component {
+    state = {
+      inputValue: '',
+      isShowingOptions: false,
+      isLoading: false,
+      highlightedOptionId: null,
+      selectedOptionId: null,
+      selectedOptionLabel: '',
+      filteredOptions: [],
+      announcement: null
+    }
 
-class AsyncExample extends React.Component {
-  state = {
-    inputValue: '',
-    isShowingOptions: false,
-    isLoading: false,
-    highlightedOptionId: null,
-    selectedOptionId: null,
-    selectedOptionLabel: '',
-    filteredOptions: [],
-    announcement: null
-  }
+    timeoutId = null
 
-  timeoutId = null
+    getOptionById(queryId) {
+      return this.state.filteredOptions.find(({ id }) => id === queryId)
+    }
 
-  getOptionById (queryId) {
-    return this.state.filteredOptions.find(({ id }) => id === queryId)
-  }
+    filterOptions = (value) => {
+      return this.props.options.filter((option) =>
+        option.label.toLowerCase().startsWith(value.toLowerCase())
+      )
+    }
 
-  filterOptions = (value) => {
-    return this.props.options.filter(option => (
-      option.label.toLowerCase().startsWith(value.toLowerCase())
-    ))
-  }
+    matchValue() {
+      const {
+        filteredOptions,
+        inputValue,
+        selectedOptionId,
+        selectedOptionLabel
+      } = this.state
 
-  matchValue () {
-    const {
-      filteredOptions,
-      inputValue,
-      selectedOptionId,
-      selectedOptionLabel
-    } = this.state
-
-    // an option matching user input exists
-    if (filteredOptions.length === 1) {
-      const onlyOption = filteredOptions[0]
-      // automatically select the matching option
-      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
-        return {
-          inputValue: onlyOption.label,
-          selectedOptionId: onlyOption.id
+      // an option matching user input exists
+      if (filteredOptions.length === 1) {
+        const onlyOption = filteredOptions[0]
+        // automatically select the matching option
+        if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+          return {
+            inputValue: onlyOption.label,
+            selectedOptionId: onlyOption.id
+          }
         }
       }
+      // allow user to return to empty input and no selection
+      if (inputValue.length === 0) {
+        return { selectedOptionId: null, filteredOptions: [] }
+      }
+      // no match found, return selected option label to input
+      if (selectedOptionId) {
+        return { inputValue: selectedOptionLabel }
+      }
     }
-    // allow user to return to empty input and no selection
-    if (inputValue.length === 0) {
-      return { selectedOptionId: null, filteredOptions: [] }
+
+    handleShowOptions = (event) => {
+      this.setState(({ filteredOptions }) => ({
+        isShowingOptions: true
+      }))
     }
-    // no match found, return selected option label to input
-    if (selectedOptionId) {
-      return { inputValue: selectedOptionLabel }
-    }
-  }
 
-  handleShowOptions = (event) => {
-    this.setState(({ filteredOptions }) => ({
-      isShowingOptions: true
-    }))
-  }
-
-  handleHideOptions = (event) => {
-    const { selectedOptionId, inputValue } = this.state
-    this.setState({
-      isShowingOptions: false,
-      highlightedOptionId: null,
-      announcement: 'List collapsed.',
-      ...this.matchValue()
-    })
-  }
-
-  handleBlur = (event) => {
-    this.setState({ highlightedOptionId: null })
-  }
-
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const option = this.getOptionById(id)
-    if (!option) return // prevent highlighting of empty option
-    this.setState((state) => ({
-      highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option.label : state.inputValue,
-      announcement: option.label
-    }))
-  }
-
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id)
-    if (!option) return // prevent selecting of empty option
-    this.setState({
-      selectedOptionId: id,
-      selectedOptionLabel: option.label,
-      inputValue: option.label,
-      isShowingOptions: false,
-      announcement: `${option.label} selected. List collapsed.`,
-      filteredOptions: [this.getOptionById(id)]
-    })
-  }
-
-  handleInputChange = (event) => {
-    const value = event.target.value
-    clearTimeout(this.timeoutId)
-
-    if (!value || value === '') {
+    handleHideOptions = (event) => {
+      const { selectedOptionId, inputValue } = this.state
       this.setState({
-        isLoading: false,
-        inputValue: value,
-        isShowingOptions: true,
-        selectedOptionId: null,
-        selectedOptionLabel: null,
-        filteredOptions: [],
-      })
-    } else {
-      this.setState({
-        isLoading: true,
-        inputValue: value,
-        isShowingOptions: true,
-        filteredOptions: [],
+        isShowingOptions: false,
         highlightedOptionId: null,
-        announcement: 'Loading options.'
+        announcement: 'List collapsed.',
+        ...this.matchValue()
       })
+    }
 
-      this.timeoutId = setTimeout(() => {
-        const newOptions = this.filterOptions(value)
+    handleBlur = (event) => {
+      this.setState({ highlightedOptionId: null })
+    }
+
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = this.getOptionById(id)
+      if (!option) return // prevent highlighting of empty option
+      this.setState((state) => ({
+        highlightedOptionId: id,
+        inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+        announcement: option.label
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      const option = this.getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      this.setState({
+        selectedOptionId: id,
+        selectedOptionLabel: option.label,
+        inputValue: option.label,
+        isShowingOptions: false,
+        announcement: `${option.label} selected. List collapsed.`,
+        filteredOptions: [this.getOptionById(id)]
+      })
+    }
+
+    handleInputChange = (event) => {
+      const value = event.target.value
+      clearTimeout(this.timeoutId)
+
+      if (!value || value === '') {
         this.setState({
-          filteredOptions: newOptions,
           isLoading: false,
-          announcement: `${newOptions.length} options available.`
+          inputValue: value,
+          isShowingOptions: true,
+          selectedOptionId: null,
+          selectedOptionLabel: null,
+          filteredOptions: []
         })
-      }, 1500)
+      } else {
+        this.setState({
+          isLoading: true,
+          inputValue: value,
+          isShowingOptions: true,
+          filteredOptions: [],
+          highlightedOptionId: null,
+          announcement: 'Loading options.'
+        })
+
+        this.timeoutId = setTimeout(() => {
+          const newOptions = this.filterOptions(value)
+          this.setState({
+            filteredOptions: newOptions,
+            isLoading: false,
+            announcement: `${newOptions.length} options available.`
+          })
+        }, 1500)
+      }
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        isLoading,
+        highlightedOptionId,
+        selectedOptionId,
+        filteredOptions,
+        announcement
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            renderLabel="Async Select"
+            assistiveText="Type to search"
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            onBlur={this.handleBlur}
+            onInputChange={this.handleInputChange}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+          >
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option) => {
+                return (
+                  <Select.Option
+                    id={option.id}
+                    key={option.id}
+                    isHighlighted={option.id === highlightedOptionId}
+                    isSelected={option.id === selectedOptionId}
+                    isDisabled={option.disabled}
+                    renderBeforeLabel={
+                      !option.disabled ? IconUserSolid : IconUserLine
+                    }
+                  >
+                    {option.label}
+                  </Select.Option>
+                )
+              })
+            ) : (
+              <Select.Option id="empty-option" key="empty-option">
+                {isLoading ? (
+                  <Spinner renderTitle="Loading" size="x-small" />
+                ) : inputValue !== '' ? (
+                  'No results'
+                ) : (
+                  'Type to search'
+                )}
+              </Select.Option>
+            )}
+          </Select>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            liveRegionPoliteness="assertive"
+            screenReaderOnly
+          >
+            {announcement}
+          </Alert>
+        </div>
+      )
     }
   }
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      isLoading,
-      highlightedOptionId,
-      selectedOptionId,
-      filteredOptions,
-      announcement
-    } = this.state
+  render(
+    <View>
+      <AsyncExample
+        options={[
+          { id: 'opt0', label: 'Aaron Aaronson' },
+          { id: 'opt1', label: 'Amber Murphy' },
+          { id: 'opt2', label: 'Andrew Miller' },
+          { id: 'opt3', label: 'Barbara Ward' },
+          { id: 'opt4', label: 'Byron Cranston', disabled: true },
+          { id: 'opt5', label: 'Dennis Reynolds' },
+          { id: 'opt6', label: 'Dee Reynolds' },
+          { id: 'opt7', label: 'Ezra Betterthan' },
+          { id: 'opt8', label: 'Jeff Spicoli' },
+          { id: 'opt9', label: 'Joseph Smith' },
+          { id: 'opt10', label: 'Jasmine Diaz' },
+          { id: 'opt11', label: 'Martin Harris' },
+          { id: 'opt12', label: 'Michael Morgan', disabled: true },
+          { id: 'opt13', label: 'Michelle Rodriguez' },
+          { id: 'opt14', label: 'Ziggy Stardust' }
+        ]}
+      />
+    </View>
+  )
+  ```
+
+- ```js
+  const AsyncExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState('')
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(null)
+    const [selectedOptionLabel, setSelectedOptionLabel] = useState('')
+    const [filteredOptions, setFilteredOptions] = useState([])
+    const [announcement, setAnnouncement] = useState(null)
+
+    let timeoutId = null
+
+    const getOptionById = (queryId) => {
+      return filteredOptions.find(({ id }) => id === queryId)
+    }
+
+    const filterOptions = (value) => {
+      return options.filter((option) =>
+        option.label.toLowerCase().startsWith(value.toLowerCase())
+      )
+    }
+
+    const matchValue = () => {
+      // an option matching user input exists
+      if (filteredOptions.length === 1) {
+        const onlyOption = filteredOptions[0]
+        // automatically select the matching option
+        if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+          setInputValue(onlyOption.label)
+          setSelectedOptionId(onlyOption.id)
+          return
+        }
+      }
+      // allow user to return to empty input and no selection
+      if (inputValue.length === 0) {
+        setSelectedOptionId(null)
+        setFilteredOptions([])
+        return
+      }
+      // no match found, return selected option label to input
+      if (selectedOptionId) {
+        setInputValue(selectedOptionLabel)
+        return
+      }
+    }
+
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+    }
+
+    const handleHideOptions = (event) => {
+      setIsShowingOptions(false)
+      setHighlightedOptionId(null)
+      setAnnouncement('List collapsed.')
+      matchValue()
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const option = getOptionById(id)
+      if (!option) return // prevent highlighting of empty option
+
+      setHighlightedOptionId(id)
+      setInputValue(event.type === 'keydown' ? option.label : inputValue)
+      setAnnouncement(option.label)
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      const option = getOptionById(id)
+      if (!option) return // prevent selecting of empty option
+      setSelectedOptionId(id)
+      setSelectedOptionLabel(option.label)
+      setInputValue(option.label)
+      setIsShowingOptions(false)
+      setAnnouncement(`${option.label} selected. List collapsed.`)
+      setFilteredOptions([getOptionById(id)])
+    }
+
+    const handleInputChange = (event) => {
+      const value = event.target.value
+      clearTimeout(timeoutId)
+
+      if (!value || value === '') {
+        setIsLoading(false)
+        setInputValue(value)
+        setIsShowingOptions(true)
+        setSelectedOptionId(null)
+        setSelectedOptionLabel(null)
+        setFilteredOptions([])
+      } else {
+        setIsLoading(true)
+        setInputValue(value)
+        setIsShowingOptions(true)
+        setFilteredOptions([])
+        setHighlightedOptionId(null)
+        setAnnouncement('Loading options.')
+
+        timeoutId = setTimeout(() => {
+          const newOptions = filterOptions(value)
+          setFilteredOptions(newOptions)
+          setIsLoading(false)
+          setAnnouncement(`${newOptions.length} options available.`)
+        }, 1500)
+      }
+    }
 
     return (
       <div>
@@ -1173,31 +2181,39 @@ class AsyncExample extends React.Component {
           assistiveText="Type to search"
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          onBlur={this.handleBlur}
-          onInputChange={this.handleInputChange}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
+          onBlur={handleBlur}
+          onInputChange={handleInputChange}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
         >
-          {filteredOptions.length > 0 ? filteredOptions.map((option) => {
-            return (
-              <Select.Option
-                id={option.id}
-                key={option.id}
-                isHighlighted={option.id === highlightedOptionId}
-                isSelected={option.id === selectedOptionId}
-                isDisabled={option.disabled}
-                renderBeforeLabel={!option.disabled ? IconUserSolid : IconUserLine}
-              >
-                {option.label}
-              </Select.Option>
-            )
-          }) : (
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((option) => {
+              return (
+                <Select.Option
+                  id={option.id}
+                  key={option.id}
+                  isHighlighted={option.id === highlightedOptionId}
+                  isSelected={option.id === selectedOptionId}
+                  isDisabled={option.disabled}
+                  renderBeforeLabel={
+                    !option.disabled ? IconUserSolid : IconUserLine
+                  }
+                >
+                  {option.label}
+                </Select.Option>
+              )
+            })
+          ) : (
             <Select.Option id="empty-option" key="empty-option">
-              {isLoading
-                ? <Spinner renderTitle="Loading" size="x-small" />
-                : inputValue !== '' ? 'No results' : 'Type to search'}
+              {isLoading ? (
+                <Spinner renderTitle="Loading" size="x-small" />
+              ) : inputValue !== '' ? (
+                'No results'
+              ) : (
+                'Type to search'
+              )}
             </Select.Option>
           )}
         </Select>
@@ -1206,112 +2222,228 @@ class AsyncExample extends React.Component {
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )
   }
-}
 
-render(
-  <View>
-    <AsyncExample
-      options={[
-        { id: 'opt0', label: 'Aaron Aaronson' },
-        { id: 'opt1', label: 'Amber Murphy' },
-        { id: 'opt2', label: 'Andrew Miller' },
-        { id: 'opt3', label: 'Barbara Ward' },
-        { id: 'opt4', label: 'Byron Cranston', disabled: true },
-        { id: 'opt5', label: 'Dennis Reynolds' },
-        { id: 'opt6', label: 'Dee Reynolds' },
-        { id: 'opt7', label: 'Ezra Betterthan' },
-        { id: 'opt8', label: 'Jeff Spicoli' },
-        { id: 'opt9', label: 'Joseph Smith' },
-        { id: 'opt10', label: 'Jasmine Diaz' },
-        { id: 'opt11', label: 'Martin Harris' },
-        { id: 'opt12', label: 'Michael Morgan', disabled: true },
-        { id: 'opt13', label: 'Michelle Rodriguez' },
-        { id: 'opt14', label: 'Ziggy Stardust' },
-      ]}
-    />
-  </View>
-)
-```
+  render(
+    <View>
+      <AsyncExample
+        options={[
+          { id: 'opt0', label: 'Aaron Aaronson' },
+          { id: 'opt1', label: 'Amber Murphy' },
+          { id: 'opt2', label: 'Andrew Miller' },
+          { id: 'opt3', label: 'Barbara Ward' },
+          { id: 'opt4', label: 'Byron Cranston', disabled: true },
+          { id: 'opt5', label: 'Dennis Reynolds' },
+          { id: 'opt6', label: 'Dee Reynolds' },
+          { id: 'opt7', label: 'Ezra Betterthan' },
+          { id: 'opt8', label: 'Jeff Spicoli' },
+          { id: 'opt9', label: 'Joseph Smith' },
+          { id: 'opt10', label: 'Jasmine Diaz' },
+          { id: 'opt11', label: 'Martin Harris' },
+          { id: 'opt12', label: 'Michael Morgan', disabled: true },
+          { id: 'opt13', label: 'Michelle Rodriguez' },
+          { id: 'opt14', label: 'Ziggy Stardust' }
+        ]}
+      />
+    </View>
+  )
+  ```
 
 ### Icons
 
 To display icons (or other elements) before or after an option, pass it via the `renderBeforeLabel` and `renderAfterLabel` prop to `Select.Option`. You can pass a function as well, which will have a `props` parameter, so you can access the properties of that `Select.Option` (e.g. if it is currently `isHighlighted`). The available props are: `[ id, isDisabled, isSelected, isHighlighted, children ]`.
 
-```javascript
----
-type: example
----
-class SingleSelectExample extends React.Component {
-  state = {
-    inputValue: this.props.options[0].label,
-    isShowingOptions: false,
-    highlightedOptionId: null,
-    selectedOptionId: this.props.options[0].id,
-    announcement: null
-  }
-
-  getOptionById (queryId) {
-    return this.props.options.find(({ id }) => id === queryId)
-  }
-
-  handleShowOptions = (event) => {
-    this.setState({
-      isShowingOptions: true
-    })
-  }
-
-  handleHideOptions = (event) => {
-    const { selectedOptionId } = this.state
-    const option = this.getOptionById(selectedOptionId).label
-    this.setState({
+- ```js
+  class SingleSelectExample extends React.Component {
+    state = {
+      inputValue: this.props.options[0].label,
       isShowingOptions: false,
       highlightedOptionId: null,
-      inputValue: selectedOptionId ? option : '',
-      announcement: 'List collapsed.'
-    })
+      selectedOptionId: this.props.options[0].id,
+      announcement: null
+    }
+
+    getOptionById(queryId) {
+      return this.props.options.find(({ id }) => id === queryId)
+    }
+
+    handleShowOptions = (event) => {
+      this.setState({
+        isShowingOptions: true
+      })
+    }
+
+    handleHideOptions = (event) => {
+      const { selectedOptionId } = this.state
+      const option = this.getOptionById(selectedOptionId).label
+      this.setState({
+        isShowingOptions: false,
+        highlightedOptionId: null,
+        inputValue: selectedOptionId ? option : '',
+        announcement: 'List collapsed.'
+      })
+    }
+
+    handleBlur = (event) => {
+      this.setState({
+        highlightedOptionId: null
+      })
+    }
+
+    handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const optionsAvailable = `${this.props.options.length} options available.`
+      const nowOpen = !this.state.isShowingOptions
+        ? `List expanded. ${optionsAvailable}`
+        : ''
+      const option = this.getOptionById(id).label
+      this.setState((state) => ({
+        highlightedOptionId: id,
+        inputValue: event.type === 'keydown' ? option : state.inputValue,
+        announcement: `${option} ${nowOpen}`
+      }))
+    }
+
+    handleSelectOption = (event, { id }) => {
+      const option = this.getOptionById(id).label
+      this.setState({
+        selectedOptionId: id,
+        inputValue: option,
+        isShowingOptions: false,
+        announcement: `"${option}" selected. List collapsed.`
+      })
+    }
+
+    render() {
+      const {
+        inputValue,
+        isShowingOptions,
+        highlightedOptionId,
+        selectedOptionId,
+        announcement
+      } = this.state
+
+      return (
+        <div>
+          <Select
+            renderLabel="Option Icons"
+            assistiveText="Use arrow keys to navigate options."
+            inputValue={inputValue}
+            isShowingOptions={isShowingOptions}
+            onBlur={this.handleBlur}
+            onRequestShowOptions={this.handleShowOptions}
+            onRequestHideOptions={this.handleHideOptions}
+            onRequestHighlightOption={this.handleHighlightOption}
+            onRequestSelectOption={this.handleSelectOption}
+          >
+            {this.props.options.map((option) => {
+              return (
+                <Select.Option
+                  id={option.id}
+                  key={option.id}
+                  isHighlighted={option.id === highlightedOptionId}
+                  isSelected={option.id === selectedOptionId}
+                  renderBeforeLabel={option.renderBeforeLabel}
+                >
+                  {option.label}
+                </Select.Option>
+              )
+            })}
+          </Select>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            liveRegionPoliteness="assertive"
+            screenReaderOnly
+          >
+            {announcement}
+          </Alert>
+        </div>
+      )
+    }
   }
 
-  handleBlur = (event) => {
-    this.setState({
-      highlightedOptionId: null
-    })
-  }
+  render(
+    <View>
+      <SingleSelectExample
+        options={[
+          {
+            id: 'opt1',
+            label: 'Text',
+            renderBeforeLabel: 'XY'
+          },
+          {
+            id: 'opt2',
+            label: 'Icon',
+            renderBeforeLabel: <IconCheckSolid />
+          },
+          {
+            id: 'opt3',
+            label: 'Colored Icon',
+            renderBeforeLabel: (props) => {
+              let color = 'brand'
+              if (props.isHighlighted) color = 'primary-inverse'
+              if (props.isSelected) color = 'primary'
+              if (props.isDisabled) color = 'warning'
+              return <IconInstructureSolid color={color} />
+            }
+          }
+        ]}
+      />
+    </View>
+  )
+  ```
 
-  handleHighlightOption = (event, { id }) => {
-    event.persist()
-    const optionsAvailable = `${this.props.options.length} options available.`
-    const nowOpen = !this.state.isShowingOptions ? `List expanded. ${optionsAvailable}` : ''
-    const option = this.getOptionById(id).label
-    this.setState((state) => ({
-      highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option : state.inputValue,
-      announcement: `${option} ${nowOpen}`
-    }))
-  }
+- ```js
+  const SingleSelectExample = ({ options }) => {
+    const [inputValue, setInputValue] = useState(options[0].label)
+    const [isShowingOptions, setIsShowingOptions] = useState(false)
+    const [highlightedOptionId, setHighlightedOptionId] = useState(null)
+    const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
+    const [announcement, setAnnouncement] = useState(null)
 
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id).label
-    this.setState({
-      selectedOptionId: id,
-      inputValue: option,
-      isShowingOptions: false,
-      announcement: `"${option}" selected. List collapsed.`
-    })
-  }
+    const getOptionById = (queryId) => {
+      return options.find(({ id }) => id === queryId)
+    }
 
-  render () {
-    const {
-      inputValue,
-      isShowingOptions,
-      highlightedOptionId,
-      selectedOptionId,
-      announcement
-    } = this.state
+    const handleShowOptions = (event) => {
+      setIsShowingOptions(true)
+    }
+
+    const handleHideOptions = (event) => {
+      const option = getOptionById(selectedOptionId).label
+      setIsShowingOptions(false)
+      setHighlightedOptionId(null)
+      setInputValue(selectedOptionId ? option : '')
+      setAnnouncement('List collapsed.')
+    }
+
+    const handleBlur = (event) => {
+      setHighlightedOptionId(null)
+    }
+
+    const handleHighlightOption = (event, { id }) => {
+      event.persist()
+      const optionsAvailable = `${options.length} options available.`
+      const nowOpen = !isShowingOptions
+        ? `List expanded. ${optionsAvailable}`
+        : ''
+      const option = getOptionById(id).label
+      setHighlightedOptionId(id)
+      setInputValue(event.type === 'keydown' ? option : inputValue)
+      setAnnouncement(`${option} ${nowOpen}`)
+    }
+
+    const handleSelectOption = (event, { id }) => {
+      const option = getOptionById(id).label
+      setSelectedOptionId(id)
+      setInputValue(option)
+      setIsShowingOptions(false)
+      setAnnouncement(`"${option}" selected. List collapsed.`)
+    }
 
     return (
       <div>
@@ -1320,13 +2452,13 @@ class SingleSelectExample extends React.Component {
           assistiveText="Use arrow keys to navigate options."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          onBlur={this.handleBlur}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-          onRequestHighlightOption={this.handleHighlightOption}
-          onRequestSelectOption={this.handleSelectOption}
+          onBlur={handleBlur}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestHighlightOption={handleHighlightOption}
+          onRequestSelectOption={handleSelectOption}
         >
-          {this.props.options.map((option) => {
+          {options.map((option) => {
             return (
               <Select.Option
                 id={option.id}
@@ -1335,7 +2467,7 @@ class SingleSelectExample extends React.Component {
                 isSelected={option.id === selectedOptionId}
                 renderBeforeLabel={option.renderBeforeLabel}
               >
-                { option.label }
+                {option.label}
               </Select.Option>
             )
           })}
@@ -1345,43 +2477,42 @@ class SingleSelectExample extends React.Component {
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )
   }
-}
 
-render(
-  <View>
-    <SingleSelectExample
-      options={[
-        {
-          id: 'opt1',
-          label: 'Text',
-          renderBeforeLabel: 'XY'
-        },
-        {
-          id: 'opt2',
-          label: 'Icon',
-          renderBeforeLabel: <IconCheckSolid />
-        },
-        {
-          id: 'opt3',
-          label: 'Colored Icon',
-          renderBeforeLabel: (props) => {
-            let color = 'brand'
-            if (props.isHighlighted) color = 'primary-inverse'
-            if (props.isSelected) color = 'primary'
-            if (props.isDisabled) color = 'warning'
-            return <IconInstructureSolid color={color} />
+  render(
+    <View>
+      <SingleSelectExample
+        options={[
+          {
+            id: 'opt1',
+            label: 'Text',
+            renderBeforeLabel: 'XY'
+          },
+          {
+            id: 'opt2',
+            label: 'Icon',
+            renderBeforeLabel: <IconCheckSolid />
+          },
+          {
+            id: 'opt3',
+            label: 'Colored Icon',
+            renderBeforeLabel: (props) => {
+              let color = 'brand'
+              if (props.isHighlighted) color = 'primary-inverse'
+              if (props.isSelected) color = 'primary'
+              if (props.isDisabled) color = 'warning'
+              return <IconInstructureSolid color={color} />
+            }
           }
-        }
-      ]}
-    />
-  </View>
-)
-```
+        ]}
+      />
+    </View>
+  )
+  ```
 
 #### Providing assistive text for screen readers
 
