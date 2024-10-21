@@ -42,11 +42,21 @@ module.exports = function (
   ]
 
   let plugins = []
+  // This is triggered in 2 cases:
+  // 1. If `process.env.TRANSFORM_IMPORTS` is `true` -- this is never the case, its undefined
+  //    (If its `false` it's not run)
+  // 2. for every CJS build, see `ui-scripts/lib/build/babel.js`
   if (opts.transformImports) {
     plugins.push([
       require('@instructure/babel-plugin-transform-imports'),
       {
-        '(@instructure/ui-[^(/|\\s)]+)$': {
+        // This transforms
+        // `var _uiPropTypes = require("@instructure/ui-prop-types");`
+        // (0, _uiPropTypes.controllable)(_propTypes.default.bool, 'onToggle', 'defaultExpanded'),
+        // to
+        // `var _controllable = require("@instructure/ui-prop-types/lib/controllable.js");`
+        // `(0, _controllable.controllable)(_propTypes.default.bool, 'onToggle', 'defaultExpanded'),`
+        /*'(@instructure/ui-[^(/|\\s)]+)$': {
           // eslint-disable-line no-useless-escape
           transform: (importName, matches) => {
             const ignore = [
@@ -58,7 +68,9 @@ module.exports = function (
             if (!matches || !matches[1] || ignore.includes(matches[1])) return
             return `${matches[1]}/lib/${importName}`
           }
-        },
+        },*/
+        // This is used ONLY in locators, e.g. " @instructure/ui-pill/es/Pill/PillLocator"
+        // This is needed because otherwise ESM locators would import from /es/
         // Convert any es imports to lib imports
         '(@instructure/ui-[^(/|\\s)]+/es/[^\\s]+)$': {
           // eslint-disable-line no-useless-escape
