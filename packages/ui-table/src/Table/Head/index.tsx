@@ -68,7 +68,7 @@ class Head extends Component<TableHeadProps> {
     let sortable = false
     if (firstRow && firstRow.props && firstRow.props.children) {
       Children.forEach(firstRow.props.children, (grandchild) => {
-        if (grandchild.props.onRequestSort) {
+        if (grandchild?.props?.onRequestSort) {
           sortable = true
           return
         }
