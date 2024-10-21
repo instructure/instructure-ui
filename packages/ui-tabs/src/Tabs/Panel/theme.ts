@@ -46,7 +46,7 @@ const generateComponentTheme = (theme: Theme): TabsPanelTheme => {
     lineHeight: typography?.lineHeight,
     color: colors?.contrasts?.grey125125,
     background: colors?.contrasts?.white1010,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     defaultOverflowY: 'auto'

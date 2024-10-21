@@ -1377,6 +1377,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           getDisabledOptionProps
         }) => (
           <View
+            borderWidth="small"
             as="div"
             elementRef={this.handleDrilldownRef}
             tabIndex={0}

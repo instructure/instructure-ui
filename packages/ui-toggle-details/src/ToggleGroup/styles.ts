@@ -22,12 +22,8 @@
  * SOFTWARE.
  */
 
-import type { DrilldownTheme } from '@instructure/shared-types'
-import type {
-  DrilldownProps,
-  DrilldownStyleProps,
-  DrilldownStyle
-} from './props'
+import type { ToggleGroupTheme } from '@instructure/shared-types'
+import type { ToggleGroupProps, ToggleGroupStyle } from './props'
 
 /**
  * ---
@@ -40,57 +36,11 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: DrilldownTheme,
-  _props: DrilldownProps,
-  state: DrilldownStyleProps
-): DrilldownStyle => {
-  const { hasHighlightedOption } = state
-
+  componentTheme: ToggleGroupTheme,
+  _props: ToggleGroupProps
+): ToggleGroupStyle => {
   return {
-    drilldown: {
-      label: 'drilldown',
-      overflow: 'visible', // needed for focus ring!
-      borderColor: componentTheme.borderColor,
-
-      ...(hasHighlightedOption && {
-        '&:focus::before': {
-          display: 'none'
-        }
-      })
-    },
-    container: {
-      label: 'drilldown__container'
-    },
-    headerBack: {
-      label: 'drilldown__headerBack',
-      minHeight: '1.25em'
-    },
-    headerTitle: {
-      label: 'drilldown__headerTitle',
-      fontWeight: componentTheme.headerTitleFontWeight
-    },
-    optionContainer: {
-      label: 'drilldown__optionContainer',
-      alignItems: 'center',
-      display: 'flex',
-      height: '100%'
-    },
-    optionLabelInfo: {
-      label: 'drilldown__optionLabelInfo',
-      display: 'flex',
-      flexShrink: 0,
-      height: '100%',
-      alignItems: 'center',
-      paddingInlineStart: componentTheme.labelInfoPadding,
-      color: componentTheme.labelInfoColor
-    },
-    optionContent: {
-      label: 'drilldown__optionContent',
-      flexGrow: 1
-    },
-
-    // we use it in the index file
-    headerActionColor: componentTheme.headerActionColor
+    borderColor: componentTheme.borderColor
   }
 }
 

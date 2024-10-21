@@ -39,6 +39,7 @@ const contrasts: Contrasts = {
   grey1214: primitives.grey12,
   grey1424: primitives.grey14,
   grey2424: primitives.grey24,
+  grey3045: primitives.grey30,
   grey4570: primitives.grey45,
   grey5782: primitives.grey57,
   grey100100: primitives.grey100,
