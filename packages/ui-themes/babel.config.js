@@ -30,7 +30,7 @@ module.exports = {
         coverage: Boolean(process.env.COVERAGE),
         esModules: Boolean(process.env.ES_MODULES),
         removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+        transformImports: false
       }
     ]
   ]
