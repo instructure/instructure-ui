@@ -125,7 +125,10 @@ class Alert extends Component<AlertProps, AlertState> {
     this.clearTimeouts()
     this.removeScreenreaderAlert()
     this.setState({ open: false }, () => {
-      if (this.props.onDismiss && this.props.transition === 'none') {
+      if (
+        this.props.onDismiss &&
+        (this.props.transition === 'none' || this.props.screenReaderOnly)
+      ) {
         this.props.onDismiss()
       }
     })
