@@ -36,8 +36,7 @@ const generateComponentTheme = (theme: Theme): MenuItemTheme => {
   const themeSpecificStyle: ThemeSpecificStyle<MenuItemTheme> = {
     canvas: {
       labelColor: theme['ic-brand-font-color-dark'],
-      iconColor: theme['ic-brand-font-color-dark'],
-      activeBackground: theme['ic-brand-primary']
+      iconColor: theme['ic-brand-font-color-dark']
     }
   }
 
@@ -56,7 +55,7 @@ const generateComponentTheme = (theme: Theme): MenuItemTheme => {
     iconColor: colors?.contrasts?.grey125125,
     iconPadding: spacing?.small,
 
-    activeBackground: colors?.contrasts?.blue4570,
+    activeBackground: colors?.contrasts?.grey4570,
     activeLabelColor: colors?.contrasts?.white1010,
     activeIconColor: colors?.contrasts?.white1010
   }

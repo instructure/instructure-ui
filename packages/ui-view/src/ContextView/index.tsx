@@ -118,6 +118,11 @@ class ContextView extends Component<ContextViewProps> {
           display="block"
           borderRadius="medium"
           borderWidth="small"
+          themeOverride={
+            styles?.borderColorForView
+              ? { borderColorPrimary: styles?.borderColorForView }
+              : {}
+          }
           borderColor={background === 'default' ? 'primary' : 'transparent'}
           background={background === 'default' ? 'primary' : 'primary-inverse'}
           withVisualDebug={debug}
