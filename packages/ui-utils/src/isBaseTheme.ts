@@ -39,6 +39,12 @@ const baseThemeProps: BaseThemeVariableKeys = [
   'typography'
 ]
 
+/**
+ * Checks if the given param is an object with all the keys needed for an
+ * Instructure theme.
+ * @param theme Anything. This function will throw an error if it's not a theme
+ * object.
+ */
 const isBaseTheme = (theme: any): theme is BaseTheme => {
   if (Array.isArray(theme) || typeof theme === 'function') {
     throw new Error()

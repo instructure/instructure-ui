@@ -37,15 +37,17 @@ import type {
  * ---
  * private: true
  * ---
- * Gives back the theme object for the the provider.
+ * Gives back the theme object for the provider.
  *
  * If a valid InstUI theme is given, it just returns the theme.
  *
  * If an override object is given, it returns the ancestor theme and
  * the overrides merged together.
  *
- * @param {object} themeOrOverride - A full theme or an override object
- * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
+ * @param themeOrOverride - A full theme or an override object
+ * @returns A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
+ *    This function is called by Emotion on theme provider creation, where
+ *    `ancestorTheme` is a theme object from an ancestor `ThemeProvider`
  */
 const getTheme =
   (themeOrOverride: ThemeOrOverride) =>
@@ -71,7 +73,6 @@ const getTheme =
 
     // we need to clone the ancestor theme not to override it
     let currentTheme
-
     if (Object.keys(ancestorTheme).length === 0) {
       const globalTheme = ThemeRegistry.getCurrentTheme()
 
