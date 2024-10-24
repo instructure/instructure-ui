@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy } from '@instructure/ui-test-utils'
+import { expect, mount, spy, find } from '@instructure/ui-test-utils'
 
 import { ToggleDetails } from '../index'
 import { ToggleDetailsLocator } from '../ToggleDetailsLocator'
@@ -74,6 +74,16 @@ describe('<ToggleDetails />', async () => {
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
   })
 
+  it('should not have aria attributes when it has no children', async () => {
+    await mount(
+      <ToggleDetails summary="Click me" data-test-id="td__0"></ToggleDetails>
+    )
+    const toggle = await find('[data-test-id="td__0"]')
+
+    expect(toggle.getAttribute('aria-controls')).to.not.exist()
+    expect(toggle.getAttribute('aria-expanded')).to.not.exist()
+  })
+
   it('should toggle on click events', async () => {
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
 
@@ -100,7 +110,27 @@ describe('<ToggleDetails />', async () => {
 
     const { args } = onToggle.firstCall
 
-    expect((args[0] as any).type).to.equal('click')
+    expect(args[0].type).to.equal('click')
+    expect(args[1]).to.be.true()
+  })
+
+  it('should call onToggle on click events when it has no children', async () => {
+    const onToggle = spy((_event: React.MouseEvent) => {
+      _event.persist()
+    })
+
+    await mount(
+      <ToggleDetails
+        summary="Click me"
+        expanded={false}
+        onToggle={onToggle}
+        data-test-id="td__1"
+      ></ToggleDetails>
+    )
+    const toggleDetails = await find('[data-test-id="td__1"]')
+    await toggleDetails.click()
+    const { args } = onToggle.firstCall
+    expect(args[0].type).to.equal('click')
     expect(args[1]).to.be.true()
   })
 

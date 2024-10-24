@@ -43,9 +43,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    defaultExpanded: false,
-    onToggle: function () {},
-    children: null
+    defaultExpanded: false
   }
 
   _contentId: string
@@ -92,7 +90,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
-    this.props.onToggle(event, !this.expanded)
+    this.props.onToggle?.(event, !this.expanded)
   }
 
   render() {
@@ -101,15 +99,12 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     if (typeof render === 'function') {
       return render({
         expanded: this.expanded,
-        getToggleProps: (props = {} as any) => {
+        getToggleProps: (props = {}) => {
           return {
+            ...props,
             'aria-controls': this._contentId,
             'aria-expanded': this.expanded,
-            onClick: createChainedFunction(
-              this.handleToggle,
-              props.onClick
-            ) as React.MouseEventHandler,
-            ...props
+            onClick: createChainedFunction(this.handleToggle, props.onClick)!
           }
         },
         getDetailsProps: () => {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { JSX } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -30,17 +30,18 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
-type ExpandableToggleProps = <P extends Record<string, any>>(
-  props?: P & { onClick?: React.MouseEventHandler }
-) => {
+type ExpandableToggleProps = (props?: {
+  onClick?: React.MouseEventHandler
+  [key: string]: unknown
+}) => {
   'aria-controls': string
   'aria-expanded': boolean
   onClick: (event: React.MouseEvent) => void
-} & P
+  [key: string]: unknown
+}
 
 type RenderProps = {
   expanded: boolean
-
   /**
    * Props to be spread onto the trigger element
    */
@@ -65,17 +66,22 @@ type ExpandableOwnProps = {
    */
   defaultExpanded: boolean
 
-  onToggle: (event: React.MouseEvent, expanded: boolean) => void
+  /**
+   * Function invoked when this component is expanded/collapsed
+   */
+  onToggle?: (event: React.MouseEvent, expanded: boolean) => void
 
   /**
-   * @param {Object} renderProps
-   * @param {Boolean} renderProps.expanded
-   * @param {Function} renderProps.getToggleProps - Props to be spread onto the trigger element
-   * @param {Function} renderProps.getDetailsProps - Props to be spread onto the details element
+   * Must be a function that returns a JSX element. It receives and object which
+   * contains whether its expanded and objects that need to be spread on the
+   * trigger and details elements.
    */
   children?: RenderExpandable
 
   /**
+   * Must be a function that returns a JSX element. It receives and object which
+   * contains whether its expanded and objects that need to be spread on the
+   * trigger and details elements.
    * Identical to children
    */
   render?: RenderExpandable

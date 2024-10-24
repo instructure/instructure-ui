@@ -101,13 +101,16 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     expanded: boolean
   ) {
     const { variant } = this.props
-
+    // Do not put aria-controls and aria-expanded into the toggle if there
+    // is nothing to open
+    const tProps = this.props.children
+      ? toggleProps
+      : { onClick: toggleProps.onClick }
     const props = {
       ...omitProps(this.props, ToggleDetails.allowedProps),
-      ...toggleProps,
+      ...tProps,
       children: this.renderSummary(expanded)
-      // spread operator makes toggleProps loose Record<string, any>>
-    } as Record<string, any>
+    } as Record<string, unknown>
     const summary = this.renderSummary(expanded)
 
     if (variant === 'filled') {
@@ -152,11 +155,11 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   renderDetails(expanded: boolean, detailsProps: { id: string }) {
-    const { children } = this.props
+    if (!this.props.children) return null
     const expandedStyles = expanded ? { display: 'block' } : { display: 'none' }
     return (
       <div {...detailsProps} css={[this.props.styles?.details, expandedStyles]}>
-        {children && expanded && this.renderContent()}
+        {expanded && this.renderContent()}
       </div>
     )
   }
