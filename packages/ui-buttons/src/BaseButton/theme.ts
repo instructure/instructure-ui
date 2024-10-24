@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { BaseButtonTheme } from '@instructure/shared-types'
-import { alpha } from '@instructure/ui-color-utils'
+import { alpha, darken } from '@instructure/ui-color-utils'
 
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
 
@@ -34,7 +34,32 @@ const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
-  const { borders, colors, forms, spacing, typography } = theme
+  const { borders, colors, forms, spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle: ThemeSpecificStyle<BaseButtonTheme> = {
+    canvas: {
+      primaryColor: theme['ic-brand-button--primary-text']!,
+      primaryBorderColor: theme['ic-brand-button--primary-bgd']!,
+      primaryBackground: theme['ic-brand-button--primary-bgd']!,
+      primaryHoverBackground: darken(theme['ic-brand-button--primary-bgd']!),
+      primaryActiveBackground: darken(theme['ic-brand-button--primary-bgd']!),
+      primaryActiveBoxShadow: `${activeShadow} ${theme[
+        'ic-brand-button--primary-bgd'
+      ]!}`,
+      primaryGhostColor: theme['ic-brand-button--primary-bgd']!,
+      primaryGhostBorderColor: theme['ic-brand-button--primary-bgd']!,
+      primaryGhostBackground: 'transparent',
+      primaryGhostHoverBackground: alpha(
+        theme['ic-brand-button--primary-bgd']!,
+        10
+      ),
+      primaryGhostActiveBackground: 'transparent',
+      primaryGhostActiveBoxShadow: `${activeShadow} ${alpha(
+        theme['ic-brand-button--primary-bgd']!,
+        28
+      )}`
+    }
+  }
 
   const componentVariables: BaseButtonTheme = {
     transform: 'none',
@@ -155,7 +180,8 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
   }
 
   return {
-    ...componentVariables
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
