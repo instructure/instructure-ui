@@ -213,17 +213,16 @@ export type ParsedDoc = {
   descriptions: Record<string, string>
   // Hold minimal information about each document that is needed for search
   // functionality
-  docs: Record<
-    string,
-    {
-      title: string
-      order?: string
-      category?: string
-      isWIP?: boolean
-      tags?: string
-    }
-  >
+  docs: ParsedDocSummary
 }
+
+export type ParsedDocSummary = Record<string,{
+  title: string
+  order?: string
+  category?: string
+  isWIP?: boolean
+  tags?: string
+}>
 
 type IconGlyph = {
   name: string

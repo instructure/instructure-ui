@@ -32,7 +32,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-type DrawerContentSize = { width: number; height: number }
+type DrawerContentSize = { width: number; height?: number }
 
 type DrawerLayoutContentOwnProps = {
   label: string

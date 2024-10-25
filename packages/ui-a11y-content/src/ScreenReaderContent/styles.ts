@@ -29,25 +29,23 @@ import type { ScreenReaderContentStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (): ScreenReaderContentStyle => {
   return {
     screenReaderContent: {
       label: 'screenReaderContent',
-      width: '0.0625rem',
-      height: '0.0625rem',
-      margin: '-0.0625rem',
-      padding: 0,
+      width: '0.0625rem !important',
+      height: '0.0625rem !important',
+      margin: '-0.0625rem !important',
+      padding: '0 !important',
       position: 'absolute',
       top: 0,
       insetInlineStart: 0,
-      overflow: 'hidden',
-      clip: 'rect(0 0 0 0)',
-      border: 0
+      whiteSpace: 'nowrap',
+      overflow: 'hidden !important',
+      clip: 'rect(0 0 0 0) !important',
+      border: '0 !important'
     }
   }
 }

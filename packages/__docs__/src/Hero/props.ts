@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { Colors, PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
+import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 
 type HeroOwnProps = {
   name: string
   repository: string
   version: string
   layout: 'small' | 'medium' | 'large' | 'x-large'
-  docs: any
+  docs: ParsedDocSummary
 }
 
 type PropKeys = keyof HeroOwnProps
@@ -59,7 +60,7 @@ type HeroStyle = ComponentStyle<
 >
 
 type HeroTheme = {
-  backgroundColor: Colors['backgroundBrand']
+  backgroundColor: string
 }
 export type { HeroStyle, HeroTheme }
 export type { HeroProps }

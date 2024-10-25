@@ -28,10 +28,9 @@ interface DebounceOptions {
   trailing?: boolean
 }
 
-export type Debounced = {
-  (...args: unknown[]): unknown
+export type Debounced<F extends (...args: any) => any> = F & {
   cancel: () => void
-  flush: () => void
+  flush: () => ReturnType<F>
 }
 
 /**
@@ -51,6 +50,8 @@ export type Debounced = {
  *
  * Note: Modified from the original to check for cancelled boolean before invoking func to prevent React setState
  * on unmounted components.
+ * For a cool explanation see https://css-tricks.com/debouncing-throttling-explained-examples/
+ *
  * @module debounce
  *
  * @param {Function} func The function to debounce.
@@ -64,15 +65,15 @@ export type Debounced = {
  *  Specify invoking on the trailing edge of the timeout.
  * @returns {Function} Returns the new debounced function.
  */
-function debounce(
-  func: (...args: any[]) => unknown,
+function debounce<F extends (...args: any) => any>(
+  func: F,
   wait = 0,
   options: DebounceOptions = {}
-): Debounced {
-  let lastArgs: unknown[] | undefined
+) {
+  let lastArgs: unknown | undefined
   let lastThis: unknown
-  let result: unknown
-  let lastCallTime: number | undefined // TODO this should never be undefined
+  let result: ReturnType<F>
+  let lastCallTime: number
   let lastInvokeTime = 0
   let timers: ReturnType<typeof setTimeout>[] = []
   if (typeof func !== 'function') {
@@ -155,7 +156,8 @@ function debounce(
   function cancel() {
     clearAllTimers()
     lastInvokeTime = 0
-    lastArgs = lastCallTime = lastThis = undefined
+    lastCallTime = 0
+    lastArgs = lastThis = undefined
   }
 
   function flush() {
@@ -167,7 +169,7 @@ function debounce(
     timers = []
   }
 
-  function debounced(...args: unknown[]) {
+  function debounced(...args: any[]) {
     const time = Date.now()
     const isInvoking = shouldInvoke(time)
 
@@ -197,7 +199,7 @@ function debounce(
   debounced.cancel = cancel
   debounced.flush = flush
 
-  return debounced
+  return debounced as Debounced<F>
 }
 
 export default debounce

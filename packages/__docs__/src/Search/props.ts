@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import type { PropValidators } from '@instructure/shared-types'
+import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 import PropTypes from 'prop-types'
 
 type OptionType = {
@@ -29,13 +30,12 @@ type OptionType = {
   value: string
   label: string
   groupLabel: string
-  tags: string
+  tags?: string
   isWIP: string | boolean
-  category?: string
 }
 
 type SearchOwnProps = {
-  options: Record<string, OptionType>
+  options: ParsedDocSummary
 }
 
 type PropKeys = keyof SearchOwnProps
@@ -55,15 +55,7 @@ type SearchState = {
   highlightedOptionId: string | null
   selectedOptionId: string | null
   selectedOptionLabel: string
-  filteredOptions: {
-    id: string
-    value: string
-    label: string
-    groupLabel: string
-    tags: string
-    isWIP: string | boolean
-    category?: string
-  }[]
+  filteredOptions: OptionType[]
   announcement: string | null
 }
 

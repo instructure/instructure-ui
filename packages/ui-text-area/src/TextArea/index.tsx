@@ -78,7 +78,7 @@ class TextArea extends Component<TextAreaProps> {
   private _request?: RequestAnimationFrameType
   private _defaultId: string
   private _textareaResizeListener?: ResizeObserver
-  private _debounced?: Debounced
+  private _debounced?: Debounced<typeof this.grow>
   private _textarea: HTMLTextAreaElement | null = null
   private _container: HTMLDivElement | null = null
   private _height?: string

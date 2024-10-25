@@ -86,7 +86,7 @@ class Tabs extends Component<TabsProps, TabsState> {
   private _tabList: Element | null = null
   private _focusable: Focusable | null = null
   private _tabListPosition?: RectType
-  private _debounced?: Debounced
+  private _debounced?: Debounced<typeof this.handleResize>
   private _resizeListener?: ResizeObserver
 
   ref: Element | null = null

@@ -63,7 +63,7 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
 
   private _menuTriggerRef: HTMLLIElement | null = null
 
-  private _debouncedHandleResize?: Debounced
+  private _debouncedHandleResize?: Debounced<typeof this.handleResize>
   private _resizeListener?: ResizeObserver
 
   handleRef = (el: HTMLUListElement | null) => {
