@@ -76,7 +76,8 @@ import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { propTypes, allowedProps } from './props'
 import type {
   LibraryOptions,
-  MainDocsData
+  MainDocsData,
+  ParsedDocSummary
 } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 
@@ -498,10 +499,11 @@ class App extends Component<AppProps, AppState> {
     const { library, docs, themes } = this.state.docsData!
     const { layout } = this.state
 
-    const themeDocs: Record<string, any> = {}
+    const themeDocs: ParsedDocSummary = {}
 
     Object.keys(themes).forEach((key) => {
       themeDocs[key] = {
+        title: key,
         category: 'themes'
       }
     })

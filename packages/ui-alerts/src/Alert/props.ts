@@ -53,11 +53,23 @@ type AlertOwnProps = {
    */
   liveRegion?: () => Element
   /**
-   * Choose the politeness level of screenreader alerts.
+   * Choose the politeness level of screenreader alerts, sets the value of
+   * `aria-live`.
+   *
+   * When regions are specified as `polite`, assistive technologies will notify
+   * users of updates but generally do not interrupt the current task,
+   * and updates take low priority.
+   *
+   * When regions are specified as `assertive`, assistive technologies will
+   * immediately notify the user, and could potentially clear the speech queue
+   * of previous updates.
    */
   liveRegionPoliteness?: 'polite' | 'assertive'
   /**
-   * If the screenreader alert should be atomic
+   * Value for the `aria-atomic` attribute.
+   * `aria-atomic` controls how much is read when a change happens. Should only
+   * the specific thing that changed be read or should the entire element be
+   * read.
    */
   isLiveRegionAtomic?: boolean
   /**

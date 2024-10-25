@@ -33,6 +33,7 @@ import { Select } from '@instructure/ui-select'
 import { SearchStatus } from '../SearchStatus'
 
 import type { SearchProps, SearchState, OptionType } from './props'
+import { debounce } from '@instructure/debounce'
 
 class Search extends Component<SearchProps, SearchState> {
   static defaultProps = {
@@ -40,6 +41,8 @@ class Search extends Component<SearchProps, SearchState> {
   }
 
   _options: OptionType[] = []
+  _debounced = debounce(this.setState, 1000)
+
   timeoutId?: ReturnType<typeof setTimeout>
 
   constructor(props: SearchProps) {
@@ -70,6 +73,11 @@ class Search extends Component<SearchProps, SearchState> {
       })
     })
   }
+  componentDidUpdate(_prevProps: SearchProps, prevState: SearchState) {
+    if (this.state.announcement != prevState.announcement) {
+      this._debounced({ announcement: null })
+    }
+  }
 
   getOptionById(queryId: string) {
     return this.state.filteredOptions.find(({ id }) => id === queryId)
@@ -77,11 +85,10 @@ class Search extends Component<SearchProps, SearchState> {
 
   filterOptions = (value: string) => {
     return this._options.filter((option) => {
-      // We want to hide WIP components etc.
+      // We want to hide WIP components
       if (option?.isWIP) {
         return false
       }
-
       return (
         option.label.toLowerCase().includes(value.toLowerCase()) ||
         (option.tags && option.tags.toString().includes(value.toLowerCase()))
@@ -201,8 +208,7 @@ class Search extends Component<SearchProps, SearchState> {
   renderGroups(options: OptionType[]) {
     const { highlightedOptionId, selectedOptionId } = this.state
 
-    // TODO fix any
-    const groups: any = {
+    const groups: Record<string, OptionType[]> = {
       'GETTING STARTED': [],
       GUIDES: [],
       'CONTRIBUTOR GUIDES': [],
@@ -233,27 +239,16 @@ class Search extends Component<SearchProps, SearchState> {
 
     return Object.keys(groups).map((group) => (
       <Select.Group renderLabel={group} key={group}>
-        {groups[group].map(
-          ({
-            id,
-            label,
-            disabled
-          }: {
-            id: string
-            label: string
-            disabled: boolean
-          }) => (
-            <Select.Option
-              id={id}
-              key={id}
-              isHighlighted={id === highlightedOptionId}
-              isSelected={id === selectedOptionId}
-              isDisabled={disabled}
-            >
-              {label}
-            </Select.Option>
-          )
-        )}
+        {groups[group].map(({ id, label }) => (
+          <Select.Option
+            id={id}
+            key={id}
+            isHighlighted={id === highlightedOptionId}
+            isSelected={id === selectedOptionId}
+          >
+            {label}
+          </Select.Option>
+        ))}
       </Select.Group>
     ))
   }

@@ -153,6 +153,9 @@ class Alert extends Component<AlertProps, AlertState> {
 
     if (liveRegion) {
       liveRegion.setAttribute('aria-live', this.props.liveRegionPoliteness!)
+      // indicates what notifications the user agent will trigger when the
+      // accessibility tree within a live region is modified.
+      // additions: elements are added, text: Text content is added
       liveRegion.setAttribute('aria-relevant', 'additions text')
       liveRegion.setAttribute(
         'aria-atomic',

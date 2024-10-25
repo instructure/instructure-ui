@@ -161,7 +161,7 @@ class Position extends Component<PositionProps, PositionState> {
   }
 
   componentWillUnmount() {
-    ;(this.position as Debounced).cancel()
+    ;(this.position as Debounced<typeof this.position>).cancel()
     this.stopTracking()
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
 

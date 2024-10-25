@@ -68,7 +68,7 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
 
   ref: Element | null = null
   private _text?: JSX.Element
-  private _debounced?: Debounced
+  private _debounced?: Debounced<typeof this.update>
   private _stage: HTMLSpanElement | null = null
   private _wasTruncated?: boolean
   private _resizeListener?: ResizeObserver

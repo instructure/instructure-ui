@@ -71,7 +71,7 @@ class DrawerContent extends Component<DrawerLayoutContentProps> {
 
   private _resizeListener?: ResizeObserver
 
-  private _debounced?: Debounced
+  private _debounced?: Debounced<NonNullable<typeof this.props.onSizeChange>>
 
   componentDidMount() {
     const rect = getBoundingClientRect(this.ref)
