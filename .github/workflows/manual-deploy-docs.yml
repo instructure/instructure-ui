@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy docs
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - name: Install Node 22
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
       - name: Install netlify-cli
         run: npm install --save-dev netlify-cli@13.2.2
       - name: Install packages.
