@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-icons-build",
-  "version": "9.8.0",
+  "version": "9.8.1",
   "description": "Build scripts to export icons from SVG files",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
