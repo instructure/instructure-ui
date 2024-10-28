@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* docs screenreader alerts are no longer screenreader focusable ([c225853](https://github.com/instructure/instructure-ui/commit/c2258531aa377b698fe932012112704f1879b501))
+* **ui-buttons:** add back ic-brand theme tokens to basebutton ([ff21f05](https://github.com/instructure/instructure-ui/commit/ff21f05ccafe699ebfdb4da3dff6a418e00f0721))
+* **ui-toggle-details:** do not put aria-expanded and aria-controls on the toggle if there is nothing to toggle ([82094c3](https://github.com/instructure/instructure-ui/commit/82094c3289dae60946047bbbdf60f768dcd63f4c))
+* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
+
+
+
+
+
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
 
