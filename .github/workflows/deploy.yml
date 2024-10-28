@@ -47,6 +47,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - run: npm ci && npm run bootstrap
       - name: Build docs-app
         run: npm run build:docs
