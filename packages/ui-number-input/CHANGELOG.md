@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.8.1](https://github.com/instructure/instructure-ui/compare/v9.8.0...v9.8.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* **ui-number-input:** add back options for string input ([f08d078](https://github.com/instructure/instructure-ui/commit/f08d0786aece1731b9a122338d8a7586aec3e32a))
+
+
+
+
+
 # [9.8.0](https://github.com/instructure/instructure-ui/compare/v9.7.2...v9.8.0) (2024-10-16)
 
 **Note:** Version bump only for package @instructure/ui-number-input
