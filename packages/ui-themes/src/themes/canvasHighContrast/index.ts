@@ -25,7 +25,7 @@
 import sharedThemeTokens from '../../sharedThemeTokens'
 import { BaseTheme, Colors } from '@instructure/shared-types'
 import { ThemeRegistry } from '@instructure/theme-registry'
-import colors from './colors'
+import { colors } from './colors'
 
 const key = 'canvas-high-contrast'
 
