@@ -184,9 +184,9 @@ const DateInput2 = ({
 
   useEffect(() => {
     // don't set input messages if there is an internal error set already
-    if (!inputMessages.length && !invalidDateErrorMessage) {
-      setInputMessages(messages || [])
-    }
+    if (inputMessages.find((m) => m.text === invalidDateErrorMessage)) return
+
+    setInputMessages(messages || [])
   }, [messages])
 
   useEffect(() => {
