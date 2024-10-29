@@ -29,6 +29,7 @@ import type {
   MainDocsData,
   ProcessedFile
 } from '../../buildScripts/DataTypes.mts'
+import type { DocDataType } from '../Document/props'
 
 type AppOwnProps = {
   trayWidth: number
@@ -90,7 +91,7 @@ type AppState = {
 
 type DocData = ProcessedFile & {
   componentInstance: any
-  children: any[]
+  children: DocDataType[]
 }
 
 export type { AppProps, AppState, DocData, LayoutSize, AppStyle, AppTheme }

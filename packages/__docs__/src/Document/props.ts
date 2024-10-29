@@ -45,8 +45,7 @@ type PropKeys = keyof DocumentOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DocumentProps = DocumentOwnProps &
-  WithStyleProps<DocumentTheme, DocumentStyle>
+type DocumentProps = DocumentOwnProps & WithStyleProps<null, DocumentStyle>
 
 const propTypes: PropValidators<PropKeys> = {
   doc: DocPropType.isRequired,
@@ -56,13 +55,7 @@ const propTypes: PropValidators<PropKeys> = {
   layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
 }
 
-type DocumentStyle = ComponentStyle<'githubCornerColor'>
-
-type DocumentTheme = {
-  githubCornerColor: string
-}
-
-type TOCHeadingData = { id: string; innerText: string; level: string }
+type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 
 type DocumentState = {
   selectedDetailsTabIndex: number
@@ -78,11 +71,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export { propTypes, allowedProps }
-export type {
-  DocumentProps,
-  DocumentStyle,
-  DocumentState,
-  DocumentTheme,
-  DocDataType,
-  TOCHeadingData
-}
+export type { DocumentProps, DocumentStyle, DocumentState, DocDataType }
