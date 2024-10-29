@@ -40,7 +40,12 @@ jobs:
           folder: ${{ steps.set-build-dir.outputs.build_dir }}
           branch: gh-pages
           target-folder: ${{ steps.set-build-dir.outputs.deploy_dir }}
-          clean-exclude: pr-preview
+          clean-exclude: |
+            pr-preview
+            v7
+            v8
+            v9
+            latest
           force: false
   deploy-latest:
     runs-on: ubuntu-latest
