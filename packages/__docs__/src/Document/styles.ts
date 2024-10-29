@@ -33,10 +33,54 @@
  * @return {Object} The final style object, which will be used in the component
  */
 
-import type { DocumentTheme, DocumentStyle } from './props'
-const generateStyle = (componentTheme: DocumentTheme): DocumentStyle => {
+import type { DocumentStyle } from './props'
+import { keyframes } from '@instructure/emotion'
+
+const octocatWave = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(-25deg);
+  }
+
+  40% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(-25deg);
+  }
+
+  80% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }`
+
+const generateStyle = (): DocumentStyle => {
   return {
-    githubCornerColor: componentTheme.githubCornerColor
+    githubCorner: {
+      position: 'absolute',
+      top: 0,
+      right: 0
+    },
+    githubCornerOctoArm: {
+      fill: '#151513',
+      color: '#fff',
+      ':hover': {
+        '[id="octoArm"]': {
+          // 0,0 is the bottom left of the SVG
+          transformOrigin: '55% 45%',
+          animationDuration: '560ms',
+          animationName: octocatWave,
+          animationTimingFunction: 'ease-in-out'
+        }
+      }
+    }
   }
 }
 

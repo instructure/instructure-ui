@@ -238,10 +238,7 @@ class Focusable extends Component<FocusableProps, FocusableState> {
     if (tagName == 'TEXTAREA') {
       return true
     }
-    if (isContentEditable) {
-      return true
-    }
-    return false
+    return isContentEditable
   }
 
   render() {
