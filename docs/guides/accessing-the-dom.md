@@ -25,70 +25,120 @@ class MyComponent extends React.Component {
     return <div ref={this.ref}>Content</div>
   }
 }
+
+```
+
+```javascript
+---
+type: code
+---
+const MyComponent = React.forwardRef((props, ref) => {
+  return <div ref={ref}>Content</div>
+})
 ```
 
 Good Usage Example with `ref`:
 
-```js
----
-type: example
----
-
-class GoodComponent extends React.Component {
-  constructor(props) {
-    super(props)
-    this.ref = React.createRef()
+- ```js
+  class GoodComponent extends React.Component {
+    constructor(props) {
+      super(props)
+      this.ref = React.createRef()
+    }
+    render() {
+      return <span ref={this.ref}>Good Position target component</span>
+    }
   }
-  render() {
-    return (<span ref={this.ref}>Good Position target component</span>)
+  const Example = () => {
+    return (
+      <View as="div" padding={'large'}>
+        <Position
+          renderTarget={<GoodComponent />}
+          placement="end center"
+          offsetX="20px"
+        >
+          <span style={{ padding: '8px', background: 'white' }}>
+            Positioned content
+          </span>
+        </Position>
+      </View>
+    )
   }
-}
+  render(<Example />)
+  ```
 
-const Example = () => {
-  return (
-    <View as="div" padding={'large'}>
-      <Position
-        renderTarget={<GoodComponent />}
-        placement='end center'
-        offsetX='20px'
-      >
-        <span style={{ padding: '8px', background: 'white' }}>Positioned content</span>
-      </Position>
-    </View>
-  )
-}
+- ```js
+  const GoodComponent = React.forwardRef((props, ref) => {
+    return <span ref={ref}>Good Position target component</span>
+  })
 
-render(<Example />)
-```
+  const Example = () => {
+    return (
+      <View as="div" padding={'large'}>
+        <Position
+          renderTarget={<GoodComponent />}
+          placement="end center"
+          offsetX="20px"
+        >
+          <span style={{ padding: '8px', background: 'white' }}>
+            Positioned content
+          </span>
+        </Position>
+      </View>
+    )
+  }
+  render(<Example />)
+  ```
 
 Bad Usage Example without `ref`, that will result in InstUI calling `ReactDOM.findDOMNode()` and throw warnings:
 
-```js
----
-type: example
----
-class BadComponent extends React.Component {
-  constructor(props) {
-    super(props)
+- ```js
+  class BadComponent extends React.Component {
+    constructor(props) {
+      super(props)
+    }
+    render() {
+      return <span>Bad Position target component</span>
+    }
   }
-  render() {
-    return (<span>Bad Position target component</span>)
+
+  const Example = () => {
+    return (
+      <View as="div" padding={'large'}>
+        <Position
+          renderTarget={<BadComponent />}
+          placement="end center"
+          offsetX="20px"
+        >
+          <span style={{ padding: '8px', background: 'white' }}>
+            Positioned content
+          </span>
+        </Position>
+      </View>
+    )
   }
-}
+  render(<Example />)
+  ```
 
-const Example = () => {
-  return (
-    <View as="div" padding={'large'}>
-      <Position
-        renderTarget={<BadComponent />}
-        placement='end center'
-        offsetX='20px'
-      >
-        <span style={{ padding: '8px', background: 'white' }}>Positioned content</span>
-      </Position>
-    </View>
-  )
-}
+- ```js
+  const BadComponent = React.forwardRef((props, ref) => {
+    return <span>Bad Position target component</span>
+  })
 
-render(<Example />)
-```
+  const Example = () => {
+    return (
+      <View as="div" padding={'large'}>
+        <Position
+          renderTarget={<BadComponent />}
+          placement="end center"
+          offsetX="20px"
+        >
+          <span style={{ padding: '8px', background: 'white' }}>
+            Positioned content
+          </span>
+        </Position>
+      </View>
+    )
+  }
+  render(<Example />)
+  ```
