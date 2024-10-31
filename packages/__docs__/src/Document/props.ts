@@ -31,7 +31,7 @@ import type {
 } from '@instructure/shared-types'
 import { DocData } from '../App/props'
 
-type DocDataType = DocData & { legacyGitBranch: any }
+type DocDataType = DocData & { legacyGitBranch?: string }
 
 type DocumentOwnProps = {
   doc: DocDataType

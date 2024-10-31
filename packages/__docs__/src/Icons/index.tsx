@@ -45,13 +45,7 @@ import * as InstIcons from '@instructure/ui-icons'
 import { IconXSolid } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
 import { Flex } from '@instructure/ui-flex'
-
-type Glyph = {
-  lineSrc: string
-  solidSrc: string
-  name: string
-  glyphName: string
-}
+import { Glyph } from '../../buildScripts/DataTypes.mjs'
 
 type Format = 'react' | 'svg' | 'font'
 
@@ -108,6 +102,7 @@ const IconTile = memo(
         const componentName = `${name}${
           styleType === 'line' ? 'Line' : 'Solid'
         }`
+        // @ts-ignore TS cant type import *
         const IconComponent = InstIcons[componentName]
         return <IconComponent />
       } else if (format === 'svg') {
@@ -263,7 +258,7 @@ const IconsPage = ({ glyphs }: IconsPageProps) => {
         >
           {Object.keys(formats).map((f) => (
             <SimpleSelect.Option value={f} id={f} key={f}>
-              {formats[f]}
+              {formats[f as keyof typeof formats]}
             </SimpleSelect.Option>
           ))}
         </SimpleSelect>

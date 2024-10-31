@@ -82,7 +82,14 @@ type AppState = {
   layout: LayoutSize
   showMenu: boolean
   key?: string
-  versionsData: any
+  versionsData?: {
+    // like `v10`
+    latestVersion: string
+    // like `['v9', 'v10']`
+    previousVersions: string[]
+    // like `{"v8": "v8_maintenance", "v9": "v9_maintenance"}`
+    olderVersionsGitBranchMap: Record<string, string>
+  }
   // changelog.md read from the JSON file
   changelogData?: DocData
   // the currently shown document
