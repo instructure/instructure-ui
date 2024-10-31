@@ -124,7 +124,7 @@ class App extends Component<AppProps, AppState> {
       themeKey: undefined,
       layout: 'large',
       docsData: null,
-      versionsData: null,
+      versionsData: undefined,
       iconsData: null
     }
   }
@@ -163,34 +163,6 @@ class App extends Component<AppProps, AppState> {
       // If we don't have an id, scroll the content back to the top
       this._content.scrollTop = 0
     }
-  }
-
-  /**
-   * Get every static prop from an object (inherited ones too)
-   * @param object The object to check
-   * @returns {Set<string>} the properties
-   */
-  getAllPropNames(object: Record<string, any>) {
-    let obj: object | null = object
-    const props: Set<string> = new Set()
-    // exclude some common static props for performance
-    const invalidKeys = [
-      '$$typeof',
-      'render',
-      'propTypes',
-      'selector',
-      'defaultProps',
-      'displayName',
-      'generateComponentTheme'
-    ]
-    while (obj) {
-      const keys = Object.keys(obj)
-      keys.forEach((k) => {
-        if (!invalidKeys.includes(k)) props.add(k)
-      })
-      obj = Reflect.getPrototypeOf(obj)
-    }
-    return props
   }
 
   componentDidMount() {
@@ -416,7 +388,7 @@ class App extends Component<AppProps, AppState> {
         <Heading level="h1" as="h2" margin="0 0 medium">
           Icons
         </Heading>
-        <IconsPage glyphs={iconsData.glyphs} />
+        <IconsPage glyphs={iconsData!.glyphs} />
       </View>
     )
 
@@ -453,9 +425,9 @@ class App extends Component<AppProps, AppState> {
     const { themes } = this.state.docsData!
     const { layout, themeKey, versionsData } = this.state
     const { olderVersionsGitBranchMap } = versionsData || {}
-    let legacyGitBranch
+    let legacyGitBranch: string | undefined = undefined
 
-    if (olderVersionsGitBranchMap) {
+    if (olderVersionsGitBranchMap && versionInPath) {
       legacyGitBranch = olderVersionsGitBranchMap[versionInPath]
     }
 

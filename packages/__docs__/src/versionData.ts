@@ -32,17 +32,18 @@
  * @param signal {AbortController.signal}
  * @returns {Promise<null|object>}
  */
-const fetchVersionData = async (signal) => {
+const fetchVersionData = async (signal: AbortSignal) => {
   const isLocalHost = window.location.hostname === 'localhost'
-
   if (!isLocalHost) {
     const isGhPages = window.location.origin === 'https://instructure.github.io'
-    const versionsDataUrl = window.location.origin + (isGhPages ? '/instructure-ui' : '') + '/versions.json'
+    const versionsDataUrl =
+      window.location.origin +
+      (isGhPages ? '/instructure-ui' : '') +
+      '/versions.json'
     const result = await fetch(versionsDataUrl, { signal })
     return await result.json()
   }
-
-  return null
+  return undefined
 }
 
 /**
@@ -50,7 +51,7 @@ const fetchVersionData = async (signal) => {
  * the path includes the version number, e.g. `/v7` or `/v8`
  */
 const versionMatch = window.location.pathname.match(/\/(v\d+)(\/|$)/)
-const versionInPath =  versionMatch ? versionMatch[1] : null
+const versionInPath = versionMatch ? versionMatch[1] : null
 
 export default fetchVersionData
 export { fetchVersionData, versionInPath }

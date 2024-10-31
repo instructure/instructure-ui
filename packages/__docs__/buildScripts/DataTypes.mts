@@ -224,23 +224,16 @@ export type ParsedDocSummary = Record<string,{
   tags?: string
 }>
 
-type IconGlyph = {
+type Glyph = {
+  bidirectional: boolean
+  lineSrc: string
+  solidSrc: string
   name: string
-  variant: any
   glyphName: string
-  deprecated: boolean
-}
-
-type IconFormat = {
-  format: 'React' | 'SVG' | 'Font'
-  glyphs: Record<string, IconGlyph>
-  packageName: string
-  requirePath: string
 }
 
 type MainIconsData = {
-  packageName: string
-  formats: Record<'icons-svg' | `icons-react` | 'icons-font', IconFormat>
+  glyphs: Glyph[]
 }
 
 type MainDocsData = {
@@ -264,8 +257,7 @@ export type {
   ObjectSignatureType,
   BaseType,
   LibraryOptions,
-  IconFormat,
-  IconGlyph,
+  Glyph,
   MainDocsData,
   MainIconsData,
   JsDocResult

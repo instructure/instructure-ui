@@ -199,7 +199,7 @@ class Document extends Component<DocumentProps, DocumentState> {
     )
   }
 
-  renderThemeLink(doc: any, text?: string) {
+  renderThemeLink(doc: DocDataType, text?: string) {
     if (doc.themeUrl && doc.themePath) {
       const { themePath, themeUrl, legacyGitBranch } = doc
 
