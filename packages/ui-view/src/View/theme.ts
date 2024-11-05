@@ -64,7 +64,7 @@ const generateComponentTheme = (theme: Theme): ViewTheme => {
 
     borderColorPrimary: colors?.contrasts?.grey1214,
     borderColorSecondary: colors?.contrasts?.grey4570,
-    borderColorSuccess: colors?.contrasts?.grey4570,
+    borderColorSuccess: colors?.contrasts?.green4570,
     borderColorBrand: colors?.contrasts?.blue4570,
     borderColorInfo: colors?.contrasts?.blue4570,
     borderColorAlert: colors?.contrasts?.blue4570,
@@ -80,7 +80,7 @@ const generateComponentTheme = (theme: Theme): ViewTheme => {
     backgroundBrand: colors?.contrasts?.blue4570,
     backgroundInfo: colors?.contrasts?.blue4570,
     backgroundAlert: colors?.contrasts?.blue4570,
-    backgroundSuccess: colors?.contrasts?.grey4570,
+    backgroundSuccess: colors?.contrasts?.green4570,
     backgroundDanger: colors?.contrasts?.red4570,
     backgroundWarning: colors?.contrasts?.orange4570,
 
