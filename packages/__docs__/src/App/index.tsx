@@ -613,6 +613,11 @@ class App extends Component<AppProps, AppState> {
               shape="circle"
               color="secondary"
               size="medium"
+              ref={(button) => {
+                if (button) {
+                  button.focus()
+                }
+              }}
             />
           </InstUISettingsProvider>
         </View>
