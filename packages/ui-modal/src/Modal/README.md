@@ -57,7 +57,7 @@ by using the `padding` prop on the `<Modal.Body/>` if the use case requires it.
             }}
             onSubmit={this.handleFormSubmit}
             size="auto"
-            label="Modal Dialog: Hello World"
+            label="Hello World"
             shouldCloseOnDocumentClick
           >
             <Modal.Header>
@@ -127,7 +127,7 @@ by using the `padding` prop on the `<Modal.Body/>` if the use case requires it.
           }}
           onSubmit={handleFormSubmit}
           size="auto"
-          label="Modal Dialog: Hello World"
+          label="Hello World"
           shouldCloseOnDocumentClick
         >
           <Modal.Header>
@@ -204,7 +204,7 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
               this.setState({ open: false })
             }}
             size="fullscreen"
-            label="Modal Dialog: Hello World"
+            label="Hello World"
             shouldCloseOnDocumentClick
             mountNode={() => document.getElementById('constrainExample')}
             constrain="parent"
@@ -329,7 +329,7 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
             setOpen(false)
           }}
           size="fullscreen"
-          label="Modal Dialog: Hello World"
+          label="Hello World"
           shouldCloseOnDocumentClick
           mountNode={() => document.getElementById('constrainExample')}
           constrain="parent"
@@ -448,7 +448,7 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
               this.setState({ open: false })
             }}
             size="auto"
-            label="Modal Dialog: Hello Media"
+            label="Hello Media"
             shouldCloseOnDocumentClick
             variant="inverse"
           >
@@ -515,7 +515,7 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
             setOpen(false)
           }}
           size="auto"
-          label="Modal Dialog: Hello Media"
+          label="Hello Media"
           shouldCloseOnDocumentClick
           variant="inverse"
         >
@@ -637,7 +637,7 @@ use the [Img](#Img) component's `constrain` property to fit the image inside Mod
               this.setState({ open: false })
             }}
             size={this.state.modalSize}
-            label="Modal Dialog: Hello Media"
+            label="Hello Media"
             shouldCloseOnDocumentClick
             variant="inverse"
             overflow="fit"
@@ -775,7 +775,7 @@ use the [Img](#Img) component's `constrain` property to fit the image inside Mod
             setOpen(false)
           }}
           size={modalSize}
-          label="Modal Dialog: Hello Media"
+          label="Hello Media"
           shouldCloseOnDocumentClick
           variant="inverse"
           overflow="fit"
@@ -907,7 +907,7 @@ On smaller viewports (like mobile devices or scaled-up UI), we don't want to los
                 this.setState({ open: false })
               }
             }}
-            label="Modal Dialog: Hello World"
+            label="Hello World"
             shouldCloseOnDocumentClick
             mountNode={() => document.getElementById('viewportExample')}
             constrain="parent"
@@ -1005,7 +1005,7 @@ On smaller viewports (like mobile devices or scaled-up UI), we don't want to los
               setOpen(false)
             }
           }}
-          label="Modal Dialog: Hello World"
+          label="Hello World"
           shouldCloseOnDocumentClick
           mountNode={() => document.getElementById('viewportExample')}
           constrain="parent"
@@ -1100,7 +1100,7 @@ class Example extends React.Component {
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
           size="large"
-          label="Modal Dialog: Hello World"
+          label="Hello World"
           shouldCloseOnDocumentClick
           variant='inverse'
           overflow='scroll'
