@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
+
+
+### Bug Fixes
+
+* **ui-view:** fix view success colors ([e250b02](https://github.com/instructure/instructure-ui/commit/e250b02bcbd8c12ec57de554df66fe1ef88d7a66))
+
+
+
+
+
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
 

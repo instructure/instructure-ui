@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
+
+
+### Bug Fixes
+
+* **ui-alerts:** trigger onDismiss for SR only alerts ([98750f6](https://github.com/instructure/instructure-ui/commit/98750f689419aeb85969c93bceb31b2c74a34d68))
+
+
+
+
+
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
 
