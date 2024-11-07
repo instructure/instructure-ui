@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
+
+
+### Bug Fixes
+
+* do not lose focus when opening the side menu in the docs app ([0b4434d](https://github.com/instructure/instructure-ui/commit/0b4434df712df83f4a6d5e30bdea37b7be544d83))
+* docs Github corner has focus ring ([cc742d1](https://github.com/instructure/instructure-ui/commit/cc742d16c6c2a1ac8de9defae1eb53d5db4fc0bd))
+
+
+
+
+
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
 

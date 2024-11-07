@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
+
+
+### Features
+
+* **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
+
+
+
+
+
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
 

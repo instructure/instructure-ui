@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
+
+
+### Bug Fixes
+
+* do not lose focus when opening the side menu in the docs app ([0b4434d](https://github.com/instructure/instructure-ui/commit/0b4434df712df83f4a6d5e30bdea37b7be544d83))
+* docs Github corner has focus ring ([cc742d1](https://github.com/instructure/instructure-ui/commit/cc742d16c6c2a1ac8de9defae1eb53d5db4fc0bd))
+* **ui-alerts:** trigger onDismiss for SR only alerts ([98750f6](https://github.com/instructure/instructure-ui/commit/98750f689419aeb85969c93bceb31b2c74a34d68))
+* **ui-date-input:** fix DateInput2 to update messages properly ([553a235](https://github.com/instructure/instructure-ui/commit/553a2351fc7f8c6d012d4001ff49c2450d29ee97))
+* **ui-options,ui-utils:** subgroup titles in Options are not announced by TalkBack and iOS VoiceOver ([ebdf8f0](https://github.com/instructure/instructure-ui/commit/ebdf8f047cf8541723d494b16432c8248ef5fe1e))
+* **ui-tabs:** tabpanel content is not accessible with keyboard navigation when it does not have focusable element ([297cd03](https://github.com/instructure/instructure-ui/commit/297cd039228cda5bf742f3c0ca5d1cbf6a253893))
+* **ui-themes:** make all colors available ([46f9e38](https://github.com/instructure/instructure-ui/commit/46f9e38bb9f8ef0cb81ff5685cb7550b663ab896))
+* **ui-tree-browser:** treeBrowser collection descriptor is not read by screenreaders ([87623f7](https://github.com/instructure/instructure-ui/commit/87623f77cbad91961c9c390511774001e8fa6177))
+* **ui-view:** fix view success colors ([e250b02](https://github.com/instructure/instructure-ui/commit/e250b02bcbd8c12ec57de554df66fe1ef88d7a66))
+
+
+### Features
+
+* **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
+
+
+
+
+
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
 
