@@ -23,60 +23,64 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
 
-import { ProgressCircle } from '../index'
-import { ProgressCircleLocator } from '../ProgressCircleLocator'
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { ProgressBar } from '../index'
 
-describe('<ProgressCircle />', async () => {
+describe('<ProgressBar />', () => {
   it('should render', async () => {
-    await mount(
-      <ProgressCircle
+    const { container } = render(
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
       />
     )
-    expect(await ProgressCircleLocator.find()).to.exist()
+    const progress = container.querySelector('progress')
+
+    expect(progress).toBeInTheDocument()
   })
 
   it('should render a progress element with correct aria attributes', async () => {
-    await mount(
-      <ProgressCircle
+    const { container } = render(
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
       />
     )
+    const progress = container.querySelector('progress')
 
-    const componentRoot = await ProgressCircleLocator.find()
-    const progress = await componentRoot.find('progress')
-
-    expect(progress).to.exist()
-    expect(progress.getAttribute('value')).to.equal('30')
+    expect(progress).toHaveAttribute('value', '30')
   })
 
   it('should format the displayed text', async () => {
-    await mount(
-      <ProgressCircle
+    const current = 30
+    const max = 60
+    const { container } = render(
+      <ProgressBar
         screenReaderLabel="Chapters read"
-        valueMax={60}
-        valueNow={30}
+        valueMax={max}
+        valueNow={current}
         renderValue={({ valueNow, valueMax }) => `${valueNow} of ${valueMax}`}
       />
     )
-    expect(await ProgressCircleLocator.find(':contains(30 of 60)')).to.exist()
+    const progress = container.querySelector('[class$="-progressBar"]')
+
+    expect(progress).toHaveTextContent(`${current} of ${max}`)
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
-      <ProgressCircle
+    const { container } = render(
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
       />
     )
-    const progress = await ProgressCircleLocator.find()
-    expect(await progress.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+    expect(axeCheck).toBe(true)
   })
 })
