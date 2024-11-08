@@ -230,7 +230,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           invalid={this.invalid}
         >
           {label}
-          {isRequired && (
+          {isRequired && label && (
             <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
           )}
         </ToggleFacade>
@@ -247,7 +247,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           invalid={this.invalid}
         >
           {label}
-          {isRequired && (
+          {isRequired && label && (
             <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
           )}
         </CheckboxFacade>

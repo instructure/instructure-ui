@@ -268,7 +268,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       isRequiredMessages =
         typeof renderIsRequiredMessage === 'function'
           ? renderIsRequiredMessage()
-          : [{ type: 'error', text: '*' }]
+          : [{ type: 'error', text: '' }]
     }
     if (typeof renderMessages === 'function') {
       generalMessages = renderMessages(
@@ -386,14 +386,14 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const { label, tooltip, styles } = this.props
 
     return tooltip ? (
-      <div>
+      <span>
         <span css={styles?.label}>{label}</span>
         <span>
           <Tooltip renderTip={tooltip}>
             <IconInfoLine tabIndex={-1} />
           </Tooltip>
         </span>
-      </div>
+      </span>
     ) : (
       label
     )

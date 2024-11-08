@@ -167,7 +167,7 @@ type PropsPassedToSelect = {
    * objects with the following shape:
    * `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]

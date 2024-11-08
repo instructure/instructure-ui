@@ -48,7 +48,7 @@ type FormFieldLayoutOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: React.ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -79,7 +79,9 @@ type FormFieldLayoutProps = FormFieldLayoutOwnProps &
   OtherHTMLAttributes<FormFieldLayoutOwnProps> &
   WithDeterministicIdProps
 
-type FormFieldLayoutStyle = ComponentStyle<'formFieldLayout' | 'groupErrorMessage'>
+type FormFieldLayoutStyle = ComponentStyle<
+  'formFieldLayout' | 'groupErrorMessage'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,

@@ -34,6 +34,7 @@ import {
   pickProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { RadioInput } from '../RadioInput'
 import type { RadioInputProps } from '../RadioInput/props'
@@ -160,13 +161,15 @@ class RadioInputGroup extends Component<
   render() {
     const { variant, layout, description, isRequired, styles } = this.props
 
-    const descriptionWithRequired = (
+    const descriptionWithRequired = hasVisibleChildren(description) ? (
       <React.Fragment>
         {description}
-        {isRequired && (
+        {isRequired && description && (
           <span css={this.invalid ? styles?.invalidAsterisk : {}}> *</span>
         )}
       </React.Fragment>
+    ) : (
+      description
     )
 
     return (

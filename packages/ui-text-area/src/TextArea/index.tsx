@@ -42,6 +42,7 @@ import {
   pickProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -314,7 +315,7 @@ class TextArea extends Component<TextAreaProps> {
       maxHeight,
       textareaRef,
       resize,
-      styles,
+      styles
     } = this.props
 
     const props = omitProps(this.props, TextArea.allowedProps)
@@ -353,17 +354,21 @@ class TextArea extends Component<TextAreaProps> {
       />
     )
 
+    const label = hasVisibleChildren(this.props.label) ? (
+      <React.Fragment>
+        {this.props.label}
+        {required && (
+          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      this.props.label
+    )
+
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
-        label={
-          <React.Fragment>
-            {this.props.label}
-            {required && (
-              <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
-            )}
-          </React.Fragment>
-        }
+        label={label}
         vAlign="top"
         id={this.id}
         elementRef={(el) => {

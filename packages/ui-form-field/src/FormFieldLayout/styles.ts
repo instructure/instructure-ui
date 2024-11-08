@@ -42,7 +42,7 @@ const generateStyle = (
 
   return {
     groupErrorMessage: {
-      margin: '0.5rem',
+      margin: '0.5rem 0',
     },
     formFieldLayout: {
       label: 'formFieldLayout',

@@ -51,9 +51,9 @@ However you might have noticed from the type definition that a message can be `e
 
 We wanted to allow users to start using the new format without making it mandatory, but after the introductory period `newError` will be deprecated and `error` type will be changed to look and behave the same way.
 
-With this update we also introduced the "required asterisk" which will display an `*` character next to field labels that are required. This update is not opt-in and will apply to **all** InstUI form components so if you we relying on a custom solution for this feature before, you need to remove that to avoid having double asterisks.
+With this update we also introduced the "required asterisk" which will display an `*` character next to field labels that are required. This update is not opt-in and will apply to **all** InstUI form components so if you were relying on a custom solution for this feature before, you need to remove that to avoid having double asterisks.
 
-Here are examples with different form components: 
+Here are examples with different form components:
 
 ```ts
 ---
@@ -98,7 +98,7 @@ const Example = () => {
         <TextArea messages={messages} label="TextArea" required={isRequired}/>
 
         <Checkbox label="Checkbox" isRequired={isRequired} messages={messages}/>
- 
+
         <Checkbox label={`Checkbox (variant="toggle")`} variant="toggle" isRequired={isRequired} messages={messages}/>
 
         <CheckboxGroup
@@ -127,6 +127,14 @@ const Example = () => {
         </RadioInputGroup>
 
         <FileDrop messages={messages} renderLabel="FileDrop" />
+
+        <ColorPicker
+          label="ColorPicker"
+          placeholderText="Enter HEX"
+          isRequired={isRequired}
+          renderMessages={() => messages}
+        />
+
       </div>
     </div>
   )

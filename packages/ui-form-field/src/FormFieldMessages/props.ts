@@ -38,7 +38,7 @@ type FormFieldMessagesOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: React.ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]

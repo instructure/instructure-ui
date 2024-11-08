@@ -39,6 +39,7 @@ import {
   getInteraction,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -101,7 +102,9 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   get invalid() {
     return (
       !!this.props.messages &&
-      this.props.messages.some((message) => message.type === 'error' || message.type === 'newError')
+      this.props.messages.some(
+        (message) => message.type === 'error' || message.type === 'newError'
+      )
     )
   }
 
@@ -238,17 +241,22 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
 
     const { interaction } = this
 
+    const rawLabel = callRenderProp(renderLabel)
+    const label = hasVisibleChildren(rawLabel) ? (
+      <React.Fragment>
+        {rawLabel}
+        {isRequired && (
+          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      rawLabel
+    )
+
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
-        label={
-          <React.Fragment>
-            {callRenderProp(renderLabel)}
-            {isRequired && (
-              <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
-            )}
-          </React.Fragment>
-        }
+        label={label}
         inline={display === 'inline-block'}
         id={this.id}
         elementRef={this.handleRef}

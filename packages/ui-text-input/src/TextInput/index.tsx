@@ -35,6 +35,7 @@ import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -327,17 +328,22 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
     const renderBeforeOrAfter = !!beforeElement || !!afterElement
 
+    const rawLabel = callRenderProp(renderLabel)
+    const label = hasVisibleChildren(rawLabel) ? (
+      <React.Fragment>
+        {rawLabel}
+        {isRequired && (
+          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      rawLabel
+    )
+
     return (
       <FormField
         id={this.id}
-        label={
-          <React.Fragment>
-            {callRenderProp(renderLabel)}
-            {isRequired && (
-              <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
-            )}
-          </React.Fragment>
-        }
+        label={label}
         messagesId={this._messagesId}
         messages={messages}
         inline={display === 'inline-block'}
