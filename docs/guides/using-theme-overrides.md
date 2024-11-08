@@ -180,3 +180,209 @@ type: example
   </div>
 </InstUISettingsProvider>
 ```
+
+### Branding (user customizable theming)
+
+The `canvas` theme has specific theme variables that are meant as a basis to provide end users a customizability of this theme, e.g. a university can use their own colors throughout the UI. This is used by [Canvas's theme editor](https://community.canvaslms.com/t5/Admin-Guide/How-do-I-create-a-theme-for-an-account-using-the-Theme-Editor/ta-p/242).
+
+> `canvas-high-contrast` does not have this functionality, so a11y color contrast requirements (e.g. [WCAG](https://webaim.org/articles/contrast/)) are always met
+
+```ts
+---
+type: example
+---
+const Example = () => {
+  // global stuff
+  const [icBrandPrimary, setIcBrandPrimary] = useState(canvas['ic-brand-primary'])
+  const [icBrandFontColorDark, setIcBrandFontColorDark] = useState(canvas['ic-brand-font-color-dark'])
+  // Link
+  const [icLinkColor, setIcLinkColor] = useState(canvas['ic-link-color'])
+  const [icLinkDecoration, setIcLinkDecoration] = useState(canvas['ic-link-decoration'])
+  // Button
+  const [icBrandButtonPrimaryBgd, setIcBrandButtonPrimaryBgd] = useState(canvas['ic-brand-button--primary-bgd'])
+  const [icBrandButtonPrimaryText, setIcBrandButtonPrimaryText] = useState(canvas['ic-brand-button--primary-text'])
+  const [icBrandButtonSecondaryBgd, setIcBrandButtonSecondaryBgd] = useState(canvas['ic-brand-button--secondary-bgd'])
+  const [icBrandButtonSecondaryText, setIcBrandButtonSecondaryText] = useState(canvas['ic-brand-button--secondary-text'])
+  // SideNavBar
+  const [icBrandGlobalNavBgd, setIcBrandGlobalNavBgd] = useState(canvas['ic-brand-global-nav-bgd'])
+  const [icGlobalNavLinkHover, setIcGlobalNavLinkHover] = useState(canvas['ic-global-nav-link-hover'])
+  const [icBrandGlobalNavIcIconSvgFill, setIcBrandGlobalNavIcIconSvgFill] = useState(canvas['ic-brand-global-nav-ic-icon-svg-fill'])
+  const [icBrandGlobalNavIcIconSvgFillActive, setIcBrandGlobalNavIcIconSvgFillActive] = useState(canvas['ic-brand-global-nav-ic-icon-svg-fill--active'])
+  const [icBrandGlobalNavMenuItemTextColor, setIcBrandGlobalNavMenuItemTextColor] = useState(canvas['ic-brand-global-nav-menu-item__text-color'])
+  const [icBrandGlobalNavMenuItemTextColorActive, setIcBrandGlobalNavMenuItemTextColorActive] = useState(canvas['ic-brand-global-nav-menu-item__text-color--active'])
+
+  return (
+    <div>
+      <h3>Common variables</h3>
+      <Flex gap="small large">
+        <Flex.Item size="50%">
+          <TextInput renderLabel="ic-brand-primary" value={icBrandPrimary} onChange={(e, v) => setIcBrandPrimary(v)}
+  messages={[{text:'used for border/background/shadow/focus colors in many places',type:'hint'}]} />
+        </Flex.Item>
+        <Flex.Item size="50%">
+  <TextInput renderLabel="ic-brand-font-color-dark" value={icBrandFontColorDark} onChange={(e, v) => setIcBrandFontColorDark(v)}
+  messages={[{text:'used in lots of places for text color',type:'hint'}]} />
+        </Flex.Item>
+    </Flex>
+
+      <h3><code>Button</code> branding</h3>
+      <Flex gap="small large">
+        <Flex.Item size="50%">
+          <TextInput renderLabel="ic-brand-button--primary-bgd" value={icBrandButtonPrimaryBgd} onChange={(e, v) => setIcBrandButtonPrimaryBgd(v)}
+  messages={[{text:"Used by 'primary' color buttons for background",type:'hint'}]} />
+          <br/>
+          <TextInput renderLabel="ic-brand-button--primary-text" value={icBrandButtonPrimaryText} onChange={(e, v) => setIcBrandButtonPrimaryText(v)}
+  messages={[{text:"Used by 'primary' color buttons for text color",type:'hint'}]} />
+        </Flex.Item>
+        <Flex.Item size="50%">
+          <TextInput renderLabel="ic-brand-button--secondary-bgd" value={icBrandButtonSecondaryBgd} onChange={(e, v) => setIcBrandButtonSecondaryBgd(v)}
+  messages={[{text:'Unused in InstUI',type:'hint'}]} />
+          <br/>
+          <TextInput renderLabel="ic-brand-button--secondary-text" value={icBrandButtonSecondaryText} onChange={(e, v) => setIcBrandButtonSecondaryText(v)}
+  messages={[{text:'Unused in InstUI',type:'hint'}]}/>
+        </Flex.Item>
+      </Flex>
+      <div style={{display: 'flex', gap: '2rem', marginTop: '3rem', flexDirection: 'column'}}>
+        <InstUISettingsProvider theme={{...canvas, ...{
+          'ic-brand-primary': icBrandPrimary,
+          'ic-brand-font-color-dark': icBrandFontColorDark,
+          'ic-link-color': icLinkColor,
+          'ic-link-decoration': icLinkDecoration,
+          'ic-brand-button--primary-bgd': icBrandButtonPrimaryBgd,
+          'ic-brand-button--primary-text': icBrandButtonPrimaryText,
+          'ic-brand-button--secondary-bgd': icBrandButtonSecondaryBgd,
+          'ic-brand-button--secondary-text': icBrandButtonSecondaryText,
+          'ic-brand-global-nav-bgd': icBrandGlobalNavBgd,
+          'ic-global-nav-link-hover': icGlobalNavLinkHover,
+          'ic-brand-global-nav-ic-icon-svg-fill': icBrandGlobalNavIcIconSvgFill,
+          'ic-brand-global-nav-ic-icon-svg-fill--active': icBrandGlobalNavIcIconSvgFillActive,
+          'ic-brand-global-nav-menu-item__text-color': icBrandGlobalNavMenuItemTextColor,
+          'ic-brand-global-nav-menu-item__text-color--active': icBrandGlobalNavMenuItemTextColorActive
+        }}}>
+          <hr style={{width:'100%'}}/>
+          <Flex gap="small large">
+            <Flex.Item size="50%">
+              <Button color="primary">I'm a 'primary' color button</Button>
+              <TextInput renderLabel="TextInput" placeholder="ic-brand-primary sets focus color"/>
+            </Flex.Item>
+            <Flex.Item size="50%">
+              <Button color="secondary">I'm a 'secondary' color button</Button>
+              <TextArea label="TextArea" placeholder="ic-brand-primary sets focus color"/>
+            </Flex.Item>
+          </Flex>
+
+          <Tabs>
+            <Tabs.Panel id="tabA" renderTitle="Tab A" isSelected={true}></Tabs.Panel>
+            <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled></Tabs.Panel>
+            <Tabs.Panel id="tabC" renderTitle="Tab C"></Tabs.Panel>
+            <Tabs.Panel id="tabD" renderTitle="Tab D"></Tabs.Panel>
+          </Tabs>
+
+          <hr style={{width:'100%'}}/>
+          <h3>Link colors used by <code>Link</code> and <code>Billboard</code>:</h3>
+          <Flex gap="small large">
+            <Flex.Item size="50%">
+              <TextInput renderLabel="ic-link-color" value={icLinkColor} onChange={(e, v) => setIcLinkColor(v)}
+              messages={[{text:'Used for non-inverse Link and clickable Billboard',type:'hint'}]} />
+            </Flex.Item>
+            <Flex.Item size="50%">
+              <TextInput renderLabel="ic-link-decoration" value={icLinkDecoration} onChange={(e, v) => setIcLinkDecoration(v)}
+              messages={[{text:'Unused in InstUI',type:'hint'}]}/>
+            </Flex.Item>
+          </Flex>
+          <hr style={{width:'100%'}}/>
+          <Flex gap="small large">
+            <Flex.Item size="50%">
+              <Link href="https://instructure.github.io/instructure-ui/">normal link</Link>
+            </Flex.Item>
+            <Flex.Item size="50%">
+              <View background="primary-inverse" as="div">
+              <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">inverse link</Link>
+              </View>
+            </Flex.Item>
+          </Flex>
+          <Flex gap="small large">
+            <Flex.Item size="50%">
+              <Billboard
+              margin="small"
+              message="Billboard with link"
+              href="http://instructure.com"
+              hero={(size) => <IconGradebookLine size={size} />}
+              />
+            </Flex.Item>
+            <Flex.Item size="50%">
+              <Billboard
+              margin="small"
+              message="Billboard without link"
+              hero={(size) => <IconGradebookLine size={size} />}
+              />
+            </Flex.Item>
+          </Flex>
+
+          <hr style={{width:'100%'}}/>
+          <h3><code>SideNavBar</code> branding</h3>
+          <Flex gap="small large">
+            <Flex.Item size="50%">
+              <TextInput renderLabel="ic-brand-global-nav-bgd" value={icBrandGlobalNavBgd} onChange={(e, v) => setIcBrandGlobalNavBgd(v)}/>
+              <TextInput renderLabel="ic-global-nav-link-hover" value={icGlobalNavLinkHover} onChange={(e, v) => setIcGlobalNavLinkHover(v)}/>
+              <TextInput renderLabel="ic-brand-global-nav-ic-icon-svg-fill" value={icBrandGlobalNavIcIconSvgFill} onChange={(e, v) => setIcBrandGlobalNavIcIconSvgFill(v)}/>
+            </Flex.Item>
+            <Flex.Item size="50%">
+              <TextInput renderLabel="ic-brand-global-nav-menu-item__text-color" value={icBrandGlobalNavMenuItemTextColor} onChange={(e, v) => setIcBrandGlobalNavMenuItemTextColor(v)}/>
+              <TextInput renderLabel="ic-brand-global-nav-menu-item__text-color--active" value={icBrandGlobalNavMenuItemTextColorActive} onChange={(e, v) => setIcBrandGlobalNavMenuItemTextColorActive(v)}/>
+              <TextInput renderLabel="ic-brand-global-nav-ic-icon-svg-fill--active" value={icBrandGlobalNavIcIconSvgFillActive} onChange={(e, v) => setIcBrandGlobalNavIcIconSvgFillActive(v)}/>
+            </Flex.Item>
+          </Flex>
+          <hr style={{width:'100%'}}/>
+          <SideNavBar
+            label="Main navigation"
+            toggleLabel={{
+              expandedLabel: 'Minimize SideNavBar',
+                minimizedLabel: 'Expand SideNavBar'
+            }}
+          >
+            <SideNavBar.Item
+              icon={<IconUserLine />}
+              label={<ScreenReaderContent>Home</ScreenReaderContent>}
+              href="#"
+            />
+            <SideNavBar.Item
+              icon={<Avatar name="Ziggy Marley" size="x-small" src={avatarSquare} showBorder="always"/>}
+              label="Account"
+              onClick={() => { this.loadSubNav('account') }}
+            />
+            <SideNavBar.Item
+              icon={<IconAdminLine />}
+              label="Admin"
+              href="#"
+                />
+                <SideNavBar.Item selected
+              icon={<IconDashboardLine />}
+              label="Dashboard"
+              href="#"
+            />
+            <SideNavBar.Item
+              icon={<Badge count={99}
+              formatOutput={function (formattedCount) {
+                    return (
+                      <AccessibleContent alt={`You have ${formattedCount} unread messages.`}>
+                    {formattedCount}
+                    </AccessibleContent>
+                  )
+                  }}
+                ><IconInboxLine /></Badge>}
+              label="Inbox"
+              href="#"
+            />
+            <SideNavBar.Item icon={<IconUserLine />}
+              label="Supercalifragilistic"
+              href="#" />
+          </SideNavBar>
+        </InstUISettingsProvider>
+      </div>
+    </div>
+  )
+}
+
+render(<Example/>)
+```

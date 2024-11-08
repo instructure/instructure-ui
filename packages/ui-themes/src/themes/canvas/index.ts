@@ -31,17 +31,19 @@ const key = 'canvas'
 
 const brandVariables = {
   /* Defaults for Canvas account branding variables: */
+  // used for border/background/shadow colors in many places
   'ic-brand-primary': colors?.contrasts?.blue4570,
+  // used in lots of places for text color
   'ic-brand-font-color-dark': colors?.contrasts?.grey125125,
-
+  // used by Link and links in Billboard
   'ic-link-color': colors?.contrasts?.blue4570,
   'ic-link-decoration': 'none',
-
+  // Used by BaseButton and its subcomponents
   'ic-brand-button--primary-bgd': colors?.contrasts?.blue4570,
   'ic-brand-button--primary-text': colors?.contrasts?.white1010,
-  'ic-brand-button--secondary-bgd': colors?.contrasts?.grey125125,
-  'ic-brand-button--secondary-text': colors?.contrasts?.white1010,
-
+  'ic-brand-button--secondary-bgd': colors?.contrasts?.grey125125, // unused!
+  'ic-brand-button--secondary-text': colors?.contrasts?.white1010, // unused!
+  // these are used only by SideNavBar
   'ic-brand-global-nav-bgd': colors?.contrasts?.grey100100,
   'ic-global-nav-link-hover': colors?.contrasts?.grey125125,
   'ic-brand-global-nav-ic-icon-svg-fill': colors?.contrasts?.white1010,
