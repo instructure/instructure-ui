@@ -52,7 +52,7 @@ type ColorPickerOwnProps = {
    *
    * FormMessage[]: Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   checkContrast?: {
@@ -164,7 +164,7 @@ type ColorPickerOwnProps = {
    *
    * FormMessage[]: Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   renderInvalidColorMessage?: (hexCode: string) => FormMessage[]
@@ -174,7 +174,7 @@ type ColorPickerOwnProps = {
    *
    * FormMessage[]: Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   renderIsRequiredMessage?: () => FormMessage[]
@@ -184,7 +184,7 @@ type ColorPickerOwnProps = {
    *
    * FormMessage[]: Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   renderMessages?: (
