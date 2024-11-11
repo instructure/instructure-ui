@@ -308,7 +308,9 @@ const generateStyle = (
       ...arrowBaseStyles,
       display: 'block',
       borderWidth: `calc(${componentTheme?.arrowSize} + ${componentTheme?.arrowBorderWidth})`,
-      borderColor: borderColor || arrowBackGroundVariants[background!],
+      borderColor:
+        borderColor ||
+        arrowBackGroundVariants[background!],
       ...arrowPlacementVariant.main,
       ...getArrowCorrections(placement!, componentTheme),
       '&::after': {
