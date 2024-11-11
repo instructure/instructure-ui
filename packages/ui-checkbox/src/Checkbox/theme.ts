@@ -22,38 +22,24 @@
  * SOFTWARE.
  */
 
-import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
-import { FormFieldMessageTheme } from '@instructure/shared-types'
+import type { Theme } from '@instructure/ui-themes'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): FormFieldMessageTheme => {
-  const { colors, typography, key: themeName, spacing } = theme
+const generateComponentTheme = (theme: Theme): any => {
+  const { colors, forms, spacing } = theme
 
-  const themeSpecificStyle: ThemeSpecificStyle<FormFieldMessageTheme> = {
-    canvas: {
-      colorHint: theme['ic-brand-font-color-dark']
-    }
-  }
-
-  const componentVariables: FormFieldMessageTheme = {
-    colorHint: colors?.textDarkest,
-    colorError: colors?.textDanger,
-    colorSuccess: colors?.textSuccess,
-
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-    fontSize: typography?.fontSizeSmall,
-    lineHeight: typography?.lineHeight,
-    errorIconMarginRight: spacing.xxSmall
+  const componentVariables: any = {
+    requiredInvalidColor: colors?.textDanger,
+    toggleErrorInsetWidth: `calc(${forms?.inputHeightSmall}*1.5 + ${spacing?.small})`,
+    checkErrorInsetWidth: `calc(1.25em + ${spacing?.xSmall})`
   }
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    ...componentVariables
   }
 }
 

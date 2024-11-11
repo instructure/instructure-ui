@@ -54,6 +54,9 @@ const generateStyle = (
   }
 
   return {
+    requiredInvalid: {
+      color: componentTheme.requiredInvalidColor
+    },
     textArea: {
       label: 'textArea',
       all: 'initial',
@@ -85,9 +88,10 @@ const generateStyle = (
         transform: 'scale(1)',
         opacity: 1
       },
-      '&[aria-invalid], &[aria-invalid]:focus, &[aria-invalid]:focus + [class$=-textArea__outline]': {
-        borderColor: componentTheme.errorBorderColor
-      },
+      '&[aria-invalid], &[aria-invalid]:focus, &[aria-invalid]:focus + [class$=-textArea__outline]':
+        {
+          borderColor: componentTheme.errorBorderColor
+        },
       '&::placeholder': {
         color: componentTheme.placeholderColor
       },

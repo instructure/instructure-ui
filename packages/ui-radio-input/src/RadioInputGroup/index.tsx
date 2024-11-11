@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
@@ -33,9 +34,15 @@ import {
   pickProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { RadioInput } from '../RadioInput'
 import type { RadioInputProps } from '../RadioInput/props'
+
+import { jsx, withStyle } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps, propTypes } from './props'
@@ -48,6 +55,7 @@ category: components
 ---
 **/
 @withDeterministicId()
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
@@ -88,6 +96,12 @@ class RadioInputGroup extends Component<
 
   get hasMessages() {
     return !!this.props.messages && this.props.messages.length > 0
+  }
+
+  get invalid() {
+    return !!this.props.messages?.find(
+      (m) => m.type === 'newError' || m.type === 'error'
+    )
   }
 
   handleChange: RadioInputProps['onChange'] = (e) => {
@@ -145,14 +159,24 @@ class RadioInputGroup extends Component<
   }
 
   render() {
-    const { variant, layout, description } = this.props
+    const { variant, layout, description, isRequired, styles } = this.props
+
+    const descriptionWithRequired = hasVisibleChildren(description) ? (
+      <React.Fragment>
+        {description}
+        {isRequired && description && (
+          <span css={this.invalid ? styles?.invalidAsterisk : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      description
+    )
 
     return (
       <FormFieldGroup
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
-        description={description}
-        // TODO: split out toggle variant into its own component
+        description={descriptionWithRequired}
         layout={
           layout === 'columns' && variant === 'toggle' ? 'stacked' : layout
         } // toggles already display in cols
@@ -162,6 +186,7 @@ class RadioInputGroup extends Component<
         startAt={variant === 'toggle' ? 'small' : undefined}
         messagesId={this._messagesId}
         elementRef={this.handleRef}
+        role="radiogroup"
       >
         {this.renderChildren()}
       </FormFieldGroup>

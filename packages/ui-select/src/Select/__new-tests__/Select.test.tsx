@@ -103,7 +103,6 @@ describe('<Select />', () => {
       <Select renderLabel="Choose an option" onInputChange={() => {}}>
         {getOptions()}
       </Select>
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
     )
     const input = container.querySelector('input')
     expect(input).toHaveAttribute('role', 'combobox')
@@ -291,7 +290,7 @@ describe('<Select />', () => {
 
     it('should render required when isRequired={true}', () => {
       render(<Select renderLabel="Choose an option" isRequired />)
-      const input = screen.getByLabelText('Choose an option')
+      const input = screen.getByLabelText('Choose an option *')
 
       expect(input).toHaveAttribute('required')
     })

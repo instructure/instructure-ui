@@ -35,6 +35,7 @@ import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -179,7 +180,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     return (
       !!this.props.messages &&
       this.props.messages.findIndex((message) => {
-        return message.type === 'error'
+        return message.type === 'error' || message.type === 'newError'
       }) >= 0
     )
   }
@@ -314,6 +315,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       renderAfterInput,
       messages,
       inputContainerRef,
+      isRequired,
       styles
     } = this.props
 
@@ -326,10 +328,22 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
     const renderBeforeOrAfter = !!beforeElement || !!afterElement
 
+    const rawLabel = callRenderProp(renderLabel)
+    const label = hasVisibleChildren(rawLabel) ? (
+      <React.Fragment>
+        {rawLabel}
+        {isRequired && (
+          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      rawLabel
+    )
+
     return (
       <FormField
         id={this.id}
-        label={callRenderProp(renderLabel)}
+        label={label}
         messagesId={this._messagesId}
         messages={messages}
         inline={display === 'inline-block'}

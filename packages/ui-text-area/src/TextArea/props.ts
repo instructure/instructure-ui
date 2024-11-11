@@ -72,7 +72,7 @@ type TextAreaOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: React.ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -131,7 +131,7 @@ type TextAreaProps =
     WithDeterministicIdProps
 
 type TextAreaStyle = ComponentStyle<
-  'textArea' | 'textAreaLayout' | 'textAreaOutline'
+  'textArea' | 'textAreaLayout' | 'textAreaOutline' | 'requiredInvalid'
 >
 
 const propTypes: PropValidators<PropKeys> = {

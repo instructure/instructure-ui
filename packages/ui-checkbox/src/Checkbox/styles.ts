@@ -36,12 +36,21 @@ import type { ComponentTheme } from '@instructure/shared-types'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  _componentTheme: ComponentTheme,
+  componentTheme: ComponentTheme,
   props: CheckboxProps
 ): CheckboxStyle => {
   const { inline, disabled } = props
 
   return {
+    requiredInvalid: {
+      color: componentTheme.requiredInvalidColor
+    },
+    indentedError: {
+      paddingLeft: componentTheme.checkErrorInsetWidth
+    },
+    indentedToggleError: {
+      paddingLeft: componentTheme.toggleErrorInsetWidth
+    },
     checkbox: {
       label: 'checkbox',
       position: 'relative',
@@ -56,6 +65,10 @@ const generateStyle = (
         verticalAlign: 'middle',
         width: 'auto'
       })
+    },
+    // this container is added to reduce the clickable area of the checkbox to the actual checkbox and label
+    container: {
+      width: 'fit-content'
     },
     input: {
       label: 'checkbox__input',

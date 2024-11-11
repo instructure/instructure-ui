@@ -27,6 +27,8 @@ import { Component } from 'react'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
+import { IconWarningSolid } from '@instructure/ui-icons'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -78,8 +80,15 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
     const { children, styles } = this.props
 
     return this.props.variant !== 'screenreader-only' ? (
-      <span css={styles?.formFieldMessage} ref={this.handleRef}>
-        {children}
+      <span css={{ display: 'flex' }}>
+        {this.props.variant === 'newError' && (
+          <span css={styles?.errorIcon}>
+            <IconWarningSolid color="error" />
+          </span>
+        )}
+        <span css={styles?.formFieldMessage} ref={this.handleRef}>
+          {children}
+        </span>
       </span>
     ) : (
       <ScreenReaderContent elementRef={this.handleRef}>

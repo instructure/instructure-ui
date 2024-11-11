@@ -31,6 +31,7 @@
     "@instructure/ui-form-field": "9.8.1",
     "@instructure/ui-prop-types": "9.8.1",
     "@instructure/ui-react-utils": "9.8.1",
+    "@instructure/ui-a11y-utils": "9.8.1",
     "@instructure/ui-testable": "9.8.1",
     "@instructure/ui-utils": "9.8.1",
     "@instructure/uid": "9.8.1",

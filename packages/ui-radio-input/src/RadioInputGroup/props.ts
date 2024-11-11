@@ -28,14 +28,23 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  RadioInputGroupTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputGroupOwnProps = {
+  /**
+   * This prop sets the
+   * [same low level HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group)
+   *
+   * **Must be unique across the DOM** otherwise groups will interfere with
+   * each other
+   */
   name: string
 
   description: React.ReactNode
@@ -48,7 +57,7 @@ type RadioInputGroupOwnProps = {
   /**
    * the selected value (must be accompanied by an `onChange` prop)
    */
-  value?: string | number // TODO: controllable( PropTypes.oneOfType([PropTypes.string, PropTypes.number]) )
+  value?: string | number
 
   /**
    * when used with the `value` prop, the component will not control its own state
@@ -65,12 +74,12 @@ type RadioInputGroupOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['error', 'newError', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
 
-  variant?: 'simple' | 'toggle' // TODO: split toggle out to its own component
+  variant?: 'simple' | 'toggle'
 
   size?: 'small' | 'medium' | 'large'
 
@@ -80,6 +89,11 @@ type RadioInputGroupOwnProps = {
    * any children (ones that aren't `RadioInput` are passed through)
    */
   children?: React.ReactNode
+
+  /**
+   * Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change.
+   */
+  isRequired?: boolean
 }
 
 type PropKeys = keyof RadioInputGroupOwnProps
@@ -87,11 +101,15 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
-  OtherHTMLAttributes<RadioInputGroupOwnProps> & WithDeterministicIdProps
+  WithStyleProps<RadioInputGroupTheme, RadioInputGroupStyle> &
+  OtherHTMLAttributes<RadioInputGroupOwnProps> &
+  WithDeterministicIdProps
 
 type RadioInputGroupState = {
   value?: string | number
 }
+
+type RadioInputGroupStyle = ComponentStyle<'invalidAsterisk'>
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,
@@ -107,7 +125,8 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   variant: PropTypes.oneOf(['simple', 'toggle']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
+  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
+  isRequired: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -125,5 +144,5 @@ const allowedProps: AllowedPropKeys = [
   'layout'
 ]
 
-export type { RadioInputGroupProps, RadioInputGroupState }
+export type { RadioInputGroupProps, RadioInputGroupState, RadioInputGroupStyle }
 export { propTypes, allowedProps }

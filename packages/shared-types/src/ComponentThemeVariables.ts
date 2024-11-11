@@ -316,6 +316,7 @@ export type CheckboxFacadeTheme = {
   iconSizeSmall: string
   iconSizeMedium: string
   iconSizeLarge: string
+  errorBorderColor: Colors['borderDanger']
 }
 
 export type ToggleFacadeTheme = {
@@ -343,6 +344,7 @@ export type ToggleFacadeTheme = {
   labelFontSizeSmall: Typography['fontSizeSmall']
   labelFontSizeMedium: Typography['fontSizeMedium']
   labelFontSizeLarge: Typography['fontSizeLarge']
+  errorBorderColor: Colors['borderDanger']
 }
 
 export type CodeEditorTheme = {
@@ -584,6 +586,7 @@ export type FormFieldMessageTheme = {
   fontWeight: Typography['fontWeightNormal']
   fontSize: Typography['fontSizeSmall']
   lineHeight: Typography['lineHeight']
+  errorIconMarginRight: Spacing['xxSmall']
 }
 
 export type FormFieldMessagesTheme = {
@@ -879,6 +882,7 @@ export type NumberInputTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['textDanger']
 }
 
 export type OptionsItemTheme = {
@@ -1084,6 +1088,10 @@ export type RadioInputTheme = {
   toggleSmallFontSize: Typography['fontSizeXSmall']
   toggleMediumFontSize: Typography['fontSizeSmall']
   toggleLargeFontSize: Typography['fontSizeMedium']
+}
+
+export type RadioInputGroupTheme = {
+  invalidAsteriskColor: Colors['textDanger']
 }
 
 export type RangeInputTheme = {
@@ -1364,6 +1372,7 @@ export type TextAreaTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['textDanger']
 }
 
 export type TextInputTheme = {
@@ -1388,6 +1397,7 @@ export type TextInputTheme = {
   mediumHeight: Forms['inputHeightMedium']
   largeFontSize: Typography['fontSizeLarge']
   largeHeight: Forms['inputHeightLarge']
+  requiredInvalidColor: Colors['textDanger']
 }
 
 export type ToggleDetailsTheme = {
@@ -1744,6 +1754,7 @@ export interface ThemeVariables {
   ProgressCircle: ProgressCircleTheme
   RangeInput: RangeInputTheme
   RadioInput: RadioInputTheme
+  RadioInputGroup: RadioInputGroupTheme
   RatingIcon: RatingIconTheme
   'Rating.Icon': RatingIconTheme
   Select: SelectTheme

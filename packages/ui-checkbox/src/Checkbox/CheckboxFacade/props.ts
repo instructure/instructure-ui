@@ -40,6 +40,10 @@ type CheckboxFacadeOwnProps = {
    * Visual state showing that child checkboxes are a combination of checked and unchecked
    */
   indeterminate?: boolean
+  /**
+   * Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly.
+   */
+  invalid?: boolean
 }
 
 type PropKeys = keyof CheckboxFacadeOwnProps
@@ -57,7 +61,8 @@ const propTypes: PropValidators<PropKeys> = {
   focused: PropTypes.bool,
   hovered: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  indeterminate: PropTypes.bool
+  indeterminate: PropTypes.bool,
+  invalid: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
