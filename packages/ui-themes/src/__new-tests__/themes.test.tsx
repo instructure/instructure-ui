@@ -21,12 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canvas, canvasHighContrast } from '..'
+import { canvas, canvasHighContrast, canvasThemeLocal } from '..'
 import '@testing-library/jest-dom'
+import { ThemeRegistry } from '@instructure/theme-registry'
 
 const themes = [canvas, canvasHighContrast]
 
 describe('themes are backwards compatible', () => {
+  it('Local themes are not affected by ".use()"', async () => {
+    canvas.use({
+      overrides: {
+        colors: {
+          primitives: {
+            white: 'blue'
+          }
+        }
+      }
+    })
+    expect(ThemeRegistry.getCurrentTheme()?.colors?.primitives?.white).toEqual(
+      'blue'
+    )
+    expect(canvasThemeLocal?.colors?.primitives?.white).toEqual('#FFFFFF')
+  })
+
   describe("should be able to access theme variables with 'theme.variables.x'", () => {
     for (const theme of themes) {
       it(`${theme.key}`, () => {

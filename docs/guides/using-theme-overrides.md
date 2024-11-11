@@ -27,23 +27,7 @@ type: embed
 
 ### How theming works in InstUI
 
-The theming system in InstUI has three levels:
-
-**The global theme**
-
-Global themes are useful when you have multiple React Application trees and you want to set up themes and overrides on a more global level than application level theming.
-This basically means you don't necessarily have to wrap each application tree with an [InstUISettingsProvider](/#InstUISettingsProvider) to use themes.
-InstUI leverages the [ThemeRegistry](/#ThemeRegistry) package to achieve global theming.
-
-```jsx
----
-type: code
----
-// app/init sets the global theme
-import canvas from '@instructure/ui-themes'
-
-canvas.use()
-```
+The theming system in InstUI has these levels:
 
 **The application level theme**
 
@@ -95,41 +79,27 @@ const generateStyle = (componentTheme) => {
 }
 ```
 
-### Global theme overrides
-
-In order to globally register and override themes, simply import the theme you wish to use and call `.use({ overrides })` on it:
-
-```js
----
-type: code
----
-import ReactDOM from "react-dom"
-import { canvas } from "@instructure/ui-themes"
-
-canvas.use({
-  overrides: {
-    colors: {
-      primitives: {
-        green45: "red"
-      }
-    }
-  }
-})
-
-ReactDOM.render(
-  <div>
-    ...your application code goes here...
-  </div>
-)
-```
-
-**Note**: globally overriding themes like this means that every InstUI component will use that theme, unless they are wrapped inside an `<InstUISettingsProvider/>`.
-
-You can see more examples [here](/#using-theme-overrides/#using-theme-overrides-examples).
-
 ### Application level theme overrides
 
 `<InstUISettingsProvider/>` accepts full theme objects and override objects too.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={{
+    ...canvas,
+    ...{
+      typography: { fontFamily: 'monospace' }
+    }
+  }}>
+  <div>
+    <Heading level="h3" margin="small small">
+      I should have monospace font family from the override
+    </Heading>
+  </div>
+</InstUISettingsProvider>
+```
 
 #### Full themes
 
@@ -214,27 +184,27 @@ const Example = () => {
   return (
     <div>
       <h3>Common variables</h3>
-      <Flex gap="small large">
-        <Flex.Item size="50%">
+      <Flex gap="small">
+        <Flex.Item size="45%">
           <TextInput renderLabel="ic-brand-primary" value={icBrandPrimary} onChange={(e, v) => setIcBrandPrimary(v)}
-  messages={[{text:'used for border/background/shadow/focus colors in many places',type:'hint'}]} />
+  messages={[{text:'used for border/background/focus/shadow/.. colors in many places',type:'hint'}]} />
         </Flex.Item>
-        <Flex.Item size="50%">
+        <Flex.Item size="45%">
   <TextInput renderLabel="ic-brand-font-color-dark" value={icBrandFontColorDark} onChange={(e, v) => setIcBrandFontColorDark(v)}
   messages={[{text:'used in lots of places for text color',type:'hint'}]} />
         </Flex.Item>
     </Flex>
 
       <h3><code>Button</code> branding</h3>
-      <Flex gap="small large">
-        <Flex.Item size="50%">
+      <Flex gap="small">
+        <Flex.Item size="45%">
           <TextInput renderLabel="ic-brand-button--primary-bgd" value={icBrandButtonPrimaryBgd} onChange={(e, v) => setIcBrandButtonPrimaryBgd(v)}
   messages={[{text:"Used by 'primary' color buttons for background",type:'hint'}]} />
           <br/>
           <TextInput renderLabel="ic-brand-button--primary-text" value={icBrandButtonPrimaryText} onChange={(e, v) => setIcBrandButtonPrimaryText(v)}
   messages={[{text:"Used by 'primary' color buttons for text color",type:'hint'}]} />
         </Flex.Item>
-        <Flex.Item size="50%">
+        <Flex.Item size="45%">
           <TextInput renderLabel="ic-brand-button--secondary-bgd" value={icBrandButtonSecondaryBgd} onChange={(e, v) => setIcBrandButtonSecondaryBgd(v)}
   messages={[{text:'Unused in InstUI',type:'hint'}]} />
           <br/>
@@ -260,13 +230,17 @@ const Example = () => {
           'ic-brand-global-nav-menu-item__text-color--active': icBrandGlobalNavMenuItemTextColorActive
         }}}>
           <hr style={{width:'100%'}}/>
-          <Flex gap="small large">
-            <Flex.Item size="50%">
-              <Button color="primary">I'm a 'primary' color button</Button>
+          <Flex gap="large">
+            <Flex.Item size="45%">
+              <Badge count={15} countUntil={100} margin="0 medium 0 0">
+                <Button color="primary">I'm a 'primary' color button</Button>
+              </Badge>
               <TextInput renderLabel="TextInput" placeholder="ic-brand-primary sets focus color"/>
             </Flex.Item>
-            <Flex.Item size="50%">
-              <Button color="secondary">I'm a 'secondary' color button</Button>
+            <Flex.Item size="45%">
+              <Badge count={15} countUntil={100} margin="0 medium 0 0">
+                <Button color="secondary">I'm a 'secondary' color button</Button>
+              </Badge>
               <TextArea label="TextArea" placeholder="ic-brand-primary sets focus color"/>
             </Flex.Item>
           </Flex>
@@ -280,18 +254,18 @@ const Example = () => {
 
           <hr style={{width:'100%'}}/>
           <h3>Link colors used by <code>Link</code> and <code>Billboard</code>:</h3>
-          <Flex gap="small large">
-            <Flex.Item size="50%">
+          <Flex gap="small">
+            <Flex.Item size="45%">
               <TextInput renderLabel="ic-link-color" value={icLinkColor} onChange={(e, v) => setIcLinkColor(v)}
               messages={[{text:'Used for non-inverse Link and clickable Billboard',type:'hint'}]} />
             </Flex.Item>
-            <Flex.Item size="50%">
+            <Flex.Item size="45%">
               <TextInput renderLabel="ic-link-decoration" value={icLinkDecoration} onChange={(e, v) => setIcLinkDecoration(v)}
               messages={[{text:'Unused in InstUI',type:'hint'}]}/>
             </Flex.Item>
           </Flex>
           <hr style={{width:'100%'}}/>
-          <Flex gap="small large">
+          <Flex gap="small">
             <Flex.Item size="50%">
               <Link href="https://instructure.github.io/instructure-ui/">normal link</Link>
             </Flex.Item>
@@ -301,8 +275,8 @@ const Example = () => {
               </View>
             </Flex.Item>
           </Flex>
-          <Flex gap="small large">
-            <Flex.Item size="50%">
+          <Flex gap="small">
+            <Flex.Item size="40%">
               <Billboard
               margin="small"
               message="Billboard with link"
@@ -310,7 +284,7 @@ const Example = () => {
               hero={(size) => <IconGradebookLine size={size} />}
               />
             </Flex.Item>
-            <Flex.Item size="50%">
+            <Flex.Item size="40%">
               <Billboard
               margin="small"
               message="Billboard without link"
@@ -321,13 +295,13 @@ const Example = () => {
 
           <hr style={{width:'100%'}}/>
           <h3><code>SideNavBar</code> branding</h3>
-          <Flex gap="small large">
-            <Flex.Item size="50%">
+          <Flex gap="large small">
+            <Flex.Item size="45%">
               <TextInput renderLabel="ic-brand-global-nav-bgd" value={icBrandGlobalNavBgd} onChange={(e, v) => setIcBrandGlobalNavBgd(v)}/>
               <TextInput renderLabel="ic-global-nav-link-hover" value={icGlobalNavLinkHover} onChange={(e, v) => setIcGlobalNavLinkHover(v)}/>
               <TextInput renderLabel="ic-brand-global-nav-ic-icon-svg-fill" value={icBrandGlobalNavIcIconSvgFill} onChange={(e, v) => setIcBrandGlobalNavIcIconSvgFill(v)}/>
             </Flex.Item>
-            <Flex.Item size="50%">
+            <Flex.Item size="45%">
               <TextInput renderLabel="ic-brand-global-nav-menu-item__text-color" value={icBrandGlobalNavMenuItemTextColor} onChange={(e, v) => setIcBrandGlobalNavMenuItemTextColor(v)}/>
               <TextInput renderLabel="ic-brand-global-nav-menu-item__text-color--active" value={icBrandGlobalNavMenuItemTextColorActive} onChange={(e, v) => setIcBrandGlobalNavMenuItemTextColorActive(v)}/>
               <TextInput renderLabel="ic-brand-global-nav-ic-icon-svg-fill--active" value={icBrandGlobalNavIcIconSvgFillActive} onChange={(e, v) => setIcBrandGlobalNavIcIconSvgFillActive(v)}/>
@@ -386,3 +360,53 @@ const Example = () => {
 
 render(<Example/>)
 ```
+
+### (DEPRECATED) Global (window-level) theming
+
+**The global theme**
+
+> This feature is deprecated because it needs to use the [global object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) that pierces application borders, so it causes issues with running multiple versions of InstUI in a single page.
+
+Global themes are useful when you have multiple React Application trees, and you want to set up themes and overrides on a more global level than application level theming.
+This basically means you don't necessarily have to wrap each application tree with an [InstUISettingsProvider](/#InstUISettingsProvider) to use themes.
+InstUI leverages the [ThemeRegistry](/#ThemeRegistry) package to achieve global theming.
+
+```jsx
+---
+type: code
+---
+// app/init sets the global theme
+import canvas from '@instructure/ui-themes'
+
+canvas.use()
+```
+
+### (DEPRECATED) Global theme overrides
+
+In order to globally register and override themes, simply import the theme you wish to use and call `.use({ overrides })` on it:
+
+```js
+---
+type: code
+---
+import ReactDOM from "react-dom"
+import { canvas } from "@instructure/ui-themes"
+
+canvas.use({
+  overrides: {
+    colors: {
+      primitives: {
+        green45: "red"
+      }
+    }
+  }
+})
+
+ReactDOM.render(
+  <div>
+    ...your application code goes here...
+  </div>
+)
+```
+
+**Note**: globally overriding themes like this means that every InstUI component will use that theme, unless they are wrapped inside an `<InstUISettingsProvider/>`.

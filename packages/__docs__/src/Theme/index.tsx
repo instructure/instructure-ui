@@ -279,7 +279,7 @@ class Theme extends Component<ThemeProps> {
           id={`${themeKey}ApplicationUsage`}
           content={`
 ### Usage (before mounting your application)
-##### Global theming
+##### (DEPRECATED) Global theming
 ${'```javascript\n \
 ---\n \
 type: code\n \

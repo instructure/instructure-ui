@@ -59,6 +59,11 @@ export type CanvasTheme = BaseTheme & {
   key: 'canvas'
 } & typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
 
+/**
+ * Canvas theme without the `use` function and `variables` prop.
+ * Not affected by global theme overrides (`.use()` function).
+ * Will be default in the next major version of InstUI
+ */
 const __theme: CanvasTheme = {
   key,
   ...sharedThemeTokens,
@@ -69,5 +74,4 @@ const __theme: CanvasTheme = {
 const theme = ThemeRegistry.registerTheme(__theme)
 
 export default theme
-// theme without the use() function and `variables` prop
 export { __theme as canvasThemeLocal }
