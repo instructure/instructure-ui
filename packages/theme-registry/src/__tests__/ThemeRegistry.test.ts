@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { BaseTheme } from '@instructure/shared-types'
+import type { BaseTheme } from '@instructure/shared-types'
 import { expect } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '../ThemeRegistry'
 const defaultRegistry = ThemeRegistry.getRegistry()

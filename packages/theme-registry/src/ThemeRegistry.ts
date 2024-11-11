@@ -53,9 +53,14 @@ type Registry<T extends RegisteredTheme> = {
 }
 
 type RegisteredTheme<T extends BaseTheme = BaseTheme> = T & {
-  // DEPRECATED. Use InstUISettingsProvider instead
+  /**
+   * @deprecated since version 10
+   * @param arg the theme overrides
+   */
   use(arg?: { overrides: DeepPartial<BaseThemeVariables> }): void
-  // DEPRECATED. Read its variables dirrectly from the theme object.
+  /**
+   * @deprecated since version 10
+   */
   variables: BaseThemeVariables
 }
 
@@ -118,7 +123,8 @@ function validateRegistry(registry: Registry<RegisteredTheme<BaseTheme>>) {
 
 /**
  * Get the global theme registry.
- * @return {Registry}  the theme registry
+ * @deprecated since version 10
+ * @return The theme registry
  * @module getRegistry
  */
 function getRegistry(): Registry<RegisteredTheme> {
@@ -127,6 +133,7 @@ function getRegistry(): Registry<RegisteredTheme> {
 
 /**
  * Set the global theme registry.
+ * @deprecated since version 10
  * @param {Registry} registry - the registry to set/replace the current registry with.
  * @returns {void}
  * @module setRegistry
@@ -137,6 +144,7 @@ function setRegistry(registry: Registry<RegisteredTheme>): void {
 
 /**
  * Clear/reset the global theme registry.
+ * @deprecated since version 10
  * @module clearRegistry
  * @returns {void}
  */
@@ -146,6 +154,7 @@ function clearRegistry(): void {
 
 /**
  * Get the activated theme object.
+ * @deprecated since version 10
  * @return {RegisteredTheme} the default theme object
  * @module getCurrentTheme
  */
@@ -205,6 +214,11 @@ function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
     key,
     description,
     ...rest,
+    /**
+     * Activate a global theme with the given overrides.
+     * @deprecated since version 10
+     * @param arg
+     */
     use(arg?: { overrides: DeepPartial<BaseThemeVariables> }): void {
       activateTheme(key, arg?.overrides || {})
     }
@@ -226,6 +240,7 @@ function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
 
 /**
  * Registers the passed theme into the ThemeRegistry.
+ * @deprecated since version 10
  * @param {BaseTheme} theme - the theme object to register into the ThemeRegistry
  * @returns {RegisteredTheme} If the given theme is already in the ThemeRegistry then simply return that theme.
  * Otherwise, returns the theme with a wrapper around it, so it can be `.use()`-ed to activate the given theme from the registry.
@@ -253,6 +268,9 @@ function registerTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
   }
 }
 
+/**
+ * @deprecated since version 10
+ */
 const ThemeRegistry = {
   getRegistry,
   clearRegistry,

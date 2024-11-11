@@ -33,6 +33,12 @@ export type CanvasHighContrastTheme = BaseTheme & {
   key: 'canvas-high-contrast'
 } & typeof sharedThemeTokens & { colors: Colors }
 
+/**
+ * Canvas high contrast theme without the `use` function and `variables` prop.
+ * Not affected by global theme overrides (`.use()` function).
+ *
+ * Will be default in the next major version of InstUI
+ */
 const __theme: CanvasHighContrastTheme = {
   key,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',

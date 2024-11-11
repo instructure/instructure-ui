@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import {
+  canvas,
+  canvasHighContrast,
+  canvasThemeLocal
+} from '@instructure/ui-themes'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '@instructure/theme-registry'
 
@@ -215,6 +219,37 @@ describe('useTheme hook', () => {
         }
       })
     })
+    it('should use local themes correctly', async () => {
+      const callback = spy()
+      const theme = ThemeRegistry.registerTheme(canvas)
+      theme.use()
+      await mount(
+        <InstUISettingsProvider theme={canvasThemeLocal}>
+          <InstUISettingsProvider
+            theme={{
+              themeOverrides: {
+                colors: {
+                  primitives: {
+                    white: 'red'
+                  }
+                }
+              }
+            }}
+          >
+            <ExampleComponent callback={callback}></ExampleComponent>
+          </InstUISettingsProvider>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWithMatch({
+        ...canvasThemeLocal,
+        colors: {
+          primitives: {
+            white: 'red'
+          }
+        }
+      })
+    })
   })
   describe('without using InstUISettingsProvider', () => {
     it('should use theme from global ThemeRegistry', async () => {
@@ -348,6 +383,80 @@ describe('useTheme hook', () => {
             red12: 'brown',
             green12: 'pink',
             blue12: 'magenta'
+          }
+        }
+      })
+    })
+    it('local themes should work correctly', async () => {
+      const [cb1, cb2, cb3, cb4] = Array(6)
+        .fill(0)
+        .map(() => spy())
+
+      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
+      theme.use({
+        overrides: {
+          colors: {
+            primitives: {
+              red12: 'red',
+              green12: 'yellow',
+              blue12: 'magenta'
+            }
+          }
+        }
+      })
+
+      await mount(
+        <>
+          {/* no provider -> canvasHighContrast theme */}
+          <ExampleComponent callback={cb1}></ExampleComponent>
+          <InstUISettingsProvider theme={canvas}>
+            {/* theme provided -> canvas */}
+            <ExampleComponent callback={cb2}></ExampleComponent>
+            <InstUISettingsProvider theme={canvasThemeLocal}>
+              {/* theme provided -> canvasThemeLocal theme */}
+              <ExampleComponent callback={cb3}></ExampleComponent>
+              <InstUISettingsProvider
+                theme={{
+                  colors: {
+                    primitives: {
+                      red12: 'orange'
+                    }
+                  },
+                  themeOverrides: {
+                    colors: {
+                      primitives: {
+                        green12: 'olive'
+                      }
+                    }
+                  }
+                }}
+              >
+                {/* theme provided -> canvas theme with overrides */}
+                <ExampleComponent callback={cb4}></ExampleComponent>
+              </InstUISettingsProvider>
+            </InstUISettingsProvider>
+          </InstUISettingsProvider>
+        </>
+      )
+
+      expect(cb1).to.have.been.calledWithMatch({
+        ...theme,
+        colors: {
+          primitives: {
+            red12: 'red',
+            green12: 'yellow',
+            blue12: 'magenta'
+          }
+        }
+      })
+      expect(cb2).to.have.been.calledWith(canvas)
+      expect(cb3).to.have.been.calledWith(canvasThemeLocal)
+      expect(cb4).to.have.been.calledWithMatch({
+        ...canvasThemeLocal,
+        colors: {
+          primitives: {
+            red12: 'orange',
+            green12: 'olive'
           }
         }
       })

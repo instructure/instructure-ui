@@ -18,14 +18,6 @@ npm install @instructure/ui-themes
 
 ##### Before mounting (rendering) your React application:
 
-- global theming:
-
-  ```js
-  import canvas from '@instructure/ui-themes'
-
-  canvas.use()
-  ```
-
 - application level theming:
 
   ```jsx
@@ -39,9 +31,17 @@ npm install @instructure/ui-themes
   )
   ```
 
+- (DEPRECATED) global theming:
+
+  ```js
+  import canvas from '@instructure/ui-themes'
+
+  canvas.use()
+  ```
+
 ##### To override the theme variables:
 
-- globally:
+- (DEPRECATED) globally:
 
   ```js
   import canvas from '@instructure/ui-themes'
