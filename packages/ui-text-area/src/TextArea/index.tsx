@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { FormField } from '@instructure/ui-form-field'
 import {
   addEventListener,
@@ -42,6 +42,7 @@ import {
   pickProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -283,7 +284,7 @@ class TextArea extends Component<TextAreaProps> {
     return (
       this.props.messages &&
       this.props.messages.findIndex((message) => {
-        return message.type === 'error'
+        return message.type === 'error' || message.type === 'newError'
       }) >= 0
     )
   }
@@ -313,7 +314,8 @@ class TextArea extends Component<TextAreaProps> {
       height,
       maxHeight,
       textareaRef,
-      resize
+      resize,
+      styles
     } = this.props
 
     const props = omitProps(this.props, TextArea.allowedProps)
@@ -352,10 +354,21 @@ class TextArea extends Component<TextAreaProps> {
       />
     )
 
+    const label = hasVisibleChildren(this.props.label) ? (
+      <React.Fragment>
+        {this.props.label}
+        {required && (
+          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      this.props.label
+    )
+
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
-        label={this.props.label}
+        label={label}
         vAlign="top"
         id={this.id}
         elementRef={(el) => {

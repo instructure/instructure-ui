@@ -57,6 +57,7 @@ const generateComponentTheme = (theme: Theme): CheckboxFacadeTheme => {
     checkedBorderColor: colors?.borderDarkest,
 
     hoverBorderColor: colors?.borderDarkest,
+    errorBorderColor: colors?.borderDanger,
 
     focusBorderColor: colors?.borderBrand,
     focusBorderWidth: borders?.widthMedium,

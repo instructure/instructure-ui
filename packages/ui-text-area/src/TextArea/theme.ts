@@ -47,6 +47,8 @@ const generateComponentTheme = (theme: Theme): TextAreaTheme => {
 
     background: colors?.backgroundLightest,
 
+    requiredInvalidColor: colors?.textDanger,
+
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     borderTopColor: colors?.borderMedium,

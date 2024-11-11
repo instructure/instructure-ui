@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: ToggleFacadeTheme,
   props: ToggleFacadeProps
 ): ToggleFacadeStyle => {
-  const { size, checked, focused, labelPlacement } = props
+  const { size, checked, focused, labelPlacement, invalid } = props
 
   const labelPlacementVariants = {
     start: {
@@ -81,7 +81,6 @@ const generateStyle = (
       alignItems: 'center',
       ...(labelPlacement === 'top' && { display: 'block' })
     },
-
     facade: {
       label: 'toggleFacade__facade',
       background: componentTheme.background,
@@ -92,7 +91,11 @@ const generateStyle = (
       position: 'relative',
       borderRadius: '3rem',
       verticalAlign: 'middle',
-      boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${componentTheme.borderColor}`,
+      boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${
+        invalid && !checked
+          ? componentTheme.errorBorderColor
+          : componentTheme.borderColor
+      }`,
       height: componentTheme.toggleSize,
       width: `calc(${componentTheme.toggleSize} * 1.5)`,
       ...labelPlacementVariants[labelPlacement!].facade,

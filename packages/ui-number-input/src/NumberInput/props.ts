@@ -64,7 +64,7 @@ type NumberInputOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -161,11 +161,6 @@ type NumberInputOwnProps = {
    * The text alignment of the input.
    */
   textAlign?: 'start' | 'center'
-
-  /**
-   * sets the input type to string and allows string as value
-   */
-  allowStringValue?: boolean
 }
 
 type NumberInputState = {
@@ -202,6 +197,7 @@ type NumberInputStyle = ComponentStyle<
   | 'inputWidth'
   | 'inputContainer'
   | 'input'
+  | 'requiredInvalid'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -224,8 +220,7 @@ const propTypes: PropValidators<PropKeys> = {
   onIncrement: PropTypes.func,
   onKeyDown: PropTypes.func,
   inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
-  textAlign: PropTypes.oneOf(['start', 'center']),
-  allowStringValue: PropTypes.bool
+  textAlign: PropTypes.oneOf(['start', 'center'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -248,8 +243,7 @@ const allowedProps: AllowedPropKeys = [
   'onIncrement',
   'onKeyDown',
   'inputMode',
-  'textAlign',
-  'allowStringValue'
+  'textAlign'
 ]
 
 export type {

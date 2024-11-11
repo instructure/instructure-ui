@@ -53,6 +53,8 @@ const generateComponentTheme = (theme: Theme): NumberInputTheme => {
     color: colors?.textDarkest,
     background: colors?.backgroundLightest,
 
+    requiredInvalidColor: colors?.textDanger,
+
     padding: `0 ${spacing?.small}`,
 
     arrowsContainerWidth: '2rem',

@@ -48,7 +48,7 @@ type FormFieldLayoutOwnProps = {
   /**
    * Array of objects with shape: `{
    *   text: React.ReactNode,
-   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   *   type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -67,6 +67,7 @@ type FormFieldLayoutOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  isGroup?: boolean
 }
 
 type PropKeys = keyof FormFieldLayoutOwnProps
@@ -75,9 +76,12 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldLayoutProps = FormFieldLayoutOwnProps &
   WithStyleProps<null, FormFieldLayoutStyle> &
-  OtherHTMLAttributes<FormFieldLayoutOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<FormFieldLayoutOwnProps> &
+  WithDeterministicIdProps
 
-type FormFieldLayoutStyle = ComponentStyle<'formFieldLayout'>
+type FormFieldLayoutStyle = ComponentStyle<
+  'formFieldLayout' | 'groupErrorMessage'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -92,7 +96,8 @@ const propTypes: PropValidators<PropKeys> = {
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  isGroup: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

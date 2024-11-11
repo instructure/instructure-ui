@@ -39,6 +39,7 @@ import {
   getInteraction,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -74,8 +75,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     size: 'medium',
     display: 'block',
     textAlign: 'start',
-    inputMode: 'numeric',
-    allowStringValue: false
+    inputMode: 'numeric'
   }
 
   state: NumberInputState = { hasFocus: false }
@@ -102,7 +102,9 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   get invalid() {
     return (
       !!this.props.messages &&
-      this.props.messages.some((message) => message.type === 'error')
+      this.props.messages.some(
+        (message) => message.type === 'error' || message.type === 'newError'
+      )
     )
   }
 
@@ -234,15 +236,27 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       showArrows,
       value,
       width,
-      allowStringValue
+      styles
     } = this.props
 
     const { interaction } = this
 
+    const rawLabel = callRenderProp(renderLabel)
+    const label = hasVisibleChildren(rawLabel) ? (
+      <React.Fragment>
+        {rawLabel}
+        {isRequired && (
+          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+        )}
+      </React.Fragment>
+    ) : (
+      rawLabel
+    )
+
     return (
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
-        label={callRenderProp(renderLabel)}
+        label={label}
         inline={display === 'inline-block'}
         id={this.id}
         elementRef={this.handleRef}
@@ -260,7 +274,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
               css={this.props.styles?.input}
               aria-invalid={this.invalid ? 'true' : undefined}
               id={this.id}
-              type={allowStringValue ? 'text' : 'number'}
+              type="number"
               inputMode={this.props.inputMode}
               placeholder={placeholder}
               ref={this.handleInputRef}

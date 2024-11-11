@@ -79,6 +79,7 @@ type CheckboxOwnProps = {
   variant?: 'simple' | 'toggle'
   inline?: boolean
   labelPlacement?: 'top' | 'start' | 'end'
+  isRequired?: boolean
 }
 
 type PropKeys = keyof CheckboxOwnProps
@@ -87,9 +88,18 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CheckboxProps = CheckboxOwnProps &
   WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle> &
-  OtherHTMLAttributes<CheckboxOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<CheckboxOwnProps> &
+  WithDeterministicIdProps
 
-type CheckboxStyle = ComponentStyle<'checkbox' | 'input' | 'control'>
+type CheckboxStyle = ComponentStyle<
+  | 'checkbox'
+  | 'input'
+  | 'control'
+  | 'container'
+  | 'requiredInvalid'
+  | 'indentedError'
+  | 'indentedToggleError'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -110,7 +120,8 @@ const propTypes: PropValidators<PropKeys> = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   variant: PropTypes.oneOf(['simple', 'toggle']),
   inline: PropTypes.bool,
-  labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
+  labelPlacement: PropTypes.oneOf(['top', 'start', 'end']),
+  isRequired: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

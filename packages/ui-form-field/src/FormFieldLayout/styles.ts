@@ -41,6 +41,9 @@ const generateStyle = (
   const { inline } = props
 
   return {
+    groupErrorMessage: {
+      margin: '0.5rem 0',
+    },
     formFieldLayout: {
       label: 'formFieldLayout',
       all: 'initial',
