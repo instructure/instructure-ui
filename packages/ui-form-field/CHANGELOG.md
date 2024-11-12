@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.9.0](https://github.com/instructure/instructure-ui/compare/v9.8.1...v9.9.0) (2024-11-12)
+
+
+### Features
+
+* **many:** backport new error messages from v10 ([9003d19](https://github.com/instructure/instructure-ui/commit/9003d19cc66022dfdeecc2e2c8c8d9d2a7300e3f))
+
+
+
+
+
 ## [9.8.1](https://github.com/instructure/instructure-ui/compare/v9.8.0...v9.8.1) (2024-10-28)
 
 **Note:** Version bump only for package @instructure/ui-form-field
