@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-instructure-ui",
   "private": true,
-  "version": "9.8.1",
+  "version": "9.9.0",
   "description": "An eslint configuration for Instructure UI",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/pkg-utils": "9.8.1",
+    "@instructure/pkg-utils": "9.9.0",
     "eslint-module-utils": "^2.8.1",
     "eslint-plugin-import": "^2.29.1"
   },

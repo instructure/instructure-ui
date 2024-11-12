@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-react-utils",
-  "version": "9.8.1",
+  "version": "9.9.0",
   "description": "A React utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "9.8.1",
+    "@instructure/ui-babel-preset": "9.9.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^15.0.7",
     "vitest": "^2.0.2"
@@ -30,11 +30,11 @@
   "dependencies": {
     "@babel/runtime": "^7.24.5",
     "@emotion/is-prop-valid": "^1.2.2",
-    "@instructure/console": "9.8.1",
-    "@instructure/shared-types": "9.8.1",
-    "@instructure/ui-decorator": "9.8.1",
-    "@instructure/ui-dom-utils": "9.8.1",
-    "@instructure/ui-utils": "9.8.1",
+    "@instructure/console": "9.9.0",
+    "@instructure/shared-types": "9.9.0",
+    "@instructure/ui-decorator": "9.9.0",
+    "@instructure/ui-dom-utils": "9.9.0",
+    "@instructure/ui-utils": "9.9.0",
     "hoist-non-react-statics": "^3.3.2",
     "prop-types": "^15.8.1"
   },
