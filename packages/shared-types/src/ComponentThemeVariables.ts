@@ -949,6 +949,10 @@ export type PaginationPageInputTheme = {
   inputWidth: string
 }
 
+export type PaginationTheme = {
+  pageIndicatorGap: Spacing['xSmall']
+}
+
 export type PillTheme = {
   fontFamily: Typography['fontFamily']
   padding: string | 0
