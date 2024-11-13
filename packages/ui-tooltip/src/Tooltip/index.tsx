@@ -175,6 +175,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         onBlur={this.handleBlur}
         elementRef={this.handleRef}
         shouldCloseOnDocumentClick={false}
+        shouldCloseOnEscape
       >
         <span id={this._id} css={styles?.tooltip} role="tooltip">
           {/* TODO: figure out how to add a ref to this */}

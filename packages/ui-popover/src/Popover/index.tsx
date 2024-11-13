@@ -181,7 +181,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
       // manage its FocusRegion internally rather than registering it with
       // the FocusRegionManager via Dialog
       this._focusRegion = new FocusRegion(this._contentElement, {
-        shouldCloseOnEscape: false,
+        shouldCloseOnEscape: this.props.shouldCloseOnEscape,
         shouldCloseOnDocumentClick: false,
         onDismiss: this.hide
       })
