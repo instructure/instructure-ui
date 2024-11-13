@@ -23,28 +23,50 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { render, waitFor, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import type { MockInstance } from 'vitest'
+import { vi } from 'vitest'
 
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { RadioInput } from '../index'
-import { RadioInputLocator } from '../RadioInputLocator'
 
-describe('<RadioInput />', async () => {
+describe('<RadioInput />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('renders an input with type "radio"', async () => {
-    await mount(
+    const { container } = render(
       <RadioInput label="fake label" value="someValue" name="someName" />
     )
 
-    const radioInput = await RadioInputLocator.find()
-    const input = await radioInput.find('input[type="radio"]')
+    const input = container.querySelector('input')
 
-    expect(input).to.exist()
+    expect(input).toBeInTheDocument()
+    expect(input).toHaveAttribute('type', 'radio')
   })
 
-  describe('events', async () => {
+  describe('events', () => {
     it('responds to onClick event', async () => {
-      const onClick = stub()
+      const onClick = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -53,20 +75,19 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.click()
+      userEvent.click(input!)
 
-      await wait(() => {
-        expect(onClick).to.have.been.called()
+      await waitFor(() => {
+        expect(onClick).toHaveBeenCalled()
       })
     })
 
     it('does not respond to onClick event when disabled', async () => {
-      const onClick = stub()
+      const onClick = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           disabled
           label="fake label"
@@ -76,20 +97,20 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.click()
+      fireEvent.click(input!)
 
-      await wait(() => {
-        expect(onClick).to.not.have.been.called()
+      await waitFor(() => {
+        expect(onClick).not.toHaveBeenCalled()
+        expect(input).toBeDisabled()
       })
     })
 
     it('does not respond to onClick event when readOnly', async () => {
-      const onClick = stub()
+      const onClick = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           readOnly
           label="fake label"
@@ -99,20 +120,20 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.click()
+      fireEvent.click(input!)
 
-      await wait(() => {
-        expect(onClick).to.not.have.been.called()
+      await waitFor(() => {
+        expect(onClick).not.toHaveBeenCalled()
+        expect(input).toBeDisabled()
       })
     })
 
     it('responds to onChange event', async () => {
-      const onChange = stub()
+      const onChange = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -121,20 +142,19 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.click()
+      userEvent.click(input!)
 
-      await wait(() => {
-        expect(onChange).to.have.been.called()
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalled()
       })
     })
 
     it('does not respond to onChange event when disabled', async () => {
-      const onChange = stub()
+      const onChange = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           disabled
           label="fake label"
@@ -144,20 +164,19 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.click()
+      fireEvent.click(input!)
 
-      await wait(() => {
-        expect(onChange).to.not.have.been.called()
+      await waitFor(() => {
+        expect(onChange).not.toHaveBeenCalled()
       })
     })
 
     it('does not respond to onChange event when readOnly', async () => {
-      const onChange = stub()
+      const onChange = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           readOnly
           label="fake label"
@@ -167,20 +186,19 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.click()
+      fireEvent.click(input!)
 
-      await wait(() => {
-        expect(onChange).to.not.have.been.called()
+      await waitFor(() => {
+        expect(onChange).not.toHaveBeenCalled()
       })
     })
 
     it('responds to onBlur event', async () => {
-      const onBlur = stub()
+      const onBlur = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -189,20 +207,19 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      const input = container.querySelector('input')
 
-      await input.focusOut()
+      fireEvent.focusOut(input!)
 
-      await wait(() => {
-        expect(onBlur).to.have.been.called()
+      await waitFor(() => {
+        expect(onBlur).toHaveBeenCalled()
       })
     })
 
     it('responds to onFocus event', async () => {
-      const onFocus = stub()
+      const onFocus = vi.fn()
 
-      await mount(
+      const { container } = render(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -210,19 +227,17 @@ describe('<RadioInput />', async () => {
           onFocus={onFocus}
         />
       )
+      const input = container.querySelector('input')
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
+      fireEvent.focus(input!)
 
-      await input.focus()
-
-      await wait(() => {
-        expect(onFocus).to.have.been.called()
+      await waitFor(() => {
+        expect(onFocus).toHaveBeenCalled()
       })
     })
 
     it('sets input to checked when selected', async () => {
-      await mount(
+      const { container } = render(
         <RadioInput
           checked
           label="fake label"
@@ -230,42 +245,37 @@ describe('<RadioInput />', async () => {
           name="someName"
         />
       )
+      const input = container.querySelector('input')
 
-      const radioInput = await RadioInputLocator.find()
-      const input = await radioInput.find('input[type="radio"]')
-
-      await wait(() => {
-        expect(input).to.be.checked()
-      })
+      expect(input).toHaveAttribute('checked')
     })
 
     it('focuses with the focus helper', async () => {
-      let ref: RadioInput | undefined
+      let ref: RadioInput
 
-      await mount(
+      const { container } = render(
         <RadioInput
           label="fake label"
           value="someValue"
           name="someName"
-          //@ts-expect-error TODO this is coming from ReactComponentWrapper
-          componentRef={(el) => (ref = el)}
+          // @ts-expect-error this is managed by the testing framework
+          ref={(el) => (ref = el)}
         />
       )
 
-      const radioInput = await RadioInputLocator.find()
+      const input = container.querySelector('input')
 
-      ref?.focus()
+      ref!.focus()
 
-      await wait(() => {
-        // @ts-expect-error This is intentionally overridden in assertions.ts
-        expect(radioInput).to.contain.focus()
+      await waitFor(() => {
+        expect(document.activeElement).toBe(input)
       })
     })
   })
 
-  describe('for a11y', async () => {
-    it('simple variant should meet standards', async () => {
-      await mount(
+  describe('for a11y', () => {
+    it('simple variant should meet a11y standards', async () => {
+      const { container } = render(
         <RadioInput
           variant="simple"
           label="fake label"
@@ -273,10 +283,9 @@ describe('<RadioInput />', async () => {
           name="someName"
         />
       )
+      const axeCheck = await runAxeCheck(container)
 
-      const radioInput = await RadioInputLocator.find()
-
-      expect(await radioInput.accessible())
+      expect(axeCheck).toBe(true)
     })
   })
 })
