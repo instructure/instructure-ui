@@ -97,7 +97,8 @@ class ContextView extends Component<ContextViewProps> {
       stacking,
       style,
       textAlign,
-      styles
+      styles,
+      borderColor
     } = this.props
 
     return (
@@ -118,7 +119,10 @@ class ContextView extends Component<ContextViewProps> {
           display="block"
           borderRadius="medium"
           borderWidth="small"
-          borderColor={background === 'default' ? 'primary' : 'transparent'}
+          borderColor={
+            borderColor ||
+            (background === 'default' ? 'primary' : 'transparent')
+          }
           background={background === 'default' ? 'primary' : 'primary-inverse'}
           withVisualDebug={debug}
           height={height}

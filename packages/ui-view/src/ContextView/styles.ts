@@ -126,10 +126,12 @@ const getArrowCorrections = (
 const getArrowPlacementVariant = (
   placement: PlacementPropValues,
   background: ContextViewProps['background'],
-  theme: ContextViewTheme
+  theme: ContextViewTheme,
+  props: ContextViewProps
 ) => {
   const transformedPlacement = mirrorPlacement(placement, ' ')
   const isInversed = background === 'inverse'
+  const { borderColor } = props
 
   if (endPlacements.includes(transformedPlacement)) {
     return {
@@ -140,9 +142,11 @@ const getArrowPlacementVariant = (
         marginTop: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
         borderInlineEndWidth: '0',
         borderInlineEndColor: 'transparent',
-        borderInlineStartColor: isInversed
-          ? theme?.arrowBorderColorInverse
-          : theme?.arrowBorderColor,
+        borderInlineStartColor:
+          borderColor ||
+          (isInversed
+            ? theme?.arrowBorderColorInverse
+            : theme?.arrowBorderColor),
         borderTopColor: 'transparent',
         borderBottomColor: 'transparent',
         borderInlineStartWidth: theme?.arrowSize
@@ -173,9 +177,11 @@ const getArrowPlacementVariant = (
         marginTop: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
         borderInlineStartWidth: '0',
         borderInlineStartColor: 'transparent',
-        borderInlineEndColor: isInversed
-          ? theme?.arrowBorderColorInverse
-          : theme?.arrowBorderColor,
+        borderInlineEndColor:
+          borderColor ||
+          (isInversed
+            ? theme?.arrowBorderColorInverse
+            : theme?.arrowBorderColor),
         borderTopColor: 'transparent',
         borderBottomColor: 'transparent',
         borderInlineEndWidth: theme?.arrowSize
@@ -261,7 +267,7 @@ const generateStyle = (
   componentTheme: ContextViewTheme,
   props: ContextViewProps
 ): ContextViewStyle => {
-  const { placement, background } = props
+  const { placement, background, borderColor } = props
 
   const arrowBaseStyles = {
     content: '""',
@@ -282,7 +288,8 @@ const generateStyle = (
   const arrowPlacementVariant = getArrowPlacementVariant(
     placement!,
     background,
-    componentTheme
+    componentTheme,
+    props
   )
 
   return {
@@ -301,7 +308,7 @@ const generateStyle = (
       ...arrowBaseStyles,
       display: 'block',
       borderWidth: `calc(${componentTheme?.arrowSize} + ${componentTheme?.arrowBorderWidth})`,
-      borderColor: arrowBackGroundVariants[background!],
+      borderColor: borderColor || arrowBackGroundVariants[background!],
       ...arrowPlacementVariant.main,
       ...getArrowCorrections(placement!, componentTheme),
       '&::after': {
