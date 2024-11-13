@@ -26,7 +26,7 @@
 /** @jsxFrag React.Fragment */
 import React, { Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
@@ -389,9 +389,19 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       <span>
         <span css={styles?.label}>{label}</span>
         <span>
-          <Tooltip renderTip={tooltip}>
-            <IconInfoLine tabIndex={-1} />
-          </Tooltip>
+          <InstUISettingsProvider
+            theme={{
+              componentOverrides: {
+                BaseButton: {
+                  smallHeight: 'auto'
+                }
+              }
+            }}
+          >
+            <Tooltip renderTip={<span aria-hidden={true}>{tooltip}</span>}>
+              <IconButton withBackground={false} withBorder={false} screenReaderLabel={tooltip} size="small" shape="circle" width="auto" renderIcon={IconInfoLine}/>
+            </Tooltip>
+          </InstUISettingsProvider>
         </span>
       </span>
     ) : (
