@@ -47,6 +47,18 @@ import type {
   StyleObject
 } from '@instructure/emotion'
 
+type BorderColor =
+  | string
+  | 'transparent'
+  | 'primary'
+  | 'secondary'
+  | 'brand'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'alert'
+  | 'danger'
+
 type ViewOwnProps = {
   /**
    * The element to render as the component root, `span` by default
@@ -84,18 +96,10 @@ type ViewOwnProps = {
    */
   textAlign?: 'start' | 'center' | 'end'
   /**
-   * Sets the color of the View border
+   * Sets the color of the View border.
+   * Accepts a color string value (e.g., "#FFFFFF", "red") or one of the predefined theme color options.
    */
-  borderColor?:
-    | 'transparent'
-    | 'primary'
-    | 'secondary'
-    | 'brand'
-    | 'info'
-    | 'success'
-    | 'warning'
-    | 'alert'
-    | 'danger'
+  borderColor?: BorderColor
   /**
    * Designates the background style of the `<View />`
    */
@@ -234,17 +238,7 @@ const propTypes: PropValidators<PropKeys> = {
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   borderWidth: ThemeablePropTypes.borderWidth,
   borderRadius: ThemeablePropTypes.borderRadius,
-  borderColor: PropTypes.oneOf([
-    'transparent',
-    'primary',
-    'secondary',
-    'brand',
-    'info',
-    'success',
-    'warning',
-    'alert',
-    'danger'
-  ]),
+  borderColor: PropTypes.string,
   background: PropTypes.oneOf([
     'transparent',
     'primary',
@@ -321,4 +315,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export { propTypes, allowedProps }
-export type { ViewProps, ViewOwnProps, ViewStyle }
+export type { ViewProps, ViewOwnProps, ViewStyle, BorderColor }

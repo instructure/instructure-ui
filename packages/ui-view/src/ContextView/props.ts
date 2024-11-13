@@ -61,6 +61,7 @@ type ContextViewOwnProps = {
   shadow?: Shadow
   stacking?: Stacking
   placement?: PlacementPropValues
+  borderColor?: string
 }
 
 type PropKeys = keyof ContextViewOwnProps
@@ -141,7 +142,13 @@ const propTypes: PropValidators<PropKeys> = {
    * Activate an outline around the component to make building your
    * layout easier
    */
-  debug: PropTypes.bool
+  debug: PropTypes.bool,
+
+  /**
+   * Sets the color of the ContextView border.
+   * Accepts a color string value (e.g., "#FFFFFF", "red")
+   */
+  borderColor: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -161,7 +168,8 @@ const allowedProps: AllowedPropKeys = [
   'stacking',
   'background',
   'placement',
-  'debug'
+  'debug',
+  'borderColor'
 ]
 
 export type { ContextViewProps, ContextViewStyle }

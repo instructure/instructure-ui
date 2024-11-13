@@ -36,7 +36,7 @@ import type {
   PartialRecord,
   ViewTheme
 } from '@instructure/shared-types'
-import type { ViewProps, ViewStyle } from './props'
+import type { ViewProps, ViewStyle, BorderColor } from './props'
 
 const getBorderStyle = ({
   borderRadius,
@@ -468,7 +468,7 @@ const generateStyle = (
     end: { textAlign: 'end' }
   }
 
-  const borderColorVariants = {
+  const borderColorVariants: Record<BorderColor, { borderColor: string }> = {
     transparent: {
       borderColor: componentTheme.borderColorTransparent
     },
@@ -596,7 +596,9 @@ const generateStyle = (
       ...(withBorder(props)
         ? {
             borderStyle: componentTheme.borderStyle,
-            ...borderColorVariants[borderColor!]
+            ...(borderColorVariants[borderColor!] || {
+              borderColor: borderColor
+            })
           }
         : {}),
       ...(shouldUseFocusStyles ? focusStyles : {})
