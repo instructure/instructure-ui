@@ -116,14 +116,14 @@ class InlineSVG extends Component<InlineSVGProps> {
   }
 
   get labelledBy() {
-    const ids = []
+    const ids: string[] = []
 
     if (this.props.title) {
-      ids.push(this.titleId)
+      ids.push(this.titleId as string)
     }
 
     if (this.props.description) {
-      ids.push(this.descId)
+      ids.push(this.descId as string)
     }
 
     return ids.length > 0 ? ids.join(' ') : undefined
@@ -150,7 +150,6 @@ class InlineSVG extends Component<InlineSVGProps> {
       title,
       description,
       focusable,
-      children,
       src,
       styles,
       ...props
