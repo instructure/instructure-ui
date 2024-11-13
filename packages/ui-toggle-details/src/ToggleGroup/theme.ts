@@ -23,39 +23,21 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import { TableColHeaderTheme } from '@instructure/shared-types'
+import { ToggleGroupTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): TableColHeaderTheme => {
-  const { typography, colors, borders, spacing } = theme
+const generateComponentTheme = (theme: Theme): ToggleGroupTheme => {
+  const { colors } = theme
 
-  const componentVariables: TableColHeaderTheme = {
-    fontSize: typography?.fontSizeMedium,
-    fontFamily: typography?.fontFamily,
-
-    color: colors?.contrasts?.grey125125,
-    background: colors?.contrasts?.white1010,
-
-    borderColor: colors?.contrasts?.grey1214,
-
-    lineHeight: typography?.lineHeightCondensed,
-    padding: `${spacing?.xSmall} ${spacing?.small}`,
-
-    focusOutlineColor: colors?.contrasts?.blue4570,
-    focusOutlineWidth: borders?.widthMedium,
-    focusOutlineStyle: borders?.style,
-
-    unSortedIconColor: colors?.contrasts?.grey3045,
-    sortedIconColor: colors?.contrasts?.blue4570
+  const componentVariables: ToggleGroupTheme = {
+    borderColor: colors?.contrasts?.grey3045
   }
-
   return {
     ...componentVariables
   }
 }
-
 export default generateComponentTheme

@@ -55,10 +55,14 @@ import type { ViewProps, ContextViewProps } from '@instructure/ui-view'
 import type { PositionProps } from '@instructure/ui-position'
 import type { DialogProps } from '@instructure/ui-dialog'
 
+import { withStyle } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import type { PopoverProps, PopoverState } from './props'
 import { allowedProps, propTypes } from './props'
 import type { Renderable } from '@instructure/shared-types'
-
 /**
 ---
 category: components
@@ -67,6 +71,7 @@ tags: overlay, portal, dialog
 **/
 @withDeterministicId()
 @textDirectionContextConsumer()
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Popover extends Component<PopoverProps, PopoverState> {
   static readonly componentId = 'Popover'
@@ -558,6 +563,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
       }
 
       const { placement } = this.state
+      const { styles } = this.props
 
       if (this.props.withArrow) {
         viewProps = {
@@ -570,7 +576,11 @@ class Popover extends Component<PopoverProps, PopoverState> {
               : placement
         } as Partial<ContextViewProps> & { ref: any }
 
-        return <ContextView {...viewProps}>{content}</ContextView>
+        return (
+          <ContextView {...viewProps} borderColor={styles?.borderColor}>
+            {content}
+          </ContextView>
+        )
       } else {
         viewProps = {
           ...viewProps,
@@ -579,7 +589,11 @@ class Popover extends Component<PopoverProps, PopoverState> {
           ...(color === 'primary-inverse' && { borderColor: 'transparent' })
         } as Partial<ViewProps> & { ref: any }
 
-        return <View {...viewProps}>{content}</View>
+        return (
+          <View {...viewProps} borderColor={styles?.borderColor}>
+            {content}
+          </View>
+        )
       }
     } else {
       return null

@@ -54,7 +54,7 @@ const generateComponentTheme = (theme: Theme): TabsTabTheme => {
 
     secondaryColor: colors?.contrasts?.grey125125,
     secondarySelectedBackground: colors?.contrasts?.white1010,
-    secondarySelectedBorderColor: colors?.contrasts?.grey1214,
+    secondarySelectedBorderColor: colors?.contrasts?.grey3045,
 
     zIndex: stacking?.above
   }

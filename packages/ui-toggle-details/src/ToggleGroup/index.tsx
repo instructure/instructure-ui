@@ -45,11 +45,17 @@ import { testable } from '@instructure/ui-testable'
 import type { ToggleGroupProps } from './props'
 import { allowedProps, propTypes } from './props'
 
+import { withStyle } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
@@ -97,6 +103,10 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     this._shouldTransition = true
   }
 
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.state)
+  }
+
   renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
     return Icon ? callRenderProp(Icon) : null
@@ -130,11 +140,13 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   }
 
   renderDetails(detailsProps: { id: string }) {
+    const { styles } = this.props
     return (
       <View
         {...detailsProps}
         display="block"
         borderWidth="small none none none"
+        borderColor={styles?.borderColor}
       >
         {this.props.transition && this._shouldTransition ? (
           <Transition transitionOnMount in type="fade">
@@ -149,7 +161,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
 
   render() {
     const Element = getElementType(ToggleGroup, this.props)
-
+    const { styles } = this.props
     return (
       <Expandable {...pickProps(this.props, Expandable.allowedProps)}>
         {({ expanded, getToggleProps, getDetailsProps }) => {
@@ -162,6 +174,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
               display="block"
               borderRadius="medium"
               background="primary"
+              borderColor={styles?.borderColor}
             >
               <Flex
                 padding={

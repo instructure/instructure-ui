@@ -143,7 +143,8 @@ const generateStyle = (
       height: '100%',
       float: 'right',
       clear: 'right',
-      paddingRight: '1.75rem'
+      paddingRight: '1.75rem',
+      color: componentTheme.labelInfoColor
     },
     label: {
       label: 'menuItem__label',

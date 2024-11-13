@@ -74,7 +74,10 @@ type ContextViewProps = ContextViewOwnProps &
 
 type ContextViewStyle = ComponentStyle<
   'contextView' | 'contextView__content' | 'contextView__arrow'
-> & { arrowSize: string | 0; arrowBorderWidth: string | 0 }
+> & {
+  arrowSize: string | 0
+  arrowBorderWidth: string | 0
+}
 
 const propTypes: PropValidators<PropKeys> = {
   /**
