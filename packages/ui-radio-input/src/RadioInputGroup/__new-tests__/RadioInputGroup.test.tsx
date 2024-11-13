@@ -23,30 +23,51 @@
  */
 
 import React from 'react'
-import { expect, mount, wait, stub, match } from '@instructure/ui-test-utils'
+import { render, waitFor, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import type { MockInstance } from 'vitest'
+import { vi } from 'vitest'
 
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { RadioInput } from '../../RadioInput'
 import { RadioInputGroup } from '../index'
 
-import { RadioInputGroupLocator } from '../RadioInputGroupLocator'
+describe('<RadioInputGroup />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
-describe('<RadioInputGroup />', async () => {
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('adds the name props to all RadioInput types', async () => {
-    await mount(
+    const { container } = render(
       <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
-    const inputs = await group.findAll('input[name="fruit"]')
-    expect(inputs.length).to.equal(3)
+
+    const inputs = await container.querySelectorAll('input[name="fruit"]')
+
+    expect(inputs.length).toBe(3)
   })
 
   it('requires an `onChange` prop with a `value` prop', async () => {
-    const consoleError = stub(console, 'error')
-    await mount(
+    render(
       <RadioInputGroup name="fruit" description="Select a fruit" value="banana">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
@@ -54,16 +75,19 @@ describe('<RadioInputGroup />', async () => {
       </RadioInputGroup>
     )
 
-    expect(consoleError).to.have.been.calledWithMatch(
-      match.string,
-      match.string,
-      `provided a 'value' prop without an 'onChange' handler`
+    const expectedErrorMessage = `provided a 'value' prop without an 'onChange' handler`
+
+    expect(consoleErrorMock).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.any(String),
+      expect.stringContaining(expectedErrorMessage),
+      expect.any(String)
     )
   })
 
   it('calls the onChange prop', async () => {
-    const onChange = stub()
-    await mount(
+    const onChange = vi.fn()
+    const { container } = render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -74,19 +98,18 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
-    const input = await group.find('input')
+    const input = container.querySelector('input')
 
-    await input.click()
+    userEvent.click(input!)
 
-    await wait(() => {
-      expect(onChange).to.have.been.called()
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalled()
     })
   })
 
   it('does not call the onChange prop when disabled', async () => {
-    const onChange = stub()
-    await mount(
+    const onChange = vi.fn()
+    const { container } = render(
       <RadioInputGroup
         disabled
         name="fruit"
@@ -98,19 +121,19 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
-    const input = await group.find('input')
+    const input = container.querySelector('input')
 
-    await input.click(undefined, { clickable: false })
+    fireEvent.click(input!)
 
-    await wait(() => {
-      expect(onChange).to.not.have.been.called()
+    await waitFor(() => {
+      expect(onChange).not.toHaveBeenCalled()
+      expect(input).toBeDisabled()
     })
   })
 
   it('does not call the onChange prop when readOnly', async () => {
-    const onChange = stub()
-    await mount(
+    const onChange = vi.fn()
+    const { container } = render(
       <RadioInputGroup
         readOnly
         name="fruit"
@@ -122,18 +145,18 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
-    const input = await group.find('input')
+    const input = container.querySelector('input')
 
-    await input.click()
+    fireEvent.click(input!)
 
-    await wait(() => {
-      expect(onChange).to.not.have.been.called()
+    await waitFor(() => {
+      expect(onChange).not.toHaveBeenCalled()
+      expect(input).toBeDisabled()
     })
   })
 
   it('should not update the value when the value prop is set', async () => {
-    await mount(
+    const { container } = render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -145,39 +168,35 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
+    const banana = container.querySelector('input[value="banana"]')
+    const orange = container.querySelector('input[value="orange"]')
 
-    const banana = await group.find('input:label(Banana)')
+    expect(orange).toHaveAttribute('checked')
 
-    await banana.click()
+    userEvent.click(banana!)
 
-    const orange = await group.find(':label(Orange)')
-
-    await wait(() => {
-      expect(orange).to.be.checked()
+    await waitFor(() => {
+      expect(orange).toHaveAttribute('checked')
     })
   })
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {
-    await mount(
+    const { container } = render(
       <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
-    const inputs = await group.findAll('input[name="fruit"]')
+    const inputs = container.querySelectorAll('input[name="fruit"]')
 
-    await wait(() => {
-      expect(inputs[0]).to.have.attribute('tabindex', '0')
-      expect(inputs[1]).to.attribute('tabindex', '-1')
-      expect(inputs[2]).to.attribute('tabindex', '-1')
-    })
+    expect(inputs[0]).toHaveAttribute('tabindex', '0')
+    expect(inputs[1]).toHaveAttribute('tabindex', '-1')
+    expect(inputs[2]).toHaveAttribute('tabindex', '-1')
   })
 
   it('adds the correct tabindex to RadioInputs when checked', async () => {
-    await mount(
+    const { container } = render(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -188,34 +207,25 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = await RadioInputGroupLocator.find()
-    const inputs = await group.findAll('input[name="fruit"]')
+    const inputs = container.querySelectorAll('input[name="fruit"]')
 
-    await wait(() => {
-      expect(inputs[0]).to.have.attribute('tabindex', '-1')
-      expect(inputs[1]).to.attribute('tabindex', '0')
-      expect(inputs[2]).to.attribute('tabindex', '-1')
-    })
+    expect(inputs[0]).toHaveAttribute('tabindex', '-1')
+    expect(inputs[1]).toHaveAttribute('tabindex', '0')
+    expect(inputs[2]).toHaveAttribute('tabindex', '-1')
   })
 
-  describe('for a11y', async () => {
-    it('should meet standards', async () => {
-      await mount(
+  describe('for a11y', () => {
+    it('should meet a11y standards', async () => {
+      const { container } = render(
         <RadioInputGroup name="fruit" description="Select a fruit">
           <RadioInput label="Apple" value="apple" />
           <RadioInput label="Banana" value="banana" />
           <RadioInput label="Orange" value="orange" />
         </RadioInputGroup>
       )
-      const group = await RadioInputGroupLocator.find()
+      const axeCheck = await runAxeCheck(container)
 
-      expect(
-        await group.accessible({
-          ignores: [
-            'radiogroup'
-          ] /* https://github.com/dequelabs/axe-core/issues/176 */
-        })
-      ).to.be.true()
+      expect(axeCheck).toBe(true)
     })
   })
 })
