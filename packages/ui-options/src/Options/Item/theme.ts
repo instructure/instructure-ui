@@ -64,7 +64,7 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     descriptionFontWeight: typography.fontWeightNormal,
     descriptionLineHeight: typography.lineHeight,
     descriptionPaddingStart: '0.25em',
-    descriptionColor: colors?.contrasts?.grey4570
+    descriptionColor: colors?.contrasts?.grey5782
   }
 
   return {

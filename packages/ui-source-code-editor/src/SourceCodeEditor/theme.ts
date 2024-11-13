@@ -40,7 +40,7 @@ const generateComponentTheme = (theme: Theme): SourceCodeEditorTheme => {
     color: colors?.contrasts?.grey125125,
     gutterBackground: colors?.contrasts?.grey1111,
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
     borderRadius: borders?.radiusMedium,
     focusBorderColor: colors?.contrasts?.blue4570,
     horizontalPadding: spacing?.xSmall,

@@ -30,6 +30,7 @@ type Primitives = {
   grey12: string
   grey14: string
   grey24: string
+  grey30: string
   grey45: string
   grey57: string
   grey70: string
@@ -195,6 +196,7 @@ type Contrasts = {
   grey1214: Primitives['grey12'] | Primitives['grey14']
   grey1424: Primitives['grey14'] | Primitives['grey24']
   grey2424: Primitives['grey24']
+  grey3045: Primitives['grey30'] | Primitives['grey45']
   grey4570: Primitives['grey45'] | Primitives['grey70']
   grey5782: Primitives['grey57'] | Primitives['grey82']
   grey100100: Primitives['grey100']

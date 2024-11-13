@@ -345,6 +345,8 @@ export type ToggleFacadeTheme = {
   labelFontSizeMedium: Typography['fontSizeMedium']
   labelFontSizeLarge: Typography['fontSizeLarge']
   errorBorderColor: Colors['contrasts']['red4570']
+  uncheckedIconBorderColor: Colors['contrasts']['grey3045']
+  checkedIconBorderColor: Colors['contrasts']['green5782']
 }
 
 export type CodeEditorTheme = {
@@ -536,6 +538,8 @@ export type DrilldownTheme = {
   headerTitleFontWeight: Typography['fontWeightBold']
   headerActionColor: Colors['contrasts']['blue4570']
   labelInfoPadding: Spacing['small']
+  labelInfoColor: Colors['contrasts']['grey5782']
+  borderColor: Colors['contrasts']['grey3045']
 }
 
 export type FileDropTheme = {
@@ -714,6 +718,7 @@ export type MenuItemTheme = {
   activeBackground: Colors['contrasts']['blue4570']
   activeLabelColor: Colors['contrasts']['white1010']
   activeIconColor: Colors['contrasts']['white1010']
+  labelInfoColor: Colors['contrasts']['grey5782']
 }
 
 export type MenuGroupTheme = {
@@ -962,6 +967,10 @@ export type PillTheme = {
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
   borderRadius: string | 0
+}
+
+export type PopoverTheme = {
+  borderColor: Colors['contrasts']['grey3045']
 }
 
 export type PositionTheme = {
@@ -1423,6 +1432,10 @@ export type ToggleDetailsTheme = {
   filledPadding: Spacing['small']
 }
 
+export type ToggleGroupTheme = {
+  borderColor: Colors['contrasts']['grey3045']
+}
+
 export type TooltipTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -1749,6 +1762,7 @@ export interface ThemeVariables {
   Pages: PagesTheme
   PaginationPageInput: PaginationPageInputTheme
   'Pagination.PageInput': PaginationPageInputTheme
+  Popover: PopoverTheme
   Position: PositionTheme
   Pill: PillTheme
   ProgressBar: ProgressBarTheme
@@ -1785,6 +1799,8 @@ export interface ThemeVariables {
   TextArea: TextAreaTheme
   TextInput: TextInputTheme
   ToggleDetails: ToggleDetailsTheme
+  ToggleGroup: ToggleGroupTheme
+  'ToggleDetails.ToggleGroup': ToggleGroupTheme
   Tooltip: TooltipTheme
   TopNavBarBrand: TopNavBarBrandTheme
   'TopNavBar.Brand': TopNavBarBrandTheme

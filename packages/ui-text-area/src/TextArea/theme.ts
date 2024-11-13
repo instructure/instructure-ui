@@ -51,10 +51,10 @@ const generateComponentTheme = (theme: Theme): TextAreaTheme => {
 
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
-    borderTopColor: colors?.contrasts?.grey1214,
-    borderRightColor: colors?.contrasts?.grey1214,
-    borderBottomColor: colors?.contrasts?.grey1214,
-    borderLeftColor: colors?.contrasts?.grey1214,
+    borderTopColor: colors?.contrasts?.grey3045,
+    borderRightColor: colors?.contrasts?.grey3045,
+    borderBottomColor: colors?.contrasts?.grey3045,
+    borderLeftColor: colors?.contrasts?.grey3045,
     borderRadius: borders?.radiusMedium,
 
     padding: spacing?.small,

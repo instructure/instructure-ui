@@ -47,7 +47,7 @@ const generateComponentTheme = (theme: Theme): NumberInputTheme => {
 
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
     borderRadius: borders?.radiusMedium,
 
     color: colors?.contrasts?.grey125125,

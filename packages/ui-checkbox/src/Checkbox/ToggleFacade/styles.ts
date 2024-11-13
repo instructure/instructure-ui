@@ -157,13 +157,16 @@ const generateStyle = (
       '&::before': {
         content: '""',
         position: 'absolute',
-        top: componentTheme.borderWidth,
-        left: componentTheme.borderWidth,
-        height: `calc(100% - (${componentTheme.borderWidth} * 2))`,
-        width: `calc(100% - (${componentTheme.borderWidth} * 2))`,
+        height: `calc(100% - (${componentTheme.borderWidth} * 6))`,
+        width: `calc(100% - (${componentTheme.borderWidth} * 6))`,
         background: componentTheme.toggleBackground,
         boxShadow: componentTheme.toggleShadow,
-        borderRadius: '100%'
+        borderRadius: '100%',
+        border: `${componentTheme.borderWidth} solid ${
+          checked
+            ? componentTheme.checkedIconBorderColor
+            : componentTheme.uncheckedIconBorderColor
+        }`
       }
     },
 

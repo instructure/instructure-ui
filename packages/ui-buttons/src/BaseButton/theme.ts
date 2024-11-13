@@ -39,18 +39,18 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
   const themeSpecificStyle: ThemeSpecificStyle<BaseButtonTheme> = {
     canvas: {
       primaryColor: theme['ic-brand-button--primary-text']!,
-      primaryBorderColor: theme['ic-brand-button--primary-bgd']!,
+      primaryBorderColor: darken(theme['ic-brand-button--primary-bgd']!),
       primaryBackground: theme['ic-brand-button--primary-bgd']!,
       primaryHoverBackground: darken(theme['ic-brand-button--primary-bgd']!),
       primaryActiveBackground: darken(theme['ic-brand-button--primary-bgd']!),
       primaryActiveBoxShadow: `${activeShadow} ${theme[
         'ic-brand-button--primary-bgd'
       ]!}`,
-      primaryGhostColor: theme['ic-brand-button--primary-bgd']!,
-      primaryGhostBorderColor: theme['ic-brand-button--primary-bgd']!,
+      primaryGhostColor: darken(theme['ic-brand-button--primary-bgd']!),
+      primaryGhostBorderColor: darken(theme['ic-brand-button--primary-bgd']!),
       primaryGhostBackground: 'transparent',
       primaryGhostHoverBackground: alpha(
-        theme['ic-brand-button--primary-bgd']!,
+        darken(theme['ic-brand-button--primary-bgd']!),
         10
       ),
       primaryGhostActiveBackground: 'transparent',
@@ -104,10 +104,10 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     primaryHoverBackground: colors?.contrasts?.blue5782,
     primaryActiveBackground: colors?.contrasts?.blue5782,
     primaryActiveBoxShadow: `${activeShadow} ${colors?.contrasts?.white1010}`,
-    primaryGhostColor: colors?.contrasts?.blue4570,
+    primaryGhostColor: colors?.contrasts?.blue5782,
     primaryGhostBorderColor: colors?.contrasts?.blue4570,
     primaryGhostBackground: 'transparent',
-    primaryGhostHoverBackground: alpha(colors?.contrasts?.blue4570, 10),
+    primaryGhostHoverBackground: colors?.contrasts?.blue1212,
     primaryGhostActiveBackground: 'transparent',
     primaryGhostActiveBoxShadow: `${activeShadow} ${alpha(
       colors?.contrasts?.blue1212,
@@ -123,7 +123,7 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     secondaryGhostColor: colors?.contrasts?.grey125125,
     secondaryGhostBorderColor: colors?.contrasts?.grey125125,
     secondaryGhostBackground: 'transparent',
-    secondaryGhostHoverBackground: alpha(colors?.contrasts?.grey125125, 10),
+    secondaryGhostHoverBackground: colors?.contrasts?.grey1111,
     secondaryGhostActiveBackground: 'transparent',
     secondaryGhostActiveBoxShadow: `${activeShadow} ${alpha(
       colors?.contrasts?.grey125125,

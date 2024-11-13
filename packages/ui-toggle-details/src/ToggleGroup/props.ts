@@ -31,8 +31,11 @@ import {
   AsElementType,
   OtherHTMLAttributes,
   PropValidators,
-  Renderable
+  Renderable,
+  ToggleGroupTheme
 } from '@instructure/shared-types'
+
+import type { WithStyleProps } from '@instructure/emotion'
 
 type ToggleGroupOwnProps = {
   /**
@@ -91,8 +94,11 @@ type PropKeys = keyof ToggleGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
+type ToggleGroupStyle = { borderColor: string }
+
 type ToggleGroupProps = ToggleGroupOwnProps &
-  OtherHTMLAttributes<ToggleGroupOwnProps>
+  OtherHTMLAttributes<ToggleGroupOwnProps> &
+  WithStyleProps<ToggleGroupTheme, ToggleGroupStyle>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
@@ -126,5 +132,5 @@ const allowedProps: AllowedPropKeys = [
   'border'
 ]
 
-export type { ToggleGroupProps }
+export type { ToggleGroupProps, ToggleGroupStyle }
 export { propTypes, allowedProps }

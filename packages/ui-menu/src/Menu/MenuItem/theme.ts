@@ -58,7 +58,9 @@ const generateComponentTheme = (theme: Theme): MenuItemTheme => {
 
     activeBackground: colors?.contrasts?.blue4570,
     activeLabelColor: colors?.contrasts?.white1010,
-    activeIconColor: colors?.contrasts?.white1010
+    activeIconColor: colors?.contrasts?.white1010,
+
+    labelInfoColor: colors?.contrasts?.grey5782
   }
 
   return {
