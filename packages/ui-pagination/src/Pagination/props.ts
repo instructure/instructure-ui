@@ -197,7 +197,9 @@ type PaginationProps = PaginationOwnProps &
   OtherHTMLAttributes<PaginationOwnProps> &
   WithDeterministicIdProps
 
-type PaginationStyle = ComponentStyle<'pagination' | 'pages'>
+type PaginationStyle = ComponentStyle<
+  'pagination' | 'pages' | 'pageIndicatorList'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   children: Children.oneOf([PaginationButton]),

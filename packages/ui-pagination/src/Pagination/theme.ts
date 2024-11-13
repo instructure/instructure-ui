@@ -22,37 +22,24 @@
  * SOFTWARE.
  */
 
-import type { PaginationTheme } from '@instructure/shared-types'
-import type { PaginationStyle } from './props'
+import type { Theme } from '@instructure/ui-themes'
+import { PaginationTheme } from '@instructure/shared-types'
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme: PaginationTheme): PaginationStyle => {
+const generateComponentTheme = (theme: Theme): PaginationTheme => {
+  const { spacing } = theme
+
+  const componentVariables: PaginationTheme = {
+    pageIndicatorGap: spacing.xSmall
+  }
+
   return {
-    pageIndicatorList: {
-      all: 'unset',
-      display: 'flex',
-      alignItems: 'center',
-      gap: componentTheme.pageIndicatorGap
-    },
-    pagination: {
-      label: 'pagination',
-      textAlign: 'center'
-    },
-    pages: {
-      label: 'pagination__pages',
-      display: 'inline-flex',
-      alignItems: 'center'
-    }
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

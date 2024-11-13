@@ -59,17 +59,20 @@ class PaginationButton extends Component<PaginationPageProps> {
 
     const props = omitProps(this.props, PaginationButton.allowedProps, exclude)
 
+    // wrapped in an unstyled <li> for better a11y
     return (
-      <BaseButton
-        color="primary"
-        withBackground={this.props.current}
-        withBorder={this.props.current}
-        {...props}
-        aria-current={this.props.current ? 'page' : undefined}
-        elementRef={this.handleRef}
-      >
-        {this.props.children}
-      </BaseButton>
+      <li style={{ all: 'unset' }}>
+        <BaseButton
+          color="primary"
+          withBackground={this.props.current}
+          withBorder={this.props.current}
+          {...props}
+          aria-current={this.props.current ? 'page' : undefined}
+          elementRef={this.handleRef}
+        >
+          {this.props.children}
+        </BaseButton>
+      </li>
     )
   }
 }

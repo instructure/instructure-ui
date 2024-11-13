@@ -36,6 +36,7 @@ import { PaginationArrowButton } from './PaginationArrowButton'
 import { PaginationPageInput } from './PaginationPageInput'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import type { PaginationPageProps } from './PaginationButton/props'
 import type { PaginationArrowDirections } from './PaginationArrowButton/props'
@@ -80,7 +81,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
@@ -103,7 +104,7 @@ class Pagination extends Component<PaginationProps> {
     currentPage: 1,
     siblingCount: 1,
     boundaryCount: 1,
-    ellipsis: '...',
+    ellipsis: <li style={{all: 'unset'}}>...</li>,
     renderPageIndicator: (page: number) => page
   }
 
@@ -408,7 +409,7 @@ class Pagination extends Component<PaginationProps> {
         )
       )
     }
-    return pages
+    return (<ul css={this.props.styles?.pageIndicatorList}>{pages}</ul>)
   }
 
   renderPages(currentPageIndex: number) {

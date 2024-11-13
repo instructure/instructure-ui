@@ -123,7 +123,9 @@ describe('<Pagination />', () => {
     it('by default', async () => {
       const { container } = render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-          {buildPages(5)}
+          <ul>
+            {buildPages(5)}
+          </ul>
         </Pagination>
       )
 
@@ -134,7 +136,7 @@ describe('<Pagination />', () => {
     it('by default with more pages', async () => {
       const { container } = render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-          {buildPages(8)}
+          <ul>{buildPages(8)}</ul>
         </Pagination>
       )
       const axeCheck = await runAxeCheck(container)
@@ -151,7 +153,7 @@ describe('<Pagination />', () => {
           labelLast="Last"
           withFirstAndLastButton
         >
-          {buildPages(8)}
+          <ul>{buildPages(8)}</ul>
         </Pagination>
       )
       const axeCheck = await runAxeCheck(container)
@@ -169,7 +171,7 @@ describe('<Pagination />', () => {
           withFirstAndLastButton
           showDisabledButtons
         >
-          {buildPages(8)}
+          <ul>{buildPages(8)}</ul>
         </Pagination>
       )
       const axeCheck = await runAxeCheck(container)
