@@ -32,7 +32,6 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-
 type ContrastStrength = 'min' | 'mid' | 'max'
 
 type ColorPickerOwnProps = {
@@ -100,6 +99,14 @@ type ColorPickerOwnProps = {
       graphicsTextLabel: string
       firstColorLabel: string
       secondColorLabel: string
+      onContrastChange?: (conrastData: {
+        contrast: number
+        isValidNormalText: boolean
+        isValidLargeText: boolean
+        isValidGraphicsText: boolean
+        firstColor: string
+        secondColor: string
+      }) => null
     }
   }
 
@@ -288,7 +295,8 @@ const propTypes: PropValidators<PropKeys> = {
       largeTextLabel: PropTypes.string.isRequired,
       graphicsTextLabel: PropTypes.string.isRequired,
       firstColorLabel: PropTypes.string.isRequired,
-      secondColorLabel: PropTypes.string.isRequired
+      secondColorLabel: PropTypes.string.isRequired,
+      onContrastChange: PropTypes.func
     })
   }),
   children: PropTypes.func,

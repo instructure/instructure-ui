@@ -29,9 +29,10 @@ import React, { Component } from 'react'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console'
-import { contrast as getContrast } from '@instructure/ui-color-utils'
-import conversions from '@instructure/ui-color-utils'
-import type { RGBAType } from '@instructure/ui-color-utils'
+import {
+  contrastWithAlpha,
+  validateContrast
+} from '@instructure/ui-color-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
@@ -40,7 +41,7 @@ import { Pill } from '@instructure/ui-pill'
 import ColorIndicator from '../ColorIndicator'
 
 import { propTypes, allowedProps } from './props'
-import type { ColorContrastProps } from './props'
+import type { ColorContrastProps, ColorContrastState } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -52,17 +53,25 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ColorContrast extends Component<ColorContrastProps> {
+class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
 
   static defaultProps = {
-    withoutColorPreview: false
+    withoutColorPreview: false,
+    validationLevel: 'AA'
   }
 
   constructor(props: ColorContrastProps) {
     super(props)
+
+    this.state = {
+      contrast: 1,
+      isValidNormalText: false,
+      isValidLargeText: false,
+      isValidGraphicsText: false
+    }
   }
 
   ref: HTMLDivElement | null = null
@@ -79,10 +88,27 @@ class ColorContrast extends Component<ColorContrastProps> {
 
   componentDidMount() {
     this.props.makeStyles?.()
+    this.calcState()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: ColorContrastProps) {
     this.props.makeStyles?.()
+    if (
+      prevProps?.firstColor !== this.props?.firstColor ||
+      prevProps?.secondColor !== this.props?.secondColor ||
+      prevProps?.validationLevel !== this.props?.validationLevel
+    ) {
+      const newState = this.calcState()
+
+      this.props?.onContrastChange?.({
+        contrast: newState.contrast,
+        isValidNormalText: newState.isValidNormalText,
+        isValidLargeText: newState.isValidLargeText,
+        isValidGraphicsText: newState.isValidGraphicsText,
+        firstColor: this.props.firstColor,
+        secondColor: this.props.secondColor
+      })
+    }
   }
 
   renderStatus = (pass: boolean, description: string) => {
@@ -153,32 +179,17 @@ class ColorContrast extends Component<ColorContrastProps> {
     )
   }
 
-  calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
-    const alpha = 1 - (1 - c1.a) * (1 - c2.a)
-    return {
-      r: (c2.r * c2.a) / alpha + (c1.r * c1.a * (1 - c2.a)) / alpha,
-      g: (c2.g * c2.a) / alpha + (c1.g * c1.a * (1 - c2.a)) / alpha,
-      b: (c2.b * c2.a) / alpha + (c1.b * c1.a * (1 - c2.a)) / alpha,
-      a: 1
+  calcState() {
+    const contrast = contrastWithAlpha(
+      this.props.firstColor,
+      this.props.secondColor
+    )
+    const newState = {
+      contrast,
+      ...validateContrast(contrast, this.props.validationLevel)
     }
-  }
-
-  //We project the firstColor onto an opaque white background, then we project the secondColor onto
-  //the projected first color. We calculate the contrast of these two, projected colors.
-  get calcContrast() {
-    const c1RGBA = conversions.colorToRGB(this.props.firstColor)
-    const c2RGBA = conversions.colorToRGB(this.props.secondColor)
-    const c1OnWhite = this.calcBlendedColor(
-      { r: 255, g: 255, b: 255, a: 1 },
-      c1RGBA
-    )
-    const c2OnC1OnWhite = this.calcBlendedColor(c1OnWhite, c2RGBA)
-
-    return getContrast(
-      conversions.colorToHex8(c1OnWhite),
-      conversions.colorToHex8(c2OnC1OnWhite),
-      2
-    )
+    this.setState(newState)
+    return newState
   }
 
   render() {
@@ -190,7 +201,12 @@ class ColorContrast extends Component<ColorContrastProps> {
       graphicsTextLabel
     } = this.props
 
-    const contrast = this.calcContrast
+    const {
+      contrast,
+      isValidNormalText,
+      isValidLargeText,
+      isValidGraphicsText
+    } = this.state
 
     return (
       <div
@@ -205,9 +221,9 @@ class ColorContrast extends Component<ColorContrastProps> {
         </div>
         <Text size="x-large">{contrast}:1</Text>
         {this.renderPreview()}
-        {this.renderStatus(contrast >= 4.5, normalTextLabel)}
-        {this.renderStatus(contrast >= 3, largeTextLabel)}
-        {this.renderStatus(contrast >= 3, graphicsTextLabel)}
+        {this.renderStatus(isValidNormalText, normalTextLabel)}
+        {this.renderStatus(isValidLargeText, largeTextLabel)}
+        {this.renderStatus(isValidGraphicsText, graphicsTextLabel)}
       </div>
     )
   }
