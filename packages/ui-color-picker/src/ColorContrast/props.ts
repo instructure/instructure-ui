@@ -83,6 +83,46 @@ type ColorContrastOwnProps = {
    * Otherwise, it is required.
    */
   withoutColorPreview?: boolean
+  /**
+   * Triggers a callback whenever the contrast changes, due to a changing color input.
+   * Communicates the contrast and the success/fail state of the contrast, depending on
+   * the situation:
+   *
+   * isValidNormalText true if at least 4.5:1
+   *
+   * isValidLargeText true if at least 3:1
+   *
+   * isValidGraphicsText true if at least 3:1
+   */
+  onContrastChange?: (conrastData: {
+    contrast: number
+    isValidNormalText: boolean
+    isValidLargeText: boolean
+    isValidGraphicsText: boolean
+    firstColor: string
+    secondColor: string
+  }) => null
+  /**
+   * According to WCAG 2.2
+   *
+   * AA level (https://www.w3.org/TR/WCAG22/#contrast-minimum)
+   *
+   * text: 4.5:1
+   *
+   * large text: 3:1
+   *
+   * non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast)
+   *
+   *
+   * AAA level (https://www.w3.org/TR/WCAG22/#contrast-enhanced)
+   *
+   * text: 7:1
+   *
+   * large text: 4.5:1
+   *
+   * non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast)
+   */
+  validationLevel?: 'AA' | 'AAA'
 }
 
 type PropKeys = keyof ColorContrastOwnProps
@@ -106,6 +146,8 @@ type ColorContrastStyle = ComponentStyle<
   | 'firstColorPreview'
   | 'secondColorPreview'
   | 'label'
+  | 'onContrastChange'
+  | 'validationLevel'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -120,7 +162,9 @@ const propTypes: PropValidators<PropKeys> = {
   normalTextLabel: PropTypes.string.isRequired,
   secondColor: PropTypes.string.isRequired,
   secondColorLabel: PropTypes.string,
-  successLabel: PropTypes.string.isRequired
+  successLabel: PropTypes.string.isRequired,
+  onContrastChange: PropTypes.func,
+  validationLevel: PropTypes.oneOf(['AA', 'AAA'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -135,8 +179,16 @@ const allowedProps: AllowedPropKeys = [
   'normalTextLabel',
   'secondColor',
   'secondColorLabel',
-  'successLabel'
+  'successLabel',
+  'onContrastChange',
+  'validationLevel'
 ]
 
-export type { ColorContrastProps, ColorContrastStyle }
+type ColorContrastState = {
+  contrast: number
+  isValidNormalText: boolean
+  isValidLargeText: boolean
+  isValidGraphicsText: boolean
+}
+export type { ColorContrastProps, ColorContrastStyle, ColorContrastState }
 export { propTypes, allowedProps }

@@ -32,13 +32,23 @@ type: example
       super(props)
       this.state = {
         selectedForeGround: '#0CBF94',
-        selectedBackGround: '#35423A'
+        selectedBackGround: '#35423A',
+        validationLevel: 'AA'
       }
     }
 
     render() {
       return (
         <div>
+          <RadioInputGroup
+            onChange={(_e, value) => this.setState({ validationLevel: value })}
+            name="example1"
+            defaultValue="AA"
+            description="validationLevel"
+          >
+            <RadioInput key="AA" value="AA" label="AA" />
+            <RadioInput key="AAA" value="AAA" label="AAA" />
+          </RadioInputGroup>
           <ColorPreset
             label="Background"
             colors={[
@@ -86,6 +96,8 @@ type: example
             normalTextLabel="Normal text"
             largeTextLabel="Large text"
             graphicsTextLabel="Graphics text"
+            validationLevel={this.state.validationLevel}
+            onContrastChange={(contrastData) => console.log(contrastData)}
           />
         </div>
       )
@@ -99,9 +111,19 @@ type: example
   const Example = () => {
     const [selectedForeGround, setSelectedForeGround] = useState('#0CBF94')
     const [selectedBackGround, setSelectedBackGround] = useState('#35423A')
+    const [validationLevel, setValidationLevel] = useState('AA')
 
     return (
       <div>
+        <RadioInputGroup
+          onChange={(_e, value) => setValidationLevel(value)}
+          name="example1"
+          defaultValue="AA"
+          description="validationLevel"
+        >
+          <RadioInput key="AA" value="AA" label="AA" />
+          <RadioInput key="AAA" value="AAA" label="AAA" />
+        </RadioInputGroup>
         <ColorPreset
           label="Background"
           colors={[
@@ -149,6 +171,8 @@ type: example
           normalTextLabel="Normal text"
           largeTextLabel="Large text"
           graphicsTextLabel="Graphics text"
+          validationLevel={validationLevel}
+          onContrastChange={(contrastData) => console.log(contrastData)}
         />
       </div>
     )
