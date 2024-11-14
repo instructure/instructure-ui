@@ -7,10 +7,15 @@ on:
       - v9_maintenance
   workflow_dispatch:
 jobs:
-  deploy-docs:
+  deploy-release:
+    if: startsWith(github.event.head_commit.message, 'chore(release)')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - run: npm ci && npm run bootstrap
       - name: Set build directory and deployment path based on branch
         id: set-build-dir
@@ -29,13 +34,35 @@ jobs:
           esac
       - name: Build docs-app
         run: npm run build:docs
-      - name: Copy redirects config file to the __build__ directory.
-        run: cp ./packages/__docs__/_redirects_gh_pages ./packages/__docs__/__build__
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ${{ steps.set-build-dir.outputs.build_dir }}
           branch: gh-pages
           target-folder: ${{ steps.set-build-dir.outputs.deploy_dir }}
-          clean-exclude: pr-preview
+          clean-exclude: |
+            pr-preview
+            v7
+            v8
+            v9
+            latest
+          force: false
+  deploy-latest:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci && npm run bootstrap
+      - name: Build docs-app
+        run: npm run build:docs
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./packages/__docs__/__build__
+          branch: gh-pages
+          target-folder: latest
           force: false
