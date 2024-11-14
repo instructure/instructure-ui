@@ -62,3 +62,4 @@ export type {
 } from './TopNavBar/TopNavBarUser/props'
 
 export { MobileTopNav } from './MobileTopNav'
+export { DesktopTopNav } from './DesktopTopNav'
