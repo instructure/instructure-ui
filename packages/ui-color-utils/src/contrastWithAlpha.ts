@@ -22,39 +22,29 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { overlayColors } from './overlayColors'
-export { contrastWithAlpha } from './contrastWithAlpha'
-export { validateContrast } from './validateContrast'
-export {
-  color2hex,
-  colorToHex8,
-  colorToHsva,
-  colorToHsla,
-  colorToRGB
-} from './conversions'
+import { colorToRGB, colorToHex8 } from './conversions'
+import { overlayColors } from './overlayColors'
+import { contrast } from './contrast'
 
-import {
-  color2hex,
-  colorToHex8,
-  colorToHsva,
-  colorToHsla,
-  colorToRGB
-} from './conversions'
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Calculates two, not necesseraly opaque color's contrast on top of each other.
+ * The method assumes that the bottom color is on top of a white background (only important if it isn't opaque)
+ * @module contrastWithAlpha
+ * @param {String} color1
+ * @param {String} color2
+ * @param {Number} decimalPlaces
+ * @returns {Number} color contrast ratio
+ */
+const contrastWithAlpha = (color1: string, color2: string): number => {
+  const c1RGBA = colorToRGB(color1)
+  const c2RGBA = colorToRGB(color2)
+  const c1OnWhite = overlayColors({ r: 255, g: 255, b: 255, a: 1 }, c1RGBA)
+  const c2OnC1OnWhite = overlayColors(c1OnWhite, c2RGBA)
 
-// TODO remove when we get rid of babel-plugin-transform-imports
-// This default export is needed because babel-plugin-transform-imports will
-// fail if the exported name is not the same as the filename
-export default {
-  color2hex: color2hex,
-  colorToHex8: colorToHex8,
-  colorToHsva: colorToHsva,
-  colorToHsla: colorToHsla,
-  colorToRGB: colorToRGB
+  return contrast(colorToHex8(c1OnWhite), colorToHex8(c2OnC1OnWhite), 2)
 }
 
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+export { contrastWithAlpha }

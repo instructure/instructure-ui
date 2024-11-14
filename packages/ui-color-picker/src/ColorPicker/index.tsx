@@ -548,6 +548,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               secondColorLabel={
                 this.props.colorMixerSettings.colorContrast.secondColorLabel
               }
+              onContrastChange={
+                this.props.colorMixerSettings.colorContrast.onContrastChange
+              }
             />
           </div>
         )}
