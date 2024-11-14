@@ -24,35 +24,24 @@
  */
 
 /** @jsx jsx */
-import React, {
-  Children,
-  Fragment,
-  PropsWithChildren,
-  useEffect,
-  useState
-} from 'react'
+import { Children, PropsWithChildren, useEffect, useState } from 'react'
 import { jsx, useTheme } from '@instructure/emotion'
-import type { MobileTopNavProps } from './props'
+import type { DesktopTopNavProps } from './props'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { IconHamburgerLine, IconXLine } from '@instructure/ui-icons'
-import {
-  generateItemListStyles,
-  generateItemStyles,
-  generateStyles
-} from './styles'
+import { generateStyles } from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-const MobileTopNav = ({
+const DesktopTopNav = ({
   lightMode = false,
-  brand,
   styles,
   children
-}: MobileTopNavProps) => {
+}: DesktopTopNavProps) => {
   const [open, setOpen] = useState<boolean>(false)
 
   useEffect(() => {
@@ -69,9 +58,8 @@ const MobileTopNav = ({
   return (
     <div style={styles.container(open)}>
       <div style={styles.topBar}>
-        {brand}
         <span style={styles.btnRow}>
-          {!open && getSubComponent('BtnRow')}
+          {/*{!open && getSubComponent('BtnRow')}*/}
           <IconButton
             withBackground={false}
             withBorder={false}
@@ -82,76 +70,19 @@ const MobileTopNav = ({
             {open ? <IconXLine /> : <IconHamburgerLine />}
           </IconButton>
         </span>
-      </div>
-
-      <div style={styles.content(open)}>
         {getSubComponent('BreadCrumb')}
-        {getSubComponent('Title')}
-        {getSubComponent('ItemList')}
       </div>
     </div>
   )
 }
 
-const BtnRow = ({ children }: PropsWithChildren) => {
-  return <Fragment>{children}</Fragment>
-}
-
-BtnRow.displayName = 'BtnRow'
-
 const BreadCrumb = ({ children }: PropsWithChildren) => {
-  return <div style={{ margin: '24px 0' }}>{children}</div>
+  return (
+    <div style={{ margin: '24px 0', display: 'inline-block' }}>{children}</div>
+  )
 }
 
 BreadCrumb.displayName = 'BreadCrumb'
-
-const Title = ({ children }: PropsWithChildren) => {
-  return <div style={{ margin: '32px 0' }}>{children}</div>
-}
-
-Title.displayName = 'Title'
-
-const ItemList = ({
-  children,
-  styles
-}: PropsWithChildren & { styles: any }) => {
-  return (
-    <Fragment>
-      {Children.map(children, (child, index) => (
-        <Fragment>
-          {child}
-          {index < React.Children.count(children) - 1 && (
-            <div style={styles.divider}></div>
-          )}
-        </Fragment>
-      ))}
-    </Fragment>
-  )
-}
-
-ItemList.displayName = 'ItemList'
-
-const Item = ({
-  children,
-  leftIcon,
-  rightIcon,
-  onClick,
-  styles
-}: PropsWithChildren & {
-  leftIcon: any
-  rightIcon: any
-  onClick: any
-  styles: any
-}) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-    <div style={styles.container} onClick={onClick}>
-      {leftIcon && <div style={styles.leftIcon}>{leftIcon}</div>}
-      {children}
-      {rightIcon && <div style={styles.rightIcon}>{rightIcon}</div>}
-    </div>
-  )
-}
 
 const withStyles =
   <ComponentOwnProps, ComponentStyle>(
@@ -167,16 +98,10 @@ const withStyles =
     return <WrappedComponent {...styledProps} />
   }
 
-const SC: any = withStyles(generateStyles)(MobileTopNav)
+const SC: any = withStyles(generateStyles)(DesktopTopNav)
 
-SC.BtnRow = BtnRow
 SC.BreadCrumb = BreadCrumb
-SC.Title = Title
-SC.ItemList = withStyles(generateItemListStyles)(ItemList)
 // TODO investigate whether displayName should be added to the original component
-SC.ItemList.displayName = 'ItemList'
-SC.Item = withStyles(generateItemStyles)(Item) //withStyles(generateItemStyles)(Item)
-SC.Item.displayName = 'Item'
 
-export { SC as MobileTopNav }
+export { SC as DesktopTopNav }
 export default SC
