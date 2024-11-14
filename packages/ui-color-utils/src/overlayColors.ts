@@ -22,39 +22,37 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { overlayColors } from './overlayColors'
-export { contrastWithAlpha } from './contrastWithAlpha'
-export { validateContrast } from './validateContrast'
-export {
-  color2hex,
-  colorToHex8,
-  colorToHsva,
-  colorToHsla,
-  colorToRGB
-} from './conversions'
+import type { RGBAType } from './colorTypes'
 
-import {
-  color2hex,
-  colorToHex8,
-  colorToHsva,
-  colorToHsla,
-  colorToRGB
-} from './conversions'
+/**
+ * @typedef {Object} RGBAResult
+ * @property {Number} r - Red component as a string
+ * @property {Number} g - Green component as a string
+ * @property {Number} b - Blue component as a string
+ * @property {Number} a - Alpha component as a string
+ */
 
-// TODO remove when we get rid of babel-plugin-transform-imports
-// This default export is needed because babel-plugin-transform-imports will
-// fail if the exported name is not the same as the filename
-export default {
-  color2hex: color2hex,
-  colorToHex8: colorToHex8,
-  colorToHsva: colorToHsva,
-  colorToHsla: colorToHsla,
-  colorToRGB: colorToRGB
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Place two RGBA colors on top of each other. The second one (c2) goes on top.
+ * The method calculates what color would be visible. If the second color (c2) is opaque, the result
+ * will be c2, if fully transparent, c1. If anything in between, it calculates the real color.
+ * Alpha is always set to 1 after the calculation
+ * @module overlayColors
+ * @param {RGBAType} c1
+ * @param {RGBAType} c2
+ * @returns {RGBAType} color as rgb string
+ */
+const overlayColors = (c1: RGBAType, c2: RGBAType): RGBAType => {
+  const alpha = 1 - (1 - c1.a) * (1 - c2.a)
+  return {
+    r: (c2.r * c2.a) / alpha + (c1.r * c1.a * (1 - c2.a)) / alpha,
+    g: (c2.g * c2.a) / alpha + (c1.g * c1.a * (1 - c2.a)) / alpha,
+    b: (c2.b * c2.a) / alpha + (c1.b * c1.a * (1 - c2.a)) / alpha,
+    a: 1
+  }
 }
 
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+export { overlayColors }
