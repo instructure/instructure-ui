@@ -42,6 +42,10 @@ import type {
 type TagOwnProps = {
   className?: string
   text: string | React.ReactNode
+  /**
+   * @deprecated since version 10
+   * Use of the title attribute is highly problematic due to accessibility concerns
+   */
   title?: string
   /**
    * Whether or not to disable the tag
