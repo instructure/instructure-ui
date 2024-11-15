@@ -75,7 +75,8 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     size: 'medium',
     display: 'block',
     textAlign: 'start',
-    inputMode: 'numeric'
+    inputMode: 'numeric',
+    allowStringValue: false
   }
 
   state: NumberInputState = { hasFocus: false }
@@ -236,6 +237,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       showArrows,
       value,
       width,
+      allowStringValue,
       styles
     } = this.props
 
@@ -274,7 +276,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
               css={this.props.styles?.input}
               aria-invalid={this.invalid ? 'true' : undefined}
               id={this.id}
-              type="number"
+              type={allowStringValue ? 'text' : 'number'}
               inputMode={this.props.inputMode}
               placeholder={placeholder}
               ref={this.handleInputRef}
