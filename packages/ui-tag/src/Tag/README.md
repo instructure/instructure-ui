@@ -15,7 +15,7 @@ type: example
 
 When the `dismissible` prop is added to a clickable Tag, the button
 renders an X/close icon (the Tag should be dismissed via the `onClick`
-prop).
+prop). When implementing dismissable tags, be sure to add [AccessibleContent](#AccessibleContent) to clarify that the tag is dismissible to screen readers.
 
 ```js
 ---

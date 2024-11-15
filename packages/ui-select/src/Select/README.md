@@ -681,7 +681,7 @@ It's best practice to always provide autocomplete functionality to help users ma
 
 #### Highlighting and selecting options
 
-To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](#Tag) for each selected option via the `renderBeforeInput` prop.
+To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](#Tag) with [AccessibleContent](#AccessibleContent) for each selected option via the `renderBeforeInput` prop.
 
 - ```javascript
   class MultipleSelectExample extends React.Component {
@@ -845,8 +845,11 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
         <Tag
           dismissible
           key={id}
-          title={`Remove ${this.getOptionById(id).label}`}
-          text={this.getOptionById(id).label}
+          text={
+            <AccessibleContent alt={`Remove ${this.getOptionById(id).label}`}>
+              {this.getOptionById(id).label}
+            </AccessibleContent>
+          }
           margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
           onClick={(e) => this.dismissTag(e, id)}
         />
@@ -1071,8 +1074,11 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
         <Tag
           dismissible
           key={id}
-          title={`Remove ${getOptionById(id).label}`}
-          text={getOptionById(id).label}
+          text={
+            <AccessibleContent alt={`Remove ${this.getOptionById(id).label}`}>
+              {this.getOptionById(id).label}
+            </AccessibleContent>
+          }
           margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
           onClick={(e) => dismissTag(e, id)}
         />
