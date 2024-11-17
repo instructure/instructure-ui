@@ -177,6 +177,7 @@ SC.ItemList = withStyles(generateItemListStyles)(ItemList)
 SC.ItemList.displayName = 'ItemList'
 SC.Item = withStyles(generateItemStyles)(Item) //withStyles(generateItemStyles)(Item)
 SC.Item.displayName = 'Item'
+SC.displayName = 'MobileTopNav'
 
 export { SC as MobileTopNav }
 export default SC
