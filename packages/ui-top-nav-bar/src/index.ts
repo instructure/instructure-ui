@@ -63,3 +63,4 @@ export type {
 
 export { MobileTopNav } from './MobileTopNav'
 export { DesktopTopNav } from './DesktopTopNav'
+export { TopNav } from './TopNav'
