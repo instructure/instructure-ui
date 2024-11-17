@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { DesktopTopNavProps } from './props'
+import type { TopNavProps } from './props'
 
 //TODO use theme variables for spacing
-const generateStyles = (props: DesktopTopNavProps, theme: any) => {
+const generateStyles = (props: TopNavProps, theme: any) => {
   const { lightMode } = props
   return {
     container: (open: boolean) => {

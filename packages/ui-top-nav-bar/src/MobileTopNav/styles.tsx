@@ -27,10 +27,10 @@ import type { MobileTopNavProps } from './props'
 const generateStyles = (props: MobileTopNavProps, theme: any) => {
   const { lightMode } = props
   return {
-    container: (open: boolean) => {
+    container: (_open: boolean) => {
       return {
         height: '54px',
-        position: open ? 'fixed' : 'relative',
+        // position: open ? 'fixed' : 'relative',
         backgroundColor: lightMode
           ? theme.colors.ui.surfacePageSecondary
           : theme.colors.ui.surfaceDark,
@@ -38,7 +38,7 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
           ? theme.colors.contrasts.grey125125
           : theme.colors?.contrasts?.white1010,
         width: '100%',
-        zIndex: '1000'
+        zIndex: '9999'
       }
     },
     topBar: {

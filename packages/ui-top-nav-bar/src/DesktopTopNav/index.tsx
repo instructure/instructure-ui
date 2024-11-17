@@ -103,5 +103,7 @@ const SC: any = withStyles(generateStyles)(DesktopTopNav)
 SC.BreadCrumb = BreadCrumb
 // TODO investigate whether displayName should be added to the original component
 
+SC.displayName = 'DesktopTopNav'
+
 export { SC as DesktopTopNav }
 export default SC
