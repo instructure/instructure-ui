@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
+
+
+### Bug Fixes
+
+* **many:** fix regression where form elements without label got misaligned ([139f7f1](https://github.com/instructure/instructure-ui/commit/139f7f130cd7e8372af869a13cfd50cd6a97fd85))
+
+
+### Features
+
+* **ui-color-picker,ui-color-utils:** add callback for contrast validation information and export validation methods ([e756c7d](https://github.com/instructure/instructure-ui/commit/e756c7dde20158e82483a4541e916ee98a7a93ec))
+
+
+
+
+
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
 **Note:** Version bump only for package @instructure/ui-color-picker

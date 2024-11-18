@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
+
+
+### Features
+
+* **ui-color-picker,ui-color-utils:** add callback for contrast validation information and export validation methods ([e756c7d](https://github.com/instructure/instructure-ui/commit/e756c7dde20158e82483a4541e916ee98a7a93ec))
+
+
+
+
+
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
 **Note:** Version bump only for package @instructure/ui-color-utils
