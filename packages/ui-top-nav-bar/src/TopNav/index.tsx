@@ -31,7 +31,11 @@ import type { TopNavProps } from './props'
  category: components
  ---
  **/
-const TopNav = ({ children, breakpoint = '768' }: TopNavProps) => {
+const TopNav = ({
+  children,
+  breakpoint = '768',
+  lightMode = true
+}: TopNavProps) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   useEffect(() => {
@@ -46,7 +50,6 @@ const TopNav = ({ children, breakpoint = '768' }: TopNavProps) => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Filter children to get specific components
   const mobileNav = React.Children.toArray(children).find(
     (child) =>
       React.isValidElement(child) &&
@@ -60,7 +63,15 @@ const TopNav = ({ children, breakpoint = '768' }: TopNavProps) => {
       (child.type as any).displayName === 'DesktopTopNav'
   )
 
-  return isSmallScreen ? mobileNav : desktopNav
+  // Clone and inject the lightMode prop into identified children
+  const mobileNavWithProps = mobileNav
+    ? React.cloneElement(mobileNav as React.ReactElement, { lightMode })
+    : null
+  const desktopNavWithProps = desktopNav
+    ? React.cloneElement(desktopNav as React.ReactElement, { lightMode })
+    : null
+
+  return isSmallScreen ? mobileNavWithProps : desktopNavWithProps
 }
 
 // <TopNav
