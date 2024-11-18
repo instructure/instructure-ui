@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import type { ReactNode, PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
 type TopNavOwnProps = {
   lightMode?: boolean
-  brand?: ReactNode
   breakpoint?: string
 }
 
