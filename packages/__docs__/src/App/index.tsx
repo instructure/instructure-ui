@@ -980,7 +980,7 @@ class App extends Component<AppProps, AppState> {
     const key = this.state.key
     const { showMenu, layout, docsData, iconsData } = this.state
 
-    const isLightMode = false
+    const isLightMode = true
 
     const brandSvg = (
       <IconButton
@@ -988,6 +988,7 @@ class App extends Component<AppProps, AppState> {
         href="#"
         withBackground={false}
         withBorder={false}
+        color={isLightMode ? 'secondary' : 'primary-inverse'}
       >
         <svg
           viewBox="0 0 1920 1920"
@@ -1021,7 +1022,7 @@ class App extends Component<AppProps, AppState> {
             boxSizing: 'border-box'
           }}
         >
-          <TopNav>
+          <TopNav lightMode={isLightMode}>
             <DesktopTopNav>
               <DesktopTopNav.BreadCrumb>
                 <Breadcrumb label="You are here:">
@@ -1031,7 +1032,7 @@ class App extends Component<AppProps, AppState> {
                 </Breadcrumb>
               </DesktopTopNav.BreadCrumb>
             </DesktopTopNav>
-            <MobileTopNav brand={brandSvg} lightMode={isLightMode}>
+            <MobileTopNav brand={brandSvg}>
               <MobileTopNav.BtnRow>
                 <IconButton
                   withBackground={false}
