@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
+
+
+### Bug Fixes
+
+* **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
+* **many:** fix regression where form elements without label got misaligned ([139f7f1](https://github.com/instructure/instructure-ui/commit/139f7f130cd7e8372af869a13cfd50cd6a97fd85))
+* **ui-view:** adjust border colors to meet a11y contrast standards ([569072e](https://github.com/instructure/instructure-ui/commit/569072e797c8a91064567d7f4b773beeff9b3c14))
+
+
+### Features
+
+* **ui-color-picker,ui-color-utils:** add callback for contrast validation information and export validation methods ([e756c7d](https://github.com/instructure/instructure-ui/commit/e756c7dde20158e82483a4541e916ee98a7a93ec))
+* **ui-view:** add borderColor prop to ContextView; make borderColor accept HEX code as a string in View ([a823d51](https://github.com/instructure/instructure-ui/commit/a823d51b16f237629e3342ed4195a41a09eefbac))
+
+
+
+
+
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
 
