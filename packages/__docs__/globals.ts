@@ -49,9 +49,11 @@ import '@instructure/ui-icons/es/icon-font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/es/icon-font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'
-
+// @ts-ignore webpack import
 import iconExample from './buildScripts/samplemedia/heart_lg.svg'
+// @ts-ignore webpack import
 import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
+// @ts-ignore webpack import
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
 // eslint-disable-next-line no-restricted-imports
@@ -83,7 +85,7 @@ const globals = {
   lorem: {
     sentence: () => lorem.generateWords(),
     paragraph: () => lorem.generateSentences(5),
-    paragraphs: (count) =>
+    paragraphs: (count: number) =>
       lorem.generateSentences(count || Math.floor(Math.random() * 10))
   },
   mirrorHorizontalPlacement,
@@ -104,7 +106,7 @@ const globals = {
 }
 
 Object.keys(globals).forEach((key) => {
-  global[key] = globals[key]
+  ;(global as any)[key] = globals[key]
 })
 
 export default globals

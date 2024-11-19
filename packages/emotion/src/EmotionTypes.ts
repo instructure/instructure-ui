@@ -29,21 +29,75 @@ import type {
   DeepPartial
 } from '@instructure/shared-types'
 
+/**
+ * A theme object where every prop is optional
+ */
 type PartialTheme = DeepPartial<Omit<BaseTheme, 'key'>>
 
-type ComponentOverride =
-  | DeepPartial<ComponentThemeMap>
-  // this is needed for user defined components which we can't possibly type
-  | { [otherComponent: string]: ComponentTheme }
+/**
+ * Keys are component IDs, values are their theme props.
+ * Key can be an arbitrary string to support custom components
+ */
+type ComponentOverride = {
+  [otherComponent: string]: ComponentTheme
+} & DeepPartial<ComponentThemeMap>
 
+/**
+ * Overrides for a specific theme, e.g. Canvas
+ * The `ComponentOverride` type as value is needed to be able to type
+ * componentOverrides properly, see
+ * https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures
+ */
 type SpecificThemeOverride = {
-  [key: string]: PartialTheme | { componentOverrides?: ComponentOverride }
+  [key: string]:
+    | undefined
+    | ComponentOverride
+    | (PartialTheme & { componentOverrides?: ComponentOverride })
+  componentOverrides?: ComponentOverride
 }
 
+/**
+ * Can take up one of more of the following:
+ * - parts of a theme object like `{typography: {fontFamily: 'Arial'}}`
+ * - overrides for specific components in a `componentOverrides` prop
+ * - overrides for a specific theme like `{canvas: {...}}`
+ */
 type ThemeOverride = PartialTheme | SpecificThemeOverride
 
 type Overrides = {
+  /**
+   * Override theme variables, Keys are props of theme objects, values are their
+   * overridden values, e.g.:
+   * ```
+   * themeOverrides: {
+   *   typography: {
+   *     fontFamily: 'Brush Script MT'
+   *   },
+   *   colors: {
+   *     contrasts: {
+   *       white1010: '#ff00ff'
+   *     }
+   *   },
+   *   componentOverrides: {
+   *     'Tabs.Tab': {
+   *       fontSize: '5rem'
+   *     }
+   *   }
+   * }
+   * ```
+   */
   themeOverrides?: ThemeOverride
+  /**
+   * Override individual components. Keys are component IDs,
+   * values are objects with the theme variables for the given object, e.g.
+   * ```
+   * componentOverrides: {
+   *   'Tabs.Tab': {
+   *     fontSize: '5rem'
+   *   }
+   * }
+   * ```
+   */
   componentOverrides?: ComponentOverride
 }
 
@@ -87,3 +141,62 @@ export type {
   GenerateStyle,
   ComponentStyle
 }
+/*
+const _typeTest0: Overrides = {
+  //aswssdf: 'ff00',
+  themeOverrides: {
+    typography: {
+      //wefwef:4, // should error
+      fontFamily: 'Brush Script MT' // works
+    }
+  }
+}
+
+const _typeTest: Overrides = {
+  //aswssdf: 'ff00',
+  themeOverrides: {
+    fgrfg:{},
+    canvas: {
+      typography: {
+        //iugiub: '',
+        fontFamily: 'Brush Script MT' // works
+      },
+      colors: {
+        contrasts: {
+          white1010: '#ff00ff' // works
+        }
+      },
+      componentOverrides: {
+        'Tabs.Tab': {
+          fontSize: '5rem' // works
+        }
+      },
+    },
+    componentOverrides: {
+      shouldWork: {iubib:7}, // works
+      'Tabs.Tab': {
+        fontFamily: 'hhg',
+        fontSize: '5rem'// works
+      }
+    },
+    typography: {
+      //wefwef:4, // should error
+      fontFamily: 'Brush Script MT' // works
+    },
+    colors: {
+      primitives: {
+        green12: 'orange'
+      },
+      contrasts: {
+        white1010: '#ff00ff' //works
+      }
+    }
+  },
+  componentOverrides: {
+    'er':{},
+    'Tabs.Tab': {
+      fontSize: '5rem'
+    }
+  }
+}
+*/

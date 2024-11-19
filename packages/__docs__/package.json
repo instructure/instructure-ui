@@ -123,7 +123,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "semver": "^7.6.3",
-    "uuid": "^10.0.0",
+    "uuid": "^11.0.3",
     "webpack-merge": "^6.0.1"
   },
   "devDependencies": {
