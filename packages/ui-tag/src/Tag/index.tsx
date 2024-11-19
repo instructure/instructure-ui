@@ -122,7 +122,7 @@ class Tag extends Component<TagProps> {
         as={onClick ? 'button' : 'span'}
         margin={margin}
         type={onClick ? 'button' : undefined}
-        onClick={onClick ?? this.handleClick}
+        {...(onClick && { onClick: this.handleClick })}
         disabled={disabled || readOnly}
         display={undefined}
         title={title || (typeof text === 'string' ? text : undefined)}
