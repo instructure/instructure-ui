@@ -30,7 +30,7 @@ class Example extends React.Component {
       <div>
         <div>
           <Button margin="small 0" size="small" onClick={this.handleButtonClick}>
-            Fade {this.state.in ? 'Out' : 'In'}
+            <div aria-live="polite">Fade {this.state.in ? 'Out' : 'In'}</div>
           </Button>
         </div>
         <Transition
@@ -75,7 +75,7 @@ class Example extends React.Component {
       <div>
         <div>
           <Button margin="small 0" size="small" onClick={this.handleButtonClick}>
-            {this.state.in ? 'Collapse' : 'Expand'}
+            <div aria-live="polite">{this.state.in ? 'Collapse' : 'Expand'}</div>
           </Button>
         </div>
         <Transition
@@ -161,7 +161,7 @@ class Example extends React.Component {
             {directionVariants.map(dir => <RadioInput key={dir.value} value={dir.value} label={dir.label} />)}
           </RadioInputGroup>
           <Button size="small" margin="medium none small" onClick={this.handleButtonClick}>
-            Slide {this.state.in ? 'Out' : 'In'}
+            <div aria-live="polite">Slide {this.state.in ? 'Out' : 'In'}</div>
           </Button>
         </div>
         <div style={{

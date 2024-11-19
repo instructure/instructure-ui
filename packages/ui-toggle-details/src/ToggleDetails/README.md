@@ -34,7 +34,9 @@ ToggleDetails can be controlled:
       return (
         <div>
           <Button onClick={this.handleToggle}>
-            This Button {this.state.expanded ? 'Collapses' : 'Expands'}
+            <div aria-live="polite">
+              This Button {this.state.expanded ? 'Collapses' : 'Expands'}
+            </div>
           </Button>
           <br />
           <br />
@@ -69,7 +71,9 @@ ToggleDetails can be controlled:
     return (
       <div>
         <Button onClick={handleToggle}>
-          This Button {expanded ? 'Collapses' : 'Expands'}
+          <div aria-live="polite">
+            This Button {expanded ? 'Collapses' : 'Expands'}
+          </div>
         </Button>
         <br />
         <br />
