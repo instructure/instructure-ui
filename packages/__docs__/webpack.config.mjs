@@ -39,7 +39,7 @@ const resolveAliases = DEBUG ? { resolve } : {}
 
 const config = merge(baseConfig, {
   entry: {
-    main: './src/index.js',
+    main: './src/index.tsx',
   },
   module: {
     exprContextCritical: false,

@@ -25,8 +25,8 @@
 import { element } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 
-import { DocPropType } from '../propTypes'
 import type { DocDataType } from '../Document/props'
+import { DocPropType } from '../Document/props'
 
 type TableOfContentsOwnProps = {
   doc: DocDataType

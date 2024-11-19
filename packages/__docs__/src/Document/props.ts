@@ -23,7 +23,6 @@
  */
 
 import PropTypes from 'prop-types'
-import { DocPropType } from '../propTypes'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
   PropValidators,
@@ -46,6 +45,19 @@ type PropKeys = keyof DocumentOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DocumentProps = DocumentOwnProps & WithStyleProps<null, DocumentStyle>
+
+// TODO this does not match the TS type either fix or remove
+const DocPropType = PropTypes.shape({
+  props: PropTypes.object,
+  id: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  undocumented: PropTypes.bool,
+  srcPath: PropTypes.string,
+  srcUrl: PropTypes.string,
+  requirePath: PropTypes.string,
+  packageName: PropTypes.string,
+  children: PropTypes.array
+})
 
 const propTypes: PropValidators<PropKeys> = {
   doc: DocPropType.isRequired,
@@ -70,5 +82,5 @@ const allowedProps: AllowedPropKeys = [
   'themeVariables'
 ]
 
-export { propTypes, allowedProps }
+export { propTypes, allowedProps, DocPropType }
 export type { DocumentProps, DocumentStyle, DocumentState, DocDataType }

@@ -39,7 +39,32 @@ import { Playground } from './Playground'
 import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
-import { trimIndent } from './trimIndent'
+
+function trimIndent(str: string) {
+  const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split(
+    '\n'
+  )
+  let indentFound = false
+  let trimmed = ''
+  let indent = ''
+  lines.forEach((line, _i) => {
+    // matches whitespace at the end of a string
+    line.replace(/\s*$/, '')
+    if (indentFound === false) {
+      if (line === '') {
+        return
+      }
+      // matches whitespace at the beginning of a string
+      const matches = line.match(/^\s*/)
+      if (matches && matches.length > 0) {
+        indentFound = true
+        indent = matches[0]
+      }
+    }
+    trimmed += `${line.replace(new RegExp(`^${indent}`), '')}\n`
+  })
+  return trimmed.trim()
+}
 
 const getHeadingId = (children: ReactNode): string => {
   const headingId = Children.toArray(children).reduce((id, child) => {

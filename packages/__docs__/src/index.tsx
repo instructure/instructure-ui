@@ -22,25 +22,17 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 
-const LibraryPropType = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  version: PropTypes.string,
-  repository: PropTypes.string,
-  author: PropTypes.string
-})
+import { App } from './App'
+import { InstUISettingsProvider } from '@instructure/emotion'
+import '../globals'
 
-const DocPropType = PropTypes.shape({
-  props: PropTypes.object,
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  undocumented: PropTypes.bool,
-  srcPath: PropTypes.string,
-  srcUrl: PropTypes.string,
-  requirePath: PropTypes.string,
-  packageName: PropTypes.string,
-  children: PropTypes.array
-})
-
-export { LibraryPropType, DocPropType }
+createRoot(document.getElementById('app')!).render(
+  <React.StrictMode>
+    <InstUISettingsProvider>
+      <App />
+    </InstUISettingsProvider>
+  </React.StrictMode>
+)

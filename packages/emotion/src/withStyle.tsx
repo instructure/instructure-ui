@@ -51,7 +51,11 @@ import type {
   Props
 } from './EmotionTypes'
 
-type ComponentName = keyof ComponentOverride
+// Extract is needed because it would allow number otherwise
+// https://stackoverflow.com/a/51808262/319473
+
+// Unique name of an InstUI component
+type ComponentName = Extract<keyof ComponentOverride, string>
 
 interface WithStyleComponent extends InstUIComponent {
   componentId?: ComponentName

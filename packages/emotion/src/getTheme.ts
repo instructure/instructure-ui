@@ -89,11 +89,10 @@ const getTheme =
     const themeName = currentTheme.key
 
     // we pick the overrides for the current theme from the override object
+    const specificOverrides = (themeOrOverride as Overrides)?.themeOverrides
     const currentThemeOverrides =
-      (
-        (themeOrOverride as Overrides)?.themeOverrides as SpecificThemeOverride
-      )?.[themeName] ||
-      (themeOrOverride as Overrides).themeOverrides ||
+      (specificOverrides as SpecificThemeOverride)?.[themeName] ||
+      specificOverrides ||
       {}
 
     return mergeDeep(currentTheme, themeOrOverride, currentThemeOverrides)

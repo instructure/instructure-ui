@@ -24,7 +24,6 @@
 
 import PropTypes from 'prop-types'
 
-/** Recursively makes every property in T optional */
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
