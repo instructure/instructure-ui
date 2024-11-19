@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.10.0](https://github.com/instructure/instructure-ui/compare/v9.9.0...v9.10.0) (2024-11-19)
+
+
+### Bug Fixes
+
+* **ui-number-input:** fix regression and allow string type for NumberInput again ([17685f8](https://github.com/instructure/instructure-ui/commit/17685f85ef022c9f29aedec844b0c43369f014d5))
+
+
+
+
+
 # [9.9.0](https://github.com/instructure/instructure-ui/compare/v9.8.1...v9.9.0) (2024-11-12)
 
 

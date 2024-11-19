@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-scripts",
   "private": true,
-  "version": "9.9.0",
+  "version": "9.10.0",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -21,8 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.24.7",
-    "@instructure/command-utils": "9.9.0",
-    "@instructure/pkg-utils": "9.9.0",
+    "@instructure/command-utils": "9.10.0",
+    "@instructure/pkg-utils": "9.10.0",
     "@lerna/project": "^6.4.1",
     "dotenv": "^16.4.5",
     "find-up": "^7.0.0",
