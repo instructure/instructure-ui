@@ -29,7 +29,7 @@ import { Button, IconButton } from '@instructure/ui-buttons'
 import { Flex } from '@instructure/ui-flex'
 import { Img } from '@instructure/ui-img'
 import { Link } from '@instructure/ui-link'
-import { List } from '@instructure/ui-list'
+import { InlineList, List } from '@instructure/ui-list'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import {
@@ -290,7 +290,7 @@ class Hero extends Component<HeroProps> {
     )
 
     const sidebarContent = (
-      <View as="aside">
+      <View as="div">
         <View as="div">
           <Flex>
             <Flex.Item>
@@ -453,37 +453,42 @@ class Hero extends Component<HeroProps> {
                       LMS.
                     </Text>
                   </View>
-
-                  <View as="p" margin="0">
-                    <Button
-                      withBackground={false}
-                      color="primary-inverse"
-                      href="#usage"
-                      margin="0 x-small x-small 0"
-                      size={bigScreen ? 'large' : 'medium'}
-                    >
-                      Developer Quick Start
-                    </Button>
-                    <Button
-                      withBackground={false}
-                      color="primary-inverse"
-                      renderIcon={IconGithubSolid as any}
-                      href="https://github.com/instructure/instructure-ui"
-                      size={bigScreen ? 'large' : 'medium'}
-                      margin="0 x-small x-small 0"
-                    >
-                      Github
-                    </Button>
-                    <Button
-                      focusColor="inverse"
-                      color="success"
-                      href="#v10-upgrade-guide"
-                      size={bigScreen ? 'large' : 'medium'}
-                      margin="0 x-small x-small 0"
-                    >
-                      10.0 Upgrade Guide
-                    </Button>
-                  </View>
+                  <InlineList margin="0">
+                    <InlineList.Item>
+                      <Button
+                        withBackground={false}
+                        color="primary-inverse"
+                        href="#usage"
+                        margin="0 x-small x-small 0"
+                        size={bigScreen ? 'large' : 'medium'}
+                      >
+                        Developer Quick Start
+                      </Button>
+                    </InlineList.Item>
+                    <InlineList.Item>
+                      <Button
+                        withBackground={false}
+                        color="primary-inverse"
+                        renderIcon={IconGithubSolid as any}
+                        href="https://github.com/instructure/instructure-ui"
+                        size={bigScreen ? 'large' : 'medium'}
+                        margin="0 x-small x-small 0"
+                      >
+                        Github
+                      </Button>
+                    </InlineList.Item>
+                    <InlineList.Item>
+                      <Button
+                        focusColor="inverse"
+                        color="success"
+                        href="#v10-upgrade-guide"
+                        size={bigScreen ? 'large' : 'medium'}
+                        margin="0 x-small x-small 0"
+                      >
+                        10.0 Upgrade Guide
+                      </Button>
+                    </InlineList.Item>
+                  </InlineList>
                 </View>
               </ContentWrap>
             </View>

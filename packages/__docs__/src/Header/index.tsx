@@ -154,13 +154,8 @@ class Header extends Component<HeaderProps> {
     )
 
     return (
-      <View
-        role="banner"
-        as="div"
-        margin="none none medium"
-        padding="none medium"
-      >
-        <Heading level="h2" as="h1">
+      <View as="div" margin="none none medium" padding="none medium">
+        <Heading level="h2" as="div">
           <Link href="#index" isWithinText={false} display="block">
             <View display="block" textAlign="center">
               {corpLogo}
