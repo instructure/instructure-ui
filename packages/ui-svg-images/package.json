@@ -23,10 +23,14 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@instructure/ui-axe-check": "10.6.0",
     "@instructure/ui-babel-preset": "10.6.0",
-    "@instructure/ui-test-locator": "10.6.0",
     "@instructure/ui-test-utils": "10.6.0",
-    "@instructure/ui-themes": "10.6.0"
+    "@instructure/ui-themes": "10.6.0",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "vitest": "^2.1.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.25.6",
