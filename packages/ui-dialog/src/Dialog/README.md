@@ -28,6 +28,7 @@ Elements outside of the `Dialog` are hidden from screen readers automatically wh
                 defaultFocusElement={() => this._firstName}
                 shouldReturnFocus
                 onDismiss={() => this.setState({ open: false })}
+                label="Full name form"
               >
                 <View
                   as="div"
@@ -53,10 +54,10 @@ Elements outside of the `Dialog` are hidden from screen readers automatically wh
                   >
                     <TextInput
                       width="12rem"
-                      renderLabel="First"
+                      renderLabel="First name"
                       inputRef={(c) => (this._firstName = c)}
                     />
-                    <TextInput width="12rem" renderLabel="Last" />
+                    <TextInput width="12rem" renderLabel="Last name" />
                   </FormFieldGroup>
                 </View>
               </Dialog>
@@ -85,6 +86,7 @@ Elements outside of the `Dialog` are hidden from screen readers automatically wh
               defaultFocusElement={() => this._firstName}
               shouldReturnFocus
               onDismiss={() => setOpen(false)}
+              label="Full name form"
             >
               <View
                 as="div"
@@ -110,10 +112,10 @@ Elements outside of the `Dialog` are hidden from screen readers automatically wh
                 >
                   <TextInput
                     width="12rem"
-                    renderLabel="First"
+                    renderLabel="First name"
                     inputRef={(c) => (this._firstName = c)}
                   />
-                  <TextInput width="12rem" renderLabel="Last" />
+                  <TextInput width="12rem" renderLabel="Last name" />
                 </FormFieldGroup>
               </View>
             </Dialog>
@@ -141,6 +143,7 @@ type: embed
     <Figure.Item>When dialogs are triggered by buttons or links (buttons are recommended), accessibility can be further enhanced by applying aria-haspopup="dialog" to the trigger. This will notify screen reader users that the trigger opens a dialog</Figure.Item>
     <Figure.Item>We recommend that dialogs begin with a heading (typically an H2)</Figure.Item>
     <Figure.Item>Dialogs should be able to be closed by clicking away, esc key and/or a close button</Figure.Item>
+    <Figure.Item>It is recommended to provide a label for the dialog because, when specified, it will automatically set role="dialog". Alternatively, you can set aria-labelledby on the dialog to reference the ID of the visible title and set role="dialog" manually.</Figure.Item>
   </Figure>
 </Guidelines>
 ```
