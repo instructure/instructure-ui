@@ -46,7 +46,7 @@ type DialogOwnProps = {
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   /**
-   * The aria-label to read for screen reader.
+   * The aria-label to read for screen reader. When specified, it will automatically set role="dialog".
    */
   label?: string
   /**
