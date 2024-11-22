@@ -35,6 +35,8 @@ jobs:
         run: npm run bootstrap
       - name: Run vitest unit tests
         run: npm run test:vitest
+      - name: Run codemods unit tests
+        run: npm run test:codemods
   cypress:
     name: Cypress component tests
     runs-on: ubuntu-latest
