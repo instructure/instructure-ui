@@ -238,7 +238,8 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       value,
       width,
       styles,
-      allowStringValue
+      allowStringValue,
+      margin,
     } = this.props
 
     const { interaction } = this
@@ -268,6 +269,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         inline={display === 'inline-block'}
         id={this.id}
         elementRef={this.handleRef}
+        margin={margin}
       >
         <span
           css={this.props.styles?.inputWidth}

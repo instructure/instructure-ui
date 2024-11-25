@@ -34,7 +34,7 @@ import type {
   PropValidators,
   TextInputTheme
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle, Spacing } from '@instructure/emotion'
 import type {
   InteractionType,
   WithDeterministicIdProps
@@ -172,6 +172,11 @@ type TextInputOwnProps = {
    * Callback fired when input receives focus.
    */
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof TextInputOwnProps
@@ -223,7 +228,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
+  margin: PropTypes.string,
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -249,7 +255,8 @@ const allowedProps: AllowedPropKeys = [
   'renderAfterInput',
   'onChange',
   'onBlur',
-  'onFocus'
+  'onFocus',
+  'margin',
 ]
 
 type TextInputState = {

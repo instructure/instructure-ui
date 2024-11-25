@@ -84,7 +84,7 @@ const ThemeablePropValues = {
     medium: 'medium',
     large: 'large',
     xLarge: 'x-large',
-    xxLarge: 'xx-large'
+    xxLarge: 'xx-large',
   }
 } as const
 
