@@ -7,16 +7,29 @@ category: packages
 This will convert any non-default imports that are referencing the package only to reference the full path to the module instead. For example:
 
 ```js
+---
+  type: code
+---
 // a named member import:
 import { Text } from '@instructure/ui-elements'
+```
 
 would be converted to
 
+```js
+---
+  type: code
+---
 // a named import using the full module path:
 import { Text } from '@instructure/ui-elements/lib/Text'
+```
 
 Note that any default imports you are currently using will not be transformed:
 
+```js
+---
+  type: code
+---
 // a default import using the full path (will not be transformed):
 import Text from '@instructure/ui-elements/lib/Text'
 ```
