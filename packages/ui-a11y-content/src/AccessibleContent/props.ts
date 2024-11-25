@@ -31,13 +31,18 @@ import type {
 } from '@instructure/shared-types'
 
 type AccessibleContentOwnProps = {
+  /**
+   * The text that screenreaders will read. Will not be visible.
+   */
   alt?: string
 
   /**
    * the element type to render the screen reader content as
    */
   as: AsElementType
-
+  /**
+   * Content that will be hidden from screenreaders (via `aria-hidden` set to `true`)
+   */
   children?: React.ReactNode
 }
 
