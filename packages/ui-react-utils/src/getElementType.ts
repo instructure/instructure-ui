@@ -41,7 +41,13 @@ interface PropsObject {
  * ---
  * category: utilities/react
  * ---
- * Get the React element type for a component.
+ * Get the React element type for a component. It uses the following logic:
+ * 1. type defined by the `as` prop
+ * 2. type returned by the `getDefault()` parameter
+ * 3. `<a>` if it has a `href` or `to` prop
+ * 4. `<button>` if it has an `onClick` prop
+ * 5. the component's defaultProp's `as` field
+ * 6. `<span>` if none of the above
  *
  * @module getElementType
  * @param {ComponentType} Component

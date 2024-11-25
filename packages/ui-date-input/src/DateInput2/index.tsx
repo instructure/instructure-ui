@@ -316,7 +316,6 @@ const DateInput2 = ({
             visibleMonth={selectedDate}
             locale={getLocale()}
             timezone={getTimezone()}
-            role="listbox"
             renderNextMonthButton={
               <IconButton
                 size="small"

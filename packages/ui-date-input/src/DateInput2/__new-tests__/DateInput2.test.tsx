@@ -127,7 +127,7 @@ describe('<DateInput2 />', () => {
 
   it('should not show calendar table by default', async () => {
     render(<DateInputExample />)
-    const calendarTable = screen.queryByRole('listbox')
+    const calendarTable = screen.queryByRole('table')
 
     expect(calendarTable).not.toBeInTheDocument()
   })
@@ -141,8 +141,7 @@ describe('<DateInput2 />', () => {
     await userEvent.click(calendarButton)
 
     await waitFor(() => {
-      const calendarTable = screen.queryByRole('listbox')
-
+      const calendarTable = screen.queryByRole('table')
       expect(calendarTable).toBeInTheDocument()
     })
   })
@@ -258,7 +257,7 @@ describe('<DateInput2 />', () => {
     await userEvent.click(calendarButton)
 
     await waitFor(() => {
-      const calendarTable = screen.queryByRole('listbox')
+      const calendarTable = screen.queryByRole('table')
 
       expect(calendarTable).not.toBeInTheDocument()
     })

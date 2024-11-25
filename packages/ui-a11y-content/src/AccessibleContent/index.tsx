@@ -33,11 +33,13 @@ import { propTypes, allowedProps } from './props'
 import type { AccessibleContentProps } from './props'
 
 /**
----
-category: components/utilities
----
-@module AccessibleContent
-**/
+ * ---
+ * category: components/utilities
+ * ---
+ * This component hides its children from screenreaders, they will read the text
+ * specified by the `alt` prop instead
+ * @module AccessibleContent
+ */
 class AccessibleContent extends Component<AccessibleContentProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
