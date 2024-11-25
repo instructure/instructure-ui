@@ -49,7 +49,8 @@ function trimIndent(str: string) {
   let indent = ''
   lines.forEach((line, _i) => {
     // matches whitespace at the end of a string
-    line.replace(/\s*$/, '')
+    // eslint-disable-next-line no-param-reassign
+    line = line.replace(/\s*$/, '')
     if (indentFound === false) {
       if (line === '') {
         return

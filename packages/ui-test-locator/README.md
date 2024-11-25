@@ -18,7 +18,10 @@ npm install @instructure/ui-test-locator
 
 ### Usage
 
-```javascript
+```js
+---
+  type: code
+---
 // MyComponent.js
 import { testable } from '@instructure/ui-testable'
 
