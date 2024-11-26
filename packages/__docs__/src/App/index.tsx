@@ -41,7 +41,7 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 import {
   MobileTopNav,
   DesktopTopNav,
-  TopNav
+  CanvasTopNav
 } from '@instructure/ui-top-nav-bar'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
@@ -1023,85 +1023,52 @@ class App extends Component<AppProps, AppState> {
             boxSizing: 'border-box'
           }}
         >
-          <TopNav lightMode={isLightMode}>
-            <DesktopTopNav>
-              <DesktopTopNav.BreadCrumb>
-                <Breadcrumb label="You are here:">
-                  <Breadcrumb.Link>Student Forecast</Breadcrumb.Link>
-                  <Breadcrumb.Link>University of Utah</Breadcrumb.Link>
-                  <Breadcrumb.Link>University of Colleges</Breadcrumb.Link>
-                </Breadcrumb>
-              </DesktopTopNav.BreadCrumb>
-            </DesktopTopNav>
-            <MobileTopNav brand={brandSvg}>
-              <MobileTopNav.BtnRow>
-                <IconButton
-                  withBackground={false}
-                  withBorder={false}
-                  screenReaderLabel="burgir"
-                  color={isLightMode ? 'secondary' : 'primary-inverse'}
-                >
-                  <IconAnalyticsLine />
-                </IconButton>
-                <IconButton
-                  withBackground={false}
-                  withBorder={false}
-                  screenReaderLabel="burgir"
-                  color={isLightMode ? 'secondary' : 'primary-inverse'}
-                >
-                  <IconAlertsLine />
-                </IconButton>
-              </MobileTopNav.BtnRow>
-              <MobileTopNav.BreadCrumb>
-                <Link
-                  href="#"
-                  isWithinText={false}
-                  color={isLightMode ? 'link' : 'link-inverse'}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px'
-                    }}
-                  >
-                    <IconArrowOpenStartLine />
-                    Back
-                  </div>
-                </Link>
-              </MobileTopNav.BreadCrumb>
-              <MobileTopNav.Title>Courses</MobileTopNav.Title>
-              <MobileTopNav.ItemList>
-                <MobileTopNav.Item
-                  leftIcon={<IconUserLine />}
-                  rightIcon={<IconArrowOpenDownLine />}
-                  onClick={() => alert('Account clicked')}
-                >
-                  Account
-                </MobileTopNav.Item>
-                <MobileTopNav.Item
-                  leftIcon={<IconAdminLine />}
-                  rightIcon={<IconArrowOpenDownLine />}
-                  onClick={() => alert('Admin clicked')}
-                >
-                  Admin
-                </MobileTopNav.Item>
-                <MobileTopNav.Item
-                  leftIcon={<IconDashboardLine />}
-                  rightIcon={<IconArrowOpenDownLine />}
-                  onClick={() => alert('Dashboard')}
-                >
-                  Dashboard
-                </MobileTopNav.Item>
-                <MobileTopNav.Item
-                  rightIcon={<IconArrowOpenDownLine />}
-                  onClick={() => alert('Simple option with no left icon')}
-                >
-                  Simple option with no left icon
-                </MobileTopNav.Item>
-              </MobileTopNav.ItemList>
-            </MobileTopNav>
-          </TopNav>
+          <CanvasTopNav
+            brand={brandSvg}
+            lightMode={true}
+            breadcrumbLinks={[
+              { href: '#', label: 'Student Forecast' },
+              { href: '#', label: 'University of Utah' },
+              { href: '#', label: 'University of Colleges' }
+            ]}
+            title="Courses"
+            buttons={[
+              {
+                screenReaderLabel: 'Analytics', // itt icon is lesz!!!!!
+                color: 'primary-inverse'
+              },
+              {
+                screenReaderLabel: 'Alerts', // itt icon lesz!!!!!
+                color: 'primary-inverse'
+              }
+            ]}
+            backButton={{ href: '#', label: 'Back' }}
+            items={[
+              {
+                label: 'Account',
+                leftIcon: <IconUserLine />,
+                rightIcon: <IconArrowOpenDownLine />,
+                onClick: () => alert('Account clicked')
+              },
+              {
+                label: 'Admin',
+                leftIcon: <IconAdminLine />,
+                rightIcon: <IconArrowOpenDownLine />,
+                onClick: () => alert('Admin clicked')
+              },
+              {
+                label: 'Dashboard',
+                leftIcon: <IconDashboardLine />,
+                rightIcon: <IconArrowOpenDownLine />,
+                onClick: () => alert('Dashboard clicked')
+              },
+              {
+                label: 'Simple option with no left icon',
+                rightIcon: <IconArrowOpenDownLine />,
+                onClick: () => alert('Simple option with no left icon')
+              }
+            ]}
+          />
         </div>
       </AppContext.Provider>
     )
