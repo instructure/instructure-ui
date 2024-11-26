@@ -72,7 +72,7 @@ describe('<TopNavBarDesktopLayout />', () => {
 
   describe('renderBreadcrumb', () => {
     it('should render breadcrumb container', () => {
-      const { getByLabelText, getByText } = render(
+      const { getByLabelText, getAllByText } = render(
         <TopNavBarContext.Provider
           value={{
             layout: 'desktop',
@@ -87,9 +87,9 @@ describe('<TopNavBarDesktopLayout />', () => {
         </TopNavBarContext.Provider>
       )
       const breadCrumbContainer = getByLabelText('You are here')
-      const crumb1 = getByText('Course page 1')
-      const crumb2 = getByText('Course page 2')
-      const crumb3 = getByText('Course page 3')
+      const crumb1 = getAllByText('Course page 1')[0]
+      const crumb2 = getAllByText('Course page 2')[0]
+      const crumb3 = getAllByText('Course page 3')[0]
 
       expect(breadCrumbContainer).toBeInTheDocument()
       expect(crumb1).toBeVisible()
