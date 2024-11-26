@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **ui-date-input:** fix DateInput2 not working with NVDA ([34fb8e0](https://github.com/instructure/instructure-ui/commit/34fb8e0d0882d7b45580533ed4218b5b306f6075))
+
+
+
+
+
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 **Note:** Version bump only for package @instructure/ui-react-utils

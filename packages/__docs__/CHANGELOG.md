@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **emotion,shared-types:** better TS types for theme objects and their overrides ([c790958](https://github.com/instructure/instructure-ui/commit/c7909580b283ab6808f7c9d0f53b49630bf713d9))
+
+
+
+
+
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 **Note:** Version bump only for package docs-app
