@@ -109,5 +109,9 @@ const allowedProps: AllowedPropKeys = [
   'isCurrentPage'
 ]
 
-export type { BreadcrumbLinkProps }
+type BreadcrumbLinkState = {
+  isTruncated: boolean
+}
+
+export type { BreadcrumbLinkProps, BreadcrumbLinkState }
 export { propTypes, allowedProps }

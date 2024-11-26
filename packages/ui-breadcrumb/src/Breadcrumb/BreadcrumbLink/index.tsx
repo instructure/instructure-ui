@@ -28,9 +28,10 @@ import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { Tooltip } from '@instructure/ui-tooltip'
 
 import { propTypes, allowedProps } from './props'
-import type { BreadcrumbLinkProps } from './props'
+import type { BreadcrumbLinkProps, BreadcrumbLinkState } from './props'
 
 /**
 ---
@@ -40,7 +41,10 @@ id: Breadcrumb.Link
 **/
 
 @testable()
-class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
+class BreadcrumbLink extends Component<
+  BreadcrumbLinkProps,
+  BreadcrumbLinkState
+> {
   static readonly componentId = 'Breadcrumb.Link'
 
   static propTypes = propTypes
@@ -52,7 +56,18 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
   handleRef = (el: Element | null) => {
     this.ref = el
   }
+  constructor(props: BreadcrumbLinkProps) {
+    super(props)
 
+    this.state = {
+      isTruncated: false
+    }
+  }
+  handleTruncation(isTruncated: boolean) {
+    if (isTruncated !== this.state.isTruncated) {
+      this.setState({ isTruncated })
+    }
+  }
   render() {
     const {
       children,
@@ -64,22 +79,30 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
       isCurrentPage
     } = this.props
 
+    const { isTruncated } = this.state
     const props = omitProps(this.props, BreadcrumbLink.allowedProps)
 
     return (
-      <Link
-        {...props}
-        href={href}
-        renderIcon={renderIcon}
-        iconPlacement={iconPlacement}
-        onClick={onClick}
-        onMouseEnter={onMouseEnter}
-        isWithinText={false}
-        elementRef={this.handleRef}
-        {...(isCurrentPage && { 'aria-current': 'page' })}
-      >
-        <TruncateText>{children}</TruncateText>
-      </Link>
+      <Tooltip renderTip={children} preventTooltip={!isTruncated}>
+        <Link
+          {...props}
+          href={href}
+          renderIcon={renderIcon}
+          iconPlacement={iconPlacement}
+          onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          isWithinText={false}
+          elementRef={this.handleRef}
+          forceButtonRole={false}
+          {...(isCurrentPage && { 'aria-current': 'page' })}
+        >
+          <TruncateText
+            onUpdate={(isTruncated) => this.handleTruncation(isTruncated)}
+          >
+            <span aria-hidden={isTruncated}>{children}</span>
+          </TruncateText>
+        </Link>
+      </Tooltip>
     )
   }
 }
