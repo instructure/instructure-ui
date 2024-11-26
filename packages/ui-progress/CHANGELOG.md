@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **ui-progress,ui-tag:** remove onClick prop from Tag when callback is not provided. Fix Progress dependency mismatch (test-locator) ([de22f76](https://github.com/instructure/instructure-ui/commit/de22f76fd8fcdf6ef0a25788014da26f5fdfdd0e))
+
+
+
+
+
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 

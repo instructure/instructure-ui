@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **emotion,shared-types:** better TS types for theme objects and their overrides ([c790958](https://github.com/instructure/instructure-ui/commit/c7909580b283ab6808f7c9d0f53b49630bf713d9))
+* **shared-types,ui-pagination:** pagination indicators have spacing and coded as a list for a11y ([e6e5a7b](https://github.com/instructure/instructure-ui/commit/e6e5a7b6cda158f16cf0d86787130877b9c22a75))
+
+
+
+
+
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 

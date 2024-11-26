@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **ui-popover,ui-tooltip:** tooltips should close when esc is pressed ([d91de1c](https://github.com/instructure/instructure-ui/commit/d91de1c418c8fc2ff385593dc2ff938a4ba51914))
+
+
+
+
+
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 

@@ -5,7 +5,7 @@ order: 99
 isWIP: true
 ---
 
-# Upgrade Guide for Version 11
+# Upgrade Guide for Version 11 (WIP)
 
 ## Removal of deprecated props/components
 
@@ -19,6 +19,14 @@ isWIP: true
 | `Body`    | `isStacked` | is now stored in `TableContext` |
 | `Body`    | `hover`     | is now stored in `TableContext` |
 | `Body`    | `headers`   | is now stored in `TableContext` |
+
+### Theming engine changes
+
+| Deprecation                                | What to use instead?                                                                                     |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `canvas.use()`, `canvasHighContrast.use()` | Wrap all your application roots in `<InstUISettingsProvider>`                                            |
+| `variables` field on theme objects         | Use the fields from the object above, e.g. use `canvas.borders` instead of `canvas.variables.borders`    |
+| `@instructure/theme-registry` package      | This added the deprecated functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
 
 ## Changes
 

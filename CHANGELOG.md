@@ -3,118 +3,114 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
+## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
+### Other
+
+(**Experimental**) It is now possible to run InstUI 10 on the same page with InstUI v9 and v8. This is useful for e.g. module federation where the host app is running InstUI v8/v9 and the guest app wants to be on the latest version. To make this work specific criteria needs to be met:
+
+- Host app needs to be using InstUI v8/v9
+- Host app needs to import the `canvas`/`canvasHighContrast` theme before loading the guest app.
+- Guest app must use `canvasThemeLocal` or `canvasHighContrastThemeLocal`. These are exported from `ui-themes` and do not have a `variables` field and a `.use()` method.
+- Guest app's `InstUISettingsProvider`'s `theme` prop must be set otherwise it will default to a window-level theme
+- Overrides specified in global themes are not applied to local themes, you must apply these manually.
+
+These limitations/caveats are necessary to not cause breaking changes, a final iteration of thing change in InstUI v11 will remove some of these limitations.
+
+The following are **deprecated** and will be removed in InstUI v11:
+
+| Deprecation                                | What to use instead?                                                                                     |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `canvas.use()`, `canvasHighContrast.use()` | Wrap all your application roots in `<InstUISettingsProvider>`                                            |
+| `variables` field on theme objects         | Use the fields from the object above, e.g. use `canvas.borders` instead of `canvas.variables.borders`    |
+| `@instructure/theme-registry` package      | This added the deprecated functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
 
 ### Bug Fixes
 
-* **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
-* **many:** fix regression where form elements without label got misaligned ([139f7f1](https://github.com/instructure/instructure-ui/commit/139f7f130cd7e8372af869a13cfd50cd6a97fd85))
-* **ui-view:** adjust border colors to meet a11y contrast standards ([569072e](https://github.com/instructure/instructure-ui/commit/569072e797c8a91064567d7f4b773beeff9b3c14))
+- **emotion,shared-types:** better TS types for theme objects and their overrides ([c790958](https://github.com/instructure/instructure-ui/commit/c7909580b283ab6808f7c9d0f53b49630bf713d9))
+- **shared-types,ui-pagination:** pagination indicators have spacing and coded as a list for a11y ([e6e5a7b](https://github.com/instructure/instructure-ui/commit/e6e5a7b6cda158f16cf0d86787130877b9c22a75))
+- **ui-date-input:** fix DateInput2 not working with NVDA ([34fb8e0](https://github.com/instructure/instructure-ui/commit/34fb8e0d0882d7b45580533ed4218b5b306f6075))
+- **ui-popover,ui-tooltip:** tooltips should close when esc is pressed ([d91de1c](https://github.com/instructure/instructure-ui/commit/d91de1c418c8fc2ff385593dc2ff938a4ba51914))
+- **ui-progress,ui-tag:** remove onClick prop from Tag when callback is not provided. Fix Progress dependency mismatch (test-locator) ([de22f76](https://github.com/instructure/instructure-ui/commit/de22f76fd8fcdf6ef0a25788014da26f5fdfdd0e))
 
+# [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
+
+### Bug Fixes
+
+- **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
+- **many:** fix regression where form elements without label got misaligned ([139f7f1](https://github.com/instructure/instructure-ui/commit/139f7f130cd7e8372af869a13cfd50cd6a97fd85))
+- **ui-view:** adjust border colors to meet a11y contrast standards ([569072e](https://github.com/instructure/instructure-ui/commit/569072e797c8a91064567d7f4b773beeff9b3c14))
 
 ### Features
 
-* **ui-color-picker,ui-color-utils:** add callback for contrast validation information and export validation methods ([e756c7d](https://github.com/instructure/instructure-ui/commit/e756c7dde20158e82483a4541e916ee98a7a93ec))
-* **ui-view:** add borderColor prop to ContextView; make borderColor accept HEX code as a string in View ([a823d51](https://github.com/instructure/instructure-ui/commit/a823d51b16f237629e3342ed4195a41a09eefbac))
-
-
-
-
+- **ui-color-picker,ui-color-utils:** add callback for contrast validation information and export validation methods ([e756c7d](https://github.com/instructure/instructure-ui/commit/e756c7dde20158e82483a4541e916ee98a7a93ec))
+- **ui-view:** add borderColor prop to ContextView; make borderColor accept HEX code as a string in View ([a823d51](https://github.com/instructure/instructure-ui/commit/a823d51b16f237629e3342ed4195a41a09eefbac))
 
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
-
 ### Bug Fixes
 
-* do not lose focus when opening the side menu in the docs app ([0b4434d](https://github.com/instructure/instructure-ui/commit/0b4434df712df83f4a6d5e30bdea37b7be544d83))
-* docs Github corner has focus ring ([cc742d1](https://github.com/instructure/instructure-ui/commit/cc742d16c6c2a1ac8de9defae1eb53d5db4fc0bd))
-* **ui-alerts:** trigger onDismiss for SR only alerts ([98750f6](https://github.com/instructure/instructure-ui/commit/98750f689419aeb85969c93bceb31b2c74a34d68))
-* **ui-date-input:** fix DateInput2 to update messages properly ([553a235](https://github.com/instructure/instructure-ui/commit/553a2351fc7f8c6d012d4001ff49c2450d29ee97))
-* **ui-options,ui-utils:** subgroup titles in Options are not announced by TalkBack and iOS VoiceOver ([ebdf8f0](https://github.com/instructure/instructure-ui/commit/ebdf8f047cf8541723d494b16432c8248ef5fe1e))
-* **ui-tabs:** tabpanel content is not accessible with keyboard navigation when it does not have focusable element ([297cd03](https://github.com/instructure/instructure-ui/commit/297cd039228cda5bf742f3c0ca5d1cbf6a253893))
-* **ui-themes:** make all colors available ([46f9e38](https://github.com/instructure/instructure-ui/commit/46f9e38bb9f8ef0cb81ff5685cb7550b663ab896))
-* **ui-tree-browser:** treeBrowser collection descriptor is not read by screenreaders ([87623f7](https://github.com/instructure/instructure-ui/commit/87623f77cbad91961c9c390511774001e8fa6177))
-* **ui-view:** fix view success colors ([e250b02](https://github.com/instructure/instructure-ui/commit/e250b02bcbd8c12ec57de554df66fe1ef88d7a66))
-
+- do not lose focus when opening the side menu in the docs app ([0b4434d](https://github.com/instructure/instructure-ui/commit/0b4434df712df83f4a6d5e30bdea37b7be544d83))
+- docs Github corner has focus ring ([cc742d1](https://github.com/instructure/instructure-ui/commit/cc742d16c6c2a1ac8de9defae1eb53d5db4fc0bd))
+- **ui-alerts:** trigger onDismiss for SR only alerts ([98750f6](https://github.com/instructure/instructure-ui/commit/98750f689419aeb85969c93bceb31b2c74a34d68))
+- **ui-date-input:** fix DateInput2 to update messages properly ([553a235](https://github.com/instructure/instructure-ui/commit/553a2351fc7f8c6d012d4001ff49c2450d29ee97))
+- **ui-options,ui-utils:** subgroup titles in Options are not announced by TalkBack and iOS VoiceOver ([ebdf8f0](https://github.com/instructure/instructure-ui/commit/ebdf8f047cf8541723d494b16432c8248ef5fe1e))
+- **ui-tabs:** tabpanel content is not accessible with keyboard navigation when it does not have focusable element ([297cd03](https://github.com/instructure/instructure-ui/commit/297cd039228cda5bf742f3c0ca5d1cbf6a253893))
+- **ui-themes:** make all colors available ([46f9e38](https://github.com/instructure/instructure-ui/commit/46f9e38bb9f8ef0cb81ff5685cb7550b663ab896))
+- **ui-tree-browser:** treeBrowser collection descriptor is not read by screenreaders ([87623f7](https://github.com/instructure/instructure-ui/commit/87623f77cbad91961c9c390511774001e8fa6177))
+- **ui-view:** fix view success colors ([e250b02](https://github.com/instructure/instructure-ui/commit/e250b02bcbd8c12ec57de554df66fe1ef88d7a66))
 
 ### Features
 
-* **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
-
-
-
-
+- **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
 
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
-
 ### Bug Fixes
 
-* docs screenreader alerts are no longer screenreader focusable ([c225853](https://github.com/instructure/instructure-ui/commit/c2258531aa377b698fe932012112704f1879b501))
-* **ui-buttons:** add back ic-brand theme tokens to basebutton ([ff21f05](https://github.com/instructure/instructure-ui/commit/ff21f05ccafe699ebfdb4da3dff6a418e00f0721))
-* **ui-toggle-details:** do not put aria-expanded and aria-controls on the toggle if there is nothing to toggle ([82094c3](https://github.com/instructure/instructure-ui/commit/82094c3289dae60946047bbbdf60f768dcd63f4c))
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- docs screenreader alerts are no longer screenreader focusable ([c225853](https://github.com/instructure/instructure-ui/commit/c2258531aa377b698fe932012112704f1879b501))
+- **ui-buttons:** add back ic-brand theme tokens to basebutton ([ff21f05](https://github.com/instructure/instructure-ui/commit/ff21f05ccafe699ebfdb4da3dff6a418e00f0721))
+- **ui-toggle-details:** do not put aria-expanded and aria-controls on the toggle if there is nothing to toggle ([82094c3](https://github.com/instructure/instructure-ui/commit/82094c3289dae60946047bbbdf60f768dcd63f4c))
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
-
 ### Bug Fixes
 
-* **ui-calendar:** fix duplicate dates for certain timezones ([f9181aa](https://github.com/instructure/instructure-ui/commit/f9181aa88c35eba1e374240505d32bf618c46b04))
-* **ui-date-input:** fix messages prop sometimes not populating in DateInput2 ([28d2601](https://github.com/instructure/instructure-ui/commit/28d2601f55ec418e32316b77604ec15d6368d23c))
-* **ui-progress,ui-side-nav-bar:** improve a11y for Progress and SideNavBar examples ([2160fdd](https://github.com/instructure/instructure-ui/commit/2160fdd79f0ac671b8f42f06b2f8ec1f4f8b1577))
-
+- **ui-calendar:** fix duplicate dates for certain timezones ([f9181aa](https://github.com/instructure/instructure-ui/commit/f9181aa88c35eba1e374240505d32bf618c46b04))
+- **ui-date-input:** fix messages prop sometimes not populating in DateInput2 ([28d2601](https://github.com/instructure/instructure-ui/commit/28d2601f55ec418e32316b77604ec15d6368d23c))
+- **ui-progress,ui-side-nav-bar:** improve a11y for Progress and SideNavBar examples ([2160fdd](https://github.com/instructure/instructure-ui/commit/2160fdd79f0ac671b8f42f06b2f8ec1f4f8b1577))
 
 ### Features
 
-* **ui-modal:** modify modal to support less strict children ([40f8ca2](https://github.com/instructure/instructure-ui/commit/40f8ca24e80ceb41e8c5d05d1f9d5e8f77113370))
-
-
-
-
+- **ui-modal:** modify modal to support less strict children ([40f8ca2](https://github.com/instructure/instructure-ui/commit/40f8ca24e80ceb41e8c5d05d1f9d5e8f77113370))
 
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
-
 ### Bug Fixes
 
-* **console:** remove __PURE__ annotation from console to fix warnings in Vite/Rollup ([48e78bb](https://github.com/instructure/instructure-ui/commit/48e78bbd7c6830bc73aa1916970f3d656ccb54f8))
-* **shared-types,ui-table:** fix color contrast for table sorting icons ([b5a60bf](https://github.com/instructure/instructure-ui/commit/b5a60bf4b682e100912d686524a7c4c04f828ea9))
-* **ui-pagination:** fix pagination with numberinput when onBlur it calls  onPage change every time, even where there are no changes ([38e75c4](https://github.com/instructure/instructure-ui/commit/38e75c4f610455128d0c3d19181a14823e150f4f))
-* **ui-progress,ui-range-input:** use just the native HTML elements instead of ARIA tags ([f0fa72c](https://github.com/instructure/instructure-ui/commit/f0fa72c7d716ab2cb0af191debe27db1e911c19a))
-* **ui-radio-input:** fixing the issue of TalkBack reading the radio grop options incorrectly ([ff2618e](https://github.com/instructure/instructure-ui/commit/ff2618e517ddf6ed37ec5d7dce65b51e5c133504))
-* **ui-simple-select:** ensure input value updates correctly when options change ([4dc7cb2](https://github.com/instructure/instructure-ui/commit/4dc7cb2cfde69d28baaaced32a5e63aea9a48ee1))
-* **ui-text-input:** icon in SimpleSelect is vertically centered ([13790d1](https://github.com/instructure/instructure-ui/commit/13790d14ac6eb6135d7ae22b2a29f542ddf95333))
-
+- **console:** remove **PURE** annotation from console to fix warnings in Vite/Rollup ([48e78bb](https://github.com/instructure/instructure-ui/commit/48e78bbd7c6830bc73aa1916970f3d656ccb54f8))
+- **shared-types,ui-table:** fix color contrast for table sorting icons ([b5a60bf](https://github.com/instructure/instructure-ui/commit/b5a60bf4b682e100912d686524a7c4c04f828ea9))
+- **ui-pagination:** fix pagination with numberinput when onBlur it calls onPage change every time, even where there are no changes ([38e75c4](https://github.com/instructure/instructure-ui/commit/38e75c4f610455128d0c3d19181a14823e150f4f))
+- **ui-progress,ui-range-input:** use just the native HTML elements instead of ARIA tags ([f0fa72c](https://github.com/instructure/instructure-ui/commit/f0fa72c7d716ab2cb0af191debe27db1e911c19a))
+- **ui-radio-input:** fixing the issue of TalkBack reading the radio grop options incorrectly ([ff2618e](https://github.com/instructure/instructure-ui/commit/ff2618e517ddf6ed37ec5d7dce65b51e5c133504))
+- **ui-simple-select:** ensure input value updates correctly when options change ([4dc7cb2](https://github.com/instructure/instructure-ui/commit/4dc7cb2cfde69d28baaaced32a5e63aea9a48ee1))
+- **ui-text-input:** icon in SimpleSelect is vertically centered ([13790d1](https://github.com/instructure/instructure-ui/commit/13790d14ac6eb6135d7ae22b2a29f542ddf95333))
 
 ### Features
 
-* **ui-calendar,ui-date-input:** update DateInput2 api, add placeholder hint ([ee9dfab](https://github.com/instructure/instructure-ui/commit/ee9dfab8cb5cff76d829bd24163d2052a7da46a9))
-* **ui-menu:** add renderLabelInfo to Menu ([2bc8554](https://github.com/instructure/instructure-ui/commit/2bc85544b5c51aba4a98bc5082b98b8e2e08b06e))
-
-
-
-
+- **ui-calendar,ui-date-input:** update DateInput2 api, add placeholder hint ([ee9dfab](https://github.com/instructure/instructure-ui/commit/ee9dfab8cb5cff76d829bd24163d2052a7da46a9))
+- **ui-menu:** add renderLabelInfo to Menu ([2bc8554](https://github.com/instructure/instructure-ui/commit/2bc85544b5c51aba4a98bc5082b98b8e2e08b06e))
 
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
-
 ### Bug Fixes
 
-* **docs:** ensure page scrolls to anchor on load when linked ([6928c97](https://github.com/instructure/instructure-ui/commit/6928c972bbbed0073c37c93b4434f4505e80e374))
-* **docs:** fix compileMarkdown heading id generation ([ef97c7c](https://github.com/instructure/instructure-ui/commit/ef97c7c034ed712085c69d2a4b575da1da6e2c66))
-* **ui-checkbox,ui-radio-input:** reduce clickable area of checkbox and radioinput ([77b2a7d](https://github.com/instructure/instructure-ui/commit/77b2a7d18da19f28328486e53a31f7ca5ec37e74))
-* **ui-selectable:** fix Select options not being selectable on iOS Safari with VoiceOver on ([aae996f](https://github.com/instructure/instructure-ui/commit/aae996fa6aed143fe1966fe3463727459a483ccc))
-* **ui-toggle-details:** fix ToggleDetails flickering ([cbab3be](https://github.com/instructure/instructure-ui/commit/cbab3befb43f37f5df8b981f757dd857388502e0))
-
-
-
-
+- **docs:** ensure page scrolls to anchor on load when linked ([6928c97](https://github.com/instructure/instructure-ui/commit/6928c972bbbed0073c37c93b4434f4505e80e374))
+- **docs:** fix compileMarkdown heading id generation ([ef97c7c](https://github.com/instructure/instructure-ui/commit/ef97c7c034ed712085c69d2a4b575da1da6e2c66))
+- **ui-checkbox,ui-radio-input:** reduce clickable area of checkbox and radioinput ([77b2a7d](https://github.com/instructure/instructure-ui/commit/77b2a7d18da19f28328486e53a31f7ca5ec37e74))
+- **ui-selectable:** fix Select options not being selectable on iOS Safari with VoiceOver on ([aae996f](https://github.com/instructure/instructure-ui/commit/aae996fa6aed143fe1966fe3463727459a483ccc))
+- **ui-toggle-details:** fix ToggleDetails flickering ([cbab3be](https://github.com/instructure/instructure-ui/commit/cbab3befb43f37f5df8b981f757dd857388502e0))
 
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
