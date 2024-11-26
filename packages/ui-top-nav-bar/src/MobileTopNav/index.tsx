@@ -44,7 +44,7 @@ import {
 
 /**
 ---
-category: components
+category: utilities
 ---
 **/
 const MobileTopNav = ({
