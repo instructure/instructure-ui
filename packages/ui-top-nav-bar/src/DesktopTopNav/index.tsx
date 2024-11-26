@@ -24,65 +24,40 @@
  */
 
 /** @jsx jsx */
-import { Children, PropsWithChildren, useEffect, useState } from 'react'
+import { Children, PropsWithChildren } from 'react'
 import { jsx, useTheme } from '@instructure/emotion'
 import type { DesktopTopNavProps } from './props'
 
-import { IconButton } from '@instructure/ui-buttons'
-import { IconHamburgerLine, IconXLine } from '@instructure/ui-icons'
 import { generateStyles } from './styles'
 
 /**
----
-category: components
----
-**/
-const DesktopTopNav = ({
-  lightMode = false,
-  styles,
-  children
-}: DesktopTopNavProps) => {
-  const [open, setOpen] = useState<boolean>(false)
-
-  useEffect(() => {
-    const body = document.getElementsByTagName('body')[0]
-    body.style.overflow = open ? 'hidden' : 'visible'
-  }, [open])
-
+ ---
+ category: utilities
+ ---
+ **/
+const DesktopTopNav = ({ styles, children }: DesktopTopNavProps) => {
   const getSubComponent = (displayName: any) => {
     return Children.map(children, (child: any) => child)?.filter(
       (child: any) => child?.type?.displayName === displayName
     )
   }
+  //console.log('getSubComponent', getSubComponent('Start'))
 
   return (
-    <div style={styles.container(open)}>
-      <div style={styles.topBar}>
-        <span style={styles.btnRow}>
-          {/*{!open && getSubComponent('BtnRow')}*/}
-          <IconButton
-            withBackground={false}
-            withBorder={false}
-            screenReaderLabel="burgir"
-            color={lightMode ? 'secondary' : 'primary-inverse'}
-            onClick={() => setOpen((open) => !open)}
-          >
-            {open ? <IconXLine /> : <IconHamburgerLine />}
-          </IconButton>
-        </span>
-        {getSubComponent('BreadCrumb')}
-      </div>
+    <div style={styles.container}>
+      {getSubComponent('Start')}
+      {getSubComponent('End')}
     </div>
   )
 }
 
-const BreadCrumb = ({ children }: PropsWithChildren) => {
-  return (
-    <div style={{ margin: '24px 0', display: 'inline-block' }}>{children}</div>
-  )
+const Start = ({ children, styles }: PropsWithChildren & { styles: any }) => {
+  return <div style={styles.start}>{children}</div>
 }
 
-BreadCrumb.displayName = 'BreadCrumb'
+const End = ({ children, styles }: PropsWithChildren & { styles: any }) => {
+  return <div style={styles.end}>{children}</div>
+}
 
 const withStyles =
   <ComponentOwnProps, ComponentStyle>(
@@ -100,10 +75,11 @@ const withStyles =
 
 const SC: any = withStyles(generateStyles)(DesktopTopNav)
 
-SC.BreadCrumb = BreadCrumb
-// TODO investigate whether displayName should be added to the original component
-
 SC.displayName = 'DesktopTopNav'
+SC.Start = withStyles(generateStyles)(Start)
+SC.Start.displayName = 'Start'
+SC.End = withStyles(generateStyles)(End)
+SC.End.displayName = 'End'
 
 export { SC as DesktopTopNav }
 export default SC

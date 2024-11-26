@@ -23,58 +23,90 @@
  */
 
 /** @jsx jsx */
-import React, { useEffect, useState } from 'react'
-import type { TopNavProps } from './props'
+import { useEffect, useState } from 'react'
+import { DesktopTopNav } from '../DesktopTopNav'
+import { MobileTopNav } from '../MobileTopNav'
+import { jsx } from '@instructure/emotion'
+import {
+  IconAddLine,
+  IconAdminSolid,
+  IconHamburgerLine,
+  IconXLine
+} from '@instructure/ui-icons'
+import { Button, IconButton } from '@instructure/ui-buttons'
+import { Breadcrumb } from '@instructure/ui-breadcrumb'
 
 /**
- ---
- category: components
- ---
- **/
-const TopNav = ({
-  children,
-  breakpoint = '768',
-  lightMode = true
-}: TopNavProps) => {
+---
+category: components
+---
+**/
+const CanvasTopNav = ({
+  breakpoint = 768,
+  lightMode = true,
+  brand,
+  breadcrumbLinks = [],
+  title,
+  buttons = [],
+  items = [],
+  backButton
+}: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
+  // Resize listener to check if the screen is small or not
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= Number(breakpoint))
     }
 
     handleResize()
-
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [breakpoint])
 
-  const mobileNav = React.Children.toArray(children).find(
-    (child) =>
-      React.isValidElement(child) &&
-      child?.type &&
-      (child.type as any).displayName === 'MobileTopNav'
+  // Render mobile or desktop nav based on screen size
+  return isSmallScreen ? (
+    <MobileTopNav
+      lightMode={lightMode}
+      brand={brand}
+      breadcrumbLinks={breadcrumbLinks}
+      title={title}
+      buttons={buttons}
+      items={items}
+      backButton={backButton}
+    />
+  ) : (
+    <DesktopTopNav lightMode={lightMode} breadcrumbLinks={breadcrumbLinks}>
+      <DesktopTopNav.Start>
+        <IconButton
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel="burgir"
+          color={lightMode ? 'secondary' : 'primary-inverse'}
+        >
+          <IconHamburgerLine />
+        </IconButton>
+        <Breadcrumb label="You are here:">
+          {breadcrumbLinks.map((link, index) =>
+            link.href ? (
+              <Breadcrumb.Link key={index} href={link.href}>
+                {link.label}
+              </Breadcrumb.Link>
+            ) : (
+              <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
+            )
+          )}
+        </Breadcrumb>
+      </DesktopTopNav.Start>
+      <DesktopTopNav.End>
+        <Button renderIcon={IconAddLine}>IconAddLine</Button>
+        <Button renderIcon={IconAdminSolid}>IconAdminSolid</Button>
+      </DesktopTopNav.End>
+    </DesktopTopNav>
   )
-  const desktopNav = React.Children.toArray(children).find(
-    (child) =>
-      React.isValidElement(child) &&
-      child?.type &&
-      (child.type as any).displayName === 'DesktopTopNav'
-  )
-
-  // Clone and inject the lightMode prop into identified children
-  const mobileNavWithProps = mobileNav
-    ? React.cloneElement(mobileNav as React.ReactElement, { lightMode })
-    : null
-  const desktopNavWithProps = desktopNav
-    ? React.cloneElement(desktopNav as React.ReactElement, { lightMode })
-    : null
-
-  return isSmallScreen ? mobileNavWithProps : desktopNavWithProps
 }
-
-// <TopNav
+// <CanvasTopNav
 //   brand={
 //     <IconButton
 //       screenReaderLabel="Canvas Brand"
@@ -111,14 +143,14 @@ const TopNav = ({
 //   ]}
 // />
 
-// <TopNav lightMode={true} >
+// <CanvasTopNav lightMode={true} >
 //   <MobileTopNav>
 //     <div>Mobile Navigation Content</div>
 //   </MobileTopNav>
 //   <DesktopTopNav>
 //     <div>Desktop Navigation Content</div>
 //   </DesktopTopNav>
-// </TopNav>
+// </CanvasTopNav>
 
-export { TopNav }
-export default TopNav
+export { CanvasTopNav }
+export default CanvasTopNav
