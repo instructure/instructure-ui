@@ -148,6 +148,12 @@ type TooltipOwnProps = {
     event: React.UIEvent | React.FocusEvent,
     args: { documentClick: boolean }
   ) => void
+
+  /**
+   * If true, it won't display the tooltip. This is useful in cases when tooltip is conditionally needed
+   * but in an uncontrolled way
+   */
+  preventTooltip?: boolean
 }
 
 type PropKeys = keyof TooltipOwnProps
@@ -177,6 +183,7 @@ type PropsPassableToPopover = Omit<
   | 'onFocus'
   | 'onBlur'
   | 'elementRef'
+  | 'preventTooltip'
 >
 
 type TooltipProps = PropsPassableToPopover &
@@ -211,7 +218,8 @@ const propTypes: PropValidators<PropKeys> = {
   offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
   onShowContent: PropTypes.func,
-  onHideContent: PropTypes.func
+  onHideContent: PropTypes.func,
+  preventTooltip: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -230,7 +238,8 @@ const allowedProps: AllowedPropKeys = [
   'offsetY',
   'positionTarget',
   'onShowContent',
-  'onHideContent'
+  'onHideContent',
+  'preventTooltip'
 ]
 
 export type {
