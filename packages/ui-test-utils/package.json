@@ -45,8 +45,8 @@
     "wait-for-expect": "^3.0.2"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=18",
-    "react-dom": ">=16.8 <=18"
+    "react": ">=16.14 <=18",
+    "react-dom": ">=16.14 <=18"
   },
   "//dependency-comments": {
     "chai": "v5 cannot be used because 'dirty-chai' needs chai v4 (and maybe other plugins too)"
