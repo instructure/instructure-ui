@@ -144,8 +144,10 @@ export default function customSearch(searchConfig: SearchConfig | undefined) {
           dom.style.padding = '8px'
           const reactVersionMajor = Number(React.version.split('.')[0])
           if (reactVersionMajor >= 18) {
+            const module = 'react-dom/client'
             // webpack tries to evaluate imports compile time which would lead to an error on older react versions
-            import(/* webpackIgnore: true */ 'react-dom/client')
+            // Vite errors out during build in React v16/17
+            import(/* webpackIgnore: true */ /* @vite-ignore */ module)
               .then((r) => {
                 const root = r.createRoot(dom)
                 root.render(
