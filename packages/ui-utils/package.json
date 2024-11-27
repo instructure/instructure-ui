@@ -39,8 +39,8 @@
     "ua-parser-js": "^1.0.39"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=18",
-    "react-dom": ">=16.8 <=18"
+    "react": ">=16.14 <=18",
+    "react-dom": ">=16.14 <=18"
   },
   "publishConfig": {
     "access": "public"

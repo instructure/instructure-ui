@@ -44,7 +44,7 @@
     "@types/escape-html": "^1.0.4"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=18"
+    "react": ">=16.14 <=18"
   },
   "publishConfig": {
     "access": "public"

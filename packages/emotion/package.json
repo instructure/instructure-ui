@@ -42,7 +42,7 @@
     "react-dom": "^18.3.1"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=18"
+    "react": ">=16.14 <=18"
   },
   "publishConfig": {
     "access": "public"

@@ -243,7 +243,7 @@ class Hero extends Component<HeroProps> {
         </View>
         <List margin="none none x-large" itemSpacing="xx-small">
           <List.Item>
-            <Text weight="bold">React support:</Text> 16.8.0 and later
+            <Text weight="bold">React support:</Text> 16.14.0 and later
           </List.Item>
           <List.Item>
             <Text weight="bold">Browser support:</Text> The last two versions of
