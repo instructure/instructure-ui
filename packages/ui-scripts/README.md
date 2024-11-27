@@ -58,7 +58,7 @@ Deprecates ALL of a certain version of instUI npm packages by running `npm depre
 
 To build component examples and start up a dev server with hot reloading:
 
-`npm run ui-scripts examples --watch -p 8080`
+`npm run ui-scripts examples --watch -p 9090`
 
 To build component examples for deploying:
 
@@ -98,7 +98,7 @@ To publish all packages (defaults to current version):
 
 To start up a server to test production builds of examples or docs:
 
-`npm run ui-scripts server -p 8080`
+`npm run ui-scripts server -p 9090`
 
 #### npm tag
 
