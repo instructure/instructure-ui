@@ -2,7 +2,9 @@
 describes: NumberInput
 ---
 
-A controlled number input field. Note that this field **does not work
+A controlled number input field.
+By deafult, it renders a `<intput type="number">` to the DOM. However, if you need any string value, use the `allowStringValue` flag. Only use this if absolutely necessary, since it could be confusing for screenreader users.
+Note that this field **does not work
 uncontrolled** - you must pass event handlers if you want it to respond to
 user input.
 
@@ -300,12 +302,11 @@ type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <Figure.Item>Use when the input is limited to a number (integer, rational, or irrational expressed with decimal points)</Figure.Item>
+    <Figure.Item>Use when you need increment/decrement functionality</Figure.Item>
     <Figure.Item>Use labels at the top or to the left of the input field</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Place labels or text strings to the right of the input field</Figure.Item>
-    <Figure.Item>Use for alphanumeric input</Figure.Item>
   </Figure>
 </Guidelines>
 ```
