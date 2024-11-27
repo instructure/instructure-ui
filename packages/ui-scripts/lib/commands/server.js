@@ -31,7 +31,7 @@ export default {
       alias: 'p',
       type: 'number',
       describe: 'port to use.',
-      default: 8080
+      default: 9090
     }
   },
   handler: (argv) => {
