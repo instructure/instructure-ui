@@ -49,7 +49,8 @@ const CanvasTopNav = ({
   mobileMenuTitle,
   mobileButtons = [],
   mobileMenu = [],
-  mobileMenuBackButton
+  mobileMenuBackNavigation,
+  hamburgerOnClick
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -68,7 +69,7 @@ const CanvasTopNav = ({
   // Render mobile or desktop nav based on screen size
   return isSmallScreen ? (
     <MobileTopNav lightMode={lightMode} brand={brand}>
-      <MobileTopNav.BtnRow>
+      <MobileTopNav.End>
         {mobileButtons.map((button, index) => (
           <IconButton
             key={index}
@@ -80,11 +81,11 @@ const CanvasTopNav = ({
             {button.icon}
           </IconButton>
         ))}
-      </MobileTopNav.BtnRow>
+      </MobileTopNav.End>
       <MobileTopNav.Menu>
         <Breadcrumb>
           <BreadcrumbLink
-            href={mobileMenuBackButton.href}
+            href={mobileMenuBackNavigation.href}
             isWithinText={false}
             color={lightMode ? 'link' : 'link-inverse'}
           >
@@ -96,7 +97,7 @@ const CanvasTopNav = ({
               }}
             >
               <IconArrowOpenStartLine />
-              {mobileMenuBackButton.label}
+              {mobileMenuBackNavigation.label}
             </div>
           </BreadcrumbLink>
         </Breadcrumb>
@@ -122,6 +123,7 @@ const CanvasTopNav = ({
           withBackground={false}
           withBorder={false}
           screenReaderLabel="burgir"
+          onClick={hamburgerOnClick}
           color={lightMode ? 'secondary' : 'primary-inverse'}
         >
           <IconHamburgerLine />

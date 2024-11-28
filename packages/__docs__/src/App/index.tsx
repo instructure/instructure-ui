@@ -1045,7 +1045,7 @@ class App extends Component<AppProps, AppState> {
                 icon: <IconAlertsLine />
               }
             ]}
-            mobileMenuBackButton={{ href: '#', label: 'Back' }}
+            mobileMenuBackNavigation={{ href: '#', label: 'Back' }}
             mobileMenu={[
               {
                 label: 'Account',
