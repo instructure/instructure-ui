@@ -30,7 +30,6 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
     container: (_open: boolean) => {
       return {
         height: '54px',
-        // position: open ? 'fixed' : 'relative',
         backgroundColor: lightMode
           ? theme.colors.ui.surfacePageSecondary
           : theme.colors.ui.surfaceDark,
@@ -66,9 +65,10 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
           : theme.colors?.contrasts?.white1010
       }
     },
-    btnRow: {
+    end: {
       display: 'flex',
-      gap: '12px'
+      gap: '12px',
+      marginLeft: 'auto'
     }
   }
 }
