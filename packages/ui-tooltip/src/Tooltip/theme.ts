@@ -31,13 +31,14 @@ import { TooltipTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): TooltipTheme => {
-  const { typography, spacing } = theme
+  const { typography, spacing, colors } = theme
 
   const componentVariables: TooltipTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     fontSize: typography?.fontSizeSmall,
-    padding: spacing?.small
+    padding: spacing?.small,
+    borderColor: colors?.contrasts?.grey3045
   }
 
   return {

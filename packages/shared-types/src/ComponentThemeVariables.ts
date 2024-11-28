@@ -1445,6 +1445,7 @@ export type TooltipTheme = {
   fontWeight: Typography['fontWeightNormal']
   fontSize: Typography['fontSizeSmall']
   padding: Spacing['small']
+  borderColor: Colors['contrasts']['grey3045']
 }
 
 export type TopNavBarActionItemsTheme = {

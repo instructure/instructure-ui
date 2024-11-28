@@ -176,6 +176,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         elementRef={this.handleRef}
         shouldCloseOnDocumentClick={false}
         shouldCloseOnEscape
+        themeOverride={{ borderColor: styles?.borderColor as string }}
       >
         <span id={this._id} css={styles?.tooltip} role="tooltip">
           {/* TODO: figure out how to add a ref to this */}

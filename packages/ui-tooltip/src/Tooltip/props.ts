@@ -186,7 +186,7 @@ type TooltipProps = PropsPassableToPopover &
   OtherHTMLAttributes<TooltipOwnProps> &
   WithDeterministicIdProps
 
-type TooltipStyle = ComponentStyle<'tooltip'>
+type TooltipStyle = ComponentStyle<'tooltip' | 'borderColor'>
 
 type TooltipState = {
   hasFocus: boolean
