@@ -31,9 +31,9 @@ import type { DesktopTopNavProps } from './props'
 import { generateStyles } from './styles'
 
 /**
- ---
- category: utilities
- ---
+---
+category: utilities
+---
  **/
 const DesktopTopNav = ({ styles, children }: DesktopTopNavProps) => {
   const getSubComponent = (displayName: any) => {
@@ -41,8 +41,6 @@ const DesktopTopNav = ({ styles, children }: DesktopTopNavProps) => {
       (child: any) => child?.type?.displayName === displayName
     )
   }
-  //console.log('getSubComponent', getSubComponent('Start'))
-
   return (
     <div style={styles.container}>
       {getSubComponent('Start')}
