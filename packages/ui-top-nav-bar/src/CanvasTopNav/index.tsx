@@ -30,11 +30,11 @@ import { jsx } from '@instructure/emotion'
 import {
   IconAddLine,
   IconAdminSolid,
-  IconHamburgerLine,
-  IconXLine
+  IconArrowOpenStartLine,
+  IconHamburgerLine
 } from '@instructure/ui-icons'
 import { Button, IconButton } from '@instructure/ui-buttons'
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
+import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
 
 /**
 ---
@@ -45,11 +45,11 @@ const CanvasTopNav = ({
   breakpoint = 768,
   lightMode = true,
   brand,
-  breadcrumbLinks = [],
-  title,
-  buttons = [],
-  items = [],
-  backButton
+  breadcrumb,
+  mobileMenuTitle,
+  mobileButtons = [],
+  mobileMenu = [],
+  mobileMenuBackButton
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -67,17 +67,56 @@ const CanvasTopNav = ({
 
   // Render mobile or desktop nav based on screen size
   return isSmallScreen ? (
-    <MobileTopNav
-      lightMode={lightMode}
-      brand={brand}
-      breadcrumbLinks={breadcrumbLinks}
-      title={title}
-      buttons={buttons}
-      items={items}
-      backButton={backButton}
-    />
+    <MobileTopNav lightMode={lightMode} brand={brand}>
+      <MobileTopNav.BtnRow>
+        {mobileButtons.map((button, index) => (
+          <IconButton
+            key={index}
+            withBackground={false}
+            withBorder={false}
+            screenReaderLabel={button.screenReaderLabel}
+            color={lightMode ? 'secondary' : button.color}
+          >
+            {button.icon}
+          </IconButton>
+        ))}
+      </MobileTopNav.BtnRow>
+      <MobileTopNav.Menu>
+        <Breadcrumb>
+          <BreadcrumbLink
+            href={mobileMenuBackButton.href}
+            isWithinText={false}
+            color={lightMode ? 'link' : 'link-inverse'}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <IconArrowOpenStartLine />
+              {mobileMenuBackButton.label}
+            </div>
+          </BreadcrumbLink>
+        </Breadcrumb>
+        <MobileTopNav.Title>{mobileMenuTitle}</MobileTopNav.Title>
+        <MobileTopNav.ItemList>
+          {mobileMenu.map((item, index) => (
+            <MobileTopNav.Item
+              key={index}
+              renderBeforeLabel={item.renderBeforeLabel || null}
+              renderAfterLabel={item.renderAfterLabel || null}
+              onClick={item.onClick}
+            >
+              {item.label}
+            </MobileTopNav.Item>
+          ))}
+        </MobileTopNav.ItemList>
+      </MobileTopNav.Menu>
+    </MobileTopNav>
   ) : (
-    <DesktopTopNav lightMode={lightMode} breadcrumbLinks={breadcrumbLinks}>
+    <DesktopTopNav lightMode={lightMode}>
       <DesktopTopNav.Start>
         <IconButton
           withBackground={false}
@@ -87,8 +126,8 @@ const CanvasTopNav = ({
         >
           <IconHamburgerLine />
         </IconButton>
-        <Breadcrumb label="You are here:">
-          {breadcrumbLinks.map((link, index) =>
+        <Breadcrumb label={breadcrumb.label}>
+          {breadcrumb.links.map((link, index) =>
             link.href ? (
               <Breadcrumb.Link key={index} href={link.href}>
                 {link.label}

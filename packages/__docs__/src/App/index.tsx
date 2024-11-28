@@ -1026,45 +1026,45 @@ class App extends Component<AppProps, AppState> {
           <CanvasTopNav
             brand={brandSvg}
             lightMode={true}
-            breadcrumbLinks={[
-              { href: '#', label: 'Student Forecast' },
-              { href: '#', label: 'University of Utah' },
-              { href: '#', label: 'University of Colleges' }
-            ]}
-            title="Courses"
-            buttons={[
+            breadcrumb={{
+              label: 'You are here:',
+              links: [
+                { href: '#', label: 'Student Forecast' },
+                { href: '#', label: 'University of Utah' },
+                { href: '#', label: 'University of Colleges' }
+              ]
+            }}
+            hamburgerOnClick={() => alert('Hamburger clicked')}
+            mobileMenuTitle="Courses"
+            mobileButtons={[
               {
-                screenReaderLabel: 'Analytics', // itt icon is lesz!!!!!
-                color: 'primary-inverse'
+                screenReaderLabel: 'Analytics',
+                icon: <IconAnalyticsLine />
               },
               {
-                screenReaderLabel: 'Alerts', // itt icon lesz!!!!!
-                color: 'primary-inverse'
+                screenReaderLabel: 'Alerts',
+                icon: <IconAlertsLine />
               }
             ]}
-            backButton={{ href: '#', label: 'Back' }}
-            items={[
+            mobileMenuBackButton={{ href: '#', label: 'Back' }}
+            mobileMenu={[
               {
                 label: 'Account',
-                leftIcon: <IconUserLine />,
-                rightIcon: <IconArrowOpenDownLine />,
+                renderBeforeLabel: <IconUserLine />,
                 onClick: () => alert('Account clicked')
               },
               {
                 label: 'Admin',
-                leftIcon: <IconAdminLine />,
-                rightIcon: <IconArrowOpenDownLine />,
+                renderBeforeLabel: <IconAdminLine />,
                 onClick: () => alert('Admin clicked')
               },
               {
                 label: 'Dashboard',
-                leftIcon: <IconDashboardLine />,
-                rightIcon: <IconArrowOpenDownLine />,
+                renderBeforeLabel: <IconDashboardLine />,
                 onClick: () => alert('Dashboard clicked')
               },
               {
                 label: 'Simple option with no left icon',
-                rightIcon: <IconArrowOpenDownLine />,
                 onClick: () => alert('Simple option with no left icon')
               }
             ]}
