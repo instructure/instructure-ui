@@ -70,8 +70,8 @@ const MobileTopNav = ({
     <div style={styles.container(open)}>
       <div style={styles.topBar}>
         {brand}
-        <span style={styles.btnRow}>
-          {!open && getSubComponent('BtnRow')}
+        <span style={styles.end}>
+          {!open && getSubComponent('End')}
           <IconButton
             withBackground={false}
             withBorder={false}
@@ -89,21 +89,13 @@ const MobileTopNav = ({
   )
 }
 
-const BtnRow = ({ children }: PropsWithChildren) => {
+const End = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
 
 const Menu = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
-
-BtnRow.displayName = 'BtnRow'
-
-const BreadCrumb = ({ children }: PropsWithChildren) => {
-  return <div style={{ margin: '24px 0' }}>{children}</div>
-}
-
-BreadCrumb.displayName = 'BreadCrumb'
 
 const Title = ({ children }: PropsWithChildren) => {
   return <div style={{ margin: '32px 0' }}>{children}</div>
@@ -173,8 +165,8 @@ const withStyles =
 
 const SC: any = withStyles(generateStyles)(MobileTopNav)
 
-SC.BtnRow = BtnRow
-SC.BreadCrumb = BreadCrumb
+SC.End = End
+SC.End.displayName = 'End'
 SC.Title = Title
 SC.ItemList = withStyles(generateItemListStyles)(ItemList)
 // TODO investigate whether displayName should be added to the original component
