@@ -39,7 +39,7 @@ type MobileTopNavStyle = {
   topBar: {
     [key: string]: string | number
   }
-  btnRow: {
+  end: {
     [key: string]: string | number
   }
 }
