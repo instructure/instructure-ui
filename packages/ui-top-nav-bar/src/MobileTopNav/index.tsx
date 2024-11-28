@@ -84,16 +84,16 @@ const MobileTopNav = ({
         </span>
       </div>
 
-      <div style={styles.content(open)}>
-        {getSubComponent('BreadCrumb')}
-        {getSubComponent('Title')}
-        {getSubComponent('ItemList')}
-      </div>
+      <div style={styles.content(open)}>{getSubComponent('Menu')}</div>
     </div>
   )
 }
 
 const BtnRow = ({ children }: PropsWithChildren) => {
+  return <Fragment>{children}</Fragment>
+}
+
+const Menu = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
 
@@ -133,22 +133,26 @@ ItemList.displayName = 'ItemList'
 
 const Item = ({
   children,
-  leftIcon,
-  rightIcon,
+  renderBeforeLabel,
+  renderAfterLabel,
   onClick,
   styles
 }: PropsWithChildren & {
-  leftIcon: any
-  rightIcon: any
+  renderBeforeLabel: any
+  renderAfterLabel: any
   onClick: any
   styles: any
 }) => {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <div style={styles.container} onClick={onClick}>
-      {leftIcon && <div style={styles.leftIcon}>{leftIcon}</div>}
+      {renderBeforeLabel && (
+        <div style={styles.leftIcon}>{renderBeforeLabel}</div>
+      )}
       {children}
-      {rightIcon && <div style={styles.rightIcon}>{rightIcon}</div>}
+      {renderAfterLabel && (
+        <div style={styles.rightIcon}>{renderAfterLabel}</div>
+      )}
     </div>
   )
 }
@@ -177,6 +181,8 @@ SC.ItemList = withStyles(generateItemListStyles)(ItemList)
 SC.ItemList.displayName = 'ItemList'
 SC.Item = withStyles(generateItemStyles)(Item) //withStyles(generateItemStyles)(Item)
 SC.Item.displayName = 'Item'
+SC.Menu = Menu
+SC.Menu.displayName = 'Menu'
 SC.displayName = 'MobileTopNav'
 
 export { SC as MobileTopNav }
