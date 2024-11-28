@@ -36,7 +36,7 @@ const brandVariables = {
   // used in lots of places for text color
   'ic-brand-font-color-dark': colors?.contrasts?.grey125125,
   // used by Link and links in Billboard
-  'ic-link-color': colors?.contrasts?.blue4570,
+  'ic-link-color': colors?.contrasts?.blue5782,
   'ic-link-decoration': 'none',
   // Used by BaseButton and its subcomponents
   'ic-brand-button--primary-bgd': colors?.contrasts?.blue4570,
