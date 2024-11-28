@@ -52,7 +52,7 @@ const generateComponentTheme = (theme: Theme): LinkTheme => {
   const componentVariables: LinkTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
-    color: colors?.contrasts?.blue4570,
+    color: colors?.contrasts?.blue5782,
 
     textDecorationWithinText: 'underline',
     hoverTextDecorationWithinText: 'none',
