@@ -1024,7 +1024,7 @@ class App extends Component<AppProps, AppState> {
         >
           <CanvasTopNav
             brand={brandSvg}
-            lightMode={true}
+            lightMode={false}
             breadcrumb={{
               label: 'You are here:',
               links: [
@@ -1038,11 +1038,13 @@ class App extends Component<AppProps, AppState> {
             mobileButtons={[
               {
                 screenReaderLabel: 'Analytics',
-                icon: <IconAnalyticsLine />
+                icon: <IconAnalyticsLine />,
+                onClick: () => alert('Analytics clicked')
               },
               {
                 screenReaderLabel: 'Alerts',
-                icon: <IconAlertsLine />
+                icon: <IconAlertsLine />,
+                onClick: () => alert('Alerts clicked')
               }
             ]}
             mobileMenuBackNavigation={{ href: '#', label: 'Back' }}
