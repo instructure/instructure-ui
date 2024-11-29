@@ -76,7 +76,8 @@ const CanvasTopNav = ({
             withBackground={false}
             withBorder={false}
             screenReaderLabel={button.screenReaderLabel}
-            color={lightMode ? 'secondary' : button.color}
+            color={lightMode ? 'primary' : 'primary-inverse'}
+            onClick={button.onClick}
           >
             {button.icon}
           </IconButton>
@@ -87,7 +88,7 @@ const CanvasTopNav = ({
           <BreadcrumbLink
             href={mobileMenuBackNavigation.href}
             isWithinText={false}
-            color={lightMode ? 'link' : 'link-inverse'}
+            color={lightMode ? 'link' : 'primary-inverse'}
           >
             <div
               style={{
@@ -101,8 +102,7 @@ const CanvasTopNav = ({
             </div>
           </BreadcrumbLink>
         </Breadcrumb>
-        <MobileTopNav.Title>{mobileMenuTitle}</MobileTopNav.Title>
-        <MobileTopNav.ItemList>
+        <MobileTopNav.ItemList title={mobileMenuTitle}>
           {mobileMenu.map((item, index) => (
             <MobileTopNav.Item
               key={index}
@@ -128,17 +128,19 @@ const CanvasTopNav = ({
         >
           <IconHamburgerLine />
         </IconButton>
-        <Breadcrumb label={breadcrumb.label}>
-          {breadcrumb.links.map((link, index) =>
-            link.href ? (
-              <Breadcrumb.Link key={index} href={link.href}>
-                {link.label}
-              </Breadcrumb.Link>
-            ) : (
-              <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
-            )
-          )}
-        </Breadcrumb>
+        <div style={{ minWidth: '100%' }}>
+          <Breadcrumb label={breadcrumb.label}>
+            {breadcrumb.links.map((link, index) =>
+              link.href ? (
+                <Breadcrumb.Link key={index} href={link.href}>
+                  {link.label}
+                </Breadcrumb.Link>
+              ) : (
+                <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
+              )
+            )}
+          </Breadcrumb>
+        </div>
       </DesktopTopNav.Start>
       <DesktopTopNav.End>
         <Button renderIcon={IconAddLine}>IconAddLine</Button>
