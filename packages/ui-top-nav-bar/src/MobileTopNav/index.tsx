@@ -76,7 +76,7 @@ const MobileTopNav = ({
             withBackground={false}
             withBorder={false}
             screenReaderLabel="burgir"
-            color={lightMode ? 'secondary' : 'primary-inverse'}
+            color={lightMode ? 'primary' : 'primary-inverse'}
             onClick={() => setOpen((open) => !open)}
           >
             {open ? <IconXLine /> : <IconHamburgerLine />}
@@ -105,10 +105,12 @@ Title.displayName = 'Title'
 
 const ItemList = ({
   children,
+  title,
   styles
-}: PropsWithChildren & { styles: any }) => {
+}: PropsWithChildren & { styles: any; title: any }) => {
   return (
     <Fragment>
+      {title && <Title>{title}</Title>}
       {Children.map(children, (child, index) => (
         <Fragment>
           {child}
