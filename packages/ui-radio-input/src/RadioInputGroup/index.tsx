@@ -165,7 +165,13 @@ class RadioInputGroup extends Component<
       <React.Fragment>
         {description}
         {isRequired && description && (
-          <span css={this.invalid ? styles?.invalidAsterisk : {}}> *</span>
+          <span
+            css={this.invalid ? styles?.invalidAsterisk : {}}
+            aria-hidden={true}
+          >
+            {' '}
+            *
+          </span>
         )}
       </React.Fragment>
     ) : (

@@ -358,7 +358,13 @@ class TextArea extends Component<TextAreaProps> {
       <React.Fragment>
         {this.props.label}
         {required && (
-          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+          <span
+            css={this.invalid ? styles?.requiredInvalid : {}}
+            aria-hidden={true}
+          >
+            {' '}
+            *
+          </span>
         )}
       </React.Fragment>
     ) : (

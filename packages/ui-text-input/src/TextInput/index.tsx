@@ -333,7 +333,13 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       <React.Fragment>
         {rawLabel}
         {isRequired && (
-          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+          <span
+            css={this.invalid ? styles?.requiredInvalid : {}}
+            aria-hidden={true}
+          >
+            {' '}
+            *
+          </span>
         )}
       </React.Fragment>
     ) : (
