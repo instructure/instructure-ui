@@ -246,7 +246,13 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       <React.Fragment>
         {rawLabel}
         {isRequired && (
-          <span css={this.invalid ? styles?.requiredInvalid : {}}> *</span>
+          <span
+            css={this.invalid ? styles?.requiredInvalid : {}}
+            aria-hidden={true}
+          >
+            {' '}
+            *
+          </span>
         )}
       </React.Fragment>
     ) : (
