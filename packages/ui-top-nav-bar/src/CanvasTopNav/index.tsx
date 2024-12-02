@@ -70,7 +70,7 @@ const CanvasTopNav = ({
   return isSmallScreen ? (
     <MobileTopNav lightMode={lightMode} brand={brand}>
       <MobileTopNav.End>
-        {mobileButtons.map((button, index) => (
+        {mobileButtons.map((button: any, index: any) => (
           <IconButton
             key={index}
             withBackground={false}
@@ -84,12 +84,8 @@ const CanvasTopNav = ({
         ))}
       </MobileTopNav.End>
       <MobileTopNav.Menu>
-        <Breadcrumb>
-          <BreadcrumbLink
-            href={mobileMenuBackNavigation.href}
-            isWithinText={false}
-            color={lightMode ? 'link' : 'primary-inverse'}
-          >
+        <Breadcrumb label={mobileMenuBackNavigation.label}>
+          <BreadcrumbLink href={mobileMenuBackNavigation.href}>
             <div
               style={{
                 display: 'flex',
@@ -103,7 +99,7 @@ const CanvasTopNav = ({
           </BreadcrumbLink>
         </Breadcrumb>
         <MobileTopNav.ItemList title={mobileMenuTitle}>
-          {mobileMenu.map((item, index) => (
+          {mobileMenu.map((item: any, index: any) => (
             <MobileTopNav.Item
               key={index}
               renderBeforeLabel={item.renderBeforeLabel || null}
@@ -130,7 +126,7 @@ const CanvasTopNav = ({
         </IconButton>
         <div style={{ minWidth: '100%' }}>
           <Breadcrumb label={breadcrumb.label}>
-            {breadcrumb.links.map((link, index) =>
+            {breadcrumb.links.map((link: any, index: any) =>
               link.href ? (
                 <Breadcrumb.Link key={index} href={link.href}>
                   {link.label}
@@ -143,8 +139,8 @@ const CanvasTopNav = ({
         </div>
       </DesktopTopNav.Start>
       <DesktopTopNav.End>
-        <Button renderIcon={IconAddLine}>IconAddLine</Button>
-        <Button renderIcon={IconAdminSolid}>IconAdminSolid</Button>
+        <Button renderIcon={<IconAddLine />}>IconAddLine</Button>
+        <Button renderIcon={<IconAdminSolid />}>IconAdminSolid</Button>
       </DesktopTopNav.End>
     </DesktopTopNav>
   )
