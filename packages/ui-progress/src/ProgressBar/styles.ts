@@ -45,7 +45,8 @@ const generateStyle = (
     size,
     color,
     meterColor,
-    shouldAnimate
+    shouldAnimate,
+    isRounded
   } = props
 
   const meterColorClassName =
@@ -57,6 +58,8 @@ const generateStyle = (
     valueNow > valueMax ? valueMax : valueNow < 0 ? 0 : valueNow
 
   const currentValuePercent = `${(currentValue / valueMax) * 100}%`
+
+  const borderRadius = isRounded ? '20px' : 0
 
   const sizeVariants = {
     'x-small': {
@@ -138,6 +141,7 @@ const generateStyle = (
       borderBottomWidth: componentTheme.trackBottomBorderWidth,
       borderBottomStyle: 'solid',
       background: 'transparent',
+      borderRadius,
 
       ...sizeVariants[size!].track,
       ...colorVariants[color!].trackBorder
@@ -150,6 +154,7 @@ const generateStyle = (
       height: '100%',
       width: currentValuePercent,
       maxWidth: '100%',
+      borderRadius,
 
       ...(shouldAnimate && { transition: 'all 0.5s' }),
       ...(meterColorClassName &&

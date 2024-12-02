@@ -134,6 +134,45 @@ type: example
 > `<ProgressBar />` defaults to setting the meter color to `success` when
 > complete.
 
+### `isRounded`
+
+Rounded variant of the progress bar is available via the `isRounded` prop
+
+```js
+---
+type: example
+---
+<div>
+  <ProgressBar
+    size="x-small"
+    screenReaderLabel="Loading completion"
+    valueNow={40}
+    valueMax={60}
+    margin="0 0 small"
+  />
+  <ProgressBar
+    size="small"
+    screenReaderLabel="Loading completion"
+    valueNow={40}
+    valueMax={60}
+    margin="0 0 small"
+  />
+  <ProgressBar
+    screenReaderLabel="Loading completion"
+    valueNow={40}
+    valueMax={60}
+    margin="0 0 small"
+  />
+  <ProgressBar
+    size="large"
+    screenReaderLabel="Loading completion"
+    valueNow={60}
+    valueMax={60}
+    isRounded
+  />
+</div>
+```
+
 ### `renderValue` / `formatScreenReaderValue`
 
 Via the `renderValue` prop, developers can use `valueMax` and `valueNow` props to format the

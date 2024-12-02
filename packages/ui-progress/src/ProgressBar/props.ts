@@ -106,6 +106,11 @@ type ProgressBarOwnProps = {
   margin?: Spacing
 
   /**
+   * Control the border-radius of the progress meter.
+   */
+  isRounded?: boolean
+
+  /**
    * Provides a reference to the component's root HTML element
    */
   elementRef?: (element: Element | null) => void
@@ -147,6 +152,7 @@ const propTypes: PropValidators<PropKeys> = {
   ]),
   shouldAnimate: PropTypes.bool,
   margin: ThemeablePropTypes.spacing,
+  isRounded: PropTypes.bool,
   elementRef: PropTypes.func,
   as: PropTypes.elementType
 }
@@ -162,6 +168,7 @@ const allowedProps: AllowedPropKeys = [
   'meterColor',
   'shouldAnimate',
   'margin',
+  'isRounded',
   'elementRef',
   'as'
 ]
