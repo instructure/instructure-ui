@@ -30,7 +30,7 @@ type DesktopTopNavOwnProps = {
 }
 
 type DesktopTopNavStyle = {
-  container: (open: boolean) => {
+  container: {
     [key: string]: string | number
   }
   content: (open: boolean) => {
