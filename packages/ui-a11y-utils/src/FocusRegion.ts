@@ -45,8 +45,7 @@ class FocusRegion {
   private readonly _id: string
   private _listeners: ReturnType<typeof addEventListener>[] = []
   private _active = false
-  private _documentClickTarget: Node | null = null
-  private _contextContainsTarget = false
+  private _documentMouseDownTarget: Node | null = null
 
   constructor(element: Element | Node | null, options: FocusRegionOptions) {
     this._options = options || {
@@ -83,11 +82,8 @@ class FocusRegion {
   }
 
   captureDocumentMousedown = (event: React.MouseEvent) => {
-    this._documentClickTarget = event.target as Node
-    this._contextContainsTarget = contains(
-      this._contextElement,
-      this._documentClickTarget
-    )
+    // FocusRegion can be activated after mousedown but before click so this is not guaranteed to fire.
+    this._documentMouseDownTarget = event.target as Node
   }
 
   handleDocumentClick = (event: React.PointerEvent) => {
@@ -95,7 +91,8 @@ class FocusRegion {
       this._options.shouldCloseOnDocumentClick &&
       event.button === 0 &&
       event.detail > 0 && // if event.detail is 0 then this is a keyboard and not a mouse press
-      !this._contextContainsTarget
+      this._documentMouseDownTarget !== null &&
+      !contains(this._contextElement, this._documentMouseDownTarget)
     ) {
       this.handleDismiss(event, true)
     }
