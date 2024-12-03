@@ -83,4 +83,36 @@ describe('<ProgressBar />', () => {
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
   })
+
+  it('should not render the value inside when the prop is set to false', () => {
+    const valueNow = 33
+    const { container } = render(
+      <ProgressBar
+        screenReaderLabel="Chapters read"
+        valueMax={100}
+        valueNow={valueNow}
+        renderValueInside={false}
+        renderValue={`${valueNow}%`}
+      />
+    )
+    const progressMeter = container.querySelector('[class$="-progressBar__trackValue"]')
+
+    expect(progressMeter).not.toHaveTextContent('33%')
+  })
+
+  it('should render the value inside when the prop is set', () => {
+    const valueNow = 33
+    const { container } = render(
+      <ProgressBar
+        screenReaderLabel="Chapters read"
+        valueMax={100}
+        valueNow={valueNow}
+        renderValueInside
+        renderValue={`${valueNow}%`}
+      />
+    )
+    const progressMeter = container.querySelector('[class$="-progressBar__trackValue"]')
+
+    expect(progressMeter).toHaveTextContent('33%')
+  })
 })

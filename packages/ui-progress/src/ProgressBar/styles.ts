@@ -119,13 +119,15 @@ const generateStyle = (
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
-      fontSize: componentTheme.fontSize
+      fontSize: componentTheme.fontSize,
+      borderRadius: componentTheme.borderRadius
     },
 
     trackLayout: {
       label: 'progressBar__trackLayout',
       position: 'relative',
       flex: 1,
+      borderRadius: 'inherit',
 
       ...colorVariants[color!].trackLayout
     },
@@ -138,6 +140,7 @@ const generateStyle = (
       borderBottomWidth: componentTheme.trackBottomBorderWidth,
       borderBottomStyle: 'solid',
       background: 'transparent',
+      borderRadius: 'inherit',
 
       ...sizeVariants[size!].track,
       ...colorVariants[color!].trackBorder
@@ -150,6 +153,7 @@ const generateStyle = (
       height: '100%',
       width: currentValuePercent,
       maxWidth: '100%',
+      borderRadius: 'inherit',
 
       ...(shouldAnimate && { transition: 'all 0.5s' }),
       ...(meterColorClassName &&

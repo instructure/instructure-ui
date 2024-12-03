@@ -114,6 +114,14 @@ type ProgressBarOwnProps = {
    * Set the element type of the component's root
    */
   as?: AsElementType
+
+  /**
+   * If true, displays the `renderValue` inside the progress meter for customization.
+   *
+   * Note: This should not be used in most cases. When enabled, ensure `renderValue` is styled for proper
+   * legibility and alignment across themes and sizes.
+   */
+  renderValueInside?: boolean
 }
 
 type PropKeys = keyof ProgressBarOwnProps
@@ -148,7 +156,8 @@ const propTypes: PropValidators<PropKeys> = {
   shouldAnimate: PropTypes.bool,
   margin: ThemeablePropTypes.spacing,
   elementRef: PropTypes.func,
-  as: PropTypes.elementType
+  as: PropTypes.elementType,
+  renderValueInside: PropTypes.bool,
 }
 
 const allowedProps: AllowedPropKeys = [

@@ -1014,6 +1014,7 @@ export type ProgressBarTheme = {
   trackBottomBorderWidth: Border['widthSmall']
   trackBottomBorderColor: Colors['contrasts']['grey1214']
   trackBottomBorderColorInverse: Colors['contrasts']['white1010']
+  borderRadius: string
 }
 
 export type ProgressCircleTheme = {
