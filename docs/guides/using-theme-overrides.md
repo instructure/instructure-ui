@@ -9,7 +9,7 @@ order: 2
 This document gives an overview on how you can customize Instructure UI components by tweaking their theme variables.
 While this gives you a level of flexibility on the look and feel of the components you should be aware of 2 things:
 
-- The default theme variables are tested to have high enough contrast ratios for WCAG 2.1 conformance. If you are making changes, please make sure that your app stays WCAG conformant.
+- The default theme variables are tested to have high enough contrast ratios for WCAG 2.1 AA conformance. If you are making changes, please make sure that your app stays WCAG conformant.
 - The look of components is only customisable to a certain degree. This is intentional, because Instructure UI is a design system geared towards the Canvas "look and feel", not a generic UI component library.
 
 ```js
@@ -25,22 +25,259 @@ type: embed
 </ToggleBlockquote>
 ```
 
-### How theming works in InstUI
+### Using a different theme for a DOM subtree
 
-The theming system in InstUI has these levels:
+By nesting the `InstUISettingsProvider` you can apply different themes to some sections of you app.
 
-**The application level theme**
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <div>
+    <Alert variant="info" margin="small">
+      I am a "canvas" style Alert.
+    </Alert>
 
-On the broader level, there is the main theme object that contains the color, spacing, typography etc. variables available in the theme (e.g.: [canvas theme](/#canvas)). The application level theme can be set via the [InstUISettingsProvider](/#InstUISettingsProvider) component.
+    <InstUISettingsProvider theme={canvasHighContrast}>
+      <Alert variant="info" margin="small">
+        I am a "canvasHighContrast" style Alert.
+      </Alert>
+    </InstUISettingsProvider>
+  </div>
+</InstUISettingsProvider>
+```
+
+### Overriding parts of a theme
+
+You can modify parts of a theme object:
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={{
+    ...canvas,
+    ...{
+      typography: { fontFamily: 'monospace' }
+    }
+  }}>
+  <div>
+    <Heading level="h3" margin="small small">
+      I should have monospace font family from the override
+    </Heading>
+  </div>
+</InstUISettingsProvider>
+```
+
+Or modify a theme inside a subtree in 2 ways:
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <div>
+    <Heading level="h3" margin="small small medium">
+      I should have default font family.
+    </Heading>
+
+    <InstUISettingsProvider
+      theme={{ typography: { fontFamily: 'monospace' } }}
+    >
+      <Heading level="h3" margin="small small">
+        monospace font family set via override on the parent theme.
+      </Heading>
+    </InstUISettingsProvider>
+    <InstUISettingsProvider
+      theme={{
+        themeOverrides: {
+          canvas: { typography: { fontFamily: 'monospace' } }
+        }
+      }}
+    >
+      <Heading level="h3" margin="small small">
+        monospace font family set via override only if the parent theme is 'canvas'.
+      </Heading>
+    </InstUISettingsProvider>
+  </div>
+</InstUISettingsProvider>
+```
+
+### Overriding theme for a specific component in a subtree
+
+You can override the theme variables of specific components too with the `componentOverrides` key. You can do this for every theme or for just a given theme.
+
+**Important:** these variables are the components own theme variables set in the `theme.js` of the component.
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider theme={canvas}>
+  <div>
+    <Alert variant="info" margin="small">
+      I am a default style Alert.
+    </Alert>
+
+    <InstUISettingsProvider
+      theme={{
+        componentOverrides: {
+          Alert: {
+            infoIconBackground: "darkblue",
+            infoBorderColor: "darkblue"
+          }
+        }
+      }}
+    >
+      <Alert variant="info" margin="small">
+        My icon background and border should be dark blue in any theme.
+      </Alert>
+    </InstUISettingsProvider>
+
+    <InstUISettingsProvider
+      theme={{
+        themeOverrides: {
+          canvas: {
+            componentOverrides: {
+              Alert: {
+                warningIconBackground: "deeppink",
+                warningBorderColor: "deeppink"
+              }
+            }
+          }
+        }
+      }}
+    >
+      <Alert variant="warning" margin="small">
+        My border and icon background should be deep pink just if the 'canvas' theme is active.
+      </Alert>
+    </InstUISettingsProvider>
+  </div>
+</InstUISettingsProvider>
+```
+
+For child components both the displayName (`'InlineList.Item'`) and the componentId (`List.Item.componentId`) can be used as keys in `componentOverrides`.
 
 ```jsx
 ---
 type: code
 ---
-// app/component root sets the app theme
-<InstUISettingsProvider theme={canvas}>
-  <ExampleComponent />
+<InstUISettingsProvider
+  theme={{
+    componentOverrides: {
+      'InlineList.Item': {
+        color: 'blue'
+      },
+      [List.Item.componentId]: {
+        color: 'red'
+      }
+    }
+  }}
+>
+  {/* ... */}
 </InstUISettingsProvider>
+```
+
+### Overriding theme for a single component
+
+Themeable components (that implement the [withStyle](#withStyle) decorator) accept a `themeOverride` prop. This prop let's you override the component's own theme. It accepts an object or a function.
+
+The available theme variables are always displayed at the bottom of the component's page (e.g.: [Button component theme variables](/#Button/#ButtonTheme)).
+
+#### Override object
+
+```js
+---
+type: example
+---
+<div>
+  <div>
+    <Button color='primary'>Default Primary Button</Button>
+  </div>
+
+  <div>
+    <Button color='primary'
+      themeOverride={{ primaryBackground: "purple" }}
+      margin="small 0 large">
+      Purple Primary Button
+    </Button>
+    <InstUISettingsProvider
+      theme={{
+        componentOverrides: {
+          TextInput: { background: "yellow" }
+        }
+      }}
+    >
+      <DateInput2
+        renderLabel="This is how to handle override in a nested component"
+        screenReaderLabels={{
+          calendarIcon: 'Calendar',
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month'
+        }}
+        width="20rem"
+        invalidDateErrorMessage="Invalid date"
+      />
+    </InstUISettingsProvider>
+  </div>
+</div>
+```
+
+#### Override function
+
+The override function's first parameter is the component's own theme object, the second is the main theme object.
+
+```js
+---
+type: example
+---
+<div>
+  <div>
+    <Button color='primary'>Default Primary Button</Button>
+  </div>
+
+  <div>
+    <Button
+      color='primary'
+      margin="small 0 0"
+      themeOverride={(componentTheme) => ({
+        primaryBackground: componentTheme.successBackground,
+        primaryBorderColor: componentTheme.successBorderColor
+      })}
+    >
+      Default Primary Button with Success colors
+    </Button>
+  </div>
+</div>
+```
+
+You can access and use any global theme variable via the second parameter (e.g. the [canvas theme](/#canvas)). When changing themes, these variables will update too.
+
+```js
+---
+type: example
+---
+<div>
+  <div>
+    <Button color='primary'>Default Primary Button</Button>
+  </div>
+
+  <div>
+    <Button
+      color='primary'
+      margin="small 0 0"
+      themeOverride={(_componentTheme, currentTheme) => ({
+        primaryBackground: currentTheme.colors.primitives.orange57,
+        primaryBorderColor: currentTheme.colors.primitives.green45,
+        borderWidth: currentTheme.borders.widthLarge,
+        borderStyle: 'dashed'
+      })}
+    >
+      Custom Primary Button
+    </Button>
+  </div>
+</div>
 ```
 
 **The component's own theme**
@@ -77,78 +314,6 @@ const generateStyle = (componentTheme) => {
     }
   }
 }
-```
-
-### Application level theme overrides
-
-`<InstUISettingsProvider/>` accepts full theme objects and override objects too.
-
-```js
----
-type: example
----
-<InstUISettingsProvider theme={{
-    ...canvas,
-    ...{
-      typography: { fontFamily: 'monospace' }
-    }
-  }}>
-  <div>
-    <Heading level="h3" margin="small small">
-      I should have monospace font family from the override
-    </Heading>
-  </div>
-</InstUISettingsProvider>
-```
-
-#### Full themes
-
-By nesting the `InstUISettingsProvider` you can apply different themes to some sections of you app.
-
-```js
----
-type: example
----
-<InstUISettingsProvider theme={canvas}>
-  <div>
-    <Alert variant="info" margin="small">
-      I am a "canvas" style Alert.
-    </Alert>
-
-    <InstUISettingsProvider theme={canvasHighContrast}>
-      <Alert variant="info" margin="small">
-        I am a "canvasHighContrast" style Alert.
-      </Alert>
-    </InstUISettingsProvider>
-  </div>
-</InstUISettingsProvider>
-```
-
-#### Partial theme overrides
-
-When providing a partial theme object, you can override any theme variable inside that provider.
-
-```js
----
-type: example
----
-<InstUISettingsProvider theme={canvas}>
-  <div>
-    <Heading level="h3" margin="small small medium">
-      I should have default font family.
-    </Heading>
-
-    <InstUISettingsProvider
-      theme={{
-        typography: { fontFamily: 'monospace' }
-      }}
-    >
-      <Heading level="h3" margin="small small">
-        I should have monospace font family.
-      </Heading>
-    </InstUISettingsProvider>
-  </div>
-</InstUISettingsProvider>
 ```
 
 ### Branding (user customizable theming)

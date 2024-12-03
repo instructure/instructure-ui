@@ -110,8 +110,8 @@ type: example
     color='primary'
     margin="0 0 0 small"
     themeOverride={(_componentTheme, currentTheme) => ({
-      primaryBackground: currentTheme.colors.backgroundWarning,
-      primaryBorderColor: currentTheme.colors.backgroundLightest,
+      primaryBackground: currentTheme.colors.primitives.orange57,
+      primaryBorderColor: '#00AAA4',
       borderWidth: currentTheme.borders.widthLarge,
       borderStyle: 'dashed'
     })}
