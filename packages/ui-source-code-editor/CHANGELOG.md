@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
+
+
+### Bug Fixes
+
+* **ui-source-code-editor:** prevent Vite from erroring out during the build in React 16/17 ([c871244](https://github.com/instructure/instructure-ui/commit/c8712447a296fc0e3e436536e983196be27ad388))
+
+
+
+
+
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
+
+
+### Bug Fixes
+
+* **many:** hide required asterisks from screenreaders ([78aec71](https://github.com/instructure/instructure-ui/commit/78aec71d1056df3a43ffd226d993c451a8fe9c1d))
+
+
+### Features
+
+* **ui-number-input:** add back options for string input ([ce86cdb](https://github.com/instructure/instructure-ui/commit/ce86cdb91e016878edfeda3260f55bc7fd1db2e3))
+
+
+
+
+
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-number-input
