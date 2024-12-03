@@ -95,6 +95,7 @@ class ProgressBar extends Component<ProgressBarProps> {
       size,
       color,
       meterColor,
+      renderValueInside,
       styles,
       ...props
     } = this.props
@@ -130,11 +131,11 @@ class ProgressBar extends Component<ProgressBarProps> {
           />
 
           <span css={styles?.track} role="presentation" aria-hidden="true">
-            <span css={styles?.trackValue}></span>
+            <span css={styles?.trackValue}>{renderValueInside && value}</span>
           </span>
         </span>
 
-        {value && (
+        {value && !renderValueInside && (
           <span css={styles?.value} aria-hidden="true">
             {value}
           </span>
