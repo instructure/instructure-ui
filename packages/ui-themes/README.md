@@ -21,6 +21,9 @@ npm install @instructure/ui-themes
 - application level theming:
 
   ```jsx
+  ---
+  type: code
+  ---
   import canvas from '@instructure/ui-themes'
 
   ReactDOM.render(
@@ -34,6 +37,9 @@ npm install @instructure/ui-themes
 - (DEPRECATED) global theming:
 
   ```js
+  ---
+  type: code
+  ---
   import canvas from '@instructure/ui-themes'
 
   canvas.use()
@@ -44,6 +50,9 @@ npm install @instructure/ui-themes
 - (DEPRECATED) globally:
 
   ```js
+  ---
+  type: code
+  ---
   import canvas from '@instructure/ui-themes'
 
   canvas.use({ overrides: { colors: { brand: 'red' } } })
@@ -52,6 +61,9 @@ npm install @instructure/ui-themes
 - application level:
 
   ```jsx
+  ---
+  type: code
+  ---
   import canvas from '@instructure/ui-themes'
   const themeOverrides = { colors: { brand: 'red' } }
 
