@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
+
+
+### Features
+
+* **ui-link:** update Link's color ([c3f5f37](https://github.com/instructure/instructure-ui/commit/c3f5f37e9d810e889e1ddcd058bb13e336e26097))
+
+
+
+
+
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-themes

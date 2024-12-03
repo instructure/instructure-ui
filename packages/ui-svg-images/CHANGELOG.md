@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** make ColorPicker tooltip VoiceOver focusable ([610c0d8](https://github.com/instructure/instructure-ui/commit/610c0d8a03dd9c8b7080c5e2819193b1a7a4f2cd))
+
+
+
+
+
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-svg-images

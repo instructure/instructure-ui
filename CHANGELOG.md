@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
+
+
+### Bug Fixes
+
+* **many:** hide required asterisks from screenreaders ([78aec71](https://github.com/instructure/instructure-ui/commit/78aec71d1056df3a43ffd226d993c451a8fe9c1d))
+* **ui-color-picker:** make ColorPicker tooltip VoiceOver focusable ([610c0d8](https://github.com/instructure/instructure-ui/commit/610c0d8a03dd9c8b7080c5e2819193b1a7a4f2cd))
+* **ui-source-code-editor:** prevent Vite from erroring out during the build in React 16/17 ([c871244](https://github.com/instructure/instructure-ui/commit/c8712447a296fc0e3e436536e983196be27ad388))
+* **ui-text-area:** make focus line follow resized textarea ([dd1e12c](https://github.com/instructure/instructure-ui/commit/dd1e12ce7911afb9325be1de118ad976cd9f141a))
+
+
+### Features
+
+* **ui-icons:** new icons: chart-line,chart-pie,chart-scatter,learnplatform,search-ai,single-metric ([304a29a](https://github.com/instructure/instructure-ui/commit/304a29a4a2d950c62aa159e0db3212239afefc78))
+* **ui-link:** update Link's color ([c3f5f37](https://github.com/instructure/instructure-ui/commit/c3f5f37e9d810e889e1ddcd058bb13e336e26097))
+* **ui-number-input:** add back options for string input ([ce86cdb](https://github.com/instructure/instructure-ui/commit/ce86cdb91e016878edfeda3260f55bc7fd1db2e3))
+
+
+
+
+
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 ### Other
