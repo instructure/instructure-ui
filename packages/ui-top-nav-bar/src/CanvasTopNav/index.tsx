@@ -84,20 +84,25 @@ const CanvasTopNav = ({
         ))}
       </MobileTopNav.End>
       <MobileTopNav.Menu>
-        <Breadcrumb label={mobileMenuBackNavigation.label}>
-          <BreadcrumbLink href={mobileMenuBackNavigation.href}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
+        <div style={{ marginTop: 16 }}>
+          <Breadcrumb label={mobileMenuBackNavigation.label}>
+            <BreadcrumbLink
+              href={mobileMenuBackNavigation.href}
+              onClick={mobileMenuBackNavigation.onClick}
             >
-              <IconArrowOpenStartLine />
-              {mobileMenuBackNavigation.label}
-            </div>
-          </BreadcrumbLink>
-        </Breadcrumb>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                <IconArrowOpenStartLine />
+                {mobileMenuBackNavigation.label}
+              </div>
+            </BreadcrumbLink>
+          </Breadcrumb>
+        </div>
         <MobileTopNav.ItemList title={mobileMenuTitle}>
           {mobileMenu.map((item: any, index: any) => (
             <MobileTopNav.Item
