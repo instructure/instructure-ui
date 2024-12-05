@@ -59,9 +59,25 @@ class App extends Component<AppProps, AppState> {
       docsData: null,
       versionsData: null,
       iconsData: null,
-      previousMenu: '',
-      currentMenu: 'default'
+      menuStack: ['default']
     }
+  }
+
+  pushMenu = (menuKey) => {
+    this.setState((prevState) => ({
+      menuStack: [...prevState.menuStack, menuKey]
+    }))
+  }
+
+  popMenu = () => {
+    this.setState((prevState) => ({
+      menuStack: prevState.menuStack.slice(0, -1)
+    }))
+  }
+
+  getCurrentMenu = () => {
+    const { menuStack } = this.state
+    return menuStack[menuStack.length - 1]
   }
 
   render() {
@@ -94,40 +110,24 @@ class App extends Component<AppProps, AppState> {
             label: 'Account',
             renderBeforeLabel: <IconUserLine />,
             onClick: () => {
-              alert('Account clicked')
-              this.setState((prev) => {
-                return {
-                  ...prev,
-                  currentMenu: 'account',
-                  previousMenu: 'default'
-                }
-              })
+              this.pushMenu('account')
             }
           },
           {
             label: 'Courses',
             renderBeforeLabel: <IconCoursesLine />,
             onClick: () => {
-              alert('Courses clicked')
-              this.setState((prev) => {
-                return {
-                  ...prev,
-                  currentMenu: 'courses',
-                  previousMenu: 'default'
-                }
-              })
+              this.pushMenu('courses')
             }
           },
           {
             label: 'Help',
-            renderBeforeLabel: <IconQuestionLine />,
-            onClick: () => alert('Help')
+            renderBeforeLabel: <IconQuestionLine />
           }
         ],
         backNavigation: {
           href: '#',
-          label: 'Back',
-          onClick: () => alert('Back clicked')
+          label: 'Back'
         },
         title: 'Main Menu'
       },
@@ -141,9 +141,7 @@ class App extends Component<AppProps, AppState> {
         backNavigation: {
           label: 'Back',
           onClick: () => {
-            this.setState((prev) => {
-              return { ...prev, currentMenu: 'default' }
-            })
+            this.popMenu()
           }
         },
         title: 'Account'
@@ -153,9 +151,7 @@ class App extends Component<AppProps, AppState> {
         backNavigation: {
           label: 'Back',
           onClick: () => {
-            this.setState((prev) => {
-              return { ...prev, currentMenu: 'default' }
-            })
+            this.popMenu()
           }
         },
         title: 'Courses'
@@ -183,7 +179,7 @@ class App extends Component<AppProps, AppState> {
             ]
           }}
           hamburgerOnClick={() => alert('Hamburger clicked')}
-          mobileMenuTitle={menu[this.state.currentMenu].title}
+          mobileMenuTitle={menu[this.getCurrentMenu()].title}
           mobileButtons={[
             {
               screenReaderLabel: 'Analytics',
@@ -196,29 +192,8 @@ class App extends Component<AppProps, AppState> {
               onClick: () => alert('Alerts clicked')
             }
           ]}
-          mobileMenuBackNavigation={menu[this.state.currentMenu].backNavigation}
-          mobileMenu={menu[this.state.currentMenu].items}
-          // mobileMenu={[
-          //   {
-          //     label: 'Account',
-          //     renderBeforeLabel: <IconUserLine />,
-          //     onClick: () => alert('Account clicked')
-          //   },
-          //   {
-          //     label: 'Admin',
-          //     renderBeforeLabel: <IconAdminLine />,
-          //     onClick: () => alert('Admin clicked')
-          //   },
-          //   {
-          //     label: 'Dashboard',
-          //     renderBeforeLabel: <IconDashboardLine />,
-          //     onClick: () => alert('Dashboard clicked')
-          //   },
-          //   {
-          //     label: 'Simple option with no left icon',
-          //     onClick: () => alert('Simple option with no left icon')
-          //   }
-          // ]}
+          mobileMenuBackNavigation={menu[this.getCurrentMenu()].backNavigation}
+          mobileMenu={menu[this.getCurrentMenu()].items}
         />
       </div>
     )
