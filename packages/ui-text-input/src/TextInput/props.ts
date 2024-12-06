@@ -193,11 +193,9 @@ type TextInputStyle = ComponentStyle<
   | 'textInput'
   | 'facade'
   | 'layout'
-  | 'beforeElement'
-  | 'innerWrapper'
-  | 'inputLayout'
   | 'afterElement'
   | 'requiredInvalid'
+  | 'inputLayout'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -254,7 +252,6 @@ const allowedProps: AllowedPropKeys = [
 
 type TextInputState = {
   hasFocus: boolean
-  beforeElementHasWidth?: boolean
   afterElementHasWidth?: boolean
 }
 
@@ -262,8 +259,8 @@ type TextInputStyleProps = {
   disabled: boolean
   invalid: boolean
   focused: TextInputState['hasFocus']
-  beforeElementHasWidth: TextInputState['beforeElementHasWidth']
   afterElementHasWidth: TextInputState['afterElementHasWidth']
+  beforeElementExists: boolean
 }
 
 export type {

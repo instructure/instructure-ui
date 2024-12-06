@@ -49,8 +49,8 @@ const generateStyle = (
     disabled,
     invalid,
     focused,
-    beforeElementHasWidth,
-    afterElementHasWidth
+    afterElementHasWidth,
+    beforeElementExists
   } = state
 
   const sizeVariants = {
@@ -103,15 +103,14 @@ const generateStyle = (
 
   const inputStyle = {
     all: 'initial',
-
     '&::-ms-clear': {
       display: 'none'
     },
+    width: '100%',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     appearance: 'none',
     margin: 0,
-    width: '100%',
     display: 'block',
     boxSizing: 'border-box',
     outline: 'none',
@@ -149,11 +148,6 @@ const generateStyle = (
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'row'
-  }
-
-  const flexItemBase = {
-    ...viewBase,
-    flexShrink: 0
   }
 
   return {
@@ -198,30 +192,17 @@ const generateStyle = (
     },
     layout: {
       label: 'textInput__layout',
-      ...flexBase,
-      ...(!shouldNotWrap && { flexWrap: 'wrap' })
-    },
-    beforeElement: {
-      display: 'inline-flex',
+      ...viewBase,
+      display: 'flex',
       alignItems: 'center',
-      label: 'textInput__beforeElement',
-      ...flexItemBase,
-      paddingInlineStart: componentTheme.padding,
-      // we only override the padding once the width is calculated,
-      // it needs the padding on render
-      ...(beforeElementHasWidth === false && {
-        paddingInlineStart: 0
-      })
-    },
-    innerWrapper: {
-      label: 'textInput__innerWrapper',
-      ...flexItemBase,
-      minWidth: '0.0625rem',
-      flexShrink: 1,
-      flexGrow: 1
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      ...(!shouldNotWrap && { flexWrap: 'wrap' }),
+      ...(beforeElementExists && { paddingInlineStart: componentTheme.padding })
     },
     inputLayout: {
       label: 'textInput__inputLayout',
+      flexGrow: 1,
       ...flexBase
     },
     afterElement: {
@@ -231,7 +212,8 @@ const generateStyle = (
       marginTop: '-1px',
       marginBottom: '-1px',
       label: 'textInput__afterElement',
-      ...flexItemBase,
+      ...viewBase,
+      flexShrink: 0,
       paddingInlineEnd: componentTheme.padding,
       // we only override the padding once the width is calculated,
       // it needs the padding on render

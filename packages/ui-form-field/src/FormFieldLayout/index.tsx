@@ -28,7 +28,6 @@ import { Component } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-grid'
-import { logError as error } from '@instructure/console'
 import {
   omitProps,
   pickProps,
@@ -67,16 +66,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
   constructor(props: FormFieldLayoutProps) {
     super(props)
-
     this._messagesId = props.messagesId || props.deterministicId!()
-
-    error(
-      typeof props.width !== 'undefined' ||
-        !props.inline ||
-        props.layout !== 'inline',
-      `[FormFieldLayout] The 'inline' prop is true, and the 'layout' is set to 'inline'.
-      This will cause a layout issue in Internet Explorer 11 unless you also add a value for the 'width' prop.`
-    )
   }
 
   private _messagesId: string
@@ -212,7 +202,9 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
               elementRef={this.handleInputContainerRef}
             >
               {hasNewErrorMsg && (
-                <div css={styles?.groupErrorMessage}>{this.renderVisibleMessages()}</div>
+                <div css={styles?.groupErrorMessage}>
+                  {this.renderVisibleMessages()}
+                </div>
               )}
               {children}
             </Grid.Col>

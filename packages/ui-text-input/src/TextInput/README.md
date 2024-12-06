@@ -205,7 +205,7 @@ Focusable content will be focused separately from the input itself.
             value={this.state.value}
             onChange={this.handleChange}
             renderBeforeInput={
-              <View display="block" padding="xxx-small 0">
+              <>
                 {this.state.value !== '' && (
                   <Tag
                     text={this.state.value}
@@ -233,7 +233,7 @@ Focusable content will be focused separately from the input itself.
                   margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Strawberry')}
                 />
-              </View>
+              </>
             }
             renderAfterInput={() => (
               <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />
@@ -260,7 +260,7 @@ Focusable content will be focused separately from the input itself.
           value={value}
           onChange={handleChange}
           renderBeforeInput={
-            <View display="block" padding="xxx-small 0">
+            <>
               {value !== '' && (
                 <Tag
                   text={value}
@@ -288,7 +288,7 @@ Focusable content will be focused separately from the input itself.
                 margin="xxx-small xxx-small xxx-small none"
                 onClick={() => console.log('Strawberry')}
               />
-            </View>
+            </>
           }
           renderAfterInput={() => (
             <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />
@@ -346,7 +346,7 @@ type: example
     <TextInput
       renderLabel="I will wrap"
       renderBeforeInput={
-        <div>
+        <>
           <Tag
             text="English 101"
             margin="xx-small xxx-small"
@@ -355,7 +355,7 @@ type: example
             text="History 205"
             margin="xx-small xxx-small"
           />
-        </div>
+        </>
       }
       renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
     />
@@ -374,6 +374,7 @@ type: embed
     <Figure.Item>Left align text (exceptions may apply)</Figure.Item>
     <Figure.Item>Place labels on top or to the left (inline)</Figure.Item>
     <Figure.Item>Make placeholder text different than the label</Figure.Item>
+    <Figure.Item>Use React fragments for <code>renderBeforeInput</code>. This will nicely float the text input box to the remaining space</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Place labels to the right of the input</Figure.Item>
