@@ -38,7 +38,6 @@ import {
 } from '@instructure/ui-icons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { propTypes, allowedProps } from './props'
 
 type AppProps = Record<string, never>
 
@@ -210,6 +209,8 @@ class App extends Component<AppProps, AppState> {
           ]}
           mobileMenuBackNavigation={menu[this.getCurrentMenu()].backNavigation}
           mobileMenu={menu[this.getCurrentMenu()].items}
+          beforeMobileMenuItems={<div>Before Mobile Menu</div>}
+          afterMobileMenuItems={<div>After Mobile Menu</div>}
         />
       </div>
     )
