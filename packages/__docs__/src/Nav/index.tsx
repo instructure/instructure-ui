@@ -113,10 +113,13 @@ class Nav extends Component<NavProps, NavState> {
   }: {
     id: string
     title: string
-    children: React.ReactNode[]
+    children: React.ReactNode
     variant?: 'section' | 'category'
   }): React.ReactNode {
-    if (children.length === 0) {
+    if (
+      React.isValidElement(children) &&
+      React.Children.count(children.props.children) === 0
+    ) {
       return
     }
 
@@ -201,6 +204,7 @@ class Nav extends Component<NavProps, NavState> {
 
     return (
       <View
+        as="li"
         display="block"
         key={docId}
         margin="xx-small none xx-small"
@@ -229,7 +233,7 @@ class Nav extends Component<NavProps, NavState> {
   renderSectionChildren(
     sectionId: string,
     markExpanded: (sectionId: string) => void
-  ): React.ReactNode[] {
+  ): React.ReactNode {
     const children: Record<
       string,
       { id: string; section?: boolean; order?: string }
@@ -249,33 +253,37 @@ class Nav extends Component<NavProps, NavState> {
       }
     )
 
-    return Object.keys(children)
-      .sort((a, b) => {
-        const orderA = children[a].order ? children[a].order : ''
-        const orderB = children[b].order ? children[b].order : ''
-        const idA = `${orderA}${a.toUpperCase()}`
-        const idB = `${orderB}${b.toUpperCase()}`
-        if (idA < idB) {
-          return -1
-        }
-        if (idA > idB) {
-          return 1
-        }
-        return 0
-      })
-      .map((id) => {
-        if (children[id].section) {
-          return this.renderSectionLink(
-            children[id].id,
-            () => {
-              markExpanded(sectionId)
-            },
-            'category'
-          )
-        } else {
-          return this.renderDocLink(id)
-        }
-      })
+    return (
+      <ul style={{ paddingLeft: '0px', margin: '0px' }}>
+        {Object.keys(children)
+          .sort((a, b) => {
+            const orderA = children[a].order ? children[a].order : ''
+            const orderB = children[b].order ? children[b].order : ''
+            const idA = `${orderA}${a.toUpperCase()}`
+            const idB = `${orderB}${b.toUpperCase()}`
+            if (idA < idB) {
+              return -1
+            }
+            if (idA > idB) {
+              return 1
+            }
+            return 0
+          })
+          .map((id) => {
+            if (children[id].section) {
+              return this.renderSectionLink(
+                children[id].id,
+                () => {
+                  markExpanded(sectionId)
+                },
+                'category'
+              )
+            } else {
+              return this.renderDocLink(id)
+            }
+          })}
+      </ul>
+    )
   }
 
   renderSectionLink(
