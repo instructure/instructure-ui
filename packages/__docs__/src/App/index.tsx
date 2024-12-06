@@ -30,39 +30,53 @@ import { IconButton } from '@instructure/ui-buttons'
 import {
   IconAlertsLine,
   IconAnalyticsLine,
+  IconArrowOpenEndSolid,
   IconCoursesLine,
   IconQuestionLine,
   IconUserLine
 } from '@instructure/ui-icons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { AppProps, AppState } from './props'
 import { propTypes, allowedProps } from './props'
+
+type AppProps = Record<string, never>
+
+type AppState = {
+  menuStack: string[]
+}
+
+type MenuItem = {
+  label: string
+  renderBeforeLabel?: JSX.Element
+  onClick?: () => void
+  renderAfterLabel?: JSX.Element
+}
+
+type Menu = {
+  items: MenuItem[]
+  backNavigation: {
+    href?: string
+    label: string
+    onClick?: () => void
+  }
+  title: string
+}
+
+type MenuCollection = {
+  [key: string]: Menu
+}
 
 @withStyle(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
-  static propTypes = propTypes
-  static allowedProps = allowedProps
-
-  static defaultProps = {
-    trayWidth: 300
-  }
-
   constructor(props: AppProps) {
     super(props)
 
     this.state = {
-      showMenu: false,
-      themeKey: undefined,
-      layout: 'large',
-      docsData: null,
-      versionsData: null,
-      iconsData: null,
       menuStack: ['default']
     }
   }
 
-  pushMenu = (menuKey) => {
+  pushMenu = (menuKey: string) => {
     this.setState((prevState) => ({
       menuStack: [...prevState.menuStack, menuKey]
     }))
@@ -102,7 +116,7 @@ class App extends Component<AppProps, AppState> {
       </IconButton>
     )
 
-    const menu = {
+    const menu: MenuCollection = {
       default: {
         items: [
           {
@@ -110,14 +124,16 @@ class App extends Component<AppProps, AppState> {
             renderBeforeLabel: <IconUserLine />,
             onClick: () => {
               this.pushMenu('account')
-            }
+            },
+            renderAfterLabel: <IconArrowOpenEndSolid />
           },
           {
             label: 'Courses',
             renderBeforeLabel: <IconCoursesLine />,
             onClick: () => {
               this.pushMenu('courses')
-            }
+            },
+            renderAfterLabel: <IconArrowOpenEndSolid />
           },
           {
             label: 'Help',
