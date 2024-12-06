@@ -203,6 +203,7 @@ const generateStyle = (
     },
     beforeElement: {
       display: 'inline-flex',
+      flexWrap: 'wrap',
       alignItems: 'center',
       label: 'textInput__beforeElement',
       ...flexItemBase,
