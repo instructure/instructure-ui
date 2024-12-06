@@ -50,7 +50,9 @@ const CanvasTopNav = ({
   mobileButtons = [],
   mobileMenu = [],
   mobileMenuBackNavigation,
-  hamburgerOnClick
+  hamburgerOnClick,
+  beforeMobileMenuItems,
+  afterMobileMenuItems
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -103,6 +105,7 @@ const CanvasTopNav = ({
             </BreadcrumbLink>
           </Breadcrumb>
         </div>
+        {beforeMobileMenuItems && beforeMobileMenuItems}
         <MobileTopNav.ItemList title={mobileMenuTitle}>
           {mobileMenu.map((item: any, index: any) => (
             <MobileTopNav.Item
@@ -115,6 +118,7 @@ const CanvasTopNav = ({
             </MobileTopNav.Item>
           ))}
         </MobileTopNav.ItemList>
+        {afterMobileMenuItems && afterMobileMenuItems}
       </MobileTopNav.Menu>
     </MobileTopNav>
   ) : (
@@ -150,51 +154,6 @@ const CanvasTopNav = ({
     </DesktopTopNav>
   )
 }
-// <CanvasTopNav
-//   brand={
-//     <IconButton
-//       screenReaderLabel="Canvas Brand"
-//       href="#"
-//       withBackground={false}
-//       withBorder={false}
-//     >
-//       <svg viewBox="0 0 1920 1920" fill="#fff" width="28px" height="28px">
-//         <path d="M958.568 277.97C1100.42..." />
-//       </svg>
-//     </IconButton>
-//   }
-//   lightMode={true}
-//   breadcrumbLinks={[
-//     { href: '#', label: 'Student Forecast' },
-//     { href: '#', label: 'University of Utah' },
-//     { href: '#', label: 'University of Colleges' },
-//   ]}
-//   title="Courses"
-//   buttons={[
-//     {
-//       screenReaderLabel: 'Analytics',
-//       color: 'primary-inverse',
-//     },
-//     {
-//       screenReaderLabel: 'Alerts',
-//       color: 'primary-inverse',
-//     },
-//   ]}
-//   items={[
-//     { label: 'Account', leftIcon: <IconUserLine />, onClick: () => alert('Account clicked') },
-//     { label: 'Admin', leftIcon: <IconAdminLine />, onClick: () => alert('Admin clicked') },
-//     { label: 'Dashboard', leftIcon: <IconDashboardLine />, onClick: () => alert('Dashboard') },
-//   ]}
-// />
-
-// <CanvasTopNav lightMode={true} >
-//   <MobileTopNav>
-//     <div>Mobile Navigation Content</div>
-//   </MobileTopNav>
-//   <DesktopTopNav>
-//     <div>Desktop Navigation Content</div>
-//   </DesktopTopNav>
-// </CanvasTopNav>
 
 export { CanvasTopNav }
 export default CanvasTopNav
