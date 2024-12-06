@@ -850,7 +850,9 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
               {this.getOptionById(id).label}
             </AccessibleContent>
           }
-          margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
+          margin={
+            index > 0 ? 'xxx-small xx-small xxx-small 0' : '0 xx-small 0 0'
+          }
           onClick={(e) => this.dismissTag(e, id)}
         />
       ))
@@ -1079,7 +1081,9 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
               {this.getOptionById(id).label}
             </AccessibleContent>
           }
-          margin={index > 0 ? 'xxx-small 0 xxx-small xx-small' : 'xxx-small 0'}
+          margin={
+            index > 0 ? 'xxx-small xx-small xxx-small 0' : '0 xx-small 0 0'
+          }
           onClick={(e) => dismissTag(e, id)}
         />
       ))

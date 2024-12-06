@@ -77,7 +77,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     super(props)
     this.state = {
       hasFocus: false,
-      beforeElementHasWidth: undefined,
       afterElementHasWidth: undefined
     }
     this._defaultId = props.deterministicId!()
@@ -87,7 +86,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   ref: Element | null = null
 
   private _input: HTMLInputElement | null = null
-  private _beforeElement: HTMLSpanElement | null = null
   private _afterElement: HTMLSpanElement | null = null
 
   private readonly _defaultId: string
@@ -112,13 +110,10 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         'focus',
         this.handleFocus
       )
-
       this.setState({
-        beforeElementHasWidth: this.getElementHasWidth(this._beforeElement),
         afterElementHasWidth: this.getElementHasWidth(this._afterElement)
       })
     }
-
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
@@ -129,11 +124,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
 
   componentDidUpdate(prevProps: TextInputProps) {
-    if (prevProps.renderBeforeInput !== this.props.renderBeforeInput) {
-      this.setState({
-        beforeElementHasWidth: this.getElementHasWidth(this._beforeElement)
-      })
-    }
     if (prevProps.renderAfterInput !== this.props.renderAfterInput) {
       this.setState({
         afterElementHasWidth: this.getElementHasWidth(this._afterElement)
@@ -154,13 +144,13 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
   makeStyleProps = (): TextInputStyleProps => {
     const { interaction } = this
-    const { hasFocus, beforeElementHasWidth, afterElementHasWidth } = this.state
+    const { hasFocus, afterElementHasWidth } = this.state
     return {
       disabled: interaction === 'disabled',
       invalid: this.invalid,
       focused: hasFocus,
-      beforeElementHasWidth,
-      afterElementHasWidth
+      afterElementHasWidth: afterElementHasWidth,
+      beforeElementExists: this.props.renderBeforeInput != undefined
     }
   }
 
@@ -282,7 +272,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     )
   }
 
-  getElementHasWidth(element: HTMLSpanElement | null) {
+  getElementHasWidth(element: Element | null) {
     if (!element) {
       return undefined
     }
@@ -360,39 +350,24 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       >
         <span css={styles?.facade}>
           {renderBeforeOrAfter ? (
-            <div>
-              <span css={styles?.layout}>
-                {beforeElement && (
+            <span css={styles?.layout}>
+              {beforeElement}
+              {/* The input and content after input should not wrap,
+                so they're in their own flex container */}
+              <span css={styles?.inputLayout}>
+                {this.renderInput()}
+                {afterElement && (
                   <span
-                    css={styles?.beforeElement}
+                    css={styles?.afterElement}
                     ref={(e) => {
-                      this._beforeElement = e
+                      this._afterElement = e
                     }}
                   >
-                    {beforeElement}
+                    {afterElement}
                   </span>
                 )}
-                <span css={styles?.innerWrapper}>
-                  {/*
-                    The input and content after input should not wrap,
-                    so they're in their own flex container
-                  */}
-                  <span css={styles?.inputLayout}>
-                    <span css={styles?.innerWrapper}>{this.renderInput()}</span>
-                    {afterElement && (
-                      <span
-                        css={styles?.afterElement}
-                        ref={(e) => {
-                          this._afterElement = e
-                        }}
-                      >
-                        {afterElement}
-                      </span>
-                    )}
-                  </span>
-                </span>
               </span>
-            </div>
+            </span>
           ) : (
             /* If no prepended or appended content, don't render Flex layout */
             this.renderInput()
