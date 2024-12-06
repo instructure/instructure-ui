@@ -62,6 +62,16 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     this.ref = el
   }
 
+  addAriaCurrent = (child: React.ReactNode) => {
+    const updatedChild = React.cloneElement(
+      child as React.ReactElement<{ 'aria-current'?: string }>,
+      {
+        'aria-current': 'true'
+      }
+    )
+    return updatedChild
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -78,9 +88,13 @@ class Breadcrumb extends Component<BreadcrumbProps> {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
     return React.Children.map(children, (child, index) => {
+      const isLastElement = index === numChildren - 1
+      const hasHref =
+        React.isValidElement(child) && (child.props as { href?: string }).href
+
       return (
         <li css={styles?.crumb} style={inlineStyle}>
-          {child}
+          {isLastElement && hasHref ? this.addAriaCurrent(child) : child}
           {index < numChildren - 1 && (
             <IconArrowOpenEndSolid color="auto" css={styles?.separator} />
           )}
