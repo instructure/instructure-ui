@@ -22,15 +22,13 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+import type { PropsWithChildren } from 'react'
 
-import { App } from './App'
-import { InstUISettingsProvider } from '@instructure/emotion'
-import '../globals'
+type TopNavOwnProps = {
+  lightMode?: boolean
+  breakpoint?: string
+}
 
-createRoot(document.getElementById('app')).render(
-  <InstUISettingsProvider>
-    <App />
-  </InstUISettingsProvider>
-)
+type TopNavProps = TopNavOwnProps & PropsWithChildren
+
+export type { TopNavProps, TopNavOwnProps }

@@ -21,16 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { DesktopTopNavProps } from './props'
 
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+const generateStyles = (props: DesktopTopNavProps, theme: any) => {
+  const { lightMode } = props
+  return {
+    container: {
+      height: '66px',
+      position: 'fixed',
+      backgroundColor: lightMode
+        ? theme.colors.ui.surfacePageSecondary
+        : theme.colors.ui.surfaceDark,
+      color: lightMode
+        ? theme.colors.contrasts.grey125125
+        : theme.colors?.contrasts?.white1010,
+      width: '100%',
+      zIndex: '1000',
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'row'
+    },
+    start: {
+      marginLeft: '24px',
+      marginRight: 'auto',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: '16px'
+    },
+    end: {
+      marginRight: '24px',
+      display: 'flex',
+      gap: '12px'
+    }
+  }
+}
 
-import { App } from './App'
-import { InstUISettingsProvider } from '@instructure/emotion'
-import '../globals'
-
-createRoot(document.getElementById('app')).render(
-  <InstUISettingsProvider>
-    <App />
-  </InstUISettingsProvider>
-)
+export { generateStyles }
