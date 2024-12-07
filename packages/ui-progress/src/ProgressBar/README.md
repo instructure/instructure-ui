@@ -18,6 +18,16 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     size="small"
@@ -25,18 +35,48 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     size="large"
     screenReaderLabel="Loading completion"
     valueNow={40}
     valueMax={60}
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
 </div>
 ```
@@ -56,6 +96,16 @@ type: example
     color="primary-inverse"
     valueNow={30}
     valueMax={60}
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
 </View>
 ```
@@ -75,6 +125,16 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     screenReaderLabel="Loading completion"
@@ -82,6 +142,16 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     screenReaderLabel="Loading completion"
@@ -89,6 +159,16 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     screenReaderLabel="Loading completion"
@@ -96,6 +176,16 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
   <ProgressBar
     screenReaderLabel="Loading completion"
@@ -103,6 +193,16 @@ type: example
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
+    renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
   />
 </div>
 ```
@@ -128,6 +228,16 @@ type: example
   }}
   valueNow={10}
   valueMax={60}
+  renderValue={({ valueNow, valueMax }) => {
+    return (
+      <Text>
+        {Math.round(valueNow / valueMax * 100)}%
+      </Text>
+    )
+  }}
+  formatScreenReaderValue={({ valueNow, valueMax }) => {
+    return Math.round((valueNow / valueMax * 100)) + ' percent'
+  }}
 />
 ```
 
@@ -259,6 +369,12 @@ The `shouldAnimate` prop makes the progress bar animate the transition between v
             valueNow={this.state.value}
             valueMax={this.MAX}
             shouldAnimate={this.state.shouldAnimate}
+            renderValue={({ valueNow, valueMax }) => {
+              return <Text>{Math.round((valueNow / valueMax) * 100)}%</Text>
+            }}
+            formatScreenReaderValue={({ valueNow, valueMax }) => {
+              return Math.round((valueNow / valueMax) * 100) + ' percent'
+            }}
           />
         </div>
       )
@@ -346,6 +462,12 @@ The `shouldAnimate` prop makes the progress bar animate the transition between v
           valueNow={value}
           valueMax={MAX}
           shouldAnimate={shouldAnimate}
+          renderValue={({ valueNow, valueMax }) => {
+            return <Text>{Math.round((valueNow / valueMax) * 100)}%</Text>
+          }}
+          formatScreenReaderValue={({ valueNow, valueMax }) => {
+            return Math.round((valueNow / valueMax) * 100) + ' percent'
+          }}
         />
       </div>
     )
