@@ -41,6 +41,7 @@ const generateStyle = (
   const { inline } = props
 
   return {
+    // TODO margin should be configurable
     groupErrorMessage: {
       margin: '0.5rem 0',
     },

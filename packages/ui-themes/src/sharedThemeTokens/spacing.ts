@@ -25,6 +25,7 @@
 import { Spacing } from '@instructure/shared-types'
 
 const spacing: Spacing = Object.freeze({
+  // legacy spacing tokens:
   xxxSmall: '0.125rem', // 2px
   xxSmall: '0.375rem', // 6px
   xSmall: '0.5rem', // 8px
@@ -33,7 +34,37 @@ const spacing: Spacing = Object.freeze({
   medium: '1.5rem', // 24px
   large: '2.25rem', // 36px
   xLarge: '3rem', // 48px
-  xxLarge: '3.75rem' // 60px
+  xxLarge: '3.75rem', // 60px
+
+  // new spacing tokens:
+  space0: '0px',
+  space2: '2px',
+  space4: '4px',
+  space8: '8px',
+  space12: '12px',
+  space16: '16px',
+  space24: '24px',
+  space36: '36px',
+  space48: '48px',
+  space60: '60px',
+  sections: '36px',
+  sectionElements: '24px',
+  trayElements: '24px',
+  modalElements: '24px',
+  moduleElements: '16px',
+  paddingCardLarge: '24px',
+  paddingCardMedium: '16px',
+  paddingCardSmall: '12px',
+  selects: '16px',
+  textareas: '16px',
+  inputFields: '16px',
+  checkboxes: '16px',
+  radios: '16px',
+  toggles: '16px',
+  buttons: '12px',
+  tags: '12px',
+  statusIndicators: '12px',
+  dataPoints: '12px',
 } as const)
 
 export default spacing

@@ -1,7 +1,7 @@
 ---
 title: Upgrade Guide for Version 10.0
 category: Guides
-order: 7
+order: 98
 ---
 
 # Upgrade Guide for Version 10
