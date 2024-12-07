@@ -613,6 +613,7 @@ class App extends Component<AppProps, AppState> {
               shape="circle"
               color="secondary"
               size="medium"
+              aria-expanded={true}
               ref={(button) => {
                 if (button) {
                   button.focus()
