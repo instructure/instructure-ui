@@ -41,9 +41,8 @@ export default function generateIconFonts({
   name
 }) {
   generateFonts({ ...config, inputDir, outputDir, prefix, name })
-    .then((result) => {
-      // eslint-disable-next-line no-console
-      console.log('Icon font generated:', result)
+    .then((_result) => {
+      //console.log('Icon font generated:', result)
     })
     .catch((error) => {
       console.error('Error generating icon font:', error)

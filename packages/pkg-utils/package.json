@@ -13,7 +13,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-scripts lint",
-    "lint:fix": "ui-scripts lint --fix"
+    "lint:fix": "ui-scripts lint --fix",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {

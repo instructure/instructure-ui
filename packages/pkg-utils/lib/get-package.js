@@ -32,6 +32,11 @@ exports.getPackage = function getPackage(options) {
   return new Package(result.packageJson, path.dirname(result.path))
 }
 
+/**
+ * Reads a package.json
+ * @param options {readPkgUp.NormalizeOptions}
+ * @returns {readPkgUp.NormalizedPackageJson}
+ */
 exports.getPackageJSON = function getPackageJSON(options) {
   return readPackage(options).packageJson
 }
