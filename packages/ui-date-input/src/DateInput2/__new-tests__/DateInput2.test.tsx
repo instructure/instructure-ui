@@ -140,7 +140,7 @@ describe('<DateInput2 />', () => {
         renderCalendarIcon={<IconHeartLine />}
       />
     )
-    const calendarIcon = container.querySelector('svg[name="IconHeartLine"]')
+    const calendarIcon = container.querySelector('svg[name="IconHeart"]')
     const calendarLabel = screen.getByText(iconLabel)
 
     expect(calendarIcon).toBeInTheDocument()
