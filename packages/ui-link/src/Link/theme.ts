@@ -71,7 +71,8 @@ const generateComponentTheme = (theme: Theme): LinkTheme => {
     focusInverseIconOutlineColor: colors?.contrasts?.white1010,
 
     iconSize: '1.125em', // make icon slightly larger than inherited font-size,
-    iconPlusTextMargin: spacing?.xxSmall
+    iconPlusTextMargin: spacing?.xxSmall,
+    textUnderlineOffset: 'auto'
   }
 
   return {
