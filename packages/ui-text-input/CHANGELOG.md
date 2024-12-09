@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.10.1](https://github.com/instructure/instructure-ui/compare/v9.10.0...v9.10.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **ui-text-input:** fix TextInput, Select, SimpleSelect overflowing when there are lots of renderBefore elements ([542c75f](https://github.com/instructure/instructure-ui/commit/542c75ff28244d3e721cb9936ed1e795fe785df0))
+
+
+
+
+
 # [9.10.0](https://github.com/instructure/instructure-ui/compare/v9.9.0...v9.10.0) (2024-11-19)
 
 **Note:** Version bump only for package @instructure/ui-text-input
