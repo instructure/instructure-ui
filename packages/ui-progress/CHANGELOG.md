@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
+
+
+### Features
+
+* **shared-types,ui-progress:** add customization options for progressbar ([56308de](https://github.com/instructure/instructure-ui/commit/56308de9aa4b84a9f9f6fb7096b4916014c56b5b))
+
+
+
+
+
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-progress
