@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import type { StoryConfig } from '@instructure/ui-test-utils'
+import { IconHeartLine } from '@instructure/ui-icons'
 import type { DateInput2Props } from '../props'
 
 export default {
@@ -33,6 +35,10 @@ export default {
       [{ text: 'error example', type: 'error' }],
       [{ text: 'hint example', type: 'hint' }],
       [{ text: 'success example', type: 'success' }]
+    ],
+    renderCalendarIcon: [
+      null,
+      <IconHeartLine key="custom-icon" color="error" title="Love" />
     ]
   },
   getComponentProps: () => {

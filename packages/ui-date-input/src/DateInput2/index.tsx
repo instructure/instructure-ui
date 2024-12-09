@@ -152,6 +152,7 @@ const DateInput2 = ({
   placeholder,
   dateFormat,
   onRequestValidateDate,
+  renderCalendarIcon,
   // margin, TODO enable this prop
   ...rest
 }: DateInput2Props) => {
@@ -298,7 +299,7 @@ const DateInput2 = ({
               shape="circle"
               interaction={interaction}
             >
-              <IconCalendarMonthLine />
+              {renderCalendarIcon ?? <IconCalendarMonthLine />}
             </IconButton>
           }
           isShowingContent={showPopover}
