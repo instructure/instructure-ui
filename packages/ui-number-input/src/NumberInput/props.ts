@@ -34,7 +34,7 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle, Spacing } from '@instructure/emotion'
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type {
   InteractionType,
@@ -166,6 +166,10 @@ type NumberInputOwnProps = {
    * sets the input type to string and allows string as value
    */
   allowStringValue?: boolean
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type NumberInputState = {
@@ -226,7 +230,8 @@ const propTypes: PropValidators<PropKeys> = {
   onKeyDown: PropTypes.func,
   inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
   textAlign: PropTypes.oneOf(['start', 'center']),
-  allowStringValue: PropTypes.bool
+  allowStringValue: PropTypes.bool,
+  margin: PropTypes.string,
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -250,7 +255,8 @@ const allowedProps: AllowedPropKeys = [
   'onKeyDown',
   'inputMode',
   'textAlign',
-  'allowStringValue'
+  'allowStringValue',
+  'margin',
 ]
 
 export type {
