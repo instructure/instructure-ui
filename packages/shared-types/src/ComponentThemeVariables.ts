@@ -653,6 +653,7 @@ export type LinkTheme = {
   focusInverseIconOutlineColor: Colors['contrasts']['white1010']
   iconSize: string
   iconPlusTextMargin: Spacing['xxSmall']
+  textUnderlineOffset: string
 }
 
 export type InlineListItemTheme = {

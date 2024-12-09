@@ -57,6 +57,7 @@ const generateStyle = (
     outlineStyle: componentTheme.focusOutlineStyle,
     borderRadius: componentTheme.focusOutlineBorderRadius,
     outlineOffset: '0.25rem',
+    textUnderlineOffset: componentTheme.textUnderlineOffset,
 
     // If TruncateText is used in Link with icon, align the icon and the text vertically
     ...(renderIcon &&
