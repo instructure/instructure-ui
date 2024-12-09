@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 import { TextInput } from '@instructure/ui-text-input'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 import { jsx } from '@instructure/emotion'
@@ -299,7 +299,11 @@ const DateInput2 = ({
               shape="circle"
               interaction={interaction}
             >
-              {renderCalendarIcon ?? <IconCalendarMonthLine />}
+              {renderCalendarIcon ? (
+                callRenderProp(renderCalendarIcon)
+              ) : (
+                <IconCalendarMonthLine />
+              )}
             </IconButton>
           }
           isShowingContent={showPopover}
