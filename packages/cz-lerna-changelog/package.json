@@ -25,7 +25,7 @@
     "@instructure/pkg-utils": "10.8.0",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "chalk": "^4.1.2",
-    "cz-customizable": "^6.9.2",
+    "cz-customizable": "^7.3.0",
     "inquirer": "^8.2.6"
   },
   "devDependencies": {
