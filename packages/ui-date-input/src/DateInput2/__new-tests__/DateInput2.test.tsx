@@ -26,6 +26,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi, MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
+import { IconHeartLine } from '@instructure/ui-icons'
 
 import { DateInput2 } from '../index'
 
@@ -119,6 +120,27 @@ describe('<DateInput2 />', () => {
     const calendarIcon = container.querySelector(
       'svg[name="IconCalendarMonth"]'
     )
+    const calendarLabel = screen.getByText(iconLabel)
+
+    expect(calendarIcon).toBeInTheDocument()
+    expect(calendarLabel).toBeInTheDocument()
+  })
+
+  it('should render a custom calendar icon with screen reader label', async () => {
+    const iconLabel = 'Calendar icon Label'
+    const { container } = render(
+      <DateInput2
+        renderLabel="Choose a date"
+        screenReaderLabels={{
+          calendarIcon: iconLabel,
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month'
+        }}
+        value=""
+        renderCalendarIcon={<IconHeartLine />}
+      />
+    )
+    const calendarIcon = container.querySelector('svg[name="IconHeart"]')
     const calendarLabel = screen.getByText(iconLabel)
 
     expect(calendarIcon).toBeInTheDocument()

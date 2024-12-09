@@ -165,6 +165,11 @@ type DateInput2OwnProps = {
     utcDateString: string
   ) => void
   // margin?: Spacing // TODO enable this prop
+
+  /**
+   * Custom icon for the icon button opening the picker.
+   */
+  renderCalendarIcon?: Renderable
 }
 
 type PropKeys = keyof DateInput2OwnProps
@@ -195,7 +200,8 @@ const propTypes: PropValidators<PropKeys> = {
   timezone: PropTypes.string,
   withYearPicker: PropTypes.object,
   dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  onRequestValidateDate: PropTypes.func
+  onRequestValidateDate: PropTypes.func,
+  renderCalendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 export type { DateInput2Props }
