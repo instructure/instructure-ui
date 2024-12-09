@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* **ui-select,ui-text-input:** fix long before elements overflowing in TextInput, Select, SimpleSelect ([ee9cafd](https://github.com/instructure/instructure-ui/commit/ee9cafdd027b9a1caaa0791d1b6dc4f8401c87e7))
+
+
+
+
+
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-react-utils
