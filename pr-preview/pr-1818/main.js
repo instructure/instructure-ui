@@ -646,7 +646,7 @@ try{return eval(compileCode(code))}catch(err){return console.error(err),err.toSt
 exports.compileAndRenderExample=compileAndRenderExample},22398:(__unused_webpack_module,exports,__webpack_require__)=>{"use strict"
 var _interopRequireDefault=__webpack_require__(4293).default,_interopRequireWildcard=__webpack_require__(78920).default
 Object.defineProperty(exports,"__esModule",{value:!0}),exports.compileMarkdown=compileMarkdown,exports.default=void 0
-var _react=_interopRequireWildcard(__webpack_require__(14041)),_markedReact=_interopRequireDefault(__webpack_require__(35857)),_grayMatter=_interopRequireDefault(__webpack_require__(4093)),_uuid=__webpack_require__(40182),_emotion=__webpack_require__(66276),_uiThemes=_interopRequireDefault(__webpack_require__(40703)),_uiView=__webpack_require__(96431),_uiTable=__webpack_require__(92113),_uiImg=__webpack_require__(89283),_uiSourceCodeEditor=__webpack_require__(19438),_Playground=__webpack_require__(25226),_compileAndRenderExample=__webpack_require__(64572),_Heading=__webpack_require__(31065),_Link=__webpack_require__(50485)
+var _react=_interopRequireWildcard(__webpack_require__(14041)),_markedReact=_interopRequireDefault(__webpack_require__(3793)),_grayMatter=_interopRequireDefault(__webpack_require__(4093)),_uuid=__webpack_require__(40182),_emotion=__webpack_require__(66276),_uiThemes=_interopRequireDefault(__webpack_require__(40703)),_uiView=__webpack_require__(96431),_uiTable=__webpack_require__(92113),_uiImg=__webpack_require__(89283),_uiSourceCodeEditor=__webpack_require__(19438),_Playground=__webpack_require__(25226),_compileAndRenderExample=__webpack_require__(64572),_Heading=__webpack_require__(31065),_Link=__webpack_require__(50485)
 function trimIndent(str){const lines=`${str.replace(/\r\n/g,"\n").replace(/\r/g,"\n")}\n`.split("\n")
 let indentFound=!1,trimmed="",indent=""
 return lines.forEach(((line,_i)=>{if(line=line.replace(/\s*$/,""),!1===indentFound){if(""===line)return
@@ -6516,5 +6516,5 @@ if(chunkIds.some((id=>0!==installedChunks[id]))){for(moduleId in moreModules)__w
 if(runtime)var result=runtime(__webpack_require__)}for(parentChunkLoadingFunction&&parentChunkLoadingFunction(data);i<chunkIds.length;i++)chunkId=chunkIds[i],__webpack_require__.o(installedChunks,chunkId)&&installedChunks[chunkId]&&installedChunks[chunkId][0](),installedChunks[chunkId]=0
 return __webpack_require__.O(result)},chunkLoadingGlobal=globalThis.webpackChunkdocs_app=globalThis.webpackChunkdocs_app||[]
 chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null,0)),chunkLoadingGlobal.push=webpackJsonpCallback.bind(null,chunkLoadingGlobal.push.bind(chunkLoadingGlobal))})(),__webpack_require__.nc=void 0
-var __webpack_exports__=__webpack_require__.O(void 0,[752],(()=>__webpack_require__(47022)))
+var __webpack_exports__=__webpack_require__.O(void 0,[918],(()=>__webpack_require__(47022)))
 __webpack_exports__=__webpack_require__.O(__webpack_exports__)})()
