@@ -166,6 +166,14 @@ type NumberInputOwnProps = {
    * sets the input type to string and allows string as value
    */
   allowStringValue?: boolean
+
+  /**
+   * Sets the icons to be rendered for increase and decrease buttons
+   */
+  renderIcons?: {
+    increase: Renderable
+    decrease: Renderable
+  }
 }
 
 type NumberInputState = {
@@ -226,7 +234,11 @@ const propTypes: PropValidators<PropKeys> = {
   onKeyDown: PropTypes.func,
   inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
   textAlign: PropTypes.oneOf(['start', 'center']),
-  allowStringValue: PropTypes.bool
+  allowStringValue: PropTypes.bool,
+  renderIcons: PropTypes.shape({
+    increase: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    decrease: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired
+  })
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -250,7 +262,8 @@ const allowedProps: AllowedPropKeys = [
   'onKeyDown',
   'inputMode',
   'textAlign',
-  'allowStringValue'
+  'allowStringValue',
+  'renderIcons'
 ]
 
 export type {

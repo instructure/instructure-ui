@@ -33,6 +33,7 @@ import { NumberInput } from '../index'
 import NumberInputExamples from '../__examples__/NumberInput.examples'
 // eslint-disable-next-line no-restricted-imports
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
+import { IconZoomInLine, IconZoomOutLine } from '@instructure/ui-icons'
 
 describe('<NumberInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -281,5 +282,40 @@ describe('<NumberInput />', () => {
         expect(axeCheck).toBe(true)
       })
     }
+  })
+
+  it('renders custom interactive icons', async () => {
+    const onDecrement = vi.fn()
+    const onIncrement = vi.fn()
+    const { container } = render(
+      <NumberInput
+        renderLabel="Label"
+        onIncrement={onIncrement}
+        onDecrement={onDecrement}
+        renderIcons={{
+          increase: <IconZoomInLine />,
+          decrease: <IconZoomOutLine />
+        }}
+      />
+    )
+
+    const zoomInIcon = container.querySelector('svg[name="IconZoomIn"]')
+    const zoomOutIcon = container.querySelector('svg[name="IconZoomOut"]')
+    expect(zoomInIcon).toBeInTheDocument()
+    expect(zoomOutIcon).toBeInTheDocument()
+
+    const buttons = container.querySelectorAll(
+      'button[class$="-numberInput_arrow'
+    )
+
+    userEvent.click(buttons[0])
+    await waitFor(() => {
+      expect(onIncrement).toHaveBeenCalledTimes(1)
+    })
+
+    userEvent.click(buttons[1])
+    await waitFor(() => {
+      expect(onDecrement).toHaveBeenCalledTimes(1)
+    })
   })
 })
