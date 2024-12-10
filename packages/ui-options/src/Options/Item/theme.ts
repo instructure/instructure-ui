@@ -45,6 +45,7 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeightCondensed,
+    fontWeightSelected: typography?.fontWeightNormal,
 
     color: colors?.contrasts?.grey125125,
     background: colors?.contrasts?.white1010,
