@@ -52,6 +52,7 @@ import type {
   NumberInputState,
   NumberInputStyleProps
 } from './props'
+import { Renderable } from '@instructure/shared-types'
 
 /**
 ---
@@ -203,7 +204,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     }
   }
 
-  renderArrows() {
+  renderArrows(customIcons?: { increase: Renderable; decrease: Renderable }) {
     return (
       <span css={this.props.styles?.arrowContainer}>
         <button
@@ -213,7 +214,11 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
           tabIndex={-1}
           type="button"
         >
-          <IconArrowOpenUpLine />
+          {customIcons?.increase ? (
+            callRenderProp(customIcons.increase)
+          ) : (
+            <IconArrowOpenUpLine />
+          )}
         </button>
         <button
           aria-hidden
@@ -222,7 +227,11 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
           tabIndex={-1}
           type="button"
         >
-          <IconArrowOpenDownLine />
+          {customIcons?.decrease ? (
+            callRenderProp(customIcons.decrease)
+          ) : (
+            <IconArrowOpenDownLine />
+          )}
         </button>
       </span>
     )
@@ -238,7 +247,8 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       value,
       width,
       styles,
-      allowStringValue
+      allowStringValue,
+      renderIcons
     } = this.props
 
     const { interaction } = this
@@ -295,7 +305,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
               onChange={this.handleChange}
               onKeyDown={this.handleKeyDown}
             />
-            {showArrows ? this.renderArrows() : null}
+            {showArrows ? this.renderArrows(renderIcons) : null}
           </span>
         </span>
       </FormField>
