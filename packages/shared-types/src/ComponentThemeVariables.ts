@@ -911,6 +911,7 @@ export type OptionsItemTheme = {
   descriptionLineHeight: Typography['lineHeight']
   descriptionPaddingStart: string | 0
   descriptionColor: Colors['contrasts']['grey4570']
+  fontWeightSelected: Typography['fontWeightNormal']
 }
 
 export type OptionsSeparatorTheme = {
