@@ -33,6 +33,7 @@ import type {
   Renderable,
   PropValidators
 } from '@instructure/shared-types'
+import type { Spacing } from '@instructure/emotion'
 
 type DateInput2OwnProps = {
   /**
@@ -164,7 +165,11 @@ type DateInput2OwnProps = {
     value: string,
     utcDateString: string
   ) => void
-  // margin?: Spacing // TODO enable this prop
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof DateInput2OwnProps
@@ -195,7 +200,8 @@ const propTypes: PropValidators<PropKeys> = {
   timezone: PropTypes.string,
   withYearPicker: PropTypes.object,
   dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  onRequestValidateDate: PropTypes.func
+  onRequestValidateDate: PropTypes.func,
+  margin: PropTypes.string,
 }
 
 export type { DateInput2Props }
