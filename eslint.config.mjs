@@ -161,7 +161,7 @@ const finalConfig = tseslint.config(
     },
     settings: {
       react: {
-        version: process.env.REACT_VERSION || '18.2.0'
+        version: process.env.REACT_VERSION || '18.3.1'
       }
     }
   },
@@ -203,17 +203,6 @@ const finalConfig = tseslint.config(
     languageOptions: {
       globals: {
         ...globals.node
-      }
-    }
-  },
-  {// parts of the docs app that are not converted to TS
-    // TODO convert docs app fully to TS to remove this part
-    files: [
-      'packages/__docs__/**/*.js',
-    ],
-    languageOptions: {
-      globals: {
-        ...globals.browser
       }
     }
   },

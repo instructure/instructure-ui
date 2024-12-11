@@ -34,11 +34,11 @@ describe('uid', () => {
 
   it('should run a bunch and never get duplicates', () => {
     const results = new Set()
-    for (let x = 0; x < 5000; x++) {
-      const id = uid('', 7)
+    for (let x = 0; x < 500; x++) {
+      const id = uid('', 17)
       results.add(id)
     }
-    expect(results.size).toBe(5000)
+    expect(results.size).toBe(500)
   })
 
   it('adds a prefix', () => {

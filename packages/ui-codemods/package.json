@@ -23,7 +23,7 @@
     "@types/prettier": "^2.7.3",
     "esbuild": "^0.24.0",
     "pirates": "^4.0.6",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
