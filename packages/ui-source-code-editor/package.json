@@ -26,12 +26,12 @@
     "@instructure/ui-babel-preset": "10.8.0",
     "@instructure/ui-test-queries": "10.8.0",
     "@instructure/ui-test-utils": "10.8.0",
-    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.8"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.6",
+    "@babel/runtime": "^7.26.0",
     "@codemirror/autocomplete": "^6.18.1",
     "@codemirror/commands": "^6.6.2",
     "@codemirror/lang-css": "^6.3.0",
