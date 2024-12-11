@@ -948,6 +948,7 @@ export type PagesTheme = {
 export type PaginationPageInputTheme = {
   inputSpacing: Spacing['xSmall']
   inputWidth: string
+  labelColor: Colors['contrasts']['grey125125']
 }
 
 export type PaginationTheme = {
