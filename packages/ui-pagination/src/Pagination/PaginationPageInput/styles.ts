@@ -52,7 +52,8 @@ const generateStyle = (
     inputLabel: {
       label: 'paginationPageInput__inputLabel',
       marginInlineStart: componentTheme.inputSpacing,
-      whiteSpace: 'nowrap'
+      whiteSpace: 'nowrap',
+      color: componentTheme.labelColor
     }
   }
 }

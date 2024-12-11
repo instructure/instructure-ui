@@ -31,11 +31,12 @@ import type { PaginationPageInputTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): PaginationPageInputTheme => {
-  const { spacing } = theme
+  const { spacing, colors } = theme
 
   const componentVariables: PaginationPageInputTheme = {
     inputSpacing: spacing.xSmall,
-    inputWidth: '4.5rem'
+    inputWidth: '4.5rem',
+    labelColor: colors?.contrasts?.grey125125
   }
 
   return {
