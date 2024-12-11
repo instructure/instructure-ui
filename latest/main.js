@@ -646,7 +646,7 @@ try{return eval(compileCode(code))}catch(err){return console.error(err),err.toSt
 exports.compileAndRenderExample=compileAndRenderExample},22398:(__unused_webpack_module,exports,__webpack_require__)=>{"use strict"
 var _interopRequireDefault=__webpack_require__(4293).default,_interopRequireWildcard=__webpack_require__(78920).default
 Object.defineProperty(exports,"__esModule",{value:!0}),exports.compileMarkdown=compileMarkdown,exports.default=void 0
-var _react=_interopRequireWildcard(__webpack_require__(14041)),_markedReact=_interopRequireDefault(__webpack_require__(35857)),_grayMatter=_interopRequireDefault(__webpack_require__(4093)),_uuid=__webpack_require__(40182),_emotion=__webpack_require__(66276),_uiThemes=_interopRequireDefault(__webpack_require__(40703)),_uiView=__webpack_require__(96431),_uiTable=__webpack_require__(92113),_uiImg=__webpack_require__(89283),_uiSourceCodeEditor=__webpack_require__(19438),_Playground=__webpack_require__(25226),_compileAndRenderExample=__webpack_require__(64572),_Heading=__webpack_require__(31065),_Link=__webpack_require__(50485)
+var _react=_interopRequireWildcard(__webpack_require__(14041)),_markedReact=_interopRequireDefault(__webpack_require__(3793)),_grayMatter=_interopRequireDefault(__webpack_require__(4093)),_uuid=__webpack_require__(40182),_emotion=__webpack_require__(66276),_uiThemes=_interopRequireDefault(__webpack_require__(40703)),_uiView=__webpack_require__(96431),_uiTable=__webpack_require__(92113),_uiImg=__webpack_require__(89283),_uiSourceCodeEditor=__webpack_require__(19438),_Playground=__webpack_require__(25226),_compileAndRenderExample=__webpack_require__(64572),_Heading=__webpack_require__(31065),_Link=__webpack_require__(50485)
 function trimIndent(str){const lines=`${str.replace(/\r\n/g,"\n").replace(/\r/g,"\n")}\n`.split("\n")
 let indentFound=!1,trimmed="",indent=""
 return lines.forEach(((line,_i)=>{if(line=line.replace(/\s*$/,""),!1===indentFound){if(""===line)return
@@ -699,14 +699,14 @@ __webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_expor
 var _debounce__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(31175)
 const __WEBPACK_DEFAULT_EXPORT__=_debounce__WEBPACK_IMPORTED_MODULE_0__.s},15977:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{v:()=>InstUISettingsProvider})
-var react=__webpack_require__(14041),prop_types=__webpack_require__(39067),prop_types_default=__webpack_require__.n(prop_types),emotion_element_5486c51c_browser_esm=__webpack_require__(64813),TextDirectionContext=__webpack_require__(70117),DeterministicIdContextProvider=__webpack_require__(77867),es=__webpack_require__(40703),theme_registry_es=__webpack_require__(64971),isBaseTheme=__webpack_require__(31183),mergeDeep=__webpack_require__(33259)
+var react=__webpack_require__(14041),prop_types=__webpack_require__(39067),prop_types_default=__webpack_require__.n(prop_types),emotion_element_f0de968e_browser_esm=__webpack_require__(53901),TextDirectionContext=__webpack_require__(70117),DeterministicIdContextProvider=__webpack_require__(77867),es=__webpack_require__(40703),theme_registry_es=__webpack_require__(64971),isBaseTheme=__webpack_require__(31183),mergeDeep=__webpack_require__(33259)
 const getTheme=themeOrOverride=>(ancestorTheme={})=>{var _themeOrOverride
 try{if((0,isBaseTheme.$)(themeOrOverride))return themeOrOverride}catch{0,themeOrOverride={}}let currentTheme
 if(0===Object.keys(ancestorTheme).length){0,currentTheme=theme_registry_es.DT.getCurrentTheme()||es.default}else currentTheme=ancestorTheme
 const themeName=currentTheme.key,specificOverrides=null===(_themeOrOverride=themeOrOverride)||void 0===_themeOrOverride?void 0:_themeOrOverride.themeOverrides,currentThemeOverrides=(null==specificOverrides?void 0:specificOverrides[themeName])||specificOverrides||{}
 return(0,mergeDeep.D)(currentTheme,themeOrOverride,currentThemeOverrides)}
 function InstUISettingsProvider({children,theme={},dir,instanceCounterMap,as}){const finalDir=dir||(0,react.useContext)(TextDirectionContext.SZ)
-let providers=react.createElement(DeterministicIdContextProvider.Y,{instanceCounterMap},react.createElement(emotion_element_5486c51c_browser_esm.a,{theme:getTheme(theme)},react.createElement(TextDirectionContext.SZ.Provider,{value:finalDir},children)))
+let providers=react.createElement(DeterministicIdContextProvider.Y,{instanceCounterMap},react.createElement(emotion_element_f0de968e_browser_esm.a,{theme:getTheme(theme)},react.createElement(TextDirectionContext.SZ.Provider,{value:finalDir},children)))
 if(dir){const Element=as||"span"
 providers=react.createElement(Element,{dir:finalDir},providers)}else 0
 return providers}InstUISettingsProvider.propTypes={children:prop_types_default().node,theme:prop_types_default().object,dir:prop_types_default().oneOf(["ltr","rtl"]),instanceCounterMap:prop_types_default().instanceOf(Map),as:prop_types_default().string}},66276:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
@@ -748,8 +748,8 @@ var slicedToArray=__webpack_require__(17338),react=__webpack_require__(14041),ho
 const getComponentThemeOverride=(theme,displayName,componentId,props,componentTheme)=>{const name=displayName,id=componentId,themeOverride=props.themeOverride,componentOverrides=theme.componentOverrides
 let overridesFromTheme={},overrideFromComponent={}
 return componentOverrides&&(overridesFromTheme=name&&componentOverrides[name]||id&&componentOverrides[id]||{}),themeOverride&&(overrideFromComponent="function"==typeof themeOverride?themeOverride(componentTheme||{},theme):themeOverride),{...overridesFromTheme,...overrideFromComponent}}
-var emotion_element_5486c51c_browser_esm=__webpack_require__(64813),ui_themes_es=__webpack_require__(40703),isEmpty=__webpack_require__(65012),theme_registry_es=__webpack_require__(64971)
-const useTheme=()=>{let theme=(0,emotion_element_5486c51c_browser_esm.u)()
+var emotion_element_f0de968e_browser_esm=__webpack_require__(53901),ui_themes_es=__webpack_require__(40703),isEmpty=__webpack_require__(65012),theme_registry_es=__webpack_require__(64971)
+const useTheme=()=>{let theme=(0,emotion_element_f0de968e_browser_esm.u)()
 if((0,isEmpty.I)(theme)){const globalTheme=theme_registry_es.DT.getCurrentTheme()
 if(globalTheme)return globalTheme
 0,theme=ui_themes_es.default}return theme},defaultValues={styles:{},makeStyles:()=>{}},withStyle=(0,decorator.G)(((ComposedComponent,generateStyle,generateComponentTheme)=>{const displayName=ComposedComponent.displayName||ComposedComponent.name,WithStyle=(0,react.forwardRef)(((props,ref)=>{const theme=useTheme()
@@ -6516,5 +6516,5 @@ if(chunkIds.some((id=>0!==installedChunks[id]))){for(moduleId in moreModules)__w
 if(runtime)var result=runtime(__webpack_require__)}for(parentChunkLoadingFunction&&parentChunkLoadingFunction(data);i<chunkIds.length;i++)chunkId=chunkIds[i],__webpack_require__.o(installedChunks,chunkId)&&installedChunks[chunkId]&&installedChunks[chunkId][0](),installedChunks[chunkId]=0
 return __webpack_require__.O(result)},chunkLoadingGlobal=globalThis.webpackChunkdocs_app=globalThis.webpackChunkdocs_app||[]
 chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null,0)),chunkLoadingGlobal.push=webpackJsonpCallback.bind(null,chunkLoadingGlobal.push.bind(chunkLoadingGlobal))})(),__webpack_require__.nc=void 0
-var __webpack_exports__=__webpack_require__.O(void 0,[752],(()=>__webpack_require__(47022)))
+var __webpack_exports__=__webpack_require__.O(void 0,[918],(()=>__webpack_require__(47022)))
 __webpack_exports__=__webpack_require__.O(__webpack_exports__)})()
