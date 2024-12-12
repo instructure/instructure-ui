@@ -51,7 +51,7 @@ import { allowedProps, propTypes, SimpleSelectState } from './props'
 type OptionChild = React.ComponentElement<SimpleSelectOptionProps, Option>
 type GroupChild = React.ComponentElement<SimpleSelectGroupProps, Group>
 
-type GetOption = <F extends 'id' | 'value'>(
+type GetOption = <F extends keyof SimpleSelectOptionProps>(
   field: F,
   value?: SimpleSelectOptionProps[F]
 ) => OptionChild | undefined
@@ -150,14 +150,17 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
   componentDidUpdate(prevProps: SimpleSelectProps) {
     if (this.hasOptionsChanged(prevProps.children, this.props.children)) {
-      const option = this.getOption('value', this.state.inputValue)
+      // Compare current input value to children's child prop, this is put into
+      // state.inputValue
+      const option = this.getOption('children', this.state.inputValue)
       this.setState({
         inputValue: option ? option.props.children : undefined,
         selectedOptionId: option ? option.props.id : ''
       })
     }
-
     if (this.props.value !== prevProps.value) {
+      // if value has changed externally try to find an option with the same value
+      // and select it
       let option = this.getOption('value', this.props.value)
       if (typeof this.props.value === 'undefined') {
         // preserve current value when changing from controlled to uncontrolled
