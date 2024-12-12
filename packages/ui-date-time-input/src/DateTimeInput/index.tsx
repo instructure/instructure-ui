@@ -165,7 +165,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
                 ? this.props.invalidDateTimeMessage(parsed.toISOString(true))
                 : this.props.invalidDateTimeMessage
           }
-          errorMsg = text ? { text, type: 'error' } : undefined
+          errorMsg = text ? { text, type: 'newError' } : undefined
           return {
             iso: parsed.clone(),
             calendarSelectedDate: parsed.clone(),
@@ -348,7 +348,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           ? this.props.invalidDateTimeMessage(dateStr ? dateStr : '')
           : this.props.invalidDateTimeMessage
       // eslint-disable-next-line no-param-reassign
-      newState.message = { text: text, type: 'error' }
+      newState.message = { text: text, type: 'newError' }
     }
     if (this.areDifferentDates(this.state.iso, newState.iso)) {
       if (typeof this.props.onChange === 'function') {
@@ -567,6 +567,17 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       allowNonStepInput
     } = this.props
 
+    const allMessages = [
+      ...(showMessages && this.state.message ? [this.state.message] : []),
+      ...(messages || [])
+    ]
+
+    const hasError = allMessages.find((m) => m.type === 'newError')
+    // if the component is in error state, create an empty error message to pass down to the subcomponents (DateInput and TimeInput) so they get a red outline and red required asterisk
+    const subComponentMessages: FormMessage[] = hasError
+      ? [{ type: 'newError', text: '' }]
+      : []
+
     return (
       <FormFieldGroup
         description={description}
@@ -575,6 +586,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         colSpacing={colSpacing}
         vAlign="top"
         elementRef={this.handleRef}
+        isGroup={false}
         messages={[
           ...(showMessages && this.state.message ? [this.state.message] : []),
           ...(messages || [])
@@ -601,6 +613,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           onRequestRenderNextMonth={this.handleRenderNextMonth}
           onRequestRenderPrevMonth={this.handleRenderPrevMonth}
           isRequired={isRequired}
+          messages={subComponentMessages}
           interaction={interaction}
           renderNavigationLabel={
             <span>
@@ -624,6 +637,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           inputRef={timeInputRef}
           interaction={interaction}
           allowNonStepInput={allowNonStepInput}
+          isRequired={isRequired}
+          messages={subComponentMessages}
         />
       </FormFieldGroup>
     )
