@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
+
+
+### Bug Fixes
+
+* **ui-pagination:** fix color of pageInput's label ([b91cfe1](https://github.com/instructure/instructure-ui/commit/b91cfe1e77eeeb9956a87ac01d3ee4598d304a5a))
+
+
+
+
+
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-pagination
