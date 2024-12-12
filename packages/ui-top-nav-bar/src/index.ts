@@ -23,6 +23,13 @@
  */
 
 export { TopNavBar } from './TopNavBar'
+export { TopNavBarActionItems } from './TopNavBar/TopNavBarActionItems'
+export { TopNavBarBrand } from './TopNavBar/TopNavBarBrand'
+export { TopNavBarBreadcrumb } from './TopNavBar/TopNavBarBreadcrumb'
+export { TopNavBarItem } from './TopNavBar/TopNavBarItem'
+export { TopNavBarLayout } from './TopNavBar/TopNavBarLayout'
+export { TopNavBarMenuItems } from './TopNavBar/TopNavBarMenuItems'
+export { TopNavBarUser } from './TopNavBar/TopNavBarUser'
 
 export type { TopNavBarProps, TopNavBarOwnProps } from './TopNavBar/props'
 export type {

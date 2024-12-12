@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export { Pages } from './Pages'
+export { Page as PagesPage } from './Pages/Page'
 
 export type { PagesProps } from './Pages/props'
 export type { PagesPageProps } from './Pages/Page/props'

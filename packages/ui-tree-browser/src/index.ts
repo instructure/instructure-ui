@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 export { TreeBrowser } from './TreeBrowser'
+export { TreeButton } from './TreeBrowser/TreeButton'
+export { TreeCollection } from './TreeBrowser/TreeCollection'
+export { TreeNode } from './TreeBrowser/TreeNode'
 
 export type { TreeBrowserProps } from './TreeBrowser/props'
 export type { TreeBrowserButtonProps } from './TreeBrowser/TreeButton/props'

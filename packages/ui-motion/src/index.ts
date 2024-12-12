@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export { Transition } from './Transition'
+export { BaseTransition } from './Transition/BaseTransition'
 export type { TransitionProps, TransitionType } from './Transition/props'
 export type { BaseTransitionStatesType } from './Transition/BaseTransition/props'
 export { transitionTypePropType } from './Transition/props'

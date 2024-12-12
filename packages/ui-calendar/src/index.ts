@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export { Calendar } from './Calendar'
+export { Day as CalendarDay } from './Calendar/Day'
 
 export type { CalendarProps } from './Calendar/props'
 export type { CalendarDayProps } from './Calendar/Day/props'

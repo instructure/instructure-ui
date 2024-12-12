@@ -23,6 +23,8 @@
  */
 
 export { SimpleSelect } from './SimpleSelect'
+export { Group as SimpleSelectGroup } from './SimpleSelect/Group'
+export { Option as SimpleSelectOption } from './SimpleSelect/Option'
 
 export type { SimpleSelectProps } from './SimpleSelect/props'
 export type { SimpleSelectGroupProps } from './SimpleSelect/Group/props'

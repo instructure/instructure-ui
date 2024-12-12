@@ -23,6 +23,12 @@
  */
 export { Table } from './Table'
 export { TableContext } from './Table/TableContext'
+export { Body as TableBody } from './Table/Body'
+export { Cell as TableCell } from './Table/Cell'
+export { ColHeader as TableColHeader } from './Table/ColHeader'
+export { Head as TableHead } from './Table/Head'
+export { Row as TableRow } from './Table/Row'
+export { RowHeader as TableRowHeader } from './Table/RowHeader'
 
 export type { TableProps } from './Table/props'
 export type { TableBodyProps } from './Table/Body/props'

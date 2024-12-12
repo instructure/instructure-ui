@@ -23,6 +23,8 @@
  */
 
 export { Options } from './Options'
+export { Item as OptionItem } from './Options/Item'
+export { Separator as OptionSeparator } from './Options/Separator'
 
 export { optionsThemeGenerator } from './Options/theme'
 export { optionsItemThemeGenerator } from './Options/Item/theme'
