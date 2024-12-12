@@ -352,6 +352,8 @@ class Tabs extends Component<TabsProps, TabsState> {
         isDisabled={panel.props.isDisabled}
         onClick={this.handleTabClick}
         onKeyDown={this.handleTabKeyDown}
+        customTab={panel.props.customTab}
+        align={panel.props.alignTab}
       >
         {panel.props.renderTitle}
       </Tab>

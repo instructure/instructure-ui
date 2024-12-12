@@ -50,6 +50,8 @@ type TabsTabOwnProps = {
     tabData: { index: number; id: string }
   ) => void
   children?: Renderable
+  customTab?: boolean
+  align?: string
 }
 
 type PropKeys = keyof TabsTabOwnProps
@@ -71,7 +73,9 @@ const propTypes: PropValidators<PropKeys> = {
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  customTab: PropTypes.bool,
+  align: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -83,7 +87,9 @@ const allowedProps: AllowedPropKeys = [
   'isSelected',
   'onClick',
   'onKeyDown',
-  'children'
+  'children',
+  'customTab',
+  'align'
 ]
 
 export type { TabsTabProps, TabsTabStyle }

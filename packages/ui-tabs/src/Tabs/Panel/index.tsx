@@ -56,7 +56,8 @@ class Panel extends Component<TabsPanelProps> {
     isSelected: false,
     padding: 'small',
     active: false,
-    unmountOnExit: true
+    unmountOnExit: true,
+    customTab: false
   }
 
   componentDidMount() {
