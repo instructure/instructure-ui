@@ -61,7 +61,8 @@ class Item extends Component<OptionsItemProps> {
     role: 'listitem',
     voiceoverRoleBugWorkaround: false,
     beforeLabelContentVAlign: 'center',
-    afterLabelContentVAlign: 'center'
+    afterLabelContentVAlign: 'center',
+    isSelected: false
   } as const
 
   ref: Element | null = null

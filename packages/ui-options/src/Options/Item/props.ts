@@ -94,6 +94,10 @@ type OptionsItemOwnProps = OptionsItemRenderProps & {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * Whether or not this option is selected
+   */
+  isSelected?: boolean
 }
 
 type PropKeys = keyof OptionsItemOwnProps
@@ -133,7 +137,8 @@ const propTypes: PropValidators<PropKeys> = {
   href: PropTypes.string,
   voiceoverRoleBugWorkaround: PropTypes.bool,
   elementRef: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  isSelected: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -149,7 +154,8 @@ const allowedProps: AllowedPropKeys = [
   'voiceoverRoleBugWorkaround',
   'href',
   'elementRef',
-  'children'
+  'children',
+  'isSelected'
 ]
 
 export type { OptionsItemProps, OptionsItemStyle, OptionsItemRenderProps }

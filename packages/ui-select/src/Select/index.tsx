@@ -425,6 +425,7 @@ class Select extends Component<SelectProps> {
     // should option be treated as highlighted or selected
     if (isSelected) {
       optionProps.variant = 'selected'
+      optionProps.isSelected = true
     } else if (isHighlighted) {
       optionProps.variant = 'highlighted'
     }

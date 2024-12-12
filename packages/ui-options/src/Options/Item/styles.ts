@@ -112,7 +112,9 @@ const generateStyle = (
       display: 'block',
       fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
+      fontWeight: props.isSelected
+        ? componentTheme.fontWeightSelected
+        : componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
       outline: 'none',
       position: 'relative',
