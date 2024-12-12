@@ -23,6 +23,8 @@
  */
 
 export { Tabs } from './Tabs'
+export { Panel as TabsPanel } from './Tabs/Panel'
+export { Tab as TabsTab } from './Tabs/Tab'
 
 export type { TabsProps } from './Tabs/props'
 export type { TabsPanelProps } from './Tabs/Panel/props'

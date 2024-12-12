@@ -23,6 +23,7 @@
  */
 
 export { AppNav } from './AppNav'
+export { Item as AppNavItem } from './AppNav/Item'
 
 export type { AppNavProps } from './AppNav/props'
 export type { AppNavItemProps } from './AppNav/Item/props'

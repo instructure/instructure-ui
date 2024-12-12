@@ -23,6 +23,10 @@
  */
 
 export { Drilldown } from './Drilldown'
+export { DrilldownGroup } from './Drilldown/DrilldownGroup'
+export { DrilldownOption } from './Drilldown/DrilldownOption'
+export { DrilldownPage } from './Drilldown/DrilldownPage'
+export { DrilldownSeparator } from './Drilldown/DrilldownSeparator'
 
 export type {
   DrilldownProps,

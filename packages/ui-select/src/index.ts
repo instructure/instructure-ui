@@ -23,6 +23,8 @@
  */
 
 export { Select } from './Select'
+export { Group as SelectGroup } from './Select/Group'
+export { Option as SelectOption } from './Select/Option'
 
 export type { SelectProps, SelectOwnProps } from './Select/props'
 export type { SelectGroupProps } from './Select/Group/props'

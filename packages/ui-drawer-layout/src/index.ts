@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { DrawerLayout, DrawerContent } from './DrawerLayout'
+export { DrawerLayout, DrawerContent, DrawerTray } from './DrawerLayout'
 
 export type { DrawerLayoutProps } from './DrawerLayout/props'
 export type { DrawerLayoutContentProps } from './DrawerLayout/DrawerContent/props'
