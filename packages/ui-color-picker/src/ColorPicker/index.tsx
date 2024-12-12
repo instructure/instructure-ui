@@ -399,7 +399,15 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             }}
           >
             <Tooltip renderTip={<span aria-hidden={true}>{tooltip}</span>}>
-              <IconButton withBackground={false} withBorder={false} screenReaderLabel={tooltip} size="small" shape="circle" width="auto" renderIcon={IconInfoLine}/>
+              <IconButton
+                withBackground={false}
+                withBorder={false}
+                screenReaderLabel={tooltip}
+                size="small"
+                shape="circle"
+                width="auto"
+                renderIcon={IconInfoLine}
+              />
             </Tooltip>
           </InstUISettingsProvider>
         </span>
@@ -602,7 +610,8 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   )
 
   render() {
-    const { disabled, isRequired, placeholderText, width, id } = this.props
+    const { disabled, isRequired, placeholderText, width, id, margin } =
+      this.props
 
     return (
       <div
@@ -627,6 +636,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           onPaste={(event) => this.handleOnPaste(event)}
           onBlur={() => this.handleOnBlur()}
           messages={this.renderMessages()}
+          margin={margin}
         />
         {!this.isSimple && (
           <div
