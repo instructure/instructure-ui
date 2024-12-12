@@ -26,7 +26,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type {
   ColorPickerTheme,
   OtherHTMLAttributes,
@@ -225,6 +229,11 @@ type ColorPickerOwnProps = {
    * If true, alpha slider will be rendered. Defaults to false
    */
   withAlpha?: boolean
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type ColorPickerState = {
@@ -316,7 +325,8 @@ const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string,
   value: PropTypes.string,
   width: PropTypes.string,
-  withAlpha: PropTypes.bool
+  withAlpha: PropTypes.bool,
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -339,7 +349,8 @@ const allowedProps: AllowedPropKeys = [
   'tooltip',
   'value',
   'width',
-  'withAlpha'
+  'withAlpha',
+  'margin'
 ]
 
 export type {

@@ -29,8 +29,6 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
-import type { BaseColors } from '@instructure/shared-types'
-
 import { ColorSwatch } from '../ColorSwatch'
 
 import generateStyle from './styles'
@@ -42,51 +40,49 @@ class ComponentTheme extends Component<ComponentThemeProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
 
-  mapColors(colorKey: BaseColors) {
-    const map: Record<string, string> = {}
-    ;(Object.keys(colorKey) as Array<keyof BaseColors>).forEach((color) => {
-      const hex = colorKey[color]
-      if (typeof map[hex] === 'undefined') {
-        map[hex] = color
-      }
-    })
-    return map
+  renderValueCell(
+    value: undefined | string | object | number,
+    colorPrimitives: object
+  ) {
+    if (!value) {
+      return <code>$aposundefined$apos</code>
+    }
+    if (typeof value === 'object') {
+      return <code>{JSON.stringify(value)}</code>
+    }
+    if (typeof value === 'object') {
+      return <code>{JSON.stringify(value)}</code>
+    }
+    if (
+      value.toString().charAt(0) === '#' ||
+      value.toString().substring(0, 3) === 'rgb'
+    ) {
+      // find color primitive name from hex value
+      const color = Object.entries(colorPrimitives).find(([, v]) => v === value)
+      return (
+        <span>
+          <View margin="0 xx-small 0 0">
+            <ColorSwatch color={value} />
+          </View>
+          <code>{color?.[0] ?? value}</code>
+        </span>
+      )
+    }
+    return <code>{value}</code>
   }
 
   renderRows() {
     const { componentTheme, themeVariables } = this.props
-    const colorKey = themeVariables.colors.values
-      ? themeVariables.colors.values
-      : themeVariables.colors
-    const map = this.mapColors(colorKey)
+    const colorPrimitives = themeVariables.colors.primitives
 
     return Object.keys(componentTheme).map((name) => {
-      const value = componentTheme[name] || 'undefined'
-      const color = value.toString().charAt(0) === '#' ? map[value] : null
-
       return (
         <Table.Row key={name}>
           <Table.Cell>
             <code>{name}</code>
           </Table.Cell>
           <Table.Cell>
-            {value.toString().charAt(0) === '#' ? (
-              <span>
-                <View margin="0 xx-small 0 0">
-                  <ColorSwatch color={value} />
-                </View>
-                <code>{color}</code>
-              </span>
-            ) : value.toString().substring(0, 3) === 'rgb' ? (
-              <span>
-                <View margin="0 xx-small 0 0">
-                  <ColorSwatch color={value} />
-                </View>
-                <code>{value}</code>
-              </span>
-            ) : (
-              <code>{value}</code>
-            )}
+            {this.renderValueCell(componentTheme[name], colorPrimitives)}
           </Table.Cell>
         </Table.Row>
       )

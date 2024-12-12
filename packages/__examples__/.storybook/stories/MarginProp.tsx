@@ -21,32 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+import React from 'react'
+import {
+  Button,
+  ColorPicker,
+  TextInput,
+  TextArea,
+  NumberInput,
+  DateInput2
+} from '@instructure/ui'
 
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  ThemeablePropTypes,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges,
-  mapSpacingToShorthand
-} from './styleUtils'
+const exampleMargin = 'space36 21px 0 buttons'
 
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+function MarginProp() {
+  return (
+    <div>
+      <Button margin={exampleMargin}>hello</Button>
+      <TextInput margin={exampleMargin} />
+      <TextArea margin={exampleMargin} label="label" />
+      <NumberInput margin={exampleMargin} renderLabel="label" />
+      <ColorPicker
+        placeholderText="placeholder"
+        label="label"
+        margin={exampleMargin}
+      />
+      <DateInput2
+        margin={exampleMargin}
+        renderLabel="label"
+        screenReaderLabels={{
+          calendarIcon: 'asdf',
+          prevMonthButton: 'asdf',
+          nextMonthButton: 'asdf'
+        }}
+      />
+    </div>
+  )
+}
+
+export default MarginProp

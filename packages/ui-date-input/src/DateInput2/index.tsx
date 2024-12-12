@@ -153,7 +153,7 @@ const DateInput2 = ({
   dateFormat,
   onRequestValidateDate,
   renderCalendarIcon,
-  // margin, TODO enable this prop
+  margin,
   ...rest
 }: DateInput2Props) => {
   const localeContext = useContext(ApplyLocaleContext)
@@ -278,7 +278,6 @@ const DateInput2 = ({
   return (
     <TextInput
       {...passthroughProps(rest)}
-      // margin={'large'} TODO add this prop to TextInput
       renderLabel={renderLabel}
       onChange={handleInputChange}
       onBlur={handleBlur}
@@ -289,6 +288,7 @@ const DateInput2 = ({
       display={isInline ? 'inline-block' : 'block'}
       messages={inputMessages}
       interaction={interaction}
+      margin={margin}
       renderAfterInput={
         <Popover
           renderTrigger={

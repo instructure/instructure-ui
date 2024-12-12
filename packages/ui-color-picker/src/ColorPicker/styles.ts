@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { mapSpacingToShorthand } from '@instructure/emotion'
 import type { ColorPickerTheme } from '@instructure/shared-types'
 
 import type {
@@ -45,15 +46,22 @@ const generateStyle = (
   props: ColorPickerProps,
   state: ColorPickerState & { isSimple: boolean }
 ): ColorPickerStyle => {
-  const { hashMarkColor, errorIconColor, warningIconColor, successIconColor } =
-    componentTheme
-  const { checkContrast, popoverMaxHeight } = props
+  const {
+    hashMarkColor,
+    errorIconColor,
+    warningIconColor,
+    successIconColor,
+    spacing
+  } = componentTheme
+  const { checkContrast, popoverMaxHeight, margin } = props
   const { isSimple } = state
 
+  const cssMargin = mapSpacingToShorthand(margin, spacing)
   return {
     colorPicker: {
       label: 'colorPicker',
-      display: 'flex'
+      display: 'flex',
+      margin: cssMargin
     },
     simpleColorContainer: {
       label: 'colorPicker__simpleColorContainer',
