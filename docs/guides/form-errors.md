@@ -135,6 +135,34 @@ const Example = () => {
           renderMessages={() => messages}
         />
 
+        <DateTimeInput
+          description={`DateTimeInput (layout="column")`}
+          datePlaceholder="Choose a date"
+          dateRenderLabel="Date"
+          timeRenderLabel="Time"
+          invalidDateTimeMessage="Invalid date!"
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
+          defaultValue="2018-01-18T13:30"
+          layout="columns"
+          isRequired={isRequired}
+          messages={messages}
+        />
+
+        <DateTimeInput
+          description={`DateTimeInput (layout="stacked")`}
+          datePlaceholder="Choose a date"
+          dateRenderLabel="Date"
+          timeRenderLabel="Time"
+          invalidDateTimeMessage="Invalid date!"
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
+          defaultValue="2018-01-18T13:30"
+          layout="stacked"
+          isRequired={isRequired}
+          messages={messages}
+        />
+
       </div>
     </div>
   )
