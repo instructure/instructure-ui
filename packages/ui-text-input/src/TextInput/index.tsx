@@ -347,6 +347,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         inputContainerRef={inputContainerRef}
         layout={this.props.layout}
         elementRef={this.handleRef}
+        margin={this.props.margin}
       >
         <span css={styles?.facade}>
           {renderBeforeOrAfter ? (

@@ -315,7 +315,8 @@ class TextArea extends Component<TextAreaProps> {
       maxHeight,
       textareaRef,
       resize,
-      styles
+      styles,
+      margin
     } = this.props
 
     const props = omitProps(this.props, TextArea.allowedProps)
@@ -380,6 +381,7 @@ class TextArea extends Component<TextAreaProps> {
         elementRef={(el) => {
           this.ref = el
         }}
+        margin={margin}
       >
         <div
           css={this.props.styles?.textAreaLayout}

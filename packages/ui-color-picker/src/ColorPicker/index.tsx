@@ -399,7 +399,15 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             }}
           >
             <Tooltip renderTip={<span aria-hidden={true}>{tooltip}</span>}>
-              <IconButton withBackground={false} withBorder={false} screenReaderLabel={tooltip} size="small" shape="circle" width="auto" renderIcon={IconInfoLine}/>
+              <IconButton
+                withBackground={false}
+                withBorder={false}
+                screenReaderLabel={tooltip}
+                size="small"
+                shape="circle"
+                width="auto"
+                renderIcon={IconInfoLine}
+              />
             </Tooltip>
           </InstUISettingsProvider>
         </span>

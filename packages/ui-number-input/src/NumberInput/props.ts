@@ -34,7 +34,11 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type {
   InteractionType,
@@ -174,6 +178,10 @@ type NumberInputOwnProps = {
     increase: Renderable
     decrease: Renderable
   }
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type NumberInputState = {
@@ -238,7 +246,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderIcons: PropTypes.shape({
     increase: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     decrease: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired
-  })
+  }),
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -263,7 +272,8 @@ const allowedProps: AllowedPropKeys = [
   'inputMode',
   'textAlign',
   'allowStringValue',
-  'renderIcons'
+  'renderIcons',
+  'margin'
 ]
 
 export type {

@@ -21,32 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+import type { Theme } from '@instructure/ui-themes'
 
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  ThemeablePropTypes,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges,
-  mapSpacingToShorthand
-} from './styleUtils'
+const generateComponentTheme = (theme: Theme): any => {
+  const { spacing } = theme
 
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+  return { spacing }
+}
+
+export default generateComponentTheme

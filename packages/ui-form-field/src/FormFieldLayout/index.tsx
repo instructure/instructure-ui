@@ -44,6 +44,7 @@ import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -51,7 +52,7 @@ parent: FormField
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 

@@ -36,7 +36,11 @@ import type {
   PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type TextAreaOwnProps = {
@@ -110,6 +114,11 @@ type TextAreaOwnProps = {
    * when used with the `value` prop, the component will not control its own state
    */
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof TextAreaOwnProps
@@ -153,7 +162,8 @@ const propTypes: PropValidators<PropKeys> = {
   textareaRef: PropTypes.func,
   defaultValue: PropTypes.string,
   value: controllable(PropTypes.string),
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -175,7 +185,8 @@ const allowedProps: AllowedPropKeys = [
   'textareaRef',
   'defaultValue',
   'value',
-  'onChange'
+  'onChange',
+  'margin'
 ]
 
 export type { TextAreaProps, TextAreaStyle }
