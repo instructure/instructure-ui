@@ -35,6 +35,7 @@ import type {
 import type {
   OtherHTMLAttributes,
   PropValidators,
+  Renderable,
   TabsPanelTheme
 } from '@instructure/shared-types'
 
@@ -43,7 +44,7 @@ type TabsPanelOwnProps = {
    * The content that will be rendered in the corresponding <Tab /> and will label
    * this `<Tabs.Panel />` for screen readers
    */
-  renderTitle: React.ReactNode | (() => React.ReactNode)
+  renderTitle: Renderable
   children?: React.ReactNode
   variant?: 'default' | 'secondary'
   isSelected?: boolean
@@ -67,6 +68,16 @@ type TabsPanelOwnProps = {
    * When set to false, the tabPanel only will be hidden, but not dismounted when not active
    */
   unmountOnExit?: boolean
+
+  /**
+   * When set to true, the tab will be rendered with minimal styling to enable a custom design
+   */
+  customTab?: boolean
+
+  /**
+   * Aligning the tab in the flex container
+   */
+  alignTab?: string
 }
 
 type PropKeys = keyof TabsPanelOwnProps
@@ -93,7 +104,9 @@ const propTypes: PropValidators<PropKeys> = {
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   elementRef: PropTypes.func,
   active: PropTypes.bool,
-  unmountOnExit: PropTypes.bool
+  unmountOnExit: PropTypes.bool,
+  customTab: PropTypes.bool,
+  alignTab: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -110,7 +123,9 @@ const allowedProps: AllowedPropKeys = [
   'textAlign',
   'elementRef',
   'active',
-  'unmountOnExit'
+  'unmountOnExit',
+  'customTab',
+  'alignTab'
 ]
 
 export type { TabsPanelProps, TabsPanelStyle }
