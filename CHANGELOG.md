@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
+
+
+### Bug Fixes
+
+* **ui-pagination:** fix color of pageInput's label ([b91cfe1](https://github.com/instructure/instructure-ui/commit/b91cfe1e77eeeb9956a87ac01d3ee4598d304a5a))
+
+
+### Features
+
+* **link:** add textUnderlineOffset to Link component theme override ([2b2a997](https://github.com/instructure/instructure-ui/commit/2b2a997d8c255c2568b44c755754a5fa3bdd0468))
+* **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
+* **shared-types,ui-options,ui-select:** allow to change font weight of selected option item in Select ([6818928](https://github.com/instructure/instructure-ui/commit/6818928536ad0145516c8d7d25eb8079c84089b6))
+* **ui-date-input:** add support for custom calendar icon ([a0fff9d](https://github.com/instructure/instructure-ui/commit/a0fff9dc8ab96c45f1cb9bf2d4a49d8ba03b7b2b))
+* **ui-number-input:** add customizable icons for increment and decrement buttons ([7be2226](https://github.com/instructure/instructure-ui/commit/7be222651902524f6c166e39f09878542a646d7c))
+
+
+
+
+
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 
