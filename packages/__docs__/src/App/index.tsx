@@ -156,7 +156,8 @@ class App extends Component<AppProps, AppState> {
           },
           {
             label: 'Help',
-            renderBeforeLabel: <IconQuestionLine />
+            renderBeforeLabel: <IconQuestionLine />,
+            onClick: () => alert('Help clicked')
           }
         ],
         backNavigation: {
@@ -172,7 +173,22 @@ class App extends Component<AppProps, AppState> {
             <Img src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" />
           </div>
         ),
-        renderAfterMobileMenuItems: <h3>Additional account info</h3>,
+        renderAfterMobileMenuItems: (
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+            aliquet erat in orci semper fringilla. Nullam suscipit mollis mi, at
+            vehicula magna vulputate eu. Cras mattis felis id quam vehicula
+            euismod. Nulla dolor enim, ornare in odio a, molestie dictum ligula.
+            Nullam maximus et dolor eget porttitor. Vestibulum faucibus viverra
+            pellentesque. Duis lorem lectus, porta vitae aliquam vitae, vehicula
+            sagittis nulla. Aenean sagittis congue rhoncus. Cras laoreet eu
+            nulla eu dignissim. Maecenas sed massa nisi. Suspendisse
+            pellentesque, metus sed ultricies porta, justo tellus pulvinar diam,
+            ac ornare massa nibh quis purus. Duis erat ipsum, pellentesque in
+            diam non, luctus accumsan metus. In ipsum tellus, ullamcorper a
+            faucibus a, venenatis ut urna. Sed at rutrum turpis.
+          </p>
+        ),
         items: [
           {
             label: 'AccountInfo1'
