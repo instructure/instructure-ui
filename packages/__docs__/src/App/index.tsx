@@ -23,7 +23,7 @@
  */
 
 import { Component } from 'react'
-
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { withStyle } from '@instructure/emotion'
 import { CanvasTopNav } from '@instructure/ui-top-nav-bar'
 import { IconButton } from '@instructure/ui-buttons'
@@ -32,13 +32,16 @@ import {
   IconAnalyticsLine,
   IconArrowOpenEndSolid,
   IconCoursesLine,
+  IconDashboardLine,
   IconQuestionLine,
   IconUserLine
 } from '@instructure/ui-icons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-type AppProps = Record<string, never>
+type AppProps = {
+  navigate: (path: string, options?: { replace: boolean }) => void
+}
 
 type AppState = {
   menuStack: string[]
@@ -135,6 +138,15 @@ class App extends Component<AppProps, AppState> {
             renderAfterLabel: <IconArrowOpenEndSolid />
           },
           {
+            label: 'Dashboard',
+            renderBeforeLabel: <IconDashboardLine />,
+            onClick: () => {
+              // Navigate and reload logic
+              this.props.navigate('/dashboard', { replace: true })
+              window.location.reload() // Forces a reload
+            }
+          },
+          {
             label: 'Help',
             renderBeforeLabel: <IconQuestionLine />
           }
@@ -211,10 +223,20 @@ class App extends Component<AppProps, AppState> {
           beforeMobileMenuItems={<div>Before Mobile Menu</div>}
           afterMobileMenuItems={<div>After Mobile Menu</div>}
         />
+        <Routes>
+          <Route path="/" element={<h1>This is home</h1>} />
+          <Route path="/dashboard" element={<h1>This is dashboard</h1>} />
+          {/*<Route path="/profile" element={<Profile />} />*/}
+        </Routes>
       </div>
     )
   }
 }
 
+function AppWrapper() {
+  const navigate = useNavigate()
+  return <App navigate={navigate} />
+}
+
 export default App
-export { App }
+export { App, AppWrapper }
