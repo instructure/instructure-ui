@@ -64,7 +64,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     placement: 'top',
     constrain: 'window',
     offsetX: 0,
-    offsetY: 0
+    offsetY: 0,
+    preventTooltip: false
   } as const
 
   private readonly _id: string
@@ -148,6 +149,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
       positionTarget,
       onShowContent,
       onHideContent,
+      preventTooltip,
       styles,
       ...rest
     } = this.props
@@ -155,8 +157,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     return (
       <Popover
         {...passthroughProps(rest)}
-        isShowingContent={isShowingContent}
-        defaultIsShowingContent={defaultIsShowingContent}
+        isShowingContent={!preventTooltip && isShowingContent}
+        defaultIsShowingContent={!preventTooltip && defaultIsShowingContent}
         on={on}
         shouldRenderOffscreen
         shouldReturnFocus={false}
@@ -177,10 +179,12 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         shouldCloseOnDocumentClick={false}
         shouldCloseOnEscape
       >
-        <span id={this._id} css={styles?.tooltip} role="tooltip">
-          {/* TODO: figure out how to add a ref to this */}
-          {callRenderProp(renderTip)}
-        </span>
+        {!preventTooltip ? (
+          <span id={this._id} css={styles?.tooltip} role="tooltip">
+            {/* TODO: figure out how to add a ref to this */}
+            {callRenderProp(renderTip)}
+          </span>
+        ) : null}
       </Popover>
     )
   }
