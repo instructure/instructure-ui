@@ -26,7 +26,7 @@
 import { useEffect, useState } from 'react'
 import { DesktopTopNav } from '../DesktopTopNav'
 import { MobileTopNav } from '../MobileTopNav'
-import { jsx } from '@instructure/emotion'
+import { InstUISettingsProvider, jsx, useTheme } from '@instructure/emotion'
 import {
   IconAddLine,
   IconAdminSolid,
@@ -35,6 +35,7 @@ import {
 } from '@instructure/ui-icons'
 import { Button, IconButton } from '@instructure/ui-buttons'
 import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
+import { generateStyles } from './styles'
 
 /**
 ---
@@ -52,7 +53,8 @@ const CanvasTopNav = ({
   mobileMenuBackNavigation,
   hamburgerOnClick,
   beforeMobileMenuItems,
-  afterMobileMenuItems
+  afterMobileMenuItems,
+  styles
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -134,17 +136,27 @@ const CanvasTopNav = ({
           <IconHamburgerLine />
         </IconButton>
         <div style={{ minWidth: '100%' }}>
-          <Breadcrumb label={breadcrumb.label}>
-            {breadcrumb.links.map((link: any, index: any) =>
-              link.href ? (
-                <Breadcrumb.Link key={index} href={link.href}>
-                  {link.label}
-                </Breadcrumb.Link>
-              ) : (
-                <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
-              )
-            )}
-          </Breadcrumb>
+          <InstUISettingsProvider
+            theme={{
+              componentOverrides: {
+                Link: {
+                  color: styles.breadcrumbOverride.color
+                }
+              }
+            }}
+          >
+            <Breadcrumb label={breadcrumb.label}>
+              {breadcrumb.links.map((link: any, index: any) =>
+                link.href ? (
+                  <Breadcrumb.Link key={index} href={link.href}>
+                    {link.label}
+                  </Breadcrumb.Link>
+                ) : (
+                  <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
+                )
+              )}
+            </Breadcrumb>
+          </InstUISettingsProvider>
         </div>
       </DesktopTopNav.Start>
       <DesktopTopNav.End>
@@ -155,5 +167,23 @@ const CanvasTopNav = ({
   )
 }
 
-export { CanvasTopNav }
-export default CanvasTopNav
+const withStyles =
+  <ComponentOwnProps, ComponentStyle>(
+    generateStyles: (props: any, theme: any) => ComponentStyle
+  ) =>
+  (WrappedComponent: any) =>
+  // eslint-disable-next-line react/display-name
+  (originalProps: ComponentOwnProps) => {
+    const theme = useTheme()
+    const styledProps = {
+      styles: generateStyles(originalProps, theme),
+      ...originalProps
+    }
+    return <WrappedComponent {...styledProps} />
+  }
+
+const SC: any = withStyles(generateStyles)(CanvasTopNav)
+SC.displayName = 'CanvasTopNav'
+
+export { SC as CanvasTopNav }
+export default SC
