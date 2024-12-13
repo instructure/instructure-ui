@@ -38,6 +38,7 @@ import {
 } from '@instructure/ui-icons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { Img } from '@instructure/ui-img'
 
 type AppProps = {
   navigate: (path: string, options?: { replace: boolean }) => void
@@ -62,6 +63,8 @@ type Menu = {
     onClick?: () => void
   }
   title: string
+  renderBeforeMobileMenuItems?: JSX.Element
+  renderAfterMobileMenuItems?: JSX.Element
 }
 
 type MenuCollection = {
@@ -74,7 +77,12 @@ class App extends Component<AppProps, AppState> {
     super(props)
 
     this.state = {
-      menuStack: ['default']
+      menuStack: [
+        'default',
+        ...(window.location.pathname.substring(1)
+          ? [window.location.pathname.substring(1)]
+          : [])
+      ]
     }
   }
 
@@ -141,9 +149,8 @@ class App extends Component<AppProps, AppState> {
             label: 'Dashboard',
             renderBeforeLabel: <IconDashboardLine />,
             onClick: () => {
-              // Navigate and reload logic
               this.props.navigate('/dashboard', { replace: true })
-              window.location.reload() // Forces a reload
+              window.location.reload()
             }
           },
           {
@@ -152,12 +159,19 @@ class App extends Component<AppProps, AppState> {
           }
         ],
         backNavigation: {
-          href: '#',
-          label: 'Back'
+          href: undefined,
+          label: '',
+          onClick: undefined
         },
-        title: 'Main Menu'
+        title: ''
       },
       account: {
+        renderBeforeMobileMenuItems: (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Img src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" />
+          </div>
+        ),
+        renderAfterMobileMenuItems: <h3>Additional account info</h3>,
         items: [
           {
             label: 'AccountInfo1'
@@ -181,6 +195,18 @@ class App extends Component<AppProps, AppState> {
           }
         },
         title: 'Courses'
+      },
+      dashboard: {
+        title: 'Dashboard',
+        items: [{ label: 'Courses1' }, { label: 'Courses2' }],
+        backNavigation: {
+          label: 'Back',
+          onClick: () => {
+            this.popMenu()
+            this.props.navigate('/', { replace: true })
+            window.location.reload()
+          }
+        }
       }
     }
 
@@ -218,15 +244,18 @@ class App extends Component<AppProps, AppState> {
               onClick: () => alert('Alerts clicked')
             }
           ]}
-          mobileMenuBackNavigation={menu[this.getCurrentMenu()].backNavigation}
+          mobileMenuBackNavigation={menu[this.getCurrentMenu()]?.backNavigation}
           mobileMenu={menu[this.getCurrentMenu()].items}
-          beforeMobileMenuItems={<div>Before Mobile Menu</div>}
-          afterMobileMenuItems={<div>After Mobile Menu</div>}
+          beforeMobileMenuItems={
+            menu[this.getCurrentMenu()]?.renderBeforeMobileMenuItems
+          }
+          afterMobileMenuItems={
+            menu[this.getCurrentMenu()]?.renderAfterMobileMenuItems
+          }
         />
         <Routes>
           <Route path="/" element={<h1>This is home</h1>} />
           <Route path="/dashboard" element={<h1>This is dashboard</h1>} />
-          {/*<Route path="/profile" element={<Profile />} />*/}
         </Routes>
       </div>
     )
