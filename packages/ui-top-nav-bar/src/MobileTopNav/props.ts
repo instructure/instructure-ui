@@ -22,18 +22,30 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+import type { ReactNode, PropsWithChildren } from 'react'
 
-import { AppWrapper } from './App'
-import { InstUISettingsProvider } from '@instructure/emotion'
-import '../globals'
-import { BrowserRouter } from 'react-router-dom'
+type MobileTopNavOwnProps = {
+  lightMode?: boolean
+  brand?: ReactNode
+}
 
-createRoot(document.getElementById('app')).render(
-  <InstUISettingsProvider>
-    <BrowserRouter>
-      <AppWrapper />
-    </BrowserRouter>
-  </InstUISettingsProvider>
-)
+type MobileTopNavStyle = {
+  container: (open: boolean) => {
+    [key: string]: string | number
+  }
+  content: (open: boolean) => {
+    [key: string]: string | number
+  }
+  topBar: {
+    [key: string]: string | number
+  }
+  end: {
+    [key: string]: string | number
+  }
+}
+
+type MobileTopNavProps = MobileTopNavOwnProps & {
+  styles: MobileTopNavStyle
+} & PropsWithChildren
+
+export type { MobileTopNavProps, MobileTopNavOwnProps }
