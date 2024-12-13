@@ -28,7 +28,7 @@ const generateStyles = (props: DesktopTopNavProps, theme: any) => {
   return {
     container: {
       height: '66px',
-      position: 'fixed',
+      position: 'relative',
       backgroundColor: lightMode
         ? theme.colors.ui.surfacePageSecondary
         : theme.colors.ui.surfaceDark,
