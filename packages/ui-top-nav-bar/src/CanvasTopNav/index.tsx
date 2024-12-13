@@ -88,26 +88,42 @@ const CanvasTopNav = ({
         ))}
       </MobileTopNav.End>
       <MobileTopNav.Menu>
-        <div style={{ marginTop: 16 }}>
-          <Breadcrumb label={mobileMenuBackNavigation.label}>
-            <BreadcrumbLink
-              href={mobileMenuBackNavigation.href}
-              onClick={mobileMenuBackNavigation.onClick}
+        {mobileMenuBackNavigation.label && (
+          <div style={{ marginTop: 16 }}>
+            <InstUISettingsProvider
+              theme={{
+                componentOverrides: {
+                  Link: {
+                    color: styles.breadcrumbOverride.color
+                  }
+                }
+              }}
             >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}
-              >
-                <IconArrowOpenStartLine />
-                {mobileMenuBackNavigation.label}
-              </div>
-            </BreadcrumbLink>
-          </Breadcrumb>
-        </div>
-        {beforeMobileMenuItems && beforeMobileMenuItems}
+              <Breadcrumb label={mobileMenuBackNavigation.label}>
+                <BreadcrumbLink
+                  href={mobileMenuBackNavigation.href}
+                  onClick={mobileMenuBackNavigation.onClick}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px'
+                    }}
+                  >
+                    <IconArrowOpenStartLine />
+                    {mobileMenuBackNavigation.label}
+                  </div>
+                </BreadcrumbLink>
+              </Breadcrumb>
+            </InstUISettingsProvider>
+          </div>
+        )}
+        {beforeMobileMenuItems && (
+          <div style={{ marginTop: '24px', marginBottom: '16px' }}>
+            {beforeMobileMenuItems}
+          </div>
+        )}
         <MobileTopNav.ItemList title={mobileMenuTitle}>
           {mobileMenu.map((item: any, index: any) => (
             <MobileTopNav.Item
@@ -120,7 +136,11 @@ const CanvasTopNav = ({
             </MobileTopNav.Item>
           ))}
         </MobileTopNav.ItemList>
-        {afterMobileMenuItems && afterMobileMenuItems}
+        {afterMobileMenuItems && (
+          <div style={{ marginTop: '24px', marginBottom: '16px' }}>
+            {afterMobileMenuItems}
+          </div>
+        )}
       </MobileTopNav.Menu>
     </MobileTopNav>
   ) : (
