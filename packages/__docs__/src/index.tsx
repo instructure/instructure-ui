@@ -25,14 +25,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { App } from './App'
+import { AppWrapper } from './App'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
+import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('app')!).render(
   <StrictMode>
     <InstUISettingsProvider>
-      <App />
+      <BrowserRouter>
+      <AppWrapper />
+    </BrowserRouter>
     </InstUISettingsProvider>
   </StrictMode>
 )
