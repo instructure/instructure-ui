@@ -4,6 +4,31 @@ describes: Heading
 
 Heading is a component for creating typographic headings.
 
+## Variant
+
+Variant takes care of - almost - all use-cases when it comes hedings on pages. Their name reflects the places they meant to be used. It sets the `level` prop and takes care of the style of the heading
+We recommend using `variants` instead of the `level` (and `as`) props.
+
+NOTE: when `variant` is set, `level` and `as` props are ignored
+
+```js
+---
+type: example
+---
+  <div>
+    <Heading variant="titlePageDesktop"> titlePageDesktop </Heading><br/>
+    <Heading variant="titlePageMobile"> titlePageMobile </Heading><br/>
+    <Heading variant="titleSection"> titleSection </Heading><br/>
+    <Heading variant="titleCardSection"> titleCardSection </Heading><br/>
+    <Heading variant="titleModule"> titleModule </Heading><br/>
+    <Heading variant="titleCardLarge"> titleCardLarge </Heading><br/>
+    <Heading variant="titleCardRegular"> titleCardRegular </Heading><br/>
+    <Heading variant="titleCardMini"> titleCardMini </Heading><br/>
+    <Heading variant="label"> label </Heading><br/>
+    <Heading variant="labelInline"> labelInline </Heading><br/>
+  </div>
+```
+
 ```js
 ---
 type: example
@@ -24,11 +49,7 @@ type: example
 ---
 <div>
   <Heading level="h1" as="h2" margin="0 0 x-small">Heading level One</Heading>
-  <Heading level="h2" as="h1" margin="0 0 x-small">Heading level Two</Heading>
-  <Heading level="h3" margin="0 0 x-small">Heading level Three</Heading>
-  <Heading level="h4" margin="0 0 x-small">Heading level Four</Heading>
-  <Heading level="h5" margin="0 0 x-small">Heading level Five</Heading>
-  <Heading level="reset" as="h2">Heading level reset as a Two</Heading>
+
 </div>
 ```
 

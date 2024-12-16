@@ -47,8 +47,54 @@ const generateStyle = (
     transform,
     lineHeight,
     letterSpacing,
-    color
+    color,
+    variant
   } = props
+
+  const variants: Record<NonNullable<TextProps['variant']>, object> = {
+    descriptionPage: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightRegular,
+      fontSize: componentTheme.descriptionPage,
+      lineHeight: componentTheme.lineHeight150
+    },
+    descriptionSection: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightRegular,
+      fontSize: componentTheme.descriptionSection,
+      lineHeight: componentTheme.lineHeight150
+    },
+    content: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightRegular,
+      fontSize: componentTheme.content,
+      lineHeight: componentTheme.lineHeight150
+    },
+    contentImportant: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.content,
+      lineHeight: componentTheme.lineHeight150
+    },
+    contentQuote: {
+      fontStyle: 'italic',
+      fontWeight: componentTheme.weightRegular,
+      fontSize: componentTheme.content,
+      lineHeight: componentTheme.lineHeight150
+    },
+    contentSmall: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightRegular,
+      fontSize: componentTheme.contentSmall,
+      lineHeight: componentTheme.lineHeight150
+    },
+    legend: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightRegular,
+      fontSize: componentTheme.legend,
+      lineHeight: componentTheme.lineHeight150
+    }
+  }
 
   const colorVariants = {
     primary: { color: componentTheme.primaryColor },
@@ -70,7 +116,9 @@ const generateStyle = (
   const weightStyle = {
     normal: { fontWeight: componentTheme.fontWeightNormal },
     light: { fontWeight: componentTheme.fontWeightLight },
-    bold: { fontWeight: componentTheme.fontWeightBold }
+    bold: { fontWeight: componentTheme.fontWeightBold },
+    weightRegular: { fontWeight: componentTheme.weightRegular },
+    weightImportant: { fontWeight: componentTheme.weightImportant }
   }
 
   const fontSizeVariants = {
@@ -79,14 +127,22 @@ const generateStyle = (
     medium: componentTheme.fontSizeMedium,
     large: componentTheme.fontSizeLarge,
     'x-large': componentTheme.fontSizeXLarge,
-    'xx-large': componentTheme.fontSizeXXLarge
+    'xx-large': componentTheme.fontSizeXXLarge,
+    descriptionPage: componentTheme.descriptionPage,
+    descriptionSection: componentTheme.descriptionSection,
+    content: componentTheme.content,
+    contentSmall: componentTheme.contentSmall,
+    legend: componentTheme.legend
   }
 
   const lineHeightVariants = {
     default: { lineHeight: componentTheme.lineHeight },
     fit: { lineHeight: componentTheme.lineHeightFit },
     condensed: { lineHeight: componentTheme.lineHeightCondensed },
-    double: { lineHeight: componentTheme.lineHeightDouble }
+    double: { lineHeight: componentTheme.lineHeightDouble },
+    lineHeight100: { lineHeight: componentTheme.lineHeight100 },
+    lineHeight125: { lineHeight: componentTheme.lineHeight125 },
+    lineHeight150: { lineHeight: componentTheme.lineHeight150 }
   }
 
   const letterSpacingVariants = {
@@ -95,18 +151,27 @@ const generateStyle = (
     expanded: componentTheme.letterSpacingExpanded
   }
 
+  const calcTextStyles = () => {
+    if (variant) {
+      return variants[variant]
+    }
+    return {
+      ...(weight ? weightStyle[weight] : {}),
+      ...(fontStyle ? { fontStyle: fontStyle } : {}),
+      fontSize: fontSizeVariants[size!],
+      ...(lineHeight ? lineHeightVariants[lineHeight] : {})
+    }
+  }
+
   const baseStyles = {
     '&:focus': {
       outline: 'none'
     },
     ...(color ? colorVariants[color] : {}),
     ...(wrap === 'break-word' ? wrapStyle : {}),
-    ...(weight ? weightStyle[weight] : {}),
-    ...(fontStyle ? { fontStyle: fontStyle } : {}),
-    fontSize: fontSizeVariants[size!],
-    ...(lineHeight ? lineHeightVariants[lineHeight] : {}),
     letterSpacing: letterSpacingVariants[letterSpacing!],
-    ...(transform ? { textTransform: transform } : {})
+    ...(transform ? { textTransform: transform } : {}),
+    ...calcTextStyles()
   }
 
   const inputStyles = {

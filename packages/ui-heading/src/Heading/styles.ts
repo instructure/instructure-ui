@@ -39,7 +39,70 @@ const generateStyle = (
   componentTheme: HeadingTheme,
   props: HeadingProps
 ): HeadingStyle => {
-  const { level, color, border } = props
+  const { level, color, border, variant } = props
+
+  const variants: Record<NonNullable<HeadingProps['variant']>, object> = {
+    titlePageDesktop: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titlePageDesktop,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titlePageMobile: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titlePageMobile,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titleSection: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titleSection,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titleCardSection: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titleSection,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titleModule: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titleModule,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titleCardLarge: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titleCardLarge,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titleCardRegular: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titleCardRegular,
+      lineHeight: componentTheme.lineHeight125
+    },
+    titleCardMini: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.titleCardMini,
+      lineHeight: componentTheme.lineHeight125
+    },
+    label: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.label,
+      lineHeight: componentTheme.lineHeight125
+    },
+    labelInline: {
+      fontStyle: 'normal',
+      fontWeight: componentTheme.weightImportant,
+      fontSize: componentTheme.label,
+      lineHeight: componentTheme.lineHeight150
+    }
+  }
 
   const levelStyles = {
     h1: {
@@ -125,7 +188,7 @@ const generateStyle = (
       '&:is(input)[type]': inputStyles,
       '&:-webkit-any(input)[type]': inputStyles,
 
-      ...levelStyles[level!],
+      ...(variant ? variants[variant] : levelStyles[level!]),
       ...colorStyles[color!],
       ...borderStyles[border!]
     }

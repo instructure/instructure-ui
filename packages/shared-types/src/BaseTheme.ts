@@ -111,6 +111,26 @@ type Typography = {
   letterSpacingNormal: number | 0
   letterSpacingCondensed: string | 0
   letterSpacingExpanded: string | 0
+
+  titlePageDesktop: string
+  titlePageMobile: string
+  titleSection: string
+  titleModule: string
+  titleCardLarge: string
+  titleCardRegular: string
+  titleCardMini: string
+  descriptionPage: string
+  descriptionSection: string
+  label: string
+  content: string
+  contentSmall: string
+  legend: string
+
+  lineHeight100: number
+  lineHeight125: number
+  lineHeight150: number
+  weightRegular: number
+  weightImportant: number
 }
 
 type Size = {

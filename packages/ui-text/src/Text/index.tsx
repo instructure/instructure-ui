@@ -53,12 +53,32 @@ class Text extends Component<TextProps> {
     children: null
   } as const
 
+  checkProps() {
+    const { variant, size, lineHeight, weight, fontStyle } = this.props
+    if (variant) {
+      if (size) {
+        console.warn("[Text]: Don't use 'size' with 'variant' ")
+      }
+      if (lineHeight) {
+        console.warn("[Text]: Don't use 'lineHeight' with 'variant' ")
+      }
+      if (weight) {
+        console.warn("[Text]: Don't use 'weight' with 'variant' ")
+      }
+      if (fontStyle) {
+        console.warn("[Text]: Don't use 'fontStyle' with 'variant' ")
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
+    this.checkProps()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+    this.checkProps()
   }
 
   render() {

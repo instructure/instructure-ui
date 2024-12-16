@@ -26,16 +26,13 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { TextProps } from '../props'
 
 export default {
-  sectionProp: 'weight',
+  sectionProp: 'variant',
   maxExamplesPerPage: 50,
   maxExamples: 1000,
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children:
-        props.size &&
-        ['x-small', 'small', 'medium', 'large'].includes(props.size)
-          ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
-          : 'Lorem ipsum dolor sit amet, consectetur'
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
     }
   },
   getExampleProps: (props) => {
@@ -46,24 +43,23 @@ export default {
       maxWidth: '25rem'
     }
   },
+  propValues: {
+    weight: [undefined],
+    lineHeight: [undefined],
+    size: [undefined],
+    fontStyle: [undefined]
+  },
   filter: (props) => {
     return (
       // Only generate a 1 variation for non-'primary' color
       (props.color !== 'primary' &&
-        (props.fontStyle !== 'normal' ||
-          props.letterSpacing !== 'normal' ||
-          props.lineHeight !== 'default' ||
-          props.size !== 'medium' ||
+        (props.letterSpacing !== 'normal' ||
           props.transform !== 'none' ||
-          props.weight !== 'normal' ||
           props.wrap !== 'normal')) ||
       // Only generate a 1 variation for non-'medium' size
       (props.size !== 'medium' &&
-        (props.fontStyle !== 'normal' ||
-          props.letterSpacing !== 'normal' ||
-          props.lineHeight !== 'default' ||
+        (props.letterSpacing !== 'normal' ||
           props.transform !== 'none' ||
-          props.weight !== 'normal' ||
           props.wrap !== 'normal'))
     )
   }
