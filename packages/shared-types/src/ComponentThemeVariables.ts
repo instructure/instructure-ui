@@ -603,7 +603,7 @@ export type GridTheme = {
   spacingLarge: Spacing['large']
 } & Media
 
-export type HeadingTheme = {
+export type HeadingTheme = Typography & {
   lineHeight: Typography['lineHeightCondensed']
   h1FontSize: Typography['fontSizeXXLarge']
   h1FontWeight: Typography['fontWeightBold']

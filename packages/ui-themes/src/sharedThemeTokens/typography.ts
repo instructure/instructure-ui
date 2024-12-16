@@ -28,6 +28,12 @@ const typography: Typography = Object.freeze({
   fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 
+  letterSpacingNormal: 0,
+  letterSpacingCondensed: '-0.0625rem',
+  letterSpacingExpanded: '0.0625rem',
+
+  // deprecated values
+
   fontSizeXSmall: '0.75rem', // 12px
   fontSizeSmall: '0.875rem', // 14px
   fontSizeMedium: '1rem', // 16px
@@ -44,9 +50,26 @@ const typography: Typography = Object.freeze({
   lineHeightCondensed: 1.25,
   lineHeightDouble: 2,
 
-  letterSpacingNormal: 0,
-  letterSpacingCondensed: '-0.0625rem',
-  letterSpacingExpanded: '0.0625rem'
+  // new values
+  titlePageDesktop: '2.25rem',
+  titlePageMobile: '2rem',
+  titleSection: '1.75rem',
+  titleModule: '1.5rem',
+  titleCardLarge: '1.5rem',
+  titleCardRegular: '1.25rem',
+  titleCardMini: '1rem',
+  descriptionPage: '1.25rem',
+  descriptionSection: '1rem',
+  label: '1rem',
+  content: '1rem',
+  contentSmall: '0.875rem',
+  legend: '0.75rem',
+
+  lineHeight100: 1,
+  lineHeight125: 1.25,
+  lineHeight150: 1.5,
+  weightRegular: 400,
+  weightImportant: 700
 })
 
 export default typography

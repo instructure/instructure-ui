@@ -78,6 +78,21 @@ type HeadingOwnProps = {
    * Provides a ref to the underlying HTML element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * Sets style and level at once. The as property will be the same as the level.
+   * NOTE: this is the recommended way of setting the appearance, instead of level
+   */
+  variant?:
+    | 'titlePageDesktop'
+    | 'titlePageMobile'
+    | 'titleSection'
+    | 'titleCardSection'
+    | 'titleModule'
+    | 'titleCardLarge'
+    | 'titleCardRegular'
+    | 'titleCardMini'
+    | 'label'
+    | 'labelInline'
 }
 
 type PropKeys = keyof HeadingOwnProps
@@ -103,7 +118,19 @@ const propTypes: PropValidators<PropKeys> = {
   level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
   as: PropTypes.elementType,
   margin: ThemeablePropTypes.spacing,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  variant: PropTypes.oneOf([
+    'titlePageDesktop',
+    'titlePageMobile',
+    'titleSection',
+    'titleCardSection',
+    'titleModule',
+    'titleCardLarge',
+    'titleCardRegular',
+    'titleCardMini',
+    'label',
+    'labelInline'
+  ])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -113,7 +140,8 @@ const allowedProps: AllowedPropKeys = [
   'level',
   'as',
   'margin',
-  'elementRef'
+  'elementRef',
+  'variant'
 ]
 
 export type { HeadingProps, HeadingStyle }

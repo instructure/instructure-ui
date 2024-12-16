@@ -57,10 +57,41 @@ type TextOwnProps = {
   elementRef?: (element: Element | null) => void
   fontStyle?: 'italic' | 'normal'
   letterSpacing?: 'normal' | 'condensed' | 'expanded'
-  lineHeight?: 'default' | 'fit' | 'condensed' | 'double'
-  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large'
+  lineHeight?:
+    | 'default'
+    | 'fit'
+    | 'condensed'
+    | 'double'
+    | 'lineHeight100'
+    | 'lineHeight125'
+    | 'lineHeight150'
+  size?:
+    | 'x-small'
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'x-large'
+    | 'xx-large'
+    | 'descriptionPage'
+    | 'descriptionSection'
+    | 'content'
+    | 'contentSmall'
+    | 'legend'
   transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase'
-  weight?: 'normal' | 'light' | 'bold'
+  /**
+   * Sets multiple props at once. (size, fontStyle, lineHeight, weight)
+   * If set, these props are not allowed.
+   * NOTE: this is the recommended way of setting these values
+   */
+  variant?:
+    | 'descriptionPage'
+    | 'descriptionSection'
+    | 'content'
+    | 'contentImportant'
+    | 'contentQuote'
+    | 'contentSmall'
+    | 'legend'
+  weight?: 'normal' | 'light' | 'bold' | 'weightRegular' | 'weightImportant'
   wrap?: 'normal' | 'break-word'
   children?: React.ReactNode
 }
@@ -91,17 +122,45 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   fontStyle: PropTypes.oneOf(['italic', 'normal']),
   letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),
-  lineHeight: PropTypes.oneOf(['default', 'fit', 'condensed', 'double']),
+  lineHeight: PropTypes.oneOf([
+    'default',
+    'fit',
+    'condensed',
+    'double',
+    'lineHeight100',
+    'lineHeight125',
+    'lineHeight150'
+  ]),
   size: PropTypes.oneOf([
     'x-small',
     'small',
     'medium',
     'large',
     'x-large',
-    'xx-large'
+    'xx-large',
+    'descriptionPage',
+    'descriptionSection',
+    'content',
+    'contentSmall',
+    'legend'
   ]),
   transform: PropTypes.oneOf(['none', 'capitalize', 'uppercase', 'lowercase']),
-  weight: PropTypes.oneOf(['normal', 'light', 'bold']),
+  variant: PropTypes.oneOf([
+    'descriptionPage',
+    'descriptionSection',
+    'content',
+    'contentImportant',
+    'contentQuote',
+    'contentSmall',
+    'legend'
+  ]),
+  weight: PropTypes.oneOf([
+    'normal',
+    'light',
+    'bold',
+    'weightRegular',
+    'weightImportant'
+  ]),
   wrap: PropTypes.oneOf(['normal', 'break-word'])
 }
 
@@ -115,6 +174,7 @@ const allowedProps: AllowedPropKeys = [
   'lineHeight',
   'size',
   'transform',
+  'variant',
   'weight',
   'wrap'
 ]

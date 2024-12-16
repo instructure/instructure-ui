@@ -26,7 +26,7 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { HeadingProps } from '../props'
 
 export default {
-  sectionProp: 'level',
+  sectionProp: 'variant',
   propValues: {
     color: [
       'primary',
@@ -34,7 +34,10 @@ export default {
       'primary-inverse',
       'secondary-inverse',
       'inherit'
-    ]
+    ],
+
+    level: [undefined],
+    as: [undefined]
   },
   getComponentProps: () => {
     return {

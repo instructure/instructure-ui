@@ -36,6 +36,22 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { HeadingProps } from './props'
 
+const variantLevels: Record<
+  NonNullable<HeadingProps['variant']>,
+  'h1' | 'h2' | 'h3' | 'h4' | 'h5'
+> = {
+  titlePageDesktop: 'h1',
+  titlePageMobile: 'h1',
+  titleSection: 'h2',
+  titleCardSection: 'h2',
+  titleModule: 'h3',
+  titleCardLarge: 'h4',
+  titleCardRegular: 'h4',
+  titleCardMini: 'h4',
+  label: 'h5',
+  labelInline: 'h5'
+}
+
 /**
 ---
 category: components
@@ -67,12 +83,26 @@ class Heading extends Component<HeadingProps> {
     }
   }
 
+  checkProps() {
+    const { variant, level, as } = this.props
+    if (variant) {
+      if (level) {
+        console.warn("[Heading]: Don't use 'level' with 'variant' ")
+      }
+      if (as) {
+        console.warn("[Heading]: Don't use 'as' with 'variant' ")
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
+    this.checkProps()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+    this.checkProps()
   }
 
   render() {
@@ -84,10 +114,16 @@ class Heading extends Component<HeadingProps> {
       margin,
       elementRef,
       makeStyles,
+      variant,
       ...props
     } = this.props
 
-    const ElementType = getElementType(Heading, this.props, () => {
+    const propsForGetElementType = variant ? {} : this.props
+
+    const ElementType = getElementType(Heading, propsForGetElementType, () => {
+      if (variant) {
+        return variantLevels[variant]
+      }
       if (level === 'reset') {
         return 'span'
       } else {

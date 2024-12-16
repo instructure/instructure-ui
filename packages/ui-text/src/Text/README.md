@@ -4,6 +4,28 @@ describes: Text
 
 A component for styling textual content
 
+## Variant
+
+Variant takes care of - almost - all use-cases when it comes to texts on pages. Their name reflects the places they meant to be used. It sets `size`, `weight`, `fontStyle` and `lineHeight`
+We recommend using `variants` instead of the aforementioned props.
+
+NOTE: when `variant` is set, `size`, `weight`, `fontStyle` and `lineHeight` props are ignored
+
+```js
+---
+type: example
+---
+<div>
+  <Text variant="descriptionPage"> descriptionPage </Text><br/>
+  <Text variant="descriptionSection"> descriptionSection </Text><br/>
+  <Text variant="content"> content </Text><br/>
+  <Text variant="contentImportant"> contentImportant </Text><br/>
+  <Text variant="contentQuote"> contentQuote </Text><br/>
+  <Text variant="contentSmall"> contentSmall </Text><br/>
+  <Text variant="legend"> legend </Text><br/>
+</div>
+```
+
 ### Font sizes
 
 ```js
@@ -11,12 +33,11 @@ A component for styling textual content
 type: example
 ---
 <div>
-  <Text size="x-small">I&#39;m extra small</Text><br/>
-  <Text size="small">I&#39;m small</Text><br/>
-  <Text>I&#39;m medium</Text><br/>
-  <Text size="large">I&#39;m large</Text><br/>
-  <Text size="x-large">I&#39;m extra large</Text><br/>
-  <Text size="xx-large">I&#39;m extra extra large</Text>
+  <Text size='descriptionPage'>descriptionPage</Text><br/>
+  <Text size='descriptionSection'>descriptionSection</Text><br/>
+  <Text size='content'>content</Text><br/>
+  <Text size='contentSmall'>contentSmall</Text><br/>
+  <Text size='legend'>legend</Text>
 </div>
 ```
 
@@ -27,9 +48,8 @@ type: example
 type: example
 ---
 <div>
-  <Text weight="light">I&#39;m light text</Text><br/>
-  <Text>I&#39;m normal text</Text><br/>
-  <Text weight="bold">I&#39;m bold text</Text>
+  <Text weight="weightRegular">weightRegular</Text><br/>
+  <Text weight="weightImportant">weightImportant</Text>
 </div>
 ```
 
@@ -52,16 +72,14 @@ type: example
 type: example
 ---
 <div>
-  <Text lineHeight="fit">
+  <br/><br/>
+  <Text lineHeight="lineHeight100">
     <p>{lorem.paragraph()}</p>
   </Text>
-  <Text>
+  <Text lineHeight="lineHeight125">
     <p>{lorem.paragraph()}</p>
   </Text>
-  <Text lineHeight="condensed">
-    <p>{lorem.paragraph()}</p>
-  </Text>
-  <Text lineHeight="double">
+  <Text lineHeight="lineHeight150">
     <p>{lorem.paragraph()}</p>
   </Text>
 </div>
@@ -158,3 +176,29 @@ type: example
   This<sup>is</sup> some<sub>text</sub>.
 </Text>
 ```
+
+### DEPRECATED legacy values
+
+Multiple values from `size`, `weight` and `lineHeight` are deprecated, but still supported for backward compatibility reasons. Please only use the above listed, semantic values.
+
+Deprecated `size` values:
+
+- x-small
+- small
+- medium
+- large
+- x-large
+- xx-large
+
+Deprecated `weight` values:
+
+- normal
+- light
+- bold
+
+Deprecated `lineHeight` values:
+
+- default
+- fit
+- condensed
+- double
