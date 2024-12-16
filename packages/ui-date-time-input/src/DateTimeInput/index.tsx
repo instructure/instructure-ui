@@ -351,7 +351,14 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       newState.message = { text: text, type: 'error' }
     }
     if (this.areDifferentDates(this.state.iso, newState.iso)) {
-      this.props.onChange?.(e, newState.iso?.toISOString())
+      if (typeof this.props.onChange === 'function') {
+        const newDate = newState.iso?.toISOString()
+        // Timeout is needed here because users might change value in the
+        // onChange event lister, which might not execute properly
+        window.setTimeout(() => {
+          this.props.onChange?.(e, newDate)
+        }, 0)
+      }
     }
     this.setState(newState)
   }
@@ -439,12 +446,12 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       // Please note that this causes one hour of time difference in the affected timezones/dates and to
       // fully solve this bug we need to change to something like luxon which handles this properly
       if (currDate.clone().format('HH') === '23') {
-        arr.push(currDate.clone().add({hours: 1}))
+        arr.push(currDate.clone().add({ hours: 1 }))
       } else {
         arr.push(currDate.clone())
       }
 
-      currDate.add({days: 1})
+      currDate.add({ days: 1 })
     }
     return arr.map((date) => {
       const dateStr = date.toISOString()
