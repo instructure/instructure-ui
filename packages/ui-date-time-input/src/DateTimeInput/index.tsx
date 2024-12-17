@@ -277,7 +277,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     event.persist()
     // timeout is needed here because handleDayClick could be called in the same
     // frame, and it updates calendarSelectedDate which is read in here.
-    window.setTimeout(() => {
+    setTimeout(() => {
       if ((event as React.KeyboardEvent).key === 'Enter') {
         // user pressed enter, use the selected value in the calendar
         this.updateStateBasedOnDateInput(this.state.calendarSelectedDate, event)
@@ -355,7 +355,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         const newDate = newState.iso?.toISOString()
         // Timeout is needed here because users might change value in the
         // onChange event lister, which might not execute properly
-        window.setTimeout(() => {
+        setTimeout(() => {
           this.props.onChange?.(e, newDate)
         }, 0)
       }
@@ -375,7 +375,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     // happens on the target before the relatedTarget gets focus.
     // The timeout gives it a moment for that to happen
     if (typeof this.props.onBlur === 'function') {
-      window.setTimeout(() => {
+      setTimeout(() => {
         this.props.onBlur?.(e)
       }, 0)
     }
