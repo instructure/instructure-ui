@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
+
+
+### Features
+
+* **many:** add new Typography tokens and update text and heading ([a09fa0f](https://github.com/instructure/instructure-ui/commit/a09fa0f9ee3b92e8b20415e1d57f5f465526936c))
+
+
+
+
+
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
 
 **Note:** Version bump only for package @instructure/ui-themes

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
+
+
+### Bug Fixes
+
+* **ui-date-time-input,ui-form-field:** make DateTimeInput compatible with the new error format ([07c9443](https://github.com/instructure/instructure-ui/commit/07c9443116dc53b1d2da317e42f314ce3e9b9c39))
+* **ui-date-time-input:** fix DateTimeInput displaying wrong value of its value is changed in a onChange callback ([69e9d24](https://github.com/instructure/instructure-ui/commit/69e9d2458b520b83eefb131d8de9a9a658f627a0))
+* **ui-simple-select:** fix selection getting lost after options have changed ([4e07f9a](https://github.com/instructure/instructure-ui/commit/4e07f9a5b8c7823dfcbf40273e28a448cfae59fb))
+
+
+### Features
+
+* **many:** add new Typography tokens and update text and heading ([a09fa0f](https://github.com/instructure/instructure-ui/commit/a09fa0f9ee3b92e8b20415e1d57f5f465526936c))
+
+
+
+
+
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
 
 
