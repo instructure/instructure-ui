@@ -275,17 +275,6 @@ class Hero extends Component<HeroProps> {
             </Link>
           </List.Item>
         </List>
-        <Heading as="h3" level="h2" margin="none none medium">
-          Acknowledgements
-        </Heading>
-        <View as="p" margin="none none small">
-          <a href="https://www.netlify.com">
-            <img
-              src="https://www.netlify.com/img/global/badges/netlify-dark.svg"
-              alt="Deploys by Netlify"
-            />
-          </a>
-        </View>
       </View>
     )
 
