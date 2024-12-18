@@ -82,11 +82,8 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
         selected: this.selectedFromChildren(props) || props.defaultSelected!
       }
     }
-
-    this._labelId = props.deterministicId!('MenuItemGroup')
   }
 
-  private _labelId: string
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -210,23 +207,18 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
         ++index
         const value = child.props.value || index
 
-        return (
-          <li role="none">
-            {' '}
-            {safeCloneElement(child, {
-              tabIndex: isTabbable && index === 0 ? 0 : -1,
-              controls,
-              value,
-              children: child.props.children,
-              type: allowMultiple ? 'checkbox' : 'radio',
-              ref: this.props.itemRef,
-              disabled: disabled || child.props.disabled,
-              selected: this.selected.indexOf(value) > -1,
-              onSelect: this.handleSelect,
-              onMouseOver
-            })}{' '}
-          </li>
-        )
+        return safeCloneElement(child, {
+          tabIndex: isTabbable && index === 0 ? 0 : -1,
+          controls,
+          value,
+          children: child.props.children,
+          type: allowMultiple ? 'checkbox' : 'radio',
+          ref: this.props.itemRef,
+          disabled: disabled || child.props.disabled,
+          selected: this.selected.indexOf(value) > -1,
+          onSelect: this.handleSelect,
+          onMouseOver
+        })
       } else {
         return child
       }
@@ -239,18 +231,15 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
       <span
         {...props}
         css={this.props.styles?.menuItemGroup}
-        role="presentation"
         ref={this.handleRef}
       >
-        <span id={this._labelId}>{this.renderLabel()}</span>
-        <ul
-          role="menu"
+        {this.renderLabel()}
+        <div
           css={this.props.styles?.items}
           aria-disabled={this.props.disabled ? 'true' : undefined}
-          aria-labelledby={this._labelId}
         >
           {this.renderChildren()}
-        </ul>
+        </div>
       </span>
     )
   }
