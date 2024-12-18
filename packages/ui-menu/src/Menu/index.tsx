@@ -95,7 +95,7 @@ class Menu extends Component<MenuProps> {
   _popover: Popover | null = null
   _trigger: MenuItem | (React.ReactInstance & { focus?: () => void }) | null =
     null
-  _menu: HTMLUListElement | null = null
+  _menu: HTMLElement | null = null
   _labelId = this.props.deterministicId!('Menu__label')
 
   _activeSubMenu?: Menu | null
@@ -103,7 +103,7 @@ class Menu extends Component<MenuProps> {
 
   ref: Element | null = null
 
-  handleRef = (el: HTMLUListElement | null) => {
+  handleRef = (el: HTMLElement | null) => {
     const { menuRef } = this.props
     this._menu = el
     if (typeof menuRef === 'function') {
@@ -169,7 +169,7 @@ class Menu extends Component<MenuProps> {
     }
   }
 
-  handleMenuKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
+  handleMenuKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     const key = event && event.keyCode
     const { down, up, tab, left } = keycode.codes
     const pgdn = keycode.codes['page down']
@@ -338,7 +338,7 @@ class Menu extends Component<MenuProps> {
         if (
           matchComponentTypes<MenuSeparatorChild>(child, ['MenuItemSeparator'])
         ) {
-          return <li role="none">{child}</li>
+          return child
         }
 
         const menuItemChild = child
@@ -350,71 +350,59 @@ class Menu extends Component<MenuProps> {
           this.props.controls
 
         if (matchComponentTypes<MenuItemChild>(child, ['MenuItem'])) {
-          return (
-            <li role="none">
-              {safeCloneElement(child, {
-                controls,
-                children: child.props.children,
-                disabled: disabled || child.props.disabled,
-                onFocus: this.handleMenuItemFocus,
-                onBlur: this.handleMenuItemBlur,
-                onSelect: this.handleMenuItemSelect,
-                onMouseOver: this.handleMenuItemMouseOver,
-                tabIndex: isTabbable ? 0 : -1
-              })}
-            </li>
-          )
+          return safeCloneElement(child, {
+            controls,
+            children: child.props.children,
+            disabled: disabled || child.props.disabled,
+            onFocus: this.handleMenuItemFocus,
+            onBlur: this.handleMenuItemBlur,
+            onSelect: this.handleMenuItemSelect,
+            onMouseOver: this.handleMenuItemMouseOver,
+            tabIndex: isTabbable ? 0 : -1
+          })
         }
 
         if (matchComponentTypes<MenuGroupChild>(child, ['MenuItemGroup'])) {
-          return (
-            <li role="none">
-              {safeCloneElement(child, {
-                label: child.props.label,
-                controls,
-                disabled: disabled || child.props.disabled,
-                onFocus: this.handleMenuItemFocus,
-                onBlur: this.handleMenuItemBlur,
-                onSelect: this.handleMenuItemSelect,
-                onMouseOver: this.handleMenuItemMouseOver,
-                isTabbable
-              })}
-            </li>
-          )
+          return safeCloneElement(child, {
+            label: child.props.label,
+            controls,
+            disabled: disabled || child.props.disabled,
+            onFocus: this.handleMenuItemFocus,
+            onBlur: this.handleMenuItemBlur,
+            onSelect: this.handleMenuItemSelect,
+            onMouseOver: this.handleMenuItemMouseOver,
+            isTabbable
+          })
         }
 
         if (matchComponentTypes(child, ['Menu'])) {
           const submenuDisabled = disabled || child.props.disabled
 
-          return (
-            <li role="none">
-              {safeCloneElement(child, {
-                type: 'flyout',
-                controls,
-                disabled: submenuDisabled,
-                onSelect: this.handleMenuItemSelect,
-                placement: 'end top',
-                offsetX: -5,
-                offsetY: 5,
-                withArrow: false,
-                onToggle: this.handleSubMenuToggle,
-                onDismiss: this.handleSubMenuDismiss,
-                trigger: (
-                  <MenuItem
-                    onMouseOver={this.handleMenuItemMouseOver}
-                    onFocus={this.handleMenuItemFocus}
-                    onBlur={this.handleMenuItemBlur}
-                    tabIndex={isTabbable ? 0 : -1}
-                    type="flyout"
-                    disabled={submenuDisabled}
-                    renderLabelInfo={child.props.renderLabelInfo}
-                  >
-                    {child.props.title || child.props.label}
-                  </MenuItem>
-                )
-              })}
-            </li>
-          )
+          return safeCloneElement(child, {
+            type: 'flyout',
+            controls,
+            disabled: submenuDisabled,
+            onSelect: this.handleMenuItemSelect,
+            placement: 'end top',
+            offsetX: -5,
+            offsetY: 5,
+            withArrow: false,
+            onToggle: this.handleSubMenuToggle,
+            onDismiss: this.handleSubMenuDismiss,
+            trigger: (
+              <MenuItem
+                onMouseOver={this.handleMenuItemMouseOver}
+                onFocus={this.handleMenuItemFocus}
+                onBlur={this.handleMenuItemBlur}
+                tabIndex={isTabbable ? 0 : -1}
+                type="flyout"
+                disabled={submenuDisabled}
+                renderLabelInfo={child.props.renderLabelInfo}
+              >
+                {child.props.title || child.props.label}
+              </MenuItem>
+            )
+          })
         }
         return
       }
@@ -434,7 +422,7 @@ class Menu extends Component<MenuProps> {
           registerMenuItem: this.registerMenuItem
         }}
       >
-        <ul
+        <div
           role="menu"
           aria-label={label}
           tabIndex={0}
@@ -447,7 +435,7 @@ class Menu extends Component<MenuProps> {
           ref={this.handleRef}
         >
           {this.renderChildren()}
-        </ul>
+        </div>
       </MenuContext.Provider>
     )
   }

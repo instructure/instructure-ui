@@ -111,15 +111,15 @@ type MenuOwnProps = {
   /**
    * Callback fired on the onKeyDown of the `<Menu />`
    */
-  onKeyDown?: (event: React.KeyboardEvent<HTMLUListElement>) => void
+  onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void
   /**
    * Callback fired on the onKeyUp of the `<Menu />`
    */
-  onKeyUp?: (event: React.KeyboardEvent<HTMLUListElement>) => void
+  onKeyUp?: (event: React.KeyboardEvent<HTMLElement>) => void
   /**
    * A function that returns a reference to the `<Menu />`
    */
-  menuRef?: (el: HTMLUListElement | null) => void
+  menuRef?: (el: HTMLElement | null) => void
   /**
    * A function that returns a reference to the `<Popover />`
    */

@@ -40,44 +40,11 @@ describe('<MenuItemGroup />', () => {
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const group = container.querySelector("[id*='MenuItemGroup_']")
-    const groupMenu = screen.getByRole('menu')
-
+    const group = container.querySelector("[class*='menuItemGroup']")
     expect(group).toBeInTheDocument()
     expect(group).toHaveTextContent('Menu Label')
-
-    expect(groupMenu).toBeInTheDocument()
-    expect(groupMenu).toHaveTextContent('Item Text 1')
-    expect(groupMenu).toHaveTextContent('Item Text 2')
-  })
-
-  it('should set the role to "menu"', () => {
-    const { container } = render(
-      <MenuItemGroup label="Select one">
-        <MenuItem>Foo</MenuItem>
-        <MenuItem>Bar</MenuItem>
-        <MenuItemSeparator />
-      </MenuItemGroup>
-    )
-    const menuItemGroup = container.querySelector(
-      "[class*='menuItemGroup__items']"
-    )
-
-    expect(menuItemGroup).toHaveAttribute('role', 'menu')
-  })
-
-  it('should set the list item role to "none"', () => {
-    render(
-      <MenuItemGroup label="Select one">
-        <MenuItem>Food</MenuItem>
-        <MenuItem>Bar</MenuItem>
-      </MenuItemGroup>
-    )
-    const menu = screen.getByRole('menu')
-    const menuListItem = menu.firstChild as HTMLElement
-
-    expect(menuListItem.tagName).toBe('LI')
-    expect(menuListItem).toHaveAttribute('role', 'none')
+    expect(group).toHaveTextContent('Item Text 1')
+    expect(group).toHaveTextContent('Item Text 2')
   })
 
   it('should default to children with type "radio"', () => {
@@ -114,10 +81,8 @@ describe('<MenuItemGroup />', () => {
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const menu = screen.getByRole('menu')
     const menuItems = screen.getAllByRole('menuitemradio')
 
-    expect(menu).toHaveAttribute('aria-disabled', 'true')
     expect(menuItems).toHaveLength(2)
     expect(menuItems[0]).toHaveAttribute('aria-disabled', 'true')
     expect(menuItems[1]).toHaveAttribute('aria-disabled', 'true')
