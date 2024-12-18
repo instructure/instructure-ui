@@ -36,6 +36,7 @@ import { renderPage } from './renderPage'
 import propJSONData from '../../prop-data.json'
 import TooltipPositioning from './TooltipPositioning'
 import FormErrors from './FormErrors'
+import SpacingTokens from './SpacingTokens'
 import SourceCodeEditorExamples from './SourceCodeEditorExamples'
 
 type AdditionalExample = {
@@ -75,6 +76,15 @@ const additionalExamples: AdditionalExample[] = [
       {
         storyName: 'Form errors',
         storyFn: () => FormErrors()
+      }
+    ]
+  },
+  {
+    title: 'Spacing tokens',
+    stories: [
+      {
+        storyName: 'Spacing tokens',
+        storyFn: () => SpacingTokens()
       }
     ]
   },
