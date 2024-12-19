@@ -109,7 +109,6 @@ const pathsToIgnore = [
   '**/InputModeListener.{js,ts}',
   // regression testing app:
   '**/regression-test/**',
-  '**/packages/cz-lerna-changelog/**'
 ]
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
