@@ -133,7 +133,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   }
 
   render() {
-    const { styles, makeStyles, ...props } = this.props
+    const { styles, makeStyles, isGroup, ...props } = this.props
 
     return (
       <FormFieldLayout
@@ -145,7 +145,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
         aria-disabled={props.disabled ? 'true' : undefined}
         aria-invalid={this.invalid ? 'true' : undefined}
         elementRef={this.handleRef}
-        isGroup
+        isGroup={isGroup}
       >
         {this.renderFields()}
       </FormFieldLayout>
