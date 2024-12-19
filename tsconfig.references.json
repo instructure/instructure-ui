@@ -16,9 +16,6 @@
       "path": "./packages/console/tsconfig.build.json"
     },
     {
-      "path": "./packages/cz-lerna-changelog/tsconfig.build.json"
-    },
-    {
       "path": "./packages/debounce/tsconfig.build.json"
     },
     {
