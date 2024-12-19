@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.10.2](https://github.com/instructure/instructure-ui/compare/v9.10.1...v9.10.2) (2024-12-19)
+
+
+### Bug Fixes
+
+* **ui-date-time-input,ui-form-field:** make DateTimeInput compatible with the new error format ([064a1a9](https://github.com/instructure/instructure-ui/commit/064a1a9e581660dfd2804d35f11d6ae514875614)), closes [#1826](https://github.com/instructure/instructure-ui/issues/1826)
+
+
+
+
+
 ## [9.10.1](https://github.com/instructure/instructure-ui/compare/v9.10.0...v9.10.1) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-form-field

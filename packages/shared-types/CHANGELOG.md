@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.10.2](https://github.com/instructure/instructure-ui/compare/v9.10.1...v9.10.2) (2024-12-19)
+
+**Note:** Version bump only for package @instructure/shared-types
+
+
+
+
+
 ## [9.10.1](https://github.com/instructure/instructure-ui/compare/v9.10.0...v9.10.1) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/shared-types
