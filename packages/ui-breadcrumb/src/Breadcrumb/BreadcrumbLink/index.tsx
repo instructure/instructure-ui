@@ -54,8 +54,15 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
   }
 
   render() {
-    const { children, href, renderIcon, iconPlacement, onClick, onMouseEnter } =
-      this.props
+    const {
+      children,
+      href,
+      renderIcon,
+      iconPlacement,
+      onClick,
+      onMouseEnter,
+      isCurrentPage
+    } = this.props
 
     const props = omitProps(this.props, BreadcrumbLink.allowedProps)
 
@@ -69,6 +76,7 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
         onMouseEnter={onMouseEnter}
         isWithinText={false}
         elementRef={this.handleRef}
+        {...(isCurrentPage && { 'aria-current': 'page' })}
       >
         <TruncateText>{children}</TruncateText>
       </Link>

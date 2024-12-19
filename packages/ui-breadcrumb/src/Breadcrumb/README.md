@@ -23,7 +23,7 @@ type: example
   {(props, matches) => {
     if (matches.includes('tablet')) {
       return (
-        <Breadcrumb label="You are here:">
+        <Breadcrumb label="breadcrumb">
           <Breadcrumb.Link href="#">Student Forecast</Breadcrumb.Link>
           <Breadcrumb.Link href="#">University of Utah</Breadcrumb.Link>
           <Breadcrumb.Link href="#">University of Utah Colleges</Breadcrumb.Link>
@@ -52,7 +52,7 @@ Change the `size` prop to control the font-size of the breadcrumbs (default is `
 type: example
 ---
 <div>
-  <Breadcrumb size="small" label="You are here:" margin="none none medium">
+  <Breadcrumb size="small" label="breadcrumb" margin="none none medium">
     <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
       <Breadcrumb.Link
         onClick={function () {
@@ -65,7 +65,7 @@ type: example
     <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
   </Breadcrumb>
   <View as="div" width="40rem">
-    <Breadcrumb label="You are here:" margin="none none medium">
+    <Breadcrumb label="breadcrumb" margin="none none medium">
       <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
         <Breadcrumb.Link
           onClick={function () {
@@ -78,7 +78,7 @@ type: example
       <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
     </Breadcrumb>
   </View>
-  <Breadcrumb size="large" label="You are here:">
+  <Breadcrumb size="large" label="breadcrumb">
     <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
       <Breadcrumb.Link
         onClick={function () {
@@ -123,6 +123,19 @@ type: embed
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Use Breadcrumb if you are taking users through a multi-step process</Figure.Item>
     <Figure.Item>Use Breadcrumb in mobile layouts: use a Link to the previous page/view instead</Figure.Item>
+  </Figure>
+</Guidelines>
+```
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>
+    To indicate the current element within a breadcrumb, the <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current">aria-current</a> attribute is used. In this component, aria-current="page" will automatically be applied to the last element, and we recommend that the current page always be the last element in the breadcrumb. If the last element is not the current page, the isCurrentPage property should be applied to the relevant Breadcrumb.Link to ensure compatibility with screen readers.
+    </Figure.Item>
   </Figure>
 </Guidelines>
 ```
