@@ -16,8 +16,8 @@ jobs:
         run: npm ci
       - name: Bootstrap project
         run: npm run bootstrap
-      - name: Lint commit
-        run: npm run lint:commit
+      - name: Lint commits
+        run: npm run lint:commits
       - name: Lint code
         run: npm run lint:changes
   vitest-tests:

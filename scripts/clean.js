@@ -34,7 +34,6 @@ const NODE_PACKAGES = [
   'ui-karma-config',
   'ui-scripts',
   'command-utils',
-  'cz-lerna-changelog',
   'instui-cli',
   'babel-plugin-transform-imports',
   'pkg-utils'
