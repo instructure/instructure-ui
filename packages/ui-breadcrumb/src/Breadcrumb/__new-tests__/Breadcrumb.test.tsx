@@ -111,4 +111,68 @@ describe('<Breadcrumb />', () => {
     expect(icon).toBeInTheDocument()
     expect(icon).toHaveAttribute('aria-hidden', 'true')
   })
+
+  it('should add aria-current="page" to the last element by default', () => {
+    const { container } = render(
+      <Breadcrumb label={TEST_LABEL}>
+        <Breadcrumb.Link href={TEST_LINK}>{TEST_TEXT_01}</Breadcrumb.Link>
+        <Breadcrumb.Link>{TEST_TEXT_02}</Breadcrumb.Link>
+      </Breadcrumb>
+    )
+    const links = container.querySelectorAll('[class$="--block-link"]')
+    const firstLink = links[0]
+    const lastLink = links[links.length - 1]
+
+    expect(firstLink).not.toHaveAttribute('aria-current', 'page')
+    expect(lastLink).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('should add aria-current="page" to the element if isCurrent is true', () => {
+    const { container } = render(
+      <Breadcrumb label={TEST_LABEL}>
+        <Breadcrumb.Link isCurrentPage href={TEST_LINK}>
+          {TEST_TEXT_01}
+        </Breadcrumb.Link>
+        <Breadcrumb.Link>{TEST_TEXT_02}</Breadcrumb.Link>
+      </Breadcrumb>
+    )
+    const links = container.querySelectorAll('[class$="--block-link"]')
+    const firstLink = links[0]
+    const lastLink = links[links.length - 1]
+
+    expect(firstLink).toHaveAttribute('aria-current', 'page')
+    expect(lastLink).not.toHaveAttribute('aria-current', 'page')
+  })
+
+  it('should throw a warning when multiple elements have isCurrent set to true ', () => {
+    render(
+      <Breadcrumb label={TEST_LABEL}>
+        <Breadcrumb.Link isCurrentPage href={TEST_LINK}>
+          {TEST_TEXT_01}
+        </Breadcrumb.Link>
+        <Breadcrumb.Link isCurrentPage>{TEST_TEXT_02}</Breadcrumb.Link>
+      </Breadcrumb>
+    )
+
+    expect(consoleWarningMock).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: Multiple elements with isCurrentPage=true found. Only one element should be set to current.'
+      )
+    )
+  })
+
+  it('should not add aria-current="page" to the last element if it set to false', () => {
+    const { container } = render(
+      <Breadcrumb label={TEST_LABEL}>
+        <Breadcrumb.Link href={TEST_LINK}>{TEST_TEXT_01}</Breadcrumb.Link>
+        <Breadcrumb.Link isCurrentPage={false}>{TEST_TEXT_02}</Breadcrumb.Link>
+      </Breadcrumb>
+    )
+    const links = container.querySelectorAll('[class$="--block-link"]')
+    const firstLink = links[0]
+    const lastLink = links[links.length - 1]
+
+    expect(firstLink).not.toHaveAttribute('aria-current', 'page')
+    expect(lastLink).not.toHaveAttribute('aria-current', 'page')
+  })
 })

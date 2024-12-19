@@ -63,6 +63,11 @@ type BreadcrumbLinkOwnProps = {
    * Place the icon before or after the text in the Breadcrumb.Link
    */
   iconPlacement?: 'start' | 'end'
+  /**
+   * Whether the page this breadcrumb points to is the current one. If true, it sets aria-current="page".
+   * If this prop is not set to true on any breadcrumb element, the one recieving the aria-current="page" will always be the last element, unless the last element's isCurrentPage prop is explicity set to false.
+   */
+  isCurrentPage?: boolean
 }
 
 type PropKeys = keyof BreadcrumbLinkOwnProps
@@ -89,7 +94,8 @@ const propTypes: PropValidators<PropKeys> = {
   onMouseEnter: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  iconPlacement: PropTypes.oneOf(['start', 'end'])
+  iconPlacement: PropTypes.oneOf(['start', 'end']),
+  isCurrentPage: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -99,7 +105,8 @@ const allowedProps: AllowedPropKeys = [
   'onClick',
   'onMouseEnter',
   'renderIcon',
-  'size'
+  'size',
+  'isCurrentPage'
 ]
 
 export type { BreadcrumbLinkProps }
