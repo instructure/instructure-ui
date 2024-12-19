@@ -62,6 +62,16 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     this.ref = el
   }
 
+  addAriaCurrent = (child: React.ReactNode) => {
+    const updatedChild = React.cloneElement(
+      child as React.ReactElement<{ 'aria-current'?: string }>,
+      {
+        'aria-current': 'page'
+      }
+    )
+    return updatedChild
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -77,10 +87,28 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
+    let isAriaCurrentSet = false
+
     return React.Children.map(children, (child, index) => {
+      const isLastElement = index === numChildren - 1
+      if (React.isValidElement(child)) {
+        const isCurrentPage = child.props.isCurrentPage || false
+        if (isAriaCurrentSet && isCurrentPage) {
+          console.warn(
+            `Warning: Multiple elements with isCurrentPage=true found. Only one element should be set to current.`
+          )
+        }
+        if (isCurrentPage) {
+          isAriaCurrentSet = true
+        }
+      }
       return (
         <li css={styles?.crumb} style={inlineStyle}>
-          {child}
+          {!isAriaCurrentSet &&
+          isLastElement &&
+          (child as React.ReactElement).props.isCurrentPage !== false
+            ? this.addAriaCurrent(child)
+            : child}
           {index < numChildren - 1 && (
             <IconArrowOpenEndSolid color="auto" css={styles?.separator} />
           )}
