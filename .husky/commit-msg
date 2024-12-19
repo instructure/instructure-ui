@@ -1,1 +1,1 @@
-npm run lint:commit
+npx --no -- commitlint --edit $1

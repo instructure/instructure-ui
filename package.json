@@ -26,10 +26,7 @@
     "lint": "lerna run lint --stream",
     "lint:changes": "npm run lint -- --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
-    "lint:commit": "commitlint --from=HEAD^1",
-    "lint:staged": "lint-staged",
-    "update:package:list": "lerna run generate:package:list --stream --scope @instructure/instui-config",
-    "commit:package:list": "git add packages/instui-config/package-lists/**/package-list.json",
+    "lint:commits": "commitlint --from=HEAD^1",
     "bootstrap": "node scripts/bootstrap.js",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
@@ -45,12 +42,10 @@
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "prestart:examples": "npm run bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "husky:pre-commit": "npm run update:package:list && npm run commit:package:list && npm run lint:staged && npm run ts:check:references",
-    "husky:pre-push": "npm run lint:commit",
+    "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "postinstall": "husky",
-    "ts:check": "lerna run ts:check --stream",
-    "ts:check:references": "node scripts/checkTSReferences.js"
+    "ts:check": "lerna run ts:check --stream"
   },
   "license": "MIT",
   "resolutions": {
@@ -83,6 +78,7 @@
     "cross-spawn": "^7.0.6",
     "cypress": "^13.16.1",
     "cypress-real-events": "^1.13.0",
+    "cz-git": "^1.11.0",
     "esbuild": "^0.24.0",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
@@ -117,7 +113,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/@instructure/cz-lerna-changelog"
+      "path": "node_modules/cz-git"
     }
   },
   "lint-staged": {

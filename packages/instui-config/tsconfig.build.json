@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.build.json",
-  "compilerOptions": {
-    "outDir": "./types",
-    "composite": true
-  },
-  "include": ["codemod-configs/**/*", "scripts/**/*"]
-}
