@@ -13,7 +13,6 @@
       ],
       "@instructure/command-utils": ["command-utils/lib"],
       "@instructure/config-loader": ["config-loader/lib"],
-      "@instructure/cz-lerna-changelog": ["cz-lerna-changelog/lib"],
       "@instructure/instui-cli": ["instui-cli/lib"],
       "@instructure/pkg-utils": ["pkg-utils/lib"],
       "@instructure/ui-babel-preset": ["ui-babel-preset/lib"],

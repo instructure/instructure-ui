@@ -21,31 +21,71 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+const { execSync } = require('child_process')
+const fs = require('fs')
+const path = require('path')
+
+const ignoredPackages = ['__docs__', '__examples__']
+
+function getChangedPackages() {
+  try {
+    const output = execSync('git diff --cached --name-only', {
+      encoding: 'utf-8'
+    })
+    return Array.from(
+      new Set(
+        output
+          .split('\n')
+          .filter((line) => line.startsWith('packages/'))
+          .map((line) => line.split('/')[1])
+          .filter((pkg) => !ignoredPackages.includes(pkg))
+      )
+    )
+  } catch (error) {
+    console.error(error.message)
+    return []
+  }
+}
+
+function getAllPackages() {
+  try {
+    const packagesDir = path.resolve('packages')
+    return fs
+      .readdirSync(packagesDir)
+      .filter(
+        (pkg) =>
+          fs.statSync(path.join(packagesDir, pkg)).isDirectory() &&
+          !ignoredPackages.includes(pkg)
+      )
+  } catch (error) {
+    console.error(error.message)
+    return []
+  }
+}
+
 module.exports = {
   extends: ['@commitlint/config-conventional'],
   parserOpts: {
     headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
     headerCorrespondence: ['type', 'scope', 'subject']
   },
-  // see https://commitlint.js.org/#/reference-rules
+  // https://commitlint.js.org/reference/rules.html
   rules: {
-    'type-enum': [
-      2,
-      'always',
-      [
-        'WIP',
-        'feat',
-        'fix',
-        'docs',
-        'chore',
-        'style',
-        'refactor',
-        'test',
-        'perf',
-        'revert'
-      ]
-    ],
-    'type-case': [0],
-    'header-max-length': [0, 'always', 150] // commit message first field (subject) length
+    'header-max-length': [2, 'always', 150]
+  },
+
+  // https://cz-git.qbb.sh/config/
+  prompt: {
+    enableMultipleScopes: true,
+    scopeEnumSeparator: ',',
+    scopes: getAllPackages(),
+    defaultScope: getChangedPackages(),
+    skipQuestions: ['footerPrefix', 'confirmCommit'],
+    // If more than 3 packages are selected display 'many', e.g. `refactor(many): some message`
+    formatMessageCB: ({ scope, defaultMessage }) =>
+      scope.split(',').length > 3
+        ? defaultMessage.replace(scope, 'many')
+        : defaultMessage
   }
 }
