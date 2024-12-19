@@ -173,7 +173,7 @@ describe('<DateTimeInput />', () => {
         invalidDateTimeMessage={invalidDateTimeMessage}
       />
     )
-    const timeInput = screen.getByLabelText('time-input')
+    const timeInput = screen.getByLabelText('time-input *')
 
     await userEvent.type(timeInput, '1:00 PM')
     fireEvent.blur(timeInput)

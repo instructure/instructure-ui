@@ -81,7 +81,7 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
 
     return this.props.variant !== 'screenreader-only' ? (
       <span css={{ display: 'flex' }}>
-        {this.props.variant === 'newError' && (
+        {this.props.variant === 'newError' && this.props.children && (
           <span css={styles?.errorIcon}>
             <IconWarningSolid color="error" />
           </span>
