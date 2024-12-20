@@ -79,6 +79,17 @@ type SelectOwnProps = {
   visibleOptionsCount?: number
 
   /**
+   * Whether or not the before and after content of the selected option appear in the input field.
+   * If the selected option has both before and after content, both will be displayed in the input field.
+   * One of the Select.Options isSelected prop should be true in order to display the content in the input field.
+   * Before and after content will not be displayed, if Select's inputValue is an empty value.
+   * If true and the selected option has a renderAfterInput value, it will replace the default arrow icon.
+   * If true and Select's ownrenderBeforeInput or renderAfterInput prop is set, it will display the selected option's content instead of Select's renderBeforeInput or renderAfterInput value.
+   * If the selected option's renderAfterInput value is empty, default arrow icon will be rendered.
+   */
+  isOptionContentAppliedToInput?: boolean
+
+  /**
    * The max height the options list can be before having to scroll. If
    * set, it will __override__ the `visibleOptionsCount` prop.
    */
@@ -288,6 +299,7 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.string,
   htmlSize: PropTypes.number,
   visibleOptionsCount: PropTypes.number,
+  isOptionContentAppliedToInput: PropTypes.bool,
   optionsMaxHeight: PropTypes.string,
   optionsMaxWidth: PropTypes.string,
   messages: PropTypes.arrayOf(FormPropTypes.message),
@@ -325,6 +337,7 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'htmlSize',
   'visibleOptionsCount',
+  'isOptionContentAppliedToInput',
   'optionsMaxHeight',
   'optionsMaxWidth',
   'messages',

@@ -218,6 +218,15 @@ type PropsPassedToSelect = {
    * Callback fired when text input loses focus.
    */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  /**
+   * Whether or not the before and after content of the selected option appear in the input field.
+   * If the selected option has both before and after content, both will be displayed in the input field.
+   * Before and after content will not be displayed, if the selected SimpleSelect.Option display text is empty.
+   * If true and the selected option has a renderAfterInput value, it will replace the default arrow icon.
+   * If true and SimpleSelect's renderBeforeInput or renderAfterInput prop is set, it will display the selected option's content instead of SimpleSelect's own renderBeforeInput or renderAfterInput value.
+   * If the selected option's renderAfterInput value is empty, default arrow icon will be rendered.
+   */
+  isOptionContentAppliedToInput?: boolean
 }
 
 type PropKeys = keyof SimpleSelectOwnProps
@@ -279,7 +288,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: ChildrenPropTypes.oneOf([Group, Option])
+  children: ChildrenPropTypes.oneOf([Group, Option]),
+  isOptionContentAppliedToInput: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
