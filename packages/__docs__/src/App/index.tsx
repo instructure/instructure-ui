@@ -80,6 +80,7 @@ import type {
   ParsedDocSummary
 } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
+import React from 'react'
 
 type AppContextType = {
   themeKey: keyof MainDocsData['themes']
@@ -106,6 +107,7 @@ class App extends Component<AppProps, AppState> {
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
   _controller?: AbortController
+  _heroRef: React.RefObject<Hero>
 
   constructor(props: AppProps) {
     super(props)
@@ -127,6 +129,8 @@ class App extends Component<AppProps, AppState> {
       versionsData: undefined,
       iconsData: null
     }
+
+    this._heroRef = React.createRef()
   }
 
   fetchDocumentData = async (docId: string) => {
@@ -487,6 +491,7 @@ class App extends Component<AppProps, AppState> {
           repository={library.repository}
           version={library.version}
           layout={layout}
+          ref={this._heroRef}
         />
       </InstUISettingsProvider>
     )
@@ -692,6 +697,10 @@ class App extends Component<AppProps, AppState> {
     ) : null
   }
 
+  focusMainContent = () => {
+    this._heroRef.current?.focusMainContentHeading()
+  }
+
   render() {
     const key = this.state.key
     const { showMenu, layout, docsData, iconsData } = this.state
@@ -718,6 +727,18 @@ class App extends Component<AppProps, AppState> {
             aria-label={key || docsData.library.name}
             ref={this.handleContentRef}
           >
+            <View
+              as={'button'}
+              onClick={this.focusMainContent}
+              tabIndex={0}
+              css={this.props.styles?.skipToMainButton}
+              borderRadius="small"
+              display="inline-block"
+              padding="small"
+              background="primary"
+            >
+              Skip to main content
+            </View>
             {!showMenu && (
               <div css={this.props.styles?.hamburger}>
                 <InstUISettingsProvider>
