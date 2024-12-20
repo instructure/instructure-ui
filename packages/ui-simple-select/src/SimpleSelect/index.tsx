@@ -80,7 +80,8 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     visibleOptionsCount: 8,
     placement: 'bottom stretch',
     constrain: 'window',
-    renderEmptyOption: '---'
+    renderEmptyOption: '---',
+    isOptionContentAppliedToInput: false
   }
 
   ref: Select | null = null
@@ -479,6 +480,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
         onRequestHideOptions={this.handleHideOptions}
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={this.handleSelectOption}
+        isOptionContentAppliedToInput={this.props.isOptionContentAppliedToInput}
         {...passthroughProps(rest)}
       >
         {this.renderChildren()}

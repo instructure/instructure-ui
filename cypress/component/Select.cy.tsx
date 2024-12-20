@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Select } from '../../packages/ui'
-import { IconCheckSolid } from '../../packages/ui-icons'
+import { Select } from '@instructure/ui'
+import { IconCheckSolid, IconEyeSolid } from '@instructure/ui-icons'
 import 'cypress-real-events'
 import '../support/component'
 
@@ -44,6 +44,44 @@ const getOptions = (
       {opt}
     </Select.Option>
   ))
+
+type ExampleOptionWithContent = 'opt1' | 'op2' | 'opt3'
+
+const optionsWithBeforeContent = [
+  {
+    id: 'opt1',
+    label: 'Text',
+    renderBeforeLabel: 'XY'
+  },
+  {
+    id: 'opt2',
+    label: 'Icon',
+    renderBeforeLabel: 'YY'
+  },
+  {
+    id: 'opt3',
+    label: 'Colored Icon',
+    renderBeforeLabel: <IconEyeSolid />
+  }
+]
+
+const optionsWithAfterContent = [
+  {
+    id: 'opt1',
+    label: 'Text',
+    renderAfterLabel: 'XY'
+  },
+  {
+    id: 'opt2',
+    label: 'Icon',
+    renderAfterLabel: 'YY'
+  },
+  {
+    id: 'opt3',
+    label: 'Colored Icon',
+    renderAfterLabel: <IconEyeSolid />
+  }
+]
 
 describe('<Select/>', () => {
   it('should render dynamically colored icons before option', async () => {
@@ -337,5 +375,149 @@ describe('<Select/>', () => {
 
     cy.wrap(onRequestHighlightOption).should('have.been.calledOnce')
     cy.wrap(onKeyDown).should('have.been.calledTwice')
+  })
+
+  it("should render the selected option's before content in the input field", async () => {
+    const MyTestComponent = () => {
+      const [selectedOptionId, setSelectedOptionId] = React.useState<string>(
+        optionsWithBeforeContent[0].id
+      )
+      const [isShowingOptions, setIsShowingOptions] = React.useState(false)
+      const [inputValue, setInputValue] = React.useState<string | undefined>(
+        optionsWithBeforeContent[0].label
+      )
+
+      const getOptionById = (selectedOptionId) => {
+        return optionsWithBeforeContent.find(
+          ({ id }) => id === selectedOptionId
+        )
+      }
+
+      const handleShowOptions = () => {
+        setIsShowingOptions(true)
+      }
+
+      const handleHideOptions = (options) => {
+        const option = getOptionById(selectedOptionId)?.label
+        setIsShowingOptions(false)
+        setInputValue(selectedOptionId ? option : '')
+      }
+
+      const handleSelectOption = (event, data: { id?: string }) => {
+        const option = data.id ? getOptionById(data.id)?.label : undefined
+        if (data.id) {
+          setSelectedOptionId(data.id)
+          setInputValue(option || '')
+        }
+        setIsShowingOptions(false)
+      }
+
+      return (
+        <Select
+          renderLabel="Choose an option"
+          inputValue={optionsWithBeforeContent[0].label}
+          isOptionContentAppliedToInput={true}
+          isShowingOptions={isShowingOptions}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestSelectOption={handleSelectOption}
+        >
+          {optionsWithBeforeContent.map((opt) => (
+            <Select.Option
+              id={opt.id}
+              key={opt.id}
+              value={opt.label}
+              renderBeforeLabel={opt.renderBeforeLabel}
+              isSelected={opt.id === selectedOptionId}
+            ></Select.Option>
+          ))}
+        </Select>
+      )
+    }
+    cy.mount(<MyTestComponent />)
+
+    cy.get('span[class$="-textInput__beforeElement"]').should(
+      'contain.text',
+      'XY'
+    )
+    cy.get('input').click()
+    cy.get('ul[role="listbox"]').as('listbox')
+    cy.get('@listbox')
+    cy.get('@listbox').find('li').eq(1).click()
+    cy.get('span[class$="-textInput__beforeElement"]').should(
+      'contain.text',
+      'YY'
+    )
+  })
+
+  it("should render the selected option's after content in the input field", async () => {
+    const MyTestComponent = () => {
+      const [selectedOptionId, setSelectedOptionId] = React.useState<string>(
+        optionsWithAfterContent[0].id
+      )
+      const [isShowingOptions, setIsShowingOptions] = React.useState(false)
+      const [inputValue, setInputValue] = React.useState<string | undefined>(
+        optionsWithAfterContent[0].label
+      )
+
+      const getOptionById = (selectedOptionId) => {
+        return optionsWithAfterContent.find(({ id }) => id === selectedOptionId)
+      }
+
+      const handleShowOptions = () => {
+        setIsShowingOptions(true)
+      }
+
+      const handleHideOptions = (options) => {
+        const option = getOptionById(selectedOptionId)?.label
+        setIsShowingOptions(false)
+        setInputValue(selectedOptionId ? option : '')
+      }
+
+      const handleSelectOption = (event, data: { id?: string }) => {
+        const option = data.id ? getOptionById(data.id)?.label : undefined
+        if (data.id) {
+          setSelectedOptionId(data.id)
+          setInputValue(option || '')
+        }
+        setIsShowingOptions(false)
+      }
+
+      return (
+        <Select
+          renderLabel="Choose an option"
+          inputValue={optionsWithAfterContent[0].label}
+          isOptionContentAppliedToInput={true}
+          isShowingOptions={isShowingOptions}
+          onRequestShowOptions={handleShowOptions}
+          onRequestHideOptions={handleHideOptions}
+          onRequestSelectOption={handleSelectOption}
+        >
+          {optionsWithAfterContent.map((opt) => (
+            <Select.Option
+              id={opt.id}
+              key={opt.id}
+              value={opt.label}
+              renderAfterLabel={opt.renderAfterLabel}
+              isSelected={opt.id === selectedOptionId}
+            ></Select.Option>
+          ))}
+        </Select>
+      )
+    }
+    cy.mount(<MyTestComponent />)
+
+    cy.get('span[class$="-textInput__afterElement"]').should(
+      'contain.text',
+      'XY'
+    )
+    cy.get('input').click()
+    cy.get('ul[role="listbox"]').as('listbox')
+    cy.get('@listbox')
+    cy.get('@listbox').find('li').eq(1).click()
+    cy.get('span[class$="-textInput__afterElement"]').should(
+      'contain.text',
+      'YY'
+    )
   })
 })
