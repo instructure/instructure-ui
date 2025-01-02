@@ -67,3 +67,7 @@ export type {
   TopNavBarUserProps,
   TopNavBarUserOwnProps
 } from './TopNavBar/TopNavBarUser/props'
+
+export { MobileTopNav } from './MobileTopNav'
+export { DesktopTopNav } from './DesktopTopNav'
+export { CanvasTopNav } from './CanvasTopNav'
