@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import React, { Component } from 'react'
+import React, { Component, ReactElement, ReactNode } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
@@ -104,7 +104,7 @@ class Pagination extends Component<PaginationProps> {
     currentPage: 1,
     siblingCount: 1,
     boundaryCount: 1,
-    ellipsis: <li style={{all: 'unset'}}>...</li>,
+    ellipsis: '...',
     renderPageIndicator: (page: number) => page
   }
 
@@ -317,7 +317,7 @@ class Pagination extends Component<PaginationProps> {
   renderPagesInInterval = (from: number, to: number, currentPage: number) => {
     if (to - from > 1000)
       throw new Error('Pagination: too many pages (more than 1000)')
-    const pages = []
+    const pages: ReactElement[] = []
     for (let i = from; i <= to; i++) {
       pages.push(
         <Pagination.Page
@@ -342,18 +342,26 @@ class Pagination extends Component<PaginationProps> {
       boundaryCount,
       variant
     } = this.props
-    const pages: any = []
+    const pages: ReactNode[] = []
     if (
       totalPageNumber! <= 2 * boundaryCount! ||
       totalPageNumber! <= 1 + siblingCount! + boundaryCount! ||
       variant === 'full'
     ) {
-      return this.renderPagesInInterval(1, totalPageNumber!, currentPage!)
+      return (
+        <ul css={this.props.styles?.pageIndicatorList}>
+          {this.renderPagesInInterval(1, totalPageNumber!, currentPage!)}
+        </ul>
+      )
     }
 
     if (currentPage! > boundaryCount! + siblingCount! + 1) {
       pages.push(this.renderPagesInInterval(1, boundaryCount!, currentPage!))
-      pages.push(ellipsis)
+      pages.push(
+        <li key="ellipsis1" style={{ all: 'unset' }}>
+          {ellipsis}
+        </li>
+      )
       if (
         currentPage! - siblingCount! >
         totalPageNumber! - boundaryCount! + 1
@@ -365,7 +373,7 @@ class Pagination extends Component<PaginationProps> {
             currentPage!
           )
         )
-        return pages
+        return <ul css={this.props.styles?.pageIndicatorList}>{pages}</ul>
       }
       pages.push(
         this.renderPagesInInterval(
@@ -392,7 +400,11 @@ class Pagination extends Component<PaginationProps> {
           currentPage!
         )
       )
-      pages.push(ellipsis)
+      pages.push(
+        <li key="ellipsis2" style={{ all: 'unset' }}>
+          {ellipsis}
+        </li>
+      )
       pages.push(
         this.renderPagesInInterval(
           totalPageNumber! - boundaryCount! + 1,
@@ -409,7 +421,7 @@ class Pagination extends Component<PaginationProps> {
         )
       )
     }
-    return (<ul css={this.props.styles?.pageIndicatorList}>{pages}</ul>)
+    return <ul css={this.props.styles?.pageIndicatorList}>{pages}</ul>
   }
 
   renderPages(currentPageIndex: number) {
@@ -434,22 +446,22 @@ class Pagination extends Component<PaginationProps> {
 
       if (sliceStart - firstIndex > 1)
         visiblePages.unshift(
-          <span key="first" aria-hidden="true">
-            &hellip;
-          </span>
+          <li style={{ all: 'unset' }} key="first" aria-hidden="true">
+            {this.props.ellipsis}
+          </li>
         )
       if (sliceStart - firstIndex > 0) visiblePages.unshift(firstPage)
       if (lastIndex - sliceEnd + 1 > 1)
         visiblePages.push(
-          <span key="last" aria-hidden="true">
-            &hellip;
-          </span>
+          <li style={{ all: 'unset' }} key="last" aria-hidden="true">
+            {this.props.ellipsis}
+          </li>
         )
       if (lastIndex - sliceEnd + 1 > 0) visiblePages.push(lastPage)
     }
 
     return (
-      <View display="inline-block">
+      <View display="inline-block" as="ul">
         {this.transferDisabledPropToChildren(visiblePages)}
       </View>
     )
