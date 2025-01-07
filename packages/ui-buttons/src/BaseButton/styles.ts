@@ -136,28 +136,32 @@ const generateStyle = (
           default: {
             color: componentTheme.primaryColor,
             background: componentTheme.primaryBackground,
-            borderColor: componentTheme.primaryBorderColor
+            borderColor: componentTheme.primaryBorderColor,
+            boxShadow: componentTheme.primaryBoxShadow
           },
           active: {
             background: componentTheme.primaryActiveBackground,
             boxShadow: componentTheme.primaryActiveBoxShadow
           },
           hover: {
-            background: componentTheme.primaryHoverBackground
+            background: componentTheme.primaryHoverBackground,
+            boxShadow: componentTheme.primaryHoverBoxShadow
           }
         }
       : {
           default: {
             color: componentTheme.primaryGhostColor,
             borderColor: componentTheme.primaryGhostBorderColor,
-            background: componentTheme.primaryGhostBackground
+            background: componentTheme.primaryGhostBackground,
+            boxShadow: componentTheme.primaryBoxShadow
           },
           active: {
             background: componentTheme.primaryGhostActiveBackground,
             boxShadow: componentTheme.primaryGhostActiveBoxShadow
           },
           hover: {
-            background: componentTheme.primaryGhostHoverBackground
+            background: componentTheme.primaryGhostHoverBackground,
+            boxShadow: componentTheme.primaryHoverBoxShadow
           }
         },
 
@@ -166,28 +170,32 @@ const generateStyle = (
           default: {
             color: componentTheme.secondaryColor,
             background: componentTheme.secondaryBackground,
-            borderColor: componentTheme.secondaryBorderColor
+            borderColor: componentTheme.secondaryBorderColor,
+            boxShadow: componentTheme.secondaryBoxShadow
           },
           active: {
             background: componentTheme.secondaryActiveBackground,
             boxShadow: componentTheme.secondaryActiveBoxShadow
           },
           hover: {
-            background: componentTheme.secondaryHoverBackground
+            background: componentTheme.secondaryHoverBackground,
+            boxShadow: componentTheme.secondaryHoverBoxShadow
           }
         }
       : {
           default: {
             color: componentTheme.secondaryGhostColor,
             borderColor: componentTheme.secondaryGhostBorderColor,
-            background: componentTheme.secondaryGhostBackground
+            background: componentTheme.secondaryGhostBackground,
+            boxShadow: componentTheme.secondaryGhostBoxShadow
           },
           active: {
             background: componentTheme.secondaryGhostActiveBackground,
             boxShadow: componentTheme.secondaryGhostActiveBoxShadow
           },
           hover: {
-            background: componentTheme.secondaryGhostHoverBackground
+            background: componentTheme.secondaryGhostHoverBackground,
+            boxShadow: componentTheme.secondaryGhostHoverBoxShadow
           }
         },
 
@@ -196,28 +204,32 @@ const generateStyle = (
           default: {
             color: componentTheme.primaryInverseColor,
             background: componentTheme.primaryInverseBackground,
-            borderColor: componentTheme.primaryInverseBorderColor
+            borderColor: componentTheme.primaryInverseBorderColor,
+            boxShadow: componentTheme.primaryInverseBoxShadow
           },
           active: {
             background: componentTheme.primaryInverseActiveBackground,
             boxShadow: componentTheme.primaryInverseActiveBoxShadow
           },
           hover: {
-            background: componentTheme.primaryInverseHoverBackground
+            background: componentTheme.primaryInverseHoverBackground,
+            boxShadow: componentTheme.primaryInverseHoverBoxShadow
           }
         }
       : {
           default: {
             color: componentTheme.primaryInverseGhostColor,
             borderColor: componentTheme.primaryInverseGhostBorderColor,
-            background: componentTheme.primaryInverseGhostBackground
+            background: componentTheme.primaryInverseGhostBackground,
+            boxShadow: componentTheme.primaryInverseGhostBoxShadow
           },
           active: {
             background: componentTheme.primaryInverseGhostActiveBackground,
             boxShadow: componentTheme.primaryInverseGhostActiveBoxShadow
           },
           hover: {
-            background: componentTheme.primaryInverseGhostHoverBackground
+            background: componentTheme.primaryInverseGhostHoverBackground,
+            boxShadow: componentTheme.primaryInverseGhostHoverBoxShadow
           }
         },
 
@@ -226,28 +238,32 @@ const generateStyle = (
           default: {
             color: componentTheme.successColor,
             background: componentTheme.successBackground,
-            borderColor: componentTheme.successBorderColor
+            borderColor: componentTheme.successBorderColor,
+            boxShadow: componentTheme.successBoxShadow
           },
           active: {
             background: componentTheme.successActiveBackground,
             boxShadow: componentTheme.successActiveBoxShadow
           },
           hover: {
-            background: componentTheme.successHoverBackground
+            background: componentTheme.successHoverBackground,
+            boxShadow: componentTheme.successHoverBoxShadow
           }
         }
       : {
           default: {
             color: componentTheme.successGhostColor,
             borderColor: componentTheme.successGhostBorderColor,
-            background: componentTheme.successGhostBackground
+            background: componentTheme.successGhostBackground,
+            boxShadow: componentTheme.successGhostBoxShadow
           },
           active: {
             background: componentTheme.successGhostActiveBackground,
             boxShadow: componentTheme.successGhostActiveBoxShadow
           },
           hover: {
-            background: componentTheme.successGhostHoverBackground
+            background: componentTheme.successGhostHoverBackground,
+            boxShadow: componentTheme.successGhostHoverBoxShadow
           }
         },
 
@@ -256,28 +272,32 @@ const generateStyle = (
           default: {
             color: componentTheme.dangerColor,
             background: componentTheme.dangerBackground,
-            borderColor: componentTheme.dangerBorderColor
+            borderColor: componentTheme.dangerBorderColor,
+            boxShadow: componentTheme.dangerBoxShadow
           },
           active: {
             background: componentTheme.dangerActiveBackground,
             boxShadow: componentTheme.dangerActiveBoxShadow
           },
           hover: {
-            background: componentTheme.dangerHoverBackground
+            background: componentTheme.dangerHoverBackground,
+            boxShadow: componentTheme.dangerHoverBoxShadow
           }
         }
       : {
           default: {
             color: componentTheme.dangerGhostColor,
             borderColor: componentTheme.dangerGhostBorderColor,
-            background: componentTheme.dangerGhostBackground
+            background: componentTheme.dangerGhostBackground,
+            boxShadow: componentTheme.dangerGhostBoxShadow
           },
           active: {
             background: componentTheme.dangerGhostActiveBackground,
             boxShadow: componentTheme.dangerGhostActiveBoxShadow
           },
           hover: {
-            background: componentTheme.dangerGhostHoverBackground
+            background: componentTheme.dangerGhostHoverBackground,
+            boxShadow: componentTheme.dangerGhostHoverBoxShadow
           }
         }
   }

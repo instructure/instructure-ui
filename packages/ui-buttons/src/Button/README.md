@@ -249,7 +249,15 @@ type: example
         secondaryGhostActiveBackground: '#FF0000',
         secondaryGhostActiveBoxShadow: '10px 5px 5px green',
 
-        secondaryGhostHoverBackground: '#00FFFF'
+        secondaryGhostHoverBackground: '#00FFFF',
+
+        secondaryBoxShadow: '0 0 0.4875rem 0.625rem yellow',
+        secondaryHoverBoxShadow: '0 0 0.1875rem 0.625rem lime',
+        secondaryActiveBoxShadow: '0 0px 0px 25px red',
+        secondaryGhostHoverBoxShadow: '0 0 0.7875rem 0.625rem pink',
+        secondaryGhostBoxShadow: '0 0 0.2875rem 0.625rem green',
+        secondaryGhostActiveBoxShadow: '10px 5px 5px blue'
+
       }
       return (
         <>
