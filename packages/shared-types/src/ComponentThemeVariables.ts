@@ -182,6 +182,10 @@ export type BaseButtonTheme = {
   primaryGhostHoverBackground: Colors['contrasts']['blue1212']
   primaryGhostActiveBackground: string
   primaryGhostActiveBoxShadow: string
+  primaryBoxShadow: string
+  primaryGhostBoxShadow: string
+  primaryHoverBoxShadow: string
+  primaryGhostHoverBoxShadow: string
 
   secondaryColor: Colors['contrasts']['grey125125']
   secondaryBorderColor: Colors['contrasts']['grey1214']
@@ -195,6 +199,10 @@ export type BaseButtonTheme = {
   secondaryGhostHoverBackground: Colors['contrasts']['grey1111']
   secondaryGhostActiveBackground: string
   secondaryGhostActiveBoxShadow: string
+  secondaryBoxShadow: string
+  secondaryGhostBoxShadow: string
+  secondaryHoverBoxShadow: string
+  secondaryGhostHoverBoxShadow: string
 
   successColor: Colors['contrasts']['white1010']
   successBorderColor: Colors['contrasts']['green5782']
@@ -208,6 +216,10 @@ export type BaseButtonTheme = {
   successGhostHoverBackground: Colors['contrasts']['green1212']
   successGhostActiveBackground: string
   successGhostActiveBoxShadow: string
+  successBoxShadow: string
+  successGhostBoxShadow: string
+  successHoverBoxShadow: string
+  successGhostHoverBoxShadow: string
 
   dangerColor: Colors['contrasts']['white1010']
   dangerBorderColor: Colors['contrasts']['red5782']
@@ -221,6 +233,10 @@ export type BaseButtonTheme = {
   dangerGhostHoverBackground: Colors['contrasts']['red1212']
   dangerGhostActiveBackground: string
   dangerGhostActiveBoxShadow: string
+  dangerBoxShadow: string
+  dangerGhostBoxShadow: string
+  dangerHoverBoxShadow: string
+  dangerGhostHoverBoxShadow: string
 
   primaryInverseColor: Colors['contrasts']['grey125125']
   primaryInverseBorderColor: Colors['contrasts']['grey1214']
@@ -234,6 +250,10 @@ export type BaseButtonTheme = {
   primaryInverseGhostHoverBackground: Colors['contrasts']['grey1111']
   primaryInverseGhostActiveBackground: string
   primaryInverseGhostActiveBoxShadow: string
+  primaryInverseBoxShadow: string
+  primaryInverseGhostBoxShadow: string
+  primaryInverseHoverBoxShadow: string
+  primaryInverseGhostHoverBoxShadow: string
 }
 
 export type CloseButtonTheme = {

@@ -113,6 +113,10 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
       colors?.contrasts?.blue1212,
       28
     )}`,
+    primaryBoxShadow: 'none',
+    primaryGhostBoxShadow: 'none',
+    primaryHoverBoxShadow: 'none',
+    primaryGhostHoverBoxShadow: 'none',
 
     secondaryColor: colors?.contrasts?.grey125125,
     secondaryBorderColor: colors?.contrasts?.grey1214,
@@ -129,6 +133,10 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
       colors?.contrasts?.grey125125,
       28
     )}`,
+    secondaryBoxShadow: 'none',
+    secondaryGhostBoxShadow: 'none',
+    secondaryHoverBoxShadow: 'none',
+    secondaryGhostHoverBoxShadow: 'none',
 
     successColor: colors?.contrasts?.white1010,
     successBorderColor: colors?.contrasts?.green5782,
@@ -145,6 +153,10 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
       colors?.contrasts?.green4570,
       28
     )}`,
+    successBoxShadow: 'none',
+    successGhostBoxShadow: 'none',
+    successHoverBoxShadow: 'none',
+    successGhostHoverBoxShadow: 'none',
 
     dangerColor: colors?.contrasts?.white1010,
     dangerBorderColor: colors?.contrasts?.red5782,
@@ -161,6 +173,10 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
       colors?.contrasts?.red4570,
       28
     )}`,
+    dangerBoxShadow: 'none',
+    dangerGhostBoxShadow: 'none',
+    dangerHoverBoxShadow: 'none',
+    dangerGhostHoverBoxShadow: 'none',
 
     primaryInverseColor: colors?.contrasts?.grey125125,
     primaryInverseBorderColor: colors?.contrasts?.grey1214,
@@ -176,7 +192,11 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     primaryInverseGhostActiveBoxShadow: `${activeShadow}  ${alpha(
       colors?.contrasts?.white1010,
       28
-    )}`
+    )}`,
+    primaryInverseBoxShadow: 'none',
+    primaryInverseGhostBoxShadow: 'none',
+    primaryInverseHoverBoxShadow: 'none',
+    primaryInverseGhostHoverBoxShadow: 'none'
   }
 
   return {
