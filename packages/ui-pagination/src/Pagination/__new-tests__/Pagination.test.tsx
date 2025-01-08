@@ -123,12 +123,9 @@ describe('<Pagination />', () => {
     it('by default', async () => {
       const { container } = render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-          <ul>
-            {buildPages(5)}
-          </ul>
+          {buildPages(5)}
         </Pagination>
       )
-
       const axeCheck = await runAxeCheck(container)
       expect(axeCheck).toBe(true)
     })
@@ -136,7 +133,7 @@ describe('<Pagination />', () => {
     it('by default with more pages', async () => {
       const { container } = render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-          <ul>{buildPages(8)}</ul>
+          {buildPages(8)}
         </Pagination>
       )
       const axeCheck = await runAxeCheck(container)
@@ -153,7 +150,7 @@ describe('<Pagination />', () => {
           labelLast="Last"
           withFirstAndLastButton
         >
-          <ul>{buildPages(8)}</ul>
+          {buildPages(8)}
         </Pagination>
       )
       const axeCheck = await runAxeCheck(container)
@@ -171,7 +168,7 @@ describe('<Pagination />', () => {
           withFirstAndLastButton
           showDisabledButtons
         >
-          <ul>{buildPages(8)}</ul>
+          {buildPages(8)}
         </Pagination>
       )
       const axeCheck = await runAxeCheck(container)
@@ -966,7 +963,7 @@ describe('<Pagination />', () => {
           totalPageNumber={9}
         />
       )
-      expect(container.firstChild).toHaveTextContent('12...9Next Page')
+      expect(container.firstChild).toHaveTextContent('12…9Next Page')
     })
     it('should render the correct pages - 2', () => {
       const { container } = render(
@@ -979,7 +976,7 @@ describe('<Pagination />', () => {
         />
       )
       expect(container.firstChild).toHaveTextContent(
-        'Previous Page1...456...9Next Page'
+        'Previous Page1…456…9Next Page'
       )
     })
     it('should render the correct pages - 3', () => {
@@ -1011,7 +1008,7 @@ describe('<Pagination />', () => {
         />
       )
       expect(container.firstChild).toHaveTextContent(
-        'Previous Page12...456...89Next Page'
+        'Previous Page12…456…89Next Page'
       )
     })
     it('should render the correct pages - 5', () => {
@@ -1056,7 +1053,7 @@ describe('<Pagination />', () => {
           siblingCount={1}
         />
       )
-      expect(container.firstChild).toHaveTextContent('123...789Next Page')
+      expect(container.firstChild).toHaveTextContent('123…789Next Page')
     })
     it('should render the correct ellipsis', () => {
       const { container } = render(
@@ -1098,7 +1095,7 @@ describe('<Pagination />', () => {
         />
       )
       expect(container.firstChild).toHaveTextContent(
-        'Previous Page1...567756785679...1000000000000000Next Page'
+        'Previous Page1…567756785679…1000000000000000Next Page'
       )
     })
     it('should render first and last buttons', () => {
@@ -1115,7 +1112,7 @@ describe('<Pagination />', () => {
         />
       )
       expect(container.firstChild).toHaveTextContent(
-        'First PagePrevious Page1...456...100Next PageLast Page'
+        'First PagePrevious Page1…456…100Next PageLast Page'
       )
     })
     it('should render every page if boundary and sibling counts are big enough', () => {
