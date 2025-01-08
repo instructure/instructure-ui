@@ -104,7 +104,7 @@ class Pagination extends Component<PaginationProps> {
     currentPage: 1,
     siblingCount: 1,
     boundaryCount: 1,
-    ellipsis: '...',
+    ellipsis: '…',
     renderPageIndicator: (page: number) => page
   }
 
