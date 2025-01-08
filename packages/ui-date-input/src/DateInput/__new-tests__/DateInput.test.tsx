@@ -740,8 +740,12 @@ describe('<DateInput />', () => {
       expect(prevMonthButton).toHaveAttribute('tabIndex', '-1')
       expect(calendarDays).toHaveLength(42)
 
-      calendarDays.forEach((day) => {
-        expect(day).toHaveAttribute('tabIndex', '-1')
+      calendarDays.forEach((day, index) => {
+        if (index === 0) {
+          expect(day).toHaveAttribute('tabIndex', '0')
+        } else {
+          expect(day).toHaveAttribute('tabIndex', '-1')
+        }
       })
     })
 
