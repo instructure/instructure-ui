@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component, ReactElement } from 'react'
+import React, { Component, LegacyRef, ReactElement } from 'react'
 
+import { View } from '@instructure/ui-view'
 import { compileMarkdown } from '../compileMarkdown'
 
 import { propTypes, allowedProps } from './props'
@@ -33,6 +34,7 @@ class Description extends Component<DescriptionProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   compiledMarkdown: ReactElement | null = null
+  _mainContent?: HTMLElement
 
   constructor(props: DescriptionProps) {
     super(props)
@@ -42,10 +44,24 @@ class Description extends Component<DescriptionProps> {
     )
   }
 
+  mainContentRef = (el: Element | null) => {
+    this._mainContent = el as HTMLElement
+  }
+
+  focusMainContent = () => {
+    if (this._mainContent) {
+      this._mainContent.focus()
+    }
+  }
+
   render() {
     const { id } = this.props
 
-    return <div id={id}>{this.compiledMarkdown}</div>
+    return (
+      <View as="div" id={id} elementRef={this.mainContentRef} tabIndex={0}>
+        {this.compiledMarkdown}
+      </View>
+    )
   }
 }
 

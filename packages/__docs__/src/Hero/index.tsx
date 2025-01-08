@@ -52,6 +52,7 @@ import { Heading } from '../Heading'
 
 import type { HeroProps } from './props'
 import { propTypes, allowedProps } from './props'
+import React from 'react'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Hero extends Component<HeroProps> {
@@ -61,12 +62,24 @@ class Hero extends Component<HeroProps> {
     docs: null
   }
 
+  _mainContent?: HTMLElement
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  mainContentRef = (el: Element | null) => {
+    this._mainContent = el as HTMLElement
+  }
+
+  focusMainContent = () => {
+    if (this._mainContent) {
+      this._mainContent.focus()
+    }
   }
 
   render() {
@@ -191,7 +204,12 @@ class Hero extends Component<HeroProps> {
     const checkmark = <IconCheckMarkSolid inline={false} color="success" />
 
     const heroBodyContent = (
-      <View as="div">
+      <View
+        as="div"
+        elementRef={this.mainContentRef}
+        tabIndex={0}
+        aria-label="main content"
+      >
         <Heading as="h3" level="h2" margin="none none medium">
           Components everyone can count on
         </Heading>
