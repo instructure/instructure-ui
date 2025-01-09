@@ -66,6 +66,8 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
 
   render() {
     const props = omitProps(this.props, MenuItemSeparator.allowedProps)
+    // role="separator" would fit better here, but it causes NVDA to stop the
+    // MenuItem count after it
     return (
       <div
         {...props}
