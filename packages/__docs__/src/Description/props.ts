@@ -27,6 +27,7 @@ type DescriptionOwnProps = {
   id: string
   content: string
   title: string
+  tabIndex?: number
 }
 
 type PropKeys = keyof DescriptionOwnProps
@@ -38,10 +39,11 @@ type DescriptionProps = DescriptionOwnProps
 const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  tabIndex: PropTypes.number
 }
 
-const allowedProps: AllowedPropKeys = ['content', 'id', 'title']
+const allowedProps: AllowedPropKeys = ['content', 'id', 'title', 'tabIndex']
 
 export type { DescriptionProps }
 export { propTypes, allowedProps }

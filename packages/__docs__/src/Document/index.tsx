@@ -44,6 +44,7 @@ import { Heading } from '../Heading'
 
 import { propTypes, allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
+import React from 'react'
 
 @withStyle(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
@@ -64,6 +65,8 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   ref: HTMLDivElement | null = null
 
+  _mainContent = React.createRef<Description>()
+
   componentDidMount() {
     this.props.makeStyles?.()
     this.setState({ pageRef: this.ref })
@@ -71,6 +74,12 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  focusMainContent = () => {
+    if (this._mainContent.current) {
+      this._mainContent.current.focusMainContent()
+    }
   }
 
   handleDetailsTabChange: TabsProps['onRequestTabChange'] = (
@@ -176,6 +185,8 @@ class Document extends Component<DocumentProps, DocumentState> {
         id={`${id}Description`}
         content={filteredDescription}
         title={title}
+        ref={this._mainContent}
+        tabIndex={0}
       />
     ) : null
   }
