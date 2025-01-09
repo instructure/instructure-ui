@@ -35,21 +35,22 @@ import type { FormFieldLayoutProps, FormFieldLayoutStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  _componentTheme: null,
+  componentTheme: any,
   props: FormFieldLayoutProps
 ): FormFieldLayoutStyle => {
-  const { inline } = props
+  const { inline, margin } = props
+  const { spacing } = componentTheme
 
   return {
     groupErrorMessage: {
-      margin: '0.5rem 0',
+      margin: '0.5rem 0'
     },
     formFieldLayout: {
       label: 'formFieldLayout',
       all: 'initial',
       border: '0',
       padding: '0',
-      margin: '0',
+      margin: margin ? spacing[margin] : '0',
       minWidth: '0',
       direction: 'inherit',
       textAlign: 'start',
