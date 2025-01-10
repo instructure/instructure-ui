@@ -96,6 +96,8 @@ class Tab extends Component<TabsTabProps> {
       controls,
       children,
       styles,
+      customTab,
+      align,
       ...props
     } = this.props
 

@@ -49,7 +49,7 @@ const generateStyle = (
   componentTheme: TabsTabTheme,
   props: TabsTabProps
 ): TabsTabStyle => {
-  const { variant, isSelected, isDisabled } = props
+  const { variant, isSelected, isDisabled, customTab, align } = props
 
   const variants = {
     default: {
@@ -132,20 +132,23 @@ const generateStyle = (
   return {
     tab: {
       label: 'tab',
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      lineHeight: componentTheme.lineHeight,
-      fontSize: componentTheme.fontSize,
-      cursor: 'pointer',
-      userSelect: 'none',
-      whiteSpace: 'nowrap',
+      ...(!customTab && {
+        fontFamily: componentTheme.fontFamily,
+        fontWeight: componentTheme.fontWeight,
+        lineHeight: componentTheme.lineHeight,
+        fontSize: componentTheme.fontSize,
+        cursor: 'pointer',
+        userSelect: 'none',
+        whiteSpace: 'nowrap',
 
-      ...((isSelected || isDisabled) && { cursor: 'default' }),
-      ...(isDisabled && { opacity: 0.5 }),
+        ...((isSelected || isDisabled) && { cursor: 'default' }),
+        ...(isDisabled && { opacity: 0.5 }),
 
-      ...focusRingStyles,
+        ...focusRingStyles,
 
-      ...variants[variant!]
+        ...variants[variant!]
+      }),
+      ...(align && { alignSelf: align })
     }
   }
 }
