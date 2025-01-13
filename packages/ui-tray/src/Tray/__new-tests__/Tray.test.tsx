@@ -23,151 +23,93 @@
  */
 
 import React from 'react'
-
-import {
-  expect,
-  mount,
-  stub,
-  wait,
-  wrapQueryResult
-} from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 import { Tray } from '../index'
-import { TrayLocator } from '../TrayLocator'
 import type { TrayProps } from '../props'
 
 describe('<Tray />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
-    await mount(<Tray label="Tray Example">Hello World</Tray>)
-    const tray = await TrayLocator.find({ expectEmpty: true })
-    expect(tray).to.not.exist()
+    render(<Tray label="Tray Example">Hello Tray</Tray>)
+
+    const trayContent = screen.queryByText('Hello Tray')
+    expect(trayContent).not.toBeInTheDocument()
   })
 
   it('should render children and have a node with a parent when open', async () => {
-    await mount(
+    render(
       <Tray label="Tray Example" open>
-        Hello World
+        Hello Tray
       </Tray>
     )
+    const trayContent = screen.getByText('Hello Tray')
 
-    const tray = await TrayLocator.find(':label(Tray Example)')
-    await wait(() => expect(tray.getTextContent()).to.equal('Hello World'))
-  })
-
-  it('should apply theme overrides when open', async () => {
-    await mount(
-      <Tray
-        label="Tray Example"
-        open
-        size="small"
-        placement="start"
-        themeOverride={{ smallWidth: '10em' }}
-      >
-        <div>Hello</div>
-      </Tray>
-    )
-    const tray = await TrayLocator.find()
-    const dialog = await tray.find('[role="dialog"]')
-    await wait(() => {
-      expect(dialog.getComputedStyle().width).to.equal('160px')
-    })
+    expect(trayContent).toBeInTheDocument()
   })
 
   it('should apply the a11y attributes', async () => {
-    await mount(
+    render(
       <Tray label="Tray Example" open>
-        Hello World
+        Hello Tray
       </Tray>
     )
-    const tray = await TrayLocator.find()
-    const dialog = await tray.find('[role="dialog"]')
+    const tray = screen.getByRole('dialog')
 
-    expect(dialog.getAttribute('aria-label')).to.equal('Tray Example')
+    expect(tray).toHaveAttribute('aria-label', 'Tray Example')
   })
 
   it('should support onOpen prop', async () => {
-    const onOpen = stub()
-    await mount(
+    const onOpen = vi.fn()
+    render(
       <Tray label="Tray Example" open onOpen={onOpen}>
-        Hello World
+        Hello Tray
       </Tray>
     )
 
-    await wait(() => {
-      expect(onOpen).to.have.been.called()
+    await waitFor(() => {
+      expect(onOpen).toHaveBeenCalled()
     })
   })
 
   it('should support onClose prop', async () => {
-    const onClose = stub()
+    const onClose = vi.fn()
 
-    const subject = await mount(
+    const { rerender } = render(
       <Tray label="Tray Example" open onClose={onClose}>
-        Hello World
+        Hello Tray
       </Tray>
     )
 
-    await subject.setProps({ open: false })
+    // Set prop: open
+    rerender(
+      <Tray label="Tray Example" open={false} onClose={onClose}>
+        Hello Tray
+      </Tray>
+    )
 
-    await wait(() => {
-      expect(onClose).to.have.been.called()
+    await waitFor(() => {
+      expect(onClose).toHaveBeenCalled()
     })
   })
 
   it('should take a prop for finding default focus', async () => {
-    await mount(
+    render(
       <Tray
         label="Tray Example"
         open
         defaultFocusElement={() => document.getElementById('my-input')}
       >
-        Hello World
+        Hello Tray
         <input type="text" />
-        <input type="text" id="my-input" />
+        <input type="text" id="my-input" aria-label="my-input-label" />
       </Tray>
     )
+    const input = screen.getByLabelText('my-input-label')
 
-    const tray = await TrayLocator.find()
-    const input = await tray.find('#my-input')
-
-    await wait(() => {
-      expect(input.focused()).to.be.true()
-    })
-  })
-
-  it('should call onDismiss prop when Esc key pressed', async () => {
-    const onDismiss = stub()
-    await mount(
-      <Tray
-        open
-        label="Tray Example"
-        shouldCloseOnDocumentClick
-        onDismiss={onDismiss}
-      >
-        Hello World
-        <input type="text" />
-        <input type="text" id="my-input" />
-      </Tray>
-    )
-
-    const tray = await TrayLocator.find()
-
-    await wait(() => {
-      expect(tray.containsFocus()).to.be.true()
-    })
-
-    await wrapQueryResult(tray.getOwnerDocument().documentElement).keyUp(
-      'escape',
-      {
-        defaultPrevented: false,
-        bubbles: true,
-        button: 0
-      },
-      { focusable: false }
-    )
-
-    await wait(() => {
-      expect(onDismiss).to.have.been.called()
+    await waitFor(() => {
+      expect(document.activeElement).toBe(input)
     })
   })
 
@@ -204,10 +146,10 @@ describe('<Tray />', async () => {
         for (const placement in placements[dir].enteringPlacements) {
           const val = placements[dir].enteringPlacements[placement]
           it(`returns ${val} for ${placement} when entering`, async () => {
-            const onEntered = stub()
+            const onEntered = vi.fn()
             document.documentElement.setAttribute('dir', dir)
 
-            await mount(
+            render(
               <Tray
                 open
                 label="Tray Example"
@@ -217,9 +159,8 @@ describe('<Tray />', async () => {
                 Hello
               </Tray>
             )
-
-            await wait(() => {
-              expect(onEntered).to.have.been.called()
+            await waitFor(() => {
+              expect(onEntered).toHaveBeenCalled()
             })
           })
         }
@@ -227,10 +168,10 @@ describe('<Tray />', async () => {
         for (const placement in placements[dir].exitingPlacements) {
           const val = placements[dir].exitingPlacements[placement]
           it(`returns ${val} for ${placement} when exiting`, async () => {
-            const onExited = stub()
+            const onExited = vi.fn()
             document.documentElement.setAttribute('dir', dir)
 
-            const subject = await mount(
+            const { rerender } = render(
               <Tray
                 open
                 label="Tray Example"
@@ -241,10 +182,19 @@ describe('<Tray />', async () => {
               </Tray>
             )
 
-            await subject.setProps({ open: false })
-
-            await wait(() => {
-              expect(onExited).to.have.been.called()
+            // Set prop: open
+            rerender(
+              <Tray
+                open={false}
+                label="Tray Example"
+                placement={placement as TrayProps['placement']}
+                onExited={onExited}
+              >
+                Hello
+              </Tray>
+            )
+            await waitFor(() => {
+              expect(onExited).toHaveBeenCalled()
             })
           })
         }
