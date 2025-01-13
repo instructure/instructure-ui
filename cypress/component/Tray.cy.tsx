@@ -21,8 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { Tray } from '@instructure/ui'
 
-import { TrayLocator } from './TrayLocator'
+import '../support/component'
+import 'cypress-real-events'
 
-export { TrayLocator }
-export default TrayLocator
+describe('<Tray />', () => {
+  it('should apply theme overrides when open', async () => {
+    cy.mount(
+      <Tray
+        label="Tray Example"
+        open
+        size="small"
+        placement="start"
+        themeOverride={{ smallWidth: '10em' }}
+      >
+        <div>Hello</div>
+      </Tray>
+    )
+
+    cy.get('[aria-label="Tray Example"]')
+      .should('have.attr', 'role', 'dialog')
+      .and('have.css', 'width', '160px')
+  })
+
+  it('should call onDismiss prop when Esc key pressed', async () => {
+    const onDismiss = cy.stub()
+    cy.mount(
+      <Tray
+        open
+        label="Tray Example"
+        shouldCloseOnDocumentClick
+        onDismiss={onDismiss}
+      >
+        Hello Tray
+        <input type="text" />
+        <input type="text" id="my-input" />
+      </Tray>
+    )
+
+    cy.get('[aria-label="Tray Example"]').as('tray')
+
+    cy.get('@tray').realPress('Escape')
+    cy.wrap(onDismiss).should('have.been.called')
+  })
+})
