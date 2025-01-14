@@ -237,7 +237,8 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   }
 
   render() {
-    const { disabled, controls, onKeyDown, onKeyUp, type, href } = this.props
+    const { disabled, controls, onKeyDown, onKeyUp, type, href, target } =
+      this.props
 
     const props = omitProps(this.props, MenuItem.allowedProps)
     const ElementType = this.elementType
@@ -247,6 +248,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         href={href}
+        target={target}
         role={this.role}
         aria-labelledby={this.labelId}
         aria-disabled={disabled ? 'true' : undefined}
