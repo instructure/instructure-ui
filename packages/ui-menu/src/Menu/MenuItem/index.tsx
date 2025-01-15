@@ -187,8 +187,6 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         return 'menuitemcheckbox'
       case 'radio':
         return 'menuitemradio'
-      case 'flyout':
-        return 'button'
       default:
         return 'menuitem'
     }
