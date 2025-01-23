@@ -51,6 +51,7 @@ type AppStyle = ComponentStyle<
   | 'hamburger'
   | 'inlineNavigation'
   | 'globalStyles'
+  | 'skipToMainButton'
 >
 
 type AppTheme = {

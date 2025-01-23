@@ -28,7 +28,8 @@ import {
   createContext,
   LegacyRef,
   ReactElement,
-  SyntheticEvent
+  SyntheticEvent,
+  createRef
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
@@ -106,6 +107,10 @@ class App extends Component<AppProps, AppState> {
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
   _controller?: AbortController
+  _heroRef: React.RefObject<Hero>
+  _navRef: React.RefObject<Nav>
+  _skipToMainButtonRef?: HTMLElement
+  _mainContentRef?: HTMLElement
 
   constructor(props: AppProps) {
     super(props)
@@ -127,6 +132,9 @@ class App extends Component<AppProps, AppState> {
       versionsData: undefined,
       iconsData: null
     }
+
+    this._heroRef = createRef()
+    this._navRef = createRef()
   }
 
   fetchDocumentData = async (docId: string) => {
@@ -149,6 +157,16 @@ class App extends Component<AppProps, AppState> {
   fetchVersionData = async (signal: AbortController['signal']) => {
     const versionsData = await fetchVersionData(signal)
     return this.setState({ versionsData })
+  }
+
+  mainContentRef = (el: Element | null) => {
+    this._mainContentRef = el as HTMLElement
+  }
+
+  focusContent = () => {
+    if (this._mainContentRef) {
+      this._mainContentRef.focus()
+    }
   }
 
   scrollToElement() {
@@ -192,6 +210,7 @@ class App extends Component<AppProps, AppState> {
     const errorHandler = (error: Error) => {
       logError(error.name === 'AbortError', error.message)
     }
+    document.addEventListener('keydown', this.handleTabKey)
 
     fetch('icons-data.json', { signal })
       .then((response) => response.json())
@@ -285,7 +304,9 @@ class App extends Component<AppProps, AppState> {
   }
 
   handleMenuOpen = () => {
-    this.setState({ showMenu: true })
+    this.setState({ showMenu: true }, () => {
+      this._navRef.current?.focusTextInput()
+    })
   }
 
   handleMenuClose = () => {
@@ -313,6 +334,33 @@ class App extends Component<AppProps, AppState> {
       return true
     } else {
       return showMenu
+    }
+  }
+
+  focusMainContent = () => {
+    if (this._heroRef?.current?.focusMainContent) {
+      this._heroRef.current.focusMainContent()
+    } else if (this._mainContentRef?.focus) {
+      this._mainContentRef.focus()
+    }
+  }
+
+  handleTabKey = (event: KeyboardEvent) => {
+    if (event.key === 'Tab') {
+      if (document.activeElement === document.body) {
+        event.preventDefault()
+        this.focusSkipToMainButton()
+      }
+    }
+  }
+
+  skipToMainButtonRef = (el: Element | null) => {
+    this._skipToMainButtonRef = el as HTMLElement
+  }
+
+  focusSkipToMainButton = () => {
+    if (this._skipToMainButtonRef) {
+      this._skipToMainButtonRef.focus()
     }
   }
 
@@ -443,18 +491,24 @@ class App extends Component<AppProps, AppState> {
         }
       >
         {this.renderThemeSelect()}
-        <Section id={currentData.id} heading={heading}>
-          <Document
-            doc={{
-              ...currentData,
-              legacyGitBranch
-            }}
-            description={currentData.description}
-            themeVariables={themeVariables}
-            repository={repository}
-            layout={layout}
-          />
-        </Section>
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="main content"
+        >
+          <Section id={currentData.id} heading={heading}>
+            <Document
+              doc={{
+                ...currentData,
+                legacyGitBranch
+              }}
+              description={currentData.description}
+              themeVariables={themeVariables}
+              repository={repository}
+              layout={layout}
+            />
+          </Section>
+        </View>
       </View>
     )
     return this.renderWrappedContent(documentContent)
@@ -487,6 +541,7 @@ class App extends Component<AppProps, AppState> {
           repository={library.repository}
           version={library.version}
           layout={layout}
+          ref={this._heroRef}
         />
       </InstUISettingsProvider>
     )
@@ -552,15 +607,48 @@ class App extends Component<AppProps, AppState> {
       return this.renderHero()
     }
     if (key === 'CHANGELOG') {
-      return this.renderChangeLog()
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="changelog page main content"
+        >
+          {this.renderChangeLog()}
+        </View>
+      )
     } else if (key === 'icons') {
-      return this.renderIcons(key)
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="icons page main content"
+          as={'div'}
+        >
+          {this.renderIcons(key)}
+        </View>
+      )
     } else if (theme) {
-      return this.renderTheme(key)
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="theme page main content"
+        >
+          {this.renderTheme(key)}
+        </View>
+      )
     } else if (doc) {
       return this.renderDocument(key!, repository)
     } else {
-      return this.renderError()
+      return (
+        <View
+          elementRef={this.mainContentRef}
+          tabIndex={0}
+          aria-label="error page main content"
+        >
+          {this.renderError()}
+        </View>
+      )
     }
   }
 
@@ -613,13 +701,7 @@ class App extends Component<AppProps, AppState> {
               shape="circle"
               color="secondary"
               size="medium"
-              aria-expanded={true}
-              ref={(button) => {
-                if (button) {
-                  button.focus()
-                }
-              }}
-            />
+              aria-expanded={true} />
           </InstUISettingsProvider>
         </View>
 
@@ -634,6 +716,7 @@ class App extends Component<AppProps, AppState> {
           sections={this.state.docsData!.sections}
           docs={this.state.docsData!.docs}
           themes={this.state.docsData!.themes}
+          ref={this._navRef}
         />
       </View>
     )
@@ -692,6 +775,24 @@ class App extends Component<AppProps, AppState> {
     ) : null
   }
 
+  renderSkipToMainButton = () => {
+    return (
+      <View
+        as={'button'}
+        onClick={this.focusMainContent}
+        tabIndex={0}
+        css={this.props.styles?.skipToMainButton}
+        borderRadius="small"
+        display="inline-block"
+        padding="small"
+        background="primary"
+        elementRef={this.skipToMainButtonRef}
+      >
+        Skip to main content
+      </View>
+    )
+  }
+
   render() {
     const key = this.state.key
     const { showMenu, layout, docsData, iconsData } = this.state
@@ -712,6 +813,7 @@ class App extends Component<AppProps, AppState> {
           {showMenu && layout === 'small' && (
             <Mask onClick={this.handleMenuClose} />
           )}
+          {this.renderSkipToMainButton()}
           {this.renderNavigation()}
           <div
             css={this.props.styles?.content}
