@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
@@ -38,6 +38,7 @@ import type { NavProps, NavState } from './props'
 class Nav extends Component<NavProps, NavState> {
   _themeId: string
   searchTimeout: ReturnType<typeof setTimeout> | null
+  _textInput?: HTMLElement
   constructor(props: NavProps) {
     super(props)
 
@@ -198,6 +199,22 @@ class Nav extends Component<NavProps, NavState> {
     })
   }
 
+  textInputRef = (el: Element | null) => {
+    this._textInput = el as HTMLElement
+  }
+
+  focusTextInput = () => {
+    if (this._textInput) {
+      this._textInput.focus()
+    }
+  }
+
+  removeFocus = (event) => {
+    if (event.target && event.target.blur) {
+      event.target.blur()
+    }
+  }
+
   renderDocLink(docId: string) {
     const { docs, selected } = this.props
     const docSelected = docId === selected
@@ -223,7 +240,12 @@ class Nav extends Component<NavProps, NavState> {
             background="brand"
           />
         )}
-        <Link display="block" href={`#${docId}`} isWithinText={false}>
+        <Link
+          onClick={this.removeFocus}
+          display="block"
+          href={`#${docId}`}
+          isWithinText={false}
+        >
           {docs[docId].title}
         </Link>
       </View>
@@ -385,7 +407,12 @@ class Nav extends Component<NavProps, NavState> {
             borderWidth={isSelected ? 'none none none large' : 'none'}
             borderColor="brand"
           >
-            <Link display="block" isWithinText={false} href={`#${themeKey}`}>
+            <Link
+              display="block"
+              onClick={this.removeFocus}
+              isWithinText={false}
+              href={`#${themeKey}`}
+            >
               {themeKey}
             </Link>
           </View>
@@ -408,7 +435,14 @@ class Nav extends Component<NavProps, NavState> {
   render() {
     const sections = this.renderSections()
     const themes = this.renderThemes()
-    const icons = <NavToggle key={'icons'} summary={'Icons'} href="#icons" />
+    const icons = (
+      <NavToggle
+        key={'icons'}
+        summary={'Icons'}
+        href="#icons"
+        shouldBlur={true}
+      />
+    )
     const matches = [...sections, ...themes, icons]
     const hasMatches = matches.length > 0
     const errorMessage = [
@@ -432,6 +466,7 @@ class Nav extends Component<NavProps, NavState> {
                 : errorMessage
             }
             shouldNotWrap
+            elementRef={this.textInputRef}
           />
         </View>
         <View margin="medium none none" display="block">

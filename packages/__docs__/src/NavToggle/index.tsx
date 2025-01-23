@@ -36,7 +36,8 @@ class NavToggle extends Component<NavToggleProps> {
   static allowedProps = allowedProps
   static defaultProps = {
     variant: 'section',
-    children: null
+    children: null,
+    shouldBlur: false
   }
   private _toggle: ToggleDetails | null = null
 
@@ -44,8 +45,15 @@ class NavToggle extends Component<NavToggleProps> {
     this._toggle?.focus()
   }
 
+  blurNavToggle = () => {
+    const { shouldBlur } = this.props
+    if (shouldBlur && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+  }
+
   render() {
-    const { summary, variant, ...props } = this.props
+    const { summary, variant, shouldBlur, ...props } = this.props
 
     const isSection = variant === 'section'
 
@@ -67,6 +75,8 @@ class NavToggle extends Component<NavToggleProps> {
         display="block"
         padding="x-small none"
         margin={isSection ? 'none' : 'none none none x-small'}
+        onClick={this.blurNavToggle}
+        as={'div'}
       >
         <InstUISettingsProvider>
           <ToggleDetails

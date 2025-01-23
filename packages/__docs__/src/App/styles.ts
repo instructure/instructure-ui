@@ -76,6 +76,21 @@ const generateStyle = (componentTheme: AppTheme): AppStyle => {
       borderInlineEndWidth: componentTheme.navBorderWidth,
       borderInlineEndStyle: 'solid'
     },
+    skipToMainButton: {
+      label: 'skipToMainButton',
+      position: 'absolute',
+      left: '-9999px',
+      zIndex: 999,
+      marginTop: '6px',
+      opacity: 0,
+      height: '60px',
+      fontSize: '150%',
+      '&:focus': {
+        left: '11.5rem',
+        transform: 'translateX(-50%)',
+        opacity: 1
+      }
+    },
     globalStyles: {
       html: {
         height: '100%',

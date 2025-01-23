@@ -35,6 +35,7 @@ type NavToggleOwnProps = {
   summary: string
   variant?: 'section' | 'category'
   children?: React.ReactNode
+  shouldBlur?: boolean
 }
 type PropKeys = keyof NavToggleOwnProps
 
@@ -42,15 +43,21 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NavToggleProps = PickPropsWithExceptions<
   ToggleDetailsProps,
-  'summary' | 'fluidWidth' | keyof NavToggleOwnProps
+  'summary' | 'shouldBlur' | 'fluidWidth' | keyof NavToggleOwnProps
 > &
   NavToggleOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
   summary: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['section', 'category']),
-  children: PropTypes.node
+  children: PropTypes.node,
+  shouldBlur: PropTypes.bool
 }
-const allowedProps: AllowedPropKeys = ['children', 'summary', 'variant']
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'summary',
+  'variant',
+  'shouldBlur'
+]
 export type { NavToggleProps }
 export { allowedProps, propTypes }
