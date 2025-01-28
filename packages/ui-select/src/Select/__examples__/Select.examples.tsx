@@ -100,6 +100,7 @@ export default {
     ],
     renderBeforeInput: [null, <IconUserLine key="0" inline={false} />]
   },
+  excludeProps: ['isOptionContentAppliedToInput'],
   getComponentProps: () => {
     return {
       inputValue: 'Option one',

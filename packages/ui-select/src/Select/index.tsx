@@ -72,6 +72,7 @@ import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { Renderable } from '@instructure/shared-types'
 
 type GroupChild = React.ComponentElement<SelectGroupProps, Group>
 type OptionChild = React.ComponentElement<SelectOptionProps, Option>
@@ -149,7 +150,8 @@ class Select extends Component<SelectProps> {
     placement: 'bottom stretch',
     constrain: 'window',
     shouldNotWrap: false,
-    scrollToHighlightedOption: true
+    scrollToHighlightedOption: true,
+    isOptionContentAppliedToInput: false
   }
 
   static Option = Option
@@ -577,6 +579,90 @@ class Select extends Component<SelectProps> {
     )
   }
 
+  renderContentBeforeOrAfterInput(position: string) {
+    for (const child of this.childrenArray) {
+      if (matchComponentTypes<GroupChild>(child, [Group])) {
+        // Group found
+        const options = this.getGroupChildrenArray(child)
+        for (const option of options) {
+          if (option.props.isSelected) {
+            return position === 'before'
+              ? option.props.renderBeforeLabel
+              : option.props.renderAfterLabel
+              ? option.props.renderAfterLabel
+              : this.renderIcon()
+          }
+        }
+      } else {
+        // Ungrouped option found
+        if (child.props.isSelected) {
+          return position === 'before'
+            ? child.props.renderBeforeLabel
+            : child.props.renderAfterLabel
+            ? child.props.renderAfterLabel
+            : this.renderIcon()
+        }
+      }
+    }
+    // if no option with isSelected is found
+    if (position === 'after') {
+      return this.renderIcon()
+    }
+    return console.warn(
+      "isOptionContentAppliedToInput is set but no option has an isSelected='true' prop so desired content cannot be displayed in input filed"
+    )
+  }
+
+  handleInputContentRender(
+    renderLabelInput: Renderable,
+    inputValue: string | undefined,
+    isOptionContentAppliedToInput: boolean,
+    position: 'before' | 'after',
+    defaultReturn: Renderable
+  ): Renderable {
+    const isInputValueEmpty = !inputValue || inputValue === ''
+    if (renderLabelInput && isOptionContentAppliedToInput) {
+      if (!isInputValueEmpty) {
+        return this.renderContentBeforeOrAfterInput(position) as Renderable
+      }
+      return renderLabelInput
+    }
+    if (isOptionContentAppliedToInput) {
+      if (isInputValueEmpty) {
+        return defaultReturn
+      }
+      return this.renderContentBeforeOrAfterInput(position) as Renderable
+    }
+    if (renderLabelInput) {
+      return renderLabelInput
+    }
+    return defaultReturn
+  }
+
+  handleRenderBeforeInput() {
+    const { renderBeforeInput, inputValue, isOptionContentAppliedToInput } =
+      this.props
+    return this.handleInputContentRender(
+      renderBeforeInput,
+      inputValue,
+      isOptionContentAppliedToInput!,
+      'before',
+      null // default for before
+    )
+  }
+
+  handleRenderAfterInput() {
+    const { renderAfterInput, inputValue, isOptionContentAppliedToInput } =
+      this.props
+    return this.handleInputContentRender(
+      renderAfterInput,
+      inputValue,
+      isOptionContentAppliedToInput!,
+      'after',
+      this.renderIcon() // default for after
+    )
+  }
+
   renderInput(
     data: Pick<SelectableRender, 'getInputProps' | 'getTriggerProps'>
   ) {
@@ -643,8 +729,8 @@ class Select extends Component<SelectProps> {
       isRequired,
       shouldNotWrap,
       display: isInline ? 'inline-block' : 'block',
-      renderBeforeInput,
-      renderAfterInput: renderAfterInput || this.renderIcon(),
+      renderBeforeInput: this.handleRenderBeforeInput(),
+      renderAfterInput: this.handleRenderAfterInput(),
 
       // If `inputValue` is provided, we need to pass a default onChange handler,
       // because TextInput `value` is a controlled prop,

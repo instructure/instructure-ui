@@ -79,6 +79,23 @@ type SelectOwnProps = {
   visibleOptionsCount?: number
 
   /**
+   * Whether or not the content of the selected `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field.
+   *
+   * If the selected `Select.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field.
+   *
+   * One of the `Select.Option`'s `isSelected` prop should be `true` in order to display the content in the input field.
+   *
+   * `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `Select`'s `inputValue` is an empty value, null or undefined.
+   *
+   * If `true` and the selected `Select.Option` has a `renderAfterLabel` value, it will replace the default arrow icon.
+   *
+   * If `true` and `Select`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `Select`'s `renderBeforeInput` or `renderAfterInput` value.
+   *
+   * If the selected `Select.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered.
+   */
+  isOptionContentAppliedToInput?: boolean
+
+  /**
    * The max height the options list can be before having to scroll. If
    * set, it will __override__ the `visibleOptionsCount` prop.
    */
@@ -288,6 +305,7 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.string,
   htmlSize: PropTypes.number,
   visibleOptionsCount: PropTypes.number,
+  isOptionContentAppliedToInput: PropTypes.bool,
   optionsMaxHeight: PropTypes.string,
   optionsMaxWidth: PropTypes.string,
   messages: PropTypes.arrayOf(FormPropTypes.message),
@@ -325,6 +343,7 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'htmlSize',
   'visibleOptionsCount',
+  'isOptionContentAppliedToInput',
   'optionsMaxHeight',
   'optionsMaxWidth',
   'messages',
