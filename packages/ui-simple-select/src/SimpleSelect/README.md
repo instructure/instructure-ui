@@ -4,6 +4,9 @@ describes: SimpleSelect
 
 `SimpleSelect` is a higher level abstraction of [Select](#Select) that closely parallels the functionality of standard HTML `<select>` elements. It does not support autocomplete behavior and is much less configurable than [Select](#Select). However, because it is more opinionated, `SimpleSelect` can be implemented with very little boilerplate.
 
+> Note: The `id` prop on options must be globally unique, it will be translated to an `id` prop
+> in the DOM.
+
 ### Uncontrolled
 
 For the most basic implementations, `SimpleSelect` can be uncontrolled. If desired, the `defaultValue` prop can be used to set the initial selection.

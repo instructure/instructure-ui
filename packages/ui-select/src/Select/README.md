@@ -8,7 +8,10 @@ describes: Select
 - It should not be used for navigation or as a list of actions/functions. (see [Menu](#Menu)).
 - It can behave like a `<select>` element or implement autocomplete behavior.
 
-> Note: Before implementing Select, see if a [SimpleSelect](#SimpleSelect) will suffice.
+> Notes:
+>
+> - Before implementing Select, see if a [SimpleSelect](#SimpleSelect) will suffice.
+> - The `id` prop on options must be globally unique, it will be translated to an `id` prop in the DOM.
 
 #### Managing state for a Select
 

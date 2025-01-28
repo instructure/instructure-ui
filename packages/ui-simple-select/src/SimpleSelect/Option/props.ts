@@ -43,7 +43,8 @@ type RenderSimpleSelectOptionLabel = Renderable<OptionProps>
 
 type SimpleSelectOptionOwnProps = {
   /**
-   * The id for the option.
+   * The id for the option. **Must be globally unique**, it will be translated
+   * to an `id` prop in the DOM.
    */
   id: string
   /**
