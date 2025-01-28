@@ -68,6 +68,7 @@ export default {
       ]
     ]
   },
+  excludeProps: ['isOptionContentAppliedToInput'],
   getComponentProps: () => {
     return {
       inputValue: 'Option one',

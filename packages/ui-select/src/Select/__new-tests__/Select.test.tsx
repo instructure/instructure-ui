@@ -34,6 +34,12 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import Select from '../index'
 import SelectExamples from '../__examples__/Select.examples'
 import * as utils from '@instructure/ui-utils'
+import {
+  IconAddLine,
+  IconCheckSolid,
+  IconDownloadSolid,
+  IconEyeSolid
+} from '@instructure/ui-icons'
 
 type ExampleOption = 'foo' | 'bar' | 'baz'
 const defaultOptions: ExampleOption[] = ['foo', 'bar', 'baz']
@@ -53,6 +59,235 @@ const getOptions = (
     >
       {opt}
     </Select.Option>
+  ))
+
+type ExampleOptionWithContent = 'opt1' | 'op2' | 'opt3'
+type GroupExampleOptionWithContent =
+  | 'opt1'
+  | 'op2'
+  | 'opt3'
+  | 'opt4'
+  | 'op5'
+  | 'opt6'
+
+type groupOptionWithBeforeContent = {
+  id: string
+  label: string
+  renderBeforeLabel: string | React.ReactNode
+}
+type groupOptionWithAfterContent = {
+  id: string
+  label: string
+  renderAfterLabel: string | React.ReactNode
+}
+
+const optionsWithBeforeContent = [
+  {
+    id: 'opt1',
+    label: 'Text',
+    renderBeforeLabel: 'XY'
+  },
+  {
+    id: 'opt2',
+    label: 'Icon',
+    renderBeforeLabel: <IconCheckSolid />
+  },
+  {
+    id: 'opt3',
+    label: 'Colored Icon',
+    renderBeforeLabel: <IconEyeSolid />
+  }
+]
+
+const groupOptionsWithBeforeContent: {
+  [key: string]: groupOptionWithBeforeContent[]
+} = {
+  Options1: [
+    {
+      id: 'opt1',
+      label: 'Text1',
+      renderBeforeLabel: 'XY'
+    },
+    {
+      id: 'opt2',
+      label: 'Icon1',
+      renderBeforeLabel: <IconCheckSolid />
+    },
+    {
+      id: 'opt3',
+      label: 'Colored Icon1',
+      renderBeforeLabel: <IconEyeSolid />
+    }
+  ],
+  Options2: [
+    {
+      id: 'opt4',
+      label: 'Text2',
+      renderBeforeLabel: 'AB'
+    },
+    {
+      id: 'opt5',
+      label: 'Icon2',
+      renderBeforeLabel: <IconAddLine />
+    },
+    {
+      id: 'opt6',
+      label: 'Colored Icon2',
+      renderBeforeLabel: <IconDownloadSolid />
+    }
+  ]
+}
+
+const optionsWithAfterContent = [
+  {
+    id: 'opt1',
+    label: 'Text',
+    renderAfterLabel: 'XY'
+  },
+  {
+    id: 'opt2',
+    label: 'Icon',
+    renderAfterLabel: <IconCheckSolid />
+  },
+  {
+    id: 'opt3',
+    label: 'Colored Icon',
+    renderAfterLabel: <IconEyeSolid />
+  }
+]
+
+const groupOptionsWithAfterContent: {
+  [key: string]: groupOptionWithAfterContent[]
+} = {
+  Options1: [
+    {
+      id: 'opt1',
+      label: 'Text1',
+      renderAfterLabel: 'XY'
+    },
+    {
+      id: 'opt2',
+      label: 'Icon1',
+      renderAfterLabel: <IconCheckSolid />
+    },
+    {
+      id: 'opt3',
+      label: 'Colored Icon1',
+      renderAfterLabel: <IconEyeSolid />
+    }
+  ],
+  Options2: [
+    {
+      id: 'opt4',
+      label: 'Text2',
+      renderAfterLabel: 'AB'
+    },
+    {
+      id: 'opt5',
+      label: 'Icon2',
+      renderAfterLabel: <IconAddLine />
+    },
+    {
+      id: 'opt6',
+      label: 'Colored Icon2',
+      renderAfterLabel: <IconDownloadSolid />
+    }
+  ]
+}
+
+const optionsWithBeforeAndAfterContent = [
+  {
+    id: 'opt1',
+    label: 'Text',
+    renderBeforeLabel: 'XY',
+    renderAfterLabel: 'ZZ'
+  },
+  {
+    id: 'opt2',
+    label: 'Icon',
+    renderAfterLabel: <IconCheckSolid />,
+    renderBeforeLabel: <IconEyeSolid />
+  },
+  {
+    id: 'opt3',
+    label: 'Colored Icon',
+    renderBeforeLabel: <IconEyeSolid />,
+    renderAfterLabel: <IconCheckSolid />
+  }
+]
+
+const getOptionsWithBeforeContent = (selected: ExampleOptionWithContent) =>
+  optionsWithBeforeContent.map((opt) => (
+    <Select.Option {...opt} key={opt.id} isSelected={opt.id === selected} />
+  ))
+
+const getGroupOptionsWithBeforeContent = (
+  selected: GroupExampleOptionWithContent
+) => {
+  return Object.keys(groupOptionsWithBeforeContent).map((key, index) => {
+    return (
+      <Select.Group key={index} renderLabel={key}>
+        {groupOptionsWithBeforeContent[key].map(
+          (opt: groupOptionWithBeforeContent) => (
+            <Select.Option
+              id={opt.id}
+              key={opt.id}
+              value={opt.label}
+              renderBeforeLabel={opt.renderBeforeLabel}
+              isSelected={opt.id === selected}
+            ></Select.Option>
+          )
+        )}
+      </Select.Group>
+    )
+  })
+}
+
+const getOptionsWithAfterContent = (selected: ExampleOptionWithContent) =>
+  optionsWithAfterContent.map((opt) => (
+    <Select.Option
+      id={opt.id}
+      key={opt.id}
+      value={opt.label}
+      renderAfterLabel={opt.renderAfterLabel}
+      isSelected={opt.id === selected}
+    ></Select.Option>
+  ))
+
+const getGroupOptionsWithAfterContent = (
+  selected: GroupExampleOptionWithContent
+) => {
+  return Object.keys(groupOptionsWithAfterContent).map((key, index) => {
+    return (
+      <Select.Group key={index} renderLabel={key}>
+        {groupOptionsWithAfterContent[key].map(
+          (opt: groupOptionWithAfterContent) => (
+            <Select.Option
+              id={opt.id}
+              key={opt.id}
+              value={opt.label}
+              renderAfterLabel={opt.renderAfterLabel}
+              isSelected={opt.id === selected}
+            ></Select.Option>
+          )
+        )}
+      </Select.Group>
+    )
+  })
+}
+
+const getOptionsWithBeforeAndAfterContent = (
+  selected: ExampleOptionWithContent
+) =>
+  optionsWithBeforeAndAfterContent.map((opt) => (
+    <Select.Option
+      id={opt.id}
+      key={opt.id}
+      value={opt.label}
+      renderBeforeLabel={opt.renderBeforeLabel}
+      renderAfterLabel={opt.renderAfterLabel}
+      isSelected={opt.id === selected}
+    ></Select.Option>
   ))
 
 vi.mock('@instructure/ui-utils', async (importOriginal) => {
@@ -381,6 +616,281 @@ describe('<Select />', () => {
       await waitFor(() => {
         expect(inputRef).toHaveBeenCalledWith(input)
       })
+    })
+
+    it("should not render option's before content in input field when isOptionContentAppliedToInput is set to false ", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={false}
+          inputValue={optionsWithBeforeContent[0].label}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__layout"]'
+      )
+
+      expect(beforeContent).not.toHaveTextContent('XY')
+    })
+
+    it('should render arrow in input field when isOptionContentAppliedToInput is set to false', async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={false}
+          inputValue={optionsWithBeforeContent[0].label}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const spanElement = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      const svgElement = spanElement!.querySelector(
+        'svg[name="IconArrowOpenDown"]'
+      )
+      expect(svgElement).toBeInTheDocument()
+    })
+
+    it("should render option's before content in input field when isOptionContentAppliedToInput is set to true", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithBeforeContent[0].label}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__layout"]'
+      )
+
+      expect(beforeContent).toHaveTextContent('XY')
+    })
+
+    it('should render arrow icon when isOptionContentAppliedToInput is set to true with before content', async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithBeforeContent[0].label}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const spanElement = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      const svgElement = spanElement!.querySelector(
+        'svg[name="IconArrowOpenDown"]'
+      )
+      expect(svgElement).toBeInTheDocument()
+    })
+
+    it("should render option's after content in input field when isOptionContentAppliedToInput is set to true", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithAfterContent[0].label}
+        >
+          {getOptionsWithAfterContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      expect(beforeContent).toHaveTextContent('XY')
+    })
+
+    it("should render option's before content in input field when isOptionContentAppliedToInput is set to true but renderBeforeInput is also set", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithBeforeContent[0].label}
+          renderBeforeInput="ZZ"
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__layout"]'
+      )
+
+      expect(beforeContent).toHaveTextContent('XY')
+    })
+
+    it("should render option's after content in input field when isOptionContentAppliedToInput is set to true but renderAfterInput is also set", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithAfterContent[0].label}
+          renderAfterInput="ZZ"
+        >
+          {getOptionsWithAfterContent('opt1')}
+        </Select>
+      )
+
+      const afterContent = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      expect(afterContent).toHaveTextContent('XY')
+    })
+
+    it("should not render option's before content in input field when isOptionContentAppliedToInput is set to true but inputValue is not set", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__layout"]'
+      )
+
+      expect(beforeContent).not.toHaveTextContent('XY')
+    })
+
+    it("should render option's before content in input field when isOptionContentAppliedToInput is set to true and both optionBeforeContent and optionAfterContent are provided", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithBeforeAndAfterContent[0].label}
+        >
+          {getOptionsWithBeforeAndAfterContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__layout"]'
+      )
+
+      expect(beforeContent).toHaveTextContent('XY')
+    })
+
+    it("should render option's after content in input field when isOptionContentAppliedToInput is set to true and both optionBeforeContent and optionAfterContent are provided", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={optionsWithBeforeAndAfterContent[0].label}
+        >
+          {getOptionsWithBeforeAndAfterContent('opt1')}
+        </Select>
+      )
+
+      const afterContent = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      expect(afterContent).toHaveTextContent('ZZ')
+    })
+
+    it('should render arrow in input field when isOptionContentAppliedToInput is set to true but inputValue is not set', async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const spanElement = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      const svgElement = spanElement!.querySelector(
+        'svg[name="IconArrowOpenDown"]'
+      )
+
+      expect(svgElement).toBeInTheDocument()
+    })
+
+    it("should not render option's after content in input field when isOptionContentAppliedToInput is set to true but inputValue is not set", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+        >
+          {getOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const afterContent = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+
+      expect(afterContent).not.toHaveTextContent('XY')
+    })
+
+    it("should render option's before content input field when isOptionContentAppliedToInput is set to true with group options", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={groupOptionsWithBeforeContent.Options1[0].label}
+        >
+          {getGroupOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const beforeContent = container.querySelector(
+        'span[class$="-textInput__layout"]'
+      )
+
+      expect(beforeContent).toHaveTextContent('XY')
+    })
+
+    it('should render arrow icon when isOptionContentAppliedToInput is set to true with before content and group options', async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={groupOptionsWithBeforeContent.Options1[0].label}
+        >
+          {getGroupOptionsWithBeforeContent('opt1')}
+        </Select>
+      )
+
+      const spanElement = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+      const svgElement = spanElement!.querySelector(
+        'svg[name="IconArrowOpenDown"]'
+      )
+      expect(svgElement).toBeInTheDocument()
+    })
+
+    it("should render option's after content input field when isOptionContentAppliedToInput is set to true with group options", async () => {
+      const { container } = render(
+        <Select
+          renderLabel="Choose an option"
+          isOptionContentAppliedToInput={true}
+          inputValue={groupOptionsWithAfterContent.Options2[0].label}
+        >
+          {getGroupOptionsWithAfterContent('opt4')}
+        </Select>
+      )
+
+      const afterContent = container.querySelector(
+        'span[class$="-textInput__afterElement"]'
+      )
+
+      expect(afterContent).toHaveTextContent('AB')
     })
   })
 

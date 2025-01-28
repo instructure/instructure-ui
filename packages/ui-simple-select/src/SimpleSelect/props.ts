@@ -218,6 +218,20 @@ type PropsPassedToSelect = {
    * Callback fired when text input loses focus.
    */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  /**
+   * Whether or not the content of the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field.
+   *
+   * If the selected `SimpleSelect.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field.
+   *
+   * `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `SimpleSelect`'s `inputValue` is an empty value, null or undefined.
+   *
+   * If `true` and the selected `SimpleSelect.Option` has a `renderAfterLabel` value, it will replace the default arrow icon.
+   *
+   * If `true` and `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` value.
+   *
+   * If the selected `SimpleSelect.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered.
+   */
+  isOptionContentAppliedToInput?: boolean
 }
 
 type PropKeys = keyof SimpleSelectOwnProps
@@ -279,7 +293,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: ChildrenPropTypes.oneOf([Group, Option])
+  children: ChildrenPropTypes.oneOf([Group, Option]),
+  isOptionContentAppliedToInput: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
