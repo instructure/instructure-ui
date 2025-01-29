@@ -36,8 +36,8 @@
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
+    "@instructure/ui-axe-check": "10.10.0",
     "@instructure/ui-babel-preset": "10.10.0",
-    "@instructure/ui-test-locator": "10.10.0",
     "@instructure/ui-test-utils": "10.10.0",
     "@instructure/ui-themes": "10.10.0",
     "@testing-library/jest-dom": "^6.6.3",
