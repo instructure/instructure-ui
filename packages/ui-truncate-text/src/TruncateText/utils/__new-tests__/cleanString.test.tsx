@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from 'chai'
+import '@testing-library/jest-dom'
 import cleanString from '../cleanString'
 
-describe('cleanSring', async () => {
+describe('cleanSring', () => {
   it('should remove spaces from start and end of string', async () => {
     const string = ' Hello world '
 

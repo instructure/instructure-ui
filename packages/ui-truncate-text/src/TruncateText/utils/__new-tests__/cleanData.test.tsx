@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from 'chai'
+import '@testing-library/jest-dom'
 import cleanData from '../cleanData'
 import { CleanDataOptions } from '../../props'
 
-describe('cleanData', async () => {
+describe('cleanData', () => {
   it('should remove spaces from the end of character data', async () => {
     const data = [['T', 'e', 's', 't', ' ', '...']]
     const options: Required<CleanDataOptions> = {
