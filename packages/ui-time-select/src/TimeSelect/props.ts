@@ -244,6 +244,11 @@ type TimeSelectOwnProps = {
      */
     valueAsISOString?: string
   ) => void
+  /**
+   * Whether to allow for the user to clear the selected option in the input field.
+   * If `false`, the input field will return the last selected option after the input is cleared and loses focus.
+   */
+  allowClearingSelection: boolean
 }
 
 const propTypes: PropValidators<PropKeys> = {
@@ -278,7 +283,8 @@ const propTypes: PropValidators<PropKeys> = {
   locale: PropTypes.string,
   timezone: PropTypes.string,
   allowNonStepInput: PropTypes.bool,
-  onInputChange: PropTypes.func
+  onInputChange: PropTypes.func,
+  allowClearingSelection: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -313,7 +319,8 @@ const allowedProps: AllowedPropKeys = [
   'locale',
   'timezone',
   'allowNonStepInput',
-  'onInputChange'
+  'onInputChange',
+  'allowClearingSelection'
 ]
 
 type TimeSelectOptions = {
@@ -356,6 +363,10 @@ type TimeSelectState = {
    * fire onChange event when the popup closes?
    */
   fireChangeOnBlur?: TimeSelectOptions
+  /**
+   * Whether to selected option is cleared
+   */
+  isInputCleared: boolean
 }
 
 export type { TimeSelectProps, TimeSelectState, TimeSelectOptions }

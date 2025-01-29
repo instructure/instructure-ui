@@ -74,7 +74,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     placement: 'bottom stretch',
     constrain: 'window',
     renderEmptyOption: '---',
-    allowNonStepInput: false
+    allowNonStepInput: false,
+    allowClearingSelection: false
   }
   static contextType = ApplyLocaleContext
 
@@ -220,7 +221,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
           : initialOptions,
       isShowingOptions: false,
       highlightedOptionId: initialSelection ? initialSelection.id : undefined,
-      selectedOptionId: initialSelection ? initialSelection.id : undefined
+      selectedOptionId: initialSelection ? initialSelection.id : undefined,
+      isInputCleared: false
     }
   }
 
@@ -338,7 +340,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         selectedOptionId: this.isControlled
           ? this.state.selectedOptionId
           : undefined,
-        fireChangeOnBlur: undefined
+        fireChangeOnBlur: undefined,
+        isInputCleared: this.props.allowClearingSelection && value === ''
       })
     }
     this.setState({
@@ -386,7 +389,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   // when pressing ESC. NOT called when an item is selected via Enter/click,
   // (but in this case it will be called later when the input is blurred.)
   handleBlurOrEsc: SelectProps['onRequestHideOptions'] = (event) => {
-    const { selectedOptionId, inputValue } = this.state
+    const { selectedOptionId, inputValue, isInputCleared } = this.state
     let defaultValue = ''
     if (this.props.defaultValue) {
       const date = DateTime.parse(
@@ -400,14 +403,23 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
     const selectedOption = this.getOption('id', selectedOptionId)
     let newInputValue = defaultValue
-    if (selectedOption) {
-      // If there is a selected option use its value in the input field.
-      newInputValue = selectedOption.label
-    }
     // if input was completely cleared, ensure it stays clear
     // e.g. defaultValue defined, but no selection yet made
-    else if (inputValue === '') {
+    if (inputValue === '' && this.props.allowClearingSelection) {
       newInputValue = ''
+    } else if (selectedOption) {
+      // If there is a selected option use its value in the input field.
+      newInputValue = selectedOption.label
+    } else if (this.props.value) {
+      // If controlled and input is cleared and blurred after the first render, it should revert to value
+      const date = DateTime.parse(
+        this.props.value,
+        this.locale(),
+        this.timezone()
+      )
+      newInputValue = this.props.format
+        ? date.format(this.props.format)
+        : date.toISOString()
     }
     this.setState(() => ({
       isShowingOptions: false,
@@ -420,6 +432,16 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.props.onChange?.(event, {
         value: this.state.fireChangeOnBlur.value.toISOString(),
         inputText: this.state.fireChangeOnBlur.label
+      })
+    } else if (
+      isInputCleared &&
+      (event as any).key !== 'Escape' &&
+      this.props.allowClearingSelection
+    ) {
+      this.setState(() => ({ isInputCleared: false }))
+      this.props.onChange?.(event, {
+        value: '',
+        inputText: ''
       })
     }
     // TODO only fire this if handleSelectOption was not called before.

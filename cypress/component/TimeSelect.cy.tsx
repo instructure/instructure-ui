@@ -26,8 +26,8 @@ import moment from 'moment-timezone'
 import 'cypress-real-events'
 
 import '../support/component'
-import { TimeSelect } from '../../packages/ui'
-import { DateTime } from '../../packages/ui-i18n'
+import { TimeSelect } from '@instructure/ui'
+import { DateTime } from '@instructure/ui-i18n'
 
 describe('<TimeSelect/>', () => {
   it('should render an input and list', async () => {
@@ -67,6 +67,34 @@ describe('<TimeSelect/>', () => {
       .then((spy) => {
         expect(spy.lastCall.args[1]).to.have.property('value')
         expect(spy.lastCall.args[1]).to.have.property('inputText', '00:00')
+      })
+  })
+
+  it('should fire onChange when input field is cleared and blurred and allowClearingSelection is true', async () => {
+    const onChange = cy.spy()
+    cy.mount(
+      <TimeSelect
+        renderLabel="Choose a time"
+        timezone="US/Eastern"
+        onChange={onChange}
+        allowClearingSelection={true}
+      />
+    )
+    cy.get('input[id^="Select_"]').as('input')
+
+    cy.get('@input').click()
+
+    cy.get('li[class$="-optionItem"]').eq(0).click()
+
+    cy.get('@input').click()
+    cy.get('@input').clear()
+    cy.get('@input').blur()
+
+    cy.wrap(onChange)
+      .should('have.been.called')
+      .then((spy) => {
+        expect(spy.lastCall.args[1]).to.have.property('value', '')
+        expect(spy.lastCall.args[1]).to.have.property('inputText', '')
       })
   })
 
