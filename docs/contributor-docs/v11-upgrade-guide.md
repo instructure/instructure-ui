@@ -31,3 +31,4 @@ isWIP: true
 ## Changes
 
 - `ui-dom-utils`/`getComputedStyle` can now return `undefined`: In previous versions sometimes returned an empty object which could lead to runtime exceptions when one tried to call methods of `CSSStyleDeclaration` on it.
+- TO-DO: [TimeSelect](/#TimeSelect) as a controlled component can now return an '' instead of a valid date when its input field is cleared. In previous versions it always reverted to the last selected value when the input field was cleared and lost focus.
