@@ -21,19 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { TopNavProps } from './props'
 
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+const generateStyles = (props: TopNavProps, theme: any) => {
+  const { lightMode } = props
+  return {
+    breadcrumbOverride: {
+      color: lightMode
+        ? theme?.colors?.contrasts?.blue4570
+        : theme?.colors?.contrasts?.grey1111
+    }
+  }
+}
 
-import { AppWrapper } from './App'
-import { InstUISettingsProvider } from '@instructure/emotion'
-import '../globals'
-import { BrowserRouter } from 'react-router-dom'
-
-createRoot(document.getElementById('app')).render(
-  <InstUISettingsProvider>
-    <BrowserRouter>
-      <AppWrapper />
-    </BrowserRouter>
-  </InstUISettingsProvider>
-)
+export { generateStyles }
