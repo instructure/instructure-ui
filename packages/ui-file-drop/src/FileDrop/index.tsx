@@ -274,6 +274,9 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
 
   handleRef = (el: HTMLInputElement) => {
     this.fileInputEl = el
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(el)
+    }
   }
 
   handleBlur = () => {
