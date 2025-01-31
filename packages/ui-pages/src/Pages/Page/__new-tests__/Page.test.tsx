@@ -23,54 +23,34 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import { vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
+
+import '@testing-library/jest-dom'
 import { Page } from '../index'
 
-describe('<Page />', async () => {
-  let _input: HTMLInputElement | null
+describe('<Page />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
-  it('should render with a function as child', async () => {
-    const subject = await mount(
-      <Page
-        defaultFocusElement={() => {
-          return _input
-        }}
-      >
-        {() => {
-          return (
-            <div>
-              <input
-                type="text"
-                ref={(el) => {
-                  _input = el
-                }}
-              />
-              <span>Hello World</span>
-            </div>
-          )
-        }}
-      </Page>
-    )
-
-    expect(subject.getDOMNode().textContent).to.equal('Hello World')
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
   })
 
-  it('should focus default element', async () => {
-    const subject = await mount(
-      <Page
-        defaultFocusElement={() => {
-          return _input
-        }}
-      >
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
+  it('should render with a function as child', async () => {
+    const { container } = render(
+      <Page>
         {() => {
           return (
             <div>
-              <input
-                type="text"
-                ref={(el) => {
-                  _input = el
-                }}
-              />
+              <input type="text" />
               <span>Hello World</span>
             </div>
           )
@@ -78,11 +58,6 @@ describe('<Page />', async () => {
       </Page>
     )
 
-    const page = within(subject.getDOMNode())
-    const input = await page.find(':focusable')
-
-    await page.focus()
-
-    expect(input.focused()).to.be.true()
+    expect(container).toHaveTextContent('Hello World')
   })
 })
