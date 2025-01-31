@@ -23,81 +23,115 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, within, stub } from '@instructure/ui-test-utils'
+import { render, waitFor } from '@testing-library/react'
+import { vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
+
+import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import { Pages, Page } from '../index'
 
-describe('<Pages />', async () => {
+describe('<Pages />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Pages>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
       </Pages>
     )
+    const pages = container.querySelector('div[id^="Pages_"]')
 
-    expect(subject.getDOMNode()).to.exist()
+    expect(pages).toBeInTheDocument()
   })
 
   it('should render a Page', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Pages>
         <Page>{() => 'Hello World'}</Page>
       </Pages>
     )
+    const pages = container.querySelector('div[id^="Pages_"]')
 
-    expect(subject.getDOMNode().textContent).to.equal('Hello World')
+    expect(pages).toHaveTextContent('Hello World')
   })
 
   it('should render the 0th Page by default', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Pages>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
       </Pages>
     )
-    expect(subject.getDOMNode().textContent).to.equal('Foo')
+    const pages = container.querySelector('div[id^="Pages_"]')
+
+    expect(pages).toHaveTextContent('Foo')
   })
 
   it('should render the active Page', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Pages activePageIndex={1} onPageIndexChange={() => {}}>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
       </Pages>
     )
+    const pages = container.querySelector('div[id^="Pages_"]')
 
-    expect(subject.getDOMNode().textContent).to.equal('Bar')
+    expect(pages).toHaveTextContent('Bar')
   })
 
   it('should throw error if onPageIndexChange is not passed together with activePageIndex', async () => {
-    const consoleError = stub(console, 'error')
-    await mount(
+    render(
       <Pages activePageIndex={1}>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
       </Pages>
     )
 
-    expect(consoleError).to.have.been.called()
+    const expectedErrorMessage =
+      "You provided a 'activePageIndex' prop without an 'onPageIndexChange' handler on 'Pages'."
+
+    expect(consoleErrorMock).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.any(String),
+      expect.stringContaining(expectedErrorMessage),
+      expect.any(String)
+    )
   })
 
   it('should pass history and navigateToPreviousPage to Page', async () => {
-    const pageSpy = spy()
-    await mount(
+    const pageSpy = vi.fn()
+    render(
       <Pages>
         <Page>{pageSpy}</Page>
       </Pages>
     )
-    // Called twice because props.makeStyles() is called in Pages.componentDidMount()
-    expect(pageSpy).to.have.been.called()
-    expect(Array.isArray(pageSpy.args[0][0])).to.equal(true)
-    expect(typeof pageSpy.args[0][1]).to.equal('function')
+
+    await waitFor(() => {
+      const args = pageSpy.mock.calls[0]
+
+      expect(pageSpy).toHaveBeenCalledTimes(1)
+      expect(Array.isArray(args[0])).toEqual(true)
+      expect(typeof args[1]).toBe('function')
+    })
   })
 
   it('should fire onPageIndexChange event', async () => {
-    const onPageIndexChange = spy()
+    const onPageIndexChange = vi.fn()
 
-    const subject = await mount(
+    const { container, rerender } = render(
       <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
         <Page key={1}>
@@ -106,14 +140,23 @@ describe('<Pages />', async () => {
       </Pages>
     )
 
-    await subject.setProps({ activePageIndex: 1 })
+    // Set prop: activePageIndex
+    rerender(
+      <Pages activePageIndex={1} onPageIndexChange={onPageIndexChange}>
+        <Page key={0}>{() => 'Foo'}</Page>
+        <Page key={1}>
+          {(_history, navigate) => <button onClick={navigate}>Back</button>}
+        </Page>
+      </Pages>
+    )
 
-    const pages = within(subject.getDOMNode())
-    const button = await pages.find('button')
+    const button = container.querySelector('button')!
 
-    await button.click()
+    userEvent.click(button)
 
-    expect(onPageIndexChange).to.have.been.calledOnce()
-    expect(onPageIndexChange).to.have.been.calledWith(0, 1)
+    await waitFor(() => {
+      expect(onPageIndexChange).toHaveBeenCalledTimes(1)
+      expect(onPageIndexChange).toHaveBeenCalledWith(0, 1)
+    })
   })
 })
