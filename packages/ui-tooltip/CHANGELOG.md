@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
+
+
+### Bug Fixes
+
+* **ui-tooltip:** ensure Esc key closes only the Tooltip when inside a Modal ([0e6e1e4](https://github.com/instructure/instructure-ui/commit/0e6e1e496ee844f3cfc9d47f2d66c425c05e474f))
+
+
+
+
+
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-tooltip

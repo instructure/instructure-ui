@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
+
+
+### Bug Fixes
+
+* **ui-breadcrumb:** add and update aria tags in Breadcrumb and in documentation ([e8db0f2](https://github.com/instructure/instructure-ui/commit/e8db0f20b5f8acc6662a1c8cc7c2530466e6869d))
+* **ui-menu:** make Menu.Item apply target prop ([6c85b31](https://github.com/instructure/instructure-ui/commit/6c85b312212edf9f08317d0d6aeb7c28fe1eb3b3))
+* **ui-menu:** screenreaders should read the correct number of menu items ([0670648](https://github.com/instructure/instructure-ui/commit/06706488cd4b550594f7a5b2b52ea674c79b0530))
+* **ui-pagination:** fix Pagination sometimes displaying non li elements in lists, fix key errors too ([1dbe539](https://github.com/instructure/instructure-ui/commit/1dbe53995c5eca96711024e86151eb0bbcf7e1f4))
+* **ui-time-select:** clear input field after setting an empty value ([1993282](https://github.com/instructure/instructure-ui/commit/19932824ebbcc5c927d000d353405ff72c4bf264))
+* **ui-tooltip:** ensure Esc key closes only the Tooltip when inside a Modal ([0e6e1e4](https://github.com/instructure/instructure-ui/commit/0e6e1e496ee844f3cfc9d47f2d66c425c05e474f))
+
+
+### Features
+
+* **shared-types,ui-buttons:** add theme variables for default and hover states for buttons ([43fde61](https://github.com/instructure/instructure-ui/commit/43fde61a9a5beea44b75d56358cf0d886c9da41a))
+* **ui-filedrop:** add inputRef prop to make FileDrop focusable ([a3a75e0](https://github.com/instructure/instructure-ui/commit/a3a75e09432ab9fdf376f571ab874c83108df726))
+* **ui-icons:** add give-award, grid-view, list-view icons ([1f37f70](https://github.com/instructure/instructure-ui/commit/1f37f70f437ec94c5d56650c9af5f96671563161))
+
+
+
+
+
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 
