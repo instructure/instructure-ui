@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
+
+
+### Bug Fixes
+
+* **ui-menu:** make Menu.Item apply target prop ([6c85b31](https://github.com/instructure/instructure-ui/commit/6c85b312212edf9f08317d0d6aeb7c28fe1eb3b3))
+* **ui-menu:** screenreaders should read the correct number of menu items ([0670648](https://github.com/instructure/instructure-ui/commit/06706488cd4b550594f7a5b2b52ea674c79b0530))
+
+
+
+
+
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-menu

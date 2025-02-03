@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
+
+
+### Bug Fixes
+
+* **ui-time-select:** clear input field after setting an empty value ([1993282](https://github.com/instructure/instructure-ui/commit/19932824ebbcc5c927d000d353405ff72c4bf264))
+
+
+
+
+
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-time-select

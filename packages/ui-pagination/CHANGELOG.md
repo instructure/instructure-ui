@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
+
+
+### Bug Fixes
+
+* **ui-pagination:** fix Pagination sometimes displaying non li elements in lists, fix key errors too ([1dbe539](https://github.com/instructure/instructure-ui/commit/1dbe53995c5eca96711024e86151eb0bbcf7e1f4))
+
+
+
+
+
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-pagination

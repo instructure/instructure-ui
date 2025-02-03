@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
+
+
+### Features
+
+* **shared-types,ui-buttons:** add theme variables for default and hover states for buttons ([43fde61](https://github.com/instructure/instructure-ui/commit/43fde61a9a5beea44b75d56358cf0d886c9da41a))
+
+
+
+
+
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-buttons
