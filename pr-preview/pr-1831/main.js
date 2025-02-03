@@ -4504,7 +4504,7 @@ let count=0
 return react.Children.map(children,(child=>{if(!(0,matchComponentTypes.w)(child,["MenuItemSeparator","MenuItem","MenuItemGroup","Menu"]))return
 count+=1
 const isTabbable=!this.state.hasFocus&&1===count
-if((0,matchComponentTypes.w)(child,["MenuItemSeparator"]))return(0,emotion_react_browser_esm.Y)("li",{role:"none"},child)
+if((0,matchComponentTypes.w)(child,["MenuItemSeparator"]))return child
 const menuItemChild=child,controls=menuItemChild.props["aria-controls"]||menuItemChild.props.controls||this.props["aria-controls"]||this.props.controls
 if((0,matchComponentTypes.w)(child,["MenuItem"]))return(0,safeCloneElement.Z)(child,{controls,children:child.props.children,disabled:disabled||child.props.disabled,onFocus:this.handleMenuItemFocus,onBlur:this.handleMenuItemBlur,onSelect:this.handleMenuItemSelect,onMouseOver:this.handleMenuItemMouseOver,tabIndex:isTabbable?0:-1})
 if((0,matchComponentTypes.w)(child,["MenuItemGroup"]))return(0,safeCloneElement.Z)(child,{label:child.props.label,controls,disabled:disabled||child.props.disabled,onFocus:this.handleMenuItemFocus,onBlur:this.handleMenuItemBlur,onSelect:this.handleMenuItemSelect,onMouseOver:this.handleMenuItemMouseOver,isTabbable})
