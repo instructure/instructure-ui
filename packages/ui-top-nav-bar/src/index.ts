@@ -71,3 +71,4 @@ export type {
 export { MobileTopNav } from './MobileTopNav'
 export { DesktopTopNav } from './DesktopTopNav'
 export { CanvasTopNav } from './CanvasTopNav'
+export { SubNav } from './SubNav'
