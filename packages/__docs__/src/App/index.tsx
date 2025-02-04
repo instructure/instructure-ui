@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { withStyle } from '@instructure/emotion'
-import { CanvasTopNav } from '@instructure/ui-top-nav-bar'
+import { CanvasTopNav, SubNav } from '@instructure/ui-top-nav-bar'
 import { IconButton } from '@instructure/ui-buttons'
 import {
   IconAlertsLine,
@@ -269,6 +269,7 @@ class App extends Component<AppProps, AppState> {
             menu[this.getCurrentMenu()]?.renderAfterMobileMenuItems
           }
         />
+        <SubNav></SubNav>
         <Routes>
           <Route path="/" element={<h1>This is home</h1>} />
           <Route path="/dashboard" element={<h1>This is dashboard</h1>} />
