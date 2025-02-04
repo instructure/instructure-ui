@@ -23,7 +23,7 @@ The component is localized via its `locale` and `timezone` parameters. Both are 
   class Example extends React.Component {
     render() {
       return (
-        <div style={{ height: '10rem', width: '40em' }}>
+        <div style={{ height: '15rem' }}>
           <DateTimeInput
             description="Pick a date and time"
             datePlaceholder="Choose a date"
@@ -45,7 +45,7 @@ The component is localized via its `locale` and `timezone` parameters. Both are 
 - ```js
   const Example = () => {
     return (
-      <div style={{ height: '10rem', width: '40em' }}>
+      <div style={{ height: '15rem' }}>
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"
@@ -98,7 +98,7 @@ This sample code also allows the user to enter an arbitrary time value by settin
         ? new Date(this.state.value).toString()
         : 'N/A'
       return (
-        <div style={{ width: '25em' }}>
+        <div>
           <div style={{ marginBottom: '1em', fontStyle: 'italic' }}>
             You entered:
             <br />
@@ -155,7 +155,7 @@ This sample code also allows the user to enter an arbitrary time value by settin
     const text = value ? new Date(value).toString() : 'N/A'
 
     return (
-      <div style={{ width: '25em' }}>
+      <div>
         <div style={{ marginBottom: '1em', fontStyle: 'italic' }}>
           You entered:
           <br />
@@ -214,7 +214,7 @@ type: example
     render() {
       return (
         <ApplyLocale locale="fr" timezone="Africa/Nairobi">
-          <div style={{ height: '12rem', width: '40em' }}>
+          <div style={{ height: '14rem' }}>
             <DateTimeInput
               description="Pick a date and time"
               datePlaceholder="Choose a date"
@@ -240,7 +240,7 @@ type: example
   const Example = () => {
     return (
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
-        <div style={{ height: '12rem', width: '40em' }}>
+        <div style={{ height: '14rem' }}>
           <DateTimeInput
             description="Pick a date and time"
             datePlaceholder="Choose a date"
@@ -304,7 +304,7 @@ type: example
     }
     render() {
       return (
-        <div style={{ height: '12rem', width: '40em' }}>
+        <div style={{ height: '15rem' }}>
           <DateTimeInput
             description="Pick a date and time"
             datePlaceholder="Choose a date"
@@ -349,7 +349,7 @@ type: example
     }
 
     return (
-      <div style={{ height: '12rem', width: '40em' }}>
+      <div style={{ height: '15rem' }}>
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"

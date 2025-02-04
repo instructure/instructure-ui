@@ -81,6 +81,7 @@ import type {
   ParsedDocSummary
 } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
+import type { Spacing } from '@instructure/emotion'
 
 type AppContextType = {
   themeKey: keyof MainDocsData['themes']
@@ -482,14 +483,7 @@ class App extends Component<AppProps, AppState> {
     const themeVariables = themes[themeKey!].resource
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
-      <View
-        as="div"
-        padding={
-          layout === 'small' || layout === 'medium'
-            ? 'x-large none none large'
-            : 'x-large none none'
-        }
-      >
+      <View as="div" padding="x-large none none">
         {this.renderThemeSelect()}
         <View
           elementRef={this.mainContentRef}
@@ -511,12 +505,14 @@ class App extends Component<AppProps, AppState> {
         </View>
       </View>
     )
-    return this.renderWrappedContent(documentContent)
+    const padding: Spacing =
+      layout === 'small' ? 'large small large small' : 'large'
+    return this.renderWrappedContent(documentContent, padding)
   }
 
   renderWrappedContent(
     content: ReactElement[] | ReactElement,
-    padding: any = 'large'
+    padding: Spacing = 'large'
   ) {
     return <ContentWrap padding={padding}>{content}</ContentWrap>
   }
@@ -701,7 +697,8 @@ class App extends Component<AppProps, AppState> {
               shape="circle"
               color="secondary"
               size="medium"
-              aria-expanded={true} />
+              aria-expanded={true}
+            />
           </InstUISettingsProvider>
         </View>
 
@@ -824,6 +821,9 @@ class App extends Component<AppProps, AppState> {
               <div css={this.props.styles?.hamburger}>
                 <InstUISettingsProvider>
                   <IconButton
+                    themeOverride={{
+                      secondaryBorderColor: '#343434'
+                    }}
                     onClick={this.handleMenuOpen}
                     elementRef={this.handleMenuTriggerRef}
                     renderIcon={IconHamburgerSolid}
