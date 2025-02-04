@@ -523,7 +523,8 @@ class Select extends Component<SelectProps> {
             optionsMaxHeight || this._optionHeight * visibleOptionsCount!,
           maxWidth: optionsMaxWidth || this.width,
           background: 'primary',
-          elementRef: (node: Element | null) => (this._listView = node)
+          elementRef: (node: Element | null) => (this._listView = node),
+          borderRadius: 'medium'
         }
       : { maxHeight: 0 }
 
