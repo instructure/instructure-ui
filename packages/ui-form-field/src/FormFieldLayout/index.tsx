@@ -23,7 +23,8 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+/** @jsxFrag React.Fragment */
+import React, { Component } from 'react'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -60,16 +61,18 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static defaultProps = {
     inline: false,
     layout: 'stacked',
-    as: 'label',
+    as: 'span', // TODO why was this label???
     labelAlign: 'end'
   } as const
 
   constructor(props: FormFieldLayoutProps) {
     super(props)
     this._messagesId = props.messagesId || props.deterministicId!()
+    this._labelId = this.props.deterministicId!()
   }
 
   private _messagesId: string
+  private _labelId: string
 
   ref: Element | null = null
 
@@ -121,32 +124,29 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
           textAlign={this.props.labelAlign}
           width={this.inlineContainerAndLabel ? 'auto' : 3}
         >
-          <FormFieldLabel
-            aria-hidden={this.elementType === 'fieldset' ? 'true' : undefined}
-          >
+          <FormFieldLabel id={this._labelId}>
             {this.props.label}
+            {this.hasMessages && (
+              <ScreenReaderContent>
+                <FormFieldMessages messages={this.props.messages} />
+              </ScreenReaderContent>
+            )}
           </FormFieldLabel>
         </Grid.Col>
       )
-    } else if (this.elementType !== 'fieldset') {
-      // to avoid duplicate label/legend content
-      return this.props.label
-    } else {
-      return null
-    }
-  }
-
-  renderLegend() {
-    // note: the legend element must be the first child of a fieldset element for SR
-    // so we render it twice in that case (once for SR-only and one that is visible)
-    return (
-      <ScreenReaderContent as="legend">
-        {this.props.label}
-        {this.hasMessages && (
-          <FormFieldMessages messages={this.props.messages} />
-        )}
-      </ScreenReaderContent>
-    )
+    } else if (this.props.label || this.hasMessages) {
+      return (
+        <ScreenReaderContent id={this._labelId}>
+          {this.props.label && this.props.label}
+          {this.hasMessages && (
+            <>
+              ,
+              <FormFieldMessages messages={this.props.messages} />
+            </>
+          )}
+        </ScreenReaderContent>
+      )
+    } else return null
   }
 
   renderVisibleMessages() {
@@ -184,9 +184,11 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         css={styles?.formFieldLayout}
         style={{ width }}
         aria-describedby={this.hasMessages ? this._messagesId : undefined}
+        aria-labelledby={
+          this.props.label || this.hasMessages ? this._labelId : undefined
+        }
         ref={this.handleRef}
       >
-        {this.elementType === 'fieldset' && this.renderLegend()}
         <Grid
           rowSpacing="small"
           colSpacing="small"

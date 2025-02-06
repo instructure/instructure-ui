@@ -49,7 +49,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    as: 'fieldset',
+    as: 'span',
     disabled: false,
     rowSpacing: 'medium',
     colSpacing: 'small',

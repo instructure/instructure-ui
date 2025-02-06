@@ -148,6 +148,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
         vAlign="top"
         messagesId={this._messagesId}
         elementRef={this.handleRef}
+        role="group"
       >
         {this.renderChildren()}
       </FormFieldGroup>

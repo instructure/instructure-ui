@@ -66,7 +66,7 @@ describe('<FormFieldGroup />', () => {
     )
 
     const formFieldGroup = container.querySelector(
-      "fieldset[class$='-formFieldLayout']"
+      "span[class$='-formFieldLabel']"
     )
     const firstNameInput = screen.getByLabelText('First:')
     const middleNameInput = screen.getByLabelText('Middle:')
@@ -94,14 +94,12 @@ describe('<FormFieldGroup />', () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = container.querySelector(
-      "fieldset[class$='-formFieldLayout']"
-    )
+    const formFieldGroup = container.querySelector('label')
 
     expect(formFieldGroup).toBeInTheDocument()
   })
 
-  it('links the messages to the fieldset via aria-describedby', () => {
+  it('links the messages to the group via aria-describedby', () => {
     const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
 
     const { container } = render(
@@ -122,10 +120,10 @@ describe('<FormFieldGroup />', () => {
     )
 
     const formFieldGroup = container.querySelector(
-      "fieldset[class$='-formFieldLayout']"
+      "span[class$='-formFieldLayout']"
     )
-    const message = container.querySelector("span[id^='FormFieldLayout_']")
-
+    // TODO not working because there are 2 instances of FormFieldMessages
+    const message = container.querySelector("span[class$='-formFieldMessages']")
     expect(message).toBeInTheDocument()
     expect(formFieldGroup).toBeInTheDocument()
     expect(formFieldGroup).toHaveAttribute('aria-describedby')
@@ -136,7 +134,7 @@ describe('<FormFieldGroup />', () => {
     expect(message).toHaveAttribute('id', messagesId)
   })
 
-  it('displays description message inside the legend', () => {
+  it('displays description message inside the label', () => {
     const description = 'Please enter your full name'
 
     const { container } = render(
@@ -153,9 +151,7 @@ describe('<FormFieldGroup />', () => {
       </FormFieldGroup>
     )
 
-    const legend = container.querySelector(
-      "legend[class$='-screenReaderContent']"
-    )
+    const legend = container.querySelector("span[class$='-formFieldLabel']")
 
     expect(legend).toBeInTheDocument()
     expect(legend).toHaveTextContent(description)
