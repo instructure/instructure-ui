@@ -99,7 +99,7 @@ describe('<FormFieldGroup />', () => {
     expect(formFieldGroup).toBeInTheDocument()
   })
 
-  it.skip('links the messages to the group via aria-describedby', () => {
+  it('links the messages to the group via aria-describedby', () => {
     const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
 
     const { container } = render(
@@ -122,7 +122,6 @@ describe('<FormFieldGroup />', () => {
     const formFieldGroup = container.querySelector(
       "span[class$='-formFieldLayout']"
     )
-    // TODO not working because there are 2 instances of FormFieldMessages
     const message = container.querySelector("span[class$='-formFieldMessages']")
     expect(message).toBeInTheDocument()
     expect(formFieldGroup).toBeInTheDocument()

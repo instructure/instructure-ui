@@ -23,11 +23,8 @@
  */
 
 /** @jsx jsx */
-/** @jsxFrag React.Fragment */
-import React, { Component } from 'react'
-
+import { Component } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-grid'
 import {
   omitProps,
@@ -45,6 +42,7 @@ import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 /**
 ---
@@ -61,7 +59,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static defaultProps = {
     inline: false,
     layout: 'stacked',
-    as: 'span', // TODO why was this label???
+    as: 'span',
     labelAlign: 'end'
   } as const
 
@@ -124,26 +122,13 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
           textAlign={this.props.labelAlign}
           width={this.inlineContainerAndLabel ? 'auto' : 3}
         >
-          <FormFieldLabel id={this._labelId}>
-            {this.props.label}
-            {this.hasMessages && (
-              <ScreenReaderContent>
-                <FormFieldMessages messages={this.props.messages} />
-              </ScreenReaderContent>
-            )}
-          </FormFieldLabel>
+          <FormFieldLabel id={this._labelId}>{this.props.label}</FormFieldLabel>
         </Grid.Col>
       )
-    } else if (this.props.label || this.hasMessages) {
+    } else if (this.props.label) {
       return (
         <ScreenReaderContent id={this._labelId}>
-          {this.props.label && this.props.label}
-          {this.hasMessages && (
-            <>
-              ,
-              <FormFieldMessages messages={this.props.messages} />
-            </>
-          )}
+          {this.props.label}
         </ScreenReaderContent>
       )
     } else return null
@@ -184,9 +169,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         css={styles?.formFieldLayout}
         style={{ width }}
         aria-describedby={this.hasMessages ? this._messagesId : undefined}
-        aria-labelledby={
-          this.props.label || this.hasMessages ? this._labelId : undefined
-        }
+        aria-labelledby={this.props.label ? this._labelId : undefined}
         ref={this.handleRef}
       >
         <Grid
