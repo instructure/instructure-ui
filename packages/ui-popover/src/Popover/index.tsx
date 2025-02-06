@@ -584,7 +584,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
       } else {
         viewProps = {
           ...viewProps,
-          borderWidth: 'small',
+          borderWidth: this.props.borderWidth || 'small',
           borderRadius: 'medium',
           ...(color === 'primary-inverse' && { borderColor: 'transparent' })
         } as Partial<ViewProps> & { ref: any }
