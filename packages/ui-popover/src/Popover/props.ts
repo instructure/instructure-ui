@@ -25,7 +25,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
+import { ThemeablePropTypes, BorderWidth } from '@instructure/emotion'
 import { PositionPropTypes } from '@instructure/ui-position'
 
 import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
@@ -275,6 +275,11 @@ type PopoverOwnProps = {
    * Provides a reference to the underlying HTML root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * Accepts the familiar CSS shorthand to designate border widths corresponding to edges with the following values: 'none', 'small', 'medium','large'(e.g. 'none large none large).
+   * Only applies to a Popover without an arrow.
+   */
+  borderWidth?: BorderWidth
 }
 
 type PopoverProps = PopoverOwnProps &
@@ -344,7 +349,8 @@ const propTypes: PropValidators<PropKeys> = {
   onMouseOut: PropTypes.func,
   renderTrigger: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  borderWidth: ThemeablePropTypes.borderWidth
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -389,7 +395,8 @@ const allowedProps: AllowedPropKeys = [
   'onMouseOut',
   'renderTrigger',
   'children',
-  'elementRef'
+  'elementRef',
+  'borderWidth'
 ]
 
 export type { PopoverOwnProps, PopoverProps, PopoverState, PopoverStyle }

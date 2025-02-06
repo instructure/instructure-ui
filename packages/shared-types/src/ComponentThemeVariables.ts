@@ -1175,6 +1175,7 @@ export type SelectTheme = {
   largeIconSize: Typography['fontSizeMedium']
   color: Colors['contrasts']['grey125125']
   background: Colors['contrasts']['white1010']
+  popoverBorderWidth: Border['widthSmall']
 }
 
 export type SourceCodeEditorTheme = {

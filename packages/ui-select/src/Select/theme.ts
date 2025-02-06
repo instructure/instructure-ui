@@ -42,7 +42,8 @@ const generateComponentTheme = (theme: Theme): SelectTheme => {
     largeIconSize: typography?.fontSizeMedium,
 
     color: colors?.contrasts?.grey125125,
-    background: colors?.contrasts?.white1010
+    background: colors?.contrasts?.white1010,
+    popoverBorderWidth: 'small'
   }
 
   return {

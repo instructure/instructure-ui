@@ -60,7 +60,7 @@ import type {
   SelectableRender
 } from '@instructure/ui-selectable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, BorderWidth } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -713,6 +713,7 @@ class Select extends Component<SelectProps> {
               isShowingContent={isShowingOptions}
               shouldReturnFocus={false}
               withArrow={false}
+              borderWidth={styles?.popoverBorderWidth as BorderWidth}
             >
               {this.renderList({
                 getListProps,

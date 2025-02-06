@@ -59,7 +59,8 @@ const generateStyle = (
     assistiveText: {
       label: 'select__assistiveText',
       display: 'none'
-    }
+    },
+    popoverBorderWidth: componentTheme.popoverBorderWidth
   }
 }
 

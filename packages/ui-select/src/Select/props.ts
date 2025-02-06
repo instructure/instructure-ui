@@ -273,7 +273,9 @@ type SelectProps = SelectOwnProps &
   > &
   WithDeterministicIdProps
 
-type SelectStyle = ComponentStyle<'select' | 'icon' | 'assistiveText'>
+type SelectStyle = ComponentStyle<
+  'select' | 'icon' | 'assistiveText' | 'popoverBorderWidth'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
