@@ -155,6 +155,10 @@ type FileDropOwnProps = {
    * CSS-like shorthand. For example: margin="small auto large".
    */
   margin?: Spacing
+  /**
+   * A function that provides a reference to the actual input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
 type FileDropState = {
@@ -210,7 +214,8 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: ThemeablePropTypes.spacing
+  margin: ThemeablePropTypes.spacing,
+  inputRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -236,7 +241,8 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'maxWidth',
   'minWidth',
-  'margin'
+  'margin',
+  'inputRef'
 ]
 
 export type { FileDropProps, FileDropState, FileDropStyleProps, FileDropStyle }
