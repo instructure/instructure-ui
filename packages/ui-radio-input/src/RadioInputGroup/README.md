@@ -11,87 +11,210 @@ The `name` prop sets the [same low level HTML attribute](https://developer.mozil
 Adjust the size of the radio button and label text via the `size` prop. The default size is
 `medium`.
 
-```js
----
-type: example
----
-function Example () {
-  const inputs = [
-    {value: 'foo', label: 'Radio option one' },
-    {value: 'bar', label: 'Radio option two' },
-    {value: 'baz', label: 'Radio option three' }
-  ]
-  const handleChange = function (event, value) {
-    console.log(value)
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        inputs: [
+          { value: 'foo', label: 'Radio option one' },
+          { value: 'bar', label: 'Radio option two' },
+          { value: 'baz', label: 'Radio option three' }
+        ]
+      }
+    }
+
+    handleChange(event, value) {
+      console.log(value)
+    }
+
+    render() {
+      const { inputs } = this.state
+      return (
+        <RadioInputGroup
+          onChange={this.handleChange}
+          name="example1"
+          defaultValue="foo"
+          description="Select something"
+        >
+          {inputs.map((input) => (
+            <RadioInput
+              key={input.value}
+              value={input.value}
+              label={input.label}
+            />
+          ))}
+        </RadioInputGroup>
+      )
+    }
   }
-  return (
-    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something">
-      {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
-    </RadioInputGroup>
-  )
-}
-render(<Example />)
-```
+
+  render(<Example />)
+  ```
+
+- ```js
+  function Example() {
+    const inputs = [
+      { value: 'foo', label: 'Radio option one' },
+      { value: 'bar', label: 'Radio option two' },
+      { value: 'baz', label: 'Radio option three' }
+    ]
+    const handleChange = function (event, value) {
+      console.log(value)
+    }
+    return (
+      <RadioInputGroup
+        onChange={handleChange}
+        name="example1"
+        defaultValue="foo"
+        description="Select something"
+      >
+        {inputs.map((input) => (
+          <RadioInput
+            key={input.value}
+            value={input.value}
+            label={input.label}
+          />
+        ))}
+      </RadioInputGroup>
+    )
+  }
+  render(<Example />)
+  ```
 
 With the `layout` prop set to `inline` to render the description in its own column at screens `medium` size
 and up (see [Grid](#Grid)).
 
-```js
----
-type: example
----
-function Example () {
-  const inputs = [
-    {value: 'foo', label: 'Classical' },
-    {value: 'bar', label: 'Electronic' },
-    {value: 'baz', label: 'Country' }
-  ]
-  return (
-    <RadioInputGroup
-      name="example2"
-      defaultValue="foo"
-      description="Select something"
-      layout="inline">
-      {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
-    </RadioInputGroup>
-  )
-}
-render(<Example />)
-```
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        inputs: [
+          { value: 'foo', label: 'Classical' },
+          { value: 'bar', label: 'Electronic' },
+          { value: 'baz', label: 'Country' }
+        ]
+      }
+    }
+    render() {
+      const { inputs } = this.state
+
+      return (
+        <RadioInputGroup
+          name="example2"
+          defaultValue="foo"
+          description="Select something"
+          layout="inline"
+        >
+          {inputs.map((input) => (
+            <RadioInput
+              key={input.value}
+              value={input.value}
+              label={input.label}
+            />
+          ))}
+        </RadioInputGroup>
+      )
+    }
+  }
+  render(<Example />)
+  ```
+
+- ```js
+  function Example() {
+    const inputs = [
+      { value: 'foo', label: 'Classical' },
+      { value: 'bar', label: 'Electronic' },
+      { value: 'baz', label: 'Country' }
+    ]
+    return (
+      <RadioInputGroup
+        name="example2"
+        defaultValue="foo"
+        description="Select something"
+        layout="inline"
+      >
+        {inputs.map((input) => (
+          <RadioInput
+            key={input.value}
+            value={input.value}
+            label={input.label}
+          />
+        ))}
+      </RadioInputGroup>
+    )
+  }
+  render(<Example />)
+  ```
 
 With the `layout` property set to `columns` the inputs will render horizontally at screens `medium` size
 and up (see [Grid](#Grid)).
 
-```js
----
-type: example
----
-function Example () {
-  const inputs = [
-    {value: 'foo', label: 'Extremely happy' },
-    {value: 'bar', label: 'Very annoyed' },
-    {value: 'baz', label: 'Somewhat apathetic' }
-  ]
-  return (
-    <RadioInputGroup
-      layout="columns"
-      name="example3"
-      defaultValue="foo"
-      description="Select something"
-    >
-      {inputs.map(input =>
-        <RadioInput
-          key={input.value}
-          value={input.value}
-          label={input.label}
-        />
-      )}
-    </RadioInputGroup>
-  )
-}
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        inputs: [
+          { value: 'foo', label: 'Extremely happy' },
+          { value: 'bar', label: 'Very annoyed' },
+          { value: 'baz', label: 'Somewhat apathetic' }
+        ]
+      }
+    }
 
-render(<Example />)
-```
+    render() {
+      const { inputs } = this.state
+      return (
+        <RadioInputGroup
+          layout="columns"
+          name="example3"
+          defaultValue="foo"
+          description="Select something"
+        >
+          {inputs.map((input) => (
+            <RadioInput
+              key={input.value}
+              value={input.value}
+              label={input.label}
+            />
+          ))}
+        </RadioInputGroup>
+      )
+    }
+  }
+
+  render(<Example />)
+  ```
+
+- ```js
+  function Example() {
+    const inputs = [
+      { value: 'foo', label: 'Extremely happy' },
+      { value: 'bar', label: 'Very annoyed' },
+      { value: 'baz', label: 'Somewhat apathetic' }
+    ]
+    return (
+      <RadioInputGroup
+        layout="columns"
+        name="example3"
+        defaultValue="foo"
+        description="Select something"
+      >
+        {inputs.map((input) => (
+          <RadioInput
+            key={input.value}
+            value={input.value}
+            label={input.label}
+          />
+        ))}
+      </RadioInputGroup>
+    )
+  }
+
+  render(<Example />)
+  ```
 
 Set the `variant` prop to `toggle` to have the RadioInputGroup display as a toggle switch. The `context` prop can be set to switch the background color of the toggle switch. Default is `success` options are 'success', 'warning', 'danger', and 'off'.
 
