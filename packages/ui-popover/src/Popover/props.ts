@@ -276,7 +276,10 @@ type PopoverOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   /**
-   * Accepts the familiar CSS shorthand to designate border widths corresponding to edges with the following values: 'none', 'small', 'medium','large'(e.g. 'none large none large).
+   * Allowed values: 0, 'none', 'small', 'medium', 'large'.
+   *
+   * Accepts the familiar CSS shorthand to designate border widths corresponding to edges. (e.g. 'none large none large).
+   *
    * Only applies to a Popover without an arrow.
    */
   borderWidth?: BorderWidth
