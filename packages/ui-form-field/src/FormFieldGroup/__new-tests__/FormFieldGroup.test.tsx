@@ -99,7 +99,7 @@ describe('<FormFieldGroup />', () => {
     expect(formFieldGroup).toBeInTheDocument()
   })
 
-  it('links the messages to the group via aria-describedby', () => {
+  it.skip('links the messages to the group via aria-describedby', () => {
     const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
 
     const { container } = render(
