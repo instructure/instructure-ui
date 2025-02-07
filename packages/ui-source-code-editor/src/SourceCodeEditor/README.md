@@ -231,7 +231,7 @@ class LanguageExamples extends React.Component {
         <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
           <FormField label="SourceCodeEditor with syntax highlight">
             <SourceCodeEditor
-              label={`${this.state.currentLanguage} code editor`}
+              label={`${this.state.currentLanguage} SourceCodeEditor with syntax highlight`}
               language={this.state.currentLanguage}
               value={this.state.currentValue}
               onChange={(value) => {
