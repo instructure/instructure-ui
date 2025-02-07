@@ -487,7 +487,7 @@ describe('<Select />', () => {
         })
       })
 
-      it.only('when input is clicked', async () => {
+      it('when input is clicked', async () => {
         const onRequestShowOptions = vi.fn()
 
         const { rerender } = render(

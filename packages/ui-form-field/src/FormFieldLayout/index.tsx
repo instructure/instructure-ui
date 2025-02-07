@@ -155,10 +155,16 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
     const hasNewErrorMsg =
       !!messages?.find((m) => m.type === 'newError') && isGroup
-    // If it's a label we apply the 'for' attribute to associate the label
-    let ariaLabelledBy = {}
-    if (ElementType != 'label' && this.props.label) {
-      ariaLabelledBy = { 'aria-labelledby': this._labelId }
+
+    let labelConnector = {}
+    if (ElementType == 'label') {
+      // this is a `<label>`, it needs to be connected to a control
+      // This is the case for e.g. `FormField`, `TextInput`, `NumberInput`
+      labelConnector = { htmlFor: this.props.id }
+    } else if (this.props.label) {
+      // This is a FormFieldGroup (span), it needs to be connected to its label
+      // This is the case for `FormFieldGroup`
+      labelConnector = { 'aria-labelledby': this._labelId }
     }
     return (
       <ElementType
@@ -169,7 +175,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         css={styles?.formFieldLayout}
         style={{ width }}
         aria-describedby={this.hasMessages ? this._messagesId : undefined}
-        {...ariaLabelledBy}
+        {...labelConnector}
         ref={this.handleRef}
       >
         <Grid
