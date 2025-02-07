@@ -44,5 +44,19 @@ describe('<SourceCodeEditor />', () => {
       expect(activeLine[1]).toHaveStyle({ color: '#0000ff' })
       expect(activeLine[2]).toHaveStyle({ color: '#116644' })
     })
+
+    it('should link editor element to label using aria-labelledby attribute', async () => {
+      const { container } = render(
+        <SourceCodeEditor
+          label="test"
+          language="jsx"
+          defaultValue="const a = 2;"
+        />
+      )
+      const editorElement = container.querySelector('[role="textbox"]')
+      const labelId = container.querySelector('[class$="-label"]')?.id
+
+      expect(editorElement).toHaveAttribute('aria-labelledby', labelId)
+    })
   })
 })

@@ -302,6 +302,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     if (indentOnLoad) {
       this.indentAll()
     }
+    this.assignAriaLabel()
   }
 
   componentWillUnmount() {
@@ -644,6 +645,15 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     }
   }
 
+  assignAriaLabel = () => {
+    if (this._containerRef) {
+      const editorDiv = this._containerRef.querySelector('[role="textbox"]')
+      if (editorDiv) {
+        editorDiv.setAttribute('aria-labelledby', `${this._id}`)
+      }
+    }
+  }
+
   render() {
     const { label, styles, ...restProps } = this.props
 
@@ -655,7 +665,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
           omitProps(restProps, SourceCodeEditor.allowedProps)
         )}
       >
-        <label css={styles?.label} htmlFor={this._id}>
+        <label css={styles?.label} id={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
           <div
             ref={this.handleContainerRef}
