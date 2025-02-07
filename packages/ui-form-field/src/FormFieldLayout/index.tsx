@@ -42,7 +42,6 @@ import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 /**
 ---
@@ -59,14 +58,14 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static defaultProps = {
     inline: false,
     layout: 'stacked',
-    as: 'span',
+    as: 'label',
     labelAlign: 'end'
   } as const
 
   constructor(props: FormFieldLayoutProps) {
     super(props)
     this._messagesId = props.messagesId || props.deterministicId!()
-    this._labelId = this.props.deterministicId!()
+    this._labelId = props.deterministicId!('FormField-Label')
   }
 
   private _messagesId: string
@@ -126,11 +125,8 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         </Grid.Col>
       )
     } else if (this.props.label) {
-      return (
-        <ScreenReaderContent id={this._labelId}>
-          {this.props.label}
-        </ScreenReaderContent>
-      )
+      // needs to be wrapped because it needs an `id`
+      return <div id={this._labelId}>{this.props.label}</div>
     } else return null
   }
 
@@ -151,8 +147,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   }
 
   render() {
-    // any cast is needed to prevent Expression produces a union type that is too complex to represent errors
-    const ElementType = this.elementType as any
+    const ElementType = this.elementType
 
     const { makeStyles, styles, messages, isGroup, ...props } = this.props
 
@@ -160,6 +155,11 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
     const hasNewErrorMsg =
       !!messages?.find((m) => m.type === 'newError') && isGroup
+    // If it's a label we apply the 'for' attribute to associate the label
+    let ariaLabelledBy = {}
+    if (ElementType != 'label' && this.props.label) {
+      ariaLabelledBy = { 'aria-labelledby': this._labelId }
+    }
     return (
       <ElementType
         {...omitProps(props, [
@@ -169,7 +169,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         css={styles?.formFieldLayout}
         style={{ width }}
         aria-describedby={this.hasMessages ? this._messagesId : undefined}
-        aria-labelledby={this.props.label ? this._labelId : undefined}
+        {...ariaLabelledBy}
         ref={this.handleRef}
       >
         <Grid

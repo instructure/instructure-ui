@@ -98,7 +98,7 @@ describe('<CheckboxGroup />', () => {
 
   it('displays description message inside the legend', () => {
     const { container } = renderCheckboxGroup({ description: TEST_DESCRIPTION })
-    const legend = container.querySelector('legend')
+    const legend = container.querySelector(`[id^="FormField-Label_"]`)
 
     expect(legend).toBeInTheDocument()
     expect(legend).toHaveTextContent(TEST_DESCRIPTION)

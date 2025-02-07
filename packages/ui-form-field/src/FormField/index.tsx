@@ -68,7 +68,7 @@ class FormField extends Component<FormFieldProps> {
         label={this.props.label}
         vAlign={this.props.vAlign}
         as="label"
-        htmlFor={this.props.id}
+        htmlFor={this.props.id} // TODO do this on the layout instead!
         elementRef={this.handleRef}
       />
     )

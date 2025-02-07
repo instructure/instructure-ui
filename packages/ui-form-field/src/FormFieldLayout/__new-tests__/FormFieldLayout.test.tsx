@@ -53,7 +53,7 @@ describe('<FormFieldLayout />', () => {
     const { container } = render(<FormFieldLayout label="Username" />)
 
     const formFieldLayout = container.querySelector(
-      "span[class$='-formFieldLayout']"
+      "label[class$='-formFieldLayout']"
     )
     const formFieldLabel = container.querySelector(
       "span[class$='-formFieldLabel']"
