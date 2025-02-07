@@ -498,8 +498,6 @@ describe('<Select />', () => {
             {getOptions()}
           </Select>
         )
-        screen.debug()
-        //const input = container.querySelector('span[id^=FormField-Label_]')
         const input = screen.getByLabelText('Choose an option')
 
         await userEvent.click(input)
