@@ -110,11 +110,7 @@ describe('<ColorPreset />', () => {
 
       testColors.forEach((testColor, index) => {
         const tooltip = tooltips[index]
-        const indicator = indicators[index]
 
-        expect(tooltip.getAttribute('id')).toBe(
-          indicator.getAttribute('aria-describedby')
-        )
         expect(tooltip).toHaveTextContent(testColor)
       })
     })

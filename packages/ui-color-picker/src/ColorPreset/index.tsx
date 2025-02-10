@@ -266,7 +266,11 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       cursor={this.props.disabled ? 'not-allowed' : 'auto'}
       as="button"
       {...(selectOnClick ? { onClick: () => this.props.onSelect(color) } : {})}
-      {...(this.isSelectedColor(color) ? { 'aria-label': 'selected' } : {})}
+      {...{
+        'aria-label': `${color}${
+          this.isSelectedColor(color) ? ' selected' : ''
+        }`
+      }}
     >
       <div>
         <ColorIndicator color={color} shape="rectangle" role="presentation" />
@@ -282,9 +286,25 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     </View>
   )
 
-  renderIndicatorTooltip = (child: React.ReactElement, color: string) => (
-    <Tooltip renderTip={<div>{color}</div>}>{child}</Tooltip>
-  )
+  renderIndicatorTooltip = (child: React.ReactElement, color: string) => {
+    return (
+      <Tooltip
+        renderTip={<div>{color}</div>}
+        elementRef={(element) => {
+          if (
+            element &&
+            element.firstElementChild instanceof HTMLButtonElement
+          ) {
+            // The tooltip and the button's aria-label has the same text content. This is redundant for screenreaders.
+            // Aria-describedby is removed to bypass reading the tooltip twice
+            element.firstElementChild.removeAttribute('aria-describedby')
+          }
+        }}
+      >
+        {child}
+      </Tooltip>
+    )
+  }
 
   renderSettingsMenu = (color: string, index: number) => (
     <Drilldown
