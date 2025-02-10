@@ -26,27 +26,46 @@
 /** @jsx jsx */
 import { Children, PropsWithChildren } from 'react'
 import { jsx, useTheme } from '@instructure/emotion'
-import type { SubNavProps } from './props'
 
 import { generateStyles } from './styles'
+import { Link } from '@instructure/ui-link'
 
 /**
 ---
 category: utilities
 ---
  **/
-const SubNav = ({ styles, children }: SubNavProps) => {
+const SubNav = ({ children, menuItems }: any) => {
   const getSubComponent = (displayName: any) => {
     return Children.map(children, (child: any) => child)?.filter(
       (child: any) => child?.type?.displayName === displayName
     )
   }
   return (
-    // <div style={styles.container}>
-    <div>
-      FOS
-      {getSubComponent('Start')}
-      {getSubComponent('End')}
+    <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+      {menuItems.map((item: any) => (
+        <div
+          style={{
+            justifyContent: 'center',
+            color: 'black',
+            fontSize: '20px',
+            padding: '4px',
+            borderLeft: item.selected ? '3px solid' : 'none',
+            height: '32px',
+            fontWeight: 'bold'
+          }}
+          key={item}
+        >
+          <Link
+            key={item}
+            href={item.href}
+            themeOverride={item.selected ? { color: 'black' } : {}}
+            isWithinText={false}
+          >
+            {item.title}
+          </Link>
+        </div>
+      ))}
     </div>
   )
 }
