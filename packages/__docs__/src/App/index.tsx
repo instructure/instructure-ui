@@ -270,9 +270,19 @@ class App extends Component<AppProps, AppState> {
             menu[this.getCurrentMenu()]?.renderAfterMobileMenuItems
           }
         />
-        <SubNav></SubNav>
+        <SubNav
+          menuItems={[
+            { title: 'Home', href: 'www.google.com', selected: true },
+            { title: 'Announcements', href: 'http://www.google.com' },
+            { title: 'Assignments', href: 'www.google.com' },
+            { title: 'Discussions', href: 'www.google.com' },
+            { title: 'Grades', href: 'www.google.com' },
+            { title: 'People', href: 'www.google.com' }
+          ]}
+        />
+
         <Routes>
-          <Route path="/" element={<h1>This is home</h1>} />
+          {/*<Route path="/" element={<h1>This is home</h1>} />*/}
           <Route path="/dashboard" element={<h1>This is dashboard</h1>} />
         </Routes>
       </div>
