@@ -77,7 +77,13 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   }
 
   get makeStylesVariables(): FormFieldGroupStyleProps {
-    return { invalid: this.invalid }
+    // new form errors dont need borders
+    const oldInvalid =
+      !!this.props.messages &&
+      this.props.messages.findIndex((message) => {
+        return message.type === 'error'
+      }) >= 0
+    return { invalid: oldInvalid }
   }
 
   get invalid() {
