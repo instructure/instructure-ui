@@ -199,6 +199,14 @@ type ViewOwnProps = {
    * Valid values are `auto`, `contain`, `none`.
    */
   overscrollBehavior?: 'auto' | 'contain' | 'none'
+  /**
+   * Sets the radius of the focus border ring.
+   *
+   * For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width.
+   *
+   * For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width.
+   */
+  focusRingBorderRadius?: string
 }
 
 type PropKeys = keyof ViewOwnProps
@@ -271,7 +279,8 @@ const propTypes: PropValidators<PropKeys> = {
   shouldAnimateFocus: PropTypes.bool,
   withVisualDebug: PropTypes.bool,
   dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION)),
-  overscrollBehavior: PropTypes.oneOf(['auto', 'contain', 'none'])
+  overscrollBehavior: PropTypes.oneOf(['auto', 'contain', 'none']),
+  focusRingBorderRadius: PropTypes.string
 }
 
 // This variable will be attached as static property on the `View` component
@@ -311,7 +320,8 @@ const allowedProps: AllowedPropKeys = [
   'textAlign',
   'width',
   'withFocusOutline',
-  'withVisualDebug'
+  'withVisualDebug',
+  'focusRingBorderRadius'
 ]
 
 export { propTypes, allowedProps }
