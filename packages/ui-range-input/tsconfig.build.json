@@ -10,6 +10,7 @@
     { "path": "../console/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
+    { "path": "../ui-axe-check/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
     { "path": "../ui-dom-utils/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },
@@ -21,7 +22,6 @@
     { "path": "../ui-view/tsconfig.build.json" },
     { "path": "../uid/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-locator/tsconfig.build.json" },
     { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../ui-themes/tsconfig.build.json" }
   ]
