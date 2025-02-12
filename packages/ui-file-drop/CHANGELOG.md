@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.11.0](https://github.com/instructure/instructure-ui/compare/v9.10.2...v9.11.0) (2025-02-12)
+
+
+### Features
+
+* **ui-file-drop:** add inputRef prop to make FileDrop focusable ([b3acc38](https://github.com/instructure/instructure-ui/commit/b3acc3814dba9492e200f7cda5c557067bf33252))
+
+
+
+
+
 ## [9.10.2](https://github.com/instructure/instructure-ui/compare/v9.10.1...v9.10.2) (2024-12-19)
 
 **Note:** Version bump only for package @instructure/ui-file-drop
