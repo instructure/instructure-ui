@@ -335,11 +335,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.setState({ fireChangeOnBlur: newOptions[0] })
     } else {
       this.setState({
-        // needs not to lose selectedOptionId in controlled mode otherwise it'd
-        // revert to the default or '' instead of the set value
-        selectedOptionId: this.isControlled
-          ? this.state.selectedOptionId
-          : undefined,
         fireChangeOnBlur: undefined,
         isInputCleared: this.props.allowClearingSelection && value === ''
       })

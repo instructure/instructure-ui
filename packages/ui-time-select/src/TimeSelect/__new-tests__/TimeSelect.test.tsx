@@ -249,12 +249,125 @@ describe('<TimeSelect />', () => {
     await userEvent.type(input, '7:45 PM')
     fireEvent.blur(input) // sends onChange event
 
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalled()
-      expect(onKeyDown).toHaveBeenCalled()
-      expect(handleInputChange).toHaveBeenCalled()
-      expect(input).toHaveValue('7:45 PM')
+    expect(onChange).toHaveBeenCalledWith(expect.anything(), {
+      inputText: '7:45 PM',
+      value: expect.anything()
     })
+    expect(onKeyDown).toHaveBeenCalled()
+    expect(handleInputChange).toHaveBeenCalled()
+    expect(input).toHaveValue('7:45 PM')
+  })
+
+  it('allowClearingSelection allows to clear the value', async () => {
+    const defaultValue = moment.tz(
+      '1986-05-17T18:00:00.000Z', // 2:00 PM in US/Eastern
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
+    const onChange = vi.fn()
+    render(
+      <TimeSelect
+        allowClearingSelection
+        renderLabel="Choose a time"
+        allowNonStepInput={true}
+        locale="en_AU"
+        timezone="US/Eastern"
+        defaultValue={defaultValue.toISOString()}
+        onChange={onChange}
+      />
+    )
+    const input = screen.getByRole('combobox')
+
+    await userEvent.type(
+      input,
+      '{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}'
+    )
+    fireEvent.blur(input) // sends onChange event
+
+    expect(onChange).toHaveBeenCalledWith(expect.anything(), {
+      inputText: '',
+      value: ''
+    })
+    expect(input).toHaveValue('')
+  })
+
+  it('Can change from defaultValue', async () => {
+    const defaultValue = moment.tz(
+      '1986-05-17T18:00:00.000Z', // 2:00 PM in US/Eastern
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
+    const onChange = vi.fn()
+    const onKeyDown = vi.fn()
+    const handleInputChange = vi.fn()
+    render(
+      <TimeSelect
+        renderLabel="Choose a time"
+        allowNonStepInput={true}
+        locale="en_AU"
+        timezone="US/Eastern"
+        defaultValue={defaultValue.toISOString()}
+        onChange={onChange}
+        onInputChange={handleInputChange}
+        onKeyDown={onKeyDown}
+      />
+    )
+    const input = screen.getByRole('combobox')
+
+    await userEvent.type(
+      input,
+      '{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}7:45 PM'
+    )
+    fireEvent.blur(input) // sends onChange event
+    expect(onChange).toHaveBeenCalledWith(expect.anything(), {
+      inputText: '7:45 PM',
+      value: '1986-05-17T23:45:00.000Z'
+    })
+    expect(onKeyDown).toHaveBeenCalled()
+    expect(handleInputChange).toHaveBeenCalled()
+    expect(input).toHaveValue('7:45 PM')
+  })
+
+  it('Reverts to a set value if the current one is invalid', async () => {
+    const defaultValue = moment.tz(
+      '1986-05-17T18:00:00.000Z', // 2:00 PM in US/Eastern
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
+    const onChange = vi.fn()
+    const onKeyDown = vi.fn()
+    const handleInputChange = vi.fn()
+    render(
+      <TimeSelect
+        renderLabel="Choose a time"
+        allowNonStepInput={true}
+        locale="en_AU"
+        timezone="US/Eastern"
+        defaultValue={defaultValue.toISOString()}
+        onChange={onChange}
+        onInputChange={handleInputChange}
+        onKeyDown={onKeyDown}
+      />
+    )
+    const input = screen.getByRole('combobox')
+
+    await userEvent.type(
+      input,
+      '{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}7:45 PM'
+    )
+    fireEvent.blur(input) // sends onChange event
+    await userEvent.type(input, 'asdf')
+    fireEvent.blur(input)
+    expect(onChange).toHaveBeenCalledWith(expect.anything(), {
+      inputText: '7:45 PM',
+      value: '1986-05-17T23:45:00.000Z'
+    })
+    expect(onKeyDown).toHaveBeenCalled()
+    expect(handleInputChange).toHaveBeenCalled()
+    expect(input).toHaveValue('7:45 PM')
   })
 
   describe('input', () => {
