@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import { Component, SyntheticEvent } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { TimeSelect } from '@instructure/ui-time-select'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -59,7 +59,10 @@ class Avatar extends Component<AvatarProps, AvatarState> {
     onImageLoaded: (_event: SyntheticEvent) => {}
   } as const
 
-  state = { loaded: false }
+  state = {
+    startTime: '',
+    endTime: '2020-05-18T23:59:00'
+  }
 
   ref: Element | null = null
 
@@ -86,71 +89,40 @@ class Avatar extends Component<AvatarProps, AvatarState> {
     }
   }
 
-  makeInitialsFromName() {
-    let name = this.props.name
-
-    if (!name || typeof name !== 'string') {
-      return
-    }
-    name = name.trim()
-    if (name.length === 0) {
-      return
-    }
-
-    if (name.match(/\s+/)) {
-      const names = name.split(/\s+/)
-      return (names[0][0] + names[names.length - 1][0]).toUpperCase()
-    } else {
-      return name[0].toUpperCase()
-    }
+  trySetStartTime(value) {
+    this.setState({ startTime: value, endTime: '2025-02-13T23:59:59.999Z' })
   }
 
-  handleImageLoaded = (event: SyntheticEvent) => {
-    this.setState({ loaded: true })
-    this.props.onImageLoaded(event)
-  }
-
-  renderInitials() {
-    return (
-      <span css={this.props.styles?.initials} aria-hidden="true">
-        {this.makeInitialsFromName()}
-      </span>
-    )
-  }
-
-  renderContent() {
-    const { renderIcon, styles } = this.props
-
-    if (!renderIcon) {
-      return this.renderInitials()
-    }
-
-    return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
+  trySetEndTime(value) {
+    this.setState({ ...this.state, endTime: value })
   }
 
   render() {
-    const { onImageLoaded, styles, ...props } = this.props
-
     return (
-      <View
-        {...passthroughProps(props)}
-        aria-label={this.props.alt ? this.props.alt : undefined}
-        role={this.props.alt ? 'img' : undefined}
-        as={this.props.as}
-        elementRef={this.handleRef}
-        margin={this.props.margin}
-        css={styles?.avatar}
-        display={this.props.display}
-      >
-        <img // This is visually hidden and is here for loading purposes only
-          src={this.props.src}
-          css={this.props.styles?.loadImage}
-          alt={this.props.alt}
-          onLoad={this.handleImageLoaded}
-          aria-hidden="true"
+      <div>
+        <TimeSelect
+          data-testid="event-form-start-time"
+          renderLabel={'from'}
+          value={this.state.startTime}
+          placeholder={'Start Time'}
+          onChange={(e, { value }) => this.trySetStartTime(value)}
+          format="LT"
+          step={15}
+          allowNonStepInput={true}
+          timezone="Etc/UTC"
         />
-        {!this.state.loaded && this.renderContent()}
-      </View>
+        <TimeSelect
+          data-testid="event-form-end-time"
+          renderLabel={'To'}
+          value={this.state.endTime}
+          placeholder={'End Time'}
+          onChange={(e, { value }) => this.trySetEndTime(value)}
+          format="LT"
+          step={15}
+          allowNonStepInput={true}
+          timezone="Etc/UTC"
+        />
+      </div>
     )
   }
 }
