@@ -15,7 +15,7 @@ type: example
     console.log(options)
     return <span>
       <div>
-        <Button>Focus me!</Button>
+        <Button aria-labelledby="focusable-example1-button focusable-example1-tooltip" id="focusable-example1-button">Focus me!</Button>
       </div>
       {options.focused && (
         <ContextView
@@ -26,6 +26,8 @@ type: example
           padding="small"
           borderWidth="small"
           display="block"
+          id="focusable-example1-tooltip"
+          role="tooltip"
         >
           I&#39;m focused!
         </ContextView>
