@@ -107,7 +107,7 @@ const generateStyle = (
       display: 'grid',
       gridTemplateColumns: gridTemplateColumns,
       gridTemplateAreas: gridTemplateAreas,
-      [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint}))`]:
+      [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
           // for small screens use the stacked layout
           ...(isInlineLayout && {
@@ -117,7 +117,7 @@ const generateStyle = (
             gridTemplateColumns: '100%'
           })
         },
-      [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint}))`]:
+      [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
           ...(isInlineLayout &&
             inline && {
@@ -146,7 +146,7 @@ const generateStyle = (
       alignSelf: 'center',
       ...(isInlineLayout &&
         inline && {
-          [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint}))`]:
+          [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
             {
               justifySelf: 'start'
             }

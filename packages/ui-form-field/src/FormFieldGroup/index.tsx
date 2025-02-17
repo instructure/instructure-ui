@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement, AriaAttributes } from 'react'
+import { Component, Children, ReactElement } from 'react'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
@@ -49,7 +49,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    as: 'span',
+    as: 'fieldset',
     disabled: false,
     rowSpacing: 'medium',
     colSpacing: 'small',
@@ -140,33 +140,6 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
 
   render() {
     const { styles, makeStyles, isGroup, ...props } = this.props
-    const role = props.role ? props.role : 'group'
-    // This is quite ugly, but according to ARIA spec
-    // the `aria-invalid` prop can only be used with certain roles
-    // see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid#associated_roles
-    let ariaInvalid: AriaAttributes['aria-invalid'] = undefined
-    if (
-      this.invalid &&
-      [
-        'application',
-        'checkbox',
-        'combobox',
-        'gridcell',
-        'listbox',
-        'radiogroup',
-        'slider',
-        'spinbutton',
-        'textbox',
-        'tree',
-        'columnheader',
-        'rowheader',
-        'searchbox',
-        'switch',
-        'treegrid'
-      ].includes(role)
-    ) {
-      ariaInvalid = 'true'
-    }
     return (
       <FormFieldLayout
         {...omitProps(props, FormFieldGroup.allowedProps)}
@@ -175,8 +148,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
         label={props.description}
         aria-disabled={props.disabled ? 'true' : undefined}
-        aria-invalid={ariaInvalid}
-        role={role}
+        aria-invalid={this.invalid ? 'true' : undefined}
         elementRef={this.handleRef}
         isGroup={isGroup}
       >

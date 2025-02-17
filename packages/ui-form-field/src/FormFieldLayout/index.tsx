@@ -107,9 +107,13 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   renderLabel() {
     if (this.hasVisibleLabel) {
       if (this.elementType == 'fieldset') {
+        // `legend` has some very special buildt in CSS, this can only be reset
+        // this way https://stackoverflow.com/a/65866981/319473
         return (
-          <legend css={this.props.styles?.formFieldLabel}>
-            {this.props.label}
+          <legend style={{ display: 'contents' }}>
+            <div css={this.props.styles?.formFieldLabel}>
+              {this.props.label}
+            </div>
           </legend>
         )
       }

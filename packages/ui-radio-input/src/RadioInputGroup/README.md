@@ -60,7 +60,7 @@ render(<Example />)
 ```
 
 With the `layout` property set to `columns` the inputs will render horizontally at screens `medium` size
-and up (see [Grid](#Grid)).
+and up.
 
 ```js
 ---
