@@ -67,6 +67,7 @@ class FormField extends Component<FormFieldProps> {
         {...pickProps(this.props, FormFieldLayout.allowedProps)}
         label={this.props.label}
         vAlign={this.props.vAlign}
+        as="label"
         elementRef={this.handleRef}
       />
     )

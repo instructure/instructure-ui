@@ -25,23 +25,18 @@
 /** @jsx jsx */
 import { Component } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { Grid } from '@instructure/ui-grid'
 import {
   omitProps,
-  pickProps,
   getElementType,
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
-
-import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
-
 import generateStyle from './styles'
-
 import { propTypes, allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -49,7 +44,7 @@ parent: FormField
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 
@@ -103,12 +98,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     return getElementType(FormFieldLayout, this.props)
   }
 
-  get inlineContainerAndLabel() {
-    // Return if both the component container and label will display inline
-    return this.props.inline && this.props.layout === 'inline'
-  }
-
-  handleInputContainerRef = (node: HTMLSpanElement | null) => {
+  handleInputContainerRef = (node: HTMLElement | null) => {
     if (typeof this.props.inputContainerRef === 'function') {
       this.props.inputContainerRef(node)
     }
@@ -116,92 +106,67 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
   renderLabel() {
     if (this.hasVisibleLabel) {
+      if (this.elementType == 'fieldset') {
+        return (
+          <legend css={this.props.styles?.formFieldLabel}>
+            {this.props.label}
+          </legend>
+        )
+      }
       return (
-        <Grid.Col
-          textAlign={this.props.labelAlign}
-          width={this.inlineContainerAndLabel ? 'auto' : 3}
-        >
-          <FormFieldLabel id={this._labelId}>{this.props.label}</FormFieldLabel>
-        </Grid.Col>
+        <span css={this.props.styles?.formFieldLabel}>{this.props.label}</span>
       )
     } else if (this.props.label) {
+      // TODO check this case
       // needs to be wrapped because it needs an `id`
-      return <div id={this._labelId}>{this.props.label}</div>
+      return (
+        <div id={this._labelId} css={this.props.styles?.formFieldLabel}>
+          {this.props.label}
+        </div>
+      )
     } else return null
   }
 
   renderVisibleMessages() {
     return this.hasMessages ? (
-      <Grid.Row>
-        <Grid.Col
-          offset={this.inlineContainerAndLabel ? undefined : 3}
-          textAlign={this.inlineContainerAndLabel ? 'end' : undefined}
-        >
-          <FormFieldMessages
-            id={this._messagesId}
-            messages={this.props.messages}
-          />
-        </Grid.Col>
-      </Grid.Row>
+      <FormFieldMessages
+        id={this._messagesId}
+        messages={this.props.messages}
+        gridArea="messages"
+      />
     ) : null
   }
 
   render() {
+    // Should be `<label>` if it's a FormField, fieldset if it's a group
     const ElementType = this.elementType
 
     const { makeStyles, styles, messages, isGroup, ...props } = this.props
 
-    const { width, layout, children } = props
+    const { width, children } = props
 
-    const hasNewErrorMsg =
+    const hasNewErrorMsgAndIsGroup =
       !!messages?.find((m) => m.type === 'newError') && isGroup
 
-    let labelConnector = {}
-    if (ElementType == 'label') {
-      // this is a `<label>`, it needs to be connected to a control
-      // This is the case for e.g. `FormField`, `TextInput`, `NumberInput`
-      labelConnector = { htmlFor: this.props.id }
-    } else if (this.props.label) {
-      // This is a FormFieldGroup (span), it needs to be connected to its label
-      // This is the case for `FormFieldGroup`
-      labelConnector = { 'aria-labelledby': this._labelId }
-    }
     return (
       <ElementType
-        {...omitProps(props, [
-          ...FormFieldLayout.allowedProps,
-          ...Grid.allowedProps
-        ])}
+        {...omitProps(props, [...FormFieldLayout.allowedProps])}
         css={styles?.formFieldLayout}
         style={{ width }}
-        aria-describedby={this.hasMessages ? this._messagesId : undefined}
-        {...labelConnector}
         ref={this.handleRef}
       >
-        <Grid
-          rowSpacing="small"
-          colSpacing="small"
-          startAt={
-            layout === 'inline' && this.hasVisibleLabel ? 'medium' : null
-          }
-          {...pickProps(props, Grid.allowedProps)}
+        {this.renderLabel()}
+        {
+          hasNewErrorMsgAndIsGroup &&
+            this.renderVisibleMessages() /* TODO fix, never happens bc its buggy*/
+        }
+        <span
+          css={styles?.formFieldChildren}
+          ref={this.handleInputContainerRef}
         >
-          <Grid.Row>
-            {this.renderLabel()}
-            <Grid.Col
-              width={this.inlineContainerAndLabel ? 'auto' : undefined}
-              elementRef={this.handleInputContainerRef}
-            >
-              {hasNewErrorMsg && (
-                <div css={styles?.groupErrorMessage}>
-                  {this.renderVisibleMessages()}
-                </div>
-              )}
-              {children}
-            </Grid.Col>
-          </Grid.Row>
-          {!hasNewErrorMsg && this.renderVisibleMessages()}
-        </Grid>
+          {children}
+        </span>
+        {!hasNewErrorMsgAndIsGroup && this.renderVisibleMessages()}
       </ElementType>
     )
   }

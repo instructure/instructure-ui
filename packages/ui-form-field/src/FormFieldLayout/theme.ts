@@ -22,37 +22,37 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { FormFieldLayoutTheme } from '@instructure/shared-types'
 
-import type {
-  AsElementType,
-  PropValidators,
-  FormFieldLabelTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): FormFieldLayoutTheme => {
+  const { colors, typography, spacing, breakpoints, key: themeName } = theme
 
-type FormFieldLabelOwnProps = {
-  children: React.ReactNode
-  as?: AsElementType
+  const themeSpecificStyle: ThemeSpecificStyle<FormFieldLayoutTheme> = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables: FormFieldLayoutTheme = {
+    color: colors?.contrasts?.grey125125,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightBold,
+    fontSize: typography?.fontSizeMedium,
+    lineHeight: typography?.lineHeightFit,
+    inlinePadding: spacing?.xxSmall,
+    stackedOrInlineBreakpoint: breakpoints?.medium
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
 }
 
-type PropKeys = keyof FormFieldLabelOwnProps
-
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-type FormFieldLabelProps = FormFieldLabelOwnProps &
-  WithStyleProps<FormFieldLabelTheme, FormFieldLabelStyle> &
-  OtherHTMLAttributes<FormFieldLabelOwnProps>
-
-type FormFieldLabelStyle = ComponentStyle<'formFieldLabel'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  as: PropTypes.elementType
-}
-
-const allowedProps: AllowedPropKeys = ['as', 'children']
-
-export type { FormFieldLabelProps, FormFieldLabelStyle }
-export { propTypes, allowedProps }
+export default generateComponentTheme
