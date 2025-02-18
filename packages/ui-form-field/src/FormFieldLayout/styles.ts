@@ -22,9 +22,12 @@
  * SOFTWARE.
  */
 
-import type { FormFieldLayoutProps, FormFieldLayoutStyle } from './props'
+import type {
+  FormFieldLayoutProps,
+  FormFieldLayoutStyle,
+  FormFieldStyleProps
+} from './props'
 import type { FormFieldLayoutTheme } from '@instructure/shared-types'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 // TODO If the label is invisible the top gap is too large
 // TODO DateTimeInput renders empty messages, these leave too large gaps too
 /**
@@ -34,33 +37,34 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} styleProps
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: FormFieldLayoutTheme,
-  props: FormFieldLayoutProps
+  props: FormFieldLayoutProps,
+  styleProps: FormFieldStyleProps
 ): FormFieldLayoutStyle => {
-  const { inline, layout, label, messages } = props
-  const hasLabelContent = hasVisibleChildren(label)
-  const hasMessages = messages && messages.length > 0
+  const { inline, layout } = props
+  const { hasMessages, hasVisibleLabel } = styleProps
   // This is quite ugly, we should simplify it
   const inlineContainerAndLabel = layout === 'inline' && !inline
   const isInlineLayout = layout === 'inline'
   let gridTemplateColumns = '100%'
   // stacked layout
-  let gridTemplateAreas = `"label"
+  let gridTemplateAreas = `${hasVisibleLabel ? ' "label"' : ''}
                                   "controls"
                                   ${hasMessages ? ' "messages"' : ''}`
   if (isInlineLayout) {
-    gridTemplateColumns = `1fr 3fr`
-    gridTemplateAreas = `"label controls"
+    gridTemplateColumns = '1fr 3fr'
+    gridTemplateAreas = `${hasVisibleLabel ? ' "label controls"' : '. controls'}
                          ${hasMessages ? '"messages messages"' : ''}`
     if (inline) {
       gridTemplateColumns = 'auto 3fr'
     }
   }
   if (inlineContainerAndLabel) {
-    gridTemplateAreas = `"label controls"
+    gridTemplateAreas = `${hasVisibleLabel ? ' "label controls"' : '. controls'}
                          ${hasMessages ? ' ". messages"' : ''}`
   }
 
@@ -68,29 +72,27 @@ const generateStyle = (
     all: 'initial',
     display: 'block',
     gridArea: 'label',
-    ...(hasLabelContent && {
-      color: componentTheme.color,
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      fontSize: componentTheme.fontSize,
-      lineHeight: componentTheme.lineHeight,
-      margin: 0,
-      textAlign: inlineContainerAndLabel ? 'end' : 'start',
-      ...(isInlineLayout &&
-        inline && {
-          paddingRight: componentTheme.inlinePadding
-        }),
-      ...(inlineContainerAndLabel && {
-        paddingLeft: componentTheme.inlinePadding,
+    color: componentTheme.color,
+    fontFamily: componentTheme.fontFamily,
+    fontWeight: componentTheme.fontWeight,
+    fontSize: componentTheme.fontSize,
+    lineHeight: componentTheme.lineHeight,
+    margin: 0,
+    textAlign: inlineContainerAndLabel ? 'end' : 'start',
+    ...(isInlineLayout &&
+      inline && {
         paddingRight: componentTheme.inlinePadding
       }),
-      [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
-        {
-          ...(inlineContainerAndLabel && {
-            textAlign: 'start'
-          })
-        }
-    })
+    ...(inlineContainerAndLabel && {
+      paddingLeft: componentTheme.inlinePadding,
+      paddingRight: componentTheme.inlinePadding
+    }),
+    [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+      {
+        ...(inlineContainerAndLabel && {
+          textAlign: 'start'
+        })
+      }
   }
 
   return {
@@ -135,10 +137,12 @@ const generateStyle = (
     },
     formFieldLabel: {
       label: 'formFieldLayout__label',
-      ...labelStyles,
-      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
-      '&:is(label)': labelStyles,
-      '&:-webkit-any(label)': labelStyles
+      ...(hasVisibleLabel && {
+        ...labelStyles,
+        // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+        '&:is(label)': labelStyles,
+        '&:-webkit-any(label)': labelStyles
+      })
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',

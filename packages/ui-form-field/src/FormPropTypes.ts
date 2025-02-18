@@ -40,6 +40,10 @@ type FormMessageType =
   | 'hint'
   | 'success'
   | 'screenreader-only'
+// TODO it will be easier if this would be just a string
+/**
+ * The text to display in the form message
+ */
 type FormMessageChild = React.ReactNode
 
 /**

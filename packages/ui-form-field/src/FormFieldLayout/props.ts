@@ -131,7 +131,13 @@ const allowedProps: AllowedPropKeys = [
   //'vAlign'
 ]
 
+type FormFieldStyleProps = {
+  hasMessages: boolean
+  hasVisibleLabel: boolean
+}
+
 export type {
+  FormFieldStyleProps,
   FormFieldLayoutProps,
   FormFieldLayoutStyle,
   FormFieldLayoutOwnProps

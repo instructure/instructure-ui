@@ -34,7 +34,7 @@ import {
 import { withStyle, jsx } from '@instructure/emotion'
 import { FormFieldMessages } from '../FormFieldMessages'
 import generateStyle from './styles'
-import { propTypes, allowedProps } from './props'
+import { propTypes, allowedProps, FormFieldStyleProps } from './props'
 import type { FormFieldLayoutProps } from './props'
 import generateComponentTheme from './theme'
 
@@ -79,19 +79,39 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps())
+  }
+
+  makeStyleProps = (): FormFieldStyleProps => {
+    return {
+      hasMessages: this.hasMessages,
+      hasVisibleLabel: this.hasVisibleLabel
+    }
   }
 
   get hasVisibleLabel() {
-    return this.props.label && hasVisibleChildren(this.props.label)
+    return this.props.label ? hasVisibleChildren(this.props.label) : false
   }
 
   get hasMessages() {
-    return this.props.messages && this.props.messages.length > 0
+    if (!this.props.messages || this.props.messages.length == 0) {
+      return false
+    }
+    for (const msg of this.props.messages) {
+      if (msg.text) {
+        if (typeof msg.text === 'string') {
+          return msg.text.length > 0
+        }
+        // this is more complicated (e.g. an array, a React component,...)
+        // but we don't try to optimize here for these cases
+        return true
+      }
+    }
+    return false
   }
 
   get elementType() {
@@ -107,13 +127,13 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   renderLabel() {
     if (this.hasVisibleLabel) {
       if (this.elementType == 'fieldset') {
-        // `legend` has some very special buildt in CSS, this can only be reset
+        // `legend` has some special built in CSS, this can only be reset
         // this way https://stackoverflow.com/a/65866981/319473
         return (
           <legend style={{ display: 'contents' }}>
-            <div css={this.props.styles?.formFieldLabel}>
+            <span css={this.props.styles?.formFieldLabel}>
               {this.props.label}
-            </div>
+            </span>
           </legend>
         )
       }
@@ -121,7 +141,13 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         <span css={this.props.styles?.formFieldLabel}>{this.props.label}</span>
       )
     } else if (this.props.label) {
-      // TODO check this case
+      if (this.elementType == 'fieldset') {
+        return (
+          <legend id={this._labelId} style={{ display: 'contents' }}>
+            {this.props.label}
+          </legend>
+        )
+      }
       // needs to be wrapped because it needs an `id`
       return (
         <div id={this._labelId} css={this.props.styles?.formFieldLabel}>
