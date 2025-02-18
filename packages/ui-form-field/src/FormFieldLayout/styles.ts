@@ -115,6 +115,7 @@ const generateStyle = (
       opacity: 'inherit',
       display: 'grid',
       alignItems: alignItems,
+      verticalAlign: 'middle',
       gridTemplateColumns: gridTemplateColumns,
       gridTemplateAreas: gridTemplateAreas,
       [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
