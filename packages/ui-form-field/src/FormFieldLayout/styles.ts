@@ -28,8 +28,7 @@ import type {
   FormFieldStyleProps
 } from './props'
 import type { FormFieldLayoutTheme } from '@instructure/shared-types'
-// TODO If the label is invisible the top gap is too large
-// TODO DateTimeInput renders empty messages, these leave too large gaps too
+
 /**
  * ---
  * private: true
@@ -45,7 +44,7 @@ const generateStyle = (
   props: FormFieldLayoutProps,
   styleProps: FormFieldStyleProps
 ): FormFieldLayoutStyle => {
-  const { inline, layout } = props
+  const { inline, layout, vAlign } = props
   const { hasMessages, hasVisibleLabel } = styleProps
   // This is quite ugly, we should simplify it
   const inlineContainerAndLabel = layout === 'inline' && !inline
@@ -77,7 +76,7 @@ const generateStyle = (
     fontWeight: componentTheme.fontWeight,
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
-    margin: 0,
+    margin: '0 0 0.75rem 0',
     textAlign: inlineContainerAndLabel ? 'end' : 'start',
     ...(isInlineLayout &&
       inline && {
@@ -95,6 +94,14 @@ const generateStyle = (
       }
   }
 
+  let alignItems = 'start'
+  if (vAlign == 'top') {
+    alignItems = 'start'
+  } else if (vAlign == 'middle') {
+    alignItems = 'center'
+  } else if (vAlign == 'bottom') {
+    alignItems = 'end'
+  }
   return {
     formFieldLayout: {
       label: 'formFieldLayout',
@@ -107,6 +114,7 @@ const generateStyle = (
       textAlign: 'start',
       opacity: 'inherit',
       display: 'grid',
+      alignItems: alignItems,
       gridTemplateColumns: gridTemplateColumns,
       gridTemplateAreas: gridTemplateAreas,
       [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
@@ -119,19 +127,10 @@ const generateStyle = (
             gridTemplateColumns: '100%'
           })
         },
-      [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
-        {
-          ...(isInlineLayout &&
-            inline && {
-              textAlign: 'end' // TODO this is a bug, remove it!
-            })
-        },
-      rowGap: '0.75rem',
       columnGap: '0.375rem',
       width: '100%',
       ...(inline && {
         display: 'inline-grid',
-        verticalAlign: 'middle',
         width: 'auto'
       })
     },
@@ -147,7 +146,7 @@ const generateStyle = (
     formFieldChildren: {
       label: 'formFieldLayout__children',
       gridArea: 'controls',
-      alignSelf: 'center',
+      ...(hasMessages && { marginBottom: '0.75rem' }),
       ...(isInlineLayout &&
         inline && {
           [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:

@@ -68,6 +68,10 @@ type FormFieldLayoutOwnProps = {
    */
   layout?: 'stacked' | 'inline'
   labelAlign?: 'start' | 'end'
+  /**
+   * The vertical alignment of the label and the controls.
+   * "top" by default
+   */
   vAlign?: 'top' | 'middle' | 'bottom'
   width?: string
   /**

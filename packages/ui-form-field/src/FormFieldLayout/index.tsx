@@ -149,11 +149,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         )
       }
       // needs to be wrapped because it needs an `id`
-      return (
-        <div id={this._labelId} css={this.props.styles?.formFieldLabel}>
-          {this.props.label}
-        </div>
-      )
+      return <div id={this._labelId}>{this.props.label}</div>
     } else return null
   }
 
@@ -177,7 +173,6 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
     const hasNewErrorMsgAndIsGroup =
       !!messages?.find((m) => m.type === 'newError') && isGroup
-
     return (
       <ElementType
         {...omitProps(props, [...FormFieldLayout.allowedProps])}

@@ -33,5 +33,11 @@ type: example
     <TextInput id="_foo124"/>
   </FormField>
   test
+  <hr/>
+  <FormField id="_foo121" label={<ScreenReaderContent>hidden text</ScreenReaderContent>} width="400px" layout="stacked">
+    <TextInput id="_foo121" />
+  </FormField>
+  test
+  <hr/>
 </div>
 ```
