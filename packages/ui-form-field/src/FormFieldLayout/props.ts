@@ -67,6 +67,9 @@ type FormFieldLayoutOwnProps = {
    * container is to the right/left (depending on text direction)
    */
   layout?: 'stacked' | 'inline'
+  /**
+   * The horizontal alignment of the label
+   */
   labelAlign?: 'start' | 'end'
   /**
    * The vertical alignment of the label and the controls.

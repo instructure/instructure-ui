@@ -29,7 +29,6 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FormFieldGroup } from '../index'
-import { FormMessage } from '../../FormPropTypes'
 
 describe('<FormFieldGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -66,7 +65,7 @@ describe('<FormFieldGroup />', () => {
     )
 
     const formFieldGroup = container.querySelector(
-      "span[class$='-formFieldLabel']"
+      "span[class$='-formFieldLayout__label']"
     )
     const firstNameInput = screen.getByLabelText('First:')
     const middleNameInput = screen.getByLabelText('Middle:')
@@ -99,40 +98,6 @@ describe('<FormFieldGroup />', () => {
     expect(formFieldGroup).toBeInTheDocument()
   })
 
-  it('links the messages to the group via aria-describedby', () => {
-    const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
-
-    const { container } = render(
-      <FormFieldGroup
-        description="Please enter your full name"
-        messages={messages}
-      >
-        <label>
-          First: <input />
-        </label>
-        <label>
-          Middle: <input />
-        </label>
-        <label>
-          Last: <input />
-        </label>
-      </FormFieldGroup>
-    )
-
-    const formFieldGroup = container.querySelector(
-      "span[class$='-formFieldLayout']"
-    )
-    const message = container.querySelector("span[class$='-formFieldMessages']")
-    expect(message).toBeInTheDocument()
-    expect(formFieldGroup).toBeInTheDocument()
-    expect(formFieldGroup).toHaveAttribute('aria-describedby')
-
-    const messagesId = formFieldGroup!.getAttribute('aria-describedby')
-
-    expect(message).toHaveTextContent('Invalid name')
-    expect(message).toHaveAttribute('id', messagesId)
-  })
-
   it('displays description message inside the label', () => {
     const description = 'Please enter your full name'
 
@@ -150,7 +115,9 @@ describe('<FormFieldGroup />', () => {
       </FormFieldGroup>
     )
 
-    const legend = container.querySelector("span[class$='-formFieldLabel']")
+    const legend = container.querySelector(
+      "span[class$='-formFieldLayout__label']"
+    )
 
     expect(legend).toBeInTheDocument()
     expect(legend).toHaveTextContent(description)

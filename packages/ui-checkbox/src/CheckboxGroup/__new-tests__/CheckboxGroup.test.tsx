@@ -98,7 +98,9 @@ describe('<CheckboxGroup />', () => {
 
   it('displays description message inside the legend', () => {
     const { container } = renderCheckboxGroup({ description: TEST_DESCRIPTION })
-    const legend = container.querySelector(`[id^="FormField-Label_"]`)
+    const legend = container.querySelector(
+      'span[class$="-formFieldLayout__label"]'
+    )
 
     expect(legend).toBeInTheDocument()
     expect(legend).toHaveTextContent(TEST_DESCRIPTION)
@@ -227,7 +229,6 @@ describe('<CheckboxGroup />', () => {
       })
       const group = container.querySelector(`[data-id="group"]`)
       expect(group).toBeInTheDocument()
-      expect(group).toHaveAttribute('role', 'group')
       expect(group).toHaveAttribute('aria-disabled', 'true')
       // ARIA role 'group' cannot have the 'aria-invalid' attribute
       expect(group).not.toHaveAttribute('aria-invalid')

@@ -173,6 +173,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
     const hasNewErrorMsgAndIsGroup =
       !!messages?.find((m) => m.type === 'newError') && isGroup
+    // TODO use aria-errormessage here https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-errormessage
     return (
       <ElementType
         {...omitProps(props, [...FormFieldLayout.allowedProps])}

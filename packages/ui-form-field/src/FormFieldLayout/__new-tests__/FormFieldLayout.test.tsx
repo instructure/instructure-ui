@@ -56,7 +56,7 @@ describe('<FormFieldLayout />', () => {
       "label[class$='-formFieldLayout']"
     )
     const formFieldLabel = container.querySelector(
-      "span[class$='-formFieldLabel']"
+      "span[class$='-formFieldLayout__label']"
     )
 
     expect(formFieldLayout).toBeInTheDocument()

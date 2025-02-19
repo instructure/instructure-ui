@@ -44,7 +44,7 @@ const generateStyle = (
   props: FormFieldLayoutProps,
   styleProps: FormFieldStyleProps
 ): FormFieldLayoutStyle => {
-  const { inline, layout, vAlign } = props
+  const { inline, layout, vAlign, labelAlign } = props
   const { hasMessages, hasVisibleLabel } = styleProps
   // This is quite ugly, we should simplify it
   const inlineContainerAndLabel = layout === 'inline' && !inline
@@ -77,7 +77,7 @@ const generateStyle = (
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
     margin: '0 0 0.75rem 0',
-    textAlign: inlineContainerAndLabel ? 'end' : 'start',
+    textAlign: labelAlign, //TODO inlineContainerAndLabel ? 'end' : 'start',
     ...(isInlineLayout &&
       inline && {
         paddingRight: componentTheme.inlinePadding
@@ -85,13 +85,14 @@ const generateStyle = (
     ...(inlineContainerAndLabel && {
       paddingLeft: componentTheme.inlinePadding,
       paddingRight: componentTheme.inlinePadding
-    }),
-    [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
-      {
-        ...(inlineContainerAndLabel && {
-          textAlign: 'start'
-        })
-      }
+    })
+    // TODO figure this out
+    //[`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+    //  {
+    //    ...(inlineContainerAndLabel && {
+    //      textAlign: 'start'
+    //    })
+    //  }
   }
 
   let alignItems = 'start'
@@ -115,7 +116,7 @@ const generateStyle = (
       opacity: 'inherit',
       display: 'grid',
       alignItems: alignItems,
-      verticalAlign: 'middle',
+      verticalAlign: 'middle', // removes margin in inline layouts
       gridTemplateColumns: gridTemplateColumns,
       gridTemplateAreas: gridTemplateAreas,
       [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:

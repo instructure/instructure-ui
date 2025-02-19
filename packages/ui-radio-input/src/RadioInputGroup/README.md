@@ -34,7 +34,7 @@ render(<Example />)
 ```
 
 With the `layout` prop set to `inline` to render the description in its own column at screens `medium` size
-and up (see [Grid](#Grid)).
+and up.
 
 ```js
 ---
