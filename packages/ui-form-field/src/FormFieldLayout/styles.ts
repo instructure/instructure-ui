@@ -77,7 +77,7 @@ const generateStyle = (
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
     margin: '0 0 0.75rem 0',
-    textAlign: labelAlign, //TODO inlineContainerAndLabel ? 'end' : 'start',
+    textAlign: inlineContainerAndLabel ? 'end' : 'start',
     ...(isInlineLayout &&
       inline && {
         paddingRight: componentTheme.inlinePadding
@@ -85,14 +85,13 @@ const generateStyle = (
     ...(inlineContainerAndLabel && {
       paddingLeft: componentTheme.inlinePadding,
       paddingRight: componentTheme.inlinePadding
-    })
-    // TODO figure this out
-    //[`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
-    //  {
-    //    ...(inlineContainerAndLabel && {
-    //      textAlign: 'start'
-    //    })
-    //  }
+    }),
+    [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+      {
+        ...(isInlineLayout && {
+          textAlign: labelAlign
+        })
+      }
   }
 
   let alignItems = 'start'

@@ -68,7 +68,7 @@ type FormFieldLayoutOwnProps = {
    */
   layout?: 'stacked' | 'inline'
   /**
-   * The horizontal alignment of the label
+   * The horizontal alignment of the label. Only works in `inline` layout
    */
   labelAlign?: 'start' | 'end'
   /**
