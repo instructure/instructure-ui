@@ -29,6 +29,35 @@ import type {
 } from './props'
 import type { FormFieldLayoutTheme } from '@instructure/shared-types'
 
+const generateGridLayout = (
+  isInlineLayout: boolean,
+  hasNewErrorMsgAndIsGroup: boolean,
+  hasVisibleLabel: boolean,
+  hasMessages: boolean
+) => {
+  if (isInlineLayout) {
+    if (hasNewErrorMsgAndIsGroup) {
+      if (hasMessages) {
+        return `${hasVisibleLabel ? ' "label messages"' : '. messages'}
+                                      ". controls"`
+      } else {
+        return `${hasVisibleLabel ? ' "label controls"' : '. controls'}`
+      }
+    } else {
+      return `${hasVisibleLabel ? ' "label controls"' : '. controls'}
+              ${hasMessages ? ' ". messages"' : ''}`
+    }
+  }
+  if (hasNewErrorMsgAndIsGroup) {
+    return `${hasVisibleLabel ? ' "label"' : ''}
+            ${hasMessages ? ' "messages"' : ''}
+            "controls"`
+  } else {
+    return `${hasVisibleLabel ? ' "label"' : ''}
+            "controls"
+            ${hasMessages ? ' "messages"' : ''}`
+  }
+}
 /**
  * ---
  * private: true
@@ -45,28 +74,23 @@ const generateStyle = (
   styleProps: FormFieldStyleProps
 ): FormFieldLayoutStyle => {
   const { inline, layout, vAlign, labelAlign } = props
-  const { hasMessages, hasVisibleLabel } = styleProps
-  // This is quite ugly, we should simplify it
-  const inlineContainerAndLabel = layout === 'inline' && !inline
+  const { hasMessages, hasVisibleLabel, hasNewErrorMsgAndIsGroup } = styleProps
   const isInlineLayout = layout === 'inline'
-  let gridTemplateColumns = '100%'
-  // stacked layout
-  let gridTemplateAreas = `${hasVisibleLabel ? ' "label"' : ''}
-                                  "controls"
-                                  ${hasMessages ? ' "messages"' : ''}`
+  const inlineContainerAndLabel = isInlineLayout && !inline
+  // This is quite ugly, we should simplify it
+  const gridTemplateAreas = generateGridLayout(
+    isInlineLayout,
+    hasNewErrorMsgAndIsGroup,
+    hasVisibleLabel,
+    hasMessages
+  )
+  let gridTemplateColumns = '100%' // stacked layout, could be a Flex
   if (isInlineLayout) {
     gridTemplateColumns = '1fr 3fr'
-    gridTemplateAreas = `${hasVisibleLabel ? ' "label controls"' : '. controls'}
-                         ${hasMessages ? '"messages messages"' : ''}`
     if (inline) {
       gridTemplateColumns = 'auto 3fr'
     }
   }
-  if (inlineContainerAndLabel) {
-    gridTemplateAreas = `${hasVisibleLabel ? ' "label controls"' : '. controls'}
-                         ${hasMessages ? ' ". messages"' : ''}`
-  }
-
   const labelStyles = {
     all: 'initial',
     display: 'block',
@@ -77,7 +101,6 @@ const generateStyle = (
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
     margin: '0 0 0.75rem 0',
-    textAlign: inlineContainerAndLabel ? 'end' : 'start',
     ...(isInlineLayout &&
       inline && {
         paddingRight: componentTheme.inlinePadding
@@ -88,9 +111,7 @@ const generateStyle = (
     }),
     [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
       {
-        ...(isInlineLayout && {
-          textAlign: labelAlign
-        })
+        ...(isInlineLayout && { textAlign: labelAlign })
       }
   }
 
@@ -121,12 +142,13 @@ const generateStyle = (
       [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
           // for small screens use the stacked layout
-          ...(isInlineLayout && {
-            gridTemplateAreas: `"label"
-                              "controls"
-                              ${hasMessages ? '"messages"' : ''}`,
-            gridTemplateColumns: '100%'
-          })
+          gridTemplateColumns: '100%',
+          gridTemplateAreas: generateGridLayout(
+            false,
+            hasNewErrorMsgAndIsGroup,
+            hasVisibleLabel,
+            hasMessages
+          )
         },
       columnGap: '0.375rem',
       width: '100%',

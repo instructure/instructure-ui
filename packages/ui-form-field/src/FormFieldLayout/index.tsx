@@ -87,9 +87,14 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   }
 
   makeStyleProps = (): FormFieldStyleProps => {
+    const hasNewErrorMsgAndIsGroup =
+      !!this.props.messages?.find((m) => m.type === 'newError') &&
+      !!this.props.isGroup
     return {
       hasMessages: this.hasMessages,
-      hasVisibleLabel: this.hasVisibleLabel
+      hasVisibleLabel: this.hasVisibleLabel,
+      // if true render error message above the controls (and below the label)
+      hasNewErrorMsgAndIsGroup: hasNewErrorMsgAndIsGroup
     }
   }
 
@@ -182,10 +187,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         ref={this.handleRef}
       >
         {this.renderLabel()}
-        {
-          hasNewErrorMsgAndIsGroup &&
-            this.renderVisibleMessages() /* TODO fix, never happens bc its buggy*/
-        }
+        {hasNewErrorMsgAndIsGroup && this.renderVisibleMessages()}
         <span
           css={styles?.formFieldChildren}
           ref={this.handleInputContainerRef}

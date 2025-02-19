@@ -53,7 +53,8 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     disabled: false,
     rowSpacing: 'medium',
     colSpacing: 'small',
-    vAlign: 'middle'
+    vAlign: 'middle',
+    isGroup: true
   }
 
   ref: Element | null = null

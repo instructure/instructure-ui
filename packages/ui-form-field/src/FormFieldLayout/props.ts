@@ -141,6 +141,7 @@ const allowedProps: AllowedPropKeys = [
 type FormFieldStyleProps = {
   hasMessages: boolean
   hasVisibleLabel: boolean
+  hasNewErrorMsgAndIsGroup: boolean
 }
 
 export type {
