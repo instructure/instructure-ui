@@ -48,6 +48,7 @@ const generateGridLayout = (
               ${hasMessages ? ' ". messages"' : ''}`
     }
   }
+  // stacked layout -- in this case we could use a simple `Flex`
   if (hasNewErrorMsgAndIsGroup) {
     return `${hasVisibleLabel ? ' "label"' : ''}
             ${hasMessages ? ' "messages"' : ''}
@@ -76,7 +77,6 @@ const generateStyle = (
   const { inline, layout, vAlign, labelAlign } = props
   const { hasMessages, hasVisibleLabel, hasNewErrorMsgAndIsGroup } = styleProps
   const isInlineLayout = layout === 'inline'
-  const inlineContainerAndLabel = isInlineLayout && !inline
   // This is quite ugly, we should simplify it
   const gridTemplateAreas = generateGridLayout(
     isInlineLayout,
@@ -84,7 +84,7 @@ const generateStyle = (
     hasVisibleLabel,
     hasMessages
   )
-  let gridTemplateColumns = '100%' // stacked layout, could be a Flex
+  let gridTemplateColumns = '100%' // stacked layout
   if (isInlineLayout) {
     gridTemplateColumns = '1fr 3fr'
     if (inline) {
@@ -101,18 +101,15 @@ const generateStyle = (
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
     margin: '0 0 0.75rem 0',
-    ...(isInlineLayout &&
-      inline && {
-        paddingRight: componentTheme.inlinePadding
-      }),
-    ...(inlineContainerAndLabel && {
-      paddingLeft: componentTheme.inlinePadding,
-      paddingRight: componentTheme.inlinePadding
-    }),
-    [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
-      {
-        ...(isInlineLayout && { textAlign: labelAlign })
-      }
+    ...(isInlineLayout && {
+      // when inline add a small padding between the label and the control
+      paddingRight: componentTheme.inlinePadding,
+      // and use the horizontal alignment prop
+      [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+        {
+          textAlign: labelAlign
+        }
+    })
   }
 
   let alignItems = 'start'
@@ -169,7 +166,10 @@ const generateStyle = (
     formFieldChildren: {
       label: 'formFieldLayout__children',
       gridArea: 'controls',
-      ...(hasMessages && { marginBottom: '0.75rem' }),
+      // add a small margin between the message and the controls
+      ...(hasMessages && hasNewErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
+      ...(hasMessages &&
+        !hasNewErrorMsgAndIsGroup && { marginBottom: '0.75rem' }),
       ...(isInlineLayout &&
         inline && {
           [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
