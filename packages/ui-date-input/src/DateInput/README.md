@@ -2,7 +2,7 @@
 describes: DateInput
 ---
 
-> _Note:_ you can now try the updated (but still experimental) [`DateInput2`](/#DateInput2) which is easier to configure for developers, has a better UX, better accessibility features and a year picker. We recommend using that instead of `DateInput` which will be deprecated in the future.
+> _Note:_ we recommend to update to the new [`DateInput2`](/#DateInput2) which is easier to configure for developers, has a better UX, better accessibility features and a year picker. `DateInput` will be deprecated in the future.
 
 The `DateInput` component provides a visual interface for inputting date data.
 
