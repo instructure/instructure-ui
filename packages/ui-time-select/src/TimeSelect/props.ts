@@ -248,7 +248,7 @@ type TimeSelectOwnProps = {
    * Whether to allow for the user to clear the selected option in the input field.
    * If `false`, the input field will return the last selected option after the input is cleared and loses focus.
    */
-  allowClearingSelection: boolean
+  allowClearingSelection?: boolean
 }
 
 const propTypes: PropValidators<PropKeys> = {
