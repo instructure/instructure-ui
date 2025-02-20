@@ -170,6 +170,13 @@ type DateInput2OwnProps = {
    * Custom icon for the icon button opening the picker.
    */
   renderCalendarIcon?: Renderable
+
+  /*
+   * Specify which date(s) will be shown as disabled in the calendar.
+   * You can either supply an array of ISO8601 timeDate strings or
+   * a function that will be called for each date shown in the calendar.
+   */
+  disabledDates?: string[] | ((isoDateToCheck: string) => boolean)
 }
 
 type PropKeys = keyof DateInput2OwnProps
@@ -201,7 +208,8 @@ const propTypes: PropValidators<PropKeys> = {
   withYearPicker: PropTypes.object,
   dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onRequestValidateDate: PropTypes.func,
-  renderCalendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  renderCalendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func])
 }
 
 export type { DateInput2Props }
