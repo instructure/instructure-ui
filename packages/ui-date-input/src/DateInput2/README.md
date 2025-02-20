@@ -305,3 +305,38 @@ render(<Example />)
 ### Date format hint
 
 If the `placeholder` property is undefined it will display a hint for the date format (like `DD/MM/YYYY`). Usually it is recommended to leave it as it is for a better user experience.
+
+### Disabling dates
+
+You can use the `disabledDates` prop to disable specific dates. It accepts either an array of ISO8601 date strings or a function. Keep in mind that this will only disable the dates in the calendar and does not prevent the user the enter them into the input field. To validate those values please use the `onRequestValidateDate` prop.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [inputValue, setInputValue] = useState('2/5/2025')
+  const [dateString, setDateString] = useState('')
+  return (
+    <DateInput2
+      renderLabel="Choose a date"
+      disabledDates={['2025-02-11', '2025-02-12', '2025-02-13']}
+      screenReaderLabels={{
+        calendarIcon: 'Calendar',
+        nextMonthButton: 'Next month',
+        prevMonthButton: 'Previous month'
+      }}
+      value={inputValue}
+      locale="en-us"
+      width="20rem"
+      onChange={(e, inputValue, dateString) => {
+        setInputValue(inputValue)
+        setDateString(dateString)
+      }}
+      invalidDateErrorMessage="Invalid date"
+    />
+  )
+}
+
+render(<Example />)
+```

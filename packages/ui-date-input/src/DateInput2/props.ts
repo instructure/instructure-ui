@@ -175,6 +175,17 @@ type DateInput2OwnProps = {
    * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
    */
   margin?: Spacing
+  /*
+   * Specify which date(s) will be shown as disabled in the calendar.
+   * You can either supply an array of ISO8601 timeDate strings or
+   * a function that will be called for each date shown in the calendar.
+   */
+  disabledDates?: string[] | ((isoDateToCheck: string) => boolean)
+
+  /**
+   * A function that provides a reference to the inner input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
 type PropKeys = keyof DateInput2OwnProps
@@ -207,7 +218,9 @@ const propTypes: PropValidators<PropKeys> = {
   dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onRequestValidateDate: PropTypes.func,
   renderCalendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  margin: PropTypes.string
+  margin: PropTypes.string,
+  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+  inputRef: PropTypes.func
 }
 
 export type { DateInput2Props }

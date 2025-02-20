@@ -131,8 +131,6 @@ function parseLocaleDate(
 ---
 category: components
 ---
-
-@module experimental
 **/
 const DateInput2 = ({
   renderLabel,
@@ -152,8 +150,10 @@ const DateInput2 = ({
   placeholder,
   dateFormat,
   onRequestValidateDate,
+  disabledDates,
   renderCalendarIcon,
   margin,
+  inputRef,
   ...rest
 }: DateInput2Props) => {
   const localeContext = useContext(ApplyLocaleContext)
@@ -275,9 +275,11 @@ const DateInput2 = ({
   }
 
   const selectedDate = parseDate(value)[1]
+
   return (
     <TextInput
       {...passthroughProps(rest)}
+      inputRef={inputRef}
       renderLabel={renderLabel}
       onChange={handleInputChange}
       onBlur={handleBlur}
@@ -318,6 +320,7 @@ const DateInput2 = ({
             withYearPicker={withYearPicker}
             onDateSelected={handleDateSelected}
             selectedDate={selectedDate}
+            disabledDates={disabledDates}
             visibleMonth={selectedDate}
             locale={getLocale()}
             timezone={getTimezone()}
