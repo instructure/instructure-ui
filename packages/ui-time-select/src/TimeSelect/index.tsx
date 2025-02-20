@@ -341,7 +341,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
           ? this.state.selectedOptionId
           : undefined,
         fireChangeOnBlur: undefined,
-        isInputCleared: this.props.allowClearingSelection && value === ''
+        isInputCleared: this.props.allowClearingSelection! && value === ''
       })
     }
     this.setState({
