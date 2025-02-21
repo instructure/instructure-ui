@@ -28,19 +28,20 @@ import { jsx, useTheme } from '@instructure/emotion'
 
 import { generateStyles } from './styles'
 import { Link } from '@instructure/ui-link'
+import { SubNavProps, MenuItem } from './props'
 
 /**
 ---
 category: components
 ---
  **/
-const SubNav = ({ menuItems, styles }: any) => {
+const SubNav = ({ menuItems, styles }: SubNavProps) => {
   return (
     <div style={styles.container}>
-      {menuItems.map((item: any) => (
-        <div style={styles.linkContainer(item)} key={item}>
+      {menuItems.map((item: MenuItem) => (
+        <div style={styles.linkContainer(item)} key={item.title}>
           <Link
-            key={item}
+            key={item.title}
             href={item.href}
             themeOverride={styles.link(item)}
             isWithinText={false}
