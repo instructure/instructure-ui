@@ -29,6 +29,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FormFieldGroup } from '../index'
+import { FormMessage } from '../../FormPropTypes'
 
 describe('<FormFieldGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -96,6 +97,41 @@ describe('<FormFieldGroup />', () => {
     const formFieldGroup = container.querySelector('label')
 
     expect(formFieldGroup).toBeInTheDocument()
+  })
+
+  it('links the messages to the fieldset via aria-describedby', () => {
+    const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
+
+    const { container } = render(
+      <FormFieldGroup
+        description="Please enter your full name"
+        messages={messages}
+      >
+        <label>
+          First: <input />
+        </label>
+        <label>
+          Middle: <input />
+        </label>
+        <label>
+          Last: <input />
+        </label>
+      </FormFieldGroup>
+    )
+
+    const formFieldGroup = container.querySelector(
+      "fieldset[class$='-formFieldLayout']"
+    )
+    const message = container.querySelector("span[id^='FormFieldLayout_']")
+
+    expect(message).toBeInTheDocument()
+    expect(formFieldGroup).toBeInTheDocument()
+    expect(formFieldGroup).toHaveAttribute('aria-describedby')
+
+    const messagesId = formFieldGroup!.getAttribute('aria-describedby')
+
+    expect(message).toHaveTextContent('Invalid name')
+    expect(message).toHaveAttribute('id', messagesId)
   })
 
   it('displays description message inside the label', () => {

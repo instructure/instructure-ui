@@ -144,6 +144,8 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     // This is quite ugly, but according to ARIA spec the `aria-invalid` prop
     // can only be used with certain roles see
     // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid#associated_roles
+    // `aria-invalid` is put on in FormFieldLayout because the error message
+    // DOM part gets there its ID.
     let ariaInvalid: AriaAttributes['aria-invalid'] = undefined
     if (
       this.props.role &&

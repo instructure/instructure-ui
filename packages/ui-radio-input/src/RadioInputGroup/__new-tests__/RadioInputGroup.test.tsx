@@ -248,5 +248,6 @@ describe('<RadioInputGroup />', () => {
     expect(group).toHaveAttribute('role', 'radiogroup')
     expect(group).toHaveAttribute('aria-disabled', 'true')
     expect(group).toHaveAttribute('aria-invalid', 'true')
+    expect(group).toHaveAttribute('aria-errormessage', expect.anything())
   })
 })
