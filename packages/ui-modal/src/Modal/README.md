@@ -1180,6 +1180,7 @@ type: embed
     <Figure.Item>When a user closes a modal, focus must return to a logical place within the page. This is usually the element that triggered opening the modal</Figure.Item>
     <Figure.Item>Modals should be able to be closed by clicking away, esc key and/or a close button</Figure.Item>
     <Figure.Item>We recommend that modals begin with a heading (typically H2)</Figure.Item>
+    <Figure.Item>The Modal's header currently becomes non-sticky when the window height is too small, improving navigation of the Modal.Body, e.g., at higher zoom levels</Figure.Item>
   </Figure>
 </Guidelines>
 ```

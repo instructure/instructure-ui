@@ -189,11 +189,14 @@ type ModalProps = ModalOwnProps &
   WithStyleProps<ModalTheme, ModalStyle> &
   OtherHTMLAttributes<ModalOwnProps>
 
-type ModalStyle = ComponentStyle<'modal' | 'constrainContext'>
+type ModalStyle = ComponentStyle<
+  'modal' | 'constrainContext' | 'joinedHeaderAndBody'
+>
 
 type ModalState = {
   transitioning: boolean
   open: boolean
+  windowHeight: number
 }
 
 const propTypes: PropValidators<PropKeys> = {
