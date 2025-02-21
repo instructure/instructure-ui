@@ -25,6 +25,7 @@
 import { Spacing } from '@instructure/shared-types'
 
 const spacing: Spacing = Object.freeze({
+  // legacy spacing tokens:
   xxxSmall: '0.125rem', // 2px
   xxSmall: '0.375rem', // 6px
   xSmall: '0.5rem', // 8px
@@ -33,7 +34,37 @@ const spacing: Spacing = Object.freeze({
   medium: '1.5rem', // 24px
   large: '2.25rem', // 36px
   xLarge: '3rem', // 48px
-  xxLarge: '3.75rem' // 60px
+  xxLarge: '3.75rem', // 60px
+
+  // new spacing tokens:
+  space0: '0rem', // 0px
+  space2: '0.125rem', // 2px
+  space4: '0.25rem', // 4px
+  space8: '0.5rem', // 8px
+  space12: '0.75rem', // 12px
+  space16: '1rem', // 16px
+  space24: '1.5rem', // 24px
+  space36: '2.25rem', // 36px
+  space48: '3rem', // 48px
+  space60: '3.75rem', // 60px
+  sections: '2.25rem', // 36px
+  sectionElrements: '1.5em', // 24px
+  trayElrements: '1.5em', // 24px
+  modalElrements: '1.5em', // 24px
+  moduleElrements: '1em', // 16px
+  paddingCardLarge: '1.5rem', // 24px
+  paddingCardMedium: '1rem', // 16px
+  paddingCardSmall: '0.75rem', // 12px
+  selects: '1rem', // 16px
+  textareas: '1rem', // 16px
+  inputFields: '1rem', // 16px
+  checkboxes: '1rem', // 16px
+  radios: '1rem', // 16px
+  toggles: '1rem', // 16px
+  buttons: '0.75rem', // 12px
+  tags: '0.75rem', // 12px
+  statusIndicators: '0.75rem', // 12px
+  dataPoints: '0.75rem' // 12px
 } as const)
 
 export default spacing

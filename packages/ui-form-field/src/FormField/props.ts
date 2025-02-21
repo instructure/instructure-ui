@@ -32,6 +32,7 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 import type { FormMessage } from '../FormPropTypes'
+import type { Spacing } from '@instructure/emotion'
 
 type FormFieldOwnProps = {
   label: React.ReactNode
@@ -62,6 +63,11 @@ type FormFieldOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof FormFieldOwnProps
@@ -82,7 +88,8 @@ const propTypes: PropValidators<PropKeys> = {
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -97,7 +104,8 @@ const allowedProps: AllowedPropKeys = [
   'vAlign',
   'width',
   'inputContainerRef',
-  'elementRef'
+  'elementRef',
+  'margin'
 ]
 
 export type { FormFieldOwnProps, FormFieldProps }

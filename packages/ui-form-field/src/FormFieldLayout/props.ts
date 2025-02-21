@@ -31,7 +31,11 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -68,6 +72,11 @@ type FormFieldLayoutOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   isGroup?: boolean
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof FormFieldLayoutOwnProps
@@ -97,7 +106,8 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
   elementRef: PropTypes.func,
-  isGroup: PropTypes.bool
+  isGroup: PropTypes.bool,
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -112,7 +122,8 @@ const allowedProps: AllowedPropKeys = [
   'labelAlign',
   'width',
   'inputContainerRef',
-  'elementRef'
+  'elementRef',
+  'margin'
 
   // added vAlign because FormField and FormFieldGroup passes it, but not adding
   // it to allowedProps to prevent it from getting passed through accidentally

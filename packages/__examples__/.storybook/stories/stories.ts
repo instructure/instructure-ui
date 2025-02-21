@@ -36,6 +36,8 @@ import { renderPage } from './renderPage'
 import propJSONData from '../../prop-data.json'
 import TooltipPositioning from './TooltipPositioning'
 import FormErrors from './FormErrors'
+import SpacingTokens from './SpacingTokens'
+import MarginProp from './MarginProp'
 import SourceCodeEditorExamples from './SourceCodeEditorExamples'
 
 type AdditionalExample = {
@@ -75,6 +77,24 @@ const additionalExamples: AdditionalExample[] = [
       {
         storyName: 'Form errors',
         storyFn: () => FormErrors()
+      }
+    ]
+  },
+  {
+    title: 'Spacing tokens',
+    stories: [
+      {
+        storyName: 'Spacing tokens',
+        storyFn: () => SpacingTokens()
+      }
+    ]
+  },
+  {
+    title: 'Margin prop',
+    stories: [
+      {
+        storyName: 'Margin prop',
+        storyFn: () => MarginProp()
       }
     ]
   },

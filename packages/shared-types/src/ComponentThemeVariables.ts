@@ -519,6 +519,7 @@ export type ColorPickerTheme = {
   popoverFooterPadding: Spacing['xSmall']
   popoverFooterTopBorderWidth: Border['widthSmall']
   colorMixerButtonContainerLeftMargin: Spacing['xSmall']
+  spacing: any
 }
 
 export type ColorPresetTheme = {

@@ -89,9 +89,40 @@ const ThemeablePropValues = {
 } as const
 
 // SPACING
-type SpacingKeys = keyof typeof ThemeablePropValues.SPACING
-type SpacingValues = (typeof ThemeablePropValues.SPACING)[SpacingKeys]
-type Spacing = CSSShorthandValue<SpacingValues>
+type OldSpacingKeys = keyof typeof ThemeablePropValues.SPACING
+type OldSpacingValues = (typeof ThemeablePropValues.SPACING)[OldSpacingKeys]
+type NewSpacingValues =
+  | 'space0'
+  | 'space2'
+  | 'space4'
+  | 'space8'
+  | 'space12'
+  | 'space16'
+  | 'space24'
+  | 'space36'
+  | 'space48'
+  | 'space60'
+  | 'sections'
+  | 'sectionElrements'
+  | 'trayElrements'
+  | 'modalElrements'
+  | 'moduleElrements'
+  | 'paddingCardLarge'
+  | 'paddingCardMedium'
+  | 'paddingCardSmall'
+  | 'selects'
+  | 'textareas'
+  | 'inputFields'
+  | 'checkboxes'
+  | 'radios'
+  | 'toggles'
+  | 'buttons'
+  | 'tags'
+  | 'statusIndicators'
+  | 'dataPoints'
+type SpacingValues = OldSpacingValues | NewSpacingValues
+// adding `(string & {})` allows to use any string while still allowing specific string values to be suggested by IDEs
+type Spacing = SpacingValues | (string & {})
 
 // SHADOW_TYPES
 type ShadowKeys = keyof typeof ThemeablePropValues.SHADOW_TYPES

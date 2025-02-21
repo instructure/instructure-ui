@@ -21,32 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
+import type { Spacing } from './ThemeablePropValues'
 
-export * from '@emotion/react'
-
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  ThemeablePropTypes,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges,
-  mapSpacingToShorthand
-} from './styleUtils'
-
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+export function mapSpacingToShorthand(
+  value: Spacing | undefined,
+  spacingMap: { [key: string]: string }
+) {
+  const splitMargin = value?.split(' ')
+  const cssMargin = splitMargin
+    ? splitMargin.map((m: string) => spacingMap[m] || m).join(' ')
+    : '0'
+  return cssMargin
+}

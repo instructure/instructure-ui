@@ -21,32 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+import React from 'react'
+import { Button } from '@instructure/ui'
 
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  ThemeablePropTypes,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges,
-  mapSpacingToShorthand
-} from './styleUtils'
+function SpacingTokens() {
+  const spaceTokens = [
+    'space0',
+    'space2',
+    'space4',
+    'space8',
+    'space12',
+    'space16',
+    'space24',
+    'space36',
+    'space48',
+    'space60',
+    'sections',
+    'sectionElrements',
+    'trayElrements',
+    'modalElrements',
+    'moduleElrements',
+    'paddingCardLarge',
+    'paddingCardMedium',
+    'paddingCardSmall',
+    'selects',
+    'textareas',
+    'inputFields',
+    'checkboxes',
+    'radios',
+    'toggles',
+    'buttons',
+    'tags',
+    'statusIndicators',
+    'dataPoints'
+  ]
 
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+  return (
+    <div>
+      {spaceTokens.map((token) => (
+        <Button margin={token} key={token}>
+          {token}
+        </Button>
+      ))}
+    </div>
+  )
+}
+
+export default SpacingTokens
