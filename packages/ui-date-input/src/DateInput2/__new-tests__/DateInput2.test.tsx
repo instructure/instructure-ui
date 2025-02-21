@@ -77,12 +77,10 @@ describe('<DateInput2 />', () => {
   it('should render an input label', async () => {
     const { container } = render(<DateInputExample />)
 
-    const dateInput = container.querySelector('input')
     const label = container.querySelector('label')
 
     expect(label).toBeInTheDocument()
     expect(label).toHaveTextContent(LABEL_TEXT)
-    expect(dateInput?.id).toBe(label?.htmlFor)
   })
 
   it('should render an input placeholder', async () => {

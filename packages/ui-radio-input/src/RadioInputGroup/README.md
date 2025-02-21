@@ -34,7 +34,7 @@ render(<Example />)
 ```
 
 With the `layout` prop set to `inline` to render the description in its own column at screens `medium` size
-and up (see [Grid](#Grid)).
+and up.
 
 ```js
 ---
@@ -60,7 +60,7 @@ render(<Example />)
 ```
 
 With the `layout` property set to `columns` the inputs will render horizontally at screens `medium` size
-and up (see [Grid](#Grid)).
+and up.
 
 ```js
 ---
@@ -212,7 +212,7 @@ type: example
   description={
     <ScreenReaderContent>Select a fruit</ScreenReaderContent>
   }
-  messages={[{ text: 'Invalid choice', type: 'error' }]}
+  messages={[{ text: 'Invalid choice', type: 'newError' }]}
 >
   <RadioInput label="Apple" value="apple" />
   <RadioInput label="Orange" value="orange" />

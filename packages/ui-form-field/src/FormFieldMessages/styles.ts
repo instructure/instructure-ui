@@ -23,7 +23,7 @@
  */
 
 import type { FormFieldMessagesTheme } from '@instructure/shared-types'
-import type { FormFieldMessagesStyle } from './props'
+import type { FormFieldMessagesProps, FormFieldMessagesStyle } from './props'
 
 /**
  * ---
@@ -32,18 +32,19 @@ import type { FormFieldMessagesStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: FormFieldMessagesTheme
+  componentTheme: FormFieldMessagesTheme,
+  props: FormFieldMessagesProps
 ): FormFieldMessagesStyle => {
   return {
     formFieldMessages: {
       label: 'formFieldMessages',
       padding: 0,
       display: 'block',
-      margin: `calc(-1 * ${componentTheme.topMargin}) 0 0 0`
+      margin: `calc(-${componentTheme.topMargin}) 0 0 0`,
+      ...(props.gridArea && { gridArea: props.gridArea })
     },
     message: {
       label: 'formFieldMessages__message',

@@ -50,7 +50,7 @@ describe('<RangeInput />', () => {
       <RangeInput label="Opacity" name="opacity" max={100} min={0} />
     )
 
-    const label = container.querySelector('[class$="-formFieldLabel"]')
+    const label = container.querySelector('[class$="-formFieldLayout__label"]')
     const input = container.querySelector('[class$="-rangeInput__input"]')
 
     expect(label).toBeInTheDocument()

@@ -148,7 +148,6 @@ export { Focusable } from '@instructure/ui-focusable'
 export type { FocusableProps } from '@instructure/ui-focusable'
 export {
   FormField,
-  FormFieldLabel,
   FormFieldMessage,
   FormFieldMessages,
   FormFieldLayout,
@@ -157,7 +156,6 @@ export {
 } from '@instructure/ui-form-field'
 export type {
   FormFieldGroupProps,
-  FormFieldLabelProps,
   FormFieldMessageProps,
   FormFieldMessagesProps,
   FormFieldLayoutProps,
