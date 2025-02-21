@@ -185,12 +185,17 @@ type FocusRingRadius =
   | 'focusRing--radiusSmall'
   | 'focusRing--radiusMedium'
   | 'focusRing--radiusLarge'
+  | 'focusRing--radiusCustom'
 
-const getFocusRingRadius = (borderRadius: ViewProps['borderRadius']) => {
+const getFocusRingRadius = (
+  borderRadius: ViewProps['borderRadius'],
+  props: ViewProps
+) => {
   const baseRadiusStyle = 'focusRing--radius'
-
   const initialValue = (borderRadius || '').trim().split(' ')[0]
-
+  if (props.focusRingBorderRadius) {
+    return `${baseRadiusStyle}Custom`
+  }
   if (verifyUniformValues(initialValue, borderRadius)) {
     const capitalize = (str: string) =>
       `${str.charAt(0).toUpperCase()}${str.slice(1)}`
@@ -242,7 +247,8 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
     focusPosition,
     position,
     shouldAnimateFocus,
-    borderRadius
+    borderRadius,
+    focusRingBorderRadius
   } = props
   const focusOutline = getFocusOutline(props)
   const shouldUseBrowserFocus = typeof focusOutline === 'undefined'
@@ -269,7 +275,7 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
   }
 
   if (position === 'relative') {
-    const focusRingRadius = getFocusRingRadius(borderRadius)
+    const focusRingRadius = getFocusRingRadius(borderRadius, props)
     const focusRingVariants: PartialRecord<FocusRingRadius, string | 0> = {
       'focusRing--radiusInherit': 'inherit',
       'focusRing--radiusNone': 0
@@ -289,6 +295,9 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
         },
         'focusRing--radiusLarge': {
           borderRadius: `calc(${componentTheme.borderRadiusLarge} + (${componentTheme.focusOutlineOffset} -  ${componentTheme.focusOutlineWidth}))`
+        },
+        'focusRing--radiusCustom': {
+          borderRadius: `calc(${focusRingBorderRadius} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
         }
       },
       inset: {
@@ -300,6 +309,9 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
         },
         'focusRing--radiusLarge': {
           borderRadius: `calc(${componentTheme.borderRadiusLarge} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
+        },
+        'focusRing--radiusCustom': {
+          borderRadius: `calc(${focusRingBorderRadius} - (${componentTheme.focusOutlineOffset} + ${componentTheme.focusOutlineWidth}))`
         }
       }
     }
