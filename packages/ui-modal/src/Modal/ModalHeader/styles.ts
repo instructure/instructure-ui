@@ -44,7 +44,7 @@ const generateStyle = (
   props: ModalHeaderProps,
   state: ModalHeaderStyleProps
 ): ModalHeaderStyle => {
-  const { variant, spacing } = props
+  const { variant, spacing, smallViewPort } = props
   const { withCloseButton } = state
 
   const sizeVariants = {
@@ -83,6 +83,7 @@ const generateStyle = (
       borderBottomWidth: '0.0625rem',
       borderBottomStyle: 'solid',
       borderBottomColor: componentTheme.borderColor,
+      ...(smallViewPort ? { position: 'relative' } : {}),
       ...sizeVariants[spacing!],
       ...inverseStyle
     }

@@ -28,6 +28,7 @@ import { Children, Component, isValidElement, ReactElement } from 'react'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
+import { canUseDOM } from '@instructure/ui-dom-utils'
 
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
@@ -86,7 +87,8 @@ class Modal extends Component<ModalProps, ModalState> {
 
     this.state = {
       transitioning: false,
-      open: props.open ?? false
+      open: props.open ?? false,
+      windowHeight: 99999
     }
   }
 
@@ -101,6 +103,7 @@ class Modal extends Component<ModalProps, ModalState> {
 
   componentDidMount() {
     this.props.makeStyles?.()
+    window.addEventListener('resize', this.updateHeight)
   }
 
   componentDidUpdate(prevProps: ModalProps) {
@@ -108,6 +111,14 @@ class Modal extends Component<ModalProps, ModalState> {
       this.setState({ transitioning: true, open: !!this.props.open })
     }
     this.props.makeStyles?.()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateHeight)
+  }
+
+  updateHeight = () => {
+    this.setState({ windowHeight: window.innerHeight })
   }
 
   get defaultFocusElement() {
@@ -146,21 +157,84 @@ class Modal extends Component<ModalProps, ModalState> {
     }
   }
 
+  getWindowHeightInRem = (): number => {
+    if (!canUseDOM) {
+      return Infinity
+    }
+    const rootFontSize = parseFloat(
+      getComputedStyle(document.documentElement)?.fontSize || '16'
+    )
+    if (isNaN(rootFontSize) || rootFontSize <= 0) {
+      return Infinity
+    }
+    return window.innerHeight / rootFontSize
+  }
+
   renderChildren() {
     const { children, variant, overflow } = this.props
 
+    // header should be non-sticky for small viewport height (ca. 320px)
+    if (this.getWindowHeightInRem() <= 20) {
+      return this.renderForSmallViewportHeight()
+    }
+
     return Children.map(children as ReactElement, (child) => {
       if (!child) return // ignore null, falsy children
-
-      if (isValidElement(child)) {
-        return safeCloneElement(child, {
-          variant: variant,
-          overflow: (child?.props as { overflow: string })?.overflow || overflow
-        })
-      } else {
-        return child
-      }
+      return this.cloneChildWithProps(child, variant, overflow)
     })
+  }
+
+  renderForSmallViewportHeight() {
+    const { children, variant, overflow, styles } = this.props
+
+    const headerAndBody: React.ReactNode[] = []
+
+    const childrenArray = Children.toArray(children)
+
+    // Separate header and body elements
+    const filteredChildren = childrenArray.filter((child) => {
+      if (isValidElement(child)) {
+        if (child.type === Modal.Header || child.type === Modal.Body) {
+          if (child.type === Modal.Header) {
+            const headerWithProp = safeCloneElement(child, {
+              smallViewPort: true
+            })
+            headerAndBody.push(headerWithProp)
+          } else {
+            headerAndBody.push(child)
+          }
+          return false
+        }
+      }
+      return true
+    })
+
+    // Adds the <div> to the beginning of the filteredChildren array
+    if (headerAndBody.length > 0) {
+      filteredChildren.unshift(
+        <div css={styles?.joinedHeaderAndBody}>{headerAndBody}</div>
+      )
+    }
+
+    return Children.map(filteredChildren as ReactElement[], (child) => {
+      if (!child) return // ignore null, falsy children
+      return this.cloneChildWithProps(child, variant, overflow)
+    })
+  }
+
+  cloneChildWithProps(
+    child: React.ReactNode,
+    variant: string | undefined,
+    overflow: string | undefined
+  ) {
+    if (isValidElement(child)) {
+      return safeCloneElement(child, {
+        variant: variant,
+        overflow: (child?.props as { overflow: string })?.overflow || overflow
+      })
+    } else {
+      return child
+    }
   }
 
   renderDialog(

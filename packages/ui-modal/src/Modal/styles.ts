@@ -108,6 +108,10 @@ const generateStyle = (
       position: 'relative',
       width: '100%',
       height: '100%'
+    },
+    joinedHeaderAndBody: {
+      borderRadius: componentTheme.borderRadius,
+      overflowY: 'scroll'
     }
   }
 }
