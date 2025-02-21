@@ -22,30 +22,31 @@
  * SOFTWARE.
  */
 
-import type { ReactNode, PropsWithChildren } from 'react'
+type MenuItem = {
+  href: string
+  title: string
+  selected: boolean
+  onClick?: () => void
+}
 
 type SubNavOwnProps = {
-  lightMode?: boolean
-  brand?: ReactNode
+  menuItems: MenuItem[]
 }
 
 type SubNavStyle = {
   container: {
     [key: string]: string | number
   }
-  content: (open: boolean) => {
+  linkContainer: (item: MenuItem) => {
     [key: string]: string | number
   }
-  topBar: {
-    [key: string]: string | number
-  }
-  btnRow: {
+  link: (item: MenuItem) => {
     [key: string]: string | number
   }
 }
 
 type SubNavProps = SubNavOwnProps & {
   styles: SubNavStyle
-} & PropsWithChildren
+}
 
-export type { SubNavProps, SubNavOwnProps }
+export type { SubNavProps, SubNavOwnProps, MenuItem }
