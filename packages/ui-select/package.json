@@ -27,7 +27,6 @@
     "@instructure/ui-babel-preset": "10.11.0",
     "@instructure/ui-color-utils": "10.11.0",
     "@instructure/ui-scripts": "10.11.0",
-    "@instructure/ui-test-locator": "10.11.0",
     "@instructure/ui-test-utils": "10.11.0",
     "@instructure/ui-themes": "10.11.0",
     "@testing-library/jest-dom": "^6.6.3",
