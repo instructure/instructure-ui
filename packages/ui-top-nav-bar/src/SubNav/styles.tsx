@@ -23,36 +23,33 @@
  */
 import type { SubNavProps } from './props'
 
-const generateStyles = (props: SubNavProps, theme: any) => {
-  const { lightMode } = props
+const generateStyles = (_props: SubNavProps, theme: any) => {
   return {
     container: {
-      height: '66px',
-      position: 'relative',
-      backgroundColor: lightMode
-        ? theme.colors.ui.surfacePageSecondary
-        : theme.colors.ui.surfaceDark,
-      color: lightMode
-        ? theme.colors.contrasts.grey125125
-        : theme.colors?.contrasts?.white1010,
-      width: '100%',
-      zIndex: '1000',
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'row'
+      marginLeft: '20px',
+      marginTop: '20px'
     },
-    start: {
-      marginLeft: '24px',
-      marginRight: 'auto',
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: '16px'
+    linkContainer: (item: any) => {
+      return {
+        display: 'flex',
+        alignItems: 'center',
+        color: theme?.colors?.contrasts?.grey125125,
+        fontSize: '16px',
+        borderLeft: item.selected ? '3px solid' : 'none',
+        borderColor: theme?.colors?.contrasts?.grey125125,
+        height: '32px',
+        fontWeight: 'bold',
+        marginBottom: '4px',
+        paddingLeft: '4px'
+      }
     },
-    end: {
-      marginRight: '24px',
-      display: 'flex',
-      gap: '12px'
+    link: (item: any) => {
+      return {
+        ...(item.selected && {
+          color: theme?.colors?.contrasts?.grey125125,
+          hoverColor: theme?.colors?.contrasts?.grey125125
+        })
+      }
     }
   }
 }
