@@ -24,7 +24,6 @@
  */
 
 /** @jsx jsx */
-import { Children, PropsWithChildren } from 'react'
 import { jsx, useTheme } from '@instructure/emotion'
 
 import { generateStyles } from './styles'
@@ -32,35 +31,20 @@ import { Link } from '@instructure/ui-link'
 
 /**
 ---
-category: utilities
+category: components
 ---
  **/
-const SubNav = ({ children, menuItems }: any) => {
-  const getSubComponent = (displayName: any) => {
-    return Children.map(children, (child: any) => child)?.filter(
-      (child: any) => child?.type?.displayName === displayName
-    )
-  }
+const SubNav = ({ menuItems, styles }: any) => {
   return (
-    <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+    <div style={styles.container}>
       {menuItems.map((item: any) => (
-        <div
-          style={{
-            justifyContent: 'center',
-            color: 'black',
-            fontSize: '20px',
-            padding: '4px',
-            borderLeft: item.selected ? '3px solid' : 'none',
-            height: '32px',
-            fontWeight: 'bold'
-          }}
-          key={item}
-        >
+        <div style={styles.linkContainer(item)} key={item}>
           <Link
             key={item}
             href={item.href}
-            themeOverride={item.selected ? { color: 'black' } : {}}
+            themeOverride={styles.link(item)}
             isWithinText={false}
+            onClick={item.onClick}
           >
             {item.title}
           </Link>
@@ -68,14 +52,6 @@ const SubNav = ({ children, menuItems }: any) => {
       ))}
     </div>
   )
-}
-
-const Start = ({ children, styles }: PropsWithChildren & { styles: any }) => {
-  return <div style={styles.start}>{children}</div>
-}
-
-const End = ({ children, styles }: PropsWithChildren & { styles: any }) => {
-  return <div style={styles.end}>{children}</div>
 }
 
 const withStyles =
@@ -95,10 +71,6 @@ const withStyles =
 const SC: any = withStyles(generateStyles)(SubNav)
 
 SC.displayName = 'SubNav'
-SC.Start = withStyles(generateStyles)(Start)
-SC.Start.displayName = 'Start'
-SC.End = withStyles(generateStyles)(End)
-SC.End.displayName = 'End'
 
 export { SC as SubNav }
 export default SC
