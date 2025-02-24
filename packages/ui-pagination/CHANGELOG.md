@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ui-pagination:** remove margin from legacy Pagination ([4dacbf8](https://github.com/instructure/instructure-ui/commit/4dacbf8108d78c68c1946aff0a4ac7570ef8fe6e))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 

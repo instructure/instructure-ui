@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Features
+
+* **ui-select,ui-simple-select:** add support for rendering selected option's before and after content in Select and SimpleSelect input ([87dc52d](https://github.com/instructure/instructure-ui/commit/87dc52dcd2a23acfe50856c05b8ff28c1046f85a))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-simple-select

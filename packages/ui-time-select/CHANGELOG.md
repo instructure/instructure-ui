@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ui-time-select:** fix TimeSelect showing the wrong value when defaultValue is set and enteting a wrong value after a good one ([9d28a3b](https://github.com/instructure/instructure-ui/commit/9d28a3b5da8c6c60f37c0b60a5a2fe856bec0ffd))
+* **ui-time-select:** make allowClearingSelection an optional prop ([fc1264c](https://github.com/instructure/instructure-ui/commit/fc1264cee1750fde1d8391a4da2dfc88485ab07b))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 

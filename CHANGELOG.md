@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix focus region missing mouse down target ([e37aee9](https://github.com/instructure/instructure-ui/commit/e37aee990f35c1f4f8afa03181fe996c7d49dc63))
+* **ui-color-picker:** add hex to aria-label ([98adf34](https://github.com/instructure/instructure-ui/commit/98adf34bf082919a4aa809e06238633813ca888b))
+* **ui-focusable:** make screenreader annouce Tooltip in Focusable example by providing aria props ([e38bce2](https://github.com/instructure/instructure-ui/commit/e38bce2fb08fa98fe1d98667f890a7137e4e2dea))
+* **ui-modal:** make Modal's header non-sticky with small window height ([db5c708](https://github.com/instructure/instructure-ui/commit/db5c7082ec4834793d83cf7d6f469c4fbaa83eed))
+* **ui-pagination:** remove margin from legacy Pagination ([4dacbf8](https://github.com/instructure/instructure-ui/commit/4dacbf8108d78c68c1946aff0a4ac7570ef8fe6e))
+* **ui-select:** fix select's dropdown border radius ([7427773](https://github.com/instructure/instructure-ui/commit/74277738698fd9014a6cd5e4043f717914bc863d))
+* **ui-sourcecodeeditor:** link label to input field programmatically ([b092b45](https://github.com/instructure/instructure-ui/commit/b092b457777c2dea480c09da87989cf985a1713e))
+* **ui-time-select:** fix TimeSelect showing the wrong value when defaultValue is set and enteting a wrong value after a good one ([9d28a3b](https://github.com/instructure/instructure-ui/commit/9d28a3b5da8c6c60f37c0b60a5a2fe856bec0ffd))
+* **ui-time-select:** make allowClearingSelection an optional prop ([fc1264c](https://github.com/instructure/instructure-ui/commit/fc1264cee1750fde1d8391a4da2dfc88485ab07b))
+
+
+### Features
+
+* **many:** introduce new spacing tokens; add margin prop for more components ([048c902](https://github.com/instructure/instructure-ui/commit/048c902406c00611cd117fb2fb8164a6eba62fb8))
+* **ui-icons:** add new icons password-reset, neutral ([c4d2404](https://github.com/instructure/instructure-ui/commit/c4d2404807df9922f4cbaee29ec8d7768711f2e1))
+* **ui-popover, ui-select:** allow overriding Select's dropdown border ([1e83164](https://github.com/instructure/instructure-ui/commit/1e83164770430d593f949be72b087295bb42e6b0))
+* **ui-popover, ui-select:** allow overriding Select's dropdown border ([90d59d3](https://github.com/instructure/instructure-ui/commit/90d59d3c3689c3a1500c37db363fa43c1b8403d7))
+* **ui-select,ui-simple-select:** add support for rendering selected option's before and after content in Select and SimpleSelect input ([87dc52d](https://github.com/instructure/instructure-ui/commit/87dc52dcd2a23acfe50856c05b8ff28c1046f85a))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 
