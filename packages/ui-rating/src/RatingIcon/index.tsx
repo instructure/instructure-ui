@@ -110,20 +110,19 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
 
     return (
       <span
+        aria-hidden="true"
         css={this.props.styles?.ratingIcon}
         ref={(el) => {
           this.ref = el
         }}
       >
-        <span>
-          {this.state.filled && animateFill ? (
-            <Transition in transitionOnMount type="scale">
-              <Icon css={this.props.styles?.icon} />
-            </Transition>
-          ) : (
+        {this.state.filled && animateFill ? (
+          <Transition in transitionOnMount type="scale">
             <Icon css={this.props.styles?.icon} />
-          )}
-        </span>
+          </Transition>
+        ) : (
+          <Icon css={this.props.styles?.icon} />
+        )}
       </span>
     )
   }
