@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix focus region missing mouse down target ([e37aee9](https://github.com/instructure/instructure-ui/commit/e37aee990f35c1f4f8afa03181fe996c7d49dc63))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-a11y-utils

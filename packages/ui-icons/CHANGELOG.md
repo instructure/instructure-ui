@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Features
+
+* **ui-icons:** add new icons password-reset, neutral ([c4d2404](https://github.com/instructure/instructure-ui/commit/c4d2404807df9922f4cbaee29ec8d7768711f2e1))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 

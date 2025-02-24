@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ui-select:** fix select's dropdown border radius ([7427773](https://github.com/instructure/instructure-ui/commit/74277738698fd9014a6cd5e4043f717914bc863d))
+
+
+### Features
+
+* **ui-popover, ui-select:** allow overriding Select's dropdown border ([90d59d3](https://github.com/instructure/instructure-ui/commit/90d59d3c3689c3a1500c37db363fa43c1b8403d7))
+* **ui-select,ui-simple-select:** add support for rendering selected option's before and after content in Select and SimpleSelect input ([87dc52d](https://github.com/instructure/instructure-ui/commit/87dc52dcd2a23acfe50856c05b8ff28c1046f85a))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-select

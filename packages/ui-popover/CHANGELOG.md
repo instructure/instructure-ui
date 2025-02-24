@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
+
+
+### Features
+
+* **ui-popover, ui-select:** allow overriding Select's dropdown border ([1e83164](https://github.com/instructure/instructure-ui/commit/1e83164770430d593f949be72b087295bb42e6b0))
+* **ui-popover, ui-select:** allow overriding Select's dropdown border ([90d59d3](https://github.com/instructure/instructure-ui/commit/90d59d3c3689c3a1500c37db363fa43c1b8403d7))
+
+
+
+
+
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-popover
