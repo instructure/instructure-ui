@@ -66,7 +66,7 @@ describe('<FormFieldGroup />', () => {
     )
 
     const formFieldGroup = container.querySelector(
-      "fieldset[class$='-formFieldLayout']"
+      "span[class$='-formFieldLayout__label']"
     )
     const firstNameInput = screen.getByLabelText('First:')
     const middleNameInput = screen.getByLabelText('Middle:')
@@ -94,9 +94,7 @@ describe('<FormFieldGroup />', () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = container.querySelector(
-      "fieldset[class$='-formFieldLayout']"
-    )
+    const formFieldGroup = container.querySelector('label')
 
     expect(formFieldGroup).toBeInTheDocument()
   })
@@ -136,7 +134,7 @@ describe('<FormFieldGroup />', () => {
     expect(message).toHaveAttribute('id', messagesId)
   })
 
-  it('displays description message inside the legend', () => {
+  it('displays description message inside the label', () => {
     const description = 'Please enter your full name'
 
     const { container } = render(
@@ -154,7 +152,7 @@ describe('<FormFieldGroup />', () => {
     )
 
     const legend = container.querySelector(
-      "legend[class$='-screenReaderContent']"
+      "span[class$='-formFieldLayout__label']"
     )
 
     expect(legend).toBeInTheDocument()

@@ -61,12 +61,31 @@ type FormFieldLayoutOwnProps = {
    */
   messagesId?: string
   children?: React.ReactNode
+  /**
+   * If `true` use an inline layout -- content will flow on the left/right side
+   * of this component
+   */
   inline?: boolean
+  /**
+   * In `stacked` mode the container is below the label, in `inline` mode the
+   * container is to the right/left (depending on text direction)
+   */
   layout?: 'stacked' | 'inline'
+  /**
+   * The horizontal alignment of the label. Only works in `inline` layout
+   */
   labelAlign?: 'start' | 'end'
+  /**
+   * The vertical alignment of the label and the controls.
+   * "top" by default
+   */
   vAlign?: 'top' | 'middle' | 'bottom'
   width?: string
-  inputContainerRef?: (element: HTMLSpanElement | null) => void
+  /**
+   * Provides a reference to the container that holds the input element
+   * @param element The element that holds the input control as its children
+   */
+  inputContainerRef?: (element: HTMLElement | null) => void
   /**
    * provides a reference to the underlying html root element
    */
@@ -89,7 +108,7 @@ type FormFieldLayoutProps = FormFieldLayoutOwnProps &
   WithDeterministicIdProps
 
 type FormFieldLayoutStyle = ComponentStyle<
-  'formFieldLayout' | 'groupErrorMessage'
+  'formFieldLayout' | 'formFieldLabel' | 'formFieldChildren'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -130,7 +149,14 @@ const allowedProps: AllowedPropKeys = [
   //'vAlign'
 ]
 
+type FormFieldStyleProps = {
+  hasMessages: boolean
+  hasVisibleLabel: boolean
+  hasNewErrorMsgAndIsGroup: boolean
+}
+
 export type {
+  FormFieldStyleProps,
   FormFieldLayoutProps,
   FormFieldLayoutStyle,
   FormFieldLayoutOwnProps

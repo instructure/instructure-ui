@@ -28,10 +28,7 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
-import type {
-  WithStyleProps,
-  ComponentStyle
-} from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
@@ -50,6 +47,9 @@ type RadioInputGroupOwnProps = {
    */
   name: string
 
+  /**
+   * The text above the radio group. Use `ScreenReaderContent` if you don't want it to be visible.
+   */
   description: React.ReactNode
 
   /**

@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import { Component, Children, ReactElement, AriaAttributes } from 'react'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
@@ -53,7 +53,8 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     disabled: false,
     rowSpacing: 'medium',
     colSpacing: 'small',
-    vAlign: 'middle'
+    vAlign: 'middle',
+    isGroup: true
   }
 
   ref: Element | null = null
@@ -77,14 +78,20 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   }
 
   get makeStylesVariables(): FormFieldGroupStyleProps {
-    return { invalid: this.invalid }
+    // new form errors dont need borders
+    const oldInvalid =
+      !!this.props.messages &&
+      this.props.messages.findIndex((message) => {
+        return message.type === 'error'
+      }) >= 0
+    return { invalid: oldInvalid }
   }
 
   get invalid() {
     return (
       !!this.props.messages &&
       this.props.messages.findIndex((message) => {
-        return message.type === 'error'
+        return message.type === 'error' || message.type === 'newError'
       }) >= 0
     )
   }
@@ -134,7 +141,35 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
 
   render() {
     const { styles, makeStyles, isGroup, ...props } = this.props
-
+    // This is quite ugly, but according to ARIA spec the `aria-invalid` prop
+    // can only be used with certain roles see
+    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid#associated_roles
+    // `aria-invalid` is put on in FormFieldLayout because the error message
+    // DOM part gets there its ID.
+    let ariaInvalid: AriaAttributes['aria-invalid'] = undefined
+    if (
+      this.props.role &&
+      this.invalid &&
+      [
+        'application',
+        'checkbox',
+        'combobox',
+        'gridcell',
+        'listbox',
+        'radiogroup',
+        'slider',
+        'spinbutton',
+        'textbox',
+        'tree',
+        'columnheader',
+        'rowheader',
+        'searchbox',
+        'switch',
+        'treegrid'
+      ].includes(this.props.role)
+    ) {
+      ariaInvalid = 'true'
+    }
     return (
       <FormFieldLayout
         {...omitProps(props, FormFieldGroup.allowedProps)}
@@ -143,7 +178,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
         label={props.description}
         aria-disabled={props.disabled ? 'true' : undefined}
-        aria-invalid={this.invalid ? 'true' : undefined}
+        aria-invalid={ariaInvalid}
         elementRef={this.handleRef}
         isGroup={isGroup}
       >
