@@ -228,4 +228,26 @@ describe('<RadioInputGroup />', () => {
       expect(axeCheck).toBe(true)
     })
   })
+
+  it('adds the correct ARIA attributes', () => {
+    const { container } = render(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+        disabled={true}
+        data-id="group"
+        messages={[{ type: 'newError', text: 'abc' }]}
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = container.querySelector(`[data-id="group"]`)
+    expect(group).toBeInTheDocument()
+    expect(group).toHaveAttribute('role', 'radiogroup')
+    expect(group).toHaveAttribute('aria-disabled', 'true')
+    expect(group).toHaveAttribute('aria-invalid', 'true')
+    expect(group).toHaveAttribute('aria-errormessage', expect.anything())
+  })
 })

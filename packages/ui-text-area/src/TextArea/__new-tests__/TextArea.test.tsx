@@ -59,7 +59,9 @@ describe('TextArea', () => {
 
   it('should include a label', async () => {
     const { container } = render(<TextArea label="Name" autoGrow={false} />)
-    const textArea = container.querySelector('span[class$="-formFieldLabel"]')
+    const textArea = container.querySelector(
+      'span[class$="-formFieldLayout__label"]'
+    )
 
     expect(textArea).toHaveTextContent('Name')
   })

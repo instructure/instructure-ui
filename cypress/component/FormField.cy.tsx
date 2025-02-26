@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
+// eslint-disable-next-line @instructure/no-relative-imports
 import { FormFieldLayout } from '../../packages/ui'
 
 import '../support/component'
@@ -36,7 +37,7 @@ describe('<FormField/>', () => {
       </FormFieldLayout>
     )
 
-    cy.get('span[class$="-formFieldLabel"]')
+    cy.get('span[class$="-formFieldLayout__label"]')
       .contains('Username')
       .should('have.css', 'text-align', 'end')
   })
@@ -50,7 +51,7 @@ describe('<FormField/>', () => {
       </FormFieldLayout>
     )
 
-    cy.get('span[class$="-formFieldLabel"]')
+    cy.get('span[class$="-formFieldLayout__label"]')
       .contains('Username')
       .should('have.css', 'text-align', 'start')
   })

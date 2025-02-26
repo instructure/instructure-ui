@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { type InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'
@@ -32,7 +32,10 @@ import {
 } from '@instructure/ui-prop-types'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 import { Checkbox } from '../Checkbox'
@@ -58,7 +61,12 @@ type PropKeys = keyof CheckboxGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CheckboxGroupProps = CheckboxGroupOwnProps & WithDeterministicIdProps
+type CheckboxGroupProps = CheckboxGroupOwnProps &
+  OtherHTMLAttributes<
+    CheckboxGroupOwnProps,
+    InputHTMLAttributes<CheckboxGroupOwnProps & Element>
+  > &
+  WithDeterministicIdProps
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,

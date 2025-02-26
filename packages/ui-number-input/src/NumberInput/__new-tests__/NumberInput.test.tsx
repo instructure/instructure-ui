@@ -72,7 +72,9 @@ describe('<NumberInput />', () => {
 
   it('displays the label', async () => {
     const { container } = render(<NumberInput renderLabel="Label" />)
-    const label = container.querySelector('span[class$="-formFieldLabel"]')
+    const label = container.querySelector(
+      'span[class$="-formFieldLayout__label"]'
+    )
 
     expect(label).toHaveTextContent('Label')
   })

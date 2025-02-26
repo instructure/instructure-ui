@@ -1008,7 +1008,6 @@ describe('<Select />', () => {
             {getOptions()}
           </Select>
         )
-
         const input = screen.getByLabelText('Choose an option')
 
         await userEvent.click(input)

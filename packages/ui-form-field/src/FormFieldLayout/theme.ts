@@ -22,12 +22,38 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { FormFieldLayoutTheme } from '@instructure/shared-types'
 
-const generateComponentTheme = (theme: Theme): any => {
-  const { spacing } = theme
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): FormFieldLayoutTheme => {
+  const { colors, typography, spacing, breakpoints, key: themeName } = theme
 
-  return { spacing }
+  const themeSpecificStyle: ThemeSpecificStyle<FormFieldLayoutTheme> = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables: FormFieldLayoutTheme = {
+    color: colors?.contrasts?.grey125125,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightBold,
+    fontSize: typography?.fontSizeMedium,
+    lineHeight: typography?.lineHeightFit,
+    inlinePadding: spacing?.xxSmall,
+    stackedOrInlineBreakpoint: breakpoints?.medium,
+    spacing: theme.spacing
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
 }
 
 export default generateComponentTheme

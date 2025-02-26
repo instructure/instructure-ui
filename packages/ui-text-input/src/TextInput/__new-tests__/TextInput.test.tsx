@@ -90,59 +90,11 @@ describe('<TextInput/>', () => {
     expect(ref?.value).toBe('bar')
   })
 
-  it('should provide messageId to FormField', async () => {
-    render(
-      <TextInput
-        renderLabel="Name"
-        messages={[
-          {
-            text: 'yup',
-            type: 'error'
-          }
-        ]}
-      />
-    )
+  it('should let aria-describedby through', async () => {
+    render(<TextInput renderLabel="Name" aria-describedby="abcd" />)
     const input = screen.getByRole('textbox')
 
-    expect(input).toHaveAttribute('aria-describedby')
-  })
-
-  it('should have equal messagesId and aria-describedby values', async () => {
-    const { container } = render(
-      <TextInput
-        renderLabel="Name"
-        messages={[
-          {
-            text: 'yup',
-            type: 'error'
-          }
-        ]}
-      />
-    )
-    const id = screen.getByRole('textbox').getAttribute('aria-describedby')
-    const messages = container.querySelector(
-      'span[class$="-formFieldMessages"]'
-    )
-
-    expect(messages).toHaveAttribute('id', id)
-  })
-
-  it('should handle multiple aria-describedby ids', async () => {
-    render(
-      <TextInput
-        renderLabel="Name"
-        aria-describedby="assistive-id"
-        messages={[
-          {
-            text: 'yup',
-            type: 'error'
-          }
-        ]}
-      />
-    )
-    const ids = screen.getByRole('textbox').getAttribute('aria-describedby')
-
-    expect(ids).toMatch('assistive-id TextInput-messages')
+    expect(input).toHaveAttribute('aria-describedby', 'abcd')
   })
 
   describe('events', () => {

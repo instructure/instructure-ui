@@ -381,7 +381,9 @@ describe('<DateInput />', () => {
             {generateDays()}
           </DateInput>
         )
-        const dateInput = container.querySelector("[class$='-formFieldLabel']")
+        const dateInput = container.querySelector(
+          'span[class$="-formFieldLayout__label"]'
+        )
 
         expect(dateInput).toHaveTextContent('Choose date')
 

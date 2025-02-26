@@ -595,12 +595,15 @@ export type FormFieldGroupTheme = {
   errorFieldsPadding: Spacing['xSmall']
 }
 
-export type FormFieldLabelTheme = {
+export type FormFieldLayoutTheme = {
   color: Colors['contrasts']['grey125125']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
   fontSize: Typography['fontSizeMedium']
   lineHeight: Typography['lineHeightFit']
+  inlinePadding: Spacing['xxSmall']
+  stackedOrInlineBreakpoint: Breakpoints['medium']
+  spacing: any // TODO remove any
 }
 
 export type FormFieldMessageTheme = {
@@ -1748,7 +1751,6 @@ export interface ThemeVariables {
   FileDrop: FileDropTheme
   Flex: FlexTheme
   FormFieldGroup: FormFieldGroupTheme
-  FormFieldLabel: FormFieldLabelTheme
   FormFieldMessage: FormFieldMessageTheme
   FormFieldMessages: FormFieldMessagesTheme
   Grid: GridTheme

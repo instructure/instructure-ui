@@ -88,8 +88,8 @@ describe('<CheckboxGroup />', () => {
     const { container } = renderCheckboxGroup({
       messages: [{ text: TEST_ERROR_MESSAGE, type: 'error' }]
     })
-    const fieldset = screen.getByRole('group')
-    const ariaDesc = fieldset.getAttribute('aria-describedby')
+    const group = screen.getByRole('group')
+    const ariaDesc = group.getAttribute('aria-describedby')
     const messageById = container.querySelector(`[id="${ariaDesc}"]`)
 
     expect(messageById).toBeInTheDocument()
@@ -98,7 +98,9 @@ describe('<CheckboxGroup />', () => {
 
   it('displays description message inside the legend', () => {
     const { container } = renderCheckboxGroup({ description: TEST_DESCRIPTION })
-    const legend = container.querySelector('legend')
+    const legend = container.querySelector(
+      'span[class$="-formFieldLayout__label"]'
+    )
 
     expect(legend).toBeInTheDocument()
     expect(legend).toHaveTextContent(TEST_DESCRIPTION)
@@ -216,6 +218,20 @@ describe('<CheckboxGroup />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
+    })
+
+    it('adds the correct ARIA attributes', () => {
+      const { container } = renderCheckboxGroup({
+        disabled: true,
+        messages: [{ type: 'newError', text: 'abc' }],
+        // @ts-ignore This is a valid attribute
+        'data-id': 'group'
+      })
+      const group = container.querySelector(`[data-id="group"]`)
+      expect(group).toBeInTheDocument()
+      expect(group).toHaveAttribute('aria-disabled', 'true')
+      // ARIA role 'group' cannot have the 'aria-invalid' attribute
+      expect(group).not.toHaveAttribute('aria-invalid')
     })
   })
 })

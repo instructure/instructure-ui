@@ -243,13 +243,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       descriptionIds = `${props['aria-describedby']}`
     }
 
-    if (this.hasMessages) {
-      descriptionIds =
-        descriptionIds !== ''
-          ? `${descriptionIds} ${this._messagesId}`
-          : this._messagesId
-    }
-
     return (
       <input
         {...props}
