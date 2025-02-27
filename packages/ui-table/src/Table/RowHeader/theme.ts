@@ -36,7 +36,7 @@ const generateComponentTheme = (theme: Theme): TableRowHeaderTheme => {
   const componentVariables: TableRowHeaderTheme = {
     fontSize: typography?.fontSizeMedium,
     fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
+    fontWeight: typography?.fontWeightBold,
 
     color: colors?.contrasts?.grey125125,
     background: colors?.contrasts?.white1010,
