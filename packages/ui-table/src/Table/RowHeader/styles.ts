@@ -46,7 +46,7 @@ const generateStyle = (
       label: 'rowHeader',
       fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,
-      fontWeight: 'bold',
+      fontWeight: componentTheme.fontWeight,
       color: componentTheme.color,
       background: componentTheme.background,
       boxSizing: 'border-box',
