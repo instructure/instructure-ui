@@ -24,18 +24,16 @@
 import type { DesktopTopNavProps } from './props'
 
 const generateStyles = (props: DesktopTopNavProps, theme: any) => {
-  const { lightMode } = props
+  const { lti } = props
   return {
     container: {
       height: '66px',
       position: 'relative',
-      backgroundColor: lightMode
-        ? theme.colors.ui.surfacePageSecondary
-        : theme.colors.ui.surfaceDark,
-      color: lightMode
-        ? theme.colors.contrasts.grey125125
-        : theme.colors?.contrasts?.white1010,
+      borderBottom: '1px solid',
+      borderColor: theme.colors.contrasts.grey1424,
+      backgroundColor: theme.colors.contrasts.grey1111,
       width: '100%',
+      color: theme.colors.contrasts.grey125125,
       zIndex: '1000',
       display: 'flex',
       alignItems: 'center',

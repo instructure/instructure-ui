@@ -25,7 +25,7 @@
 import type { PropsWithChildren } from 'react'
 
 type TopNavOwnProps = {
-  lightMode?: boolean
+  lti?: boolean
   breakpoint?: string
 }
 
