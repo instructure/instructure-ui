@@ -38,20 +38,20 @@ If you had component level overrides of colors you need to migrate using the fol
 
 | Old                | New (v10)                     |
 | ------------------ | ----------------------------- |
-| `colors.Brand`     | `colors.contrasts.blue4570`   |
-| `colors.Link`      | `colors.contrasts.blue4570`   |
-| `colors.Electric`  | `colors.contrasts.blue4570`   |
-| `colors.Shamrock`  | `colors.contrasts.green4570`  |
-| `colors.Barney`    | `colors.contrasts.blue4570`   |
-| `colors.Crimson`   | `colors.contrasts.red4570`    |
-| `colors.Fire`      | `colors.contrasts.orange4570` |
-| `colors.Licorice`  | `colors.contrasts.grey125125` |
-| `colors.Oxford`    | `colors.contrasts.grey100100` |
-| `colors.Ash`       | `colors.contrasts.grey4570`   |
-| `colors.Slate`     | `colors.contrasts.grey4570`   |
-| `colors.Tiara`     | `colors.contrasts.grey1214`   |
-| `colors.Porcelain` | `colors.contrasts.grey1111`   |
-| `colors.White`     | `colors.contrasts.white1010`  |
+| `colors.brand`     | `colors.contrasts.blue4570`   |
+| `colors.link`      | `colors.contrasts.blue4570`   |
+| `colors.electric`  | `colors.contrasts.blue4570`   |
+| `colors.shamrock`  | `colors.contrasts.green4570`  |
+| `colors.barney`    | `colors.contrasts.blue4570`   |
+| `colors.crimson`   | `colors.contrasts.red4570`    |
+| `colors.fire`      | `colors.contrasts.orange4570` |
+| `colors.licorice`  | `colors.contrasts.grey125125` |
+| `colors.oxford`    | `colors.contrasts.grey100100` |
+| `colors.ash`       | `colors.contrasts.grey4570`   |
+| `colors.slate`     | `colors.contrasts.grey4570`   |
+| `colors.tiara`     | `colors.contrasts.grey1214`   |
+| `colors.porcelain` | `colors.contrasts.grey1111`   |
+| `colors.white`     | `colors.contrasts.white1010`  |
 
 You can use the latest [codemod](#ui-codemods) to automate this process.
 
