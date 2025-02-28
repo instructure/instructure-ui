@@ -461,7 +461,7 @@ class Pagination extends Component<PaginationProps> {
     }
 
     return (
-      <View display="inline-block" as="ul" margin="0">
+      <View display="inline-block" as="ul" margin="0" padding="0">
         {this.transferDisabledPropToChildren(visiblePages)}
       </View>
     )
