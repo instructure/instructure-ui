@@ -25,17 +25,15 @@ import type { MobileTopNavProps } from './props'
 
 //TODO use theme variables for spacing
 const generateStyles = (props: MobileTopNavProps, theme: any) => {
-  const { lightMode } = props
+  const { lti } = props
   return {
     container: (_open: boolean) => {
       return {
         height: '54px',
-        backgroundColor: lightMode
-          ? theme.colors.ui.surfacePageSecondary
-          : theme.colors.ui.surfaceDark,
-        color: lightMode
-          ? theme.colors.contrasts.grey125125
-          : theme.colors?.contrasts?.white1010,
+        backgroundColor: lti
+          ? theme?.colors?.contrasts?.grey1111
+          : theme?.colors?.contrasts?.grey100100, //CANVAS, LTI LATER
+        color: theme?.colors?.contrasts?.grey125125,
         width: '100%',
         zIndex: '9999'
       }
@@ -49,20 +47,17 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
     },
     content: (open: boolean) => {
       return {
-        padding: `0 ${theme.spacing.small}`,
         height: open ? '100%' : '0px',
         top: '3.375rem',
         bottom: 0,
         left: 0,
         right: 0,
-        overflow: open ? 'scroll' : 'hidden',
+        overflow: open ? 'hidden' : 'scroll',
         position: 'fixed',
-        backgroundColor: lightMode
-          ? theme.colors.ui.surfacePageSecondary
-          : theme.colors.ui.surfaceDark,
-        color: lightMode
-          ? theme.colors.contrasts.grey125125
-          : theme.colors?.contrasts?.white1010
+        backgroundColor: lti
+          ? theme?.colors?.contrasts?.grey1111
+          : theme?.colors?.contrasts?.grey100100,
+        color: theme.colors?.contrasts?.white1010
       }
     },
     end: {
@@ -72,26 +67,5 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
     }
   }
 }
-const generateItemListStyles = (_props: any, theme: any) => {
-  return {
-    divider: {
-      height: '0.0625rem',
-      overflow: 'hidden',
-      background: theme.colors.contrasts.grey1214
-    }
-  }
-}
-const generateItemStyles = (_props: any, _theme: any) => {
-  return {
-    container: {
-      margin: '16px 0',
-      display: 'flex',
-      cursor: 'pointer',
-      alignItems: 'flex-end'
-    },
-    leftIcon: { paddingRight: '8px', fontSize: '18px' },
-    rightIcon: { marginLeft: 'auto', paddingRight: '8px', fontSize: '18px' }
-  }
-}
 
-export { generateStyles, generateItemListStyles, generateItemStyles }
+export { generateStyles }

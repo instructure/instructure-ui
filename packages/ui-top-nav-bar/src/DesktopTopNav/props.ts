@@ -25,7 +25,7 @@
 import type { ReactNode, PropsWithChildren } from 'react'
 
 type DesktopTopNavOwnProps = {
-  lightMode?: boolean
+  lti?: boolean
   brand?: ReactNode
 }
 

@@ -24,12 +24,33 @@
 import type { TopNavProps } from './props'
 
 const generateStyles = (props: TopNavProps, theme: any) => {
-  const { lightMode } = props
+  const { lti } = props
   return {
-    breadcrumbOverride: {
-      color: lightMode
-        ? theme?.colors?.contrasts?.blue4570
-        : theme?.colors?.contrasts?.grey1111
+    optionsOverride: {
+      background: lti
+        ? theme?.colors?.contrasts?.grey1111
+        : theme?.colors?.contrasts?.grey100100, //-> grey100100
+      highlightedBackground: lti
+        ? theme?.colors?.contrasts?.grey1214
+        : theme?.colors?.contrasts?.grey5782,
+      color: lti
+        ? theme?.colors?.contrasts?.grey125125
+        : theme?.colors?.contrasts?.white1010,
+      highlightedLabelColor: lti
+        ? theme?.colors?.contrasts?.grey125125
+        : theme?.colors?.contrasts?.white1010,
+      padding: '16px 12px',
+      lineHeight: '1.5'
+    },
+    drilldownOverride: {
+      borderColor: lti
+        ? theme?.colors?.contrasts?.grey1424
+        : theme?.colors?.contrasts?.grey100100
+    },
+    optionContainer: {
+      display: 'flex',
+      gap: '8px',
+      alignItems: 'center'
     }
   }
 }

@@ -455,12 +455,17 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         <DrilldownOption
           id={this._headerBackId}
           onOptionClick={this.handleBackButtonClick}
+          beforeLabelContentVAlign={'center'}
         >
           <div css={styles?.headerBack} role="presentation">
             {backButtonLabel}
           </div>
         </DrilldownOption>
       )
+
+      if (currentPage.renderBeforeChildren) {
+        headerChildren.push(currentPage.renderBeforeChildren())
+      }
     }
 
     // Header title
@@ -993,7 +998,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         lastItemWasSeparator = false
         return this.renderOption(child, getOptionProps, getDisabledOptionProps)
       } else {
-        return null
+        // eslint-disable-next-line react/jsx-key
+        return <Options.Item>{child}</Options.Item>
       }
     })
   }
@@ -1465,6 +1471,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             >
               <Options {...getListProps()} role="presentation" as={as}>
                 {this.renderList(getOptionProps, getDisabledOptionProps)}
+                {this.currentPage?.renderAfterChildren && (
+                  <Options.Item>
+                    {this.currentPage.renderAfterChildren()}
+                  </Options.Item>
+                )}
               </Options>
             </View>
           </View>

@@ -571,6 +571,7 @@ export type DrilldownTheme = {
   labelInfoPadding: Spacing['small']
   labelInfoColor: Colors['contrasts']['grey5782']
   borderColor: Colors['contrasts']['grey3045']
+  headerTitleTextDecoration: string
 }
 
 export type FileDropTheme = {
