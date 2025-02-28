@@ -48,7 +48,7 @@ category: utilities
 ---
 **/
 const MobileTopNav = ({
-  lightMode = false,
+  lti = false,
   brand,
   styles,
   children
@@ -61,6 +61,7 @@ const MobileTopNav = ({
   }, [open])
 
   const getSubComponent = (displayName: any) => {
+    // TODO: specify the type of the child
     return Children.map(children, (child: any) => child)?.filter(
       (child: any) => child?.type?.displayName === displayName
     )
@@ -75,8 +76,8 @@ const MobileTopNav = ({
           <IconButton
             withBackground={false}
             withBorder={false}
-            screenReaderLabel="burgir"
-            color={lightMode ? 'primary' : 'primary-inverse'}
+            screenReaderLabel="burger"
+            color={lti ? undefined : 'primary-inverse'}
             onClick={() => setOpen((open) => !open)}
           >
             {open ? <IconXLine /> : <IconHamburgerLine />}
@@ -97,60 +98,6 @@ const Menu = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
 
-const Title = ({ children }: PropsWithChildren) => {
-  return <div style={{ margin: '32px 0' }}>{children}</div>
-}
-
-Title.displayName = 'Title'
-
-const ItemList = ({
-  children,
-  title,
-  styles
-}: PropsWithChildren & { styles: any; title: any }) => {
-  return (
-    <Fragment>
-      {title && <Title>{title}</Title>}
-      {Children.map(children, (child, index) => (
-        <Fragment>
-          {child}
-          {index < React.Children.count(children) - 1 && (
-            <div style={styles.divider}></div>
-          )}
-        </Fragment>
-      ))}
-    </Fragment>
-  )
-}
-
-ItemList.displayName = 'ItemList'
-
-const Item = ({
-  children,
-  renderBeforeLabel,
-  renderAfterLabel,
-  onClick,
-  styles
-}: PropsWithChildren & {
-  renderBeforeLabel: any
-  renderAfterLabel: any
-  onClick: any
-  styles: any
-}) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-    <div style={styles.container} onClick={onClick}>
-      {renderBeforeLabel && (
-        <div style={styles.leftIcon}>{renderBeforeLabel}</div>
-      )}
-      {children}
-      {renderAfterLabel && (
-        <div style={styles.rightIcon}>{renderAfterLabel}</div>
-      )}
-    </div>
-  )
-}
-
 const withStyles =
   <ComponentOwnProps, ComponentStyle>(
     generateStyles: (props: any, theme: any) => ComponentStyle
@@ -169,12 +116,7 @@ const SC: any = withStyles(generateStyles)(MobileTopNav)
 
 SC.End = End
 SC.End.displayName = 'End'
-SC.Title = Title
-SC.ItemList = withStyles(generateItemListStyles)(ItemList)
 // TODO investigate whether displayName should be added to the original component
-SC.ItemList.displayName = 'ItemList'
-SC.Item = withStyles(generateItemStyles)(Item) //withStyles(generateItemStyles)(Item)
-SC.Item.displayName = 'Item'
 SC.Menu = Menu
 SC.Menu.displayName = 'Menu'
 SC.displayName = 'MobileTopNav'

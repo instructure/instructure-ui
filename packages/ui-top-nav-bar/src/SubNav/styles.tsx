@@ -27,10 +27,12 @@ const generateStyles = (_props: SubNavProps, theme: any) => {
   return {
     container: {
       marginLeft: '20px',
-      marginTop: '20px'
+      marginTop: '20px',
+      label: 'subNavContainer'
     },
     linkContainer: (item: any) => {
       return {
+        label: 'subNavLinkContainer',
         display: 'flex',
         alignItems: 'center',
         color: theme?.colors?.contrasts?.grey125125,
@@ -45,6 +47,7 @@ const generateStyles = (_props: SubNavProps, theme: any) => {
     },
     link: (item: any) => {
       return {
+        label: 'subNavLink',
         ...(item.selected && {
           color: theme?.colors?.contrasts?.grey125125,
           hoverColor: theme?.colors?.contrasts?.grey125125

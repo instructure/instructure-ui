@@ -38,7 +38,8 @@ const generateComponentTheme = (theme: Theme): DrilldownTheme => {
     headerActionColor: colors?.contrasts?.blue4570,
     labelInfoPadding: spacing?.small,
     labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045
+    borderColor: colors?.contrasts?.grey3045,
+    headerTitleTextDecoration: 'none'
   }
 
   return {
