@@ -22,19 +22,37 @@
  * SOFTWARE.
  */
 
-export { FormField } from './FormField'
-export { FormFieldLabel } from './FormFieldLabel'
-export { FormFieldMessage } from './FormFieldMessage'
-export { FormFieldMessages } from './FormFieldMessages'
-export { FormFieldLayout } from './FormFieldLayout'
-export { FormFieldGroup } from './FormFieldGroup'
+import PropTypes from 'prop-types'
 
-export { FormPropTypes } from './FormPropTypes'
-export type { FormMessageType, FormMessage } from './FormPropTypes'
+import type {
+  AsElementType,
+  PropValidators,
+  FormFieldLabelTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-export type { FormFieldOwnProps, FormFieldProps } from './FormField/props'
-export type { FormFieldLabelProps } from './FormFieldLabel/props'
-export type { FormFieldMessageProps } from './FormFieldMessage/props'
-export type { FormFieldMessagesProps } from './FormFieldMessages/props'
-export type { FormFieldLayoutProps } from './FormFieldLayout/props'
-export type { FormFieldGroupProps } from './FormFieldGroup/props'
+type FormFieldLabelOwnProps = {
+  children: React.ReactNode
+  as?: AsElementType
+}
+
+type PropKeys = keyof FormFieldLabelOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FormFieldLabelProps = FormFieldLabelOwnProps &
+  WithStyleProps<FormFieldLabelTheme, FormFieldLabelStyle> &
+  OtherHTMLAttributes<FormFieldLabelOwnProps>
+
+type FormFieldLabelStyle = ComponentStyle<'formFieldLabel'>
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node.isRequired,
+  as: PropTypes.elementType
+}
+
+const allowedProps: AllowedPropKeys = ['as', 'children']
+
+export type { FormFieldLabelProps, FormFieldLabelStyle }
+export { propTypes, allowedProps }

@@ -606,6 +606,14 @@ export type FormFieldLayoutTheme = {
   spacing: any // TODO remove any
 }
 
+export type FormFieldLabelTheme = {
+  color: Colors['contrasts']['grey125125']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+  fontSize: Typography['fontSizeMedium']
+  lineHeight: Typography['lineHeightFit']
+}
+
 export type FormFieldMessageTheme = {
   colorHint: Colors['contrasts']['grey125125']
   colorError: Colors['contrasts']['red4570']

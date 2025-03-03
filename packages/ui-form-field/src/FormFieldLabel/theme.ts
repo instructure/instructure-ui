@@ -22,19 +22,35 @@
  * SOFTWARE.
  */
 
-export { FormField } from './FormField'
-export { FormFieldLabel } from './FormFieldLabel'
-export { FormFieldMessage } from './FormFieldMessage'
-export { FormFieldMessages } from './FormFieldMessages'
-export { FormFieldLayout } from './FormFieldLayout'
-export { FormFieldGroup } from './FormFieldGroup'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { FormFieldLabelTheme } from '@instructure/shared-types'
 
-export { FormPropTypes } from './FormPropTypes'
-export type { FormMessageType, FormMessage } from './FormPropTypes'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): FormFieldLabelTheme => {
+  const { colors, typography, key: themeName } = theme
 
-export type { FormFieldOwnProps, FormFieldProps } from './FormField/props'
-export type { FormFieldLabelProps } from './FormFieldLabel/props'
-export type { FormFieldMessageProps } from './FormFieldMessage/props'
-export type { FormFieldMessagesProps } from './FormFieldMessages/props'
-export type { FormFieldLayoutProps } from './FormFieldLayout/props'
-export type { FormFieldGroupProps } from './FormFieldGroup/props'
+  const themeSpecificStyle: ThemeSpecificStyle<FormFieldLabelTheme> = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables: FormFieldLabelTheme = {
+    color: colors?.contrasts?.grey125125,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightBold,
+    fontSize: typography?.fontSizeMedium,
+    lineHeight: typography?.lineHeightFit
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
+}
+
+export default generateComponentTheme
