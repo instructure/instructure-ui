@@ -74,7 +74,18 @@ export {
   FormFieldMessage,
   FormFieldMessages,
   FormFieldLayout,
-  FormFieldGroup
+  FormFieldGroup,
+  FormPropTypes
+} from '@instructure/ui-form-field'
+export type {
+  FormFieldGroupProps,
+  FormFieldMessageProps,
+  FormFieldMessagesProps,
+  FormFieldLayoutProps,
+  FormFieldOwnProps,
+  FormFieldProps,
+  FormMessage,
+  FormMessageType
 } from '@instructure/ui-form-field'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid'
 export { Heading } from '@instructure/ui-heading'

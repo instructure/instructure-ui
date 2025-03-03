@@ -24,27 +24,19 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { Grid } from '@instructure/ui-grid'
-import { logError as error } from '@instructure/console'
 import {
   omitProps,
-  pickProps,
   getElementType,
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
-
-import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
-
 import generateStyle from './styles'
-
-import { propTypes, allowedProps } from './props'
+import { propTypes, allowedProps, FormFieldStyleProps } from './props'
 import type { FormFieldLayoutProps } from './props'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -52,7 +44,7 @@ parent: FormField
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 
@@ -67,19 +59,12 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
   constructor(props: FormFieldLayoutProps) {
     super(props)
-
     this._messagesId = props.messagesId || props.deterministicId!()
-
-    error(
-      typeof props.width !== 'undefined' ||
-        !props.inline ||
-        props.layout !== 'inline',
-      `[FormFieldLayout] The 'inline' prop is true, and the 'layout' is set to 'inline'.
-      This will cause a layout issue in Internet Explorer 11 unless you also add a value for the 'width' prop.`
-    )
+    this._labelId = props.deterministicId!('FormField-Label')
   }
 
   private _messagesId: string
+  private _labelId: string
 
   ref: Element | null = null
 
@@ -94,31 +79,51 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps())
+  }
+
+  makeStyleProps = (): FormFieldStyleProps => {
+    const hasNewErrorMsgAndIsGroup =
+      !!this.props.messages?.find((m) => m.type === 'newError') &&
+      !!this.props.isGroup
+    return {
+      hasMessages: this.hasMessages,
+      hasVisibleLabel: this.hasVisibleLabel,
+      // if true render error message above the controls (and below the label)
+      hasNewErrorMsgAndIsGroup: hasNewErrorMsgAndIsGroup
+    }
   }
 
   get hasVisibleLabel() {
-    return this.props.label && hasVisibleChildren(this.props.label)
+    return this.props.label ? hasVisibleChildren(this.props.label) : false
   }
 
   get hasMessages() {
-    return this.props.messages && this.props.messages.length > 0
+    if (!this.props.messages || this.props.messages.length == 0) {
+      return false
+    }
+    for (const msg of this.props.messages) {
+      if (msg.text) {
+        if (typeof msg.text === 'string') {
+          return msg.text.length > 0
+        }
+        // this is more complicated (e.g. an array, a React component,...)
+        // but we don't try to optimize here for these cases
+        return true
+      }
+    }
+    return false
   }
 
   get elementType() {
     return getElementType(FormFieldLayout, this.props)
   }
 
-  get inlineContainerAndLabel() {
-    // Return if both the component container and label will display inline
-    return this.props.inline && this.props.layout === 'inline'
-  }
-
-  handleInputContainerRef = (node: HTMLSpanElement | null) => {
+  handleInputContainerRef = (node: HTMLElement | null) => {
     if (typeof this.props.inputContainerRef === 'function') {
       this.props.inputContainerRef(node)
     }
@@ -126,99 +131,73 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
   renderLabel() {
     if (this.hasVisibleLabel) {
+      if (this.elementType == 'fieldset') {
+        // `legend` has some special built in CSS, this can only be reset
+        // this way https://stackoverflow.com/a/65866981/319473
+        return (
+          <legend style={{ display: 'contents' }}>
+            <span css={this.props.styles?.formFieldLabel}>
+              {this.props.label}
+            </span>
+          </legend>
+        )
+      }
       return (
-        <Grid.Col
-          textAlign={this.props.labelAlign}
-          width={this.inlineContainerAndLabel ? 'auto' : 3}
-        >
-          <FormFieldLabel
-            aria-hidden={this.elementType === 'fieldset' ? 'true' : undefined}
-          >
-            {this.props.label}
-          </FormFieldLabel>
-        </Grid.Col>
+        <span css={this.props.styles?.formFieldLabel}>{this.props.label}</span>
       )
-    } else if (this.elementType !== 'fieldset') {
-      // to avoid duplicate label/legend content
-      return this.props.label
-    } else {
-      return null
-    }
-  }
-
-  renderLegend() {
-    // note: the legend element must be the first child of a fieldset element for SR
-    // so we render it twice in that case (once for SR-only and one that is visible)
-    return (
-      <ScreenReaderContent as="legend">
-        {this.props.label}
-        {this.hasMessages && (
-          <FormFieldMessages messages={this.props.messages} />
-        )}
-      </ScreenReaderContent>
-    )
+    } else if (this.props.label) {
+      if (this.elementType == 'fieldset') {
+        return (
+          <legend id={this._labelId} style={{ display: 'contents' }}>
+            {this.props.label}
+          </legend>
+        )
+      }
+      // needs to be wrapped because it needs an `id`
+      return <div id={this._labelId}>{this.props.label}</div>
+    } else return null
   }
 
   renderVisibleMessages() {
     return this.hasMessages ? (
-      <Grid.Row>
-        <Grid.Col
-          offset={this.inlineContainerAndLabel ? undefined : 3}
-          textAlign={this.inlineContainerAndLabel ? 'end' : undefined}
-        >
-          <FormFieldMessages
-            id={this._messagesId}
-            messages={this.props.messages}
-          />
-        </Grid.Col>
-      </Grid.Row>
+      <FormFieldMessages
+        id={this._messagesId}
+        messages={this.props.messages}
+        gridArea="messages"
+      />
     ) : null
   }
 
   render() {
-    // any cast is needed to prevent Expression produces a union type that is too complex to represent errors
-    const ElementType = this.elementType as any
+    // Should be `<label>` if it's a FormField, fieldset if it's a group
+    const ElementType = this.elementType
 
     const { makeStyles, styles, messages, isGroup, ...props } = this.props
 
-    const { width, layout, children } = props
+    const { width, children } = props
 
-    const hasNewErrorMsg =
+    const hasNewErrorMsgAndIsGroup =
       !!messages?.find((m) => m.type === 'newError') && isGroup
     return (
       <ElementType
-        {...omitProps(props, [
-          ...FormFieldLayout.allowedProps,
-          ...Grid.allowedProps
-        ])}
+        {...omitProps(props, [...FormFieldLayout.allowedProps])}
         css={styles?.formFieldLayout}
-        style={{ width }}
         aria-describedby={this.hasMessages ? this._messagesId : undefined}
+        aria-errormessage={
+          this.props['aria-invalid'] ? this._messagesId : undefined
+        }
+        style={{ width }}
         ref={this.handleRef}
       >
-        {this.elementType === 'fieldset' && this.renderLegend()}
-        <Grid
-          rowSpacing="small"
-          colSpacing="small"
-          startAt={
-            layout === 'inline' && this.hasVisibleLabel ? 'medium' : null
-          }
-          {...pickProps(props, Grid.allowedProps)}
+        {this.renderLabel()}
+        {hasNewErrorMsgAndIsGroup && this.renderVisibleMessages()}
+        <span
+          css={styles?.formFieldChildren}
+          ref={this.handleInputContainerRef}
         >
-          <Grid.Row>
-            {this.renderLabel()}
-            <Grid.Col
-              width={this.inlineContainerAndLabel ? 'auto' : undefined}
-              elementRef={this.handleInputContainerRef}
-            >
-              {hasNewErrorMsg && (
-                <div css={styles?.groupErrorMessage}>{this.renderVisibleMessages()}</div>
-              )}
-              {children}
-            </Grid.Col>
-          </Grid.Row>
-          {!hasNewErrorMsg && this.renderVisibleMessages()}
-        </Grid>
+          {children}
+        </span>
+        {!hasNewErrorMsgAndIsGroup && this.renderVisibleMessages()}
       </ElementType>
     )
   }
