@@ -42,6 +42,11 @@ type FormFieldMessagesOwnProps = {
    * }`
    */
   messages?: FormMessage[]
+  /**
+   * Specifies the size and location if inside a CSS grid, see
+   * https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
+   */
+  gridArea?: string
 }
 
 type PropKeys = keyof FormFieldMessagesOwnProps
@@ -55,10 +60,11 @@ type FormFieldMessagesProps = FormFieldMessagesOwnProps &
 type FormFieldMessagesStyle = ComponentStyle<'formFieldMessages' | 'message'>
 
 const propTypes: PropValidators<PropKeys> = {
-  messages: PropTypes.arrayOf(FormPropTypes.message)
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  gridArea: PropTypes.string
 }
 
-const allowedProps: AllowedPropKeys = ['messages']
+const allowedProps: AllowedPropKeys = ['messages', 'gridArea']
 
 export type { FormFieldMessagesProps, FormFieldMessagesStyle }
 export { propTypes, allowedProps }

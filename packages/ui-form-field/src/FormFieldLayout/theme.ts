@@ -21,37 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { FormFieldLayout } from '../../packages/ui'
 
-import '../support/component'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { FormFieldLayoutTheme } from '@instructure/shared-types'
 
-describe('<FormField/>', () => {
-  it('should align FormFieldLayout label to right by default', () => {
-    cy.viewport(800, 600)
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): FormFieldLayoutTheme => {
+  const { colors, typography, spacing, breakpoints, key: themeName } = theme
 
-    cy.mount(
-      <FormFieldLayout label="Username" layout="inline">
-        <input type="text" />
-      </FormFieldLayout>
-    )
+  const themeSpecificStyle: ThemeSpecificStyle<FormFieldLayoutTheme> = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
 
-    cy.get('span[class$="-formFieldLayout__label"]')
-      .contains('Username')
-      .should('have.css', 'text-align', 'end')
-  })
+  const componentVariables: FormFieldLayoutTheme = {
+    color: colors?.licorice,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightBold,
+    fontSize: typography?.fontSizeMedium,
+    lineHeight: typography?.lineHeightFit,
+    inlinePadding: spacing?.xxSmall,
+    stackedOrInlineBreakpoint: breakpoints?.medium,
+    spacing: theme.spacing
+  }
 
-  it('should align FormFieldLayout label to left', () => {
-    cy.viewport(800, 600)
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
+}
 
-    cy.mount(
-      <FormFieldLayout label="Username" layout="inline" labelAlign="start">
-        <input type="text" />
-      </FormFieldLayout>
-    )
-
-    cy.get('span[class$="-formFieldLayout__label"]')
-      .contains('Username')
-      .should('have.css', 'text-align', 'start')
-  })
-})
+export default generateComponentTheme
