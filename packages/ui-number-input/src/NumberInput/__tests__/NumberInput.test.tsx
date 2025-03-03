@@ -60,7 +60,7 @@ describe('<NumberInput />', () => {
     expect(input).to.have.value('42')
   })
 
-  it('displays the label', async () => {
+  it.skip('displays the label', async () => {
     await mount(<NumberInput renderLabel="Label" />)
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()

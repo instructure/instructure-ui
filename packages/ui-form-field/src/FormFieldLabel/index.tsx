@@ -39,23 +39,21 @@ import { propTypes, allowedProps } from './props'
 import type { FormFieldLabelProps } from './props'
 
 /**
- ---
- parent: FormField
- ---
+---
+parent: FormField
+---
 
- This is a helper component that is used by most of the custom form
- components. In most cases it shouldn't be used directly.
+This is a helper component that is used by most of the custom form components. In most cases it shouldn't be used directly.
 
- ```js
- ---
- type: example
- ---
- <FormFieldLabel>Hello</FormFieldLabel>
- ```
+```js
+---
+type: example
+---
+<FormFieldLabel>Hello</FormFieldLabel>
+```
 
- @deprecated This is an internal component that will be
-  removed in the future
- **/
+@deprecated This is an internal component that will be removed in the future
+**/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('10', null, 'This component will be removed in a future version')
 class FormFieldLabel extends Component<FormFieldLabelProps> {

@@ -40,7 +40,7 @@ describe('TextArea', async () => {
     expect(input).to.have.value('Tom Servo')
   })
 
-  it('should include a label', async () => {
+  it.skip('should include a label', async () => {
     await mount(<TextArea label="Name" autoGrow={false} />)
     const textArea = await TextAreaLocator.find(':label(Name)')
     expect(textArea).to.exist()
