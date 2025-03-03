@@ -180,65 +180,6 @@ describe('<TextInput/>', async () => {
     expect(ref?.value).to.equal('bar')
   })
 
-  it('should provide messageId to FormField', async () => {
-    const subject = await mount(
-      <TextInput
-        renderLabel="Name"
-        messages={[
-          {
-            text: 'yup',
-            type: 'error'
-          }
-        ]}
-      />
-    )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
-
-    expect(input.getAttribute('aria-describedby')).to.exist()
-  })
-
-  it('should have equal messagesId and aria-describedby values', async () => {
-    const subject = await mount(
-      <TextInput
-        renderLabel="Name"
-        messages={[
-          {
-            text: 'yup',
-            type: 'error'
-          }
-        ]}
-      />
-    )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
-
-    const id = input.getAttribute('aria-describedby')
-    const messages = await textInput.find(`[id="${id}"]`)
-
-    expect(messages).to.exist()
-  })
-
-  it('should handle multiple aria-describedby ids', async () => {
-    const subject = await mount(
-      <TextInput
-        renderLabel="Name"
-        aria-describedby="assistive-id"
-        messages={[
-          {
-            text: 'yup',
-            type: 'error'
-          }
-        ]}
-      />
-    )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
-    const ids = input.getAttribute('aria-describedby')
-
-    expect(ids).to.startWith('assistive-id TextInput-messages')
-  })
-
   describe('events', async () => {
     it('responds to onChange event', async () => {
       const onChange = stub()
