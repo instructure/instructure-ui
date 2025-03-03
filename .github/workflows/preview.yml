@@ -29,4 +29,5 @@ jobs:
           source-dir: ./packages/__docs__/__build__
           preview-branch: gh-pages
           umbrella-dir: pr-preview
+          pages-base-url: instructure.design
           action: auto

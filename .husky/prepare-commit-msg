@@ -1,16 +1,14 @@
-# Don't run this hook on --amend or rebase
-# From https://github.com/commitizen/cz-cli/issues/672#issuecomment-1328123802
-#
-# Explanation:
-# Per the [prepare-commit-msg hook docs](https://git-scm.com/docs/githooks#_prepare_commit_msg),
-# the second argument can have these values:
-# - Empty: No message supplied
-# - "message": Message was supplied via -m or -F
-# - "template": Template was supplied via -t or via commit.template git config
-# - "merge": Commit is a merge commit or .git/MERGE_MSG file exists
-# - "squash": .git/SQUASH_MSG file exists
-# - "commit": -c, -C, or --amend was supplied. In this case, the script gets a third argument representing the commit object.
+# Skip the hook during --amend or rebase
 
-if [ -z "$2" ]; then
-  exec < /dev/tty && npx cz --hook
+# Check if the commit is an amend (source is "commit" with a third argument)
+if [ "$2" = "commit" ] && [ -n "$3" ]; then
+  exit 0
 fi
+
+# Check if a rebase is in progress
+if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+  exit 0
+fi
+
+# Otherwise, run Commitizen
+exec < /dev/tty && npx cz --hook
