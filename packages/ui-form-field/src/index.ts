@@ -33,6 +33,7 @@ export { FormPropTypes } from './FormPropTypes'
 export type { FormMessageType, FormMessage } from './FormPropTypes'
 
 export type { FormFieldOwnProps, FormFieldProps } from './FormField/props'
+export type { FormFieldLabelProps } from './FormFieldLabel/props'
 export type { FormFieldMessageProps } from './FormFieldMessage/props'
 export type { FormFieldMessagesProps } from './FormFieldMessages/props'
 export type { FormFieldLayoutProps } from './FormFieldLayout/props'
