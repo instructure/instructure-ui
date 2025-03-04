@@ -25,35 +25,34 @@
 import React, { Component } from 'react'
 import keycode from 'keycode'
 
+import type { PositionProps } from '@instructure/ui-position'
 import {
-  Position,
+  mirrorHorizontalPlacement,
   parsePlacement,
-  mirrorHorizontalPlacement
+  Position
 } from '@instructure/ui-position'
+import type { ContextViewProps, ViewProps } from '@instructure/ui-view'
 import { ContextView, View } from '@instructure/ui-view'
+import type { DialogProps } from '@instructure/ui-dialog'
 import { Dialog } from '@instructure/ui-dialog'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import {
-  findDOMNode,
   containsActiveElement,
-  requestAnimationFrame,
-  handleMouseOverOut
+  findDOMNode,
+  handleMouseOverOut,
+  requestAnimationFrame
 } from '@instructure/ui-dom-utils'
 
 import {
-  safeCloneElement,
   callRenderProp,
+  safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
+import { createChainedFunction, px, shallowEqual } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
-
-import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
-import type { ViewProps, ContextViewProps } from '@instructure/ui-view'
-import type { PositionProps } from '@instructure/ui-position'
-import type { DialogProps } from '@instructure/ui-dialog'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -63,6 +62,7 @@ import generateComponentTheme from './theme'
 import type { PopoverProps, PopoverState } from './props'
 import { allowedProps, propTypes } from './props'
 import type { Renderable } from '@instructure/shared-types'
+
 /**
 ---
 category: components
@@ -192,6 +192,15 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 
+  isContentOutOfView() {
+    if (this._contentElement) {
+      const rect = this._contentElement.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      return rect.bottom > windowHeight || rect.top < 0
+    }
+    return false
+  }
+
   componentWillUnmount() {
     this._raf.forEach((request) => request.cancel())
     this._raf = []
@@ -270,6 +279,10 @@ class Popover extends Component<PopoverProps, PopoverState> {
       } else if (secondaryPlacement === 'bottom') {
         offsetY = -offsetAmount
       }
+    }
+
+    if (this.isContentOutOfView()) {
+      offsetY = 0
     }
 
     return { offsetX, offsetY }
@@ -578,7 +591,15 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
         return (
           <ContextView {...viewProps} borderColor={styles?.borderColor}>
-            {content}
+            <div
+              style={{
+                position: 'relative',
+                maxHeight: this.isContentOutOfView() ? `50vh` : undefined,
+                overflowY: this.isContentOutOfView() ? 'auto' : undefined
+              }}
+            >
+              {content}
+            </div>
           </ContextView>
         )
       } else {
