@@ -100,8 +100,8 @@ const generateStyle = (
     fontWeight: componentTheme.fontWeight,
     fontSize: componentTheme.fontSize,
     lineHeight: componentTheme.lineHeight,
-    margin: '0 0 0.75rem 0',
     ...(isInlineLayout && {
+      margin: '0',
       // when inline add a small padding between the label and the control
       paddingRight: componentTheme.inlinePadding,
       // and use the horizontal alignment prop
@@ -148,6 +148,7 @@ const generateStyle = (
           )
         },
       columnGap: '0.375rem',
+      rowGap: '0.75rem',
       width: '100%',
       ...(inline && {
         display: 'inline-grid',
@@ -156,20 +157,16 @@ const generateStyle = (
     },
     formFieldLabel: {
       label: 'formFieldLayout__label',
-      ...(hasVisibleLabel && {
-        ...labelStyles,
-        // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
-        '&:is(label)': labelStyles,
-        '&:-webkit-any(label)': labelStyles
-      })
+      ...labelStyles,
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(label)': labelStyles,
+      '&:-webkit-any(label)': labelStyles
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',
       gridArea: 'controls',
       // add a small margin between the message and the controls
       ...(hasMessages && hasNewErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
-      ...(hasMessages &&
-        !hasNewErrorMsgAndIsGroup && { marginBottom: '0.75rem' }),
       ...(isInlineLayout &&
         inline && {
           [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
