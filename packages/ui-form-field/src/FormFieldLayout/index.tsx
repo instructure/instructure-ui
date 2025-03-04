@@ -154,7 +154,11 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         )
       }
       // needs to be wrapped because it needs an `id`
-      return <div id={this._labelId}>{this.props.label}</div>
+      return (
+        <div id={this._labelId} style={{ display: 'contents' }}>
+          {this.props.label}
+        </div>
+      )
     } else return null
   }
 
