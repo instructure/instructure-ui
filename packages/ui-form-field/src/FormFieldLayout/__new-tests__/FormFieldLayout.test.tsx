@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
@@ -56,7 +56,7 @@ describe('<FormFieldLayout />', () => {
       "label[class$='-formFieldLayout']"
     )
     const formFieldLabel = container.querySelector(
-      "span[class$='-formFieldLabel']"
+      "span[class$='-formFieldLayout__label']"
     )
 
     expect(formFieldLayout).toBeInTheDocument()
@@ -74,15 +74,13 @@ describe('<FormFieldLayout />', () => {
 
   it('should provide a ref to the input container', () => {
     const inputContainerRef = vi.fn()
-
+    const ref = React.createRef<HTMLInputElement>()
     render(
       <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>
-        <input type="text" />
+        <input type="text" ref={ref} />
       </FormFieldLayout>
     )
-
-    const input = screen.getByLabelText('Username')
-
-    expect(inputContainerRef).toHaveBeenCalledWith(input.parentElement)
+    expect(ref.current).toBeInstanceOf(HTMLInputElement)
+    expect(inputContainerRef).toHaveBeenCalledWith(ref.current!.parentElement)
   })
 })

@@ -218,4 +218,25 @@ describe('<RadioInputGroup />', async () => {
       ).to.be.true()
     })
   })
+
+  it('adds the correct ARIA attributes', async () => {
+    await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+        disabled={true}
+        data-id="group"
+        messages={[{ type: 'newError', text: 'abc' }]}
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = await RadioInputGroupLocator.find()
+    expect(group).to.have.attribute('role', 'radiogroup')
+    expect(group).to.have.attribute('aria-disabled', 'true')
+    expect(group).to.have.attribute('aria-invalid', 'true')
+    expect(group).to.have.attribute('aria-errormessage')
+  })
 })
