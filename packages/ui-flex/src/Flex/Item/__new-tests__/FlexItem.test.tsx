@@ -23,34 +23,39 @@
  */
 
 import React from 'react'
+import { render, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 
-import { expect, mount, within, wait, stub } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Item } from '../index'
 
-describe('<Item />', async () => {
+describe('<Item />', () => {
   it('should render children', async () => {
-    const subject = await mount(<Item>Flex item 1</Item>)
-    const item = within(subject.getDOMNode())
-    expect(item.find(':contains(Flex item 1)')).to.exist()
+    const { container } = render(<Item>Flex item 1</Item>)
+    const item = container.querySelector('[class$="-flexItem"]')
+
+    expect(item).toBeInTheDocument()
+    expect(item).toHaveTextContent('Flex item 1')
   })
 
   it('should support an elementRef prop', async () => {
-    const elementRef = stub()
+    const elementRef = vi.fn()
 
-    const subject = await mount(
+    const { container } = render(
       <Item elementRef={elementRef}>Flex item 2</Item>
     )
+    const item = container.querySelector('[class$="-flexItem"]')
 
-    await wait(() => {
-      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    await waitFor(() => {
+      expect(elementRef).toHaveBeenCalledWith(item)
     })
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<Item>Flex item 3</Item>)
+    const { container } = render(<Item>Flex item 3</Item>)
+    const axeCheck = await runAxeCheck(container)
 
-    const item = within(subject.getDOMNode())
-
-    expect(await item.accessible()).to.be.true()
+    expect(axeCheck).toBe(true)
   })
 })

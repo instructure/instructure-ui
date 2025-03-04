@@ -23,13 +23,16 @@
  */
 
 import React from 'react'
+import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 
-import { expect, mount, within, wait, stub } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Flex } from '../index'
 
-describe('<Flex />', async () => {
+describe('<Flex />', () => {
   it('should render Flex.Items as children', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -37,37 +40,43 @@ describe('<Flex />', async () => {
         <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')
+    expect(flex).toBeInTheDocument()
 
-    expect(subject.getDOMNode().children.length).to.equal(4)
+    const items = flex?.querySelectorAll('[class$="-flexItem"]')
+    expect(items?.length).toBe(4)
   })
 
   it('should render other markup as children', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex>
         <div>foo</div>
         <div>bar</div>
         <div>baz</div>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')
+    const childs = flex?.childNodes
 
-    expect(subject.getDOMNode().children.length).to.equal(3)
+    expect(childs?.length).toBe(3)
   })
 
   it('should render children when children is a function', async () => {
-    const subject = await mount(<Flex>{() => <div>hello world</div>}</Flex>)
+    render(<Flex>{() => <div>hello world</div>}</Flex>)
+    const child = screen.getByText('hello world')
 
-    const flex = within(subject.getDOMNode())
-    expect(await flex.findWithText('hello world')).to.exist()
+    expect(child).toBeInTheDocument()
   })
 
   it('should render no markup if there are no children', async () => {
-    const subject = await mount(<Flex></Flex>)
+    const { container } = render(<Flex></Flex>)
+    const flex = container.querySelector('[class$="-flex-flex"]')
 
-    expect(subject.getDOMNode()).to.not.exist()
+    expect(flex).not.toBeInTheDocument()
   })
 
   it('should accept width and height as props', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex width="400px" height="200px">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -75,186 +84,172 @@ describe('<Flex />', async () => {
         <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flexStyle = window.getComputedStyle(flex)
 
-    const flex = within(subject.getDOMNode())
-
-    await wait(() => {
-      expect(flex.getComputedStyle().width).to.equal('400px')
-      expect(flex.getComputedStyle().height).to.equal('200px')
-    })
+    expect(flexStyle.width).toBe('400px')
+    expect(flexStyle.height).toBe('200px')
   })
 
   it('should set flex-direction with the direction property', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex direction="column">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flexStyle = window.getComputedStyle(flex)
 
-    const flex = within(subject.getDOMNode())
-
-    await wait(() => {
-      expect(flex.getComputedStyle().flexDirection).to.equal('column')
-    })
+    expect(flexStyle.flexDirection).toBe('column')
   })
 
   it('should render an inline-flex container with the display property', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex display="inline-flex">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-inlineFlex-flex"]')!
+    const flexStyle = window.getComputedStyle(flex)
 
-    const flex = within(subject.getDOMNode())
-
-    await wait(() => {
-      expect(flex.getComputedStyle().display).to.equal('inline-flex')
-    })
+    expect(flexStyle.display).toBe('inline-flex')
   })
 
   it('should set align-items with the alignItems property', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex alignItems="start">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = within(subject.getDOMNode())
+    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flexStyle = window.getComputedStyle(flex)
 
-    await wait(() => {
-      expect(flex.getComputedStyle().alignItems).to.equal('flex-start')
-    })
+    expect(flexStyle.alignItems).toBe('flex-start')
   })
 
   it('should set justify-content with the justifyItems property', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex justifyItems="space-between">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flexStyle = window.getComputedStyle(flex)
 
-    const flex = within(subject.getDOMNode())
-
-    await wait(() => {
-      expect(flex.getComputedStyle().justifyContent).to.equal('space-between')
-    })
+    expect(flexStyle.justifyContent).toBe('space-between')
   })
 
   it('should set flex-wrap with the wrap property', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex wrap="wrap">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flexStyle = window.getComputedStyle(flex)
 
-    const flex = within(subject.getDOMNode())
-
-    await wait(() => {
-      expect(flex.getComputedStyle().flexWrap).to.equal('wrap')
-    })
+    expect(flexStyle.flexWrap).toBe('wrap')
   })
 
   it('should let Flex.Items align themselves with the align property', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex alignItems="end">
         <Flex.Item align="stretch">Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const item = screen.getByText('Flex item 1')
 
-    const flex = within(subject.getDOMNode())
-    const item = await flex.findWithText('Flex item 1')
+    const flexStyle = window.getComputedStyle(flex)
+    const itemStyle = window.getComputedStyle(item)
 
-    await wait(() => {
-      expect(flex.getComputedStyle().alignItems).to.equal('flex-end')
-      expect(item.getComputedStyle().alignSelf).to.equal('stretch')
-    })
+    expect(flexStyle.alignItems).toBe('flex-end')
+    expect(itemStyle.alignSelf).toBe('stretch')
   })
 
   it('should let Flex.Items flex-grow with the shouldGrow property', async () => {
-    const subject = await mount(
+    render(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item shouldGrow>Flex item 2</Flex.Item>
       </Flex>
     )
+    const item1 = screen.getByText('Flex item 1')
+    const item2 = screen.getByText('Flex item 2')
 
-    const flex = within(subject.getDOMNode())
-    const item1 = await flex.findWithText('Flex item 1')
-    const item2 = await flex.findWithText('Flex item 2')
+    const item1Style = window.getComputedStyle(item1)
+    const item2Style = window.getComputedStyle(item2)
 
-    await wait(() => {
-      expect(item1.getComputedStyle().flexGrow).to.equal('0')
-      expect(item2.getComputedStyle().flexGrow).to.equal('1')
-    })
+    expect(item1Style.flexGrow).toBe('')
+    expect(item2Style.flexGrow).toBe('1')
   })
 
   it('should let Flex.Items flex-shrink with the shouldShrink property', async () => {
-    const subject = await mount(
+    render(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item shouldShrink>Flex item 2</Flex.Item>
       </Flex>
     )
+    const item1 = screen.getByText('Flex item 1')
+    const item2 = screen.getByText('Flex item 2')
 
-    const flex = within(subject.getDOMNode())
-    const item1 = await flex.findWithText('Flex item 1')
-    const item2 = await flex.findWithText('Flex item 2')
+    const item1Style = window.getComputedStyle(item1)
+    const item2Style = window.getComputedStyle(item2)
 
-    await wait(() => {
-      expect(item1.getComputedStyle().flexShrink).to.equal('0')
-      expect(item2.getComputedStyle().flexShrink).to.equal('1')
-    })
+    expect(item1Style.flexShrink).toBe('0')
+    expect(item2Style.flexShrink).toBe('1')
   })
 
   it('should set flex-basis and min-width on Flex.Items with the size property', async () => {
-    const subject = await mount(
+    render(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
         <Flex.Item size="100px">Flex item 3</Flex.Item>
       </Flex>
     )
+    const item2 = screen.getByText('Flex item 2')
+    const item3 = screen.getByText('Flex item 3')
 
-    const flex = within(subject.getDOMNode())
-    const item2 = await flex.findWithText('Flex item 2')
-    const item3 = await flex.findWithText('Flex item 3')
+    const item2Style = window.getComputedStyle(item2)
+    const item3Style = window.getComputedStyle(item3)
 
-    await wait(() => {
-      expect(item3.getComputedStyle().flexBasis).to.equal('100px')
-      expect(item3.getComputedStyle().minWidth).to.equal('100px')
-      expect(item2.getComputedStyle().flexBasis).to.equal('auto')
-    })
+    expect(item2Style.flexBasis).toBe('')
+    expect(item3Style.flexBasis).toBe('100px')
+    expect(item3Style.minWidth).toBe('100px')
   })
 
   it('should support an elementRef prop', async () => {
-    const elementRef = stub()
+    const elementRef = vi.fn()
 
-    const subject = await mount(
+    const { container } = render(
       <Flex elementRef={elementRef}>
         <Flex.Item>Flex item</Flex.Item>
       </Flex>
     )
+    const flex = container.querySelector('[class$="-flex-flex"]')
 
-    await wait(() => {
-      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    await waitFor(() => {
+      expect(elementRef).toHaveBeenCalledWith(flex)
     })
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
+    const { container } = render(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
+    const axeCheck = await runAxeCheck(container)
 
-    const flex = within(subject.getDOMNode())
-
-    expect(await flex.accessible()).to.be.true()
+    expect(axeCheck).toBe(true)
   })
 })
