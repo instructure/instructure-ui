@@ -7,9 +7,8 @@
   },
   "include": ["src"],
   "references": [
+    { "path": "../ui-axe-check/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-locator/tsconfig.build.json" },
-    { "path": "../ui-test-queries/tsconfig.build.json" },
     { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../ui-themes/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
