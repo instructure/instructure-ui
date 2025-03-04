@@ -335,6 +335,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       margin,
       onDropAccepted,
       onDropRejected,
+      styles,
       ...props
     } = this.props
     const id = this.props.id || this.defaultId!
@@ -368,6 +369,10 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
             borderRadius="large"
             focusColor={focusColor}
             height={height}
+            focusRingBorderRadius={String(
+              (styles?.fileDropLayout as { borderRadius?: string | number })
+                ?.borderRadius
+            )}
           >
             <span css={this.props.styles?.fileDropLabelContent}>
               <span css={this.props.styles?.fileDropLayout}>
