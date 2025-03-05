@@ -23,130 +23,146 @@
  */
 
 import React from 'react'
-import { expect, find, mount, stub } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 
 import { Tab } from '../index'
 
-describe('<Tabs.Tab />', async () => {
+describe('<Tabs.Tab />', () => {
   it('should render children', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
+    const children = screen.getByText('Tab Label')
 
-    const tab = await find('[role="tab"]')
-
-    expect(tab.getTextContent()).to.equal('Tab Label')
+    expect(children).toBeInTheDocument()
   })
 
   it('should have appropriate role attribute', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
-    expect(await find('[role="tab"]')).to.exist()
+    const tab = screen.getByRole('tab')
+
+    expect(tab).toBeInTheDocument()
   })
 
   it('should have appropriate aria attributes', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
+    const tab = screen.getByRole('tab')
 
-    const tab = await find('[role="tab"]')
-
-    expect(tab.getAttribute('aria-selected')).to.not.exist()
-    expect(tab.getAttribute('aria-disabled')).to.not.exist()
+    expect(tab).not.toHaveAttribute('aria-selected')
+    expect(tab).not.toHaveAttribute('aria-disabled')
   })
 
   it('should set the aria-selected attribute', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel" isSelected>
         Tab Label
       </Tab>
     )
-    expect(await find('[role="tab"][aria-selected="true"]')).to.exist()
+    const tab = screen.getByRole('tab')
+
+    expect(tab).toHaveAttribute('aria-selected', 'true')
   })
 
   it('should set the aria-disabled attribute', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel" isDisabled>
         Tab Label
       </Tab>
     )
-    expect(await find('[role="tab"][aria-disabled="true"]')).to.exist()
+    const tab = screen.getByRole('tab')
+
+    expect(tab).toHaveAttribute('aria-disabled', 'true')
   })
 
   it('should set the tabindex to 0 when selected', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel" isSelected>
         Tab Label
       </Tab>
     )
-    expect(await find('[role="tab"][tabindex="0"]')).to.exist()
+    const tab = screen.getByRole('tab')
+
+    expect(tab).toHaveAttribute('tabindex', '0')
   })
 
   it('should not set the tabindex when not selected', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
       </Tab>
     )
-    const tab = await find('[role="tab"]')
-    expect(tab).to.not.have.attribute('tabindex')
+    const tab = screen.getByRole('tab')
+
+    expect(tab).not.toHaveAttribute('tabindex')
   })
 
   it('should remove the tabindex attribute when disabled', async () => {
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel" isDisabled>
         Tab Label
       </Tab>
     )
+    const tab = screen.getByRole('tab')
 
-    const tab = await find('[role="tab"]')
-
-    expect(tab.getAttribute('tabindex')).to.not.exist()
+    expect(tab).not.toHaveAttribute('tabindex')
   })
 
   it('should call onClick when clicked', async () => {
-    const onClick = stub()
+    const onClick = vi.fn()
     const index = 2
 
-    await mount(
+    render(
       <Tab id="foo" index={index} controls="foo-panel" onClick={onClick}>
         Tab Label
       </Tab>
     )
+    const tab = screen.getByRole('tab')
 
-    const tab = await find('[role="tab"]')
-    await tab.click()
+    await userEvent.click(tab)
 
-    expect(onClick).to.have.been.called()
-    expect(onClick.args[0][1].index).to.equal(index)
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalled()
+
+      const args = onClick.mock.calls[0][1]
+      expect(args).toHaveProperty('index', index)
+    })
   })
 
   it('should NOT call onClick when clicked and tab is disabled', async () => {
-    const onClick = stub()
+    const onClick = vi.fn()
 
-    await mount(
+    render(
       <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} isDisabled>
         Tab Label
       </Tab>
     )
-    const tab = await find('[role="tab"]')
-    await tab.click()
+    const tab = screen.getByRole('tab')
 
-    expect(onClick).to.not.have.been.called()
+    await userEvent.click(tab)
+
+    await waitFor(() => {
+      expect(onClick).not.toHaveBeenCalled()
+    })
   })
 
   it('should call onKeyDown when keys are pressed and tab is selected', async () => {
-    const onKeyDown = stub()
+    const onKeyDown = vi.fn()
     const index = 2
 
-    await mount(
+    render(
       <Tab
         id="foo"
         isSelected
@@ -157,18 +173,22 @@ describe('<Tabs.Tab />', async () => {
         Tab Label
       </Tab>
     )
+    const tab = screen.getByRole('tab')
 
-    const tab = await find('[role="tab"]')
-    await tab.keyDown('enter')
+    await userEvent.type(tab, '{enter}')
 
-    expect(onKeyDown).to.have.been.called()
-    expect(onKeyDown.args[0][1].index).to.equal(index)
+    await waitFor(() => {
+      expect(onKeyDown).toHaveBeenCalled()
+
+      const args = onKeyDown.mock.calls[0][1]
+      expect(args).toHaveProperty('index', index)
+    })
   })
 
   it('should NOT call onKeyDown when keys are pressed and tab is disabled', async () => {
-    const onKeyDown = stub()
+    const onKeyDown = vi.fn()
 
-    await mount(
+    render(
       <Tab
         id="foo"
         index={0}
@@ -179,16 +199,12 @@ describe('<Tabs.Tab />', async () => {
         Tab Label
       </Tab>
     )
-    const tab = await find('[role="tab"]')
+    const tab = screen.getByRole('tab')
 
-    let error = false
-    try {
-      await tab.keyDown('enter')
-    } catch (event) {
-      error = true
-    }
+    await userEvent.type(tab, '{enter}')
 
-    expect(error).to.be.true()
-    expect(onKeyDown).to.not.have.been.called()
+    await waitFor(() => {
+      expect(onKeyDown).not.toHaveBeenCalled()
+    })
   })
 })
