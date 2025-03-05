@@ -132,7 +132,11 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * provides a reference to the underlying html root element
    */
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  /**
+   * Whether or not the element is a Tooltip
+   */
+  isTooltip: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

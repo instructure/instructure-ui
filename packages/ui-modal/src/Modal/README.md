@@ -9,82 +9,63 @@ The default `padding` of the Modal content is `medium` but can be overridden
 by using the `padding` prop on the `<Modal.Body/>` if the use case requires it.
 
 - ```js
-  const fpo = lorem.paragraphs(5)
+  const Example = () => {
+    const [open, setOpen] = useState(false)
 
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
-
-      this.state = {
-        open: false
-      }
+    const handleButtonClick = () => {
+      setOpen((state) => !state)
     }
 
-    handleButtonClick = () => {
-      this.setState(function (state) {
-        return { open: !state.open }
-      })
-    }
-
-    handleFormSubmit = (e) => {
-      e.preventDefault()
-      console.log('form submitted')
-      this.setState((state) => ({ open: false }))
-    }
-
-    renderCloseButton() {
+    const renderCloseButton = () => {
       return (
         <CloseButton
           placement="end"
           offset="small"
-          onClick={this.handleButtonClick}
+          onClick={handleButtonClick}
           screenReaderLabel="Close"
         />
       )
     }
 
-    render() {
-      return (
-        <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
-          <Button onClick={this.handleButtonClick}>
-            {this.state.open ? 'Close' : 'Open'} the Modal
-          </Button>
-          <Modal
-            as="form"
-            open={this.state.open}
-            onDismiss={() => {
-              this.setState({ open: false })
-            }}
-            onSubmit={this.handleFormSubmit}
-            size="auto"
-            label="Hello World"
-            shouldCloseOnDocumentClick
-          >
-            <Modal.Header>
-              {this.renderCloseButton()}
-              <Heading>Hello World</Heading>
-            </Modal.Header>
-            <Modal.Body>
-              <TextInput
-                renderLabel="Example"
-                placeholder="if you hit enter here, it should submit the form"
-              />
-              <Text lineHeight="double">{fpo}</Text>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleButtonClick} margin="0 x-small 0 0">
-                Close
-              </Button>
-              <Button color="primary" type="submit">
-                Submit
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      )
-    }
-  }
+    return (
+      <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
+        <Tooltip renderTip="Hello. I'm a tool tip" as={Button}>
+          Hover or focus me
+        </Tooltip>
 
+        <Button onClick={handleButtonClick}>
+          {open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Modal
+          open={open}
+          onDismiss={() => {
+            setOpen(false)
+          }}
+          size="auto"
+          label="Hello World"
+          shouldCloseOnDocumentClick
+        >
+          <Modal.Header>
+            {renderCloseButton()}
+            <Heading>Hello World</Heading>
+          </Modal.Header>
+          <Modal.Body>
+            <Tooltip
+              renderTip="Hello. I'm a tool tip"
+              placement="start"
+              on={['click', 'hover', 'focus']}
+            >
+              <IconInfoLine />
+            </Tooltip>
+
+            <Tooltip renderTip="Hello. I'm a tool tip" as={Button}>
+              Hover or focus me
+            </Tooltip>
+          </Modal.Body>
+        </Modal>
+      </div>
+    )
+  }
   render(<Example />)
   ```
 
@@ -164,137 +145,83 @@ By default, Modals are positioned relative to the document body.
 Setting the `constrain` property to `parent` will constrain the Modal within the element it is mounted from (specified via the `mountNode` property). Note: in these cases, the `mountNode` element should have an explicit `height` set: Because Modal is absolutely positioned, it has no height of its own.
 
 - ```js
-  const fpo = lorem.paragraphs(1)
+  const FPO = lorem.paragraph()
   class Example extends React.Component {
     constructor(props) {
       super(props)
-
       this.state = {
-        open: false,
-        size: 'auto'
+        open: false
       }
     }
 
-    handleButtonClick = () => {
-      this.setState(function (state) {
-        return { open: !state.open }
+    hideTray = () => {
+      this.setState({
+        open: false
       })
     }
 
     renderCloseButton() {
       return (
-        <CloseButton
-          placement="end"
-          offset="small"
-          onClick={this.handleButtonClick}
-          screenReaderLabel="Close"
-        />
+        <Flex>
+          <Flex.Item shouldGrow shouldShrink>
+            <Heading>Hello</Heading>
+          </Flex.Item>
+          <Flex.Item>
+            <CloseButton
+              placement="end"
+              offset="small"
+              screenReaderLabel="Close"
+              onClick={this.hideTray}
+            />
+          </Flex.Item>
+        </Flex>
       )
     }
 
     render() {
       return (
-        <div>
-          <Button onClick={this.handleButtonClick}>
-            {this.state.open ? 'Close' : 'Open'} the Modal
+        <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
+          <Button
+            onClick={() => {
+              this.setState({ open: true })
+            }}
+          >
+            Show the Tray
           </Button>
-          <Modal
+          <Tray
+            label="Tray Example"
             open={this.state.open}
             onDismiss={() => {
               this.setState({ open: false })
             }}
-            size="fullscreen"
-            label="Hello World"
-            shouldCloseOnDocumentClick
-            mountNode={() => document.getElementById('constrainExample')}
-            constrain="parent"
+            size="small"
+            placement="start"
           >
-            <Modal.Header>
+            <View as="div" padding="medium">
               {this.renderCloseButton()}
-              <Heading>This Modal is constrained to a parent</Heading>
-            </Modal.Header>
-            <Modal.Body>
-              <View as="p" margin="none none small">
-                <Text>{fpo}</Text>
-              </View>
-              <ModalAutoCompleteExample renderLabel="Choose a state" />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleButtonClick} margin="0 x-small 0 0">
-                Close
-              </Button>
+              <Text as="p" lineHeight="double">
+                {FPO}
+              </Text>
+            </View>
+            <Tooltip
+              renderTip="Hello. I'm a tool tip"
+
+              // onShowContent={() => console.log('showing')}
+              // onHideContent={() => console.log('hidden')}
+            >
               <Button
-                onClick={this.handleButtonClick}
-                color="primary"
-                type="submit"
+                onClick={() => {
+                  this.setState({ open: false })
+                }}
               >
-                Submit
+                Hello Instructure
               </Button>
-            </Modal.Footer>
-          </Modal>
-          <View
-            background="primary-inverse"
-            margin="medium auto none"
-            display="block"
-            width="25rem"
-            height="25rem"
-            borderWidth="large"
-            id="constrainExample"
-          ></View>
+            </Tooltip>
+          </Tray>
         </div>
       )
     }
   }
-
-  class ModalAutoCompleteExample extends React.Component {
-    state = {
-      isShowingOptions: false
-    }
-
-    handleShowOptions = () => {
-      this.setState({ isShowingOptions: true })
-    }
-    handleHideOptions = () => {
-      this.setState({ isShowingOptions: false })
-    }
-    render() {
-      const options = [
-        'Alabama',
-        'Alaska',
-        'American Samoa',
-        'Arizona',
-        'Arkansas',
-        'California',
-        'Colorado',
-        'Connecticut',
-        'Delaware',
-        'District Of Columbia',
-        'Federated States Of Micronesia',
-        'Florida',
-        'Georgia',
-        'Guam',
-        'Hawaii',
-        'Idaho',
-        'Illinois'
-      ]
-
-      return (
-        <Select
-          {...this.props}
-          isShowingOptions={this.state.isShowingOptions}
-          onRequestShowOptions={this.handleShowOptions}
-          onRequestHideOptions={this.handleHideOptions}
-        >
-          {options.map((label, index) => (
-            <Select.Option key={label} id={'' + index}>
-              {label}
-            </Select.Option>
-          ))}
-        </Select>
-      )
-    }
-  }
-
   render(<Example />)
   ```
 
@@ -422,77 +349,67 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
 
 - ```js
   class Example extends React.Component {
-    constructor(props) {
-      super(props)
-
-      this.state = {
-        open: false
-      }
+    state = {
+      isShowingContent: false
     }
 
-    handleButtonClick = () => {
-      this.setState(function (state) {
-        return { open: !state.open }
-      })
+    renderCloseButton() {
+      return (
+        <CloseButton
+          placement="end"
+          offset="small"
+          onClick={() => this.setState({ isShowingContent: false })}
+          screenReaderLabel="Close"
+        />
+      )
     }
 
     render() {
       return (
-        <div>
-          <Button onClick={this.handleButtonClick}>
-            {this.state.open ? 'Close' : 'Open'} the Modal
-          </Button>
-          <Modal
-            open={this.state.open}
-            onDismiss={() => {
-              this.setState({ open: false })
+        <View>
+          <Popover
+            renderTrigger={<Button>Sign In</Button>}
+            isShowingContent={this.state.isShowingContent}
+            onShowContent={(e) => {
+              this.setState({ isShowingContent: true })
             }}
-            size="auto"
-            label="Hello Media"
+            onHideContent={(e, { documentClick }) => {
+              this.setState({ isShowingContent: false })
+            }}
+            on="click"
+            screenReaderLabel="Popover Dialog Example"
+            shouldContainFocus
+            shouldReturnFocus
             shouldCloseOnDocumentClick
-            variant="inverse"
+            offsetY="16px"
           >
-            <Modal.Header>
-              <Flex>
-                <Flex.Item shouldGrow shouldShrink>
-                  <Heading level="h2">
-                    <TruncateText>A small image</TruncateText>
-                  </Heading>
-                </Flex.Item>
-                <Flex.Item>
-                  <CloseButton
-                    color="primary-inverse"
-                    placement="end"
-                    offset="small"
-                    onClick={this.handleButtonClick}
-                    screenReaderLabel="Close"
-                  />
-                </Flex.Item>
-              </Flex>
-            </Modal.Header>
-            <Modal.Body padding="none">
-              <Img
-                src={placeholderImage(500, 250)}
-                display="block"
-                margin="0 auto"
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                onClick={this.handleButtonClick}
-                withBackground={false}
-                color="primary-inverse"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
+            <View padding="medium" display="block" as="form">
+              {this.renderCloseButton()}
+              <FormFieldGroup description="Log In">
+                <TextInput
+                  renderLabel="Username"
+                  inputRef={(el) => {
+                    if (el) {
+                      this._username = el
+                    }
+                  }}
+                />
+                <TextInput renderLabel="Password" type="password" />
+              </FormFieldGroup>
+            </View>
+          </Popover>
+          <Tooltip
+            renderTip="Hello. I'm a tool tip"
+            as={Button}
+            onShowContent={() => console.log('showing')}
+            onHideContent={() => console.log('hidden')}
+          >
+            Hover or focus me
+          </Tooltip>
+        </View>
       )
     }
   }
-
   render(<Example />)
   ```
 

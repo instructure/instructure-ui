@@ -183,7 +183,8 @@ class Popover extends Component<PopoverProps, PopoverState> {
       this._focusRegion = new FocusRegion(this._contentElement, {
         shouldCloseOnEscape: this.props.shouldCloseOnEscape,
         shouldCloseOnDocumentClick: false,
-        onDismiss: this.hide
+        onDismiss: this.hide,
+        isTooltip: true
       })
 
       if (this.shown) {
