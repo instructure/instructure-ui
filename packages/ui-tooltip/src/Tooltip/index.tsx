@@ -159,7 +159,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         defaultIsShowingContent={defaultIsShowingContent}
         on={on}
         shouldRenderOffscreen
-        shouldReturnFocus={true}
+        shouldReturnFocus={false}
         placement={placement}
         color={color === 'primary' ? 'primary-inverse' : 'primary'}
         mountNode={mountNode}

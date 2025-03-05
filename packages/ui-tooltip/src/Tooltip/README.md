@@ -21,8 +21,6 @@ type: example
     <Tooltip
       renderTip="Hello. I'm a tool tip"
       as={Button}
-      onShowContent={() => console.log('showing')}
-      onHideContent={() => console.log('hidden')}
     >
       Hover or focus me
     </Tooltip>
