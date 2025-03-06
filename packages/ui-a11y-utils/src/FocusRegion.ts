@@ -50,7 +50,8 @@ class FocusRegion {
   constructor(element: Element | Node | null, options: FocusRegionOptions) {
     this._options = options || {
       shouldCloseOnDocumentClick: true,
-      shouldCloseOnEscape: true
+      shouldCloseOnEscape: true,
+      isTooltip: false
     }
     this._contextElement = element
     this._screenReaderFocusRegion = new ScreenReaderFocusRegion(
@@ -122,6 +123,10 @@ class FocusRegion {
       if (fileInputFocused) {
         ;(<HTMLInputElement>activeElement).blur()
       } else {
+        //This should prevent a Tooltip from closing when inside of a Modal
+        if (this._options.isTooltip) {
+          event.stopPropagation()
+        }
         this.handleDismiss(event)
       }
     }
@@ -169,9 +174,14 @@ class FocusRegion {
           }
         })
       }
-
+      //This will ensure that the Tooltip's Escape event listener is executed first
+      //because listeners in the capturing phase are called before other event listeners (like that of the Modal's Escape listener)
+      //so a Modal with a Tooltip will not get closed when closing the Tooltip with Escape
+      const useCapture = this._options.isTooltip
       if (this._options.shouldCloseOnEscape) {
-        this._listeners.push(addEventListener(doc, 'keyup', this.handleKeyUp))
+        this._listeners.push(
+          addEventListener(doc, 'keyup', this.handleKeyUp, useCapture)
+        )
       }
 
       this._active = true

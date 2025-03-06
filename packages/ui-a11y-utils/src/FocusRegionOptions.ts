@@ -82,4 +82,8 @@ export type FocusRegionOptions = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * Whether or not the element is a Tooltip
+   */
+  isTooltip?: boolean
 }
