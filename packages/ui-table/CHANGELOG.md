@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
+
+
+### Bug Fixes
+
+* **ui-table:** match fontWeight in style to the appropriate theme variabel ([abad1cc](https://github.com/instructure/instructure-ui/commit/abad1cc60880460f1cb854864d2e5eae1f0d38df))
+
+
+
+
+
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
 **Note:** Version bump only for package @instructure/ui-table

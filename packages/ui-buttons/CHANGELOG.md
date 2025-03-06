@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
+
+
+### Bug Fixes
+
+* **ui-view,ui-file-drop,ui-buttons:** make focus ring radius fit the enclosed element's radius ([1283939](https://github.com/instructure/instructure-ui/commit/128393959340cf0408f5c33b094c5d7f721553e9))
+
+
+
+
+
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
 **Note:** Version bump only for package @instructure/ui-buttons
