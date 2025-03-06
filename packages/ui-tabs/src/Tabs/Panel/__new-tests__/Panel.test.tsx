@@ -21,7 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { TabsLocator } from './TabsLocator'
 
-export { TabsLocator }
-export default TabsLocator
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+import { Panel } from '../index'
+
+describe('<Tabs.Panel />', () => {
+  it('should render children', async () => {
+    render(
+      <Panel isSelected renderTitle="Panel Title">
+        Panel contents
+      </Panel>
+    )
+    const children = screen.getByText('Panel contents')
+
+    expect(children).toBeInTheDocument()
+  })
+
+  it('should have appropriate role attribute', async () => {
+    const {container} = render(
+      <Panel isSelected renderTitle="Panel Title">
+        Panel contents
+      </Panel>
+    )
+    const tabPanel = container.querySelector('[class$="-panel"]')
+
+    expect(tabPanel).toHaveAttribute('role', 'tabpanel')
+  })
+})
