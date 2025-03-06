@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
+
+
+### Bug Fixes
+
+* **many:** fix form label not read by NVDA in hover mode and other layout issues ([ef77281](https://github.com/instructure/instructure-ui/commit/ef77281890511e8eea794196445d3ef2454537ba))
+* **ui-form-field:** fix Select's focus selecting its leaf not instead of the input field ([efe0c4f](https://github.com/instructure/instructure-ui/commit/efe0c4f390beeb34e8cdb047b37500bbc6865b34))
+
+
+
+
+
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
 

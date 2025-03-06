@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
+
+
+### Bug Fixes
+
+* **many:** fix form label not read by NVDA in hover mode and other layout issues ([ef77281](https://github.com/instructure/instructure-ui/commit/ef77281890511e8eea794196445d3ef2454537ba))
+* **many:** fix Tooltip focus issues and make Tooltip closeable inside of a Modal ([3d05afe](https://github.com/instructure/instructure-ui/commit/3d05afe7506eaf81644860edd6f9501bf20de83f))
+* **ui-form-field:** fix Select's focus selecting its leaf not instead of the input field ([efe0c4f](https://github.com/instructure/instructure-ui/commit/efe0c4f390beeb34e8cdb047b37500bbc6865b34))
+* **ui-pagination:** remove padding from legacy Pagination ([dd2638e](https://github.com/instructure/instructure-ui/commit/dd2638e163505fd9d65359b547fcf34dd4846941))
+* **ui-rating:** add text value to Rating examples ([502449d](https://github.com/instructure/instructure-ui/commit/502449d2ab32f0fbc5a5e039d503fa1b97726538))
+* **ui-table:** match fontWeight in style to the appropriate theme variabel ([abad1cc](https://github.com/instructure/instructure-ui/commit/abad1cc60880460f1cb854864d2e5eae1f0d38df))
+* **ui-view,ui-file-drop,ui-buttons:** make focus ring radius fit the enclosed element's radius ([1283939](https://github.com/instructure/instructure-ui/commit/128393959340cf0408f5c33b094c5d7f721553e9))
+
+
+### Features
+
+* **ui-date-input:** add feature to disable dates and access the input's ref ([411219e](https://github.com/instructure/instructure-ui/commit/411219e4347c75ed2ffeda320b33c591ffc05329))
+
+
+
+
+
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
 
