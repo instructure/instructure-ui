@@ -36,7 +36,7 @@ import { ContextView, View } from '@instructure/ui-view'
 import type { DialogProps } from '@instructure/ui-dialog'
 import { Dialog } from '@instructure/ui-dialog'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
+import { canUseDOM, RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import {
   containsActiveElement,
   findDOMNode,
@@ -254,6 +254,14 @@ class Popover extends Component<PopoverProps, PopoverState> {
         ...this.computeOffsets(this.placement)
       })
     }
+
+    if (this._contentElement && this._trigger && canUseDOM) {
+      const height = this.state.placement?.includes('top')
+        ? this._trigger?.ref?.getBoundingClientRect().top
+        : window.innerHeight -
+          this._trigger?.ref?.getBoundingClientRect().bottom
+      this.setState({ contentMaxHeight: height })
+    }
   }
 
   computeOffsets(placement: PopoverProps['placement']) {
@@ -279,10 +287,6 @@ class Popover extends Component<PopoverProps, PopoverState> {
       } else if (secondaryPlacement === 'bottom') {
         offsetY = -offsetAmount
       }
-    }
-
-    if (this.isContentOutOfView()) {
-      offsetY = 0
     }
 
     return { offsetX, offsetY }
@@ -594,8 +598,8 @@ class Popover extends Component<PopoverProps, PopoverState> {
             <div
               style={{
                 position: 'relative',
-                maxHeight: this.isContentOutOfView() ? `50vh` : undefined,
-                overflowY: this.isContentOutOfView() ? 'auto' : undefined
+                maxHeight: this.state.contentMaxHeight,
+                overflowY: 'auto'
               }}
             >
               {content}
