@@ -192,15 +192,6 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 
-  isContentOutOfView() {
-    if (this._contentElement) {
-      const rect = this._contentElement.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      return rect.bottom > windowHeight || rect.top < 0
-    }
-    return false
-  }
-
   componentWillUnmount() {
     this._raf.forEach((request) => request.cancel())
     this._raf = []
