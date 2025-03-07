@@ -142,11 +142,8 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'inputContainerRef',
   'elementRef',
-  'margin'
-
-  // added vAlign because FormField and FormFieldGroup passes it, but not adding
-  // it to allowedProps to prevent it from getting passed through accidentally
-  //'vAlign'
+  'margin',
+  'vAlign'
 ]
 
 type FormFieldStyleProps = {
