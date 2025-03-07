@@ -104,7 +104,8 @@ const generateStyle = (
     success: { color: componentTheme.successColor },
     brand: { color: componentTheme.brandColor },
     danger: { color: componentTheme.dangerColor },
-    alert: { color: componentTheme.alertColor }
+    alert: { color: componentTheme.alertColor },
+    warning: { color: componentTheme.warningColor }
   }
 
   const wrapStyle = {

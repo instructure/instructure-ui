@@ -46,13 +46,14 @@ const generateComponentTheme = (theme: Theme): TextTheme => {
     primaryInverseColor: colors?.contrasts?.white1010,
     primaryColor: colors?.contrasts?.grey125125,
 
-    secondaryColor: colors?.contrasts?.grey4570,
+    secondaryColor: colors?.contrasts?.grey5782,
     secondaryInverseColor: colors?.contrasts?.grey1111,
 
-    brandColor: colors?.contrasts?.blue4570,
-    dangerColor: colors?.contrasts?.red4570,
-    successColor: colors?.contrasts?.green4570,
-    alertColor: colors?.contrasts?.blue4570,
+    brandColor: colors?.contrasts?.blue5782,
+    dangerColor: colors?.contrasts?.red5782,
+    successColor: colors?.contrasts?.green5782,
+    alertColor: colors?.contrasts?.blue5782,
+    warningColor: colors?.contrasts?.orange5782,
 
     paragraphMargin: `${spacing.medium} 0`
   }
