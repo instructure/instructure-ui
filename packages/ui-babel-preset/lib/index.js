@@ -43,33 +43,6 @@ module.exports = function (
 
   let plugins = []
 
-  if (opts.transformImports) {
-    plugins.push([
-      require('@instructure/babel-plugin-transform-imports'),
-      {
-        '(@instructure/ui-[^(/|\\s)]+)$': {
-          transform: (importName, matches) => {
-            const ignore = [
-              '@instructure/ui-test-queries',
-              '@instructure/ui-test-sandbox',
-              '@instructure/ui-test-utils'
-            ]
-
-            if (!matches || !matches[1] || ignore.includes(matches[1])) return
-            return `${matches[1]}/lib/${importName}`
-          }
-        },
-        // Convert any es imports to lib imports
-        '(@instructure/ui-[^(/|\\s)]+/es/[^\\s]+)$': {
-          transform: (importName, matches) => {
-            if (!matches || !matches[1]) return
-            return matches[1].replace(new RegExp('/es/'), '/lib/')
-          }
-        },
-        ...(opts.importTransforms || {})
-      }
-    ])
-  }
   // Work around https://github.com/babel/babel/issues/10261, which causes
   // Babel to not use the runtime helpers for things like _objectSpread.
   // Remove this once that babel issue is fixed

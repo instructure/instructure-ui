@@ -32,7 +32,6 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@babel/runtime": "^7.26.0",
-    "@instructure/babel-plugin-transform-imports": "10.13.0",
     "@instructure/browserslist-config-instui": "10.13.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-dynamic-import-node": "^2.3.3",

@@ -6,10 +6,5 @@
     "composite": true,
     "outDir": "./types"
   },
-  "include": ["lib"],
-  "references": [
-    {
-      "path": "../babel-plugin-transform-imports/tsconfig.build.json"
-    }
-  ]
+  "include": ["lib"]
 }
