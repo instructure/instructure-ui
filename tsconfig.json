@@ -17,7 +17,6 @@
       "@instructure/pkg-utils": ["pkg-utils/lib"],
       "@instructure/ui-babel-preset": ["ui-babel-preset/lib"],
       "@instructure/ui-codemods": ["ui-codemods/lib"],
-      "@instructure/ui-icons-build": ["ui-icons-build/lib"],
       "@instructure/ui-karma-config": ["ui-karma-config/lib"],
       "@instructure/ui-webpack-config": ["ui-webpack-config/config"]
     }

@@ -13,10 +13,9 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "clean": "gulp clean && ui-scripts clean",
     "lint": "ui-scripts lint",
     "prepare-build": "npm run build-icons",
-    "build-icons": "ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js && gulp",
+    "build-icons": "ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js",
     "build": "ui-scripts build __build__ --copy-files --modules es,cjs",
     "export": "npm run build-icons && npm run build:types",
     "build:types": "tsc -p tsconfig.build.json",
@@ -24,9 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.13.0",
-    "@instructure/ui-icons-build": "10.13.0",
-    "gulp": "^4.0.2"
+    "@instructure/ui-babel-preset": "10.13.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
