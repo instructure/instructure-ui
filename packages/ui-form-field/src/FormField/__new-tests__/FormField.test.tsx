@@ -29,6 +29,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FormField } from '../index'
+import { userEvent } from '@testing-library/user-event'
 
 describe('<FormField />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -65,9 +66,22 @@ describe('<FormField />', () => {
 
   it('should meet a11y standards', async () => {
     const { container } = render(<FormField label="foo" id="bar" />)
-
     const axeCheck = await runAxeCheck(container)
-
     expect(axeCheck).toBe(true)
+  })
+
+  it('should focus the control with the supplied id', async () => {
+    const user = userEvent.setup()
+    render(
+      <FormField label="labelText" id="foo">
+        <input />
+        <input id="foo" />
+        <input />
+      </FormField>
+    )
+    const label = screen.getByText('labelText').closest('label')!
+    await user.click(label)
+    const input = document.getElementById('foo')!
+    expect(input).toHaveFocus()
   })
 })
