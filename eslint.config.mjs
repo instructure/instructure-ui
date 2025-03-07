@@ -58,7 +58,6 @@ const COPYRIGHT_NOTICE = "/*\n" +
 
 const NODE_PACKAGES = [
   'browserslist-config-instui',
-  'ui-icons-build',
   'ui-babel-preset',
   'ui-codemods',
   'ui-karma-config',
@@ -197,7 +196,6 @@ const finalConfig = tseslint.config(
       "packages/+(" + NODE_PACKAGES + ")/**/*",
       'packages/__docs__/*.js', // docs is a mess
       'packages/__docs__/*.mjs', // docs is a mess
-      '**/gulpfile.js',
       '!packages/**' // every file not in packages
     ],
     languageOptions: {

@@ -9,7 +9,6 @@
   "exclude": ["/font/Line/**/*", "/font/Solid/**/*"],
   "references": [
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-icons-build/tsconfig.build.json" },
     { "path": "../ui-svg-images/tsconfig.build.json" }
   ]
 }
