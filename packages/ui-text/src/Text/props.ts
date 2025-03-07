@@ -49,6 +49,7 @@ type TextOwnProps = {
     | 'success'
     | 'danger'
     | 'alert'
+    | 'warning'
     | 'primary-inverse'
     | 'secondary-inverse'
   /**
@@ -115,6 +116,7 @@ const propTypes: PropValidators<PropKeys> = {
     'brand',
     'success',
     'danger',
+    'warning',
     'alert',
     'primary-inverse',
     'secondary-inverse'
