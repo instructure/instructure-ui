@@ -130,9 +130,6 @@
       "path": "./packages/ui-i18n/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-icons-build/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-img/tsconfig.build.json"
     },
     {
