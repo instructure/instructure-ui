@@ -47,6 +47,9 @@ type RadioInputGroupOwnProps = {
    */
   name: string
 
+  /**
+   * The text above the radio group. Use `ScreenReaderContent` if you don't want it to be visible.
+   */
   description: React.ReactNode
 
   /**

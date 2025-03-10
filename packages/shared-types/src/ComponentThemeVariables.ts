@@ -578,6 +578,17 @@ export type FormFieldLabelTheme = {
   lineHeight: Typography['lineHeightFit']
 }
 
+export type FormFieldLayoutTheme = {
+  color: Colors['textDarkest'] // todo should be contrasts.grey125125
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+  fontSize: Typography['fontSizeMedium']
+  lineHeight: Typography['lineHeightFit']
+  inlinePadding: Spacing['xxSmall']
+  stackedOrInlineBreakpoint: Breakpoints['medium']
+  spacing: any // TODO remove any
+}
+
 export type FormFieldMessageTheme = {
   colorHint: Colors['textDarkest']
   colorError: Colors['textDanger']
