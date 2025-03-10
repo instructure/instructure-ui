@@ -1391,6 +1391,7 @@ export type TextTheme = Typography & {
   dangerColor: Colors['contrasts']['red4570']
   successColor: Colors['contrasts']['green4570']
   alertColor: Colors['contrasts']['blue4570']
+  warningColor: Colors['contrasts']['orange5782']
   paragraphMargin: string | 0
 }
 
