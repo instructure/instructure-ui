@@ -48,10 +48,10 @@ const spacing: Spacing = Object.freeze({
   space48: '3rem', // 48px
   space60: '3.75rem', // 60px
   sections: '2.25rem', // 36px
-  sectionElrements: '1.5em', // 24px
-  trayElrements: '1.5em', // 24px
-  modalElrements: '1.5em', // 24px
-  moduleElrements: '1em', // 16px
+  sectionElements: '1.5em', // 24px
+  trayElements: '1.5em', // 24px
+  modalElements: '1.5em', // 24px
+  moduleElements: '1em', // 16px
   paddingCardLarge: '1.5rem', // 24px
   paddingCardMedium: '1rem', // 16px
   paddingCardSmall: '0.75rem', // 12px
