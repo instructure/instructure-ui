@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.11.1](https://github.com/instructure/instructure-ui/compare/v9.11.0...v9.11.1) (2025-03-11)
+
+**Note:** Version bump only for package @instructure/ui-side-nav-bar
+
+
+
+
+
 # [9.11.0](https://github.com/instructure/instructure-ui/compare/v9.10.2...v9.11.0) (2025-02-12)
 
 **Note:** Version bump only for package @instructure/ui-side-nav-bar

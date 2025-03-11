@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.11.1](https://github.com/instructure/instructure-ui/compare/v9.11.0...v9.11.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* fix FormFieldLabel not read on NVDA hover ([c29b6ab](https://github.com/instructure/instructure-ui/commit/c29b6ab989266c6a7875e3f0dbdee3efbf18606a))
+
+
+
+
+
 # [9.11.0](https://github.com/instructure/instructure-ui/compare/v9.10.2...v9.11.0) (2025-02-12)
 
 **Note:** Version bump only for package @instructure/ui-checkbox
