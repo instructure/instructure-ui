@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 /*
  * The MIT License (MIT)
  *
@@ -24,23 +23,19 @@
  */
 
 /** @jsx jsx */
-import React, {
+import {
   Children,
   Fragment,
   PropsWithChildren,
   useEffect,
   useState
 } from 'react'
-import { jsx, useTheme } from '@instructure/emotion'
+import { jsx, withFunctionalStyle } from '@instructure/emotion'
 import type { MobileTopNavProps } from './props'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { IconHamburgerLine, IconXLine } from '@instructure/ui-icons'
-import {
-  generateItemListStyles,
-  generateItemStyles,
-  generateStyles
-} from './styles'
+import { generateStyles } from './styles'
 
 /**
 ---
@@ -98,21 +93,7 @@ const Menu = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
 
-const withStyles =
-  <ComponentOwnProps, ComponentStyle>(
-    generateStyles: (props: any, theme: any) => ComponentStyle
-  ) =>
-  (WrappedComponent: any) =>
-  (originalProps: ComponentOwnProps) => {
-    const theme = useTheme()
-    const styledProps = {
-      styles: generateStyles(originalProps, theme),
-      ...originalProps
-    }
-    return <WrappedComponent {...styledProps} />
-  }
-
-const SC: any = withStyles(generateStyles)(MobileTopNav)
+const SC: any = withFunctionalStyle(generateStyles)(MobileTopNav)
 
 SC.End = End
 SC.End.displayName = 'End'

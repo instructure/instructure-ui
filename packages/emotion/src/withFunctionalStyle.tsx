@@ -22,41 +22,23 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { jsx, withFunctionalStyle } from '@instructure/emotion'
+import { useTheme } from './index'
+import React from 'react'
 
-import { generateStyles } from './styles'
-import { Link } from '@instructure/ui-link'
-import { SubNavProps, MenuItem } from './props'
+const withFunctionalStyle =
+  <ComponentOwnProps, ComponentStyle>(
+    generateStyles: (props: any, theme: any) => ComponentStyle
+  ) =>
+  (WrappedComponent: any) =>
+  // eslint-disable-next-line react/display-name
+  (originalProps: ComponentOwnProps) => {
+    const theme = useTheme()
+    const styledProps = {
+      styles: generateStyles(originalProps, theme),
+      ...originalProps
+    }
+    return <WrappedComponent {...styledProps} />
+  }
 
-/**
----
-category: components
----
- **/
-const SubNav = ({ menuItems, styles }: SubNavProps) => {
-  return (
-    <div style={styles.container}>
-      {menuItems.map((item: MenuItem) => (
-        <div style={styles.linkContainer(item)} key={item.title}>
-          <Link
-            key={item.title}
-            href={item.href}
-            themeOverride={styles.link(item)}
-            isWithinText={false}
-            onClick={item.onClick}
-          >
-            {item.title}
-          </Link>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-const SC: any = withFunctionalStyle(generateStyles)(SubNav)
-
-SC.displayName = 'SubNav'
-
-export { SC as SubNav }
-export default SC
+export default withFunctionalStyle
+export { withFunctionalStyle }

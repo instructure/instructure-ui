@@ -90,9 +90,9 @@ type DrilldownPageOwnProps = {
    */
   disabled?: boolean
 
-  renderBeforeChildren?: () => React.ReactNode
+  renderBeforeChildren?: React.ReactNode | (() => React.ReactNode)
 
-  renderAfterChildren?: () => React.ReactNode
+  renderAfterChildren?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof DrilldownPageOwnProps
@@ -116,8 +116,8 @@ const propTypes: PropValidators<PropKeys> = {
   onBackButtonClicked: PropTypes.func,
   withoutHeaderSeparator: PropTypes.bool,
   disabled: PropTypes.bool,
-  renderBeforeChildren: PropTypes.func,
-  renderAfterChildren: PropTypes.func
+  renderBeforeChildren: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderAfterChildren: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 const allowedProps: AllowedPropKeys = [
