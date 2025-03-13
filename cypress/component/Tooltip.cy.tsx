@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 import React from 'react'
+import { useState } from 'react'
 import 'cypress-real-events'
 
-import { Tooltip } from '../../packages/ui'
+import { Modal, Tooltip, Button } from '@instructure/ui'
+import { IconInfoLine } from '@instructure/ui-icons'
 import '../support/component'
 
 describe('<Tooltip/>', () => {
@@ -130,5 +132,232 @@ describe('<Tooltip/>', () => {
     cy.contains('button', 'For dismiss').realHover()
     cy.contains('Hello').should('not.be.visible')
     cy.wrap(onHideContent).should('have.been.calledOnce')
+  })
+
+  it('should remain visible when Tooltip is hovered over', async () => {
+    cy.mount(
+      <Tooltip renderTip={<h2>Hello</h2>}>
+        <a data-testid="trigger" href="example.html">
+          Hover me!
+        </a>
+      </Tooltip>
+    )
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.contains('Hover me!').realHover()
+
+      cy.get(tooltip).should('be.visible')
+
+      cy.contains('Hello').realHover().wait(100)
+
+      cy.get(tooltip).should('be.visible')
+    })
+  })
+
+  it('should close when Esc key is pressed', async () => {
+    cy.mount(
+      <Tooltip renderTip={<h2>Hello</h2>}>
+        <a data-testid="trigger" href="example.html">
+          Hover me!
+        </a>
+      </Tooltip>
+    )
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.contains('Hover me!').realHover()
+
+      cy.get(tooltip).should('be.visible').realPress('Escape')
+
+      cy.get(tooltip).should('not.be.visible')
+    })
+  })
+
+  it('should close when Esc key is pressed and Tooltip is hovered over', async () => {
+    cy.mount(
+      <Tooltip renderTip={<h2>Hello</h2>}>
+        <a data-testid="trigger" href="example.html">
+          Hover me!
+        </a>
+      </Tooltip>
+    )
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.contains('Hover me!')
+        .realHover()
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+        })
+
+      cy.contains('Hello')
+        .realHover()
+        .then(() => {
+          cy.realPress('Escape').then(() => {
+            cy.get(tooltip).should('not.be.visible')
+          })
+        })
+    })
+  })
+
+  it('should close when Esc key is pressed, but should not close the parent modal', () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button onClick={() => setOpen((state) => !state)}>
+            Open the Modal
+          </Button>
+          <Modal
+            data-testid="modal"
+            open={open}
+            onDismiss={() => setOpen(false)}
+            label="modal"
+          >
+            Hello, Word!
+            <Tooltip renderTip="Hello. I'm a tool tip">
+              <IconInfoLine data-testid="trigger" />
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.get('[data-testid="trigger"]')
+        .realHover()
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+        })
+
+      cy.get(tooltip)
+        .realPress('Escape')
+        .then(() => {
+          cy.get(tooltip).should('not.be.visible')
+          cy.wait(300)
+          cy.get('[role="dialog"]').should('be.visible')
+        })
+
+      cy.get('[role="dialog"]')
+        .realPress('Escape')
+        .then(() => {
+          cy.get('[role="dialog"]').should('not.exist')
+        })
+    })
+  })
+
+  it('should allow closing modal with Esc when the modal trigger button has a Tooltip', async () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Tooltip renderTip="Hello. I'm a tool tip">
+            <Button
+              onClick={() => {
+                setOpen((state) => !state)
+              }}
+            >
+              Open the Modal
+            </Button>
+          </Tooltip>
+          <Modal
+            open={open}
+            onDismiss={() => {
+              setOpen(false)
+            }}
+            label="modal"
+          >
+            Hello, World!
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[role="dialog"]').should('be.visible')
+
+    cy.get('[role="dialog"]')
+      .realPress('Escape')
+      .then(() => {
+        cy.get('[role="dialog"]').should('not.exist')
+      })
+  })
+
+  it('should not trap focus when Modal closing button has a Tooltip', async () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              setOpen((state) => !state)
+            }}
+          >
+            Open the Modal
+          </Button>
+          <Button>Hello</Button>
+          <Modal
+            label="modal"
+            open={open}
+            onDismiss={() => {
+              setOpen((state) => !state)
+            }}
+          >
+            <Tooltip renderTip="Hello. I'm a tool tip">
+              <Button
+                onClick={() => {
+                  setOpen((state) => !state)
+                }}
+              >
+                Close the Modal
+              </Button>
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[role="dialog"]').should('be.visible')
+
+    cy.contains('Close the Modal')
+      .realPress('Space')
+      .then(() => {
+        cy.get('[role="dialog"]').should('not.exist')
+      })
+
+    cy.contains('Open the Modal').should('be.focused')
+
+    cy.contains('Open the Modal').realPress('Tab')
+
+    cy.contains('Hello').should('be.focused')
   })
 })
