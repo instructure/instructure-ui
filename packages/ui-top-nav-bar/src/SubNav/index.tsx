@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 /*
  * The MIT License (MIT)
  *
@@ -24,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { jsx, useTheme } from '@instructure/emotion'
+import { jsx, withFunctionalStyle } from '@instructure/emotion'
 
 import { generateStyles } from './styles'
 import { Link } from '@instructure/ui-link'
@@ -55,21 +54,7 @@ const SubNav = ({ menuItems, styles }: SubNavProps) => {
   )
 }
 
-const withStyles =
-  <ComponentOwnProps, ComponentStyle>(
-    generateStyles: (props: any, theme: any) => ComponentStyle
-  ) =>
-  (WrappedComponent: any) =>
-  (originalProps: ComponentOwnProps) => {
-    const theme = useTheme()
-    const styledProps = {
-      styles: generateStyles(originalProps, theme),
-      ...originalProps
-    }
-    return <WrappedComponent {...styledProps} />
-  }
-
-const SC: any = withStyles(generateStyles)(SubNav)
+const SC: any = withFunctionalStyle(generateStyles)(SubNav)
 
 SC.displayName = 'SubNav'
 

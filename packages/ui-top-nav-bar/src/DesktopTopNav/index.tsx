@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 /*
  * The MIT License (MIT)
  *
@@ -25,7 +24,7 @@
 
 /** @jsx jsx */
 import { Children, PropsWithChildren } from 'react'
-import { jsx, useTheme } from '@instructure/emotion'
+import { jsx, withFunctionalStyle } from '@instructure/emotion'
 import type { DesktopTopNavProps } from './props'
 
 import { generateStyles } from './styles'
@@ -57,26 +56,12 @@ const End = ({ children, styles }: PropsWithChildren & { styles: any }) => {
   return <div style={styles.end}>{children}</div>
 }
 
-const withStyles =
-  <ComponentOwnProps, ComponentStyle>(
-    generateStyles: (props: any, theme: any) => ComponentStyle
-  ) =>
-  (WrappedComponent: any) =>
-  (originalProps: ComponentOwnProps) => {
-    const theme = useTheme()
-    const styledProps = {
-      styles: generateStyles(originalProps, theme),
-      ...originalProps
-    }
-    return <WrappedComponent {...styledProps} />
-  }
-
-const SC: any = withStyles(generateStyles)(DesktopTopNav)
+const SC: any = withFunctionalStyle(generateStyles)(DesktopTopNav)
 
 SC.displayName = 'DesktopTopNav'
-SC.Start = withStyles(generateStyles)(Start)
+SC.Start = withFunctionalStyle(generateStyles)(Start)
 SC.Start.displayName = 'Start'
-SC.End = withStyles(generateStyles)(End)
+SC.End = withFunctionalStyle(generateStyles)(End)
 SC.End.displayName = 'End'
 
 export { SC as DesktopTopNav }

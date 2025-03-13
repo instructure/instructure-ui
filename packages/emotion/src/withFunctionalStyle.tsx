@@ -22,20 +22,23 @@
  * SOFTWARE.
  */
 
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { useTheme } from './index'
+import React from 'react'
 
-import { AppWrapper } from './App'
-import { InstUISettingsProvider } from '@instructure/emotion'
-import '../globals'
-import { BrowserRouter } from 'react-router-dom'
+const withFunctionalStyle =
+  <ComponentOwnProps, ComponentStyle>(
+    generateStyles: (props: any, theme: any) => ComponentStyle
+  ) =>
+  (WrappedComponent: any) =>
+  // eslint-disable-next-line react/display-name
+  (originalProps: ComponentOwnProps) => {
+    const theme = useTheme()
+    const styledProps = {
+      styles: generateStyles(originalProps, theme),
+      ...originalProps
+    }
+    return <WrappedComponent {...styledProps} />
+  }
 
-createRoot(document.getElementById('app')!).render(
-  <StrictMode>
-    <InstUISettingsProvider>
-      <BrowserRouter basename="/">
-      <AppWrapper />
-    </BrowserRouter>
-    </InstUISettingsProvider>
-  </StrictMode>
-)
+export default withFunctionalStyle
+export { withFunctionalStyle }
