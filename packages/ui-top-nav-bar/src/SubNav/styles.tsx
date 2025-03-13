@@ -21,30 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { SubNavProps } from './props'
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
-
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
-
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
-  }
-
+const generateStyles = (_props: SubNavProps, theme: any) => {
   return {
-    ...componentVariables
+    container: {
+      marginLeft: '20px',
+      marginTop: '20px',
+      label: 'subNavContainer'
+    },
+    linkContainer: (item: any) => {
+      return {
+        label: 'subNavLinkContainer',
+        display: 'flex',
+        alignItems: 'center',
+        color: theme?.colors?.contrasts?.grey125125,
+        fontSize: '16px',
+        borderLeft: item.selected ? '3px solid' : 'none',
+        borderColor: theme?.colors?.contrasts?.grey125125,
+        height: '32px',
+        fontWeight: 'bold',
+        marginBottom: '4px',
+        paddingLeft: '4px'
+      }
+    },
+    link: (item: any) => {
+      return {
+        label: 'subNavLink',
+        ...(item.selected && {
+          color: theme?.colors?.contrasts?.grey125125,
+          hoverColor: theme?.colors?.contrasts?.grey125125
+        })
+      }
+    }
   }
 }
 
-export default generateComponentTheme
+export { generateStyles }

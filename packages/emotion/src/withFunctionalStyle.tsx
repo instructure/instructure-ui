@@ -22,29 +22,23 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
+import { useTheme } from './index'
+import React from 'react'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
-
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
+const withFunctionalStyle =
+  <ComponentOwnProps, ComponentStyle>(
+    generateStyles: (props: any, theme: any) => ComponentStyle
+  ) =>
+  (WrappedComponent: any) =>
+  // eslint-disable-next-line react/display-name
+  (originalProps: ComponentOwnProps) => {
+    const theme = useTheme()
+    const styledProps = {
+      styles: generateStyles(originalProps, theme),
+      ...originalProps
+    }
+    return <WrappedComponent {...styledProps} />
   }
 
-  return {
-    ...componentVariables
-  }
-}
-
-export default generateComponentTheme
+export default withFunctionalStyle
+export { withFunctionalStyle }
