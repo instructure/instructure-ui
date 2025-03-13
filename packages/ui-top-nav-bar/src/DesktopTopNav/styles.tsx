@@ -23,8 +23,7 @@
  */
 import type { DesktopTopNavProps } from './props'
 
-const generateStyles = (props: DesktopTopNavProps, theme: any) => {
-  const { lti } = props
+const generateStyles = (_props: DesktopTopNavProps, theme: any) => {
   return {
     container: {
       height: '66px',

@@ -32,7 +32,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('app')).render(
   <InstUISettingsProvider>
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <AppWrapper />
     </BrowserRouter>
   </InstUISettingsProvider>

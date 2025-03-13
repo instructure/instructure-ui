@@ -465,7 +465,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       )
 
       if (currentPage.renderBeforeChildren) {
-        headerChildren.push(currentPage.renderBeforeChildren())
+        headerChildren.push(currentPage.renderBeforeChildren)
       }
     }
 
@@ -1445,7 +1445,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                 {this.renderList(getOptionProps, getDisabledOptionProps)}
                 {this.currentPage?.renderAfterChildren && (
                   <Options.Item>
-                    {this.currentPage.renderAfterChildren()}
+                    {this.currentPage.renderAfterChildren}
                   </Options.Item>
                 )}
               </Options>

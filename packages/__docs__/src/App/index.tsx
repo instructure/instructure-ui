@@ -27,11 +27,9 @@ import { Component } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
 import { CanvasTopNav, SubNav } from '@instructure/ui-top-nav-bar'
-import { IconButton } from '@instructure/ui-buttons'
 import {
   IconAlertsLine,
   IconAnalyticsLine,
-  IconArrowOpenEndSolid,
   IconCoursesLine,
   IconDashboardLine,
   IconQuestionLine,
@@ -40,8 +38,9 @@ import {
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Img } from '@instructure/ui-img'
-import { Drilldown } from '@instructure/ui-drilldown'
 import { View } from '@instructure/ui-view'
+import { SideNavBar } from '@instructure/ui-side-nav-bar'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 type AppProps = {
   navigate: (path: string, options?: { replace: boolean }) => void
@@ -51,63 +50,34 @@ type AppState = {
   menuStack: string[]
 }
 
-type MenuItem = {
-  label: string
-  renderBeforeLabel?: JSX.Element
-  onClick?: () => void
-  renderAfterLabel?: JSX.Element
-}
-
-type Menu = {
-  items: MenuItem[]
-  backNavigation: {
-    href?: string
-    label: string
-    onClick?: () => void
-  }
-  title: string
-  renderBeforeMobileMenuItems?: JSX.Element
-  renderAfterMobileMenuItems?: JSX.Element
-}
-
-type MenuCollection = {
-  [key: string]: Menu
-}
-
 @withStyle(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
 
     this.state = {
-      menuStack: [
-        'default',
-        ...(window.location.pathname.substring(1)
-          ? [window.location.pathname.substring(1)]
-          : [])
-      ]
+      windowWidth: window.innerWidth
     }
   }
 
-  pushMenu = (menuKey: string) => {
-    this.setState((prevState) => ({
-      menuStack: [...prevState.menuStack, menuKey]
-    }))
+  isCoursePage() {
+    return location.pathname.startsWith('/courses')
   }
 
-  popMenu = () => {
-    this.setState((prevState) => ({
-      menuStack: prevState.menuStack.slice(0, -1)
-    }))
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
   }
 
-  getCurrentMenu = () => {
-    const { menuStack } = this.state
-    return menuStack[menuStack.length - 1]
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  handleResize = () => {
+    this.setState({ windowWidth: window.innerWidth })
   }
 
   render() {
-    const isLightMode = true
+    const isMobile = this.state.windowWidth < 768
 
     const brandSvg = (
       <View
@@ -152,7 +122,7 @@ class App extends Component<AppProps, AppState> {
             renderBeforeTitle: <IconDashboardLine />,
             onClick: () => {
               this.props.navigate('/dashboard', { replace: true })
-              window.location.reload()
+              // window.location.reload()
             }
           },
           {
@@ -196,170 +166,146 @@ class App extends Component<AppProps, AppState> {
         id: 'courses',
         title: 'Courses',
         options: [
-          { id: 'courses1', label: 'Courses1' },
-          { id: 'courses2', label: 'Courses2' }
-        ]
-      }
-    ]
+          {
+            id: 'courses1',
+            label: 'Courses1',
+            onClick: () => {
+              this.props.navigate('/courses/course1', { replace: true })
+              setTimeout(() => {
+                window.location.reload()
+              }, 50) // Small delay ensures React updates before reloading
 
-    const menu: MenuCollection = {
-      default: {
-        items: [
-          {
-            label: 'Account',
-            renderBeforeLabel: <IconUserLine />,
-            onClick: () => {
-              this.pushMenu('account')
-            },
-            renderAfterLabel: <IconArrowOpenEndSolid />
-          },
-          {
-            label: 'Courses',
-            renderBeforeLabel: <IconCoursesLine />,
-            onClick: () => {
-              this.pushMenu('courses')
-            },
-            renderAfterLabel: <IconArrowOpenEndSolid />
-          },
-          {
-            label: 'Dashboard',
-            renderBeforeLabel: <IconDashboardLine />,
-            onClick: (e) => {
-              e.preventDefault()
-              this.props.navigate('/dashboard', { replace: true })
               // window.location.reload()
             }
           },
           {
-            label: 'Help',
-            renderBeforeLabel: <IconQuestionLine />,
-            onClick: () => alert('Help clicked')
+            id: 'courses2',
+            label: 'Courses2',
+            onClick: () => {
+              this.props.navigate('/courses/course2', { replace: true })
+              setTimeout(() => {
+                window.location.reload()
+              }, 50) // Small delay ensures React updates before reloading
+
+              // window.location.reload()
+            }
           }
-        ],
-        backNavigation: {
-          href: undefined,
-          label: '',
-          onClick: undefined
-        },
-        title: ''
-      },
-      account: {
-        renderBeforeMobileMenuItems: (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Img src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" />
-          </div>
-        ),
-        renderAfterMobileMenuItems: (
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            aliquet erat in orci semper fringilla. Nullam suscipit mollis mi, at
-            vehicula magna vulputate eu. Cras mattis felis id quam vehicula
-            euismod. Nulla dolor enim, ornare in odio a, molestie dictum ligula.
-            Nullam maximus et dolor eget porttitor. Vestibulum faucibus viverra
-            pellentesque. Duis lorem lectus, porta vitae aliquam vitae, vehicula
-            sagittis nulla. Aenean sagittis congue rhoncus. Cras laoreet eu
-            nulla eu dignissim. Maecenas sed massa nisi. Suspendisse
-            pellentesque, metus sed ultricies porta, justo tellus pulvinar diam,
-            ac ornare massa nibh quis purus. Duis erat ipsum, pellentesque in
-            diam non, luctus accumsan metus. In ipsum tellus, ullamcorper a
-            faucibus a, venenatis ut urna. Sed at rutrum turpis.
-          </p>
-        ),
-        items: [
-          {
-            label: 'AccountInfo1'
-          },
-          { label: 'AccountInfo2' }
-        ],
-        backNavigation: {
-          label: 'Back',
-          onClick: () => {
-            this.popMenu()
-          }
-        },
-        title: 'Account'
-      },
-      courses: {
-        items: [{ label: 'Courses1' }, { label: 'Courses2' }],
-        backNavigation: {
-          label: 'Back',
-          onClick: () => {
-            this.popMenu()
-          }
-        },
-        title: 'Courses'
-      },
-      dashboard: {
-        title: 'Dashboard',
-        items: [{ label: 'Courses1' }, { label: 'Courses2' }],
-        backNavigation: {
-          label: 'Back',
-          onClick: () => {
-            this.popMenu()
-            this.props.navigate('/', { replace: true })
-            window.location.reload()
-          }
-        }
+        ]
       }
-    }
+    ]
 
     return (
-      <InstUISettingsProvider
-        style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: '100%',
-          boxSizing: 'border-box'
-        }}
-      >
-        <CanvasTopNav
-          brand={brandSvg}
-          lti={true}
-          breadcrumb={{
-            label: 'You are here:',
-            links: [
-              { href: '#', label: 'Student Forecast' },
-              { href: '#', label: 'University of Utah' },
-              { label: 'University of Colleges' }
-            ]
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <InstUISettingsProvider
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box'
           }}
-          hamburgerOnClick={() => alert('Hamburger clicked')}
-          mobileMenuTitle={menu[this.getCurrentMenu()].title}
-          mobileButtons={[
-            {
-              screenReaderLabel: 'Analytics',
-              icon: <IconAnalyticsLine />,
-              onClick: () => alert('Analytics clicked')
-            },
-            {
-              screenReaderLabel: 'Alerts',
-              icon: <IconAlertsLine />,
-              onClick: () => alert('Alerts clicked')
-            }
-          ]}
-          mobileMenu={menuArray}
-        />
-        <div style={{ display: 'flex' }}>
-          <SubNav
-            menuItems={[
-              { title: 'Home', href: '/', selected: true },
-              { title: 'Account', href: '/account' },
-              { title: 'Courses', href: '/courses' },
-              {
-                title: 'Dashboard',
-                onClick: () => this.props.navigate('/dashboard')
-              },
-              { title: 'Help', onClick: () => alert('Help clicked') }
-            ]}
-          />
-          <div style={{ padding: '30px' }}>
-            <Routes>
-              <Route path="/" element={<h1>This is home</h1>} />
-              <Route path="/dashboard" element={<h1>This is dashboard</h1>} />
-            </Routes>
+        >
+          <div style={{ height: '100vh' }}>
+            {!isMobile && (
+              <SideNavBar
+                label="Main navigation"
+                toggleLabel={{
+                  expandedLabel: 'Minimize SideNavBar',
+                  minimizedLabel: 'Expand SideNavBar'
+                }}
+              >
+                <SideNavBar.Item
+                  label={<ScreenReaderContent>Home</ScreenReaderContent>}
+                />
+                <SideNavBar.Item
+                  icon={brandSvg}
+                  label={<ScreenReaderContent>Home</ScreenReaderContent>}
+                  onClick={() => this.props.navigate('/', { replace: true })}
+                />
+                <SideNavBar.Item
+                  icon={<IconUserLine />}
+                  label="Account"
+                  href="/account"
+                />
+                <SideNavBar.Item
+                  icon={<IconCoursesLine />}
+                  label="Courses"
+                  href="/courses"
+                />
+                <SideNavBar.Item
+                  icon={<IconDashboardLine />}
+                  label="Dashboard"
+                  onClick={() =>
+                    this.props.navigate('/dashboard', { replace: true })
+                  }
+                />
+                <SideNavBar.Item
+                  icon={<IconQuestionLine />}
+                  label="Help"
+                  href="#"
+                />
+              </SideNavBar>
+            )}
           </div>
-        </div>
-      </InstUISettingsProvider>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+          >
+            <CanvasTopNav
+              brand={brandSvg}
+              lti={false}
+              breadcrumb={{
+                label: 'You are here:',
+                links: [
+                  { href: '#', label: 'Student Forecast' },
+                  { href: '#', label: 'University of Utah' },
+                  { label: 'University of Colleges' }
+                ]
+              }}
+              hamburgerOnClick={() => alert('Hamburger clicked')}
+              mobileButtons={[
+                {
+                  screenReaderLabel: 'Analytics',
+                  icon: <IconAnalyticsLine />,
+                  onClick: () => alert('Analytics clicked')
+                },
+                {
+                  screenReaderLabel: 'Alerts',
+                  icon: <IconAlertsLine />,
+                  onClick: () => alert('Alerts clicked')
+                }
+              ]}
+              mobileMenu={menuArray}
+            />
+            <div style={{ display: 'flex' }}>
+              {this.isCoursePage() && (
+                <SubNav
+                  menuItems={[
+                    { title: 'Home', href: '/', selected: true },
+                    { title: 'Announcements', href: '/' },
+                    { title: 'Assignments', href: '/' }
+                  ]}
+                />
+              )}
+              <div style={{ padding: '30px' }}>
+                <Routes>
+                  <Route path="/" element={<h1>This is home</h1>} />
+                  <Route
+                    path="/dashboard"
+                    element={<h1>This is the dashboard</h1>}
+                  />
+                  <Route
+                    path="/account"
+                    element={<h1>This is the account page</h1>}
+                  />
+                  <Route
+                    path="/courses"
+                    element={<h1>This is a course home page</h1>}
+                  />
+                </Routes>
+              </div>
+            </div>
+          </div>
+        </InstUISettingsProvider>
+      </div>
     )
   }
 }
