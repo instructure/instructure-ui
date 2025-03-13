@@ -253,9 +253,7 @@ class DrawerTray extends Component<
                   label={label}
                   shouldReturnFocus={shouldReturnFocus}
                   shouldContainFocus={
-                    !this.state.transitioning &&
-                    shouldContainFocus &&
-                    shouldOverlayTray
+                    shouldContainFocus && shouldOverlayTray // only contain focus when it's in overlay mode
                   }
                   shouldCloseOnDocumentClick={
                     shouldCloseOnDocumentClick && shouldOverlayTray
