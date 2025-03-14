@@ -107,7 +107,7 @@ const generateStyle = (
       // when inline add a small padding between the label and the control
       paddingRight: componentTheme.inlinePadding,
       // and use the horizontal alignment prop
-      [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+      [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
           textAlign: labelAlign
         }
@@ -138,7 +138,7 @@ const generateStyle = (
       verticalAlign: 'middle', // removes margin in inline layouts
       gridTemplateColumns: gridTemplateColumns,
       gridTemplateAreas: gridTemplateAreas,
-      [`@media screen and (max-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+      [`@media screen and (width < ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
           // for small screens use the stacked layout
           gridTemplateColumns: '100%',
@@ -171,7 +171,7 @@ const generateStyle = (
       ...(hasMessages && hasNewErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
       ...(isInlineLayout &&
         inline && {
-          [`@media screen and (min-width: ${componentTheme.stackedOrInlineBreakpoint})`]:
+          [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
             {
               justifySelf: 'start'
             }
