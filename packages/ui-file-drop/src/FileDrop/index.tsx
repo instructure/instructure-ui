@@ -232,10 +232,8 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     e.preventDefault()
     this.enterCounter = 0
     // When dropping a file the browser does not populate the input's
-    // 'files' property, so we need to do it manually.
-    // Browsers do not allow setting the 'value' of file inputs for security,
-    // so it will be empty here.
-    this.fileInputEl!.value = ''
+    // 'files' property, so we need to do it manually. This will also populate
+    // the input's 'value' prop, which contains the first file's path
     this.fileInputEl!.files = new DataTransfer().files
     if (accepted.length > 0 && 'dataTransfer' in e) {
       this.fileInputEl!.files = e.dataTransfer!.files
