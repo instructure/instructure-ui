@@ -93,7 +93,12 @@ class FocusRegion {
       event.button === 0 &&
       event.detail > 0 && // if event.detail is 0 then this is a keyboard and not a mouse press
       this._documentMouseDownTarget !== null &&
-      !contains(this._contextElement, this._documentMouseDownTarget)
+      !contains(this._contextElement, this._documentMouseDownTarget) &&
+      //this prevents clicking on Tooltip from closing the parent dialog
+      !(
+        this._documentMouseDownTarget instanceof HTMLElement &&
+        this._documentMouseDownTarget.getAttribute('role') === 'tooltip'
+      )
     ) {
       this.handleDismiss(event, true)
     }
