@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-expandable",
-  "version": "10.13.0",
+  "version": "10.14.0",
   "description": "A utility component for show/hide functionality",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,17 +24,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.26.0",
-    "@instructure/shared-types": "10.13.0",
-    "@instructure/ui-prop-types": "10.13.0",
-    "@instructure/ui-react-utils": "10.13.0",
-    "@instructure/ui-testable": "10.13.0",
-    "@instructure/ui-utils": "10.13.0",
-    "@instructure/uid": "10.13.0",
+    "@instructure/shared-types": "10.14.0",
+    "@instructure/ui-prop-types": "10.14.0",
+    "@instructure/ui-react-utils": "10.14.0",
+    "@instructure/ui-testable": "10.14.0",
+    "@instructure/ui-utils": "10.14.0",
+    "@instructure/uid": "10.14.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.13.0",
-    "@instructure/ui-color-utils": "10.13.0",
+    "@instructure/ui-babel-preset": "10.14.0",
+    "@instructure/ui-color-utils": "10.14.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
