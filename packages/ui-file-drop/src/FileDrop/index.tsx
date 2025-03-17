@@ -231,6 +231,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()
     this.enterCounter = 0
+    // When dropping a file the browser does not populate the input's
+    // 'files' property, so we need to do it manually. This will also populate
+    // the input's 'value' prop, which contains the first file's path
+    if (accepted.length > 0 && 'dataTransfer' in e) {
+      this.fileInputEl!.files = e.dataTransfer!.files
+    }
     onDrop && onDrop(accepted, rejected, e as React.DragEvent)
     if (rejected.length > 0 && onDropRejected) {
       onDropRejected(rejected, e)
