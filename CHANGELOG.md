@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
+
+
+### Bug Fixes
+
+* **ui-file-drop:** fix files and value prop empty when adding a file via drag and drop ([5842034](https://github.com/instructure/instructure-ui/commit/58420341bbdb942fa72fe1c8e416184ede421191))
+* **ui-form-field:** do not pass vAlign prop to underlying html element ([78135b0](https://github.com/instructure/instructure-ui/commit/78135b09d7af43d536acafb4350b345896ee30d3))
+
+
+### Features
+
+* **ui-text,shared-types:** add warningColor to Text component ([dcea4d0](https://github.com/instructure/instructure-ui/commit/dcea4d0762b48c798fb4a17d10c3927355f52f60))
+
+
+
+
+
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
 
 
