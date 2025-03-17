@@ -21,26 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+'use client'
+import React from 'react'
+import { Button } from '@instructure/ui'
 
-// ***********************************************************
-// This example support/e2e.ts is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/configuration
-// ***********************************************************
-
-// Import commands.js using ES2015 syntax:
-import './commands'
-
-import '@chromatic-com/cypress/support'
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+export default function ButtonPage() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Button>Gonb</Button>
+    </main>
+  )
+}

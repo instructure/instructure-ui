@@ -8,27 +8,27 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "cypress run"
+    "test": "ELECTRON_EXTRA_LAUNCH_ARGS=--remote-debugging-port=9222 npx cypress run"
   },
   "keywords": [],
-  "author": "Viktor Ohad",
-  "license": "MIT",
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "snapshot",
+    "@instructure/browserslist-config-instui": "10.14.0",
+    "@chromatic-com/cypress": "^0.11.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "cypress": "^13.13.0",
+    "chromatic": "^11.27.0",
+    "cypress": "^14.2.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.2",
     "postcss": "^8",
-    "typescript": "^5",
-    "tailwindcss": "^3"
+    "tailwindcss": "^3",
+    "typescript": "^5"
   },
   "dependencies": {
-    "@instructure/ui": "snapshot",
-    "next": "^14.2.3",
+    "@instructure/ui": "10.14.0",
+    "next": "^15.2.3",
     "react": "^18",
     "react-dom": "^18"
   }
