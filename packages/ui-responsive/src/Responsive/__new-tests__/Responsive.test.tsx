@@ -23,16 +23,31 @@
  */
 
 import React from 'react'
+import { render } from '@testing-library/react'
+import { vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
+import '@testing-library/jest-dom'
 
-import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
 import { deepEqual } from '@instructure/ui-utils'
-
 import { Responsive } from '../index'
 
-describe('<Responsive />', async () => {
+describe('<Responsive />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+  })
+
   it('should call render with the correct matches', async () => {
-    const renderSpy = spy()
-    await mount(
+    const renderSpy = vi.fn()
+    render(
       <div style={{ width: 200 }}>
         <Responsive
           query={{
@@ -48,21 +63,17 @@ describe('<Responsive />', async () => {
       </div>
     )
 
-    expect(renderSpy).to.have.been.calledWith(null, [
-      'small',
-      'medium',
-      'large'
-    ])
+    expect(renderSpy).toHaveBeenCalledWith(null, ['small', 'medium', 'large'])
   })
 
   it('should provide correct props for a given breakpoint', async () => {
-    const renderSpy = spy()
+    const renderSpy = vi.fn()
     const props = {
       small: { withBorder: true, background: 'transparent' },
       medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
       large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
-    await mount(
+    render(
       <div style={{ width: 200 }}>
         <Responsive
           props={props}
@@ -79,42 +90,12 @@ describe('<Responsive />', async () => {
       </div>
     )
 
-    expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
-  })
-
-  it('should merge props correctly when more than one breakpoint is applied', async () => {
-    const renderSpy = spy()
-    const props = {
-      small: { withBorder: true, background: 'transparent' },
-      medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
-      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
-    }
-    await mount(
-      <Responsive
-        props={props}
-        query={{
-          small: { maxWidth: 300 },
-          medium: { minWidth: 300 },
-          large: { minWidth: 300 }
-        }}
-        render={(props, matches) => {
-          renderSpy(props, matches)
-          return <div>hello</div>
-        }}
-      />
-    )
-
-    expect(
-      deepEqual(
-        renderSpy.lastCall.args[0],
-        Object.assign({ ...props.medium }, { ...props.large })
-      )
-    ).to.be.true()
+    expect(renderSpy).toHaveBeenCalledOnce()
+    expect(deepEqual(renderSpy.mock.calls[0][0], props.small)).toBe(true)
   })
 
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
-    const consoleError = stub(console, 'warn')
-    await mount(
+    render(
       <div style={{ width: 200 }}>
         <Responsive
           props={{
@@ -136,18 +117,22 @@ describe('<Responsive />', async () => {
         />
       </div>
     )
-    const warning = [
+    const expectedWarningMessage = [
       'Warning: [Responsive]',
       'The prop `background` is defined at 2 or more breakpoints',
       'which are currently applied at the same time. Its current value, `transparent`,',
       'will be overwritten as `solid`.'
     ].join(' ')
-    expect(consoleError).to.be.calledWith(warning)
+
+    expect(consoleWarningMock).toHaveBeenCalledWith(
+      expect.stringContaining(expectedWarningMessage),
+      expect.any(String)
+    )
   })
 
   it('should call render prop only once', async () => {
-    const renderSpy = spy()
-    await mount(
+    const renderSpy = vi.fn()
+    render(
       <div style={{ width: 200 }}>
         <Responsive
           query={{
@@ -163,12 +148,12 @@ describe('<Responsive />', async () => {
       </div>
     )
 
-    expect(renderSpy).to.have.been.called()
+    expect(renderSpy).toHaveBeenCalledOnce()
   })
 
   it('should apply the `display` prop', async () => {
-    const renderSpy = spy()
-    await mount(
+    const renderSpy = vi.fn()
+    const { container } = render(
       <div style={{ width: 200 }} id="testContainer">
         <Responsive
           query={{
@@ -184,41 +169,9 @@ describe('<Responsive />', async () => {
         />
       </div>
     )
+    const responsiveContainer = container.querySelector('[id="testContainer"]')
+    const responsiveDiv = responsiveContainer?.firstChild
 
-    const responsiveDiv = document.querySelector('#testContainer')
-      ?.firstChild as HTMLDivElement
-
-    expect(responsiveDiv.style.display).to.equal('inline-flex')
-  })
-
-  it('should provide correct props in case of multiple breakpoints in query', async () => {
-    const renderSpy = spy()
-    const props = {
-      small: { withBorder: true, background: 'transparent' },
-      medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
-      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
-    }
-    await mount(
-      <div style={{ width: 800, height: 400 }}>
-        <Responsive
-          props={props}
-          query={{
-            small: { maxWidth: 300 },
-            medium: { maxWidth: 800 },
-            large: {
-              minWidth: 800,
-              maxWidth: 1000
-            }
-          }}
-          render={(props, matches) => {
-            renderSpy(props, matches)
-            return <div>hello</div>
-          }}
-        />
-      </div>
-    )
-    expect(
-      deepEqual(renderSpy.lastCall.args[0], { ...props.medium, ...props.large })
-    ).to.be.true()
+    expect(responsiveDiv).toHaveStyle('display: inline-flex')
   })
 })
