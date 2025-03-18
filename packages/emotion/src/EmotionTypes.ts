@@ -116,6 +116,11 @@ type GenerateStyle = (
   state?: State
 ) => StyleObject
 
+type GenerateStyleFunctional = (
+  componentTheme: ComponentTheme,
+  params: Record<string, unknown>
+) => StyleObject
+
 type ComponentStyle<Keys extends string = string> = Record<
   Keys,
   StyleObject | string | number | undefined
@@ -139,6 +144,7 @@ export type {
   State,
   GenerateComponentTheme,
   GenerateStyle,
+  GenerateStyleFunctional,
   ComponentStyle
 }
 /*
