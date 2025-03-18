@@ -23,25 +23,33 @@
  */
 
 import type { AvatarTheme } from '@instructure/shared-types'
-import type { AvatarProps, AvatarState, AvatarStyle } from './props'
+import { AvatarProps, AvatarStyle } from './props'
 
+type StyleParams = {
+  loaded: boolean
+  size: AvatarProps['size']
+  color: AvatarProps['color']
+  hasInverseColor: AvatarProps['hasInverseColor']
+  shape: AvatarProps['shape']
+  src: AvatarProps['src']
+  showBorder: AvatarProps['showBorder']
+  themeOverride: AvatarProps['themeOverride']
+}
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: AvatarTheme,
-  props: AvatarProps,
-  state: AvatarState
+  params: StyleParams
 ): AvatarStyle => {
-  const { size, color, hasInverseColor, shape, src, showBorder } = props
-  const { loaded } = state
+  const { loaded, size, color, hasInverseColor, shape, src, showBorder } =
+    params
 
   const sizeStyles = {
     auto: {
@@ -101,12 +109,12 @@ const generateStyle = (
   }
 
   const backgroundColor = hasInverseColor
-    ? colorVariants[color]
+    ? colorVariants[color!]
     : componentTheme.background
 
   const contentColor = hasInverseColor
     ? componentTheme.background
-    : colorVariants[color]
+    : colorVariants[color!]
 
   return {
     avatar: {
@@ -123,8 +131,8 @@ const generateStyle = (
       textAlign: 'center',
       borderStyle: 'solid',
       borderColor: componentTheme.borderColor,
-      ...sizeStyles[size],
-      ...variantStyles[shape],
+      ...sizeStyles[size!],
+      ...variantStyles[shape!],
       ...(loaded
         ? {
             backgroundImage: `url('${src}')`,
@@ -137,7 +145,7 @@ const generateStyle = (
             backgroundImage: undefined,
             ...(hasInverseColor && {
               border: 0,
-              padding: sizeStyles[size].borderWidth,
+              padding: sizeStyles[size!].borderWidth,
               backgroundClip: 'border-box'
             })
           }),

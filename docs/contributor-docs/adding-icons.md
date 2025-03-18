@@ -13,11 +13,10 @@ order: 9
 
 - Double-check that the SVG size is 1920x1920.
 
-```html
+```js
 ---
 type: code
 ---
-
 <svg
   width="1920"
   height="1920"
@@ -31,7 +30,7 @@ type: code
 
 - The files cannot contain [clipping paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/clipPath)! Sadly, when the Designers export icons from Figma, most of the time they have a clipping path around the whole canvas. If the source code has them, manually refactor the code, e.g:
 
-```html
+```js
 ---
 type: code
 ---

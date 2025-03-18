@@ -23,136 +23,139 @@
  */
 
 /** @jsx jsx */
-import { Component, SyntheticEvent } from 'react'
+import { jsx, useStyle } from '@instructure/emotion'
+import { useState, SyntheticEvent, useEffect } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
-
-import { withStyle, jsx } from '@instructure/emotion'
+import type { AvatarProps } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-import { propTypes, allowedProps } from './props'
-import type { AvatarProps, AvatarState } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
-class Avatar extends Component<AvatarProps, AvatarState> {
-  static readonly componentId = 'Avatar'
 
-  static propTypes = propTypes
-  static allowedProps = allowedProps
-  static defaultProps = {
-    size: 'medium',
-    color: 'default',
-    hasInverseColor: false,
-    showBorder: 'auto',
-    shape: 'circle',
-    display: 'inline-block',
-    onImageLoaded: (_event: SyntheticEvent) => {}
-  } as const
+const Avatar = ({
+  size = 'medium',
+  color = 'default',
+  hasInverseColor = false,
+  showBorder = 'auto',
+  shape = 'circle',
+  display = 'inline-block',
+  onImageLoaded = (_event: SyntheticEvent) => {},
+  src,
+  name,
+  renderIcon,
+  alt,
+  as,
+  margin,
+  themeOverride,
+  elementRef,
+  ...rest
+}: AvatarProps) => {
+  const [loaded, setLoaded] = useState(false)
 
-  state = { loaded: false }
+  const styles = useStyle({
+    generateStyle,
+    generateComponentTheme,
+    params: {
+      loaded,
+      size,
+      color,
+      hasInverseColor,
+      shape,
+      src,
+      showBorder,
+      themeOverride
+    },
+    componentId: 'Avatar',
+    displayName: 'Avatar'
+  })
 
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.(this.state)
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.(this.state)
-
+  useEffect(() => {
     // in case the image is unset in an update, show icons/initials again
-    if (this.state.loaded && !this.props.src) {
-      this.setState({ loaded: false })
+    if (loaded && !src) {
+      setLoaded(false)
     }
-  }
+  }, [loaded, src])
 
-  makeInitialsFromName() {
-    let name = this.props.name
-
+  const makeInitialsFromName = () => {
     if (!name || typeof name !== 'string') {
       return
     }
-    name = name.trim()
-    if (name.length === 0) {
+    const currentName = name.trim()
+    if (currentName.length === 0) {
       return
     }
 
-    if (name.match(/\s+/)) {
-      const names = name.split(/\s+/)
+    if (currentName.match(/\s+/)) {
+      const names = currentName.split(/\s+/)
       return (names[0][0] + names[names.length - 1][0]).toUpperCase()
     } else {
-      return name[0].toUpperCase()
+      return currentName[0].toUpperCase()
     }
   }
 
-  handleImageLoaded = (event: SyntheticEvent) => {
-    this.setState({ loaded: true })
-    this.props.onImageLoaded(event)
+  const handleImageLoaded = (event: SyntheticEvent) => {
+    setLoaded(true)
+    onImageLoaded(event)
   }
 
-  renderInitials() {
+  const renderInitials = () => {
     return (
-      <span css={this.props.styles?.initials} aria-hidden="true">
-        {this.makeInitialsFromName()}
+      <span css={styles?.initials} aria-hidden="true">
+        {makeInitialsFromName()}
       </span>
     )
   }
 
-  renderContent() {
-    const { renderIcon, styles } = this.props
-
+  const renderContent = () => {
     if (!renderIcon) {
-      return this.renderInitials()
+      return renderInitials()
     }
 
     return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
   }
 
-  render() {
-    const { onImageLoaded, styles, ...props } = this.props
-
-    return (
-      <View
-        {...passthroughProps(props)}
-        aria-label={this.props.alt ? this.props.alt : undefined}
-        role={this.props.alt ? 'img' : undefined}
-        as={this.props.as}
-        elementRef={this.handleRef}
-        margin={this.props.margin}
-        css={styles?.avatar}
-        display={this.props.display}
-      >
-        <img // This is visually hidden and is here for loading purposes only
-          src={this.props.src}
-          css={this.props.styles?.loadImage}
-          alt={this.props.alt}
-          onLoad={this.handleImageLoaded}
-          aria-hidden="true"
-        />
-        {!this.state.loaded && this.renderContent()}
-      </View>
-    )
-  }
+  return (
+    <View
+      {...passthroughProps({
+        size,
+        color,
+        hasInverseColor,
+        showBorder,
+        shape,
+        display,
+        src,
+        name,
+        renderIcon,
+        alt,
+        as,
+        margin,
+        ...rest
+      })}
+      aria-label={alt ? alt : undefined}
+      role={alt ? 'img' : undefined}
+      as={as}
+      elementRef={elementRef}
+      margin={margin}
+      css={styles?.avatar}
+      display={display}
+    >
+      <img // This is visually hidden and is here for loading purposes only
+        src={src}
+        css={styles?.loadImage}
+        alt={alt}
+        onLoad={handleImageLoaded}
+        aria-hidden="true"
+      />
+      {!loaded && renderContent()}
+    </View>
+  )
 }
 
 export default Avatar
