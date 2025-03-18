@@ -53,7 +53,7 @@ type AvatarOwnProps = {
    * Accessible label
    */
   alt?: string
-  size:
+  size?:
     | 'auto'
     | 'xx-small'
     | 'x-small'
@@ -62,7 +62,7 @@ type AvatarOwnProps = {
     | 'large'
     | 'x-large'
     | 'xx-large'
-  color:
+  color?:
     | 'default' // = brand
     | 'shamrock'
     | 'barney'
@@ -78,8 +78,8 @@ type AvatarOwnProps = {
    * `auto` only shows a border when there is no source image. This prop can force to always or never show that border.
    */
   showBorder?: 'auto' | 'always' | 'never'
-  shape: 'circle' | 'rectangle'
-  display: 'inline-block' | 'block'
+  shape?: 'circle' | 'rectangle'
+  display?: 'inline-block' | 'block'
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -89,7 +89,7 @@ type AvatarOwnProps = {
   /**
    * Callback fired when the avatar image has loaded
    */
-  onImageLoaded: (event: SyntheticEvent) => void
+  onImageLoaded?: (event: SyntheticEvent) => void
   /**
    * The element type to render as
    */

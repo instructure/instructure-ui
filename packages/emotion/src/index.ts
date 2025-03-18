@@ -37,6 +37,8 @@ export {
   mapSpacingToShorthand
 } from './styleUtils'
 
+export { useStyle } from './useStyle'
+
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
 export type { WithStyleProps } from './withStyle'
 export type {
