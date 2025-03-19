@@ -31,21 +31,17 @@ import {
   jsx,
   withFunctionalStyle
 } from '@instructure/emotion'
-import {
-  IconAddLine,
-  IconAdminLine,
-  IconHamburgerLine
-} from '@instructure/ui-icons'
+import { IconHamburgerLine } from '@instructure/ui-icons'
 import { Button, IconButton } from '@instructure/ui-buttons'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
 import { generateStyles } from './styles'
 import { Drilldown } from '@instructure/ui-drilldown'
 
 /**
- ---
- category: components
- ---
- **/
+---
+category: components
+---
+**/
 const CanvasTopNav = ({
   breakpoint = 768,
   lti = false,

@@ -90,9 +90,9 @@ type DrilldownPageOwnProps = {
    */
   disabled?: boolean
 
-  renderBeforeChildren?: React.ReactNode | (() => React.ReactNode)
+  renderBeforeChildren?: React.ReactNode
 
-  renderAfterChildren?: React.ReactNode | (() => React.ReactNode)
+  renderAfterChildren?: React.ReactNode
 }
 
 type PropKeys = keyof DrilldownPageOwnProps

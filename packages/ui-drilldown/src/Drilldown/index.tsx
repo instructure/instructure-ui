@@ -428,7 +428,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     const { currentPage } = this
     const { styles, deterministicId } = this.props
 
-    const headerChildren: PageChildren[] = []
+    const headerChildren: (PageChildren | React.ReactNode)[] = []
 
     if (!currentPage) {
       return headerChildren
@@ -917,7 +917,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       return null
     }
 
-    const pageChildren: PageChildren[] = [
+    const pageChildren: (PageChildren | React.ReactNode)[] = [
       ...headerChildren,
       ...currentPage.children
     ]
