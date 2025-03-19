@@ -23,12 +23,33 @@
  */
 'use client'
 import React from 'react'
-import { Button } from '@instructure/ui'
+import { Button } from 'instructure-ui/ui-buttons/es/index'
+import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
 
 export default function ButtonPage() {
+  const colors = [
+    'primary',
+    'primary-inverse',
+    'secondary',
+    'success',
+    'danger'
+  ]
+  const sizes = ['small', 'medium', 'large']
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button>Gonb</Button>
+    <main className="flex gap-8 p-8 flex-col items-start">
+      <Button>Button</Button>
+      {colors.map((color) => (
+        <Button key={'color' + color} color={color}>
+          {color} color
+        </Button>
+      ))}
+      {sizes.map((size) => (
+        <Button key={'size' + size} size={size}>
+          {size} size
+        </Button>
+      ))}
+      <Button renderIcon={IconAddLine}>Icon Button</Button>
+      <Button disabled>Disabled Button</Button>
     </main>
   )
 }

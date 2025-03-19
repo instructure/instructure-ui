@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { Component } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'

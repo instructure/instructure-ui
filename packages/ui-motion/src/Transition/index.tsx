@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 // test is breaking without importing React here

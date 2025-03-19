@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Build InstUI
+        run: npm ci && npm run bootstrap
       - name: Install dependencies
         run: npm ci
         working-directory: regression-test

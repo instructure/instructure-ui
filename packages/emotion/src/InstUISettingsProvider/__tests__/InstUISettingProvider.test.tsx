@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react'
 import { expect, mount, spy } from '@instructure/ui-test-utils'

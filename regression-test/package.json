@@ -12,8 +12,9 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "10.14.0",
     "@chromatic-com/cypress": "^0.11.0",
+    "@instructure/browserslist-config-instui": "10.14.0",
+    "@tailwindcss/postcss": "^4.0.14",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -22,14 +23,14 @@
     "cypress": "^14.2.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.2",
-    "postcss": "^8",
-    "tailwindcss": "^3",
+    "postcss": "^8.5.3",
+    "tailwindcss": "4",
     "typescript": "^5"
   },
   "dependencies": {
-    "@instructure/ui": "10.14.0",
-    "next": "^15.2.3",
-    "react": "^18",
+    "instructure-ui": "file:../packages",
+    "next": "^14.2.25",
+    "react": "^18.3.1",
     "react-dom": "^18"
   }
 }
