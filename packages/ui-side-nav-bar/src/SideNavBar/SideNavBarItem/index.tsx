@@ -89,9 +89,7 @@ class SideNavBarItem extends Component<SideNavBarItemProps> {
         css={this.props.styles?.navigationItem}
         aria-label={this.props.minimized ? (label as string) : undefined}
       >
-        <div css={this.props.styles?.icon} aria-hidden="true">
-          {icon}
-        </div>
+        <div css={this.props.styles?.icon}>{icon}</div>
         {!this.props.minimized ? (
           <div css={this.props.styles?.label}>{label}</div>
         ) : null}
