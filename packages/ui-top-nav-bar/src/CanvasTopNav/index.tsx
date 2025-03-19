@@ -42,15 +42,16 @@ import { generateStyles } from './styles'
 import { Drilldown } from '@instructure/ui-drilldown'
 
 /**
----
-category: components
----
-**/
+ ---
+ category: components
+ ---
+ **/
 const CanvasTopNav = ({
   breakpoint = 768,
   lti = false,
   brand,
   breadcrumb,
+  buttons = [],
   mobileButtons = [],
   mobileMenu = [],
   hamburgerOnClick,
@@ -164,8 +165,11 @@ const CanvasTopNav = ({
         </div>
       </DesktopTopNav.Start>
       <DesktopTopNav.End>
-        <Button renderIcon={<IconAddLine />}>IconAddLine</Button>
-        <Button renderIcon={<IconAdminLine />}>IconAdminSolid</Button>
+        {buttons.map((button: any) => (
+          <Button key={button.label} renderIcon={button.icon}>
+            {button.label}
+          </Button>
+        ))}
       </DesktopTopNav.End>
     </DesktopTopNav>
   )
