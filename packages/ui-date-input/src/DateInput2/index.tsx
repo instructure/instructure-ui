@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { useState, useEffect, useContext } from 'react'
 import type { SyntheticEvent } from 'react'

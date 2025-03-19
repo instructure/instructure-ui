@@ -21,25 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+'use client'
 import React from 'react'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import { Button } from 'instructure-ui/ui-buttons/es/index'
+import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'InstUI Visual Regression Test Suite'
-}
-
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function ButtonPage() {
+  const colors = [
+    'primary',
+    'primary-inverse',
+    'secondary',
+    'success',
+    'danger'
+  ]
+  const sizes = ['small', 'medium', 'large']
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <main className="flex gap-8 p-8 flex-col items-start">
+      <Button>Button</Button>
+      {colors.map((color) => (
+        <Button key={'color' + color} color={color}>
+          {color} color
+        </Button>
+      ))}
+      {sizes.map((size) => (
+        <Button key={'size' + size} size={size}>
+          {size} size
+        </Button>
+      ))}
+      <Button renderIcon={IconAddLine}>Icon Button</Button>
+      <Button disabled>Disabled Button</Button>
+    </main>
   )
 }

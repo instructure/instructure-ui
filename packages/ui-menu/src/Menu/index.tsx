@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { Children, Component, ReactElement } from 'react'
 import keycode from 'keycode'

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { Component } from 'react'
 import { deepEqual as isEqual } from '@instructure/ui-utils'
