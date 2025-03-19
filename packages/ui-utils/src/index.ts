@@ -37,4 +37,12 @@ export { within } from './within'
 export { camelize } from './camelize'
 export { pascalize } from './pascalize'
 export { isBaseTheme } from './isBaseTheme'
-export * from './getBrowser'
+export {
+  getBrowser,
+  isSafari,
+  isEdge,
+  isIE,
+  isFirefox,
+  isChromium,
+  isAndroidOrIOS
+} from './getBrowser'
