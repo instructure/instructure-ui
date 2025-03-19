@@ -27,6 +27,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import { withStyle } from '@instructure/emotion'
 import { CanvasTopNav, SubNav } from '@instructure/ui-top-nav-bar'
 import {
+  IconAddLine,
+  IconAdminLine,
   IconAlertsLine,
   IconAnalyticsLine,
   IconCoursesLine,
@@ -251,6 +253,18 @@ class App extends Component<AppProps, AppState> {
             <CanvasTopNav
               brand={brandSvg}
               lti={false}
+              buttons={[
+                {
+                  label: 'AddLine',
+                  onClick: () => alert('Button 1'),
+                  icon: <IconAddLine />
+                },
+                {
+                  label: 'AdminLine',
+                  onClick: () => alert('Button 2'),
+                  icon: <IconAdminLine />
+                }
+              ]}
               breadcrumb={{
                 label: 'You are here:',
                 links: [
