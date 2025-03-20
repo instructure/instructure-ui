@@ -51,6 +51,8 @@ const CanvasTopNav = ({
   mobileButtons = [],
   mobileMenu = [],
   hamburgerOnClick,
+  hamburgerLabel,
+  showDesktopView,
   styles
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -135,39 +137,41 @@ const CanvasTopNav = ({
       </MobileTopNav.Menu>
     </MobileTopNav>
   ) : (
-    <DesktopTopNav lightMode={lti}>
-      <DesktopTopNav.Start>
-        <IconButton
-          withBackground={false}
-          withBorder={false}
-          screenReaderLabel="burgir"
-          onClick={hamburgerOnClick}
-          // color={lti ? 'secondary' : 'primary-inverse'}
-        >
-          <IconHamburgerLine />
-        </IconButton>
-        <div style={{ minWidth: '100%' }}>
-          <Breadcrumb label={breadcrumb.label}>
-            {breadcrumb.links.map((link: any, index: any) =>
-              link.href ? (
-                <Breadcrumb.Link key={index} href={link.href}>
-                  {link.label}
-                </Breadcrumb.Link>
-              ) : (
-                <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
-              )
-            )}
-          </Breadcrumb>
-        </div>
-      </DesktopTopNav.Start>
-      <DesktopTopNav.End>
-        {buttons.map((button: any) => (
-          <Button key={button.label} renderIcon={button.icon}>
-            {button.label}
-          </Button>
-        ))}
-      </DesktopTopNav.End>
-    </DesktopTopNav>
+    <div style={{ display: showDesktopView ? 'block' : 'none' }}>
+      <DesktopTopNav lightMode={lti}>
+        <DesktopTopNav.Start>
+          <IconButton
+            withBackground={false}
+            withBorder={false}
+            screenReaderLabel={hamburgerLabel}
+            onClick={hamburgerOnClick}
+            // color={lti ? 'secondary' : 'primary-inverse'}
+          >
+            <IconHamburgerLine />
+          </IconButton>
+          <div style={{ minWidth: '100%' }}>
+            <Breadcrumb label={breadcrumb.label}>
+              {breadcrumb.links.map((link: any, index: any) =>
+                link.href ? (
+                  <Breadcrumb.Link key={index} href={link.href}>
+                    {link.label}
+                  </Breadcrumb.Link>
+                ) : (
+                  <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
+                )
+              )}
+            </Breadcrumb>
+          </div>
+        </DesktopTopNav.Start>
+        <DesktopTopNav.End>
+          {buttons.map((button: any) => (
+            <Button key={button.label} renderIcon={button.icon}>
+              {button.label}
+            </Button>
+          ))}
+        </DesktopTopNav.End>
+      </DesktopTopNav>
+    </div>
   )
 }
 
