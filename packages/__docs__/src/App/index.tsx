@@ -62,7 +62,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   isCoursePage() {
-    return location.pathname.startsWith('/courses')
+    return location.pathname.startsWith('/course')
   }
 
   componentDidMount() {
@@ -171,24 +171,14 @@ class App extends Component<AppProps, AppState> {
             id: 'courses1',
             label: 'Courses1',
             onClick: () => {
-              this.props.navigate('/courses/course1', { replace: true })
-              setTimeout(() => {
-                window.location.reload()
-              }, 50) // Small delay ensures React updates before reloading
-
-              // window.location.reload()
+              this.props.navigate('/course1', { replace: true })
             }
           },
           {
             id: 'courses2',
             label: 'Courses2',
             onClick: () => {
-              this.props.navigate('/courses/course2', { replace: true })
-              setTimeout(() => {
-                window.location.reload()
-              }, 50) // Small delay ensures React updates before reloading
-
-              // window.location.reload()
+              this.props.navigate('/course2', { replace: true })
             }
           }
         ]
@@ -225,12 +215,16 @@ class App extends Component<AppProps, AppState> {
                 <SideNavBar.Item
                   icon={<IconUserLine />}
                   label="Account"
-                  href="/account"
+                  onClick={() =>
+                    this.props.navigate('/account', { replace: true })
+                  }
                 />
                 <SideNavBar.Item
                   icon={<IconCoursesLine />}
                   label="Courses"
-                  href="/courses"
+                  onClick={() =>
+                    this.props.navigate('/course1', { replace: true })
+                  }
                 />
                 <SideNavBar.Item
                   icon={<IconDashboardLine />}
@@ -242,7 +236,7 @@ class App extends Component<AppProps, AppState> {
                 <SideNavBar.Item
                   icon={<IconQuestionLine />}
                   label="Help"
-                  href="#"
+                  onClick={() => alert('Help clicked')}
                 />
               </SideNavBar>
             )}
@@ -253,6 +247,7 @@ class App extends Component<AppProps, AppState> {
             <CanvasTopNav
               brand={brandSvg}
               lti={false}
+              showDesktopView={this.isCoursePage()}
               buttons={[
                 {
                   label: 'AddLine',
@@ -268,11 +263,12 @@ class App extends Component<AppProps, AppState> {
               breadcrumb={{
                 label: 'You are here:',
                 links: [
-                  { href: '#', label: 'Student Forecast' },
-                  { href: '#', label: 'University of Utah' },
-                  { label: 'University of Colleges' }
+                  { href: '#', label: 'Crumb 1' },
+                  { href: '#', label: 'Crumb 2' },
+                  { label: 'Home' }
                 ]
               }}
+              hamburgerLabel="Open the main menu"
               hamburgerOnClick={() => alert('Hamburger clicked')}
               mobileButtons={[
                 {
@@ -310,8 +306,12 @@ class App extends Component<AppProps, AppState> {
                     element={<h1>This is the account page</h1>}
                   />
                   <Route
-                    path="/courses"
-                    element={<h1>This is a course home page</h1>}
+                    path="/course1"
+                    element={<h1>This is the first course home page</h1>}
+                  />
+                  <Route
+                    path="/course2"
+                    element={<h1>This is the second course home page</h1>}
                   />
                 </Routes>
               </div>
