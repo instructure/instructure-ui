@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Children, Component } from 'react'
 import { Flex } from '@instructure/ui-flex'
 import type { GuidelinesProps } from './props'
 import { propTypes, allowedProps } from './props'
@@ -37,7 +37,7 @@ class Guidelines extends Component<GuidelinesProps> {
   render() {
     return (
       <Flex wrap="wrap" justifyItems="end" alignItems="stretch">
-        {React.Children.map(this.props.children, (child) => (
+        {Children.map(this.props.children, (child) => (
           <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
             {child}
           </Flex.Item>

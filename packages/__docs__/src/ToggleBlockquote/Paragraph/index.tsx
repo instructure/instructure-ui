@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import type { ParagraphProps } from './props'
 
-class Paragraph extends React.Component<ParagraphProps> {
+class Paragraph extends Component<ParagraphProps> {
   static defaultProps = {
     children: null
   }

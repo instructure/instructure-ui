@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import {
   render,
   screen,
@@ -1314,7 +1314,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       })
 
       it('returnFocusElement prop should help returning the focus', async () => {
-        class ReturnFocusExample extends React.Component {
+        class ReturnFocusExample extends Component {
           state = {
             isDialogOpen: true
           }

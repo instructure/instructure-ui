@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

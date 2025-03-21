@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { propTypes, allowedProps } from './props'

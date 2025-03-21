@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { ColorPreset } from '@instructure/ui'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const COLOR_PRESET_IUI = () => {
   const [selected, setSelected] = useState('#0C89BF')

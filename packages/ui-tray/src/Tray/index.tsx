@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { Dialog } from '@instructure/ui-dialog'
@@ -35,7 +34,7 @@ import type { PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'

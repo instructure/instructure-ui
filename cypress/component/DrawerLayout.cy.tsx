@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { expect } from 'chai'
 
 import '../support/component'
 import { px, within } from '@instructure/ui-utils'
-import DrawerLayoutFixture from '../../packages/ui-drawer-layout/src/DrawerLayout/__fixtures__/DrawerLayout.fixture'
+import DrawerLayoutFixture from '@instructure/ui-drawer-layout/src/DrawerLayout/__fixtures__/DrawerLayout.fixture'
 
 describe('<DrawerLayout/>', () => {
   it('with no overlay, layout content should have margin equal to tray width with placement=start', () => {

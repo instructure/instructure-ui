@@ -9,7 +9,8 @@
     "experimentalDecorators": true,
     "allowJs": true,
     "isolatedModules": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "target": "ES6",
     // interop between ESM and CJS. Recommended by TS
     "esModuleInterop": true,
@@ -29,7 +30,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     // ES2019 is needed so TS recognizes new features like Array.flat
-    "lib": ["ES2019", "DOM", "DOM.Iterable"]
+    "lib": ["ES2019", "DOM", "DOM.Iterable"],
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["cypress.config.ts", "cypress", "node_modules"]
 }

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, Children } from 'react'
+import { ComponentElement, Component, Children } from 'react'
 
 import {
   safeCloneElement,
@@ -36,7 +35,7 @@ import { GridRow } from '../GridRow'
 import type { GridRowProps } from '../GridRow/props'
 import { GridCol } from '../GridCol'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -88,10 +87,9 @@ class Grid extends Component<GridProps> {
 
     return children.map((child, index) => {
       if (
-        matchComponentTypes<React.ComponentElement<GridRowProps, GridRow>>(
-          child,
-          [GridRow]
-        )
+        matchComponentTypes<ComponentElement<GridRowProps, GridRow>>(child, [
+          GridRow
+        ])
       ) {
         return safeCloneElement(child, {
           ...pickProps(props, Grid.allowedProps),

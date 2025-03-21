@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -145,15 +144,8 @@ class InlineSVG extends Component<InlineSVGProps> {
   }
 
   render() {
-    const {
-      style,
-      title,
-      description,
-      focusable,
-      src,
-      styles,
-      ...props
-    } = this.props
+    const { style, title, description, focusable, src, styles, ...props } =
+      this.props
 
     // if width or height are 'auto', don't supply anything to the SVG
     const width = this.props.width === 'auto' ? undefined : this.props.width

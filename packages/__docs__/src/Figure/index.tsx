@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, PropsWithChildren } from 'react'
+import { Children, Component, PropsWithChildren } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, ensureSingleChild } from '@instructure/ui-react-utils'
@@ -36,7 +35,7 @@ import { List } from '@instructure/ui-list'
 import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -128,7 +127,7 @@ class Figure extends Component<FigureProps> {
             {title}
           </Heading>
           <List itemSpacing="small" margin="0 0 small 0">
-            {React.Children.map(children, (child) => {
+            {Children.map(children, (child) => {
               return <List.Item>{child}</List.Item>
             })}
           </List>

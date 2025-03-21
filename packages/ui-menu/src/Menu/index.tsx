@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
-import React, { Children, Component, ReactElement } from 'react'
+
+import { ComponentElement, Children, Component, ReactElement } from 'react'
 import keycode from 'keycode'
 
 import { Popover } from '@instructure/ui-popover'
@@ -42,7 +42,7 @@ import { MenuItemGroup } from './MenuItemGroup'
 import type { MenuGroupProps } from './MenuItemGroup/props'
 import { MenuItemSeparator } from './MenuItemSeparator'
 import type { MenuSeparatorProps } from './MenuItemSeparator/props'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -50,10 +50,10 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { MenuProps } from './props'
 
-type MenuChild = React.ComponentElement<MenuProps, Menu>
-type MenuItemChild = React.ComponentElement<MenuItemProps, MenuItem>
-type MenuGroupChild = React.ComponentElement<MenuGroupProps, MenuItemGroup>
-type MenuSeparatorChild = React.ComponentElement<
+type MenuChild = ComponentElement<MenuProps, Menu>
+type MenuItemChild = ComponentElement<MenuItemProps, MenuItem>
+type MenuGroupChild = ComponentElement<MenuGroupProps, MenuItemGroup>
+type MenuSeparatorChild = ComponentElement<
   MenuSeparatorProps,
   MenuItemSeparator
 >

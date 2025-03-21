@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { ComponentProps, useCallback, useState } from 'react'
+import { ComponentProps, useCallback, useState } from 'react'
 import {
   InstUISettingsProvider,
   canvas,

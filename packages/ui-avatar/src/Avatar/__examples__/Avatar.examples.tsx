@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { IconGroupLine } from '@instructure/ui-icons'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'
