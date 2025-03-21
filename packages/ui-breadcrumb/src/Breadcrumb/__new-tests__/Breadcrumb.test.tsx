@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -144,7 +143,7 @@ describe('<Breadcrumb />', () => {
     expect(lastLink).not.toHaveAttribute('aria-current', 'page')
   })
 
-  it('should throw a warning when multiple elements have isCurrent set to true ', () => {
+  it('should throw a warning when multiple elements have isCurrent set to true', () => {
     render(
       <Breadcrumb label={TEST_LABEL}>
         <Breadcrumb.Link isCurrentPage href={TEST_LINK}>

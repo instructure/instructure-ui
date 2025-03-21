@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, Children } from 'react'
+import { Component, Children } from 'react'
 
 import { error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { TopNavBarContext } from '../TopNavBarContext'
 import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'
@@ -79,7 +78,7 @@ class TopNavBarUser extends Component<TopNavBarUserProps> {
   }
 
   get content() {
-    const children = React.Children.toArray(this.props.children) as ItemChild[]
+    const children = Children.toArray(this.props.children) as ItemChild[]
 
     const allowedVariants: TopNavBarItemProps['variant'][] = [
       'default',

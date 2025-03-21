@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { IconArcSolid } from '@instructure/ui-icons'

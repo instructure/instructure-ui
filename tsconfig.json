@@ -19,7 +19,9 @@
       "@instructure/ui-codemods": ["ui-codemods/lib"],
       "@instructure/ui-karma-config": ["ui-karma-config/lib"],
       "@instructure/ui-webpack-config": ["ui-webpack-config/config"]
-    }
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["./vitest.setup.ts", "./vitest.config.ts"]
 }

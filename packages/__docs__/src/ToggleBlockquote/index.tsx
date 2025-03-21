@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
@@ -30,7 +30,7 @@ import { Heading } from '../Heading'
 import { Paragraph } from './Paragraph'
 import type { ToggleBlockquoteProps } from './props'
 
-class ToggleBlockquote extends React.Component<ToggleBlockquoteProps> {
+class ToggleBlockquote extends Component<ToggleBlockquoteProps> {
   static defaultProps = {
     children: null
   }

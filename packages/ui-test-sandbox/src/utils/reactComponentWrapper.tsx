@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { ComponentElement, Component, ComponentProps, StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 const createRoot = async () => {
   return import('react-dom/client')
@@ -35,7 +35,7 @@ interface Root {
   unmount(): void
 }
 
-interface WrapperProp extends React.ComponentProps<React.ElementType> {
+interface WrapperProp extends ComponentProps<React.ElementType> {
   Component: React.ElementType
   props: Record<string, unknown>
 }
@@ -45,7 +45,7 @@ export interface WrappedRef {
   getDOMNode: () => Element
 }
 
-class WrapperComponent extends React.Component<WrapperProp, WrapperProp> {
+class WrapperComponent extends Component<WrapperProp, WrapperProp> {
   static propTypes = {
     Component: PropTypes.elementType.isRequired,
     props: PropTypes.object.isRequired
@@ -88,7 +88,7 @@ class ReactComponentWrapper {
   private _root?: Root = undefined
 
   async mount(
-    element: React.ComponentElement<Record<string, unknown>, React.Component>,
+    element: ComponentElement<Record<string, unknown>, Component>,
     options: { props?: Record<string, unknown>; strictMode?: boolean } = {}
   ) {
     const { type, ref, props } = element
@@ -157,7 +157,7 @@ class ReactComponentWrapper {
             this._root = res!.createRoot(this._mountNode!)
             this._root.render(
               shouldWrapInStrictMode ? (
-                <React.StrictMode>{WrappedElement}</React.StrictMode>
+                <StrictMode>{WrappedElement}</StrictMode>
               ) : (
                 WrappedElement
               )
@@ -182,7 +182,7 @@ class ReactComponentWrapper {
             try {
               ReactDOM.render(
                 shouldWrapInStrictMode ? (
-                  <React.StrictMode>{WrappedElement}</React.StrictMode>
+                  <StrictMode>{WrappedElement}</StrictMode>
                 ) : (
                   WrappedElement
                 ),

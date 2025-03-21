@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, ReactElement } from 'react'
+import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
@@ -35,7 +34,7 @@ import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -158,7 +157,7 @@ class Pages extends Component<PagesProps, PagesState> {
 
   get activePage() {
     const { activePageIndex, children } = this.props
-    const pages = React.Children.toArray(children)
+    const pages = Children.toArray(children)
     const activePage =
       activePageIndex! < pages.length ? pages[activePageIndex!] : null
 

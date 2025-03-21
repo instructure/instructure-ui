@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { ColorIndicator } from '../../packages/ui'
+
+import { ColorIndicator } from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'
 
-import { colorToRGB, colorToHex8 } from '../../packages/ui-color-utils'
+import { colorToRGB, colorToHex8 } from '@instructure/ui-color-utils'
 
 const colorTestCases = {
   '3 digit hex': '#069',

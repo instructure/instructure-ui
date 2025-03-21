@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { PresentationContent } from '@instructure/ui-a11y-content'

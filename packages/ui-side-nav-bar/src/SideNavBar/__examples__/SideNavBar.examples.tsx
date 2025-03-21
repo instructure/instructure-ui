@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import {
   IconAdminLine,
   IconDashboardLine,

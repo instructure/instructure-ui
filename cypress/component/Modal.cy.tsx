@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useState } from 'react'
-import { Modal, View } from '../../packages/ui'
+import { useState } from 'react'
+import { Modal, View } from '@instructure/ui'
 
 import '../support/component'
 

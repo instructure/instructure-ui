@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
@@ -173,9 +173,7 @@ describe('<Modal />', () => {
     const bodyText = 'Modal-body-text'
     const { findByText } = render(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
-        <View>
-          This is a custom child
-        </View>
+        <View>This is a custom child</View>
         <Modal.Body>{bodyText}</Modal.Body>
       </Modal>
     )
@@ -409,7 +407,7 @@ describe('<Modal />', () => {
   })
 
   describe('managed focus', () => {
-    class ModalExample extends React.Component<Partial<ModalProps>> {
+    class ModalExample extends Component<Partial<ModalProps>> {
       static propTypes = {
         // eslint-disable-next-line react/forbid-foreign-prop-types
         ...Modal.propTypes

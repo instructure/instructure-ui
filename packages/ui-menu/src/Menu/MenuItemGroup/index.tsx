@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Children, Component } from 'react'
+import { ComponentElement, Children, Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import {
   omitProps,
   safeCloneElement,
@@ -46,8 +45,8 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
 
-type MenuItemChild = React.ComponentElement<MenuItemProps, MenuItem>
-type MenuSeparatorChild = React.ComponentElement<
+type MenuItemChild = ComponentElement<MenuItemProps, MenuItem>
+type MenuSeparatorChild = ComponentElement<
   MenuSeparatorProps,
   MenuItemSeparator
 >

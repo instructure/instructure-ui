@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import 'cypress-real-events'
 
 import '../support/component'
-import { ToggleButton } from '../../packages/ui'
+import { ToggleButton } from '@instructure/ui'
 
 describe('<ToggleButton/>', () => {
   const icon = (

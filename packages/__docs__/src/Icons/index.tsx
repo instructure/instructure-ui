@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { useState, useRef, memo } from 'react'
-
-import { jsx } from '@instructure/emotion'
 
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { Heading } from '@instructure/ui-heading'
@@ -183,6 +180,7 @@ const IconTile = memo(
     )
   }
 )
+IconTile.displayName = 'IconTile'
 
 const IconsPage = ({ glyphs }: IconsPageProps) => {
   const [selectedFormat, setSelectedFormat] = useState<Format>('react')

@@ -1,10 +1,8 @@
 node_modules/
 npm-debug.log
-yarn-error.log
 lerna-debug.log
 ./build-storybook.log
 coverage/
-.yarnclean
 .babel-cache
 __build__
 .vscode
@@ -16,15 +14,6 @@ __build__
 .env.test
 .tmp/
 
-# Local Netlify folder
-.netlify
-
 tsconfig.build.tsbuildinfo
 
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children } from 'react'
+import { Children } from 'react'
 
 import { warn } from '@instructure/console'
 import { generateId } from '@instructure/ui-utils'

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { render } from '@testing-library/react'
@@ -56,7 +56,7 @@ describe('callRenderProp', () => {
   })
 
   it('React classes', () => {
-    class Foo extends React.Component {
+    class Foo extends Component {
       render() {
         return <div>hello</div>
       }
@@ -112,7 +112,7 @@ describe('callRenderProp', () => {
 
     it('should pass props correctly to React classes', () => {
       type FooProps = { shape?: string }
-      class Foo extends React.Component<FooProps> {
+      class Foo extends Component<FooProps> {
         static propTypes = {
           shape: PropTypes.oneOf(['circle', 'rectangle'])
         }

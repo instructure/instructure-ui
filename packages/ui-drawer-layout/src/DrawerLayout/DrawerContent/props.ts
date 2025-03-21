@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { AriaRole } from 'react'
+import { AriaRole } from 'react'
 import PropTypes from 'prop-types'
 
 import type {

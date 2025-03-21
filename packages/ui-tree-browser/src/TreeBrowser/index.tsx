@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-
 import { Component, SyntheticEvent } from 'react'
 import keycode from 'keycode'
 
@@ -31,7 +29,7 @@ import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
 import { TreeButton } from './TreeButton'

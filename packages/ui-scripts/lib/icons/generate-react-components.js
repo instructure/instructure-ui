@@ -58,7 +58,7 @@ async function generateIconComponent(glyph) {
   const jsxSource = await svg2jsx(source)
   const viewBox = src.match(/viewBox="(.*?)"/)[1]
 
-  const content = `import React, { Component } from 'react'
+  const content = `import { Component } from 'react'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import type { SVGIconProps } from '@instructure/ui-svg-images'
 
