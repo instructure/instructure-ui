@@ -25,8 +25,8 @@ import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 
 type ColorTableOwnProps = {
-  colors: any
-  colorNames: any
+  colors: Record<string, string>
+  colorNames: Record<string, string>
 }
 
 type PropKeys = keyof ColorTableOwnProps

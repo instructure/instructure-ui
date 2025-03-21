@@ -34,12 +34,6 @@ type PlaygroundOwnProps = {
   title: string
   code: string | [string, string]
   language: string
-  background:
-    | 'checkerboard'
-    | 'checkerboard-inverse'
-    | 'light'
-    | 'inverse'
-    | 'none'
   readOnly?: boolean
 }
 
@@ -59,26 +53,10 @@ const propTypes: PropValidators<PropKeys> = {
   title: PropTypes.string.isRequired,
   code: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.array]),
   language: PropTypes.string.isRequired,
-  background: PropTypes.oneOfType([
-    PropTypes.oneOf([
-      'checkerboard',
-      'checkerboard-inverse',
-      'light',
-      'inverse',
-      'none'
-    ]),
-    PropTypes.array
-  ]),
   readOnly: PropTypes.bool
 }
 
-const allowedProps: AllowedPropKeys = [
-  'background',
-  'code',
-  'language',
-  'readOnly',
-  'title'
-]
+const allowedProps: AllowedPropKeys = ['code', 'language', 'readOnly', 'title']
 
 export type PlaygroundState = {
   defaultCode: string | [string, string]

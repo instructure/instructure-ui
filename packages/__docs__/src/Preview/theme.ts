@@ -33,37 +33,16 @@ import type { Theme } from '@instructure/ui-themes'
 const generateComponentTheme = (theme: Theme): PreviewTheme => {
   const { colors, typography, spacing, borders } = theme
 
-  const colorCheckerboard = '#eee'
-  const colorCheckerboardInverse = '#444'
-
   return {
     padding: spacing?.small,
     borderRadius: borders?.radiusMedium,
-    backgroundColorLight: colors?.contrasts?.white1010,
-    backgroundColorInverse: colors?.contrasts?.grey125125,
+    backgroundColor: colors?.contrasts?.white1010,
     borderWidth: borders?.widthSmall,
-    borderColor: '#eee',
-    gradientCheckerboardSize: '1rem',
-    gradientCheckerboard: `
-      45deg,
-      ${colorCheckerboard} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboard} 75%,
-      ${colorCheckerboard}`,
-    gradientCheckerboardInverse: `
-      45deg,
-      ${colorCheckerboardInverse} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`,
+    borderColor: '#aaaaaa',
     fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
     fontSizeError: typography?.fontSizeSmall,
     backgroundError: colors?.contrasts?.red4570,
-    colorError: colors?.contrasts?.white1010,
-    toolbarColor: colors?.contrasts?.white1010,
-    toolbarBackground: '#0084D1'
+    colorError: colors?.contrasts?.white1010
   }
 }
 

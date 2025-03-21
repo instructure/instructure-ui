@@ -42,7 +42,6 @@ class Preview extends Component<PreviewProps, PreviewState> {
     frameless: false,
     inverse: false,
     rtl: false,
-    background: 'checkerboard',
     language: 'jsx'
   }
 

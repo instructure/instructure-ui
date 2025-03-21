@@ -24,17 +24,16 @@
 import type {
   PropValidators,
   Colors,
-  Typography
+  Typography,
+  BaseTheme
 } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 type ThemeOwnProps = {
   themeKey: string
-  //TODO type docs-data.js
-  variables: any
+  variables: BaseTheme
   requirePath: string
-  description?: string
 }
 
 type PropKeys = keyof ThemeOwnProps
@@ -52,15 +51,9 @@ export type ThemeStyle = ComponentStyle<'convertedValue'>
 const propTypes: PropValidators<PropKeys> = {
   themeKey: PropTypes.string.isRequired,
   variables: PropTypes.object.isRequired,
-  requirePath: PropTypes.string.isRequired,
-  description: PropTypes.string
+  requirePath: PropTypes.string.isRequired
 }
 
-const allowedProps: AllowedPropKeys = [
-  'themeKey',
-  'variables',
-  'requirePath',
-  'description'
-]
+const allowedProps: AllowedPropKeys = ['themeKey', 'variables', 'requirePath']
 export type { ThemeProps, ThemeTheme }
 export { propTypes, allowedProps }

@@ -24,6 +24,7 @@
 
 // This is the format of the saved JSON files
 import { Documentation } from 'react-docgen'
+import type { Theme } from '@instructure/ui-themes'
 
 type ProcessedFile =
   Documentation &
@@ -92,99 +93,6 @@ type JSDocFunctionReturns = {
     names: string[]
   }
 }
-// TODO these are from React-docgen Documentation.d.ts,
-// remove when react-docgen exports them
-interface MethodParameter {
-  name: string;
-  description?: string;
-  optional: boolean;
-  type?: TypeDescriptor<FunctionSignatureType> | null;
-}
-
-interface MethodReturn {
-  description?: string;
-  type: TypeDescriptor<FunctionSignatureType> | undefined;
-}
-
-interface PropDescriptor {
-  type?: PropTypeDescriptor;
-  flowType?: TypeDescriptor<FunctionSignatureType>;
-  tsType?: TypeDescriptor<TSFunctionSignatureType>;
-  required?: boolean;
-  defaultValue?: DefaultValueDescriptor;
-  description?: string;
-}
-
-interface PropTypeDescriptor {
-  name: 'any' | 'array' | 'arrayOf' | 'bool' | 'custom' | 'element' | 'elementType' | 'enum' | 'exact' | 'func' | 'instanceOf' | 'node' | 'number' | 'object' | 'objectOf' | 'shape' | 'string' | 'symbol' | 'union';
-  value?: unknown;
-  raw?: string;
-  computed?: boolean;
-  description?: string;
-  required?: boolean;
-}
-
-type TypeDescriptor<T = FunctionSignatureType> = ElementsType<T> | LiteralType | ObjectSignatureType<T> | SimpleType | T;
-
-interface DefaultValueDescriptor {
-  value: unknown;
-  computed: boolean;
-}
-interface BaseType {
-  required?: boolean;
-  nullable?: boolean;
-  alias?: string;
-}
-interface SimpleType extends BaseType {
-  name: string;
-  raw?: string;
-}
-interface LiteralType extends BaseType {
-  name: 'literal';
-  value: string;
-}
-interface ElementsType<T = FunctionSignatureType> extends BaseType {
-  name: string;
-  raw: string;
-  elements: Array<TypeDescriptor<T>>;
-}
-
-interface FunctionArgumentType<T> {
-  name: string
-  type?: TypeDescriptor<T>
-  rest?: boolean
-}
-
-interface FunctionSignatureType extends BaseType {
-  name: 'signature';
-  type: 'function';
-  raw: string;
-  signature: {
-    arguments: Array<FunctionArgumentType<FunctionSignatureType>>;
-    return?: TypeDescriptor<FunctionSignatureType>;
-  };
-}
-interface TSFunctionSignatureType extends FunctionSignatureType {
-  signature: {
-    arguments: Array<FunctionArgumentType<TSFunctionSignatureType>>;
-    return?: TypeDescriptor<TSFunctionSignatureType>;
-    this?: TypeDescriptor<TSFunctionSignatureType>;
-  };
-}
-interface ObjectSignatureType<T = FunctionSignatureType> extends BaseType {
-  name: 'signature';
-  type: 'object';
-  raw: string;
-  signature: {
-    properties: Array<{
-      key: TypeDescriptor<T> | string;
-      value: TypeDescriptor<T>;
-      description?: string;
-    }>;
-    constructor?: TypeDescriptor<T>;
-  };
-}
-// end react-docgen part
 
 type LibraryOptions = {
   name: string
@@ -237,7 +145,7 @@ type MainIconsData = {
 }
 
 type MainDocsData = {
-  themes: Record<string, { resource: any; requirePath: string }>
+  themes: Record<string, { resource: Theme; requirePath: string }>
   library: LibraryOptions
 } & ParsedDoc
 
@@ -246,16 +154,6 @@ export type {
   PackagePathData,
   YamlMetaInfo,
   JSDocFunctionReturns,
-  PropDescriptor,
-  MethodParameter,
-  MethodReturn,
-  TypeDescriptor,
-  TSFunctionSignatureType,
-  SimpleType,
-  LiteralType,
-  ElementsType,
-  ObjectSignatureType,
-  BaseType,
   LibraryOptions,
   Glyph,
   MainDocsData,

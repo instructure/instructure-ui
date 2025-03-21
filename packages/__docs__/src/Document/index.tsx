@@ -73,19 +73,20 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   fetchGenerateComponentTheme = async () => {
     const { doc, themeVariables } = this.props
-    const generateComponentTheme =
-      doc?.componentInstance?.generateComponentTheme
+    const generateTheme = doc?.componentInstance?.generateComponentTheme
+    const generateThemeFunctional =
+      functionalComponentThemes[
+        doc.id as keyof typeof functionalComponentThemes
+      ]
     if (
-      generateComponentTheme &&
-      typeof generateComponentTheme === 'function' &&
+      generateTheme &&
+      typeof generateTheme === 'function' &&
       themeVariables
     ) {
-      this.setState({ componentTheme: generateComponentTheme(themeVariables) })
-    } else {
-      const componentTheme = await functionalComponentThemes[
-        doc.id.toLowerCase()
-      ](themeVariables)
-      this.setState({ componentTheme })
+      this.setState({ componentTheme: generateTheme(themeVariables) })
+    } else if (generateThemeFunctional && themeVariables) {
+      const componentTheme = await generateThemeFunctional(themeVariables)
+      this.setState({ componentTheme: componentTheme })
     }
   }
 

@@ -24,19 +24,16 @@
 
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type {
-  PropValidators,
-  BaseThemeVariables,
-  ComponentTheme
-} from '@instructure/shared-types'
+import type { PropValidators, ThemeVariables } from '@instructure/shared-types'
 import { DocData } from '../App/props'
+import { Theme } from '@instructure/ui-themes'
 
 type DocDataType = DocData & { legacyGitBranch?: string }
 
 type DocumentOwnProps = {
   doc: DocDataType
   description: string
-  themeVariables?: BaseThemeVariables & { key: string }
+  themeVariables?: Theme
   repository?: string
   layout?: 'small' | 'medium' | 'large' | 'x-large'
 }
@@ -73,7 +70,7 @@ type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 type DocumentState = {
   selectedDetailsTabIndex: number
   pageRef: HTMLDivElement | null
-  componentTheme: ComponentTheme
+  componentTheme: Partial<ThemeVariables[keyof ThemeVariables]>
 }
 
 const allowedProps: AllowedPropKeys = [

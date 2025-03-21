@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Children, Component } from 'react'
+import React, { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 
 import { px } from '@instructure/ui-utils'
@@ -41,6 +41,9 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { ThemeProps } from './props'
+import { BaseTheme, Colors, Primitives } from '@instructure/shared-types'
+
+type valueof<X> = X[keyof X]
 
 @withStyle(generateStyle, generateComponentTheme)
 class Theme extends Component<ThemeProps> {
@@ -175,21 +178,19 @@ class Theme extends Component<ThemeProps> {
     )
   }
 
-  renderSection(name: string, data: Record<string, string>) {
+  renderSection(name: string, data: valueof<BaseTheme>) {
     const subSections = []
-    let baseColors = {}
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    let baseColors: Primitives | {} = {}
     const newData = Object.assign({}, data)
-    if (name === 'colors' && data.primitives) {
-      baseColors = data.primitives
-      delete newData.values
-
+    if (name === 'colors' && (data as Colors).primitives) {
+      baseColors = (data as Colors).primitives
       this._colorMap = this.mapColors({
         ...baseColors,
-        ...data.additionalPrimitives
+        ...(data as Colors).additionalPrimitives
       })
       subSections.push(<ThemeColors colors={baseColors} label="primitives" />)
     }
-
     Object.keys(newData).forEach((key) => {
       //primitives are the color palette above
       if (
@@ -199,8 +200,8 @@ class Theme extends Component<ThemeProps> {
       ) {
         return
       }
-
-      const item = data[key]
+      // @ts-ignore TODO type later
+      const item = data![key]
 
       if (typeof item === 'object') {
         const subData: Record<string, { text: string; color: string }> = {}
@@ -223,11 +224,6 @@ class Theme extends Component<ThemeProps> {
           <Heading as="h3" level="h2">
             {name}
           </Heading>
-          {data.description && (
-            <Text size="medium" as="p">
-              {data.description}
-            </Text>
-          )}
           <View
             background="secondary"
             as="div"
@@ -235,35 +231,35 @@ class Theme extends Component<ThemeProps> {
             margin="small none large"
             borderRadius="medium"
           >
-            {Children.map(subSections, (sub) => sub)}
+            {React.Children.map(subSections, (sub) => sub)}
           </View>
         </View>
       )
     } else {
-      return this.renderTable(name, this.renderRows(data))
+      return this.renderTable(name, this.renderRows(data as any))
     }
   }
 
   render() {
     const sections: React.ReactElement[] = []
 
-    const { themeKey, variables, description } = this.props
+    const { themeKey, variables } = this.props
 
-    Object.keys(variables)
-      .sort((a, b) => (a === 'colors' ? -1 : b === 'colors' ? 1 : 0))
-      .forEach((name) => {
-        const value = variables[name]
-
-        if (value && typeof value === 'object') {
-          sections.push(this.renderSection(name, value))
-        }
-      })
+    const sortedKeys = Object.keys(variables).sort((a, b) =>
+      a === 'colors' ? -1 : b === 'colors' ? 1 : 0
+    ) as Array<keyof BaseTheme>
+    for (const name of sortedKeys) {
+      const value = variables[name]
+      if (value && typeof value === 'object') {
+        sections.push(this.renderSection(name, value))
+      }
+    }
 
     return (
       <div>
-        {description && (
+        {variables.description && (
           <Text size="medium" as="p">
-            {description}
+            {variables.description}
           </Text>
         )}
 
