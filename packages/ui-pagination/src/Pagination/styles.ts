@@ -41,7 +41,9 @@ const generateStyle = (componentTheme: PaginationTheme): PaginationStyle => {
       all: 'unset',
       display: 'flex',
       alignItems: 'center',
-      gap: componentTheme.pageIndicatorGap
+      gap: componentTheme.pageIndicatorGap,
+      flexWrap: 'wrap',
+      justifyContent: 'center'
     },
     pagination: {
       label: 'pagination',
@@ -50,7 +52,8 @@ const generateStyle = (componentTheme: PaginationTheme): PaginationStyle => {
     pages: {
       label: 'pagination__pages',
       display: 'inline-flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      margin: '0.3rem'
     }
   }
 }
