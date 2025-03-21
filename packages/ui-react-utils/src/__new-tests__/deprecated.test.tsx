@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { vi } from 'vitest'
 import PropTypes from 'prop-types'
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { PropsWithChildren } from 'react'
+import { Component, PropsWithChildren } from 'react'
 import { userEvent } from '@testing-library/user-event'
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -32,7 +32,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Link } from '../index'
 
 //<unknown> is needed for React 17 compatibility
-class TruncateText extends React.Component<PropsWithChildren<unknown>> {
+class TruncateText extends Component<PropsWithChildren<unknown>> {
   render() {
     return <span>{this.props.children}</span>
   }

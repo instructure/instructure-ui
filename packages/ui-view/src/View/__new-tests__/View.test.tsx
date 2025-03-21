@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { CSSProperties } from 'react'
+import { CSSProperties } from 'react'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'

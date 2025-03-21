@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
+import { createRef } from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -419,7 +420,7 @@ describe('<Select />', () => {
   })
 
   it('should provide a focus method', async () => {
-    const ref = React.createRef<Select>()
+    const ref = createRef<Select>()
     render(
       <Select renderLabel="Choose an option" ref={ref}>
         {getOptions()}
@@ -436,7 +437,7 @@ describe('<Select />', () => {
   })
 
   it('should provide a focused getter', async () => {
-    const ref = React.createRef<Select>()
+    const ref = createRef<Select>()
 
     render(
       <Select renderLabel="Choose an option" ref={ref}>
@@ -618,7 +619,7 @@ describe('<Select />', () => {
       })
     })
 
-    it("should not render option's before content in input field when isOptionContentAppliedToInput is set to false ", async () => {
+    it("should not render option's before content in input field when isOptionContentAppliedToInput is set to false", async () => {
       const { container } = render(
         <Select
           renderLabel="Choose an option"

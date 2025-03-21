@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import {
@@ -32,7 +31,7 @@ import {
   IconMiniArrowDoubleLine
 } from '@instructure/ui-icons'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

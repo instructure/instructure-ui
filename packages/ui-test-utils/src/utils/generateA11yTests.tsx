@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { ComponentType } from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { expect } from './expect'
 import { Example, StoryConfig, within } from '../index'
@@ -55,7 +55,7 @@ const renderExample = ({ Component, componentProps, key }: Example<any>) => (
  * @private
  */
 export function generateA11yTests<Props extends Record<string, any>>(
-  Component: React.ComponentType<any>,
+  Component: ComponentType<any>,
   componentExample: StoryConfig<Props>,
   ariaRulesToIgnore?: string[]
 ) {

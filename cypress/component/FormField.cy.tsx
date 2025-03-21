@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-// eslint-disable-next-line @instructure/no-relative-imports
-import { FormFieldLayout } from '../../packages/ui'
+
+import { FormFieldLayout } from '@instructure/ui'
 
 import '../support/component'
 

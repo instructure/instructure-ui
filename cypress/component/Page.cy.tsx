@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Pages, PagesPage } from '@instructure/ui-pages'
 
 import '../support/component'

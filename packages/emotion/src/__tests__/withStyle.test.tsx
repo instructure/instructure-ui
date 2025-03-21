@@ -22,19 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React from 'react'
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 import PropTypes from 'prop-types'
 
 import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
-import {
-  withStyle,
-  jsx,
-  InstUISettingsProvider,
-  WithStyleProps
-} from '../index'
+import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index'
 
 type Props = {
   inverse?: boolean
@@ -104,7 +98,7 @@ describe('@withStyle', async () => {
   }
 
   @withStyle(generateStyle, generateComponentTheme)
-  class ThemeableComponent extends React.Component<Props, State> {
+  class ThemeableComponent extends Component<Props, State> {
     static propTypes = {
       inverse: PropTypes.bool
     }
@@ -142,7 +136,7 @@ describe('@withStyle', async () => {
     }
   }
 
-  class WrapperComponent extends React.Component {
+  class WrapperComponent extends Component {
     render() {
       return (
         <div>

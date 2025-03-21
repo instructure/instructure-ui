@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'

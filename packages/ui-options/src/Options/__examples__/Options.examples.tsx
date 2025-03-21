@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { Options } from '../index'
 

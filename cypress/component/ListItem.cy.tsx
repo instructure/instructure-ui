@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import 'cypress-real-events'
 
-import { ListItem } from '../../packages/ui'
+import { ListItem } from '@instructure/ui'
 import '../support/component'
 
 describe('<ListItem/>', () => {

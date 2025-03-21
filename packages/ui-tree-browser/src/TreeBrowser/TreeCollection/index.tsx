@@ -22,12 +22,10 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-import React, { Component, ReactElement, SyntheticEvent } from 'react'
+import { Component, ReactElement, SyntheticEvent } from 'react'
 
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
 import { TreeButton } from '../TreeButton'

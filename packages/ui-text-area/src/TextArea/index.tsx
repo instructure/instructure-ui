@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Fragment, Component } from 'react'
 import { FormField } from '@instructure/ui-form-field'
 import {
   addEventListener,
@@ -34,7 +33,7 @@ import {
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -356,7 +355,7 @@ class TextArea extends Component<TextAreaProps> {
     )
 
     const label = hasVisibleChildren(this.props.label) ? (
-      <React.Fragment>
+      <Fragment>
         {this.props.label}
         {required && (
           <span
@@ -367,7 +366,7 @@ class TextArea extends Component<TextAreaProps> {
             *
           </span>
         )}
-      </React.Fragment>
+      </Fragment>
     ) : (
       this.props.label
     )

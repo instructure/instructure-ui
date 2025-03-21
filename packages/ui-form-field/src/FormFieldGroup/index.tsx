@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, Children, ReactElement, AriaAttributes } from 'react'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { FormFieldLayout } from '../FormFieldLayout'
 

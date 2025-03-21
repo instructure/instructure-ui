@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-import React, { Component, ReactElement, ReactNode } from 'react'
+import { Children, Component, ReactElement, ReactNode } from 'react'
 
 import { warn, error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
@@ -53,7 +51,7 @@ import {
   IconCheckSolid
 } from '@instructure/ui-icons'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
@@ -260,7 +258,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
   get pages(): PageChild[] {
     const { children } = this.props
-    return React.Children.toArray(children || []) as PageChild[]
+    return Children.toArray(children || []) as PageChild[]
   }
 
   get pageMap(): PageMap | undefined {
@@ -278,7 +276,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
       map[props.id] = {
         ...props,
-        children: React.Children.toArray(children || []) as PageChildren[]
+        children: Children.toArray(children || []) as PageChildren[]
       }
     })
 

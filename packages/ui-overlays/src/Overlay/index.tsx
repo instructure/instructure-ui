@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, ComponentClass, ReactElement } from 'react'
+import { Component, ComponentClass, ReactElement } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { createChainedFunction } from '@instructure/ui-utils'
