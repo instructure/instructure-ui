@@ -32,12 +32,7 @@ import {
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
-import {
-  InstUISettingsProvider,
-  withStyle,
-  jsx,
-  Global
-} from '@instructure/emotion'
+import { InstUISettingsProvider, withStyle, Global } from '@instructure/emotion'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
@@ -398,7 +393,6 @@ class App extends Component<AppProps, AppState> {
 
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
-
     const themeContent = (
       <View
         as="div"

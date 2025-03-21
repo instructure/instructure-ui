@@ -387,8 +387,10 @@ type DataVisualization = {
 
 type Colors = {
   primitives: Primitives
+  additionalPrimitives: AdditionalPrimitives
   contrasts: Contrasts
   ui: UI
+  dataVisualization: DataVisualization
 }
 
 export type {

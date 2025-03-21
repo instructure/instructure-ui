@@ -25,11 +25,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { ToggleDetailsProps } from '@instructure/ui-toggle-details'
-import type {
-  PickPropsWithExceptions,
-  PropValidators
-} from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
+import { ToggleDetailsProps } from '@instructure/ui-toggle-details'
 
 type NavToggleOwnProps = {
   summary: string
@@ -41,10 +38,7 @@ type PropKeys = keyof NavToggleOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NavToggleProps = PickPropsWithExceptions<
-  ToggleDetailsProps,
-  'summary' | 'shouldBlur' | 'fluidWidth' | keyof NavToggleOwnProps
-> &
+type NavToggleProps = Omit<ToggleDetailsProps, 'variant' | 'summary'> &
   NavToggleOwnProps
 
 const propTypes: PropValidators<PropKeys> = {

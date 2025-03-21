@@ -169,11 +169,7 @@ class Header extends Component<HeaderProps> {
               <Link href="#index" isWithinText={false} display="block">
                 <View display="block" margin="small none none">
                   <Text size="large">
-                    {(
-                      <span>
-                        {this.props.name} {this.props.version}
-                      </span>
-                    ) || 'Documentation'}
+                    {this.props.name} {this.props.version}
                   </Text>
                 </View>
               </Link>

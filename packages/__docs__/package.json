@@ -137,7 +137,7 @@
     "jsdoc-api": "^8.1.1",
     "mkdirp": "^3.0.1",
     "raw-loader": "^4.0.2",
-    "react-docgen": "^7.1.0",
+    "react-docgen": "^7.1.1",
     "svg-inline-loader": "^0.8.2",
     "webpack-bundle-analyzer": "^4.10.2"
   },

@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+import React, { Component } from 'react'
 
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { View } from '@instructure/ui-view'
+import { View, ViewOwnProps } from '@instructure/ui-view'
 
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
@@ -119,7 +119,7 @@ class Nav extends Component<NavProps, NavState> {
   }): React.ReactNode {
     if (
       React.isValidElement(children) &&
-      Children.count(children.props.children) === 0
+      React.Children.count(children.props.children) === 0
     ) {
       return
     }
@@ -209,9 +209,9 @@ class Nav extends Component<NavProps, NavState> {
     }
   }
 
-  removeFocus = (event) => {
-    if (event.target && event.target.blur) {
-      event.target.blur()
+  removeFocus = (event: React.MouseEvent<ViewOwnProps>) => {
+    if (event.target && (event.target as HTMLElement).blur) {
+      ;(event.target as HTMLElement).blur()
     }
   }
 

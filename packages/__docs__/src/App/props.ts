@@ -30,6 +30,8 @@ import type {
   ProcessedFile
 } from '../../buildScripts/DataTypes.mts'
 import type { DocDataType } from '../Document/props'
+import type { Theme } from '@instructure/ui-themes'
+import type { ThemeVariables } from '@instructure/shared-types'
 
 type AppOwnProps = {
   trayWidth: number
@@ -97,8 +99,18 @@ type AppState = {
   currentDocData?: DocData
 }
 
+type ThemeFunctionsClassic = {
+  [K in keyof ThemeVariables]: (theme: Theme) => ThemeVariables[K]
+}
+
+export type ThemeFunctionsFunctional = Partial<{
+  [K in keyof ThemeVariables]: (theme: Theme) => Promise<ThemeVariables[K]>
+}>
+
 type DocData = ProcessedFile & {
-  componentInstance: any
+  componentInstance: Record<string, any> & {
+    generateComponentTheme?: ThemeFunctionsClassic[keyof ThemeFunctionsClassic]
+  }
   children: DocDataType[]
 }
 

@@ -40,12 +40,6 @@ type PreviewOwnProps = {
   frameless?: boolean
   inverse?: boolean
   rtl?: boolean
-  background?:
-    | 'checkerboard'
-    | 'checkerboard-inverse'
-    | 'inverse'
-    | 'light'
-    | 'none'
   themeKey?: keyof MainDocsData['themes']
   themes?: MainDocsData['themes']
   error?: string
@@ -60,19 +54,13 @@ type PreviewProps = PreviewOwnProps & WithStyleProps<PreviewTheme, PreviewStyle>
 type PreviewTheme = {
   padding: Spacing['small']
   borderRadius: Border['radiusMedium']
-  backgroundColorLight: Colors['backgroundLightest']
-  backgroundColorInverse: Colors['backgroundDarkest']
+  backgroundColor: Colors['contrasts']['white1010']
   borderWidth: Border['widthSmall']
   borderColor: string
-  gradientCheckerboardSize: string
-  gradientCheckerboard: string
-  gradientCheckerboardInverse: string
   fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace'
   fontSizeError: Typography['fontSizeSmall']
-  backgroundError: Colors['backgroundDanger']
-  colorError: Colors['textLightest']
-  toolbarColor: Colors['textLightest']
-  toolbarBackground: string
+  backgroundError: Colors['contrasts']['red4570']
+  colorError: Colors['contrasts']['white1010']
 }
 export type PreviewStyle = ComponentStyle<'preview' | 'previewError' | 'error'>
 
@@ -83,13 +71,6 @@ const propTypes: PropValidators<PropKeys> = {
   frameless: PropTypes.bool,
   inverse: PropTypes.bool,
   rtl: PropTypes.bool,
-  background: PropTypes.oneOf([
-    'checkerboard',
-    'checkerboard-inverse',
-    'inverse',
-    'light',
-    'none'
-  ]),
   themes: PropTypes.object,
   themeKey: PropTypes.string,
   error: PropTypes.string
@@ -104,7 +85,6 @@ const allowedProps: AllowedPropKeys = [
   'frameless',
   'inverse',
   'rtl',
-  'background',
   'themes',
   'themeKey'
 ]

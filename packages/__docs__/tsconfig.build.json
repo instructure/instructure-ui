@@ -8,8 +8,9 @@
   },
   "include": [
     "src/**/*",
-    "components.js",
-    "globals.js",
+    "components.ts",
+    "functionalComponentThemes.ts",
+    "globals.ts",
     "buildScripts/DataTypes.mts",
     "buildScripts/samplemedia/placeholder-image.js"
   ],
@@ -272,6 +273,9 @@
     },
     {
       "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-color-picker/tsconfig.build.json"
     },
     {
       "path": "../ui-scripts/tsconfig.build.json"

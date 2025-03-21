@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 type NavOwnProps = {
   docs: Record<string, any>
@@ -35,7 +38,7 @@ type PropKeys = keyof NavOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NavProps = NavOwnProps
+type NavProps = OtherHTMLAttributes<NavOwnProps> & NavOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
   docs: PropTypes.object.isRequired,

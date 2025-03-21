@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { Tabs } from '@instructure/ui-tabs'
 import { Modal } from '@instructure/ui-modal'
@@ -59,7 +59,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    background: 'checkerboard',
     readOnly: false,
     language: 'jsx'
   }
@@ -206,11 +205,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
       <Preview
         code={code}
         language={this.props.language}
-        background={
-          typeof this.props.background === 'string'
-            ? this.props.background
-            : 'light'
-        }
         fullscreen={fullscreen}
         rtl={rtl}
         themeKey={themeKey}

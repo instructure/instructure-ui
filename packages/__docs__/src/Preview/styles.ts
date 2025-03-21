@@ -31,60 +31,25 @@ import type { PreviewProps, PreviewTheme, PreviewStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: PreviewTheme,
   props: PreviewProps
 ): PreviewStyle => {
-  const { fullscreen, frameless, background } = props
-
-  const backgroundBase = {
-    padding: componentTheme.padding,
-    borderWidth: componentTheme.borderWidth,
-    borderStyle: 'solid',
-    borderColor: componentTheme.borderColor,
-    borderRadius: componentTheme.borderRadius,
-    backgroundColor: componentTheme.backgroundColorLight
-  }
-
-  const checkedBackgroundBase = {
-    ...backgroundBase,
-    backgroundPosition: `0 0, calc(${componentTheme.gradientCheckerboardSize} / 2) calc(${componentTheme.gradientCheckerboardSize} / 2)`,
-    backgroundSize: `${componentTheme.gradientCheckerboardSize} ${componentTheme.gradientCheckerboardSize}`
-  }
-
-  const backgroundVariants = {
-    checkerboard: {
-      ...checkedBackgroundBase,
-      backgroundImage: `linear-gradient(${componentTheme.gradientCheckerboard}), linear-gradient(${componentTheme.gradientCheckerboard})`
-    },
-    'checkerboard-inverse': {
-      ...checkedBackgroundBase,
-      backgroundColor: componentTheme.backgroundColorInverse,
-      backgroundImage: `linear-gradient(${componentTheme.gradientCheckerboardInverse}), linear-gradient(${componentTheme.gradientCheckerboardInverse})`
-    },
-    light: {
-      ...backgroundBase
-    },
-    inverse: {
-      backgroundColor: componentTheme.backgroundColorInverse
-    },
-    none: {
-      display: 'flex',
-      justifyContent: 'center'
-    }
-  }
+  const { fullscreen, frameless } = props
 
   const previewStyle = {
     boxSizing: 'border-box',
     margin: 0,
     position: 'relative',
     overflow: 'auto',
-
-    ...backgroundVariants[background!],
-
+    padding: componentTheme.padding,
+    borderWidth: componentTheme.borderWidth,
+    borderStyle: 'solid',
+    borderColor: componentTheme.borderColor,
+    borderRadius: componentTheme.borderRadius,
+    backgroundColor: componentTheme.backgroundColor,
     ...(fullscreen && {
       position: 'fixed',
       width: '100vw',
