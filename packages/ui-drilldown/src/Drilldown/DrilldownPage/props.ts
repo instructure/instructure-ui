@@ -89,6 +89,10 @@ type DrilldownPageOwnProps = {
    * Is the page disabled
    */
   disabled?: boolean
+
+  renderBeforeChildren?: React.ReactNode
+
+  renderAfterChildren?: React.ReactNode
 }
 
 type PropKeys = keyof DrilldownPageOwnProps
@@ -111,7 +115,9 @@ const propTypes: PropValidators<PropKeys> = {
   onHeaderActionClicked: PropTypes.func,
   onBackButtonClicked: PropTypes.func,
   withoutHeaderSeparator: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  renderBeforeChildren: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderAfterChildren: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -123,7 +129,9 @@ const allowedProps: AllowedPropKeys = [
   'onHeaderActionClicked',
   'onBackButtonClicked',
   'withoutHeaderSeparator',
-  'disabled'
+  'disabled',
+  'renderBeforeChildren',
+  'renderAfterChildren'
 ]
 
 export type { DrilldownPageProps, PageChildren }

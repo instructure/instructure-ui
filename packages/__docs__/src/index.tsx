@@ -25,14 +25,15 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { App } from './App'
+import { AppWrapper } from './App'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
+import { BrowserRouter } from 'react-router-dom'
 
-createRoot(document.getElementById('app')!).render(
-  <React.StrictMode>
-    <InstUISettingsProvider>
-      <App />
-    </InstUISettingsProvider>
-  </React.StrictMode>
+createRoot(document.getElementById('app')).render(
+  <InstUISettingsProvider>
+    <BrowserRouter basename="/">
+      <AppWrapper />
+    </BrowserRouter>
+  </InstUISettingsProvider>
 )
