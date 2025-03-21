@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Tooltip, Modal, Button, CloseButton, View } from '@instructure/ui'
 import 'cypress-real-events'
 

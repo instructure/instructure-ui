@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { IconXSolid } from '@instructure/ui-icons'
@@ -30,7 +29,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

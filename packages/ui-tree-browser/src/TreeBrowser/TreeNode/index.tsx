@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from '../TreeButton/styles'
 import generateComponentTheme from '../TreeButton/theme'

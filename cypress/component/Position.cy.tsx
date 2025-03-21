@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import 'cypress-real-events'
 
 import '../support/component'
-import { Position } from '../../packages/ui'
-import { within } from '../../packages/ui-utils'
+import { Position } from '@instructure/ui'
+import { within } from '@instructure/ui-utils'
 
 const parentDefaults = {
   width: 500,

@@ -2014,7 +2014,7 @@ Custom table with `stacked` layout support:
           onMouseOver={this.toggleHoverOn}
           onMouseOut={this.toggleHoverOff}
         >
-          {React.Children.toArray(this.props.children)
+          {Children.toArray(this.props.children)
             .filter(React.isValidElement)
             .map((child, index) => {
               return React.cloneElement(child, {
@@ -2144,7 +2144,7 @@ Custom table with `stacked` layout support:
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
       >
-        {React.Children.toArray(children)
+        {Children.toArray(children)
           .filter(React.isValidElement)
           .map((child, index) => {
             return React.cloneElement(child, {

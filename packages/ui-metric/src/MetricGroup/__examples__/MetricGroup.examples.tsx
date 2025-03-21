@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { Metric } from '../../Metric'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

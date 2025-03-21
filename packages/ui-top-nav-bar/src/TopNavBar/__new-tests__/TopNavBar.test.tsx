@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'

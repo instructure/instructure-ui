@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { cloneElement, Component } from 'react'
+import { cloneElement, Component } from 'react'
 
 import {
   addInputModeListener,

@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { ColorPreset } from '../../packages/ui'
+
+import { ColorPreset } from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'
 
-import { colorToRGB } from '../../packages/ui-color-utils'
+import { colorToRGB } from '@instructure/ui-color-utils'
 
 const testValue = {
   colors: [

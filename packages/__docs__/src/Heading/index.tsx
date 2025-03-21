@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { Heading as UIHeading } from '@instructure/ui-heading'
 import type { HeadingProps } from '@instructure/ui-heading'
 import { InstUISettingsProvider } from '@instructure/emotion'

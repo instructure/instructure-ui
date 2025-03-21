@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Children, Component, ReactElement } from 'react'
+import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { vi, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -37,7 +36,7 @@ describe('<Options />', () => {
   it('should render', async () => {
     const { container } = render(<Options />)
 
-    const options = container.querySelector('div[class$="-options"]')
+    const options = container.querySelector('div[class*="-options"]')
 
     expect(options).toBeInTheDocument()
   })
@@ -101,7 +100,7 @@ describe('<Options />', () => {
         <Options.Item>Option two</Options.Item>
       </Options>
     )
-    const options = container.querySelector('[class$="-options__list"]')
+    const options = container.querySelector('[class*="-options__list"]')
 
     expect(options).toHaveRole('listbox')
     expect(options).toHaveAttribute('data-custom-attr', 'true')
@@ -114,7 +113,7 @@ describe('<Options />', () => {
         <Options.Item>Option two</Options.Item>
       </Options>
     )
-    const options = container.querySelector('div[class$="-options"]')
+    const options = container.querySelector('div[class*="-options"]')
 
     expect(options).toHaveAttribute('role', 'presentation')
   })
@@ -139,7 +138,7 @@ describe('<Options />', () => {
       </Options>
     )
 
-    const allLists = container.querySelectorAll('[class$="-options__list"]')
+    const allLists = container.querySelectorAll('[class*="-options__list"]')
     const allItems = container.querySelectorAll('[class$="-optionItem"]')
     expect(allLists.length).toBe(2)
     expect(allItems.length).toBe(5)
@@ -148,7 +147,7 @@ describe('<Options />', () => {
     expect(outerList).toHaveTextContent('Option one Option two')
 
     const nestedLabel = outerList.querySelector(
-      '[class$=-options__label]'
+      '[class*=-options__label]'
     ) as HTMLElement
     expect(nestedLabel).toBeInTheDocument()
     expect(nestedLabel).toHaveTextContent('Nested list')

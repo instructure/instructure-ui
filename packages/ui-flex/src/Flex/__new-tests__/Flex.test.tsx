@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 
@@ -40,10 +39,10 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="flex"]')
     expect(flex).toBeInTheDocument()
 
-    const items = flex?.querySelectorAll('[class$="-flexItem"]')
+    const items = flex?.querySelectorAll('[class*="-flexItem"]')
     expect(items?.length).toBe(4)
   })
 
@@ -55,7 +54,7 @@ describe('<Flex />', () => {
         <div>baz</div>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="flex"]')
     const childs = flex?.childNodes
 
     expect(childs?.length).toBe(3)
@@ -70,7 +69,7 @@ describe('<Flex />', () => {
 
   it('should render no markup if there are no children', async () => {
     const { container } = render(<Flex></Flex>)
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="flex"]')
 
     expect(flex).not.toBeInTheDocument()
   })
@@ -84,7 +83,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.width).toBe('400px')
@@ -98,7 +97,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.flexDirection).toBe('column')
@@ -111,7 +110,9 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-inlineFlex-flex"]')!
+    const flex = container.querySelector(
+      '[class*="inlineFlex"][class*="flex"]'
+    )!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.display).toBe('inline-flex')
@@ -124,7 +125,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.alignItems).toBe('flex-start')
@@ -137,7 +138,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.justifyContent).toBe('space-between')
@@ -150,7 +151,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.flexWrap).toBe('wrap')
@@ -163,7 +164,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="flex"]')!
     const item = screen.getByText('Flex item 1')
 
     const flexStyle = window.getComputedStyle(flex)
@@ -234,7 +235,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="flex"]')
 
     await waitFor(() => {
       expect(elementRef).toHaveBeenCalledWith(flex)

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { JSX } from 'react'
+import { JSX } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'

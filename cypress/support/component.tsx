@@ -43,7 +43,6 @@ import './commands'
 // require('./commands')
 
 import { mount } from 'cypress/react18'
-import React from 'react'
 
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'

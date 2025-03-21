@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -985,7 +985,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should work controlled too', async () => {
-      class ControlledExample extends React.Component {
+      class ControlledExample extends Component {
         state = {
           isPopoverOpen: false
         }

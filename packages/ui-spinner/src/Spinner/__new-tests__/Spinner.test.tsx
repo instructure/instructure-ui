@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { render, waitFor, screen } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { vi, expect } from 'vitest'
@@ -48,14 +48,14 @@ describe('<Spinner />', () => {
 
   it('should render', async () => {
     const { container } = render(<Spinner renderTitle="Loading" size="small" />)
-    const spinner = container.querySelector('div[class$="-spinner"]')
+    const spinner = container.querySelector('div[class*="-spinner"]')
 
     expect(spinner).toBeInTheDocument()
   })
 
   it('should render the title prop text in the SVG element title', async () => {
     const { container } = render(<Spinner renderTitle="Loading" size="large" />)
-    const spinner = container.querySelector('div[class$="-spinner"]')
+    const spinner = container.querySelector('div[class*="-spinner"]')
 
     expect(spinner).toHaveTextContent('Loading')
   })
@@ -75,7 +75,7 @@ describe('<Spinner />', () => {
       <Spinner renderTitle={<Translation>Loading</Translation>} size="small" />
     )
 
-    const spinner = container.querySelector('div[class$="-spinner"]')
+    const spinner = container.querySelector('div[class*="-spinner"]')
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)

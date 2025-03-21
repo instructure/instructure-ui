@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import { IconZoomInLine, IconZoomOutLine } from '@instructure/ui-icons'
 import type { NumberInputProps } from '../props'

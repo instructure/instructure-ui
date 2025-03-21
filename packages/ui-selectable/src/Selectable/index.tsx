@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, SyntheticEvent } from 'react'
+import { Component, SyntheticEvent } from 'react'
 
 import keycode from 'keycode'
 

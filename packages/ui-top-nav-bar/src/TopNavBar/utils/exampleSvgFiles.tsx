@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 const getElevateLogo = (fill: 'white' | 'black') => (
   <svg
     id="elevateLogo"

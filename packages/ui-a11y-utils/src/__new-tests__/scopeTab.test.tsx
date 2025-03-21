@@ -22,13 +22,11 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { scopeTab } from '../scopeTab'
-
 
 const MOCK_EVENT = new KeyboardEvent('mockEvent', { shiftKey: false })
 MOCK_EVENT.preventDefault = () => {}

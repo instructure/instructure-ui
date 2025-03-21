@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import type { Moment } from 'moment-timezone'
 import { ApplyLocaleContext, Locale, DateTime } from '@instructure/ui-i18n'
 import {

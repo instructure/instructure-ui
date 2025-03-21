@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, createRef } from 'react'
+import React, { Children, Component } from 'react'
 
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
@@ -119,7 +119,7 @@ class Nav extends Component<NavProps, NavState> {
   }): React.ReactNode {
     if (
       React.isValidElement(children) &&
-      React.Children.count(children.props.children) === 0
+      Children.count(children.props.children) === 0
     ) {
       return
     }

@@ -1,25 +1,27 @@
 {
-  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
-    "baseUrl": "./packages",
-    "paths": {
-      "@instructure/*": ["*/src"],
-      "@instructure/babel-plugin-transform-imports": [
-        "babel-plugin-transform-imports/lib"
-      ],
-      "@instructure/browserslist-config-instui/*": [
-        "browserslist-config-instui/*"
-      ],
-      "@instructure/command-utils": ["command-utils/lib"],
-      "@instructure/config-loader": ["config-loader/lib"],
-      "@instructure/instui-cli": ["instui-cli/lib"],
-      "@instructure/pkg-utils": ["pkg-utils/lib"],
-      "@instructure/ui-babel-preset": ["ui-babel-preset/lib"],
-      "@instructure/ui-codemods": ["ui-codemods/lib"],
-      "@instructure/ui-karma-config": ["ui-karma-config/lib"],
-      "@instructure/ui-webpack-config": ["ui-webpack-config/config"]
-    }
-  },
-  "include": ["./vitest.setup.ts", "./vitest.config.ts"]
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "checkJs": false,
+    "noImplicitAny": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "lib": ["ES2019", "DOM", "DOM.Iterable"],
+    "allowSyntheticDefaultImports": true
+  }
 }

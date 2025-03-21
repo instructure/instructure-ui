@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { useState } from 'react'
+import { version, useState } from 'react'
 import {
   setSearchQuery,
   search,
@@ -142,7 +142,7 @@ export default function customSearch(searchConfig: SearchConfig | undefined) {
         createPanel: (view) => {
           const dom = document.createElement('div')
           dom.style.padding = '8px'
-          const reactVersionMajor = Number(React.version.split('.')[0])
+          const reactVersionMajor = Number(version.split('.')[0])
           if (reactVersionMajor >= 18) {
             const module = 'react-dom/client'
             // webpack tries to evaluate imports compile time which would lead to an error on older react versions

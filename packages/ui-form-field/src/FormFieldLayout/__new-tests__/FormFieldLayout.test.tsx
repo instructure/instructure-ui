@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { createRef } from 'react'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -74,7 +74,7 @@ describe('<FormFieldLayout />', () => {
 
   it('should provide a ref to the input container', () => {
     const inputContainerRef = vi.fn()
-    const ref = React.createRef<HTMLInputElement>()
+    const ref = createRef<HTMLInputElement>()
     render(
       <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>
         <input type="text" ref={ref} />

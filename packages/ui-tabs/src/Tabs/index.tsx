@@ -22,8 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, ComponentElement, ReactElement } from 'react'
+import {
+  cloneElement,
+  Children,
+  Component,
+  ComponentElement,
+  ReactElement
+} from 'react'
 
 import keycode from 'keycode'
 
@@ -44,7 +49,7 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -289,7 +294,7 @@ class Tabs extends Component<TabsProps, TabsState> {
     startIndex: number,
     step: -1 | 0 | 1
   ): { index: number; id?: string } {
-    const tabs = React.Children.toArray(this.props.children).map(
+    const tabs = Children.toArray(this.props.children).map(
       (child) => matchComponentTypes<PanelChild>(child, [Panel]) && child
     ) as PanelChild[]
     const count = tabs.length
@@ -383,7 +388,7 @@ class Tabs extends Component<TabsProps, TabsState> {
     if (activePanel !== undefined) {
       // cloning active panel with a proper custom key as a workaround because
       // safeCloneElement overwrites it with the key from the original element
-      activePanelClone = React.cloneElement(activePanel as ReactElement, {
+      activePanelClone = cloneElement(activePanel as ReactElement, {
         key: `panel-${index}`
       })
 
@@ -453,7 +458,7 @@ class Tabs extends Component<TabsProps, TabsState> {
       ...props
     } = this.props
 
-    const activePanels = (React.Children.toArray(children) as PanelChild[])
+    const activePanels = (Children.toArray(children) as PanelChild[])
       .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
       .filter((child) => child.props.active)
 
@@ -461,14 +466,12 @@ class Tabs extends Component<TabsProps, TabsState> {
       error(false, `[Tabs] Only one Panel can be marked as active.`)
     }
 
-    const selectedChildIndex = (
-      React.Children.toArray(children) as PanelChild[]
-    )
+    const selectedChildIndex = (Children.toArray(children) as PanelChild[])
       .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
       .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
     const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
-    React.Children.toArray(children).map((child, index) => {
+    Children.toArray(children).map((child, index) => {
       if (matchComponentTypes<PanelChild>(child, [Panel])) {
         const selected =
           !child.props.isDisabled &&

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { debounce } from '@instructure/debounce'
@@ -30,7 +29,7 @@ import type { Debounced } from '@instructure/debounce'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

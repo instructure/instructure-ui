@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { vi } from 'vitest'
 import { fireEvent, render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'

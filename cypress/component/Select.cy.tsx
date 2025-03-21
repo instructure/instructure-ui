@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { Select } from '@instructure/ui'
 import { IconCheckSolid, IconEyeSolid } from '@instructure/ui-icons'
 import 'cypress-real-events'

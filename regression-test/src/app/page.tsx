@@ -23,7 +23,7 @@
  */
 'use client'
 import { Link, View } from '@instructure/ui'
-import React from 'react'
+
 import * as Components from './/components'
 
 export default function Home() {

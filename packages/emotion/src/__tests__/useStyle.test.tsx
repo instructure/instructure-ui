@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { useState } from 'react'
 
 import { expect, mount, stub, within } from '@instructure/ui-test-utils'
-import { jsx, InstUISettingsProvider, WithStyleProps, useStyle } from '../index'
+import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index'
 
 type Props = {
   inverse?: boolean

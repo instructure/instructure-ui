@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { forwardRef, useContext } from 'react'
+import { ComponentClass, forwardRef, useContext } from 'react'
 import type {
   ForwardRefExoticComponent,
   PropsWithoutRef,
@@ -50,7 +50,7 @@ type WithDeterministicIdProps = {
 const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
   const WithDeterministicId: ForwardRefExoticComponent<Props> & {
-    originalType?: React.ComponentClass
+    originalType?: ComponentClass
   } = forwardRef((props: Props, ref: React.ForwardedRef<any>) => {
     const componentName =
       ComposedComponent.componentId ||

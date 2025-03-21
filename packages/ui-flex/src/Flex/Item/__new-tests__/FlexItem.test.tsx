@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 
@@ -33,7 +32,7 @@ import { Item } from '../index'
 describe('<Item />', () => {
   it('should render children', async () => {
     const { container } = render(<Item>Flex item 1</Item>)
-    const item = container.querySelector('[class$="-flexItem"]')
+    const item = container.querySelector('[class*="-flexItem"]')
 
     expect(item).toBeInTheDocument()
     expect(item).toHaveTextContent('Flex item 1')
@@ -45,7 +44,7 @@ describe('<Item />', () => {
     const { container } = render(
       <Item elementRef={elementRef}>Flex item 2</Item>
     )
-    const item = container.querySelector('[class$="-flexItem"]')
+    const item = container.querySelector('[class*="-flexItem"]')
 
     await waitFor(() => {
       expect(elementRef).toHaveBeenCalledWith(item)

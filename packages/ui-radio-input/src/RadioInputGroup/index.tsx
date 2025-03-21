@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Children, Component } from 'react'
+import { ComponentElement, Fragment, Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
@@ -39,7 +38,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { RadioInput } from '../RadioInput'
 import type { RadioInputProps } from '../RadioInput/props'
 
-import { jsx, withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -47,7 +46,7 @@ import generateComponentTheme from './theme'
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps, propTypes } from './props'
 
-type RadioInputChild = React.ComponentElement<RadioInputProps, RadioInput>
+type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
 
 /**
 ---
@@ -162,7 +161,7 @@ class RadioInputGroup extends Component<
     const { variant, layout, description, isRequired, styles } = this.props
 
     const descriptionWithRequired = hasVisibleChildren(description) ? (
-      <React.Fragment>
+      <Fragment>
         {description}
         {isRequired && description && (
           <span
@@ -173,7 +172,7 @@ class RadioInputGroup extends Component<
             *
           </span>
         )}
-      </React.Fragment>
+      </Fragment>
     ) : (
       description
     )

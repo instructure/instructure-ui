@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
+
 import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

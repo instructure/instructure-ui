@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'

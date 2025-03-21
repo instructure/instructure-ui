@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component as ReactComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { mount, expect, locator } from '../index'
@@ -36,7 +36,7 @@ const props = {
   [componentLocator.attribute]: componentLocator.value
 }
 
-class Component extends React.Component<{ hide: boolean }> {
+class Component extends ReactComponent<{ hide: boolean }> {
   static displayName = 'Component'
   static selector = `[${componentLocator.attribute}~="${componentLocator.value}"]`
 

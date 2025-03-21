@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 

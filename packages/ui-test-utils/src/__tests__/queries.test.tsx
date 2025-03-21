@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { BaseSyntheticEvent } from 'react'
+import { BaseSyntheticEvent } from 'react'
 import {
   findWithLabel,
   findWithTitle,

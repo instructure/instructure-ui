@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Children, Component } from 'react'
+import { ComponentElement, Children, Component } from 'react'
 
 import {
   safeCloneElement,
@@ -32,7 +31,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Item } from './Item'
 import type { FlexItemProps } from './Item/props'
@@ -94,10 +93,9 @@ class Flex extends Component<FlexProps> {
         return null
       }
 
-      return matchComponentTypes<React.ComponentElement<FlexItemProps, Item>>(
-        child,
-        ['Item']
-      )
+      return matchComponentTypes<ComponentElement<FlexItemProps, Item>>(child, [
+        'Item'
+      ])
         ? safeCloneElement(child, {
             // child withVisualDebug prop should override parent
             withVisualDebug: this.props.withVisualDebug,

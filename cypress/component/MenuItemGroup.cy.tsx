@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { expect } from 'chai'
 import 'cypress-real-events'
 
 import '../support/component'
-import { MenuItem, MenuItemGroup, MenuItemSeparator } from '../../packages/ui'
+import { MenuItem, MenuItemGroup, MenuItemSeparator } from '@instructure/ui'
 
 describe('<MenuItemGroup />', () => {
   it('updates the selected items when allowMultiple is true', () => {

@@ -40,7 +40,7 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import React, { InputHTMLAttributes, ReactElement, SyntheticEvent } from 'react'
+import { InputHTMLAttributes, ReactElement, SyntheticEvent } from 'react'
 
 type DateInputOwnProps = {
   /**

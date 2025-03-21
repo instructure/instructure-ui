@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Children, Component, createContext } from 'react'
+import { ComponentElement, Children, Component, createContext } from 'react'
 
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
@@ -47,17 +46,17 @@ import type {
 import { DrawerTray } from './DrawerTray'
 import type { DrawerLayoutTrayProps } from './DrawerTray/props'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
 import type { DrawerLayoutProps, DrawerLayoutState } from './props'
 
-type TrayChild = React.ComponentElement<
+type TrayChild = ComponentElement<
   DrawerLayoutTrayProps & React.Attributes,
   DrawerTray
 >
-type ContentChild = React.ComponentElement<
+type ContentChild = ComponentElement<
   DrawerLayoutContentProps & React.Attributes,
   DrawerContent
 >
