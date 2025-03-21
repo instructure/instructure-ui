@@ -339,10 +339,20 @@ class App extends Component<AppProps, AppState> {
 
               <div style={{ marginLeft: '100px' }}>
                 <h1>Courses</h1>
-                <Link href="/course1" display="block">
+                <Link
+                  onClick={() =>
+                    this.props.navigate('/course1', { replace: true })
+                  }
+                  display="block"
+                >
                   Course 1
                 </Link>
-                <Link href="/course2" display="block">
+                <Link
+                  onClick={() =>
+                    this.props.navigate('/course2', { replace: true })
+                  }
+                  display="block"
+                >
                   Course 2
                 </Link>
               </div>
