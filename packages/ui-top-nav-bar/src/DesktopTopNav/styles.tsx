@@ -33,7 +33,6 @@ const generateStyles = (_props: DesktopTopNavProps, theme: any) => {
       backgroundColor: theme.colors.contrasts.grey1111,
       width: '100%',
       color: theme.colors.contrasts.grey125125,
-      zIndex: '1000',
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'row'
