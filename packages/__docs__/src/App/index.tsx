@@ -39,10 +39,15 @@ import {
 } from '@instructure/ui-icons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { Flex } from '@instructure/ui-flex'
+import { Heading } from '@instructure/ui-heading'
+import { CloseButton } from '@instructure/ui-buttons'
+import { Tray } from '@instructure/ui-tray'
 import { Img } from '@instructure/ui-img'
 import { View } from '@instructure/ui-view'
 import { SideNavBar } from '@instructure/ui-side-nav-bar'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import Link from '../Link'
 
 type AppProps = {
   navigate: (path: string, options?: { replace: boolean }) => void
@@ -58,12 +63,21 @@ class App extends Component<AppProps, AppState> {
     super(props)
 
     this.state = {
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      open: false
     }
   }
 
   isCoursePage() {
     return location.pathname.startsWith('/course')
+  }
+
+  isAccountPage() {
+    return location.pathname.startsWith('/account')
+  }
+
+  isDashboardPage() {
+    return location.pathname.startsWith('/dashboard')
   }
 
   componentDidMount() {
@@ -76,6 +90,28 @@ class App extends Component<AppProps, AppState> {
 
   handleResize = () => {
     this.setState({ windowWidth: window.innerWidth })
+  }
+
+  renderCloseButton() {
+    return (
+      <Flex>
+        <Flex.Item shouldGrow shouldShrink>
+          <Heading>Hello</Heading>
+        </Flex.Item>
+        <Flex.Item>
+          <CloseButton
+            placement="end"
+            offset="small"
+            screenReaderLabel="Close"
+            onClick={() => {
+              this.setState({
+                open: false
+              })
+            }}
+          />
+        </Flex.Item>
+      </Flex>
+    )
   }
 
   render() {
@@ -196,7 +232,7 @@ class App extends Component<AppProps, AppState> {
             boxSizing: 'border-box'
           }}
         >
-          <div style={{ height: '100vh' }}>
+          <div style={{ height: '100vh', zIndex: 100 }}>
             {!isMobile && (
               <SideNavBar
                 label="Main navigation"
@@ -219,13 +255,16 @@ class App extends Component<AppProps, AppState> {
                   onClick={() =>
                     this.props.navigate('/account', { replace: true })
                   }
+                  selected={this.isAccountPage()}
                 />
                 <SideNavBar.Item
                   icon={<IconCoursesLine />}
                   label="Courses"
-                  onClick={() =>
+                  onClick={() => {
                     this.props.navigate('/course1', { replace: true })
-                  }
+                    this.setState({ open: true })
+                  }}
+                  selected={this.isCoursePage()}
                 />
                 <SideNavBar.Item
                   icon={<IconDashboardLine />}
@@ -233,6 +272,7 @@ class App extends Component<AppProps, AppState> {
                   onClick={() =>
                     this.props.navigate('/dashboard', { replace: true })
                   }
+                  selected={this.isDashboardPage()}
                 />
                 <SideNavBar.Item
                   icon={<IconQuestionLine />}
@@ -285,6 +325,28 @@ class App extends Component<AppProps, AppState> {
               ]}
               mobileMenu={menuArray}
             />
+            <Tray
+              label="Tray Example"
+              open={this.state.open}
+              onDismiss={() => {
+                this.setState({ open: false })
+              }}
+              size="small"
+              placement="start"
+              themeOverride={{ zIndex: 1 }}
+            >
+              {this.renderCloseButton()}
+
+              <div style={{ marginLeft: '100px' }}>
+                <h1>Courses</h1>
+                <Link href="/course1" display="block">
+                  Course 1
+                </Link>
+                <Link href="/course2" display="block">
+                  Course 2
+                </Link>
+              </div>
+            </Tray>
             <div style={{ display: 'flex' }}>
               {this.isCoursePage() && (
                 <SubNav
