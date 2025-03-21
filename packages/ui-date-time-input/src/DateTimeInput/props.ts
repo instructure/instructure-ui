@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { SyntheticEvent } from 'react'
+import { SyntheticEvent } from 'react'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { View } from '@instructure/ui-view'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

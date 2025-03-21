@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { isValidElement, cloneElement, Children, Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
@@ -63,7 +62,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
   }
 
   addAriaCurrent = (child: React.ReactNode) => {
-    const updatedChild = React.cloneElement(
+    const updatedChild = cloneElement(
       child as React.ReactElement<{ 'aria-current'?: string }>,
       {
         'aria-current': 'page'
@@ -83,15 +82,15 @@ class Breadcrumb extends Component<BreadcrumbProps> {
 
   renderChildren() {
     const { styles, children } = this.props
-    const numChildren = React.Children.count(children)
+    const numChildren = Children.count(children)
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
     let isAriaCurrentSet = false
 
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       const isLastElement = index === numChildren - 1
-      if (React.isValidElement(child)) {
+      if (isValidElement(child)) {
         const isCurrentPage = child.props.isCurrentPage || false
         if (isAriaCurrentSet && isCurrentPage) {
           console.warn(

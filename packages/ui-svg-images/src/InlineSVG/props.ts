@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { SVGAttributes } from 'react'
+import { SVGAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -48,17 +48,17 @@ type InlineSVGOwnProps = {
   height?: string | number
   inline?: boolean
   color?:
-  | 'inherit'
-  | 'primary'
-  | 'secondary'
-  | 'primary-inverse'
-  | 'secondary-inverse'
-  | 'success'
-  | 'error'
-  | 'alert'
-  | 'warning'
-  | 'brand'
-  | 'auto'
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'primary-inverse'
+    | 'secondary-inverse'
+    | 'success'
+    | 'error'
+    | 'alert'
+    | 'warning'
+    | 'brand'
+    | 'auto'
   /**
    * provides a reference to the underlying html root element
    */
@@ -71,7 +71,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type InlineSVGProps = InlineSVGOwnProps &
   WithStyleProps<InlineSVGTheme, InlineSVGStyle> &
-  OtherHTMLAttributes<InlineSVGOwnProps, SVGAttributes<InlineSVGOwnProps>> & WithDeterministicIdProps
+  OtherHTMLAttributes<InlineSVGOwnProps, SVGAttributes<InlineSVGOwnProps>> &
+  WithDeterministicIdProps
 
 type InlineSVGStyle = ComponentStyle<'inlineSVG'>
 

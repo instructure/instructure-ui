@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { Link as UILink } from '@instructure/ui-link'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { LinkProps } from '@instructure/ui-link'

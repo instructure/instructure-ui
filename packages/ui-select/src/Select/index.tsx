@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Children, Component, memo } from 'react'
+import { ComponentElement, Children, Component, memo } from 'react'
 
 import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -60,7 +59,7 @@ import type {
   SelectableRender
 } from '@instructure/ui-selectable'
 
-import { withStyle, jsx, BorderWidth } from '@instructure/emotion'
+import { withStyle, BorderWidth } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -74,8 +73,8 @@ import type { SelectProps } from './props'
 import { allowedProps, propTypes } from './props'
 import { Renderable } from '@instructure/shared-types'
 
-type GroupChild = React.ComponentElement<SelectGroupProps, Group>
-type OptionChild = React.ComponentElement<SelectOptionProps, Option>
+type GroupChild = ComponentElement<SelectGroupProps, Group>
+type OptionChild = ComponentElement<SelectOptionProps, Option>
 type SelectChildren = (GroupChild | OptionChild)[]
 
 type MemoedOptionProps = React.PropsWithChildren<{

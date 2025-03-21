@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import generateMessages from './generateMessages'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import '@testing-library/jest-dom'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'

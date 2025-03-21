@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, Children, ContextType } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
@@ -32,7 +31,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconCheckLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

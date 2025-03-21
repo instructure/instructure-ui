@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component, ComponentElement } from 'react'
 
 import {
   callRenderProp,
@@ -37,7 +36,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { warn, error } from '@instructure/console'
 
-import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 
 import {
   IconArrowOpenDownSolid,
@@ -66,7 +65,7 @@ import type {
   TopNavBarItemStyleProps
 } from './props'
 
-type BaseButtonElement = React.ComponentElement<BaseButtonProps, BaseButton>
+type BaseButtonElement = ComponentElement<BaseButtonProps, BaseButton>
 
 const navbarStackingDefault = 10000
 const submenuStacking = navbarStackingDefault + 1

@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-import React, {
+import {
   Attributes,
   FunctionComponentElement,
   ComponentElement,
   ReactElement,
   ReactNode,
-  DOMElement
+  DOMElement,
+  cloneElement
 } from 'react'
 
 import { logWarn as warn } from '@instructure/console'
@@ -93,7 +94,7 @@ function safeCloneElement<
   })
 
   if (originalRef == null || cloneRef == null) {
-    return React.cloneElement<P>(element, mergedProps, ...children) as E
+    return cloneElement<P>(element, mergedProps, ...children) as E
   }
 
   warn(
@@ -103,7 +104,7 @@ is not a function. Use a composable callback-style ref instead. \
 Ignoring ref: ${originalRef}`
   )
 
-  return React.cloneElement<P>(
+  return cloneElement<P>(
     element,
     {
       ...mergedProps,

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, ReactElement, ReactNode } from 'react'
+import { Children, ReactElement, ReactNode } from 'react'
 import { safeCloneElement } from './safeCloneElement'
 
 /**

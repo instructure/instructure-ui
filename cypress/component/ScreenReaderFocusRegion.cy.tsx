@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { ScreenReaderFocusRegion } from '../../packages/ui-a11y-utils/src/ScreenReaderFocusRegion'
+
+import { ScreenReaderFocusRegion } from '@instructure/ui-a11y-utils/src/ScreenReaderFocusRegion'
 
 import '../support/component'
 import 'cypress-real-events'

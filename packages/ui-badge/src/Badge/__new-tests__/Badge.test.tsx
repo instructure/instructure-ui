@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -88,7 +88,7 @@ describe('<Badge />', () => {
       themeOverride: { countOffset }
     })
 
-    const badge = container.querySelector('[class$=-badge]')
+    const badge = container.querySelector('[class*=block][class*=badge]')
     const badgeStyle = badge && getComputedStyle(badge)
 
     expect(badge).not.toBeNull()

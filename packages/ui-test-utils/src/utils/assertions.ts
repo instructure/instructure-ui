@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ReactInstance } from 'react'
+import { isValidElement, ReactInstance } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import {
@@ -55,14 +55,14 @@ export default function assertions(
 
   function wrapObj(obj: ReactInstance | undefined | Element | WrappedRef) {
     if (obj && typeof (obj as WrappedRef).getDOMNode === 'function') {
-      return (obj as unknown) as QueriesHelpersEventsType
+      return obj as unknown as QueriesHelpersEventsType
     }
 
     let node
 
     if (isElement(obj)) {
       node = obj as Element
-    } else if (React.isValidElement(obj)) {
+    } else if (isValidElement(obj)) {
       node = findDOMNode(obj as ReactInstance)
     }
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 import { expect, mount } from '@instructure/ui-test-utils'
@@ -34,7 +34,7 @@ import {
 import { TextDirectionContext } from '../TextDirectionContext'
 
 @textDirectionContextConsumer()
-class TextDirectionContextConsumerComponent extends React.Component<TextDirectionContextConsumerProps> {
+class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerProps> {
   render() {
     return (
       <div data-dir={this.props.dir} dir={this.props.dir}>
@@ -44,7 +44,7 @@ class TextDirectionContextConsumerComponent extends React.Component<TextDirectio
   }
 }
 
-class WrapperComponent extends React.Component {
+class WrapperComponent extends Component {
   render() {
     return (
       <div>

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import type { StoryConfig } from '@instructure/ui-test-utils'
 
 import { Drilldown } from '../index'

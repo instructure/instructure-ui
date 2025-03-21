@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { jsx, useStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import { useState, SyntheticEvent, useEffect } from 'react'
 
 import { View } from '@instructure/ui-view'

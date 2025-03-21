@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
+import { Component as ReactComponent } from 'react'
 import PropTypes from 'prop-types'
 import { ReactComponentWrapper } from '@instructure/ui-test-sandbox'
 
@@ -33,7 +34,7 @@ type TestComponentProps = {
   componentRef?: (el: Component) => void
 }
 
-class Component extends React.Component<TestComponentProps> {
+class Component extends ReactComponent<TestComponentProps> {
   static displayName = 'Component'
 
   static propTypes = {

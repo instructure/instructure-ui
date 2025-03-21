@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Text } from '@instructure/ui-text'

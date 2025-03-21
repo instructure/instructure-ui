@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
+import { isValidElement, ComponentType, ReactNode } from 'react'
 import { nanoid } from 'nanoid'
 
 import { generatePropCombinations } from './generatePropCombinations'
-import React, { ComponentType, ReactNode } from 'react'
 
 export type StoryConfig<Props> = {
   /**
@@ -221,7 +221,7 @@ export function generateComponentExamples<Props extends Record<string, any>>(
     if (!currObject) {
       return
     }
-    if (React.isValidElement(currObject)) {
+    if (isValidElement(currObject)) {
       currString.push(JSON.stringify(currObject))
     } else if (typeof currObject === 'object') {
       for (const [key, value] of Object.entries(currObject)) {

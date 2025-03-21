@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import {
@@ -31,7 +30,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { FormFieldMessages } from '../FormFieldMessages'
 import generateStyle from './styles'
 import { propTypes, allowedProps, FormFieldStyleProps } from './props'
@@ -111,7 +110,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         if (typeof msg.text === 'string') {
           return msg.text.length > 0
         }
-        // this is more complicated (e.g. an array, a React component,...)
+        // this is more complicated (e.g. an array, a Component,...)
         // but we don't try to optimize here for these cases
         return true
       }

@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import 'cypress-real-events'
 
 import '../support/component'
-import { DateTimeInput } from '../../packages/ui'
-import { DateTime } from '../../packages/ui-i18n'
+import { DateTimeInput } from '@instructure/ui'
+import { DateTime } from '@instructure/ui-i18n'
 
 describe('<DateInput/>', () => {
   it('should merge defaultValue and initialTimeForNewDate and handle onChange when the user clears date input and select another one', () => {

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { RadioInput } from '../../RadioInput'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

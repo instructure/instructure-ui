@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { warn } from '@instructure/console'
 import { ContextView } from '@instructure/ui-view'
 import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 import {
   omitProps,

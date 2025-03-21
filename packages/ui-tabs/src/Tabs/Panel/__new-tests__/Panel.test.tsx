@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
@@ -41,7 +40,7 @@ describe('<Tabs.Panel />', () => {
   })
 
   it('should have appropriate role attribute', async () => {
-    const {container} = render(
+    const { container } = render(
       <Panel isSelected renderTitle="Panel Title">
         Panel contents
       </Panel>

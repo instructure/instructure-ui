@@ -32,7 +32,7 @@ import {
   TextInput,
   Heading
 } from '@instructure/ui'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const DIALOG_IUI = () => {
   const [open, setOpen] = useState(false)

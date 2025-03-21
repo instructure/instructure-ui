@@ -21,19 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import {
   ColorPicker,
   ColorMixer,
   ColorPreset,
   ColorContrast,
   Button
-} from '../../packages/ui'
+} from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'
 
-import { colorToRGB, color2hex } from '../../packages/ui-color-utils'
+import { colorToRGB, color2hex } from '@instructure/ui-color-utils'
 
 const colorPreset = [
   '#ffffff',

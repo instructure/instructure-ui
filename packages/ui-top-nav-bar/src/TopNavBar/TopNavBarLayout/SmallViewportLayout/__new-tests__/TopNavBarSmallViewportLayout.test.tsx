@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import {
   render,
   screen,
@@ -160,10 +160,10 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
       const crumb = queryByText('Course page 2')
       const menuTriggerContainer = container.querySelector(
-        "[class$='topNavBarSmallViewportLayout__menuTriggerContainer']"
+        "[class*='topNavBarSmallViewportLayout__menuTriggerContainer']"
       )
       const brandContainer = container.querySelector(
-        "[class$='topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='topNavBarSmallViewportLayout__brandContainer']"
       )
 
       expect(crumb).toBeInTheDocument()
@@ -183,7 +183,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const brandNameText = screen.getByText('Brand name')
 
@@ -201,7 +201,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const brandNameText = screen.queryByText('Brand name')
 
@@ -221,7 +221,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const brandNameText = screen.queryByText('Brand name')
 
@@ -240,7 +240,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const menuTrigger = container.querySelector(
         "[class*='-topNavBarSmallViewportLayout__menuTrigger']"
@@ -265,7 +265,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(actionItems).toBeInTheDocument()
@@ -282,7 +282,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(actionItems).not.toBeInTheDocument()
@@ -298,7 +298,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(actionItems).not.toBeInTheDocument()
@@ -396,7 +396,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const menuTriggerButton = screen.queryByRole('button')
 
@@ -431,7 +431,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       fireEvent.click(option)
 
       const subMenuOptions = container.querySelectorAll(
-        '[class$="optionItem__container"]'
+        '[class*="optionItem__container"]'
       )
       expect(subMenuOptions.length).toEqual(4)
 
@@ -681,7 +681,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
           if (option.id === 'TestItem2') {
             const activeOptionStyle = getComputedStyle(
               option.querySelector(
-                '[class$="topNavBarSmallViewportLayout__dropdownMenuOptionActive"]'
+                '[class*="topNavBarSmallViewportLayout__dropdownMenuOptionActive"]'
               )!
             )
 
@@ -694,7 +694,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
           } else {
             const inactiveOptionStyle = getComputedStyle(
               option.querySelector(
-                '[class$="topNavBarSmallViewportLayout__dropdownMenuOption"]'
+                '[class*="topNavBarSmallViewportLayout__dropdownMenuOption"]'
               )!
             )
 
@@ -846,7 +846,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
       const dropdownMenu = await screen.findByRole('menu')
       const options = await within(dropdownMenu).findAllByRole('link')
-      const separator = dropdownMenu.querySelector("[class$='-separator']")
+      const separator = dropdownMenu.querySelector("[class*='-separator']")
 
       expect(separator).toBeInTheDocument()
 
@@ -906,7 +906,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
       const dropdownMenu = await screen.findByRole('menu')
       const options = await within(dropdownMenu).findAllByRole('link')
-      const avatar = dropdownMenu.querySelector("[class$='inlineBlock-avatar']")
+      const avatar = dropdownMenu.querySelector("[class*='inlineBlock-avatar']")
 
       expect(options.length).toEqual(1)
       expect(avatar).toHaveAttribute('name', 'User Name')
@@ -932,7 +932,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
       const dropdownMenu = await screen.findByRole('menu')
       const options = await within(dropdownMenu).findAllByRole('link')
-      const avatar = dropdownMenu.querySelector("[class$='inlineBlock-avatar']")
+      const avatar = dropdownMenu.querySelector("[class*='inlineBlock-avatar']")
 
       expect(options.length).toEqual(1)
       expect(avatar).toHaveAttribute('name', 'User Name')
@@ -985,7 +985,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       )
       const menuTriggerButton = screen.getByRole('button')
       const screenReaderContent = container.querySelector(
-        "[class$='-screenReaderContent']"
+        "[class*='-screenReaderContent']"
       )
 
       expect(menuTriggerButton).toBeInTheDocument()
@@ -1022,7 +1022,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       )
       const menuTriggerButton = screen.getByRole('button')
       const screenReaderContent = menuTriggerButton.querySelector(
-        "[class$='-screenReaderContent']"
+        "[class*='-screenReaderContent']"
       )
 
       // TODO convert to e2e
@@ -1066,10 +1066,10 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const alternativeTitleContainer = container.querySelector(
-        "[class$='alternativeTitleContainer']"
+        "[class*='alternativeTitleContainer']"
       )
       const titleContainerIcon = alternativeTitleContainer!.querySelector('svg')
 
@@ -1093,10 +1093,10 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       const alternativeTitleContainer = container.querySelector(
-        "[class$='alternativeTitleContainer']"
+        "[class*='alternativeTitleContainer']"
       )
       const expectedErrorMessage =
         'Warning: There are no menu items or user menu to display in the <TopNavBar> dropdown menu! The menu trigger and the alternative title will not display.'
@@ -1120,7 +1120,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       )
       const menuTriggerButton = screen.getByRole('button')
       const alternativeTitleContainer = container.querySelector(
-        "[class$='alternativeTitleContainer']"
+        "[class*='alternativeTitleContainer']"
       )
       const titleContainerIconDown =
         alternativeTitleContainer!.querySelector('svg')
@@ -1156,7 +1156,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       const menuTriggerButton = screen.getByRole('button')
       const menuIconDown = menuTriggerButton.querySelector('svg')
       const alternativeTitleContainer = container.querySelector(
-        "[class$='alternativeTitleContainer']"
+        "[class*='alternativeTitleContainer']"
       )
 
       expect(alternativeTitleContainer).not.toBeInTheDocument()
@@ -1183,7 +1183,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         </SmallViewportModeWrapper>
       )
       const inPlaceDialogContainer = container.querySelector(
-        "[class$='inPlaceDialogContainer']"
+        "[class*='inPlaceDialogContainer']"
       )
       expect(inPlaceDialogContainer).toBeInTheDocument()
       expect(inPlaceDialogContainer).toHaveTextContent('InPlace Dialog content')
@@ -1194,12 +1194,12 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       expect(inPlaceDialogCloseButton).toBeInTheDocument()
 
       const brandContainer = container.querySelector(
-        "[class$='-topNavBarSmallViewportLayout__brandContainer']"
+        "[class*='-topNavBarSmallViewportLayout__brandContainer']"
       )
       expect(brandContainer).not.toBeInTheDocument()
 
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
       expect(actionItems).not.toBeInTheDocument()
     })
@@ -1222,7 +1222,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
           </SmallViewportModeWrapper>
         )
         const inPlaceDialogContainer = container.querySelector(
-          "[class$='inPlaceDialogContainer']"
+          "[class*='inPlaceDialogContainer']"
         )
         const inPlaceDialogButton =
           inPlaceDialogContainer!.querySelector('button')!
@@ -1288,7 +1288,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
           </SmallViewportModeWrapper>
         )
         const inPlaceDialogContainer = container.querySelector(
-          "[class$='inPlaceDialogContainer']"
+          "[class*='inPlaceDialogContainer']"
         )
 
         expect(inPlaceDialogContainer).toBeInTheDocument()
@@ -1307,14 +1307,14 @@ describe('<TopNavBarSmallViewportLayout />', () => {
           </SmallViewportModeWrapper>
         )
         const inPlaceDialogContainer = container.querySelector(
-          "[class$='inPlaceDialogContainer']"
+          "[class*='inPlaceDialogContainer']"
         )
 
         expect(inPlaceDialogContainer).not.toBeInTheDocument()
       })
 
       it('returnFocusElement prop should help returning the focus', async () => {
-        class ReturnFocusExample extends React.Component {
+        class ReturnFocusExample extends Component {
           state = {
             isDialogOpen: true
           }
@@ -1341,7 +1341,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
         const { container } = render(<ReturnFocusExample />)
         const inPlaceDialogContainer = container.querySelector(
-          "[class$='inPlaceDialogContainer']"
+          "[class*='inPlaceDialogContainer']"
         )
         const inPlaceDialogCloseButton = container.querySelector(
           '[id*="-inPlaceDialogCloseButton"]'
@@ -1353,7 +1353,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
         await waitFor(() => {
           const inPlaceDialogContainerAfterClick = container.querySelector(
-            "[class$='inPlaceDialogContainer']"
+            "[class*='inPlaceDialogContainer']"
           )
 
           expect(inPlaceDialogContainerAfterClick).not.toBeInTheDocument()

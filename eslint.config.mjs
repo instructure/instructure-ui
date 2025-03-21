@@ -98,7 +98,7 @@ const finalConfig = tseslint.config(
       ...reactPlugin.configs.flat.recommended.languageOptions,
     },
     plugins: {
-      ...reactPlugin.configs.flat.recommended.plugins,
+      ...reactPlugin.configs.flat['jsx-runtime'].plugins,
       notice
     },
     rules: {
@@ -157,6 +157,7 @@ const finalConfig = tseslint.config(
           allowTaggedTemplates: true
         }
       ],
+      "react/react-in-jsx-scope": "off"
     },
     settings: {
       react: {

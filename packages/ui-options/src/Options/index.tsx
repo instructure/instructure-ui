@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, Children } from 'react'
+import { ComponentElement, Component, Children } from 'react'
 
 import {
   omitProps,
@@ -36,7 +35,7 @@ import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -50,9 +49,9 @@ import type { OptionsProps } from './props'
 import { allowedProps, propTypes } from './props'
 import { isAndroidOrIOS } from '@instructure/ui-utils'
 
-type ItemChild = React.ComponentElement<OptionsItemProps, Item>
-type SeparatorChild = React.ComponentElement<OptionsSeparatorProps, Separator>
-type OptionsChild = React.ComponentElement<OptionsProps, Options>
+type ItemChild = ComponentElement<OptionsItemProps, Item>
+type SeparatorChild = ComponentElement<OptionsSeparatorProps, Separator>
+type OptionsChild = ComponentElement<OptionsProps, Options>
 type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
 
 /**
