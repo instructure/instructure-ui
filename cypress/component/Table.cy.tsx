@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import '../support/component'
 import 'cypress-real-events'
 
-import { Table } from '../../packages/ui'
+import { Table } from '@instructure/ui'
 
 describe('<Table/>', () =>
   it('can render table head as a combobox when in stacked layout', async () => {

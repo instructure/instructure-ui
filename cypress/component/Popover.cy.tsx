@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   Popover,
   View,
@@ -29,7 +29,7 @@ import {
   CloseButton,
   FormFieldGroup,
   TextInput
-} from '../../packages/ui'
+} from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'

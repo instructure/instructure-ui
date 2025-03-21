@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
@@ -272,11 +272,7 @@ describe('<Calendar />', () => {
 
   it('should render next and prev buttons', async () => {
     const { rerender } = render(
-      <Calendar
-        renderWeekdayLabels={weekdayLabels}
-      >
-        {generateDays()}
-      </Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
     const defaultPrevButton = screen.getByText('Previous month')
     const defaultNextButton = screen.getByText('Next month')

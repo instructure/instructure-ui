@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, ComponentType } from 'react'
 
 import { getComputedStyle } from '@instructure/ui-dom-utils'
@@ -34,7 +33,7 @@ import {
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { jsx, withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import type { StoryConfig } from '@instructure/ui-test-utils'
 
 import { TopNavBarItem } from '../../TopNavBarItem'

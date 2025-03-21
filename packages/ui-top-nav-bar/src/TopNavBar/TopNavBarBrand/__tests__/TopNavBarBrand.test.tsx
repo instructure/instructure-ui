@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import {
   expect,

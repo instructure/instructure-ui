@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { getParameters } from 'codesandbox/lib/api/define'
 
 import { Tooltip } from '@instructure/ui-tooltip'
@@ -42,7 +42,7 @@ class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
   render() {
     //TODO: we should not import everything everytime
     //somehow conditionally import needed modules
-    const importStatements = `import React, {useState, useEffect} from "react"
+    const importStatements = `import {useState, useEffect} from "react"
 import ReactDOM from "react-dom"
 import moment from 'moment'
 import {avatarSquare, avatarPortrait, lorem} from "./samplemedia"

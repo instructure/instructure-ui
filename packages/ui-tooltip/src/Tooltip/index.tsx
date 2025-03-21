@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, ReactNode } from 'react'
 
 import {
@@ -36,7 +35,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
 import type { PopoverProps } from '@instructure/ui-popover'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

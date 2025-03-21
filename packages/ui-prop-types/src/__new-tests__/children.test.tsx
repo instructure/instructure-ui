@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import '@testing-library/jest-dom'
 import { Children } from '../Children'
 

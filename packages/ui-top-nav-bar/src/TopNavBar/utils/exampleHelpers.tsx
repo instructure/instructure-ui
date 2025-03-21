@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { Drilldown } from '@instructure/ui-drilldown'
 import {
   IconQuestionLine,

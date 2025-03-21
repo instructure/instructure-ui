@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './App'
@@ -30,9 +30,9 @@ import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
 createRoot(document.getElementById('app')!).render(
-  <React.StrictMode>
+  <StrictMode>
     <InstUISettingsProvider>
       <App />
     </InstUISettingsProvider>
-  </React.StrictMode>
+  </StrictMode>
 )

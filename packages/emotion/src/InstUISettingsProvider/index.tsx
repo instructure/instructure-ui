@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from '@emotion/react'
 

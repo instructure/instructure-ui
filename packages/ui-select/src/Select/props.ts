@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'

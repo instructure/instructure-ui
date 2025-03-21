@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import userEvent from '@testing-library/user-event'

@@ -22,17 +22,15 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React from 'react'
+import { Component } from 'react'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 import canvas from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '../index'
-import { jsx } from '../../index'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 
 @textDirectionContextConsumer()
-class TextDirAwareComponent extends React.Component<TextDirectionContextConsumerProps> {
+class TextDirAwareComponent extends Component<TextDirectionContextConsumerProps> {
   render() {
     return <div data-dir={this.props.dir}>hello world</div>
   }

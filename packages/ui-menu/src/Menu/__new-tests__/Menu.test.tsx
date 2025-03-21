@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { render, screen, fireEvent } from '@testing-library/react'
 import { vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'

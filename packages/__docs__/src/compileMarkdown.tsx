@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, isValidElement, ReactElement, ReactNode } from 'react'
+import { Children, isValidElement, ReactElement, ReactNode } from 'react'
 import Markdown from 'marked-react'
 import grayMatter from 'gray-matter'
 import { v4 as uuid } from 'uuid'

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { SourceCodeEditor } from '../index'

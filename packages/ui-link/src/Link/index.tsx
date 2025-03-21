@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Children, Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -38,7 +37,7 @@ import {
 import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -133,7 +132,7 @@ class Link extends Component<LinkProps, LinkState> {
   get containsTruncateText() {
     let truncateText = false
 
-    React.Children.forEach(this.props.children, (child) => {
+    Children.forEach(this.props.children, (child) => {
       if (child && matchComponentTypes(child, ['TruncateText'])) {
         truncateText = true
       }

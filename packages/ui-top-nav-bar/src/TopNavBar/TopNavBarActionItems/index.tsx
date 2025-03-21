@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Children, Component } from 'react'
 
 import {
   omitProps,
@@ -34,7 +33,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 import { warn, error } from '@instructure/console'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Drilldown } from '@instructure/ui-drilldown'
 import { IconMoreLine } from '@instructure/ui-icons'
@@ -127,8 +126,7 @@ class TopNavBarActionItems extends Component<
 
     if (
       this.context.layout === 'smallViewport' &&
-      React.Children.count(prevProps.children) !==
-        React.Children.count(this.props.children)
+      Children.count(prevProps.children) !== Children.count(this.props.children)
     ) {
       this.setState({ key: this.state.key + 1 })
     }
@@ -141,7 +139,7 @@ class TopNavBarActionItems extends Component<
   }
 
   get childrenArray() {
-    const children = React.Children.toArray(this.props.children) as ItemChild[]
+    const children = Children.toArray(this.props.children) as ItemChild[]
 
     return children.map((child) => {
       if (!child?.props) {

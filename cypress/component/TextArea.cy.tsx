@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import '../support/component'
 import 'cypress-real-events'
 
-import { TextArea } from '../../packages/ui'
+import { TextArea } from '@instructure/ui'
 
 it('should resize if autoGrow is true', () => {
   cy.mount(

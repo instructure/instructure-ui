@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { MockInstance, vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
@@ -332,12 +332,12 @@ describe('<Table />', async () => {
 
   describe('when using custom components', () => {
     it('should render wrapper HOCs', () => {
-      class CustomTableCell extends React.Component<any> {
+      class CustomTableCell extends Component<any> {
         render() {
           return <Table.Cell {...this.props}>{this.props.children}</Table.Cell>
         }
       }
-      class CustomTableRow extends React.Component {
+      class CustomTableRow extends Component {
         render() {
           return (
             <Table.Row {...this.props}>
@@ -377,13 +377,13 @@ describe('<Table />', async () => {
     })
 
     it('should render fully custom components', () => {
-      class CustomTableCell extends React.Component<any> {
+      class CustomTableCell extends Component<any> {
         render() {
           return <td>{this.props.children}</td>
         }
       }
 
-      class CustomTableRow extends React.Component<any> {
+      class CustomTableRow extends Component<any> {
         render() {
           return <tr>{this.props.children}</tr>
         }

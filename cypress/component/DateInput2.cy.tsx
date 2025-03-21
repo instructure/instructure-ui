@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import 'cypress-real-events'
 
 import '../support/component'
@@ -29,115 +29,163 @@ import { DateInput2, ApplyLocale } from '@instructure/ui'
 import { SinonSpy } from 'cypress/types/sinon'
 
 const TIMEZONES_DST = [
-  { timezone: 'UTC', expectedDateIsoString: '2020-04-17T00:00:00.000Z' },                 // Coordinated Universal Time UTC
-  { timezone: 'America/New_York', expectedDateIsoString: '2020-04-17T04:00:00.000Z' },    // Eastern Time (US & Canada) UTC -4 (Daylight Saving Time)
-  { timezone: 'America/Los_Angeles', expectedDateIsoString: '2020-04-17T07:00:00.000Z' }, // Pacific Time (US & Canada) UTC -7 (Daylight Saving Time)
-  { timezone: 'Europe/London', expectedDateIsoString: '2020-04-16T23:00:00.000Z' },       // United Kingdom Time UTC +1 (Daylight Saving Time)
-  { timezone: 'Europe/Paris', expectedDateIsoString: '2020-04-16T22:00:00.000Z' },        // Central European Time UTC +2 (Daylight Saving Time)
-  { timezone: 'Asia/Tokyo', expectedDateIsoString: '2020-04-16T15:00:00.000Z' },          // Japan Standard Time UTC +9 (No DST)
-  { timezone: 'Australia/Sydney', expectedDateIsoString: '2020-04-16T14:00:00.000Z' },    // Australia Eastern Time UTC +10 (Daylight Saving Time ended in April)
-  { timezone: 'Asia/Kolkata', expectedDateIsoString: '2020-04-16T18:30:00.000Z' },        // India Standard Time UTC +5:30 (No DST)
-  { timezone: 'Africa/Johannesburg', expectedDateIsoString: '2020-04-16T22:00:00.000Z' }, // South Africa Standard Time UTC +2 (No DST)
-  { timezone: 'Asia/Kathmandu', expectedDateIsoString: '2020-04-16T18:15:00.000Z' }       // Nepal Standard Time UTC +5:45 (No DST)
+  { timezone: 'UTC', expectedDateIsoString: '2020-04-17T00:00:00.000Z' }, // Coordinated Universal Time UTC
+  {
+    timezone: 'America/New_York',
+    expectedDateIsoString: '2020-04-17T04:00:00.000Z'
+  }, // Eastern Time (US & Canada) UTC -4 (Daylight Saving Time)
+  {
+    timezone: 'America/Los_Angeles',
+    expectedDateIsoString: '2020-04-17T07:00:00.000Z'
+  }, // Pacific Time (US & Canada) UTC -7 (Daylight Saving Time)
+  {
+    timezone: 'Europe/London',
+    expectedDateIsoString: '2020-04-16T23:00:00.000Z'
+  }, // United Kingdom Time UTC +1 (Daylight Saving Time)
+  {
+    timezone: 'Europe/Paris',
+    expectedDateIsoString: '2020-04-16T22:00:00.000Z'
+  }, // Central European Time UTC +2 (Daylight Saving Time)
+  { timezone: 'Asia/Tokyo', expectedDateIsoString: '2020-04-16T15:00:00.000Z' }, // Japan Standard Time UTC +9 (No DST)
+  {
+    timezone: 'Australia/Sydney',
+    expectedDateIsoString: '2020-04-16T14:00:00.000Z'
+  }, // Australia Eastern Time UTC +10 (Daylight Saving Time ended in April)
+  {
+    timezone: 'Asia/Kolkata',
+    expectedDateIsoString: '2020-04-16T18:30:00.000Z'
+  }, // India Standard Time UTC +5:30 (No DST)
+  {
+    timezone: 'Africa/Johannesburg',
+    expectedDateIsoString: '2020-04-16T22:00:00.000Z'
+  }, // South Africa Standard Time UTC +2 (No DST)
+  {
+    timezone: 'Asia/Kathmandu',
+    expectedDateIsoString: '2020-04-16T18:15:00.000Z'
+  } // Nepal Standard Time UTC +5:45 (No DST)
 ]
 
 const TIMEZONES_NON_DST = [
-  { timezone: 'UTC', expectedDateIsoString: '2020-02-17T00:00:00.000Z' },                 // Coordinated Universal Time UTC
-  { timezone: 'America/New_York', expectedDateIsoString: '2020-02-17T05:00:00.000Z' },    // Eastern Time (US & Canada) UTC -5 (Standard Time)
-  { timezone: 'America/Los_Angeles', expectedDateIsoString: '2020-02-17T08:00:00.000Z' }, // Pacific Time (US & Canada) UTC -8 (Standard Time)
-  { timezone: 'Europe/London', expectedDateIsoString: '2020-02-17T00:00:00.000Z' },       // United Kingdom Time UTC +0 (Standard Time)
-  { timezone: 'Europe/Paris', expectedDateIsoString: '2020-02-16T23:00:00.000Z' },        // Central European Time UTC +1 (Standard Time)
-  { timezone: 'Asia/Tokyo', expectedDateIsoString: '2020-02-16T15:00:00.000Z' },          // Japan Standard Time UTC +9 (No DST)
-  { timezone: 'Australia/Sydney', expectedDateIsoString: '2020-02-16T13:00:00.000Z' },    // Australia Eastern Time UTC +11 (Standard Time)
-  { timezone: 'Asia/Kolkata', expectedDateIsoString: '2020-02-16T18:30:00.000Z' },        // India Standard Time UTC +5:30 (No DST)
-  { timezone: 'Africa/Johannesburg', expectedDateIsoString: '2020-02-16T22:00:00.000Z' }, // South Africa Standard Time UTC +2 (No DST)
-  { timezone: 'Asia/Kathmandu', expectedDateIsoString: '2020-02-16T18:15:00.000Z' }       // Nepal Standard Time UTC +5:45 (No DST)
+  { timezone: 'UTC', expectedDateIsoString: '2020-02-17T00:00:00.000Z' }, // Coordinated Universal Time UTC
+  {
+    timezone: 'America/New_York',
+    expectedDateIsoString: '2020-02-17T05:00:00.000Z'
+  }, // Eastern Time (US & Canada) UTC -5 (Standard Time)
+  {
+    timezone: 'America/Los_Angeles',
+    expectedDateIsoString: '2020-02-17T08:00:00.000Z'
+  }, // Pacific Time (US & Canada) UTC -8 (Standard Time)
+  {
+    timezone: 'Europe/London',
+    expectedDateIsoString: '2020-02-17T00:00:00.000Z'
+  }, // United Kingdom Time UTC +0 (Standard Time)
+  {
+    timezone: 'Europe/Paris',
+    expectedDateIsoString: '2020-02-16T23:00:00.000Z'
+  }, // Central European Time UTC +1 (Standard Time)
+  { timezone: 'Asia/Tokyo', expectedDateIsoString: '2020-02-16T15:00:00.000Z' }, // Japan Standard Time UTC +9 (No DST)
+  {
+    timezone: 'Australia/Sydney',
+    expectedDateIsoString: '2020-02-16T13:00:00.000Z'
+  }, // Australia Eastern Time UTC +11 (Standard Time)
+  {
+    timezone: 'Asia/Kolkata',
+    expectedDateIsoString: '2020-02-16T18:30:00.000Z'
+  }, // India Standard Time UTC +5:30 (No DST)
+  {
+    timezone: 'Africa/Johannesburg',
+    expectedDateIsoString: '2020-02-16T22:00:00.000Z'
+  }, // South Africa Standard Time UTC +2 (No DST)
+  {
+    timezone: 'Asia/Kathmandu',
+    expectedDateIsoString: '2020-02-16T18:15:00.000Z'
+  } // Nepal Standard Time UTC +5:45 (No DST)
 ]
 
 const LOCALES = [
-  { locale: 'af',     textDirection: 'ltr' },  // Afrikaans
-  { locale: 'am',     textDirection: 'ltr' },  // Amharic
-  { locale: 'ar-SA',  textDirection: 'rtl' },  // Arabic (Saudi Arabia) - Arabic-Indic numerals
-  { locale: 'ar-DZ',  textDirection: 'rtl' },  // Arabic (Algeria)
-  { locale: 'ar-EG',  textDirection: 'rtl' },  // Arabic (Egypt)
-  { locale: 'ar-SY',  textDirection: 'rtl' },  // Arabic (Syria)
-  { locale: 'ar-AE',  textDirection: 'rtl' },  // Arabic (United Arab Emirates)
-  { locale: 'ar-IQ',  textDirection: 'rtl' },  // Arabic (Iraq)
-  { locale: 'ar-PS',  textDirection: 'rtl' },  // Arabic (Palestine)
-  { locale: 'az',     textDirection: 'ltr' },  // Azerbaijani
-  { locale: 'be',     textDirection: 'ltr' },  // Belarusian
-  { locale: 'bg',     textDirection: 'ltr' },  // Bulgarian
-  { locale: 'bn-BD',  textDirection: 'ltr' },  // Bengali (Bangladesh) - Bengali numerals
-  { locale: 'bs',     textDirection: 'ltr' },  // Bosnian
-  { locale: 'ca',     textDirection: 'ltr' },  // Catalan
-  { locale: 'cs',     textDirection: 'ltr' },  // Czech
-  { locale: 'cy',     textDirection: 'ltr' },  // Welsh
-  { locale: 'da',     textDirection: 'ltr' },  // Danish
-  { locale: 'de-DE',  textDirection: 'ltr' },  // German (Germany)
-  { locale: 'de-AT',  textDirection: 'ltr' },  // German (Austria)
-  { locale: 'el',     textDirection: 'ltr' },  // Greek
-  { locale: 'en-US',  textDirection: 'ltr' },  // English (United States)
-  { locale: 'en-GB',  textDirection: 'ltr' },  // English (United Kingdom)
-  { locale: 'es-ES',  textDirection: 'ltr' },  // Spanish (Spain)
-  { locale: 'es-MX',  textDirection: 'ltr' },  // Spanish (Mexico)
-  { locale: 'et',     textDirection: 'ltr' },  // Estonian
-  { locale: 'fa',     textDirection: 'ltr' },  // Persian - Persian numerals
-  { locale: 'fi',     textDirection: 'ltr' },  // Finnish
-  { locale: 'fr-FR',  textDirection: 'ltr' },  // French (France)
-  { locale: 'fr-CA',  textDirection: 'ltr' },  // French (Canada)
-  { locale: 'ga',     textDirection: 'ltr' },  // Irish
-  { locale: 'gl',     textDirection: 'ltr' },  // Galician
-  { locale: 'gu',     textDirection: 'ltr' },  // Gujarati
-  { locale: 'he',     textDirection: 'ltr' },  // Hebrew
-  { locale: 'hi',     textDirection: 'ltr' },  // Hindi - Devanagari numerals
-  { locale: 'hr',     textDirection: 'ltr' },  // Croatian
-  { locale: 'hu',     textDirection: 'ltr' },  // Hungarian
-  { locale: 'hy',     textDirection: 'ltr' },  // Armenian
-  { locale: 'id',     textDirection: 'ltr' },  // Indonesian
-  { locale: 'is',     textDirection: 'ltr' },  // Icelandic
-  { locale: 'it-IT',  textDirection: 'ltr' },  // Italian (Italy)
-  { locale: 'ja',     textDirection: 'ltr' },  // Japanese
-  { locale: 'ka',     textDirection: 'ltr' },  // Georgian
-  { locale: 'kk',     textDirection: 'ltr' },  // Kazakh
-  { locale: 'km',     textDirection: 'ltr' },  // Khmer - Khmer numerals
-  { locale: 'kn',     textDirection: 'ltr' },  // Kannada
-  { locale: 'ko',     textDirection: 'ltr' },  // Korean
-  { locale: 'lt',     textDirection: 'ltr' },  // Lithuanian
-  { locale: 'lv',     textDirection: 'ltr' },  // Latvian
-  { locale: 'mk',     textDirection: 'ltr' },  // Macedonian
-  { locale: 'ml',     textDirection: 'ltr' },  // Malayalam
-  { locale: 'mn',     textDirection: 'ltr' },  // Mongolian
-  { locale: 'mr',     textDirection: 'ltr' },  // Marathi
-  { locale: 'ms',     textDirection: 'ltr' },  // Malay
-  { locale: 'mt',     textDirection: 'ltr' },  // Maltese
-  { locale: 'nb',     textDirection: 'ltr' },  // Norwegian Bokmål
-  { locale: 'ne',     textDirection: 'ltr' },  // Nepali
-  { locale: 'nl',     textDirection: 'ltr' },  // Dutch
-  { locale: 'nn',     textDirection: 'ltr' },  // Norwegian Nynorsk
-  { locale: 'pa',     textDirection: 'ltr' },  // Punjabi
-  { locale: 'pl',     textDirection: 'ltr' },  // Polish
-  { locale: 'pt-PT',  textDirection: 'ltr' },  // Portuguese (Portugal)
-  { locale: 'pt-BR',  textDirection: 'ltr' },  // Portuguese (Brazil)
-  { locale: 'ro',     textDirection: 'ltr' },  // Romanian
-  { locale: 'ru',     textDirection: 'ltr' },  // Russian
-  { locale: 'si',     textDirection: 'ltr' },  // Sinhala
-  { locale: 'sk',     textDirection: 'ltr' },  // Slovak
-  { locale: 'sl',     textDirection: 'ltr' },  // Slovenian
-  { locale: 'sq',     textDirection: 'ltr' },  // Albanian
-  { locale: 'sr',     textDirection: 'ltr' },  // Serbian
-  { locale: 'sv-SE',  textDirection: 'ltr' },  // Swedish (Sweden)
-  { locale: 'sw',     textDirection: 'ltr' },  // Swahili
-  { locale: 'ta',     textDirection: 'ltr' },  // Tamil
-  { locale: 'te',     textDirection: 'ltr' },  // Telugu
-  { locale: 'th',     textDirection: 'ltr' },  // Thai - Thai numerals
-  { locale: 'tr',     textDirection: 'ltr' },  // Turkish
-  { locale: 'uk',     textDirection: 'ltr' },  // Ukrainian
-  { locale: 'ur',     textDirection: 'ltr' },  // Urdu - Arabic script
-  { locale: 'uz',     textDirection: 'ltr' },  // Uzbek
-  { locale: 'vi',     textDirection: 'ltr' },  // Vietnamese
-  { locale: 'zh-CN',  textDirection: 'ltr' },  // Chinese (Simplified)
-  { locale: 'zh-TW',  textDirection: 'ltr' },  // Chinese (Traditional)
-  { locale: 'zu',     textDirection: 'ltr' }   // Zulu
+  { locale: 'af', textDirection: 'ltr' }, // Afrikaans
+  { locale: 'am', textDirection: 'ltr' }, // Amharic
+  { locale: 'ar-SA', textDirection: 'rtl' }, // Arabic (Saudi Arabia) - Arabic-Indic numerals
+  { locale: 'ar-DZ', textDirection: 'rtl' }, // Arabic (Algeria)
+  { locale: 'ar-EG', textDirection: 'rtl' }, // Arabic (Egypt)
+  { locale: 'ar-SY', textDirection: 'rtl' }, // Arabic (Syria)
+  { locale: 'ar-AE', textDirection: 'rtl' }, // Arabic (United Arab Emirates)
+  { locale: 'ar-IQ', textDirection: 'rtl' }, // Arabic (Iraq)
+  { locale: 'ar-PS', textDirection: 'rtl' }, // Arabic (Palestine)
+  { locale: 'az', textDirection: 'ltr' }, // Azerbaijani
+  { locale: 'be', textDirection: 'ltr' }, // Belarusian
+  { locale: 'bg', textDirection: 'ltr' }, // Bulgarian
+  { locale: 'bn-BD', textDirection: 'ltr' }, // Bengali (Bangladesh) - Bengali numerals
+  { locale: 'bs', textDirection: 'ltr' }, // Bosnian
+  { locale: 'ca', textDirection: 'ltr' }, // Catalan
+  { locale: 'cs', textDirection: 'ltr' }, // Czech
+  { locale: 'cy', textDirection: 'ltr' }, // Welsh
+  { locale: 'da', textDirection: 'ltr' }, // Danish
+  { locale: 'de-DE', textDirection: 'ltr' }, // German (Germany)
+  { locale: 'de-AT', textDirection: 'ltr' }, // German (Austria)
+  { locale: 'el', textDirection: 'ltr' }, // Greek
+  { locale: 'en-US', textDirection: 'ltr' }, // English (United States)
+  { locale: 'en-GB', textDirection: 'ltr' }, // English (United Kingdom)
+  { locale: 'es-ES', textDirection: 'ltr' }, // Spanish (Spain)
+  { locale: 'es-MX', textDirection: 'ltr' }, // Spanish (Mexico)
+  { locale: 'et', textDirection: 'ltr' }, // Estonian
+  { locale: 'fa', textDirection: 'ltr' }, // Persian - Persian numerals
+  { locale: 'fi', textDirection: 'ltr' }, // Finnish
+  { locale: 'fr-FR', textDirection: 'ltr' }, // French (France)
+  { locale: 'fr-CA', textDirection: 'ltr' }, // French (Canada)
+  { locale: 'ga', textDirection: 'ltr' }, // Irish
+  { locale: 'gl', textDirection: 'ltr' }, // Galician
+  { locale: 'gu', textDirection: 'ltr' }, // Gujarati
+  { locale: 'he', textDirection: 'ltr' }, // Hebrew
+  { locale: 'hi', textDirection: 'ltr' }, // Hindi - Devanagari numerals
+  { locale: 'hr', textDirection: 'ltr' }, // Croatian
+  { locale: 'hu', textDirection: 'ltr' }, // Hungarian
+  { locale: 'hy', textDirection: 'ltr' }, // Armenian
+  { locale: 'id', textDirection: 'ltr' }, // Indonesian
+  { locale: 'is', textDirection: 'ltr' }, // Icelandic
+  { locale: 'it-IT', textDirection: 'ltr' }, // Italian (Italy)
+  { locale: 'ja', textDirection: 'ltr' }, // Japanese
+  { locale: 'ka', textDirection: 'ltr' }, // Georgian
+  { locale: 'kk', textDirection: 'ltr' }, // Kazakh
+  { locale: 'km', textDirection: 'ltr' }, // Khmer - Khmer numerals
+  { locale: 'kn', textDirection: 'ltr' }, // Kannada
+  { locale: 'ko', textDirection: 'ltr' }, // Korean
+  { locale: 'lt', textDirection: 'ltr' }, // Lithuanian
+  { locale: 'lv', textDirection: 'ltr' }, // Latvian
+  { locale: 'mk', textDirection: 'ltr' }, // Macedonian
+  { locale: 'ml', textDirection: 'ltr' }, // Malayalam
+  { locale: 'mn', textDirection: 'ltr' }, // Mongolian
+  { locale: 'mr', textDirection: 'ltr' }, // Marathi
+  { locale: 'ms', textDirection: 'ltr' }, // Malay
+  { locale: 'mt', textDirection: 'ltr' }, // Maltese
+  { locale: 'nb', textDirection: 'ltr' }, // Norwegian Bokmål
+  { locale: 'ne', textDirection: 'ltr' }, // Nepali
+  { locale: 'nl', textDirection: 'ltr' }, // Dutch
+  { locale: 'nn', textDirection: 'ltr' }, // Norwegian Nynorsk
+  { locale: 'pa', textDirection: 'ltr' }, // Punjabi
+  { locale: 'pl', textDirection: 'ltr' }, // Polish
+  { locale: 'pt-PT', textDirection: 'ltr' }, // Portuguese (Portugal)
+  { locale: 'pt-BR', textDirection: 'ltr' }, // Portuguese (Brazil)
+  { locale: 'ro', textDirection: 'ltr' }, // Romanian
+  { locale: 'ru', textDirection: 'ltr' }, // Russian
+  { locale: 'si', textDirection: 'ltr' }, // Sinhala
+  { locale: 'sk', textDirection: 'ltr' }, // Slovak
+  { locale: 'sl', textDirection: 'ltr' }, // Slovenian
+  { locale: 'sq', textDirection: 'ltr' }, // Albanian
+  { locale: 'sr', textDirection: 'ltr' }, // Serbian
+  { locale: 'sv-SE', textDirection: 'ltr' }, // Swedish (Sweden)
+  { locale: 'sw', textDirection: 'ltr' }, // Swahili
+  { locale: 'ta', textDirection: 'ltr' }, // Tamil
+  { locale: 'te', textDirection: 'ltr' }, // Telugu
+  { locale: 'th', textDirection: 'ltr' }, // Thai - Thai numerals
+  { locale: 'tr', textDirection: 'ltr' }, // Turkish
+  { locale: 'uk', textDirection: 'ltr' }, // Ukrainian
+  { locale: 'ur', textDirection: 'ltr' }, // Urdu - Arabic script
+  { locale: 'uz', textDirection: 'ltr' }, // Uzbek
+  { locale: 'vi', textDirection: 'ltr' }, // Vietnamese
+  { locale: 'zh-CN', textDirection: 'ltr' }, // Chinese (Simplified)
+  { locale: 'zh-TW', textDirection: 'ltr' }, // Chinese (Traditional)
+  { locale: 'zu', textDirection: 'ltr' } // Zulu
 ]
 
 type DateInputExampleProps = {
@@ -444,23 +492,71 @@ describe('<DateInput2/>', () => {
       // Define numeral mappings for different numeral systems
       const numeralMappings = {
         // Arabic-Indic
-        '\u0660': '0', '\u0661': '1', '\u0662': '2', '\u0663': '3', '\u0664': '4', '\u0665': '5',
-        '\u0666': '6', '\u0667': '7', '\u0668': '8', '\u0669': '9',
+        '\u0660': '0',
+        '\u0661': '1',
+        '\u0662': '2',
+        '\u0663': '3',
+        '\u0664': '4',
+        '\u0665': '5',
+        '\u0666': '6',
+        '\u0667': '7',
+        '\u0668': '8',
+        '\u0669': '9',
         // Persian
-        '\u06F0': '0', '\u06F1': '1', '\u06F2': '2', '\u06F3': '3', '\u06F4': '4', '\u06F5': '5',
-        '\u06F6': '6', '\u06F7': '7', '\u06F8': '8', '\u06F9': '9',
+        '\u06F0': '0',
+        '\u06F1': '1',
+        '\u06F2': '2',
+        '\u06F3': '3',
+        '\u06F4': '4',
+        '\u06F5': '5',
+        '\u06F6': '6',
+        '\u06F7': '7',
+        '\u06F8': '8',
+        '\u06F9': '9',
         // Bengali
-        '\u09E6': '0', '\u09E7': '1', '\u09E8': '2', '\u09E9': '3', '\u09EA': '4', '\u09EB': '5',
-        '\u09EC': '6', '\u09ED': '7', '\u09EE': '8', '\u09EF': '9',
+        '\u09E6': '0',
+        '\u09E7': '1',
+        '\u09E8': '2',
+        '\u09E9': '3',
+        '\u09EA': '4',
+        '\u09EB': '5',
+        '\u09EC': '6',
+        '\u09ED': '7',
+        '\u09EE': '8',
+        '\u09EF': '9',
         // Devanagari (Hindi)
-        '\u0966': '0', '\u0967': '1', '\u0968': '2', '\u0969': '3', '\u096A': '4', '\u096B': '5',
-        '\u096C': '6', '\u096D': '7', '\u096E': '8', '\u096F': '9',
+        '\u0966': '0',
+        '\u0967': '1',
+        '\u0968': '2',
+        '\u0969': '3',
+        '\u096A': '4',
+        '\u096B': '5',
+        '\u096C': '6',
+        '\u096D': '7',
+        '\u096E': '8',
+        '\u096F': '9',
         // Thai
-        '\u0E50': '0', '\u0E51': '1', '\u0E52': '2', '\u0E53': '3', '\u0E54': '4', '\u0E55': '5',
-        '\u0E56': '6', '\u0E57': '7', '\u0E58': '8', '\u0E59': '9',
+        '\u0E50': '0',
+        '\u0E51': '1',
+        '\u0E52': '2',
+        '\u0E53': '3',
+        '\u0E54': '4',
+        '\u0E55': '5',
+        '\u0E56': '6',
+        '\u0E57': '7',
+        '\u0E58': '8',
+        '\u0E59': '9',
         // Khmer
-        '\u17E0': '0', '\u17E1': '1', '\u17E2': '2', '\u17E3': '3', '\u17E4': '4', '\u17E5': '5',
-        '\u17E6': '6', '\u17E7': '7', '\u17E8': '8', '\u17E9': '9'
+        '\u17E0': '0',
+        '\u17E1': '1',
+        '\u17E2': '2',
+        '\u17E3': '3',
+        '\u17E4': '4',
+        '\u17E5': '5',
+        '\u17E6': '6',
+        '\u17E7': '7',
+        '\u17E8': '8',
+        '\u17E9': '9'
       }
 
       // Return the date with western digits
@@ -479,9 +575,9 @@ describe('<DateInput2/>', () => {
     }
 
     const transformDate = ({ date, locale, shouldRemoveRTL = true }) => {
-      const formatted = formatDate(date, locale)           // ١٧/٣/٢٠٢٢
+      const formatted = formatDate(date, locale) // ١٧/٣/٢٠٢٢
       const normalized = normalizeWesternDigits(formatted) // 172022/3/  RTL:(17[U+200F]/3[U+200F]/2022)
-      const rtlFree = removeRtlMarkers(normalized)         // 17/3/2022
+      const rtlFree = removeRtlMarkers(normalized) // 17/3/2022
 
       return shouldRemoveRTL ? rtlFree : normalized
     }
@@ -503,7 +599,10 @@ describe('<DateInput2/>', () => {
           locale
         })
         const initialDate = transformDate({ date: dateForSetInitial, locale })
-        const dayForSelect = getDayInOriginalLanguage(dateForExpectSelect, locale) // 17 (in local language)
+        const dayForSelect = getDayInOriginalLanguage(
+          dateForExpectSelect,
+          locale
+        ) // 17 (in local language)
 
         cy.mount(
           <RtlExample
@@ -523,7 +622,8 @@ describe('<DateInput2/>', () => {
           .invoke('val')
           .then((inputValue) => {
             const inputValueRTLFree = removeRtlMarkers(inputValue)
-            const hasCorrectDirection = ((textDirection === 'rtl') === hasRtlMarkers(inputValue as string))
+            const hasCorrectDirection =
+              (textDirection === 'rtl') === hasRtlMarkers(inputValue as string)
 
             cy.wrap(hasCorrectDirection).should('be.true')
             cy.wrap(inputValueRTLFree).should('equal', expectedFormattedValue)
@@ -992,10 +1092,10 @@ describe('<DateInput2/>', () => {
   })
 
   const expectedPlaceholders = [
-    { locale: 'hu',  expectedPlaceHolder: 'YYYY. MM. DD.' },
-    { locale: 'fr',  expectedPlaceHolder: 'DD/MM/YYYY' },
-    { locale: 'en-US',  expectedPlaceHolder: 'M/D/YYYY' },
-    { locale: 'ar-SA',  expectedPlaceHolder: 'D‏/M‏/YYYY' }
+    { locale: 'hu', expectedPlaceHolder: 'YYYY. MM. DD.' },
+    { locale: 'fr', expectedPlaceHolder: 'DD/MM/YYYY' },
+    { locale: 'en-US', expectedPlaceHolder: 'M/D/YYYY' },
+    { locale: 'ar-SA', expectedPlaceHolder: 'D‏/M‏/YYYY' }
   ]
 
   expectedPlaceholders.forEach(({ locale, expectedPlaceHolder }) => {
@@ -1033,7 +1133,7 @@ describe('<DateInput2/>', () => {
             },
             formatter: (date) => {
               const year = date.getFullYear()
-              const month = date.getMonth()+1
+              const month = date.getMonth() + 1
               const day = date.getDate()
 
               // set placeholder according to created date structure 'YYYY*M*D'

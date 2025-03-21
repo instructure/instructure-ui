@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { SimpleSelect } from '../../SimpleSelect'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

@@ -21,7 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { ForwardedRef, forwardRef, PropsWithChildren } from 'react'
+import {
+  ComponentClass,
+  Component,
+  ForwardedRef,
+  forwardRef,
+  PropsWithChildren
+} from 'react'
 import type {
   ForwardRefExoticComponent,
   PropsWithoutRef,
@@ -61,7 +67,7 @@ type TextDirectionContextConsumerType = {
  * ```js-code
  * import { textDirectionContextConsumer } from '@instructure/ui-i18n'
  *
- * class Example extends React.Component {
+ * class Example extends Component {
  *   render () {
  *     return this.props.dir === textDirectionContextConsumer.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
  *   }
@@ -81,7 +87,7 @@ type TextDirectionContextConsumerType = {
  */
 const textDirectionContextConsumer: TextDirectionContextConsumerType =
   decorator((ComposedComponent) => {
-    class TextDirectionContextConsumerComponent extends React.Component<TextDirectionContextConsumerInternalProps> {
+    class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerInternalProps> {
       render() {
         const { forwardedRef, ...rest } = this.props
         // Quite complex code, this is the priority order of applying the `dir` prop:
@@ -111,7 +117,7 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
     const TextDirectionContextConsumerForwardingRef: ForwardRefExoticComponent<
       PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
     > & {
-      originalType?: React.ComponentClass
+      originalType?: ComponentClass
     } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
       <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
     ))
@@ -126,10 +132,13 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
     )
     TextDirectionContextConsumerForwardingRef.defaultProps =
       ComposedComponent.defaultProps
-    // eslint-disable-next-line react/forbid-foreign-prop-types
-    TextDirectionContextConsumerForwardingRef.propTypes = ComposedComponent.propTypes
+    TextDirectionContextConsumerForwardingRef.propTypes =
+      // eslint-disable-next-line react/forbid-foreign-prop-types
+      ComposedComponent.propTypes
     // @ts-expect-error These static fields exist on InstUI components
-    TextDirectionContextConsumerForwardingRef.allowedProps = ComposedComponent.allowedProps
+    TextDirectionContextConsumerForwardingRef.allowedProps =
+      // @ts-expect-error These static fields exist on InstUI components
+      ComposedComponent.allowedProps
 
     // added so it can be tested with ReactTestUtils
     // more info: https://github.com/facebook/react/issues/13455

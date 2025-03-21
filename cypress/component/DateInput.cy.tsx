@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import 'cypress-real-events'
 
 import '../support/component'
-import { DateInput, Calendar } from '../../packages/ui'
+import { DateInput, Calendar } from '@instructure/ui'
 
 const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 

@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
 
 import { expect, mount } from '@instructure/ui-test-utils'
 import { getTextDirection } from '../getTextDirection'

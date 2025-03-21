@@ -21,13 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { expect } from 'chai'
 
 import '../support/component'
 import { within } from '@instructure/ui-utils'
-import truncate from '../../packages/ui-truncate-text/src/TruncateText/utils/truncate'
-
+import truncate from '@instructure/ui-truncate-text/src/TruncateText/utils/truncate'
 
 describe('truncate', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
@@ -280,7 +279,10 @@ describe('truncate', () => {
 
   it('should account for font size styles', async () => {
     cy.mount(
-      <div id="stage" style={{ ...baseStyle, width: '200px', fontSize: '16px' }}>
+      <div
+        id="stage"
+        style={{ ...baseStyle, width: '200px', fontSize: '16px' }}
+      >
         {defaultText}
       </div>
     )
@@ -292,7 +294,11 @@ describe('truncate', () => {
     cy.get('#stage').should('have.text', 'Hello world! This is a long…')
 
     // Update font size
-    cy.get('#stage').invoke('css', { ...baseStyle, width: '200px', fontSize: '24px' })
+    cy.get('#stage').invoke('css', {
+      ...baseStyle,
+      width: '200px',
+      fontSize: '24px'
+    })
 
     cy.get('#stage').then(($stageUpdated) => {
       truncate($stageUpdated[0])

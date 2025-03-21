@@ -86,6 +86,6 @@ module.exports = {
     formatMessageCB: ({ scope, defaultMessage }) =>
       scope.split(',').length > 3
         ? defaultMessage.replace(scope, 'many')
-        : defaultMessage
+        : defaultMessage.replace(scope, 'many')
   }
 }
