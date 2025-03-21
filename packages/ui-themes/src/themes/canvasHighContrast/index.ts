@@ -41,7 +41,7 @@ export type CanvasHighContrastTheme = BaseTheme & {
  */
 const __theme: CanvasHighContrastTheme = {
   key,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
+  description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
   ...sharedThemeTokens,
   colors
 }

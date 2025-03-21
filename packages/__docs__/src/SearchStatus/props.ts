@@ -38,13 +38,13 @@ type SearchStatusProps = SearchStatusOwnProps &
   WithStyleProps<SearchStatusTheme, SearchStatusStyle>
 
 type SearchStatusTheme = {
-  colorBrand: Colors['backgroundBrand']
-  colorAlert: Colors['backgroundAlert']
-  colorWarning: Colors['backgroundWarning']
-  colorDanger: Colors['backgroundDanger']
-  colorFaceSuccess: Colors['backgroundAlert']
-  colorFaceFailure: Colors['backgroundWarning']
-  colorFeatures: Colors['backgroundDarkest']
+  colorBrand: Colors['contrasts']['blue4570']
+  colorAlert: Colors['contrasts']['red4570']
+  colorWarning: Colors['contrasts']['orange4570']
+  colorDanger: Colors['contrasts']['red4570']
+  colorFaceSuccess: Colors['contrasts']['blue4570']
+  colorFaceFailure: Colors['contrasts']['orange4570']
+  colorFeatures: Colors['contrasts']['grey125125']
 }
 export type SearchStatusStyle = ComponentStyle<'searchStatus' | 'box'>
 

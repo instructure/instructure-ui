@@ -38,7 +38,7 @@ import type {
   SimpleType,
   TSFunctionSignatureType,
   TypeDescriptor
-} from '../../buildScripts/DataTypes.mts'
+} from 'react-docgen'
 
 @withStyle(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
