@@ -25,8 +25,7 @@
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-
-import type { PropDescriptor } from '../../buildScripts/DataTypes.mts'
+import type { PropDescriptor } from 'react-docgen'
 
 type PropertiesOwnProps = {
   props: Record<string, PropDescriptor>

@@ -32,7 +32,9 @@ import { ColorTableProps } from './props'
 
 class ColorTable extends Component<ColorTableProps> {
   renderRows() {
-    const colorMap = Object.keys(this.props.colorNames).reduce((acc, color) => {
+    const colorMap: Record<string, string> = Object.keys(
+      this.props.colorNames
+    ).reduce((acc, color) => {
       const hex = this.props.colorNames[color]
       return { ...acc, [hex]: color }
     }, {})
