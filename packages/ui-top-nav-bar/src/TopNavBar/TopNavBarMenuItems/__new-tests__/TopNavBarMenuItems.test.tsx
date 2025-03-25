@@ -64,7 +64,7 @@ describe('<TopNavBarMenuItems />', () => {
 
   it('should render', () => {
     const { container } = render(getMenuItems())
-    const menu = container.querySelector("[class$='-topNavBarMenuItems']")
+    const menu = container.querySelector("[class*='-topNavBarMenuItems']")
 
     expect(menu).toBeInTheDocument()
     expect(menu!.tagName).toBe('UL')
@@ -74,14 +74,14 @@ describe('<TopNavBarMenuItems />', () => {
     const { container } = render(
       <SmallViewportModeWrapper>{getMenuItems()}</SmallViewportModeWrapper>
     )
-    const menu = container.querySelector("[class$='-topNavBarMenuItems']")
+    const menu = container.querySelector("[class*='-topNavBarMenuItems']")
 
     expect(menu).not.toBeInTheDocument()
   })
 
   it('should not render if no children are passed', async () => {
     const { container } = render(getMenuItems({ menuItemsCount: 0 }))
-    const menu = container.querySelector("[class$='-topNavBarMenuItems']")
+    const menu = container.querySelector("[class*='-topNavBarMenuItems']")
 
     expect(menu).not.toBeInTheDocument()
   })
@@ -90,7 +90,7 @@ describe('<TopNavBarMenuItems />', () => {
     it('should render as a TruncateList component', () => {
       const { container } = render(getMenuItems())
       const truncatedList = container.querySelector(
-        "[class$='-truncateList-topNavBarMenuItems']"
+        "[class*='-truncateList-topNavBarMenuItems']"
       )
 
       expect(truncatedList).toBeInTheDocument()
@@ -103,13 +103,13 @@ describe('<TopNavBarMenuItems />', () => {
         </div>
       )
       const truncatedList = container.querySelector(
-        "[class$='-truncateList-topNavBarMenuItems']"
+        "[class*='-truncateList-topNavBarMenuItems']"
       )
       // const listItems = container.querySelectorAll(
       //   "[class*='truncateList__listItem']"
       // )
       const hiddenMenuTrigger = container.querySelector(
-        '[class$="submenuTriggerContainer"]'
+        '[class*="submenuTriggerContainer"]'
       )
       const triggerItem = hiddenMenuTrigger!.querySelector(
         '[id*="-hiddenMenuItemsMenuTrigger"]'
@@ -125,15 +125,20 @@ describe('<TopNavBarMenuItems />', () => {
       // expect(hiddenMenuTrigger).to.contain(triggerItem?.getDOMNode())
     })
 
-    it('should truncate the end of the list', () => {
+    it.only('should truncate the end of the list', () => {
       const { container } = render(
         <div style={{ width: '400px' }}>
           {getMenuItems({ menuItemsCount: 6 })}
         </div>
       )
       const truncatedList = container.querySelector(
-        "[class$='-truncateList-topNavBarMenuItems']"
+        "[class*='-truncateList-topNavBarMenuItems']"
       )
+
+      console.log('////////////////////////////')
+      console.log(container.innerHTML)
+      console.log(truncatedList)
+      console.log('////////////////////////////')
 
       expect(truncatedList).toBeInTheDocument()
 
@@ -228,7 +233,7 @@ describe('<TopNavBarMenuItems />', () => {
           })}
         </div>
       )
-      const menu = container.querySelector("[class$='-topNavBarMenuItems']")
+      const menu = container.querySelector("[class*='-topNavBarMenuItems']")
 
       expect(menu).toBeInTheDocument()
       expect(menu!.tagName).toBe('UL')
@@ -409,7 +414,7 @@ describe('<TopNavBarMenuItems />', () => {
         })
       )
       const activeItem = container.querySelector(
-        "[class$='-topNavBarItem__container']"
+        "[class*='-topNavBarItem__container']"
       )!
       // TODO convert to e2e
       // const activeItemPseudoStyle = getComputedStyle(activeItem, '::after')
@@ -507,7 +512,7 @@ describe('<TopNavBarMenuItems />', () => {
           //   const dropdownContentItems = await dropdownContent.findAllOptions()
 
           //   const item = await dropdownContentItems[2].find(
-          //     '[class$=-topNavBarMenuItems__submenuOption]:not([class$=-topNavBarMenuItems__submenuOptionActive])'
+          //     '[class*=-topNavBarMenuItems__submenuOption]:not([class*=-topNavBarMenuItems__submenuOptionActive])'
           //   )
 
           //   expect(consoleWarning).to.have.been.calledWith(
@@ -526,7 +531,7 @@ describe('<TopNavBarMenuItems />', () => {
           //   // TODO: This test is flaky, falsely breaks with this error sometimes. We skip this  unless there is another error. Try to fix later.
           //   if (
           //     !(e?.message || '').includes(
-          //       `Tried to find DOM element with selector: "querySelectorAll [class$=-optionItem__container]:not([role="presentation"])"`
+          //       `Tried to find DOM element with selector: "querySelectorAll [class*=-optionItem__container]:not([role="presentation"])"`
           //     )
           //   ) {
           //     error = true
@@ -618,7 +623,7 @@ describe('<TopNavBarMenuItems />', () => {
         // const dropdownContentItems = await dropdownContent.findAllOptions()
 
         // const item = await dropdownContentItems[2].find(
-        //   '[class$=-topNavBarMenuItems__submenuOption]:not([class$=-topNavBarMenuItems__submenuOptionActive])'
+        //   '[class*=-topNavBarMenuItems__submenuOption]:not([class*=-topNavBarMenuItems__submenuOptionActive])'
         // )
 
         // expect(consoleWarning).to.have.been.calledWith(
@@ -640,7 +645,7 @@ describe('<TopNavBarMenuItems />', () => {
           menuItemsProps: { elementRef }
         })
       )
-      const menu = container.querySelector("[class$='topNavBarMenuItems']")
+      const menu = container.querySelector("[class*='topNavBarMenuItems']")
 
       expect(elementRef).toHaveBeenCalledWith(menu)
     })

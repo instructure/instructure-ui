@@ -62,7 +62,7 @@ describe('Day', () => {
       </Day>
     )
     const screenReaderContent = container.querySelector(
-      '[class$="-screenReaderContent"]'
+      '[class*="-screenReaderContent"]'
     )
 
     expect(screenReaderContent).toBeInTheDocument()
@@ -75,7 +75,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const today = container.querySelector('[class$="-calendarDay"]')
+    const today = container.querySelector('[class*="-calendarDay"]')
 
     expect(today).toHaveAttribute('aria-current', 'date')
 
@@ -84,7 +84,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const day = container.querySelector('[class$="-calendarDay"]')
+    const day = container.querySelector('[class*="-calendarDay"]')
 
     expect(day).not.toHaveAttribute('aria-current', 'date')
   })
@@ -95,7 +95,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const day = container.querySelector('[class$="-calendarDay"]')
+    const day = container.querySelector('[class*="-calendarDay"]')
 
     expect(day).not.toHaveAttribute('aria-selected')
 
@@ -104,7 +104,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const daySelected = container.querySelector('[class$="-calendarDay"]')
+    const daySelected = container.querySelector('[class*="-calendarDay"]')
 
     expect(daySelected).not.toHaveAttribute('aria-selected')
   })
@@ -115,7 +115,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const day = container.querySelector('[class$="-calendarDay"]')
+    const day = container.querySelector('[class*="-calendarDay"]')
     expect(day).toHaveAttribute('aria-selected', 'false')
 
     rerender(
@@ -128,7 +128,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const daySelected = container.querySelector('[class$="-calendarDay"]')
+    const daySelected = container.querySelector('[class*="-calendarDay"]')
     expect(daySelected).toHaveAttribute('aria-selected', 'true')
 
     rerender(
@@ -141,7 +141,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const dayCell = container.querySelector('[class$="-calendarDay"]')
+    const dayCell = container.querySelector('[class*="-calendarDay"]')
     expect(dayCell).toHaveAttribute('aria-selected', 'false')
 
     rerender(
@@ -154,7 +154,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const dayCellSelected = container.querySelector('[class$="-calendarDay"]')
+    const dayCellSelected = container.querySelector('[class*="-calendarDay"]')
     expect(dayCellSelected).toHaveAttribute('aria-selected', 'true')
   })
 
@@ -167,7 +167,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const day = container.querySelector('[class$="-calendarDay"]')
+    const day = container.querySelector('[class*="-calendarDay"]')
 
     await userEvent.click(day!)
 
@@ -194,7 +194,7 @@ describe('Day', () => {
       </Day>
     )
 
-    const day = container.querySelector('[class$="-calendarDay"]')!
+    const day = container.querySelector('[class*="-calendarDay"]')!
 
     userEvent.type(day, '{enter}')
 
@@ -219,7 +219,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const day = container.querySelector('[class$="-calendarDay"]')!
+    const day = container.querySelector('[class*="-calendarDay"]')!
 
     userEvent.click(day)
 
@@ -243,7 +243,7 @@ describe('Day', () => {
         8
       </Day>
     )
-    const day = container.querySelector('[class$="-calendarDay"]')
+    const day = container.querySelector('[class*="-calendarDay"]')
 
     expect(day).toEqual(element)
   })
@@ -255,7 +255,7 @@ describe('Day', () => {
           8
         </Day>
       )
-      const day = container.querySelector('[class$="-calendarDay"]')
+      const day = container.querySelector('[class*="-calendarDay"]')
 
       expect(day?.tagName).toEqual('SPAN')
     })
@@ -266,7 +266,7 @@ describe('Day', () => {
           8
         </Day>
       )
-      const day = container.querySelector('[class$="-calendarDay"]')
+      const day = container.querySelector('[class*="-calendarDay"]')
 
       expect(day?.tagName).toEqual('BUTTON')
     })
@@ -282,7 +282,7 @@ describe('Day', () => {
           8
         </Day>
       )
-      const day = container.querySelector('[class$="-calendarDay"]')
+      const day = container.querySelector('[class*="-calendarDay"]')
 
       expect(day?.tagName).toEqual('LI')
     })

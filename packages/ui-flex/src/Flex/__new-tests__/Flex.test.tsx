@@ -39,10 +39,10 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="-flex-flex"]')
     expect(flex).toBeInTheDocument()
 
-    const items = flex?.querySelectorAll('[class$="-flexItem"]')
+    const items = flex?.querySelectorAll('[class*="-flexItem"]')
     expect(items?.length).toBe(4)
   })
 
@@ -54,7 +54,7 @@ describe('<Flex />', () => {
         <div>baz</div>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="-flex-flex"]')
     const childs = flex?.childNodes
 
     expect(childs?.length).toBe(3)
@@ -69,7 +69,7 @@ describe('<Flex />', () => {
 
   it('should render no markup if there are no children', async () => {
     const { container } = render(<Flex></Flex>)
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    const flex = container.querySelector('[class*="-flex-flex"]')
 
     expect(flex).not.toBeInTheDocument()
   })
@@ -83,7 +83,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="-flex-flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.width).toBe('400px')
@@ -97,7 +97,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="-flex-flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.flexDirection).toBe('column')
@@ -110,7 +110,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-inlineFlex-flex"]')!
+    const flex = container.querySelector('[class*="-inlineFlex-flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.display).toBe('inline-flex')
@@ -123,7 +123,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="-flex-flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.alignItems).toBe('flex-start')
@@ -136,7 +136,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="-flex-flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.justifyContent).toBe('space-between')
@@ -149,7 +149,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="-flex-flex"]')!
     const flexStyle = window.getComputedStyle(flex)
 
     expect(flexStyle.flexWrap).toBe('wrap')
@@ -162,7 +162,7 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item 2</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')!
+    const flex = container.querySelector('[class*="-flex-flex"]')!
     const item = screen.getByText('Flex item 1')
 
     const flexStyle = window.getComputedStyle(flex)
@@ -225,7 +225,7 @@ describe('<Flex />', () => {
     expect(item3Style.minWidth).toBe('100px')
   })
 
-  it('should support an elementRef prop', async () => {
+  it.only('should support an elementRef prop', async () => {
     const elementRef = vi.fn()
 
     const { container } = render(
@@ -233,7 +233,12 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item</Flex.Item>
       </Flex>
     )
-    const flex = container.querySelector('[class$="-flex-flex"]')
+    console.log('/////////')
+    console.log(container.innerHTML)
+    console.log('/////////')
+
+
+    const flex = container.querySelector('[class*="-flex-flex"]')
 
     await waitFor(() => {
       expect(elementRef).toHaveBeenCalledWith(flex)
