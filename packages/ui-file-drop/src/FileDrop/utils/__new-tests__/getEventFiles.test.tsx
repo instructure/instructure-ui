@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { getEventFiles } from '../getEventFiles'
 import React from 'react'
+import { expect } from 'vitest'
+import { getEventFiles } from '../getEventFiles'
 
 describe('getEventFiles', () => {
   const chromeDragEnter = {
@@ -69,18 +69,18 @@ describe('getEventFiles', () => {
   it('should return items on chrome dragenter event', () => {
     expect(
       getEventFiles(chromeDragEnter as unknown as React.DragEvent)
-    ).to.be.equal(chromeDragEnter.dataTransfer.items)
+    ).toEqual(chromeDragEnter.dataTransfer.items)
   })
 
   it('should return items on a firefox dragenter event', () => {
     expect(
       getEventFiles(firefoxDragEnter as unknown as React.DragEvent)
-    ).to.be.equal(firefoxDragEnter.dataTransfer.items)
+    ).toEqual(firefoxDragEnter.dataTransfer.items)
   })
 
   it('should return empty array on a safari dragenter event', () => {
     expect(
       getEventFiles(safariDragEnter as unknown as React.DragEvent).length
-    ).to.be.equal(0)
+    ).toEqual(0)
   })
 })

@@ -25,14 +25,16 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FileDrop } from '../index'
+import { FileDropProps } from '../props'
 
 describe('<FileDrop/>', () => {
   it('should focus the input when focus is called', async () => {
     let inputEl: any
-    render(
+    const { container } = render(
       <FileDrop
         renderLabel="filedrop"
         inputRef={(el: HTMLInputElement | null) => {
@@ -40,7 +42,7 @@ describe('<FileDrop/>', () => {
         }}
       />
     )
-    const input = document.querySelector('input[class$="-fileDrop__input"]')
+    const input = container.querySelector('input[class$="-fileDrop__input"]')
 
     inputEl.focus()
 
@@ -49,9 +51,109 @@ describe('<FileDrop/>', () => {
 
   it('should provide an inputRef prop', async () => {
     const inputRef = vi.fn()
-    render(<FileDrop renderLabel="filedrop" inputRef={inputRef} />)
-    const input = document.querySelector('input[class$="-fileDrop__input"]')
+    const { container } = render(
+      <FileDrop renderLabel="filedrop" inputRef={inputRef} />
+    )
+    const input = container.querySelector('input[class$="-fileDrop__input"]')
 
     expect(inputRef).toHaveBeenCalledWith(input)
+  })
+
+  it('should render', async () => {
+    const { container } = render(<FileDrop renderLabel="fake label" />)
+    const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
+
+    expect(fileDrop).toBeInTheDocument()
+  })
+
+  it('should meet a11y standards', async () => {
+    const { container } = render(<FileDrop renderLabel="fake label" />)
+    const axeCheck = await runAxeCheck(container)
+    expect(axeCheck).toBe(true)
+  })
+
+  describe('interactions', async () => {
+    it('should functionally disable the input if `interaction` is set to disabled', async () => {
+      const { container } = render(
+        <FileDrop renderLabel="Some label" interaction="disabled" />
+      )
+      const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
+
+      expect(fileDrop).toBeDisabled()
+    })
+
+    it('should functionally disable the input if `disabled` is set', async () => {
+      const { container } = render(
+        <FileDrop renderLabel="Some label" disabled />
+      )
+      const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
+
+      expect(fileDrop).toBeDisabled()
+    })
+
+    it('should functionally disable the input if `interaction` is set to readonly', async () => {
+      const { container } = render(
+        <FileDrop renderLabel="Some label" interaction="readonly" />
+      )
+      const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
+
+      expect(fileDrop).toBeDisabled()
+    })
+
+    it('should functionally disable the input if `readOnly` is set', async () => {
+      const { container } = render(
+        <FileDrop renderLabel="Some label" readOnly />
+      )
+      const fileDrop = container.querySelector('[class$="-fileDrop__input"]')
+
+      expect(fileDrop).toBeDisabled()
+    })
+  })
+
+  describe('label handling', async () => {
+    it('renders element label directly', async () => {
+      const label = <section id="test-id">This is an element label</section>
+      const { container } = render(<FileDrop renderLabel={label} />)
+
+      const renderedLabel = container.querySelector('[id="test-id"]')
+
+      expect(renderedLabel).toBeInTheDocument()
+    })
+
+    it('passes isDragAccepted and isDragRejected boolean props to component label', async () => {
+      type RenderLabelProps = {
+        isDragAccepted: boolean
+        isDragRejected: boolean
+        interaction?: string
+      }
+      let result: RenderLabelProps = {} as RenderLabelProps
+      const label: FileDropProps['renderLabel'] = (props) => {
+        result = { ...props }
+        return null
+      }
+
+      render(<FileDrop renderLabel={label} />)
+
+      expect(typeof result.isDragAccepted).toBe('boolean')
+      expect(typeof result.isDragRejected).toBe('boolean')
+    })
+
+    it(`label component's props are false by default`, async () => {
+      type RenderLabelProps = {
+        isDragAccepted: boolean
+        isDragRejected: boolean
+        interaction?: string
+      }
+      let result: RenderLabelProps = {} as RenderLabelProps
+      const label: FileDropProps['renderLabel'] = (props) => {
+        result = { ...props }
+        return null
+      }
+
+      render(<FileDrop renderLabel={label} />)
+
+      expect(result.isDragAccepted).toBe(false)
+      expect(result.isDragRejected).toBe(false)
+    })
   })
 })
