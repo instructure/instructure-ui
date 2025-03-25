@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from 'vitest'
 import { accepts } from '../accepts'
 
 describe('accepts', () => {
@@ -38,36 +37,36 @@ describe('accepts', () => {
   })
 
   it('should take image/* to mean any image type', () => {
-    expect(accepts(dropImage, 'image/*')).to.be.true()
+    expect(accepts(dropImage, 'image/*')).toBe(true)
   })
 
   it('should reject anything that is not an image, given image/*', () => {
-    expect(accepts(dropFile, 'image/*')).to.be.false()
+    expect(accepts(dropFile, 'image/*')).toBe(false)
   })
 
   it('should match the exact file extensions given', () => {
-    expect(accepts(dropImage, '.jpg')).to.be.true()
-    expect(accepts(dropImage, '.jpg, .png')).to.be.true()
-    expect(accepts(dropImage, '.png')).to.be.false()
-    expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
-    expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
+    expect(accepts(dropImage, '.jpg')).toBe(true)
+    expect(accepts(dropImage, '.jpg, .png')).toBe(true)
+    expect(accepts(dropImage, '.png')).toBe(false)
+    expect(accepts(dropFile, '.jpg, .pdf')).toBe(true)
+    expect(accepts(dropFile, '.jpg, .pdf')).toBe(true)
   })
 
   it('should handle chrome dragenter file data', () => {
-    expect(accepts(chromeDragEnterFile, 'image/*')).to.be.true()
-    expect(accepts(chromeDragEnterFile, '.jpeg')).to.be.true()
-    expect(accepts(chromeDragEnterFile, '.png')).to.not.be.true()
-    expect(accepts(chromeDragEnterFile, '.pdf')).to.not.be.true()
+    expect(accepts(chromeDragEnterFile, 'image/*')).toBe(true)
+    expect(accepts(chromeDragEnterFile, '.jpeg')).toBe(true)
+    expect(accepts(chromeDragEnterFile, '.png')).not.toBe(true)
+    expect(accepts(chromeDragEnterFile, '.pdf')).not.toBe(true)
   })
 
   it(`should always be true for firefox's dragenter file data`, () => {
-    expect(accepts(firefoxDragEnterFile, 'image/*')).to.be.true()
-    expect(accepts(firefoxDragEnterFile, '.jpeg')).to.be.true()
-    expect(accepts(firefoxDragEnterFile, '.png')).to.be.true()
-    expect(accepts(firefoxDragEnterFile, '.pdf')).to.be.true()
+    expect(accepts(firefoxDragEnterFile, 'image/*')).toBe(true)
+    expect(accepts(firefoxDragEnterFile, '.jpeg')).toBe(true)
+    expect(accepts(firefoxDragEnterFile, '.png')).toBe(true)
+    expect(accepts(firefoxDragEnterFile, '.pdf')).toBe(true)
   })
 
   it('allows extensions without leading dot', () => {
-    expect(accepts(dropImage, 'jpg, png')).to.be.true()
+    expect(accepts(dropImage, 'jpg, png')).toBe(true)
   })
 })
