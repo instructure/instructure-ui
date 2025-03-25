@@ -88,7 +88,7 @@ describe('<Badge />', () => {
       themeOverride: { countOffset }
     })
 
-    const badge = container.querySelector('[class$=-badge]')
+    const badge = container.querySelector('[class*=-badge]')
     const badgeStyle = badge && getComputedStyle(badge)
 
     expect(badge).not.toBeNull()

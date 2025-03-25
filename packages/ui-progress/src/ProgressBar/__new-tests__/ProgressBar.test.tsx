@@ -66,7 +66,7 @@ describe('<ProgressBar />', () => {
         renderValue={({ valueNow, valueMax }) => `${valueNow} of ${valueMax}`}
       />
     )
-    const progress = container.querySelector('[class$="-progressBar"]')
+    const progress = container.querySelector('[class*="-progressBar"]')
 
     expect(progress).toHaveTextContent(`${current} of ${max}`)
   })
@@ -95,7 +95,7 @@ describe('<ProgressBar />', () => {
       />
     )
     const progressMeter = container.querySelector(
-      '[class$="-progressBar__trackValue"]'
+      '[class*="-progressBar__trackValue"]'
     )
 
     expect(progressMeter).not.toHaveTextContent('33%')
@@ -113,7 +113,7 @@ describe('<ProgressBar />', () => {
       />
     )
     const progressMeter = container.querySelector(
-      '[class$="-progressBar__trackValue"]'
+      '[class*="-progressBar__trackValue"]'
     )
 
     expect(progressMeter).toHaveTextContent('33%')

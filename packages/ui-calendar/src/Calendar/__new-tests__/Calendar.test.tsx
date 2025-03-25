@@ -140,7 +140,7 @@ describe('<Calendar />', () => {
     )
 
     const calendarDays = container.querySelectorAll(
-      'span[class$="-calendarDay__day"]'
+      'span[class*="-calendarDay__day"]'
     )
 
     expect(calendarDays.length).toEqual(Calendar.DAY_COUNT)
@@ -376,7 +376,7 @@ describe('<Calendar />', () => {
 
       days.forEach((dayTd, i) => {
         const index = i % 7
-        const day = dayTd.querySelector('span[class$="-calendarDay"]')
+        const day = dayTd.querySelector('span[class*="-calendarDay"]')
 
         expect(day).toHaveAttribute(
           'aria-describedby',

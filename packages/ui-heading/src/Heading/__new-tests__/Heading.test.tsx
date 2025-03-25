@@ -31,14 +31,14 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {
     const { container } = render(<Heading>Hello World</Heading>)
-    const heading = container.querySelector('[class$="-heading"]')
+    const heading = container.querySelector('[class*="-heading"]')
 
     expect(heading!.tagName).toBe('H2')
   })
 
   it('should render the children as text content', async () => {
     const { container } = render(<Heading>Hello World</Heading>)
-    const heading = container.querySelector('[class$="-heading"]')
+    const heading = container.querySelector('[class*="-heading"]')
 
     expect(heading).toHaveTextContent('Hello World')
   })

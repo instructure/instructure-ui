@@ -61,7 +61,7 @@ describe('<TopNavBarActionItems />', () => {
     const { container } = render(getActionItems({ actionItemsCount: 6 }))
 
     const actionItems = container.querySelector(
-      "[class$='-topNavBarActionItems']"
+      "[class*='-topNavBarActionItems']"
     )
 
     expect(actionItems).toBeInTheDocument()
@@ -71,7 +71,7 @@ describe('<TopNavBarActionItems />', () => {
     const { container } = render(getActionItems({ actionItemsCount: 0 }))
 
     const actionItems = container.querySelector(
-      "[class$='-topNavBarActionItems']"
+      "[class*='-topNavBarActionItems']"
     )
     expect(actionItems).not.toBeInTheDocument()
   })
@@ -86,7 +86,7 @@ describe('<TopNavBarActionItems />', () => {
         })
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(elementRef).toHaveBeenCalledWith(actionItems)
@@ -104,7 +104,7 @@ describe('<TopNavBarActionItems />', () => {
         </SmallViewportModeWrapper>
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(elementRef).toHaveBeenCalledWith(actionItems)
@@ -122,7 +122,7 @@ describe('<TopNavBarActionItems />', () => {
         })
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(actionItems).toHaveAttribute('aria-label', 'Test label')
@@ -139,7 +139,7 @@ describe('<TopNavBarActionItems />', () => {
         </SmallViewportModeWrapper>
       )
       const actionItems = container.querySelector(
-        "[class$='-topNavBarActionItems']"
+        "[class*='-topNavBarActionItems']"
       )
 
       expect(actionItems).toHaveAttribute('aria-label', 'Test label')
@@ -151,7 +151,7 @@ describe('<TopNavBarActionItems />', () => {
       it('should not truncate the list', () => {
         const { container } = render(getActionItems({ actionItemsCount: 6 }))
         const truncatedList = container.querySelector(
-          '[class$="truncateList-topNavBarActionItems"]'
+          '[class*="truncateList-topNavBarActionItems"]'
         )
 
         expect(truncatedList).not.toBeInTheDocument()
@@ -173,7 +173,7 @@ describe('<TopNavBarActionItems />', () => {
           </SmallViewportModeWrapper>
         )
         const truncatedList = container.querySelector(
-          '[class$="truncateList-topNavBarActionItems"]'
+          '[class*="truncateList-topNavBarActionItems"]'
         )
 
         expect(truncatedList).toBeInTheDocument()
@@ -196,10 +196,10 @@ describe('<TopNavBarActionItems />', () => {
       //   )
 
       //   const truncatedList = container.querySelector(
-      //     "[class$='truncateList-topNavBarActionItems']"
+      //     "[class*='truncateList-topNavBarActionItems']"
       //   )
       //   const listItems = container.querySelectorAll(
-      //     "[class$='truncateList__listItem']"
+      //     "[class*='truncateList__listItem']"
       //   )
 
       //   // const hiddenMenuTrigger = await truncatedList.findMenuTriggerItem()
@@ -228,10 +228,10 @@ describe('<TopNavBarActionItems />', () => {
           </SmallViewportModeWrapper>
         )
         const truncatedList = container.querySelector(
-          "[class$='truncateList-topNavBarActionItems']"
+          "[class*='truncateList-topNavBarActionItems']"
         )
         const listItems = container.querySelectorAll(
-          "[class$='truncateList__listItem']"
+          "[class*='truncateList__listItem']"
         )
         const firstButton = listItems[0].querySelector('a')
 
@@ -256,7 +256,7 @@ describe('<TopNavBarActionItems />', () => {
       //     </SmallViewportModeWrapper>
       //   )
       //   const truncatedList = container.querySelector(
-      //     "[class$='truncateList-topNavBarActionItems']"
+      //     "[class*='truncateList-topNavBarActionItems']"
       //   )
 
       //   expect(truncatedList).toBeInTheDocument()
@@ -304,7 +304,7 @@ describe('<TopNavBarActionItems />', () => {
         </SmallViewportModeWrapper>
       )
       const listItems = container.querySelectorAll(
-        "[class$='truncateList__listItem']"
+        "[class*='truncateList__listItem']"
       )
       const icons = container.querySelectorAll('svg')
       const expectedErrorMessage =
@@ -328,12 +328,12 @@ describe('<TopNavBarActionItems />', () => {
         </SmallViewportModeWrapper>
       )
       const listItems = container.querySelectorAll(
-        "[class$='truncateList__listItem']"
+        "[class*='truncateList__listItem']"
       )
       const firstButton = listItems[0].querySelector('a')
       const icon = listItems[0].querySelector('svg')
       const screenReaderContent = container.querySelector(
-        "[class$='-screenReaderContent']"
+        "[class*='-screenReaderContent']"
       )
 
       expect(listItems.length).toEqual(1)
