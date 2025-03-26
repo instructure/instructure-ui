@@ -6030,8 +6030,8 @@ const popoverProps={placement:"bottom start",withArrow:!0,shouldReturnFocus:!0,s
 return(0,emotion_react_browser_esm.Y)(Popover.A,popoverProps,customPopoverConfig.children)}render(){const styles=this.props.styles
 let content
 return content=this.shouldRenderPopover?(0,emotion_react_browser_esm.Y)(InstUISettingsProvider.v,{theme:{componentOverrides:{View:{stackingTopmost:10001}}}},this.renderPopover()):this.shouldRenderSubmenu?(0,emotion_react_browser_esm.Y)(InstUISettingsProvider.v,{theme:{componentOverrides:{View:{stackingTopmost:10001}}}},this.renderDropdownMenu()):this.renderContent(),(0,emotion_react_browser_esm.Y)("div",{ref:this.handleRef,css:null==styles?void 0:styles.topNavBarItem},content)}},_TopNavBarItem.displayName="TopNavBarItem",_TopNavBarItem.componentId="TopNavBar.Item",_TopNavBarItem.propTypes=propTypes,_TopNavBarItem.allowedProps=allowedProps,_TopNavBarItem.defaultProps={status:"default",variant:"default",showSubmenuChevron:!0,shouldCloseOnClick:"auto"},_TopNavBarItem.contextType=TopNavBarContext,_class=_TopNavBarItem))||_class)||_class)||_class
-var generateId=__webpack_require__(52835),generateInstanceCounterMap=__webpack_require__(55262)
-const mapItemsForDrilldown=(itemList,options={})=>{const submenus=[],currentPageId=options.currentPageId,renderOptionContent=options.renderOptionContent,customPopoverIdMap=(0,generateInstanceCounterMap.V)()
+var generateId=__webpack_require__(52835)
+const mapItemsForDrilldown=(itemList,options={})=>{const submenus=[],currentPageId=options.currentPageId,renderOptionContent=options.renderOptionContent,customPopoverIdMap=new Map
 return react.Children.forEach(itemList,(item=>{if(!item||!(0,matchComponentTypes.w)(item,[TopNavBarItem]))return
 const _item$props=item.props,renderSubmenu=_item$props.renderSubmenu,customPopoverConfig=_item$props.customPopoverConfig,id=_item$props.id,children=_item$props.children,status=_item$props.status,variant=_item$props.variant,href=_item$props.href,onClick=_item$props.onClick,shouldCloseOnClick=_item$props.shouldCloseOnClick
 let customPopoverId,optionSubPageId,submenu=renderSubmenu,customPopover=customPopoverConfig
