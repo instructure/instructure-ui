@@ -35,8 +35,7 @@ const generateId = (instanceName: string, map: Map<string, number>) => {
   } else {
     map.set(instanceName, map.get(instanceName)! + 1)
   }
-
-  return `${instanceName}_${map.get(instanceName!)}`
+  return `${instanceName}___${map.get(instanceName!)}`
 }
 
 export default generateId
