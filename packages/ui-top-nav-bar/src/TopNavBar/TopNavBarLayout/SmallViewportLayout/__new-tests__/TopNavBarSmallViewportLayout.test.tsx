@@ -442,7 +442,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
     })
 
     describe('items with "customPopoverConfig" prop', () => {
-      it.skip('should render content of "customPopoverConfig" prop in the dropdown menu', async () => {
+      it('should render content of "customPopoverConfig" prop in the dropdown menu', async () => {
         render(
           <SmallViewportModeWrapper>
             <TopNavBarSmallViewportLayout
