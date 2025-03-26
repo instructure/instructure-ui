@@ -22,8 +22,21 @@
  * SOFTWARE.
  */
 import type { DeterministicIdProviderValue } from './DeterministicIdContextProvider'
+
+declare global {
+  // eslint-disable-next-line no-var
+  var __INSTUI_GLOBAL_INSTANCE_COUNTER_MAP__: Map<string, number>
+}
+const __INSTUI_GLOBAL_INSTANCE_COUNTER_MAP__ =
+  '__INSTUI_GLOBAL_INSTANCE_COUNTER_MAP__'
+
 function generateInstanceCounterMap(): DeterministicIdProviderValue {
-  return new Map<string, number>()
+  if (globalThis[__INSTUI_GLOBAL_INSTANCE_COUNTER_MAP__]) {
+    return globalThis[__INSTUI_GLOBAL_INSTANCE_COUNTER_MAP__]
+  }
+  const map = new Map<string, number>()
+  globalThis[__INSTUI_GLOBAL_INSTANCE_COUNTER_MAP__] = map
+  return map
 }
 export default generateInstanceCounterMap
 export { generateInstanceCounterMap }
