@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 import React, { useState } from 'react'
-import { Modal, View } from '../../packages/ui'
+import { Modal, View, Button } from '@instructure/ui'
+import 'cypress-real-events'
 
 import '../support/component'
 
@@ -104,5 +105,70 @@ describe('<Modal/>', () => {
 
     cy.get('body').click(0, 0)
     cy.wrap(handleDismissSpy).should('have.been.calledOnceWith', 1)
+  })
+
+  it('should not close when button is clicked to rerender content', () => {
+    const TestModal = () => {
+      const [isOpen, setIsOpen] = useState(false)
+      const [state, setState] = useState({
+        content:
+          'This content should change by clicking on the Change content button',
+        isButtonVisible: true
+      })
+
+      return (
+        <div>
+          <Button onClick={() => setIsOpen(true)}>Open the Modal</Button>
+
+          {isOpen && (
+            <Modal
+              label="label"
+              open
+              onDismiss={() => setIsOpen(false)}
+              shouldCloseOnDocumentClick
+            >
+              <Modal.Body>
+                <div data-testid="modal-content">{state.content}</div>
+                {state.isButtonVisible && (
+                  <Button
+                    onClick={() =>
+                      setState({
+                        content: 'The content has changed!',
+                        isButtonVisible: false
+                      })
+                    }
+                    data-testid="change-content-button"
+                  >
+                    Change content
+                  </Button>
+                )}
+                <Button
+                  data-testid="close-button"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </Button>
+              </Modal.Body>
+            </Modal>
+          )}
+        </div>
+      )
+    }
+
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').realClick()
+
+    cy.get('[data-testid="modal-content"]').should('be.visible')
+
+    cy.get('[data-testid="change-content-button"]')
+      .realClick()
+      .then(() => cy.get('[data-testid="modal-content"]').should('be.visible'))
+
+    cy.get('[data-testid="close-button"]').should('be.visible')
+
+    cy.get('[data-testid="close-button"]').realClick()
+
+    cy.get('[data-testid="modal-content"]').should('not.exist')
   })
 })
