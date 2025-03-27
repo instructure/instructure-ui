@@ -295,6 +295,14 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
       parent: this._containerRef
     })
 
+    // from the a11y team:
+    // axe devtools and other automated a11y tests both flagging this issue,
+    // which can be observed while navigating with keyboard:
+    // Ensure elements that have scrollable content are accessible by keyboard
+    // To solve this problem, you need to fix at least (1) of the following:
+    // Element should have focusable content, Element should be focusable
+    this._editorView.scrollDOM.tabIndex = 0
+
     if (autofocus) {
       this.focus()
     }
