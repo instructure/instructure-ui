@@ -44,7 +44,11 @@ type InstUIProviderProps = {
   theme?: ThemeOrOverride
 
   /**
-   * A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
+   * @deprecated the `instanceCounterMap` prop is deprecated. You don't need to supply the
+   * `instanceCounterMap` to the component. It handles it internally.
+   *
+   * A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of
+   * specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
    */
   instanceCounterMap?: DeterministicIdProviderValue
 } & (
@@ -57,14 +61,16 @@ type InstUIProviderProps = {
        */
       dir: 'ltr' | 'rtl'
       /**
-       *  Deprecated property, remove in 10.0.0
+       *  @deprecated remove in v11
+       *  The element type to render as
        */
       as?: AsElementType
     }
   | {
       dir?: never
       /**
-       *  Deprecated property, remove in 10.0.0
+       *  @deprecated remove in v11
+       *  The element type to render as
        */
       as?: never
     }

@@ -29,8 +29,7 @@ import '@testing-library/jest-dom'
 
 import {
   withDeterministicId,
-  DeterministicIdContextProvider,
-  generateInstanceCounterMap
+  DeterministicIdContextProvider
 } from '../DeterministicIdContext'
 import type { WithDeterministicIdProps } from '../DeterministicIdContext'
 
@@ -106,9 +105,7 @@ describe('DeterministicIdContext', () => {
   it('should generate unique ids with provider only', () => {
     const Wrapper = ({ children }: any) => {
       return (
-        <DeterministicIdContextProvider
-          instanceCounterMap={generateInstanceCounterMap()}
-        >
+        <DeterministicIdContextProvider>
           <div data-testid="wrapper">{children}</div>
         </DeterministicIdContextProvider>
       )
@@ -122,5 +119,26 @@ describe('DeterministicIdContext', () => {
     const el = screen.getByTestId('wrapper')
 
     expect(uniqueIds(el)).toBe(true)
+  })
+
+  it('should use a global object for ID counter', () => {
+    const __INSTUI_GLOBAL_INSTANCE_COUNTER__ =
+      '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
+    const counterValue = 345
+    globalThis[__INSTUI_GLOBAL_INSTANCE_COUNTER__].set(
+      'TestComponent',
+      counterValue
+    )
+    render(
+      <div data-testid="test-components">
+        <TestComponent />
+        <TestComponent />
+        <TestComponent />
+        <TestComponent />
+        <TestComponent />
+      </div>
+    )
+    const instanceCounter = globalThis[__INSTUI_GLOBAL_INSTANCE_COUNTER__]
+    expect(instanceCounter.get('TestComponent')).toBe(counterValue + 5)
   })
 })
