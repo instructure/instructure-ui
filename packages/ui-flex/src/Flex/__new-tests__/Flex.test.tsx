@@ -225,7 +225,7 @@ describe('<Flex />', () => {
     expect(item3Style.minWidth).toBe('100px')
   })
 
-  it.only('should support an elementRef prop', async () => {
+  it('should support an elementRef prop', async () => {
     const elementRef = vi.fn()
 
     const { container } = render(
@@ -233,11 +233,6 @@ describe('<Flex />', () => {
         <Flex.Item>Flex item</Flex.Item>
       </Flex>
     )
-    console.log('/////////')
-    console.log(container.innerHTML)
-    console.log('/////////')
-
-
     const flex = container.querySelector('[class*="-flex-flex"]')
 
     await waitFor(() => {
