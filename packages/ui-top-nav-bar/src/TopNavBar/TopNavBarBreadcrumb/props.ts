@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ComponentElement } from 'react'
+import { ComponentElement } from 'react'
 import type { ViewOwnProps } from '@instructure/ui-view'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import { TopNavBarContextType } from '../TopNavBarContext'

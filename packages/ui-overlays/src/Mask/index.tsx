@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import noScroll from 'no-scroll'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 

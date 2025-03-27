@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
@@ -38,7 +37,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'

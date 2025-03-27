@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Select as UISelect } from '@instructure/ui-select'
@@ -77,7 +77,7 @@ class Select extends Component<SelectProps, SelectState> {
   getOptionData(options: React.ReactElement[]) {
     //TODO remove any
     const data: any = []
-    Children.forEach(options, (child: React.ReactElement) => {
+    Children.forEach(options, (child: ReactElement) => {
       const { value, children, ...rest } = child.props
       data.push({ value, label: children, ...rest })
     })

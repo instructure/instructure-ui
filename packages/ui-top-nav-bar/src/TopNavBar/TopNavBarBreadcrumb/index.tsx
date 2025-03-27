@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component, ReactElement } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import {
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState,
@@ -31,7 +30,7 @@ import {
   propTypes
 } from './props'
 import TopNavBar from '../index'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -108,12 +107,10 @@ class TopNavBarBreadcrumb extends Component<
       )
     }
 
-    const breadcrumbElement = React.Children.toArray(
-      children
-    )[0] as ReactElement
+    const breadcrumbElement = Children.toArray(children)[0] as ReactElement
     const breadCrumbLinks = breadcrumbElement.props.children
-    const lastButOneLink = React.Children.toArray(breadCrumbLinks)[
-      React.Children.count(breadCrumbLinks) - 2
+    const lastButOneLink = Children.toArray(breadCrumbLinks)[
+      Children.count(breadCrumbLinks) - 2
     ] as ReactElement
 
     return (

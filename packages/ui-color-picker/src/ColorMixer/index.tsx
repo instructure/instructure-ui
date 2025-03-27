@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { isValid } from '@instructure/ui-color-utils'

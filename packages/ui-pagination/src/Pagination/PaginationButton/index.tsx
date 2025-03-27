@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { BaseButton } from '@instructure/ui-buttons'
 import { omitProps } from '@instructure/ui-react-utils'

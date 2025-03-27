@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { ApplyLocale } from '../index'
 import { ApplyLocaleContext } from '../ApplyLocaleContext'
 
-class LocalizableComponent extends React.Component {
+class LocalizableComponent extends Component {
   declare context: React.ContextType<typeof ApplyLocaleContext>
   static contextType = ApplyLocaleContext
 

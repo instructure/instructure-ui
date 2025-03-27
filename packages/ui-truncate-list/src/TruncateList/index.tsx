@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Children, Component } from 'react'
 
 import { debounce } from '@instructure/debounce'
@@ -35,7 +34,7 @@ import {
   getComputedStyle
 } from '@instructure/ui-dom-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

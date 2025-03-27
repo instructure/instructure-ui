@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { render, waitFor, screen } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { vi, expect } from 'vitest'

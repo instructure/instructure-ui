@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { ComponentElement, Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
@@ -89,7 +88,7 @@ class AppNav extends Component<AppNavProps> {
     }
   }
 
-  renderMenu(items: React.ComponentElement<AppNavItemProps, Item>[]) {
+  renderMenu(items: ComponentElement<AppNavItemProps, Item>[]) {
     return (
       <Menu
         trigger={
@@ -98,7 +97,7 @@ class AppNav extends Component<AppNavProps> {
           />
         }
       >
-        {(items as React.ComponentElement<AppNavItemProps, Item>[]).map(
+        {(items as ComponentElement<AppNavItemProps, Item>[]).map(
           (item, index) => {
             return (
               <Menu.Item
@@ -149,7 +148,7 @@ class AppNav extends Component<AppNavProps> {
           onUpdate={this.props.onUpdate}
           renderHiddenItemMenu={(hiddenChildren) =>
             this.renderMenu(
-              hiddenChildren as React.ComponentElement<AppNavItemProps, Item>[]
+              hiddenChildren as ComponentElement<AppNavItemProps, Item>[]
             )
           }
           itemSpacing={styles?.horizontalMargin}

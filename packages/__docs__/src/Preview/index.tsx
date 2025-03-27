@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
-import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { compileAndRenderExample } from '../compileAndRenderExample'

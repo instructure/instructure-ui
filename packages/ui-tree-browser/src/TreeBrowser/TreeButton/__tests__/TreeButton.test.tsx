@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, locator, stub } from '@instructure/ui-test-utils'
 
 import { TreeButton } from '../index'

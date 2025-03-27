@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
+import { isValidElement, ComponentType, ReactNode } from 'react'
 import { generatePropCombinations } from './generatePropCombinations'
-import React, { ComponentType, ReactNode } from 'react'
 
 export type StoryConfig<Props> = {
   /**
@@ -100,7 +100,7 @@ export type Example<Props> = {
 
 /**
  * Generates examples for the given component based on the given configuration.
- * @param Component A React component
+ * @param Component A Component
  * @param config A configuration object (stored in xy.examples.jsx files in InstUI)
  * @returns Array of examples broken into sections and pages if configured to do so.
  * @module generateComponentExamples
@@ -219,7 +219,7 @@ export function generateComponentExamples<Props extends Record<string, any>>(
     if (!currObject) {
       return
     }
-    if (React.isValidElement(currObject)) {
+    if (isValidElement(currObject)) {
       currString.push(JSON.stringify(currObject))
     } else if (typeof currObject === 'object') {
       for (const [key, value] of Object.entries(currObject)) {

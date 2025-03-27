@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 'use client'
-import React from 'react'
+
 import { InstUISettingsProvider, View } from '@instructure/ui'
 
 export default function Component({ params }: any) {
@@ -30,7 +30,7 @@ export default function Component({ params }: any) {
     .default as React.ElementType
   return (
     <InstUISettingsProvider>
-      <View as='div' margin='small' padding='large' background='primary'>
+      <View as="div" margin="small" padding="large" background="primary">
         <h1>
           Component{' '}
           {params.componentName

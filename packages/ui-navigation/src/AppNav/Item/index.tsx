@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { ComponentElement, Component } from 'react'
 
 import { logError as error } from '@instructure/console'
 import {
@@ -38,7 +37,7 @@ import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -108,7 +107,7 @@ class Item extends Component<AppNavItemProps> {
     const label = callRenderProp(renderLabel)
 
     const labelIsForScreenReaders = matchComponentTypes<
-      React.ComponentElement<ScreenReaderContentProps, ScreenReaderContent>
+      ComponentElement<ScreenReaderContentProps, ScreenReaderContent>
     >(label, [ScreenReaderContent])
 
     if (icon) {

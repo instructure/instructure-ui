@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'

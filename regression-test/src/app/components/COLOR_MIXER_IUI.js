@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { ColorMixer } from '@instructure/ui'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const COLOR_MIXER_IUI = () => {
   const [value, setValue] = useState('#ff0')

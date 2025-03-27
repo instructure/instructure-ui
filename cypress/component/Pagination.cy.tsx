@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { Pagination, ScreenReaderContent } from '../../packages/ui'
+
+import { Pagination, ScreenReaderContent } from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'

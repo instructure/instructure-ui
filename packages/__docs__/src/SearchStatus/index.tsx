@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { IconSearchLine } from '@instructure/ui-icons'
 
 import generateStyle from './styles'

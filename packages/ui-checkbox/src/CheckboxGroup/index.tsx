@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+import { Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
 import {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { useState } from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -33,7 +33,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Tabs } from '../index'
 
 const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   return (
     <Tabs
       onRequestTabChange={(_event, { index }) => {

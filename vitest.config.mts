@@ -25,8 +25,12 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vitest/config'
+import babel from 'vite-plugin-babel'
 
 export default defineConfig({
+  plugins: [
+    babel(),
+  ],
   test: {
     include: ['**/__new-tests__/**/*.test.tsx'],
     globals: true,

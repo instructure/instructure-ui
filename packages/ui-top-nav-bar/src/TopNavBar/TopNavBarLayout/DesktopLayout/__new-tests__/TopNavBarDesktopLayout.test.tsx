@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -184,7 +183,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         <TopNavBarDesktopLayout {...defaultBlocks} renderBrand={getBrand()} />
       )
       const brandContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__brandContainer']"
+        "[class*='topNavBarDesktopLayout__brandContainer']"
       )
       const brandNameText = screen.getByText('Brand name')
 
@@ -198,10 +197,10 @@ describe('<TopNavBarDesktopLayout />', () => {
       )
 
       const brandContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__brandContainer']"
+        "[class*='topNavBarDesktopLayout__brandContainer']"
       )
       const desktopLayout = container.querySelector(
-        "[class$='-topNavBarDesktopLayout']"
+        "[class*='-topNavBarDesktopLayout']"
       )
 
       expect(brandContainer).not.toBeInTheDocument()
@@ -219,10 +218,10 @@ describe('<TopNavBarDesktopLayout />', () => {
       )
 
       const brandContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__brandContainer']"
+        "[class*='topNavBarDesktopLayout__brandContainer']"
       )
       const desktopLayout = container.querySelector(
-        "[class$='-topNavBarDesktopLayout']"
+        "[class*='-topNavBarDesktopLayout']"
       )
 
       expect(brandContainer).not.toBeInTheDocument()
@@ -240,7 +239,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         // expect(getComputedStyle(component.getDOMNode()).paddingInlineStart).to.equal('0px')
 
         const brandContainer = container.querySelector(
-          "[class$='topNavBarBrand__container']"
+          "[class*='topNavBarBrand__container']"
         )
         const brandContainerStyle = getComputedStyle(brandContainer!)
 
@@ -253,10 +252,10 @@ describe('<TopNavBarDesktopLayout />', () => {
         )
 
         const brandContainer = container.querySelector(
-          "[class$='topNavBarBrand__container']"
+          "[class*='topNavBarBrand__container']"
         )
         const desktopLayout = container.querySelector(
-          "[class$='topNavBarDesktopLayout']"
+          "[class*='topNavBarDesktopLayout']"
         )
 
         // TODO convert to e2e
@@ -279,10 +278,10 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const menuItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__menuItemsContainer']"
+        "[class*='topNavBarDesktopLayout__menuItemsContainer']"
       )
       const menuItem = container.querySelector(
-        "[class$='topNavBarItem__content']"
+        "[class*='topNavBarItem__content']"
       )
 
       expect(menuItemsContainer).toBeInTheDocument()
@@ -298,10 +297,10 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const menuItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__menuItemsContainer']"
+        "[class*='topNavBarDesktopLayout__menuItemsContainer']"
       )
       const actionItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        "[class*='topNavBarDesktopLayout__actionItemsContainer']"
       )
 
       expect(actionItemsContainer).toBeInTheDocument()
@@ -317,10 +316,10 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const menuItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__menuItemsContainer']"
+        "[class*='topNavBarDesktopLayout__menuItemsContainer']"
       )
       const actionItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        "[class*='topNavBarDesktopLayout__actionItemsContainer']"
       )
 
       expect(actionItemsContainer).toBeInTheDocument()
@@ -338,7 +337,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const actionItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        "[class*='topNavBarDesktopLayout__actionItemsContainer']"
       )
 
       expect(actionItemsContainer).toBeInTheDocument()
@@ -353,7 +352,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const actionItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        "[class*='topNavBarDesktopLayout__actionItemsContainer']"
       )
 
       expect(actionItemsContainer).not.toBeInTheDocument()
@@ -367,7 +366,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const actionItemsContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        "[class*='topNavBarDesktopLayout__actionItemsContainer']"
       )
 
       expect(actionItemsContainer).not.toBeInTheDocument()
@@ -380,7 +379,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         <TopNavBarDesktopLayout {...defaultBlocks} renderUser={getUser()} />
       )
       const userContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__userContainer']"
+        "[class*='topNavBarDesktopLayout__userContainer']"
       )
 
       expect(userContainer).toBeInTheDocument()
@@ -392,7 +391,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         <TopNavBarDesktopLayout {...defaultBlocks} renderUser={undefined} />
       )
       const userContainer = container.querySelector(
-        "[class$='topNavBarDesktopLayout__userContainer']"
+        "[class*='topNavBarDesktopLayout__userContainer']"
       )
 
       expect(userContainer).not.toBeInTheDocument()
@@ -409,7 +408,7 @@ describe('<TopNavBarDesktopLayout />', () => {
         />
       )
       const topNavBarDesktopLayout = container.querySelector(
-        "[class$='-topNavBarDesktopLayout']"
+        "[class*='-topNavBarDesktopLayout']"
       )
 
       expect(topNavBarDesktopLayout).toHaveAttribute(

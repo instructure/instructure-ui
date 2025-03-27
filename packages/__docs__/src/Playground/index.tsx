@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { Tabs } from '@instructure/ui-tabs'
 import { Modal } from '@instructure/ui-modal'
@@ -36,7 +35,7 @@ import { Flex } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconXLine } from '@instructure/ui-icons'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

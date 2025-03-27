@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
-import React, { Component } from 'react'
+
+import { Fragment, Component } from 'react'
 import ReactDOM from 'react-dom'
 import keycode from 'keycode'
 
@@ -42,7 +42,7 @@ import {
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -300,14 +300,14 @@ class Alert extends Component<AlertProps, AlertState> {
 
     if (this.props.transition === 'none') {
       return this.state.open ? (
-        <React.Fragment>
+        <Fragment>
           {screenReaderContent}
           {this.renderAlert()}
-        </React.Fragment>
+        </Fragment>
       ) : null
     }
     return (
-      <React.Fragment>
+      <Fragment>
         {screenReaderContent}
         <Transition
           type={this.props.transition}
@@ -318,7 +318,7 @@ class Alert extends Component<AlertProps, AlertState> {
         >
           {this.renderAlert()}
         </Transition>
-      </React.Fragment>
+      </Fragment>
     )
   }
 }

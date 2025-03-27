@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { createRef } from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
@@ -185,7 +185,7 @@ describe('<Checkbox />', () => {
     })
 
     it('focuses with the focus helper', () => {
-      const checkboxRef = React.createRef<Checkbox>()
+      const checkboxRef = createRef<Checkbox>()
       render(<Checkbox ref={checkboxRef} {...initProps} />)
       const checkboxElement = screen.getByRole('checkbox')
 

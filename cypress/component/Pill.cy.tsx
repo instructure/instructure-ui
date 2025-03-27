@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { Pill } from '../../packages/ui'
+
+import { Pill } from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'

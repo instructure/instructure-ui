@@ -22,15 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
 // test is breaking without importing React here
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { ms } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

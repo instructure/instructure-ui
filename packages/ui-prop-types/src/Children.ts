@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ComponentType, ReactElement } from 'react'
+import { ComponentType, ReactElement, Children as ReactChildren } from 'react'
 import { makeRequirable } from './makeRequirable'
 
 const Children = {
@@ -76,7 +76,7 @@ const Children = {
       propName: string,
       componentName: string
     ) {
-      const children = React.Children.toArray(props[propName])
+      const children = ReactChildren.toArray(props[propName])
       const validTypeNames = validTypes.map(
         (type: string | React.ComponentType | null) =>
           type ? getDisplayName(type) : type
@@ -149,7 +149,7 @@ const Children = {
       propName: string,
       componentName: string
     ) {
-      const children = React.Children.toArray(props[propName])
+      const children = ReactChildren.toArray(props[propName])
       const instanceCount: Record<string, any> = {}
       const validTypeNames = validTypes.map(
         (type: string | React.ComponentType) => {
@@ -329,16 +329,14 @@ const Children = {
       propName: string,
       componentName: string
     ) {
-      const childNames = React.Children.toArray(props[propName]).map(
-        (child) => {
-          if (child && (child as ReactElement).type) {
-            return getDisplayName((child as ReactElement).type)
-          } else if (child) {
-            return null
-          }
-          return
+      const childNames = ReactChildren.toArray(props[propName]).map((child) => {
+        if (child && (child as ReactElement).type) {
+          return getDisplayName((child as ReactElement).type)
+        } else if (child) {
+          return null
         }
-      )
+        return
+      })
 
       // Validate each group, if any of them are valid we're done
       for (let i = 0; i < validTypeGroups.length; i++) {
