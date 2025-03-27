@@ -33,6 +33,7 @@ import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import functionalComponentThemes from '../../functionalComponentThemes'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -59,7 +60,8 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   state: DocumentState = {
     selectedDetailsTabIndex: 0,
-    pageRef: null
+    pageRef: null,
+    componentTheme: {}
   }
 
   ref: HTMLDivElement | null = null
@@ -67,6 +69,25 @@ class Document extends Component<DocumentProps, DocumentState> {
   componentDidMount() {
     this.props.makeStyles?.()
     this.setState({ pageRef: this.ref })
+    this.fetchGenerateComponentTheme()
+  }
+
+  fetchGenerateComponentTheme = async () => {
+    const { doc, themeVariables } = this.props
+    const generateComponentTheme =
+      doc?.componentInstance?.generateComponentTheme
+    if (
+      generateComponentTheme &&
+      typeof generateComponentTheme === 'function' &&
+      themeVariables
+    ) {
+      this.setState({ componentTheme: generateComponentTheme(themeVariables) })
+    } else {
+      const componentTheme = await functionalComponentThemes[
+        doc.id.toLowerCase()
+      ](themeVariables)
+      this.setState({ componentTheme })
+    }
   }
 
   componentDidUpdate() {
@@ -96,17 +117,11 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   renderTheme(doc: DocDataType) {
     const { themeVariables } = this.props
-    const generateComponentTheme =
-      doc?.componentInstance?.generateComponentTheme
+    const { componentTheme } = this.state
 
-    const componentTheme =
-      themeVariables &&
-      typeof generateComponentTheme === 'function' &&
-      generateComponentTheme(themeVariables)
+    const themeVariableKeys = componentTheme && Object.keys(componentTheme)
 
-    const themeVariableKeys = Object.keys(componentTheme)
-
-    return componentTheme && themeVariableKeys.length > 0 ? (
+    return themeVariables && componentTheme && themeVariableKeys.length > 0 ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Default Theme Variables
