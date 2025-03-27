@@ -39,7 +39,6 @@ export { safeCloneElement } from './safeCloneElement'
 export { windowMessageListener } from './windowMessageListener'
 export {
   DeterministicIdContext,
-  generateInstanceCounterMap,
   DeterministicIdContextProvider,
   withDeterministicId
 } from './DeterministicIdContext'
