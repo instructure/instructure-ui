@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Pagination, ScreenReaderContent } from '../../packages/ui'
+import { Pagination, ScreenReaderContent } from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'
@@ -65,6 +65,56 @@ describe('<Pagination/>', () => {
         ).height
         expect(heightWithNoLabel).to.equal(heightWithHiddenLabel)
         cy.wrap($paginationWithLabel).should('contain', 'I am a hidden label')
+      })
+    })
+  })
+
+  it('should wrap at a small viewport width', () => {
+    cy.mount(
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="compact"
+        currentPage={4}
+        totalPageNumber={100000}
+        siblingCount={3}
+        boundaryCount={2}
+      />
+    )
+
+    cy.viewport(1000, 800)
+
+    cy.get('[role="navigation"]').within(() => {
+      cy.get('button').then(($items) => {
+        const firstItem = $items[0]
+        const firstItemTop = firstItem.getBoundingClientRect().top
+
+        let hasWrapped = false
+        $items.each((index, item) => {
+          const itemTop = item.getBoundingClientRect().top
+          if (index > 0 && itemTop > firstItemTop) {
+            hasWrapped = true
+          }
+        })
+        expect(hasWrapped).to.be.false
+      })
+    })
+
+    cy.viewport(300, 800)
+
+    cy.get('[role="navigation"]').within(() => {
+      cy.get('button').then(($items) => {
+        const firstItem = $items[0]
+        const firstItemTop = firstItem.getBoundingClientRect().top
+
+        let hasWrapped = false
+        $items.each((index, item) => {
+          const itemTop = item.getBoundingClientRect().top
+          if (index > 0 && itemTop > firstItemTop) {
+            hasWrapped = true
+          }
+        })
+        expect(hasWrapped).to.be.true
       })
     })
   })
