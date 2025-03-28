@@ -23,8 +23,9 @@
  */
 import React from 'react'
 import 'cypress-real-events'
+import { useState } from 'react'
 
-import { Tooltip } from '../../packages/ui'
+import { Tooltip, Modal, Button, CloseButton } from '@instructure/ui'
 import '../support/component'
 
 describe('<Tooltip/>', () => {
@@ -130,5 +131,65 @@ describe('<Tooltip/>', () => {
     cy.contains('button', 'For dismiss').realHover()
     cy.contains('Hello').should('not.be.visible')
     cy.wrap(onHideContent).should('have.been.calledOnce')
+  })
+
+  it('should not close parent Modal with shouldCloseOnDocumentClick when Tooltip is clicked on', async () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
+            Open the Modal
+          </Button>
+          <Modal
+            label="modal"
+            open={open}
+            onDismiss={() => {
+              setOpen(false)
+            }}
+            shouldCloseOnDocumentClick
+          >
+            <CloseButton
+              screenReaderLabel="Close"
+              onClick={() => {
+                setOpen(false)
+              }}
+            />
+            <Tooltip renderTip="Tooltip!">
+              <Button data-testid="trigger">Hello</Button>
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.get('[data-testid="trigger"]')
+        .realHover()
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+        })
+
+      cy.get(tooltip)
+        .realClick()
+        .wait(500)
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+          cy.get('[role="dialog"]').should('be.visible')
+        })
+    })
   })
 })
