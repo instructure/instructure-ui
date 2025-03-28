@@ -26,7 +26,8 @@ import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
   PropValidators,
-  BaseThemeVariables
+  BaseThemeVariables,
+  ComponentTheme
 } from '@instructure/shared-types'
 import { DocData } from '../App/props'
 
@@ -72,6 +73,7 @@ type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 type DocumentState = {
   selectedDetailsTabIndex: number
   pageRef: HTMLDivElement | null
+  componentTheme: ComponentTheme
 }
 
 const allowedProps: AllowedPropKeys = [
