@@ -746,7 +746,8 @@ class Select extends Component<SelectProps> {
 
       onFocus,
       onBlur: utils.createChainedFunction(onBlur, onRequestHideOptions),
-      ...overrideProps
+      ...overrideProps,
+      ...(interaction === 'disabled' && { isAriaDisabled: true })
     }
 
     return <TextInput {...triggerProps} {...getInputProps(inputProps)} />

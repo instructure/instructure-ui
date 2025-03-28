@@ -10,11 +10,32 @@ describes: TextInput
 ---
 type: example
 ---
-<TextInput
-  renderLabel="Name"
-  placeholder="Doe, John Doe"
-  onChange={(event, value) => { console.log(value) }}
-/>
+    <>
+    <SimpleSelect renderLabel="SimpleSelect">
+      <SimpleSelect.Option id="foo" value="foo">
+        Foo
+      </SimpleSelect.Option>
+      <SimpleSelect.Option id="bar" value="bar">
+        Bar
+      </SimpleSelect.Option>
+      <SimpleSelect.Option id="baz" value="baz">
+        Baz
+      </SimpleSelect.Option>
+    </SimpleSelect>
+    <TextInput renderLabel="TextInput" />
+    <SimpleSelect renderLabel="Disabled SimpleSelect" interaction="disabled" onFocus={() => console.log('focused')}>
+      <SimpleSelect.Option id="foo" value="foo">
+        Foo
+      </SimpleSelect.Option>
+      <SimpleSelect.Option id="bar" value="bar">
+        Bar
+      </SimpleSelect.Option>
+      <SimpleSelect.Option id="baz" value="baz">
+        Baz
+      </SimpleSelect.Option>
+    </SimpleSelect>
+    <TextInput renderLabel="Disabled TextInput" interaction="disabled" />
+  </>
 ```
 
 #### Controlled TextInput

@@ -181,6 +181,11 @@ type TextInputOwnProps = {
    * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
    */
   margin?: Spacing
+
+  /**
+   * Whether the aria-diabled prop is but on in input element
+   */
+  isAriaDisabled?: boolean
 }
 
 type PropKeys = keyof TextInputOwnProps
@@ -231,7 +236,8 @@ const propTypes: PropValidators<PropKeys> = {
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
-  margin: PropTypes.string
+  margin: PropTypes.string,
+  isAriaDisabled: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -258,12 +264,14 @@ const allowedProps: AllowedPropKeys = [
   'onChange',
   'onBlur',
   'onFocus',
-  'margin'
+  'margin',
+  'isAriaDisabled'
 ]
 
 type TextInputState = {
   hasFocus: boolean
   afterElementHasWidth?: boolean
+  isAriaDisabled?: boolean
 }
 
 type TextInputStyleProps = {
