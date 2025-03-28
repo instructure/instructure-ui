@@ -105,7 +105,8 @@ class Pagination extends Component<PaginationProps> {
     siblingCount: 1,
     boundaryCount: 1,
     ellipsis: '…',
-    renderPageIndicator: (page: number) => page
+    renderPageIndicator: (page: number) => page,
+    margin: 'space8'
   }
 
   static Page = PaginationButton

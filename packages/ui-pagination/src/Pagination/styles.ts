@@ -41,7 +41,9 @@ const generateStyle = (componentTheme: PaginationTheme): PaginationStyle => {
       all: 'unset',
       display: 'flex',
       alignItems: 'center',
-      gap: componentTheme.pageIndicatorGap
+      gap: componentTheme.pageIndicatorGap,
+      flexWrap: 'wrap',
+      justifyContent: 'center'
     },
     pagination: {
       label: 'pagination',
