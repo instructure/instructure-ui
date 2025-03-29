@@ -40,6 +40,7 @@ type: code
 ---
 // Button/index.js
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { Children, Component } from 'react'
 

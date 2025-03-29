@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, useStyle } from '@instructure/emotion'
 import { useState, SyntheticEvent, useEffect } from 'react'

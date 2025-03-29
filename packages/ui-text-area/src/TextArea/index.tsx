@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { Component } from 'react'
 import { FormField } from '@instructure/ui-form-field'

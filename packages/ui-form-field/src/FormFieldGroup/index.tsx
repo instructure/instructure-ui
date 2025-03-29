@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { Component, Children, ReactElement, AriaAttributes } from 'react'
 

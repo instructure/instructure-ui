@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { Component } from 'react'
 import noScroll from 'no-scroll'

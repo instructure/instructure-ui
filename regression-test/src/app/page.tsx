@@ -22,28 +22,18 @@
  * SOFTWARE.
  */
 'use client'
-import { Link, View } from '@instructure/ui'
 import React from 'react'
-import * as Components from './/components'
+import { Link } from 'instructure-ui/ui-link/es/index'
 
 export default function Home() {
+  const componentPages = ['avatar', 'button']
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <View as="div">
-        <ul>
-          {Object.entries(Components as Record<string, React.ElementType>).map(
-            ([ComponentName, _Component]) => (
-              <li key={ComponentName}>
-                <Link href={'components/' + ComponentName}>
-                  {ComponentName.substring(0, ComponentName.length - 4)
-                    .toLowerCase()
-                    .replace('_', ' ')}
-                </Link>
-              </li>
-            )
-          )}
-        </ul>
-      </View>
+    <main className="flex gap-2 p-8 flex-col items-start">
+      {componentPages.map((page) => (
+        <Link href={`/${page}`} key={page}>
+          {page}
+        </Link>
+      ))}
     </main>
   )
 }

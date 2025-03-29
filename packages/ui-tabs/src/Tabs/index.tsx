@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { Component, ComponentElement, ReactElement } from 'react'
 

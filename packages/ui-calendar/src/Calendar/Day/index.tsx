@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { Component, MouseEvent, KeyboardEvent } from 'react'
 

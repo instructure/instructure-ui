@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+/** @jsxRuntime classic */
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 import React, { Component, ReactElement, SyntheticEvent } from 'react'
