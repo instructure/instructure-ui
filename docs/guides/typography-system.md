@@ -1,7 +1,7 @@
 ---
 title: Typography
 category: Guides
-order: 8
+order: 9
 ---
 
 # Typography

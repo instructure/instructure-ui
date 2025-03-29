@@ -1,7 +1,7 @@
 ---
 title: Focus Management
 category: Guides
-order: 3
+order: 4
 ---
 
 ## The Focus Management Problem

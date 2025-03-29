@@ -1,7 +1,7 @@
 ---
 title: Server side rendering (SSR)
 category: Guides
-order: 1
+order: 2
 ---
 
 # SSR with Next.js
@@ -45,8 +45,7 @@ npm install @instructure/emotion @instructure/ui-react-utils
 
 - in your Next.js application create - if it does not already exist - a file named `_app.js` inside the `pages` directory. This is a special file in Next.js because it allows you to override/control component initialization. Read more about it in the [Next.js docs](https://nextjs.org/docs/advanced-features/custom-app).
 
-- then configure the `_app.js` so your component tree is wrapped with an `InstUISettingsProvider`
-- the important step is to call `generateInstanceCounterMap` on every request, so the server side instance tracking and browser side instance tracking stays in sync with each other:
+- then configure the `_app.js` so your component tree is wrapped with an `InstUISettingsProvider` component. This component is responsible for keeping track of component instances and generating deterministic `ids` for components.
 
 ```js
 ---
@@ -66,8 +65,7 @@ export default function MyApp(props) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-                                               {/* This is the important step */}
-      <InstUISettingsProvider instanceCounterMap={generateInstanceCounterMap()}>
+      <InstUISettingsProvider>
         <Component {...pageProps} />
       </InstUISettingsProvider>
     </>
