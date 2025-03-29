@@ -21,30 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { DesktopTopNavProps } from './props'
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
-
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
-
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
-  }
-
+const generateStyles = (_props: DesktopTopNavProps, theme: any) => {
   return {
-    ...componentVariables
+    container: {
+      height: '66px',
+      position: 'relative',
+      borderBottom: '1px solid',
+      borderColor: theme.colors.contrasts.grey1424,
+      backgroundColor: theme.colors.contrasts.grey1111,
+      width: '100%',
+      color: theme.colors.contrasts.grey125125,
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'row'
+    },
+    start: {
+      marginLeft: '24px',
+      marginRight: 'auto',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: '16px'
+    },
+    end: {
+      marginRight: '24px',
+      display: 'flex',
+      gap: '12px'
+    }
   }
 }
 
-export default generateComponentTheme
+export { generateStyles }

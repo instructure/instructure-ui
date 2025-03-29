@@ -22,29 +22,30 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
+import type { ReactNode, PropsWithChildren } from 'react'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
+type DesktopTopNavOwnProps = {
+  lti?: boolean
+  brand?: ReactNode
+}
 
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
+type DesktopTopNavStyle = {
+  container: {
+    [key: string]: string | number
   }
-
-  return {
-    ...componentVariables
+  content: (open: boolean) => {
+    [key: string]: string | number
+  }
+  topBar: {
+    [key: string]: string | number
+  }
+  btnRow: {
+    [key: string]: string | number
   }
 }
 
-export default generateComponentTheme
+type DesktopTopNavProps = DesktopTopNavOwnProps & {
+  styles: DesktopTopNavStyle
+} & PropsWithChildren
+
+export type { DesktopTopNavProps, DesktopTopNavOwnProps }
