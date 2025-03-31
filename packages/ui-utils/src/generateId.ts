@@ -28,15 +28,15 @@
  * @param map - a Map<string, counter>, which counts how many times the given element/instance was rendered
  * @returns a string in a format `instanceName_intanceRenderedCount`: `Alert_4`
  */
-
 const generateId = (instanceName: string, map: Map<string, number>) => {
   if (!map.has(instanceName)) {
     map.set(instanceName, 0)
   } else {
     map.set(instanceName, map.get(instanceName)! + 1)
   }
-
-  return `${instanceName}_${map.get(instanceName!)}`
+  // Do not rename '___' to '_' it will cause name clash with InstUI v10.14.0
+  // or older
+  return `${instanceName}___${map.get(instanceName!)}`
 }
 
 export default generateId
