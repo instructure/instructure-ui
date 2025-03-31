@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **many:** fix having the same DOM ids if there are multiple instances of InstUI, e.g. module federation ([a0bb4d0](https://github.com/instructure/instructure-ui/commit/a0bb4d0a8d0f8bcca8f565883f56b599eec66fc9))
+
+
+### Features
+
+* **ui-breadcrumb,ui-tooltip:** add tooltips for truncated breadcrumbs ([1c22bfc](https://github.com/instructure/instructure-ui/commit/1c22bfcb01238b2af8b03db5391013175f487805))
+
+
+
+
+
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-top-nav-bar

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **ui-side-nav-bar:** make screenreaders announce Badge text in SideNavBar ([fea9f5e](https://github.com/instructure/instructure-ui/commit/fea9f5e0494f37ec59b7bc8699003a490b329134))
+
+
+
+
+
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-side-nav-bar

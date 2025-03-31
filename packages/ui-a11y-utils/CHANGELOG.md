@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** make Modal stay open when button is clicked in certain configurations ([4511594](https://github.com/instructure/instructure-ui/commit/45115947077481f6b75cf4a4c909a515c790adc4))
+
+
+
+
+
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-a11y-utils

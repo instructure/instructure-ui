@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **many:** fix having the same DOM ids if there are multiple instances of InstUI, e.g. module federation ([a0bb4d0](https://github.com/instructure/instructure-ui/commit/a0bb4d0a8d0f8bcca8f565883f56b599eec66fc9))
+* **ui-a11y-utils:** make Modal stay open when button is clicked in certain configurations ([4511594](https://github.com/instructure/instructure-ui/commit/45115947077481f6b75cf4a4c909a515c790adc4))
+* **ui-form-field:** fix misaligned text when size is exactly at the breakpoint ([142c508](https://github.com/instructure/instructure-ui/commit/142c508992d85ada9c0b70afea50bce0c3bb30d9))
+* **ui-side-nav-bar:** make screenreaders announce Badge text in SideNavBar ([fea9f5e](https://github.com/instructure/instructure-ui/commit/fea9f5e0494f37ec59b7bc8699003a490b329134))
+* **ui-source-code-editor:** make scrollview in SourceCodeEditor keyboard accessible ([6b3701c](https://github.com/instructure/instructure-ui/commit/6b3701cf076431ec56e0e5cfc720bbdc2114d885))
+* **ui-themes,emotion:** fix typos in names of some spacing token ([9bbc6e4](https://github.com/instructure/instructure-ui/commit/9bbc6e4b51e000aa9d9a279224fd890401940a7e))
+
+
+### Features
+
+* **ui-avatar,emotion:** add theming solution to functional components ([9cbfd35](https://github.com/instructure/instructure-ui/commit/9cbfd35f038aed2942424707ec4669c820e3c820))
+* **ui-breadcrumb,ui-tooltip:** add tooltips for truncated breadcrumbs ([1c22bfc](https://github.com/instructure/instructure-ui/commit/1c22bfcb01238b2af8b03db5391013175f487805))
+
+
+
+
+
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 
