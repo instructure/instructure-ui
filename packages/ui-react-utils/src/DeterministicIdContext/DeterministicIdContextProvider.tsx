@@ -29,6 +29,12 @@ import {
 
 type DeterministicIdProviderValue = Map<string, number>
 type DeterministicIdProviderProps = React.PropsWithChildren<{
+  /**
+   * @deprecated the `instanceCounterMap` prop is deprecated. You don't need to
+   * supply the `instanceCounterMap` to the component. It handles it internally.
+   * If you use this make sure that it generates unique IDs across app instances
+   * like in module federation.
+   */
   instanceCounterMap?: DeterministicIdProviderValue
 }>
 
@@ -44,7 +50,6 @@ type DeterministicIdProviderProps = React.PropsWithChildren<{
  * This is utility component for wrapping components with `DeterministicIdContext.Provider`
  * See detailed documentation about how to use it: [InstUISettingsProvider](/#InstUISettingsProvider)
  */
-
 const DeterministicIdContextProvider = ({
   children,
   instanceCounterMap = defaultDeterministicIDMap

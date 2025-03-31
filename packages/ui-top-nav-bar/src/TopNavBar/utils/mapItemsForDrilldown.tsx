@@ -26,10 +26,7 @@ import React, { Children } from 'react'
 
 import { warn } from '@instructure/console'
 import { generateId } from '@instructure/ui-utils'
-import {
-  matchComponentTypes,
-  generateInstanceCounterMap
-} from '@instructure/ui-react-utils'
+import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { Drilldown } from '@instructure/ui-drilldown'
 import type {
@@ -62,7 +59,7 @@ const mapItemsForDrilldown = (
   const submenus: ItemMappedForDrilldownOption[] = []
   const { currentPageId, renderOptionContent } = options
 
-  const customPopoverIdMap = generateInstanceCounterMap()
+  const customPopoverIdMap = new Map<string, number>()
 
   Children.forEach(itemList, (item) => {
     if (!item || !matchComponentTypes(item, [TopNavBarItem])) return

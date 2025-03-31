@@ -22,9 +22,31 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { generateInstanceCounterMap } from './generateInstanceCounterMap'
+import type { DeterministicIdProviderValue } from './DeterministicIdContextProvider'
+
+declare global {
+  // eslint-disable-next-line no-var
+  var __INSTUI_GLOBAL_INSTANCE_COUNTER__: Map<string, number>
+}
+const instUIInstanceCounter = '__INSTUI_GLOBAL_INSTANCE_COUNTER__'
+
+/**
+ * Returns a global (window-level) instance counter map.
+ * This needs to be global so that IDs are unique across application instances,
+ * e.g. in module federation applications are loaded as a .js blob, this method
+ * makes sure that there are no duplicate IDs across instances.
+ */
+function generateInstanceCounterMap(): DeterministicIdProviderValue {
+  if (globalThis[instUIInstanceCounter]) {
+    return globalThis[instUIInstanceCounter]
+  }
+  const map = new Map<string, number>()
+  globalThis[instUIInstanceCounter] = map
+  return map
+}
 
 const defaultDeterministicIDMap = generateInstanceCounterMap()
+
 const DeterministicIdContext = React.createContext(defaultDeterministicIDMap)
 
 export { DeterministicIdContext, defaultDeterministicIDMap }
