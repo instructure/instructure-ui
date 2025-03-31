@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **ui-source-code-editor:** make scrollview in SourceCodeEditor keyboard accessible ([6b3701c](https://github.com/instructure/instructure-ui/commit/6b3701cf076431ec56e0e5cfc720bbdc2114d885))
+
+
+
+
+
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
