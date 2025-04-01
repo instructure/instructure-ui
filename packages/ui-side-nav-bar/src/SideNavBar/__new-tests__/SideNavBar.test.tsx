@@ -77,6 +77,29 @@ describe('<SideNavBar />', () => {
     expect(nav).toHaveTextContent('Minimize SideNavBar')
   })
 
+  it('should not crash with valid React elements', async () => {
+    render(
+      <SideNavBar
+        label="Main navigation"
+        toggleLabel={{
+          expandedLabel: 'Minimize SideNavBar',
+          minimizedLabel: 'Expand SideNavBar'
+        }}
+      >
+        {false}
+        <div>test123</div>
+        <SideNavBarItem
+          icon={<IconDashboardLine />}
+          label="Dashboard"
+          href="#"
+        />
+      </SideNavBar>
+    )
+    const navElements = screen.getAllByRole('listitem')
+    expect(navElements[0]).toHaveTextContent('test123')
+    expect(navElements[1]).toHaveTextContent('Dashboard')
+  })
+
   it('should render a single semantic nav element', async () => {
     render(
       <SideNavBar

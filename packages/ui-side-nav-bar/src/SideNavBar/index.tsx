@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import React, { Component, Children, ReactElement } from 'react'
+import React, { Component, Children, ReactElement, isValidElement } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 
@@ -47,7 +47,6 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 category: components
 ---
 **/
-
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
@@ -107,6 +106,7 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
+      if (!isValidElement(child)) return null
       const navItem = safeCloneElement(child as ReactElement, {
         minimized: this.state.minimized
       })
