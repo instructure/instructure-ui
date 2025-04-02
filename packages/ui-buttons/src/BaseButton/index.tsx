@@ -255,12 +255,37 @@ class BaseButton extends Component<BaseButtonProps> {
       ...props
     } = this.props
 
-    const { isDisabled, isEnabled, isReadOnly } = this
-
+    const { isDisabled, isEnabled, isReadOnly, elementType } = this
+    // only add 0 tabIndex value if it doesn't have it by default, see
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
+    let needsZeroTabIndex = true
+    if (typeof elementType == 'string') {
+      if (
+        [
+          'button',
+          'frame',
+          'iframe',
+          'input',
+          'object',
+          'select',
+          'textarea',
+          'summary'
+        ].includes(elementType)
+      ) {
+        needsZeroTabIndex = false
+      }
+      if (href && (elementType === 'a' || elementType === 'area')) {
+        needsZeroTabIndex = false
+      }
+    }
+    let tabIndexValue = tabIndex
+    if (onClick && as && needsZeroTabIndex) {
+      tabIndexValue = tabIndex || 0
+    }
     return (
       <View
         {...passthroughProps(props)}
-        as={this.elementType}
+        as={elementType}
         focusColor={this.focusColor}
         position="relative"
         display={display}
@@ -277,7 +302,7 @@ class BaseButton extends Component<BaseButtonProps> {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         role={onClick && as !== 'button' ? 'button' : undefined}
-        tabIndex={onClick && as ? tabIndex || 0 : tabIndex}
+        tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
         css={isEnabled ? styles?.baseButton : null}
         focusRingBorderRadius={String(
