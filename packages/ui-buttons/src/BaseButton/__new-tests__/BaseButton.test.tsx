@@ -126,6 +126,27 @@ describe('<BaseButton/>', () => {
     expect(button).toHaveAttribute('tabIndex', '0')
   })
 
+  it('should not set tabIndex="0" when the element has it by default', () => {
+    const onClick = vi.fn()
+
+    render(
+      <>
+        <BaseButton as="button" onClick={onClick}>
+          Hello Button
+        </BaseButton>
+        <BaseButton onClick={onClick} href="example.html">
+          Hello link
+        </BaseButton>
+      </>
+    )
+    const button = screen.getByRole('button', { name: 'Hello Button' })
+    expect(button).toBeInTheDocument()
+    expect(button).not.toHaveAttribute('tabIndex')
+    const link = screen.getByRole('link', { name: 'Hello link' })
+    expect(link).toBeInTheDocument()
+    expect(link).not.toHaveAttribute('tabIndex')
+  })
+
   it('should pass down the type prop to the button element', async () => {
     const onClick = vi.fn()
     render(
@@ -163,7 +184,7 @@ describe('<BaseButton/>', () => {
     expect(document.activeElement).toBe(button)
   })
 
-  it('should provide an  elementRef prop', async () => {
+  it('should provide an elementRef prop', async () => {
     const elementRef = vi.fn()
     render(<BaseButton elementRef={elementRef}>Hello World</BaseButton>)
 
