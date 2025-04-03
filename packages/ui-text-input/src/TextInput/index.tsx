@@ -309,7 +309,11 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       ? callRenderProp(renderAfterInput)
       : null
 
-    const renderBeforeOrAfter = !!beforeElement || !!afterElement
+    const renderBeforeOrAfter =
+      !!beforeElement ||
+      !!afterElement ||
+      renderBeforeInput !== undefined ||
+      renderAfterInput !== undefined
 
     const rawLabel = callRenderProp(renderLabel)
     const label = hasVisibleChildren(rawLabel) ? (
