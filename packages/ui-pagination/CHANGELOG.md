@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* **ui-pagination:** make Pagination wrap on smaller screen sizes and prevent scrollbars ([75e1540](https://github.com/instructure/instructure-ui/commit/75e154062530c141a380624f4590b517d8b9e691))
+
+
+
+
+
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 **Note:** Version bump only for package @instructure/ui-pagination

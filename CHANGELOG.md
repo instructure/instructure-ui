@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* **ui-form-field:** update form error message color to have better contrast ([117433d](https://github.com/instructure/instructure-ui/commit/117433df655ca8fe8c7f72c0a27fc19f0db74402))
+* **ui-pagination:** make Pagination wrap on smaller screen sizes and prevent scrollbars ([75e1540](https://github.com/instructure/instructure-ui/commit/75e154062530c141a380624f4590b517d8b9e691))
+* **ui-side-nav-bar:** fix crash on null/falsy children ([6473eb6](https://github.com/instructure/instructure-ui/commit/6473eb6980581f72593b466ff3dd2fed392ddae9))
+* **ui-utils:** fix 'no matching export' build error ([318fb44](https://github.com/instructure/instructure-ui/commit/318fb447ce30fc6de9efa1651484c71cc810ea37))
+
+
+
+
+
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 
