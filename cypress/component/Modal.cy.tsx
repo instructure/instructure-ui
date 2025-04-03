@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React, { useState } from 'react'
-import { Modal, View, Button } from '@instructure/ui'
+import { Tooltip, Modal, Button, CloseButton, View } from '@instructure/ui'
 import 'cypress-real-events'
 
 import '../support/component'
@@ -170,5 +170,193 @@ describe('<Modal/>', () => {
     cy.get('[data-testid="close-button"]').realClick()
 
     cy.get('[data-testid="modal-content"]').should('not.exist')
+  })
+
+  it('should not close with shouldCloseOnDocumentClick when Tooltip inside is clicked on', async () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
+            Open the Modal
+          </Button>
+          <Modal
+            label="modal"
+            open={open}
+            onDismiss={() => {
+              setOpen(false)
+            }}
+            shouldCloseOnDocumentClick
+          >
+            <CloseButton
+              screenReaderLabel="Close"
+              onClick={() => {
+                setOpen(false)
+              }}
+            />
+            <Tooltip renderTip="Tooltip!">
+              <Button data-testid="trigger">Hello</Button>
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.get('[data-testid="trigger"]')
+        .realHover()
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+        })
+
+      cy.get(tooltip)
+        .realClick()
+        .wait(500)
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+          cy.get('[role="dialog"]').should('be.visible')
+        })
+    })
+  })
+
+  it('should not close with shouldCloseOnDocumentClick when inside Tooltip has renderTip with HTML content', async () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
+            Open the Modal
+          </Button>
+          <Modal
+            label="modal"
+            open={open}
+            onDismiss={() => {
+              setOpen(false)
+            }}
+            shouldCloseOnDocumentClick
+          >
+            <CloseButton
+              screenReaderLabel="Close"
+              onClick={() => {
+                setOpen(false)
+              }}
+            />
+            <Tooltip
+              renderTip={
+                <div>
+                  <div>HTML content</div>
+                </div>
+              }
+            >
+              <Button data-testid="trigger">Hello</Button>
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.get('[data-testid="trigger"]')
+        .realHover()
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+        })
+
+      cy.get(tooltip)
+        .realClick()
+        .wait(500)
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+          cy.get('[role="dialog"]').should('be.visible')
+        })
+    })
+  })
+
+  it('should not close with shouldCloseOnDocumentClick when ToolTip button is focused and Tooltip is clicked', async () => {
+    const TestModal = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <div>
+          <Button
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
+            Open the Modal
+          </Button>
+          <Modal
+            label="modal"
+            open={open}
+            onDismiss={() => {
+              setOpen(false)
+            }}
+            shouldCloseOnDocumentClick
+          >
+            <CloseButton
+              screenReaderLabel="Close"
+              onClick={() => {
+                setOpen(false)
+              }}
+            />
+            <Tooltip renderTip={<div>HTML content</div>}>
+              <Button data-testid="trigger">Hello</Button>
+            </Tooltip>
+          </Modal>
+        </div>
+      )
+    }
+    cy.mount(<TestModal />)
+
+    cy.contains('Open the Modal').click()
+
+    cy.get('[data-testid="trigger"]').then(($trigger) => {
+      const tooltipId = $trigger.attr('data-position-target')
+      const tooltip = `span[data-position-content="${tooltipId}"]`
+
+      cy.get(tooltip).should('not.be.visible')
+
+      cy.get('[data-testid="trigger"]')
+        .realClick()
+        .then(() => {
+          cy.get(tooltip).should('be.visible')
+          cy.get('[data-testid="trigger"]')
+            .should('have.focus')
+            .then(() => {
+              cy.get(tooltip)
+                .realClick()
+                .wait(500)
+                .then(() => {
+                  cy.get('[role="dialog"]').should('be.visible')
+                })
+            })
+        })
+    })
   })
 })
