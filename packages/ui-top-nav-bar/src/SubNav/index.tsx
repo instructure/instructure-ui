@@ -22,29 +22,41 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
+/** @jsx jsx */
+import { jsx, withFunctionalStyle } from '@instructure/emotion'
+
+import { generateStyles } from './styles'
+import { Link } from '@instructure/ui-link'
+import { SubNavProps, MenuItem } from './props'
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
-
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
-  }
-
-  return {
-    ...componentVariables
-  }
+---
+category: components
+---
+ **/
+const SubNav = ({ menuItems, styles }: SubNavProps) => {
+  return (
+    <div style={styles.container}>
+      {menuItems.map((item: MenuItem) => (
+        <div style={styles.linkContainer(item)} key={item.title}>
+          <Link
+            key={item.title}
+            href={item.href}
+            themeOverride={styles.link(item)}
+            isWithinText={false}
+            onClick={item.onClick}
+          >
+            {item.title}
+          </Link>
+        </div>
+      ))}
+    </div>
+  )
 }
 
-export default generateComponentTheme
+const SC: any = withFunctionalStyle(generateStyles)(SubNav)
+
+SC.displayName = 'SubNav'
+
+export { SC as SubNav }
+export default SC
