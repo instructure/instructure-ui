@@ -119,7 +119,7 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     primaryGhostHoverBoxShadow: 'none',
 
     secondaryColor: colors?.contrasts?.grey125125,
-    secondaryBorderColor: colors?.contrasts?.grey1214,
+    secondaryBorderColor: colors?.contrasts?.grey1424,
     secondaryBackground: colors?.contrasts?.grey1111,
     secondaryHoverBackground: colors?.contrasts?.grey1214,
     secondaryActiveBackground: colors?.contrasts?.grey1214,

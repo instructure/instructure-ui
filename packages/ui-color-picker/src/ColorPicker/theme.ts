@@ -24,7 +24,6 @@
 
 import type { Theme } from '@instructure/ui-themes'
 import type { ColorPickerTheme } from '@instructure/shared-types'
-import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
@@ -55,7 +54,7 @@ const generateComponentTheme = (theme: Theme): ColorPickerTheme => {
     checkerboardBackgroundSize: '.5rem .5rem',
     checkerboardBackgroundPosition:
       '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
-    colorIndicatorBorderColor,
+    colorIndicatorBorderColor: colors?.contrasts?.grey1424,
     simpleColorContainerLeftPadding: spacing?.xSmall,
     hashMarkContainerLineHeight: typography?.fontSizeXLarge,
     hashMarkContainerLeftPadding: spacing?.xSmall,

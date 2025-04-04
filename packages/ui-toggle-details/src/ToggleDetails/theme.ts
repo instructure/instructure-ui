@@ -66,7 +66,7 @@ const generateComponentTheme = (theme: Theme): ToggleDetailsTheme => {
     filledBackgroundColor: colors?.contrasts?.grey1111,
     filledBorderWidth: borders?.widthSmall,
     filledBorderStyle: borders?.style,
-    filledBorderColor: colors?.contrasts?.grey1214,
+    filledBorderColor: colors?.contrasts?.grey1424,
     filledBorderRadius: borders?.radiusMedium,
     filledPadding: spacing?.small
   }

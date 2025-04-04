@@ -35,7 +35,7 @@ const generateComponentTheme = (theme: Theme): ModalFooterTheme => {
 
   const componentVariables: ModalFooterTheme = {
     background: colors?.contrasts?.grey1111,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey1424,
     borderWidth: borders?.widthSmall,
     borderRadius: borders?.radiusMedium,
     padding: spacing?.small,

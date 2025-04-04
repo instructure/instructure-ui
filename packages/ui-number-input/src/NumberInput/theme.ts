@@ -61,7 +61,7 @@ const generateComponentTheme = (theme: Theme): NumberInputTheme => {
     arrowsColor: colors?.contrasts?.grey125125,
     arrowsBackgroundColor: colors?.contrasts?.grey1111,
     arrowsHoverBackgroundColor: colors?.contrasts?.grey1214,
-    arrowsBorderColor: colors?.contrasts?.grey1214,
+    arrowsBorderColor: colors?.contrasts?.grey3045,
     arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors?.contrasts?.grey1214}`,
 
     focusOutlineWidth: borders?.widthMedium,

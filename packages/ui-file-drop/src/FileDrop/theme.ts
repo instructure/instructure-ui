@@ -45,7 +45,7 @@ const generateComponentTheme = (theme: Theme): FileDropTheme => {
     borderRadius: borders?.radiusLarge,
     borderWidth: borders?.widthMedium,
     borderStyle: 'dashed',
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey1424,
     hoverBorderColor: colors?.contrasts?.blue4570,
     acceptedColor: colors?.contrasts?.blue4570,
     rejectedColor: colors?.contrasts?.red4570

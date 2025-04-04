@@ -188,7 +188,7 @@ export type BaseButtonTheme = {
   primaryGhostHoverBoxShadow: string
 
   secondaryColor: Colors['contrasts']['grey125125']
-  secondaryBorderColor: Colors['contrasts']['grey1214']
+  secondaryBorderColor: Colors['contrasts']['grey1424']
   secondaryBackground: Colors['contrasts']['grey1111']
   secondaryHoverBackground: Colors['contrasts']['grey1214']
   secondaryActiveBackground: Colors['contrasts']['grey1214']
@@ -453,7 +453,7 @@ export type ColorIndicatorTheme = {
   backgroundPosition: string
   circleIndicatorSize: string
   rectangleIndicatorSize: string
-  colorIndicatorBorderColor: string
+  colorIndicatorBorderColor: Colors['contrasts']['grey1424']
   rectangularIndicatorBorderRadius: Spacing['xxSmall']
   rectangularIndicatorBorderWidth: Border['widthSmall']
 }
@@ -461,7 +461,7 @@ export type ColorIndicatorTheme = {
 export type ColorMixerPaletteTheme = {
   indicatorBorderColor: Colors['contrasts']['grey125125']
   whiteColor: Colors['contrasts']['white1010']
-  colorIndicatorBorderColor: string
+  colorIndicatorBorderColor: Colors['contrasts']['grey1424']
 
   indicatorBorderWidth: Border['widthSmall']
   paletteBorderRadius: Border['radiusMedium']
@@ -484,7 +484,7 @@ export type ColorMixerSliderTheme = {
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
-  colorIndicatorBorderColor: string
+  colorIndicatorBorderColor: Colors['contrasts']['grey1424']
 
   indicatorBorderWidth: Border['widthSmall']
   sliderBorderWidth: Border['widthSmall']
@@ -503,7 +503,7 @@ export type ColorPickerTheme = {
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
-  colorIndicatorBorderColor: string
+  colorIndicatorBorderColor: Colors['contrasts']['grey1424']
   simpleColorContainerLeftPadding: Spacing['xSmall']
   hashMarkContainerLineHeight: Typography['fontSizeXLarge']
   hashMarkContainerLeftPadding: Spacing['xSmall']
@@ -545,7 +545,7 @@ export type DrawerLayoutContentTheme = {
 
 export type DrawerLayoutTrayTheme = {
   background: Colors['contrasts']['white1010']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
   zIndex: Stacking['topmost']
@@ -568,7 +568,7 @@ export type FileDropTheme = {
   borderRadius: Border['radiusLarge']
   borderWidth: Border['widthMedium']
   borderStyle: string
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   hoverBorderColor: Colors['contrasts']['blue4570']
   acceptedColor: Colors['contrasts']['blue4570']
   rejectedColor: Colors['contrasts']['red4570']
@@ -657,7 +657,7 @@ export type HeadingTheme = Typography & {
   secondaryColor: Colors['contrasts']['grey4570']
   secondaryInverseColor: Colors['contrasts']['grey1111']
   borderPadding: Spacing['xxxSmall']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
 }
@@ -800,7 +800,7 @@ export type ModalBodyTheme = {
 
 export type ModalFooterTheme = {
   background: Colors['contrasts']['grey1111']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   borderWidth: Border['widthSmall']
   borderRadius: Border['radiusMedium']
   padding: Spacing['small']
@@ -810,7 +810,7 @@ export type ModalFooterTheme = {
 
 export type ModalHeaderTheme = {
   background: Colors['contrasts']['white1010']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   padding: Spacing['medium']
   paddingCompact: Spacing['small']
   inverseBackground: Colors['contrasts']['grey125125']
@@ -852,7 +852,7 @@ export type AppNavItemTheme = {
 export type AppNavTheme = {
   fontFamily: Typography['fontFamily']
   height: string | 0
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   borderStyle: Border['style']
   borderWidth: Border['widthSmall']
   horizontalMargin: Spacing['xxSmall']
@@ -899,7 +899,7 @@ export type NumberInputTheme = {
   fontWeight: Typography['fontWeightNormal']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey3045']
   borderRadius: Border['radiusMedium']
   color: Colors['contrasts']['grey125125']
   background: Colors['contrasts']['white1010']
@@ -908,7 +908,7 @@ export type NumberInputTheme = {
   arrowsColor: Colors['contrasts']['grey125125']
   arrowsBackgroundColor: Colors['contrasts']['grey1111']
   arrowsHoverBackgroundColor: Colors['contrasts']['grey1214']
-  arrowsBorderColor: Colors['contrasts']['grey1214']
+  arrowsBorderColor: Colors['contrasts']['grey3045']
   arrowsActiveBoxShadow: string
   focusOutlineWidth: Border['widthMedium']
   focusOutlineStyle: Border['style']
@@ -1252,7 +1252,7 @@ export type TableCellTheme = {
   fontWeight: Typography['fontWeightNormal']
   color: Colors['contrasts']['grey125125']
   background: Colors['contrasts']['white1010']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey3045']
   lineHeight: Typography['lineHeightCondensed']
   padding: string | 0
 }
@@ -1317,7 +1317,7 @@ export type TabsPanelTheme = {
   lineHeight: Typography['lineHeight']
   color: Colors['contrasts']['grey125125']
   background: Colors['contrasts']['white1010']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
   defaultOverflowY: string
@@ -1364,7 +1364,7 @@ export type TagTheme = {
   transitionTiming: string
   defaultBackgroundHover: Colors['contrasts']['grey1214']
   defaultBackground: Colors['contrasts']['grey1111']
-  defaultBorderColor: Colors['contrasts']['grey1214']
+  defaultBorderColor: Colors['contrasts']['grey1424']
   defaultBorderRadius: string
   defaultBorderStyle: string
   defaultBorderWidth: string | 0
@@ -1469,7 +1469,7 @@ export type ToggleDetailsTheme = {
   filledBackgroundColor: Colors['contrasts']['grey1111']
   filledBorderWidth: Border['widthSmall']
   filledBorderStyle: Border['style']
-  filledBorderColor: Colors['contrasts']['grey1214']
+  filledBorderColor: Colors['contrasts']['grey1424']
   filledBorderRadius: Border['radiusMedium']
   filledPadding: Spacing['small']
 }
@@ -1577,7 +1577,7 @@ export type TopNavBarMenuItemsTheme = {
 
 export type TrayTheme = {
   background: Colors['contrasts']['white1010']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: Colors['contrasts']['grey1424']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
   boxShadow: Shadows['depth3']
@@ -1644,7 +1644,7 @@ export type ContextViewTheme = {
   arrowSize: string | 0
   arrowBorderWidth: Border['widthSmall']
   arrowBackgroundColor: Colors['contrasts']['white1010']
-  arrowBorderColor: Colors['contrasts']['grey1214']
+  arrowBorderColor: Colors['contrasts']['grey1424']
   arrowBackgroundColorInverse: Colors['contrasts']['grey125125']
   arrowBorderColorInverse: string
 }

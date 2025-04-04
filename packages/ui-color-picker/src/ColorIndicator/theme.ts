@@ -25,8 +25,6 @@
 import type { Theme } from '@instructure/ui-themes'
 import { ColorIndicatorTheme } from '@instructure/shared-types'
 
-export const colorIndicatorBorderColor = '#384A5899'
-
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -45,7 +43,7 @@ const generateComponentTheme = (theme: Theme): ColorIndicatorTheme => {
     backgroundPosition: '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
     circleIndicatorSize: '1.5rem',
     rectangleIndicatorSize: '2.375rem',
-    colorIndicatorBorderColor,
+    colorIndicatorBorderColor: colors?.contrasts?.grey1424,
     rectangularIndicatorBorderRadius: spacing?.xxSmall,
     rectangularIndicatorBorderWidth: borders?.widthSmall
   }
