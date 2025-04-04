@@ -188,7 +188,7 @@ export type BaseButtonTheme = {
   primaryGhostHoverBoxShadow: string
 
   secondaryColor: Colors['contrasts']['grey125125']
-  secondaryBorderColor: Colors['contrasts']['grey1214']
+  secondaryBorderColor: Colors['contrasts']['grey1424']
   secondaryBackground: Colors['contrasts']['grey1111']
   secondaryHoverBackground: Colors['contrasts']['grey1214']
   secondaryActiveBackground: Colors['contrasts']['grey1214']
