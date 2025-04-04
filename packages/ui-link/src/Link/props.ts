@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   ToProp,
   AsElementType,
@@ -162,7 +160,7 @@ const propTypes: PropValidators<PropKeys> = {
   role: PropTypes.string,
   forceButtonRole: PropTypes.bool,
   interaction: PropTypes.oneOf(['enabled', 'disabled']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   iconPlacement: PropTypes.oneOf(['start', 'end']),
   display: PropTypes.oneOf([

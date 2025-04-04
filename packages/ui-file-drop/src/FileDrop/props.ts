@@ -25,7 +25,6 @@
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
@@ -214,7 +213,7 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   inputRef: PropTypes.func
 }
 

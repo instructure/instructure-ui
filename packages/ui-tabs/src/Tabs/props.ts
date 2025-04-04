@@ -25,7 +25,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { Panel } from './Panel'
 
@@ -124,8 +123,8 @@ const propTypes: PropValidators<PropKeys> = {
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fixHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: ThemeablePropTypes.spacing,
-  padding: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
+  padding: PropTypes.string,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   elementRef: PropTypes.func,
   tabOverflow: PropTypes.oneOf(['stack', 'scroll']),

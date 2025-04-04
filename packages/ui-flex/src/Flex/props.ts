@@ -24,8 +24,6 @@
 
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   AsElementType,
   PropValidators,
@@ -143,9 +141,9 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: ThemeablePropTypes.spacing,
-  padding: ThemeablePropTypes.spacing,
-  gap: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
+  padding: PropTypes.string,
+  gap: PropTypes.string,
   display: PropTypes.oneOf(['flex', 'inline-flex']),
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   direction: PropTypes.oneOf([

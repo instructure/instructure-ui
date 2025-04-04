@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   AsElementType,
   OtherHTMLAttributes,
@@ -128,8 +126,8 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   as: PropTypes.elementType,
   elementRef: PropTypes.func,
-  margin: ThemeablePropTypes.spacing,
-  padding: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
+  padding: PropTypes.string,
   align: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
   direction: PropTypes.oneOf(['row', 'column']),
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),

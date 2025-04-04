@@ -95,13 +95,13 @@ const propTypes: PropValidators<PropKeys> = {
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   /**
    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
    */
-  padding: ThemeablePropTypes.spacing,
+  padding: PropTypes.string,
 
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

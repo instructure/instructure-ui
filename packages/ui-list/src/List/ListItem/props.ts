@@ -25,8 +25,6 @@
 import { PropsWithChildren } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -89,8 +87,8 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  margin: ThemeablePropTypes.spacing,
-  padding: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
+  padding: PropTypes.string,
   spacing: PropTypes.oneOf([
     'none',
     'xxx-small',

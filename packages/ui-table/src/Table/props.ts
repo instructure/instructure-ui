@@ -24,8 +24,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -87,7 +85,7 @@ type TableStyle = ComponentStyle<'table'>
 const propTypes: PropValidators<PropKeys> = {
   caption: PropTypes.node.isRequired,
   children: PropTypes.node,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   elementRef: PropTypes.func,
   hover: PropTypes.bool,
   layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])

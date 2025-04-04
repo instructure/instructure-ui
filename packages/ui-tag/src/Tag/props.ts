@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type { ViewProps } from '@instructure/ui-view'
 import type {
   Spacing,
@@ -91,7 +89,7 @@ const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
   dismissible: PropTypes.bool,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   onClick: PropTypes.func,
   elementRef: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium', 'large']),

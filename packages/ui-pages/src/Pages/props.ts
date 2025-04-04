@@ -25,7 +25,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children, controllable } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { Page } from './Page'
 
@@ -87,7 +86,7 @@ const propTypes: PropValidators<PropKeys> = {
     'defaultPageIndex'
   ),
   onPageIndexChange: PropTypes.func,
-  margin: ThemeablePropTypes.spacing
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [

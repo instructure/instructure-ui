@@ -25,8 +25,6 @@
 import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
@@ -160,7 +158,7 @@ const propTypes: PropValidators<PropKeys> = {
   shape: PropTypes.oneOf(['rectangle', 'circle']),
   withBackground: PropTypes.bool,
   withBorder: PropTypes.bool,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   cursor: PropTypes.string,
   href: PropTypes.string,
   onClick: PropTypes.func

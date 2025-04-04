@@ -25,7 +25,6 @@
 import PropTypes from 'prop-types'
 
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
   AsElementType,
@@ -117,7 +116,7 @@ const propTypes: PropValidators<PropKeys> = {
   ]),
   level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
   as: PropTypes.elementType,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   elementRef: PropTypes.func,
   variant: PropTypes.oneOf([
     'titlePageDesktop',

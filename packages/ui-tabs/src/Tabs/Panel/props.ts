@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -89,7 +87,7 @@ const propTypes: PropValidators<PropKeys> = {
   minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   id: PropTypes.string,
   labelledBy: PropTypes.string,
-  padding: ThemeablePropTypes.spacing,
+  padding: PropTypes.string,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   elementRef: PropTypes.func,
   active: PropTypes.bool,

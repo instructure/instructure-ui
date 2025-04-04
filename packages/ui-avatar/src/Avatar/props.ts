@@ -25,8 +25,6 @@
 import { SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -146,7 +144,7 @@ const propTypes: PropValidators<PropKeys> = {
   hasInverseColor: PropTypes.bool,
   showBorder: PropTypes.oneOf(['auto', 'always', 'never']),
   shape: PropTypes.oneOf(['circle', 'rectangle']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   display: PropTypes.oneOf(['inline-block', 'block']),
   onImageLoaded: PropTypes.func,
   as: PropTypes.elementType,

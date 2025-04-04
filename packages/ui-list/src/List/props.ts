@@ -26,7 +26,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { ListItem } from './ListItem'
 
@@ -96,7 +95,7 @@ const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.oneOf(['ul', 'ol']),
   delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
   isUnstyled: PropTypes.bool,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   itemSpacing: PropTypes.oneOf([
     'none',

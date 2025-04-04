@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -141,7 +139,7 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   onClick: PropTypes.func,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   placement: PropTypes.oneOf(['start', 'end', 'static']),
   offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
   type: PropTypes.oneOf(['button', 'submit', 'reset']),

@@ -40,8 +40,7 @@ const {
   BORDER_WIDTHS,
   BORDER_RADII,
   BACKGROUNDS,
-  SIZES,
-  SPACING
+  SIZES
 } = ThemeablePropValues
 
 /**
@@ -57,8 +56,7 @@ const ThemeablePropTypes = {
   borderWidth: shorthandPropType(Object.values(BORDER_WIDTHS)),
   borderRadius: shorthandPropType(Object.values(BORDER_RADII)),
   background: PropTypes.oneOf(Object.values(BACKGROUNDS)),
-  size: PropTypes.oneOf(Object.values(SIZES)),
-  spacing: shorthandPropType(Object.values(SPACING))
+  size: PropTypes.oneOf(Object.values(SIZES))
 }
 
 type ValueKeys =

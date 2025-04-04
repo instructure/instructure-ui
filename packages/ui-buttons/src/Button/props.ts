@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
@@ -153,7 +151,7 @@ const propTypes: PropValidators<PropKeys> = {
   display: PropTypes.oneOf(['inline-block', 'block']),
   textAlign: PropTypes.oneOf(['start', 'center']),
   withBackground: PropTypes.bool,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   cursor: PropTypes.string,
   href: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

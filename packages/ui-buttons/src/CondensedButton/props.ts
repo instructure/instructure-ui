@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
@@ -122,7 +120,7 @@ const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
   color: PropTypes.oneOf(['primary', 'primary-inverse', 'secondary']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   cursor: PropTypes.string,
   href: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
