@@ -26,7 +26,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 
@@ -214,7 +213,7 @@ const propTypes: PropValidators<PropKeys> = {
   labelNumberInput: PropTypes.func,
   screenReaderLabelNumberInput: PropTypes.func,
   variant: PropTypes.oneOf(['full', 'compact', 'input']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   as: PropTypes.elementType,
   elementRef: PropTypes.func,
   inputRef: PropTypes.func,

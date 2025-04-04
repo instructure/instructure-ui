@@ -25,7 +25,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { Item } from './Item'
 
@@ -110,7 +109,7 @@ const propTypes: PropValidators<PropKeys> = {
   debounce: PropTypes.number,
   renderBeforeItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   elementRef: PropTypes.func,
   renderTruncateLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   onUpdate: PropTypes.func,

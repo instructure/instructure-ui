@@ -26,7 +26,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 import { InlineListItem } from './InlineListItem'
 
 import type { Spacing } from '@instructure/emotion'
@@ -79,7 +78,7 @@ type InlineListProps = InlineListOwnProps &
 const propTypes: PropValidators<PropKeys> = {
   children: ChildrenPropTypes.oneOf([InlineListItem]),
   as: PropTypes.oneOf(['ul', 'ol']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
   itemSpacing: PropTypes.oneOf([

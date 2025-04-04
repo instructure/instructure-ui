@@ -25,8 +25,6 @@
 import { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -122,7 +120,7 @@ type AlertStyle = ComponentStyle<'alert' | 'icon' | 'closeButton' | 'content'>
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   variant: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   liveRegion: PropTypes.func,
   liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
   isLiveRegionAtomic: PropTypes.bool,

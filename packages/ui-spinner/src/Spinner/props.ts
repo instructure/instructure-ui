@@ -23,8 +23,6 @@
  */
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -94,7 +92,7 @@ const propTypes: PropValidators<PropKeys> = {
   renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
   variant: PropTypes.oneOf(['default', 'inverse']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   elementRef: PropTypes.func,
   as: PropTypes.elementType
 }

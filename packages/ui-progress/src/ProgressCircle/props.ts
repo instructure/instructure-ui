@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
   Spacing,
@@ -137,7 +136,7 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.func,
     PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
   ]),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   elementRef: PropTypes.func,
   as: PropTypes.elementType,
   shouldAnimateOnMount: PropTypes.bool,

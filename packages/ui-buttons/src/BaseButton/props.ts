@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type {
   Spacing,
@@ -205,7 +203,7 @@ const propTypes: PropValidators<PropKeys> = {
   withBackground: PropTypes.bool,
   withBorder: PropTypes.bool,
   isCondensed: PropTypes.bool,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   cursor: PropTypes.string,
   href: PropTypes.string,
   onClick: PropTypes.func,

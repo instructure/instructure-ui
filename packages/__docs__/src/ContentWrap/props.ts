@@ -24,7 +24,6 @@
 
 import PropTypes from 'prop-types'
 import type { PropValidators } from '@instructure/shared-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 import type { Spacing } from '@instructure/emotion'
 
 type ContentWrapOwnProps = {
@@ -42,7 +41,7 @@ type ContentWrapProps = ContentWrapOwnProps
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   maxWidth: PropTypes.string,
-  padding: ThemeablePropTypes.spacing
+  padding: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = ['children', 'maxWidth', 'padding']

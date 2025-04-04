@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -64,7 +62,7 @@ type ModalBodyState = {
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
-  padding: ThemeablePropTypes.spacing,
+  padding: PropTypes.string,
   /**
    * provides a reference to the underlying html root element
    */

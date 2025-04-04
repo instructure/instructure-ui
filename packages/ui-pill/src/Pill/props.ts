@@ -24,8 +24,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -87,7 +85,7 @@ const propTypes: PropValidators<PropKeys> = {
     'alert'
   ]),
   elementRef: PropTypes.func,
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   statusLabel: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }

@@ -23,7 +23,6 @@
  */
 
 import PropTypes from 'prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
   PropValidators,
@@ -82,7 +81,7 @@ const propTypes: PropValidators<PropKeys> = {
   alt: PropTypes.string,
   display: PropTypes.oneOf(['inline-block', 'block']),
   loading: PropTypes.oneOf(['eager', 'lazy']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   overlay: PropTypes.shape({
     color: PropTypes.string.isRequired,
     opacity: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).isRequired,

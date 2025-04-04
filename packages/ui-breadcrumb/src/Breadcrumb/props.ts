@@ -25,7 +25,6 @@
 import PropTypes from 'prop-types'
 
 import { Children } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { BreadcrumbLink } from './BreadcrumbLink'
 
@@ -70,7 +69,7 @@ const propTypes: PropValidators<PropKeys> = {
   children: Children.oneOf([BreadcrumbLink]),
   label: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  margin: ThemeablePropTypes.spacing
+  margin: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = ['children', 'label', 'margin', 'size']

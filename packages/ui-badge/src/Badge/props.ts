@@ -25,7 +25,6 @@
 import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'
-import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
   AsElementType,
@@ -110,7 +109,7 @@ const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['primary', 'success', 'danger', 'inverse']),
   placement: PositionPropTypes.placement,
   display: PropTypes.oneOf(['inline-block', 'block']),
-  margin: ThemeablePropTypes.spacing,
+  margin: PropTypes.string,
   elementRef: PropTypes.func,
   formatOverflowText: PropTypes.func,
   formatOutput: PropTypes.func,

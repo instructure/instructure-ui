@@ -25,8 +25,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type { Spacing } from '@instructure/emotion'
 import type { PropValidators, UIElement } from '@instructure/shared-types'
 
@@ -64,7 +62,7 @@ type PagesPageProps = PagesPageOwnProps
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  padding: ThemeablePropTypes.spacing,
+  padding: PropTypes.string,
   textAlign: PropTypes.oneOf(['start', 'center', 'end'])
 }
 
