@@ -41,7 +41,7 @@ const generateComponentTheme = (theme: Theme): TableCellTheme => {
     color: colors?.contrasts?.grey125125,
     background: colors?.contrasts?.white1010,
 
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey3045,
 
     lineHeight: typography?.lineHeightCondensed,
     padding: `${spacing?.xSmall} ${spacing?.small}`

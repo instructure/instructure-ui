@@ -35,7 +35,7 @@ const generateComponentTheme = (theme: Theme): ModalHeaderTheme => {
 
   const componentVariables: ModalHeaderTheme = {
     background: colors?.contrasts?.white1010,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey1424,
     padding: spacing?.medium,
     paddingCompact: spacing?.small,
 

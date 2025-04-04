@@ -81,7 +81,7 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
     secondaryInverseColor: colors?.contrasts?.grey1111,
 
     borderPadding: spacing?.xxxSmall,
-    borderColor: colors?.contrasts?.grey1214,
+    borderColor: colors?.contrasts?.grey1424,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style
   }

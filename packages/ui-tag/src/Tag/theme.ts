@@ -64,7 +64,7 @@ const generateComponentTheme = (theme: Theme): TagTheme => {
 
     defaultBackgroundHover: colors?.contrasts?.grey1214,
     defaultBackground: colors?.contrasts?.grey1111,
-    defaultBorderColor: colors?.contrasts?.grey1214,
+    defaultBorderColor: colors?.contrasts?.grey1424,
     defaultBorderRadius: '999rem',
     defaultBorderStyle: borders.style,
     defaultBorderWidth: borders.widthSmall,
