@@ -36,7 +36,7 @@ type DocDataType = DocData & { legacyGitBranch?: string }
 type DocumentOwnProps = {
   doc: DocDataType
   description: string
-  themeVariables?: BaseThemeVariables
+  themeVariables?: BaseThemeVariables & { key: string }
   repository?: string
   layout?: 'small' | 'medium' | 'large' | 'x-large'
 }

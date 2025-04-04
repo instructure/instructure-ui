@@ -90,8 +90,11 @@ class Document extends Component<DocumentProps, DocumentState> {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: typeof this.props) {
     this.props.makeStyles?.()
+    if (this.props.themeVariables?.key !== prevProps.themeVariables?.key) {
+      this.fetchGenerateComponentTheme()
+    }
   }
 
   handleDetailsTabChange: TabsProps['onRequestTabChange'] = (

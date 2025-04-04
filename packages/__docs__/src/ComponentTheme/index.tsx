@@ -45,10 +45,7 @@ class ComponentTheme extends Component<ComponentThemeProps> {
     colorPrimitives: object
   ) {
     if (!value) {
-      return <code>$aposundefined$apos</code>
-    }
-    if (typeof value === 'object') {
-      return <code>{JSON.stringify(value)}</code>
+      return <code>ERROR - possible bug</code>
     }
     if (typeof value === 'object') {
       return <code>{JSON.stringify(value)}</code>
