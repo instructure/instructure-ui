@@ -28,7 +28,8 @@ import {
   contains,
   addEventListener,
   ownerDocument,
-  findTabbable
+  findTabbable,
+  canUseDOM
 } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { logError as error } from '@instructure/console'
@@ -96,7 +97,13 @@ class FocusRegion {
       this._options.shouldCloseOnDocumentClick &&
       event.button === 0 &&
       event.detail > 0 && // if event.detail is 0 then this is a keyboard and not a mouse press
-      !this._contextContainsTarget
+      !this._contextContainsTarget &&
+      //this prevents clicking on Tooltip from closing the parent dialog
+      !(
+        canUseDOM &&
+        this._documentClickTarget instanceof HTMLElement &&
+        this._documentClickTarget.closest('[role="tooltip"]')
+      )
     ) {
       this.handleDismiss(event, true)
     }
