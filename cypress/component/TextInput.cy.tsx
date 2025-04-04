@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { TextInput } from '../../packages/ui'
+import React, { useState } from 'react'
+import { TextInput } from '@instructure/ui'
 
 import '../support/component'
 import 'cypress-real-events'
@@ -109,5 +109,44 @@ describe('<TextInput/>', () => {
       'padding-inline-end',
       '12px'
     )
+  })
+
+  it('should maintain focus while typing when after-content is conditionally rendered', () => {
+    const TextTextInput = () => {
+      const [value, setValue] = useState('')
+
+      const renderAfterInput = () => {
+        if (!value) return
+        return <div>Hello!</div>
+      }
+
+      return (
+        <TextInput
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue)
+          }}
+          renderAfterInput={renderAfterInput}
+        />
+      )
+    }
+    cy.mount(<TextTextInput />)
+
+    cy.get('input').as('textInput').click().should('be.focused')
+    cy.get('[class*="textInput__afterElement"]').should('not.exist')
+
+    cy.get('@textInput')
+      .type('a')
+      .should(($input) => {
+        expect($input).to.have.value('a')
+      })
+      .should('have.focus')
+
+    cy.get('[class*="textInput__afterElement"]').should('contain', 'Hello!')
+
+    cy.get('@textInput')
+      .type('bc')
+      .should('have.value', 'abc')
+      .and('be.focused')
   })
 })
