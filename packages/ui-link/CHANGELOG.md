@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
+
+
+### Bug Fixes
+
+* update PropTypes to align with the new spacing tokens ([223d55b](https://github.com/instructure/instructure-ui/commit/223d55bad95e2a3a8b298d622e5b1d0fbab6b289))
+
+
+
+
+
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-link

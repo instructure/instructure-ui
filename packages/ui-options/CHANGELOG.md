@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
+
+
+### Bug Fixes
+
+* **ui-options:** fix isAndroidOrIOS missing error for some bundlers ([3a383f8](https://github.com/instructure/instructure-ui/commit/3a383f8b188416f71dc888ba552fa9e50376cb31))
+
+
+
+
+
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-options
