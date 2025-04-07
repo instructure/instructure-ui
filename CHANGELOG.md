@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** prevent clicking on a Tooltip from closing the parent dialog ([89910fa](https://github.com/instructure/instructure-ui/commit/89910fafa6dbd8893965f5787f99972c65f47a1c))
+* **ui-buttons:** fix tabindex=0 added unnecessarly to Buttons ([a9a68a4](https://github.com/instructure/instructure-ui/commit/a9a68a447d04e6c5509e0ce785745cdcaea73c54))
+* **ui-options:** fix isAndroidOrIOS missing error for some bundlers ([3a383f8](https://github.com/instructure/instructure-ui/commit/3a383f8b188416f71dc888ba552fa9e50376cb31))
+* update PropTypes to align with the new spacing tokens ([223d55b](https://github.com/instructure/instructure-ui/commit/223d55bad95e2a3a8b298d622e5b1d0fbab6b289))
+
+
+
+
+
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 

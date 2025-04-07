@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** prevent clicking on a Tooltip from closing the parent dialog ([89910fa](https://github.com/instructure/instructure-ui/commit/89910fafa6dbd8893965f5787f99972c65f47a1c))
+
+
+
+
+
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-a11y-utils
