@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - present Instructure, Inc.
+ * Copyright (c) 2021 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { TreeBrowser } from './index'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 
-// TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const TreeBrowserItemLocator = locator('[role="treeitem"]')
+import '@testing-library/jest-dom'
+import { TreeNode } from '../index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const TreeBrowserLocator = locator(TreeBrowser.selector, {
-  findAllItems: (...args: any[]) => {
-    return TreeBrowserItemLocator.findAll(...args)
-  },
-  findItem: (...args: any[]) => {
-    return TreeBrowserItemLocator.find(...args)
-  }
+describe('<TreeNode />', () => {
+  it('should render children', async () => {
+    render(
+      <TreeNode>
+        <button>Hello World</button>
+      </TreeNode>
+    )
+    const item = screen.getByText('Hello World')
+
+    expect(item).toBeInTheDocument()
+  })
+
+  it('supports containerRef prop', async () => {
+    const containerRef = vi.fn()
+    render(
+      <div data-testid="1">
+        <TreeNode containerRef={containerRef}>
+          <button>Hello World</button>
+        </TreeNode>
+      </div>
+    )
+    const div = screen.getByTestId('1')
+
+    expect(containerRef).toHaveBeenCalledWith(div)
+  })
 })
