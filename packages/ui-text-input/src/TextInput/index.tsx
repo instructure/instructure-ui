@@ -145,12 +145,15 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   makeStyleProps = (): TextInputStyleProps => {
     const { interaction } = this
     const { hasFocus, afterElementHasWidth } = this.state
+    const beforeElement = this.props.renderBeforeInput
+      ? callRenderProp(this.props.renderBeforeInput)
+      : null
     return {
       disabled: interaction === 'disabled',
       invalid: this.invalid,
       focused: hasFocus,
       afterElementHasWidth: afterElementHasWidth,
-      beforeElementExists: this.props.renderBeforeInput != undefined
+      beforeElementExists: !!beforeElement
     }
   }
 
@@ -309,7 +312,11 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       ? callRenderProp(renderAfterInput)
       : null
 
-    const renderBeforeOrAfter = !!beforeElement || !!afterElement
+    const renderBeforeOrAfter =
+      !!beforeElement ||
+      !!afterElement ||
+      renderBeforeInput !== undefined ||
+      renderAfterInput !== undefined
 
     const rawLabel = callRenderProp(renderLabel)
     const label = hasVisibleChildren(rawLabel) ? (
