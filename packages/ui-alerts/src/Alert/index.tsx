@@ -28,7 +28,8 @@ import keycode from 'keycode'
 
 import {
   callRenderProp,
-  withDeterministicId
+  withDeterministicId,
+  passthroughProps
 } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
@@ -257,16 +258,18 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   renderAlert() {
+    const { margin, styles, children, ...props } = this.props
     return (
       <View
+        {...passthroughProps({ ...props })}
         as="div"
-        margin={this.props.margin}
-        css={this.props.styles?.alert}
+        margin={margin}
+        css={styles?.alert}
         onKeyUp={this.handleKeyUp}
         elementRef={this.handleRef}
       >
         {this.renderIcon()}
-        <div css={this.props.styles?.content}>{this.props.children}</div>
+        <div css={styles?.content}>{children}</div>
         {this.renderCloseButton()}
       </View>
     )
