@@ -108,9 +108,10 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     }
     for (const msg of this.props.messages) {
       if (msg.text) {
-        if (typeof msg.text === 'string') {
-          return msg.text.length > 0
+        if (typeof msg.text === 'string' && msg.text.length > 0) {
+          return true
         }
+      } else {
         // this is more complicated (e.g. an array, a React component,...)
         // but we don't try to optimize here for these cases
         return true

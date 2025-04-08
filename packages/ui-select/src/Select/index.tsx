@@ -697,10 +697,15 @@ class Select extends Component<SelectProps> {
     // popup buttons rather than comboboxes.
     const overrideProps: Partial<TextInputProps> = !isEditable
       ? {
-          // Given that Safari with Voiceover does not support proper combobox
-          // handling, a button role is set as a workaround.
+          // We need role="combobox" for the 'open list' button shortcut to work
+          // with desktop screenreaders.
+          // But desktop Safari with Voiceover does not support proper combobox
+          // handling, a 'button' role is set as a workaround.
           // See https://bugs.webkit.org/show_bug.cgi?id=236881
-          role: utils.isSafari() ? 'button' : 'combobox',
+          // Also on iOS Chrome with role='combobox' it announces unnecessarily
+          // that its 'read-only' and that this is a 'textfield', see INSTUI-4500
+          role:
+            utils.isSafari() || utils.isAndroidOrIOS() ? 'button' : 'combobox',
           title: inputValue,
           'aria-autocomplete': undefined,
           'aria-readonly': true
