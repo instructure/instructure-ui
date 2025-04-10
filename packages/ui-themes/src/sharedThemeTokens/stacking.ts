@@ -24,7 +24,7 @@
 
 import { Stacking } from '@instructure/shared-types'
 
-const stacking: Stacking = Object.freeze({
+const stacking: Stacking = Object.freeze<Stacking>({
   topmost: 9999,
   above: 1,
   below: -1,

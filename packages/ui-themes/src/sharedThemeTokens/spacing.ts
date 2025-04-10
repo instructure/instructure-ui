@@ -24,7 +24,7 @@
 
 import { Spacing } from '@instructure/shared-types'
 
-const spacing: Spacing = Object.freeze({
+const spacing: Spacing = Object.freeze<Spacing>({
   // legacy spacing tokens:
   xxxSmall: '0.125rem', // 2px
   xxSmall: '0.375rem', // 6px

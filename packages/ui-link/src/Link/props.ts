@@ -129,6 +129,11 @@ type LinkOwnProps = {
    * Fires when the Link is hovered
    */
   onMouseEnter?: (event: React.MouseEvent<ViewOwnProps>) => void
+
+  /**
+   * Sets pre-defined values for the component to achieve specific roles for the component
+   */
+  variant?: 'inline' | 'inline-small' | 'standalone' | 'standalone-small'
 }
 
 export type LinkStyleProps = {
@@ -174,7 +179,13 @@ const propTypes: PropValidators<PropKeys> = {
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
-  onMouseEnter: PropTypes.func
+  onMouseEnter: PropTypes.func,
+  variant: PropTypes.oneOf([
+    'inline',
+    'inline-small',
+    'standalone',
+    'standalone-small'
+  ])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -194,7 +205,8 @@ const allowedProps: AllowedPropKeys = [
   'onBlur',
   'onClick',
   'onFocus',
-  'onMouseEnter'
+  'onMouseEnter',
+  'variant'
 ]
 
 export type { LinkProps, LinkState, LinkStyle }

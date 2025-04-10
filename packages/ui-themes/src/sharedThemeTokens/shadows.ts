@@ -31,7 +31,7 @@ const values = [
   '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)'
 ]
 
-const shadows: Shadows = Object.freeze({
+const shadows: Shadows = Object.freeze<Shadows>({
   depth1: values[0],
   depth2: values[1],
   depth3: values[2],

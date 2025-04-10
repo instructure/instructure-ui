@@ -670,6 +670,9 @@ export type ImgTheme = {
 export type LinkTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
+  fontSize: string | 0
+  fontSizeSmall: string | 0
+  lineHeight: number
   color: Colors['contrasts']['blue4570']
   textDecorationWithinText: string
   hoverTextDecorationWithinText: string
@@ -684,7 +687,8 @@ export type LinkTheme = {
   focusInverseOutlineColor: Colors['contrasts']['white1010']
   focusInverseIconOutlineColor: Colors['contrasts']['white1010']
   iconSize: string
-  iconPlusTextMargin: Spacing['xxSmall']
+  iconPlusTextMargin: string | 0
+  iconPlusTextMarginSmall: string | 0
   textUnderlineOffset: string
 }
 

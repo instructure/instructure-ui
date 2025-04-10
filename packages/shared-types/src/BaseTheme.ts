@@ -77,6 +77,35 @@ type Spacing = {
   large: string | 0
   xLarge: string | 0
   xxLarge: string | 0
+
+  space0: string | 0
+  space2: string | 0
+  space4: string | 0
+  space8: string | 0
+  space12: string | 0
+  space16: string | 0
+  space24: string | 0
+  space36: string | 0
+  space48: string | 0
+  space60: string | 0
+  sections: string | 0
+  sectionElements: string | 0
+  trayElements: string | 0
+  modalElements: string | 0
+  moduleElements: string | 0
+  paddingCardLarge: string | 0
+  paddingCardMedium: string | 0
+  paddingCardSmall: string | 0
+  selects: string | 0
+  textareas: string | 0
+  inputFields: string | 0
+  checkboxes: string | 0
+  radios: string | 0
+  toggles: string | 0
+  buttons: string | 0
+  tags: string | 0
+  statusIndicators: string | 0
+  dataPoints: string | 0
 }
 
 type Stacking = {

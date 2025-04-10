@@ -252,9 +252,9 @@ class Link extends Component<LinkProps, LinkState> {
         tabIndex={tabIndex}
         css={this.props.styles?.link}
       >
-        {renderIcon && iconPlacement === 'start' && this.renderIcon()}
+        {renderIcon && iconPlacement === 'start' ? this.renderIcon() : null}
         {children}
-        {renderIcon && iconPlacement === 'end' && this.renderIcon()}
+        {renderIcon && iconPlacement === 'end' ? this.renderIcon() : null}
       </View>
     )
   }
