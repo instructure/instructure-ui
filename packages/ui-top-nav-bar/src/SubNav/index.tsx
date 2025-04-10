@@ -23,28 +23,36 @@
  */
 
 /** @jsx jsx */
-import { jsx, useStyle, withFunctionalStyle } from '@instructure/emotion'
+import { jsx, useStyle } from '@instructure/emotion'
 
 import { generateStyle } from './styles'
 import { Link } from '@instructure/ui-link'
 import { SubNavProps, MenuItem } from './props'
+import { LinkTheme } from '@instructure/shared-types'
 
 /**
 ---
 category: components
 ---
- **/
+**/
 const SubNav = ({ menuItems }: SubNavProps) => {
   const styles = useStyle({ generateStyle, params: {} })
 
   return (
     <div css={styles.container}>
       {menuItems.map((item: MenuItem) => (
-        <div css={styles.linkContainer(item)} key={item.title}>
+        <div
+          css={
+            item.selected ? styles.linkContainerSelected : styles.linkContainer
+          }
+          key={item.title}
+        >
           <Link
             key={item.title}
             href={item.href}
-            themeOverride={styles.link(item)}
+            {...(item.selected && {
+              themeOverride: styles.linkOverride as Partial<LinkTheme>
+            })}
             isWithinText={false}
             onClick={item.onClick}
           >
