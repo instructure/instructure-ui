@@ -24,38 +24,41 @@
 
 import { ComponentStyle } from '@instructure/emotion'
 
-type SubNavStyle = ComponentStyle
+type SubNavStyle = ComponentStyle<
+  'container' | 'linkContainer' | 'linkContainerSelected' | 'linkOverride'
+>
 
-const generateStyle = (theme: any, params: any): SubNavStyle => {
+const generateStyle = (theme: any, _params: any): SubNavStyle => {
+  const linkContainerBase = {
+    label: 'subNavLinkContainer',
+    display: 'flex',
+    alignItems: 'center',
+    color: theme?.colors?.contrasts?.grey125125,
+    fontSize: '16px',
+    borderColor: theme?.colors?.contrasts?.grey125125,
+    height: '32px',
+    fontWeight: 'bold',
+    marginBottom: '4px',
+    paddingLeft: '4px'
+  }
+
   return {
     container: {
       marginLeft: '20px',
       marginTop: '20px',
       label: 'subNavContainer'
     },
-    linkContainer: (item: any) => {
-      return {
-        label: 'subNavLinkContainer',
-        display: 'flex',
-        alignItems: 'center',
-        color: theme?.colors?.contrasts?.grey125125,
-        fontSize: '16px',
-        borderLeft: item.selected ? '3px solid' : 'none',
-        borderColor: theme?.colors?.contrasts?.grey125125,
-        height: '32px',
-        fontWeight: 'bold',
-        marginBottom: '4px',
-        paddingLeft: '4px'
-      }
+    linkContainer: {
+      ...linkContainerBase
     },
-    link: (item: any) => {
-      return {
-        label: 'subNavLink',
-        ...(item.selected && {
-          color: theme?.colors?.contrasts?.grey125125,
-          hoverColor: theme?.colors?.contrasts?.grey125125
-        })
-      }
+    linkContainerSelected: {
+      ...linkContainerBase,
+      borderLeft: '3px solid'
+    },
+    linkOverride: {
+      backgroundColor: theme?.colors?.contrasts?.grey125125,
+      color: theme?.colors?.contrasts?.white1010,
+      hoverColor: theme?.colors?.contrasts?.white1010
     }
   }
 }
