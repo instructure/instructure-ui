@@ -27,6 +27,7 @@ export * from '@emotion/react'
 
 export { InstUISettingsProvider } from './InstUISettingsProvider'
 export { withStyle } from './withStyle'
+export { withFunctionalStyle } from './withFunctionalStyle'
 export {
   ThemeablePropValues,
   ThemeablePropTypes,

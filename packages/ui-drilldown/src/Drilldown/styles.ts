@@ -51,7 +51,7 @@ const generateStyle = (
       label: 'drilldown',
       overflow: 'visible', // needed for focus ring!
       borderColor: componentTheme.borderColor,
-
+      background: '#334451',
       ...(hasHighlightedOption && {
         '&:focus::before': {
           display: 'none'
@@ -67,7 +67,8 @@ const generateStyle = (
     },
     headerTitle: {
       label: 'drilldown__headerTitle',
-      fontWeight: componentTheme.headerTitleFontWeight
+      fontWeight: componentTheme.headerTitleFontWeight,
+      textDecoration: componentTheme.headerTitleTextDecoration
     },
     optionContainer: {
       label: 'drilldown__optionContainer',
