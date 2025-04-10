@@ -29,6 +29,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 import Avatar from '../index'
 import { IconGroupLine } from '@instructure/ui-icons'
+import { View } from '@instructure/ui-view'
 
 describe('<Avatar />', () => {
   describe('for a11y', () => {
@@ -72,12 +73,17 @@ describe('<Avatar />', () => {
       expect(getComputedStyle(initials).color).toBe('rgb(43, 122, 188)')
     })
 
-    it('should return the underlying component', async () => {
+    it('refs should return the underlying component', async () => {
       const elementRef = vi.fn()
+      const ref: React.Ref<View> = { current: null }
       const { container } = render(
-        <Avatar name="Avatar Name" elementRef={elementRef} />
+        <>
+          <Avatar id="av1" name="Avatar Name" elementRef={elementRef} />
+          <Avatar id="av2" name="Avatar Name2" ref={ref} />
+        </>
       )
-      expect(elementRef).toHaveBeenCalledWith(container.firstChild)
+      expect(ref.current!.props.id).toBe('av2')
+      expect(elementRef).toHaveBeenCalledWith(container.querySelector('#av1'))
     })
   })
 
