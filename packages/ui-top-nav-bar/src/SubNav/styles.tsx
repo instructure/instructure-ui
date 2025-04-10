@@ -21,9 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { SubNavProps } from './props'
 
-const generateStyles = (_props: SubNavProps, theme: any) => {
+import { ComponentStyle } from '@instructure/emotion'
+
+type SubNavStyle = ComponentStyle
+
+const generateStyle = (theme: any, params: any): SubNavStyle => {
   return {
     container: {
       marginLeft: '20px',
@@ -57,4 +60,4 @@ const generateStyles = (_props: SubNavProps, theme: any) => {
   }
 }
 
-export { generateStyles }
+export { generateStyle }
