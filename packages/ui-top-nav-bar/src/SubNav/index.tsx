@@ -23,9 +23,9 @@
  */
 
 /** @jsx jsx */
-import { jsx, withFunctionalStyle } from '@instructure/emotion'
+import { jsx, useStyle, withFunctionalStyle } from '@instructure/emotion'
 
-import { generateStyles } from './styles'
+import { generateStyle } from './styles'
 import { Link } from '@instructure/ui-link'
 import { SubNavProps, MenuItem } from './props'
 
@@ -34,11 +34,13 @@ import { SubNavProps, MenuItem } from './props'
 category: components
 ---
  **/
-const SubNav = ({ menuItems, styles }: SubNavProps) => {
+const SubNav = ({ menuItems }: SubNavProps) => {
+  const styles = useStyle({ generateStyle, params: {} })
+
   return (
-    <div style={styles.container}>
+    <div css={styles.container}>
       {menuItems.map((item: MenuItem) => (
-        <div style={styles.linkContainer(item)} key={item.title}>
+        <div css={styles.linkContainer(item)} key={item.title}>
           <Link
             key={item.title}
             href={item.href}
@@ -54,9 +56,5 @@ const SubNav = ({ menuItems, styles }: SubNavProps) => {
   )
 }
 
-const SC: any = withFunctionalStyle(generateStyles)(SubNav)
-
-SC.displayName = 'SubNav'
-
-export { SC as SubNav }
-export default SC
+export { SubNav }
+export default SubNav
