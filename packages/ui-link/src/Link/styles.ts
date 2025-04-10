@@ -40,9 +40,32 @@ const generateStyle = (
   props: LinkProps,
   state: LinkStyleProps
 ): LinkStyle => {
-  const { isWithinText, renderIcon, iconPlacement, color } = props
+  const { isWithinText, renderIcon, iconPlacement, color, variant } = props
   const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'
+
+  const variantStyles = {
+    inline: {
+      fontSize: componentTheme.fontSize,
+      lineHeight: componentTheme.lineHeight,
+      textDecoration: 'underline'
+    },
+    'inline-small': {
+      fontSize: componentTheme.fontSizeSmall,
+      lineHeight: '1.3125rem',
+      textDecoration: 'underline'
+    },
+    standalone: {
+      fontSize: componentTheme.fontSize,
+      lineHeight: componentTheme.lineHeight,
+      textDecoration: 'none'
+    },
+    'standalone-small': {
+      fontSize: componentTheme.fontSizeSmall,
+      lineHeight: componentTheme.lineHeight,
+      textDecoration: 'none'
+    }
+  }
 
   const baseStyles = {
     boxSizing: 'border-box',
@@ -84,9 +107,6 @@ const generateStyle = (
     ...baseStyles,
     cursor: 'pointer',
     color: componentTheme.color,
-    textDecoration: isWithinText
-      ? componentTheme.textDecorationWithinText
-      : componentTheme.textDecorationOutsideText,
     '&:focus': {
       color: componentTheme.color,
       outlineColor: componentTheme.focusOutlineColor
@@ -96,7 +116,14 @@ const generateStyle = (
       textDecoration: isWithinText
         ? componentTheme.hoverTextDecorationWithinText
         : componentTheme.hoverTextDecorationOutsideText
-    }
+    },
+    ...(variant
+      ? variantStyles[variant]
+      : {
+          textDecoration: isWithinText
+            ? componentTheme.textDecorationWithinText
+            : componentTheme.textDecorationOutsideText
+        })
   }
 
   const buttonStyle = {
@@ -105,10 +132,10 @@ const generateStyle = (
     background: 'none',
     border: 'none',
     cursor: 'pointer',
-    fontSize: '1em',
     margin: 0,
     padding: 0,
-    textAlign: 'inherit'
+    textAlign: 'inherit',
+    ...(variant ? variantStyles[variant] : { fontSize: '1em' })
   }
 
   const inverseStyles = {
@@ -120,7 +147,32 @@ const generateStyle = (
       color: componentTheme.colorInverse
     }
   }
-
+  const variantIconStyles = {
+    inline: {
+      paddingInlineStart:
+        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
+      paddingInlineEnd:
+        iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
+    },
+    'inline-small': {
+      paddingInlineStart:
+        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMarginSmall,
+      paddingInlineEnd:
+        iconPlacement === 'start' ? componentTheme.iconPlusTextMarginSmall : 0
+    },
+    standalone: {
+      paddingInlineStart:
+        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
+      paddingInlineEnd:
+        iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
+    },
+    'standalone-small': {
+      paddingInlineStart:
+        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMarginSmall,
+      paddingInlineEnd:
+        iconPlacement === 'start' ? componentTheme.iconPlusTextMarginSmall : 0
+    }
+  }
   return {
     link: {
       label: 'link',
@@ -145,10 +197,18 @@ const generateStyle = (
       ...(renderIcon && {
         fontSize: componentTheme.iconSize,
         boxSizing: 'border-box',
-        paddingInlineStart:
-          iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
-        paddingInlineEnd:
-          iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
+        ...(variant
+          ? variantIconStyles[variant]
+          : {
+              paddingInlineStart:
+                iconPlacement === 'start'
+                  ? 0
+                  : componentTheme.iconPlusTextMargin,
+              paddingInlineEnd:
+                iconPlacement === 'start'
+                  ? componentTheme.iconPlusTextMargin
+                  : 0
+            })
       })
     }
   }

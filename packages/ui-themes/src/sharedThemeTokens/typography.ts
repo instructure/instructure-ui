@@ -24,7 +24,7 @@
 
 import { Typography } from '@instructure/shared-types'
 
-const typography: Typography = Object.freeze({
+const typography: Typography = Object.freeze<Typography>({
   fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 

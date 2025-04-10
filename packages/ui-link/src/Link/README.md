@@ -22,6 +22,37 @@ type: example
 </View>
 ```
 
+### Variant
+
+In order to make it easy to get the most commonly used links, we have the variant prop. It will set all the necessary styles (fontSize, lineHeight, and textDecoration).
+
+```js
+---
+type: example
+---
+<div>
+<div>
+In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+</div>
+
+<br></br>
+<div>
+<Text variant="contentSmall">In a line of text, where the text is smaller, use the <Link variant="inline-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline-small</Link> link variant
+</Text>
+</div>
+
+<br></br>
+<div>
+If the link is standalone (not in a text), use the <code>standalone</code> <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+</div>
+
+<br></br>
+<div>
+If the link is standalone (not in a text), but smaller, use the <code>standalone-small</code> <Link display="block" variant="standalone-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone-small</Link>
+</div>
+</div>
+```
+
 ### Adding margin
 
 Use the `margin` prop to add space to the left or right of the Link. Because
@@ -75,6 +106,8 @@ type: example
 Use the `renderIcon` property to put an [icon](#icons) inside a Link. To position the
 icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
 render a Link with just an icon. Don't forget to add text for screen readers, though.
+
+NOTE: if you want the icon to have the same `font-size` as the link, do not specify its `size`!
 
 ```js
 ---

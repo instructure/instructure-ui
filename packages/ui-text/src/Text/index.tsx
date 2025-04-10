@@ -54,11 +54,8 @@ class Text extends Component<TextProps> {
   } as const
 
   checkProps() {
-    const { variant, size, lineHeight, weight, fontStyle } = this.props
+    const { variant, lineHeight, weight, fontStyle } = this.props
     if (variant) {
-      if (size) {
-        console.warn("[Text]: Don't use 'size' with 'variant' ")
-      }
       if (lineHeight) {
         console.warn("[Text]: Don't use 'lineHeight' with 'variant' ")
       }

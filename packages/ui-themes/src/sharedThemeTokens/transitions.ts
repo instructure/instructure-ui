@@ -24,7 +24,7 @@
 
 import { Transitions } from '@instructure/shared-types'
 
-const transitions: Transitions = Object.freeze({
+const transitions: Transitions = Object.freeze<Transitions>({
   duration: '300ms',
   timing: 'ease-in-out'
 } as const)

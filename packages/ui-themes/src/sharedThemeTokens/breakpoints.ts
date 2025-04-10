@@ -38,7 +38,7 @@ const values = {
   xLarge: 75 // 1200px
 }
 
-const breakpoints: Breakpoints = Object.freeze({
+const breakpoints: Breakpoints = Object.freeze<Breakpoints>({
   xxSmall: `${values.xxSmall}em`,
   xSmall: `${values.xSmall}em`,
   small: `${values.small}em`,

@@ -26,7 +26,7 @@ import { Border } from '@instructure/shared-types'
 
 // use for consistency between buttons, text inputs, etc.
 
-const borders: Border = Object.freeze({
+const borders: Border = Object.freeze<Border>({
   radiusSmall: '0.125rem', // 2px
   radiusMedium: '0.25rem', // 4px
   radiusLarge: '0.5rem', // 8px
