@@ -23,7 +23,13 @@
  */
 
 import { useStyle } from '@instructure/emotion'
-import { useState, SyntheticEvent, useEffect } from 'react'
+import {
+  useState,
+  SyntheticEvent,
+  useEffect,
+  forwardRef,
+  ForwardedRef
+} from 'react'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
@@ -37,125 +43,130 @@ import generateComponentTheme from './theme'
 category: components
 ---
 **/
-
-const Avatar = ({
-  size = 'medium',
-  color = 'default',
-  hasInverseColor = false,
-  showBorder = 'auto',
-  shape = 'circle',
-  display = 'inline-block',
-  onImageLoaded = (_event: SyntheticEvent) => {},
-  src,
-  name,
-  renderIcon,
-  alt,
-  as,
-  margin,
-  themeOverride,
-  elementRef,
-  ...rest
-}: AvatarProps) => {
-  const [loaded, setLoaded] = useState(false)
-
-  const styles = useStyle({
-    generateStyle,
-    generateComponentTheme,
-    params: {
-      loaded,
-      size,
-      color,
-      hasInverseColor,
-      shape,
+const Avatar = forwardRef(
+  (
+    {
+      size = 'medium',
+      color = 'default',
+      hasInverseColor = false,
+      showBorder = 'auto',
+      shape = 'circle',
+      display = 'inline-block',
+      onImageLoaded = (_event: SyntheticEvent) => {},
       src,
-      showBorder,
-      themeOverride
-    },
-    componentId: 'Avatar',
-    displayName: 'Avatar'
-  })
+      name,
+      renderIcon,
+      alt,
+      as,
+      margin,
+      themeOverride,
+      elementRef,
+      ...rest
+    }: AvatarProps,
+    ref: ForwardedRef<View>
+  ) => {
+    const [loaded, setLoaded] = useState(false)
 
-  useEffect(() => {
-    // in case the image is unset in an update, show icons/initials again
-    if (loaded && !src) {
-      setLoaded(false)
-    }
-  }, [loaded, src])
-
-  const makeInitialsFromName = () => {
-    if (!name || typeof name !== 'string') {
-      return
-    }
-    const currentName = name.trim()
-    if (currentName.length === 0) {
-      return
-    }
-
-    if (currentName.match(/\s+/)) {
-      const names = currentName.split(/\s+/)
-      return (names[0][0] + names[names.length - 1][0]).toUpperCase()
-    } else {
-      return currentName[0].toUpperCase()
-    }
-  }
-
-  const handleImageLoaded = (event: SyntheticEvent) => {
-    setLoaded(true)
-    onImageLoaded(event)
-  }
-
-  const renderInitials = () => {
-    return (
-      <span css={styles?.initials} aria-hidden="true">
-        {makeInitialsFromName()}
-      </span>
-    )
-  }
-
-  const renderContent = () => {
-    if (!renderIcon) {
-      return renderInitials()
-    }
-
-    return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
-  }
-
-  return (
-    <View
-      {...passthroughProps({
+    const styles = useStyle({
+      generateStyle,
+      generateComponentTheme,
+      params: {
+        loaded,
         size,
         color,
         hasInverseColor,
-        showBorder,
         shape,
-        display,
         src,
-        name,
-        renderIcon,
-        alt,
-        as,
-        margin,
-        ...rest
-      })}
-      aria-label={alt ? alt : undefined}
-      role={alt ? 'img' : undefined}
-      as={as}
-      elementRef={elementRef}
-      margin={margin}
-      css={styles?.avatar}
-      display={display}
-    >
-      <img // This is visually hidden and is here for loading purposes only
-        src={src}
-        css={styles?.loadImage}
-        alt={alt}
-        onLoad={handleImageLoaded}
-        aria-hidden="true"
-      />
-      {!loaded && renderContent()}
-    </View>
-  )
-}
+        showBorder,
+        themeOverride
+      },
+      componentId: 'Avatar',
+      displayName: 'Avatar'
+    })
+
+    useEffect(() => {
+      // in case the image is unset in an update, show icons/initials again
+      if (loaded && !src) {
+        setLoaded(false)
+      }
+    }, [loaded, src])
+
+    const makeInitialsFromName = () => {
+      if (!name || typeof name !== 'string') {
+        return
+      }
+      const currentName = name.trim()
+      if (currentName.length === 0) {
+        return
+      }
+
+      if (currentName.match(/\s+/)) {
+        const names = currentName.split(/\s+/)
+        return (names[0][0] + names[names.length - 1][0]).toUpperCase()
+      } else {
+        return currentName[0].toUpperCase()
+      }
+    }
+
+    const handleImageLoaded = (event: SyntheticEvent) => {
+      setLoaded(true)
+      onImageLoaded(event)
+    }
+
+    const renderInitials = () => {
+      return (
+        <span css={styles?.initials} aria-hidden="true">
+          {makeInitialsFromName()}
+        </span>
+      )
+    }
+
+    const renderContent = () => {
+      if (!renderIcon) {
+        return renderInitials()
+      }
+
+      return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
+    }
+
+    return (
+      <View
+        {...passthroughProps({
+          size,
+          color,
+          hasInverseColor,
+          showBorder,
+          shape,
+          display,
+          src,
+          name,
+          renderIcon,
+          alt,
+          as,
+          margin,
+          ...rest
+        })}
+        ref={ref}
+        aria-label={alt ? alt : undefined}
+        role={alt ? 'img' : undefined}
+        as={as}
+        elementRef={elementRef}
+        margin={margin}
+        css={styles?.avatar}
+        display={display}
+      >
+        <img // This is visually hidden and is here for loading purposes only
+          src={src}
+          css={styles?.loadImage}
+          alt={alt}
+          onLoad={handleImageLoaded}
+          aria-hidden="true"
+        />
+        {!loaded && renderContent()}
+      </View>
+    )
+  }
+)
 
 export default Avatar
 export { Avatar }

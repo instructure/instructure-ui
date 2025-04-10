@@ -29,6 +29,7 @@ import '@testing-library/jest-dom'
 import { IconHeartLine } from '@instructure/ui-icons'
 
 import { DateInput2 } from '../index'
+import { TextInput } from '@instructure/ui-text-input'
 
 const LABEL_TEXT = 'Choose a date'
 
@@ -122,6 +123,28 @@ describe('<DateInput2 />', () => {
 
     expect(calendarIcon).toBeInTheDocument()
     expect(calendarLabel).toBeInTheDocument()
+  })
+
+  it('refs should return the underlying component', async () => {
+    const inputRef = vi.fn()
+    const ref: React.Ref<TextInput> = { current: null }
+    const { container } = render(
+      <DateInput2
+        id="dateInput2"
+        inputRef={inputRef}
+        ref={ref}
+        renderLabel={LABEL_TEXT}
+        screenReaderLabels={{
+          calendarIcon: 'Calendar',
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month'
+        }}
+      />
+    )
+    const dateInput = container.querySelector('input')
+    expect(inputRef).toHaveBeenCalledWith(dateInput)
+    expect(ref.current!.props.id).toBe('dateInput2')
+    expect(dateInput).toBeInTheDocument()
   })
 
   it('should render a custom calendar icon with screen reader label', async () => {

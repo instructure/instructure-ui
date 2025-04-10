@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-import { useState, useEffect, useContext } from 'react'
+import {
+  useState,
+  useEffect,
+  useContext,
+  forwardRef,
+  ForwardedRef,
+  ValidationMap
+} from 'react'
 import type { SyntheticEvent } from 'react'
 import { Calendar } from '@instructure/ui-calendar'
 import { IconButton } from '@instructure/ui-buttons'
@@ -130,224 +137,235 @@ function parseLocaleDate(
 category: components
 ---
 **/
-const DateInput2 = ({
-  renderLabel,
-  screenReaderLabels,
-  isRequired = false,
-  interaction = 'enabled',
-  isInline = false,
-  value,
-  messages,
-  width,
-  onChange,
-  onBlur,
-  withYearPicker,
-  invalidDateErrorMessage,
-  locale,
-  timezone,
-  placeholder,
-  dateFormat,
-  onRequestValidateDate,
-  disabledDates,
-  renderCalendarIcon,
-  margin,
-  inputRef,
-  ...rest
-}: DateInput2Props) => {
-  const localeContext = useContext(ApplyLocaleContext)
+// eslint-disable-next-line react/display-name
+const DateInput2 = forwardRef(
+  (
+    {
+      renderLabel,
+      screenReaderLabels,
+      isRequired = false,
+      interaction = 'enabled',
+      isInline = false,
+      value,
+      messages,
+      width,
+      onChange,
+      onBlur,
+      withYearPicker,
+      invalidDateErrorMessage,
+      locale,
+      timezone,
+      placeholder,
+      dateFormat,
+      onRequestValidateDate,
+      disabledDates,
+      renderCalendarIcon,
+      margin,
+      inputRef,
+      ...rest
+    }: DateInput2Props,
+    ref: ForwardedRef<TextInput>
+  ) => {
+    const localeContext = useContext(ApplyLocaleContext)
 
-  const getLocale = () => {
-    if (locale) {
-      return locale
-    } else if (localeContext.locale) {
-      return localeContext.locale
-    }
-    // default to the system's locale
-    return Locale.browserLocale()
-  }
-
-  const getTimezone = () => {
-    if (timezone) {
-      return timezone
-    } else if (localeContext.timezone) {
-      return localeContext.timezone
-    }
-    // default to the system's timezone
-    return Intl.DateTimeFormat().resolvedOptions().timeZone
-  }
-
-  const [inputMessages, setInputMessages] = useState<FormMessage[]>(
-    messages || []
-  )
-  const [showPopover, setShowPopover] = useState<boolean>(false)
-
-  useEffect(() => {
-    // don't set input messages if there is an internal error set already
-    if (inputMessages.find((m) => m.text === invalidDateErrorMessage)) return
-
-    setInputMessages(messages || [])
-  }, [messages])
-
-  useEffect(() => {
-    const [, utcIsoDate] = parseDate(value)
-    // clear error messages if date becomes valid
-    if (utcIsoDate || !value) {
-      setInputMessages(messages || [])
-    }
-  }, [value])
-
-  const parseDate = (dateString: string = ''): [string, string] => {
-    let date: Date | null = null
-    if (dateFormat) {
-      if (typeof dateFormat === 'string') {
-        // use dateFormat instead of the user locale
-        date = parseLocaleDate(dateString, dateFormat, getTimezone())
-      } else if (dateFormat.parser) {
-        date = dateFormat.parser(dateString)
+    const getLocale = () => {
+      if (locale) {
+        return locale
+      } else if (localeContext.locale) {
+        return localeContext.locale
       }
-    } else {
-      // no dateFormat prop passed, use locale for formatting
-      date = parseLocaleDate(dateString, getLocale(), getTimezone())
+      // default to the system's locale
+      return Locale.browserLocale()
     }
-    return date ? [formatDate(date), date.toISOString()] : ['', '']
-  }
 
-  const formatDate = (date: Date): string => {
-    // use formatter function if provided
-    if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
-      return dateFormat.formatter(date)
+    const getTimezone = () => {
+      if (timezone) {
+        return timezone
+      } else if (localeContext.timezone) {
+        return localeContext.timezone
+      }
+      // default to the system's timezone
+      return Intl.DateTimeFormat().resolvedOptions().timeZone
     }
-    // if dateFormat set to a locale, use that, otherwise default to the user's locale
-    return date.toLocaleDateString(
-      typeof dateFormat === 'string' ? dateFormat : getLocale(),
-      { timeZone: getTimezone(), calendar: 'gregory', numberingSystem: 'latn' }
+
+    const [inputMessages, setInputMessages] = useState<FormMessage[]>(
+      messages || []
+    )
+    const [showPopover, setShowPopover] = useState<boolean>(false)
+
+    useEffect(() => {
+      // don't set input messages if there is an internal error set already
+      if (inputMessages.find((m) => m.text === invalidDateErrorMessage)) return
+
+      setInputMessages(messages || [])
+    }, [messages])
+
+    useEffect(() => {
+      const [, utcIsoDate] = parseDate(value)
+      // clear error messages if date becomes valid
+      if (utcIsoDate || !value) {
+        setInputMessages(messages || [])
+      }
+    }, [value])
+
+    const parseDate = (dateString: string = ''): [string, string] => {
+      let date: Date | null = null
+      if (dateFormat) {
+        if (typeof dateFormat === 'string') {
+          // use dateFormat instead of the user locale
+          date = parseLocaleDate(dateString, dateFormat, getTimezone())
+        } else if (dateFormat.parser) {
+          date = dateFormat.parser(dateString)
+        }
+      } else {
+        // no dateFormat prop passed, use locale for formatting
+        date = parseLocaleDate(dateString, getLocale(), getTimezone())
+      }
+      return date ? [formatDate(date), date.toISOString()] : ['', '']
+    }
+
+    const formatDate = (date: Date): string => {
+      // use formatter function if provided
+      if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
+        return dateFormat.formatter(date)
+      }
+      // if dateFormat set to a locale, use that, otherwise default to the user's locale
+      return date.toLocaleDateString(
+        typeof dateFormat === 'string' ? dateFormat : getLocale(),
+        {
+          timeZone: getTimezone(),
+          calendar: 'gregory',
+          numberingSystem: 'latn'
+        }
+      )
+    }
+
+    const getDateFromatHint = () => {
+      const exampleDate = new Date('2024-09-01')
+      const formattedDate = formatDate(exampleDate)
+
+      // Create a regular expression to find the exact match of the number
+      const regex = (n: string) => {
+        return new RegExp(`(?<!\\d)0*${n}(?!\\d)`, 'g')
+      }
+
+      // Replace the matched number with the same number of dashes
+      const year = `${exampleDate.getFullYear()}`
+      const month = `${exampleDate.getMonth() + 1}`
+      const day = `${exampleDate.getDate()}`
+      return formattedDate
+        .replace(regex(year), (match) => 'Y'.repeat(match.length))
+        .replace(regex(month), (match) => 'M'.repeat(match.length))
+        .replace(regex(day), (match) => 'D'.repeat(match.length))
+    }
+
+    const handleInputChange = (e: SyntheticEvent, newValue: string) => {
+      const [, utcIsoDate] = parseDate(newValue)
+      onChange?.(e, newValue, utcIsoDate)
+    }
+
+    const handleDateSelected = (
+      dateString: string,
+      _momentDate: Moment,
+      e: SyntheticEvent
+    ) => {
+      setShowPopover(false)
+      const newValue = formatDate(new Date(dateString))
+      onChange?.(e, newValue, dateString)
+      onRequestValidateDate?.(e, newValue, dateString)
+    }
+
+    const handleBlur = (e: SyntheticEvent) => {
+      const [localeDate, utcIsoDate] = parseDate(value)
+      if (localeDate) {
+        if (localeDate !== value) {
+          onChange?.(e, localeDate, utcIsoDate)
+        }
+      } else if (value && invalidDateErrorMessage) {
+        setInputMessages([{ type: 'error', text: invalidDateErrorMessage }])
+      }
+      onRequestValidateDate?.(e, value || '', utcIsoDate)
+      onBlur?.(e, value || '', utcIsoDate)
+    }
+
+    const selectedDate = parseDate(value)[1]
+
+    return (
+      <TextInput
+        {...passthroughProps(rest)}
+        ref={ref}
+        inputRef={inputRef}
+        renderLabel={renderLabel}
+        onChange={handleInputChange}
+        onBlur={handleBlur}
+        isRequired={isRequired}
+        value={value}
+        placeholder={placeholder ?? getDateFromatHint()}
+        width={width}
+        display={isInline ? 'inline-block' : 'block'}
+        messages={inputMessages}
+        interaction={interaction}
+        margin={margin}
+        renderAfterInput={
+          <Popover
+            renderTrigger={
+              <IconButton
+                withBackground={false}
+                withBorder={false}
+                screenReaderLabel={screenReaderLabels.calendarIcon}
+                shape="circle"
+                interaction={interaction}
+              >
+                {renderCalendarIcon ? (
+                  callRenderProp(renderCalendarIcon)
+                ) : (
+                  <IconCalendarMonthLine />
+                )}
+              </IconButton>
+            }
+            isShowingContent={showPopover}
+            onShowContent={() => setShowPopover(true)}
+            onHideContent={() => setShowPopover(false)}
+            on="click"
+            shouldContainFocus
+            shouldReturnFocus
+            shouldCloseOnDocumentClick
+          >
+            <Calendar
+              withYearPicker={withYearPicker}
+              onDateSelected={handleDateSelected}
+              selectedDate={selectedDate}
+              disabledDates={disabledDates}
+              visibleMonth={selectedDate}
+              locale={getLocale()}
+              timezone={getTimezone()}
+              renderNextMonthButton={
+                <IconButton
+                  size="small"
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={<IconArrowOpenEndSolid color="primary" />}
+                  screenReaderLabel={screenReaderLabels.nextMonthButton}
+                />
+              }
+              renderPrevMonthButton={
+                <IconButton
+                  size="small"
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={<IconArrowOpenStartSolid color="primary" />}
+                  screenReaderLabel={screenReaderLabels.prevMonthButton}
+                />
+              }
+            />
+          </Popover>
+        }
+      />
     )
   }
+)
 
-  const getDateFromatHint = () => {
-    const exampleDate = new Date('2024-09-01')
-    const formattedDate = formatDate(exampleDate)
-
-    // Create a regular expression to find the exact match of the number
-    const regex = (n: string) => {
-      return new RegExp(`(?<!\\d)0*${n}(?!\\d)`, 'g')
-    }
-
-    // Replace the matched number with the same number of dashes
-    const year = `${exampleDate.getFullYear()}`
-    const month = `${exampleDate.getMonth() + 1}`
-    const day = `${exampleDate.getDate()}`
-    return formattedDate
-      .replace(regex(year), (match) => 'Y'.repeat(match.length))
-      .replace(regex(month), (match) => 'M'.repeat(match.length))
-      .replace(regex(day), (match) => 'D'.repeat(match.length))
-  }
-
-  const handleInputChange = (e: SyntheticEvent, newValue: string) => {
-    const [, utcIsoDate] = parseDate(newValue)
-    onChange?.(e, newValue, utcIsoDate)
-  }
-
-  const handleDateSelected = (
-    dateString: string,
-    _momentDate: Moment,
-    e: SyntheticEvent
-  ) => {
-    setShowPopover(false)
-    const newValue = formatDate(new Date(dateString))
-    onChange?.(e, newValue, dateString)
-    onRequestValidateDate?.(e, newValue, dateString)
-  }
-
-  const handleBlur = (e: SyntheticEvent) => {
-    const [localeDate, utcIsoDate] = parseDate(value)
-    if (localeDate) {
-      if (localeDate !== value) {
-        onChange?.(e, localeDate, utcIsoDate)
-      }
-    } else if (value && invalidDateErrorMessage) {
-      setInputMessages([{ type: 'error', text: invalidDateErrorMessage }])
-    }
-    onRequestValidateDate?.(e, value || '', utcIsoDate)
-    onBlur?.(e, value || '', utcIsoDate)
-  }
-
-  const selectedDate = parseDate(value)[1]
-
-  return (
-    <TextInput
-      {...passthroughProps(rest)}
-      inputRef={inputRef}
-      renderLabel={renderLabel}
-      onChange={handleInputChange}
-      onBlur={handleBlur}
-      isRequired={isRequired}
-      value={value}
-      placeholder={placeholder ?? getDateFromatHint()}
-      width={width}
-      display={isInline ? 'inline-block' : 'block'}
-      messages={inputMessages}
-      interaction={interaction}
-      margin={margin}
-      renderAfterInput={
-        <Popover
-          renderTrigger={
-            <IconButton
-              withBackground={false}
-              withBorder={false}
-              screenReaderLabel={screenReaderLabels.calendarIcon}
-              shape="circle"
-              interaction={interaction}
-            >
-              {renderCalendarIcon ? (
-                callRenderProp(renderCalendarIcon)
-              ) : (
-                <IconCalendarMonthLine />
-              )}
-            </IconButton>
-          }
-          isShowingContent={showPopover}
-          onShowContent={() => setShowPopover(true)}
-          onHideContent={() => setShowPopover(false)}
-          on="click"
-          shouldContainFocus
-          shouldReturnFocus
-          shouldCloseOnDocumentClick
-        >
-          <Calendar
-            withYearPicker={withYearPicker}
-            onDateSelected={handleDateSelected}
-            selectedDate={selectedDate}
-            disabledDates={disabledDates}
-            visibleMonth={selectedDate}
-            locale={getLocale()}
-            timezone={getTimezone()}
-            renderNextMonthButton={
-              <IconButton
-                size="small"
-                withBackground={false}
-                withBorder={false}
-                renderIcon={<IconArrowOpenEndSolid color="primary" />}
-                screenReaderLabel={screenReaderLabels.nextMonthButton}
-              />
-            }
-            renderPrevMonthButton={
-              <IconButton
-                size="small"
-                withBackground={false}
-                withBorder={false}
-                renderIcon={<IconArrowOpenStartSolid color="primary" />}
-                screenReaderLabel={screenReaderLabels.prevMonthButton}
-              />
-            }
-          />
-        </Popover>
-      }
-    />
-  )
-}
-
-DateInput2.propTypes = propTypes
+DateInput2.propTypes = propTypes as ValidationMap<DateInput2Props>
 
 export default DateInput2
 export { DateInput2 }
