@@ -23,22 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 
+import '@testing-library/jest-dom'
 import { TreeCollection } from '../index'
-
-// TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const TreeBrowserItemLocator = locator('[role="treeitem"]')
-
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-const TreeCollectionLocator = locator(TreeCollection.selector, {
-  findAllItems: (...args: any[]) => {
-    return TreeBrowserItemLocator.findAll(...args)
-  },
-  findItem: (...args: any[]) => {
-    return TreeBrowserItemLocator.find(...args)
-  }
-})
 
 const IconFolder = (
   <svg height="100" width="100">
@@ -61,9 +52,28 @@ const IconUser = (
   </svg>
 )
 
-describe('<TreeCollection />', async () => {
+describe('<TreeCollection />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render', async () => {
-    await mount(
+    const { container } = render(
       <TreeCollection
         level={1}
         id={1}
@@ -74,13 +84,14 @@ describe('<TreeCollection />', async () => {
         items={[{ id: 1, name: 'Item 1' }]}
       />
     )
-    const collection = await TreeCollectionLocator.find()
-    expect(collection).to.exist()
+    const collection = container.querySelector('[class$="-treeCollection"]')
+
+    expect(collection).toBeInTheDocument()
   })
 
-  describe('collections', async () => {
+  describe('collections', () => {
     it('should render icons on children', async () => {
-      await mount(
+      render(
         <TreeCollection
           level={1}
           id={1}
@@ -95,19 +106,17 @@ describe('<TreeCollection />', async () => {
           expanded={true}
         />
       )
-      const collection = await TreeCollectionLocator.find()
+      const folderIcons = await screen.findAllByTitle('Folder icon')
+      expect(folderIcons.length).toBe(2)
 
-      const folderIcons = await collection.findAll('svg:title(Folder icon)')
-      expect(folderIcons.length).to.equal(2)
-
-      const documentIcons = await collection.findAll('svg:title(Document icon)')
-      expect(documentIcons.length).to.equal(1)
+      const documentIcons = await screen.findAllByTitle('Document icon')
+      expect(documentIcons.length).toBe(1)
     })
 
     it('should support the containerRef prop', async () => {
-      const containerRef = stub()
+      const containerRef = vi.fn()
 
-      await mount(
+      const { container } = render(
         <TreeCollection
           level={1}
           id={1}
@@ -119,13 +128,13 @@ describe('<TreeCollection />', async () => {
           items={[{ id: 1, name: 'Item 1' }]}
         />
       )
-      const collection = await TreeCollectionLocator.find()
-      const item = await collection.findItem()
-      expect(containerRef).to.have.been.calledWith(item.getDOMNode())
+      const collection = container.querySelector('[class$="-treeCollection"]')
+
+      expect(containerRef).toHaveBeenCalledWith(collection)
     })
 
     it('should pass an aria-expanded attribute to its list item', async () => {
-      await mount(
+      render(
         <TreeCollection
           level={1}
           id={1}
@@ -136,15 +145,13 @@ describe('<TreeCollection />', async () => {
           items={[{ id: 1, name: 'Item 1' }]}
         />
       )
+      const item = screen.getByRole('treeitem')
 
-      const collection = await TreeCollectionLocator.find()
-      const item = await collection.findItem()
-
-      expect(item.getAttribute('aria-expanded')).to.exist()
+      expect(item).toHaveAttribute('aria-expanded')
     })
 
     it('should pass an aria-selected attribute to its list item', async () => {
-      await mount(
+      render(
         <TreeCollection
           level={1}
           id={1}
@@ -156,15 +163,13 @@ describe('<TreeCollection />', async () => {
           selection="collection_1"
         />
       )
+      const item = screen.getByRole('treeitem')
 
-      const collection = await TreeCollectionLocator.find()
-      const item = await collection.findItem()
-
-      expect(item.getAttribute('aria-selected')).to.exist()
+      expect(item).toHaveAttribute('aria-selected')
     })
 
     it('should correctly evaluate `getCollectionProps` for each item', async () => {
-      await mount(
+      const { container } = render(
         <TreeCollection
           level={1}
           id={1}
@@ -191,18 +196,19 @@ describe('<TreeCollection />', async () => {
           expanded={true}
         />
       )
-      const collection = await TreeCollectionLocator.find()
+      const svgIconUser = screen.getByTitle('User icon')
+      const item1 = container.querySelectorAll('button')[1]
 
-      const item1 = await collection.find('button:contains(Coll 2)')
-      expect(item1).to.exist()
-      expect(await item1.find('svg:title(User icon)')).to.exist()
+      expect(svgIconUser).toBeInTheDocument()
+      expect(item1).toContainElement(svgIconUser)
+      expect(item1).toHaveTextContent('Coll 2')
     })
 
-    describe('onCollectionClick', async () => {
+    describe('onCollectionClick', () => {
       it('should return the correct collection params on click', async () => {
-        const onCollectionClick = stub()
+        const onCollectionClick = vi.fn()
 
-        await mount(
+        render(
           <TreeCollection
             level={1}
             id={1}
@@ -214,25 +220,27 @@ describe('<TreeCollection />', async () => {
             onCollectionClick={onCollectionClick}
           />
         )
+        const item = screen.getByRole('treeitem')
 
-        const collection = await TreeCollectionLocator.find()
-        const item = await collection.findItem()
+        await userEvent.click(item)
 
-        await item.click()
+        await waitFor(() => {
+          const args = onCollectionClick.mock.calls[0][1]
 
-        expect(onCollectionClick).to.have.been.calledOnce()
-        expect(onCollectionClick.lastCall.lastArg).to.deep.equal({
-          id: 1,
-          expanded: true,
-          type: 'collection'
+          expect(onCollectionClick).toHaveBeenCalledTimes(1)
+          expect(args).toStrictEqual({
+            id: 1,
+            expanded: true,
+            type: 'collection'
+          })
         })
       })
     })
   })
 
-  describe('items', async () => {
+  describe('items', () => {
     it('should not pass an aria-expanded attribute to its button', async () => {
-      await mount(
+      render(
         <TreeCollection
           level={1}
           id={1}
@@ -244,18 +252,18 @@ describe('<TreeCollection />', async () => {
           expanded={true}
         />
       )
+      const item = screen.getAllByLabelText('Coll 1')[0]
+      const button = item.firstChild as HTMLElement
 
-      const collection = await TreeCollectionLocator.find()
-      const item = await collection.findItem()
-      const button = await item.find('button')
-
-      expect(button.getAttribute('aria-expanded')).to.not.exist()
+      expect(item).toHaveAttribute('aria-expanded', 'true')
+      expect(button.tagName).toBe('BUTTON')
+      expect(button).not.toHaveAttribute('aria-expanded')
     })
 
     it('should call custom functions passed by onItemClick', async () => {
-      const onItemClick = stub()
+      const onItemClick = vi.fn()
 
-      await mount(
+      render(
         <TreeCollection
           level={1}
           id={1}
@@ -268,21 +276,23 @@ describe('<TreeCollection />', async () => {
           expanded={true}
         />
       )
+      const item = screen.getByLabelText('Item 1')
 
-      const collection = await TreeCollectionLocator.find()
-      const item = await collection.findItem(':label(Item 1)')
+      await userEvent.click(item)
 
-      await item.click()
+      await waitFor(() => {
+        const args = onItemClick.mock.calls[0][1]
 
-      expect(onItemClick).to.have.been.calledOnce()
-      expect(onItemClick.lastCall.lastArg).to.deep.equal({
-        id: 1,
-        type: 'item'
+        expect(onItemClick).toHaveBeenCalledTimes(1)
+        expect(args).toStrictEqual({
+          id: 1,
+          type: 'item'
+        })
       })
     })
 
     it('should correctly evaluate `getItemProps` for each item', async () => {
-      await mount(
+      render(
         <TreeCollection
           level={1}
           id={1}
@@ -312,22 +322,16 @@ describe('<TreeCollection />', async () => {
           expanded={true}
         />
       )
-      const collection = await TreeCollectionLocator.find()
 
-      const item1 = await collection.find('button:contains(Item 1)')
-      expect(await item1.find('svg:title(Folder icon)')).to.exist()
-
-      const item2 = await collection.find('button:contains(Item 2)')
-      expect(await item2.find('svg:title(User icon)')).to.exist()
-
-      const item3 = await collection.find('button:contains(Item 3)')
-      expect(await item3.find('svg:title(Document icon)')).to.exist()
+      expect(screen.getByTitle('Folder icon')).toBeInTheDocument()
+      expect(screen.getByTitle('User icon')).toBeInTheDocument()
+      expect(screen.getByTitle('Document icon')).toBeInTheDocument()
     })
   })
 
-  describe('sorting', async () => {
+  describe('sorting', () => {
     it('should show the items and subcollections in alphabetical order', async () => {
-      await mount(
+      const { container } = render(
         <TreeCollection
           level={1}
           id={1}
@@ -356,26 +360,18 @@ describe('<TreeCollection />', async () => {
           }}
         />
       )
+      const childNames = container.querySelectorAll(
+        'span[class$="treeButton__textName"]'
+      )
+      const childNameArr = Array.from(childNames)
+        .map((element) => element.textContent)
+        .slice(1)
 
-      const collection = await TreeCollectionLocator.find()
-      const childs = await collection.findAllItems()
-      const childNameArr = childs.map((child) => {
-        return child
-          .getDOMNode()
-          .querySelector('span[class$="treeButton__textName"]')?.textContent
-      })
-      expect(childNameArr.slice(1)).deep.equal([
-        'A',
-        'A1',
-        'B',
-        'B1',
-        'C',
-        'C1'
-      ])
+      expect(childNameArr).toEqual(['A', 'A1', 'B', 'B1', 'C', 'C1'])
     })
 
     it('should show the items before the collections', async () => {
-      await mount(
+      const { container } = render(
         <TreeCollection
           level={1}
           id={1}
@@ -408,15 +404,14 @@ describe('<TreeCollection />', async () => {
           }}
         />
       )
+      const childNames = container.querySelectorAll(
+        'span[class$="treeButton__textName"]'
+      )
+      const childNameArr = Array.from(childNames)
+        .map((element) => element.textContent)
+        .slice(1)
 
-      const collection = await TreeCollectionLocator.find()
-      const childs = await collection.findAllItems()
-      const childNameArr = childs.map((child) => {
-        return child
-          .getDOMNode()
-          .querySelector('span[class$="treeButton__textName"]')?.textContent
-      })
-      expect(childNameArr.slice(1)).deep.equal([
+      expect(childNameArr).toEqual([
         'Item A',
         'Item B',
         'Item C',
