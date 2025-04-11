@@ -53,7 +53,9 @@ const CanvasTopNav = ({
   hamburgerOnClick,
   hamburgerLabel,
   showDesktopView,
-  styles
+  styles,
+  open,
+  onOpenChange
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -102,7 +104,12 @@ const CanvasTopNav = ({
 
   // Render mobile or desktop nav based on screen size
   return isSmallScreen ? (
-    <MobileTopNav lti={lti} brand={brand}>
+    <MobileTopNav
+      lti={lti}
+      brand={brand}
+      open={open}
+      onOpenChange={onOpenChange}
+    >
       <MobileTopNav.End>
         {mobileButtons.map((button: any, index: any) => (
           <IconButton

@@ -46,6 +46,8 @@ type MobileTopNavStyle = {
 
 type MobileTopNavProps = MobileTopNavOwnProps & {
   styles: MobileTopNavStyle
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 } & PropsWithChildren
 
 export type { MobileTopNavProps, MobileTopNavOwnProps }
