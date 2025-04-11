@@ -46,10 +46,14 @@ const MobileTopNav = ({
   lti = false,
   brand,
   styles,
-  children
+  children,
+  open: controlledOpen,
+  onOpenChange
 }: MobileTopNavProps) => {
-  const [open, setOpen] = useState<boolean>(false)
+  const [internalOpen, setInternalOpen] = useState<boolean>(false)
 
+  const isControlled = controlledOpen !== undefined
+  const open = isControlled ? controlledOpen : internalOpen
   useEffect(() => {
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = open ? 'hidden' : 'visible'
@@ -60,6 +64,15 @@ const MobileTopNav = ({
     return Children.map(children, (child: any) => child)?.filter(
       (child: any) => child?.type?.displayName === displayName
     )
+  }
+
+  const handleToggle = () => {
+    const newOpen = !open
+    if (isControlled) {
+      onOpenChange?.(newOpen)
+    } else {
+      setInternalOpen(newOpen)
+    }
   }
 
   return (
@@ -73,7 +86,7 @@ const MobileTopNav = ({
             withBorder={false}
             screenReaderLabel="burger"
             color={lti ? undefined : 'primary-inverse'}
-            onClick={() => setOpen((open) => !open)}
+            onClick={handleToggle}
           >
             {open ? <IconXLine /> : <IconHamburgerLine />}
           </IconButton>
