@@ -40,8 +40,8 @@ type: code
 ---
 // Button/index.js
 
-/** @jsx jsx */
-import { withStyle, jsx } from '@instructure/emotion'
+
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -421,7 +421,7 @@ type: code
 ---
 // index.js
 
-import { withStyle, jsx, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 // ...
 

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { Calendar } from '@instructure/ui-calendar'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

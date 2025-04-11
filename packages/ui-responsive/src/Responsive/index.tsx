@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logError as error, warn } from '@instructure/console'

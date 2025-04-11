@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'

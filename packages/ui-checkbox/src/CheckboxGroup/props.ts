@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { type InputHTMLAttributes } from 'react'
+import { type InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'

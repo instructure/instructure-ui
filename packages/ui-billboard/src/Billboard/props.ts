@@ -36,7 +36,7 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
-import React, { MouseEvent } from 'react'
+import { MouseEvent } from 'react'
 import { Renderable } from '@instructure/shared-types'
 type HeroIconSize = 'medium' | 'x-large' | 'large'
 type BillboardOwnProps = {

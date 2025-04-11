@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import codemirror from 'codemirror'
 
 // Language modes
@@ -33,7 +33,7 @@ import 'codemirror/mode/htmlmixed/htmlmixed'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/yaml/yaml'
 
-class Controlled extends React.Component<IControlledCodeMirror, any> {
+class Controlled extends Component<IControlledCodeMirror, any> {
   /** @internal */
   private appliedNext: boolean
   /** @internal */

@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { expect } from 'chai'
 import 'cypress-real-events'
 
 import '../support/component'
-import { Menu, MenuItem } from '../../packages/ui'
+import { Menu, MenuItem } from '@instructure/ui'
 
 describe('<Menu/>', () => {
   it('should move focus properly', () => {

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { useState, useEffect, useContext } from 'react'
 import type { SyntheticEvent } from 'react'
 import { Calendar } from '@instructure/ui-calendar'
@@ -37,7 +36,6 @@ import { TextInput } from '@instructure/ui-text-input'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
-import { jsx } from '@instructure/emotion'
 
 import { propTypes } from './props'
 import type { DateInput2Props } from './props'

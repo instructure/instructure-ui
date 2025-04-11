@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 

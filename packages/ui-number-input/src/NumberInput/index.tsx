@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Fragment, Component } from 'react'
 import keycode from 'keycode'
 
 import { FormField } from '@instructure/ui-form-field'
@@ -41,7 +40,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -256,7 +255,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
 
     const rawLabel = callRenderProp(renderLabel)
     const label = hasVisibleChildren(rawLabel) ? (
-      <React.Fragment>
+      <Fragment>
         {rawLabel}
         {isRequired && (
           <span
@@ -267,7 +266,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
             *
           </span>
         )}
-      </React.Fragment>
+      </Fragment>
     ) : (
       rawLabel
     )

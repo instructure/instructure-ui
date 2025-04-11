@@ -21,12 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { NumberInput } from '@instructure/ui-number-input'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 

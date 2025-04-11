@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import 'cypress-real-events'
 
-import { SideNavBarItem } from '../../packages/ui-side-nav-bar'
-import { IconAdminLine } from '../../packages/ui-icons'
+import { SideNavBarItem } from '@instructure/ui-side-nav-bar'
+import { IconAdminLine } from '@instructure/ui-icons'
 import '../support/component'
 
 describe('<SideNavBarItem/>', () => {

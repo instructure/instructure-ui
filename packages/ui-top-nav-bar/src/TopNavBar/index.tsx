@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'

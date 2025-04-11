@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Children, Component, ReactElement, MouseEvent } from 'react'
+import { Children, Component, ReactElement, MouseEvent } from 'react'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -38,7 +37,7 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
@@ -502,7 +501,6 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
     const arr: Moment[] = []
     for (let i = 0; i < Calendar.DAY_COUNT; i++) {
-
       // This workaround is needed because moment's `.add({days: 1})` function has a bug that happens when the date added lands perfectly onto the DST cutoff,
       // in these cases adding 1 day results in 23 hours added instead,
       // so `moment.tz('2024-09-07T00:00:00', 'America/Santiago').add({days: 1})` results
@@ -512,12 +510,12 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       // Please note that this causes one hour of time difference in the affected timezones/dates and to
       // fully solve this bug we need to change to something like luxon which handles this properly
       if (currDate.clone().format('HH') === '23') {
-        arr.push(currDate.clone().add({hours: 1}))
+        arr.push(currDate.clone().add({ hours: 1 }))
       } else {
         arr.push(currDate.clone())
       }
 
-      currDate.add({days: 1})
+      currDate.add({ days: 1 })
     }
     return arr.map((date) => {
       const dateStr = date.toISOString()

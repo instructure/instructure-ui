@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -93,6 +92,10 @@ describe('<TopNavBarMenuItems />', () => {
       const truncatedList = container.querySelector(
         "[class$='-truncateList-topNavBarMenuItems']"
       )
+
+      console.log('///')
+      console.log(container.innerHTML)
+      console.log('///')
 
       expect(truncatedList).toBeInTheDocument()
     })
