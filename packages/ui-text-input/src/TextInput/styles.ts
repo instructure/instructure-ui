@@ -81,11 +81,11 @@ const generateStyle = (
   const focusedStyle = focused
     ? {
         opacity: 1,
-        transform: 'scale(1)'
+        outlineOffset: '0.15rem'
       }
     : {
         opacity: 0,
-        transform: 'scale(0.95)'
+        outlineOffset: '-0.9rem'
       }
 
   const invalidStyle = invalid
@@ -176,13 +176,13 @@ const generateStyle = (
         position: 'absolute',
         display: 'block',
         boxSizing: 'border-box',
-        top: '-0.25rem',
-        bottom: '-0.25rem',
-        left: '-0.25rem',
-        right: '-0.25rem',
-        border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-        transition: 'all 0.2s',
+        top: '0',
+        bottom: '0',
+        left: '0',
+        right: '0',
+        outline: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
+        borderRadius: componentTheme.borderRadius,
+        transition: 'opacity 0.2s, outline-offset 0.2s ease-out',
 
         ...focusedStyle, // properties to transition on :focus
         ...invalidAndFocusedStyle
