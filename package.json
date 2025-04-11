@@ -129,7 +129,10 @@
     "extends @instructure/browserslist-config-instui"
   ],
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/preset-react": "^7.26.3",
     "@emotion/babel-plugin": "^11.13.5",
+    "@instructure/ui-babel-preset": "^10.15.2",
     "vite-plugin-babel": "^1.3.0",
     "vite-plugin-cjs-interop": "^2.2.0"
   }

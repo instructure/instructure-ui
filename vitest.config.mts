@@ -25,11 +25,14 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vitest/config'
-import babel from 'vite-plugin-babel'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [
-    babel(),
+    react({
+      jsxRuntime: 'automatic',
+      jsxImportSource: '@emotion/react',
+    })
   ],
   test: {
     include: ['**/__new-tests__/**/*.test.tsx'],
