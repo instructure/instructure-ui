@@ -32,6 +32,7 @@ import {
   IconAdminLine,
   IconAlertsLine,
   IconAnalyticsLine,
+  IconArcLine,
   IconCoursesLine,
   IconDashboardLine,
   IconQuestionLine,
@@ -64,7 +65,8 @@ class App extends Component<AppProps, AppState> {
 
     this.state = {
       windowWidth: window.innerWidth,
-      open: false
+      open: false,
+      openMobile: false
     }
   }
 
@@ -78,6 +80,10 @@ class App extends Component<AppProps, AppState> {
 
   isDashboardPage() {
     return location.pathname.startsWith('/dashboard')
+  }
+
+  isStudioPage() {
+    return location.pathname.startsWith('/studio')
   }
 
   componentDidMount() {
@@ -160,7 +166,7 @@ class App extends Component<AppProps, AppState> {
             renderBeforeTitle: <IconDashboardLine />,
             onClick: () => {
               this.props.navigate('/dashboard', { replace: true })
-              // window.location.reload()
+              this.setState({ openMobile: false })
             }
           },
           {
@@ -209,6 +215,7 @@ class App extends Component<AppProps, AppState> {
             label: 'Courses1',
             onClick: () => {
               this.props.navigate('/course1', { replace: true })
+              this.setState({ openMobile: false })
             }
           },
           {
@@ -216,6 +223,7 @@ class App extends Component<AppProps, AppState> {
             label: 'Courses2',
             onClick: () => {
               this.props.navigate('/course2', { replace: true })
+              this.setState({ openMobile: false })
             }
           }
         ]
@@ -247,21 +255,24 @@ class App extends Component<AppProps, AppState> {
                 <SideNavBar.Item
                   icon={brandSvg}
                   label={<ScreenReaderContent>Home</ScreenReaderContent>}
-                  onClick={() => this.props.navigate('/', { replace: true })}
+                  onClick={() => {
+                    this.setState({ open: false })
+                    this.props.navigate('/', { replace: true })
+                  }}
                 />
                 <SideNavBar.Item
                   icon={<IconUserLine />}
                   label="Account"
-                  onClick={() =>
+                  onClick={() => {
+                    this.setState({ open: false })
                     this.props.navigate('/account', { replace: true })
-                  }
+                  }}
                   selected={this.isAccountPage()}
                 />
                 <SideNavBar.Item
                   icon={<IconCoursesLine />}
                   label="Courses"
                   onClick={() => {
-                    this.props.navigate('/course1', { replace: true })
                     this.setState({ open: true })
                   }}
                   selected={this.isCoursePage()}
@@ -269,10 +280,20 @@ class App extends Component<AppProps, AppState> {
                 <SideNavBar.Item
                   icon={<IconDashboardLine />}
                   label="Dashboard"
-                  onClick={() =>
+                  onClick={() => {
+                    this.setState({ open: false })
                     this.props.navigate('/dashboard', { replace: true })
-                  }
+                  }}
                   selected={this.isDashboardPage()}
+                />
+                <SideNavBar.Item
+                  icon={<IconArcLine />}
+                  label="Studio"
+                  onClick={() => {
+                    this.setState({ open: false })
+                    this.props.navigate('/studio', { replace: true })
+                  }}
+                  selected={this.isStudioPage()}
                 />
                 <SideNavBar.Item
                   icon={<IconQuestionLine />}
@@ -287,8 +308,8 @@ class App extends Component<AppProps, AppState> {
           >
             <CanvasTopNav
               brand={brandSvg}
-              lti={false}
-              showDesktopView={this.isCoursePage()}
+              lti={this.isStudioPage()}
+              showDesktopView={this.isCoursePage() || this.isStudioPage()}
               buttons={[
                 {
                   label: 'AddLine',
@@ -324,6 +345,11 @@ class App extends Component<AppProps, AppState> {
                 }
               ]}
               mobileMenu={menuArray}
+              open={this.state.openMobile}
+              onOpenChange={(open: boolean) => {
+                this.setState({ openMobile: open })
+              }}
+              menuItems={['alma', 'korte', 'szilva']}
             />
             <Tray
               label="Tray Example"
@@ -340,17 +366,19 @@ class App extends Component<AppProps, AppState> {
               <div style={{ marginLeft: '100px' }}>
                 <h1>Courses</h1>
                 <Link
-                  onClick={() =>
+                  onClick={() => {
+                    this.setState({ open: false })
                     this.props.navigate('/course1', { replace: true })
-                  }
+                  }}
                   display="block"
                 >
                   Course 1
                 </Link>
                 <Link
-                  onClick={() =>
+                  onClick={() => {
+                    this.setState({ open: false })
                     this.props.navigate('/course2', { replace: true })
-                  }
+                  }}
                   display="block"
                 >
                   Course 2
@@ -386,6 +414,7 @@ class App extends Component<AppProps, AppState> {
                     path="/course2"
                     element={<h1>This is the second course home page</h1>}
                   />
+                  <Route path="/studio" element={<h1>LTI VIEW TEST</h1>} />
                 </Routes>
               </div>
             </div>

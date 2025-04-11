@@ -25,7 +25,7 @@
 type MenuItem = {
   href: string
   title: string
-  selected: boolean
+  selected?: boolean
   onClick?: () => void
 }
 
