@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
+
+
+### Bug Fixes
+
+* **ui-alerts:** no passthroughProps are set in component so Alert won't pass down props such as id to the underlaying DOM ([e481373](https://github.com/instructure/instructure-ui/commit/e481373d1b16dc26f7c808e4ea31bd8c59e41883))
+* **ui-buttons:** fix button border color ([5322f9c](https://github.com/instructure/instructure-ui/commit/5322f9c8d359a394e0ea4caa5dbab982169edddf))
+* **ui-text-input:** make TextInput maintain focus when renderAfterInput is conditionally rendered ([c124e16](https://github.com/instructure/instructure-ui/commit/c124e16000e1d60e49372ade27633dbeb48e22ae))
+
+
+### Features
+
+* **ui-link:** add variants to <Link> ([308bb2f](https://github.com/instructure/instructure-ui/commit/308bb2f0e58cff05fd2358e17f449d6eaadf7d4a))
+
+
+
+
+
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
 
