@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
+
+
+### Bug Fixes
+
+* **ui-alerts:** no passthroughProps are set in component so Alert won't pass down props such as id to the underlaying DOM ([e481373](https://github.com/instructure/instructure-ui/commit/e481373d1b16dc26f7c808e4ea31bd8c59e41883))
+
+
+
+
+
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
 
