@@ -36,6 +36,8 @@ import { Button, IconButton } from '@instructure/ui-buttons'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
 import { generateStyles } from './styles'
 import { Drilldown } from '@instructure/ui-drilldown'
+import { TopNavBarMenuItems } from '../TopNavBar/TopNavBarMenuItems'
+import { TopNavBarItem } from '../TopNavBar/TopNavBarItem'
 
 /**
 ---
@@ -53,9 +55,12 @@ const CanvasTopNav = ({
   hamburgerOnClick,
   hamburgerLabel,
   showDesktopView,
+  menuItems,
   styles,
   open,
-  onOpenChange
+  onOpenChange,
+  ltiIcon,
+  currentPageId
 }: any) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -106,23 +111,25 @@ const CanvasTopNav = ({
   return isSmallScreen ? (
     <MobileTopNav
       lti={lti}
+      ltiIcon={ltiIcon}
       brand={brand}
       open={open}
       onOpenChange={onOpenChange}
     >
       <MobileTopNav.End>
-        {mobileButtons.map((button: any, index: any) => (
-          <IconButton
-            key={index}
-            withBackground={false}
-            withBorder={false}
-            screenReaderLabel={button.screenReaderLabel}
-            color={lti ? undefined : 'primary-inverse'}
-            onClick={button.onClick}
-          >
-            {button.icon}
-          </IconButton>
-        ))}
+        {!lti &&
+          mobileButtons.map((button: any, index: any) => (
+            <IconButton
+              key={index}
+              withBackground={false}
+              withBorder={false}
+              screenReaderLabel={button.screenReaderLabel}
+              color={lti ? undefined : 'primary-inverse'}
+              onClick={button.onClick}
+            >
+              {button.icon}
+            </IconButton>
+          ))}
       </MobileTopNav.End>
       <MobileTopNav.Menu>
         <InstUISettingsProvider
@@ -147,28 +154,84 @@ const CanvasTopNav = ({
     <div style={{ display: showDesktopView ? 'block' : 'none' }}>
       <DesktopTopNav lightMode={lti}>
         <DesktopTopNav.Start>
-          <IconButton
-            withBackground={false}
-            withBorder={false}
-            screenReaderLabel={hamburgerLabel}
-            onClick={hamburgerOnClick}
-            // color={lti ? 'secondary' : 'primary-inverse'}
+          {!lti && (
+            <IconButton
+              withBackground={false}
+              withBorder={false}
+              screenReaderLabel={hamburgerLabel}
+              onClick={hamburgerOnClick}
+              // color={lti ? 'secondary' : 'primary-inverse'}
+            >
+              <IconHamburgerLine />
+            </IconButton>
+          )}
+          {lti && <div style={styles.ltiIcon}>{ltiIcon}</div>}
+          {!lti && (
+            <div style={{ minWidth: '100%' }}>
+              <Breadcrumb label={breadcrumb.label}>
+                {breadcrumb.links.map((link: any, index: any) =>
+                  link.href ? (
+                    <Breadcrumb.Link key={index} href={link.href}>
+                      {link.label}
+                    </Breadcrumb.Link>
+                  ) : (
+                    <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
+                  )
+                )}
+              </Breadcrumb>
+            </div>
+          )}
+          <InstUISettingsProvider
+            theme={{
+              componentOverrides: {
+                'TopNavBar.Item': {
+                  ...styles.topNavBarItemOverride
+                }
+              }
+            }}
           >
-            <IconHamburgerLine />
-          </IconButton>
-          <div style={{ minWidth: '100%' }}>
-            <Breadcrumb label={breadcrumb.label}>
-              {breadcrumb.links.map((link: any, index: any) =>
-                link.href ? (
-                  <Breadcrumb.Link key={index} href={link.href}>
-                    {link.label}
-                  </Breadcrumb.Link>
-                ) : (
-                  <Breadcrumb.Link key={index}>{link.label}</Breadcrumb.Link>
-                )
-              )}
-            </Breadcrumb>
-          </div>
+            {' '}
+            <TopNavBarMenuItems
+              renderHiddenItemsMenuTriggerLabel={() => ''}
+              currentPageId={currentPageId}
+            >
+              {menuItems.map((item: any) => (
+                <TopNavBarItem key={item.id} id={item.id}>
+                  {item.title}
+                </TopNavBarItem>
+              ))}
+              <TopNavBarItem
+                renderSubmenu={
+                  <Drilldown rootPageId="root">
+                    <Drilldown.Page id="root">
+                      <Drilldown.Option id="rootOption1" subPageId="secondPage">
+                        Link One
+                      </Drilldown.Option>
+                      <Drilldown.Option id="rootOption2" href="/#TopNavBar">
+                        Link Two
+                      </Drilldown.Option>
+                      <Drilldown.Option id="rootOption3" href="/#TopNavBar">
+                        Link Three
+                      </Drilldown.Option>
+                    </Drilldown.Page>
+                    <Drilldown.Page id="secondPage">
+                      <Drilldown.Option id="secondPageOption1">
+                        Level 2 Option One
+                      </Drilldown.Option>
+                      <Drilldown.Option
+                        id="secondPageOption2"
+                        href="/#TopNavBar"
+                      >
+                        Level 2 Option Two
+                      </Drilldown.Option>
+                    </Drilldown.Page>
+                  </Drilldown>
+                }
+              >
+                Submenu
+              </TopNavBarItem>
+            </TopNavBarMenuItems>
+          </InstUISettingsProvider>
         </DesktopTopNav.Start>
         <DesktopTopNav.End>
           {buttons.map((button: any) => (

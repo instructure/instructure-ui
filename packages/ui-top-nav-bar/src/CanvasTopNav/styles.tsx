@@ -51,6 +51,13 @@ const generateStyles = (props: TopNavProps, theme: any) => {
       display: 'flex',
       gap: '8px',
       alignItems: 'center'
+    },
+    topNavBarItemOverride: {
+      color: theme?.colors?.contrasts.grey125125,
+      activeIndicatorColor: theme?.colors?.contrasts.grey125125
+    },
+    ltiIcon: {
+      fontSize: '38px'
     }
   }
 }

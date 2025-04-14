@@ -48,7 +48,8 @@ const MobileTopNav = ({
   styles,
   children,
   open: controlledOpen,
-  onOpenChange
+  onOpenChange,
+  ltiIcon
 }: MobileTopNavProps) => {
   const [internalOpen, setInternalOpen] = useState<boolean>(false)
 
@@ -78,7 +79,13 @@ const MobileTopNav = ({
   return (
     <div style={styles.container(open)}>
       <div style={styles.topBar}>
-        {brand}
+        {lti ? (
+          <IconButton withBackground={false} withBorder={false}>
+            <div style={{ fontSize: '36px' }}> {ltiIcon}</div>
+          </IconButton>
+        ) : (
+          brand
+        )}
         <span style={styles.end}>
           {!open && getSubComponent('End')}
           <IconButton

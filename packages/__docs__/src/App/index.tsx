@@ -142,7 +142,7 @@ class App extends Component<AppProps, AppState> {
         </svg>
       </View>
     )
-
+    // mobile menu
     const menuArray: any = [
       {
         id: 'default',
@@ -308,7 +308,7 @@ class App extends Component<AppProps, AppState> {
             <CanvasTopNav
               brand={brandSvg}
               lti={this.isStudioPage()}
-              showDesktopView={this.isCoursePage() || this.isStudioPage()}
+              showDesktopView={this.isCoursePage() || this.isStudioPage()} // jobb nev
               buttons={[
                 {
                   label: 'AddLine',
@@ -344,14 +344,21 @@ class App extends Component<AppProps, AppState> {
                 }
               ]}
               mobileMenu={menuArray}
-              open={this.state.openMobile}
+              open={this.state.openMobile} // jobb nev, pl mobileMenuOpen
               onOpenChange={(open: boolean) => {
+                // szinten
                 this.setState({ openMobile: open })
               }}
-              menuItems={['alma', 'korte', 'szilva']}
+              ltiIcon={<IconArcLine />}
+              menuItems={[
+                { id: 'library', title: 'My Library' },
+                { id: 'share', title: 'Share with me' },
+                { id: 'settings', title: 'Settings' }
+              ]}
+              currentPageId="library" // ltiCurrentPageID
             />
             <Tray
-              label="Tray Example"
+              label="Courses"
               open={this.state.open}
               onDismiss={() => {
                 this.setState({ open: false })
