@@ -6,7 +6,7 @@ Heading is a component for creating typographic headings.
 
 ## Variant
 
-Variant takes care of - almost - all use-cases when it comes hedings on pages. Their name reflects the places they meant to be used. It sets the `level` prop and takes care of the style of the heading
+Variant covers almost all use cases for headings on pages. Their name reflects the places they meant to be used. It sets the `level` prop and takes care of the style of the heading
 We recommend using `variants` instead of the `level` (and `as`) props.
 
 NOTE: when `variant` is set, `level` and `as` props are ignored
