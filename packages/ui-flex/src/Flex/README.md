@@ -279,7 +279,7 @@ type: example
 ### Handling overflow
 
 When `direction` is set to `column`, Flex.Items' `overflowY` property is automagically set
-to `auto` to account for content overflow with a vertical scrollbar.
+to `auto` to account for content overflow with a vertical scrollbar. Add padding, so focus rings are not cut off.
 
 > To override this default, simply set `overflowY` on the Flex.Item to either `visible` or `hidden`.
 
@@ -287,17 +287,20 @@ to `auto` to account for content overflow with a vertical scrollbar.
 ---
 type: example
 ---
-<Flex
-  withVisualDebug
-  direction="column"
->
-  <Flex.Item padding="small">
-    <Heading>Pandas are cute, right?</Heading>
-  </Flex.Item>
-  <Flex.Item size="150px" padding="small">
-    <Img src={avatarSquare} />
-  </Flex.Item>
-</Flex>
+  <Flex
+    withVisualDebug
+    direction="column"
+  >
+    <Flex.Item padding="small">
+      <Heading>Pandas are cute, right?</Heading>
+    </Flex.Item>
+    <Flex.Item>
+      <TextInput name="name" renderLabel="If you dont add padding, the focus ring will be cut off!" />
+    </Flex.Item>
+    <Flex.Item size="150px" padding="small">
+      <Img src={avatarSquare} />
+    </Flex.Item>
+  </Flex>
 ```
 
 ### A few common layouts
