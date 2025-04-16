@@ -24,10 +24,9 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.16.2",
-    "@instructure/ui-test-queries": "10.16.2",
-    "@instructure/ui-test-utils": "10.16.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
     "vitest": "^2.1.8"
   },
   "dependencies": {
@@ -54,7 +53,6 @@
     "@instructure/ui-icons": "10.16.2",
     "@instructure/ui-prop-types": "10.16.2",
     "@instructure/ui-react-utils": "10.16.2",
-    "@instructure/ui-test-locator": "10.16.2",
     "@instructure/ui-testable": "10.16.2",
     "@instructure/ui-text-input": "10.16.2",
     "@instructure/ui-themes": "10.16.2",
