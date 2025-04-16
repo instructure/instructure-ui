@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
@@ -62,7 +62,7 @@ describe('<AppNav />', () => {
         </AppNav>
       )
 
-      const appNavList = container.querySelector('ul[class$="-appNav__list"]')!
+      const appNavList = container.querySelector('ul[class*="-appNav__list"]')!
 
       expect(appNavList).toBeInTheDocument()
       expect(appNavList.tagName).toBe('UL')

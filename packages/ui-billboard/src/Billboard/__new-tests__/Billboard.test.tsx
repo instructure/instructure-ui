@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
@@ -176,7 +175,8 @@ describe('<Billboard />', () => {
       const billboardAsEm = container.querySelector('em')
 
       expect(billboardAsEm).toBeInTheDocument()
-      expect(billboardAsEm?.className).toMatch(/view-billboard/)
+      expect(billboardAsEm?.className).toMatch(/billboard/)
+      expect(billboardAsEm?.className).toMatch(/view/)
     })
   })
 })

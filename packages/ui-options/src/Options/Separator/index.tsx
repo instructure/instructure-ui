@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'

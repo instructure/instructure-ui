@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -34,7 +34,7 @@ import {
 import type { WithDeterministicIdProps } from '../DeterministicIdContext'
 
 @withDeterministicId()
-class TestComponent extends React.Component<
+class TestComponent extends Component<
   React.PropsWithChildren<WithDeterministicIdProps>
 > {
   render() {
@@ -46,7 +46,7 @@ class TestComponent extends React.Component<
   }
 }
 
-class WrapperComponent extends React.Component {
+class WrapperComponent extends Component {
   render() {
     return (
       <div>

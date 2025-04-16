@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
@@ -31,7 +30,7 @@ import { testable } from '@instructure/ui-testable'
 import { Tooltip } from '@instructure/ui-tooltip'
 import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

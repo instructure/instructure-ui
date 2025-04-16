@@ -72,7 +72,8 @@ module.exports = {
   },
   // https://commitlint.js.org/reference/rules.html
   rules: {
-    'header-max-length': [2, 'always', 150]
+    'header-max-length': [0, 'always', 150], // 0 === rule is disabled
+    'subject-max-length': [2, 'always', 150]
   },
 
   // https://cz-git.qbb.sh/config/
@@ -83,9 +84,10 @@ module.exports = {
     defaultScope: getChangedPackages(),
     skipQuestions: ['footerPrefix', 'confirmCommit'],
     // If more than 3 packages are selected display 'many', e.g. `refactor(many): some message`
-    formatMessageCB: ({ scope, defaultMessage }) =>
-      scope.split(',').length > 3
+    formatMessageCB: ({ scope, defaultMessage }) => {
+      return scope.split(',').length > 3
         ? defaultMessage.replace(scope, 'many')
         : defaultMessage
+    }
   }
 }

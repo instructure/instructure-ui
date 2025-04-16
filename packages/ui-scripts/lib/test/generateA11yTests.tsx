@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import { ComponentType } from 'react'
 import {
   Example,
   StoryConfig,
@@ -38,7 +38,7 @@ const renderExample = ({ Component, componentProps, key }: Example<any>) => (
 )
 
 export function generateA11yTests<Props extends Record<string, any>>(
-  Component: React.ComponentType<any>,
+  Component: ComponentType<any>,
   componentExample: StoryConfig<Props>
 ): ReturnComponentType[] {
   const sections = generateComponentExamples(Component, componentExample)

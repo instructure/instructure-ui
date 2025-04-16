@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render } from '@testing-library/react'
 
 import '@testing-library/jest-dom'
@@ -67,7 +66,7 @@ describe('<ProgressCircle />', () => {
         renderValue={({ valueNow, valueMax }) => `${valueNow} of ${valueMax}`}
       />
     )
-    const progress = container.querySelector('[class$="-progressCircle"]')
+    const progress = container.querySelector('[class*="-progressCircle"]')
 
     expect(progress).toHaveTextContent(`${current} of ${max}`)
   })

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import {
   Component,
   createContext,

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Fragment, Component } from 'react'
 
 import {
   callRenderProp,
@@ -34,7 +33,7 @@ import {
 import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
@@ -320,7 +319,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
     const rawLabel = callRenderProp(renderLabel)
     const label = hasVisibleChildren(rawLabel) ? (
-      <React.Fragment>
+      <Fragment>
         {rawLabel}
         {isRequired && (
           <span
@@ -331,7 +330,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
             *
           </span>
         )}
-      </React.Fragment>
+      </Fragment>
     ) : (
       rawLabel
     )

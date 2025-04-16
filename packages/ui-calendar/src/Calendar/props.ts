@@ -34,7 +34,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import type { CalendarDayProps } from './Day/props'
 import { Renderable } from '@instructure/shared-types'
 import type { Moment } from '@instructure/ui-i18n'

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 import type { ParamsProps } from './props'

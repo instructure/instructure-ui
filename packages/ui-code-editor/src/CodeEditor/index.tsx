@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, createRef, lazy, Suspense } from 'react'
 
 import { testable } from '@instructure/ui-testable'
@@ -33,7 +32,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

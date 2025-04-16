@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, SyntheticEvent, MouseEvent } from 'react'
+import { Component, SyntheticEvent, MouseEvent } from 'react'
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
 import { FormFieldGroup } from '@instructure/ui-form-field'

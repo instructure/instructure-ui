@@ -22,17 +22,17 @@
  * SOFTWARE.
  */
 
-import React, { PropsWithChildren } from 'react'
+/** jsxImportSource @emotion/react */
+import { Component, PropsWithChildren } from 'react'
 import { userEvent } from '@testing-library/user-event'
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { expect, vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Link } from '../index'
 
-//<unknown> is needed for React 17 compatibility
-class TruncateText extends React.Component<PropsWithChildren<unknown>> {
+class TruncateText extends Component<PropsWithChildren> {
   render() {
     return <span>{this.props.children}</span>
   }
@@ -138,7 +138,7 @@ describe('<Link />', () => {
     const { container } = render(
       <Link onMouseEnter={onMouseEnter}>Hello World</Link>
     )
-    const link = container.querySelector('span[class$="-link"]')!
+    const link = container.querySelector('span[class*="-link"]')!
 
     userEvent.hover(link)
 

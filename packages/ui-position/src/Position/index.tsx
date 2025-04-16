@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import {
@@ -41,7 +40,7 @@ import { deepEqual, shallowEqual } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
-import { jsx, withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { IconBankLine } from '@instructure/ui-icons'
 
 import { BreadcrumbLink } from '../index'

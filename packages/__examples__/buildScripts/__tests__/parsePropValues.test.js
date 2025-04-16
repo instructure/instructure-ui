@@ -28,7 +28,7 @@
 // import { expect } from '@instructure/ui-test-utils'
 // import parsePropValues from '../parsePropValues'
 //
-// const src = `import React, { Component } from 'react'
+// const src = `import { Component } from 'react'
 // import PropTypes from 'prop-types'
 //
 // export default class TestComponent extends Component {

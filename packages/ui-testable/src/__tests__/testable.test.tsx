@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component as ReactComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { mount, expect, find, findAll } from '@instructure/ui-test-utils'
@@ -34,7 +34,7 @@ type Props = {
   children?: React.ReactNode
 }
 
-class Component extends React.Component<Props> {
+class Component extends ReactComponent<Props> {
   static propTypes = {
     hide: PropTypes.bool,
     children: PropTypes.node

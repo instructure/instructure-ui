@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'

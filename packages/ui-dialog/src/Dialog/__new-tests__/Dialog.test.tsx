@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, {
+import {
   forwardRef,
   useEffect,
   useImperativeHandle,

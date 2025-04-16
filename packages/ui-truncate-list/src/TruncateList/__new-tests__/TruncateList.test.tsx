@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'

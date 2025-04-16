@@ -31,7 +31,7 @@ import type {
   TreeBrowserTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import type { TreeBrowserButtonProps } from './TreeButton/props'
 import { Renderable } from '@instructure/shared-types'
 

@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { TruncateText, Text } from '@instructure/ui'
 import { expect } from 'chai'
 import '../support/component'
-
 
 describe('<TruncateText />', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
@@ -59,7 +58,10 @@ describe('<TruncateText />', () => {
 
     cy.get('[class$="-truncateText"]').invoke('text').as('text1')
 
-    cy.get('[data-testid="container"]').invoke('css', { ...baseStyle, width: '100px'})
+    cy.get('[data-testid="container"]').invoke('css', {
+      ...baseStyle,
+      width: '100px'
+    })
 
     cy.get('[class$="-truncateText"]').invoke('text').as('text2')
 
@@ -67,8 +69,10 @@ describe('<TruncateText />', () => {
       cy.get('@text1').should('not.equal', text2)
     })
 
-    cy.get('[data-testid="container"]').invoke('css', { ...baseStyle, width: '400px'})
-
+    cy.get('[data-testid="container"]').invoke('css', {
+      ...baseStyle,
+      width: '400px'
+    })
 
     cy.get('[class$="-truncateText"]').invoke('text').as('text3')
 
@@ -164,11 +168,17 @@ describe('<TruncateText />', () => {
     cy.wrap(onUpdate).should('not.have.been.called')
 
     // Set container width
-    cy.get('[data-testid="container"]').invoke('css', { ...baseStyle, width: '100px'})
+    cy.get('[data-testid="container"]').invoke('css', {
+      ...baseStyle,
+      width: '100px'
+    })
     cy.wrap(onUpdate).should('have.been.calledWith', true)
 
     // Set container width
-    cy.get('[data-testid="container"]').invoke('css', { ...baseStyle, width: '800px'})
+    cy.get('[data-testid="container"]').invoke('css', {
+      ...baseStyle,
+      width: '800px'
+    })
     cy.wrap(onUpdate).should('have.been.calledWith', false)
   })
 

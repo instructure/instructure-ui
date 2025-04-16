@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
+
 import { Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
