@@ -224,7 +224,10 @@ const DateInput2 = forwardRef(
       return date ? [formatDate(date), date.toISOString()] : ['', '']
     }
 
-    const formatDate = (date: Date): string => {
+    const formatDate = (
+      date: Date,
+      timeZone: string = getTimezone()
+    ): string => {
       // use formatter function if provided
       if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
         return dateFormat.formatter(date)
@@ -233,16 +236,16 @@ const DateInput2 = forwardRef(
       return date.toLocaleDateString(
         typeof dateFormat === 'string' ? dateFormat : getLocale(),
         {
-          timeZone: getTimezone(),
+          timeZone,
           calendar: 'gregory',
           numberingSystem: 'latn'
         }
       )
     }
 
-    const getDateFromatHint = () => {
+    const getDateFormatHint = () => {
       const exampleDate = new Date('2024-09-01')
-      const formattedDate = formatDate(exampleDate)
+      const formattedDate = formatDate(exampleDate, 'UTC') // exampleDate is in UTC so format it as such
 
       // Create a regular expression to find the exact match of the number
       const regex = (n: string) => {
@@ -300,7 +303,7 @@ const DateInput2 = forwardRef(
         onBlur={handleBlur}
         isRequired={isRequired}
         value={value}
-        placeholder={placeholder ?? getDateFromatHint()}
+        placeholder={placeholder ?? getDateFormatHint()}
         width={width}
         display={isInline ? 'inline-block' : 'block'}
         messages={inputMessages}
