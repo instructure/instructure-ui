@@ -214,7 +214,7 @@ const DateInput2 = ({
     return date ? [formatDate(date), date.toISOString()] : ['', '']
   }
 
-  const formatDate = (date: Date): string => {
+  const formatDate = (date: Date, timeZone: string = getTimezone()): string => {
     // use formatter function if provided
     if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
       return dateFormat.formatter(date)
@@ -222,13 +222,13 @@ const DateInput2 = ({
     // if dateFormat set to a locale, use that, otherwise default to the user's locale
     return date.toLocaleDateString(
       typeof dateFormat === 'string' ? dateFormat : getLocale(),
-      { timeZone: getTimezone(), calendar: 'gregory', numberingSystem: 'latn' }
+      { timeZone, calendar: 'gregory', numberingSystem: 'latn' }
     )
   }
 
   const getDateFromatHint = () => {
     const exampleDate = new Date('2024-09-01')
-    const formattedDate = formatDate(exampleDate)
+    const formattedDate = formatDate(exampleDate, 'UTC') // exampleDate is in UTC so format it as such
 
     // Create a regular expression to find the exact match of the number
     const regex = (n: string) => {
