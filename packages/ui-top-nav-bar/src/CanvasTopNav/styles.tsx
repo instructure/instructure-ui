@@ -21,30 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { TopNavProps } from './props'
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
-
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
-
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
-  }
-
+const generateStyles = (props: TopNavProps, theme: any) => {
+  const { lti } = props
   return {
-    ...componentVariables
+    optionsOverride: {
+      background: lti
+        ? theme?.colors?.contrasts?.grey1111
+        : theme?.colors?.contrasts?.grey100100, //-> grey100100
+      highlightedBackground: lti
+        ? theme?.colors?.contrasts?.grey1214
+        : theme?.colors?.contrasts?.grey5782,
+      color: lti
+        ? theme?.colors?.contrasts?.grey125125
+        : theme?.colors?.contrasts?.white1010,
+      highlightedLabelColor: lti
+        ? theme?.colors?.contrasts?.grey125125
+        : theme?.colors?.contrasts?.white1010,
+      padding: '16px 12px',
+      lineHeight: '1.5'
+    },
+    drilldownOverride: {
+      borderColor: lti
+        ? theme?.colors?.contrasts?.grey1424
+        : theme?.colors?.contrasts?.grey100100
+    },
+    optionContainer: {
+      display: 'flex',
+      gap: '8px',
+      alignItems: 'center'
+    },
+    topNavBarItemOverride: {
+      color: theme?.colors?.contrasts.grey125125,
+      activeIndicatorColor: theme?.colors?.contrasts.grey125125
+    },
+    ltiIcon: {
+      fontSize: '38px'
+    }
   }
 }
 
-export default generateComponentTheme
+export { generateStyles }

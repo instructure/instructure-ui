@@ -22,29 +22,45 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
+import { ComponentStyle } from '@instructure/emotion'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
+type SubNavStyle = ComponentStyle<
+  'container' | 'linkContainer' | 'linkContainerSelected' | 'linkOverride'
+>
 
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
+const generateStyle = (theme: any, _params: any): SubNavStyle => {
+  const linkContainerBase = {
+    label: 'subNavLinkContainer',
+    display: 'flex',
+    alignItems: 'center',
+    color: theme?.colors?.contrasts?.grey125125,
+    fontSize: '16px',
+    borderColor: theme?.colors?.contrasts?.grey125125,
+    height: '32px',
+    fontWeight: 'bold',
+    marginBottom: '4px',
+    paddingLeft: '4px'
   }
 
   return {
-    ...componentVariables
+    container: {
+      marginLeft: '20px',
+      marginTop: '20px',
+      label: 'subNavContainer'
+    },
+    linkContainer: {
+      ...linkContainerBase
+    },
+    linkContainerSelected: {
+      ...linkContainerBase,
+      borderLeft: '3px solid'
+    },
+    linkOverride: {
+      backgroundColor: theme?.colors?.contrasts?.grey125125,
+      color: theme?.colors?.contrasts?.white1010,
+      hoverColor: theme?.colors?.contrasts?.white1010
+    }
   }
 }
 
-export default generateComponentTheme
+export { generateStyle }

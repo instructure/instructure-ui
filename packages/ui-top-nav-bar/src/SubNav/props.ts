@@ -22,29 +22,31 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-import type { DrilldownTheme } from '@instructure/shared-types'
+type MenuItem = {
+  href: string
+  title: string
+  selected?: boolean
+  onClick?: () => void
+}
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors, typography, spacing } = theme
+type SubNavOwnProps = {
+  menuItems: MenuItem[]
+}
 
-  const componentVariables: DrilldownTheme = {
-    headerTitleFontWeight: typography.fontWeightBold,
-    headerActionColor: colors?.contrasts?.blue4570,
-    labelInfoPadding: spacing?.small,
-    labelInfoColor: colors?.contrasts?.grey5782,
-    borderColor: colors?.contrasts?.grey3045,
-    headerTitleTextDecoration: 'none'
+type SubNavStyle = {
+  container: {
+    [key: string]: string | number
   }
-
-  return {
-    ...componentVariables
+  linkContainer: (item: MenuItem) => {
+    [key: string]: string | number
+  }
+  link: (item: MenuItem) => {
+    [key: string]: string | number
   }
 }
 
-export default generateComponentTheme
+type SubNavProps = SubNavOwnProps & {
+  styles: SubNavStyle
+}
+
+export type { SubNavProps, SubNavOwnProps, MenuItem }
