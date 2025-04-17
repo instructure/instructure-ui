@@ -80,7 +80,6 @@ const generateStyle = (
   const previewStyle = {
     boxSizing: 'border-box',
     margin: 0,
-    position: 'relative',
     overflow: 'auto',
 
     ...backgroundVariants[background!],
