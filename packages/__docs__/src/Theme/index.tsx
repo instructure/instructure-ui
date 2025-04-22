@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Children, Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 
 import { px } from '@instructure/ui-utils'
