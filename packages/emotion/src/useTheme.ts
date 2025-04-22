@@ -27,7 +27,7 @@ import canvas from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
 import { ThemeRegistry } from '@instructure/theme-registry'
 
-import type { ThemeOrOverride } from './EmotionTypes'
+import type { BaseThemeOrOverride } from './EmotionTypes'
 
 /**
  * ---
@@ -40,7 +40,7 @@ import type { ThemeOrOverride } from './EmotionTypes'
  */
 const useTheme = () => {
   // This reads the theme from Emotion's ThemeContext
-  let theme = useEmotionTheme() as ThemeOrOverride
+  let theme = useEmotionTheme() as BaseThemeOrOverride
 
   if (isEmpty(theme)) {
     const globalTheme = ThemeRegistry.getCurrentTheme()

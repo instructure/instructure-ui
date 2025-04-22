@@ -179,6 +179,34 @@ type: code
 </InstUISettingsProvider>
 ```
 
+#### Override function
+
+The `InstUISettingsProvider` accepts a `function`. The override function's first parameter is the currently applied theme object. It should return a valid theme or override object.
+
+```js
+---
+type: example
+---
+<div>
+  <div>
+  <InstUISettingsProvider theme={
+    (theme)=>{
+      return {
+        componentOverrides: {
+          Alert:{
+            infoBorderColor:theme.colors.contrasts.red4570
+          }
+        }
+      }
+    }
+  }
+  >
+    <Alert>Overridden Alert</Alert>
+  </InstUISettingsProvider>
+</div>
+</div>
+```
+
 ### Overriding theme for a single component
 
 Themeable components (that implement the [withStyle](#withStyle) decorator) accept a `themeOverride` prop. This prop let's you override the component's own theme. It accepts an object or a function.
