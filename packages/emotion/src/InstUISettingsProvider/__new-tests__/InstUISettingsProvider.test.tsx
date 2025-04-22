@@ -22,41 +22,22 @@
  * SOFTWARE.
  */
 
-import { useTheme as useEmotionTheme } from '@emotion/react'
-import canvas from '@instructure/ui-themes'
-import { isEmpty } from '@instructure/ui-utils'
-import { ThemeRegistry } from '@instructure/theme-registry'
+import { render } from '@testing-library/react'
+import { vi } from 'vitest'
 
-import type { BaseThemeOrOverride } from './EmotionTypes'
+import '@testing-library/jest-dom'
+import { InstUISettingsProvider } from '../index'
+import { canvasHighContrast } from '@instructure/ui-themes'
 
-/**
- * ---
- * private: true
- * ---
- * A hook that will return the currently applied theme object from the nearest Context.
- * If there is no Context, then it tries to get the current theme from the global ThemeRegistry.
- * If there is no theme provided to the Context and ThemeRegistry it will return the default `canvas` theme.
- * @returns The theme object
- */
-const useTheme = () => {
-  // This reads the theme from Emotion's ThemeContext
-  let theme = useEmotionTheme() as BaseThemeOrOverride
+describe('<InstUISettingsProvider />', () => {
+  it('passes the current theme if a function is passed to theme prop', async () => {
+    const themeFn = vi.fn()
+    render(
+      <InstUISettingsProvider theme={canvasHighContrast}>
+        <InstUISettingsProvider theme={themeFn}></InstUISettingsProvider>
+      </InstUISettingsProvider>
+    )
 
-  if (isEmpty(theme)) {
-    const globalTheme = ThemeRegistry.getCurrentTheme()
-
-    if (globalTheme) {
-      return globalTheme
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        `No theme provided for [InstUISettingsProvider], using default <canvas> theme.`
-      )
-    }
-    theme = canvas
-  }
-  return theme
-}
-
-export default useTheme
-export { useTheme }
+    expect(themeFn).toHaveBeenCalledWith(canvasHighContrast)
+  })
+})
