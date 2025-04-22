@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tree-browser",
-  "version": "10.16.1",
+  "version": "10.16.2",
   "description": "A component for displaying a hierarchical view of information",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,22 +23,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.16.1",
-    "@instructure/ui-color-utils": "10.16.1",
-    "@instructure/ui-test-locator": "10.16.1",
-    "@instructure/ui-test-utils": "10.16.1",
-    "@instructure/ui-themes": "10.16.1"
+    "@instructure/ui-babel-preset": "10.16.2",
+    "@instructure/ui-color-utils": "10.16.2",
+    "@instructure/ui-test-locator": "10.16.2",
+    "@instructure/ui-test-utils": "10.16.2",
+    "@instructure/ui-themes": "10.16.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
-    "@instructure/emotion": "10.16.1",
-    "@instructure/shared-types": "10.16.1",
-    "@instructure/ui-icons": "10.16.1",
-    "@instructure/ui-img": "10.16.1",
-    "@instructure/ui-prop-types": "10.16.1",
-    "@instructure/ui-react-utils": "10.16.1",
-    "@instructure/ui-testable": "10.16.1",
-    "@instructure/ui-utils": "10.16.1",
+    "@instructure/emotion": "10.16.2",
+    "@instructure/shared-types": "10.16.2",
+    "@instructure/ui-icons": "10.16.2",
+    "@instructure/ui-img": "10.16.2",
+    "@instructure/ui-prop-types": "10.16.2",
+    "@instructure/ui-react-utils": "10.16.2",
+    "@instructure/ui-testable": "10.16.2",
+    "@instructure/ui-utils": "10.16.2",
     "keycode": "^2",
     "prop-types": "^15.8.1"
   },
