@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
+
+
+### Bug Fixes
+
+* **ui-select,ui-form-field:** fix iOS VoiceOver with Select and SimpleSelect announcing 'readonly' and 'textinput' ([d4378e7](https://github.com/instructure/instructure-ui/commit/d4378e757b2a07c86aa89fe84c063c0406741c10))
+
+
+
+
+
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
 
 
