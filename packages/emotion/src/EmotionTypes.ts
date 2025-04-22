@@ -101,7 +101,11 @@ type Overrides = {
   componentOverrides?: ComponentOverride
 }
 
-type ThemeOrOverride = BaseTheme | PartialTheme | Overrides
+type BaseThemeOrOverride = BaseTheme | PartialTheme | Overrides
+
+type ThemeOrOverride =
+  | BaseThemeOrOverride
+  | ((theme: BaseTheme) => BaseThemeOrOverride)
 
 type Props = Record<string, unknown>
 type State = Record<string, unknown>
@@ -134,6 +138,7 @@ export interface StyleObject {
 }
 
 export type {
+  BaseThemeOrOverride,
   ThemeOrOverride,
   Overrides,
   ComponentOverride,

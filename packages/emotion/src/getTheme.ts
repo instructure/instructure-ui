@@ -52,25 +52,6 @@ import type {
 const getTheme =
   (themeOrOverride: ThemeOrOverride) =>
   (ancestorTheme = {} as BaseTheme) => {
-    try {
-      // If a valid InstUI theme is given, it just returns the theme.
-      if (isBaseTheme(themeOrOverride)) {
-        return themeOrOverride
-      }
-    } catch {
-      // If the prop passed is not an Object, it will throw an error.
-      // We are using this fail-safe here for the non-TS users,
-      // because the whole page can break without a theme.
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(
-          'The `theme` property provided to InstUISettingsProvider is not a valid InstUI theme object.\ntheme: ',
-          themeOrOverride
-        )
-      }
-      // eslint-disable-next-line no-param-reassign
-      themeOrOverride = {}
-    }
-
     // we need to clone the ancestor theme not to override it
     let currentTheme
     if (Object.keys(ancestorTheme).length === 0) {
@@ -86,16 +67,40 @@ const getTheme =
       currentTheme = ancestorTheme
     }
 
+    let calcedThemeOrOverride = themeOrOverride
+
+    if (typeof calcedThemeOrOverride === 'function') {
+      calcedThemeOrOverride = calcedThemeOrOverride(currentTheme)
+    }
+    try {
+      // If a valid InstUI theme is given, it just returns the theme.
+      if (isBaseTheme(calcedThemeOrOverride)) {
+        return calcedThemeOrOverride
+      }
+    } catch {
+      // If the prop passed is not an Object, it will throw an error.
+      // We are using this fail-safe here for the non-TS users,
+      // because the whole page can break without a theme.
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn(
+          'The `theme` property provided to InstUISettingsProvider is not a valid InstUI theme object.\ntheme: ',
+          calcedThemeOrOverride
+        )
+      }
+      calcedThemeOrOverride = {}
+    }
+
     const themeName = currentTheme.key
 
     // we pick the overrides for the current theme from the override object
-    const specificOverrides = (themeOrOverride as Overrides)?.themeOverrides
+    const specificOverrides = (calcedThemeOrOverride as Overrides)
+      ?.themeOverrides
     const currentThemeOverrides =
       (specificOverrides as SpecificThemeOverride)?.[themeName] ||
       specificOverrides ||
       {}
 
-    return mergeDeep(currentTheme, themeOrOverride, currentThemeOverrides)
+    return mergeDeep(currentTheme, calcedThemeOrOverride, currentThemeOverrides)
   }
 
 export default getTheme

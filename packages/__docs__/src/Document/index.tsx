@@ -84,8 +84,8 @@ class Document extends Component<DocumentProps, DocumentState> {
       this.setState({ componentTheme: generateComponentTheme(themeVariables) })
     } else {
       const componentTheme = await functionalComponentThemes[
-        doc.id.toLowerCase()
-      ](themeVariables)
+        doc?.id?.toLowerCase()
+      ]?.(themeVariables)
       this.setState({ componentTheme })
     }
   }
