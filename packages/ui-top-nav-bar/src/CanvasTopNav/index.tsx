@@ -26,18 +26,17 @@
 import { useEffect, useState } from 'react'
 import { DesktopTopNav } from '../DesktopTopNav'
 import { MobileTopNav } from '../MobileTopNav'
-import {
-  InstUISettingsProvider,
-  jsx,
-  withFunctionalStyle
-} from '@instructure/emotion'
+import { InstUISettingsProvider, jsx, useStyle } from '@instructure/emotion'
 import { IconHamburgerLine } from '@instructure/ui-icons'
 import { Button, IconButton } from '@instructure/ui-buttons'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
-import { generateStyles } from './styles'
+import { generateStyle } from './styles'
 import { Drilldown } from '@instructure/ui-drilldown'
 import { TopNavBarMenuItems } from '../TopNavBar/TopNavBarMenuItems'
 import { TopNavBarItem } from '../TopNavBar/TopNavBarItem'
+import { CanvasTopNavProps } from './props'
+import generateComponentTheme from './theme'
+import TopNavBarContext from '../TopNavBar/TopNavBarContext'
 
 /**
 ---
@@ -56,12 +55,11 @@ const CanvasTopNav = ({
   hamburgerLabel,
   showDesktopView,
   menuItems,
-  styles,
   open,
   onOpenChange,
   ltiIcon,
   currentPageId
-}: any) => {
+}: CanvasTopNavProps) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   // Resize listener to check if the screen is small or not
@@ -75,6 +73,14 @@ const CanvasTopNav = ({
 
     return () => window.removeEventListener('resize', handleResize)
   }, [breakpoint])
+
+  const styles = useStyle({
+    generateStyle,
+    generateComponentTheme,
+    params: { lti },
+    componentId: 'CanvasTopNav',
+    displayName: 'CanvasTopNav'
+  })
 
   const renderDrilldownPages = (items: any) => {
     return items.map((item: any) => {
@@ -94,7 +100,7 @@ const CanvasTopNav = ({
                   onOptionClick={option.onClick}
                   afterLabelContentVAlign={'center'}
                 >
-                  <div style={styles.optionContainer}>
+                  <div css={styles.optionContainer}>
                     {option.renderBeforeTitle}
                     {option.label}
                   </div>
@@ -152,7 +158,7 @@ const CanvasTopNav = ({
     </MobileTopNav>
   ) : (
     <div style={{ display: showDesktopView ? 'block' : 'none' }}>
-      <DesktopTopNav lightMode={lti}>
+      <DesktopTopNav>
         <DesktopTopNav.Start>
           {!lti && (
             <IconButton
@@ -165,11 +171,11 @@ const CanvasTopNav = ({
               <IconHamburgerLine />
             </IconButton>
           )}
-          {lti && <div style={styles.ltiIcon}>{ltiIcon}</div>}
+          {lti && <div css={styles.ltiIcon}>{ltiIcon}</div>}
           {!lti && (
             <div style={{ minWidth: '100%' }}>
-              <Breadcrumb label={breadcrumb.label}>
-                {breadcrumb.links.map((link: any, index: any) =>
+              <Breadcrumb label={breadcrumb?.label}>
+                {breadcrumb?.links.map((link: any, index: any) =>
                   link.href ? (
                     <Breadcrumb.Link key={index} href={link.href}>
                       {link.label}
@@ -190,47 +196,57 @@ const CanvasTopNav = ({
               }
             }}
           >
-            {' '}
-            <TopNavBarMenuItems
-              renderHiddenItemsMenuTriggerLabel={() => ''}
-              currentPageId={currentPageId}
+            <TopNavBarContext.Provider
+              value={{
+                layout: 'desktop',
+                inverseColor: true
+              }}
             >
-              {menuItems.map((item: any) => (
-                <TopNavBarItem key={item.id} id={item.id}>
-                  {item.title}
-                </TopNavBarItem>
-              ))}
-              <TopNavBarItem
-                renderSubmenu={
-                  <Drilldown rootPageId="root">
-                    <Drilldown.Page id="root">
-                      <Drilldown.Option id="rootOption1" subPageId="secondPage">
-                        Link One
-                      </Drilldown.Option>
-                      <Drilldown.Option id="rootOption2" href="/#TopNavBar">
-                        Link Two
-                      </Drilldown.Option>
-                      <Drilldown.Option id="rootOption3" href="/#TopNavBar">
-                        Link Three
-                      </Drilldown.Option>
-                    </Drilldown.Page>
-                    <Drilldown.Page id="secondPage">
-                      <Drilldown.Option id="secondPageOption1">
-                        Level 2 Option One
-                      </Drilldown.Option>
-                      <Drilldown.Option
-                        id="secondPageOption2"
-                        href="/#TopNavBar"
-                      >
-                        Level 2 Option Two
-                      </Drilldown.Option>
-                    </Drilldown.Page>
-                  </Drilldown>
-                }
+              <TopNavBarMenuItems
+                renderHiddenItemsMenuTriggerLabel={() => ''}
+                currentPageId={currentPageId}
               >
-                Submenu
-              </TopNavBarItem>
-            </TopNavBarMenuItems>
+                {menuItems?.map((item: any) => (
+                  <TopNavBarItem key={item.id} id={item.id}>
+                    {item.title}
+                  </TopNavBarItem>
+                ))}
+                <TopNavBarItem
+                  id="submenu"
+                  renderSubmenu={
+                    <Drilldown rootPageId="root">
+                      <Drilldown.Page id="root">
+                        <Drilldown.Option
+                          id="rootOption1"
+                          subPageId="secondPage"
+                        >
+                          Link One
+                        </Drilldown.Option>
+                        <Drilldown.Option id="rootOption2" href="/#TopNavBar">
+                          Link Two
+                        </Drilldown.Option>
+                        <Drilldown.Option id="rootOption3" href="/#TopNavBar">
+                          Link Three
+                        </Drilldown.Option>
+                      </Drilldown.Page>
+                      <Drilldown.Page id="secondPage">
+                        <Drilldown.Option id="secondPageOption1">
+                          Level 2 Option One
+                        </Drilldown.Option>
+                        <Drilldown.Option
+                          id="secondPageOption2"
+                          href="/#TopNavBar"
+                        >
+                          Level 2 Option Two
+                        </Drilldown.Option>
+                      </Drilldown.Page>
+                    </Drilldown>
+                  }
+                >
+                  Submenu
+                </TopNavBarItem>
+              </TopNavBarMenuItems>
+            </TopNavBarContext.Provider>
           </InstUISettingsProvider>
         </DesktopTopNav.Start>
         <DesktopTopNav.End>
@@ -245,8 +261,7 @@ const CanvasTopNav = ({
   )
 }
 
-const SC: any = withFunctionalStyle(generateStyles)(CanvasTopNav)
-SC.displayName = 'CanvasTopNav'
+CanvasTopNav.displayName = 'CanvasTopNav'
 
-export { SC as CanvasTopNav }
-export default SC
+export { CanvasTopNav }
+export default CanvasTopNav

@@ -44,8 +44,6 @@ type DesktopTopNavStyle = {
   }
 }
 
-type DesktopTopNavProps = DesktopTopNavOwnProps & {
-  styles: DesktopTopNavStyle
-} & PropsWithChildren
+type DesktopTopNavProps = DesktopTopNavOwnProps & PropsWithChildren
 
 export type { DesktopTopNavProps, DesktopTopNavOwnProps }

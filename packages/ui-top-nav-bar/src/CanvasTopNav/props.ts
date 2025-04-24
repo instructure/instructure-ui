@@ -22,13 +22,26 @@
  * SOFTWARE.
  */
 
-import type { PropsWithChildren } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 
-type TopNavOwnProps = {
+type CanvasTopNavOwnProps = {
   lti?: boolean
-  breakpoint?: string
+  breakpoint?: number
+  brand?: ReactNode
+  breadcrumb?: { label: string; links: { label: string; href?: string }[] }
+  buttons?: any[]
+  mobileButtons?: any[]
+  mobileMenu?: any[]
+  hamburgerOnClick?: () => void
+  hamburgerLabel?: string
+  showDesktopView?: boolean
+  menuItems?: any[]
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  ltiIcon?: ReactNode
+  currentPageId?: string
 }
 
-type TopNavProps = TopNavOwnProps & PropsWithChildren
+type CanvasTopNavProps = CanvasTopNavOwnProps & PropsWithChildren
 
-export type { TopNavProps, TopNavOwnProps }
+export type { CanvasTopNavProps, CanvasTopNavOwnProps }

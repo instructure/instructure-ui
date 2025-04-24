@@ -1725,6 +1725,34 @@ export type RadioInputGroupTheme = {
   invalidAsteriskColor: Colors['contrasts']['red5782']
 }
 
+export type MobileTopNavTheme = {
+  backgroundColor: string
+  backgroundColorLti: string
+  color: string
+  topBarPadding: string | 0
+}
+
+export type DesktopTopNavTheme = {
+  borderColor: string
+  backgroundColor: string
+  color: string
+}
+
+export type CanvasTopNavTheme = {
+  optionBackgroundLti: string
+  optionBackground: string
+  optionHighlightedBackgroundLti: string
+  optionHighlightedBackground: string
+  optionColorLti: string
+  optionColor: string
+  optionHighlightedLabelColorLti: string
+  optionHighlightedLabelColor: string
+  drilldownBorderColorLti: string
+  drilldownBorderColor: string
+  topNavBarItemColor: string
+  topNavBarItemActiveIndicatorColor: string
+}
+
 export interface ThemeVariables {
   Avatar: AvatarTheme
   Alert: AlertTheme
@@ -1866,4 +1894,7 @@ export interface ThemeVariables {
   ContextView: ContextViewTheme
   View: ViewTheme
   RadioInputGroup: RadioInputGroupTheme
+  MobileTopNav: MobileTopNavTheme
+  DesktopTopNav: DesktopTopNavTheme
+  CanvasTopNav: CanvasTopNavTheme
 }
