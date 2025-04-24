@@ -70,7 +70,9 @@ const generateStyle = (
       cursor: 'not-allowed',
       opacity: 0.5
     },
-    default: {}
+    default: {
+      transition: 'background 200ms'
+    }
   }
 
   const getContentVAlign = (type: 'before' | 'after') => {
@@ -101,8 +103,6 @@ const generateStyle = (
 
   const linkStyles = { textDecoration: 'none', color: 'currentColor' }
 
-  const transition = 'background 200ms'
-
   return {
     item: {
       label: 'optionItem',
@@ -118,7 +118,6 @@ const generateStyle = (
       lineHeight: componentTheme.lineHeight,
       outline: 'none',
       position: 'relative',
-      transition,
       userSelect: 'none',
       ...variantVariants[variant!],
       ...(containsList && { cursor: 'default' }),
@@ -188,7 +187,6 @@ const generateStyle = (
     description: {
       label: 'optionItem__description',
       display: 'block',
-      transition,
       paddingBlockStart: componentTheme.descriptionPaddingStart,
       fontWeight: componentTheme.descriptionFontWeight,
       fontSize: componentTheme.descriptionFontSize,

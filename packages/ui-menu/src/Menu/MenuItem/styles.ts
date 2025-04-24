@@ -103,6 +103,7 @@ const generateStyle = (
       ...roleStyles,
       '&:focus,  &:active,  &:hover': {
         background: componentTheme.activeBackground,
+        transition: 'background 0s',
         '[class*="menuItem__label"]': {
           color: componentTheme.activeLabelColor
         },
