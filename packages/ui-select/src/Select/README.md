@@ -26,6 +26,14 @@ describes: Select
       selectedOptionId: this.props.options[0].id,
       announcement: null
     }
+    inputElement = null
+
+    focusInput = () => {
+      this.inputElement.blur()
+      if (this.inputElement) {
+        this.inputElement.focus()
+      }
+    }
 
     getOptionById(queryId) {
       return this.props.options.find(({ id }) => id === queryId)
@@ -69,6 +77,7 @@ describes: Select
     }
 
     handleSelectOption = (event, { id }) => {
+      this.focusInput()
       const option = this.getOptionById(id).label
       this.setState({
         selectedOptionId: id,
@@ -99,6 +108,9 @@ describes: Select
             onRequestHideOptions={this.handleHideOptions}
             onRequestHighlightOption={this.handleHighlightOption}
             onRequestSelectOption={this.handleSelectOption}
+            inputRef={(el) => {
+              this.inputElement = el
+            }}
           >
             {this.props.options.map((option) => {
               return (
@@ -158,6 +170,14 @@ describes: Select
     const [highlightedOptionId, setHighlightedOptionId] = useState(null)
     const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
     const [announcement, setAnnouncement] = useState(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     const getOptionById = (queryId) => {
       return options.find(({ id }) => id === queryId)
@@ -193,6 +213,7 @@ describes: Select
 
     const handleSelectOption = (event, { id }) => {
       const option = getOptionById(id).label
+      focusInput()
       setSelectedOptionId(id)
       setInputValue(option)
       setIsShowingOptions(false)
@@ -211,6 +232,9 @@ describes: Select
           onRequestHideOptions={handleHideOptions}
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
         >
           {options.map((option) => {
             return (
@@ -277,6 +301,7 @@ It's best practice to always provide autocomplete functionality to help users ma
       filteredOptions: this.props.options,
       announcement: null
     }
+    inputElement = null
 
     getOptionById(queryId) {
       return this.props.options.find(({ id }) => id === queryId)
@@ -302,6 +327,13 @@ It's best practice to always provide autocomplete functionality to help users ma
       return this.props.options.filter((option) =>
         option.label.toLowerCase().startsWith(value.toLowerCase())
       )
+    }
+
+    focusInput = () => {
+      this.inputElement.blur()
+      if (this.inputElement) {
+        this.inputElement.focus()
+      }
     }
 
     matchValue() {
@@ -380,6 +412,7 @@ It's best practice to always provide autocomplete functionality to help users ma
     handleSelectOption = (event, { id }) => {
       const option = this.getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      this.focusInput()
       this.setState({
         selectedOptionId: id,
         inputValue: option.label,
@@ -428,6 +461,9 @@ It's best practice to always provide autocomplete functionality to help users ma
             onRequestSelectOption={this.handleSelectOption}
             renderBeforeInput={<IconUserSolid inline={false} />}
             renderAfterInput={<IconSearchLine inline={false} />}
+            inputRef={(el) => {
+              this.inputElement = el
+            }}
           >
             {filteredOptions.length > 0 ? (
               filteredOptions.map((option) => {
@@ -499,6 +535,14 @@ It's best practice to always provide autocomplete functionality to help users ma
     const [selectedOptionId, setSelectedOptionId] = useState(null)
     const [filteredOptions, setFilteredOptions] = useState(options)
     const [announcement, setAnnouncement] = useState(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     const getOptionById = (queryId) => {
       return options.find(({ id }) => id === queryId)
@@ -586,6 +630,7 @@ It's best practice to always provide autocomplete functionality to help users ma
     const handleSelectOption = (event, { id }) => {
       const option = getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      focusInput()
       setSelectedOptionId(id)
       setInputValue(option.label)
       setIsShowingOptions(false)
@@ -620,6 +665,9 @@ It's best practice to always provide autocomplete functionality to help users ma
           onRequestSelectOption={handleSelectOption}
           renderBeforeInput={<IconUserSolid inline={false} />}
           renderAfterInput={<IconSearchLine inline={false} />}
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
         >
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option) => {
@@ -695,6 +743,15 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
       selectedOptionId: ['opt1', 'opt6'],
       filteredOptions: this.props.options,
       announcement: null
+    }
+
+    inputRef = null
+
+    focusInput = () => {
+      this.inputRef.blur()
+      if (this.inputRef) {
+        this.inputRef.focus()
+      }
     }
 
     getOptionById(queryId) {
@@ -784,6 +841,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
     }
 
     handleSelectOption = (event, { id }) => {
+      this.focusInput()
       const option = this.getOptionById(id)
       if (!option) return // prevent selecting of empty option
       this.setState((state) => ({
@@ -956,7 +1014,14 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
     const [selectedOptionId, setSelectedOptionId] = useState(['opt1', 'opt6'])
     const [filteredOptions, setFilteredOptions] = useState(options)
     const [announcement, setAnnouncement] = useState(null)
-    const inputRef = useRef(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     const getOptionById = (queryId) => {
       return options.find(({ id }) => id === queryId)
@@ -1030,6 +1095,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
     const handleSelectOption = (event, { id }) => {
       const option = getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      focusInput()
       setSelectedOptionId([...selectedOptionId, id])
       setHighlightedOptionId(null)
       setFilteredOptions(filterOptions(''))
@@ -1080,8 +1146,8 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
           dismissible
           key={id}
           text={
-            <AccessibleContent alt={`Remove ${this.getOptionById(id).label}`}>
-              {this.getOptionById(id).label}
+            <AccessibleContent alt={`Remove ${getOptionById(id).label}`}>
+              {getOptionById(id).label}
             </AccessibleContent>
           }
           margin={
@@ -1099,7 +1165,9 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
           assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
-          inputRef={(el) => (inputRef.current = el)}
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
           onBlur={handleBlur}
           onInputChange={handleInputChange}
           onRequestShowOptions={handleShowOptions}
@@ -1180,6 +1248,15 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
       announcement: null
     }
 
+    inputElement = null
+
+    focusInput = () => {
+      this.inputElement.blur()
+      if (this.inputElement) {
+        this.inputElement.focus()
+      }
+    }
+
     getOptionById(id) {
       const { options } = this.props
       let match = null
@@ -1240,6 +1317,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
     }
 
     handleSelectOption = (event, { id }) => {
+      this.focusInput()
       this.setState({
         selectedOptionId: id,
         inputValue: this.getOptionById(id).label,
@@ -1322,6 +1400,9 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
                 margin="0 0 xxx-small 0"
               />
             }
+            inputRef={(el) => {
+              this.inputElement = el
+            }}
           >
             {this.renderGroup()}
           </Select>
@@ -1368,6 +1449,14 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
       options['Western'][0].id
     )
     const [announcement, setAnnouncement] = useState(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     const getOptionById = (id) => {
       let match = null
@@ -1418,6 +1507,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
     }
 
     const handleSelectOption = (event, { id }) => {
+      focusInput()
       setSelectedOptionId(id)
       setInputValue(getOptionById(id).label)
       setIsShowingOptions(false)
@@ -1485,6 +1575,9 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
               margin="0 0 xxx-small 0"
             />
           }
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
         >
           {renderGroup()}
         </Select>
@@ -1534,6 +1627,15 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
       selectedOptionId: null,
       filteredOptions: this.props.options,
       announcement: null
+    }
+
+    inputElement = null
+
+    focusInput = () => {
+      this.inputElement.blur()
+      if (this.inputElement) {
+        this.inputElement.focus()
+      }
     }
 
     getOptionById(id) {
@@ -1593,6 +1695,7 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     handleSelectOption = (event, { id }) => {
       const option = this.getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      this.focusInput()
       this.setState({
         selectedOptionId: id,
         inputValue: option.label,
@@ -1672,6 +1775,9 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
             onRequestHideOptions={this.handleHideOptions}
             onRequestHighlightOption={this.handleHighlightOption}
             onRequestSelectOption={this.handleSelectOption}
+            inputRef={(el) => {
+              this.inputElement = el
+            }}
           >
             {this.renderGroup()}
           </Select>
@@ -1711,6 +1817,14 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     const [selectedOptionId, setSelectedOptionId] = useState(null)
     const [filteredOptions, setFilteredOptions] = useState(options)
     const [announcement, setAnnouncement] = useState(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     const getOptionById = (id) => {
       return Object.values(options)
@@ -1757,6 +1871,7 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     const handleSelectOption = (event, { id }) => {
       const option = getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      focusInput()
       setSelectedOptionId(id)
       setInputValue(option.label)
       setIsShowingOptions(false)
@@ -1819,6 +1934,9 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
           onRequestHideOptions={handleHideOptions}
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
         >
           {renderGroup()}
         </Select>
@@ -1864,6 +1982,15 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
       selectedOptionLabel: '',
       filteredOptions: [],
       announcement: null
+    }
+
+    inputElement = null
+
+    focusInput = () => {
+      this.inputElement.blur()
+      if (this.inputElement) {
+        this.inputElement.focus()
+      }
     }
 
     timeoutId = null
@@ -1941,6 +2068,7 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
     handleSelectOption = (event, { id }) => {
       const option = this.getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      this.focusInput()
       this.setState({
         selectedOptionId: id,
         selectedOptionLabel: option.label,
@@ -2009,6 +2137,9 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
             onRequestHideOptions={this.handleHideOptions}
             onRequestHighlightOption={this.handleHighlightOption}
             onRequestSelectOption={this.handleSelectOption}
+            inputRef={(el) => {
+              this.inputElement = el
+            }}
           >
             {filteredOptions.length > 0 ? (
               filteredOptions.map((option) => {
@@ -2086,6 +2217,14 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
     const [selectedOptionLabel, setSelectedOptionLabel] = useState('')
     const [filteredOptions, setFilteredOptions] = useState([])
     const [announcement, setAnnouncement] = useState(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     let timeoutId = null
 
@@ -2151,6 +2290,7 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
     const handleSelectOption = (event, { id }) => {
       const option = getOptionById(id)
       if (!option) return // prevent selecting of empty option
+      focusInput()
       setSelectedOptionId(id)
       setSelectedOptionLabel(option.label)
       setInputValue(option.label)
@@ -2200,6 +2340,9 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
           onRequestHideOptions={handleHideOptions}
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
         >
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option) => {
@@ -2279,6 +2422,14 @@ To display icons (or other elements) before or after an option, pass it via the 
       selectedOptionId: this.props.options[0].id,
       announcement: null
     }
+    inputElement = null
+
+    focusInput = () => {
+      this.inputElement.blur()
+      if (this.inputElement) {
+        this.inputElement.focus()
+      }
+    }
 
     getOptionById(queryId) {
       return this.props.options.find(({ id }) => id === queryId)
@@ -2323,6 +2474,7 @@ To display icons (or other elements) before or after an option, pass it via the 
 
     handleSelectOption = (event, { id }) => {
       const option = this.getOptionById(id).label
+      this.focusInput()
       this.setState({
         selectedOptionId: id,
         inputValue: option,
@@ -2352,6 +2504,9 @@ To display icons (or other elements) before or after an option, pass it via the 
             onRequestHideOptions={this.handleHideOptions}
             onRequestHighlightOption={this.handleHighlightOption}
             onRequestSelectOption={this.handleSelectOption}
+            inputRef={(el) => {
+              this.inputElement = el
+            }}
           >
             {this.props.options.map((option) => {
               return (
@@ -2417,6 +2572,14 @@ To display icons (or other elements) before or after an option, pass it via the 
     const [highlightedOptionId, setHighlightedOptionId] = useState(null)
     const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
     const [announcement, setAnnouncement] = useState(null)
+    const [inputElement, setInputElement] = useState(null)
+
+    const focusInput = () => {
+      inputElement.blur()
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
 
     const getOptionById = (queryId) => {
       return options.find(({ id }) => id === queryId)
@@ -2452,6 +2615,7 @@ To display icons (or other elements) before or after an option, pass it via the 
 
     const handleSelectOption = (event, { id }) => {
       const option = getOptionById(id).label
+      focusInput()
       setSelectedOptionId(id)
       setInputValue(option)
       setIsShowingOptions(false)
@@ -2470,6 +2634,9 @@ To display icons (or other elements) before or after an option, pass it via the 
           onRequestHideOptions={handleHideOptions}
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
+          inputRef={(el) => {
+            setInputElement(el)
+          }}
         >
           {options.map((option) => {
             return (
@@ -2532,3 +2699,15 @@ To display icons (or other elements) before or after an option, pass it via the 
 It's important to ensure screen reader users receive instruction and feedback while interacting with a `Select`, but screen reader support for the `combobox` role varies. The `assistiveText` prop should always be used to explain how a keyboard user can make a selection. Additionally, a live region should be updated with feedback as the component is interacted with, such as when options are filtered or highlighted. Using an [Alert](#Alert) with the `screenReaderOnly` prop is the easiest way to do this.
 
 > Note: This component uses a native `input` field to render the selected value. When it's included in a native HTML `form`, the text value will be sent to the backend instead of anything specified in the `value` field of the `Select.Option`-s. We do not recommend to use this component this way, rather write your own code that collects information and sends it to the backend.
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>To ensure Select is accessible for iOS VoiceOver users, the input field’s focus must be blurred and then reapplied after selecting an option and closing the listbox. The examples above demonstrate this behavior.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
