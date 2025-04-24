@@ -24,45 +24,71 @@
 
 /** @jsx jsx */
 import { Children, PropsWithChildren } from 'react'
-import { jsx, withFunctionalStyle } from '@instructure/emotion'
+import { jsx, useStyle } from '@instructure/emotion'
 import type { DesktopTopNavProps } from './props'
 
-import { generateStyles } from './styles'
+import { generateStyle } from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: utilities
 ---
- **/
-const DesktopTopNav = ({ styles, children }: DesktopTopNavProps) => {
+**/
+const DesktopTopNav = ({ children }: DesktopTopNavProps) => {
+  const styles = useStyle({
+    generateStyle,
+    generateComponentTheme,
+    params: {},
+    componentId: 'DesktopTopNav',
+    displayName: 'DesktopTopNav'
+  })
+
   const getSubComponent = (displayName: any) => {
     return Children.map(children, (child: any) => child)?.filter(
       (child: any) => child?.type?.displayName === displayName
     )
   }
   return (
-    <div style={styles.container}>
+    <div css={styles.container}>
       {getSubComponent('Start')}
       {getSubComponent('End')}
     </div>
   )
 }
 
-const Start = ({ children, styles }: PropsWithChildren & { styles: any }) => {
-  return <div style={styles.start}>{children}</div>
+const Start = ({ children }: PropsWithChildren) => {
+  const styles = useStyle({
+    generateStyle,
+    generateComponentTheme,
+    params: {},
+    componentId: 'DesktopTopNav.Start',
+    displayName: 'DesktopTopNav.Start'
+  })
+  return <div css={styles.start}>{children}</div>
 }
 
-const End = ({ children, styles }: PropsWithChildren & { styles: any }) => {
-  return <div style={styles.end}>{children}</div>
+const End = ({ children }: PropsWithChildren) => {
+  const styles = useStyle({
+    generateStyle,
+    generateComponentTheme,
+    params: {},
+    componentId: 'DesktopTopNav.End',
+    displayName: 'DesktopTopNav.End'
+  })
+  return <div css={styles.end}>{children}</div>
 }
 
-const SC: any = withFunctionalStyle(generateStyles)(DesktopTopNav)
+Start.displayName = 'Start'
+End.displayName = 'End'
+DesktopTopNav.Start = Start
+DesktopTopNav.End = End
 
-SC.displayName = 'DesktopTopNav'
-SC.Start = withFunctionalStyle(generateStyles)(Start)
-SC.Start.displayName = 'Start'
-SC.End = withFunctionalStyle(generateStyles)(End)
-SC.End.displayName = 'End'
+DesktopTopNav.displayName = 'DesktopTopNav'
+Start.displayName = 'Start'
+End.displayName = 'End'
+DesktopTopNav.Start = Start
+DesktopTopNav.End = End
 
-export { SC as DesktopTopNav }
-export default SC
+export { DesktopTopNav }
+export default DesktopTopNav

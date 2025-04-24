@@ -22,32 +22,19 @@
  * SOFTWARE.
  */
 
-import type { ReactNode, PropsWithChildren } from 'react'
+import type { Theme } from '@instructure/ui-themes'
+import { DesktopTopNavTheme } from '@instructure/shared-types'
 
-type MobileTopNavOwnProps = {
-  lti?: boolean
-  brand?: ReactNode
-}
+const generateComponentTheme = (theme: Theme): DesktopTopNavTheme => {
+  const componentVariables: DesktopTopNavTheme = {
+    borderColor: theme.colors.contrasts.grey1424,
+    backgroundColor: theme.colors.contrasts.grey1111,
+    color: theme.colors.contrasts.grey125125
+  }
 
-type MobileTopNavStyle = {
-  container: (open: boolean) => {
-    [key: string]: string | number
-  }
-  content: (open: boolean) => {
-    [key: string]: string | number
-  }
-  topBar: {
-    [key: string]: string | number
-  }
-  end: {
-    [key: string]: string | number
+  return {
+    ...componentVariables
   }
 }
 
-type MobileTopNavProps = MobileTopNavOwnProps & {
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
-  ltiIcon?: ReactNode
-} & PropsWithChildren
-
-export type { MobileTopNavProps, MobileTopNavOwnProps }
+export default generateComponentTheme

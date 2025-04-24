@@ -22,22 +22,28 @@
  * SOFTWARE.
  */
 import type { DesktopTopNavProps } from './props'
+import type { DesktopTopNavTheme } from '@instructure/shared-types'
 
-const generateStyles = (_props: DesktopTopNavProps, theme: any) => {
+const generateStyle = (
+  componentTheme: DesktopTopNavTheme,
+  _params: DesktopTopNavProps
+) => {
   return {
     container: {
+      label: 'desktopTopNavContainer',
       height: '66px',
       position: 'relative',
       borderBottom: '1px solid',
-      borderColor: theme.colors.contrasts.grey1424,
-      backgroundColor: theme.colors.contrasts.grey1111,
+      borderColor: componentTheme.borderColor,
+      backgroundColor: componentTheme.backgroundColor,
       width: '100%',
-      color: theme.colors.contrasts.grey125125,
+      color: componentTheme.color,
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'row'
     },
     start: {
+      label: 'desktopTopNavStart',
       marginLeft: '24px',
       marginRight: 'auto',
       display: 'flex',
@@ -46,6 +52,7 @@ const generateStyles = (_props: DesktopTopNavProps, theme: any) => {
       gap: '16px'
     },
     end: {
+      label: 'desktopTopNavEnd',
       marginRight: '24px',
       display: 'flex',
       gap: '12px'
@@ -53,4 +60,4 @@ const generateStyles = (_props: DesktopTopNavProps, theme: any) => {
   }
 }
 
-export { generateStyles }
+export { generateStyle }

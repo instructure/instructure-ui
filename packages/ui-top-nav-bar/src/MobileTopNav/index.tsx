@@ -30,12 +30,13 @@ import {
   useEffect,
   useState
 } from 'react'
-import { jsx, withFunctionalStyle } from '@instructure/emotion'
+import { jsx, useStyle } from '@instructure/emotion'
 import type { MobileTopNavProps } from './props'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { IconHamburgerLine, IconXLine } from '@instructure/ui-icons'
-import { generateStyles } from './styles'
+import { generateStyle } from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -45,13 +46,22 @@ category: utilities
 const MobileTopNav = ({
   lti = false,
   brand,
-  styles,
   children,
   open: controlledOpen,
   onOpenChange,
   ltiIcon
 }: MobileTopNavProps) => {
   const [internalOpen, setInternalOpen] = useState<boolean>(false)
+
+  const styles = useStyle({
+    generateStyle,
+    generateComponentTheme,
+    params: {
+      lti
+    },
+    componentId: 'MobileTopNav',
+    displayName: 'MobileTopNav'
+  })
 
   const isControlled = controlledOpen !== undefined
   const open = isControlled ? controlledOpen : internalOpen
@@ -77,8 +87,8 @@ const MobileTopNav = ({
   }
 
   return (
-    <div style={styles.container(open)}>
-      <div style={styles.topBar}>
+    <div css={styles.container}>
+      <div css={styles.topBar}>
         {lti ? (
           <IconButton withBackground={false} withBorder={false}>
             <div style={{ fontSize: '36px' }}> {ltiIcon}</div>
@@ -86,7 +96,7 @@ const MobileTopNav = ({
         ) : (
           brand
         )}
-        <span style={styles.end}>
+        <span css={styles.end}>
           {!open && getSubComponent('End')}
           <IconButton
             withBackground={false}
@@ -100,7 +110,9 @@ const MobileTopNav = ({
         </span>
       </div>
 
-      <div style={styles.content(open)}>{getSubComponent('Menu')}</div>
+      <div css={open ? styles.contentOpen : styles.contentClosed}>
+        {getSubComponent('Menu')}
+      </div>
     </div>
   )
 }
@@ -113,14 +125,11 @@ const Menu = ({ children }: PropsWithChildren) => {
   return <Fragment>{children}</Fragment>
 }
 
-const SC: any = withFunctionalStyle(generateStyles)(MobileTopNav)
+MobileTopNav.End = End
+;(MobileTopNav.End as React.FC).displayName = 'End'
+MobileTopNav.Menu = Menu
+;(MobileTopNav.Menu as React.FC).displayName = 'Menu'
+MobileTopNav.displayName = 'MobileTopNav'
 
-SC.End = End
-SC.End.displayName = 'End'
-// TODO investigate whether displayName should be added to the original component
-SC.Menu = Menu
-SC.Menu.displayName = 'Menu'
-SC.displayName = 'MobileTopNav'
-
-export { SC as MobileTopNav }
-export default SC
+export { MobileTopNav }
+export default MobileTopNav
