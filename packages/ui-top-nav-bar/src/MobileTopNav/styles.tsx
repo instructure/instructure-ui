@@ -22,45 +22,59 @@
  * SOFTWARE.
  */
 import type { MobileTopNavProps } from './props'
+import type { MobileTopNavTheme } from '@instructure/shared-types'
 
-//TODO use theme variables for spacing
-const generateStyles = (props: MobileTopNavProps, theme: any) => {
-  const { lti } = props
+const generateStyle = (
+  componentTheme: MobileTopNavTheme,
+  params: MobileTopNavProps
+) => {
+  const { lti } = params
+
+  const contentBase = {
+    top: '3.375rem',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: 'fixed',
+    backgroundColor: lti
+      ? componentTheme.backgroundColorLti
+      : componentTheme.backgroundColor,
+    color: componentTheme.backgroundColor
+  }
+
   return {
-    container: (_open: boolean) => {
-      return {
-        height: '54px',
-        backgroundColor: lti
-          ? theme?.colors?.contrasts?.grey1111
-          : theme?.colors?.contrasts?.grey100100, //CANVAS, LTI LATER
-        color: theme?.colors?.contrasts?.grey125125,
-        width: '100%',
-        zIndex: '9999'
-      }
+    container: {
+      label: 'mobileTopNavContainer',
+      height: '54px',
+      backgroundColor: lti
+        ? componentTheme.backgroundColorLti
+        : componentTheme.backgroundColor,
+      color: componentTheme.backgroundColor,
+      width: '100%',
+      zIndex: '9999'
     },
     topBar: {
-      padding: `0 ${theme.spacing.small}`,
+      label: 'mobileTopNavTopBar',
+      padding: `0 ${componentTheme.topBarPadding}`,
       height: '54px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between'
     },
-    content: (open: boolean) => {
-      return {
-        height: open ? '100%' : '0px',
-        top: '3.375rem',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        overflow: open ? 'hidden' : 'scroll',
-        position: 'fixed',
-        backgroundColor: lti
-          ? theme?.colors?.contrasts?.grey1111
-          : theme?.colors?.contrasts?.grey100100,
-        color: theme.colors?.contrasts?.white1010
-      }
+    contentOpen: {
+      label: 'mobileTopNavContentOpen',
+      ...contentBase,
+      height: '100%',
+      overflow: 'hidden'
+    },
+    contentClosed: {
+      label: 'mobileTopNavContentClosed',
+      ...contentBase,
+      height: '0px',
+      overflow: 'scroll'
     },
     end: {
+      label: 'mobileTopNavEnd',
       display: 'flex',
       gap: '12px',
       marginLeft: 'auto'
@@ -68,4 +82,4 @@ const generateStyles = (props: MobileTopNavProps, theme: any) => {
   }
 }
 
-export { generateStyles }
+export { generateStyle }

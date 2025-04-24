@@ -21,45 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { TopNavProps } from './props'
+import type { CanvasTopNavProps } from './props'
+import { CanvasTopNavTheme } from '@instructure/shared-types'
 
-const generateStyles = (props: TopNavProps, theme: any) => {
-  const { lti } = props
+const generateStyle = (
+  componentTheme: CanvasTopNavTheme,
+  params: CanvasTopNavProps
+) => {
+  const { lti } = params
+
   return {
     optionsOverride: {
       background: lti
-        ? theme?.colors?.contrasts?.grey1111
-        : theme?.colors?.contrasts?.grey100100, //-> grey100100
+        ? componentTheme.optionBackgroundLti
+        : componentTheme.optionBackground,
       highlightedBackground: lti
-        ? theme?.colors?.contrasts?.grey1214
-        : theme?.colors?.contrasts?.grey5782,
-      color: lti
-        ? theme?.colors?.contrasts?.grey125125
-        : theme?.colors?.contrasts?.white1010,
+        ? componentTheme.optionHighlightedBackgroundLti
+        : componentTheme.optionHighlightedBackground,
+      color: lti ? componentTheme.optionColorLti : componentTheme.optionColor,
       highlightedLabelColor: lti
-        ? theme?.colors?.contrasts?.grey125125
-        : theme?.colors?.contrasts?.white1010,
+        ? componentTheme.optionHighlightedLabelColorLti
+        : componentTheme.optionHighlightedLabelColor,
       padding: '16px 12px',
       lineHeight: '1.5'
     },
     drilldownOverride: {
       borderColor: lti
-        ? theme?.colors?.contrasts?.grey1424
-        : theme?.colors?.contrasts?.grey100100
+        ? componentTheme.drilldownBorderColorLti
+        : componentTheme.drilldownBorderColor
     },
     optionContainer: {
+      label: 'canvasTopNavOptionContainer',
       display: 'flex',
       gap: '8px',
       alignItems: 'center'
     },
     topNavBarItemOverride: {
-      color: theme?.colors?.contrasts.grey125125,
-      activeIndicatorColor: theme?.colors?.contrasts.grey125125
+      color: componentTheme.topNavBarItemColor,
+      activeIndicatorColor: componentTheme.topNavBarItemActiveIndicatorColor
     },
     ltiIcon: {
+      label: 'canvasTopNavLtiIcon',
       fontSize: '38px'
     }
   }
 }
 
-export { generateStyles }
+export { generateStyle }
