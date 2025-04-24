@@ -251,7 +251,11 @@ const CanvasTopNav = ({
         </DesktopTopNav.Start>
         <DesktopTopNav.End>
           {buttons.map((button: any) => (
-            <Button key={button.label} renderIcon={button.icon}>
+            <Button
+              key={button.label}
+              renderIcon={button.icon}
+              onClick={button.onClick}
+            >
               {button.label}
             </Button>
           ))}
