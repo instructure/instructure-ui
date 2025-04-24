@@ -62,8 +62,8 @@ const generateComponentTheme = (theme: Theme): ViewTheme => {
     color: colors?.contrasts?.grey125125,
     colorPrimaryInverse: colors?.contrasts?.white1010,
 
-    borderColorPrimary: colors?.contrasts?.grey1214,
-    borderColorSecondary: colors?.contrasts?.grey4570,
+    borderColorPrimary: colors?.contrasts?.grey1424,
+    borderColorSecondary: colors?.contrasts?.grey3045,
     borderColorSuccess: colors?.contrasts?.green4570,
     borderColorBrand: colors?.contrasts?.blue4570,
     borderColorInfo: colors?.contrasts?.blue4570,
