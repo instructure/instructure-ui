@@ -33,6 +33,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
+import * as utils from '@instructure/ui-utils'
 
 import type { SelectProps } from '@instructure/ui-select'
 import type {
@@ -97,6 +98,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
 
   focus() {
     this.ref?.focus()
+  }
+
+  blur() {
+    this.ref && this.ref.blur()
   }
 
   get _select() {
@@ -452,6 +457,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     const selectedOption = this.getOption('id', data.id)
     let newInputValue: string
     const currentSelectedOptionId = this.state.selectedOptionId
+
+    // Focus needs to be reapplied to input
+    // after selecting an item to make sure VoiceOver behaves correctly on iOS
+    if (utils.isAndroidOrIOS()) {
+      this.blur()
+      this.focus()
+    }
+
     if (this.isControlled) {
       // in controlled mode we leave to the user to set the value of the
       // component e.g. in the onChange event handler.

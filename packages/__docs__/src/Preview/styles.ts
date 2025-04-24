@@ -42,7 +42,6 @@ const generateStyle = (
   const previewStyle = {
     boxSizing: 'border-box',
     margin: 0,
-    position: 'relative',
     overflow: 'auto',
     padding: componentTheme.padding,
     borderWidth: componentTheme.borderWidth,

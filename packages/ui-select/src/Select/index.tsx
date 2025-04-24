@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { ComponentElement, Children, Component, memo } from 'react'
+
+import { ComponentElement, Children, Component, memo, ReactNode } from 'react'
 
 import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -184,6 +185,10 @@ class Select extends Component<SelectProps> {
 
   focus() {
     this._input && this._input.focus()
+  }
+
+  blur() {
+    this._input && this._input.blur()
   }
 
   get childrenArray() {
@@ -735,7 +740,17 @@ class Select extends Component<SelectProps> {
       shouldNotWrap,
       display: isInline ? 'inline-block' : 'block',
       renderBeforeInput: this.handleRenderBeforeInput(),
-      renderAfterInput: this.handleRenderAfterInput(),
+      // On iOS VoiceOver, if there is a custom element instead of the changing up and down arrow button
+      // the listbox closes on a swipe, so a DOM change is enforced by the key change
+      // that seems to inform VoiceOver to behave the correct way
+      renderAfterInput:
+        utils.isAndroidOrIOS() && renderAfterInput !== undefined ? (
+          <span key={this.props.isShowingOptions ? 'open' : 'closed'}>
+            {this.handleRenderAfterInput() as ReactNode}
+          </span>
+        ) : (
+          this.handleRenderAfterInput()
+        ),
 
       // If `inputValue` is provided, we need to pass a default onChange handler,
       // because TextInput `value` is a controlled prop,
@@ -798,7 +813,16 @@ class Select extends Component<SelectProps> {
             <Popover
               constrain={constrain}
               placement={placement}
-              mountNode={mountNode}
+              // On iOS VoiceOver, the Popover is mounted right after the input
+              // in order to be able to navigate through the list items with a swipe.
+              // The swipe would result in closing the listbox if mounted elsewhere.
+              mountNode={
+                mountNode !== undefined
+                  ? mountNode
+                  : utils.isAndroidOrIOS()
+                  ? this.ref
+                  : undefined
+              }
               positionTarget={this._inputContainer}
               isShowingContent={isShowingOptions}
               shouldReturnFocus={false}

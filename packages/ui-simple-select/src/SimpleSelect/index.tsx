@@ -24,6 +24,7 @@
 
 import { isValidElement, ComponentElement, Component, Children } from 'react'
 
+import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
@@ -113,6 +114,10 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
   focus() {
     this.ref && this.ref.focus()
+  }
+
+  blur() {
+    this.ref && this.ref.blur()
   }
 
   get focused() {
@@ -303,6 +308,13 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
     const option = this.getOption('id', id)
     const value = option && option.props.value
+
+    // Focus needs to be reapplied to input
+    // after selecting an item to make sure VoiceOver behaves correctly on iOS
+    if (utils.isAndroidOrIOS()) {
+      this.blur()
+      this.focus()
+    }
 
     if (this.isControlled) {
       this.setState({ isShowingOptions: false })
