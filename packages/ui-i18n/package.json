@@ -24,9 +24,11 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.16.2",
-    "@instructure/ui-test-utils": "10.16.2",
     "@types/hoist-non-react-statics": "^3.3.5",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",

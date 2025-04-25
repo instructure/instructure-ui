@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { Component } from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { expect } from 'vitest'
 import { ApplyLocale } from '../index'
 import { ApplyLocaleContext } from '../ApplyLocaleContext'
 
@@ -43,24 +44,20 @@ class LocalizableComponent extends Component {
 
 describe('<ApplyLocale />', async () => {
   it('applies locale context', async () => {
-    const subject = await mount(
+    const { container } = render(
       <ApplyLocale locale="fr">
         <LocalizableComponent />
       </ApplyLocale>
     )
-
-    const component = within(subject.getDOMNode())
-    expect(await component.findWithText('fr')).to.exist()
+    expect(container).toHaveTextContent('fr')
   })
 
   it('applies timezone context', async () => {
-    const subject = await mount(
+    const { container } = render(
       <ApplyLocale timezone="Europe/Paris">
         <LocalizableComponent />
       </ApplyLocale>
     )
-
-    const component = within(subject.getDOMNode())
-    expect(await component.findWithText('Europe/Paris')).to.exist()
+    expect(container).toHaveTextContent('Europe/Paris')
   })
 })

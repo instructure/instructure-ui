@@ -25,7 +25,10 @@
 import { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
 
 import {
   textDirectionContextConsumer,
@@ -54,30 +57,48 @@ class WrapperComponent extends Component {
   }
 }
 
-describe('@textDirectionContextConsumer', async () => {
+describe('@textDirectionContextConsumer', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should take on the direction of the document by default', async () => {
-    const subject = await mount(<TextDirectionContextConsumerComponent />)
-    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
+    const { container } = render(<TextDirectionContextConsumerComponent />)
+
+    expect(container.firstChild).toHaveAttribute('data-dir', 'ltr')
   })
 
   it('can be found and tested with ReactTestUtils', async () => {
     const rootNode = document.createElement('div')
+
     document.body.appendChild(rootNode)
 
     // eslint-disable-next-line react/no-render-return-value
     const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
-    ReactTestUtils.findRenderedComponentWithType(
+    const foundComponent = ReactTestUtils.findRenderedComponentWithType(
       rendered as any,
       (TextDirectionContextConsumerComponent as any).originalType
     )
+
+    expect(foundComponent).toBeDefined()
   })
 
   it('should set the text direction via props', async () => {
-    const subject = await mount(
+    const { container } = render(
       <TextDirectionContextConsumerComponent dir="rtl" />
     )
-    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
+    expect(container.firstChild).toHaveAttribute('data-dir', 'rtl')
   })
+
   /* TODO re-enable this test when we allow 'auto' text direction
   it('setting "auto" from context figures out text direction from the text', async () => {
     const subject = await mount(
@@ -91,13 +112,14 @@ describe('@textDirectionContextConsumer', async () => {
       getComputedStyle(subject.getDOMNode().childNodes[0] as Element).direction
     ).to.equal('rtl')
   })
-*/
+  */
+
   it('should give props preference when context and context are present', async () => {
-    const subject = await mount(
+    const { container } = render(
       <TextDirectionContext.Provider value="ltr">
         <TextDirectionContextConsumerComponent dir="rtl" />
       </TextDirectionContext.Provider>
     )
-    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
+    expect(container.firstChild).toHaveAttribute('data-dir', 'rtl')
   })
 })

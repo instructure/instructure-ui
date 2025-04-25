@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+import { expect } from 'vitest'
 import { I18nPropTypes } from '../I18nPropTypes'
 
 describe('I18nPropTypes', () => {
@@ -75,7 +75,7 @@ describe('I18nPropTypes', () => {
       ]
       validISO8601Strings.forEach((iso8601string) => {
         props.date = iso8601string
-        expect(iso8601(props, 'date', 'TestComponent', '', '')).to.not.exist()
+        expect(iso8601(props, 'date', 'TestComponent', '', '')).toBe(null)
       })
     })
 
@@ -110,9 +110,9 @@ describe('I18nPropTypes', () => {
       ]
       invalidISO8601Strings.forEach((iso8601string) => {
         props.date = iso8601string
-        expect(
-          iso8601(props, 'date', 'TestComponent', '', '')
-        ).to.be.an.instanceOf(Error)
+        expect(iso8601(props, 'date', 'TestComponent', '', '')).toBeInstanceOf(
+          Error
+        )
       })
     })
   })
