@@ -155,10 +155,27 @@ describe('<Table />', async () => {
     render(
       <Table caption="Test table" layout="stacked">
         <Table.Head>
+          {/* @ts-expect-error error is normal here */}
           <Table.Row>
             <Table.Cell>Foo</Table.Cell>
+            {}
+            {false}
           </Table.Row>
         </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.RowHeader>1</Table.RowHeader>
+            <Table.Cell>The Shawshank Redemption</Table.Cell>
+            <Table.Cell>1994</Table.Cell>
+            <Table.Cell>9.3</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.RowHeader>2</Table.RowHeader>
+            <Table.Cell>The Godfather</Table.Cell>
+            <Table.Cell>1972</Table.Cell>
+            <Table.Cell>9.2</Table.Cell>
+          </Table.Row>
+        </Table.Body>
       </Table>
     )
     const stackedTable = screen.getByRole('table')
@@ -167,7 +184,7 @@ describe('<Table />', async () => {
     expect(stackedTable).not.toHaveTextContent('Foo')
   })
 
-  it('does not crash for invalid children', async () => {
+  it('does not crash for invalid children in stacked layout', async () => {
     render(
       <Table caption="Test table" layout="stacked">
         test1

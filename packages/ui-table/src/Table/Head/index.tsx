@@ -117,7 +117,7 @@ class Head extends Component<TableHeadProps> {
     let count = 0
     Children.forEach(firstRow.props.children, (grandchild) => {
       count += 1
-      if (!grandchild.props) return
+      if (!grandchild?.props) return // grandchild can be false
       const { id, stackedSortByLabel, sortDirection, onRequestSort } =
         grandchild.props
       if (id && onRequestSort) {

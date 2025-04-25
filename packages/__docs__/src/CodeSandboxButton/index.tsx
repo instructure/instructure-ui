@@ -42,25 +42,51 @@ class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
   render() {
     //TODO: we should not import everything everytime
     //somehow conditionally import needed modules
-    const importStatements = `import {useState, useEffect} from "react"
+    const importStatements = `import React, {useState, useEffect, useContext, Children} from "react"
 import ReactDOM from "react-dom"
 import moment from 'moment'
-import {avatarSquare, avatarPortrait, lorem} from "./samplemedia"
-import {placeholderImage} from "./samplemedia"
-import iconExample from "!svg-inline-loader!./heart_lg.svg"
 import 'moment/min/locales'
 `
-    const reactComponentPattern = /<[A-Z]\w+|Icon\w+/gm
-    const neededClasses = this.props.code
-      .match(reactComponentPattern)
-      ?.map((className) => className.replace(/</gm, '').trim())
-
-    if (this.props.code.includes('Calendar')) {
-      neededClasses?.push('Calendar')
+    let importExampleIcon = ''
+    if (this.props.code.includes('iconExample(')) {
+      importExampleIcon =
+        'import iconExample from "!svg-inline-loader!./heart_lg.svg"'
     }
 
-    const uniqueClasses = [...new Set(neededClasses)]
+    // import sample media
+    const neededSampleMedia: string[] = []
+    if (this.props.code.includes('avatarSquare')) {
+      neededSampleMedia.push('avatarSquare')
+    }
+    if (this.props.code.includes('avatarPortrait')) {
+      neededSampleMedia.push('avatarPortrait')
+    }
+    if (this.props.code.includes('lorem.')) {
+      neededSampleMedia.push('lorem')
+    }
+    if (this.props.code.includes('placeholderImage(')) {
+      neededSampleMedia.push('placeholderImage')
+    }
+    const importSampleMedia =
+      neededSampleMedia.length > 0
+        ? `import { ${neededSampleMedia.join(', ')} } from './samplemedia'\n`
+        : ''
 
+    // import InstUI components/icons/Context
+    const neededClasses: string[] = []
+    const reactComponentPattern = /<[A-Z]\w+|Icon\w+/gm // React component or an icon
+    this.props.code
+      .match(reactComponentPattern)
+      ?.forEach((className) =>
+        neededClasses.push(className.replace(/</gm, '').trim())
+      )
+    if (this.props.code.includes('Calendar')) {
+      neededClasses.push('Calendar')
+    }
+    this.props.code
+      .match(/[A-Z]\w+Context/gm)
+      ?.forEach((className) => neededClasses.push(className))
+    const uniqueClasses = [...new Set(neededClasses)]
     const externalElements = this.props.code
       .match(/class.\w+|function.\w+|const.\w+/gm)
       ?.map((className) =>
@@ -86,7 +112,13 @@ import 'moment/min/locales'
     const renderStatement = `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n`
     const codeSandboxData = {
       title: this.props.title,
-      js: importStatements + importClasses + renderStatement + codeBlock,
+      js:
+        importStatements +
+        importExampleIcon +
+        importSampleMedia +
+        importClasses +
+        renderStatement +
+        codeBlock,
       private: true,
       editors: '001',
       html: `<div id="app"></div>
