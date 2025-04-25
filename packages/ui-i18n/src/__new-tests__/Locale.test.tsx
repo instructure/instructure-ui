@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2018 - present Instructure, Inc.
+ * Copyright (c) 2015 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,42 +22,34 @@
  * SOFTWARE.
  */
 
-import { expect, mount } from '@instructure/ui-test-utils'
-import { getTextDirection } from '../getTextDirection'
+import '@testing-library/jest-dom'
+import { expect } from 'vitest'
+import { Locale } from '../Locale'
 
-describe('getTextDirection', async () => {
-  it('defaults the dir of <html>', async () => {
-    expect(getTextDirection()).to.equal(
-      document.documentElement.getAttribute('dir')
-    )
+describe('browserLocale', () => {
+  it('returns the navigator language if a navigator is explicity passed', () => {
+    const navigator = { language: 'de' }
+    expect(Locale.browserLocale(navigator)).toBe('de')
   })
 
-  it('defaults to the dir of <html> when passed an element', async () => {
-    const subject = await mount(
-      <div>
-        <h1>Hello</h1>
-      </div>
-    )
-    expect(getTextDirection(subject.getDOMNode())).to.equal('ltr')
+  describe('with document lang attribute', () => {
+    it('returns the document locale if no navigator is passed', () => {
+      const original = document.documentElement.lang
+
+      document.documentElement.lang = 'fr'
+      expect(Locale.browserLocale()).toBe('fr')
+
+      // Restore global
+      document.documentElement.lang = original
+    })
   })
 
-  it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
-    const subject = await mount(
-      <div dir="rtl">
-        <h1>Hello</h1>
-      </div>
-    )
-    expect(getTextDirection(subject.getDOMNode())).to.equal('rtl')
+  it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', () => {
+    const expectedLanguage = navigator ? navigator.language : 'en-US'
+    expect(Locale.browserLocale()).toBe(expectedLanguage)
   })
 
-  it('inherits value set by ancestor', async () => {
-    const subject = await mount(
-      <div dir="rtl">
-        <h1>Hello</h1>
-      </div>
-    )
-    expect(
-      getTextDirection(subject.getDOMNode().firstChild as Element)
-    ).to.equal('rtl')
+  it('returns the default "en-US" if navigator is undefined and the DOM is unavailable', () => {
+    expect(Locale.browserLocale(null, false)).toBe('en-US')
   })
 })
