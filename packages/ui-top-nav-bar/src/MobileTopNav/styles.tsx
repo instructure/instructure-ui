@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { MobileTopNavProps } from './props'
+import type { MobileTopNavProps, MobileTopNavStyle } from './props'
 import type { MobileTopNavTheme } from '@instructure/shared-types'
 
 const generateStyle = (
   componentTheme: MobileTopNavTheme,
   params: MobileTopNavProps
-) => {
+): MobileTopNavStyle => {
   const { lti } = params
 
   const contentBase = {
