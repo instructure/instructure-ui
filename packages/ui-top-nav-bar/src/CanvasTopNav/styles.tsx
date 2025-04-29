@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { CanvasTopNavProps } from './props'
+import type { CanvasTopNavProps, CanvasTopNavStyle } from './props'
 import { CanvasTopNavTheme } from '@instructure/shared-types'
 
 const generateStyle = (
   componentTheme: CanvasTopNavTheme,
   params: CanvasTopNavProps
-) => {
+): CanvasTopNavStyle => {
   const { lti } = params
 
   return {
@@ -63,6 +63,11 @@ const generateStyle = (
     ltiIcon: {
       label: 'canvasTopNavLtiIcon',
       fontSize: '38px'
+    },
+    menuItems: {
+      label: 'canvasTopNavMenuitems',
+      display: 'flex',
+      height: '50px'
     }
   }
 }

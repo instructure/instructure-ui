@@ -23,6 +23,7 @@
  */
 
 import type { PropsWithChildren, ReactNode } from 'react'
+import { ComponentStyle } from '@instructure/emotion'
 
 type CanvasTopNavOwnProps = {
   lti?: boolean
@@ -42,6 +43,15 @@ type CanvasTopNavOwnProps = {
   currentPageId?: string
 }
 
+type CanvasTopNavStyle = ComponentStyle<
+  | 'optionsOverride'
+  | 'drilldownOverride'
+  | 'optionContainer'
+  | 'topNavBarItemOverride'
+  | 'ltiIcon'
+  | 'menuItems'
+>
+
 type CanvasTopNavProps = CanvasTopNavOwnProps & PropsWithChildren
 
-export type { CanvasTopNavProps, CanvasTopNavOwnProps }
+export type { CanvasTopNavProps, CanvasTopNavOwnProps, CanvasTopNavStyle }
