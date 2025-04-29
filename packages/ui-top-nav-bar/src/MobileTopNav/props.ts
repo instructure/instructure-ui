@@ -23,26 +23,16 @@
  */
 
 import type { ReactNode, PropsWithChildren } from 'react'
+import { ComponentStyle } from '@instructure/emotion'
 
 type MobileTopNavOwnProps = {
   lti?: boolean
   brand?: ReactNode
 }
 
-type MobileTopNavStyle = {
-  container: (open: boolean) => {
-    [key: string]: string | number
-  }
-  content: (open: boolean) => {
-    [key: string]: string | number
-  }
-  topBar: {
-    [key: string]: string | number
-  }
-  end: {
-    [key: string]: string | number
-  }
-}
+type MobileTopNavStyle = ComponentStyle<
+  'container' | 'topBar' | 'contentOpen' | 'contentClosed' | 'end'
+>
 
 type MobileTopNavProps = MobileTopNavOwnProps & {
   open?: boolean
@@ -50,4 +40,4 @@ type MobileTopNavProps = MobileTopNavOwnProps & {
   ltiIcon?: ReactNode
 } & PropsWithChildren
 
-export type { MobileTopNavProps, MobileTopNavOwnProps }
+export type { MobileTopNavProps, MobileTopNavOwnProps, MobileTopNavStyle }
