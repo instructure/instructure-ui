@@ -37,6 +37,12 @@ import { TopNavBarItem } from '../TopNavBar/TopNavBarItem'
 import { CanvasTopNavProps } from './props'
 import generateComponentTheme from './theme'
 import TopNavBarContext from '../TopNavBar/TopNavBarContext'
+import {
+  DeepPartial,
+  DrilldownTheme,
+  OptionsItemTheme,
+  TopNavBarItemTheme
+} from '@instructure/shared-types'
 
 /**
 ---
@@ -88,6 +94,7 @@ const CanvasTopNav = ({
         <Drilldown.Page
           key={item.id}
           id={item.id} //TODO renderbackbuttonlabel
+          renderBackButtonLabel={item?.backButtonLabel}
           renderBeforeChildren={item.renderBeforeMobileMenuItems}
           renderAfterChildren={item.renderAfterMobileMenuItems}
         >
@@ -142,10 +149,10 @@ const CanvasTopNav = ({
           theme={{
             componentOverrides: {
               'Options.Item': {
-                ...styles.optionsOverride
+                ...(styles.optionsOverride as DeepPartial<OptionsItemTheme>)
               },
               Drilldown: {
-                ...styles.drilldownOverride
+                ...(styles.drilldownOverride as DeepPartial<DrilldownTheme>)
               }
             }
           }}
@@ -188,67 +195,75 @@ const CanvasTopNav = ({
             </div>
           )}
           {lti && (
-            <InstUISettingsProvider
-              theme={{
-                componentOverrides: {
-                  'TopNavBar.Item': {
-                    ...styles.topNavBarItemOverride
+            <div css={styles.menuItems}>
+              <InstUISettingsProvider
+                theme={{
+                  componentOverrides: {
+                    'TopNavBar.Item': {
+                      ...(styles.topNavBarItemOverride as DeepPartial<TopNavBarItemTheme>)
+                    }
                   }
-                }
-              }}
-            >
-              <TopNavBarContext.Provider
-                value={{
-                  layout: 'desktop',
-                  inverseColor: true
                 }}
               >
-                <TopNavBarMenuItems
-                  renderHiddenItemsMenuTriggerLabel={() => ''}
-                  currentPageId={currentPageId}
+                <TopNavBarContext.Provider
+                  value={{
+                    layout: 'desktop',
+                    inverseColor: true
+                  }}
                 >
-                  {menuItems?.map((item: any) => (
-                    <TopNavBarItem key={item.id} id={item.id}>
-                      {item.title}
-                    </TopNavBarItem>
-                  ))}
-                  <TopNavBarItem
-                    id="submenu"
-                    renderSubmenu={
-                      <Drilldown rootPageId="root">
-                        <Drilldown.Page id="root">
-                          <Drilldown.Option
-                            id="rootOption1"
-                            subPageId="secondPage"
-                          >
-                            Link One
-                          </Drilldown.Option>
-                          <Drilldown.Option id="rootOption2" href="/#TopNavBar">
-                            Link Two
-                          </Drilldown.Option>
-                          <Drilldown.Option id="rootOption3" href="/#TopNavBar">
-                            Link Three
-                          </Drilldown.Option>
-                        </Drilldown.Page>
-                        <Drilldown.Page id="secondPage">
-                          <Drilldown.Option id="secondPageOption1">
-                            Level 2 Option One
-                          </Drilldown.Option>
-                          <Drilldown.Option
-                            id="secondPageOption2"
-                            href="/#TopNavBar"
-                          >
-                            Level 2 Option Two
-                          </Drilldown.Option>
-                        </Drilldown.Page>
-                      </Drilldown>
-                    }
+                  <TopNavBarMenuItems
+                    renderHiddenItemsMenuTriggerLabel={() => ''}
+                    currentPageId={currentPageId}
                   >
-                    Submenu
-                  </TopNavBarItem>
-                </TopNavBarMenuItems>
-              </TopNavBarContext.Provider>
-            </InstUISettingsProvider>
+                    {menuItems?.map((item: any) => (
+                      <TopNavBarItem key={item.id} id={item.id}>
+                        {item.title}
+                      </TopNavBarItem>
+                    ))}
+                    <TopNavBarItem
+                      id="submenu"
+                      renderSubmenu={
+                        <Drilldown rootPageId="root">
+                          <Drilldown.Page id="root">
+                            <Drilldown.Option
+                              id="rootOption1"
+                              subPageId="secondPage"
+                            >
+                              Link One
+                            </Drilldown.Option>
+                            <Drilldown.Option
+                              id="rootOption2"
+                              href="/#TopNavBar"
+                            >
+                              Link Two
+                            </Drilldown.Option>
+                            <Drilldown.Option
+                              id="rootOption3"
+                              href="/#TopNavBar"
+                            >
+                              Link Three
+                            </Drilldown.Option>
+                          </Drilldown.Page>
+                          <Drilldown.Page id="secondPage">
+                            <Drilldown.Option id="secondPageOption1">
+                              Level 2 Option One
+                            </Drilldown.Option>
+                            <Drilldown.Option
+                              id="secondPageOption2"
+                              href="/#TopNavBar"
+                            >
+                              Level 2 Option Two
+                            </Drilldown.Option>
+                          </Drilldown.Page>
+                        </Drilldown>
+                      }
+                    >
+                      Submenu
+                    </TopNavBarItem>
+                  </TopNavBarMenuItems>
+                </TopNavBarContext.Provider>
+              </InstUISettingsProvider>
+            </div>
           )}
         </DesktopTopNav.Start>
         <DesktopTopNav.End>
