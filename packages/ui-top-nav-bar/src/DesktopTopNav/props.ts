@@ -23,27 +23,15 @@
  */
 
 import type { ReactNode, PropsWithChildren } from 'react'
+import { ComponentStyle } from '@instructure/emotion'
 
 type DesktopTopNavOwnProps = {
   lti?: boolean
   brand?: ReactNode
 }
 
-type DesktopTopNavStyle = {
-  container: {
-    [key: string]: string | number
-  }
-  content: (open: boolean) => {
-    [key: string]: string | number
-  }
-  topBar: {
-    [key: string]: string | number
-  }
-  btnRow: {
-    [key: string]: string | number
-  }
-}
+type DesktopTopNavStyle = ComponentStyle<'container' | 'start' | 'end'>
 
 type DesktopTopNavProps = DesktopTopNavOwnProps & PropsWithChildren
 
-export type { DesktopTopNavProps, DesktopTopNavOwnProps }
+export type { DesktopTopNavProps, DesktopTopNavOwnProps, DesktopTopNavStyle }

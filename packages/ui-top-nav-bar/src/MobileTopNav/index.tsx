@@ -90,7 +90,11 @@ const MobileTopNav = ({
     <div css={styles.container}>
       <div css={styles.topBar}>
         {lti ? (
-          <IconButton withBackground={false} withBorder={false}>
+          <IconButton
+            withBackground={false}
+            withBorder={false}
+            screenReaderLabel={'lti'}
+          >
             <div style={{ fontSize: '36px' }}> {ltiIcon}</div>
           </IconButton>
         ) : (

@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { DesktopTopNavProps } from './props'
+import type { DesktopTopNavProps, DesktopTopNavStyle } from './props'
 import type { DesktopTopNavTheme } from '@instructure/shared-types'
 
 const generateStyle = (
   componentTheme: DesktopTopNavTheme,
   _params: DesktopTopNavProps
-) => {
+): DesktopTopNavStyle => {
   return {
     container: {
       label: 'desktopTopNavContainer',

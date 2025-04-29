@@ -172,9 +172,9 @@ const CanvasTopNav = ({
             </IconButton>
           )}
           {lti && <div css={styles.ltiIcon}>{ltiIcon}</div>}
-          {!lti && (
+          {!lti && breadcrumb && (
             <div style={{ minWidth: '100%' }}>
-              <Breadcrumb label={breadcrumb?.label}>
+              <Breadcrumb label={breadcrumb.label}>
                 {breadcrumb?.links.map((link: any, index: any) =>
                   link.href ? (
                     <Breadcrumb.Link key={index} href={link.href}>
@@ -187,67 +187,69 @@ const CanvasTopNav = ({
               </Breadcrumb>
             </div>
           )}
-          <InstUISettingsProvider
-            theme={{
-              componentOverrides: {
-                'TopNavBar.Item': {
-                  ...styles.topNavBarItemOverride
+          {lti && (
+            <InstUISettingsProvider
+              theme={{
+                componentOverrides: {
+                  'TopNavBar.Item': {
+                    ...styles.topNavBarItemOverride
+                  }
                 }
-              }
-            }}
-          >
-            <TopNavBarContext.Provider
-              value={{
-                layout: 'desktop',
-                inverseColor: true
               }}
             >
-              <TopNavBarMenuItems
-                renderHiddenItemsMenuTriggerLabel={() => ''}
-                currentPageId={currentPageId}
+              <TopNavBarContext.Provider
+                value={{
+                  layout: 'desktop',
+                  inverseColor: true
+                }}
               >
-                {menuItems?.map((item: any) => (
-                  <TopNavBarItem key={item.id} id={item.id}>
-                    {item.title}
-                  </TopNavBarItem>
-                ))}
-                <TopNavBarItem
-                  id="submenu"
-                  renderSubmenu={
-                    <Drilldown rootPageId="root">
-                      <Drilldown.Page id="root">
-                        <Drilldown.Option
-                          id="rootOption1"
-                          subPageId="secondPage"
-                        >
-                          Link One
-                        </Drilldown.Option>
-                        <Drilldown.Option id="rootOption2" href="/#TopNavBar">
-                          Link Two
-                        </Drilldown.Option>
-                        <Drilldown.Option id="rootOption3" href="/#TopNavBar">
-                          Link Three
-                        </Drilldown.Option>
-                      </Drilldown.Page>
-                      <Drilldown.Page id="secondPage">
-                        <Drilldown.Option id="secondPageOption1">
-                          Level 2 Option One
-                        </Drilldown.Option>
-                        <Drilldown.Option
-                          id="secondPageOption2"
-                          href="/#TopNavBar"
-                        >
-                          Level 2 Option Two
-                        </Drilldown.Option>
-                      </Drilldown.Page>
-                    </Drilldown>
-                  }
+                <TopNavBarMenuItems
+                  renderHiddenItemsMenuTriggerLabel={() => ''}
+                  currentPageId={currentPageId}
                 >
-                  Submenu
-                </TopNavBarItem>
-              </TopNavBarMenuItems>
-            </TopNavBarContext.Provider>
-          </InstUISettingsProvider>
+                  {menuItems?.map((item: any) => (
+                    <TopNavBarItem key={item.id} id={item.id}>
+                      {item.title}
+                    </TopNavBarItem>
+                  ))}
+                  <TopNavBarItem
+                    id="submenu"
+                    renderSubmenu={
+                      <Drilldown rootPageId="root">
+                        <Drilldown.Page id="root">
+                          <Drilldown.Option
+                            id="rootOption1"
+                            subPageId="secondPage"
+                          >
+                            Link One
+                          </Drilldown.Option>
+                          <Drilldown.Option id="rootOption2" href="/#TopNavBar">
+                            Link Two
+                          </Drilldown.Option>
+                          <Drilldown.Option id="rootOption3" href="/#TopNavBar">
+                            Link Three
+                          </Drilldown.Option>
+                        </Drilldown.Page>
+                        <Drilldown.Page id="secondPage">
+                          <Drilldown.Option id="secondPageOption1">
+                            Level 2 Option One
+                          </Drilldown.Option>
+                          <Drilldown.Option
+                            id="secondPageOption2"
+                            href="/#TopNavBar"
+                          >
+                            Level 2 Option Two
+                          </Drilldown.Option>
+                        </Drilldown.Page>
+                      </Drilldown>
+                    }
+                  >
+                    Submenu
+                  </TopNavBarItem>
+                </TopNavBarMenuItems>
+              </TopNavBarContext.Provider>
+            </InstUISettingsProvider>
+          )}
         </DesktopTopNav.Start>
         <DesktopTopNav.End>
           {buttons.map((button: any) => (
