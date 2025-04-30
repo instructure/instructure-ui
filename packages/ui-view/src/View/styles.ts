@@ -29,7 +29,6 @@ import {
   mirrorShorthandCorners
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
-import { logError as error } from '@instructure/console'
 
 import type {
   OtherHTMLAttributes,
@@ -37,6 +36,7 @@ import type {
   ViewTheme
 } from '@instructure/shared-types'
 import type { ViewProps, ViewStyle, BorderColor } from './props'
+import { alpha } from '@instructure/ui-color-utils'
 
 const getBorderStyle = ({
   borderRadius,
@@ -209,35 +209,8 @@ const getFocusRingRadius = (
   return `${baseRadiusStyle}None` as FocusRingRadius
 }
 
-const getFocusOutline = (props: ViewProps) => {
-  const {
-    position,
-    display,
-    focusPosition,
-    withFocusOutline: shouldDisplayFocusOutline
-  } = props
-
-  if (typeof shouldDisplayFocusOutline === 'undefined') {
-    return shouldDisplayFocusOutline
-  }
-
-  if (shouldDisplayFocusOutline) {
-    error(
-      display === 'inline' || position === 'relative',
-      '[View] the focus outline will only show if the `position` prop is `relative`.'
-    )
-    error(
-      display !== 'inline' || focusPosition === 'inset',
-      '[View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
-    )
-  }
-
-  return shouldDisplayFocusOutline
-}
-
 const withBorder = (props: ViewProps) => {
   const { borderWidth } = props
-
   return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
 }
 
@@ -245,26 +218,23 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
   const {
     focusColor,
     focusPosition,
-    position,
     shouldAnimateFocus,
     borderRadius,
-    focusRingBorderRadius
+    focusRingBorderRadius,
+    withFocusOutline,
+    focusWithin
   } = props
-  const focusOutline = getFocusOutline(props)
-  const shouldUseBrowserFocus = typeof focusOutline === 'undefined'
 
+  const focusPos =
+    focusPosition == 'offset' || focusPosition == 'inset'
+      ? focusPosition
+      : 'offset'
   const focusPositionVariants = {
     offset: {
-      top: `calc(${componentTheme.focusOutlineOffset} * -1)`,
-      left: `calc(${componentTheme.focusOutlineOffset} * -1)`,
-      right: `calc(${componentTheme.focusOutlineOffset} * -1)`,
-      bottom: `calc(${componentTheme.focusOutlineOffset}* -1)`
+      outlineOffset: `calc(${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth})`
     },
     inset: {
-      top: `calc(${componentTheme.focusOutlineInset} * -1)`,
-      left: `calc(${componentTheme.focusOutlineInset} * -1)`,
-      right: `calc(${componentTheme.focusOutlineInset} * -1)`,
-      bottom: `calc(${componentTheme.focusOutlineInset} * -1)`
+      outlineOffset: `calc(${componentTheme.focusOutlineInset} - ${componentTheme.focusOutlineWidth})`
     }
   }
   const focusColorVariants = {
@@ -274,104 +244,77 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
     danger: componentTheme.focusColorDanger
   }
 
-  if (position === 'relative') {
-    const focusRingRadius = getFocusRingRadius(borderRadius, props)
-    const focusRingVariants: PartialRecord<FocusRingRadius, string | 0> = {
-      'focusRing--radiusInherit': 'inherit',
-      'focusRing--radiusNone': 0
-    }
-    const borderRadiusByOffset: {
-      [k in NonNullable<ViewProps['focusPosition']>]: PartialRecord<
-        FocusRingRadius,
-        { borderRadius: string }
-      >
-    } = {
-      offset: {
-        'focusRing--radiusSmall': {
-          borderRadius: `calc(${componentTheme.borderRadiusSmall} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
-        },
-        'focusRing--radiusMedium': {
-          borderRadius: `calc(${componentTheme.borderRadiusMedium} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
-        },
-        'focusRing--radiusLarge': {
-          borderRadius: `calc(${componentTheme.borderRadiusLarge} + (${componentTheme.focusOutlineOffset} -  ${componentTheme.focusOutlineWidth}))`
-        },
-        'focusRing--radiusCustom': {
-          borderRadius: `calc(${focusRingBorderRadius} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
-        }
+  const focusRingRadius = getFocusRingRadius(borderRadius, props)
+  const focusRingVariants: PartialRecord<FocusRingRadius, string | 0> = {
+    'focusRing--radiusInherit': 'inherit',
+    'focusRing--radiusNone': 0
+  }
+  const borderRadiusByOffset: {
+    [k in NonNullable<ViewProps['focusPosition']>]: PartialRecord<
+      FocusRingRadius,
+      { borderRadius: string }
+    >
+  } = {
+    offset: {
+      'focusRing--radiusSmall': {
+        borderRadius: `calc(${componentTheme.borderRadiusSmall} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
       },
-      inset: {
-        'focusRing--radiusSmall': {
-          borderRadius: `calc(${componentTheme.borderRadiusSmall} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
-        },
-        'focusRing--radiusMedium': {
-          borderRadius: `calc(${componentTheme.borderRadiusMedium} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
-        },
-        'focusRing--radiusLarge': {
-          borderRadius: `calc(${componentTheme.borderRadiusLarge} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
-        },
-        'focusRing--radiusCustom': {
-          borderRadius: `calc(${focusRingBorderRadius} - (${componentTheme.focusOutlineOffset} + ${componentTheme.focusOutlineWidth}))`
-        }
+      'focusRing--radiusMedium': {
+        borderRadius: `calc(${componentTheme.borderRadiusMedium} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
+      },
+      'focusRing--radiusLarge': {
+        borderRadius: `calc(${componentTheme.borderRadiusLarge} + (${componentTheme.focusOutlineOffset} -  ${componentTheme.focusOutlineWidth}))`
+      },
+      'focusRing--radiusCustom': {
+        borderRadius: `calc(${focusRingBorderRadius} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
       }
-    }
-
-    return {
-      '&::before': {
-        pointerEvents: 'none',
-        content: '""',
-        position: 'absolute',
-        borderStyle: componentTheme.focusOutlineStyle,
-        borderWidth: componentTheme.focusOutlineWidth,
-        borderColor: focusColorVariants[focusColor!],
-        opacity: 0,
-        borderRadius: focusRingVariants[focusRingRadius],
-        ...borderRadiusByOffset[focusPosition!][focusRingRadius],
-        ...focusPositionVariants[focusPosition!],
-        ...(shouldAnimateFocus
-          ? {
-              transition: 'all 0.2s',
-              transform: 'scale(0.95)'
-            }
-          : {}),
-        ...(focusOutline
-          ? {
-              opacity: 1,
-              transform: 'scale(1)'
-            }
-          : {})
+    },
+    inset: {
+      'focusRing--radiusSmall': {
+        borderRadius: `calc(${componentTheme.borderRadiusSmall} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
       },
-      '&:focus': {
-        outline: 'none',
-        '&::before': {
-          ...(shouldUseBrowserFocus
-            ? {
-                opacity: 1,
-                transform: 'scale(1)'
-              }
-            : {})
-        }
+      'focusRing--radiusMedium': {
+        borderRadius: `calc(${componentTheme.borderRadiusMedium} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
+      },
+      'focusRing--radiusLarge': {
+        borderRadius: `calc(${componentTheme.borderRadiusLarge} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
+      },
+      'focusRing--radiusCustom': {
+        borderRadius: `calc(${focusRingBorderRadius} - (${componentTheme.focusOutlineOffset} + ${componentTheme.focusOutlineWidth}))`
       }
     }
   }
-
   return {
-    '&::before': {
-      borderStyle: 'none'
-    },
-    outlineStyle: 'none',
-    outlineColor: focusColorVariants[focusColor!],
-    ...(focusOutline
+    outlineOffset: '-0.8rem', // value when not in focus, its invisible
+    outlineColor: alpha(focusColorVariants[focusColor!], 0),
+    outlineStyle: componentTheme.focusOutlineStyle,
+    outlineWidth: componentTheme.focusOutlineWidth,
+    borderRadius: focusRingVariants[focusRingRadius], // inherit or none
+    ...borderRadiusByOffset[focusPos][focusRingRadius], // border radius value
+    ...(shouldAnimateFocus
       ? {
-          outlineWidth: componentTheme.focusOutlineWidth,
-          outlineStyle: componentTheme.focusOutlineStyle
+          transition: 'outline-color 0.2s, outline-offset 0.25s'
+        }
+      : {}),
+    ...(withFocusOutline
+      ? {
+          ...focusPositionVariants[focusPos],
+          outlineColor: focusColorVariants[focusColor!]
         }
       : {}),
     '&:focus': {
-      ...(shouldUseBrowserFocus
+      ...(typeof withFocusOutline === 'undefined'
         ? {
-            outlineWidth: componentTheme.focusOutlineWidth,
-            outlineStyle: componentTheme.focusOutlineStyle
+            ...focusPositionVariants[focusPos],
+            outlineColor: focusColorVariants[focusColor!]
+          }
+        : {})
+    },
+    '&:focus-within': {
+      ...(focusWithin
+        ? {
+            ...focusPositionVariants[focusPos],
+            outlineColor: focusColorVariants[focusColor!]
           }
         : {})
     }
@@ -385,7 +328,6 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} extraArgs
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
@@ -399,7 +341,6 @@ const generateStyle = (
     padding,
     position,
     display,
-    focusPosition,
     textAlign,
     borderColor,
     background,
@@ -443,10 +384,6 @@ const generateStyle = (
     insetInlineEnd,
     insetInlineStart
   })
-
-  const shouldUseFocusStyles =
-    position === 'relative' ||
-    (display === 'inline' && focusPosition === 'inset')
 
   const displayVariants = {
     inline: {
@@ -583,7 +520,6 @@ const generateStyle = (
   }
 
   const focusStyles = getFocusStyles(props, componentTheme)
-
   return {
     view: {
       label: 'view',
@@ -602,7 +538,8 @@ const generateStyle = (
       overscrollBehavior: overscrollBehavior ? overscrollBehavior : 'auto',
       ...(withVisualDebug
         ? {
-            outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
+            //outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
+            boxShadow: `0 0 0 1px ${componentTheme.debugOutlineColor}`
           }
         : {}),
       ...(withBorder(props)
@@ -613,7 +550,7 @@ const generateStyle = (
             })
           }
         : {}),
-      ...(shouldUseFocusStyles ? focusStyles : {})
+      ...focusStyles
     },
     inlineStyles: {
       //every '&' symbol will add another class to the rule, so it will be stronger

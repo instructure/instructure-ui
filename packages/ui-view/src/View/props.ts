@@ -135,9 +135,9 @@ type ViewOwnProps = {
    */
   insetBlockEnd?: string
   /**
-   * Manually control if the `View` should display a focus outline. When left undefined (which is the default)
-   * the focus outline will display automatically if the `View` is focusable and receives focus.
-   * Note: This props is applicable only when the position prop is set to relative.
+   * Manually control if the `View` should display a focus outline.<br/>
+   * When left `undefined` (which is the default) the focus outline will display
+   * automatically if the `View` is focusable and receives focus.
    */
   withFocusOutline?: boolean
   /**
@@ -207,6 +207,12 @@ type ViewOwnProps = {
    * For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width.
    */
   focusRingBorderRadius?: string
+  /**
+   * Display the focus ring when any of the descendants is focused.
+   * (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within)
+   * CSS selector)
+   */
+  focusWithin?: boolean
 }
 
 type PropKeys = keyof ViewOwnProps
@@ -280,7 +286,8 @@ const propTypes: PropValidators<PropKeys> = {
   withVisualDebug: PropTypes.bool,
   dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION)),
   overscrollBehavior: PropTypes.oneOf(['auto', 'contain', 'none']),
-  focusRingBorderRadius: PropTypes.string
+  focusRingBorderRadius: PropTypes.string,
+  focusWithin: PropTypes.bool
 }
 
 // This variable will be attached as static property on the `View` component
@@ -321,7 +328,8 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'withFocusOutline',
   'withVisualDebug',
-  'focusRingBorderRadius'
+  'focusRingBorderRadius',
+  'focusWithin'
 ]
 
 export { propTypes, allowedProps }
