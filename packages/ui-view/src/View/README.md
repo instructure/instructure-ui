@@ -398,9 +398,6 @@ type: example
 `position` sets the CSS position rule for the component: `static`, `absolute`, `relative`,
 `sticky`, or `fixed`.
 
-> Note that `position="sticky"` is currently [not as fully supported](https://caniuse.com/#feat=css-sticky)
-> as the other values.
-
 ```js
 ---
 type: example
@@ -428,25 +425,19 @@ type: example
 
 By default, if a `View` is rendered as a focusable element, a focus outline will display when it is focused for accessibility.
 
-> Note that `position` must be set to `relative` for the focus ring to display.
-> (This restriction exists because the focus ring requires styling a pseudo element
-> that has absolute positioning.)
-
 ```javascript
 ---
 type: example
 ---
-<View
-  position="relative"
-  tabIndex="0"
-  role="button"
-  cursor="pointer"
-  display="block"
-  margin="large"
-  padding="small"
->
-  Tab here to see the focus outline
-</View>
+<Flex gap="medium" direction="column">
+  <View tabIndex="0" role="button" cursor="pointer">
+    Tab here to see the focus outline
+  </View>
+  <View focusWithin>
+    if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
+    <div tabindex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
+  </View>
+</Flex>
 ```
 
 In some situations, you may want to manually control when the focus outline is displayed instead of leaving it up to the browser.
@@ -455,8 +446,7 @@ Be careful when overriding the display of the focus outline as it is essential f
 
 The focus outline adjusts to account for the shape of the View. For example, the following values can be set for `borderRadius`:
 `circle`, `pill`, `small`, `medium`, and `large`. In each case, the border radius of the focus outline will automatically adjust
-to match the border radius of the corresponding View. For Views with irregular border radius (e.g., `borderRadius="small large none medium"`), the focus outline will appear with square edges. The color of the focus outline can be
-changed for different contexts via the `focusColor` property.
+to match the border radius of the corresponding View. The color of the focus outline can be changed for different contexts via the `focusColor` property.
 
 - ```javascript
   class FocusedExample extends React.Component {
@@ -465,7 +455,8 @@ changed for different contexts via the `focusColor` property.
 
       this.state = {
         isFocused: true,
-        inset: false
+        inset: false,
+        focusColor: undefined
       }
     }
 
@@ -475,6 +466,10 @@ changed for different contexts via the `focusColor` property.
 
     updateInset = (event) => {
       this.setState({ inset: event.target.checked })
+    }
+
+    updateFocusRingColor = (event, value) => {
+      this.setState({ focusColor: value })
     }
 
     render() {
@@ -495,16 +490,32 @@ changed for different contexts via the `focusColor` property.
                 </ScreenReaderContent>
               }
             >
-              <Checkbox
-                label="withFocusOutline"
-                checked={this.state.isFocused}
-                onChange={this.updateFocused}
-              />
-              <Checkbox
-                label="focusPosition = inset"
-                checked={this.state.inset}
-                onChange={this.updateInset}
-              />
+              <Flex gap="small" direction="row">
+                <Flex gap="small" direction="column" width="15rem">
+                  <Checkbox
+                    label="withFocusOutline"
+                    checked={this.state.isFocused}
+                    onChange={this.updateFocused}
+                  />
+                  <Checkbox
+                    label="focusPosition = inset"
+                    checked={this.state.inset}
+                    onChange={this.updateInset}
+                  />
+                </Flex>
+                <RadioInputGroup
+                  onChange={this.updateFocusRingColor}
+                  name="focusColor"
+                  defaultValue="info"
+                  variant="toggle"
+                  description="Focus ring color"
+                >
+                  <RadioInput label="info" value="info" />
+                  <RadioInput label="inverse" value="inverse" />
+                  <RadioInput label="success" value="success" />
+                  <RadioInput label="danger" value="danger" />
+                </RadioInputGroup>
+              </Flex>
             </FormFieldGroup>
           </View>
           <View as="div">
@@ -517,6 +528,7 @@ changed for different contexts via the `focusColor` property.
               borderRadius="small"
               borderWidth="small"
               position="relative"
+              focusColor={this.state.focusColor}
               withFocusOutline={this.state.isFocused}
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -530,6 +542,7 @@ changed for different contexts via the `focusColor` property.
               borderRadius="medium"
               borderWidth="small"
               position="relative"
+              focusColor={this.state.focusColor}
               withFocusOutline={this.state.isFocused}
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -543,6 +556,7 @@ changed for different contexts via the `focusColor` property.
               borderRadius="large"
               borderWidth="small"
               position="relative"
+              focusColor={this.state.focusColor}
               withFocusOutline={this.state.isFocused}
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -557,6 +571,7 @@ changed for different contexts via the `focusColor` property.
               borderRadius="circle"
               borderWidth="small"
               position="relative"
+              focusColor={this.state.focusColor}
               withFocusOutline={this.state.isFocused}
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -583,7 +598,7 @@ changed for different contexts via the `focusColor` property.
                 borderWidth="small"
                 position="relative"
                 withFocusOutline={this.state.isFocused}
-                focusColor="inverse"
+                focusColor={this.state.focusColor}
                 focusPosition={this.state.inset ? 'inset' : 'offset'}
               >
                 medium
@@ -597,9 +612,9 @@ changed for different contexts via the `focusColor` property.
               borderRadius="pill"
               borderWidth="small"
               position="relative"
-              focusColor="success"
               width="100px"
               textAlign="center"
+              focusColor={this.state.focusColor}
               withFocusOutline={this.state.isFocused}
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -612,8 +627,8 @@ changed for different contexts via the `focusColor` property.
               background="primary"
               borderWidth="small"
               borderRadius="none large"
-              focusColor="danger"
               position="relative"
+              focusColor={this.state.focusColor}
               withFocusOutline={this.state.isFocused}
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -624,7 +639,6 @@ changed for different contexts via the `focusColor` property.
       )
     }
   }
-
   render(<FocusedExample />)
   ```
 
@@ -632,9 +646,11 @@ changed for different contexts via the `focusColor` property.
   const FocusedExample = () => {
     const [isFocused, setIsFocused] = useState(true)
     const [inset, setInset] = useState(false)
+    const [focusColor, setfocusColor] = useState(undefined)
 
     const updateFocused = (event) => setIsFocused(event.target.checked)
     const updateInset = (event) => setInset(event.target.checked)
+    const updateFocusRingColor = (event) => setfocusColor(event.target.value)
 
     return (
       <View as="div">
@@ -653,16 +669,32 @@ changed for different contexts via the `focusColor` property.
               </ScreenReaderContent>
             }
           >
-            <Checkbox
-              label="withFocusOutline"
-              checked={isFocused}
-              onChange={updateFocused}
-            />
-            <Checkbox
-              label="focusPosition = inset"
-              checked={inset}
-              onChange={updateInset}
-            />
+            <Flex gap="small" direction="row">
+              <Flex gap="small" direction="column" width="15rem">
+                <Checkbox
+                  label="withFocusOutline"
+                  checked={isFocused}
+                  onChange={updateFocused}
+                />
+                <Checkbox
+                  label="focusPosition = inset"
+                  checked={inset}
+                  onChange={updateInset}
+                />
+              </Flex>
+              <RadioInputGroup
+                onChange={updateFocusRingColor}
+                name="focusColor_2"
+                defaultValue="info"
+                variant="toggle"
+                description="Focus ring color"
+              >
+                <RadioInput label="info" value="info" />
+                <RadioInput label="inverse" value="inverse" />
+                <RadioInput label="success" value="success" />
+                <RadioInput label="danger" value="danger" />
+              </RadioInputGroup>
+            </Flex>
           </FormFieldGroup>
         </View>
         <View as="div">
@@ -675,6 +707,7 @@ changed for different contexts via the `focusColor` property.
             borderRadius="small"
             borderWidth="small"
             position="relative"
+            focusColor={focusColor}
             withFocusOutline={isFocused}
             focusPosition={inset ? 'inset' : 'offset'}
           >
@@ -689,6 +722,7 @@ changed for different contexts via the `focusColor` property.
             borderWidth="small"
             position="relative"
             withFocusOutline={isFocused}
+            focusColor={focusColor}
             focusPosition={inset ? 'inset' : 'offset'}
           >
             medium
@@ -702,6 +736,7 @@ changed for different contexts via the `focusColor` property.
             borderWidth="small"
             position="relative"
             withFocusOutline={isFocused}
+            focusColor={focusColor}
             focusPosition={inset ? 'inset' : 'offset'}
           >
             large
@@ -716,6 +751,7 @@ changed for different contexts via the `focusColor` property.
             borderWidth="small"
             position="relative"
             withFocusOutline={isFocused}
+            focusColor={focusColor}
             focusPosition={inset ? 'inset' : 'offset'}
           >
             <Flex
@@ -741,6 +777,7 @@ changed for different contexts via the `focusColor` property.
               borderWidth="small"
               position="relative"
               withFocusOutline={isFocused}
+              focusColor={focusColor}
               focusColor="inverse"
               focusPosition={inset ? 'inset' : 'offset'}
             >
@@ -758,6 +795,7 @@ changed for different contexts via the `focusColor` property.
             focusColor="success"
             width="100px"
             textAlign="center"
+            focusColor={focusColor}
             withFocusOutline={isFocused}
             focusPosition={inset ? 'inset' : 'offset'}
           >
@@ -772,6 +810,7 @@ changed for different contexts via the `focusColor` property.
             borderRadius="none large"
             focusColor="danger"
             position="relative"
+            focusColor={focusColor}
             withFocusOutline={isFocused}
             focusPosition={inset ? 'inset' : 'offset'}
           >
@@ -936,7 +975,9 @@ props.
 
 ### Debugging
 
-Set the `withVisualDebug` prop to see the View's boundaries.
+Set the `withVisualDebug` prop to see the View's boundaries. Use this only for debugging.
+
+> This effect uses a CSS box-shadow, so the `shadow` prop will be overridden
 
 ```js
 ---

@@ -234,39 +234,6 @@ describe('<View />', () => {
     expect(newStyles.maxWidth).toEqual('200px')
   })
 
-  describe('withFocusOutline', () => {
-    it('should warn when withFocusOutline is true without position=relative', () => {
-      render(
-        <View withFocusOutline>
-          <h1>View Content</h1>
-        </View>
-      )
-      const expectedErrorMessage =
-        'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
-
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
-    })
-
-    it('should warn when withFocusOutline is `true`, display is set to `inline`, and focusPosition is set to `offset`', () => {
-      render(
-        <View withFocusOutline display="inline" focusPosition="offset">
-          <h1>View Content</h1>
-        </View>
-      )
-
-      const expectedErrorMessage =
-        'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
-
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
-    })
-  })
-
   it('should meet a11y standards', async () => {
     const { container } = render(<View>View Content</View>)
 
