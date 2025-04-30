@@ -20,7 +20,9 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */ // ***********************************************************
+ */
+
+// ***********************************************************
 // This example support/e2e.ts is processed and
 // loaded automatically before your test files.
 //
@@ -37,6 +39,8 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+
+import '@chromatic-com/cypress/support'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
