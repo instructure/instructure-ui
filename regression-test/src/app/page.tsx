@@ -21,29 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-'use client'
-import { Link, View } from '@instructure/ui'
 
-import * as Components from './/components'
+'use client'
+import { Link } from 'instructure-ui/ui-link/es/index'
+
+const components = ['button']
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <View as="div">
-        <ul>
-          {Object.entries(Components as Record<string, React.ElementType>).map(
-            ([ComponentName, _Component]) => (
-              <li key={ComponentName}>
-                <Link href={'components/' + ComponentName}>
-                  {ComponentName.substring(0, ComponentName.length - 4)
-                    .toLowerCase()
-                    .replace('_', ' ')}
-                </Link>
-              </li>
-            )
-          )}
-        </ul>
-      </View>
+      <ul>
+        {components.map((component) => (
+          <li key={component}>
+            <Link href={component}>{component}</Link>
+          </li>
+        ))}
+      </ul>
     </main>
   )
 }
