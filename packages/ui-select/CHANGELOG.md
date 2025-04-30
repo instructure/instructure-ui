@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
+
+
+### Bug Fixes
+
+* **ui-time-select,ui-simple-select,ui-select:** make Select accessible for iOS VoiceOver ([b501a7b](https://github.com/instructure/instructure-ui/commit/b501a7b38bfa491298085a173a49a1baa0a19b29))
+
+
+
+
+
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-select

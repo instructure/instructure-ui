@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
+
+
+### Bug Fixes
+
+* **ui-date-input,ui-avatar:** add ref support to functional components ([6a6ba49](https://github.com/instructure/instructure-ui/commit/6a6ba493634a22a515d59b5acbecbc2d93084e0f))
+* **ui-focusable:** fix Focusable example using the wrong ARIA tag ([c88b21c](https://github.com/instructure/instructure-ui/commit/c88b21caf85e9dbf213eadec423ac6ab8398a1f7))
+* **ui-modal:** set inverseBackground to grey100100 ([2ef4a6b](https://github.com/instructure/instructure-ui/commit/2ef4a6b261d0412b43b690f5f6782bfcea17b7a0))
+* **ui-options,ui-menu:** improve hover animations ([fed526c](https://github.com/instructure/instructure-ui/commit/fed526c735cfdc7678fc1ecee3ddf89aedded135))
+* **ui-table:** fix table crashing in stacked layout when using falsy children ([cb1b2ae](https://github.com/instructure/instructure-ui/commit/cb1b2ae4c24f00f6ba37f414f52fd4a3fe444edf))
+* **ui-time-select,ui-simple-select,ui-select:** make Select accessible for iOS VoiceOver ([b501a7b](https://github.com/instructure/instructure-ui/commit/b501a7b38bfa491298085a173a49a1baa0a19b29))
+
+
+
+
+
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package instructure-ui

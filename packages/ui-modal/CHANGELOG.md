@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
+
+
+### Bug Fixes
+
+* **ui-modal:** set inverseBackground to grey100100 ([2ef4a6b](https://github.com/instructure/instructure-ui/commit/2ef4a6b261d0412b43b690f5f6782bfcea17b7a0))
+
+
+
+
+
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-modal
