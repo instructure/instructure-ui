@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
+
+
+### Bug Fixes
+
+* **ui-options,ui-menu:** improve hover animations ([fed526c](https://github.com/instructure/instructure-ui/commit/fed526c735cfdc7678fc1ecee3ddf89aedded135))
+
+
+
+
+
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-menu
