@@ -105,7 +105,7 @@ const MobileTopNav = ({
           <IconButton
             withBackground={false}
             withBorder={false}
-            screenReaderLabel="burger"
+            screenReaderLabel={open ? 'Close menu' : 'Open menu'}
             color={lti ? undefined : 'primary-inverse'}
             onClick={handleToggle}
           >

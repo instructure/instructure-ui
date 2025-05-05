@@ -173,7 +173,6 @@ const CanvasTopNav = ({
               withBorder={false}
               screenReaderLabel={hamburgerLabel}
               onClick={hamburgerOnClick}
-              // color={lti ? 'secondary' : 'primary-inverse'}
             >
               <IconHamburgerLine />
             </IconButton>
