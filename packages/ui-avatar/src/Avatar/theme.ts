@@ -52,7 +52,10 @@ const generateComponentTheme = (theme: Theme): AvatarTheme => {
     colorCrimson: colors?.contrasts?.red4570,
     colorFire: colors?.contrasts?.orange4570,
     colorLicorice: colors?.contrasts?.grey125125,
-    colorAsh: colors?.contrasts?.grey4570
+    colorAsh: colors?.contrasts?.grey4570,
+
+    aiTopGradientColor: colors?.contrasts?.violet4570,
+    aiBottomGradientColor: colors?.contrasts?.sea4570
   }
 
   return {

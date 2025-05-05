@@ -100,6 +100,11 @@ type AvatarOwnProps = {
    * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
    */
   renderIcon?: Renderable
+
+  /**
+   * if "ai", it will ignore most props (e.g.: shape, showBorder, onImageLoaded, hasInverseColor, color, name) and render an "ai avatar"
+   */
+  variant?: 'default' | 'ai'
 }
 
 export type AvatarState = {
@@ -149,7 +154,8 @@ const propTypes: PropValidators<PropKeys> = {
   onImageLoaded: PropTypes.func,
   as: PropTypes.elementType,
   elementRef: PropTypes.func,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  variant: PropTypes.oneOf(['default', 'ai'])
 }
 
 const allowedProps: AllowedPropKeys = [
