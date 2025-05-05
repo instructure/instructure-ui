@@ -4,6 +4,34 @@ describes: Avatar
 
 The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display.
 
+## Variant
+
+Avatar has a variant prop, which currently only toggles it between `ai` and `default` behavior. `ai` is a preset where you can only change the `size` and `margin` visual props, all others are preset. In the following example, there are the `ai` variants.
+
+### ai
+
+```js
+---
+type: example
+readonly: true
+---
+<div>
+   <View display="block" padding="small medium">
+    <Avatar variant="ai" size="xx-small" margin="0 small 0 0" />
+    <Avatar variant="ai" size="x-small" margin="0 small 0 0" />
+    <Avatar variant="ai" size="small" margin="0 small 0 0" />
+    <Avatar variant="ai" size="medium" margin="0 small 0 0" />
+    <Avatar variant="ai" size="large" margin="0 small 0 0" />
+    <Avatar variant="ai" size="x-large" margin="0 small 0 0" />
+    <Avatar variant="ai" size="xx-large" />
+  </View>
+</div>
+```
+
+### default
+
+Most avatar's features are accessible through the `default` variant
+
 Instead of the initials, an SVG icon can be displayed with the `renderIcon` property.
 
 The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.

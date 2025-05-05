@@ -32,6 +32,7 @@ import {
 } from 'react'
 
 import { View } from '@instructure/ui-view'
+import { IconAiSolid } from '@instructure/ui-icons'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import type { AvatarProps } from './props'
 
@@ -52,7 +53,8 @@ const Avatar = forwardRef(
       showBorder = 'auto',
       shape = 'circle',
       display = 'inline-block',
-      onImageLoaded = (_event: SyntheticEvent) => {},
+      variant = 'default',
+      onImageLoaded = (_event: SyntheticEvent) => { },
       src,
       name,
       renderIcon,
@@ -78,7 +80,8 @@ const Avatar = forwardRef(
         shape,
         src,
         showBorder,
-        themeOverride
+        themeOverride,
+        variant
       },
       componentId: 'Avatar',
       displayName: 'Avatar'
@@ -122,11 +125,13 @@ const Avatar = forwardRef(
     }
 
     const renderContent = () => {
-      if (!renderIcon) {
+      const calcedRenderIcon = variant === 'ai' ? <IconAiSolid /> : renderIcon
+
+      if (!calcedRenderIcon) {
         return renderInitials()
       }
 
-      return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
+      return <span css={styles?.iconSVG}>{callRenderProp(calcedRenderIcon)}</span>
     }
 
     return (
