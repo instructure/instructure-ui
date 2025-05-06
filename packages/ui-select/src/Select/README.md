@@ -29,8 +29,8 @@ describes: Select
     inputElement = null
 
     focusInput = () => {
-      this.inputElement.blur()
       if (this.inputElement) {
+        this.inputElement.blur()
         this.inputElement.focus()
       }
     }
@@ -170,12 +170,12 @@ describes: Select
     const [highlightedOptionId, setHighlightedOptionId] = useState(null)
     const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -233,7 +233,7 @@ describes: Select
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
         >
           {options.map((option) => {
@@ -330,8 +330,8 @@ It's best practice to always provide autocomplete functionality to help users ma
     }
 
     focusInput = () => {
-      this.inputElement.blur()
       if (this.inputElement) {
+        this.inputElement.blur()
         this.inputElement.focus()
       }
     }
@@ -535,12 +535,12 @@ It's best practice to always provide autocomplete functionality to help users ma
     const [selectedOptionId, setSelectedOptionId] = useState(null)
     const [filteredOptions, setFilteredOptions] = useState(options)
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -666,7 +666,7 @@ It's best practice to always provide autocomplete functionality to help users ma
           renderBeforeInput={<IconUserSolid inline={false} />}
           renderAfterInput={<IconSearchLine inline={false} />}
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
         >
           {filteredOptions.length > 0 ? (
@@ -748,8 +748,8 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
     inputRef = null
 
     focusInput = () => {
-      this.inputRef.blur()
       if (this.inputRef) {
+        this.inputRef.blur()
         this.inputRef.focus()
       }
     }
@@ -1014,12 +1014,12 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
     const [selectedOptionId, setSelectedOptionId] = useState(['opt1', 'opt6'])
     const [filteredOptions, setFilteredOptions] = useState(options)
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -1166,7 +1166,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
           inputValue={inputValue}
           isShowingOptions={isShowingOptions}
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
           onBlur={handleBlur}
           onInputChange={handleInputChange}
@@ -1251,8 +1251,8 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
     inputElement = null
 
     focusInput = () => {
-      this.inputElement.blur()
       if (this.inputElement) {
+        this.inputElement.blur()
         this.inputElement.focus()
       }
     }
@@ -1449,12 +1449,12 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
       options['Western'][0].id
     )
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -1576,7 +1576,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
             />
           }
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
         >
           {renderGroup()}
@@ -1632,8 +1632,8 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     inputElement = null
 
     focusInput = () => {
-      this.inputElement.blur()
       if (this.inputElement) {
+        this.inputElement.blur()
         this.inputElement.focus()
       }
     }
@@ -1817,12 +1817,12 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     const [selectedOptionId, setSelectedOptionId] = useState(null)
     const [filteredOptions, setFilteredOptions] = useState(options)
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -1935,7 +1935,7 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
         >
           {renderGroup()}
@@ -1987,8 +1987,8 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
     inputElement = null
 
     focusInput = () => {
-      this.inputElement.blur()
       if (this.inputElement) {
+        this.inputElement.blur()
         this.inputElement.focus()
       }
     }
@@ -2217,12 +2217,12 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
     const [selectedOptionLabel, setSelectedOptionLabel] = useState('')
     const [filteredOptions, setFilteredOptions] = useState([])
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -2341,7 +2341,7 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
         >
           {filteredOptions.length > 0 ? (
@@ -2425,8 +2425,8 @@ To display icons (or other elements) before or after an option, pass it via the 
     inputElement = null
 
     focusInput = () => {
-      this.inputElement.blur()
       if (this.inputElement) {
+        this.inputElement.blur()
         this.inputElement.focus()
       }
     }
@@ -2572,12 +2572,12 @@ To display icons (or other elements) before or after an option, pass it via the 
     const [highlightedOptionId, setHighlightedOptionId] = useState(null)
     const [selectedOptionId, setSelectedOptionId] = useState(options[0].id)
     const [announcement, setAnnouncement] = useState(null)
-    const [inputElement, setInputElement] = useState(null)
+    const inputRef = useRef()
 
     const focusInput = () => {
-      inputElement.blur()
-      if (inputElement) {
-        inputElement.focus()
+      if (inputRef.current) {
+        inputRef.current.blur()
+        inputRef.current.focus()
       }
     }
 
@@ -2635,7 +2635,7 @@ To display icons (or other elements) before or after an option, pass it via the 
           onRequestHighlightOption={handleHighlightOption}
           onRequestSelectOption={handleSelectOption}
           inputRef={(el) => {
-            setInputElement(el)
+            inputRef.current = el
           }}
         >
           {options.map((option) => {
