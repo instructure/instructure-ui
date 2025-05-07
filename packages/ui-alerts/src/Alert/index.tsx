@@ -169,7 +169,11 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   createScreenreaderContentNode() {
-    return <ScreenReaderContent>{this.props.children}</ScreenReaderContent>
+    return (
+      <ScreenReaderContent>
+        {this.props.variantScreenReaderLabel || ''} {this.props.children}
+      </ScreenReaderContent>
+    )
   }
 
   createScreenreaderAlert() {
@@ -260,7 +264,14 @@ class Alert extends Component<AlertProps, AlertState> {
   renderAlert() {
     // prevent onDismiss from being passed to the View component
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { margin, styles, children, onDismiss, ...props } = this.props
+    const {
+      margin,
+      styles,
+      children,
+      onDismiss,
+      variantScreenReaderLabel,
+      ...props
+    } = this.props
     return (
       <View
         {...passthroughProps({ ...props })}
@@ -271,7 +282,14 @@ class Alert extends Component<AlertProps, AlertState> {
         elementRef={this.handleRef}
       >
         {this.renderIcon()}
-        <div css={styles?.content}>{children}</div>
+        <div css={styles?.content}>
+          {variantScreenReaderLabel && (
+            <span css={styles?.variantScreenReaderLabel}>
+              {variantScreenReaderLabel}
+            </span>
+          )}
+          {children}
+        </div>
         {this.renderCloseButton()}
       </View>
     )

@@ -20,6 +20,7 @@ type: example
     renderCloseButtonLabel="Close"
     margin="small"
     transition="none"
+    variantScreenReaderLabel="Success, "
   >
     Sample success alert text. I will close w/o a transition out if you close me
   </Alert>
@@ -27,6 +28,7 @@ type: example
     variant="info"
     renderCloseButtonLabel="Close"
     margin="small"
+    variantScreenReaderLabel="Information, "
   >
     Sample info text. I will fade out if you close me.
   </Alert>
@@ -34,6 +36,7 @@ type: example
     variant="error"
     renderCloseButtonLabel="Close"
     margin="small"
+    variantScreenReaderLabel="Error, "
   >
     Sample error text that continues for a while
     to demonstrate what happens when the content stretches over
@@ -43,6 +46,7 @@ type: example
   <Alert
     variant="warning"
     margin="small"
+    variantScreenReaderLabel="Warning, "
   >
     Sample warning text. This alert is not dismissible and cannot be closed.
   </Alert>
@@ -59,6 +63,7 @@ type: example
   variant="info"
   margin="small"
   timeout={5000}
+  variantScreenReaderLabel="Information, "
 >
   Sample info text. I will fade out after 5 seconds
 </Alert>
@@ -111,6 +116,16 @@ For more information about live regions, see
       this.setState({ alerts })
     }
 
+    getScreenReaderLabel(variant) {
+      const labels = {
+        info: 'Information, ',
+        success: 'Success, ',
+        warning: 'Warning, ',
+        error: 'Error, '
+      }
+      return labels[variant] || ''
+    }
+
     render() {
       return (
         <div>
@@ -125,6 +140,9 @@ For more information about live regions, see
                   liveRegion={() => document.getElementById('flash-messages')}
                   liveRegionPoliteness={alert.politeness}
                   margin="small 0"
+                  variantScreenReaderLabel={this.getScreenReaderLabel(
+                    alert.variant
+                  )}
                 >
                   This is {alert.politeness === 'polite' ? 'a' : 'an'}{' '}
                   {alert.politeness} {alert.variant} alert
@@ -325,6 +343,7 @@ type: embed
     <Figure.Item>Use the Error alert to notify user of an error</Figure.Item>
     <Figure.Item>Use the Warning alert to notify user of a warning</Figure.Item>
     <Figure.Item>Use the Success alert to notify user of a success event or action</Figure.Item>
+    <Figure.Item>Use the `variantScreenReaderLabel` prop to indicate the alert variant to screen reader users</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Have alert messaging that is more than two lines long</Figure.Item>
