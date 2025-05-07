@@ -26,7 +26,6 @@
     "@lerna/project": "^6.4.1",
     "dotenv": "^16.4.7",
     "find-up": "^7.0.0",
-    "fs-extra": "^11.2.0",
     "http-server": "^14.1.1",
     "jscodeshift": "^0.16.1",
     "karma-cli": "^2.0.0",
@@ -34,7 +33,7 @@
     "lodash.isplainobject": "^4.0.6",
     "mocha": "^10.7.3",
     "semver": "^7.6.3",
-    "style-dictionary": "4.1.2",
+    "style-dictionary": "4.4.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
     "yargs": "^17.7.2"
