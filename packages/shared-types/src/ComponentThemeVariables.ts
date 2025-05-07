@@ -834,7 +834,6 @@ export type ModalTheme = {
   mediumMaxWidth: Breakpoints['medium']
   largeMaxWidth: Breakpoints['large']
   boxShadow: Shadows['depth3']
-  zIndex: Stacking['topmost']
 }
 
 export type TransitionTheme = {
