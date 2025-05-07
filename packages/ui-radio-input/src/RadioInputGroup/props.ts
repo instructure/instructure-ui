@@ -144,7 +144,8 @@ const allowedProps: AllowedPropKeys = [
   'children',
   'variant',
   'size',
-  'layout'
+  'layout',
+  'isRequired'
 ]
 
 export type { RadioInputGroupProps, RadioInputGroupState, RadioInputGroupStyle }
