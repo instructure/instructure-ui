@@ -1145,6 +1145,29 @@ const WrappedModalBody = withLogger(Modal.Body)
 render(<Example />)
 ```
 
+### Changing the Modal's z-index
+
+You can do this with the `insertAt` prop or a theme override:
+
+```jsx
+---
+  type: code
+---
+<InstUISettingsProvider
+      theme={{
+        themeOverrides: {
+            componentOverrides: {
+              Mask: {
+                zIndex: 555,
+              }
+            }
+          }
+      }}
+    >
+  <Modal />
+</InstUISettingsProvider>
+```
+
 ### Guidelines
 
 ```js

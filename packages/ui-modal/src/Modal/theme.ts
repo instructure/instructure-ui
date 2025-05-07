@@ -31,7 +31,7 @@ import { ModalTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): ModalTheme => {
-  const { colors, typography, borders, breakpoints, shadows, stacking } = theme
+  const { colors, typography, borders, breakpoints, shadows } = theme
 
   const componentVariables: ModalTheme = {
     fontFamily: typography?.fontFamily,
@@ -48,9 +48,7 @@ const generateComponentTheme = (theme: Theme): ModalTheme => {
     mediumMaxWidth: breakpoints?.medium,
     largeMaxWidth: breakpoints?.large,
 
-    boxShadow: shadows?.depth3,
-
-    zIndex: stacking?.topmost
+    boxShadow: shadows?.depth3
   }
 
   return {
