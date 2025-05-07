@@ -143,7 +143,8 @@ const allowedProps: AllowedPropKeys = [
   'size',
   'variant',
   'inline',
-  'labelPlacement'
+  'labelPlacement',
+  'isRequired'
 ]
 
 type CheckboxState = {
