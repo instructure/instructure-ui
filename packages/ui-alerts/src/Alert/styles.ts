@@ -114,6 +114,13 @@ const generateStyle = (
       fontWeight: componentTheme.contentFontWeight,
       lineHeight: componentTheme.contentLineHeight,
       padding: componentTheme.contentPadding
+    },
+    variantScreenReaderLabel: {
+      position: 'absolute',
+      height: '1px',
+      width: '1px',
+      overflow: 'hidden',
+      margin: '-1px'
     }
   }
 }

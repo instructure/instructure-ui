@@ -47,6 +47,10 @@ type AlertOwnProps = {
    */
   variant?: 'info' | 'success' | 'warning' | 'error'
   /**
+   * How the screen reader should announce the alert variant. While the `variant` prop sets the color and icon for the alert component, this label should be a textual representation of that information. So e.g. if the variant is `info`, this label could be "Information," or "Information alert,". Note the `,` at the end of the label which helps the screenreader to be more natural sounding.
+   */
+  variantScreenReaderLabel?: string
+  /**
    * Function that returns the DIV where screenreader alerts will be placed.
    */
   liveRegion?: () => Element
@@ -115,7 +119,9 @@ type AlertProps = AlertOwnProps &
   WithStyleProps<AlertTheme, AlertStyle> &
   WithDeterministicIdProps
 
-type AlertStyle = ComponentStyle<'alert' | 'icon' | 'closeButton' | 'content'>
+type AlertStyle = ComponentStyle<
+  'alert' | 'icon' | 'closeButton' | 'content' | 'variantScreenReaderLabel'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
@@ -130,7 +136,8 @@ const propTypes: PropValidators<PropKeys> = {
   onDismiss: PropTypes.func,
   transition: PropTypes.oneOf(['none', 'fade']),
   open: PropTypes.bool,
-  hasShadow: PropTypes.bool
+  hasShadow: PropTypes.bool,
+  variantScreenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
