@@ -330,7 +330,7 @@ class App extends Component<AppProps, AppState> {
               breadcrumb={{
                 label: 'You are here:',
                 links: [
-                  { href: '#', label: 'Crumb 1' },
+                  { href: '#crumb1', label: 'Crumb 1' },
                   { href: '#', label: 'Crumb 2' },
                   { label: 'Home' }
                 ]

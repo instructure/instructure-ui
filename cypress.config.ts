@@ -21,30 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { defineConfig } from 'cypress'
+import { defineConfig } from "cypress"
 
 // TODO figure out why this isn't working:
 // import webpackConfig from '@instructure/ui-webpack-config'
 // eslint-disable-next-line @instructure/no-relative-imports
-import webpackConfig from './packages/ui-karma-config/lib/legacyBaseWebpackConfig'
+import webpackConfig from "./packages/ui-karma-config/lib/legacyBaseWebpackConfig"
 
 export default defineConfig({
   retries: {
-    experimentalStrategy: 'detect-flake-and-pass-on-threshold',
+    experimentalStrategy: "detect-flake-and-pass-on-threshold",
     experimentalOptions: {
       maxRetries: 10,
-      passesRequired: 1
+      passesRequired: 1,
     },
     openMode: true,
-    runMode: true
+    runMode: true,
   },
+
   screenshotOnRunFailure: false,
+
   component: {
-    excludeSpecPattern: 'regression-test/**',
+    excludeSpecPattern: "regression-test/**",
     devServer: {
-      framework: 'react',
-      bundler: 'webpack',
-      webpackConfig
-    }
-  }
-})
+      framework: "react",
+      bundler: "webpack",
+      webpackConfig,
+    },
+  },
+
+  e2e: {
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+  },
+});
