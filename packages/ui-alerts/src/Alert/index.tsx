@@ -258,7 +258,8 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   renderAlert() {
-    const { margin, styles, children, ...props } = this.props
+    const { margin, styles, children, variantScreenReaderLabel, ...props } =
+      this.props
     return (
       <View
         {...passthroughProps({ ...props })}
@@ -269,7 +270,14 @@ class Alert extends Component<AlertProps, AlertState> {
         elementRef={this.handleRef}
       >
         {this.renderIcon()}
-        <div css={styles?.content}>{children}</div>
+        <div css={styles?.content}>
+          {variantScreenReaderLabel && (
+            <span css={styles?.variantScreenReaderLabel}>
+              {variantScreenReaderLabel}
+            </span>
+          )}
+          {children}
+        </div>
         {this.renderCloseButton()}
       </View>
     )

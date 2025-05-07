@@ -20,6 +20,7 @@ type: example
     renderCloseButtonLabel="Close"
     margin="small"
     transition="none"
+    variantScreenReaderLabel="Success: "
   >
     Sample success alert text. I will close w/o a transition out if you close me
   </Alert>
@@ -27,6 +28,7 @@ type: example
     variant="info"
     renderCloseButtonLabel="Close"
     margin="small"
+    variantScreenReaderLabel="Information: "
   >
     Sample info text. I will fade out if you close me.
   </Alert>
@@ -34,6 +36,7 @@ type: example
     variant="error"
     renderCloseButtonLabel="Close"
     margin="small"
+    variantScreenReaderLabel="Error: "
   >
     Sample error text that continues for a while
     to demonstrate what happens when the content stretches over
@@ -43,6 +46,7 @@ type: example
   <Alert
     variant="warning"
     margin="small"
+    variantScreenReaderLabel="Warning: "
   >
     Sample warning text. This alert is not dismissible and cannot be closed.
   </Alert>
