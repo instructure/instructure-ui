@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import fse from 'fs-extra'
 import path from 'path'
 import StyleDictionary from 'style-dictionary'
+import fs from 'fs'
 
 export async function handleGenerateTokens({
   themeKey,
@@ -32,43 +32,51 @@ export async function handleGenerateTokens({
   styleDictionarySource,
   outputPath
 }) {
-  return fse
-    .outputFile(sourcePath, JSON.stringify(styleDictionarySource))
-    .then(() => {
-      const dictionary = new StyleDictionary({
-        source: [sourcePath],
-        platforms: {
-          scss: {
-            transformGroup: 'scss',
-            prefix: 'instui-' + themeKey,
-            buildPath: path.join(outputPath, 'scss/'),
-            files: [
-              {
-                destination: '_variables.scss',
-                format: 'scss/variables'
-              }
-            ]
+  const dir = path.dirname(sourcePath)
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+  fs.writeFileSync(sourcePath, JSON.stringify(styleDictionarySource))
+  // this is just a debug code to find the JSON error here that occurs only in CI
+  // eslint-disable-next-line no-console
+  console.log(
+    '!!!! handleGenerateTokens',
+    sourcePath,
+    fs.existsSync(sourcePath),
+    JSON.stringify(styleDictionarySource)?.substring(0, 400)
+  )
+  const dictionary = new StyleDictionary({
+    source: [sourcePath],
+    platforms: {
+      scss: {
+        transformGroup: 'scss',
+        prefix: 'instui-' + themeKey,
+        buildPath: path.join(outputPath, 'scss/'),
+        files: [
+          {
+            destination: '_variables.scss',
+            format: 'scss/variables'
           }
-          // TODO: Revisit the best way to distribute tokens for vanilla JS
-          // js: {
-          //   transformGroup: 'js',
-          //   buildPath: path.join(outputPath, 'js/'),
-          //   files: [
-          //     {
-          //       destination: 'umd.js',
-          //       format: 'javascript/umd'
-          //     },
-          //     {
-          //       destination: 'es6.js',
-          //       format: 'javascript/es6'
-          //     }
-          //   ]
-          // }
-        }
-      })
-      return dictionary.buildAllPlatforms()
-    })
-    .then((builds) => {
-      return builds
-    })
+        ]
+      }
+      // TODO: Revisit the best way to distribute tokens for vanilla JS
+      // js: {
+      //   transformGroup: 'js',
+      //   buildPath: path.join(outputPath, 'js/'),
+      //   files: [
+      //     {
+      //       destination: 'umd.js',
+      //       format: 'javascript/umd'
+      //     },
+      //     {
+      //       destination: 'es6.js',
+      //       format: 'javascript/es6'
+      //     }
+      //   ]
+      // }
+    }
+  })
+  dictionary.buildAllPlatforms().then((builds) => {
+    return builds
+  })
 }

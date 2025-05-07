@@ -23,6 +23,7 @@
  */
 
 import path from 'path'
+import fs from 'fs'
 import { error } from '@instructure/command-utils'
 import { handleMapJSTokensToSource } from '../utils/handle-map-js-tokens-to-source.js'
 import { handleGenerateTokens } from '../utils/handle-generate-tokens.js'
@@ -90,7 +91,21 @@ export default {
         ? path.join(themePath, outputDir, themeKey)
         : path.join(themePath, outputDir)
       const sourcePath = path.join(outputPath, 'source.json')
-
+      // this is just a debug code to find the JSON error here that occurs only in CI
+      // eslint-disable-next-line no-console
+      console.log(
+        '!!!!! starting',
+        themeKey,
+        sourceTokens,
+        outputPath,
+        sourcePath,
+        fs.existsSync(sourcePath)
+      )
+      // eslint-disable-next-line no-console
+      console.log(
+        '!!!! styleDictionarySource',
+        JSON.stringify(styleDictionarySource)?.substring(0, 400)
+      )
       generators.push(
         handleGenerateTokens({
           themeKey,
