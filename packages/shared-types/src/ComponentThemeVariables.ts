@@ -66,21 +66,24 @@ export type AlertTheme = {
 }
 
 export type AvatarTheme = {
-  background: Colors['contrasts']['white1010']
+  background: string
   borderWidthSmall: Border['widthSmall']
   borderWidthMedium: Border['widthMedium']
-  borderColor: Colors['contrasts']['grey1214']
+  borderColor: string
   boxShadowColor: string
   boxShadowBlur: string
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
-  color: Colors['contrasts']['blue4570']
-  colorShamrock: Colors['contrasts']['green4570']
-  colorBarney: Colors['contrasts']['blue4570']
-  colorCrimson: Colors['contrasts']['orange4570']
-  colorFire: Colors['contrasts']['red4570']
-  colorLicorice: Colors['contrasts']['grey125125']
-  colorAsh: Colors['contrasts']['grey4570']
+  color: string
+  colorShamrock: string
+  colorBarney: string
+  colorCrimson: string
+  colorFire: string
+  colorLicorice: string
+  colorAsh: string
+
+  aiTopGradientColor: string
+  aiBottomGradientColor: string
 }
 
 export type BadgeTheme = {

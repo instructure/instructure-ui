@@ -63,6 +63,28 @@ type Primitives = {
   red57: string
   red70: string
   red82: string
+
+  sea12: string
+  sea30: string
+  sea45: string
+  sea70: string
+  sea110: string
+  sea35: string
+  sea40: string
+  sea50: string
+  sea57: string
+  sea90: string
+
+  violet12: string
+  violet30: string
+  violet45: string
+  violet70: string
+  violet110: string
+  violet35: string
+  violet40: string
+  violet50: string
+  violet57: string
+  violet90: string
 }
 
 type AdditionalPrimitives = {
@@ -219,6 +241,12 @@ type Contrasts = {
   red1212: Primitives['red12']
   red4570: Primitives['red45'] | Primitives['red70']
   red5782: Primitives['red57'] | Primitives['red82']
+
+  violet1212: Primitives['violet12']
+  violet4570: Primitives['violet45'] | Primitives['violet70']
+  violet5790: Primitives['violet57'] | Primitives['violet90']
+  sea4570: Primitives['sea45'] | Primitives['sea70']
+  sea5790: Primitives['sea57'] | Primitives['sea90']
 }
 
 type UI = {

@@ -61,7 +61,13 @@ const contrasts: Contrasts = {
 
   red1212: primitives.red12,
   red4570: primitives.red70,
-  red5782: primitives.red82
+  red5782: primitives.red82,
+
+  violet1212: primitives.violet12,
+  violet4570: primitives.violet70,
+  violet5790: primitives.violet90,
+  sea4570: primitives.sea70,
+  sea5790: primitives.sea90
 }
 
 const ui: UI = getUIColors(contrasts)

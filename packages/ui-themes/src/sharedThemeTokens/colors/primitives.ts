@@ -64,7 +64,29 @@ export const primitives: Primitives = {
   red45: '#E62429',
   red57: '#C71F23',
   red70: '#AE1B1F',
-  red82: '#9B181C'
+  red82: '#9B181C',
+
+  sea12: '#DAEEEF',
+  sea30: '#37A1AA',
+  sea35: '#1E95A0',
+  sea40: '#0A8C97',
+  sea45: '#00828E',
+  sea50: '#007B86',
+  sea57: '#00717B',
+  sea70: '#00626B',
+  sea90: '#005158',
+  sea110: '#004349',
+
+  violet12: '#F1E6F5',
+  violet30: '#B57FCC',
+  violet35: '#AC6FC6',
+  violet40: '#A564C2',
+  violet45: '#9E58BD',
+  violet50: '#994FB9',
+  violet57: '#9242B4',
+  violet70: '#7F399E',
+  violet90: '#682F82',
+  violet110: '#56276B'
 }
 
 export const additionalPrimitives: AdditionalPrimitives = {
