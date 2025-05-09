@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
+
+
+### Bug Fixes
+
+* **ui-date-input:** correctly format the DateInput2 placeholder in every timezone ([f8229df](https://github.com/instructure/instructure-ui/commit/f8229df71ae6ad67fc089f7e1ff143842d7a0979))
+
+
+
+
+
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
 
 
