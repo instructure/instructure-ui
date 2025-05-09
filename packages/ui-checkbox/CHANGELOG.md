@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
+
+
+### Bug Fixes
+
+* **ui-radio-input,ui-checkbox:** fix 'React does not recognize the isRequired prop on a DOM element' on RadioInputGroup and Checkbox ([32bb431](https://github.com/instructure/instructure-ui/commit/32bb43185eb53ce4e452d02e33c41ceaf0c4e2b9))
+
+
+
+
+
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
 
 **Note:** Version bump only for package @instructure/ui-checkbox
