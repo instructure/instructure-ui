@@ -152,9 +152,16 @@ type BaseButtonOwnProps = {
 
   /**
    * Specifies the tabindex of the `Button`.
-   *
    */
   tabIndex?: number
+
+  /**
+   * Manually control if the `Button` should display a focus outline.
+   *
+   * When left `undefined` (which is the default) the focus outline will display
+   * if this component is focusable and receives focus.
+   */
+  withFocusOutline?: boolean
 }
 
 type BaseButtonStyleProps = {
@@ -209,7 +216,8 @@ const propTypes: PropValidators<PropKeys> = {
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  tabIndex: PropTypes.number
+  tabIndex: PropTypes.number,
+  withFocusOutline: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

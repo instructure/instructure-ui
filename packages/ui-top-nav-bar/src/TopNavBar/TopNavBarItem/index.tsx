@@ -431,7 +431,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       themeOverride: this.buttonThemeOverride,
       elementRef: (e) => {
         this.handleItemRef(e as HTMLButtonElement | HTMLLinkElement)
-      }
+      },
+      withFocusOutline: this.hasOpenPopover
     }
   }
 
