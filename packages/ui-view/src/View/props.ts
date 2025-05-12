@@ -135,7 +135,8 @@ type ViewOwnProps = {
    */
   insetBlockEnd?: string
   /**
-   * Manually control if the `View` should display a focus outline.<br/>
+   * Manually control if the `View` should display a focus outline.
+   *
    * When left `undefined` (which is the default) the focus outline will display
    * automatically if the `View` is focusable and receives focus.
    */
