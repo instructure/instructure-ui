@@ -128,7 +128,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
 
     this.state = {
       isSubmenuOpen: false,
-      isPopoverOpen: false
+      isPopoverOpen: false,
+      isFocused: false
     }
   }
 
@@ -347,7 +348,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       renderSubmenu,
       status: statusOriginal,
       renderAvatar,
-      renderIcon
+      renderIcon,
+      withFocusOutline
     } = this.props
 
     let href = hrefOriginal
@@ -423,16 +425,26 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       onClick,
       onMouseOver,
       onMouseOut,
-      onFocus,
-      onBlur,
+      onFocus: createChainedFunction(onFocus, this.onFocus),
+      onBlur: createChainedFunction(onBlur, this.onBlur),
       onKeyDown: createChainedFunction(onKeyDown, this.handleKeyDown),
       onKeyUp,
       renderIcon,
       themeOverride: this.buttonThemeOverride,
       elementRef: (e) => {
         this.handleItemRef(e as HTMLButtonElement | HTMLLinkElement)
-      }
+      },
+      withFocusOutline:
+        withFocusOutline || this.hasOpenPopover || this.state.isFocused
     }
+  }
+
+  onFocus = () => {
+    this.setState({ isFocused: true })
+  }
+
+  onBlur = () => {
+    this.setState({ isFocused: false })
   }
 
   handleKeyDown: TopNavBarItemProps['onKeyDown'] = (e) => {
