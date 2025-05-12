@@ -15,7 +15,7 @@ For the most basic implementations, `SimpleSelect` can be uncontrolled. If desir
 ---
 type: example
 ---
-<SimpleSelect renderLabel="Uncontrolled Select">
+<SimpleSelect renderLabel="Uncontrolled Select" interaction="disabled" onFocus={()=> console.log('focus')}>
   <SimpleSelect.Option id="foo" value="foo"
                        renderBeforeLabel={(props) => {
                          console.log(props)
