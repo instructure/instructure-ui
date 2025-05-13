@@ -30,8 +30,7 @@ import type {
   BorderRadii,
   BorderWidthValues,
   BorderWidth,
-  SpacingValues,
-  Spacing
+  SpacingValues
 } from './ThemeablePropValues'
 
 const {
@@ -72,8 +71,6 @@ function shorthandPropType<V extends ValueKeys>(
     ? BorderWidth
     : V extends BorderRadiiValues[]
     ? BorderRadii
-    : V extends SpacingValues[]
-    ? Spacing
     : string[]
 > {
   return function (
