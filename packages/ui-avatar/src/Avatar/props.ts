@@ -68,6 +68,7 @@ type AvatarOwnProps = {
     | 'fire'
     | 'licorice'
     | 'ash'
+    | 'ai'
   /**
    * In inverse color mode the background and text/icon colors are inverted
    */
@@ -139,7 +140,8 @@ const propTypes: PropValidators<PropKeys> = {
     'crimson',
     'fire',
     'licorice',
-    'ash'
+    'ash',
+    'ai'
   ]),
   hasInverseColor: PropTypes.bool,
   showBorder: PropTypes.oneOf(['auto', 'always', 'never']),

@@ -51,44 +51,98 @@ const generateStyle = (
   const { loaded, size, color, hasInverseColor, shape, src, showBorder } =
     params
 
+  // TODO: this is a temporary solution and should be revised on component update
+  // NOTE: this is needed due to design changes. The size of the component is calculated from "em" which means it is
+  // tied to the fontSize. The font sizes changed for the icons, which meant that the container (component) size would've
+  // changed too without additional calculations
+  const calcNewScaler = (
+    originalFontSize: number,
+    newFontSize: number,
+    originalScaler: number
+  ) => {
+    return `${(originalFontSize * originalScaler) / newFontSize}em`
+  }
+
   const sizeStyles = {
     auto: {
       fontSize: 'inherit',
-      borderWidth: componentTheme.borderWidthSmall
+      borderWidth: componentTheme.borderWidthSmall,
+      width: '2.5em',
+      height: '2.5em'
     },
     'xx-small': {
-      fontSize: '0.5rem',
-      borderWidth: componentTheme.borderWidthSmall
+      fontSize: '0.625rem',
+      borderWidth: componentTheme.borderWidthSmall,
+      width: calcNewScaler(0.5, 0.625, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(0.5, 0.625, 2.5)
     },
     'x-small': {
-      fontSize: '0.75rem',
-      borderWidth: componentTheme.borderWidthSmall
+      fontSize: '0.875rem',
+      borderWidth: componentTheme.borderWidthSmall,
+      width: calcNewScaler(0.75, 0.875, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(0.75, 0.875, 2.5)
     },
     small: {
-      fontSize: '1rem',
-      borderWidth: componentTheme.borderWidthSmall
+      fontSize: '1.25rem',
+      borderWidth: componentTheme.borderWidthSmall,
+      width: calcNewScaler(1, 1.25, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(1, 1.25, 2.5)
     },
     medium: {
-      fontSize: '1.25rem',
-      borderWidth: componentTheme.borderWidthMedium
+      fontSize: '1.5rem',
+      borderWidth: componentTheme.borderWidthMedium,
+      width: calcNewScaler(1.25, 1.5, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(1.25, 1.5, 2.5)
     },
     large: {
-      fontSize: '1.5rem',
-      borderWidth: componentTheme.borderWidthMedium
+      fontSize: '1.75rem',
+      borderWidth: componentTheme.borderWidthMedium,
+      width: calcNewScaler(1.5, 1.75, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(1.5, 1.75, 2.5)
     },
     'x-large': {
-      fontSize: '1.75rem',
-      borderWidth: componentTheme.borderWidthMedium
+      fontSize: '2rem',
+      borderWidth: componentTheme.borderWidthMedium,
+      width: calcNewScaler(1.75, 2, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(1.75, 2, 2.5)
     },
     'xx-large': {
-      fontSize: '2rem',
-      borderWidth: componentTheme.borderWidthMedium
+      fontSize: '2.25rem',
+      borderWidth: componentTheme.borderWidthMedium,
+      width: calcNewScaler(2, 2.25, shape === 'circle' ? 2.5 : 3),
+      height: calcNewScaler(2, 2.25, 2.5)
     }
   }
 
-  const variantStyles = {
+  const initialSizeStyles = {
+    auto: {
+      fontSize: 'inherit'
+    },
+    'xx-small': {
+      fontSize: '0.5rem'
+    },
+    'x-small': {
+      fontSize: '0.75rem'
+    },
+    small: {
+      fontSize: '1rem'
+    },
+    medium: {
+      fontSize: '1.25rem'
+    },
+    large: {
+      fontSize: '1.5rem'
+    },
+    'x-large': {
+      fontSize: '1.75rem'
+    },
+    'xx-large': {
+      fontSize: '2rem'
+    }
+  }
+
+  const shapeStyles = {
     circle: {
-      width: '2.5em',
       position: 'relative',
       borderRadius: '100%',
       overflow: 'hidden'
@@ -105,34 +159,54 @@ const generateStyle = (
     crimson: componentTheme.colorCrimson,
     fire: componentTheme.colorFire,
     licorice: componentTheme.colorLicorice,
-    ash: componentTheme.colorAsh
+    ash: componentTheme.colorAsh,
+    ai: `
+        linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`
   }
 
-  const backgroundColor = hasInverseColor
-    ? colorVariants[color!]
-    : componentTheme.background
+  const background = () => {
+    if (color === 'ai') {
+      return {
+        background: `
+        linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`,
+        border: 'solid transparent'
+      }
+    }
+    return hasInverseColor
+      ? {
+          backgroundColor: colorVariants[color!],
+          backgroundClip: 'content-box'
+        }
+      : {
+          backgroundColor: componentTheme.background,
+          backgroundClip: 'content-box'
+        }
+  }
 
-  const contentColor = hasInverseColor
-    ? componentTheme.background
-    : colorVariants[color!]
+  const contentColor = () => {
+    if (color === 'ai') {
+      return componentTheme.aiFontColor
+    }
+    return hasInverseColor ? componentTheme.background : colorVariants[color!]
+  }
 
   return {
     avatar: {
       label: 'avatar',
-      height: '2.5em',
       boxSizing: 'border-box',
-      backgroundColor: backgroundColor,
+      borderStyle: 'solid',
+      borderColor: componentTheme.borderColor,
+      ...background(),
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundClip: 'content-box',
       backgroundRepeat: 'no-repeat',
       overflow: 'hidden',
       lineHeight: 0,
       textAlign: 'center',
-      borderStyle: 'solid',
-      borderColor: componentTheme.borderColor,
       ...sizeStyles[size!],
-      ...variantStyles[shape!],
+      ...shapeStyles[shape!],
       ...(loaded
         ? {
             backgroundImage: `url('${src}')`,
@@ -155,11 +229,12 @@ const generateStyle = (
     },
     initials: {
       label: 'avatar__initials',
-      color: contentColor,
+      color: contentColor(),
       lineHeight: '2.375em',
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
-      letterSpacing: '0.0313em'
+      letterSpacing: '0.0313em',
+      ...initialSizeStyles[size!]
     },
     loadImage: {
       label: 'avatar__loadImage',
@@ -174,7 +249,7 @@ const generateStyle = (
       width: '100%',
 
       svg: {
-        fill: contentColor,
+        fill: contentColor(),
         height: '1em',
         width: '1em'
       }
