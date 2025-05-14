@@ -25,6 +25,24 @@ type: example
   <Button color="success" margin="small">Success</Button>
   <Button color="danger" margin="small">Danger</Button>
   <Button color="primary-inverse" margin="small">Primary Inverse</Button>
+  <Button color="ai-primary" margin="small">AI Primary</Button>
+  <Button color="ai-secondary" margin="small">AI Secondary</Button>
+</View>
+```
+
+### AI buttons
+
+There is a specific need for `AI buttons`, which has an icon and gradient colors for `background` and `borders`. Here are the preset examples you can use. (the `IconButton` examples are also included for convenience)
+
+```js
+---
+type: example
+---
+<View display="block">
+  <Button color="ai-primary" renderIcon={IconAiSolid} margin="small">AI Primary</Button>
+  <Button color="ai-secondary" renderIcon={IconAiSolid} margin="small">AI Secondary</Button>
+  <IconButton color="ai-primary" margin="small"><IconAiSolid/></IconButton>
+  <IconButton color="ai-secondary" margin="small"><IconAiSolid/></IconButton>
 </View>
 ```
 

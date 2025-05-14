@@ -29,6 +29,8 @@ import type {
   BaseButtonStyle
 } from './props'
 
+import { darken, lighten } from '@instructure/ui-color-utils'
+
 /**
  * ---
  * private: true
@@ -131,6 +133,102 @@ const generateStyle = (
   }
 
   const colorVariants = {
+    'ai-primary': {
+      default: {
+        color: componentTheme.primaryColor,
+        background: `
+        linear-gradient(165deg,  ${componentTheme.aiBackgroundTopGradientColor} -20.97%, ${componentTheme.aiBackgroundBottomGradientColor} 141.21%) padding-box,
+        linear-gradient(125deg, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 141.21%) border-box`,
+        border: 'solid transparent',
+        boxShadow: componentTheme.primaryBoxShadow
+      },
+      active: {
+        background: `
+          linear-gradient(165deg,  ${darken(
+            componentTheme.aiBackgroundTopGradientColor,
+            10
+          )} -20.97%, ${darken(
+          componentTheme.aiBackgroundBottomGradientColor,
+          10
+        )} 141.21%) padding-box,
+          linear-gradient(125deg, ${darken(
+            componentTheme.aiBorderTopGradientColor,
+            10
+          )} 0%, ${darken(
+          componentTheme.aiBorderBottomGradientColor,
+          10
+        )} 141.21%) border-box`,
+        border: 'solid transparent',
+        boxShadow: componentTheme.aiActiveBoxShadow
+      },
+      hover: {
+        background: `
+          linear-gradient(165deg, ${darken(
+            componentTheme.aiBackgroundTopGradientColor,
+            10
+          )} -20.97%, ${darken(
+          componentTheme.aiBackgroundBottomGradientColor,
+          10
+        )} 141.21%) padding-box,
+  linear-gradient(125deg, ${darken(
+    componentTheme.aiBorderTopGradientColor,
+    10
+  )} 0%, ${darken(
+          componentTheme.aiBorderBottomGradientColor,
+          10
+        )} 141.21%) border-box`,
+        border: 'solid transparent',
+        boxShadow: componentTheme.primaryHoverBoxShadow
+      }
+    },
+    'ai-secondary': {
+      default: {
+        background: `
+        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%) text,
+        linear-gradient(white) padding-box,
+        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} -40%, ${componentTheme.aiBorderBottomGradientColor} 140%) border-box`,
+        border: 'solid transparent',
+        boxShadow: componentTheme.primaryBoxShadow,
+        '-webkit-text-fill-color': 'transparent'
+      },
+      active: {
+        background: `
+        linear-gradient(165deg,  ${darken(
+          componentTheme.aiBackgroundTopGradientColor,
+          10
+        )} -20.97%, ${darken(
+          componentTheme.aiBackgroundBottomGradientColor,
+          10
+        )} 141.21%) padding-box,
+    linear-gradient(125deg, ${darken(
+      componentTheme.aiBorderTopGradientColor,
+      10
+    )} 0%, ${darken(
+          componentTheme.aiBorderBottomGradientColor,
+          10
+        )} 141.21%) border-box`,
+        border: 'solid transparent',
+        boxShadow: componentTheme.aiActiveBoxShadow
+      },
+      hover: {
+        background: `
+        linear-gradient(to bottom, ${
+          componentTheme.aiBorderTopGradientColor
+        } 0%, ${componentTheme.aiBorderBottomGradientColor} 100%) text,
+        linear-gradient(165deg, ${lighten(
+          componentTheme.aiBackgroundTopGradientColor,
+          70
+        )} -20.97%, ${lighten(
+          componentTheme.aiBackgroundBottomGradientColor,
+          70
+        )} 141.21%) padding-box,
+       linear-gradient(to bottom, ${
+         componentTheme.aiBorderTopGradientColor
+       } -40%, ${componentTheme.aiBorderBottomGradientColor} 140%) border-box`,
+        border: 'solid transparent',
+        boxShadow: componentTheme.primaryHoverBoxShadow
+      }
+    },
     primary: withBackground
       ? {
           default: {
