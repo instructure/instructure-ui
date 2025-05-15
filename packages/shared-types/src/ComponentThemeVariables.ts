@@ -1398,15 +1398,18 @@ export type TagTheme = {
 }
 
 export type TextTheme = Typography & {
-  primaryInverseColor: Colors['contrasts']['white1010']
-  primaryColor: Colors['contrasts']['grey125125']
-  secondaryColor: Colors['contrasts']['grey4570']
-  secondaryInverseColor: Colors['contrasts']['grey1111']
-  brandColor: Colors['contrasts']['blue4570']
-  dangerColor: Colors['contrasts']['red4570']
-  successColor: Colors['contrasts']['green4570']
-  alertColor: Colors['contrasts']['blue4570']
-  warningColor: Colors['contrasts']['orange5782']
+  primaryInverseColor: string
+  primaryColor: string
+  secondaryColor: string
+  secondaryInverseColor: string
+  brandColor: string
+  dangerColor: string
+  successColor: string
+  alertColor: string
+  warningColor: string
+  aiColor: string
+
+  aiBackgroundColor: string
   paragraphMargin: string | 0
 }
 

@@ -26,6 +26,24 @@ type: example
 </div>
 ```
 
+### Text colors
+
+```js
+---
+type: example
+---
+<div>
+  <Text color="primary">I&#39;m primary text</Text><br/>
+  <Text color="secondary">I&#39;m secondary text</Text><br/>
+  <Text color="brand">I&#39;m brand text</Text><br />
+  <Text color="success">I&#39;m success text</Text><br/>
+  <Text color="warning">I&#39;m warning text</Text><br />
+  <Text color="danger">I&#39;m danger text</Text><br />
+  <Text color="ai-highlight">I&#39;m a highlighted text (by AI)</Text><br />
+  <Text color="alert">I&#39;m alert text - DEPRECATED - DO NOT USE</Text>
+</div>
+```
+
 ### Font sizes
 
 ```js
@@ -131,23 +149,6 @@ type: example
       superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
     </Text>
   </View>
-</div>
-```
-
-### Text colors
-
-```js
----
-type: example
----
-<div>
-  <Text color="primary">I&#39;m primary text</Text><br/>
-  <Text color="secondary">I&#39;m secondary text</Text><br/>
-  <Text color="brand">I&#39;m brand text</Text><br />
-  <Text color="success">I&#39;m success text</Text><br/>
-  <Text color="warning">I&#39;m warning text</Text><br />
-  <Text color="danger">I&#39;m danger text</Text><br />
-  <Text color="alert">I&#39;m alert text - DEPRECATED - DO NOT USE</Text>
 </div>
 ```
 

@@ -105,7 +105,11 @@ const generateStyle = (
     brand: { color: componentTheme.brandColor },
     danger: { color: componentTheme.dangerColor },
     alert: { color: componentTheme.alertColor },
-    warning: { color: componentTheme.warningColor }
+    warning: { color: componentTheme.warningColor },
+    'ai-highlight': {
+      color: componentTheme.aiColor,
+      background: componentTheme.aiBackgroundColor
+    }
   }
 
   const wrapStyle = {
