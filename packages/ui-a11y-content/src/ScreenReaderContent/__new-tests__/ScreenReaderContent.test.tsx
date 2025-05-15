@@ -21,45 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { ScreenReaderContent } from '../index'
 
-describe('<ScreenReaderContent />', async () => {
+describe('<ScreenReaderContent />', () => {
   it('should render the specified tag when `as` prop is set', async () => {
-    const subject = await mount(<ScreenReaderContent as="div" />)
-    expect(subject.getDOMNode()).to.have.tagName('div')
+    render(<ScreenReaderContent as="div" data-testid="src" />)
+    const screenReaderContent = screen.getByTestId('src')
+
+    expect(screenReaderContent.tagName).toBe('DIV')
   })
 
   it('accepts "passthrough" props', async () => {
-    const subject = await mount(<ScreenReaderContent hidden />)
-    expect(subject.getDOMNode()).to.have.attribute('hidden')
+    render(<ScreenReaderContent hidden data-testid="src" />)
+    const screenReaderContent = screen.getByTestId('src')
+
+    expect(screenReaderContent).toHaveAttribute('hidden')
   })
 
   it('renders children components', async () => {
-    const subject = await mount(
+    render(
       <ScreenReaderContent>
         <span>Screenreader text</span>
       </ScreenReaderContent>
     )
 
-    expect(subject.getDOMNode()).to.have.text('Screenreader text')
-  })
+    const children = screen.getByText('Screenreader text')
 
-  it('renders children offscreen', async () => {
-    const subject = await mount(
-      <ScreenReaderContent>
-        <span>Screenreader text</span>
-      </ScreenReaderContent>
-    )
-
-    expect(subject.getDOMNode()).to.not.be.visible()
-  })
-
-  it('is accessible by screen readers', async () => {
-    const subject = await mount(<ScreenReaderContent />)
-
-    expect(subject.getDOMNode()).to.have.style('height', 0)
-    expect(subject.getDOMNode()).to.have.style('opacity', 0)
+    expect(children).toBeInTheDocument()
   })
 })

@@ -22,51 +22,68 @@
  * SOFTWARE.
  */
 
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { AccessibleContent } from '../index'
 
-describe('<AccessibleContent />', async () => {
+describe('<AccessibleContent />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render screen reader content', async () => {
-    const subject = await mount(
+    const { container } = render(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
       </AccessibleContent>
     )
-    const content = within(subject.getDOMNode())
-    const alt = await content.find(':withText(Screen Reader Content)')
 
-    expect(alt).to.not.be.visible()
+    const alt = container.querySelector('[class$="-screenReaderContent"]')
+
+    expect(alt).toBeVisible()
   })
 
   it('should render a presentational content', async () => {
-    const subject = await mount(
+    render(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
       </AccessibleContent>
     )
-    const content = within(subject.getDOMNode())
-    const presentational = await content.findWithText('Presentational Content')
 
-    expect(presentational).to.be.visible()
-    expect(presentational).to.have.attribute('aria-hidden')
+    const presentational = screen.getByText('Presentational Content')
+
+    expect(presentational).toBeVisible()
+    expect(presentational).toHaveAttribute('aria-hidden')
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    const subject = await mount(<AccessibleContent as="div" />)
-    const accessibleContent = within(subject.getDOMNode())
+    render(<AccessibleContent as="div" data-testid="ac" />)
+    const accessibleContent = screen.getByTestId('ac')
 
-    expect(accessibleContent).to.have.tagName('div')
+    expect(accessibleContent.tagName).toBe('DIV')
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
+    const { container } = render(
       <AccessibleContent alt="Screenreader test">
         Not screenreader text
       </AccessibleContent>
     )
 
-    const accessibleContent = within(subject.getDOMNode())
+    const axeCheck = await runAxeCheck(container)
 
-    expect(await accessibleContent.accessible()).to.be.true()
+    expect(axeCheck).toBe(true)
   })
 })

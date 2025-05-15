@@ -22,32 +22,49 @@
  * SOFTWARE.
  */
 
-import {
-  expect,
-  mount,
-  find,
-  accessible,
-  wait
-} from '@instructure/ui-test-utils'
-
+import { render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import '@testing-library/jest-dom'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { PresentationContent } from '../index'
 
-describe('<PresentationContent />', async () => {
+describe('<PresentationContent />', () => {
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleErrorMock.mockRestore()
+  })
+
   it('should render children with an aria-hidden attribute', async () => {
-    await mount(<PresentationContent>Hello World</PresentationContent>)
-    const content = await find('[aria-hidden]')
-    await wait(() => {
-      expect(content).to.have.text('Hello World')
-    })
+    const { container } = render(
+      <PresentationContent>Hello World</PresentationContent>
+    )
+    const content = container.querySelector('[aria-hidden="true"]')
+
+    expect(content).toHaveTextContent('Hello World')
   })
 
   it('should render the specified tag when `as` prop is set', async () => {
-    const subject = await mount(<PresentationContent as="div" />)
-    expect(subject.getDOMNode()).to.have.tagName('div')
+    render(<PresentationContent as="div" data-testid="pc" />)
+    const presentationContent = screen.getByTestId('pc')
+
+    expect(presentationContent.tagName).toBe('DIV')
   })
 
   it('should meet a11y standards', async () => {
-    await mount(<PresentationContent>Hello World</PresentationContent>)
-    expect(await accessible()).to.be.true()
+    const { container } = render(
+      <PresentationContent>Hello World</PresentationContent>
+    )
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })
