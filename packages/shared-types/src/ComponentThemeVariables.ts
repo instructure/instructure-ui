@@ -174,16 +174,16 @@ export type BaseButtonTheme = {
   iconTextGap: Spacing['xSmall']
   iconTextGapCondensed: Spacing['xxSmall']
 
-  primaryColor: Colors['contrasts']['white1010']
-  primaryBorderColor: Colors['contrasts']['blue5782']
-  primaryBackground: Colors['contrasts']['blue4570']
-  primaryHoverBackground: Colors['contrasts']['blue5782']
-  primaryActiveBackground: Colors['contrasts']['blue5782']
+  primaryColor: string
+  primaryBorderColor: string
+  primaryBackground: string
+  primaryHoverBackground: string
+  primaryActiveBackground: string
   primaryActiveBoxShadow: string
-  primaryGhostColor: Colors['contrasts']['blue4570']
-  primaryGhostBorderColor: Colors['contrasts']['blue4570']
+  primaryGhostColor: string
+  primaryGhostBorderColor: string
   primaryGhostBackground: string
-  primaryGhostHoverBackground: Colors['contrasts']['blue1212']
+  primaryGhostHoverBackground: string
   primaryGhostActiveBackground: string
   primaryGhostActiveBoxShadow: string
   primaryBoxShadow: string
@@ -191,16 +191,16 @@ export type BaseButtonTheme = {
   primaryHoverBoxShadow: string
   primaryGhostHoverBoxShadow: string
 
-  secondaryColor: Colors['contrasts']['grey125125']
-  secondaryBorderColor: Colors['contrasts']['grey1424']
-  secondaryBackground: Colors['contrasts']['grey1111']
-  secondaryHoverBackground: Colors['contrasts']['grey1214']
-  secondaryActiveBackground: Colors['contrasts']['grey1214']
+  secondaryColor: string
+  secondaryBorderColor: string
+  secondaryBackground: string
+  secondaryHoverBackground: string
+  secondaryActiveBackground: string
   secondaryActiveBoxShadow: string
-  secondaryGhostColor: Colors['contrasts']['grey125125']
-  secondaryGhostBorderColor: Colors['contrasts']['grey125125']
+  secondaryGhostColor: string
+  secondaryGhostBorderColor: string
   secondaryGhostBackground: string
-  secondaryGhostHoverBackground: Colors['contrasts']['grey1111']
+  secondaryGhostHoverBackground: string
   secondaryGhostActiveBackground: string
   secondaryGhostActiveBoxShadow: string
   secondaryBoxShadow: string
@@ -208,16 +208,16 @@ export type BaseButtonTheme = {
   secondaryHoverBoxShadow: string
   secondaryGhostHoverBoxShadow: string
 
-  successColor: Colors['contrasts']['white1010']
-  successBorderColor: Colors['contrasts']['green5782']
-  successBackground: Colors['contrasts']['green4570']
-  successHoverBackground: Colors['contrasts']['green5782']
-  successActiveBackground: Colors['contrasts']['green5782']
+  successColor: string
+  successBorderColor: string
+  successBackground: string
+  successHoverBackground: string
+  successActiveBackground: string
   successActiveBoxShadow: string
-  successGhostColor: Colors['contrasts']['green4570']
-  successGhostBorderColor: Colors['contrasts']['green4570']
+  successGhostColor: string
+  successGhostBorderColor: string
   successGhostBackground: string
-  successGhostHoverBackground: Colors['contrasts']['green1212']
+  successGhostHoverBackground: string
   successGhostActiveBackground: string
   successGhostActiveBoxShadow: string
   successBoxShadow: string
@@ -225,16 +225,16 @@ export type BaseButtonTheme = {
   successHoverBoxShadow: string
   successGhostHoverBoxShadow: string
 
-  dangerColor: Colors['contrasts']['white1010']
-  dangerBorderColor: Colors['contrasts']['red5782']
-  dangerBackground: Colors['contrasts']['red4570']
-  dangerHoverBackground: Colors['contrasts']['red5782']
-  dangerActiveBackground: Colors['contrasts']['red5782']
+  dangerColor: string
+  dangerBorderColor: string
+  dangerBackground: string
+  dangerHoverBackground: string
+  dangerActiveBackground: string
   dangerActiveBoxShadow: string
-  dangerGhostColor: Colors['contrasts']['red4570']
-  dangerGhostBorderColor: Colors['contrasts']['red4570']
+  dangerGhostColor: string
+  dangerGhostBorderColor: string
   dangerGhostBackground: string
-  dangerGhostHoverBackground: Colors['contrasts']['red1212']
+  dangerGhostHoverBackground: string
   dangerGhostActiveBackground: string
   dangerGhostActiveBoxShadow: string
   dangerBoxShadow: string
@@ -242,22 +242,28 @@ export type BaseButtonTheme = {
   dangerHoverBoxShadow: string
   dangerGhostHoverBoxShadow: string
 
-  primaryInverseColor: Colors['contrasts']['grey125125']
-  primaryInverseBorderColor: Colors['contrasts']['grey1214']
-  primaryInverseBackground: Colors['contrasts']['white1010']
-  primaryInverseHoverBackground: Colors['contrasts']['grey1111']
-  primaryInverseActiveBackground: Colors['contrasts']['white1010']
+  primaryInverseColor: string
+  primaryInverseBorderColor: string
+  primaryInverseBackground: string
+  primaryInverseHoverBackground: string
+  primaryInverseActiveBackground: string
   primaryInverseActiveBoxShadow: string
-  primaryInverseGhostColor: Colors['contrasts']['white1010']
-  primaryInverseGhostBorderColor: Colors['contrasts']['white1010']
+  primaryInverseGhostColor: string
+  primaryInverseGhostBorderColor: string
   primaryInverseGhostBackground: string
-  primaryInverseGhostHoverBackground: Colors['contrasts']['grey1111']
+  primaryInverseGhostHoverBackground: string
   primaryInverseGhostActiveBackground: string
   primaryInverseGhostActiveBoxShadow: string
   primaryInverseBoxShadow: string
   primaryInverseGhostBoxShadow: string
   primaryInverseHoverBoxShadow: string
   primaryInverseGhostHoverBoxShadow: string
+
+  aiBackgroundTopGradientColor: string
+  aiBackgroundBottomGradientColor: string
+  aiBorderTopGradientColor: string
+  aiBorderBottomGradientColor: string
+  aiActiveBoxShadow: string
 }
 
 export type CloseButtonTheme = {

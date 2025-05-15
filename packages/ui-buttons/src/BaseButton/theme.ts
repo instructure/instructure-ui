@@ -196,7 +196,13 @@ const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
     primaryInverseBoxShadow: 'none',
     primaryInverseGhostBoxShadow: 'none',
     primaryInverseHoverBoxShadow: 'none',
-    primaryInverseGhostHoverBoxShadow: 'none'
+    primaryInverseGhostHoverBoxShadow: 'none',
+
+    aiBackgroundTopGradientColor: colors?.contrasts?.violet4570,
+    aiBackgroundBottomGradientColor: colors?.contrasts?.sea4570,
+    aiBorderTopGradientColor: colors?.contrasts?.violet5790,
+    aiBorderBottomGradientColor: colors?.contrasts?.sea5790,
+    aiActiveBoxShadow: '0px 0px 5px 0px #013451 inset'
   }
 
   return {
