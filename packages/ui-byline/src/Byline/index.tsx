@@ -82,12 +82,11 @@ class Byline extends Component<BylineProps> {
         {...passthroughProps}
         elementRef={this.handleRef}
         css={this.props.styles?.byline}
-        as="figure"
         margin={this.props.margin}
         maxWidth={this.props.styles?.maxWidth}
       >
         <div css={this.props.styles?.figure}>{this.props.children}</div>
-        <figcaption css={this.props.styles?.caption}>
+        <div css={this.props.styles?.caption}>
           {this.props.title && (
             <span css={this.props.styles?.title}>{this.props.title}</span>
           )}
@@ -96,7 +95,7 @@ class Byline extends Component<BylineProps> {
               {this.props.description}
             </div>
           )}
-        </figcaption>
+        </div>
       </View>
     )
   }

@@ -128,13 +128,6 @@ describe('<Byline />', () => {
     expect(axeCheck).toBe(true)
   })
 
-  it(`should render a figure by default`, () => {
-    renderByline()
-    const figureElement = screen.getByRole('figure')
-
-    expect(figureElement).toBeInTheDocument()
-  })
-
   describe('when passing down props to View', () => {
     const customAllowedProps: { [key: string]: string } = { margin: 'small' }
     const customIgnoredProps = ['elementRef', 'children']
