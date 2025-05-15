@@ -143,7 +143,13 @@ const generateStyle = (
     primary: { color: componentTheme.primaryColor },
     secondary: { color: componentTheme.secondaryColor },
     'primary-inverse': { color: componentTheme.primaryInverseColor },
-    'secondary-inverse': { color: componentTheme.secondaryInverseColor }
+    'secondary-inverse': { color: componentTheme.secondaryInverseColor },
+    ai: {
+      background: `
+        linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
+      border: 'solid transparent',
+      WebkitTextFillColor: 'transparent'
+    }
   }
 
   const borderStyles = {
@@ -182,6 +188,8 @@ const generateStyle = (
       label: 'heading',
       lineHeight: componentTheme.lineHeight,
       margin: 0,
+      display: 'flex',
+      alignItems: 'center',
 
       // NOTE: the input styles exist to accommodate the InPlaceEdit component
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
