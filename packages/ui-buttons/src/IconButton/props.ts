@@ -81,7 +81,14 @@ type IconButtonOwnProps = {
   /**
    * Specifies the color for the `IconButton`.
    */
-  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+  color?:
+    | 'primary'
+    | 'primary-inverse'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'ai-primary'
+    | 'ai-secondary'
 
   /**
    * Override the `Button`'s default focus outline color.
@@ -152,7 +159,9 @@ const propTypes: PropValidators<PropKeys> = {
     'primary-inverse',
     'secondary',
     'success',
-    'danger'
+    'danger',
+    'ai-primary',
+    'ai-secondary'
   ]),
   focusColor: PropTypes.oneOf(['info', 'inverse']),
   shape: PropTypes.oneOf(['rectangle', 'circle']),

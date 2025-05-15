@@ -38,6 +38,18 @@ type: example
 </Tooltip>
 ```
 
+### AI Icon buttons
+
+```js
+---
+type: example
+---
+<View display="block">
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+</View>
+```
+
 ### Shaping
 
 The `shape` prop specifies if the IconButton will render as a `rectangle` or `circle`.
