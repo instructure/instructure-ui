@@ -54,6 +54,9 @@ const generateComponentTheme = (theme: Theme): TextTheme => {
     successColor: colors?.contrasts?.green5782,
     alertColor: colors?.contrasts?.blue5782,
     warningColor: colors?.contrasts?.orange5782,
+    aiColor: colors?.contrasts?.violet5790,
+
+    aiBackgroundColor: colors?.contrasts?.violet1212,
 
     paragraphMargin: `${spacing.medium} 0`
   }

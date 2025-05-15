@@ -52,6 +52,7 @@ type TextOwnProps = {
     | 'warning'
     | 'primary-inverse'
     | 'secondary-inverse'
+    | 'ai-highlight'
   /**
    * Provides a reference to the underlying HTML element
    */
@@ -119,7 +120,8 @@ const propTypes: PropValidators<PropKeys> = {
     'warning',
     'alert',
     'primary-inverse',
-    'secondary-inverse'
+    'secondary-inverse',
+    'ai-highlight'
   ]),
   elementRef: PropTypes.func,
   fontStyle: PropTypes.oneOf(['italic', 'normal']),
