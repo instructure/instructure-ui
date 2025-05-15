@@ -65,6 +65,7 @@ type: example
   <Heading>I inherit my color via the CSS cascade (default)</Heading>
   <Heading color="primary">I am primary color</Heading>
   <Heading color="secondary">I am secondary color</Heading>
+  <Heading color="ai"><IconAiColoredSolid/>&nbsp; I am AI color</Heading>
 </div>
 ```
 

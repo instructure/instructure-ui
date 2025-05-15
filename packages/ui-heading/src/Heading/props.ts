@@ -58,6 +58,7 @@ type HeadingOwnProps = {
     | 'primary-inverse'
     | 'secondary-inverse'
     | 'inherit'
+    | 'ai'
   /**
    * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
    */
@@ -112,7 +113,8 @@ const propTypes: PropValidators<PropKeys> = {
     'secondary',
     'primary-inverse',
     'secondary-inverse',
-    'inherit'
+    'inherit',
+    'ai'
   ]),
   level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
   as: PropTypes.elementType,

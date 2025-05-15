@@ -83,7 +83,10 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
     borderPadding: spacing?.xxxSmall,
     borderColor: colors?.contrasts?.grey1424,
     borderWidth: borders?.widthSmall,
-    borderStyle: borders?.style
+    borderStyle: borders?.style,
+
+    aiTextTopGradientColor: colors.contrasts.violet4570,
+    aiTextBottomGradientColor: colors.contrasts.sea4570
   }
 
   return {

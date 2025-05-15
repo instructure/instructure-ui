@@ -656,14 +656,16 @@ export type HeadingTheme = Typography & {
   h5FontSize: Typography['fontSizeSmall']
   h5FontWeight: Typography['fontWeightNormal']
   h5FontFamily: Typography['fontFamily']
-  primaryInverseColor: Colors['contrasts']['white1010']
-  primaryColor: Colors['contrasts']['grey125125']
-  secondaryColor: Colors['contrasts']['grey4570']
-  secondaryInverseColor: Colors['contrasts']['grey1111']
+  primaryInverseColor: string
+  primaryColor: string
+  secondaryColor: string
+  secondaryInverseColor: string
   borderPadding: Spacing['xxxSmall']
-  borderColor: Colors['contrasts']['grey1424']
+  borderColor: string
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
+  aiTextTopGradientColor: string
+  aiTextBottomGradientColor: string
 }
 
 export type ImgTheme = {
