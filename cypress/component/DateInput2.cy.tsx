@@ -615,8 +615,10 @@ describe('<DateInput2/>', () => {
         )
 
         cy.get('button[data-popover-trigger="true"]').click()
+        cy.wait(100)
 
         cy.contains('button', dayForSelect).click()
+        cy.wait(100)
 
         cy.get('input')
           .invoke('val')
