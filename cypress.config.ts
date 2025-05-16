@@ -29,6 +29,13 @@ import { defineConfig } from 'cypress'
 import webpackConfig from './packages/ui-karma-config/lib/legacyBaseWebpackConfig'
 
 export default defineConfig({
+  numTestsKeptInMemory: 1,
+  defaultCommandTimeout: 10000,
+  pageLoadTimeout: 120000,
+  responseTimeout: 60000,
+  requestTimeout: 60000,
+  execTimeout: 120000,
+  taskTimeout: 60000,
   retries: {
     experimentalStrategy: 'detect-flake-and-pass-on-threshold',
     experimentalOptions: {

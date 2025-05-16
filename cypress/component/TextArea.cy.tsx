@@ -42,6 +42,8 @@ it('should resize if autoGrow is true', () => {
       )
       .trigger('input')
 
+    cy.wait(500)
+
     cy.get('textarea').then((input) => {
       const resizedHeight = parseInt(getComputedStyle(input[0]).height, 10)
       expect(resizedHeight).to.be.above(initialHeight)
