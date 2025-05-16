@@ -51,7 +51,8 @@ const generateStyle = (
       flexDirection: 'row',
       alignItems: 'stretch',
       // padding to prevent focus ring getting cropped by `overflow: hidden`
-      padding: '0 0.125rem'
+      padding: '0 0.125rem',
+      overflow: 'visible'
     },
     submenuOption: {
       label: 'topNavBarMenuItems__submenuOption',
