@@ -82,9 +82,12 @@ describe('<Dialog/>', () => {
 
         cy.mount(<NestedDialogExample defaultInput={'one'} onBlur={onBlur} />)
 
-        cy.get('[data-testid="nested-input-two"]').click().should('have.focus')
+        cy.get('[data-testid="nested-input-two"]').click().wait(500)
 
-        cy.realPress('Tab')
+        cy.get('[data-testid="nested-input-two"]').should('have.focus')
+
+        cy.realPress('Tab').wait(500)
+
         cy.get('[data-testid="nested-input-one"]').should('have.focus')
         cy.wrap(onBlur).should('not.have.been.called')
       })
@@ -94,9 +97,12 @@ describe('<Dialog/>', () => {
 
         cy.mount(<NestedDialogExample defaultInput={'two'} onBlur={onBlur} />)
 
-        cy.get('[data-testid="nested-input-one"]').click().should('have.focus')
+        cy.get('[data-testid="nested-input-one"]').click().wait(500)
 
-        cy.realPress(['Shift', 'Tab']).wait(100)
+        cy.get('[data-testid="nested-input-one"]').should('have.focus')
+
+        cy.realPress(['Shift', 'Tab']).wait(500)
+
         cy.get('[data-testid="nested-input-two"]').should('have.focus')
         cy.wrap(onBlur).should('not.have.been.called')
       })
