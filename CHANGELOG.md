@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
+
+
+### Bug Fixes
+
+* **ui-byline:** remove figure and figcaption ([72af55e](https://github.com/instructure/instructure-ui/commit/72af55e853ad4e1463726eacf9e2e48235dc9d80))
+* **ui-checkbox:** remove pointer cursor from disabled checkbox toggle ([796284e](https://github.com/instructure/instructure-ui/commit/796284ecad5af495d369ef467386f21a503fdc0f))
+
+
+### Features
+
+* **ui-avatar,shared-types:** add new ai color variant ([52545d1](https://github.com/instructure/instructure-ui/commit/52545d10d670722dd0126f99e97cb4e13a4ea814))
+* **ui-buttons,shared-types:** add ai-primary and ai-secondary colors to buttons ([47868fc](https://github.com/instructure/instructure-ui/commit/47868fc9fe552c0389183c4e19ae25825fe4bc7d))
+* **ui-heading,shared-types:** add ai color ([a00690b](https://github.com/instructure/instructure-ui/commit/a00690b2c3df477298b89ac94055c26be06071b9))
+* **ui-scripts:** add new ai-colored icon (temp solution) ([c221a97](https://github.com/instructure/instructure-ui/commit/c221a9772c6c6a3834c21a9e1e17ac7613a3c844))
+* **ui-text,shared-types:** add ai-highlight color ([b31d917](https://github.com/instructure/instructure-ui/commit/b31d917938be54364c7931acb64d67b157d77bb5))
+* **ui-themes,shared-types:** add new primitive and contrast colors ([c943d27](https://github.com/instructure/instructure-ui/commit/c943d276acc1ca04d7b9026fef210d1ac29ab91a))
+
+
+
+
+
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 

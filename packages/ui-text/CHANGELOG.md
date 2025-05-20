@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
+
+
+### Features
+
+* **ui-text,shared-types:** add ai-highlight color ([b31d917](https://github.com/instructure/instructure-ui/commit/b31d917938be54364c7931acb64d67b157d77bb5))
+
+
+
+
+
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-text
