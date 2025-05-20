@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
+
+
+### Bug Fixes
+
+* **ui-checkbox:** remove pointer cursor from disabled checkbox toggle ([796284e](https://github.com/instructure/instructure-ui/commit/796284ecad5af495d369ef467386f21a503fdc0f))
+
+
+
+
+
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 

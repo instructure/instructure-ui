@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
+
+
+### Features
+
+* **ui-heading,shared-types:** add ai color ([a00690b](https://github.com/instructure/instructure-ui/commit/a00690b2c3df477298b89ac94055c26be06071b9))
+
+
+
+
+
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-heading
