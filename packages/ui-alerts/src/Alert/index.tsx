@@ -258,7 +258,9 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   renderAlert() {
-    const { margin, styles, children, ...props } = this.props
+    // prevent onDismiss from being passed to the View component
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { margin, styles, children, onDismiss, ...props } = this.props
     return (
       <View
         {...passthroughProps({ ...props })}
