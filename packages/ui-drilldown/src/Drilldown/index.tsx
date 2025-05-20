@@ -889,7 +889,14 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   handleToggle = (event: React.UIEvent | React.FocusEvent, shown: boolean) => {
     const { onToggle } = this.props
 
-    this.setState({ isShowingPopover: shown })
+    const mouseEvent = event as React.MouseEvent
+
+    this.setState({ isShowingPopover: shown }, () => {
+      //  Focus first item when it's a keyboard event (mouseEvent.detail === 0)
+      if (mouseEvent.detail === 0 && shown) {
+        this.focusFirstAvailableItem()
+      }
+    })
 
     if (typeof onToggle === 'function') {
       onToggle(event, {
@@ -898,6 +905,24 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         ...this.exposedNavigationProps
       })
     }
+  }
+
+  focusFirstAvailableItem() {
+    if (!this.currentPage) return
+
+    // Check for action option
+    const actionLabel = callRenderProp(this.currentPage.renderActionLabel)
+    // Use action ID if exists, otherwise first non-action option's ID
+    const targetId = actionLabel
+      ? this._headerActionId
+      : this.currentPage.children[0]?.props.id
+
+    if (!targetId) return
+
+    this.setState({ highlightedOptionId: targetId }, () => {
+      // A slight delay is needed to focus the first item after the popover appears.
+      setTimeout(() => this.focusOption(targetId), 10)
+    })
   }
 
   renderList(
@@ -1055,7 +1080,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       role,
       elementRef,
       variant: 'default',
-      tabIndex: -1
+      // header should not get focused (role === 'presentation')
+      tabIndex: role === 'presentation' ? -1 : 0
     }
 
     // extra data we need track on the option,
@@ -1378,7 +1404,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             borderWidth="small"
             as="div"
             elementRef={this.handleDrilldownRef}
-            tabIndex={0}
             css={styles?.drilldown}
             position="relative"
             borderRadius="small"
@@ -1481,7 +1506,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           this.handleToggle(event, false)
         }}
         onShowContent={(event) => this.handleToggle(event, true)}
-        mountNode={mountNode}
+        mountNode={mountNode || this.ref}
         placement={placement}
         withArrow={withArrow}
         positionTarget={positionTarget}

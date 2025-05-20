@@ -66,10 +66,9 @@ const generateStyle = (
       alignItems: 'stretch',
       justifyContent: 'space-between',
       height: componentTheme.desktopHeight,
-      position: 'relative',
       zIndex: componentTheme.desktopZIndex,
       maxWidth: '100%',
-      overflow: 'hidden',
+      overflow: 'visible',
       paddingInline: componentTheme.desktopInlinePadding,
       paddingBlock: 0,
       ...(hasBrandBlock && {
@@ -113,7 +112,6 @@ const generateStyle = (
       marginInline: componentTheme.desktopUserContainerInlineMargin,
 
       ...(hasUserSeparator && {
-        position: 'relative',
         paddingInlineStart: componentTheme.desktopUserSeparatorGap,
 
         '&::before': {
