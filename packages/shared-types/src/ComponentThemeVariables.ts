@@ -943,12 +943,13 @@ export type OptionsItemTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeightCondensed']
-  color: Colors['contrasts']['grey125125']
-  background: Colors['contrasts']['white1010']
-  highlightedLabelColor: Colors['contrasts']['white1010']
-  highlightedBackground: Colors['contrasts']['blue4570']
-  selectedLabelColor: Colors['contrasts']['white1010']
-  selectedBackground: Colors['contrasts']['grey4570']
+  color: string
+  background: string
+  highlightedLabelColor: string
+  highlightedBackground: string
+  selectedLabelColor: string
+  selectedBackground: string
+  selectedHighlightedBackground: string
   padding: string | 0
   iconPadding: Spacing['small']
   nestedPadding: Spacing['medium']
@@ -958,7 +959,7 @@ export type OptionsItemTheme = {
   descriptionFontWeight: Typography['fontWeightNormal']
   descriptionLineHeight: Typography['lineHeight']
   descriptionPaddingStart: string | 0
-  descriptionColor: Colors['contrasts']['grey4570']
+  descriptionColor: string
   fontWeightSelected: Typography['fontWeightNormal']
 }
 

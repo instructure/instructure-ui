@@ -64,11 +64,15 @@ const generateStyle = (
       color: componentTheme.highlightedLabelColor
     },
     disabled: { cursor: 'not-allowed', opacity: 0.5 },
-    ['highlighted-disabled']: {
+    'highlighted-disabled': {
       background: componentTheme.highlightedBackground,
       color: componentTheme.highlightedLabelColor,
       cursor: 'not-allowed',
       opacity: 0.5
+    },
+    'selected-highlighted': {
+      background: componentTheme.selectedHighlightedBackground,
+      color: componentTheme.highlightedLabelColor
     },
     default: {
       transition: 'background 200ms'
