@@ -1,13 +1,13 @@
 ---
-title: Real-world component testing
+title: Cypress component testing
 category: Testing
-order: 5
+order: 3
 ---
 
-# Real-world component testing
+# Cypress component testing
 
 Sometimes unit test behaviour doesn't match how our components work in the browser (e.g. no ResizeObserver)
-InstUI uses [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/overview) for these cases. These are located at `instructure-ui/cypress/component/`.
+InstUI uses [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/overview) in these cases to run tests in a real-world environment.
 
 ### Running tests
 
@@ -17,9 +17,14 @@ You can run them from the root with the following command:
 npm run cy:component
 ```
 
+Run specific test file:
+```
+npm run cy:component -- --spec "cypress/component/Alerts.cy.tsx"
+```
 ### Creating new tests
 
-New tests should be added under `instructure-ui/cypress/component/[ComponentName].cy.tsx`
+New tests should be added under `cypress/component/`  
+By convention we name test files after the component they are testing like `cypress/component/[ComponentName].cy.tsx`
 
 Cypress tests usually have a structure like this:
 
@@ -28,7 +33,7 @@ Cypress tests usually have a structure like this:
 type: code
 ---
 import React from 'react'
-import { ComponentToTest } from '../../packages/ui'
+import { ComponentToTest } from '@instructure/ui'
 import '../support/component'
 
 describe('<ComponentToTest/>', () => {
@@ -38,8 +43,11 @@ describe('<ComponentToTest/>', () => {
   })
 })
 ```
-
 You can read more about cypress testing from their [docs](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Writing-tests) and their [React Examples](https://docs.cypress.io/guides/component-testing/react/examples).
+
+### Example
+You can view our code base on GitHub. The component tests can be found [here](https://github.com/instructure/instructure-ui/tree/master/cypress/component).
+
 
 ### Debugging tests
 
@@ -78,3 +86,9 @@ describe('real events testing', () => {
   })
 })
 ```
+
+
+### Configuration Setup
+Here you can find the key configuration files and folder locations used for our test environment:
+- [cypress/support](https://github.com/instructure/instructure-ui/tree/master/cypress/support)
+- [cypress.config.ts](https://github.com/instructure/instructure-ui/blob/master/cypress.config.ts)
