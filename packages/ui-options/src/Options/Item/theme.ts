@@ -53,6 +53,7 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     highlightedBackground: colors?.contrasts?.blue4570,
     selectedLabelColor: colors?.contrasts?.white1010,
     selectedBackground: colors?.contrasts?.grey4570,
+    selectedHighlightedBackground: colors?.contrasts?.blue5782,
 
     padding: `${spacing?.xSmall} ${spacing?.small}`,
     iconPadding: spacing?.small,
