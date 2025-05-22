@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 import { ComponentElement, Children, Component, memo, ReactNode } from 'react'
 
 import * as utils from '@instructure/ui-utils'
@@ -429,7 +428,10 @@ class Select extends Component<SelectProps> {
       renderAfterLabel: getRenderOptionLabel(renderAfterLabel)
     }
     // should option be treated as highlighted or selected
-    if (isSelected) {
+    if (isSelected && isHighlighted) {
+      optionProps.variant = 'selected-highlighted'
+      optionProps.isSelected = true
+    } else if (isSelected) {
       optionProps.variant = 'selected'
       optionProps.isSelected = true
     } else if (isHighlighted) {

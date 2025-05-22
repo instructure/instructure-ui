@@ -49,6 +49,7 @@ type OptionsItemRenderProps = {
     | 'selected'
     | 'disabled'
     | 'highlighted-disabled'
+    | 'selected-highlighted'
   /**
    * The ARIA role of the element
    */
@@ -125,7 +126,8 @@ const propTypes: PropValidators<PropKeys> = {
     'highlighted',
     'selected',
     'disabled',
-    'highlighted-disabled'
+    'highlighted-disabled',
+    'selected-highlighted'
   ]),
   role: PropTypes.string,
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
