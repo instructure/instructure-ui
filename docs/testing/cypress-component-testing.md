@@ -1,10 +1,10 @@
 ---
-title: Real-world component testing
+title: Cypress component testing
 category: Testing
-order: 5
+order: 3
 ---
 
-# Real-world component testing
+# Cypress component testing
 
 Sometimes unit test behaviour doesn't match how our components work in the browser (e.g. no ResizeObserver)
 InstUI uses [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/overview) for these cases. These are located at `instructure-ui/cypress/component/`.
@@ -28,7 +28,7 @@ Cypress tests usually have a structure like this:
 type: code
 ---
 import React from 'react'
-import { ComponentToTest } from '../../packages/ui'
+import { ComponentToTest } from '@instructure/ui'
 import '../support/component'
 
 describe('<ComponentToTest/>', () => {
