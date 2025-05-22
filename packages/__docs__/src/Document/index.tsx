@@ -76,7 +76,7 @@ class Document extends Component<DocumentProps, DocumentState> {
     const generateTheme = doc?.componentInstance?.generateComponentTheme
     const generateThemeFunctional =
       functionalComponentThemes[
-        doc.id as keyof typeof functionalComponentThemes
+      doc.id as keyof typeof functionalComponentThemes
       ]
     if (
       generateTheme &&
@@ -173,9 +173,9 @@ class Document extends Component<DocumentProps, DocumentState> {
   {...props}
   themeOverride={{
     ${
-      // get random theme variable
-      themeVariableKeys[Math.floor(Math.random() * themeVariableKeys.length)]
-    }: 'custom value'
+              // get random theme variable
+              themeVariableKeys[Math.floor(Math.random() * themeVariableKeys.length)]
+              }: 'custom value'
   }}
 />`}
           />

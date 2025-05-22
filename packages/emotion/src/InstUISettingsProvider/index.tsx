@@ -122,7 +122,7 @@ function InstUISettingsProvider({
 InstUISettingsProvider.propTypes = {
   /* eslint-disable react/require-default-props */
   children: PropTypes.node,
-  theme: PropTypes.object,
+  theme: PropTypes.oneOf([PropTypes.object, PropTypes.func]),
   dir: PropTypes.oneOf(['ltr', 'rtl']),
   instanceCounterMap: PropTypes.instanceOf(Map),
   as: PropTypes.string
