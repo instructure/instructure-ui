@@ -72,6 +72,7 @@ import type {
   TopNavBarSmallViewportLayoutState,
   TopNavBarSmallViewportLayoutStyleProps
 } from './props'
+import { ViewOwnProps } from '@instructure/ui-view'
 
 /**
 ---
@@ -104,6 +105,7 @@ class TopNavBarSmallViewportLayout extends Component<
   private readonly _inPlaceDialogId: string
   private readonly _inPlaceDialogCloseButtonId: string
   private readonly _separatorId: string
+  private _drilldownRef: Drilldown | null = null
 
   private _raf: RequestAnimationFrameType[] = []
 
@@ -274,7 +276,11 @@ class TopNavBarSmallViewportLayout extends Component<
     })
   }
 
-  toggleDropdownMenu() {
+  toggleDropdownMenu(
+    event?:
+      | React.MouseEvent<ViewOwnProps, MouseEvent>
+      | React.KeyboardEvent<ViewOwnProps>
+  ) {
     const { onDropdownMenuToggle } = this.props
     const { isDropdownMenuOpen } = this.state
 
@@ -286,7 +292,43 @@ class TopNavBarSmallViewportLayout extends Component<
       onDropdownMenuToggle(!isDropdownMenuOpen)
     }
 
-    this.setState({ isDropdownMenuOpen: !isDropdownMenuOpen })
+    this.setState(
+      { isDropdownMenuOpen: !this.state.isDropdownMenuOpen },
+      () => {
+        if (this.state.isDropdownMenuOpen) {
+          this.focusFirstAvailableItem(event)
+        }
+      }
+    )
+  }
+
+  focusFirstAvailableItem(
+    event?:
+      | React.MouseEvent<ViewOwnProps, MouseEvent>
+      | React.KeyboardEvent<ViewOwnProps>
+  ) {
+    const userChildren = Children.toArray(
+      this.props.renderUser?.props.children
+    ) as ItemChild[]
+
+    // If option is a User, it preceeds other item, so focus that first
+    const targetId = userChildren[0]
+      ? userChildren[0].props.id
+      : this.mappedMenuItemsOptions[0].optionData.id
+
+    setTimeout(() => {
+      const container = document.getElementById(this._trayContainerId)
+      const firstOption = container?.querySelector(
+        `[id="${targetId}"]`
+      ) as HTMLSpanElement
+      firstOption?.focus()
+      // If it was a keyboard event, highlight the option using Drilldown's handleOptionHighlight function
+      if (this._drilldownRef && event?.detail === 0) {
+        this._drilldownRef.handleOptionHighlight({} as React.SyntheticEvent, {
+          id: targetId
+        })
+      }
+    })
   }
 
   renderOptionContent: RenderOptionContent = (children, itemProps) => {
@@ -356,8 +398,8 @@ class TopNavBarSmallViewportLayout extends Component<
     } else {
       const itemProps: Omit<TopNavBarItemProps, 'children'> = {
         id: this._menuTriggerId,
-        onClick: () => {
-          this.toggleDropdownMenu()
+        onClick: (e) => {
+          this.toggleDropdownMenu(e)
         },
         tooltip: dropdownMenuToggleButtonTooltip,
         themeOverride: { itemSpacing: '0.375rem' },
@@ -402,6 +444,9 @@ class TopNavBarSmallViewportLayout extends Component<
     return (
       <div css={styles?.menuTriggerContainer}>
         {menuTrigger}
+        {!this.hasBreadcrumbBlock && !this.props.trayMountNode && (
+          <div css={styles?.trayContainer} id={this._trayContainerId} />
+        )}
 
         {this.hasBrandBlock(renderBrand) && !alternativeTitle && (
           <div css={styles?.brandContainer}>{renderBrand}</div>
@@ -442,6 +487,9 @@ class TopNavBarSmallViewportLayout extends Component<
 
     return (
       <Drilldown
+        ref={(el) => {
+          this._drilldownRef = el
+        }}
         id={this._drilldownId}
         rootPageId={this._menuId}
         label={dropdownMenuLabel}
@@ -576,13 +624,7 @@ class TopNavBarSmallViewportLayout extends Component<
   }
 
   render() {
-    const {
-      trayMountNode,
-      navLabel,
-      renderActionItems,
-      renderBreadcrumb,
-      styles
-    } = this.props
+    const { navLabel, renderActionItems, renderBreadcrumb, styles } = this.props
 
     return (
       <nav
@@ -606,10 +648,6 @@ class TopNavBarSmallViewportLayout extends Component<
         )}
 
         {!this.hasBreadcrumbBlock && this.renderInPlaceDialog()}
-
-        {!this.hasBreadcrumbBlock && !trayMountNode && (
-          <div css={styles?.trayContainer} id={this._trayContainerId} />
-        )}
 
         {!this.hasBreadcrumbBlock && this.renderDropdownMenuTray()}
       </nav>
