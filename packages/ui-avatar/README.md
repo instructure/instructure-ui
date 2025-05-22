@@ -26,7 +26,7 @@ npm install @instructure/ui-avatar
 
 ```jsx
 ---
-type: example
+type: code
 ---
 import React from 'react'
 import { Avatar } from '@instructure/ui-avatar'
