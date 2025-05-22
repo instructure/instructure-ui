@@ -65,7 +65,20 @@ type: example
   <Heading>I inherit my color via the CSS cascade (default)</Heading>
   <Heading color="primary">I am primary color</Heading>
   <Heading color="secondary">I am secondary color</Heading>
-  <Heading color="ai"><IconAiColoredSolid/>&nbsp; I am AI color</Heading>
+  <Heading color="ai">I am AI color</Heading>
+</div>
+```
+
+### Icons
+
+With the `renderIcon` prop, an icon can be rendered before the text. Only current use-case is for the `ai heading`
+
+```js
+---
+type: example
+---
+<div>
+ <Heading color="ai" renderIcon={<IconAiColoredSolid/>}>I am AI color with icon</Heading>
 </div>
 ```
 
