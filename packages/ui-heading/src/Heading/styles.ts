@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: HeadingTheme,
   props: HeadingProps
 ): HeadingStyle => {
-  const { level, color, border, variant } = props
+  const { level, color, border, variant, renderIcon } = props
 
   const variants: Record<NonNullable<HeadingProps['variant']>, object> = {
     titlePageDesktop: {
@@ -188,9 +188,13 @@ const generateStyle = (
       label: 'heading',
       lineHeight: componentTheme.lineHeight,
       margin: 0,
-      display: 'flex',
-      alignItems: 'center',
-
+      //need this for icons to render them vertically centered
+      ...(renderIcon
+        ? {
+            display: 'flex',
+            alignItems: 'center'
+          }
+        : {}),
       // NOTE: the input styles exist to accommodate the InPlaceEdit component
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(input)[type]': inputStyles,

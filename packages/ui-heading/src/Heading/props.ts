@@ -30,7 +30,8 @@ import type {
   AsElementType,
   PropValidators,
   HeadingTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -79,6 +80,10 @@ type HeadingOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   /**
+   * An icon, or function that returns an icon that gets displayed before the text.
+   */
+  renderIcon?: Renderable
+  /**
    * Sets style and level at once. The as property will be the same as the level.
    * NOTE: this is the recommended way of setting the appearance, instead of level
    */
@@ -120,6 +125,7 @@ const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   margin: PropTypes.string,
   elementRef: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   variant: PropTypes.oneOf([
     'titlePageDesktop',
     'titlePageMobile',
