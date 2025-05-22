@@ -25,7 +25,11 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  getElementType,
+  passthroughProps,
+  callRenderProp
+} from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
@@ -105,6 +109,19 @@ class Heading extends Component<HeadingProps> {
     this.checkProps()
   }
 
+  renderContent() {
+    const { children, renderIcon } = this.props
+
+    if (renderIcon) {
+      return (
+        <>
+          {callRenderProp(renderIcon)}&nbsp;{children}
+        </>
+      )
+    }
+    return children
+  }
+
   render() {
     const {
       border,
@@ -139,7 +156,7 @@ class Heading extends Component<HeadingProps> {
         elementRef={this.handleRef}
         margin={margin}
       >
-        {children}
+        {this.renderContent()}
       </View>
     )
   }
