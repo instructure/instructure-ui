@@ -76,7 +76,8 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     super(props)
     this.state = {
       hasFocus: false,
-      afterElementHasWidth: undefined
+      afterElementHasWidth: undefined,
+      isAriaDisabled: this.props.isAriaDisabled
     }
     this._defaultId = props.deterministicId!()
     this._messagesId = props.deterministicId!('TextInput-messages')
@@ -103,7 +104,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
 
   componentDidMount() {
-    if (this._input) {
+    if (this._input && !this.props.isAriaDisabled) {
       this._focusListener = addEventListener(
         this._input,
         'focus',
@@ -137,8 +138,21 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         hasFocus: false
       })
     }
-
     this.props.makeStyles?.(this.makeStyleProps())
+    //if interaction type is changes, the event listeners need to be reapplied
+    if (
+      prevProps.interaction !== this.props.interaction &&
+      this.props.interaction !== 'disabled'
+    ) {
+      if (this._input) {
+        this._focusListener = addEventListener(
+          this._input,
+          'focus',
+          this.handleFocus
+        )
+      }
+      this.setState({ isAriaDisabled: false })
+    }
   }
 
   makeStyleProps = (): TextInputStyleProps => {
@@ -233,6 +247,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       defaultValue,
       isRequired,
       onFocus,
+      isAriaDisabled,
       ...rest
     } = this.props
 
@@ -257,12 +272,14 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         id={this.id}
         required={isRequired}
         aria-invalid={this.invalid ? 'true' : undefined}
-        disabled={interaction === 'disabled'}
+        //Chrome with Voiceover does not read disabled combobox input as 'dimmed' so 'aria-disable' need to be applied instead
+        disabled={isAriaDisabled ? false : interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
         aria-describedby={descriptionIds !== '' ? descriptionIds : undefined}
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
+        aria-disabled={this.state.isAriaDisabled}
       />
     )
   }
