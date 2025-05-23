@@ -82,7 +82,8 @@ class Menu extends Component<MenuProps> {
     shouldFocusTriggerOnClose: true,
     withArrow: true,
     offsetX: 0,
-    offsetY: 0
+    offsetY: 0,
+    focusFirsItemOnOpen: false
   }
 
   static Item = MenuItem
@@ -455,7 +456,8 @@ class Menu extends Component<MenuProps> {
       onMouseOver,
       positionContainerDisplay,
       offsetX,
-      offsetY
+      offsetY,
+      focusFirsItemOnOpen
     } = this.props
 
     return trigger ? (
@@ -500,6 +502,17 @@ class Menu extends Component<MenuProps> {
           onKeyDown: this.handleTriggerKeyDown,
           disabled: (trigger as ReactElement).props.disabled || disabled
         })}
+        defaultFocusElement={
+          focusFirsItemOnOpen
+            ? () => {
+                // TODO: this could be better. Maybe a more precise selector
+                // @ts-expect-error it works
+                return this._popover?._contentElement?.querySelector(
+                  '[class$="menuItem"]'
+                )
+              }
+            : undefined
+        }
       >
         {this.renderMenu()}
       </Popover>

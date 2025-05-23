@@ -175,6 +175,10 @@ type MenuOwnProps = {
    * Content to render in the label's info region. It is only visible on nested Menus.
    */
   renderLabelInfo?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * If true, when menu opens, the focus will jump to the first menuItem
+   */
+  focusFirsItemOnOpen?: boolean
 }
 
 type PropKeys = keyof MenuOwnProps
@@ -223,7 +227,8 @@ const propTypes: PropValidators<PropKeys> = {
   offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.string,
-  renderLabelInfo: PropTypes.node
+  renderLabelInfo: PropTypes.node,
+  focusFirsItemOnOpen: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
