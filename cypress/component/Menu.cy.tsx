@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from 'chai'
 import 'cypress-real-events'
-
 import '../support/component'
 import { Menu, MenuItem } from '@instructure/ui'
 
@@ -51,7 +49,7 @@ describe('<Menu/>', () => {
     cy.contains('[role="menuitem"]', 'Item1').should('have.focus')
   })
 
-  it('should focus the menu first', () => {
+  it('should focus the first menu item when the menu opens', () => {
     cy.mount(
       <Menu trigger={<button>More</button>} defaultShow>
         <MenuItem>Learning Mastery</MenuItem>
@@ -60,11 +58,18 @@ describe('<Menu/>', () => {
     )
 
     cy.get('[role="menu"]')
-      .should('be.focused')
+      .should('not.be.focused')
       .and('have.attr', 'tabIndex', '0')
+    
+    cy.get('[role="menuitem"]').eq(0)
+      .should('be.focused')
+      .and('have.attr', 'tabIndex', '-1')
+
     cy.focused().realPress('ArrowDown')
-    cy.get('[role="menuitem"]:first').should('be.focused')
-    cy.get('[role="menu"]').should('have.attr', 'tabIndex', '0')
+
+    cy.get('[role="menuitem"]').eq(1)
+      .should('be.focused')
+
   })
 
   it('should apply offset values to Popover', () => {
@@ -241,8 +246,10 @@ describe('<Menu/>', () => {
     cy.contains('Flyout').click()
     cy.get('body').should('not.contain', 'Flyout Menu Item')
     cy.contains('Flyout').click()
-    cy.contains('Flyout Menu Item').should('be.visible')
-    cy.get('[role="menu"]').should('be.focused')
+    cy.contains('Flyout Menu Item')
+      .should('be.visible')
+    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+      .should('be.focused')
   })
 
   it(`should show and focus flyout menu on right arrow keyDown`, () => {
@@ -259,7 +266,8 @@ describe('<Menu/>', () => {
     cy.contains('Flyout').focus()
     cy.focused().realPress('ArrowRight').wait(100)
     cy.contains('Flyout Menu Item').should('exist')
-    cy.get('[role="menu"]').should('be.focused')
+    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+      .should('be.focused')
   })
 
   it(`should show and focus flyout menu on space keyDown`, () => {
@@ -274,9 +282,10 @@ describe('<Menu/>', () => {
     )
 
     cy.contains('Flyout').focus()
-    cy.focused().type('Space').wait(100)
+    cy.focused().realPress('Space').wait(100)
     cy.contains('Flyout Menu Item').should('exist')
-    cy.get('[role="menu"]').should('be.focused')
+    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+      .should('be.focused')
   })
 
   it(`should show and focus flyout menu on enter keyDown`, () => {
@@ -293,7 +302,8 @@ describe('<Menu/>', () => {
     cy.contains('Flyout').focus()
     cy.focused().realPress('Enter').wait(100)
     cy.contains('Flyout Menu Item').should('exist')
-    cy.get('[role="menu"]').should('be.focused')
+    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+      .should('be.focused')
   })
 
   it(`should focus flyout menu on mouseOver`, () => {
@@ -309,6 +319,7 @@ describe('<Menu/>', () => {
 
     cy.contains('Flyout').focus()
     cy.focused().realHover().wait(100)
-    cy.get('[role="menu"]').should('be.focused')
+    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+      .should('be.focused')
   })
 })

@@ -144,7 +144,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
   private _trigger: React.ReactInstance | null = null
   private _view: View | ContextView | null = null
   private _dialog: Dialog | null = null
-  private _contentElement: Element | null = null
+  _contentElement: Element | null = null
   private _focusRegion?: FocusRegion
   // renderTrigger needs to be a variable because if it's a function it will
   // recreate the trigger on each render which will trigger MouseOver events

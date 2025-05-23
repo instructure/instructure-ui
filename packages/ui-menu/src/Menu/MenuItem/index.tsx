@@ -170,7 +170,9 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   }
 
   handleMouseOver = (event: React.MouseEvent) => {
-    this.focus()
+    if (!this.focused) {
+      this.focus()
+    }
 
     if (typeof this.props.onMouseOver === 'function') {
       this.props.onMouseOver(event, this)

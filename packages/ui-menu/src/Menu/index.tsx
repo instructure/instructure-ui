@@ -500,6 +500,9 @@ class Menu extends Component<MenuProps> {
           onKeyDown: this.handleTriggerKeyDown,
           disabled: (trigger as ReactElement).props.disabled || disabled
         })}
+        defaultFocusElement={() =>
+          this._popover?._contentElement?.querySelector('[class$="menuItem"]')
+        }
       >
         {this.renderMenu()}
       </Popover>
