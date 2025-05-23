@@ -65,6 +65,9 @@ type Shadows = {
   resting: string
   above: string
   topmost: string
+
+  card: string
+  cardHover: string
 }
 
 type Spacing = {
