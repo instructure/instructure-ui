@@ -22,6 +22,25 @@ type: example
 </View>
 ```
 
+### Controlled navigation
+
+Sometimes a simple `Link (<a>)` with an `href` is not enough for navigation and an `onClick` handler is needed. In this case, the recommended approach is the following
+
+```js
+---
+type: example
+---
+<Link
+  variant="standalone"
+  onClick = {(e)=>{
+    e.preventDefault()
+    console.log("do navigation")
+  }}
+  forceButtonRole={false}
+  href="#">Go to places
+</Link>
+```
+
 ### Variant
 
 In order to make it easy to get the most commonly used links, we have the variant prop. It will set all the necessary styles (fontSize, lineHeight, and textDecoration).
