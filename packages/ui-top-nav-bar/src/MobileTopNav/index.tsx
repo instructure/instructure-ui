@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import {
   Children,
   Fragment,
@@ -30,7 +29,7 @@ import {
   useEffect,
   useState
 } from 'react'
-import { jsx, useStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import type { MobileTopNavProps } from './props'
 
 import { IconButton } from '@instructure/ui-buttons'

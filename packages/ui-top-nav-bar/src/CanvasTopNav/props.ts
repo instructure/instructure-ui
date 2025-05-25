@@ -36,7 +36,7 @@ type CanvasTopNavOwnProps = {
   hamburgerOnClick?: () => void
   hamburgerLabel?: string
   showDesktopView?: boolean
-  menuItems?: any[]
+  ltiMenuItems?: any[]
   open?: boolean
   onOpenChange?: (open: boolean) => void
   ltiIcon?: ReactNode

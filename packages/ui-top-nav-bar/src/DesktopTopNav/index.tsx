@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Children, PropsWithChildren } from 'react'
-import { jsx, useStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import type { DesktopTopNavProps } from './props'
 
 import { generateStyle } from './styles'

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { jsx, useStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 
 import { generateStyle } from './styles'
 import { Link } from '@instructure/ui-link'

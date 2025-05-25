@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { useEffect, useState } from 'react'
 import { DesktopTopNav } from '../DesktopTopNav'
 import { MobileTopNav } from '../MobileTopNav'
-import { InstUISettingsProvider, jsx, useStyle } from '@instructure/emotion'
+import { InstUISettingsProvider, useStyle } from '@instructure/emotion'
 import { IconHamburgerLine } from '@instructure/ui-icons'
 import { Button, IconButton } from '@instructure/ui-buttons'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
@@ -60,7 +59,7 @@ const CanvasTopNav = ({
   hamburgerOnClick,
   hamburgerLabel,
   showDesktopView,
-  menuItems,
+  ltiMenuItems,
   open,
   onOpenChange,
   ltiIcon,
@@ -93,7 +92,7 @@ const CanvasTopNav = ({
       return (
         <Drilldown.Page
           key={item.id}
-          id={item.id} //TODO renderbackbuttonlabel
+          id={item.id}
           renderBackButtonLabel={item?.backButtonLabel}
           renderBeforeChildren={item.renderBeforeMobileMenuItems}
           renderAfterChildren={item.renderAfterMobileMenuItems}
@@ -214,7 +213,7 @@ const CanvasTopNav = ({
                     renderHiddenItemsMenuTriggerLabel={() => ''}
                     currentPageId={currentPageId}
                   >
-                    {menuItems?.map((item: any) => (
+                    {ltiMenuItems?.map((item: any) => (
                       <TopNavBarItem key={item.id} id={item.id}>
                         {item.title}
                       </TopNavBarItem>
