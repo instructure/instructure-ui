@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { withStyle } from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 import { CanvasTopNav, SubNav } from '@instructure/ui-top-nav-bar'
 import {
   IconAddLine,
@@ -54,7 +54,9 @@ type AppProps = {
 }
 
 type AppState = {
-  menuStack: string[]
+  windowWidth: number
+  open: boolean
+  openMobile: boolean
 }
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -239,14 +241,7 @@ class App extends Component<AppProps, AppState> {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <InstUISettingsProvider
-          style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: '100%',
-            boxSizing: 'border-box'
-          }}
-        >
+        <InstUISettingsProvider>
           <div style={{ height: '100vh', zIndex: 100 }}>
             {!isMobile && (
               <SideNavBar
@@ -329,7 +324,10 @@ class App extends Component<AppProps, AppState> {
               breadcrumb={{
                 label: 'You are here:',
                 links: [
-                  { href: '#', label: 'Crumb 1' },
+                  {
+                    href: '#',
+                    label: 'Crumb 1Crumb 1Crumb 1Crumb 1Crumb 1Crumb 1'
+                  },
                   { href: '#', label: 'Crumb 2' },
                   { label: 'Home' }
                 ]
@@ -355,10 +353,22 @@ class App extends Component<AppProps, AppState> {
                 this.setState({ openMobile: open })
               }}
               ltiIcon={<IconArcLine />}
-              menuItems={[
+              ltiMenuItems={[
                 { id: 'library', title: 'My Library' },
                 { id: 'share', title: 'Share with me' },
                 { id: 'settings', title: 'Settings' }
+                // { id: 'SubMenu', title: 'SubMenu', options: [ {
+                //     id: 'account',
+                //     label: 'Account',
+                //     renderBeforeTitle: <IconUserLine />,
+                //     subPageId: 'account'
+                //   },
+                //     {
+                //       id: 'courses',
+                //       label: 'Courses',
+                //       renderBeforeTitle: <IconCoursesLine />,
+                //       subPageId: 'courses'
+                //     },] }
               ]}
               currentPageId="library" // ltiCurrentPageID
             />

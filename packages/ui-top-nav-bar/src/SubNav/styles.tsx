@@ -22,11 +22,7 @@
  * SOFTWARE.
  */
 
-import { ComponentStyle } from '@instructure/emotion'
-
-type SubNavStyle = ComponentStyle<
-  'container' | 'linkContainer' | 'linkContainerSelected' | 'linkOverride'
->
+import { SubNavStyle } from './props'
 
 const generateStyle = (theme: any, _params: any): SubNavStyle => {
   const linkContainerBase = {

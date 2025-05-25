@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { ComponentStyle } from '@instructure/emotion'
+
 type MenuItem = {
   href: string
   title: string
@@ -33,20 +35,10 @@ type SubNavOwnProps = {
   menuItems: MenuItem[]
 }
 
-type SubNavStyle = {
-  container: {
-    [key: string]: string | number
-  }
-  linkContainer: (item: MenuItem) => {
-    [key: string]: string | number
-  }
-  link: (item: MenuItem) => {
-    [key: string]: string | number
-  }
-}
+type SubNavStyle = ComponentStyle<
+  'container' | 'linkContainer' | 'linkContainerSelected' | 'linkOverride'
+>
 
-type SubNavProps = SubNavOwnProps & {
-  styles: SubNavStyle
-}
+type SubNavProps = SubNavOwnProps
 
-export type { SubNavProps, SubNavOwnProps, MenuItem }
+export type { SubNavProps, SubNavOwnProps, MenuItem, SubNavStyle }

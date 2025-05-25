@@ -51,7 +51,6 @@ const generateStyle = (
       label: 'drilldown',
       overflow: 'visible', // needed for focus ring!
       borderColor: componentTheme.borderColor,
-      background: '#334451',
       ...(hasHighlightedOption && {
         '&:focus::before': {
           display: 'none'
