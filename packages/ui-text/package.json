@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-text",
-  "version": "10.17.0",
+  "version": "10.18.0",
   "description": "A component for styling textual content",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,18 +24,18 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.26.0",
-    "@instructure/console": "10.17.0",
-    "@instructure/emotion": "10.17.0",
-    "@instructure/shared-types": "10.17.0",
-    "@instructure/ui-color-utils": "10.17.0",
-    "@instructure/ui-react-utils": "10.17.0",
+    "@instructure/console": "10.18.0",
+    "@instructure/emotion": "10.18.0",
+    "@instructure/shared-types": "10.18.0",
+    "@instructure/ui-color-utils": "10.18.0",
+    "@instructure/ui-react-utils": "10.18.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "10.17.0",
-    "@instructure/ui-babel-preset": "10.17.0",
-    "@instructure/ui-test-utils": "10.17.0",
-    "@instructure/ui-themes": "10.17.0",
+    "@instructure/ui-axe-check": "10.18.0",
+    "@instructure/ui-babel-preset": "10.18.0",
+    "@instructure/ui-test-utils": "10.18.0",
+    "@instructure/ui-themes": "10.18.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1"
   },
