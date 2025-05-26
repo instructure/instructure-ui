@@ -708,17 +708,19 @@ var _debounce__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(31175)
 const __WEBPACK_DEFAULT_EXPORT__=_debounce__WEBPACK_IMPORTED_MODULE_0__.s},15977:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{v:()=>InstUISettingsProvider})
 var react=__webpack_require__(14041),prop_types=__webpack_require__(39067),prop_types_default=__webpack_require__.n(prop_types),emotion_element_f0de968e_browser_esm=__webpack_require__(53901),TextDirectionContext=__webpack_require__(70117),DeterministicIdContextProvider=__webpack_require__(77867),es=__webpack_require__(40703),theme_registry_es=__webpack_require__(64971),isBaseTheme=__webpack_require__(31183),mergeDeep=__webpack_require__(33259)
-const getTheme=themeOrOverride=>(ancestorTheme={})=>{var _themeOrOverride
-try{if((0,isBaseTheme.$)(themeOrOverride))return themeOrOverride}catch{0,themeOrOverride={}}let currentTheme
+const getTheme=themeOrOverride=>(ancestorTheme={})=>{var _resolvedThemeOrOverr
+let currentTheme
 if(0===Object.keys(ancestorTheme).length){0,currentTheme=theme_registry_es.DT.getCurrentTheme()||es.default}else currentTheme=ancestorTheme
-const themeName=currentTheme.key,specificOverrides=null===(_themeOrOverride=themeOrOverride)||void 0===_themeOrOverride?void 0:_themeOrOverride.themeOverrides,currentThemeOverrides=(null==specificOverrides?void 0:specificOverrides[themeName])||specificOverrides||{}
-return(0,mergeDeep.D)(currentTheme,themeOrOverride,currentThemeOverrides)}
+let resolvedThemeOrOverride=themeOrOverride
+"function"==typeof resolvedThemeOrOverride&&(resolvedThemeOrOverride=resolvedThemeOrOverride(currentTheme))
+try{if((0,isBaseTheme.$)(resolvedThemeOrOverride))return resolvedThemeOrOverride}catch{0,resolvedThemeOrOverride={}}const themeName=currentTheme.key,specificOverrides=null===(_resolvedThemeOrOverr=resolvedThemeOrOverride)||void 0===_resolvedThemeOrOverr?void 0:_resolvedThemeOrOverr.themeOverrides,currentThemeOverrides=(null==specificOverrides?void 0:specificOverrides[themeName])||specificOverrides||{}
+return(0,mergeDeep.D)(currentTheme,resolvedThemeOrOverride,currentThemeOverrides)}
 var emotion_react_jsx_runtime_browser_esm=__webpack_require__(54380)
 function InstUISettingsProvider({children,theme={},dir,instanceCounterMap,as}){const finalDir=dir||(0,react.useContext)(TextDirectionContext.SZ)
 let providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)(DeterministicIdContextProvider.Y,{instanceCounterMap,children:(0,emotion_react_jsx_runtime_browser_esm.jsx)(emotion_element_f0de968e_browser_esm.a,{theme:getTheme(theme),children:(0,emotion_react_jsx_runtime_browser_esm.jsx)(TextDirectionContext.SZ.Provider,{value:finalDir,children})})})
 if(dir){const Element=as||"span"
 providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)(Element,{dir:finalDir,children:providers})}else 0
-return providers}InstUISettingsProvider.propTypes={children:prop_types_default().node,theme:prop_types_default().object,dir:prop_types_default().oneOf(["ltr","rtl"]),instanceCounterMap:prop_types_default().instanceOf(Map),as:prop_types_default().string}},36132:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
+return providers}InstUISettingsProvider.propTypes={children:prop_types_default().node,theme:prop_types_default().oneOf([prop_types_default().object,prop_types_default().func]),dir:prop_types_default().oneOf(["ltr","rtl"]),instanceCounterMap:prop_types_default().instanceOf(Map),as:prop_types_default().string}},36132:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{z:()=>getComponentThemeOverride})
 const getComponentThemeOverride=(theme,displayName,componentId,props,componentTheme)=>{const name=displayName,id=componentId,themeOverride=props.themeOverride,componentOverrides=theme.componentOverrides
 let overridesFromTheme={},overrideFromComponent={}
