@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
+
+
+### Bug Fixes
+
+* **ui-alerts:** sotp passing onDismiss to div in Alert ([1ac0a2d](https://github.com/instructure/instructure-ui/commit/1ac0a2d2500e62e3d9892e71f0191c1119e1b529))
+* **ui-heading:** add renderIcon prop to fix layout issues ([e69f4ae](https://github.com/instructure/instructure-ui/commit/e69f4ae29fa7138ab49aab2a5493b7cd8f7db49a))
+
+
+### Features
+
+* **emotion:** [InstUISettingsProvider] should be able to access the current theme ([d13b6c1](https://github.com/instructure/instructure-ui/commit/d13b6c1449d5ae7c2fa6d917c1a5db8d676df5b2))
+* **ui-menu:** add prop to focus first element on open ([79c7349](https://github.com/instructure/instructure-ui/commit/79c734991509d84ce678118c0984ddbbac2207f8))
+* **ui-themes,shared-types:** add new shadow tokens ([8e28f83](https://github.com/instructure/instructure-ui/commit/8e28f83d4516f0efc61d455b8d2b8ee5cf0a50fe))
+
+
+
+
+
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 

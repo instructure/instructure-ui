@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
+
+
+### Features
+
+* **ui-themes,shared-types:** add new shadow tokens ([8e28f83](https://github.com/instructure/instructure-ui/commit/8e28f83d4516f0efc61d455b8d2b8ee5cf0a50fe))
+
+
+
+
+
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 

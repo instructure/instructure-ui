@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-karma-config",
   "private": true,
-  "version": "10.17.0",
+  "version": "10.18.0",
   "description": "A shared karma config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/ui-webpack-config": "10.17.0",
+    "@instructure/ui-webpack-config": "10.18.0",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
     "buffer": "^6.0.3",
     "choma": "^1.2.1",
