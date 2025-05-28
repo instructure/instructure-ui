@@ -356,19 +356,37 @@ class App extends Component<AppProps, AppState> {
               ltiMenuItems={[
                 { id: 'library', title: 'My Library' },
                 { id: 'share', title: 'Share with me' },
-                { id: 'settings', title: 'Settings' }
-                // { id: 'SubMenu', title: 'SubMenu', options: [ {
-                //     id: 'account',
-                //     label: 'Account',
-                //     renderBeforeTitle: <IconUserLine />,
-                //     subPageId: 'account'
-                //   },
-                //     {
-                //       id: 'courses',
-                //       label: 'Courses',
-                //       renderBeforeTitle: <IconCoursesLine />,
-                //       subPageId: 'courses'
-                //     },] }
+                { id: 'settings', title: 'Settings' },
+                {
+                  id: 'submenu',
+                  title: 'SubMenu',
+                  options: [
+                    {
+                      id: 'account',
+                      label: 'Account',
+                      renderBeforeTitle: <IconUserLine />,
+                      subPageId: 'accountPage',
+                      subOptions: [
+                        {
+                          id: 'profile',
+                          label: 'Profile Settings',
+                          href: '/profile'
+                        },
+                        {
+                          id: 'privacy',
+                          label: 'Privacy',
+                          href: '/privacy'
+                        }
+                      ]
+                    },
+                    {
+                      id: 'courses',
+                      label: 'Courses',
+                      renderBeforeTitle: <IconCoursesLine />,
+                      href: '/courses'
+                    }
+                  ]
+                }
               ]}
               currentPageId="library" // ltiCurrentPageID
             />

@@ -213,51 +213,65 @@ const CanvasTopNav = ({
                     renderHiddenItemsMenuTriggerLabel={() => ''}
                     currentPageId={currentPageId}
                   >
-                    {ltiMenuItems?.map((item: any) => (
-                      <TopNavBarItem key={item.id} id={item.id}>
-                        {item.title}
-                      </TopNavBarItem>
-                    ))}
-                    <TopNavBarItem
-                      id="submenu"
-                      renderSubmenu={
-                        <Drilldown rootPageId="root">
-                          <Drilldown.Page id="root">
-                            <Drilldown.Option
-                              id="rootOption1"
-                              subPageId="secondPage"
-                            >
-                              Link One
-                            </Drilldown.Option>
-                            <Drilldown.Option
-                              id="rootOption2"
-                              href="/#TopNavBar"
-                            >
-                              Link Two
-                            </Drilldown.Option>
-                            <Drilldown.Option
-                              id="rootOption3"
-                              href="/#TopNavBar"
-                            >
-                              Link Three
-                            </Drilldown.Option>
-                          </Drilldown.Page>
-                          <Drilldown.Page id="secondPage">
-                            <Drilldown.Option id="secondPageOption1">
-                              Level 2 Option One
-                            </Drilldown.Option>
-                            <Drilldown.Option
-                              id="secondPageOption2"
-                              href="/#TopNavBar"
-                            >
-                              Level 2 Option Two
-                            </Drilldown.Option>
-                          </Drilldown.Page>
-                        </Drilldown>
+                    {ltiMenuItems?.map((item: any) => {
+                      // Check if this item has a submenu
+                      if (item.options?.length) {
+                        return (
+                          <TopNavBarItem
+                            key={item.id}
+                            id={item.id}
+                            renderSubmenu={
+                              <Drilldown rootPageId={item.id}>
+                                {/* Root Page */}
+                                <Drilldown.Page id={item.id}>
+                                  {item.options.map((option: any) => (
+                                    <Drilldown.Option
+                                      key={option.id}
+                                      id={option.id}
+                                      subPageId={option.subPageId}
+                                      href={option.href}
+                                    >
+                                      {option.renderBeforeTitle}
+                                      {option.label}
+                                    </Drilldown.Option>
+                                  ))}
+                                </Drilldown.Page>
+
+                                {/* Optional nested pages if subPageId is used */}
+                                {item.options
+                                  .filter((opt: any) => opt.subOptions?.length)
+                                  .map((opt: any) => (
+                                    <Drilldown.Page
+                                      key={opt.subPageId}
+                                      id={opt.subPageId}
+                                    >
+                                      {opt.subOptions.map((subOpt: any) => (
+                                        <Drilldown.Option
+                                          key={subOpt.id}
+                                          id={subOpt.id}
+                                          href={subOpt.href}
+                                        >
+                                          {subOpt.renderBeforeTitle}
+                                          {subOpt.label}
+                                        </Drilldown.Option>
+                                      ))}
+                                    </Drilldown.Page>
+                                  ))}
+                              </Drilldown>
+                            }
+                          >
+                            {item.title}
+                          </TopNavBarItem>
+                        )
                       }
-                    >
-                      Submenu
-                    </TopNavBarItem>
+
+                      // Top-level item with no submenu
+                      return (
+                        <TopNavBarItem key={item.id} id={item.id}>
+                          {item.title}
+                        </TopNavBarItem>
+                      )
+                    })}
                   </TopNavBarMenuItems>
                 </TopNavBarContext.Provider>
               </InstUISettingsProvider>
