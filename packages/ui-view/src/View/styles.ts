@@ -194,7 +194,7 @@ const getFocusRingRadius = (
   const baseRadiusStyle = 'focusRing--radius'
   const initialValue = (borderRadius || '').trim().split(' ')[0]
   if (props.focusRingBorderRadius) {
-    return `${baseRadiusStyle}Custom`
+    return `${baseRadiusStyle}Custom` as FocusRingRadius
   }
   if (verifyUniformValues(initialValue, borderRadius)) {
     const capitalize = (str: string) =>
@@ -284,40 +284,35 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
       }
     }
   }
-  return {
+  const visibleFocusStyle = {
+    ...focusPositionVariants[focusPos],
+    outlineColor: focusColorVariants[focusColor!]
+  }
+  const outlineStyle = {
     outlineOffset: '-0.8rem', // value when not in focus, its invisible
     outlineColor: alpha(focusColorVariants[focusColor!], 0),
     outlineStyle: componentTheme.focusOutlineStyle,
     outlineWidth: componentTheme.focusOutlineWidth,
+    ...(withFocusOutline && visibleFocusStyle)
+  }
+  return {
     borderRadius: focusRingVariants[focusRingRadius], // inherit or none
     ...borderRadiusByOffset[focusPos][focusRingRadius], // border radius value
-    ...(shouldAnimateFocus
-      ? {
-          transition: 'outline-color 0.2s, outline-offset 0.25s'
-        }
-      : {}),
-    ...(withFocusOutline
-      ? {
-          ...focusPositionVariants[focusPos],
-          outlineColor: focusColorVariants[focusColor!]
-        }
-      : {}),
-    '&:focus': {
-      ...(typeof withFocusOutline === 'undefined'
-        ? {
-            ...focusPositionVariants[focusPos],
-            outlineColor: focusColorVariants[focusColor!]
-          }
-        : {})
+    ...(shouldAnimateFocus && {
+      transition: 'outline-color 0.2s, outline-offset 0.25s'
+    }),
+    ...outlineStyle,
+    '&:hover, &:active': {
+      // apply the same style so it's not overridden by some global style
+      ...outlineStyle
     },
-    '&:focus-within': {
-      ...(focusWithin
-        ? {
-            ...focusPositionVariants[focusPos],
-            outlineColor: focusColorVariants[focusColor!]
-          }
-        : {})
-    }
+    ...(typeof withFocusOutline === 'undefined' && {
+      // user focuses the element
+      '&:focus': visibleFocusStyle
+    }),
+    ...(focusWithin && {
+      '&:focus-within': visibleFocusStyle
+    })
   }
 }
 
@@ -538,7 +533,6 @@ const generateStyle = (
       overscrollBehavior: overscrollBehavior ? overscrollBehavior : 'auto',
       ...(withVisualDebug
         ? {
-            //outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
             boxShadow: `0 0 0 1px ${componentTheme.debugOutlineColor}`
           }
         : {}),
