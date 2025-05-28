@@ -104,6 +104,7 @@ class TopNavBarSmallViewportLayout extends Component<
   private readonly _inPlaceDialogId: string
   private readonly _inPlaceDialogCloseButtonId: string
   private readonly _separatorId: string
+  private _drilldownRef: Drilldown | null = null
 
   private _raf: RequestAnimationFrameType[] = []
 
@@ -286,7 +287,44 @@ class TopNavBarSmallViewportLayout extends Component<
       onDropdownMenuToggle(!isDropdownMenuOpen)
     }
 
-    this.setState({ isDropdownMenuOpen: !isDropdownMenuOpen })
+    this.setState(
+      { isDropdownMenuOpen: !this.state.isDropdownMenuOpen },
+      () => {
+        if (this.state.isDropdownMenuOpen) {
+          this.focusFirstAvailableItem()
+        }
+      }
+    )
+  }
+
+  focusFirstAvailableItem() {
+    const userChildren = Children.toArray(
+      this.props.renderUser?.props.children
+    ) as ItemChild[]
+
+    // If option is a User, it preceeds other item, so focus that first
+    const targetId = userChildren[0]
+      ? userChildren[0].props.id
+      : this.mappedMenuItemsOptions[0].optionData.id
+
+    setTimeout(() => {
+      const container = document.getElementById(this._trayContainerId)
+      const firstOption = container?.querySelector(
+        `[id="${targetId}"]`
+      ) as HTMLSpanElement
+      firstOption?.focus()
+      if (this._drilldownRef) {
+        const drilldownRef = this._drilldownRef
+        setTimeout(() => {
+          if (drilldownRef) {
+            // highlight the option using Drilldown's handleOptionHighlight function
+            drilldownRef.handleOptionHighlight({} as React.SyntheticEvent, {
+              id: targetId
+            })
+          }
+        }, 10)
+      }
+    }, 10)
   }
 
   renderOptionContent: RenderOptionContent = (children, itemProps) => {
@@ -402,6 +440,9 @@ class TopNavBarSmallViewportLayout extends Component<
     return (
       <div css={styles?.menuTriggerContainer}>
         {menuTrigger}
+        {!this.hasBreadcrumbBlock && !this.props.trayMountNode && (
+          <div css={styles?.trayContainer} id={this._trayContainerId} />
+        )}
 
         {this.hasBrandBlock(renderBrand) && !alternativeTitle && (
           <div css={styles?.brandContainer}>{renderBrand}</div>
@@ -442,6 +483,9 @@ class TopNavBarSmallViewportLayout extends Component<
 
     return (
       <Drilldown
+        ref={(el) => {
+          this._drilldownRef = el
+        }}
         id={this._drilldownId}
         rootPageId={this._menuId}
         label={dropdownMenuLabel}
@@ -576,13 +620,7 @@ class TopNavBarSmallViewportLayout extends Component<
   }
 
   render() {
-    const {
-      trayMountNode,
-      navLabel,
-      renderActionItems,
-      renderBreadcrumb,
-      styles
-    } = this.props
+    const { navLabel, renderActionItems, renderBreadcrumb, styles } = this.props
 
     return (
       <nav
@@ -606,10 +644,6 @@ class TopNavBarSmallViewportLayout extends Component<
         )}
 
         {!this.hasBreadcrumbBlock && this.renderInPlaceDialog()}
-
-        {!this.hasBreadcrumbBlock && !trayMountNode && (
-          <div css={styles?.trayContainer} id={this._trayContainerId} />
-        )}
 
         {!this.hasBreadcrumbBlock && this.renderDropdownMenuTray()}
       </nav>
