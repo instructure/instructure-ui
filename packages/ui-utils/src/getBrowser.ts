@@ -55,7 +55,7 @@ const isIE = () => {
 const isChromium = () => {
   const chromiumBasedBrowsers = ['Chrome', 'Chromium', 'Opera', 'Edge']
   return chromiumBasedBrowsers.some((browser) => {
-    getBrowser().name?.includes(browser)
+    return getBrowser().name?.includes(browser)
   })
 }
 
