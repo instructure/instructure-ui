@@ -207,7 +207,7 @@ type DrilldownOwnProps = {
 
   /**
    * If a trigger is supplied, an element or a function returning an element
-   * to use as the mount node for the `<Drilldown />` (defaults to `document.body`)
+   * to use as the mount node for the `<Drilldown />` (defaults to the component itself)
    */
   mountNode?: PositionMountNode
 

@@ -887,8 +887,20 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   }
 
   handleToggle = (event: React.UIEvent | React.FocusEvent, shown: boolean) => {
-    const { onToggle } = this.props
+    const { onToggle, trigger } = this.props
 
+    if (trigger && shown && this.currentPage) {
+      const actionLabel = callRenderProp(this.currentPage.renderActionLabel)
+      // Use action ID if exists, otherwise first non-action option's ID
+      const targetId = actionLabel
+        ? this._headerActionId
+        : this.currentPage.children[0]?.props.id
+      setTimeout(() => {
+        this.setState({
+          highlightedOptionId: targetId
+        })
+      }, 10)
+    }
     this.setState({ isShowingPopover: shown })
 
     if (typeof onToggle === 'function') {
@@ -1481,7 +1493,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           this.handleToggle(event, false)
         }}
         onShowContent={(event) => this.handleToggle(event, true)}
-        mountNode={mountNode}
+        mountNode={mountNode || this.ref}
         placement={placement}
         withArrow={withArrow}
         positionTarget={positionTarget}
@@ -1495,6 +1507,17 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         onMouseOver={onMouseOver}
         offsetX={offsetX}
         offsetY={offsetY}
+        defaultFocusElement={() => {
+          if (!this.currentPage) return null
+          const actionLabel = callRenderProp(this.currentPage.renderActionLabel)
+          // Use action ID if exists, otherwise first non-action option's ID
+          const targetId = actionLabel
+            ? this._headerActionId
+            : this.currentPage.children[0]?.props.id
+
+          if (!targetId) return null
+          return this._popover?._contentElement?.querySelector(`#${targetId}`)
+        }}
         elementRef={(element) => {
           // setting ref for "Popover" version, the popover root
           // (if there is no trigger, we set it in handleDrilldownRef)

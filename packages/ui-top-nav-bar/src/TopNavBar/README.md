@@ -648,12 +648,10 @@ class PlaygroundExample extends React.Component {
 
                       {...item.submenu && {
                         renderSubmenu: this.generateSubmenu(item),
-                        'aria-label': `Open for ${item.label} menu`
                       }}
 
                       {...item.customPopoverConfig && {
                         customPopoverConfig: item.customPopoverConfig,
-                        'aria-label': `Open for ${item.label} menu`
                       }}
 
                       {...!item.submenu && !item.customPopoverConfig ? {
@@ -720,7 +718,7 @@ class PlaygroundExample extends React.Component {
                   <TopNavBar.Item
                     id="Info"
                     renderIcon={<IconQuestionLine />}
-                    aria-label="Open for info menu"
+                    aria-label="info menu"
                     renderSubmenu={this.generateSubmenu({
                       id: 'Info',
                       submenu: ['Contact', 'Map', 'Career'].map(item => ({
