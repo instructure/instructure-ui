@@ -74,7 +74,8 @@ const generateStyle = (
         '&::-webkit-scrollbar-thumb': {
           backgroundColor: 'transparent'
         }
-      })
+      }),
+      scrollbarWidth: 'none'
     }
   }
 
