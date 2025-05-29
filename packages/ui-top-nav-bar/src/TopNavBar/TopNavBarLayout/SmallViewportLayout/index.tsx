@@ -400,7 +400,8 @@ class TopNavBarSmallViewportLayout extends Component<
         tooltip: dropdownMenuToggleButtonTooltip,
         themeOverride: { itemSpacing: '0.375rem' },
         'aria-haspopup': 'menu',
-        'aria-expanded': isDropdownMenuOpen
+        'aria-expanded': isDropdownMenuOpen,
+        withFocusOutline: isDropdownMenuOpen ? true : undefined
       }
 
       const alternativeTitleIconProps = {

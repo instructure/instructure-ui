@@ -254,6 +254,14 @@ type TopNavBarItemOwnProps = {
    * Should close the container menu component, if clicked on the option marked with this prop
    */
   shouldCloseOnClick?: ShouldCloseOnClick
+
+  /**
+   * Manually control if this component should display a focus outline.
+   *
+   * When left `undefined` (which is the default) the focus outline will display
+   * if this component is focusable and receives focus or has an open popover.
+   */
+  withFocusOutline?: boolean
 }
 
 type PropKeys = keyof TopNavBarItemOwnProps
@@ -281,6 +289,7 @@ type TopNavBarItemStyle = ComponentStyle<
 type TopNavBarItemState = {
   isSubmenuOpen: boolean
   isPopoverOpen: boolean
+  isFocused: boolean
 }
 
 type TopNavBarItemStyleProps = {
@@ -316,7 +325,8 @@ const propTypes: PropValidators<PropKeys> = {
   onKeyUp: PropTypes.func,
   elementRef: PropTypes.func,
   itemRef: PropTypes.func,
-  shouldCloseOnClick: PropTypes.oneOf(['auto', 'always', 'never'])
+  shouldCloseOnClick: PropTypes.oneOf(['auto', 'always', 'never']),
+  withFocusOutline: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -343,7 +353,8 @@ const allowedProps: AllowedPropKeys = [
   'onKeyUp',
   'elementRef',
   'itemRef',
-  'shouldCloseOnClick'
+  'shouldCloseOnClick',
+  'withFocusOutline'
 ]
 
 export type {
