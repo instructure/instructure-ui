@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **ui-alerts:** add variantScreenReaderLabel prop to Alert to improve screenreader usability ([814a0ea](https://github.com/instructure/instructure-ui/commit/814a0eaebc0cededff575a8ea0cd05f8ec27b6de))
+
+
+
+
+
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 

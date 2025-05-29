@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **ui-view:** fix focus outline showing when setting a global CSS rule for outline ([00cfba9](https://github.com/instructure/instructure-ui/commit/00cfba9c30df9c58b2543824fa3e9b8967ec0516))
+
+
+
+
+
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-view
