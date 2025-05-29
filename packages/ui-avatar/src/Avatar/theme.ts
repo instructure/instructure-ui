@@ -46,7 +46,7 @@ const generateComponentTheme = (theme: Theme): AvatarTheme => {
 
     // these colors have sufficient contrast with the white background
     // in the normal and high contrast themes
-    color: colors?.contrasts.blue4570,
+    color: colors?.contrasts?.blue4570,
     colorShamrock: colors?.contrasts?.green4570,
     colorBarney: colors?.contrasts?.blue4570,
     colorCrimson: colors?.contrasts?.red4570,
