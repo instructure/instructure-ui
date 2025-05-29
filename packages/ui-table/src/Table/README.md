@@ -486,7 +486,14 @@ By default, the options in the `Select` for sorting in stacked layout are genera
                 sortDirection: id === sortBy ? direction : 'none'
               })}
             >
-              {text}
+              {id === sortBy ? (
+                text
+              ) : (
+                <>
+                  <span aria-hidden="true">{text}</span>
+                  <ScreenReaderContent>sort by {text}</ScreenReaderContent>
+                </>
+              )}
             </Table.ColHeader>
           ))}
         </Table.Row>
@@ -726,7 +733,14 @@ By default, the options in the `Select` for sorting in stacked layout are genera
               sortDirection: id === sortBy ? direction : 'none'
             })}
           >
-            {text}
+            {id === sortBy ? (
+              text
+            ) : (
+              <>
+                <span aria-hidden="true">{text}</span>
+                <ScreenReaderContent>sort by {text}</ScreenReaderContent>
+              </>
+            )}
           </Table.ColHeader>
         ))}
       </Table.Row>
@@ -980,7 +994,16 @@ that selection does not re-paginate or re-sort the table, and pagination does no
                         onRequestSort={onSort}
                         sortDirection={id === sortBy ? direction : 'none'}
                       >
-                        {text}
+                        {id === sortBy ? (
+                          text
+                        ) : (
+                          <>
+                            <span aria-hidden="true">{text}</span>
+                            <ScreenReaderContent>
+                              sort by {text}
+                            </ScreenReaderContent>
+                          </>
+                        )}
                       </Table.ColHeader>
                     ))}
                   </Table.Row>
@@ -1310,7 +1333,16 @@ that selection does not re-paginate or re-sort the table, and pagination does no
                       onRequestSort={onSort}
                       sortDirection={id === sortBy ? direction : 'none'}
                     >
-                      {text}
+                      {id === sortBy ? (
+                        text
+                      ) : (
+                        <>
+                          <span aria-hidden="true">{text}</span>
+                          <ScreenReaderContent>
+                            sort by {text}
+                          </ScreenReaderContent>
+                        </>
+                      )}
                     </Table.ColHeader>
                   ))}
                 </Table.Row>
