@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **many:** fix access of colors from theme ([983e580](https://github.com/instructure/instructure-ui/commit/983e580a6e03d2cd590db76aae28f1d6e71004b8))
+* **ui-alerts:** add variantScreenReaderLabel prop to Alert to improve screenreader usability ([814a0ea](https://github.com/instructure/instructure-ui/commit/814a0eaebc0cededff575a8ea0cd05f8ec27b6de))
+* **ui-tabs:** remove scrollbar from tabs ([7c4e5be](https://github.com/instructure/instructure-ui/commit/7c4e5bedba8c1e9d1972eb702ccacb60c34eb513))
+* **ui-top-nav-bar,ui-popover,ui-drilldown:** fix Drilldown's and TopNavBar's keyboard navigation issues ([6d7d3fa](https://github.com/instructure/instructure-ui/commit/6d7d3faa6c9fe8e7f2b987cb11ec2d9b00732d5b))
+* **ui-view:** fix focus outline showing when setting a global CSS rule for outline ([00cfba9](https://github.com/instructure/instructure-ui/commit/00cfba9c30df9c58b2543824fa3e9b8967ec0516))
+
+
+
+
+
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 
