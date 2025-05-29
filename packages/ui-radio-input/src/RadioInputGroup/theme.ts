@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): RadioInputGroupTheme => {
   const { colors } = theme
 
   const componentVariables: RadioInputGroupTheme = {
-    invalidAsteriskColor: colors.primitives.red57
+    invalidAsteriskColor: colors?.primitives?.red57
   }
 
   return {

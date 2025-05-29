@@ -61,13 +61,13 @@ const generateComponentTheme = (theme: Theme): SideNavBarItemTheme => {
 
     hoverBackgroundColor: colors?.contrasts?.grey125125,
     outerFocusOutline: `inset 0 0 0 0.125rem ${colors?.contrasts?.grey4570}`,
-    innerFocusOutline: `inset 0 0 0 0.25rem ${colors.contrasts?.white1010}`,
+    innerFocusOutline: `inset 0 0 0 0.25rem ${colors?.contrasts?.white1010}`,
 
     selectedFontColor: colors?.contrasts?.blue4570,
     selectedIconColor: colors?.contrasts?.blue4570,
     selectedBackgroundColor: colors?.contrasts?.white1010,
-    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors.contrasts?.white1010}`,
-    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors.contrasts?.blue4570}`,
+    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors?.contrasts?.white1010}`,
+    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors?.contrasts?.blue4570}`,
 
     contentPadding: spacing?.xxSmall
   }

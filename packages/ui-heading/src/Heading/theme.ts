@@ -85,8 +85,8 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
 
-    aiTextTopGradientColor: colors.contrasts.violet4570,
-    aiTextBottomGradientColor: colors.contrasts.sea4570
+    aiTextTopGradientColor: colors?.contrasts?.violet4570,
+    aiTextBottomGradientColor: colors?.contrasts?.sea4570
   }
 
   return {
