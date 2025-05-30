@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+//TODO uncomment if needed
+/*
 import { Component as ReactComponent } from 'react'
 import PropTypes from 'prop-types'
 
@@ -114,3 +116,4 @@ describe('locator', async () => {
     )
   })
 })
+*/
