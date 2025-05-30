@@ -168,8 +168,7 @@ const finalConfig = tseslint.config(
   {
     // Vitest tests
     files: [
-      '**/__new-tests__/**',
-      'packages/ui-codemods/__tests__/*'
+      '**/__tests__/**'
     ],
     plugins: {
       vitest
@@ -182,7 +181,6 @@ const finalConfig = tseslint.config(
   },
   { // Do not check unit tests for a11y
     ignores: [
-      '**/__new-tests__/**',
       '**/__tests__/**'
     ],
     plugins: {
