@@ -18,7 +18,6 @@
     "start": "npm run start --workspace=docs-app",
     "start:watch": "npm run start:watch --workspace=docs-app",
     "dev": "npm run start:watch",
-    "test": "ui-scripts test --randomize",
     "cy:component": "cypress run --component",
     "test:vitest": "vitest --watch=false",
     "test:vitest-watch": "vitest",
