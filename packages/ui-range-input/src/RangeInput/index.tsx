@@ -86,6 +86,13 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
     this.ref = el
   }
 
+  handleInputRef = (el: HTMLInputElement | null) => {
+    this._input = el
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(el)
+    }
+  }
+
   constructor(props: RangeInputProps) {
     super(props)
 
@@ -195,9 +202,7 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
         <div css={this.props.styles?.rangeInput}>
           <input
             css={this.props.styles?.rangeInputInput}
-            ref={(c) => {
-              this._input = c
-            }}
+            ref={this.handleInputRef}
             type="range"
             id={this.id}
             min={this.props.min}

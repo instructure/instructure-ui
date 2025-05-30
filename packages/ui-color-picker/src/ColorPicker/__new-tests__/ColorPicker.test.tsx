@@ -389,6 +389,14 @@ describe('<ColorPicker />', () => {
         expect(errorMessage).toBeInTheDocument()
       })
     })
+
+    it('should provide an inputRef prop', async () => {
+      const inputRef = vi.fn()
+      render(<SimpleExample inputRef={inputRef} />)
+      const input = screen.getByRole('textbox')
+
+      expect(inputRef).toHaveBeenCalledWith(input)
+    })
   })
 
   describe('complex mode', () => {
