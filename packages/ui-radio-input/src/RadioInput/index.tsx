@@ -84,6 +84,13 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
     this.props.makeStyles?.()
   }
 
+  handleInputRef = (el: HTMLInputElement | null) => {
+    this._input = el
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(el)
+    }
+  }
+
   handleClick: React.MouseEventHandler<HTMLInputElement> = (e) => {
     if (this.props.disabled || this.props.readOnly) {
       e.preventDefault()
@@ -144,9 +151,7 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
           <input
             {...props}
             id={this.id}
-            ref={(c: HTMLInputElement | null) => {
-              this._input = c
-            }}
+            ref={this.handleInputRef}
             value={value}
             name={name}
             checked={this.checked}

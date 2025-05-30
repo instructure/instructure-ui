@@ -61,6 +61,21 @@ describe('<RadioInput />', () => {
     expect(input).toHaveAttribute('type', 'radio')
   })
 
+  it('should provide an inputRef prop', async () => {
+    const inputRef = vi.fn()
+    const { container } = render(
+      <RadioInput
+        label="fake label"
+        value="someValue"
+        name="someName"
+        inputRef={inputRef}
+      />
+    )
+    const input = container.querySelector('input')
+
+    expect(inputRef).toHaveBeenCalledWith(input)
+  })
+
   describe('events', () => {
     it('responds to onClick event', async () => {
       const onClick = vi.fn()

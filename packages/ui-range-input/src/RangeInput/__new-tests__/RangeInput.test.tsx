@@ -107,6 +107,23 @@ describe('<RangeInput />', () => {
     expect(input).toHaveValue('25')
   })
 
+  it('should provide an inputRef prop', async () => {
+    const inputRef = vi.fn()
+    const { container } = render(
+      <RangeInput
+        label="Opacity"
+        name="opacity"
+        max={100}
+        min={0}
+        defaultValue={42}
+        inputRef={inputRef}
+      />
+    )
+    const input = container.querySelector('input')
+
+    expect(inputRef).toHaveBeenCalledWith(input)
+  })
+
   describe('thumbVariant prop', () => {
     it('should throw deprecation warning by default', async () => {
       render(

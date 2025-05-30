@@ -72,6 +72,10 @@ type RadioInputOwnProps = {
    * event.target.value will contain the new value. It will always be a string.
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  /**
+   * A function that provides a reference to the actual underlying input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
 type PropKeys = keyof RadioInputOwnProps
@@ -107,7 +111,8 @@ const propTypes: PropValidators<PropKeys> = {
   context: PropTypes.oneOf(['success', 'warning', 'danger', 'off']),
   inline: PropTypes.bool,
   onClick: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  inputRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -123,7 +128,8 @@ const allowedProps: AllowedPropKeys = [
   'context',
   'inline',
   'onClick',
-  'onChange'
+  'onChange',
+  'inputRef'
 ]
 
 export type { RadioInputProps, RadioInputState, RadioInputStyle }
