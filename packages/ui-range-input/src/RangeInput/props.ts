@@ -98,6 +98,11 @@ type RangeInputOwnProps = {
   thumbVariant?:
     | 'deprecated' // TODO: deprecated, remove in V9.
     | 'accessible'
+
+  /**
+   * A function that provides a reference to the actual underlying input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
 type PropKeys = keyof RangeInputOwnProps
@@ -147,7 +152,8 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.oneOf(['deprecated', 'accessible']),
     ['deprecated'],
     'The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant.'
-  )
+  ),
+  inputRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -167,7 +173,8 @@ const allowedProps: AllowedPropKeys = [
   'inline',
   'disabled',
   'readOnly',
-  'thumbVariant'
+  'thumbVariant',
+  'inputRef'
 ]
 
 export type { RangeInputProps, RangeInputState, RangeInputStyle }

@@ -80,6 +80,10 @@ type CheckboxOwnProps = {
   inline?: boolean
   labelPlacement?: 'top' | 'start' | 'end'
   isRequired?: boolean
+  /**
+   * A function that provides a reference to the actual underlying input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
 type PropKeys = keyof CheckboxOwnProps
@@ -121,7 +125,8 @@ const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['simple', 'toggle']),
   inline: PropTypes.bool,
   labelPlacement: PropTypes.oneOf(['top', 'start', 'end']),
-  isRequired: PropTypes.bool
+  isRequired: PropTypes.bool,
+  inputRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -144,7 +149,8 @@ const allowedProps: AllowedPropKeys = [
   'variant',
   'inline',
   'labelPlacement',
-  'isRequired'
+  'isRequired',
+  'inputRef'
 ]
 
 type CheckboxState = {
