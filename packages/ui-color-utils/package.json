@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.19.1",
-    "@instructure/ui-test-utils": "10.19.1",
     "@types/tinycolor2": "^1.4.6"
   },
   "dependencies": {

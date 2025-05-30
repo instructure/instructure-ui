@@ -36,7 +36,6 @@
     "@instructure/ui-axe-check": "10.19.1",
     "@instructure/ui-babel-preset": "10.19.1",
     "@instructure/ui-color-utils": "10.19.1",
-    "@instructure/ui-test-locator": "10.19.1",
     "@instructure/ui-test-utils": "10.19.1",
     "@instructure/ui-themes": "10.19.1",
     "@testing-library/jest-dom": "^6.6.3",

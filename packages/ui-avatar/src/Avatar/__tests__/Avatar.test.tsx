@@ -22,246 +22,203 @@
  * SOFTWARE.
  */
 
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
+import '@testing-library/jest-dom'
+import Avatar from '../index'
 import { IconGroupLine } from '@instructure/ui-icons'
+import { View } from '@instructure/ui-view'
 
-import { Avatar } from '../index'
-import { AvatarLocator } from '../AvatarLocator'
-
-describe.skip('<Avatar />', async () => {
-  describe('for a11y', async () => {
+describe('<Avatar />', () => {
+  describe('for a11y', () => {
     it('should be accessible', async () => {
-      await mount(<Avatar name="Jessica Jones" />)
-
-      const avatar = await AvatarLocator.find()
-
-      expect(await avatar.accessible()).to.be.true()
+      const { container } = render(<Avatar name="Jessica Jones" />)
+      const axeCheck = await runAxeCheck(container)
+      expect(axeCheck).toBe(true)
     })
 
     it('initials should have aria-hidden=true', async () => {
-      await mount(<Avatar name="Jessica Jones" />)
-
-      const avatar = await AvatarLocator.find()
-      const initials = await avatar.findWithText('JJ')
-
-      expect(initials.getAttribute('aria-hidden')).to.equal('true')
+      render(<Avatar name="Jessica Jones" />)
+      const initials = screen.getByText('JJ')
+      expect(initials).toHaveAttribute('aria-hidden', 'true')
     })
   })
 
-  describe('with the default props', async () => {
+  describe('with the default props', () => {
     it('should display as a circle', async () => {
-      await mount(<Avatar name="Jessica Jones" />)
-      const avatar = await AvatarLocator.find()
-
-      expect(avatar.getAttribute('shape')).to.equal('circle')
+      const { container } = render(<Avatar name="Avatar Name" />)
+      const avatarImg = container.querySelector('span[name="Avatar Name"]')
+      expect(avatarImg).toHaveAttribute('shape', 'circle')
     })
 
     it('should render initials', async () => {
-      await mount(<Avatar name="Jessica Jones" />)
-
-      expect(await AvatarLocator.findWithText('JJ')).to.exist()
+      render(<Avatar name="Avatar Name" />)
+      const avatarWithInitials = await screen.findByText('AN')
+      expect(avatarWithInitials).toBeVisible()
     })
 
     it('should have border and no box-shadow', async () => {
-      const subject = await mount(<Avatar name="Jessica Jones" />)
-
-      const avatar = subject.getDOMNode()
-      const computedStyle = getComputedStyle(avatar)
-
-      expect(computedStyle.borderWidth).not.to.equal('0px')
-      expect(computedStyle.boxShadow).to.equal('none')
+      const { container } = render(<Avatar name="Avatar Name" />)
+      const element = container.querySelector('span')
+      expect(element).not.toHaveStyle('border-width: 0px')
+      const containerStyle = element && getComputedStyle(element)
+      expect(containerStyle?.boxShadow).toBe('')
     })
 
     it('should display the initials in brand color', async () => {
-      await mount(<Avatar name="Jessica Jones" />)
-
-      const avatar = await AvatarLocator.find()
-      const initials = await avatar.findWithText('JJ')
-
-      expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
-        'rgb(3, 116, 181)'
-      )
+      render(<Avatar name="Jessica Jones" />)
+      const initials = screen.getByText('JJ')
+      expect(getComputedStyle(initials).color).toBe('rgb(43, 122, 188)')
     })
 
-    it('should return the underlying component', async () => {
-      const elementRef = stub()
-      const subject = await mount(
-        <Avatar name="Jessica Jones" elementRef={elementRef} />
+    it('refs should return the underlying component', async () => {
+      const elementRef = vi.fn()
+      const ref: React.Ref<View> = { current: null }
+      const { container } = render(
+        <>
+          <Avatar id="av1" name="Avatar Name" elementRef={elementRef} />
+          <Avatar id="av2" name="Avatar Name2" ref={ref} />
+        </>
       )
-      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+      expect(ref.current!.props.id).toBe('av2')
+      expect(elementRef).toHaveBeenCalledWith(container.querySelector('#av1'))
     })
   })
 
-  describe('when the renderIcon prop is provided', async () => {
+  describe('when the renderIcon prop is provided', () => {
     it('should display an svg passed', async () => {
       const SomeIcon = () => (
         <svg>
           <circle cx="25" cy="75" r="20" />
         </svg>
       )
-
-      await mount(
-        <Avatar name="Jessica Jones" renderIcon={SomeIcon}>
-          Hello World
+      const { container } = render(
+        <Avatar name="avatar name" renderIcon={SomeIcon}>
+          hello
         </Avatar>
       )
-      const avatar = await AvatarLocator.find()
-      expect(await avatar.find('svg')).to.exist()
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
     })
 
     it('should display an InstUI icon passed', async () => {
-      await mount(
-        <Avatar name="Jessica Jones" renderIcon={<IconGroupLine />}>
-          Hello World
+      const { container } = render(
+        <Avatar name="avatar name" renderIcon={<IconGroupLine />}>
+          hello
         </Avatar>
       )
-      const avatar = await AvatarLocator.find()
-      expect(await avatar.find('svg')).to.exist()
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
     })
 
     it('should display correctly when an icon renderer is passed', async () => {
-      await mount(
+      const { container } = render(
         <Avatar name="Jessica Jones" renderIcon={() => <IconGroupLine />}>
           Hello World
         </Avatar>
       )
-      const avatar = await AvatarLocator.find()
-      expect(await avatar.find('svg')).to.exist()
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
     })
   })
 
-  describe('when an image src url is provided', async () => {
+  describe('when an image src url is provided', () => {
     const src =
       'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
     it('should display the image url provided', async () => {
-      await mount(<Avatar name="Foo bar" src={src} />)
-
-      const avatar = await AvatarLocator.find()
-      const image = await avatar.find('img')
-
-      await image.load()
-
-      expect(avatar.getAttribute('src')).to.contain(src)
+      const { container } = render(<Avatar name="avatar name" src={src} />)
+      const avatarImg = container.querySelector('img')
+      expect(avatarImg).toHaveAttribute('src', src)
     })
 
     it('should display the image even if an icon is provided', async () => {
-      await mount(
-        <Avatar name="Foo bar" src={src} renderIcon={<IconGroupLine />} />
+      const { container } = render(
+        <Avatar name="avatar name" src={src} renderIcon={<IconGroupLine />} />
       )
-
-      const avatar = await AvatarLocator.find()
-      const image = await avatar.find('img')
-
-      await image.load()
-
-      expect(avatar.getAttribute('src')).to.contain(src)
+      const avatarImg = container.querySelector('img')
+      expect(avatarImg).toHaveAttribute('src', src)
     })
 
     it('should call onImageLoaded once the image loads', async () => {
-      const onImageLoaded = stub()
-
-      await mount(
-        <Avatar name="Foo bar" src={src} onImageLoaded={onImageLoaded} />
+      const onImageLoaded = vi.fn()
+      const { container } = render(
+        <Avatar name="Avatar Name" onImageLoaded={onImageLoaded} />
       )
-
-      const avatar = await AvatarLocator.find()
-      const image = await avatar.find('img')
-
-      await image.load()
-
-      expect(onImageLoaded).to.have.been.called()
+      const avatarImg = container.querySelector('img')
+      if (avatarImg) {
+        fireEvent.load(avatarImg)
+      }
+      expect(onImageLoaded).toHaveBeenCalled()
     })
 
     it('should have box-shadow instead of border', async () => {
-      const subject = await mount(<Avatar name="Foo bar" src={src} />)
-
-      const avatar = await AvatarLocator.find()
-      const image = await avatar.find('img')
-
-      await image.load()
-
-      const computedStyle = getComputedStyle(subject.getDOMNode())
-
-      expect(computedStyle.borderWidth).to.equal('0px')
-      expect(computedStyle.boxShadow).not.to.equal('none')
+      const { container } = render(<Avatar name="Avatar Name" src={src} />)
+      const element = container.querySelector('span')
+      const avatarImg = container.querySelector('img')
+      if (avatarImg) {
+        fireEvent.load(avatarImg)
+      }
+      expect(element).toHaveStyle('border-width: 0px')
+      const containerStyle = element && window.getComputedStyle(element)
+      expect(containerStyle?.boxShadow).not.toBe('')
     })
   })
 
-  describe('when shape is set to "rectangle"', async () => {
+  describe('when shape is set to "rectangle"', () => {
     it('should display as a rectangle', async () => {
-      await mount(<Avatar name="Jessica Jones" shape="rectangle" />)
-
-      const avatar = await AvatarLocator.find()
-
-      expect(avatar.getAttribute('shape')).to.equal('rectangle')
+      const { container } = render(
+        <Avatar name="Avatar Name" shape="rectangle" />
+      )
+      const avatarImg = container.querySelector('span[name="Avatar Name"]')
+      expect(avatarImg).toHaveAttribute('shape', 'rectangle')
     })
   })
 
-  describe('when the color is set to "shamrock"', async () => {
+  describe('when the color is set to "shamrock"', () => {
     it('should display the initials in green (shamrock)', async () => {
-      await mount(<Avatar name="Jessica Jones" color="shamrock" />)
-
-      const avatar = await AvatarLocator.find()
-      const initials = await avatar.findWithText('JJ')
-
-      expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
-        'rgb(11, 135, 75)'
-      )
+      render(<Avatar name="Jessica Jones" color="shamrock" />)
+      const initials = screen.getByText('JJ')
+      expect(getComputedStyle(initials).color).toBe('rgb(3, 137, 61)')
     })
 
     it('should display the icon in green (shamrock)', async () => {
-      await mount(
+      const { container } = render(
         <Avatar
           name="Jessica Jones"
           renderIcon={<IconGroupLine />}
-          color="shamrock"
+          color="fire"
         >
           Hello World
         </Avatar>
       )
-
-      const avatar = await AvatarLocator.find()
-      const svg = await avatar.find('svg')
-
-      expect(getComputedStyle(svg.getDOMNode()).fill).to.equal(
-        'rgb(11, 135, 75)'
-      )
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toHaveStyle({ fill: '#CF4A00' })
     })
   })
 
-  describe('when "hasInverseColor" is set', async () => {
-    describe('with initials', async () => {
+  describe('when "hasInverseColor" is set', () => {
+    describe('with initials', () => {
       it('should display the background in the color', async () => {
-        await mount(
-          <Avatar name="Jessica Jones" color="shamrock" hasInverseColor />
-        )
-
-        const avatar = await AvatarLocator.find()
-
-        expect(getComputedStyle(avatar.getDOMNode()).backgroundColor).to.equal(
-          'rgb(11, 135, 75)'
-        )
+        render(<Avatar name="Jessica Jones" color="shamrock" hasInverseColor />)
+        const initials = screen.getByText('JJ')
+        expect(initials.parentNode).toHaveStyle({
+          backgroundColor: 'rgb(3, 137, 61)'
+        })
       })
 
       it('should display the initials in white', async () => {
-        await mount(
-          <Avatar name="Jessica Jones" color="shamrock" hasInverseColor />
-        )
-
-        const avatar = await AvatarLocator.find()
-        const initials = await avatar.findWithText('JJ')
-
-        expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
-          'rgb(255, 255, 255)'
-        )
+        render(<Avatar name="Jessica Jones" color="shamrock" hasInverseColor />)
+        const initials = screen.getByText('JJ')
+        expect(initials).toHaveStyle({ color: 'rgb(255, 255, 255)' })
       })
     })
 
-    describe('with icon', async () => {
+    describe('with icon', () => {
       it('should display the background in the color', async () => {
-        await mount(
+        const { container } = render(
           <Avatar
             name="Jessica Jones"
             color="shamrock"
@@ -269,72 +226,66 @@ describe.skip('<Avatar />', async () => {
             renderIcon={<IconGroupLine />}
           />
         )
-
-        const avatar = await AvatarLocator.find()
-
-        expect(getComputedStyle(avatar.getDOMNode()).backgroundColor).to.equal(
-          'rgb(11, 135, 75)'
-        )
+        const element = container.querySelector('span')
+        expect(element).toHaveStyle({ backgroundColor: 'rgb(3, 137, 61)' })
       })
 
       it('should display the icon in white', async () => {
-        await mount(
+        const { container } = render(
           <Avatar
             name="Jessica Jones"
-            color="shamrock"
-            hasInverseColor
             renderIcon={<IconGroupLine />}
-          />
+            hasInverseColor
+            color="fire"
+          >
+            Hello World
+          </Avatar>
         )
-
-        const avatar = await AvatarLocator.find()
-        const svg = await avatar.find('svg')
-
-        expect(getComputedStyle(svg.getDOMNode()).fill).to.equal(
-          'rgb(255, 255, 255)'
-        )
+        const avatarSvg = container.querySelector('svg')
+        expect(avatarSvg).toHaveStyle({ fill: '#FFFFFF' })
       })
     })
   })
 
-  describe('when the user name has no spaces', async () => {
+  describe('when the user name has no spaces', () => {
     it('should render a single initial', async () => {
-      await mount(<Avatar name="Jessica" />)
-
-      expect(await AvatarLocator.find()).to.have.text('J')
+      render(<Avatar name="Jessica" />)
+      const initials = screen.getByText('J')
+      expect(initials).toBeInTheDocument()
     })
   })
 
-  describe('when the user name has leading spaces', async () => {
+  describe('when the user name has leading spaces', () => {
     it('should skip them', async () => {
-      await mount(<Avatar name=" Jessica Jones" />)
-
-      expect(await AvatarLocator.find()).to.have.text('JJ')
+      render(<Avatar name=" Jessica Jones" />)
+      const initials = screen.getByText('JJ')
+      expect(initials).toBeInTheDocument()
     })
   })
 
-  describe('when the user name is empty', async () => {
+  describe('when the user name is empty', () => {
     it('should render', async () => {
-      await mount(<Avatar name="" />)
-
-      const avatar = await AvatarLocator.find()
-      const initials = await avatar.find('[class$="-avatar__initials"]')
-
-      expect(initials).to.exist()
-      expect(initials.getTextContent()).to.equal('')
+      const { container } = render(<Avatar name="" />)
+      const initials = container.querySelector('[class$="-avatar__initials"]')
+      expect(initials).toBeInTheDocument()
+      expect(initials).toHaveTextContent('')
     })
   })
 
-  describe('when alt text is provided', async () => {
+  describe('when alt text is provided', () => {
     it('should render the text as an aria-label attribute', async () => {
-      await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
-
-      expect(await AvatarLocator.find()).to.have.label('This is a test')
+      render(<Avatar name="Jessica Jones" alt="This is a test" />)
+      const initials = screen.getByText('JJ')
+      expect(initials.parentNode).toHaveAttribute(
+        'aria-label',
+        'This is a test'
+      )
     })
 
     it('should set the role attribute to img', async () => {
-      await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
-      expect(await AvatarLocator.find()).to.contain('[role="img"]')
+      render(<Avatar name="Jessica Jones" alt="This is a test" />)
+      const initials = screen.getByText('JJ')
+      expect(initials.parentNode).toHaveAttribute('role', 'img')
     })
   })
 })

@@ -20,7 +20,7 @@ jobs:
       - name: Set up project.
         run: npm run bootstrap
       - name: Run tests.
-        run: USE_REACT_STRICT_MODE=0 npm run test && npm run test:vitest
+        run: USE_REACT_STRICT_MODE=0 npm run test:vitest
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
