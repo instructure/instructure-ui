@@ -585,9 +585,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
   focusOption(id: string) {
     const container = this._containerElement
-
     const optionElement = container?.querySelector(
-      `[id="${id}"]`
+      `[id="${CSS.escape(id)}"]`
     ) as HTMLSpanElement
 
     optionElement?.focus()
@@ -816,7 +815,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     if (event.type === 'keydown' && href) {
       const optionEl = this._drilldownRef?.querySelector(
-        `#${id}`
+        `#${CSS.escape(id)}`
       ) as HTMLLinkElement
       const isLink = optionEl.tagName.toLowerCase() === 'a'
 
@@ -1516,7 +1515,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             : this.currentPage.children[0]?.props.id
 
           if (!targetId) return null
-          return this._popover?._contentElement?.querySelector(`#${targetId}`)
+          return this._popover?._contentElement?.querySelector(
+            `#${CSS.escape(targetId)}`
+          )
         }}
         elementRef={(element) => {
           // setting ref for "Popover" version, the popover root

@@ -316,6 +316,29 @@ describe('<Select />', () => {
     consoleErrorMock.mockRestore()
   })
 
+  it('should not crash for weird option ids', async () => {
+    const weirdID = 'some_`w@ei:r|!@#$%^&*(()|\\.l/d"id'
+    vi.useFakeTimers()
+    const { container } = render(
+      <Select
+        renderLabel="Choose an option"
+        scrollToHighlightedOption
+        isShowingOptions
+      >
+        <Select.Option id={weirdID} key="1" value="2" isHighlighted={true}>
+          op1
+        </Select.Option>
+        <Select.Option id="sdfsdfsd" key="2" value="2">
+          op2
+        </Select.Option>
+      </Select>
+    )
+    vi.advanceTimersToNextFrame()
+    vi.useRealTimers()
+    const input = container.querySelector('input')
+    expect(input).toBeInTheDocument()
+  })
+
   it('should have role button in Safari without onInputChange', async () => {
     const { container } = render(
       <Select renderLabel="Choose an option">{getOptions()}</Select>

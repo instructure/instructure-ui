@@ -291,22 +291,21 @@ class Select extends Component<SelectProps> {
   }
 
   scrollToOption(id?: string) {
-    if (this._listView) {
-      const option = this._listView.querySelector(`[id="${id}"]`)
-      if (!option) return
+    if (!this._listView || !id) return
+    const option = this._listView.querySelector(`[id="${CSS.escape(id)}"]`)
+    if (!option) return
 
-      const listItem = option.parentNode
-      const parentTop = getBoundingClientRect(this._listView).top
-      const elemTop = getBoundingClientRect(listItem).top
-      const parentBottom = parentTop + this._listView.clientHeight
-      const elemBottom =
-        elemTop + (listItem ? (listItem as Element).clientHeight : 0)
+    const listItem = option.parentNode
+    const parentTop = getBoundingClientRect(this._listView).top
+    const elemTop = getBoundingClientRect(listItem).top
+    const parentBottom = parentTop + this._listView.clientHeight
+    const elemBottom =
+      elemTop + (listItem ? (listItem as Element).clientHeight : 0)
 
-      if (elemBottom > parentBottom) {
-        this._listView.scrollTop += elemBottom - parentBottom
-      } else if (elemTop < parentTop) {
-        this._listView.scrollTop -= parentTop - elemTop
-      }
+    if (elemBottom > parentBottom) {
+      this._listView.scrollTop += elemBottom - parentBottom
+    } else if (elemTop < parentTop) {
+      this._listView.scrollTop -= parentTop - elemTop
     }
   }
 

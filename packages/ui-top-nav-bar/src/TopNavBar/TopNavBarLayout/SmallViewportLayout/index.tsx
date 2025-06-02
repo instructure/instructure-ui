@@ -310,7 +310,7 @@ class TopNavBarSmallViewportLayout extends Component<
     setTimeout(() => {
       const container = document.getElementById(this._trayContainerId)
       const firstOption = container?.querySelector(
-        `[id="${targetId}"]`
+        `[id="${CSS.escape(targetId)}"]`
       ) as HTMLSpanElement
       firstOption?.focus()
       if (this._drilldownRef) {

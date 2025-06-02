@@ -104,6 +104,33 @@ describe('<Drilldown />', () => {
       expect(options.length).toBe(0)
       expect(notAllowedChild).not.toBeInTheDocument()
     })
+
+    it('should not crash for weird option ids', async () => {
+      const onSelect = vi.fn()
+      const weirdID = 'some"_weird!@#$%^&*()\\|`id'
+      render(
+        <Drilldown rootPageId="page0" onSelect={onSelect}>
+          <Drilldown.Page id="page0">
+            {data.map((option) => (
+              <Drilldown.Option
+                id={weirdID + option.id}
+                value={weirdID + option.id}
+                key={weirdID + option.id}
+                data-testid={weirdID + option.id}
+              >
+                {option.label}
+              </Drilldown.Option>
+            ))}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const option_1 = screen.getByTestId(weirdID + 'opt_1')
+      await userEvent.click(option_1)
+
+      await waitFor(() => {
+        expect(onSelect).toHaveBeenCalled()
+      })
+    })
   })
 
   describe('id prop', () => {
