@@ -21,21 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { useContext } from 'react'
+import { ApplyLocaleContext } from '.'
 
-export { ApplyLocale } from './ApplyLocale'
-export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
+// TODO: this is a better replacement for `ui-i18n/src/Locale.ts` which should be deleted in the future
+export function getLocale(defaultLocale = 'en-US') {
+  const localeContext = useContext(ApplyLocaleContext)
+  if (localeContext.locale) {
+    return localeContext.locale
+  }
 
-export { textDirectionContextConsumer } from './textDirectionContextConsumer'
-export { DateTime } from './DateTime'
-export { getTextDirection } from './getTextDirection'
-export { I18nPropTypes } from './I18nPropTypes'
-
-export { Locale } from './Locale' // TODO delete this and only keep the ones below
-export { getLocale } from './getLocale'
-export { getTimezone } from './getTimezone'
-
-export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-
-export type { Moment } from './DateTime'
-export type { TextDirectionContextConsumerProps } from './textDirectionContextConsumer'
-export type { ApplyLocaleProps } from './ApplyLocale/props'
+  if (typeof navigator !== 'undefined') {
+    if (navigator.languages && navigator.languages.length) {
+      return navigator.languages[0]
+    }
+    if (navigator.language) {
+      return navigator.language
+    }
+  }
+  try {
+    // This is generally reliable if Intl is supported
+    return new Intl.DateTimeFormat().resolvedOptions().locale
+  } catch (e) {
+    console.warn(
+      'Intl.DateTimeFormat().resolvedOptions().locale failed, using fallback.'
+    )
+    // Fall through to default
+  }
+  return defaultLocale
+}
