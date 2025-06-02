@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+// TODO: there is an improved replacement for this helper at `ui-i18n/src/getLocale.ts`
+// all uses of this should be updated and this helper deleted
 import { canUseDOM } from '@instructure/ui-dom-utils'
 
 const defaultLocale = 'en-US'

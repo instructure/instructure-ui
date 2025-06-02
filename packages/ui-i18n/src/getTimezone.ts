@@ -21,21 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { useContext } from 'react'
+import { ApplyLocaleContext } from '.'
 
-export { ApplyLocale } from './ApplyLocale'
-export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
+// TODO: this is a better replacement for `ui-i18n/src/Locale.ts` which should be deleted in the future
+export function getTimezone() {
+  const localeContext = useContext(ApplyLocaleContext)
+  if (localeContext.timezone) {
+    return localeContext.timezone
+  }
 
-export { textDirectionContextConsumer } from './textDirectionContextConsumer'
-export { DateTime } from './DateTime'
-export { getTextDirection } from './getTextDirection'
-export { I18nPropTypes } from './I18nPropTypes'
-
-export { Locale } from './Locale' // TODO delete this and only keep the ones below
-export { getLocale } from './getLocale'
-export { getTimezone } from './getTimezone'
-
-export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-
-export type { Moment } from './DateTime'
-export type { TextDirectionContextConsumerProps } from './textDirectionContextConsumer'
-export type { ApplyLocaleProps } from './ApplyLocale/props'
+  return Intl.DateTimeFormat().resolvedOptions().timeZone
+}

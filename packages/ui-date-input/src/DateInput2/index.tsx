@@ -25,7 +25,6 @@
 import {
   useState,
   useEffect,
-  useContext,
   forwardRef,
   ForwardedRef,
   ValidationMap
@@ -41,8 +40,7 @@ import {
 import { Popover } from '@instructure/ui-popover'
 import { TextInput } from '@instructure/ui-text-input'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-
-import { ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
+import { getLocale, getTimezone } from '@instructure/ui-i18n'
 
 import { propTypes } from './props'
 import type { DateInput2Props } from './props'
@@ -92,11 +90,6 @@ function parseLocaleDate(
 
   // create utc date from year, month (zero indexed) and day
   const date = new Date(Date.UTC(year, month - 1, day))
-
-  if (date.getMonth() !== month - 1 || date.getDate() !== day) {
-    // Check if the Date object adjusts the values. If it does, the input is invalid.
-    return null
-  }
 
   // Format date string in the provided timezone. The locale here is irrelevant, we only care about how to time is adjusted for the timezone.
   const parts = new Intl.DateTimeFormat('en-US', {
@@ -166,27 +159,8 @@ const DateInput2 = forwardRef(
     }: DateInput2Props,
     ref: ForwardedRef<TextInput>
   ) => {
-    const localeContext = useContext(ApplyLocaleContext)
-
-    const getLocale = () => {
-      if (locale) {
-        return locale
-      } else if (localeContext.locale) {
-        return localeContext.locale
-      }
-      // default to the system's locale
-      return Locale.browserLocale()
-    }
-
-    const getTimezone = () => {
-      if (timezone) {
-        return timezone
-      } else if (localeContext.timezone) {
-        return localeContext.timezone
-      }
-      // default to the system's timezone
-      return Intl.DateTimeFormat().resolvedOptions().timeZone
-    }
+    const userLocale = locale || getLocale()
+    const userTimezone = timezone || getTimezone()
 
     const [inputMessages, setInputMessages] = useState<FormMessage[]>(
       messages || []
@@ -213,20 +187,20 @@ const DateInput2 = forwardRef(
       if (dateFormat) {
         if (typeof dateFormat === 'string') {
           // use dateFormat instead of the user locale
-          date = parseLocaleDate(dateString, dateFormat, getTimezone())
+          date = parseLocaleDate(dateString, dateFormat, userTimezone)
         } else if (dateFormat.parser) {
           date = dateFormat.parser(dateString)
         }
       } else {
         // no dateFormat prop passed, use locale for formatting
-        date = parseLocaleDate(dateString, getLocale(), getTimezone())
+        date = parseLocaleDate(dateString, userLocale, userTimezone)
       }
       return date ? [formatDate(date), date.toISOString()] : ['', '']
     }
 
     const formatDate = (
       date: Date,
-      timeZone: string = getTimezone()
+      timeZone: string = userTimezone
     ): string => {
       // use formatter function if provided
       if (typeof dateFormat !== 'string' && dateFormat?.formatter) {
@@ -234,7 +208,7 @@ const DateInput2 = forwardRef(
       }
       // if dateFormat set to a locale, use that, otherwise default to the user's locale
       return date.toLocaleDateString(
-        typeof dateFormat === 'string' ? dateFormat : getLocale(),
+        typeof dateFormat === 'string' ? dateFormat : userLocale,
         {
           timeZone,
           calendar: 'gregory',
@@ -253,9 +227,9 @@ const DateInput2 = forwardRef(
       }
 
       // Replace the matched number with the same number of dashes
-      const year = `${exampleDate.getFullYear()}`
-      const month = `${exampleDate.getMonth() + 1}`
-      const day = `${exampleDate.getDate()}`
+      const year = '2024'
+      const month = '9'
+      const day = '1'
       return formattedDate
         .replace(regex(year), (match) => 'Y'.repeat(match.length))
         .replace(regex(month), (match) => 'M'.repeat(match.length))
@@ -340,8 +314,8 @@ const DateInput2 = forwardRef(
               selectedDate={selectedDate}
               disabledDates={disabledDates}
               visibleMonth={selectedDate}
-              locale={getLocale()}
-              timezone={getTimezone()}
+              locale={userLocale}
+              timezone={userTimezone}
               renderNextMonthButton={
                 <IconButton
                   size="small"
