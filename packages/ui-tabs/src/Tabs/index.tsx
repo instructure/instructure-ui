@@ -331,10 +331,12 @@ class Tabs extends Component<TabsProps, TabsState> {
     // this is needed because keypress cancels scrolling. So we have to trigger the scrolling
     // one "tick" later than the keypress
     setTimeout(() => {
-      this.state.withTabListOverflow &&
-        this.showActiveTabIfOverlayed(
-          this._tabList!.querySelector(`#tab-${id}`)
-        )
+      if (this.state.withTabListOverflow) {
+        const tab = id
+          ? this._tabList!.querySelector(`#tab-${CSS.escape(id)}`)
+          : null
+        this.showActiveTabIfOverlayed(tab)
+      }
     }, 0)
   }
 
