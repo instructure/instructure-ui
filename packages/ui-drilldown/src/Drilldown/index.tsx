@@ -893,7 +893,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       // Use action ID if exists, otherwise first non-action option's ID
       const targetId = actionLabel
         ? this._headerActionId
-        : this.currentPage.children[0]?.props.id
+        : this.getFirstOption()?.props.id
       setTimeout(() => {
         this.setState({
           highlightedOptionId: targetId
@@ -909,6 +909,24 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         ...this.exposedNavigationProps
       })
     }
+  }
+
+  getFirstOption = () => {
+    const children = Children.toArray(this.currentPage?.children)
+
+    const child = children[0]
+    if (!child) return undefined
+
+    // If it's a regular option, return it
+    if (matchComponentTypes<OptionChild>(child, [DrilldownOption])) {
+      return child
+    }
+    // If it's a group, get its options
+    if (matchComponentTypes<GroupChild>(child, [Drilldown.Group])) {
+      const groupOptions = Children.toArray(child.props.children)
+      return groupOptions[0] as OptionChild
+    }
+    return undefined
   }
 
   renderList(
@@ -1512,7 +1530,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           // Use action ID if exists, otherwise first non-action option's ID
           const targetId = actionLabel
             ? this._headerActionId
-            : this.currentPage.children[0]?.props.id
+            : this.getFirstOption()?.props.id
 
           if (!targetId) return null
           return this._popover?._contentElement?.querySelector(
