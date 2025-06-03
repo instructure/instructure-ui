@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { Children, Component, isValidElement, ReactElement } from 'react'
+import { Children, Component, isValidElement } from 'react'
 
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
-import { canUseDOM } from '@instructure/ui-dom-utils'
 
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
@@ -156,69 +155,31 @@ class Modal extends Component<ModalProps, ModalState> {
     }
   }
 
-  getWindowHeightInRem = (): number => {
-    if (!canUseDOM) {
-      return Infinity
-    }
-    const rootFontSize = parseFloat(
-      getComputedStyle(document.documentElement)?.fontSize || '16'
-    )
-    if (isNaN(rootFontSize) || rootFontSize <= 0) {
-      return Infinity
-    }
-    return window.innerHeight / rootFontSize
-  }
-
   renderChildren() {
-    const { children, variant, overflow } = this.props
-
-    // header should be non-sticky for small viewport height (ca. 320px)
-    if (this.getWindowHeightInRem() <= 20) {
-      return this.renderForSmallViewportHeight()
-    }
-
-    return Children.map(children as ReactElement, (child) => {
-      if (!child) return // ignore null, falsy children
-      return this.cloneChildWithProps(child, variant, overflow)
-    })
-  }
-
-  renderForSmallViewportHeight() {
     const { children, variant, overflow, styles } = this.props
-
-    const headerAndBody: React.ReactNode[] = []
-
     const childrenArray = Children.toArray(children)
 
-    // Separate header and body elements
-    const filteredChildren = childrenArray.filter((child) => {
+    const headerAndBody: React.ReactNode[] = []
+    const others: React.ReactNode[] = []
+
+    childrenArray.forEach((child) => {
       if (isValidElement(child)) {
         if (child.type === Modal.Header || child.type === Modal.Body) {
-          if (child.type === Modal.Header) {
-            const headerWithProp = safeCloneElement(child, {
-              smallViewPort: true
-            })
-            headerAndBody.push(headerWithProp)
-          } else {
-            headerAndBody.push(child)
-          }
-          return false
+          headerAndBody.push(this.cloneChildWithProps(child, variant, overflow))
+        } else {
+          others.push(this.cloneChildWithProps(child, variant, overflow))
         }
       }
-      return true
     })
 
-    // Adds the <div> to the beginning of the filteredChildren array
-    if (headerAndBody.length > 0) {
-      filteredChildren.unshift(
+    // Putting ModalHeader and ModalBody into the same container, so they can be styled together;
+    // this is needed to apply a media query breakpoint
+    const wrappedHeaderAndBody =
+      headerAndBody.length > 0 ? (
         <div css={styles?.joinedHeaderAndBody}>{headerAndBody}</div>
-      )
-    }
+      ) : null
 
-    return Children.map(filteredChildren as ReactElement[], (child) => {
-      if (!child) return // ignore null, falsy children
-      return this.cloneChildWithProps(child, variant, overflow)
-    })
+    return [...(wrappedHeaderAndBody ? [wrappedHeaderAndBody] : []), ...others]
   }
 
   cloneChildWithProps(

@@ -53,9 +53,12 @@ const generateStyle = (
       label: 'modalBody',
       boxSizing: 'border-box',
       flex: '1 1 auto',
-      overflowY: 'auto',
       '&:focus': {
         outline: 'none'
+      },
+      // ModalBody is set to scrollable above 20rem height
+      '@media (min-height: 20rem)': {
+        overflowY: 'auto'
       },
       ...backgroundStyle
     }
