@@ -36,7 +36,6 @@ type ModalHeaderOwnProps = {
   children?: React.ReactNode
   variant?: 'default' | 'inverse'
   spacing?: 'default' | 'compact'
-  smallViewPort?: boolean
 }
 
 type ModalHeaderStyleProps = {
@@ -56,8 +55,7 @@ type ModalHeaderStyle = ComponentStyle<'modalHeader'>
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   variant: PropTypes.oneOf(['default', 'inverse']),
-  spacing: PropTypes.oneOf(['default', 'compact']),
-  smallViewPort: PropTypes.bool
+  spacing: PropTypes.oneOf(['default', 'compact'])
 }
 
 const allowedProps: AllowedPropKeys = ['children', 'variant', 'spacing']

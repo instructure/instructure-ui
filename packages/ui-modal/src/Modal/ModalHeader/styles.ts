@@ -44,7 +44,7 @@ const generateStyle = (
   props: ModalHeaderProps,
   state: ModalHeaderStyleProps
 ): ModalHeaderStyle => {
-  const { variant, spacing, smallViewPort } = props
+  const { variant, spacing } = props
   const { withCloseButton } = state
 
   const sizeVariants = {
@@ -83,9 +83,13 @@ const generateStyle = (
       borderBottomWidth: '0.0625rem',
       borderBottomStyle: 'solid',
       borderBottomColor: componentTheme.borderColor,
-      ...(smallViewPort ? { position: 'relative' } : {}),
       ...sizeVariants[spacing!],
-      ...inverseStyle
+      ...inverseStyle,
+
+      // Position is set to relative for small viewports to ensure proper close button positioning during scrolling
+      '@media (max-height: 20rem)': {
+        position: 'relative'
+      }
     }
   }
 }

@@ -111,7 +111,15 @@ const generateStyle = (
     },
     joinedHeaderAndBody: {
       borderRadius: componentTheme.borderRadius,
-      overflowY: 'scroll'
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+
+      // ModalHeader and ModalBody is set to scrollable above 20rem height instead of just the ModalBody
+      '@media (max-height: 20rem)': {
+        overflowY: 'auto',
+        maxHeight: '20rem'
+      }
     }
   }
 }
