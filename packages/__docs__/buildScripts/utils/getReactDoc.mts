@@ -33,6 +33,7 @@ export function getReactDoc(
   error: (err: Error) => void
 ) {
   let doc: Documentation | undefined = undefined
+
   try {
     const parsed = parse(
       source,
@@ -42,6 +43,7 @@ export function getReactDoc(
         importer: makeFsImporter()
       }
     )
+
     if (parsed.length > 1) {
       // If a file has multiple exports this will choose the one that has the
       // same name in its path.

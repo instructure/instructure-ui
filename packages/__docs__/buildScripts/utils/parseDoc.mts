@@ -29,25 +29,28 @@ import path from 'path'
 import type { JsDocResult, YamlMetaInfo } from '../DataTypes.mjs'
 import type { Documentation } from 'react-docgen'
 
-export function parseDoc(
+export async function parseDoc(
   resourcePath: string,
   source: Buffer,
   errorHandler: (err: Error) => void
-): Documentation & YamlMetaInfo & Partial<JsDocResult> {
+): Promise<Documentation & YamlMetaInfo & Partial<JsDocResult>> {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
   let doc: Documentation | undefined
 
   if (extension === '.md') {
-    doc = { description: source as unknown as string}
+    doc = { description: source as unknown as string }
   } else if (allowedExtensions.includes(extension)) {
+
     doc = getReactDoc(source, resourcePath, errorHandler)
+
     if (!doc || !doc.props) {
-      doc = getJSDoc(source, errorHandler)
+      doc = await getJSDoc(source, errorHandler)
     }
+
   } else {
     errorHandler(new Error('not allowed extension ' + extension))
-    doc = { description: source as unknown as string}
+    doc = { description: source as unknown as string }
   }
   // the YAML description in a JSDoc comment at the top of some files
   let frontMatter: YamlMetaInfo
