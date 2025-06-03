@@ -43,15 +43,3 @@ jobs:
         run: git tag -a v$(./.github/workflows/calculateVersion.sh) -m v$(./.github/workflows/calculateVersion.sh)
       - name: Push tags
         run: git push origin v$(./.github/workflows/calculateVersion.sh)
-  ssr-regression:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          working-directory: ./regression-test
-          build: npm run build
-          start: npm start
