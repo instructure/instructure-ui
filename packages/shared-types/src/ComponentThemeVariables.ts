@@ -711,6 +711,7 @@ export type InlineListItemTheme = {
   fontSizeMedium: Typography['fontSizeMedium']
   fontSizeLarge: Typography['fontSizeLarge']
   color: Colors['contrasts']['grey4570']
+  delimiterColor: Colors['contrasts']['grey125125']
   lineHeight: Typography['lineHeightCondensed']
   noneSpacing: Spacing['xSmall']
   pipeSpacing: Spacing['xSmall']

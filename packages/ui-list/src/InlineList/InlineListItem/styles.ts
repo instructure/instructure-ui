@@ -136,7 +136,8 @@ const generateStyle = (
       ...delimiterVariants[delimiter!],
       '[class$=-inlineListItem]:last-of-type > &:last-child::after': {
         content: 'none'
-      }
+      },
+      color: componentTheme.delimiterColor
     }
   }
 }
