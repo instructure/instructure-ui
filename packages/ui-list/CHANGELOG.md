@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
+
+
+### Features
+
+* **ui-list,shared-types:** ability to override delimiter color ([915fab3](https://github.com/instructure/instructure-ui/commit/915fab32650480ac3ce2e966eab6ba1e9c6e791e))
+
+
+
+
+
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 **Note:** Version bump only for package @instructure/ui-list

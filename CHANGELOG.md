@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
+
+
+### Bug Fixes
+
+* **emotion:** fix proptype definition ([d140fe3](https://github.com/instructure/instructure-ui/commit/d140fe3fcb78b2bb3eeda29014108f956d2226ac))
+* **many:** fix "not a valid selector" exception when an option ID contains quotes ([78e0b96](https://github.com/instructure/instructure-ui/commit/78e0b96edf29f3d476ba30b03134f1726bbdd0f4))
+* **ui-date-input:** make DateInput2 date parsing work in every locale and timezone ([7d2ed73](https://github.com/instructure/instructure-ui/commit/7d2ed732a4b8608b6fc29996e416b51ac25faf0c))
+* **ui-top-nav-bar,ui-buttons:** display a focus ring in TopNavBar if a button has a Popover open ([1a03763](https://github.com/instructure/instructure-ui/commit/1a03763f99db390ec6cea58a71ef118930be64d8))
+
+
+### Features
+
+* **ui-list,shared-types:** ability to override delimiter color ([915fab3](https://github.com/instructure/instructure-ui/commit/915fab32650480ac3ce2e966eab6ba1e9c6e791e))
+
+
+
+
+
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 
