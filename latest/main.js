@@ -720,7 +720,7 @@ function InstUISettingsProvider({children,theme={},dir,instanceCounterMap,as}){c
 let providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)(DeterministicIdContextProvider.Y,{instanceCounterMap,children:(0,emotion_react_jsx_runtime_browser_esm.jsx)(emotion_element_f0de968e_browser_esm.a,{theme:getTheme(theme),children:(0,emotion_react_jsx_runtime_browser_esm.jsx)(TextDirectionContext.SZ.Provider,{value:finalDir,children})})})
 if(dir){const Element=as||"span"
 providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)(Element,{dir:finalDir,children:providers})}else 0
-return providers}InstUISettingsProvider.propTypes={children:prop_types_default().node,theme:prop_types_default().oneOf([prop_types_default().object,prop_types_default().func]),dir:prop_types_default().oneOf(["ltr","rtl"]),instanceCounterMap:prop_types_default().instanceOf(Map),as:prop_types_default().string}},36132:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
+return providers}InstUISettingsProvider.propTypes={children:prop_types_default().node,theme:prop_types_default().oneOfType([prop_types_default().object,prop_types_default().func]),dir:prop_types_default().oneOf(["ltr","rtl"]),instanceCounterMap:prop_types_default().instanceOf(Map),as:prop_types_default().string}},36132:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{z:()=>getComponentThemeOverride})
 const getComponentThemeOverride=(theme,displayName,componentId,props,componentTheme)=>{const name=displayName,id=componentId,themeOverride=props.themeOverride,componentOverrides=theme.componentOverrides
 let overridesFromTheme={},overrideFromComponent={}
