@@ -121,7 +121,7 @@ describe('<FormFieldGroup />', () => {
     const formFieldGroup = container.querySelector(
       "fieldset[class$='-formFieldLayout']"
     )
-    const message = container.querySelector("span[id^='FormFieldLayout_']")
+    const message = container.querySelector("div[id^='FormFieldLayout_']")
 
     expect(message).toBeInTheDocument()
     expect(formFieldGroup).toBeInTheDocument()

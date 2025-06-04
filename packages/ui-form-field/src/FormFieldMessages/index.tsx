@@ -80,7 +80,7 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
     const { messages, styles } = this.props
 
     return messages && messages.length > 0 ? (
-      <span
+      <div
         css={styles?.formFieldMessages}
         {...omitProps(this.props, FormFieldMessages.allowedProps)}
         ref={this.handleRef}
@@ -92,7 +92,7 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
             </span>
           )
         })}
-      </span>
+      </div>
     ) : null
   }
 }
