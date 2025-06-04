@@ -60,7 +60,7 @@ describe('<FormFieldMessages />', () => {
     const { container } = render(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = container.querySelector(
-      "span[class$='-formFieldMessages']"
+      "div[class$='-formFieldMessages']"
     )
 
     expect(formFieldMessages).toBeInTheDocument()
@@ -84,7 +84,7 @@ describe('<FormFieldMessages />', () => {
     const { container } = render(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = container.querySelector(
-      "span[class$='-formFieldMessages']"
+      "div[class$='-formFieldMessages']"
     )
     const iconSvg = container.querySelector('svg[name="IconWarning"]')
 
