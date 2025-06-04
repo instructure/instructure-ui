@@ -40,14 +40,27 @@ describes: Select
     }
 
     handleShowOptions = (event) => {
+      const { options } = this.props
+      const { inputValue, selectedOptionId } = this.state
+
       this.setState({
         isShowingOptions: true
       })
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return this.handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return this.handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
 
     handleHideOptions = (event) => {
       const { selectedOptionId } = this.state
-      const option = this.getOptionById(selectedOptionId).label
+      const option = this.getOptionById(selectedOptionId)?.label
       this.setState({
         isShowingOptions: false,
         highlightedOptionId: null,
@@ -68,17 +81,17 @@ describes: Select
       const nowOpen = !this.state.isShowingOptions
         ? `List expanded. ${optionsAvailable}`
         : ''
-      const option = this.getOptionById(id).label
+      const option = this.getOptionById(id)?.label
       this.setState((state) => ({
         highlightedOptionId: id,
-        inputValue: event.type === 'keydown' ? option : state.inputValue,
+        inputValue: state.inputValue,
         announcement: `${option} ${nowOpen}`
       }))
     }
 
     handleSelectOption = (event, { id }) => {
       this.focusInput()
-      const option = this.getOptionById(id).label
+      const option = this.getOptionById(id)?.label
       this.setState({
         selectedOptionId: id,
         inputValue: option,
@@ -125,13 +138,6 @@ describes: Select
               )
             })}
           </Select>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="assertive"
-            screenReaderOnly
-          >
-            {announcement}
-          </Alert>
         </div>
       )
     }
@@ -185,10 +191,20 @@ describes: Select
 
     const handleShowOptions = (event) => {
       setIsShowingOptions(true)
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
 
     const handleHideOptions = (event) => {
-      const option = getOptionById(selectedOptionId).label
+      const option = getOptionById(selectedOptionId)?.label
       setIsShowingOptions(false)
       setHighlightedOptionId(null)
       setSelectedOptionId(selectedOptionId ? option : '')
@@ -205,15 +221,15 @@ describes: Select
       const nowOpen = !isShowingOptions
         ? `List expanded. ${optionsAvailable}`
         : ''
-      const option = getOptionById(id).label
+      const option = getOptionById(id)?.label
       setHighlightedOptionId(id)
-      setInputValue(event.type === 'keydown' ? option : inputValue)
+      setInputValue(inputValue)
       setAnnouncement(`${option} ${nowOpen}`)
     }
 
     const handleSelectOption = (event, { id }) => {
-      const option = getOptionById(id).label
       focusInput()
+      const option = getOptionById(id)?.label
       setSelectedOptionId(id)
       setInputValue(option)
       setIsShowingOptions(false)
@@ -249,13 +265,6 @@ describes: Select
             )
           })}
         </Select>
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="assertive"
-          screenReaderOnly
-        >
-          {announcement}
-        </Alert>
       </div>
     )
   }
@@ -378,10 +387,24 @@ It's best practice to always provide autocomplete functionality to help users ma
     }
 
     handleShowOptions = (event) => {
+      const { options } = this.props
+      const { inputValue, selectedOptionId } = this.state
+
       this.setState(({ filteredOptions }) => ({
         isShowingOptions: true,
         announcement: `List expanded. ${filteredOptions.length} options available.`
       }))
+
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return this.handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return this.handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
 
     handleHideOptions = (event) => {
@@ -404,7 +427,7 @@ It's best practice to always provide autocomplete functionality to help users ma
       if (!option) return // prevent highlighting of empty option
       this.setState((state) => ({
         highlightedOptionId: id,
-        inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+        inputValue: state.inputValue,
         announcement: option.label
       }))
     }
@@ -490,13 +513,6 @@ It's best practice to always provide autocomplete functionality to help users ma
               </Select.Option>
             )}
           </Select>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="assertive"
-            screenReaderOnly
-          >
-            {announcement}
-          </Alert>
         </div>
       )
     }
@@ -605,6 +621,16 @@ It's best practice to always provide autocomplete functionality to help users ma
       setAnnouncement(
         `List expanded. ${filteredOptions.length} options available.`
       )
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
 
     const handleHideOptions = (event) => {
@@ -623,7 +649,7 @@ It's best practice to always provide autocomplete functionality to help users ma
       const option = getOptionById(id)
       if (!option) return // prevent highlighting of empty option
       setHighlightedOptionId(id)
-      setInputValue(event.type === 'keydown' ? option.label : inputValue)
+      setInputValue(inputValue)
       setAnnouncement(option.label)
     }
 
@@ -694,13 +720,6 @@ It's best practice to always provide autocomplete functionality to help users ma
             </Select.Option>
           )}
         </Select>
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="assertive"
-          screenReaderOnly
-        >
-          {announcement}
-        </Alert>
       </div>
     )
   }
@@ -813,7 +832,29 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
     }
 
     handleShowOptions = (event) => {
+      const { options } = this.props
+      const { inputValue, selectedOptionId } = this.state
+
       this.setState({ isShowingOptions: true })
+
+      if (inputValue || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return this.handleHighlightOption(event, {
+            id: options.find((option) => !selectedOptionId.includes(option.id))
+              .id
+          })
+        case 'ArrowUp':
+          // Highlight last non-selected option
+          return this.handleHighlightOption(event, {
+            id: options[
+              options.findLastIndex(
+                (option) => !selectedOptionId.includes(option.id)
+              )
+            ].id
+          })
+      }
     }
 
     handleHideOptions = (event) => {
@@ -835,7 +876,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
       if (!option) return // prevent highlighting empty option
       this.setState((state) => ({
         highlightedOptionId: id,
-        inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+        inputValue: state.inputValue,
         announcement: option.label
       }))
     }
@@ -908,7 +949,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
           key={id}
           text={
             <AccessibleContent alt={`Remove ${this.getOptionById(id).label}`}>
-              {this.getOptionById(id).label}
+              {this.getOptionById(id)?.label}
             </AccessibleContent>
           }
           margin={
@@ -968,13 +1009,6 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
               </Select.Option>
             )}
           </Select>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="assertive"
-            screenReaderOnly
-          >
-            {announcement}
-          </Alert>
         </div>
       )
     }
@@ -1072,6 +1106,25 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
 
     const handleShowOptions = (event) => {
       setIsShowingOptions(true)
+
+      if (inputValue || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options.find((option) => !selectedOptionId.includes(option.id))
+              .id
+          })
+        case 'ArrowUp':
+          // Highlight last non-selected option
+          return handleHighlightOption(event, {
+            id: options[
+              options.findLastIndex(
+                (option) => !selectedOptionId.includes(option.id)
+              )
+            ].id
+          })
+      }
     }
 
     const handleHideOptions = (event) => {
@@ -1088,7 +1141,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
       const option = getOptionById(id)
       if (!option) return // prevent highlighting empty option
       setHighlightedOptionId(id)
-      setInputValue(event.type === 'keydown' ? option.label : inputValue)
+      setInputValue(inputValue)
       setAnnouncement(option.label)
     }
 
@@ -1197,13 +1250,6 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
             </Select.Option>
           )}
         </Select>
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="assertive"
-          screenReaderOnly
-        >
-          {announcement}
-        </Alert>
       </div>
     )
   }
@@ -1284,10 +1330,26 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
     }
 
     handleShowOptions = (event) => {
+      const { options } = this.props
+      const { inputValue, selectedOptionId } = this.state
+
       this.setState({
         isShowingOptions: true,
         highlightedOptionId: null
       })
+
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return this.handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return this.handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
 
     handleHideOptions = (event) => {
@@ -1295,7 +1357,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
       this.setState({
         isShowingOptions: false,
         highlightedOptionId: null,
-        inputValue: this.getOptionById(selectedOptionId).label
+        inputValue: this.getOptionById(selectedOptionId)?.label
       })
     }
 
@@ -1310,8 +1372,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
       const newOption = this.getOptionById(id)
       this.setState((state) => ({
         highlightedOptionId: id,
-        inputValue:
-          event.type === 'keydown' ? newOption.label : state.inputValue,
+        inputValue: state.inputValue,
         announcement: this.getGroupChangedMessage(newOption)
       }))
     }
@@ -1392,7 +1453,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
               <Badge
                 type="notification"
                 variant={
-                  this.getOptionById(selectedOptionId).group === 'Eastern'
+                  this.getOptionById(selectedOptionId)?.group === 'Eastern'
                     ? 'success'
                     : 'primary'
                 }
@@ -1406,13 +1467,6 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
           >
             {this.renderGroup()}
           </Select>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="assertive"
-            screenReaderOnly
-          >
-            {announcement}
-          </Alert>
         </div>
       )
     }
@@ -1432,7 +1486,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
             { id: 'opt1', label: 'Alabama' },
             { id: 'opt2', label: 'Connecticut' },
             { id: 'opt3', label: 'Delaware' },
-            { id: '4', label: 'Illinois' }
+            { id: 'opt4', label: 'Illinois' }
           ]
         }}
       />
@@ -1486,12 +1540,24 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
     const handleShowOptions = (event) => {
       setIsShowingOptions(true)
       setHighlightedOptionId(null)
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
 
     const handleHideOptions = (event) => {
       setIsShowingOptions(false)
       setHighlightedOptionId(null)
-      setInputValue(getOptionById(selectedOptionId).label)
+      setInputValue(getOptionById(selectedOptionId)?.label)
     }
 
     const handleBlur = (event) => {
@@ -1502,7 +1568,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
       event.persist()
       const newOption = getOptionById(id)
       setHighlightedOptionId(id)
-      setInputValue(event.type === 'keydown' ? newOption.label : inputValue)
+      setInputValue(inputValue)
       setAnnouncement(getGroupChangedMessage(newOption))
     }
 
@@ -1567,7 +1633,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
             <Badge
               type="notification"
               variant={
-                getOptionById(selectedOptionId).group === 'Eastern'
+                getOptionById(selectedOptionId)?.group === 'Eastern'
                   ? 'success'
                   : 'primary'
               }
@@ -1581,13 +1647,6 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
         >
           {renderGroup()}
         </Select>
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="assertive"
-          screenReaderOnly
-        >
-          {announcement}
-        </Alert>
       </div>
     )
   }
@@ -1606,7 +1665,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
             { id: 'opt1', label: 'Alabama' },
             { id: 'opt2', label: 'Connecticut' },
             { id: 'opt3', label: 'Delaware' },
-            { id: '4', label: 'Illinois' }
+            { id: 'opt4', label: 'Illinois' }
           ]
         }}
       />
@@ -1659,10 +1718,26 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     }
 
     handleShowOptions = (event) => {
+      const { options } = this.props
+      const { inputValue, selectedOptionId } = this.state
+
       this.setState({
         isShowingOptions: true,
         highlightedOptionId: null
       })
+
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return this.handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return this.handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
 
     handleHideOptions = (event) => {
@@ -1848,6 +1923,19 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
     const handleShowOptions = (event) => {
       setIsShowingOptions(true)
       setHighlightedOptionId(null)
+
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
 
     const handleHideOptions = (event) => {
@@ -2060,7 +2148,7 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
       if (!option) return // prevent highlighting of empty option
       this.setState((state) => ({
         highlightedOptionId: id,
-        inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+        inputValue: state.inputValue,
         announcement: option.label
       }))
     }
@@ -2170,13 +2258,6 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
               </Select.Option>
             )}
           </Select>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="assertive"
-            screenReaderOnly
-          >
-            {announcement}
-          </Alert>
         </div>
       )
     }
@@ -2283,7 +2364,7 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
       if (!option) return // prevent highlighting of empty option
 
       setHighlightedOptionId(id)
-      setInputValue(event.type === 'keydown' ? option.label : inputValue)
+      setInputValue(inputValue)
       setAnnouncement(option.label)
     }
 
@@ -2373,13 +2454,6 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
             </Select.Option>
           )}
         </Select>
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="assertive"
-          screenReaderOnly
-        >
-          {announcement}
-        </Alert>
       </div>
     )
   }
@@ -2436,14 +2510,28 @@ To display icons (or other elements) before or after an option, pass it via the 
     }
 
     handleShowOptions = (event) => {
+      const { options } = this.props
+      const { inputValue, selectedOptionId } = this.state
+
       this.setState({
         isShowingOptions: true
       })
+
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return this.handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return this.handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
 
     handleHideOptions = (event) => {
       const { selectedOptionId } = this.state
-      const option = this.getOptionById(selectedOptionId).label
+      const option = this.getOptionById(selectedOptionId)?.label
       this.setState({
         isShowingOptions: false,
         highlightedOptionId: null,
@@ -2467,7 +2555,7 @@ To display icons (or other elements) before or after an option, pass it via the 
       const option = this.getOptionById(id).label
       this.setState((state) => ({
         highlightedOptionId: id,
-        inputValue: event.type === 'keydown' ? option : state.inputValue,
+        inputValue: state.inputValue,
         announcement: `${option} ${nowOpen}`
       }))
     }
@@ -2522,13 +2610,6 @@ To display icons (or other elements) before or after an option, pass it via the 
               )
             })}
           </Select>
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="assertive"
-            screenReaderOnly
-          >
-            {announcement}
-          </Alert>
         </div>
       )
     }
@@ -2587,10 +2668,21 @@ To display icons (or other elements) before or after an option, pass it via the 
 
     const handleShowOptions = (event) => {
       setIsShowingOptions(true)
+
+      if (inputValue || selectedOptionId || options.length === 0) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
 
     const handleHideOptions = (event) => {
-      const option = getOptionById(selectedOptionId).label
+      const option = getOptionById(selectedOptionId)?.label
       setIsShowingOptions(false)
       setHighlightedOptionId(null)
       setInputValue(selectedOptionId ? option : '')
@@ -2609,7 +2701,7 @@ To display icons (or other elements) before or after an option, pass it via the 
         : ''
       const option = getOptionById(id).label
       setHighlightedOptionId(id)
-      setInputValue(event.type === 'keydown' ? option : inputValue)
+      setInputValue(inputValue)
       setAnnouncement(`${option} ${nowOpen}`)
     }
 
@@ -2652,13 +2744,6 @@ To display icons (or other elements) before or after an option, pass it via the 
             )
           })}
         </Select>
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="assertive"
-          screenReaderOnly
-        >
-          {announcement}
-        </Alert>
       </div>
     )
   }
@@ -2707,6 +2792,8 @@ type: embed
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
     <Figure.Item>To ensure Select is accessible for iOS VoiceOver users, the input field’s focus must be blurred and then reapplied after selecting an option and closing the listbox. The examples above demonstrate this behavior.
+    </Figure.Item>
+    <Figure.Item>If no option is selected initially, pressing the down arrow should open the listbox and move focus to the first option, while pressing up should move focus to the last item. You can see this behavior in the examples above.
     </Figure.Item>
   </Figure>
 </Guidelines>
