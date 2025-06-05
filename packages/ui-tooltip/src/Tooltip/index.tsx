@@ -177,6 +177,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         elementRef={this.handleRef}
         shouldCloseOnDocumentClick={false}
         shouldCloseOnEscape
+        aria-expanded={undefined}
       >
         {!preventTooltip ? (
           <span id={this._id} css={styles?.tooltip} role="tooltip">

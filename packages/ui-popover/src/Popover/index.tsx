@@ -437,7 +437,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     let trigger = this._renderTrigger
 
     if (trigger) {
-      const { on, shouldContainFocus } = this.props
+      const { on } = this.props
 
       let onClick: React.MouseEventHandler | undefined = undefined
       let onFocus: React.FocusEventHandler | undefined = undefined
@@ -468,17 +468,13 @@ class Popover extends Component<PopoverProps, PopoverState> {
         }
       }
 
-      if (shouldContainFocus) {
-        // only set aria-expanded if popover can contain focus
-        expanded = this.shown ? 'true' : 'false'
+      // only set aria-expanded if popover can contain focus
+      expanded = this.shown ? 'true' : 'false'
 
-        if ('aria-expanded' in this.props) {
-          // @ts-expect-error It is an escape hatch, in case someone
-          // wants to remove/override aria-expanded even when shouldContainFocus
-          expanded = this.props['aria-expanded']
-        }
-      } else {
-        expanded = undefined
+      if ('aria-expanded' in this.props) {
+        // @ts-expect-error It is an escape hatch, in case someone
+        // wants to remove/override aria-expanded even when shouldContainFocus
+        expanded = this.props['aria-expanded']
       }
 
       trigger = safeCloneElement(trigger, {
