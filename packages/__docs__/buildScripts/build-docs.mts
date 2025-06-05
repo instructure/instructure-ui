@@ -67,7 +67,7 @@ const pathsToProcess = [
   '**/src/*/*.{js,ts,tsx}', // component src files
   '**/src/*/*/*.{js,ts,tsx}', // child component src files
   'CODE_OF_CONDUCT.md',
-  'LICENSE.md'
+  'LICENSE.md',
 ]
 
 const pathsToIgnore = [
@@ -117,7 +117,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   buildDocs()
 }
 
-function buildDocs() {
+async function buildDocs() {
   // eslint-disable-next-line no-console
   console.log('Start building application data')
 
@@ -127,17 +127,20 @@ function buildDocs() {
   // globby needs the posix format
   const files = pathsToProcess.map((file) => path.posix.join(packagesDir, file))
   const ignore = pathsToIgnore.map((file) => path.posix.join(packagesDir, file))
+
   globby(files, { ignore })
-    .then((matches) => {
+    .then(async (matches) => {
+
       fs.mkdirSync(buildDir + 'docs/', { recursive: true })
       // eslint-disable-next-line no-console
       console.log(
         'Parsing markdown and source files... (' + matches.length + ' files)'
       )
-      const docs = matches.map((relativePath) => {
+      const docs = await Promise.all(matches.map(async (relativePath) => {
         // loop trough every source and Readme file
-        return processSingleFile(path.resolve(relativePath))
-      })
+        return await processSingleFile(path.resolve(relativePath))
+      }))
+
       const themes = parseThemes()
       const clientProps = getClientProps(docs, library)
       const props: MainDocsData = {
@@ -146,6 +149,7 @@ function buildDocs() {
         library
       }
       const markdownsAndSources = JSON.stringify(props)
+
       fs.writeFileSync(
         buildDir + 'markdown-and-sources-data.json',
         markdownsAndSources
@@ -182,12 +186,13 @@ function buildDocs() {
 // This function is also called by Webpack if a file changes
 // TODO this parses some files twice, its needed for the Webpack watcher but not
 // for the full build.
-function processSingleFile(fullPath: string) {
+async function processSingleFile(fullPath: string) {
+
   let docObject
   const dirName = path.dirname(fullPath)
   const fileName = path.parse(fullPath).name
   if (fileName === 'index') {
-    docObject = processFile(fullPath, projectRoot, library)
+    docObject = await processFile(fullPath, projectRoot, library)
     // Some Components (e.g. Alert) store their descriptions in README.md files.
     // Add this to the final JSON if it's edited
     const readmeDesc = tryParseReadme(dirName)
@@ -203,20 +208,23 @@ function processSingleFile(fullPath: string) {
       componentIndexFile = path.join(dirName, 'index.ts')
     }
     if (componentIndexFile) {
-      docObject = processFile(componentIndexFile, projectRoot, library)
+      docObject = await processFile(componentIndexFile, projectRoot, library)
       const readmeDesc = tryParseReadme(dirName)
       docObject.description = readmeDesc ? readmeDesc : docObject.description
     } else {
       // just a README.md, has no index file
-      docObject = processFile(fullPath, projectRoot, library)
+      docObject = await processFile(fullPath, projectRoot, library)
     }
   } else {
     // documentation .md files, utils ts and tsx files
-    docObject = processFile(fullPath, projectRoot, library)
+    docObject = await processFile(fullPath, projectRoot, library)
   }
+
   const docJSON = JSON.stringify(docObject!)
   fs.writeFileSync(buildDir + 'docs/' + docObject!.id + '.json', docJSON)
+
   return docObject!
+
 }
 
 function tryParseReadme(dirName: string) {

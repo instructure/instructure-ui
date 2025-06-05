@@ -26,25 +26,26 @@
 import jsdoc from 'jsdoc-api'
 import type { JsDocResult } from '../DataTypes.mjs'
 
-export function getJSDoc(source: Buffer, error: (err: Error) => void) {
+export async function getJSDoc(source: Buffer, error: (err: Error) => void) {
   // note: JSDoc seems to be abandoned, we should use TypeScript:
   // https://stackoverflow.com/questions/47429792/is-it-possible-to-get-comments-as-nodes-in-the-ast-using-the-typescript-compiler
   let doc: Partial<JsDocResult> = {}
   try {
     // JSDoc only creates these sections if the file has a @module or @namespace annotation
-    let sections: JsDocResult[] = jsdoc
-      .explainSync({
+    let sections: JsDocResult[] = await jsdoc
+      .explain({
         // note: Do not use cache:true here, its buggy
         configure: './jsdoc.config.json',
-        source
+        source: source.toString()
       })
-      sections = sections.filter((section) => {
-        return (
-          section.undocumented !== true &&
-          section.access !== 'private' &&
-          section.kind !== 'package'
-        )
-      })
+
+    sections = sections.filter((section) => {
+      return (
+        section.undocumented !== true &&
+        section.access !== 'private' &&
+        section.kind !== 'package'
+      )
+    })
     const module =
       sections.filter((section) => section.kind === 'module')[0] ||
       sections[0] ||

@@ -59,15 +59,15 @@ const config = merge(baseConfig, {
       directory: outputPath,
     },
     host: '0.0.0.0',
-    onListening: function () {
+    onListening: async function () {
       // devServer is watching source files by default and hot reloading the docs page if they are changed
       // however markdown files (i.e. README.md) need to be recompiled hence the need for chokidar
       const paths = globbySync(['packages/**/*.md', 'docs/**/*.md'], { cwd: '../../' }).map(p => '../../' + p)
       chokidar
         .watch(paths)
-        .on('change', (evt) => {
+        .on('change', async (evt) => {
           const fullPath = resolvePath(import.meta.dirname, evt)
-          processSingleFile(fullPath)
+          await processSingleFile(fullPath)
         })
     },
     client: {

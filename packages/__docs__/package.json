@@ -134,7 +134,7 @@
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "html-webpack-plugin": "^5.6.3",
-    "jsdoc-api": "^8.1.1",
+    "jsdoc-api": "^9.3.4",
     "mkdirp": "^3.0.1",
     "raw-loader": "^4.0.2",
     "react-docgen": "^7.1.1",
