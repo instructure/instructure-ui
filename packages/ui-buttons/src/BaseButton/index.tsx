@@ -36,6 +36,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
+import { isSafari } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -278,7 +279,8 @@ class BaseButton extends Component<BaseButtonProps> {
       }
     }
     let tabIndexValue = tabIndex
-    if (onClick && as && needsZeroTabIndex) {
+    // In Safari, a button cannot get focus unless it has an explicit 0 tabindex
+    if ((onClick && as && needsZeroTabIndex) || (isSafari() && as)) {
       tabIndexValue = tabIndex || 0
     }
     return (
