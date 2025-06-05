@@ -56,6 +56,10 @@ const generateStyle = (
       gap: '8px',
       alignItems: 'center'
     },
+    optionSeparatorOverride: {
+      background: componentTheme.optionSeparatorColor,
+      margin: '0'
+    },
     topNavBarItemOverride: {
       color: componentTheme.topNavBarItemColor,
       activeIndicatorColor: componentTheme.topNavBarItemActiveIndicatorColor

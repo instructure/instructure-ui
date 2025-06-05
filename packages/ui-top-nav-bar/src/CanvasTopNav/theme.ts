@@ -35,8 +35,9 @@ const generateComponentTheme = (theme: Theme): CanvasTopNavTheme => {
     optionColor: theme?.colors?.contrasts?.white1010,
     optionHighlightedLabelColorLti: theme?.colors?.contrasts?.grey125125,
     optionHighlightedLabelColor: theme?.colors?.contrasts?.white1010,
-    drilldownBorderColorLti: theme?.colors?.contrasts?.grey1424,
+    drilldownBorderColorLti: theme?.colors?.contrasts?.grey1111,
     drilldownBorderColor: theme?.colors?.contrasts?.grey100100,
+    optionSeparatorColor: theme?.colors?.contrasts?.grey1424,
     topNavBarItemColor: theme?.colors?.contrasts?.grey125125,
     topNavBarItemActiveIndicatorColor: theme?.colors?.contrasts?.grey125125
   }
