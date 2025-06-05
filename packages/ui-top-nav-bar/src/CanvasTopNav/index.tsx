@@ -40,6 +40,7 @@ import {
   DeepPartial,
   DrilldownTheme,
   OptionsItemTheme,
+  OptionsSeparatorTheme,
   TopNavBarItemTheme
 } from '@instructure/shared-types'
 
@@ -152,6 +153,9 @@ const CanvasTopNav = ({
               },
               Drilldown: {
                 ...(styles.drilldownOverride as DeepPartial<DrilldownTheme>)
+              },
+              'Options.Separator': {
+                ...(styles.optionSeparatorOverride as DeepPartial<OptionsSeparatorTheme>)
               }
             }
           }}

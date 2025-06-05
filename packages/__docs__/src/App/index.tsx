@@ -388,7 +388,7 @@ class App extends Component<AppProps, AppState> {
                   ]
                 }
               ]}
-              currentPageId="library" // ltiCurrentPageID
+              currentPageId="share" // ltiCurrentPageID
             />
             <Tray
               label="Courses"

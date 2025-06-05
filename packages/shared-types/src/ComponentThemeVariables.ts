@@ -1771,6 +1771,7 @@ export type CanvasTopNavTheme = {
   drilldownBorderColor: string
   topNavBarItemColor: string
   topNavBarItemActiveIndicatorColor: string
+  optionSeparatorColor: string
 }
 
 export interface ThemeVariables {

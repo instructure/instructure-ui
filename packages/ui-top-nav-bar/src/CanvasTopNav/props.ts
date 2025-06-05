@@ -50,6 +50,7 @@ type CanvasTopNavStyle = ComponentStyle<
   | 'topNavBarItemOverride'
   | 'ltiIcon'
   | 'menuItems'
+  | 'optionSeparatorOverride'
 >
 
 type CanvasTopNavProps = CanvasTopNavOwnProps & PropsWithChildren
