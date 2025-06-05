@@ -192,6 +192,18 @@ describe('<BaseButton/>', () => {
     expect(elementRef).toBeCalledWith(button)
   })
 
+  it('should not be underlined when disabled with a href', () => {
+    render(
+      <BaseButton disabled href="#">
+        Hello World
+      </BaseButton>
+    )
+    const button = screen.getByRole('link', { name: 'Hello World' })
+
+    const styles = window.getComputedStyle(button)
+    expect(styles.textDecoration).toContain('none')
+  })
+
   describe('onClick', () => {
     it('should call onClick when clicked', async () => {
       const onClick = vi.fn()
