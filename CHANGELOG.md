@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* **ui-drilldown:** fix highlighting first drilldown option if it is in a group ([3cc159b](https://github.com/instructure/instructure-ui/commit/3cc159bb0b6591bfb10eeeb6558dd384b09649d6))
+* **ui-modal:** save modal from unnecessary rerender ([a473127](https://github.com/instructure/instructure-ui/commit/a473127b2049b02e5463b71c84a0b803fd9d40d4))
+* **ui-top-nav-bar:** truncate TopNavBar menu items properly ([09efff0](https://github.com/instructure/instructure-ui/commit/09efff0810837962309a2e48828ea8fa7322a2cf))
+* **ui-utils,ui-select:** make screenreader annouce disabled Select as dimmed in Chrome ([c547c31](https://github.com/instructure/instructure-ui/commit/c547c31b65fd15ebde0f588bbd364d12d1b46615))
+
+
+
+
+
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
 
 
