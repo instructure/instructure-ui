@@ -7,10 +7,7 @@ order: 9
 ## Adding and Modifying Icons
 
 - Use dashes in the name of the .svg files (e.g `calendar-month`).
-  Use the same name for the "line" and "solid" variants, and save them in the respective folder, e.g. `Solid/calendar-month` and `Line/calendar-month`.
-
-- Copy the new icon files in the `/svg/Solid` and `/svg/Line` directories.
-
+- Use the same name for the "Line" and "Solid" variants, and save them in the respective folder, e.g. `instructure-ui/packages/ui-icons/svg/Line/calendar-month.svg` and `instructure-ui/packages/ui-icons/svg/Solid/calendar-month.svg`.
 - Double-check that the SVG size is 1920x1920.
 
 ```js
@@ -65,15 +62,11 @@ type: code
 </svg>
 ```
 
-- If the icon has to bidirectional (being mirrored in RTL mode, typically arrow icons), add the icon name to the bidirectional list in `packages/ui-icons/icons.config.js`. Deprecated icons are handled here as well.
+- If the icon has to be bidirectional (being mirrored in RTL mode, typically arrow icons), add the icon name to the bidirectional list in `packages/ui-icons/icons.config.js`. Deprecated icons are handled here as well.
 
-- Run `npm run export:icons` from the repository root directory to generate the icons. This script will also take care of further optimizations on the SVG files (e.g. removing the `fill`s). The configs for this are located in `packages/ui-icons-build/lib/tasks/optimize-svgs/index.js` and `packages/ui-icons/svgo.config.js`.
+- Run `npm run bootstrap`.
 
-- Run `npm install && npm run bootstrap`.
-
-- Finally, run `npm run dev` from the repository root directory to start the local server and check the generated output.
-
-- Verify icons display correctly by checking under [Icons](/#icons) in the main nav. Check all 3 versions (React, SVG and icon font).
+- Finally, run `npm run dev` and verify that the icons are displayed correctly under [Icons](/#icons). Check all 3 versions (React, SVG and icon font).
 
 (Note: The fonts are sometimes not rendered correctly, but we decided not to fix them, because they are not really used anywhere, and we might stop supporting icon fonts in the future in general.)
 
@@ -94,3 +87,9 @@ type: code
   Draw inside the lines.
 
 - Fill the space edge-to-edge as much as possible. The build process will add margins as needed.
+
+- Don't use inline styles
+
+- Don't use `class` or `for` attributes
+
+- Always have `<svg>` as the root tag
