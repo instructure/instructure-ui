@@ -29,7 +29,7 @@
     "@types/codemirror": "5.x"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.0",
+    "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "10.19.1",
     "@instructure/shared-types": "10.19.1",
     "@instructure/ui-a11y-content": "10.19.1",

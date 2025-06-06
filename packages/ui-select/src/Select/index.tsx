@@ -411,7 +411,7 @@ class Select extends Component<SelectProps> {
             isHighlighted,
             children
           })
-        : renderOptionLabel
+        : (renderOptionLabel as React.ReactNode)
     }
 
     let optionProps: Partial<OptionsItemProps> = {
