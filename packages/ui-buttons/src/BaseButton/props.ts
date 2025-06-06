@@ -174,6 +174,7 @@ type BaseButtonOwnProps = {
 type BaseButtonStyleProps = {
   isDisabled: boolean
   hasOnlyIconVisible: boolean
+  isEnabled: boolean
 }
 
 type PropKeys = keyof BaseButtonOwnProps
