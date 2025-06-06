@@ -71,13 +71,12 @@ function hash(value: unknown, maxLength = 0) {
 
   let hashedValue = ''
   let valueToHash = value
-
-  if (typeof valueToHash !== 'string') {
-    if (typeof valueToHash === 'object') {
+  if (typeof value !== 'string') {
+    if (typeof value === 'object') {
       // Ensure we are robust to things like objects that are identical, but with keys in diff orders
-      valueToHash = stringify(valueToHash)
+      valueToHash = stringify(value)!
     } else {
-      valueToHash = (valueToHash as any).toString()
+      valueToHash = value.toString()
     }
   }
   hashedValue = executeHash(valueToHash as string)

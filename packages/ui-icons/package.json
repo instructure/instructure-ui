@@ -26,7 +26,7 @@
     "@instructure/ui-babel-preset": "10.19.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.0",
+    "@babel/runtime": "^7.27.6",
     "@instructure/ui-svg-images": "10.19.1",
     "prop-types": "^15.8.1"
   },

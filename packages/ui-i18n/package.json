@@ -26,12 +26,12 @@
     "@instructure/ui-babel-preset": "10.19.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
-    "@types/hoist-non-react-statics": "^3.3.5",
+    "@types/hoist-non-react-statics": "^3.3.6",
     "react-dom": "^18.3.1",
-    "vitest": "^2.1.8"
+    "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.0",
+    "@babel/runtime": "^7.27.6",
     "@instructure/shared-types": "10.19.1",
     "@instructure/ui-decorator": "10.19.1",
     "@instructure/ui-dom-utils": "10.19.1",
@@ -39,7 +39,7 @@
     "@instructure/ui-react-utils": "10.19.1",
     "@instructure/ui-utils": "10.19.1",
     "hoist-non-react-statics": "^3.3.2",
-    "moment-timezone": "^0.5.45",
+    "moment-timezone": "^0.6.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

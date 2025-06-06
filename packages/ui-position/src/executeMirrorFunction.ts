@@ -45,7 +45,7 @@ function executeMirrorFunction<D extends string | undefined = undefined>(
     ? (placement as PlacementValueArray)
     : ((placement as PlacementStringValues).split(' ') as PlacementValueArray)
   const result = mirrorFunction(first, second).filter((value) => value)
-  return delimiter ? (result.join(delimiter) as any) : result
+  return delimiter ? (result.join(delimiter) as any) : (result as any)
 }
 
 export default executeMirrorFunction
