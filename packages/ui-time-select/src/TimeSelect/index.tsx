@@ -383,6 +383,27 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       highlightedOptionId: this.state.selectedOptionId
     })
     this.props.onShowOptions?.(event)
+
+    if (event.type.startsWith('key')) {
+      const keyboardEvent = event as React.KeyboardEvent
+      const children = this.state.filteredOptions
+      if (
+        !this.state.inputValue &&
+        children.length > 0 &&
+        !this.props.allowClearingSelection
+      ) {
+        const optionId =
+          keyboardEvent.key === 'ArrowDown'
+            ? children[0].id
+            : keyboardEvent.key === 'ArrowUp'
+            ? children[children.length - 1].id
+            : undefined
+        optionId &&
+          this.setState({
+            highlightedOptionId: optionId
+          })
+      }
+    }
   }
 
   // Called when the input is blurred (=when clicking outside, tabbing away),
@@ -492,17 +513,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   handleHighlightOption: SelectProps['onRequestHighlightOption'] = (
-    event,
+    _event,
     data
   ) => {
     if (data.id === this._emptyOptionId) return
-    const option = this.getOption('id', data.id)!.label
 
-    // this is needed for react 16. When we no longer support it, this can be removed
-    const eventType = event.type
     this.setState((state) => ({
       highlightedOptionId: data.id,
-      inputValue: eventType === 'keydown' ? option : state.inputValue
+      inputValue: state.inputValue
     }))
   }
 

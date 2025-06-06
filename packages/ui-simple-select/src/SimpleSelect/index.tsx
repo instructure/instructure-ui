@@ -248,6 +248,31 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     return match
   }
 
+  getOptionByPosition(position: 'first' | 'last'): OptionChild | undefined {
+    const children = Children.toArray(this.props.children)
+
+    // Determine where to start looking based on position
+    const index = position === 'first' ? 0 : children.length - 1
+
+    // Check if child is an option or group
+    const child = children[index]
+    if (!child) return undefined
+
+    // If it's a regular option, return it
+    if (matchComponentTypes<OptionChild>(child, [Option])) {
+      return child
+    }
+
+    // If it's a group, get its options
+    if (matchComponentTypes<GroupChild>(child, [Group])) {
+      const groupOptions = Children.toArray(child.props.children)
+      const groupIndex = position === 'first' ? 0 : groupOptions.length - 1
+      return groupOptions[groupIndex] as OptionChild
+    }
+
+    return undefined
+  }
+
   handleRef = (node: Select) => {
     this.ref = node
   }
@@ -263,6 +288,30 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     this.setState({ isShowingOptions: true })
     if (typeof this.props.onShowOptions === 'function') {
       this.props.onShowOptions(event)
+    }
+
+    if (event.type.startsWith('key')) {
+      const keyboardEvent = event as React.KeyboardEvent
+      const children = Children.toArray(this.props.children) as (
+        | OptionChild
+        | GroupChild
+      )[]
+
+      if (!this.state.inputValue && children.length > 0) {
+        const position =
+          keyboardEvent.key === 'ArrowDown'
+            ? 'first'
+            : keyboardEvent.key === 'ArrowUp'
+            ? 'last'
+            : undefined
+        if (position) {
+          const optionId = this.getOptionByPosition(position)?.props.id
+          optionId &&
+            this.setState({
+              highlightedOptionId: optionId
+            })
+        }
+      }
     }
   }
 
@@ -281,18 +330,14 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   }
 
   handleHighlightOption: SelectProps['onRequestHighlightOption'] = (
-    event,
+    _event,
     { id }
   ) => {
     if (id === this._emptyOptionId) return
 
-    const option = this.getOption('id', id)
-    const label = option?.props.children
-    const inputValue = event.type === 'keydown' ? label : this.state.inputValue
-
     this.setState({
       highlightedOptionId: id,
-      inputValue
+      inputValue: this.state.inputValue
     })
   }
 
