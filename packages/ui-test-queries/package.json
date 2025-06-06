@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.19.1",
-    "@types/sizzle": "^2.3.8"
+    "@types/sizzle": "^2.3.9"
   },
   "publishConfig": {
     "access": "public"

@@ -29,11 +29,11 @@
     "@instructure/ui-themes": "10.19.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
-    "vitest": "^2.1.8"
+    "@testing-library/user-event": "^14.6.1",
+    "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.0",
+    "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "10.19.1",
     "@instructure/shared-types": "10.19.1",
     "@instructure/ui-react-utils": "10.19.1",
