@@ -59,7 +59,6 @@ const generateStyle = (
       justifyContent: 'flex-start',
       alignItems: 'stretch',
       border: 0,
-      outline: 0,
       padding: 0,
       margin: 0,
       appearance: 'none',
