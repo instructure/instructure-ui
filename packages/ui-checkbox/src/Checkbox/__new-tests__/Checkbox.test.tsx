@@ -105,6 +105,14 @@ describe('<Checkbox />', () => {
     expect(inputElem).toHaveAttribute('aria-checked', 'mixed')
   })
 
+  it('should provide an inputRef prop', async () => {
+    const inputRef = vi.fn()
+    renderCheckbox({ inputRef })
+    const input = screen.getByRole('checkbox')
+
+    expect(inputRef).toHaveBeenCalledWith(input)
+  })
+
   describe('events', () => {
     it('when clicked, fires onClick and onChange events', async () => {
       const onClick = vi.fn()

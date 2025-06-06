@@ -102,6 +102,13 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     this.ref = el
   }
 
+  handleInputRef = (el: HTMLInputElement | null) => {
+    this._input = el
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(el)
+    }
+  }
+
   componentDidMount() {
     if (this._input) {
       this._input.indeterminate = this.props.indeterminate!
@@ -323,9 +330,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
             id={this.id}
             value={value}
             type="checkbox"
-            ref={(c) => {
-              this._input = c
-            }}
+            ref={this.handleInputRef}
             required={isRequired}
             disabled={disabled || readOnly}
             aria-checked={indeterminate ? 'mixed' : undefined}

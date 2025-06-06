@@ -234,6 +234,11 @@ type ColorPickerOwnProps = {
    * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
    */
   margin?: Spacing
+
+  /**
+   * A function that provides a reference to the input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
 type ColorPickerState = {
@@ -326,7 +331,8 @@ const propTypes: PropValidators<PropKeys> = {
   value: PropTypes.string,
   width: PropTypes.string,
   withAlpha: PropTypes.bool,
-  margin: PropTypes.string
+  margin: PropTypes.string,
+  inputRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -350,7 +356,8 @@ const allowedProps: AllowedPropKeys = [
   'value',
   'width',
   'withAlpha',
-  'margin'
+  'margin',
+  'inputRef'
 ]
 
 export type {

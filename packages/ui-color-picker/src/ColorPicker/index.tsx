@@ -608,7 +608,8 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   )
 
   render() {
-    const { disabled, isRequired, placeholderText, width, id } = this.props
+    const { disabled, isRequired, placeholderText, width, id, inputRef } =
+      this.props
 
     return (
       <div
@@ -633,6 +634,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           onPaste={(event) => this.handleOnPaste(event)}
           onBlur={() => this.handleOnBlur()}
           messages={this.renderMessages()}
+          inputRef={inputRef}
         />
         {!this.isSimple && (
           <div
