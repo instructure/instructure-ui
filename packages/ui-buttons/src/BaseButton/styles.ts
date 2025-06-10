@@ -56,7 +56,7 @@ const generateStyle = (
     isCondensed
   } = props
 
-  const { isDisabled, hasOnlyIconVisible } = state
+  const { isDisabled, hasOnlyIconVisible, isEnabled } = state
 
   const shapeVariants = {
     circle: { borderRadius: '50%' },
@@ -401,26 +401,32 @@ const generateStyle = (
   }
 
   return {
-    baseButton: {
-      label: 'baseButton',
-      appearance: 'none',
-      textDecoration: 'none' /* for links styled as buttons */,
-      touchAction: 'manipulation',
+    baseButton: isEnabled
+      ? {
+          label: 'baseButton',
+          appearance: 'none',
+          textDecoration: 'none' /* for links styled as buttons */,
+          touchAction: 'manipulation',
 
-      '&::-moz-focus-inner': {
-        border: '0' /* removes default dotted focus outline in Firefox */
-      },
-      '*': {
-        pointerEvents:
-          'none' /* Ensures that button or link is always the event target */
-      },
-      '&:focus': {
-        textDecoration: 'none'
-      },
-      '&:active > [class$=-baseButton__content]': colorVariants[color!].active,
-      '&:hover > [class$=-baseButton__content]': colorVariants[color!].hover
-    },
-
+          '&::-moz-focus-inner': {
+            border: '0' /* removes default dotted focus outline in Firefox */
+          },
+          '*': {
+            pointerEvents:
+              'none' /* Ensures that button or link is always the event target */
+          },
+          '&:focus': {
+            textDecoration: 'none'
+          },
+          '&:active > [class$=-baseButton__content]':
+            colorVariants[color!].active,
+          '&:hover > [class$=-baseButton__content]': colorVariants[color!].hover
+        }
+      : {
+          textDecoration: 'none',
+          label: 'baseButton',
+          appearance: 'none'
+        },
     content: {
       label: 'baseButton__content',
       boxSizing: 'border-box',
