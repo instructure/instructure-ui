@@ -89,7 +89,8 @@ class BaseButton extends Component<BaseButtonProps> {
   get makeStylesVariables(): BaseButtonStyleProps {
     return {
       isDisabled: this.isDisabled,
-      hasOnlyIconVisible: this.hasOnlyIconVisible
+      hasOnlyIconVisible: this.hasOnlyIconVisible,
+      isEnabled: this.isEnabled
     }
   }
 
@@ -256,7 +257,7 @@ class BaseButton extends Component<BaseButtonProps> {
       ...props
     } = this.props
 
-    const { isDisabled, isEnabled, isReadOnly, elementType } = this
+    const { isDisabled, isReadOnly, elementType } = this
     // only add 0 tabIndex value if it doesn't have it by default, see
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
     let needsZeroTabIndex = true
@@ -306,7 +307,7 @@ class BaseButton extends Component<BaseButtonProps> {
         role={onClick && as !== 'button' ? 'button' : undefined}
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
-        css={isEnabled ? styles?.baseButton : null}
+        css={styles?.baseButton}
         focusRingBorderRadius={String(
           (styles?.content as { borderRadius?: string | number })?.borderRadius
         )}
