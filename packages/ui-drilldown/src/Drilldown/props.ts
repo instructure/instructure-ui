@@ -261,6 +261,12 @@ type DrilldownOwnProps = {
    * Works only if `trigger` is provided.
    */
   offsetY?: string | number
+  /**
+   * If true (default), then the aria-expanded prop is added to the trigger.
+   * If its supplied via the aria-expanded prop then it takes the given value,
+   * otherwise its calculated automatically based on whether the content is shown.
+   */
+  shouldSetAriaExpanded?: boolean
 }
 
 type PropKeys = keyof DrilldownOwnProps
@@ -338,7 +344,8 @@ const propTypes: PropValidators<PropKeys> = {
   shouldReturnFocus: PropTypes.bool,
   withArrow: PropTypes.bool,
   offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  shouldSetAriaExpanded: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

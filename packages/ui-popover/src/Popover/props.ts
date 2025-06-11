@@ -283,6 +283,12 @@ type PopoverOwnProps = {
    * Only applies to a Popover without an arrow.
    */
   borderWidth?: BorderWidth
+  /**
+   * If true (default), then the aria-expanded prop is added to the trigger.
+   * If its supplied via the aria-expanded prop then it takes the given value,
+   * otherwise its calculated automatically based on whether the content is shown.
+   */
+  shouldSetAriaExpanded?: boolean
 }
 
 type PopoverProps = PopoverOwnProps &
@@ -353,7 +359,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderTrigger: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   elementRef: PropTypes.func,
-  borderWidth: ThemeablePropTypes.borderWidth
+  borderWidth: ThemeablePropTypes.borderWidth,
+  shouldSetAriaExpanded: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -399,7 +406,8 @@ const allowedProps: AllowedPropKeys = [
   'renderTrigger',
   'children',
   'elementRef',
-  'borderWidth'
+  'borderWidth',
+  'shouldSetAriaExpanded'
 ]
 
 export type { PopoverOwnProps, PopoverProps, PopoverState, PopoverStyle }

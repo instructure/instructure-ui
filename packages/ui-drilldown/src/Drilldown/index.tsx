@@ -121,7 +121,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     shouldReturnFocus: true,
     withArrow: true,
     offsetX: 0,
-    offsetY: 0
+    offsetY: 0,
+    shouldSetAriaExpanded: true
   }
 
   static Group = DrilldownGroup
@@ -1494,11 +1495,13 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       onFocus,
       onMouseOver,
       offsetX,
-      offsetY
+      offsetY,
+      shouldSetAriaExpanded
     } = this.props
 
     return trigger ? (
       <Popover
+        shouldSetAriaExpanded={shouldSetAriaExpanded}
         isShowingContent={show}
         defaultIsShowingContent={defaultShow}
         shouldCloseOnDocumentClick={true}
