@@ -163,7 +163,10 @@ class TopNavBarMenuItems extends Component<
         id={this._hiddenMenuItemsMenuTriggerId}
         status={hasActiveChild ? 'active' : 'default'}
         renderSubmenu={
-          <Drilldown rootPageId={this._hiddenItemsMenuId}>
+          <Drilldown
+            shouldSetAriaExpanded={false}
+            rootPageId={this._hiddenItemsMenuId}
+          >
             {[
               <Drilldown.Page
                 id={this._hiddenItemsMenuId}

@@ -223,7 +223,10 @@ class TopNavBarActionItems extends Component<
         tooltip={tooltip}
         showSubmenuChevron={false}
         renderSubmenu={
-          <Drilldown rootPageId={this._hiddenActionItemsMenuId}>
+          <Drilldown
+            shouldSetAriaExpanded={false}
+            rootPageId={this._hiddenActionItemsMenuId}
+          >
             {[
               <Drilldown.Page
                 id={this._hiddenActionItemsMenuId}

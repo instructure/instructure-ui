@@ -98,7 +98,8 @@ class Popover extends Component<PopoverProps, PopoverState> {
     shouldReturnFocus: true,
     shouldCloseOnDocumentClick: true,
     shouldFocusContentOnTriggerBlur: false,
-    shouldCloseOnEscape: true
+    shouldCloseOnEscape: true,
+    shouldSetAriaExpanded: true
   }
 
   constructor(props: PopoverProps) {
@@ -437,7 +438,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     let trigger = this._renderTrigger
 
     if (trigger) {
-      const { on, shouldContainFocus } = this.props
+      const { on } = this.props
 
       let onClick: React.MouseEventHandler | undefined = undefined
       let onFocus: React.FocusEventHandler | undefined = undefined
@@ -468,13 +469,13 @@ class Popover extends Component<PopoverProps, PopoverState> {
         }
       }
 
-      if (shouldContainFocus) {
+      if (this.props.shouldSetAriaExpanded) {
         // only set aria-expanded if popover can contain focus
         expanded = this.shown ? 'true' : 'false'
 
         if ('aria-expanded' in this.props) {
           // @ts-expect-error It is an escape hatch, in case someone
-          // wants to remove/override aria-expanded even when shouldContainFocus
+          // wants to remove/override aria-expanded even when shouldSetAriaExpanded is set
           expanded = this.props['aria-expanded']
         }
       } else {

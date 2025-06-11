@@ -84,7 +84,7 @@ const avatarExample = {
 }
 
 const itemSubmenuExample = (
-  <Drilldown rootPageId="root">
+  <Drilldown shouldSetAriaExpanded={false} rootPageId="root">
     <Drilldown.Page id="root">
       <Drilldown.Option id="linkExampleOption1" href="/#One">
         Link One
