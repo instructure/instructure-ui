@@ -114,7 +114,7 @@ const generateStyle = (
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
-
+      flex: '1 1 auto',
       // ModalHeader and ModalBody is set to scrollable above 20rem height instead of just the ModalBody
       '@media (max-height: 20rem)': {
         overflowY: 'auto',
