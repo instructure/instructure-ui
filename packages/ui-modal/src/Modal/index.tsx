@@ -176,7 +176,9 @@ class Modal extends Component<ModalProps, ModalState> {
     // this is needed to apply a media query breakpoint
     const wrappedHeaderAndBody =
       headerAndBody.length > 0 ? (
-        <div css={styles?.joinedHeaderAndBody}>{headerAndBody}</div>
+        <div key="header-and-body" css={styles?.joinedHeaderAndBody}>
+          {headerAndBody}
+        </div>
       ) : null
 
     return [...(wrappedHeaderAndBody ? [wrappedHeaderAndBody] : []), ...others]
