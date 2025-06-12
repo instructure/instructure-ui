@@ -59,6 +59,7 @@ type NavState = {
   expandedSections: Record<string, any>
   userToggling: boolean
   queryStr?: string
+  announcement: string | null
 }
 export type { NavProps, NavState }
 export { allowedProps, propTypes }
