@@ -435,7 +435,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
         this.handleItemRef(e as HTMLButtonElement | HTMLLinkElement)
       },
       withFocusOutline:
-        withFocusOutline || this.hasOpenPopover || this.state.isFocused
+        withFocusOutline || this.hasOpenPopover ? true : undefined
     }
   }
 
