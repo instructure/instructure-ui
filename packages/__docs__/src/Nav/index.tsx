@@ -34,6 +34,7 @@ import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
 import { NavToggle } from '../NavToggle'
 import type { NavProps, NavState } from './props'
+import { Alert } from '@instructure/ui-alerts'
 
 class Nav extends Component<NavProps, NavState> {
   _themeId: string
@@ -45,7 +46,8 @@ class Nav extends Component<NavProps, NavState> {
     this.state = {
       query: null,
       expandedSections: this.setExpandedSections(false, props.sections),
-      userToggling: false
+      userToggling: false,
+      announcement: null
     }
 
     this._themeId = '__themes'
@@ -79,15 +81,53 @@ class Nav extends Component<NavProps, NavState> {
       this.state.expandedSections
     )
 
+    if (!value && this.state.queryStr) {
+      this.announceResults(-1)
+    }
+
     clearTimeout(this.searchTimeout!)
     this.searchTimeout = setTimeout(() => {
-      this.setState({
-        query: value ? new RegExp(value, 'i') : null,
-        queryStr: value,
-        expandedSections,
-        userToggling: false
-      })
+      this.setState(
+        {
+          query: value ? new RegExp(value, 'i') : null,
+          queryStr: value,
+          expandedSections,
+          userToggling: false
+        },
+        () => {
+          if (value) {
+            this.announceResults(this.countSearchResults())
+          }
+        }
+      )
     }, 500)
+  }
+
+  announceResults(count: number) {
+    const message =
+      count === -1
+        ? 'Search cleared'
+        : count === 0
+        ? 'No results'
+        : `${count} ${count === 1 ? 'result' : 'results'} available below`
+    setTimeout(() => {
+      this.setState({
+        announcement: message
+      })
+    }, 1000)
+  }
+
+  countSearchResults(): number {
+    const { sections } = this.props
+    let count = 0
+    Object.keys(sections).forEach((sectionId) => {
+      const uniqueDocs = this.matchingDocsInSection(sectionId).filter(
+        (docId: any, index: any, array: string | any[]) =>
+          array.indexOf(docId) === index
+      )
+      count += uniqueDocs.length
+    })
+    return count
   }
 
   handleToggleSection = (sectionId: string, expanded: boolean) => {
@@ -469,6 +509,15 @@ class Nav extends Component<NavProps, NavState> {
             elementRef={this.textInputRef}
           />
         </View>
+        <Alert
+          liveRegion={() =>
+            document.getElementById('flash-messages') as HTMLElement
+          }
+          liveRegionPoliteness="polite"
+          screenReaderOnly
+        >
+          {this.state.announcement}
+        </Alert>
         <View margin="medium none none" display="block">
           {hasMatches && matches}
         </View>
