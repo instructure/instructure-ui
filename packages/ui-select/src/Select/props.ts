@@ -256,6 +256,12 @@ type PropsFromTextInput = {
    * when available space is exceeded.
    */
   shouldNotWrap?: boolean
+
+  /**
+   * In `stacked` mode the input is below the label, in `inline` mode the
+   * container is to the right/left (depending on text direction)
+   */
+  layout?: 'stacked' | 'inline'
 }
 
 // These props are directly passed to Popover
@@ -328,7 +334,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: ChildrenPropTypes.oneOf([Group, Option]),
   shouldNotWrap: PropTypes.bool,
-  scrollToHighlightedOption: PropTypes.bool
+  scrollToHighlightedOption: PropTypes.bool,
+  layout: PropTypes.oneOf(['stacked', 'inline'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -365,7 +372,8 @@ const allowedProps: AllowedPropKeys = [
   'renderAfterInput',
   'children',
   'shouldNotWrap',
-  'scrollToHighlightedOption'
+  'scrollToHighlightedOption',
+  'layout'
 ]
 
 export type { SelectProps, SelectOwnProps, SelectStyle }

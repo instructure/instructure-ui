@@ -503,6 +503,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
       onShowOptions,
       onHideOptions,
       children,
+      layout,
       ...rest
     } = this.props
 
@@ -538,6 +539,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={this.handleSelectOption}
         isOptionContentAppliedToInput={this.props.isOptionContentAppliedToInput}
+        layout={layout}
         {...passthroughProps(rest)}
       >
         {this.renderChildren()}
