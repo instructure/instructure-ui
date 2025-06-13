@@ -42,56 +42,56 @@ break
 case"onDragLeave":this.editor.on("dragleave",((_cm,event)=>{var _this$props$onDragLea,_this$props9
 null===(_this$props$onDragLea=(_this$props9=this.props).onDragLeave)||void 0===_this$props$onDragLea||_this$props$onDragLea.call(_this$props9,this.editor,event)}))
 break
-case"onDragOver":this.editor.on("dragover",((_cm,event)=>{var _this$props$onDragOve,_this$props10
-null===(_this$props$onDragOve=(_this$props10=this.props).onDragOver)||void 0===_this$props$onDragOve||_this$props$onDragOve.call(_this$props10,this.editor,event)}))
+case"onDragOver":this.editor.on("dragover",((_cm,event)=>{var _this$props$onDragOve,_this$props0
+null===(_this$props$onDragOve=(_this$props0=this.props).onDragOver)||void 0===_this$props$onDragOve||_this$props$onDragOve.call(_this$props0,this.editor,event)}))
 break
-case"onDragStart":this.editor.on("dragstart",((_cm,event)=>{var _this$props$onDragSta,_this$props11
-null===(_this$props$onDragSta=(_this$props11=this.props).onDragStart)||void 0===_this$props$onDragSta||_this$props$onDragSta.call(_this$props11,this.editor,event)}))
+case"onDragStart":this.editor.on("dragstart",((_cm,event)=>{var _this$props$onDragSta,_this$props1
+null===(_this$props$onDragSta=(_this$props1=this.props).onDragStart)||void 0===_this$props$onDragSta||_this$props$onDragSta.call(_this$props1,this.editor,event)}))
 break
-case"onDrop":this.editor.on("drop",((_cm,event)=>{var _this$props$onDrop,_this$props12
-null===(_this$props$onDrop=(_this$props12=this.props).onDrop)||void 0===_this$props$onDrop||_this$props$onDrop.call(_this$props12,this.editor,event)}))
+case"onDrop":this.editor.on("drop",((_cm,event)=>{var _this$props$onDrop,_this$props10
+null===(_this$props$onDrop=(_this$props10=this.props).onDrop)||void 0===_this$props$onDrop||_this$props$onDrop.call(_this$props10,this.editor,event)}))
 break
-case"onFocus":this.editor.on("focus",((_cm,event)=>{var _this$props$onFocus,_this$props13
-null===(_this$props$onFocus=(_this$props13=this.props).onFocus)||void 0===_this$props$onFocus||_this$props$onFocus.call(_this$props13,this.editor,event)}))
+case"onFocus":this.editor.on("focus",((_cm,event)=>{var _this$props$onFocus,_this$props11
+null===(_this$props$onFocus=(_this$props11=this.props).onFocus)||void 0===_this$props$onFocus||_this$props$onFocus.call(_this$props11,this.editor,event)}))
 break
-case"onGutterClick":this.editor.on("gutterClick",((_cm,lineNumber,gutter,event)=>{var _this$props$onGutterC,_this$props14
-null===(_this$props$onGutterC=(_this$props14=this.props).onGutterClick)||void 0===_this$props$onGutterC||_this$props$onGutterC.call(_this$props14,this.editor,lineNumber,gutter,event)}))
+case"onGutterClick":this.editor.on("gutterClick",((_cm,lineNumber,gutter,event)=>{var _this$props$onGutterC,_this$props12
+null===(_this$props$onGutterC=(_this$props12=this.props).onGutterClick)||void 0===_this$props$onGutterC||_this$props$onGutterC.call(_this$props12,this.editor,lineNumber,gutter,event)}))
 break
-case"onInputRead":this.editor.on("inputRead",((_cm,EditorChangeEvent)=>{var _this$props$onInputRe,_this$props15
-null===(_this$props$onInputRe=(_this$props15=this.props).onInputRead)||void 0===_this$props$onInputRe||_this$props$onInputRe.call(_this$props15,this.editor,EditorChangeEvent)}))
+case"onInputRead":this.editor.on("inputRead",((_cm,EditorChangeEvent)=>{var _this$props$onInputRe,_this$props13
+null===(_this$props$onInputRe=(_this$props13=this.props).onInputRead)||void 0===_this$props$onInputRe||_this$props$onInputRe.call(_this$props13,this.editor,EditorChangeEvent)}))
 break
-case"onKeyDown":this.editor.on("keydown",((_cm,event)=>{var _this$props$onKeyDown,_this$props16
-null===(_this$props$onKeyDown=(_this$props16=this.props).onKeyDown)||void 0===_this$props$onKeyDown||_this$props$onKeyDown.call(_this$props16,this.editor,event)}))
+case"onKeyDown":this.editor.on("keydown",((_cm,event)=>{var _this$props$onKeyDown,_this$props14
+null===(_this$props$onKeyDown=(_this$props14=this.props).onKeyDown)||void 0===_this$props$onKeyDown||_this$props$onKeyDown.call(_this$props14,this.editor,event)}))
 break
-case"onKeyHandled":this.editor.on("keyHandled",((_cm,key,event)=>{var _this$props$onKeyHand,_this$props17
-null===(_this$props$onKeyHand=(_this$props17=this.props).onKeyHandled)||void 0===_this$props$onKeyHand||_this$props$onKeyHand.call(_this$props17,this.editor,key,event)}))
+case"onKeyHandled":this.editor.on("keyHandled",((_cm,key,event)=>{var _this$props$onKeyHand,_this$props15
+null===(_this$props$onKeyHand=(_this$props15=this.props).onKeyHandled)||void 0===_this$props$onKeyHand||_this$props$onKeyHand.call(_this$props15,this.editor,key,event)}))
 break
-case"onKeyPress":this.editor.on("keypress",((_cm,event)=>{var _this$props$onKeyPres,_this$props18
-null===(_this$props$onKeyPres=(_this$props18=this.props).onKeyPress)||void 0===_this$props$onKeyPres||_this$props$onKeyPres.call(_this$props18,this.editor,event)}))
+case"onKeyPress":this.editor.on("keypress",((_cm,event)=>{var _this$props$onKeyPres,_this$props16
+null===(_this$props$onKeyPres=(_this$props16=this.props).onKeyPress)||void 0===_this$props$onKeyPres||_this$props$onKeyPres.call(_this$props16,this.editor,event)}))
 break
-case"onKeyUp":this.editor.on("keyup",((_cm,event)=>{var _this$props$onKeyUp,_this$props19
-null===(_this$props$onKeyUp=(_this$props19=this.props).onKeyUp)||void 0===_this$props$onKeyUp||_this$props$onKeyUp.call(_this$props19,this.editor,event)}))
+case"onKeyUp":this.editor.on("keyup",((_cm,event)=>{var _this$props$onKeyUp,_this$props17
+null===(_this$props$onKeyUp=(_this$props17=this.props).onKeyUp)||void 0===_this$props$onKeyUp||_this$props$onKeyUp.call(_this$props17,this.editor,event)}))
 break
-case"onMouseDown":this.editor.on("mousedown",((_cm,event)=>{var _this$props$onMouseDo,_this$props20
-null===(_this$props$onMouseDo=(_this$props20=this.props).onMouseDown)||void 0===_this$props$onMouseDo||_this$props$onMouseDo.call(_this$props20,this.editor,event)}))
+case"onMouseDown":this.editor.on("mousedown",((_cm,event)=>{var _this$props$onMouseDo,_this$props18
+null===(_this$props$onMouseDo=(_this$props18=this.props).onMouseDown)||void 0===_this$props$onMouseDo||_this$props$onMouseDo.call(_this$props18,this.editor,event)}))
 break
-case"onPaste":this.editor.on("paste",((_cm,event)=>{var _this$props$onPaste,_this$props21
-null===(_this$props$onPaste=(_this$props21=this.props).onPaste)||void 0===_this$props$onPaste||_this$props$onPaste.call(_this$props21,this.editor,event)}))
+case"onPaste":this.editor.on("paste",((_cm,event)=>{var _this$props$onPaste,_this$props19
+null===(_this$props$onPaste=(_this$props19=this.props).onPaste)||void 0===_this$props$onPaste||_this$props$onPaste.call(_this$props19,this.editor,event)}))
 break
-case"onRenderLine":this.editor.on("renderLine",((_cm,line,element)=>{var _this$props$onRenderL,_this$props22
-null===(_this$props$onRenderL=(_this$props22=this.props).onRenderLine)||void 0===_this$props$onRenderL||_this$props$onRenderL.call(_this$props22,this.editor,line,element)}))
+case"onRenderLine":this.editor.on("renderLine",((_cm,line,element)=>{var _this$props$onRenderL,_this$props20
+null===(_this$props$onRenderL=(_this$props20=this.props).onRenderLine)||void 0===_this$props$onRenderL||_this$props$onRenderL.call(_this$props20,this.editor,line,element)}))
 break
-case"onScroll":this.editor.on("scroll",(_cm=>{var _this$props$onScroll,_this$props23
-null===(_this$props$onScroll=(_this$props23=this.props).onScroll)||void 0===_this$props$onScroll||_this$props$onScroll.call(_this$props23,this.editor,this.editor.getScrollInfo())}))
+case"onScroll":this.editor.on("scroll",(_cm=>{var _this$props$onScroll,_this$props21
+null===(_this$props$onScroll=(_this$props21=this.props).onScroll)||void 0===_this$props$onScroll||_this$props$onScroll.call(_this$props21,this.editor,this.editor.getScrollInfo())}))
 break
-case"onSelection":this.editor.on("beforeSelectionChange",((_cm,data)=>{var _this$props$onSelecti,_this$props24
-null===(_this$props$onSelecti=(_this$props24=this.props).onSelection)||void 0===_this$props$onSelecti||_this$props$onSelecti.call(_this$props24,this.editor,data)}))
+case"onSelection":this.editor.on("beforeSelectionChange",((_cm,data)=>{var _this$props$onSelecti,_this$props22
+null===(_this$props$onSelecti=(_this$props22=this.props).onSelection)||void 0===_this$props$onSelecti||_this$props$onSelecti.call(_this$props22,this.editor,data)}))
 break
-case"onTouchStart":this.editor.on("touchstart",((_cm,event)=>{var _this$props$onTouchSt,_this$props25
-null===(_this$props$onTouchSt=(_this$props25=this.props).onTouchStart)||void 0===_this$props$onTouchSt||_this$props$onTouchSt.call(_this$props25,this.editor,event)}))
+case"onTouchStart":this.editor.on("touchstart",((_cm,event)=>{var _this$props$onTouchSt,_this$props23
+null===(_this$props$onTouchSt=(_this$props23=this.props).onTouchStart)||void 0===_this$props$onTouchSt||_this$props$onTouchSt.call(_this$props23,this.editor,event)}))
 break
-case"onUpdate":this.editor.on("update",(_cm=>{var _this$props$onUpdate,_this$props26
-null===(_this$props$onUpdate=(_this$props26=this.props).onUpdate)||void 0===_this$props$onUpdate||_this$props$onUpdate.call(_this$props26,this.editor)}))
+case"onUpdate":this.editor.on("update",(_cm=>{var _this$props$onUpdate,_this$props24
+null===(_this$props$onUpdate=(_this$props24=this.props).onUpdate)||void 0===_this$props$onUpdate||_this$props$onUpdate.call(_this$props24,this.editor)}))
 break
-case"onViewportChange":this.editor.on("viewportChange",((_cm,from,to)=>{var _this$props$onViewpor,_this$props27
-null===(_this$props$onViewpor=(_this$props27=this.props).onViewportChange)||void 0===_this$props$onViewpor||_this$props$onViewpor.call(_this$props27,this.editor,from,to)}))}}))}}const __WEBPACK_DEFAULT_EXPORT__=Controlled}}])
+case"onViewportChange":this.editor.on("viewportChange",((_cm,from,to)=>{var _this$props$onViewpor,_this$props25
+null===(_this$props$onViewpor=(_this$props25=this.props).onViewportChange)||void 0===_this$props$onViewpor||_this$props$onViewpor.call(_this$props25,this.editor,from,to)}))}}))}}const __WEBPACK_DEFAULT_EXPORT__=Controlled}}])
