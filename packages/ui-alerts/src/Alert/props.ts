@@ -109,6 +109,11 @@ type AlertOwnProps = {
    * If the alert should have a shadow.
    */
   hasShadow: boolean
+
+  /**
+   * An icon, or function that returns an icon. Setting it will override the variant's icon.
+   */
+  renderCustomIcon?: Renderable
 }
 
 type PropKeys = keyof AlertOwnProps
@@ -137,7 +142,8 @@ const propTypes: PropValidators<PropKeys> = {
   transition: PropTypes.oneOf(['none', 'fade']),
   open: PropTypes.bool,
   hasShadow: PropTypes.bool,
-  variantScreenReaderLabel: PropTypes.string
+  variantScreenReaderLabel: PropTypes.string,
+  renderCustomIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -153,7 +159,8 @@ const allowedProps: AllowedPropKeys = [
   'onDismiss',
   'transition',
   'open',
-  'hasShadow'
+  'hasShadow',
+  'renderCustomIcon'
 ]
 
 type AlertState = {
