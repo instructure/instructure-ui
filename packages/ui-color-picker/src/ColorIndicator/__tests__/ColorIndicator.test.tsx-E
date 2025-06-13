@@ -31,6 +31,7 @@ import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11y
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { ColorIndicator } from '../'
+import ColorIndicatorExamples from '../__examples__/ColorIndicator.examples'
 
 describe('<ColorIndicator />', () => {
   describe('elementRef prop', () => {

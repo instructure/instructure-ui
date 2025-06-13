@@ -25,5 +25,7 @@
 describe('visual regression test', () => {
   it('check button', () => {
     cy.visit('http://localhost:3000/button')
+    cy.injectAxe()
+    cy.checkA11y()
   })
 })

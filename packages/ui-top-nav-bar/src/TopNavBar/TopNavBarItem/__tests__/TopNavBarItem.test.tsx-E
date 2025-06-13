@@ -35,7 +35,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Drilldown } from '@instructure/ui-drilldown'
 import { TopNavBarItem } from '../index'
-
+import TopNavBarItemExamples from '../__examples__/TopNavBarItem.examples'
 import {
   avatarExample,
   SmallViewportModeWrapper,

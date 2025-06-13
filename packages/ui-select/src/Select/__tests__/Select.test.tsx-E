@@ -33,7 +33,7 @@ import '@testing-library/jest-dom'
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import Select from '../index'
-
+import SelectExamples from '../__examples__/Select.examples'
 import * as utils from '@instructure/ui-utils'
 import {
   IconAddLine,

@@ -30,6 +30,7 @@ import '@testing-library/jest-dom'
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TruncateList } from '../index'
+import TruncateListExamples from '../__examples__/TruncateList.examples'
 
 describe('<TruncateList />', () => {
   it('should return ref with elementRef prop', async () => {

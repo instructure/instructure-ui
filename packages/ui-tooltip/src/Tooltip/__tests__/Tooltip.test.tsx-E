@@ -33,6 +33,7 @@ import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11y
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { Tooltip } from '../index'
+import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>

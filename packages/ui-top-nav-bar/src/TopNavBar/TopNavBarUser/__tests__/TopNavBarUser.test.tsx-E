@@ -39,6 +39,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import type { TopNavBarItemProps } from '../../TopNavBarItem/props'
 import { IconSearchLine } from '@instructure/ui-icons'
 import { TopNavBarUser } from '../index'
+import TopNavBarUserExamples from '../__examples__/TopNavBarUser.examples'
 
 describe('<TopNavBarUser />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

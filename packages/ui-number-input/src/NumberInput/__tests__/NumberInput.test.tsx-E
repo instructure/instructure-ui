@@ -29,7 +29,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { NumberInput } from '../index'
-
+import NumberInputExamples from '../__examples__/NumberInput.examples'
 // eslint-disable-next-line no-restricted-imports
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { IconZoomInLine, IconZoomOutLine } from '@instructure/ui-icons'
