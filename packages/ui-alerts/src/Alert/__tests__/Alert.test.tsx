@@ -29,6 +29,7 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { Alert } from '../index'
 import type { AlertProps } from '../props'
+import { IconGroupLine } from '@instructure/ui-icons'
 
 describe('<Alert />', () => {
   let srdiv: HTMLDivElement | null
@@ -145,6 +146,14 @@ describe('<Alert />', () => {
 
     expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
     expect(liveRegion).toHaveAttribute('aria-live', 'polite')
+  })
+
+  it('should render an icon when provided as the `renderIcon` prop', () => {
+    const { container } = render(<Alert renderCustomIcon={<IconGroupLine />} />)
+    const icon = container.querySelector('svg[class$="-svgIcon"]')
+
+    expect(icon).toHaveAttribute('name', 'IconGroup')
+    expect(icon).toBeInTheDocument()
   })
 
   describe('with `screenReaderOnly', () => {
