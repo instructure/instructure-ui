@@ -27,12 +27,8 @@ import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
-
 import { Alert } from '../index'
 import type { AlertProps } from '../props'
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import AlertExamples from '../__examples__/Alert.examples'
 
 describe('<Alert />', () => {
   let srdiv: HTMLDivElement | null
@@ -67,18 +63,6 @@ describe('<Alert />', () => {
     render(<Alert variant="success">Success: Sample alert text.</Alert>)
     const text = screen.getByText('Success: Sample alert text.')
     expect(text).toBeInTheDocument()
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Alert, AlertExamples)
-
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 
   it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {

@@ -139,7 +139,9 @@
     "raw-loader": "^4.0.2",
     "react-docgen": "^8.0.0",
     "svg-inline-loader": "^0.8.2",
-    "webpack-bundle-analyzer": "^4.10.2"
+    "webpack-bundle-analyzer": "^4.10.2",
+    "style-loader": "^4.0.0",
+    "css-loader": "^4.0.0"
   },
   "//dependency-comments": {
     "jsdoc-api": "v9 removes explainSync, its async only",

@@ -27,11 +27,8 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import TopNavBar from '../index'
-import TopNavBarExamples from '../__examples__/TopNavBar.examples'
 
 const TEST_MENU_ITEM_TEXT = 'Test menu item text'
 
@@ -114,23 +111,6 @@ describe('<TopNavBar />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        TopNavBar,
-        TopNavBarExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

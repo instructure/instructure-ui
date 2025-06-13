@@ -28,13 +28,9 @@ import userEvent from '@testing-library/user-event'
 import moment from 'moment-timezone'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ApplyLocale } from '@instructure/ui-i18n'
 
 import { TimeSelect } from '../index'
-import TimeSelectExamples from '../__examples__/TimeSelect.examples'
 
 describe('<TimeSelect />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -434,21 +430,5 @@ describe('<TimeSelect />', () => {
         expect(listRef).toHaveBeenCalledWith(listbox)
       })
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(
-      TimeSelect,
-      TimeSelectExamples
-    )
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 })

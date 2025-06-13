@@ -35,13 +35,9 @@ import {
   SmallViewportModeWrapper
 } from '../../utils/exampleHelpers'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconSearchLine } from '@instructure/ui-icons'
-import { TopNavBarMenuItems } from '../index'
 import type { TopNavBarItemProps } from '../../TopNavBarItem/props'
-import TopNavBarMenuItemsExamples from '../__examples__/TopNavBarMenuItems.examples'
 
 describe('<TopNavBarMenuItems />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -688,22 +684,6 @@ describe('<TopNavBarMenuItems />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        TopNavBarMenuItems,
-        TopNavBarMenuItemsExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

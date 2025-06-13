@@ -26,12 +26,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Day } from '../index'
-import DayExamples from '../__examples__/Day.examples'
 
 describe('Day', () => {
   it('should render children', async () => {
@@ -286,17 +281,5 @@ describe('Day', () => {
 
       expect(day?.tagName).toEqual('LI')
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Day, DayExamples)
-
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 })

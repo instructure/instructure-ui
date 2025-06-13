@@ -26,13 +26,8 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi, MockInstance, it } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { IconCheckSolid } from '@instructure/ui-icons'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 
-import SimpleSelectExamples from '../__examples__/SimpleSelect.examples'
 import SimpleSelect from '../index'
 
 type ExampleOption = 'foo' | 'bar' | 'baz'
@@ -330,22 +325,6 @@ describe('<SimpleSelect />', () => {
         expect(listRef).toHaveBeenCalledWith(listbox)
       })
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(
-      SimpleSelect,
-      SimpleSelectExamples
-    )
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 
   describe('children', () => {

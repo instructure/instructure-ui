@@ -26,11 +26,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
-import CalendarExamples from '../__examples__/Calendar.examples'
 import type { CalendarDayProps } from '../Day/props'
 import Calendar from '../index'
 
@@ -396,17 +391,5 @@ describe('<Calendar />', () => {
 
     expect(calendar.tagName).toBe('UL')
     expect(calendar).toHaveTextContent(weekdayLabels.join(''))
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Calendar, CalendarExamples)
-
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 })

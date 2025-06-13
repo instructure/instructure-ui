@@ -24,12 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { InlineSVG } from '../index'
-import InlineSVGExamples from '../__examples__/InlineSVG.examples'
 
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
@@ -132,18 +127,5 @@ describe('<InlineSVG />', () => {
     const svg = container.querySelector('svg')
 
     expect(svg).toHaveAttribute('focusable', 'true')
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(InlineSVG, InlineSVGExamples)
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 })

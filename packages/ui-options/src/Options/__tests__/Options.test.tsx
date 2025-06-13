@@ -26,11 +26,8 @@ import { render, screen } from '@testing-library/react'
 import { vi, expect } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import '@testing-library/jest-dom'
 import { Options } from '../index'
-import OptionsExamples from '../__examples__/Options.examples'
 
 describe('<Options />', () => {
   it('should render', async () => {
@@ -160,25 +157,6 @@ describe('<Options />', () => {
 
     expect(outerList).toContainElement(nestedLabel)
     expect(outerList).toContainElement(nestedList)
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Options, OptionsExamples)
-
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-
-        // axe-check is more strict now, and expects "list" role to have "listitem" children, but we use "role='none'" children. After discussing it with the A11y team, we agreed to ignore this error because the screen readers can read the component perfectly.
-        // TODO: try to remove this ignore if axe-check is updated and isn't this strict anymore
-        // https://dequeuniversity.com/rules/axe/4.6/aria-required-children?application=axeAPI
-        const axeCheck = await runAxeCheck(container, {
-          ignores: ['aria-required-children']
-        })
-
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 
   describe('for a11y', () => {

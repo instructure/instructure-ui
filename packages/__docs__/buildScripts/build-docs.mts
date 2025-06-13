@@ -79,7 +79,6 @@ const pathsToIgnore = [
   '**/templates/**',
   '**/node_modules/**',
   '**/__docs__/**',
-  '**/__examples__/**',
   '**/__svg__/**',
   '**/__fixtures__/**',
   '**/__testfixtures__/**',

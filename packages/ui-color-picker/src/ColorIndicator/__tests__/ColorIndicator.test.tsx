@@ -25,13 +25,8 @@
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-
 import { ColorIndicator } from '../'
-import ColorIndicatorExamples from '../__examples__/ColorIndicator.examples'
 
 describe('<ColorIndicator />', () => {
   describe('elementRef prop', () => {
@@ -49,22 +44,6 @@ describe('<ColorIndicator />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        ColorIndicator,
-        ColorIndicatorExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

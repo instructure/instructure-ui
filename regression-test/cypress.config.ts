@@ -28,6 +28,24 @@ export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       installPlugin(on, config)
+
+      // This registers a log task as seen in the Cypress docs for cy.task as well
+      // as a table task for sending tabular data to the terminal.
+      // More info: https://www.npmjs.com/package/cypress-axe
+      on('task', {
+        log(message) {
+          // eslint-disable-next-line no-console
+          console.log(message)
+
+          return null
+        },
+        table(message) {
+          // eslint-disable-next-line no-console
+          console.table(message)
+
+          return null
+        }
+      })
     }
   }
 })

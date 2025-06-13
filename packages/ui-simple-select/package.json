@@ -35,7 +35,6 @@
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "10.20.1",
     "@instructure/ui-babel-preset": "10.20.1",
     "@instructure/ui-color-utils": "10.20.1",
     "@instructure/ui-icons": "10.20.1",

@@ -22,8 +22,57 @@
  * SOFTWARE.
  */
 
+import type { Result, RunOnly } from 'axe-core'
+
+type ConsoleErrorStub = Cypress.Agent<sinon.SinonStub<any[], any>>
+let windowErrorSpy: ConsoleErrorStub | undefined
+
+Cypress.on('window:before:load', (win) => {
+  // Stub console.error before your application code runs
+  // This allows you to capture errors even if they happen very early
+  windowErrorSpy = cy.stub(win.console, 'error')
+})
+
+afterEach(() => {
+  // After each test, assert that console.error was not called
+  // Add a small wait if your application might log errors asynchronously
+  cy.wait(100).then(() => {
+    expect(windowErrorSpy).to.not.be.called
+  })
+})
+
+// log fn taken from https://www.npmjs.com/package/cypress-axe
+function terminalLog(violations: Result[]) {
+  cy.task(
+    'log',
+    `${violations.length} accessibility violation${
+      violations.length === 1 ? '' : 's'
+    } ${violations.length === 1 ? 'was' : 'were'} detected`
+  )
+  // pluck specific keys to keep the table readable
+  const violationData = violations.map(
+    ({ id, impact, description, nodes }) => ({
+      id,
+      impact,
+      description,
+      nodes: nodes.length
+    })
+  )
+
+  cy.task('table', violationData)
+}
+
+const axeOptions: { runOnly: RunOnly } = {
+  runOnly: {
+    type: 'tag',
+    values: ['wcag2a', 'wcag2aa', 'section508', 'best-practice']
+  }
+}
+
 describe('visual regression test', () => {
   it('check button', () => {
     cy.visit('http://localhost:3000/button')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
   })
 })

@@ -26,11 +26,8 @@ import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TruncateList } from '../index'
-import TruncateListExamples from '../__examples__/TruncateList.examples'
 
 describe('<TruncateList />', () => {
   it('should return ref with elementRef prop', async () => {
@@ -115,22 +112,6 @@ describe('<TruncateList />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('should be accessible with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        TruncateList,
-        TruncateListExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

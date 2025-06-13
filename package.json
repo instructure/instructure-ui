@@ -37,11 +37,7 @@
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts bump",
     "release": "ui-scripts publish",
-    "dev:examples": "lerna run start:watch --stream --scope docs-examples",
-    "prestart:examples": "npm run bootstrap",
-    "start:examples": "lerna run start --stream --scope docs-examples",
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
-    "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "postinstall": "husky",
     "ts:check": "lerna run ts:check --stream"
   },
@@ -49,8 +45,7 @@
   "resolutions": {
     "react": "^18",
     "react-dom": "^18",
-    "@types/react": "^18",
-    "@storybook/react/webpack": "^5"
+    "@types/react": "^18"
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",

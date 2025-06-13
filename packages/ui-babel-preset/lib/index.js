@@ -146,7 +146,6 @@ module.exports = function (
             '**/*.conf.js',
             '__tests__/**/*.js',
             '__testfixtures__/**/*.js',
-            '__examples__/**/*.js',
             '__fixtures__/**/*.js'
           ]
         }

@@ -26,13 +26,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Calendar } from '@instructure/ui-calendar'
-
-import Examples from '../__examples__/DateInput.examples'
 import { DateInput } from '../index'
 
 describe('<DateInput />', () => {
@@ -815,19 +809,6 @@ describe('<DateInput />', () => {
       const dateInput = screen.getByLabelText('Choose date')
       expect(dateInput).toHaveAttribute('aria-activedescendant', selectedDayID)
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(DateInput, Examples)
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 
   describe('with minimal config', () => {
