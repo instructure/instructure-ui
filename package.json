@@ -124,5 +124,8 @@
   },
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
-  ]
+  ],
+  "dependencies": {
+    "clipboardy": "^4.0.0"
+  }
 }

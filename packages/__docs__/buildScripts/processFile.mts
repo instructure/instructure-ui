@@ -28,18 +28,18 @@ import { parseDoc } from './utils/parseDoc.mjs'
 import { getPathInfo } from './utils/getPathInfo.mjs'
 import type { LibraryOptions, ProcessedFile } from './DataTypes.mjs'
 
-export function processFile(
+export async function processFile(
   fullPath: string,
   projectRoot: string,
   library: LibraryOptions
-): ProcessedFile {
+): Promise<ProcessedFile> {
   // eslint-disable-next-line no-console
   console.info(`Processing ${fullPath}`)
   const source = fs.readFileSync(fullPath)
   const dirName = path.dirname(fullPath) || process.cwd()
   const pathInfo = getPathInfo(fullPath, projectRoot, library)
 
-  const doc = parseDoc(fullPath, source, (err: Error) => {
+  const doc = await parseDoc(fullPath, source, (err: Error) => {
     console.warn('Error when parsing ', fullPath, ":\n", err.stack)
   })
   const docData: ProcessedFile = { ...doc, ...pathInfo } as ProcessedFile
