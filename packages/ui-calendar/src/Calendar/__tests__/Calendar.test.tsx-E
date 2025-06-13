@@ -30,7 +30,7 @@ import '@testing-library/jest-dom'
 // eslint-disable-next-line no-restricted-imports
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-
+import CalendarExamples from '../__examples__/Calendar.examples'
 import type { CalendarDayProps } from '../Day/props'
 import Calendar from '../index'
 

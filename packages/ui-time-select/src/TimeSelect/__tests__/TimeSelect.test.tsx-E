@@ -34,6 +34,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ApplyLocale } from '@instructure/ui-i18n'
 
 import { TimeSelect } from '../index'
+import TimeSelectExamples from '../__examples__/TimeSelect.examples'
 
 describe('<TimeSelect />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

@@ -32,6 +32,7 @@ import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11y
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import conversions from '@instructure/ui-color-utils'
 
+import ColorPickerExamples from '../__examples__/ColorPicker.examples'
 import type { ColorPickerProps } from '../props'
 import { ContrastStrength } from '../props'
 import { ColorPicker } from '../'

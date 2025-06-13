@@ -32,6 +32,7 @@ import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11y
 import { IconCheckSolid } from '@instructure/ui-icons'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
+import SimpleSelectExamples from '../__examples__/SimpleSelect.examples'
 import SimpleSelect from '../index'
 
 type ExampleOption = 'foo' | 'bar' | 'baz'

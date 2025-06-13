@@ -32,6 +32,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { contrast } from '@instructure/ui-color-utils'
 
 import { ColorContrast } from '../'
+import ColorContrastExamples from '../__examples__/ColorContrast.examples'
 
 const testColors = {
   firstColor: '#FF0000',

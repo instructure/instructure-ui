@@ -30,6 +30,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import '@testing-library/jest-dom'
 import { Options } from '../index'
+import OptionsExamples from '../__examples__/Options.examples'
 
 describe('<Options />', () => {
   it('should render', async () => {

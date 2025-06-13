@@ -34,6 +34,7 @@ import { IconCheckSolid } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 
 import { Drilldown } from '../index'
+import DrilldownExamples from '../__examples__/Drilldown.examples'
 
 const data = Array(5)
   .fill(0)
