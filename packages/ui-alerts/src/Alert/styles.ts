@@ -95,6 +95,9 @@ const generateStyle = (
       justifyContent: 'center',
       fontSize: '1.125rem',
       borderRight: `${componentTheme.borderWidth} ${componentTheme.borderStyle}`,
+      margin: -1,
+      borderStartStartRadius: componentTheme.borderRadius,
+      borderEndStartRadius: componentTheme.borderRadius,
       ...variantStyles[variant!].icon
     },
     closeButton: {

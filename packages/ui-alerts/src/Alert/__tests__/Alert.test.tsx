@@ -33,6 +33,7 @@ import type { AlertProps } from '../props'
 // eslint-disable-next-line no-restricted-imports
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import AlertExamples from '../__examples__/Alert.examples'
+import { IconGroupLine } from '@instructure/ui-icons'
 
 describe('<Alert />', () => {
   let srdiv: HTMLDivElement | null
@@ -161,6 +162,14 @@ describe('<Alert />', () => {
 
     expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
     expect(liveRegion).toHaveAttribute('aria-live', 'polite')
+  })
+
+  it('should render an icon when provided as the `renderIcon` prop', () => {
+    const { container } = render(<Alert renderCustomIcon={<IconGroupLine />} />)
+    const icon = container.querySelector('svg[class$="-svgIcon"]')
+
+    expect(icon).toHaveAttribute('name', 'IconGroup')
+    expect(icon).toBeInTheDocument()
   })
 
   describe('with `screenReaderOnly', () => {
