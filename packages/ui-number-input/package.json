@@ -23,7 +23,6 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "10.20.1",
     "@instructure/ui-babel-preset": "10.20.1",
     "@instructure/ui-scripts": "10.20.1",
     "@instructure/ui-test-utils": "10.20.1",

@@ -26,7 +26,7 @@ const { execSync } = require('child_process')
 const fs = require('fs')
 const path = require('path')
 
-const ignoredPackages = ['__docs__', '__examples__']
+const ignoredPackages = ['__docs__']
 
 function getChangedPackages() {
   try {

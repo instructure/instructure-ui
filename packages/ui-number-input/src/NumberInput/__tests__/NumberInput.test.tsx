@@ -25,13 +25,10 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { NumberInput } from '../index'
-import NumberInputExamples from '../__examples__/NumberInput.examples'
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
+
 import { IconZoomInLine, IconZoomOutLine } from '@instructure/ui-icons'
 
 describe('<NumberInput />', () => {
@@ -269,20 +266,6 @@ describe('<NumberInput />', () => {
     const input = screen.getByRole('spinbutton')
 
     expect(input).toHaveAttribute('inputMode', 'decimal')
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(
-      NumberInput,
-      NumberInputExamples
-    )
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 
   it('renders custom interactive icons', async () => {

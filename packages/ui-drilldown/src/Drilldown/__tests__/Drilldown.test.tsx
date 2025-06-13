@@ -27,14 +27,11 @@ import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconCheckSolid } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 
 import { Drilldown } from '../index'
-import DrilldownExamples from '../__examples__/Drilldown.examples'
 
 const data = Array(5)
   .fill(0)
@@ -983,23 +980,5 @@ describe('<Drilldown />', () => {
 
       expect(axeCheck).toBe(true)
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Drilldown, DrilldownExamples)
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container, {
-          // axe-check is more strict now, and expects "list" role to have "listitem" children, but we use "role='none'" children. After discussing it with the A11y team, we agreed to ignore this error because the screen readers can read the component perfectly.
-          // TODO: try to remove this ignore if axe-check is updated and isn't this strict anymore
-          // https://dequeuniversity.com/rules/axe/4.6/aria-required-children?application=axeAPI
-          ignores: ['aria-required-children']
-        })
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 })

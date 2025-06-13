@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cypress": "cypress run"
+    "cypress": "ELECTRON_EXTRA_LAUNCH_ARGS=--remote-debugging-port=9222 cypress run"
   },
   "keywords": [],
   "devDependencies": {
@@ -19,8 +19,10 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "axe-core": "^4.10.3",
     "chromatic": "^11.27.0",
-    "cypress": "^14.2.0",
+    "cypress": "^14.4.1",
+    "cypress-axe": "^1.6.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.2",
     "postcss": "^8.5.3",

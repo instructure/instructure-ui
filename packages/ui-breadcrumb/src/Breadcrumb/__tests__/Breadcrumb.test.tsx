@@ -26,12 +26,8 @@ import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Breadcrumb } from '../index'
-import BreadcrumbExamples from '../__examples__/Breadcrumb.examples'
 
 const TEST_LABEL = 'You are here:'
 const TEST_TEXT_01 = 'Account'
@@ -67,22 +63,6 @@ describe('<Breadcrumb />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(
-      Breadcrumb,
-      BreadcrumbExamples
-    )
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 
   it('should render the label as an aria-label attribute', () => {

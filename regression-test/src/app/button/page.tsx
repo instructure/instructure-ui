@@ -36,7 +36,7 @@ export default function ButtonPage() {
   ]
   const sizes = ['small', 'medium', 'large']
   return (
-    <main className="flex gap-8 p-8 flex-col items-start">
+    <main className="flex gap-8 p-8 flex-col items-start axe-test">
       <Button>Button</Button>
       {colors.map((color) => (
         <Button key={'color' + color} color={color}>

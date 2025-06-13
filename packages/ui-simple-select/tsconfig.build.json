@@ -7,7 +7,6 @@
   },
   "include": ["src"],
   "references": [
-    { "path": "../ui-axe-check/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },
     { "path": "../ui-position/tsconfig.build.json" },

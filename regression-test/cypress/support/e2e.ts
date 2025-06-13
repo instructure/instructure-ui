@@ -42,5 +42,7 @@ import './commands'
 
 import '@chromatic-com/cypress/support'
 
+import 'cypress-axe'
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

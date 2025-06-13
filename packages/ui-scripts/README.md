@@ -54,16 +54,6 @@ Deprecates ALL of a certain version of instUI npm packages by running `npm depre
 
 `npm run ui-scripts deprecate --versionToDeprecate 5.11.0 --fixVersion 5.11.1`
 
-#### examples (Storybook)
-
-To build component examples and start up a dev server with hot reloading:
-
-`npm run ui-scripts examples --watch -p 9090`
-
-To build component examples for deploying:
-
-`npm run ui-scripts examples`
-
 #### generating design tokens
 
 `npm run generate-tokens <options>`
@@ -93,12 +83,6 @@ To fix lint issues:
 To publish all packages (defaults to current version):
 
 `npm run ui-scripts publish [version]`
-
-#### server
-
-To start up a server to test production builds of examples or docs:
-
-`npm run ui-scripts server -p 9090`
 
 #### npm tag
 

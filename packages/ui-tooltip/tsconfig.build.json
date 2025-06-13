@@ -9,7 +9,6 @@
   "references": [
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui-axe-check/tsconfig.build.json" },
     { "path": "../ui-popover/tsconfig.build.json" },
     { "path": "../ui-position/tsconfig.build.json" },
     { "path": "../ui-prop-types/tsconfig.build.json" },

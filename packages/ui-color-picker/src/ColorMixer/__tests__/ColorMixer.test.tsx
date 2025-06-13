@@ -27,14 +27,11 @@ import { userEvent } from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { deepEqual } from '@instructure/ui-utils'
 import conversions from '@instructure/ui-color-utils'
 
 import { ColorMixer } from '../'
-import ColorMixerExamples from '../__examples__/ColorMixer.examples'
 
 const testValue = {
   value: '#09918B'
@@ -160,22 +157,6 @@ describe('<ColorMixer />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        ColorMixer,
-        ColorMixerExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 

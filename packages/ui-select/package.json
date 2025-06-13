@@ -23,7 +23,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-axe-check": "10.20.1",
     "@instructure/ui-babel-preset": "10.20.1",
     "@instructure/ui-color-utils": "10.20.1",
     "@instructure/ui-scripts": "10.20.1",

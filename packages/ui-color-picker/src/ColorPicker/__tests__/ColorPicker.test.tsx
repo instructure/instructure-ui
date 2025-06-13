@@ -27,12 +27,9 @@ import { userEvent } from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import conversions from '@instructure/ui-color-utils'
 
-import ColorPickerExamples from '../__examples__/ColorPicker.examples'
 import type { ColorPickerProps } from '../props'
 import { ContrastStrength } from '../props'
 import { ColorPicker } from '../'
@@ -616,22 +613,6 @@ describe('<ColorPicker />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        ColorPicker,
-        ColorPickerExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

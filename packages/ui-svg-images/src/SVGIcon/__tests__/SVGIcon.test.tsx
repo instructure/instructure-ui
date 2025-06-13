@@ -24,12 +24,7 @@
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import { SVGIcon } from '../index'
-import SVGIconExamples from '../__examples__/SVGIcon.examples'
 
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
@@ -68,24 +63,5 @@ describe('<SVGIcon />', () => {
     const smallFontSize = window.getComputedStyle(svgUpdated!).fontSize
 
     expect(smallFontSize).not.toEqual(largeFontSize)
-  })
-
-  describe('with generated examples', () => {
-    it('should be accessible', async () => {
-      const { container } = render(<SVGIcon src={SVG_SRC} />)
-      const axeCheck = await runAxeCheck(container)
-
-      expect(axeCheck).toBe(true)
-    })
-
-    const generatedComponents = generateA11yTests(SVGIcon, SVGIconExamples)
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 })

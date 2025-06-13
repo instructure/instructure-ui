@@ -26,12 +26,7 @@ import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
-
 import { AppNav } from '../index'
-import AppNavExamples from '../__examples__/AppNav.examples'
 
 describe('<AppNav />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -160,16 +155,5 @@ describe('<AppNav />', () => {
       expect(items.length).toBe(3)
       expect(items[2]).toHaveTextContent('I am sooo custom!')
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(AppNav, AppNavExamples)
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 })

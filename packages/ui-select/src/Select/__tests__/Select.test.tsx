@@ -28,12 +28,8 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
 import Select from '../index'
-import SelectExamples from '../__examples__/Select.examples'
+
 import * as utils from '@instructure/ui-utils'
 import {
   IconAddLine,
@@ -1299,18 +1295,5 @@ describe('<Select />', () => {
         })
       })
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Select, SelectExamples)
-
-    it.each(generatedComponents)(
-      'should be accessible with example: $description',
-      async ({ content }) => {
-        const { container } = render(content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      }
-    )
   })
 })

@@ -25,14 +25,10 @@
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
-
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { contrast } from '@instructure/ui-color-utils'
 
 import { ColorContrast } from '../'
-import ColorContrastExamples from '../__examples__/ColorContrast.examples'
 
 const testColors = {
   firstColor: '#FF0000',
@@ -215,22 +211,6 @@ describe('<ColorContrast />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        ColorContrast,
-        ColorContrastExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

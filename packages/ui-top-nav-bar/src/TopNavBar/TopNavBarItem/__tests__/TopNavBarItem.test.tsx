@@ -29,13 +29,11 @@ import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Drilldown } from '@instructure/ui-drilldown'
 import { TopNavBarItem } from '../index'
-import TopNavBarItemExamples from '../__examples__/TopNavBarItem.examples'
+
 import {
   avatarExample,
   SmallViewportModeWrapper,
@@ -1838,22 +1836,6 @@ describe('<TopNavBarItem />', () => {
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
-    })
-
-    describe('with generated examples', () => {
-      const generatedComponents = generateA11yTests(
-        TopNavBarItem,
-        TopNavBarItemExamples
-      )
-
-      it.each(generatedComponents)(
-        'should be accessible with example: $description',
-        async ({ content }) => {
-          const { container } = render(content)
-          const axeCheck = await runAxeCheck(container)
-          expect(axeCheck).toBe(true)
-        }
-      )
     })
   })
 })

@@ -28,12 +28,7 @@ import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-// eslint-disable-next-line no-restricted-imports
-import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
-import { runAxeCheck } from '@instructure/ui-axe-check'
-
 import { Tooltip } from '../index'
-import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
@@ -183,16 +178,5 @@ describe('<Tooltip />', () => {
         expect(onClick).toHaveBeenCalledTimes(1)
       })
     })
-  })
-
-  describe('with generated examples', () => {
-    const generatedComponents = generateA11yTests(Tooltip, TooltipExamples)
-    for (const component of generatedComponents) {
-      it(component.description, async () => {
-        const { container } = render(component.content)
-        const axeCheck = await runAxeCheck(container)
-        expect(axeCheck).toBe(true)
-      })
-    }
   })
 })
