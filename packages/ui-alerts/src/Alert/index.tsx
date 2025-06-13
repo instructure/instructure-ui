@@ -237,10 +237,11 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   renderIcon() {
-    const Icon = this.variantUI[this.props.variant!]
+    const { renderCustomIcon, variant, styles } = this.props
+    const Icon = this.variantUI[variant!]
     return (
-      <div css={this.props.styles?.icon}>
-        <Icon />
+      <div css={styles?.icon}>
+        {renderCustomIcon ? callRenderProp(renderCustomIcon) : <Icon />}
       </div>
     )
   }
