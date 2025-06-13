@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
+* **ui-buttons:** make Button have a focus ring in Safari ([54118ac](https://github.com/instructure/instructure-ui/commit/54118ac22f3745c7b34f4da9d1c857951c63f8df))
+* **ui-buttons:** remove underline from disabled Button with href ([90e8ce7](https://github.com/instructure/instructure-ui/commit/90e8ce710faf7d71b0a8cbd28940a89d3aa7f065))
+
+
+
+
+
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 **Note:** Version bump only for package @instructure/ui-buttons

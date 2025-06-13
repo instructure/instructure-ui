@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
+* **ui-buttons:** make Button have a focus ring in Safari ([54118ac](https://github.com/instructure/instructure-ui/commit/54118ac22f3745c7b34f4da9d1c857951c63f8df))
+* **ui-buttons:** remove underline from disabled Button with href ([90e8ce7](https://github.com/instructure/instructure-ui/commit/90e8ce710faf7d71b0a8cbd28940a89d3aa7f065))
+* **ui-form-field:** make JAWS read input field labels and form error separately ([9c23166](https://github.com/instructure/instructure-ui/commit/9c23166433a8a4afa4a1b4e358d8d4080f13a23b))
+* **ui-modal:** fill the available space if fullscreen prop is set ([6e42d1e](https://github.com/instructure/instructure-ui/commit/6e42d1e8f11266af16c7eb7e2b858eb39ebeec4d))
+* **ui-time-select,ui-simple-select,ui-select:** add missing keyboard interactions and fix duplicate SR announcements ([0f7ffa5](https://github.com/instructure/instructure-ui/commit/0f7ffa5b263b0b287ca1c2387e0b902189706cb2))
+* **ui-top-nav-bar,ui-popover,ui-drilldown:** automatically set aria-expanded, allow override with shouldSetAriaExpanded ([b8e1367](https://github.com/instructure/instructure-ui/commit/b8e13674a2e700e44162a29ca61ead4fd98ce193))
+* **ui-top-nav-bar:** fix focus ring not showing when closing a dropdown ([051eca7](https://github.com/instructure/instructure-ui/commit/051eca7e94f4cb549002bc9d32499f9c3070db6f))
+* **ui-top-nav-bar:** fix TopNavBarBrand flashing an outline on hover ([41caeea](https://github.com/instructure/instructure-ui/commit/41caeeae1bc5315959bfdc5e16943387de95f2e7))
+
+
+### Features
+
+* **many:** add missing inputRef prop to input components ([e1158fb](https://github.com/instructure/instructure-ui/commit/e1158fb7af5426e6ce13efe197c2148e1c5f15f0))
+* **ui-icons:** add compare icon, include ai-colored icon in the index, improve svg to jsx conversion ([13b6a04](https://github.com/instructure/instructure-ui/commit/13b6a041d8eabaa4597d626e2eaaf296e3e788c6))
+
+
+
+
+
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 

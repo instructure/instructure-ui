@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
+
+
+### Bug Fixes
+
+* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
+* **ui-top-nav-bar,ui-popover,ui-drilldown:** automatically set aria-expanded, allow override with shouldSetAriaExpanded ([b8e1367](https://github.com/instructure/instructure-ui/commit/b8e13674a2e700e44162a29ca61ead4fd98ce193))
+* **ui-top-nav-bar:** fix focus ring not showing when closing a dropdown ([051eca7](https://github.com/instructure/instructure-ui/commit/051eca7e94f4cb549002bc9d32499f9c3070db6f))
+* **ui-top-nav-bar:** fix TopNavBarBrand flashing an outline on hover ([41caeea](https://github.com/instructure/instructure-ui/commit/41caeeae1bc5315959bfdc5e16943387de95f2e7))
+
+
+
+
+
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 
