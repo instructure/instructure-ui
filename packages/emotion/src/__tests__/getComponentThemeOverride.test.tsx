@@ -22,16 +22,34 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import canvas from '@instructure/ui-themes'
-
 import { getComponentThemeOverride } from '../getComponentThemeOverride'
 
 const componentName = 'ExampleComponent'
 const componentId = 'Example.Component'
 
-describe('@getComponentThemeOverride', async () => {
-  describe('should return empty object', async () => {
+describe('@getComponentThemeOverride', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
+  describe('should return empty object', () => {
     it('if there is no theme set', async () => {
       const override = getComponentThemeOverride(
         {},
@@ -39,8 +57,7 @@ describe('@getComponentThemeOverride', async () => {
         componentId,
         {}
       )
-
-      expect(override).to.deep.equal({})
+      expect(override).toEqual({})
     })
 
     it('if there is no override set', async () => {
@@ -51,11 +68,11 @@ describe('@getComponentThemeOverride', async () => {
         {}
       )
 
-      expect(override).to.deep.equal({})
+      expect(override).toEqual({})
     })
   })
 
-  describe('should return the correct override', async () => {
+  describe('should return the correct override', () => {
     it('if there is `themeOverride` set on the props', async () => {
       const componentOverride = {
         componentColor: 'rgb(150, 0, 0)'
@@ -69,7 +86,7 @@ describe('@getComponentThemeOverride', async () => {
         }
       )
 
-      expect(override).to.deep.equal(componentOverride)
+      expect(override).toEqual(componentOverride)
     })
 
     it('if the `themeOverride` prop is a function', async () => {
@@ -92,7 +109,7 @@ describe('@getComponentThemeOverride', async () => {
         theme
       )
 
-      expect(override).to.deep.equal({
+      expect(override).toEqual({
         backgroundBlue: 'rgb(0, 150, 0)',
         backgroundDark: '#FFFFFF'
       })
@@ -117,12 +134,12 @@ describe('@getComponentThemeOverride', async () => {
         }
       )
 
-      expect(override).to.deep.equal({
+      expect(override).toEqual({
         componentColor: 'rgb(0, 150, 0)'
       })
     })
 
-    describe('if there is `componentOverrides` set on the theme', async () => {
+    describe('if there is `componentOverrides` set on the theme', () => {
       it('with the displayName', async () => {
         const componentOverride = {
           componentColor: 'rgb(0, 0, 150)'
@@ -139,7 +156,7 @@ describe('@getComponentThemeOverride', async () => {
           {}
         )
 
-        expect(override).to.deep.equal(componentOverride)
+        expect(override).toEqual(componentOverride)
       })
 
       it('with the componentId', async () => {
@@ -158,7 +175,7 @@ describe('@getComponentThemeOverride', async () => {
           {}
         )
 
-        expect(override).to.deep.equal(componentOverride)
+        expect(override).toEqual(componentOverride)
       })
 
       it('with both the displayName and componentId (displayName takes precedence)', async () => {
@@ -175,7 +192,7 @@ describe('@getComponentThemeOverride', async () => {
           {}
         )
 
-        expect(override).to.deep.equal({ componentColor: 'rgb(150, 150, 150)' })
+        expect(override).toEqual({ componentColor: 'rgb(150, 150, 150)' })
       })
     })
   })

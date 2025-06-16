@@ -22,14 +22,33 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
+import { canvasHighContrast } from '@instructure/ui-themes/src/index'
 import { InstUISettingsProvider } from '../index'
-import { canvasHighContrast } from '@instructure/ui-themes'
 
 describe('<InstUISettingsProvider />', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
   it('passes the current theme if a function is passed to theme prop', async () => {
     const themeFn = vi.fn()
     render(
@@ -39,5 +58,40 @@ describe('<InstUISettingsProvider />', () => {
     )
 
     expect(themeFn).toHaveBeenCalledWith(canvasHighContrast)
+  })
+
+  it('can handle text direction on native HTML elements', async () => {
+    const { rerender } = render(
+      <InstUISettingsProvider dir="rtl">
+        <div data-testid="child">Should be RTL</div>
+      </InstUISettingsProvider>
+    )
+
+    let element = screen.getByTestId('child').parentElement!
+
+    expect(element).toHaveAttribute('dir', 'rtl')
+
+    // Set prop: dir
+    rerender(
+      <InstUISettingsProvider dir="ltr">
+        <div data-testid="child">Should be RTL</div>
+      </InstUISettingsProvider>
+    )
+    element = screen.getByTestId('child').parentElement!
+
+    expect(element).toHaveAttribute('dir', 'ltr')
+  })
+
+  it('warns when "as" property is used without using the "dir" property', async () => {
+    const warningMessage =
+      "The 'as' property should be used in conjunction with the 'dir' property!"
+
+    render(
+      //@ts-expect-error div is required
+      <InstUISettingsProvider as="div">
+        <div>text</div>
+      </InstUISettingsProvider>
+    )
+    expect(consoleWarningMock).toHaveBeenCalledWith(warningMessage)
   })
 })

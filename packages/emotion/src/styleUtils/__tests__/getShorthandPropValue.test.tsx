@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from 'vitest'
 import { getShorthandPropValue } from '../getShorthandPropValue'
 
 const theme = {
@@ -50,9 +50,9 @@ describe('getShorthandPropValue', () => {
     const marginResult = getShorthandPropValue(name, theme, value, 'margin')
     const paddingResult = getShorthandPropValue(name, theme, value, 'padding')
 
-    expect(borderResult).to.equal('0.1rem')
-    expect(marginResult).to.equal('1.1rem')
-    expect(paddingResult).to.equal('2.1rem')
+    expect(borderResult).toEqual('0.1rem')
+    expect(marginResult).toEqual('1.1rem')
+    expect(paddingResult).toEqual('2.1rem')
   })
 
   it('converts 2 value syntax', () => {
@@ -61,9 +61,9 @@ describe('getShorthandPropValue', () => {
     const marginResult = getShorthandPropValue(name, theme, values, 'margin')
     const paddingResult = getShorthandPropValue(name, theme, values, 'padding')
 
-    expect(borderResult).to.equal('0.3rem 0.4rem')
-    expect(marginResult).to.equal('1.3rem 1.4rem')
-    expect(paddingResult).to.equal('2.3rem 2.4rem')
+    expect(borderResult).toEqual('0.3rem 0.4rem')
+    expect(marginResult).toEqual('1.3rem 1.4rem')
+    expect(paddingResult).toEqual('2.3rem 2.4rem')
   })
 
   it('converts 3 value syntax', () => {
@@ -72,9 +72,9 @@ describe('getShorthandPropValue', () => {
     const marginResult = getShorthandPropValue(name, theme, values, 'margin')
     const paddingResult = getShorthandPropValue(name, theme, values, 'padding')
 
-    expect(borderResult).to.equal('0.2rem 0.1rem 0.4rem')
-    expect(marginResult).to.equal('1.2rem 1.1rem 1.4rem')
-    expect(paddingResult).to.equal('2.2rem 2.1rem 2.4rem')
+    expect(borderResult).toEqual('0.2rem 0.1rem 0.4rem')
+    expect(marginResult).toEqual('1.2rem 1.1rem 1.4rem')
+    expect(paddingResult).toEqual('2.2rem 2.1rem 2.4rem')
   })
 
   it('converts 4 value syntax', () => {
@@ -83,14 +83,14 @@ describe('getShorthandPropValue', () => {
     const marginResult = getShorthandPropValue(name, theme, values, 'margin')
     const paddingResult = getShorthandPropValue(name, theme, values, 'padding')
 
-    expect(borderResult).to.equal('0.4rem 0.2rem 0.1rem 0.3rem')
-    expect(marginResult).to.equal('1.4rem 1.2rem 1.1rem 1.3rem')
-    expect(paddingResult).to.equal('2.4rem 2.2rem 2.1rem 2.3rem')
+    expect(borderResult).toEqual('0.4rem 0.2rem 0.1rem 0.3rem')
+    expect(marginResult).toEqual('1.4rem 1.2rem 1.1rem 1.3rem')
+    expect(paddingResult).toEqual('2.4rem 2.2rem 2.1rem 2.3rem')
   })
 
   it('returns 0 for none or 0, and returns auto if auto is supplied', () => {
     const values = '0 none auto large'
     const result = getShorthandPropValue(name, theme, values, 'border')
-    expect(result).to.equal('0 0 auto 0.3rem')
+    expect(result).toEqual('0 0 auto 0.3rem')
   })
 })
