@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from 'vitest'
 import {
   mirrorShorthandCorners,
   mirrorShorthandEdges
@@ -32,24 +32,24 @@ describe('convertRtlShorthandEdges', () => {
   it('should not modify 1 value syntax', () => {
     const value = 'x-small'
     const result = mirrorShorthandEdges(value)
-    expect(result).to.equal(value)
+    expect(result).toEqual(value)
   })
 
   it('should not modify 2 value syntax', () => {
     const value = 'x-small xx-large'
     const result = mirrorShorthandEdges(value)
-    expect(result).to.equal(value)
+    expect(result).toEqual(value)
   })
 
   it('should not modify 3 value syntax', () => {
     const value = 'x-small medium x-large'
     const result = mirrorShorthandEdges(value)
-    expect(result).to.equal(value)
+    expect(result).toEqual(value)
   })
 
   it('should swap the second and fourth values with 4 value syntax', () => {
     const result = mirrorShorthandEdges('auto x-small none x-large')
-    expect(result).to.equal('auto x-large none x-small')
+    expect(result).toEqual('auto x-large none x-small')
   })
 })
 
@@ -57,21 +57,21 @@ describe('convertRtlShorthandCorners', () => {
   it('should not modify 1 value syntax', () => {
     const value = 'x-small'
     const result = mirrorShorthandCorners(value)
-    expect(result).to.equal(value)
+    expect(result).toEqual(value)
   })
 
   it('should swap the first and second values with 2 value syntax', () => {
     const result = mirrorShorthandCorners('x-small xx-large')
-    expect(result).to.equal('xx-large x-small')
+    expect(result).toEqual('xx-large x-small')
   })
 
   it('should convert 3 value syntax to 4 value syntax and switch the values appropriately', () => {
     const result = mirrorShorthandCorners('x-small medium x-large')
-    expect(result).to.equal('medium x-small medium x-large')
+    expect(result).toEqual('medium x-small medium x-large')
   })
 
   it('should appropriately switch shorthand values to rtl with 4 value syntax', () => {
     const result = mirrorShorthandCorners('auto x-small none x-large')
-    expect(result).to.equal('x-small auto x-large none')
+    expect(result).toEqual('x-small auto x-large none')
   })
 })

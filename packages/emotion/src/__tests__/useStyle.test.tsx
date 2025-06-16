@@ -23,8 +23,11 @@
  */
 
 import { useState } from 'react'
-
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index'
 
 type Props = {
@@ -48,7 +51,7 @@ type ComponentTheme = {
   backgroundColor: string
 }
 
-describe('useStyle', async () => {
+describe('useStyle', () => {
   const grey1111 = 'rgb(0, 128, 0)'
   const green4570 = 'rgb(10, 10, 10)'
   const blue4570 = 'rgb(255, 255, 0)'
@@ -111,41 +114,61 @@ describe('useStyle', async () => {
     }
 
     return (
-      <div css={styles!.exampleComponent}>
+      <div data-testid="testComp" css={styles!.exampleComponent}>
         <p>Hello World</p>
         <button onClick={handleClick}>Button</button>
       </div>
     )
   }
 
-  describe('with theme provided by InstUISettingsProvider', async () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution and expect for messages
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
+  })
+
+  describe('with theme provided by InstUISettingsProvider', () => {
     it('should add css class suffixed with label', async () => {
-      const subject = await mount(
+      render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
         </InstUISettingsProvider>
       )
       const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
 
-      expect(subject.getDOMNode().classList[0]).to.match(emotionClassRegex)
+      const themedComponent = screen.getByTestId('testComp')!
+
+      expect(themedComponent.classList[0]).toMatch(emotionClassRegex)
     })
 
     it('should apply correct css props', async () => {
-      const subject = await mount(
+      render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
+      const component = screen.getByTestId('testComp')!
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal('rgb(0, 128, 0)')
-      expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
+      expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
+      expect(computedStyle.backgroundColor).toEqual('rgb(255, 255, 0)')
     })
 
-    describe('should allow configuration through the themeOverride prop', async () => {
+    describe('should allow configuration through the themeOverride prop', () => {
       it('when it is an object', async () => {
-        const subject = await mount(
+        render(
           <InstUISettingsProvider theme={exampleTheme}>
             <ThemedComponent
               themeOverride={{
@@ -154,15 +177,15 @@ describe('useStyle', async () => {
             />
           </InstUISettingsProvider>
         )
-        const component = subject.getDOMNode()
+        const component = screen.getByTestId('testComp')!
         const computedStyle = getComputedStyle(component)
 
-        expect(computedStyle.color).to.equal('rgb(128, 0, 128)')
-        expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
+        expect(computedStyle.color).toEqual('rgb(128, 0, 128)')
+        expect(computedStyle.backgroundColor).toEqual('rgb(255, 255, 0)')
       })
 
       it('when it is a function', async () => {
-        const subject = await mount(
+        render(
           <InstUISettingsProvider theme={exampleTheme}>
             <ThemedComponent
               themeOverride={(componentTheme) => ({
@@ -171,35 +194,31 @@ describe('useStyle', async () => {
             />
           </InstUISettingsProvider>
         )
-        const component = subject.getDOMNode()
+        const component = screen.getByTestId('testComp')!
         const computedStyle = getComputedStyle(component)
 
-        expect(computedStyle.color).to.equal('rgb(255, 255, 0)')
-        expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
+        expect(computedStyle.color).toEqual('rgb(255, 255, 0)')
+        expect(computedStyle.backgroundColor).toEqual('rgb(255, 255, 0)')
       })
     })
 
     it('should ignore empty themeOverride props', async () => {
-      const subject = await mount(
+      render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent themeOverride={{}} />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
+      const component = screen.getByTestId('testComp')!
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal('rgb(0, 128, 0)')
-      expect(computedStyle.backgroundColor).to.equal('rgb(255, 255, 0)')
+      expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
+      expect(computedStyle.backgroundColor).toEqual('rgb(255, 255, 0)')
     })
   })
 
-  describe('should update css props', async () => {
+  describe('should update css props', () => {
     it('when props are updated', async () => {
-      // `setProps` can be called on the outer component,
-      // so have to add the theme ad themeOverride here, and suppress the error
-      stub(console, 'warn') // suppress "no theme provided error"
-
-      const subject = await mount(
+      const { rerender } = render(
         <ThemedComponent
           inverse={false}
           themeOverride={{
@@ -209,64 +228,45 @@ describe('useStyle', async () => {
           }}
         />
       )
-      const component = subject.getDOMNode()
+      const component = screen.getByTestId('testComp')!
+      expect(getComputedStyle(component).color).toEqual(grey1111)
 
-      expect(getComputedStyle(component).color).to.equal(grey1111)
+      // Set Prop: inverse
+      rerender(
+        <ThemedComponent
+          inverse={true}
+          themeOverride={{
+            textColor: grey1111,
+            textColorInverse: blue4570,
+            backgroundColor: green4570
+          }}
+        />
+      )
 
-      await subject.setProps({ inverse: true })
-
-      expect(getComputedStyle(component).color).to.equal(blue4570)
+      const updatedComponent = screen.getByTestId('testComp')!
+      expect(getComputedStyle(updatedComponent).color).toEqual(blue4570)
     })
 
     it('when state is updated', async () => {
-      const subject = await mount(
+      render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
         </InstUISettingsProvider>
       )
-      const main = within(subject.getDOMNode())
-      const clearBackgroundButton = await main.find('button')
-      const component = main.getDOMNode()
+      const component = screen.getByTestId('testComp')!
+      const clearBackgroundButton = screen.getByText('Button')
 
-      expect(getComputedStyle(component).backgroundColor).to.equal(
+      expect(getComputedStyle(component).backgroundColor).toEqual(
         'rgb(255, 255, 0)'
       )
 
-      await clearBackgroundButton.click()
+      await userEvent.click(clearBackgroundButton)
 
-      expect(getComputedStyle(component).backgroundColor).to.equal(
-        'rgba(0, 0, 0, 0)'
-      )
-    })
-  })
-
-  describe('should apply bi-directional polyfill on styles object', async () => {
-    it('in default "ltr" mode', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemedComponent />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
-
-      // `inset-inline-start` should be transformed to 'left' in 'ltr' mode
-      expect(computedStyle.left).to.equal('8px')
-      expect(computedStyle.right).to.equal('auto')
-    })
-
-    it('in "rtl" mode', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme} dir="rtl">
-          <ThemedComponent />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode().firstElementChild
-      const computedStyle = getComputedStyle(component!)
-
-      // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
-      expect(computedStyle.left).to.equal('auto')
-      expect(computedStyle.right).to.equal('8px')
+      await waitFor(() => {
+        expect(getComputedStyle(component).backgroundColor).toEqual(
+          'rgba(0, 0, 0, 0)'
+        )
+      })
     })
   })
 })

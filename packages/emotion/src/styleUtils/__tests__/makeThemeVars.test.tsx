@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from 'vitest'
 import { makeThemeVars } from '../makeThemeVars'
 
 describe('makeThemeVars', () => {
@@ -35,14 +35,14 @@ describe('makeThemeVars', () => {
 
     const result = makeThemeVars('margin', vars)
     // @ts-expect-error we expect it to throw error
-    expect(result['xSmall']).to.not.exist()
+    expect(result['xSmall']).toBeUndefined()
     // @ts-expect-error we expect it to throw error
-    expect(result['medium']).to.not.exist()
+    expect(result['medium']).toBeUndefined()
     // @ts-expect-error we expect it to throw error
-    expect(result['xxLarge']).to.not.exist()
+    expect(result['xxLarge']).toBeUndefined()
 
-    expect(result['marginXSmall']).to.equal('foo')
-    expect(result['marginMedium']).to.equal('bar')
-    expect(result['marginXxLarge']).to.equal('baz')
+    expect(result['marginXSmall']).toEqual('foo')
+    expect(result['marginMedium']).toEqual('bar')
+    expect(result['marginXxLarge']).toEqual('baz')
   })
 })
