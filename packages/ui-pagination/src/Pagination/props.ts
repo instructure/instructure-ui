@@ -97,7 +97,7 @@ type PaginationOwnProps = {
    *
    * (__only__ for `input` variant)
    */
-  labelNumberInput?: (numberOfPages: number) => React.ReactNode
+  labelNumberInput?: (totalPageNumber: number) => React.ReactNode
 
   /**
    * ScreenReaderLabel for number input
@@ -106,7 +106,17 @@ type PaginationOwnProps = {
    */
   screenReaderLabelNumberInput?: (
     currentPage: number,
-    numberOfPages: number
+    totalPageNumber: number
+  ) => string
+
+  /**
+   * ScreenReaderLabel for page number buttons
+   *
+   * (__only__ for `full` and `compact variants)
+   */
+  screenReaderLabelPageButton?: (
+    currentPage: number,
+    totalPageNumber: number
   ) => string
 
   /**
@@ -212,6 +222,7 @@ const propTypes: PropValidators<PropKeys> = {
   labelLast: PropTypes.string,
   labelNumberInput: PropTypes.func,
   screenReaderLabelNumberInput: PropTypes.func,
+  screenReaderLabelPageButton: PropTypes.func,
   variant: PropTypes.oneOf(['full', 'compact', 'input']),
   margin: PropTypes.string,
   as: PropTypes.elementType,
@@ -239,6 +250,7 @@ const allowedProps: AllowedPropKeys = [
   'labelLast',
   'labelNumberInput',
   'screenReaderLabelNumberInput',
+  'screenReaderLabelPageButton',
   'variant',
   'margin',
   'as',
