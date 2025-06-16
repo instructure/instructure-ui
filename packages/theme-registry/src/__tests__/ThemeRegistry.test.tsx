@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { vi, expect } from 'vitest'
+import type { MockInstance } from 'vitest'
 import type { BaseTheme } from '@instructure/shared-types'
-import { expect } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '../ThemeRegistry'
 const defaultRegistry = ThemeRegistry.getRegistry()
 
@@ -40,17 +41,33 @@ const baseTheme = {
 }
 
 describe('ThemeRegistry', () => {
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
   beforeEach(() => {
     ThemeRegistry.clearRegistry()
+
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+    consoleErrorMock = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {}) as MockInstance
   })
+
   afterEach(() => {
     ThemeRegistry.setRegistry(defaultRegistry)
+
+    consoleWarningMock.mockRestore()
+    consoleErrorMock.mockRestore()
   })
+
   it('should instantiate registry correctly', async () => {
     const registry = ThemeRegistry.getRegistry()
 
-    expect(registry).to.not.be.empty()
-    expect(registry).to.eql({
+    expect(registry).not.toEqual({})
+    expect(registry).toEqual({
       currentThemeKey: null,
       themes: {},
       registered: []
@@ -69,9 +86,9 @@ describe('ThemeRegistry', () => {
     ThemeRegistry.registerTheme(theme as unknown as BaseTheme)
     const registry = ThemeRegistry.getRegistry()
 
-    expect(registry.registered).to.contain(theme.key)
-    expect(registry.themes).to.have.key(theme.key)
-    expect(registry.themes[theme.key]).to.not.be.empty()
+    expect(registry.registered).toContain(theme.key)
+    expect(Object.keys(registry.themes)).toContain(theme.key)
+    expect(registry.themes[theme.key]).not.toEqual({})
   })
 
   it('should be able to get the current theme', async () => {
@@ -90,8 +107,8 @@ describe('ThemeRegistry', () => {
 
     const registry = ThemeRegistry.getRegistry()
 
-    expect(registry.currentThemeKey).to.be.eq(theme.key)
-    expect(ThemeRegistry.getCurrentTheme()).to.be.eql(registeredTheme)
+    expect(registry.currentThemeKey).toBe(theme.key)
+    expect(ThemeRegistry.getCurrentTheme()).toEqual(registeredTheme)
   })
 
   it('should be able to override themes with ".use()"', async () => {
@@ -115,7 +132,7 @@ describe('ThemeRegistry', () => {
         }
       }
     })
-    expect(ThemeRegistry.getCurrentTheme()?.colors?.primitives?.white).to.be.eq(
+    expect(ThemeRegistry.getCurrentTheme()?.colors?.primitives?.white).toBe(
       'blue'
     )
   })
@@ -130,6 +147,6 @@ describe('ThemeRegistry', () => {
         theme as unknown as BaseTheme
       )
       registeredTheme.use()
-    }).to.throw(Error)
+    }).toThrow(Error)
   })
 })
