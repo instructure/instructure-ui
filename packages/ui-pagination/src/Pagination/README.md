@@ -63,9 +63,10 @@ The pagination component provides props to handle most of the pagination use-cas
   render(<Example />)
   ```
 
-You can set any `totalPageNumber`, the component can handle it easily. Furthermore, you can set
-`siblingCount`, which indicates how many pages are visible on either side of the `currentPage` and the
-`boundaryCount`, which indicates how many pages are visible in the beginning and end.
+You can set any `totalPageNumber`, the component can handle it easily.\
+Furthermore, you can set `siblingCount`, which indicates how many pages are visible on either side of the `currentPage` and the
+`boundaryCount`, which indicates how many pages are visible in the beginning and end.\
+Also, you can set `screenReaderLabelPageButton` to customize what a screenreader will announce when the button receives focus.
 
 - ```js
   class Example extends React.Component {
@@ -87,6 +88,9 @@ You can set any `totalPageNumber`, the component can handle it easily. Furthermo
           onPageChange={(nextPage) => this.setState({ currentPage: nextPage })}
           siblingCount={3}
           boundaryCount={2}
+          screenReaderLabelPageButton={(currentPage, totalPageNumber) =>
+            `Page ${currentPage} of ${totalPageNumber}`
+          }
         />
       )
     }
@@ -110,6 +114,9 @@ You can set any `totalPageNumber`, the component can handle it easily. Furthermo
         onPageChange={(nextPage) => setCurrentPage(nextPage)}
         siblingCount={3}
         boundaryCount={2}
+        screenReaderLabelPageButton={(currentPage, totalPageNumber) =>
+          `Page ${currentPage} of ${totalPageNumber}`
+        }
       />
     )
   }
@@ -531,6 +538,7 @@ type: embed
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
     <Figure.Item>Ensure page links and the next/previous buttons are labeled correctly for screen readers</Figure.Item>
+    <Figure.Item>Use `screenReaderLabelPageButton` or `screenReaderLabelNumberInput` for better screenreader experience</Figure.Item>
   </Figure>
 </Guidelines>
 ```

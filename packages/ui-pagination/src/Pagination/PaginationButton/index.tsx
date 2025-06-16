@@ -69,6 +69,9 @@ class PaginationButton extends Component<PaginationPageProps> {
           {...props}
           aria-current={this.props.current ? 'page' : undefined}
           elementRef={this.handleRef}
+          {...(this.props.screenReaderLabel
+            ? { 'aria-label': this.props.screenReaderLabel }
+            : {})}
         >
           {this.props.children}
         </BaseButton>
