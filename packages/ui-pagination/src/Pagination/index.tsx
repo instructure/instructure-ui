@@ -332,6 +332,14 @@ class Pagination extends Component<PaginationProps> {
           key={i}
           onClick={() => this.handleNavigation(i, currentPage)}
           current={i === currentPage}
+          {...(this.props.screenReaderLabelPageButton
+            ? {
+                screenReaderLabel: this.props.screenReaderLabelPageButton(
+                  i,
+                  this.props.totalPageNumber!
+                )
+              }
+            : {})}
         >
           {this.props.renderPageIndicator?.(i, currentPage)}
         </Pagination.Page>
