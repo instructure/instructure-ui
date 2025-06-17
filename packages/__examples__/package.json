@@ -2,7 +2,7 @@
   "name": "docs-examples",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "10.20.0",
+  "version": "10.20.1",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -23,12 +23,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/ui-babel-preset": "10.20.0",
-    "@instructure/ui-buttons": "10.20.0",
-    "@instructure/ui-i18n": "10.20.0",
-    "@instructure/ui-icons": "10.20.0",
-    "@instructure/ui-view": "10.20.0",
-    "@instructure/ui-webpack-config": "10.20.0",
+    "@instructure/ui-babel-preset": "10.20.1",
+    "@instructure/ui-buttons": "10.20.1",
+    "@instructure/ui-i18n": "10.20.1",
+    "@instructure/ui-icons": "10.20.1",
+    "@instructure/ui-view": "10.20.1",
+    "@instructure/ui-webpack-config": "10.20.1",
     "@storybook/addons": "^7.6.19",
     "@storybook/react": "^7.6.19",
     "@storybook/theming": "^7.6.19",
@@ -38,8 +38,8 @@
     "webpack-merge": "^6.0.1"
   },
   "devDependencies": {
-    "@instructure/ui-scripts": "10.20.0",
-    "@instructure/ui-test-utils": "10.20.0",
+    "@instructure/ui-scripts": "10.20.1",
+    "@instructure/ui-test-utils": "10.20.1",
     "@storybook/react-webpack5": "^7.6.19",
     "@storybook/source-loader": "^7.6.19",
     "@storybook/types": "^7.6.19",
