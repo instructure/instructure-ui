@@ -133,6 +133,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 @testable()
 class Select extends Component<SelectProps> {
   static readonly componentId = 'Select'
+  private readonly SCROLL_TOLERANCE = 0.5
 
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -527,7 +528,10 @@ class Select extends Component<SelectProps> {
           display: 'block',
           overflowY: 'auto',
           maxHeight:
-            optionsMaxHeight || this._optionHeight * visibleOptionsCount!,
+            optionsMaxHeight ||
+            this._optionHeight * visibleOptionsCount! -
+              // in Chrome, we need to prevent scrolling when the bottom area of last item is hovered
+              (utils.isChromium() ? this.SCROLL_TOLERANCE : 0),
           maxWidth: optionsMaxWidth || this.width,
           background: 'primary',
           elementRef: (node: Element | null) => (this._listView = node),
