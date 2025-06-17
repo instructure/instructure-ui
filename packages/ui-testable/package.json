@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.20.1",
-    "@instructure/ui-test-utils": "10.20.1",
     "prop-types": "^15.8.1"
   },
   "dependencies": {
