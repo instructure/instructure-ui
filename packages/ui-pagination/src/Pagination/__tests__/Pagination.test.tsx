@@ -1128,5 +1128,26 @@ describe('<Pagination />', () => {
       )
       expect(container.firstChild).toHaveTextContent('12345678910Next Page')
     })
+
+    it('should add aria-label when screenReaderLabelPageButton is set', async () => {
+      render(
+        <Pagination
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          totalPageNumber={5}
+          screenReaderLabelPageButton={(currentPage, totalPageNumber) =>
+            `Page ${currentPage} of ${totalPageNumber}`
+          }
+        />
+      )
+      const paginationButtons = screen.getAllByRole('button', { name: /\d$/ })
+
+      for (let i: number = 0; i < paginationButtons.length; i++) {
+        expect(paginationButtons[i]).toHaveAttribute(
+          'aria-label',
+          `Page ${i + 1} of ${paginationButtons.length}`
+        )
+      }
+    })
   })
 })
