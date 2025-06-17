@@ -37,6 +37,7 @@ import type {
 import { printWarning } from './codemodHelpers'
 
 /**
+ * DEPRECATED, this should be deleted in the future
  * Replaces deprecated pros and their values based on the given config
  * object
  * Example:

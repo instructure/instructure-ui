@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import {
+import type {
   API,
   ASTPath,
   Collection,
@@ -88,7 +88,7 @@ function updateImports(
   // This is the local name created by the consumer. For example, in the import
   // `import { Foo as Bar } from '@instructure...` this would be Bar
   const localName = (importSpecifier.value as ImportDefaultSpecifier).local!
-    .name
+    .name as string
 
   const parsedImport = parseImport(importPath)
   const transform = findTransform(
@@ -114,10 +114,10 @@ function updateImports(
     if (updatedModuleName) {
       updatedModuleNameStr =
         typeof updatedModuleName === 'function'
-          ? updatedModuleName(currentModuleName)
+          ? updatedModuleName(currentModuleName as string)
           : updatedModuleName
     } else {
-      updatedModuleNameStr = currentModuleName
+      updatedModuleNameStr = currentModuleName as string
     }
 
     const updatedImportPath = transformImportPath(
@@ -348,7 +348,7 @@ function findTransform(
   transforms: Transform[],
   importPath: string,
   parsedImport: ParsedImport,
-  moduleName?: string
+  moduleName?: ImportSpecifier['imported']['name']
 ) {
   return (
     transforms.find(({ where = {} }) => {
@@ -375,7 +375,7 @@ function findTransform(
 
         if (moduleName) {
           foundTransform =
-            foundTransform && where.moduleNames.includes(moduleName)
+            foundTransform && where.moduleNames.includes(moduleName as string)
         } else {
           foundTransform =
             foundTransform &&
@@ -461,6 +461,7 @@ function parseImport(importPath: string): ParsedImport {
 }
 
 /**
+ * DEPRECATED, this should be deleted in the future
  * Find imports
  *
  * Example:
