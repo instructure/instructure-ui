@@ -137,96 +137,48 @@ const generateStyle = (
       default: {
         color: componentTheme.primaryColor,
         background: `
-        linear-gradient(165deg,  ${componentTheme.aiBackgroundTopGradientColor} -20.97%, ${componentTheme.aiBackgroundBottomGradientColor} 141.21%) padding-box,
-        linear-gradient(125deg, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 141.21%) border-box`,
-        border: 'solid transparent',
+        linear-gradient(to bottom,  ${componentTheme.aiBackgroundTopGradientColor} 0%, ${componentTheme.aiBackgroundBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%) border-box`,
+        borderStyle: 'solid',
+        borderColor: 'transparent',
         boxShadow: componentTheme.primaryBoxShadow
       },
-      active: {
-        background: `
-          linear-gradient(165deg,  ${darken(
-            componentTheme.aiBackgroundTopGradientColor,
-            10
-          )} -20.97%, ${darken(
-          componentTheme.aiBackgroundBottomGradientColor,
-          10
-        )} 141.21%) padding-box,
-          linear-gradient(125deg, ${darken(
-            componentTheme.aiBorderTopGradientColor,
-            10
-          )} 0%, ${darken(
-          componentTheme.aiBorderBottomGradientColor,
-          10
-        )} 141.21%) border-box`,
-        border: 'solid transparent',
-        boxShadow: componentTheme.aiActiveBoxShadow
-      },
+      active: {},
       hover: {
         background: `
-          linear-gradient(165deg, ${darken(
+          linear-gradient(to bottom, ${darken(
             componentTheme.aiBackgroundTopGradientColor,
             10
-          )} -20.97%, ${darken(
+          )} 0%, ${darken(
           componentTheme.aiBackgroundBottomGradientColor,
           10
-        )} 141.21%) padding-box,
-  linear-gradient(125deg, ${darken(
+        )} 100%) padding-box,
+  linear-gradient(to bottom, ${darken(
     componentTheme.aiBorderTopGradientColor,
     10
   )} 0%, ${darken(
           componentTheme.aiBorderBottomGradientColor,
           10
-        )} 141.21%) border-box`,
-        border: 'solid transparent',
+        )} 100%) border-box`,
+        borderStyle: 'solid',
+        borderColor: 'transparent',
         boxShadow: componentTheme.primaryHoverBoxShadow
       }
     },
     'ai-secondary': {
       default: {
-        background: `
-        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%) text,
-        linear-gradient(white) padding-box,
-        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} -40%, ${componentTheme.aiBorderBottomGradientColor} 140%) border-box`,
-        border: 'solid transparent',
-        boxShadow: componentTheme.primaryBoxShadow,
-        WebkitTextFillColor: 'transparent'
+        boxShadow: componentTheme.primaryBoxShadow
       },
-      active: {
-        background: `
-        linear-gradient(165deg,  ${darken(
-          componentTheme.aiBackgroundTopGradientColor,
-          10
-        )} -20.97%, ${darken(
-          componentTheme.aiBackgroundBottomGradientColor,
-          10
-        )} 141.21%) padding-box,
-    linear-gradient(125deg, ${darken(
-      componentTheme.aiBorderTopGradientColor,
-      10
-    )} 0%, ${darken(
-          componentTheme.aiBorderBottomGradientColor,
-          10
-        )} 141.21%) border-box`,
-        border: 'solid transparent',
-        boxShadow: componentTheme.aiActiveBoxShadow
-      },
+      active: {},
       hover: {
         background: `
-        linear-gradient(to bottom, ${
-          componentTheme.aiBorderTopGradientColor
-        } 0%, ${componentTheme.aiBorderBottomGradientColor} 100%) text,
-        linear-gradient(165deg, ${lighten(
+        linear-gradient(to bottom, ${lighten(
           componentTheme.aiBackgroundTopGradientColor,
           70
-        )} -20.97%, ${lighten(
+        )} 0%, ${lighten(
           componentTheme.aiBackgroundBottomGradientColor,
           70
-        )} 141.21%) padding-box,
-       linear-gradient(to bottom, ${
-         componentTheme.aiBorderTopGradientColor
-       } -40%, ${componentTheme.aiBorderBottomGradientColor} 140%) border-box`,
-        border: 'solid transparent',
-        boxShadow: componentTheme.primaryHoverBoxShadow
+        )} 100%)`
       }
     },
     primary: withBackground
@@ -420,7 +372,20 @@ const generateStyle = (
           },
           '&:active > [class$=-baseButton__content]':
             colorVariants[color!].active,
-          '&:hover > [class$=-baseButton__content]': colorVariants[color!].hover
+          '&:hover > [class$=-baseButton__content]':
+            colorVariants[color!].hover,
+
+          //TODO not the greatest solution. Must be stronger than the same &&& enforcement of <View>
+          ...(color === 'ai-secondary'
+            ? {
+                '&&&&&&&&&&': {
+                  background: `
+               linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
+                  padding: componentTheme.borderWidth,
+                  borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
+                }
+              }
+            : {})
         }
       : {
           textDecoration: 'none',
@@ -448,6 +413,14 @@ const generateStyle = (
       textAlign,
 
       '&:hover': { transform: componentTheme.hoverTransform },
+
+      ...(color === 'ai-secondary'
+        ? {
+            border: 'none',
+            background: 'white',
+            transition: 'none'
+          }
+        : {}),
 
       ...sizeVariants[size!].content,
       ...colorVariants[color!].default,
@@ -477,7 +450,15 @@ const generateStyle = (
       ...(isCondensed && {
         paddingTop: 0,
         paddingBottom: 0
-      })
+      }),
+      ...(color === 'ai-secondary'
+        ? {
+            background: `
+        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
+            backgroundClip: 'text',
+            color: 'transparent'
+          }
+        : {})
     },
 
     iconSVG: {
