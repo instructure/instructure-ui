@@ -36,7 +36,7 @@ export default function updateV8ThemeProp(j: JSCodeshift, root: Collection) {
       .find(j.JSXOpeningElement, {
         name: {
           type: 'JSXIdentifier',
-          name: instUIImport
+          name: instUIImport as string
         }
       })
       .find(j.JSXIdentifier, {

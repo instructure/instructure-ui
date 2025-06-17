@@ -43,14 +43,19 @@ export default function formatSource(source: string, sourcePath: string) {
   } catch (err) {
     // Will revert to the default prettier options if a config cannot be parsed
   }
-
-  return prettier.format(
-    source,
-    options || {
-      parser: parser,
-      semi: false,
-      singleQuote: true,
-      trailingComma: 'none'
-    }
-  )
+  let result = source
+  try {
+    result = prettier.format(
+      source,
+      options || {
+        parser: parser,
+        semi: false,
+        singleQuote: true,
+        trailingComma: 'none'
+      }
+    )
+  } catch (e) {
+    console.warn('Prettier could not format the codemod result')
+  }
+  return result
 }

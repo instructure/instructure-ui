@@ -343,7 +343,7 @@ function findImport(
   name: string,
   path: string | string[]
 ) {
-  let importedName: string | undefined
+  let importedName
   const importPaths = findImportPath(j, root, path)
   // check import name
   importPaths.forEach((path) => {
@@ -375,8 +375,8 @@ function findImport(
 /**
  * Finds every imported component from the given path in the given collection.
  * If an import is renamed it returns the renamed name. If `exactMatch` is true
- * importPath is searched via `string.indexOf()` so it can be a substring
- * For example calling it with "@instructure/ui` on a collection with
+ * importPath is searched via `string.indexOf()` so it can be a substring.
+ * For example calling it with `@instructure/ui` on a collection with
  * `exactMatch = true` with this collection:
  * ```
  * import { a } from "@instructure/ui"
@@ -391,7 +391,7 @@ function findEveryImport(
   importPath: string,
   exactMatch = true
 ) {
-  const imports: string[] = []
+  const imports: (ImportSpecifier['local'] | string)[] = []
   const everyInstUIImport = findImportPath(j, root, importPath, exactMatch)
   everyInstUIImport.forEach((path) => {
     if (path.node.specifiers) {

@@ -25,12 +25,45 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vitest/config'
+import path from 'path'
 
 export default defineConfig({
   test: {
-    include: ['**/__tests__/**/*.test.tsx'],
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './vitest.setup.ts'
+    watchTriggerPatterns: [
+      {
+        // matches any file inside the __testfixtures__ directory
+        pattern: /^.*\/ui-codemods\/.*\/__testfixtures__\/.*$/,
+        // file is the full path. e.g.  /Users/MyUser/code/instructure-ui/packages/ui-codemods/lib/__node_tests__/__testfixtures__/colors.input.ts
+        testsToRun: (file, _match) => {
+          const dirName = path.basename(path.dirname(file))
+          // reruns all tests that match the directory name of the test fixture
+          return `packages/ui-codemods/lib/__node_tests__/${dirName}.test.ts`
+        }
+      }
+    ],
+    projects: [
+      {
+        // DOM-based unit tests
+        test: {
+          // Allows using APIs like Jest without importing them
+          globals: true,
+          include: ['**/__tests__/**/*.test.tsx'],
+          environment: 'jsdom',
+          setupFiles: './vitest.setup.ts',
+          name: { label: 'web', color: 'blue' }
+        }
+      },
+      {
+        // tests for node scripts
+        test: {
+          globals: true,
+          include: ['**/__node_tests__/**/*.test.{ts,tsx}'],
+          environment: 'node',
+          name: { label: 'node', color: 'magenta' }
+        }
+      }
+    ]
+
   }
 })

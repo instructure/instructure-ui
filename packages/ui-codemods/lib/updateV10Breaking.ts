@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
+import type { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
 import { writeWarningsToFile } from './helpers/codemodHelpers'
 import formatSource from './utils/formatSource'
 import { updateToV10Colors } from './utils/updateToV10Colors'
@@ -30,7 +30,7 @@ import { updateToV10Colors } from './utils/updateToV10Colors'
 export default function updateV10Breaking(
   file: FileInfo,
   api: API,
-  options?: { fileName: string; usePrettier?: boolean }
+  options?: { fileName?: string; usePrettier?: boolean }
 ) {
   const j = api.jscodeshift
   const root = j(file.source)
