@@ -264,12 +264,12 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       padding="0"
       cursor={this.props.disabled ? 'not-allowed' : 'auto'}
       as="button"
+      aria-label={`${color}${
+        this.props.colorScreenReaderLabel
+          ? `, ${this.props.colorScreenReaderLabel}`
+          : ''
+      }`}
       {...(selectOnClick ? { onClick: () => this.props.onSelect(color) } : {})}
-      {...{
-        'aria-label': `${color}${
-          this.isSelectedColor(color) ? ' selected' : ''
-        }`
-      }}
     >
       <div>
         <ColorIndicator color={color} shape="rectangle" role="presentation" />

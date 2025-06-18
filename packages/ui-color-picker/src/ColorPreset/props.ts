@@ -103,6 +103,10 @@ type ColorPresetOwnProps = {
    * The currently selected HEX string
    */
   selected?: string
+  /**
+   * A label for screen readers to provide additional context beyond the hex color code.
+   */
+  colorScreenReaderLabel?: string
 }
 
 type ColorPresetState = {
@@ -138,6 +142,7 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   label: PropTypes.string,
   popoverScreenReaderLabel: PropTypes.string,
+  colorScreenReaderLabel: PropTypes.string,
   colorMixerSettings: PropTypes.shape({
     addNewPresetButtonScreenReaderLabel: PropTypes.string.isRequired,
     selectColorLabel: PropTypes.string.isRequired,
@@ -181,7 +186,8 @@ const allowedProps: AllowedPropKeys = [
   'colorMixerSettings',
   'onSelect',
   'popoverScreenReaderLabel',
-  'selected'
+  'selected',
+  'colorScreenReaderLabel'
 ]
 
 export type {
