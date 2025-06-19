@@ -6,10 +6,15 @@ Heading is a component for creating typographic headings.
 
 ## Variant
 
-Variant covers almost all use cases for headings on pages. Their name reflects the places they meant to be used. It sets the `level` prop and takes care of the style of the heading
-We recommend using `variants` instead of the `level` (and `as`) props.
+Variant covers almost all use cases for headings on pages. Their name reflects the places they meant to be used. It takes care of the style of the heading
 
-NOTE: when `variant` is set, `level` and `as` props are ignored
+NOTE 1: for legacy reasons, each `variant` has a default `level` set. This is not the recommended way and will be removed in a later major release. Please specify the `level` directly!
+
+NOTE 2: when `variant` is set the `as` prop is ignored
+
+IMPORTANT A11Y NOTE 1: there can be only one `h1` tag in a page
+
+IMPORTANT A11Y NOTE 2: `h` tags can not skip a level, so for example an `h1` followed by an `h3` not allowed
 
 ```js
 ---
