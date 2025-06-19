@@ -55,6 +55,19 @@ describe('<ProgressBar />', () => {
     expect(progress).toHaveAttribute('value', '30')
   })
 
+  it('should render a progress element with an aria-label attribute', async () => {
+    const { container } = render(
+      <ProgressBar
+        screenReaderLabel="Chapters read"
+        valueMax={60}
+        valueNow={30}
+      />
+    )
+    const progress = container.querySelector('progress')
+
+    expect(progress).toHaveAttribute('aria-label', 'Chapters read')
+  })
+
   it('should format the displayed text', async () => {
     const current = 30
     const max = 60
