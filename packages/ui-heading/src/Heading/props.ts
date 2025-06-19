@@ -84,8 +84,7 @@ type HeadingOwnProps = {
    */
   renderIcon?: Renderable
   /**
-   * Sets style and level at once. The as property will be the same as the level.
-   * NOTE: this is the recommended way of setting the appearance, instead of level
+   * Sets appearance of the heading.
    */
   variant?:
     | 'titlePageDesktop'

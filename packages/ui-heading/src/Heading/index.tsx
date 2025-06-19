@@ -88,11 +88,8 @@ class Heading extends Component<HeadingProps> {
   }
 
   checkProps() {
-    const { variant, level, as } = this.props
+    const { variant, as } = this.props
     if (variant) {
-      if (level) {
-        console.warn("[Heading]: Don't use 'level' with 'variant' ")
-      }
       if (as) {
         console.warn("[Heading]: Don't use 'as' with 'variant' ")
       }
@@ -138,13 +135,16 @@ class Heading extends Component<HeadingProps> {
     const propsForGetElementType = variant ? {} : this.props
 
     const ElementType = getElementType(Heading, propsForGetElementType, () => {
-      if (variant) {
-        return variantLevels[variant]
-      }
       if (level === 'reset') {
         return 'span'
+      } else if (level) {
+        return level
+      }
+
+      if (variant) {
+        return variantLevels[variant]
       } else {
-        return level!
+        return 'span'
       }
     })
 
