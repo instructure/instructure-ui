@@ -103,10 +103,6 @@ class ProgressBar extends Component<ProgressBarProps> {
       typeof formatScreenReaderValue === 'function'
         ? formatScreenReaderValue({ valueNow: valueNow!, valueMax: valueMax! })
         : undefined
-    // consolidating the label and aria-valuetext to put in aria-label because
-    // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
-    // But leaving aria-valuetext because JAWS ignores aria-label
-    const labelAndValueText = `${screenReaderLabel} ${valueText}`
 
     const value = callRenderProp(renderValue, {
       valueNow: valueNow!,
@@ -126,7 +122,8 @@ class ProgressBar extends Component<ProgressBarProps> {
             css={styles?.htmlProgress}
             max={valueMax}
             value={valueNow}
-            aria-valuetext={labelAndValueText}
+            aria-valuetext={valueText}
+            aria-label={screenReaderLabel}
           />
 
           <span css={styles?.track} role="presentation" aria-hidden="true">
