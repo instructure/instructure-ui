@@ -22,33 +22,11 @@
  * SOFTWARE.
  */
 
-import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
-import { writeWarningsToFile } from './helpers/codemodHelpers'
-import formatSource from './utils/formatSource'
-import { updateToV9Theming } from './utils/updateToV9Theming'
+import { runTest } from './runTest'
+import updateV10Breaking from '../updateV10Breaking'
 
-export default function updateV9Breaking(
-  file: FileInfo,
-  api: API,
-  options?: { fileName: string; usePrettier?: boolean }
-) {
-  const j = api.jscodeshift
-  const root = j(file.source)
-  const hasModifications = doUpdate(j, root, file.path)
-  if (options && options.fileName) {
-    writeWarningsToFile(options.fileName)
-  }
-
-  if (hasModifications) {
-    const shouldUsePrettier = options?.usePrettier !== false
-    return shouldUsePrettier
-      ? formatSource(root.toSource(), file.path)
-      : root.toSource()
-  } else {
-    return null
-  }
-}
-
-function doUpdate(j: JSCodeshift, root: Collection, filePath: string) {
-  return updateToV9Theming(j, root, filePath)
-}
+describe('test codemods', () => {
+  it('test InstUI v10 color codemods', () => {
+    runTest(updateV10Breaking)
+  })
+})

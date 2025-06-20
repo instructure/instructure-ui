@@ -23,11 +23,8 @@
  */
 
 import { Collection, JSCodeshift } from 'jscodeshift'
-import {
-  findImport,
-  isIdentifier,
-  isMemberExpression
-} from '../helpers/codemodHelpers'
+import { findImport } from '../utils/codemodHelpers'
+import { isIdentifier, isMemberExpression } from '../utils/codemodTypeCheckers'
 
 const colorMapping: { [index: string]: string } = {
   brand: 'blue4570',
@@ -77,9 +74,11 @@ export function updateToV10Colors(
         astNode.property.name = colorMapping[astNode.property.name]
       }
     })
-    if(!hasModifications) {
+    if (!hasModifications) {
       // eslint-disable-next-line no-console
-      console.log("Warning: " + _filePath + ' might need manual replacement of colors')
+      console.log(
+        'Warning: ' + _filePath + ' might need manual replacement of colors'
+      )
     }
   }
   return hasModifications
