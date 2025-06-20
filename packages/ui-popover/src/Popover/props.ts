@@ -301,6 +301,7 @@ type PopoverState = {
   offsetX: PopoverOwnProps['offsetX']
   offsetY: PopoverOwnProps['offsetY']
   isShowingContent?: boolean
+  contentMaxHeight: number
 }
 
 type PropKeys = keyof PopoverOwnProps
