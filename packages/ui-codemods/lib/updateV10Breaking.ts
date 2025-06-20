@@ -22,33 +22,19 @@
  * SOFTWARE.
  */
 
-import type { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
-import { writeWarningsToFile } from './helpers/codemodHelpers'
-import formatSource from './utils/formatSource'
-import { updateToV10Colors } from './utils/updateToV10Colors'
+import type { Transform } from 'jscodeshift'
+import { updateToV10Colors } from './instui-codemods/updateToV10Colors'
+import instUICodemodExecutor from './utils/instUICodemodExecutor'
 
-export default function updateV10Breaking(
-  file: FileInfo,
-  api: API,
+/**
+ * Updates theme color syntax from InstUI v9 to v10
+ */
+const updateV10Breaking: Transform = (
+  file,
+  api,
   options?: { fileName?: string; usePrettier?: boolean }
-) {
-  const j = api.jscodeshift
-  const root = j(file.source)
-  const hasModifications = doUpdate(j, root, file.path)
-  if (options && options.fileName) {
-    writeWarningsToFile(options.fileName)
-  }
-
-  if (hasModifications) {
-    const shouldUsePrettier = options?.usePrettier !== false
-    return shouldUsePrettier
-      ? formatSource(root.toSource(), file.path)
-      : root.toSource()
-  } else {
-    return null
-  }
+) => {
+  return instUICodemodExecutor(updateToV10Colors, file, api, options)
 }
 
-function doUpdate(j: JSCodeshift, root: Collection, filePath: string) {
-  return updateToV10Colors(j, root, filePath)
-}
+export default updateV10Breaking

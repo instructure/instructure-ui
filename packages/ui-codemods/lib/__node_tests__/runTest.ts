@@ -63,9 +63,7 @@ export function runTest(codemod: Transform) {
       // based on the file's extension.
       // Also, this is closer to how its used, there is always a correct
       // filename
-      runInlineTest(codemod, {}, { path: inputPath, source: input }, expected, {
-        parser: 'tsx'
-      })
+      runInlineTest(codemod, {}, { path: inputPath, source: input }, expected)
       fixturesRun++
     }
   })
