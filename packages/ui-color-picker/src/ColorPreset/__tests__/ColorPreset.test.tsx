@@ -75,6 +75,16 @@ const testColorMixerSettings: ColorPresetProps['colorMixerSettings'] = {
 }
 
 describe('<ColorPreset />', () => {
+  it('should provide aria-label through the colorScreenReaderLabel prop', async () => {
+    render(<ColorPreset {...testValue} colorScreenReaderLabel="hex code" />)
+    const buttons = screen.getAllByRole('button')
+
+    buttons.forEach((button, index) => {
+      const expectedColor = testValue.colors[index]
+      expect(button).toHaveAttribute('aria-label', `${expectedColor}, hex code`)
+    })
+  })
+
   describe('elementRef prop', () => {
     it('should provide ref', async () => {
       const elementRef = vi.fn()
