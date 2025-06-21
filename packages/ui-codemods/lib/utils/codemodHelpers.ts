@@ -22,32 +22,29 @@
  * SOFTWARE.
  */
 
-import {
-  CallExpression,
+import type {
   Collection,
-  Identifier,
   ImportDeclaration,
-  ImportDefaultSpecifier,
-  ImportSpecifier,
   JSCodeshift,
   JSXAttribute,
   JSXElement,
-  JSXExpressionContainer,
-  JSXFragment,
   JSXIdentifier,
   JSXMemberExpression,
   JSXSpreadAttribute,
-  JSXText,
-  Literal,
-  MemberExpression,
-  SpreadElement
+  Literal
 } from 'jscodeshift'
+import {
+  isImportSpecifier,
+  isImportDefaultSpecifier,
+  isJSXAttribute,
+  isJSXElement,
+  isJSXText,
+  isJSXIdentifier,
+  isJSXMemberExpression,
+  isLiteral,
+  isTSTypeParameter
+} from './codemodTypeCheckers'
 import fs from 'fs'
-
-type GetArrayType<T extends any[] | undefined> = T extends (infer U)[]
-  ? U
-  : never
-export type JSXChild = GetArrayType<JSXElement['children']>
 
 type Attribute = {
   name: string
@@ -57,10 +54,23 @@ type Attribute = {
 const warningsMap: Record<string, boolean> = {}
 
 /**
- * Finds all the opening tag elements (JSXElement) given in tagName.
- * You can supply an optional withAttributes argument,
+ * Finds all the opening tag elements (`JSXElement`) given in `tagName`.
+ * You can supply an optional `withAttributes` argument,
  * this will return only tags where the given prop with the given
  * value (or at least one in the array) exists (every attribute needs to exist).
+ *
+ * @example
+ * This code finds all `ApplyTheme` tags that are either imported
+ * from `@instructure/ui` or from `@instructure/ui-themeable`:
+ * ```
+ * const importedName = findImport(j, root, 'ApplyTheme', [
+ *     '@instructure/ui',
+ *     '@instructure/ui-themeable'
+ *   ])
+ *  if (importedName) {
+ *     const found = findElements(filePath, j, root, importedName)
+ *     ...
+ * ```
  */
 function findElements(
   filePath: string,
@@ -73,7 +83,7 @@ function findElements(
   if (tagName.includes('.')) {
     const tagNames = tagName.split('.')
     if (tagNames.length > 2) {
-      throw new Error(`This script cannot handle tab names with 2 or more "."
+      throw new Error(`This script cannot handle tag names with 2 or more "."
       characters. Tag name: ${tagName}`)
     }
     elements = root.find(j.JSXElement, {
@@ -145,7 +155,7 @@ function checkIfAttributeExist(
   let numMatches = 0
   for (const attr of attributes) {
     for (const toFind of attribsToFind) {
-      if (isJSXAttribue(attr) && attr.name.name === toFind.name) {
+      if (isJSXAttribute(attr) && attr.name.name === toFind.name) {
         if (!toFind.value) {
           // attribute name matches, no values specified
           numMatches++
@@ -223,17 +233,18 @@ function findAttribute(
 
 /**
  * Prunes every non-visible child. This is useful because jscodeshift parses
- * newlines and spaces as children too, for example here:
+ * newlines and spaces as children too
+ * @example
  * ```
  * <Button>
  *   <aaa/>
  * </Button>
  * ```
- * Button will have 3 children: a JSXText with value `"  \n"`, aaa element, and
- * again a JSXText with `"  \n"`. This function removes the empty text nodes.
+ * Button will have 3 children: a `JSXText` with value `"  \n"`, `aaa` element, and
+ * again a `JSXText` with `"  \n"`. This function removes the empty text nodes.
  */
-function getVisibleChildren(nodes?: JSXChild[]) {
-  const result: JSXChild[] = []
+function getVisibleChildren(nodes?: JSXElement['children']) {
+  const result: JSXElement['children'] = []
   if (!nodes) {
     return result
   }
@@ -246,7 +257,27 @@ function getVisibleChildren(nodes?: JSXChild[]) {
 }
 
 /**
- * Renames every element (=JSX tag). Modifies the input collection
+ * Renames every element (=JSX tag). Modifies the input collection.
+ * @example this code renames <EmotionThemeProvider> -> <InstUISettingsProvider>
+ * ```
+ * const importedName = findImport(j, root, 'EmotionThemeProvider', [
+ *     '@instructure/emotion'
+ *   ])
+ * if (importedName) {
+ *   const emotionThemeProviderElements = findElements(
+ *     filePath,
+ *     j,
+ *     root,
+ *     importedName
+ *   )
+ *   renameElements(
+ *     filePath,
+ *     emotionThemeProviderElements,
+ *     importedName,
+ *     'instUISettingsProvider'
+ *   )
+ * }
+ * ```
  */
 function renameElements(
   filePath: string,
@@ -326,16 +357,15 @@ function renameElement(node: JSXElement, currentName: string, newName: string) {
 }
 
 /**
- * Figures out if a certain component is imported in a AST tree.
+ * Figures out if a certain component is imported in the given collection.
  * If it's imported and renamed (e.g. `import {Button as BTN} ...`) then it
  * returns the renamed name of the import
- * @param j the JSCodeshift API
+ * @param j the jscodeshift API
  * @param root the collection to check
- * @param name imported name, e.g. Button. If its a default import its ignored
+ * @param name imported name, e.g. `Button`. If it's a default import its ignored
  * @param path import path, or paths, e.g. `@instructure/ui-buttons`. Uses
- * `string.indexOf()` to search for matches, so substring matches are returned
- * too.
- * @return the name its imported as, undefined if it's not imported
+ * strict equality comparison (`===`) for matches.
+ * @return the name it's imported as, undefined if it's not imported
  */
 function findImport(
   j: JSCodeshift,
@@ -343,20 +373,25 @@ function findImport(
   name: string,
   path: string | string[]
 ) {
-  let importedName
+  let importedName: string | undefined
   const importPaths = findImportPath(j, root, path)
   // check import name
   importPaths.forEach((path) => {
     if (path.node.specifiers) {
       path.node.specifiers.forEach((specifier) => {
-        if (isImportDefaultSpecifier(specifier) && specifier.local) {
+        if (
+          isImportDefaultSpecifier(specifier) &&
+          specifier.local &&
+          !isTSTypeParameter(specifier.local)
+        ) {
           importedName = specifier.local.name
-          return
+          return undefined
         }
         if (isImportSpecifier(specifier) && specifier.imported.name === name) {
           // is it imported via an alias? e.g. import { A as B } ..
           if (
             specifier.local &&
+            !isTSTypeParameter(specifier.local) &&
             specifier.local.name &&
             specifier.local.name != name
           ) {
@@ -364,7 +399,7 @@ function findImport(
           } else {
             importedName = specifier.imported.name
           }
-          return
+          return undefined
         }
       })
     }
@@ -374,10 +409,10 @@ function findImport(
 
 /**
  * Finds every imported component from the given path in the given collection.
- * If an import is renamed it returns the renamed name. If `exactMatch` is true
+ * If an import is renamed it returns the renamed name. If `exactMatch` is `false`
  * importPath is searched via `string.indexOf()` so it can be a substring.
- * For example calling it with `@instructure/ui` on a collection with
- * `exactMatch = true` with this collection:
+ * @example Calling it with `@instructure/ui` on a collection with
+ * `exactMatch = false` with this collection:
  * ```
  * import { a } from "@instructure/ui"
  * import { b } from "@instructure/ui-buttons"
@@ -391,12 +426,12 @@ function findEveryImport(
   importPath: string,
   exactMatch = true
 ) {
-  const imports: (ImportSpecifier['local'] | string)[] = []
+  const imports: string[] = []
   const everyInstUIImport = findImportPath(j, root, importPath, exactMatch)
   everyInstUIImport.forEach((path) => {
     if (path.node.specifiers) {
       path.node.specifiers.forEach((specifier) => {
-        if (specifier.local) {
+        if (specifier.local && !isTSTypeParameter(specifier.local)) {
           imports.push(specifier.local.name)
         }
       })
@@ -450,22 +485,40 @@ function addImportIfNeeded(
   return name
 }
 
+/**
+ * Replaces an import
+ * @example
+ * ```
+ * replaceImport(
+ *       j,
+ *       root,
+ *       'OldImport',
+ *       'NewImport',
+ *       '@instructure/emotion'
+ *     )
+ * ```
+ * replaces
+ * ```
+ * import { OldImport } from "@instructure/abc"
+ * ```
+ * with
+ * ```
+ * import { NewImport } from "@instructure/abc"
+ * ```
+ * @returns the `name` input parameter
+ */
 function replaceImport(
   j: JSCodeshift,
   root: Collection,
   oldName: string,
-  name: string,
-  pathToAdd: string | string[],
+  newName: string,
+  importPath: string | string[],
   isDefaultImport = false
 ) {
-  const paths: Collection<ImportDeclaration> = findImportPath(
-    j,
-    root,
-    pathToAdd
-  )
+  const paths = findImportPath(j, root, importPath)
   const importSpecifier = isDefaultImport
-    ? j.importDefaultSpecifier(j.identifier(name))
-    : j.importSpecifier(j.identifier(name))
+    ? j.importDefaultSpecifier(j.identifier(newName))
+    : j.importSpecifier(j.identifier(newName))
   if (paths.length > 0) {
     // going through all specifiers and replacing the old import name with the new one
     paths.nodes()[0].specifiers = paths
@@ -474,12 +527,17 @@ function replaceImport(
         return specifier.local?.name !== oldName ? specifier : importSpecifier
       })
   }
-  return name
+  return newName
 }
 
 /**
- * Finds all lines that import from `importPath`. For example with the
- * following root:
+ * Finds all lines that import from `importPath`.
+ *
+ * If `exactMatch` is `true` (delault) it uses strict
+ * equality comparison (`===`), if its `false` it uses `string.indexOf()` so
+ * substring matches are returned too.
+ *
+ * @example With the following root:
  * ```
  * import { a } from "@instructure/ui"
  * import { b } from "@instructure/ui-buttons"
@@ -487,8 +545,6 @@ function replaceImport(
  * ```
  * `findImportPath(j, root, "@instructure/ui-buttons")`
  * will return line 2.
- * If exactMatch is `false` It uses `string.indexOf()` to find results, so
- * it returns substring matches too.
  */
 function findImportPath(
   j: JSCodeshift,
@@ -538,91 +594,14 @@ function removeAllChildren(element: JSXElement) {
   }
 }
 
-// type checkers
-type astElem = { type: string }
-
-function isSpreadElement(elem?: astElem | null): elem is SpreadElement {
-  return elem !== null && elem !== undefined && elem.type === 'SpreadElement'
-}
-
-function isImportSpecifier(elem?: astElem | null): elem is ImportSpecifier {
-  return elem !== null && elem !== undefined && elem.type === 'ImportSpecifier'
-}
-
-function isImportDefaultSpecifier(
-  elem?: astElem | null
-): elem is ImportDefaultSpecifier {
-  return (
-    elem !== null &&
-    elem !== undefined &&
-    elem.type === 'ImportDefaultSpecifier'
-  )
-}
-
-function isLiteral(elem?: astElem | null): elem is Literal {
-  return elem !== null && elem !== undefined && elem.type === 'Literal'
-}
-
-function isIdentifier(elem?: astElem | null): elem is Identifier {
-  return elem !== null && elem !== undefined && elem.type === 'Identifier'
-}
-
-function isMemberExpression(elem?: astElem | null): elem is MemberExpression {
-  return elem !== null && elem !== undefined && elem.type == 'MemberExpression'
-}
-
-function isCallExpression(elem?: astElem | null): elem is CallExpression {
-  return elem !== null && elem !== undefined && elem.type == 'CallExpression'
-}
-
-function isJSXAttribue(elem?: astElem | null): elem is JSXAttribute {
-  return elem !== null && elem !== undefined && elem.type === 'JSXAttribute'
-}
-
-function isJSXElement(elem?: astElem | astElem[] | null): elem is JSXElement {
-  return (
-    elem !== null &&
-    elem !== undefined &&
-    !Array.isArray(elem) &&
-    elem.type == 'JSXElement'
-  )
-}
-
-function isJSXText(elem?: astElem | astElem[] | null): elem is JSXText {
-  return (
-    elem !== null &&
-    elem !== undefined &&
-    !Array.isArray(elem) &&
-    elem.type == 'JSXText'
-  )
-}
-
-function isJSXIdentifier(elem?: astElem | null): elem is JSXIdentifier {
-  return elem !== null && elem !== undefined && elem.type == 'JSXIdentifier'
-}
-
-function isJSXFragment(elem?: astElem | null): elem is JSXFragment {
-  return elem !== null && elem !== undefined && elem.type == 'JSXFragment'
-}
-
-// Name of a tag that looks like "List.Item"
-function isJSXMemberExpression(
-  elem?: astElem | null
-): elem is JSXMemberExpression {
-  return (
-    elem !== null && elem !== undefined && elem.type == 'JSXMemberExpression'
-  )
-}
-
-function isJSXExpressionContainer(
-  elem?: astElem | null
-): elem is JSXExpressionContainer {
-  return (
-    elem !== null && elem !== undefined && elem.type == 'JSXExpressionContainer'
-  )
-}
-
 const warnings: string[] = []
+/**
+ * Prints the given warning with the file path and line to the console
+ * and adds it to an array in the background
+ * @param filePath
+ * @param line
+ * @param message
+ */
 function printWarning(
   filePath: string,
   line: number | undefined,
@@ -633,6 +612,10 @@ function printWarning(
   console.warn(warning)
 }
 
+/**
+ * Writes all warnings printed with `printWarning` to the given file
+ * @param fileName
+ */
 function writeWarningsToFile(fileName: string) {
   if (warnings.length > 0) {
     const sorted = warnings.sort()
@@ -655,19 +638,5 @@ export {
   getVisibleChildren,
   removeAllChildren,
   printWarning,
-  writeWarningsToFile,
-  // type checkers
-  isSpreadElement,
-  isIdentifier,
-  isImportSpecifier,
-  isMemberExpression,
-  isCallExpression,
-  isJSXAttribue,
-  isJSXElement,
-  isJSXText,
-  isJSXIdentifier,
-  isJSXFragment,
-  isJSXMemberExpression,
-  isJSXExpressionContainer,
-  isLiteral
+  writeWarningsToFile
 }
