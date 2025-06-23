@@ -145,6 +145,34 @@ class Heading extends Component<HeadingProps> {
         </span>
       )
     }
+    if (aiVariant === 'stacked') {
+      return (
+        <>
+          <span css={this.props.styles?.igniteAIStacked}>
+            <IconAiColoredSolid />
+            <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          </span>
+          {children}
+        </>
+      )
+    }
+    if (aiVariant === 'horizontal') {
+      return (
+        <>
+          <IconAiColoredSolid />
+          <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          {children}
+        </>
+      )
+    }
+    if (aiVariant === 'iconOnly') {
+      return (
+        <>
+          <IconAiColoredSolid />
+          &nbsp;{children}
+        </>
+      )
+    }
     return children
   }
 
