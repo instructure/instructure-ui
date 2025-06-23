@@ -206,15 +206,20 @@ const generateStyle = (
       ...flexBase
     },
     afterElement: {
-      // TODO this is added for the case when there is an IconButton inside a TextInput (like in the DateInput2 component)
-      // and the button size makes the whole input 2px larger (because of the borders)
-      // this is not the best solution and in the long term we should work with the design team to figure out how to handle such cases
-      marginTop: '-1px',
-      marginBottom: '-1px',
+      // the next couple lines (until the `label`) is needed so the IconButton looks OK inside the TextInput
+      // explanation: if the content inside is not a button or a popover (which could contain a button) it should have some padding on the right
+      '& > :not(button):not([data-cid$="Popover"])': {
+        marginRight: componentTheme.padding
+      },
+      marginTop: '1px',
+      marginBottom: '1px',
+      display: 'flex',
+      alignItems: 'center',
+      ...sizeVariants[size!],
       label: 'textInput__afterElement',
       ...viewBase,
+      borderRadius: componentTheme.borderRadius,
       flexShrink: 0,
-      paddingInlineEnd: componentTheme.padding,
       // we only override the padding once the width is calculated,
       // it needs the padding on render
       ...(afterElementHasWidth === false && {

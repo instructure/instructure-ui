@@ -2,7 +2,7 @@
 describes: DateInput2
 ---
 
-> _Warning_: `DateInput2` is an **experimental** upgrade to the existing [`DateInput`](/#DateInput) component, offering easier configuration, better UX, improved accessibility, and a year picker. While it addresses key limitations of `DateInput`, it's still in the experimental phase, with some missing unit tests and potential API changes.
+> _Info_: `DateInput2` is an upgrade to the [`DateInput`](/#DateInput) component, offering easier configuration, better UX, improved accessibility, and a year picker. Please consider updating to this for WCAG compatiblity and an overall better experience (for both devs and users).
 
 ### Minimal config
 
