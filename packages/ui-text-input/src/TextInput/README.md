@@ -182,9 +182,6 @@ TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
 Focusable content will be focused separately from the input itself.
 
-> Note: For any content larger than an icon or small avatar (multiple [Tags](#Tag), for example),
-> use the `renderBeforeInput` property.
-
 - ```javascript
   class ExtraContentExample extends React.Component {
     constructor(props) {
@@ -300,6 +297,33 @@ Focusable content will be focused separately from the input itself.
 
   render(<ExtraContentExample />)
   ```
+
+Another common usecase is to add an `IconButton` at the end of a TextInput, e.g. for revealing the content of a password field. In these cases, please use the `withBorder={false}` and `withBackground={false}` props for the IconButton.
+
+```js
+---
+type: example
+---
+const InputsWithButtonsExample = () => {
+  const [passwordValue, setPasswordValue] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  return (
+    <TextInput
+      renderLabel="Password"
+      type={showPassword ? 'text' : 'password'}
+      placeholder="Find something..."
+      value={passwordValue}
+      onChange={(e, newValue) => setPasswordValue(newValue)}
+      renderAfterInput={
+        <IconButton withBorder={false} withBackground={false} onClick={() => setShowPassword(prevState => !prevState)} screenReaderLabel={showPassword ? 'Hide password' : 'Show password'}>
+          {showPassword ? <IconOffLine/> : <IconEyeLine/>}
+        </IconButton>
+      }
+    />
+  )
+}
+render(<InputsWithButtonsExample />)
+```
 
 ### Setting width and display
 

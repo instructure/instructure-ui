@@ -290,7 +290,6 @@ const DateInput2 = forwardRef(
                 withBackground={false}
                 withBorder={false}
                 screenReaderLabel={screenReaderLabels.calendarIcon}
-                shape="circle"
                 interaction={interaction}
               >
                 {renderCalendarIcon ? (
