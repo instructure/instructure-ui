@@ -58,12 +58,12 @@ type HeadingOwnProps = {
    * The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead
    */
   color?:
-    | 'primary'
-    | 'secondary'
-    | 'primary-inverse'
-    | 'secondary-inverse'
-    | 'inherit'
-    | 'ai'
+  | 'primary'
+  | 'secondary'
+  | 'primary-inverse'
+  | 'secondary-inverse'
+  | 'inherit'
+  | 'ai'
   /**
    * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
    */
@@ -91,16 +91,16 @@ type HeadingOwnProps = {
    * Sets appearance of the heading.
    */
   variant?:
-    | 'titlePageDesktop'
-    | 'titlePageMobile'
-    | 'titleSection'
-    | 'titleCardSection'
-    | 'titleModule'
-    | 'titleCardLarge'
-    | 'titleCardRegular'
-    | 'titleCardMini'
-    | 'label'
-    | 'labelInline'
+  | 'titlePageDesktop'
+  | 'titlePageMobile'
+  | 'titleSection'
+  | 'titleCardSection'
+  | 'titleModule'
+  | 'titleCardLarge'
+  | 'titleCardRegular'
+  | 'titleCardMini'
+  | 'label'
+  | 'labelInline'
 }
 
 type PropKeys = keyof HeadingOwnProps
