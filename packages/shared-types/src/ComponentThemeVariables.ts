@@ -662,6 +662,9 @@ export type HeadingTheme = Typography & {
   h5FontSize: Typography['fontSizeSmall']
   h5FontWeight: Typography['fontWeightNormal']
   h5FontFamily: Typography['fontFamily']
+  h6FontSize: Typography['fontSizeXSmall']
+  h6FontWeight: Typography['fontWeightNormal']
+  h6FontFamily: Typography['fontFamily']
   primaryInverseColor: string
   primaryColor: string
   secondaryColor: string

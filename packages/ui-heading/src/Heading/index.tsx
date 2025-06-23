@@ -31,6 +31,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { IconAiColoredSolid } from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -107,16 +108,56 @@ class Heading extends Component<HeadingProps> {
   }
 
   renderContent() {
-    const { children, renderIcon } = this.props
+    const { children, renderIcon, aiVariant } = this.props
 
-    if (renderIcon) {
+    if (renderIcon && !aiVariant) {
       return (
-        <>
+        <span css={[this.props.styles?.withIcon]} aria-hidden="true">
           {callRenderProp(renderIcon)}&nbsp;{children}
-        </>
+        </span>
+      )
+    }
+    if (aiVariant === 'stacked') {
+      return (
+        <span css={[this.props.styles?.withIcon]} aria-hidden="true">
+          <span css={this.props.styles?.igniteAIStacked}>
+            <IconAiColoredSolid />
+            <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          </span>
+          {children}
+        </span>
+      )
+    }
+    if (aiVariant === 'horizontal') {
+      return (
+        <span css={this.props.styles?.withIcon} aria-hidden="true">
+          <IconAiColoredSolid />
+          <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          {children}
+        </span>
+      )
+    }
+    if (aiVariant === 'iconOnly') {
+      return (
+        <span css={this.props.styles?.withIcon} aria-hidden="true">
+          <IconAiColoredSolid />
+          &nbsp;{children}
+        </span>
       )
     }
     return children
+  }
+
+  //overriding default screen reader functionality is needed to read spans in h tags correctly
+  getAriaLabel() {
+    const { aiVariant, children, renderIcon } = this.props
+    if (aiVariant === 'stacked' || aiVariant === 'horizontal') {
+      return `IgniteAI, ${children}`
+    }
+    if (aiVariant === 'iconOnly' || renderIcon) {
+      return `${children}`
+    }
+    return undefined
   }
 
   render() {
@@ -155,6 +196,7 @@ class Heading extends Component<HeadingProps> {
         as={ElementType}
         elementRef={this.handleRef}
         margin={margin}
+        aria-label={this.getAriaLabel()}
       >
         {this.renderContent()}
       </View>

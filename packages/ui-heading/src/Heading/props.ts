@@ -43,6 +43,10 @@ type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
 
 type HeadingOwnProps = {
   /**
+   * transforms heading into an ai variant
+   */
+  aiVariant?: 'stacked' | 'horizontal' | 'iconOnly'
+  /**
    * The text content of the Heading
    */
   children?: React.ReactNode // TODO: childrenOrValue or is it even needed?
@@ -51,7 +55,7 @@ type HeadingOwnProps = {
    */
   border?: 'none' | 'top' | 'bottom'
   /**
-   * The font color to render
+   * The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead
    */
   color?:
     | 'primary'
@@ -63,7 +67,7 @@ type HeadingOwnProps = {
   /**
    * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
    */
-  level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5'> | 'reset'
+  level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> | 'reset'
   /**
    * Choose the element Heading should render as. Will default to the `level` prop
    * if not specified.
@@ -107,9 +111,12 @@ type HeadingProps = HeadingOwnProps &
   WithStyleProps<HeadingTheme, HeadingStyle> &
   OtherHTMLAttributes<HeadingOwnProps>
 
-type HeadingStyle = ComponentStyle<'heading'>
+type HeadingStyle = ComponentStyle<
+  'heading' | 'igniteAI' | 'igniteAIStacked' | 'withIcon'
+>
 
 const propTypes: PropValidators<PropKeys> = {
+  aiVariant: PropTypes.oneOf(['stacked', 'horizontal', 'iconOnly']),
   border: PropTypes.oneOf(['none', 'top', 'bottom']),
   children: childrenOrValue,
   color: PropTypes.oneOf([
@@ -140,6 +147,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'aiVariant',
   'border',
   'children',
   'color',
