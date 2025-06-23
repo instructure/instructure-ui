@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: HeadingTheme,
   props: HeadingProps
 ): HeadingStyle => {
-  const { level, color, border, variant, renderIcon } = props
+  const { level, color, border, variant, aiVariant } = props
 
   const variants: Record<NonNullable<HeadingProps['variant']>, object> = {
     titlePageDesktop: {
@@ -130,6 +130,11 @@ const generateStyle = (
       fontSize: componentTheme.h5FontSize,
       fontWeight: componentTheme.h5FontWeight
     },
+    h6: {
+      fontFamily: componentTheme.h6FontFamily,
+      fontSize: componentTheme.h6FontSize,
+      fontWeight: componentTheme.h6FontWeight
+    },
     reset: {
       margin: 0,
       fontSize: 'inherit',
@@ -188,13 +193,6 @@ const generateStyle = (
       label: 'heading',
       lineHeight: componentTheme.lineHeight,
       margin: 0,
-      //need this for icons to render them vertically centered
-      ...(renderIcon
-        ? {
-            display: 'flex',
-            alignItems: 'center'
-          }
-        : {}),
       // NOTE: the input styles exist to accommodate the InPlaceEdit component
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(input)[type]': inputStyles,
@@ -203,6 +201,33 @@ const generateStyle = (
       ...(variant ? variants[variant] : levelStyles[level!]),
       ...colorStyles[color!],
       ...borderStyles[border!]
+    },
+    igniteAI: {
+      label: 'heading__ignite-ai',
+      background: `
+        linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
+      border: 'solid transparent',
+      WebkitTextFillColor: 'transparent',
+      paddingRight: '.25rem'
+    },
+    igniteAIStacked: {
+      label: 'heading__ignite-ai-stacked',
+      fontSize: '1rem',
+      lineHeight: '1.25rem',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    withIcon: {
+      label: 'heading__with-icon',
+      display: 'flex',
+      alignItems: 'center',
+      ...(aiVariant === 'stacked'
+        ? {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+          }
+        : {})
     }
   }
 }
