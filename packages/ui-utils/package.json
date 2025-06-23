@@ -39,7 +39,7 @@
     "ua-parser-js": "^1.0.39"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18",
+    "react": ">=18 <=19",
     "react-dom": ">=16.14 <=18"
   },
   "publishConfig": {

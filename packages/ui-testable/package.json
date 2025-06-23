@@ -31,7 +31,7 @@
     "@instructure/ui-dom-utils": "10.23.0"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18",
+    "react": ">=18 <=19",
     "react-dom": ">=16.14 <=18"
   },
   "publishConfig": {
