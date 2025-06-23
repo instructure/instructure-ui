@@ -31,6 +31,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { IconAiColoredSolid } from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -107,12 +108,40 @@ class Heading extends Component<HeadingProps> {
   }
 
   renderContent() {
-    const { children, renderIcon } = this.props
+    const { children, renderIcon, aiVariant } = this.props
 
-    if (renderIcon) {
+    if (renderIcon && !aiVariant) {
       return (
         <>
           {callRenderProp(renderIcon)}&nbsp;{children}
+        </>
+      )
+    }
+    if (aiVariant === 'stacked') {
+      return (
+        <>
+          <span css={this.props.styles?.igniteAIStacked}>
+            <IconAiColoredSolid />
+            <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          </span>
+          {children}
+        </>
+      )
+    }
+    if (aiVariant === 'horizontal') {
+      return (
+        <>
+          <IconAiColoredSolid />
+          <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          {children}
+        </>
+      )
+    }
+    if (aiVariant === 'iconOnly') {
+      return (
+        <>
+          <IconAiColoredSolid />
+          &nbsp;{children}
         </>
       )
     }

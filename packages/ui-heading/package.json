@@ -29,6 +29,7 @@
     "@instructure/shared-types": "10.20.1",
     "@instructure/ui-prop-types": "10.20.1",
     "@instructure/ui-react-utils": "10.20.1",
+    "@instructure/ui-icons": "10.20.1",
     "@instructure/ui-testable": "10.20.1",
     "@instructure/ui-view": "10.20.1",
     "prop-types": "^15.8.1"

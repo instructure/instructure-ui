@@ -36,16 +36,6 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
   const themeSpecificStyle: ThemeSpecificStyle<HeadingTheme> = {
     canvas: {
       primaryColor: theme['ic-brand-font-color-dark']
-    },
-    instructure: {
-      h1FontFamily: typography?.fontFamilyHeading,
-      h2FontFamily: typography?.fontFamilyHeading,
-      h3FontWeight: typography?.fontWeightBold,
-      h3FontSize: '2.125rem',
-      h4FontWeight: typography?.fontWeightBold,
-      h4FontSize: typography?.fontSizeLarge,
-      h5FontWeight: typography?.fontWeightBold,
-      h5FontSize: typography?.fontSizeMedium
     }
   }
 
@@ -73,6 +63,10 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
     h5FontSize: typography?.fontSizeSmall,
     h5FontWeight: typography?.fontWeightNormal,
     h5FontFamily: typography?.fontFamily,
+
+    h6FontSize: typography?.fontSizeXSmall,
+    h6FontWeight: typography?.fontWeightNormal,
+    h6FontFamily: typography?.fontFamily,
 
     primaryInverseColor: colors?.contrasts?.white1010,
     primaryColor: colors?.contrasts?.grey125125,

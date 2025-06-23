@@ -34,11 +34,19 @@ type: example
   </div>
 ```
 
+### AI Heading
+
+Pre-configured and with unique styles, the `ai-headings` are used for standardized, ai-related components.
+
 ```js
 ---
 type: example
 ---
-<Heading>Default Heading</Heading>
+<div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
+ <Heading aiVariant="stacked">Nutrition Facts</Heading>
+ <Heading aiVariant="horizontal">Nutrition Facts</Heading>
+ <Heading aiVariant="iconOnly">Nutrition Facts</Heading>
+</div>
 ```
 
 ### Heading level
@@ -70,20 +78,19 @@ type: example
   <Heading>I inherit my color via the CSS cascade (default)</Heading>
   <Heading color="primary">I am primary color</Heading>
   <Heading color="secondary">I am secondary color</Heading>
-  <Heading color="ai">I am AI color</Heading>
 </div>
 ```
 
 ### Icons
 
-With the `renderIcon` prop, an icon can be rendered before the text. Only current use-case is for the `ai heading`
+With the `renderIcon` prop, an icon can be rendered before the text.
 
 ```js
 ---
 type: example
 ---
 <div>
- <Heading color="ai" renderIcon={<IconAiColoredSolid/>}>I am AI color with icon</Heading>
+ <Heading renderIcon={<IconAdminSolid/>}>I am heading with icon</Heading>
 </div>
 ```
 
