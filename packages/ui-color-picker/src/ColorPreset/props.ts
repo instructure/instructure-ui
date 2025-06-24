@@ -103,6 +103,18 @@ type ColorPresetOwnProps = {
    * The currently selected HEX string
    */
   selected?: string
+  /**
+   * A function for formatting the text provided to screen readers about the color.
+   *
+   * @param {string} hexCode - The hexadecimal color code (e.g., "#FFFFFF") of the current color option. Provided by the component - treat as read-only.
+   *
+   * @param {boolean} isSelected - Indicates whether this color is currently selected. Provided by the component - treat as read-only.
+   *
+   * Sets the aria-label attribute of the color.
+   *
+   * If not set, aria-label defaults to the hex code of the color.
+   */
+  colorScreenReaderLabel?: (hexCode: string, isSelected: boolean) => string
 }
 
 type ColorPresetState = {
@@ -138,6 +150,7 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   label: PropTypes.string,
   popoverScreenReaderLabel: PropTypes.string,
+  colorScreenReaderLabel: PropTypes.func,
   colorMixerSettings: PropTypes.shape({
     addNewPresetButtonScreenReaderLabel: PropTypes.string.isRequired,
     selectColorLabel: PropTypes.string.isRequired,
@@ -181,7 +194,8 @@ const allowedProps: AllowedPropKeys = [
   'colorMixerSettings',
   'onSelect',
   'popoverScreenReaderLabel',
-  'selected'
+  'selected',
+  'colorScreenReaderLabel'
 ]
 
 export type {

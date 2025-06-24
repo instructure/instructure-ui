@@ -250,40 +250,48 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       : this.renderIndicatorTooltip(indicatorBase, color)
   }
 
-  renderIndicatorBase = (color: string, selectOnClick?: boolean) => (
-    <View
-      disabled={this.props.disabled}
-      position="relative"
-      width="2.375rem"
-      height="2.375rem"
-      background="transparent"
-      margin="xx-small"
-      display="inline-block"
-      borderRadius="medium"
-      borderWidth="0"
-      padding="0"
-      cursor={this.props.disabled ? 'not-allowed' : 'auto'}
-      as="button"
-      {...(selectOnClick ? { onClick: () => this.props.onSelect(color) } : {})}
-      {...{
-        'aria-label': `${color}${
-          this.isSelectedColor(color) ? ' selected' : ''
-        }`
-      }}
-    >
-      <div>
-        <ColorIndicator color={color} shape="rectangle" role="presentation" />
-        {this.isSelectedColor(color) && (
-          <div css={this.props?.styles?.selectedIndicator}>
-            <IconCheckDarkSolid
-              themeOverride={{ sizeXSmall: '0.8rem' }}
-              size="x-small"
-            />
-          </div>
-        )}
-      </div>
-    </View>
-  )
+  renderIndicatorBase = (color: string, selectOnClick?: boolean) => {
+    const hexCode = color
+    const isSelected = this.isSelectedColor(color)
+
+    const screenReaderLabel =
+      typeof this.props.colorScreenReaderLabel === 'function'
+        ? this.props.colorScreenReaderLabel(hexCode, isSelected)
+        : hexCode
+
+    return (
+      <View
+        disabled={this.props.disabled}
+        position="relative"
+        width="2.375rem"
+        height="2.375rem"
+        background="transparent"
+        margin="xx-small"
+        display="inline-block"
+        borderRadius="medium"
+        borderWidth="0"
+        padding="0"
+        cursor={this.props.disabled ? 'not-allowed' : 'auto'}
+        as="button"
+        aria-label={screenReaderLabel}
+        {...(selectOnClick
+          ? { onClick: () => this.props.onSelect(color) }
+          : {})}
+      >
+        <div>
+          <ColorIndicator color={color} shape="rectangle" role="presentation" />
+          {this.isSelectedColor(color) && (
+            <div css={this.props?.styles?.selectedIndicator}>
+              <IconCheckDarkSolid
+                themeOverride={{ sizeXSmall: '0.8rem' }}
+                size="x-small"
+              />
+            </div>
+          )}
+        </div>
+      </View>
+    )
+  }
 
   renderIndicatorTooltip = (child: React.ReactElement, color: string) => {
     return (
