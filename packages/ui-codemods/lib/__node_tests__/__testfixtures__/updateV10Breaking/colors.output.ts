@@ -1,4 +1,3 @@
-/* eslint-disable */
 // @ts-nocheck
 import { canvas, canvasHighContrast } from '@instructure/ui'
 

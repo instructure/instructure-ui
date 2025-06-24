@@ -1,6 +1,5 @@
 // this is the same as the other colors test, it just makes sure that
 // codemods work on plain `.js` files too
-/* eslint-disable */
 // @ts-nocheck
 import { canvas, canvasHighContrast } from '@instructure/ui'
 

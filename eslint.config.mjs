@@ -76,6 +76,7 @@ const finalConfig = tseslint.config(
     // https://github.com/eslint/eslint/discussions/18304#discussioncomment-9069706
     ignores: [ // global ignores
       "**/node_modules/**",
+      "packages/ui-codemods/lib/__node_tests__/__testfixtures__/**",
       "**/types/**",
       "**/es/**",
       "packages/!(" + NODE_PACKAGES + ")/lib/**/*",
