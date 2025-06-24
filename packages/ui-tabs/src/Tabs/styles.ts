@@ -62,6 +62,10 @@ const generateStyle = (
       flexFlow: 'row wrap'
     },
     scroll: {
+      marginBottom:
+        variant === 'secondary'
+          ? `calc(${componentTheme.tabVerticalOffset} * -1)`
+          : 0,
       overflowX: 'auto',
       ...(variant === 'default' && {
         '&::-webkit-scrollbar-track': {

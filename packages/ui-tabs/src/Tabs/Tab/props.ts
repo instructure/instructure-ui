@@ -50,6 +50,10 @@ type TabsTabOwnProps = {
     tabData: { index: number; id: string }
   ) => void
   children?: Renderable
+  /**
+   * Whether tabOverflow prop in Tabs is set to 'scroll'.
+   */
+  isOverflowScroll?: boolean
 }
 
 type PropKeys = keyof TabsTabOwnProps
@@ -71,7 +75,8 @@ const propTypes: PropValidators<PropKeys> = {
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  isOverflowScroll: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -83,7 +88,8 @@ const allowedProps: AllowedPropKeys = [
   'isSelected',
   'onClick',
   'onKeyDown',
-  'children'
+  'children',
+  'isOverflowScroll'
 ]
 
 export type { TabsTabProps, TabsTabStyle }

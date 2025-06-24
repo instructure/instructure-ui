@@ -49,7 +49,7 @@ const generateStyle = (
   componentTheme: TabsTabTheme,
   props: TabsTabProps
 ): TabsTabStyle => {
-  const { variant, isSelected, isDisabled } = props
+  const { variant, isSelected, isDisabled, isOverflowScroll } = props
 
   const variants = {
     default: {
@@ -90,7 +90,7 @@ const generateStyle = (
       padding: '0.75rem 1rem', // if horizontal padding changes, update `scrollOverlayWidthSecondary` in `Tabs/theme.js`
       color: componentTheme.secondaryColor,
       marginInlineEnd: '0.2em',
-      marginBottom: '-0.0625rem',
+      marginBottom: isOverflowScroll ? '0rem' : '-0.0625rem',
       border: '0.0625rem solid transparent',
       borderTopLeftRadius: '0.1875rem',
       borderTopRightRadius: '0.1875rem',
