@@ -22,12 +22,20 @@
  * SOFTWARE.
  */
 
-import updateV10Breaking from './updateV10Breaking'
-import instUIv11Codemods from './instUIv11Codemods'
-import removeAsFromInstUISettingsProvider from './removeAsFromInstUISettingsProvider'
+import { Transform } from 'jscodeshift'
+import instUICodemodExecutor from './utils/instUICodemodExecutor'
+import { removeAsProp } from './removeAsFromInstUISettingsProvider'
 
-export {
-  updateV10Breaking,
-  instUIv11Codemods,
-  removeAsFromInstUISettingsProvider
+/**
+ * Runs all InstUI v10 -> v11 upgrade codemods
+ */
+const InstUIv11Codemods: Transform = (
+  file,
+  api,
+  options?: { fileName?: string; usePrettier?: boolean }
+) => {
+  // TODO add other v11 codemods to this array
+  return instUICodemodExecutor([removeAsProp], file, api, options)
 }
+
+export default InstUIv11Codemods

@@ -73,7 +73,7 @@ const warningsMap: Record<string, boolean> = {}
  *     ...
  * ```
  */
-function findElements(
+function findElement(
   filePath: string,
   j: JSCodeshift,
   root: Collection,
@@ -647,7 +647,7 @@ function writeWarningsToFile(fileName: string) {
 export {
   // lookup
   getVisibleChildren,
-  findElements,
+  findElement,
   findAttribute,
   findImport,
   findEveryImport,

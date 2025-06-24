@@ -24,9 +24,14 @@
 
 import { runTest } from './runTest'
 import updateV10Breaking from '../updateV10Breaking'
+import removeAsFromInstUISettingsProvider from '../removeAsFromInstUISettingsProvider'
 
 describe('test codemods', () => {
   it('test InstUI v10 color codemods', () => {
     runTest(updateV10Breaking)
+  })
+
+  it('test removing "as" prop from InstUISettingsProvider', () => {
+    runTest(removeAsFromInstUISettingsProvider)
   })
 })

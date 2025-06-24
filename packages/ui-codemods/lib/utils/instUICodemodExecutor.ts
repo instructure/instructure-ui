@@ -27,10 +27,10 @@ import formatSource from './formatSource'
 import type { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
 
 /**
- * @param j JSCodeshift instance
- * @param root the collection to work on. The function should modify this directly
- * @param filePath The path to the file that is being modified
- * @returns `true` if the code was modified
+ * @param j {JSCodeshift} JSCodeshift instance
+ * @param root {Collection} the collection to work on. The function should modify this directly
+ * @param filePath {string} The path to the file that is being modified
+ * @returns {boolean} `true` if the code was modified
  */
 export type InstUICodemod = (
   j: JSCodeshift,

@@ -61,7 +61,8 @@ type InstUIProviderProps = {
        */
       dir: 'ltr' | 'rtl'
       /**
-       *  @deprecated remove in v11
+       *  @deprecated This prop will be removed in InstUI v11
+       *
        *  The element type to render as
        */
       as?: AsElementType
@@ -69,7 +70,8 @@ type InstUIProviderProps = {
   | {
       dir?: never
       /**
-       *  @deprecated remove in v11
+       *  @deprecated This prop will be removed in InstUI v11
+       *
        *  The element type to render as
        */
       as?: never

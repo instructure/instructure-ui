@@ -19,19 +19,20 @@ The codemod scripts can be installed via the following command:
 type: code
 ---
 # use here the InstUI version number you are upgrading to
-npm install @instructure/ui-codemods@10
+npm install @instructure/ui-codemods@11
 ```
 
-### Codemod for changing the color palette to the v10 color palette
+Then run them with `jscodeshift`:
 
 ```sh
 ---
 type: code
 ---
-npx jscodeshift@17.3.0 -t node_modules/@instructure/ui-codemods/lib/updateV10Breaking.ts <path> --usePrettier=false
+# substitute updateV10Breaking with the codemod name you want to run
+npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateV10Breaking.ts <path>
 ```
 
-This codemod updates the `canvas` and `canvas-high-contrast` color palettes. Execute this in your project post-upgrade to InstUI v10. Prettier is turned on by default for output formatting, and you can also use the `usePrettier` flag.
+For more information about what the codemods do, see the [major version upgrade guides](#upgrade-guide)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods

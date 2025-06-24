@@ -31,11 +31,80 @@ import {
   findEveryImport,
   addImportIfNeeded,
   replaceImport,
-  removeAllChildren
+  removeAllChildren,
+  findElement
 } from '../utils/codemodHelpers'
 import { expect } from 'vitest'
 
 describe('test codemod helpers', () => {
+  it('test findElement', () => {
+    // Test finding simple elements by tag name
+    const source = `
+      <div>
+        <Button id="btn1" onClick={handleClick}>Click me</Button>
+        <Button type="submit" disabled>Submit</Button>
+        <Icon size="small" />
+        <Component.SubItem active={true}>Child</Component.SubItem>
+        <div {...spreadProps}>Spread attributes</div>
+      </div>
+    `
+    const filePath = 'test.jsx'
+    const root = j(source)
+
+    // Find all Button elements
+    let result = findElement(filePath, j, root, 'Button')
+    expect(result.length).toEqual(2)
+
+    // Find elements by tag name and attribute name
+    result = findElement(filePath, j, root, 'Button', { name: 'disabled' })
+    expect(result.length).toEqual(1)
+    expect(j(result.paths()[0]).toSource()).toContain('type="submit"')
+
+    // Find elements by tag name and attribute name + value
+    result = findElement(filePath, j, root, 'Button', {
+      name: 'id',
+      value: 'btn1'
+    })
+    expect(result.length).toEqual(1)
+    expect(j(result.paths()[0]).toSource()).toContain('onClick={handleClick}')
+
+    // Find elements by tag name and multiple attribute options
+    result = findElement(filePath, j, root, 'Button', {
+      name: 'type',
+      value: ['reset', 'submit']
+    })
+    expect(result.length).toEqual(1)
+    expect(j(result.paths()[0]).toSource()).toContain('type="submit"')
+
+    // Find elements with all attributes present
+    result = findElement(filePath, j, root, 'Button', [
+      { name: 'type', value: 'submit' },
+      { name: 'disabled' }
+    ])
+    expect(result.length).toEqual(1)
+
+    // Test finding no matching elements
+    result = findElement(filePath, j, root, 'Button', { name: 'nonexistent' })
+    expect(result.length).toEqual(0)
+
+    // Test finding component with member expression (namespace)
+    result = findElement(filePath, j, root, 'Component.SubItem')
+    expect(result.length).toEqual(1)
+    expect(j(result.paths()[0]).toSource()).toContain('active={true}')
+
+    // Test finding element with attribute and value that doesn't match
+    result = findElement(filePath, j, root, 'Button', {
+      name: 'type',
+      value: 'reset'
+    })
+    expect(result.length).toEqual(0)
+
+    // Verify error when using deep nesting in tag names
+    expect(() => {
+      findElement(filePath, j, root, 'Component.SubItem.DeepNesting')
+    }).toThrow(/cannot handle tag names with 2 or more/)
+  })
+
   it('test findAttribute', () => {
     const data = j(
       `<>
