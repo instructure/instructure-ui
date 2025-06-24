@@ -694,6 +694,7 @@ class Select extends Component<SelectProps> {
       onBlur,
       onInputChange,
       onRequestHideOptions,
+      layout,
       ...rest
     } = this.props
 
@@ -749,6 +750,7 @@ class Select extends Component<SelectProps> {
           : interaction,
       isRequired,
       shouldNotWrap,
+      layout,
       display: isInline ? 'inline-block' : 'block',
       renderBeforeInput: this.handleRenderBeforeInput(),
       // On iOS VoiceOver, if there is a custom element instead of the changing up and down arrow button

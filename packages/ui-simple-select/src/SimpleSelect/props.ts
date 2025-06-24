@@ -232,6 +232,14 @@ type PropsPassedToSelect = {
    * If the selected `SimpleSelect.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered.
    */
   isOptionContentAppliedToInput?: boolean
+
+  /**
+   * In `stacked` mode the input is below the label.
+   *
+   * In `inline` mode the input is to the right/left (depending on text direction) of the label,
+   * and the layout will look like `stacked` for small screens.
+   */
+  layout?: 'stacked' | 'inline'
 }
 
 type PropKeys = keyof SimpleSelectOwnProps
@@ -248,6 +256,7 @@ type SimpleSelectProps = PickPropsWithExceptions<
   | 'onRequestSelectOption'
   | 'inputValue'
   | 'isShowingOptions'
+  | 'layout'
 > &
   SimpleSelectOwnProps &
   OtherHTMLAttributes<
@@ -294,7 +303,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: ChildrenPropTypes.oneOf([Group, Option]),
-  isOptionContentAppliedToInput: PropTypes.bool
+  isOptionContentAppliedToInput: PropTypes.bool,
+  layout: PropTypes.oneOf(['stacked', 'inline'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -326,7 +336,8 @@ const allowedProps: AllowedPropKeys = [
   'renderEmptyOption',
   'renderBeforeInput',
   'renderAfterInput',
-  'children'
+  'children',
+  'layout'
 ]
 
 export type { SimpleSelectProps, SimpleSelectState }
