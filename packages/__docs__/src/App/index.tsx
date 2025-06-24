@@ -46,8 +46,10 @@ import { Tray } from '@instructure/ui-tray'
 import { Img } from '@instructure/ui-img'
 import { View } from '@instructure/ui-view'
 import { SideNavBar } from '@instructure/ui-side-nav-bar'
+import { TopNavBar } from '@instructure/ui-top-nav-bar'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import Link from '../Link'
+import { Drilldown } from '@instructure/ui-drilldown'
 
 type AppProps = {
   navigate: (path: string, options?: { replace: boolean }) => void
@@ -239,6 +241,121 @@ class App extends Component<AppProps, AppState> {
       }
     ]
 
+    const drillDown = (
+      <Drilldown
+        rootPageId={'default'} //renderBackButtonLabel={item?.backButtonLabel}
+      >
+        <Drilldown.Page id={'default'}>
+          <Drilldown.Group key={'default'} id={'default'}>
+            <Drilldown.Option
+              id={'account'}
+              subPageId={'account'}
+              afterLabelContentVAlign={'center'}
+            >
+              <div>
+                <IconUserLine /> Account
+              </div>
+            </Drilldown.Option>
+            <Drilldown.Option
+              id={'courses'}
+              subPageId={'courses'}
+              afterLabelContentVAlign={'center'}
+            >
+              <div>
+                <IconCoursesLine /> Courses
+              </div>
+            </Drilldown.Option>
+            <Drilldown.Option
+              id={'dashboard'}
+              afterLabelContentVAlign={'center'}
+              onOptionClick={() => {
+                this.props.navigate('/dashboard', { replace: true })
+                this.setState({ openMobile: false })
+              }}
+            >
+              <div>
+                <IconDashboardLine /> Dashboard
+              </div>
+            </Drilldown.Option>
+            <Drilldown.Option
+              id={'help'}
+              afterLabelContentVAlign={'center'}
+              onOptionClick={() => alert('Help clicked')}
+            >
+              <div>
+                <IconQuestionLine /> Help
+              </div>
+            </Drilldown.Option>
+          </Drilldown.Group>
+        </Drilldown.Page>
+        <Drilldown.Page
+          id={'account'}
+          renderBackButtonLabel={'Account'}
+          renderAfterChildren={
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+              aliquet erat in orci semper fringilla. Nullam suscipit mollis mi,
+              at vehicula magna vulputate eu. Cras mattis felis id quam vehicula
+              euismod. Nulla dolor enim, ornare in odio a, molestie dictum
+              ligula. Nullam maximus et dolor eget porttitor. Vestibulum
+              faucibus viverra pellentesque. Duis lorem lectus, porta vitae
+              aliquam vitae, vehicula sagittis nulla. Aenean sagittis congue
+              rhoncus. Cras laoreet eu nulla eu dignissim. Maecenas sed massa
+              nisi. Suspendisse pellentesque, metus sed ultricies porta, justo
+              tellus pulvinar diam, ac ornare massa nibh quis purus. Duis erat
+              ipsum, pellentesque in diam non, luctus accumsan metus. In ipsum
+              tellus, ullamcorper a faucibus a, venenatis ut urna. Sed at rutrum
+              turpis.
+            </p>
+          }
+          renderBeforeChildren={
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Img src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" />
+            </div>
+          }
+        >
+          <Drilldown.Group key={'account'} id={'account'}>
+            <Drilldown.Option
+              id={'accountinfo1'}
+              afterLabelContentVAlign={'center'}
+            >
+              <div>Account info 1</div>
+            </Drilldown.Option>
+            <Drilldown.Option
+              id={'accountinfo2'}
+              afterLabelContentVAlign={'center'}
+            >
+              <div>Account info 2</div>
+            </Drilldown.Option>
+          </Drilldown.Group>
+        </Drilldown.Page>
+        <Drilldown.Page id={'courses'} renderBackButtonLabel={'Courses'}>
+          <Drilldown.Group key={'courses'} id={'courses'}>
+            <Drilldown.Option
+              id={'courses1'}
+              afterLabelContentVAlign={'center'}
+              onOptionClick={() => {
+                this.props.navigate('/course1', { replace: true })
+                this.setState({ openMobile: false })
+              }}
+            >
+              <div>Courses1</div>
+            </Drilldown.Option>
+            <Drilldown.Option
+              id={'courses2'}
+              afterLabelContentVAlign={'center'}
+              onOptionClick={() => {
+                this.props.navigate('/course2', { replace: true })
+                this.setState({ openMobile: false })
+              }}
+            >
+              <div>Courses2</div>
+            </Drilldown.Option>
+          </Drilldown.Group>
+        </Drilldown.Page>
+      </Drilldown>
+    )
+
     return (
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <InstUISettingsProvider>
@@ -346,49 +463,41 @@ class App extends Component<AppProps, AppState> {
                   onClick: () => alert('Alerts clicked')
                 }
               ]}
-              mobileMenu={menuArray}
+              mobileMenu={drillDown}
               open={this.state.openMobile} // jobb nev, pl mobileMenuOpen
               onOpenChange={(open: boolean) => {
                 // szinten
                 this.setState({ openMobile: open })
               }}
               ltiIcon={<IconArcLine />}
-              ltiMenuItems={[
-                { id: 'library', title: 'My Library' },
-                { id: 'share', title: 'Share with me' },
-                { id: 'settings', title: 'Settings' },
-                {
-                  id: 'submenu',
-                  title: 'SubMenu',
-                  options: [
-                    {
-                      id: 'account',
-                      label: 'Account',
-                      renderBeforeTitle: <IconUserLine />,
-                      subPageId: 'accountPage',
-                      subOptions: [
-                        {
-                          id: 'profile',
-                          label: 'Profile Settings',
-                          href: '/profile'
-                        },
-                        {
-                          id: 'privacy',
-                          label: 'Privacy',
-                          href: '/privacy'
-                        }
-                      ]
-                    },
-                    {
-                      id: 'courses',
-                      label: 'Courses',
-                      renderBeforeTitle: <IconCoursesLine />,
-                      href: '/courses'
-                    }
-                  ]
-                }
-              ]}
-              currentPageId="share" // ltiCurrentPageID
+              ltiMenuItems={
+                <TopNavBar.MenuItems
+                  listLabel="Page navigation"
+                  currentPageId="OverviewPage"
+                  renderHiddenItemsMenuTriggerLabel={(hiddenChildrenCount) =>
+                    `${hiddenChildrenCount} More`
+                  }
+                >
+                  <TopNavBar.Item id="OverviewPage" href="/#TopNavBar">
+                    Overview
+                  </TopNavBar.Item>
+                  <TopNavBar.Item id="AdminPage" href="/#TopNavBar">
+                    Admin
+                  </TopNavBar.Item>
+                  <TopNavBar.Item id="SettingsPage" href="/#TopNavBar">
+                    Settings
+                  </TopNavBar.Item>
+                  <TopNavBar.Item id="MapsPage" href="/#TopNavBar">
+                    Maps
+                  </TopNavBar.Item>
+                  <TopNavBar.Item id="AssessmentsPage" href="/#TopNavBar">
+                    Assessments
+                  </TopNavBar.Item>
+                  <TopNavBar.Item id="CommunityPage" href="/#TopNavBar">
+                    Community
+                  </TopNavBar.Item>
+                </TopNavBar.MenuItems>
+              }
             />
             <Tray
               label="Courses"
