@@ -34,6 +34,11 @@ A component for picking a color from a list of colors. Supports adding new color
             colors={this.state.colors}
             selected={this.state.selected}
             onSelect={(selected) => this.setState({ selected })}
+            colorScreenReaderLabel={(hexCode, isSelected) => {
+              return `color with hex code ${hexCode}${
+                isSelected ? ' selected' : ''
+              }`
+            }}
           />
         </div>
       )
@@ -65,6 +70,11 @@ A component for picking a color from a list of colors. Supports adding new color
           colors={colors}
           selected={selected}
           onSelect={setSelected}
+          colorScreenReaderLabel={(hexCode, isSelected) => {
+            return `color with hex code ${hexCode}${
+              isSelected ? ' selected' : ''
+            }`
+          }}
         />
       </div>
     )
@@ -131,6 +141,11 @@ A component for picking a color from a list of colors. Supports adding new color
                 secondColorLabel: 'Foreground'
               }
             }}
+            colorScreenReaderLabel={(hexCode, isSelected) => {
+              return `color with hex code ${hexCode}${
+                isSelected ? ' selected' : ''
+              }`
+            }}
           />
         </div>
       )
@@ -188,6 +203,11 @@ A component for picking a color from a list of colors. Supports adding new color
               firstColorLabel: 'Background',
               secondColorLabel: 'Foreground'
             }
+          }}
+          colorScreenReaderLabel={(hexCode, isSelected) => {
+            return `color with hex code ${hexCode}${
+              isSelected ? ' selected' : ''
+            }`
           }}
         />
       </div>
