@@ -359,6 +359,7 @@ class Tabs extends Component<TabsProps, TabsState> {
         isDisabled={panel.props.isDisabled}
         onClick={this.handleTabClick}
         onKeyDown={this.handleTabKeyDown}
+        isOverflowScroll={this.props.tabOverflow === 'scroll'}
       >
         {panel.props.renderTitle}
       </Tab>
