@@ -9,7 +9,6 @@
   "references": [
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-buttons/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../ui-calendar/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },

@@ -21,25 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import chai from 'chai'
-import sinon from 'sinon-chai'
-import string from 'chai-string'
-import exclude from 'chai-exclude'
-import dirty from 'dirty-chai'
-import promised from 'chai-as-promised'
+const { defineConfig } = require('cypress')
+const webpackConfig = require('./cypress/webpack.config.cjs')
 
-import assertions from './assertions'
-
-const init = (chai: Chai.ChaiStatic) => {
-  // eslint-disable-next-line no-param-reassign
-  chai.config.truncateThreshold = 999
-  chai.use(sinon)
-  chai.use(exclude)
-  chai.use(string)
-  chai.use(promised)
-  chai.use(assertions)
-  chai.use(dirty)
-  return chai
-}
-
-export const expect = init(chai).expect
+module.exports = defineConfig({
+  numTestsKeptInMemory: 1,
+  defaultCommandTimeout: 10000,
+  pageLoadTimeout: 120000,
+  responseTimeout: 60000,
+  requestTimeout: 60000,
+  execTimeout: 120000,
+  taskTimeout: 60000,
+  retries: {
+    experimentalStrategy: 'detect-flake-and-pass-on-threshold',
+    experimentalOptions: {
+      maxRetries: 10,
+      passesRequired: 1
+    },
+    openMode: true,
+    runMode: true
+  },
+  screenshotOnRunFailure: false,
+  component: {
+    excludeSpecPattern: 'regression-test/**',
+    devServer: {
+      framework: 'react',
+      bundler: 'webpack',
+      webpackConfig
+    }
+  }
+})

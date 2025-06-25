@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from 'chai'
+import { expect } from 'vitest'
 import '@testing-library/jest-dom'
 import cleanString from '../cleanString'
 

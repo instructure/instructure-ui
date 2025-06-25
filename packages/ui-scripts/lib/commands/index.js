@@ -28,7 +28,6 @@ import tag from './tag.js'
 import deprecate from './deprecate.js'
 import publish from './publish.js'
 import lint from '../test/lint.js'
-import test from '../test/karma.js'
 import bundle from '../build/webpack.js'
 import clean from '../build/clean.js'
 import build from '../build/babel.js'
@@ -42,7 +41,6 @@ export const yargCommands = [
   deprecate,
   publish,
   lint,
-  test,
   bundle,
   clean,
   build,

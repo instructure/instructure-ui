@@ -17,9 +17,6 @@
       "path": "../ui-dom-utils/tsconfig.build.json"
     },
     {
-      "path": "../ui-test-utils/tsconfig.build.json"
-    },
-    {
       "path": "../ui-portal/tsconfig.build.json"
     },
     {
@@ -42,9 +39,6 @@
     },
     {
       "path": "../ui-color-utils/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-test-utils/tsconfig.build.json"
     },
     {
       "path": "../ui-themes/tsconfig.build.json"

@@ -60,16 +60,15 @@ describe('<Menu/>', () => {
     cy.get('[role="menu"]')
       .should('not.be.focused')
       .and('have.attr', 'tabIndex', '0')
-    
-    cy.get('[role="menuitem"]').eq(0)
+
+    cy.get('[role="menuitem"]')
+      .eq(0)
       .should('be.focused')
       .and('have.attr', 'tabIndex', '-1')
 
     cy.focused().realPress('ArrowDown')
 
-    cy.get('[role="menuitem"]').eq(1)
-      .should('be.focused')
-
+    cy.get('[role="menuitem"]').eq(1).should('be.focused')
   })
 
   it('should apply offset values to Popover', () => {
@@ -246,9 +245,9 @@ describe('<Menu/>', () => {
     cy.contains('Flyout').click()
     cy.get('body').should('not.contain', 'Flyout Menu Item')
     cy.contains('Flyout').click()
+    cy.contains('Flyout Menu Item').should('be.visible')
     cy.contains('Flyout Menu Item')
-      .should('be.visible')
-    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+      .closest('[role="menuitem"]')
       .should('be.focused')
   })
 
@@ -266,7 +265,8 @@ describe('<Menu/>', () => {
     cy.contains('Flyout').focus()
     cy.focused().realPress('ArrowRight').wait(100)
     cy.contains('Flyout Menu Item').should('exist')
-    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+    cy.contains('Flyout Menu Item')
+      .closest('[role="menuitem"]')
       .should('be.focused')
   })
 
@@ -281,11 +281,15 @@ describe('<Menu/>', () => {
       </Menu>
     )
 
-    cy.contains('Flyout').focus()
-    cy.focused().realPress('Space').wait(100)
-    cy.contains('Flyout Menu Item').should('exist')
-    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
-      .should('be.focused')
+    cy.contains('Flyout').should('be.visible').focus().should('have.focus')
+
+    cy.focused().realPress('Space')
+
+    cy.contains('Flyout Menu Item').should('exist').and('be.visible')
+
+    cy.contains('Flyout Menu Item')
+      .closest('[role="menuitem"]')
+      .should('have.focus')
   })
 
   it(`should show and focus flyout menu on enter keyDown`, () => {
@@ -302,7 +306,8 @@ describe('<Menu/>', () => {
     cy.contains('Flyout').focus()
     cy.focused().realPress('Enter').wait(100)
     cy.contains('Flyout Menu Item').should('exist')
-    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+    cy.contains('Flyout Menu Item')
+      .closest('[role="menuitem"]')
       .should('be.focused')
   })
 
@@ -319,7 +324,8 @@ describe('<Menu/>', () => {
 
     cy.contains('Flyout').focus()
     cy.focused().realHover().wait(100)
-    cy.contains('Flyout Menu Item').closest('[role="menuitem"]')
+    cy.contains('Flyout Menu Item')
+      .closest('[role="menuitem"]')
       .should('be.focused')
   })
 })
