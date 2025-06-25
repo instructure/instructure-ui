@@ -28,7 +28,6 @@
     "find-up": "^7.0.0",
     "http-server": "^14.1.1",
     "jscodeshift": "^0.16.1",
-    "karma-cli": "^2.0.0",
     "lerna": "^8.1.9",
     "lodash.isplainobject": "^4.0.6",
     "mocha": "^10.7.3",

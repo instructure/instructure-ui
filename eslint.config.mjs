@@ -60,7 +60,6 @@ const NODE_PACKAGES = [
   'browserslist-config-instui',
   'ui-babel-preset',
   'ui-codemods',
-  'ui-karma-config',
   'ui-stylelint-config',
   'ui-scripts',
   'ui-webpack-config',
@@ -83,8 +82,7 @@ const finalConfig = tseslint.config(
       "/regression-test/**",
       "/coverage/**",
       "**/stylelint.config.js",
-      "**/babel.config.js",
-      "karma.conf.js"
+      "**/babel.config.js"
     ]
   },
   eslint.configs.recommended,

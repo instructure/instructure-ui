@@ -36,7 +36,6 @@
     "@instructure/ui-position": "10.20.1",
     "@instructure/ui-prop-types": "10.20.1",
     "@instructure/ui-react-utils": "10.20.1",
-    "@instructure/ui-test-utils": "10.20.1",
     "@instructure/ui-testable": "10.20.1",
     "@instructure/ui-utils": "10.20.1",
     "@instructure/ui-view": "10.20.1",

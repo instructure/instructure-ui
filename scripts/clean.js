@@ -31,7 +31,6 @@ const NODE_PACKAGES = [
   'ui-icons-build',
   'ui-babel-preset',
   'ui-codemods',
-  'ui-karma-config',
   'ui-scripts',
   'command-utils',
   'instui-cli',

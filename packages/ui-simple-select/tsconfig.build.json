@@ -17,7 +17,6 @@
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" }
   ]

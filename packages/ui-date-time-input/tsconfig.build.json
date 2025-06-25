@@ -8,7 +8,6 @@
   "include": ["src"],
   "references": [
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../ui-buttons/tsconfig.build.json" },
     { "path": "../ui-calendar/tsconfig.build.json" },
     { "path": "../ui-date-input/tsconfig.build.json" },

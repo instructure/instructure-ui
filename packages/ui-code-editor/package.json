@@ -24,7 +24,6 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.20.1",
-    "@instructure/ui-test-utils": "10.20.1",
     "@instructure/ui-themes": "10.20.1",
     "@types/codemirror": "5.x"
   },
@@ -36,7 +35,6 @@
     "@instructure/ui-color-utils": "10.20.1",
     "@instructure/ui-dom-utils": "10.20.1",
     "@instructure/ui-react-utils": "10.20.1",
-    "@instructure/ui-test-locator": "10.20.1",
     "@instructure/ui-testable": "10.20.1",
     "@instructure/ui-utils": "10.20.1",
     "codemirror": "5.65.16",

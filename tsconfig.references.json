@@ -133,9 +133,6 @@
       "path": "./packages/ui-img/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-karma-config/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-link/tsconfig.build.json"
     },
     {
@@ -236,18 +233,6 @@
     },
     {
       "path": "./packages/ui-tag/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui-test-locator/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui-test-queries/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui-test-sandbox/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui-test-utils/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-testable/tsconfig.build.json"

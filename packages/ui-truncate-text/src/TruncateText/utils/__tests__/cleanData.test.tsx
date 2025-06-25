@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { expect } from 'chai'
+import { expect } from 'vitest'
 import '@testing-library/jest-dom'
 import cleanData from '../cleanData'
 import { CleanDataOptions } from '../../props'

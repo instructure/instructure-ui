@@ -56,13 +56,7 @@ module.exports = function (
       {
         '(@instructure/ui-[^(/|\\s)]+)$': {
           transform: (importName, matches) => {
-            const ignore = [
-              '@instructure/ui-test-queries',
-              '@instructure/ui-test-sandbox',
-              '@instructure/ui-test-utils'
-            ]
-
-            if (!matches || !matches[1] || ignore.includes(matches[1])) return
+            if (!matches || !matches[1]) return
             return `${matches[1]}/lib/${importName}`
           }
         },
