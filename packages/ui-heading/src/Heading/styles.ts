@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: HeadingTheme,
   props: HeadingProps
 ): HeadingStyle => {
-  const { level, color, border, variant, renderIcon } = props
+  const { level, color, border, variant, renderIcon, aiVariant } = props
 
   const variants: Record<NonNullable<HeadingProps['variant']>, object> = {
     titlePageDesktop: {
@@ -130,6 +130,11 @@ const generateStyle = (
       fontSize: componentTheme.h5FontSize,
       fontWeight: componentTheme.h5FontWeight
     },
+    h6: {
+      fontFamily: componentTheme.h6FontFamily,
+      fontSize: componentTheme.h6FontSize,
+      fontWeight: componentTheme.h6FontWeight
+    },
     reset: {
       margin: 0,
       fontSize: 'inherit',
@@ -189,7 +194,7 @@ const generateStyle = (
       lineHeight: componentTheme.lineHeight,
       margin: 0,
       //need this for icons to render them vertically centered
-      ...(renderIcon
+      ...(renderIcon || aiVariant
         ? {
             display: 'flex',
             alignItems: 'center'
@@ -202,7 +207,29 @@ const generateStyle = (
 
       ...(variant ? variants[variant] : levelStyles[level!]),
       ...colorStyles[color!],
-      ...borderStyles[border!]
+      ...borderStyles[border!],
+      ...(aiVariant === 'stacked'
+        ? {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+          }
+        : {})
+    },
+    igniteAI: {
+      label: 'igniteAI',
+      background: `
+        linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
+      border: 'solid transparent',
+      WebkitTextFillColor: 'transparent',
+      paddingRight: '.25rem'
+    },
+    igniteAIStacked: {
+      label: 'igniteAIStacked',
+      fontSize: '1rem',
+      lineHeight: '1.25rem',
+      display: 'flex',
+      alignItems: 'center'
     }
   }
 }
