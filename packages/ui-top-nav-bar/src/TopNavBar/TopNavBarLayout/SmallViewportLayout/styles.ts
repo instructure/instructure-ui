@@ -74,7 +74,6 @@ const generateStyle = (
     maxWidth: '100%',
     paddingBlock: 0,
     paddingInline: componentTheme.smallViewportInlinePadding,
-    position: 'relative',
     zIndex: componentTheme.smallViewportZIndex,
     display: 'flex',
     justifyContent: 'space-between',
