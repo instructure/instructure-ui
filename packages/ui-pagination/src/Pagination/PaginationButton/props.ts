@@ -50,6 +50,12 @@ type PaginationPageOwnProps = {
       | React.MouseEvent<HTMLButtonElement>
       | React.FocusEvent<HTMLInputElement>
   ) => void
+  /**
+   * The text screenreaders should say when this button is in focus (sets the
+   * `aria-label` attribute).
+   * If left undefined (default) SRs will announce text in the child node(s).
+   */
+  screenReaderLabel?: string
 }
 
 type PropKeys = keyof PaginationPageOwnProps
@@ -65,13 +71,14 @@ type PaginationPageProps =
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
   current: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  screenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
   'children',
-  'current'
-
+  'current',
+  'screenReaderLabel'
   // we don't want to pass onClick
   // 'onClick'
 ]
