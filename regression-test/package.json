@@ -31,8 +31,11 @@
   },
   "dependencies": {
     "instructure-ui": "file:../packages",
-    "next": "^15",
-    "react": "^18.3.1",
-    "react-dom": "^18"
+    "next": "14.2.30",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "dependency-comments": {
+    "next": "Next.js 15 needs React 19, but this app is using React 18 for compatibility with InstUI, so we are using Next.js 14."
   }
 }
