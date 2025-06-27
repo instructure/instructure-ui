@@ -26,7 +26,6 @@ export * from './BaseTheme'
 export * from './Colors'
 export * from './ComponentThemeMap'
 export * from './ComponentThemeVariables'
-export * from './CommonProps'
 export * from './CommonTypes'
 export type {
   DeepPartial,
@@ -34,6 +33,5 @@ export type {
   Nullable,
   CSSShorthandValue,
   OtherHTMLAttributes,
-  PropValidators,
   PickPropsWithExceptions
 } from './UtilityTypes'

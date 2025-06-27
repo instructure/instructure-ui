@@ -30,10 +30,8 @@ import type {
   ComponentClass,
   ComponentElement,
   ComponentState,
-  ReactHTML,
   ReactNode,
   ReactElement,
-  ReactSVG
 } from 'react'
 
 /** Element func parameter, mainly for the `findDOMNode` util */
@@ -47,8 +45,6 @@ export type UIElement =
 
 /** Type that is renderable by `callRenderProp` */
 export type Renderable<P = never> =
-  | keyof ReactHTML
-  | keyof ReactSVG
   | ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>
   | ComponentClass
   | ReactNode
