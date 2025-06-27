@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
+
+
+### Bug Fixes
+
+* **ui-tabs:** fix bottom border of Tab with scrolling overflow in secondary variant ([dabd148](https://github.com/instructure/instructure-ui/commit/dabd14809ce6372b2605aea6edb6ea1a58c86b13))
+
+
+
+
+
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-tabs

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
+
+
+### Bug Fixes
+
+* **ui-progress:** add aria-label to ProgressBar via the screenReaderLabel prop ([34dfbce](https://github.com/instructure/instructure-ui/commit/34dfbce5b4e9b68fd1bf50d952afe8b69e7d812b))
+
+
+
+
+
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-progress

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-text",
-  "version": "10.20.1",
+  "version": "10.21.0",
   "description": "A component for styling textual content",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,17 +24,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/console": "10.20.1",
-    "@instructure/emotion": "10.20.1",
-    "@instructure/shared-types": "10.20.1",
-    "@instructure/ui-color-utils": "10.20.1",
-    "@instructure/ui-react-utils": "10.20.1",
+    "@instructure/console": "10.21.0",
+    "@instructure/emotion": "10.21.0",
+    "@instructure/shared-types": "10.21.0",
+    "@instructure/ui-color-utils": "10.21.0",
+    "@instructure/ui-react-utils": "10.21.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "10.20.1",
-    "@instructure/ui-babel-preset": "10.20.1",
-    "@instructure/ui-themes": "10.20.1",
+    "@instructure/ui-axe-check": "10.21.0",
+    "@instructure/ui-babel-preset": "10.21.0",
+    "@instructure/ui-themes": "10.21.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1"
   },
