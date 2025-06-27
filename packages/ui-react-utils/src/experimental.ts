@@ -25,6 +25,28 @@ import { decorator } from '@instructure/ui-decorator'
 import { logWarn as warn } from '@instructure/console'
 import { ComponentClass } from 'react'
 
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * Flag React component and component props as experimental.
+ * Warnings will display in the console when experimental components/props
+ * props are used.
+ *
+ * ```js-code
+ *  class Example extends Component {
+ *    static propTypes = {
+ *      currentProp: PropTypes.func
+ *    }
+ *  }
+ *  export default experimental(['experimentalProp'])(Example)
+ * ```
+ *
+ * @module experimental
+ * @param {array} experimentalProps (if this argument is null or undefined, the entire component is flagged)
+ * @param {string} message
+ * @return {function} React component flagged as experimental
+ */
 const experimental =
   process.env.NODE_ENV == 'production'
     ? () => (ReactComponent: ComponentClass<any>) => ReactComponent
@@ -102,28 +124,4 @@ function warnExperimentalComponent(name: string, message = '') {
 }
 
 export default experimental
-export {
-  /**
-   * ---
-   * category: utilities/react
-   * ---
-   * Flag React component and component props as experimental.
-   * Warnings will display in the console when experimental components/props
-   * props are used.
-   *
-   * ```js-code
-   *  class Example extends Component {
-   *    static propTypes = {
-   *      currentProp: PropTypes.func
-   *    }
-   *  }
-   *  export default experimental(['experimentalProp'])(Example)
-   * ```
-   *
-   * @module experimental
-   * @param {array} experimentalProps (if this argument is null or undefined, the entire component is flagged)
-   * @param {string} message
-   * @return {function} React component flagged as experimental
-   */
-  experimental
-}
+export { experimental }

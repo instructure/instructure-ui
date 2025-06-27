@@ -36,6 +36,31 @@ export interface DeprecatedDecorator {
   changedPackageWarning: (...args: any[]) => string
 }
 
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * Deprecate React component props. Warnings will display in the console when deprecated
+ * props are used. Include the version number when the deprecated component will be removed.
+ *
+ * ```js-code
+ *  class Example extends Component {
+ *    static propTypes = {
+ *      currentProp: PropTypes.func
+ *    }
+ *  }
+ *  export default deprecated('7.0.0', {
+ *    deprecatedProp: 'currentProp',
+ *    nowNonExistentProp: true
+ *  })(Example)
+ * ```
+ *
+ * @param {string} version
+ * @param {object} oldProps (if this argument is null or undefined, the entire component is deprecated)
+ * @param {string} message
+ * @return {function} React component with deprecated props behavior
+ * @module deprecated
+ */
 const deprecated = (() => {
   if (process.env.NODE_ENV === 'production') {
     const deprecated: DeprecatedDecorator = function () {
@@ -54,31 +79,6 @@ const deprecated = (() => {
       oldProps?: Record<string, any>,
       message = ''
     ) => {
-      /**
-       * ---
-       * category: utilities/react
-       * ---
-       * Deprecate React component props. Warnings will display in the console when deprecated
-       * props are used. Include the version number when the deprecated component will be removed.
-       *
-       * ```js-code
-       *  class Example extends Component {
-       *    static propTypes = {
-       *      currentProp: PropTypes.func
-       *    }
-       *  }
-       *  export default deprecated('7.0.0', {
-       *    deprecatedProp: 'currentProp',
-       *    nowNonExistentProp: true
-       *  })(Example)
-       * ```
-       *
-       * @param {string} version
-       * @param {object} oldProps (if this argument is null or undefined, the entire component is deprecated)
-       * @param {string} message
-       * @return {function} React component with deprecated props behavior
-       * @module deprecated
-       */
       class DeprecatedComponent extends ComposedComponent {}
 
       DeprecatedComponent.prototype.componentDidMount = function () {

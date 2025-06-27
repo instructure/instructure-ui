@@ -46,13 +46,6 @@ type FormMessageType =
  */
 type FormMessageChild = React.ReactNode
 
-/**
- * ---
- * category: utilities/form
- * ---
- * Custom prop types for React components.
- * @module FormPropTypes
- */
 const FormPropTypes = {
   message: PropTypes.shape({
     type: formMessageTypePropType,

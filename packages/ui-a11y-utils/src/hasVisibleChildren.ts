@@ -28,6 +28,15 @@ import { matchComponentTypes } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
+ * @module hasVisibleChildren
+ * @param children - A React component's children prop
+ * @return whether any of the children are visible
+ */
 function hasVisibleChildren(children: ReactNode) {
   let visible = false
   Children.forEach(children, (child) => {
@@ -44,15 +53,4 @@ function hasVisibleChildren(children: ReactNode) {
 }
 
 export default hasVisibleChildren
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
-   * @module hasVisibleChildren
-   * @param {ReactChildren} children - A react component's children prop
-   * @return {boolean} whether any of the children are visible
-   */
-  hasVisibleChildren
-}
+export { hasVisibleChildren }

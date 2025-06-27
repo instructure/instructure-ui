@@ -44,9 +44,6 @@ export function getClientProps(docs: ProcessedFile[], library: LibraryOptions) {
     .filter((doc) => !doc.private)
     .forEach((doc) => {
       const { category, id, parent, describes } = doc
-      if (doc.undocumented) {
-        return
-      }
       // warn if the ID already exists with a different path
       if (docIDs[id] && docIDs[id] !== doc.srcPath) {
         warning(

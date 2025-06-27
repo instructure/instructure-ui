@@ -32,7 +32,7 @@ export function processFile(
   fullPath: string,
   projectRoot: string,
   library: LibraryOptions
-): ProcessedFile {
+): ProcessedFile | undefined {
   // eslint-disable-next-line no-console
   console.info(`Processing ${fullPath}`)
   const source = fs.readFileSync(fullPath)
@@ -42,11 +42,10 @@ export function processFile(
   const doc = parseDoc(fullPath, source, (err: Error) => {
     console.warn('Error when parsing ', fullPath, ":\n", err.stack)
   })
+  if (!doc) {
+    return
+  }
   const docData: ProcessedFile = { ...doc, ...pathInfo } as ProcessedFile
-  // TODO docblock is always undefined. Either show this or delete.
-  docData.methods = docData.methods
-    ? docData.methods.filter((method) => method.docblock !== null)
-    : undefined
   let docId: string
   const lowerPath = docData.relativePath.toLowerCase()
   if (docData.id) {

@@ -12,15 +12,40 @@ This page documents how to add and maintain documentation.
 
 The documentation site is generated from the **source code** and the `.md` files. There are two types of `.md` files: `README.md` and `named-md-files.md`, under the `docs folder`.
 
-The **source code** is parsed with [JSDoc](https://jsdoc.app/) with the exeption of react components, which are parsed by [react-docgen](https://react-docgen.dev/) and it provides `type` information for the docs.
+The **source code** is parsed with the [TypeScript compiler API](https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API) with the exception of React components, which are parsed by [react-docgen](https://react-docgen.dev/). These tools parse out JSDoc comments, type information of React component props and types for functions.
+
+## Utility functions
+
+These are in the "utilities" menu in the left navigation bar. Their JSDoc needs to be above an exported function and needs to have a `@module` annotation to be included in the docs. Our parser can handle 1 export/file. No need to define types in JSDoc, they will be parsed from the function itself.
+
+The gray-matter YAML defines meta information like which part of the side navigation this will be in (`category`).
+
+```typescript
+---
+type: code
+---
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ * @module
+ * Documentation goes here
+ * @param p1 the param
+ */
+function myFunc(p1: int) {}
+
+export {myFunc}
+```
+
+## Markdown files
 
 The docs can be written in `markdown`, with some added flavor, so the docs can handle special code-display cases.
 
-## Special Mardown Rules
+### Special Markdown Rules
 
 The only special markdown part is the `codeblock`. It can be displayed in several different ways.
 
-### 1. code
+#### 1. code
 
 If a code example is needed with syntax highlighting:
 
@@ -48,7 +73,7 @@ console.log("my js example comes here")
 
 Most common languages can be used for syntax highlight, such as `jsx`, `bash` or `md`
 
-### 2. embed
+#### 2. embed
 
 The `type: embed` will render the containing code into the page. It must be valid `javascript`
 
@@ -76,7 +101,7 @@ type: embed
 
 **_Note:_** you can use any instUI components in the examples
 
-### 3. example
+#### 3. example
 
 The most complex type is the `type: example`. It will render as the `embed` did, but it also provides access to the code, which is editable and the changes reflect on the rendered view immediately.
 
@@ -216,7 +241,7 @@ render(<Example />);
 
 **_Note:_** you can use `funcional React` as well.
 
-### 4. Multi example
+#### 4. Multi example
 
 If an example should be shown in `class` and `function` form as well, it needs to be written as a `list` with two items. The first item will be the `class`, the second the `function`.
 
@@ -312,7 +337,7 @@ The above code will display like this:
 
 **_Note:_** beacuse of this feature, code examples can not be displayed by `lists`
 
-### 5. comment examples
+#### 5. comment examples
 
 `JSDoc` can parse `markdown` even in the comments of `js/ts files`. These `comment-based examples` can not contain `front-matter`:
 
@@ -348,7 +373,7 @@ type: code
 
 The compiler will strip the postfix and calculate the language and type from it as well.
 
-## Named files
+### Purely documentation files
 
 Under the docs folder, there are additional folders, which are containing `.md` files, which are for general documentation. These need a `frontmatter`:
 
@@ -378,7 +403,7 @@ The `category` is the category under which the doc will be palced in the menu tr
 
 ## Additional information
 
-There are automatically generated parts of the documentation, such as:
+These are automatically generated parts of the documentation, such as:
 
 - Table of content
 - Properties

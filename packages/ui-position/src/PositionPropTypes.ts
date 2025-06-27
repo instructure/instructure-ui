@@ -168,15 +168,4 @@ export type Size = Pick<RectType, 'width' | 'height'>
 export type Overflow = Pick<RectType, 'top' | 'bottom' | 'left' | 'right'>
 
 export default PositionPropTypes
-export {
-  /**
-   * ---
-   * category: utilities/position
-   * ---
-   * Custom prop types for `ui-position` components.
-   * @module PositionPropTypes
-   */
-  PositionPropTypes,
-  placementPropValues,
-  mirrorMap
-}
+export { PositionPropTypes, placementPropValues, mirrorMap }

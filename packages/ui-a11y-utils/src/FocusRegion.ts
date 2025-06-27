@@ -38,6 +38,18 @@ import { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion'
 import { KeyboardFocusRegion } from './KeyboardFocusRegion'
 import { FocusRegionOptions } from './FocusRegionOptions'
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Class for focus operations, manages [ScreenReaderFocusRegion](#ScreenReaderFocusRegion)
+ * and [KeyboardFocusRegion](#KeyboardFocusRegion) for the given DOM element.
+ * - Scoping focus within a given context (DOM node),
+ * - Mark active element for focus later
+ * - Return focus to the marked element
+ * @module FocusRegion
+ */
 class FocusRegion {
   private _contextElement: Node | Element | null = null
   private _options: FocusRegionOptions
@@ -230,18 +242,4 @@ class FocusRegion {
 }
 
 export default FocusRegion
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Class for focus operations, manages [ScreenReaderFocusRegion](#ScreenReaderFocusRegion)
-   * and [KeyboardFocusRegion](#KeyboardFocusRegion) for the given DOM element.
-   * - Scoping focus within a given context (DOM node),
-   * - Mark active element for focus later
-   * - Return focus to the marked element
-   * @module FocusRegion
-   */
-  FocusRegion
-}
+export { FocusRegion }

@@ -29,6 +29,16 @@ function isElement(elem: Node): elem is Element {
   return elem instanceof Element
 }
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Utility that hides all DOM elements outside of a specified node. Used,
+ * for example, in overlay components where we want to restrict the screen
+ * readers to the overlay content.
+ * @module ScreenReaderFocusRegion
+ */
 class ScreenReaderFocusRegion {
   private _parents: HTMLElement[] = []
   private _nodes: Element[] = []
@@ -213,16 +223,4 @@ class ScreenReaderFocusRegion {
 }
 
 export default ScreenReaderFocusRegion
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Utility that hides all DOM elements outside of a specified node. Used,
-   * for example, in overlay components where we want to restrict the screen
-   * readers to the overlay content.
-   * @module ScreenReaderFocusRegion
-   */
-  ScreenReaderFocusRegion
-}
+export { ScreenReaderFocusRegion }
