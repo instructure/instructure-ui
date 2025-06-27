@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
+
+
+### Features
+
+* **ui-color-picker:** add colorScreenReaderLabel prop to provide more color information ([6650445](https://github.com/instructure/instructure-ui/commit/6650445d4ae33a0e7b37b6ed6b1d736f030e310b))
+
+
+
+
+
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-color-picker

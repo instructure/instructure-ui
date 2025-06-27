@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
+
+
+### Features
+
+* **ui-text-input,ui-date-input:** properly support IconButtons inside TextInputs ([40ca6bb](https://github.com/instructure/instructure-ui/commit/40ca6bbaa9d113a34c2477501b34ba4342a044d6))
+
+
+
+
+
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-date-input

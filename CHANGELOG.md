@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
+
+
+### Bug Fixes
+
+* **ui-progress:** add aria-label to ProgressBar via the screenReaderLabel prop ([34dfbce](https://github.com/instructure/instructure-ui/commit/34dfbce5b4e9b68fd1bf50d952afe8b69e7d812b))
+* **ui-select:** prevent scrolling when last item is hovered in Chrome ([51cd81a](https://github.com/instructure/instructure-ui/commit/51cd81a5360bbbc78d30e7e2489bb0c02b67a470))
+* **ui-tabs:** fix bottom border of Tab with scrolling overflow in secondary variant ([dabd148](https://github.com/instructure/instructure-ui/commit/dabd14809ce6372b2605aea6edb6ea1a58c86b13))
+
+
+### Features
+
+* **ui-color-picker:** add colorScreenReaderLabel prop to provide more color information ([6650445](https://github.com/instructure/instructure-ui/commit/6650445d4ae33a0e7b37b6ed6b1d736f030e310b))
+* **ui-heading:** enable setting level for headings with variant ([512c0df](https://github.com/instructure/instructure-ui/commit/512c0df17cd36126b70c0ab0aea77dba6bac08d3))
+* **ui-simple-select,ui-select:** add layout prop to Select and SimpleSelect ([94f0a6f](https://github.com/instructure/instructure-ui/commit/94f0a6f99f9e813fe44e6c3111fdb4e5f3708b76))
+* **ui-text-input,ui-date-input:** properly support IconButtons inside TextInputs ([40ca6bb](https://github.com/instructure/instructure-ui/commit/40ca6bbaa9d113a34c2477501b34ba4342a044d6))
+
+
+
+
+
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 
