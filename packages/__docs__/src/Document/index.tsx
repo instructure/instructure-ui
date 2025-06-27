@@ -76,7 +76,7 @@ class Document extends Component<DocumentProps, DocumentState> {
     const generateTheme = doc?.componentInstance?.generateComponentTheme
     const generateThemeFunctional =
       functionalComponentThemes[
-      doc.id as keyof typeof functionalComponentThemes
+        doc.id as keyof typeof functionalComponentThemes
       ]
     if (
       generateTheme &&
@@ -173,9 +173,9 @@ class Document extends Component<DocumentProps, DocumentState> {
   {...props}
   themeOverride={{
     ${
-              // get random theme variable
-              themeVariableKeys[Math.floor(Math.random() * themeVariableKeys.length)]
-              }: 'custom value'
+      // get random theme variable
+      themeVariableKeys[Math.floor(Math.random() * themeVariableKeys.length)]
+    }: 'custom value'
   }}
 />`}
           />
@@ -288,14 +288,18 @@ import { ${importName} } from '${esPath}'
   }
 
   renderParams(doc: DocDataType) {
-    const { id, params } = doc
+    const { id, params, genericParameters } = doc
 
     return params ? (
       <View margin="small 0" display="block">
         <Heading level="h2" as="h3" id={`${id}Parameters`} margin="0 0 small 0">
           Parameters
         </Heading>
-        <Params params={params} layout={this.props.layout} />
+        <Params
+          params={params}
+          genericParameters={genericParameters}
+          layout={this.props.layout}
+        />
       </View>
     ) : null
   }

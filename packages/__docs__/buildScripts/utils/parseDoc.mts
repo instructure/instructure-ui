@@ -33,7 +33,7 @@ export function parseDoc(
   resourcePath: string,
   source: Buffer,
   errorHandler: (err: Error) => void
-): Documentation & YamlMetaInfo & Partial<JsDocResult> {
+): Documentation & YamlMetaInfo & Partial<JsDocResult> | undefined {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
   let doc: Documentation | undefined
@@ -41,9 +41,14 @@ export function parseDoc(
   if (extension === '.md') {
     doc = { description: source as unknown as string}
   } else if (allowedExtensions.includes(extension)) {
+    // parses React components
     doc = getReactDoc(source, resourcePath, errorHandler)
     if (!doc || !doc.props) {
-      doc = getJSDoc(source, errorHandler)
+      // parses JS modules
+      doc = getJSDoc(resourcePath, errorHandler)
+      if (!doc) {
+        return
+      }
     }
   } else {
     errorHandler(new Error('not allowed extension ' + extension))

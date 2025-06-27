@@ -22,43 +22,89 @@
  * SOFTWARE.
  */
 
-// @ts-ignore no typing :(
-import jsdoc from 'jsdoc-api'
+import * as ts from 'typescript'
 import type { JsDocResult } from '../DataTypes.mjs'
 
-export function getJSDoc(source: Buffer, error: (err: Error) => void) {
-  // note: JSDoc seems to be abandoned, we should use TypeScript:
-  // https://stackoverflow.com/questions/47429792/is-it-possible-to-get-comments-as-nodes-in-the-ast-using-the-typescript-compiler
-  let doc: Partial<JsDocResult> = {}
-  try {
-    // JSDoc only creates these sections if the file has a @module or @namespace annotation
-    let sections: JsDocResult[] = jsdoc
-      .explainSync({
-        // note: Do not use cache:true here, its buggy
-        configure: './jsdoc.config.json',
-        source
-      })
-      sections = sections.filter((section) => {
-        return (
-          section.undocumented !== true &&
-          section.access !== 'private' &&
-          section.kind !== 'package'
-        )
-      })
-    const module =
-      sections.filter((section) => section.kind === 'module')[0] ||
-      sections[0] ||
-      {}
-    if (process.platform === 'win32' && module.description) {
-      // JSDoc bug https://github.com/jsdoc/jsdoc/issues/2067
-      module.description = module.description.replace(/\r/g, "\r\n")
-    }
-    doc = {
-      ...module,
-      undocumented: sections.length <= 0
-    }
-  } catch (err: any) {
-    error(err)
+function extractFunctionInfo(filePath: string) {
+  const program = ts.createProgram([filePath], {})
+  const sourceFile = program.getSourceFile(filePath)
+  if (!sourceFile) {
+    throw new Error(`Could not load source file: ${filePath}`)
   }
-  return doc
+  const typeChecker = program.getTypeChecker()
+  let result: Partial<JsDocResult> | undefined = undefined
+  function visit(node: ts.Node) {
+    if (ts.isFunctionDeclaration(node)) {
+      // Extract JSDoc comments
+      const allTags = ts.getJSDocTags(node)
+      // only exported functions with the @module annotation are needed
+      let hasModuleAnnotation = false
+      for (const tag of allTags) {
+        if (tag.tagName.text === 'module') {
+          hasModuleAnnotation = true
+        }
+      }
+      if (!hasModuleAnnotation) {
+        return
+      }
+      // Find the @returns tag to get the return type description
+      let returnDescription: string | undefined
+      for (const tag of allTags) {
+        if (tag.comment && (tag.tagName.text === 'returns' || tag.tagName.text === 'return')) {
+          returnDescription = typeof tag.comment === 'string'
+            ? tag.comment
+            : tag.comment.map(comment => comment.text).join(' ')
+          break
+        }
+      }
+      // main description
+      let description = ''
+      const symbol = typeChecker.getSymbolAtLocation(node.name!)
+      if (symbol) {
+        const docs = symbol.getDocumentationComment(typeChecker)
+        description = ts.displayPartsToString(docs)
+      }
+      // Extract generic type parameters and their constraints
+      const genericParameters = node.typeParameters?.map(typeParam => {
+        return {
+          name: typeParam.name.text,
+          defaultValue: typeParam.default?.getText(),
+          constraint: ts.getEffectiveConstraintOfTypeParameter(typeParam)?.getText()
+        }
+      })
+      // Extract parameter types
+      const parameters = node.parameters.map(param => {
+        const paramSymbol = typeChecker.getSymbolAtLocation(param.name)
+        return {
+          name: param.name.getText(),
+          type: typeChecker.typeToString(typeChecker.getTypeAtLocation(param.name)),
+          defaultValue: param.initializer?.getText(),
+          optional: param.questionToken !== undefined || param.initializer !== undefined,
+          description: paramSymbol ? ts.displayPartsToString(paramSymbol.getDocumentationComment(typeChecker)) : undefined
+        }
+      })
+      // Extract return type
+      const signature = typeChecker.getSignatureFromDeclaration(node)
+      const returnType = signature
+        ? typeChecker.typeToString(typeChecker.getReturnTypeOfSignature(signature))
+        : 'unknown'
+      result = {
+        name: node.name?.getText(),
+        description: description,
+        params: parameters,
+        genericParameters: genericParameters,
+        returns: {
+          description: returnDescription || '',
+          type: returnType
+        }
+      }
+    }
+    ts.forEachChild(node, visit)
+  }
+  visit(sourceFile)
+  return result
+}
+
+export function getJSDoc(filePath: string, _error: (err: Error) => void) {
+  return extractFunctionInfo(filePath)
 }

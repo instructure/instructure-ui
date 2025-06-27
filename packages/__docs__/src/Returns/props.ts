@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import type { JSDocFunctionReturns } from '../../buildScripts/DataTypes.mts'
 
 type ReturnsOwnProps = {
-  types: JSDocFunctionReturns[]
+  types: JSDocFunctionReturns
 }
 
 type PropKeys = keyof ReturnsOwnProps

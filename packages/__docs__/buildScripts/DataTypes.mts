@@ -62,36 +62,30 @@ type YamlMetaInfo = {
 }
 
 type JsDocResult = {
-  // the comment section above the function
-  comment?: string,
-  // metadata about the parsed file like filename
-  meta?: any,
   // the comment without the comment characters ("/*" etc)
   description?: string,
-  kind?: string,
   name?: string,
   // function params. undefined if the comment is e.g. above imports
   params?: {
-    description?: string
-    defaultValue?: string | number | boolean
     name: string
-    type?: { names: string[] }
+    type?: string
+    defaultValue?: string
     optional?: boolean
+    // the description of the param
+    description?: string
   }[],
+  genericParameters?: {
+    name: string
+    defaultValue?: string
+    constraint?: string
+  }[]
   // function return value. undefined if the comment is e.g. above imports
-  returns?: JSDocFunctionReturns[],
-  //e.g. "module:debounce", "module:FocusRegion"
-  longname: string,
-  access?: string,
-  undocumented?: boolean,
-  title?: string
+  returns?: JSDocFunctionReturns,
 }
 
 type JSDocFunctionReturns = {
   description: string
-  type: {
-    names: string[]
-  }
+  type: string
 }
 
 type LibraryOptions = {

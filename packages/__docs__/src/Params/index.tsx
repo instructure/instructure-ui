@@ -27,6 +27,7 @@ import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 import type { ParamsProps } from './props'
 import { propTypes } from './props'
+import { Heading } from '@instructure/ui-heading'
 
 class Params extends Component<ParamsProps> {
   static propTypes = propTypes
@@ -38,12 +39,12 @@ class Params extends Component<ParamsProps> {
   renderRows() {
     return this.props.params?.map((param) => {
       return (
-        <Table.Row key={param?.name}>
+        <Table.Row key={param.name}>
           <Table.Cell>
-            <code>{param?.name}</code>
+            <code>{param.name}</code>
           </Table.Cell>
           <Table.Cell>
-            <code>{this.renderType(param?.type)}</code>
+            <code>{param?.type}</code>
           </Table.Cell>
           <Table.Cell>
             <code>{param?.defaultValue}</code>
@@ -54,33 +55,78 @@ class Params extends Component<ParamsProps> {
     })
   }
 
-  renderType(type?: { names: string[] }) {
-    return type ? type.names.join(' | ') : null
-  }
-
   renderDescription(description: string) {
     return <div>{description && compileMarkdown(description)}</div>
   }
 
-  render() {
-    const { layout } = this.props
+  renderGenericRows() {
+    return this.props.genericParameters?.map((param) => {
+      return (
+        <Table.Row key={param.name}>
+          <Table.Cell>
+            <code>{param.name}</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code>{param?.defaultValue}</code>
+          </Table.Cell>
+          <Table.Cell>{param?.constraint}</Table.Cell>
+        </Table.Row>
+      )
+    })
+  }
 
+  render() {
+    const { layout, genericParameters } = this.props
+    let genericParamsTable = <></>
+    if (genericParameters) {
+      genericParamsTable = (
+        <>
+          <Heading
+            level="h3"
+            as="h4"
+            id="genericParameters"
+            margin="0 0 small 0"
+          >
+            Generic type Parameters
+          </Heading>
+          <Table
+            caption="Parameters"
+            margin="0 0 large"
+            layout={layout === 'small' ? 'stacked' : 'auto'}
+          >
+            <Table.Head>
+              <Table.Row>
+                <Table.ColHeader id="genericParam">Param</Table.ColHeader>
+                <Table.ColHeader id="genericDefault">Default</Table.ColHeader>
+                <Table.ColHeader id="genericConstraint">
+                  Constraint
+                </Table.ColHeader>
+              </Table.Row>
+            </Table.Head>
+            <Table.Body>{this.renderGenericRows()}</Table.Body>
+          </Table>
+        </>
+      )
+    }
     return (
-      <Table
-        caption="Parameters"
-        margin="0 0 large"
-        layout={layout === 'small' ? 'stacked' : 'auto'}
-      >
-        <Table.Head>
-          <Table.Row>
-            <Table.ColHeader id="Param">Param</Table.ColHeader>
-            <Table.ColHeader id="Type">Type</Table.ColHeader>
-            <Table.ColHeader id="Default">Default</Table.ColHeader>
-            <Table.ColHeader id="Description">Description</Table.ColHeader>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>{this.renderRows()}</Table.Body>
-      </Table>
+      <>
+        <Table
+          caption="Parameters"
+          margin="0 0 large"
+          layout={layout === 'small' ? 'stacked' : 'auto'}
+        >
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="Param">Param</Table.ColHeader>
+              <Table.ColHeader id="Type">Type</Table.ColHeader>
+              <Table.ColHeader id="Default">Default</Table.ColHeader>
+              <Table.ColHeader id="Description">Description</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>{this.renderRows()}</Table.Body>
+        </Table>
+        {genericParamsTable}
+      </>
     )
   }
 }

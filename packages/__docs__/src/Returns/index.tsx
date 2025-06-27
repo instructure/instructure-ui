@@ -23,38 +23,10 @@
  */
 
 import { Component } from 'react'
-
 import { Table } from '@instructure/ui-table'
-
-import { compileMarkdown } from '../compileMarkdown'
-
 import type { ReturnsProps } from './props'
 
-import type { JSDocFunctionReturns } from '../../buildScripts/DataTypes.mts'
-
 class Returns extends Component<ReturnsProps> {
-  renderRows() {
-    return this.props.types.map((type, index) => {
-      const key = `${type.type}-${index}`
-      return (
-        <Table.Row key={key}>
-          <Table.Cell>
-            <code>{this.renderType(type.type)}</code>
-          </Table.Cell>
-          <Table.Cell>{this.renderDescription(type.description)}</Table.Cell>
-        </Table.Row>
-      )
-    })
-  }
-
-  renderType(type: JSDocFunctionReturns['type']) {
-    return type ? type.names.join(', ') : null
-  }
-
-  renderDescription(description: string) {
-    return <div>{description && compileMarkdown(description)}</div>
-  }
-
   render() {
     return (
       <Table caption="Returns" margin="0 0 large">
@@ -64,7 +36,14 @@ class Returns extends Component<ReturnsProps> {
             <Table.ColHeader id="Description">Description</Table.ColHeader>
           </Table.Row>
         </Table.Head>
-        <Table.Body>{this.renderRows()}</Table.Body>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <code>{this.props.types.type}</code>
+            </Table.Cell>
+            <Table.Cell>{this.props.types.description}</Table.Cell>
+          </Table.Row>
+        </Table.Body>
       </Table>
     )
   }
