@@ -24,11 +24,7 @@
 
 'use client'
 import React, { useEffect, useState } from 'react'
-import {
-  SubNav,
-  CanvasTopNav,
-  TopNavBar
-} from 'instructure/ui-top-nav-bar/es/index'
+import { SubNav, CanvasTopNav, TopNavBar } from '@instructure/ui-top-nav-bar'
 import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
 import {
   IconAdminLine,
