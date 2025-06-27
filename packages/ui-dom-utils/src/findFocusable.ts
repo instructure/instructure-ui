@@ -63,6 +63,21 @@ function hasQuerySelectorAll(el?: UIElement): el is Element | Document {
   return true
 }
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Given an element, finds and returns all visible, focusable children.
+ * Focusable elements include input, select, textarea, button, and object.
+ * Anchor tags are also focusable if they include an href or
+ * tabindex attribute (including tabindices less than zero).
+ * @module findFocusable
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el component or DOM node
+ * @param { function } filter a function to filter the matching nodes
+ * @param { boolean } shouldSearchRootNode should the root node be included in the search
+ * @returns { Array } array of all tabbable children
+ */
 function findFocusable(
   el?: UIElement,
   filter?: (el: Element) => boolean,
@@ -126,20 +141,5 @@ function focusable(element: Element & { disabled?: boolean }) {
 
 export default findFocusable
 export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Given an element, finds and returns all visible, focusable children.
-   * Focusable elements include input, select, textarea, button, and object.
-   * Anchor tags are also focusable if they include an href or
-   * tabindex attribute (including tabindices less than zero).
-   * @module findFocusable
-   * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
-   * @param { function } filter - a function to filter the matching nodes
-   * @param { boolean } shouldSearchRootNode - should the root node be included in the search
-   * @returns { Array } array of all tabbable children
-   */
   findFocusable
 }

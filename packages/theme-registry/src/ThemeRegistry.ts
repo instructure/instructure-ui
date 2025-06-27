@@ -22,16 +22,6 @@
  * SOFTWARE.
  */
 
-/**
- * ---
- * category: utilities/themes
- * ---
- * DEPRECATED. This will be deleted, please use InstUISettingsProvider instead.
- * A global theme registry used for registering theme objects, setting globally available themes
- * and receiving the currently used theme.
- * @module ThemeRegistry
- */
-
 import { error } from '@instructure/console'
 import { mergeDeep } from '@instructure/ui-utils'
 import { isBaseTheme } from '@instructure/ui-utils'
@@ -79,7 +69,6 @@ if (globalThis[GLOBAL_THEME_REGISTRY]) {
 /**
  * Creates and returns a new empty registry.
  * @returns {Registry} the empty registry object
- * @module makeRegistry
  * @private
  */
 function makeRegistry(): Registry<RegisteredTheme> {
@@ -125,7 +114,6 @@ function validateRegistry(registry: Registry<RegisteredTheme<BaseTheme>>) {
  * Get the global theme registry.
  * @deprecated since version 10
  * @return The theme registry
- * @module getRegistry
  */
 function getRegistry(): Registry<RegisteredTheme> {
   return globalThis[GLOBAL_THEME_REGISTRY]
@@ -136,7 +124,6 @@ function getRegistry(): Registry<RegisteredTheme> {
  * @deprecated since version 10
  * @param {Registry} registry - the registry to set/replace the current registry with.
  * @returns {void}
- * @module setRegistry
  */
 function setRegistry(registry: Registry<RegisteredTheme>): void {
   globalThis[GLOBAL_THEME_REGISTRY] = registry
@@ -145,7 +132,6 @@ function setRegistry(registry: Registry<RegisteredTheme>): void {
 /**
  * Clear/reset the global theme registry.
  * @deprecated since version 10
- * @module clearRegistry
  * @returns {void}
  */
 function clearRegistry(): void {
@@ -155,8 +141,7 @@ function clearRegistry(): void {
 /**
  * Get the activated theme object.
  * @deprecated since version 10
- * @return {RegisteredTheme} the default theme object
- * @module getCurrentTheme
+ * @return the default theme object
  */
 function getCurrentTheme(): RegisteredTheme | undefined {
   const registry = getRegistry()
@@ -174,7 +159,6 @@ function getCurrentTheme(): RegisteredTheme | undefined {
  * @param {String} themeKey - the default theme key
  * @param {DeepPartial<BaseThemeVariables>} overrides - the overrides for the theme variables
  * @returns {RegisteredTheme} the registered theme object
- * @module activateTheme
  * @private
  */
 function activateTheme(
@@ -205,7 +189,6 @@ function activateTheme(
 /**
  * Wraps a theme and provides a method to activate the theme.
  * @returns the wrapped theme object
- * @module makeTheme
  * @private
  */
 function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
@@ -245,7 +228,6 @@ function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
  * @returns {RegisteredTheme} If the given theme is already in the ThemeRegistry then simply return that theme.
  * Otherwise, returns the theme with a wrapper around it, so it can be `.use()`-ed to activate the given theme from the registry.
  * This function also adds a `variables` prop for backwards compatibility (deprecated).
- * @module registerTheme
  */
 function registerTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
   const registry = getRegistry()
@@ -269,6 +251,14 @@ function registerTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
 }
 
 /**
+ * ---
+ * category: utilities/themes
+ * ---
+ * @module ThemeRegistry
+ *
+ * DEPRECATED. This will be deleted, please use `InstUISettingsProvider` instead.
+ * A global theme registry used for registering theme objects, setting globally available themes
+ * and receiving the currently used theme.
  * @deprecated since version 10
  */
 const ThemeRegistry = {

@@ -70,13 +70,4 @@ const ResponsivePropTypes = {
 }
 
 export default ResponsivePropTypes
-export {
-  /**
-   * ---
-   * category: utilities/layout
-   * ---
-   * Custom prop types for `ui-responsive` components.
-   * @module ResponsivePropTypes
-   */
-  ResponsivePropTypes
-}
+export { ResponsivePropTypes }

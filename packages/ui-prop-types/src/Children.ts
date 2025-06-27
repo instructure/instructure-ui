@@ -378,12 +378,4 @@ const getDisplayName = (Component: string | ComponentType): string => {
 }
 
 export default Children
-export {
-  /**
-   * ---
-   * category: utilities/PropTypes
-   * ---
-   * @module Children
-   */
-  Children
-}
+export { Children }

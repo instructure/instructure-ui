@@ -26,17 +26,6 @@ import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import { UIElement } from '@instructure/shared-types'
 
-/**
- * ---
- * category: utilities/DOM
- * ---
- *
- * Determine if an element contains another DOM node
- * @module containsWithDOM
- * @param { Node | Window | React.ReactElement | function | null } context - component or DOM node
- * @param { Node | Window | React.ReactElement | function | null } el - component or DOM node which we want to determine if contained within the context
- * @returns { boolean } if the element is contained within the context
- */
 function containsWithDOM(context: UIElement, el: UIElement) {
   const container = context && findDOMNode(context)
   const node = el && findDOMNode(el)
@@ -62,6 +51,17 @@ function containsFallback(context: UIElement, el: UIElement) {
   return false
 }
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Determine if an element contains another DOM node
+ * @module containsWithDOM
+ * @param { Node | Window | React.ReactElement | function | null } context - component or DOM node
+ * @param { Node | Window | React.ReactElement | function | null } el - component or DOM node which we want to determine if contained within the context
+ * @returns { boolean } if the element is contained within the context
+ */
 const contains = canUseDOM ? containsWithDOM : containsFallback
 export default contains
 export { contains }

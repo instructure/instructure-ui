@@ -31,6 +31,18 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { UIElement } from '@instructure/shared-types'
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Scope tab in order to trap focus within a specified
+ * element.
+ * @module scopeTab
+ * @param element
+ * @param event the DOM Event that was fired
+ * @param onLeavingFinalTabbable function executed when leaving final tabbable instead of the default behavior
+ */
 function scopeTab(
   element: UIElement | undefined,
   event: React.KeyboardEvent,
@@ -74,18 +86,4 @@ function scopeTab(
 }
 
 export default scopeTab
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Scope tab in order to trap focus within a specified
-   * element.
-   * @module scopeTab
-   * @param {ReactElement|DOMNode} element
-   * @param {Event} event the DOM Event that was fired
-   * @param {function} function executed when leaving final tabbable instead of the default behavior
-   */
-  scopeTab
-}
+export { scopeTab }

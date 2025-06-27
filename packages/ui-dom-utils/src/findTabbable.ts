@@ -25,6 +25,22 @@
 import { findFocusable } from './findFocusable'
 import { UIElement } from '@instructure/shared-types'
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Given an element, finds and returns all visible, tabbable children.
+ * Tabbable elements include input, select, textarea, button, and object.
+ * Anchor tags are also tabbable if they include an href or zero or positive
+ * tabindex attribute (to include elements with negative tabindex attributes,
+ * use findFocusable).
+ *
+ * @module findTabbable
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
+ * @param { boolean } shouldSearchRootNode - should the root node be included in the search
+ * @returns { Array } array of all tabbable children
+ */
 function findTabbable(el?: UIElement, shouldSearchRootNode?: boolean) {
   return findFocusable(
     el,
@@ -41,22 +57,4 @@ function isInvalidTabIndex(tabIndex: unknown) {
 }
 
 export default findTabbable
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Given an element, finds and returns all visible, tabbable children.
-   * Tabbable elements include input, select, textarea, button, and object.
-   * Anchor tags are also tabbable if they include an href or zero or positive
-   * tabindex attribute (to include elements with negative tabindex attributes,
-   * use findFocusable).
-   *
-   * @module findTabbable
-   * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
-   * @param { boolean } shouldSearchRootNode - should the root node be included in the search
-   * @returns { Array } array of all tabbable children
-   */
-  findTabbable
-}
+export { findTabbable }

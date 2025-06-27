@@ -44,6 +44,17 @@ import { scopeTab } from './scopeTab'
 import type { UIElement } from '@instructure/shared-types'
 import { FocusRegionOptions } from './FocusRegionOptions'
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Class for focus operations.
+ * - Scoping focus within a given context (DOM node),
+ * - Mark active element for focus later
+ * - Return focus to the marked element
+ * @module KeyboardFocusRegion
+ */
 class KeyboardFocusRegion {
   private readonly _options: FocusRegionOptions
   private _focusLaterElement: Element | null = null
@@ -343,17 +354,4 @@ class KeyboardFocusRegion {
 }
 
 export default KeyboardFocusRegion
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Class for focus operations.
-   * - Scoping focus within a given context (DOM node),
-   * - Mark active element for focus later
-   * - Return focus to the marked element
-   * @module KeyboardFocusRegion
-   */
-  KeyboardFocusRegion
-}
+export { KeyboardFocusRegion }

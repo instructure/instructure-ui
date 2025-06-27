@@ -27,6 +27,7 @@ import type { DocDataType } from '../Document/props'
 
 type ParamsOwnProp = {
   params: DocDataType['params']
+  genericParameters: DocDataType['genericParameters']
   layout?: 'small' | 'medium' | 'large' | 'x-large'
 }
 type PropKeys = keyof ParamsOwnProp
@@ -34,8 +35,9 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ParamsProps = ParamsOwnProp
 const propTypes: PropValidators<PropKeys> = {
   params: PropTypes.array.isRequired,
+  genericParameters: PropTypes.array,
   layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
 }
-const allowedProps: AllowedPropKeys = ['layout', 'params']
+const allowedProps: AllowedPropKeys = ['layout', 'params', 'genericParameters']
 export type { ParamsProps }
 export { propTypes, allowedProps }

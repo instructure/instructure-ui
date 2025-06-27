@@ -31,7 +31,7 @@ import { theme as canvasTheme } from '@instructure/canvas-theme'
 import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
 import type {
   LibraryOptions,
-  MainDocsData,
+  MainDocsData, ProcessedFile
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
 import { createRequire } from "module"
@@ -119,6 +119,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 function buildDocs() {
   // eslint-disable-next-line no-console
   console.log('Start building application data')
+  console.time('docs build time')
 
   const { COPY_VERSIONS_JSON = '1' } = process.env
   const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
@@ -133,12 +134,13 @@ function buildDocs() {
       console.log(
         'Parsing markdown and source files... (' + matches.length + ' files)'
       )
-      const docs = matches.map((relativePath) => {
+      let docs = matches.map((relativePath) => {
         // loop trough every source and Readme file
         return processSingleFile(path.resolve(relativePath))
       })
+      docs = docs.filter(Boolean) // filter out undefined
       const themes = parseThemes()
-      const clientProps = getClientProps(docs, library)
+      const clientProps = getClientProps(docs as ProcessedFile[], library)
       const props: MainDocsData = {
         ...clientProps,
         themes: themes,
@@ -158,6 +160,7 @@ function buildDocs() {
       console.log('Finished building documentation data')
     })
     .then(() => {
+      console.timeEnd('docs build time')
       if (shouldDoTheVersionCopy) {
         // eslint-disable-next-line no-console
         console.log('Copying versions.json into __build__ folder')
@@ -187,6 +190,9 @@ function processSingleFile(fullPath: string) {
   const fileName = path.parse(fullPath).name
   if (fileName === 'index') {
     docObject = processFile(fullPath, projectRoot, library)
+    if (!docObject) {
+      return
+    }
     // Some Components (e.g. Alert) store their descriptions in README.md files.
     // Add this to the final JSON if it's edited
     const readmeDesc = tryParseReadme(dirName)
@@ -202,7 +208,7 @@ function processSingleFile(fullPath: string) {
       componentIndexFile = path.join(dirName, 'index.ts')
     }
     if (componentIndexFile) {
-      docObject = processFile(componentIndexFile, projectRoot, library)
+      docObject = processFile(componentIndexFile, projectRoot, library)!
       const readmeDesc = tryParseReadme(dirName)
       docObject.description = readmeDesc ? readmeDesc : docObject.description
     } else {
@@ -213,9 +219,12 @@ function processSingleFile(fullPath: string) {
     // documentation .md files, utils ts and tsx files
     docObject = processFile(fullPath, projectRoot, library)
   }
-  const docJSON = JSON.stringify(docObject!)
-  fs.writeFileSync(buildDir + 'docs/' + docObject!.id + '.json', docJSON)
-  return docObject!
+  if (!docObject) {
+    return
+  }
+  const docJSON = JSON.stringify(docObject)
+  fs.writeFileSync(buildDir + 'docs/' + docObject.id + '.json', docJSON)
+  return docObject
 }
 
 function tryParseReadme(dirName: string) {

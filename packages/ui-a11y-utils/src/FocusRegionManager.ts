@@ -35,6 +35,17 @@ type Entry = {
 }
 let ENTRIES: Entry[] = []
 
+/**
+ * ---
+ * category: utilities/a11y
+ * ---
+ *
+ * Class for focus operations, manages multiple [FocusRegion](#FocusRegion)s.
+ * - Scoping focus within a given context,
+ * - Mark active element for focus later
+ * - Return focus to the marked element
+ * @module FocusManager
+ */
 class FocusRegionManager {
   static focusRegion = (
     element: Element | Node,
@@ -172,17 +183,4 @@ class FocusRegionManager {
 }
 
 export default FocusRegionManager
-export {
-  /**
-   * ---
-   * category: utilities/a11y
-   * ---
-   *
-   * Class for focus operations, manages multiple [FocusRegion](#FocusRegion)s.
-   * - Scoping focus within a given context,
-   * - Mark active element for focus later
-   * - Return focus to the marked element
-   * @module FocusManager
-   */
-  FocusRegionManager
-}
+export { FocusRegionManager }
