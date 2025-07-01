@@ -382,7 +382,11 @@ const generateStyle = (
                   background: `
                linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
                   padding: componentTheme.borderWidth,
-                  borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
+                  ...(shape !== 'circle'
+                    ? {
+                        borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
+                      }
+                    : {})
                 }
               }
             : {})
