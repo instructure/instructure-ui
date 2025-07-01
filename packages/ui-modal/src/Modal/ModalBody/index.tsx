@@ -34,7 +34,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { ModalBodyProps, ModalBodyState } from './props'
+import type { ModalBodyProps } from './props'
 
 /**
 ---
@@ -44,7 +44,7 @@ id: Modal.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
+class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
   static propTypes = propTypes
@@ -69,10 +69,6 @@ class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
 
   constructor(props: ModalBodyProps) {
     super(props)
-
-    this.state = {
-      isFirefox: false
-    }
   }
 
   componentDidMount() {
@@ -117,11 +113,14 @@ class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
         as={as}
         css={this.props.styles?.modalBody}
         padding={padding}
-        // We have to make an exception in Firefox, because it makes
-        //  the container focusable when it is scrollable.
-        //  This is a feature, not a bug, but it prevents VoiceOver
-        //  to correctly focus inside the body in other browsers.
-        {...(this.state.isFirefox && { tabIndex: -1 })}
+        // Setting this to 0 is necessary for findFocusable to find this DOM
+        // element.
+        // Note that VoiceOver does not read the contents properly
+        // if there is a scrollbar, and it has no kb just SR focus.
+        // To prevent this we could set tabIndex to -1
+        // but this would make the scrollbar non-focusable, so the modal cannot
+        // be scrolled with keyboard.
+        tabIndex={0}
       >
         {children}
       </View>
