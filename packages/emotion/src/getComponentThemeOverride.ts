@@ -56,7 +56,8 @@ const getComponentThemeOverride = (
   const name = displayName as ComponentName
   const id = componentId as ComponentName
 
-  const { themeOverride } = props as WithStyleProps
+  const themeOverride = props ? props.themeOverride : undefined
+
   const { componentOverrides } = theme as Overrides
 
   let overridesFromTheme: Partial<ComponentTheme> = {}

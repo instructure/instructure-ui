@@ -5,9 +5,7 @@
     "composite": true,
     "rootDir": "./src"
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "../console/tsconfig.build.json"
@@ -38,9 +36,6 @@
     },
     {
       "path": "../ui-babel-preset/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-test-utils/tsconfig.build.json"
     },
     {
       "path": "../ui-themes/tsconfig.build.json"

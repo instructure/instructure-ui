@@ -128,6 +128,9 @@
       "path": "../ui-img/tsconfig.build.json"
     },
     {
+      "path": "../ui-instructure/tsconfig.build.json"
+    },
+    {
       "path": "../ui-link/tsconfig.build.json"
     },
     {
