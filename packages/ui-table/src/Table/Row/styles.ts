@@ -37,9 +37,16 @@ import type { TableRowProps, TableRowStyle } from './props'
  */
 const generateStyle = (
   componentTheme: TableRowTheme,
-  _props: TableRowProps,
+  props: TableRowProps,
   extraArgs: { isStacked: boolean; hover: boolean }
 ): TableRowStyle => {
+  const { setHoverStateTo } = props
+
+  const hoverStyles = {
+    borderLeftColor: componentTheme.hoverBorderColor,
+    borderRightColor: componentTheme.hoverBorderColor
+  }
+
   return {
     row: {
       label: 'row',
@@ -53,14 +60,10 @@ const generateStyle = (
       borderBottomWidth: '0.0625rem',
       borderBottomColor: componentTheme.borderColor,
 
-      ...(extraArgs.hover && {
+      ...((setHoverStateTo ?? extraArgs.hover) && {
         borderLeft: '0.1875rem solid transparent',
         borderRight: '0.1875rem solid transparent',
-
-        '&:hover': {
-          borderLeftColor: componentTheme.hoverBorderColor,
-          borderRightColor: componentTheme.hoverBorderColor
-        }
+        ...(setHoverStateTo === true ? hoverStyles : { '&:hover': hoverStyles })
       }),
 
       ...(extraArgs.isStacked && { padding: componentTheme.padding })
