@@ -194,6 +194,16 @@ export type {
 export * from '@instructure/ui-icons'
 export { Img } from '@instructure/ui-img'
 export type { ImgProps } from '@instructure/ui-img'
+export {
+  NutritionFacts,
+  DataPermissionLevels,
+  AiInformation
+} from '@instructure/ui-instructure'
+export type {
+  NutritionFactsProps,
+  DataPermissionLevelsProps,
+  AiInformationProps
+} from '@instructure/ui-instructure'
 export { Link } from '@instructure/ui-link'
 export type { LinkProps } from '@instructure/ui-link'
 export {

@@ -54,6 +54,11 @@ export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export { Expandable } from '@instructure/ui-expandable'
 export { Focusable } from '@instructure/ui-focusable'
 export { Img } from '@instructure/ui-img'
+export {
+  NutritionFacts,
+  DataPermissionLevels,
+  AiInformation
+} from '@instructure/ui-instructure'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput, DateInput2 } from '@instructure/ui-date-input'
 export { DateTimeInput } from '@instructure/ui-date-time-input'

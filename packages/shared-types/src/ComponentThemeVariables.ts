@@ -682,6 +682,52 @@ export type ImgTheme = {
   imageBlurAmount: string | 0
 }
 
+export type NutritionFactsTheme = {
+  cardBorderRadius: Border['radiusMedium']
+  cardBorderColor: string
+  cardBorderWidth: Border['widthSmall']
+  cardPadding: Spacing['space12']
+  cardExplainerContainerBottomMargin: Spacing['space8']
+  cardGap: Spacing['modalElements']
+  bodyPadding: Spacing['paddingCardLarge']
+  blockGap: Spacing['sectionElements']
+}
+
+export type DataPermissionLevelsTheme = {
+  cardBorderRadius: Border['radiusMedium']
+  cardBorderColor: string
+  cardBorderWidth: Border['widthMedium']
+  cardPadding: Spacing['space12']
+  cardExplainerContainerBottomMargin: Spacing['space8']
+  cardGap: Spacing['modalElements']
+  currentFeaturePaddingSides: Spacing['space12']
+  currentFeaturePaddingTopBottom: Spacing['space8']
+  permissionTitleBottomMargin: Spacing['space8']
+  levelColor: string
+
+  bodyPadding: Spacing['paddingCardLarge']
+
+  aiTextLeftGradientColor: string
+  aiTextRightGradientColor: string
+}
+
+export type AiInformationTheme = {
+  bodyPadding: Spacing['paddingCardLarge']
+  headingBottomMargin: Spacing['sectionElements']
+  featureNameBottomMargin: Spacing['moduleElements']
+  permissionLevelTextBottomMargin: Spacing['space8']
+  permissionLevelBottomMargin: Spacing['space8']
+  descriptionBottomMargin: Spacing['space8']
+  permissionLevelsModalTriggerBottomMargin: Spacing['moduleElements']
+  modelNameTextBottomMargin: Spacing['space4']
+  modelNameBottomMargin: Spacing['space4']
+
+  dividerMargin: Spacing['moduleElements']
+  dividerColor: string
+
+  levelColor: string
+}
+
 export type LinkTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']

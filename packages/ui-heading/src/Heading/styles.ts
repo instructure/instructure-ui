@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: HeadingTheme,
   props: HeadingProps
 ): HeadingStyle => {
-  const { level, color, border, variant, renderIcon, aiVariant } = props
+  const { level, color, border, variant, aiVariant } = props
 
   const variants: Record<NonNullable<HeadingProps['variant']>, object> = {
     titlePageDesktop: {
@@ -223,10 +223,10 @@ const generateStyle = (
       alignItems: 'center',
       ...(aiVariant === 'stacked'
         ? {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start'
-        }
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+          }
         : {})
     }
   }
