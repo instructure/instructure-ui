@@ -56,10 +56,6 @@ type ModalBodyProps = ModalBodyOwnProps &
 
 type ModalBodyStyle = ComponentStyle<'modalBody'>
 
-type ModalBodyState = {
-  isFirefox: boolean
-}
-
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   padding: PropTypes.string,
@@ -81,5 +77,5 @@ const allowedProps: AllowedPropKeys = [
   'overflow'
 ]
 
-export type { ModalBodyProps, ModalBodyState, ModalBodyStyle }
+export type { ModalBodyProps, ModalBodyStyle }
 export { propTypes, allowedProps }

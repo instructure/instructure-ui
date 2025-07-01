@@ -33,7 +33,10 @@
  *
  * http://api.jqueryui.com/category/ui-core/
  **/
-
+// TODO replace this with https://github.com/focus-trap/tabbable
+// or even better use the native <dialog> component.
+// tabbable has issues with scrollable containers, e.g.
+// https://github.com/focus-trap/tabbable/issues/167
 import { getComputedStyle, findDOMNode } from './'
 import type { UIElement } from '@instructure/shared-types'
 
@@ -50,6 +53,16 @@ const focusableSelector = [
   '[contenteditable="true"]'
 ].join(',')
 
+function hasQuerySelectorAll(el?: UIElement): el is Element | Document {
+  if (
+    !el ||
+    typeof (el as Element | Document).querySelectorAll !== 'function'
+  ) {
+    return false
+  }
+  return true
+}
+
 function findFocusable(
   el?: UIElement,
   filter?: (el: Element) => boolean,
@@ -57,17 +70,10 @@ function findFocusable(
 ) {
   const element = el && findDOMNode(el)
 
-  if (
-    !element ||
-    typeof (element as Element | Document).querySelectorAll !== 'function'
-  ) {
+  if (!hasQuerySelectorAll(element)) {
     return []
   }
-
-  let matches = Array.from(
-    (element as Element | Document).querySelectorAll(focusableSelector)
-  )
-
+  let matches = Array.from(element.querySelectorAll(focusableSelector))
   if (shouldSearchRootNode && (element as Element).matches(focusableSelector)) {
     matches = [...matches, element as Element]
   }
