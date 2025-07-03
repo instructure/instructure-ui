@@ -50,19 +50,22 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Link } from '@instructure/ui-link'
 
 export default function CanvasTopNavPage() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  // Use 1024 as a default width for SSR
+  const getInitialWidth = () =>
+    typeof window !== 'undefined' ? window.innerWidth : 1024
+
+  const [windowWidth, setWindowWidth] = useState(getInitialWidth())
   const [open, setOpen] = useState(false)
   const [openMobile, setOpenMobile] = useState(false)
-  const [hash, setHash] = useState(
-    typeof window !== 'undefined' ? window.location.hash : ''
-  )
 
   const router = useRouter()
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || 'home'
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const handleResize = () => setWindowWidth(window.innerWidth)
+    setWindowWidth(window.innerWidth)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
