@@ -114,7 +114,8 @@ Ignoring ref: ${originalRef}`
         } else {
           cloneRef.current = component
         }
-        originalRef(component)
+
+        originalRefIsAFunction && originalRef(component)
       }
     },
     ...children
