@@ -40,6 +40,13 @@ type TableRowOwnProps = {
    * By default `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`
    */
   children?: React.ReactElement | React.ReactElement[]
+
+  /**
+   * Controls the hover state of the row.
+   * When set to true, the row will appear highlighted even when not hovered.
+   * When set to false, the row will not highlight on hover even if the hover prop is set to true.
+   */
+  setHoverStateTo?: boolean
 }
 
 type PropKeys = keyof TableRowOwnProps
@@ -53,10 +60,11 @@ type TableRowProps = TableRowOwnProps &
 type TableRowStyle = ComponentStyle<'row'>
 
 const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  setHoverStateTo: PropTypes.bool
 }
 
-const allowedProps: AllowedPropKeys = ['children']
+const allowedProps: AllowedPropKeys = ['children', 'setHoverStateTo']
 
 export type { TableRowProps, TableRowStyle }
 export { propTypes, allowedProps }
