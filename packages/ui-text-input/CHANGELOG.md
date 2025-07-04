@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
+
+
+### Bug Fixes
+
+* **ui-text-input:** better IconButton positioning inside TextInput when wrapped inside a Popover ([e39838e](https://github.com/instructure/instructure-ui/commit/e39838ee1149c32ccec2e7e6e17fdbc852571952))
+
+
+
+
+
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
+
+
+### Features
+
+* **ui-pagination:** add prop to customize screenreader label on buttons ([66e222c](https://github.com/instructure/instructure-ui/commit/66e222c943b1b1dbfbcbf8657fa868578e91ba5b))
+
+
+
+
+
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-pagination

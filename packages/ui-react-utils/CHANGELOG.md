@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
+
+
+### Bug Fixes
+
+* **ui-react-utils:** fix an edge-case where safeCloneElement breaks with non-functional refs ([fa78679](https://github.com/instructure/instructure-ui/commit/fa78679d7f9634b0729a66197bb0466444514d4b))
+
+
+
+
+
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-react-utils
