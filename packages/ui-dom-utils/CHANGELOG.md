@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
+
+
+### Bug Fixes
+
+* **ui-modal,ui-dom-utils:** fix Modal focus trap broken when it has a scrollbar ([0e4adf0](https://github.com/instructure/instructure-ui/commit/0e4adf07e17819f08f1004eb0f3b5c0036dc413b))
+
+
+
+
+
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils

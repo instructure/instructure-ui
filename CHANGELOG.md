@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
+
+
+### Bug Fixes
+
+* **ui-alerts:** fix Alert border radius override and add new prop for custom icon ([78ef567](https://github.com/instructure/instructure-ui/commit/78ef56729411333e4504c7080460df40ff9e718e))
+* **ui-modal,ui-dom-utils:** fix Modal focus trap broken when it has a scrollbar ([0e4adf0](https://github.com/instructure/instructure-ui/commit/0e4adf07e17819f08f1004eb0f3b5c0036dc413b))
+* **ui-react-utils:** fix an edge-case where safeCloneElement breaks with non-functional refs ([fa78679](https://github.com/instructure/instructure-ui/commit/fa78679d7f9634b0729a66197bb0466444514d4b))
+* **ui-text-input:** better IconButton positioning inside TextInput when wrapped inside a Popover ([e39838e](https://github.com/instructure/instructure-ui/commit/e39838ee1149c32ccec2e7e6e17fdbc852571952))
+* **ui-top-nav-bar:** ensure Drilldown overflows correctly in small viewports in TopNavBar ([0d32bd0](https://github.com/instructure/instructure-ui/commit/0d32bd08be43fea3279aea66c5a27283193f1809))
+
+
+### Features
+
+* **many:** add new package (instructure) and three new components: AiInformation, NutritionFacts and DataPermissionLevels ([073be7b](https://github.com/instructure/instructure-ui/commit/073be7b50893e9ab77158ee8a83506eddfbd4113))
+* **ui-buttons:** add circular ai icon buttons ([89ff4b3](https://github.com/instructure/instructure-ui/commit/89ff4b3cc28c0fba376418a8f2bd33c290118478))
+* **ui-heading,shared-types:** add new aiHeading prop and design. Also add h6 level to heading ([b6c7e0b](https://github.com/instructure/instructure-ui/commit/b6c7e0b9f650dc32ab4b571a8ebabc5ba149c20f))
+* **ui-heading,shared-types:** add new aiHeading prop and design. Also add h6 level to heading ([a74236a](https://github.com/instructure/instructure-ui/commit/a74236a4e245b8738e6fa7785806a9586666d33c))
+* **ui-icons:** new Mastery Connect icon ([883262d](https://github.com/instructure/instructure-ui/commit/883262dc48d1714c40253b3b680a348f212ea260))
+* **ui-pagination:** add prop to customize screenreader label on buttons ([66e222c](https://github.com/instructure/instructure-ui/commit/66e222c943b1b1dbfbcbf8657fa868578e91ba5b))
+
+
+
+
+
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 

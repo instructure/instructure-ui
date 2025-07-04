@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
+
+
+### Features
+
+* **ui-buttons:** add circular ai icon buttons ([89ff4b3](https://github.com/instructure/instructure-ui/commit/89ff4b3cc28c0fba376418a8f2bd33c290118478))
+
+
+
+
+
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
 
 **Note:** Version bump only for package @instructure/ui-buttons
