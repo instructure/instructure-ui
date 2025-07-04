@@ -345,10 +345,10 @@ export default function CanvasTopNavPage() {
               label: 'You are here:',
               links: [
                 {
-                  href: '#',
-                  label: 'Crumb 1Crumb 1Crumb 1Crumb 1Crumb 1Crumb 1'
+                  href: '#crumb1',
+                  label: 'FirstCrumb Crumb1 Crumb1 Crumb1 Crumb1 Crumb1'
                 },
-                { href: '#', label: 'Crumb 2' },
+                { href: '#crumb2', label: 'Crumb2' },
                 { label: 'Home' }
               ]
             }}
