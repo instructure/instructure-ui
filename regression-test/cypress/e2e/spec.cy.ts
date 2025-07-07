@@ -350,7 +350,6 @@ describe('CanvasTopNavBar', () => {
       })
     })
 
-    // TODO sub menu?
     it('should show LTI topNavBar SubMenu as menuitem', () => {
       cy.visit('http://localhost:3000/canvastopnav?page=studio')
 
@@ -375,7 +374,6 @@ describe('CanvasTopNavBar', () => {
       cy.get('Link Two').should('not.exist')
     })
 
-    // TODO sub menu?
     it('should close LTI TopNav SubMenu after item selection', async () => {
       cy.visit('http://localhost:3000/canvastopnav?page=studio')
 
