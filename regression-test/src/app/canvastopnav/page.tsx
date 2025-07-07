@@ -387,14 +387,39 @@ export default function CanvasTopNavPage() {
                 <TopNavBar.Item id="SettingsPage" href="/#TopNavBar">
                   Settings
                 </TopNavBar.Item>
-                <TopNavBar.Item id="MapsPage" href="/#TopNavBar">
-                  Maps
-                </TopNavBar.Item>
-                <TopNavBar.Item id="AssessmentsPage" href="/#TopNavBar">
-                  Assessments
-                </TopNavBar.Item>
-                <TopNavBar.Item id="CommunityPage" href="/#TopNavBar">
-                  Community
+                <TopNavBar.Item
+                  id="itemSubmenuExample"
+                  renderSubmenu={
+                    <Drilldown rootPageId="root">
+                      <Drilldown.Page id="root">
+                        <Drilldown.Option
+                          id="rootOption1"
+                          subPageId="secondPage"
+                        >
+                          Link One
+                        </Drilldown.Option>
+                        <Drilldown.Option id="rootOption2" href="/#TopNavBar">
+                          Link Two
+                        </Drilldown.Option>
+                        <Drilldown.Option id="rootOption3" href="/#TopNavBar">
+                          Link Three
+                        </Drilldown.Option>
+                      </Drilldown.Page>
+                      <Drilldown.Page id="secondPage">
+                        <Drilldown.Option id="secondPageOption1">
+                          Level 2 Option One
+                        </Drilldown.Option>
+                        <Drilldown.Option
+                          id="secondPageOption2"
+                          href="/#TopNavBar"
+                        >
+                          Level 2 Option Two
+                        </Drilldown.Option>
+                      </Drilldown.Page>
+                    </Drilldown>
+                  }
+                >
+                  Submenu
                 </TopNavBar.Item>
               </TopNavBar.MenuItems>
             }
