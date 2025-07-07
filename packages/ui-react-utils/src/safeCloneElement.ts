@@ -60,7 +60,13 @@ function safeCloneElement<
   ...children: ReactNode[]
 ) {
   const cloneRef = props.ref
-  const originalRef = element.ref
+  // Support both React 18 (element.ref) and React 19+ (element.props.ref)
+  // TypeScript's ReactElement type does not always include a 'ref' property,
+  // so we use 'as any' to safely access it for React 18 compatibility.
+  const originalRef =
+    element.props && element.props.ref !== undefined
+      ? element.props.ref
+      : (element as any).ref
   const originalRefIsAFunction = typeof originalRef === 'function'
   const cloneRefIsFunction = typeof cloneRef === 'function'
 
