@@ -34,16 +34,12 @@ function buildProject() {
   // if one of the sub processes fails, then we terminate the other sub process and exit the main process
   const spawnStdIoOpts = { stdio: ['inherit', 'inherit', 'pipe'] }
   execSync(
-    'lerna run prepare-build --stream --scope @instructure/ui-icons',
+    'lerna run prepare-build --scope @instructure/ui-icons --loglevel silent',
     opts
   )
   // eslint-disable-next-line no-console
   console.info('Starting Babel and TSC...')
-  const tsBuild = spawn(
-    'npm',
-    ['run', 'build:types', '--verbose'],
-    spawnStdIoOpts
-  )
+  const tsBuild = spawn('npm', ['run', 'build:types'], spawnStdIoOpts)
   const babelBuild = spawn('npm', ['run', 'build'], spawnStdIoOpts)
   tsBuild.on('exit', (code) => {
     if (code !== 0) {
@@ -64,9 +60,7 @@ function buildProject() {
       console.error("'npm run build' failed :(")
       process.exit(code)
     }
-    const result = execSync('npm run build:tokens', opts)
-    // eslint-disable-next-line no-console
-    console.info('npm run build:tokens result', result)
+    execSync('npm run build:tokens', opts)
   })
 }
 function bootstrap() {

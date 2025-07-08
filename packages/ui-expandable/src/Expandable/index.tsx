@@ -26,6 +26,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 
 import { propTypes, allowedProps } from './props'
 import type { ExpandableProps, ExpandableState } from './props'
+import type { ViewProps } from '@instructure/ui-view'
 
 import { withDeterministicId } from '@instructure/ui-react-utils'
 
@@ -86,7 +87,9 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     }
   }
 
-  handleToggle = (event: React.MouseEvent) => {
+  handleToggle = (
+    event: React.MouseEvent<ViewProps> | React.KeyboardEvent<ViewProps>
+  ) => {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
