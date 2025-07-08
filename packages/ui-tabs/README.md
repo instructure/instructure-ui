@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-tabs
 
 [![npm][npm]][npm-url]
@@ -23,18 +19,13 @@ npm install @instructure/ui-tabs
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Tabs } from '@instructure/ui-tabs'
 
 export default MyTabs = function () {
   return (
     <Tabs>
-      <Tabs.Panel renderTitle="First Tab">
-        Tab One
-      </Tabs.Panel>
+      <Tabs.Panel renderTitle="First Tab">Tab One</Tabs.Panel>
       <Tabs.Panel renderTitle="Second Tab" isSelected>
         Tab Two
       </Tabs.Panel>

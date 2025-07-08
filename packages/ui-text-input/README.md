@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-text-input
 
 [![npm][npm]][npm-url]
@@ -25,11 +21,8 @@ npm install @instructure/ui-text-input
 ### Usage
 
 ```javascript
----
-type: code
----
 class ControlledTextInputExample extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -39,7 +32,7 @@ class ControlledTextInputExample extends React.Component {
 
   handleChange = (e, value) => this.setState({ value })
 
-  render () {
+  render() {
     return (
       <View as="div">
         <TextInput

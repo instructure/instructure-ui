@@ -26,7 +26,7 @@ import Color from 'tinycolor2'
 
 /**
  * ---
- * category: utilities
+ * category: utilities/Color
  * ---
  * Adjust the alpha transparency of a color
  * @module alpha

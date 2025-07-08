@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-simple-select
 
 [![npm][npm]][npm-url]

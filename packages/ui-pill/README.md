@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-pill
 
 [![npm][npm]][npm-url]
@@ -25,18 +21,12 @@ npm install @instructure/ui-pill
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Pill } from '@instructure/ui-pill'
 
 const MyPill = () => {
   return (
-    <Pill
-      color="info"
-      margin="x-small"
-    >
+    <Pill color="info" margin="x-small">
       Draft
     </Pill>
   )

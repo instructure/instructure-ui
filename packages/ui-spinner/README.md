@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-spinner
 
 [![npm][npm]][npm-url]
@@ -25,16 +21,11 @@ npm install @instructure/ui-spinner
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Spinner } from '@instructure/ui-spinner'
 
 const MySpinner = () => {
-  return (
-    <Spinner renderTitle="Loading" />
-  )
+  return <Spinner renderTitle="Loading" />
 }
 ```
 

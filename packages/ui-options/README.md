@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-options
 
 [![npm][npm]][npm-url]

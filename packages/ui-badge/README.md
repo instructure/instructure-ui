@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-badge
 
 [![npm][npm]][npm-url]

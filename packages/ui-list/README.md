@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-list
 
 [![npm][npm]][npm-url]

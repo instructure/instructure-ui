@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-truncate-text
 
 [![npm][npm]][npm-url]
@@ -25,19 +21,16 @@ npm install @instructure/ui-truncate-text
 ### Usage
 
 ```js
----
-example: false
----
 import React from 'react'
 import { TruncateText } from '@instructure/ui-truncate-text'
 
 const MyTruncateText = () => {
   return (
-    <TruncateText
-      position="middle"
-      truncate="word"
-    >
-      <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
+    <TruncateText position="middle" truncate="word">
+      <span>
+        This line of text should be truncated from the middle of the string{' '}
+        <strong>instead of the end.</strong>
+      </span>
     </TruncateText>
   )
 }

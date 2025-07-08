@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-radio-input
 
 [![npm][npm]][npm-url]

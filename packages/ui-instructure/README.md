@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-Instructure
 
 [![npm][npm]][npm-url]

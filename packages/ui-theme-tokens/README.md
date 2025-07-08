@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-theme-tokens
 
 [![npm][npm]][npm-url]

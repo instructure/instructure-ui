@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-img
 
 [![npm][npm]][npm-url]
@@ -25,16 +21,11 @@ npm install @instructure/ui-img
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Img } from '@instructure/ui-img'
 
 const MyImg = () => {
-  return (
-    <Img src={placeholderImage(250, 350)} alt="A Placeholder Image" />
-  )
+  return <Img src={placeholderImage(250, 350)} alt="A Placeholder Image" />
 }
 ```
 

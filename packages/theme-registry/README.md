@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## theme-registry
 
 [![npm][npm]][npm-url]

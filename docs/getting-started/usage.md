@@ -76,6 +76,5 @@ Just add the `@instructure/ui` dependency as shown above and wrap the part of yo
 
 ## Further reading
 
-- To use a different theme or customize one read about [InstUISettingsProvider](#InstUISettingsProvider)
+- To use a different theme or customize one read about [Using theme overrides](#using-theme-overrides)
 - Make sure you read about [Accessibility](#accessibility) with InstUI.
-- [How to make your own component that uses InstUI's theming engine](#emotion)

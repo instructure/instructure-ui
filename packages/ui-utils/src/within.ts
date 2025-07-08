@@ -24,7 +24,7 @@
 
 /**
  * ---
- * category: utilities
+ * category: utilities/utils
  * ---
  * Determines if one numerical value (a) is within a designated range (diff) of another (b)
  *

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-selectable
 
 [![npm][npm]][npm-url]

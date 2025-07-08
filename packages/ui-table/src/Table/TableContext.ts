@@ -42,7 +42,19 @@ type TableContextType = {
 }
 
 /**
- * React context created by the `Table` component to hold its data
+ * ---
+ * category: utilities/react
+ * ---
+ * React context created by the `Table` component to hold its data which are
+ * read by its children. You can access these to make custom Table cells/rows.
+ *
+ * It stores the following parameters:
+ * - `isStacked`: Whether the `Table` is in `stacked` layout.
+ * - `hover`: Whether highlight rows on mouse hover
+ * - `headers`: in `stacked` layout the children of the first row of cells
+ *   (e.g. the titles in a table). This is used in `stacked` layout to display
+ *   the titles inline
+ * @module
  */
 const TableContext = createContext<TableContextType>({
   isStacked: false,

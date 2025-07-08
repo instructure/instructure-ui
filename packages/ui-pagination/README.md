@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-pagination
 
 [![npm][npm]][npm-url]

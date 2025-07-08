@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-decorator
 
 [![npm][npm]][npm-url]

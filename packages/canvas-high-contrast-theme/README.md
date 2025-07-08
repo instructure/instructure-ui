@@ -1,16 +1,12 @@
----
-category: packages
----
-
 ## canvas-high-contrast-theme
 
 [![npm][npm]][npm-url]
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
-A high contrast UI component theme for Canvas LMS made by Instructure Inc.
+A high contrast UI component theme made by Instructure Inc.
 
-This theme meets the WCAG 2 Level AA 4.5:1 minimum contrast requirements.
+This theme meets the WCAG 2.1 Level AAA minimum contrast requirements.
 
 ### Installation
 
@@ -22,7 +18,7 @@ npm install @instructure/canvas-high-contrast-theme
 
 Before mounting (rendering) your React application:
 
-- global theming:
+- global theming (DEPRECATED):
 
   ```js
   import { theme } from '@instructure/canvas-high-contrast-theme'
@@ -45,7 +41,7 @@ Before mounting (rendering) your React application:
 
 To override the variables:
 
-- globally:
+- globally (DEPRECATED):
 
   ```js
   import { theme } from '@instructure/canvas-high-contrast-theme'

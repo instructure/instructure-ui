@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-scripts
 
 [![npm][npm]][npm-url]

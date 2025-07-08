@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-codemods
 
 The `ui-codemods` package should make it easier to deal with API changes when upgrading Instructure UI libraries.

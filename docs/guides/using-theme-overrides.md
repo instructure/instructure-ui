@@ -312,7 +312,7 @@ type: example
 
 Every themeable component has its own "theme map". This map defines the components own theme variables (used by this component only), and maps them to values in the global theme object. These local variables are then passed to the component and used in the styles object.
 
-See the [emotion](/#emotion), [built-in themes](/#ui-themes) and [InstUISettingsProvider](/#InstUISettingsProvider) docs pages for more info and examples.
+See the [theming dev guide](/#theming-basics), and [InstUISettingsProvider](/#InstUISettingsProvider) docs pages for more info and examples.
 
 Either you set up the themes globally, or you use the `InstUISettingsProvider` to set up themes, the component's `theme.js` will map it to theme variables:
 

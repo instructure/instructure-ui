@@ -28,15 +28,14 @@ import { contrast } from './contrast'
 
 /**
  * ---
- * category: utilities
+ * category: utilities/Color
  * ---
- * Calculates two, not necesseraly opaque color's contrast on top of each other.
+ * Calculates two, not necessarily opaque color's contrast on top of each other.
  * The method assumes that the bottom color is on top of a white background (only important if it isn't opaque)
  * @module contrastWithAlpha
- * @param {String} color1
- * @param {String} color2
- * @param {Number} decimalPlaces
- * @returns {Number} color contrast ratio
+ * @param color1
+ * @param color2
+ * @returns color contrast ratio
  */
 const contrastWithAlpha = (color1: string, color2: string): number => {
   const c1RGBA = colorToRGB(color1)

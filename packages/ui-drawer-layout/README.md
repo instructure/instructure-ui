@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-drawer-layout
 
 [![npm][npm]][npm-url]

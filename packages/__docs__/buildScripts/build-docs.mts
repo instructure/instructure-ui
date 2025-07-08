@@ -74,6 +74,7 @@ const pathsToIgnore = [
   '**/macro.{js,ts}',
   '**/*-loader.{js,ts}',
   '**/svg/**',
+  'packages/*/README.md', // main package READMEs
   '**/packages/**/CHANGELOG.md',
   '**/config/**',
   '**/templates/**',

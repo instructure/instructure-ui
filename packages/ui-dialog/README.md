@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-dialog
 
 [![npm][npm]][npm-url]

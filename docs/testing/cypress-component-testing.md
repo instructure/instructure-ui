@@ -1,6 +1,6 @@
 ---
 title: Cypress component testing
-category: Testing
+category: Contributor Guides/Testing
 order: 3
 ---
 
@@ -18,9 +18,11 @@ npm run cy:component
 ```
 
 Run specific test file:
+
 ```
 npm run cy:component -- --spec "cypress/component/Alerts.cy.tsx"
 ```
+
 ### Creating new tests
 
 New tests should be added under `cypress/component/`  
@@ -43,11 +45,12 @@ describe('<ComponentToTest/>', () => {
   })
 })
 ```
+
 You can read more about cypress testing from their [docs](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Writing-tests) and their [React Examples](https://docs.cypress.io/guides/component-testing/react/examples).
 
 ### Example
-You can view our code base on GitHub. The component tests can be found [here](https://github.com/instructure/instructure-ui/tree/master/cypress/component).
 
+You can view our code base on GitHub. The component tests can be found [here](https://github.com/instructure/instructure-ui/tree/master/cypress/component).
 
 ### Debugging tests
 
@@ -87,8 +90,9 @@ describe('real events testing', () => {
 })
 ```
 
-
 ### Configuration Setup
+
 Here you can find the key configuration files and folder locations used for our test environment:
+
 - [cypress/support](https://github.com/instructure/instructure-ui/tree/master/cypress/support)
 - [cypress.config.ts](https://github.com/instructure/instructure-ui/blob/master/cypress.config.ts)

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## console
 
 [![npm][npm]][npm-url]

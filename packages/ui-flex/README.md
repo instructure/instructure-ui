@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-flex
 
 [![npm][npm]][npm-url]

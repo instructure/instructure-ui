@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-heading
 
 [![npm][npm]][npm-url]
@@ -25,16 +21,11 @@ npm install @instructure/ui-heading
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Heading } from '@instructure/ui-heading'
 
 const MyHeading = () => {
-  return (
-    <Heading>I am a heading!</Heading>
-  )
+  return <Heading>I am a heading!</Heading>
 }
 ```
 

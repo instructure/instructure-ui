@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## browserslist-config-instui
 
 [![npm][npm]][npm-url]

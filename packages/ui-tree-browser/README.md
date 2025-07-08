@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-tree-browser
 
 [![npm][npm]][npm-url]

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-drilldown
 
 [![npm][npm]][npm-url]

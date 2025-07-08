@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-portal
 
 [![npm][npm]][npm-url]

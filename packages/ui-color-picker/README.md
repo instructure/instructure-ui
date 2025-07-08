@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-color-picker
 
 [![npm][npm]][npm-url]

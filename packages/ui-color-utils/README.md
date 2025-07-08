@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-color-utils
 
 [![npm][npm]][npm-url]

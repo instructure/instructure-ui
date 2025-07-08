@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-buttons
 
 [![npm][npm]][npm-url]

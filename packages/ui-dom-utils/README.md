@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-dom-utils
 
 [![npm][npm]][npm-url]

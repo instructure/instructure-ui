@@ -1763,7 +1763,7 @@ Wrapper HOCs are simple, just return the original component:
 If you want to use fully custom components you have to pay attention to the following:
 
 - Render them as the appropriate HTML Table tags (`tr`, `th`, ...)
-- Read the `hover` prop from `TableContext` to customize hover behaviour
+- Read the `hover` prop from [TableContext](#TableContext) to customize hover behaviour
 - A11y: Row header cells must have the `scope='row'` HTML attribute
 - A11y: Column header cells must have the `scope='col'` and `aria-sort` (if sortable) HTML attribute
 
@@ -1977,13 +1977,13 @@ Basic fully custom table:
 
 #### Fully custom components with `stacked` layout
 
-This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in `TableContext`), so they can display what column they are rendering.
+This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in [TableContext](#TableContext)), so they can display what column they are rendering.
 In this layout for accessibility not render HTML table tags, just plain DOM elements (e.g. `div`) and use the appropriate ARIA role to signify that it's actually a `Table` (e.g. [`cell`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/cell_role), [`row`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/row_role), [`rowheader`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/rowheader_role)).  
 Also you need the following props on the components:
 
 ##### Table rows
 
-- It should read the `headers` array from `TableContext` and pass its nth element to its nth child (if they have such prop).
+- It should read the `headers` array from [TableContext](#TableContext) and pass its nth element to its nth child (if they have such prop).
 
 ##### The children of the first row in `Table.Head` (`Table.ColHeader` by default)
 
@@ -1991,7 +1991,7 @@ Also you need the following props on the components:
 
 ##### Table cells
 
-- It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to (you can read whether the table is using `stacked` layout from `TableContext`.
+- It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to (you can read whether the table is using `stacked` layout from [TableContext](#TableContext).
 
 Custom table with `stacked` layout support:
 

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-truncate-list
 
 [![npm][npm]][npm-url]

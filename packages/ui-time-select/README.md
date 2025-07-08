@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-time-select
 
 [![npm][npm]][npm-url]

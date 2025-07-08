@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-alerts
 
 [![npm][npm]][npm-url]

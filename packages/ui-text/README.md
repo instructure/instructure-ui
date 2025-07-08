@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-text
 
 [![npm][npm]][npm-url]
@@ -25,18 +21,11 @@ npm install @instructure/ui-text
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Text } from '@instructure/ui-text'
 
 const MyText = () => {
-  return (
-    <Text>
-      Whatever you want to display goes here.
-    </Text>
-  )
+  return <Text>Whatever you want to display goes here.</Text>
 }
 ```
 

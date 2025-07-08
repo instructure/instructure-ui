@@ -15,7 +15,7 @@ isWIP: true
 
 ### Table
 
-[Table](/#Table) is now using `TableContext` to pass down data to its child components, the following props are no longer passed down to their children:
+[Table](/#Table) is now using [TableContext](#TableContext) to pass down data to its child components, the following props are no longer passed down to their children (This should only affect you if you wild custom table rows or cells):
 
 | Component | prop        | Substitute / Notes              |
 | --------- | ----------- | ------------------------------- |
