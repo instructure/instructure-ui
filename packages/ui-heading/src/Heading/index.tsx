@@ -219,12 +219,12 @@ class Heading extends Component<HeadingProps> {
 
     return (
       <View
+        aria-label={this.getAriaLabel()}
         {...passthroughProps(props)}
         css={this.props.styles?.heading}
         as={ElementType}
         elementRef={this.handleRef}
         margin={margin}
-        aria-label={this.getAriaLabel()}
       >
         {this.renderContent()}
       </View>
