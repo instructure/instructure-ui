@@ -39,6 +39,7 @@ import generateComponentTheme from './theme'
 import type { ToggleDetailsProps } from './props'
 import { allowedProps, propTypes } from './props'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
+import type { ViewProps } from '@instructure/ui-view'
 
 /**
 ---
@@ -168,7 +169,10 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     return <div css={this.props.styles?.content}>{this.props.children}</div>
   }
 
-  handleToggle = (event: React.MouseEvent, expanded: boolean) => {
+  handleToggle = (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>,
+    expanded: boolean
+  ) => {
     if (typeof this.props.onToggle === 'function') {
       this.props.onToggle(event, expanded)
     }

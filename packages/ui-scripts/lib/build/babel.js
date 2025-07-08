@@ -68,7 +68,8 @@ export default {
     babelArgs = babelArgs.concat([
       src,
       '--ignore',
-      'src/**/*.test.js,src/**/__tests__/**'
+      'src/**/*.test.js,src/**/__tests__/**',
+      '--quiet'
     ])
 
     let envVars = {}
