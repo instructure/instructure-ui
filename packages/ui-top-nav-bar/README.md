@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-top-nav-bar
 
 [![npm][npm]][npm-url]

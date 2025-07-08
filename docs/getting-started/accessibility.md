@@ -10,7 +10,7 @@ We aim to make our software accessible to everyone, including those with vision,
 
 ### Color Contrast
 
-Our [default theme](#canvas) colors meet at least a [3:1](http://www.w3.org/TR/WCAG20-TECHS/G183.html) ratio between foreground and background, and our [high contrast theme](#canvas-high-contrast) colors maintain a minimum [4.5:1](http://www.w3.org/TR/WCAG20-TECHS/G18.html) ratio to ensure we comply with WCAG 2.1 AA contrast requirements. This ensures sufficient color contrast between elements so that users with low vision or color blindness can view and use our components.
+Our [default theme](#canvas) colors meet meets WCAG 2.1 AA rules for color contrast, and our [high contrast theme](#canvas-high-contrast) meets WCAG 2.1 AAA rules for color contrast. This ensures sufficient color contrast between elements so that users with low vision or color blindness can view and use our components.
 
 ### Keyboard Navigation
 
@@ -22,13 +22,13 @@ Our components are [tested in VoiceOver for Mac, and NVDA/JAWS for Windows](http
 
 ### Web Content Accessibility Guidelines (WCAG)
 
-Instructure UI targets WCAG 2.1 Level A and Level AA success criteria, and seeks to provide a highly usable experience for everyone.
+Instructure UI targets WCAG 2.1 Level AA and Level AAA success criteria, and seeks to provide a highly usable experience for everyone.
 
 For more information, see the following resources:
 
 [WCAG 2.1](https://www.w3.org/TR/WCAG21/)
 
-[ARIA 1.1](https://www.w3.org/TR/wai-aria-1.1/)
+[ARIA 1.3](https://www.w3.org/TR/wai-aria-1.3/)
 
 ### Feedback
 

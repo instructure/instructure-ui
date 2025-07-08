@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-source-code-editor
 
 [![npm][npm]][npm-url]

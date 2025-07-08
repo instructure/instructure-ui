@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-i18n
 
 [![npm][npm]][npm-url]

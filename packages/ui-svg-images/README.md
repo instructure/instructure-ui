@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-svg-images
 
 [![npm][npm]][npm-url]

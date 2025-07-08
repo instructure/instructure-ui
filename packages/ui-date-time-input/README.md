@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-date-time-input
 
 [![npm][npm]][npm-url]

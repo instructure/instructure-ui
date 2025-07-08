@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-overlays
 
 [![npm][npm]][npm-url]

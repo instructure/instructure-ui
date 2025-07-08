@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-tag
 
 [![npm][npm]][npm-url]
@@ -25,16 +21,11 @@ npm install @instructure/ui-tag
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Tag } from '@instructure/ui-tag'
 
 const MyTag = () => {
-  return (
-    <Tag text="Hello world" />
-  )
+  return <Tag text="Hello world" />
 }
 ```
 

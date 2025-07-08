@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-rating
 
 [![npm][npm]][npm-url]

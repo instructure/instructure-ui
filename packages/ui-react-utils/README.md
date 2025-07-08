@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-react-utils
 
 [![npm][npm]][npm-url]

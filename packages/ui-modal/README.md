@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-modal
 
 [![npm][npm]][npm-url]

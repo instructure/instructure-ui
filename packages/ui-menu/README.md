@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-menu
 
 [![npm][npm]][npm-url]

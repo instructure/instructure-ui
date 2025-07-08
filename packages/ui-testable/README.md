@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-testable
 
 [![npm][npm]][npm-url]

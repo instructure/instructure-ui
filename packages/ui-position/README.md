@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-position
 
 [![npm][npm]][npm-url]

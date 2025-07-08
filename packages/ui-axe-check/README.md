@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-axe-check
 
 [![npm][npm]][npm-url]

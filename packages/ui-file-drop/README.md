@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-file-drop
 
 [![npm][npm]][npm-url]

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-range-input
 
 [![npm][npm]][npm-url]
@@ -25,20 +21,12 @@ npm install @instructure/ui-range-input
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { RangeInput } from '@instructure/ui-range-input'
 
 const MyRange = () => {
   return (
-    <RangeInput
-      label="Grading range"
-      defaultValue={50}
-      max={100}
-      min={0}
-    />
+    <RangeInput label="Grading range" defaultValue={50} max={100} min={0} />
   )
 }
 ```

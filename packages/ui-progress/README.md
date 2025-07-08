@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-progress
 
 [![npm][npm]][npm-url]
@@ -26,9 +22,6 @@ npm install @instructure/ui-progress
 ### Usage
 
 ```jsx
----
-example: false
----
 import React from 'react'
 import { ProgressBar } from '@instructure/ui-progress'
 

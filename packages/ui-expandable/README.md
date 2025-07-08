@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-expandable
 
 [![npm][npm]][npm-url]

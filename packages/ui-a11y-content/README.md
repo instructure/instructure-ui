@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-a11y-content
 
 [![npm][npm]][npm-url]

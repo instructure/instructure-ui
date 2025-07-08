@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-prop-types
 
 [![npm][npm]][npm-url]

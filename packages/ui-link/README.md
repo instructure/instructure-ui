@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-link
 
 [![npm][npm]][npm-url]
@@ -25,15 +21,14 @@ npm install @instructure/ui-link
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Link } from '@instructure/ui-link'
 
 const MyLink = () => {
   return (
-    <Text>This is <Link href="http://instructure.design">a link</Link>!</Text>
+    <Text>
+      This is <Link href="http://instructure.design">a link</Link>!
+    </Text>
   )
 }
 ```

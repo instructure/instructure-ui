@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-table
 
 [![npm][npm]][npm-url]

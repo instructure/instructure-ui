@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-breadcrumb
 
 [![npm][npm]][npm-url]

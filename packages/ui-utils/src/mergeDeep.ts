@@ -24,7 +24,7 @@
 
 /**
  * ---
- * category: utilities
+ * category: utilities/utils
  * ---
  * Deep merge N objects into a single result object.
  * Merging creates a new object, so that none of the arguments are modified.

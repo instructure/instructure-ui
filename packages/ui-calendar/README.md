@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-calendar
 
 [![npm][npm]][npm-url]

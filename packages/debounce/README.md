@@ -1,9 +1,3 @@
----
-category: packages
-id: debounce_README
-title: debounce
----
-
 ## debounce
 
 [![npm][npm]][npm-url]

@@ -25,25 +25,17 @@
 import type { RGBAType } from './colorTypes'
 
 /**
- * @typedef {Object} RGBAResult
- * @property {Number} r - Red component as a string
- * @property {Number} g - Green component as a string
- * @property {Number} b - Blue component as a string
- * @property {Number} a - Alpha component as a string
- */
-
-/**
  * ---
- * category: utilities
+ * category: utilities/Color
  * ---
  * Place two RGBA colors on top of each other. The second one (c2) goes on top.
  * The method calculates what color would be visible. If the second color (c2) is opaque, the result
  * will be c2, if fully transparent, c1. If anything in between, it calculates the real color.
  * Alpha is always set to 1 after the calculation
  * @module overlayColors
- * @param {RGBAType} c1
- * @param {RGBAType} c2
- * @returns {RGBAType} color as rgb string
+ * @param c1
+ * @param c2
+ * @returns color as rgb string
  */
 const overlayColors = (c1: RGBAType, c2: RGBAType): RGBAType => {
   const alpha = 1 - (1 - c1.a) * (1 - c2.a)

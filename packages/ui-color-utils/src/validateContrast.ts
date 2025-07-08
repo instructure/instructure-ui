@@ -29,39 +29,28 @@ interface ValidatedContrasts {
 }
 
 /**
- * @typedef {Object} ValidatedContrasts
- * @property {Boolean} isValidNormalText - Is the contrast high enough for normal text size?
- * @property {Boolean} isValidLargeText - Is the contrast high enough for large text size?
- * @property {Boolean} isValidGraphicsText - Is the contrast high enough for graphics text?
- */
-
-/**
  * ---
- * category: utilities
+ * category: utilities/Color
  * ---
  * Decides if the given contrast is sufficient for different text sizes and situations.
  *
  * According to WCAG 2.2
  *
  * AA level (https://www.w3.org/TR/WCAG22/#contrast-minimum)
- *
- * text: 4.5:1
- *
- * large text: 3:1
- *
- * non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast)
+ * - text: 4.5:1
+ * - large text: 3:1
+ * - non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast)
  *
  *
  * AAA level (https://www.w3.org/TR/WCAG22/#contrast-enhanced)
+ * - text: 7:1
+ * - large text: 4.5:1
+ * - non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast)
  *
- * text: 7:1
- *
- * large text: 4.5:1
- *
- * non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast)
  * @module validateContrast
- * @param {Number} contrast
- * @returns {ValidatedContrasts} validation object
+ * @param contrast
+ * @param validationLevel
+ * @returns validation object
  */
 const validateContrast = (
   contrast: number,

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## babel-plugin-transform-imports
 
 This will convert any non-default imports that are referencing the package only to reference the full path to the module instead. For example:

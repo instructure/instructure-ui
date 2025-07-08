@@ -26,12 +26,12 @@ import Color from 'tinycolor2'
 
 /**
  * ---
- * category: utilities
+ * category: utilities/Color
  * ---
  * check if a string is a valid color
  * @module isValid
- * @param {String} color
- * @returns {Boolean} true if the string is a valid color
+ * @param color
+ * @returns true if the string is a valid color
  */
 function isValid(color: string): boolean {
   return Color(color).isValid()

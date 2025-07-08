@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-icons
 
 [![npm][npm]][npm-url]
@@ -19,9 +15,6 @@ npm install @instructure/ui-icons
 To use the React components:
 
 ```js
----
-type: code
----
 import { IconAddLine } from '@instructure/ui-icons'
 
 const MyComponent = () => {

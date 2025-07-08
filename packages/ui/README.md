@@ -1,104 +1,10 @@
----
-category: packages
----
-
 ## ui
 
 [![npm][npm]][npm-url]
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
-A meta package exporting all UI components made by Instructure Inc.
-
-### Components
-
-The `ui` package contains the following:
-
-- AccessibleContent
-- Alert
-- All ui-icons
-- ApplyLocale
-- AppNav
-- Avatar
-- Badge
-- Billboard
-- Breadcrumb
-- Button
-- Byline
-- Calendar
-- Checkbox
-- CheckboxGroup
-- CloseButton
-- CodeEditor
-- CondensedButton
-- ContextView
-- DateInput
-- Dialog
-- DrawerLayout
-- Editable
-- FileDrop
-- Flex
-- Focusable
-- FormField
-- FormFieldGroup
-- FormFieldLabel
-- FormFieldLayout
-- FormFieldMessage
-- FormFieldMessages
-- Grid
-- Heading
-- IconButton
-- Img
-- InlineList
-- InlineSVG
-- InPlaceEdit
-- InstUISettingsProvider
-- Link
-- List
-- Mask
-- Menu
-- Metric
-- MetricGroup
-- Modal
-- NumberInput
-- Options
-- Overlay
-- Pages
-- Pagination
-- Pill
-- Popover
-- Portal
-- Position
-- PresentationContent
-- ProgressBar
-- ProgressCircle
-- RadioInput
-- RadioInputGroup
-- RangeInput
-- Rating
-- Responsive
-- ScreenReaderContent
-- Select
-- Selectable
-- Spinner
-- SVGIcon
-- Tab
-- Table
-- Tag
-- Text
-- TextArea
-- TextDirectionContext
-- TextInput
-- TimeSelect
-- ToggleButton
-- ToggleDetails
-- ToggleGroup
-- Tooltip
-- Transition
-- Tray
-- TreeBrowser
-- TruncateText
-- View
+A meta package exporting all UI components that are in InstUI. It exports all components, their sub-components if any (e.g. `Table.Row`), their props, type definitions, themes and public contexts.
 
 ### Installation
 

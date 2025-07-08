@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## command-utils
 
 [![npm][npm]][npm-url]

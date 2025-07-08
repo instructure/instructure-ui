@@ -1,6 +1,6 @@
 ---
 title: Vitest unit testing
-category: Testing
+category: Contributor Guides/Testing
 order: 2
 ---
 
@@ -19,21 +19,25 @@ npm run test:vitest
 You can scope the tests you want to run by specifying the path and also enable watch mode to automatically rerun tests when files change.
 
 Run all tests of the selected component in wach mode:
+
 ```
 npm run test:vitest-watch ui-avatar
 ```
+
 Run specific test file in wach mode:
+
 ```
 npm run test:vitest-watch ui-avatar/src/Avatar/__tests__/Avatar.test.tsx
 ```
->  DO NOT forget to `rebuild` the changed package before testing!
+
+> DO NOT forget to `rebuild` the changed package before testing!
 
 ### Creating new tests
 
 Current tests can be found next to the component source code in the `__tests__` subfolder. New tests should also be added there.
 By convention we name test files after the component they are testing like:
 
- `[component-package]/src/[ComponentName]/__tests__/[ComponentName].test.tsx`
+`[component-package]/src/[ComponentName]/__tests__/[ComponentName].test.tsx`
 
 Vitest tests usually have a structure like this:
 
@@ -57,6 +61,7 @@ describe('<ComponentToTest/>', () => {
 ```
 
 ### Example
+
 You can view our code base on GitHub.
 
 The `ui-avatar` tests can be found [here](https://github.com/instructure/instructure-ui/tree/master/packages/ui-avatar/src/Avatar/__tests__).
@@ -109,6 +114,8 @@ describe('<ComponentToTest/>', () => {
 ```
 
 ### Configuration Setup
+
 In the root you can find the key configuration files and folder locations used for our test environment:
+
 - [vitest.config.mts](https://github.com/instructure/instructure-ui/blob/master/vitest.config.mts)
 - [vitest.setup.ts](https://github.com/instructure/instructure-ui/blob/master/vitest.setup.ts)

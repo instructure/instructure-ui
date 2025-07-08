@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-grid
 
 [![npm][npm]][npm-url]

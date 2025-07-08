@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-metric
 
 [![npm][npm]][npm-url]
@@ -26,23 +22,15 @@ npm install @instructure/ui-metric
 ### Usage
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { Metric } from '@instructure/ui-metric'
 
 const MyMetric = () => {
-  return (
-    <Metric label="Grade" value="80%" />
-  )
+  return <Metric label="Grade" value="80%" />
 }
 ```
 
 ```jsx
----
-type: code
----
 import React from 'react'
 import { MetricGroup } from '@instructure/ui-metric'
 

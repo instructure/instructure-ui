@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-billboard
 
 [![npm][npm]][npm-url]

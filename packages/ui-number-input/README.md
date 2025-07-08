@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-number-input
 
 [![npm][npm]][npm-url]

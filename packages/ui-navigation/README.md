@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-navigation
 
 [![npm][npm]][npm-url]

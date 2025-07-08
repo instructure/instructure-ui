@@ -26,7 +26,7 @@ import { parseUnit } from './parseUnit'
 
 /**
  * ---
- * category: utilities
+ * category: utilities/utils
  * ---
  * Converts a unit value time combination (s, ms) to a number representing ms
  *

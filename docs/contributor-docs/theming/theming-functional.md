@@ -1,13 +1,13 @@
 ---
-title: Themed components
-category: Contributor Guides
-order: 10
+title: Functional themed components
+category: Contributor Guides/theming
+order: 2
 ---
 
 ## Making InstUI-like components with theming
 
 InstUI uses [Emotion](https://emotion.sh/docs/introduction) under the hood to theme and style its components.
-If you want to read about the design behind the system and how to build `class-based` components with InstUI, please read [this](https://instructure.design/#emotion).
+If you want to read about the design behind the system and how to build `class-based` components with InstUI, please read [this](#theming-class-based).
 
 This page will show you how to build `functional` react components with InstUI.
 

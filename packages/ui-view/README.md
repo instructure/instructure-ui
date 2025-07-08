@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-view
 
 [![npm][npm]][npm-url]
@@ -26,9 +22,6 @@ npm install @instructure/ui-view
 ### Usage
 
 ```js
----
-type: code
----
 import React from 'react'
 import { View } from '@instructure/ui-view'
 

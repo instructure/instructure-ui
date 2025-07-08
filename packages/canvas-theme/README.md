@@ -1,16 +1,12 @@
----
-category: packages
----
-
 ## canvas-theme
 
 [![npm][npm]][npm-url]
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component theme for Canvas LMS made by Instructure Inc.
+A UI component theme made by Instructure Inc.
 
-This theme has a 3:1 minimum contrast requirement.
+This theme has WCAG 2.1 Level AA minimum contrast requirement.
 
 ### Installation
 
@@ -22,50 +18,30 @@ npm install @instructure/canvas-theme
 
 Before mounting (rendering) your React application:
 
-- global theming:
+```jsx
+import { theme } from '@instructure/canvas-theme'
 
-  ```js
-  import { theme } from '@instructure/canvas-theme'
-
-  theme.use()
-  ```
-
-- application level theming:
-
-  ```jsx
-  import { theme } from '@instructure/canvas-theme'
-
-  ReactDOM.render(
-    <InstUISettingsProvider theme={theme}>
-      <App />
-    </InstUISettingsProvider>,
-    element
-  )
-  ```
+ReactDOM.render(
+  <InstUISettingsProvider theme={theme}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+```
 
 To override the variables:
 
-- globally:
+```jsx
+import { theme } from '@instructure/canvas-theme'
+const themeOverrides = { spacing: { xxxSmall: '0.3rem' } }
 
-  ```js
-  import { theme } from '@instructure/canvas-theme'
-
-  theme.use({ overrides: { spacing: { xxxSmall: '0.3rem' } } })
-  ```
-
-- application level:
-
-  ```jsx
-  import { theme } from '@instructure/canvas-theme'
-  const themeOverrides = { spacing: { xxxSmall: '0.3rem' } }
-
-  ReactDOM.render(
-    <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
-      <App />
-    </InstUISettingsProvider>,
-    element
-  )
-  ```
+ReactDOM.render(
+  <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+```
 
 [npm]: https://img.shields.io/npm/v/@instructure/canvas-theme.svg
 [npm-url]: https://npmjs.com/package/@instructure/canvas-theme

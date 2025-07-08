@@ -26,8 +26,11 @@ import type { ComponentClass } from 'react'
 
 /**
  * ---
- * category: utilities
+ * category: utilities/utils
  * ---
+ * DEPRECATED This is an old TypeScript style decorator and will be removed
+ * in the future.
+ *
  * Wraps (decorates) a React component to add additional functionality
  *
  * @module decorator

@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-responsive
 
 [![npm][npm]][npm-url]

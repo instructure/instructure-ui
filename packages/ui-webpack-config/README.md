@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-webpack-config
 
 [![npm][npm]][npm-url]

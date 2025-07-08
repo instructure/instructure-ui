@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-editable
 
 [![npm][npm]][npm-url]

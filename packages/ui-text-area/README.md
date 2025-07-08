@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-text-area
 
 [![npm][npm]][npm-url]

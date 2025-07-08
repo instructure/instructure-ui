@@ -26,7 +26,7 @@ import Color from 'tinycolor2'
 
 /**
  * ---
- * category: utilities
+ * category: utilities/Color
  * ---
  * check the contrast ratio of 2 colors. Optionally number of decimal places can be added
  * @module contrast

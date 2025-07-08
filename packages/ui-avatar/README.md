@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-avatar
 
 [![npm][npm]][npm-url]

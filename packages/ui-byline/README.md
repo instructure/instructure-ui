@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-byline
 
 [![npm][npm]][npm-url]

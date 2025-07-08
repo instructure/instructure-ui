@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## ui-tooltip
 
 [![npm][npm]][npm-url]
@@ -25,9 +21,6 @@ npm install @instructure/ui-tooltip
 ### Usage
 
 ```js
----
-  type: code
----
 import React from 'react'
 import { Tooltip } from '@instructure/ui-tooltip'
 

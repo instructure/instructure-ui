@@ -1,14 +1,10 @@
----
-category: packages
----
-
 ## pkg-utils
 
 [![npm][npm]][npm-url]
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
-Utilities for managing node packages in a mono-repo using yarn workspaces.
+Utilities for managing node packages in a mono-repo.
 
 ### Installation
 

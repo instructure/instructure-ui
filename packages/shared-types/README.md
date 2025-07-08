@@ -1,7 +1,3 @@
----
-category: packages
----
-
 ## shared-types
 
 [![npm][npm]][npm-url]
