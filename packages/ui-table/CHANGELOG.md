@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
+
+
+### Features
+
+* **ui-table:** add setHoverStateTo to control the hover state of the Table's row ([60001cd](https://github.com/instructure/instructure-ui/commit/60001cd8439ecacc5eb3dc3a5be1144f7f5faa31))
+
+
+
+
+
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
 
 **Note:** Version bump only for package @instructure/ui-table

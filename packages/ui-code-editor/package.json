@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-code-editor",
-  "version": "10.22.0",
+  "version": "10.23.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,20 +23,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.22.0",
-    "@instructure/ui-themes": "10.22.0",
+    "@instructure/ui-babel-preset": "10.23.0",
+    "@instructure/ui-themes": "10.23.0",
     "@types/codemirror": "5.x"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/emotion": "10.22.0",
-    "@instructure/shared-types": "10.22.0",
-    "@instructure/ui-a11y-content": "10.22.0",
-    "@instructure/ui-color-utils": "10.22.0",
-    "@instructure/ui-dom-utils": "10.22.0",
-    "@instructure/ui-react-utils": "10.22.0",
-    "@instructure/ui-testable": "10.22.0",
-    "@instructure/ui-utils": "10.22.0",
+    "@instructure/emotion": "10.23.0",
+    "@instructure/shared-types": "10.23.0",
+    "@instructure/ui-a11y-content": "10.23.0",
+    "@instructure/ui-color-utils": "10.23.0",
+    "@instructure/ui-dom-utils": "10.23.0",
+    "@instructure/ui-react-utils": "10.23.0",
+    "@instructure/ui-testable": "10.23.0",
+    "@instructure/ui-utils": "10.23.0",
     "codemirror": "5.65.16",
     "prop-types": "^15.8.1"
   },
