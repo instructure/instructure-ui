@@ -46,7 +46,6 @@ class InlineList extends Component<InlineListProps> {
     itemSpacing: 'none',
     as: 'ul',
     margin: 'none',
-    delimiter: 'none',
     size: 'medium'
   }
 
@@ -65,17 +64,21 @@ class InlineList extends Component<InlineListProps> {
   }
 
   renderChildren() {
-    return Children.map(this.props.children, (child) => {
-      if (!child) return // ignore null, falsy children
+    const childrenArray = Children.toArray(this.props.children)
+    const lastIndex = childrenArray.length - 1
+
+    return childrenArray.map((child, index) => {
+      if (!child) return null
+
+      const shouldRenderDelimiter = index !== lastIndex
 
       return safeCloneElement(child as ReactElement, {
-        delimiter: this.props.delimiter,
+        delimiter: shouldRenderDelimiter ? this.props.delimiter : undefined,
         size: this.props.size,
         spacing: this.props.itemSpacing
       })
     })
   }
-
   render() {
     const { as, margin, elementRef, ...rest } = this.props
 
