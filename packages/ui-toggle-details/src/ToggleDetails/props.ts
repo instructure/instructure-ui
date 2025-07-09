@@ -33,6 +33,7 @@ import type {
   ToggleDetailsTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { ViewProps } from '@instructure/ui-view'
 
 type ToggleDetailsOwnProps = {
   variant?: 'default' | 'filled'
@@ -48,7 +49,10 @@ type ToggleDetailsOwnProps = {
    * Whether the content is initially expanded or hidden (uncontrolled)
    */
   defaultExpanded?: boolean
-  onToggle?: (event: React.MouseEvent, expanded: boolean) => void
+  onToggle?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>,
+    expanded: boolean
+  ) => void
   /**
    * The icon to display next to the summary text when content is hidden
    */

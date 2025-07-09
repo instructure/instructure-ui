@@ -92,6 +92,3 @@ if (args.length > 0 && args[0] === '--nuke_node') {
   console.info('Deleting node_modules recursively...')
   removeNodeModules()
 }
-
-// eslint-disable-next-line no-console
-console.info('clean finished')

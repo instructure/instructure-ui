@@ -37,16 +37,12 @@ export async function handleGenerateTokens({
     fs.mkdirSync(dir, { recursive: true })
   }
   fs.writeFileSync(sourcePath, JSON.stringify(styleDictionarySource))
-  // this is just a debug code to find the JSON error here that occurs only in CI
-  // eslint-disable-next-line no-console
-  console.log(
-    '!!!! handleGenerateTokens',
-    sourcePath,
-    fs.existsSync(sourcePath),
-    JSON.stringify(styleDictionarySource)?.substring(0, 400)
-  )
+
   const dictionary = new StyleDictionary({
     source: [sourcePath],
+    log: {
+      verbosity: 'silent' // silent to hide success messages, fatal error should still be logged
+    },
     platforms: {
       scss: {
         transformGroup: 'scss',

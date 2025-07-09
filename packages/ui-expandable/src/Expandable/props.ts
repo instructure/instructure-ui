@@ -29,14 +29,19 @@ import { controllable } from '@instructure/ui-prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { ViewProps } from '@instructure/ui-view'
 
 type ExpandableToggleProps = (props?: {
-  onClick?: React.MouseEventHandler
+  onClick?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
   [key: string]: unknown
 }) => {
   'aria-controls': string
   'aria-expanded': boolean
-  onClick: (event: React.MouseEvent) => void
+  onClick: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
   [key: string]: unknown
 }
 
@@ -69,7 +74,10 @@ type ExpandableOwnProps = {
   /**
    * Function invoked when this component is expanded/collapsed
    */
-  onToggle?: (event: React.MouseEvent, expanded: boolean) => void
+  onToggle?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>,
+    expanded: boolean
+  ) => void
 
   /**
    * Must be a function that returns a JSX element. It receives and object which
