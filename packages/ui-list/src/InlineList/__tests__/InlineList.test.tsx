@@ -75,7 +75,7 @@ describe('<InlineList />', () => {
     )
     const delimiters = container.querySelectorAll('span[aria-hidden="true"]')
 
-    expect(delimiters.length).toEqual(4)
+    expect(delimiters.length).toEqual(3)
     delimiters.forEach((delimiter) => {
       expect(delimiter.getAttribute('class')).toContain(
         'inlineListItem__delimiter'

@@ -65,13 +65,19 @@ class InlineList extends Component<InlineListProps> {
   }
 
   renderChildren() {
-    return Children.map(this.props.children, (child) => {
-      if (!child) return // ignore null, falsy children
+    const childrenArray = Children.toArray(this.props.children)
+    const lastIndex = childrenArray.length - 1
+
+    return childrenArray.map((child, index) => {
+      if (!child) return null
+
+      const shouldRenderPlaceholder = index === lastIndex
 
       return safeCloneElement(child as ReactElement, {
         delimiter: this.props.delimiter,
         size: this.props.size,
-        spacing: this.props.itemSpacing
+        spacing: this.props.itemSpacing,
+        lastPlaceholder: shouldRenderPlaceholder
       })
     })
   }

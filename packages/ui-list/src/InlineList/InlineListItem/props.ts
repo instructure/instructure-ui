@@ -71,6 +71,10 @@ type InlineListItemOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * Used internally to mark the last item as a placeholder
+   */
+  lastPlaceholder?: boolean
 } & PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
 
 type PropKeys = keyof InlineListItemOwnProps
@@ -100,7 +104,8 @@ const propTypes: PropValidators<PropKeys> = {
     'x-large',
     'xx-large'
   ]),
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  lastPlaceholder: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [

@@ -53,7 +53,8 @@ class InlineListItem extends Component<InlineListItemProps> {
     padding: 'none',
     spacing: 'none',
     delimiter: 'none',
-    size: 'medium'
+    size: 'medium',
+    lastPlaceholder: false
   }
 
   ref: Element | null = null
@@ -86,6 +87,7 @@ class InlineListItem extends Component<InlineListItemProps> {
       children,
       spacing,
       styles,
+      lastPlaceholder,
       ...rest
     } = this.props
 
@@ -101,7 +103,9 @@ class InlineListItem extends Component<InlineListItemProps> {
         elementRef={this.handleRef}
       >
         {children}
-        <span css={styles?.delimiter} aria-hidden="true" />
+        {!lastPlaceholder && (
+          <span css={styles?.delimiter} aria-hidden="true" />
+        )}
       </View>
     )
   }
