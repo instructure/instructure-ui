@@ -52,7 +52,6 @@ class InlineListItem extends Component<InlineListItemProps> {
   static defaultProps = {
     padding: 'none',
     spacing: 'none',
-    delimiter: 'none',
     size: 'medium'
   }
 
@@ -101,7 +100,7 @@ class InlineListItem extends Component<InlineListItemProps> {
         elementRef={this.handleRef}
       >
         {children}
-        <span css={styles?.delimiter} aria-hidden="true" />
+        {delimiter && <span css={styles?.delimiter} aria-hidden="true" />}
       </View>
     )
   }
