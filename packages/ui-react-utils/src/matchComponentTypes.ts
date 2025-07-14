@@ -33,9 +33,9 @@ import { ComponentType, ReactElement, ReactNode } from 'react'
  * specified types.
  *
  * @module matchComponentTypes
- * @param {ReactElement|any} componentInstance
- * @param {Array} types an array of React components
- * @returns {Boolean} true if the component matches at least one of the types
+ * @param componentInstance
+ * @param types an array of React components
+ * @returns true if the component matches at least one of the types
  */
 function matchComponentTypes<Type extends ReactElement = ReactElement>(
   componentInstance: ReactNode,

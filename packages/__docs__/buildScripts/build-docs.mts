@@ -63,16 +63,15 @@ const pathsToProcess = [
   'CHANGELOG.md',
   '**/packages/**/*.md', // package READMEs
   '**/docs/**/*.md', // general docs
-  '**/src/*.{js,ts,tsx}', // util src files
-  '**/src/*/*.{js,ts,tsx}', // component src files
-  '**/src/*/*/*.{js,ts,tsx}', // child component src files
+  '**/src/*.{ts,tsx}', // util src files
+  '**/src/*/*.{ts,tsx}', // component src files
+  '**/src/*/*/*.{ts,tsx}', // child component src files
   'CODE_OF_CONDUCT.md',
   'LICENSE.md'
 ]
 
 const pathsToIgnore = [
   '**/macro.{js,ts}',
-  '**/*-loader.{js,ts}',
   '**/svg/**',
   'packages/*/README.md', // main package READMEs
   '**/packages/**/CHANGELOG.md',
@@ -80,22 +79,16 @@ const pathsToIgnore = [
   '**/templates/**',
   '**/node_modules/**',
   '**/__docs__/**',
-  '**/__svg__/**',
+  '**/__build__/**',
   '**/__fixtures__/**',
   '**/__testfixtures__/**',
   '**/__tests__/**',
-  '**/__new-tests__/**',
-  '**/locales/**',
-  '**/styles.{js,ts}',
-  '**/theme.{js,ts}',
-  '**/props.ts',
-  '**/locator.{js,ts}',
-  '**/*Locator.{js,ts}',
-
+  '**/styles.{tsx,ts}',
+  '**/theme.{tsx,ts}',
   '**/types/**',
 
   // ignore index files that just re-export
-  '**/src/index.{js,ts}',
+  '**/src/index.ts',
 
   // packages to ignore:
   '**/canvas-theme/**',
@@ -106,7 +99,7 @@ const pathsToIgnore = [
   '**/ui-code-editor/src/CodeMirrorWrapper/**',
 
   // deprecated packages and modules:
-  '**/InputModeListener.{js,ts}',
+  '**/InputModeListener.ts',
   // regression testing app:
   '**/regression-test/**',
 ]

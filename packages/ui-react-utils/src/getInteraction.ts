@@ -24,11 +24,23 @@
 
 export type GetInteractionOptions = {
   props?: {
+    /**
+     * specifies the interaction mode, one of 'enabled', 'disabled', or 'readonly'
+     */
     interaction?: InteractionType | null
+    /**
+     * specifies if the component is disabled. Will take precedence over readOnly
+     */
     disabled?: boolean | null
+    /**
+     * specifies if the component is readonly
+     */
     readOnly?: boolean | null
     [key: string]: any
   }
+  /**
+   * an array specifying the interaction types available to the component, ['disabled', 'readonly'] by default
+   */
   interactionTypes?: InteractionType[]
 }
 
@@ -41,13 +53,8 @@ export type InteractionType = 'enabled' | 'disabled' | 'readonly'
  * This is useful for form elements where consumers are able to either use the interaction prop as specified or the
  * native html disabled or readonly attributes
  * @module getInteraction
- * @param {Object} args
- * @param {Object} args.props - the component props
- * @param {string} args.props.interaction - specifies the interaction mode, one of 'enabled', 'disabled', or 'readonly'
- * @param {boolean} args.props.disabled - specifies if the component is disabled. Will take precedence over readOnly
- * @param {boolean} args.props.readOnly - specifies if the component is readonly
- * @param {Array} args.interactionTypes - an array specifying the interaction types available to the component, ['disabled', 'readonly'] by default
- * @returns {String} one of 'enabled', 'disabled', or 'readonly'
+ * @param args extra arguments
+ * @returns The calculated interaction type
  */
 export function getInteraction({
   props = {},

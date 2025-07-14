@@ -50,10 +50,10 @@ interface PropsObject {
  * 6. `<span>` if none of the above
  *
  * @module getElementType
- * @param {ComponentType} Component
- * @param {Object} props
- * @param {Function} getDefault an optional function that returns the default element type
- * @returns {String} the element type
+ * @param Component
+ * @param props
+ * @param getDefault an optional function that returns the default element type
+ * @returns the element type
  */
 function getElementType<T extends PropsObject>(
   Component: Omit<ComponentType<T>, 'propTypes'>,

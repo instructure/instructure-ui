@@ -105,7 +105,7 @@ function extractFunctionData(node: FunctionDeclaration | FunctionExpression | Ar
     description: description,
     ...(parameters.length > 0 && {params: parameters}),
     ...((genericParameters && genericParameters.length > 0) && {genericParameters: genericParameters}),
-    ...((returnsDesc || returnsType) && {
+    ...((returnsDesc || (returnsType && returnsType !== 'void')) && {
       returns: {
         description: returnsDesc,
         type: returnsType
@@ -131,7 +131,14 @@ function parseNode(node: ts.Node, typeChecker: TypeChecker): JsDocResult | undef
   }
 
   let result: JsDocResult | undefined = undefined
-  if (ts.isVariableStatement(node)) { // e.g. const x = function(){}, y = 5
+  if (ts.isVariableDeclaration(node)) { // e.g. x=1
+    if (node.initializer) {
+      if (ts.isArrowFunction(node.initializer) || ts.isFunctionExpression(node.initializer)) {
+        result = extractFunctionData(node.initializer, typeChecker)
+      }
+    }
+  }
+  else if (ts.isVariableStatement(node)) { // e.g. const x = function(){}, y = 5
     for (const d of node.declarationList.declarations) {
       if (d.initializer) {
         if (ts.isArrowFunction(d.initializer) || ts.isFunctionExpression(d.initializer)) {
@@ -140,12 +147,11 @@ function parseNode(node: ts.Node, typeChecker: TypeChecker): JsDocResult | undef
       }
     }
   }
-  // e.g. function focusable(el: Element)
-  if (ts.isFunctionDeclaration(node)) {
+  else if (ts.isFunctionDeclaration(node)) { // e.g. function focusable(el: Element)
     result = extractFunctionData(node, typeChecker)
   }
   // if it's not a function, then try to parse types from the JSDoc comment
-  else if (!result) {
+  if (!result) {
     let description = ''
     const params: JsDocResult['params'] = []
     const docs = ts.getJSDocCommentsAndTags(node)

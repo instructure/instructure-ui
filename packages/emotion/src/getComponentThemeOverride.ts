@@ -39,12 +39,12 @@ type ComponentName = keyof ComponentOverride | undefined
  * This is a utility function which calculates the correct component theme
  * based on every possible override there is.
 
- * @param {object} theme - Theme object
- * @param {*} displayName - Name of the component
- * @param {*} componentId - componentId of the component
- * @param {*} props - The component's props object
- * @param {*} componentTheme - The component's default theme
- * @returns {object} The calculated theme override object
+ * @param theme - Theme object
+ * @param displayName - Name of the component
+ * @param componentId - componentId of the component
+ * @param props - The component's props object
+ * @param componentTheme - The component's default theme
+ * @returns The calculated theme override object
  */
 const getComponentThemeOverride = (
   theme: ThemeOrOverride,

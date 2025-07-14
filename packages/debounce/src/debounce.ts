@@ -23,8 +23,17 @@
  */
 
 interface DebounceOptions {
+  /**
+   * Specify invoking on the leading edge of the timeout
+   */
   leading?: boolean
+  /**
+   * The maximum time `func` is allowed to be delayed before it's invoked
+   */
   maxWait?: number
+  /**
+   * Specify invoking on the trailing edge of the timeout
+   */
   trailing?: boolean
 }
 
@@ -54,16 +63,10 @@ export type Debounced<F extends (...args: any) => any> = F & {
  *
  * @module debounce
  *
- * @param {Function} func The function to debounce.
- * @param {number} [wait=0] The number of milliseconds to delay.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=false]
- *  Specify invoking on the leading edge of the timeout.
- * @param {number} [options.maxWait]
- *  The maximum time `func` is allowed to be delayed before it's invoked.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new debounced function.
+ * @param func The function to debounce.
+ * @param wait The number of milliseconds to delay.
+ * @param options options object.
+ * @returns Returns the new debounced function.
  */
 function debounce<F extends (...args: any) => any>(
   func: F,

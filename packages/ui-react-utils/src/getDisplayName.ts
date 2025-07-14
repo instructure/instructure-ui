@@ -31,8 +31,8 @@ import { ComponentType } from 'react'
  * Get the displayName of a React component.
  * needs a babel plugin to work https://github.com/facebook/react/issues/4915 !!
  * @module getDisplayName
- * @param {ComponentType|String} ReactComponent
- * @returns {String} the component displayName
+ * @param ReactComponent
+ * @returns the component displayName
  */
 function getDisplayName(ReactComponent: string | ComponentType) {
   return typeof ReactComponent === 'string'

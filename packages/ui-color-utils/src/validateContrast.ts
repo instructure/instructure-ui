@@ -49,7 +49,7 @@ interface ValidatedContrasts {
  *
  * @module validateContrast
  * @param contrast
- * @param validationLevel
+ * @param validationLevel WCAG 2.2 validation level
  * @returns validation object
  */
 const validateContrast = (
