@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 type ColorCardOwnProps = {
   hex: string
   name: string
@@ -34,13 +34,6 @@ type PropKeys = keyof ColorCardOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorCardProps = ColorCardOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  hex: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  minimal: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = ['hex', 'name', 'minimal']
 export type { ColorCardProps }
-export { propTypes, allowedProps }
+export { allowedProps }

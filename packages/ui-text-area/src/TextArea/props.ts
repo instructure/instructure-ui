@@ -24,14 +24,14 @@
 
 import React from 'react'
 import type { TextareaHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
+
 
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   TextAreaTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
@@ -142,30 +142,6 @@ type TextAreaProps =
 type TextAreaStyle = ComponentStyle<
   'textArea' | 'textAreaLayout' | 'textAreaOutline' | 'requiredInvalid'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.node.isRequired,
-  id: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'inline']),
-  autoGrow: PropTypes.bool,
-  resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical']),
-  width: PropTypes.string,
-  height: PropTypes.string,
-  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  inline: PropTypes.bool,
-  placeholder: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  required: PropTypes.bool,
-  textareaRef: PropTypes.func,
-  defaultValue: PropTypes.string,
-  value: controllable(PropTypes.string),
-  onChange: PropTypes.func,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'id',
@@ -190,4 +166,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TextAreaProps, TextAreaStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

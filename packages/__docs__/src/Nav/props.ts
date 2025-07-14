@@ -26,7 +26,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 type NavOwnProps = {
   docs: Record<string, any>
   sections: Record<string, any>
@@ -40,13 +40,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NavProps = OtherHTMLAttributes<NavOwnProps> & NavOwnProps
 
-const propTypes: PropValidators<PropKeys> = {
-  docs: PropTypes.object.isRequired,
-  sections: PropTypes.object.isRequired,
-  themes: PropTypes.object,
-  icons: PropTypes.object,
-  selected: PropTypes.string
-}
+
 const allowedProps: AllowedPropKeys = [
   'docs',
   'icons',

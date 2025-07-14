@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { InlineListItem } from './InlineListItem'
 
@@ -74,27 +72,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type InlineListProps = InlineListOwnProps &
   OtherHTMLAttributes<InlineListOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([InlineListItem]),
-  as: PropTypes.oneOf(['ul', 'ol']),
-  margin: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
-  itemSpacing: PropTypes.oneOf([
-    'none',
-    'xxx-small',
-    'xx-small',
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large'
-  ]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'as',
@@ -106,4 +83,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { InlineListProps }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -23,7 +23,7 @@
  */
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 
 type HeroOwnProps = {
@@ -39,15 +39,6 @@ type PropKeys = keyof HeroOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type HeroProps = HeroOwnProps & WithStyleProps<HeroTheme, HeroStyle>
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  repository: PropTypes.string.isRequired,
-  version: PropTypes.string.isRequired,
-  layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
-  docs: PropTypes.object
-}
-
 const allowedProps: AllowedPropKeys = [
   'docs',
   'layout',

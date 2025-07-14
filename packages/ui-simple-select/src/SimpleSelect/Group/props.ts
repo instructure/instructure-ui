@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Option } from '../Option'
@@ -51,13 +49,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SimpleSelectGroupProps = SimpleSelectGroupOwnProps &
   OtherHTMLAttributes<SimpleSelectGroupOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  children: ChildrenPropTypes.oneOf([Option])
-}
-
 const allowedProps: AllowedPropKeys = ['renderLabel', 'children']
 
 export type { SimpleSelectGroupProps }
-export { propTypes, allowedProps }
+export { allowedProps }

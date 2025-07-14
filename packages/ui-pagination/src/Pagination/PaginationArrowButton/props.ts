@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { IconButtonProps } from '@instructure/ui-buttons'
@@ -64,14 +62,6 @@ type PaginationNavigationProps =
   > &
     PaginationNavigationOwnProps &
     OtherHTMLAttributes<PaginationNavigationOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  direction: PropTypes.oneOf(['first', 'prev', 'next', 'last']),
-  label: PropTypes.string.isRequired,
-  buttonRef: PropTypes.func,
-  onClick: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'direction',
   'label',
@@ -82,4 +72,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PaginationNavigationProps, PaginationArrowDirections }
-export { propTypes, allowedProps }
+export { allowedProps }

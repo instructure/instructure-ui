@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children, controllable } from '@instructure/ui-prop-types'
-import { PositionPropTypes } from '@instructure/ui-position'
 
 import { Popover } from '@instructure/ui-popover'
 
@@ -41,7 +38,7 @@ import type {
 import type {
   DrilldownTheme,
   OtherHTMLAttributes,
-  PropValidators,
+  
   AsElementType
 } from '@instructure/shared-types'
 
@@ -304,50 +301,6 @@ type DrilldownState = {
   lastSelectedId?: string
   selectedGroupOptionsMap: SelectedGroupOptionsMap
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  rootPageId: PropTypes.string.isRequired,
-  children: Children.oneOf([DrilldownPage]),
-  id: PropTypes.string,
-  label: PropTypes.string,
-  disabled: PropTypes.bool,
-  rotateFocus: PropTypes.bool,
-  as: PropTypes.elementType,
-  role: PropTypes.string,
-  elementRef: PropTypes.func,
-  drilldownRef: PropTypes.func,
-  overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  trigger: PropTypes.node,
-  placement: PositionPropTypes.placement,
-  defaultShow: PropTypes.bool,
-  show: controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
-  onToggle: PropTypes.func,
-  onSelect: PropTypes.func,
-  onDismiss: PropTypes.func,
-  onFocus: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  popoverRef: PropTypes.func,
-  mountNode: PositionPropTypes.mountNode,
-  positionTarget: PositionPropTypes.mountNode,
-  positionContainerDisplay: PropTypes.oneOf(['inline-block', 'block']),
-  constrain: PositionPropTypes.constrain,
-  shouldHideOnSelect: PropTypes.bool,
-  shouldContainFocus: PropTypes.bool,
-  shouldReturnFocus: PropTypes.bool,
-  withArrow: PropTypes.bool,
-  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  shouldSetAriaExpanded: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'rootPageId',
   'children',
@@ -403,4 +356,4 @@ export type {
   SeparatorChild,
   SelectedGroupOptionsMap
 }
-export { propTypes, allowedProps }
+export { allowedProps }

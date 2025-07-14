@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
@@ -167,13 +166,6 @@ type TopNavBarSmallViewportLayoutStyleProps = {
   menuBottomPosition: number
   inverseColor: TopNavBarContextType['inverseColor']
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  // Edit PropTypes in TopNavBarLayout/props.ts
-  ...commonPropTypes,
-  ...smallViewportPropTypes
-}
-
 const allowedProps: AllowedPropKeys = [
   // Edit allowed props in TopNavBarLayout/props.ts
   ...commonAllowedProps,
@@ -189,4 +181,4 @@ export type {
   TopNavBarSmallViewportLayoutState,
   TopNavBarSmallViewportLayoutStyleProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

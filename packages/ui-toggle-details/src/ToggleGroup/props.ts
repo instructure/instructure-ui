@@ -23,14 +23,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { controllable } from '@instructure/ui-prop-types'
 
 import {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators,
+  
   Renderable,
   ToggleGroupTheme
 } from '@instructure/shared-types'
@@ -99,23 +97,6 @@ type ToggleGroupStyle = { borderColor: string }
 type ToggleGroupProps = ToggleGroupOwnProps &
   OtherHTMLAttributes<ToggleGroupOwnProps> &
   WithStyleProps<ToggleGroupTheme, ToggleGroupStyle>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  summary: PropTypes.node.isRequired,
-  toggleLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-  defaultExpanded: PropTypes.bool,
-  onToggle: PropTypes.func,
-  icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  iconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  transition: PropTypes.bool,
-  border: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'summary',
@@ -133,4 +114,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ToggleGroupProps, ToggleGroupStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -26,7 +26,6 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { Metric } from '../Metric'
 
 import type {
-  PropValidators,
   MetricGroupTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -48,12 +47,7 @@ type MetricGroupProps = MetricGroupOwnProps &
   OtherHTMLAttributes<MetricGroupOwnProps>
 
 type MetricGroupStyle = ComponentStyle<'metricGroup'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([Metric])
-}
-
 const allowedProps: AllowedPropKeys = ['children']
 
 export type { MetricGroupProps, MetricGroupStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

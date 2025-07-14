@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type {
   OtherHTMLAttributes,
@@ -77,15 +77,6 @@ type PropKeys = keyof TopNavBarOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarProps = TopNavBarOwnProps & OtherHTMLAttributes<TopNavBarOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.func,
-  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  mediaQueryMatch: PropTypes.oneOf(['element', 'media']),
-  inverseColor: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'breakpoint',
@@ -105,4 +96,4 @@ export type {
   MenuItemsChild,
   UserChild
 }
-export { propTypes, allowedProps }
+export { allowedProps }

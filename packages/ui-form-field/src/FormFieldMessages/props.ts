@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import { FormPropTypes } from '../FormPropTypes'
 
 import type {
-  PropValidators,
   FormFieldMessagesTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -58,13 +57,7 @@ type FormFieldMessagesProps = FormFieldMessagesOwnProps &
   OtherHTMLAttributes<FormFieldMessagesOwnProps>
 
 type FormFieldMessagesStyle = ComponentStyle<'formFieldMessages' | 'message'>
-
-const propTypes: PropValidators<PropKeys> = {
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  gridArea: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = ['messages', 'gridArea']
 
 export type { FormFieldMessagesProps, FormFieldMessagesStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

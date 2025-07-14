@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type { PropValidators, TransitionTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -68,12 +68,6 @@ type TransitionStyle = ComponentStyle<'globalStyles'> & {
     entering: string
   }
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  type: transitionTypePropType,
-  ...transitionCommonPropTypes
-}
-
 const allowedProps: AllowedPropKeys = [
   'type',
   'children',

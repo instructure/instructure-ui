@@ -22,13 +22,11 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import type {
   AsElementType,
-  PropValidators,
+  
   OptionsTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -69,15 +67,6 @@ type OptionsProps = OptionsOwnProps &
   WithDeterministicIdProps
 
 type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  role: PropTypes.string,
-  elementRef: PropTypes.func,
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'role',
@@ -87,4 +76,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { OptionsProps, OptionsStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

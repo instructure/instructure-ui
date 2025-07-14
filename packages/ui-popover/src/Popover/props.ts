@@ -22,11 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes, BorderWidth } from '@instructure/emotion'
-import { PositionPropTypes } from '@instructure/ui-position'
 
 import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
 
@@ -38,7 +34,6 @@ import type {
 } from '@instructure/ui-position'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type {
-  PropValidators,
   LiveRegion,
   UIElement,
   Renderable,
@@ -308,61 +303,6 @@ type PropKeys = keyof PopoverOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PopoverStyle = { borderColor: string }
-
-const propTypes: PropValidators<PropKeys> = {
-  isShowingContent: PropTypes.bool,
-  defaultIsShowingContent: PropTypes.bool,
-  on: PropTypes.oneOfType([
-    PropTypes.oneOf(['click', 'hover', 'focus']),
-    PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
-  ]),
-  withArrow: PropTypes.bool,
-  color: PropTypes.oneOf(['primary', 'primary-inverse']),
-  placement: PositionPropTypes.placement,
-  shadow: ThemeablePropTypes.shadow,
-  stacking: ThemeablePropTypes.stacking,
-  contentRef: PropTypes.func,
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  screenReaderLabel: PropTypes.string,
-  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  constrain: PositionPropTypes.constrain,
-  positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
-  positionContainerDisplay: PropTypes.oneOf(['inline-block', 'block']),
-  mountNode: PositionPropTypes.mountNode,
-  insertAt: PropTypes.oneOf(['bottom', 'top']),
-  liveRegion: PropTypes.oneOfType([
-    element,
-    PropTypes.arrayOf(element),
-    PropTypes.func
-  ]),
-  id: PropTypes.string,
-  shouldAlignArrow: PropTypes.bool,
-  shouldTrackPosition: PropTypes.bool,
-  shouldRenderOffscreen: PropTypes.bool,
-  shouldContainFocus: PropTypes.bool,
-  shouldReturnFocus: PropTypes.bool,
-  shouldCloseOnDocumentClick: PropTypes.bool,
-  shouldCloseOnEscape: PropTypes.bool,
-  shouldFocusContentOnTriggerBlur: PropTypes.bool,
-  onShowContent: PropTypes.func,
-  onHideContent: PropTypes.func,
-  onPositioned: PropTypes.func,
-  onPositionChanged: PropTypes.func,
-  onClick: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  onMouseOut: PropTypes.func,
-  renderTrigger: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  elementRef: PropTypes.func,
-  borderWidth: ThemeablePropTypes.borderWidth,
-  shouldSetAriaExpanded: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'isShowingContent',
   'defaultIsShowingContent',
@@ -411,4 +351,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PopoverOwnProps, PopoverProps, PopoverState, PopoverStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

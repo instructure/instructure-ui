@@ -23,7 +23,7 @@
  */
 
 import { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
+
 
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { controllable } from '@instructure/ui-prop-types'
@@ -31,7 +31,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   TextInputTheme
 } from '@instructure/shared-types'
 import type {
@@ -206,34 +206,6 @@ type TextInputStyle = ComponentStyle<
   | 'requiredInvalid'
   | 'inputLayout'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  type: PropTypes.oneOf(['text', 'email', 'url', 'tel', 'search', 'password']),
-  id: PropTypes.string,
-  value: controllable(PropTypes.string),
-  defaultValue: PropTypes.string,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  textAlign: PropTypes.oneOf(['start', 'center']),
-  width: PropTypes.string,
-  htmlSize: PropTypes.number,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  shouldNotWrap: PropTypes.bool,
-  placeholder: PropTypes.string,
-  isRequired: PropTypes.bool,
-  elementRef: PropTypes.func,
-  inputRef: PropTypes.func,
-  inputContainerRef: PropTypes.func,
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'type',
@@ -280,4 +252,4 @@ export type {
   TextInputStyleProps,
   TextInputStyle
 }
-export { propTypes, allowedProps }
+export { allowedProps }

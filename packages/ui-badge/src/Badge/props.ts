@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 
-import { PositionPropTypes } from '@instructure/ui-position'
+
 
 import type {
   AsElementType,
@@ -98,24 +97,6 @@ type BadgeProps = BadgeOwnProps &
   WithDeterministicIdProps
 
 type BadgeStyle = ComponentStyle<'badge' | 'wrapper'>
-
-const propTypes: PropValidators<PropKeys> = {
-  count: PropTypes.number,
-  countUntil: PropTypes.number,
-  children: PropTypes.element,
-  type: PropTypes.oneOf(['count', 'notification']),
-  standalone: PropTypes.bool,
-  pulse: PropTypes.bool,
-  variant: PropTypes.oneOf(['primary', 'success', 'danger', 'inverse']),
-  placement: PositionPropTypes.placement,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  formatOverflowText: PropTypes.func,
-  formatOutput: PropTypes.func,
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = [
   'count',
   'countUntil',
@@ -134,4 +115,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { BadgeProps, BadgeStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -23,7 +23,7 @@
  */
 
 import { type InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
+
 
 import { FormPropTypes } from '@instructure/ui-form-field'
 import {
@@ -67,39 +67,6 @@ type CheckboxGroupProps = CheckboxGroupOwnProps &
     InputHTMLAttributes<CheckboxGroupOwnProps & Element>
   > &
   WithDeterministicIdProps
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.node.isRequired,
-  /**
-   * value to set on initial render
-   */
-  defaultValue: PropTypes.array,
-  /**
-   * the selected values (must be accompanied by an `onChange` prop)
-   */
-  value: controllable(PropTypes.array),
-  /**
-   * when used with the `value` prop, the component will not control its own state
-   */
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  /**
-   * object with shape: `{
-    text: PropTypes.node,
-    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-      }`
-   */
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * children of type `Checkbox`
-   */
-  children: ChildrenPropTypes.oneOf([Checkbox]),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'name',
   'description',
@@ -118,4 +85,4 @@ type CheckboxGroupState = {
   value: (string | number)[]
 }
 export type { CheckboxGroupProps, CheckboxGroupState, CheckboxChild }
-export { propTypes, allowedProps }
+export { allowedProps }

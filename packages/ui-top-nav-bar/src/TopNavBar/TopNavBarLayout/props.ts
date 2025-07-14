@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import {
   Children as ChildrenPropTypes,
   element
@@ -170,12 +168,6 @@ const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
   onDropdownMenuSelect: PropTypes.func,
   renderNavbarStartDangerousHack: PropTypes.node
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  ...commonPropTypes,
-  smallViewportConfig: PropTypes.shape(smallViewportPropTypes).isRequired
-}
-
 const commonAllowedProps: CommonAllowedPropKeys = [
   'renderBrand',
   'renderMenuItems',

@@ -23,11 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TableRowTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -59,12 +56,7 @@ type TableRowProps = TableRowOwnProps &
 
 type TableRowStyle = ComponentStyle<'row'>
 
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  setHoverStateTo: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'setHoverStateTo']
 
 export type { TableRowProps, TableRowStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

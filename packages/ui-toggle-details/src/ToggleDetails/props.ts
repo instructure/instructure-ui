@@ -23,13 +23,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { controllable } from '@instructure/ui-prop-types'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   ToggleDetailsTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -100,21 +98,6 @@ type ToggleDetailsStyle = ComponentStyle<
 type ToggleDetailsStyleProps = {
   animate: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  variant: PropTypes.oneOf(['default', 'filled']),
-  summary: PropTypes.node.isRequired,
-  expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-  defaultExpanded: PropTypes.bool,
-  onToggle: PropTypes.func,
-  icon: PropTypes.func,
-  iconExpanded: PropTypes.func,
-  iconPosition: PropTypes.oneOf(['start', 'end']),
-  fluidWidth: PropTypes.bool,
-  children: PropTypes.node,
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'variant',
   'summary',
@@ -130,4 +113,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ToggleDetailsProps, ToggleDetailsStyleProps, ToggleDetailsStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

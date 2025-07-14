@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import { controllable } from '@instructure/ui-prop-types'
 
 import type {
-  PropValidators,
   TreeBrowserTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -176,37 +175,6 @@ type CollectionData = {
   expanded?: boolean
   type: 'child' | 'collection' | 'item'
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  collections: PropTypes.object.isRequired,
-  items: PropTypes.object.isRequired,
-  rootId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  expanded: controllable(
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ),
-    'onCollectionToggle'
-  ),
-  defaultExpanded: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  selectionType: PropTypes.oneOf(['none', 'single']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  variant: PropTypes.oneOf(['folderTree', 'indent']),
-  collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  getItemProps: PropTypes.func,
-  getCollectionProps: PropTypes.func,
-  showRootCollection: PropTypes.bool,
-  onCollectionClick: PropTypes.func,
-  onCollectionToggle: PropTypes.func,
-  onItemClick: PropTypes.func,
-  treeLabel: PropTypes.string,
-  renderContent: PropTypes.func,
-  sortOrder: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'collections',
   'items',
@@ -249,4 +217,4 @@ export type {
   TreeBrowserBaseProps,
   TreeBrowserCommonProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

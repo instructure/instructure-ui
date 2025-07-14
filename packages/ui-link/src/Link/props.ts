@@ -23,12 +23,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   ToProp,
   AsElementType,
-  PropValidators,
+  
   LinkTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -155,39 +153,6 @@ type LinkProps = LinkOwnProps &
   ToProp
 
 type LinkStyle = ComponentStyle<'link' | 'icon'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string,
-  color: PropTypes.oneOf(['link', 'link-inverse']),
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  role: PropTypes.string,
-  forceButtonRole: PropTypes.bool,
-  interaction: PropTypes.oneOf(['enabled', 'disabled']),
-  margin: PropTypes.string,
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  iconPlacement: PropTypes.oneOf(['start', 'end']),
-  display: PropTypes.oneOf([
-    'auto',
-    'block',
-    'inline-block',
-    'flex',
-    'inline-flex'
-  ]),
-  isWithinText: PropTypes.bool,
-  onBlur: PropTypes.func,
-  onClick: PropTypes.func,
-  onFocus: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  variant: PropTypes.oneOf([
-    'inline',
-    'inline-small',
-    'standalone',
-    'standalone-small'
-  ])
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'href',
@@ -210,4 +175,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { LinkProps, LinkState, LinkStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

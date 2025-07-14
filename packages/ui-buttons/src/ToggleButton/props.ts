@@ -23,9 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { PositionPropTypes } from '@instructure/ui-position'
 
 import type {
   AsElementType,
@@ -126,31 +123,6 @@ type ToggleButtonProps = ToggleButtonOwnProps &
 type ToggleButtonState = {
   isShowingTooltip: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  screenReaderLabel: PropTypes.string.isRequired,
-  renderTooltipContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-    .isRequired,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  status: PropTypes.oneOf(['pressed', 'unpressed']).isRequired,
-  as: PropTypes.elementType,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  elementRef: PropTypes.func,
-  onClick: PropTypes.func,
-  color: PropTypes.oneOf([
-    'primary',
-    'primary-inverse',
-    'secondary',
-    'success',
-    'danger'
-  ]),
-  isShowingTooltip: PropTypes.bool,
-  mountNode: PositionPropTypes.mountNode,
-  placement: PositionPropTypes.placement,
-  constrain: PositionPropTypes.constrain
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'color',
@@ -169,4 +141,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ToggleButtonProps, ToggleButtonState }
-export { propTypes, allowedProps }
+export { allowedProps }

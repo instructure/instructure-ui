@@ -23,13 +23,13 @@
  */
 
 import { ReactNode } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
   AsElementType,
-  PropValidators,
+  
   BaseButtonTheme,
   OtherHTMLAttributes,
   Renderable
@@ -144,35 +144,6 @@ type IconButtonProps = IconButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
   OtherHTMLAttributes<IconButtonOwnProps> &
   ToProp
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  screenReaderLabel: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  color: PropTypes.oneOf([
-    'primary',
-    'primary-inverse',
-    'secondary',
-    'success',
-    'danger',
-    'ai-primary',
-    'ai-secondary'
-  ]),
-  focusColor: PropTypes.oneOf(['info', 'inverse']),
-  shape: PropTypes.oneOf(['rectangle', 'circle']),
-  withBackground: PropTypes.bool,
-  withBorder: PropTypes.bool,
-  margin: PropTypes.string,
-  cursor: PropTypes.string,
-  href: PropTypes.string,
-  onClick: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -194,4 +165,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { IconButtonProps }
-export { propTypes, allowedProps }
+export { allowedProps }

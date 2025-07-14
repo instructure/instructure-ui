@@ -23,10 +23,9 @@
  */
 
 import { ReactNode } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type {
-  PropValidators,
   TruncateTextTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -95,19 +94,6 @@ type TruncateTextState = {
   truncatedElement?: ReactNode
   truncatedText?: string
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  maxLines: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  position: PropTypes.oneOf(['end', 'middle']),
-  truncate: PropTypes.oneOf(['character', 'word']),
-  ellipsis: PropTypes.string,
-  ignore: PropTypes.arrayOf(PropTypes.string),
-  debounce: PropTypes.number,
-  onUpdate: PropTypes.func,
-  shouldTruncateWhenInvisible: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'maxLines',
@@ -127,4 +113,4 @@ export type {
   TruncateTextState,
   TruncateTextStyle
 }
-export { propTypes, allowedProps }
+export { allowedProps }

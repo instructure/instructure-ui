@@ -28,7 +28,6 @@ import {
 } from '../FormPropTypes'
 
 import type {
-  PropValidators,
   FormFieldMessageTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -47,13 +46,7 @@ type FormFieldMessageProps = FormFieldMessageOwnProps &
   WithStyleProps<FormFieldMessageTheme, FormFieldMessageStyle>
 
 type FormFieldMessageStyle = ComponentStyle<'formFieldMessage' | 'errorIcon'>
-
-const propTypes: PropValidators<PropKeys> = {
-  variant: formMessageTypePropType,
-  children: formMessageChildPropType
-}
-
 const allowedProps: AllowedPropKeys = ['variant', 'children']
 
 export type { FormFieldMessageProps, FormFieldMessageStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

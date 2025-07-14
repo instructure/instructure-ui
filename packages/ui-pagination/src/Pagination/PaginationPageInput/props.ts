@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
@@ -30,7 +30,6 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 import React from 'react'
-
 type PaginationPageInputOwnProps = {
   /**
    * The number of pages in total
@@ -83,17 +82,6 @@ type PaginationPageInputState = {
   number: number
   value: string
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  numberOfPages: PropTypes.number.isRequired,
-  currentPageIndex: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-  screenReaderLabel: PropTypes.func.isRequired,
-  label: PropTypes.func,
-  disabled: PropTypes.bool,
-  inputRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'numberOfPages',
   'currentPageIndex',
@@ -109,4 +97,4 @@ export type {
   PaginationPageInputStyle,
   PaginationPageInputState
 }
-export { propTypes, allowedProps }
+export { allowedProps }

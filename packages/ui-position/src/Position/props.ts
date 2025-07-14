@@ -23,9 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
 
 import { PositionPropTypes } from '../PositionPropTypes'
 
@@ -142,26 +139,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type PositionProps = PositionOwnProps &
   WithStyleProps<PositionTheme, PositionStyle> &
   WithDeterministicIdProps
-
-const propTypes: PropValidators<PropKeys> = {
-  renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  target: PropTypes.oneOfType([element, PropTypes.func]),
-  placement: PositionPropTypes.placement,
-  mountNode: PositionPropTypes.mountNode,
-  insertAt: PropTypes.oneOf(['bottom', 'top']),
-  constrain: PositionPropTypes.constrain,
-  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  id: PropTypes.string,
-  shouldTrackPosition: PropTypes.bool,
-  shouldPositionOverTarget: PropTypes.bool,
-  onPositionChanged: PropTypes.func,
-  onPositioned: PropTypes.func,
-  children: PropTypes.node,
-  containerDisplay: PropTypes.oneOf(['inline-block', 'block']),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderTarget',
   'target',
@@ -182,4 +159,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PositionProps, PositionState, PositionStyle, PositionObject }
-export { propTypes, allowedProps }
+export { allowedProps }

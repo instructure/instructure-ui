@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { PropValidators } from '@instructure/shared-types'
 
 type TransitionType =
@@ -179,20 +177,6 @@ const transitionCommonPropTypes: PropValidators<CommonPropKeys> = {
   children: PropTypes.node,
   elementRef: PropTypes.func
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  ...transitionCommonPropTypes,
-
-  enterDelay: PropTypes.number,
-  exitDelay: PropTypes.number,
-  transitionClassName: PropTypes.string.isRequired,
-  exitedClassName: PropTypes.string.isRequired,
-  exitingClassName: PropTypes.string.isRequired,
-  enteredClassName: PropTypes.string.isRequired,
-  enteringClassName: PropTypes.string.isRequired,
-  className: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'in',
   'unmountOnExit',

@@ -23,7 +23,7 @@
  */
 
 import { SyntheticEvent } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type {
   Spacing,
@@ -118,42 +118,6 @@ type AvatarProps = AvatarOwnProps &
 type AvatarStyle = ComponentStyle<
   'avatar' | 'initials' | 'loadImage' | 'iconSVG'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  src: PropTypes.string,
-  alt: PropTypes.string,
-  size: PropTypes.oneOf([
-    'auto',
-    'xx-small',
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large'
-  ]),
-  color: PropTypes.oneOf([
-    'default',
-    'shamrock',
-    'barney',
-    'crimson',
-    'fire',
-    'licorice',
-    'ash',
-    'ai'
-  ]),
-  hasInverseColor: PropTypes.bool,
-  showBorder: PropTypes.oneOf(['auto', 'always', 'never']),
-  shape: PropTypes.oneOf(['circle', 'rectangle']),
-  margin: PropTypes.string,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  onImageLoaded: PropTypes.func,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-}
-
 const allowedProps: AllowedPropKeys = [
   'name',
   'src',
@@ -172,4 +136,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { AvatarProps, AvatarStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

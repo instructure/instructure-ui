@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { ListItem } from './ListItem'
@@ -35,7 +33,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   ListTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -89,28 +86,6 @@ type ListProps = ListOwnProps &
   OtherHTMLAttributes<ListOwnProps>
 
 type ListStyle = ComponentStyle<'list'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([ListItem]),
-  as: PropTypes.oneOf(['ul', 'ol']),
-  delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
-  isUnstyled: PropTypes.bool,
-  margin: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  itemSpacing: PropTypes.oneOf([
-    'none',
-    'xxx-small',
-    'xx-small',
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large'
-  ]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'as',
@@ -123,4 +98,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ListProps, ListStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

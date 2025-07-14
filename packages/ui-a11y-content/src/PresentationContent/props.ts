@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   AsElementType,
   OtherHTMLAttributes,
@@ -51,14 +49,7 @@ type AllowedPropKeys = Readonly<PropKeys[]>
 
 type PresentationContentProps = PresentationContentOwnProps &
   OtherHTMLAttributes<PresentationContentOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  children: PropTypes.node,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = ['as', 'children', 'elementRef']
 
 export type { PresentationContentProps }
-export { propTypes, allowedProps }
+export { allowedProps }

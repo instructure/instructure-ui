@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   Renderable
 } from '@instructure/shared-types'
 
@@ -74,17 +72,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectOptionProps = SelectOptionOwnProps &
   OtherHTMLAttributes<SelectOptionOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  isHighlighted: PropTypes.bool,
-  isSelected: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'isHighlighted',
@@ -96,4 +83,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SelectOptionProps, RenderSelectOptionLabel }
-export { propTypes, allowedProps }
+export { allowedProps }

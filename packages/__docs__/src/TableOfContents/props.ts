@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import { element } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 
 import type { DocDataType } from '../Document/props'
@@ -44,13 +43,7 @@ type TOCHeadingData = { id: string; innerText: string; level: string }
 type TableOfContentsState = {
   TOCData: TOCHeadingData[]
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  doc: DocPropType.isRequired,
-  pageElement: element.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['doc', 'pageElement']
 
 export type { TableOfContentsProps, TableOfContentsState, TOCHeadingData }
-export { propTypes, allowedProps }
+export { allowedProps }

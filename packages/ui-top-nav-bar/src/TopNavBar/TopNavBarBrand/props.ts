@@ -23,13 +23,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarBrandTheme,
   OtherHTMLAttributes,
-  PropValidators,
+  
   AsElementType
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view'
@@ -95,17 +93,6 @@ type TopNavBarBrandStyle = ComponentStyle<
 type TopNavBarBrandStyleProps = {
   layout: TopNavBarContextType['layout']
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  screenReaderLabel: PropTypes.string.isRequired,
-  renderIcon: PropTypes.node,
-  iconBackground: PropTypes.string,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'screenReaderLabel',
   'renderIcon',
@@ -123,4 +110,4 @@ export type {
   TopNavBarBrandStyle,
   TopNavBarBrandStyleProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

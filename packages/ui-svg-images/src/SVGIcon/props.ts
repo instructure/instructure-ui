@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+
 
 import { InlineSVG } from '../InlineSVG'
 
@@ -29,7 +29,7 @@ import type { SVGAttributes } from 'react'
 import type {
   InlineSVGTheme,
   OtherHTMLAttributes,
-  PropValidators,
+  
   SVGIconTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -51,15 +51,6 @@ type SVGIconProps = SVGIconOwnProps &
   OtherHTMLAttributes<SVGIconOwnProps, SVGAttributes<SVGIconOwnProps>>
 
 type SVGIconStyle = ComponentStyle<'svgIcon'>
-
-const propTypes: PropValidators<PropKeys> = {
-  // eslint-disable-next-line react/forbid-foreign-prop-types
-  ...InlineSVG.propTypes,
-  rotate: PropTypes.oneOf(['0', '90', '180', '270']),
-  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
-  bidirectional: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'src',
@@ -77,4 +68,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SVGIconProps, SVGIconStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

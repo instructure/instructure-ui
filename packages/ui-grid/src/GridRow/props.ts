@@ -23,14 +23,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { GridCol } from '../GridCol'
 
 import type {
-  PropValidators,
   GridTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -60,24 +57,6 @@ type GridRowProps = GridRowOwnProps &
   OtherHTMLAttributes<GridRowOwnProps>
 
 type GridRowStyle = ComponentStyle<'gridRow'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
-  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  hAlign: PropTypes.oneOf([
-    'start',
-    'center',
-    'end',
-    'space-around',
-    'space-between'
-  ]),
-  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch']),
-  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-  visualDebug: PropTypes.bool,
-  isLastRow: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'rowSpacing',
@@ -90,4 +69,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { GridRowProps, GridRowStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

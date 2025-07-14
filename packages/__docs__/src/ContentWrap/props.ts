@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 import type { PropValidators } from '@instructure/shared-types'
 import type { Spacing } from '@instructure/emotion'
 
@@ -37,13 +37,6 @@ type PropKeys = keyof ContentWrapOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ContentWrapProps = ContentWrapOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  maxWidth: PropTypes.string,
-  padding: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'maxWidth', 'padding']
 export type { ContentWrapProps, AllowedPropKeys }
-export { propTypes, allowedProps }
+export { allowedProps }

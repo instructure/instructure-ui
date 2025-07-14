@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
-  PropValidators,
   GridTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -82,45 +81,6 @@ type GridColProps = GridColOwnProps &
   OtherHTMLAttributes<GridColOwnProps>
 
 type GridColStyle = ComponentStyle<'gridCol'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  textAlign: PropTypes.oneOf(['start', 'end', 'center', 'inherit']),
-  hAlign: PropTypes.oneOf([
-    'start',
-    'center',
-    'end',
-    'space-around',
-    'space-between'
-  ]),
-  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch']),
-  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-  visualDebug: PropTypes.bool,
-  width: PropTypes.oneOfType([
-    COL_WIDTHS,
-    PropTypes.shape({
-      small: COL_WIDTHS,
-      medium: COL_WIDTHS,
-      large: COL_WIDTHS,
-      xLarge: COL_WIDTHS
-    })
-  ]),
-  offset: PropTypes.oneOfType([
-    COL_WIDTHS,
-    PropTypes.shape({
-      small: COL_WIDTHS,
-      medium: COL_WIDTHS,
-      large: COL_WIDTHS,
-      xLarge: COL_WIDTHS
-    })
-  ]),
-  isLastRow: PropTypes.bool,
-  isLastCol: PropTypes.bool,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'colSpacing',
@@ -138,4 +98,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { GridColProps, GridColStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

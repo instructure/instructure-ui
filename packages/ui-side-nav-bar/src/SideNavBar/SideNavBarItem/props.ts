@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+
 import React from 'react'
 import type {
   AsElementType,
-  PropValidators,
+  
   SideNavBarItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -75,18 +75,6 @@ type SideNavBarItemProps = SideNavBarItemOwnProps &
   OtherHTMLAttributes<SideNavBarItemOwnProps>
 
 type SideNavBarItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>
-
-const propTypes: PropValidators<PropKeys> = {
-  elementRef: PropTypes.func,
-  icon: PropTypes.node.isRequired,
-  label: PropTypes.node.isRequired,
-  as: PropTypes.elementType,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  selected: PropTypes.bool,
-  minimized: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'elementRef',
   'icon',
@@ -99,4 +87,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SideNavBarItemProps, SideNavBarItemStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

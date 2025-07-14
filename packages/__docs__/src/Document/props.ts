@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators, ThemeVariables } from '@instructure/shared-types'
 import { DocData } from '../App/props'
@@ -56,15 +56,6 @@ const DocPropType = PropTypes.shape({
   packageName: PropTypes.string,
   children: PropTypes.array
 })
-
-const propTypes: PropValidators<PropKeys> = {
-  doc: DocPropType.isRequired,
-  description: PropTypes.string,
-  themeVariables: PropTypes.object,
-  repository: PropTypes.string,
-  layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
-}
-
 type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 
 type DocumentState = {

@@ -23,7 +23,7 @@
  */
 
 import { ReactNode } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -165,22 +165,6 @@ type PropKeys = keyof SelectableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectableProps = SelectableOwnProps & WithDeterministicIdProps
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string,
-  highlightedOptionId: PropTypes.string,
-  selectedOptionId: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  isShowingOptions: PropTypes.bool,
-  onRequestShowOptions: PropTypes.func,
-  onRequestHideOptions: PropTypes.func,
-  onRequestHighlightOption: PropTypes.func,
-  onRequestHighlightFirstOption: PropTypes.func,
-  onRequestHighlightLastOption: PropTypes.func,
-  onRequestSelectOption: PropTypes.func,
-  children: PropTypes.func,
-  render: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'highlightedOptionId',
@@ -197,4 +181,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SelectableProps, SelectableRender }
-export { propTypes, allowedProps }
+export { allowedProps }

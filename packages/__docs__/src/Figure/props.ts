@@ -24,7 +24,7 @@
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 import { Children } from '@instructure/ui-prop-types'
-import PropTypes from 'prop-types'
+
 import {
   Shadows,
   Typography,
@@ -73,16 +73,6 @@ type FigureTheme = {
 type FigureStyle = ComponentStyle<
   'figure' | 'caption' | 'content' | 'iconContainer'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  title: PropTypes.node,
-  caption: PropTypes.node,
-  recommendation: PropTypes.oneOf(['yes', 'no', 'a11y', 'none']),
-  iconTitle: PropTypes.string,
-  float: PropTypes.oneOf(['start', 'end', 'none']),
-  children: Children.oneOf(['FigureItem'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'caption',
   'children',
@@ -93,4 +83,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { FigureProps, FigureStyle, FigureTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

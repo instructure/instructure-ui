@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
@@ -111,22 +109,6 @@ type CondensedButtonProps = CondensedButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
   OtherHTMLAttributes<CondensedButtonOwnProps> &
   ToProp
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  color: PropTypes.oneOf(['primary', 'primary-inverse', 'secondary']),
-  margin: PropTypes.string,
-  cursor: PropTypes.string,
-  href: PropTypes.string,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  onClick: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -143,4 +125,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { CondensedButtonProps }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
@@ -70,14 +68,6 @@ type DrawerLayoutState = {
   trayWidth: number
   contentWidth: number
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOfEach([DrawerContent, DrawerTray]),
-  minWidth: PropTypes.string,
-  onOverlayTrayChange: PropTypes.func,
-  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'minWidth',
@@ -86,4 +76,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { DrawerLayoutProps, DrawerLayoutState, DrawerLayoutStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

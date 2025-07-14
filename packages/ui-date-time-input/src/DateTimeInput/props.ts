@@ -300,56 +300,6 @@ const hourMinuteValidator: Validator<string> = function (
   }
   return null
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  description: PropTypes.node.isRequired,
-  dateRenderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
-    .isRequired,
-  prevMonthLabel: PropTypes.string.isRequired,
-  nextMonthLabel: PropTypes.string.isRequired,
-  datePlaceholder: PropTypes.string,
-  timePlaceholder: PropTypes.string,
-  dateFormat: PropTypes.string,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  timeRenderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
-    .isRequired,
-  timeStep: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
-  timeFormat: PropTypes.string,
-  locale: PropTypes.string,
-  timezone: PropTypes.string,
-  invalidDateTimeMessage: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired,
-  showMessages: PropTypes.bool,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  messageFormat: PropTypes.string,
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
-  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  value: controllable(I18nPropTypes.iso8601, 'onChange'),
-  defaultValue: I18nPropTypes.iso8601,
-  renderWeekdayLabels: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.node])
-  ),
-  isRequired: PropTypes.bool,
-  onChange: PropTypes.func,
-  dateInputRef: PropTypes.func,
-  timeInputRef: PropTypes.func,
-  onBlur: PropTypes.func,
-  disabledDates: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.arrayOf(PropTypes.string)
-  ]),
-  disabledDateTimeMessage: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func
-  ]),
-  allowNonStepInput: PropTypes.bool,
-  reset: PropTypes.func,
-  initialTimeForNewDate: hourMinuteValidator
-}
-
 const allowedProps: AllowedPropKeys = [
   'description',
   'dateRenderLabel',
@@ -386,4 +336,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }
-export { propTypes, allowedProps }
+export { allowedProps }

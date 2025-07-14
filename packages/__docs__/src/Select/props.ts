@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 import React from 'react'
 import { Renderable } from '@instructure/shared-types'
 
@@ -41,17 +41,6 @@ type PropKeys = keyof SelectOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectProps = SelectOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  id: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  children: PropTypes.node.isRequired
-}
-
 type SelectState = {
   isShowing: boolean
   inputValue: string
@@ -69,4 +58,4 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 export type { SelectProps, SelectState }
-export { propTypes, allowedProps }
+export { allowedProps }

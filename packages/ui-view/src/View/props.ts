@@ -23,17 +23,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
-import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-import type { Cursor } from '@instructure/ui-prop-types'
-import { ThemeablePropTypes } from '@instructure/emotion'
+import type { Cursor } from '@instructure/shared-types'
 
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators,
   ViewTheme
 } from '@instructure/shared-types'
 import type {
@@ -232,69 +226,6 @@ type ViewStyle = ComponentStyle<'view'> & {
   inlineStyles: StyleObject
 }
 
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  display: PropTypes.oneOf([
-    'auto',
-    'inline',
-    'block',
-    'inline-block',
-    'flex',
-    'inline-flex'
-  ]),
-  overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  margin: PropTypes.string,
-  padding: PropTypes.string,
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  children: PropTypes.node,
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  borderWidth: ThemeablePropTypes.borderWidth,
-  borderRadius: PropTypes.string,
-  borderColor: PropTypes.string,
-  background: PropTypes.oneOf([
-    'transparent',
-    'primary',
-    'secondary',
-    'primary-inverse',
-    'brand',
-    'info',
-    'alert',
-    'success',
-    'danger',
-    'warning'
-  ]),
-  shadow: ThemeablePropTypes.shadow,
-  stacking: ThemeablePropTypes.stacking,
-  cursor: cursorPropTypes,
-  position: PropTypes.oneOf([
-    'static',
-    'absolute',
-    'relative',
-    'sticky',
-    'fixed'
-  ]),
-  insetInlineStart: PropTypes.string,
-  insetInlineEnd: PropTypes.string,
-  insetBlockStart: PropTypes.string,
-  insetBlockEnd: PropTypes.string,
-  withFocusOutline: PropTypes.bool,
-  focusPosition: PropTypes.oneOf(['offset', 'inset']),
-  focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
-  shouldAnimateFocus: PropTypes.bool,
-  withVisualDebug: PropTypes.bool,
-  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION)),
-  overscrollBehavior: PropTypes.oneOf(['auto', 'contain', 'none']),
-  focusRingBorderRadius: PropTypes.string,
-  focusWithin: PropTypes.bool
-}
-
 // This variable will be attached as static property on the `View` component
 // so we don't rely on the `PropTypes` validators for our internal logic.
 // This means on prod builds the consuming applications can safely delete propTypes.
@@ -337,5 +268,5 @@ const allowedProps: AllowedPropKeys = [
   'focusWithin'
 ]
 
-export { propTypes, allowedProps }
+export { allowedProps }
 export type { ViewProps, ViewOwnProps, ViewStyle, BorderColor }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 import type { PropValidators } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ColorBandOwnProps = {
@@ -32,9 +32,7 @@ type PropKeys = keyof ColorBandOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ColorBandProps = ColorBandOwnProps &
   WithStyleProps<ColorBandTheme, ColorBandStyle>
-const propTypes: PropValidators<PropKeys> = {
-  height: PropTypes.string
-}
+
 const allowedProps: AllowedPropKeys = ['height']
 
 type ColorBandStyle = ComponentStyle<'band1' | 'band2' | 'band3'>
@@ -44,4 +42,4 @@ type ColorBandTheme = {
   colorDanger: string
 }
 export type { ColorBandProps, ColorBandStyle, ColorBandTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

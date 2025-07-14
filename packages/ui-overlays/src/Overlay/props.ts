@@ -23,9 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
 import { transitionTypePropType } from '@instructure/ui-motion'
 
 import type { PortalNode, PortalProps } from '@instructure/ui-portal'
@@ -35,7 +32,7 @@ import type { DialogProps } from '@instructure/ui-dialog'
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions,
-  PropValidators,
+  
   UIElement
 } from '@instructure/shared-types'
 
@@ -196,36 +193,6 @@ type OverlayState = {
   open: boolean
   transitioning: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  open: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  insertAt: PropTypes.oneOf(['bottom', 'top']),
-  label: PropTypes.string.isRequired,
-  onDismiss: PropTypes.func,
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  shouldContainFocus: PropTypes.bool,
-  shouldReturnFocus: PropTypes.bool,
-  shouldCloseOnDocumentClick: PropTypes.bool,
-  shouldCloseOnEscape: PropTypes.bool,
-  transition: transitionTypePropType,
-  in: PropTypes.bool,
-  unmountOnExit: PropTypes.bool,
-  transitionOnMount: PropTypes.bool,
-  transitionEnter: PropTypes.bool,
-  transitionExit: PropTypes.bool,
-  onEnter: PropTypes.func,
-  onEntering: PropTypes.func,
-  onEntered: PropTypes.func,
-  onExit: PropTypes.func,
-  onExiting: PropTypes.func,
-  onExited: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'open',
@@ -255,4 +222,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { OverlayProps, OverlayState }
-export { propTypes, allowedProps }
+export { allowedProps }

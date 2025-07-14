@@ -23,7 +23,7 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
-import PropTypes from 'prop-types'
+
 
 type OptionType = {
   id: string
@@ -43,11 +43,6 @@ type PropKeys = keyof SearchOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SearchProps = SearchOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  options: PropTypes.object
-}
-
 type SearchState = {
   inputValue: string
   isShowingOptions: boolean
@@ -61,4 +56,4 @@ type SearchState = {
 
 const allowedProps: AllowedPropKeys = ['options']
 export type { SearchProps, SearchState, OptionType }
-export { propTypes, allowedProps }
+export { allowedProps }

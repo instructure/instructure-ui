@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
@@ -102,25 +102,6 @@ type ColorMixerProps = ColorMixerOwnProps &
 type ColorMixerStyle = ComponentStyle<
   'colorMixer' | 'sliderAndPaletteContainer'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  disabled: PropTypes.bool,
-  elementRef: PropTypes.func,
-  withAlpha: PropTypes.bool,
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
-  rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
-  rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
-  rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
-  colorSliderNavigationExplanationScreenReaderLabel:
-    PropTypes.string.isRequired,
-  alphaSliderNavigationExplanationScreenReaderLabel:
-    PropTypes.string.isRequired,
-  colorPaletteNavigationExplanationScreenReaderLabel:
-    PropTypes.string.isRequired
-}
-
 const allowedProps: AllowedPropKeys = [
   'disabled',
   'elementRef',
@@ -137,4 +118,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ColorMixerProps, ColorMixerStyle, ColorMixerState }
-export { propTypes, allowedProps }
+export { allowedProps }

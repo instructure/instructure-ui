@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
@@ -32,7 +30,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   RadioInputGroupTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -113,25 +111,6 @@ type RadioInputGroupState = {
 }
 
 type RadioInputGroupStyle = ComponentStyle<'invalidAsterisk'>
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.node.isRequired,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  value: controllable(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(['simple', 'toggle']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
-  isRequired: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'name',
   'description',
@@ -149,4 +128,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { RadioInputGroupProps, RadioInputGroupState, RadioInputGroupStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

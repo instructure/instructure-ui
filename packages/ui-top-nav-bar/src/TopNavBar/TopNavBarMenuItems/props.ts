@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -32,7 +30,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarMenuItemsTheme,
   OtherHTMLAttributes,
-  PropValidators,
+  
   ChildrenOfType
 } from '@instructure/shared-types'
 
@@ -103,18 +101,6 @@ type TopNavBarMenuItemsState = {
   key: number
   visibleItemsCount?: number
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([TopNavBarItem]),
-  currentPageId: PropTypes.string,
-  renderHiddenItemsMenuTriggerLabel: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]).isRequired,
-  listLabel: PropTypes.string,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'currentPageId',
@@ -130,4 +116,4 @@ export type {
   TopNavBarMenuItemsStyle,
   TopNavBarMenuItemsState
 }
-export { propTypes, allowedProps }
+export { allowedProps }

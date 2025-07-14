@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+
 
 import type { PropValidators, RatingIconTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -45,14 +45,6 @@ type RatingIconProps = RatingIconOwnProps &
   WithStyleProps<RatingIconTheme, RatingIconStyle>
 
 type RatingIconStyle = ComponentStyle<'ratingIcon' | 'icon'>
-
-const propTypes: PropValidators<PropKeys> = {
-  animationDelay: PropTypes.number,
-  animateFill: PropTypes.bool,
-  filled: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'animationDelay',
   'animateFill',
@@ -61,4 +53,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { RatingIconProps, RatingIconStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

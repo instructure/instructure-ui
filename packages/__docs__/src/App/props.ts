@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
   MainIconsData,
@@ -115,4 +115,4 @@ type DocData = ProcessedFile & {
 }
 
 export type { AppProps, AppState, DocData, LayoutSize, AppStyle, AppTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

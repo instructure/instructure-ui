@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type {
   AsElementType,
-  PropValidators,
+  
   FlexTheme,
   OtherHTMLAttributes,
   Renderable
@@ -134,36 +134,6 @@ type FlexProps = FlexOwnProps &
   OtherHTMLAttributes<FlexOwnProps>
 
 type FlexStyle = ComponentStyle<'flex'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: PropTypes.string,
-  padding: PropTypes.string,
-  gap: PropTypes.string,
-  display: PropTypes.oneOf(['flex', 'inline-flex']),
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  direction: PropTypes.oneOf([
-    'row',
-    'column',
-    'row-reverse',
-    'column-reverse'
-  ]),
-  alignItems: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
-  justifyItems: PropTypes.oneOf([
-    'center',
-    'start',
-    'end',
-    'space-around',
-    'space-between'
-  ]),
-  wrap: PropTypes.oneOf(['wrap', 'no-wrap', 'wrap-reverse']),
-  withVisualDebug: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'as',
@@ -182,4 +152,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { FlexProps, FlexStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

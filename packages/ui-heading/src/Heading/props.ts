@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 
-import { childrenOrValue } from '@instructure/ui-prop-types'
 
 import type {
   AsElementType,
-  PropValidators,
   HeadingTheme,
   OtherHTMLAttributes,
   Renderable
@@ -114,38 +111,6 @@ type HeadingProps = HeadingOwnProps &
 type HeadingStyle = ComponentStyle<
   'heading' | 'igniteAI' | 'igniteAIStacked' | 'withIcon'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  aiVariant: PropTypes.oneOf(['stacked', 'horizontal', 'iconOnly']),
-  border: PropTypes.oneOf(['none', 'top', 'bottom']),
-  children: childrenOrValue,
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'primary-inverse',
-    'secondary-inverse',
-    'inherit',
-    'ai'
-  ]),
-  level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
-  as: PropTypes.elementType,
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  variant: PropTypes.oneOf([
-    'titlePageDesktop',
-    'titlePageMobile',
-    'titleSection',
-    'titleCardSection',
-    'titleModule',
-    'titleCardLarge',
-    'titleCardRegular',
-    'titleCardMini',
-    'label',
-    'labelInline'
-  ])
-}
-
 const allowedProps: AllowedPropKeys = [
   'aiVariant',
   'border',
@@ -159,4 +124,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { HeadingProps, HeadingStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

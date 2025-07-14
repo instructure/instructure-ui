@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type {
   AsElementType,
-  PropValidators,
+  
   OptionsItemTheme,
   OtherHTMLAttributes,
   Renderable
@@ -118,31 +118,6 @@ type OptionsItemStyle = ComponentStyle<
   | 'contentAfter'
   | 'description'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  variant: PropTypes.oneOf([
-    'default',
-    'highlighted',
-    'selected',
-    'disabled',
-    'highlighted-disabled',
-    'selected-highlighted'
-  ]),
-  role: PropTypes.string,
-  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  beforeLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  afterLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  descriptionRole: PropTypes.string,
-  href: PropTypes.string,
-  voiceoverRoleBugWorkaround: PropTypes.bool,
-  elementRef: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  isSelected: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'variant',
@@ -161,4 +136,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { OptionsItemProps, OptionsItemStyle, OptionsItemRenderProps }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import { FormPropTypes } from '../FormPropTypes'
 
 import type {
   AsElementType,
-  PropValidators,
+  
   FormFieldGroupTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -85,22 +85,6 @@ type FormFieldGroupProps = FormFieldGroupOwnProps &
   >
 
 type FormFieldGroupStyle = ComponentStyle<'formFieldGroup'>
-
-const propTypes: PropValidators<PropKeys> = {
-  description: PropTypes.node.isRequired,
-  as: PropTypes.elementType,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  messagesId: PropTypes.string,
-  disabled: PropTypes.bool,
-  children: PropTypes.node,
-  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
-  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'description',
   'as',
@@ -121,4 +105,4 @@ export type {
   FormFieldGroupStyleProps,
   FormFieldGroupStyle
 }
-export { propTypes, allowedProps }
+export { allowedProps }

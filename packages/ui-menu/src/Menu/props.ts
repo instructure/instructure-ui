@@ -23,16 +23,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { PositionPropTypes } from '@instructure/ui-position'
 import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
 
 import type {
-  PropValidators,
   MenuTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -189,43 +185,6 @@ type MenuProps = MenuOwnProps &
   } & WithDeterministicIdProps
 
 type MenuStyle = ComponentStyle<'menu'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([
-    'MenuItem',
-    'MenuItemGroup',
-    'MenuItemSeparator',
-    'Menu'
-  ]),
-  label: PropTypes.string,
-  disabled: PropTypes.bool,
-  trigger: PropTypes.node,
-  placement: PositionPropTypes.placement,
-  defaultShow: PropTypes.bool,
-  show: controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
-  onToggle: PropTypes.func,
-  onSelect: PropTypes.func,
-  onDismiss: PropTypes.func,
-  onFocus: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  menuRef: PropTypes.func,
-  popoverRef: PropTypes.func,
-  mountNode: PositionPropTypes.mountNode,
-  constrain: PositionPropTypes.constrain,
-  shouldHideOnSelect: PropTypes.bool,
-  shouldFocusTriggerOnClose: PropTypes.bool,
-  positionContainerDisplay: PropTypes.oneOf(['inline-block', 'block']),
-  type: PropTypes.oneOf(['flyout']),
-  id: PropTypes.string,
-  withArrow: PropTypes.bool,
-  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxHeight: PropTypes.string,
-  renderLabelInfo: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'label',
@@ -258,4 +217,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { MenuProps, MenuStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

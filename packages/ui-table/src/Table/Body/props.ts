@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   TableBodyTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -50,12 +48,7 @@ type TableBodyProps = TableBodyOwnProps &
   OtherHTMLAttributes<TableBodyOwnProps>
 
 type TableBodyStyle = ComponentStyle<'body'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = ['children']
 
 export type { TableBodyProps, TableBodyStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

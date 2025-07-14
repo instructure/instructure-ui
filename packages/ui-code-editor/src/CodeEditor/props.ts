@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type {
-  PropValidators,
   CodeEditorTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -91,30 +90,6 @@ type CodeEditorProps = CodeEditorOwnProps &
   WithDeterministicIdProps
 
 type CodeEditorStyle = ComponentStyle<'codeEditor' | 'globalStyles'>
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  language: PropTypes.oneOf([
-    'sh',
-    'js',
-    'json',
-    'javascript',
-    'jsx',
-    'shell',
-    'css',
-    'html',
-    'markdown',
-    'yaml',
-    'yml',
-    'bash'
-  ]),
-  readOnly: PropTypes.bool,
-  onChange: PropTypes.func,
-  options: PropTypes.object,
-  attachment: PropTypes.oneOf(['bottom', 'top']),
-  value: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'language',
@@ -126,4 +101,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { CodeEditorProps, CodeEditorStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

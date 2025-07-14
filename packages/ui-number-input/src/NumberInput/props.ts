@@ -24,12 +24,11 @@
 
 import React from 'react'
 import type { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
+
 
 import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type {
-  PropValidators,
   NumberInputTheme,
   OtherHTMLAttributes,
   PickPropsWithExceptions
@@ -220,36 +219,6 @@ type NumberInputStyle = ComponentStyle<
   | 'input'
   | 'requiredInvalid'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  id: PropTypes.string,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  placeholder: PropTypes.string,
-  isRequired: PropTypes.bool,
-  showArrows: PropTypes.bool,
-  size: PropTypes.oneOf(['medium', 'large']),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.string,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  inputRef: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onDecrement: PropTypes.func,
-  onIncrement: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
-  textAlign: PropTypes.oneOf(['start', 'center']),
-  allowStringValue: PropTypes.bool,
-  renderIcons: PropTypes.shape({
-    increase: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    decrease: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired
-  }),
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'id',
@@ -282,4 +251,4 @@ export type {
   NumberInputStyleProps,
   NumberInputStyle
 }
-export { propTypes, allowedProps }
+export { allowedProps }

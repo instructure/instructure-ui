@@ -23,7 +23,7 @@
  */
 
 import { PropsWithChildren } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type {
   Spacing,
@@ -31,7 +31,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   ListItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -82,27 +81,6 @@ type ListItemProps = ListItemOwnProps &
   OtherHTMLAttributes<ListItemOwnProps>
 
 type ListItemStyle = ComponentStyle<'listItem'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  margin: PropTypes.string,
-  padding: PropTypes.string,
-  spacing: PropTypes.oneOf([
-    'none',
-    'xxx-small',
-    'xx-small',
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large'
-  ]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'delimiter',
@@ -114,4 +92,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ListItemProps, ListItemStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

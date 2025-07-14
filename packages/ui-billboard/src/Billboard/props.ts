@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type {
   Spacing,
@@ -111,23 +111,6 @@ type BillboardProps = BillboardOwnProps &
 type BillboardStyle = ComponentStyle<
   'billboard' | 'content' | 'hero' | 'heading' | 'message'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  hero: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  heading: PropTypes.string,
-  headingAs: PropTypes.oneOf(['h1', 'h2', 'h3', 'span']),
-  headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4']),
-  message: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  onClick: PropTypes.func,
-  href: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'hero',
   'size',
@@ -145,4 +128,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { BillboardProps, BillboardStyle, HeroIconSize }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   OptionsItemTheme,
   AsElementType
 } from '@instructure/shared-types'
@@ -187,30 +185,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type DrilldownOptionProps = DrilldownOptionOwnProps &
   WithStyleProps<OptionsItemTheme, null> &
   OtherHTMLAttributes<DrilldownOptionOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  subPageId: PropTypes.string,
-  disabled: PropTypes.bool,
-  selected: PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  href: PropTypes.string,
-  as: PropTypes.elementType,
-  role: PropTypes.string,
-  renderLabelInfo: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  beforeLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  afterLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  descriptionRole: PropTypes.string,
-  onOptionClick: PropTypes.func,
-  defaultSelected: PropTypes.bool,
-  elementRef: PropTypes.func,
-  shouldCloseOnClick: PropTypes.oneOf(['auto', 'always', 'never'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'children',
@@ -235,4 +209,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { DrilldownOptionProps, DrilldownOptionValue }
-export { propTypes, allowedProps }
+export { allowedProps }

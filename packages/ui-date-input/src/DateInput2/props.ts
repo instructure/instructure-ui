@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 import type { SyntheticEvent, InputHTMLAttributes } from 'react'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -195,33 +195,5 @@ type DateInput2Props = DateInput2OwnProps &
     DateInput2OwnProps,
     InputHTMLAttributes<DateInput2OwnProps & Element>
   >
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  screenReaderLabels: PropTypes.object.isRequired,
-  value: controllable(PropTypes.string),
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  width: PropTypes.string,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  invalidDateErrorMessage: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  locale: PropTypes.string,
-  timezone: PropTypes.string,
-  withYearPicker: PropTypes.object,
-  dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  onRequestValidateDate: PropTypes.func,
-  renderCalendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  margin: PropTypes.string,
-  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-  inputRef: PropTypes.func
-}
-
 export type { DateInput2Props }
 export { propTypes }

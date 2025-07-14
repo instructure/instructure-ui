@@ -23,10 +23,9 @@
  */
 
 import { AriaRole } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type {
-  PropValidators,
   DrawerLayoutContentTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -58,15 +57,6 @@ type DrawerLayoutContentProps = DrawerLayoutContentOwnProps &
   OtherHTMLAttributes<DrawerLayoutContentOwnProps>
 
 type DrawerLayoutContentStyle = ComponentStyle<'drawerContent'>
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node,
-  contentRef: PropTypes.func,
-  onSizeChange: PropTypes.func,
-  role: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'children',
@@ -81,4 +71,4 @@ export type {
   DrawerLayoutContentStyle,
   DrawerContentSize
 }
-export { propTypes, allowedProps }
+export { allowedProps }

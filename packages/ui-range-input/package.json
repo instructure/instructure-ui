@@ -44,7 +44,7 @@
     "@instructure/ui-babel-preset": "10.23.0",
     "@instructure/ui-themes": "10.23.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {

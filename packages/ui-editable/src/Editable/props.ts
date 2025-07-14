@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { PropValidators } from '@instructure/shared-types'
 
 type GetContainerProps = (props?: Record<string, any>) => {
@@ -112,18 +110,6 @@ type PropKeys = keyof EditableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type EditableProps = EditableOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  mode: PropTypes.oneOf(['view', 'edit']).isRequired,
-  onChangeMode: PropTypes.func.isRequired,
-  children: PropTypes.func,
-  render: PropTypes.func,
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  readOnly: PropTypes.bool,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'mode',
   'onChangeMode',
@@ -148,4 +134,4 @@ export type {
   GetEditorProps,
   GetViewerProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

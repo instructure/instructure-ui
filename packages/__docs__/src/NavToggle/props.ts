@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { PropValidators } from '@instructure/shared-types'
 import { ToggleDetailsProps } from '@instructure/ui-toggle-details'
 
@@ -41,12 +39,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type NavToggleProps = Omit<ToggleDetailsProps, 'variant' | 'summary'> &
   NavToggleOwnProps
 
-const propTypes: PropValidators<PropKeys> = {
-  summary: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['section', 'category']),
-  children: PropTypes.node,
-  shouldBlur: PropTypes.bool
-}
+
 const allowedProps: AllowedPropKeys = [
   'children',
   'summary',

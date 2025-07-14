@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
 import { Calendar } from '@instructure/ui-calendar'
 import type { CalendarDayProps } from '@instructure/ui-calendar'
 import type { FormMessage } from '@instructure/ui-form-field'
@@ -282,54 +281,6 @@ type DateInputProps = DateInputOwnProps &
   >
 
 type DateInputStyle = ComponentStyle<'dateInput' | 'assistiveText'>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  value: controllable(PropTypes.string),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  assistiveText: PropTypes.string,
-  layout: PropTypes.oneOf(['stacked', 'inline']),
-  width: PropTypes.string,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  inputRef: PropTypes.func,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  placement: PositionPropTypes.placement,
-  isShowingCalendar: PropTypes.bool,
-  onRequestValidateDate: PropTypes.func,
-  onRequestShowCalendar: PropTypes.func,
-  onRequestHideCalendar: PropTypes.func,
-  onRequestSelectNextDay: PropTypes.func,
-  onRequestSelectPrevDay: PropTypes.func,
-  onRequestRenderNextMonth: PropTypes.func,
-  onRequestRenderPrevMonth: PropTypes.func,
-  renderNavigationLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  renderWeekdayLabels: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.node])
-  ),
-  renderNextMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  renderPrevMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  children: ChildrenPropTypes.oneOf([Calendar.Day]),
-  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-  currentDate: PropTypes.string,
-  disabledDateErrorMessage: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  invalidDateErrorMessage: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  locale: PropTypes.string,
-  timezone: PropTypes.string,
-  withYearPicker: PropTypes.object
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'value',
@@ -376,4 +327,4 @@ type DateInputState = {
 }
 
 export type { DateInputProps, DateInputStyle, DateInputState }
-export { propTypes, allowedProps }
+export { allowedProps }
