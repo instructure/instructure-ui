@@ -43,7 +43,7 @@ export default myCodemod
 
 You should write unit tests for your codemods. They are tested via test fixtures (sample before transform, sample after transform). To create a unit test for say `sampleCodemod` the following steps are needed:
 
-1. create a new test in `packages/ui-codemods/lib/__node_tests__/codemod.tests.ts`:
+1. Create a new test in `packages/ui-codemods/lib/__node_tests__/codemod.tests.ts`:
    ```ts
    ---
    type: code
@@ -52,10 +52,32 @@ You should write unit tests for your codemods. They are tested via test fixtures
      runTest(sampleCodemod)
    })
    ```
-2. create a folder named `sampleCodemod` in `packages/ui-codemods/lib/__node_tests__/__testfixtures__`
+2. Create a folder named `sampleCodemod` in `packages/ui-codemods/lib/__node_tests__/__testfixtures__`
 3. Here create sample input-output file pairs whose filename follows the following naming convention: `[fixtureName].input.[js/ts/tsx]`, `[fixtureName].output.[js/ts/tsx]`. These should be your test cases that ensure that the codemod does the transformation correctly.
 
 Done! Run `npm run test:vitest ui-codemods` to run your test.
+
+#### Testing codemod warnings
+
+Sometimes codemods need to emit warnings to inform users about manual follow-ups or tricky edge cases.
+We support testing these warnings using special fixtures and a console.warn spy.
+
+1. In your codemod you can use the `printWarning` from `utils/codemodhelpers.ts` to create warnings.
+2. Create new sample input file in the `__testfixtures__` folder, filename follows the following naming convention: `[fixtureName].warning.input.[js/ts/tsx]`:
+   ```ts
+   ---
+   type: code
+   ---
+   <MyComponent deprecatedProp="value" />
+   ```
+3. Create new sample output file with the array of expected warning messages in the `__testfixtures__` folder, filename follows the following naming convention: `[fixtureName].warning.output.[js/ts/tsx]`:
+   ```ts
+   ---
+   type: code
+   ---
+   ["Warn for deprecated prop usage.", "Warn for something else."]
+   ```
+4. When you run `npm run test:vitest ui-codemods`, your test will pass and ensure your codemod warns as expected.
 
 Finally, you should try to run your codemod as users will do:
 

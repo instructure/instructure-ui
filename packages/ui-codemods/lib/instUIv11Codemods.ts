@@ -25,6 +25,7 @@
 import { Transform } from 'jscodeshift'
 import instUICodemodExecutor from './utils/instUICodemodExecutor'
 import { removeAsProp } from './removeAsFromInstUISettingsProvider'
+import { renameCanvasThemes } from './renameCanvasThemesCodemod'
 
 /**
  * Runs all InstUI v10 -> v11 upgrade codemods
@@ -35,7 +36,12 @@ const InstUIv11Codemods: Transform = (
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
   // TODO add other v11 codemods to this array
-  return instUICodemodExecutor([removeAsProp], file, api, options)
+  return instUICodemodExecutor(
+    [removeAsProp, renameCanvasThemes],
+    file,
+    api,
+    options
+  )
 }
 
 export default InstUIv11Codemods

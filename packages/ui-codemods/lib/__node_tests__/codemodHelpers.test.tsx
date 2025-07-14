@@ -27,6 +27,7 @@ import {
   findAttribute,
   getVisibleChildren,
   renameElements,
+  renameImportAndUsages,
   findImport,
   findEveryImport,
   addImportIfNeeded,
@@ -520,5 +521,314 @@ import { Modal } from "@instructure/ui-modal";`)
     expect(root.toSource()).toEqual(
       `<Button id="test" onClick={handleClick} />`
     )
+  })
+
+  it('test renameImportAndUsages', () => {
+    // Test renaming a direct import and all its usages
+    let source = `
+      import { oldName } from '@import-path'
+      import { otherThing } from 'another-path'
+
+      function test() {
+        oldName()
+        const a = oldName
+        return <Component prop={oldName} />;
+      }
+    `
+    let root = j(source)
+    let result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { newName } from '@import-path'
+      import { otherThing } from 'another-path'
+
+      function test() {
+        newName()
+        const a = newName
+        return <Component prop={newName} />;
+      }
+    `)
+
+    // Test renaming a renamed import (with as syntax) but keeping the local name
+    source = `
+      import { oldName as localName } from '@import-path'
+      import { oldName } from '@other-path'
+
+      function test() {
+        localName()
+        const a = localName
+        oldName()
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { newName as localName } from '@import-path'
+      import { oldName } from '@other-path'
+
+      function test() {
+        localName()
+        const a = localName
+        oldName()
+      }
+    `)
+
+    // Test handle type imports correctly
+    source = `
+      import type { oldName } from '@import-path'
+      import { name } from '@import-path'
+
+      function test(): oldName {
+        return name()
+      }
+    `
+    root = j.withParser('tsx')(source)
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import type { newName } from '@import-path'
+      import { name } from '@import-path'
+
+      function test(): newName {
+        return name()
+      }
+    `)
+
+    // Test handling multiple imports from the same module
+    source = `
+      import { oldName, oldName as localName, otherThing } from '@import-path'
+
+      function test() {
+        oldName()
+        localName()
+        otherThing()
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { newName, newName as localName, otherThing } from '@import-path'
+
+      function test() {
+        newName()
+        localName()
+        otherThing()
+      }
+    `)
+
+    // Test not modifying source when import doesn't exist
+    source = `
+      import { otherThing } from '@import-path'
+
+      function test() {
+        otherThing()
+      }
+    `
+    root = j(source)
+    const originalSource = root.toSource()
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(false)
+    expect(root.toSource()).toBe(originalSource)
+
+    // Test handling object destructuring patterns
+    source = `
+      import { oldName } from '@import-path'
+      import * as myModule from '@import-path'
+
+      function test() {
+        myModule.oldName()
+        const { oldName } = myModule
+        oldName()
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { newName } from '@import-path'
+      import * as myModule from '@import-path'
+
+      function test() {
+        myModule.newName()
+        const { newName } = myModule
+        newName()
+      }
+    `)
+
+    // Test handling spread operator usage
+    source = `
+      import { oldName } from '@import-path'
+
+      function test() {
+        const obj = { ...oldName }
+        return <Component {...oldName} />
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { newName } from '@import-path'
+
+      function test() {
+        const obj = { ...newName }
+        return <Component {...newName} />;
+      }
+    `)
+
+    // Test not modifying similarly named identifiers
+    source = `
+      import { oldName } from '@import-path'
+
+      function test() {
+        const oldNameCustom = 'test'
+        const prefixOldName = 'test'
+        return oldName + oldNameCustom + prefixOldName
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { newName } from '@import-path'
+
+      function test() {
+        const oldNameCustom = 'test'
+        const prefixOldName = 'test'
+        return newName + oldNameCustom + prefixOldName;
+      }
+    `)
+
+    // Test renaming a JSX component import and its usages
+    source = `
+      import { Button } from '@instructure/ui-buttons'
+
+      function TestComponent() {
+        return (
+          <div>
+            <Button variant="primary">Click me</Button>
+            <Button onClick={handleClick} />
+          </div>
+        )
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { PrimaryButton } from '@instructure/ui-buttons'
+
+      function TestComponent() {
+        return (
+          <div>
+            <PrimaryButton variant="primary">Click me</PrimaryButton>
+            <PrimaryButton onClick={handleClick} />
+          </div>
+        );
+      }
+    `)
+
+    // Test renaming a component with props spread
+    source = `
+      import { Button } from '@instructure/ui-buttons'
+
+      function TestComponent(props) {
+        return <Button {...props} />
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { PrimaryButton } from '@instructure/ui-buttons'
+
+      function TestComponent(props) {
+        return <PrimaryButton {...props} />;
+      }
+    `)
+
+    // Test renaming a component used in JSX expressions
+    source = `
+      import { Button } from '@instructure/ui-buttons'
+
+      function TestComponent() {
+        const buttonVariant = 'primary'
+        return buttonVariant === 'primary' ? <Button variant="primary" /> : null
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { PrimaryButton } from '@instructure/ui-buttons'
+
+      function TestComponent() {
+        const buttonVariant = 'primary'
+        return buttonVariant === 'primary' ? <PrimaryButton variant="primary" /> : null;
+      }
+    `)
+
+    // Test renaming a component with children
+    source = `
+      import { Button } from '@instructure/ui-buttons'
+
+      function TestComponent() {
+        return (
+          <Button>
+            <span>Click me</span>
+            <Icon name="arrow-right" />
+          </Button>
+        )
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+
+    expect(result).toBe(true)
+    expect(root.toSource()).toBe(`
+      import { PrimaryButton } from '@instructure/ui-buttons'
+
+      function TestComponent() {
+        return (
+          <PrimaryButton>
+            <span>Click me</span>
+            <Icon name="arrow-right" />
+          </PrimaryButton>
+        );
+      }
+    `)
+
+    // Test that default imports are NOT supported (should not modify source)
+    source = `
+      import Button from './Button'
+      import { SecondaryButton } from './Button'
+
+      function TestComponent() {
+        return (
+          <div>
+            <Button>Default Import</Button>
+            <SecondaryButton />
+          </div>
+        )
+      }
+    `
+    root = j(source)
+    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+
+    expect(result).toBe(false)
+    expect(root.toSource()).toBe(source)
   })
 })
