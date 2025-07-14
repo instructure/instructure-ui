@@ -46,7 +46,7 @@
     "@instructure/ui-focusable": "10.23.0",
     "@instructure/ui-icons": "10.23.0",
     "@instructure/ui-menu": "10.23.0",
-    "@instructure/ui-prop-types": "10.23.0",
+    
     "@instructure/ui-react-utils": "10.23.0",
     "@instructure/ui-testable": "10.23.0",
     "@instructure/ui-tooltip": "10.23.0",

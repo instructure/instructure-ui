@@ -37,7 +37,7 @@
     "@instructure/ui-icons": "10.23.0",
     "@instructure/ui-link": "10.23.0",
     "@instructure/ui-popover": "10.23.0",
-    "@instructure/ui-prop-types": "10.23.0",
+    
     "@instructure/ui-react-utils": "10.23.0",
     "@instructure/ui-responsive": "10.23.0",
     "@instructure/ui-testable": "10.23.0",

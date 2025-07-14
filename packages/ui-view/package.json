@@ -31,7 +31,7 @@
     "@instructure/ui-dom-utils": "10.23.0",
     "@instructure/ui-i18n": "10.23.0",
     "@instructure/ui-position": "10.23.0",
-    "@instructure/ui-prop-types": "10.23.0",
+    
     "@instructure/ui-react-utils": "10.23.0",
     "prop-types": "^15.8.1"
   },
