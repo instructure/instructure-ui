@@ -36,8 +36,8 @@ import { contains } from './contains'
  * from one child element to another.
  *
  * @module handleMouseOverOut
- * @param handler {function} Callback function for handling the event
- * @param event {Event} The DOM Event that was fired
+ * @param handler Callback function for handling the event
+ * @param event The DOM Event that was fired
  */
 function handleMouseOverOut(
   handler: (event: React.MouseEvent) => void,

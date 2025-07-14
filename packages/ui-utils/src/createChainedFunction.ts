@@ -34,8 +34,8 @@ type GenericFunction = (...args: any[]) => any
  *
  * Forked from: https://github.com/react-bootstrap/react-overlays/blob/master/src/utils/createChainedFunction.js
  * @module createChainedFunction
- * @param {function} funcs to chain
- * @returns {function|null}
+ * @param funcs Functions to chain. It can be null/undefined
+ * @returns the functions chained after each other
  */
 
 function createChainedFunction<F extends GenericFunction = GenericFunction>(

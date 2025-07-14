@@ -28,10 +28,10 @@
  * ---
  * Return a props object with only specified propTypes.
  * @module pickProps
- * @param {Object} props React component props
- * @param {Object|Array<string>} propTypesOrAllowedPropList React component propTypes or the list of allowed prop keys
- * @param {Array} include an optional array of prop names to include
- * @returns {Object} props object with only the included props
+ * @param props React component props
+ * @param propTypesOrAllowedPropList React component propTypes or the list of allowed prop keys
+ * @param include an optional array of prop names to include
+ * @returns props object with only the included props
  * @module pickProps
  */
 function pickProps<T extends Record<string, any>>(

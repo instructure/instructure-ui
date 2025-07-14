@@ -35,9 +35,9 @@ import { safeCloneElement } from './safeCloneElement'
  * wrap in a span and return the child. Return null if child has
  * no length.
  * @module ensureSingleChild
- * @param {ReactNode} child
- * @param {Object} props - props for child
- * @returns {ReactElement|null} cloned instance for a single child, or children wrapped in a span
+ * @param child
+ * @param props props for child
+ * @returns cloned instance for a single child, or children wrapped in a span
  */
 function ensureSingleChild(child: ReactNode, props = {}) {
   const childCount = Children.count(child)

@@ -30,9 +30,9 @@ import Color from 'tinycolor2'
  * ---
  * Adjust the alpha transparency of a color
  * @module alpha
- * @param {String} color
- * @param {Number} percent
- * @returns {String} color as rgb string
+ * @param color
+ * @param percent
+ * @returns color as rgb string
  */
 function alpha(color: string, percent: number): string {
   return Color(color)

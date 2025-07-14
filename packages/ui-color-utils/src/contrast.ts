@@ -30,10 +30,10 @@ import Color from 'tinycolor2'
  * ---
  * check the contrast ratio of 2 colors. Optionally number of decimal places can be added
  * @module contrast
- * @param {String} color1
- * @param {String} color2
- * @param {Number} decimalPlaces
- * @returns {Number} color contrast ratio
+ * @param color1
+ * @param color2
+ * @param decimalPlaces
+ * @returns color contrast ratio
  */
 const contrast = (
   color1: string,
