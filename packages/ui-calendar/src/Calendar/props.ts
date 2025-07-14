@@ -22,14 +22,8 @@
  * SOFTWARE.
  */
 
-
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { Day } from './Day'
-
 import type {
   AsElementType,
-  
   CalendarTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

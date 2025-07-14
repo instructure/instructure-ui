@@ -23,18 +23,9 @@
  */
 
 import { type InputHTMLAttributes } from 'react'
-
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 

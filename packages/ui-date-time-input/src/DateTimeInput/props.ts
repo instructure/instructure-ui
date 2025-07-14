@@ -23,14 +23,11 @@
  */
 
 import { SyntheticEvent } from 'react'
-import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
-import { I18nPropTypes } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
-import PropTypes, { Validator } from 'prop-types'
-import { controllable } from '@instructure/ui-prop-types'
-import type { PropValidators, Renderable } from '@instructure/shared-types'
+import { Validator } from 'prop-types'
+import type { Renderable } from '@instructure/shared-types'
 
 type DateTimeInputProps = {
   /**

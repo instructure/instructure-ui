@@ -27,7 +27,6 @@ import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   ToProp,
   AsElementType,
-  
   BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

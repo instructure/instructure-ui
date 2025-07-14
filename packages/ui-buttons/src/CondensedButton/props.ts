@@ -28,8 +28,7 @@ import type {
   ToProp,
   AsElementType,
   BaseButtonTheme,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
 import type { ViewProps } from '@instructure/ui-view'

@@ -24,14 +24,10 @@
 
 
 import type { SyntheticEvent, InputHTMLAttributes } from 'react'
-
-import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  Renderable,
-  PropValidators
+  Renderable
 } from '@instructure/shared-types'
 import type { Spacing } from '@instructure/emotion'
 

@@ -182,9 +182,6 @@
       "path": "../ui-progress/tsconfig.build.json"
     },
     {
-      "path": "../ui-prop-types/tsconfig.build.json"
-    },
-    {
       "path": "../ui-radio-input/tsconfig.build.json"
     },
     {

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   CheckboxFacadeTheme
 } from '@instructure/shared-types'

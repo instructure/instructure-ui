@@ -22,21 +22,12 @@
  * SOFTWARE.
  */
 
-
-
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { Calendar } from '@instructure/ui-calendar'
 import type { CalendarDayProps } from '@instructure/ui-calendar'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type {
   Renderable,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { InputHTMLAttributes, ReactElement, SyntheticEvent } from 'react'

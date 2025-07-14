@@ -22,16 +22,10 @@
  * SOFTWARE.
  */
 
-
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { controllable } from '@instructure/ui-prop-types'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   CheckboxFacadeTheme,
   OtherHTMLAttributes,
-  
   ToggleFacadeTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'

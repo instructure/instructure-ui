@@ -21,19 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-
-
-import { Children } from '@instructure/ui-prop-types'
-
-import { BreadcrumbLink } from './BreadcrumbLink'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { BreadcrumbTheme, PropValidators } from '@instructure/shared-types'
+import type { BreadcrumbTheme } from '@instructure/shared-types'
 
 type BreadcrumbOwnProps = {
   /**

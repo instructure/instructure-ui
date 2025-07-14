@@ -22,12 +22,8 @@
  * SOFTWARE.
  */
 
-
-import { I18nPropTypes } from '@instructure/ui-i18n'
-
 import type {
   AsElementType,
-  
   CalendarDayTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

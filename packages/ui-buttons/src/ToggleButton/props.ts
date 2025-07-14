@@ -26,8 +26,7 @@ import React from 'react'
 
 import type {
   AsElementType,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
