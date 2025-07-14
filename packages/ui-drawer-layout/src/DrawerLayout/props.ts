@@ -23,15 +23,8 @@
  */
 
 import React from 'react'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-
-import { DrawerContent } from './DrawerContent'
-import { DrawerTray } from './DrawerTray'
-
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type DrawerLayoutOwnProps = {

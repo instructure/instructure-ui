@@ -35,7 +35,6 @@
     "@instructure/shared-types": "10.23.0",
     "@instructure/ui-decorator": "10.23.0",
     "@instructure/ui-dom-utils": "10.23.0",
-    
     "@instructure/ui-react-utils": "10.23.0",
     "@instructure/ui-utils": "10.23.0",
     "hoist-non-react-statics": "^3.3.2",

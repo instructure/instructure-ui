@@ -26,7 +26,6 @@ import React from 'react'
 import type {
   ToProp,
   AsElementType,
-  
   LinkTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

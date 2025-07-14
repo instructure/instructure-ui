@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
@@ -32,7 +30,6 @@ import type {
   DrawerLayoutTrayTheme,
   LiveRegion,
   OtherHTMLAttributes,
-  
   UIElement
 } from '@instructure/shared-types'
 import {
@@ -215,4 +212,4 @@ export type {
   DrawerLayoutTrayStyleProps,
   DrawerTrayPlacement
 }
-export { allowedProps, propTypes }
+export { allowedProps }

@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-
 import type {
   AsElementType,
-  
   AppNavItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

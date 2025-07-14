@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   AsElementType,
-  
   OptionsItemTheme,
   OtherHTMLAttributes,
   Renderable

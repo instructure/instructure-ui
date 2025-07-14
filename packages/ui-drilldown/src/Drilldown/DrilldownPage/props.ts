@@ -23,16 +23,10 @@
  */
 
 import React from 'react'
-import { Children } from '@instructure/ui-prop-types'
-
 import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-
-import DrilldownGroup from '../DrilldownGroup'
-import DrilldownOption from '../DrilldownOption'
-import DrilldownSeparator from '../DrilldownSeparator'
 
 import type { OptionChild, SeparatorChild, GroupChild } from '../props'
 import { Renderable } from '@instructure/shared-types'

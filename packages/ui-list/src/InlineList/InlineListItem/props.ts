@@ -24,7 +24,6 @@
 
 import { PropsWithChildren } from 'react'
 
-
 import type {
   Spacing,
   WithStyleProps,

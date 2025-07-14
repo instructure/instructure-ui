@@ -24,7 +24,6 @@
 
 import { AriaRole } from 'react'
 
-
 import type {
   DrawerLayoutContentTheme,
   OtherHTMLAttributes

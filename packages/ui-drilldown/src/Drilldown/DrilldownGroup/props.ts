@@ -23,14 +23,9 @@
  */
 
 import React from 'react'
-import { Children } from '@instructure/ui-prop-types'
-
-import DrilldownOption from '../DrilldownOption'
-import DrilldownSeparator from '../DrilldownSeparator'
 
 import type {
   OtherHTMLAttributes,
-  
   OptionsTheme,
   AsElementType
 } from '@instructure/shared-types'

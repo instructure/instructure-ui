@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   OtherHTMLAttributes,
-  
   OptionsItemTheme,
   AsElementType
 } from '@instructure/shared-types'

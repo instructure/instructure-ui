@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   MetricTheme,
   OtherHTMLAttributes,

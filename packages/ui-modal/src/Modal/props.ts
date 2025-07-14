@@ -23,13 +23,10 @@
  */
 
 import React from 'react'
-import { transitionTypePropType } from '@instructure/ui-motion'
-
 import { Dialog } from '@instructure/ui-dialog'
 
 import type {
   AsElementType,
-  
   ModalTheme,
   OtherHTMLAttributes,
   LiveRegion,

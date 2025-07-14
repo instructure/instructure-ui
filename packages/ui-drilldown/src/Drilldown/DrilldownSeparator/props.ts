@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions,
-  
   AsElementType,
   OptionsSeparatorTheme
 } from '@instructure/shared-types'

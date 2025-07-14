@@ -27,7 +27,6 @@ import React from 'react'
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  
   UIElement
 } from '@instructure/shared-types'
 import type { FocusRegionOptions } from '@instructure/ui-a11y-utils'

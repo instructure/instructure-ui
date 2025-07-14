@@ -23,10 +23,6 @@
  */
 
 import React from 'react'
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
 
 import type {
   MenuTheme,

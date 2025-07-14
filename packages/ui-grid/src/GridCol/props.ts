@@ -22,20 +22,12 @@
  * SOFTWARE.
  */
 
-
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   GridTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { GridBreakpoints } from '../GridTypes'
-
-// TODO: get numcols from theme config
-const COL_WIDTHS = PropTypes.oneOfType([
-  PropTypes.number,
-  PropTypes.oneOf(['auto'])
-])
 
 type ColWidths = 'auto' | number
 

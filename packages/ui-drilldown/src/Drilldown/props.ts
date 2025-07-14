@@ -23,12 +23,9 @@
  */
 
 import React from 'react'
-import { Children, controllable } from '@instructure/ui-prop-types'
 
 import { Popover } from '@instructure/ui-popover'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   PlacementPropValues,
@@ -38,7 +35,6 @@ import type {
 import type {
   DrilldownTheme,
   OtherHTMLAttributes,
-  
   AsElementType
 } from '@instructure/shared-types'
 

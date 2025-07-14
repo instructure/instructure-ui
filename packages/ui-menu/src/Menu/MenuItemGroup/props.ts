@@ -23,13 +23,8 @@
  */
 
 import React from 'react'
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
 
 import { MenuItem } from '../MenuItem'
-import { MenuItemSeparator } from '../MenuItemSeparator'
 
 import type {
   MenuGroupTheme,

@@ -24,11 +24,9 @@
 
 import React from 'react'
 import MenuItem from '../MenuItem'
-import { controllable } from '@instructure/ui-prop-types'
 
 import type {
   AsElementType,
-  
   MenuItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

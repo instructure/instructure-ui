@@ -23,9 +23,6 @@
  */
 
 import React from 'react'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { GridCol } from '../GridCol'
 
 import type {
   GridTheme,

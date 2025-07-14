@@ -22,12 +22,6 @@
  * SOFTWARE.
  */
 
-
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { GridRow } from '../GridRow'
-
 import type {
   GridTheme,
   OtherHTMLAttributes

@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
 import type {
   AsElementType,
-  
   OptionsTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

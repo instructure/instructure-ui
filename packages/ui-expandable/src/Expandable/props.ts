@@ -23,11 +23,6 @@
  */
 
 import { JSX } from 'react'
-
-
-import { controllable } from '@instructure/ui-prop-types'
-
-import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { ViewProps } from '@instructure/ui-view'
 

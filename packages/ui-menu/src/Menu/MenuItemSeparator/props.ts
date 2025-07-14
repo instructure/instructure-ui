@@ -42,8 +42,6 @@ type MenuSeparatorProps = MenuSeparatorOwnProps &
 
 type MenuSeparatorStyle = ComponentStyle<'menuItemSeparator'>
 
-const propTypes: PropValidators<PropKeys> = {}
-
 const allowedProps: AllowedPropKeys = []
 
 export type { MenuSeparatorProps, MenuSeparatorStyle }

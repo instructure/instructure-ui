@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   AsElementType,
   HeadingTheme,

@@ -23,13 +23,9 @@
  */
 
 import React from 'react'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { InlineListItem } from './InlineListItem'
-
 import type { Spacing } from '@instructure/emotion'
 import type {
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 type InlineListOwnProps = {

@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-
 import type {
   AsElementType,
-  
   OptionsSeparatorTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

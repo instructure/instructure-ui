@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { Metric } from '../Metric'
-
 import type {
   MetricGroupTheme,
   OtherHTMLAttributes

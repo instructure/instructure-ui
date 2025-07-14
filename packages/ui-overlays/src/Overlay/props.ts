@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-import { transitionTypePropType } from '@instructure/ui-motion'
 
 import type { PortalNode, PortalProps } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
@@ -32,7 +31,6 @@ import type { DialogProps } from '@instructure/ui-dialog'
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions,
-  
   UIElement
 } from '@instructure/shared-types'
 
