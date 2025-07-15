@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import type { PropValidators } from '@instructure/shared-types'
-
 type GetContainerProps = (props?: Record<string, any>) => {
   ref: React.RefCallback<any>
   onMouseOver: (event: React.MouseEvent<any>) => void

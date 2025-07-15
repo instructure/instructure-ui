@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
-
 import type { ParsedDocSummary } from '../../buildScripts/DataTypes.mjs'
 
 type HeroOwnProps = {

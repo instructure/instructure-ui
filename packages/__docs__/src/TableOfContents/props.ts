@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
-
 import type { DocDataType } from '../Document/props'
 import { DocPropType } from '../Document/props'
 

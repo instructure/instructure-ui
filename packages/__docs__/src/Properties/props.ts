@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
-
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { PropDescriptor } from 'react-docgen'
 

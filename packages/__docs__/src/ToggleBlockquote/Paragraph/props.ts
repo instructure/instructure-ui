@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-
 import { PropsWithChildren } from 'react'
 
 type PropKeys = keyof PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility

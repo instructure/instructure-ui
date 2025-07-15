@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
-
 import {
   CElement,
   DOMElement,
