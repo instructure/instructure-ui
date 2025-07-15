@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   AsElementType,
-  
   FormFieldLabelTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

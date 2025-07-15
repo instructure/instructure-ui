@@ -24,7 +24,6 @@
 
 import { ReactNode } from 'react'
 
-
 import type {
   TruncateTextTheme
 } from '@instructure/shared-types'

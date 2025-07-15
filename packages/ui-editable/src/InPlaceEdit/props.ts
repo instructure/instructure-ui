@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { EditableProps } from '../Editable/props'
 import React from 'react'
+
 type ExtendedRenderEditButton = {
   elementRef?: (el: HTMLButtonElement) => void
   onClick: () => void

@@ -26,7 +26,7 @@ import type {
   TreeBrowserTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import type { TreeBrowserButtonProps } from './TreeButton/props'
 import { Renderable } from '@instructure/shared-types'
 
@@ -106,7 +106,7 @@ type TreeBrowserCommonProps = {
   collectionIcon?: Renderable
   collectionIconExpanded?: Renderable
   itemIcon?: Renderable
-  renderContent?: (props: TreeBrowserButtonProps) => JSX.Element
+  renderContent?: (props: TreeBrowserButtonProps) => React.JSX.Element
 }
 
 type PropKeys = keyof TreeBrowserOwnProps

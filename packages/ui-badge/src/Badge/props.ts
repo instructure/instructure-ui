@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 
-
-
-
+import React from 'react'
 import type {
   AsElementType,
   BadgeTheme,
@@ -66,7 +64,7 @@ type BadgeOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   formatOverflowText?: (count: number, countUntil: number) => string
-  formatOutput?: (formattedCount: string) => JSX.Element | string | number
+  formatOutput?: (formattedCount: string) => React.JSX.Element | string | number
   as?: AsElementType
   /**
    * Specifies the display property of the container.

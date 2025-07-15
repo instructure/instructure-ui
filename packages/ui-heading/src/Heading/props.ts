@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import type {
   AsElementType,
   HeadingTheme,
@@ -34,7 +35,7 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 
-type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
+type HeadingLevel<U extends keyof React.JSX.IntrinsicElements> = U
 
 type HeadingOwnProps = {
   /**
