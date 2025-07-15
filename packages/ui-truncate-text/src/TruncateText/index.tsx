@@ -40,7 +40,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
-import { propTypes, allowedProps, TruncateTextState } from './props'
+import { allowedProps, TruncateTextState } from './props'
 import type { TruncateTextProps } from './props'
 
 /**

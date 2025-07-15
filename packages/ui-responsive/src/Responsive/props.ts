@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-
-import { ResponsivePropTypes } from '../ResponsivePropTypes'
-
 import type { BreakpointQueries, QueriesMatching } from '../QueryType'
 
 interface ResponsivePropsObject {

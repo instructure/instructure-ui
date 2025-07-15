@@ -22,13 +22,8 @@
  * SOFTWARE.
  */
 
-
-
-import { FormPropTypes } from '../FormPropTypes'
-
 import type {
   AsElementType,
-  
   FormFieldGroupTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

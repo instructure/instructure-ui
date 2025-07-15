@@ -33,7 +33,7 @@ import {
 import { withStyle } from '@instructure/emotion'
 import { FormFieldMessages } from '../FormFieldMessages'
 import generateStyle from './styles'
-import { propTypes, allowedProps, FormFieldStyleProps } from './props'
+import { allowedProps, FormFieldStyleProps } from './props'
 import type { FormFieldLayoutProps } from './props'
 import generateComponentTheme from './theme'
 

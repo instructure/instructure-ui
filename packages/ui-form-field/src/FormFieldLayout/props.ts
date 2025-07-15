@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 
-
-
-import { FormPropTypes } from '../FormPropTypes'
-
 import type {
   AsElementType,
   OtherHTMLAttributes,
