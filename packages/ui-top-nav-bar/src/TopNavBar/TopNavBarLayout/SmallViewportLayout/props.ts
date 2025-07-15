@@ -31,7 +31,6 @@ import type {
 } from '@instructure/shared-types'
 
 import type { DrilldownProps } from '@instructure/ui-drilldown'
-
 import type { TopNavBarItemTooltipType } from '../../TopNavBarItem/props'
 import type { TopNavBarContextType } from '../../TopNavBarContext'
 

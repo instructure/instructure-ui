@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   OtherHTMLAttributes,
-  
   PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { IconButtonProps } from '@instructure/ui-buttons'

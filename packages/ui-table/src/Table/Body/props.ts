@@ -24,7 +24,6 @@
 import React from 'react'
 import type {
   OtherHTMLAttributes,
-  
   TableBodyTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'

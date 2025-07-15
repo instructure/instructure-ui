@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   OtherHTMLAttributes,
 } from '@instructure/shared-types'
@@ -34,7 +32,6 @@ import type { ItemChild } from './TopNavBarItem/props'
 import type { LayoutChild } from './TopNavBarLayout/props'
 import type { MenuItemsChild } from './TopNavBarMenuItems/props'
 import type { UserChild } from './TopNavBarUser/props'
-
 import type { TopNavBarContextType } from './TopNavBarContext'
 
 type TopNavBarOwnProps = {

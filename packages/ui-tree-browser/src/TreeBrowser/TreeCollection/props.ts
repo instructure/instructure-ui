@@ -25,7 +25,6 @@
 import React from 'react'
 
 import type { CollectionData } from '../props'
-
 import type {
   TreeBrowserCollectionTheme
 } from '@instructure/shared-types'

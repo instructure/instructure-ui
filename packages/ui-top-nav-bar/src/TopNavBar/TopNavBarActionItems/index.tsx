@@ -54,7 +54,6 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import {
-  propTypes,
   allowedProps,
   TopNavBarActionItemsStyleProps
 } from './props'

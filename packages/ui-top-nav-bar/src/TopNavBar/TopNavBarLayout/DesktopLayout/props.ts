@@ -28,13 +28,9 @@ import type {
   TopNavBarLayoutDesktopTheme,
   OtherHTMLAttributes,
 } from '@instructure/shared-types'
-
 import type { TopNavBarContextType } from '../../TopNavBarContext'
-
 import {
-  commonPropTypes,
   commonAllowedProps,
-  desktopPropTypes,
   desktopAllowedProps
 } from '../props'
 import type { CommonTopNavBarLayoutProps } from '../props'

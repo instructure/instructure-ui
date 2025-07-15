@@ -27,11 +27,9 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarBrandTheme,
   OtherHTMLAttributes,
-  
   AsElementType
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view'
-
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBarBrand } from './index'

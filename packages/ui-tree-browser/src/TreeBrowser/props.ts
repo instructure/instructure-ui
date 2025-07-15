@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   TreeBrowserTheme
 } from '@instructure/shared-types'

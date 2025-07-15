@@ -23,13 +23,11 @@
  */
 
 import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
   ChildrenOfType
 } from '@instructure/shared-types'
-
 import type { ItemChild } from '../TopNavBarItem/props'
 
 import { TopNavBarUser } from './index'

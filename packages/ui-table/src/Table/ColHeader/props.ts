@@ -23,10 +23,8 @@
  */
 import { ThHTMLAttributes } from 'react'
 
-
 import type {
   OtherHTMLAttributes,
-  
   TableColHeaderTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'

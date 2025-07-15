@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Children } from '@instructure/ui-prop-types'
-
-import { Panel } from './Panel'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -33,7 +29,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  
   TabsTheme
 } from '@instructure/shared-types'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'

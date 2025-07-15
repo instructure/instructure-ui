@@ -23,11 +23,8 @@
  */
 
 import React from 'react'
-import { ThemeablePropTypes } from '@instructure/emotion'
-
 import type {
   AsElementType,
-  
   ContextViewTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

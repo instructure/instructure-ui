@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   OtherHTMLAttributes,
-  
   Renderable
 } from '@instructure/shared-types'
 

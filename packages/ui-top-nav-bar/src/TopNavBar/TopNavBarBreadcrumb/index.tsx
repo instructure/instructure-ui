@@ -26,8 +26,7 @@ import { Children, Component, ReactElement } from 'react'
 import {
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState,
-  allowedProps,
-  propTypes
+  allowedProps
 } from './props'
 import TopNavBar from '../index'
 import { withStyle } from '@instructure/emotion'

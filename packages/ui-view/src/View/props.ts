@@ -24,7 +24,6 @@
 
 import React from 'react'
 import type { Cursor } from '@instructure/shared-types'
-
 import type {
   AsElementType,
   OtherHTMLAttributes,

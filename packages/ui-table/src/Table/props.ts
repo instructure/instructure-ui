@@ -29,7 +29,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  
   TableTheme
 } from '@instructure/shared-types'
 

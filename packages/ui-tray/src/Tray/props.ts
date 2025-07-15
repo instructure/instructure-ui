@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  
   TrayTheme,
   LiveRegion,
   UIElement

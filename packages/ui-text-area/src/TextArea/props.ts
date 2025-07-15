@@ -24,7 +24,6 @@
 
 import React from 'react'
 import type { TextareaHTMLAttributes } from 'react'
-
 import type {
   OtherHTMLAttributes,
   TextAreaTheme,

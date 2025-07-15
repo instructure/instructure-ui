@@ -26,7 +26,6 @@ import React from 'react'
 import type { InputHTMLAttributes } from 'react'
 import type {
   OtherHTMLAttributes,
-  
   RadioInputTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'

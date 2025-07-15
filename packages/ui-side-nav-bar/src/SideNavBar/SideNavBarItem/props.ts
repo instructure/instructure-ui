@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   AsElementType,
-  
   SideNavBarItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'

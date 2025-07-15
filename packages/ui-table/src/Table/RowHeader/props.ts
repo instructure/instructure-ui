@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-
-
 import type {
   OtherHTMLAttributes,
-  
   Renderable,
   TableRowHeaderTheme
 } from '@instructure/shared-types'

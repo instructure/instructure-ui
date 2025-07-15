@@ -15,7 +15,6 @@
     { "path": "../ui-dom-utils/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },
     { "path": "../ui-i18n/tsconfig.build.json" },
-    { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../ui-view/tsconfig.build.json" },

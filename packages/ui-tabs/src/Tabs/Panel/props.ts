@@ -30,7 +30,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  
   TabsPanelTheme
 } from '@instructure/shared-types'
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { ThemeablePropTypes, BorderWidth } from '@instructure/emotion'
+import { BorderWidth } from '@instructure/emotion'
 
 import type { Shadow, Stacking, WithStyleProps } from '@instructure/emotion'
 

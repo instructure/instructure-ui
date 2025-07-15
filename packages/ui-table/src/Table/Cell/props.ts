@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  
   Renderable,
   TableCellTheme
 } from '@instructure/shared-types'

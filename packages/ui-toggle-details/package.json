@@ -41,13 +41,11 @@
     "@instructure/ui-flex": "10.23.0",
     "@instructure/ui-icons": "10.23.0",
     "@instructure/ui-motion": "10.23.0",
-    
     "@instructure/ui-react-utils": "10.23.0",
     "@instructure/ui-testable": "10.23.0",
     "@instructure/ui-utils": "10.23.0",
     "@instructure/ui-view": "10.23.0",
-    "@instructure/uid": "10.23.0",
-    "prop-types": "^15.8.1"
+    "@instructure/uid": "10.23.0"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

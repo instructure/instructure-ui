@@ -31,7 +31,6 @@ import type {
   OtherHTMLAttributes,
   ChildrenOfType
 } from '@instructure/shared-types'
-
 import type { ItemChild } from '../TopNavBarItem/props'
 
 import { TopNavBarMenuItems } from './index'

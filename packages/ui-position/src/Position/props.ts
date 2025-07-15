@@ -23,11 +23,8 @@
  */
 
 import React from 'react'
-
-import { PositionPropTypes } from '../PositionPropTypes'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { PropValidators, PositionTheme } from '@instructure/shared-types'
+import type { PositionTheme } from '@instructure/shared-types'
 import type {
   PositionConstraint,
   PositionMountNode,
