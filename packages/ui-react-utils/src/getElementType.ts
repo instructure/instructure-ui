@@ -60,7 +60,7 @@ function getElementType<T extends PropsObject>(
   props: T,
   getDefault?: () => AsElementType<T>
 ) {
-  if (props.as && props.as !== Component.defaultProps?.as) {
+  if (props.as) {
     return props.as
   }
   if (typeof getDefault === 'function') {
@@ -80,7 +80,7 @@ function getElementType<T extends PropsObject>(
   if (typeof props.onClick === 'function') {
     return 'button'
   }
-  return Component.defaultProps?.as || 'span'
+  return 'span'
 }
 
 export default getElementType
