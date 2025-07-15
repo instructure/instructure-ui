@@ -42,7 +42,7 @@ import { TopNavBarBreadcrumb } from './TopNavBarBreadcrumb'
 import { TopNavBarContext } from './TopNavBarContext'
 import type { TopNavBarLayouts } from './TopNavBarContext'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TopNavBarProps } from './props'
 
 /**
@@ -65,7 +65,6 @@ class TopNavBar extends Component<TopNavBarProps> {
 
   static contextType = TopNavBarContext
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     breakpoint: 1024,

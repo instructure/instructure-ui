@@ -46,7 +46,6 @@ category: components/utilities
 ---
 **/
 class Focusable extends Component<FocusableProps, FocusableState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null

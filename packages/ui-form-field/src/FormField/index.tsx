@@ -28,7 +28,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import { FormFieldLayout } from '../FormFieldLayout'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FormFieldProps } from './props'
 
 /**
@@ -39,7 +39,6 @@ category: components
 class FormField extends Component<FormFieldProps> {
   static readonly componentId = 'FormField'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     inline: false,

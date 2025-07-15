@@ -31,7 +31,7 @@ import { View } from '../View'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ContextViewProps } from './props'
 
 /**
@@ -44,8 +44,7 @@ category: components
 class ContextView extends Component<ContextViewProps> {
   static readonly componentId = 'ContextView'
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     as: 'span',
     elementRef: () => {},
     debug: false,

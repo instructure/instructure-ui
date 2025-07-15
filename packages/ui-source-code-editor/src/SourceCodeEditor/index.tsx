@@ -97,7 +97,7 @@ import generateComponentTheme from './theme'
 
 import { rtlHorizontalArrowKeymap } from './customKeybinding'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { SourceCodeEditorProps } from './props'
 
 /**
@@ -112,7 +112,6 @@ category: components
 class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   static readonly componentId = 'SourceCodeEditor'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     language: 'jsx',

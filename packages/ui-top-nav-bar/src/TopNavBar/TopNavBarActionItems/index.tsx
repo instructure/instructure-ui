@@ -79,7 +79,6 @@ class TopNavBarActionItems extends Component<
 > {
   static readonly componentId = 'TopNavBar.ActionItems'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

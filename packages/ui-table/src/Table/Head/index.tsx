@@ -54,8 +54,7 @@ class Head extends Component<TableHeadProps> {
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     children: null
   }
 

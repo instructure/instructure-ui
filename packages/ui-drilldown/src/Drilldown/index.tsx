@@ -105,7 +105,6 @@ category: components
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static readonly componentId = 'Drilldown'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,

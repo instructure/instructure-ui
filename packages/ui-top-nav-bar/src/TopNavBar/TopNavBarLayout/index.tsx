@@ -42,7 +42,7 @@ import type { TopNavBarSmallViewportLayoutProps } from './SmallViewportLayout/pr
 import { TopNavBarDesktopLayout } from './DesktopLayout'
 import type { TopNavBarDesktopLayoutProps } from './DesktopLayout/props'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TopNavBarLayoutProps } from './props'
 
 /**
@@ -57,7 +57,6 @@ id: TopNavBar.Layout
 class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static readonly componentId = 'TopNavBar.Layout'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     smallViewportConfig: {}

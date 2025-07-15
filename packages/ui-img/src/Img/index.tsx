@@ -33,7 +33,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ImgProps } from './props'
 
 /**
@@ -46,7 +46,6 @@ category: components
 class Img extends Component<ImgProps> {
   static readonly componentId = 'Img'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     alt: '',

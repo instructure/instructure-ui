@@ -37,7 +37,7 @@ import { withStyle, Global } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CodeEditorProps } from './props'
 import type CodeMirror from 'codemirror'
 import type { EditorConfiguration } from 'codemirror'
@@ -77,7 +77,6 @@ category: components/deprecated
 )
 class CodeEditor extends Component<CodeEditorProps> {
   static readonly componentId = 'CodeEditor'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     language: 'jsx',

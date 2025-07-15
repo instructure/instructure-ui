@@ -35,7 +35,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CloseButtonProps } from './props'
 
 /**
@@ -48,7 +48,6 @@ category: components
 class CloseButton extends Component<CloseButtonProps> {
   static readonly componentId = 'CloseButton'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied

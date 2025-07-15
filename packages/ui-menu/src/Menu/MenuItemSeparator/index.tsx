@@ -31,7 +31,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MenuSeparatorProps } from './props'
 
 /**
@@ -46,7 +46,6 @@ id: Menu.Separator
 class MenuItemSeparator extends Component<MenuSeparatorProps> {
   static readonly componentId = 'Menu.Separator'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   ref: Element | null = null

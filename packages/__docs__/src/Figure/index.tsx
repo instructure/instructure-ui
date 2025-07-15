@@ -42,7 +42,7 @@ import generateComponentTheme from './theme'
 
 import { Heading } from '../Heading'
 import type { FigureProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 
 class FigureItem extends Component<PropsWithChildren> {
   static displayName = 'FigureItem'

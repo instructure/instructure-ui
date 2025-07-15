@@ -49,7 +49,7 @@ import type { DrawerLayoutTrayProps } from './DrawerTray/props'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DrawerLayoutProps, DrawerLayoutState } from './props'
 
 type TrayChild = ComponentElement<
@@ -75,7 +75,6 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
   static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     minWidth: '30rem'

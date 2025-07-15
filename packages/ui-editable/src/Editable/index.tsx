@@ -42,7 +42,6 @@ category: components
 ---
 **/
 class Editable extends Component<EditableProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     readOnly: false,

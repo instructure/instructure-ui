@@ -51,8 +51,7 @@ category: components
 class Spinner extends Component<SpinnerProps, SpinnerState> {
   static readonly componentId = 'Spinner'
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     as: 'div',
     size: 'medium',
     variant: 'default'

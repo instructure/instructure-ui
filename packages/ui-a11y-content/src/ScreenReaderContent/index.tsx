@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ScreenReaderContentProps } from './props'
 
 /**

@@ -49,8 +49,7 @@ class Tag extends Component<TagProps> {
   static readonly componentId = 'Tag'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     size: 'medium',
     dismissible: false,
     variant: 'default',

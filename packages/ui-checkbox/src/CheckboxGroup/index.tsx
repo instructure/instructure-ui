@@ -36,7 +36,7 @@ import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   CheckboxGroupProps,
   CheckboxGroupState,
@@ -54,7 +54,6 @@ category: components
 class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static readonly componentId = 'CheckboxGroup'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,

@@ -47,7 +47,7 @@ import generateComponentTheme from './theme'
 
 import { Day } from './Day'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CalendarProps, CalendarState } from './props'
 import { Renderable } from '@instructure/shared-types'
 
@@ -74,7 +74,6 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

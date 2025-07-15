@@ -47,7 +47,6 @@ parent: FormField
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     inline: false,
