@@ -22,11 +22,6 @@
  * SOFTWARE.
  */
 
-import {
-  formMessageTypePropType,
-  formMessageChildPropType
-} from '../FormPropTypes'
-
 import type {
   FormFieldMessageTheme
 } from '@instructure/shared-types'

@@ -41,9 +41,6 @@ type PropKeys = keyof AppOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type AppProps = AppOwnProps & WithStyleProps<AppTheme, AppStyle>
 
-const propTypes = {
-  trayWidth: PropTypes.number
-}
 const allowedProps: AllowedPropKeys = ['trayWidth']
 
 type AppStyle = ComponentStyle<

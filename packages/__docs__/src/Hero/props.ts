@@ -53,4 +53,4 @@ type HeroTheme = {
 }
 export type { HeroStyle, HeroTheme }
 export type { HeroProps }
-export { allowedProps, propTypes }
+export { allowedProps }
