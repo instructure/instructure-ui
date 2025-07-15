@@ -71,8 +71,8 @@ const getHeadingId = (children: ReactNode): string => {
   const headingId = Children.toArray(children).reduce((id, child) => {
     if (typeof child === 'string') return id + child
 
-    if (isValidElement(child) && typeof child.props.children === 'string') {
-      return id + child.props.children
+    if (isValidElement(child) && typeof (child.props as { children?: ReactNode }).children === 'string') {
+      return id + (child.props as { children: string }).children
     }
 
     return id

@@ -182,7 +182,6 @@ export {
   textDirectionContextConsumer,
   DateTime,
   getTextDirection,
-  I18nPropTypes,
   Locale,
   DIRECTION
 } from '@instructure/ui-i18n'
@@ -246,7 +245,6 @@ export type {
 } from '@instructure/ui-modal'
 export {
   Transition,
-  transitionTypePropType,
   BaseTransition
 } from '@instructure/ui-motion'
 export type {
