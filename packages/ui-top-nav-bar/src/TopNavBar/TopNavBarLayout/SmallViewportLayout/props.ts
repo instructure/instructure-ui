@@ -37,8 +37,6 @@ import type { TopNavBarContextType } from '../../TopNavBarContext'
 
 import {
   commonAllowedProps,
-  commonPropTypes,
-  smallViewportPropTypes,
   smallViewportAllowedProps
 } from '../props'
 import type { CommonTopNavBarLayoutProps } from '../props'

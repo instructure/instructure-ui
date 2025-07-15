@@ -23,9 +23,7 @@
  */
 
 import React from 'react'
-import { Children } from '@instructure/ui-prop-types'
 
-import { TreeNode } from '../TreeNode'
 import type { CollectionData } from '../props'
 
 import type {

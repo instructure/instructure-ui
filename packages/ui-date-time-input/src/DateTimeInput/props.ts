@@ -26,7 +26,6 @@ import { SyntheticEvent } from 'react'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { Moment } from '@instructure/ui-i18n'
-import { Validator } from 'prop-types'
 import type { Renderable } from '@instructure/shared-types'
 
 type DateTimeInputProps = {
@@ -278,25 +277,6 @@ type DateTimeInputState = {
 type PropKeys = keyof DateTimeInputProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-const hourMinuteValidator: Validator<string> = function (
-  props,
-  propName,
-  componentName,
-  location
-) {
-  const propValue = props[propName]
-  if (typeof propValue === 'undefined' || propValue === '') return null
-
-  const hourMinuteRegex = /^\d{2}:\d{2}$/
-
-  if (typeof propValue === 'string' && !propValue.match(hourMinuteRegex)) {
-    return new Error(
-      `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
-        `a HH:MM formatted string.`
-    )
-  }
-  return null
-}
 const allowedProps: AllowedPropKeys = [
   'description',
   'dateRenderLabel',
