@@ -63,7 +63,7 @@ import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps, SelectedGroupOptionsMap } from './props'
+import { allowedProps, SelectedGroupOptionsMap } from './props'
 
 import type {
   DrilldownProps,

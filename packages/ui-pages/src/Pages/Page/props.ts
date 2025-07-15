@@ -24,7 +24,7 @@
 
 import React from 'react'
 import type { Spacing } from '@instructure/emotion'
-import type { PropValidators, UIElement } from '@instructure/shared-types'
+import type { UIElement } from '@instructure/shared-types'
 
 import type { PagesContextType } from '../PagesContext'
 

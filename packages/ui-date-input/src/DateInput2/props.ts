@@ -184,12 +184,9 @@ type DateInput2OwnProps = {
   inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
-type PropKeys = keyof DateInput2OwnProps
-
 type DateInput2Props = DateInput2OwnProps &
   OtherHTMLAttributes<
     DateInput2OwnProps,
     InputHTMLAttributes<DateInput2OwnProps & Element>
   >
 export type { DateInput2Props }
-export { propTypes }

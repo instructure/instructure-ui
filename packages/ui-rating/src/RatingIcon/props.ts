@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-
-import type { PropValidators, RatingIconTheme } from '@instructure/shared-types'
+import type { RatingIconTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type RatingIconOwnProps = {

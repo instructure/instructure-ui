@@ -25,9 +25,6 @@
 import React from 'react'
 import type { InputHTMLAttributes } from 'react'
 
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-
 import type {
   NumberInputTheme,
   OtherHTMLAttributes,

@@ -23,9 +23,6 @@
  */
 
 import React from 'react'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
-import { Option } from '../Option'
 
 import type {
   OtherHTMLAttributes,

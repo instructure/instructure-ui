@@ -47,7 +47,7 @@ import { Group } from './Group'
 import type { SimpleSelectGroupProps } from './Group/props'
 
 import type { SimpleSelectProps } from './props'
-import { allowedProps, propTypes, SimpleSelectState } from './props'
+import { allowedProps, SimpleSelectState } from './props'
 
 type OptionChild = ComponentElement<SimpleSelectOptionProps, Option>
 type GroupChild = ComponentElement<SimpleSelectGroupProps, Group>

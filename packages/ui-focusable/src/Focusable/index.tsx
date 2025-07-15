@@ -32,7 +32,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import { logWarn as warn } from '@instructure/console'
 
-import { propTypes, allowedProps, FocusableState } from './props'
+import { allowedProps, FocusableState } from './props'
 import type { FocusableProps } from './props'
 import { createChainedFunction } from '@instructure/ui-utils'
 
