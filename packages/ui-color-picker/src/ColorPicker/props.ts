@@ -32,7 +32,6 @@ import type {
 import type {
   ColorPickerTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 type ContrastStrength = 'min' | 'mid' | 'max'
 

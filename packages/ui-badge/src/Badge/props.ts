@@ -28,7 +28,6 @@
 import type {
   AsElementType,
   BadgeTheme,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   Spacing,

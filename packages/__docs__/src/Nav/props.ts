@@ -24,7 +24,6 @@
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type NavOwnProps = {

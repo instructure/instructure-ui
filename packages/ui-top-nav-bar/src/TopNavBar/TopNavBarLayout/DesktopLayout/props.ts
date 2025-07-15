@@ -27,7 +27,6 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarLayoutDesktopTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 import type { TopNavBarContextType } from '../../TopNavBarContext'

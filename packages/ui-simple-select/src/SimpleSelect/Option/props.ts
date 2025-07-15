@@ -25,7 +25,6 @@
 import React from 'react'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
 

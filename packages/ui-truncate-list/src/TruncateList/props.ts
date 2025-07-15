@@ -26,7 +26,6 @@ import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type TruncateListOwnProps = {

@@ -32,7 +32,6 @@ import type { WithStyleProps } from '@instructure/emotion'
 import type {
   TopNavBarLayoutTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 import { TopNavBarActionItems } from '../TopNavBarActionItems'

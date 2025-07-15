@@ -26,7 +26,6 @@
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 import type { ActionItemsChild } from './TopNavBarActionItems/props'

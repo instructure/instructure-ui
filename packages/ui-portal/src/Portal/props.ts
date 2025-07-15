@@ -28,7 +28,6 @@ import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 /**

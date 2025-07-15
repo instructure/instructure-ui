@@ -34,7 +34,6 @@ import type {
   AsElementType,
   AvatarTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
 

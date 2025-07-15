@@ -28,7 +28,6 @@ import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   TopNavBarLayoutSmallViewportTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 import type { DrilldownProps } from '@instructure/ui-drilldown'

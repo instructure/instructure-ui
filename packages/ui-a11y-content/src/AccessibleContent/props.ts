@@ -27,7 +27,6 @@
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type AccessibleContentOwnProps = {

@@ -30,7 +30,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type RatingOwnProps = {

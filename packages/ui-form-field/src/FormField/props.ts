@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import { FormPropTypes } from '../FormPropTypes'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type { FormMessage } from '../FormPropTypes'
 import type { Spacing } from '@instructure/emotion'

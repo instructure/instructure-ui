@@ -29,7 +29,6 @@ import { TopNavBarContextType } from '../TopNavBarContext'
 import {
   ChildrenOfType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import TopNavBarBreadcrumb from './index'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'

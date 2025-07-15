@@ -29,7 +29,6 @@ import { FormPropTypes } from '../FormPropTypes'
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   WithStyleProps,

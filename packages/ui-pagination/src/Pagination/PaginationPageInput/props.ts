@@ -27,7 +27,6 @@
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PaginationPageInputTheme,
-  PropValidators
 } from '@instructure/shared-types'
 import React from 'react'
 type PaginationPageInputOwnProps = {

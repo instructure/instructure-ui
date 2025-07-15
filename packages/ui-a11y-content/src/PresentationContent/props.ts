@@ -26,7 +26,6 @@ import React from 'react'
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type PresentationContentOwnProps = {

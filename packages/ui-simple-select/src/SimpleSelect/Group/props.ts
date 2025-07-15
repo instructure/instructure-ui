@@ -29,7 +29,6 @@ import { Option } from '../Option'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type SimpleSelectGroupOwnProps = {

@@ -33,7 +33,6 @@ import type {
   AsElementType,
   BillboardTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
 import { MouseEvent } from 'react'
