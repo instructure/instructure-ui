@@ -24,11 +24,9 @@
 
 import { ReactNode } from 'react'
 
-
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 

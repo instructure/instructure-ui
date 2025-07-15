@@ -23,13 +23,10 @@
  */
 
 
-import { InlineSVG } from '../InlineSVG'
-
 import type { SVGAttributes } from 'react'
 import type {
   InlineSVGTheme,
   OtherHTMLAttributes,
-  
   SVGIconTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
