@@ -23,12 +23,10 @@
  */
 
 import React from 'react'
-import { controllable } from '@instructure/ui-prop-types'
 
 import {
   AsElementType,
   OtherHTMLAttributes,
-  
   Renderable,
   ToggleGroupTheme
 } from '@instructure/shared-types'

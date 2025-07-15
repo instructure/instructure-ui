@@ -24,14 +24,9 @@
 
 import { InputHTMLAttributes } from 'react'
 
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { controllable } from '@instructure/ui-prop-types'
-
 import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  
   TextInputTheme
 } from '@instructure/shared-types'
 import type {

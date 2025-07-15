@@ -24,15 +24,9 @@
 
 import { InputHTMLAttributes } from 'react'
 
-
-import { controllable } from '@instructure/ui-prop-types'
-import { I18nPropTypes } from '@instructure/ui-i18n'
-import { FormPropTypes } from '@instructure/ui-form-field'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   PlacementPropValues,

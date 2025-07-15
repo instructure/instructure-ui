@@ -24,8 +24,6 @@
 
 
 
-import { controllable } from '@instructure/ui-prop-types'
-
 import type {
   TreeBrowserTheme
 } from '@instructure/shared-types'

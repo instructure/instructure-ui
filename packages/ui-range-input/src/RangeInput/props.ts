@@ -23,13 +23,9 @@
  */
 
 import React from 'react'
-import { controllable } from '@instructure/ui-prop-types'
-import { deprecated } from '@instructure/ui-react-utils'
-import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type {
   OtherHTMLAttributes,
-  
   RangeInputTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'

@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 
-
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   Spacing,

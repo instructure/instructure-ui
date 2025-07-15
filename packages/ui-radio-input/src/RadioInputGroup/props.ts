@@ -23,14 +23,11 @@
  */
 
 import React from 'react'
-import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  
   RadioInputGroupTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'

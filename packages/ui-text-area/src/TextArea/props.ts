@@ -25,13 +25,8 @@
 import React from 'react'
 import type { TextareaHTMLAttributes } from 'react'
 
-
-import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
-
 import type {
   OtherHTMLAttributes,
-  
   TextAreaTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'

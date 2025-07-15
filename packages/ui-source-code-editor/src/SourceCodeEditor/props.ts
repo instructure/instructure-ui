@@ -26,8 +26,6 @@
 
 import type { TagStyle } from '@codemirror/language'
 
-import { controllable } from '@instructure/ui-prop-types'
-
 import type {
   CodeEditorTheme,
   OtherHTMLAttributes

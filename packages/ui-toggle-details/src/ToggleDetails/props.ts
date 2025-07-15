@@ -23,11 +23,9 @@
  */
 
 import React from 'react'
-import { controllable } from '@instructure/ui-prop-types'
 
 import type {
   OtherHTMLAttributes,
-  
   ToggleDetailsTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
