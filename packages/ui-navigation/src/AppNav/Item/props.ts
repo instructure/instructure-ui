@@ -28,7 +28,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { Cursor } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/shared-types'
 import React from 'react'
 import { Renderable } from '@instructure/shared-types'
 

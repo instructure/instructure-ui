@@ -30,7 +30,7 @@ import type {
   BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { Cursor } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
 
 type ButtonOwnProps = {

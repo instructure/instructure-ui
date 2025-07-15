@@ -34,7 +34,7 @@ import type {
   AsElementType,
   BaseButtonTheme,
 } from '@instructure/shared-types'
-import type { Cursor } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
 import { Renderable } from '@instructure/shared-types'
 
