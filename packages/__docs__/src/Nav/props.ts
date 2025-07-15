@@ -55,4 +55,4 @@ type NavState = {
   announcement: string | null
 }
 export type { NavProps, NavState }
-export { allowedProps, propTypes }
+export { allowedProps }

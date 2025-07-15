@@ -23,7 +23,6 @@
  */
 
 import { Children, Component, PropsWithChildren } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, ensureSingleChild } from '@instructure/ui-react-utils'
 import {
@@ -46,10 +45,6 @@ import { allowedProps } from './props'
 
 class FigureItem extends Component<PropsWithChildren> {
   static displayName = 'FigureItem'
-
-  static propTypes = {
-    children: PropTypes.node
-  }
 
   static defaultProps = {
     children: null

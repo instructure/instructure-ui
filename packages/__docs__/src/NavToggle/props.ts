@@ -46,4 +46,4 @@ const allowedProps: AllowedPropKeys = [
   'shouldBlur'
 ]
 export type { NavToggleProps }
-export { allowedProps, propTypes }
+export { allowedProps }

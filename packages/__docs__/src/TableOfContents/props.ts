@@ -23,7 +23,6 @@
  */
 
 import type { DocDataType } from '../Document/props'
-import { DocPropType } from '../Document/props'
 
 type TableOfContentsOwnProps = {
   doc: DocDataType

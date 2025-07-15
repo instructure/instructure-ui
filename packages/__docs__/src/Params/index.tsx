@@ -26,7 +26,6 @@ import { Component } from 'react'
 import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 import type { ParamsProps } from './props'
-import { propTypes } from './props'
 import { Heading } from '@instructure/ui-heading'
 
 class Params extends Component<ParamsProps> {

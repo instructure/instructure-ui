@@ -408,11 +408,6 @@ describe('<Modal />', () => {
 
   describe('managed focus', () => {
     class ModalExample extends Component<Partial<ModalProps>> {
-      static propTypes = {
-        // eslint-disable-next-line react/forbid-foreign-prop-types
-        ...Modal.propTypes
-      }
-
       render() {
         const { label, ...props } = this.props
 

@@ -27,7 +27,7 @@ import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 
-import { propTypes, allowedProps, EditableState } from './props'
+import { allowedProps, EditableState } from './props'
 import type {
   EditableProps,
   GetContainerProps,
