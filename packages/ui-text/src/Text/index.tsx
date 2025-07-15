@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TextProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -42,7 +42,6 @@ class Text extends Component<TextProps> {
   static readonly componentId = 'Text'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',

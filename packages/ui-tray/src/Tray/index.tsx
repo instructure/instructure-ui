@@ -53,7 +53,6 @@ class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     defaultFocusElement: null,

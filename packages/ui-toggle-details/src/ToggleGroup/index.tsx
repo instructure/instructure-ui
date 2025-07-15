@@ -43,7 +43,7 @@ import {
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 import type { ToggleGroupProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -61,7 +61,6 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',

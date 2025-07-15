@@ -30,7 +30,6 @@ import { propTypes } from './props'
 import { Heading } from '@instructure/ui-heading'
 
 class Params extends Component<ParamsProps> {
-  static propTypes = propTypes
 
   static defaultProps = {
     layout: 'small'

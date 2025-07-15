@@ -37,7 +37,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { ToggleDetailsProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 import type { ViewProps } from '@instructure/ui-view'
 
@@ -51,7 +51,6 @@ category: components
 class ToggleDetails extends Component<ToggleDetailsProps> {
   static readonly componentId = 'ToggleDetails'
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'default',

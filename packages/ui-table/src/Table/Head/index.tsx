@@ -39,7 +39,7 @@ import generateComponentTheme from './theme'
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
 import type { RowChild } from '../props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from '../TableContext'
 
 /**

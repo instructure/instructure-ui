@@ -42,7 +42,7 @@ import { Cell } from './Cell'
 
 import type { TableProps } from './props'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from './TableContext'
 
 /**
@@ -55,7 +55,6 @@ class Table extends Component<TableProps> {
   static readonly componentId = 'Table'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,

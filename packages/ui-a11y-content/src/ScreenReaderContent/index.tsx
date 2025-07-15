@@ -43,7 +43,6 @@ category: components/utilities
 class ScreenReaderContent extends Component<ScreenReaderContentProps> {
   static readonly componentId = 'ScreenReaderContent'
 
-  static propTypes = propTypes
 
   static allowedProps = allowedProps
 

@@ -42,7 +42,7 @@ import type {
   TimeSelectOptions
 } from './props'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,

@@ -64,7 +64,6 @@ class FigureItem extends Component<PropsWithChildren> {
 
 @withStyle(generateStyle, generateComponentTheme)
 class Figure extends Component<FigureProps> {
-  static propTypes = propTypes
 
   static allowedProps = allowedProps
 

@@ -34,7 +34,7 @@ import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import type { CompareObject } from '../props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { CollectionItem, CollectionProps, CollectionData } from '../props'
 
 type AriaSelectedType = { 'aria-selected'?: boolean }
@@ -54,7 +54,6 @@ class TreeCollection extends Component<
   static readonly componentId = 'TreeBrowser.Collection'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     collections: [],

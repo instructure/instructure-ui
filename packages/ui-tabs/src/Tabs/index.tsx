@@ -57,7 +57,7 @@ import generateComponentTheme from './theme'
 import { Tab } from './Tab'
 import { Panel } from './Panel'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { TabsProps, TabsState } from './props'
 
 import type { TabsTabProps } from './Tab/props'
@@ -77,7 +77,6 @@ class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'default',

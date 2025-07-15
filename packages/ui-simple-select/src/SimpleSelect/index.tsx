@@ -72,7 +72,6 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   static Group = Group
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',

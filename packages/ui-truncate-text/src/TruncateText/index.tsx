@@ -55,7 +55,6 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   static readonly componentId = 'TruncateText'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     maxLines: 1,
