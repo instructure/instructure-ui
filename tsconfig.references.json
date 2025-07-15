@@ -70,9 +70,6 @@
       "path": "./packages/ui-checkbox/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-code-editor/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-codemods/tsconfig.build.json"
     },
     {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Children, Component } from 'react'
+import { Children, Component, type JSX } from 'react'
 
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'

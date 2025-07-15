@@ -79,8 +79,6 @@ export type {
   CheckboxGroupProps,
   CheckboxProps
 } from '@instructure/ui-checkbox'
-export { CodeEditor } from '@instructure/ui-code-editor'
-export type { CodeEditorProps } from '@instructure/ui-code-editor'
 export {
   ColorPicker,
   ColorMixer,
@@ -153,7 +151,6 @@ export {
   FormFieldMessages,
   FormFieldLayout,
   FormFieldGroup,
-  FormPropTypes
 } from '@instructure/ui-form-field'
 export type {
   FormFieldGroupProps,
@@ -288,7 +285,6 @@ export { Portal } from '@instructure/ui-portal'
 export type { PortalProps, PortalNode } from '@instructure/ui-portal'
 export {
   Position,
-  PositionPropTypes,
   calculateElementPosition,
   executeMirrorFunction,
   mirrorHorizontalPlacement,
