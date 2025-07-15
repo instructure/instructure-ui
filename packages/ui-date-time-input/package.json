@@ -43,8 +43,7 @@
     "@instructure/ui-react-utils": "10.23.0",
     "@instructure/ui-testable": "10.23.0",
     "@instructure/ui-time-select": "10.23.0",
-    "@instructure/ui-utils": "10.23.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-utils": "10.23.0"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

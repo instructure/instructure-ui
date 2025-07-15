@@ -37,8 +37,7 @@
     "@instructure/ui-react-utils": "10.23.0",
     "@instructure/ui-testable": "10.23.0",
     "@instructure/ui-utils": "10.23.0",
-    "codemirror": "5.65.16",
-    "prop-types": "^15.8.1"
+    "codemirror": "5.65.16"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

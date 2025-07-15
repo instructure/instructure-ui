@@ -37,8 +37,7 @@
     "@instructure/ui-utils": "10.23.0",
     "@instructure/ui-view": "10.23.0",
     "@instructure/uid": "10.23.0",
-    "keycode": "^2.2.1",
-    "prop-types": "^15.8.1"
+    "keycode": "^2.2.1"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.23.0",
