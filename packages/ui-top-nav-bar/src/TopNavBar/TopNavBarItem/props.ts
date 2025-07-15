@@ -23,14 +23,12 @@
  */
 
 import React from 'react'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   TopNavBarItemTheme,
   OtherHTMLAttributes,
-  
   Renderable,
   AsElementType
 } from '@instructure/shared-types'
@@ -60,19 +58,6 @@ type TopNavBarItemTooltipType =
       onShowContent?: TooltipProps['onShowContent']
       onHideContent?: TooltipProps['onHideContent']
     }
-
-const topNavBarItemTooltipPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.shape({
-    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    placement: PropTypes.string,
-    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    onShowContent: PropTypes.func,
-    onHideContent: PropTypes.func
-  })
-])
 
 type TopNavBarItemOwnProps = {
   /**
@@ -332,4 +317,4 @@ export type {
   DrilldownSubmenu,
   TopNavBarItemTooltipType
 }
-export { propTypes, allowedProps, topNavBarItemTooltipPropType }
+export { allowedProps }

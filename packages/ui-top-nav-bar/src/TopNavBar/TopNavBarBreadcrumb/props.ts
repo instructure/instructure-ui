@@ -31,7 +31,6 @@ import {
   OtherHTMLAttributes,
 } from '@instructure/shared-types'
 import TopNavBarBreadcrumb from './index'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
 import type { BreadcrumbProps } from '@instructure/ui-breadcrumb'

@@ -22,17 +22,13 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Children, controllable } from '@instructure/ui-prop-types'
-
-import { Page } from './Page'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { PropValidators, PagesTheme } from '@instructure/shared-types'
+import type { PagesTheme } from '@instructure/shared-types'
 import type { PagesContextType } from './PagesContext'
 
 type PagesOwnProps = {
