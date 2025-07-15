@@ -22,45 +22,16 @@
  * SOFTWARE.
  */
 
-import '@testing-library/jest-dom'
-import { pickProps } from '../pickProps'
+import type { ComponentType } from 'react'
 
-describe('pickProps', () => {
-  it('should work with an input of a list allowed prop names', () => {
-    const allowedPropKeys = ['prop1', 'prop2']
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp1: 'excessiveValue1'
-    }
-    const expectedResult = {
-      prop1: 'hello',
-      prop2: 42
-    }
+type AsElementType<P = any> = keyof JSX.IntrinsicElements | ComponentType<P>
 
-    const actualResult = pickProps(inputProps, allowedPropKeys)
+type ToProp = {
+  /**
+   * Needed for React Router links
+   * @private
+   */
+  to?: string
+}
 
-    expect(actualResult).toEqual(expectedResult)
-  })
-
-  it('should add the `include` keys to the result with a list allowed prop names', () => {
-    const allowedPropKeys = ['prop1', 'prop2']
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp1: 'excessiveValue1',
-      excessiveProp2: 'excessiveValue2'
-    }
-    const expectedResult = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp2: 'excessiveValue2'
-    }
-
-    const actualResult = pickProps(inputProps, allowedPropKeys, [
-      'excessiveProp2'
-    ])
-
-    expect(actualResult).toEqual(expectedResult)
-  })
-})
+export type { AsElementType, ToProp }

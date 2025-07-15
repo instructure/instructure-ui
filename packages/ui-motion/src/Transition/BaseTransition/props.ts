@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-import type { PropValidators } from '@instructure/shared-types'
 
 type TransitionType =
   | 'fade'
@@ -156,27 +155,10 @@ type BaseTransitionOwnProps = TransitionCommonProps & OwnProps
 // that's why it is separated from BaseTransitionOwnProps
 type BaseTransitionProps = BaseTransitionOwnProps
 
-type CommonPropKeys = keyof TransitionCommonProps
 type PropKeys = keyof BaseTransitionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-const transitionCommonPropTypes: PropValidators<CommonPropKeys> = {
-  in: PropTypes.bool,
-  unmountOnExit: PropTypes.bool,
-  transitionOnMount: PropTypes.bool,
-  transitionEnter: PropTypes.bool,
-  transitionExit: PropTypes.bool,
-  onTransition: PropTypes.func,
-  onEnter: PropTypes.func,
-  onEntering: PropTypes.func,
-  onEntered: PropTypes.func,
-  onExit: PropTypes.func,
-  onExiting: PropTypes.func,
-  onExited: PropTypes.func,
-  children: PropTypes.node,
-  elementRef: PropTypes.func
-}
 const allowedProps: AllowedPropKeys = [
   'in',
   'unmountOnExit',
@@ -217,4 +199,4 @@ export type {
   BaseTransitionStateValue,
   BaseTransitionStatesType
 }
-export { propTypes, allowedProps, transitionCommonPropTypes }
+export { allowedProps }

@@ -27,6 +27,7 @@ export * from './Colors'
 export * from './ComponentThemeMap'
 export * from './ComponentThemeVariables'
 export * from './CommonTypes'
+export * from './CommonProps'
 export type {
   DeepPartial,
   PartialRecord,
