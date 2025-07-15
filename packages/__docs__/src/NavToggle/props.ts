@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-import type { PropValidators } from '@instructure/shared-types'
 import { ToggleDetailsProps } from '@instructure/ui-toggle-details'
 
 type NavToggleOwnProps = {

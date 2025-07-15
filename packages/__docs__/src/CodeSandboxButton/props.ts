@@ -23,7 +23,6 @@
  */
 
 
-import type { PropValidators } from '@instructure/shared-types'
 type CodeSandboxButtonOwnProps = {
   code: string
   title: string

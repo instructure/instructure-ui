@@ -25,7 +25,6 @@
 
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
 
-import type { PropValidators } from '@instructure/shared-types'
 import type { BreakpointQueries, QueriesMatching } from '../QueryType'
 
 interface ResponsivePropsObject {

@@ -25,7 +25,6 @@
 import { ReactNode } from 'react'
 
 
-import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type SelectableOwnProps = {

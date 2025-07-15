@@ -23,7 +23,6 @@
  */
 
 
-import type { PropValidators } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ColorBandOwnProps = {
   height?: string

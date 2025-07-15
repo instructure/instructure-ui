@@ -23,7 +23,7 @@
  */
 
 
-import type { PropValidators, AsElementType } from '@instructure/shared-types'
+import type { AsElementType } from '@instructure/shared-types'
 type ColorNameOwnProps = {
   name: string
   as?: AsElementType

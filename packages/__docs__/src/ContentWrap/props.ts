@@ -23,7 +23,6 @@
  */
 
 
-import type { PropValidators } from '@instructure/shared-types'
 import type { Spacing } from '@instructure/emotion'
 
 type ContentWrapOwnProps = {

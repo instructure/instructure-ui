@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
 import { Children } from '@instructure/ui-prop-types'
 
 import {

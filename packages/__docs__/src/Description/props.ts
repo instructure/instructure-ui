@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
 type DescriptionOwnProps = {
   id: string
   content: string

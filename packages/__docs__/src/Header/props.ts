@@ -23,7 +23,6 @@
  */
 
 
-import type { PropValidators } from '@instructure/shared-types'
 type HeaderOwnProps = {
   name: string
   version: string

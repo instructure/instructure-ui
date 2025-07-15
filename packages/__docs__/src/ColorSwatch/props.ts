@@ -23,7 +23,6 @@
  */
 
 
-import type { PropValidators } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ColorSwatchOwnProps = {
   // TODO: once all the docs components are typed, check again whether the number type is needed.
