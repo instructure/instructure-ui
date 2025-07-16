@@ -113,14 +113,10 @@ class ModalBody extends Component<ModalBodyProps> {
         as={as}
         css={this.props.styles?.modalBody}
         padding={padding}
-        // Setting this to 0 is necessary for findFocusable to find this DOM
-        // element.
-        // Note that VoiceOver does not read the contents properly
-        // if there is a scrollbar, and it has no kb just SR focus.
-        // To prevent this we could set tabIndex to -1
-        // but this would make the scrollbar non-focusable, so the modal cannot
-        // be scrolled with keyboard.
-        tabIndex={0}
+        //check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
+        {...(this.ref?.scrollHeight !== this.ref?.getBoundingClientRect().height
+          ? { tabIndex: 0 }
+          : {})}
       >
         {children}
       </View>
