@@ -56,7 +56,7 @@ interface PropsObject {
  * @returns the element type
  */
 function getElementType<T extends PropsObject>(
-  Component: Omit<ComponentType<T>, 'propTypes'>,
+  Component: ComponentType<T>,
   props: T,
   getDefault?: () => AsElementType<T>
 ) {
