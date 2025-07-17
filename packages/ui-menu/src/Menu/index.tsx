@@ -497,7 +497,7 @@ class Menu extends Component<MenuProps> {
           id: this._labelId,
           onMouseOver: this.handleTriggerMouseOver,
           onKeyDown: this.handleTriggerKeyDown,
-          disabled: (trigger as ReactElement).props.disabled || disabled
+          disabled: (trigger as ReactElement<any>).props.disabled || disabled
         })}
         defaultFocusElement={() =>
           this._popover?._contentElement?.querySelector('[class$="menuItem"]')

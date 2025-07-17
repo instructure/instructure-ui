@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { isValidElement, ComponentElement, Component, Children } from 'react'
+import { isValidElement, ComponentElement, Component, Children, type ReactElement } from 'react'
 
 import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -142,7 +142,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     const getValues = (children: SimpleSelectProps['children']) =>
       Children.map(children, (child) => {
         if (isValidElement(child)) {
-          return child.props.value
+          return (child as ReactElement<any>).props.value
         }
         return null
       })
