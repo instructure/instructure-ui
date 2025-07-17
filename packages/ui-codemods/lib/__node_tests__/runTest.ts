@@ -39,7 +39,8 @@ export function runTest(codemod: Transform) {
   const entries = fs.readdirSync(
     `${__dirname}/__testfixtures__/${codemod.name}`,
     { withFileTypes: true }
-  )
+  ) as Array<fs.Dirent & { path: string }>
+
   let fixturesRun = 0
   entries.forEach((entry) => {
     if (entry.isFile() && entry.name.indexOf('input') > -1) {
