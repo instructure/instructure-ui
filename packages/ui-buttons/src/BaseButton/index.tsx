@@ -308,9 +308,6 @@ class BaseButton extends Component<BaseButtonProps> {
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
         css={styles?.baseButton}
-        focusRingBorderRadius={String(
-          (styles?.content as { borderRadius?: string | number })?.borderRadius
-        )}
         withFocusOutline={withFocusOutline}
       >
         <span css={styles?.content}>{this.renderChildren()}</span>

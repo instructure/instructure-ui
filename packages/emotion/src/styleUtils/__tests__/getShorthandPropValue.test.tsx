@@ -93,4 +93,21 @@ describe('getShorthandPropValue', () => {
     const result = getShorthandPropValue(name, theme, values, 'border')
     expect(result).toEqual('0 0 auto 0.3rem')
   })
+
+  it('accepts CSS units if matchCSSUnits is true', () => {
+    const r1 = getShorthandPropValue(name, theme, '1px', 'border', true)
+    expect(r1).toEqual('1px')
+
+    const r2 = getShorthandPropValue(name, theme, 'sdfsdf', 'border', true)
+    expect(r2).toEqual('0')
+
+    const r3 = getShorthandPropValue(name, theme, '123', 'border', true)
+    expect(r3).toEqual('0')
+
+    const r4 = getShorthandPropValue(name, theme, 'medium 2rem', 'border', true)
+    expect(r4).toEqual('0.2rem 2rem')
+
+    const r5 = getShorthandPropValue(name, theme, '15px .2rem', 'border', true)
+    expect(r5).toEqual('15px .2rem')
+  })
 })

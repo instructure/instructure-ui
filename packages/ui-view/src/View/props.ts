@@ -180,6 +180,7 @@ type ViewOwnProps = {
   /**
    * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
    * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
+   * Also accepts valid CSS length values like `1rem` or `12px`
    */
   borderRadius?: BorderRadii
   /**
@@ -201,6 +202,9 @@ type ViewOwnProps = {
    */
   overscrollBehavior?: 'auto' | 'contain' | 'none'
   /**
+   * DEPRECATED, this prop does nothing. Use the focusOutlineOffset theme
+   * variable
+   *
    * Sets the radius of the focus border ring.
    *
    * For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width.
@@ -252,7 +256,7 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   borderWidth: ThemeablePropTypes.borderWidth,
-  borderRadius: ThemeablePropTypes.borderRadius,
+  borderRadius: PropTypes.string,
   borderColor: PropTypes.string,
   background: PropTypes.oneOf([
     'transparent',
