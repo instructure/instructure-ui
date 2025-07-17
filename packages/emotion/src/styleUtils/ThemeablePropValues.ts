@@ -140,7 +140,7 @@ type Background = (typeof ThemeablePropValues.BACKGROUNDS)[BackgroundKeys]
 type BorderRadiiKeys = keyof typeof ThemeablePropValues.BORDER_RADII
 type BorderRadiiValues =
   (typeof ThemeablePropValues.BORDER_RADII)[BorderRadiiKeys]
-type BorderRadii = CSSShorthandValue<BorderRadiiValues>
+type BorderRadii = CSSShorthandValue<BorderRadiiValues | string> // TODO type better for actual values like '12px'
 
 // BORDER_WIDTHS
 type BorderWidthKeys = keyof typeof ThemeablePropValues.BORDER_WIDTHS

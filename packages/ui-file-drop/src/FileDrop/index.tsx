@@ -369,16 +369,15 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
           onDrop={this.handleChange}
         >
           <View
-            display="block"
-            position="relative"
-            withFocusOutline={this.state.isFocused}
-            borderRadius="large"
-            focusColor={focusColor}
-            height={height}
-            focusRingBorderRadius={String(
+            borderRadius={String(
               (styles?.fileDropLayout as { borderRadius?: string | number })
                 ?.borderRadius
             )}
+            display="block"
+            position="relative"
+            withFocusOutline={this.state.isFocused}
+            focusColor={focusColor}
+            height={height}
           >
             <span css={this.props.styles?.fileDropLabelContent}>
               <span css={this.props.styles?.fileDropLayout}>

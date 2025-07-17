@@ -30,11 +30,7 @@ import {
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 
-import type {
-  OtherHTMLAttributes,
-  PartialRecord,
-  ViewTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, ViewTheme } from '@instructure/shared-types'
 import type { ViewProps, ViewStyle, BorderColor } from './props'
 import { alpha } from '@instructure/ui-color-utils'
 
@@ -50,17 +46,16 @@ const getBorderStyle = ({
   dir: ViewProps['dir']
 }) => {
   const isRtlDirection = dir === DIRECTION.rtl
-
   return {
     borderRadius: getShorthandPropValue(
       'View',
       theme,
       isRtlDirection ? mirrorShorthandCorners(borderRadius) : borderRadius,
-      'borderRadius'
+      'borderRadius',
+      true
     ),
     borderWidth: getShorthandPropValue(
       'View',
-
       theme,
       isRtlDirection ? mirrorShorthandEdges(borderWidth) : borderWidth,
       'borderWidth'
@@ -165,50 +160,6 @@ const getStyleProps = ({
   return whitelisted
 }
 
-const verifyUniformValues = (
-  initialValue: string,
-  input: ViewProps['borderRadius']
-) => {
-  if (typeof input !== 'string') {
-    return false
-  }
-
-  return input
-    .trim()
-    .split(' ')
-    .every((value) => initialValue === value)
-}
-
-type FocusRingRadius =
-  | 'focusRing--radiusInherit'
-  | 'focusRing--radiusNone'
-  | 'focusRing--radiusSmall'
-  | 'focusRing--radiusMedium'
-  | 'focusRing--radiusLarge'
-  | 'focusRing--radiusCustom'
-
-const getFocusRingRadius = (
-  borderRadius: ViewProps['borderRadius'],
-  props: ViewProps
-) => {
-  const baseRadiusStyle = 'focusRing--radius'
-  const initialValue = (borderRadius || '').trim().split(' ')[0]
-  if (props.focusRingBorderRadius) {
-    return `${baseRadiusStyle}Custom` as FocusRingRadius
-  }
-  if (verifyUniformValues(initialValue, borderRadius)) {
-    const capitalize = (str: string) =>
-      `${str.charAt(0).toUpperCase()}${str.slice(1)}`
-
-    if (['small', 'medium', 'large'].includes(initialValue))
-      return `${baseRadiusStyle}${capitalize(initialValue)}` as FocusRingRadius
-    if (['circle', 'pill'].includes(initialValue))
-      return `${baseRadiusStyle}Inherit` as FocusRingRadius
-  }
-
-  return `${baseRadiusStyle}None` as FocusRingRadius
-}
-
 const withBorder = (props: ViewProps) => {
   const { borderWidth } = props
   return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
@@ -219,8 +170,6 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
     focusColor,
     focusPosition,
     shouldAnimateFocus,
-    borderRadius,
-    focusRingBorderRadius,
     withFocusOutline,
     focusWithin
   } = props
@@ -243,47 +192,6 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
     success: componentTheme.focusColorSuccess,
     danger: componentTheme.focusColorDanger
   }
-
-  const focusRingRadius = getFocusRingRadius(borderRadius, props)
-  const focusRingVariants: PartialRecord<FocusRingRadius, string | 0> = {
-    'focusRing--radiusInherit': 'inherit',
-    'focusRing--radiusNone': 0
-  }
-  const borderRadiusByOffset: {
-    [k in NonNullable<ViewProps['focusPosition']>]: PartialRecord<
-      FocusRingRadius,
-      { borderRadius: string }
-    >
-  } = {
-    offset: {
-      'focusRing--radiusSmall': {
-        borderRadius: `calc(${componentTheme.borderRadiusSmall} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
-      },
-      'focusRing--radiusMedium': {
-        borderRadius: `calc(${componentTheme.borderRadiusMedium} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
-      },
-      'focusRing--radiusLarge': {
-        borderRadius: `calc(${componentTheme.borderRadiusLarge} + (${componentTheme.focusOutlineOffset} -  ${componentTheme.focusOutlineWidth}))`
-      },
-      'focusRing--radiusCustom': {
-        borderRadius: `calc(${focusRingBorderRadius} + (${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth}))`
-      }
-    },
-    inset: {
-      'focusRing--radiusSmall': {
-        borderRadius: `calc(${componentTheme.borderRadiusSmall} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
-      },
-      'focusRing--radiusMedium': {
-        borderRadius: `calc(${componentTheme.borderRadiusMedium} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
-      },
-      'focusRing--radiusLarge': {
-        borderRadius: `calc(${componentTheme.borderRadiusLarge} - (${componentTheme.focusOutlineInset} + ${componentTheme.focusOutlineWidth}))`
-      },
-      'focusRing--radiusCustom': {
-        borderRadius: `calc(${focusRingBorderRadius} - (${componentTheme.focusOutlineOffset} + ${componentTheme.focusOutlineWidth}))`
-      }
-    }
-  }
   const visibleFocusStyle = {
     ...focusPositionVariants[focusPos],
     outlineColor: focusColorVariants[focusColor!]
@@ -296,8 +204,6 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
     ...(withFocusOutline && visibleFocusStyle)
   }
   return {
-    borderRadius: focusRingVariants[focusRingRadius], // inherit or none
-    ...borderRadiusByOffset[focusPos][focusRingRadius], // border radius value
     ...(shouldAnimateFocus && {
       transition: 'outline-color 0.2s, outline-offset 0.25s'
     }),
@@ -317,9 +223,6 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
 }
 
 /**
- * ---
- * private: true
- * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
@@ -357,14 +260,12 @@ const generateStyle = (
     withVisualDebug,
     dir
   } = props
-
   const borderStyle = getBorderStyle({
     theme: componentTheme,
     borderRadius,
     borderWidth,
     dir
   })
-
   const spacingStyle = getSpacingStyle({
     margin,
     padding,
@@ -544,15 +445,15 @@ const generateStyle = (
             })
           }
         : {}),
-      ...focusStyles
+      ...borderStyle
     },
     inlineStyles: {
       //every '&' symbol will add another class to the rule, so it will be stronger
       //making an accidental override less likely
       '&&&&&&&&&&': {
         ...spacingStyle,
-        ...borderStyle,
         ...offsetStyle,
+        ...focusStyles,
         width,
         height,
         minWidth,

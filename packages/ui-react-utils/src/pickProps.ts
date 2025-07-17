@@ -27,7 +27,7 @@
  * category: utilities/react
  * ---
  * Return a props object with only specified propTypes.
- * @module pickProps
+ *
  * @param props React component props
  * @param propTypesOrAllowedPropList React component propTypes or the list of allowed prop keys
  * @param include an optional array of prop names to include

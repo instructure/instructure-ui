@@ -25,6 +25,7 @@
 import { Component } from 'react'
 import { Table } from '@instructure/ui-table'
 import type { ReturnsProps } from './props'
+import Markdown from 'marked-react'
 
 class Returns extends Component<ReturnsProps> {
   render() {
@@ -41,7 +42,9 @@ class Returns extends Component<ReturnsProps> {
             <Table.Cell>
               <code>{this.props.types.type}</code>
             </Table.Cell>
-            <Table.Cell>{this.props.types.description}</Table.Cell>
+            <Table.Cell>
+              <Markdown>{this.props.types.description}</Markdown>
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>

@@ -359,6 +359,8 @@ const generateStyle = (
           appearance: 'none',
           textDecoration: 'none' /* for links styled as buttons */,
           touchAction: 'manipulation',
+          // This sets the focus ring's border radius displayed by the `View`
+          borderRadius: componentTheme.borderRadius,
 
           '&::-moz-focus-inner': {
             border: '0' /* removes default dotted focus outline in Firefox */

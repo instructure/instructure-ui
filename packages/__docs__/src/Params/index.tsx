@@ -49,13 +49,13 @@ class Params extends Component<ParamsProps> {
           <Table.Cell>
             <code>{param?.defaultValue}</code>
           </Table.Cell>
-          <Table.Cell>{this.renderDescription(param.description!)}</Table.Cell>
+          <Table.Cell>{this.renderDescription(param.description)}</Table.Cell>
         </Table.Row>
       )
     })
   }
 
-  renderDescription(description: string) {
+  renderDescription(description?: string) {
     return <div>{description && compileMarkdown(description)}</div>
   }
 
