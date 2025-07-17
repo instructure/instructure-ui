@@ -99,7 +99,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
       return child ? (
         <Grid.Col
           width={
-            (child as ReactElement).props && (child as ReactElement).props.width
+            (child as ReactElement).props && (child as ReactElement<any>).props.width
               ? 'auto'
               : undefined
           }

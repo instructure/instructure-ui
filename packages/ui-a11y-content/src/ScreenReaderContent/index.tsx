@@ -72,18 +72,16 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
   }
 
   render() {
-    const { children, styles, as, ...props } = this.props
-    // TODO is this ok?
-    // const ElementType = getElementType(ScreenReaderContent, props)
-    const Component = as || 'span'
+    const { children, styles, ...props } = this.props
+    const ElementType = getElementType(ScreenReaderContent, props)
     return (
-      <Component
+      <ElementType
         {...passthroughProps(props)}
         css={styles?.screenReaderContent}
         ref={this.handleRef}
       >
         {children}
-      </Component>
+      </ElementType>
     )
   }
 }
