@@ -36,7 +36,7 @@ type TableRowOwnProps = {
    *
    * By default `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`
    */
-  children?: React.ReactElement | React.ReactElement[]
+  children?: React.ReactElement<any> | React.ReactElement<any>[]
 
   /**
    * Controls the hover state of the row.

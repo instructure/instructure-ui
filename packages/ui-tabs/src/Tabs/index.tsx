@@ -390,7 +390,7 @@ class Tabs extends Component<TabsProps, TabsState> {
     if (activePanel !== undefined) {
       // cloning active panel with a proper custom key as a workaround because
       // safeCloneElement overwrites it with the key from the original element
-      activePanelClone = cloneElement(activePanel as ReactElement, {
+      activePanelClone = cloneElement(activePanel as ReactElement<any>, {
         key: `panel-${index}`
       })
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ContextType } from 'react'
+import { Component, Children, ContextType, type ReactElement } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
@@ -65,7 +65,7 @@ static defaultProps = {
     const [firstRow] = Children.toArray(this.props.children) as RowChild[]
     let sortable = false
     if (firstRow && firstRow.props && firstRow.props.children) {
-      Children.forEach(firstRow.props.children, (grandchild) => {
+      Children.forEach(firstRow.props.children, (grandchild: ReactElement<any>) => {
         if (grandchild?.props?.onRequestSort) {
           sortable = true
           return
@@ -114,7 +114,7 @@ static defaultProps = {
     > = {}
     let selectedOption: TableColHeaderProps['id'] | undefined
     let count = 0
-    Children.forEach(firstRow.props.children, (grandchild) => {
+    Children.forEach(firstRow.props.children, (grandchild: ReactElement<any>) => {
       count += 1
       if (!grandchild?.props) return // grandchild can be false
       const { id, stackedSortByLabel, sortDirection, onRequestSort } =

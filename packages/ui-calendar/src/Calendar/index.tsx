@@ -261,7 +261,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     const { prevButton, nextButton } = this.renderMonthNavigationButtons()
 
     const cloneButton = (
-      button: ReactElement,
+      button: ReactElement<any>,
       onClick?: (e: React.MouseEvent) => void
     ) =>
       safeCloneElement(button, {
@@ -425,7 +425,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     )
 
     return childrenArr
-      .reduce((days: ReactElement[][], day, i) => {
+      .reduce((days: ReactElement<any>[][], day, i) => {
         const index = Math.floor(i / 7)
         if (!days[index]) days.push([])
         days[index].push(day)

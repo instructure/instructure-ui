@@ -1556,9 +1556,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           },
           'aria-haspopup': this.props.role,
           id: this._triggerId,
-          disabled: !!((trigger as ReactElement).props.disabled || disabled),
+          disabled: !!((trigger as ReactElement<any>).props.disabled || disabled),
           'aria-disabled':
-            (trigger as ReactElement).props.disabled || disabled
+            (trigger as ReactElement<any>).props.disabled || disabled
               ? 'true'
               : undefined
         })}
