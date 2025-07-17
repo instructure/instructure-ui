@@ -65,7 +65,7 @@ class Select extends Component<SelectProps, SelectState> {
   getOptionData(options: React.ReactElement[]) {
     //TODO remove any
     const data: any = []
-    Children.forEach(options, (child: ReactElement) => {
+    Children.forEach(options, (child: ReactElement<any>) => {
       const { value, children, ...rest } = child.props
       data.push({ value, label: children, ...rest })
     })

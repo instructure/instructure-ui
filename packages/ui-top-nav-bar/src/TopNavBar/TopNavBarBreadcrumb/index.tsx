@@ -105,11 +105,11 @@ class TopNavBarBreadcrumb extends Component<
       )
     }
 
-    const breadcrumbElement = Children.toArray(children)[0] as ReactElement
+    const breadcrumbElement = Children.toArray(children)[0] as ReactElement<any>
     const breadCrumbLinks = breadcrumbElement.props.children
     const lastButOneLink = Children.toArray(breadCrumbLinks)[
       Children.count(breadCrumbLinks) - 2
-    ] as ReactElement
+    ] as ReactElement<any>
 
     return (
       this.context.inverseColor &&

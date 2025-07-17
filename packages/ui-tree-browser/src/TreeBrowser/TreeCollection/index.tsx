@@ -208,7 +208,7 @@ class TreeCollection extends Component<
 
   renderCollectionChildren(
     collectionId: string | number | undefined,
-    child: ReactElement,
+    child: ReactElement<any>,
     position: number,
     keyword: 'before' | 'after'
   ) {
