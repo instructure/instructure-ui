@@ -24,13 +24,12 @@
 import { decorator } from '@instructure/ui-decorator'
 import { logWarnDeprecated as warnDeprecated } from '@instructure/console'
 import { ComponentClass } from 'react'
-import PropTypes from 'prop-types'
 
 export interface DeprecatedDecorator {
   (version: string, oldProps?: Record<string, any> | null, message?: string): (
     ComposedComponent: any
   ) => any
-  deprecatePropValues: (...args: any[]) => PropTypes.Validator<unknown>
+  deprecatePropValues: (...args: any[]) => (props: any, propName: string, componentName: string) => any
   warnDeprecatedProps: (...args: any[]) => void
   warnDeprecatedComponent: (...args: any[]) => void
   changedPackageWarning: (...args: any[]) => string
@@ -45,9 +44,7 @@ export interface DeprecatedDecorator {
  *
  * ```js-code
  *  class Example extends Component {
- *    static propTypes = {
- *      currentProp: PropTypes.func
- *    }
+ *    // PropTypes removed - use TypeScript types instead
  *  }
  *  export default deprecated('7.0.0', {
  *    deprecatedProp: 'currentProp',
@@ -139,7 +136,7 @@ const deprecated = (() => {
    * @param {string|function} message - a string with additional information (like the version the prop will be removed) or a function returning a string
    */
   ;(deprecated as DeprecatedDecorator).deprecatePropValues = (
-    propType: PropTypes.Validator<unknown>,
+    propType: (props: any, propName: string, componentName: string) => any,
     deprecated: string[] = [],
     message:
       | string
