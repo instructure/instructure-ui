@@ -34,7 +34,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { RadioInputProps, RadioInputState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -48,7 +48,6 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
   static readonly componentId = 'RadioInput'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'simple',

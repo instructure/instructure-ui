@@ -61,7 +61,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { PopoverProps, PopoverState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { Renderable } from '@instructure/shared-types'
 /**
 ---
@@ -77,7 +77,6 @@ class Popover extends Component<PopoverProps, PopoverState> {
   static readonly componentId = 'Popover'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     defaultIsShowingContent: false,

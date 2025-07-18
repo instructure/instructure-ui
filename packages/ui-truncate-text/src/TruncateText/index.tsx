@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Children, Component } from 'react'
+import { Children, Component, type JSX } from 'react'
 
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
@@ -40,7 +40,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
-import { propTypes, allowedProps, TruncateTextState } from './props'
+import { allowedProps, TruncateTextState } from './props'
 import type { TruncateTextProps } from './props'
 
 /**
@@ -55,7 +55,6 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   static readonly componentId = 'TruncateText'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     maxLines: 1,

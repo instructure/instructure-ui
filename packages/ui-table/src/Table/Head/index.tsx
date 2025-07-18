@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ContextType } from 'react'
+import { Component, Children, ContextType, type ReactElement } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
@@ -39,7 +39,7 @@ import generateComponentTheme from './theme'
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
 import type { RowChild } from '../props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from '../TableContext'
 
 /**
@@ -54,8 +54,7 @@ class Head extends Component<TableHeadProps> {
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     children: null
   }
 
@@ -66,7 +65,7 @@ class Head extends Component<TableHeadProps> {
     const [firstRow] = Children.toArray(this.props.children) as RowChild[]
     let sortable = false
     if (firstRow && firstRow.props && firstRow.props.children) {
-      Children.forEach(firstRow.props.children, (grandchild) => {
+      Children.forEach(firstRow.props.children, (grandchild: ReactElement<any>) => {
         if (grandchild?.props?.onRequestSort) {
           sortable = true
           return
@@ -115,7 +114,7 @@ class Head extends Component<TableHeadProps> {
     > = {}
     let selectedOption: TableColHeaderProps['id'] | undefined
     let count = 0
-    Children.forEach(firstRow.props.children, (grandchild) => {
+    Children.forEach(firstRow.props.children, (grandchild: ReactElement<any>) => {
       count += 1
       if (!grandchild?.props) return // grandchild can be false
       const { id, stackedSortByLabel, sortDirection, onRequestSort } =

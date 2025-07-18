@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   MaskTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -52,15 +49,6 @@ type MaskProps = MaskOwnProps &
   OtherHTMLAttributes<MaskOwnProps>
 
 type MaskStyle = ComponentStyle<'mask'>
-
-const propTypes: PropValidators<PropKeys> = {
-  placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
-  fullscreen: PropTypes.bool,
-  children: PropTypes.node,
-  onClick: PropTypes.func,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'placement',
   'fullscreen',
@@ -70,4 +58,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { MaskProps, MaskStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

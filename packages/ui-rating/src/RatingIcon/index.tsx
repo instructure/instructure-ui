@@ -33,7 +33,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { RatingIconProps, RatingIconState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -46,7 +46,6 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   static readonly componentId = 'Rating.Icon'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     animationDelay: 200,

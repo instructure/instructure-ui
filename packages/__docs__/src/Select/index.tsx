@@ -23,24 +23,12 @@
  */
 
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import { Select as UISelect } from '@instructure/ui-select'
 
 import type { SelectProps, SelectState } from './props'
 
 class Select extends Component<SelectProps, SelectState> {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    id: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    children: PropTypes.node
-  }
-
   static defaultProps = {
     id: undefined,
     value: undefined,
@@ -77,7 +65,7 @@ class Select extends Component<SelectProps, SelectState> {
   getOptionData(options: React.ReactElement[]) {
     //TODO remove any
     const data: any = []
-    Children.forEach(options, (child: ReactElement) => {
+    Children.forEach(options, (child: ReactElement<any>) => {
       const { value, children, ...rest } = child.props
       data.push({ value, label: children, ...rest })
     })

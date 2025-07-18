@@ -33,7 +33,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { InlineListItemProps } from './props'
 
 /**
@@ -47,7 +47,6 @@ id: InlineList.Item
 class InlineListItem extends Component<InlineListItemProps> {
   static readonly componentId = 'InlineList.Item'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     padding: 'none',

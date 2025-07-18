@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+
 
 import type {
   Spacing,
@@ -30,7 +30,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 type RatingOwnProps = {
@@ -79,18 +78,6 @@ type RatingProps = RatingOwnProps &
   OtherHTMLAttributes<RatingOwnProps>
 
 type RatingStyle = ComponentStyle<'rating'>
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  formatValueText: PropTypes.func,
-  iconCount: PropTypes.oneOf([3, 5]),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  valueMax: PropTypes.number,
-  valueNow: PropTypes.number,
-  animateFill: PropTypes.bool,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'formatValueText',
@@ -103,4 +90,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { RatingProps, RatingStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

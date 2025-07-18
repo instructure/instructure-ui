@@ -23,7 +23,6 @@
  */
 
 import { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { ThemeProvider } from '@emotion/react'
 
 import { TextDirectionContext } from '@instructure/ui-i18n'
@@ -119,16 +118,6 @@ function InstUISettingsProvider({
   }
 
   return providers
-}
-
-InstUISettingsProvider.propTypes = {
-  /* eslint-disable react/require-default-props */
-  children: PropTypes.node,
-  theme: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  dir: PropTypes.oneOf(['ltr', 'rtl']),
-  instanceCounterMap: PropTypes.instanceOf(Map),
-  as: PropTypes.string
-  /* eslint-enable react/require-default-props */
 }
 
 export default InstUISettingsProvider

@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   ToggleFacadeTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -55,18 +52,6 @@ type ToggleFacadeProps = ToggleFacadeOwnProps &
 type ToggleFacadeStyle = ComponentStyle<
   'toggleFacade' | 'facade' | 'icon' | 'iconToggle' | 'iconSVG' | 'label'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  focused: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  labelPlacement: PropTypes.oneOf(['top', 'start', 'end']),
-  invalid: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'checked',
@@ -78,4 +63,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ToggleFacadeProps, ToggleFacadeStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

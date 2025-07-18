@@ -28,13 +28,12 @@ import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { compileAndRenderExample } from '../compileAndRenderExample'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { PreviewProps, PreviewState } from './props'
 import canvas from '@instructure/ui-themes'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   static defaultProps = {

@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type {
-  PropValidators,
   ImgTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -75,35 +74,6 @@ type ImgProps = ImgOwnProps &
   OtherHTMLAttributes<ImgOwnProps>
 
 type ImgStyle = ComponentStyle<'overlay' | 'container' | 'img'>
-
-const propTypes: PropValidators<PropKeys> = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  loading: PropTypes.oneOf(['eager', 'lazy']),
-  margin: PropTypes.string,
-  overlay: PropTypes.shape({
-    color: PropTypes.string.isRequired,
-    opacity: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).isRequired,
-    blend: PropTypes.oneOf([
-      'normal',
-      'multiply',
-      'screen',
-      'overlay',
-      'color-burn'
-    ])
-  }),
-  withGrayscale: PropTypes.bool,
-  withBlur: PropTypes.bool,
-  constrain: PropTypes.oneOf(['cover', 'contain']),
-  /**
-   * provides a reference to the underlying html root element
-   */
-  elementRef: PropTypes.func,
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
-
 const allowedProps: AllowedPropKeys = [
   'src',
   'alt',
@@ -120,4 +90,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ImgProps, ImgStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

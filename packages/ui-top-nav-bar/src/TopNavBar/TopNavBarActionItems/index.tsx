@@ -54,7 +54,6 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import {
-  propTypes,
   allowedProps,
   TopNavBarActionItemsStyleProps
 } from './props'
@@ -79,7 +78,6 @@ class TopNavBarActionItems extends Component<
 > {
   static readonly componentId = 'TopNavBar.ActionItems'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

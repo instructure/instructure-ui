@@ -30,7 +30,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Tooltip } from '@instructure/ui-tooltip'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { BreadcrumbLinkProps, BreadcrumbLinkState } from './props'
 
 /**
@@ -47,7 +47,6 @@ class BreadcrumbLink extends Component<
 > {
   static readonly componentId = 'Breadcrumb.Link'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

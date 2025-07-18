@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators, Colors } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+import type { Colors } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 type SearchStatusOwnProps = {
@@ -47,12 +46,6 @@ type SearchStatusTheme = {
   colorFeatures: Colors['contrasts']['grey125125']
 }
 export type SearchStatusStyle = ComponentStyle<'searchStatus' | 'box'>
-
-const propTypes: PropValidators<PropKeys> = {
-  size: PropTypes.string,
-  status: PropTypes.oneOf(['inactive', 'active'])
-}
-
 const allowedProps: AllowedPropKeys = ['size', 'status']
 export type { SearchStatusProps, SearchStatusTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

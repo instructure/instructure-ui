@@ -30,7 +30,6 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import PropTypes from 'prop-types'
 
 import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index'
 
@@ -103,10 +102,6 @@ describe('@withStyle', () => {
 
   @withStyle(generateStyle, generateComponentTheme)
   class ThemeableComponent extends Component<Props, State> {
-    static propTypes = {
-      inverse: PropTypes.bool
-    }
-
     static defaultTypes = {
       inverse: false
     }

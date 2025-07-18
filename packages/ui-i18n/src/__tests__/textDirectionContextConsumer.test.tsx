@@ -23,8 +23,8 @@
  */
 
 import { Component } from 'react'
-import ReactDOM from 'react-dom'
-import ReactTestUtils from 'react-dom/test-utils'
+import { render as domRender } from 'react-dom'
+import { findRenderedComponentWithType } from 'react-dom/test-utils'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { vi, expect } from 'vitest'
@@ -83,8 +83,8 @@ describe('@textDirectionContextConsumer', () => {
     document.body.appendChild(rootNode)
 
     // eslint-disable-next-line react/no-render-return-value
-    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
-    const foundComponent = ReactTestUtils.findRenderedComponentWithType(
+    const rendered = domRender(<WrapperComponent />, rootNode)
+    const foundComponent = findRenderedComponentWithType(
       rendered as any,
       (TextDirectionContextConsumerComponent as any).originalType
     )

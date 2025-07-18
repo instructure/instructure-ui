@@ -39,7 +39,7 @@ import {
   IconArrowOpenStartSolid
 } from '@instructure/ui-icons'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import { error } from '@instructure/console'
 
 /**
@@ -51,7 +51,6 @@ category: components
 class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   // extra verbose localized date and time
   private static readonly DEFAULT_MESSAGE_FORMAT = 'LLLL'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     layout: 'inline',

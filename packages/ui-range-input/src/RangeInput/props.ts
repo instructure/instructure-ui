@@ -23,15 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { controllable } from '@instructure/ui-prop-types'
-import { deprecated } from '@instructure/ui-react-utils'
-import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   RangeInputTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
@@ -130,32 +124,6 @@ type RangeInputStyle = ComponentStyle<
 type RangeInputState = {
   value?: number | string
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  defaultValue: PropTypes.number,
-  value: controllable(PropTypes.number),
-  onChange: PropTypes.func,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  layout: PropTypes.oneOf(['stacked', 'inline']),
-  id: PropTypes.string,
-  label: PropTypes.node.isRequired,
-  displayValue: PropTypes.bool,
-  step: PropTypes.number,
-  formatValue: PropTypes.func,
-  inline: PropTypes.bool,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  thumbVariant: deprecated.deprecatePropValues(
-    PropTypes.oneOf(['deprecated', 'accessible']),
-    ['deprecated'],
-    'The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant.'
-  ),
-  inputRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'min',
   'max',
@@ -178,4 +146,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { RangeInputProps, RangeInputState, RangeInputStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

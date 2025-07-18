@@ -32,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyles from '../TreeButton/styles'
 import generateComponentTheme from '../TreeButton/theme'
 import type { TreeBrowserNodeProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
@@ -50,7 +50,6 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
   static readonly componentId = 'TreeBrowser.Node'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',

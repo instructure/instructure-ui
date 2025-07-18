@@ -28,7 +28,6 @@ export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
 export { textDirectionContextConsumer } from './textDirectionContextConsumer'
 export { DateTime } from './DateTime'
 export { getTextDirection } from './getTextDirection'
-export { I18nPropTypes } from './I18nPropTypes'
 
 export { Locale } from './Locale' // TODO delete this and only keep the ones below
 export { getLocale } from './getLocale'

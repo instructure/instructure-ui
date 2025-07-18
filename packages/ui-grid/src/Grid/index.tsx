@@ -40,7 +40,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { GridProps } from './props'
 
 /**
@@ -52,7 +52,6 @@ category: components
 class Grid extends Component<GridProps> {
   static readonly componentId = 'Grid'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     colSpacing: 'medium',

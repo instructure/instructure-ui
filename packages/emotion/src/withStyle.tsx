@@ -251,12 +251,6 @@ const withStyle = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
-    // we have to pass these on, because sometimes users
-    // access propTypes of the component in other components
-    // eslint-disable-next-line react/forbid-foreign-prop-types
-    WithStyle.propTypes = ComposedComponent.propTypes
-    WithStyle.defaultProps = ComposedComponent.defaultProps
-
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 

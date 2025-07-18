@@ -32,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { TreeBrowserButtonProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
@@ -48,7 +48,6 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   static readonly componentId = 'TreeBrowser.Button'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     type: 'treeButton',

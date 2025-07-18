@@ -42,12 +42,11 @@ import { ComponentTheme } from '../ComponentTheme'
 import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DocumentProps, DocumentState, DocDataType } from './props'
 
 @withStyle(generateStyle)
 class Document extends Component<DocumentProps, DocumentState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   static defaultProps = {

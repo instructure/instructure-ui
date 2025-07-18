@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   ColorMixerRGBAInputTheme
 } from '@instructure/shared-types'
 import type { RGBAType } from '@instructure/ui-color-utils'
@@ -61,21 +61,6 @@ type RGBAInputProps = RGBAInputOwnProps &
 type RGBAInputStyle = ComponentStyle<
   'RGBAInput' | 'label' | 'inputContainer' | 'rgbInput' | 'aInput'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  disabled: PropTypes.bool,
-  label: PropTypes.string,
-  width: PropTypes.number.isRequired,
-  value: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  withAlpha: PropTypes.bool,
-  rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
-  rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
-  rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
-  rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'disabled',
   'label',
@@ -91,4 +76,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { RGBAInputProps, RGBAInputState, RGBAInputStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -23,7 +23,6 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { DrawerLayout } from '../index'
 import type { DrawerLayoutProps } from '../props'
@@ -38,14 +37,6 @@ type DrawerLayoutFixtureProps = {
 }
 
 export default class DrawerLayoutFixture extends Component<DrawerLayoutFixtureProps> {
-  static propTypes = {
-    layoutWidth: PropTypes.string,
-    trayWidth: PropTypes.string,
-    placement: PropTypes.string,
-    open: PropTypes.bool,
-    onOverlayTrayChange: PropTypes.func
-  }
-
   static defaultProps = {
     layoutWidth: '600px',
     trayWidth: '200px',

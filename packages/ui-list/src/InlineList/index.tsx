@@ -29,7 +29,7 @@ import { testable } from '@instructure/ui-testable'
 
 import { InlineListItem } from './InlineListItem'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { InlineListProps } from './props'
 
 /**
@@ -40,7 +40,6 @@ category: components
 **/
 @testable()
 class InlineList extends Component<InlineListProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     itemSpacing: 'none',
