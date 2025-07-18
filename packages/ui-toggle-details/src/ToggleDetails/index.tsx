@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 import { Button } from '@instructure/ui-buttons'
 import {
   IconArrowOpenEndSolid,
@@ -63,15 +63,20 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     children: null
   }
 
-  ref: Element | null = null
-  _button: HTMLElement | null = null
+  _buttonNode: HTMLElement | null = null
+  _rootRef = createRef<HTMLDivElement>()
+
+  // TODO this solution was generated with Gemini, should be tested if it works as fine as before
+  setButtonRef = (node: Element | null) => {
+    this._buttonNode = node as HTMLElement | null
+  }
 
   get focused() {
-    return isActiveElement(this._button)
+    return isActiveElement(this._buttonNode)
   }
 
   focus() {
-    this._button?.focus()
+    this._buttonNode?.focus()
   }
 
   componentDidMount() {
@@ -81,8 +86,6 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
-
-  getButtonRef = (el: Element | null) => (this._button = el as HTMLElement)
 
   renderSummary(expanded: boolean) {
     const { summary, iconPosition } = this.props
@@ -101,8 +104,6 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     expanded: boolean
   ) {
     const { variant } = this.props
-    // Do not put aria-controls and aria-expanded into the toggle if there
-    // is nothing to open
     const tProps = this.props.children
       ? toggleProps
       : { onClick: toggleProps.onClick }
@@ -119,14 +120,14 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
           {...props}
           display="block"
           textAlign="start"
-          elementRef={this.getButtonRef}
+          elementRef={this.setButtonRef}
         >
           {summary}
         </Button>
       )
     } else if (props.href) {
       return (
-        <a {...props} css={this.props.styles?.toggle} ref={this.getButtonRef}>
+        <a {...props} css={this.props.styles?.toggle} ref={this.setButtonRef}>
           {summary}
         </a>
       )
@@ -136,7 +137,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
           {...props}
           type="button"
           css={this.props.styles?.toggle}
-          ref={this.getButtonRef}
+          ref={this.setButtonRef}
         >
           {summary}
         </button>
@@ -185,12 +186,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
-            <div
-              css={this.props.styles?.toggleDetails}
-              ref={(el) => {
-                this.ref = el
-              }}
-            >
+            <div css={this.props.styles?.toggleDetails} ref={this._rootRef}>
               {this.renderToggle(getToggleProps(), expanded)}
               {this.renderDetails(expanded, getDetailsProps())}
             </div>
