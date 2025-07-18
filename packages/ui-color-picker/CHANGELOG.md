@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
+
+
+### Features
+
+* **ui-color-picker:** add type=button to color preset's buttons for better form handling ([b94ee9f](https://github.com/instructure/instructure-ui/commit/b94ee9fe7afc6cf01463fa785f77aabf53bc975c))
+
+
+
+
+
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-color-picker

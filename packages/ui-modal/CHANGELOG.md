@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* **ui-modal:** remove tabbability from modalBody if there is no scrollbar ([eb790ba](https://github.com/instructure/instructure-ui/commit/eb790ba3a05cb993a006f89b8cccf791ed918303))
+
+
+
+
+
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-modal

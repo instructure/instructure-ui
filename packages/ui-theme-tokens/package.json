@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-theme-tokens",
-  "version": "10.23.0",
+  "version": "10.24.0",
   "description": "Cross-platform theme tokens for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,11 +22,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.23.0"
+    "@instructure/ui-babel-preset": "10.24.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/ui-themes": "10.23.0"
+    "@instructure/ui-themes": "10.24.0"
   },
   "publishConfig": {
     "access": "public"

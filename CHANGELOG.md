@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* **many:** fix focus ring not respecting theme overrides in Button and FileDrop ([8fffc5d](https://github.com/instructure/instructure-ui/commit/8fffc5db8f41249277283b0ad05be0d158d6d7d7))
+* **ui-list:** remove delimiter placeholder after last child ([c1032a0](https://github.com/instructure/instructure-ui/commit/c1032a0d318d1f14840ab6bf49423c6eb92967d1))
+* **ui-modal:** remove tabbability from modalBody if there is no scrollbar ([eb790ba](https://github.com/instructure/instructure-ui/commit/eb790ba3a05cb993a006f89b8cccf791ed918303))
+* **ui-toggle-details,ui-expandable:** improve typing for onClick prop ([e086e31](https://github.com/instructure/instructure-ui/commit/e086e3194f93565a0314233a10bba804f48c3a16))
+
+
+### Features
+
+* **ui-color-picker:** add type=button to color preset's buttons for better form handling ([b94ee9f](https://github.com/instructure/instructure-ui/commit/b94ee9fe7afc6cf01463fa785f77aabf53bc975c))
+* **ui-react-utils:** safeClonElement to support react 19 ([2c9931f](https://github.com/instructure/instructure-ui/commit/2c9931f4c6d815435e6db14e11f6260bb9df91a7))
+
+
+
+
+
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 
