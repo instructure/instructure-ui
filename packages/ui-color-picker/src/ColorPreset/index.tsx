@@ -273,6 +273,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         padding="0"
         cursor={this.props.disabled ? 'not-allowed' : 'auto'}
         as="button"
+        type="button"
         aria-label={screenReaderLabel}
         {...(selectOnClick
           ? { onClick: () => this.props.onSelect(color) }
