@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
@@ -71,7 +71,7 @@ class Tray extends Component<TrayProps> {
     enableMask: false
   }
   ref: Element | null = null
-  dialogRef: Dialog | null = null
+  dialogRef = createRef<Dialog>()
 
   state: TrayState
 
@@ -92,7 +92,7 @@ class Tray extends Component<TrayProps> {
       if (!this.props.open) {
         // calling Dialog.close() to remove focusregion immediately when transition starts
         // so if a new Tray is opened (during transition) the new focusregion won't get treated as a child of this one
-        this.dialogRef?.close()
+        this.dialogRef.current?.close()
       }
 
       this.setState({ transitioning: true, open: this.props.open })
@@ -209,7 +209,7 @@ class Tray extends Component<TrayProps> {
           ref={contentRef}
         >
           <Dialog
-            ref={(element) => (this.dialogRef = element)}
+            ref={this.dialogRef}
             as="div"
             label={label}
             defaultFocusElement={defaultFocusElement}
