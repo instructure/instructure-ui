@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* **ui-list:** remove delimiter placeholder after last child ([c1032a0](https://github.com/instructure/instructure-ui/commit/c1032a0d318d1f14840ab6bf49423c6eb92967d1))
+
+
+
+
+
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-list

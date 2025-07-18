@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* **many:** fix focus ring not respecting theme overrides in Button and FileDrop ([8fffc5d](https://github.com/instructure/instructure-ui/commit/8fffc5db8f41249277283b0ad05be0d158d6d7d7))
+
+
+### Features
+
+* **ui-react-utils:** safeClonElement to support react 19 ([2c9931f](https://github.com/instructure/instructure-ui/commit/2c9931f4c6d815435e6db14e11f6260bb9df91a7))
+
+
+
+
+
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-react-utils
