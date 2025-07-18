@@ -504,6 +504,79 @@ function addImportIfNeeded(
 }
 
 /**
+ * Renames an import and all its usages throughout the file. Modifies the input collection.
+ * Handles both direct imports and renamed imports (with 'as' syntax).
+ * ❗ Does NOT support default imports like `import Button from './Button'`
+ * @example
+ * renameImportAndUsages(j, root, path, 'oldName', 'newName', '@import-path')
+ *
+ * replaces
+ * ```
+ * import { oldName } from "@import-path"
+ * import { oldName as localName } from "@import-path"
+ * oldName()
+ * localName()
+ * ```
+ * with
+ * ```
+ * import { newName } from "@import-path"
+ * import { newName as localName } from "@import-path"
+ * newName()
+ * localName()
+ * ```
+ *
+ * @param j - jscodeshift API
+ * @param root - Root AST collection
+ * @param oldName - Original imported name to replace
+ * @param newName - New name to use
+ * @param importPath - String or array of strings specifying the import source path(s)
+ * @returns boolean indicating if any changes were made
+ */
+function renameImportAndUsages(
+  j: JSCodeshift,
+  root: Collection,
+  oldName: string,
+  newName: string,
+  importPath: string | string[]
+): boolean {
+  let didRename = false
+  const paths = findImportPath(j, root, importPath)
+
+  if (paths.length === 0) return false
+
+  paths.forEach((importDecl) => {
+    importDecl.value.specifiers?.forEach((specifier) => {
+      if (
+        specifier.type === 'ImportSpecifier' &&
+        specifier.imported.name === oldName
+      ) {
+        // eslint-disable-next-line no-param-reassign
+        specifier.imported.name = newName
+
+      // Rename usages if no alias (no 'as' syntax)
+      if (!specifier.local || specifier.local.name === oldName) {
+        const localName = specifier.local ? specifier.local.name : oldName
+
+        root
+          .find(j.Identifier, { name: localName as string})
+          .forEach((idPath) => {
+            // Make sure this identifier is not inside import declaration
+            if (idPath.parentPath.node.type !== 'ImportSpecifier') {
+              // eslint-disable-next-line no-param-reassign
+              idPath.node.name = newName
+            }
+          })
+        }
+
+        didRename = true
+      }
+    })
+  })
+
+  return didRename
+}
+
+/**
  * Replaces an import. Modifies the input collection.
  * @example
  * ```
@@ -655,6 +728,7 @@ export {
   replaceImport,
   addImportIfNeeded,
   renameElements,
+  renameImportAndUsages,
   removeAllChildren,
   // logging
   printWarning,

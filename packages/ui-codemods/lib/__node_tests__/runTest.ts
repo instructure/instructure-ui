@@ -26,7 +26,8 @@ import path from 'path'
 import fs from 'fs'
 // eslint-disable-next-line no-restricted-imports
 import { runInlineTest } from 'jscodeshift/src/testUtils'
-import { Transform } from 'jscodeshift'
+import jscodeshift, { Transform } from 'jscodeshift'
+import { vi } from 'vitest'
 
 /**
  * A helper function to run codemods. For it work properly some conventions
@@ -42,9 +43,14 @@ export function runTest(codemod: Transform) {
   )
   let fixturesRun = 0
   entries.forEach((entry) => {
-    if (entry.isFile() && entry.name.indexOf('input') > -1) {
+    if (entry.isFile() && entry.name.includes('input')) {
+      const isWarningTest = entry.name.includes('.warning.input')
       const inputPath = path.join(entry.path, entry.name)
+      const input = fs.readFileSync(inputPath, 'utf8')
       const expectedName = entry.name.replace('input', 'output')
+      const expectedPath = path.join(entry.path, expectedName)
+      const expected = fs.readFileSync(expectedPath, 'utf8')
+
       // eslint-disable-next-line no-console
       console.log(
         codemod.name + ':',
@@ -53,17 +59,59 @@ export function runTest(codemod: Transform) {
         '->',
         expectedName
       )
-      const input = fs.readFileSync(inputPath, 'utf8')
-      const expected = fs.readFileSync(
-        path.join(entry.path, expectedName),
-        'utf8'
-      )
-      // We need to supply inputPath because some codemods use it, e.g. to
-      // pick up prettier config or prettier figures out which parser to use
-      // based on the file's extension.
-      // Also, this is closer to how its used, there is always a correct
-      // filename
-      runInlineTest(codemod, {}, { path: inputPath, source: input }, expected)
+
+      if (isWarningTest) {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => { })
+
+        try {
+          const j = jscodeshift.withParser('tsx')
+          const fileInfo = { path: inputPath, source: input }
+          const api = { jscodeshift: j, j: j, stats: () => { }, report: () => { } }
+          const options = {}
+
+          // Run codemod withouth comparison
+          codemod(fileInfo, api, options)
+
+          const expectedWarningContent = fs
+            .readFileSync(expectedPath, 'utf8')
+            .trim()
+            .replace(/'/g, '"')
+
+          let expectedWarnings: string[]
+
+          try {
+            expectedWarnings = JSON.parse(expectedWarningContent)
+            if (!Array.isArray(expectedWarnings)) throw new Error()
+          } catch {
+            throw new Error(
+              `Expected JSON array of warning strings in warning.output file like: ["warn1", "warn2"] in file: ${expectedPath}`
+            )
+          }
+
+          // Verify each expected warning exists as many times as expected
+          const actualWarnings = warnSpy.mock.calls.map(
+            (call) => call[0] as string
+          )
+
+          expect(warnSpy).toHaveBeenCalledTimes(expectedWarnings.length)
+
+          expectedWarnings.forEach((expected) => {
+            const expectedCount = expectedWarnings.filter(
+              (e) => e === expected
+            ).length
+
+            const actualCount = actualWarnings.filter((w) =>
+              w.includes(expected)
+            ).length
+
+            expect(actualCount).toBe(expectedCount)
+          })
+        } finally {
+          warnSpy.mockRestore()
+        }
+      } else {
+        runInlineTest(codemod, {}, { path: inputPath, source: input }, expected)
+      }
       fixturesRun++
     }
   })
