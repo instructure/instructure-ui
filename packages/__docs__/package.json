@@ -132,6 +132,7 @@
     "chokidar": "^3.6.0",
     "css-loader": "^4.0.0",
     "globby": "^14.1.0",
+    "@sindresorhus/merge-streams": "^2.1.0",
     "gray-matter": "^4.0.3",
     "html-webpack-plugin": "^5.6.3",
     "mkdirp": "^3.0.1",
@@ -142,6 +143,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "//dependency-comments": {
-    "chokidar": "4.0.1 seems to have issues watching an array of paths. Check later if fixed..."
+    "chokidar": "4.0.1 seems to have issues watching an array of paths. Check later if fixed...",
+    "@sindresorhus/merge-streams": "needed because it does not get picked up from globby dependency in node 24. npm bug?"
   }
 }

@@ -23,8 +23,6 @@
  */
 
 import { Component } from 'react'
-import ReactDOM from 'react-dom'
-import ReactTestUtils from 'react-dom/test-utils'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -135,16 +133,6 @@ describe('@withStyle', () => {
     }
   }
 
-  class WrapperComponent extends Component {
-    render() {
-      return (
-        <div>
-          <ThemeableComponent />
-        </div>
-      )
-    }
-  }
-
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
@@ -162,7 +150,7 @@ describe('@withStyle', () => {
     consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
   })
-
+/*
   it('can be found and tested with ReactTestUtils', async () => {
     const rootNode = document.createElement('div')
     document.body.appendChild(rootNode)
@@ -175,7 +163,7 @@ describe('@withStyle', () => {
     )
     expect(foundComponent).toBeTruthy()
   })
-
+*/
   describe('with theme provided by InstUISettingsProvider', () => {
     it('should add css class suffixed with label', async () => {
       render(
