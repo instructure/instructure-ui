@@ -327,7 +327,11 @@ class Pagination extends Component<PaginationProps> {
     for (let i = from; i <= to; i++) {
       pages.push(
         <Pagination.Page
-          ref={(e) => (i === currentPage ? (this.currentPageRef = e) : null)}
+          ref={(e) => {
+              if (i === currentPage) {
+                this.currentPageRef = e
+              }
+            }}
           key={i}
           onClick={() => this.handleNavigation(i, currentPage)}
           current={i === currentPage}

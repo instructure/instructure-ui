@@ -101,8 +101,8 @@ class App extends Component<AppProps, AppState> {
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
   _controller?: AbortController
-  _heroRef: React.RefObject<Hero>
-  _navRef: React.RefObject<Nav>
+  _heroRef: React.RefObject<Hero | null>
+  _navRef: React.RefObject<Nav | null>
   _skipToMainButtonRef?: HTMLElement
   _mainContentRef?: HTMLElement
 
