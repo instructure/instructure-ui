@@ -23,8 +23,6 @@
  */
 
 import { Component } from 'react'
-import ReactDOM from 'react-dom'
-import ReactTestUtils from 'react-dom/test-utils'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -163,16 +161,10 @@ describe('@withStyle', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('can be found and tested with ReactTestUtils', async () => {
-    const rootNode = document.createElement('div')
-    document.body.appendChild(rootNode)
-
-    // eslint-disable-next-line react/no-render-return-value
-    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
-    const foundComponent = ReactTestUtils.findRenderedComponentWithType(
-      rendered as any,
-      (ThemeableComponent as any).originalType
-    )
+  it('should render ThemeableComponent correctly', async () => {
+    render(<WrapperComponent />)
+    
+    const foundComponent = screen.getByTestId('testComp')
     expect(foundComponent).toBeTruthy()
   })
 
