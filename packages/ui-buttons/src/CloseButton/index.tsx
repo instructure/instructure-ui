@@ -117,7 +117,7 @@ class CloseButton extends Component<CloseButtonProps> {
           elementRef={this.handleRef}
           interaction={this.interaction}
           type={type}
-          color={this.color}
+          {...(this.color ? {color: this.color}: {})}
           size={size}
           onClick={onClick}
           margin={margin}
