@@ -378,9 +378,9 @@ describe('<Modal />', () => {
           shouldReturnFocus={false}
           variant="inverse"
         >
-          <Modal.Header ref={(el) => (headerRef = el)}>header</Modal.Header>
-          <Modal.Body ref={(el) => (bodyRef = el)}>body</Modal.Body>
-          <Modal.Footer ref={(el) => (footerRef = el)}>footer</Modal.Footer>
+          <Modal.Header ref={(el) => {headerRef = el}}>header</Modal.Header>
+          <Modal.Body ref={(el) => {bodyRef = el}}>body</Modal.Body>
+          <Modal.Footer ref={(el) => {footerRef = el}}>footer</Modal.Footer>
         </Modal>
       )
       const dialog = await findByRole('dialog')
@@ -396,7 +396,7 @@ describe('<Modal />', () => {
 
       const { findByRole } = render(
         <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
-          <Modal.Body ref={(el) => (bodyRef = el)}>body</Modal.Body>
+          <Modal.Body ref={(el) => {bodyRef = el}}>body</Modal.Body>
         </Modal>
       )
       const dialog = await findByRole('dialog')
