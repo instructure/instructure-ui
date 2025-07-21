@@ -64,7 +64,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   _buttonNode: HTMLElement | null = null
-  _rootRef = createRef<HTMLDivElement>()
+  ref = createRef<HTMLDivElement>()
 
   // TODO this solution was generated with Gemini, should be tested if it works as fine as before
   setButtonRef = (node: Element | null) => {
@@ -186,7 +186,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
-            <div css={this.props.styles?.toggleDetails} ref={this._rootRef}>
+            <div css={this.props.styles?.toggleDetails} ref={this.ref}>
               {this.renderToggle(getToggleProps(), expanded)}
               {this.renderDetails(expanded, getDetailsProps())}
             </div>
