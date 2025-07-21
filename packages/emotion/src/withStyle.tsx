@@ -177,6 +177,7 @@ const withStyle = decorator(
       generateComponentTheme?: GenerateComponentTheme
       allowedProps?: string[]
       originalType?: WithStyleComponent
+      defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
       const theme = useTheme()
 
@@ -251,6 +252,7 @@ const withStyle = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
+    WithStyle.defaultProps = ComposedComponent.defaultProps
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 
