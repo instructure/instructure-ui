@@ -23,6 +23,8 @@
  */
 
 import { Component } from 'react'
+import { render as domRender } from 'react-dom'
+import { findRenderedComponentWithType } from 'react-dom/test-utils'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { vi, expect } from 'vitest'
@@ -40,6 +42,16 @@ class TextDirectionContextConsumerComponent extends Component<TextDirectionConte
     return (
       <div data-dir={this.props.dir} dir={this.props.dir}>
         {this.props.children}
+      </div>
+    )
+  }
+}
+
+class WrapperComponent extends Component {
+  render() {
+    return (
+      <div>
+        <TextDirectionContextConsumerComponent />
       </div>
     )
   }
@@ -63,6 +75,21 @@ describe('@textDirectionContextConsumer', () => {
     const { container } = render(<TextDirectionContextConsumerComponent />)
 
     expect(container.firstChild).toHaveAttribute('data-dir', 'ltr')
+  })
+
+  it('can be found and tested with ReactTestUtils', async () => {
+    const rootNode = document.createElement('div')
+
+    document.body.appendChild(rootNode)
+
+    // eslint-disable-next-line react/no-render-return-value
+    const rendered = domRender(<WrapperComponent />, rootNode)
+    const foundComponent = findRenderedComponentWithType(
+      rendered as any,
+      (TextDirectionContextConsumerComponent as any).originalType
+    )
+
+    expect(foundComponent).toBeDefined()
   })
 
   it('should set the text direction via props', async () => {
