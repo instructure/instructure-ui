@@ -816,7 +816,7 @@ class Select extends Component<SelectProps> {
         }) => (
           <span
             {...getRootProps({ css: styles?.select })}
-            ref={(el) => (this.ref = el)}
+            ref={(el) => {this.ref = el}}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

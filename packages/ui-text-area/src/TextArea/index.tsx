@@ -394,7 +394,9 @@ class TextArea extends Component<TextAreaProps> {
             <span
               css={this.props.styles?.textAreaOutline}
               aria-hidden="true"
-              ref={(e) => (this._highlightRef = e)}
+              ref={(e) => {
+                this._highlightRef = e
+              }}
             />
           ) : null}
         </div>

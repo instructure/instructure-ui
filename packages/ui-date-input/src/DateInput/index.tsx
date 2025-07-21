@@ -468,7 +468,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
         }) => (
           <span
             {...getRootProps({ css: styles?.dateInput })}
-            ref={(el) => (this.ref = el)}
+            ref={(el) => {this.ref = el}}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

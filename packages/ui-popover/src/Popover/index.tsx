@@ -519,7 +519,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
         <Dialog
           open={this.shown}
           label={this.props.screenReaderLabel}
-          ref={(el) => (this._dialog = el)}
+          ref={(el) => {this._dialog = el}}
           display="block"
           onBlur={this.handleDialogBlur}
           onDismiss={this.handleDialogDismiss}
