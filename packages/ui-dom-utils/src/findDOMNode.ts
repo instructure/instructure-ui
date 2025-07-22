@@ -29,7 +29,10 @@ import type { UIElement } from '@instructure/shared-types'
  * React 18 (element.ref) and React 19+ (element.props.ref)
  */
 function getElementRef(elem: { ref?: any; props?: { ref: any } }) {
-  return elem.props && elem.props.ref !== undefined ? elem.props.ref : elem.ref
+  if (elem?.props?.ref !== undefined) {
+    return elem.props.ref
+  }
+  return elem.ref
 }
 
 /**
@@ -37,11 +40,19 @@ function getElementRef(elem: { ref?: any; props?: { ref: any } }) {
  * category: utilities/DOM
  * ---
  *
- * Wrapper function for React.findDOMNode
+ * Returns the underlying DOM node. It looks the following places:
+ * - If it's a native HTML element e.g. `HtmlSpanElement` its returned as is.
+ * - If the element has a non-nullish `ref` prop or instance variable which is a
+ *   `HTMLElement` its returned. If it`s something else then `findDOMNode` is called
+ *   on the object. (it also checks `ref.current`)
+ * - If the element has a `ref` prop or instance variable whose value is `null`,
+ *   `undefined` is returned.
+ * - If the element does not have a `ref` prop or instance variable `undefined`
+ *   is returned with a warning
  * @module findDOMNode
  *
- * @param { Node | Window | React.ReactElement | React.Component | function } el - component, DOM node, or function returning a DOM node
- * @returns { Node | Window | null | undefined } The root node of this element
+ * @param el - component, DOM node, or function returning a DOM node
+ * @returns The native DOM node of this element or `undefined`
  */
 function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
   const node = typeof el === 'function' ? el() : el
@@ -56,26 +67,23 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
     return node as Node | Window
   } else if (node) {
     const ref = getElementRef(node as object)
-    let refElement = undefined
-    if (ref) {
-      refElement = ref.current ? ref.current : ref
-    }
+    const refElement = ref?.current ? ref.current : ref
     if (refElement) {
       if (!(refElement instanceof HTMLElement)) {
         return findDOMNode(refElement)
       }
       return refElement
-    } else {
-      const elName = (node as any).constructor.componentId
-        ? (node as any).constructor.componentId
-        : (node as any).constructor.name
-
-      console.error(
-        `Error: ${elName} doesn't have "ref" property.\nReactDOM.findDOMNode is removed in React 19, consider using refs instead. From InstUI v9, components must have the "ref" property for findDOMNode to work.\nSee more here: https://instructure.design/#accessing-the-dom`
-      )
-
+    } else if (refElement === null) {
+      // weird, but changing it would be a breaking change
       return undefined
     }
+    const elName = (node as any).constructor.componentId
+      ? (node as any).constructor.componentId
+      : (node as any).constructor.name
+    console.error(
+      `Error: ${elName} doesn't have "ref" property.\nReactDOM.findDOMNode is removed in React 19, consider using refs instead. From InstUI v9, components must have the "ref" property for findDOMNode to work.\nSee more here: https://instructure.design/#accessing-the-dom`
+    )
+    return undefined
   }
   return undefined
 }
