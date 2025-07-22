@@ -141,15 +141,29 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
     }
   }
 
+  shallowCompare(obj1: any, obj2: any) {
+    const keys1 = Object.keys(obj1)
+    const keys2 = Object.keys(obj2)
+    if (keys1.length !== keys2.length) {
+      return false
+    }
+    for (const key of keys1) {
+      if (obj1[key] !== obj2[key]) {
+        return false
+      }
+    }
+    return true
+  }
+
   componentDidUpdate(prevProps: TruncateTextProps) {
     const { children, onUpdate, makeStyles } = this.props
-
     makeStyles?.()
-
     const { isTruncated, needsSecondRender, truncatedText } = this.state
 
     if (children) {
-      if (prevProps !== this.props) {
+      // for some reason in React 19 prevPros and this.props are a different
+      // object even if their contents are the same, so we cannot use !==
+      if (!this.shallowCompare(prevProps, this.props)) {
         if (prevProps.children !== this.props.children) {
           // reset internal text variable if children change
           this.checkChildren()
