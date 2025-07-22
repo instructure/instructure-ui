@@ -28,15 +28,12 @@ export default {
   command: 'bundle',
   desc: 'Build and optionally start an app with Webpack',
   builder: (yargs) => {
-    yargs.option('port', { alias: 'p', desc: '' })
+    yargs.option('port', { alias: 'p', desc: '', default: '9090' })
     yargs.option('watch', { boolean: true, desc: '' })
     yargs.strictOptions(true)
   },
   handler: async (argv) => {
     const { NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
-
-    let port = argv.port || '9090'
-
     let command, webpackArgs
 
     let envVars = {}
@@ -51,7 +48,7 @@ export default {
         NODE_ENV: 'development',
         DEBUG: '1'
       }
-      webpackArgs = ['serve', '--mode=development', `--port=${port}`]
+      webpackArgs = ['serve', '--mode=development', `--port=${argv.port}`]
     } else {
       command = 'webpack'
       envVars = {
