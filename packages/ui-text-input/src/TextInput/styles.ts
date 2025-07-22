@@ -211,8 +211,6 @@ const generateStyle = (
       '& > :not(button):not([data-position^="Popover"])': {
         marginRight: componentTheme.padding
       },
-      marginTop: '1px',
-      marginBottom: '2px',
       display: 'flex',
       alignItems: 'center',
       ...sizeVariants[size!],
