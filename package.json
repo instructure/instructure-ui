@@ -15,9 +15,9 @@
   ],
   "scripts": {
     "prestart": "npm run bootstrap",
-    "start": "npm run start --workspace=docs-app",
-    "start:watch": "npm run start:watch --workspace=docs-app",
-    "dev": "npm run start:watch",
+    "start": "npm run start --workspace=docs-app --",
+    "start:watch": "npm run start:watch --workspace=docs-app --",
+    "dev": "npm run start:watch --",
     "cy:component": "cypress run --component",
     "test:vitest": "vitest --watch=false",
     "test:vitest-watch": "vitest",
@@ -92,6 +92,7 @@
     "webpack": "^5.99.9"
   },
   "//dependency-comments": {
+    "scripts": "The '--' at the end of commands is needed so user parameters are passed forward",
     "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",
     "chalk": "Chalk 5 is ESM. (used here by the scripts/ folder)",
     "tar": "Lerna 8 needs tar for this fixed(?) bug: https://github.com/lerna/lerna/issues/4005",

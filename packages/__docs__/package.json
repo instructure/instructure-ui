@@ -13,8 +13,8 @@
   "scripts": {
     "prestart": "npm run build:scripts:ts && node lib/build-docs.mjs",
     "start": "npm run prestart && ui-scripts bundle && ui-scripts server -p 8001",
-    "start:watch": "npm run prestart && ui-scripts bundle --watch -p 9090",
-    "start-watch-just-app": "ui-scripts bundle --watch -p 9090",
+    "start:watch": "npm run prestart && ui-scripts bundle --watch",
+    "start-watch-just-app": "ui-scripts bundle --watch",
     "bundle": "npm run prestart && ui-scripts bundle",
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
