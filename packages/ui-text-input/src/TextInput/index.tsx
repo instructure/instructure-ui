@@ -113,6 +113,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         afterElementHasWidth: this.getElementHasWidth(this._afterElement)
       })
     }
+    this.adjustAfterElementHeight()
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
@@ -139,6 +140,35 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     }
 
     this.props.makeStyles?.(this.makeStyleProps())
+  }
+
+  adjustAfterElementHeight() {
+    const afterElementChild = this._afterElement
+      ?.firstElementChild as HTMLElement | null
+
+    // Check if the child is a button, then get the button's first child (the content span)
+    const buttonContentSpan =
+      afterElementChild?.tagName === 'BUTTON'
+        ? (afterElementChild.firstElementChild as HTMLElement | null)
+        : null
+
+    // This is a necessary workaround for DateInput2 because it uses a Popover, which has a nested Button as an afterElement
+    // Check if the child is a Popover's inner span containing a button, then get the button's first child (the content span)
+    const popoverContentSpan =
+      afterElementChild?.tagName === 'SPAN' &&
+      afterElementChild.firstElementChild?.tagName === 'BUTTON'
+        ? (afterElementChild.firstElementChild
+            .firstElementChild as HTMLElement | null)
+        : null
+
+    const targetSpan = buttonContentSpan ?? popoverContentSpan
+
+    if (targetSpan) {
+      // Set the height to 36px (the height of a medium TextInput) to avoid layout shift when the afterElement content changes
+      // this temporary workaround is necessary because otherwise the layout breaks, later on IconButton's default height will be adjusted to the TextInput size
+      // so this workaround will not be needed anymore
+      targetSpan.style.height = '36px'
+    }
   }
 
   makeStyleProps = (): TextInputStyleProps => {
