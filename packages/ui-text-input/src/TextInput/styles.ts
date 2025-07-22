@@ -208,14 +208,20 @@ const generateStyle = (
     afterElement: {
       // the next couple lines (until the `label`) is needed so the IconButton looks OK inside the TextInput
       // explanation: if the content inside is not a button or a popover (which could contain a button) it should have some padding on the right
+      // lineHeight is only needed if it is not popover or button
       '& > :not(button):not([data-position^="Popover"])': {
-        marginRight: componentTheme.padding
+        marginRight: componentTheme.padding,
+        ...(sizeVariants[size!] && {
+          lineHeight: sizeVariants[size!].lineHeight
+        })
       },
-      marginTop: '1px',
-      marginBottom: '2px',
       display: 'flex',
       alignItems: 'center',
-      ...sizeVariants[size!],
+      // Spread all sizeVariants except lineHeight (handled above)
+      ...(sizeVariants[size!]
+        ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          (({ lineHeight, ...rest }) => rest)(sizeVariants[size!])
+        : {}),
       label: 'textInput__afterElement',
       ...viewBase,
       borderRadius: componentTheme.borderRadius,
