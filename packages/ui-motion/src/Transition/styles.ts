@@ -34,14 +34,10 @@ const getClassNames = (type: TransitionProps['type']) => ({
 })
 
 /**
- * ---
- * private: true
- * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param props the props of the component, the style is applied to
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: TransitionTheme,
@@ -54,10 +50,12 @@ const generateStyle = (
    * the old BaseTransition functionality with adding and removing
    * classes was to add the `Global` helper of `emotion`
    *
+   * `!important` is added, so it overrides any other animation
+   * (this class is only on the DOM node while the animation is running)
+   *
    * Todo: refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
    */
-
-  const baseTransition = `opacity ${componentTheme.duration} ${componentTheme.timing}, transform ${componentTheme.duration} ${componentTheme.timing}`
+  const baseTransition = `opacity ${componentTheme.duration} ${componentTheme.timing}, transform ${componentTheme.duration} ${componentTheme.timing} !important`
 
   /* Animation type: fade */
   const fadeAnimation = {
