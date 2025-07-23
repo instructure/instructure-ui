@@ -28,6 +28,7 @@ import removeAsFromInstUISettingsProvider from '../removeAsFromInstUISettingsPro
 import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
 import updateCodeEditorImport from '../updateCodeEditorImport'
 import removeMaxWidthFromTag from '../removeMaxWidthFromTag'
+import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputedStyleToGetCSSStyleDeclaration'
 
 describe('test codemods', () => {
   it('test InstUI v10 color codemods', () => {
@@ -48,5 +49,9 @@ describe('test codemods', () => {
 
   it('test removing "maxWidth" from Tag', () => {
     runTest(removeMaxWidthFromTag)
+  })
+
+  it('test renaming "getComputedStyle" to getCSSStyleDeclaration', () => {
+    runTest(renameGetComputedStyleToGetCSSStyleDeclaration)
   })
 })

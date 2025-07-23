@@ -28,6 +28,7 @@ import removeAsFromInstUISettingsProvider from './removeAsFromInstUISettingsProv
 import { renameCanvasThemes } from './renameCanvasThemesCodemod'
 import updateCodeEditorImport from './updateCodeEditorImport'
 import removeMaxWidthFromTag from './removeMaxWidthFromTag'
+import renameGetComputedStyleToGetCSSStyleDeclaration from './renameGetComputedStyleToGetCSSStyleDeclaration'
 
 export {
   updateV10Breaking,
@@ -35,5 +36,6 @@ export {
   removeAsFromInstUISettingsProvider,
   renameCanvasThemes,
   updateCodeEditorImport,
-  removeMaxWidthFromTag
+  removeMaxWidthFromTag,
+  renameGetComputedStyleToGetCSSStyleDeclaration
 }
