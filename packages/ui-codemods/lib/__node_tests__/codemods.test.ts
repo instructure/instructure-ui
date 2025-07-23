@@ -26,6 +26,7 @@ import { runTest } from './runTest'
 import updateV10Breaking from '../updateV10Breaking'
 import removeAsFromInstUISettingsProvider from '../removeAsFromInstUISettingsProvider'
 import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
+import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputedStyleToGetCSSStyleDeclaration'
 
 describe('test codemods', () => {
   it('test InstUI v10 color codemods', () => {
@@ -38,5 +39,9 @@ describe('test codemods', () => {
 
   it('test renaming Canvas themes', () => {
     runTest(renameCanvasThemesCodemod)
+  })
+
+  it('test renaming "getComputedStyle" to getCSSStyleDeclaration', () => {
+    runTest(renameGetComputedStyleToGetCSSStyleDeclaration)
   })
 })
