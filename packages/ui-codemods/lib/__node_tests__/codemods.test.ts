@@ -26,6 +26,7 @@ import { runTest } from './runTest'
 import updateV10Breaking from '../updateV10Breaking'
 import removeAsFromInstUISettingsProvider from '../removeAsFromInstUISettingsProvider'
 import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
+import updateCodeEditorImport from '../updateCodeEditorImport'
 
 describe('test codemods', () => {
   it('test InstUI v10 color codemods', () => {
@@ -38,5 +39,9 @@ describe('test codemods', () => {
 
   it('test renaming Canvas themes', () => {
     runTest(renameCanvasThemesCodemod)
+  })
+
+  it('test removing CodeEditor', () => {
+    runTest(updateCodeEditorImport)
   })
 })
