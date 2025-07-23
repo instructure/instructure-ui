@@ -35,7 +35,7 @@ import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TopNavBarUserProps } from './props'
 
 /**
@@ -50,7 +50,6 @@ id: TopNavBar.User
 class TopNavBarUser extends Component<TopNavBarUserProps> {
   static readonly componentId = 'TopNavBar.User'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

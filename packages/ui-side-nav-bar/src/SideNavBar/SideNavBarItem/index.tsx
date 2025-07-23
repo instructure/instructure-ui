@@ -33,7 +33,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { SideNavBarItemProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -47,7 +47,6 @@ class SideNavBarItem extends Component<SideNavBarItemProps> {
   static readonly componentId = 'SideNavBar.Item'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'a',

@@ -42,7 +42,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavItemProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -57,7 +57,6 @@ class Item extends Component<AppNavItemProps> {
   static readonly componentId = 'AppNav.Item'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,

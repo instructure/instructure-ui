@@ -29,11 +29,10 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { SVGIcon } from '@instructure/ui-svg-images'
 
 import { IconButton } from '@instructure/ui-buttons'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CodeSandboxButtonProps } from './props'
 
 class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     options: {},

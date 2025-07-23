@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 import { vi } from 'vitest'
-import PropTypes from 'prop-types'
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -36,11 +35,6 @@ type TestComponentProps = {
   qux: string
 }
 class TestComponent extends Component<TestComponentProps> {
-  static propTypes = {
-    bar: PropTypes.string,
-    qux: PropTypes.string
-  }
-
   static defaultProps = {
     bar: null,
     qux: 'Hello'
@@ -168,13 +162,6 @@ describe('@deprecated', () => {
         color: string
       }
       class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
-        static propTypes = {
-          color: deprecated.deprecatePropValues(
-            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
-            ['blue', 'orange', 'gold']
-          )
-        }
-
         static defaultProps = {
           color: 'red'
         }
@@ -201,13 +188,6 @@ describe('@deprecated', () => {
         color: string
       }
       class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
-        static propTypes = {
-          color: deprecated.deprecatePropValues(
-            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
-            ['blue', 'orange', 'gold']
-          )
-        }
-
         static defaultProps = {
           color: 'red'
         }
@@ -240,14 +220,6 @@ describe('@deprecated', () => {
         color: string
       }
       class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
-        static propTypes = {
-          color: deprecated.deprecatePropValues(
-            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
-            ['blue', 'orange', 'gold'],
-            'It will be removed in v8.0.0.'
-          )
-        }
-
         static defaultProps = {
           color: 'red'
         }
@@ -280,14 +252,6 @@ describe('@deprecated', () => {
         color: string
       }
       class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
-        static propTypes = {
-          color: deprecated.deprecatePropValues(
-            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
-            ['blue', 'orange', 'gold'],
-            messageMock
-          )
-        }
-
         static defaultProps = {
           color: 'red'
         }
@@ -319,21 +283,6 @@ describe('@deprecated', () => {
         color: string
       }
       class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
-        static propTypes = {
-          color: deprecated.deprecatePropValues(
-            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
-            ['blue', 'orange', 'gold'],
-            ({
-              propValue,
-              propName
-            }: {
-              propValue: string
-              propName: string
-            }) =>
-              `The ${propValue} value for ${propName} has been deprecated. Use the FooBar component with the 'baz' prop set instead.`
-          )
-        }
-
         static defaultProps = {
           color: 'red'
         }

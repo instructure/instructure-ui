@@ -23,7 +23,6 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
@@ -31,7 +30,7 @@ import { View } from '@instructure/ui-view'
 
 import { PagesContext } from '../PagesContext'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { PagesPageProps } from './props'
 
 /**
@@ -44,18 +43,12 @@ class Page extends Component<PagesPageProps> {
   static readonly componentId = 'Pages.Page'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     defaultFocusElement: null,
     padding: 'small',
     textAlign: 'start',
     children: null
-  }
-
-  static contextTypes = {
-    history: PropTypes.array,
-    navigateToPreviousPage: PropTypes.func
   }
 
   get _content() {

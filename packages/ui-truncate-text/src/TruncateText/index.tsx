@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Children, Component } from 'react'
+import { Children, Component, type JSX } from 'react'
 
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
@@ -40,7 +40,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
-import { propTypes, allowedProps, TruncateTextState } from './props'
+import { allowedProps, TruncateTextState } from './props'
 import type { TruncateTextProps } from './props'
 
 /**
@@ -55,7 +55,6 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   static readonly componentId = 'TruncateText'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     maxLines: 1,
@@ -142,15 +141,29 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
     }
   }
 
+  shallowCompare(obj1: any, obj2: any) {
+    const keys1 = Object.keys(obj1)
+    const keys2 = Object.keys(obj2)
+    if (keys1.length !== keys2.length) {
+      return false
+    }
+    for (const key of keys1) {
+      if (obj1[key] !== obj2[key]) {
+        return false
+      }
+    }
+    return true
+  }
+
   componentDidUpdate(prevProps: TruncateTextProps) {
     const { children, onUpdate, makeStyles } = this.props
-
     makeStyles?.()
-
     const { isTruncated, needsSecondRender, truncatedText } = this.state
 
     if (children) {
-      if (prevProps !== this.props) {
+      // for some reason in React 19 prevPros and this.props are a different
+      // object even if their contents are the same, so we cannot use !==
+      if (!this.shallowCompare(prevProps, this.props)) {
         if (prevProps.children !== this.props.children) {
           // reset internal text variable if children change
           this.checkChildren()

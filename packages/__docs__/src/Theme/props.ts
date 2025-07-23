@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 import type {
-  PropValidators,
   Colors,
   Typography,
   BaseTheme
 } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 type ThemeOwnProps = {
@@ -47,13 +46,6 @@ type ThemeTheme = {
   convertedValueFontSize: Typography['fontSizeSmall']
 }
 export type ThemeStyle = ComponentStyle<'convertedValue'>
-
-const propTypes: PropValidators<PropKeys> = {
-  themeKey: PropTypes.string.isRequired,
-  variables: PropTypes.object.isRequired,
-  requirePath: PropTypes.string.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['themeKey', 'variables', 'requirePath']
 export type { ThemeProps, ThemeTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

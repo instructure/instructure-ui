@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
+  
   ColorContrastTheme
 } from '@instructure/shared-types'
 
@@ -149,24 +149,6 @@ type ColorContrastStyle = ComponentStyle<
   | 'onContrastChange'
   | 'validationLevel'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  elementRef: PropTypes.func,
-  failureLabel: PropTypes.string.isRequired,
-  firstColor: PropTypes.string.isRequired,
-  firstColorLabel: PropTypes.string,
-  graphicsTextLabel: PropTypes.string.isRequired,
-  withoutColorPreview: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  largeTextLabel: PropTypes.string.isRequired,
-  normalTextLabel: PropTypes.string.isRequired,
-  secondColor: PropTypes.string.isRequired,
-  secondColorLabel: PropTypes.string,
-  successLabel: PropTypes.string.isRequired,
-  onContrastChange: PropTypes.func,
-  validationLevel: PropTypes.oneOf(['AA', 'AAA'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'elementRef',
   'failureLabel',
@@ -191,4 +173,4 @@ type ColorContrastState = {
   isValidGraphicsText: boolean
 }
 export type { ColorContrastProps, ColorContrastStyle, ColorContrastState }
-export { propTypes, allowedProps }
+export { allowedProps }

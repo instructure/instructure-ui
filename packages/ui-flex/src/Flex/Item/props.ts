@@ -23,12 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -121,24 +118,6 @@ type FlexItemProps = FlexItemOwnProps &
   OtherHTMLAttributes<FlexItemOwnProps>
 
 type FlexItemStyle = ComponentStyle<'flexItem'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  margin: PropTypes.string,
-  padding: PropTypes.string,
-  align: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
-  direction: PropTypes.oneOf(['row', 'column']),
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  shouldGrow: PropTypes.bool,
-  shouldShrink: PropTypes.bool,
-  size: PropTypes.string,
-  withVisualDebug: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'as',
@@ -157,4 +136,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { FlexItemProps, FlexItemStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

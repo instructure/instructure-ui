@@ -36,7 +36,7 @@ import Slider from './Slider'
 import RGBAInput from './RGBAInput'
 
 import type { ColorMixerProps, ColorMixerState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import generateStyle from './styles'
 
 /**
@@ -47,7 +47,6 @@ category: components
 @withStyle(generateStyle, null)
 @testable()
 class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer'
 

@@ -23,17 +23,10 @@
  */
 
 import { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
-
-import { controllable } from '@instructure/ui-prop-types'
-import { I18nPropTypes } from '@instructure/ui-i18n'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
 
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
@@ -250,43 +243,6 @@ type TimeSelectOwnProps = {
    */
   allowClearingSelection?: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  defaultToFirstOption: PropTypes.bool,
-  value: controllable(I18nPropTypes.iso8601, 'onChange'),
-  defaultValue: I18nPropTypes.iso8601,
-  id: PropTypes.string,
-  format: PropTypes.string,
-  step: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  placeholder: PropTypes.string,
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  width: PropTypes.string,
-  optionsMaxWidth: PropTypes.string,
-  visibleOptionsCount: PropTypes.number,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  placement: PositionPropTypes.placement,
-  constrain: PositionPropTypes.constrain,
-  mountNode: PositionPropTypes.mountNode,
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onShowOptions: PropTypes.func,
-  onHideOptions: PropTypes.func,
-  inputRef: PropTypes.func,
-  listRef: PropTypes.func,
-  renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  locale: PropTypes.string,
-  timezone: PropTypes.string,
-  allowNonStepInput: PropTypes.bool,
-  onInputChange: PropTypes.func,
-  allowClearingSelection: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'defaultToFirstOption',
@@ -370,4 +326,4 @@ type TimeSelectState = {
 }
 
 export type { TimeSelectProps, TimeSelectState, TimeSelectOptions }
-export { propTypes, allowedProps }
+export { allowedProps }

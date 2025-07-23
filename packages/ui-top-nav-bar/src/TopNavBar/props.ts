@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 
 import type { ActionItemsChild } from './TopNavBarActionItems/props'
@@ -35,7 +32,6 @@ import type { ItemChild } from './TopNavBarItem/props'
 import type { LayoutChild } from './TopNavBarLayout/props'
 import type { MenuItemsChild } from './TopNavBarMenuItems/props'
 import type { UserChild } from './TopNavBarUser/props'
-
 import type { TopNavBarContextType } from './TopNavBarContext'
 
 type TopNavBarOwnProps = {
@@ -77,15 +73,6 @@ type PropKeys = keyof TopNavBarOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarProps = TopNavBarOwnProps & OtherHTMLAttributes<TopNavBarOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.func,
-  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  mediaQueryMatch: PropTypes.oneOf(['element', 'media']),
-  inverseColor: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'breakpoint',
@@ -105,4 +92,4 @@ export type {
   MenuItemsChild,
   UserChild
 }
-export { propTypes, allowedProps }
+export { allowedProps }

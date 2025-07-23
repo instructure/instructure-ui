@@ -67,8 +67,6 @@ class ${name}${variant} extends Component<SVGIconProps> {
   static variant = '${variant}'
   static displayName = '${name}${variant}'
   ${deprecated ? `static deprecated = true` : ''}
-  // eslint-disable-next-line react/forbid-foreign-prop-types
-  static propTypes = { ...SVGIcon.propTypes }
   static allowedProps = [ ...SVGIcon.allowedProps ]
 
   ref: Element | null = null

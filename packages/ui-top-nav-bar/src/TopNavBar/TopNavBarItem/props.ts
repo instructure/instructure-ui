@@ -23,16 +23,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   TopNavBarItemTheme,
   OtherHTMLAttributes,
-  PropValidators,
   Renderable,
   AsElementType
 } from '@instructure/shared-types'
@@ -62,19 +58,6 @@ type TopNavBarItemTooltipType =
       onShowContent?: TooltipProps['onShowContent']
       onHideContent?: TooltipProps['onHideContent']
     }
-
-const topNavBarItemTooltipPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.shape({
-    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    placement: PropTypes.string,
-    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    onShowContent: PropTypes.func,
-    onHideContent: PropTypes.func
-  })
-])
 
 type TopNavBarItemOwnProps = {
   /**
@@ -296,39 +279,6 @@ type TopNavBarItemStyleProps = {
   layout: TopNavBarContextType['layout']
   inverseColor: TopNavBarContextType['inverseColor']
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  as: PropTypes.elementType,
-  children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['default', 'button', 'icon', 'avatar']),
-  status: PropTypes.oneOf(['default', 'active', 'disabled']),
-  renderSubmenu: ChildrenPropTypes.oneOf([Drilldown]),
-  showSubmenuChevron: PropTypes.bool,
-  customPopoverConfig: PropTypes.object,
-  tooltip: topNavBarItemTooltipPropType,
-  renderAvatar: PropTypes.shape({
-    avatarName: PropTypes.string.isRequired,
-    avatarSrc: PropTypes.string,
-    avatarAlt: PropTypes.string
-  }),
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  onHiddenClick: PropTypes.func,
-  onSubmenuToggle: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  onMouseOut: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  elementRef: PropTypes.func,
-  itemRef: PropTypes.func,
-  shouldCloseOnClick: PropTypes.oneOf(['auto', 'always', 'never']),
-  withFocusOutline: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'as',
@@ -367,4 +317,4 @@ export type {
   DrilldownSubmenu,
   TopNavBarItemTooltipType
 }
-export { propTypes, allowedProps, topNavBarItemTooltipPropType }
+export { allowedProps }

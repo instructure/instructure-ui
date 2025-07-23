@@ -22,14 +22,11 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+
 
 import type { TagStyle } from '@codemirror/language'
 
-import { controllable } from '@instructure/ui-prop-types'
-
 import type {
-  PropValidators,
   CodeEditorTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -233,51 +230,6 @@ type SourceCodeEditorStyle = ComponentStyle<
   theme: StyleObject
   highlightStyle: TagStyle[]
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  language: PropTypes.oneOf([
-    'sh',
-    'js',
-    'json',
-    'javascript',
-    'jsx',
-    'shell',
-    'css',
-    'html',
-    'markdown',
-    'yaml',
-    'yml',
-    'bash'
-  ]),
-  readOnly: PropTypes.bool,
-  editable: PropTypes.bool,
-  lineNumbers: PropTypes.bool,
-  foldGutter: PropTypes.bool,
-  highlightActiveLineGutter: PropTypes.bool,
-  highlightActiveLine: PropTypes.bool,
-  lineWrapping: PropTypes.bool,
-  autofocus: PropTypes.bool,
-  spellcheck: PropTypes.bool,
-  direction: PropTypes.oneOf(['ltr', 'rtl']),
-  rtlMoveVisually: PropTypes.bool,
-  indentOnLoad: PropTypes.bool,
-  indentWithTab: PropTypes.bool,
-  indentUnit: PropTypes.string,
-  defaultValue: PropTypes.string,
-  value: controllable(PropTypes.string, 'onChange', 'defaultValue'),
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  attachment: PropTypes.oneOf(['bottom', 'top']),
-  height: PropTypes.string,
-  width: PropTypes.string,
-  // darkTheme: PropTypes.bool,
-  elementRef: PropTypes.func,
-  containerRef: PropTypes.func,
-  searchConfig: PropTypes.object
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'language',
@@ -310,4 +262,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SourceCodeEditorProps, SourceCodeEditorStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

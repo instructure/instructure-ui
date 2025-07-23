@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+
 
 import type {
   Spacing,
@@ -29,7 +29,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   AsElementType,
   ProgressBarTheme,
   OtherHTMLAttributes
@@ -138,26 +137,6 @@ type ProgressBarStyle = ComponentStyle<
   | 'value'
   | 'htmlProgress'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  screenReaderLabel: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-  valueMax: PropTypes.number,
-  valueNow: PropTypes.number,
-  formatScreenReaderValue: PropTypes.func,
-  renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  color: PropTypes.oneOf(['primary', 'primary-inverse']),
-  meterColor: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
-  ]),
-  shouldAnimate: PropTypes.bool,
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  renderValueInside: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'screenReaderLabel',
   'size',
@@ -174,4 +153,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ProgressBarProps, ProgressBarStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

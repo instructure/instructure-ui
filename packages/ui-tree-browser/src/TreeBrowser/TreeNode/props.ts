@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   TreeBrowserButtonTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
@@ -63,22 +60,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TreeBrowserNodeProps = TreeBrowserNodeOwnProps &
   WithStyleProps<TreeBrowserButtonTheme, TreeBrowserButtonStyle>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  variant: PropTypes.oneOf(['folderTree', 'indent']),
-  selected: PropTypes.bool,
-  focused: PropTypes.bool,
-  itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  thumbnail: PropTypes.string,
-  level: PropTypes.number,
-  children: PropTypes.node,
-  containerRef: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onClick: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'size',
@@ -95,4 +76,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TreeBrowserNodeProps }
-export { propTypes, allowedProps }
+export { allowedProps }

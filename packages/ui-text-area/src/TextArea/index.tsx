@@ -46,7 +46,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TextAreaProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -60,7 +60,6 @@ class TextArea extends Component<TextAreaProps> {
   static readonly componentId = 'TextArea'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',
@@ -395,7 +394,9 @@ class TextArea extends Component<TextAreaProps> {
             <span
               css={this.props.styles?.textAreaOutline}
               aria-hidden="true"
-              ref={(e) => (this._highlightRef = e)}
+              ref={(e) => {
+                this._highlightRef = e
+              }}
             />
           ) : null}
         </div>

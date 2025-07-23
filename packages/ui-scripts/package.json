@@ -40,7 +40,7 @@
   "peerDependencies": {
     "eslint": "^9",
     "prettier": "^2",
-    "react": ">=16.14 <=18",
+    "react": ">=18 <=19",
     "webpack": "^5"
   },
   "publishConfig": {

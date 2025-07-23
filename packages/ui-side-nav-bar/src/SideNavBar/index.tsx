@@ -35,7 +35,7 @@ import { SideNavBarItem } from './SideNavBarItem'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { SideNavBarProps, SideNavBarState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 const navMinimized = ({ minimized }: { minimized: boolean }) => ({
   minimized: !minimized
@@ -52,7 +52,6 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   static readonly componentId = 'SideNavBar'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,

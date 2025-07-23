@@ -42,7 +42,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FileDropProps, FileDropState, FileDropStyleProps } from './props'
 
 function keyEventIsClickButton(e: React.KeyboardEvent) {
@@ -60,7 +60,6 @@ category: components
 class FileDrop extends Component<FileDropProps, FileDropState> {
   static readonly componentId = 'FileDrop'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     onClick: function (_e: React.MouseEvent) {},

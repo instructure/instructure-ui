@@ -34,7 +34,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { ProgressBarProps, Values } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -47,7 +47,6 @@ class ProgressBar extends Component<ProgressBarProps> {
   static readonly componentId = 'ProgressBar'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     formatScreenReaderValue: ({ valueNow, valueMax }: Values) =>

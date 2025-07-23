@@ -42,7 +42,7 @@ import type { MenuSeparatorProps } from '../MenuItemSeparator/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
 
 type MenuItemChild = ComponentElement<MenuItemProps, MenuItem>
@@ -63,7 +63,6 @@ id: Menu.Group
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   static readonly componentId = 'Menu.Group'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,

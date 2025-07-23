@@ -22,12 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children } from '@instructure/ui-prop-types'
-
-import { Panel } from './Panel'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -35,7 +29,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TabsTheme
 } from '@instructure/shared-types'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
@@ -113,24 +106,6 @@ type TabsState = {
   showStartOverLay: boolean
   showEndOverLay: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: Children.oneOf([Panel, null]),
-  variant: PropTypes.oneOf(['default', 'secondary']),
-  screenReaderLabel: PropTypes.string,
-  onRequestTabChange: PropTypes.func,
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  fixHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: PropTypes.string,
-  padding: PropTypes.string,
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  elementRef: PropTypes.func,
-  tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
-  shouldFocusOnRender: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'variant',
@@ -149,4 +124,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TabsProps, TabsState, TabsStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

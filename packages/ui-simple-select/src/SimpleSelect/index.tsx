@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { isValidElement, ComponentElement, Component, Children } from 'react'
+import { isValidElement, ComponentElement, Component, Children, type ReactElement } from 'react'
 
 import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -47,7 +47,7 @@ import { Group } from './Group'
 import type { SimpleSelectGroupProps } from './Group/props'
 
 import type { SimpleSelectProps } from './props'
-import { allowedProps, propTypes, SimpleSelectState } from './props'
+import { allowedProps, SimpleSelectState } from './props'
 
 type OptionChild = ComponentElement<SimpleSelectOptionProps, Option>
 type GroupChild = ComponentElement<SimpleSelectGroupProps, Group>
@@ -72,7 +72,6 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   static Group = Group
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',
@@ -143,7 +142,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     const getValues = (children: SimpleSelectProps['children']) =>
       Children.map(children, (child) => {
         if (isValidElement(child)) {
-          return child.props.value
+          return (child as ReactElement<any>).props.value
         }
         return null
       })

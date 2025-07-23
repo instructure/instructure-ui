@@ -32,8 +32,7 @@
     "@instructure/ui-tooltip": "10.24.0",
     "@instructure/ui-truncate-text": "10.24.0",
     "@instructure/ui-utils": "10.24.0",
-    "@instructure/ui-view": "10.24.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-view": "10.24.0"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.24.0",
@@ -43,11 +42,11 @@
     "@instructure/ui-scripts": "10.24.0",
     "@instructure/ui-themes": "10.24.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

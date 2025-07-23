@@ -31,7 +31,7 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ToggleButtonProps, ToggleButtonState } from './props'
 
 /**
@@ -44,7 +44,6 @@ category: components
 class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
   static readonly componentId = 'ToggleButton'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     size: 'medium',

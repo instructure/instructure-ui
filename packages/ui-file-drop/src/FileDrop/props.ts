@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   Spacing,
@@ -33,7 +29,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   FileDropTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -186,37 +181,6 @@ type FileDropProps = FileDropOwnProps &
 type FileDropStyle = ComponentStyle<
   'fileDropLabel' | 'fileDropInput' | 'fileDropLabelContent' | 'fileDropLayout'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string,
-  renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
-  accept: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
-  ]),
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  onClick: PropTypes.func,
-  onDrop: PropTypes.func,
-  onDropAccepted: PropTypes.func,
-  onDropRejected: PropTypes.func,
-  onDragEnter: PropTypes.func,
-  onDragOver: PropTypes.func,
-  onDragLeave: PropTypes.func,
-  shouldEnablePreview: PropTypes.bool,
-  shouldAllowMultiple: PropTypes.bool,
-  shouldAllowRepeats: PropTypes.bool,
-  maxSize: PropTypes.number,
-  minSize: PropTypes.number,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  display: PropTypes.oneOf(['block', 'inline-block']),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: PropTypes.string,
-  inputRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'renderLabel',
@@ -245,4 +209,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { FileDropProps, FileDropState, FileDropStyleProps, FileDropStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

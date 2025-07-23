@@ -32,7 +32,7 @@ import { RatingIcon } from '../RatingIcon'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { RatingProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -45,7 +45,6 @@ class Rating extends Component<RatingProps> {
   static readonly componentId = 'Rating'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     animateFill: false,

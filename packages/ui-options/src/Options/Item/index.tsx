@@ -37,7 +37,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { OptionsItemProps, OptionsItemStyle } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -52,7 +52,6 @@ class Item extends Component<OptionsItemProps> {
   static readonly componentId = 'Options.Item'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',

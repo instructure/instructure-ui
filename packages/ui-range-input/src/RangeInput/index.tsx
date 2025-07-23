@@ -40,7 +40,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { RangeInputProps, RangeInputState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -55,7 +55,6 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
   static outputLocatorAttribute = 'data-range-output'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     step: 1,

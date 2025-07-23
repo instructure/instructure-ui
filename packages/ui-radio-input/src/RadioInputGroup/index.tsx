@@ -44,7 +44,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
 
@@ -63,7 +63,6 @@ class RadioInputGroup extends Component<
   static readonly componentId = 'RadioInputGroup'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     disabled: false,

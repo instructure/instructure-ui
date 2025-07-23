@@ -23,13 +23,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import MenuItem from '../MenuItem'
-import { controllable } from '@instructure/ui-prop-types'
 
 import type {
   AsElementType,
-  PropValidators,
   MenuItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -108,26 +105,6 @@ type MenuItemProps = MenuItemOwnProps &
   WithDeterministicIdProps
 
 type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'labelInfo' | 'label'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  defaultSelected: PropTypes.bool,
-  selected: controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
-  onSelect: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  controls: PropTypes.string,
-  disabled: PropTypes.bool,
-  as: PropTypes.elementType,
-  type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  href: PropTypes.string,
-  target: PropTypes.string,
-  renderLabelInfo: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'defaultSelected',
@@ -150,4 +127,4 @@ type MenuItemState = {
   selected: boolean
 }
 export type { MenuItemProps, MenuItemStyle, MenuItemState, OnMenuItemSelect }
-export { propTypes, allowedProps }
+export { allowedProps }
