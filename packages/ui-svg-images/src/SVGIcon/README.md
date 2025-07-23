@@ -47,15 +47,15 @@ type: example
 </div>
 ```
 
-If you need a size that is not offered via the `size` prop, adjust the
-`font-size` on the icon's parent element.
+If you need a size that is not offered via the `size` prop, use the `width` or `height` props, these accept a valid CSS length value.
 
 ```js
 ---
 type: example
 ---
-<div style={{fontSize: '15rem', lineHeight: 1}}>
-  <SVGIcon src={iconExample} title="Icon Example" />
+<div>
+  <SVGIcon width="1rem" height="1rem" src={iconExample} title="Icon Example" />
+  <SVGIcon width="55px" height="55px" src={iconExample} title="Icon Example" />
 </div>
 ```
 

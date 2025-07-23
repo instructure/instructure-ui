@@ -39,10 +39,12 @@ type InlineSVGOwnProps = {
   description?: string
   focusable?: boolean
   /**
+   * Width of the SVG. Accepts valid CSS unit strings like '1rem'
    * To let the SVG expand to fill its container, use "`auto`"
    */
   width?: string | number
   /**
+   * Height of the SVG. Accepts valid CSS unit strings like '1rem'
    * To let the SVG expand to fill its container, use "`auto`"
    */
   height?: string | number
