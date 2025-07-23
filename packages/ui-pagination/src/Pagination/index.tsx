@@ -47,7 +47,7 @@ import generateComponentTheme from './theme'
 import type { PaginationPageProps } from './PaginationButton/props'
 import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { PaginationProps, PaginationSnapshot, ChildPage } from './props'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
@@ -92,7 +92,6 @@ category: components
 class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
@@ -328,7 +327,11 @@ class Pagination extends Component<PaginationProps> {
     for (let i = from; i <= to; i++) {
       pages.push(
         <Pagination.Page
-          ref={(e) => (i === currentPage ? (this.currentPageRef = e) : null)}
+          ref={(e) => {
+              if (i === currentPage) {
+                this.currentPageRef = e
+              }
+            }}
           key={i}
           onClick={() => this.handleNavigation(i, currentPage)}
           current={i === currentPage}

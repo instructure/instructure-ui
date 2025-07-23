@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   Renderable,
   TableRowHeaderTheme
 } from '@instructure/shared-types'
@@ -49,13 +46,7 @@ type TableRowHeaderProps = TableRowHeaderOwnProps &
   OtherHTMLAttributes<TableRowHeaderOwnProps>
 
 type TableRowHeaderStyle = ComponentStyle<'rowHeader'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  textAlign: PropTypes.oneOf(['start', 'center', 'end'])
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'textAlign']
 
 export type { TableRowHeaderProps, TableRowHeaderStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -32,7 +32,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   PaginationPageInputProps,
   PaginationPageInputState
@@ -52,7 +52,6 @@ class PaginationPageInput extends Component<
 > {
   static readonly componentId = 'Pagination.PageInput'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false

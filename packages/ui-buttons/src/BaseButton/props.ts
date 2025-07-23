@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type {
   Spacing,
@@ -36,9 +34,8 @@ import type {
   AsElementType,
   BaseButtonTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
-import type { Cursor } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
 import { Renderable } from '@instructure/shared-types'
 
@@ -196,40 +193,6 @@ type BaseButtonStyle = ComponentStyle<
   | 'iconWrapper'
   | 'childrenWrapper'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  color: PropTypes.oneOf([
-    'primary',
-    'primary-inverse',
-    'secondary',
-    'success',
-    'danger',
-    'ai-primary',
-    'ai-secondary'
-  ]),
-  focusColor: PropTypes.oneOf(['info', 'inverse']),
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  textAlign: PropTypes.oneOf(['start', 'center']),
-  shape: PropTypes.oneOf(['rectangle', 'circle']),
-  withBackground: PropTypes.bool,
-  withBorder: PropTypes.bool,
-  isCondensed: PropTypes.bool,
-  margin: PropTypes.string,
-  cursor: PropTypes.string,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  tabIndex: PropTypes.number,
-  withFocusOutline: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -260,4 +223,4 @@ export type {
   BaseButtonStyleProps,
   BaseButtonStyle
 }
-export { propTypes, allowedProps }
+export { allowedProps }

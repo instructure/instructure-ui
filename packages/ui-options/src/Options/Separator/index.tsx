@@ -31,7 +31,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { OptionsSeparatorProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -45,7 +45,6 @@ class Separator extends Component<OptionsSeparatorProps> {
   static readonly componentId = 'Options.Separator'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span'

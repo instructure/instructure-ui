@@ -71,9 +71,6 @@
       "path": "../ui-checkbox/tsconfig.build.json"
     },
     {
-      "path": "../ui-code-editor/tsconfig.build.json"
-    },
-    {
       "path": "../ui-color-utils/tsconfig.build.json"
     },
     {
@@ -180,9 +177,6 @@
     },
     {
       "path": "../ui-progress/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-prop-types/tsconfig.build.json"
     },
     {
       "path": "../ui-radio-input/tsconfig.build.json"

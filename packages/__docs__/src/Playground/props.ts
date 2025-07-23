@@ -24,11 +24,10 @@
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
-  PropValidators,
   Border,
   Typography
 } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 
 type PlaygroundOwnProps = {
   title: string
@@ -49,12 +48,7 @@ type PlaygroundTheme = {
   editorBorderRadius: Border['radiusMedium']
   fontSize: Typography['fontSizeMedium']
 }
-const propTypes: PropValidators<PropKeys> = {
-  title: PropTypes.string.isRequired,
-  code: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.array]),
-  language: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool
-}
+
 
 const allowedProps: AllowedPropKeys = ['code', 'language', 'readOnly', 'title']
 
@@ -67,4 +61,4 @@ export type PlaygroundState = {
   selectedTab: number
 }
 export type { PlaygroundProps, PlaygroundStyle, PlaygroundTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
   AsElementType,
-  PropValidators,
   FormFieldLabelTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -46,13 +43,7 @@ type FormFieldLabelProps = FormFieldLabelOwnProps &
   OtherHTMLAttributes<FormFieldLabelOwnProps>
 
 type FormFieldLabelStyle = ComponentStyle<'formFieldLabel'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = ['as', 'children']
 
 export type { FormFieldLabelProps, FormFieldLabelStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

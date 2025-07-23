@@ -32,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CondensedButtonProps } from './props'
 
 /**
@@ -46,7 +46,6 @@ category: components
 class CondensedButton extends Component<CondensedButtonProps> {
   static readonly componentId = 'CondensedButton'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     type: 'button',

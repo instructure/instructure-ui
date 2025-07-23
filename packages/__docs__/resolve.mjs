@@ -46,10 +46,6 @@ const alias = {
   '@instructure/ui-byline$': path.resolve(import.meta.dirname, '../ui-byline/src/'),
   '@instructure/ui-calendar$': path.resolve(import.meta.dirname, '../ui-calendar/src/'),
   '@instructure/ui-checkbox$': path.resolve(import.meta.dirname, '../ui-checkbox/src/'),
-  '@instructure/ui-code-editor$': path.resolve(
-    import.meta.dirname,
-    '../ui-code-editor/src/'
-  ),
   '@instructure/ui-color-picker$': path.resolve(
     import.meta.dirname,
     '../ui-color-picker/src/'

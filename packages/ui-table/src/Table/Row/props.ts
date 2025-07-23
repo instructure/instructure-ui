@@ -23,11 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TableRowTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -43,11 +40,11 @@ type TableRowOwnProps = {
    * `{condition && <Table.Cell>bla<Table.Cell>}`
    */
   children?:
-    | React.ReactElement
+    | React.ReactElement<any>
     | null
     | undefined
     | boolean
-    | (React.ReactElement | null | undefined | boolean)[]
+    | (React.ReactElement<any> | null | undefined | boolean)[]
 
   /**
    * Controls the hover state of the row.
@@ -67,12 +64,7 @@ type TableRowProps = TableRowOwnProps &
 
 type TableRowStyle = ComponentStyle<'row'>
 
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  setHoverStateTo: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'setHoverStateTo']
 
 export type { TableRowProps, TableRowStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

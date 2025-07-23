@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ScreenReaderContentProps } from './props'
 
 /**
@@ -43,7 +43,6 @@ category: components/utilities
 class ScreenReaderContent extends Component<ScreenReaderContentProps> {
   static readonly componentId = 'ScreenReaderContent'
 
-  static propTypes = propTypes
 
   static allowedProps = allowedProps
 

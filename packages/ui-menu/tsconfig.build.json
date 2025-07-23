@@ -18,7 +18,6 @@
     { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-popover/tsconfig.build.json" },
     { "path": "../ui-position/tsconfig.build.json" },
-    { "path": "../ui-prop-types/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },

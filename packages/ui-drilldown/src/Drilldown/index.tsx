@@ -63,7 +63,7 @@ import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps, SelectedGroupOptionsMap } from './props'
+import { allowedProps, SelectedGroupOptionsMap } from './props'
 
 import type {
   DrilldownProps,
@@ -105,7 +105,6 @@ category: components
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static readonly componentId = 'Drilldown'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
@@ -1566,9 +1565,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           },
           'aria-haspopup': this.props.role,
           id: this._triggerId,
-          disabled: !!((trigger as ReactElement).props.disabled || disabled),
+          disabled: !!((trigger as ReactElement<any>).props.disabled || disabled),
           'aria-disabled':
-            (trigger as ReactElement).props.disabled || disabled
+            (trigger as ReactElement<any>).props.disabled || disabled
               ? 'true'
               : undefined
         })}

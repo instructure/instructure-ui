@@ -23,7 +23,6 @@
  */
 
 import { Children, Component, PropsWithChildren } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, ensureSingleChild } from '@instructure/ui-react-utils'
 import {
@@ -42,14 +41,10 @@ import generateComponentTheme from './theme'
 
 import { Heading } from '../Heading'
 import type { FigureProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 
 class FigureItem extends Component<PropsWithChildren> {
   static displayName = 'FigureItem'
-
-  static propTypes = {
-    children: PropTypes.node
-  }
 
   static defaultProps = {
     children: null
@@ -64,7 +59,6 @@ class FigureItem extends Component<PropsWithChildren> {
 
 @withStyle(generateStyle, generateComponentTheme)
 class Figure extends Component<FigureProps> {
-  static propTypes = propTypes
 
   static allowedProps = allowedProps
 

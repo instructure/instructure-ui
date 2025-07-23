@@ -34,7 +34,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { ProgressCircleProps, ProgressCircleState, Values } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -50,7 +50,6 @@ class ProgressCircle extends Component<
   static readonly componentId = 'ProgressCircle'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     formatScreenReaderValue: ({ valueNow, valueMax }: Values) =>

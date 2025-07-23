@@ -36,7 +36,7 @@ import { Item } from './Item'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { AppNavItemProps } from './Item/props'
 
 import { TruncateList } from '@instructure/ui-truncate-list'
@@ -52,7 +52,6 @@ class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,

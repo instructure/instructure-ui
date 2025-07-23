@@ -54,6 +54,13 @@ type TextDirectionContextConsumerType = {
   (): (ComposedComponent: any) => any
   DIRECTION: typeof DIRECTION
 }
+
+interface ForwardRefComponentWithStatics extends ForwardRefExoticComponent<PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>> {
+  originalType?: ComponentClass
+  defaultProps?: any
+  propTypes?: any
+  allowedProps?: any
+}
 /**
  * ---
  * category: utilities/i18n
@@ -86,7 +93,14 @@ type TextDirectionContextConsumerType = {
  * @return The decorator that composes the textDirectionContextConsumer component.
  */
 const textDirectionContextConsumer: TextDirectionContextConsumerType =
-  decorator((ComposedComponent) => {
+  decorator((ComposedComponent: ComponentClass<any> & {
+    displayName?: string
+    name?: string
+    defaultProps?: any
+    propTypes?: any
+    allowedProps?: any
+    originalType?: ComponentClass<any>
+  }) => {
     class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerInternalProps> {
       render() {
         const { forwardedRef, ...rest } = this.props
@@ -113,14 +127,17 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
         )
       }
     }
-
-    const TextDirectionContextConsumerForwardingRef: ForwardRefExoticComponent<
-      PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
-    > & {
-      originalType?: ComponentClass
-    } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
+    const TextDirectionContextConsumerForwardingRef: ForwardRefComponentWithStatics = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
       <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
     ))
+
+    // const TextDirectionContextConsumerForwardingRef: ForwardRefExoticComponent<
+    //   PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
+    // > & {
+    //   originalType?: ComponentClass
+    // } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
+    //   <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
+    // ))
     if (process.env.NODE_ENV !== 'production') {
       const displayName =
         ComposedComponent.displayName || ComposedComponent.name
@@ -135,9 +152,7 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
     TextDirectionContextConsumerForwardingRef.propTypes =
       // eslint-disable-next-line react/forbid-foreign-prop-types
       ComposedComponent.propTypes
-    // @ts-expect-error These static fields exist on InstUI components
     TextDirectionContextConsumerForwardingRef.allowedProps =
-      // @ts-expect-error These static fields exist on InstUI components
       ComposedComponent.allowedProps
 
     // added so it can be tested with ReactTestUtils

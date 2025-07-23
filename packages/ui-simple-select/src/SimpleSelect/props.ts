@@ -23,20 +23,11 @@
  */
 
 import { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
-
-import { Group } from './Group'
-import { Option } from './Option'
 
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
@@ -272,41 +263,6 @@ type SimpleSelectState = {
   selectedOptionId?: string
 }
 
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  // TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  defaultValue: PropTypes.string,
-  id: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  assistiveText: PropTypes.string,
-  placeholder: PropTypes.string,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  width: PropTypes.string,
-  visibleOptionsCount: PropTypes.number,
-  optionsMaxHeight: PropTypes.string,
-  optionsMaxWidth: PropTypes.string,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  placement: PositionPropTypes.placement,
-  constrain: PositionPropTypes.constrain,
-  mountNode: PositionPropTypes.mountNode,
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onShowOptions: PropTypes.func,
-  onHideOptions: PropTypes.func,
-  inputRef: PropTypes.func,
-  listRef: PropTypes.func,
-  renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: ChildrenPropTypes.oneOf([Group, Option]),
-  isOptionContentAppliedToInput: PropTypes.bool,
-  layout: PropTypes.oneOf(['stacked', 'inline'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'value',
@@ -341,4 +297,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SimpleSelectProps, SimpleSelectState }
-export { propTypes, allowedProps }
+export { allowedProps }

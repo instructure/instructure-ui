@@ -23,11 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
 
@@ -75,16 +72,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SimpleSelectOptionProps = SimpleSelectOptionOwnProps &
   OtherHTMLAttributes<SimpleSelectOptionOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  isDisabled: PropTypes.bool,
-  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'value',
@@ -95,4 +82,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SimpleSelectOptionProps, RenderSimpleSelectOptionLabel }
-export { propTypes, allowedProps }
+export { allowedProps }

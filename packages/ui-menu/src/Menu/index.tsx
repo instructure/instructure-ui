@@ -47,7 +47,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MenuProps } from './props'
 
 type MenuChild = ComponentElement<MenuProps, Menu>
@@ -68,7 +68,6 @@ category: components
 @testable()
 class Menu extends Component<MenuProps> {
   static readonly componentId = 'Menu'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     label: null,
@@ -498,7 +497,7 @@ class Menu extends Component<MenuProps> {
           id: this._labelId,
           onMouseOver: this.handleTriggerMouseOver,
           onKeyDown: this.handleTriggerKeyDown,
-          disabled: (trigger as ReactElement).props.disabled || disabled
+          disabled: (trigger as ReactElement<any>).props.disabled || disabled
         })}
         defaultFocusElement={() =>
           this._popover?._contentElement?.querySelector('[class$="menuItem"]')

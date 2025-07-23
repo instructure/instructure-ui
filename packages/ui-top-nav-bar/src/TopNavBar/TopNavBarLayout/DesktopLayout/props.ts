@@ -23,20 +23,14 @@
  */
 
 import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarLayoutDesktopTheme,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
-
 import type { TopNavBarContextType } from '../../TopNavBarContext'
-
 import {
-  commonPropTypes,
   commonAllowedProps,
-  desktopPropTypes,
   desktopAllowedProps
 } from '../props'
 import type { CommonTopNavBarLayoutProps } from '../props'
@@ -82,13 +76,6 @@ type TopNavBarDesktopLayoutStyleProps = {
   hasActionItemsBlock: boolean
   hasUserBlock: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  // Edit PropTypes in TopNabBarLayout/props.ts
-  ...commonPropTypes,
-  ...desktopPropTypes
-}
-
 const allowedProps: AllowedPropKeys = [
   // Edit allowed props in TopNabBarLayout/props.ts
   ...commonAllowedProps,
@@ -103,4 +90,4 @@ export type {
   TopNavBarDesktopLayoutStyle,
   TopNavBarDesktopLayoutStyleProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

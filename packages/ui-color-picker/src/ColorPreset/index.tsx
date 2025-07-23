@@ -46,7 +46,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -56,7 +56,6 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'
 

@@ -30,12 +30,11 @@ import { View } from '@instructure/ui-view'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ColorBandProps } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class ColorBand extends Component<ColorBandProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   componentDidMount() {
     this.props.makeStyles?.()
