@@ -26,10 +26,12 @@ import updateV10Breaking from './updateV10Breaking'
 import instUIv11Codemods from './instUIv11Codemods'
 import removeAsFromInstUISettingsProvider from './removeAsFromInstUISettingsProvider'
 import { renameCanvasThemes } from './renameCanvasThemesCodemod'
+import updateCodeEditorImport from './updateCodeEditorImport'
 
 export {
   updateV10Breaking,
   instUIv11Codemods,
   removeAsFromInstUISettingsProvider,
-  renameCanvasThemes
+  renameCanvasThemes,
+  updateCodeEditorImport
 }
