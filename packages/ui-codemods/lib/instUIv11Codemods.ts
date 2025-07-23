@@ -27,6 +27,7 @@ import instUICodemodExecutor from './utils/instUICodemodExecutor'
 import { removeAsProp } from './removeAsFromInstUISettingsProvider'
 import { renameCanvasThemes } from './renameCanvasThemesCodemod'
 import { updateCodeEditor } from './updateCodeEditorImport'
+import { removeMaxWidth } from './removeMaxWidthFromTag'
 
 /**
  * Runs all InstUI v10 -> v11 upgrade codemods
@@ -38,7 +39,7 @@ const InstUIv11Codemods: Transform = (
 ) => {
   // TODO add other v11 codemods to this array
   return instUICodemodExecutor(
-    [removeAsProp, renameCanvasThemes, updateCodeEditor],
+    [removeAsProp, renameCanvasThemes, updateCodeEditor, removeMaxWidth],
     file,
     api,
     options
