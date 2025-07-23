@@ -143,14 +143,33 @@ class InlineSVG extends Component<InlineSVGProps> {
     }
   }
 
+  // Firefox workaround: If width/height is a string that's a number (e.g. '100')
+  // it needs to be converted to a number, otherwise it is not added to the
+  // stylesheet
+  numberToNumberType(n: string | number | undefined) {
+    if (typeof n === 'string') {
+      const parsed = parseFloat(n)
+      // from https://stackoverflow.com/a/52986361/319473
+      if (!isNaN(parsed) && isFinite(n as unknown as number)) {
+        return parsed
+      }
+    }
+    return n
+  }
+
   render() {
     const { style, title, description, focusable, src, styles, ...props } =
       this.props
 
     // if width or height are 'auto', don't supply anything to the SVG
-    const width = this.props.width === 'auto' ? undefined : this.props.width
-    const height = this.props.height === 'auto' ? undefined : this.props.height
-
+    const width =
+      this.props.width === 'auto'
+        ? undefined
+        : this.numberToNumberType(this.props.width)
+    const height =
+      this.props.height === 'auto'
+        ? undefined
+        : this.numberToNumberType(this.props.height)
     return (
       <svg
         {...parseAttributes(src)}
