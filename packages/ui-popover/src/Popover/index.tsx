@@ -249,6 +249,9 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 
+  /**
+   * Offsets the popover by the arrow size
+   */
   computeOffsets(placement: PopoverProps['placement']) {
     let { offsetX, offsetY } = this.props
 
