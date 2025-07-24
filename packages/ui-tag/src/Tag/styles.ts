@@ -206,7 +206,6 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      maxWidth: componentTheme.maxWidth,
       ...sizeVariants[size!].text
     },
     icon: {

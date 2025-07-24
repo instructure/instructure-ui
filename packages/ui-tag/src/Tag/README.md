@@ -69,17 +69,6 @@ type: example
 </div>
 ```
 
-### Max-width
-
-```js
----
-type: example
----
-<Tag
-  text="Long string of text designed to trigger overflow"
-/>
-```
-
 ### Inline variant
 
 This variant is designed to look similar to the surrounding text.
