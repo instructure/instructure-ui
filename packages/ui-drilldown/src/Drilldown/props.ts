@@ -136,7 +136,13 @@ type DrilldownOwnProps = {
   trigger?: React.ReactNode
 
   /**
-   * If a trigger is supplied, where should the `<Drilldown />` be placed (relative to the trigger)
+   * If a trigger is supplied, where should the `<Drilldown />` be placed
+   * (relative to the trigger)
+   *
+   * `stretch` will stretch the `Drilldown` to the same size as its `trigger`
+   * (provided that the `trigger` is at least as large as the `Drilldown`).
+   * In this case you should not set `width`/`maxHeight`, it will be set
+   * automatically.
    */
   placement?: PlacementPropValues
 
