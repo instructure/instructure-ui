@@ -38,7 +38,7 @@ import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TruncateListProps, TruncateListState } from './props'
 
 /**
@@ -51,7 +51,6 @@ category: components/utilities
 class TruncateList extends Component<TruncateListProps, TruncateListState> {
   static readonly componentId = 'TruncateList'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     itemSpacing: '0',

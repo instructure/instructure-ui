@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 import { ThHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TableColHeaderTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -91,19 +89,6 @@ type TableColHeaderStyle = ComponentStyle<
   | 'unSortedIconColor'
   | 'sortedIconColor'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  isStacked: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  stackedSortByLabel: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  sortDirection: PropTypes.oneOf(['none', 'ascending', 'descending']),
-  onRequestSort: PropTypes.func,
-  scope: PropTypes.oneOf(['row', 'col', 'rowgroup', 'colgroup', 'auto'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'isStacked',
@@ -117,4 +102,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TableColHeaderProps, TableColHeaderStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

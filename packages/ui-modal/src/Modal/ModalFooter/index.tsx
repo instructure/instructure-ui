@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ModalFooterProps } from './props'
 
 /**
@@ -44,7 +44,6 @@ id: Modal.Footer
 class ModalFooter extends Component<ModalFooterProps> {
   static readonly componentId = 'Modal.Footer'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     variant: 'default'

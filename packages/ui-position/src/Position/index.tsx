@@ -45,7 +45,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { PositionProps, PositionState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 import { calculateElementPosition } from '../calculateElementPosition'
 import { PositionElement } from '../PositionPropTypes'
@@ -62,7 +62,6 @@ class Position extends Component<PositionProps, PositionState> {
   static readonly componentId = 'Position'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps: PositionProps = {
     placement: 'bottom center',

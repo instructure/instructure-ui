@@ -29,9 +29,8 @@ import { TruncateText } from '@instructure/ui-truncate-text'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ColorNameProps, ColorNameState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 class ColorName extends Component<ColorNameProps, ColorNameState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span'

@@ -26,8 +26,7 @@ import { Children, Component, ReactElement } from 'react'
 import {
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState,
-  allowedProps,
-  propTypes
+  allowedProps
 } from './props'
 import TopNavBar from '../index'
 import { withStyle } from '@instructure/emotion'
@@ -54,7 +53,6 @@ class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState
 > {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 
@@ -107,11 +105,11 @@ class TopNavBarBreadcrumb extends Component<
       )
     }
 
-    const breadcrumbElement = Children.toArray(children)[0] as ReactElement
+    const breadcrumbElement = Children.toArray(children)[0] as ReactElement<any>
     const breadCrumbLinks = breadcrumbElement.props.children
     const lastButOneLink = Children.toArray(breadCrumbLinks)[
       Children.count(breadCrumbLinks) - 2
-    ] as ReactElement
+    ] as ReactElement<any>
 
     return (
       this.context.inverseColor &&

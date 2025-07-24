@@ -41,7 +41,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { TooltipProps, TooltipState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -55,7 +55,6 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     defaultIsShowingContent: false,

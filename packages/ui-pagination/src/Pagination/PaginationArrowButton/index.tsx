@@ -36,7 +36,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import type { PaginationNavigationProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -49,7 +49,6 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
   static readonly componentId = 'Pagination.Navigation'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {}
 

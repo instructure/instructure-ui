@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 import { vi } from 'vitest'
-import PropTypes from 'prop-types'
 
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -36,11 +35,6 @@ type TestComponentProps = {
   qux: string
 }
 class TestComponent extends Component<TestComponentProps> {
-  static propTypes = {
-    bar: PropTypes.string,
-    qux: PropTypes.string
-  }
-
   static defaultProps = {
     bar: undefined,
     qux: 'Hello'

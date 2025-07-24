@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
@@ -64,15 +62,6 @@ type OtherHTMLAttributes<
 > = Omit<Attributes, keyof Props | 'dir'> & { dir?: 'ltr' | 'rtl' }
 
 /**
- * Helper type for the propTypes object.
- * It ensures that the passed prop type keys match with the propType version.
- */
-type PropValidators<PropKeys extends string> = Record<
-  PropKeys,
-  PropTypes.Validator<unknown>
->
-
-/**
  * These props are not the components own prop, but we have to allow them,
  * since these are passed to another component.
  */
@@ -87,6 +76,5 @@ export type {
   Nullable,
   CSSShorthandValue,
   OtherHTMLAttributes,
-  PropValidators,
   PickPropsWithExceptions
 }

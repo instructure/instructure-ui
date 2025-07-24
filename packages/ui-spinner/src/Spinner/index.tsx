@@ -38,7 +38,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { SpinnerProps, SpinnerState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -51,8 +51,7 @@ category: components
 class Spinner extends Component<SpinnerProps, SpinnerState> {
   static readonly componentId = 'Spinner'
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     as: 'div',
     size: 'medium',
     variant: 'default'

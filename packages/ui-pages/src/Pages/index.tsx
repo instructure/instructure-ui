@@ -40,7 +40,7 @@ import generateComponentTheme from './theme'
 
 import { PagesContext } from './PagesContext'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { PagesProps, PagesState } from './props'
 
 /**
@@ -54,7 +54,6 @@ class Pages extends Component<PagesProps, PagesState> {
   static readonly componentId = 'Pages'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     activePageIndex: 0

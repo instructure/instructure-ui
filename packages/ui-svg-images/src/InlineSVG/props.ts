@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 import { SVGAttributes } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type {
-  PropValidators,
   InlineSVGTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -75,32 +74,6 @@ type InlineSVGProps = InlineSVGOwnProps &
   WithDeterministicIdProps
 
 type InlineSVGStyle = ComponentStyle<'inlineSVG'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  src: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  focusable: PropTypes.bool,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  inline: PropTypes.bool,
-  color: PropTypes.oneOf([
-    'inherit',
-    'primary',
-    'secondary',
-    'primary-inverse',
-    'secondary-inverse',
-    'success',
-    'error',
-    'alert',
-    'warning',
-    'brand',
-    'auto'
-  ]),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'src',
@@ -115,4 +88,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { InlineSVGProps, InlineSVGOwnProps, InlineSVGStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -48,7 +48,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { AlertProps, AlertState } from './props'
 
 /**
@@ -61,7 +61,6 @@ category: components
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     variant: 'info',

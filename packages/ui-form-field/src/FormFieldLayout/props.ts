@@ -22,14 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { FormPropTypes } from '../FormPropTypes'
-
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   WithStyleProps,
@@ -110,25 +105,6 @@ type FormFieldLayoutProps = FormFieldLayoutOwnProps &
 type FormFieldLayoutStyle = ComponentStyle<
   'formFieldLayout' | 'formFieldLabel' | 'formFieldChildren'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.node.isRequired,
-  id: PropTypes.string,
-  as: PropTypes.elementType,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  messagesId: PropTypes.string,
-  children: PropTypes.node,
-  inline: PropTypes.bool,
-  layout: PropTypes.oneOf(['stacked', 'inline']),
-  labelAlign: PropTypes.oneOf(['start', 'end']),
-  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-  width: PropTypes.string,
-  inputContainerRef: PropTypes.func,
-  elementRef: PropTypes.func,
-  isGroup: PropTypes.bool,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'id',
@@ -158,4 +134,4 @@ export type {
   FormFieldLayoutStyle,
   FormFieldLayoutOwnProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

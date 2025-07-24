@@ -32,7 +32,7 @@ import { InlineSVG } from '../InlineSVG'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { SVGIconProps } from './props'
 import { SVGIconTheme } from '@instructure/shared-types'
 
@@ -47,7 +47,6 @@ class SVGIcon extends Component<SVGIconProps> {
   static readonly componentId = 'SVGIcon'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     rotate: '0',

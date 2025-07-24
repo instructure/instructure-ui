@@ -42,7 +42,7 @@ import { MenuContext } from '../../MenuContext'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MenuItemProps, MenuItemState } from './props'
 
 /**
@@ -57,7 +57,6 @@ id: Menu.Item
 class MenuItem extends Component<MenuItemProps, MenuItemState> {
   static readonly componentId = 'Menu.Item'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     type: 'button',

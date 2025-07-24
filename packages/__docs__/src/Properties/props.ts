@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { PropDescriptor } from 'react-docgen'
 
@@ -48,12 +46,6 @@ export type PropertiesStyle = ComponentStyle<
   | 'oneOf'
   | 'noWrap'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  props: PropTypes.object.isRequired,
-  layout: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = ['props', 'layout']
 export type { PropertiesProps }
-export { propTypes, allowedProps }
+export { allowedProps }

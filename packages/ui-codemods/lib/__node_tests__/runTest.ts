@@ -40,7 +40,9 @@ export function runTest(codemod: Transform) {
   const entries = fs.readdirSync(
     `${__dirname}/__testfixtures__/${codemod.name}`,
     { withFileTypes: true }
-  )
+    // TODO path error solved by npm i on master
+  ) as Array<fs.Dirent & { path: string }>
+
   let fixturesRun = 0
   entries.forEach((entry) => {
     if (entry.isFile() && entry.name.includes('input')) {

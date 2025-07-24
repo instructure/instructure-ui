@@ -50,7 +50,7 @@ import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DateInputProps, DateInputState } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
 
@@ -65,7 +65,6 @@ class DateInput extends Component<DateInputProps, DateInputState> {
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
   declare context: React.ContextType<typeof ApplyLocaleContext>
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     value: '',
@@ -469,7 +468,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
         }) => (
           <span
             {...getRootProps({ css: styles?.dateInput })}
-            ref={(el) => (this.ref = el)}
+            ref={(el) => {this.ref = el}}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

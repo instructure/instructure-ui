@@ -44,7 +44,7 @@ import type {
   TreeBrowserProps,
   TreeBrowserState
 } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -57,7 +57,6 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   static readonly componentId = 'TreeBrowser'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',

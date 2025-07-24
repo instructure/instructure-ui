@@ -31,12 +31,11 @@ import { View } from '@instructure/ui-view'
 import { ColorSwatch } from '../ColorSwatch'
 
 import generateStyle from './styles'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ComponentThemeProps } from './props'
 
 @withStyle(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   renderValueCell(
