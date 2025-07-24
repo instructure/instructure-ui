@@ -29,8 +29,7 @@ import type { Debounced } from '@instructure/debounce'
 import { canUseDOM, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import {
   safeCloneElement,
-  ensureSingleChild,
-  hack
+  ensureSingleChild
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
@@ -50,7 +49,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   static readonly componentId = 'TruncateText'
 
