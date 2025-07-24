@@ -34,6 +34,7 @@ const endPlacements: PlacementArray = [
   'end center',
   'end top',
   'end bottom',
+  'end stretch',
   'center end',
   'end'
 ]
@@ -41,6 +42,7 @@ const startPlacements: PlacementArray = [
   'start center',
   'start top',
   'start bottom',
+  'start stretch',
   'center start',
   'start'
 ]
@@ -48,12 +50,14 @@ const bottomPlacements: PlacementArray = [
   'bottom',
   'bottom end',
   'bottom start',
+  'bottom stretch',
   'bottom center'
 ]
 const topPlacements: PlacementArray = [
   'top',
   'top start',
   'top end',
+  'top stretch',
   'top center'
 ]
 
@@ -85,7 +89,9 @@ const getArrowCorrections = (
     'top',
     'bottom',
     'top center',
-    'bottom center'
+    'bottom center',
+    'top stretch',
+    'bottom stretch'
   ]
   const start: PlacementArray = ['top start', 'bottom start']
   const end: PlacementArray = ['top end', 'bottom end']

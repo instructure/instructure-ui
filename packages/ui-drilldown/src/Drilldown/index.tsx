@@ -1367,7 +1367,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       maxWidth,
       role,
       as,
-      label
+      label,
+      trigger
     } = this.props
 
     if (!this.currentPage) {
@@ -1405,7 +1406,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           getDisabledOptionProps
         }) => (
           <View
-            borderWidth="small"
+            // if there is a trigger the border needs to be rendered by the <Popover>
+            // (because it has an arrow)
+            {...(trigger ? {} : { borderWidth: 'small' })}
             as="div"
             elementRef={this.handleDrilldownRef}
             tabIndex={0}
@@ -1496,11 +1499,17 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       onMouseOver,
       offsetX,
       offsetY,
-      shouldSetAriaExpanded
+      shouldSetAriaExpanded,
+      styles
     } = this.props
-
+    const borderColor = (styles?.drilldown as { borderColor: string })
+      ?.borderColor
     return trigger ? (
       <Popover
+        themeOverride={{
+          // use here own theme's color
+          borderColor: borderColor
+        }}
         shouldSetAriaExpanded={shouldSetAriaExpanded}
         isShowingContent={show}
         defaultIsShowingContent={defaultShow}
