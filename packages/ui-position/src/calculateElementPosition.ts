@@ -616,13 +616,18 @@ function offsetToPx(
 
 function sortPlacement(placement: PlacementValuesWithoutOffscreenArray) {
   let [first, second] = placement
-
-  if (first === 'center' || first === 'stretch') {
+  if (first === 'center') {
     ;[first, second] = [second, first]
   }
   return [first, second] as PlacementValuesWithoutOffscreenArray
 }
 
+/**
+ * Returns the following:
+ * - When the input is just 1 element, then `[input, 'center']`, else:
+ * - if the first element is `center`, it reverses the order
+ * - otherwise, it just returns the split input as an array
+ */
 function parsePlacement(placement: PlacementPropValues) {
   let parsed = placement.split(' ') as PlacementValuesWithoutOffscreenArray
 
