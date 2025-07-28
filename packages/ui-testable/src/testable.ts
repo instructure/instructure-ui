@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ComponentClass, ComponentState } from 'react'
+import React, { ComponentClass, ComponentState } from 'react'
 
 import { decorator } from '@instructure/ui-decorator'
 import { findDOMNode } from '@instructure/ui-dom-utils'
@@ -124,7 +124,21 @@ const testable =
             })
           }
         }
-        return TestableComponent
+
+        // Forward refs properly
+        const ForwardedComponent = React.forwardRef((props: any, ref: any) => {
+          // Filter out the ref from props to avoid the warning
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { ref: propRef, ...restProps } = props
+          // Pass the ref through to the component if it has a ref prop
+          const componentProps = ref ? { ...restProps, ref } : restProps
+          return React.createElement(TestableComponent, componentProps)
+        })
+
+        ForwardedComponent.displayName = displayName
+        ;(ForwardedComponent as any).selector = selector
+
+        return ForwardedComponent
       })
 
 export default testable
