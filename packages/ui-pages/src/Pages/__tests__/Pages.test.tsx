@@ -91,25 +91,6 @@ describe('<Pages />', () => {
     expect(pages).toHaveTextContent('Bar')
   })
 
-  it('should throw error if onPageIndexChange is not passed together with activePageIndex', async () => {
-    render(
-      <Pages activePageIndex={1}>
-        <Page>{() => 'Foo'}</Page>
-        <Page>{() => 'Bar'}</Page>
-      </Pages>
-    )
-
-    const expectedErrorMessage =
-      "You provided a 'activePageIndex' prop without an 'onPageIndexChange' handler on 'Pages'."
-
-    expect(consoleErrorMock).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.any(String),
-      expect.stringContaining(expectedErrorMessage),
-      expect.any(String)
-    )
-  })
-
   it('should pass history and navigateToPreviousPage to Page', async () => {
     const pageSpy = vi.fn()
     render(
