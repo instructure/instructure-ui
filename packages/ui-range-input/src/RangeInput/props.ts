@@ -86,7 +86,7 @@ type RangeInputOwnProps = {
   readOnly?: boolean
 
   /**
-   * The "default" variant has an outer shadow on focus.
+   * The "deprecated" variant has an outer shadow on focus.
    * The "accessible" variant has better color contrast, border and inset focus ring for better accessibility.
    */
   thumbVariant?:
