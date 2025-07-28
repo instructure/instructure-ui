@@ -32,6 +32,12 @@ isWIP: true
 | `variables` field on theme objects         | Use `canvas.borders` instead of `canvas.variables.borders` (same for all othere fields)               |
 | `@instructure/theme-registry` package      | This added the removed functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
 
+### Removal of the `deprecated`, `experimental`, `hack` decorators
+
+We have removed these utilities from the `ui-react-utils` package because we are phasing out parts from the codebase that use decorators.
+
+If you want to still use these we suggest to copy-paste their code from the latest v10 codebase (Note: they only work for class-based components!).
+
 ## API Changes
 
 - `ui-dom-utils`/`getComputedStyle` can now return `undefined`: In previous versions sometimes returned an empty object which could lead to runtime exceptions when one tried to call methods of `CSSStyleDeclaration` on it.

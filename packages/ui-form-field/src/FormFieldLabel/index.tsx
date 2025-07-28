@@ -26,8 +26,7 @@ import { Component } from 'react'
 
 import {
   omitProps,
-  getElementType,
-  deprecated
+  getElementType
 } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
@@ -56,7 +55,6 @@ type: example
  removed in the future
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('10', null, 'This component will be removed in a future version')
 class FormFieldLabel extends Component<FormFieldLabelProps> {
   static readonly componentId = 'FormFieldLabel'
 
