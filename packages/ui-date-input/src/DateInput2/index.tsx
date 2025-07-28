@@ -128,7 +128,6 @@ function parseLocaleDate(
 category: components
 ---
 **/
-// eslint-disable-next-line react/display-name
 const DateInput2 = forwardRef(
   (
     {
@@ -338,6 +337,9 @@ const DateInput2 = forwardRef(
     )
   }
 )
+
+// TODO this is probably needed?
+DateInput2.displayName = 'DateInput2'
 
 export default DateInput2
 export { DateInput2 }
