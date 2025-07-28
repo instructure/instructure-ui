@@ -40,17 +40,16 @@ export function runTest(codemod: Transform) {
   const entries = fs.readdirSync(
     `${__dirname}/__testfixtures__/${codemod.name}`,
     { withFileTypes: true }
-    // TODO path error solved by npm i on master
-  ) as Array<fs.Dirent & { path: string }>
+  )
 
   let fixturesRun = 0
   entries.forEach((entry) => {
     if (entry.isFile() && entry.name.includes('input')) {
       const isWarningTest = entry.name.includes('.warning.input')
-      const inputPath = path.join(entry.path, entry.name)
+      const inputPath = path.join(entry.parentPath, entry.name)
       const input = fs.readFileSync(inputPath, 'utf8')
       const expectedName = entry.name.replace('input', 'output')
-      const expectedPath = path.join(entry.path, expectedName)
+      const expectedPath = path.join(entry.parentPath, expectedName)
       const expected = fs.readFileSync(expectedPath, 'utf8')
 
       // eslint-disable-next-line no-console
