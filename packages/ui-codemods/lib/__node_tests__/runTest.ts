@@ -39,13 +39,11 @@ export function runTest(codemod: Transform) {
   const entries = fs.readdirSync(
     `${__dirname}/__testfixtures__/${codemod.name}`,
     { withFileTypes: true }
-    // TODO path error solved by npm i on master
-  ) as Array<fs.Dirent & { path: string }>
-
+  )
   let fixturesRun = 0
   entries.forEach((entry) => {
     if (entry.isFile() && entry.name.indexOf('input') > -1) {
-      const inputPath = path.join(entry.path, entry.name)
+      const inputPath = path.join(entry.parentPath, entry.name)
       const expectedName = entry.name.replace('input', 'output')
       // eslint-disable-next-line no-console
       console.log(
@@ -57,7 +55,7 @@ export function runTest(codemod: Transform) {
       )
       const input = fs.readFileSync(inputPath, 'utf8')
       const expected = fs.readFileSync(
-        path.join(entry.path, expectedName),
+        path.join(entry.parentPath, expectedName),
         'utf8'
       )
       // We need to supply inputPath because some codemods use it, e.g. to
