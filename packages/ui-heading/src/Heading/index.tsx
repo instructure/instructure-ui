@@ -25,11 +25,7 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import {
-  getElementType,
-  passthroughProps,
-  callRenderProp
-} from '@instructure/ui-react-utils'
+import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { IconAiColoredSolid } from '@instructure/ui-icons'
 
@@ -40,6 +36,7 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { HeadingProps } from './props'
+import { AsElementType } from '@instructure/shared-types'
 
 const variantLevels: Record<
   NonNullable<HeadingProps['variant']>,
@@ -72,8 +69,7 @@ class Heading extends Component<HeadingProps> {
   static defaultProps = {
     children: null,
     border: 'none',
-    color: 'inherit',
-    level: 'h2'
+    color: 'inherit'
   } as const
 
   ref: Element | null = null
@@ -201,22 +197,27 @@ class Heading extends Component<HeadingProps> {
       ...props
     } = this.props
 
-    const propsForGetElementType = variant ? {} : this.props
-
-    const ElementType = getElementType(Heading, propsForGetElementType, () => {
-      if (level === 'reset') {
-        return 'span'
-      } else if (level) {
-        return level
-      }
-
-      if (variant) {
-        return variantLevels[variant]
+    let ElementType: AsElementType = 'h2'
+    if (variant) {
+      // TODO deprecated, remove. `variant` should not set DOM level
+      if (level) {
+        if (level === 'reset') {
+          ElementType = 'span'
+        } else {
+          ElementType = level
+        }
       } else {
-        return 'span'
+        ElementType = variantLevels[variant]
       }
-    })
-
+    } else if (props.as) {
+      ElementType = props.as
+    } else if (level) {
+      if (level === 'reset') {
+        ElementType = 'span'
+      } else {
+        ElementType = level
+      }
+    }
     return (
       <View
         aria-label={this.getAriaLabel()}

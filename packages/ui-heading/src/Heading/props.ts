@@ -43,7 +43,7 @@ type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
 
 type HeadingOwnProps = {
   /**
-   * transforms heading into an ai variant
+   * transforms heading into an `ai` variant
    */
   aiVariant?: 'stacked' | 'horizontal' | 'iconOnly'
   /**
@@ -58,19 +58,23 @@ type HeadingOwnProps = {
    * The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead
    */
   color?:
-  | 'primary'
-  | 'secondary'
-  | 'primary-inverse'
-  | 'secondary-inverse'
-  | 'inherit'
-  | 'ai'
+    | 'primary'
+    | 'secondary'
+    | 'primary-inverse'
+    | 'secondary-inverse'
+    | 'inherit'
+    | 'ai'
   /**
-   * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
+   * The level of the heading in the DOM: h1 is largest; h5 is smallest.
    */
   level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> | 'reset'
   /**
-   * Choose the element Heading should render as. Will default to the `level` prop
-   * if not specified.
+   * What DOM element is output is determined in the following order:
+   * 1. (deprecated) If `variant` is set, then use the `level` prop, if that's
+   * not set use `<h1>`-`<h6>` based on the `variant` prop's value
+   * 2. The value of the `as` prop
+   * 3. The value of the `level` prop
+   * 4. `<h2>`
    */
   as?: AsElementType
   /**
@@ -88,19 +92,20 @@ type HeadingOwnProps = {
    */
   renderIcon?: Renderable
   /**
-   * Sets appearance of the heading.
+   * Sets appearance of the heading. Will also set its heading level, if not
+   * specified by the `level` prop (deprecated, not recommended!)
    */
   variant?:
-  | 'titlePageDesktop'
-  | 'titlePageMobile'
-  | 'titleSection'
-  | 'titleCardSection'
-  | 'titleModule'
-  | 'titleCardLarge'
-  | 'titleCardRegular'
-  | 'titleCardMini'
-  | 'label'
-  | 'labelInline'
+    | 'titlePageDesktop'
+    | 'titlePageMobile'
+    | 'titleSection'
+    | 'titleCardSection'
+    | 'titleModule'
+    | 'titleCardLarge'
+    | 'titleCardRegular'
+    | 'titleCardMini'
+    | 'label'
+    | 'labelInline'
 }
 
 type PropKeys = keyof HeadingOwnProps

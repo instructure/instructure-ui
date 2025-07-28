@@ -4,33 +4,39 @@ describes: Heading
 
 Heading is a component for creating typographic headings.
 
-## Variant
+### Variant
 
 Variant covers almost all use cases for headings on pages. Their name reflects the places they meant to be used. It takes care of the style of the heading
 
-NOTE 1: for legacy reasons, each `variant` has a default `level` set. This is not the recommended way and will be removed in a later major release. Please specify the `level` directly!
-
-NOTE 2: when `variant` is set the `as` prop is ignored
-
-IMPORTANT A11Y NOTE 1: there can be only one `h1` tag in a page
-
-IMPORTANT A11Y NOTE 2: `h` tags can not skip a level, so for example an `h1` followed by an `h3` not allowed
+```js
+---
+type: embed
+---
+<Alert variant="info">
+  <List margin="0 0 medium">
+    <List.Item>For legacy reasons, each <code>variant</code> has a default <code>level</code> set. This is not the recommended way and will be removed in a later major release. Please always specify the <code>level</code>!</List.Item>
+    <List.Item>When <code>variant</code> is set the <code>as</code> prop is ignored</List.Item>
+    <List.Item>A11Y GUIDELINE: There can be only one <code>h1</code> tag in a page</List.Item>
+    <List.Item>A11Y GUIDELINE: <code>h</code> tags can not skip a level, so for example an <code>h1</code> followed by an <code>h3</code> not allowed</List.Item>
+  </List>
+</Alert>
+```
 
 ```js
 ---
 type: example
 ---
   <div>
-    <Heading variant="titlePageDesktop"> titlePageDesktop </Heading><br/>
-    <Heading variant="titlePageMobile"> titlePageMobile </Heading><br/>
-    <Heading variant="titleSection"> titleSection </Heading><br/>
-    <Heading variant="titleCardSection"> titleCardSection </Heading><br/>
-    <Heading variant="titleModule"> titleModule </Heading><br/>
-    <Heading variant="titleCardLarge"> titleCardLarge </Heading><br/>
-    <Heading variant="titleCardRegular"> titleCardRegular </Heading><br/>
-    <Heading variant="titleCardMini"> titleCardMini </Heading><br/>
-    <Heading variant="label"> label </Heading><br/>
-    <Heading variant="labelInline"> labelInline </Heading><br/>
+    <Heading variant="titlePageDesktop" level="h1"> titlePageDesktop </Heading><br/>
+    <Heading variant="titlePageMobile" level="h1"> titlePageMobile </Heading><br/>
+    <Heading variant="titleSection" level="h2"> titleSection </Heading><br/>
+    <Heading variant="titleCardSection" level="h2"> titleCardSection </Heading><br/>
+    <Heading variant="titleModule" level="h2"> titleModule </Heading><br/>
+    <Heading variant="titleCardLarge" level="h3"> titleCardLarge </Heading><br/>
+    <Heading variant="titleCardRegular" level="h3"> titleCardRegular </Heading><br/>
+    <Heading variant="titleCardMini" level="h4"> titleCardMini </Heading><br/>
+    <Heading variant="label" level="h5"> label </Heading><br/>
+    <Heading variant="labelInline" level="h6"> labelInline </Heading><br/>
   </div>
 ```
 
@@ -51,18 +57,21 @@ type: example
 
 ### Heading level
 
-Generate content headings, from h1 to h5. Use the `margin` prop to add margin.
+What DOM element is output is determined in the following order:
 
-- The `as` prop controls what html element is output. _(if not defined it will default to level)._
-- The `level` prop sets its appearance.
+1. (deprecated) If the variant prop is set, then the value of level prop. If variant is set but level is not, <h1>-<h6> based on the variant prop's value.
+2. The value of the `as` prop
+3. The value of the `level` prop
+4. `<h2>`
+
+The `variant` and `level` props sets its appearance in this order.
 
 ```js
 ---
 type: example
 ---
 <div>
-  <Heading level="h1" as="h2" margin="0 0 x-small">Heading level One</Heading>
-
+  <Heading level="h1" as="h3" margin="0 0 x-small">This renders as <code>&lt;h3&gt;</code></Heading>
 </div>
 ```
 
