@@ -28,7 +28,7 @@ import { BaseButton } from '@instructure/ui-buttons'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { PaginationPageProps } from './props'
 
 /**
@@ -42,7 +42,6 @@ id: Pagination.Page
 class PaginationButton extends Component<PaginationPageProps> {
   static readonly componentId = 'Pagination.Page'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     current: false

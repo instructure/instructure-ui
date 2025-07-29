@@ -34,7 +34,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   DrawerLayoutContentProps,
   DrawerLayoutContentStyleProps
@@ -52,7 +52,6 @@ class DrawerContent extends Component<DrawerLayoutContentProps> {
   static readonly componentId = 'DrawerLayout.Content'
 
   static locatorAttribute = 'data-drawer-content'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     role: 'region'

@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import type { SelectGroupProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -37,7 +37,6 @@ class Group extends Component<SelectGroupProps> {
   static readonly componentId = 'Select.Group'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {}
 

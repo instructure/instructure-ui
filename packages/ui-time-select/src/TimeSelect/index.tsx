@@ -42,7 +42,7 @@ import type {
   TimeSelectOptions
 } from './props'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,
@@ -64,8 +64,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
 
   static readonly componentId = 'TimeSelect'
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     defaultToFirstOption: false,
     format: 'LT', // see https://momentjs.com/docs/#/displaying/
     step: 30,

@@ -45,7 +45,6 @@
     "@instructure/ui-byline": "10.24.0",
     "@instructure/ui-calendar": "10.24.0",
     "@instructure/ui-checkbox": "10.24.0",
-    "@instructure/ui-code-editor": "10.24.0",
     "@instructure/ui-color-picker": "10.24.0",
     "@instructure/ui-color-utils": "10.24.0",
     "@instructure/ui-date-input": "10.24.0",
@@ -83,7 +82,6 @@
     "@instructure/ui-portal": "10.24.0",
     "@instructure/ui-position": "10.24.0",
     "@instructure/ui-progress": "10.24.0",
-    "@instructure/ui-prop-types": "10.24.0",
     "@instructure/ui-radio-input": "10.24.0",
     "@instructure/ui-range-input": "10.24.0",
     "@instructure/ui-rating": "10.24.0",
@@ -121,9 +119,8 @@
     "marked": "^15.0.12",
     "marked-react": "^3.0.0",
     "moment": "^2.30.1",
-    "prop-types": "^15.8.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1",
+    "react-dom": "^19.1",
     "semver": "^7.7.2",
     "uuid": "^11.1.0",
     "webpack-merge": "^6.0.1"
@@ -135,6 +132,7 @@
     "chokidar": "^3.6.0",
     "css-loader": "^4.0.0",
     "globby": "^14.1.0",
+    "@sindresorhus/merge-streams": "^2.1.0",
     "gray-matter": "^4.0.3",
     "html-webpack-plugin": "^5.6.3",
     "mkdirp": "^3.0.1",
@@ -145,6 +143,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "//dependency-comments": {
-    "chokidar": "4.0.1 seems to have issues watching an array of paths. Check later if fixed..."
+    "chokidar": "4.0.1 seems to have issues watching an array of paths. Check later if fixed...",
+    "@sindresorhus/merge-streams": "needed because it does not get picked up from globby dependency in node 24. npm bug?"
   }
 }

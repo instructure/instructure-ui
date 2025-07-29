@@ -58,7 +58,7 @@ import { TopNavBarContext } from '../TopNavBarContext'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   TopNavBarItemProps,
   TopNavBarItemState,
@@ -84,7 +84,6 @@ id: TopNavBar.Item
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static readonly componentId = 'TopNavBar.Item'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     status: 'default',

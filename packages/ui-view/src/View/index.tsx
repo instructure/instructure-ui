@@ -38,7 +38,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ViewProps } from './props'
 
 /**
@@ -52,8 +52,7 @@ category: components
 class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     display: 'auto',
     overflowX: 'visible',
     overflowY: 'visible',

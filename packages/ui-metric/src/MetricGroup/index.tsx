@@ -31,7 +31,7 @@ import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MetricGroupProps } from './props'
 
 /**
@@ -44,7 +44,6 @@ category: components
 class MetricGroup extends Component<MetricGroupProps> {
   static readonly componentId = 'MetricGroup'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null

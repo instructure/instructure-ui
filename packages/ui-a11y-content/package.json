@@ -26,18 +26,17 @@
     "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "10.24.0",
     "@instructure/shared-types": "10.24.0",
-    "@instructure/ui-react-utils": "10.24.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-react-utils": "10.24.0"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.24.0",
     "@instructure/ui-babel-preset": "10.24.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

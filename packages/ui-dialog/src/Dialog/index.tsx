@@ -30,7 +30,7 @@ import { logError as error } from '@instructure/console'
 import { FocusRegion, FocusRegionManager } from '@instructure/ui-a11y-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DialogProps } from './props'
 
 /**
@@ -42,7 +42,6 @@ category: components/utilities
 class Dialog extends Component<DialogProps> {
   static readonly componentId = 'Dialog'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     open: false,

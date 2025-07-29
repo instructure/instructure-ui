@@ -21,19 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import PropTypes from 'prop-types'
-
-import { Children } from '@instructure/ui-prop-types'
-
-import { BreadcrumbLink } from './BreadcrumbLink'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { BreadcrumbTheme, PropValidators } from '@instructure/shared-types'
+import type { BreadcrumbTheme } from '@instructure/shared-types'
 
 type BreadcrumbOwnProps = {
   /**
@@ -64,15 +57,7 @@ type BreadcrumbProps = BreadcrumbOwnProps &
   WithStyleProps<BreadcrumbTheme, BreadcrumbStyle>
 
 type BreadcrumbStyle = ComponentStyle<'breadcrumb' | 'crumb' | 'separator'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: Children.oneOf([BreadcrumbLink]),
-  label: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'label', 'margin', 'size']
 
 export type { BreadcrumbProps, BreadcrumbStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

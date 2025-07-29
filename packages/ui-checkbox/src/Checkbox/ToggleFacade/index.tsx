@@ -31,7 +31,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ToggleFacadeProps } from './props'
 
 /**
@@ -43,7 +43,6 @@ parent: Checkbox
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     checked: false,

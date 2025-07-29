@@ -43,7 +43,7 @@ import type {
   TextInputState,
   TextInputStyleProps
 } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -58,7 +58,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   static readonly componentId = 'TextInput'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     type: 'text',

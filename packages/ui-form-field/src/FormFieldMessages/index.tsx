@@ -33,7 +33,7 @@ import { FormFieldMessage } from '../FormFieldMessage'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FormFieldMessagesProps } from './props'
 
 /**
@@ -58,7 +58,6 @@ type: example
 class FormFieldMessages extends Component<FormFieldMessagesProps> {
   static readonly componentId = 'FormFieldMessages'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

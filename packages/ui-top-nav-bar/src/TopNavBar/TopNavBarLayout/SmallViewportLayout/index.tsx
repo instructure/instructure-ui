@@ -66,7 +66,7 @@ import { TopNavBarContext } from '../../TopNavBarContext'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState,
@@ -87,7 +87,6 @@ class TopNavBarSmallViewportLayout extends Component<
 > {
   static readonly componentId = 'TopNavBar.SmallViewportLayout'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

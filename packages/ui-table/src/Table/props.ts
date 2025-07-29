@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -31,7 +29,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TableTheme
 } from '@instructure/shared-types'
 
@@ -81,16 +78,6 @@ type TableProps = TableOwnProps &
   OtherHTMLAttributes<TableOwnProps>
 
 type TableStyle = ComponentStyle<'table'>
-
-const propTypes: PropValidators<PropKeys> = {
-  caption: PropTypes.node.isRequired,
-  children: PropTypes.node,
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  hover: PropTypes.bool,
-  layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'caption',
   'children',
@@ -106,4 +93,4 @@ export type {
   // children
   RowChild
 }
-export { propTypes, allowedProps }
+export { allowedProps }

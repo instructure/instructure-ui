@@ -26,15 +26,14 @@ import { Component } from 'react'
 
 import {
   omitProps,
-  getElementType,
-  deprecated
+  getElementType
 } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FormFieldLabelProps } from './props'
 
 /**
@@ -56,11 +55,9 @@ type: example
  removed in the future
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('10', null, 'This component will be removed in a future version')
 class FormFieldLabel extends Component<FormFieldLabelProps> {
   static readonly componentId = 'FormFieldLabel'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span'

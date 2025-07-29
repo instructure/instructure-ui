@@ -41,7 +41,7 @@ import { ToggleFacade } from './ToggleFacade'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CheckboxProps, CheckboxState } from './props'
 
 import type {
@@ -62,7 +62,6 @@ tags: toggle, switch
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     size: 'medium',

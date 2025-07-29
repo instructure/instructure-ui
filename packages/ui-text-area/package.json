@@ -29,12 +29,10 @@
     "@instructure/shared-types": "10.24.0",
     "@instructure/ui-dom-utils": "10.24.0",
     "@instructure/ui-form-field": "10.24.0",
-    "@instructure/ui-prop-types": "10.24.0",
     "@instructure/ui-react-utils": "10.24.0",
     "@instructure/ui-testable": "10.24.0",
     "@instructure/ui-utils": "10.24.0",
-    "@instructure/uid": "10.24.0",
-    "prop-types": "^15.8.1"
+    "@instructure/uid": "10.24.0"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.24.0",
@@ -42,12 +40,12 @@
     "@instructure/ui-color-utils": "10.24.0",
     "@instructure/ui-themes": "10.24.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"
