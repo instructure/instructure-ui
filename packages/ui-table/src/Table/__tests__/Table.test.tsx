@@ -155,7 +155,6 @@ describe('<Table />', async () => {
     render(
       <Table caption="Test table" layout="stacked">
         <Table.Head>
-          {/* @ts-expect-error error is normal here */}
           <Table.Row>
             <Table.Cell>Foo</Table.Cell>
             {}
