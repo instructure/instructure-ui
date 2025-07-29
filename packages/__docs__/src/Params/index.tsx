@@ -36,7 +36,7 @@ class Params extends Component<ParamsProps> {
     layout: 'small'
   }
 
-  renderRows() {
+  renderRows(hasDefault: boolean) {
     return this.props.params?.map((param) => {
       return (
         <Table.Row key={param.name}>
@@ -46,9 +46,11 @@ class Params extends Component<ParamsProps> {
           <Table.Cell>
             <code>{param?.type}</code>
           </Table.Cell>
-          <Table.Cell>
-            <code>{param?.defaultValue}</code>
-          </Table.Cell>
+          {hasDefault && (
+            <Table.Cell>
+              <code>{param?.defaultValue}</code>
+            </Table.Cell>
+          )}
           <Table.Cell>{this.renderDescription(param.description)}</Table.Cell>
         </Table.Row>
       )
@@ -108,6 +110,15 @@ class Params extends Component<ParamsProps> {
         </>
       )
     }
+    let hasDefault = false
+    if (this.props.params) {
+      for (const param of this.props.params) {
+        if (param.defaultValue) {
+          hasDefault = true
+          break
+        }
+      }
+    }
     return (
       <>
         <Table
@@ -119,11 +130,13 @@ class Params extends Component<ParamsProps> {
             <Table.Row>
               <Table.ColHeader id="Param">Param</Table.ColHeader>
               <Table.ColHeader id="Type">Type</Table.ColHeader>
-              <Table.ColHeader id="Default">Default</Table.ColHeader>
+              {hasDefault && (
+                <Table.ColHeader id="Default">Default</Table.ColHeader>
+              )}
               <Table.ColHeader id="Description">Description</Table.ColHeader>
             </Table.Row>
           </Table.Head>
-          <Table.Body>{this.renderRows()}</Table.Body>
+          <Table.Body>{this.renderRows(hasDefault)}</Table.Body>
         </Table>
         {genericParamsTable}
       </>

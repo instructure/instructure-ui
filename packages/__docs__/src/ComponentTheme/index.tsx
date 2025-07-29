@@ -71,18 +71,20 @@ class ComponentTheme extends Component<ComponentThemeProps> {
     const { componentTheme, themeVariables } = this.props
     const colorPrimitives = themeVariables.colors.primitives
 
-    return Object.keys(componentTheme).map((name) => {
-      return (
-        <Table.Row key={name}>
-          <Table.Cell>
-            <code>{name}</code>
-          </Table.Cell>
-          <Table.Cell>
-            {this.renderValueCell(componentTheme[name], colorPrimitives)}
-          </Table.Cell>
-        </Table.Row>
-      )
-    })
+    return Object.keys(componentTheme)
+      .sort((a, b) => a.localeCompare(b))
+      .map((name) => {
+        return (
+          <Table.Row key={name}>
+            <Table.Cell>
+              <code>{name}</code>
+            </Table.Cell>
+            <Table.Cell>
+              {this.renderValueCell(componentTheme[name], colorPrimitives)}
+            </Table.Cell>
+          </Table.Row>
+        )
+      })
   }
 
   render() {

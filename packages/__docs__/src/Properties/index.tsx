@@ -62,7 +62,7 @@ class Properties extends Component<PropertiesProps> {
     return string.includes('(...args: any[]) => any')
   }
 
-  renderRows() {
+  renderRows(hasDefaultOrRequired: boolean) {
     const { props } = this.props
     const propsToIgnore = ['styles', 'makeStyles', 'dir']
 
@@ -81,6 +81,7 @@ class Properties extends Component<PropertiesProps> {
           !propsToIgnore.includes(name)
         )
       })
+      .sort((a, b) => a.localeCompare(b))
       .map((name, idx) => {
         const prop = props[name]
         return (
@@ -91,7 +92,9 @@ class Properties extends Component<PropertiesProps> {
             <Table.Cell>
               {prop.tsType && <code>{this.renderTSType(prop.tsType)}</code>}
             </Table.Cell>
-            <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
+            {hasDefaultOrRequired && (
+              <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
+            )}
             <Table.Cell>{this.renderDescription(prop)}</Table.Cell>
           </Table.Row>
         )
@@ -263,6 +266,13 @@ class Properties extends Component<PropertiesProps> {
   render() {
     const { styles } = this.props
     const { layout } = this.props
+    let hasDefaultOrRequired = false
+    for (const i in this.props.props) {
+      if (this.props.props[i].required || this.props.props[i].defaultValue) {
+        hasDefaultOrRequired = true
+        break
+      }
+    }
     return (
       <div css={styles?.properties}>
         <Table
@@ -273,11 +283,13 @@ class Properties extends Component<PropertiesProps> {
             <Table.Row>
               <Table.ColHeader id="Prop">Prop</Table.ColHeader>
               <Table.ColHeader id="Type">Type</Table.ColHeader>
-              <Table.ColHeader id="Default">Default</Table.ColHeader>
+              {hasDefaultOrRequired && (
+                <Table.ColHeader id="Default">Default</Table.ColHeader>
+              )}
               <Table.ColHeader id="Description">Description</Table.ColHeader>
             </Table.Row>
           </Table.Head>
-          <Table.Body>{this.renderRows()}</Table.Body>
+          <Table.Body>{this.renderRows(hasDefaultOrRequired)}</Table.Body>
         </Table>
       </div>
     )

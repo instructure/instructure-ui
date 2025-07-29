@@ -37,9 +37,17 @@ type TableRowOwnProps = {
    * A row's children should be table cells. Its children should have the
    * `header` prop to render the column header in `stacked` layout
    *
-   * By default `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`
+   * By default, `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`.
+   *
+   * Falsy values are also allowed to be able to use syntax like
+   * `{condition && <Table.Cell>bla<Table.Cell>}`
    */
-  children?: React.ReactElement | React.ReactElement[]
+  children?:
+    | React.ReactElement
+    | null
+    | undefined
+    | boolean
+    | (React.ReactElement | null | undefined | boolean)[]
 
   /**
    * Controls the hover state of the row.
