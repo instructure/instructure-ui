@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import { isValidElement, ComponentElement, Component, Children, type ReactElement } from 'react'
+import {
+  isValidElement,
+  ComponentElement,
+  Component,
+  Children,
+  type ReactElement
+} from 'react'
 
 import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -423,21 +429,24 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
       ...rest
     } = option.props
 
-    const isDisabled = option.props.isDisabled
+    const isDisabled = option.props.isDisabled ?? false // after the react 19 upgrade `isDisabled` is undefined instead of defaulting to false if not specified (but only in vitest env for some reason)
     const isSelected = id === this.state.selectedOptionId
     const isHighlighted = id === this.state.highlightedOptionId
 
     const getRenderLabel = (renderLabel: RenderSimpleSelectOptionLabel) => {
-      return typeof renderLabel === 'function' &&
+      if (
+        typeof renderLabel === 'function' &&
         !renderLabel?.prototype?.isReactComponent
-        ? (renderLabel as any).bind(null, {
-            id,
-            isDisabled,
-            isSelected,
-            isHighlighted,
-            children
-          })
-        : renderLabel
+      ) {
+        return (renderLabel as any).bind(null, {
+          id,
+          isDisabled,
+          isSelected,
+          isHighlighted,
+          children
+        })
+      }
+      return renderLabel
     }
 
     return (
@@ -445,9 +454,9 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
         id={id}
         value={value}
         key={option.key || id}
-        isHighlighted={id === this.state.highlightedOptionId}
-        isSelected={id === this.state.selectedOptionId}
-        isDisabled={option.props.isDisabled}
+        isHighlighted={isHighlighted}
+        isSelected={isSelected}
+        isDisabled={isDisabled}
         renderBeforeLabel={getRenderLabel(renderBeforeLabel)}
         renderAfterLabel={getRenderLabel(renderAfterLabel)}
         {...passthroughProps(rest)}
