@@ -36,7 +36,7 @@ class Option extends Component<SimpleSelectOptionProps> {
   static readonly componentId = 'SimpleSelect.Option'
 
   static allowedProps = allowedProps
-static defaultProps = {
+  static defaultProps = {
     isDisabled: false
   }
 
