@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* **ui-heading:** fix Heading rendering as H2 in most cases ([d6e4cd5](https://github.com/instructure/instructure-ui/commit/d6e4cd5f6369f219e70975c95f0e1e1bcb22ced4))
+* **ui-motion:** fix Transitions not working on focusable elements ([2dabe86](https://github.com/instructure/instructure-ui/commit/2dabe864fb22ffa3e5280ce38f72bf3e7cf600a3))
+* **ui-svg-images:** fix Firefox discarding numeric width/height values ([64a165a](https://github.com/instructure/instructure-ui/commit/64a165a58751354c602a59f779bc97ee817f9413))
+* **ui-view,ui-position,ui-popover:** fix 'stretch' placement in Popover/ContextView ([f65acd5](https://github.com/instructure/instructure-ui/commit/f65acd5da879fb814c2e5a0d22319a502851fff3))
+
+
+
+
+
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 

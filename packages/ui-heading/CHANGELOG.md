@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* **ui-heading:** fix Heading rendering as H2 in most cases ([d6e4cd5](https://github.com/instructure/instructure-ui/commit/d6e4cd5f6369f219e70975c95f0e1e1bcb22ced4))
+
+
+
+
+
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-heading

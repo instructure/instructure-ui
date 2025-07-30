@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* **ui-motion:** fix Transitions not working on focusable elements ([2dabe86](https://github.com/instructure/instructure-ui/commit/2dabe864fb22ffa3e5280ce38f72bf3e7cf600a3))
+
+
+
+
+
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-motion
