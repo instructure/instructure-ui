@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* **ui-svg-images:** fix Firefox discarding numeric width/height values ([64a165a](https://github.com/instructure/instructure-ui/commit/64a165a58751354c602a59f779bc97ee817f9413))
+
+
+
+
+
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-svg-images
