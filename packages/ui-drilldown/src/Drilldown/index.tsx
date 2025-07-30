@@ -781,9 +781,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   ) => {
     const selectedOption = this.getPageChildById(id)
 
-    // TODO: this line can be removed when React 16 is no longer supported
-    event.persist()
-
     if (
       !id ||
       !selectedOption ||
@@ -1292,7 +1289,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       children,
       renderGroupTitle,
       themeOverride,
-      role,
+      role = 'group', // react 19 defaultProps workaround
       as,
       elementRef
     } = group.props
