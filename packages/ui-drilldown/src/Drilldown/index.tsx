@@ -1024,15 +1024,15 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       id,
       children,
       href,
-      as,
+      as = 'li', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       role = 'menuitem', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       subPageId,
-      disabled,
+      disabled = false, // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       renderLabelInfo,
       renderBeforeLabel,
       renderAfterLabel,
-      beforeLabelContentVAlign,
-      afterLabelContentVAlign,
+      beforeLabelContentVAlign = 'start', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
+      afterLabelContentVAlign = 'start', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       description,
       descriptionRole,
       elementRef,
