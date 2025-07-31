@@ -76,6 +76,7 @@ import type {
 } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
+import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 type AppContextType = {
   themeKey: keyof MainDocsData['themes']
@@ -93,6 +94,9 @@ export const AppContext = createContext<AppContextType>({
 class App extends Component<AppProps, AppState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
+
+  private navRef = createRef<HTMLElement>()
+  private navFocusRegion: FocusRegion | null = null
 
   static defaultProps = {
     trayWidth: 300
@@ -222,10 +226,18 @@ class App extends Component<AppProps, AppState> {
         })
       })
       .catch(errorHandler)
+    document.addEventListener('focusin', this.handleFocusChange)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(_prevProps: AppProps, prevState: AppState) {
     this.props.makeStyles?.()
+
+    if (
+      prevState.showMenu !== this.state.showMenu ||
+      prevState.layout !== this.state.layout
+    ) {
+      this.handleNavigationFocusRegion()
+    }
   }
 
   componentWillUnmount() {
@@ -236,6 +248,8 @@ class App extends Component<AppProps, AppState> {
     if (this._mediaQueryListener) {
       this._mediaQueryListener.remove()
     }
+    document.removeEventListener('focusin', this.handleFocusChange)
+    this.navFocusRegion?.deactivate()
   }
 
   trackPage(page: string) {
@@ -356,6 +370,40 @@ class App extends Component<AppProps, AppState> {
   focusSkipToMainButton = () => {
     if (this._skipToMainButtonRef) {
       this._skipToMainButtonRef.focus()
+    }
+  }
+
+  getFocusRegionConfig() {
+    return {
+      shouldContainFocus: true,
+      shouldCloseOnEscape: true,
+      shouldReturnFocus: false,
+      onDismiss: this.handleMenuClose
+    }
+  }
+
+  handleNavigationFocusRegion() {
+    if (this.state.showMenu) {
+      if (this.navFocusRegion) {
+        this.navFocusRegion.activate()
+      } else if (this.navRef.current) {
+        this.navFocusRegion = new FocusRegion(
+          this.navRef.current,
+          this.getFocusRegionConfig()
+        )
+        this.navFocusRegion.activate()
+      }
+    }
+  }
+
+  handleFocusChange = (e: FocusEvent) => {
+    const isFocusInsideNav =
+      e.target && this.navRef.current?.contains(e.target as Node)
+    if (!isFocusInsideNav && this.navFocusRegion) {
+      this.navFocusRegion.deactivate()
+      this.navFocusRegion = null
+    } else if (isFocusInsideNav && !this.navFocusRegion) {
+      this.handleNavigationFocusRegion()
     }
   }
 
@@ -712,7 +760,9 @@ class App extends Component<AppProps, AppState> {
     )
 
     return layout !== 'small' ? (
-      <nav css={this.props.styles?.inlineNavigation}>{navContent}</nav>
+      <nav css={this.props.styles?.inlineNavigation} ref={this.navRef}>
+        {navContent}
+      </nav>
     ) : (
       <Tray label="Navigation" open={showMenu} onDismiss={this.handleMenuClose}>
         {navContent}
