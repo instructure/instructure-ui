@@ -102,6 +102,9 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
       const txt = ensureSingleChild(children)
       this._text = txt ? txt : undefined
 
+      // TODO: Currently truncate text not working on page load. Resizeing the browser window to minimal will trigger it.
+      // Wait for browser paints child DOM nodes and dimensions are available.
+      // Something like this solve the correct initial truncation: setTimeout(() => { this.truncate() }, 1000)
       this.truncate()
 
       this._debounced = debounce(this.update, this.props.debounce, {
