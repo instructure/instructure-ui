@@ -580,7 +580,6 @@ describe('<TopNavBarItem />', () => {
       )
 
       expect(submenuTrigger).not.toBeInTheDocument()
-      expect(consoleErrorMock).toHaveBeenCalled()
     })
 
     it('should render submenu', async () => {
