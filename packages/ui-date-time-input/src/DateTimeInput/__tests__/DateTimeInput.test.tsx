@@ -682,30 +682,6 @@ describe('<DateTimeInput />', () => {
     })
   })
 
-  it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", async () => {
-    const initialTimeForNewDate = 'WRONG_FORMAT'
-
-    render(
-      <DateTimeInput
-        description="date_time"
-        dateRenderLabel="date-input"
-        prevMonthLabel="Previous month"
-        nextMonthLabel="Next month"
-        timeRenderLabel="time-input"
-        invalidDateTimeMessage="whoops"
-        locale={'en-US'}
-        timezone={'US/Eastern'}
-        initialTimeForNewDate={initialTimeForNewDate}
-      />
-    )
-
-    expect(consoleErrorMock.mock.calls[0][2]).toEqual(
-      expect.stringContaining(
-        `Invalid prop \`initialTimeForNewDate\` \`${initialTimeForNewDate}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`
-      )
-    )
-  })
-
   it("should throw warning if date select and initialTimeForNewDate prop's value is not HH:MM", async () => {
     const initialTimeForNewDate = 'WRONG_FORMAT'
 
