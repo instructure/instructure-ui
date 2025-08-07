@@ -29,7 +29,8 @@ import {
   ReactElement,
   ReactNode,
   DOMElement,
-  cloneElement
+  cloneElement,
+  version
 } from 'react'
 
 import { logWarn as warn } from '@instructure/console'
@@ -63,10 +64,15 @@ function safeCloneElement<
   // Support both React 18 (element.ref) and React 19+ (element.props.ref)
   // TypeScript's ReactElement type does not always include a 'ref' property,
   // so we use 'as any' to safely access it for React 18 compatibility.
-  const originalRef =
-    element.props && element.props.ref !== undefined
-      ? element.props.ref
-      : (element as any).ref
+  let isReact19OrNewer = true
+  const versArr = version.split('.', 1)
+  if (versArr.length > 0 && parseInt(versArr[0], 10) < 19) {
+    isReact19OrNewer = false
+  }
+  // this needs to happen in such tricky way because React 18 and earlier
+  // throw warning when one tries to access element.props.ref, see
+  // https://github.com/facebook/react/blob/18-3-1/packages/react/src/jsx/ReactJSXElement.js#L108
+  const originalRef = isReact19OrNewer ? element.props.ref : element.ref
   const originalRefIsAFunction = typeof originalRef === 'function'
   const cloneRefIsFunction = typeof cloneRef === 'function'
 
