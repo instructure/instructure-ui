@@ -110,6 +110,14 @@ type FlexItemOwnProps = {
    * Places dashed lines around the component's borders to help debug your layout
    */
   withVisualDebug?: boolean
+  /**
+   * Specifies the order of the `Flex.Item` inside the `Flex` component.
+   *
+   * Items with the same order revert to source order.
+   *
+   * Utilizes the order flex CSS property. Default order CSS value is 0.
+   */
+  order?: string | number
 }
 
 type PropKeys = keyof FlexItemOwnProps
@@ -136,7 +144,8 @@ const propTypes: PropValidators<PropKeys> = {
   shouldGrow: PropTypes.bool,
   shouldShrink: PropTypes.bool,
   size: PropTypes.string,
-  withVisualDebug: PropTypes.bool
+  withVisualDebug: PropTypes.bool,
+  order: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -153,7 +162,8 @@ const allowedProps: AllowedPropKeys = [
   'shouldGrow',
   'shouldShrink',
   'size',
-  'withVisualDebug'
+  'withVisualDebug',
+  'order'
 ]
 
 export type { FlexItemProps, FlexItemStyle }
