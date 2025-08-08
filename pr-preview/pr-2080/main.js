@@ -5569,6 +5569,8 @@ var react=__webpack_require__(14041)
 class DrilldownPage extends react.Component{render(){return null}}DrilldownPage.displayName="DrilldownPage",DrilldownPage.componentId="Drilldown.Page",DrilldownPage.allowedProps=["id","children","renderTitle","renderActionLabel","renderBackButtonLabel","onHeaderActionClicked","onBackButtonClicked","withoutHeaderSeparator","disabled"],DrilldownPage.defaultProps={renderBackButtonLabel:"Back",disabled:!1,withoutHeaderSeparator:!1}},82174:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{BaseTransition:()=>_Transition_BaseTransition__WEBPACK_IMPORTED_MODULE_1__.p,Transition:()=>_Transition__WEBPACK_IMPORTED_MODULE_0__.e})
 var _Transition__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(99559),_Transition_BaseTransition__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__(86108)},82243:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
+__webpack_require__.d(__webpack_exports__,{o:()=>findDOMNode})
+var react_dom__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(43144)
 function findDOMNode(el){const node="function"==typeof el?el():el
 if(node&&node===document)return document.documentElement
 if(node instanceof Element||node===window||node&&void 0!==node.nodeType)return node
@@ -5576,7 +5578,8 @@ if(node){const ref=void 0!==(null==(elem=node)||null===(_elem$props=elem.props)|
 if(refElement)return refElement instanceof HTMLElement?refElement:findDOMNode(refElement)
 if(null===refElement)return
 node.constructor.componentId?node.constructor.componentId:node.constructor.name
-return}var elem,_elem$props}__webpack_require__.d(__webpack_exports__,{o:()=>findDOMNode})},82647:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
+const ReactDomInstance=react_dom__WEBPACK_IMPORTED_MODULE_0__
+return"function"==typeof ReactDomInstance.findDOMNode?ReactDomInstance.findDOMNode(node):void 0}var elem,_elem$props}},82647:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{L:()=>uid})
 const dictionary="getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ",dictionaryLengthMinus1=dictionary.length-1
 function uid(prefix="",length=12){return`u${function(idLength){let id=""
