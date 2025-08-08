@@ -22,15 +22,12 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   AsElementType,
   PillTheme,
   OtherHTMLAttributes
@@ -72,24 +69,6 @@ type PillProps = PillOwnProps &
 type PillStyle = ComponentStyle<
   'pill' | 'text' | 'maxWidth' | 'status' | 'icon'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf([
-    'primary',
-    'success',
-    'danger',
-    'info',
-    'warning',
-    'alert'
-  ]),
-  elementRef: PropTypes.func,
-  margin: PropTypes.string,
-  statusLabel: PropTypes.string,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -103,4 +82,4 @@ type PillState = {
 }
 
 export type { PillProps, PillStyle, PillState }
-export { propTypes, allowedProps }
+export { allowedProps }

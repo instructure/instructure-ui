@@ -22,11 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
-import { Item } from './Item'
 
 import type {
   Spacing,
@@ -34,7 +29,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   AppNavTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -102,20 +96,6 @@ type AppNavStyle = ComponentStyle<'appNav' | 'alignCenter' | 'list'> & {
   horizontalMargin: string
   menuTriggerWidth: string
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  screenReaderLabel: PropTypes.string.isRequired,
-  children: ChildrenPropTypes.oneOf([Item]),
-  debounce: PropTypes.number,
-  renderBeforeItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  renderTruncateLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  onUpdate: PropTypes.func,
-  visibleItemsCount: PropTypes.number
-}
-
 const allowedProps: AllowedPropKeys = [
   'screenReaderLabel',
   'children',
@@ -130,4 +110,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { AppNavProps, AppNavStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

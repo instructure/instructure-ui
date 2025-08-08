@@ -23,7 +23,7 @@
  */
 
 import { ReactNode } from 'react'
-import PropTypes from 'prop-types'
+
 
 import type {
   Spacing,
@@ -32,7 +32,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   AlertTheme,
-  PropValidators,
   Renderable
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -128,24 +127,6 @@ type AlertStyle = ComponentStyle<
   'alert' | 'icon' | 'closeButton' | 'content' | 'variantScreenReaderLabel'
 >
 
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-  margin: PropTypes.string,
-  liveRegion: PropTypes.func,
-  liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
-  isLiveRegionAtomic: PropTypes.bool,
-  screenReaderOnly: PropTypes.bool,
-  timeout: PropTypes.number,
-  renderCloseButtonLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  onDismiss: PropTypes.func,
-  transition: PropTypes.oneOf(['none', 'fade']),
-  open: PropTypes.bool,
-  hasShadow: PropTypes.bool,
-  variantScreenReaderLabel: PropTypes.string,
-  renderCustomIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'variant',
@@ -168,4 +149,4 @@ type AlertState = {
 }
 
 export type { AlertProps, AlertStyle, AlertState }
-export { propTypes, allowedProps }
+export { allowedProps }

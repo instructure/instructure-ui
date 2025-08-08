@@ -7,6 +7,12 @@ isWIP: true
 
 # Upgrade Guide for Version 11 (WIP)
 
+## React 19 DOM access
+
+InstUI needs to access the native DOM in some cases, React 19 introduced a breaking change here by removing `ReactDOM.findDOMNode()` If you are upgrading to React 19, you will need to add `ref`s to some of your custom components that use InstUI utilities, see [this guide](/#accessing-the-dom).
+
+If you are staying on React 17 or 18 you will just see error messages (`Error: ${elName} doesn't have "ref" property.`), but your code should work the same as with InstUI v10.
+
 ## Removal of deprecated props/components/APIs
 
 ### InstUISettingsProvider
@@ -31,6 +37,12 @@ isWIP: true
 | `canvas.use()`, `canvasHighContrast.use()` | Wrap all your application roots in `<InstUISettingsProvider>`                                         |
 | `variables` field on theme objects         | Use `canvas.borders` instead of `canvas.variables.borders` (same for all othere fields)               |
 | `@instructure/theme-registry` package      | This added the removed functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
+
+### Removal of the `deprecated`, `experimental`, `hack` decorators
+
+We have removed these utilities from the `ui-react-utils` package because we are phasing out parts from the codebase that use decorators.
+
+If you want to still use these we suggest to copy-paste their code from the latest v10 codebase (Note: they only work for class-based components!).
 
 ## API Changes
 

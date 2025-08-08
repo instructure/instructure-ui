@@ -46,7 +46,7 @@ import { Separator } from './Separator'
 import type { OptionsSeparatorProps } from './Separator/props'
 
 import type { OptionsProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { isAndroidOrIOS } from '@instructure/ui-utils'
 
 type ItemChild = ComponentElement<OptionsItemProps, Item>
@@ -66,7 +66,6 @@ class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',

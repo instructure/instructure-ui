@@ -41,7 +41,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
 
 import type { ViewOwnProps } from '@instructure/ui-view'
@@ -56,7 +56,6 @@ category: components
 class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     // Leave interaction default undefined so that `disabled` can also be supplied

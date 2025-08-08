@@ -30,10 +30,8 @@ import type {
   ComponentClass,
   ComponentElement,
   ComponentState,
-  ReactHTML,
   ReactNode,
   ReactElement,
-  ReactSVG
 } from 'react'
 
 /** Element func parameter, mainly for the `findDOMNode` util */
@@ -47,8 +45,6 @@ export type UIElement =
 
 /** Type that is renderable by `callRenderProp` */
 export type Renderable<P = never> =
-  | keyof ReactHTML
-  | keyof ReactSVG
   | ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>
   | ComponentClass
   | ReactNode
@@ -87,5 +83,43 @@ export interface InstUIComponent
     InstUIBaseComponent {
   originalType?: any
 }
+
+export type Cursor =
+  | 'auto'
+  | 'default'
+  | 'none'
+  | 'context-menu'
+  | 'help'
+  | 'pointer'
+  | 'progress'
+  | 'wait'
+  | 'cell'
+  | 'crosshair'
+  | 'text'
+  | 'vertical-text'
+  | 'alias'
+  | 'copy'
+  | 'move'
+  | 'no-drop'
+  | 'not-allowed'
+  | 'grab'
+  | 'grabbing'
+  | 'all-scroll'
+  | 'col-resize'
+  | 'row-resize'
+  | 'n-resize'
+  | 'e-resize'
+  | 's-resize'
+  | 'w-resize'
+  | 'ne-resize'
+  | 'nw-resize'
+  | 'se-resize'
+  | 'sw-resize'
+  | 'ew-resize'
+  | 'ns-resize'
+  | 'nesw-resize'
+  | 'nwse-resize'
+  | 'zoom-in'
+  | 'zoom-out'
 
 export type Themes = 'contrast45' | 'contrast70'

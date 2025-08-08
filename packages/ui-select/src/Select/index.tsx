@@ -70,7 +70,7 @@ import { Option } from './Option'
 import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { Renderable } from '@instructure/shared-types'
 
 type GroupChild = ComponentElement<SelectGroupProps, Group>
@@ -136,7 +136,6 @@ class Select extends Component<SelectProps> {
   private readonly SCROLL_TOLERANCE = 0.5
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     inputValue: '',
@@ -817,7 +816,7 @@ class Select extends Component<SelectProps> {
         }) => (
           <span
             {...getRootProps({ css: styles?.select })}
-            ref={(el) => (this.ref = el)}
+            ref={(el) => {this.ref = el}}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

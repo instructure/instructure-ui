@@ -16,8 +16,8 @@
     "@instructure/browserslist-config-instui": "10.14.0",
     "@tailwindcss/postcss": "^4.1.4",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.1",
+    "@types/react-dom": "^19.1",
     "autoprefixer": "^10.0.1",
     "axe-core": "^4.10.3",
     "chromatic": "^11.27.0",
@@ -32,7 +32,7 @@
   "dependencies": {
     "instructure-ui": "file:../packages",
     "next": "^15",
-    "react": "^18.3.1",
-    "react-dom": "^18"
+    "react": "^19.1",
+    "react-dom": "^19.1"
   }
 }

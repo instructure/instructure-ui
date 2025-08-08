@@ -39,7 +39,7 @@ import type {
   ResponsiveProps,
   ResponsivePropsObject
 } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -49,7 +49,6 @@ category: components
 **/
 class Responsive extends Component<ResponsiveProps> {
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,

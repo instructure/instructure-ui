@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { SliderProps, SliderStyleProps } from './props'
 
 import generateStyle from './styles'
@@ -43,7 +43,6 @@ private: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Slider extends Component<SliderProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Slider'
 

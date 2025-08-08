@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
 import type { RectType } from '@instructure/ui-dom-utils'
 import { UIElement } from '@instructure/shared-types'
 
@@ -53,25 +50,6 @@ const placementPropValues = [
   'center end',
   'offscreen'
 ]
-
-const PositionPropTypes = {
-  /**
-   * The placement of the content in relation to the trigger
-   */
-  placement: PropTypes.oneOf(placementPropValues),
-  /**
-   * An element or a function returning an element to use as the mount node
-   */
-  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  /**
-   * The parent in which to constrain a placement
-   */
-  constrain: PropTypes.oneOfType([
-    element,
-    PropTypes.func,
-    PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
-  ])
-}
 
 /**
  * The placement of the content in relation to the trigger
@@ -167,5 +145,4 @@ export type Offset<Type extends number | string | undefined = number> = {
 export type Size = Pick<RectType, 'width' | 'height'>
 export type Overflow = Pick<RectType, 'top' | 'bottom' | 'left' | 'right'>
 
-export default PositionPropTypes
-export { PositionPropTypes, placementPropValues, mirrorMap }
+export { placementPropValues, mirrorMap }

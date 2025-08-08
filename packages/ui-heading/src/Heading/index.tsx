@@ -34,7 +34,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { HeadingProps } from './props'
 import { AsElementType } from '@instructure/shared-types'
 
@@ -64,7 +64,6 @@ category: components
 class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null,

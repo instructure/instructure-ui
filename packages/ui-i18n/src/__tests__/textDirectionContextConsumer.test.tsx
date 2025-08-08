@@ -23,9 +23,7 @@
  */
 
 import { Component } from 'react'
-import ReactDOM from 'react-dom'
-import ReactTestUtils from 'react-dom/test-utils'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -40,7 +38,7 @@ import { TextDirectionContext } from '../TextDirectionContext'
 class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerProps> {
   render() {
     return (
-      <div data-dir={this.props.dir} dir={this.props.dir}>
+      <div data-dir={this.props.dir} dir={this.props.dir} data-testid="test-consumer">
         {this.props.children}
       </div>
     )
@@ -77,19 +75,13 @@ describe('@textDirectionContextConsumer', () => {
     expect(container.firstChild).toHaveAttribute('data-dir', 'ltr')
   })
 
-  it('can be found and tested with ReactTestUtils', async () => {
-    const rootNode = document.createElement('div')
+  it('should render correctly', async () => {
+    render(<WrapperComponent />)
 
-    document.body.appendChild(rootNode)
-
-    // eslint-disable-next-line react/no-render-return-value
-    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
-    const foundComponent = ReactTestUtils.findRenderedComponentWithType(
-      rendered as any,
-      (TextDirectionContextConsumerComponent as any).originalType
-    )
-
-    expect(foundComponent).toBeDefined()
+    const foundComponent = screen.getByTestId('test-consumer')
+  
+    expect(foundComponent).toBeInTheDocument()
+    expect(foundComponent).toHaveAttribute('data-dir')
   })
 
   it('should set the text direction via props', async () => {

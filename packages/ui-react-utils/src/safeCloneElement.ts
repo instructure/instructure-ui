@@ -43,6 +43,16 @@ type GetProps<E extends ReactElement = ReactElement> = E extends
   : Record<string, any> & { ref?: any }
 
 /**
+ * Return the ref of an element in a way that is compatible both with
+ * React 18 (element.ref) and React 19+ (element.props.ref)
+ */
+function getElementRef(
+  elem: ReactElement<any> & { ref?: any; props?: { ref: any } }
+) {
+  return elem.props && elem.props.ref !== undefined ? elem.props.ref : elem.ref
+}
+
+/**
  * ---
  * category: utilities/react
  * ---
@@ -52,7 +62,7 @@ type GetProps<E extends ReactElement = ReactElement> = E extends
  * @param children
  */
 function safeCloneElement<
-  E extends ReactElement = ReactElement,
+  E extends ReactElement<any> = ReactElement,
   P extends GetProps<E> = GetProps<E>
 >(
   element: { ref?: any } & E,
@@ -60,13 +70,7 @@ function safeCloneElement<
   ...children: ReactNode[]
 ) {
   const cloneRef = props.ref
-  // Support both React 18 (element.ref) and React 19+ (element.props.ref)
-  // TypeScript's ReactElement type does not always include a 'ref' property,
-  // so we use 'as any' to safely access it for React 18 compatibility.
-  const originalRef =
-    element.props && element.props.ref !== undefined
-      ? element.props.ref
-      : (element as any).ref
+  const originalRef = getElementRef(element)
   const originalRefIsAFunction = typeof originalRef === 'function'
   const cloneRefIsFunction = typeof cloneRef === 'function'
 
@@ -116,11 +120,10 @@ Ignoring ref: ${originalRef}`
       ...mergedProps,
       ref(component: E) {
         if (cloneRefIsFunction) {
-          ;(cloneRef as (instance: any) => void)(component)
+          ;(cloneRef as (instance: unknown) => void)(component)
         } else {
           cloneRef.current = component
         }
-
         originalRefIsAFunction && originalRef(component)
       }
     },

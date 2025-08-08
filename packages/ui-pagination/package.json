@@ -41,18 +41,16 @@
     "@instructure/ui-icons": "10.24.1",
     "@instructure/ui-number-input": "10.24.1",
     "@instructure/ui-portal": "10.24.1",
-    "@instructure/ui-prop-types": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
     "@instructure/ui-testable": "10.24.1",
     "@instructure/ui-themes": "10.24.1",
     "@instructure/ui-tooltip": "10.24.1",
     "@instructure/ui-utils": "10.24.1",
     "@instructure/ui-view": "10.24.1",
-    "@instructure/uid": "10.24.1",
-    "prop-types": "^15.8.1"
+    "@instructure/uid": "10.24.1"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

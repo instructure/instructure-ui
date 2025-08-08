@@ -36,7 +36,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { BadgeProps } from './props'
 
 /**
@@ -50,7 +50,6 @@ category: components
 class Badge extends Component<BadgeProps> {
   static readonly componentId = 'Badge'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     standalone: false,

@@ -41,14 +41,12 @@
     "@instructure/ui-a11y-utils": "10.24.1",
     "@instructure/ui-badge": "10.24.1",
     "@instructure/ui-icons": "10.24.1",
-    "@instructure/ui-prop-types": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
     "@instructure/ui-testable": "10.24.1",
-    "@instructure/ui-tooltip": "10.24.1",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-tooltip": "10.24.1"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

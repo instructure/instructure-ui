@@ -45,7 +45,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type {
   NumberInputProps,
   NumberInputState,
@@ -65,8 +65,7 @@ id: NumberInput
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
   static readonly componentId = 'NumberInput'
   static allowedProps = allowedProps
-  static propTypes = propTypes
-  static defaultProps = {
+static defaultProps = {
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
     messages: [],

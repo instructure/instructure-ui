@@ -36,7 +36,7 @@ import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 
 import type { OverlayProps, OverlayState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -46,7 +46,6 @@ category: components
 @testable()
 class Overlay extends Component<OverlayProps, OverlayState> {
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     open: false,

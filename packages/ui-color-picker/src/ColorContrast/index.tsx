@@ -38,7 +38,7 @@ import { Pill } from '@instructure/ui-pill'
 
 import ColorIndicator from '../ColorIndicator'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ColorContrastProps, ColorContrastState } from './props'
 
 import generateStyle from './styles'
@@ -52,7 +52,6 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
 

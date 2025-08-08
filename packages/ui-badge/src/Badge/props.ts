@@ -22,14 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { PositionPropTypes } from '@instructure/ui-position'
-
+import React from 'react'
 import type {
   AsElementType,
   BadgeTheme,
-  PropValidators
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -68,7 +64,7 @@ type BadgeOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   formatOverflowText?: (count: number, countUntil: number) => string
-  formatOutput?: (formattedCount: string) => JSX.Element | string | number
+  formatOutput?: (formattedCount: string) => React.JSX.Element | string | number
   as?: AsElementType
   /**
    * Specifies the display property of the container.
@@ -98,24 +94,6 @@ type BadgeProps = BadgeOwnProps &
   WithDeterministicIdProps
 
 type BadgeStyle = ComponentStyle<'badge' | 'wrapper'>
-
-const propTypes: PropValidators<PropKeys> = {
-  count: PropTypes.number,
-  countUntil: PropTypes.number,
-  children: PropTypes.element,
-  type: PropTypes.oneOf(['count', 'notification']),
-  standalone: PropTypes.bool,
-  pulse: PropTypes.bool,
-  variant: PropTypes.oneOf(['primary', 'success', 'danger', 'inverse']),
-  placement: PositionPropTypes.placement,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  formatOverflowText: PropTypes.func,
-  formatOutput: PropTypes.func,
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = [
   'count',
   'countUntil',
@@ -134,4 +112,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { BadgeProps, BadgeStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -36,7 +36,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { PillProps, PillState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -49,7 +49,6 @@ class Pill extends Component<PillProps, PillState> {
   static readonly componentId = 'Pill'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     color: 'primary'

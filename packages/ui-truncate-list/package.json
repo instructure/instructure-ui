@@ -31,8 +31,7 @@
     "@instructure/ui-dom-utils": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
     "@instructure/ui-testable": "10.24.1",
-    "@instructure/ui-utils": "10.24.1",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-utils": "10.24.1"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.24.1",
@@ -44,7 +43,7 @@
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

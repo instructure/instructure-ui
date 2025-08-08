@@ -23,11 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
-import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
@@ -35,7 +30,6 @@ import type {
   DrawerLayoutTrayTheme,
   LiveRegion,
   OtherHTMLAttributes,
-  PropValidators,
   UIElement
 } from '@instructure/shared-types'
 import {
@@ -182,40 +176,6 @@ type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps &
 type DrawerLayoutTrayStyle = ComponentStyle<
   'drawerTray' | 'drawerTrayWithShadow' | 'drawerTrayContent'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  render: PropTypes.func,
-  placement: PropTypes.oneOf(['start', 'end']),
-  open: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  border: PropTypes.bool,
-  shadow: PropTypes.bool,
-  onTransition: PropTypes.func,
-  onEnter: PropTypes.func,
-  onEntering: PropTypes.func,
-  onEntered: PropTypes.func,
-  onExit: PropTypes.func,
-  onExiting: PropTypes.func,
-  onExited: PropTypes.func,
-  contentRef: PropTypes.func,
-  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  liveRegion: PropTypes.oneOfType([
-    element,
-    PropTypes.arrayOf(element),
-    PropTypes.func
-  ]),
-  onDismiss: PropTypes.func,
-  shouldContainFocus: PropTypes.bool,
-  shouldReturnFocus: PropTypes.bool,
-  shouldCloseOnDocumentClick: PropTypes.bool,
-  shouldCloseOnEscape: PropTypes.bool,
-  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'children',
@@ -252,4 +212,4 @@ export type {
   DrawerLayoutTrayStyleProps,
   DrawerTrayPlacement
 }
-export { allowedProps, propTypes }
+export { allowedProps }
