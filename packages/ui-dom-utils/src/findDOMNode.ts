@@ -23,6 +23,7 @@
  */
 
 import type { UIElement } from '@instructure/shared-types'
+import ReactDOM from 'react-dom'
 
 /**
  * Return the ref of an element in a way that is compatible both with
@@ -81,8 +82,17 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
       ? (node as any).constructor.componentId
       : (node as any).constructor.name
     console.error(
-      `Error: ${elName} doesn't have "ref" property.\nReactDOM.findDOMNode is removed in React 19, consider using refs instead. From InstUI v9, components must have the "ref" property for findDOMNode to work.\nSee more here: https://instructure.design/#accessing-the-dom`
+      `Error: ${elName} doesn't have "ref" property.\n
+      your code will likely not work with React 19+, because ReactDOM.findDOMNode() was removed.\n
+      See more here: https://instructure.design/#accessing-the-dom`
     )
+    // TODO remove when we only support React 19 or greater
+    const ReactDomInstance = ReactDOM as {
+      findDOMNode?: (arg: unknown) => Element
+    }
+    if (typeof ReactDomInstance.findDOMNode === 'function') {
+      return ReactDomInstance.findDOMNode(node)
+    }
     return undefined
   }
   return undefined
