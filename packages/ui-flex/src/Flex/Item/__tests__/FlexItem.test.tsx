@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
@@ -56,5 +56,19 @@ describe('<Item />', () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
+  })
+
+  describe('order prop', () => {
+    it('should apply `order` CSS when passed', () => {
+      render(<Item order={2}>Item with order</Item>)
+      const item = screen.getByText('Item with order')
+      expect(item).toHaveStyle('order: 2')
+    })
+
+    it('should not apply `order` CSS when prop is undefined', () => {
+      render(<Item>Item without order</Item>)
+      const item = screen.getByText('Item without order')
+      expect(item).not.toHaveStyle({ order: expect.anything() })
+    })
   })
 })
