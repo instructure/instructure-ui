@@ -117,7 +117,7 @@ type FlexItemOwnProps = {
    *
    * Utilizes the order flex CSS property. Default order CSS value is 0.
    */
-  order?: string | number
+  order?: number
 }
 
 type PropKeys = keyof FlexItemOwnProps
@@ -145,7 +145,7 @@ const propTypes: PropValidators<PropKeys> = {
   shouldShrink: PropTypes.bool,
   size: PropTypes.string,
   withVisualDebug: PropTypes.bool,
-  order: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  order: PropTypes.number
 }
 
 const allowedProps: AllowedPropKeys = [
