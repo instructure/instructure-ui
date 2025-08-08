@@ -38,7 +38,7 @@ const generateStyle = (
   _componentTheme: null,
   props: FlexItemProps
 ): FlexItemStyle => {
-  const { shouldGrow, shouldShrink, align, size } = props
+  const { shouldGrow, shouldShrink, align, size, order } = props
 
   const alignSelfValues = {
     start: 'flex-start',
@@ -53,6 +53,7 @@ const generateStyle = (
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
       flexBasis: size,
+      ...(order !== undefined && { order }),
       // initial value is 1, but we want 0 as our default,
       // so users can opt in to shrink like they do grow
       flexShrink: shouldShrink ? 1 : 0,
