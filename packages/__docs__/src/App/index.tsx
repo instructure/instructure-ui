@@ -727,7 +727,7 @@ class App extends Component<AppProps, AppState> {
         minHeight="100vh"
         width="18.75rem"
       >
-        <View display="block" textAlign="end" margin="xx-small x-small none">
+        <View display="block" textAlign="end" margin="xx-small x-small small">
           <InstUISettingsProvider>
             <IconButton
               renderIcon={IconXSolid}
@@ -744,7 +744,7 @@ class App extends Component<AppProps, AppState> {
         </View>
 
         <Header
-          name={name === 'instructure-ui' ? 'Instructure UI' : name}
+          name={name === 'instructure-ui' ? 'v' : name}
           version={version}
           versionsData={versionsData}
         />
