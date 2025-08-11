@@ -38,6 +38,8 @@ import { versionInPath } from '../versionData'
 import { Heading } from '../Heading'
 import type { HeaderProps } from './props'
 import { propTypes, allowedProps } from './props'
+//@ts-expect-error ts complains for no real reason
+import logo from '../../full_logo.svg'
 
 class Header extends Component<HeaderProps> {
   static propTypes = propTypes
@@ -100,7 +102,8 @@ class Header extends Component<HeaderProps> {
               <Text size="large">
                 {name && version ? (
                   <span>
-                    {name} {version}
+                    {name}
+                    {version}
                   </span>
                 ) : (
                   'Documentation'
@@ -120,7 +123,7 @@ class Header extends Component<HeaderProps> {
             {allVersions.map((opt, index) => (
               <Menu.Item key={index} id={`opt-${index}`} value={opt}>
                 <View textAlign="center" as="div">
-                  {this.props.name} {opt}
+                  InstUI {opt}
                 </View>
               </Menu.Item>
             ))}
@@ -132,30 +135,10 @@ class Header extends Component<HeaderProps> {
 
   render() {
     const { versionsData } = this.props
-    const corpLogo = (
-      <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
-        <polygon
-          fill="#2A7BA0"
-          points="30.07,373.64 250.04,249.77 470,373.64 250.04,497.46 "
-        />
-        <polygon
-          fill="#FDCC10"
-          points="140.03,64.02 30.07,125.9 140.08,187.84 250.04,125.9 "
-        />
-        <polygon
-          fill="#F78F20"
-          points="249.99,2.08 140.08,63.97 250.04,125.9 359.99,64.02 "
-        />
-        <polygon
-          fill="#EB2227"
-          points="359.99,64.02 250.04,125.9 359.99,187.84 469.95,125.9 "
-        />
-      </InlineSVG>
-    )
-
+    const corpLogo = <InlineSVG width="200px" src={logo} />
     return (
       <View as="div" margin="none none medium" padding="none medium">
-        <Heading level="h2" as="div">
+        <Heading variant="titlePageDesktop" level="h2" as="div">
           <Link href="#index" isWithinText={false} display="block">
             <View display="block" textAlign="center">
               {corpLogo}
@@ -169,7 +152,8 @@ class Header extends Component<HeaderProps> {
               <Link href="#index" isWithinText={false} display="block">
                 <View display="block" margin="small none none">
                   <Text size="large">
-                    {this.props.name} {this.props.version}
+                    {this.props.name}
+                    {this.props.version}
                   </Text>
                 </View>
               </Link>
