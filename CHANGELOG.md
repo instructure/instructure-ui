@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
+
+
+### Bug Fixes
+
+* **ui-react-utils:** fix "ref is not a prop" warning spam ([5c02971](https://github.com/instructure/instructure-ui/commit/5c029716199b98353c5de589025962bcba4b01b5))
+
+
+
+
+
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 

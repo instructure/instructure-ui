@@ -1,6 +1,6 @@
 {
   "name": "@instructure/theme-registry",
-  "version": "10.24.1",
+  "version": "10.24.2",
   "description": "Package for global ThemeRegistry.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "types": "./types",
@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/console": "10.24.1",
-    "@instructure/shared-types": "10.24.1",
-    "@instructure/ui-utils": "10.24.1"
+    "@instructure/console": "10.24.2",
+    "@instructure/shared-types": "10.24.2",
+    "@instructure/ui-utils": "10.24.2"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.24.1",
+    "@instructure/ui-babel-preset": "10.24.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "vitest": "^3.2.2"
