@@ -57,9 +57,20 @@ const useStyle = <P extends (theme: any, params: any) => any>(
     displayName
   } = useStyleParams
   const theme = useTheme()
-  const baseComponentTheme = generateComponentTheme
+
+  let baseComponentTheme = generateComponentTheme
     ? generateComponentTheme(theme as BaseTheme)
     : {}
+  if (
+    //@ts-expect-error asd
+    theme.newTheme &&
+    //@ts-expect-error asd
+    theme.newTheme.components[componentId?.toLocaleLowerCase()]
+  ) {
+    baseComponentTheme =
+      //@ts-expect-error asd
+      theme.newTheme.components[componentId?.toLocaleLowerCase()]
+  }
 
   const themeOverride = getComponentThemeOverride(
     theme,
