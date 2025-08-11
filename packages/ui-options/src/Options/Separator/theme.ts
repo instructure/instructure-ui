@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): OptionsSeparatorTheme => {
   const { borders, colors, spacing } = theme
 
   const componentVariables: OptionsSeparatorTheme = {
-    background: colors?.contrasts?.grey1214,
+    background: colors?.contrasts?.grey3045,
     height: borders?.widthSmall,
     margin: `0 ${spacing?.small}`
   }
