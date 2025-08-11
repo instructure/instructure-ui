@@ -38,7 +38,7 @@ const generateComponentTheme = (theme: Theme): ColorPresetTheme => {
     smallSpacing: spacing?.small,
     selectedIndicatorBackgroundColor: colors?.contrasts?.white1010,
     selectedIndicatorBorderColor: colors?.contrasts?.grey125125,
-    popoverDividerColor: colors?.contrasts?.grey1214,
+    popoverDividerColor: colors?.contrasts?.grey3045,
     smallBorder: borders?.widthSmall,
     popoverFooterColor: colors?.contrasts?.grey1111,
     checkerboardBackgroundImage: `linear-gradient(45deg, ${colors?.contrasts?.grey4570} 25%, transparent 25%),
