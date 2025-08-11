@@ -28,7 +28,8 @@ import {
   SyntheticEvent,
   useEffect,
   forwardRef,
-  ForwardedRef
+  ForwardedRef,
+  useRef
 } from 'react'
 
 import { View } from '@instructure/ui-view'
@@ -52,7 +53,7 @@ const Avatar = forwardRef(
       showBorder = 'auto',
       shape = 'circle',
       display = 'inline-block',
-      onImageLoaded = (_event: SyntheticEvent) => {},
+      onImageLoaded,
       src,
       name,
       renderIcon,
@@ -65,6 +66,7 @@ const Avatar = forwardRef(
     }: AvatarProps,
     ref: ForwardedRef<View>
   ) => {
+    const imgRef = useRef<HTMLImageElement>(null)
     const [loaded, setLoaded] = useState(false)
 
     const styles = useStyle({
@@ -89,6 +91,11 @@ const Avatar = forwardRef(
       if (loaded && !src) {
         setLoaded(false)
       }
+      // Image already loaded (common in SSR)
+      if (src && !loaded && imgRef.current && imgRef.current.complete) {
+        setLoaded(true)
+        onImageLoaded?.()
+      }
     }, [loaded, src])
 
     const makeInitialsFromName = () => {
@@ -110,7 +117,7 @@ const Avatar = forwardRef(
 
     const handleImageLoaded = (event: SyntheticEvent) => {
       setLoaded(true)
-      onImageLoaded(event)
+      onImageLoaded?.(event)
     }
 
     const renderInitials = () => {
@@ -157,6 +164,7 @@ const Avatar = forwardRef(
       >
         <img // This is visually hidden and is here for loading purposes only
           src={src}
+          ref={imgRef}
           css={styles?.loadImage}
           alt={alt}
           onLoad={handleImageLoaded}
@@ -167,6 +175,7 @@ const Avatar = forwardRef(
     )
   }
 )
+Avatar.displayName = 'Avatar'
 
 export default Avatar
 export { Avatar }
