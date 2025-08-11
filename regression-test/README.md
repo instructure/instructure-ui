@@ -13,7 +13,7 @@ This is a simple Next.js app importing (locally) @instructure/ui. This allows us
 2. Then open the regression test folder: `cd regression-test`
 3. Run the dev server with `npm run dev`
 4. The dev server will be accessible at `localhost:3000`
-5. Once the dev server is running you can start the Cypress e2e tests with the `npm run cypress` command
+5. Once the dev server is running you can start the Cypress e2e tests with the `npm run cypress` command. Run `npm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
 
 ### To add a new component
 

@@ -23,8 +23,14 @@
  */
 'use client'
 import React from 'react'
-import { Avatar } from 'instructure-ui/ui-avatar/es/index'
-import { IconGroupLine, IconAiSolid } from 'instructure-ui/ui-icons/es/index'
+import { Avatar as avv } from 'instructure-ui/ui-avatar/es/index'
+import {
+  IconGroupLine as igl,
+  IconAiSolid
+} from 'instructure-ui/ui-icons/es/index'
+
+const Avatar = avv as any
+const IconGroupLine = igl as any
 
 export default function AvatarPage() {
   return (
@@ -255,7 +261,7 @@ export default function AvatarPage() {
           name="David Herbert"
           hasInverseColor
           color="fire"
-          themeOverride={{ colorFire: '#efb410' }}
+          themeOverride={{ colorFire: '#013410' }}
         />
       </div>
       <div>
