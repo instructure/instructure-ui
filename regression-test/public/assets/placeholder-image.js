@@ -21,40 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-'use client'
-import React, { useEffect, useRef } from 'react'
-import { Button } from 'instructure-ui/ui-buttons/es/index'
-import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
 
-export default function ButtonPage() {
-  const myElementRef = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    myElementRef?.current?.focus()
-  })
-  const colors = [
-    'primary',
-    'primary-inverse',
-    'secondary',
-    'success',
-    'danger'
-  ]
-  const sizes = ['small', 'medium', 'large']
-  return (
-    <main className="flex gap-8 p-8 flex-col items-start axe-test">
-      <Button>Button</Button>
-      {colors.map((color) => (
-        <Button key={'color' + color} color={color}>
-          {color} color
-        </Button>
-      ))}
-      {sizes.map((size) => (
-        <Button key={'size' + size} size={size}>
-          {size} size
-        </Button>
-      ))}
-      <Button renderIcon={IconAddLine}>Icon Button</Button>
-      <Button disabled>Disabled Button</Button>
-      <Button ref={myElementRef}>focused button</Button>
-    </main>
-  )
+import IconSVG from './placeholder.svg'
+
+export default function placeholderImage(width = 512, height = 512) {
+  // We need to base64 encode this because otherwise FF will add extra escape chars
+  const dataUri = Buffer.from(
+    IconSVG.replace(/{{w}}/g, width).replace(/{{h}}/g, height).trim()
+  ).toString('base64')
+
+  return `data:image/svg+xml;base64,${dataUri}`
 }

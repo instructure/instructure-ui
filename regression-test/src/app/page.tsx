@@ -25,7 +25,7 @@
 'use client'
 import { Link } from 'instructure-ui/ui-link/es/index'
 
-const components = ['button']
+const components = ['button', 'alert', 'avatar']
 
 export default function Home() {
   return (

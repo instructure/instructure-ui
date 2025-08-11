@@ -75,4 +75,16 @@ describe('visual regression test', () => {
     cy.injectAxe()
     cy.checkA11y('.axe-test', axeOptions, terminalLog)
   })
+
+  it('check alert', () => {
+    cy.visit('http://localhost:3000/alert')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check avatar', () => {
+    cy.visit('http://localhost:3000/avatar')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
 })
