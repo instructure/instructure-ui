@@ -826,11 +826,13 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (groupProps?.selectableType) {
       this.handleGroupOptionSelected(event, selectedOption)
     } else {
+      // TODO workaround for react 19 default props
+      const optionWithDefaultProps = {...selectedOptionChild, props: {...selectedOptionChild.props, role: 'menuitem'}}
       if (typeof onSelect === 'function') {
         onSelect(event, {
           value,
           isSelected: true,
-          selectedOption: selectedOptionChild,
+          selectedOption: optionWithDefaultProps,
           drilldown: this
         })
       }
