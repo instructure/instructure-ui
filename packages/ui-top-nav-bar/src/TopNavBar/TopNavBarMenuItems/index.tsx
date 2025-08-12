@@ -191,7 +191,14 @@ class TopNavBarMenuItems extends Component<
         return
       }
 
-      const { id, status, variant, renderSubmenu, renderAvatar } = child.props
+      const {
+        id,
+        status,
+        variant = 'default', // workaround because after react 19 defaultProps are not working as expected
+        renderSubmenu,
+        renderAvatar
+      } = child.props
+
       const isCurrentPage = currentPageId === id
 
       if (renderAvatar) {
