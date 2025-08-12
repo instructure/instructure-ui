@@ -113,11 +113,9 @@ type FlexItemOwnProps = {
   /**
    * Specifies the order of the `Flex.Item` inside the `Flex` component.
    *
-   * Items with the same order revert to source order.
-   *
-   * Utilizes the order flex CSS property. Default order CSS value is 0.
+   * Utilizes the order flex CSS property.
    */
-  order?: string | number
+  order?: number
 }
 
 type PropKeys = keyof FlexItemOwnProps
@@ -145,7 +143,7 @@ const propTypes: PropValidators<PropKeys> = {
   shouldShrink: PropTypes.bool,
   size: PropTypes.string,
   withVisualDebug: PropTypes.bool,
-  order: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  order: PropTypes.number
 }
 
 const allowedProps: AllowedPropKeys = [
