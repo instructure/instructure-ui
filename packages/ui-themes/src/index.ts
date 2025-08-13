@@ -43,6 +43,13 @@ import {
 } from './sharedThemeTokens/colors/primitives'
 import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
 
+import type {
+  Canvas as NewCanvas,
+  CanvasHighContrast as NewCanvasHighContrast,
+  RebrandDark as NewRebrandDark,
+  RebrandLight as NewRebrandLight
+} from './themes/newThemes'
+
 type ThemeMap = {
   canvas: CanvasTheme
   'canvas-high-contrast': CanvasHighContrastTheme
@@ -83,5 +90,9 @@ export type {
   Primitives,
   AdditionalPrimitives,
   DataVisualization,
-  UI
+  UI,
+  NewCanvas,
+  NewCanvasHighContrast,
+  NewRebrandDark,
+  NewRebrandLight
 }

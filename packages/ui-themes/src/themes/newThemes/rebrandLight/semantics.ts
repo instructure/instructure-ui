@@ -29,6 +29,8 @@ export type Semantics = {
   background: {
     base: Primitives['color']['white']
     muted: Primitives['color']['grey']['grey10']
+    page: Primitives['color']['grey']['grey10']
+    container: Primitives['color']['white']
     success: Primitives['color']['green']['green70']
     warning: Primitives['color']['orange']['orange70']
     error: Primitives['color']['red']['red70']
@@ -39,8 +41,6 @@ export type Semantics = {
       base: Primitives['color']['grey']['grey30']
       onColor: Primitives['color']['white']
     }
-    page: Primitives['color']['grey']['grey10']
-    container: Primitives['color']['white']
     interactive: {
       primary: {
         base: Primitives['color']['blue']['blue70']
@@ -186,18 +186,18 @@ export type Semantics = {
     }
   }
   borderRadius: {
-    xs: Primitives['size']['size4']
+    xs: Primitives['size']['size2']
     sm: Primitives['size']['size4']
-    md: Primitives['size']['size4']
-    lg: Primitives['size']['size4']
-    xl: Primitives['size']['size4']
+    md: Primitives['size']['size8']
+    lg: Primitives['size']['size12']
+    xl: Primitives['size']['size16']
     full: string
     container: {
-      sm: Primitives['size']['size4']
-      md: Primitives['size']['size4']
-      lg: Primitives['size']['size4']
+      sm: Primitives['size']['size8']
+      md: Primitives['size']['size12']
+      lg: Primitives['size']['size16']
     }
-    interactive: { default: Primitives['size']['size4'] }
+    interactive: { default: Primitives['size']['size8'] }
   }
   borderWidth: {
     sm: Primitives['size']['size1']
@@ -205,9 +205,9 @@ export type Semantics = {
     lg: Primitives['size']['size4']
   }
   fontFamily: {
-    heading: Primitives['fontFamilies']['lato']
-    base: Primitives['fontFamilies']['lato']
-    code: Primitives['fontFamilies']['lato']
+    heading: Primitives['fontFamilies']['inclusiveSans']
+    base: Primitives['fontFamilies']['inclusiveSans']
+    code: Primitives['fontFamilies']['inclusiveSans']
   }
   fontWeight: {
     body: {
@@ -247,8 +247,8 @@ export type Semantics = {
     textSm: string
     textBase: Primitives['size']['size16']
     textLg: Primitives['size']['size20']
-    textXl: Primitives['size']['size24']
-    text2xl: Primitives['size']['size28']
+    textXl: Primitives['size']['size20']
+    text2xl: Primitives['size']['size24']
     text3xl: Primitives['size']['size32']
     text4xl: Primitives['size']['size36']
   }
@@ -260,6 +260,8 @@ const semantics: Semantics = {
   background: {
     base: primitives.color.white,
     muted: primitives.color.grey.grey10,
+    page: primitives.color.grey.grey10,
+    container: primitives.color.white,
     success: primitives.color.green.green70,
     warning: primitives.color.orange.orange70,
     error: primitives.color.red.red70,
@@ -270,8 +272,6 @@ const semantics: Semantics = {
       base: primitives.color.grey.grey30,
       onColor: primitives.color.white
     },
-    page: primitives.color.grey.grey10,
-    container: primitives.color.white,
     interactive: {
       primary: {
         base: primitives.color.blue.blue70,
@@ -414,18 +414,18 @@ const semantics: Semantics = {
     }
   },
   borderRadius: {
-    xs: primitives.size.size4,
+    xs: primitives.size.size2,
     sm: primitives.size.size4,
-    md: primitives.size.size4,
-    lg: primitives.size.size4,
-    xl: primitives.size.size4,
+    md: primitives.size.size8,
+    lg: primitives.size.size12,
+    xl: primitives.size.size16,
     full: '999px',
     container: {
-      sm: primitives.size.size4,
-      md: primitives.size.size4,
-      lg: primitives.size.size4
+      sm: primitives.size.size8,
+      md: primitives.size.size12,
+      lg: primitives.size.size16
     },
-    interactive: { default: primitives.size.size4 }
+    interactive: { default: primitives.size.size8 }
   },
   borderWidth: {
     sm: primitives.size.size1,
@@ -433,9 +433,9 @@ const semantics: Semantics = {
     lg: primitives.size.size4
   },
   fontFamily: {
-    heading: primitives.fontFamilies.lato,
-    base: primitives.fontFamilies.lato,
-    code: primitives.fontFamilies.lato
+    heading: primitives.fontFamilies.inclusiveSans,
+    base: primitives.fontFamilies.inclusiveSans,
+    code: primitives.fontFamilies.inclusiveSans
   },
   fontWeight: {
     body: {
@@ -475,12 +475,12 @@ const semantics: Semantics = {
     textSm: '14px',
     textBase: primitives.size.size16,
     textLg: primitives.size.size20,
-    textXl: primitives.size.size24,
-    text2xl: primitives.size.size28,
+    textXl: primitives.size.size20,
+    text2xl: primitives.size.size24,
     text3xl: primitives.size.size32,
     text4xl: primitives.size.size36
   },
-  visibleInCanvas: 'true',
-  visibleInRebrand: 'false'
+  visibleInCanvas: 'false',
+  visibleInRebrand: 'true'
 }
 export default semantics

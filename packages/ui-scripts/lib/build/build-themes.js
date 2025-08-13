@@ -22,30 +22,21 @@
  * SOFTWARE.
  */
 
-import primitives, { type Primitives } from './primitives'
-import semantics, { type Semantics } from './semantics'
-import avatar, { type Avatar } from './components/avatar'
-import pill, { type Pill } from './components/pill'
-import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
+import setupThemes from './buildThemes/setupThemes.js'
 
-export type Theme = {
-  primitives: Primitives
-  semantics: Semantics
-  components: {
-    avatar: Avatar
-    pill: Pill
-    breadcrumb: Breadcrumb
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+export default {
+  command: 'build-themes',
+  desc: 'Generate themes',
+  handler: async () => {
+    const rawData = fs.readFileSync(
+      path.join(__dirname, 'tokenStudioThemeTokens.json')
+    )
+    setupThemes('packages/ui-themes/src/themes/newThemes', rawData)
   }
 }
-
-const theme = {
-  primitives,
-  semantics,
-  components: {
-    avatar,
-    pill,
-    breadcrumb
-  }
-}
-
-export default theme

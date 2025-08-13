@@ -22,30 +22,46 @@
  * SOFTWARE.
  */
 
-import primitives, { type Primitives } from './primitives'
-import semantics, { type Semantics } from './semantics'
-import avatar, { type Avatar } from './components/avatar'
-import pill, { type Pill } from './components/pill'
-import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
-
-export type Theme = {
-  primitives: Primitives
-  semantics: Semantics
-  components: {
-    avatar: Avatar
-    pill: Pill
-    breadcrumb: Breadcrumb
+export const generatePrimitives = (collection, key) => {
+  const value = key ? collection[key] : collection
+  if (typeof value === 'object' && !value.value && !value.type) {
+    return Object.keys(value).reduce((acc, key) => {
+      return { ...acc, [key]: generatePrimitives(value, key) }
+    }, {})
   }
+
+  if (!isNaN(Number(value.value))) {
+    return Number(value.value)
+  }
+
+  return value.value
 }
 
-const theme = {
-  primitives,
-  semantics,
-  components: {
-    avatar,
-    pill,
-    breadcrumb
+const generateTypeData = (primitives, key) => {
+  const value = key ? primitives[key] : primitives
+  if (typeof value === 'object' && !value.value && !value.type) {
+    return Object.keys(value).reduce((acc, key, index) => {
+      if (typeof value[key] === 'object') {
+        return (
+          acc +
+          `${key}: {${generateTypeData(value, key)}}${
+            index + 1 === Object.keys(value).length ? '' : ', '
+          }`
+        )
+      }
+      return acc + `${key}: ${generateTypeData(value, key)}`
+    }, '')
   }
+  if (!isNaN(Number(value))) {
+    return 'number, '
+  }
+
+  return `${typeof value}, `
 }
 
-export default theme
+export const generateType = (primitives, key) => {
+  const typeData = generateTypeData(primitives, key)
+
+  return `{${typeData}}`
+}
+export default generatePrimitives

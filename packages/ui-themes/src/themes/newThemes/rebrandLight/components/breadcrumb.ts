@@ -22,30 +22,28 @@
  * SOFTWARE.
  */
 
-import primitives, { type Primitives } from './primitives'
-import semantics, { type Semantics } from './semantics'
-import avatar, { type Avatar } from './components/avatar'
-import pill, { type Pill } from './components/pill'
-import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
+import semantics from '../semantics.js'
+import type { Semantics } from '../semantics.js'
 
-export type Theme = {
-  primitives: Primitives
-  semantics: Semantics
-  components: {
-    avatar: Avatar
-    pill: Pill
-    breadcrumb: Breadcrumb
-  }
+export type Breadcrumb = {
+  fontFamily: Semantics['fontFamily']['base']
+  largeFontSize: string
+  largeSeparatorFontSize: Semantics['size']['icon']['md']
+  mediumFontSize: Semantics['fontSize']['textBase']
+  mediumSeparatorFontSize: Semantics['size']['icon']['sm']
+  separatorColor: Semantics['icon']['muted']
+  smallFontSize: Semantics['fontSize']['textSm']
+  smallSeparatorFontSize: Semantics['size']['icon']['xs']
 }
 
-const theme = {
-  primitives,
-  semantics,
-  components: {
-    avatar,
-    pill,
-    breadcrumb
-  }
+const breadcrumb: Breadcrumb = {
+  fontFamily: semantics.fontFamily.base,
+  largeFontSize: '22px',
+  largeSeparatorFontSize: semantics.size.icon.md,
+  mediumFontSize: semantics.fontSize.textBase,
+  mediumSeparatorFontSize: semantics.size.icon.sm,
+  separatorColor: semantics.icon.muted,
+  smallFontSize: semantics.fontSize.textSm,
+  smallSeparatorFontSize: semantics.size.icon.xs
 }
-
-export default theme
+export default breadcrumb

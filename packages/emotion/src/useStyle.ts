@@ -58,17 +58,18 @@ const useStyle = <P extends (theme: any, params: any) => any>(
   } = useStyleParams
   const theme = useTheme()
 
-  let baseComponentTheme = generateComponentTheme
-    ? generateComponentTheme(theme as BaseTheme)
-    : {}
+  let baseComponentTheme =
+    typeof generateComponentTheme === 'function'
+      ? generateComponentTheme(theme as BaseTheme)
+      : {}
   if (
-    //@ts-expect-error asd
+    //@ts-expect-error TODO fix these later
     theme.newTheme &&
-    //@ts-expect-error asd
+    //@ts-expect-error TODO fix these later
     theme.newTheme.components[componentId?.toLocaleLowerCase()]
   ) {
     baseComponentTheme =
-      //@ts-expect-error asd
+      //@ts-expect-error TODO fix these later
       theme.newTheme.components[componentId?.toLocaleLowerCase()]
   }
 

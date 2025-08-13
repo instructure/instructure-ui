@@ -29,12 +29,12 @@ export type Semantics = {
   background: {
     base: Primitives['color']['white']
     muted: Primitives['color']['grey']['grey10']
-    success: Primitives['color']['green']['green70']
-    warning: Primitives['color']['orange']['orange70']
-    error: Primitives['color']['red']['red70']
-    info: Primitives['color']['blue']['blue70']
-    aiTopGradient: Primitives['color']['violet']['violet70']
-    aiBottomGradient: Primitives['color']['sea']['sea70']
+    success: Primitives['color']['green']['green100']
+    warning: Primitives['color']['orange']['orange100']
+    error: Primitives['color']['red']['red100']
+    info: Primitives['color']['blue']['blue100']
+    aiTopGradient: Primitives['color']['violet']['violet100']
+    aiBottomGradient: Primitives['color']['sea']['sea100']
     divider: {
       base: Primitives['color']['grey']['grey30']
       onColor: Primitives['color']['white']
@@ -43,93 +43,93 @@ export type Semantics = {
     container: Primitives['color']['white']
     interactive: {
       primary: {
-        base: Primitives['color']['blue']['blue70']
-        hover: Primitives['color']['blue']['blue60']
-        active: Primitives['color']['blue']['blue80']
+        base: Primitives['color']['blue']['blue100']
+        hover: Primitives['color']['blue']['blue90']
+        active: Primitives['color']['blue']['blue110']
       }
       secondary: {
-        base: Primitives['color']['grey']['grey70']
-        hover: Primitives['color']['grey']['grey60']
-        active: Primitives['color']['grey']['grey80']
+        base: Primitives['color']['grey']['grey100']
+        hover: Primitives['color']['grey']['grey90']
+        active: Primitives['color']['grey']['grey110']
       }
       destructive: {
-        base: Primitives['color']['red']['red70']
-        hover: Primitives['color']['red']['red60']
-        active: Primitives['color']['red']['red80']
+        base: Primitives['color']['red']['red100']
+        hover: Primitives['color']['red']['red90']
+        active: Primitives['color']['red']['red110']
       }
     }
   }
   stroke: {
-    base: Primitives['color']['grey']['grey50']
+    base: Primitives['color']['grey']['grey90']
     muted: Primitives['color']['grey']['grey20']
-    success: Primitives['color']['green']['green70']
-    warning: Primitives['color']['orange']['orange70']
-    error: Primitives['color']['red']['red70']
-    info: Primitives['color']['blue']['blue70']
+    success: Primitives['color']['green']['green100']
+    warning: Primitives['color']['orange']['orange100']
+    error: Primitives['color']['red']['red100']
+    info: Primitives['color']['blue']['blue100']
     container: Primitives['color']['grey']['grey30']
-    aiTopGradient: Primitives['color']['violet']['violet70']
-    aiBottomGradient: Primitives['color']['sea']['sea70']
+    aiTopGradient: Primitives['color']['violet']['violet100']
+    aiBottomGradient: Primitives['color']['sea']['sea100']
     interactive: {
       primary: {
-        base: Primitives['color']['blue']['blue70']
-        hover: Primitives['color']['blue']['blue60']
-        active: Primitives['color']['blue']['blue80']
-      }
-      secondary: {
-        base: Primitives['color']['grey']['grey70']
-        hover: Primitives['color']['grey']['grey60']
-        active: Primitives['color']['grey']['grey80']
-      }
-      destructive: {
-        base: Primitives['color']['red']['red70']
-        hover: Primitives['color']['red']['red60']
-        active: Primitives['color']['red']['red80']
-      }
-    }
-    focusRing: Primitives['color']['blue']['blue70']
-  }
-  text: {
-    base: Primitives['color']['grey']['grey100']
-    muted: Primitives['color']['grey']['grey80']
-    placeholder: Primitives['color']['grey']['grey60']
-    disabled: Primitives['color']['grey']['grey50']
-    success: Primitives['color']['green']['green70']
-    warning: Primitives['color']['orange']['orange70']
-    error: Primitives['color']['red']['red70']
-    info: Primitives['color']['blue']['blue70']
-    onColor: Primitives['color']['white']
-    interactive: {
-      primary: {
-        base: Primitives['color']['blue']['blue70']
-        hover: Primitives['color']['blue']['blue60']
-        active: Primitives['color']['blue']['blue80']
+        base: Primitives['color']['blue']['blue100']
+        hover: Primitives['color']['blue']['blue90']
+        active: Primitives['color']['blue']['blue110']
       }
       secondary: {
         base: Primitives['color']['grey']['grey100']
-        hover: Primitives['color']['grey']['grey100']
-        active: Primitives['color']['grey']['grey100']
+        hover: Primitives['color']['grey']['grey90']
+        active: Primitives['color']['grey']['grey110']
       }
       destructive: {
-        base: Primitives['color']['red']['red70']
-        hover: Primitives['color']['red']['red60']
-        active: Primitives['color']['red']['red80']
+        base: Primitives['color']['red']['red100']
+        hover: Primitives['color']['red']['red90']
+        active: Primitives['color']['red']['red110']
+      }
+    }
+    focusRing: Primitives['color']['blue']['blue90']
+  }
+  text: {
+    base: Primitives['color']['grey']['grey120']
+    muted: Primitives['color']['grey']['grey90']
+    placeholder: Primitives['color']['grey']['grey70']
+    disabled: Primitives['color']['grey']['grey60']
+    success: Primitives['color']['green']['green100']
+    warning: Primitives['color']['orange']['orange100']
+    error: Primitives['color']['red']['red100']
+    info: Primitives['color']['blue']['blue100']
+    onColor: Primitives['color']['white']
+    interactive: {
+      primary: {
+        base: Primitives['color']['blue']['blue100']
+        hover: Primitives['color']['blue']['blue90']
+        active: Primitives['color']['blue']['blue110']
+      }
+      secondary: {
+        base: Primitives['color']['grey']['grey120']
+        hover: Primitives['color']['grey']['grey120']
+        active: Primitives['color']['grey']['grey120']
+      }
+      destructive: {
+        base: Primitives['color']['red']['red100']
+        hover: Primitives['color']['red']['red90']
+        active: Primitives['color']['red']['red110']
       }
     }
   }
   icon: {
-    base: Primitives['color']['grey']['grey110']
-    muted: Primitives['color']['grey']['grey70']
-    disabled: Primitives['color']['grey']['grey50']
-    success: Primitives['color']['green']['green70']
-    warning: Primitives['color']['orange']['orange70']
-    error: Primitives['color']['red']['red70']
-    info: Primitives['color']['blue']['blue70']
+    base: Primitives['color']['grey']['grey120']
+    muted: Primitives['color']['grey']['grey100']
+    disabled: Primitives['color']['grey']['grey60']
+    success: Primitives['color']['green']['green100']
+    warning: Primitives['color']['orange']['orange100']
+    error: Primitives['color']['red']['red100']
+    info: Primitives['color']['blue']['blue100']
     onColor: Primitives['color']['white']
     interactive: {
       primary: {
-        base: Primitives['color']['blue']['blue70']
-        hover: Primitives['color']['blue']['blue60']
-        active: Primitives['color']['blue']['blue80']
+        base: Primitives['color']['blue']['blue100']
+        hover: Primitives['color']['blue']['blue90']
+        active: Primitives['color']['blue']['blue110']
       }
       secondary: {
         base: Primitives['color']['grey']['grey100']
@@ -137,9 +137,9 @@ export type Semantics = {
         active: Primitives['color']['grey']['grey100']
       }
       destructive: {
-        base: Primitives['color']['red']['red70']
-        hover: Primitives['color']['red']['red60']
-        active: Primitives['color']['red']['red80']
+        base: Primitives['color']['red']['red100']
+        hover: Primitives['color']['red']['red90']
+        active: Primitives['color']['red']['red110']
       }
     }
   }
@@ -260,12 +260,12 @@ const semantics: Semantics = {
   background: {
     base: primitives.color.white,
     muted: primitives.color.grey.grey10,
-    success: primitives.color.green.green70,
-    warning: primitives.color.orange.orange70,
-    error: primitives.color.red.red70,
-    info: primitives.color.blue.blue70,
-    aiTopGradient: primitives.color.violet.violet70,
-    aiBottomGradient: primitives.color.sea.sea70,
+    success: primitives.color.green.green100,
+    warning: primitives.color.orange.orange100,
+    error: primitives.color.red.red100,
+    info: primitives.color.blue.blue100,
+    aiTopGradient: primitives.color.violet.violet100,
+    aiBottomGradient: primitives.color.sea.sea100,
     divider: {
       base: primitives.color.grey.grey30,
       onColor: primitives.color.white
@@ -274,93 +274,93 @@ const semantics: Semantics = {
     container: primitives.color.white,
     interactive: {
       primary: {
-        base: primitives.color.blue.blue70,
-        hover: primitives.color.blue.blue60,
-        active: primitives.color.blue.blue80
+        base: primitives.color.blue.blue100,
+        hover: primitives.color.blue.blue90,
+        active: primitives.color.blue.blue110
       },
       secondary: {
-        base: primitives.color.grey.grey70,
-        hover: primitives.color.grey.grey60,
-        active: primitives.color.grey.grey80
+        base: primitives.color.grey.grey100,
+        hover: primitives.color.grey.grey90,
+        active: primitives.color.grey.grey110
       },
       destructive: {
-        base: primitives.color.red.red70,
-        hover: primitives.color.red.red60,
-        active: primitives.color.red.red80
+        base: primitives.color.red.red100,
+        hover: primitives.color.red.red90,
+        active: primitives.color.red.red110
       }
     }
   },
   stroke: {
-    base: primitives.color.grey.grey50,
+    base: primitives.color.grey.grey90,
     muted: primitives.color.grey.grey20,
-    success: primitives.color.green.green70,
-    warning: primitives.color.orange.orange70,
-    error: primitives.color.red.red70,
-    info: primitives.color.blue.blue70,
+    success: primitives.color.green.green100,
+    warning: primitives.color.orange.orange100,
+    error: primitives.color.red.red100,
+    info: primitives.color.blue.blue100,
     container: primitives.color.grey.grey30,
-    aiTopGradient: primitives.color.violet.violet70,
-    aiBottomGradient: primitives.color.sea.sea70,
+    aiTopGradient: primitives.color.violet.violet100,
+    aiBottomGradient: primitives.color.sea.sea100,
     interactive: {
       primary: {
-        base: primitives.color.blue.blue70,
-        hover: primitives.color.blue.blue60,
-        active: primitives.color.blue.blue80
-      },
-      secondary: {
-        base: primitives.color.grey.grey70,
-        hover: primitives.color.grey.grey60,
-        active: primitives.color.grey.grey80
-      },
-      destructive: {
-        base: primitives.color.red.red70,
-        hover: primitives.color.red.red60,
-        active: primitives.color.red.red80
-      }
-    },
-    focusRing: primitives.color.blue.blue70
-  },
-  text: {
-    base: primitives.color.grey.grey100,
-    muted: primitives.color.grey.grey80,
-    placeholder: primitives.color.grey.grey60,
-    disabled: primitives.color.grey.grey50,
-    success: primitives.color.green.green70,
-    warning: primitives.color.orange.orange70,
-    error: primitives.color.red.red70,
-    info: primitives.color.blue.blue70,
-    onColor: primitives.color.white,
-    interactive: {
-      primary: {
-        base: primitives.color.blue.blue70,
-        hover: primitives.color.blue.blue60,
-        active: primitives.color.blue.blue80
+        base: primitives.color.blue.blue100,
+        hover: primitives.color.blue.blue90,
+        active: primitives.color.blue.blue110
       },
       secondary: {
         base: primitives.color.grey.grey100,
-        hover: primitives.color.grey.grey100,
-        active: primitives.color.grey.grey100
+        hover: primitives.color.grey.grey90,
+        active: primitives.color.grey.grey110
       },
       destructive: {
-        base: primitives.color.red.red70,
-        hover: primitives.color.red.red60,
-        active: primitives.color.red.red80
+        base: primitives.color.red.red100,
+        hover: primitives.color.red.red90,
+        active: primitives.color.red.red110
+      }
+    },
+    focusRing: primitives.color.blue.blue90
+  },
+  text: {
+    base: primitives.color.grey.grey120,
+    muted: primitives.color.grey.grey90,
+    placeholder: primitives.color.grey.grey70,
+    disabled: primitives.color.grey.grey60,
+    success: primitives.color.green.green100,
+    warning: primitives.color.orange.orange100,
+    error: primitives.color.red.red100,
+    info: primitives.color.blue.blue100,
+    onColor: primitives.color.white,
+    interactive: {
+      primary: {
+        base: primitives.color.blue.blue100,
+        hover: primitives.color.blue.blue90,
+        active: primitives.color.blue.blue110
+      },
+      secondary: {
+        base: primitives.color.grey.grey120,
+        hover: primitives.color.grey.grey120,
+        active: primitives.color.grey.grey120
+      },
+      destructive: {
+        base: primitives.color.red.red100,
+        hover: primitives.color.red.red90,
+        active: primitives.color.red.red110
       }
     }
   },
   icon: {
-    base: primitives.color.grey.grey110,
-    muted: primitives.color.grey.grey70,
-    disabled: primitives.color.grey.grey50,
-    success: primitives.color.green.green70,
-    warning: primitives.color.orange.orange70,
-    error: primitives.color.red.red70,
-    info: primitives.color.blue.blue70,
+    base: primitives.color.grey.grey120,
+    muted: primitives.color.grey.grey100,
+    disabled: primitives.color.grey.grey60,
+    success: primitives.color.green.green100,
+    warning: primitives.color.orange.orange100,
+    error: primitives.color.red.red100,
+    info: primitives.color.blue.blue100,
     onColor: primitives.color.white,
     interactive: {
       primary: {
-        base: primitives.color.blue.blue70,
-        hover: primitives.color.blue.blue60,
-        active: primitives.color.blue.blue80
+        base: primitives.color.blue.blue100,
+        hover: primitives.color.blue.blue90,
+        active: primitives.color.blue.blue110
       },
       secondary: {
         base: primitives.color.grey.grey100,
@@ -368,9 +368,9 @@ const semantics: Semantics = {
         active: primitives.color.grey.grey100
       },
       destructive: {
-        base: primitives.color.red.red70,
-        hover: primitives.color.red.red60,
-        active: primitives.color.red.red80
+        base: primitives.color.red.red100,
+        hover: primitives.color.red.red90,
+        active: primitives.color.red.red110
       }
     }
   },

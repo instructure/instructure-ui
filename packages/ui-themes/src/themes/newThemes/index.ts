@@ -22,30 +22,16 @@
  * SOFTWARE.
  */
 
-import primitives, { type Primitives } from './primitives'
-import semantics, { type Semantics } from './semantics'
-import avatar, { type Avatar } from './components/avatar'
-import pill, { type Pill } from './components/pill'
-import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
-
-export type Theme = {
-  primitives: Primitives
-  semantics: Semantics
-  components: {
-    avatar: Avatar
-    pill: Pill
-    breadcrumb: Breadcrumb
-  }
+import canvas, { type Theme as Canvas } from './canvas'
+import canvasHighContrast, {
+  type Theme as CanvasHighContrast
+} from './canvasHighContrast'
+import rebrandLight, { type Theme as RebrandLight } from './rebrandLight'
+import rebrandDark, { type Theme as RebrandDark } from './rebrandDark'
+export { canvas, canvasHighContrast, rebrandLight, rebrandDark }
+export {
+  type Canvas,
+  type CanvasHighContrast,
+  type RebrandLight,
+  type RebrandDark
 }
-
-const theme = {
-  primitives,
-  semantics,
-  components: {
-    avatar,
-    pill,
-    breadcrumb
-  }
-}
-
-export default theme

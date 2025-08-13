@@ -33,13 +33,6 @@ type: example
     Checked In
   </Pill>
   <Pill
-    renderIcon={<IconEndLine />}
-    color="danger"
-    margin="x-small"
-  >
-    Missing
-  </Pill>
-  <Pill
     renderIcon={<IconClockLine />}
     color="warning"
     margin="x-small"
@@ -48,7 +41,7 @@ type: example
   </Pill>
   <Pill
     renderIcon={<IconMessageLine />}
-    color="alert"
+    color="error"
     margin="x-small"
   >
     Notification

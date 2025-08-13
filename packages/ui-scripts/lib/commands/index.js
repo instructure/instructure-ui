@@ -33,6 +33,7 @@ import clean from '../build/clean.js'
 import build from '../build/babel.js'
 import generateAllTokens from '../build/generate-all-tokens.js'
 import buildIcons from '../icons/build-icons.js'
+import buildThemes from '../build/build-themes.js'
 
 export const yargCommands = [
   bump,
@@ -45,5 +46,6 @@ export const yargCommands = [
   clean,
   build,
   generateAllTokens,
-  buildIcons
+  buildIcons,
+  buildThemes
 ]
