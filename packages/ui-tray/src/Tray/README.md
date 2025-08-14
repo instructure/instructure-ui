@@ -25,9 +25,6 @@ The Tray is an actionable container that is triggered by click and does not need
     renderCloseButton() {
       return (
         <Flex>
-          <Flex.Item shouldGrow shouldShrink>
-            <Heading>Hello</Heading>
-          </Flex.Item>
           <Flex.Item>
             <CloseButton
               placement="end"
@@ -35,6 +32,9 @@ The Tray is an actionable container that is triggered by click and does not need
               screenReaderLabel="Close"
               onClick={this.hideTray}
             />
+          </Flex.Item>
+          <Flex.Item shouldGrow shouldShrink>
+            <Heading>Hello</Heading>
           </Flex.Item>
         </Flex>
       )
@@ -86,9 +86,6 @@ The Tray is an actionable container that is triggered by click and does not need
 
     const renderCloseButton = () => (
       <Flex>
-        <Flex.Item shouldGrow shouldShrink>
-          <Heading>Hello</Heading>
-        </Flex.Item>
         <Flex.Item>
           <CloseButton
             placement="end"
@@ -96,6 +93,9 @@ The Tray is an actionable container that is triggered by click and does not need
             screenReaderLabel="Close"
             onClick={hideTray}
           />
+        </Flex.Item>
+        <Flex.Item shouldGrow shouldShrink>
+          <Heading>Hello</Heading>
         </Flex.Item>
       </Flex>
     )
@@ -159,7 +159,7 @@ type: embed
     <Figure.Item>Keyboard focus must be set in the tray when it appears; usually on the first interactive element</Figure.Item>
     <Figure.Item>Trays must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</Figure.Item>
     <Figure.Item>When a user closes a tray, focus must return to a logical place within the page. This is usually the element that triggered opening the tray</Figure.Item>
-    <Figure.Item>We recommend that trays begin with a heading (typically H2)</Figure.Item>
+    <Figure.Item>We recommend that trays begin with a heading (typically H2). However, when configuring the component, the button to close the Tray should precede the heading. This ensures screen readers announce the Tray's content in a logical order.</Figure.Item>
   </Figure>
 </Guidelines>
 ```
