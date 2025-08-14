@@ -1126,7 +1126,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (subPageId) {
       optionProps.renderAfterLabel = <IconArrowOpenEndSolid />
       optionProps['aria-haspopup'] = true
-      optionProps.role = customRole || 'button'
+      optionProps.role = customRole || 'menuitem'
       warn(
         !renderAfterLabel,
         `The prop "renderAfterLabel" is reserved on item with id: "${id}". When it has "subPageId" provided, a navigation arrow will render after the label.`

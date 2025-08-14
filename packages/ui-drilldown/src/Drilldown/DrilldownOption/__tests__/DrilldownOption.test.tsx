@@ -211,7 +211,7 @@ describe('<Drilldown.Option />', () => {
       )
       const option = screen.getByLabelText('Option')
 
-      expect(option).toHaveAttribute('role', 'button')
+      expect(option).toHaveAttribute('role', 'menuitem')
       expect(option).toHaveAttribute('aria-haspopup', 'true')
     })
   })

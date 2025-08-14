@@ -780,8 +780,14 @@ class Select extends Component<SelectProps> {
       onBlur: utils.createChainedFunction(onBlur, onRequestHideOptions),
       ...overrideProps
     }
-
-    return <TextInput {...triggerProps} {...getInputProps(inputProps)} />
+    // suppressHydrationWarning is needed because `role` depends on the browser type
+    return (
+      <TextInput
+        {...triggerProps}
+        {...getInputProps(inputProps)}
+        suppressHydrationWarning
+      />
+    )
   }
 
   render() {

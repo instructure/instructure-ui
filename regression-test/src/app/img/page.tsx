@@ -23,52 +23,52 @@
  */
 
 'use client'
-import { Link } from 'instructure-ui/ui-link/es/index'
+import React from 'react'
+import { Img as ig } from 'instructure-ui/ui-img/es/index'
+import { View as vw } from 'instructure-ui/ui-view/es/index'
 
-const components = [
-  'small-components',
-  'alert',
-  'avatar',
-  'badge',
-  'billboard',
-  'breadcrumb',
-  'button',
-  'tooltip',
-  'byline',
-  'calendar',
-  'checkbox',
-  'checkboxgroup',
-  'colorpicker',
-  'contextview',
-  'dateinput',
-  'datetimeinput',
-  'drilldown',
-  'filedrop',
-  'form-errors',
-  'heading',
-  'img',
-  'link',
-  'menu',
-  'options',
-  'pagination',
-  'progressbar',
-  'select',
-  'table',
-  'tabs',
-  'treebrowser',
-  'view'
-]
+const Img = ig as any
+const View = vw as any
 
-export default function Home() {
+export default function ImgPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6">
-      <ul>
-        {components.map((component) => (
-          <li key={component}>
-            <Link href={component}>{component}</Link>
-          </li>
-        ))}
-      </ul>
+    <main className="flex gap-12 p-8 flex-col items-start axe-test">
+      <section>
+        <Img src="/assets/avatarSquare.jpg" alt="Sample image" />
+      </section>
+
+      <section>
+        <Img
+          src="/assets/avatarSquare.jpg"
+          overlay={{ color: '#0374B5', opacity: 9, blend: 'overlay' }}
+          alt="Overlay example"
+          margin="x-small"
+        />
+      </section>
+
+      <section>
+        <div style={{ width: '5rem', height: '7rem' }}>
+          <Img src="/assets/avatarSquare.jpg" constrain="cover" alt="test" />
+        </div>
+      </section>
+
+      <section>
+        <View
+          as="div"
+          withGrayscale
+          background="primary-inverse"
+          width="500px"
+          height="200px"
+          textAlign="center"
+        >
+          <Img
+            withBlur
+            src="/assets/avatarSquare.jpg"
+            constrain="contain"
+            alt=""
+          />
+        </View>
+      </section>
     </main>
   )
 }

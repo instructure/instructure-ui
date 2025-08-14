@@ -22,53 +22,20 @@
  * SOFTWARE.
  */
 
-'use client'
-import { Link } from 'instructure-ui/ui-link/es/index'
+import dynamic from 'next/dynamic'
+import React from 'react'
 
-const components = [
-  'small-components',
-  'alert',
-  'avatar',
-  'badge',
-  'billboard',
-  'breadcrumb',
-  'button',
-  'tooltip',
-  'byline',
-  'calendar',
-  'checkbox',
-  'checkboxgroup',
-  'colorpicker',
-  'contextview',
-  'dateinput',
-  'datetimeinput',
-  'drilldown',
-  'filedrop',
-  'form-errors',
-  'heading',
-  'img',
-  'link',
-  'menu',
-  'options',
-  'pagination',
-  'progressbar',
-  'select',
-  'table',
-  'tabs',
-  'treebrowser',
-  'view'
-]
+const ComponentWithChildren = (props: any) => (
+  <React.Fragment>{props.children}</React.Fragment>
+)
+/**
+ * This component disables SSR for its children. Use it as:
+ * ```
+ * <NoSSR>here is no SSR</NoSSR>
+ * ```
+ */
+const NoSSR = dynamic(() => Promise.resolve(ComponentWithChildren), {
+  ssr: false
+})
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6">
-      <ul>
-        {components.map((component) => (
-          <li key={component}>
-            <Link href={component}>{component}</Link>
-          </li>
-        ))}
-      </ul>
-    </main>
-  )
-}
+export { NoSSR }

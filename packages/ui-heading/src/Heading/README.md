@@ -49,9 +49,9 @@ Pre-configured and with unique styles, the `ai-headings` are used for standardiz
 type: example
 ---
 <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
- <Heading aiVariant="stacked">Nutrition Facts</Heading>
- <Heading aiVariant="horizontal">Nutrition Facts</Heading>
- <Heading aiVariant="iconOnly">Nutrition Facts</Heading>
+  <Heading aiVariant="stacked" level="h2">Nutrition Facts</Heading>
+  <Heading aiVariant="horizontal" level="h3">Nutrition Facts</Heading>
+  <Heading aiVariant="iconOnly" level="h4">Nutrition Facts</Heading>
 </div>
 ```
 
