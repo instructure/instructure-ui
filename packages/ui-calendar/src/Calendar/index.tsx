@@ -28,11 +28,11 @@ import { View } from '@instructure/ui-view'
 import {
   safeCloneElement,
   callRenderProp,
-  omitProps
+  omitProps,
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 
 import { testable } from '@instructure/ui-testable'
@@ -64,6 +64,7 @@ import { SimpleSelect } from '@instructure/ui-simple-select'
 category: components
 ---
 **/
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Calendar extends Component<CalendarProps, CalendarState> {
@@ -82,14 +83,15 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   }
 
   ref: Element | null = null
-  private _weekdayHeaderIds = (
-    this.props.renderWeekdayLabels || this.defaultWeekdays
-  ).reduce((ids: Record<number, string>, _label, i) => {
-    return { ...ids, [i]: uid(`weekday-header-${i}`) }
-  }, {})
+  private _weekdayHeaderIds
+
   constructor(props: CalendarProps) {
     super(props)
-
+    this._weekdayHeaderIds = (
+      this.props.renderWeekdayLabels || this.defaultWeekdays
+    ).reduce((ids: Record<number, string>, _label, i) => {
+      return { ...ids, [i]: this.props.deterministicId!('weekday-header') }
+    }, {})
     this.state = this.calculateState(
       this.locale(),
       this.timezone(),

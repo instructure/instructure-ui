@@ -37,7 +37,7 @@ afterEach(() => {
   // After each test, assert that console.error was not called
   // Add a small wait if your application might log errors asynchronously
   cy.wait(100).then(() => {
-    expect(windowErrorSpy).to.not.be.called
+    expect(windowErrorSpy).to.have.callCount(0)
   })
 })
 
@@ -70,12 +70,6 @@ const axeOptions: { runOnly: RunOnly } = {
 }
 
 describe('visual regression test', () => {
-  it('check button', () => {
-    cy.visit('http://localhost:3000/button')
-    cy.injectAxe()
-    cy.checkA11y('.axe-test', axeOptions, terminalLog)
-  })
-
   it('check alert', () => {
     cy.visit('http://localhost:3000/alert')
     cy.injectAxe()
@@ -89,9 +83,94 @@ describe('visual regression test', () => {
     cy.checkA11y('.axe-test', axeOptions, terminalLog)
   })
 
+  it('check badge', () => {
+    cy.visit('http://localhost:3000/badge')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check billboard', () => {
+    cy.visit('http://localhost:3000/billboard')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check breadcrumb', () => {
+    cy.visit('http://localhost:3000/breadcrumb')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check button', () => {
+    cy.visit('http://localhost:3000/button')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check byline', () => {
+    cy.visit('http://localhost:3000/byline')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
   it('check tooltip', () => {
     cy.visit('http://localhost:3000/tooltip')
     cy.wait(300) // tooltips render a frame later, Chromatic needs a bit more delay
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check calendar', () => {
+    cy.visit('http://localhost:3000/calendar')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check checkbox', () => {
+    cy.visit('http://localhost:3000/checkbox')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check checkboxgroup', () => {
+    cy.visit('http://localhost:3000/checkboxgroup')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check contextview', () => {
+    cy.visit('http://localhost:3000/contextview')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check dateinput', () => {
+    cy.visit('http://localhost:3000/dateinput')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check datetimeinput', () => {
+    cy.visit('http://localhost:3000/datetimeinput')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check drilldown', () => {
+    cy.visit('http://localhost:3000/drilldown')
+    cy.wait(300) // Drilldown dropdown renders a frame later, Chromatic needs a bit more delay
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check filedrop', () => {
+    cy.visit('http://localhost:3000/filedrop')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check form-errors', () => {
+    cy.visit('http://localhost:3000/form-errors')
     cy.injectAxe()
     cy.checkA11y('.axe-test', axeOptions, terminalLog)
   })

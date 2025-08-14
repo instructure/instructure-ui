@@ -23,7 +23,13 @@
  */
 'use client'
 import React, { useEffect, useRef } from 'react'
-import { Button } from 'instructure-ui/ui-buttons/es/index'
+import {
+  Button,
+  CondensedButton,
+  CloseButton
+} from 'instructure-ui/ui-buttons/es/index'
+import { View } from 'instructure-ui/ui-view/es/index'
+import { Flex } from 'instructure-ui/ui-flex/es/index'
 import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
 
 export default function ButtonPage() {
@@ -41,20 +47,58 @@ export default function ButtonPage() {
   const sizes = ['small', 'medium', 'large']
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
-      <Button>Button</Button>
-      {colors.map((color) => (
-        <Button key={'color' + color} color={color}>
-          {color} color
-        </Button>
-      ))}
-      {sizes.map((size) => (
-        <Button key={'size' + size} size={size}>
-          {size} size
-        </Button>
-      ))}
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <Button>Button</Button>
+        {colors.map((color) => (
+          <Button key={'color' + color} color={color}>
+            {color} color
+          </Button>
+        ))}
+      </div>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        {sizes.map((size) => (
+          <Button key={'size' + size} size={size}>
+            {size} size
+          </Button>
+        ))}
+      </div>
       <Button renderIcon={IconAddLine}>Icon Button</Button>
       <Button disabled>Disabled Button</Button>
       <Button ref={myElementRef}>focused button</Button>
+      <CondensedButton>CondensedButton</CondensedButton>
+      {/* Positioned CloseButton (placement=end, offset=small) */}
+      <View
+        display="block"
+        position="relative"
+        height="5rem"
+        width="10rem"
+        background="primary"
+        shadow="resting"
+      >
+        <CloseButton placement="end" offset="small" screenReaderLabel="Close" />
+      </View>
+
+      {/* Static layout with Flex and CloseButton */}
+      <View
+        display="block"
+        position="relative"
+        background="primary"
+        shadow="resting"
+      >
+        <Flex
+          height="6rem"
+          justifyItems="space-between"
+          alignItems="center"
+          padding="medium"
+        >
+          <Flex.Item shouldShrink shouldGrow>
+            <h2>A heading</h2>
+          </Flex.Item>
+          <Flex.Item padding="none none none medium">
+            <CloseButton size="medium" screenReaderLabel="Close" />
+          </Flex.Item>
+        </Flex>
+      </View>
     </main>
   )
 }
