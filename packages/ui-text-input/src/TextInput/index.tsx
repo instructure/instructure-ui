@@ -97,6 +97,18 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
     this.ref = el
 
+    // Find the IconButton's span with class ending in 'content' and set its height
+    // This is a workaround until this component is redesigned (see INSTUI-4651).
+    // TODO: Remove this if INSTUI-4642 is completed.
+    if (el) {
+      const contentSpan = el.querySelector(
+        'span[class$="baseButton__content"]'
+      ) as HTMLElement | null
+      if (contentSpan) {
+        contentSpan.style.height = '2.25rem'
+      }
+    }
+
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
