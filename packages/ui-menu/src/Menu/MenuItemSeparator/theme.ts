@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): MenuSeparatorTheme => {
   const { colors, spacing, borders } = theme
 
   const componentVariables: MenuSeparatorTheme = {
-    background: colors?.contrasts?.grey1214,
+    background: colors?.contrasts?.grey3045,
     height: borders?.widthSmall,
     margin: `0 ${spacing?.small}`
   }

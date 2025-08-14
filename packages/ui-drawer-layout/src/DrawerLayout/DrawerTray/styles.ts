@@ -89,7 +89,8 @@ const generateStyle = (
     drawerTrayWithShadow: {
       label: 'drawerTray--with-shadow',
       ...trayStyle,
-      boxShadow: componentTheme.boxShadow
+      boxShadow: componentTheme.boxShadow,
+      border: 0
     },
     drawerTrayContent: {
       label: 'drawerTray__content',
