@@ -76,7 +76,6 @@ import { shell } from '@codemirror/legacy-modes/mode/shell'
 import { yaml } from '@codemirror/legacy-modes/mode/yaml'
 // import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 
-import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   passthroughProps,
@@ -108,7 +107,6 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
-@testable()
 class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   static readonly componentId = 'SourceCodeEditor'
 
@@ -665,6 +663,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
 
     return (
       <div
+        data-cid="SourceCodeEditor"
         ref={this.handleRef}
         css={styles?.codeEditor}
         {...passthroughProps(

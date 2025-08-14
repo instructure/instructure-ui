@@ -35,7 +35,6 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { logWarn as warn } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -52,7 +51,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 
@@ -249,6 +247,7 @@ class Link extends Component<LinkProps, LinkState> {
         type={type}
         tabIndex={tabIndex}
         css={this.props.styles?.link}
+        data-cid="Link"
       >
         {renderIcon && iconPlacement === 'start' ? this.renderIcon() : null}
         {children}

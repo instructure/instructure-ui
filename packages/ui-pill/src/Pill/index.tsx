@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { Tooltip } from '@instructure/ui-tooltip'
 import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip'
 
@@ -44,7 +43,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Pill extends Component<PillProps, PillState> {
   static readonly componentId = 'Pill'
 
@@ -133,6 +131,7 @@ class Pill extends Component<PillProps, PillState> {
         position="relative"
         withFocusOutline={focused}
         focusColor="info"
+        data-cid="Pill"
       >
         <div css={styles?.pill}>
           {renderIcon && <div css={styles?.icon}>{renderIcon}</div>}

@@ -27,7 +27,6 @@ import { Component } from 'react'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -40,7 +39,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, null)
-@testable()
 class Rating extends Component<RatingProps> {
   static readonly componentId = 'Rating'
 
@@ -109,6 +107,7 @@ class Rating extends Component<RatingProps> {
         margin={margin}
         display="inline-block"
         elementRef={this.handleRef}
+        data-cid="Rating"
       >
         <ScreenReaderContent>{valueText}</ScreenReaderContent>
         {[...Array(this.filled)].map((_x, i) => (

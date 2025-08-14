@@ -31,7 +31,6 @@ import {
 import { Expandable } from '@instructure/ui-expandable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -47,7 +46,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ToggleDetails extends Component<ToggleDetailsProps> {
   static readonly componentId = 'ToggleDetails'
   static allowedProps = allowedProps
@@ -186,7 +184,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
-            <div css={this.props.styles?.toggleDetails} ref={this.ref}>
+            <div css={this.props.styles?.toggleDetails} ref={this.ref} data-cid="ToggleDetails">
               {this.renderToggle(getToggleProps(), expanded)}
               {this.renderDetails(expanded, getDetailsProps())}
             </div>

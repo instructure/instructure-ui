@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { withStyle } from '@instructure/emotion'
-import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
@@ -42,7 +41,6 @@ id: Menu.Separator
 @module MenuItemSeparator
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class MenuItemSeparator extends Component<MenuSeparatorProps> {
   static readonly componentId = 'Menu.Separator'
 
@@ -72,6 +70,7 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
         role="presentation"
         css={this.props.styles?.menuItemSeparator}
         ref={this.handleRef}
+        data-cid="MenuItemSeparator"
       />
     )
   }

@@ -31,7 +31,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { px } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import {
   getBoundingClientRect,
   requestAnimationFrame
@@ -80,7 +79,6 @@ private: true
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarSmallViewportLayout extends Component<
   TopNavBarSmallViewportLayoutProps,
   TopNavBarSmallViewportLayoutState
@@ -627,6 +625,7 @@ class TopNavBarSmallViewportLayout extends Component<
         {...omitProps(this.props, allowedProps)}
         ref={this.handleRef}
         aria-label={navLabel}
+        data-cid="TopNavBarSmallViewportLayout"
       >
         <Global styles={styles?.globalStyles} />
 

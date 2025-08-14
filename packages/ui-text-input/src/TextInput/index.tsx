@@ -32,7 +32,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
@@ -53,7 +52,6 @@ tags: form, field
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TextInput extends Component<TextInputProps, TextInputState> {
   static readonly componentId = 'TextInput'
 
@@ -346,6 +344,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         layout={this.props.layout}
         elementRef={this.handleRef}
         margin={this.props.margin}
+        data-cid="TextInput"
       >
         <span css={styles?.facade}>
           {renderBeforeOrAfter ? (

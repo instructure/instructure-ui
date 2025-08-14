@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -42,7 +41,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ProgressBar extends Component<ProgressBarProps> {
   static readonly componentId = 'ProgressBar'
 
@@ -115,6 +113,7 @@ class ProgressBar extends Component<ProgressBarProps> {
         css={styles?.progressBar}
         margin={this.props.margin}
         elementRef={this.handleRef}
+        data-cid="ProgressBar"
       >
         <span css={styles?.trackLayout}>
           <progress

@@ -31,7 +31,6 @@ import {
 import TopNavBar from '../index'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
-import { testable } from '@instructure/ui-testable'
 import {
   IconArrowOpenStartLine,
   IconHamburgerLine
@@ -48,7 +47,6 @@ id: TopNavBar.Breadcrumb
 @module TopNavBarBreadcrumb
  **/
 @withStyle(generateStyle, null)
-@testable()
 class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState
@@ -114,12 +112,12 @@ class TopNavBarBreadcrumb extends Component<
     return (
       this.context.inverseColor &&
       (this.context.layout === 'desktop' ? (
-        <div ref={this.handleRef} css={styles?.topNavBarBreadcrumb}>
+        <div ref={this.handleRef} css={styles?.topNavBarBreadcrumb} data-cid="TopNavBarBreadcrumb">
           <div css={styles?.iconContainer}>{this.renderMenu()}</div>
           <div css={styles?.breadcrumbContainer}>{children}</div>
         </div>
       ) : (
-        <div ref={this.handleRef} css={styles?.topNavBarBreadcrumb}>
+        <div ref={this.handleRef} css={styles?.topNavBarBreadcrumb} data-cid="TopNavBarBreadcrumb">
           <div css={styles?.linkContainer}>
             {lastButOneLink && (
               <Link
