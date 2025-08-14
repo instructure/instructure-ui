@@ -35,7 +35,6 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { withStyle } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   pickProps,
@@ -55,7 +54,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TextArea extends Component<TextAreaProps> {
   static readonly componentId = 'TextArea'
 
@@ -380,6 +378,7 @@ class TextArea extends Component<TextAreaProps> {
           this.ref = el
         }}
         margin={margin}
+        data-cid="TextArea"
       >
         <div
           css={this.props.styles?.textAreaLayout}

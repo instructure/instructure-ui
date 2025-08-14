@@ -41,7 +41,6 @@ import {
   IconArrowOpenEndSolid,
   IconArrowOpenDownSolid
 } from '@instructure/ui-icons'
-import { testable } from '@instructure/ui-testable'
 import type { ToggleGroupProps } from './props'
 import { allowedProps } from './props'
 
@@ -56,7 +55,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 
@@ -174,6 +172,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
               borderRadius="medium"
               background="primary"
               borderColor={styles?.borderColor}
+              data-cid="ToggleGroup"
             >
               <Flex
                 padding={

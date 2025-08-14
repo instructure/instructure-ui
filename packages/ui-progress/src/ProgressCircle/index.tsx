@@ -27,7 +27,6 @@ import { Component } from 'react'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -42,7 +41,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ProgressCircle extends Component<
   ProgressCircleProps,
   ProgressCircleState
@@ -152,6 +150,7 @@ class ProgressCircle extends Component<
         elementRef={this.handleRef}
         css={styles?.progressCircle}
         margin={this.props.margin}
+        data-cid="ProgressCircle"
       >
         <ScreenReaderContent>
           <progress

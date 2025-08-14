@@ -31,7 +31,6 @@ import {
 } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
@@ -88,7 +87,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
 
@@ -575,6 +573,7 @@ class Pagination extends Component<PaginationProps> {
         onClick={onClick}
         disabled={disabled}
         buttonRef={handleButtonRef}
+        data-cid="PaginationArrowButton"
       />
     ) : null
   }
@@ -614,6 +613,7 @@ class Pagination extends Component<PaginationProps> {
         onClick={onClick}
         disabled={disabled}
         buttonRef={handleButtonRef}
+        data-cid="PaginationArrowButton"
       />
     ) : null
   }
@@ -638,6 +638,7 @@ class Pagination extends Component<PaginationProps> {
         margin={this.props.margin}
         css={this.props.styles?.pagination}
         aria-labelledby={this.props.label ? this._labelId : undefined}
+        data-cid="Pagination"
       >
         {this.props.label && this.renderLabel()}
         <View display="inline-block" css={this.props.styles?.pages}>

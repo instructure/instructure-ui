@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -42,7 +41,6 @@ category: components
 **/
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
-@testable()
 class CondensedButton extends Component<CondensedButtonProps> {
   static readonly componentId = 'CondensedButton'
 
@@ -118,6 +116,7 @@ class CondensedButton extends Component<CondensedButtonProps> {
         ref={(component) => {
           this._baseButton = component
         }}
+        data-cid="CondensedButton"
       >
         {children}
       </BaseButton>

@@ -30,7 +30,6 @@ import {
   omitProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { logError as error } from '@instructure/console'
 
 import { withStyle } from '@instructure/emotion'
@@ -47,7 +46,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Spinner extends Component<SpinnerProps, SpinnerState> {
   static readonly componentId = 'Spinner'
   static allowedProps = allowedProps
@@ -132,6 +130,7 @@ static defaultProps = {
         elementRef={this.handleRef}
         css={this.props.styles?.spinner}
         margin={this.props.margin}
+        data-cid="Spinner"
       >
         <svg
           css={this.props.styles?.circle}

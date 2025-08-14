@@ -26,7 +26,6 @@ import { Component, Children } from 'react'
 
 import { error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -46,7 +45,6 @@ id: TopNavBar.User
 @module TopNavBarUser
 **/
 @withStyle(generateStyle, null)
-@testable()
 class TopNavBarUser extends Component<TopNavBarUserProps> {
   static readonly componentId = 'TopNavBar.User'
 
@@ -119,6 +117,7 @@ class TopNavBarUser extends Component<TopNavBarUserProps> {
         {...omitProps(this.props, allowedProps)}
         ref={this.handleRef}
         css={styles?.topNavBarUser}
+        data-cid="TopNavBarUser"
       >
         {this.content}
       </div>

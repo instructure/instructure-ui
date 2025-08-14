@@ -33,6 +33,7 @@ import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type InlineSVGOwnProps = {
   children?: React.ReactNode
+  'data-cid'?: string
   src?: string
   title?: string
   description?: string

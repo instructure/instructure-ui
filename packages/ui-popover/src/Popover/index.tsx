@@ -609,7 +609,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
     if (this.props.positionTarget) {
       return (
-        <span ref={this.handleRef}>
+        <span ref={this.handleRef} data-cidteszt="positionTargetPopoverben">
           {this.renderTrigger()}
           <Position {...positionProps}>{this.renderContent()}</Position>
         </span>
@@ -620,6 +620,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
           {...positionProps}
           renderTarget={this.renderTrigger()}
           elementRef={this.handleRef}
+          data-cidteszt="positionPopoverben"
         >
           {this.renderContent()}
         </Position>

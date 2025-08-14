@@ -32,7 +32,6 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { MenuItem } from '../MenuItem'
 import type { OnMenuItemSelect, MenuItemProps } from '../MenuItem/props'
@@ -59,7 +58,6 @@ id: Menu.Group
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   static readonly componentId = 'Menu.Group'
 
@@ -230,6 +228,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
         {...props}
         css={this.props.styles?.menuItemGroup}
         ref={this.handleRef}
+        data-cid="MenuItemGroup"
       >
         {this.renderLabel()}
         <div

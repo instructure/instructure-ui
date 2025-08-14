@@ -305,7 +305,7 @@ class Position extends Component<PositionProps, PositionState> {
   render() {
     const props = { [Position.locatorAttribute]: this._id }
     return (
-      <span {...props} css={this.props.styles?.position} ref={this.handleRef}>
+      <span {...props} css={this.props.styles?.position} ref={this.handleRef} data-cid="Position" data-arrowlofasz="OOOOOOO">
         {this.renderTarget()}
         {this.renderContent()}
       </span>

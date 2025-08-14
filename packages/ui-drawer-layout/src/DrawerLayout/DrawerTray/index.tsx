@@ -30,7 +30,6 @@ import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import { Dialog } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
@@ -56,7 +55,6 @@ id: DrawerLayout.Tray
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
-@testable()
 class DrawerTray extends Component<
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState
@@ -245,6 +243,7 @@ class DrawerTray extends Component<
                 {...omitProps(props, DrawerTray.allowedProps)}
                 ref={this.handleContentRef}
                 css={trayStyles}
+                data-cid="DrawerTray"
               >
                 <Dialog
                   open

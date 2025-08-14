@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -42,7 +41,6 @@ category: components
 **/
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
-@testable()
 class Button extends Component<ButtonProps> {
   static readonly componentId = 'Button'
 
@@ -129,7 +127,7 @@ class Button extends Component<ButtonProps> {
       themeOverride
     }
 
-    return <BaseButton {...buttonProps}>{children}</BaseButton>
+    return <BaseButton {...buttonProps} data-cid="Button">{children}</BaseButton>
   }
 }
 

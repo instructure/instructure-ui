@@ -26,7 +26,6 @@ import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { ListItem } from './ListItem'
 
@@ -44,7 +43,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class List extends Component<ListProps> {
   static readonly componentId = 'List'
 
@@ -103,6 +101,7 @@ class List extends Component<ListProps> {
         margin={margin}
         elementRef={this.handleRef}
         display="block"
+        data-cid="List"
       >
         {this.renderChildren()}
       </View>

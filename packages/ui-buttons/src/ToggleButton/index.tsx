@@ -24,8 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip'
@@ -40,7 +38,6 @@ category: components
 ---
 **/
 
-@testable()
 class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
   static readonly componentId = 'ToggleButton'
 
@@ -124,6 +121,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           onClick={onClick}
           interaction={interaction}
           aria-pressed={status === 'pressed'}
+          data-cid="ToggleButton"
         >
           {callRenderProp(renderIcon)}
         </IconButton>

@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -44,7 +43,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class CloseButton extends Component<CloseButtonProps> {
   static readonly componentId = 'CloseButton'
 
@@ -127,6 +125,7 @@ class CloseButton extends Component<CloseButtonProps> {
           href={href}
           cursor={cursor}
           tabIndex={tabIndex}
+          data-cid="CloseButton"
         >
           <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
         </BaseButton>

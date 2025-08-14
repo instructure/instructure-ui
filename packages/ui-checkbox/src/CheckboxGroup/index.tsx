@@ -32,7 +32,6 @@ import {
   omitProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
 
@@ -50,7 +49,6 @@ category: components
 **/
 
 @withDeterministicId()
-@testable()
 class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static readonly componentId = 'CheckboxGroup'
 
@@ -147,6 +145,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
         vAlign="top"
         messagesId={this._messagesId}
         elementRef={this.handleRef}
+        data-cid="CheckboxGroup"
       >
         {this.renderChildren()}
       </FormFieldGroup>

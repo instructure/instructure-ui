@@ -28,7 +28,6 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -47,7 +46,6 @@ id: DrawerLayout.Content
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class DrawerContent extends Component<DrawerLayoutContentProps> {
   static readonly componentId = 'DrawerLayout.Content'
 
@@ -138,6 +136,7 @@ class DrawerContent extends Component<DrawerLayoutContentProps> {
         ref={this.handleContentRef}
         aria-label={label}
         css={this.props.styles?.drawerContent}
+        data-cid="DrawerContent"
       >
         {this.props.children}
       </div>
