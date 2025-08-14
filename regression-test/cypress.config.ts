@@ -26,7 +26,7 @@ import { installPlugin } from '@chromatic-com/cypress'
 
 export default defineConfig({
   env: {
-    delay: 100
+    delay: 100 // Chromatic snapshot delay time
   },
   e2e: {
     setupNodeEvents(on, config) {

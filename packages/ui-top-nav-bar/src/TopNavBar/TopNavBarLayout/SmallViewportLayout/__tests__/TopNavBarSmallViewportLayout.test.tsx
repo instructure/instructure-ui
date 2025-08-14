@@ -425,7 +425,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       const dropdownMenu = await screen.findByRole('menu')
       expect(dropdownMenu).toBeInTheDocument()
 
-      const option = await within(dropdownMenu).findByRole('button')
+      const option = await within(dropdownMenu).findByRole('menuitem')
       expect(option).toHaveAttribute('id', `TestItem1`)
 
       fireEvent.click(option)
@@ -467,7 +467,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         const dropdownMenu = await screen.findByRole('menu')
         expect(dropdownMenu).toBeInTheDocument()
 
-        const option = await within(dropdownMenu).findByRole('button')
+        const option = await within(dropdownMenu).findByRole('menuitem')
         expect(option).toHaveAttribute('id', `TestItem1`)
 
         fireEvent.click(option)

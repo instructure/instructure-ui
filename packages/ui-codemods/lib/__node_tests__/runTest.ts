@@ -45,10 +45,10 @@ export function runTest(codemod: Transform) {
   entries.forEach((entry) => {
     if (entry.isFile() && entry.name.includes('input')) {
       const isWarningTest = entry.name.includes('.warning.input')
-      const inputPath = path.join(entry.path, entry.name)
+      const inputPath = path.join(entry.parentPath, entry.name)
       const input = fs.readFileSync(inputPath, 'utf8')
       const expectedName = entry.name.replace('input', 'output')
-      const expectedPath = path.join(entry.path, expectedName)
+      const expectedPath = path.join(entry.parentPath, expectedName)
       const expected = fs.readFileSync(expectedPath, 'utf8')
 
       // eslint-disable-next-line no-console
@@ -61,12 +61,17 @@ export function runTest(codemod: Transform) {
       )
 
       if (isWarningTest) {
-        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => { })
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
         try {
           const j = jscodeshift.withParser('tsx')
           const fileInfo = { path: inputPath, source: input }
-          const api = { jscodeshift: j, j: j, stats: () => { }, report: () => { } }
+          const api = {
+            jscodeshift: j,
+            j: j,
+            stats: () => {},
+            report: () => {}
+          }
           const options = {}
 
           // Run codemod withouth comparison

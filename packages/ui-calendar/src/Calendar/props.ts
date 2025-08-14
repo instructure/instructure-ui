@@ -38,6 +38,7 @@ import { ReactElement } from 'react'
 import type { CalendarDayProps } from './Day/props'
 import { Renderable } from '@instructure/shared-types'
 import type { Moment } from '@instructure/ui-i18n'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type CalendarOwnProps = {
   /**
@@ -178,7 +179,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CalendarProps = CalendarOwnProps &
   WithStyleProps<CalendarTheme, CalendarStyle> &
-  OtherHTMLAttributes<CalendarOwnProps>
+  OtherHTMLAttributes<CalendarOwnProps> &
+  WithDeterministicIdProps
 
 type CalendarStyle = ComponentStyle<
   'navigation' | 'navigationWithButtons' | 'weekdayHeader' | 'yearPicker'
