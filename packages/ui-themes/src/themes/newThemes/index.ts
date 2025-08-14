@@ -22,30 +22,16 @@
  * SOFTWARE.
  */
 
-import bump from './bump.js'
-import server from './server.js'
-import tag from './tag.js'
-import deprecate from './deprecate.js'
-import publish from './publish.js'
-import lint from '../test/lint.js'
-import bundle from '../build/webpack.js'
-import clean from '../build/clean.js'
-import build from '../build/babel.js'
-import generateAllTokens from '../build/generate-all-tokens.js'
-import buildIcons from '../icons/build-icons.js'
-import buildThemes from '../build/build-themes.js'
-
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  lint,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons,
-  buildThemes
-]
+import canvas, { type Theme as Canvas } from './canvas'
+import canvasHighContrast, {
+  type Theme as CanvasHighContrast
+} from './canvasHighContrast'
+import rebrandLight, { type Theme as RebrandLight } from './rebrandLight'
+import rebrandDark, { type Theme as RebrandDark } from './rebrandDark'
+export { canvas, canvasHighContrast, rebrandLight, rebrandDark }
+export {
+  type Canvas,
+  type CanvasHighContrast,
+  type RebrandLight,
+  type RebrandDark
+}
