@@ -38,6 +38,11 @@ import type { ViewProps } from '@instructure/ui-view'
 
 type IconButtonOwnProps = {
   /**
+   * Custom data attribute for testing and identification
+   */
+  'data-cid'?: string
+
+  /**
    * An icon, or function returning an icon (identical to the `renderIcon` prop).
    */
   children?: Renderable

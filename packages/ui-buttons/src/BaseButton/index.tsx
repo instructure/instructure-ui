@@ -25,7 +25,6 @@
 import { Component } from 'react'
 import keycode from 'keycode'
 
-import { testable } from '@instructure/ui-testable'
 import {
   getElementType,
   getInteraction,
@@ -53,7 +52,6 @@ category: components/utilities
 **/
 
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 
@@ -230,6 +228,12 @@ class BaseButton extends Component<BaseButtonProps> {
     return <span css={styles?.childrenLayout}>{flexChildren}</span>
   }
 
+  getDataCid() {
+    return ['BaseButton', this.props['data-cid']]
+      .filter(Boolean)
+      .join(' ')
+  }
+
   render() {
     const {
       type,
@@ -308,6 +312,7 @@ class BaseButton extends Component<BaseButtonProps> {
         disabled={isDisabled || isReadOnly}
         css={styles?.baseButton}
         withFocusOutline={withFocusOutline}
+        data-cid={this.getDataCid()}
       >
         <span css={styles?.content}>{this.renderChildren()}</span>
       </View>

@@ -24,7 +24,6 @@
 
 import { Component, ReactElement, SyntheticEvent } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
@@ -46,7 +45,6 @@ id: TreeBrowser.Collection
 ---
 **/
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class TreeCollection extends Component<
   TreeBrowserCollectionProps,
   TreeCollectionState
@@ -396,6 +394,7 @@ class TreeCollection extends Component<
         onFocus={(e) => this.handleFocus(e, { id: id, type: 'collection' })}
         onBlur={(e) => this.handleBlur(e, { id: id, type: 'collection' })}
         {...ariaSelected}
+        data-cid="TreeCollection"
       >
         <TreeButton {...collectionProps} />
         {expanded && this.childCount > 0 && (

@@ -25,8 +25,6 @@
 import { isValidElement, cloneElement, Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
-
 import { withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
@@ -44,7 +42,6 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 
@@ -125,6 +122,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
         margin={this.props.margin}
         aria-label={this.props.label}
         elementRef={this.handleRef}
+        data-cid="Breadcrumb"
       >
         <ol css={styles?.breadcrumb}>{this.renderChildren()}</ol>
       </View>

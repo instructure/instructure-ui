@@ -33,8 +33,6 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { testable } from '@instructure/ui-testable'
-
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -50,7 +48,6 @@ id: Calendar.Day
 ---
  **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Day extends Component<CalendarDayProps> {
   static readonly componentId = 'Calendar.Day'
 
@@ -164,6 +161,7 @@ class Day extends Component<CalendarDayProps> {
         onClick={onClick && this.handleClick}
         onKeyDown={onKeyDown && this.handleKeyDown}
         elementRef={this.handleElementRef}
+        data-cid="Day"
       >
         <span css={styles?.day}>
           <AccessibleContent alt={label}>

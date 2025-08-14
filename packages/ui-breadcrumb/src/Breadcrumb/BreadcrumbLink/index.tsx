@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
+
 import { Tooltip } from '@instructure/ui-tooltip'
 
 import { allowedProps } from './props'
@@ -40,7 +40,7 @@ id: Breadcrumb.Link
 ---
 **/
 
-@testable()
+
 class BreadcrumbLink extends Component<
   BreadcrumbLinkProps,
   BreadcrumbLinkState
@@ -94,6 +94,7 @@ class BreadcrumbLink extends Component<
           elementRef={this.handleRef}
           forceButtonRole={false}
           {...(isCurrentPage && { 'aria-current': 'page' })}
+          data-cid="BreadcrumbLink"
         >
           <TruncateText
             onUpdate={(isTruncated) => this.handleTruncation(isTruncated)}

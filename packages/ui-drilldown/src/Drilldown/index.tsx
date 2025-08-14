@@ -1401,7 +1401,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           getDisabledOptionProps
         }) => (
           <View
-            borderWidth="small"
+            // if there is a trigger the border needs to be rendered by the <Popover>
+            // (because it has an arrow)
+            {...(trigger ? {} : { borderWidth: 'small' })}
+            {...(trigger ? {} : { 'data-cid': 'Drilldown' })}
             as="div"
             elementRef={this.handleDrilldownRef}
             tabIndex={0}
@@ -1552,6 +1555,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             this._trigger = el
           },
           'aria-haspopup': this.props.role,
+          'data-triggeres': "TRIGGER_ESETEN_DRILLDOWN",
+          'data-cid': "Drilldownx",
           id: this._triggerId,
           disabled: !!((trigger as ReactElement<any>).props.disabled || disabled),
           'aria-disabled':

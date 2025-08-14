@@ -28,7 +28,6 @@ import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -50,7 +49,6 @@ id: Modal.Header
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ModalHeader extends Component<ModalHeaderProps> {
   static readonly componentId = 'Modal.Header'
 
@@ -103,6 +101,7 @@ class ModalHeader extends Component<ModalHeaderProps> {
         css={this.props.styles?.modalHeader}
         {...passthroughProps(rest)}
         ref={this.handleRef}
+        data-cid="ModalHeader"
       >
         {children}
       </div>

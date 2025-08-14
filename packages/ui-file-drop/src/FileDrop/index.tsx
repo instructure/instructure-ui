@@ -27,7 +27,6 @@ import keycode from 'keycode'
 import { FormFieldMessages } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import {
   callRenderProp,
   passthroughProps,
@@ -56,7 +55,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class FileDrop extends Component<FileDropProps, FileDropState> {
   static readonly componentId = 'FileDrop'
 
@@ -357,6 +355,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
         margin={margin}
         height={height}
         elementRef={this.handleElementRef}
+        data-cid="FileDrop"
       >
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label

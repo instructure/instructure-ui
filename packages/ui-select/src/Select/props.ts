@@ -40,6 +40,11 @@ import { Renderable } from '@instructure/shared-types'
 
 type SelectOwnProps = {
   /**
+   * Custom data attribute for testing and identification
+   */
+  'data-cid'?: string
+
+  /**
    * The id of the text input. One is generated if not supplied.
    */
   id?: string

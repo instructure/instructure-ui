@@ -30,7 +30,6 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { IconAiColoredSolid } from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
@@ -63,7 +62,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 
@@ -224,6 +222,7 @@ class Heading extends Component<HeadingProps> {
         as={ElementType}
         elementRef={this.handleRef}
         margin={margin}
+        data-cid="Heading"
       >
         {this.renderContent()}
       </View>

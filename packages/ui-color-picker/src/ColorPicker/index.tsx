@@ -27,7 +27,6 @@ import { Component } from 'react'
 import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
 import { TextInput } from '@instructure/ui-text-input'
@@ -89,7 +88,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPicker'
@@ -615,6 +613,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         {...omitProps(this.props, ColorPicker.allowedProps)}
         css={this.props.styles?.colorPicker}
         ref={this.handleRef}
+        data-cid="ColorPicker"
       >
         <TextInput
           id={id}

@@ -41,7 +41,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
@@ -72,7 +71,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
 
@@ -513,6 +511,7 @@ class Tabs extends Component<TabsProps, TabsState> {
         margin={margin}
         as="div"
         css={styles?.container}
+        data-cid="Tabs"
       >
         <Focusable ref={this.handleFocusableRef}>
           {() => (

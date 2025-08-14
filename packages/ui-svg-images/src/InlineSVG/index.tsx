@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -42,7 +41,6 @@ category: components/utilities
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class InlineSVG extends Component<InlineSVGProps> {
   static readonly componentId = 'InlineSVG'
 
@@ -146,6 +144,10 @@ class InlineSVG extends Component<InlineSVGProps> {
     const { style, title, description, focusable, src, styles, ...props } =
       this.props
 
+    const dataCid = ['InlineSVG', this.props['data-cid']]
+      .filter(Boolean)
+      .join(' ')
+
     // if width or height are 'auto', don't supply anything to the SVG
     const width = this.props.width === 'auto' ? undefined : this.props.width
     const height = this.props.height === 'auto' ? undefined : this.props.height
@@ -168,6 +170,7 @@ class InlineSVG extends Component<InlineSVGProps> {
         css={styles?.inlineSVG}
         className={props.className}
         ref={this.handleRef}
+        data-cid={dataCid}
       >
         {this.renderTitle()}
         {this.renderDesc(description)}

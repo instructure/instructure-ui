@@ -29,7 +29,6 @@ import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -44,7 +43,6 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Tag extends Component<TagProps> {
   static readonly componentId = 'Tag'
 
@@ -125,6 +123,7 @@ static defaultProps = {
         disabled={disabled || readOnly}
         display={undefined}
         title={title || (typeof text === 'string' ? text : undefined)}
+        data-cid="Tag"
       >
         <span css={styles?.text}>{text}</span>
         {onClick && dismissible ? <IconXLine css={styles?.icon} /> : null}

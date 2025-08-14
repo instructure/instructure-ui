@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 import { NumberInput } from '@instructure/ui-number-input'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -45,7 +44,6 @@ id: Pagination.PageInput
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class PaginationPageInput extends Component<
   PaginationPageInputProps,
   PaginationPageInputState
@@ -211,7 +209,7 @@ class PaginationPageInput extends Component<
     const { styles, disabled } = this.props
 
     return (
-      <span css={styles?.paginationPageInput} ref={this.handleRef}>
+      <span css={styles?.paginationPageInput} ref={this.handleRef} data-cid="PaginationPageInput">
         <span css={styles?.numberInput}>
           <NumberInput
             renderLabel={this.renderScreenReaderLabel()}

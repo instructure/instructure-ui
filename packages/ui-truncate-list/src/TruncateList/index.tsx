@@ -27,7 +27,6 @@ import { Children, Component } from 'react'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
@@ -47,7 +46,6 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, null)
-@testable()
 class TruncateList extends Component<TruncateListProps, TruncateListState> {
   static readonly componentId = 'TruncateList'
 
@@ -284,6 +282,7 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
         className={className}
         style={style}
         css={styles?.truncateList}
+        data-cid="TruncateList"
       >
         {visibleChildren.map((child, index) => {
           return (

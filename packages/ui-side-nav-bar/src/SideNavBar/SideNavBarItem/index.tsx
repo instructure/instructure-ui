@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -42,7 +41,6 @@ id: SideNavBar.Item
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class SideNavBarItem extends Component<SideNavBarItemProps> {
   static readonly componentId = 'SideNavBar.Item'
 
@@ -87,6 +85,7 @@ class SideNavBarItem extends Component<SideNavBarItemProps> {
         ref={addRef ? this.handleRef : undefined}
         css={this.props.styles?.navigationItem}
         aria-label={this.props.minimized ? (label as string) : undefined}
+        data-cid="SideNavBarItem"
       >
         <div css={this.props.styles?.icon}>{icon}</div>
         {!this.props.minimized ? (

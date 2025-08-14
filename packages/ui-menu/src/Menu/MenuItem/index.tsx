@@ -34,7 +34,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import { MenuContext } from '../../MenuContext'
@@ -53,7 +52,6 @@ id: Menu.Item
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class MenuItem extends Component<MenuItemProps, MenuItemState> {
   static readonly componentId = 'Menu.Item'
 
@@ -265,6 +263,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         ref={this.handleRef}
         css={this.props.styles?.menuItem}
         onMouseOver={this.handleMouseOver}
+        data-cid="MenuItem"
       >
         {this.renderContent()}
       </ElementType>

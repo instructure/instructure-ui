@@ -31,7 +31,6 @@ import { logError as error } from '@instructure/console'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -58,7 +57,6 @@ tags: toggle, switch
 
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
 
@@ -322,6 +320,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
         ref={this.handleRef}
+        data-cid="Checkbox"
       >
         <div css={styles?.container}>
           <input
