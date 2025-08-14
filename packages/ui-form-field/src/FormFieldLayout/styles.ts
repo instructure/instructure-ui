@@ -75,10 +75,16 @@ const generateStyle = (
   props: FormFieldLayoutProps,
   styleProps: FormFieldStyleProps
 ): FormFieldLayoutStyle => {
-  const { inline, layout, vAlign, labelAlign, margin } = props
+  const { inline, layout, vAlign, labelAlign, margin, messages } = props
   const { hasMessages, hasVisibleLabel, hasNewErrorMsgAndIsGroup } = styleProps
   const cssMargin = mapSpacingToShorthand(margin, componentTheme.spacing)
   const isInlineLayout = layout === 'inline'
+
+  const hasNonEmptyMessages = messages?.reduce(
+    (acc, message) => acc || message.type !== 'screenreader-only',
+    false
+  )
+
   // This is quite ugly, we should simplify it
   const gridTemplateAreas = generateGridLayout(
     isInlineLayout,
@@ -150,7 +156,7 @@ const generateStyle = (
           )
         },
       columnGap: '0.375rem',
-      rowGap: '0.75rem',
+      rowGap: hasNonEmptyMessages ? '0.75rem' : '0',
       width: '100%',
       ...(inline && {
         display: 'inline-grid',
@@ -162,7 +168,9 @@ const generateStyle = (
       ...labelStyles,
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(label)': labelStyles,
-      '&:-webkit-any(label)': labelStyles
+      '&:-webkit-any(label)': labelStyles,
+
+      paddingBottom: hasNonEmptyMessages ? '0' : '0.75rem'
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',
