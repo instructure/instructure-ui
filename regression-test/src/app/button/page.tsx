@@ -22,11 +22,15 @@
  * SOFTWARE.
  */
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Button } from 'instructure-ui/ui-buttons/es/index'
 import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
 
 export default function ButtonPage() {
+  const myElementRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    myElementRef?.current?.focus()
+  })
   const colors = [
     'primary',
     'primary-inverse',
@@ -50,6 +54,7 @@ export default function ButtonPage() {
       ))}
       <Button renderIcon={IconAddLine}>Icon Button</Button>
       <Button disabled>Disabled Button</Button>
+      <Button ref={myElementRef}>focused button</Button>
     </main>
   )
 }

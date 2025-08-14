@@ -21,34 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { defineConfig } from 'cypress'
-import { installPlugin } from '@chromatic-com/cypress'
+'use client'
+import React, { useRef } from 'react'
+import { Alert } from 'instructure-ui/ui-alerts/es/index'
 
-export default defineConfig({
-  env: {
-    delay: 100
-  },
-  e2e: {
-    setupNodeEvents(on, config) {
-      installPlugin(on, config)
-
-      // This registers a log task as seen in the Cypress docs for cy.task as well
-      // as a table task for sending tabular data to the terminal.
-      // More info: https://www.npmjs.com/package/cypress-axe
-      on('task', {
-        log(message) {
-          // eslint-disable-next-line no-console
-          console.log(message)
-
-          return null
-        },
-        table(message) {
-          // eslint-disable-next-line no-console
-          console.table(message)
-
-          return null
-        }
-      })
-    }
-  }
-})
+export default function AlertPage() {
+  const variants = ['info', 'success', 'warning', 'error']
+  const myElementRef = useRef(null)
+  return (
+    <main className="flex gap-8 p-8 flex-row items-start axe-test">
+      <div id="flash-messages" role="alert" ref={myElementRef}></div>
+      <div>
+        {variants.map((variant) => (
+          <Alert variant={variant} key={variant} transition="none">
+            I&apos;m {variant} Alert
+          </Alert>
+        ))}
+      </div>
+      <div>
+        <Alert transition="none" renderCloseButtonLabel="Close">
+          Close button Alert
+        </Alert>
+        <Alert transition="none" margin="xx-large" hasShadow={false}>
+          no shadow Alert
+        </Alert>
+      </div>
+      <div>
+        {myElementRef.current ? (
+          <Alert
+            liveRegion={() => myElementRef.current}
+            isLiveRegionAtomic
+            screenReaderOnly
+          >
+            some message
+          </Alert>
+        ) : null}
+      </div>
+    </main>
+  )
+}

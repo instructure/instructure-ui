@@ -21,16 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+'use client'
 import React from 'react'
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { InstUISettingsProvider } from '@instructure/emotion'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'InstUI Visual Regression Test Suite'
-}
 
 export default function RootLayout({
   children
@@ -38,8 +35,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+    // we need to make a new Map to reset counting on the server side
+    // on each page refresh TODO fix
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <InstUISettingsProvider instanceCounterMap={new Map()}>
+        <body className={inter.className}>{children}</body>
+      </InstUISettingsProvider>
     </html>
   )
 }

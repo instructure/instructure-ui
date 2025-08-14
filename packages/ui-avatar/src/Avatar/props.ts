@@ -86,9 +86,11 @@ type AvatarOwnProps = {
    */
   margin?: Spacing
   /**
-   * Callback fired when the avatar image has loaded
+   * Callback fired when the avatar image has loaded.
+   * `event` can be `undefined`, if its already loaded when the page renders
+   * (can happen in SSR)
    */
-  onImageLoaded?: (event: SyntheticEvent) => void
+  onImageLoaded?: (event?: SyntheticEvent) => void
   /**
    * The element type to render as
    */

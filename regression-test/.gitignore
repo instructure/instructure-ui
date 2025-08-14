@@ -24,6 +24,7 @@
 
 # debug
 npm-debug.log*
+build-archive.log
 
 # local env files
 .env*.local

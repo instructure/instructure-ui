@@ -21,34 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { defineConfig } from 'cypress'
-import { installPlugin } from '@chromatic-com/cypress'
 
-export default defineConfig({
-  env: {
-    delay: 100
-  },
-  e2e: {
-    setupNodeEvents(on, config) {
-      installPlugin(on, config)
+import IconSVG from './placeholder.svg'
 
-      // This registers a log task as seen in the Cypress docs for cy.task as well
-      // as a table task for sending tabular data to the terminal.
-      // More info: https://www.npmjs.com/package/cypress-axe
-      on('task', {
-        log(message) {
-          // eslint-disable-next-line no-console
-          console.log(message)
+export default function placeholderImage(width = 512, height = 512) {
+  // We need to base64 encode this because otherwise FF will add extra escape chars
+  const dataUri = Buffer.from(
+    IconSVG.replace(/{{w}}/g, width).replace(/{{h}}/g, height).trim()
+  ).toString('base64')
 
-          return null
-        },
-        table(message) {
-          // eslint-disable-next-line no-console
-          console.table(message)
-
-          return null
-        }
-      })
-    }
-  }
-})
+  return `data:image/svg+xml;base64,${dataUri}`
+}

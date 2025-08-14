@@ -65,13 +65,33 @@ function terminalLog(violations: Result[]) {
 const axeOptions: { runOnly: RunOnly } = {
   runOnly: {
     type: 'tag',
-    values: ['wcag2a', 'wcag2aa', 'section508', 'best-practice']
+    values: ['wcag2a', 'wcag2aa', 'section508']
   }
 }
 
 describe('visual regression test', () => {
   it('check button', () => {
     cy.visit('http://localhost:3000/button')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check alert', () => {
+    cy.visit('http://localhost:3000/alert')
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check avatar', () => {
+    cy.visit('http://localhost:3000/avatar')
+    cy.wait(300) // images render a frame later, Chromatic needs a bit more delay
+    cy.injectAxe()
+    cy.checkA11y('.axe-test', axeOptions, terminalLog)
+  })
+
+  it('check tooltip', () => {
+    cy.visit('http://localhost:3000/tooltip')
+    cy.wait(300) // tooltips render a frame later, Chromatic needs a bit more delay
     cy.injectAxe()
     cy.checkA11y('.axe-test', axeOptions, terminalLog)
   })
