@@ -35,6 +35,7 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { ModalBodyProps } from './props'
+import { UIElement } from '@instructure/shared-types'
 
 /**
 ---
@@ -55,9 +56,9 @@ class ModalBody extends Component<ModalBodyProps> {
     variant: 'default'
   }
 
-  ref: Element | null = null
+  ref: UIElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: UIElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -93,6 +94,19 @@ class ModalBody extends Component<ModalBodyProps> {
     this.props.makeStyles?.()
   }
 
+  getFinalRef(el: UIElement): Element | undefined {
+    if (!el) {
+      return undefined
+    }
+    if (el instanceof Element) {
+      return el
+    }
+    if ((el as unknown as { ref: UIElement }).ref) {
+      return this.getFinalRef((el as unknown as { ref: UIElement }).ref)
+    }
+    return undefined
+  }
+
   render() {
     const { as, elementRef, overflow, variant, padding, children, ...rest } =
       this.props
@@ -102,6 +116,10 @@ class ModalBody extends Component<ModalBodyProps> {
       ModalBody
     )
     const isFit = overflow === 'fit'
+    // this recursive function is needed because `ref` can be a React component.
+    // TODO rethink, the 'as' prop, likely its not a good idea to allow React
+    // components. See INSTUI-4674
+    const finalRef = this.getFinalRef(this.ref)
 
     return (
       <View
@@ -114,7 +132,8 @@ class ModalBody extends Component<ModalBodyProps> {
         css={this.props.styles?.modalBody}
         padding={padding}
         //check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
-        {...(this.ref?.scrollHeight !== this.ref?.getBoundingClientRect().height
+        {...(finalRef?.scrollHeight !==
+        finalRef?.getBoundingClientRect()?.height
           ? { tabIndex: 0 }
           : {})}
       >
