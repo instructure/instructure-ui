@@ -34,13 +34,14 @@ import type {
   AsElementType,
   PropValidators,
   ModalBodyTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  UIElement
 } from '@instructure/shared-types'
 
 type ModalBodyOwnProps = {
   children?: React.ReactNode
   padding?: Spacing
-  elementRef?: (element: Element | null) => void
+  elementRef?: (element: UIElement | null) => void
   as?: AsElementType
   variant?: 'default' | 'inverse'
   overflow?: 'scroll' | 'fit'
