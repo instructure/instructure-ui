@@ -207,7 +207,7 @@ export default function TooltipPage() {
     <main className="items-start axe-test">
       <ApplyLocale locale="en-US">
         <br />
-        <div style={{ display: 'flex', flexWrap: 'wrap', margin: '3rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', width: '40rem' }}>
           {components.map(function (component, key) {
             return wrapComponent(component, key.toString())
           })}
@@ -220,15 +220,7 @@ export default function TooltipPage() {
 function wrapComponent(component: string | React.JSX.Element, key: string) {
   const Tooltip = to as any
   return (
-    <div
-      key={key}
-      style={{
-        flex: '0 0 calc(100% / 2 - 1rem)',
-        boxSizing: 'border-box',
-        display: 'flex',
-        marginBottom: '5rem'
-      }}
-    >
+    <div key={key} style={{ margin: '4rem' }}>
       <Tooltip
         renderTip={`Tooltip ${key}`}
         isShowingContent={true}
