@@ -15,6 +15,7 @@
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-img/tsconfig.build.json" },
+    { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" }
   ]
