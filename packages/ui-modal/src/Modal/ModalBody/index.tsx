@@ -131,9 +131,13 @@ class ModalBody extends Component<ModalBodyProps> {
         as={as}
         css={this.props.styles?.modalBody}
         padding={padding}
-        //check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
-        {...(finalRef?.scrollHeight !==
-        finalRef?.getBoundingClientRect()?.height
+        // check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
+        // epsilon tolerance is used to avoid false positives, this is generally safer than Math rounding techniques
+        {...(finalRef &&
+        Math.abs(
+          (finalRef.scrollHeight ?? 0) -
+            (finalRef.getBoundingClientRect()?.height ?? 0)
+        ) > 0.05
           ? { tabIndex: 0 }
           : {})}
       >
