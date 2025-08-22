@@ -136,7 +136,11 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * Whether or not the element is a Tooltip
    */
-  isTooltip: PropTypes.bool
+  isTooltip: PropTypes.bool,
+  /**
+   * The ID of the `FocusRegion` this belongs to. Used only for debugging.
+   */
+  regionId: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [

@@ -67,13 +67,15 @@ class FocusRegion {
       shouldCloseOnEscape: true,
       isTooltip: false
     }
+    this._id = uid()
+    // eslint-disable-next-line no-param-reassign
+    options.regionId = this._id
     this._contextElement = element
     this._screenReaderFocusRegion = new ScreenReaderFocusRegion(
       element,
       options
     )
     this._keyboardFocusRegion = new KeyboardFocusRegion(element, options)
-    this._id = uid()
   }
 
   updateElement(element: Element | Node, options?: FocusRegionOptions) {
@@ -211,17 +213,15 @@ class FocusRegion {
   }
 
   deactivate({ keyboard = true }: { keyboard?: boolean } = {}) {
-    if (this._active) {
-      this._listeners.forEach((listener) => {
-        listener.remove()
-      })
-      this._listeners = []
-      if (keyboard) {
-        this._keyboardFocusRegion.deactivate()
-      }
-      this._screenReaderFocusRegion.deactivate()
-      this._active = false
+    this._listeners.forEach((listener) => {
+      listener.remove()
+    })
+    this._listeners = []
+    if (keyboard) {
+      this._keyboardFocusRegion.deactivate()
     }
+    this._screenReaderFocusRegion.deactivate()
+    this._active = false
   }
 
   focus() {
