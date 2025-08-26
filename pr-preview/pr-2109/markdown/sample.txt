@@ -1,0 +1,10 @@
+# Sample Markdown File
+
+This is a sample markdown file created by the documentation build process.
+
+## Features
+- Created automatically during build
+- Located in the markdown folder
+- Can be used for testing or documentation purposes
+
+Generated on: 2025-08-26T08:54:32.542Z
