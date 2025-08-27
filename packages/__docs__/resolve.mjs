@@ -165,7 +165,6 @@ const alias = {
   '@instructure/ui-table$': path.resolve(import.meta.dirname, '../ui-table/src/'),
   '@instructure/ui-tabs$': path.resolve(import.meta.dirname, '../ui-tabs/src/'),
   '@instructure/ui-tag$': path.resolve(import.meta.dirname, '../ui-tag/src/'),
-  '@instructure/ui-testable$': path.resolve(import.meta.dirname, '../ui-testable/src/'),
   '@instructure/ui-text$': path.resolve(import.meta.dirname, '../ui-text/src/'),
   '@instructure/ui-time-select$': path.resolve(
     import.meta.dirname,

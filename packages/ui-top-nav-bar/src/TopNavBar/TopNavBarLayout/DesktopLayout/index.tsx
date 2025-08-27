@@ -25,7 +25,6 @@
 import { Children, Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -46,7 +45,6 @@ private: true
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static readonly componentId = 'TopNavBar.DesktopLayout'
 
@@ -138,6 +136,7 @@ class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
         ref={this.handleRef}
         css={styles?.topNavBarDesktopLayout}
         aria-label={navLabel}
+        data-cid="TopNavBarDesktopLayout"
       >
         {this.hasBrandBlock && (
           <div css={styles?.brandContainer}>{renderBrand}</div>

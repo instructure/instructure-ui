@@ -190,7 +190,11 @@ class Responsive extends Component<ResponsiveProps> {
     }
 
     return (
-      <div ref={this.handleRef} style={{ display }}>
+      <div
+        ref={this.handleRef}
+        style={{ display }}
+        data-cid={(this.props as any)['data-cid']}
+      >
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )

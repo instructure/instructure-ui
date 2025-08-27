@@ -26,7 +26,6 @@ import { Children, Component, isValidElement } from 'react'
 
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
@@ -58,7 +57,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Modal extends Component<ModalProps, ModalState> {
   static readonly componentId = 'Modal'
 
@@ -281,6 +279,7 @@ class Modal extends Component<ModalProps, ModalState> {
         insertAt={insertAt}
         open={portalIsOpen}
         onOpen={this.handlePortalOpen}
+        data-cid="Modal"
       >
         <Transition
           in={open}

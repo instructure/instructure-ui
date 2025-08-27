@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import { px } from '@instructure/ui-utils'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
@@ -50,7 +49,6 @@ import type { TopNavBarProps } from './props'
 category: components
 ---
 **/
-@testable()
 class TopNavBar extends Component<TopNavBarProps> {
   static readonly componentId = 'TopNavBar'
 
@@ -93,6 +91,7 @@ class TopNavBar extends Component<TopNavBarProps> {
 
     return (
       <Responsive
+        data-cid="TopNavBar"
         elementRef={this.handleRef}
         match={mediaQueryMatch}
         query={{

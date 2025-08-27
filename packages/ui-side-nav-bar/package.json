@@ -42,7 +42,6 @@
     "@instructure/ui-badge": "10.24.1",
     "@instructure/ui-icons": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
-    "@instructure/ui-testable": "10.24.1",
     "@instructure/ui-tooltip": "10.24.1"
   },
   "peerDependencies": {

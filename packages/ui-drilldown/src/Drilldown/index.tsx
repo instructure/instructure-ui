@@ -25,7 +25,6 @@
 import { Children, Component, ReactElement, ReactNode } from 'react'
 
 import { warn, error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import { contains, containsActiveElement } from '@instructure/ui-dom-utils'
 import {
   callRenderProp,
@@ -101,7 +100,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static readonly componentId = 'Drilldown'
 
@@ -827,7 +825,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       this.handleGroupOptionSelected(event, selectedOption)
     } else {
       // TODO workaround for react 19 default props
-      const optionWithDefaultProps = {...selectedOptionChild, props: {...selectedOptionChild.props, role: 'menuitem'}}
+      const optionWithDefaultProps = {
+        ...selectedOptionChild,
+        props: { ...selectedOptionChild.props, role: 'menuitem' }
+      }
       if (typeof onSelect === 'function') {
         onSelect(event, {
           value,
@@ -1408,6 +1409,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             // (because it has an arrow)
             {...(trigger ? {} : { borderWidth: 'small' })}
             as="div"
+            data-cid="Drilldown"
             elementRef={this.handleDrilldownRef}
             tabIndex={0}
             css={styles?.drilldown}
@@ -1500,10 +1502,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       shouldSetAriaExpanded,
       styles
     } = this.props
+
     const borderColor = (styles?.drilldown as { borderColor: string })
       ?.borderColor
     return trigger ? (
       <Popover
+        data-cid="Drilldown"
         themeOverride={{
           // use here own theme's color
           borderColor: borderColor
@@ -1564,7 +1568,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           },
           'aria-haspopup': this.props.role,
           id: this._triggerId,
-          disabled: !!((trigger as ReactElement<any>).props.disabled || disabled),
+          disabled: !!(
+            (trigger as ReactElement<any>).props.disabled || disabled
+          ),
           'aria-disabled':
             (trigger as ReactElement<any>).props.disabled || disabled
               ? 'true'

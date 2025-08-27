@@ -20,7 +20,6 @@
     { "path": "../ui-position/tsconfig.build.json" },
     { "path": "../ui-selectable/tsconfig.build.json" },
     { "path": "../ui-scripts/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-text-input/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../ui-view/tsconfig.build.json" },

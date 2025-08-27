@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -43,7 +42,6 @@ id: List.Item
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 
@@ -97,6 +95,7 @@ class ListItem extends Component<ListItemProps> {
         padding={padding}
         maxWidth="100%"
         elementRef={this.handleRef}
+        data-cid="ListItem"
       >
         {children}
       </View>

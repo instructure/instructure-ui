@@ -30,7 +30,6 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -47,7 +46,6 @@ id: Options.Item
 **/
 @withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class Item extends Component<OptionsItemProps> {
   static readonly componentId = 'Options.Item'
 
@@ -137,6 +135,7 @@ class Item extends Component<OptionsItemProps> {
     return (
       <ElementType
         role={voiceoverRoleBugWorkaround ? role : 'none'}
+        data-cid="Options.Item"
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element

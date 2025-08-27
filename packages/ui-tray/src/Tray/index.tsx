@@ -28,7 +28,6 @@ import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
@@ -48,7 +47,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
-@testable()
 class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'
 
@@ -234,6 +232,7 @@ class Tray extends Component<TrayProps> {
         onOpen={this.handlePortalOpen}
         insertAt={insertAt}
         mountNode={mountNode}
+        data-cid="Tray"
       >
         {enableMask ? (
           <Mask placement={'center'} fullscreen={true}>

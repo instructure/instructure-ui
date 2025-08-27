@@ -27,8 +27,7 @@
     "@instructure/shared-types": "10.24.1",
     "@instructure/ui-a11y-utils": "10.24.1",
     "@instructure/ui-dom-utils": "10.24.1",
-    "@instructure/ui-react-utils": "10.24.1",
-    "@instructure/ui-testable": "10.24.1"
+    "@instructure/ui-react-utils": "10.24.1"
   },
   "devDependencies": {
     "@instructure/console": "10.24.1",

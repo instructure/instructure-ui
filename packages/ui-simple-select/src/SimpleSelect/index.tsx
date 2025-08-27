@@ -31,7 +31,6 @@ import {
 } from 'react'
 
 import * as utils from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
   passthroughProps,
@@ -70,7 +69,6 @@ tags: form, field, dropdown
 ---
 **/
 @withDeterministicId()
-@testable()
 class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   static readonly componentId = 'SimpleSelect'
 
@@ -549,6 +547,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
         isOptionContentAppliedToInput={this.props.isOptionContentAppliedToInput}
         layout={layout}
         {...passthroughProps(rest)}
+        data-cid="SimpleSelect"
       >
         {this.renderChildren()}
       </Select>

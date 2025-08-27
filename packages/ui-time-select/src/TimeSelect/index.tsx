@@ -31,7 +31,6 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 import * as utils from '@instructure/ui-utils'
 
@@ -58,13 +57,12 @@ category: components
 A component used to select a time value.
  **/
 @withDeterministicId()
-@testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   declare context: React.ContextType<typeof ApplyLocaleContext>
 
   static readonly componentId = 'TimeSelect'
   static allowedProps = allowedProps
-static defaultProps = {
+  static defaultProps = {
     defaultToFirstOption: false,
     format: 'LT', // see https://momentjs.com/docs/#/displaying/
     step: 30,
@@ -635,6 +633,7 @@ static defaultProps = {
         onInputChange={this.handleInputChange}
         onKeyDown={this.onKeyDown}
         {...passthroughProps(rest)}
+        data-cid="TimeSelect"
       >
         {isShowingOptions && this.renderOptions()}
       </Select>

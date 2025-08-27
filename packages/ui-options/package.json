@@ -38,7 +38,6 @@
     "@instructure/shared-types": "10.24.1",
     "@instructure/ui-icons": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
-    "@instructure/ui-testable": "10.24.1",
     "@instructure/ui-utils": "10.24.1",
     "@instructure/ui-view": "10.24.1"
   },

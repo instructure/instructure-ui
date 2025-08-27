@@ -33,7 +33,6 @@ import {
   IconArrowDoubleStartSolid,
   IconArrowDoubleEndSolid
 } from '@instructure/ui-icons'
-import { testable } from '@instructure/ui-testable'
 
 import type { PaginationNavigationProps } from './props'
 import { allowedProps } from './props'
@@ -44,7 +43,6 @@ parent: Pagination
 id: Pagination.Navigation
 ---
 **/
-@testable()
 class PaginationArrowButton extends Component<PaginationNavigationProps> {
   static readonly componentId = 'Pagination.Navigation'
 
@@ -102,6 +100,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
           rel={props.href || props.to ? direction : undefined}
           elementRef={buttonRef}
           margin={this.margin}
+          data-cid="PaginationArrowButton"
         >
           {this.Icon}
         </IconButton>

@@ -26,7 +26,6 @@
 import { Component } from 'react'
 
 import { ms } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle, Global } from '@instructure/emotion'
 
@@ -45,7 +44,6 @@ category: components/utilities
 @module Transition
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Transition extends Component<TransitionProps> {
   static readonly componentId = 'Transition'
 

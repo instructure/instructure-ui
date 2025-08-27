@@ -30,7 +30,6 @@
     "@instructure/ui-dom-utils": "10.24.1",
     "@instructure/ui-form-field": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
-    "@instructure/ui-testable": "10.24.1",
     "@instructure/ui-utils": "10.24.1",
     "@instructure/uid": "10.24.1"
   },

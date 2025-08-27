@@ -33,7 +33,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
@@ -65,7 +64,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Menu extends Component<MenuProps> {
   static readonly componentId = 'Menu'
   static allowedProps = allowedProps
@@ -432,6 +430,7 @@ class Menu extends Component<MenuProps> {
           onKeyDown={this.handleMenuKeyDown}
           onKeyUp={onKeyUp}
           ref={this.handleRef}
+          data-cid="Menu"
         >
           {this.renderChildren()}
         </div>
@@ -459,6 +458,7 @@ class Menu extends Component<MenuProps> {
 
     return trigger ? (
       <Popover
+        data-cid="Menu"
         isShowingContent={show}
         defaultIsShowingContent={defaultShow}
         onHideContent={(event, { documentClick }) => {

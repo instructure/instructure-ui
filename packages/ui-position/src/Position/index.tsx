@@ -36,9 +36,8 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { PositionChangeListenerType } from '@instructure/ui-dom-utils'
 import type { Debounced } from '@instructure/debounce'
-import { deepEqual, shallowEqual } from '@instructure/ui-utils'
+import { deepEqual, shallowEqual, combineDataCid } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
-import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
 import { withStyle } from '@instructure/emotion'
 
@@ -57,7 +56,6 @@ category: components/utilities
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Position extends Component<PositionProps, PositionState> {
   static readonly componentId = 'Position'
 
@@ -304,8 +302,14 @@ class Position extends Component<PositionProps, PositionState> {
 
   render() {
     const props = { [Position.locatorAttribute]: this._id }
+
     return (
-      <span {...props} css={this.props.styles?.position} ref={this.handleRef}>
+      <span
+        {...props}
+        css={this.props.styles?.position}
+        ref={this.handleRef}
+        data-cid={combineDataCid('Position', this.props)}
+      >
         {this.renderTarget()}
         {this.renderContent()}
       </span>
