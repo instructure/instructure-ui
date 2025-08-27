@@ -29,7 +29,6 @@ import {
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -46,7 +45,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Badge extends Component<BadgeProps> {
   static readonly componentId = 'Badge'
 
@@ -131,7 +129,7 @@ class Badge extends Component<BadgeProps> {
         }
         id={!standalone ? this._defaultId : undefined}
         display={standalone ? 'inline-block' : 'block'}
-        {...(standalone && { elementRef: this.handleRef })}
+        {...(standalone && { elementRef: this.handleRef, 'data-cid': 'Badge' })}
       >
         {this.renderOutput()}
       </View>
@@ -159,6 +157,7 @@ class Badge extends Component<BadgeProps> {
           elementRef={this.handleRef}
           css={styles?.wrapper}
           display={display}
+          data-cid="Badge"
         >
           {this.renderChildren()}
           {this.renderBadge()}

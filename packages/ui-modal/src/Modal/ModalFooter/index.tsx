@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -40,7 +39,6 @@ id: Modal.Footer
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ModalFooter extends Component<ModalFooterProps> {
   static readonly componentId = 'Modal.Footer'
 
@@ -71,6 +69,7 @@ class ModalFooter extends Component<ModalFooterProps> {
         css={this.props.styles?.modalFooter}
         {...passthroughProps(rest)}
         ref={this.handleRef}
+        data-cid="ModalFooter"
       >
         {children}
       </div>

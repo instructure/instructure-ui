@@ -33,7 +33,6 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import { warn, error } from '@instructure/console'
 
 import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
@@ -80,7 +79,6 @@ id: TopNavBar.Item
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static readonly componentId = 'TopNavBar.Item'
 
@@ -743,7 +741,11 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     }
 
     return (
-      <div ref={this.handleRef} css={styles?.topNavBarItem}>
+      <div
+        ref={this.handleRef}
+        css={styles?.topNavBarItem}
+        data-cid="TopNavBarItem"
+      >
         {content}
       </div>
     )

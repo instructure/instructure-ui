@@ -35,8 +35,6 @@ import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 
-import { testable } from '@instructure/ui-testable'
-
 import { withStyle } from '@instructure/emotion'
 
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
@@ -65,7 +63,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Calendar extends Component<CalendarProps, CalendarState> {
   static readonly componentId = 'Calendar'
 
@@ -549,6 +546,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         padding="small"
         background="primary"
         elementRef={this.handleRef}
+        data-cid="Calendar"
       >
         {this.renderHeader()}
         {this.renderBody()}

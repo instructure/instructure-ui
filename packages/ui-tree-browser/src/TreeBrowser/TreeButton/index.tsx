@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
@@ -43,7 +42,6 @@ id: TreeBrowser.Button
 ---
 **/
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class TreeButton extends Component<TreeBrowserButtonProps> {
   static readonly componentId = 'TreeBrowser.Button'
 
@@ -146,6 +144,7 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
         tabIndex={-1}
         type="button"
         css={styles?.treeButton}
+        data-cid="TreeButton"
       >
         {buttonContent}
       </button>

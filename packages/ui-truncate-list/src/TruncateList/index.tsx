@@ -26,8 +26,7 @@ import { Children, Component } from 'react'
 
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
-import { px } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
+import { px, combineDataCid } from '@instructure/ui-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
@@ -47,7 +46,6 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, null)
-@testable()
 class TruncateList extends Component<TruncateListProps, TruncateListState> {
   static readonly componentId = 'TruncateList'
 
@@ -281,9 +279,10 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
         {...omitProps(this.props, allowedProps)}
         // we have to pass style and className
         // (e.g. if emotion style is provided, it will be passed as a className)
-        className={className}
         style={style}
+        className={className}
         css={styles?.truncateList}
+        data-cid={combineDataCid('TruncateList', this.props)}
       >
         {visibleChildren.map((child, index) => {
           return (

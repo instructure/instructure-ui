@@ -27,7 +27,6 @@ import { ComponentElement, Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 import { Menu } from '@instructure/ui-menu'
@@ -47,7 +46,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 
@@ -138,6 +136,7 @@ class AppNav extends Component<AppNavProps> {
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
         elementRef={this.handleRef}
+        data-cid="AppNav"
       >
         {renderBeforeItems && <span>{renderBeforeItems}</span>}
 

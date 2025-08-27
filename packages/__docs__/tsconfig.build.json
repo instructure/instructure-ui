@@ -224,9 +224,6 @@
       "path": "../ui-tag/tsconfig.build.json"
     },
     {
-      "path": "../ui-testable/tsconfig.build.json"
-    },
-    {
       "path": "../ui-text/tsconfig.build.json"
     },
     {

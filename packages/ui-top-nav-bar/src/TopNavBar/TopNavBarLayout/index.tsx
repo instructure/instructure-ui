@@ -24,8 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
 import { withStyle } from '@instructure/emotion'
 
 import type {
@@ -53,7 +51,6 @@ id: TopNavBar.Layout
 @module TopNavBarLayout
 **/
 @withStyle(null, generateComponentTheme)
-@testable()
 class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static readonly componentId = 'TopNavBar.Layout'
 

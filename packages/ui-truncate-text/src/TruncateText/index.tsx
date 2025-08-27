@@ -32,7 +32,6 @@ import {
   ensureSingleChild
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -48,7 +47,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   static readonly componentId = 'TruncateText'
 
@@ -288,6 +286,7 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
     const { children } = this.props
     return (
       <span
+        data-cid="TruncateText"
         css={this.props.styles?.truncateText}
         ref={(el) => {
           this.ref = el

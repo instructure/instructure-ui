@@ -17,7 +17,6 @@
     { "path": "../ui-a11y-content/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-time-select/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" }

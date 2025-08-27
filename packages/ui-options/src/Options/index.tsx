@@ -31,7 +31,6 @@ import {
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 
@@ -61,7 +60,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 
@@ -161,7 +159,12 @@ class Options extends Component<OptionsProps> {
     const { as, role, renderLabel, elementRef, styles } = this.props
 
     return (
-      <div css={styles?.options} role="presentation" ref={this.handleRef}>
+      <div
+        css={styles?.options}
+        role="presentation"
+        ref={this.handleRef}
+        data-cid="Options"
+      >
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}

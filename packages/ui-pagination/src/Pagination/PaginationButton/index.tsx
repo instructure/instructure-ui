@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { BaseButton } from '@instructure/ui-buttons'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { allowedProps } from './props'
 import type { PaginationPageProps } from './props'
@@ -38,7 +37,6 @@ id: Pagination.Page
 ---
 **/
 
-@testable()
 class PaginationButton extends Component<PaginationPageProps> {
   static readonly componentId = 'Pagination.Page'
 
@@ -63,6 +61,7 @@ class PaginationButton extends Component<PaginationPageProps> {
       <li style={{ all: 'unset' }}>
         <BaseButton
           color="primary"
+          data-cid="PaginationButton"
           withBackground={this.props.current}
           withBorder={this.props.current}
           {...props}

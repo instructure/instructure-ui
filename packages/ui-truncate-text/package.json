@@ -30,7 +30,6 @@
     "@instructure/shared-types": "10.24.1",
     "@instructure/ui-dom-utils": "10.24.1",
     "@instructure/ui-react-utils": "10.24.1",
-    "@instructure/ui-testable": "10.24.1",
     "@instructure/ui-utils": "10.24.1",
     "escape-html": "^1.0.3"
   },

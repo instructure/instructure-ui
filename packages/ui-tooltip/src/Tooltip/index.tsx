@@ -32,7 +32,6 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
 import type { PopoverProps } from '@instructure/ui-popover'
 import { withStyle } from '@instructure/emotion'
@@ -50,7 +49,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
 
@@ -177,6 +175,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         shouldCloseOnDocumentClick={false}
         shouldCloseOnEscape
         shouldSetAriaExpanded={false}
+        data-cid="Tooltip"
       >
         {!preventTooltip ? (
           <span id={this._id} css={styles?.tooltip} role="tooltip">

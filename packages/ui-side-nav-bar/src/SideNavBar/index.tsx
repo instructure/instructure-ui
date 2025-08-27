@@ -23,8 +23,6 @@
  */
 import { Component, Children, ReactElement, isValidElement } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -47,7 +45,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   static readonly componentId = 'SideNavBar'
 
@@ -127,6 +124,7 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
       <nav
         {...props}
         css={this.props.styles?.navigation}
+        data-cid="SideNavBar"
         aria-label={label}
         ref={(element) => {
           this.ref = element

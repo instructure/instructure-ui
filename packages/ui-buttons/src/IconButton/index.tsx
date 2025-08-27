@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -44,7 +44,6 @@ category: components
 
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
-@testable()
 class IconButton extends Component<IconButtonProps> {
   static readonly componentId = 'IconButton'
 
@@ -129,6 +128,7 @@ class IconButton extends Component<IconButtonProps> {
         ref={(component) => {
           this._baseButton = component
         }}
+        data-cid={combineDataCid('IconButton', this.props)}
       >
         <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
       </BaseButton>

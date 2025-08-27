@@ -22,10 +22,15 @@
  * SOFTWARE.
  */
 
-import { isValidElement, cloneElement, Children, Component, ReactElement } from 'react'
+import {
+  isValidElement,
+  cloneElement,
+  Children,
+  Component,
+  ReactElement
+} from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
@@ -44,7 +49,6 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 
@@ -90,7 +94,8 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     return Children.map(children, (child, index) => {
       const isLastElement = index === numChildren - 1
       if (isValidElement(child)) {
-        const isCurrentPage = (child as ReactElement<any>).props.isCurrentPage || false
+        const isCurrentPage =
+          (child as ReactElement<any>).props.isCurrentPage || false
         if (isAriaCurrentSet && isCurrentPage) {
           console.warn(
             `Warning: Multiple elements with isCurrentPage=true found. Only one element should be set to current.`
@@ -125,6 +130,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
         margin={this.props.margin}
         aria-label={this.props.label}
         elementRef={this.handleRef}
+        data-cid="Breadcrumb"
       >
         <ol css={styles?.breadcrumb}>{this.renderChildren()}</ol>
       </View>

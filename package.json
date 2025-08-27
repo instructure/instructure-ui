@@ -92,6 +92,9 @@
     "vitest": "^3.2.2",
     "webpack": "^5.99.9"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
+  },
   "//dependency-comments": {
     "scripts": "The '--' at the end of commands is needed so user parameters are passed forward",
     "danger": "^11.3.1 -- add this back if we use it in pr-validation.yml",

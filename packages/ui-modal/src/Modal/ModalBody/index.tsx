@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 
@@ -43,7 +42,6 @@ id: Modal.Body
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
@@ -106,6 +104,7 @@ class ModalBody extends Component<ModalBodyProps> {
       <View
         {...passthroughProps}
         display="block"
+        data-cid="ModalBody"
         width={isFit ? '100%' : undefined}
         height={isFit ? '100%' : undefined}
         elementRef={this.handleRef}

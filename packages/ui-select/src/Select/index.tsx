@@ -25,7 +25,7 @@
 import { ComponentElement, Children, Component, memo, ReactNode } from 'react'
 
 import * as utils from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
+import { combineDataCid } from '@instructure/ui-utils'
 import {
   matchComponentTypes,
   omitProps,
@@ -130,7 +130,6 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Select extends Component<SelectProps> {
   static readonly componentId = 'Select'
   private readonly SCROLL_TOLERANCE = 0.5
@@ -816,7 +815,10 @@ class Select extends Component<SelectProps> {
         }) => (
           <span
             {...getRootProps({ css: styles?.select })}
-            ref={(el) => {this.ref = el}}
+            ref={(el) => {
+              this.ref = el
+            }}
+            data-cid={combineDataCid('Select', this.props)}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

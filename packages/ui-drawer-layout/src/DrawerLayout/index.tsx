@@ -33,7 +33,6 @@ import {
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { createChainedFunction, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import type { PlacementPropValues } from '@instructure/ui-position'
@@ -70,7 +69,6 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, null)
 @textDirectionContextConsumer()
-@testable()
 class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
   static readonly componentId = 'DrawerLayout'
 
@@ -323,6 +321,7 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
           {...props}
           css={this.props.styles?.drawerLayout}
           ref={this.handleRef}
+          data-cid="DrawerLayout"
         >
           {this.renderChildren()}
         </div>

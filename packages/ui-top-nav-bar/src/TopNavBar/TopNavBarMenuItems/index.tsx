@@ -30,7 +30,6 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -63,7 +62,6 @@ id: TopNavBar.MenuItems
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarMenuItems extends Component<
   TopNavBarMenuItemsProps,
   TopNavBarMenuItemsState
@@ -269,6 +267,7 @@ class TopNavBarMenuItems extends Component<
           itemSpacing: styles.itemSpacing
         })}
         aria-label={listLabel}
+        data-cid="TopNavBarMenuItems"
       >
         {this.renderChildren()}
       </TruncateList>

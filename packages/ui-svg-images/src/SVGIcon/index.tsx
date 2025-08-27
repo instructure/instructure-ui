@@ -24,7 +24,6 @@
 
 import { Component, ReactInstance } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import { InlineSVG } from '../InlineSVG'
@@ -42,7 +41,6 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class SVGIcon extends Component<SVGIconProps> {
   static readonly componentId = 'SVGIcon'
 
@@ -106,6 +104,7 @@ class SVGIcon extends Component<SVGIconProps> {
         css={styles?.svgIcon}
         className={className}
         elementRef={this.handleRef}
+        data-cid="SVGIcon"
       />
     )
   }
