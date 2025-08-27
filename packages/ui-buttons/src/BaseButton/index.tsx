@@ -285,6 +285,7 @@ class BaseButton extends Component<BaseButtonProps> {
     if ((onClick && as && needsZeroTabIndex) || (isSafari() && as)) {
       tabIndexValue = tabIndex || 0
     }
+
     return (
       <View
         {...passthroughProps(props)}
@@ -299,12 +300,21 @@ class BaseButton extends Component<BaseButtonProps> {
         borderWidth="none"
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
-        href={href}
+        // if Button is disabled, don't pass href attribute (disabled <a> tags are not supported by default)
+        // and set aria-disabled true to inform screen readers
+        href={isDisabled ? undefined : href}
+        aria-disabled={isDisabled ? 'true' : undefined}
         type={href ? undefined : type}
         elementRef={this.handleElementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        role={onClick && as !== 'button' ? 'button' : undefined}
+        role={
+          elementType === 'a'
+            ? 'link'
+            : onClick && as !== 'button'
+            ? 'button'
+            : undefined
+        }
         tabIndex={tabIndexValue}
         disabled={isDisabled || isReadOnly}
         css={styles?.baseButton}
