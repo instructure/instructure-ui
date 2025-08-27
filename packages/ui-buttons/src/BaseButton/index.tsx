@@ -257,7 +257,8 @@ class BaseButton extends Component<BaseButtonProps> {
       ...props
     } = this.props
 
-    const { isDisabled, isReadOnly, elementType } = this
+    const { isDisabled, isReadOnly } = this
+    let { elementType } = this
     // only add 0 tabIndex value if it doesn't have it by default, see
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
     let needsZeroTabIndex = true
@@ -285,6 +286,11 @@ class BaseButton extends Component<BaseButtonProps> {
     if ((onClick && as && needsZeroTabIndex) || (isSafari() && as)) {
       tabIndexValue = tabIndex || 0
     }
+
+    // if the button is disabled and has an href, then we render it as a button
+    // to avoid being focusable and clickable (<a> elements with href are always
+    // focusable and clickable, even with disabled attribute)
+    elementType = isDisabled && href ? 'button' : elementType
     return (
       <View
         {...passthroughProps(props)}
