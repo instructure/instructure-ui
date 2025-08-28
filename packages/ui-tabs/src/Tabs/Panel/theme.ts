@@ -35,7 +35,8 @@ const generateComponentTheme = (theme: Theme): TabsPanelTheme => {
 
   const themeSpecificStyle: ThemeSpecificStyle<TabsPanelTheme> = {
     canvas: {
-      color: theme['ic-brand-font-color-dark']
+      color: theme['ic-brand-font-color-dark'],
+      focusOutlineColor: theme['ic-brand-primary']
     }
   }
 
@@ -49,7 +50,8 @@ const generateComponentTheme = (theme: Theme): TabsPanelTheme => {
     borderColor: colors?.contrasts?.grey3045,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
-    defaultOverflowY: 'auto'
+    defaultOverflowY: 'auto',
+    focusOutlineColor: colors.contrasts.blue4570
   }
 
   return {
