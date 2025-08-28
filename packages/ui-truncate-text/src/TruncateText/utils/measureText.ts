@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { getComputedStyle } from '@instructure/ui-dom-utils'
+import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
 /**
  * ---
@@ -44,7 +44,7 @@ function measureText(nodes: Node[], parentNode?: Node) {
 }
 
 function measure(string: string | null, domNode?: Node) {
-  const style = getComputedStyle(domNode)
+  const style = getCSSStyleDeclaration(domNode)
   // we use a canvas in a doc fragment to prevent having to render the string full width in the DOM
   const canvas = document.createElement('canvas')
   document.createDocumentFragment().appendChild(canvas)
@@ -60,22 +60,22 @@ function measure(string: string | null, domNode?: Node) {
   // grab individual font styles
   // some browsers don't report a value for style['font']
   context.font = [
-    style.fontWeight,
-    style.fontStyle,
-    style.fontSize,
-    style.fontFamily
+    style?.fontWeight,
+    style?.fontStyle,
+    style?.fontSize,
+    style?.fontFamily
   ].join(' ')
 
-  if (style.textTransform === 'uppercase') {
+  if (style?.textTransform === 'uppercase') {
     text = string.toUpperCase()
-  } else if (style.textTransform === 'lowercase') {
+  } else if (style?.textTransform === 'lowercase') {
     text = string.toLowerCase()
-  } else if (style.textTransform === 'capitalize') {
+  } else if (style?.textTransform === 'capitalize') {
     text = string.replace(/\b\w/g, (str: string) => str.toUpperCase())
   }
 
-  if (style.letterSpacing !== 'normal') {
-    letterOffset = text.length * parseInt(style.letterSpacing as string)
+  if (style?.letterSpacing !== 'normal') {
+    letterOffset = text.length * parseInt(style?.letterSpacing as string)
   }
 
   width = context.measureText(text).width + letterOffset
