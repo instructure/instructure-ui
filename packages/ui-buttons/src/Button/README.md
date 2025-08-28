@@ -42,6 +42,8 @@ type: example
   <Button color="ai-primary" renderIcon={IconAiSolid} margin="small">AI Primary</Button>
   <Button color="ai-secondary" renderIcon={IconAiColoredSolid} margin="small">AI Secondary</Button>
   <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
+  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
   <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
 </View>
 ```
