@@ -1,0 +1,42 @@
+# MetricGroup
+
+
+A `MetricGroup` component displays multiple `Metric` (value + label) in rows.
+
+```javascript
+---
+type: example
+---
+<MetricGroup>
+  <Metric renderLabel="Grade" renderValue="80%" />
+  <Metric renderLabel="Late" renderValue="4" />
+  <Metric renderLabel="Missing" renderValue="2" />
+</MetricGroup>
+```
+
+
+### Props
+
+| Component | Prop | Type | Required | Default | Description |
+|-----------|------|------|----------|---------|-------------|
+| MetricGroup | children | `React.ReactNode` | No | `null` | children of type `Metric` |
+| MetricGroup | dir | `'ltr' \| 'rtl'` | No | - |  |
+
+### Usage
+
+Install the package:
+
+```shell
+npm install @instructure/ui-metric
+```
+
+Import the component:
+
+```javascript
+/*** ES Modules (with tree shaking) ***/
+import { MetricGroup } from '@instructure/ui-metric'
+
+/*** ES Modules (without tree shaking) ***/
+import { MetricGroup } from '@instructure/ui-metric/es/MetricGroup/index'
+```
+
