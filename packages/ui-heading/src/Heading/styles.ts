@@ -153,7 +153,11 @@ const generateStyle = (
       background: `
         linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
       border: 'solid transparent',
-      WebkitTextFillColor: 'transparent'
+      WebkitTextFillColor: 'transparent',
+      '@media print': {
+        background: 'transparent',
+        WebkitTextFillColor: 'unset'
+      }
     }
   }
 
@@ -208,6 +212,10 @@ const generateStyle = (
         linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
       border: 'solid transparent',
       WebkitTextFillColor: 'transparent',
+      '@media print': {
+        background: 'transparent',
+        WebkitTextFillColor: 'unset'
+      },
       paddingRight: '.25rem'
     },
     igniteAIStacked: {
