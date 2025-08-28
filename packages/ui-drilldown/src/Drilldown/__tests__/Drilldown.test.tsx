@@ -682,22 +682,6 @@ describe('<Drilldown />', () => {
 
       expect(popoverContent).toBeVisible()
     })
-
-    it('should give error if onToggle is not provided (controllable)', async () => {
-      render(
-        <Drilldown rootPageId="page0" trigger={<button>Toggle</button>} show>
-          <Drilldown.Page id="page0">
-            <Drilldown.Option id="option01">Option</Drilldown.Option>
-          </Drilldown.Page>
-        </Drilldown>
-      )
-      const popoverContent = screen.getByText('Option')
-
-      expect(popoverContent).toBeVisible()
-
-      expect(popoverContent).toBeVisible()
-      expect(consoleErrorMock).toHaveBeenCalled()
-    })
   })
 
   describe('onFocus prop', () => {

@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions,
-  PropValidators,
   AsElementType,
   OptionsSeparatorTheme
 } from '@instructure/shared-types'
@@ -53,13 +50,7 @@ type DrilldownSeparatorProps =
     DrilldownSeparatorOwnProps &
     WithStyleProps<OptionsSeparatorTheme, null> &
     OtherHTMLAttributes<DrilldownSeparatorOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = ['id', 'as']
 
 export type { DrilldownSeparatorProps }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ContextType, isValidElement } from 'react'
+import {
+  Component,
+  Children,
+  ContextType,
+  isValidElement,
+  type ReactElement
+} from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -31,7 +37,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TableBodyProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from '../TableContext'
 
 /**
@@ -46,7 +52,6 @@ class Body extends Component<TableBodyProps> {
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
-  static propTypes = propTypes
   static defaultProps = {
     children: null
   }
@@ -73,7 +78,7 @@ class Body extends Component<TableBodyProps> {
         {Children.map(children, (child) => {
           if (isValidElement(child)) {
             return safeCloneElement(child, {
-              key: child.props.name,
+              key: (child as ReactElement<any>).props.name,
               // Sent down for compatibility with custom components
               // TODO DEPRECATED, remove in v11
               hover,

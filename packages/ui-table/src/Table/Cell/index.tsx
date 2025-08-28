@@ -32,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TableCellProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from '../TableContext'
 
 /**
@@ -47,7 +47,6 @@ class Cell extends Component<TableCellProps> {
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     textAlign: 'start',

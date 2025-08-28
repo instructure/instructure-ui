@@ -1,123 +1,71 @@
 ---
-title: Upgrade Guide for Version 10.0
+title: Upgrade Guide for Version 11
 category: Guides
-order: 98
+order: 7
 ---
 
-# Upgrade Guide for Version 10
+# Upgrade Guide for Version 11
 
-## Introduction
+## InstUI and React
 
-InstUI v10 is a major release with a new theming color system. It has been simplified and rewritten to make our design language easier to understand and more uniform.
+> React 16 support was dropped with InstUI 11. Please upgrade to React 17 or later before upgrading to InstUI v11!
 
-With the new system some old designs could be more challenging or very hard to implement. This is intentional, we wanted
-to avoid situations when someone really changes the look and feel of their application.
-In these cases, make sure you talk with your designer and update the UI according to the new designs.
+### React 19
 
-The revised designs should result in better accessibility ([WCAG 2.1](https://www.w3.org/TR/WCAG21/) compliance!), less theming code and more uniform look and feel.
+InstUI v11 added support for React 19. But upgrading to React 19 might cause issues because InstUI needs to access the native DOM in some cases and React introduced a breaking change here by [removing `ReactDOM.findDOMNode()`](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-reactdom-finddomnode). If you are upgrading to React 19, you will need to add `ref`s to some of your custom components that use InstUI utilities, see [this guide](/#accessing-the-dom). We suggest to check your code thoroughly for errors, especially places where you use your own components as some kind of popovers or its triggers (e.g. Menu, Popover, Tooltip, Drilldown,..)
 
-## Step-by-step guide
+If you are staying on React 17 or 18 you might just see error messages like (`Error: ${elName} doesn't have "ref" property.`), but your code should work the same as with InstUI v10.
 
-We recommend upgrading your application for each major version gradually, e.g. if you plan to update from 8.x to 10.x,
-then migrate first to the latest 9.x and then to version 10.
+## Removal of deprecated props/components/APIs
 
-The places where your code can break during the upgrade are related to theme overrides, color props and color utilities.
-Please check the [theming components](#theming-components) guide to understand the new color system.
+### InstUISettingsProvider
 
-If you override the theme colors, you must use the new colors provided either in the `canvas-high-contrast` or in the `canvas` theme object.
-The previous color system has been removed, the old color names are no longer available.
+[InstUISettingsProvider](/#InstUISettingsProvider)'s `as` prop was removed, it will always render as a `<span>` (note: it will only render anything to the DOM if you provide a value to the `dir` prop.). The provided codemod will remove this prop automatically (see below).
 
-### `Instructure` theme is removed
+### Table
 
-Instructure theme (`@instructure/instructure-theme`) is no longer maintained and not compatible with InstUI v10.
-If you were using it, you need to switch to the `canvas` or the `canvas-high-contrast` theme.
+[Table](/#Table) is now using [TableContext](#TableContext) to pass down data to its child components, the following props are no longer passed down to their children (This should only affect you if you wild custom table rows or cells):
 
-### Component level color overrides
+| Component | prop        | Substitute / Notes              |
+| --------- | ----------- | ------------------------------- |
+| `Row`     | `isStacked` | is now stored in `TableContext` |
+| `Body`    | `isStacked` | is now stored in `TableContext` |
+| `Body`    | `hover`     | is now stored in `TableContext` |
+| `Body`    | `headers`   | is now stored in `TableContext` |
 
-If you had component level overrides of colors you need to migrate using the following table:
+### Theming engine changes
 
-| Old                | New (v10)                     |
-| ------------------ | ----------------------------- |
-| `colors.brand`     | `colors.contrasts.blue4570`   |
-| `colors.link`      | `colors.contrasts.blue4570`   |
-| `colors.electric`  | `colors.contrasts.blue4570`   |
-| `colors.shamrock`  | `colors.contrasts.green4570`  |
-| `colors.barney`    | `colors.contrasts.blue4570`   |
-| `colors.crimson`   | `colors.contrasts.red4570`    |
-| `colors.fire`      | `colors.contrasts.orange4570` |
-| `colors.licorice`  | `colors.contrasts.grey125125` |
-| `colors.oxford`    | `colors.contrasts.grey100100` |
-| `colors.ash`       | `colors.contrasts.grey4570`   |
-| `colors.slate`     | `colors.contrasts.grey4570`   |
-| `colors.tiara`     | `colors.contrasts.grey1214`   |
-| `colors.porcelain` | `colors.contrasts.grey1111`   |
-| `colors.white`     | `colors.contrasts.white1010`  |
+| Deprecation                                | What to use instead?                                                                                  |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `canvas.use()`, `canvasHighContrast.use()` | Wrap all your application roots in `<InstUISettingsProvider>`                                         |
+| `variables` field on theme objects         | Use `canvas.borders` instead of `canvas.variables.borders` (same for all othere fields)               |
+| `@instructure/theme-registry` package      | This added the removed functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
 
-You can use the latest [codemod](#ui-codemods) to automate this process.
+### Removal of the `deprecated`, `experimental`, `hack` decorators
 
-InstUI v9:
+We have removed these utilities from the `ui-react-utils` package because we are phasing out parts from the codebase that use decorators.
 
-```jsx
----
-type: code
----
-<Heading level="h3" color="primary"
-         themeOverride={{primaryColor: canvas.colors.brand}}>
-    I have nice color!
-</Heading>
-```
+If you want to still use these we suggest to copy-paste their code from the latest v10 codebase (Note: they only work for class-based components!).
 
-InstUI v10:
+## API Changes
 
-```jsx
+- `ui-dom-utils`/`getComputedStyle` can now return `undefined`: In previous versions sometimes returned an empty object which could lead to runtime exceptions when one tried to call methods of `CSSStyleDeclaration` on it.
+- TO-DO: [TimeSelect](/#TimeSelect) as a controlled component can now return an '' instead of a valid date when its input field is cleared. In previous versions it always reverted to the last selected value when the input field was cleared and lost focus.
+
+## Codemods
+
+To ease the upgrade we provide codemods that will automate most of the changes. Pay close attention to its output, it cannot refactor complex code! The codemod scripts can be run via the following commands:
+
+```sh
 ---
 type: code
 ---
-<Heading level="h3" margin="small small" color="primary"
-         themeOverride={{primaryColor: canvas.colors.contrasts.blue4570}}>
-    some nice blue text.
-</Heading>
+npm install @instructure/ui-codemods@11
+npx jscodeshift@17.3.0 -t node_modules/@instructure/ui-codemods/lib/instUIv11Codemods.ts <path> --usePrettier=false
 ```
 
-Notice, that the new values use `colors.contrasts`. Please do not use `colors.primitives` for anything.
+Options for the codemod:
 
-### Theme level color overrides
-
-InstUI v9 theme level properties `text`, `background`, `border` (for example `backgroundLightest` or `textDarkest`) have been removed.
-To upgrade these props you need to find and override component level theme variables for each component that used the replaced property.
-**This is heavily discouraged, upcoming designs should not necessitate theme overrides.**
-
-For example, if you had `backgroundLightest` overridden on the theme level, you need to find every component whose theme
-utilizes `backgroundLightest` and override them individually in each component. Some of these components are `Alert`, `Avatar`, `Billboard`, `View` and many more.
-
-InstUI v9:
-
-```jsx
----
-type: code
----
-
-<InstUISettingsProvider
-  theme={{
-    themeOverrides: {
-      canvas: {
-        colors: { backgroundLightest: 'orange' }
-      }
-    }
-  }}
->
-```
-
-InstUI v10:
-
-```jsx
----
-type: code
----
-
-<Alert themeOverride={{background: 'orange'}}></Alert>
-<Avatar themeOverride={{background: 'orange'}}></Avatar>
-<Billboard themeOverride={{background: 'orange'}}></Billboard>
-<Tabs themeOverride={{defaultBackground: 'orange', scrollFadeColor:'orange'}}></Tabs>
-//...and all other components that use color.backgroundLightest
-```
+- `filename`: if specified then emitted warnings are written to this file.
+- `usePrettier`: if `true` the transformed code will be run through Prettier. You can customize this through a [Prettier
+  config file](https://prettier.io/docs/configuration.html)

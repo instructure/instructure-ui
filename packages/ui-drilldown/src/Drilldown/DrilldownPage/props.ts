@@ -23,18 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children } from '@instructure/ui-prop-types'
-
-import type {
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
-
-import DrilldownGroup from '../DrilldownGroup'
-import DrilldownOption from '../DrilldownOption'
-import DrilldownSeparator from '../DrilldownSeparator'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import type { OptionChild, SeparatorChild, GroupChild } from '../props'
 import { Renderable } from '@instructure/shared-types'
@@ -97,23 +86,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrilldownPageProps = DrilldownPageOwnProps &
   OtherHTMLAttributes<DrilldownPageOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  children: Children.oneOf([
-    DrilldownOption,
-    DrilldownSeparator,
-    DrilldownGroup
-  ]),
-  renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderActionLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderBackButtonLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  onHeaderActionClicked: PropTypes.func,
-  onBackButtonClicked: PropTypes.func,
-  withoutHeaderSeparator: PropTypes.bool,
-  disabled: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'children',
@@ -127,4 +99,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { DrilldownPageProps, PageChildren }
-export { propTypes, allowedProps }
+export { allowedProps }

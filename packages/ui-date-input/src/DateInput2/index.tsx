@@ -22,13 +22,7 @@
  * SOFTWARE.
  */
 
-import {
-  useState,
-  useEffect,
-  forwardRef,
-  ForwardedRef,
-  ValidationMap
-} from 'react'
+import { useState, useEffect, forwardRef, ForwardedRef } from 'react'
 import type { SyntheticEvent } from 'react'
 import { Calendar } from '@instructure/ui-calendar'
 import { IconButton } from '@instructure/ui-buttons'
@@ -42,7 +36,6 @@ import { TextInput } from '@instructure/ui-text-input'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { getLocale, getTimezone } from '@instructure/ui-i18n'
 
-import { propTypes } from './props'
 import type { DateInput2Props } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { Moment } from '@instructure/ui-i18n'
@@ -130,7 +123,6 @@ function parseLocaleDate(
 category: components
 ---
 **/
-// eslint-disable-next-line react/display-name
 const DateInput2 = forwardRef(
   (
     {
@@ -341,7 +333,8 @@ const DateInput2 = forwardRef(
   }
 )
 
-DateInput2.propTypes = propTypes as ValidationMap<DateInput2Props>
+// TODO this is probably needed?
+DateInput2.displayName = 'DateInput2'
 
 export default DateInput2
 export { DateInput2 }

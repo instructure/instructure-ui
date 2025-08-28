@@ -44,7 +44,7 @@ import { AppContext } from '../App'
 import Preview from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
 import type { PlaygroundProps, PlaygroundState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
 
 const codeIconPath = (
@@ -56,7 +56,6 @@ const fullScreenIconPath = (
 
 @withStyle(generateStyle, generateComponentTheme)
 class Playground extends Component<PlaygroundProps, PlaygroundState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     readOnly: false,

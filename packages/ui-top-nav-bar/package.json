@@ -27,6 +27,8 @@
     "@instructure/console": "10.24.2",
     "@instructure/emotion": "10.24.2",
     "@instructure/shared-types": "10.24.2",
+    "@instructure/ui-babel-preset": "10.24.2",
+    "@instructure/ui-themes": "10.24.2",
     "@instructure/ui-a11y-content": "10.24.2",
     "@instructure/ui-avatar": "10.24.2",
     "@instructure/ui-breadcrumb": "10.24.2",
@@ -37,33 +39,14 @@
     "@instructure/ui-icons": "10.24.2",
     "@instructure/ui-link": "10.24.2",
     "@instructure/ui-popover": "10.24.2",
-    "@instructure/ui-prop-types": "10.24.2",
     "@instructure/ui-react-utils": "10.24.2",
     "@instructure/ui-responsive": "10.24.2",
-    "@instructure/ui-testable": "10.24.2",
     "@instructure/ui-tooltip": "10.24.2",
     "@instructure/ui-tray": "10.24.2",
     "@instructure/ui-truncate-list": "10.24.2",
     "@instructure/ui-utils": "10.24.2",
-    "@instructure/ui-view": "10.24.2",
-    "prop-types": "^15.8.1"
-  },
-  "devDependencies": {
-    "@instructure/ui-axe-check": "10.24.2",
-    "@instructure/ui-babel-preset": "10.24.2",
     "@instructure/ui-color-utils": "10.24.2",
-    "@instructure/ui-scripts": "10.24.2",
-    "@instructure/ui-themes": "10.24.2",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.6.1",
-    "vitest": "^3.2.2"
-  },
-  "peerDependencies": {
-    "react": ">=16.14 <=18"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "sideEffects": false
+    "@instructure/ui-view": "10.24.2",
+    "@instructure/ui-axe-check": "10.24.2"
+  }
 }

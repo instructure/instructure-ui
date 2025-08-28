@@ -45,18 +45,15 @@
     "@instructure/ui-popover": "10.24.2",
     "@instructure/ui-portal": "10.24.2",
     "@instructure/ui-position": "10.24.2",
-    "@instructure/ui-prop-types": "10.24.2",
     "@instructure/ui-react-utils": "10.24.2",
-    "@instructure/ui-testable": "10.24.2",
     "@instructure/ui-tooltip": "10.24.2",
     "@instructure/ui-utils": "10.24.2",
     "@instructure/ui-view": "10.24.2",
     "@instructure/uid": "10.24.2",
-    "no-scroll": "^2.1.1",
-    "prop-types": "^15.8.1"
+    "no-scroll": "^2.1.1"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

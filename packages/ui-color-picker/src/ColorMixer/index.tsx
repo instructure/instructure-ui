@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { isValid } from '@instructure/ui-color-utils'
 import conversions from '@instructure/ui-color-utils'
 import { logWarn as warn } from '@instructure/console'
@@ -36,7 +35,7 @@ import Slider from './Slider'
 import RGBAInput from './RGBAInput'
 
 import type { ColorMixerProps, ColorMixerState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import generateStyle from './styles'
 
 /**
@@ -45,9 +44,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, null)
-@testable()
 class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer'
 
@@ -139,6 +136,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
         aria-disabled={disabled}
         ref={this.handleRef}
         css={styles?.colorMixer}
+        data-cid="ColorMixer"
       >
         <span
           css={styles?.sliderAndPaletteContainer}

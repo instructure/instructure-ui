@@ -70,9 +70,6 @@
       "path": "./packages/ui-checkbox/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-code-editor/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-codemods/tsconfig.build.json"
     },
     {
@@ -187,9 +184,6 @@
       "path": "./packages/ui-progress/tsconfig.build.json"
     },
     {
-      "path": "./packages/ui-prop-types/tsconfig.build.json"
-    },
-    {
       "path": "./packages/ui-radio-input/tsconfig.build.json"
     },
     {
@@ -236,9 +230,6 @@
     },
     {
       "path": "./packages/ui-tag/tsconfig.build.json"
-    },
-    {
-      "path": "./packages/ui-testable/tsconfig.build.json"
     },
     {
       "path": "./packages/ui-text/tsconfig.build.json"

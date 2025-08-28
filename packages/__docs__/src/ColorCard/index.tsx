@@ -28,9 +28,8 @@ import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { ColorName } from '../ColorName'
 import type { ColorCardProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 class ColorCard extends Component<ColorCardProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     minimal: false

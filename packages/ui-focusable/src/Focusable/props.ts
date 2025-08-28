@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 import {
   CElement,
   DOMElement,
@@ -84,12 +82,6 @@ type PropKeys = keyof FocusableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FocusableProps = FocusableOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.func,
-  render: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'render']
 
 type FocusableState = {
@@ -98,4 +90,4 @@ type FocusableState = {
 }
 
 export type { FocusableProps, FocusableState }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -46,3 +46,4 @@ export {
   isChromium,
   isAndroidOrIOS
 } from './getBrowser'
+export { combineDataCid } from './combineDataCid'

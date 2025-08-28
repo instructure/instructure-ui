@@ -23,11 +23,6 @@
  */
 
 import { JSX } from 'react'
-import PropTypes from 'prop-types'
-
-import { controllable } from '@instructure/ui-prop-types'
-
-import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { ViewProps } from '@instructure/ui-view'
 
@@ -102,15 +97,6 @@ type PropKeys = keyof ExpandableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ExpandableProps = ExpandableOwnProps & WithDeterministicIdProps
-
-const propTypes: PropValidators<PropKeys> = {
-  expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-  defaultExpanded: PropTypes.bool,
-  onToggle: PropTypes.func,
-  children: PropTypes.func,
-  render: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'expanded',
   'defaultExpanded',
@@ -125,4 +111,4 @@ export type {
   RenderExpandable,
   ExpandableToggleProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }
