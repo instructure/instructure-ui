@@ -23,7 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
-import { getComputedStyle } from './getComputedStyle'
+import { getCSSStyleDeclaration } from './getCSSStyleDeclaration'
 import { UIElement } from '@instructure/shared-types'
 
 /**
@@ -52,22 +52,24 @@ function isVisible(el?: UIElement, recursive = true): boolean {
     return isVisible(parent, recursive)
   }
 
-  const style = node ? getComputedStyle(node) : ({} as CSSStyleDeclaration)
+  const style = node
+    ? getCSSStyleDeclaration(node)
+    : ({} as CSSStyleDeclaration)
   // physically and visually hidden
-  if (style.display === 'none') {
+  if (style?.display === 'none') {
     return false
   }
   // visually hidden
-  if (style.visibility === 'hidden' || style.opacity === '0') {
+  if (style?.visibility === 'hidden' || style?.opacity === '0') {
     return false
   }
   // hidden by clipping
   if (
-    style.overflow === 'hidden' &&
-    style.position === 'absolute' &&
-    style.clip !== 'auto'
+    style?.overflow === 'hidden' &&
+    style?.position === 'absolute' &&
+    style?.clip !== 'auto'
   ) {
-    const rect = style.clip.substring(5).slice(0, -1).split(', ')
+    const rect = style?.clip.substring(5).slice(0, -1).split(', ')
     let zeros = true
     rect.forEach((a) => {
       if (a !== '0px') {
