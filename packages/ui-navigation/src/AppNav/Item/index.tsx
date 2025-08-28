@@ -31,7 +31,6 @@ import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -42,7 +41,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavItemProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -52,12 +51,10 @@ id: AppNav.Item
 @module Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Item extends Component<AppNavItemProps> {
   static readonly componentId = 'AppNav.Item'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
@@ -130,6 +127,7 @@ class Item extends Component<AppNavItemProps> {
         borderRadius="medium"
         cursor={isDisabled ? 'not-allowed' : cursor}
         css={this.props.styles?.item}
+        data-cid="AppNav.Item"
       >
         {icon}
         {labelIsForScreenReaders ? (

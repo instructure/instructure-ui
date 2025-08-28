@@ -30,7 +30,6 @@ import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import { Dialog } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
@@ -40,7 +39,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { DrawerLayoutContext } from '../index'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState,
@@ -56,7 +55,6 @@ id: DrawerLayout.Tray
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
-@testable()
 class DrawerTray extends Component<
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState
@@ -65,7 +63,6 @@ class DrawerTray extends Component<
 
   static locatorAttribute = 'data-drawer-tray'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     shouldContainFocus: true,
@@ -246,6 +243,7 @@ class DrawerTray extends Component<
                 {...omitProps(props, DrawerTray.allowedProps)}
                 ref={this.handleContentRef}
                 css={trayStyles}
+                data-cid="DrawerTray"
               >
                 <Dialog
                   open

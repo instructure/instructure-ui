@@ -12,7 +12,6 @@
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-dom-utils/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-view/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-axe-check/tsconfig.build.json" }

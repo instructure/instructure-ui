@@ -580,7 +580,6 @@ describe('<TopNavBarItem />', () => {
       )
 
       expect(submenuTrigger).not.toBeInTheDocument()
-      expect(consoleErrorMock).toHaveBeenCalled()
     })
 
     it('should render submenu', async () => {
@@ -594,10 +593,6 @@ describe('<TopNavBarItem />', () => {
       )
 
       expect(customElementInitial).toBeInTheDocument()
-      expect(customElementInitial).not.toHaveAttribute(
-        'data-cid',
-        expect.stringContaining('Drilldown')
-      )
 
       const button = container.querySelector(
         "[class$='inlineBlock-baseButton']"
@@ -697,10 +692,6 @@ describe('<TopNavBarItem />', () => {
         "span[class$='-position']"
       )
       expect(customElementInitial).toBeInTheDocument()
-      expect(customElementInitial).not.toHaveAttribute(
-        'data-cid',
-        expect.stringContaining('Drilldown')
-      )
 
       const button = container.querySelector(
         "[class$='inlineBlock-baseButton']"
@@ -858,10 +849,6 @@ describe('<TopNavBarItem />', () => {
           "span[class$='-position']"
         )
         expect(customElementInitial).toBeInTheDocument()
-        expect(customElementInitial).not.toHaveAttribute(
-          'data-cid',
-          expect.stringContaining('Popover')
-        )
 
         const button = screen.getByRole('button')
         expect(button).toHaveAttribute('aria-haspopup', 'true')
@@ -916,10 +903,6 @@ describe('<TopNavBarItem />', () => {
           "span[class$='-position']"
         )
         expect(customElementInitial).toBeInTheDocument()
-        expect(customElementInitial).not.toHaveAttribute(
-          'data-cid',
-          expect.stringContaining('Popover')
-        )
 
         const button = screen.getByRole('button')
         expect(button).toHaveAttribute('aria-haspopup', 'true')

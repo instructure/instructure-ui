@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  presets: [
-    [
-      require('@instructure/ui-babel-preset'),
-      {
-        coverage: Boolean(process.env.COVERAGE),
-        esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
-      }
-    ]
-  ]
+/**
+ * Combines a component's default data-cid with a data-cid from props
+ * @param dataCid - The default data-cid for the component
+ * @param props - The component props object that may contain a data-cid
+ * @returns A combined data-cid string, trimmed of extra whitespace
+ */
+const combineDataCid = (dataCid: string, props: any): string => {
+  const dataCidFromProps = props['data-cid'] || ''
+  return `${dataCid} ${dataCidFromProps}`.trim()
 }
+
+export { combineDataCid }

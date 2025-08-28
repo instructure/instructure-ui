@@ -23,13 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type TruncateListOwnProps = {
   /**
@@ -97,18 +92,6 @@ type TruncateListState = {
   isMeasuring: boolean
   menuTriggerWidth?: number
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  visibleItemsCount: PropTypes.number,
-  onUpdate: PropTypes.func,
-  renderHiddenItemMenu: PropTypes.func,
-  itemSpacing: PropTypes.string,
-  fixMenuTriggerWidth: PropTypes.string,
-  debounce: PropTypes.number,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'renderHiddenItemMenu',
@@ -121,4 +104,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TruncateListProps, TruncateListStyle, TruncateListState }
-export { propTypes, allowedProps }
+export { allowedProps }

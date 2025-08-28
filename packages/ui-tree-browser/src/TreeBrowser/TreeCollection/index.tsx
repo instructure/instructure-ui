@@ -24,7 +24,6 @@
 
 import { Component, ReactElement, SyntheticEvent } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
@@ -34,7 +33,7 @@ import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import type { CompareObject } from '../props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { CollectionItem, CollectionProps, CollectionData } from '../props'
 
 type AriaSelectedType = { 'aria-selected'?: boolean }
@@ -46,7 +45,6 @@ id: TreeBrowser.Collection
 ---
 **/
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class TreeCollection extends Component<
   TreeBrowserCollectionProps,
   TreeCollectionState
@@ -54,7 +52,6 @@ class TreeCollection extends Component<
   static readonly componentId = 'TreeBrowser.Collection'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     collections: [],
@@ -209,7 +206,7 @@ class TreeCollection extends Component<
 
   renderCollectionChildren(
     collectionId: string | number | undefined,
-    child: ReactElement,
+    child: ReactElement<any>,
     position: number,
     keyword: 'before' | 'after'
   ) {
@@ -397,6 +394,7 @@ class TreeCollection extends Component<
         onFocus={(e) => this.handleFocus(e, { id: id, type: 'collection' })}
         onBlur={(e) => this.handleBlur(e, { id: id, type: 'collection' })}
         {...ariaSelected}
+        data-cid="TreeCollection"
       >
         <TreeButton {...collectionProps} />
         {expanded && this.childCount > 0 && (

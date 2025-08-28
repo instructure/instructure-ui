@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import type { SimpleSelectGroupProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -37,7 +37,6 @@ class Group extends Component<SimpleSelectGroupProps> {
   static readonly componentId = 'SimpleSelect.Group'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
   static defaultProps = {}
 
   /* istanbul ignore next */

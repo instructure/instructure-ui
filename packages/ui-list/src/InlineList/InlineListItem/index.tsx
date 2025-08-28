@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -33,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { InlineListItemProps } from './props'
 
 /**
@@ -43,11 +42,9 @@ id: InlineList.Item
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class InlineListItem extends Component<InlineListItemProps> {
   static readonly componentId = 'InlineList.Item'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     padding: 'none',
@@ -101,6 +98,7 @@ class InlineListItem extends Component<InlineListItemProps> {
         display="inline-block"
         maxWidth="100%"
         elementRef={this.handleRef}
+        data-cid="InlineListItem"
       >
         {children}
         {!lastPlaceholder && (

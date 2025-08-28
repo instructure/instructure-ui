@@ -160,7 +160,7 @@ const finalConfig = tseslint.config(
     },
     settings: {
       react: {
-        version: process.env.REACT_VERSION || '18.3.1'
+        version: process.env.REACT_VERSION || '19.1'
       }
     }
   },

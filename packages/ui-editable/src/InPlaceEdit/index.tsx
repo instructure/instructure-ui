@@ -36,7 +36,7 @@ import { View } from '@instructure/ui-view'
 import { Editable } from '../Editable'
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { InPlaceEditProps } from './props'
 import type { EditableRenderProps } from '../Editable/props'
 
@@ -48,7 +48,6 @@ category: components
 @withStyle(generateStyle, null)
 class InPlaceEdit extends Component<InPlaceEditProps> {
   static readonly componentId = 'InPlaceEdit'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     readOnly: false,

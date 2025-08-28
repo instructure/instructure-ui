@@ -24,7 +24,6 @@
 
 import { Component, ComponentClass, ReactElement } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
@@ -36,17 +35,15 @@ import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 
 import type { OverlayProps, OverlayState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-@testable()
 class Overlay extends Component<OverlayProps, OverlayState> {
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     open: false,
@@ -170,6 +167,7 @@ class Overlay extends Component<OverlayProps, OverlayState> {
         {...pickProps(this.props, Portal.allowedProps)}
         open={this.props.open || this.state.transitioning}
         onOpen={createChainedFunction(this.handlePortalOpen, this.props.onOpen)}
+        data-cid="Overlay"
       >
         {content}
       </Portal>

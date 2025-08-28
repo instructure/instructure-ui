@@ -25,7 +25,6 @@
 import { Children, Component, ReactElement, ReactNode } from 'react'
 
 import { warn, error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import { contains, containsActiveElement } from '@instructure/ui-dom-utils'
 import {
   callRenderProp,
@@ -63,7 +62,7 @@ import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps, SelectedGroupOptionsMap } from './props'
+import { allowedProps, SelectedGroupOptionsMap } from './props'
 
 import type {
   DrilldownProps,
@@ -101,11 +100,9 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static readonly componentId = 'Drilldown'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
@@ -782,9 +779,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   ) => {
     const selectedOption = this.getPageChildById(id)
 
-    // TODO: this line can be removed when React 16 is no longer supported
-    event.persist()
-
     if (
       !id ||
       !selectedOption ||
@@ -830,11 +824,16 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (groupProps?.selectableType) {
       this.handleGroupOptionSelected(event, selectedOption)
     } else {
+      // TODO workaround for react 19 default props
+      const optionWithDefaultProps = {
+        ...selectedOptionChild,
+        props: { ...selectedOptionChild.props, role: 'menuitem' }
+      }
       if (typeof onSelect === 'function') {
         onSelect(event, {
           value,
           isSelected: true,
-          selectedOption: selectedOptionChild,
+          selectedOption: optionWithDefaultProps,
           drilldown: this
         })
       }
@@ -1025,15 +1024,15 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       id,
       children,
       href,
-      as,
-      role,
+      as = 'li', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
+      role = 'menuitem', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       subPageId,
-      disabled,
+      disabled = false, // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       renderLabelInfo,
       renderBeforeLabel,
       renderAfterLabel,
-      beforeLabelContentVAlign,
-      afterLabelContentVAlign,
+      beforeLabelContentVAlign = 'start', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
+      afterLabelContentVAlign = 'start', // workaround after the react 19 upgrade, defaultProps doesn't work anymore
       description,
       descriptionRole,
       elementRef,
@@ -1293,7 +1292,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       children,
       renderGroupTitle,
       themeOverride,
-      role,
+      role = 'group', // react 19 defaultProps workaround
       as,
       elementRef
     } = group.props
@@ -1410,6 +1409,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             // (because it has an arrow)
             {...(trigger ? {} : { borderWidth: 'small' })}
             as="div"
+            data-cid="Drilldown"
             elementRef={this.handleDrilldownRef}
             tabIndex={0}
             css={styles?.drilldown}
@@ -1502,10 +1502,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       shouldSetAriaExpanded,
       styles
     } = this.props
+
     const borderColor = (styles?.drilldown as { borderColor: string })
       ?.borderColor
     return trigger ? (
       <Popover
+        data-cid="Drilldown"
         themeOverride={{
           // use here own theme's color
           borderColor: borderColor
@@ -1566,9 +1568,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           },
           'aria-haspopup': this.props.role,
           id: this._triggerId,
-          disabled: !!((trigger as ReactElement).props.disabled || disabled),
+          disabled: !!(
+            (trigger as ReactElement<any>).props.disabled || disabled
+          ),
           'aria-disabled':
-            (trigger as ReactElement).props.disabled || disabled
+            (trigger as ReactElement<any>).props.disabled || disabled
               ? 'true'
               : undefined
         })}

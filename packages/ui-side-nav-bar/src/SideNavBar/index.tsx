@@ -23,8 +23,6 @@
  */
 import { Component, Children, ReactElement, isValidElement } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -35,7 +33,7 @@ import { SideNavBarItem } from './SideNavBarItem'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { SideNavBarProps, SideNavBarState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 const navMinimized = ({ minimized }: { minimized: boolean }) => ({
   minimized: !minimized
@@ -47,12 +45,10 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   static readonly componentId = 'SideNavBar'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
@@ -128,6 +124,7 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
       <nav
         {...props}
         css={this.props.styles?.navigation}
+        data-cid="SideNavBar"
         aria-label={label}
         ref={(element) => {
           this.ref = element

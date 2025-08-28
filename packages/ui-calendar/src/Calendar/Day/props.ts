@@ -22,12 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-import { I18nPropTypes } from '@instructure/ui-i18n'
-
 import type {
   AsElementType,
-  PropValidators,
   CalendarDayTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -112,21 +108,6 @@ type CalendarDayProps = CalendarDayOwnProps &
   OtherHTMLAttributes<CalendarDayOwnProps>
 
 type CalendarDayStyle = ComponentStyle<'calendarDay' | 'day'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  date: I18nPropTypes.iso8601.isRequired,
-  label: PropTypes.string.isRequired,
-  interaction: PropTypes.oneOf(['enabled', 'disabled']),
-  isSelected: PropTypes.bool,
-  isToday: PropTypes.bool,
-  isOutsideMonth: PropTypes.bool,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'date',
@@ -142,4 +123,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { CalendarDayProps, CalendarDayStyleProps, CalendarDayStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

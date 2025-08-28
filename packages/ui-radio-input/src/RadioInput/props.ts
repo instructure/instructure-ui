@@ -23,12 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { InputHTMLAttributes } from 'react'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   RadioInputTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -97,24 +94,6 @@ type RadioInputStyle = ComponentStyle<
 type RadioInputState = {
   checked?: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.node.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  id: PropTypes.string,
-  name: PropTypes.string,
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  variant: PropTypes.oneOf(['simple', 'toggle']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  context: PropTypes.oneOf(['success', 'warning', 'danger', 'off']),
-  inline: PropTypes.bool,
-  onClick: PropTypes.func,
-  onChange: PropTypes.func,
-  inputRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'value',
@@ -133,4 +112,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { RadioInputProps, RadioInputState, RadioInputStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

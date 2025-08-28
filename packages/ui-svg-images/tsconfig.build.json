@@ -12,7 +12,6 @@
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../uid/tsconfig.build.json" }
   ]

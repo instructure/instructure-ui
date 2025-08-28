@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 
 import type { JSDocFunctionReturns } from '../../buildScripts/DataTypes.mts'
 
@@ -35,11 +33,6 @@ type PropKeys = keyof ReturnsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ReturnsProps = ReturnsOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  types: PropTypes.array.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['types']
 export type { ReturnsProps }
-export { propTypes, allowedProps }
+export { allowedProps }

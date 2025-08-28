@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 import { optionsThemeGenerator } from '@instructure/ui-options'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DrilldownGroupProps } from './props'
 
 /**
@@ -43,7 +43,6 @@ id: Drilldown.Group
 class DrilldownGroup extends Component<DrilldownGroupProps> {
   static readonly componentId = 'Drilldown.Group'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
