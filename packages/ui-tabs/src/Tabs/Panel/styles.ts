@@ -59,7 +59,10 @@ const generateStyle = (
       }),
       ...(isHidden && {
         display: 'none'
-      })
+      }),
+      '&:focus': {
+        outlineColor: componentTheme.focusOutlineColor
+      }
     },
     content: {
       label: 'panel__content',
