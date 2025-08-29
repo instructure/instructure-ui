@@ -51,6 +51,8 @@ import { Heading } from '../Heading'
 
 import type { HeroProps } from './props'
 import { propTypes, allowedProps } from './props'
+//@ts-expect-error ts complains for no real reason
+import logo from '../../logo.svg'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Hero extends Component<HeroProps> {
@@ -83,26 +85,7 @@ class Hero extends Component<HeroProps> {
   render() {
     const { version, layout, styles } = this.props
 
-    const corpLogo = (
-      <SVGIcon viewBox="0 0 500 500">
-        <polygon
-          fill="#2A7BA0"
-          points="30.07,373.64 250.04,249.77 470,373.64 250.04,497.46 "
-        />
-        <polygon
-          fill="#FDCC10"
-          points="140.03,64.02 30.07,125.9 140.08,187.84 250.04,125.9 "
-        />
-        <polygon
-          fill="#F78F20"
-          points="249.99,2.08 140.08,63.97 250.04,125.9 359.99,64.02 "
-        />
-        <polygon
-          fill="#EB2227"
-          points="359.99,64.02 250.04,125.9 359.99,187.84 469.95,125.9 "
-        />
-      </SVGIcon>
-    )
+    const corpLogo = <SVGIcon src={logo} />
 
     const canvasLogo = (
       <InlineSVG viewBox="0 0 792 220" width="239px" height="66px">
