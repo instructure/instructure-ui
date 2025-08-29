@@ -32,10 +32,8 @@ import type {
   UI
 } from '@instructure/shared-types'
 
-import canvasHighContrast, {
-  canvasHighContrastThemeLocal
-} from './themes/canvasHighContrast'
-import canvas, { canvasThemeLocal } from './themes/canvas'
+import { canvasHighContrast } from './themes/canvasHighContrast'
+import { canvas } from './themes/canvas'
 
 import {
   primitives,
@@ -63,9 +61,7 @@ type ThemeSpecificStyle<ComponentTheme> = {
 
 export {
   canvas,
-  canvasThemeLocal,
   canvasHighContrast,
-  canvasHighContrastThemeLocal,
   primitives,
   additionalPrimitives,
   dataVisualization

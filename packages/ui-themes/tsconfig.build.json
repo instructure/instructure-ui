@@ -12,9 +12,6 @@
     },
     {
       "path": "../shared-types/tsconfig.build.json"
-    },
-    {
-      "path": "../theme-registry/tsconfig.build.json"
     }
   ]
 }

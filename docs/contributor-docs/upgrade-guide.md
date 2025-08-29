@@ -35,11 +35,12 @@ If you are staying on React 17 or 18 you might just see error messages like (`Er
 
 ### Theming engine changes
 
-| Deprecation                                | What to use instead?                                                                                  |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| `canvas.use()`, `canvasHighContrast.use()` | Wrap all your application roots in `<InstUISettingsProvider>`                                         |
-| `variables` field on theme objects         | Use `canvas.borders` instead of `canvas.variables.borders` (same for all othere fields)               |
-| `@instructure/theme-registry` package      | This added the removed functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
+| Removed                                            | What to use instead?                                                                                  |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `canvas.use()`, `canvasHighContrast.use()`         | Wrap all your application roots in `<InstUISettingsProvider>`                                         |
+| `canvasThemeLocal`, `canvasHighContrastThemeLocal` | Use `canvas` and `canvasHighContrast` respectively, they are the same objects.                        |
+| `variables` field on theme objects                 | Use `canvas.borders` instead of `canvas.variables.borders` (same for all other fields)                |
+| `@instructure/theme-registry` package              | This added the removed functions above. Wrap all your application roots in `<InstUISettingsProvider>` |
 
 ### Removal of the `deprecated`, `experimental`, `hack` decorators
 

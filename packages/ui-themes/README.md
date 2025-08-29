@@ -14,50 +14,30 @@ npm install @instructure/ui-themes
 
 ##### Before mounting (rendering) your React application:
 
-- application level theming:
+```jsx
+import canvas from '@instructure/ui-themes'
 
-  ```jsx
-  import canvas from '@instructure/ui-themes'
-
-  ReactDOM.render(
-    <InstUISettingsProvider theme={canvas}>
-      <App />
-    </InstUISettingsProvider>,
-    element
-  )
-  ```
-
-- (DEPRECATED) global theming:
-
-  ```js
-  import canvas from '@instructure/ui-themes'
-
-  canvas.use()
-  ```
+ReactDOM.render(
+  <InstUISettingsProvider theme={canvas}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+```
 
 ##### To override the theme variables:
 
-- (DEPRECATED) globally:
+```jsx
+import canvas from '@instructure/ui-themes'
+const themeOverrides = { colors: { brand: 'red' } }
 
-  ```js
-  import canvas from '@instructure/ui-themes'
-
-  canvas.use({ overrides: { colors: { brand: 'red' } } })
-  ```
-
-- application level:
-
-  ```jsx
-  import canvas from '@instructure/ui-themes'
-  const themeOverrides = { colors: { brand: 'red' } }
-
-  ReactDOM.render(
-    <InstUISettingsProvider theme={{ ...canvas, ...themeOverrides }}>
-      <App />
-    </InstUISettingsProvider>,
-    element
-  )
-  ```
+ReactDOM.render(
+  <InstUISettingsProvider theme={{ ...canvas, ...themeOverrides }}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+```
 
 > You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
 

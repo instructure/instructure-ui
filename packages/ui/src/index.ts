@@ -150,7 +150,7 @@ export {
   FormFieldMessage,
   FormFieldMessages,
   FormFieldLayout,
-  FormFieldGroup,
+  FormFieldGroup
 } from '@instructure/ui-form-field'
 export type {
   FormFieldGroupProps,
@@ -240,10 +240,7 @@ export type {
   ModalFooterProps,
   ModalHeaderProps
 } from '@instructure/ui-modal'
-export {
-  Transition,
-  BaseTransition
-} from '@instructure/ui-motion'
+export { Transition, BaseTransition } from '@instructure/ui-motion'
 export type {
   TransitionProps,
   TransitionType,
@@ -397,9 +394,7 @@ export { TextInput } from '@instructure/ui-text-input'
 export type { TextInputProps } from '@instructure/ui-text-input'
 export {
   canvas,
-  canvasThemeLocal,
   canvasHighContrast,
-  canvasHighContrastThemeLocal,
   primitives,
   additionalPrimitives,
   dataVisualization
