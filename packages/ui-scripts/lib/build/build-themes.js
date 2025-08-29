@@ -22,30 +22,21 @@
  * SOFTWARE.
  */
 
-import bump from './bump.js'
-import server from './server.js'
-import tag from './tag.js'
-import deprecate from './deprecate.js'
-import publish from './publish.js'
-import lint from '../test/lint.js'
-import bundle from '../build/webpack.js'
-import clean from '../build/clean.js'
-import build from '../build/babel.js'
-import generateAllTokens from '../build/generate-all-tokens.js'
-import buildIcons from '../icons/build-icons.js'
-import buildThemes from '../build/build-themes.js'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
+import setupThemes from './buildThemes/setupThemes.js'
 
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  lint,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons,
-  buildThemes
-]
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+export default {
+  command: 'build-themes',
+  desc: 'Generate themes',
+  handler: async () => {
+    const rawData = fs.readFileSync(
+      path.join(__dirname, 'tokenStudioThemeTokens.json')
+    )
+    setupThemes('packages/ui-themes/src/themes/newThemes', rawData)
+  }
+}
