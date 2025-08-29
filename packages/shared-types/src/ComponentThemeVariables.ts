@@ -1387,6 +1387,7 @@ export type TabsPanelTheme = {
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
   defaultOverflowY: string
+  focusOutlineColor: Colors['contrasts']['blue4570']
 }
 
 export type TabsTabTheme = {
