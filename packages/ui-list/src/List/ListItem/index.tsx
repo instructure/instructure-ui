@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -33,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ListItemProps } from './props'
 
 /**
@@ -43,11 +42,9 @@ id: List.Item
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     padding: 'none',
@@ -98,6 +95,7 @@ class ListItem extends Component<ListItemProps> {
         padding={padding}
         maxWidth="100%"
         elementRef={this.handleRef}
+        data-cid="ListItem"
       >
         {children}
       </View>

@@ -24,14 +24,12 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ToggleButtonProps, ToggleButtonState } from './props'
 
 /**
@@ -40,11 +38,9 @@ category: components
 ---
 **/
 
-@testable()
 class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
   static readonly componentId = 'ToggleButton'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     size: 'medium',
@@ -125,6 +121,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           onClick={onClick}
           interaction={interaction}
           aria-pressed={status === 'pressed'}
+          data-cid="ToggleButton"
         >
           {callRenderProp(renderIcon)}
         </IconButton>

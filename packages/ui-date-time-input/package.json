@@ -40,15 +40,12 @@
     "@instructure/ui-form-field": "10.24.2",
     "@instructure/ui-i18n": "10.24.2",
     "@instructure/ui-icons": "10.24.2",
-    "@instructure/ui-prop-types": "10.24.2",
     "@instructure/ui-react-utils": "10.24.2",
-    "@instructure/ui-testable": "10.24.2",
     "@instructure/ui-time-select": "10.24.2",
-    "@instructure/ui-utils": "10.24.2",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-utils": "10.24.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

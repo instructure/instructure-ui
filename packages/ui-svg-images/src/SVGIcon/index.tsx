@@ -24,7 +24,6 @@
 
 import { Component, ReactInstance } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import { InlineSVG } from '../InlineSVG'
@@ -32,7 +31,7 @@ import { InlineSVG } from '../InlineSVG'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { SVGIconProps } from './props'
 import { SVGIconTheme } from '@instructure/shared-types'
 
@@ -42,12 +41,10 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class SVGIcon extends Component<SVGIconProps> {
   static readonly componentId = 'SVGIcon'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     rotate: '0',
@@ -107,6 +104,7 @@ class SVGIcon extends Component<SVGIconProps> {
         css={styles?.svgIcon}
         className={className}
         elementRef={this.handleRef}
+        data-cid="SVGIcon"
       />
     )
   }

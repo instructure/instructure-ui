@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
   AsElementType,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 type AccessibleContentOwnProps = {
@@ -52,14 +49,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AccessibleContentProps = AccessibleContentOwnProps &
   OtherHTMLAttributes<AccessibleContentOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  alt: PropTypes.string,
-  as: PropTypes.elementType,
-  children: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = ['alt', 'as', 'children']
 
 export type { AccessibleContentProps }
-export { propTypes, allowedProps }
+export { allowedProps }

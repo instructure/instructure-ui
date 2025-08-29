@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 import { optionsSeparatorThemeGenerator } from '@instructure/ui-options'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DrilldownSeparatorProps } from './props'
 
 /**
@@ -43,7 +43,6 @@ id: Drilldown.Separator
 class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
   static readonly componentId = 'Drilldown.Separator'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 

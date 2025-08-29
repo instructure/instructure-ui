@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 
 type GuidelinesOwnProps = {
   children: React.ReactNode
@@ -33,12 +31,7 @@ type PropKeys = keyof GuidelinesOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type GuidelinesProps = GuidelinesOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = ['children']
 
 export type { GuidelinesProps }
-export { propTypes, allowedProps }
+export { allowedProps }

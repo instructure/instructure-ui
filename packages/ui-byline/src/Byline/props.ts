@@ -23,15 +23,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  PropValidators,
   BylineTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -82,17 +79,6 @@ type BylineStyle = ComponentStyle<
 > & {
   maxWidth?: string
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.node,
-  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  alignContent: PropTypes.oneOf(['top', 'center']),
-  margin: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'alignContent',
   'children',
@@ -104,4 +90,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { BylineProps, BylineStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

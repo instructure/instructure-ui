@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   Renderable,
   TableHeadTheme
 } from '@instructure/shared-types'
@@ -65,13 +62,7 @@ type TableHeadProps = TableHeadOwnProps &
   OtherHTMLAttributes<TableHeadOwnProps>
 
 type TableHeadStyle = ComponentStyle<'head'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'renderSortLabel']
 
 export type { TableHeadProps, TableHeadStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

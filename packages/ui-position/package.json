@@ -29,12 +29,9 @@
     "@instructure/shared-types": "10.24.2",
     "@instructure/ui-dom-utils": "10.24.2",
     "@instructure/ui-portal": "10.24.2",
-    "@instructure/ui-prop-types": "10.24.2",
     "@instructure/ui-react-utils": "10.24.2",
-    "@instructure/ui-testable": "10.24.2",
     "@instructure/ui-utils": "10.24.2",
-    "@instructure/uid": "10.24.2",
-    "prop-types": "^15.8.1"
+    "@instructure/uid": "10.24.2"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.24.2",
@@ -45,7 +42,7 @@
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

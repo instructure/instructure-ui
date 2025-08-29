@@ -79,8 +79,6 @@ export type {
   CheckboxGroupProps,
   CheckboxProps
 } from '@instructure/ui-checkbox'
-export { CodeEditor } from '@instructure/ui-code-editor'
-export type { CodeEditorProps } from '@instructure/ui-code-editor'
 export {
   ColorPicker,
   ColorMixer,
@@ -152,8 +150,7 @@ export {
   FormFieldMessage,
   FormFieldMessages,
   FormFieldLayout,
-  FormFieldGroup,
-  FormPropTypes
+  FormFieldGroup
 } from '@instructure/ui-form-field'
 export type {
   FormFieldGroupProps,
@@ -182,7 +179,6 @@ export {
   textDirectionContextConsumer,
   DateTime,
   getTextDirection,
-  I18nPropTypes,
   Locale,
   DIRECTION
 } from '@instructure/ui-i18n'
@@ -244,11 +240,7 @@ export type {
   ModalFooterProps,
   ModalHeaderProps
 } from '@instructure/ui-modal'
-export {
-  Transition,
-  transitionTypePropType,
-  BaseTransition
-} from '@instructure/ui-motion'
+export { Transition, BaseTransition } from '@instructure/ui-motion'
 export type {
   TransitionProps,
   TransitionType,
@@ -290,7 +282,6 @@ export { Portal } from '@instructure/ui-portal'
 export type { PortalProps, PortalNode } from '@instructure/ui-portal'
 export {
   Position,
-  PositionPropTypes,
   calculateElementPosition,
   executeMirrorFunction,
   mirrorHorizontalPlacement,

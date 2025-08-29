@@ -29,7 +29,6 @@ import { ContextView } from '@instructure/ui-view'
 import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { withStyle } from '@instructure/emotion'
-import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   pickProps,
@@ -40,7 +39,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { RangeInputProps, RangeInputState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -49,13 +48,11 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class RangeInput extends Component<RangeInputProps, RangeInputState> {
   static readonly componentId = 'RangeInput'
   static outputLocatorAttribute = 'data-range-output'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     step: 1,
@@ -198,6 +195,7 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
         label={this.props.label}
         id={this.id}
         elementRef={this.handleRef}
+        data-cid="RangeInput"
       >
         <div css={this.props.styles?.rangeInput}>
           <input

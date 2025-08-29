@@ -41,6 +41,7 @@ export function runTest(codemod: Transform) {
     `${__dirname}/__testfixtures__/${codemod.name}`,
     { withFileTypes: true }
   )
+
   let fixturesRun = 0
   entries.forEach((entry) => {
     if (entry.isFile() && entry.name.includes('input')) {

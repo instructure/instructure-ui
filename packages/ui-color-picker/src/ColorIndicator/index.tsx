@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
@@ -32,7 +31,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { ColorIndicatorProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -40,9 +39,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ColorIndicator extends Component<ColorIndicatorProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'
 
@@ -78,6 +75,7 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
         {...omitProps(this.props, ColorIndicator.allowedProps)}
         ref={this.handleRef}
         css={styles?.colorIndicator}
+        data-cid="ColorIndicator"
       />
     )
   }

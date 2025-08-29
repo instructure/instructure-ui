@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 
@@ -33,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ModalBodyProps } from './props'
 import { UIElement } from '@instructure/shared-types'
 
@@ -44,11 +43,9 @@ id: Modal.Body
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     padding: 'medium',
@@ -125,6 +122,7 @@ class ModalBody extends Component<ModalBodyProps> {
       <View
         {...passthroughProps}
         display="block"
+        data-cid="ModalBody"
         width={isFit ? '100%' : undefined}
         height={isFit ? '100%' : undefined}
         elementRef={this.handleRef}

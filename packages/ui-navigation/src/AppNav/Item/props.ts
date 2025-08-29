@@ -21,16 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
 
 import type {
   AsElementType,
-  PropValidators,
   AppNavItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { Cursor } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/shared-types'
 import React from 'react'
 import { Renderable } from '@instructure/shared-types'
 
@@ -88,24 +86,6 @@ type AppNavItemProps = AppNavItemOwnProps &
   OtherHTMLAttributes<AppNavItemOwnProps>
 
 type AppNavItemStyle = ComponentStyle<'item' | 'label'>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired,
-  renderAfter: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  isSelected: PropTypes.bool,
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  cursor: PropTypes.string,
-  isDisabled: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'renderAfter',
@@ -120,4 +100,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { AppNavItemProps, AppNavItemStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

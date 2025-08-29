@@ -23,12 +23,10 @@
  */
 
 import { ReactNode } from 'react'
-import PropTypes from 'prop-types'
 
 import type {
   AsElementType,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -58,14 +56,7 @@ type ScreenReaderContentProps = ScreenReaderContentOwnProps &
   WithStyleProps<null, ScreenReaderContentStyle>
 
 type ScreenReaderContentStyle = ComponentStyle<'screenReaderContent'>
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  children: PropTypes.node,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = ['as', 'children', 'elementRef']
 
 export type { ScreenReaderContentProps, ScreenReaderContentStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

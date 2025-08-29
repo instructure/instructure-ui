@@ -23,14 +23,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
 
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators,
   UIElement
 } from '@instructure/shared-types'
 import type { FocusRegionOptions } from '@instructure/ui-a11y-utils'
@@ -67,77 +63,6 @@ type DialogProps = DialogOwnProps & OtherHTMLAttributes<DialogOwnProps>
 
 // JSDoc comments are here, because the doc app is not able to pick them up if
 // they are in another package
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  as: PropTypes.elementType,
-  display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
-  label: PropTypes.string,
-  open: PropTypes.bool,
-  /**
-   * Function called when tab focus leaves the focusable content. This only
-   * occurs when `shouldContainFocus` is set to false.
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Function called when a focus region is dismissed. This can happen when
-   * the user presses the escape key and `shouldCloseOnEscape` is true or
-   * when an IFrame is clicked or when anything outside the focus region
-   * is clicked if `shouldCloseOnDocumentClick` is true.
-   * @param event The event triggered the dismissal
-   * @param documentClick Whether the dismissal was triggered by a mouse click.
-   */
-  onDismiss: PropTypes.func,
-  /**
-   * An element or a function returning an element to focus by default
-   */
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  /**
-   * An element, function returning an element, or array of elements that will not be hidden from
-   * the screen reader when the focus region is active
-   */
-  liveRegion: PropTypes.oneOfType([
-    element,
-    PropTypes.arrayOf(element),
-    PropTypes.func
-  ]),
-  /**
-   * When set to true, or it is an array that includes the 'keyboard' string,
-   * the keyboard and screenreader focus is trapped; when set to 'screenreader'
-   * only the screenreader focus is trapped.
-   */
-  shouldContainFocus: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.oneOf(['keyboard', 'screenreader'])
-  ]),
-  /**
-   * When set to true the keyboard focus is returned to the active element
-   * before the focus region was activated.
-   */
-  shouldReturnFocus: PropTypes.bool,
-  /**
-   * When set to true the `onDismiss` function is called on a click outside
-   * the focus region.
-   */
-  shouldCloseOnDocumentClick: PropTypes.bool,
-  /**
-   * When set to true the `onDismiss` function is called on the `Escape`
-   * keypress
-   */
-  shouldCloseOnEscape: PropTypes.bool,
-  /**
-   * When set to true, the `defaultFocusElement` is focused on initialization.
-   */
-  shouldFocusOnOpen: PropTypes.bool,
-  /**
-   * provides a reference to the underlying html root element
-   */
-  elementRef: PropTypes.func,
-  /**
-   * Whether or not the element is a Tooltip
-   */
-  isTooltip: PropTypes.bool
-}
 
 const allowedProps: AllowedPropKeys = [
   'children',
@@ -159,4 +84,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { DialogProps }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -41,7 +41,6 @@ export {
 } from '@instructure/ui-buttons'
 export { Byline } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'
-export { CodeEditor } from '@instructure/ui-code-editor'
 export {
   ColorPicker,
   ColorMixer,

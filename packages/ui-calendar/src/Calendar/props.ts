@@ -22,14 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { Day } from './Day'
-
 import type {
   AsElementType,
-  PropValidators,
   CalendarTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -185,29 +179,6 @@ type CalendarProps = CalendarOwnProps &
 type CalendarStyle = ComponentStyle<
   'navigation' | 'navigationWithButtons' | 'weekdayHeader' | 'yearPicker'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  children: ChildrenPropTypes.oneOf([Day]),
-  currentDate: PropTypes.string,
-  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-  locale: PropTypes.string,
-  onDateSelected: PropTypes.func,
-  onRequestRenderNextMonth: PropTypes.func,
-  onRequestRenderPrevMonth: PropTypes.func,
-  renderNavigationLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderWeekdayLabels: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  ),
-  role: PropTypes.oneOf(['table', 'listbox']),
-  selectedDate: PropTypes.string,
-  timezone: PropTypes.string,
-  visibleMonth: PropTypes.string,
-  withYearPicker: PropTypes.object
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -233,4 +204,4 @@ type CalendarState = {
 }
 
 export type { CalendarProps, CalendarStyle, CalendarState }
-export { propTypes, allowedProps }
+export { allowedProps }
