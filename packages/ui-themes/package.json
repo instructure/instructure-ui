@@ -28,8 +28,7 @@
     "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@instructure/shared-types": "10.24.1",
-    "@instructure/theme-registry": "10.24.1"
+    "@instructure/shared-types": "10.24.1"
   },
   "publishConfig": {
     "access": "public"

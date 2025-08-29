@@ -8,7 +8,11 @@ order: 1
 
 InstUI supports [module federation](https://module-federation.io/) with some caveats. In a host app-guest app scenario, you have 2 choices depending on the version of InstUI you are using:
 
-### (Recommended) Host and guest app are using larger version than InstUI v10.14:
+### InstUI v11 or newer
+
+Just use themes as you would without module federation. Note that theme objects are not shared between instances, you will need to pass overrides manually to guest apps if needed.
+
+### InstUI v10.14 - v10.latest:
 
 - Both apps should use `canvasThemeLocal` or `canvasHighContrastThemeLocal` from the `@instructure/ui-themes` package when using themes. This means that `InstUISettingsProvider`'s theme prop cannot be left unset because it will default to `canvas`.
 - Apps cannot use `canvas.use()`, `canvasHighContrast.use()`, these do not exist in the local themes.

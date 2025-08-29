@@ -1,9 +1,6 @@
 {
   "references": [
     {
-      "path": "./packages/theme-registry/tsconfig.build.json"
-    },
-    {
       "path": "./packages/canvas-high-contrast-theme/tsconfig.build.json"
     },
     {

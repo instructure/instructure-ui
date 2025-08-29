@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/cli": "^7.27.2",
     "@instructure/command-utils": "10.24.1",
+    "@instructure/ui-themes": "10.24.1",
     "@instructure/pkg-utils": "10.24.1",
     "@lerna/project": "^6.4.1",
     "dotenv": "^16.5.0",
