@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { Tray } from '@instructure/ui'
+import { Button, Overlay, Text, Tray, View } from '@instructure/ui'
+import React from 'react'
 
 import '../support/component'
 import 'cypress-real-events'
@@ -65,5 +66,80 @@ describe('<Tray />', () => {
 
     cy.get('@tray').realPress('Escape')
     cy.wrap(onDismiss).should('have.been.called')
+  })
+
+  it.only('should handle focus properly in complex cases', async () => {
+    const Example = () => {
+      const [showTray, setShowTray] = React.useState(false)
+      const [showOverlay, setShowOverlay] = React.useState(false)
+
+      const handleTrayButtonClick = () => {
+        setShowOverlay(true)
+        // hide the Tray after the Overlay is rendered.
+        // This means it's not on the top of the FocusRegion stack
+        setTimeout(() => {
+          setShowTray(false)
+        }, 30)
+      }
+
+      return (
+        <View textAlign="center">
+          <View as="div" maxWidth="600px" margin="0 auto">
+            <Text as="p" size="large">
+              Click the button below to open a tray. Then click the button
+              inside the tray to trigger an overlay that will automatically
+              close after a short time.
+            </Text>
+            <Button
+              color="primary"
+              size="large"
+              id="open_tray_button"
+              onClick={() => setShowTray(true)}
+            >
+              Open Tray
+            </Button>
+            <Button id="test1_button">test 1</Button>
+            <Button id="test2_button">test 2</Button>
+          </View>
+
+          <Tray label="Sample Tray" open={showTray} placement="end">
+            <Text as="p">
+              This is the Tray. Click the button below to show an overlay and
+              automatically close this tray after a short time.
+            </Text>
+            <Button
+              color="success"
+              id="close_tray_button"
+              onClick={handleTrayButtonClick}
+            >
+              Close after a short time
+            </Button>
+            <Button onClick={() => setShowTray(false)}>Cancel</Button>
+            <Button>test</Button>
+          </Tray>
+
+          <Overlay open={showOverlay} transition="fade" label="Loading overlay">
+            <Text size="large" color="success">
+              This is the overlay.
+            </Text>
+          </Overlay>
+        </View>
+      )
+    }
+
+    cy.mount(<Example />)
+
+    cy.get('#open_tray_button').click()
+    // Wait 500ms so the Tray CSS animation can finish
+    cy.wait(500)
+    // Click the close_tray_button. This should run the state changes in its handler
+    cy.get('#close_tray_button').click()
+    // Wait 500ms so the Tray CSS animation can finish
+    cy.wait(500)
+    cy.focused().should('have.attr', 'id', 'open_tray_button')
+    cy.realPress('Tab')
+    cy.focused().should('have.attr', 'id', 'test1_button')
+    cy.realPress('Tab')
+    cy.focused().should('have.attr', 'id', 'test2_button')
   })
 })

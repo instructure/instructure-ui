@@ -86,4 +86,8 @@ export type FocusRegionOptions = {
    * Whether or not the element is a Tooltip
    */
   isTooltip?: boolean
+  /**
+   * The ID of the `FocusRegion` this belongs to. Used only for debugging.
+   */
+  regionId?: string
 }
