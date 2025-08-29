@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ContextType, isValidElement, type ReactElement } from 'react'
+import {
+  Component,
+  Children,
+  ContextType,
+  isValidElement,
+  type ReactElement
+} from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -46,7 +52,7 @@ class Body extends Component<TableBodyProps> {
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
-static defaultProps = {
+  static defaultProps = {
     children: null
   }
 
@@ -60,7 +66,7 @@ static defaultProps = {
 
   render() {
     const { children, styles } = this.props
-    const { isStacked, hover, headers } = this.context
+    const { isStacked } = this.context
 
     return (
       <View
@@ -72,16 +78,7 @@ static defaultProps = {
         {Children.map(children, (child) => {
           if (isValidElement(child)) {
             return safeCloneElement(child, {
-              key: (child as ReactElement<any>).props.name,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in v11
-              hover,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in v11
-              isStacked,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in v11
-              headers
+              key: (child as ReactElement<any>).props.name
             })
           }
           return child
