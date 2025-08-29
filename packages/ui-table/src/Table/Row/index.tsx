@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ContextType, isValidElement, type ReactElement } from 'react'
+import {
+  Component,
+  Children,
+  ContextType,
+  isValidElement,
+  type ReactElement
+} from 'react'
 
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -85,9 +91,6 @@ class Row extends Component<TableRowProps> {
             if (isValidElement(child)) {
               return safeCloneElement(child, {
                 key: (child as ReactElement<any>).props.name,
-                // Sent down for compatibility with custom components
-                // TODO DEPRECATED, remove in v11
-                isStacked,
                 // used by `Cell` to render its column title in `stacked` layout
                 header: headers && headers[index]
               })

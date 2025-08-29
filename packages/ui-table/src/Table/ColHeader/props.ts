@@ -31,10 +31,6 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
   /**
-   * DEPRECATED. Use `TableContext` to read this value
-   */
-  isStacked?: boolean
-  /**
    * A unique id for this column. The `id` is also used as option in combobox,
    * when sortable table is in stacked layout,
    * and no `stackedSortByLabel` is provided.
@@ -91,7 +87,6 @@ type TableColHeaderStyle = ComponentStyle<
 >
 const allowedProps: AllowedPropKeys = [
   'id',
-  'isStacked',
   'stackedSortByLabel',
   'children',
   'width',
