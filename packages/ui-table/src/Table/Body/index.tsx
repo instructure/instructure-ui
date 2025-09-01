@@ -66,7 +66,7 @@ class Body extends Component<TableBodyProps> {
 
   render() {
     const { children, styles } = this.props
-    const { isStacked, hover, headers } = this.context
+    const { isStacked } = this.context
 
     return (
       <View
@@ -78,16 +78,7 @@ class Body extends Component<TableBodyProps> {
         {Children.map(children, (child) => {
           if (isValidElement(child)) {
             return safeCloneElement(child, {
-              key: (child as ReactElement<any>).props.name,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in v11
-              hover,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in v11
-              isStacked,
-              // Sent down for compatibility with custom components
-              // TODO DEPRECATED, remove in v11
-              headers
+              key: (child as ReactElement<any>).props.name
             })
           }
           return child
