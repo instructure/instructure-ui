@@ -30,7 +30,11 @@ import {
   passthroughProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
+import {
+  isActiveElement,
+  addEventListener,
+  getCSSStyleDeclaration
+} from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { withStyle } from '@instructure/emotion'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -269,7 +273,11 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       return undefined
     }
 
-    const computedStyle = getComputedStyle(element)
+    const computedStyle = getCSSStyleDeclaration(element)
+    if (!computedStyle) {
+      return undefined
+    }
+
     const { width, paddingInlineStart, paddingInlineEnd } = computedStyle
 
     if (width === 'auto' || width === '') {

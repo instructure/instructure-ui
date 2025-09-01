@@ -34,23 +34,29 @@ import type { UIElement } from '@instructure/shared-types'
  *
  * Get the associated CSS properties and values for a
  * specified element
- * @module getComputedStyle
+ * @module getCSSStyleDeclaration
  *
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @param { string | null | undefined } pseudoElt - A string specifying the pseudo-element to match. Omitted (or null ) for real elements.
- * @returns { Object } object containing css properties and values for the element
+ * @returns { CSSStyleDeclaration | undefined } The style declaration containing css properties and values for the element or undefined
  */
-function getComputedStyle(el?: UIElement, pseudoElt?: string | null) {
-  let style = {}
+function getCSSStyleDeclaration(el?: UIElement, pseudoElt?: string | null) {
+  let style: CSSStyleDeclaration | undefined
   if (canUseDOM) {
     const node = el && findDOMNode(el)
     if (node) {
       const window = ownerWindow(el)
-      style = window ? window.getComputedStyle(node as Element, pseudoElt) : {}
+      try {
+        style = window
+          ? window.getComputedStyle(node as Element, pseudoElt)
+          : undefined
+      } catch {
+        style = undefined
+      }
     }
   }
-  return style as CSSStyleDeclaration
+  return style
 }
 
-export default getComputedStyle
-export { getComputedStyle }
+export default getCSSStyleDeclaration
+export { getCSSStyleDeclaration }
