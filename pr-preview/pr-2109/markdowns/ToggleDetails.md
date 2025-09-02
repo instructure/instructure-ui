@@ -280,7 +280,6 @@ type: embed
 | ToggleDetails | fluidWidth | `bool` | No | `false` | should the summary fill the width of its container |
 | ToggleDetails | children | `React.ReactNode` | No | `null` | The toggleable content passed inside the ToggleDetails component |
 | ToggleDetails | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Choose a size for the expand/collapse icon |
-| ToggleDetails | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -197,7 +197,6 @@ type: embed
 | Tray | border | `bool` | No | `false` | Should the `<Tray />` have a border |
 | Tray | shadow | `bool` | No | `true` | Should the `<Tray />` have a box shadow |
 | Tray | enableMask | `bool` | No | `false` | Add Mask overlay to the `<Tray />` |
-| Tray | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

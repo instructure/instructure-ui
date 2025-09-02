@@ -116,7 +116,6 @@ type: embed
 | Rating | valueNow | `number` | No | `0` | The current rating |
 | Rating | animateFill | `bool` | No | `false` | Set to make the icons animate when they become filled |
 | Rating | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Rating | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

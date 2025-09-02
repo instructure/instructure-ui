@@ -125,7 +125,6 @@ type: embed
 | CheckboxGroup | children | `CheckboxChild[]` | No | `null` | children of type `Checkbox` |
 | CheckboxGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | CheckboxGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
-| CheckboxGroup | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -237,7 +237,6 @@ valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progr
 | ProgressCircle | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Set the element type of the component's root |
 | ProgressCircle | shouldAnimateOnMount | `bool` | No | `false` |  |
 | ProgressCircle | animationDelay | `number` | No | - |  |
-| ProgressCircle | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -210,7 +210,6 @@ render(<Example />)
 | TruncateList | fixMenuTriggerWidth | `string` | No | - | Fix width of the Menu trigger (in 'rem', 'em' or 'px') |
 | TruncateList | debounce | `number` | No | `300` | The rate (in ms) the component responds to container resizing or an update to one of its child items |
 | TruncateList | elementRef | `(element: HTMLUListElement \| null) => void` | No | - | Provides a reference to the underlying ul element |
-| TruncateList | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

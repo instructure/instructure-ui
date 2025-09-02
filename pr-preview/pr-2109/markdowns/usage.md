@@ -1,5 +1,3 @@
-# Usage
-
 
 ## Quick Start
 

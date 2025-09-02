@@ -575,7 +575,6 @@ type: embed
 | Pagination | onPageChange | `(next: number, prev: number) => void` | No | - | Called when page number is changed |
 | Pagination | renderPageIndicator | `( pageIndex: number, currentPage: number ) => React.ReactNode` | No | `(page: number) => page` | Renders the visible pages |
 | Pagination | ellipsis | `React.ReactNode` | No | `'…'` | The ellipsis (e.g. "...") |
-| Pagination | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -111,7 +111,6 @@ For an example see [Button](#Button/#Styling%20buttons)
 | IconButton | cursor | `string` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | IconButton | href | `string` | No | - | Specifies an href attribute for the `IconButton`'s underlying html element. |
 | IconButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `Button` is clicked. |
-| IconButton | dir | `'ltr' \| 'rtl'` | No | - |  |
 | IconButton | to | `` | No | - | Needed for React Router links @private |
 
 ### Usage

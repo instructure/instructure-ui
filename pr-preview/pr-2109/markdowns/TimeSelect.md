@@ -145,7 +145,6 @@ type: embed
 | TimeSelect | allowNonStepInput | `bool` | No | `false` | Whether to allow the user to enter non-step divisible values in the input field. Note that even if this is set to `false` one can enter non-step divisible values programatically. The user will need to enter the value exactly (except for lower/uppercase) as specified by the `format` prop for it to be accepted. Default is `false` |
 | TimeSelect | onInputChange | `( /** * The raw HTML input event */ event: React.ChangeEvent<HTMLInputElement>, /** * The text value in the input field. */ value: string, /** * Current value as ISO datetime string, undefined it its a non-valid value. */ valueAsISOString?: string ) => void` | No | - | Callback fired when text input value changes. |
 | TimeSelect | allowClearingSelection | `bool` | No | `false` | Whether to allow for the user to clear the selected option in the input field. If `false`, the input field will return the last selected option after the input is cleared and loses focus. |
-| TimeSelect | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

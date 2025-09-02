@@ -249,7 +249,6 @@ type: example
 | Grid | vAlign | `'top' \| 'middle' \| 'bottom' \| 'stretch'` | No | `'top'` |  |
 | Grid | startAt | `'small' \| 'medium' \| 'large' \| 'x-large' \| null` | No | `'small'` |  |
 | Grid | visualDebug | `bool` | No | `false` |  |
-| Grid | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

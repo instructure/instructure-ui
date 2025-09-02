@@ -204,7 +204,6 @@ type: example
 | FileDrop | minWidth | `string \| number` | No | - | Set the CSS `minWidth` property on FileInput's outermost element |
 | FileDrop | margin | `string` | No | - | Valid values are 0, none, auto, xxx-small, xx-small, x-small, small, medium, large, x-large, xx-large. Apply these values via familiar CSS-like shorthand. For example: margin="small auto large". |
 | FileDrop | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual input element |
-| FileDrop | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

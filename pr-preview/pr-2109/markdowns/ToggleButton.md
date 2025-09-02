@@ -161,7 +161,6 @@ type: embed
 | ToggleButton | mountNode | `custom` | No | `null` | An element or a function returning an element to use as the mount node |
 | ToggleButton | placement | `custom` | No | `'top center'` | The placement of the tooltip in relation to the button |
 | ToggleButton | constrain | `custom` | No | `'window'` | The parent in which to constrain the tooltip. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element. |
-| ToggleButton | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

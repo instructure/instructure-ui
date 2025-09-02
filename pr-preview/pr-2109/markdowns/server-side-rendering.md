@@ -1,5 +1,3 @@
-# Server side rendering (SSR)
-
 
 # SSR with Next.js
 

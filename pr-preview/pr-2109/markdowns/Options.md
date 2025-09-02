@@ -731,7 +731,6 @@ Providing a `href` prop will render the option as `<a>` link element.
 | Options | elementRef | `(element: Element \| null) => void` | No | `() => {}` | The the actual list element |
 | Options | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `null` | Content to render as a label. Mostly for when the component is nested |
 | Options | children | `React.ReactNode` | No | `null` |  |
-| Options | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

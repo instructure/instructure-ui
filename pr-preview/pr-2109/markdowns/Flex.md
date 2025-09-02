@@ -437,7 +437,6 @@ type: example
 | Flex | justifyItems | `'center' \| 'start' \| 'end' \| 'space-around' \| 'space-between'` | No | `'start'` | Aligns Flex.Items on the horizontal axis (vertical if direction is column) |
 | Flex | wrap | `'wrap' \| 'no-wrap' \| 'wrap-reverse'` | No | `'no-wrap'` | Determines if the Flex.Items should wrap when they exceed their container's width |
 | Flex | withVisualDebug | `bool` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
-| Flex | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

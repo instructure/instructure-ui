@@ -257,7 +257,6 @@ type: embed
 | RadioInputGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | RadioInputGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
 | RadioInputGroup | isRequired | `bool` | No | - | Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change. |
-| RadioInputGroup | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

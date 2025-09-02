@@ -110,7 +110,6 @@ type: example
 | NutritionFacts | closeIconButtonScreenReaderLabel | `` | Yes | - | i18n text for the close iconButton |
 | NutritionFacts | triggerText | `` | Yes | - | i18n text for the trigger |
 | NutritionFacts | fullscreen | `` | No | `false` | sets the modal size to 'fullscreen'. Used for small viewports |
-| NutritionFacts | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

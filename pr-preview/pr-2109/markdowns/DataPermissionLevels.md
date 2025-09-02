@@ -59,7 +59,6 @@ readonly: true
 | DataPermissionLevels | currentFeature | `` | Yes | - | i18n text for the current feature |
 | DataPermissionLevels | triggerText | `` | Yes | - | i18n text for the trigger |
 | DataPermissionLevels | fullscreen | `` | No | `false` | sets the modal size to 'fullscreen'. Used for small viewports |
-| DataPermissionLevels | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

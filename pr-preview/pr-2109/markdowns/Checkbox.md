@@ -310,7 +310,6 @@ type: embed
 | Checkbox | labelPlacement | `'top' \| 'start' \| 'end'` | No | `'end'` |  |
 | Checkbox | isRequired | `bool` | No | - |  |
 | Checkbox | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
-| Checkbox | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

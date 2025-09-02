@@ -382,7 +382,6 @@ type: embed
 | Button | href | `string` | No | - | Specifies an href attribute for the `Button`'s underlying html element. |
 | Button | renderIcon | `React.ReactNode \| (() => React.ReactNode)` | No | - | An icon, or function that returns an icon. |
 | Button | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `Button` is clicked. |
-| Button | dir | `'ltr' \| 'rtl'` | No | - |  |
 | Button | to | `` | No | - | Needed for React Router links @private |
 
 ### Usage

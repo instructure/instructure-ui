@@ -1,5 +1,3 @@
-# Destroy Action
-
 
 ## Destroy Action
 

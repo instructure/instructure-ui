@@ -1,5 +1,3 @@
-# Color System
-
 
 ## Colors
 

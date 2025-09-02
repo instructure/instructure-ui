@@ -2534,7 +2534,6 @@ type: embed
 | Drilldown | offsetX | `string \| number` | No | `0` | The horizontal offset for the positioned content. Works only if `trigger` is provided. |
 | Drilldown | offsetY | `string \| number` | No | `0` | The vertical offset for the positioned content. Works only if `trigger` is provided. |
 | Drilldown | shouldSetAriaExpanded | `bool` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |
-| Drilldown | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -1,5 +1,3 @@
-# Upgrade Guide for Version 11
-
 
 # Upgrade Guide for Version 11 (WIP)
 

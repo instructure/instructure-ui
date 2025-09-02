@@ -48,9 +48,9 @@ Pre-configured and with unique styles, the `ai-headings` are used for standardiz
 type: example
 ---
 <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
- <Heading aiVariant="stacked">Nutrition Facts</Heading>
- <Heading aiVariant="horizontal">Nutrition Facts</Heading>
- <Heading aiVariant="iconOnly">Nutrition Facts</Heading>
+  <Heading aiVariant="stacked" level="h2">Nutrition Facts</Heading>
+  <Heading aiVariant="horizontal" level="h3">Nutrition Facts</Heading>
+  <Heading aiVariant="iconOnly" level="h4">Nutrition Facts</Heading>
 </div>
 ```
 
@@ -171,7 +171,6 @@ type: embed
 | Heading | elementRef | `(element: Element \| null) => void` | No | - | Provides a ref to the underlying HTML element |
 | Heading | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon that gets displayed before the text. |
 | Heading | variant | `\| 'titlePageDesktop' \| 'titlePageMobile' \| 'titleSection' \| 'titleCardSection' \| 'titleModule' \| 'titleCardLarge' \| 'titleCardRegular' \| 'titleCardMini' \| 'label' \| 'labelInline'` | No | - | Sets appearance of the heading. Will also set its heading level, if not specified by the `level` prop (deprecated, not recommended!) |
-| Heading | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

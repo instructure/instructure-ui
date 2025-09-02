@@ -76,7 +76,6 @@ type: example
 | ContextView | placement | `custom` | No | `'center end'` | Specifies how the arrow for `<ContextView />` will be rendered. Ex. `placement="top"` will render with an arrow pointing down. |
 | ContextView | debug | `bool` | No | `false` | Activate an outline around the component to make building your layout easier |
 | ContextView | borderColor | `string` | No | - | Sets the color of the ContextView border. Accepts a color string value (e.g., "#FFFFFF", "red") |
-| ContextView | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -21,7 +21,6 @@ type: example
 | ScreenReaderContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
 | ScreenReaderContent | children | `node` | No | `null` | content meant for screen readers only |
 | ScreenReaderContent | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| ScreenReaderContent | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

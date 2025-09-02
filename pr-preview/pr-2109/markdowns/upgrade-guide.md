@@ -1,5 +1,3 @@
-# Upgrade Guide for Version 10.0
-
 
 # Upgrade Guide for Version 10
 

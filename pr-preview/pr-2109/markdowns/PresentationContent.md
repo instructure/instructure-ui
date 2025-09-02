@@ -32,7 +32,6 @@ type: example
 | PresentationContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
 | PresentationContent | children | `React.ReactNode` | No | `null` |  |
 | PresentationContent | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| PresentationContent | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

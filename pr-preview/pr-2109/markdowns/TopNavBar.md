@@ -2353,7 +2353,6 @@ type: example
 | TopNavBar | mediaQueryMatch | `'element' \| 'media'` | No | `'media'` | Specifies if the underlying `<Responsive />` component should use element or media queries |
 | TopNavBar | inverseColor | `\| boolean \| ((currentLayout: TopNavBarContextType['layout']) => boolean)` | No | `false` | Displays the TopNavBar in inverse color mode. If a function is passed, the function has the current layout ('desktop' or 'smallViewport') as its parameter. |
 | TopNavBar | elementRef | `(el: HTMLDivElement \| null) => void` | No | - | A function that returns a reference to root HTML element |
-| TopNavBar | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

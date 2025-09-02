@@ -450,7 +450,6 @@ Multiple `<DrawerLayout />` components can be nested in order to place trays on 
 | DrawerLayout | children | `React.ReactNode` | No | - | Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray` |
 | DrawerLayout | minWidth | `string` | No | `'30rem'` | Min width for the `<DrawerLayout.Content />` |
 | DrawerLayout | onOverlayTrayChange | `(shouldOverlayTray: boolean) => void` | No | - | Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint Called with a boolean value, `true` if the tray is now overlaying the content or `false` if it is side by side |
-| DrawerLayout | dir | `enum` | No | - |  |
 
 ### Usage
 

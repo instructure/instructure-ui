@@ -2296,7 +2296,6 @@ type: embed
 | Table | elementRef | `(element: Element \| null) => void` | No | - | Provide a reference to the underlying html element |
 | Table | hover | `bool` | No | `false` | Highlight each row on hover |
 | Table | layout | `'auto' \| 'fixed' \| 'stacked'` | No | `'auto'` | `auto` lets the browser determine table column widths based on cell content, while `fixed` forces columns of equal width (sets the [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) CSS prop to `fixed`). `stacked` renders table in one column to be more readable on narrow screens |
-| Table | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

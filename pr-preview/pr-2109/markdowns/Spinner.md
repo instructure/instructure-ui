@@ -71,7 +71,6 @@ type: example
 | Spinner | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Spinner | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Spinner | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Render Spinner "as" another HTML element |
-| Spinner | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

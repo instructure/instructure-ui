@@ -141,7 +141,6 @@ type: example
 | ColorMixer | colorSliderNavigationExplanationScreenReaderLabel | `string` | Yes | - | screenReaderLabel for the color slider. It should explain how to navigate the slider with the keyboard ('A' for left, 'D' for right) |
 | ColorMixer | alphaSliderNavigationExplanationScreenReaderLabel | `string` | Yes | - | screenReaderLabel for the alpha slider. It should explain how to navigate the slider with the keyboard ('A' for left, 'D' for right) |
 | ColorMixer | colorPaletteNavigationExplanationScreenReaderLabel | `string` | Yes | - | screenReaderLabel for the color palette. It should explain how to navigate the palette with the keyboard ('W' for up, 'A' for left, 'S' for down and 'D' for right) |
-| ColorMixer | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

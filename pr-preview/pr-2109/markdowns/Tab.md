@@ -16,7 +16,6 @@
 | Tab | onKeyDown | `( event: React.KeyboardEvent<ViewOwnProps>, tabData: { index: number; id: string } ) => void` | No | - |  |
 | Tab | children | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Tab | isOverflowScroll | `bool` | No | - | Whether tabOverflow prop in Tabs is set to 'scroll'. |
-| Tab | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

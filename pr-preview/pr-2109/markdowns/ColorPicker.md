@@ -655,7 +655,6 @@ type: example
 | ColorPicker | withAlpha | `bool` | No | `false` | If true, alpha slider will be rendered. Defaults to false |
 | ColorPicker | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
 | ColorPicker | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the input element |
-| ColorPicker | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

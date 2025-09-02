@@ -366,7 +366,6 @@ render(<Example />)
 | DateInput2 | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
 | DateInput2 | disabledDates | `string[] \| ((isoDateToCheck: string) => boolean)` | No | - |  |
 | DateInput2 | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the inner input element |
-| DateInput2 | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

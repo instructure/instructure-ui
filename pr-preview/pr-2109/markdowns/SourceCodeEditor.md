@@ -1534,7 +1534,6 @@ Nisi anim cupidatat excepteur officia.
 | SourceCodeEditor | elementRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the underlying html root element |
 | SourceCodeEditor | containerRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the html element of the editor's container |
 | SourceCodeEditor | searchConfig | `{ placeholder: string nextResultLabel: string prevResultLabel: string }` | No | - | enable search panel in editor when pressing ctrl/cmd+f |
-| SourceCodeEditor | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

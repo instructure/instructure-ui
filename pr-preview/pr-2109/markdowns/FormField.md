@@ -59,7 +59,6 @@ type: example
 | FormField | inputContainerRef | `(element: HTMLSpanElement \| null) => void` | No | - |  |
 | FormField | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | FormField | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| FormField | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

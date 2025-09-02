@@ -190,7 +190,6 @@ type: embed
 | Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
 | Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
 | Link | variant | `'inline' \| 'inline-small' \| 'standalone' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component |
-| Link | dir | `'ltr' \| 'rtl'` | No | - |  |
 | Link | to | `` | No | - | Needed for React Router links @private |
 
 ### Usage

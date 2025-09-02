@@ -94,7 +94,6 @@ type: embed
 | SideNavBar | toggleLabel | `{ expandedLabel?: string minimizedLabel?: string }` | Yes | - | Screen reader label for the toggle button expanded/minimized state |
 | SideNavBar | href | `string` | No | - | If the `<SideNavBar.Item>` goes to a new page, pass an href |
 | SideNavBar | onClick | `(event: React.MouseEvent) => void` | No | `function (_e: React.MouseEvent) {}` | If the `<SideNavBar.Item>` does not go to a new page pass an onClick |
-| SideNavBar | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -111,7 +111,6 @@ type: example
 | Billboard | disabled | `bool` | No | `false` | Whether or not to disable the billboard |
 | Billboard | readOnly | `bool` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
 | Billboard | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Billboard | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -9,43 +9,28 @@
 ### User Guides
 #### Getting Started
 
-- [CODE_OF_CONDUCT](https://instructure.design/pr-preview/pr-2109/markdowns/CODE_OF_CONDUCT.md)
-- [LICENSE](https://instructure.design/pr-preview/pr-2109/markdowns/LICENSE.md)
-- [accessibility](https://instructure.design/pr-preview/pr-2109/markdowns/accessibility.md): Instructure UI targets WCAG 2.1 AA/AAA standards with proper color contrast, keyboard navigation, screen reader support, and ARIA compliance. Components are perceivable, operable, understandable, and robust.
-- [theming-components](https://instructure.design/pr-preview/pr-2109/markdowns/theming-components.md): InstUI has two themes: `canvas` (default) and `canvas-high-contrast`. Colors are layered: primitives (base), contrasts (theme-specific), and UI (curated tokens). Use `InstUISettingsProvider` to set themes. Overrides allow customization but must maintain accessibility.
-- [usage](https://instructure.design/pr-preview/pr-2109/markdowns/usage.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
-
-#### Contributor Guides
-
-- [adding-icons](https://instructure.design/pr-preview/pr-2109/markdowns/adding-icons.md)
-- [api-guidelines](https://instructure.design/pr-preview/pr-2109/markdowns/api-guidelines.md)
-- [building-instui](https://instructure.design/pr-preview/pr-2109/markdowns/building-instui.md)
-- [codemods](https://instructure.design/pr-preview/pr-2109/markdowns/codemods.md)
-- [contributing](https://instructure.design/pr-preview/pr-2109/markdowns/contributing.md)
-- [dev-commands](https://instructure.design/pr-preview/pr-2109/markdowns/dev-commands.md)
-- [release](https://instructure.design/pr-preview/pr-2109/markdowns/release.md)
-- [writing-docs](https://instructure.design/pr-preview/pr-2109/markdowns/writing-docs.md)
+- [Accessibility](https://instructure.design/pr-preview/pr-2109/markdowns/accessibility.md): Instructure UI targets WCAG 2.1 AA/AAA standards with proper color contrast, keyboard navigation, screen reader support, and ARIA compliance. Components are perceivable, operable, understandable, and robust.
+- [Theming components](https://instructure.design/pr-preview/pr-2109/markdowns/theming-components.md): InstUI has two themes: `canvas` (default) and `canvas-high-contrast`. Colors are layered: primitives (base), contrasts (theme-specific), and UI (curated tokens). Use `InstUISettingsProvider` to set themes. Overrides allow customization but must maintain accessibility.
+- [Usage](https://instructure.design/pr-preview/pr-2109/markdowns/usage.md): Quick start: Create a React app, add `@instructure/ui`, wrap with `InstUISettingsProvider`, and use components. Integrate with existing projects by adding the dependency and provider. Read about theme overrides and accessibility for best practices.
 
 #### Guides
 
-- [upgrade-guide](https://instructure.design/pr-preview/pr-2109/markdowns/upgrade-guide.md)
-- [v11-upgrade-guide](https://instructure.design/pr-preview/pr-2109/markdowns/v11-upgrade-guide.md)
-- [accessing-the-dom](https://instructure.design/pr-preview/pr-2109/markdowns/accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
-- [color-system](https://instructure.design/pr-preview/pr-2109/markdowns/color-system.md): Color system divided into primitive (hex values) and semantic (contextual) colors. Includes data visualization palette with primary and secondary hues for charts and graphs on white backgrounds.
-- [focus-management](https://instructure.design/pr-preview/pr-2109/markdowns/focus-management.md): Comprehensive focus management system for dialogs, modals, and popovers. Uses Dialog component with FocusRegion and FocusRegionManager to trap focus, handle escape keys, and manage screen reader accessibility.
-- [form-errors](https://instructure.design/pr-preview/pr-2109/markdowns/form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Supports both `error` (legacy) and `newError` (accessible) types. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
-- [layout-spacing](https://instructure.design/pr-preview/pr-2109/markdowns/layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
-- [module-federation](https://instructure.design/pr-preview/pr-2109/markdowns/module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
-- [server-side-rendering](https://instructure.design/pr-preview/pr-2109/markdowns/server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
-- [typography-system](https://instructure.design/pr-preview/pr-2109/markdowns/typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
-- [using-theme-overrides](https://instructure.design/pr-preview/pr-2109/markdowns/using-theme-overrides.md): Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions.
+- [Accessing the dom](https://instructure.design/pr-preview/pr-2109/markdowns/accessing-the-dom.md): Guidance for properly accessing DOM elements in React components using refs instead of findDOMNode to avoid warnings. Examples show good and bad patterns for component ref handling.
+- [Color system](https://instructure.design/pr-preview/pr-2109/markdowns/color-system.md): Color system divided into primitive (hex values) and semantic (contextual) colors. Includes data visualization palette with primary and secondary hues for charts and graphs on white backgrounds.
+- [Focus management](https://instructure.design/pr-preview/pr-2109/markdowns/focus-management.md): Comprehensive focus management system for dialogs, modals, and popovers. Uses Dialog component with FocusRegion and FocusRegionManager to trap focus, handle escape keys, and manage screen reader accessibility.
+- [Form errors](https://instructure.design/pr-preview/pr-2109/markdowns/form-errors.md): InstUI form components use a `messages` prop for error/hint/success messages. Supports both `error` (legacy) and `newError` (accessible) types. Required fields now show an asterisk automatically. Examples provided for various form components like TextInput, Checkbox, and DateTimeInput.
+- [Layout spacing](https://instructure.design/pr-preview/pr-2109/markdowns/layout-spacing.md): InstUI provides semantic spacing tokens (e.g., buttons, tags) for consistent layouts. Apply spacing via `margin` prop, container `gap`, or importing from theme. Legacy tokens are available for compatibility but not recommended for new layouts.
+- [Module federation](https://instructure.design/pr-preview/pr-2109/markdowns/module-federation.md): InstUI supports module federation with specific version requirements. For v10.14+, use local themes (`canvasThemeLocal`). For older hosts, guest apps must use v10.14+ and local themes. Global theme overrides don't apply to local themes.
+- [Server side rendering](https://instructure.design/pr-preview/pr-2109/markdowns/server-side-rendering.md): SSR with Next.js requires wrapping the app with `InstUISettingsProvider` for deterministic ID generation. Avoid `@instructure/ui` meta-package; install only needed packages. CodeEditor isn't SSR-compatible and must be dynamically imported.
+- [Typography system](https://instructure.design/pr-preview/pr-2109/markdowns/typography-system.md): Use `<Text>` and `<Heading>` components with semantic variants for consistent typography. Variants define font style, weight, size, and line height. Legacy tokens (e.g., fontSizeXSmall) are deprecated and should not be used in new designs.
+- [Using theme overrides](https://instructure.design/pr-preview/pr-2109/markdowns/using-theme-overrides.md): Customize components via theme overrides while ensuring WCAG compliance. Use nested `InstUISettingsProvider` for subtree themes, override global or component themes, and leverage branding variables for user customization. Deprecated global theming causes issues with multiple InstUI versions.
 
 #### Patterns
 
-- [ContentAlignment](https://instructure.design/pr-preview/pr-2109/markdowns/ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
-- [DestroyAction](https://instructure.design/pr-preview/pr-2109/markdowns/DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
+- [Content alignment](https://instructure.design/pr-preview/pr-2109/markdowns/ContentAlignment.md): Guidelines for main content area alignment with maximum width (948px) for readability, minimum width (320px) for accessibility, and responsive padding (24px/12px). Ensures proper centering, avoids two-dimensional scrolling, and allows exceptions for complex data displays.
+- [Destroy action](https://instructure.design/pr-preview/pr-2109/markdowns/DestroyAction.md): A modal used for irreversible actions like deletion. Includes guidelines for usage: use clear language, avoid vague confirmations, and use a danger button for the destructive action.
 - [Search](https://instructure.design/pr-preview/pr-2109/markdowns/Search.md): Provides search input patterns including auto-activated, activated, and autocomplete search. Includes guidelines, accessibility support, and clear state management examples.
-- [UsingIcons](https://instructure.design/pr-preview/pr-2109/markdowns/UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
+- [Using icons](https://instructure.design/pr-preview/pr-2109/markdowns/UsingIcons.md): Guidelines for using icons with proper accessibility roles, size variants, and color options. Line icons for light backgrounds, solid for dark backgrounds. Icons scale with parent font-size by default.
 
 ### Components
 

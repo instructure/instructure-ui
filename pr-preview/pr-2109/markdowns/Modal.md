@@ -1237,7 +1237,6 @@ type: embed
 | Modal | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the <Modal /> finishes transitioning out |
 | Modal | constrain | `'window' \| 'parent'` | No | `'window'` | Constrain the Modal to the document window or its closest positioned parent |
 | Modal | overflow | `'scroll' \| 'fit'` | No | `'scroll'` | Should ModalBody handle overflow with scrollbars, or fit its content within its own height? |
-| Modal | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

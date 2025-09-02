@@ -435,7 +435,6 @@ type: embed
 | TextInput | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input loses focus. |
 | TextInput | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input receives focus. |
 | TextInput | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| TextInput | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

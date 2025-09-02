@@ -1,5 +1,3 @@
-# Accessing the DOM
-
 
 ## Accessing the DOM
 

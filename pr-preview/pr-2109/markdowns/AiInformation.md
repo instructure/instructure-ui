@@ -318,7 +318,6 @@ readonly: true
 | AiInformation | nutritionFactsData | `NutritionFactsProps['data']` | Yes | - | i18n text for the "model and data" heading of the NutritionFacts |
 | AiInformation | nutritionFactsCloseButtonText | `NutritionFactsProps['closeButtonText']` | Yes | - | i18n text for the NutritionFacts close button |
 | AiInformation | nutritionFactsCloseIconButtonScreenReaderLabel | `NutritionFactsProps['closeIconButtonScreenReaderLabel']` | Yes | - | i18n text for the NutritionFacts close iconButton |
-| AiInformation | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

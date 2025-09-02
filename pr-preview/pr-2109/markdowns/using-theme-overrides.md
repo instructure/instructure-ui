@@ -1,5 +1,3 @@
-# Using theme overrides
-
 
 ## Using theme overrides
 

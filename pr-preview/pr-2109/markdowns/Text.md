@@ -221,7 +221,6 @@ Deprecated `lineHeight` values:
 | Text | variant | `\| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentImportant' \| 'contentQuote' \| 'contentSmall' \| 'legend'` | No | - | Sets multiple props at once. (size, fontStyle, lineHeight, weight) If set, these props are not allowed. NOTE: this is the recommended way of setting these values |
 | Text | weight | `'normal' \| 'light' \| 'bold' \| 'weightRegular' \| 'weightImportant'` | No | - |  |
 | Text | wrap | `'normal' \| 'break-word'` | No | `'normal'` |  |
-| Text | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

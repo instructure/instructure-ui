@@ -176,7 +176,6 @@ type: embed
 | TextArea | value | `custom` | No | - | the selected value (must be accompanied by an `onChange` prop) |
 | TextArea | onChange | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | No | - | when used with the `value` prop, the component will not control its own state |
 | TextArea | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| TextArea | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -338,7 +338,6 @@ type: embed
 | NumberInput | allowStringValue | `bool` | No | `false` | sets the input type to string and allows string as value |
 | NumberInput | renderIcons | `{ increase: Renderable decrease: Renderable }` | No | - | Sets the icons to be rendered for increase and decrease buttons |
 | NumberInput | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| NumberInput | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

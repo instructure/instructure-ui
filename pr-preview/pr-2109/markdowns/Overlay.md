@@ -143,7 +143,6 @@ type: embed
 | Overlay | onExit | `() => void` | No | - | Callback fired before the "exiting" classes are applied |
 | Overlay | onExiting | `() => void` | No | - | Callback fired after the "exiting" classes are applied |
 | Overlay | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the "exited" classes are applied |
-| Overlay | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

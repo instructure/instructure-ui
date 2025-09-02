@@ -75,7 +75,6 @@ type: example
 | Mask | children | `React.ReactNode` | No | - |  |
 | Mask | onClick | `(event: React.MouseEvent<HTMLSpanElement>) => void` | No | - |  |
 | Mask | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| Mask | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

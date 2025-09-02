@@ -199,7 +199,6 @@ type: example
 | ColorContrast | successLabel | `string` | Yes | - | Text of the success indicator (Suggested english text: PASS) |
 | ColorContrast | onContrastChange | `(conrastData: { contrast: number isValidNormalText: boolean isValidLargeText: boolean isValidGraphicsText: boolean firstColor: string secondColor: string }) => null` | No | - | Triggers a callback whenever the contrast changes, due to a changing color input. Communicates the contrast and the success/fail state of the contrast, depending on the situation: isValidNormalText true if at least 4.5:1 isValidLargeText true if at least 3:1 isValidGraphicsText true if at least 3:1 |
 | ColorContrast | validationLevel | `'AA' \| 'AAA'` | No | `'AA'` | According to WCAG 2.2 AA level (https://www.w3.org/TR/WCAG22/#contrast-minimum) text: 4.5:1 large text: 3:1 non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast) AAA level (https://www.w3.org/TR/WCAG22/#contrast-enhanced) text: 7:1 large text: 4.5:1 non-text: 3:1 (https://www.w3.org/TR/WCAG22/#non-text-contrast) |
-| ColorContrast | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

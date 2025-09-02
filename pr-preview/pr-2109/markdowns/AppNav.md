@@ -212,7 +212,6 @@ than two.
 | AppNav | renderTruncateLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `() => 'More'` | Customize the text displayed in the menu trigger when links overflow the overall nav width. |
 | AppNav | onUpdate | `(visibleItemsCount: { visibleItemsCount: number }) => void` | No | - | Called whenever the navigation items are updated or the size of the navigation changes. Passes in the `visibleItemsCount` as a parameter. |
 | AppNav | visibleItemsCount | `number` | No | `0` | Sets the number of navigation items that are visible. |
-| AppNav | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

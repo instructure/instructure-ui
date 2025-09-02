@@ -1,5 +1,3 @@
-# Using Icons
-
 
 ## Using Icons
 

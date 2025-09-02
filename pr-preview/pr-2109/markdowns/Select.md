@@ -2838,7 +2838,6 @@ type: embed
 | Select | shouldNotWrap | `bool` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
 | Select | scrollToHighlightedOption | `bool` | No | `true` | Enable/disable auto scroll to the highlighted option on every re-render |
 | Select | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
-| Select | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -159,7 +159,6 @@ An html5 range input/slider component.
 | RangeInput | readOnly | `bool` | No | `false` |  |
 | RangeInput | thumbVariant | `\| 'deprecated' // TODO: deprecated, remove in V9. \| 'accessible'` | No | `'deprecated'` | The "default" variant has an outer shadow on focus. The "accessible" variant has better color contrast, border and inset focus ring for better accessibility. |
 | RangeInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
-| RangeInput | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

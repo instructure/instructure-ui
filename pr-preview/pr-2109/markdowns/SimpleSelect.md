@@ -240,7 +240,6 @@ type: example
 | SimpleSelect | children | `React.ReactNode` | No | - | Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`. |
 | SimpleSelect | isOptionContentAppliedToInput | `bool` | No | `false` | Whether or not the content of the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field. If the selected `SimpleSelect.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field. `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `SimpleSelect`'s `inputValue` is an empty value, null or undefined. If `true` and the selected `SimpleSelect.Option` has a `renderAfterLabel` value, it will replace the default arrow icon. If `true` and `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` value. If the selected `SimpleSelect.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered. |
 | SimpleSelect | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
-| SimpleSelect | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

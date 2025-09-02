@@ -150,7 +150,6 @@ type: example
 | SVGIcon | rotate | `'0' \| '90' \| '180' \| '270'` | No | `'0'` |  |
 | SVGIcon | size | `'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large'` | No | - |  |
 | SVGIcon | bidirectional | `bool` | No | `false` |  |
-| SVGIcon | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

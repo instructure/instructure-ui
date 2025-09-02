@@ -153,7 +153,6 @@ type: example
 | List | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | List | itemSpacing | `\| 'none' \| 'xxx-small' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'none'` | Sets the margin separating each ListItem. |
 | List | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| List | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

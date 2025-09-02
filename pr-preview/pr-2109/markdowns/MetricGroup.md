@@ -20,7 +20,6 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | MetricGroup | children | `React.ReactNode` | No | `null` | children of type `Metric` |
-| MetricGroup | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

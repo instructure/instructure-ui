@@ -63,7 +63,6 @@ type: example
 | InlineSVG | inline | `bool` | No | `true` |  |
 | InlineSVG | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'success' \| 'error' \| 'alert' \| 'warning' \| 'brand' \| 'auto'` | No | `'inherit'` |  |
 | InlineSVG | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| InlineSVG | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

@@ -506,7 +506,6 @@ valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progr
 | ProgressBar | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's root HTML element |
 | ProgressBar | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Set the element type of the component's root |
 | ProgressBar | renderValueInside | `bool` | No | - | If true, displays the `renderValue` inside the progress meter for customization. Note: This should not be used in most cases. When enabled, ensure `renderValue` is styled for proper legibility and alignment across themes and sizes. |
-| ProgressBar | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

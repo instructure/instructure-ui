@@ -109,7 +109,6 @@ type: example
 | ToggleGroup | iconExpanded | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenDownSolid` | The icon displayed in the toggle button when the content is showing |
 | ToggleGroup | transition | `bool` | No | `true` | Transition content into view |
 | ToggleGroup | border | `bool` | No | `true` | Toggle the border around the component |
-| ToggleGroup | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

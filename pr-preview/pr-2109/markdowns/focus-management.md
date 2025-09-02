@@ -1,5 +1,3 @@
-# Focus Management
-
 
 ## The Focus Management Problem
 

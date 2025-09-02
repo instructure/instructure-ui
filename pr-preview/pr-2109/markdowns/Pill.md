@@ -96,7 +96,6 @@ type: embed
 | Pill | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Pill | statusLabel | `string` | No | - | Adds a status label to the left of the main text. |
 | Pill | renderIcon | `React.ReactNode` | No | - | An icon displayed to the left of the text. |
-| Pill | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

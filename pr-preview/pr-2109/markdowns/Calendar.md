@@ -455,7 +455,6 @@ The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using th
 | Calendar | timezone | `string` | No | - | A timezone identifier in the format: *Area/Location* See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list of possible options. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's timezone will be used if no value is set via a component property or a context property. |
 | Calendar | visibleMonth | `string` | No | - | Visible month for the rendered calendar. Formatted as an ISO date string. |
 | Calendar | withYearPicker | `{ screenReaderLabel: string onRequestYearChange?: (e: any, requestedYear: number) => void startYear: number endYear: number }` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
-| Calendar | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

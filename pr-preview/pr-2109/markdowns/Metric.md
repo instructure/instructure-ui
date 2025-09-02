@@ -37,7 +37,6 @@ type: example
 | Metric | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Metric | renderValue | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Metric | isGroupChild | `bool` | No | `false` | Set to true when a child of MetricGroup so the appropriate aria labels get set |
-| Metric | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

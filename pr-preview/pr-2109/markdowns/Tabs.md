@@ -874,7 +874,6 @@ type: embed
 | Tabs | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tabs | tabOverflow | `'stack' \| 'scroll'` | No | `'stack'` | Choose whether Tabs should stack or scroll when they exceed the width of their container. |
 | Tabs | shouldFocusOnRender | `bool` | No | `false` |  |
-| Tabs | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

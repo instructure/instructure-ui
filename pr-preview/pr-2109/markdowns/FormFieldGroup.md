@@ -129,7 +129,6 @@ type: embed
 | FormFieldGroup | vAlign | `'top' \| 'middle' \| 'bottom'` | No | `'middle'` |  |
 | FormFieldGroup | startAt | `'small' \| 'medium' \| 'large' \| 'x-large' \| null` | No | - |  |
 | FormFieldGroup | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| FormFieldGroup | dir | `'ltr' \| 'rtl'` | No | - |  |
 | FormFieldGroup | isGroup | `` | No | `true` |  |
 
 ### Usage

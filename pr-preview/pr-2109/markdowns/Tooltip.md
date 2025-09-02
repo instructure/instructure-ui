@@ -219,7 +219,6 @@ type: embed
 | Tooltip | onShowContent | `(event: React.UIEvent \| React.FocusEvent) => void` | No | - | Callback fired when content is shown. When controlled, this callback is fired when the tooltip expects to be shown |
 | Tooltip | onHideContent | `( event: React.UIEvent \| React.FocusEvent, args: { documentClick: boolean } ) => void` | No | - | Callback fired when content is hidden. When controlled, this callback is fired when the tooltip expects to be hidden |
 | Tooltip | preventTooltip | `bool` | No | `false` | If true, it won't display the tooltip. This is useful in cases when tooltip is conditionally needed but in an uncontrolled way |
-| Tooltip | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

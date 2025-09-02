@@ -40,7 +40,6 @@ type: example
 | BaseButton | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon. |
 | BaseButton | tabIndex | `number` | No | - | Specifies the tabindex of the `Button`. |
 | BaseButton | withFocusOutline | `bool` | No | - | Manually control if the `Button` should display a focus outline. When left `undefined` (which is the default) the focus outline will display if this component is focusable and receives focus. |
-| BaseButton | dir | `'ltr' \| 'rtl'` | No | - |  |
 | BaseButton | to | `` | No | - | Needed for React Router links @private |
 
 ### Usage

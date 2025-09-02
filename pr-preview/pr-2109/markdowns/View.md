@@ -1104,7 +1104,6 @@ type: example
 | View | focusColor | `'info' \| 'inverse' \| 'success' \| 'danger'` | No | `'info'` | Determines the color of the focus outline |
 | View | shouldAnimateFocus | `bool` | No | `true` | Determines if the focus ring should animate when it appears |
 | View | withVisualDebug | `bool` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
-| View | dir | `'ltr' \| 'rtl'` | No | - |  |
 | View | overscrollBehavior | `'auto' \| 'contain' \| 'none'` | No | `'auto'` | Sets what a browser does when reaching the boundary of a scrolling area. Valid values are `auto`, `contain`, `none`. |
 | View | focusRingBorderRadius | `string` | No | - | DEPRECATED, this prop does nothing. Use the focusOutlineOffset theme variable Sets the radius of the focus border ring. For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width. For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width. |
 | View | focusWithin | `bool` | No | - | Display the focus ring when any of the descendants is focused. (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS selector) |

@@ -87,7 +87,6 @@ type: embed
 | CloseButton | href | `string` | No | - | Specifies an href attribute for the `CloseButton`'s underlying html element. |
 | CloseButton | cursor | `string` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
 | CloseButton | tabIndex | `number` | No | - | Specifies the tabindex of the `CloseButton`. |
-| CloseButton | dir | `'ltr' \| 'rtl'` | No | - |  |
 | CloseButton | to | `` | No | - | Needed for React Router links @private |
 
 ### Usage

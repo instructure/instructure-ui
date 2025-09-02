@@ -1,5 +1,3 @@
-# Content Alignment
-
 
 ## Content Alignment
 

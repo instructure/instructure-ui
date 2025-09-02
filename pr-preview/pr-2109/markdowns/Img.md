@@ -139,7 +139,6 @@ type: embed
 | Img | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Img | height | `string \| number` | No | - |  |
 | Img | width | `string \| number` | No | - |  |
-| Img | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

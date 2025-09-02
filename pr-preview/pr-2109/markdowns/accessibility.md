@@ -1,5 +1,3 @@
-# Accessibility
-
 
 ## Accessibility
 

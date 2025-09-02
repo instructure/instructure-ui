@@ -131,7 +131,6 @@ type: embed
 | Tag | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 | Tag | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | Tag | variant | `'default' \| 'inline'` | No | `'default'` |  |
-| Tag | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 

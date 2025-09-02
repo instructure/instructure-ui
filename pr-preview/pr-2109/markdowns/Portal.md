@@ -63,7 +63,6 @@ render(<Example />)
 | Portal | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
 | Portal | children | `React.ReactNode` | No | `null` | The children to be rendered within the `<Portal />` |
 | Portal | elementRef | `(el?: PortalNode) => void` | No | `() => {}` | Provides a reference to the underlying html element. Has the Portal DOMNode as parameter. |
-| Portal | dir | `'ltr' \| 'rtl'` | No | - |  |
 
 ### Usage
 
