@@ -5483,7 +5483,7 @@ this.setState({needsSecondRender:!1,isTruncated:!1,truncatedElement:this._text,t
 if(!truncated)return this._text
 const childElements=[]
 for(let i=0;i<data.length;i++){const item=data[i],element=this._text.props.children[i],nodeText=item.join("")
-element&&element.props?childElements.push((0,safeCloneElement.Z)(element,element.props,nodeText)):childElements.push(nodeText)}childElements.push((0,emotion_react_jsx_runtime_browser_esm.jsx)("span",{css:null===(_this$props$styles2=this.props.styles)||void 0===_this$props$styles2?void 0:_this$props$styles2.spacer,style:{width:width||void 0}}))
+element&&element.props?childElements.push((0,safeCloneElement.Z)(element,element.props,nodeText)):childElements.push(nodeText)}childElements.push((0,emotion_react_jsx_runtime_browser_esm.jsx)("span",{css:null===(_this$props$styles2=this.props.styles)||void 0===_this$props$styles2?void 0:_this$props$styles2.spacer,style:{width:width||void 0}},"spacer"))
 const children=react.Children.map(childElements,(child=>child))
 return this._text.props?(0,safeCloneElement.Z)(this._text,this._text.props,children):children}render(){var _this$props$styles3
 const truncatedElement=this.state.truncatedElement,children=this.props.children
