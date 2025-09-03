@@ -331,6 +331,7 @@ class Pagination extends Component<PaginationProps> {
           ref={(e) => (i === currentPage ? (this.currentPageRef = e) : null)}
           key={i}
           onClick={() => this.handleNavigation(i, currentPage)}
+          onMouseEnter={() => this.handleOnMouseEnter(i)}
           current={i === currentPage}
           {...(this.props.screenReaderLabelPageButton
             ? {
@@ -613,6 +614,12 @@ class Pagination extends Component<PaginationProps> {
         buttonRef={handleButtonRef}
       />
     ) : null
+  }
+
+  handleOnMouseEnter = (page: number) => {
+    if (typeof this.props.onMouseEnter === 'function') {
+      this.props.onMouseEnter(page)
+    }
   }
 
   render() {

@@ -183,6 +183,11 @@ type PaginationOwnProps = {
   onPageChange?: (next: number, prev: number) => void
 
   /**
+   * Called when a page is hovered.
+   */
+  onMouseEnter?: (page: number) => void
+
+  /**
    * Renders the visible pages
    */
   renderPageIndicator?: (
@@ -234,6 +239,7 @@ const propTypes: PropValidators<PropKeys> = {
   siblingCount: PropTypes.number,
   boundaryCount: PropTypes.number,
   onPageChange: PropTypes.func,
+  onMouseEnter: PropTypes.func,
   renderPageIndicator: PropTypes.func,
   ellipsis: PropTypes.node
 }
@@ -263,7 +269,8 @@ const allowedProps: AllowedPropKeys = [
   'siblingCount',
   'boundaryCount',
   'renderPageIndicator',
-  'ellipsis'
+  'ellipsis',
+  'onMouseEnter'
 ]
 
 type PaginationSnapshot = {
