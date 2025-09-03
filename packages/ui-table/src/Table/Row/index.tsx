@@ -91,9 +91,6 @@ class Row extends Component<TableRowProps> {
             if (isValidElement(child)) {
               return safeCloneElement(child, {
                 key: (child as ReactElement<any>).props.name,
-                // Sent down for compatibility with custom components
-                // TODO DEPRECATED, remove in v11
-                isStacked,
                 // used by `Cell` to render its column title in `stacked` layout
                 header: headers && headers[index]
               })
