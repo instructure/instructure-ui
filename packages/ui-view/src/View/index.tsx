@@ -24,7 +24,7 @@
 
 import { Component, ComponentType } from 'react'
 
-import { getComputedStyle } from '@instructure/ui-dom-utils'
+import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { logError as error } from '@instructure/console'
 import {
@@ -133,7 +133,7 @@ class View extends Component<ViewProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
 
-    // Not calling getComputedStyle can save hundreds of ms in tests and production
+    // Not calling getCSSStyleDeclaration can save hundreds of ms in tests and production
     if (process.env.NODE_ENV === 'development' && !this.spanMarginVerified) {
       // We have to verify margins in the first 'componentDidUpdate',
       // because that is when all styles are calculated,
@@ -146,7 +146,7 @@ class View extends Component<ViewProps> {
             return
           }
 
-          const display = getComputedStyle(element).display
+          const display = getCSSStyleDeclaration(element)?.display
 
           if (display !== 'inline') {
             return

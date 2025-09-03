@@ -30,7 +30,7 @@ import { px, combineDataCid } from '@instructure/ui-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
-  getComputedStyle
+  getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 
 import { withStyle } from '@instructure/emotion'
@@ -223,9 +223,10 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
 
     if (this.ref) {
       const { width: navWidth } = getBoundingClientRect(this.ref)
-      const { paddingInlineStart, paddingInlineEnd } = getComputedStyle(
-        this.ref
-      )
+      const style = getCSSStyleDeclaration(this.ref)
+      const paddingInlineStart = style?.paddingInlineStart ?? '0'
+      const paddingInlineEnd = style?.paddingInlineEnd ?? '0'
+
       const navWidthWithoutPadding =
         navWidth - px(paddingInlineStart) - px(paddingInlineEnd)
 

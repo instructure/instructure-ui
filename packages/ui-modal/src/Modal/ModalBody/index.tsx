@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
-import { getComputedStyle } from '@instructure/ui-dom-utils'
+import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -73,7 +73,7 @@ class ModalBody extends Component<ModalBodyProps> {
     this.props.makeStyles?.()
 
     // We detect if -moz- prefixed style is present to identify whether we are in Firefox browser
-    const style = this.ref && getComputedStyle(this.ref)
+    const style = this.ref && getCSSStyleDeclaration(this.ref)
     const isFirefox = !!(
       style &&
       Array.prototype.slice
