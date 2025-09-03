@@ -26,8 +26,7 @@ import {
   findDOMNode,
   findTabbable,
   isActiveElement,
-  containsActiveElement,
-  getActiveElement
+  containsActiveElement
 } from '@instructure/ui-dom-utils'
 import type { UIElement } from '@instructure/shared-types'
 
@@ -56,17 +55,13 @@ function scopeTab(
     return
   }
 
-  // Account for a changing tabindex of the active element
-  // (a case that happens with Menu for KO a11y)
-  if (containsActiveElement(element)) {
-    const activeElement = getActiveElement()
-    if (activeElement && tabbable.indexOf(activeElement) === -1) {
-      tabbable.push(activeElement)
-    }
-  }
-
   const finalTabbable = tabbable[event.shiftKey ? 0 : tabbable.length - 1]
   const leavingFinalTabbable =
+    // This can happen in Menu, where the first menu item becomes unfocusable
+    // when its focused and tab is pressed, leaving one element
+    // (the menu container) in the tabbable array, which is not the currently
+    // active element
+    tabbable.length < 2 ||
     isActiveElement(finalTabbable) ||
     // handle immediate shift+tab after opening with mouse
     isActiveElement(node) ||
