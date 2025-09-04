@@ -254,6 +254,7 @@ class BaseButton extends Component<BaseButtonProps> {
       styles,
       makeStyles,
       withFocusOutline,
+      width,
       ...props
     } = this.props
 
@@ -292,7 +293,7 @@ class BaseButton extends Component<BaseButtonProps> {
         focusColor={this.focusColor}
         position="relative"
         display={display}
-        width={display === 'block' ? '100%' : 'auto'}
+        width={width || (display === 'block' ? '100%' : 'auto')}
         borderRadius={shape === 'circle' ? 'circle' : 'medium'}
         background="transparent"
         padding="none"
