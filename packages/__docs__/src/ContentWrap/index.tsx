@@ -25,11 +25,10 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ContentWrapProps } from './props'
 
 class ContentWrap extends Component<ContentWrapProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null,

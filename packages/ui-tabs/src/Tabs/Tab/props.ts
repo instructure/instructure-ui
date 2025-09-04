@@ -23,11 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   Renderable,
   TabsTabTheme
 } from '@instructure/shared-types'
@@ -66,19 +63,6 @@ type TabsTabProps = TabsTabOwnProps &
 
 type TabsTabStyle = ComponentStyle<'tab'>
 
-const propTypes: PropValidators<PropKeys> = {
-  variant: PropTypes.oneOf(['default', 'secondary']),
-  id: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-  controls: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
-  isSelected: PropTypes.bool,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  isOverflowScroll: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'variant',
   'id',
@@ -93,4 +77,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TabsTabProps, TabsTabStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

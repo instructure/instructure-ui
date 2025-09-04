@@ -23,12 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children } from '@instructure/ui-prop-types'
-
-import { PaginationButton } from './PaginationButton'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -36,8 +30,7 @@ import type {
 } from '@instructure/emotion'
 import type {
   AsElementType,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { PaginationPageProps } from './PaginationButton/props'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -215,35 +208,6 @@ type PaginationStyle = ComponentStyle<
   'pagination' | 'pages' | 'pageIndicatorList'
 >
 
-const propTypes: PropValidators<PropKeys> = {
-  children: Children.oneOf([PaginationButton]),
-  disabled: PropTypes.bool,
-  withFirstAndLastButton: PropTypes.bool,
-  showDisabledButtons: PropTypes.bool,
-  label: PropTypes.node,
-  labelNext: PropTypes.string,
-  labelPrev: PropTypes.string,
-  labelFirst: PropTypes.string,
-  labelLast: PropTypes.string,
-  labelNumberInput: PropTypes.func,
-  screenReaderLabelNumberInput: PropTypes.func,
-  screenReaderLabelPageButton: PropTypes.func,
-  variant: PropTypes.oneOf(['full', 'compact', 'input']),
-  margin: PropTypes.string,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  inputRef: PropTypes.func,
-  shouldHandleFocus: PropTypes.bool,
-  totalPageNumber: PropTypes.number,
-  currentPage: PropTypes.number,
-  siblingCount: PropTypes.number,
-  boundaryCount: PropTypes.number,
-  onPageChange: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  renderPageIndicator: PropTypes.func,
-  ellipsis: PropTypes.node
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'disabled',
@@ -278,4 +242,4 @@ type PaginationSnapshot = {
 }
 
 export type { PaginationProps, PaginationStyle, PaginationSnapshot, ChildPage }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-import type { PropValidators } from '@instructure/shared-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ColorSwatchOwnProps = {
   // TODO: once all the docs components are typed, check again whether the number type is needed.
@@ -33,13 +31,11 @@ type PropKeys = keyof ColorSwatchOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ColorSwatchProps = ColorSwatchOwnProps &
   WithStyleProps<ColorSwatchTheme, ColorSwatchStyle>
-const propTypes: PropValidators<PropKeys> = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-}
+
 const allowedProps: AllowedPropKeys = ['color']
 type ColorSwatchTheme = {
   borderColor: string
 }
 export type ColorSwatchStyle = ComponentStyle<'colorSwatch'>
 export type { ColorSwatchProps, ColorSwatchTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

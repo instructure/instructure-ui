@@ -23,18 +23,9 @@
  */
 
 import { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
-
-import { Group } from './Group'
-import { Option } from './Option'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   SelectTheme
 } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
@@ -302,44 +293,6 @@ type SelectStyle = ComponentStyle<
   'select' | 'icon' | 'assistiveText' | 'popoverBorderWidth'
 >
 
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  inputValue: PropTypes.string,
-  id: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  assistiveText: PropTypes.string,
-  placeholder: PropTypes.string,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  width: PropTypes.string,
-  htmlSize: PropTypes.number,
-  visibleOptionsCount: PropTypes.number,
-  isOptionContentAppliedToInput: PropTypes.bool,
-  optionsMaxHeight: PropTypes.string,
-  optionsMaxWidth: PropTypes.string,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  placement: PositionPropTypes.placement,
-  constrain: PositionPropTypes.constrain,
-  mountNode: PositionPropTypes.mountNode,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onInputChange: PropTypes.func,
-  isShowingOptions: PropTypes.bool,
-  onRequestShowOptions: PropTypes.func,
-  onRequestHideOptions: PropTypes.func,
-  onRequestHighlightOption: PropTypes.func,
-  onRequestSelectOption: PropTypes.func,
-  inputRef: PropTypes.func,
-  listRef: PropTypes.func,
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  children: ChildrenPropTypes.oneOf([Group, Option]),
-  shouldNotWrap: PropTypes.bool,
-  scrollToHighlightedOption: PropTypes.bool,
-  layout: PropTypes.oneOf(['stacked', 'inline'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'inputValue',
@@ -379,4 +332,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SelectProps, SelectOwnProps, SelectStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

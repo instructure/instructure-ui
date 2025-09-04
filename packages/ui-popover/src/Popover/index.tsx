@@ -45,9 +45,13 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
+import {
+  createChainedFunction,
+  shallowEqual,
+  px,
+  combineDataCid
+} from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
@@ -61,7 +65,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { PopoverProps, PopoverState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { Renderable } from '@instructure/shared-types'
 /**
 ---
@@ -72,12 +76,10 @@ tags: overlay, portal, dialog
 @withDeterministicId()
 @textDirectionContextConsumer()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Popover extends Component<PopoverProps, PopoverState> {
   static readonly componentId = 'Popover'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     defaultIsShowingContent: false,
@@ -523,7 +525,9 @@ class Popover extends Component<PopoverProps, PopoverState> {
         <Dialog
           open={this.shown}
           label={this.props.screenReaderLabel}
-          ref={(el) => (this._dialog = el)}
+          ref={(el) => {
+            this._dialog = el
+          }}
           display="block"
           onBlur={this.handleDialogBlur}
           onDismiss={this.handleDialogDismiss}
@@ -612,12 +616,18 @@ class Popover extends Component<PopoverProps, PopoverState> {
       return (
         <span ref={this.handleRef}>
           {this.renderTrigger()}
-          <Position {...positionProps}>{this.renderContent()}</Position>
+          <Position
+            {...positionProps}
+            data-cid={combineDataCid('Popover', this.props)}
+          >
+            {this.renderContent()}
+          </Position>
         </span>
       )
     } else {
       return (
         <Position
+          data-cid={combineDataCid('Popover', this.props)}
           {...positionProps}
           renderTarget={this.renderTrigger()}
           elementRef={this.handleRef}

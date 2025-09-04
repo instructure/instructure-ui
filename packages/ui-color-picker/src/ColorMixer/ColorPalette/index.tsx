@@ -35,7 +35,7 @@ import { withDeterministicId } from '@instructure/ui-react-utils'
 
 import shallowCompare from '../utils/shallowCompare'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ColorPaletteProps, ColorPaletteState } from './props'
 
 import generateStyle from './styles'
@@ -49,7 +49,6 @@ private: true
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.Palette'
 

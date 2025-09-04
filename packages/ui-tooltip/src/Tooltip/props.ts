@@ -23,13 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { PositionPropTypes } from '@instructure/ui-position'
-import { element } from '@instructure/ui-prop-types'
 
 import type {
-  PropValidators,
   AsElementType,
   TooltipTheme,
   OtherHTMLAttributes
@@ -198,30 +193,6 @@ type TooltipStyle = ComponentStyle<'tooltip'>
 type TooltipState = {
   hasFocus: boolean
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  elementRef: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  isShowingContent: PropTypes.bool,
-  defaultIsShowingContent: PropTypes.bool,
-  as: PropTypes.elementType,
-  on: PropTypes.oneOfType([
-    PropTypes.oneOf(['click', 'hover', 'focus']),
-    PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
-  ]),
-  color: PropTypes.oneOf(['primary', 'primary-inverse']),
-  placement: PositionPropTypes.placement,
-  mountNode: PositionPropTypes.mountNode,
-  constrain: PositionPropTypes.constrain,
-  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
-  onShowContent: PropTypes.func,
-  onHideContent: PropTypes.func,
-  preventTooltip: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'elementRef',
   'children',
@@ -249,4 +220,4 @@ export type {
   TooltipRenderChildren,
   TooltipRenderChildrenArgs
 }
-export { propTypes, allowedProps }
+export { allowedProps }

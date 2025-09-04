@@ -26,7 +26,6 @@ import { Children, Component, isValidElement } from 'react'
 
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
@@ -43,7 +42,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   ModalProps,
   ModalState,
@@ -58,11 +57,9 @@ tags: overlay, portal, dialog
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Modal extends Component<ModalProps, ModalState> {
   static readonly componentId = 'Modal'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     open: false,
@@ -282,6 +279,7 @@ class Modal extends Component<ModalProps, ModalState> {
         insertAt={insertAt}
         open={portalIsOpen}
         onOpen={this.handlePortalOpen}
+        data-cid="Modal"
       >
         <Transition
           in={open}

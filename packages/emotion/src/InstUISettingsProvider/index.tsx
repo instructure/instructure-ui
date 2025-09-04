@@ -23,7 +23,6 @@
  */
 
 import { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { ThemeProvider } from '@emotion/react'
 
 import { TextDirectionContext } from '@instructure/ui-i18n'
@@ -33,7 +32,6 @@ import { getTheme } from '../getTheme'
 
 import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
-import type { AsElementType } from '@instructure/shared-types'
 
 type InstUIProviderProps = {
   children?: React.ReactNode
@@ -51,32 +49,15 @@ type InstUIProviderProps = {
    * specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
    */
   instanceCounterMap?: DeterministicIdProviderValue
-} & (
-  | {
-      /**
-       * The text direction to use in the descendants. If not provided, it uses the following in this priority order:
-       *   - The value given in a parent `TextDirectionContext`
-       *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
-       *   - The default `ltr`
-       */
-      dir: 'ltr' | 'rtl'
-      /**
-       *  @deprecated This prop will be removed in InstUI v11
-       *
-       *  The element type to render as
-       */
-      as?: AsElementType
-    }
-  | {
-      dir?: never
-      /**
-       *  @deprecated This prop will be removed in InstUI v11
-       *
-       *  The element type to render as
-       */
-      as?: never
-    }
-)
+
+  /**
+   * The text direction to use in the descendants. If not provided, it uses the following in this priority order:
+   *   - The value given in a parent `TextDirectionContext`
+   *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
+   *   - The default `ltr`
+   */
+  dir?: 'ltr' | 'rtl'
+}
 
 /**
  * ---
@@ -88,8 +69,7 @@ function InstUISettingsProvider({
   children,
   theme = {},
   dir,
-  instanceCounterMap,
-  as
+  instanceCounterMap
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -110,25 +90,10 @@ function InstUISettingsProvider({
   )
 
   if (dir) {
-    const Element = as || 'span'
-    providers = <Element dir={finalDir}>{providers}</Element>
-  } else if (as && process.env.NODE_ENV !== 'production') {
-    console.warn(
-      "The 'as' property should be used in conjunction with the 'dir' property!"
-    )
+    providers = <span dir={finalDir}>{providers}</span>
   }
 
   return providers
-}
-
-InstUISettingsProvider.propTypes = {
-  /* eslint-disable react/require-default-props */
-  children: PropTypes.node,
-  theme: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  dir: PropTypes.oneOf(['ltr', 'rtl']),
-  instanceCounterMap: PropTypes.instanceOf(Map),
-  as: PropTypes.string
-  /* eslint-enable react/require-default-props */
 }
 
 export default InstUISettingsProvider

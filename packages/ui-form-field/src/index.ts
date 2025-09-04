@@ -29,7 +29,6 @@ export { FormFieldMessages } from './FormFieldMessages'
 export { FormFieldLayout } from './FormFieldLayout'
 export { FormFieldGroup } from './FormFieldGroup'
 
-export { FormPropTypes } from './FormPropTypes'
 export type { FormMessageType, FormMessage } from './FormPropTypes'
 
 export type { FormFieldOwnProps, FormFieldProps } from './FormField/props'

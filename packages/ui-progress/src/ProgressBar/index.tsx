@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -34,7 +33,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { ProgressBarProps, Values } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -42,12 +41,10 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ProgressBar extends Component<ProgressBarProps> {
   static readonly componentId = 'ProgressBar'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     formatScreenReaderValue: ({ valueNow, valueMax }: Values) =>
@@ -116,6 +113,7 @@ class ProgressBar extends Component<ProgressBarProps> {
         css={styles?.progressBar}
         margin={this.props.margin}
         elementRef={this.handleRef}
+        data-cid="ProgressBar"
       >
         <span css={styles?.trackLayout}>
           <progress

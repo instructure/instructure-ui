@@ -23,7 +23,7 @@
  */
 import { canUseDOM } from './canUseDOM'
 import { ownerDocument } from './ownerDocument'
-import { getComputedStyle } from './getComputedStyle'
+import { getCSSStyleDeclaration } from './getCSSStyleDeclaration'
 import React from 'react'
 
 const COMPUTED_CACHE: WeakMap<any, number> = new WeakMap()
@@ -63,7 +63,7 @@ function getFontSize(
   }
 
   const fontSize = parseInt(
-    (getComputedStyle(container) as CSSStyleDeclaration).getPropertyValue(
+    (getCSSStyleDeclaration(container) as CSSStyleDeclaration).getPropertyValue(
       'font-size'
     )
   )

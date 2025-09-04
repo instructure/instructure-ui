@@ -28,8 +28,7 @@
     "@instructure/emotion": "10.24.2",
     "@instructure/shared-types": "10.24.2",
     "@instructure/ui-color-utils": "10.24.2",
-    "@instructure/ui-react-utils": "10.24.2",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-react-utils": "10.24.2"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.24.2",
@@ -39,7 +38,7 @@
     "@testing-library/react": "^16.0.1"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

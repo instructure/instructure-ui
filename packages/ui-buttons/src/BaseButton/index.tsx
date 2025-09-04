@@ -25,7 +25,6 @@
 import { Component } from 'react'
 import keycode from 'keycode'
 
-import { testable } from '@instructure/ui-testable'
 import {
   getElementType,
   getInteraction,
@@ -36,14 +35,18 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
+
+// TODO these have to be imported in separate lines because otherwise `isSafari` will be missing from the babel build
+// this bug is very likely caused by `babel-plugin-transform-imports` and can be reverted once it is removed from the codebase
 import { isSafari } from '@instructure/ui-utils'
+import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { BaseButtonProps, BaseButtonStyleProps } from './props'
 
 /**
@@ -53,11 +56,9 @@ category: components/utilities
 **/
 
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     type: 'button',
@@ -285,6 +286,7 @@ class BaseButton extends Component<BaseButtonProps> {
     if ((onClick && as && needsZeroTabIndex) || (isSafari() && as)) {
       tabIndexValue = tabIndex || 0
     }
+
     return (
       <View
         {...passthroughProps(props)}
@@ -309,6 +311,7 @@ class BaseButton extends Component<BaseButtonProps> {
         disabled={isDisabled || isReadOnly}
         css={styles?.baseButton}
         withFocusOutline={withFocusOutline}
+        data-cid={combineDataCid('BaseButton', this.props)}
       >
         <span css={styles?.content}>{this.renderChildren()}</span>
       </View>

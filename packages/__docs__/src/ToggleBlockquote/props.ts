@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 import { PropsWithChildren } from 'react'
 
 type ToggleBlockquoteOwnProps = {
@@ -34,12 +32,6 @@ type PropKeys = keyof ToggleBlockquoteOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ToggleBlockquoteProps = ToggleBlockquoteOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.string,
-  summary: PropTypes.string.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'summary']
 export type { ToggleBlockquoteProps }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 import { PropsWithChildren } from 'react'
 
 type PropKeys = keyof PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
@@ -30,11 +28,6 @@ type PropKeys = keyof PropsWithChildren<unknown> // <unknown> is needed for Reac
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ParagraphProps = PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = ['children']
 export type { ParagraphProps }
-export { propTypes, allowedProps }
+export { allowedProps }

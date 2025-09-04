@@ -96,7 +96,6 @@ const pathsToIgnore = [
   '**/ui-theme-tokens/**',
   '**/ui-test-*/src/**',
   '**/ui-scripts/src/**',
-  '**/ui-code-editor/src/CodeMirrorWrapper/**',
 
   // deprecated packages and modules:
   '**/InputModeListener.ts',

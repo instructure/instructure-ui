@@ -26,7 +26,6 @@
 import { Component } from 'react'
 
 import { ms } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle, Global } from '@instructure/emotion'
 
@@ -35,7 +34,7 @@ import generateComponentTheme from './theme'
 
 import { BaseTransition } from './BaseTransition'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { TransitionProps } from './props'
 
 /**
@@ -45,12 +44,10 @@ category: components/utilities
 @module Transition
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Transition extends Component<TransitionProps> {
   static readonly componentId = 'Transition'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     type: 'fade',
