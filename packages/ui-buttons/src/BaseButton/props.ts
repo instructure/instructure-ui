@@ -61,7 +61,7 @@ type BaseButtonOwnProps = {
   /**
    * Provides a reference to the `Button`'s underlying html element.
    */
-  elementRef?: (element: Element | null) => void
+  elementRef?: (element: HTMLElement | null) => void
 
   /**
    * The element to render as the component root, `Button` by default.
