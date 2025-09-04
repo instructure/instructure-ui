@@ -2838,11 +2838,9 @@ let resolvedThemeOrOverride=themeOrOverride
 try{if((0,isBaseTheme.$)(resolvedThemeOrOverride))return resolvedThemeOrOverride}catch{0,resolvedThemeOrOverride={}}const themeName=currentTheme.key,specificOverrides=null===(_resolvedThemeOrOverr=resolvedThemeOrOverride)||void 0===_resolvedThemeOrOverr?void 0:_resolvedThemeOrOverr.themeOverrides,currentThemeOverrides=(null==specificOverrides?void 0:specificOverrides[themeName])||specificOverrides||{}
 return(0,mergeDeep.D)(currentTheme,resolvedThemeOrOverride,currentThemeOverrides)}
 var emotion_react_jsx_runtime_browser_esm=__webpack_require__(54380)
-function InstUISettingsProvider({children,theme={},dir,instanceCounterMap,as}){const finalDir=dir||(0,react.useContext)(TextDirectionContext.SZ)
+function InstUISettingsProvider({children,theme={},dir,instanceCounterMap}){const finalDir=dir||(0,react.useContext)(TextDirectionContext.SZ)
 let providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)(DeterministicIdContextProvider.Y,{instanceCounterMap,children:(0,emotion_react_jsx_runtime_browser_esm.jsx)(emotion_element_f0de968e_browser_esm.a,{theme:getTheme(theme),children:(0,emotion_react_jsx_runtime_browser_esm.jsx)(TextDirectionContext.SZ.Provider,{value:finalDir,children})})})
-if(dir){const Element=as||"span"
-providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)(Element,{dir:finalDir,children:providers})}else 0
-return providers}},16116:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
+return dir&&(providers=(0,emotion_react_jsx_runtime_browser_esm.jsx)("span",{dir:finalDir,children:providers})),providers}},16116:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{Heading:()=>_Heading__WEBPACK_IMPORTED_MODULE_0__.D})
 var _Heading__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(19684)},16121:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{k:()=>IconSearchLine})
