@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { PillTheme } from '@instructure/shared-types'
+import type { NewCanvas } from '@instructure/ui-themes'
 import type { PillProps, PillStyle } from './props'
 
 /**
@@ -36,35 +36,31 @@ import type { PillProps, PillStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: PillTheme,
+  componentTheme: NewCanvas['components']['pill'],
   props: PillProps
 ): PillStyle => {
   const { color } = props
 
   const pillColorVariants = {
     primary: {
-      color: componentTheme.primaryColor,
-      borderColor: componentTheme.primaryColor
+      color: componentTheme.primaryText,
+      borderColor: componentTheme.primaryBorder
     },
     success: {
-      color: componentTheme.successColor,
-      borderColor: componentTheme.successColor
-    },
-    danger: {
-      color: componentTheme.dangerColor,
-      borderColor: componentTheme.dangerColor
+      color: componentTheme.successText,
+      borderColor: componentTheme.successBorder
     },
     info: {
-      color: componentTheme.infoColor,
-      borderColor: componentTheme.infoColor
+      color: componentTheme.infoText,
+      borderColor: componentTheme.infoBorder
     },
     warning: {
-      color: componentTheme.warningColor,
-      borderColor: componentTheme.warningColor
+      color: componentTheme.warningText,
+      borderColor: componentTheme.warningBorder
     },
-    alert: {
-      color: componentTheme.alertColor,
-      borderColor: componentTheme.alertColor
+    error: {
+      color: componentTheme.errorText,
+      borderColor: componentTheme.errorBorder
     }
   }
 
@@ -74,12 +70,11 @@ const generateStyle = (
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontFamily: componentTheme.fontFamily,
       boxSizing: 'border-box',
-      padding: componentTheme.padding,
+      padding: `0 ${componentTheme.paddingHorizontal}`,
       background: componentTheme.background,
       borderWidth: componentTheme.borderWidth,
-      borderStyle: componentTheme.borderStyle,
+      borderStyle: componentTheme.borderStyle.style,
       borderRadius: componentTheme.borderRadius,
       /* line-height does not account for top/bottom border width */
       lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,

@@ -22,30 +22,28 @@
  * SOFTWARE.
  */
 
-import bump from './bump.js'
-import server from './server.js'
-import tag from './tag.js'
-import deprecate from './deprecate.js'
-import publish from './publish.js'
-import lint from '../test/lint.js'
-import bundle from '../build/webpack.js'
-import clean from '../build/clean.js'
-import build from '../build/babel.js'
-import generateAllTokens from '../build/generate-all-tokens.js'
-import buildIcons from '../icons/build-icons.js'
-import buildThemes from '../build/build-themes.js'
+import semantics from '../semantics.js'
+import type { Semantics } from '../semantics.js'
 
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  lint,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons,
-  buildThemes
-]
+export type Breadcrumb = {
+  fontFamily: Semantics['fontFamily']['base']
+  largeFontSize: string
+  largeSeparatorFontSize: Semantics['size']['icon']['md']
+  mediumFontSize: Semantics['fontSize']['textBase']
+  mediumSeparatorFontSize: Semantics['size']['icon']['sm']
+  separatorColor: Semantics['icon']['muted']
+  smallFontSize: Semantics['fontSize']['textSm']
+  smallSeparatorFontSize: Semantics['size']['icon']['xs']
+}
+
+const breadcrumb: Breadcrumb = {
+  fontFamily: semantics.fontFamily.base,
+  largeFontSize: '22px',
+  largeSeparatorFontSize: semantics.size.icon.md,
+  mediumFontSize: semantics.fontSize.textBase,
+  mediumSeparatorFontSize: semantics.size.icon.sm,
+  separatorColor: semantics.icon.muted,
+  smallFontSize: semantics.fontSize.textSm,
+  smallSeparatorFontSize: semantics.size.icon.xs
+}
+export default breadcrumb
