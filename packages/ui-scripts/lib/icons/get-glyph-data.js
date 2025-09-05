@@ -39,8 +39,12 @@ export default function getGlyphData(
   const glyphs = []
   // variants are in different sub directories
   const subdirs = fs.readdirSync(svgSourceDir)
+  // we only care about subdirs named "Solid" or "Line"
+  const relevantSubdirs = subdirs.filter(
+    (dir) => dir === 'Solid' || dir === 'Line'
+  )
 
-  subdirs.forEach((subdir) => {
+  relevantSubdirs.forEach((subdir) => {
     const fileNames = fs.readdirSync(svgSourceDir + subdir)
     fileNames.forEach((fileName) => {
       const { name, ext } = path.parse(fileName)
