@@ -23,14 +23,11 @@
  */
 
 import { Component } from 'react'
-import ReactDOM from 'react-dom'
-import ReactTestUtils from 'react-dom/test-utils'
 import { render, screen, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import PropTypes from 'prop-types'
 
 import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index'
 
@@ -103,10 +100,6 @@ describe('@withStyle', () => {
 
   @withStyle(generateStyle, generateComponentTheme)
   class ThemeableComponent extends Component<Props, State> {
-    static propTypes = {
-      inverse: PropTypes.bool
-    }
-
     static defaultTypes = {
       inverse: false
     }
@@ -168,16 +161,10 @@ describe('@withStyle', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('can be found and tested with ReactTestUtils', async () => {
-    const rootNode = document.createElement('div')
-    document.body.appendChild(rootNode)
+  it('should render ThemeableComponent correctly', async () => {
+    render(<WrapperComponent />)
 
-    // eslint-disable-next-line react/no-render-return-value
-    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
-    const foundComponent = ReactTestUtils.findRenderedComponentWithType(
-      rendered as any,
-      (ThemeableComponent as any).originalType
-    )
+    const foundComponent = screen.getByTestId('testComp')
     expect(foundComponent).toBeTruthy()
   })
 
@@ -189,8 +176,7 @@ describe('@withStyle', () => {
         </InstUISettingsProvider>
       )
       const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
-      const themeableComponent = screen.getAllByTestId('testComp')[1]!
-
+      const themeableComponent = screen.getAllByTestId('testComp')[0]!
       expect(themeableComponent.classList[0]).toMatch(emotionClassRegex)
     })
 
@@ -200,7 +186,7 @@ describe('@withStyle', () => {
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[1]!
+      const component = screen.getAllByTestId('testComp')[0]!
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
@@ -218,7 +204,7 @@ describe('@withStyle', () => {
             />
           </InstUISettingsProvider>
         )
-        const component = screen.getAllByTestId('testComp')[1]!
+        const component = screen.getAllByTestId('testComp')[0]!
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).toEqual('rgb(128, 0, 128)')
@@ -235,7 +221,7 @@ describe('@withStyle', () => {
             />
           </InstUISettingsProvider>
         )
-        const component = screen.getAllByTestId('testComp')[1]!
+        const component = screen.getAllByTestId('testComp')[0]!
         const computedStyle = getComputedStyle(component)
 
         expect(computedStyle.color).toEqual('rgb(255, 255, 0)')
@@ -249,7 +235,7 @@ describe('@withStyle', () => {
           <ThemeableComponent themeOverride={{}} />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[1]!
+      const component = screen.getAllByTestId('testComp')[0]!
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual('rgb(0, 128, 0)')
@@ -269,7 +255,7 @@ describe('@withStyle', () => {
           }}
         />
       )
-      const component = screen.getAllByTestId('testComp')[1]!
+      const component = screen.getAllByTestId('testComp')[0]!
       expect(getComputedStyle(component).color).toEqual(grey1111)
 
       // Set prop: inverse
@@ -283,7 +269,7 @@ describe('@withStyle', () => {
           }}
         />
       )
-      const updatedComponent = screen.getAllByTestId('testComp')[1]!
+      const updatedComponent = screen.getAllByTestId('testComp')[0]!
       expect(getComputedStyle(updatedComponent).color).toEqual(blue4570)
     })
 
@@ -293,8 +279,8 @@ describe('@withStyle', () => {
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[1]!
-      const clearBackgroundButton = screen.getAllByText('Button')[1]
+      const component = screen.getAllByTestId('testComp')[0]!
+      const clearBackgroundButton = screen.getAllByText('Button')[0]
 
       expect(getComputedStyle(component).backgroundColor).toEqual(
         'rgb(255, 255, 0)'
@@ -317,7 +303,7 @@ describe('@withStyle', () => {
           <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[1]!
+      const component = screen.getAllByTestId('testComp')[0]!
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual(grey1111)
@@ -337,7 +323,7 @@ describe('@withStyle', () => {
           />
         </InstUISettingsProvider>
       )
-      const component = screen.getAllByTestId('testComp')[1]!
+      const component = screen.getAllByTestId('testComp')[0]!
       const computedStyle = getComputedStyle(component)
 
       expect(computedStyle.color).toEqual(grey1111)

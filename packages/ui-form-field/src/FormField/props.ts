@@ -23,14 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import { FormPropTypes } from '../FormPropTypes'
-
-import type {
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { FormMessage } from '../FormPropTypes'
 import type { Spacing } from '@instructure/emotion'
 
@@ -75,23 +69,6 @@ type PropKeys = keyof FormFieldOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldProps = FormFieldOwnProps & OtherHTMLAttributes<FormFieldOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.node.isRequired,
-  id: PropTypes.string.isRequired,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  messagesId: PropTypes.string,
-  children: PropTypes.node,
-  inline: PropTypes.bool,
-  layout: PropTypes.oneOf(['stacked', 'inline']),
-  labelAlign: PropTypes.oneOf(['start', 'end']),
-  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-  width: PropTypes.string,
-  inputContainerRef: PropTypes.func,
-  elementRef: PropTypes.func,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'id',
@@ -109,4 +86,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { FormFieldOwnProps, FormFieldProps }
-export { propTypes, allowedProps }
+export { allowedProps }

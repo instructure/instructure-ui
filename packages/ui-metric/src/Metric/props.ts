@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   MetricTheme,
   OtherHTMLAttributes,
   Renderable
@@ -52,14 +49,6 @@ type MetricProps = MetricOwnProps &
   OtherHTMLAttributes<MetricOwnProps>
 
 type MetricStyle = ComponentStyle<'metric' | 'label' | 'value'>
-
-const propTypes: PropValidators<PropKeys> = {
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  isGroupChild: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'textAlign',
   'renderLabel',
@@ -68,4 +57,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { MetricProps, MetricStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

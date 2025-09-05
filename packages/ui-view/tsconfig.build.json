@@ -28,12 +28,7 @@
     {
       "path": "../ui-position/tsconfig.build.json"
     },
-    {
-      "path": "../ui-prop-types/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-react-utils/tsconfig.build.json"
-    },
+    { "path": "../ui-react-utils/tsconfig.build.json" },
     {
       "path": "../ui-babel-preset/tsconfig.build.json"
     },

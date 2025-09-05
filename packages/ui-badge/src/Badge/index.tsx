@@ -29,14 +29,13 @@ import {
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { BadgeProps } from './props'
 
 /**
@@ -46,11 +45,9 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Badge extends Component<BadgeProps> {
   static readonly componentId = 'Badge'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     standalone: false,
@@ -132,7 +129,7 @@ class Badge extends Component<BadgeProps> {
         }
         id={!standalone ? this._defaultId : undefined}
         display={standalone ? 'inline-block' : 'block'}
-        {...(standalone && { elementRef: this.handleRef })}
+        {...(standalone && { elementRef: this.handleRef, 'data-cid': 'Badge' })}
       >
         {this.renderOutput()}
       </View>
@@ -160,6 +157,7 @@ class Badge extends Component<BadgeProps> {
           elementRef={this.handleRef}
           css={styles?.wrapper}
           display={display}
+          data-cid="Badge"
         >
           {this.renderChildren()}
           {this.renderBadge()}

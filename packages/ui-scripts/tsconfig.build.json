@@ -12,6 +12,9 @@
       "path": "../command-utils/tsconfig.build.json"
     },
     {
+      "path": "../ui-themes/tsconfig.build.json"
+    },
+    {
       "path": "../pkg-utils/tsconfig.build.json"
     }
   ]

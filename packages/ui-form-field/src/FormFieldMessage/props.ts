@@ -22,15 +22,7 @@
  * SOFTWARE.
  */
 
-import {
-  formMessageTypePropType,
-  formMessageChildPropType
-} from '../FormPropTypes'
-
-import type {
-  PropValidators,
-  FormFieldMessageTheme
-} from '@instructure/shared-types'
+import type { FormFieldMessageTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessageType, FormMessageChild } from '../FormPropTypes'
 
@@ -47,13 +39,7 @@ type FormFieldMessageProps = FormFieldMessageOwnProps &
   WithStyleProps<FormFieldMessageTheme, FormFieldMessageStyle>
 
 type FormFieldMessageStyle = ComponentStyle<'formFieldMessage' | 'errorIcon'>
-
-const propTypes: PropValidators<PropKeys> = {
-  variant: formMessageTypePropType,
-  children: formMessageChildPropType
-}
-
 const allowedProps: AllowedPropKeys = ['variant', 'children']
 
 export type { FormFieldMessageProps, FormFieldMessageStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

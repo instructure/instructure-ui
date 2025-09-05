@@ -203,7 +203,7 @@ describe('visual regression test', () => {
 
   it('Menu', () => {
     cy.visit('http://localhost:3000/menu')
-    cy.wait(100)
+    cy.wait(300)
     // TODO Fix INSTUI-4677 before enabling this
     //cy.injectAxe()
     //cy.checkA11y('.axe-test', axeOptions, terminalLog)

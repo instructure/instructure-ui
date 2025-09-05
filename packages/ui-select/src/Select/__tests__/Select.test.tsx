@@ -427,15 +427,6 @@ describe('<Select />', () => {
     const invalidChild = screen.queryByText('invalid')
 
     expect(invalidChild).not.toBeInTheDocument()
-
-    const expectedErrorMessage = 'Expected one of Group, Option'
-
-    expect(consoleErrorMock).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.any(String),
-      expect.stringContaining(expectedErrorMessage),
-      expect.any(String)
-    )
   })
 
   it('should provide a focus method', async () => {

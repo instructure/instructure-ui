@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FlexItemProps } from './props'
 
 /**
@@ -51,7 +51,6 @@ class Item extends Component<FlexItemProps> {
     this.props.makeStyles?.()
   }
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

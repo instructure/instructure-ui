@@ -24,10 +24,7 @@
 
 /* list utils in alphabetical order */
 export { callRenderProp } from './callRenderProp'
-export { deprecated } from './deprecated'
 export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { hack } from './hack'
 export { getDisplayName } from './getDisplayName'
 export { getElementType } from './getElementType'
 export { getInteraction } from './getInteraction'
@@ -42,6 +39,7 @@ export {
   DeterministicIdContextProvider,
   withDeterministicId
 } from './DeterministicIdContext'
+
 export type { GetInteractionOptions } from './getInteraction'
 export type { InteractionType } from './getInteraction'
 export type {

@@ -36,7 +36,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TableColHeaderProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -49,7 +49,6 @@ class ColHeader extends Component<TableColHeaderProps> {
   static readonly componentId = 'Table.ColHeader'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     textAlign: 'start',

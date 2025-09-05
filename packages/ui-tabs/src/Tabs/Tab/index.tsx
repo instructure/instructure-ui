@@ -34,7 +34,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { TabsTabProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -46,7 +46,6 @@ class Tab extends Component<TabsTabProps> {
   static readonly componentId = 'Tabs.Tab'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'default',

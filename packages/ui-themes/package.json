@@ -24,12 +24,11 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.24.2",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@instructure/shared-types": "10.24.2",
-    "@instructure/theme-registry": "10.24.2"
+    "@instructure/shared-types": "10.24.2"
   },
   "publishConfig": {
     "access": "public"

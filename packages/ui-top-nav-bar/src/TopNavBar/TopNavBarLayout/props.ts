@@ -23,24 +23,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import {
-  Children as ChildrenPropTypes,
-  element
-} from '@instructure/ui-prop-types'
 
 import type { WithStyleProps } from '@instructure/emotion'
 import type {
   TopNavBarLayoutTheme,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
-
-import { TopNavBarActionItems } from '../TopNavBarActionItems'
-import { TopNavBarBrand } from '../TopNavBarBrand'
-import { TopNavBarMenuItems } from '../TopNavBarMenuItems'
-import { TopNavBarUser } from '../TopNavBarUser'
 
 import type { ActionItemsChild } from '../TopNavBarActionItems/props'
 import type { BrandChild } from '../TopNavBarBrand/props'
@@ -48,12 +36,9 @@ import type { MenuItemsChild } from '../TopNavBarMenuItems/props'
 import type { UserChild } from '../TopNavBarUser/props'
 import type { BreadcrumbChild } from '../TopNavBarBreadcrumb/props'
 
-import { topNavBarItemTooltipPropType } from '../TopNavBarItem/props'
-
 import { TopNavBarLayout } from './index'
 import type { DesktopLayoutOwnProps } from './DesktopLayout/props'
 import type { SmallViewportLayoutOwnProps } from './SmallViewportLayout/props'
-import { TopNavBarBreadcrumb } from '../TopNavBarBreadcrumb'
 
 type LayoutChild = React.ComponentElement<TopNavBarLayoutProps, TopNavBarLayout>
 
@@ -136,46 +121,6 @@ type TopNavBarLayoutProps = TopNavBarLayoutOwnProps &
   WithStyleProps<TopNavBarLayoutTheme, null> &
   OtherHTMLAttributes<TopNavBarLayoutOwnProps>
 
-const commonPropTypes: PropValidators<CommonPropKeys> = {
-  renderBrand: ChildrenPropTypes.oneOf([TopNavBarBrand]),
-  renderMenuItems: ChildrenPropTypes.oneOf([TopNavBarMenuItems]),
-  renderActionItems: ChildrenPropTypes.oneOf([TopNavBarActionItems]),
-  renderUser: ChildrenPropTypes.oneOf([TopNavBarUser]),
-  renderBreadcrumb: ChildrenPropTypes.oneOf([TopNavBarBreadcrumb]),
-  navLabel: PropTypes.string,
-  elementRef: PropTypes.func
-}
-
-const desktopPropTypes: PropValidators<DesktopPropKeys> = {
-  hideActionsUserSeparator: PropTypes.bool
-}
-
-const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
-  dropdownMenuToggleButtonLabel: PropTypes.string.isRequired,
-  dropdownMenuToggleButtonTooltip: topNavBarItemTooltipPropType,
-  dropdownMenuLabel: PropTypes.string,
-  alternativeTitle: PropTypes.node,
-  renderInPlaceDialogConfig: PropTypes.shape({
-    open: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    closeButtonLabel: PropTypes.string.isRequired,
-    content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    returnFocusElement: PropTypes.func,
-    shouldContainFocus: PropTypes.bool,
-    shouldCloseOnDocumentClick: PropTypes.bool,
-    shouldCloseOnEscape: PropTypes.bool
-  }),
-  trayMountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  onDropdownMenuToggle: PropTypes.func,
-  onDropdownMenuSelect: PropTypes.func,
-  renderNavbarStartDangerousHack: PropTypes.node
-}
-
-const propTypes: PropValidators<PropKeys> = {
-  ...commonPropTypes,
-  smallViewportConfig: PropTypes.shape(smallViewportPropTypes).isRequired
-}
-
 const commonAllowedProps: CommonAllowedPropKeys = [
   'renderBrand',
   'renderMenuItems',
@@ -206,12 +151,8 @@ const allowedProps: AllowedPropKeys = [
 
 export type { LayoutChild, CommonTopNavBarLayoutProps, TopNavBarLayoutProps }
 export {
-  propTypes,
   allowedProps,
-  commonPropTypes,
   commonAllowedProps,
-  desktopPropTypes,
-  smallViewportPropTypes,
   desktopAllowedProps,
   smallViewportAllowedProps
 }

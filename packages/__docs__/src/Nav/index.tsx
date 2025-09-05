@@ -159,7 +159,9 @@ class Nav extends Component<NavProps, NavState> {
   }): React.ReactNode {
     if (
       React.isValidElement(children) &&
-      React.Children.count(children.props.children) === 0
+      React.Children.count(
+        (children as React.ReactElement<any>).props.children
+      ) === 0
     ) {
       return
     }

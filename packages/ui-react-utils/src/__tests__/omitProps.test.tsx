@@ -22,54 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import '@testing-library/jest-dom'
 import { omitProps } from '../omitProps'
 
 describe('omitProps', () => {
-  it('should work with PropTypes', () => {
-    const propTypes = {
-      prop1: PropTypes.string.isRequired,
-      prop2: PropTypes.number
-    }
-
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp: 'excessiveValue'
-    }
-
-    const expectedResult = {
-      excessiveProp: 'excessiveValue'
-    }
-
-    const actualResult = omitProps(inputProps, propTypes)
-
-    expect(actualResult).toEqual(expectedResult)
-  })
-
-  it('should work with PropTypes and exclude the given keys', () => {
-    const propTypes = {
-      prop1: PropTypes.string.isRequired,
-      prop2: PropTypes.number
-    }
-
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp1: 'excessiveValue1',
-      excessiveProp2: 'excessiveValue2'
-    }
-
-    const expectedResult = {
-      excessiveProp2: 'excessiveValue2'
-    }
-
-    const actualResult = omitProps(inputProps, propTypes, ['excessiveProp1'])
-
-    expect(actualResult).toEqual(expectedResult)
-  })
-
   it('should work with an input of a list allowed prop names', () => {
     const allowedPropKeys = ['prop1', 'prop2']
 

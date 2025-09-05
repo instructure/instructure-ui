@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
 
 import type {
   Spacing,
@@ -31,7 +30,6 @@ import type {
 import type {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators,
   SpinnerTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -86,17 +84,6 @@ type SpinnerState = {
 type SpinnerStyle = ComponentStyle<
   'spinner' | 'circle' | 'circleTrack' | 'circleSpin'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  delay: PropTypes.number,
-  renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-  variant: PropTypes.oneOf(['default', 'inverse']),
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = [
   'delay',
   'renderTitle',
@@ -108,4 +95,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SpinnerProps, SpinnerState, SpinnerStyle }
-export { propTypes, allowedProps }
+export { allowedProps }
