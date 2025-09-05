@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import canvas from '@instructure/ui-themes'
-import { ThemeRegistry } from '@instructure/theme-registry'
 import { isBaseTheme, mergeDeep } from '@instructure/ui-utils'
 
 import type { BaseTheme } from '@instructure/shared-types'
@@ -55,14 +54,12 @@ const getTheme =
     // we need to clone the ancestor theme not to override it
     let currentTheme
     if (Object.keys(ancestorTheme).length === 0) {
-      const globalTheme = ThemeRegistry.getCurrentTheme()
-
-      if (process.env.NODE_ENV !== 'production' && !globalTheme) {
+      if (process.env.NODE_ENV !== 'production') {
         console.warn(
           'No theme provided for [InstUISettingsProvider], using default `canvas` theme.'
         )
       }
-      currentTheme = globalTheme || canvas
+      currentTheme = canvas
     } else {
       currentTheme = ancestorTheme
     }

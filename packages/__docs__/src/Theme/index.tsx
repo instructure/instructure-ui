@@ -275,18 +275,7 @@ class Theme extends Component<ThemeProps> {
           id={`${themeKey}ApplicationUsage`}
           content={`
 ### Usage (before mounting your application)
-##### (DEPRECATED) Global theming
-${'```javascript\n \
----\n \
-type: code\n \
----'}
-import { theme } from '${this.props.requirePath}'
 
-theme.use({ overrides: { colors: { brand: 'red' } }})
-
-${'```'}
-
-##### Application level theming
 ${'```javascript\n \
 ---\n \
 type: code\n \

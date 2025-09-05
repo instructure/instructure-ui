@@ -394,9 +394,7 @@ export { TextInput } from '@instructure/ui-text-input'
 export type { TextInputProps } from '@instructure/ui-text-input'
 export {
   canvas,
-  canvasThemeLocal,
   canvasHighContrast,
-  canvasHighContrastThemeLocal,
   primitives,
   additionalPrimitives,
   dataVisualization

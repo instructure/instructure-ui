@@ -27,7 +27,6 @@
     "@emotion/react": "^11",
     "@instructure/console": "10.24.2",
     "@instructure/shared-types": "10.24.2",
-    "@instructure/theme-registry": "10.24.2",
     "@instructure/ui-decorator": "10.24.2",
     "@instructure/ui-i18n": "10.24.2",
     "@instructure/ui-react-utils": "10.24.2",

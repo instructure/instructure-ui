@@ -134,9 +134,4 @@ export { Drilldown } from '@instructure/ui-drilldown'
 export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'
 export { TruncateList } from '@instructure/ui-truncate-list'
-export {
-  canvas,
-  canvasHighContrast,
-  canvasThemeLocal,
-  canvasHighContrastThemeLocal
-} from '@instructure/ui-themes'
+export { canvas, canvasHighContrast } from '@instructure/ui-themes'
