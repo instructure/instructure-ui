@@ -388,7 +388,7 @@ const generateStyle = (
                     ? {
                         borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
                       }
-                    : {})
+                    : { borderRadius: '50%' })
                 }
               }
             : {})

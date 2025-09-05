@@ -155,13 +155,22 @@ export default function ButtonPage() {
         </View>
         <View display="inline-block" background="primary-inverse">
           <IconButton
-            withBackground={false}
-            withBorder={false}
-            color="primary-inverse"
-            screenReaderLabel="Delete tag"
-            margin="large"
+            shape="circle"
+            color="ai-secondary"
+            screenReaderLabel="AI button"
+            margin="small"
           >
-            <IconXSolid />
+            <IconAiColoredSolid />
+          </IconButton>
+        </View>
+        <View display="inline-block" background="primary-inverse">
+          <IconButton
+            shape="circle"
+            color="ai-primary"
+            screenReaderLabel="AI button"
+            margin="small"
+          >
+            <IconAiSolid />
           </IconButton>
         </View>
       </div>
