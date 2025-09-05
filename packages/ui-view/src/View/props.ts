@@ -67,7 +67,7 @@ type ViewOwnProps = {
   /**
    * provides a reference to the underlying html element
    */
-  elementRef?: (element: Element | null) => void
+  elementRef?: (element: HTMLElement | null) => void
   /**
    * By default the display prop is 'auto', meaning it takes on the
    * display rules of the html element it's rendered as (see `as` prop).

@@ -185,7 +185,7 @@ class View extends Component<ViewProps> {
 
   ref: Element | null = null
 
-  handleElementRef = (el: Element | null) => {
+  handleElementRef = (el: HTMLElement | null) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
     }

@@ -76,7 +76,7 @@ class BaseButton extends Component<BaseButtonProps> {
     cursor: 'pointer'
   } as const
 
-  ref: Element | null = null
+  ref: HTMLElement | null = null
 
   componentDidMount() {
     this.props.makeStyles?.(this.makeStylesVariables)
@@ -143,10 +143,10 @@ class BaseButton extends Component<BaseButtonProps> {
   }
 
   focus() {
-    this.ref && (this.ref as HTMLElement).focus()
+    this.ref && this.ref.focus()
   }
 
-  handleElementRef = (el: Element | null) => {
+  handleElementRef = (el: HTMLElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
