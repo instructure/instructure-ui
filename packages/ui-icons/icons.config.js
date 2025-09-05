@@ -136,9 +136,11 @@ const bidirectional = [
   'open-folder',
   'outdent',
   'outdent2',
+  'undo',
   'quiz-stats-high',
   'quiz-stats-low',
   'quiz',
+  'redo',
   'replied',
   'reply-2',
   'reply-all-2',
@@ -158,6 +160,7 @@ const bidirectional = [
   'toggle-end'
 ]
 
+/* eslint-disable no-undef */
 module.exports = {
   source,
   destination,
