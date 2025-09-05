@@ -94,6 +94,7 @@ class CondensedButton extends Component<CondensedButtonProps> {
       cursor,
       href,
       renderIcon,
+      width,
       ...props
     } = this.props
 
@@ -103,6 +104,7 @@ class CondensedButton extends Component<CondensedButtonProps> {
       <BaseButton
         {...passthroughProps(props)}
         isCondensed
+        width={width}
         withBackground={false}
         withBorder={false}
         type={type}

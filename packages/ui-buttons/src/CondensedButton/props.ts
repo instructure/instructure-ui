@@ -101,6 +101,11 @@ type CondensedButtonOwnProps = {
   onClick?: (
     event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
   ) => void
+
+  /**
+   * Sets the width of the button
+   */
+  width?: string
 }
 
 type PropKeys = keyof CondensedButtonOwnProps
@@ -124,7 +129,8 @@ const propTypes: PropValidators<PropKeys> = {
   cursor: PropTypes.string,
   href: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  width: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -139,7 +145,8 @@ const allowedProps: AllowedPropKeys = [
   'renderIcon',
   'size',
   'type',
-  'onClick'
+  'onClick',
+  'width'
 ]
 
 export type { CondensedButtonProps }
