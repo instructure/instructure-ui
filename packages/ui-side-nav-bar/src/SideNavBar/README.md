@@ -4,8 +4,6 @@ describes: SideNavBar
 
 A top-level `SideNavBar` component.
 
-> Note that this component is experimental and its API might change significantly in the future.
-
 ```js
 ---
 type: example
