@@ -38,6 +38,9 @@ export default function RootLayout({
     // we need to make a new Map to reset counting on the server side
     // on each page refresh TODO fix
     <html lang="en">
+      <head>
+        <title>Component visual and regression test suite</title>
+      </head>
       <InstUISettingsProvider instanceCounterMap={new Map()}>
         <body className={inter.className}>{children}</body>
       </InstUISettingsProvider>

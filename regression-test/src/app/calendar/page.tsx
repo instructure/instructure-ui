@@ -30,9 +30,6 @@ const Calendar = cl as any
 export default function CalendarPage() {
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
-      {/* Default config */}
-      <Calendar />
-
       {/* Default config with additional props */}
       <Calendar
         visibleMonth="2025-05"
