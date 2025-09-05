@@ -93,7 +93,6 @@ const generateStyle = (
       lineHeight: componentTheme.lineHeight,
       fontSize: componentTheme.fontSize,
       background: componentTheme.background,
-      transition: 'background 0.2s',
       // Changing the following to display: flex; causes a VO
       // bug where items with role menuitem, menuitemcheckbox
       // and menuitemradio are selected twice with control+
@@ -103,7 +102,6 @@ const generateStyle = (
       ...roleStyles,
       '&:focus,  &:active,  &:hover': {
         background: componentTheme.activeBackground,
-        transition: 'background 0s',
         '[class*="menuItem__label"]': {
           color: componentTheme.activeLabelColor
         },
