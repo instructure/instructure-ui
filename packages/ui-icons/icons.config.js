@@ -145,6 +145,8 @@ const bidirectional = [
   'reply',
   'rubric-dark',
   'rubric',
+  'sidebar-right-show',
+  'sidebar-right-hide',
   'sis-imported',
   'syllabus',
   'text-left',
@@ -158,6 +160,7 @@ const bidirectional = [
   'toggle-end'
 ]
 
+/* eslint-disable no-undef */
 module.exports = {
   source,
   destination,
