@@ -56,7 +56,8 @@ class CondensedButton extends Component<CondensedButtonProps> {
     interaction: undefined,
     color: 'primary',
     margin: '0',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    display: 'inline-block'
   }
 
   _baseButton: BaseButton | null = null
@@ -94,6 +95,7 @@ class CondensedButton extends Component<CondensedButtonProps> {
       cursor,
       href,
       renderIcon,
+      display,
       ...props
     } = this.props
 
@@ -103,6 +105,7 @@ class CondensedButton extends Component<CondensedButtonProps> {
       <BaseButton
         {...passthroughProps(props)}
         isCondensed
+        display={display}
         withBackground={false}
         withBorder={false}
         type={type}
