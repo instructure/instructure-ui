@@ -4144,12 +4144,11 @@ __webpack_require__.d(__webpack_exports__,{e:()=>darken})
 var tinycolor2__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(61919)
 function darken(color,percent){return(0,tinycolor2__WEBPACK_IMPORTED_MODULE_0__.A)(color).darken(percent).toRgbString()}},89493:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{K:()=>scopeTab})
-var _instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(82243),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__(97460),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__(37319),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__(5896),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_4__=__webpack_require__(8732)
+var _instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(82243),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__(97460),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__(8732),_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__(37319)
 function scopeTab(element,event,onLeavingFinalTabbable){const node=(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_0__.o)(element),tabbable=(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_1__.j)(node)
 if(!tabbable.length)return void event.preventDefault()
-if((0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_2__.s)(element)){const activeElement=(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_3__.b)()
-activeElement&&-1===tabbable.indexOf(activeElement)&&tabbable.push(activeElement)}const finalTabbable=tabbable[event.shiftKey?0:tabbable.length-1]
-if(!((0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_4__.X)(finalTabbable)||(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_4__.X)(node)||!(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_2__.s)(element)))return
+const finalTabbable=tabbable[event.shiftKey?0:tabbable.length-1]
+if(!(tabbable.length<2||(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_2__.X)(finalTabbable)||(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_2__.X)(node)||!(0,_instructure_ui_dom_utils__WEBPACK_IMPORTED_MODULE_3__.s)(element)))return
 if("function"==typeof onLeavingFinalTabbable)return void onLeavingFinalTabbable()
 event.preventDefault()
 tabbable[event.shiftKey?tabbable.length-1:0].focus()}},90282:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
