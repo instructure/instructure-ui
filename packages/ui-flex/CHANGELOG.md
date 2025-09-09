@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Features
+
+* **ui-flex:** add order prop to Flex.Item ([c563623](https://github.com/instructure/instructure-ui/commit/c56362317573f7bb94f7c1dfb8b2dcee6b59f278))
+* **ui-flex:** add order prop to Flex.Item ([0eaa872](https://github.com/instructure/instructure-ui/commit/0eaa87269e1742e54fdaba4a0d8dc199524dcaa4))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-flex

@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix focus region skipping items after Drilldown/scrollbars ([959b340](https://github.com/instructure/instructure-ui/commit/959b340708046df9666e281c42e038d047a7209a))
+* **ui-avatar:** avatar now renders images correctly when using SSR ([7d8cc62](https://github.com/instructure/instructure-ui/commit/7d8cc6203bb850e1bed77cf5e85cf9ddeb03306a))
+* **ui-buttons:** fix seondary ai iconbutton when shape is circle ([5098202](https://github.com/instructure/instructure-ui/commit/5098202843490098326c41e928811244f65f36c1))
+* **ui-dialog,ui-a11y-utils:** fix focus getting stuck in some cases if something is removed from the middle of the focus stack ([eb3f47e](https://github.com/instructure/instructure-ui/commit/eb3f47eef4d1b8199b4e272d2142612b074f4ea1))
+* **ui-form-field:** should not change layout when only screenreader-only message is present ([09977a2](https://github.com/instructure/instructure-ui/commit/09977a2595ac3f9c00fc8152ed9cabcfe818338c))
+* **ui-heading:** ai heading won't show up on print ([af10476](https://github.com/instructure/instructure-ui/commit/af10476f5302c5e53e87ccf79a0e0f0d988871e2))
+* **ui-modal:** fix Modal.body throwing error when 'as' is set to a React component ([350a05c](https://github.com/instructure/instructure-ui/commit/350a05c109ac219a885d0998290d00b20584e168))
+* **ui-modal:** fix tabbable modal edge case ([e66ad32](https://github.com/instructure/instructure-ui/commit/e66ad32360a428668204bb8fb1299448af639200))
+* **ui-scripts:** fix getGlyphData to ignore system-generated files in the icons folder ([9097301](https://github.com/instructure/instructure-ui/commit/90973018bc5cce8519715696f078874116c59c78))
+* **ui-tabs,shared-types:** color tabs.panel focus outline from the theme and make it overridable by brand overrides ([b4f9893](https://github.com/instructure/instructure-ui/commit/b4f989343019620c2a25275eab7beba21230b158))
+* **ui-view,ui-buttons:** clarify typing of elementRefs ([f8bdf91](https://github.com/instructure/instructure-ui/commit/f8bdf91544e56f804677be6709f4896ff9176c3f))
+
+
+### Features
+
+* **ui-flex:** add order prop to Flex.Item ([c563623](https://github.com/instructure/instructure-ui/commit/c56362317573f7bb94f7c1dfb8b2dcee6b59f278))
+* **ui-flex:** add order prop to Flex.Item ([0eaa872](https://github.com/instructure/instructure-ui/commit/0eaa87269e1742e54fdaba4a0d8dc199524dcaa4))
+* **ui-icons:** add new icons Instructure-3-dot and Instructure-1-dot ([4258567](https://github.com/instructure/instructure-ui/commit/4258567c0ca93955133b46feb1d85c7dcf30988e))
+* **ui-icons:** add new icons user-assign and restore ([b617fe3](https://github.com/instructure/instructure-ui/commit/b617fe34b81ea1a120bfb1f539fa945e32e11703))
+* **ui-icons:** add new redo and undo icons and modify the documentation page ([fd4f7b9](https://github.com/instructure/instructure-ui/commit/fd4f7b9de454536d04f8d39f19185ed22ae682c4))
+* **ui-icons:** add new sidebar-open and sidebar-close icons ([154b534](https://github.com/instructure/instructure-ui/commit/154b534131a89a182b65f60afbf5383ed85c3681))
+* **ui-icons:** rename icons ([5dc7995](https://github.com/instructure/instructure-ui/commit/5dc79951fdfa67a95aee478151d519baa2c002d0))
+* **ui-menu:** remove fade in/out transitions from menu items ([d3845fb](https://github.com/instructure/instructure-ui/commit/d3845fb81f277c52f69230854ca9c1f15a3a3cab))
+* **ui-pagination:** add onMouseEnter to Pagination ([327fe69](https://github.com/instructure/instructure-ui/commit/327fe69f15ac34e2efe5bb6d0580d8e07bcd6147))
+* **ui-side-nav-bar:** remove experimental warning from SideNavBar documentation page ([c0cc00d](https://github.com/instructure/instructure-ui/commit/c0cc00d8bde785c51edbfb6325b61046c22050a9))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 

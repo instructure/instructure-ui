@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **ui-scripts:** fix getGlyphData to ignore system-generated files in the icons folder ([9097301](https://github.com/instructure/instructure-ui/commit/90973018bc5cce8519715696f078874116c59c78))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-scripts
