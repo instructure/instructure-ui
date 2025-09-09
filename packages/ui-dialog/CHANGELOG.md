@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **ui-dialog,ui-a11y-utils:** fix focus getting stuck in some cases if something is removed from the middle of the focus stack ([eb3f47e](https://github.com/instructure/instructure-ui/commit/eb3f47eef4d1b8199b4e272d2142612b074f4ea1))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-dialog

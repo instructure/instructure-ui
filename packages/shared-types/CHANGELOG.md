@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **ui-tabs,shared-types:** color tabs.panel focus outline from the theme and make it overridable by brand overrides ([b4f9893](https://github.com/instructure/instructure-ui/commit/b4f989343019620c2a25275eab7beba21230b158))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/shared-types

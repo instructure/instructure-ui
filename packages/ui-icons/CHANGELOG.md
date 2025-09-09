@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Features
+
+* **ui-icons:** add new icons Instructure-3-dot and Instructure-1-dot ([4258567](https://github.com/instructure/instructure-ui/commit/4258567c0ca93955133b46feb1d85c7dcf30988e))
+* **ui-icons:** add new icons user-assign and restore ([b617fe3](https://github.com/instructure/instructure-ui/commit/b617fe34b81ea1a120bfb1f539fa945e32e11703))
+* **ui-icons:** add new redo and undo icons and modify the documentation page ([fd4f7b9](https://github.com/instructure/instructure-ui/commit/fd4f7b9de454536d04f8d39f19185ed22ae682c4))
+* **ui-icons:** add new sidebar-open and sidebar-close icons ([154b534](https://github.com/instructure/instructure-ui/commit/154b534131a89a182b65f60afbf5383ed85c3681))
+* **ui-icons:** rename icons ([5dc7995](https://github.com/instructure/instructure-ui/commit/5dc79951fdfa67a95aee478151d519baa2c002d0))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-icons

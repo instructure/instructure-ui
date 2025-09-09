@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **ui-buttons:** fix seondary ai iconbutton when shape is circle ([5098202](https://github.com/instructure/instructure-ui/commit/5098202843490098326c41e928811244f65f36c1))
+* **ui-view,ui-buttons:** clarify typing of elementRefs ([f8bdf91](https://github.com/instructure/instructure-ui/commit/f8bdf91544e56f804677be6709f4896ff9176c3f))
+
+
+
+
+
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-buttons
