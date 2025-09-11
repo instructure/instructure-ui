@@ -361,6 +361,10 @@ const generateStyle = (
           touchAction: 'manipulation',
           // This sets the focus ring's border radius displayed by the `View`
           borderRadius: componentTheme.borderRadius,
+          // Prevents the button from being stretched vertically by a flex parent.
+          // Without this, flex containers with `align-items: stretch` (the default)
+          // would force the button to fill the parent's height.
+          alignSelf: 'center',
 
           '&::-moz-focus-inner': {
             border: '0' /* removes default dotted focus outline in Firefox */
