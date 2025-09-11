@@ -1073,7 +1073,7 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | View | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element to render as the component root, `span` by default |
-| View | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html element |
+| View | elementRef | `(element: HTMLElement \| null) => void` | No | - | provides a reference to the underlying html element |
 | View | display | `\| 'auto' \| 'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | `'auto'` | By default the display prop is 'auto', meaning it takes on the display rules of the html element it's rendered as (see `as` prop). |
 | View | overflowX | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
 | View | overflowY | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |

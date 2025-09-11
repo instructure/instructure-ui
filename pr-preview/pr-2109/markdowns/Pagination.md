@@ -573,6 +573,7 @@ type: embed
 | Pagination | siblingCount | `number` | No | `1` | The number of pages to display before and after the current page |
 | Pagination | boundaryCount | `number` | No | `1` | The number of always visible pages at the beginning and end of the pagination component |
 | Pagination | onPageChange | `(next: number, prev: number) => void` | No | - | Called when page number is changed |
+| Pagination | onMouseEnter | `(page: number) => void` | No | - | Called when a page is hovered. |
 | Pagination | renderPageIndicator | `( pageIndex: number, currentPage: number ) => React.ReactNode` | No | `(page: number) => page` | Renders the visible pages |
 | Pagination | ellipsis | `React.ReactNode` | No | `'…'` | The ellipsis (e.g. "...") |
 

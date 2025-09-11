@@ -169,6 +169,7 @@ type: embed
 | Dialog | shouldFocusOnOpen | `bool` | No | `true` | When set to true, the `defaultFocusElement` is focused on initialization. |
 | Dialog | elementRef | `func` | No | - | provides a reference to the underlying html root element |
 | Dialog | isTooltip | `bool` | No | - | Whether or not the element is a Tooltip |
+| Dialog | regionId | `string` | No | - | The ID of the `FocusRegion` this belongs to. Used only for debugging. |
 
 ### Usage
 

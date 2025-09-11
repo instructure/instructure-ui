@@ -21,7 +21,7 @@ type: example
 | BaseButton | children | `React.ReactNode` | No | - | Specifies the `Button` children. |
 | BaseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
 | BaseButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `Button` |
-| BaseButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
+| BaseButton | elementRef | `(element: HTMLElement \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
 | BaseButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `Button` by default. |
 | BaseButton | interaction | `enum` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |
 | BaseButton | color | `\| 'primary' \| 'primary-inverse' \| 'secondary' \| 'success' \| 'danger' \| 'ai-primary' \| 'ai-secondary'` | No | `'secondary'` | Specifies the color for the `Button`. |
