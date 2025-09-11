@@ -22,30 +22,30 @@
  * SOFTWARE.
  */
 
-import bump from './bump.js'
-import server from './server.js'
-import tag from './tag.js'
-import deprecate from './deprecate.js'
-import publish from './publish.js'
-import lint from '../test/lint.js'
-import bundle from '../build/webpack.js'
-import clean from '../build/clean.js'
-import build from '../build/babel.js'
-import generateAllTokens from '../build/generate-all-tokens.js'
-import buildIcons from '../icons/build-icons.js'
-import buildThemes from '../build/build-themes.js'
+import primitives, { type Primitives } from './primitives'
+import semantics, { type Semantics } from './semantics'
+import avatar, { type Avatar } from './components/avatar'
+import pill, { type Pill } from './components/pill'
+import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
 
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  lint,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons,
-  buildThemes
-]
+export type Theme = {
+  primitives: Primitives
+  semantics: Semantics
+  components: {
+    avatar: Avatar
+    pill: Pill
+    breadcrumb: Breadcrumb
+  }
+}
+
+const theme = {
+  primitives,
+  semantics,
+  components: {
+    avatar,
+    pill,
+    breadcrumb
+  }
+}
+
+export default theme
