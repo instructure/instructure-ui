@@ -83,6 +83,10 @@ type TreeBrowserOwnProps = {
    * An optional compare function to specify order of the collections and the items
    */
   sortOrder?: (obj1: any, obj2: any) => number
+  /**
+   * Whether to enable animation for the TreeBrowser
+   */
+  animation?: boolean
 } & TreeBrowserBaseProps
 
 // props shared between TreeBrowser, TreeCollection
@@ -204,7 +208,8 @@ const propTypes: PropValidators<PropKeys> = {
   onItemClick: PropTypes.func,
   treeLabel: PropTypes.string,
   renderContent: PropTypes.func,
-  sortOrder: PropTypes.func
+  sortOrder: PropTypes.func,
+  animation: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -227,7 +232,8 @@ const allowedProps: AllowedPropKeys = [
   'onItemClick',
   'treeLabel',
   'renderContent',
-  'sortOrder'
+  'sortOrder',
+  'animation'
 ]
 
 type TreeBrowserState = {

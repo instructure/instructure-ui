@@ -45,6 +45,7 @@ import type {
   TreeBrowserState
 } from './props'
 import { allowedProps, propTypes } from './props'
+import TreeBrowserContext from './TreeBrowserContext'
 
 /**
 ---
@@ -72,7 +73,8 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     selectionType: 'none',
     sortOrder: function () {
       return 0
-    }
+    },
+    animation: true
   }
 
   static Node = TreeNode
@@ -364,18 +366,24 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     const { styles } = this.props
 
     return (
-      <ul
-        css={styles?.treeBrowser}
-        tabIndex={0}
-        role="tree"
-        onKeyDown={this.handleKeyDown}
-        ref={(el) => {
-          this.ref = el
+      <TreeBrowserContext.Provider
+        value={{
+          animation: this.props.animation
         }}
-        aria-label={this.props.treeLabel}
       >
-        {this.renderRoot()}
-      </ul>
+        <ul
+          css={styles?.treeBrowser}
+          tabIndex={0}
+          role="tree"
+          onKeyDown={this.handleKeyDown}
+          ref={(el) => {
+            this.ref = el
+          }}
+          aria-label={this.props.treeLabel}
+        >
+          {this.renderRoot()}
+        </ul>
+      </TreeBrowserContext.Provider>
     )
   }
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, ReactElement, SyntheticEvent } from 'react'
+import { Component, ContextType, ReactElement, SyntheticEvent } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
@@ -36,6 +36,7 @@ import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import type { CompareObject } from '../props'
 import { allowedProps, propTypes } from './props'
 import { CollectionItem, CollectionProps, CollectionData } from '../props'
+import TreeBrowserContext from '../TreeBrowserContext'
 
 type AriaSelectedType = { 'aria-selected'?: boolean }
 
@@ -55,6 +56,9 @@ class TreeCollection extends Component<
 
   static allowedProps = allowedProps
   static propTypes = propTypes
+
+  static contextType = TreeBrowserContext
+  declare context: ContextType<typeof TreeBrowserContext>
 
   static defaultProps = {
     collections: [],
@@ -76,10 +80,10 @@ class TreeCollection extends Component<
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({ animation: this.context?.animation })
   }
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({ animation: this.context?.animation })
   }
 
   get itemsLevel() {
