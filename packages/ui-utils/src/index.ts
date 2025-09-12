@@ -44,5 +44,6 @@ export {
   isIE,
   isFirefox,
   isChromium,
-  isAndroidOrIOS
+  isAndroidOrIOS,
+  isMac
 } from './getBrowser'
