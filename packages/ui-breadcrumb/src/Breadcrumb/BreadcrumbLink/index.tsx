@@ -68,6 +68,7 @@ class BreadcrumbLink extends Component<
       this.setState({ isTruncated })
     }
   }
+
   render() {
     const {
       children,
@@ -82,8 +83,15 @@ class BreadcrumbLink extends Component<
     const { isTruncated } = this.state
     const props = omitProps(this.props, BreadcrumbLink.allowedProps)
 
+    const isInteractive = onClick || href
     return (
-      <Tooltip renderTip={children} preventTooltip={!isTruncated}>
+      <Tooltip
+        renderTip={children}
+        preventTooltip={!isTruncated}
+        // this wraps the achor/button tag in a span and puts the aria-describedby on that instead of the anchor/button tag
+        // to avoid SRs reading the text twice when there is already an aria-label
+        {...(isInteractive && { as: 'span' })}
+      >
         <Link
           {...props}
           href={href}
@@ -95,6 +103,10 @@ class BreadcrumbLink extends Component<
           elementRef={this.handleRef}
           forceButtonRole={false}
           {...(isCurrentPage && { 'aria-current': 'page' })}
+          {...(isTruncated && {
+            ...(typeof children === 'string' && { 'aria-label': children }),
+            ...(!isInteractive && { role: 'text' })
+          })}
         >
           <TruncateText
             onUpdate={(isTruncated) => this.handleTruncation(isTruncated)}
