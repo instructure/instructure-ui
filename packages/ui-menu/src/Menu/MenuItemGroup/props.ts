@@ -23,18 +23,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
 
 import { MenuItem } from '../MenuItem'
-import { MenuItemSeparator } from '../MenuItemSeparator'
 
 import type {
-  PropValidators,
   MenuGroupTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -92,21 +84,6 @@ type MenuGroupProps = MenuGroupOwnProps &
   WithDeterministicIdProps
 
 type MenuGroupStyle = ComponentStyle<'menuItemGroup' | 'label' | 'items'>
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.node.isRequired,
-  allowMultiple: PropTypes.bool,
-  children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
-  selected: controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
-  defaultSelected: PropTypes.array,
-  onSelect: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  controls: PropTypes.string,
-  itemRef: PropTypes.func,
-  disabled: PropTypes.bool,
-  isTabbable: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'allowMultiple',
@@ -125,4 +102,4 @@ type MenuGroupState = {
   selected: (string | number)[]
 }
 export type { MenuGroupProps, MenuGroupStyle, MenuGroupState }
-export { propTypes, allowedProps }
+export { allowedProps }

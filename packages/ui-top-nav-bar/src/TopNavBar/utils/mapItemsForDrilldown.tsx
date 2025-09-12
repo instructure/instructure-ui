@@ -70,7 +70,7 @@ const mapItemsForDrilldown = (
       id,
       children,
       status,
-      variant,
+      variant = 'default', // workaround because defaultProps not working after react 19 upgrade
       href,
       onClick,
       shouldCloseOnClick

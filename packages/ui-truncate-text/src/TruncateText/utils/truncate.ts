@@ -27,7 +27,7 @@ import escapeHtml from 'escape-html'
 import { cloneArray } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import {
-  getComputedStyle,
+  getCSSStyleDeclaration,
   getBoundingClientRect,
   isVisible
 } from '@instructure/ui-dom-utils'
@@ -122,8 +122,13 @@ class Truncator {
     if (!this._stage) {
       return
     }
+
+    const style = getCSSStyleDeclaration(this._parent)
+    if (!style) {
+      return
+    }
+
     const { maxLines, truncate, lineHeight } = this._options
-    const style = getComputedStyle(this._parent)
     // if no explicit lineHeight is inherited, use lineHeight multiplier for calculations
     const actualLineHeight =
       style.lineHeight === 'normal'

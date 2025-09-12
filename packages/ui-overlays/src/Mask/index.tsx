@@ -33,7 +33,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { MaskProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import MaskCounter from './MaskCounter'
 
 /**
@@ -46,7 +46,6 @@ class Mask extends Component<MaskProps> {
   static readonly componentId = 'Mask'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     placement: 'center',

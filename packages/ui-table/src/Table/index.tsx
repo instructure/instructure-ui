@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Children, isValidElement } from 'react'
+import { Component, Children, isValidElement, ReactElement } from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -42,7 +42,7 @@ import { Cell } from './Cell'
 
 import type { TableProps } from './props'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from './TableContext'
 
 /**
@@ -55,7 +55,6 @@ class Table extends Component<TableProps> {
   static readonly componentId = 'Table'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
@@ -93,12 +92,17 @@ class Table extends Component<TableProps> {
   getHeaders() {
     const [headChild] = Children.toArray(this.props.children)
     if (!headChild || !isValidElement(headChild)) return undefined
-    const [firstRow] = Children.toArray(headChild.props.children)
+    const [firstRow] = Children.toArray(
+      (headChild as ReactElement<any>).props.children
+    )
     if (!firstRow || !isValidElement(firstRow)) return undefined
-    return Children.map(firstRow.props.children, (colHeader) => {
-      if (!isValidElement<{ children?: any }>(colHeader)) return undefined
-      return colHeader.props.children
-    })
+    return Children.map(
+      (firstRow as ReactElement<any>).props.children,
+      (colHeader) => {
+        if (!isValidElement<{ children?: any }>(colHeader)) return undefined
+        return colHeader.props.children
+      }
+    )
   }
 
   render() {
@@ -133,7 +137,9 @@ class Table extends Component<TableProps> {
           )}
           {Children.map(children, (child) => {
             if (isValidElement(child)) {
-              return safeCloneElement(child, { key: child.props.name })
+              return safeCloneElement(child, {
+                key: (child as ReactElement<any>).props.name
+              })
             }
             return child
           })}

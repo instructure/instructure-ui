@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 import { optionsItemThemeGenerator } from '@instructure/ui-options'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DrilldownOptionProps } from './props'
 
 /**
@@ -43,7 +43,6 @@ id: Drilldown.Option
 class DrilldownOption extends Component<DrilldownOptionProps> {
   static readonly componentId = 'Drilldown.Option'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   static defaultProps = {

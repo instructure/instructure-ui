@@ -28,11 +28,8 @@
     "@instructure/emotion": "10.25.0",
     "@instructure/shared-types": "10.25.0",
     "@instructure/ui-a11y-content": "10.25.0",
-    "@instructure/ui-prop-types": "10.25.0",
     "@instructure/ui-react-utils": "10.25.0",
-    "@instructure/ui-testable": "10.25.0",
-    "@instructure/ui-utils": "10.25.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-utils": "10.25.0"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.25.0",
@@ -43,7 +40,7 @@
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

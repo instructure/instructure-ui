@@ -34,14 +34,14 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
+import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
 
 import type { ViewOwnProps } from '@instructure/ui-view'
@@ -52,11 +52,9 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     // Leave interaction default undefined so that `disabled` can also be supplied
@@ -250,6 +248,7 @@ class Link extends Component<LinkProps, LinkState> {
         type={type}
         tabIndex={tabIndex}
         css={this.props.styles?.link}
+        data-cid={combineDataCid('Link', this.props)}
       >
         {renderIcon && iconPlacement === 'start' ? this.renderIcon() : null}
         {children}

@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 
 type ThemeColorsOwnProps = {
   colors: Record<string, string>
@@ -34,12 +32,6 @@ type PropKeys = keyof ThemeColorsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ThemeColorsProps = ThemeColorsOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  colors: PropTypes.objectOf(PropTypes.string).isRequired,
-  label: PropTypes.string
-}
-
 type ThemeColorsState = {
   backgroundColor: string
   foregroundColor: string
@@ -48,4 +40,4 @@ type ThemeColorsState = {
 
 const allowedProps: AllowedPropKeys = ['colors']
 export type { ThemeColorsProps, ThemeColorsState }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, createRef, RefObject } from 'react'
 import {
   render,
   waitFor,
@@ -47,9 +47,15 @@ const getClass = (
   return classNames[phase]
 }
 
-class ExampleComponent extends Component {
+class ExampleComponent extends Component<any, any> {
+  private ref: RefObject<any>
+
+  constructor(props: any) {
+    super(props)
+    this.ref = createRef()
+  }
   render() {
-    return <div>{COMPONENT_TEXT}</div>
+    return <div ref={this.ref}>{COMPONENT_TEXT}</div>
   }
 }
 

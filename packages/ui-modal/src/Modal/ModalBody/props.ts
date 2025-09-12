@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -32,7 +30,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   AsElementType,
-  PropValidators,
   ModalBodyTheme,
   OtherHTMLAttributes,
   UIElement
@@ -57,18 +54,9 @@ type ModalBodyProps = ModalBodyOwnProps &
 
 type ModalBodyStyle = ComponentStyle<'modalBody'>
 
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  padding: PropTypes.string,
-  /**
-   * provides a reference to the underlying html root element
-   */
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType,
-  variant: PropTypes.oneOf(['default', 'inverse']),
-  overflow: PropTypes.oneOf(['scroll', 'fit'])
+type ModalBodyState = {
+  isFirefox: boolean
 }
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'padding',
@@ -78,5 +66,5 @@ const allowedProps: AllowedPropKeys = [
   'overflow'
 ]
 
-export type { ModalBodyProps, ModalBodyStyle }
-export { propTypes, allowedProps }
+export type { ModalBodyProps, ModalBodyState, ModalBodyStyle }
+export { allowedProps }

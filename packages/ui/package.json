@@ -35,7 +35,6 @@
     "@instructure/ui-byline": "10.25.0",
     "@instructure/ui-calendar": "10.25.0",
     "@instructure/ui-checkbox": "10.25.0",
-    "@instructure/ui-code-editor": "10.25.0",
     "@instructure/ui-color-picker": "10.25.0",
     "@instructure/ui-date-input": "10.25.0",
     "@instructure/ui-date-time-input": "10.25.0",
@@ -107,7 +106,7 @@
   },
   "sideEffects": false,
   "peerDependencies": {
-    "react": ">= 16.14 <= 18",
-    "react-dom": ">= 16.14 <= 18"
+    "react": ">= 18 <= 19",
+    "react-dom": ">= 18 <= 19"
   }
 }

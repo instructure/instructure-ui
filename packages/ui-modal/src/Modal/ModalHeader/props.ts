@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   ModalHeaderTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -51,14 +48,7 @@ type ModalHeaderProps = ModalHeaderOwnProps &
   OtherHTMLAttributes<ModalHeaderOwnProps>
 
 type ModalHeaderStyle = ComponentStyle<'modalHeader'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(['default', 'inverse']),
-  spacing: PropTypes.oneOf(['default', 'compact'])
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'variant', 'spacing']
 
 export type { ModalHeaderProps, ModalHeaderStyleProps, ModalHeaderStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

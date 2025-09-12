@@ -31,7 +31,6 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 import * as utils from '@instructure/ui-utils'
 
@@ -42,7 +41,7 @@ import type {
   TimeSelectOptions
 } from './props'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,
@@ -58,13 +57,11 @@ category: components
 A component used to select a time value.
  **/
 @withDeterministicId()
-@testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   declare context: React.ContextType<typeof ApplyLocaleContext>
 
   static readonly componentId = 'TimeSelect'
   static allowedProps = allowedProps
-  static propTypes = propTypes
   static defaultProps = {
     defaultToFirstOption: false,
     format: 'LT', // see https://momentjs.com/docs/#/displaying/
@@ -636,6 +633,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         onInputChange={this.handleInputChange}
         onKeyDown={this.onKeyDown}
         {...passthroughProps(rest)}
+        data-cid="TimeSelect"
       >
         {isShowingOptions && this.renderOptions()}
       </Select>

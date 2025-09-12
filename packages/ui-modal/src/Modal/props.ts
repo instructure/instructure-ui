@@ -23,16 +23,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
-import { transitionTypePropType } from '@instructure/ui-motion'
-
 import { Dialog } from '@instructure/ui-dialog'
 
 import type {
   AsElementType,
-  PropValidators,
   ModalTheme,
   OtherHTMLAttributes,
   LiveRegion,
@@ -198,39 +192,6 @@ type ModalState = {
   open: boolean
   windowHeight: number
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node,
-  as: PropTypes.elementType,
-  size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
-  variant: PropTypes.oneOf(['default', 'inverse']),
-  open: PropTypes.bool,
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  shouldReturnFocus: PropTypes.bool,
-  shouldCloseOnDocumentClick: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  onDismiss: PropTypes.func,
-  contentRef: PropTypes.func,
-  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  insertAt: PropTypes.oneOf(['bottom', 'top']),
-  liveRegion: PropTypes.oneOfType([
-    element,
-    PropTypes.arrayOf(element),
-    PropTypes.func
-  ]),
-  transition: transitionTypePropType,
-  onEnter: PropTypes.func,
-  onEntering: PropTypes.func,
-  onEntered: PropTypes.func,
-  onExit: PropTypes.func,
-  onExiting: PropTypes.func,
-  onExited: PropTypes.func,
-  constrain: PropTypes.oneOf(['window', 'parent']),
-  overflow: PropTypes.oneOf(['scroll', 'fit'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'children',
@@ -267,4 +228,4 @@ export type {
   ModalPropsForTransition,
   ModalPropsForDialog
 }
-export { propTypes, allowedProps }
+export { allowedProps }

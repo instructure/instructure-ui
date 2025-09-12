@@ -24,14 +24,13 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MetricProps } from './props'
 
 /**
@@ -40,11 +39,9 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Metric extends Component<MetricProps> {
   static readonly componentId = 'Metric'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     textAlign: 'center',
@@ -75,6 +72,7 @@ class Metric extends Component<MetricProps> {
         role={isGroupChild ? 'row' : undefined}
         css={this.props.styles?.metric}
         ref={this.handleRef}
+        data-cid="Metric"
       >
         <div
           role={isGroupChild ? 'rowheader' : undefined}

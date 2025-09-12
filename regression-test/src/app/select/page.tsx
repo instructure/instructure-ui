@@ -51,7 +51,7 @@ function SingleSelectExample({ options }: { options: OptionT[] }) {
   const [selectedOptionId, setSelectedOptionId] = useState<string>(
     options[0].id
   )
-  const inputRef = useRef<any>()
+  const inputRef = useRef<any>(null)
 
   const getOptionById = (id?: string | null) => options.find((o) => o.id === id)
 
@@ -123,7 +123,7 @@ function AutocompleteExample({ options }: { options: OptionT[] }) {
   )
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null)
   const [filteredOptions, setFilteredOptions] = useState<OptionT[]>(options)
-  const inputRef = useRef<any>()
+  const inputRef = useRef<any>(null)
 
   const getOptionById = (id?: string | null) => options.find((o) => o.id === id)
   const filterOptions = (val: string) =>
@@ -231,7 +231,7 @@ function GroupSelectExample({
     null
   )
   const [selectedOptionId, setSelectedOptionId] = useState<string>(first.id)
-  const inputRef = useRef<any>()
+  const inputRef = useRef<any>(null)
 
   const getOptionById = (id?: string | null) =>
     groupKeys.flatMap((k) => options[k]).find((o) => o.id === id)

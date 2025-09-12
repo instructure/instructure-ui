@@ -23,16 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-const formMessageTypePropType = PropTypes.oneOf([
-  'error',
-  'newError',
-  'hint',
-  'success',
-  'screenreader-only'
-])
-const formMessageChildPropType = PropTypes.node
 
 type FormMessageType =
   | 'newError'
@@ -46,18 +36,9 @@ type FormMessageType =
  */
 type FormMessageChild = React.ReactNode
 
-const FormPropTypes = {
-  message: PropTypes.shape({
-    type: formMessageTypePropType,
-    text: formMessageChildPropType
-  })
-}
-
 type FormMessage = {
   type: FormMessageType
   text: FormMessageChild
 }
 
-export default FormPropTypes
-export { FormPropTypes, formMessageTypePropType, formMessageChildPropType }
 export type { FormMessage, FormMessageType, FormMessageChild }

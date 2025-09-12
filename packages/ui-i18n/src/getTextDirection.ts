@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { canUseDOM, getComputedStyle } from '@instructure/ui-dom-utils'
+import { canUseDOM, getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
 type CSSDirection = 'ltr' | 'rtl' | null
 type HTMLDirection = CSSDirection | 'auto'
@@ -34,7 +34,7 @@ let observer: MutationObserver
 const getDefaultDir = () => {
   /**
    * use a cached value for the default of <html> element's "dir" so we don't
-   * have to call the expensive getComputedStyle to look it it up every time
+   * have to call the expensive getCSSStyleDeclaration to look it it up every time
    */
   if (defaultDir) {
     return defaultDir
@@ -44,7 +44,8 @@ const getDefaultDir = () => {
     dirAttribute = htmlEl.getAttribute('dir') as HTMLDirection
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
     defaultDir =
-      dirAttribute || (getComputedStyle(htmlEl).direction as CSSDirection)
+      dirAttribute ||
+      (getCSSStyleDeclaration(htmlEl)?.direction as CSSDirection)
     if (!observer) {
       observer = new MutationObserver(() => {
         // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
@@ -77,7 +78,7 @@ function getTextDirection(element?: Element) {
 
     return (
       (element.getAttribute('dir') as HTMLDirection) ||
-      (getComputedStyle(element).direction as CSSDirection)
+      (getCSSStyleDeclaration(element)?.direction as CSSDirection)
     )
   }
   return undefined

@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import type { SelectOptionProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -37,7 +37,6 @@ class Option extends Component<SelectOptionProps> {
   static readonly componentId = 'Select.Option'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     isHighlighted: false,

@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 import type {
-  PropValidators,
   Colors,
   Typography,
   Spacing,
   Border
 } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
+
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
@@ -64,17 +63,6 @@ type PreviewTheme = {
 }
 export type PreviewStyle = ComponentStyle<'preview' | 'previewError' | 'error'>
 
-const propTypes: PropValidators<PropKeys> = {
-  code: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-  fullscreen: PropTypes.bool,
-  frameless: PropTypes.bool,
-  inverse: PropTypes.bool,
-  rtl: PropTypes.bool,
-  themes: PropTypes.object,
-  themeKey: PropTypes.string,
-  error: PropTypes.string
-}
 type PreviewState = {
   error: string | null
 }
@@ -89,4 +77,4 @@ const allowedProps: AllowedPropKeys = [
   'themeKey'
 ]
 export type { PreviewProps, PreviewTheme, PreviewState }
-export { propTypes, allowedProps }
+export { allowedProps }

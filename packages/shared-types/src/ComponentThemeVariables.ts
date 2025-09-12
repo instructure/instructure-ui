@@ -1426,7 +1426,6 @@ export type TagTheme = {
   focusOutlineColor: Colors['contrasts']['blue4570']
   focusOutlineWidth: Border['widthMedium']
   focusOutlineStyle: Border['style']
-  maxWidth: string | 0
   iconMargin: Spacing['small']
   transitionTiming: string
   defaultBackgroundHover: Colors['contrasts']['grey1214']

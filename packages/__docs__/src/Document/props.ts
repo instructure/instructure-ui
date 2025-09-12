@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators, ThemeVariables } from '@instructure/shared-types'
+import type { ThemeVariables } from '@instructure/shared-types'
 import { DocData } from '../App/props'
 import { Theme } from '@instructure/ui-themes'
 
@@ -44,27 +43,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DocumentProps = DocumentOwnProps & WithStyleProps<null, DocumentStyle>
 
-// TODO this does not match the TS type either fix or remove
-const DocPropType = PropTypes.shape({
-  props: PropTypes.object,
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  undocumented: PropTypes.bool,
-  srcPath: PropTypes.string,
-  srcUrl: PropTypes.string,
-  requirePath: PropTypes.string,
-  packageName: PropTypes.string,
-  children: PropTypes.array
-})
-
-const propTypes: PropValidators<PropKeys> = {
-  doc: DocPropType.isRequired,
-  description: PropTypes.string,
-  themeVariables: PropTypes.object,
-  repository: PropTypes.string,
-  layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
-}
-
 type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 
 type DocumentState = {
@@ -81,5 +59,5 @@ const allowedProps: AllowedPropKeys = [
   'themeVariables'
 ]
 
-export { propTypes, allowedProps, DocPropType }
+export { allowedProps }
 export type { DocumentProps, DocumentStyle, DocumentState, DocDataType }
