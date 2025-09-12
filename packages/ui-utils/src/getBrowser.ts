@@ -74,6 +74,12 @@ const isAndroidOrIOS = (): boolean => {
     : false
 }
 
+const isMac = (): boolean => {
+  const parser = new UAParser()
+  const result = parser.getResult()
+  return result.os.name === 'Mac OS'
+}
+
 export {
   getBrowser,
   isSafari,
@@ -81,5 +87,6 @@ export {
   isIE,
   isFirefox,
   isChromium,
-  isAndroidOrIOS
+  isAndroidOrIOS,
+  isMac
 }
