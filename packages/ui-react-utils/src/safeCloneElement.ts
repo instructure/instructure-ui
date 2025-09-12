@@ -53,7 +53,7 @@ type GetProps<E extends ReactElement = ReactElement> = E extends
  * @param children
  */
 function safeCloneElement<
-  E extends ReactElement = ReactElement,
+  E extends ReactElement<any> = ReactElement,
   P extends GetProps<E> = GetProps<E>
 >(
   element: { ref?: any } & E,
@@ -122,11 +122,10 @@ Ignoring ref: ${originalRef}`
       ...mergedProps,
       ref(component: E) {
         if (cloneRefIsFunction) {
-          ;(cloneRef as (instance: any) => void)(component)
+          ;(cloneRef as (instance: unknown) => void)(component)
         } else {
           cloneRef.current = component
         }
-
         originalRefIsAFunction && originalRef(component)
       }
     },

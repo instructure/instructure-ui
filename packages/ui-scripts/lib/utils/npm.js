@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*
  * The MIT License (MIT)
  *
@@ -38,6 +39,11 @@ const NPM_SCOPE = '@instructure:registry=https://registry.npmjs.org/'
 const syncRootPackageVersion = async (useProjectVersion) => {
   const project = new Project(process.cwd())
   const rootPkg = pkgUtils.getPackage()
+
+  // TODO REMOVE DEBUG LOG
+  console.log('\n\nDEBUG LOG 1: project')
+  console.log(project)
+  console.log('---------\n\n')
 
   let projectVersion
 
@@ -96,6 +102,11 @@ export async function bumpPackages(packageName, requestedVersion) {
     ])
 
     releaseVersion = await syncRootPackageVersion(true)
+
+    // TODO REMOVE DEBUG LOG
+    console.log('\n\nDEBUG LOG 2: releaseVersion')
+    console.log(releaseVersion)
+    console.log('---------\n\n')
 
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {

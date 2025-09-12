@@ -35,14 +35,12 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { versionInPath } from '../versionData'
 
-import { Heading } from '../Heading'
 import type { HeaderProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 //@ts-expect-error ts complains for no real reason
 import logo from '../../full_logo.svg'
 
 class Header extends Component<HeaderProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     version: undefined,
@@ -135,31 +133,28 @@ class Header extends Component<HeaderProps> {
 
   render() {
     const { versionsData } = this.props
-    const corpLogo = <InlineSVG width="200px" src={logo} />
     return (
       <View as="div" margin="none none medium" padding="none medium">
-        <Heading variant="titlePageDesktop" level="h2" as="div">
-          <Link href="#index" isWithinText={false} display="block">
-            <View display="block" textAlign="center">
-              {corpLogo}
-              <ScreenReaderContent>Instructure logo</ScreenReaderContent>
-            </View>
-          </Link>
+        <Link href="#index" isWithinText={false} display="block">
           <View display="block" textAlign="center">
-            {versionsData ? (
-              this.renderVersionsBlock()
-            ) : (
-              <Link href="#index" isWithinText={false} display="block">
-                <View display="block" margin="small none none">
-                  <Text size="large">
-                    {this.props.name}
-                    {this.props.version}
-                  </Text>
-                </View>
-              </Link>
-            )}
+            <InlineSVG src={logo} height="6rem" fontSize="12rem" />
+            <ScreenReaderContent>Instructure logo</ScreenReaderContent>
           </View>
-        </Heading>
+        </Link>
+        <View display="block" textAlign="center">
+          {versionsData ? (
+            this.renderVersionsBlock()
+          ) : (
+            <Link href="#index" isWithinText={false} display="block">
+              <View display="block" margin="small none none">
+                <Text size="large">
+                  {this.props.name}
+                  {this.props.version}
+                </Text>
+              </View>
+            </Link>
+          )}
+        </View>
       </View>
     )
   }

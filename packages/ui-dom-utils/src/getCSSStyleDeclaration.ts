@@ -22,51 +22,41 @@
  * SOFTWARE.
  */
 
+import { findDOMNode } from './findDOMNode'
+import { ownerWindow } from './ownerWindow'
+import { canUseDOM } from './canUseDOM'
+import type { UIElement } from '@instructure/shared-types'
+
 /**
  * ---
- * category: utilities/PropTypes
+ * category: utilities/DOM
  * ---
- * Verify that either value is provided as a prop if as="input", and children
- * if provided otherwise
  *
- * ```js-code
- *  import { childrenOrValue } from '@instructure/ui-prop-types'
+ * Get the associated CSS properties and values for a
+ * specified element
+ * @module getCSSStyleDeclaration
  *
- *  class Foo extends Component {
- *    static propTypes = {
- *      children: childrenOrValue,
- *      value: childrenOrValue
- *    }
- *  ...
- * ```
- * @module childrenOrValue
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
+ * @param { string | null | undefined } pseudoElt - A string specifying the pseudo-element to match. Omitted (or null ) for real elements.
+ * @returns { CSSStyleDeclaration | undefined } The style declaration containing css properties and values for the element or undefined
  */
-function childrenOrValue(
-  props: Record<string, any>,
-  propName: string,
-  componentName: string
-) {
-  if (props.as === 'input') {
-    if (
-      (propName === 'children' && props.children) ||
-      props.value == undefined
-    ) {
-      return new Error(
-        `Prop \`value\` and not \`children\` must be supplied if \`${componentName} as="input"\``
-      )
-    }
-  } else {
-    if (propName === 'value' && props.value != undefined) {
-      return new Error(
-        `Prop \`children\` and not \`value\` must be supplied unless \`${componentName} as="input"\``
-      )
-    } else if (!props.children) {
-      return new Error(
-        `Prop \`children\` should be supplied unless \`${componentName} as="input"\`.`
-      )
+function getCSSStyleDeclaration(el?: UIElement, pseudoElt?: string | null) {
+  let style: CSSStyleDeclaration | undefined
+  if (canUseDOM) {
+    const node = el && findDOMNode(el)
+    if (node) {
+      const window = ownerWindow(el)
+      try {
+        style = window
+          ? window.getComputedStyle(node as Element, pseudoElt)
+          : undefined
+      } catch {
+        style = undefined
+      }
     }
   }
-  return null
+  return style
 }
-export default childrenOrValue
-export { childrenOrValue }
+
+export default getCSSStyleDeclaration
+export { getCSSStyleDeclaration }

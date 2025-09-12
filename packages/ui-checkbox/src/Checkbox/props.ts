@@ -22,16 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { controllable } from '@instructure/ui-prop-types'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   CheckboxFacadeTheme,
   OtherHTMLAttributes,
-  PropValidators,
   ToggleFacadeTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -104,31 +98,6 @@ type CheckboxStyle = ComponentStyle<
   | 'indentedError'
   | 'indentedToggleError'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.node.isRequired,
-  id: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  defaultChecked: PropTypes.bool,
-  checked: controllable(PropTypes.bool, 'onChange', 'defaultChecked'),
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onMouseOver: PropTypes.func,
-  onMouseOut: PropTypes.func,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  indeterminate: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  variant: PropTypes.oneOf(['simple', 'toggle']),
-  inline: PropTypes.bool,
-  labelPlacement: PropTypes.oneOf(['top', 'start', 'end']),
-  isRequired: PropTypes.bool,
-  inputRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'id',
@@ -160,4 +129,4 @@ type CheckboxState = {
 }
 
 export type { CheckboxProps, CheckboxStyle, CheckboxState }
-export { propTypes, allowedProps }
+export { allowedProps }

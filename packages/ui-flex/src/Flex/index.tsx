@@ -39,7 +39,7 @@ import type { FlexItemProps } from './Item/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FlexProps } from './props'
 
 /**
@@ -62,7 +62,6 @@ class Flex extends Component<FlexProps> {
 
   static Item = Item
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

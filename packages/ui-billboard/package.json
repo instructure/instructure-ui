@@ -40,11 +40,10 @@
     "@instructure/ui-heading": "10.25.0",
     "@instructure/ui-img": "10.25.0",
     "@instructure/ui-react-utils": "10.25.0",
-    "@instructure/ui-view": "10.25.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-view": "10.25.0"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

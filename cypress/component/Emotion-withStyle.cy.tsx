@@ -29,7 +29,6 @@ import {
   WithStyleProps,
   withStyle
 } from '@instructure/emotion/src/index'
-import PropTypes from 'prop-types'
 
 import '../support/component'
 import 'cypress-real-events'
@@ -102,10 +101,6 @@ const generateStyle = function (
 
 @withStyle(generateStyle, generateComponentTheme)
 class ThemeableComponent extends Component<Props, State> {
-  static propTypes = {
-    inverse: PropTypes.bool
-  }
-
   static defaultTypes = {
     inverse: false
   }

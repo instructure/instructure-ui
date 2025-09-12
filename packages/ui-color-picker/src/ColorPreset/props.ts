@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   ColorPresetTheme
 } from '@instructure/shared-types'
 import type { RGBAType } from '@instructure/ui-color-utils'
@@ -142,50 +139,6 @@ type ColorPresetStyle = ComponentStyle<
   | 'popoverContrastBlock'
 >
 
-const propTypes: PropValidators<PropKeys> = {
-  colors: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  selected: PropTypes.string,
-  disabled: PropTypes.bool,
-  elementRef: PropTypes.func,
-  label: PropTypes.string,
-  popoverScreenReaderLabel: PropTypes.string,
-  colorScreenReaderLabel: PropTypes.func,
-  colorMixerSettings: PropTypes.shape({
-    addNewPresetButtonScreenReaderLabel: PropTypes.string.isRequired,
-    selectColorLabel: PropTypes.string.isRequired,
-    removeColorLabel: PropTypes.string.isRequired,
-    onPresetChange: PropTypes.func,
-    popoverAddButtonLabel: PropTypes.string.isRequired,
-    popoverCloseButtonLabel: PropTypes.string.isRequired,
-    maxHeight: PropTypes.string,
-    colorMixer: PropTypes.shape({
-      withAlpha: PropTypes.bool,
-      rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
-      rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
-      rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
-      rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
-      colorSliderNavigationExplanationScreenReaderLabel:
-        PropTypes.string.isRequired,
-      alphaSliderNavigationExplanationScreenReaderLabel:
-        PropTypes.string.isRequired,
-      colorPaletteNavigationExplanationScreenReaderLabel:
-        PropTypes.string.isRequired
-    }).isRequired,
-    colorContrast: PropTypes.shape({
-      firstColor: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      successLabel: PropTypes.string.isRequired,
-      failureLabel: PropTypes.string.isRequired,
-      normalTextLabel: PropTypes.string.isRequired,
-      largeTextLabel: PropTypes.string.isRequired,
-      graphicsTextLabel: PropTypes.string.isRequired,
-      firstColorLabel: PropTypes.string.isRequired,
-      secondColorLabel: PropTypes.string.isRequired
-    })
-  })
-}
-
 const allowedProps: AllowedPropKeys = [
   'colors',
   'disabled',
@@ -204,4 +157,4 @@ export type {
   ColorPresetState,
   ContrastStrength
 }
-export { propTypes, allowedProps }
+export { allowedProps }

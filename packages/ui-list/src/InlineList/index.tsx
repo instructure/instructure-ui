@@ -25,11 +25,10 @@ import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { InlineListItem } from './InlineListItem'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { InlineListProps } from './props'
 
 /**
@@ -38,9 +37,7 @@ category: components
 ---
 
 **/
-@testable()
 class InlineList extends Component<InlineListProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     itemSpacing: 'none',
@@ -93,6 +90,7 @@ class InlineList extends Component<InlineListProps> {
         padding="0"
         elementRef={this.handleRef}
         display="block"
+        data-cid="InlineList"
       >
         {this.renderChildren()}
       </View>

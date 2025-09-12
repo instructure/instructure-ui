@@ -50,13 +50,12 @@ import { Search } from '../Search'
 import { Heading } from '../Heading'
 
 import type { HeroProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 //@ts-expect-error ts complains for no real reason
 import logo from '../../logo.svg'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Hero extends Component<HeroProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     docs: null
