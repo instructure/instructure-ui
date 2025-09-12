@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console'
 import {
   contrastWithAlpha,
@@ -38,7 +37,7 @@ import { Pill } from '@instructure/ui-pill'
 
 import ColorIndicator from '../ColorIndicator'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ColorContrastProps, ColorContrastState } from './props'
 
 import generateStyle from './styles'
@@ -50,9 +49,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
 
@@ -211,6 +208,7 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
         {...omitProps(this.props, ColorContrast.allowedProps)}
         ref={this.handleRef}
         css={styles?.colorContrast}
+        data-cid="ColorContrast"
       >
         <div css={styles?.label}>
           <Text weight="bold" as="div">

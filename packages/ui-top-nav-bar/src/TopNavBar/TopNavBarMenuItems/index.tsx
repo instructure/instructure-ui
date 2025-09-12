@@ -30,7 +30,6 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -51,7 +50,7 @@ import type { RenderOptionContent } from '../utils/mapItemsForDrilldown'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TopNavBarMenuItemsProps, TopNavBarMenuItemsState } from './props'
 
 /**
@@ -63,14 +62,12 @@ id: TopNavBar.MenuItems
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarMenuItems extends Component<
   TopNavBarMenuItemsProps,
   TopNavBarMenuItemsState
 > {
   static readonly componentId = 'TopNavBar.MenuItems'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 
@@ -192,7 +189,14 @@ class TopNavBarMenuItems extends Component<
         return
       }
 
-      const { id, status, variant, renderSubmenu, renderAvatar } = child.props
+      const {
+        id,
+        status,
+        variant = 'default', // workaround because after react 19 defaultProps are not working as expected
+        renderSubmenu,
+        renderAvatar
+      } = child.props
+
       const isCurrentPage = currentPageId === id
 
       if (renderAvatar) {
@@ -263,6 +267,7 @@ class TopNavBarMenuItems extends Component<
           itemSpacing: styles.itemSpacing
         })}
         aria-label={listLabel}
+        data-cid="TopNavBarMenuItems"
       >
         {this.renderChildren()}
       </TruncateList>

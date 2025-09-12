@@ -33,7 +33,6 @@ import {
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { createChainedFunction, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import type { PlacementPropValues } from '@instructure/ui-position'
@@ -49,7 +48,7 @@ import type { DrawerLayoutTrayProps } from './DrawerTray/props'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DrawerLayoutProps, DrawerLayoutState } from './props'
 
 type TrayChild = ComponentElement<
@@ -70,12 +69,10 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, null)
 @textDirectionContextConsumer()
-@testable()
 class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
   static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     minWidth: '30rem'
@@ -324,6 +321,7 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
           {...props}
           css={this.props.styles?.drawerLayout}
           ref={this.handleRef}
+          data-cid="DrawerLayout"
         >
           {this.renderChildren()}
         </div>

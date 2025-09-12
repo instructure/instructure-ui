@@ -22,35 +22,15 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { ownerWindow } from './ownerWindow'
-import { canUseDOM } from './canUseDOM'
-import type { UIElement } from '@instructure/shared-types'
-
 /**
- * ---
- * category: utilities/DOM
- * ---
- *
- * Get the associated CSS properties and values for a
- * specified element
- * @module getComputedStyle
- *
- * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
- * @param { string | null | undefined } pseudoElt - A string specifying the pseudo-element to match. Omitted (or null ) for real elements.
- * @returns { Object } object containing css properties and values for the element
+ * Combines a component's default data-cid with a data-cid from props
+ * @param dataCid - The default data-cid for the component
+ * @param props - The component props object that may contain a data-cid
+ * @returns A combined data-cid string, trimmed of extra whitespace
  */
-function getComputedStyle(el?: UIElement, pseudoElt?: string | null) {
-  let style = {}
-  if (canUseDOM) {
-    const node = el && findDOMNode(el)
-    if (node) {
-      const window = ownerWindow(el)
-      style = window ? window.getComputedStyle(node as Element, pseudoElt) : {}
-    }
-  }
-  return style as CSSStyleDeclaration
+const combineDataCid = (dataCid: string, props: any): string => {
+  const dataCidFromProps = props['data-cid'] || ''
+  return `${dataCid} ${dataCidFromProps}`.trim()
 }
 
-export default getComputedStyle
-export { getComputedStyle }
+export { combineDataCid }

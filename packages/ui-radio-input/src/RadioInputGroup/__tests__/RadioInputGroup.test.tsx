@@ -65,25 +65,6 @@ describe('<RadioInputGroup />', () => {
     expect(inputs.length).toBe(3)
   })
 
-  it('requires an `onChange` prop with a `value` prop', async () => {
-    render(
-      <RadioInputGroup name="fruit" description="Select a fruit" value="banana">
-        <RadioInput label="Apple" value="apple" />
-        <RadioInput label="Banana" value="banana" />
-        <RadioInput label="Orange" value="orange" />
-      </RadioInputGroup>
-    )
-
-    const expectedErrorMessage = `provided a 'value' prop without an 'onChange' handler`
-
-    expect(consoleErrorMock).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.any(String),
-      expect.stringContaining(expectedErrorMessage),
-      expect.any(String)
-    )
-  })
-
   it('calls the onChange prop', async () => {
     const onChange = vi.fn()
     const { container } = render(

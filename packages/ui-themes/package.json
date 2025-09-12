@@ -24,7 +24,7 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.25.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "vitest": "^3.2.2"
   },
   "dependencies": {

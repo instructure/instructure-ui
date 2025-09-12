@@ -58,7 +58,6 @@ const generateComponentTheme = (theme: Theme): TagTheme => {
     focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineWidth: borders.widthMedium,
     focusOutlineStyle: borders.style,
-    maxWidth: '10rem',
     iconMargin: spacing.xSmall,
     transitionTiming: '0.2s',
 

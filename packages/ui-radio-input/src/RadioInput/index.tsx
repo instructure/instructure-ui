@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
@@ -34,7 +33,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { RadioInputProps, RadioInputState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -43,12 +42,10 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class RadioInput extends Component<RadioInputProps, RadioInputState> {
   static readonly componentId = 'RadioInput'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'simple',
@@ -143,6 +140,7 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
     return (
       <div
         css={styles?.radioInput}
+        data-cid="RadioInput"
         ref={(el) => {
           this.ref = el
         }}

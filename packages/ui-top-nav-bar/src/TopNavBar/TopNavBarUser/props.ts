@@ -23,18 +23,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   ChildrenOfType
 } from '@instructure/shared-types'
-
-import { TopNavBarItem } from '../TopNavBarItem'
 import type { ItemChild } from '../TopNavBarItem/props'
 
 import { TopNavBarUser } from './index'
@@ -66,12 +59,6 @@ type TopNavBarUserProps = TopNavBarUserOwnProps &
   OtherHTMLAttributes<TopNavBarUserOwnProps>
 
 type TopNavBarUserStyle = ComponentStyle<'topNavBarUser'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([TopNavBarItem]).isRequired,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'elementRef']
 
 export type {
@@ -80,4 +67,4 @@ export type {
   TopNavBarUserOwnProps,
   TopNavBarUserStyle
 }
-export { propTypes, allowedProps }
+export { allowedProps }

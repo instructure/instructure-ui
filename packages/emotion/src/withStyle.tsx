@@ -116,7 +116,7 @@ const defaultValues = {
  * [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set
  * explicitly via its `themeOverride` prop.
  *
- * InstUISettingsProvider provides a theme object with global theme variables (e.g. the [canvas theme](/#canvas)).
+ * InstUISettingsProvider provides a theme object (e.g. the [canvas theme](/#canvas)).
  * These variables are mapped to the component's own variables in `theme.js` (see [theming](#theming-basics) for more info).
  *
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
@@ -177,6 +177,7 @@ const withStyle = decorator(
       generateComponentTheme?: GenerateComponentTheme
       allowedProps?: string[]
       originalType?: WithStyleComponent
+      defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
       const theme = useTheme()
 
@@ -251,12 +252,7 @@ const withStyle = decorator(
     // more info: https://github.com/facebook/react/issues/13455
     WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
-    // we have to pass these on, because sometimes users
-    // access propTypes of the component in other components
-    // eslint-disable-next-line react/forbid-foreign-prop-types
-    WithStyle.propTypes = ComposedComponent.propTypes
     WithStyle.defaultProps = ComposedComponent.defaultProps
-
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 

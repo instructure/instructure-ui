@@ -26,7 +26,6 @@ import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { ListItem } from './ListItem'
 
@@ -35,7 +34,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ListProps } from './props'
 
 /**
@@ -44,11 +43,9 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class List extends Component<ListProps> {
   static readonly componentId = 'List'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'ul',
@@ -104,6 +101,7 @@ class List extends Component<ListProps> {
         margin={margin}
         elementRef={this.handleRef}
         display="block"
+        data-cid="List"
       >
         {this.renderChildren()}
       </View>

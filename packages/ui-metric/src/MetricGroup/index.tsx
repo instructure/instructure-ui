@@ -25,13 +25,12 @@
 import { Children, Component, ReactElement } from 'react'
 
 import { withStyle } from '@instructure/emotion'
-import { testable } from '@instructure/ui-testable'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MetricGroupProps } from './props'
 
 /**
@@ -40,11 +39,9 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class MetricGroup extends Component<MetricGroupProps> {
   static readonly componentId = 'MetricGroup'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null
@@ -80,6 +77,7 @@ class MetricGroup extends Component<MetricGroupProps> {
         role="grid"
         aria-readonly="true"
         ref={this.handleRef}
+        data-cid="MetricGroup"
       >
         {this.renderChildren()}
       </div>

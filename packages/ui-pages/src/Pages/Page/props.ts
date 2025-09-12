@@ -23,10 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { Spacing } from '@instructure/emotion'
-import type { PropValidators, UIElement } from '@instructure/shared-types'
+import type { UIElement } from '@instructure/shared-types'
 
 import type { PagesContextType } from '../PagesContext'
 
@@ -58,14 +56,6 @@ type PropKeys = keyof PagesPageOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PagesPageProps = PagesPageOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  padding: PropTypes.string,
-  textAlign: PropTypes.oneOf(['start', 'center', 'end'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'defaultFocusElement',
@@ -74,4 +64,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PagesPageProps }
-export { propTypes, allowedProps }
+export { allowedProps }

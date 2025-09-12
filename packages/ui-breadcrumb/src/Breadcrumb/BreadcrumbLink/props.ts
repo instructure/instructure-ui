@@ -23,12 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   PickPropsWithExceptions,
   OtherHTMLAttributes,
-  PropValidators,
   Renderable
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view'
@@ -86,18 +83,6 @@ type BreadcrumbLinkProps = PickPropsWithExceptions<
 > &
   BreadcrumbLinkOwnProps &
   OtherHTMLAttributes<BreadcrumbLinkOwnProps & LinkProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  iconPlacement: PropTypes.oneOf(['start', 'end']),
-  isCurrentPage: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'href',
@@ -114,4 +99,4 @@ type BreadcrumbLinkState = {
 }
 
 export type { BreadcrumbLinkProps, BreadcrumbLinkState }
-export { propTypes, allowedProps }
+export { allowedProps }
