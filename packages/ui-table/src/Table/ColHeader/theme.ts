@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { TableColHeaderTheme } from '@instructure/shared-types'
 
 /**
@@ -31,7 +31,14 @@ import { TableColHeaderTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): TableColHeaderTheme => {
-  const { typography, colors, borders, spacing } = theme
+  const { typography, colors, borders, spacing, key: themeName } = theme
+
+  const themeSpecificStyle: ThemeSpecificStyle<TableColHeaderTheme> = {
+    canvas: {
+      focusOutlineColor: theme['ic-brand-primary'],
+      sortedIconColor: theme['ic-brand-primary']
+    }
+  }
 
   const componentVariables: TableColHeaderTheme = {
     fontSize: typography?.fontSizeMedium,
@@ -54,7 +61,8 @@ const generateComponentTheme = (theme: Theme): TableColHeaderTheme => {
   }
 
   return {
-    ...componentVariables
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
