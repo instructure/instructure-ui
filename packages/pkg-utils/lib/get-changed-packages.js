@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*
  * The MIT License (MIT)
  *
@@ -32,10 +33,20 @@ module.exports = function getChangedPackages(
 ) {
   allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
 
+  // TODO REMOVE DEBUG LOG
+  console.log('\n\nDEBUG LOG: allPackages')
+  console.log(allPackages)
+  console.log('---------\n\n')
+
   const result = childProcess
     .execSync('git diff ' + commitIsh + ' --name-only', { stdio: 'pipe' })
     .toString()
   const changedFiles = result.split('\n')
+
+  // TODO REMOVE DEBUG LOG
+  console.log('\n\nDEBUG LOG: changedFiles')
+  console.log(changedFiles)
+  console.log('---------\n\n')
 
   return allPackages.filter((pkg) => {
     const relativePath = path.relative('.', pkg.location) + path.sep
