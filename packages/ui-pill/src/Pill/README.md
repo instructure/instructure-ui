@@ -56,8 +56,9 @@ type: example
 </div>
 ```
 
-The component has a max-width, set by its theme. Any overflowing text will
-be handled via ellipses.
+The component has a `max-width`, set by its theme. Any overflowing text will be handled via ellipses.
+
+> **DEPRECATED** Please do not make Pills that have overflowing text, it's an a11y anti-pattern. The issue is if text overflows it cannot be read by keyboard-only users. We could make the Pill focusable, but that would be an anti-pattern too because only elements that are interactive should be focusable (and just displaying a tooltip is not a real interaction)
 
 ```js
 ---
