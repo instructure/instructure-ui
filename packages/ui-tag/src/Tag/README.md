@@ -69,6 +69,19 @@ type: example
 </div>
 ```
 
+### Max-width
+
+> **DEPRECATED** Please do not make Tags that have overflowing text, it's an a11y anti-pattern. The issue is if text overflows it cannot be read by keyboard-only users. We could make the Tag focusable, but that would be an anti-pattern too because only elements that are interactive should be focusable (and just displaying a tooltip is not a real interaction)
+
+```js
+---
+type: example
+---
+<Tag
+  text="Long string of text designed to trigger overflow"
+/>
+```
+
 ### Inline variant
 
 This variant is designed to look similar to the surrounding text.

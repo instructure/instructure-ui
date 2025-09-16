@@ -74,10 +74,6 @@ The **`<CodeEditor>` component** from the `ui-code-editor` package has been **re
 | `Body`    | `hover`     | is now stored in `TableContext` |
 | `Body`    | `headers`   | is now stored in `TableContext` |
 
-### Tag
-
-The **`maxWidth` theme variable has been removed** from the `Tag` component. As a result, **`<Tag>` can no longer be truncated**. This change was made because placing a tooltip on a non-interactive element is an accessibility anti-pattern. You will need to handle truncation and tooltips via a new design if this functionality is required.
-
 ---
 
 ## API Changes

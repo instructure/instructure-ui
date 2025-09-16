@@ -27,7 +27,6 @@ import instUIv11Codemods from './instUIv11Codemods'
 import removeAsFromInstUISettingsProvider from './removeAsFromInstUISettingsProvider'
 import { renameCanvasThemes } from './renameCanvasThemesCodemod'
 import updateCodeEditorImport from './updateCodeEditorImport'
-import removeMaxWidthFromTag from './removeMaxWidthFromTag'
 import renameGetComputedStyleToGetCSSStyleDeclaration from './renameGetComputedStyleToGetCSSStyleDeclaration'
 
 export {
@@ -36,6 +35,5 @@ export {
   removeAsFromInstUISettingsProvider,
   renameCanvasThemes,
   updateCodeEditorImport,
-  removeMaxWidthFromTag,
   renameGetComputedStyleToGetCSSStyleDeclaration
 }

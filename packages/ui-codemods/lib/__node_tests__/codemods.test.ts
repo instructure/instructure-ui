@@ -27,7 +27,6 @@ import updateV10Breaking from '../updateV10Breaking'
 import removeAsFromInstUISettingsProvider from '../removeAsFromInstUISettingsProvider'
 import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
 import updateCodeEditorImport from '../updateCodeEditorImport'
-import removeMaxWidthFromTag from '../removeMaxWidthFromTag'
 import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputedStyleToGetCSSStyleDeclaration'
 
 describe('test codemods', () => {
@@ -45,10 +44,6 @@ describe('test codemods', () => {
 
   it('test removing CodeEditor', () => {
     runTest(updateCodeEditorImport)
-  })
-
-  it('test removing "maxWidth" from Tag', () => {
-    runTest(removeMaxWidthFromTag)
   })
 
   it('test renaming "getComputedStyle" to getCSSStyleDeclaration', () => {
