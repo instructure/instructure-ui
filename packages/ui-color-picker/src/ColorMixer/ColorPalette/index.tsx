@@ -120,6 +120,14 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   handlePaletteMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
+    // Prevent selection outside palette during dragging the indicator
+    e.preventDefault()
+
+    // Restore focus since preventDefault() blocks automatic focus on mouse event
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.focus()
+    }
+
     this.handleChange(e)
 
     this._mouseMoveListener = addEventListener(
