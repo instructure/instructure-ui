@@ -90,6 +90,7 @@ type: example
 | CondensedButton | href | `string` | No | - | Specifies an href attribute for the `CondensedButton`'s underlying html element. |
 | CondensedButton | renderIcon | `React.ReactNode \| (() => React.ReactNode)` | No | - | An icon, or function that returns an icon. |
 | CondensedButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `CondensedButton` is clicked. |
+| CondensedButton | display | `'inline-block' \| 'block'` | No | `'inline-block'` | The CSS display property of the button, `inline-block` or `block` |
 | CondensedButton | to | `` | No | - | Needed for React Router links @private |
 
 ### Usage
