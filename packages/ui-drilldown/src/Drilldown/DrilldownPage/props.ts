@@ -39,7 +39,7 @@ import DrilldownSeparator from '../DrilldownSeparator'
 import type { OptionChild, SeparatorChild, GroupChild } from '../props'
 import { Renderable } from '@instructure/shared-types'
 
-type PageChildren = GroupChild | OptionChild | SeparatorChild
+type PageChildren = GroupChild | OptionChild | SeparatorChild | null | false
 
 type DrilldownPageOwnProps = {
   id: string
