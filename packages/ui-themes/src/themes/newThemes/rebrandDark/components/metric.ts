@@ -25,23 +25,25 @@
 import semantics from '../semantics.js'
 import type { Semantics } from '../semantics.js'
 
-export type Breadcrumb = {
-  fontSizeLg: Semantics['fontSize']['text2xl']
-  separatorFontSizeSm: Semantics['size']['icon']['xs']
-  separatorFontSizeMd: Semantics['size']['icon']['sm']
-  separatorFontSizeLg: Semantics['size']['icon']['md']
-  fontSizeMd: Semantics['fontSize']['textBase']
-  separator: Semantics['icon']['muted']
-  fontSizeSm: Semantics['fontSize']['textSm']
+export type Metric = {
+  labelColor: Semantics['text']['muted']
+  labelFontSize: Semantics['fontSize']['textXs']
+  paddingHorizontal: Semantics['spacing']['sm']
+  valueColor: Semantics['text']['base']
+  valueFontSize: Semantics['fontSize']['text2xl']
+  spaceBetweenTexts: Semantics['spacing']['sm']
+  labelLineHeight: Semantics['lineHeight']['standalone']['textXs']
+  valueLineHeight: Semantics['lineHeight']['standalone']['text2xl']
 }
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  separatorFontSizeSm: semantics.size.icon.xs,
-  separatorFontSizeMd: semantics.size.icon.sm,
-  separatorFontSizeLg: semantics.size.icon.md,
-  fontSizeMd: semantics.fontSize.textBase,
-  separator: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm
+const metric: Metric = {
+  labelColor: semantics.text.muted,
+  labelFontSize: semantics.fontSize.textXs,
+  paddingHorizontal: semantics.spacing.sm,
+  valueColor: semantics.text.base,
+  valueFontSize: semantics.fontSize.text2xl,
+  spaceBetweenTexts: semantics.spacing.sm,
+  labelLineHeight: semantics.lineHeight.standalone.textXs,
+  valueLineHeight: semantics.lineHeight.standalone.text2xl
 }
-export default breadcrumb
+export default metric

@@ -25,16 +25,28 @@
 import primitives, { type Primitives } from './primitives'
 import semantics, { type Semantics } from './semantics'
 import avatar, { type Avatar } from './components/avatar'
-import pill, { type Pill } from './components/pill'
 import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
+import metric, { type Metric } from './components/metric'
+import pill, { type Pill } from './components/pill'
+import formFieldMessage, {
+  type FormFieldMessage
+} from './components/formFieldMessage'
+import formFieldLabel, {
+  type FormFieldLabel
+} from './components/formFieldLabel'
+import spinner, { type Spinner } from './components/spinner'
 
 export type Theme = {
   primitives: Primitives
   semantics: Semantics
   components: {
-    avatar: Avatar
-    pill: Pill
-    breadcrumb: Breadcrumb
+    Avatar: Avatar
+    Breadcrumb: Breadcrumb
+    Metric: Metric
+    Pill: Pill
+    FormFieldMessage: FormFieldMessage
+    FormFieldLabel: FormFieldLabel
+    Spinner: Spinner
   }
 }
 
@@ -42,9 +54,13 @@ const theme = {
   primitives,
   semantics,
   components: {
-    avatar,
-    pill,
-    breadcrumb
+    Avatar: avatar,
+    Breadcrumb: breadcrumb,
+    Metric: metric,
+    Pill: pill,
+    FormFieldMessage: formFieldMessage,
+    FormFieldLabel: formFieldLabel,
+    Spinner: spinner
   }
 }
 

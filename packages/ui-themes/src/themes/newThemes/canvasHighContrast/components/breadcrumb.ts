@@ -26,24 +26,22 @@ import semantics from '../semantics.js'
 import type { Semantics } from '../semantics.js'
 
 export type Breadcrumb = {
-  fontFamily: Semantics['fontFamily']['base']
-  largeFontSize: string
-  largeSeparatorFontSize: Semantics['size']['icon']['md']
-  mediumFontSize: Semantics['fontSize']['textBase']
-  mediumSeparatorFontSize: Semantics['size']['icon']['sm']
-  separatorColor: Semantics['icon']['muted']
-  smallFontSize: Semantics['fontSize']['textSm']
-  smallSeparatorFontSize: Semantics['size']['icon']['xs']
+  fontSizeLg: Semantics['fontSize']['text2xl']
+  separatorFontSizeSm: Semantics['size']['icon']['xs']
+  separatorFontSizeMd: Semantics['size']['icon']['sm']
+  separatorFontSizeLg: Semantics['size']['icon']['md']
+  fontSizeMd: Semantics['fontSize']['textBase']
+  separator: Semantics['icon']['muted']
+  fontSizeSm: Semantics['fontSize']['textSm']
 }
 
 const breadcrumb: Breadcrumb = {
-  fontFamily: semantics.fontFamily.base,
-  largeFontSize: '22px',
-  largeSeparatorFontSize: semantics.size.icon.md,
-  mediumFontSize: semantics.fontSize.textBase,
-  mediumSeparatorFontSize: semantics.size.icon.sm,
-  separatorColor: semantics.icon.muted,
-  smallFontSize: semantics.fontSize.textSm,
-  smallSeparatorFontSize: semantics.size.icon.xs
+  fontSizeLg: semantics.fontSize.text2xl,
+  separatorFontSizeSm: semantics.size.icon.xs,
+  separatorFontSizeMd: semantics.size.icon.sm,
+  separatorFontSizeLg: semantics.size.icon.md,
+  fontSizeMd: semantics.fontSize.textBase,
+  separator: semantics.icon.muted,
+  fontSizeSm: semantics.fontSize.textSm
 }
 export default breadcrumb

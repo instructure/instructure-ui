@@ -25,23 +25,13 @@
 import semantics from '../semantics.js'
 import type { Semantics } from '../semantics.js'
 
-export type Breadcrumb = {
-  fontSizeLg: Semantics['fontSize']['text2xl']
-  separatorFontSizeSm: Semantics['size']['icon']['xs']
-  separatorFontSizeMd: Semantics['size']['icon']['sm']
-  separatorFontSizeLg: Semantics['size']['icon']['md']
-  fontSizeMd: Semantics['fontSize']['textBase']
-  separator: Semantics['icon']['muted']
-  fontSizeSm: Semantics['fontSize']['textSm']
+export type FormFieldLabel = {
+  text: Semantics['text']['base']
+  asterisk: Semantics['text']['error']
 }
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  separatorFontSizeSm: semantics.size.icon.xs,
-  separatorFontSizeMd: semantics.size.icon.sm,
-  separatorFontSizeLg: semantics.size.icon.md,
-  fontSizeMd: semantics.fontSize.textBase,
-  separator: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm
+const formFieldLabel: FormFieldLabel = {
+  text: semantics.text.base,
+  asterisk: semantics.text.error
 }
-export default breadcrumb
+export default formFieldLabel

@@ -200,6 +200,7 @@ export type Primitives = {
     size4: string
     size8: string
     size12: string
+    size14: string
     size16: string
     size20: string
     size24: string
@@ -210,7 +211,7 @@ export type Primitives = {
     size48: string
     size64: string
   }
-  fontFamilies: { lato: string; inclusiveSans: string }
+  fontFamilies: { lato: string; inclusiveSans: string; Atkinson: string }
   fontWeights: {
     thin: number
     extraLight: number
@@ -221,6 +222,12 @@ export type Primitives = {
     bold: number
     extraBold: number
     black: number
+  }
+  additionalSize: {
+    size1_25: string
+    size1_5: string
+    size2_5: string
+    size3: string
   }
 }
 
@@ -397,25 +404,28 @@ const primitives: Primitives = {
     }
   },
   size: {
-    size1: '1px',
-    size2: '2px',
-    size4: '4px',
-    size8: '8px',
-    size12: '12px',
-    size16: '16px',
-    size20: '20px',
-    size24: '24px',
-    size28: '28px',
-    size32: '32px',
-    size36: '36px',
-    size40: '40px',
-    size48: '48px',
-    size64: '64px'
+    size1: '0.0625 rem',
+    size2: '0.125 rem',
+    size4: '0.25rem',
+    size8: '0.5rem',
+    size12: '0.75rem',
+    size14: '0.875rem',
+    size16: '1rem',
+    size20: '1.25rem',
+    size24: '1.5rem',
+    size28: '1.75rem',
+    size32: '2rem',
+    size36: '2.25rem',
+    size40: '2.5rem',
+    size48: '3rem',
+    size64: '4rem'
   },
   fontFamilies: {
     lato: 'Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
     inclusiveSans:
-      'Inclusive Sans, "Helvetica Neue", Helvetica, Arial, sans-serif'
+      'Inclusive Sans, "Helvetica Neue", Helvetica, Arial, sans-serif',
+    Atkinson:
+      'Atkinson Hyperlegible Next VF, "Helvetica Neue", Helvetica, Arial, sans-serif'
   },
   fontWeights: {
     thin: 100,
@@ -427,6 +437,12 @@ const primitives: Primitives = {
     bold: 700,
     extraBold: 800,
     black: 900
+  },
+  additionalSize: {
+    size1_25: '0.078125rem',
+    size1_5: '0.09375rem',
+    size2_5: '0.15625rem',
+    size3: '0.1875rem'
   }
 }
 export default primitives

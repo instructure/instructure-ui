@@ -22,26 +22,37 @@
  * SOFTWARE.
  */
 
-import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
+import sharedThemeTokens from '../../sharedThemeTokens'
+import { BaseTheme, Colors } from '@instructure/shared-types'
+import { ThemeRegistry } from '@instructure/theme-registry'
+import { colors } from './colors'
+import {
+  rebrandLight as newRebrandLight,
+  type RebrandLight as NewRebrandLight
+} from '../newThemes'
 
-export type Breadcrumb = {
-  fontSizeLg: Semantics['fontSize']['text2xl']
-  separatorFontSizeSm: Semantics['size']['icon']['xs']
-  separatorFontSizeMd: Semantics['size']['icon']['sm']
-  separatorFontSizeLg: Semantics['size']['icon']['md']
-  fontSizeMd: Semantics['fontSize']['textBase']
-  separator: Semantics['icon']['muted']
-  fontSizeSm: Semantics['fontSize']['textSm']
+const key = 'rebrand-light'
+
+export type RebrandLightTheme = BaseTheme & {
+  newTheme?: NewRebrandLight
+  key: 'rebrand-light'
+} & typeof sharedThemeTokens & { colors: Colors }
+
+/**
+ * Canvas high contrast theme without the `use` function and `variables` prop.
+ * Not affected by global theme overrides (`.use()` function).
+ *
+ * Will be default in the next major version of InstUI
+ */
+const __theme: RebrandLightTheme = {
+  newTheme: newRebrandLight,
+  key,
+  description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
+  ...sharedThemeTokens,
+  colors
 }
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  separatorFontSizeSm: semantics.size.icon.xs,
-  separatorFontSizeMd: semantics.size.icon.sm,
-  separatorFontSizeLg: semantics.size.icon.md,
-  fontSizeMd: semantics.fontSize.textBase,
-  separator: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm
-}
-export default breadcrumb
+const theme = ThemeRegistry.registerTheme(__theme)
+export default theme
+// theme without the use() function and `variables` prop
+export { __theme as newRebrandLightThemeLocal }

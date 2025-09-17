@@ -25,23 +25,25 @@
 import semantics from '../semantics.js'
 import type { Semantics } from '../semantics.js'
 
-export type Breadcrumb = {
-  fontSizeLg: Semantics['fontSize']['text2xl']
-  separatorFontSizeSm: Semantics['size']['icon']['xs']
-  separatorFontSizeMd: Semantics['size']['icon']['sm']
-  separatorFontSizeLg: Semantics['size']['icon']['md']
-  fontSizeMd: Semantics['fontSize']['textBase']
-  separator: Semantics['icon']['muted']
-  fontSizeSm: Semantics['fontSize']['textSm']
+export type FormFieldMessage = {
+  hintText: Semantics['text']['base']
+  errorText: Semantics['text']['error']
+  errorIcon: Semantics['icon']['error']
+  successText: Semantics['text']['success']
+  fontWeight: Semantics['fontWeight']['body']['base']
+  fontSize: Semantics['fontSize']['textSm']
+  lineHeight: Semantics['lineHeight']['paragraph']['textSm']
+  errorIconMarginRight: Semantics['spacing']['xs']
 }
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  separatorFontSizeSm: semantics.size.icon.xs,
-  separatorFontSizeMd: semantics.size.icon.sm,
-  separatorFontSizeLg: semantics.size.icon.md,
-  fontSizeMd: semantics.fontSize.textBase,
-  separator: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm
+const formFieldMessage: FormFieldMessage = {
+  hintText: semantics.text.base,
+  errorText: semantics.text.error,
+  errorIcon: semantics.icon.error,
+  successText: semantics.text.success,
+  fontWeight: semantics.fontWeight.body.base,
+  fontSize: semantics.fontSize.textSm,
+  lineHeight: semantics.lineHeight.paragraph.textSm,
+  errorIconMarginRight: semantics.spacing.xs
 }
-export default breadcrumb
+export default formFieldMessage

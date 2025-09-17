@@ -66,13 +66,13 @@ const useStyle = <P extends (theme: any, params: any) => any>(
     //@ts-expect-error TODO fix these later
     theme.newTheme &&
     //@ts-expect-error TODO fix these later
-    theme.newTheme.components[componentId?.toLocaleLowerCase()]
+    theme.newTheme.components[componentId]
   ) {
     baseComponentTheme =
       //@ts-expect-error TODO fix these later
-      theme.newTheme.components[componentId?.toLocaleLowerCase()]
+      theme.newTheme.components[componentId]
   }
-
+  console.log(componentId, baseComponentTheme)
   const themeOverride = getComponentThemeOverride(
     theme,
     displayName ? displayName : componentId || '',

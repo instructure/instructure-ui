@@ -13,14 +13,61 @@ The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to 
 type: example
 readonly: true
 ---
+
 <div>
-  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 space8 0 0" />
-  <Avatar name="Sarah Robinson" margin="0 space8 0 0" />
-  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 space8 0 0" />
-  <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 space8 0 0" />
-  <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 space8 0 0" />
-  <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
+  <InstUISettingsProvider theme={canvas}>
+ <div>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="James Arias" color="shamrock" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Charles Kimball" color="barney" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Melissa Reed" color="crimson" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Heather Wheeler" color="fire" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="David Herbert" color="licorice" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
+  </View>
 </div>
+</InstUISettingsProvider>
+<InstUISettingsProvider theme={rebrandDark}>
+ <div>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="James Arias" color="shamrock" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Charles Kimball" color="barney" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Melissa Reed" color="crimson" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Heather Wheeler" color="fire" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="David Herbert" color="licorice" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
+  </View>
+</div>
+</InstUISettingsProvider>
+  <InstUISettingsProvider theme={rebrandLight}>
+ <div>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="James Arias" color="shamrock" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Charles Kimball" color="barney" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Melissa Reed" color="crimson" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Heather Wheeler" color="fire" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="David Herbert" color="licorice" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
+  </View>
+</div>
+</InstUISettingsProvider>
+<InstUISettingsProvider theme={canvasHighContrast}>
+ <div>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="James Arias" color="shamrock" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Charles Kimball" color="barney" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Melissa Reed" color="crimson" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Heather Wheeler" color="fire" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="David Herbert" color="licorice" hasInverseColor margin="0 space8 0 0" />
+    <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
+  </View>
+</div>
+</InstUISettingsProvider>
+  </div>
 ```
 
 ### AI Avatar

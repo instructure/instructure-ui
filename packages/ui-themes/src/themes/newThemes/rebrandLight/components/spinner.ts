@@ -25,23 +25,39 @@
 import semantics from '../semantics.js'
 import type { Semantics } from '../semantics.js'
 
-export type Breadcrumb = {
-  fontSizeLg: Semantics['fontSize']['text2xl']
-  separatorFontSizeSm: Semantics['size']['icon']['xs']
-  separatorFontSizeMd: Semantics['size']['icon']['sm']
-  separatorFontSizeLg: Semantics['size']['icon']['md']
-  fontSizeMd: Semantics['fontSize']['textBase']
-  separator: Semantics['icon']['muted']
-  fontSizeSm: Semantics['fontSize']['textSm']
+export type Spinner = {
+  color: Semantics['background']['info']
+  inverseColor: Semantics['background']['info']
+  trackColor: Semantics['background']['muted']
+  borderWidthXs: string
+  borderWidthSm: string
+  borderWidthMd: string
+  borderWidthLg: string
+  containerSizeXs: string
+  containerSizeSm: string
+  containerSizeMd: string
+  containerSizeLg: string
+  spinnerSizeXs: string
+  spinnerSizeSm: string
+  spinnerSizeMd: string
+  spinnerSizeLg: string
 }
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  separatorFontSizeSm: semantics.size.icon.xs,
-  separatorFontSizeMd: semantics.size.icon.sm,
-  separatorFontSizeLg: semantics.size.icon.md,
-  fontSizeMd: semantics.fontSize.textBase,
-  separator: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm
+const spinner: Spinner = {
+  color: semantics.background.info,
+  inverseColor: semantics.background.info,
+  trackColor: semantics.background.muted,
+  borderWidthXs: '0.25em',
+  borderWidthSm: '0.375em',
+  borderWidthMd: '0.5em',
+  borderWidthLg: '0.75em',
+  containerSizeXs: '1.5rem',
+  containerSizeSm: '3rem',
+  containerSizeMd: '5rem',
+  containerSizeLg: '7rem',
+  spinnerSizeXs: '1rem',
+  spinnerSizeSm: '2rem',
+  spinnerSizeMd: '3.5rem',
+  spinnerSizeLg: '4.5rem'
 }
-export default breadcrumb
+export default spinner

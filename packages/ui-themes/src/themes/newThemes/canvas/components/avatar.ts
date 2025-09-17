@@ -27,9 +27,9 @@ import type { Semantics } from '../semantics.js'
 
 export type Avatar = {
   background: Semantics['background']['base']
-  borderColor: Semantics['stroke']['base']
-  borderWidthSmall: Semantics['borderWidth']['sm']
-  BorderWidthMedium: Semantics['borderWidth']['md']
+  border: Semantics['stroke']['base']
+  borderWidthSm: Semantics['borderWidth']['sm']
+  BorderWidthMd: Semantics['borderWidth']['md']
   boxShadow: {
     x: number
     y: number
@@ -38,25 +38,42 @@ export type Avatar = {
     color: string
     type: string
   }
-  fontFamily: Semantics['fontFamily']['heading']
   fontWeight: Semantics['fontWeight']['heading']['strong']
-  color: Semantics['background']['interactive']['primary']['base']
-  colorShamrock: Semantics['icon']['success']
-  colorBarney: Semantics['icon']['info']
-  colorCrimson: Semantics['icon']['error']
-  colorFire: Semantics['icon']['warning']
-  colorLicorice: Semantics['icon']['base']
-  colorAsh: Semantics['icon']['muted']
-  aiTopGradientColor: Semantics['background']['aiTopGradient']
-  aiBottomGradientColor: Semantics['background']['aiBottomGradient']
-  aiFontColor: Semantics['text']['onColor']
+  accent1Background: Semantics['background']['accent']['color1']
+  accent1Icon: Semantics['icon']['accent']['color1']
+  accent1Text: Semantics['text']['accent']['color1']
+  accent2Background: Semantics['background']['accent']['color2']
+  accent2Icon: Semantics['icon']['accent']['color2']
+  accent2Text: Semantics['text']['accent']['color2']
+  accent3Background: Semantics['background']['accent']['color3']
+  accent3Icon: Semantics['icon']['accent']['color3']
+  accent3Text: Semantics['text']['accent']['color3']
+  accent4Background: Semantics['background']['accent']['color4']
+  accent4Icon: Semantics['icon']['accent']['color4']
+  accent4Text: Semantics['text']['accent']['color4']
+  accent5Background: Semantics['background']['accent']['color5']
+  accent5Icon: Semantics['icon']['accent']['color5']
+  accent5Text: Semantics['text']['accent']['color5']
+  accent6Background: Semantics['background']['accent']['color6']
+  accent6Icon: Semantics['icon']['accent']['color6']
+  accent6text: Semantics['text']['accent']['color6']
+  aiTopGradient: Semantics['background']['aiTopGradient']
+  aiBottomGradient: Semantics['background']['aiBottomGradient']
+  aiFont: Semantics['text']['onColor']
+  size2xs: string
+  sizeXs: string
+  sizeSm: string
+  sizeMd: string
+  sizeLg: string
+  sizeXl: string
+  size2xl: string
 }
 
 const avatar: Avatar = {
   background: semantics.background.base,
-  borderColor: semantics.stroke.base,
-  borderWidthSmall: semantics.borderWidth.sm,
-  BorderWidthMedium: semantics.borderWidth.md,
+  border: semantics.stroke.base,
+  borderWidthSm: semantics.borderWidth.sm,
+  BorderWidthMd: semantics.borderWidth.md,
   boxShadow: {
     x: 0,
     y: 0,
@@ -65,17 +82,34 @@ const avatar: Avatar = {
     color: 'rgba(45,59,69,0.12)',
     type: 'innerShadow'
   },
-  fontFamily: semantics.fontFamily.heading,
   fontWeight: semantics.fontWeight.heading.strong,
-  color: semantics.background.interactive.primary.base,
-  colorShamrock: semantics.icon.success,
-  colorBarney: semantics.icon.info,
-  colorCrimson: semantics.icon.error,
-  colorFire: semantics.icon.warning,
-  colorLicorice: semantics.icon.base,
-  colorAsh: semantics.icon.muted,
-  aiTopGradientColor: semantics.background.aiTopGradient,
-  aiBottomGradientColor: semantics.background.aiBottomGradient,
-  aiFontColor: semantics.text.onColor
+  accent1Background: semantics.background.accent.color1,
+  accent1Icon: semantics.icon.accent.color1,
+  accent1Text: semantics.text.accent.color1,
+  accent2Background: semantics.background.accent.color2,
+  accent2Icon: semantics.icon.accent.color2,
+  accent2Text: semantics.text.accent.color2,
+  accent3Background: semantics.background.accent.color3,
+  accent3Icon: semantics.icon.accent.color3,
+  accent3Text: semantics.text.accent.color3,
+  accent4Background: semantics.background.accent.color4,
+  accent4Icon: semantics.icon.accent.color4,
+  accent4Text: semantics.text.accent.color4,
+  accent5Background: semantics.background.accent.color5,
+  accent5Icon: semantics.icon.accent.color5,
+  accent5Text: semantics.text.accent.color5,
+  accent6Background: semantics.background.accent.color6,
+  accent6Icon: semantics.icon.accent.color6,
+  accent6text: semantics.text.accent.color6,
+  aiTopGradient: semantics.background.aiTopGradient,
+  aiBottomGradient: semantics.background.aiBottomGradient,
+  aiFont: semantics.text.onColor,
+  size2xs: '1.5 rem',
+  sizeXs: '2 rem',
+  sizeSm: '2.5 rem',
+  sizeMd: '3 rem',
+  sizeLg: '3.5 rem',
+  sizeXl: '4 rem',
+  size2xl: '5rem'
 }
 export default avatar

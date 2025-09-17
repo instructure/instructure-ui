@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// TODO-STYLES - NewCanvas type shouldn't be used here, a more general type is required
 import type { NewCanvas } from '@instructure/ui-themes'
 import type { PillProps, PillStyle } from './props'
 
@@ -36,15 +37,15 @@ import type { PillProps, PillStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewCanvas['components']['pill'],
+  componentTheme: NewCanvas['components']['Pill'],
   props: PillProps
 ): PillStyle => {
   const { color } = props
 
   const pillColorVariants = {
     primary: {
-      color: componentTheme.primaryText,
-      borderColor: componentTheme.primaryBorder
+      color: componentTheme.baseText,
+      borderColor: componentTheme.baseBorder
     },
     success: {
       color: componentTheme.successText,

@@ -26,16 +26,16 @@ import semantics from '../semantics.js'
 import type { Semantics } from '../semantics.js'
 
 export type Pill = {
-  paddingHorizontal: Semantics['space']['sm']
+  paddingHorizontal: Semantics['spacing']['sm']
   height: string
   background: Semantics['background']['base']
   textFontSize: Semantics['fontSize']['textSm']
   textFontWeight: Semantics['fontWeight']['body']['base']
   statusLabelFontWeight: Semantics['fontWeight']['body']['strong']
   maxWidth: string
-  primaryText: Semantics['text']['base']
-  primaryIcon: Semantics['icon']['base']
-  primaryBorder: Semantics['stroke']['base']
+  baseText: Semantics['text']['base']
+  baseIcon: Semantics['icon']['base']
+  baseBorder: Semantics['stroke']['base']
   infoText: Semantics['text']['info']
   infoIcon: Semantics['icon']['info']
   infoBorder: Semantics['stroke']['info']
@@ -56,16 +56,16 @@ export type Pill = {
 }
 
 const pill: Pill = {
-  paddingHorizontal: semantics.space.sm,
+  paddingHorizontal: semantics.spacing.sm,
   height: '24px',
   background: semantics.background.base,
   textFontSize: semantics.fontSize.textSm,
   textFontWeight: semantics.fontWeight.body.base,
   statusLabelFontWeight: semantics.fontWeight.body.strong,
   maxWidth: '240px',
-  primaryText: semantics.text.base,
-  primaryIcon: semantics.icon.base,
-  primaryBorder: semantics.stroke.base,
+  baseText: semantics.text.base,
+  baseIcon: semantics.icon.base,
+  baseBorder: semantics.stroke.base,
   infoText: semantics.text.info,
   infoIcon: semantics.icon.info,
   infoBorder: semantics.stroke.info,

@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import type { AvatarTheme } from '@instructure/shared-types'
+import type { NewCanvas } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
 type StyleParams = {
@@ -45,7 +44,7 @@ type StyleParams = {
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: AvatarTheme,
+  componentTheme: NewCanvas['components']['Avatar'],
   params: StyleParams
 ): AvatarStyle => {
   const { loaded, size, color, hasInverseColor, shape, src, showBorder } =
@@ -66,49 +65,49 @@ const generateStyle = (
   const sizeStyles = {
     auto: {
       fontSize: 'inherit',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: '2.5em',
       height: '2.5em'
     },
     'xx-small': {
       fontSize: '0.625rem',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: calcNewScaler(0.5, 0.625, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(0.5, 0.625, 2.5)
     },
     'x-small': {
       fontSize: '0.875rem',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: calcNewScaler(0.75, 0.875, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(0.75, 0.875, 2.5)
     },
     small: {
       fontSize: '1.25rem',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: calcNewScaler(1, 1.25, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1, 1.25, 2.5)
     },
     medium: {
       fontSize: '1.5rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.BorderWidthMd,
       width: calcNewScaler(1.25, 1.5, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.25, 1.5, 2.5)
     },
     large: {
       fontSize: '1.75rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.BorderWidthMd,
       width: calcNewScaler(1.5, 1.75, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.5, 1.75, 2.5)
     },
     'x-large': {
       fontSize: '2rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.BorderWidthMd,
       width: calcNewScaler(1.75, 2, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.75, 2, 2.5)
     },
     'xx-large': {
       fontSize: '2.25rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.BorderWidthMd,
       width: calcNewScaler(2, 2.25, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(2, 2.25, 2.5)
     }
@@ -153,7 +152,11 @@ const generateStyle = (
   }
 
   const colorVariants = {
-    default: componentTheme.color, // = brand
+    default: {
+      text: componentTheme.accent1Text,
+      background: componentTheme.accent1Background,
+      icon: componentTheme.accent1Icon
+    }, // = brand
     shamrock: componentTheme.colorShamrock,
     barney: componentTheme.colorBarney,
     crimson: componentTheme.colorCrimson,

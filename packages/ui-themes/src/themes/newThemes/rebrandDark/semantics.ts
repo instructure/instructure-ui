@@ -31,17 +31,23 @@ export type Semantics = {
     muted: Primitives['color']['grey']['grey90']
     page: Primitives['color']['grey']['grey120']
     container: Primitives['color']['grey']['grey110']
-    success: Primitives['color']['green']['green40']
-    warning: Primitives['color']['orange']['orange40']
-    error: Primitives['color']['red']['red40']
-    info: Primitives['color']['blue']['blue40']
-    aiTopGradient: Primitives['color']['violet']['violet40']
-    aiBottomGradient: Primitives['color']['sea']['sea40']
+    success: Primitives['color']['green']['green100']
+    error: Primitives['color']['red']['red100']
+    warning: Primitives['color']['orange']['orange100']
+    info: Primitives['color']['blue']['blue100']
+    aiTopGradient: Primitives['color']['violet']['violet100']
+    aiBottomGradient: Primitives['color']['sea']['sea100']
     divider: {
       base: Primitives['color']['grey']['grey90']
       onColor: Primitives['color']['grey']['grey120']
     }
     interactive: {
+      input: {
+        base: Primitives['color']['grey']['grey120']
+        hover: Primitives['color']['grey']['grey110']
+        readonly: Primitives['color']['grey']['grey100']
+        disabled: Primitives['color']['grey']['grey100']
+      }
       primary: {
         base: Primitives['color']['blue']['blue40']
         hover: Primitives['color']['blue']['blue30']
@@ -58,18 +64,36 @@ export type Semantics = {
         active: Primitives['color']['red']['red50']
       }
     }
+    accent: {
+      color1: Primitives['color']['sky']['sky100']
+      color2: Primitives['color']['aurora']['aurora100']
+      color3: Primitives['color']['plum']['plum100']
+      color4: Primitives['color']['honey']['honey100']
+      color5: Primitives['color']['stone']['stone110']
+      color6: Primitives['color']['stone']['stone70']
+    }
   }
   stroke: {
-    base: Primitives['color']['grey']['grey80']
+    base: Primitives['color']['grey']['grey60']
     muted: Primitives['color']['grey']['grey90']
     success: Primitives['color']['green']['green40']
-    warning: Primitives['color']['orange']['orange40']
     error: Primitives['color']['red']['red40']
+    warning: Primitives['color']['orange']['orange40']
     info: Primitives['color']['blue']['blue40']
     container: Primitives['color']['grey']['grey30']
     aiTopGradient: Primitives['color']['violet']['violet40']
     aiBottomGradient: Primitives['color']['sea']['sea40']
     interactive: {
+      focusRing: {
+        base: Primitives['color']['blue']['blue40']
+        onColor: Primitives['color']['white']
+      }
+      input: {
+        base: Primitives['color']['grey']['grey60']
+        hover: Primitives['color']['grey']['grey40']
+        readonly: Primitives['color']['grey']['grey110']
+        disabled: Primitives['color']['grey']['grey80']
+      }
       primary: {
         base: Primitives['color']['blue']['blue40']
         hover: Primitives['color']['blue']['blue30']
@@ -86,95 +110,135 @@ export type Semantics = {
         active: Primitives['color']['red']['red50']
       }
     }
-    focusRing: Primitives['color']['blue']['blue50']
   }
   text: {
     base: Primitives['color']['white']
     muted: Primitives['color']['grey']['grey40']
-    placeholder: Primitives['color']['grey']['grey40']
-    disabled: Primitives['color']['grey']['grey50']
     success: Primitives['color']['green']['green40']
-    warning: Primitives['color']['orange']['orange40']
     error: Primitives['color']['red']['red40']
+    warning: Primitives['color']['orange']['orange40']
     info: Primitives['color']['blue']['blue40']
-    onColor: Primitives['color']['grey']['grey120']
+    onColor: Primitives['color']['white']
     interactive: {
+      disabled: {
+        base: Primitives['color']['grey']['grey50']
+        onColor: Primitives['color']['grey']['grey40']
+      }
+      input: {
+        base: Primitives['color']['white']
+        hover: Primitives['color']['grey']['grey30']
+        readonly: Primitives['color']['white']
+        placeholder: Primitives['color']['grey']['grey40']
+        disabled: Primitives['color']['grey']['grey40']
+      }
       primary: {
-        base: Primitives['color']['blue']['blue40']
-        hover: Primitives['color']['blue']['blue30']
-        active: Primitives['color']['blue']['blue50']
+        base: Primitives['color']['blue']['blue30']
+        hover: Primitives['color']['blue']['blue20']
+        active: Primitives['color']['blue']['blue40']
+      }
+      primaryOnColor: {
+        base: Primitives['color']['blue']['blue10']
+        hover: Primitives['color']['white']
+        active: Primitives['color']['blue']['blue10']
       }
       secondary: {
-        base: Primitives['color']['grey']['grey60']
-        hover: Primitives['color']['grey']['grey50']
+        base: Primitives['color']['grey']['grey30']
+        hover: Primitives['color']['grey']['grey20']
         active: Primitives['color']['grey']['grey40']
       }
       destructive: {
-        base: Primitives['color']['red']['red40']
-        hover: Primitives['color']['red']['red30']
-        active: Primitives['color']['red']['red50']
+        base: Primitives['color']['red']['red30']
+        hover: Primitives['color']['red']['red20']
+        active: Primitives['color']['red']['red40']
       }
+    }
+    accent: {
+      color1: Primitives['color']['sky']['sky30']
+      color2: Primitives['color']['aurora']['aurora30']
+      color3: Primitives['color']['plum']['plum30']
+      color4: Primitives['color']['honey']['honey30']
+      color5: Primitives['color']['stone']['stone30']
+      color6: Primitives['color']['stone']['stone10']
     }
   }
   icon: {
     base: Primitives['color']['white']
     muted: Primitives['color']['grey']['grey40']
-    disabled: Primitives['color']['grey']['grey50']
     success: Primitives['color']['green']['green40']
-    warning: Primitives['color']['orange']['orange40']
     error: Primitives['color']['red']['red40']
+    warning: Primitives['color']['orange']['orange40']
     info: Primitives['color']['blue']['blue40']
-    onColor: Primitives['color']['grey']['grey120']
+    onColor: Primitives['color']['white']
     interactive: {
+      disabled: {
+        base: Primitives['color']['grey']['grey50']
+        onColor: Primitives['color']['grey']['grey40']
+      }
       primary: {
-        base: Primitives['color']['blue']['blue60']
-        hover: Primitives['color']['blue']['blue50']
-        active: Primitives['color']['blue']['blue70']
+        base: Primitives['color']['blue']['blue30']
+        hover: Primitives['color']['blue']['blue20']
+        active: Primitives['color']['blue']['blue40']
+      }
+      primaryOnColor: {
+        base: Primitives['color']['blue']['blue10']
+        hover: Primitives['color']['white']
+        active: Primitives['color']['blue']['blue10']
       }
       secondary: {
-        base: Primitives['color']['grey']['grey60']
-        hover: Primitives['color']['grey']['grey50']
+        base: Primitives['color']['grey']['grey30']
+        hover: Primitives['color']['grey']['grey20']
         active: Primitives['color']['grey']['grey40']
       }
       destructive: {
-        base: Primitives['color']['red']['red40']
-        hover: Primitives['color']['red']['red30']
-        active: Primitives['color']['red']['red50']
+        base: Primitives['color']['red']['red30']
+        hover: Primitives['color']['red']['red20']
+        active: Primitives['color']['red']['red40']
       }
+    }
+    accent: {
+      color1: Primitives['color']['sky']['sky30']
+      color2: Primitives['color']['aurora']['aurora30']
+      color3: Primitives['color']['plum']['plum30']
+      color4: Primitives['color']['honey']['honey30']
+      color5: Primitives['color']['stone']['stone30']
+      color6: Primitives['color']['stone']['stone10']
     }
   }
   size: {
     interactive: {
       height: {
-        sm: Primitives['size']['size32']
+        sm: Primitives['size']['size28']
         md: Primitives['size']['size40']
         lg: Primitives['size']['size48']
       }
     }
     icon: {
-      xs: Primitives['size']['size8']
-      sm: Primitives['size']['size12']
-      md: Primitives['size']['size16']
+      xs: Primitives['size']['size12']
+      sm: Primitives['size']['size16']
+      md: Primitives['size']['size20']
       lg: Primitives['size']['size24']
+      xl: Primitives['size']['size32']
+      xxl: Primitives['size']['size36']
     }
   }
-  space: {
+  spacing: {
     xs: Primitives['size']['size4']
     sm: Primitives['size']['size8']
     md: Primitives['size']['size16']
     lg: Primitives['size']['size24']
     xl: Primitives['size']['size32']
     xxl: Primitives['size']['size40']
-    layout: {
-      betweenSections: Primitives['size']['size48']
-      betweenCards: {
+    between: {
+      sections: Primitives['size']['size48']
+      cards: {
         sm: Primitives['size']['size16']
         md: Primitives['size']['size24']
       }
-      betweenInputs: {
+      inputs: {
         horizontal: Primitives['size']['size12']
         vertical: Primitives['size']['size16']
       }
+      inputElements: Primitives['size']['size12']
     }
     padding: {
       container: {
@@ -182,7 +246,7 @@ export type Semantics = {
         md: Primitives['size']['size24']
         lg: Primitives['size']['size32']
       }
-      interactive: { horizontal: Primitives['size']['size16'] }
+      interactive: { horizontal: Primitives['size']['size12'] }
     }
   }
   borderRadius: {
@@ -197,22 +261,34 @@ export type Semantics = {
       md: Primitives['size']['size12']
       lg: Primitives['size']['size16']
     }
-    interactive: { default: Primitives['size']['size8'] }
+    interactive: { base: Primitives['size']['size12'] }
   }
   borderWidth: {
     sm: Primitives['size']['size1']
     md: Primitives['size']['size2']
     lg: Primitives['size']['size4']
+    icon: {
+      xs: Primitives['size']['size1']
+      sm: Primitives['additionalSize']['size1_25']
+      md: Primitives['additionalSize']['size1_5']
+      lg: Primitives['size']['size2']
+      xl: Primitives['additionalSize']['size2_5']
+      xxl: Primitives['additionalSize']['size3']
+    }
+    interactive: {
+      base: Primitives['size']['size1']
+      focus: Primitives['size']['size2']
+    }
   }
   fontFamily: {
     heading: Primitives['fontFamilies']['inclusiveSans']
-    base: Primitives['fontFamilies']['inclusiveSans']
+    base: Primitives['fontFamilies']['Atkinson']
     code: Primitives['fontFamilies']['inclusiveSans']
   }
   fontWeight: {
     body: {
       base: Primitives['fontWeights']['regular']
-      strong: Primitives['fontWeights']['bold']
+      strong: Primitives['fontWeights']['semiBold']
     }
     heading: {
       base: Primitives['fontWeights']['semiBold']
@@ -227,7 +303,7 @@ export type Semantics = {
     }
     standalone: {
       textXs: Primitives['size']['size12']
-      textSm: string
+      textSm: Primitives['size']['size14']
       textBase: Primitives['size']['size16']
       textLg: Primitives['size']['size20']
       textXl: Primitives['size']['size24']
@@ -244,16 +320,36 @@ export type Semantics = {
   }
   fontSize: {
     textXs: Primitives['size']['size12']
-    textSm: string
+    textSm: Primitives['size']['size14']
     textBase: Primitives['size']['size16']
     textLg: Primitives['size']['size20']
-    textXl: Primitives['size']['size20']
-    text2xl: Primitives['size']['size24']
+    textXl: Primitives['size']['size24']
+    text2xl: Primitives['size']['size28']
     text3xl: Primitives['size']['size32']
     text4xl: Primitives['size']['size36']
   }
   visibleInCanvas: string
   visibleInRebrand: string
+  input: {
+    small: {
+      fontFamily: Primitives['fontFamilies']['Atkinson']
+      fontWeight: Primitives['fontWeights']['regular']
+      fontSize: Primitives['size']['size14']
+      lineHeight: Primitives['size']['size14']
+    }
+    medium: {
+      fontFamily: Primitives['fontFamilies']['Atkinson']
+      fontWeight: Primitives['fontWeights']['regular']
+      fontSize: Primitives['size']['size16']
+      lineHeight: Primitives['size']['size16']
+    }
+    large: {
+      fontFamily: Primitives['fontFamilies']['Atkinson']
+      fontWeight: Primitives['fontWeights']['regular']
+      fontSize: Primitives['size']['size20']
+      lineHeight: Primitives['size']['size20']
+    }
+  }
 }
 
 const semantics: Semantics = {
@@ -262,17 +358,23 @@ const semantics: Semantics = {
     muted: primitives.color.grey.grey90,
     page: primitives.color.grey.grey120,
     container: primitives.color.grey.grey110,
-    success: primitives.color.green.green40,
-    warning: primitives.color.orange.orange40,
-    error: primitives.color.red.red40,
-    info: primitives.color.blue.blue40,
-    aiTopGradient: primitives.color.violet.violet40,
-    aiBottomGradient: primitives.color.sea.sea40,
+    success: primitives.color.green.green100,
+    error: primitives.color.red.red100,
+    warning: primitives.color.orange.orange100,
+    info: primitives.color.blue.blue100,
+    aiTopGradient: primitives.color.violet.violet100,
+    aiBottomGradient: primitives.color.sea.sea100,
     divider: {
       base: primitives.color.grey.grey90,
       onColor: primitives.color.grey.grey120
     },
     interactive: {
+      input: {
+        base: primitives.color.grey.grey120,
+        hover: primitives.color.grey.grey110,
+        readonly: primitives.color.grey.grey100,
+        disabled: primitives.color.grey.grey100
+      },
       primary: {
         base: primitives.color.blue.blue40,
         hover: primitives.color.blue.blue30,
@@ -288,19 +390,37 @@ const semantics: Semantics = {
         hover: primitives.color.red.red30,
         active: primitives.color.red.red50
       }
+    },
+    accent: {
+      color1: primitives.color.sky.sky100,
+      color2: primitives.color.aurora.aurora100,
+      color3: primitives.color.plum.plum100,
+      color4: primitives.color.honey.honey100,
+      color5: primitives.color.stone.stone110,
+      color6: primitives.color.stone.stone70
     }
   },
   stroke: {
-    base: primitives.color.grey.grey80,
+    base: primitives.color.grey.grey60,
     muted: primitives.color.grey.grey90,
     success: primitives.color.green.green40,
-    warning: primitives.color.orange.orange40,
     error: primitives.color.red.red40,
+    warning: primitives.color.orange.orange40,
     info: primitives.color.blue.blue40,
     container: primitives.color.grey.grey30,
     aiTopGradient: primitives.color.violet.violet40,
     aiBottomGradient: primitives.color.sea.sea40,
     interactive: {
+      focusRing: {
+        base: primitives.color.blue.blue40,
+        onColor: primitives.color.white
+      },
+      input: {
+        base: primitives.color.grey.grey60,
+        hover: primitives.color.grey.grey40,
+        readonly: primitives.color.grey.grey110,
+        disabled: primitives.color.grey.grey80
+      },
       primary: {
         base: primitives.color.blue.blue40,
         hover: primitives.color.blue.blue30,
@@ -316,93 +436,133 @@ const semantics: Semantics = {
         hover: primitives.color.red.red30,
         active: primitives.color.red.red50
       }
-    },
-    focusRing: primitives.color.blue.blue50
+    }
   },
   text: {
     base: primitives.color.white,
     muted: primitives.color.grey.grey40,
-    placeholder: primitives.color.grey.grey40,
-    disabled: primitives.color.grey.grey50,
     success: primitives.color.green.green40,
-    warning: primitives.color.orange.orange40,
     error: primitives.color.red.red40,
+    warning: primitives.color.orange.orange40,
     info: primitives.color.blue.blue40,
-    onColor: primitives.color.grey.grey120,
+    onColor: primitives.color.white,
     interactive: {
+      disabled: {
+        base: primitives.color.grey.grey50,
+        onColor: primitives.color.grey.grey40
+      },
+      input: {
+        base: primitives.color.white,
+        hover: primitives.color.grey.grey30,
+        readonly: primitives.color.white,
+        placeholder: primitives.color.grey.grey40,
+        disabled: primitives.color.grey.grey40
+      },
       primary: {
-        base: primitives.color.blue.blue40,
-        hover: primitives.color.blue.blue30,
-        active: primitives.color.blue.blue50
+        base: primitives.color.blue.blue30,
+        hover: primitives.color.blue.blue20,
+        active: primitives.color.blue.blue40
+      },
+      primaryOnColor: {
+        base: primitives.color.blue.blue10,
+        hover: primitives.color.white,
+        active: primitives.color.blue.blue10
       },
       secondary: {
-        base: primitives.color.grey.grey60,
-        hover: primitives.color.grey.grey50,
+        base: primitives.color.grey.grey30,
+        hover: primitives.color.grey.grey20,
         active: primitives.color.grey.grey40
       },
       destructive: {
-        base: primitives.color.red.red40,
-        hover: primitives.color.red.red30,
-        active: primitives.color.red.red50
+        base: primitives.color.red.red30,
+        hover: primitives.color.red.red20,
+        active: primitives.color.red.red40
       }
+    },
+    accent: {
+      color1: primitives.color.sky.sky30,
+      color2: primitives.color.aurora.aurora30,
+      color3: primitives.color.plum.plum30,
+      color4: primitives.color.honey.honey30,
+      color5: primitives.color.stone.stone30,
+      color6: primitives.color.stone.stone10
     }
   },
   icon: {
     base: primitives.color.white,
     muted: primitives.color.grey.grey40,
-    disabled: primitives.color.grey.grey50,
     success: primitives.color.green.green40,
-    warning: primitives.color.orange.orange40,
     error: primitives.color.red.red40,
+    warning: primitives.color.orange.orange40,
     info: primitives.color.blue.blue40,
-    onColor: primitives.color.grey.grey120,
+    onColor: primitives.color.white,
     interactive: {
+      disabled: {
+        base: primitives.color.grey.grey50,
+        onColor: primitives.color.grey.grey40
+      },
       primary: {
-        base: primitives.color.blue.blue60,
-        hover: primitives.color.blue.blue50,
-        active: primitives.color.blue.blue70
+        base: primitives.color.blue.blue30,
+        hover: primitives.color.blue.blue20,
+        active: primitives.color.blue.blue40
+      },
+      primaryOnColor: {
+        base: primitives.color.blue.blue10,
+        hover: primitives.color.white,
+        active: primitives.color.blue.blue10
       },
       secondary: {
-        base: primitives.color.grey.grey60,
-        hover: primitives.color.grey.grey50,
+        base: primitives.color.grey.grey30,
+        hover: primitives.color.grey.grey20,
         active: primitives.color.grey.grey40
       },
       destructive: {
-        base: primitives.color.red.red40,
-        hover: primitives.color.red.red30,
-        active: primitives.color.red.red50
+        base: primitives.color.red.red30,
+        hover: primitives.color.red.red20,
+        active: primitives.color.red.red40
       }
+    },
+    accent: {
+      color1: primitives.color.sky.sky30,
+      color2: primitives.color.aurora.aurora30,
+      color3: primitives.color.plum.plum30,
+      color4: primitives.color.honey.honey30,
+      color5: primitives.color.stone.stone30,
+      color6: primitives.color.stone.stone10
     }
   },
   size: {
     interactive: {
       height: {
-        sm: primitives.size.size32,
+        sm: primitives.size.size28,
         md: primitives.size.size40,
         lg: primitives.size.size48
       }
     },
     icon: {
-      xs: primitives.size.size8,
-      sm: primitives.size.size12,
-      md: primitives.size.size16,
-      lg: primitives.size.size24
+      xs: primitives.size.size12,
+      sm: primitives.size.size16,
+      md: primitives.size.size20,
+      lg: primitives.size.size24,
+      xl: primitives.size.size32,
+      xxl: primitives.size.size36
     }
   },
-  space: {
+  spacing: {
     xs: primitives.size.size4,
     sm: primitives.size.size8,
     md: primitives.size.size16,
     lg: primitives.size.size24,
     xl: primitives.size.size32,
     xxl: primitives.size.size40,
-    layout: {
-      betweenSections: primitives.size.size48,
-      betweenCards: { sm: primitives.size.size16, md: primitives.size.size24 },
-      betweenInputs: {
+    between: {
+      sections: primitives.size.size48,
+      cards: { sm: primitives.size.size16, md: primitives.size.size24 },
+      inputs: {
         horizontal: primitives.size.size12,
         vertical: primitives.size.size16
-      }
+      },
+      inputElements: primitives.size.size12
     },
     padding: {
       container: {
@@ -410,7 +570,7 @@ const semantics: Semantics = {
         md: primitives.size.size24,
         lg: primitives.size.size32
       },
-      interactive: { horizontal: primitives.size.size16 }
+      interactive: { horizontal: primitives.size.size12 }
     }
   },
   borderRadius: {
@@ -425,22 +585,31 @@ const semantics: Semantics = {
       md: primitives.size.size12,
       lg: primitives.size.size16
     },
-    interactive: { default: primitives.size.size8 }
+    interactive: { base: primitives.size.size12 }
   },
   borderWidth: {
     sm: primitives.size.size1,
     md: primitives.size.size2,
-    lg: primitives.size.size4
+    lg: primitives.size.size4,
+    icon: {
+      xs: primitives.size.size1,
+      sm: primitives.additionalSize.size1_25,
+      md: primitives.additionalSize.size1_5,
+      lg: primitives.size.size2,
+      xl: primitives.additionalSize.size2_5,
+      xxl: primitives.additionalSize.size3
+    },
+    interactive: { base: primitives.size.size1, focus: primitives.size.size2 }
   },
   fontFamily: {
     heading: primitives.fontFamilies.inclusiveSans,
-    base: primitives.fontFamilies.inclusiveSans,
+    base: primitives.fontFamilies.Atkinson,
     code: primitives.fontFamilies.inclusiveSans
   },
   fontWeight: {
     body: {
       base: primitives.fontWeights.regular,
-      strong: primitives.fontWeights.bold
+      strong: primitives.fontWeights.semiBold
     },
     heading: {
       base: primitives.fontWeights.semiBold,
@@ -455,7 +624,7 @@ const semantics: Semantics = {
     },
     standalone: {
       textXs: primitives.size.size12,
-      textSm: '14px',
+      textSm: primitives.size.size14,
       textBase: primitives.size.size16,
       textLg: primitives.size.size20,
       textXl: primitives.size.size24,
@@ -472,15 +641,35 @@ const semantics: Semantics = {
   },
   fontSize: {
     textXs: primitives.size.size12,
-    textSm: '14px',
+    textSm: primitives.size.size14,
     textBase: primitives.size.size16,
     textLg: primitives.size.size20,
-    textXl: primitives.size.size20,
-    text2xl: primitives.size.size24,
+    textXl: primitives.size.size24,
+    text2xl: primitives.size.size28,
     text3xl: primitives.size.size32,
     text4xl: primitives.size.size36
   },
   visibleInCanvas: 'false',
-  visibleInRebrand: 'true'
+  visibleInRebrand: 'true',
+  input: {
+    small: {
+      fontFamily: primitives.fontFamilies.Atkinson,
+      fontWeight: primitives.fontWeights.regular,
+      fontSize: primitives.size.size14,
+      lineHeight: primitives.size.size14
+    },
+    medium: {
+      fontFamily: primitives.fontFamilies.Atkinson,
+      fontWeight: primitives.fontWeights.regular,
+      fontSize: primitives.size.size16,
+      lineHeight: primitives.size.size16
+    },
+    large: {
+      fontFamily: primitives.fontFamilies.Atkinson,
+      fontWeight: primitives.fontWeights.regular,
+      fontSize: primitives.size.size20,
+      lineHeight: primitives.size.size20
+    }
+  }
 }
 export default semantics

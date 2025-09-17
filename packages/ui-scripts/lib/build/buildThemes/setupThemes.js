@@ -55,11 +55,12 @@ export const transformThemes = (themes) =>
   }, {})
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+const unCapitalize = (str) => str.charAt(0).toLowerCase() + str.slice(1)
 
 const setupThemes = (targetPath, rawInput) => {
   const input = JSON.parse(rawInput.toString())
   const themeData = transformThemes(input['$themes'])
-
+  // console.log(themeData)
   Object.keys(themeData).forEach((theme) => {
     const themePath = `${targetPath}/${theme}`
     fs.rmSync(themePath, { recursive: true, force: true })
@@ -99,8 +100,8 @@ const setupThemes = (targetPath, rawInput) => {
 
     //components
     themeData[theme].components.forEach((componentpath) => {
-      const componentName =
-        componentpath.split('/')[componentpath.split('/').length - 1]
+      const rawComponentName = componentpath.split('/')[componentpath.split('/').length - 1]
+      const componentName =rawComponentName[0].toLowerCase() + rawComponentName.slice(1)
 
       const component = generateComponent(input[componentpath][componentName])
       const componentTypes = generateComponentType(
@@ -129,9 +130,9 @@ const setupThemes = (targetPath, rawInput) => {
         const componentName =
           componentpath.split('/')[componentpath.split('/').length - 1]
 
-        return `import ${componentName}, {type ${capitalize(
+        return `import ${unCapitalize(componentName)}, {type ${capitalize(
           componentName
-        )}} from "./components/${componentName}"`
+        )}} from "./components/${unCapitalize(componentName)}"`
       })
       .join('\n')
 
@@ -145,8 +146,11 @@ const setupThemes = (targetPath, rawInput) => {
       .join('\n')
     const componentNames = themeData[theme].components
       .map(
-        (componentpath) =>
-          componentpath.split('/')[componentpath.split('/').length - 1]
+        (componentpath) =>{
+          const componentName=componentpath.split('/')[componentpath.split('/').length - 1]
+          return `${componentName}: ${unCapitalize(componentName)}`
+        }
+
       )
       .join(',\n')
     const indexFileContent = `

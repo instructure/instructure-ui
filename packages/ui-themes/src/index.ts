@@ -37,6 +37,10 @@ import canvasHighContrast, {
 } from './themes/canvasHighContrast'
 import canvas, { canvasThemeLocal } from './themes/canvas'
 
+import rebrandDark from './themes/rebrandDark'
+
+import rebrandLight from './themes/rebrandLight'
+
 import {
   primitives,
   additionalPrimitives
@@ -69,6 +73,8 @@ type ThemeSpecificStyle<ComponentTheme> = {
 }
 
 export {
+  rebrandDark,
+  rebrandLight,
   canvas,
   canvasThemeLocal,
   canvasHighContrast,
