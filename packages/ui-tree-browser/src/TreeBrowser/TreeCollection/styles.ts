@@ -48,7 +48,8 @@ const list = keyframes`
 
 const generateStyles = (
   componentTheme: TreeBrowserCollectionTheme,
-  props: TreeBrowserCollectionProps
+  props: TreeBrowserCollectionProps,
+  state: { animation?: boolean }
 ): TreeBrowserCollectionStyle => {
   const { size, variant } = props
   const sizeMap = {
@@ -115,12 +116,16 @@ const generateStyles = (
           bottom: '1.1875rem',
           insetInlineStart: '0',
           insetInlineEnd: 'auto',
-          transform: 'scaleY(0.01)',
-          transformOrigin: 'center top',
-          animationName: list,
-          animationDuration: '0.2s',
-          animationFillMode: 'forwards',
-          animationTimingFunction: 'ease-out',
+          ...(state.animation
+            ? {
+                transform: 'scaleY(0.01)',
+                transformOrigin: 'center top',
+                animationName: list,
+                animationDuration: '0.2s',
+                animationFillMode: 'forwards',
+                animationTimingFunction: 'ease-out'
+              }
+            : {}),
           pointerEvents: 'none',
           width: componentTheme.borderWidth,
           background: componentTheme.borderColor

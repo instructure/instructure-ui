@@ -45,11 +45,13 @@ const transform = keyframes`
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyles = (
   componentTheme: TreeBrowserButtonTheme,
-  props: TreeBrowserButtonProps
+  props: TreeBrowserButtonProps,
+  state: { animation?: boolean }
 ): TreeBrowserButtonStyle => {
   const { size, variant, selected, focused, level } = props
 
@@ -226,14 +228,18 @@ const generateStyles = (
       borderRadius: componentTheme.borderRadius,
       position: 'relative',
       zIndex: 1,
-      transform: 'translate3d(-2%, 0, 0)',
-      opacity: 0.01,
-      transformOrigin: 'left center',
-      animationName: transform,
-      animationDuration: '0.2s',
-      animationFillMode: 'forwards',
-      animationTimingFunction: 'ease-out',
-      animationDelay: '0.2s',
+      ...(state.animation
+        ? {
+            transform: 'translate3d(-2%, 0, 0)',
+            opacity: 0.01,
+            transformOrigin: 'left center',
+            animationName: transform,
+            animationDuration: '0.2s',
+            animationFillMode: 'forwards',
+            animationTimingFunction: 'ease-out',
+            animationDelay: '0.2s'
+          }
+        : {}),
       outline: '0',
       padding: '0',
       ...(variant === 'folderTree' &&
@@ -278,9 +284,10 @@ const generateStyles = (
           ? componentTheme.selectedBackgroundColor
           : componentTheme.hoverBackgroundColor,
 
-        '[class$=-treeButton__textName], [class$=-treeButton__textDescriptor], [class$=-treeButton__icon], [class$=-treeButton__node]': {
-          color: componentTheme.hoverTextColor
-        }
+        '[class$=-treeButton__textName], [class$=-treeButton__textDescriptor], [class$=-treeButton__icon], [class$=-treeButton__node]':
+          {
+            color: componentTheme.hoverTextColor
+          }
       },
       ...(selected && {
         backgroundColor: componentTheme.selectedBackgroundColor
