@@ -136,15 +136,15 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   // duck type for a dom node
-  isDOMNode(n: Element | null) {
+  isDOMNode(n: Element | null | undefined) {
     return n && typeof n === 'object' && n.nodeType === 1
   }
 
   getLiveRegion() {
-    let lr = null
-    if (typeof this.props.liveRegion === 'function') {
-      lr = this.props.liveRegion()
-    }
+    const lr =
+      typeof this.props.liveRegion === 'function'
+        ? this.props.liveRegion()
+        : this.props.liveRegion
 
     return this.isDOMNode(lr) ? lr : null
   }
