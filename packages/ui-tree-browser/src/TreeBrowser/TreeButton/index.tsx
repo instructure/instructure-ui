@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, ContextType } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { Img } from '@instructure/ui-img'
@@ -33,6 +33,7 @@ import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { TreeBrowserButtonProps } from './props'
 import { allowedProps, propTypes } from './props'
+import TreeBrowserContext from '../TreeBrowserContext'
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
@@ -50,6 +51,9 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   static allowedProps = allowedProps
   static propTypes = propTypes
 
+  static contextType = TreeBrowserContext
+  declare context: ContextType<typeof TreeBrowserContext>
+
   static defaultProps = {
     type: 'treeButton',
     size: 'medium',
@@ -62,11 +66,11 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   ref: Element | null = null
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({ animation: this.context?.animation })
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({ animation: this.context?.animation })
   }
 
   defaultContentRenderer(props: TreeBrowserButtonProps) {
