@@ -17,3 +17,6 @@ __build__
 tsconfig.build.tsbuildinfo
 
 .pnp.*
+
+# Code Plan script output
+.code-plan/

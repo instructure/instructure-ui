@@ -39,7 +39,8 @@
     "release": "ui-scripts publish",
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
     "postinstall": "husky",
-    "ts:check": "lerna run ts:check --stream"
+    "ts:check": "lerna run ts:check --stream",
+    "plan": "node --env-file=.env scripts/code-plan.mjs -c scripts/code-plan.config.mjs"
   },
   "license": "MIT",
   "resolutions": {
@@ -54,6 +55,7 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@eslint/js": "^9.28.0",
+    "@google/genai": "^1.20.0",
     "@instructure/browserslist-config-instui": "workspace:*",
     "@instructure/pkg-utils": "workspace:*",
     "@testing-library/dom": "^10.4.0",
