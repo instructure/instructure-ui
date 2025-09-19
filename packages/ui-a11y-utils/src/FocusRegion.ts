@@ -56,7 +56,10 @@ class FocusRegion {
   private readonly _screenReaderFocusRegion: ScreenReaderFocusRegion
   private readonly _keyboardFocusRegion: KeyboardFocusRegion
   private readonly _id: string
-  private _listeners: ReturnType<typeof addEventListener>[] = []
+  private _mouseDownListener: ReturnType<typeof addEventListener> | undefined
+  private _clickListener: ReturnType<typeof addEventListener> | undefined
+  private _mouseUpListener: ReturnType<typeof addEventListener> | undefined
+  private _keyUpListener: ReturnType<typeof addEventListener> | undefined
   private _active = false
   private _documentClickTarget: Node | null = null
   private _contextContainsTarget = false
@@ -82,6 +85,10 @@ class FocusRegion {
     this._contextElement = element
     if (options) {
       this._options = options
+      this.addOrRemoveListeners(
+        options.shouldCloseOnDocumentClick,
+        options.shouldCloseOnEscape
+      )
     }
     if (this._keyboardFocusRegion) {
       this._keyboardFocusRegion.updateElement(element)
@@ -170,53 +177,92 @@ class FocusRegion {
     return (findTabbable(this._contextElement) || []).length > 0
   }
 
+  /**
+   * Adds or removes mouse/keyboard listeners based on the input parameters
+   * @param shouldCloseOnDocumentClick Should add listeners that close the region if there is an outside click?
+   * @param shouldCloseOnEscape Should the region be closed if ESC is pressed?
+   */
+  addOrRemoveListeners(
+    shouldCloseOnDocumentClick?: boolean,
+    shouldCloseOnEscape?: boolean
+  ) {
+    const doc = ownerDocument(this._contextElement)!
+    if (shouldCloseOnDocumentClick) {
+      if (!this._mouseDownListener) {
+        this._mouseDownListener = addEventListener(
+          doc,
+          'mousedown',
+          this.captureDocumentMousedown
+        )
+      }
+      if (!this._clickListener) {
+        this._clickListener = addEventListener(
+          doc,
+          'click',
+          this.handleDocumentClick
+        )
+      }
+      Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
+        // listen for mouseup events on any iframes in the document
+        const frameDoc = el.contentDocument
+        if (frameDoc && !this._mouseUpListener) {
+          this._mouseUpListener = addEventListener(
+            frameDoc,
+            'mouseup',
+            (event) => {
+              this.handleFrameClick(event as React.MouseEvent, el)
+            }
+          )
+        }
+      })
+    } else {
+      this._mouseDownListener?.remove()
+      this._mouseDownListener = undefined
+      this._clickListener?.remove()
+      this._clickListener = undefined
+      this._mouseUpListener?.remove()
+      this._mouseUpListener = undefined
+    }
+    if (shouldCloseOnEscape) {
+      if (!this._keyUpListener) {
+        //This will ensure that the Tooltip's Escape event listener is executed first
+        //because listeners in the capturing phase are called before other event listeners (like that of the Modal's Escape listener)
+        //so a Modal with a Tooltip will not get closed when closing the Tooltip with Escape
+        const useCapture = this._options.isTooltip
+        this._keyUpListener = addEventListener(
+          doc,
+          'keyup',
+          this.handleKeyUp,
+          useCapture
+        )
+      }
+    } else {
+      this._keyUpListener?.remove()
+      this._keyUpListener = undefined
+    }
+  }
+
   activate() {
     if (!this._active) {
-      const doc = ownerDocument(this._contextElement)!
-
       this._keyboardFocusRegion.activate()
       this._screenReaderFocusRegion.activate()
-
-      if (this._options.shouldCloseOnDocumentClick) {
-        this._listeners.push(
-          addEventListener(doc, 'mousedown', this.captureDocumentMousedown)
-        )
-
-        this._listeners.push(
-          addEventListener(doc, 'click', this.handleDocumentClick)
-        )
-
-        Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
-          // listen for mouseup events on any iframes in the document
-          const frameDoc = el.contentDocument
-          if (frameDoc) {
-            this._listeners.push(
-              addEventListener(frameDoc, 'mouseup', (event) => {
-                this.handleFrameClick(event as React.MouseEvent, el)
-              })
-            )
-          }
-        })
-      }
-      //This will ensure that the Tooltip's Escape event listener is executed first
-      //because listeners in the capturing phase are called before other event listeners (like that of the Modal's Escape listener)
-      //so a Modal with a Tooltip will not get closed when closing the Tooltip with Escape
-      const useCapture = this._options.isTooltip
-      if (this._options.shouldCloseOnEscape) {
-        this._listeners.push(
-          addEventListener(doc, 'keyup', this.handleKeyUp, useCapture)
-        )
-      }
-
+      this.addOrRemoveListeners(
+        this._options.shouldCloseOnDocumentClick,
+        this._options.shouldCloseOnEscape
+      )
       this._active = true
     }
   }
 
   deactivate({ keyboard = true }: { keyboard?: boolean } = {}) {
-    this._listeners.forEach((listener) => {
-      listener.remove()
-    })
-    this._listeners = []
+    this._mouseDownListener?.remove()
+    this._mouseDownListener = undefined
+    this._clickListener?.remove()
+    this._clickListener = undefined
+    this._mouseUpListener?.remove()
+    this._mouseUpListener = undefined
+    this._keyUpListener?.remove()
+    this._keyUpListener = undefined
     if (keyboard) {
       this._keyboardFocusRegion.deactivate()
     }

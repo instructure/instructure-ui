@@ -118,7 +118,11 @@ type PropsPassedToDialog = {
   shouldReturnFocus?: boolean
 
   shouldCloseOnDocumentClick?: boolean
-
+  /**
+   * Should the `<DrawerLayout.Tray />` close when ESC is pressed.
+   * Note that it will only close if it's in the overlay mode (if there is
+   * less space for the content than `DrawerLayout.props.minWidth`)
+   */
   shouldCloseOnEscape?: boolean
 }
 
