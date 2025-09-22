@@ -62,6 +62,7 @@ const useStyle = <P extends (theme: any, params: any) => any>(
     typeof generateComponentTheme === 'function'
       ? generateComponentTheme(theme as BaseTheme)
       : {}
+
   if (
     //@ts-expect-error TODO fix these later
     theme.newTheme &&
@@ -72,7 +73,6 @@ const useStyle = <P extends (theme: any, params: any) => any>(
       //@ts-expect-error TODO fix these later
       theme.newTheme.components[componentId]
   }
-  console.log(componentId, baseComponentTheme)
   const themeOverride = getComponentThemeOverride(
     theme,
     displayName ? displayName : componentId || '',

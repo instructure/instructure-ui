@@ -61,7 +61,7 @@ const generateStyle = (
   ) => {
     return `${(originalFontSize * originalScaler) / newFontSize}em`
   }
-
+  console.log(componentTheme)
   const sizeStyles = {
     auto: {
       fontSize: 'inherit',
@@ -157,29 +157,53 @@ const generateStyle = (
       background: componentTheme.accent1Background,
       icon: componentTheme.accent1Icon
     }, // = brand
-    shamrock: componentTheme.colorShamrock,
-    barney: componentTheme.colorBarney,
-    crimson: componentTheme.colorCrimson,
-    fire: componentTheme.colorFire,
-    licorice: componentTheme.colorLicorice,
-    ash: componentTheme.colorAsh,
+    shamrock: {
+      text: componentTheme.accent2Text,
+      background: componentTheme.accent2Background,
+      icon: componentTheme.accent2Icon
+    },
+    barney: {
+      text: componentTheme.accent3Text,
+      background: componentTheme.accent3Background,
+      icon: componentTheme.accent3Icon
+    },
+    crimson: {
+      text: componentTheme.accent4Text,
+      background: componentTheme.accent4Background,
+      icon: componentTheme.accent4Icon
+    },
+    fire: {
+      text: componentTheme.accent5Text,
+      background: componentTheme.accent5Background,
+      icon: componentTheme.accent5Icon
+    },
+    licorice: {
+      text: componentTheme.accent6text,
+      background: componentTheme.accent6Background,
+      icon: componentTheme.accent6Icon
+    },
+    ash: {
+      text: componentTheme.accent1Text,
+      background: componentTheme.accent1Background,
+      icon: componentTheme.accent1Icon
+    },
     ai: `
-        linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
-        linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`
+        linear-gradient(to bottom,  ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) padding-box,
+        linear-gradient(to bottom right, ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) border-box`
   }
 
   const background = () => {
     if (color === 'ai') {
       return {
         background: `
-        linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
-        linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`,
+        linear-gradient(to bottom,  ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) padding-box,
+        linear-gradient(to bottom right, ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) border-box`,
         border: 'solid transparent'
       }
     }
     return hasInverseColor
       ? {
-          backgroundColor: colorVariants[color!],
+          backgroundColor: colorVariants[color!].background,
           backgroundClip: 'content-box'
         }
       : {
@@ -190,9 +214,11 @@ const generateStyle = (
 
   const contentColor = () => {
     if (color === 'ai') {
-      return componentTheme.aiFontColor
+      return componentTheme.aiFont
     }
-    return hasInverseColor ? componentTheme.background : colorVariants[color!]
+    return hasInverseColor
+      ? componentTheme.background
+      : colorVariants[color!].text
   }
 
   return {
@@ -200,7 +226,7 @@ const generateStyle = (
       label: 'avatar',
       boxSizing: 'border-box',
       borderStyle: 'solid',
-      borderColor: componentTheme.borderColor,
+      borderColor: componentTheme.border,
       ...background(),
       backgroundPosition: 'center',
       backgroundSize: 'cover',
@@ -216,7 +242,7 @@ const generateStyle = (
             ...(showBorder !== 'always' && {
               border: 0
             }),
-            boxShadow: `inset 0 0 ${componentTheme.boxShadowBlur} 0 ${componentTheme.boxShadowColor}`
+            boxShadow: `inset 0 0 ${componentTheme.boxShadow.blur} 0 ${componentTheme.boxShadow.color}`
           }
         : {
             backgroundImage: undefined,
@@ -234,7 +260,6 @@ const generateStyle = (
       label: 'avatar__initials',
       color: contentColor(),
       lineHeight: '2.375em',
-      fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       letterSpacing: '0.0313em',
       ...initialSizeStyles[size!]

@@ -608,11 +608,11 @@
     },
     "size": {
       "size1": {
-        "value": "0.0625 rem",
+        "value": "0.0625rem",
         "type": "dimension"
       },
       "size2": {
-        "value": "0.125 rem",
+        "value": "0.125rem",
         "type": "dimension"
       },
       "size4": {
@@ -678,7 +678,7 @@
         "type": "fontFamilies"
       },
       "Atkinson": {
-        "value": "Atkinson Hyperlegible Next VF, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "value": "Atkinson Hyperlegible Next, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
         "type": "fontFamilies"
       }
     },
@@ -1351,7 +1351,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue60}",
+            "value": "{color.blue.blue110}",
             "type": "color"
           },
           "active": {
@@ -1457,7 +1457,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue60}",
+            "value": "{color.blue.blue110}",
             "type": "color"
           },
           "active": {
@@ -1581,7 +1581,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue60}",
+            "value": "{color.blue.blue110}",
             "type": "color"
           },
           "active": {
@@ -1873,7 +1873,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.blue.blue120}",
             "type": "color"
           },
           "active": {
@@ -1979,7 +1979,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.blue.blue120}",
             "type": "color"
           },
           "active": {
@@ -2103,7 +2103,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.blue.blue120}",
             "type": "color"
           },
           "active": {
@@ -2184,11 +2184,11 @@
   },
   "canvas/component/Avatar": {
     "avatar": {
-      "background": {
+      "backgroundColor": {
         "value": "{background.base}",
         "type": "color"
       },
-      "border": {
+      "borderColor": {
         "value": "{stroke.base}",
         "type": "color"
       },
@@ -2219,87 +2219,87 @@
         "value": "{fontWeight.heading.strong}",
         "type": "fontWeights"
       },
-      "accent1Background": {
+      "accent1BackgroundColor": {
         "value": "{background.accent.color1}",
         "type": "color"
       },
-      "accent1Icon": {
+      "accent1IconColor": {
         "value": "{icon.accent.color1}",
         "type": "color"
       },
-      "accent1Text": {
+      "accent1TextColor": {
         "value": "{text.accent.color1}",
         "type": "color"
       },
-      "accent2Background": {
+      "accent2BackgroundColor": {
         "value": "{background.accent.color2}",
         "type": "color"
       },
-      "accent2Icon": {
+      "accent2IconColor": {
         "value": "{icon.accent.color2}",
         "type": "color"
       },
-      "accent2Text": {
+      "accent2TextColor": {
         "value": "{text.accent.color2}",
         "type": "color"
       },
-      "accent3Background": {
+      "accent3BackgroundColor": {
         "value": "{background.accent.color3}",
         "type": "color"
       },
-      "accent3Icon": {
+      "accent3IconColor": {
         "value": "{icon.accent.color3}",
         "type": "color"
       },
-      "accent3Text": {
+      "accent3TextColor": {
         "value": "{text.accent.color3}",
         "type": "color"
       },
-      "accent4Background": {
+      "accent4BackgroundColor": {
         "value": "{background.accent.color4}",
         "type": "color"
       },
-      "accent4Icon": {
+      "accent4IconColor": {
         "value": "{icon.accent.color4}",
         "type": "color"
       },
-      "accent4Text": {
+      "accent4TextColor": {
         "value": "{text.accent.color4}",
         "type": "color"
       },
-      "accent5Background": {
+      "accent5BackgroundColor": {
         "value": "{background.accent.color5}",
         "type": "color"
       },
-      "accent5Icon": {
+      "accent5IconColor": {
         "value": "{icon.accent.color5}",
         "type": "color"
       },
-      "accent5Text": {
+      "accent5TextColor": {
         "value": "{text.accent.color5}",
         "type": "color"
       },
-      "accent6Background": {
+      "accent6BackgroundColor": {
         "value": "{background.accent.color6}",
         "type": "color"
       },
-      "accent6Icon": {
+      "accent6IconColor": {
         "value": "{icon.accent.color6}",
         "type": "color"
       },
-      "accent6text": {
+      "accent6TextColor": {
         "value": "{text.accent.color6}",
         "type": "color"
       },
-      "aiTopGradient": {
+      "aiTopGradientColor": {
         "value": "{background.aiTopGradient}",
         "type": "color"
       },
-      "aiBottomGradient": {
+      "aiBottomGradientColor": {
         "value": "{background.aiBottomGradient}",
         "type": "color"
       },
-      "aiFont": {
+      "aiFontColor": {
         "value": "{text.onColor}",
         "type": "color"
       },
@@ -2339,39 +2339,47 @@
         "value": "{fontSize.text2xl}",
         "type": "fontSizes"
       },
-      "separatorFontSizeSm": {
-        "value": "{size.icon.xs}",
-        "type": "sizing"
-      },
-      "separatorFontSizeMd": {
-        "value": "{size.icon.sm}",
-        "type": "sizing"
-      },
-      "separatorFontSizeLg": {
-        "value": "{size.icon.md}",
-        "type": "sizing"
-      },
       "fontSizeMd": {
         "value": "{fontSize.textBase}",
         "type": "fontSizes"
       },
-      "separator": {
+      "separatorColor": {
         "value": "{icon.muted}",
         "type": "color"
       },
       "fontSizeSm": {
         "value": "{fontSize.textSm}",
         "type": "fontSizes"
+      },
+      "fontColor": {
+        "value": "{text.base}",
+        "type": "color"
+      },
+      "iconColor": {
+        "value": "{icon.base}",
+        "type": "color"
+      },
+      "spaceBetweenElementsMd": {
+        "value": "{size.size4}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsLg": {
+        "value": "{size.size8}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsSm": {
+        "value": "{size.size2}",
+        "type": "spacing"
       }
     }
   },
   "canvas/component/FormFieldLabel": {
     "formFieldLabel": {
-      "text": {
+      "textColor": {
         "value": "{text.base}",
         "type": "color"
       },
-      "asterisk": {
+      "asteriskColor": {
         "value": "{text.base}",
         "type": "color"
       }
@@ -2379,19 +2387,19 @@
   },
   "canvas/component/FormFieldMessage": {
     "formFieldMessage": {
-      "hintText": {
+      "hintTextColor": {
         "value": "{text.base}",
         "type": "color"
       },
-      "errorText": {
+      "errorTextColor": {
         "value": "{text.error}",
         "type": "color"
       },
-      "errorIcon": {
+      "errorIconColor": {
         "value": "{icon.error}",
         "type": "color"
       },
-      "successText": {
+      "successTextColor": {
         "value": "{text.success}",
         "type": "color"
       },
@@ -2439,27 +2447,27 @@
         "value": "{icon.interactive.disabled.base}",
         "type": "color"
       },
-      "inverseTextColor": {
+      "onColorTextColor": {
         "value": "{text.interactive.primaryOnColor.base}",
         "type": "color"
       },
-      "inverseTextHoverColor": {
+      "onColorTextHoverColor": {
         "value": "{text.interactive.primaryOnColor.hover}",
         "type": "color"
       },
-      "inverseTextDisabledColor": {
+      "onColorTextDisabledColor": {
         "value": "{text.interactive.disabled.onColor}",
         "type": "color"
       },
-      "inverseIconColor": {
+      "onColorIconColor": {
         "value": "{icon.interactive.primaryOnColor.base}",
         "type": "color"
       },
-      "inverseIconHoverColor": {
+      "onColorIconHoverColor": {
         "value": "{icon.interactive.primaryOnColor.hover}",
         "type": "color"
       },
-      "inverseIconDisabledColor": {
+      "onColorIconDisabledColor": {
         "value": "{icon.interactive.disabled.onColor}",
         "type": "color"
       },
@@ -2479,16 +2487,16 @@
         "value": "{fontWeight.body.base}",
         "type": "fontWeights"
       },
-      "spaceBetweenElementsSm": {
-        "value": "{spacing.space2xs}",
-        "type": "spacing"
-      },
       "spaceBetweenElementsMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "spaceBetweenElementsLg": {
         "value": "{spacing.spaceXs}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsSm": {
+        "value": "{spacing.space2xs}",
         "type": "spacing"
       },
       "lineHeightSm": {
@@ -2551,7 +2559,7 @@
         "value": "24px",
         "type": "sizing"
       },
-      "background": {
+      "backgroundColor": {
         "value": "{background.base}",
         "type": "color"
       },
@@ -2571,47 +2579,47 @@
         "value": "240px",
         "type": "sizing"
       },
-      "baseText": {
+      "baseTextColor": {
         "value": "{text.base}",
         "type": "color"
       },
-      "baseIcon": {
+      "baseIconColor": {
         "value": "{icon.base}",
         "type": "color"
       },
-      "baseBorder": {
+      "baseBorderColor": {
         "value": "{stroke.base}",
         "type": "color"
       },
-      "infoText": {
+      "infoTextColor": {
         "value": "{text.info}",
         "type": "color"
       },
-      "infoIcon": {
+      "infoIconColor": {
         "value": "{icon.info}",
         "type": "color"
       },
-      "infoBorder": {
+      "infoBorderColor": {
         "value": "{stroke.info}",
         "type": "color"
       },
-      "errorText": {
+      "errorTextColor": {
         "value": "{text.error}",
         "type": "color"
       },
-      "errorIcon": {
+      "errorIconColor": {
         "value": "{icon.error}",
         "type": "color"
       },
-      "errorBorder": {
+      "errorBorderColor": {
         "value": "{stroke.error}",
         "type": "color"
       },
-      "successText": {
+      "successTextColor": {
         "value": "{text.success}",
         "type": "color"
       },
-      "successIcon": {
+      "successIconColor": {
         "value": "{icon.success}",
         "type": "color"
       },
@@ -2619,7 +2627,7 @@
         "value": "{stroke.success}",
         "type": "color"
       },
-      "warningText": {
+      "warningTextColor": {
         "value": "{text.warning}",
         "type": "color"
       },
@@ -2658,11 +2666,11 @@
   "canvas/component/Spinner": {
     "spinner": {
       "color": {
-        "value": "{background.info}",
+        "value": "{icon.info}",
         "type": "color"
       },
       "inverseColor": {
-        "value": "{background.info}",
+        "value": "{icon.onColor}",
         "type": "color"
       },
       "trackColor": {
@@ -2745,27 +2753,27 @@
         "value": "{icon.interactive.disabled.base}",
         "type": "color"
       },
-      "inverseTextColor": {
+      "onColorTextColor": {
         "value": "{text.interactive.primaryOnColor.base}",
         "type": "color"
       },
-      "inverseTextHoverColor": {
+      "onColorTextHoverColor": {
         "value": "{text.interactive.primaryOnColor.hover}",
         "type": "color"
       },
-      "inverseTextDisabledColor": {
+      "onColorTextDisabledColor": {
         "value": "{text.interactive.disabled.onColor}",
         "type": "color"
       },
-      "inverseIconColor": {
+      "onColorIconColor": {
         "value": "{icon.interactive.primaryOnColor.base}",
         "type": "color"
       },
-      "inverseIconHoverColor": {
+      "onColorIconHoverColor": {
         "value": "{icon.interactive.primaryOnColor.hover}",
         "type": "color"
       },
-      "inverseIconDisabledColor": {
+      "onColorIconDisabledColor": {
         "value": "{icon.interactive.disabled.onColor}",
         "type": "color"
       },
@@ -2785,16 +2793,16 @@
         "value": "{fontWeight.body.base}",
         "type": "fontWeights"
       },
-      "spaceBetweenElementsSm": {
-        "value": "{spacing.space2xs}",
-        "type": "spacing"
-      },
       "spaceBetweenElementsMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "spaceBetweenElementsLg": {
         "value": "{spacing.spaceXs}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsSm": {
+        "value": "{spacing.space2xs}",
         "type": "spacing"
       },
       "lineHeightSm": {
@@ -2813,11 +2821,11 @@
   },
   "rebrand/component/Avatar": {
     "avatar": {
-      "background": {
+      "backgroundColor": {
         "value": "{background.base}",
         "type": "color"
       },
-      "border": {
+      "borderColor": {
         "value": "{stroke.base}",
         "type": "color"
       },
@@ -2848,87 +2856,87 @@
         "value": "{fontWeight.heading.strong}",
         "type": "fontWeights"
       },
-      "accent1Background": {
+      "accent1BackgroundColor": {
         "value": "{background.accent.color1}",
         "type": "color"
       },
-      "accent1Icon": {
+      "accent1IconColor": {
         "value": "{icon.accent.color1}",
         "type": "color"
       },
-      "accent1Text": {
+      "accent1TextColor": {
         "value": "{text.accent.color1}",
         "type": "color"
       },
-      "accent2Background": {
+      "accent2BackgroundColor": {
         "value": "{background.accent.color2}",
         "type": "color"
       },
-      "accent2Icon": {
+      "accent2IconColor": {
         "value": "{icon.accent.color2}",
         "type": "color"
       },
-      "accent2Text": {
+      "accent2TextColor": {
         "value": "{text.accent.color2}",
         "type": "color"
       },
-      "accent3Background": {
+      "accent3BackgroundColor": {
         "value": "{background.accent.color3}",
         "type": "color"
       },
-      "accent3Icon": {
+      "accent3IconColor": {
         "value": "{icon.accent.color3}",
         "type": "color"
       },
-      "accent3Text": {
+      "accent3TextColor": {
         "value": "{text.accent.color3}",
         "type": "color"
       },
-      "accent4Background": {
+      "accent4BackgroundColor": {
         "value": "{background.accent.color4}",
         "type": "color"
       },
-      "accent4Icon": {
+      "accent4IconColor": {
         "value": "{icon.accent.color4}",
         "type": "color"
       },
-      "accent4Text": {
+      "accent4TextColor": {
         "value": "{text.accent.color4}",
         "type": "color"
       },
-      "accent5Background": {
+      "accent5BackgroundColor": {
         "value": "{background.accent.color5}",
         "type": "color"
       },
-      "accent5Icon": {
+      "accent5IconColor": {
         "value": "{icon.accent.color5}",
         "type": "color"
       },
-      "accent5Text": {
+      "accent5TextColor": {
         "value": "{text.accent.color5}",
         "type": "color"
       },
-      "accent6Background": {
+      "accent6BackgroundColor": {
         "value": "{background.accent.color6}",
         "type": "color"
       },
-      "accent6Icon": {
+      "accent6IconColor": {
         "value": "{icon.accent.color6}",
         "type": "color"
       },
-      "accent6text": {
+      "accent6TextColor": {
         "value": "{text.accent.color6}",
         "type": "color"
       },
-      "aiTopGradient": {
+      "aiTopGradientColor": {
         "value": "{background.aiTopGradient}",
         "type": "color"
       },
-      "aiBottomGradient": {
+      "aiBottomGradientColor": {
         "value": "{background.aiBottomGradient}",
         "type": "color"
       },
-      "aiFont": {
+      "aiFontColor": {
         "value": "{text.onColor}",
         "type": "color"
       },
@@ -2968,39 +2976,47 @@
         "value": "{fontSize.text2xl}",
         "type": "fontSizes"
       },
-      "separatorFontSizeSm": {
-        "value": "{size.icon.xs}",
-        "type": "sizing"
-      },
-      "separatorFontSizeMd": {
-        "value": "{size.icon.sm}",
-        "type": "sizing"
-      },
-      "separatorFontSizeLg": {
-        "value": "{size.icon.md}",
-        "type": "sizing"
-      },
       "fontSizeMd": {
         "value": "{fontSize.textBase}",
         "type": "fontSizes"
       },
-      "separator": {
+      "separatorColor": {
         "value": "{icon.muted}",
+        "type": "color"
+      },
+      "fontColor": {
+        "value": "{text.base}",
         "type": "color"
       },
       "fontSizeSm": {
         "value": "{fontSize.textSm}",
         "type": "fontSizes"
+      },
+      "iconColor": {
+        "value": "{icon.base}",
+        "type": "color"
+      },
+      "spaceBetweenElementsMd": {
+        "value": "{size.size4}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsLg": {
+        "value": "{size.size8}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsSm": {
+        "value": "{size.size2}",
+        "type": "spacing"
       }
     }
   },
   "rebrand/component/FormFieldLabel": {
     "formFieldLabel": {
-      "text": {
+      "textColor": {
         "value": "{text.base}",
         "type": "color"
       },
-      "asterisk": {
+      "asteriskColor": {
         "value": "{text.error}",
         "type": "color"
       }
@@ -3008,19 +3024,19 @@
   },
   "rebrand/component/FormFieldMessage": {
     "formFieldMessage": {
-      "hintText": {
+      "hintTextColor": {
         "value": "{text.base}",
         "type": "color"
       },
-      "errorText": {
+      "errorTextColor": {
         "value": "{text.error}",
         "type": "color"
       },
-      "errorIcon": {
+      "errorIconColor": {
         "value": "{icon.error}",
         "type": "color"
       },
-      "successText": {
+      "successTextColor": {
         "value": "{text.success}",
         "type": "color"
       },
@@ -3088,7 +3104,7 @@
         "value": "24px",
         "type": "sizing"
       },
-      "background": {
+      "backgroundColor": {
         "value": "{background.base}",
         "type": "color"
       },
@@ -3108,63 +3124,63 @@
         "value": "240px",
         "type": "sizing"
       },
-      "baseText": {
+      "baseTextColor": {
         "value": "{text.base}",
         "type": "color"
       },
-      "baseIcon": {
+      "baseIconColor": {
         "value": "{icon.base}",
         "type": "color"
       },
-      "baseBorder": {
+      "baseBorderColor": {
         "value": "{stroke.base}",
         "type": "color"
       },
-      "infoText": {
+      "infoTextColor": {
         "value": "{text.info}",
         "type": "color"
       },
-      "infoIcon": {
+      "infoIconColor": {
         "value": "{icon.info}",
         "type": "color"
       },
-      "infoBorder": {
+      "infoBorderColor": {
         "value": "{stroke.info}",
         "type": "color"
       },
-      "errorText": {
+      "errorTextColor": {
         "value": "{text.error}",
         "type": "color"
       },
-      "errorIcon": {
+      "errorIconColor": {
         "value": "{icon.error}",
         "type": "color"
       },
-      "errorBorder": {
-        "value": "{stroke.error}",
-        "type": "color"
-      },
-      "successText": {
+      "successTextColor": {
         "value": "{text.success}",
         "type": "color"
       },
-      "successIcon": {
+      "errorBorderColor": {
+        "value": "{stroke.error}",
+        "type": "color"
+      },
+      "successIconColor": {
         "value": "{icon.success}",
         "type": "color"
       },
-      "successBorder": {
+      "successBorderColor": {
         "value": "{stroke.success}",
         "type": "color"
       },
-      "warningText": {
+      "warningTextColor": {
         "value": "{text.warning}",
         "type": "color"
       },
-      "warningIcon": {
+      "warningIconColor": {
         "value": "{icon.warning}",
         "type": "color"
       },
-      "warningBorder": {
+      "warningBorderColor": {
         "value": "{stroke.warning}",
         "type": "color"
       },
@@ -3195,11 +3211,11 @@
   "rebrand/component/Spinner": {
     "spinner": {
       "color": {
-        "value": "{background.info}",
+        "value": "{icon.info}",
         "type": "color"
       },
       "inverseColor": {
-        "value": "{background.info}",
+        "value": "{icon.onColor}",
         "type": "color"
       },
       "trackColor": {
@@ -3868,7 +3884,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue60}",
+            "value": "{color.blue.blue110}",
             "type": "color"
           },
           "active": {
@@ -3974,7 +3990,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue60}",
+            "value": "{color.blue.blue110}",
             "type": "color"
           },
           "active": {
@@ -4098,7 +4114,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue60}",
+            "value": "{color.blue.blue110}",
             "type": "color"
           },
           "active": {
@@ -4721,7 +4737,6 @@
         "secondaryBg": "S:5988067f45bc08b82245433bf0714eef28ed3a5f,"
       },
       "$figmaVariableReferences": {
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -4746,6 +4761,12 @@
         "background.interactive.destructive.base": "65146cf23a21107e65f7985ba168f4a6476a7436",
         "background.interactive.destructive.hover": "16e439fc3b121dc3e4bf24739abcac4b3f2db93c",
         "background.interactive.destructive.active": "ed0a9b3413fcad3f451cb22a70eb16a59392b9b4",
+        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
+        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
+        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
+        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
+        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
+        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "stroke.base": "f68d64e91be296dbc1914792050e726a48873970",
         "stroke.muted": "84c45604667e0d2307145846ed5bfa50cf54a4a8",
         "stroke.success": "7884b713bad25920d6d1bd2f9387c179c1fc7f84",
@@ -4796,6 +4817,12 @@
         "text.interactive.destructive.base": "c3573cdb93f86f846f9e8c654f58e574b119b004",
         "text.interactive.destructive.hover": "e8c7e554b0d61bc004a5e5a84ad110b1a489de7f",
         "text.interactive.destructive.active": "f0818dbc7a6ed0bfd620b5edc4ae52893dde76d6",
+        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
+        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
+        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
+        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
+        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
+        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
         "icon.base": "56f18e2719f4eeaebb028f9002cd4734daea123b",
         "icon.muted": "a3acfbe4a8d8eefd92cccab39d31f47708463595",
         "icon.success": "40e7d8843bee2baced44df460cc811d3458c6ca0",
@@ -4817,62 +4844,60 @@
         "icon.interactive.destructive.base": "8a7b0b889d1c6a2921cf94d394382e98cef174af",
         "icon.interactive.destructive.hover": "2fb7cf5cf452e2559b72b1c974e99727b379f941",
         "icon.interactive.destructive.active": "4e8fe88565fab1390696348b9f9f9f5350aa4b18",
-        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
-        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
-        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
-        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
-        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
-        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "icon.accent.color1": "60be997ea83723b9cac11c6eb82e0d2ced7446eb",
         "icon.accent.color2": "0db471337eb1bdff4e5d004afe5500afc16ab95c",
         "icon.accent.color3": "2f980d2f2761c00fbb2d80c425f3265cc36ae91b",
         "icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
-        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
-        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
-        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
-        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
-        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
-        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
         "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
         "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
         "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
-        "link.inverseTextColor": "bae621d9007792e2a9c65943ff558a365dcb1074",
-        "link.inverseTextHoverColor": "8055e7611ab5e8a85d8b5037a578c430a5b9ebb1",
-        "link.inverseTextDisabledColor": "c39327ec6b6fde43198e8e25026f51bc35c6e685",
-        "link.inverseIconColor": "25017c7b3c33d6902f3ae102836c7458e8b36a28",
-        "link.inverseIconHoverColor": "575ceb0c2632297ea019380b935ea170924568cd",
-        "link.inverseIconDisabledColor": "5e725c276159ecca1318cf0322a1a8dd3de5a14e",
+        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
+        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
+        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
+        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
+        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
+        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
+        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
+        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
+        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "avatar.background": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
-        "avatar.border": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
+        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
+        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
+        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
+        "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
+        "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
+        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
         "avatar.fontWeight": "5950dea9a61b8d5a02f45a57ba92fce9dbd5071a",
-        "avatar.accent1Background": "7c9400856559832772c38768b01b1aa114005c1f",
-        "avatar.accent1Icon": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
-        "avatar.accent1Text": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
-        "avatar.accent2Background": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
-        "avatar.accent2Icon": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
-        "avatar.accent2Text": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
-        "avatar.accent3Background": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
-        "avatar.accent3Icon": "9944b032abe4966a008f193d7c164ec44ab44cf7",
-        "avatar.accent3Text": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
-        "avatar.accent4Background": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
-        "avatar.accent4Icon": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
-        "avatar.accent4Text": "d2006898bfc4057b47caa31aa86df392a8019637",
-        "avatar.accent5Background": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
-        "avatar.accent5Icon": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
-        "avatar.accent5Text": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
-        "avatar.accent6Background": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
-        "avatar.accent6Icon": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
-        "avatar.accent6text": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradient": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
-        "avatar.aiBottomGradient": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.aiFont": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.accent1BackgroundColor": "7c9400856559832772c38768b01b1aa114005c1f",
+        "avatar.accent1IconColor": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
+        "avatar.accent1TextColor": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
+        "avatar.accent2BackgroundColor": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
+        "avatar.accent2IconColor": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
+        "avatar.accent2TextColor": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
+        "avatar.accent3BackgroundColor": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
+        "avatar.accent3IconColor": "9944b032abe4966a008f193d7c164ec44ab44cf7",
+        "avatar.accent3TextColor": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
+        "avatar.accent4BackgroundColor": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
+        "avatar.accent4IconColor": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
+        "avatar.accent4TextColor": "d2006898bfc4057b47caa31aa86df392a8019637",
+        "avatar.accent5BackgroundColor": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
+        "avatar.accent5IconColor": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
+        "avatar.accent5TextColor": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
+        "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
+        "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
+        "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
+        "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
+        "avatar.aiFontColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -4881,18 +4906,20 @@
         "avatar.sizeXl": "032b43f918266ce70fab20ceeeaf2a70117cbc2e",
         "avatar.size2xl": "1071e2c826a762c0c0a3e5ff1790d9d7d498d74b",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
-        "breadcrumb.separatorFontSizeSm": "690a1f02fcccffa2582d3da6242fe83384e6f703",
-        "breadcrumb.separatorFontSizeMd": "b59917a09e5dee6a95a2225f81521a730570f37a",
-        "breadcrumb.separatorFontSizeLg": "d50ec62b64b49ad4824aa09d7ba0d405648a48fb",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
-        "breadcrumb.separator": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
+        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
+        "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
-        "formFieldLabel.text": "02702235fbfad166e120832358e7e30ce3447a65",
-        "formFieldLabel.asterisk": "feaaa45f0f4c0db898ee09699adc051fffc43695",
-        "formFieldMessage.hintText": "376aca078b03f6abf41cb4e946710858da2d721d",
-        "formFieldMessage.errorText": "663a0f658d742868513126254e17ba76d466cd0c",
-        "formFieldMessage.errorIcon": "67536b51fc56bc7efb11aed8f70c605d781caff1",
-        "formFieldMessage.successText": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
+        "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
+        "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
+        "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -4907,26 +4934,23 @@
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
-        "pill.background": "3b90cfbd344580bfc556aaffd26112efa28f1567",
+        "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
         "pill.textFontSize": "acc3755161f3643f9c9edcaf53d9a9fad9935ac0",
         "pill.textFontWeight": "d57e2cd27e309375052984307944c7ade665c1d2",
         "pill.statusLabelFontWeight": "a48624f8c5059f13b178a83708e4eb117b02df04",
         "pill.maxWidth": "5c2638f9ed0d3fc74ee24d58781854f70baf0354",
-        "pill.baseText": "4ca08518227568188a645947d65d0ff3944a72fc",
-        "pill.baseIcon": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
-        "pill.baseBorder": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
-        "pill.infoText": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
-        "pill.infoIcon": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
-        "pill.infoBorder": "d67299e7078e0b1a21ede087365e84766e94fd84",
-        "pill.errorText": "cb66781394f58b900c4e8f95140992ab00c0af56",
-        "pill.errorIcon": "b784890b7a8796a477ef4be307631ef5971ad2ab",
-        "pill.errorBorder": "903fab156ba153f71824803a9fa7e9068f90c839",
-        "pill.successText": "950f1055688698168efc5ff77464a7f8c314d61f",
-        "pill.successIcon": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
-        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
-        "pill.warningText": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
-        "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "pill.baseTextColor": "4ca08518227568188a645947d65d0ff3944a72fc",
+        "pill.baseIconColor": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
+        "pill.baseBorderColor": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
+        "pill.infoTextColor": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
+        "pill.infoIconColor": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
+        "pill.infoBorderColor": "d67299e7078e0b1a21ede087365e84766e94fd84",
+        "pill.errorTextColor": "cb66781394f58b900c4e8f95140992ab00c0af56",
+        "pill.errorIconColor": "b784890b7a8796a477ef4be307631ef5971ad2ab",
+        "pill.successTextColor": "950f1055688698168efc5ff77464a7f8c314d61f",
+        "pill.errorBorderColor": "903fab156ba153f71824803a9fa7e9068f90c839",
+        "pill.successIconColor": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
+        "pill.warningTextColor": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
@@ -4955,6 +4979,7 @@
         "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
         "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
         "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
+        "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
         "spacing.spaceMd": "375ea7714c171d4e881fc42a1c20ac1bdfd4a77f",
@@ -4971,7 +4996,7 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.xs": "1f3b1c95557e756b4eac4e64b18d41ae9a203a62",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
@@ -5024,15 +5049,10 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
-        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
-        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
-        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
-        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
-        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9"
+        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
+        "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
+        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5063,7 +5083,6 @@
         "input.large": "S:87bd6300ece97ed512480cdc179f761e05ecefe5,"
       },
       "$figmaVariableReferences": {
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -5088,6 +5107,12 @@
         "background.interactive.destructive.base": "65146cf23a21107e65f7985ba168f4a6476a7436",
         "background.interactive.destructive.hover": "16e439fc3b121dc3e4bf24739abcac4b3f2db93c",
         "background.interactive.destructive.active": "ed0a9b3413fcad3f451cb22a70eb16a59392b9b4",
+        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
+        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
+        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
+        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
+        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
+        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "stroke.base": "f68d64e91be296dbc1914792050e726a48873970",
         "stroke.muted": "84c45604667e0d2307145846ed5bfa50cf54a4a8",
         "stroke.success": "7884b713bad25920d6d1bd2f9387c179c1fc7f84",
@@ -5138,6 +5163,12 @@
         "text.interactive.destructive.base": "c3573cdb93f86f846f9e8c654f58e574b119b004",
         "text.interactive.destructive.hover": "e8c7e554b0d61bc004a5e5a84ad110b1a489de7f",
         "text.interactive.destructive.active": "f0818dbc7a6ed0bfd620b5edc4ae52893dde76d6",
+        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
+        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
+        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
+        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
+        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
+        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
         "icon.base": "56f18e2719f4eeaebb028f9002cd4734daea123b",
         "icon.muted": "a3acfbe4a8d8eefd92cccab39d31f47708463595",
         "icon.success": "40e7d8843bee2baced44df460cc811d3458c6ca0",
@@ -5159,62 +5190,60 @@
         "icon.interactive.destructive.base": "8a7b0b889d1c6a2921cf94d394382e98cef174af",
         "icon.interactive.destructive.hover": "2fb7cf5cf452e2559b72b1c974e99727b379f941",
         "icon.interactive.destructive.active": "4e8fe88565fab1390696348b9f9f9f5350aa4b18",
-        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
-        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
-        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
-        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
-        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
-        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "icon.accent.color1": "60be997ea83723b9cac11c6eb82e0d2ced7446eb",
         "icon.accent.color2": "0db471337eb1bdff4e5d004afe5500afc16ab95c",
         "icon.accent.color3": "2f980d2f2761c00fbb2d80c425f3265cc36ae91b",
         "icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
-        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
-        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
-        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
-        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
-        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
-        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
         "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
         "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
         "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
-        "link.inverseTextColor": "bae621d9007792e2a9c65943ff558a365dcb1074",
-        "link.inverseTextHoverColor": "8055e7611ab5e8a85d8b5037a578c430a5b9ebb1",
-        "link.inverseTextDisabledColor": "c39327ec6b6fde43198e8e25026f51bc35c6e685",
-        "link.inverseIconColor": "25017c7b3c33d6902f3ae102836c7458e8b36a28",
-        "link.inverseIconHoverColor": "575ceb0c2632297ea019380b935ea170924568cd",
-        "link.inverseIconDisabledColor": "5e725c276159ecca1318cf0322a1a8dd3de5a14e",
+        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
+        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
+        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
+        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
+        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
+        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
+        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
+        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
+        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "avatar.background": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
-        "avatar.border": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
+        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
+        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
+        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
+        "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
+        "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
+        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
         "avatar.fontWeight": "5950dea9a61b8d5a02f45a57ba92fce9dbd5071a",
-        "avatar.accent1Background": "7c9400856559832772c38768b01b1aa114005c1f",
-        "avatar.accent1Icon": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
-        "avatar.accent1Text": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
-        "avatar.accent2Background": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
-        "avatar.accent2Icon": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
-        "avatar.accent2Text": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
-        "avatar.accent3Background": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
-        "avatar.accent3Icon": "9944b032abe4966a008f193d7c164ec44ab44cf7",
-        "avatar.accent3Text": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
-        "avatar.accent4Background": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
-        "avatar.accent4Icon": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
-        "avatar.accent4Text": "d2006898bfc4057b47caa31aa86df392a8019637",
-        "avatar.accent5Background": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
-        "avatar.accent5Icon": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
-        "avatar.accent5Text": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
-        "avatar.accent6Background": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
-        "avatar.accent6Icon": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
-        "avatar.accent6text": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradient": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
-        "avatar.aiBottomGradient": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.aiFont": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.accent1BackgroundColor": "7c9400856559832772c38768b01b1aa114005c1f",
+        "avatar.accent1IconColor": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
+        "avatar.accent1TextColor": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
+        "avatar.accent2BackgroundColor": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
+        "avatar.accent2IconColor": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
+        "avatar.accent2TextColor": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
+        "avatar.accent3BackgroundColor": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
+        "avatar.accent3IconColor": "9944b032abe4966a008f193d7c164ec44ab44cf7",
+        "avatar.accent3TextColor": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
+        "avatar.accent4BackgroundColor": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
+        "avatar.accent4IconColor": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
+        "avatar.accent4TextColor": "d2006898bfc4057b47caa31aa86df392a8019637",
+        "avatar.accent5BackgroundColor": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
+        "avatar.accent5IconColor": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
+        "avatar.accent5TextColor": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
+        "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
+        "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
+        "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
+        "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
+        "avatar.aiFontColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5223,18 +5252,20 @@
         "avatar.sizeXl": "032b43f918266ce70fab20ceeeaf2a70117cbc2e",
         "avatar.size2xl": "1071e2c826a762c0c0a3e5ff1790d9d7d498d74b",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
-        "breadcrumb.separatorFontSizeSm": "690a1f02fcccffa2582d3da6242fe83384e6f703",
-        "breadcrumb.separatorFontSizeMd": "b59917a09e5dee6a95a2225f81521a730570f37a",
-        "breadcrumb.separatorFontSizeLg": "d50ec62b64b49ad4824aa09d7ba0d405648a48fb",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
-        "breadcrumb.separator": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
+        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
+        "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
-        "formFieldLabel.text": "02702235fbfad166e120832358e7e30ce3447a65",
-        "formFieldLabel.asterisk": "feaaa45f0f4c0db898ee09699adc051fffc43695",
-        "formFieldMessage.hintText": "376aca078b03f6abf41cb4e946710858da2d721d",
-        "formFieldMessage.errorText": "663a0f658d742868513126254e17ba76d466cd0c",
-        "formFieldMessage.errorIcon": "67536b51fc56bc7efb11aed8f70c605d781caff1",
-        "formFieldMessage.successText": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
+        "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
+        "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
+        "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -5249,26 +5280,23 @@
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
-        "pill.background": "3b90cfbd344580bfc556aaffd26112efa28f1567",
+        "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
         "pill.textFontSize": "acc3755161f3643f9c9edcaf53d9a9fad9935ac0",
         "pill.textFontWeight": "d57e2cd27e309375052984307944c7ade665c1d2",
         "pill.statusLabelFontWeight": "a48624f8c5059f13b178a83708e4eb117b02df04",
         "pill.maxWidth": "5c2638f9ed0d3fc74ee24d58781854f70baf0354",
-        "pill.baseText": "4ca08518227568188a645947d65d0ff3944a72fc",
-        "pill.baseIcon": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
-        "pill.baseBorder": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
-        "pill.infoText": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
-        "pill.infoIcon": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
-        "pill.infoBorder": "d67299e7078e0b1a21ede087365e84766e94fd84",
-        "pill.errorText": "cb66781394f58b900c4e8f95140992ab00c0af56",
-        "pill.errorIcon": "b784890b7a8796a477ef4be307631ef5971ad2ab",
-        "pill.errorBorder": "903fab156ba153f71824803a9fa7e9068f90c839",
-        "pill.successText": "950f1055688698168efc5ff77464a7f8c314d61f",
-        "pill.successIcon": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
-        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
-        "pill.warningText": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
-        "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "pill.baseTextColor": "4ca08518227568188a645947d65d0ff3944a72fc",
+        "pill.baseIconColor": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
+        "pill.baseBorderColor": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
+        "pill.infoTextColor": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
+        "pill.infoIconColor": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
+        "pill.infoBorderColor": "d67299e7078e0b1a21ede087365e84766e94fd84",
+        "pill.errorTextColor": "cb66781394f58b900c4e8f95140992ab00c0af56",
+        "pill.errorIconColor": "b784890b7a8796a477ef4be307631ef5971ad2ab",
+        "pill.successTextColor": "950f1055688698168efc5ff77464a7f8c314d61f",
+        "pill.errorBorderColor": "903fab156ba153f71824803a9fa7e9068f90c839",
+        "pill.successIconColor": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
+        "pill.warningTextColor": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
@@ -5297,6 +5325,7 @@
         "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
         "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
         "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
+        "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
         "spacing.spaceMd": "375ea7714c171d4e881fc42a1c20ac1bdfd4a77f",
@@ -5313,7 +5342,7 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.xs": "1f3b1c95557e756b4eac4e64b18d41ae9a203a62",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
@@ -5366,15 +5395,10 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
-        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
-        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
-        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
-        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
-        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9"
+        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
+        "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
+        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -5407,6 +5431,7 @@
         "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
         "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
         "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
+        "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
         "spacing.spaceMd": "375ea7714c171d4e881fc42a1c20ac1bdfd4a77f",
@@ -5423,6 +5448,7 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
@@ -5475,7 +5501,6 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -5500,6 +5525,12 @@
         "background.interactive.destructive.base": "65146cf23a21107e65f7985ba168f4a6476a7436",
         "background.interactive.destructive.hover": "16e439fc3b121dc3e4bf24739abcac4b3f2db93c",
         "background.interactive.destructive.active": "ed0a9b3413fcad3f451cb22a70eb16a59392b9b4",
+        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
+        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
+        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
+        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
+        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
+        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "stroke.base": "f68d64e91be296dbc1914792050e726a48873970",
         "stroke.muted": "84c45604667e0d2307145846ed5bfa50cf54a4a8",
         "stroke.success": "7884b713bad25920d6d1bd2f9387c179c1fc7f84",
@@ -5550,6 +5581,12 @@
         "text.interactive.destructive.base": "c3573cdb93f86f846f9e8c654f58e574b119b004",
         "text.interactive.destructive.hover": "e8c7e554b0d61bc004a5e5a84ad110b1a489de7f",
         "text.interactive.destructive.active": "f0818dbc7a6ed0bfd620b5edc4ae52893dde76d6",
+        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
+        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
+        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
+        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
+        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
+        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
         "icon.base": "56f18e2719f4eeaebb028f9002cd4734daea123b",
         "icon.muted": "a3acfbe4a8d8eefd92cccab39d31f47708463595",
         "icon.success": "40e7d8843bee2baced44df460cc811d3458c6ca0",
@@ -5571,49 +5608,38 @@
         "icon.interactive.destructive.base": "8a7b0b889d1c6a2921cf94d394382e98cef174af",
         "icon.interactive.destructive.hover": "2fb7cf5cf452e2559b72b1c974e99727b379f941",
         "icon.interactive.destructive.active": "4e8fe88565fab1390696348b9f9f9f5350aa4b18",
-        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
-        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
-        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
-        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
-        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
-        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "icon.accent.color1": "60be997ea83723b9cac11c6eb82e0d2ced7446eb",
         "icon.accent.color2": "0db471337eb1bdff4e5d004afe5500afc16ab95c",
         "icon.accent.color3": "2f980d2f2761c00fbb2d80c425f3265cc36ae91b",
         "icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
-        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
-        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
-        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
-        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
-        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
-        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
-        "avatar.background": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
-        "avatar.border": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
+        "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
+        "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
+        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
         "avatar.fontWeight": "5950dea9a61b8d5a02f45a57ba92fce9dbd5071a",
-        "avatar.accent1Background": "7c9400856559832772c38768b01b1aa114005c1f",
-        "avatar.accent1Icon": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
-        "avatar.accent1Text": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
-        "avatar.accent2Background": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
-        "avatar.accent2Icon": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
-        "avatar.accent2Text": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
-        "avatar.accent3Background": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
-        "avatar.accent3Icon": "9944b032abe4966a008f193d7c164ec44ab44cf7",
-        "avatar.accent3Text": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
-        "avatar.accent4Background": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
-        "avatar.accent4Icon": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
-        "avatar.accent4Text": "d2006898bfc4057b47caa31aa86df392a8019637",
-        "avatar.accent5Background": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
-        "avatar.accent5Icon": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
-        "avatar.accent5Text": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
-        "avatar.accent6Background": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
-        "avatar.accent6Icon": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
-        "avatar.accent6text": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradient": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
-        "avatar.aiBottomGradient": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.aiFont": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.accent1BackgroundColor": "7c9400856559832772c38768b01b1aa114005c1f",
+        "avatar.accent1IconColor": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
+        "avatar.accent1TextColor": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
+        "avatar.accent2BackgroundColor": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
+        "avatar.accent2IconColor": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
+        "avatar.accent2TextColor": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
+        "avatar.accent3BackgroundColor": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
+        "avatar.accent3IconColor": "9944b032abe4966a008f193d7c164ec44ab44cf7",
+        "avatar.accent3TextColor": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
+        "avatar.accent4BackgroundColor": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
+        "avatar.accent4IconColor": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
+        "avatar.accent4TextColor": "d2006898bfc4057b47caa31aa86df392a8019637",
+        "avatar.accent5BackgroundColor": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
+        "avatar.accent5IconColor": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
+        "avatar.accent5TextColor": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
+        "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
+        "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
+        "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
+        "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
+        "avatar.aiFontColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5622,18 +5648,20 @@
         "avatar.sizeXl": "032b43f918266ce70fab20ceeeaf2a70117cbc2e",
         "avatar.size2xl": "1071e2c826a762c0c0a3e5ff1790d9d7d498d74b",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
-        "breadcrumb.separatorFontSizeSm": "690a1f02fcccffa2582d3da6242fe83384e6f703",
-        "breadcrumb.separatorFontSizeMd": "b59917a09e5dee6a95a2225f81521a730570f37a",
-        "breadcrumb.separatorFontSizeLg": "d50ec62b64b49ad4824aa09d7ba0d405648a48fb",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
-        "breadcrumb.separator": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
+        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
-        "formFieldLabel.text": "02702235fbfad166e120832358e7e30ce3447a65",
-        "formFieldLabel.asterisk": "feaaa45f0f4c0db898ee09699adc051fffc43695",
-        "formFieldMessage.hintText": "376aca078b03f6abf41cb4e946710858da2d721d",
-        "formFieldMessage.errorText": "663a0f658d742868513126254e17ba76d466cd0c",
-        "formFieldMessage.errorIcon": "67536b51fc56bc7efb11aed8f70c605d781caff1",
-        "formFieldMessage.successText": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
+        "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
+        "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
+        "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
+        "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -5644,13 +5672,22 @@
         "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
         "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
         "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
-        "link.inverseTextColor": "bae621d9007792e2a9c65943ff558a365dcb1074",
-        "link.inverseTextHoverColor": "8055e7611ab5e8a85d8b5037a578c430a5b9ebb1",
-        "link.inverseTextDisabledColor": "c39327ec6b6fde43198e8e25026f51bc35c6e685",
-        "link.inverseIconColor": "25017c7b3c33d6902f3ae102836c7458e8b36a28",
-        "link.inverseIconHoverColor": "575ceb0c2632297ea019380b935ea170924568cd",
-        "link.inverseIconDisabledColor": "5e725c276159ecca1318cf0322a1a8dd3de5a14e",
+        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
+        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
+        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
+        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
+        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
+        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
+        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
+        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
+        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
+        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
+        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
+        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
         "metric.labelColor": "79fec9334e531e20cdeba764f0e16d666572d4f0",
         "metric.labelFontSize": "a69ea27ee6c412c7203ae6d4e6bdcbb2d81c7ee2",
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
@@ -5661,26 +5698,23 @@
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
-        "pill.background": "3b90cfbd344580bfc556aaffd26112efa28f1567",
+        "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
         "pill.textFontSize": "acc3755161f3643f9c9edcaf53d9a9fad9935ac0",
         "pill.textFontWeight": "d57e2cd27e309375052984307944c7ade665c1d2",
         "pill.statusLabelFontWeight": "a48624f8c5059f13b178a83708e4eb117b02df04",
         "pill.maxWidth": "5c2638f9ed0d3fc74ee24d58781854f70baf0354",
-        "pill.baseText": "4ca08518227568188a645947d65d0ff3944a72fc",
-        "pill.baseIcon": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
-        "pill.baseBorder": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
-        "pill.infoText": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
-        "pill.infoIcon": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
-        "pill.infoBorder": "d67299e7078e0b1a21ede087365e84766e94fd84",
-        "pill.errorText": "cb66781394f58b900c4e8f95140992ab00c0af56",
-        "pill.errorIcon": "b784890b7a8796a477ef4be307631ef5971ad2ab",
-        "pill.errorBorder": "903fab156ba153f71824803a9fa7e9068f90c839",
-        "pill.successText": "950f1055688698168efc5ff77464a7f8c314d61f",
-        "pill.successIcon": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
-        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
-        "pill.warningText": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
-        "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "pill.baseTextColor": "4ca08518227568188a645947d65d0ff3944a72fc",
+        "pill.baseIconColor": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
+        "pill.baseBorderColor": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
+        "pill.infoTextColor": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
+        "pill.infoIconColor": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
+        "pill.infoBorderColor": "d67299e7078e0b1a21ede087365e84766e94fd84",
+        "pill.errorTextColor": "cb66781394f58b900c4e8f95140992ab00c0af56",
+        "pill.errorIconColor": "b784890b7a8796a477ef4be307631ef5971ad2ab",
+        "pill.errorBorderColor": "903fab156ba153f71824803a9fa7e9068f90c839",
+        "pill.successTextColor": "950f1055688698168efc5ff77464a7f8c314d61f",
+        "pill.successIconColor": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
+        "pill.warningTextColor": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
@@ -5700,15 +5734,10 @@
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
         "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
-        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
-        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
-        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
-        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
-        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
-        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9"
+        "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
+        "pill.warningIconColor": "58e67a0bb640181382fad4fa1e2aa0e771251512",
+        "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -5746,6 +5775,7 @@
         "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
         "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
         "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
+        "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
         "spacing.spaceMd": "375ea7714c171d4e881fc42a1c20ac1bdfd4a77f",
@@ -5762,6 +5792,7 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
@@ -5814,7 +5845,6 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -5839,6 +5869,12 @@
         "background.interactive.destructive.base": "65146cf23a21107e65f7985ba168f4a6476a7436",
         "background.interactive.destructive.hover": "16e439fc3b121dc3e4bf24739abcac4b3f2db93c",
         "background.interactive.destructive.active": "ed0a9b3413fcad3f451cb22a70eb16a59392b9b4",
+        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
+        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
+        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
+        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
+        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
+        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "stroke.base": "f68d64e91be296dbc1914792050e726a48873970",
         "stroke.muted": "84c45604667e0d2307145846ed5bfa50cf54a4a8",
         "stroke.success": "7884b713bad25920d6d1bd2f9387c179c1fc7f84",
@@ -5889,6 +5925,12 @@
         "text.interactive.destructive.base": "c3573cdb93f86f846f9e8c654f58e574b119b004",
         "text.interactive.destructive.hover": "e8c7e554b0d61bc004a5e5a84ad110b1a489de7f",
         "text.interactive.destructive.active": "f0818dbc7a6ed0bfd620b5edc4ae52893dde76d6",
+        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
+        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
+        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
+        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
+        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
+        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
         "icon.base": "56f18e2719f4eeaebb028f9002cd4734daea123b",
         "icon.muted": "a3acfbe4a8d8eefd92cccab39d31f47708463595",
         "icon.success": "40e7d8843bee2baced44df460cc811d3458c6ca0",
@@ -5910,49 +5952,38 @@
         "icon.interactive.destructive.base": "8a7b0b889d1c6a2921cf94d394382e98cef174af",
         "icon.interactive.destructive.hover": "2fb7cf5cf452e2559b72b1c974e99727b379f941",
         "icon.interactive.destructive.active": "4e8fe88565fab1390696348b9f9f9f5350aa4b18",
-        "background.accent.color1": "b8ffb0dbc1dd4a49f20502dbdd0ba1b564673bfb",
-        "background.accent.color2": "50c38e9fdd5ea128a65db7caa6e042eca3285184",
-        "background.accent.color3": "667e04580ff6ef6b0e38e14d36ac27e4db13009f",
-        "background.accent.color4": "77ecd76f3c4bbbb6fed5dbb03dda0e9aa90bb996",
-        "background.accent.color5": "2f139d99bce74e8ca9755be3e5e99f12664a24b6",
-        "background.accent.color6": "ad424b50ce1f7531414296485546fd30fe6c2e42",
         "icon.accent.color1": "60be997ea83723b9cac11c6eb82e0d2ced7446eb",
         "icon.accent.color2": "0db471337eb1bdff4e5d004afe5500afc16ab95c",
         "icon.accent.color3": "2f980d2f2761c00fbb2d80c425f3265cc36ae91b",
         "icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
-        "text.accent.color1": "23f46462b0b3265ad426de6b7a0d0d4e13046ee3",
-        "text.accent.color2": "5af7a7c0507285d29d5b3219c014c29deea839ab",
-        "text.accent.color3": "f53b93402ca0d0014c207509379ab46874ed6df6",
-        "text.accent.color4": "e4e807a3c986ae3c8caf1b44c69f8e1de17a8f58",
-        "text.accent.color5": "14c350714e836768db05e45f03a18552787edc0a",
-        "text.accent.color6": "7a512c90633f48d57abd1bfb4ea6458d3a7ca4b2",
-        "avatar.background": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
-        "avatar.border": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
+        "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
+        "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
+        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
         "avatar.fontWeight": "5950dea9a61b8d5a02f45a57ba92fce9dbd5071a",
-        "avatar.accent1Background": "7c9400856559832772c38768b01b1aa114005c1f",
-        "avatar.accent1Icon": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
-        "avatar.accent1Text": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
-        "avatar.accent2Background": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
-        "avatar.accent2Icon": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
-        "avatar.accent2Text": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
-        "avatar.accent3Background": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
-        "avatar.accent3Icon": "9944b032abe4966a008f193d7c164ec44ab44cf7",
-        "avatar.accent3Text": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
-        "avatar.accent4Background": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
-        "avatar.accent4Icon": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
-        "avatar.accent4Text": "d2006898bfc4057b47caa31aa86df392a8019637",
-        "avatar.accent5Background": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
-        "avatar.accent5Icon": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
-        "avatar.accent5Text": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
-        "avatar.accent6Background": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
-        "avatar.accent6Icon": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
-        "avatar.accent6text": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradient": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
-        "avatar.aiBottomGradient": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.aiFont": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.accent1BackgroundColor": "7c9400856559832772c38768b01b1aa114005c1f",
+        "avatar.accent1IconColor": "6a29005ca767fb6946e8edd77d45fb1f7bc6a515",
+        "avatar.accent1TextColor": "ffc82fbfc296d93a868ddb93104f0eae0751951c",
+        "avatar.accent2BackgroundColor": "06cbaf1073134dd1e565c60376cb4467fc51cff1",
+        "avatar.accent2IconColor": "c3ba220ca9b44af1b8633a294fd05ebf778ae5ac",
+        "avatar.accent2TextColor": "d7e5db5874cdc0efc843304bb1c537344f50c0c6",
+        "avatar.accent3BackgroundColor": "cfdc10b85eb18f98fd6dbccd8b56518f3527a4cc",
+        "avatar.accent3IconColor": "9944b032abe4966a008f193d7c164ec44ab44cf7",
+        "avatar.accent3TextColor": "b39164f4e30912de6cb190a1dbe7565f0ca24b4c",
+        "avatar.accent4BackgroundColor": "e275552578fe563a0f17f7ff2bd2f37c1bd49304",
+        "avatar.accent4IconColor": "f5db843627570f389ebf6b9f464b6ef7414f81a2",
+        "avatar.accent4TextColor": "d2006898bfc4057b47caa31aa86df392a8019637",
+        "avatar.accent5BackgroundColor": "57e675c037bd1fc0bd1fab2831d32d83489a857d",
+        "avatar.accent5IconColor": "e2c81822c7f20f1ad82f3b809c080d6e1aa9b7a9",
+        "avatar.accent5TextColor": "0ba29485abc5c5973c5fe83c079a1123b8f51b5d",
+        "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
+        "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
+        "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
+        "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
+        "avatar.aiFontColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5961,18 +5992,20 @@
         "avatar.sizeXl": "032b43f918266ce70fab20ceeeaf2a70117cbc2e",
         "avatar.size2xl": "1071e2c826a762c0c0a3e5ff1790d9d7d498d74b",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
-        "breadcrumb.separatorFontSizeSm": "690a1f02fcccffa2582d3da6242fe83384e6f703",
-        "breadcrumb.separatorFontSizeMd": "b59917a09e5dee6a95a2225f81521a730570f37a",
-        "breadcrumb.separatorFontSizeLg": "d50ec62b64b49ad4824aa09d7ba0d405648a48fb",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
-        "breadcrumb.separator": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
+        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
-        "formFieldLabel.text": "02702235fbfad166e120832358e7e30ce3447a65",
-        "formFieldLabel.asterisk": "feaaa45f0f4c0db898ee09699adc051fffc43695",
-        "formFieldMessage.hintText": "376aca078b03f6abf41cb4e946710858da2d721d",
-        "formFieldMessage.errorText": "663a0f658d742868513126254e17ba76d466cd0c",
-        "formFieldMessage.errorIcon": "67536b51fc56bc7efb11aed8f70c605d781caff1",
-        "formFieldMessage.successText": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
+        "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
+        "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
+        "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
+        "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -5983,13 +6016,22 @@
         "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
         "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
         "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
-        "link.inverseTextColor": "bae621d9007792e2a9c65943ff558a365dcb1074",
-        "link.inverseTextHoverColor": "8055e7611ab5e8a85d8b5037a578c430a5b9ebb1",
-        "link.inverseTextDisabledColor": "c39327ec6b6fde43198e8e25026f51bc35c6e685",
-        "link.inverseIconColor": "25017c7b3c33d6902f3ae102836c7458e8b36a28",
-        "link.inverseIconHoverColor": "575ceb0c2632297ea019380b935ea170924568cd",
-        "link.inverseIconDisabledColor": "5e725c276159ecca1318cf0322a1a8dd3de5a14e",
+        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
+        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
+        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
+        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
+        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
+        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
+        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
+        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
+        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
+        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
+        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
+        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
         "metric.labelColor": "79fec9334e531e20cdeba764f0e16d666572d4f0",
         "metric.labelFontSize": "a69ea27ee6c412c7203ae6d4e6bdcbb2d81c7ee2",
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
@@ -6000,26 +6042,23 @@
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
-        "pill.background": "3b90cfbd344580bfc556aaffd26112efa28f1567",
+        "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
         "pill.textFontSize": "acc3755161f3643f9c9edcaf53d9a9fad9935ac0",
         "pill.textFontWeight": "d57e2cd27e309375052984307944c7ade665c1d2",
         "pill.statusLabelFontWeight": "a48624f8c5059f13b178a83708e4eb117b02df04",
         "pill.maxWidth": "5c2638f9ed0d3fc74ee24d58781854f70baf0354",
-        "pill.baseText": "4ca08518227568188a645947d65d0ff3944a72fc",
-        "pill.baseIcon": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
-        "pill.baseBorder": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
-        "pill.infoText": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
-        "pill.infoIcon": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
-        "pill.infoBorder": "d67299e7078e0b1a21ede087365e84766e94fd84",
-        "pill.errorText": "cb66781394f58b900c4e8f95140992ab00c0af56",
-        "pill.errorIcon": "b784890b7a8796a477ef4be307631ef5971ad2ab",
-        "pill.errorBorder": "903fab156ba153f71824803a9fa7e9068f90c839",
-        "pill.successText": "950f1055688698168efc5ff77464a7f8c314d61f",
-        "pill.successIcon": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
-        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
-        "pill.warningText": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
-        "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "pill.baseTextColor": "4ca08518227568188a645947d65d0ff3944a72fc",
+        "pill.baseIconColor": "d3f21b23381cfae06ef4935ff7afbc6ec556fac9",
+        "pill.baseBorderColor": "4ebbd23e282b84fc72ae203cc67b1b39d07d53b9",
+        "pill.infoTextColor": "335e36fe3aaf48fb6e034691e98a07a5f2903efb",
+        "pill.infoIconColor": "05a4402d89b9ba42c4a46aa18f3fa70089c91669",
+        "pill.infoBorderColor": "d67299e7078e0b1a21ede087365e84766e94fd84",
+        "pill.errorTextColor": "cb66781394f58b900c4e8f95140992ab00c0af56",
+        "pill.errorIconColor": "b784890b7a8796a477ef4be307631ef5971ad2ab",
+        "pill.errorBorderColor": "903fab156ba153f71824803a9fa7e9068f90c839",
+        "pill.successTextColor": "950f1055688698168efc5ff77464a7f8c314d61f",
+        "pill.successIconColor": "6c7fa4b4e3481320214bd9f2bf398c751700fabd",
+        "pill.warningTextColor": "7a70e948c3fd5eefd245fbff289c39bcf39d7728",
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
@@ -6039,15 +6078,10 @@
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
         "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
-        "avatar.borderWidthMd": "00e60facdf7fc777804bdef5eb2e7b99059ab0ce",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
-        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
-        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
-        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
-        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
-        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9"
+        "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
+        "pill.warningIconColor": "58e67a0bb640181382fad4fa1e2aa0e771251512",
+        "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
