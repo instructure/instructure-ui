@@ -23,25 +23,17 @@
  */
 
 import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
-
-export type Breadcrumb = {
-  fontSizeLg: Semantics['fontSize']['text2xl']
-  separatorFontSizeSm: Semantics['size']['icon']['xs']
-  separatorFontSizeMd: Semantics['size']['icon']['sm']
-  separatorFontSizeLg: Semantics['size']['icon']['md']
-  fontSizeMd: Semantics['fontSize']['textBase']
-  separator: Semantics['icon']['muted']
-  fontSizeSm: Semantics['fontSize']['textSm']
-}
+import type { Breadcrumb } from '../../componentTypes/breadcrumb.js'
 
 const breadcrumb: Breadcrumb = {
   fontSizeLg: semantics.fontSize.text2xl,
-  separatorFontSizeSm: semantics.size.icon.xs,
-  separatorFontSizeMd: semantics.size.icon.sm,
-  separatorFontSizeLg: semantics.size.icon.md,
   fontSizeMd: semantics.fontSize.textBase,
-  separator: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm
+  separatorColor: semantics.icon.muted,
+  fontColor: semantics.text.base,
+  fontSizeSm: semantics.fontSize.textSm,
+  iconColor: semantics.icon.base,
+  spaceBetweenElementsMd: semantics.size.size4,
+  spaceBetweenElementsLg: semantics.size.size8,
+  spaceBetweenElementsSm: semantics.size.size2
 }
 export default breadcrumb

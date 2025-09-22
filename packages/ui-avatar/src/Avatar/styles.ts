@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { NewCanvas } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
 type StyleParams = {
@@ -44,7 +44,7 @@ type StyleParams = {
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewCanvas['components']['Avatar'],
+  componentTheme: NewComponentTypes['Avatar'],
   params: StyleParams
 ): AvatarStyle => {
   const { loaded, size, color, hasInverseColor, shape, src, showBorder } =
@@ -89,25 +89,25 @@ const generateStyle = (
     },
     medium: {
       fontSize: '1.5rem',
-      borderWidth: componentTheme.BorderWidthMd,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(1.25, 1.5, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.25, 1.5, 2.5)
     },
     large: {
       fontSize: '1.75rem',
-      borderWidth: componentTheme.BorderWidthMd,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(1.5, 1.75, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.5, 1.75, 2.5)
     },
     'x-large': {
       fontSize: '2rem',
-      borderWidth: componentTheme.BorderWidthMd,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(1.75, 2, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.75, 2, 2.5)
     },
     'xx-large': {
       fontSize: '2.25rem',
-      borderWidth: componentTheme.BorderWidthMd,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(2, 2.25, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(2, 2.25, 2.5)
     }
@@ -153,51 +153,51 @@ const generateStyle = (
 
   const colorVariants = {
     default: {
-      text: componentTheme.accent1Text,
-      background: componentTheme.accent1Background,
-      icon: componentTheme.accent1Icon
+      text: componentTheme.accent1TextColor,
+      background: componentTheme.accent1BackgroundColor,
+      icon: componentTheme.accent1IconColor
     }, // = brand
     shamrock: {
-      text: componentTheme.accent2Text,
-      background: componentTheme.accent2Background,
-      icon: componentTheme.accent2Icon
+      text: componentTheme.accent2TextColor,
+      background: componentTheme.accent2BackgroundColor,
+      icon: componentTheme.accent2IconColor
     },
     barney: {
-      text: componentTheme.accent3Text,
-      background: componentTheme.accent3Background,
-      icon: componentTheme.accent3Icon
+      text: componentTheme.accent3TextColor,
+      background: componentTheme.accent3BackgroundColor,
+      icon: componentTheme.accent3IconColor
     },
     crimson: {
-      text: componentTheme.accent4Text,
-      background: componentTheme.accent4Background,
-      icon: componentTheme.accent4Icon
+      text: componentTheme.accent4TextColor,
+      background: componentTheme.accent4BackgroundColor,
+      icon: componentTheme.accent4IconColor
     },
     fire: {
-      text: componentTheme.accent5Text,
-      background: componentTheme.accent5Background,
-      icon: componentTheme.accent5Icon
+      text: componentTheme.accent5TextColor,
+      background: componentTheme.accent5BackgroundColor,
+      icon: componentTheme.accent5IconColor
     },
     licorice: {
-      text: componentTheme.accent6text,
-      background: componentTheme.accent6Background,
-      icon: componentTheme.accent6Icon
+      text: componentTheme.accent6TextColor,
+      background: componentTheme.accent6BackgroundColor,
+      icon: componentTheme.accent6IconColor
     },
     ash: {
-      text: componentTheme.accent1Text,
-      background: componentTheme.accent1Background,
-      icon: componentTheme.accent1Icon
+      text: componentTheme.accent1TextColor,
+      background: componentTheme.accent1BackgroundColor,
+      icon: componentTheme.accent1IconColor
     },
     ai: `
-        linear-gradient(to bottom,  ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) padding-box,
-        linear-gradient(to bottom right, ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) border-box`
+        linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`
   }
 
   const background = () => {
     if (color === 'ai') {
       return {
         background: `
-        linear-gradient(to bottom,  ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) padding-box,
-        linear-gradient(to bottom right, ${componentTheme.aiTopGradient} 0%, ${componentTheme.aiBottomGradient} 100%) border-box`,
+        linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`,
         border: 'solid transparent'
       }
     }
@@ -207,17 +207,17 @@ const generateStyle = (
           backgroundClip: 'content-box'
         }
       : {
-          backgroundColor: componentTheme.background,
+          backgroundColor: componentTheme.backgroundColor,
           backgroundClip: 'content-box'
         }
   }
 
   const contentColor = () => {
     if (color === 'ai') {
-      return componentTheme.aiFont
+      return componentTheme.aiFontColor
     }
     return hasInverseColor
-      ? componentTheme.background
+      ? componentTheme.backgroundColor
       : colorVariants[color!].text
   }
 
@@ -226,7 +226,7 @@ const generateStyle = (
       label: 'avatar',
       boxSizing: 'border-box',
       borderStyle: 'solid',
-      borderColor: componentTheme.border,
+      borderColor: componentTheme.borderColor,
       ...background(),
       backgroundPosition: 'center',
       backgroundSize: 'cover',

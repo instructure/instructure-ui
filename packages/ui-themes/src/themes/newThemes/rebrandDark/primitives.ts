@@ -211,8 +211,8 @@ export type Primitives = {
     size48: string
     size64: string
   }
-  fontFamilies: { lato: string; inclusiveSans: string; Atkinson: string }
-  fontWeights: {
+  fontFamily: { lato: string; inclusiveSans: string; Atkinson: string }
+  fontWeight: {
     thin: number
     extraLight: number
     light: number
@@ -404,8 +404,8 @@ const primitives: Primitives = {
     }
   },
   size: {
-    size1: '0.0625 rem',
-    size2: '0.125 rem',
+    size1: '0.0625rem',
+    size2: '0.125rem',
     size4: '0.25rem',
     size8: '0.5rem',
     size12: '0.75rem',
@@ -420,14 +420,14 @@ const primitives: Primitives = {
     size48: '3rem',
     size64: '4rem'
   },
-  fontFamilies: {
+  fontFamily: {
     lato: 'Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
     inclusiveSans:
       'Inclusive Sans, "Helvetica Neue", Helvetica, Arial, sans-serif',
     Atkinson:
-      'Atkinson Hyperlegible Next VF, "Helvetica Neue", Helvetica, Arial, sans-serif'
+      'Atkinson Hyperlegible Next, "Helvetica Neue", Helvetica, Arial, sans-serif'
   },
-  fontWeights: {
+  fontWeight: {
     thin: 100,
     extraLight: 200,
     light: 300,

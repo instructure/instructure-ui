@@ -23,15 +23,10 @@
  */
 
 import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
-
-export type FormFieldLabel = {
-  text: Semantics['text']['base']
-  asterisk: Semantics['text']['error']
-}
+import type { FormFieldLabel } from '../../componentTypes/formFieldLabel.js'
 
 const formFieldLabel: FormFieldLabel = {
-  text: semantics.text.base,
-  asterisk: semantics.text.error
+  textColor: semantics.text.base,
+  asteriskColor: semantics.text.error
 }
 export default formFieldLabel

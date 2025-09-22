@@ -22,18 +22,24 @@
  * SOFTWARE.
  */
 
-import semantics from '../semantics.js'
-import type { Breadcrumb } from '../../componentTypes/breadcrumb.js'
+import type Avatar from './avatar'
+import type Breadcrumb from './breadcrumb'
+import type Metric from './metric'
+import type Pill from './pill'
+import type FormFieldMessage from './formFieldMessage'
+import type FormFieldLabel from './formFieldLabel'
+import type Spinner from './spinner'
+import type Link from './link'
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  fontSizeMd: semantics.fontSize.textBase,
-  separatorColor: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm,
-  fontColor: semantics.text.base,
-  iconColor: semantics.icon.base,
-  spaceBetweenElementsMd: semantics.size.size4,
-  spaceBetweenElementsLg: semantics.size.size8,
-  spaceBetweenElementsSm: semantics.size.size2
+type Theme = {
+  Avatar: Avatar
+  Breadcrumb: Breadcrumb
+  Metric: Metric
+  Pill: Pill
+  FormFieldMessage: FormFieldMessage
+  FormFieldLabel: FormFieldLabel
+  Spinner: Spinner
+  Link: Link
 }
-export default breadcrumb
+
+export default Theme

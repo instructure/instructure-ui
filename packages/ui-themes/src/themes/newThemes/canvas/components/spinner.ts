@@ -23,29 +23,11 @@
  */
 
 import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
-
-export type Spinner = {
-  color: Semantics['background']['info']
-  inverseColor: Semantics['background']['info']
-  trackColor: Semantics['background']['muted']
-  borderWidthXs: string
-  borderWidthSm: string
-  borderWidthMd: string
-  borderWidthLg: string
-  containerSizeXs: string
-  containerSizeSm: string
-  containerSizeMd: string
-  containerSizeLg: string
-  spinnerSizeXs: string
-  spinnerSizeSm: string
-  spinnerSizeMd: string
-  spinnerSizeLg: string
-}
+import type { Spinner } from '../../componentTypes/spinner.js'
 
 const spinner: Spinner = {
-  color: semantics.background.info,
-  inverseColor: semantics.background.info,
+  color: semantics.icon.info,
+  inverseColor: semantics.icon.onColor,
   trackColor: semantics.background.muted,
   borderWidthXs: '0.25em',
   borderWidthSm: '0.375em',

@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
-import semantics from '../semantics.js'
-import type { Breadcrumb } from '../../componentTypes/breadcrumb.js'
+import type { Semantics } from '../canvas/semantics'
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  fontSizeMd: semantics.fontSize.textBase,
-  separatorColor: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm,
-  fontColor: semantics.text.base,
-  iconColor: semantics.icon.base,
-  spaceBetweenElementsMd: semantics.size.size4,
-  spaceBetweenElementsLg: semantics.size.size8,
-  spaceBetweenElementsSm: semantics.size.size2
+export type FormFieldMessage = {
+  hintTextColor: Semantics['text']['base']
+  errorTextColor: Semantics['text']['error']
+  errorIconColor: Semantics['icon']['error']
+  successTextColor: Semantics['text']['success']
+  fontWeight: Semantics['fontWeight']['body']['base']
+  fontSize: Semantics['fontSize']['textSm']
+  lineHeight: Semantics['lineHeight']['paragraph']['textSm']
+  errorIconMarginRight: Semantics['spacing']['spaceXs']
 }
-export default breadcrumb
+
+export default FormFieldMessage

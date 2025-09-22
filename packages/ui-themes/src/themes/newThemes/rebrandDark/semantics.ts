@@ -222,12 +222,13 @@ export type Semantics = {
     }
   }
   spacing: {
-    xs: Primitives['size']['size4']
-    sm: Primitives['size']['size8']
-    md: Primitives['size']['size16']
-    lg: Primitives['size']['size24']
-    xl: Primitives['size']['size32']
-    xxl: Primitives['size']['size40']
+    space2xs: Primitives['size']['size2']
+    spaceXs: Primitives['size']['size4']
+    spaceSm: Primitives['size']['size8']
+    spaceMd: Primitives['size']['size16']
+    spaceLg: Primitives['size']['size24']
+    spaceXl: Primitives['size']['size32']
+    space2xl: Primitives['size']['size40']
     between: {
       sections: Primitives['size']['size48']
       cards: {
@@ -281,18 +282,18 @@ export type Semantics = {
     }
   }
   fontFamily: {
-    heading: Primitives['fontFamilies']['inclusiveSans']
-    base: Primitives['fontFamilies']['Atkinson']
-    code: Primitives['fontFamilies']['inclusiveSans']
+    heading: Primitives['fontFamily']['inclusiveSans']
+    base: Primitives['fontFamily']['Atkinson']
+    code: Primitives['fontFamily']['inclusiveSans']
   }
   fontWeight: {
     body: {
-      base: Primitives['fontWeights']['regular']
-      strong: Primitives['fontWeights']['semiBold']
+      base: Primitives['fontWeight']['regular']
+      strong: Primitives['fontWeight']['semiBold']
     }
     heading: {
-      base: Primitives['fontWeights']['semiBold']
-      strong: Primitives['fontWeights']['bold']
+      base: Primitives['fontWeight']['semiBold']
+      strong: Primitives['fontWeight']['bold']
     }
   }
   lineHeight: {
@@ -332,20 +333,20 @@ export type Semantics = {
   visibleInRebrand: string
   input: {
     small: {
-      fontFamily: Primitives['fontFamilies']['Atkinson']
-      fontWeight: Primitives['fontWeights']['regular']
+      fontFamily: Primitives['fontFamily']['Atkinson']
+      fontWeight: Primitives['fontWeight']['regular']
       fontSize: Primitives['size']['size14']
       lineHeight: Primitives['size']['size14']
     }
     medium: {
-      fontFamily: Primitives['fontFamilies']['Atkinson']
-      fontWeight: Primitives['fontWeights']['regular']
+      fontFamily: Primitives['fontFamily']['Atkinson']
+      fontWeight: Primitives['fontWeight']['regular']
       fontSize: Primitives['size']['size16']
       lineHeight: Primitives['size']['size16']
     }
     large: {
-      fontFamily: Primitives['fontFamilies']['Atkinson']
-      fontWeight: Primitives['fontWeights']['regular']
+      fontFamily: Primitives['fontFamily']['Atkinson']
+      fontWeight: Primitives['fontWeight']['regular']
       fontSize: Primitives['size']['size20']
       lineHeight: Primitives['size']['size20']
     }
@@ -549,12 +550,13 @@ const semantics: Semantics = {
     }
   },
   spacing: {
-    xs: primitives.size.size4,
-    sm: primitives.size.size8,
-    md: primitives.size.size16,
-    lg: primitives.size.size24,
-    xl: primitives.size.size32,
-    xxl: primitives.size.size40,
+    space2xs: primitives.size.size2,
+    spaceXs: primitives.size.size4,
+    spaceSm: primitives.size.size8,
+    spaceMd: primitives.size.size16,
+    spaceLg: primitives.size.size24,
+    spaceXl: primitives.size.size32,
+    space2xl: primitives.size.size40,
     between: {
       sections: primitives.size.size48,
       cards: { sm: primitives.size.size16, md: primitives.size.size24 },
@@ -602,18 +604,18 @@ const semantics: Semantics = {
     interactive: { base: primitives.size.size1, focus: primitives.size.size2 }
   },
   fontFamily: {
-    heading: primitives.fontFamilies.inclusiveSans,
-    base: primitives.fontFamilies.Atkinson,
-    code: primitives.fontFamilies.inclusiveSans
+    heading: primitives.fontFamily.inclusiveSans,
+    base: primitives.fontFamily.Atkinson,
+    code: primitives.fontFamily.inclusiveSans
   },
   fontWeight: {
     body: {
-      base: primitives.fontWeights.regular,
-      strong: primitives.fontWeights.semiBold
+      base: primitives.fontWeight.regular,
+      strong: primitives.fontWeight.semiBold
     },
     heading: {
-      base: primitives.fontWeights.semiBold,
-      strong: primitives.fontWeights.bold
+      base: primitives.fontWeight.semiBold,
+      strong: primitives.fontWeight.bold
     }
   },
   lineHeight: {
@@ -653,20 +655,20 @@ const semantics: Semantics = {
   visibleInRebrand: 'true',
   input: {
     small: {
-      fontFamily: primitives.fontFamilies.Atkinson,
-      fontWeight: primitives.fontWeights.regular,
+      fontFamily: primitives.fontFamily.Atkinson,
+      fontWeight: primitives.fontWeight.regular,
       fontSize: primitives.size.size14,
       lineHeight: primitives.size.size14
     },
     medium: {
-      fontFamily: primitives.fontFamilies.Atkinson,
-      fontWeight: primitives.fontWeights.regular,
+      fontFamily: primitives.fontFamily.Atkinson,
+      fontWeight: primitives.fontWeight.regular,
       fontSize: primitives.size.size16,
       lineHeight: primitives.size.size16
     },
     large: {
-      fontFamily: primitives.fontFamilies.Atkinson,
-      fontWeight: primitives.fontWeights.regular,
+      fontFamily: primitives.fontFamily.Atkinson,
+      fontWeight: primitives.fontWeight.regular,
       fontSize: primitives.size.size20,
       lineHeight: primitives.size.size20
     }

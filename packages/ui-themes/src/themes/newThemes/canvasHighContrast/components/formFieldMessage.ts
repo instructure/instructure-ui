@@ -23,27 +23,16 @@
  */
 
 import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
-
-export type FormFieldMessage = {
-  hintText: Semantics['text']['base']
-  errorText: Semantics['text']['error']
-  errorIcon: Semantics['icon']['error']
-  successText: Semantics['text']['success']
-  fontWeight: Semantics['fontWeight']['body']['base']
-  fontSize: Semantics['fontSize']['textSm']
-  lineHeight: Semantics['lineHeight']['paragraph']['textSm']
-  errorIconMarginRight: Semantics['spacing']['xs']
-}
+import type { FormFieldMessage } from '../../componentTypes/formFieldMessage.js'
 
 const formFieldMessage: FormFieldMessage = {
-  hintText: semantics.text.base,
-  errorText: semantics.text.error,
-  errorIcon: semantics.icon.error,
-  successText: semantics.text.success,
+  hintTextColor: semantics.text.base,
+  errorTextColor: semantics.text.error,
+  errorIconColor: semantics.icon.error,
+  successTextColor: semantics.text.success,
   fontWeight: semantics.fontWeight.body.base,
   fontSize: semantics.fontSize.textSm,
   lineHeight: semantics.lineHeight.paragraph.textSm,
-  errorIconMarginRight: semantics.spacing.xs
+  errorIconMarginRight: semantics.spacing.spaceXs
 }
 export default formFieldMessage

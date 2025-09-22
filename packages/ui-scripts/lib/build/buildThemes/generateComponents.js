@@ -101,6 +101,27 @@ export const resolveTypeReferences = (semantics, key) => {
   return `${typeof value}, `
 }
 
+//this will just convert everything to string type, which is sufficient but could be better, since sometimes number makes sense
+// export const resolveTypeReferences = (semantics, key) => {
+//   const value = key ? semantics[key] : semantics
+//   if (typeof value === 'object') {
+//     return Object.keys(value).reduce((acc, key, index) => {
+//       if (typeof value[key] === 'object') {
+//         return (
+//           acc +
+//           `"${key}": {${resolveTypeReferences(value, key)}}${
+//             index + 1 === Object.keys(value).length ? '' : ',\n'
+//           }`
+//         )
+//       }
+//       return acc + `"${key}": ${resolveTypeReferences(value, key)}`
+//     }, '')
+//   }
+
+//   return `string, `
+// }
+
+
 const generateComponent = (data) => {
   const formattedSemantic = formatComponent(data)
 

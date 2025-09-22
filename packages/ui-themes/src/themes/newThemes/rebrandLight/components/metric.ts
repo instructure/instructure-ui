@@ -23,26 +23,15 @@
  */
 
 import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
-
-export type Metric = {
-  labelColor: Semantics['text']['muted']
-  labelFontSize: Semantics['fontSize']['textXs']
-  paddingHorizontal: Semantics['spacing']['sm']
-  valueColor: Semantics['text']['base']
-  valueFontSize: Semantics['fontSize']['text2xl']
-  spaceBetweenTexts: Semantics['spacing']['sm']
-  labelLineHeight: Semantics['lineHeight']['standalone']['textXs']
-  valueLineHeight: Semantics['lineHeight']['standalone']['text2xl']
-}
+import type { Metric } from '../../componentTypes/metric.js'
 
 const metric: Metric = {
   labelColor: semantics.text.muted,
   labelFontSize: semantics.fontSize.textXs,
-  paddingHorizontal: semantics.spacing.sm,
+  paddingHorizontal: semantics.spacing.spaceSm,
   valueColor: semantics.text.base,
   valueFontSize: semantics.fontSize.text2xl,
-  spaceBetweenTexts: semantics.spacing.sm,
+  spaceBetweenTexts: semantics.spacing.spaceSm,
   labelLineHeight: semantics.lineHeight.standalone.textXs,
   valueLineHeight: semantics.lineHeight.standalone.text2xl
 }

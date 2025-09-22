@@ -23,59 +23,29 @@
  */
 
 import semantics from '../semantics.js'
-import type { Semantics } from '../semantics.js'
-
-export type Pill = {
-  paddingHorizontal: Semantics['spacing']['sm']
-  height: string
-  background: Semantics['background']['base']
-  textFontSize: Semantics['fontSize']['textSm']
-  textFontWeight: Semantics['fontWeight']['body']['base']
-  statusLabelFontWeight: Semantics['fontWeight']['body']['strong']
-  maxWidth: string
-  baseText: Semantics['text']['base']
-  baseIcon: Semantics['icon']['base']
-  baseBorder: Semantics['stroke']['base']
-  infoText: Semantics['text']['info']
-  infoIcon: Semantics['icon']['info']
-  infoBorder: Semantics['stroke']['info']
-  errorText: Semantics['text']['error']
-  errorIcon: Semantics['icon']['error']
-  errorBorder: Semantics['stroke']['error']
-  successText: Semantics['text']['success']
-  successIcon: Semantics['icon']['success']
-  successBorder: Semantics['stroke']['success']
-  warningText: Semantics['text']['warning']
-  warningIcon: Semantics['icon']['warning']
-  warningBorder: Semantics['stroke']['warning']
-  borderRadius: Semantics['borderRadius']['full']
-  borderWidth: Semantics['borderWidth']['sm']
-  borderStyle: { style: string }
-  lineHeight: Semantics['lineHeight']['standalone']['textSm']
-  iconSize: Semantics['size']['icon']['sm']
-}
+import type { Pill } from '../../componentTypes/pill.js'
 
 const pill: Pill = {
-  paddingHorizontal: semantics.spacing.sm,
+  paddingHorizontal: semantics.spacing.spaceSm,
   height: '24px',
-  background: semantics.background.base,
+  backgroundColor: semantics.background.base,
   textFontSize: semantics.fontSize.textSm,
   textFontWeight: semantics.fontWeight.body.base,
   statusLabelFontWeight: semantics.fontWeight.body.strong,
   maxWidth: '240px',
-  baseText: semantics.text.base,
-  baseIcon: semantics.icon.base,
-  baseBorder: semantics.stroke.base,
-  infoText: semantics.text.info,
-  infoIcon: semantics.icon.info,
-  infoBorder: semantics.stroke.info,
-  errorText: semantics.text.error,
-  errorIcon: semantics.icon.error,
-  errorBorder: semantics.stroke.error,
-  successText: semantics.text.success,
-  successIcon: semantics.icon.success,
+  baseTextColor: semantics.text.base,
+  baseIconColor: semantics.icon.base,
+  baseBorderColor: semantics.stroke.base,
+  infoTextColor: semantics.text.info,
+  infoIconColor: semantics.icon.info,
+  infoBorderColor: semantics.stroke.info,
+  errorTextColor: semantics.text.error,
+  errorIconColor: semantics.icon.error,
+  errorBorderColor: semantics.stroke.error,
+  successTextColor: semantics.text.success,
+  successIconColor: semantics.icon.success,
   successBorder: semantics.stroke.success,
-  warningText: semantics.text.warning,
+  warningTextColor: semantics.text.warning,
   warningIcon: semantics.icon.warning,
   warningBorder: semantics.stroke.warning,
   borderRadius: semantics.borderRadius.full,

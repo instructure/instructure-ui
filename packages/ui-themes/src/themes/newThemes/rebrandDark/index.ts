@@ -24,17 +24,30 @@
 
 import primitives, { type Primitives } from './primitives'
 import semantics, { type Semantics } from './semantics'
-import metric, { type Metric } from './components/metric'
-import avatar, { type Avatar } from './components/avatar'
-import breadcrumb, { type Breadcrumb } from './components/breadcrumb'
-import pill, { type Pill } from './components/pill'
-import formFieldMessage, {
-  type FormFieldMessage
-} from './components/formFieldMessage'
-import formFieldLabel, {
-  type FormFieldLabel
-} from './components/formFieldLabel'
-import spinner, { type Spinner } from './components/spinner'
+import metric from './components/metric'
+
+import type Metric from '../componentTypes/metric'
+import avatar from './components/avatar'
+
+import type Avatar from '../componentTypes/avatar'
+import breadcrumb from './components/breadcrumb'
+
+import type Breadcrumb from '../componentTypes/breadcrumb'
+import pill from './components/pill'
+
+import type Pill from '../componentTypes/pill'
+import formFieldMessage from './components/formFieldMessage'
+
+import type FormFieldMessage from '../componentTypes/formFieldMessage'
+import formFieldLabel from './components/formFieldLabel'
+
+import type FormFieldLabel from '../componentTypes/formFieldLabel'
+import spinner from './components/spinner'
+
+import type Spinner from '../componentTypes/spinner'
+import link from './components/link'
+
+import type Link from '../componentTypes/link'
 
 export type Theme = {
   primitives: Primitives
@@ -47,6 +60,7 @@ export type Theme = {
     FormFieldMessage: FormFieldMessage
     FormFieldLabel: FormFieldLabel
     Spinner: Spinner
+    Link: Link
   }
 }
 
@@ -60,7 +74,8 @@ const theme = {
     Pill: pill,
     FormFieldMessage: formFieldMessage,
     FormFieldLabel: formFieldLabel,
-    Spinner: spinner
+    Spinner: spinner,
+    Link: link
   }
 }
 

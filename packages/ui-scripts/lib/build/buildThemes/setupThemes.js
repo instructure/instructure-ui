@@ -61,7 +61,7 @@ const setupThemes = (targetPath, rawInput) => {
   const input = JSON.parse(rawInput.toString())
   const themeData = transformThemes(input['$themes'])
   // console.log(themeData)
-  Object.keys(themeData).forEach((theme) => {
+  Object.keys(themeData).forEach((theme, themeIndex) => {
     const themePath = `${targetPath}/${theme}`
     fs.rmSync(themePath, { recursive: true, force: true })
     fs.mkdirSync(themePath, { recursive: true })
@@ -110,9 +110,7 @@ const setupThemes = (targetPath, rawInput) => {
 
       const componentFileContent = `
         import semantics from "../semantics.js"
-        import type {Semantics} from "../semantics.js"
-
-        export type ${capitalize(componentName)} = ${componentTypes}
+        import type { ${capitalize(componentName)} } from '../../componentTypes/${componentName}.js'
 
         const ${componentName}: ${capitalize(componentName)} = {${component}}
         export default ${componentName}
@@ -122,6 +120,19 @@ const setupThemes = (targetPath, rawInput) => {
         `${themePath}/components/${componentName}.ts`,
         componentFileContent
       )
+      if(themeIndex===0){
+        const typeFileContent = `
+          import type { Semantics } from "../${theme}/semantics"
+
+          export type ${capitalize(componentName)} = ${componentTypes}
+
+          export default ${capitalize(componentName)}
+        `
+          createFile(
+          `${targetPath}/componentTypes/${componentName}.ts`,
+          typeFileContent
+        )
+      }
     })
 
     //index file
@@ -130,9 +141,8 @@ const setupThemes = (targetPath, rawInput) => {
         const componentName =
           componentpath.split('/')[componentpath.split('/').length - 1]
 
-        return `import ${unCapitalize(componentName)}, {type ${capitalize(
-          componentName
-        )}} from "./components/${unCapitalize(componentName)}"`
+        return `import ${unCapitalize(componentName)} from "./components/${unCapitalize(componentName)}"\n
+        import type ${capitalize(componentName)} from "../componentTypes/${unCapitalize(componentName)}"`
       })
       .join('\n')
 
@@ -178,7 +188,42 @@ const setupThemes = (targetPath, rawInput) => {
       export default theme
       `
     createFile(`${themePath}/index.ts`, indexFileContent)
+
+    //index type file
+    if(themeIndex===0){
+      const componentTypeImports = themeData[theme].components
+          .map((componentpath) => {
+            const componentName =
+              componentpath.split('/')[componentpath.split('/').length - 1]
+
+
+            return `import type ${capitalize(componentName)} from './${unCapitalize(componentName)}'`
+          })
+          .join('\n')
+      const componentTypeExport = themeData[theme].components
+          .map((componentpath) => {
+            const componentName =
+              componentpath.split('/')[componentpath.split('/').length - 1]
+
+            return `${capitalize(componentName)}:${capitalize(componentName)}`
+          })
+          .join(',\n')
+
+        const componentsTypesFileContent = `
+          ${componentTypeImports} \n
+          type Theme = {
+          ${componentTypeExport} \n
+          }
+
+          export default Theme
+        `
+        createFile(
+            `${targetPath}/componentTypes/index.ts`,
+            componentsTypesFileContent
+          )
+    }
   })
+
 
   // export index.ts
   const themeImports = Object.keys(themeData)

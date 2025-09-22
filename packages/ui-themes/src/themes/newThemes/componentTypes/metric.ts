@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
-import semantics from '../semantics.js'
-import type { Breadcrumb } from '../../componentTypes/breadcrumb.js'
+import type { Semantics } from '../canvas/semantics'
 
-const breadcrumb: Breadcrumb = {
-  fontSizeLg: semantics.fontSize.text2xl,
-  fontSizeMd: semantics.fontSize.textBase,
-  separatorColor: semantics.icon.muted,
-  fontSizeSm: semantics.fontSize.textSm,
-  fontColor: semantics.text.base,
-  iconColor: semantics.icon.base,
-  spaceBetweenElementsMd: semantics.size.size4,
-  spaceBetweenElementsLg: semantics.size.size8,
-  spaceBetweenElementsSm: semantics.size.size2
+export type Metric = {
+  labelColor: Semantics['text']['base']
+  labelFontSize: Semantics['fontSize']['textXs']
+  paddingHorizontal: Semantics['spacing']['spaceSm']
+  valueColor: Semantics['text']['base']
+  valueFontSize: Semantics['fontSize']['text2xl']
+  spaceBetweenTexts: Semantics['spacing']['spaceSm']
+  labelLineHeight: Semantics['lineHeight']['standalone']['textXs']
+  valueLineHeight: Semantics['lineHeight']['standalone']['text2xl']
 }
-export default breadcrumb
+
+export default Metric
