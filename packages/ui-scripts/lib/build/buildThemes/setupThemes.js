@@ -58,12 +58,17 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 const unCapitalize = (str) => str.charAt(0).toLowerCase() + str.slice(1)
 
 const setupThemes = (targetPath, rawInput) => {
+
+  //clear old themes
+  fs.rmSync(targetPath, { recursive: true, force: true })
+  //make new root folder
+  fs.mkdirSync(targetPath, { recursive: true })
+
   const input = JSON.parse(rawInput.toString())
   const themeData = transformThemes(input['$themes'])
   // console.log(themeData)
   Object.keys(themeData).forEach((theme, themeIndex) => {
     const themePath = `${targetPath}/${theme}`
-    fs.rmSync(themePath, { recursive: true, force: true })
     fs.mkdirSync(themePath, { recursive: true })
 
     // primitives

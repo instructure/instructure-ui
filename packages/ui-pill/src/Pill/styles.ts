@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-// TODO-STYLES - NewCanvas type shouldn't be used here, a more general type is required
-import type { NewCanvas } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PillProps, PillStyle } from './props'
 
 /**
@@ -37,34 +36,34 @@ import type { PillProps, PillStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewCanvas['components']['Pill'],
+  componentTheme: NewComponentTypes['Pill'],
   props: PillProps
 ): PillStyle => {
   const { color } = props
 
   const pillColorVariants = {
     primary: {
-      color: componentTheme.baseText,
-      borderColor: componentTheme.baseBorder
+      color: componentTheme.baseTextColor,
+      borderColor: componentTheme.baseBorderColor
     },
     success: {
-      color: componentTheme.successText,
-      borderColor: componentTheme.successBorder
+      color: componentTheme.successTextColor,
+      borderColor: componentTheme.successBorderColor
     },
     info: {
-      color: componentTheme.infoText,
-      borderColor: componentTheme.infoBorder
+      color: componentTheme.infoTextColor,
+      borderColor: componentTheme.infoBorderColor
     },
     warning: {
-      color: componentTheme.warningText,
-      borderColor: componentTheme.warningBorder
+      color: componentTheme.warningTextColor,
+      borderColor: componentTheme.warningBorderColor
     },
     error: {
-      color: componentTheme.errorText,
-      borderColor: componentTheme.errorBorder
+      color: componentTheme.errorTextColor,
+      borderColor: componentTheme.errorBorderColor
     }
   }
-
+  console.log({ pillColorVariants })
   return {
     pill: {
       label: 'pill',
@@ -73,7 +72,7 @@ const generateStyle = (
       justifyContent: 'center',
       boxSizing: 'border-box',
       padding: `0 ${componentTheme.paddingHorizontal}`,
-      background: componentTheme.background,
+      background: componentTheme.backgroundColor,
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle.style,
       borderRadius: componentTheme.borderRadius,

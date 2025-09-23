@@ -66,14 +66,14 @@ type WithStylePrivateProps<
 > = Style extends null
   ? object
   : {
-      styles?: Style
-      makeStyles?: (extraArgs?: Record<string, unknown>) => void
-    }
+    styles?: Style
+    makeStyles?: (extraArgs?: Record<string, unknown>) => void
+  }
 
 type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
   themeOverride?:
-    | Partial<Theme>
-    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
+  | Partial<Theme>
+  | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
 }
 
 type WithStyleProps<
@@ -85,7 +85,7 @@ type WithStyleProps<
 
 const defaultValues = {
   styles: {},
-  makeStyles: () => {}
+  makeStyles: () => { }
 }
 
 /**
@@ -210,13 +210,13 @@ const withStyle = decorator(
         theme.newTheme &&
         //@ts-expect-error TODO fix these later
         theme.newTheme.components[
-          ComposedComponent.componentId?.toLocaleLowerCase()
+        ComposedComponent.componentId
         ]
       ) {
         baseComponentTheme =
           //@ts-expect-error TODO fix these later
           theme.newTheme.components[
-            ComposedComponent.componentId?.toLocaleLowerCase()
+          ComposedComponent.componentId
           ]
       }
 
