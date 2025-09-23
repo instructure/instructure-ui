@@ -1140,7 +1140,7 @@
   },
   "canvas/semantic/color/canvas": {
     "background": {
-      "baseColor": {
+      "base": {
         "value": "{color.white}",
         "type": "color"
       },
@@ -1662,7 +1662,7 @@
   },
   "canvas/semantic/color/canvasHighContrast": {
     "background": {
-      "baseColor": {
+      "base": {
         "value": "{color.white}",
         "type": "color"
       },
@@ -2185,7 +2185,7 @@
   "canvas/component/Avatar": {
     "avatar": {
       "backgroundColor": {
-        "value": "{background.baseColor}",
+        "value": "{background.base}",
         "type": "color"
       },
       "borderColor": {
@@ -2560,7 +2560,7 @@
         "type": "sizing"
       },
       "backgroundColor": {
-        "value": "{background.baseColor}",
+        "value": "{background.base}",
         "type": "color"
       },
       "textFontSize": {
@@ -2822,7 +2822,7 @@
   "rebrand/component/Avatar": {
     "avatar": {
       "backgroundColor": {
-        "value": "{background.baseColor}",
+        "value": "{background.base}",
         "type": "color"
       },
       "borderColor": {
@@ -3105,7 +3105,7 @@
         "type": "sizing"
       },
       "backgroundColor": {
-        "value": "{background.baseColor}",
+        "value": "{background.base}",
         "type": "color"
       },
       "textFontSize": {
@@ -3673,7 +3673,7 @@
   },
   "rebrand/semantic/color/rebrandLight": {
     "background": {
-      "baseColor": {
+      "base": {
         "value": "{color.white}",
         "type": "color"
       },
@@ -4195,7 +4195,7 @@
   },
   "rebrand/semantic/color/rebrandDark": {
     "background": {
-      "baseColor": {
+      "base": {
         "value": "{color.grey.grey120}",
         "type": "color"
       },
@@ -5052,7 +5052,7 @@
         "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
         "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.baseColor": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5398,7 +5398,7 @@
         "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
         "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.baseColor": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -5737,7 +5737,7 @@
         "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIconColor": "58e67a0bb640181382fad4fa1e2aa0e771251512",
         "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.baseColor": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -6081,7 +6081,7 @@
         "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIconColor": "58e67a0bb640181382fad4fa1e2aa0e771251512",
         "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.baseColor": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
