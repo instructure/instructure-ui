@@ -737,6 +737,10 @@
         "value": "0.1875rem",
         "type": "dimension"
       }
+    },
+    "undeline": {
+      "value": "underline",
+      "type": "textDecoration"
     }
   },
   "canvas/semantic/layout/default": {
@@ -1133,6 +1137,38 @@
           "fontWeight": "{fontWeight.regular}",
           "fontSize": "{size.size20}",
           "lineHeight": "{size.size20}"
+        },
+        "type": "typography"
+      }
+    },
+    "inlineLink": {
+      "small": {
+        "value": {
+          "fontFamily": "{fontFamily.lato}",
+          "fontWeight": "{fontWeight.regular}",
+          "fontSize": "{size.size14}",
+          "lineHeight": "{size.size20}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{fontFamily.lato}",
+          "fontWeight": "{fontWeight.regular}",
+          "fontSize": "{size.size16}",
+          "lineHeight": "{size.size20}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{fontFamily.lato}",
+          "fontWeight": "{fontWeight.regular}",
+          "fontSize": "{size.size28}",
+          "lineHeight": "{size.size32}",
+          "textDecoration": "{undeline}"
         },
         "type": "typography"
       }
@@ -2790,7 +2826,7 @@
         "type": "fontSizes"
       },
       "fontWeight": {
-        "value": "{fontWeight.body.base}",
+        "value": "{fontWeight.body.strong}",
         "type": "fontWeights"
       },
       "spaceBetweenElementsMd": {
@@ -3666,6 +3702,38 @@
           "fontWeight": "{fontWeight.regular}",
           "fontSize": "{size.size20}",
           "lineHeight": "{size.size20}"
+        },
+        "type": "typography"
+      }
+    },
+    "inlineLink": {
+      "small": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.semiBold}",
+          "fontSize": "{size.size14}",
+          "lineHeight": "{size.size20}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.semiBold}",
+          "fontSize": "{size.size16}",
+          "lineHeight": "{size.size20}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.semiBold}",
+          "fontSize": "{size.size28}",
+          "lineHeight": "{size.size32}",
+          "textDecoration": "{undeline}"
         },
         "type": "typography"
       }
@@ -4737,6 +4805,7 @@
         "secondaryBg": "S:5988067f45bc08b82245433bf0714eef28ed3a5f,"
       },
       "$figmaVariableReferences": {
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -5051,8 +5120,7 @@
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
         "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5080,9 +5148,13 @@
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
         "input.medium": "S:a5701c71372820c94bf01893751c0bc7a04d7d7d,",
         "input.small": "S:58d5c91a50f3164b2126c733340f87a871c9e3e6,",
-        "input.large": "S:87bd6300ece97ed512480cdc179f761e05ecefe5,"
+        "input.large": "S:87bd6300ece97ed512480cdc179f761e05ecefe5,",
+        "inlineLink.small": "S:0b346a9fe8ad299a09d47b72cf7d0ed9d0781db0,",
+        "inlineLink.medium": "S:fcc860633705baf25d75d4e6b8563e43088986dc,",
+        "inlineLink.large": "S:e67f7cb7db9b807b1e87f1fdf3fb0683e9e068a3,"
       },
       "$figmaVariableReferences": {
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -5397,8 +5469,7 @@
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
         "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -5501,6 +5572,7 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -5736,8 +5808,7 @@
         "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
         "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIconColor": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -5763,7 +5834,10 @@
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
         "input.medium": "S:a5701c71372820c94bf01893751c0bc7a04d7d7d,",
         "input.small": "S:58d5c91a50f3164b2126c733340f87a871c9e3e6,",
-        "input.large": "S:87bd6300ece97ed512480cdc179f761e05ecefe5,"
+        "input.large": "S:87bd6300ece97ed512480cdc179f761e05ecefe5,",
+        "inlineLink.small": "S:0b346a9fe8ad299a09d47b72cf7d0ed9d0781db0,",
+        "inlineLink.medium": "S:fcc860633705baf25d75d4e6b8563e43088986dc,",
+        "inlineLink.large": "S:e67f7cb7db9b807b1e87f1fdf3fb0683e9e068a3,"
       },
       "$figmaVariableReferences": {
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
@@ -5845,6 +5919,7 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
         "background.container": "2c5cfbf22b78432656fc20a0ae48253ebe00ae0d",
@@ -6080,8 +6155,7 @@
         "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
         "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIconColor": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203",
-        "background.base": "99fe5b07913dbf600b5c83fa43554af37c758216"
+        "pill.warningBorderColor": "bd23616df540a39b08188e587d7a21671fb4b203"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
