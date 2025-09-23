@@ -27,7 +27,6 @@
     "@emotion/react": "^11",
     "@instructure/console": "10.25.0",
     "@instructure/shared-types": "10.25.0",
-    "@instructure/theme-registry": "10.25.0",
     "@instructure/ui-decorator": "10.25.0",
     "@instructure/ui-i18n": "10.25.0",
     "@instructure/ui-react-utils": "10.25.0",
@@ -38,9 +37,9 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.25.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
-    "react-dom": "^19.1",
+    "react-dom": "18.3.1",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {

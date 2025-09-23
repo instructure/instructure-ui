@@ -219,11 +219,7 @@ const alias = {
     '../ui-file-drop/src/'
   ),
   '@instructure/ui-heading$': path.resolve(import.meta.dirname, '../ui-heading/src/'),
-  '@instructure/emotion$': path.resolve(import.meta.dirname, '../emotion/src/'),
-  '@instructure/theme-registry$': path.resolve(
-    import.meta.dirname,
-    '../theme-registry/src/'
-  )
+  '@instructure/emotion$': path.resolve(import.meta.dirname, '../emotion/src/')
 }
 
 export default { alias }

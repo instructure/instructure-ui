@@ -40,7 +40,7 @@
     "@instructure/ui-text": "10.25.0",
     "@instructure/ui-themes": "10.25.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "15.0.7",
     "@types/escape-html": "^1.0.4",
     "vitest": "^3.2.2"
   },

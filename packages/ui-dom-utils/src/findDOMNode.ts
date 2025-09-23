@@ -30,10 +30,14 @@ import ReactDOM from 'react-dom'
  * React 18 (element.ref) and React 19+ (element.props.ref)
  */
 function getElementRef(elem: { ref?: any; props?: { ref: any } }) {
-  if (elem?.props?.ref !== undefined) {
-    return elem.props.ref
+  // Note that this is added by InstUI components like Position
+  if (elem.ref) {
+    return elem.ref
   }
-  return elem.ref
+  // note that trying to access this will display a warning in React 18.
+  // this is OK because without it React itself would show an error because
+  // its using findDOMNode
+  return elem?.props?.ref
 }
 
 /**
@@ -82,7 +86,7 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
       ? (node as any).constructor.componentId
       : (node as any).constructor.name
     console.error(
-      `Error: ${elName} doesn't have "ref" property.\n
+      `findDOMNode error: ${elName} doesn't have "ref" property.\n
       your code will likely not work with React 19+, because ReactDOM.findDOMNode() was removed.\n
       See more here: https://instructure.design/#accessing-the-dom`
     )
