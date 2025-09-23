@@ -2402,15 +2402,15 @@
         "type": "color"
       },
       "spaceBetweenElementsMd": {
-        "value": "{size.size4}",
+        "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "spaceBetweenElementsLg": {
-        "value": "{size.size8}",
+        "value": "{spacing.spaceSm}",
         "type": "spacing"
       },
       "spaceBetweenElementsSm": {
-        "value": "{size.size2}",
+        "value": "{spacing.space2xs}",
         "type": "spacing"
       }
     }
@@ -3039,15 +3039,15 @@
         "type": "color"
       },
       "spaceBetweenElementsMd": {
-        "value": "{size.size4}",
+        "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "spaceBetweenElementsLg": {
-        "value": "{size.size8}",
+        "value": "{spacing.spaceSm}",
         "type": "spacing"
       },
       "spaceBetweenElementsSm": {
-        "value": "{size.size2}",
+        "value": "{spacing.space2xs}",
         "type": "spacing"
       }
     }
