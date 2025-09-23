@@ -2372,6 +2372,34 @@
       "size2xl": {
         "value": "5rem",
         "type": "sizing"
+      },
+      "fontSize2xs": {
+        "value": "{fontSize.textXs}",
+        "type": "fontSizes"
+      },
+      "fontSizeXs": {
+        "value": "{fontSize.textXs}",
+        "type": "fontSizes"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "{fontSize.textLg}",
+        "type": "fontSizes"
+      },
+      "fontSizeXl": {
+        "value": "{fontSize.textXl}",
+        "type": "fontSizes"
+      },
+      "fontSize2xl": {
+        "value": "{fontSize.text2xl}",
+        "type": "fontSizes"
       }
     }
   },
@@ -3009,6 +3037,34 @@
       "size2xl": {
         "value": "5rem",
         "type": "sizing"
+      },
+      "fontSize2xs": {
+        "value": "{fontSize.textXs}",
+        "type": "fontSizes"
+      },
+      "fontSizeXs": {
+        "value": "{fontSize.textXs}",
+        "type": "fontSizes"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "{fontSize.textLg}",
+        "type": "fontSizes"
+      },
+      "fontSizeXl": {
+        "value": "{fontSize.textXl}",
+        "type": "fontSizes"
+      },
+      "fontSize2xl": {
+        "value": "{fontSize.text2xl}",
+        "type": "fontSizes"
       }
     }
   },
