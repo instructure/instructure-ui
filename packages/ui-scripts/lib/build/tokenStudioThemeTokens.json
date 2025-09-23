@@ -2665,7 +2665,7 @@
         "value": "{color.icon.success}",
         "type": "color"
       },
-      "successBorder": {
+      "successBorderColor": {
         "value": "{color.stroke.success}",
         "type": "color"
       },
@@ -5130,9 +5130,9 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203"
+        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5485,9 +5485,9 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "pill.successBorder": "97c2c9a18e4d1c0feae0b6f1585758d77389011d",
         "pill.warningIcon": "58e67a0bb640181382fad4fa1e2aa0e771251512",
-        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203"
+        "pill.warningBorder": "bd23616df540a39b08188e587d7a21671fb4b203",
+        "pill.successBorderColor": "97c2c9a18e4d1c0feae0b6f1585758d77389011d"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
