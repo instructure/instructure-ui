@@ -44,6 +44,7 @@ import type { TableProps } from './props'
 
 import { allowedProps } from './props'
 import TableContext from './TableContext'
+import { error } from '@instructure/console'
 
 /**
 ---
@@ -109,6 +110,10 @@ class Table extends Component<TableProps> {
     const { margin, layout, caption, children, hover, styles } = this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : undefined
+
+    if (!caption) {
+      error(false, `[Table] required prop caption is not set.`)
+    }
 
     return (
       <TableContext.Provider

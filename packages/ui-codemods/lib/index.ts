@@ -26,14 +26,16 @@ import updateV10Breaking from './updateV10Breaking'
 import instUIv11Codemods from './instUIv11Codemods'
 import removeAsFromInstUISettingsProvider from './removeAsFromInstUISettingsProvider'
 import { renameCanvasThemes } from './renameCanvasThemesCodemod'
-import updateCodeEditorImport from './updateCodeEditorImport'
 import renameGetComputedStyleToGetCSSStyleDeclaration from './renameGetComputedStyleToGetCSSStyleDeclaration'
+import warnTableCaptionMissing from './warnTableCaptionMissing'
+import warnCodeEditorRemoved from './warnCodeEditorRemoved'
 
 export {
   updateV10Breaking,
   instUIv11Codemods,
   removeAsFromInstUISettingsProvider,
   renameCanvasThemes,
-  updateCodeEditorImport,
-  renameGetComputedStyleToGetCSSStyleDeclaration
+  renameGetComputedStyleToGetCSSStyleDeclaration,
+  warnTableCaptionMissing,
+  warnCodeEditorRemoved
 }

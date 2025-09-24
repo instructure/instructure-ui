@@ -48,7 +48,11 @@ export function runTest(codemod: Transform) {
       const isWarningTest = entry.name.includes('.warning.input')
       const inputPath = path.join(entry.parentPath, entry.name)
       const input = fs.readFileSync(inputPath, 'utf8')
-      const expectedName = entry.name.replace('input', 'output')
+      let expectedName = entry.name.replace('input', 'output')
+      if (isWarningTest) {
+        expectedName =
+          path.basename(expectedName, path.extname(expectedName)) + '.json'
+      }
       const expectedPath = path.join(entry.parentPath, expectedName)
       const expected = fs.readFileSync(expectedPath, 'utf8')
 
@@ -81,7 +85,6 @@ export function runTest(codemod: Transform) {
           const expectedWarningContent = fs
             .readFileSync(expectedPath, 'utf8')
             .trim()
-            .replace(/'/g, '"')
 
           let expectedWarnings: string[]
 
@@ -98,7 +101,6 @@ export function runTest(codemod: Transform) {
           const actualWarnings = warnSpy.mock.calls.map(
             (call) => call[0] as string
           )
-
           expect(warnSpy).toHaveBeenCalledTimes(expectedWarnings.length)
 
           expectedWarnings.forEach((expected) => {
@@ -109,7 +111,10 @@ export function runTest(codemod: Transform) {
             const actualCount = actualWarnings.filter((w) =>
               w.includes(expected)
             ).length
-
+            if (actualCount !== expectedCount) {
+              console.error('actual warnings: ' + actualWarnings)
+              console.error('expected to contain: ' + expectedWarnings)
+            }
             expect(actualCount).toBe(expectedCount)
           })
         } finally {

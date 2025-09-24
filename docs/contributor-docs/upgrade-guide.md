@@ -74,6 +74,8 @@ The **`<CodeEditor>` component** from the `ui-code-editor` package has been **re
 | `Body`    | `hover`     | is now stored in `TableContext` |
 | `Body`    | `headers`   | is now stored in `TableContext` |
 
+[Table](#Table)'s `caption` prop is now required.
+
 ---
 
 ## API Changes
@@ -93,6 +95,13 @@ type: code
 npm install @instructure/ui-codemods@11
 npx jscodeshift@17.3.0 -t node_modules/@instructure/ui-codemods/lib/instUIv11Codemods.ts <path> --usePrettier=false
 ```
+
+This is a collection of the codemods that will do the following:
+
+- Removes the `as` prop from `InstUISettingsProvider`.
+- Renames `canvasThemeLocal` to `canvas` and `canvasHighContrastThemeLocal` to `canvasHighContrastTheme`, warns about deleted `ThemeRegistry` imports and the removed `canvas.use()`/`canvasHighContrast.use()` functions.
+- Prints a warning if the `caption` prop is missing from a `<Table />`
+- Warns if `CodeEditor` is used
 
 Options for the codemod:
 

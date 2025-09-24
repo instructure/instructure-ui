@@ -36,7 +36,7 @@ type TableOwnProps = {
    * Provide a screen reader friendly description. Anything passed to this
    * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
    */
-  caption?: React.ReactNode
+  caption: React.ReactNode
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via

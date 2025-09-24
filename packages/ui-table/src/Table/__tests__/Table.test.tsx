@@ -80,7 +80,8 @@ describe('<Table />', async () => {
 
   it('applies a fixed column layout', async () => {
     await renderTable({
-      layout: 'fixed'
+      layout: 'fixed',
+      caption: 'Test table'
     })
     const table = screen.getByRole('table')
 
@@ -89,7 +90,8 @@ describe('<Table />', async () => {
 
   it('passes hover to table row', async () => {
     renderTable({
-      hover: true
+      hover: true,
+      caption: 'Test table'
     })
     const tableRows = screen.getAllByRole('row')
 
@@ -119,7 +121,8 @@ describe('<Table />', async () => {
 
   it('can render table in stacked layout', async () => {
     renderTable({
-      layout: 'stacked'
+      layout: 'stacked',
+      caption: 'Test table'
     })
     const stackedTable = screen.getByRole('table')
 

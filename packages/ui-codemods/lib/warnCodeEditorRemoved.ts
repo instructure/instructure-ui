@@ -21,33 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { Transform } from 'jscodeshift'
+import { JSCodeshift, Collection, Transform } from 'jscodeshift'
+import { findImport, printWarning } from './utils/codemodHelpers'
 import instUICodemodExecutor from './utils/instUICodemodExecutor'
-import { removeAsProp } from './removeAsFromInstUISettingsProvider'
-import { renameCanvasThemes } from './renameCanvasThemesCodemod'
-import { warnTableCaptionMissingCodemod } from './warnTableCaptionMissing'
-import { warnCodeEditorRemovedCodemod } from './warnCodeEditorRemoved'
+import type { InstUICodemod } from './utils/instUICodemodExecutor'
 
 /**
- * Runs all InstUI v10 -> v11 upgrade codemods
+ * Prints a warning if a `CodeEditor` import is found
  */
-const InstUIv11Codemods: Transform = (
+const warnCodeEditorRemoved: Transform = (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  return instUICodemodExecutor(
-    [
-      removeAsProp,
-      renameCanvasThemes,
-      warnTableCaptionMissingCodemod,
-      warnCodeEditorRemovedCodemod
-    ],
-    file,
-    api,
-    options
-  )
+  return instUICodemodExecutor(warnCodeEditorRemovedCodemod, file, api, options)
 }
 
-export default InstUIv11Codemods
+const warnCodeEditorRemovedCodemod: InstUICodemod = (
+  j: JSCodeshift,
+  root: Collection,
+  filePath: string
+) => {
+  const codeEditor = findImport(j, root, 'CodeEditor', [
+    '@instructure/ui-code-editor',
+    '@instructure/ui'
+  ])
+  if (!codeEditor) return false
+  printWarning(
+    filePath,
+    0,
+    `imports CodeEditor. This is removed in InstUI 11, you must migrate to SourceCodeEditor and remove the instructure/ui-code-editor dependency`
+  )
+  return true
+}
+
+export default warnCodeEditorRemoved
+export { warnCodeEditorRemovedCodemod }

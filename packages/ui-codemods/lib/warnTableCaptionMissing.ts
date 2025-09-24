@@ -21,33 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { Transform } from 'jscodeshift'
+import { JSCodeshift, Collection, Transform } from 'jscodeshift'
+import {
+  findImport,
+  findElement,
+  findAttribute,
+  printWarning
+} from './utils/codemodHelpers'
 import instUICodemodExecutor from './utils/instUICodemodExecutor'
-import { removeAsProp } from './removeAsFromInstUISettingsProvider'
-import { renameCanvasThemes } from './renameCanvasThemesCodemod'
-import { warnTableCaptionMissingCodemod } from './warnTableCaptionMissing'
-import { warnCodeEditorRemovedCodemod } from './warnCodeEditorRemoved'
+import type { InstUICodemod } from './utils/instUICodemodExecutor'
+
+const TABLE_IMPORT_PATHS = ['@instructure/ui-table', '@instructure/ui']
 
 /**
- * Runs all InstUI v10 -> v11 upgrade codemods
+ * Prints a warning if the `caption` prop is missing from a `<Table />`.
  */
-const InstUIv11Codemods: Transform = (
+const warnTableCaptionMissing: Transform = (
   file,
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
   return instUICodemodExecutor(
-    [
-      removeAsProp,
-      renameCanvasThemes,
-      warnTableCaptionMissingCodemod,
-      warnCodeEditorRemovedCodemod
-    ],
+    warnTableCaptionMissingCodemod,
     file,
     api,
     options
   )
 }
 
-export default InstUIv11Codemods
+const warnTableCaptionMissingCodemod: InstUICodemod = (
+  j: JSCodeshift,
+  root: Collection,
+  filePath: string
+) => {
+  let warned = false
+  // Find the local name for Table (could be aliased)
+  const tableName = findImport(j, root, 'Table', TABLE_IMPORT_PATHS)
+  if (!tableName) return false
+
+  // Find all <Table> elements
+  const tableElements = findElement(filePath, j, root, tableName)
+  tableElements.forEach((path) => {
+    // Check if caption attribute exists
+    const hasCaption =
+      findAttribute(
+        filePath,
+        j,
+        j(path.value.openingElement),
+        'caption'
+      ).size() > 0
+    if (!hasCaption) {
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        `<${tableName}> is missing required 'caption' prop.`
+      )
+      warned = true
+    }
+  })
+
+  return warned
+}
+
+export default warnTableCaptionMissing
+export { warnTableCaptionMissingCodemod }
