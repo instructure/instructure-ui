@@ -5614,7 +5614,7 @@ var react_dom__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(43144)
 function findDOMNode(el){const node="function"==typeof el?el():el
 if(node&&node===document)return document.documentElement
 if(node instanceof Element||node===window||node&&void 0!==node.nodeType)return node
-if(node){const ref=void 0!==(null==(elem=node)||null===(_elem$props=elem.props)||void 0===_elem$props?void 0:_elem$props.ref)?elem.props.ref:elem.ref,refElement=null!=ref&&ref.current?ref.current:ref
+if(node){const ref=(elem=node).ref?elem.ref:null==elem||null===(_elem$props=elem.props)||void 0===_elem$props?void 0:_elem$props.ref,refElement=null!=ref&&ref.current?ref.current:ref
 if(refElement)return refElement instanceof HTMLElement?refElement:findDOMNode(refElement)
 if(null===refElement)return
 node.constructor.componentId?node.constructor.componentId:node.constructor.name
