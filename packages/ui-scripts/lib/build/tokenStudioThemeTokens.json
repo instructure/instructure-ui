@@ -2404,6 +2404,10 @@
       "fontSize2xl": {
         "value": "{fontSize.text2xl}",
         "type": "fontSizes"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
@@ -3073,6 +3077,10 @@
       "fontSize2xl": {
         "value": "{fontSize.text2xl}",
         "type": "fontSizes"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
