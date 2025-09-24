@@ -582,10 +582,7 @@ By default, the options in the `Select` for sorting in stacked layout are genera
                 </View>
               )}
 
-              <Table
-                caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
-                {...props}
-              >
+              <Table {...props}>
                 <Table.Head renderSortLabel="Sort by">
                   {this.renderHeaderRow(direction)}
                 </Table.Head>
@@ -601,13 +598,6 @@ By default, the options in the `Select` for sorting in stacked layout are genera
                   ))}
                 </Table.Body>
               </Table>
-              <Alert
-                liveRegion={() => document.getElementById('flash-messages')}
-                liveRegionPoliteness="polite"
-                screenReaderOnly
-              >
-                {`Sorted by ${sortBy} in ${direction} order`}
-              </Alert>
             </div>
           )}
         </Responsive>
@@ -806,10 +796,7 @@ By default, the options in the `Select` for sorting in stacked layout are genera
               </View>
             )}
 
-            <Table
-              caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
-              {...props}
-            >
+            <Table {...props}>
               <Table.Head renderSortLabel="Sort by">
                 {renderHeaderRow(direction)}
               </Table.Head>
@@ -825,13 +812,6 @@ By default, the options in the `Select` for sorting in stacked layout are genera
                 ))}
               </Table.Body>
             </Table>
-            <Alert
-              liveRegion={() => document.getElementById('flash-messages')}
-              liveRegionPoliteness="polite"
-              screenReaderOnly
-            >
-              {`Sorted by ${sortBy} in ${direction} order`}
-            </Alert>
           </div>
         )}
       </Responsive>
@@ -966,10 +946,7 @@ that selection does not re-paginate or re-sort the table, and pagination does no
               <View as="div" padding="small" background="primary-inverse">
                 {`${selected.size} of ${rowIds.length} selected`}
               </View>
-              <Table
-                caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
-                {...props}
-              >
+              <Table {...props}>
                 <Table.Head
                   renderSortLabel={
                     <ScreenReaderContent>Sort by</ScreenReaderContent>
@@ -1175,15 +1152,6 @@ that selection does not re-paginate or re-sort the table, and pagination does no
             ascending={ascending}
             perPage={perPage}
           />
-          <Alert
-            liveRegion={() => document.getElementById('flash-messages')}
-            liveRegionPoliteness="polite"
-            screenReaderOnly
-          >
-            {`Sorted by ${sortBy} in ${
-              ascending ? 'ascending' : 'descending'
-            } order`}
-          </Alert>
         </div>
       )
     }
@@ -1305,10 +1273,7 @@ that selection does not re-paginate or re-sort the table, and pagination does no
             <View as="div" padding="small" background="primary-inverse">
               {`${selected.size} of ${rowIds.length} selected`}
             </View>
-            <Table
-              caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
-              {...props}
-            >
+            <Table {...props}>
               <Table.Head
                 renderSortLabel={
                   <ScreenReaderContent>Sort by</ScreenReaderContent>
@@ -1485,15 +1450,6 @@ that selection does not re-paginate or re-sort the table, and pagination does no
           ascending={ascending}
           perPage={perPage}
         />
-        <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
-          liveRegionPoliteness="polite"
-          screenReaderOnly
-        >
-          {`Sorted by ${sortBy} in ${
-            ascending ? 'ascending' : 'descending'
-          } order`}
-        </Alert>
       </div>
     )
   }
