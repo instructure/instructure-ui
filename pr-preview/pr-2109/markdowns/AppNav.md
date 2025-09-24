@@ -203,15 +203,26 @@ than two.
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | AppNav | screenReaderLabel | `string` | Yes | - | Screenreader label for the overall navigation |
-| AppNav | children | `React.ReactNode` | No | `null` | Only accepts `AppNav.Item` as children |
+| AppNav | children | `ReactReactNode` | No | `null` | Only accepts `AppNav.Item` as children |
 | AppNav | debounce | `number` | No | `300` | The rate (in ms) the component responds to container resizing or an update to one of its child items |
-| AppNav | renderBeforeItems | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the navigation items, such as a logo |
-| AppNav | renderAfterItems | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the navigation items, aligned to the far end of the navigation |
-| AppNav | margin | `string` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| AppNav | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying nav element |
-| AppNav | renderTruncateLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `() => 'More'` | Customize the text displayed in the menu trigger when links overflow the overall nav width. |
-| AppNav | onUpdate | `(visibleItemsCount: { visibleItemsCount: number }) => void` | No | - | Called whenever the navigation items are updated or the size of the navigation changes. Passes in the `visibleItemsCount` as a parameter. |
+| AppNav | renderBeforeItems | `union` | No | - | Content to display before the navigation items, such as a logo |
+| AppNav | renderAfterItems | `union` | No | - | Content to display after the navigation items, aligned to the far end of the navigation |
+| AppNav | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| AppNav | elementRef | `signature` | No | - | Provides a reference to the underlying nav element |
+| AppNav | renderTruncateLabel | `union` | No | `() => 'More'` | Customize the text displayed in the menu trigger when links overflow the overall nav width. |
+| AppNav | onUpdate | `signature` | No | - | Called whenever the navigation items are updated or the size of the navigation changes. Passes in the `visibleItemsCount` as a parameter. |
 | AppNav | visibleItemsCount | `number` | No | `0` | Sets the number of navigation items that are visible. |
+| AppNav.Item | renderLabel | `union` | Yes | - | The text to display. If the `icon` prop is used, label text must be wrapped in `ScreenReaderContent`. |
+| AppNav.Item | renderAfter | `union` | No | - | Content to display after the renderLabel text, such as a badge |
+| AppNav.Item | renderIcon | `union` | No | - | The visual to display (ex. an Image, Logo, Avatar, or Icon) |
+| AppNav.Item | href | `string` | No | - | If the item goes to a new page, pass an href |
+| AppNav.Item | onClick | `signature` | No | - | If the item does not go to a new page, pass an onClick |
+| AppNav.Item | isSelected | `boolean` | No | `false` | Denotes which item is currently selected |
+| AppNav.Item | elementRef | `signature` | No | - | provides a reference to the underlying focusable (`button` or `a`) element |
+| AppNav.Item | as | `union` | No | - | The element type to render as (will default to `<a>` if href is provided) |
+| AppNav.Item | cursor | `Cursor` | No | `'pointer'` | Specify the mouse cursor to use on :hover. The `pointer` cursor is used by default. |
+| AppNav.Item | isDisabled | `boolean` | No | `false` | Disables the link or button visually and functionally |
+| AppNav.Item | children | `` | No | `null` |  |
 
 ### Usage
 
@@ -226,8 +237,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { AppNav } from '@instructure/ui-navigation'
-
-/*** ES Modules (without tree shaking) ***/
-import { AppNav } from '@instructure/ui-navigation/es/AppNav/index'
 ```
 

@@ -245,18 +245,18 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | RadioInputGroup | name | `string` | Yes | - | This prop sets the [same low level HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group) **Must be unique across the DOM** otherwise groups will interfere with each other |
-| RadioInputGroup | description | `React.ReactNode` | Yes | - | The text above the radio group. Use `ScreenReaderContent` if you don't want it to be visible. |
-| RadioInputGroup | defaultValue | `string \| number` | No | - | value to set on initial render |
-| RadioInputGroup | value | `string \| number` | No | - | the selected value (must be accompanied by an `onChange` prop) |
-| RadioInputGroup | onChange | `(event: React.ChangeEvent<HTMLInputElement>, value: string) => void` | No | - | when used with the `value` prop, the component will not control its own state |
-| RadioInputGroup | disabled | `bool` | No | `false` |  |
-| RadioInputGroup | readOnly | `bool` | No | `false` | works just like disabled but keeps the same styles as if it were active |
-| RadioInputGroup | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: ReactNode, type: One of: ['error', 'newError', 'hint', 'success', 'screenreader-only'] }` |
-| RadioInputGroup | children | `React.ReactNode` | No | - | any children (ones that aren't `RadioInput` are passed through) |
-| RadioInputGroup | variant | `'simple' \| 'toggle'` | No | `'simple'` |  |
-| RadioInputGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| RadioInputGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
-| RadioInputGroup | isRequired | `bool` | No | - | Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change. |
+| RadioInputGroup | description | `ReactReactNode` | Yes | - | The text above the radio group. Use `ScreenReaderContent` if you don't want it to be visible. |
+| RadioInputGroup | defaultValue | `union` | No | - | value to set on initial render |
+| RadioInputGroup | value | `union` | No | - | the selected value (must be accompanied by an `onChange` prop) |
+| RadioInputGroup | onChange | `signature` | No | - | when used with the `value` prop, the component will not control its own state |
+| RadioInputGroup | disabled | `boolean` | No | `false` |  |
+| RadioInputGroup | readOnly | `boolean` | No | `false` | works just like disabled but keeps the same styles as if it were active |
+| RadioInputGroup | messages | `Array` | No | - | Array of objects with shape: `{ text: ReactNode, type: One of: ['error', 'newError', 'hint', 'success', 'screenreader-only'] }` |
+| RadioInputGroup | children | `ReactReactNode` | No | - | any children (ones that aren't `RadioInput` are passed through) |
+| RadioInputGroup | variant | `union` | No | `'simple'` |  |
+| RadioInputGroup | size | `union` | No | `'medium'` |  |
+| RadioInputGroup | layout | `union` | No | `'stacked'` |  |
+| RadioInputGroup | isRequired | `boolean` | No | - | Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change. |
 
 ### Usage
 
@@ -271,8 +271,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { RadioInputGroup } from '@instructure/ui-radio-input'
-
-/*** ES Modules (without tree shaking) ***/
-import { RadioInputGroup } from '@instructure/ui-radio-input/es/RadioInputGroup/index'
 ```
 

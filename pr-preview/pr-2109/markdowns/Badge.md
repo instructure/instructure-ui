@@ -408,19 +408,19 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Badge | count | `number` | No | - |  |
 | Badge | countUntil | `number` | No | - | The number at which the count gets truncated by formatOverflowText. For example, a countUntil of 100 would stop the count at 99. |
-| Badge | children | `element` | No | - |  |
-| Badge | type | `'count' \| 'notification'` | No | `'count'` | Render Badge as a counter (`count`) or as a smaller dot (`notification`) with no count number displayed. |
-| Badge | standalone | `bool` | No | `false` | Render Badge as an inline html element that is not positioned relative to a child. |
-| Badge | pulse | `bool` | No | `false` | Make the Badge slowly pulse twice to get the user's attention. |
-| Badge | variant | `'primary' \| 'success' \| 'danger' \| 'inverse'` | No | `'primary'` |  |
-| Badge | placement | `custom` | No | `'top end'` | Supported values are `top start`, `top end`, `end center`, `bottom end`, `bottom start`, and `start center` |
-| Badge | display | `'inline-block' \| 'block'` | No | `'inline-block'` | Specifies the display property of the container. __Use "block" only when the content inside the Badge also has "block" display.__ |
-| Badge | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Badge | elementRef | `(element: Element \| null) => void` | No | `() => {}` | provides a reference to the underlying html root element |
-| Badge | formatOverflowText | `(count: number, countUntil: number) => string` | No | `(_count: number, countUntil: number) =>
+| Badge | children | `` | No | - |  |
+| Badge | type | `union` | No | `'count'` | Render Badge as a counter (`count`) or as a smaller dot (`notification`) with no count number displayed. |
+| Badge | standalone | `boolean` | No | `false` | Render Badge as an inline html element that is not positioned relative to a child. |
+| Badge | pulse | `boolean` | No | `false` | Make the Badge slowly pulse twice to get the user's attention. |
+| Badge | variant | `union` | No | `'primary'` |  |
+| Badge | placement | `PlacementPropValues` | No | `'top end'` | Supported values are `top start`, `top end`, `end center`, `bottom end`, `bottom start`, and `start center` |
+| Badge | display | `union` | No | `'inline-block'` | Specifies the display property of the container. __Use "block" only when the content inside the Badge also has "block" display.__ |
+| Badge | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Badge | elementRef | `signature` | No | `() => {}` | provides a reference to the underlying html root element |
+| Badge | formatOverflowText | `signature` | No | `(_count: number, countUntil: number) =>
 `${countUntil - 1} +`` |  |
-| Badge | formatOutput | `(formattedCount: string) => JSX.Element \| string \| number` | No | - |  |
-| Badge | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - |  |
+| Badge | formatOutput | `signature` | No | - |  |
+| Badge | as | `union` | No | - |  |
 
 ### Usage
 
@@ -435,8 +435,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Badge } from '@instructure/ui-badge'
-
-/*** ES Modules (without tree shaking) ***/
-import { Badge } from '@instructure/ui-badge/es/Badge/index'
 ```
 

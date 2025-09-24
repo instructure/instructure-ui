@@ -345,27 +345,27 @@ render(<Example />)
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| DateInput2 | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | Specifies the input label. |
-| DateInput2 | screenReaderLabels | `{ calendarIcon: string prevMonthButton: string nextMonthButton: string }` | Yes | - |  |
-| DateInput2 | value | `custom` | No | - | Specifies the input value. |
+| DateInput2 | renderLabel | `union` | Yes | - | Specifies the input label. |
+| DateInput2 | screenReaderLabels | `signature` | Yes | - |  |
+| DateInput2 | value | `string` | No | - | Specifies the input value. |
 | DateInput2 | placeholder | `string` | No | - | Placeholder text for the input field. If it's left undefined it will display a hint for the date format (like `DD/MM/YYYY`). |
-| DateInput2 | onChange | `( event: React.SyntheticEvent, inputValue: string, utcDateString: string ) => void` | No | - | Callback fired when the input changes. |
-| DateInput2 | onBlur | `( event: React.SyntheticEvent, value: string, utcDateString: string ) => void` | No | - | Callback executed when the input fires a blur event. |
-| DateInput2 | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `'enabled'` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
-| DateInput2 | isRequired | `bool` | No | `false` | Specifies if the input is required. |
-| DateInput2 | isInline | `bool` | No | `false` | Controls whether the input is rendered inline with other elements or if it is rendered as a block level element. |
+| DateInput2 | onChange | `signature` | No | - | Callback fired when the input changes. |
+| DateInput2 | onBlur | `signature` | No | - | Callback executed when the input fires a blur event. |
+| DateInput2 | interaction | `union` | No | `'enabled'` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
+| DateInput2 | isRequired | `boolean` | No | `false` | Specifies if the input is required. |
+| DateInput2 | isInline | `boolean` | No | `false` | Controls whether the input is rendered inline with other elements or if it is rendered as a block level element. |
 | DateInput2 | width | `string` | No | - | Specifies the width of the input. |
-| DateInput2 | messages | `FormMessage[]` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
-| DateInput2 | invalidDateErrorMessage | `union` | No | - | The message shown to the user when the date is invalid. If this prop is not set, validation is bypassed. If it's set to an empty string, validation happens and the input border changes to red if validation hasn't passed. |
+| DateInput2 | messages | `Array` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
+| DateInput2 | invalidDateErrorMessage | `string` | No | - | The message shown to the user when the date is invalid. If this prop is not set, validation is bypassed. If it's set to an empty string, validation happens and the input border changes to red if validation hasn't passed. |
 | DateInput2 | locale | `string` | No | - | A standard language identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales) for more details. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's locale will be used if no value is set via a component property or a context property. |
 | DateInput2 | timezone | `string` | No | - | A timezone identifier in the format: *Area/Location* See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list of possible options. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The system timezone will be used if no value is set via a component property or a context property. |
-| DateInput2 | withYearPicker | `{ screenReaderLabel: string onRequestYearChange?: (e: SyntheticEvent, requestedYear: number) => void startYear: number endYear: number }` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
-| DateInput2 | dateFormat | `\| { parser: (input: string) => Date \| null formatter: (date: Date) => string } \| string` | No | - | By default the date format is determined by the locale but can be changed via this prop to an alternate locale (passing it in as a string) or a custom parser and formatter (both as functions) |
-| DateInput2 | onRequestValidateDate | `( event: React.SyntheticEvent, value: string, utcDateString: string ) => void` | No | - | Callback executed when the input fires a blur event or a date is selected from the picker. |
-| DateInput2 | renderCalendarIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Custom icon for the icon button opening the picker. |
-| DateInput2 | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| DateInput2 | disabledDates | `string[] \| ((isoDateToCheck: string) => boolean)` | No | - |  |
-| DateInput2 | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the inner input element |
+| DateInput2 | withYearPicker | `signature` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
+| DateInput2 | dateFormat | `union` | No | - | By default the date format is determined by the locale but can be changed via this prop to an alternate locale (passing it in as a string) or a custom parser and formatter (both as functions) |
+| DateInput2 | onRequestValidateDate | `signature` | No | - | Callback executed when the input fires a blur event or a date is selected from the picker. |
+| DateInput2 | renderCalendarIcon | `union` | No | - | Custom icon for the icon button opening the picker. |
+| DateInput2 | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| DateInput2 | disabledDates | `union` | No | - |  |
+| DateInput2 | inputRef | `signature` | No | - | A function that provides a reference to the inner input element |
 
 ### Usage
 
@@ -380,8 +380,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { DateInput2 } from '@instructure/ui-date-input'
-
-/*** ES Modules (without tree shaking) ***/
-import { DateInput2 } from '@instructure/ui-date-input/es/DateInput2/index'
 ```
 

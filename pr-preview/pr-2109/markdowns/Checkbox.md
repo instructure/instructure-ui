@@ -289,27 +289,42 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Checkbox | label | `React.ReactNode` | Yes | - |  |
+| Checkbox | label | `ReactReactNode` | Yes | - |  |
 | Checkbox | id | `string` | No | - |  |
-| Checkbox | value | `string \| number` | No | - |  |
-| Checkbox | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| Checkbox | defaultChecked | `bool` | No | - |  |
-| Checkbox | checked | `custom` | No | - | whether the input is checked or not (must be accompanied by an `onChange` prop) |
-| Checkbox | onChange | `(e: React.ChangeEvent<HTMLInputElement>) => void` | No | - | when used with the `checked` prop, the component will not control its own state |
-| Checkbox | onKeyDown | `(e: React.KeyboardEvent<HTMLInputElement>) => void` | No | - |  |
-| Checkbox | onFocus | `(e: React.FocusEvent<HTMLInputElement>) => void` | No | - |  |
-| Checkbox | onBlur | `(e: React.FocusEvent<HTMLInputElement>) => void` | No | - |  |
-| Checkbox | onMouseOver | `(e: React.MouseEvent<HTMLInputElement>) => void` | No | - |  |
-| Checkbox | onMouseOut | `(e: React.MouseEvent<HTMLInputElement>) => void` | No | - |  |
-| Checkbox | disabled | `bool` | No | `false` | Whether or not to disable the checkbox |
-| Checkbox | readOnly | `bool` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
-| Checkbox | indeterminate | `bool` | No | `false` | Visual state showing that child checkboxes are a combination of checked and unchecked |
-| Checkbox | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| Checkbox | variant | `'simple' \| 'toggle'` | No | `'simple'` |  |
-| Checkbox | inline | `bool` | No | `false` |  |
-| Checkbox | labelPlacement | `'top' \| 'start' \| 'end'` | No | `'end'` |  |
-| Checkbox | isRequired | `bool` | No | - |  |
-| Checkbox | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
+| Checkbox | value | `union` | No | - |  |
+| Checkbox | messages | `Array` | No | - | Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| Checkbox | defaultChecked | `boolean` | No | - |  |
+| Checkbox | checked | `boolean` | No | - | whether the input is checked or not (must be accompanied by an `onChange` prop) |
+| Checkbox | onChange | `signature` | No | - | when used with the `checked` prop, the component will not control its own state |
+| Checkbox | onKeyDown | `signature` | No | - |  |
+| Checkbox | onFocus | `signature` | No | - |  |
+| Checkbox | onBlur | `signature` | No | - |  |
+| Checkbox | onMouseOver | `signature` | No | - |  |
+| Checkbox | onMouseOut | `signature` | No | - |  |
+| Checkbox | disabled | `boolean` | No | `false` | Whether or not to disable the checkbox |
+| Checkbox | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
+| Checkbox | indeterminate | `boolean` | No | `false` | Visual state showing that child checkboxes are a combination of checked and unchecked |
+| Checkbox | size | `union` | No | `'medium'` |  |
+| Checkbox | variant | `union` | No | `'simple'` |  |
+| Checkbox | inline | `boolean` | No | `false` |  |
+| Checkbox | labelPlacement | `union` | No | `'end'` |  |
+| Checkbox | isRequired | `boolean` | No | - |  |
+| Checkbox | inputRef | `signature` | No | - | A function that provides a reference to the actual underlying input element |
+| Checkbox.CheckboxFacade | children | `ReactReactNode` | Yes | - |  |
+| Checkbox.CheckboxFacade | checked | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | focused | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | hovered | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | size | `union` | No | `'medium'` |  |
+| Checkbox.CheckboxFacade | indeterminate | `boolean` | No | `false` | Visual state showing that child checkboxes are a combination of checked and unchecked |
+| Checkbox.CheckboxFacade | invalid | `boolean` | No | - | Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly. |
+| Checkbox.ToggleFacade | children | `ReactReactNode` | Yes | - |  |
+| Checkbox.ToggleFacade | checked | `boolean` | No | `false` |  |
+| Checkbox.ToggleFacade | disabled | `boolean` | No | `false` |  |
+| Checkbox.ToggleFacade | readOnly | `boolean` | No | `false` |  |
+| Checkbox.ToggleFacade | focused | `boolean` | No | `false` |  |
+| Checkbox.ToggleFacade | size | `union` | No | `'medium'` |  |
+| Checkbox.ToggleFacade | labelPlacement | `union` | No | `'end'` |  |
+| Checkbox.ToggleFacade | invalid | `boolean` | No | - | Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly. |
 
 ### Usage
 
@@ -324,8 +339,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Checkbox } from '@instructure/ui-checkbox'
-
-/*** ES Modules (without tree shaking) ***/
-import { Checkbox } from '@instructure/ui-checkbox/es/Checkbox/index'
 ```
 

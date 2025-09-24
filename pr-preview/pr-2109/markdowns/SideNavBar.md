@@ -84,14 +84,22 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| SideNavBar | children | `React.ReactNode` | No | `null` | children of type SideNavBar.Item |
-| SideNavBar | minimized | `custom` | No | - | When minimized is set to true, the `<SideNavBar />` shows icons only while the text becomes a tooltip. When it is set to false, the `<SideNavBar />` shows text in addition to the icons |
-| SideNavBar | defaultMinimized | `bool` | No | `false` | Whether the `<SideNavBar />` is initially minimized (uncontrolled) |
-| SideNavBar | onMinimized | `(event: React.SyntheticEvent, minimized: boolean) => void` | No | - |  |
+| SideNavBar | children | `ReactReactNode` | No | `null` | children of type SideNavBar.Item |
+| SideNavBar | minimized | `boolean` | No | - | When minimized is set to true, the `<SideNavBar />` shows icons only while the text becomes a tooltip. When it is set to false, the `<SideNavBar />` shows text in addition to the icons |
+| SideNavBar | defaultMinimized | `boolean` | No | `false` | Whether the `<SideNavBar />` is initially minimized (uncontrolled) |
+| SideNavBar | onMinimized | `signature` | No | - |  |
 | SideNavBar | label | `string` | Yes | - | Screen reader label for the main SideNavBar |
-| SideNavBar | toggleLabel | `{ expandedLabel?: string minimizedLabel?: string }` | Yes | - | Screen reader label for the toggle button expanded/minimized state |
+| SideNavBar | toggleLabel | `signature` | Yes | - | Screen reader label for the toggle button expanded/minimized state |
 | SideNavBar | href | `string` | No | - | If the `<SideNavBar.Item>` goes to a new page, pass an href |
-| SideNavBar | onClick | `(event: React.MouseEvent) => void` | No | `function (_e: React.MouseEvent) {}` | If the `<SideNavBar.Item>` does not go to a new page pass an onClick |
+| SideNavBar | onClick | `signature` | No | `function (_e: React.MouseEvent) {}` | If the `<SideNavBar.Item>` does not go to a new page pass an onClick |
+| SideNavBar.SideNavBarItem | elementRef | `signature` | No | - | The reference to the underlying HTML element |
+| SideNavBar.SideNavBarItem | icon | `ReactReactNode` | Yes | - | The visual to display (ex. an Image, Logo, Avatar, or Icon) |
+| SideNavBar.SideNavBarItem | label | `ReactReactNode` | Yes | - | The text to display for the SideNavBar Link |
+| SideNavBar.SideNavBarItem | as | `union` | No | `'a'` | The element type to render as (will default to `<a>` if href is provided) |
+| SideNavBar.SideNavBarItem | href | `string` | No | - | If the SideNavBarItem goes to a new page, pass an href |
+| SideNavBar.SideNavBarItem | onClick | `signature` | No | - | If the SideNavBarItem does not go to a new page pass an onClick |
+| SideNavBar.SideNavBarItem | selected | `boolean` | No | `false` | Denotes which SideNavBarItem is currently selected |
+| SideNavBar.SideNavBarItem | minimized | `boolean` | No | `false` | When minimized is set to true, the `<SideNavBar />` shows icons only while the text becomes a tooltip. When it is set to false, the `<SideNavBar />` shows text in addition to the icons |
 
 ### Usage
 
@@ -106,8 +114,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { SideNavBar } from '@instructure/ui-side-nav-bar'
-
-/*** ES Modules (without tree shaking) ***/
-import { SideNavBar } from '@instructure/ui-side-nav-bar/es/SideNavBar/index'
 ```
 

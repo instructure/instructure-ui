@@ -172,25 +172,25 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Link | children | `React.ReactNode` | Yes | - | The text and/or icon displayed by the link |
+| Link | children | `ReactReactNode` | Yes | - | The text and/or icon displayed by the link |
 | Link | href | `string` | No | - | Sets the link's `href` attribute |
-| Link | color | `'link' \| 'link-inverse'` | No | `'link'` | Designates Link's text color to accommodate light and dark backgrounds |
-| Link | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
-| Link | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element type to render as (will default to `<a>` if href is provided) |
+| Link | color | `union` | No | `'link'` | Designates Link's text color to accommodate light and dark backgrounds |
+| Link | elementRef | `signature` | No | - | Provides a reference to the underlying HTML element |
+| Link | as | `union` | No | - | The element type to render as (will default to `<a>` if href is provided) |
 | Link | role | `string` | No | - | The ARIA role of the element. |
-| Link | forceButtonRole | `bool` | No | `true` | If the Link has an onClick handler but is not a button element, force ARIA role to be "button". |
-| Link | interaction | `'enabled' \| 'disabled'` | No | `undefined` | Determines if the link is enabled or disabled |
-| Link | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Link | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. |
-| Link | iconPlacement | `'start' \| 'end'` | No | `'start'` | Place the icon before or after the text in the Link. |
-| Link | display | `'auto' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
-| Link | isWithinText | `bool` | No | `true` | Set `false` to remove default underline if Link does not appear inline with text |
-| Link | onBlur | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link loses focus |
-| Link | onClick | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is clicked |
-| Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
-| Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
-| Link | variant | `'inline' \| 'inline-small' \| 'standalone' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component |
-| Link | to | `` | No | - | Needed for React Router links @private |
+| Link | forceButtonRole | `boolean` | No | `true` | If the Link has an onClick handler but is not a button element, force ARIA role to be "button". |
+| Link | interaction | `union` | No | `undefined` | Determines if the link is enabled or disabled |
+| Link | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Link | renderIcon | `union` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. |
+| Link | iconPlacement | `union` | No | `'start'` | Place the icon before or after the text in the Link. |
+| Link | display | `union` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
+| Link | isWithinText | `boolean` | No | `true` | Set `false` to remove default underline if Link does not appear inline with text |
+| Link | onBlur | `signature` | No | - | Fires when the Link loses focus |
+| Link | onClick | `signature` | No | - | Fires when the Link is clicked |
+| Link | onFocus | `signature` | No | - | Fires when the Link gains focus |
+| Link | onMouseEnter | `signature` | No | - | Fires when the Link is hovered |
+| Link | variant | `union` | No | - | Sets pre-defined values for the component to achieve specific roles for the component |
+| Link | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
 
@@ -205,8 +205,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Link } from '@instructure/ui-link'
-
-/*** ES Modules (without tree shaking) ***/
-import { Link } from '@instructure/ui-link/es/Link/index'
 ```
 

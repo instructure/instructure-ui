@@ -24,8 +24,8 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | AccessibleContent | alt | `string` | No | - | The text that screenreaders will read. Will not be visible. |
-| AccessibleContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render the screen reader content as |
-| AccessibleContent | children | `React.ReactNode` | No | `null` | Content that will be hidden from screenreaders (via `aria-hidden` set to `true`) |
+| AccessibleContent | as | `union` | No | `'span'` | the element type to render the screen reader content as |
+| AccessibleContent | children | `ReactReactNode` | No | `null` | Content that will be hidden from screenreaders (via `aria-hidden` set to `true`) |
 
 ### Usage
 
@@ -40,8 +40,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { AccessibleContent } from '@instructure/ui-a11y-content'
-
-/*** ES Modules (without tree shaking) ***/
-import { AccessibleContent } from '@instructure/ui-a11y-content/es/AccessibleContent/index'
 ```
 

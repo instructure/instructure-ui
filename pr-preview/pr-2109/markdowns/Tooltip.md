@@ -202,23 +202,23 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Tooltip | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| Tooltip | children | `React.ReactNode \| TooltipRenderChildren` | Yes | - | A ReactNode or a function that returns a ReactNode with the following params: @param {Boolean} focused - Is the Tooltip trigger focused? @param {Function} getTriggerProps - Props to be spread onto the trigger element |
-| Tooltip | renderTip | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content to render in the tooltip |
-| Tooltip | isShowingContent | `bool` | No | - | Whether or not the tooltip content is shown, when controlled |
-| Tooltip | defaultIsShowingContent | `bool` | No | `false` | Whether or not to show the content by default, when uncontrolled |
-| Tooltip | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | the element type to render as (assumes a single child if 'as' is undefined) |
-| Tooltip | on | `('click' \| 'hover' \| 'focus') \| ('click' \| 'hover' \| 'focus')[]` | No | - | The action that causes the Content to display (`click`, `hover`, `focus`) |
-| Tooltip | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | The color of the tooltip content |
-| Tooltip | placement | `custom` | No | `'top'` | Specifies where the Tooltip will be placed in relation to the target element. Ex. placement="bottom" will render the Tooltip below the triggering element (Note: if there is not room, it will position opposite. Ex. "top" will automatically switch to "bottom") |
-| Tooltip | mountNode | `custom` | No | - | An element or a function returning an element to use as the mount node for the `<Tooltip />` (defaults to `document.body`) |
-| Tooltip | constrain | `custom` | No | `'window'` | The parent in which to constrain the tooltip. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element |
-| Tooltip | offsetX | `string \| number` | No | `0` | The horizontal offset for the positioned content |
-| Tooltip | offsetY | `string \| number` | No | `0` | The vertical offset for the positioned content |
-| Tooltip | positionTarget | `union` | No | - | Target element for positioning the Tooltip (if it differs from children/trigger) |
-| Tooltip | onShowContent | `(event: React.UIEvent \| React.FocusEvent) => void` | No | - | Callback fired when content is shown. When controlled, this callback is fired when the tooltip expects to be shown |
-| Tooltip | onHideContent | `( event: React.UIEvent \| React.FocusEvent, args: { documentClick: boolean } ) => void` | No | - | Callback fired when content is hidden. When controlled, this callback is fired when the tooltip expects to be hidden |
-| Tooltip | preventTooltip | `bool` | No | `false` | If true, it won't display the tooltip. This is useful in cases when tooltip is conditionally needed but in an uncontrolled way |
+| Tooltip | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Tooltip | children | `union` | Yes | - | A ReactNode or a function that returns a ReactNode with the following params: @param {Boolean} focused - Is the Tooltip trigger focused? @param {Function} getTriggerProps - Props to be spread onto the trigger element |
+| Tooltip | renderTip | `union` | Yes | - | The content to render in the tooltip |
+| Tooltip | isShowingContent | `boolean` | No | - | Whether or not the tooltip content is shown, when controlled |
+| Tooltip | defaultIsShowingContent | `boolean` | No | `false` | Whether or not to show the content by default, when uncontrolled |
+| Tooltip | as | `union` | No | - | the element type to render as (assumes a single child if 'as' is undefined) |
+| Tooltip | on | `union` | No | - | The action that causes the Content to display (`click`, `hover`, `focus`) |
+| Tooltip | color | `union` | No | `'primary'` | The color of the tooltip content |
+| Tooltip | placement | `PlacementPropValues` | No | `'top'` | Specifies where the Tooltip will be placed in relation to the target element. Ex. placement="bottom" will render the Tooltip below the triggering element (Note: if there is not room, it will position opposite. Ex. "top" will automatically switch to "bottom") |
+| Tooltip | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<Tooltip />` (defaults to `document.body`) |
+| Tooltip | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the tooltip. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element |
+| Tooltip | offsetX | `union` | No | `0` | The horizontal offset for the positioned content |
+| Tooltip | offsetY | `union` | No | `0` | The vertical offset for the positioned content |
+| Tooltip | positionTarget | `PositionMountNode` | No | - | Target element for positioning the Tooltip (if it differs from children/trigger) |
+| Tooltip | onShowContent | `signature` | No | - | Callback fired when content is shown. When controlled, this callback is fired when the tooltip expects to be shown |
+| Tooltip | onHideContent | `signature` | No | - | Callback fired when content is hidden. When controlled, this callback is fired when the tooltip expects to be hidden |
+| Tooltip | preventTooltip | `boolean` | No | `false` | If true, it won't display the tooltip. This is useful in cases when tooltip is conditionally needed but in an uncontrolled way |
 
 ### Usage
 
@@ -233,8 +233,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Tooltip } from '@instructure/ui-tooltip'
-
-/*** ES Modules (without tree shaking) ***/
-import { Tooltip } from '@instructure/ui-tooltip/es/Tooltip/index'
 ```
 

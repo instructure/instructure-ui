@@ -108,14 +108,18 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Rating | label | `string` | Yes | - | A label is required for accessibility |
-| Rating | formatValueText | `(filled: number, iconCount: number) => string` | No | `(filled: number, iconCount: number) =>
+| Rating | formatValueText | `signature` | No | `(filled: number, iconCount: number) =>
 `${filled} / ${iconCount}`` | A function that returns the current value formatted for screen readers |
-| Rating | iconCount | `3 \| 5` | No | `3` | Choose from a 0-3 or 0-5 rating system |
-| Rating | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Choose from different rating icon sizes |
+| Rating | iconCount | `union` | No | `3` | Choose from a 0-3 or 0-5 rating system |
+| Rating | size | `union` | No | `'medium'` | Choose from different rating icon sizes |
 | Rating | valueMax | `number` | No | - | The maximum rating (defaults to iconCount) |
 | Rating | valueNow | `number` | No | `0` | The current rating |
-| Rating | animateFill | `bool` | No | `false` | Set to make the icons animate when they become filled |
-| Rating | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Rating | animateFill | `boolean` | No | `false` | Set to make the icons animate when they become filled |
+| Rating | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Rating.RatingIcon | animationDelay | `number` | No | `200` |  |
+| Rating.RatingIcon | animateFill | `boolean` | No | `false` |  |
+| Rating.RatingIcon | filled | `boolean` | No | `false` |  |
+| Rating.RatingIcon | size | `union` | No | `'medium'` |  |
 
 ### Usage
 
@@ -130,8 +134,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Rating } from '@instructure/ui-rating'
-
-/*** ES Modules (without tree shaking) ***/
-import { Rating } from '@instructure/ui-rating/es/Rating/index'
 ```
 

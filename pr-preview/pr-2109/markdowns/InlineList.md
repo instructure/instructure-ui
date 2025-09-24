@@ -149,13 +149,21 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| InlineList | children | `React.ReactNode` | No | - | Only accepts `<InlineList.Item>` as a child |
-| InlineList | as | `'ul' \| 'ol'` | No | `'ul'` |  |
-| InlineList | margin | `string` | No | `'none'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| InlineList | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| InlineList | delimiter | `'none' \| 'pipe' \| 'slash' \| 'arrow'` | No | `'none'` |  |
-| InlineList | itemSpacing | `\| 'none' \| 'xxx-small' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'none'` | Sets the margin separating each ListItem. |
-| InlineList | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| InlineList | children | `ReactReactNode` | No | - | Only accepts `<InlineList.Item>` as a child |
+| InlineList | as | `union` | No | `'ul'` |  |
+| InlineList | margin | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| InlineList | size | `union` | No | `'medium'` |  |
+| InlineList | delimiter | `union` | No | `'none'` |  |
+| InlineList | itemSpacing | `union` | No | `'none'` | Sets the margin separating each ListItem. |
+| InlineList | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| InlineList.InlineListItem | children | `` | Yes | - |  |
+| InlineList.InlineListItem | delimiter | `union` | No | `'none'` | Inherits delimiter from the parent InlineList component |
+| InlineList.InlineListItem | size | `union` | No | `'medium'` |  |
+| InlineList.InlineListItem | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| InlineList.InlineListItem | padding | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| InlineList.InlineListItem | spacing | `union` | No | `'none'` | Inherits itemSpacing from the parent InlineList component |
+| InlineList.InlineListItem | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| InlineList.InlineListItem | lastPlaceholder | `boolean` | No | `false` | Used internally to mark the last item as a placeholder |
 
 ### Usage
 
@@ -170,8 +178,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { InlineList } from '@instructure/ui-list'
-
-/*** ES Modules (without tree shaking) ***/
-import { InlineList } from '@instructure/ui-list/es/InlineList/index'
 ```
 

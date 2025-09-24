@@ -411,30 +411,30 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| TextInput | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The form field label. |
-| TextInput | type | `'text' \| 'email' \| 'url' \| 'tel' \| 'search' \| 'password'` | No | `'text'` | Determines the underlying native HTML `<input>` element's `type`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url |
+| TextInput | renderLabel | `union` | No | - | The form field label. |
+| TextInput | type | `union` | No | `'text'` | Determines the underlying native HTML `<input>` element's `type`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url |
 | TextInput | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
-| TextInput | value | `custom` | No | - | the selected value (must be accompanied by an `onChange` prop) |
+| TextInput | value | `string` | No | - | the selected value (must be accompanied by an `onChange` prop) |
 | TextInput | defaultValue | `string` | No | - | value to set on initial render |
-| TextInput | interaction | `enum` | No | `undefined` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
-| TextInput | messages | `FormMessage[]` | No | `[]` | Array of objects with shape: `{ text: React.ReactNode, type: One of ['error', 'hint', 'success', 'screenreader-only'] }` |
-| TextInput | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the text input. |
-| TextInput | textAlign | `'start' \| 'center'` | No | `'start'` | The text alignment of the input. |
+| TextInput | interaction | `InteractionType` | No | `undefined` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
+| TextInput | messages | `Array` | No | `[]` | Array of objects with shape: `{ text: React.ReactNode, type: One of ['error', 'hint', 'success', 'screenreader-only'] }` |
+| TextInput | size | `union` | No | `'medium'` | The size of the text input. |
+| TextInput | textAlign | `union` | No | `'start'` | The text alignment of the input. |
 | TextInput | width | `string` | No | - | The width of the input. |
 | TextInput | htmlSize | `number` | No | - | The width of the input (integer value 0 or higher), if a width is not explicitly provided via the `width` prop. Only applicable if `display="inline-block"`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/size |
-| TextInput | display | `'inline-block' \| 'block'` | No | `'block'` | The display of the root element. |
-| TextInput | shouldNotWrap | `bool` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
+| TextInput | display | `union` | No | `'block'` | The display of the root element. |
+| TextInput | shouldNotWrap | `boolean` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
 | TextInput | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
-| TextInput | isRequired | `bool` | No | `false` | Whether or not the text input is required. |
-| TextInput | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| TextInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | a function that provides a reference to the actual input element |
-| TextInput | inputContainerRef | `(element: HTMLSpanElement \| null) => void` | No | - | a function that provides a reference a parent of the input element |
-| TextInput | renderBeforeInput | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the input text, such as an icon |
-| TextInput | renderAfterInput | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the input text, such as an icon |
-| TextInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>, value: string) => void` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {string} value - the string value of the input |
-| TextInput | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input loses focus. |
-| TextInput | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input receives focus. |
-| TextInput | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| TextInput | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
+| TextInput | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| TextInput | inputRef | `signature` | No | - | a function that provides a reference to the actual input element |
+| TextInput | inputContainerRef | `signature` | No | - | a function that provides a reference a parent of the input element |
+| TextInput | renderBeforeInput | `union` | No | - | Content to display before the input text, such as an icon |
+| TextInput | renderAfterInput | `union` | No | - | Content to display after the input text, such as an icon |
+| TextInput | onChange | `signature` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {string} value - the string value of the input |
+| TextInput | onBlur | `signature` | No | - | Callback fired when input loses focus. |
+| TextInput | onFocus | `signature` | No | - | Callback fired when input receives focus. |
+| TextInput | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
 
 ### Usage
 
@@ -449,8 +449,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { TextInput } from '@instructure/ui-text-input'
-
-/*** ES Modules (without tree shaking) ***/
-import { TextInput } from '@instructure/ui-text-input/es/TextInput/index'
 ```
 

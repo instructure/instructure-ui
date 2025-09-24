@@ -94,24 +94,24 @@ For an example see [Button](#Button/#Styling%20buttons)
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| IconButton | children | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function returning an icon (identical to the `renderIcon` prop). |
-| IconButton | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon (identical to the `children` prop). |
-| IconButton | screenReaderLabel | `string` | Yes | - | An accessible label for the `IconButton`. |
-| IconButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `IconButton`'s underlying html element. |
-| IconButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `IconButton` |
-| IconButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `IconButton`'s underlying html element. |
-| IconButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `button` by default. |
-| IconButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `IconButton` is enabled, disabled, or readonly. |
-| IconButton | color | `\| 'primary' \| 'primary-inverse' \| 'secondary' \| 'success' \| 'danger' \| 'ai-primary' \| 'ai-secondary'` | No | `'secondary'` | Specifies the color for the `IconButton`. |
-| IconButton | focusColor | `'info' \| 'inverse'` | No | - | Override the `Button`'s default focus outline color. |
-| IconButton | shape | `'rectangle' \| 'circle'` | No | `'rectangle'` | Specifies if the `IconButton` shape should be a circle or rectangle. |
-| IconButton | withBackground | `bool` | No | `true` | Specifies if the `IconButton` should render with a solid background. When false, the background is transparent. |
-| IconButton | withBorder | `bool` | No | `true` | Specifies if the `IconButton` should render with a border. |
-| IconButton | margin | `string` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| IconButton | cursor | `string` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
+| IconButton | children | `union` | No | - | An icon, or function returning an icon (identical to the `renderIcon` prop). |
+| IconButton | renderIcon | `union` | No | - | An icon, or function that returns an icon (identical to the `children` prop). |
+| IconButton | screenReaderLabel | `ReactNode` | Yes | - | An accessible label for the `IconButton`. |
+| IconButton | type | `union` | No | `'button'` | Specifies the type of the `IconButton`'s underlying html element. |
+| IconButton | size | `union` | No | `'medium'` | The size of the `IconButton` |
+| IconButton | elementRef | `signature` | No | - | Provides a reference to the `IconButton`'s underlying html element. |
+| IconButton | as | `union` | No | `'button'` | The element to render as the component root, `button` by default. |
+| IconButton | interaction | `union` | No | `undefined` | Specifies if interaction with the `IconButton` is enabled, disabled, or readonly. |
+| IconButton | color | `union` | No | `'secondary'` | Specifies the color for the `IconButton`. |
+| IconButton | focusColor | `union` | No | - | Override the `Button`'s default focus outline color. |
+| IconButton | shape | `union` | No | `'rectangle'` | Specifies if the `IconButton` shape should be a circle or rectangle. |
+| IconButton | withBackground | `boolean` | No | `true` | Specifies if the `IconButton` should render with a solid background. When false, the background is transparent. |
+| IconButton | withBorder | `boolean` | No | `true` | Specifies if the `IconButton` should render with a border. |
+| IconButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| IconButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | IconButton | href | `string` | No | - | Specifies an href attribute for the `IconButton`'s underlying html element. |
-| IconButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `Button` is clicked. |
-| IconButton | to | `` | No | - | Needed for React Router links @private |
+| IconButton | onClick | `signature` | No | - | Callback fired when the `Button` is clicked. |
+| IconButton | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
 
@@ -126,8 +126,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { IconButton } from '@instructure/ui-buttons'
-
-/*** ES Modules (without tree shaking) ***/
-import { IconButton } from '@instructure/ui-buttons/es/IconButton/index'
 ```
 

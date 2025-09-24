@@ -845,11 +845,15 @@ The Pages component can be used to render Paginated content that does not fit in
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Pages | children | `React.ReactNode` | No | - | Children are type of `<Pages.Page>` |
+| Pages | children | `ReactReactNode` | No | - | Children are type of `<Pages.Page>` |
 | Pages | defaultPageIndex | `number` | No | - |  |
-| Pages | activePageIndex | `custom` | No | `0` | The currently active page index |
-| Pages | onPageIndexChange | `(newPageIndex: number, oldPageIndex?: number) => void` | No | - | Event handler fired anytime page index has changed due to back button being clicked |
-| Pages | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Pages | activePageIndex | `number` | No | `0` | The currently active page index |
+| Pages | onPageIndexChange | `signature` | No | - | Event handler fired anytime page index has changed due to back button being clicked |
+| Pages | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Pages.Page | children | `union` | No | `null` | The children to be rendered |
+| Pages.Page | defaultFocusElement | `union` | No | `null` | An element or a function returning an element to focus by default |
+| Pages.Page | padding | `Spacing` | No | `'small'` | Set the padding using familiar CSS shorthand |
+| Pages.Page | textAlign | `union` | No | `'start'` |  |
 
 ### Usage
 
@@ -864,8 +868,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Pages } from '@instructure/ui-pages'
-
-/*** ES Modules (without tree shaking) ***/
-import { Pages } from '@instructure/ui-pages/es/Pages/index'
 ```
 

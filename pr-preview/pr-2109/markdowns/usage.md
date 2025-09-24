@@ -76,7 +76,7 @@ InstUI provides a compressed, downloadable collection of all component documenta
 You can download the archive from the following link:
 https://instructure.design/markdowns/documentation.zip
 
-The download includes an INDEX.md file that references all available documentation within the compressed folder.
+The download includes an index.md file that references all available documentation within the compressed folder.
 
 These files are designed to be used as context for AI coding agents.
 

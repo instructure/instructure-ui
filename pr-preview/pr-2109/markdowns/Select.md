@@ -2803,41 +2803,50 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Select | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The form field label. |
+| Select | renderLabel | `union` | Yes | - | The form field label. |
 | Select | inputValue | `string` | No | `''` | The value to display in the text input. |
 | Select | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
-| Select | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the text input. |
+| Select | size | `union` | No | `'medium'` | The size of the text input. |
 | Select | assistiveText | `string` | No | - | Additional helpful text to provide to screen readers about the operation of the component. |
 | Select | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
-| Select | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
-| Select | isRequired | `bool` | No | `false` | Whether or not the text input is required. |
-| Select | isInline | `bool` | No | `false` | Whether the input is rendered inline with other elements or if it is rendered as a block level element. |
+| Select | interaction | `union` | No | `undefined` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
+| Select | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
+| Select | isInline | `boolean` | No | `false` | Whether the input is rendered inline with other elements or if it is rendered as a block level element. |
 | Select | width | `string` | No | - | The width of the text input. |
 | Select | htmlSize | `number` | No | - | The width of the input (integer value 0 or higher), if a width is not explicitly provided via the `width` prop. Only applicable if `isInline={true}`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/size |
 | Select | visibleOptionsCount | `number` | No | `8` | The number of options that should be visible before having to scroll. Works best when the options are the same height. |
-| Select | isOptionContentAppliedToInput | `bool` | No | `false` | Whether or not the content of the selected `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field. If the selected `Select.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field. One of the `Select.Option`'s `isSelected` prop should be `true` in order to display the content in the input field. `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `Select`'s `inputValue` is an empty value, null or undefined. If `true` and the selected `Select.Option` has a `renderAfterLabel` value, it will replace the default arrow icon. If `true` and `Select`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `Select`'s `renderBeforeInput` or `renderAfterInput` value. If the selected `Select.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered. |
+| Select | isOptionContentAppliedToInput | `boolean` | No | `false` | Whether or not the content of the selected `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field. If the selected `Select.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field. One of the `Select.Option`'s `isSelected` prop should be `true` in order to display the content in the input field. `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `Select`'s `inputValue` is an empty value, null or undefined. If `true` and the selected `Select.Option` has a `renderAfterLabel` value, it will replace the default arrow icon. If `true` and `Select`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `Select.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `Select`'s `renderBeforeInput` or `renderAfterInput` value. If the selected `Select.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered. |
 | Select | optionsMaxHeight | `string` | No | - | The max height the options list can be before having to scroll. If set, it will __override__ the `visibleOptionsCount` prop. |
 | Select | optionsMaxWidth | `string` | No | - | The max width the options list can be before option text wraps. If not set, the list will only display as wide as the text input. |
-| Select | messages | `FormMessage[]` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| Select | placement | `custom` | No | `'bottom stretch'` | The placement of the options list. |
-| Select | constrain | `custom` | No | `'window'` | The parent in which to constrain the placement. |
-| Select | mountNode | `custom` | No | - | An element or a function returning an element to use mount the options list to in the DOM (defaults to `document.body`) |
-| Select | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input receives focus. |
-| Select | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input loses focus. |
-| Select | onInputChange | `( event: React.ChangeEvent<HTMLInputElement>, value: string ) => void` | No | - | Callback fired when text input value changes. |
-| Select | isShowingOptions | `bool` | No | `false` | Whether or not to show the options list. |
-| Select | onRequestShowOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired requesting that the options list be shown. |
-| Select | onRequestHideOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired requesting that the options list be hidden. |
-| Select | onRequestHighlightOption | `( event: React.SyntheticEvent, data: { id?: string; direction?: 1 \| -1 } ) => void` | No | - | Callback fired requesting a particular option be highlighted. |
-| Select | onRequestSelectOption | `( event: React.SyntheticEvent, data: { id?: string } ) => void` | No | - | Callback fired requesting a particular option be selected. |
-| Select | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A ref to the html `input` element. |
-| Select | listRef | `(listElement: HTMLUListElement \| null) => void` | No | - | A ref to the html `ul` element. |
-| Select | renderBeforeInput | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the text input. This will commonly be an icon or tags to show multiple selections. |
-| Select | renderAfterInput | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
-| Select | children | `React.ReactNode` | No | - | Children of type `<Select.Option />` or `<Select.Group />`. |
-| Select | shouldNotWrap | `bool` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
-| Select | scrollToHighlightedOption | `bool` | No | `true` | Enable/disable auto scroll to the highlighted option on every re-render |
-| Select | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
+| Select | messages | `Array` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| Select | placement | `PlacementPropValues` | No | `'bottom stretch'` | The placement of the options list. |
+| Select | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the placement. |
+| Select | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use mount the options list to in the DOM (defaults to `document.body`) |
+| Select | onFocus | `signature` | No | - | Callback fired when text input receives focus. |
+| Select | onBlur | `signature` | No | - | Callback fired when text input loses focus. |
+| Select | onInputChange | `signature` | No | - | Callback fired when text input value changes. |
+| Select | isShowingOptions | `boolean` | No | `false` | Whether or not to show the options list. |
+| Select | onRequestShowOptions | `signature` | No | - | Callback fired requesting that the options list be shown. |
+| Select | onRequestHideOptions | `signature` | No | - | Callback fired requesting that the options list be hidden. |
+| Select | onRequestHighlightOption | `signature` | No | - | Callback fired requesting a particular option be highlighted. |
+| Select | onRequestSelectOption | `signature` | No | - | Callback fired requesting a particular option be selected. |
+| Select | inputRef | `signature` | No | - | A ref to the html `input` element. |
+| Select | listRef | `signature` | No | - | A ref to the html `ul` element. |
+| Select | renderBeforeInput | `union` | No | - | Content to display before the text input. This will commonly be an icon or tags to show multiple selections. |
+| Select | renderAfterInput | `union` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
+| Select | children | `ReactReactNode` | No | - | Children of type `<Select.Option />` or `<Select.Group />`. |
+| Select | shouldNotWrap | `boolean` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
+| Select | scrollToHighlightedOption | `boolean` | No | `true` | Enable/disable auto scroll to the highlighted option on every re-render |
+| Select | layout | `union` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
+| Select.Group | renderLabel | `union` | Yes | - | The label associated with the group options. |
+| Select.Group | children | `ReactReactNode` | No | - | Children of type `<SimpleSelect.Option />` that will be considered part of the group. |
+| Select.Option | id | `string` | Yes | - | The id for the option. **Must be globally unique**, it will be translated to an `id` prop in the DOM. |
+| Select.Option | isHighlighted | `boolean` | No | `false` | Whether or not this option is highlighted. |
+| Select.Option | isSelected | `boolean` | No | `false` | Whether or not this option is selected. |
+| Select.Option | isDisabled | `boolean` | No | `false` | Whether or not this option is disabled. |
+| Select.Option | renderBeforeLabel | `union` | No | - | Content to display before the option label, such as an icon. |
+| Select.Option | renderAfterLabel | `union` | No | - | Content to display after the option label, such as an icon. |
+| Select.Option | children | `ReactReactNode` | No | - | Content to display as the option label. |
 
 ### Usage
 
@@ -2852,8 +2861,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Select } from '@instructure/ui-select'
-
-/*** ES Modules (without tree shaking) ***/
-import { Select } from '@instructure/ui-select/es/Select/index'
 ```
 

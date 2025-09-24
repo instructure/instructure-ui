@@ -92,7 +92,7 @@
 - [Select](./Select.md): Accessible combobox component for single or multiple selections. Supports autocomplete, grouping, async loading, icons, and screen reader announcements. Fully controllable with extensive state management examples.
 - [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [SideNavBar](./SideNavBar.md): Experimental top-level navigation component with toggleable minimized/expanded states. Supports icons, Avatars, badges, and theming. API may change significantly.
-- [SimpleSelect](./SimpleSelect.md): Simplified Select component mimicking native <select> behavior. Supports uncontrolled/controlled usage, option groups, and icons. Less configurable than Select but easier to implement.
+- [SimpleSelect](./SimpleSelect.md): Simplified Select component mimicking native `<select>` behavior. Supports uncontrolled/controlled usage, option groups, and icons. Less configurable than Select but easier to implement.
 - [SourceCodeEditor](./SourceCodeEditor.md): Wrapper around CodeMirror with syntax highlighting, line numbers, folding, indentation, search, and RTL support. Recommended upgrade from deprecated CodeEditor component.
 - [Spinner](./Spinner.md): Loading indicator with four sizes, inverse variant for dark backgrounds, configurable delay, and screen reader support via renderTitle prop.
 - [Table](./Table.md): A versatile table component supporting multiple layouts (auto, fixed, stacked), column customization, sorting, selection, pagination, and responsive behavior. Includes accessibility features and supports custom components for advanced use cases.

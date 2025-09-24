@@ -834,50 +834,50 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Popover | isShowingContent | `bool` | No | - | Whether or not the `<Popover />` content is shown |
-| Popover | defaultIsShowingContent | `bool` | No | `false` | Whether or not to show the content by default, when uncontrolled |
-| Popover | on | `('click' \| 'hover' \| 'focus') \| ('click' \| 'hover' \| 'focus')[]` | No | `['hover', 'focus']` | The action that causes the content to display (`click`, `hover`, `focus`) |
-| Popover | withArrow | `bool` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
-| Popover | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Color variant of the popover content |
-| Popover | placement | `custom` | No | `'bottom center'` | The placement of the content in relation to the trigger One of: 'top', 'bottom', 'start', 'end', 'top start', 'top center', 'top end', 'top stretch', 'bottom start', 'bottom center', 'bottom end', 'bottom stretch', 'start top', 'start center', 'start bottom', 'start stretch', 'end top', 'end center', 'end bottom', 'end stretch', 'center start', 'center end', 'offscreen' |
-| Popover | shadow | `custom` | No | `'resting'` | Controls the shadow depth for the `<Popover />` |
-| Popover | stacking | `custom` | No | `'topmost'` | Controls the z-index depth for the `<Popover />` content |
-| Popover | contentRef | `(contentElement: Element \| null) => void` | No | - | A function that returns a reference to the content element |
-| Popover | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
+| Popover | isShowingContent | `boolean` | No | - | Whether or not the `<Popover />` content is shown |
+| Popover | defaultIsShowingContent | `boolean` | No | `false` | Whether or not to show the content by default, when uncontrolled |
+| Popover | on | `union` | No | `['hover', 'focus']` | The action that causes the content to display (`click`, `hover`, `focus`) |
+| Popover | withArrow | `boolean` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
+| Popover | color | `union` | No | `'primary'` | Color variant of the popover content |
+| Popover | placement | `PlacementPropValues` | No | `'bottom center'` | The placement of the content in relation to the trigger One of: 'top', 'bottom', 'start', 'end', 'top start', 'top center', 'top end', 'top stretch', 'bottom start', 'bottom center', 'bottom end', 'bottom stretch', 'start top', 'start center', 'start bottom', 'start stretch', 'end top', 'end center', 'end bottom', 'end stretch', 'center start', 'center end', 'offscreen' |
+| Popover | shadow | `Shadow` | No | `'resting'` | Controls the shadow depth for the `<Popover />` |
+| Popover | stacking | `Stacking` | No | `'topmost'` | Controls the z-index depth for the `<Popover />` content |
+| Popover | contentRef | `signature` | No | - | A function that returns a reference to the content element |
+| Popover | defaultFocusElement | `union` | No | - | An element or a function returning an element to focus by default |
 | Popover | screenReaderLabel | `string` | No | - | An accessible label for the `<Popover />` content |
-| Popover | offsetX | `string \| number` | No | `0` | The horizontal offset for the positioned content |
-| Popover | offsetY | `string \| number` | No | `0` | The vertical offset for the positioned content |
-| Popover | constrain | `custom` | No | `'window'` | The parent in which to constrain the popover. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element |
-| Popover | positionTarget | `union` | No | - | Target element for positioning the Popover (if it differs from the trigger) |
-| Popover | positionContainerDisplay | `'inline-block' \| 'block'` | No | - | Set the CSS `display` property on the `<span>` container element of the underlying Position component |
-| Popover | mountNode | `custom` | No | - | An element or a function returning an element to use as the mount node for the `<Popover />` (defaults to `document.body`) |
-| Popover | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
-| Popover | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Popover />` is open |
+| Popover | offsetX | `union` | No | `0` | The horizontal offset for the positioned content |
+| Popover | offsetY | `union` | No | `0` | The vertical offset for the positioned content |
+| Popover | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the popover. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element |
+| Popover | positionTarget | `PositionMountNode` | No | - | Target element for positioning the Popover (if it differs from the trigger) |
+| Popover | positionContainerDisplay | `union` | No | - | Set the CSS `display` property on the `<span>` container element of the underlying Position component |
+| Popover | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<Popover />` (defaults to `document.body`) |
+| Popover | insertAt | `union` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
+| Popover | liveRegion | `union` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Popover />` is open |
 | Popover | id | `string` | No | - | An id is generated if not supplied. |
-| Popover | shouldAlignArrow | `bool` | No | `false` | Whether or not the content should offset to align by its arrow |
-| Popover | shouldTrackPosition | `bool` | No | `true` | Whether or not position should be tracked or just set on initial render |
-| Popover | shouldRenderOffscreen | `bool` | No | `false` | Should the `<Popover />` render offscreen when visually hidden |
-| Popover | shouldContainFocus | `bool` | No | `false` | Whether focus should contained within the `<Popover/>` when it is open |
-| Popover | shouldReturnFocus | `bool` | No | `true` | Whether focus should be returned to the trigger when the `<Popover/>` is closed |
-| Popover | shouldCloseOnDocumentClick | `bool` | No | `true` | Should the `<Popover />` hide when clicks occur outside the content |
-| Popover | shouldCloseOnEscape | `bool` | No | `true` | Should the `<Popover />` hide when the escape key is pressed |
-| Popover | shouldFocusContentOnTriggerBlur | `bool` | No | `false` | Should the content become focused when the trigger is blurred |
-| Popover | onShowContent | `(event: React.UIEvent \| React.FocusEvent) => void` | No | - | Callback fired when content is shown. When controlled, this callback is fired when the Popover expects to be shown |
-| Popover | onHideContent | `( event: React.UIEvent \| React.FocusEvent, args: { documentClick: boolean } ) => void` | No | - | Callback fired when content is hidden. When controlled, this callback is fired when the Popover expects to be hidden |
-| Popover | onPositioned | `(position: PositionObject) => void` | No | - | Callback fired when content has been is initially positioned. If `shouldRenderOffscreen` is true, it will only fire once, the first time the content is shown |
-| Popover | onPositionChanged | `(position: PositionObject) => void` | No | - | Callback fired when the position changes |
-| Popover | onClick | `(event: React.MouseEvent) => void` | No | - | Callback fired when component is clicked |
-| Popover | onFocus | `(event: React.FocusEvent) => void` | No | - | Callback fired when trigger is focused |
-| Popover | onBlur | `(event: React.FocusEvent) => void` | No | - | Callback fired when component is blurred |
-| Popover | onKeyDown | `(event: React.KeyboardEvent) => void` | No | - | Callback fired on keydown |
-| Popover | onKeyUp | `(event: React.KeyboardEvent) => void` | No | - | Callback fired on keyup |
-| Popover | onMouseOver | `(event: React.MouseEvent) => void` | No | - | Callback fired when mouse is over trigger |
-| Popover | onMouseOut | `(event: React.MouseEvent) => void` | No | - | Callback fired when mouse leaves trigger |
-| Popover | renderTrigger | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The element that triggers the popover |
-| Popover | children | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The content to be shown by the popover |
-| Popover | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML root element |
-| Popover | borderWidth | `custom` | No | - | Allowed values: 0, 'none', 'small', 'medium', 'large'. Accepts the familiar CSS shorthand to designate border widths corresponding to edges. (e.g. 'none large none large). Only applies to a Popover without an arrow. |
-| Popover | shouldSetAriaExpanded | `bool` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |
+| Popover | shouldAlignArrow | `boolean` | No | `false` | Whether or not the content should offset to align by its arrow |
+| Popover | shouldTrackPosition | `boolean` | No | `true` | Whether or not position should be tracked or just set on initial render |
+| Popover | shouldRenderOffscreen | `boolean` | No | `false` | Should the `<Popover />` render offscreen when visually hidden |
+| Popover | shouldContainFocus | `boolean` | No | `false` | Whether focus should contained within the `<Popover/>` when it is open |
+| Popover | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be returned to the trigger when the `<Popover/>` is closed |
+| Popover | shouldCloseOnDocumentClick | `boolean` | No | `true` | Should the `<Popover />` hide when clicks occur outside the content |
+| Popover | shouldCloseOnEscape | `boolean` | No | `true` | Should the `<Popover />` hide when the escape key is pressed |
+| Popover | shouldFocusContentOnTriggerBlur | `boolean` | No | `false` | Should the content become focused when the trigger is blurred |
+| Popover | onShowContent | `signature` | No | - | Callback fired when content is shown. When controlled, this callback is fired when the Popover expects to be shown |
+| Popover | onHideContent | `signature` | No | - | Callback fired when content is hidden. When controlled, this callback is fired when the Popover expects to be hidden |
+| Popover | onPositioned | `signature` | No | - | Callback fired when content has been is initially positioned. If `shouldRenderOffscreen` is true, it will only fire once, the first time the content is shown |
+| Popover | onPositionChanged | `signature` | No | - | Callback fired when the position changes |
+| Popover | onClick | `signature` | No | - | Callback fired when component is clicked |
+| Popover | onFocus | `signature` | No | - | Callback fired when trigger is focused |
+| Popover | onBlur | `signature` | No | - | Callback fired when component is blurred |
+| Popover | onKeyDown | `signature` | No | - | Callback fired on keydown |
+| Popover | onKeyUp | `signature` | No | - | Callback fired on keyup |
+| Popover | onMouseOver | `signature` | No | - | Callback fired when mouse is over trigger |
+| Popover | onMouseOut | `signature` | No | - | Callback fired when mouse leaves trigger |
+| Popover | renderTrigger | `union` | No | - | The element that triggers the popover |
+| Popover | children | `union` | No | - | The content to be shown by the popover |
+| Popover | elementRef | `signature` | No | - | Provides a reference to the underlying HTML root element |
+| Popover | borderWidth | `BorderWidth` | No | - | Allowed values: 0, 'none', 'small', 'medium', 'large'. Accepts the familiar CSS shorthand to designate border widths corresponding to edges. (e.g. 'none large none large). Only applies to a Popover without an arrow. |
+| Popover | shouldSetAriaExpanded | `boolean` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |
 
 ### Usage
 
@@ -892,8 +892,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Popover } from '@instructure/ui-popover'
-
-/*** ES Modules (without tree shaking) ***/
-import { Popover } from '@instructure/ui-popover/es/Popover/index'
 ```
 

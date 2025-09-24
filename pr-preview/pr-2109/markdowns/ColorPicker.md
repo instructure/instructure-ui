@@ -633,28 +633,28 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ColorPicker | checkContrast | `{ isStrict?: boolean contrastStrength?: ContrastStrength contrastAgainst?: string renderContrastSuccessMessage?: ( contrast: number, minContrast: number ) => FormMessage[] renderContrastErrorMessage?: ( contrast: number, minContrast: number ) => FormMessage[] }` | No | - | Configures the contrast checker. If not provided, there will be no checking. isStrict: if it's true, it will display an error if false, a warning contrastStrength: can be one of ('min','mid','max'), which translates to 3:1, 4.5:1, 7:1 contrast, defalts to 'mid' contrastAgainst: is the color which the component checks the contrast against. Accepts hex, defaults to #ffffff renderContrastSuccessMessage: if set and the contrast is high enough, it will display the message renderContrastErrorMessage: if set and the contrast is not high enough, it will display the message FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| ColorPicker | colorMixerSettings | `{ popoverAddButtonLabel: string popoverCloseButtonLabel: string colorMixer?: { withAlpha?: boolean rgbRedInputScreenReaderLabel: string rgbGreenInputScreenReaderLabel: string rgbBlueInputScreenReaderLabel: string rgbAlphaInputScreenReaderLabel: string colorSliderNavigationExplanationScreenReaderLabel: string alphaSliderNavigationExplanationScreenReaderLabel: string colorPaletteNavigationExplanationScreenReaderLabel: string } colorPreset?: { colors: Array<string> label: string } colorContrast?: { firstColor: string label: string successLabel: string failureLabel: string normalTextLabel: string largeTextLabel: string graphicsTextLabel: string firstColorLabel: string secondColorLabel: string onContrastChange?: (conrastData: { contrast: number isValidNormalText: boolean isValidLargeText: boolean isValidGraphicsText: boolean firstColor: string secondColor: string }) => null } }` | No | - | If set, the default popover will appear for the picker. Those components whose corresponding keys aren't provided (e.g. `colorMixer`, `colorPreset` or `colorContrast`) will not be rendered. |
-| ColorPicker | children | `( value: string, onChange: (hex: string) => void, handleAdd: () => void, handleClose: () => void ) => React.ReactNode` | No | - | If a child function is provided, the component will render it to the popover. |
-| ColorPicker | disabled | `bool` | No | `false` | Sets the input to disabled state |
-| ColorPicker | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| ColorPicker | isRequired | `bool` | No | - | If true, it will display a red error ring or a message after a blur event and remove it after a change event |
-| ColorPicker | label | `node` | Yes | - | The label of the component |
-| ColorPicker | onChange | `(value: string) => void` | No | - | If 'value' is set, this must be set. It'll be called on every change |
+| ColorPicker | checkContrast | `signature` | No | - | Configures the contrast checker. If not provided, there will be no checking. isStrict: if it's true, it will display an error if false, a warning contrastStrength: can be one of ('min','mid','max'), which translates to 3:1, 4.5:1, 7:1 contrast, defalts to 'mid' contrastAgainst: is the color which the component checks the contrast against. Accepts hex, defaults to #ffffff renderContrastSuccessMessage: if set and the contrast is high enough, it will display the message renderContrastErrorMessage: if set and the contrast is not high enough, it will display the message FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| ColorPicker | colorMixerSettings | `signature` | No | - | If set, the default popover will appear for the picker. Those components whose corresponding keys aren't provided (e.g. `colorMixer`, `colorPreset` or `colorContrast`) will not be rendered. |
+| ColorPicker | children | `signature` | No | - | If a child function is provided, the component will render it to the popover. |
+| ColorPicker | disabled | `boolean` | No | `false` | Sets the input to disabled state |
+| ColorPicker | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| ColorPicker | isRequired | `boolean` | No | - | If true, it will display a red error ring or a message after a blur event and remove it after a change event |
+| ColorPicker | label | `string` | Yes | - | The label of the component |
+| ColorPicker | onChange | `signature` | No | - | If 'value' is set, this must be set. It'll be called on every change |
 | ColorPicker | placeholderText | `string` | Yes | - | Placeholder for the input field |
 | ColorPicker | popoverScreenReaderLabel | `string` | No | - | Sets the ScreenReaderLabel for the popover |
 | ColorPicker | popoverButtonScreenReaderLabel | `string` | No | - | Sets the ScreenReaderLabel for the popover Button |
 | ColorPicker | popoverMaxHeight | `string` | No | `'100vh'` | If set, it will set the popover's max height. Useful when the popover is too big |
-| ColorPicker | renderInvalidColorMessage | `(hexCode: string) => FormMessage[]` | No | - | If set and the hex is invalid, it will display the message after a blur event and remove it after a change event FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| ColorPicker | renderIsRequiredMessage | `() => FormMessage[]` | No | - | If set, isRequired is true and the input is empty, it will display the message after a blur event and remove it after a change event FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| ColorPicker | renderMessages | `( hexCode: string, isValidHex: boolean, minContrast: number, contrast?: number ) => FormMessage[]` | No | - | If set, it will display the message it returns FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| ColorPicker | tooltip | `React.ReactNode` | No | - | If set, an info icon with a tooltip will be displayed |
+| ColorPicker | renderInvalidColorMessage | `signature` | No | - | If set and the hex is invalid, it will display the message after a blur event and remove it after a change event FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| ColorPicker | renderIsRequiredMessage | `signature` | No | - | If set, isRequired is true and the input is empty, it will display the message after a blur event and remove it after a change event FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| ColorPicker | renderMessages | `signature` | No | - | If set, it will display the message it returns FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| ColorPicker | tooltip | `ReactReactNode` | No | - | If set, an info icon with a tooltip will be displayed |
 | ColorPicker | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
 | ColorPicker | value | `string` | No | - | If set, the component will behave as controlled |
 | ColorPicker | width | `string` | No | `'22.5rem'` | The width of the input. |
-| ColorPicker | withAlpha | `bool` | No | `false` | If true, alpha slider will be rendered. Defaults to false |
-| ColorPicker | margin | `string` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
-| ColorPicker | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the input element |
+| ColorPicker | withAlpha | `boolean` | No | `false` | If true, alpha slider will be rendered. Defaults to false |
+| ColorPicker | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| ColorPicker | inputRef | `signature` | No | - | A function that provides a reference to the input element |
 
 ### Usage
 
@@ -669,8 +669,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { ColorPicker } from '@instructure/ui-color-picker'
-
-/*** ES Modules (without tree shaking) ***/
-import { ColorPicker } from '@instructure/ui-color-picker/es/ColorPicker/index'
 ```
 

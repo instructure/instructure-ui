@@ -43,20 +43,20 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| RadioInput | label | `React.ReactNode` | Yes | - | The label displayed next to the checkbox |
-| RadioInput | value | `string \| number` | No | - | This maps to the low level HTML attribute [with the same name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#value) |
+| RadioInput | label | `ReactReactNode` | Yes | - | The label displayed next to the checkbox |
+| RadioInput | value | `union` | No | - | This maps to the low level HTML attribute [with the same name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#value) |
 | RadioInput | id | `string` | No | - |  |
 | RadioInput | name | `string` | No | - | The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group) defines which group it belongs to, it's managed by the `RadioInputGroup` this component belongs to. Do not set it manually. |
-| RadioInput | checked | `bool` | No | - |  |
-| RadioInput | disabled | `bool` | No | `false` | Whether to disable the input |
-| RadioInput | readOnly | `bool` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
-| RadioInput | variant | `'simple' \| 'toggle'` | No | `'simple'` |  |
-| RadioInput | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| RadioInput | context | `'success' \| 'warning' \| 'danger' \| 'off'` | No | `'success'` |  |
-| RadioInput | inline | `bool` | No | `false` |  |
-| RadioInput | onClick | `(event: React.MouseEvent<HTMLInputElement>) => void` | No | - |  |
-| RadioInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>) => void` | No | - | Callback fired when the input fires a change event. event.target.value will contain the new value. It will always be a string. |
-| RadioInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
+| RadioInput | checked | `boolean` | No | - |  |
+| RadioInput | disabled | `boolean` | No | `false` | Whether to disable the input |
+| RadioInput | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
+| RadioInput | variant | `union` | No | `'simple'` |  |
+| RadioInput | size | `union` | No | `'medium'` |  |
+| RadioInput | context | `union` | No | `'success'` |  |
+| RadioInput | inline | `boolean` | No | `false` |  |
+| RadioInput | onClick | `signature` | No | - |  |
+| RadioInput | onChange | `signature` | No | - | Callback fired when the input fires a change event. event.target.value will contain the new value. It will always be a string. |
+| RadioInput | inputRef | `signature` | No | - | A function that provides a reference to the actual underlying input element |
 
 ### Usage
 
@@ -71,8 +71,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { RadioInput } from '@instructure/ui-radio-input'
-
-/*** ES Modules (without tree shaking) ***/
-import { RadioInput } from '@instructure/ui-radio-input/es/RadioInput/index'
 ```
 

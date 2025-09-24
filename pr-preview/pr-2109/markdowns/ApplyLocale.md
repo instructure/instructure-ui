@@ -44,9 +44,9 @@ render(
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ApplyLocale | locale | `` | No | - |  |
-| ApplyLocale | timezone | `` | No | - |  |
-| ApplyLocale | children | `React.ReactNode` | No | - |  |
+| ApplyLocale | locale | `string` | No | - |  |
+| ApplyLocale | timezone | `string` | No | - |  |
+| ApplyLocale | children | `ReactReactNode` | No | - |  |
 
 ### Usage
 
@@ -61,8 +61,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { ApplyLocale } from '@instructure/ui-i18n'
-
-/*** ES Modules (without tree shaking) ***/
-import { ApplyLocale } from '@instructure/ui-i18n/es/ApplyLocale/index'
 ```
 

@@ -726,11 +726,26 @@ Providing a `href` prop will render the option as `<a>` link element.
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Options | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | Element type to render as |
+| Options | as | `union` | No | `'span'` | Element type to render as |
 | Options | role | `string` | No | `'list'` | The aria role of the element |
-| Options | elementRef | `(element: Element \| null) => void` | No | `() => {}` | The the actual list element |
-| Options | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `null` | Content to render as a label. Mostly for when the component is nested |
-| Options | children | `React.ReactNode` | No | `null` |  |
+| Options | elementRef | `signature` | No | `() => {}` | The the actual list element |
+| Options | renderLabel | `union` | No | `null` | Content to render as a label. Mostly for when the component is nested |
+| Options | children | `ReactReactNode` | No | `null` |  |
+| Options.Item | as | `union` | No | `'span'` | Element type to render as. Will be set to `<a>` if href is provided. |
+| Options.Item | variant | `union` | No | `'default'` | The style variant of the item |
+| Options.Item | role | `string` | No | `'listitem'` | The ARIA role of the element |
+| Options.Item | renderBeforeLabel | `union` | No | - | Content to render before the label (if you pass a function, it has the `props` as its parameter) |
+| Options.Item | renderAfterLabel | `union` | No | - | Content to render after the label (if you pass a function, it has the `props` as its parameter) |
+| Options.Item | beforeLabelContentVAlign | `union` | No | `'center'` | Sets the vAlign of renderBeforeLabel content |
+| Options.Item | afterLabelContentVAlign | `union` | No | `'center'` | Sets the vAlign of renderAfterLabel content |
+| Options.Item | description | `union` | No | - | Additional "secondary" description text |
+| Options.Item | descriptionRole | `string` | No | - | The ARIA role of the description element |
+| Options.Item | href | `string` | No | - | Providing href will render the option as `<a>`. |
+| Options.Item | voiceoverRoleBugWorkaround | `boolean` | No | `false` | Sometimes VoiceOver doesn't announce the role of the highlighted item. This prop forces the role to be on the outer element and should only be used when such an issue arises. |
+| Options.Item | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Options.Item | children | `union` | No | - |  |
+| Options.Item | isSelected | `boolean` | No | `false` | Whether or not this option is selected |
+| Options.Separator | as | `union` | No | `'span'` | Element type to render as |
 
 ### Usage
 
@@ -745,8 +760,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Options } from '@instructure/ui-options'
-
-/*** ES Modules (without tree shaking) ***/
-import { Options } from '@instructure/ui-options/es/Options/index'
 ```
 

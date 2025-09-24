@@ -2496,44 +2496,86 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Drilldown | rootPageId | `string` | Yes | - | The id of the root page |
-| Drilldown | children | `PageChild \| PageChild[]` | No | - | Children of type `<Drilldown.Page />` |
+| Drilldown | children | `union` | No | - | Children of type `<Drilldown.Page />` |
 | Drilldown | id | `string` | No | - | The id of the `<Drilldown />` |
 | Drilldown | label | `string` | No | - | Description of the `<Drilldown />` (used as `aria-label` attribute) |
-| Drilldown | disabled | `bool` | No | `false` | Is the `<Drilldown />` disabled |
-| Drilldown | rotateFocus | `bool` | No | `true` | Whether the focus should rotate with keyboard navigation when reaching the first or last option |
-| Drilldown | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'ul'` | Element type to render as. |
+| Drilldown | disabled | `boolean` | No | `false` | Is the `<Drilldown />` disabled |
+| Drilldown | rotateFocus | `boolean` | No | `true` | Whether the focus should rotate with keyboard navigation when reaching the first or last option |
+| Drilldown | as | `union` | No | `'ul'` | Element type to render as. |
 | Drilldown | role | `string` | No | `'menu'` | The ARIA role of the element |
-| Drilldown | elementRef | `(el: Element \| null) => void` | No | - | A function that returns a reference to root HTML element |
-| Drilldown | drilldownRef | `(el: HTMLDivElement \| null) => void` | No | - | A function that returns a reference to the `<Drilldown />` |
-| Drilldown | overflowX | `'auto' \| 'hidden' \| 'visible'` | No | `'auto'` |  |
-| Drilldown | overflowY | `'auto' \| 'hidden' \| 'visible'` | No | `'auto'` |  |
-| Drilldown | height | `string \| number` | No | - |  |
-| Drilldown | width | `string \| number` | No | - |  |
-| Drilldown | minHeight | `string \| number` | No | - |  |
-| Drilldown | minWidth | `string \| number` | No | - |  |
-| Drilldown | maxHeight | `string \| number` | No | - |  |
-| Drilldown | maxWidth | `string \| number` | No | - |  |
-| Drilldown | trigger | `React.ReactNode` | No | - | The trigger element, if the `<Drilldown />` is to render as a popover |
-| Drilldown | placement | `custom` | No | `'bottom center'` | If a trigger is supplied, where should the `<Drilldown />` be placed (relative to the trigger) `stretch` will stretch the `Drilldown` to the same size as its `trigger` (provided that the `trigger` is at least as large as the `Drilldown`). In this case you should not set `width`/`maxHeight`, it will be set automatically. |
-| Drilldown | defaultShow | `bool` | No | `false` | Should the `<Drilldown />` be open for the initial render |
-| Drilldown | show | `custom` | No | - | Is the `<Drilldown />` open (should be accompanied by `onToggle` and `trigger`) |
-| Drilldown | onToggle | `( event: React.UIEvent \| React.FocusEvent, args: { shown: boolean drilldown: Drilldown pageHistory: string[] goToPage: ( pageId: string ) => { prevPageId: string; newPageId: string } \| undefined goToPreviousPage: () => \| { prevPageId: string; newPageId: string } \| undefined } ) => void` | No | - | Callback fired when the `<Drilldown />` is toggled open/closed. When used with `show`, the component will not control its own state. |
-| Drilldown | onSelect | `( event: React.SyntheticEvent, args: { value: DrilldownOptionValue \| DrilldownOptionValue[] isSelected: boolean selectedOption: OptionChild drilldown: Drilldown } ) => void` | No | - | Callback fired when an item within the `<Drilldown />` is selected |
-| Drilldown | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick: boolean ) => void` | No | - | If a trigger is supplied, callback fired when the `<Drilldown />` is closed |
-| Drilldown | onFocus | `(event: React.FocusEvent) => void` | No | - | If a trigger is supplied, callback fired when the `<Drilldown />` trigger is focused |
-| Drilldown | onMouseOver | `(event: React.MouseEvent) => void` | No | - | If a trigger is supplied, callback fired onMouseOver for the `<Drilldown />` trigger |
-| Drilldown | popoverRef | `(el: Popover \| null) => void` | No | - | If a trigger is supplied, A function that returns a reference to the `<Popover />` |
-| Drilldown | mountNode | `custom` | No | - | If a trigger is supplied, an element or a function returning an element to use as the mount node for the `<Drilldown />` (defaults to the component itself) |
-| Drilldown | positionTarget | `custom` | No | - | Target element for positioning the Popover (if it differs from the trigger) |
-| Drilldown | positionContainerDisplay | `'inline-block' \| 'block'` | No | - | If a trigger is supplied, this prop can set the CSS `display` property on the `<span>` container element of the underlying Position component |
-| Drilldown | constrain | `custom` | No | - | The parent in which to constrain the placement. |
-| Drilldown | shouldHideOnSelect | `bool` | No | `true` | If a trigger is supplied, should the `<Drilldown />` hide when an item is selected |
-| Drilldown | shouldContainFocus | `bool` | No | `false` | Whether focus should be contained within the `<Drilldown/>` when it is open. Works only if `trigger` is provided. |
-| Drilldown | shouldReturnFocus | `bool` | No | `true` | Whether focus should be returned to the trigger when the `<Drilldown/>` is closed. Works only if `trigger` is provided. |
-| Drilldown | withArrow | `bool` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered. Works only if `trigger` is provided. |
-| Drilldown | offsetX | `string \| number` | No | `0` | The horizontal offset for the positioned content. Works only if `trigger` is provided. |
-| Drilldown | offsetY | `string \| number` | No | `0` | The vertical offset for the positioned content. Works only if `trigger` is provided. |
-| Drilldown | shouldSetAriaExpanded | `bool` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |
+| Drilldown | elementRef | `signature` | No | - | A function that returns a reference to root HTML element |
+| Drilldown | drilldownRef | `signature` | No | - | A function that returns a reference to the `<Drilldown />` |
+| Drilldown | overflowX | `union` | No | `'auto'` |  |
+| Drilldown | overflowY | `union` | No | `'auto'` |  |
+| Drilldown | height | `union` | No | - |  |
+| Drilldown | width | `union` | No | - |  |
+| Drilldown | minHeight | `union` | No | - |  |
+| Drilldown | minWidth | `union` | No | - |  |
+| Drilldown | maxHeight | `union` | No | - |  |
+| Drilldown | maxWidth | `union` | No | - |  |
+| Drilldown | trigger | `ReactReactNode` | No | - | The trigger element, if the `<Drilldown />` is to render as a popover |
+| Drilldown | placement | `PlacementPropValues` | No | `'bottom center'` | If a trigger is supplied, where should the `<Drilldown />` be placed (relative to the trigger) `stretch` will stretch the `Drilldown` to the same size as its `trigger` (provided that the `trigger` is at least as large as the `Drilldown`). In this case you should not set `width`/`maxHeight`, it will be set automatically. |
+| Drilldown | defaultShow | `boolean` | No | `false` | Should the `<Drilldown />` be open for the initial render |
+| Drilldown | show | `boolean` | No | - | Is the `<Drilldown />` open (should be accompanied by `onToggle` and `trigger`) |
+| Drilldown | onToggle | `signature` | No | - | Callback fired when the `<Drilldown />` is toggled open/closed. When used with `show`, the component will not control its own state. |
+| Drilldown | onSelect | `signature` | No | - | Callback fired when an item within the `<Drilldown />` is selected |
+| Drilldown | onDismiss | `signature` | No | - | If a trigger is supplied, callback fired when the `<Drilldown />` is closed |
+| Drilldown | onFocus | `signature` | No | - | If a trigger is supplied, callback fired when the `<Drilldown />` trigger is focused |
+| Drilldown | onMouseOver | `signature` | No | - | If a trigger is supplied, callback fired onMouseOver for the `<Drilldown />` trigger |
+| Drilldown | popoverRef | `signature` | No | - | If a trigger is supplied, A function that returns a reference to the `<Popover />` |
+| Drilldown | mountNode | `PositionMountNode` | No | - | If a trigger is supplied, an element or a function returning an element to use as the mount node for the `<Drilldown />` (defaults to the component itself) |
+| Drilldown | positionTarget | `PositionMountNode` | No | - | Target element for positioning the Popover (if it differs from the trigger) |
+| Drilldown | positionContainerDisplay | `union` | No | - | If a trigger is supplied, this prop can set the CSS `display` property on the `<span>` container element of the underlying Position component |
+| Drilldown | constrain | `PositionConstraint` | No | - | The parent in which to constrain the placement. |
+| Drilldown | shouldHideOnSelect | `boolean` | No | `true` | If a trigger is supplied, should the `<Drilldown />` hide when an item is selected |
+| Drilldown | shouldContainFocus | `boolean` | No | `false` | Whether focus should be contained within the `<Drilldown/>` when it is open. Works only if `trigger` is provided. |
+| Drilldown | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be returned to the trigger when the `<Drilldown/>` is closed. Works only if `trigger` is provided. |
+| Drilldown | withArrow | `boolean` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered. Works only if `trigger` is provided. |
+| Drilldown | offsetX | `union` | No | `0` | The horizontal offset for the positioned content. Works only if `trigger` is provided. |
+| Drilldown | offsetY | `union` | No | `0` | The vertical offset for the positioned content. Works only if `trigger` is provided. |
+| Drilldown | shouldSetAriaExpanded | `boolean` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |
+| Drilldown.DrilldownGroup | id | `string` | Yes | - |  |
+| Drilldown.DrilldownGroup | children | `union` | No | - | Children of type: `<Drilldown.Option />`, `<Drilldown.Separator />` |
+| Drilldown.DrilldownGroup | renderGroupTitle | `union` | No | - | The label of the option group. |
+| Drilldown.DrilldownGroup | withoutSeparators | `boolean` | No | `false` | Hides the separators around the group. |
+| Drilldown.DrilldownGroup | disabled | `boolean` | No | `false` | Is the option group disabled. |
+| Drilldown.DrilldownGroup | role | `string` | No | `'group'` | The ARIA role of the element. |
+| Drilldown.DrilldownGroup | as | `union` | No | - | Element type to render as. By default, it inherits Drilldown's `as` prop. |
+| Drilldown.DrilldownGroup | elementRef | `signature` | No | - | Provides a reference to the underlying html root element |
+| Drilldown.DrilldownGroup | selectableType | `union` | No | - | Makes the option group selectable (with "check" icon indicators). Can be set to a single-select (radio) or a multi-select (checkbox) group. |
+| Drilldown.DrilldownGroup | defaultSelected | `Array` | No | - | An array of the values for the selected items on initial render. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item. |
+| Drilldown.DrilldownGroup | onSelect | `signature` | No | - | Callback fired when an option within the `<Drilldown.Group />` is selected |
+| Drilldown.DrilldownOption | id | `string` | Yes | - |  |
+| Drilldown.DrilldownOption | children | `union` | No | - | Label of the Drilldown option. |
+| Drilldown.DrilldownOption | subPageId | `string` | No | - | The id of the sub-page the option navigates to. |
+| Drilldown.DrilldownOption | disabled | `boolean` | No | `false` | Is the option disabled. |
+| Drilldown.DrilldownOption | selected | `boolean` | No | - | Whether the option is selected or not. (Setting this property assumes controlled behaviour) |
+| Drilldown.DrilldownOption | value | `union` | No | - | The value of the option. Should be set for options in selectable groups. |
+| Drilldown.DrilldownOption | href | `string` | No | - | Providing href will render the option as `<a>`. Doesn't work, if subPageId is provided or is in a selectable group. |
+| Drilldown.DrilldownOption | as | `union` | No | `'li'` | Element type to render as. Will be set to `<a>` if href is provided. If the parent is "ul" or "ol", the option is forced to be "li" element. *Important*: `Drilldown` is rendered as `ul` by default so you *have to* change that as well if you want to use this prop. |
+| Drilldown.DrilldownOption | role | `string` | No | `'menuitem'` | The ARIA role of the element |
+| Drilldown.DrilldownOption | renderLabelInfo | `union` | No | - | Info content to render after the label. If a function is provided, it has a `props` parameter. |
+| Drilldown.DrilldownOption | renderBeforeLabel | `union` | No | - | Content to render before the label. If a function is provided, it has a `props` parameter. |
+| Drilldown.DrilldownOption | renderAfterLabel | `union` | No | - | Content to render after the label. If a function is provided, it has a `props` parameter. |
+| Drilldown.DrilldownOption | beforeLabelContentVAlign | `union` | No | `'start'` | Sets the vAlign of renderBeforeLabel content |
+| Drilldown.DrilldownOption | afterLabelContentVAlign | `union` | No | `'start'` | Sets the vAlign of renderAfterLabel content and renderLabelInfo |
+| Drilldown.DrilldownOption | description | `union` | No | - | Additional "secondary" description text |
+| Drilldown.DrilldownOption | descriptionRole | `string` | No | - | The ARIA role of the description element |
+| Drilldown.DrilldownOption | onOptionClick | `signature` | No | - | Callback fired when the option is clicked. |
+| Drilldown.DrilldownOption | defaultSelected | `boolean` | No | - | Whether the option is selected by default. |
+| Drilldown.DrilldownOption | elementRef | `signature` | No | - | Provides a reference to the underlying html root element |
+| Drilldown.DrilldownOption | shouldCloseOnClick | `union` | No | `'auto'` | Should close the container menu component, if clicked on the option marked with this prop |
+| Drilldown.DrilldownPage | id | `string` | Yes | - |  |
+| Drilldown.DrilldownPage | children | `union` | No | - | Children of type: `<Drilldown.Option />`, `<Drilldown.Separator />`, `<Drilldown.Group />` |
+| Drilldown.DrilldownPage | renderTitle | `union` | No | - | The title of the page displayed in the header |
+| Drilldown.DrilldownPage | renderActionLabel | `union` | No | - | Label for the optional "action" option in the header (e.g.: "Select all") |
+| Drilldown.DrilldownPage | renderBackButtonLabel | `union` | No | `'Back'` | Label for the "back" navigation in the header. If a function is provided, the first parameter of the function is the title of the previous page. |
+| Drilldown.DrilldownPage | onHeaderActionClicked | `signature` | No | - | Callback fired when the "action" option is clicked in the header |
+| Drilldown.DrilldownPage | onBackButtonClicked | `signature` | No | - | Callback fired when the "back" navigation option is clicked in the header |
+| Drilldown.DrilldownPage | withoutHeaderSeparator | `boolean` | No | `false` | Hides the separator under the page header |
+| Drilldown.DrilldownPage | disabled | `boolean` | No | `false` | Is the page disabled |
+| Drilldown.DrilldownSeparator | id | `string` | Yes | - |  |
+| Drilldown.DrilldownSeparator | as | `union` | No | - | Element type to render as |
 
 ### Usage
 
@@ -2548,8 +2590,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Drilldown } from '@instructure/ui-drilldown'
-
-/*** ES Modules (without tree shaking) ***/
-import { Drilldown } from '@instructure/ui-drilldown/es/Drilldown/index'
 ```
 

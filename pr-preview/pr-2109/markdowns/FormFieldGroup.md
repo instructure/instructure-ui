@@ -117,18 +117,18 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| FormFieldGroup | description | `React.ReactNode` | Yes | - |  |
-| FormFieldGroup | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'fieldset'` | the element type to render as |
-| FormFieldGroup | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| FormFieldGroup | description | `ReactReactNode` | Yes | - |  |
+| FormFieldGroup | as | `union` | No | `'fieldset'` | the element type to render as |
+| FormFieldGroup | messages | `Array` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormFieldGroup | messagesId | `string` | No | - | id for the form field messages |
-| FormFieldGroup | disabled | `bool` | No | `false` |  |
-| FormFieldGroup | children | `React.ReactNode` | No | - |  |
-| FormFieldGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | - |  |
-| FormFieldGroup | rowSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| FormFieldGroup | colSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'small'` |  |
-| FormFieldGroup | vAlign | `'top' \| 'middle' \| 'bottom'` | No | `'middle'` |  |
-| FormFieldGroup | startAt | `'small' \| 'medium' \| 'large' \| 'x-large' \| null` | No | - |  |
-| FormFieldGroup | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| FormFieldGroup | disabled | `boolean` | No | `false` |  |
+| FormFieldGroup | children | `ReactReactNode` | No | - |  |
+| FormFieldGroup | layout | `union` | No | - |  |
+| FormFieldGroup | rowSpacing | `union` | No | `'medium'` |  |
+| FormFieldGroup | colSpacing | `union` | No | `'small'` |  |
+| FormFieldGroup | vAlign | `union` | No | `'middle'` |  |
+| FormFieldGroup | startAt | `union` | No | - |  |
+| FormFieldGroup | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
 | FormFieldGroup | isGroup | `` | No | `true` |  |
 
 ### Usage
@@ -144,8 +144,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { FormFieldGroup } from '@instructure/ui-form-field'
-
-/*** ES Modules (without tree shaking) ***/
-import { FormFieldGroup } from '@instructure/ui-form-field/es/FormFieldGroup/index'
 ```
 

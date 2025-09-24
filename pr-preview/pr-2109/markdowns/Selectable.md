@@ -486,16 +486,16 @@ A variety of request callbacks are provided as prompts for state updates. They d
 |-----------|------|------|----------|---------|-------------|
 | Selectable | id | `string` | No | - | The id of the trigger element. Set automatically if not provided |
 | Selectable | highlightedOptionId | `string` | No | - | The id of the option in the list that should be considered highlighted |
-| Selectable | selectedOptionId | `string \| string[]` | No | - | The id of the option(s) in the list that should be considered selected |
-| Selectable | isShowingOptions | `bool` | No | `false` | Whether or not the options should be visible |
-| Selectable | onRequestShowOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the options want to become visible |
-| Selectable | onRequestHideOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the options no longer want to be visible |
-| Selectable | onRequestHighlightOption | `( event: React.SyntheticEvent, data: { id?: string; direction?: 1 \| -1 } ) => void` | No | - | Callback fired when option is hovered or highlighted via keyboard. Either the `id` or the `direction` parameter is supplied |
-| Selectable | onRequestHighlightFirstOption | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when first option should be highlighted |
-| Selectable | onRequestHighlightLastOption | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when last option should be highlighted |
-| Selectable | onRequestSelectOption | `( event: React.SyntheticEvent, data: { id?: string } ) => void` | No | - | Callback fired when option clicked or selected via keyboard |
-| Selectable | children | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
-| Selectable | render | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
+| Selectable | selectedOptionId | `union` | No | - | The id of the option(s) in the list that should be considered selected |
+| Selectable | isShowingOptions | `boolean` | No | `false` | Whether or not the options should be visible |
+| Selectable | onRequestShowOptions | `signature` | No | - | Callback fired when the options want to become visible |
+| Selectable | onRequestHideOptions | `signature` | No | - | Callback fired when the options no longer want to be visible |
+| Selectable | onRequestHighlightOption | `signature` | No | - | Callback fired when option is hovered or highlighted via keyboard. Either the `id` or the `direction` parameter is supplied |
+| Selectable | onRequestHighlightFirstOption | `signature` | No | - | Callback fired when first option should be highlighted |
+| Selectable | onRequestHighlightLastOption | `signature` | No | - | Callback fired when last option should be highlighted |
+| Selectable | onRequestSelectOption | `signature` | No | - | Callback fired when option clicked or selected via keyboard |
+| Selectable | children | `signature` | No | - | A function with prop getters |
+| Selectable | render | `signature` | No | - | A function with prop getters |
 
 ### Usage
 
@@ -510,8 +510,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Selectable } from '@instructure/ui-selectable'
-
-/*** ES Modules (without tree shaking) ***/
-import { Selectable } from '@instructure/ui-selectable/es/Selectable/index'
 ```
 

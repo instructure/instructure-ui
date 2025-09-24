@@ -196,20 +196,20 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Avatar | name | `` | Yes | - | The name to display. It will be automatically converted to initials. |
-| Avatar | src | `` | No | - | URL of the image to display as the background image |
-| Avatar | alt | `` | No | - | Accessible label |
-| Avatar | size | `\| 'auto' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'medium'` |  |
-| Avatar | color | `\| 'default' // = brand \| 'shamrock' \| 'barney' \| 'crimson' \| 'fire' \| 'licorice' \| 'ash' \| 'ai'` | No | `'default'` |  |
-| Avatar | hasInverseColor | `` | No | `false` | In inverse color mode the background and text/icon colors are inverted |
-| Avatar | showBorder | `'auto' \| 'always' \| 'never'` | No | `'auto'` | `auto` only shows a border when there is no source image. This prop can force to always or never show that border. |
-| Avatar | shape | `'circle' \| 'rectangle'` | No | `'circle'` |  |
-| Avatar | display | `'inline-block' \| 'block'` | No | `'inline-block'` |  |
-| Avatar | margin | `` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Avatar | onImageLoaded | `(event?: SyntheticEvent) => void` | No | - | Callback fired when the avatar image has loaded. `event` can be `undefined`, if its already loaded when the page renders (can happen in SSR) |
-| Avatar | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element type to render as |
-| Avatar | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| Avatar | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority. |
+| Avatar | name | `string` | Yes | - | The name to display. It will be automatically converted to initials. |
+| Avatar | src | `string` | No | - | URL of the image to display as the background image |
+| Avatar | alt | `string` | No | - | Accessible label |
+| Avatar | size | `union` | No | `'medium'` |  |
+| Avatar | color | `union` | No | `'default'` |  |
+| Avatar | hasInverseColor | `boolean` | No | `false` | In inverse color mode the background and text/icon colors are inverted |
+| Avatar | showBorder | `union` | No | `'auto'` | `auto` only shows a border when there is no source image. This prop can force to always or never show that border. |
+| Avatar | shape | `union` | No | `'circle'` |  |
+| Avatar | display | `union` | No | `'inline-block'` |  |
+| Avatar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Avatar | onImageLoaded | `signature` | No | - | Callback fired when the avatar image has loaded. `event` can be `undefined`, if its already loaded when the page renders (can happen in SSR) |
+| Avatar | as | `union` | No | - | The element type to render as |
+| Avatar | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Avatar | renderIcon | `union` | No | - | An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority. |
 
 ### Usage
 
@@ -224,8 +224,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Avatar } from '@instructure/ui-avatar'
-
-/*** ES Modules (without tree shaking) ***/
-import { Avatar } from '@instructure/ui-avatar/es/Avatar/index'
 ```
 

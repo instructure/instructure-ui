@@ -65,8 +65,8 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Focusable | children | `( opts: FocusableRenderOptions ) => ( \| ReactElement \| ReactComponentElement<any> \| DOMElement<any, any> \| CElement<any, any> \| FunctionComponentElement<any> ) & { ref?: (args: any[]) => unknown }` | No | `null` | The function called on each render. Identical to `render()` @param {Object} opts - Render options @param {boolean} opts.focused - Is the element focused (via keyboard only)? @param {HTMLElement} opts.focusable - The focusable element. @param {boolean} opts.focusVisible - Whether the focus state should be visible or not. @param {function} opts.attachRef - Used internally to get a reference to the object. |
-| Focusable | render | `( opts: FocusableRenderOptions ) => ( \| ReactElement \| ReactComponentElement<any> \| DOMElement<any, any> \| CElement<any, any> \| FunctionComponentElement<any> ) & { ref?: (args: any[]) => unknown }` | No | - | The function called on each render. Identical to `children()`. @param {Object} opts - Render options @param {boolean} opts.focused - Is the element focused (via keyboard only)? @param {HTMLElement} opts.focusable - The focusable element. @param {boolean} opts.focusVisible - Whether the focus state should be visible or not. @param {function} opts.attachRef - Used internally to get a reference to the object. |
+| Focusable | children | `signature` | No | `null` | The function called on each render. Identical to `render()` @param {Object} opts - Render options @param {boolean} opts.focused - Is the element focused (via keyboard only)? @param {HTMLElement} opts.focusable - The focusable element. @param {boolean} opts.focusVisible - Whether the focus state should be visible or not. @param {function} opts.attachRef - Used internally to get a reference to the object. |
+| Focusable | render | `signature` | No | - | The function called on each render. Identical to `children()`. @param {Object} opts - Render options @param {boolean} opts.focused - Is the element focused (via keyboard only)? @param {HTMLElement} opts.focusable - The focusable element. @param {boolean} opts.focusVisible - Whether the focus state should be visible or not. @param {function} opts.attachRef - Used internally to get a reference to the object. |
 
 ### Usage
 
@@ -81,8 +81,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Focusable } from '@instructure/ui-focusable'
-
-/*** ES Modules (without tree shaking) ***/
-import { Focusable } from '@instructure/ui-focusable/es/Focusable/index'
 ```
 

@@ -80,8 +80,8 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | ColorIndicator | color | `string` | No | - | Valid CSS color string. E.g.: #555, rgba(55,55,55,1). It can accept empty strings |
-| ColorIndicator | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `ColorIndicator`'s underlying html element. |
-| ColorIndicator | shape | `'circle' \| 'rectangle'` | No | `'circle'` | Sets the shape of the indicator. Either a circle or a rectangle |
+| ColorIndicator | elementRef | `signature` | No | - | Provides a reference to the `ColorIndicator`'s underlying html element. |
+| ColorIndicator | shape | `union` | No | `'circle'` | Sets the shape of the indicator. Either a circle or a rectangle |
 
 ### Usage
 
@@ -96,8 +96,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { ColorIndicator } from '@instructure/ui-color-picker'
-
-/*** ES Modules (without tree shaking) ***/
-import { ColorIndicator } from '@instructure/ui-color-picker/es/ColorIndicator/index'
 ```
 

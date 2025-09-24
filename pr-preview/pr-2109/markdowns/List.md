@@ -145,14 +145,21 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| List | children | `React.ReactNode` | No | - | Only accepts `<List.Item>` as a child |
-| List | as | `'ul' \| 'ol'` | No | `'ul'` |  |
-| List | delimiter | `'none' \| 'dashed' \| 'solid'` | No | `'none'` | One of: none, dashed, solid |
-| List | isUnstyled | `bool` | No | `false` | When set, renders the List Items without a list style type. |
-| List | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| List | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| List | itemSpacing | `\| 'none' \| 'xxx-small' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'none'` | Sets the margin separating each ListItem. |
-| List | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| List | children | `ReactReactNode` | No | - | Only accepts `<List.Item>` as a child |
+| List | as | `union` | No | `'ul'` |  |
+| List | delimiter | `union` | No | `'none'` | One of: none, dashed, solid |
+| List | isUnstyled | `boolean` | No | `false` | When set, renders the List Items without a list style type. |
+| List | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| List | size | `union` | No | `'medium'` |  |
+| List | itemSpacing | `union` | No | `'none'` | Sets the margin separating each ListItem. |
+| List | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| List.ListItem | children | `` | Yes | - |  |
+| List.ListItem | delimiter | `union` | No | `'none'` | Inherits delimiter from the parent List component. |
+| List.ListItem | size | `union` | No | `'medium'` |  |
+| List.ListItem | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| List.ListItem | padding | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| List.ListItem | spacing | `union` | No | `'none'` | Inherits itemSpacing from the parent List component |
+| List.ListItem | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 
@@ -167,8 +174,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { List } from '@instructure/ui-list'
-
-/*** ES Modules (without tree shaking) ***/
-import { List } from '@instructure/ui-list/es/List/index'
 ```
 

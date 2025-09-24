@@ -73,21 +73,21 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| CloseButton | screenReaderLabel | `React.ReactNode` | Yes | - | An accessible label for the `CloseButton` (required) |
-| CloseButton | color | `'primary' \| 'primary-inverse'` | No | - | Specifies the color for the `CloseButton`. |
-| CloseButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly. |
-| CloseButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `CloseButton`'s underlying html element. |
-| CloseButton | size | `'small' \| 'medium' \| 'large'` | No | `'small'` | The size of the `CloseButton` |
-| CloseButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `CloseButton` is clicked. |
-| CloseButton | margin | `string` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| CloseButton | placement | `'start' \| 'end' \| 'static'` | No | `'static'` | Specifies the placement of the `CloseButton` |
-| CloseButton | offset | `'none' \| 'x-small' \| 'small' \| 'medium'` | No | `'x-small'` | Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container. Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting the `position` of the parent container to `relative`. |
-| CloseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
-| CloseButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `CloseButton` by default. |
+| CloseButton | screenReaderLabel | `ReactReactNode` | Yes | - | An accessible label for the `CloseButton` (required) |
+| CloseButton | color | `union` | No | - | Specifies the color for the `CloseButton`. |
+| CloseButton | interaction | `union` | No | `undefined` | Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly. |
+| CloseButton | elementRef | `signature` | No | - | Provides a reference to the `CloseButton`'s underlying html element. |
+| CloseButton | size | `union` | No | `'small'` | The size of the `CloseButton` |
+| CloseButton | onClick | `signature` | No | - | Callback fired when the `CloseButton` is clicked. |
+| CloseButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| CloseButton | placement | `union` | No | `'static'` | Specifies the placement of the `CloseButton` |
+| CloseButton | offset | `union` | No | `'x-small'` | Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container. Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting the `position` of the parent container to `relative`. |
+| CloseButton | type | `union` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
+| CloseButton | as | `union` | No | `'button'` | The element to render as the component root, `CloseButton` by default. |
 | CloseButton | href | `string` | No | - | Specifies an href attribute for the `CloseButton`'s underlying html element. |
-| CloseButton | cursor | `string` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
+| CloseButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
 | CloseButton | tabIndex | `number` | No | - | Specifies the tabindex of the `CloseButton`. |
-| CloseButton | to | `` | No | - | Needed for React Router links @private |
+| CloseButton | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
 
@@ -102,8 +102,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { CloseButton } from '@instructure/ui-buttons'
-
-/*** ES Modules (without tree shaking) ***/
-import { CloseButton } from '@instructure/ui-buttons/es/CloseButton/index'
 ```
 

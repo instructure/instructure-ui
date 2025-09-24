@@ -242,13 +242,34 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Grid | children | `React.ReactNode` | No | `null` | One of: `Grid.Row`, `ScreenReaderContent` |
-| Grid | colSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| Grid | rowSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| Grid | hAlign | `'start' \| 'center' \| 'end' \| 'space-around' \| 'space-between'` | No | `'start'` |  |
-| Grid | vAlign | `'top' \| 'middle' \| 'bottom' \| 'stretch'` | No | `'top'` |  |
-| Grid | startAt | `'small' \| 'medium' \| 'large' \| 'x-large' \| null` | No | `'small'` |  |
-| Grid | visualDebug | `bool` | No | `false` |  |
+| Grid | children | `ReactReactNode` | No | `null` | One of: `Grid.Row`, `ScreenReaderContent` |
+| Grid | colSpacing | `union` | No | `'medium'` |  |
+| Grid | rowSpacing | `union` | No | `'medium'` |  |
+| Grid | hAlign | `union` | No | `'start'` |  |
+| Grid | vAlign | `union` | No | `'top'` |  |
+| Grid | startAt | `union` | No | `'small'` |  |
+| Grid | visualDebug | `boolean` | No | `false` |  |
+| Grid.GridCol | children | `ReactReactNode` | No | `null` |  |
+| Grid.GridCol | colSpacing | `union` | No | - |  |
+| Grid.GridCol | rowSpacing | `union` | No | - |  |
+| Grid.GridCol | textAlign | `union` | No | `'inherit'` |  |
+| Grid.GridCol | hAlign | `union` | No | - |  |
+| Grid.GridCol | vAlign | `union` | No | - |  |
+| Grid.GridCol | startAt | `union` | No | - |  |
+| Grid.GridCol | visualDebug | `boolean` | No | - |  |
+| Grid.GridCol | width | `union` | No | - |  |
+| Grid.GridCol | offset | `union` | No | - |  |
+| Grid.GridCol | isLastRow | `boolean` | No | `false` |  |
+| Grid.GridCol | isLastCol | `boolean` | No | `false` |  |
+| Grid.GridCol | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Grid.GridRow | children | `ReactReactNode` | No | `null` | One of: `Grid.Col`, `ScreenReaderContent` |
+| Grid.GridRow | rowSpacing | `union` | No | - |  |
+| Grid.GridRow | colSpacing | `union` | No | - |  |
+| Grid.GridRow | hAlign | `union` | No | - |  |
+| Grid.GridRow | vAlign | `union` | No | - |  |
+| Grid.GridRow | startAt | `union` | No | - |  |
+| Grid.GridRow | visualDebug | `boolean` | No | - |  |
+| Grid.GridRow | isLastRow | `boolean` | No | `false` |  |
 
 ### Usage
 
@@ -263,8 +284,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Grid } from '@instructure/ui-grid'
-
-/*** ES Modules (without tree shaking) ***/
-import { Grid } from '@instructure/ui-grid/es/Grid/index'
 ```
 

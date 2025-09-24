@@ -318,42 +318,42 @@ should be validated. If the value cannot be parsed as a valid date, or if the
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| DateInput | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | Specifies the input label. |
-| DateInput | value | `custom` | No | `''` | Specifies the input value. |
-| DateInput | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Specifies the input size. |
+| DateInput | renderLabel | `union` | Yes | - | Specifies the input label. |
+| DateInput | value | `string` | No | `''` | Specifies the input value. |
+| DateInput | size | `union` | No | `'medium'` | Specifies the input size. |
 | DateInput | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
-| DateInput | onChange | `( event: React.ChangeEvent<HTMLInputElement>, value: { value: string } ) => void` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {Object} data - additional data @param data.value - the new value |
-| DateInput | onBlur | `(event: React.SyntheticEvent) => void` | No | `() => {}` | Callback executed when the input fires a blur event. |
-| DateInput | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
-| DateInput | isRequired | `bool` | No | `false` | Specifies if the input is required. |
-| DateInput | isInline | `bool` | No | `false` | Controls whether the input is rendered inline with other elements or if it is rendered as a block level element. |
+| DateInput | onChange | `signature` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {Object} data - additional data @param data.value - the new value |
+| DateInput | onBlur | `signature` | No | `() => {}` | Callback executed when the input fires a blur event. |
+| DateInput | interaction | `union` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
+| DateInput | isRequired | `boolean` | No | `false` | Specifies if the input is required. |
+| DateInput | isInline | `boolean` | No | `false` | Controls whether the input is rendered inline with other elements or if it is rendered as a block level element. |
 | DateInput | assistiveText | `string` | No | - | Additional helpful text to provide to screen readers about the operation of the component. |
-| DateInput | layout | `'stacked' \| 'inline'` | No | `'stacked'` | Controls the layout. When set to `stacked`, the label rests on top of the input. When set to `inline` the label is next to the input. |
+| DateInput | layout | `union` | No | `'stacked'` | Controls the layout. When set to `stacked`, the label rests on top of the input. When set to `inline` the label is next to the input. |
 | DateInput | width | `string` | No | - | Specifies the width of the input. |
-| DateInput | display | `'inline-block' \| 'block'` | No | `'inline-block'` | Specifies the display property of the container. |
-| DateInput | inputRef | `(element: HTMLInputElement \| null) => void` | No | - | Provides a ref to the underlying input element. |
-| DateInput | messages | `FormMessage[]` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
-| DateInput | placement | `custom` | No | `'bottom center'` | The placement of the calendar in relation to the input. |
-| DateInput | isShowingCalendar | `bool` | No | `false` | Controls whether the calendar is showing. |
-| DateInput | onRequestValidateDate | `( event: SyntheticEvent, dateString?: string, validation?: FormMessage[] ) => void \| FormMessage[]` | No | - | Callback fired when the input is blurred. Feedback should be provided to the user when this function is called if the selected date or input value is not valid. The component calculates date validity and if it's disabled or nor and passes that information to this callback. |
-| DateInput | onRequestShowCalendar | `(event: SyntheticEvent) => void` | No | - | Callback fired requesting the calendar be shown. |
-| DateInput | onRequestHideCalendar | `(event: SyntheticEvent) => void` | No | - | Callback fired requesting the calendar be hidden. |
-| DateInput | onRequestSelectNextDay | `(event: SyntheticEvent) => void` | No | - | Callback fired requesting the next day be selected. If no date is currently selected should default to the first day of the currently rendered month. |
-| DateInput | onRequestSelectPrevDay | `(event: SyntheticEvent) => void` | No | - | Callback fired requesting the previous day be selected. If no date is currently selected should default to the first day of the currently rendered month. |
-| DateInput | onRequestRenderNextMonth | `(e: React.MouseEvent) => void` | No | - | Callback fired requesting the next month be rendered. |
-| DateInput | onRequestRenderPrevMonth | `(e: React.MouseEvent) => void` | No | - | Callback fired requesting the previous month be rendered. |
-| DateInput | renderNavigationLabel | `React.ReactNode \| (() => React.ReactNode)` | No | - | Content to render in the calendar navigation header. The recommendation is to include the name of the current rendered month along with the year. |
-| DateInput | renderWeekdayLabels | `(React.ReactNode \| (() => React.ReactNode))[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
-| DateInput | renderNextMonthButton | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](#Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenEnd](#icons). |
-| DateInput | renderPrevMonthButton | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](#Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenStart](#icons). |
-| DateInput | children | `ReactElement<CalendarDayProps>[]` | No | - | children of type `<DateInput.Day />` There should be exactly 42 provided (6 weeks). |
-| DateInput | disabledDates | `string[] \| ((isoDateToCheck: string) => boolean)` | No | - |  |
+| DateInput | display | `union` | No | `'inline-block'` | Specifies the display property of the container. |
+| DateInput | inputRef | `signature` | No | - | Provides a ref to the underlying input element. |
+| DateInput | messages | `Array` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
+| DateInput | placement | `PlacementPropValues` | No | `'bottom center'` | The placement of the calendar in relation to the input. |
+| DateInput | isShowingCalendar | `boolean` | No | `false` | Controls whether the calendar is showing. |
+| DateInput | onRequestValidateDate | `signature` | No | - | Callback fired when the input is blurred. Feedback should be provided to the user when this function is called if the selected date or input value is not valid. The component calculates date validity and if it's disabled or nor and passes that information to this callback. |
+| DateInput | onRequestShowCalendar | `signature` | No | - | Callback fired requesting the calendar be shown. |
+| DateInput | onRequestHideCalendar | `signature` | No | - | Callback fired requesting the calendar be hidden. |
+| DateInput | onRequestSelectNextDay | `signature` | No | - | Callback fired requesting the next day be selected. If no date is currently selected should default to the first day of the currently rendered month. |
+| DateInput | onRequestSelectPrevDay | `signature` | No | - | Callback fired requesting the previous day be selected. If no date is currently selected should default to the first day of the currently rendered month. |
+| DateInput | onRequestRenderNextMonth | `signature` | No | - | Callback fired requesting the next month be rendered. |
+| DateInput | onRequestRenderPrevMonth | `signature` | No | - | Callback fired requesting the previous month be rendered. |
+| DateInput | renderNavigationLabel | `union` | No | - | Content to render in the calendar navigation header. The recommendation is to include the name of the current rendered month along with the year. |
+| DateInput | renderWeekdayLabels | `Array` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
+| DateInput | renderNextMonthButton | `union` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](#Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenEnd](#icons). |
+| DateInput | renderPrevMonthButton | `union` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](#Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenStart](#icons). |
+| DateInput | children | `Array` | No | - | children of type `<DateInput.Day />` There should be exactly 42 provided (6 weeks). |
+| DateInput | disabledDates | `union` | No | - |  |
 | DateInput | currentDate | `string` | No | - | ISO date string for the current date if necessary. Defaults to the current date in the user's timezone. |
-| DateInput | disabledDateErrorMessage | `string \| ((rawDateValue: string) => FormMessage)` | No | - | Error message shown to the user if they enter a date that is disabled. If not specified the component will show the `invalidDateTimeMessage`. |
-| DateInput | invalidDateErrorMessage | `string \| ((rawDateValue: string) => FormMessage)` | No | - | The message shown to the user when the data is invalid. If a string, shown to the user anytime the input is invalid. If a function, receives a single parameter: - *rawDateValue*: the string entered as a date by the user. |
+| DateInput | disabledDateErrorMessage | `union` | No | - | Error message shown to the user if they enter a date that is disabled. If not specified the component will show the `invalidDateTimeMessage`. |
+| DateInput | invalidDateErrorMessage | `union` | No | - | The message shown to the user when the data is invalid. If a string, shown to the user anytime the input is invalid. If a function, receives a single parameter: - *rawDateValue*: the string entered as a date by the user. |
 | DateInput | locale | `string` | No | - | A standard language identifier. See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for more details. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's locale will be used if no value is set via a component property or a context property. |
 | DateInput | timezone | `string` | No | - | A timezone identifier in the format: *Area/Location* See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list of possible options. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's timezone will be used if no value is set via a component property or a context property. |
-| DateInput | withYearPicker | `{ screenReaderLabel: string onRequestYearChange?: (e: any, requestedYear: number) => void startYear: number endYear: number }` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
+| DateInput | withYearPicker | `signature` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
 
 ### Usage
 
@@ -368,8 +368,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { DateInput } from '@instructure/ui-date-input'
-
-/*** ES Modules (without tree shaking) ***/
-import { DateInput } from '@instructure/ui-date-input/es/DateInput/index'
 ```
 

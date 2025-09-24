@@ -860,20 +860,34 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Tabs | children | `React.ReactNode` | No | - | children of type `Tabs.Panel` |
-| Tabs | variant | `'default' \| 'secondary'` | No | `'default'` |  |
+| Tabs | children | `ReactReactNode` | No | - | children of type `Tabs.Panel` |
+| Tabs | variant | `union` | No | `'default'` |  |
 | Tabs | screenReaderLabel | `string` | No | - | A screen ready only label for the list of tabs |
-| Tabs | onRequestTabChange | `( event: React.MouseEvent<ViewOwnProps> \| React.KeyboardEvent<ViewOwnProps>, tabData: { index: number; id?: string } ) => void` | No | - | Called when the selected tab should change |
-| Tabs | maxWidth | `string \| number` | No | - |  |
-| Tabs | maxHeight | `string \| number` | No | - |  |
-| Tabs | minHeight | `string \| number` | No | - |  |
-| Tabs | fixHeight | `string \| number` | No | - |  |
-| Tabs | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Tabs | padding | `string` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
-| Tabs | textAlign | `'start' \| 'center' \| 'end'` | No | - |  |
-| Tabs | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| Tabs | tabOverflow | `'stack' \| 'scroll'` | No | `'stack'` | Choose whether Tabs should stack or scroll when they exceed the width of their container. |
-| Tabs | shouldFocusOnRender | `bool` | No | `false` |  |
+| Tabs | onRequestTabChange | `signature` | No | - | Called when the selected tab should change |
+| Tabs | maxWidth | `union` | No | - |  |
+| Tabs | maxHeight | `union` | No | - |  |
+| Tabs | minHeight | `union` | No | - |  |
+| Tabs | fixHeight | `union` | No | - |  |
+| Tabs | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Tabs | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| Tabs | textAlign | `union` | No | - |  |
+| Tabs | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Tabs | tabOverflow | `union` | No | `'stack'` | Choose whether Tabs should stack or scroll when they exceed the width of their container. |
+| Tabs | shouldFocusOnRender | `boolean` | No | `false` |  |
+| Tabs.Panel | renderTitle | `union` | Yes | - | The content that will be rendered in the corresponding <Tab /> and will label this `<Tabs.Panel />` for screen readers |
+| Tabs.Panel | children | `ReactReactNode` | No | - |  |
+| Tabs.Panel | variant | `union` | No | `'default'` |  |
+| Tabs.Panel | isSelected | `boolean` | No | `false` |  |
+| Tabs.Panel | isDisabled | `boolean` | No | `false` |  |
+| Tabs.Panel | maxHeight | `union` | No | - |  |
+| Tabs.Panel | minHeight | `union` | No | - |  |
+| Tabs.Panel | id | `string` | No | - |  |
+| Tabs.Panel | labelledBy | `string` | No | - |  |
+| Tabs.Panel | padding | `Spacing` | No | `'small'` |  |
+| Tabs.Panel | textAlign | `union` | No | `'start'` |  |
+| Tabs.Panel | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Tabs.Panel | active | `boolean` | No | `false` | Only one `<Tabs.Panel />` can be marked as active. The marked panel's content is rendered for all the `<Tabs.Panel />`s. |
+| Tabs.Panel | unmountOnExit | `boolean` | No | `true` | When set to false, the tabPanel only will be hidden, but not dismounted when not active |
 
 ### Usage
 
@@ -888,8 +902,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Tabs } from '@instructure/ui-tabs'
-
-/*** ES Modules (without tree shaking) ***/
-import { Tabs } from '@instructure/ui-tabs/es/Tabs/index'
 ```
 

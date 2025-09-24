@@ -370,21 +370,21 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Alert | children | `node` | No | `null` | content to be rendered within Alert |
-| Alert | variant | `'info' \| 'success' \| 'warning' \| 'error'` | No | `'info'` | Determines color and icon |
-| Alert | margin | `string` | No | `'x-small 0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Alert | liveRegion | `() => Element` | No | - | Function that returns the DIV where screenreader alerts will be placed. |
-| Alert | liveRegionPoliteness | `'polite' \| 'assertive'` | No | `'assertive'` | Choose the politeness level of screenreader alerts, sets the value of `aria-live`. When regions are specified as `polite`, assistive technologies will notify users of updates but generally do not interrupt the current task, and updates take low priority. When regions are specified as `assertive`, assistive technologies will immediately notify the user, and could potentially clear the speech queue of previous updates. |
-| Alert | isLiveRegionAtomic | `bool` | No | `false` | Value for the `aria-atomic` attribute. `aria-atomic` controls how much is read when a change happens. Should only the specific thing that changed be read or should the entire element be read. |
-| Alert | screenReaderOnly | `bool` | No | `false` | If the alert should only be visible to screen readers |
+| Alert | children | `ReactNode` | No | `null` | content to be rendered within Alert |
+| Alert | variant | `union` | No | `'info'` | Determines color and icon |
+| Alert | margin | `Spacing` | No | `'x-small 0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Alert | liveRegion | `signature` | No | - | Function that returns the DIV where screenreader alerts will be placed. |
+| Alert | liveRegionPoliteness | `union` | No | `'assertive'` | Choose the politeness level of screenreader alerts, sets the value of `aria-live`. When regions are specified as `polite`, assistive technologies will notify users of updates but generally do not interrupt the current task, and updates take low priority. When regions are specified as `assertive`, assistive technologies will immediately notify the user, and could potentially clear the speech queue of previous updates. |
+| Alert | isLiveRegionAtomic | `boolean` | No | `false` | Value for the `aria-atomic` attribute. `aria-atomic` controls how much is read when a change happens. Should only the specific thing that changed be read or should the entire element be read. |
+| Alert | screenReaderOnly | `boolean` | No | `false` | If the alert should only be visible to screen readers |
 | Alert | timeout | `number` | No | `0` | Milliseconds until the Alert is dismissed automatically |
-| Alert | renderCloseButtonLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Close button label. Can be a React component |
-| Alert | onDismiss | `() => void` | No | - | Callback after the alert is closed |
-| Alert | transition | `'none' \| 'fade'` | No | `'fade'` | Transition used to make the alert appear and disappear |
-| Alert | open | `bool` | No | `true` | if open transitions from truthy to falsey, it's a signal to close and unmount the alert. This is necessary to close the alert from the outside and still run the transition. |
-| Alert | hasShadow | `bool` | No | `true` | If the alert should have a shadow. |
+| Alert | renderCloseButtonLabel | `union` | No | - | Close button label. Can be a React component |
+| Alert | onDismiss | `signature` | No | - | Callback after the alert is closed |
+| Alert | transition | `union` | No | `'fade'` | Transition used to make the alert appear and disappear |
+| Alert | open | `boolean` | No | `true` | if open transitions from truthy to falsey, it's a signal to close and unmount the alert. This is necessary to close the alert from the outside and still run the transition. |
+| Alert | hasShadow | `boolean` | No | `true` | If the alert should have a shadow. |
 | Alert | variantScreenReaderLabel | `string` | No | - | How the screen reader should announce the alert variant. While the `variant` prop sets the color and icon for the alert component, this label should be a textual representation of that information. So e.g. if the variant is `info`, this label could be "Information," or "Information alert,". Note the `,` at the end of the label which helps the screenreader to be more natural sounding. |
-| Alert | renderCustomIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon. Setting it will override the variant's icon. |
+| Alert | renderCustomIcon | `union` | No | - | An icon, or function that returns an icon. Setting it will override the variant's icon. |
 
 ### Usage
 
@@ -399,8 +399,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Alert } from '@instructure/ui-alerts'
-
-/*** ES Modules (without tree shaking) ***/
-import { Alert } from '@instructure/ui-alerts/es/Alert/index'
 ```
 

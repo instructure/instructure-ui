@@ -121,16 +121,16 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Tag | className | `string` | No | - |  |
-| Tag | text | `string \| React.ReactNode` | Yes | - |  |
+| Tag | text | `union` | Yes | - |  |
 | Tag | title | `string` | No | - | @deprecated since version 10 Use of the title attribute is highly problematic due to accessibility concerns |
-| Tag | disabled | `bool` | No | `false` | Whether or not to disable the tag |
-| Tag | readOnly | `bool` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
-| Tag | dismissible | `bool` | No | `false` |  |
-| Tag | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Tag | onClick | `(event: React.MouseEvent<ViewProps & Element>) => void` | No | - | If you add an onClick prop, Tag renders as a clickable button |
-| Tag | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
-| Tag | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| Tag | variant | `'default' \| 'inline'` | No | `'default'` |  |
+| Tag | disabled | `boolean` | No | `false` | Whether or not to disable the tag |
+| Tag | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
+| Tag | dismissible | `boolean` | No | `false` |  |
+| Tag | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Tag | onClick | `signature` | No | - | If you add an onClick prop, Tag renders as a clickable button |
+| Tag | elementRef | `signature` | No | - | Provides a reference to the underlying html root element |
+| Tag | size | `union` | No | `'medium'` |  |
+| Tag | variant | `union` | No | `'default'` |  |
 
 ### Usage
 
@@ -145,8 +145,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Tag } from '@instructure/ui-tag'
-
-/*** ES Modules (without tree shaking) ***/
-import { Tag } from '@instructure/ui-tag/es/Tag/index'
 ```
 

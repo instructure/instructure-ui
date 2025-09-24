@@ -50,15 +50,15 @@ readonly: true
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| DataPermissionLevels | modalLabel | `` | Yes | - | i18n text for the label of the modal |
-| DataPermissionLevels | title | `` | Yes | - | i18n text for the dataPermissionLevels title |
-| DataPermissionLevels | data | `{ level: string title: string description: string highlighted?: boolean }[]` | Yes | - | i18n text for the "model and data" heading of the dataPermissionLevels |
-| DataPermissionLevels | closeButtonText | `` | Yes | - | i18n text for the close button |
-| DataPermissionLevels | closeIconButtonScreenReaderLabel | `` | Yes | - | i18n text for the close iconButton |
-| DataPermissionLevels | currentFeatureText | `` | Yes | - | i18n text for the "current feature" text |
-| DataPermissionLevels | currentFeature | `` | Yes | - | i18n text for the current feature |
-| DataPermissionLevels | triggerText | `` | Yes | - | i18n text for the trigger |
-| DataPermissionLevels | fullscreen | `` | No | `false` | sets the modal size to 'fullscreen'. Used for small viewports |
+| DataPermissionLevels | modalLabel | `string` | Yes | - | i18n text for the label of the modal |
+| DataPermissionLevels | title | `string` | Yes | - | i18n text for the dataPermissionLevels title |
+| DataPermissionLevels | data | `Array` | Yes | - | i18n text for the "model and data" heading of the dataPermissionLevels |
+| DataPermissionLevels | closeButtonText | `string` | Yes | - | i18n text for the close button |
+| DataPermissionLevels | closeIconButtonScreenReaderLabel | `string` | Yes | - | i18n text for the close iconButton |
+| DataPermissionLevels | currentFeatureText | `string` | Yes | - | i18n text for the "current feature" text |
+| DataPermissionLevels | currentFeature | `string` | Yes | - | i18n text for the current feature |
+| DataPermissionLevels | triggerText | `string` | Yes | - | i18n text for the trigger |
+| DataPermissionLevels | fullscreen | `boolean` | No | `false` | sets the modal size to 'fullscreen'. Used for small viewports |
 
 ### Usage
 
@@ -73,8 +73,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { DataPermissionLevels } from '@instructure/ui-instructure'
-
-/*** ES Modules (without tree shaking) ***/
-import { DataPermissionLevels } from '@instructure/ui-instructure/es/DataPermissionLevels/index'
 ```
 

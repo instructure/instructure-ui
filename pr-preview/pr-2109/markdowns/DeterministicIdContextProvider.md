@@ -27,8 +27,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
-
-/*** ES Modules (without tree shaking) ***/
-import { DeterministicIdContextProvider } from '@instructure/ui-react-utils/es/DeterministicIdContext/DeterministicIdContextProvider'
 ```
 

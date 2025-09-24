@@ -2290,12 +2290,31 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Table | caption | `React.ReactNode` | No | - | Provide a screen reader friendly description. Anything passed to this prop will be wrapped by `<ScreenReaderContent>` when it is rendered. |
-| Table | children | `React.ReactNode` | No | `null` | `Table.Head` or `Table.Body` |
-| Table | margin | `string` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Table | elementRef | `(element: Element \| null) => void` | No | - | Provide a reference to the underlying html element |
-| Table | hover | `bool` | No | `false` | Highlight each row on hover |
-| Table | layout | `'auto' \| 'fixed' \| 'stacked'` | No | `'auto'` | `auto` lets the browser determine table column widths based on cell content, while `fixed` forces columns of equal width (sets the [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) CSS prop to `fixed`). `stacked` renders table in one column to be more readable on narrow screens |
+| Table | caption | `ReactReactNode` | No | - | Provide a screen reader friendly description. Anything passed to this prop will be wrapped by `<ScreenReaderContent>` when it is rendered. |
+| Table | children | `ReactReactNode` | No | `null` | `Table.Head` or `Table.Body` |
+| Table | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Table | elementRef | `signature` | No | - | Provide a reference to the underlying html element |
+| Table | hover | `boolean` | No | `false` | Highlight each row on hover |
+| Table | layout | `union` | No | `'auto'` | `auto` lets the browser determine table column widths based on cell content, while `fixed` forces columns of equal width (sets the [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) CSS prop to `fixed`). `stacked` renders table in one column to be more readable on narrow screens |
+| Table.Body | children | `ReactReactNode` | No | `null` | Body's children should be a container component where each child represents a row. `Table.Row` by default |
+| Table.Cell | children | `union` | No | `null` |  |
+| Table.Cell | header | `union` | No | - | Contains the column header for this cell. This gets rendered in `stacked` layout to identify the column the data belongs to. |
+| Table.Cell | textAlign | `union` | No | `'start'` | Controls the text alignment in cell. |
+| Table.ColHeader | isStacked | `boolean` | No | - | DEPRECATED. Use `TableContext` to read this value |
+| Table.ColHeader | id | `string` | Yes | - | A unique id for this column. The `id` is also used as option in combobox, when sortable table is in stacked layout, and no `stackedSortByLabel` is provided. |
+| Table.ColHeader | stackedSortByLabel | `string` | No | - | A custom string to display as option text in the combobox (instead of using the `id` prop), when sortable table is in stacked layout. |
+| Table.ColHeader | children | `ReactReactNode` | No | `null` |  |
+| Table.ColHeader | width | `union` | No | - | Control the width of column. |
+| Table.ColHeader | textAlign | `union` | No | `'start'` | Control the text alignment in column header |
+| Table.ColHeader | sortDirection | `union` | No | `'none'` | The sorting direction |
+| Table.ColHeader | onRequestSort | `signature` | No | - | Callback fired when column header is clicked. |
+| Table.ColHeader | scope | `union` | No | `'col'` | The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#scope |
+| Table.Head | children | `ReactReactElement` | No | `null` | The header row(s). Default type: `Table.Row` Its first child is treated specially if the table is sortable and has `stacked` layout: A `Select` is created which reads options from the first child's children, that tries to read the following props: `id`, `stackedSortByLabel`,`sortDirection`, `onRequestSort` (Available on `Table.ColHeader`). These are used to sort the table in this layout. |
+| Table.Head | renderSortLabel | `union` | No | - | The sort `Select`'s label when using `stacked` layout and the table is sortable. If you don't want to display anything you should use `ScreenReaderContent` so screen readers can read the `Select`'s purpose |
+| Table.Row | children | `union` | No | `null` | A row's children should be table cells. Its children should have the `header` prop to render the column header in `stacked` layout By default, `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`. Falsy values are also allowed to be able to use syntax like `{condition && <Table.Cell>bla<Table.Cell>}` |
+| Table.Row | setHoverStateTo | `boolean` | No | - | Controls the hover state of the row. When set to true, the row will appear highlighted even when not hovered. When set to false, the row will not highlight on hover even if the hover prop is set to true. |
+| Table.RowHeader | children | `union` | No | `null` |  |
+| Table.RowHeader | textAlign | `union` | No | `'start'` | Control the text alignment in row header |
 
 ### Usage
 
@@ -2310,8 +2329,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Table } from '@instructure/ui-table'
-
-/*** ES Modules (without tree shaking) ***/
-import { Table } from '@instructure/ui-table/es/Table/index'
 ```
 

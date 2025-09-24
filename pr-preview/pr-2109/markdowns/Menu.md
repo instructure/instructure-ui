@@ -178,35 +178,62 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Menu | children | `React.ReactNode` | No | - | Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu` |
+| Menu | children | `ReactReactNode` | No | - | Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu` |
 | Menu | label | `string` | No | `null` | Description of the `<Menu />`. The component uses it to add its value to the `aria-label` attribute. |
-| Menu | disabled | `bool` | No | `false` | Is the `<Menu />` disabled |
-| Menu | trigger | `React.ReactNode` | No | `null` | The trigger element, if the `<Menu />` is to render as a popover |
-| Menu | placement | `custom` | No | `'bottom center'` | If a trigger is supplied, where should the `<Menu />` be placed (relative to the trigger) |
-| Menu | defaultShow | `bool` | No | `false` | Should the `<Menu />` be open for the initial render |
-| Menu | show | `custom` | No | - | Is the `<Menu />` open (should be accompanied by `onToggle`) |
-| Menu | onToggle | `(show: boolean, menu: Menu) => void` | No | - | Callback fired when the `<Menu />` is toggled open/closed. When used with `show`, the component will not control its own state. |
-| Menu | onSelect | `( e: React.MouseEvent, value: MenuItemProps['value'] \| MenuItemProps['value'][], selected: MenuItemProps['selected'], args: MenuItem ) => void` | No | - | Callback fired when an item within the `<Menu />` is selected |
-| Menu | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick: boolean ) => void` | No | - | If a trigger is supplied, callback fired when the `<Menu />` is closed |
-| Menu | onFocus | `(event: React.FocusEvent) => void` | No | - | If a trigger is supplied, callback fired when the `<Menu />` trigger is focused |
-| Menu | onMouseOver | `(event: React.MouseEvent) => void` | No | - | If a trigger is supplied, callback fired onMouseOver for the `<Menu />` trigger |
-| Menu | onKeyDown | `(event: React.KeyboardEvent<HTMLElement>) => void` | No | - | Callback fired on the onKeyDown of the `<Menu />` |
-| Menu | onKeyUp | `(event: React.KeyboardEvent<HTMLElement>) => void` | No | - | Callback fired on the onKeyUp of the `<Menu />` |
-| Menu | menuRef | `(el: HTMLElement \| null) => void` | No | - | A function that returns a reference to the `<Menu />` |
-| Menu | popoverRef | `(el: Popover \| null) => void` | No | - | A function that returns a reference to the `<Popover />` |
-| Menu | mountNode | `custom` | No | `null` | If a trigger is supplied, an element or a function returning an element to use as the mount node for the `<Menu />` (defaults to `document.body`) |
-| Menu | constrain | `custom` | No | `'window'` | The parent in which to constrain the menu. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element |
-| Menu | shouldHideOnSelect | `bool` | No | `true` | If a trigger is supplied, should the `<Menu />` hide when an item is selected |
-| Menu | shouldFocusTriggerOnClose | `bool` | No | `true` | If a trigger is supplied, should the `<Menu />` focus the trigger on after closing |
-| Menu | positionContainerDisplay | `'inline-block' \| 'block'` | No | - | If a trigger is supplied, this prop can set the CSS `display` property on the `<span>` container element of the underlying Position component |
-| Menu | type | `enum` | No | - | The type of `<Menu />` |
+| Menu | disabled | `boolean` | No | `false` | Is the `<Menu />` disabled |
+| Menu | trigger | `ReactReactNode` | No | `null` | The trigger element, if the `<Menu />` is to render as a popover |
+| Menu | placement | `PlacementPropValues` | No | `'bottom center'` | If a trigger is supplied, where should the `<Menu />` be placed (relative to the trigger) |
+| Menu | defaultShow | `boolean` | No | `false` | Should the `<Menu />` be open for the initial render |
+| Menu | show | `boolean` | No | - | Is the `<Menu />` open (should be accompanied by `onToggle`) |
+| Menu | onToggle | `signature` | No | - | Callback fired when the `<Menu />` is toggled open/closed. When used with `show`, the component will not control its own state. |
+| Menu | onSelect | `signature` | No | - | Callback fired when an item within the `<Menu />` is selected |
+| Menu | onDismiss | `signature` | No | - | If a trigger is supplied, callback fired when the `<Menu />` is closed |
+| Menu | onFocus | `signature` | No | - | If a trigger is supplied, callback fired when the `<Menu />` trigger is focused |
+| Menu | onMouseOver | `signature` | No | - | If a trigger is supplied, callback fired onMouseOver for the `<Menu />` trigger |
+| Menu | onKeyDown | `signature` | No | - | Callback fired on the onKeyDown of the `<Menu />` |
+| Menu | onKeyUp | `signature` | No | - | Callback fired on the onKeyUp of the `<Menu />` |
+| Menu | menuRef | `signature` | No | - | A function that returns a reference to the `<Menu />` |
+| Menu | popoverRef | `signature` | No | - | A function that returns a reference to the `<Popover />` |
+| Menu | mountNode | `PositionMountNode` | No | `null` | If a trigger is supplied, an element or a function returning an element to use as the mount node for the `<Menu />` (defaults to `document.body`) |
+| Menu | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the menu. One of: 'window', 'scroll-parent', 'parent', 'none', an element, or a function returning an element |
+| Menu | shouldHideOnSelect | `boolean` | No | `true` | If a trigger is supplied, should the `<Menu />` hide when an item is selected |
+| Menu | shouldFocusTriggerOnClose | `boolean` | No | `true` | If a trigger is supplied, should the `<Menu />` focus the trigger on after closing |
+| Menu | positionContainerDisplay | `union` | No | - | If a trigger is supplied, this prop can set the CSS `display` property on the `<span>` container element of the underlying Position component |
+| Menu | type | `literal` | No | - | The type of `<Menu />` |
 | Menu | id | `string` | No | - |  |
-| Menu | withArrow | `bool` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
-| Menu | offsetX | `string \| number` | No | `0` | The horizontal offset for the positioned content. Works only if `trigger` is provided. |
-| Menu | offsetY | `string \| number` | No | `0` | The vertical offset for the positioned content. Works only if `trigger` is provided. |
-| Menu | maxHeight | `string \| number` | No | - | The maximum height the menu can be. If not set, the menu won't scroll and will be as tall as the content requires |
-| Menu | renderLabelInfo | `React.ReactNode \| (() => React.ReactNode)` | No | - | Content to render in the label's info region. It is only visible on nested Menus. |
-| Menu | controls | `React.AriaAttributes['aria-controls']` | No | - |  |
+| Menu | withArrow | `boolean` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
+| Menu | offsetX | `union` | No | `0` | The horizontal offset for the positioned content. Works only if `trigger` is provided. |
+| Menu | offsetY | `union` | No | `0` | The vertical offset for the positioned content. Works only if `trigger` is provided. |
+| Menu | maxHeight | `union` | No | - | The maximum height the menu can be. If not set, the menu won't scroll and will be as tall as the content requires |
+| Menu | renderLabelInfo | `union` | No | - | Content to render in the label's info region. It is only visible on nested Menus. |
+| Menu | controls | `ReactAriaAttributes['aria-controls']` | No | - |  |
+| Menu.MenuItemGroup | label | `ReactReactNode` | Yes | - |  |
+| Menu.MenuItemGroup | allowMultiple | `boolean` | No | `false` |  |
+| Menu.MenuItemGroup | children | `ReactReactNode` | No | `null` | children of type `Menu.Item`, `Menu.Separator` |
+| Menu.MenuItemGroup | selected | `Array` | No | - | an array of the values (or indices by default) for the selected items |
+| Menu.MenuItemGroup | defaultSelected | `Array` | No | `[]` | an array of the values (or indices by default) for the selected items on initial render |
+| Menu.MenuItemGroup | onSelect | `signature` | No | - | call this function when a menu item is selected |
+| Menu.MenuItemGroup | onMouseOver | `signature` | No | - |  |
+| Menu.MenuItemGroup | controls | `string` | No | - | the id of the element that the menu items will act upon |
+| Menu.MenuItemGroup | itemRef | `signature` | No | - | returns a reference to the `MenuItem` |
+| Menu.MenuItemGroup | disabled | `boolean` | No | `false` |  |
+| Menu.MenuItemGroup | isTabbable | `boolean` | No | `false` | should the group appear in the tab order (the first item will have a tabIndex of 0) |
+| Menu.MenuItem | children | `ReactReactNode` | Yes | - | the menu item label |
+| Menu.MenuItem | defaultSelected | `boolean` | No | - | whether to set the menu item state to selected or not on initial render |
+| Menu.MenuItem | selected | `boolean` | No | - | whether the menu item is selected or not (must be accompanied by an `onSelect` prop) |
+| Menu.MenuItem | onSelect | `signature` | No | - | when used with the `selected` prop, the component will not control its own state |
+| Menu.MenuItem | onClick | `signature` | No | - |  |
+| Menu.MenuItem | onKeyDown | `signature` | No | - |  |
+| Menu.MenuItem | onKeyUp | `signature` | No | - |  |
+| Menu.MenuItem | onMouseOver | `signature` | No | - |  |
+| Menu.MenuItem | controls | `string` | No | - | the id of the element that the menu item will act upon |
+| Menu.MenuItem | disabled | `boolean` | No | `false` |  |
+| Menu.MenuItem | as | `union` | No | - | the element type to render as (will default to `<a>` if href is provided) |
+| Menu.MenuItem | type | `union` | No | `'button'` | How this component should be rendered. If it's `checkbox` or `radio` it will display a checkmark based on its own 'selected' state, if it's `flyout` it will render an arrow after the label. |
+| Menu.MenuItem | value | `union` | No | - | Arbitrary value that you can store in this component. Is sent out by the `onSelect` event |
+| Menu.MenuItem | href | `string` | No | - | Value of the `href` prop that will be put on the underlying DOM element. |
+| Menu.MenuItem | target | `string` | No | - | Where to display the linked URL, as the name for a browsing context (a tab, window, or <iframe>). |
+| Menu.MenuItem | renderLabelInfo | `union` | No | - | Content to render in the label's info region |
 
 ### Usage
 
@@ -221,8 +248,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Menu } from '@instructure/ui-menu'
-
-/*** ES Modules (without tree shaking) ***/
-import { Menu } from '@instructure/ui-menu/es/Menu/index'
 ```
 

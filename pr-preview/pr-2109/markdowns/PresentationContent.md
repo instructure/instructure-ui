@@ -29,9 +29,9 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| PresentationContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
-| PresentationContent | children | `React.ReactNode` | No | `null` |  |
-| PresentationContent | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| PresentationContent | as | `union` | No | `'span'` | the element type to render as |
+| PresentationContent | children | `ReactReactNode` | No | `null` |  |
+| PresentationContent | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 
@@ -46,8 +46,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { PresentationContent } from '@instructure/ui-a11y-content'
-
-/*** ES Modules (without tree shaking) ***/
-import { PresentationContent } from '@instructure/ui-a11y-content/es/PresentationContent/index'
 ```
 

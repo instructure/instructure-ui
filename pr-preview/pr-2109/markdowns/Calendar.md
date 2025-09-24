@@ -438,23 +438,34 @@ The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using th
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Calendar | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | The element to render as the `Calendar` root, `span` by default |
-| Calendar | children | `ReactElement<CalendarDayProps>[]` | No | - | children of type `<Calendar.Day />` There should be exactly 42 provided (6 weeks). |
+| Calendar | as | `union` | No | `'span'` | The element to render as the `Calendar` root, `span` by default |
+| Calendar | children | `Array` | No | - | children of type `<Calendar.Day />` There should be exactly 42 provided (6 weeks). |
 | Calendar | currentDate | `string` | No | - | ISO date string for the current date if necessary. Defaults to the current date in the user's timezone. |
-| Calendar | disabledDates | `string[] \| ((isoDateToCheck: string) => boolean)` | No | - |  |
+| Calendar | disabledDates | `union` | No | - |  |
 | Calendar | locale | `string` | No | - | A standard language identifier. See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for more details. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's locale will be used if no value is set via a component property or a context property. |
-| Calendar | onDateSelected | `( dateString: string, momentDate: Moment, e: React.MouseEvent ) => void` | No | - | Callback fired when a day has been selected. |
-| Calendar | onRequestRenderNextMonth | `( e: React.MouseEvent, requestedMonth: string ) => void` | No | - | Callback fired when the next month button is clicked in the navigation header, requesting to render the next month. |
-| Calendar | onRequestRenderPrevMonth | `( e: React.MouseEvent, requestedMonth: string ) => void` | No | - | Callback fired when the previous month button is clicked in the navigation header, requesting to render the previous month. |
-| Calendar | renderNavigationLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to render in the navigation header. The recommendation is to include the name of the current rendered month along with the year. |
-| Calendar | renderNextMonthButton | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](#IconButton) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenEnd](#icons). |
-| Calendar | renderPrevMonthButton | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](#Button) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenStart](#icons). |
-| Calendar | renderWeekdayLabels | `Renderable[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
-| Calendar | role | `'table' \| 'listbox'` | No | `'table'` | The role of the underlying table. This can be set to 'listbox' when assistive technologies need to read the `<Calendar.Day />` children as a list. |
+| Calendar | onDateSelected | `signature` | No | - | Callback fired when a day has been selected. |
+| Calendar | onRequestRenderNextMonth | `signature` | No | - | Callback fired when the next month button is clicked in the navigation header, requesting to render the next month. |
+| Calendar | onRequestRenderPrevMonth | `signature` | No | - | Callback fired when the previous month button is clicked in the navigation header, requesting to render the previous month. |
+| Calendar | renderNavigationLabel | `union` | No | - | Content to render in the navigation header. The recommendation is to include the name of the current rendered month along with the year. |
+| Calendar | renderNextMonthButton | `union` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](#IconButton) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenEnd](#icons). |
+| Calendar | renderPrevMonthButton | `union` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](#Button) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenStart](#icons). |
+| Calendar | renderWeekdayLabels | `Array` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
+| Calendar | role | `union` | No | `'table'` | The role of the underlying table. This can be set to 'listbox' when assistive technologies need to read the `<Calendar.Day />` children as a list. |
 | Calendar | selectedDate | `string` | No | - | ISO date string for the selected date. It needs onDateSelected to be specified too. |
 | Calendar | timezone | `string` | No | - | A timezone identifier in the format: *Area/Location* See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list of possible options. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's timezone will be used if no value is set via a component property or a context property. |
 | Calendar | visibleMonth | `string` | No | - | Visible month for the rendered calendar. Formatted as an ISO date string. |
-| Calendar | withYearPicker | `{ screenReaderLabel: string onRequestYearChange?: (e: any, requestedYear: number) => void startYear: number endYear: number }` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
+| Calendar | withYearPicker | `signature` | No | - | If set, years can be picked from a dropdown. It accepts an object. screenReaderLabel: string // e.g.: i18n("pick a year") onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place startYear: number // e.g.: 2001, sets the start year of the selectable list endYear: number // e.g.: 2030, sets the end year of the selectable list |
+| Calendar.Day | children | `union` | No | - | The rendered representation of the corresponding date. |
+| Calendar.Day | date | `string` | Yes | - | An ISO 8601 formatted string representing the date corresponding to this `<Calendar.Day />` |
+| Calendar.Day | label | `string` | Yes | - | Accessible label to provide more context for the date to assistive technologies. This should consist of more than just a numerical date value. It should also include the month and the year. Ex. instead of just `1`, provide `1 August 2019`. |
+| Calendar.Day | interaction | `union` | No | `'enabled'` | Is the `<Calendar.Day />` disabled |
+| Calendar.Day | isSelected | `boolean` | No | `false` | Is the `<Calendar.Day />` selected |
+| Calendar.Day | isToday | `boolean` | No | `false` | Is the `<Calendar.Day />` today |
+| Calendar.Day | isOutsideMonth | `boolean` | No | `false` | Is the `<Calendar.Day />` located outside the current rendered month |
+| Calendar.Day | onClick | `signature` | No | - | Callback fired on click. @param {Object} event - the click event @param {Object} data - additional data @param data.date - the date of the corresponding `<Calendar.Day />` |
+| Calendar.Day | onKeyDown | `signature` | No | - | Callback fired on key down. @param {Object} event - the key down event @param {Object} data - additional data @param data.date - the date of the corresponding `<Calendar.Day />` |
+| Calendar.Day | elementRef | `signature` | No | - | A ref function for the underlying DOM element. |
+| Calendar.Day | as | `union` | No | - | the element type to render as |
 
 ### Usage
 
@@ -469,8 +480,5 @@ Import the component:
 ```javascript
 /*** ES Modules (with tree shaking) ***/
 import { Calendar } from '@instructure/ui-calendar'
-
-/*** ES Modules (without tree shaking) ***/
-import { Calendar } from '@instructure/ui-calendar/es/Calendar/index'
 ```
 
