@@ -2588,6 +2588,10 @@
       "lineHeightLg": {
         "value": "{lineHeight.standalone.text2xl}",
         "type": "lineHeights"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
@@ -2802,98 +2806,6 @@
       "spinnerSizeLg": {
         "value": "4.5rem",
         "type": "sizing"
-      }
-    }
-  },
-  "rebrand/component/Link": {
-    "link": {
-      "textColor": {
-        "value": "{color.text.interactive.primary.base}",
-        "type": "color"
-      },
-      "textHoverColor": {
-        "value": "{color.text.interactive.primary.hover}",
-        "type": "color"
-      },
-      "textDisabledColor": {
-        "value": "{color.text.interactive.disabled.base}",
-        "type": "color"
-      },
-      "iconColor": {
-        "value": "{color.icon.interactive.primary.base}",
-        "type": "color"
-      },
-      "iconHoverColor": {
-        "value": "{color.icon.interactive.primary.hover}",
-        "type": "color"
-      },
-      "iconDisabledColor": {
-        "value": "{color.icon.interactive.disabled.base}",
-        "type": "color"
-      },
-      "onColorTextColor": {
-        "value": "{color.text.interactive.primaryOnColor.base}",
-        "type": "color"
-      },
-      "onColorTextHoverColor": {
-        "value": "{color.text.interactive.primaryOnColor.hover}",
-        "type": "color"
-      },
-      "onColorTextDisabledColor": {
-        "value": "{color.text.interactive.disabled.onColor}",
-        "type": "color"
-      },
-      "onColorIconColor": {
-        "value": "{color.icon.interactive.primaryOnColor.base}",
-        "type": "color"
-      },
-      "onColorIconHoverColor": {
-        "value": "{color.icon.interactive.primaryOnColor.hover}",
-        "type": "color"
-      },
-      "onColorIconDisabledColor": {
-        "value": "{color.icon.interactive.disabled.onColor}",
-        "type": "color"
-      },
-      "fontSizeSm": {
-        "value": "{fontSize.textSm}",
-        "type": "fontSizes"
-      },
-      "fontSizeMd": {
-        "value": "{fontSize.textBase}",
-        "type": "fontSizes"
-      },
-      "fontSizeLg": {
-        "value": "{fontSize.text2xl}",
-        "type": "fontSizes"
-      },
-      "fontWeight": {
-        "value": "{fontWeight.body.strong}",
-        "type": "fontWeights"
-      },
-      "spaceBetweenElementsMd": {
-        "value": "{spacing.spaceXs}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsLg": {
-        "value": "{spacing.spaceXs}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsSm": {
-        "value": "{spacing.space2xs}",
-        "type": "spacing"
-      },
-      "lineHeightSm": {
-        "value": "{lineHeight.standalone.textSm}",
-        "type": "lineHeights"
-      },
-      "lineHeightMd": {
-        "value": "{lineHeight.standalone.textBase}",
-        "type": "lineHeights"
-      },
-      "lineHeightLg": {
-        "value": "{lineHeight.standalone.text2xl}",
-        "type": "lineHeights"
       }
     }
   },
@@ -3169,6 +3081,102 @@
       "errorIconMarginRight": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
+      }
+    }
+  },
+  "rebrand/component/Link": {
+    "link": {
+      "textColor": {
+        "value": "{color.text.interactive.primary.base}",
+        "type": "color"
+      },
+      "textHoverColor": {
+        "value": "{color.text.interactive.primary.hover}",
+        "type": "color"
+      },
+      "textDisabledColor": {
+        "value": "{color.text.interactive.disabled.base}",
+        "type": "color"
+      },
+      "iconColor": {
+        "value": "{color.icon.interactive.primary.base}",
+        "type": "color"
+      },
+      "iconHoverColor": {
+        "value": "{color.icon.interactive.primary.hover}",
+        "type": "color"
+      },
+      "iconDisabledColor": {
+        "value": "{color.icon.interactive.disabled.base}",
+        "type": "color"
+      },
+      "onColorTextColor": {
+        "value": "{color.text.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "onColorTextHoverColor": {
+        "value": "{color.text.interactive.primaryOnColor.hover}",
+        "type": "color"
+      },
+      "onColorTextDisabledColor": {
+        "value": "{color.text.interactive.disabled.onColor}",
+        "type": "color"
+      },
+      "onColorIconColor": {
+        "value": "{color.icon.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "onColorIconHoverColor": {
+        "value": "{color.icon.interactive.primaryOnColor.hover}",
+        "type": "color"
+      },
+      "onColorIconDisabledColor": {
+        "value": "{color.icon.interactive.disabled.onColor}",
+        "type": "color"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "{fontSize.text2xl}",
+        "type": "fontSizes"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.strong}",
+        "type": "fontWeights"
+      },
+      "spaceBetweenElementsMd": {
+        "value": "{spacing.spaceXs}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsLg": {
+        "value": "{spacing.spaceXs}",
+        "type": "spacing"
+      },
+      "spaceBetweenElementsSm": {
+        "value": "{spacing.space2xs}",
+        "type": "spacing"
+      },
+      "lineHeightSm": {
+        "value": "{lineHeight.standalone.textSm}",
+        "type": "lineHeights"
+      },
+      "lineHeightMd": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "lineHeightLg": {
+        "value": "{lineHeight.standalone.text2xl}",
+        "type": "lineHeights"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
@@ -5003,28 +5011,6 @@
         "color.icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "color.icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
-        "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
-        "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
-        "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
-        "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
-        "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
-        "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
-        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
-        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
-        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
-        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
-        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
-        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
-        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
-        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
-        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
-        "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
-        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
-        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
-        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -5066,6 +5052,7 @@
         "avatar.fontSizeLg": "783ffea12705700c8cbceb32a7d6b726a19029d4",
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
+        "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
@@ -5085,6 +5072,29 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
+        "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
+        "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
+        "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
+        "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
+        "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
+        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
+        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
+        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
+        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
+        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
+        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
+        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
+        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
+        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
+        "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
+        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
+        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
+        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
+        "link.fontFamily": "0179b7a3568e6c47376ce408aa007cf58a894294",
         "metric.labelColor": "79fec9334e531e20cdeba764f0e16d666572d4f0",
         "metric.labelFontSize": "a69ea27ee6c412c7203ae6d4e6bdcbb2d81c7ee2",
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
@@ -5366,28 +5376,6 @@
         "color.icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "color.icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
-        "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
-        "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
-        "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
-        "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
-        "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
-        "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
-        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
-        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
-        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
-        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
-        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
-        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
-        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
-        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
-        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
-        "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
-        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
-        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
-        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -5429,6 +5417,7 @@
         "avatar.fontSizeLg": "783ffea12705700c8cbceb32a7d6b726a19029d4",
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
+        "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
@@ -5448,6 +5437,29 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
+        "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
+        "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
+        "link.iconColor": "182860c99529591448b12e530b171b261dcdacb9",
+        "link.iconHoverColor": "11b953bc126001880c64c6f5bc6d28d8d69153da",
+        "link.iconDisabledColor": "1138ba5aa1b3f5f2bd93de6172aafe92cce179bb",
+        "link.onColorTextColor": "a3d3a1f4e9f64aa742d7161b129ab52af0910264",
+        "link.onColorTextHoverColor": "d6fa285fdbec4efa1b59696bbade356cdadf03b6",
+        "link.onColorTextDisabledColor": "6138e1291e0c945c3ec5a49a5fcda4db29996a19",
+        "link.onColorIconColor": "713d89ba0d2fd446fd45f31930cba1e714080161",
+        "link.onColorIconHoverColor": "02330cb6c90a05369526485c9fca7cd962603e7c",
+        "link.onColorIconDisabledColor": "d72a35f18d78c3b1b000cc60dfcb16a3b5da868b",
+        "link.fontSizeSm": "658d2d590d768176d74abbaffb1ce40e56f32fd5",
+        "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
+        "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
+        "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
+        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
+        "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
+        "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
+        "link.fontFamily": "0179b7a3568e6c47376ce408aa007cf58a894294",
         "metric.labelColor": "79fec9334e531e20cdeba764f0e16d666572d4f0",
         "metric.labelFontSize": "a69ea27ee6c412c7203ae6d4e6bdcbb2d81c7ee2",
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
@@ -5833,6 +5845,7 @@
         "avatar.fontSizeLg": "783ffea12705700c8cbceb32a7d6b726a19029d4",
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
+        "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
@@ -5874,6 +5887,7 @@
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
+        "link.fontFamily": "0179b7a3568e6c47376ce408aa007cf58a894294",
         "metric.labelColor": "79fec9334e531e20cdeba764f0e16d666572d4f0",
         "metric.labelFontSize": "a69ea27ee6c412c7203ae6d4e6bdcbb2d81c7ee2",
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
@@ -6194,6 +6208,7 @@
         "avatar.fontSizeLg": "783ffea12705700c8cbceb32a7d6b726a19029d4",
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
+        "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
         "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
@@ -6235,6 +6250,7 @@
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
+        "link.fontFamily": "0179b7a3568e6c47376ce408aa007cf58a894294",
         "metric.labelColor": "79fec9334e531e20cdeba764f0e16d666572d4f0",
         "metric.labelFontSize": "a69ea27ee6c412c7203ae6d4e6bdcbb2d81c7ee2",
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
@@ -6304,11 +6320,11 @@
       "canvas/component/Metric",
       "canvas/component/Pill",
       "canvas/component/Spinner",
-      "rebrand/component/Link",
       "rebrand/component/Avatar",
       "rebrand/component/Breadcrumb",
       "rebrand/component/FormFieldLabel",
       "rebrand/component/FormFieldMessage",
+      "rebrand/component/Link",
       "rebrand/component/Metric",
       "rebrand/component/Pill",
       "rebrand/component/Spinner",
