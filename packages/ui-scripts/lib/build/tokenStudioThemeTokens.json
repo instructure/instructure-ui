@@ -2636,6 +2636,14 @@
       "valueFontFamily": {
         "value": "{fontFamily.heading}",
         "type": "fontFamilies"
+      },
+      "labelFontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "valueFontWeight": {
+        "value": "{fontWeight.heading.base}",
+        "type": "fontWeights"
       }
     }
   },
@@ -3229,6 +3237,14 @@
       "valueFontFamily": {
         "value": "{fontFamily.heading}",
         "type": "fontFamilies"
+      },
+      "labelFontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "valueFontWeight": {
+        "value": "{fontWeight.heading.base}",
+        "type": "fontWeights"
       }
     }
   },
@@ -5119,6 +5135,8 @@
         "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
+        "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
+        "metric.valueFontFamily": "38ae053dda964de3314fdc4c0a0081a3c7b6cf38",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
         "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
@@ -5484,6 +5502,8 @@
         "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
+        "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
+        "metric.valueFontFamily": "38ae053dda964de3314fdc4c0a0081a3c7b6cf38",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
         "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
@@ -5912,6 +5932,8 @@
         "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
+        "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
+        "metric.valueFontFamily": "38ae053dda964de3314fdc4c0a0081a3c7b6cf38",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
         "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
@@ -6275,6 +6297,8 @@
         "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
+        "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
+        "metric.valueFontFamily": "38ae053dda964de3314fdc4c0a0081a3c7b6cf38",
         "pill.paddingHorizontal": "91f067c6f1ac4c615586d1378c76f381c4193142",
         "pill.height": "02f772dfcc22d419c3d1acbd3ea6f93987cccb9b",
         "pill.backgroundColor": "3b90cfbd344580bfc556aaffd26112efa28f1567",
