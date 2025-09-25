@@ -115,16 +115,16 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | CheckboxGroup | name | `string` | Yes | - |  |
-| CheckboxGroup | description | `ReactReactNode` | Yes | - |  |
-| CheckboxGroup | defaultValue | `Array` | No | - | value to set on initial render |
-| CheckboxGroup | value | `Array` | No | - | the selected values (must be accompanied by an `onChange` prop) |
-| CheckboxGroup | onChange | `signature` | No | - | when used with the `value` prop, the component will not control its own state |
+| CheckboxGroup | description | `React.ReactNode` | Yes | - |  |
+| CheckboxGroup | defaultValue | `(string \| number)[]` | No | - | value to set on initial render |
+| CheckboxGroup | value | `(string \| number)[]` | No | - | the selected values (must be accompanied by an `onChange` prop) |
+| CheckboxGroup | onChange | `(value: (string \| number)[]) => void` | No | - | when used with the `value` prop, the component will not control its own state |
 | CheckboxGroup | disabled | `boolean` | No | `false` |  |
 | CheckboxGroup | readOnly | `boolean` | No | `false` |  |
-| CheckboxGroup | messages | `Array` | No | - | object with shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
-| CheckboxGroup | children | `Array` | No | `null` | children of type `Checkbox` |
-| CheckboxGroup | size | `union` | No | `'medium'` |  |
-| CheckboxGroup | layout | `union` | No | `'stacked'` |  |
+| CheckboxGroup | messages | `FormMessage[]` | No | - | object with shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
+| CheckboxGroup | children | `CheckboxChild[]` | No | `null` | children of type `Checkbox` |
+| CheckboxGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
+| CheckboxGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
 
 ### Usage
 

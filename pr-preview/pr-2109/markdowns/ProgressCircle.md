@@ -223,18 +223,18 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | ProgressCircle | screenReaderLabel | `string` | Yes | - | A label is required for accessibility |
-| ProgressCircle | size | `union` | No | `'medium'` | Control the size of the progress circle |
-| ProgressCircle | valueMax | `number` | No | `100` | Maximum value (defaults to 100) |
-| ProgressCircle | valueNow | `number` | No | `0` | Receives the progress of the event |
-| ProgressCircle | formatScreenReaderValue | `signature` | No | `({ valueNow, valueMax }: Values) =>
+| ProgressCircle | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` | Control the size of the progress circle |
+| ProgressCircle | valueMax | `Values['valueMax']` | No | `100` | Maximum value (defaults to 100) |
+| ProgressCircle | valueNow | `Values['valueNow']` | No | `0` | Receives the progress of the event |
+| ProgressCircle | formatScreenReaderValue | `(values: Values) => string` | No | `({ valueNow, valueMax }: Values) =>
 `${valueNow} / ${valueMax}`` | A function for formatting the text provided to screen readers via `aria-valuenow` |
-| ProgressCircle | renderValue | `union` | No | - | A function to format the displayed value. If null the value will not display. Takes `valueNow` and `valueMax` as parameters. |
-| ProgressCircle | color | `union` | No | `'primary'` | Controls the overall color scheme of the component |
-| ProgressCircle | meterColor | `union` | No | `({ valueNow, valueMax }: Values) =>
+| ProgressCircle | renderValue | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A function to format the displayed value. If null the value will not display. Takes `valueNow` and `valueMax` as parameters. |
+| ProgressCircle | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Controls the overall color scheme of the component |
+| ProgressCircle | meterColor | `\| ((values: Values) => ProgressCircleMeterColor) \| ProgressCircleMeterColor` | No | `({ valueNow, valueMax }: Values) =>
 valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progress meter. Defaults to showing theme success color on completion, based on `valueNow` and `valueMax`. |
 | ProgressCircle | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| ProgressCircle | elementRef | `signature` | No | - | Provides a reference to the component's root HTML element |
-| ProgressCircle | as | `union` | No | `'div'` | Set the element type of the component's root |
+| ProgressCircle | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's root HTML element |
+| ProgressCircle | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Set the element type of the component's root |
 | ProgressCircle | shouldAnimateOnMount | `boolean` | No | `false` |  |
 | ProgressCircle | animationDelay | `number` | No | - |  |
 

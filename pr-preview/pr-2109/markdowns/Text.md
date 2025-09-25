@@ -209,18 +209,18 @@ Deprecated `lineHeight` values:
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Text | as | `union` | No | `'span'` | the element type to render as |
-| Text | children | `ReactReactNode` | No | `null` |  |
-| Text | color | `union` | No | - | Color of the text |
-| Text | elementRef | `signature` | No | - | Provides a reference to the underlying HTML element |
-| Text | fontStyle | `union` | No | - |  |
-| Text | letterSpacing | `union` | No | `'normal'` |  |
-| Text | lineHeight | `union` | No | - |  |
-| Text | size | `union` | No | `'medium'` |  |
-| Text | transform | `union` | No | - |  |
-| Text | variant | `union` | No | - | Sets multiple props at once. (size, fontStyle, lineHeight, weight) If set, these props are not allowed. NOTE: this is the recommended way of setting these values |
-| Text | weight | `union` | No | - |  |
-| Text | wrap | `union` | No | `'normal'` |  |
+| Text | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Text | children | `React.ReactNode` | No | `null` |  |
+| Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'alert' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'ai-highlight'` | No | - | Color of the text |
+| Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
+| Text | fontStyle | `'italic' \| 'normal'` | No | - |  |
+| Text | letterSpacing | `'normal' \| 'condensed' \| 'expanded'` | No | `'normal'` |  |
+| Text | lineHeight | `\| 'default' \| 'fit' \| 'condensed' \| 'double' \| 'lineHeight100' \| 'lineHeight125' \| 'lineHeight150'` | No | - |  |
+| Text | size | `\| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large' \| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentSmall' \| 'legend'` | No | `'medium'` |  |
+| Text | transform | `'none' \| 'capitalize' \| 'uppercase' \| 'lowercase'` | No | - |  |
+| Text | variant | `\| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentImportant' \| 'contentQuote' \| 'contentSmall' \| 'legend'` | No | - | Sets multiple props at once. (size, fontStyle, lineHeight, weight) If set, these props are not allowed. NOTE: this is the recommended way of setting these values |
+| Text | weight | `'normal' \| 'light' \| 'bold' \| 'weightRegular' \| 'weightImportant'` | No | - |  |
+| Text | wrap | `'normal' \| 'break-word'` | No | `'normal'` |  |
 
 ### Usage
 

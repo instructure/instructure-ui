@@ -12,8 +12,8 @@
 | ColorPalette | width | `number` | Yes | - |  |
 | ColorPalette | height | `number` | Yes | - |  |
 | ColorPalette | indicatorRadius | `number` | Yes | - |  |
-| ColorPalette | onChange | `signature` | Yes | - |  |
-| ColorPalette | elementRef | `signature` | No | - |  |
+| ColorPalette | onChange | `(rgb: HSVType) => void` | Yes | - |  |
+| ColorPalette | elementRef | `(element: Element \| null) => void` | No | - |  |
 | ColorPalette | navigationExplanationScreenReaderLabel | `string` | Yes | - |  |
 
 ### Usage

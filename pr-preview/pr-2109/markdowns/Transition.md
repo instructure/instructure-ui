@@ -192,21 +192,21 @@ render(<Example />)
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Transition | type | `union` | No | `'fade'` |  |
+| Transition | type | `\| 'fade' \| 'scale' \| 'slide-down' \| 'slide-up' \| 'slide-left' \| 'slide-right'` | No | `'fade'` |  |
 | Transition | in | `boolean` | No | `false` | Show the component? Triggers the enter or exit animation. |
 | Transition | unmountOnExit | `boolean` | No | `false` | Unmount the component (remove it from the DOM) when it is not shown. |
 | Transition | transitionOnMount | `boolean` | No | `false` | Run the enter animation when the component mounts, if it is initially shown |
 | Transition | transitionEnter | `boolean` | No | `true` | Run the enter animation |
 | Transition | transitionExit | `boolean` | No | `true` | Run the exit animation |
-| Transition | onTransition | `signature` | No | - | Callback fired when transitioning to the next state |
-| Transition | onEnter | `signature` | No | - | Callback fired before the "entering" classes are applied |
-| Transition | onEntering | `signature` | No | - | Callback fired after the "entering" classes are applied |
-| Transition | onEntered | `signature` | No | - | Callback fired after the "enter" classes are applied |
-| Transition | onExit | `signature` | No | - | Callback fired before the "exiting" classes are applied |
-| Transition | onExiting | `signature` | No | - | Callback fired after the "exiting" classes are applied |
-| Transition | onExited | `signature` | No | - | Callback fired after the "exited" classes are applied |
-| Transition | children | `ReactReactNode` | No | - | A single element to animate in and out |
-| Transition | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Transition | onTransition | `( toState: BaseTransitionStatesType, fromState: BaseTransitionStatesType ) => void` | No | - | Callback fired when transitioning to the next state |
+| Transition | onEnter | `() => void` | No | - | Callback fired before the "entering" classes are applied |
+| Transition | onEntering | `() => void` | No | - | Callback fired after the "entering" classes are applied |
+| Transition | onEntered | `(type?: TransitionType) => void` | No | - | Callback fired after the "enter" classes are applied |
+| Transition | onExit | `() => void` | No | - | Callback fired before the "exiting" classes are applied |
+| Transition | onExiting | `() => void` | No | - | Callback fired after the "exiting" classes are applied |
+| Transition | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the "exited" classes are applied |
+| Transition | children | `React.ReactNode` | No | - | A single element to animate in and out |
+| Transition | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 

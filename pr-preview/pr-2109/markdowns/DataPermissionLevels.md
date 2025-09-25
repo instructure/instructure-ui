@@ -52,7 +52,7 @@ readonly: true
 |-----------|------|------|----------|---------|-------------|
 | DataPermissionLevels | modalLabel | `string` | Yes | - | i18n text for the label of the modal |
 | DataPermissionLevels | title | `string` | Yes | - | i18n text for the dataPermissionLevels title |
-| DataPermissionLevels | data | `Array` | Yes | - | i18n text for the "model and data" heading of the dataPermissionLevels |
+| DataPermissionLevels | data | `{ level: string title: string description: string highlighted?: boolean }[]` | Yes | - | i18n text for the "model and data" heading of the dataPermissionLevels |
 | DataPermissionLevels | closeButtonText | `string` | Yes | - | i18n text for the close button |
 | DataPermissionLevels | closeIconButtonScreenReaderLabel | `string` | Yes | - | i18n text for the close iconButton |
 | DataPermissionLevels | currentFeatureText | `string` | Yes | - | i18n text for the "current feature" text |

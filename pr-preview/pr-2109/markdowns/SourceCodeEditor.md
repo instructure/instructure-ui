@@ -1508,7 +1508,7 @@ Nisi anim cupidatat excepteur officia.
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | SourceCodeEditor | label | `string` | Yes | - | The label text that screen readers will read when this component gets focus. |
-| SourceCodeEditor | language | `union` | No | `'jsx'` | The language to use (adds autocomplete and syntax highlighting). |
+| SourceCodeEditor | language | `\| 'sh' \| 'js' \| 'json' \| 'javascript' \| 'jsx' \| 'shell' \| 'css' \| 'html' \| 'markdown' \| 'yaml' \| 'yml' \| 'bash'` | No | `'jsx'` | The language to use (adds autocomplete and syntax highlighting). |
 | SourceCodeEditor | readOnly | `boolean` | No | `false` | This disables editing of the editor content by the user and API calls. __Note:__ The editor is still focusable in readOnly mode. Read more at the [codemirror documentation](https://codemirror.net/6/docs/ref/#state.EditorState%5EreadOnly). |
 | SourceCodeEditor | editable | `boolean` | No | `true` | Controls whether the editor content DOM is editable. __Note:__ When set to false, the editor is not focusable. (This doesn't affect API calls that change the editor content, e.g.: copy-paste, even when those are bound to keys or buttons.) Read more at the [codemirror documentation](https://codemirror.net/6/docs/ref/#view.EditorView%5Eeditable). |
 | SourceCodeEditor | lineNumbers | `boolean` | No | `false` | Whether to display the line numbers in the gutter |
@@ -1518,22 +1518,22 @@ Nisi anim cupidatat excepteur officia.
 | SourceCodeEditor | lineWrapping | `boolean` | No | `false` | Whether it should scroll or wrap for long lines. Defaults to false (scroll) |
 | SourceCodeEditor | autofocus | `boolean` | No | `false` | Whether the editor should focus itself on initialization |
 | SourceCodeEditor | spellcheck | `boolean` | No | `false` | Whether spellcheck will be enabled on the input |
-| SourceCodeEditor | direction | `union` | No | - | Flips overall layout and selects base paragraph direction to be "LTR" or "RTL". |
+| SourceCodeEditor | direction | `'ltr' \| 'rtl'` | No | - | Flips overall layout and selects base paragraph direction to be "LTR" or "RTL". |
 | SourceCodeEditor | rtlMoveVisually | `boolean` | No | `true` | Whether horizontal cursor movement through "RTL" text is visual (pressing the left arrow moves the cursor left) or logical (pressing the left arrow moves to the next lower index in the string, which is visually right in "RTL" text) |
 | SourceCodeEditor | indentOnLoad | `boolean` | No | `false` | Whether the editor should auto-indent the code on this initial load and when the `value` is changed |
 | SourceCodeEditor | indentWithTab | `boolean` | No | `false` | When this feature is on, Tab and Shift-Tab will indent the code. By default, it is turned off, and tabbing will focus the next element in the tab order. __Note__: Even if this feature is on, pressing Escape before tabbing will not handle indentation and will handle focus instead. |
 | SourceCodeEditor | indentUnit | `string` | No | - | Overrides the unit by which indentation happens (defaults to 2 spaces). Should be a string consisting either entirely of spaces or entirely of tabs. |
 | SourceCodeEditor | defaultValue | `string` | No | `''` | The default value of the editor (in uncontrolled mode) |
 | SourceCodeEditor | value | `string` | No | - | The selected value for the controlled version (needs an onChange handler to work) |
-| SourceCodeEditor | onChange | `signature` | No | - | Called when the value of the component changes. |
-| SourceCodeEditor | onFocus | `signature` | No | - | Called when the editor receives focus |
-| SourceCodeEditor | onBlur | `signature` | No | - | Called when the editor loses focus |
-| SourceCodeEditor | attachment | `union` | No | - | Sets minor visual styles (border radius & top/bottom margin) |
+| SourceCodeEditor | onChange | `(value: string) => void` | No | - | Called when the value of the component changes. |
+| SourceCodeEditor | onFocus | `() => void` | No | - | Called when the editor receives focus |
+| SourceCodeEditor | onBlur | `() => void` | No | - | Called when the editor loses focus |
+| SourceCodeEditor | attachment | `'bottom' \| 'top'` | No | - | Sets minor visual styles (border radius & top/bottom margin) |
 | SourceCodeEditor | height | `string` | No | `'auto'` | The height of the editor. |
 | SourceCodeEditor | width | `string` | No | - | The width of the editor. |
-| SourceCodeEditor | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
-| SourceCodeEditor | containerRef | `signature` | No | - | provides a reference to the html element of the editor's container |
-| SourceCodeEditor | searchConfig | `signature` | No | - | enable search panel in editor when pressing ctrl/cmd+f |
+| SourceCodeEditor | elementRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the underlying html root element |
+| SourceCodeEditor | containerRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the html element of the editor's container |
+| SourceCodeEditor | searchConfig | `{ placeholder: string nextResultLabel: string prevResultLabel: string }` | No | - | enable search panel in editor when pressing ctrl/cmd+f |
 
 ### Usage
 

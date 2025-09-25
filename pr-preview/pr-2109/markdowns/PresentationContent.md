@@ -29,9 +29,9 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| PresentationContent | as | `union` | No | `'span'` | the element type to render as |
-| PresentationContent | children | `ReactReactNode` | No | `null` |  |
-| PresentationContent | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| PresentationContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| PresentationContent | children | `React.ReactNode` | No | `null` |  |
+| PresentationContent | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 

@@ -33,9 +33,9 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Metric | textAlign | `union` | No | `'center'` |  |
-| Metric | renderLabel | `union` | No | - |  |
-| Metric | renderValue | `union` | No | - |  |
+| Metric | textAlign | `'start' \| 'center' \| 'end'` | No | `'center'` |  |
+| Metric | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| Metric | renderValue | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Metric | isGroupChild | `boolean` | No | `false` | Set to true when a child of MetricGroup so the appropriate aria labels get set |
 
 ### Usage

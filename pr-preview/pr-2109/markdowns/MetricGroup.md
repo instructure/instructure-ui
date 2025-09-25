@@ -19,7 +19,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| MetricGroup | children | `ReactReactNode` | No | `null` | children of type `Metric` |
+| MetricGroup | children | `React.ReactNode` | No | `null` | children of type `Metric` |
 
 ### Usage
 

@@ -145,20 +145,20 @@ An html5 range input/slider component.
 | RangeInput | max | `number` | No | `0` |  |
 | RangeInput | defaultValue | `number` | No | - | value to set on initial render |
 | RangeInput | value | `number` | No | - | the selected value (must be accompanied by an `onChange` prop) |
-| RangeInput | onChange | `signature` | No | - | when used with the `value` prop, the component will not control its own state |
-| RangeInput | messages | `Array` | No | - |  |
-| RangeInput | size | `union` | No | `'medium'` | The size of the value label |
-| RangeInput | layout | `union` | No | `'stacked'` |  |
+| RangeInput | onChange | `(value: number \| string) => void` | No | - | when used with the `value` prop, the component will not control its own state |
+| RangeInput | messages | `FormMessage[]` | No | - |  |
+| RangeInput | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the value label |
+| RangeInput | layout | `'stacked' \| 'inline'` | No | `'stacked'` |  |
 | RangeInput | id | `string` | No | - |  |
-| RangeInput | label | `ReactReactNode` | Yes | - |  |
+| RangeInput | label | `React.ReactNode` | Yes | - |  |
 | RangeInput | displayValue | `boolean` | No | `true` | whether to display the current value |
 | RangeInput | step | `number` | No | `1` |  |
-| RangeInput | formatValue | `signature` | No | `(val?: number) => val` | A function to format the displayed value |
+| RangeInput | formatValue | `(value?: number, max?: number) => string` | No | `(val?: number) => val` | A function to format the displayed value |
 | RangeInput | inline | `boolean` | No | `false` |  |
 | RangeInput | disabled | `boolean` | No | `false` |  |
 | RangeInput | readOnly | `boolean` | No | `false` |  |
-| RangeInput | thumbVariant | `union` | No | `'deprecated'` | The "default" variant has an outer shadow on focus. The "accessible" variant has better color contrast, border and inset focus ring for better accessibility. |
-| RangeInput | inputRef | `signature` | No | - | A function that provides a reference to the actual underlying input element |
+| RangeInput | thumbVariant | `\| 'deprecated' // TODO: deprecated, remove in V9. \| 'accessible'` | No | `'deprecated'` | The "default" variant has an outer shadow on focus. The "accessible" variant has better color contrast, border and inset focus ring for better accessibility. |
+| RangeInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 
 ### Usage
 

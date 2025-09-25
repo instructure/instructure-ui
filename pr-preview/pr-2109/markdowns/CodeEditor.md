@@ -126,13 +126,13 @@ test('should render', () => {
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | CodeEditor | label | `string` | Yes | - | The label text that screen readers will read when this component gets focus. |
-| CodeEditor | language | `union` | No | `'jsx'` | The language to use. When not given, this will default to the first language that was loaded. |
-| CodeEditor | readOnly | `union` | No | `false` | This disables editing of the editor content by the user. If the special option "nocursor" is given (instead of simply true), focusing of the editor is also disallowed. |
-| CodeEditor | onChange | `signature` | No | - | Called when the value of the component changes. |
+| CodeEditor | language | `\| 'sh' \| 'js' \| 'json' \| 'javascript' \| 'jsx' \| 'shell' \| 'css' \| 'html' \| 'markdown' \| 'yaml' \| 'yml' \| 'bash'` | No | `'jsx'` | The language to use. When not given, this will default to the first language that was loaded. |
+| CodeEditor | readOnly | `boolean \| 'nocursor'` | No | `false` | This disables editing of the editor content by the user. If the special option "nocursor" is given (instead of simply true), focusing of the editor is also disallowed. |
+| CodeEditor | onChange | `(value: string) => void` | No | - | Called when the value of the component changes. |
 | CodeEditor | options | `EditorConfiguration` | No | `{
   styleActiveLine: true
 }` | Options that are passed to the underlying Codemirror instance. See https://codemirror.net/doc/manual.html#config |
-| CodeEditor | attachment | `union` | No | - | Sets minor visual styles (border radius & top/bottom margin) |
+| CodeEditor | attachment | `'bottom' \| 'top'` | No | - | Sets minor visual styles (border radius & top/bottom margin) |
 | CodeEditor | value | `string` | No | - | The selected value (when controlled via the `onChange` prop) |
 
 ### Usage

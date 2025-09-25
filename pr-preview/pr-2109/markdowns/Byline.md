@@ -62,13 +62,13 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Byline | children | `ReactReactNode` | Yes | - | the Byline visual/object |
-| Byline | title | `ReactReactNode` | No | - | the Byline title |
-| Byline | description | `union` | No | - | the Byline description |
-| Byline | alignContent | `union` | No | `'center'` | how should the title and description align |
+| Byline | children | `React.ReactNode` | Yes | - | the Byline visual/object |
+| Byline | title | `React.ReactNode` | No | - | the Byline title |
+| Byline | description | `string \| React.ReactNode` | No | - | the Byline description |
+| Byline | alignContent | `'top' \| 'center'` | No | `'center'` | how should the title and description align |
 | Byline | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Byline | size | `union` | No | - |  |
-| Byline | elementRef | `signature` | No | - | Provides a reference to the underlying html root element |
+| Byline | size | `'small' \| 'medium' \| 'large'` | No | - |  |
+| Byline | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 
 ### Usage
 

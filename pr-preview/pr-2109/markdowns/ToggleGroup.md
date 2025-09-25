@@ -96,17 +96,17 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ToggleGroup | children | `ReactReactNode` | Yes | - | the content to show and hide |
-| ToggleGroup | summary | `ReactReactNode` | Yes | - | the content area next to the toggle button |
-| ToggleGroup | toggleLabel | `union` | Yes | - | provides a screenreader label for the toggle button (takes `expanded` as an argument if a function) |
-| ToggleGroup | as | `union` | No | `'span'` | the element type to render as |
-| ToggleGroup | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
-| ToggleGroup | size | `union` | No | `'medium'` |  |
+| ToggleGroup | children | `React.ReactNode` | Yes | - | the content to show and hide |
+| ToggleGroup | summary | `React.ReactNode` | Yes | - | the content area next to the toggle button |
+| ToggleGroup | toggleLabel | `React.ReactNode \| ((expanded: boolean) => React.ReactNode)` | Yes | - | provides a screenreader label for the toggle button (takes `expanded` as an argument if a function) |
+| ToggleGroup | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| ToggleGroup | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| ToggleGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | ToggleGroup | expanded | `boolean` | No | - | Whether the content is expanded or hidden |
 | ToggleGroup | defaultExpanded | `boolean` | No | `false` | Whether the content is initially expanded or hidden (uncontrolled) |
-| ToggleGroup | onToggle | `signature` | No | - | Fired when the content display is toggled |
-| ToggleGroup | icon | `union` | No | `IconArrowOpenEndSolid` | The icon displayed in the toggle button when the content is hidden |
-| ToggleGroup | iconExpanded | `union` | No | `IconArrowOpenDownSolid` | The icon displayed in the toggle button when the content is showing |
+| ToggleGroup | onToggle | `(event: React.MouseEvent, expanded: boolean) => void` | No | - | Fired when the content display is toggled |
+| ToggleGroup | icon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenEndSolid` | The icon displayed in the toggle button when the content is hidden |
+| ToggleGroup | iconExpanded | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenDownSolid` | The icon displayed in the toggle button when the content is showing |
 | ToggleGroup | transition | `boolean` | No | `true` | Transition content into view |
 | ToggleGroup | border | `boolean` | No | `true` | Toggle the border around the component |
 

@@ -269,17 +269,17 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ToggleDetails | variant | `union` | No | `'default'` |  |
-| ToggleDetails | summary | `ReactReactNode` | Yes | - | The summary that displays and can be interacted with |
+| ToggleDetails | variant | `'default' \| 'filled'` | No | `'default'` |  |
+| ToggleDetails | summary | `React.ReactNode` | Yes | - | The summary that displays and can be interacted with |
 | ToggleDetails | expanded | `boolean` | No | - | Whether the content is expanded or hidden |
 | ToggleDetails | defaultExpanded | `boolean` | No | `false` | Whether the content is initially expanded or hidden (uncontrolled) |
-| ToggleDetails | onToggle | `signature` | No | - |  |
-| ToggleDetails | icon | `signature` | No | `IconArrowOpenEndSolid` | The icon to display next to the summary text when content is hidden |
-| ToggleDetails | iconExpanded | `signature` | No | `IconArrowOpenDownSolid` | The icon to display when content is expanded |
-| ToggleDetails | iconPosition | `union` | No | `'start'` | Icon position at the start or end of the summary text |
+| ToggleDetails | onToggle | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps>, expanded: boolean ) => void` | No | - |  |
+| ToggleDetails | icon | `(...args: any[]) => React.ReactElement` | No | `IconArrowOpenEndSolid` | The icon to display next to the summary text when content is hidden |
+| ToggleDetails | iconExpanded | `(...args: any[]) => React.ReactElement` | No | `IconArrowOpenDownSolid` | The icon to display when content is expanded |
+| ToggleDetails | iconPosition | `'start' \| 'end'` | No | `'start'` | Icon position at the start or end of the summary text |
 | ToggleDetails | fluidWidth | `boolean` | No | `false` | should the summary fill the width of its container |
-| ToggleDetails | children | `ReactReactNode` | No | `null` | The toggleable content passed inside the ToggleDetails component |
-| ToggleDetails | size | `union` | No | `'medium'` | Choose a size for the expand/collapse icon |
+| ToggleDetails | children | `React.ReactNode` | No | `null` | The toggleable content passed inside the ToggleDetails component |
+| ToggleDetails | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Choose a size for the expand/collapse icon |
 
 ### Usage
 

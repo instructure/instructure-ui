@@ -368,22 +368,22 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Button | children | `ReactReactNode` | No | - | Specifies the `Button` children. |
-| Button | type | `union` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
-| Button | size | `union` | No | `'medium'` | The size of the `Button` |
-| Button | elementRef | `signature` | No | - | Provides a reference to the `Button`'s underlying html element. |
-| Button | as | `union` | No | `'button'` | The element to render as the component root, `Button` by default. |
-| Button | interaction | `union` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |
-| Button | color | `union` | No | `'secondary'` | Specifies the color for the `Button`. |
-| Button | focusColor | `union` | No | - | Override the `Button`'s default focus outline color. |
-| Button | display | `union` | No | `'inline-block'` | The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements. When set to block, the `Button` expands to fill the width of the container. |
-| Button | textAlign | `union` | No | `'center'` | Sets the alignment of the `Button` children and/or icon. |
+| Button | children | `React.ReactNode` | No | - | Specifies the `Button` children. |
+| Button | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
+| Button | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `Button` |
+| Button | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
+| Button | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `Button` by default. |
+| Button | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |
+| Button | color | `\| 'primary' \| 'primary-inverse' \| 'secondary' \| 'success' \| 'danger' \| 'ai-primary' \| 'ai-secondary'` | No | `'secondary'` | Specifies the color for the `Button`. |
+| Button | focusColor | `'info' \| 'inverse'` | No | - | Override the `Button`'s default focus outline color. |
+| Button | display | `'inline-block' \| 'block'` | No | `'inline-block'` | The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements. When set to block, the `Button` expands to fill the width of the container. |
+| Button | textAlign | `'start' \| 'center'` | No | `'center'` | Sets the alignment of the `Button` children and/or icon. |
 | Button | withBackground | `boolean` | No | `true` | Specifies if the `Button` should render with a solid background. When false, the background is transparent. |
 | Button | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Button | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | Button | href | `string` | No | - | Specifies an href attribute for the `Button`'s underlying html element. |
-| Button | renderIcon | `union` | No | - | An icon, or function that returns an icon. |
-| Button | onClick | `signature` | No | - | Callback fired when the `Button` is clicked. |
+| Button | renderIcon | `React.ReactNode \| (() => React.ReactNode)` | No | - | An icon, or function that returns an icon. |
+| Button | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `Button` is clicked. |
 | Button | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage

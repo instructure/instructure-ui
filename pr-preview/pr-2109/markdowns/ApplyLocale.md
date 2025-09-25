@@ -46,7 +46,7 @@ render(
 |-----------|------|------|----------|---------|-------------|
 | ApplyLocale | locale | `string` | No | - |  |
 | ApplyLocale | timezone | `string` | No | - |  |
-| ApplyLocale | children | `ReactReactNode` | No | - |  |
+| ApplyLocale | children | `React.ReactNode` | No | - |  |
 
 ### Usage
 

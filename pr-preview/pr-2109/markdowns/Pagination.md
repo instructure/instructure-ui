@@ -547,50 +547,50 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Pagination | children | `union` | No | - | children of type Pagination.Page |
+| Pagination | children | `ChildPage \| ChildPage[]` | No | - | children of type Pagination.Page |
 | Pagination | disabled | `boolean` | No | `false` | Disables interaction with all pages |
 | Pagination | withFirstAndLastButton | `boolean` | No | `false` | Displays "jump to first" and "jump to last" buttons. Always turned on with `input` variant. |
 | Pagination | showDisabledButtons | `boolean` | No | `false` | Displays the unavailable navigation buttons as disabled instead of hiding them. Always turned on with `input` variant. |
-| Pagination | label | `ReactReactNode` | No | - | Visible label for component |
+| Pagination | label | `React.ReactNode` | No | - | Visible label for component |
 | Pagination | labelNext | `string` | No | - | Accessible label for next button |
 | Pagination | labelPrev | `string` | No | - | Accessible label for previous button |
 | Pagination | labelFirst | `string` | No | - | Accessible label for "jump to first" button |
 | Pagination | labelLast | `string` | No | - | Accessible label for "jump to last" button |
-| Pagination | labelNumberInput | `signature` | No | `(numberOfPages: number) => `of ${numberOfPages}`` | Label for number input (__only__ for `input` variant) |
-| Pagination | screenReaderLabelNumberInput | `signature` | No | `(
+| Pagination | labelNumberInput | `(totalPageNumber: number) => React.ReactNode` | No | `(numberOfPages: number) => `of ${numberOfPages}`` | Label for number input (__only__ for `input` variant) |
+| Pagination | screenReaderLabelNumberInput | `( currentPage: number, totalPageNumber: number ) => string` | No | `(
   currentPage: number,
   numberOfPages: number
 ) => `Select page (${currentPage} of ${numberOfPages})`` | ScreenReaderLabel for number input (__only__ for `input` variant) |
-| Pagination | screenReaderLabelPageButton | `signature` | No | - | ScreenReaderLabel for page number buttons (__only__ for `full` and `compact variants) |
-| Pagination | variant | `union` | No | `'full'` | The compact variant truncates the page navigation to show only the first, last, and pages immediately surrounding the current page. Fewer than 5 pages, no next/previous arrow buttons will be shown, and all pages will be listed |
+| Pagination | screenReaderLabelPageButton | `( currentPage: number, totalPageNumber: number ) => string` | No | - | ScreenReaderLabel for page number buttons (__only__ for `full` and `compact variants) |
+| Pagination | variant | `'full' \| 'compact' \| 'input'` | No | `'full'` | The compact variant truncates the page navigation to show only the first, last, and pages immediately surrounding the current page. Fewer than 5 pages, no next/previous arrow buttons will be shown, and all pages will be listed |
 | Pagination | margin | `Spacing` | No | `'space8'` | Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens) Apply these values via familiar CSS-like shorthand. For example: `margin="space8 0 space12"`. |
-| Pagination | as | `union` | No | `'div'` | the element type to render as |
-| Pagination | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
-| Pagination | inputRef | `signature` | No | - | provides a reference to the html input element (__only__ for `input` variant) |
+| Pagination | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | the element type to render as |
+| Pagination | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| Pagination | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | provides a reference to the html input element (__only__ for `input` variant) |
 | Pagination | shouldHandleFocus | `boolean` | No | `true` | For accessibility, Pagination sets focus on the first or last Pagination.Pages, respectively, when the Previous or Next arrow buttons are removed from the DOM. Set this property to `false` to prevent this behavior. |
 | Pagination | totalPageNumber | `number` | No | `0` | The total number of pages |
 | Pagination | currentPage | `number` | No | `1` | The current page number |
 | Pagination | siblingCount | `number` | No | `1` | The number of pages to display before and after the current page |
 | Pagination | boundaryCount | `number` | No | `1` | The number of always visible pages at the beginning and end of the pagination component |
-| Pagination | onPageChange | `signature` | No | - | Called when page number is changed |
-| Pagination | onMouseEnter | `signature` | No | - | Called when a page is hovered. |
-| Pagination | renderPageIndicator | `signature` | No | `(page: number) => page` | Renders the visible pages |
-| Pagination | ellipsis | `ReactReactNode` | No | `'…'` | The ellipsis (e.g. "...") |
-| Pagination.PaginationArrowButton | direction | `union` | No | - |  |
+| Pagination | onPageChange | `(next: number, prev: number) => void` | No | - | Called when page number is changed |
+| Pagination | onMouseEnter | `(page: number) => void` | No | - | Called when a page is hovered. |
+| Pagination | renderPageIndicator | `( pageIndex: number, currentPage: number ) => React.ReactNode` | No | `(page: number) => page` | Renders the visible pages |
+| Pagination | ellipsis | `React.ReactNode` | No | `'…'` | The ellipsis (e.g. "...") |
+| Pagination.PaginationArrowButton | direction | `'first' \| 'prev' \| 'next' \| 'last'` | No | - |  |
 | Pagination.PaginationArrowButton | label | `string` | Yes | - |  |
-| Pagination.PaginationArrowButton | buttonRef | `signature` | No | - |  |
-| Pagination.PaginationArrowButton | onClick | `signature` | No | - |  |
-| Pagination.PaginationButton | children | `ReactReactNode` | Yes | - | Content to render as page selection |
+| Pagination.PaginationArrowButton | buttonRef | `(element: Element \| null) => void` | No | - |  |
+| Pagination.PaginationArrowButton | onClick | `( event: \| React.KeyboardEvent<HTMLInputElement> \| React.MouseEvent<HTMLButtonElement> \| React.FocusEvent<HTMLInputElement> ) => void` | No | - |  |
+| Pagination.PaginationButton | children | `React.ReactNode` | Yes | - | Content to render as page selection |
 | Pagination.PaginationButton | current | `boolean` | No | `false` | Whether the page is currently displayed |
-| Pagination.PaginationButton | onClick | `signature` | No | - | Callback fired when the `Pagination.Page` is clicked. |
+| Pagination.PaginationButton | onClick | `( event: \| React.KeyboardEvent<HTMLInputElement> \| React.MouseEvent<HTMLButtonElement> \| React.FocusEvent<HTMLInputElement> ) => void` | No | - | Callback fired when the `Pagination.Page` is clicked. |
 | Pagination.PaginationButton | screenReaderLabel | `string` | No | - | The text screenreaders should say when this button is in focus (sets the `aria-label` attribute). If left undefined (default) SRs will announce text in the child node(s). |
 | Pagination.PaginationPageInput | numberOfPages | `number` | Yes | - | The number of pages in total |
 | Pagination.PaginationPageInput | currentPageIndex | `number` | Yes | - | The index of the current page |
-| Pagination.PaginationPageInput | onChange | `signature` | Yes | - | Fires when a new page index is selected |
-| Pagination.PaginationPageInput | screenReaderLabel | `signature` | Yes | - | ScreenReaderLabel for number input |
-| Pagination.PaginationPageInput | label | `signature` | No | - | Label for number input |
+| Pagination.PaginationPageInput | onChange | `( event: \| React.KeyboardEvent<HTMLInputElement> \| React.MouseEvent<HTMLButtonElement> \| React.FocusEvent<HTMLInputElement>, pageIndex: number ) => void` | Yes | - | Fires when a new page index is selected |
+| Pagination.PaginationPageInput | screenReaderLabel | `(currentPage: number, numberOfPages: number) => string` | Yes | - | ScreenReaderLabel for number input |
+| Pagination.PaginationPageInput | label | `(numberOfPages: number) => React.ReactNode` | No | - | Label for number input |
 | Pagination.PaginationPageInput | disabled | `boolean` | No | `false` | Disables interaction with the input |
-| Pagination.PaginationPageInput | inputRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Pagination.PaginationPageInput | inputRef | `(element: HTMLInputElement \| null) => void` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 

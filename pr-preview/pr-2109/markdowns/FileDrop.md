@@ -181,29 +181,29 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | FileDrop | id | `string` | No | - | The id of the input (to link it to its label for a11y) |
-| FileDrop | renderLabel | `union` | Yes | - | The content of FileDrop; can be a component or React node. Components receive `isDragAccepted` and `isDragRejected` as props. |
-| FileDrop | accept | `union` | No | - | The mime media type/s or file extension/s allowed to be dropped inside |
-| FileDrop | messages | `Array` | No | `[]` | object with shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
-| FileDrop | onClick | `signature` | No | `function (_e: React.MouseEvent) {}` | Called when clicking on drop area to select files to upload |
-| FileDrop | onDrop | `signature` | No | - | Called when dropping files or when file dialog window exits successfully |
-| FileDrop | onDropAccepted | `signature` | No | - | Called when dropping allowed files |
-| FileDrop | onDropRejected | `signature` | No | - | Called when dropping rejected files |
-| FileDrop | onDragEnter | `signature` | No | - | Called when dragging files and passing through FileDrop's content for the first time |
-| FileDrop | onDragOver | `signature` | No | - | Called when dragging files and passing through FileDrop's content |
-| FileDrop | onDragLeave | `signature` | No | - | Called when dragging files and leaving FileDrop's content |
+| FileDrop | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content of FileDrop; can be a component or React node. Components receive `isDragAccepted` and `isDragRejected` as props. |
+| FileDrop | accept | `string \| string[]` | No | - | The mime media type/s or file extension/s allowed to be dropped inside |
+| FileDrop | messages | `FormMessage[]` | No | `[]` | object with shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
+| FileDrop | onClick | `(e: React.MouseEvent) => void` | No | `function (_e: React.MouseEvent) {}` | Called when clicking on drop area to select files to upload |
+| FileDrop | onDrop | `( accepted: ArrayLike<DataTransferItem \| File>, rejected: ArrayLike<DataTransferItem \| File>, e: React.DragEvent ) => void` | No | - | Called when dropping files or when file dialog window exits successfully |
+| FileDrop | onDropAccepted | `( accepted: ArrayLike<DataTransferItem \| File>, e: React.DragEvent \| React.ChangeEvent ) => void` | No | - | Called when dropping allowed files |
+| FileDrop | onDropRejected | `( rejected: ArrayLike<DataTransferItem \| File>, e: React.DragEvent \| React.ChangeEvent ) => void` | No | - | Called when dropping rejected files |
+| FileDrop | onDragEnter | `(e: React.DragEvent) => void` | No | - | Called when dragging files and passing through FileDrop's content for the first time |
+| FileDrop | onDragOver | `(e: React.DragEvent) => void` | No | - | Called when dragging files and passing through FileDrop's content |
+| FileDrop | onDragLeave | `(e: React.DragEvent) => void` | No | - | Called when dragging files and leaving FileDrop's content |
 | FileDrop | shouldEnablePreview | `boolean` | No | `false` | Flag to use window.URL.createObjectURL for each dropped file and pass it through file.preview |
 | FileDrop | shouldAllowMultiple | `boolean` | No | `false` | Flag to allow multiple files to drop at once |
 | FileDrop | shouldAllowRepeats | `boolean` | No | `true` | Flag to allow upload of the same file more than once |
 | FileDrop | maxSize | `number` | No | `Infinity` | the maximum file size allowed |
 | FileDrop | minSize | `number` | No | `0` | the minimum file size allowed |
-| FileDrop | interaction | `union` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. |
-| FileDrop | display | `union` | No | `'block'` | Set the CSS `display` property on FileInput's outermost element |
-| FileDrop | height | `union` | No | - | Set the CSS `height` property on FileInput's outermost element |
-| FileDrop | width | `union` | No | - | Set the CSS `width` property on FileInput's outermost element |
-| FileDrop | maxWidth | `union` | No | - | Set the CSS `maxWidth` property on FileInput's outermost element |
-| FileDrop | minWidth | `union` | No | - | Set the CSS `minWidth` property on FileInput's outermost element |
+| FileDrop | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. |
+| FileDrop | display | `'block' \| 'inline-block'` | No | `'block'` | Set the CSS `display` property on FileInput's outermost element |
+| FileDrop | height | `string \| number` | No | - | Set the CSS `height` property on FileInput's outermost element |
+| FileDrop | width | `string \| number` | No | - | Set the CSS `width` property on FileInput's outermost element |
+| FileDrop | maxWidth | `string \| number` | No | - | Set the CSS `maxWidth` property on FileInput's outermost element |
+| FileDrop | minWidth | `string \| number` | No | - | Set the CSS `minWidth` property on FileInput's outermost element |
 | FileDrop | margin | `Spacing` | No | - | Valid values are 0, none, auto, xxx-small, xx-small, x-small, small, medium, large, x-large, xx-large. Apply these values via familiar CSS-like shorthand. For example: margin="small auto large". |
-| FileDrop | inputRef | `signature` | No | - | A function that provides a reference to the actual input element |
+| FileDrop | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual input element |
 
 ### Usage
 

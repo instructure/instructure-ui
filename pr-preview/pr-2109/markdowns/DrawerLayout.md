@@ -447,35 +447,35 @@ Multiple `<DrawerLayout />` components can be nested in order to place trays on 
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| DrawerLayout | children | `ReactReactNode` | No | - | Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray` |
+| DrawerLayout | children | `React.ReactNode` | No | - | Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray` |
 | DrawerLayout | minWidth | `string` | No | `'30rem'` | Min width for the `<DrawerLayout.Content />` |
-| DrawerLayout | onOverlayTrayChange | `signature` | No | - | Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint Called with a boolean value, `true` if the tray is now overlaying the content or `false` if it is side by side |
+| DrawerLayout | onOverlayTrayChange | `(shouldOverlayTray: boolean) => void` | No | - | Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint Called with a boolean value, `true` if the tray is now overlaying the content or `false` if it is side by side |
 | DrawerLayout.DrawerContent | label | `string` | Yes | - |  |
-| DrawerLayout.DrawerContent | children | `ReactReactNode` | No | - |  |
-| DrawerLayout.DrawerContent | contentRef | `signature` | No | - |  |
-| DrawerLayout.DrawerContent | onSizeChange | `signature` | No | - | Callback fired whenever the `<DrawerLayout.Content />` changes size |
+| DrawerLayout.DrawerContent | children | `React.ReactNode` | No | - |  |
+| DrawerLayout.DrawerContent | contentRef | `(element: HTMLDivElement \| null) => void` | No | - |  |
+| DrawerLayout.DrawerContent | onSizeChange | `(contentSize: DrawerContentSize) => void` | No | - | Callback fired whenever the `<DrawerLayout.Content />` changes size |
 | DrawerLayout.DrawerContent | role | `AriaRole` | No | `'region'` |  |
 | DrawerLayout.DrawerTray | label | `string` | Yes | - |  |
-| DrawerLayout.DrawerTray | children | `union` | No | - |  |
-| DrawerLayout.DrawerTray | render | `signature` | No | - |  |
-| DrawerLayout.DrawerTray | placement | `union` | No | `'start'` | Placement of the `<DrawerLayout.Tray />` |
+| DrawerLayout.DrawerTray | children | `React.ReactNode \| (() => React.ReactNode)` | No | - |  |
+| DrawerLayout.DrawerTray | render | `() => React.ReactNode` | No | - |  |
+| DrawerLayout.DrawerTray | placement | `'start' \| 'end'` | No | `'start'` | Placement of the `<DrawerLayout.Tray />` |
 | DrawerLayout.DrawerTray | open | `boolean` | No | `false` | If the tray is open or closed. |
-| DrawerLayout.DrawerTray | onOpen | `signature` | No | - | Called when the `<DrawerLayout.Tray />` is opened |
-| DrawerLayout.DrawerTray | onClose | `signature` | No | - | Called when the `<DrawerLayout.Tray />` is closed |
+| DrawerLayout.DrawerTray | onOpen | `(transitionType?: TransitionType) => void` | No | - | Called when the `<DrawerLayout.Tray />` is opened |
+| DrawerLayout.DrawerTray | onClose | `(transitionType?: TransitionType) => void` | No | - | Called when the `<DrawerLayout.Tray />` is closed |
 | DrawerLayout.DrawerTray | border | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` have a border |
 | DrawerLayout.DrawerTray | shadow | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` have a shadow |
-| DrawerLayout.DrawerTray | onTransition | `signature` | No | - | Callback fired when the `<DrawerLayout.Tray />` transitions in/out |
-| DrawerLayout.DrawerTray | onEnter | `signature` | No | - | Callback fired before the `<DrawerLayout.Tray />` transitions in |
-| DrawerLayout.DrawerTray | onEntering | `signature` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition in |
-| DrawerLayout.DrawerTray | onEntered | `signature` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in |
-| DrawerLayout.DrawerTray | onExit | `signature` | No | - | Callback fired right before the `<DrawerLayout.Tray />` transitions out |
-| DrawerLayout.DrawerTray | onExiting | `signature` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition out |
-| DrawerLayout.DrawerTray | onExited | `signature` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out |
-| DrawerLayout.DrawerTray | contentRef | `signature` | No | - | Ref function for the `<DrawerLayout.Tray />` content |
+| DrawerLayout.DrawerTray | onTransition | `( toState: BaseTransitionStatesType, fromState: BaseTransitionStatesType ) => void` | No | - | Callback fired when the `<DrawerLayout.Tray />` transitions in/out |
+| DrawerLayout.DrawerTray | onEnter | `() => void` | No | - | Callback fired before the `<DrawerLayout.Tray />` transitions in |
+| DrawerLayout.DrawerTray | onEntering | `() => void` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition in |
+| DrawerLayout.DrawerTray | onEntered | `(type?: TransitionType) => void` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in |
+| DrawerLayout.DrawerTray | onExit | `() => void` | No | - | Callback fired right before the `<DrawerLayout.Tray />` transitions out |
+| DrawerLayout.DrawerTray | onExiting | `() => void` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition out |
+| DrawerLayout.DrawerTray | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out |
+| DrawerLayout.DrawerTray | contentRef | `(element: HTMLDivElement \| null) => void` | No | - | Ref function for the `<DrawerLayout.Tray />` content |
 | DrawerLayout.DrawerTray | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<DrawerLayout.Tray />` when tray is overlaying content |
-| DrawerLayout.DrawerTray | defaultFocusElement | `union` | No | - | An element or a function returning an element to focus by default |
-| DrawerLayout.DrawerTray | liveRegion | `union` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<DrawerLayout.Tray />` is open |
-| DrawerLayout.DrawerTray | onDismiss | `signature` | No | - |  |
+| DrawerLayout.DrawerTray | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
+| DrawerLayout.DrawerTray | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<DrawerLayout.Tray />` is open |
+| DrawerLayout.DrawerTray | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - |  |
 | DrawerLayout.DrawerTray | shouldContainFocus | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldReturnFocus | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldCloseOnDocumentClick | `boolean` | No | `true` |  |

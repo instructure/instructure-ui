@@ -137,18 +137,18 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| SVGIcon | children | `ReactReactNode` | No | - |  |
+| SVGIcon | children | `React.ReactNode` | No | - |  |
 | SVGIcon | src | `string` | No | - |  |
 | SVGIcon | title | `string` | No | - |  |
 | SVGIcon | description | `string` | No | - |  |
 | SVGIcon | focusable | `boolean` | No | - |  |
-| SVGIcon | width | `union` | No | - | Width of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
-| SVGIcon | height | `union` | No | - | Height of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
+| SVGIcon | width | `string \| number` | No | - | Width of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
+| SVGIcon | height | `string \| number` | No | - | Height of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
 | SVGIcon | inline | `boolean` | No | - |  |
-| SVGIcon | color | `union` | No | - |  |
-| SVGIcon | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
-| SVGIcon | rotate | `union` | No | `'0'` |  |
-| SVGIcon | size | `union` | No | - |  |
+| SVGIcon | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'success' \| 'error' \| 'alert' \| 'warning' \| 'brand' \| 'auto'` | No | - |  |
+| SVGIcon | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| SVGIcon | rotate | `'0' \| '90' \| '180' \| '270'` | No | `'0'` |  |
+| SVGIcon | size | `'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large'` | No | - |  |
 | SVGIcon | bidirectional | `boolean` | No | `false` |  |
 
 ### Usage

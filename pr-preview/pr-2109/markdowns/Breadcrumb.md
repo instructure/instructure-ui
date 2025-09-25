@@ -144,17 +144,17 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Breadcrumb | children | `ReactReactNode` | No | `null` | children of type Breadcrumb.Link |
+| Breadcrumb | children | `React.ReactNode` | No | `null` | children of type Breadcrumb.Link |
 | Breadcrumb | label | `string` | Yes | - | An accessible label for the navigation |
-| Breadcrumb | size | `union` | No | `'medium'` | Sets the font-size of the breadcrumb text |
+| Breadcrumb | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Sets the font-size of the breadcrumb text |
 | Breadcrumb | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Breadcrumb.BreadcrumbLink | children | `ReactReactNode` | Yes | - | Content to render as the crumb, generally should be text. |
+| Breadcrumb.BreadcrumbLink | children | `React.ReactNode` | Yes | - | Content to render as the crumb, generally should be text. |
 | Breadcrumb.BreadcrumbLink | href | `string` | No | - | Link the crumb should direct to; if an href is provided, the crumb will render as a link |
-| Breadcrumb.BreadcrumbLink | onClick | `signature` | No | - | If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button |
-| Breadcrumb.BreadcrumbLink | onMouseEnter | `signature` | No | - | Fires when the Link is hovered |
-| Breadcrumb.BreadcrumbLink | size | `union` | No | - | Sets the font-size of the breadcrumb text |
-| Breadcrumb.BreadcrumbLink | renderIcon | `union` | No | - | Add an icon to the Breadcrumb.Link |
-| Breadcrumb.BreadcrumbLink | iconPlacement | `union` | No | - | Place the icon before or after the text in the Breadcrumb.Link |
+| Breadcrumb.BreadcrumbLink | onClick | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button |
+| Breadcrumb.BreadcrumbLink | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | Fires when the Link is hovered |
+| Breadcrumb.BreadcrumbLink | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the font-size of the breadcrumb text |
+| Breadcrumb.BreadcrumbLink | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an icon to the Breadcrumb.Link |
+| Breadcrumb.BreadcrumbLink | iconPlacement | `'start' \| 'end'` | No | - | Place the icon before or after the text in the Breadcrumb.Link |
 | Breadcrumb.BreadcrumbLink | isCurrentPage | `boolean` | No | - | Whether the page this breadcrumb points to is the current one. If true, it sets aria-current="page". If this prop is not set to true on any breadcrumb element, the one recieving the aria-current="page" will always be the last element, unless the last element's isCurrentPage prop is explicity set to false. |
 
 ### Usage

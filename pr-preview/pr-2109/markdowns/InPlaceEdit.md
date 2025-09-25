@@ -643,16 +643,16 @@ when the user has finished editing and the value has changed.
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| InPlaceEdit | renderViewer | `signature` | Yes | - | Function to render the view mode component. It is the consumer's responsibility to provide the current value or children. Return value: - element: the viewer DOM sub-tree. |
-| InPlaceEdit | renderEditor | `signature` | Yes | - | Function to render the edit mode component It is the consumer's responsibility to provide the current value, and to attach the appropriate onChange event handler needed to capture the updated value. This new value must then be forwarded to the view mode component. Return value: - element: the editor DOM sub-tree. |
-| InPlaceEdit | renderEditButton | `signature` | Yes | - | Function to render the edit button. Parameters: - object: { isVisible, onClick, onFocus, onBlur, buttonRef } Return value: - element: the edit button DOM sub-tree If you choose to use the default edit button, add `label` to the incoming `props` parameter and call `InPlaceEdit.renderDefaultEditButton(props)` If you choose to render a custom button, attach the on* event handlers and set `buttonRef` as a `ref` type property on the `button` element. `isVisible` is a hint as to whether the button is _typically_ shown, but you're free to ignore it for your use-case. |
-| InPlaceEdit | mode | `union` | Yes | - | If `'view'`: the view component is rendered, if `'edit'`: the edit component is rendered |
-| InPlaceEdit | onChangeMode | `signature` | Yes | - | Called when the component's mode changes Parameter: - newMode: string |
+| InPlaceEdit | renderViewer | `() => React.ReactNode` | Yes | - | Function to render the view mode component. It is the consumer's responsibility to provide the current value or children. Return value: - element: the viewer DOM sub-tree. |
+| InPlaceEdit | renderEditor | `(data: { onBlur: () => void editorRef: (el: HTMLElement \| null) => void }) => React.ReactNode` | Yes | - | Function to render the edit mode component It is the consumer's responsibility to provide the current value, and to attach the appropriate onChange event handler needed to capture the updated value. This new value must then be forwarded to the view mode component. Return value: - element: the editor DOM sub-tree. |
+| InPlaceEdit | renderEditButton | `(props: ExtendedRenderEditButton) => React.ReactNode \| null` | Yes | - | Function to render the edit button. Parameters: - object: { isVisible, onClick, onFocus, onBlur, buttonRef } Return value: - element: the edit button DOM sub-tree If you choose to use the default edit button, add `label` to the incoming `props` parameter and call `InPlaceEdit.renderDefaultEditButton(props)` If you choose to render a custom button, attach the on* event handlers and set `buttonRef` as a `ref` type property on the `button` element. `isVisible` is a hint as to whether the button is _typically_ shown, but you're free to ignore it for your use-case. |
+| InPlaceEdit | mode | `'view' \| 'edit'` | Yes | - | If `'view'`: the view component is rendered, if `'edit'`: the edit component is rendered |
+| InPlaceEdit | onChangeMode | `EditableProps['onChangeMode']` | Yes | - | Called when the component's mode changes Parameter: - newMode: string |
 | InPlaceEdit | value | `any` | No | - | The current value. The value is managed by the consuming app, but we need to tell InPlaceEdit it's changed or it won't re-render |
-| InPlaceEdit | onChange | `signature` | No | - | Called when Editable switches from edit to view mode and the value has changed. Parameter: - value: any |
+| InPlaceEdit | onChange | `EditableProps['onChange']` | No | - | Called when Editable switches from edit to view mode and the value has changed. Parameter: - value: any |
 | InPlaceEdit | readOnly | `boolean` | No | `false` | The mode is fixed as 'view' |
 | InPlaceEdit | showFocusRing | `boolean` | No | `true` | Show a focus outline when the input is focused |
-| InPlaceEdit | editButtonPlacement | `union` | No | `'end'` | Put the edit button before or after the view |
+| InPlaceEdit | editButtonPlacement | `'start' \| 'end'` | No | `'end'` | Put the edit button before or after the view |
 | InPlaceEdit | inline | `boolean` | No | `true` | Render outermost element inline v. block |
 
 ### Usage

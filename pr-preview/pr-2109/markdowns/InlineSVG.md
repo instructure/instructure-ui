@@ -53,16 +53,16 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| InlineSVG | children | `ReactReactNode` | No | - |  |
+| InlineSVG | children | `React.ReactNode` | No | - |  |
 | InlineSVG | src | `string` | No | `''` |  |
 | InlineSVG | title | `string` | No | `''` |  |
 | InlineSVG | description | `string` | No | `''` |  |
 | InlineSVG | focusable | `boolean` | No | `false` |  |
-| InlineSVG | width | `union` | No | `'1em'` | Width of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
-| InlineSVG | height | `union` | No | `'1em'` | Height of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
+| InlineSVG | width | `string \| number` | No | `'1em'` | Width of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
+| InlineSVG | height | `string \| number` | No | `'1em'` | Height of the SVG. Accepts valid CSS unit strings like '1rem' To let the SVG expand to fill its container, use "`auto`" |
 | InlineSVG | inline | `boolean` | No | `true` |  |
-| InlineSVG | color | `union` | No | `'inherit'` |  |
-| InlineSVG | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| InlineSVG | color | `\| 'inherit' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'success' \| 'error' \| 'alert' \| 'warning' \| 'brand' \| 'auto'` | No | `'inherit'` |  |
+| InlineSVG | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 
 ### Usage
 

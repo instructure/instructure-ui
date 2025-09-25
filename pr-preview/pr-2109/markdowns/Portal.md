@@ -57,12 +57,12 @@ render(<Example />)
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Portal | open | `boolean` | No | `false` | Whether or not the `<Portal />` is open |
-| Portal | onOpen | `signature` | No | `() => {}` | Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter. |
-| Portal | onClose | `signature` | No | `() => {}` | Callback fired when `<Portal />` has been unmounted from the DOM |
-| Portal | mountNode | `union` | No | `null` | An element or a function returning an element to use as the mount node for the `<Portal />` (defaults to `document.body`) |
-| Portal | insertAt | `union` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
-| Portal | children | `ReactReactNode` | No | `null` | The children to be rendered within the `<Portal />` |
-| Portal | elementRef | `signature` | No | `() => {}` | Provides a reference to the underlying html element. Has the Portal DOMNode as parameter. |
+| Portal | onOpen | `(DOMNode: PortalNode) => void` | No | `() => {}` | Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter. |
+| Portal | onClose | `() => void` | No | `() => {}` | Callback fired when `<Portal />` has been unmounted from the DOM |
+| Portal | mountNode | `Element \| (() => Element \| null) \| null` | No | `null` | An element or a function returning an element to use as the mount node for the `<Portal />` (defaults to `document.body`) |
+| Portal | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
+| Portal | children | `React.ReactNode` | No | `null` | The children to be rendered within the `<Portal />` |
+| Portal | elementRef | `(el?: PortalNode) => void` | No | `() => {}` | Provides a reference to the underlying html element. Has the Portal DOMNode as parameter. |
 
 ### Usage
 

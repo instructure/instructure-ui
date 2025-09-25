@@ -169,28 +169,28 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Tray | label | `string` | Yes | - |  |
-| Tray | children | `ReactReactNode` | No | - |  |
-| Tray | size | `union` | No | `'small'` | The size (width) of the `<Tray />` when placement is `start` or `end` |
-| Tray | placement | `union` | No | `'start'` | Placement to determine where the `<Tray />` should display in the viewport |
+| Tray | children | `React.ReactNode` | No | - |  |
+| Tray | size | `'x-small' \| 'small' \| 'regular' \| 'medium' \| 'large'` | No | `'small'` | The size (width) of the `<Tray />` when placement is `start` or `end` |
+| Tray | placement | `'top' \| 'bottom' \| 'start' \| 'end' \| 'center'` | No | `'start'` | Placement to determine where the `<Tray />` should display in the viewport |
 | Tray | open | `boolean` | No | `false` | Whether or not the `<Tray />` is open |
-| Tray | defaultFocusElement | `union` | No | `null` | An element or a function returning an element to focus by default |
-| Tray | contentRef | `signature` | No | - | A function that returns a reference to the content element |
+| Tray | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | `null` | An element or a function returning an element to focus by default |
+| Tray | contentRef | `(el: HTMLSpanElement \| null) => void` | No | - | A function that returns a reference to the content element |
 | Tray | shouldContainFocus | `boolean` | No | `true` | Whether focus should be contained within the `<Tray/>` when it is open |
 | Tray | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be restored when the `<Tray/>` is closed |
 | Tray | shouldCloseOnDocumentClick | `boolean` | No | `false` | Should the `<Tray />` hide when clicks occur outside the content |
-| Tray | onOpen | `signature` | No | - | Callback fired when `<Tray />` content has been mounted in the DOM |
-| Tray | onClose | `signature` | No | - | Callback fired when `<Tray />` has been unmounted from the DOM |
-| Tray | onDismiss | `signature` | No | - | Callback fired when the `<Tray />` is requesting to be closed |
-| Tray | mountNode | `union` | No | - | An element or a function returning an element to use as the mount node for the `<Tray />` (defaults to `document.body`) |
-| Tray | insertAt | `union` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
-| Tray | liveRegion | `union` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Tray />` is open |
-| Tray | onTransition | `signature` | No | - | Callback fired when the <Tray /> transitions in/out |
-| Tray | onEnter | `signature` | No | - | Callback fired before the <Tray /> transitions in |
-| Tray | onEntering | `signature` | No | - | Callback fired as the <Tray /> begins to transition in |
-| Tray | onEntered | `signature` | No | - | Callback fired after the <Tray /> finishes transitioning in |
-| Tray | onExit | `signature` | No | - | Callback fired right before the <Tray /> transitions out |
-| Tray | onExiting | `signature` | No | - | Callback fired as the <Tray /> begins to transition out |
-| Tray | onExited | `signature` | No | - | Callback fired after the <Tray /> finishes transitioning out |
+| Tray | onOpen | `(type?: TransitionType) => void` | No | - | Callback fired when `<Tray />` content has been mounted in the DOM |
+| Tray | onClose | `(type?: TransitionType) => void` | No | - | Callback fired when `<Tray />` has been unmounted from the DOM |
+| Tray | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Tray />` is requesting to be closed |
+| Tray | mountNode | `Element \| (() => Element \| null) \| null` | No | - | An element or a function returning an element to use as the mount node for the `<Tray />` (defaults to `document.body`) |
+| Tray | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
+| Tray | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Tray />` is open |
+| Tray | onTransition | `( toState: BaseTransitionStatesType, fromState: BaseTransitionStatesType ) => void` | No | - | Callback fired when the <Tray /> transitions in/out |
+| Tray | onEnter | `() => void` | No | - | Callback fired before the <Tray /> transitions in |
+| Tray | onEntering | `() => void` | No | - | Callback fired as the <Tray /> begins to transition in |
+| Tray | onEntered | `(type?: TransitionType) => void` | No | - | Callback fired after the <Tray /> finishes transitioning in |
+| Tray | onExit | `() => void` | No | - | Callback fired right before the <Tray /> transitions out |
+| Tray | onExiting | `() => void` | No | - | Callback fired as the <Tray /> begins to transition out |
+| Tray | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the <Tray /> finishes transitioning out |
 | Tray | transitionOnMount | `boolean` | No | `true` | Run the enter animation when the component mounts, if it is initially shown |
 | Tray | transitionEnter | `boolean` | No | `true` | Run the enter animation |
 | Tray | transitionExit | `boolean` | No | `true` | Run the exit animation |

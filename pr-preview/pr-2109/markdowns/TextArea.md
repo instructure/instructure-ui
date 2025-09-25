@@ -156,25 +156,25 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| TextArea | label | `ReactReactNode` | Yes | - |  |
+| TextArea | label | `React.ReactNode` | Yes | - |  |
 | TextArea | id | `string` | No | - |  |
-| TextArea | size | `union` | No | `'medium'` | sets the font-size for the textarea |
-| TextArea | layout | `union` | No | `'stacked'` |  |
+| TextArea | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | sets the font-size for the textarea |
+| TextArea | layout | `'stacked' \| 'inline'` | No | `'stacked'` |  |
 | TextArea | autoGrow | `boolean` | No | `true` | the textarea will expand vertically to fit the height of the content, unless its content exceeds `maxHeight` |
-| TextArea | resize | `union` | No | `'none'` | is the textarea resizable (in supported browsers) |
+| TextArea | resize | `'none' \| 'both' \| 'horizontal' \| 'vertical'` | No | `'none'` | is the textarea resizable (in supported browsers) |
 | TextArea | width | `string` | No | - | a fixed width for the textarea |
 | TextArea | height | `string` | No | - | Initial height for the textarea (if autoGrow is true it will grow vertically) Accepts CSS units, e.g. '55px' |
-| TextArea | maxHeight | `union` | No | - | when autoGrow is true, the textarea will never grow beyond this value |
-| TextArea | messages | `Array` | No | `[]` | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| TextArea | maxHeight | `number \| string` | No | - | when autoGrow is true, the textarea will never grow beyond this value |
+| TextArea | messages | `FormMessage[]` | No | `[]` | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | TextArea | inline | `boolean` | No | `false` |  |
 | TextArea | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
 | TextArea | disabled | `boolean` | No | `false` | Whether or not to disable the textarea |
 | TextArea | readOnly | `boolean` | No | `false` | Works just like disabled but keeps the same styles as if it were active |
 | TextArea | required | `boolean` | No | `false` | Sets the required property on the underlying native textArea |
-| TextArea | textareaRef | `signature` | No | - | a function that provides a reference to the actual textarea element |
+| TextArea | textareaRef | `(textarea: HTMLTextAreaElement \| null) => void` | No | - | a function that provides a reference to the actual textarea element |
 | TextArea | defaultValue | `string` | No | - | value to set on initial render |
 | TextArea | value | `string` | No | - | the selected value (must be accompanied by an `onChange` prop) |
-| TextArea | onChange | `signature` | No | - | when used with the `value` prop, the component will not control its own state |
+| TextArea | onChange | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | No | - | when used with the `value` prop, the component will not control its own state |
 | TextArea | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
 
 ### Usage

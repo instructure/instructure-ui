@@ -845,15 +845,15 @@ The Pages component can be used to render Paginated content that does not fit in
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Pages | children | `ReactReactNode` | No | - | Children are type of `<Pages.Page>` |
+| Pages | children | `React.ReactNode` | No | - | Children are type of `<Pages.Page>` |
 | Pages | defaultPageIndex | `number` | No | - |  |
 | Pages | activePageIndex | `number` | No | `0` | The currently active page index |
-| Pages | onPageIndexChange | `signature` | No | - | Event handler fired anytime page index has changed due to back button being clicked |
+| Pages | onPageIndexChange | `(newPageIndex: number, oldPageIndex?: number) => void` | No | - | Event handler fired anytime page index has changed due to back button being clicked |
 | Pages | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Pages.Page | children | `union` | No | `null` | The children to be rendered |
-| Pages.Page | defaultFocusElement | `union` | No | `null` | An element or a function returning an element to focus by default |
+| Pages.Page | children | `\| React.ReactNode \| (( history: PagesContextType['history'], navigateToPreviousPage: PagesContextType['navigateToPreviousPage'] ) => React.ReactNode)` | No | `null` | The children to be rendered |
+| Pages.Page | defaultFocusElement | `UIElement \| (() => UIElement)` | No | `null` | An element or a function returning an element to focus by default |
 | Pages.Page | padding | `Spacing` | No | `'small'` | Set the padding using familiar CSS shorthand |
-| Pages.Page | textAlign | `union` | No | `'start'` |  |
+| Pages.Page | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` |  |
 
 ### Usage
 

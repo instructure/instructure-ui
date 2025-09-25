@@ -209,44 +209,44 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| SimpleSelect | renderLabel | `union` | Yes | - | The form field label. |
-| SimpleSelect | value | `union` | No | - | The value corresponding to the value of the selected option. If defined, the component will act controlled and will not manage its own state. |
+| SimpleSelect | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The form field label. |
+| SimpleSelect | value | `string \| number` | No | - | The value corresponding to the value of the selected option. If defined, the component will act controlled and will not manage its own state. |
 | SimpleSelect | defaultValue | `string` | No | - | The value of the option to select by default, when uncontrolled. |
 | SimpleSelect | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
-| SimpleSelect | size | `union` | No | `'medium'` | The size of the text input. |
+| SimpleSelect | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the text input. |
 | SimpleSelect | assistiveText | `string` | No | - | Additional helpful text to provide to screen readers about the operation of the component. Provided via aria-describedby. |
 | SimpleSelect | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
-| SimpleSelect | interaction | `union` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
+| SimpleSelect | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
 | SimpleSelect | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
 | SimpleSelect | isInline | `boolean` | No | `false` | Whether the input is rendered inline with other elements or if it is rendered as a block level element. |
 | SimpleSelect | width | `string` | No | - | The width of the text input. |
 | SimpleSelect | visibleOptionsCount | `number` | No | `8` | The number of options that should be visible before having to scroll. Works best when the options are the same height. |
 | SimpleSelect | optionsMaxHeight | `string` | No | - | The max height the options list can be before having to scroll. If set, it will __override__ the `visibleOptionsCount` prop. |
 | SimpleSelect | optionsMaxWidth | `string` | No | - | The max width the options list can be before option text wraps. If not set, the list will only display as wide as the text input. |
-| SimpleSelect | messages | `Array` | No | - | Displays messages and validation for the input. It should be an array of objects with the following shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| SimpleSelect | messages | `FormMessage[]` | No | - | Displays messages and validation for the input. It should be an array of objects with the following shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | SimpleSelect | placement | `PlacementPropValues` | No | `'bottom stretch'` | The placement of the options list. |
 | SimpleSelect | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the placement. |
 | SimpleSelect | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use mount the options list to in the DOM (defaults to `document.body`) |
-| SimpleSelect | onChange | `signature` | No | - | Callback fired when a new option is selected. |
-| SimpleSelect | onFocus | `signature` | No | - | Callback fired when text input receives focus. |
-| SimpleSelect | onBlur | `signature` | No | - | Callback fired when text input loses focus. |
-| SimpleSelect | onShowOptions | `signature` | No | - | Callback fired when the options list is shown. |
-| SimpleSelect | onHideOptions | `signature` | No | - | Callback fired when the options list is hidden. |
-| SimpleSelect | inputRef | `signature` | No | - | A ref to the html `input` element. |
-| SimpleSelect | listRef | `signature` | No | - | A ref to the html `ul` element. |
-| SimpleSelect | renderEmptyOption | `union` | No | `'---'` | Content to display in the list when no options are available. |
-| SimpleSelect | renderBeforeInput | `union` | No | - | Content to display before the text input. This will commonly be an icon. |
-| SimpleSelect | renderAfterInput | `union` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
-| SimpleSelect | children | `ReactReactNode` | No | - | Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`. |
+| SimpleSelect | onChange | `( event: React.SyntheticEvent, data: { value?: string \| number id?: string } ) => void` | No | - | Callback fired when a new option is selected. |
+| SimpleSelect | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input receives focus. |
+| SimpleSelect | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input loses focus. |
+| SimpleSelect | onShowOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the options list is shown. |
+| SimpleSelect | onHideOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the options list is hidden. |
+| SimpleSelect | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A ref to the html `input` element. |
+| SimpleSelect | listRef | `(listElement: HTMLUListElement \| null) => void` | No | - | A ref to the html `ul` element. |
+| SimpleSelect | renderEmptyOption | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `'---'` | Content to display in the list when no options are available. |
+| SimpleSelect | renderBeforeInput | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the text input. This will commonly be an icon. |
+| SimpleSelect | renderAfterInput | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
+| SimpleSelect | children | `React.ReactNode` | No | - | Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`. |
 | SimpleSelect | isOptionContentAppliedToInput | `boolean` | No | `false` | Whether or not the content of the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field. If the selected `SimpleSelect.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field. `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `SimpleSelect`'s `inputValue` is an empty value, null or undefined. If `true` and the selected `SimpleSelect.Option` has a `renderAfterLabel` value, it will replace the default arrow icon. If `true` and `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` value. If the selected `SimpleSelect.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered. |
-| SimpleSelect | layout | `union` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
-| SimpleSelect.Group | renderLabel | `union` | Yes | - | The label associated with the group options. |
-| SimpleSelect.Group | children | `ReactReactNode` | No | - | Children of type `<SimpleSelect.Option />` that will be considered part of the group. |
+| SimpleSelect | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
+| SimpleSelect.Group | renderLabel | `React.ReactNode \| (() => React.ReactNode)` | Yes | - | The label associated with the group options. |
+| SimpleSelect.Group | children | `React.ReactNode` | No | - | Children of type `<SimpleSelect.Option />` that will be considered part of the group. |
 | SimpleSelect.Option | id | `string` | Yes | - | The id for the option. **Must be globally unique**, it will be translated to an `id` prop in the DOM. |
-| SimpleSelect.Option | value | `union` | Yes | - | The value for the option. |
+| SimpleSelect.Option | value | `string \| number` | Yes | - | The value for the option. |
 | SimpleSelect.Option | isDisabled | `boolean` | No | `false` | Whether or not this option is disabled. |
-| SimpleSelect.Option | renderBeforeLabel | `union` | No | - | Content to display before the option label, such as an icon. |
-| SimpleSelect.Option | renderAfterLabel | `union` | No | - | Content to display after the option label, such as an icon. |
+| SimpleSelect.Option | renderBeforeLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the option label, such as an icon. |
+| SimpleSelect.Option | renderAfterLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the option label, such as an icon. |
 | SimpleSelect.Option | children | `string` | No | - | Content to display as the option label. |
 
 ### Usage

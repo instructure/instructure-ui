@@ -422,31 +422,31 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Flex | children | `union` | No | - | It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props will not automatically be set on the children. |
-| Flex | as | `union` | No | `'span'` | the element type to render as |
-| Flex | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
-| Flex | height | `union` | No | - | Sets the height of the component's container (optional) |
-| Flex | width | `union` | No | - | Sets the width of the component's container (optional) |
+| Flex | children | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props will not automatically be set on the children. |
+| Flex | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Flex | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| Flex | height | `string \| number` | No | - | Sets the height of the component's container (optional) |
+| Flex | width | `string \| number` | No | - | Sets the width of the component's container (optional) |
 | Flex | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Flex | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
 | Flex | gap | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `gap="small large"`. |
-| Flex | display | `union` | No | `'flex'` | Sets the CSS display rule for the component's container |
-| Flex | textAlign | `union` | No | - | Designates the text alignment |
-| Flex | direction | `union` | No | `'row'` | Sets the flex-direction to row (horizontal) or column (vertical) |
-| Flex | alignItems | `union` | No | - | Aligns Flex.Items on the vertical axis (horizontal if direction is column) |
-| Flex | justifyItems | `union` | No | `'start'` | Aligns Flex.Items on the horizontal axis (vertical if direction is column) |
-| Flex | wrap | `union` | No | `'no-wrap'` | Determines if the Flex.Items should wrap when they exceed their container's width |
+| Flex | display | `'flex' \| 'inline-flex'` | No | `'flex'` | Sets the CSS display rule for the component's container |
+| Flex | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment |
+| Flex | direction | `'row' \| 'column' \| 'row-reverse' \| 'column-reverse'` | No | `'row'` | Sets the flex-direction to row (horizontal) or column (vertical) |
+| Flex | alignItems | `'center' \| 'start' \| 'end' \| 'stretch'` | No | - | Aligns Flex.Items on the vertical axis (horizontal if direction is column) |
+| Flex | justifyItems | `'center' \| 'start' \| 'end' \| 'space-around' \| 'space-between'` | No | `'start'` | Aligns Flex.Items on the horizontal axis (vertical if direction is column) |
+| Flex | wrap | `'wrap' \| 'no-wrap' \| 'wrap-reverse'` | No | `'no-wrap'` | Determines if the Flex.Items should wrap when they exceed their container's width |
 | Flex | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
-| Flex.Item | children | `ReactReactNode` | No | - | The children to render inside the Item |
-| Flex.Item | as | `union` | No | `'span'` | the element type to render as |
-| Flex.Item | elementRef | `signature` | No | - | provides a reference to the underlying html root element |
+| Flex.Item | children | `React.ReactNode` | No | - | The children to render inside the Item |
+| Flex.Item | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Flex.Item | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Flex.Item | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Flex.Item | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
-| Flex.Item | align | `union` | No | - | overrides the parent Flex's alignItems prop, if needed |
-| Flex.Item | direction | `union` | No | - | Inherits from the parent Flex component |
-| Flex.Item | textAlign | `union` | No | - | Designates the text alignment inside the Item |
-| Flex.Item | overflowX | `union` | No | - | Handles horizontal overflow |
-| Flex.Item | overflowY | `union` | No | - | Handles vertical overflow |
+| Flex.Item | align | `'center' \| 'start' \| 'end' \| 'stretch'` | No | - | overrides the parent Flex's alignItems prop, if needed |
+| Flex.Item | direction | `'row' \| 'column'` | No | - | Inherits from the parent Flex component |
+| Flex.Item | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment inside the Item |
+| Flex.Item | overflowX | `'auto' \| 'hidden' \| 'visible'` | No | - | Handles horizontal overflow |
+| Flex.Item | overflowY | `'auto' \| 'hidden' \| 'visible'` | No | - | Handles vertical overflow |
 | Flex.Item | shouldGrow | `boolean` | No | `false` | Should the FlexItem grow to fill any available space? |
 | Flex.Item | shouldShrink | `boolean` | No | `false` | Should the FlexItem shrink (stopping at its `size`)? |
 | Flex.Item | size | `string` | No | - | Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`) |

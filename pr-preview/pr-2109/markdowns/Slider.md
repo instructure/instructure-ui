@@ -7,14 +7,14 @@
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Slider | isColorSlider | `boolean` | No | `false` |  |
-| Slider | onChange | `signature` | Yes | - |  |
+| Slider | onChange | `(position: number) => void` | Yes | - |  |
 | Slider | width | `number` | Yes | - |  |
 | Slider | value | `number` | Yes | - |  |
 | Slider | minValue | `number` | Yes | - |  |
 | Slider | maxValue | `number` | Yes | - |  |
 | Slider | indicatorRadius | `number` | Yes | - |  |
 | Slider | height | `number` | Yes | - |  |
-| Slider | elementRef | `signature` | No | - |  |
+| Slider | elementRef | `(element: Element \| null) => void` | No | - |  |
 | Slider | navigationExplanationScreenReaderLabel | `string` | Yes | - |  |
 
 ### Usage

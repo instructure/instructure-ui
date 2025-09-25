@@ -131,13 +131,13 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Responsive | match | `union` | No | `'element'` | Specifies if the `<Responsive />` component should use element or media queries |
-| Responsive | query | `signature` | Yes | - | Consists of an object where the keys define the names of breakpoints. The values are query objects with keys representing the breakpoint condition and values representing a breakpoint value as a string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}` |
-| Responsive | props | `signature` | No | `null` | Consists of an object where the keys match the breakpoint names used in the query. The values are objects with keys representing prop names and values representing prop values Ex. `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}` |
-| Responsive | render | `signature` | No | - | Function called on render with the following form `(props, matches) => {...}` where the props are the current props to be applied and matches is an array of current matches from the query prop. Either this or a `children` prop function must be supplied. |
-| Responsive | children | `signature` | No | `null` | Function that takes the same form and arguments as the render prop. Either this or a `render` prop function must be supplied. |
-| Responsive | display | `union` | No | - | The Responsive component is rendered as a `<div>`, so it has `display="block"` by default. You can override the display value with this prop. |
-| Responsive | elementRef | `signature` | No | - | A function that returns a reference to root HTML element |
+| Responsive | match | `'element' \| 'media'` | No | `'element'` | Specifies if the `<Responsive />` component should use element or media queries |
+| Responsive | query | `{ [breakpointName: string]: Query }` | Yes | - | Consists of an object where the keys define the names of breakpoints. The values are query objects with keys representing the breakpoint condition and values representing a breakpoint value as a string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}` |
+| Responsive | props | `{ [breakpointName: string]: ResponsivePropsObject }` | No | `null` | Consists of an object where the keys match the breakpoint names used in the query. The values are objects with keys representing prop names and values representing prop values Ex. `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}` |
+| Responsive | render | `( props?: ResponsivePropsObject \| null, matches?: QueriesMatching ) => any` | No | - | Function called on render with the following form `(props, matches) => {...}` where the props are the current props to be applied and matches is an array of current matches from the query prop. Either this or a `children` prop function must be supplied. |
+| Responsive | children | `( props?: ResponsivePropsObject \| null, matches?: QueriesMatching ) => any` | No | `null` | Function that takes the same form and arguments as the render prop. Either this or a `render` prop function must be supplied. |
+| Responsive | display | `'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | The Responsive component is rendered as a `<div>`, so it has `display="block"` by default. You can override the display value with this prop. |
+| Responsive | elementRef | `(el: HTMLDivElement \| null) => void` | No | - | A function that returns a reference to root HTML element |
 
 ### Usage
 

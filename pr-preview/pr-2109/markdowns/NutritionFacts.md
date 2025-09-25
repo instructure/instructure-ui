@@ -105,7 +105,7 @@ type: example
 | NutritionFacts | modalLabel | `string` | Yes | - | i18n text for the label of the modal |
 | NutritionFacts | title | `string` | Yes | - | i18n text for the Nutrition Facts title |
 | NutritionFacts | featureName | `string` | Yes | - | i18n text for the feature name that the Nutrition Facts describes |
-| NutritionFacts | data | `Array` | Yes | - | i18n text for the "model and data" heading of the Nutrition Facts |
+| NutritionFacts | data | `BlockType[]` | Yes | - | i18n text for the "model and data" heading of the Nutrition Facts |
 | NutritionFacts | closeButtonText | `string` | Yes | - | i18n text for the close button |
 | NutritionFacts | closeIconButtonScreenReaderLabel | `string` | Yes | - | i18n text for the close iconButton |
 | NutritionFacts | triggerText | `string` | Yes | - | i18n text for the trigger |

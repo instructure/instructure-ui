@@ -148,15 +148,15 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | ToggleButton | screenReaderLabel | `string` | Yes | - | Text to output only to screen readers |
-| ToggleButton | renderTooltipContent | `union` | Yes | - | Text to render in the tooltip shown on hover/focus |
-| ToggleButton | renderIcon | `union` | Yes | - | An icon or function that returns an icon |
-| ToggleButton | status | `union` | Yes | - | Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`) |
-| ToggleButton | as | `union` | No | `'button'` | The element to render as the component root; `button` by default |
-| ToggleButton | interaction | `union` | No | `undefined` | Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly` |
-| ToggleButton | size | `union` | No | `'medium'` | The size of the `ToggleButton` |
-| ToggleButton | elementRef | `signature` | No | - | Provides a reference to `ToggleButton`'s underlying HTML element |
-| ToggleButton | onClick | `signature` | No | - | Callback fired when the `ToggleButton` is clicked |
-| ToggleButton | color | `union` | No | `'secondary'` | The color in which to display the icon |
+| ToggleButton | renderTooltipContent | `React.ReactNode \| ((...args: any[]) => any)` | Yes | - | Text to render in the tooltip shown on hover/focus |
+| ToggleButton | renderIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | An icon or function that returns an icon |
+| ToggleButton | status | `'pressed' \| 'unpressed'` | Yes | - | Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`) |
+| ToggleButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root; `button` by default |
+| ToggleButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly` |
+| ToggleButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `ToggleButton` |
+| ToggleButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to `ToggleButton`'s underlying HTML element |
+| ToggleButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `ToggleButton` is clicked |
+| ToggleButton | color | `'primary' \| 'primary-inverse' \| 'secondary' \| 'success' \| 'danger'` | No | `'secondary'` | The color in which to display the icon |
 | ToggleButton | isShowingTooltip | `boolean` | No | - | By default, the tooltip will show on hover/focus. Use this prop if you need to override that behavior. |
 | ToggleButton | mountNode | `PositionMountNode` | No | `null` | An element or a function returning an element to use as the mount node |
 | ToggleButton | placement | `PlacementPropValues` | No | `'top center'` | The placement of the tooltip in relation to the button |

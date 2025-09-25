@@ -226,14 +226,14 @@ should look.
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Editable | mode | `union` | Yes | - | If `'view'`: the view component is rendered, if `'edit'`: the edit component is rendered |
-| Editable | onChangeMode | `signature` | Yes | - | Called when the component's mode changes. |
-| Editable | children | `signature` | No | `null` | Function that you can supply that will return the children of this component. It has one parameter has the following fields: - mode: `view` or `edit`, depending on whether the view or the editor should be rendered. - getContainerProps(props) - Props to be spread onto the container element - getEditorProps(props) - Props to be spread onto the editor element - getEditButtonProps(props) - Props to be spread onto the edit button element |
-| Editable | render | `signature` | No | - | Identical to children |
+| Editable | mode | `'view' \| 'edit'` | Yes | - | If `'view'`: the view component is rendered, if `'edit'`: the edit component is rendered |
+| Editable | onChangeMode | `(newMode: string) => void` | Yes | - | Called when the component's mode changes. |
+| Editable | children | `(props: EditableRenderProps) => React.ReactNode` | No | `null` | Function that you can supply that will return the children of this component. It has one parameter has the following fields: - mode: `view` or `edit`, depending on whether the view or the editor should be rendered. - getContainerProps(props) - Props to be spread onto the container element - getEditorProps(props) - Props to be spread onto the editor element - getEditButtonProps(props) - Props to be spread onto the edit button element |
+| Editable | render | `(props: EditableRenderProps) => React.ReactNode` | No | - | Identical to children |
 | Editable | value | `any` | No | - | The current value. The value is managed by the consuming app, but we need to tell Editable it's changed or it won't re-render |
-| Editable | onChange | `signature` | No | - | Called when Editable switches from edit to view mode and the value has changed. |
+| Editable | onChange | `(value: any) => void` | No | - | Called when Editable switches from edit to view mode and the value has changed. |
 | Editable | readOnly | `boolean` | No | `false` | The mode is fixed as 'view' |
-| Editable | elementRef | `signature` | No | - | provides a reference to the underlying html root element (container) |
+| Editable | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element (container) |
 
 ### Usage
 
