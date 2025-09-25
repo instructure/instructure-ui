@@ -2755,10 +2755,6 @@
         "value": "{lineHeight.standalone.textSm}",
         "type": "lineHeights"
       },
-      "iconSize": {
-        "value": "{size.icon.sm}",
-        "type": "sizing"
-      },
       "fontFamily": {
         "value": "{fontFamily.base}",
         "type": "fontFamilies"
@@ -3359,10 +3355,6 @@
       "lineHeight": {
         "value": "{lineHeight.standalone.textSm}",
         "type": "lineHeights"
-      },
-      "iconSize": {
-        "value": "{size.icon.sm}",
-        "type": "sizing"
       },
       "fontFamily": {
         "value": "{fontFamily.base}",
@@ -5172,7 +5164,6 @@
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
-        "pill.iconSize": "8aac003a5eb6cb0154932e5fe89461f5e8fc51b0",
         "pill.fontFamily": "dbb5bf2b3d20d8245128d312326dc5804430f309",
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
@@ -5542,7 +5533,6 @@
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
-        "pill.iconSize": "8aac003a5eb6cb0154932e5fe89461f5e8fc51b0",
         "pill.fontFamily": "dbb5bf2b3d20d8245128d312326dc5804430f309",
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
@@ -5975,7 +5965,6 @@
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
-        "pill.iconSize": "8aac003a5eb6cb0154932e5fe89461f5e8fc51b0",
         "pill.fontFamily": "dbb5bf2b3d20d8245128d312326dc5804430f309",
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
@@ -6343,7 +6332,6 @@
         "pill.borderRadius": "cce662b733d19ab04e824baaa8bff1ce316cf94b",
         "pill.borderWidth": "2c014a9c01b4f58ce7766b5291c28cef66fe6464",
         "pill.lineHeight": "5a08f9e8f66fcd721b30a0f5248b4476c9c60870",
-        "pill.iconSize": "8aac003a5eb6cb0154932e5fe89461f5e8fc51b0",
         "pill.fontFamily": "dbb5bf2b3d20d8245128d312326dc5804430f309",
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
