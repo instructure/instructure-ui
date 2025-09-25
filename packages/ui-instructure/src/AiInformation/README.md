@@ -49,7 +49,7 @@ readonly: true
   },
     {
     level: "LEVEL 2",
-    title: "AI-Powered Features Without Data Retention",
+    title: "AI-Powered Features Without Data Training",
     description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model."
   },
     {
@@ -195,7 +195,7 @@ readonly: true
   },
     {
     level: "LEVEL 2",
-    title: "AI-Powered Features Without Data Retention",
+    title: "AI-Powered Features Without Data Training",
     description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model."
   },
     {
