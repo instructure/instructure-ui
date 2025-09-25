@@ -3431,7 +3431,7 @@
       "interactive": {
         "height": {
           "sm": {
-            "value": "{size.size28}",
+            "value": "{size.size32}",
             "type": "sizing"
           },
           "md": {
