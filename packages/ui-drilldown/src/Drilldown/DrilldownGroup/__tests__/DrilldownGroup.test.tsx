@@ -234,6 +234,26 @@ describe('<Drilldown.Group />', () => {
       expect(option_1).not.toHaveAttribute('aria-disabled')
       expect(option_2).not.toHaveAttribute('aria-disabled')
     })
+
+    it('should not allow selection if the Drilldown.Group is disabled', async () => {
+      render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" selectableType="multiple" disabled>
+              <Drilldown.Option id="opt1">Disabled Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const optionItemContainer = screen.getByLabelText('Disabled Option')
+      const optionContent = screen.getByText('Disabled Option')
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+
+      await userEvent.click(optionContent)
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+    })
   })
 
   describe('role prop', () => {
