@@ -134,10 +134,11 @@ For more information about live regions, see
             return (
               <View key={alert.key} display="block" margin="small 0">
                 <Alert
+                  screenReaderOnly
                   variant={alert.variant}
                   renderCloseButtonLabel="Close"
                   onDismiss={alert.onDismiss}
-                  liveRegion={() => document.getElementById('flash-messages')}
+                  //liveRegion={() => document.getElementById('flash-messages')}
                   liveRegionPoliteness={alert.politeness}
                   margin="small 0"
                   variantScreenReaderLabel={this.getScreenReaderLabel(

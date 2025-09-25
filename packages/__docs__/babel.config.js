@@ -26,9 +26,26 @@ module.exports = {
   presets: [
     [
       require('@instructure/ui-babel-preset'),
-      {
-        transformImports: false // needed for webpack reload on change to work,
-      }
+      { transformImports: false } // use preset for dev builds
     ]
-  ]
+  ],
+  env: {
+    production: {
+      // In production, bypass the preset to preserve console logs
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            targets: '>0.25%, not dead',
+            modules: false
+          }
+        ],
+        '@babel/preset-react',
+        '@babel/preset-typescript'
+      ],
+      plugins: [
+        // Add any additional plugins you need, but do NOT include transform-remove-console
+      ]
+    }
+  }
 }
