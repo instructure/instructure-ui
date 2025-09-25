@@ -55,7 +55,11 @@ function logMessage(
   message: string,
   ...args: unknown[]
 ) {
-  if (process.env.NODE_ENV !== 'production' && !condition) {
+  if (
+    (process.env.GITHUB_PULL_REQUEST_PREVIEW ||
+      process.env.NODE_ENV !== 'production') &&
+    !condition
+  ) {
     if (typeof console[level] === 'function') {
       const renderStack = withRenderStack ? getRenderStack() : ''
       //@ts-expect-error level can be 'constructor' which is not callable
