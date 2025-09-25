@@ -315,6 +315,26 @@ describe('<Drilldown.Page />', () => {
       })
     })
 
+    it('should not allow selection if the Drilldown.Page is disabled', async () => {
+      render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" disabled>
+            <Drilldown.Group id="group0" selectableType="multiple">
+              <Drilldown.Option id="opt1">Disabled Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const optionItemContainer = screen.getByLabelText('Disabled Option')
+      const optionContent = screen.getByText('Disabled Option')
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+
+      await userEvent.click(optionContent)
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+    })
+
     it("shouldn't make header Back options disabled", async () => {
       render(
         <Drilldown rootPageId="page0">

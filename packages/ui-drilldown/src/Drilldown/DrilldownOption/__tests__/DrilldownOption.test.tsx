@@ -231,6 +231,28 @@ describe('<Drilldown.Option />', () => {
 
       expect(option).toHaveAttribute('aria-disabled', 'true')
     })
+
+    it('should not allow selection if the Drilldown.Option itself is disabled', async () => {
+      render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" selectableType="multiple">
+              <Drilldown.Option id="opt1" disabled>
+                Disabled Option
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const optionItemContainer = screen.getByLabelText('Disabled Option')
+      const optionContent = screen.getByText('Disabled Option')
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+
+      await userEvent.click(optionContent)
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+    })
   })
 
   describe('href prop', () => {

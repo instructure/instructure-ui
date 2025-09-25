@@ -787,13 +787,21 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // TODO: this line can be removed when React 16 is no longer supported
     event.persist()
 
-    if (
-      !id ||
-      !selectedOption ||
-      selectedOption.props.disabled ||
-      (event.target as HTMLElement).getAttribute('disabled') ||
-      (event.target as HTMLElement).getAttribute('aria-disabled')
-    ) {
+    if (!id || !selectedOption) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
+    }
+
+    const isOptionDisabled =
+    id !== this._headerBackId && (
+      this.props.disabled ||
+      this.currentPage?.disabled ||
+      selectedOption.groupProps?.disabled ||
+      selectedOption.props.disabled
+      )
+
+    if (isOptionDisabled) {
       event.preventDefault()
       event.stopPropagation()
       return
