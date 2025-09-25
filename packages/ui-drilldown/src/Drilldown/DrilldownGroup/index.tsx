@@ -29,6 +29,7 @@ import { optionsThemeGenerator } from '@instructure/ui-options'
 
 import { propTypes, allowedProps } from './props'
 import type { DrilldownGroupProps } from './props'
+import { isMac, isFirefox } from '@instructure/ui-utils'
 
 /**
 ---
@@ -48,7 +49,9 @@ class DrilldownGroup extends Component<DrilldownGroupProps> {
   static defaultProps = {
     disabled: false,
     withoutSeparators: false,
-    role: 'group'
+    // Firefox with NVDA does not read Drilldown.Group with role="group" correctly
+    // but setting role="menu" on all other platforms results in Drilldown.Group label not being read
+    role: !isMac() && isFirefox() ? 'menu' : 'group'
   }
 
   render() {
