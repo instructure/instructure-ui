@@ -3526,7 +3526,7 @@
           }
         },
         "inputElements": {
-          "value": "{size.size12}",
+          "value": "{size.size8}",
           "type": "spacing"
         }
       },
