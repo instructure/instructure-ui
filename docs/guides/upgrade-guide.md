@@ -1,7 +1,7 @@
 ---
 title: Upgrade Guide for Version 11
 category: Guides
-order: 7
+order: 1
 ---
 
 # Upgrade Guide for Version 11

@@ -1,7 +1,7 @@
 ---
 title: Using theme overrides
 category: Guides
-order: 3
+order: 5
 ---
 
 ## Using theme overrides

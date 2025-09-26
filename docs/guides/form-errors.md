@@ -1,7 +1,7 @@
 ---
 title: Form Errors
 category: Guides
-order: 7
+order: 4
 ---
 
 # Adding Error Messages to Form Components

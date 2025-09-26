@@ -16,7 +16,7 @@
     "@chromatic-com/cypress": "^0.11.0",
     "@instructure/browserslist-config-instui": "10.14.0",
     "@tailwindcss/postcss": "^4.1.4",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19.1",
     "@types/react-dom": "^19.1",
     "autoprefixer": "^10.0.1",

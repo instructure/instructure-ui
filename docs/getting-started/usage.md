@@ -28,19 +28,18 @@ We recommend that you add the `@instructure/ui` meta-package, this contains all 
 ---
 type: code
 ---
-
 {
   ...
   "dependencies": {
     ...
-    "@instructure/ui": "^10"
+    "@instructure/ui": "^11"
   }
 }
 ```
 
 Run `npm install`, so InstUI is downloaded to your `node_modules` folder and can be used.
 
-##### Try the sample code
+##### Try some sample code
 
 Now you are ready to use InstUI, let's try it out. Replace the code in `App.js` with the following:
 

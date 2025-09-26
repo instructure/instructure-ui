@@ -1,7 +1,7 @@
 ---
 title: Module federation
 category: Guides
-order: 1
+order: 2
 ---
 
 # Module federation

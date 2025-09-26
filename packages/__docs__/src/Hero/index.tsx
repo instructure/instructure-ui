@@ -31,11 +31,7 @@ import { Link } from '@instructure/ui-link'
 import { InlineList, List } from '@instructure/ui-list'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import {
-  IconGithubSolid,
-  IconCheckMarkSolid,
-  IconAnnouncementLine
-} from '@instructure/ui-icons'
+import { IconGithubSolid, IconCheckMarkSolid } from '@instructure/ui-icons'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 
@@ -241,7 +237,7 @@ class Hero extends Component<HeroProps> {
         </View>
         <List margin="none none x-large" itemSpacing="xx-small">
           <List.Item>
-            <Text weight="bold">React support:</Text> 16.14.0 and later
+            <Text weight="bold">React support:</Text> 18.0 and later
           </List.Item>
           <List.Item>
             <Text weight="bold">Browser support:</Text> The last two versions of
@@ -278,26 +274,9 @@ class Hero extends Component<HeroProps> {
 
     const sidebarContent = (
       <View as="div">
-        <View as="div">
-          <Flex>
-            <Flex.Item>
-              <IconAnnouncementLine inline={false} size="small" />
-            </Flex.Item>
-            <Flex.Item padding="none none none small">
-              <Heading as="h3" level="h3">
-                What&apos;s New?
-              </Heading>
-            </Flex.Item>
-          </Flex>
-          <List isUnstyled margin="small none none">
-            <List.Item>
-              <Link href="#upgrade-guide">Version 10 Upgrade Guide</Link>
-            </List.Item>
-            <List.Item>
-              <Link href="#CHANGELOG">Change Log ({version})</Link>
-            </List.Item>
-          </List>
-        </View>
+        <Text variant="descriptionPage">
+          <Link href="#CHANGELOG">Change Log ({version})</Link>
+        </Text>
         <Link
           display="block"
           href="https://www.instructure.com/canvas/"
@@ -472,7 +451,7 @@ class Hero extends Component<HeroProps> {
                         size={bigScreen ? 'large' : 'medium'}
                         margin="0 x-small x-small 0"
                       >
-                        10.0 Upgrade Guide
+                        v11 Upgrade Guide
                       </Button>
                     </InlineList.Item>
                   </InlineList>

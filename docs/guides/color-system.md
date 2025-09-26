@@ -1,7 +1,7 @@
 ---
 title: Color System
 category: Guides
-order: 6
+order: 8
 ---
 
 ## Colors

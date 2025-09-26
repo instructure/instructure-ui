@@ -39,7 +39,6 @@ import {
   IconArrowOpenUpLine,
   IconSearchLine
 } from '@instructure/ui-icons'
-
 import { createRoot } from 'react-dom/client'
 
 export type SearchConfig = {
@@ -142,10 +141,8 @@ export default function customSearch(searchConfig: SearchConfig | undefined) {
         createPanel: (view) => {
           const dom = document.createElement('div')
           dom.style.padding = '8px'
-
           const root = createRoot(dom)
           root.render(<SearchPanel view={view} searchConfig={searchConfig} />)
-
           return { dom }
         }
       })
