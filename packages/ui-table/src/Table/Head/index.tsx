@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Children, ContextType } from 'react'
+import { Component, Children, ContextType, type ReactElement } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
@@ -39,7 +39,7 @@ import generateComponentTheme from './theme'
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
 import type { RowChild } from '../props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TableContext from '../TableContext'
 
 /**
@@ -54,7 +54,6 @@ class Head extends Component<TableHeadProps> {
   static contextType = TableContext
   declare context: ContextType<typeof TableContext>
   static allowedProps = allowedProps
-  static propTypes = propTypes
   static defaultProps = {
     children: null
   }
@@ -66,12 +65,15 @@ class Head extends Component<TableHeadProps> {
     const [firstRow] = Children.toArray(this.props.children) as RowChild[]
     let sortable = false
     if (firstRow && firstRow.props && firstRow.props.children) {
-      Children.forEach(firstRow.props.children, (grandchild) => {
-        if (grandchild?.props?.onRequestSort) {
-          sortable = true
-          return
+      Children.forEach(
+        firstRow.props.children,
+        (grandchild: ReactElement<any>) => {
+          if (grandchild?.props?.onRequestSort) {
+            sortable = true
+            return
+          }
         }
-      })
+      )
     }
     return sortable
   }
@@ -115,20 +117,23 @@ class Head extends Component<TableHeadProps> {
     > = {}
     let selectedOption: TableColHeaderProps['id'] | undefined
     let count = 0
-    Children.forEach(firstRow.props.children, (grandchild) => {
-      count += 1
-      if (!grandchild?.props) return // grandchild can be false
-      const { id, stackedSortByLabel, sortDirection, onRequestSort } =
-        grandchild.props
-      if (id && onRequestSort) {
-        const label = stackedSortByLabel || id
-        options.push({ id, label })
-        clickHandlers[id] = onRequestSort
-        if (sortDirection !== 'none') {
-          selectedOption = id
+    Children.forEach(
+      firstRow.props.children,
+      (grandchild: ReactElement<any>) => {
+        count += 1
+        if (!grandchild?.props) return // grandchild can be false
+        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
+          grandchild.props
+        if (id && onRequestSort) {
+          const label = stackedSortByLabel || id
+          options.push({ id, label })
+          clickHandlers[id] = onRequestSort
+          if (sortDirection !== 'none') {
+            selectedOption = id
+          }
         }
       }
-    })
+    )
     if (!options.length) {
       return null
     }
@@ -179,11 +184,7 @@ class Head extends Component<TableHeadProps> {
     return this.context.isStacked ? (
       this.renderSelect()
     ) : (
-      // TODO remove 'hover' exclude in v11, its passed down for compatibility with custom components
-      <thead
-        {...omitProps(this.props, Head.allowedProps, ['hover'])}
-        css={styles?.head}
-      >
+      <thead {...omitProps(this.props, Head.allowedProps)} css={styles?.head}>
         {children}
       </thead>
     )

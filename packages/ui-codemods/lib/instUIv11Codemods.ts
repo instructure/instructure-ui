@@ -26,8 +26,8 @@ import { Transform } from 'jscodeshift'
 import instUICodemodExecutor from './utils/instUICodemodExecutor'
 import { removeAsProp } from './removeAsFromInstUISettingsProvider'
 import { renameCanvasThemes } from './renameCanvasThemesCodemod'
-import { updateCodeEditor } from './updateCodeEditorImport'
-import { removeMaxWidth } from './removeMaxWidthFromTag'
+import { warnTableCaptionMissingCodemod } from './warnTableCaptionMissing'
+import { warnCodeEditorRemovedCodemod } from './warnCodeEditorRemoved'
 
 /**
  * Runs all InstUI v10 -> v11 upgrade codemods
@@ -37,9 +37,13 @@ const InstUIv11Codemods: Transform = (
   api,
   options?: { fileName?: string; usePrettier?: boolean }
 ) => {
-  // TODO add other v11 codemods to this array
   return instUICodemodExecutor(
-    [removeAsProp, renameCanvasThemes, updateCodeEditor, removeMaxWidth],
+    [
+      removeAsProp,
+      renameCanvasThemes,
+      warnTableCaptionMissingCodemod,
+      warnCodeEditorRemovedCodemod
+    ],
     file,
     api,
     options

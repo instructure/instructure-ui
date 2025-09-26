@@ -22,27 +22,13 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import type { PropValidators, TransitionTheme } from '@instructure/shared-types'
+import type { TransitionTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-import { transitionCommonPropTypes } from './BaseTransition/props'
 import type {
   TransitionCommonProps,
   TransitionType
 } from './BaseTransition/props'
-
-const transitionTypes: Readonly<Array<TransitionType>> = [
-  'fade',
-  'scale',
-  'slide-down',
-  'slide-up',
-  'slide-left',
-  'slide-right'
-]
-
-const transitionTypePropType = PropTypes.oneOf(transitionTypes)
 
 type OwnProps = {
   type?: TransitionType
@@ -68,12 +54,6 @@ type TransitionStyle = ComponentStyle<'globalStyles'> & {
     entering: string
   }
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  type: transitionTypePropType,
-  ...transitionCommonPropTypes
-}
-
 const allowedProps: AllowedPropKeys = [
   'type',
   'children',
@@ -93,4 +73,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TransitionProps, TransitionType, TransitionStyle }
-export { propTypes, allowedProps, transitionTypePropType }
+export { allowedProps }

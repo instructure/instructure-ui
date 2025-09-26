@@ -81,19 +81,17 @@ describe('<Badge />', () => {
 
   it('should change position based on the placement prop', () => {
     const countOffset = '5px'
-    const EXPECTED_PROP_VALUE = 'calc(-1 * 5px)'
-
     const { container } = renderBadge({
       placement: 'bottom start',
       themeOverride: { countOffset }
     })
-
     const badge = container.querySelector('[class*=block][class*=badge]')
     const badgeStyle = badge && getComputedStyle(badge)
-
     expect(badge).not.toBeNull()
-    expect(badgeStyle).toHaveProperty('bottom', EXPECTED_PROP_VALUE)
-    expect(badgeStyle).toHaveProperty('inset-inline-start', EXPECTED_PROP_VALUE)
+    expect(badgeStyle).not.toBeNull()
+    expect(badgeStyle).toHaveProperty('bottom')
+    expect(badgeStyle).toHaveProperty('bottom', 'calc(-5px)')
+    expect(badgeStyle).toHaveProperty('inset-inline-start', 'calc(-1 * 5px)')
   })
 
   it('should not render a wrapper for a standalone Badge', () => {

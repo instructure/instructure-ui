@@ -24,7 +24,7 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.25.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "15.0.7",
     "@types/json-stable-stringify": "^1.2.0",
     "vitest": "^3.2.2"
   },
@@ -39,8 +39,8 @@
     "ua-parser-js": "^1.0.39"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18",
-    "react-dom": ">=16.14 <=18"
+    "react": ">=18 <=19",
+    "react-dom": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

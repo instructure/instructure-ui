@@ -22,10 +22,15 @@
  * SOFTWARE.
  */
 
-import { isValidElement, cloneElement, Children, Component } from 'react'
+import {
+  isValidElement,
+  cloneElement,
+  Children,
+  Component,
+  ReactElement
+} from 'react'
 
 import { View } from '@instructure/ui-view'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
@@ -34,7 +39,7 @@ import { BreadcrumbLink } from './BreadcrumbLink'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { BreadcrumbProps } from './props'
 
 /**
@@ -44,11 +49,9 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     size: 'medium',
@@ -91,7 +94,8 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     return Children.map(children, (child, index) => {
       const isLastElement = index === numChildren - 1
       if (isValidElement(child)) {
-        const isCurrentPage = child.props.isCurrentPage || false
+        const isCurrentPage =
+          (child as ReactElement<any>).props.isCurrentPage || false
         if (isAriaCurrentSet && isCurrentPage) {
           console.warn(
             `Warning: Multiple elements with isCurrentPage=true found. Only one element should be set to current.`
@@ -105,7 +109,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
         <li css={styles?.crumb} style={inlineStyle}>
           {!isAriaCurrentSet &&
           isLastElement &&
-          (child as React.ReactElement).props.isCurrentPage !== false
+          (child as React.ReactElement<any>).props.isCurrentPage !== false
             ? this.addAriaCurrent(child)
             : child}
           {index < numChildren - 1 && (
@@ -126,6 +130,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
         margin={this.props.margin}
         aria-label={this.props.label}
         elementRef={this.handleRef}
+        data-cid="Breadcrumb"
       >
         <ol css={styles?.breadcrumb}>{this.renderChildren()}</ol>
       </View>

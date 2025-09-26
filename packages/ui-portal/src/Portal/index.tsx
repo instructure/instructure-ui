@@ -29,7 +29,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { canUseDOM } from '@instructure/ui-dom-utils'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
 
 /**
@@ -40,7 +40,6 @@ category: components/utilities
 **/
 @textDirectionContextConsumer()
 class Portal extends Component<PortalProps, PortalState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     open: false,

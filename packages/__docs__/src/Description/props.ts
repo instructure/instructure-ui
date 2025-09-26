@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
-import type { PropValidators } from '@instructure/shared-types'
+
 type DescriptionOwnProps = {
   id: string
   content: string
@@ -34,14 +33,7 @@ type PropKeys = keyof DescriptionOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DescriptionProps = DescriptionOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['content', 'id', 'title']
 
 export type { DescriptionProps }
-export { propTypes, allowedProps }
+export { allowedProps }

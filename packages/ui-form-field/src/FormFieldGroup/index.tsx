@@ -33,7 +33,7 @@ import { FormFieldLayout } from '../FormFieldLayout'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 
 /**
@@ -45,7 +45,6 @@ category: components
 class FormFieldGroup extends Component<FormFieldGroupProps> {
   static readonly componentId = 'FormFieldGroup'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'fieldset',
@@ -100,7 +99,8 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
       return child ? (
         <Grid.Col
           width={
-            (child as ReactElement).props && (child as ReactElement).props.width
+            (child as ReactElement).props &&
+            (child as ReactElement<any>).props.width
               ? 'auto'
               : undefined
           }

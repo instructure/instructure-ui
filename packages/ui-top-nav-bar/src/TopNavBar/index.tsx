@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { error } from '@instructure/console'
-import { testable } from '@instructure/ui-testable'
 import { px } from '@instructure/ui-utils'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
@@ -42,7 +41,7 @@ import { TopNavBarBreadcrumb } from './TopNavBarBreadcrumb'
 import { TopNavBarContext } from './TopNavBarContext'
 import type { TopNavBarLayouts } from './TopNavBarContext'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TopNavBarProps } from './props'
 
 /**
@@ -50,7 +49,6 @@ import type { TopNavBarProps } from './props'
 category: components
 ---
 **/
-@testable()
 class TopNavBar extends Component<TopNavBarProps> {
   static readonly componentId = 'TopNavBar'
 
@@ -65,7 +63,6 @@ class TopNavBar extends Component<TopNavBarProps> {
 
   static contextType = TopNavBarContext
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     breakpoint: 1024,
@@ -94,6 +91,7 @@ class TopNavBar extends Component<TopNavBarProps> {
 
     return (
       <Responsive
+        data-cid="TopNavBar"
         elementRef={this.handleRef}
         match={mediaQueryMatch}
         query={{

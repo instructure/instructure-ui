@@ -68,7 +68,7 @@ import generateComponentTheme from './theme'
 import { LoadingScreen } from '../LoadingScreen'
 import * as EveryComponent from '../../components'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   LibraryOptions,
   MainDocsData,
@@ -92,7 +92,6 @@ export const AppContext = createContext<AppContextType>({
 
 @withStyle(generateStyle, generateComponentTheme)
 class App extends Component<AppProps, AppState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   private navRef = createRef<HTMLElement>()
@@ -106,8 +105,8 @@ class App extends Component<AppProps, AppState> {
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
   _controller?: AbortController
-  _heroRef: React.RefObject<Hero>
-  _navRef: React.RefObject<Nav>
+  _heroRef: React.RefObject<any>
+  _navRef: React.RefObject<any>
   _skipToMainButtonRef?: HTMLElement
   _mainContentRef?: HTMLElement
 

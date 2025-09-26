@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 
 type ColorTableOwnProps = {
   colors: Record<string, string>
@@ -34,13 +32,7 @@ type PropKeys = keyof ColorTableOwnProps
 type ColorTableProps = ColorTableOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-const propTypes: PropValidators<PropKeys> = {
-  colors: PropTypes.object.isRequired,
-  colorNames: PropTypes.object.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['colors', 'colorNames']
 
 export type { ColorTableProps }
-export { propTypes, allowedProps }
+export { allowedProps }

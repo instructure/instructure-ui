@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -32,7 +30,6 @@ import type {
 } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TabsPanelTheme
 } from '@instructure/shared-types'
 
@@ -76,24 +73,6 @@ type TabsPanelProps = TabsPanelOwnProps &
   OtherHTMLAttributes<TabsPanelOwnProps>
 
 type TabsPanelStyle = ComponentStyle<'panel' | 'content'>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(['default', 'secondary']),
-  isSelected: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  id: PropTypes.string,
-  labelledBy: PropTypes.string,
-  padding: PropTypes.string,
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  elementRef: PropTypes.func,
-  active: PropTypes.bool,
-  unmountOnExit: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderTitle',
   'children',
@@ -112,4 +91,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TabsPanelProps, TabsPanelStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

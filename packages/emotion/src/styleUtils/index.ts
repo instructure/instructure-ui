@@ -23,7 +23,6 @@
  */
 
 export { ThemeablePropValues } from './ThemeablePropValues'
-export { ThemeablePropTypes } from './ThemeablePropTypes'
 export { makeThemeVars } from './makeThemeVars'
 export { getShorthandPropValue } from './getShorthandPropValue'
 export { mirrorShorthandCorners } from './mirrorShorthandCorners'

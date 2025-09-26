@@ -24,7 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
-import { getComputedStyle } from './getComputedStyle'
+import { getCSSStyleDeclaration } from './getCSSStyleDeclaration'
 import { ownerDocument } from './ownerDocument'
 import { UIElement } from '@instructure/shared-types'
 
@@ -59,7 +59,7 @@ function getOffsetParents(el?: UIElement) {
       parent.nodeType === 1 &&
       (parent as Element).tagName !== 'BODY'
     ) {
-      const style = getComputedStyle(parent) as CSSStyleDeclaration
+      const style = getCSSStyleDeclaration(parent) as CSSStyleDeclaration
       const transform =
         style.getPropertyValue('-webkit-transform') ||
         style.getPropertyValue('-moz-transform') ||

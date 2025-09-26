@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { IconAiColoredSolid } from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
@@ -34,7 +33,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { HeadingProps } from './props'
 import { AsElementType } from '@instructure/shared-types'
 
@@ -60,11 +59,9 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null,
@@ -226,6 +223,7 @@ class Heading extends Component<HeadingProps> {
         as={ElementType}
         elementRef={this.handleRef}
         margin={margin}
+        data-cid="Heading"
       >
         {this.renderContent()}
       </View>

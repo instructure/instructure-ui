@@ -95,7 +95,9 @@ describe('TextArea', () => {
       <TextArea
         label="Name"
         autoGrow={false}
-        ref={(el: TextArea) => (ref = el)}
+        ref={(el: TextArea) => {
+          ref = el
+        }}
       />
     )
 
