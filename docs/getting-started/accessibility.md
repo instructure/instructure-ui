@@ -18,7 +18,7 @@ Some users are unable to use a mouse, and instead navigate through applications 
 
 ### Assistive Technologies
 
-Our components are [tested in VoiceOver for Mac, and NVDA/JAWS for Windows](https://www.canvaslms.com/accessibility), which are the highest utilized screenreaders (according to [WebAim’s user survey](https://webaim.org/projects/screenreadersurvey7/)). We utilize many different tools to ensure this compatibility, such as features from the Accessible Rich Internet Applications (WAI-ARIA or ARIA) specification to build functionality that is not available with native HTML, and alternative text for images/icons to ensure all users have the same experience when utilizing our components.
+Our components are [tested in VoiceOver for Mac, and NVDA/JAWS for Windows](https://www.canvaslms.com/accessibility), which are the highest utilized screenreaders (according to [WebAim’s user survey](https://webaim.org/projects/screenreadersurvey10/)). We utilize many different tools to ensure this compatibility, such as features from the Accessible Rich Internet Applications (WAI-ARIA or ARIA) specification to build functionality that is not available with native HTML, and alternative text for images/icons to ensure all users have the same experience when utilizing our components.
 
 ### Web Content Accessibility Guidelines (WCAG)
 

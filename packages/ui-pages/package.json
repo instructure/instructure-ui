@@ -42,7 +42,7 @@
     "@instructure/ui-view": "10.25.0"
   },
   "peerDependencies": {
-    "react": ">=18 <=19"
+    "react": ">=17 <=19"
   },
   "publishConfig": {
     "access": "public"
