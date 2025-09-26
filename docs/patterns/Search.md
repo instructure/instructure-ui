@@ -2,6 +2,7 @@
 title: Search
 category: Patterns
 id: Search
+relevantForAI: true
 ---
 
 ## Search

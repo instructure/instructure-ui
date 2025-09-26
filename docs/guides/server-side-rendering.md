@@ -2,6 +2,7 @@
 title: Server side rendering (SSR)
 category: Guides
 order: 2
+relevantForAI: true
 ---
 
 # SSR with Next.js

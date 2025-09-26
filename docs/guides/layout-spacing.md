@@ -2,6 +2,7 @@
 title: Layout Spacing
 category: Guides
 order: 8
+relevantForAI: true
 ---
 
 # Layout Spacing

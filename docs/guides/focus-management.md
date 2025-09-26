@@ -2,6 +2,7 @@
 title: Focus Management
 category: Guides
 order: 4
+relevantForAI: true
 ---
 
 ## The Focus Management Problem

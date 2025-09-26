@@ -2,6 +2,7 @@
 title: Module federation
 category: Guides
 order: 1
+relevantForAI: true
 ---
 
 # Module federation

@@ -2,6 +2,7 @@
 title: Using Icons
 category: Patterns
 id: UsingIcons
+relevantForAI: true
 ---
 
 ## Using Icons

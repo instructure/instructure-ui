@@ -2,6 +2,7 @@
 title: Accessibility
 category: Getting Started
 order: 6
+relevantForAI: true
 ---
 
 ## Accessibility

@@ -102,6 +102,7 @@ Please update the documentation and examples with any changes.
 11. Visit [http://localhost:9090](http://localhost:9090) in a browser. You should see your component listed in the docs.
 12. Start making changes to your component, and watch it update in the browser automatically.
 13. Resolve all `FIXME` comments in the generated code (except in the `MyComponentLocator.ts`).
+14. Add a short description of the new component to the `packages/__docs__/buildScripts/ai-accessible-documentation/summaries-for-llms-file.json` file. This will optimize the component's documentation for consumption by AI agents.
 
 ### Adding a new dependency
 
