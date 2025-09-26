@@ -51,9 +51,9 @@ type AlertOwnProps = {
    */
   variantScreenReaderLabel?: string
   /**
-   * Function that returns the DIV where screenreader alerts will be placed.
+   * A DOM element or function that returns an element where screenreader alerts will be placed.
    */
-  liveRegion?: () => Element
+  liveRegion?: Element | null | (() => Element | null | undefined)
   /**
    * Choose the politeness level of screenreader alerts, sets the value of
    * `aria-live`.
@@ -132,7 +132,7 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   variant: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
   margin: PropTypes.string,
-  liveRegion: PropTypes.func,
+  liveRegion: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
   isLiveRegionAtomic: PropTypes.bool,
   screenReaderOnly: PropTypes.bool,

@@ -148,6 +148,24 @@ describe('<Alert />', () => {
     expect(liveRegion).toHaveAttribute('aria-live', 'polite')
   })
 
+  it('should accept a direct DOM element as liveRegion', async () => {
+    const liveRegion = document.getElementById('_alertLiveRegion')!
+    render(
+      <Alert
+        variant="success"
+        transition="none"
+        liveRegion={liveRegion}
+        liveRegionPoliteness="polite"
+        isLiveRegionAtomic
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(liveRegion).toHaveTextContent('Success: Sample alert text.')
+    expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
+  })
+
   it('should render an icon when provided as the `renderIcon` prop', () => {
     const { container } = render(<Alert renderCustomIcon={<IconGroupLine />} />)
     const icon = container.querySelector('svg[class$="-svgIcon"]')
