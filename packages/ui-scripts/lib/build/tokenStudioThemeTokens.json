@@ -871,27 +871,31 @@
       }
     },
     "borderRadius": {
-      "xs": {
+      "roundedXs": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "sm": {
+      "roundedSm": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "md": {
+      "roundedMd": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "lg": {
+      "roundedLg": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "xl": {
+      "roundedXl": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "full": {
+      "rounded2xl": {
+        "value": "{size.size4}",
+        "type": "borderRadius"
+      },
+      "roundedFull": {
         "value": "999px",
         "type": "borderRadius"
       },
@@ -2738,7 +2742,7 @@
         "type": "color"
       },
       "borderRadius": {
-        "value": "{borderRadius.full}",
+        "value": "{borderRadius.roundedFull}",
         "type": "borderRadius"
       },
       "borderWidth": {
@@ -3443,7 +3447,7 @@
         "type": "color"
       },
       "borderRadius": {
-        "value": "{borderRadius.full}",
+        "value": "{borderRadius.roundedFull}",
         "type": "borderRadius"
       },
       "borderWidth": {
@@ -3762,27 +3766,31 @@
       }
     },
     "borderRadius": {
-      "xs": {
+      "roundedXs": {
         "value": "{size.size2}",
         "type": "borderRadius"
       },
-      "sm": {
+      "roundedSm": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "md": {
+      "roundedMd": {
         "value": "{size.size8}",
         "type": "borderRadius"
       },
-      "lg": {
+      "roundedLg": {
         "value": "{size.size12}",
         "type": "borderRadius"
       },
-      "xl": {
+      "roundedXl": {
         "value": "{size.size16}",
         "type": "borderRadius"
       },
-      "full": {
+      "rounded2xl": {
+        "value": "{size.size24}",
+        "type": "borderRadius"
+      },
+      "roundedFull": {
         "value": "999px",
         "type": "borderRadius"
       },
@@ -3792,11 +3800,11 @@
           "type": "borderRadius"
         },
         "md": {
-          "value": "{size.size12}",
+          "value": "{size.size16}",
           "type": "borderRadius"
         },
         "lg": {
-          "value": "{size.size16}",
+          "value": "{size.size24}",
           "type": "borderRadius"
         }
       },
@@ -5414,12 +5422,6 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5466,7 +5468,12 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5783,12 +5790,6 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5835,7 +5836,12 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -5885,12 +5891,6 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -6188,7 +6188,13 @@
         "spinner.spinnerSizeXs": "6dea11d275093db7e7750da73538bf47d0df3033",
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
-        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44"
+        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
+        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.roundedFull": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
+        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -6252,12 +6258,6 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -6555,7 +6555,13 @@
         "spinner.spinnerSizeXs": "6dea11d275093db7e7750da73538bf47d0df3033",
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
-        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44"
+        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
+        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.roundedFull": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
+        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
