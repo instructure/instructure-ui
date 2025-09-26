@@ -158,7 +158,6 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
             type="radio"
             css={styles?.input}
             disabled={disabled || readOnly}
-            aria-disabled={disabled || readOnly ? 'true' : undefined}
             onChange={this.handleChange}
             onClick={this.handleClick}
           />
