@@ -23,12 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   OtherHTMLAttributes,
-  PickPropsWithExceptions,
-  PropValidators
+  PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { BaseButtonProps } from '@instructure/ui-buttons'
 
@@ -68,13 +65,6 @@ type PaginationPageProps =
     PaginationPageOwnProps &
     OtherHTMLAttributes<PaginationPageOwnProps>
 
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node.isRequired,
-  current: PropTypes.bool,
-  onClick: PropTypes.func,
-  screenReaderLabel: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'current',
@@ -84,4 +74,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PaginationPageProps }
-export { propTypes, allowedProps }
+export { allowedProps }

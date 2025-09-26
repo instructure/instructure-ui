@@ -81,17 +81,4 @@ describe('<InstUISettingsProvider />', () => {
 
     expect(element).toHaveAttribute('dir', 'ltr')
   })
-
-  it('warns when "as" property is used without using the "dir" property', async () => {
-    const warningMessage =
-      "The 'as' property should be used in conjunction with the 'dir' property!"
-
-    render(
-      //@ts-expect-error div is required
-      <InstUISettingsProvider as="div">
-        <div>text</div>
-      </InstUISettingsProvider>
-    )
-    expect(consoleWarningMock).toHaveBeenCalledWith(warningMessage)
-  })
 })

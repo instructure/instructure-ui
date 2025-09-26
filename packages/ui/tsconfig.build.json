@@ -41,9 +41,6 @@
       "path": "../ui-checkbox/tsconfig.build.json"
     },
     {
-      "path": "../ui-code-editor/tsconfig.build.json"
-    },
-    {
       "path": "../ui-color-picker/tsconfig.build.json"
     },
     {

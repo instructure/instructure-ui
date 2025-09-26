@@ -25,10 +25,9 @@
 import { Children, Component } from 'react'
 import { Flex } from '@instructure/ui-flex'
 import type { GuidelinesProps } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 
 class Guidelines extends Component<GuidelinesProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     children: null

@@ -26,9 +26,9 @@ import { runTest } from './runTest'
 import updateV10Breaking from '../updateV10Breaking'
 import removeAsFromInstUISettingsProvider from '../removeAsFromInstUISettingsProvider'
 import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
-import updateCodeEditorImport from '../updateCodeEditorImport'
-import removeMaxWidthFromTag from '../removeMaxWidthFromTag'
 import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputedStyleToGetCSSStyleDeclaration'
+import warnTableCaptionMissing from '../warnTableCaptionMissing'
+import warnCodeEditorRemoved from '../warnCodeEditorRemoved'
 
 describe('test codemods', () => {
   it('test InstUI v10 color codemods', () => {
@@ -43,15 +43,15 @@ describe('test codemods', () => {
     runTest(renameCanvasThemesCodemod)
   })
 
-  it('test removing CodeEditor', () => {
-    runTest(updateCodeEditorImport)
-  })
-
-  it('test removing "maxWidth" from Tag', () => {
-    runTest(removeMaxWidthFromTag)
-  })
-
   it('test renaming "getComputedStyle" to getCSSStyleDeclaration', () => {
     runTest(renameGetComputedStyleToGetCSSStyleDeclaration)
+  })
+
+  it('test Table caption prop warning', async () => {
+    runTest(warnTableCaptionMissing)
+  })
+
+  it('test CodeEditor removed warning', async () => {
+    runTest(warnCodeEditorRemoved)
   })
 })

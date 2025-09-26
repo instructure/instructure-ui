@@ -29,7 +29,7 @@ import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { AccessibleContentProps } from './props'
 
 /**
@@ -41,7 +41,6 @@ import type { AccessibleContentProps } from './props'
  * @module AccessibleContent
  */
 class AccessibleContent extends Component<AccessibleContentProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

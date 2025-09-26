@@ -25,7 +25,7 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "10.25.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
     "vitest": "^3.2.2"
   },
@@ -51,18 +51,15 @@
     "@instructure/ui-dom-utils": "10.25.0",
     "@instructure/ui-i18n": "10.25.0",
     "@instructure/ui-icons": "10.25.0",
-    "@instructure/ui-prop-types": "10.25.0",
     "@instructure/ui-react-utils": "10.25.0",
-    "@instructure/ui-testable": "10.25.0",
     "@instructure/ui-text-input": "10.25.0",
     "@instructure/ui-themes": "10.25.0",
     "@instructure/ui-utils": "10.25.0",
-    "@lezer/highlight": "1.2.1",
-    "prop-types": "^15.8.1"
+    "@lezer/highlight": "1.2.1"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18",
-    "react-dom": ">=16.14 <=18"
+    "react": ">=18 <=19",
+    "react-dom": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

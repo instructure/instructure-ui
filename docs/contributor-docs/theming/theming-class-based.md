@@ -27,13 +27,6 @@ import generateComponentTheme from './theme'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Button extends React.Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
   componentDidMount() {
     this.props.makeStyles()
   }
@@ -213,13 +206,6 @@ type: code
 ---
 // Button/index.js
 class Button extends React.Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
   constructor(props) {
     super(props)
 

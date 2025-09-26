@@ -29,7 +29,6 @@ export { InstUISettingsProvider } from './InstUISettingsProvider'
 export { withStyle } from './withStyle'
 export {
   ThemeablePropValues,
-  ThemeablePropTypes,
   makeThemeVars,
   getShorthandPropValue,
   mirrorShorthandCorners,

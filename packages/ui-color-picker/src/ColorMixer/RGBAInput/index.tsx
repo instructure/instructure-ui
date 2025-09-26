@@ -30,7 +30,7 @@ import shallowCompare from '../utils/shallowCompare'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { TextInput } from '@instructure/ui-text-input'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { RGBAInputProps, RGBAInputState } from './props'
 
 import generateStyle from './styles'
@@ -43,7 +43,6 @@ private: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.RGBAInput'
 

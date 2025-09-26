@@ -26,14 +26,13 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ImgProps } from './props'
 
 /**
@@ -42,11 +41,9 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Img extends Component<ImgProps> {
   static readonly componentId = 'Img'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     alt: '',
@@ -119,7 +116,7 @@ class Img extends Component<ImgProps> {
       }
 
       return (
-        <View {...rootProps} as="span" css={styles?.container}>
+        <View {...rootProps} as="span" css={styles?.container} data-cid="Img">
           {/* eslint-disable-next-line jsx-a11y/alt-text*/}
           {<img {...imageProps} {...a11yProps} />}
           {overlay && <span css={styles?.overlay} />}
@@ -127,7 +124,13 @@ class Img extends Component<ImgProps> {
       )
     } else {
       return (
-        <View {...containerProps} {...imageProps} {...a11yProps} as="img" />
+        <View
+          {...containerProps}
+          {...imageProps}
+          {...a11yProps}
+          as="img"
+          data-cid="Img"
+        />
       )
     }
   }

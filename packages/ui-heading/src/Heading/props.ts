@@ -22,13 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import { childrenOrValue } from '@instructure/ui-prop-types'
-
+import React from 'react'
 import type {
   AsElementType,
-  PropValidators,
   HeadingTheme,
   OtherHTMLAttributes,
   Renderable
@@ -39,7 +35,7 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 
-type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
+type HeadingLevel<U extends keyof React.JSX.IntrinsicElements> = U
 
 type HeadingOwnProps = {
   /**
@@ -65,7 +61,7 @@ type HeadingOwnProps = {
     | 'inherit'
     | 'ai'
   /**
-   * The level of the heading in the DOM: h1 is largest; h5 is smallest.
+   * The level of the heading in the DOM: h1 is largest; h6 is smallest.
    */
   level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> | 'reset'
   /**
@@ -119,38 +115,6 @@ type HeadingProps = HeadingOwnProps &
 type HeadingStyle = ComponentStyle<
   'heading' | 'igniteAI' | 'igniteAIStacked' | 'withIcon'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  aiVariant: PropTypes.oneOf(['stacked', 'horizontal', 'iconOnly']),
-  border: PropTypes.oneOf(['none', 'top', 'bottom']),
-  children: childrenOrValue,
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'primary-inverse',
-    'secondary-inverse',
-    'inherit',
-    'ai'
-  ]),
-  level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
-  as: PropTypes.elementType,
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  variant: PropTypes.oneOf([
-    'titlePageDesktop',
-    'titlePageMobile',
-    'titleSection',
-    'titleCardSection',
-    'titleModule',
-    'titleCardLarge',
-    'titleCardRegular',
-    'titleCardMini',
-    'label',
-    'labelInline'
-  ])
-}
-
 const allowedProps: AllowedPropKeys = [
   'aiVariant',
   'border',
@@ -164,4 +128,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { HeadingProps, HeadingStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

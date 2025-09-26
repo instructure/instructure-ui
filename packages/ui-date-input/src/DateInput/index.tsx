@@ -42,7 +42,6 @@ import {
   safeCloneElement,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
@@ -50,7 +49,7 @@ import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DateInputProps, DateInputState } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
 
@@ -60,12 +59,10 @@ category: components
 ---
 **/
 @withStyle(generateStyle, null)
-@testable()
 class DateInput extends Component<DateInputProps, DateInputState> {
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
   declare context: React.ContextType<typeof ApplyLocaleContext>
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     value: '',
@@ -469,7 +466,10 @@ class DateInput extends Component<DateInputProps, DateInputState> {
         }) => (
           <span
             {...getRootProps({ css: styles?.dateInput })}
-            ref={(el) => (this.ref = el)}
+            ref={(el) => {
+              this.ref = el
+            }}
+            data-cid="DateInput"
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

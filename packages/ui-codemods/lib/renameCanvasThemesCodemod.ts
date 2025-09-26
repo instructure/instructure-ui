@@ -27,6 +27,11 @@ import { renameImportAndUsages, printWarning } from './utils/codemodHelpers'
 import type { InstUICodemod } from './utils/instUICodemodExecutor'
 import instUICodemodExecutor from './utils/instUICodemodExecutor'
 
+/**
+ * Renames `canvasThemeLocal` to `canvas` and `canvasHighContrastThemeLocal` to
+ * `canvasHighContrastTheme`, warns about deleted `ThemeRegistry` imports and
+ * the removed `canvas.use()`/`canvasHighContrast.use()` functions
+ */
 const renameCanvasThemesCodemod: Transform = (
   file,
   api,
@@ -68,7 +73,6 @@ const renameCanvasThemes: InstUICodemod = (j, root, filePath) => {
         lineNumber,
         'ThemeRegistry has been deleted and there are no global themes anymore.'
       )
-
     })
 
   /**
@@ -90,7 +94,6 @@ const renameCanvasThemes: InstUICodemod = (j, root, filePath) => {
           lineNumber,
           `Found ${objectName}.use(). This will be deleted. Users should wrap each React root in its own InstUISettingsProvider instead.`
         )
-
       }
     }
   })

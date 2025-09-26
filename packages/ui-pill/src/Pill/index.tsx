@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { Tooltip } from '@instructure/ui-tooltip'
 import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip'
 
@@ -36,7 +35,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { PillProps, PillState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -44,12 +43,10 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Pill extends Component<PillProps, PillState> {
   static readonly componentId = 'Pill'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     color: 'primary'
@@ -134,6 +131,7 @@ class Pill extends Component<PillProps, PillState> {
         position="relative"
         withFocusOutline={focused}
         focusColor="info"
+        data-cid="Pill"
       >
         <div css={styles?.pill}>
           {renderIcon && <div css={styles?.icon}>{renderIcon}</div>}

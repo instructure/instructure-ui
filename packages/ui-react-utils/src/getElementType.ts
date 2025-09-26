@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ComponentType } from 'react'
+import type { ComponentClass } from 'react'
 import { logWarn as warn } from '@instructure/console'
 import { AsElementType } from '@instructure/shared-types'
 
@@ -56,7 +56,7 @@ interface PropsObject {
  * @returns the element type
  */
 function getElementType<T extends PropsObject>(
-  Component: Omit<ComponentType<T>, 'propTypes'>,
+  Component: ComponentClass<T>,
   props: T,
   getDefault?: () => AsElementType<T>
 ) {

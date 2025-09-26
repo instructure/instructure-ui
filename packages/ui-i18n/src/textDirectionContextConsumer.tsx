@@ -54,6 +54,16 @@ type TextDirectionContextConsumerType = {
   (): (ComposedComponent: any) => any
   DIRECTION: typeof DIRECTION
 }
+
+interface ForwardRefComponentWithStatics
+  extends ForwardRefExoticComponent<
+    PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
+  > {
+  originalType?: ComponentClass
+  defaultProps?: any
+  propTypes?: any
+  allowedProps?: any
+}
 /**
  * ---
  * category: utilities/i18n
@@ -86,67 +96,83 @@ type TextDirectionContextConsumerType = {
  * @return The decorator that composes the textDirectionContextConsumer component.
  */
 const textDirectionContextConsumer: TextDirectionContextConsumerType =
-  decorator((ComposedComponent) => {
-    class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerInternalProps> {
-      render() {
-        const { forwardedRef, ...rest } = this.props
-        // Quite complex code, this is the priority order of applying the `dir` prop:
-        // 1. The highest priority is adding it via a prop
-        // 2. If there is a <TextDirectionContext.Provider> (or <ApplyTextDirection>
-        //    which uses it) above the @textDirectionContextConsumer in the DOM, use its value.
-        // 3. If TextDirectionContext.Provider was called without params
-        //    TextDirectionContext calls getTextDirection() which returns
-        //    the 'dir' prop of the HTML document element.
-        return (
-          <TextDirectionContext.Consumer>
-            {(dir) => {
-              if (process.env.NODE_ENV !== 'production' && dir === 'auto') {
-                console.warn(
-                  "'auto' is not an supported value for the 'dir' prop. Please pass 'ltr' or 'rtl'"
-                )
-              }
-              return (
-                <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
-              )
-            }}
-          </TextDirectionContext.Consumer>
-        )
+  decorator(
+    (
+      ComposedComponent: ComponentClass<any> & {
+        displayName?: string
+        name?: string
+        defaultProps?: any
+        propTypes?: any
+        allowedProps?: any
+        originalType?: ComponentClass<any>
       }
+    ) => {
+      class TextDirectionContextConsumerComponent extends Component<TextDirectionContextConsumerInternalProps> {
+        render() {
+          const { forwardedRef, ...rest } = this.props
+          // Quite complex code, this is the priority order of applying the `dir` prop:
+          // 1. The highest priority is adding it via a prop
+          // 2. If there is a <TextDirectionContext.Provider> (or <ApplyTextDirection>
+          //    which uses it) above the @textDirectionContextConsumer in the DOM, use its value.
+          // 3. If TextDirectionContext.Provider was called without params
+          //    TextDirectionContext calls getTextDirection() which returns
+          //    the 'dir' prop of the HTML document element.
+          return (
+            <TextDirectionContext.Consumer>
+              {(dir) => {
+                if (process.env.NODE_ENV !== 'production' && dir === 'auto') {
+                  console.warn(
+                    "'auto' is not an supported value for the 'dir' prop. Please pass 'ltr' or 'rtl'"
+                  )
+                }
+                return (
+                  <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
+                )
+              }}
+            </TextDirectionContext.Consumer>
+          )
+        }
+      }
+      const TextDirectionContextConsumerForwardingRef: ForwardRefComponentWithStatics =
+        forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
+          <TextDirectionContextConsumerComponent
+            {...props}
+            forwardedRef={ref}
+          />
+        ))
+
+      // const TextDirectionContextConsumerForwardingRef: ForwardRefExoticComponent<
+      //   PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
+      // > & {
+      //   originalType?: ComponentClass
+      // } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
+      //   <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
+      // ))
+      if (process.env.NODE_ENV !== 'production') {
+        const displayName =
+          ComposedComponent.displayName || ComposedComponent.name
+        TextDirectionContextConsumerForwardingRef.displayName = `TextDirectionContextConsumerForwardingRef(${displayName})`
+      }
+      hoistNonReactStatics(
+        TextDirectionContextConsumerForwardingRef,
+        ComposedComponent
+      )
+      TextDirectionContextConsumerForwardingRef.defaultProps =
+        ComposedComponent.defaultProps
+      TextDirectionContextConsumerForwardingRef.propTypes =
+        // eslint-disable-next-line react/forbid-foreign-prop-types
+        ComposedComponent.propTypes
+      TextDirectionContextConsumerForwardingRef.allowedProps =
+        ComposedComponent.allowedProps
+
+      // added so it can be tested with ReactTestUtils
+      // more info: https://github.com/facebook/react/issues/13455
+      TextDirectionContextConsumerForwardingRef.originalType =
+        (ComposedComponent as any).originalType || ComposedComponent
+
+      return TextDirectionContextConsumerForwardingRef
     }
-
-    const TextDirectionContextConsumerForwardingRef: ForwardRefExoticComponent<
-      PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
-    > & {
-      originalType?: ComponentClass
-    } = forwardRef<any, TextDirectionContextConsumerProps>((props, ref) => (
-      <TextDirectionContextConsumerComponent {...props} forwardedRef={ref} />
-    ))
-    if (process.env.NODE_ENV !== 'production') {
-      const displayName =
-        ComposedComponent.displayName || ComposedComponent.name
-      TextDirectionContextConsumerForwardingRef.displayName = `TextDirectionContextConsumerForwardingRef(${displayName})`
-    }
-    hoistNonReactStatics(
-      TextDirectionContextConsumerForwardingRef,
-      ComposedComponent
-    )
-    TextDirectionContextConsumerForwardingRef.defaultProps =
-      ComposedComponent.defaultProps
-    TextDirectionContextConsumerForwardingRef.propTypes =
-      // eslint-disable-next-line react/forbid-foreign-prop-types
-      ComposedComponent.propTypes
-    // @ts-expect-error These static fields exist on InstUI components
-    TextDirectionContextConsumerForwardingRef.allowedProps =
-      // @ts-expect-error These static fields exist on InstUI components
-      ComposedComponent.allowedProps
-
-    // added so it can be tested with ReactTestUtils
-    // more info: https://github.com/facebook/react/issues/13455
-    TextDirectionContextConsumerForwardingRef.originalType =
-      (ComposedComponent as any).originalType || ComposedComponent
-
-    return TextDirectionContextConsumerForwardingRef
-  }) as TextDirectionContextConsumerType
+  ) as TextDirectionContextConsumerType
 
 textDirectionContextConsumer.DIRECTION = DIRECTION
 

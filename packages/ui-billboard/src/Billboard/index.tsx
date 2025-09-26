@@ -37,7 +37,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { BillboardProps, HeroIconSize } from './props'
 import type { ViewProps } from '@instructure/ui-view'
 
@@ -50,7 +50,6 @@ category: components
 class Billboard extends Component<BillboardProps> {
   static readonly componentId = 'Billboard'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,

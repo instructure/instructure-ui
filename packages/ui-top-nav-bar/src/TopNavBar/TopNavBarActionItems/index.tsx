@@ -30,7 +30,6 @@ import {
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { warn, error } from '@instructure/console'
 
 import { withStyle } from '@instructure/emotion'
@@ -53,11 +52,7 @@ import { TopNavBarContext } from '../TopNavBarContext'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import {
-  propTypes,
-  allowedProps,
-  TopNavBarActionItemsStyleProps
-} from './props'
+import { allowedProps, TopNavBarActionItemsStyleProps } from './props'
 import type {
   TopNavBarActionItemsProps,
   TopNavBarActionItemsState
@@ -72,14 +67,12 @@ id: TopNavBar.ActionItems
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarActionItems extends Component<
   TopNavBarActionItemsProps,
   TopNavBarActionItemsState
 > {
   static readonly componentId = 'TopNavBar.ActionItems'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 
@@ -284,6 +277,7 @@ class TopNavBarActionItems extends Component<
         ref={this.handleRef}
         css={styles?.topNavBarActionItems}
         aria-label={listLabel}
+        data-cid="TopNavBarActionItems"
       >
         {this.childrenArray.map((item) => (
           <li css={styles?.listItem} key={item.props.id}>
