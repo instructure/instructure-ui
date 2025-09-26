@@ -1286,6 +1286,7 @@ type: embed
 | TreeBrowser | sortOrder | `(obj1: any, obj2: any) => number` | No | `function () {
   return 0
 }` | An optional compare function to specify order of the collections and the items |
+| TreeBrowser | animation | `boolean` | No | `true` | Whether to enable animation for the TreeBrowser |
 | TreeBrowser.TreeButton | id | `string \| number` | No | - |  |
 | TreeBrowser.TreeButton | name | `string` | No | - |  |
 | TreeBrowser.TreeButton | descriptor | `string` | No | - |  |
