@@ -2825,6 +2825,26 @@
       }
     }
   },
+  "canvas/component/TextInput": {
+    "textInput": {
+      "backgroundColor": {
+        "value": "{color.background.interactive.input.base}",
+        "type": "color"
+      },
+      "backgroundHoverColor": {
+        "value": "{color.background.interactive.input.hover}",
+        "type": "color"
+      },
+      "backgroundReadonlyColor": {
+        "value": "{color.background.interactive.input.readonly}",
+        "type": "color"
+      },
+      "backgroundDisabledColor": {
+        "value": "{color.background.interactive.input.disabled}",
+        "type": "color"
+      }
+    }
+  },
   "rebrand/component/Avatar": {
     "avatar": {
       "backgroundColor": {
@@ -3423,6 +3443,26 @@
       "spinnerSizeLg": {
         "value": "4.5rem",
         "type": "sizing"
+      }
+    }
+  },
+  "rebrand/component/TextInput": {
+    "textInput": {
+      "backgroundColor": {
+        "value": "{color.background.interactive.input.base}",
+        "type": "color"
+      },
+      "backgroundHoverColor": {
+        "value": "{color.background.interactive.input.hover}",
+        "type": "color"
+      },
+      "backgroundReadonlyColor": {
+        "value": "{color.background.interactive.input.readonly}",
+        "type": "color"
+      },
+      "backgroundDisabledColor": {
+        "value": "{color.background.interactive.input.disabled}",
+        "type": "color"
       }
     }
   },
@@ -6368,6 +6408,7 @@
       "canvas/component/Metric",
       "canvas/component/Pill",
       "canvas/component/Spinner",
+      "canvas/component/TextInput",
       "rebrand/component/Avatar",
       "rebrand/component/Breadcrumb",
       "rebrand/component/FormFieldLabel",
@@ -6376,6 +6417,7 @@
       "rebrand/component/Metric",
       "rebrand/component/Pill",
       "rebrand/component/Spinner",
+      "rebrand/component/TextInput",
       "rebrand/semantic/layout/default",
       "rebrand/semantic/color/rebrandLight",
       "rebrand/semantic/color/rebrandDark"
