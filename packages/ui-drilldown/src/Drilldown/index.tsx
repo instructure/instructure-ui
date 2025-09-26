@@ -528,15 +528,17 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     const childMap = new Map<string, boolean>()
 
     for (const child of children) {
-      if (!childMap.has(child.props.id)) {
-        childMap.set(child.props.id, true)
-      } else {
-        warn(
-          false,
-          `Duplicate id: "${child.props.id}"! Make sure all options have unique ids, otherwise they won't be rendered.`
-        )
+      if (child && typeof child === 'object' && child.props?.id) {
+        if (!childMap.has(child.props.id)) {
+          childMap.set(child.props.id, true)
+        } else {
+          warn(
+            false,
+            `Duplicate id: "${child.props.id}"! Make sure all options have unique ids, otherwise they won't be rendered.`
+          )
 
-        return (containsDuplicate = true)
+          return (containsDuplicate = true)
+        }
       }
     }
 
