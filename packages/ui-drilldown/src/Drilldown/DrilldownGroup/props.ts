@@ -96,6 +96,11 @@ type DrilldownGroupOwnProps = {
   defaultSelected?: DrilldownOptionValue[]
 
   /**
+   * An array of the values for the selected items. Overrides internal state if provided. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item.
+   */
+  selectedGroupOptions?: DrilldownOptionValue[]
+
+  /**
    * Callback fired when an option within the `<Drilldown.Group />` is selected
    */
   onSelect?: (
@@ -128,6 +133,7 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   selectableType: PropTypes.oneOf(['single', 'multiple']),
   defaultSelected: PropTypes.array,
+  selectedGroupOptions: PropTypes.array,
   onSelect: PropTypes.func
 }
 
@@ -142,6 +148,7 @@ const allowedProps: AllowedPropKeys = [
   'elementRef',
   'selectableType',
   'defaultSelected',
+  'selectedGroupOptions',
   'onSelect'
 ]
 
