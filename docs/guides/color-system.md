@@ -2,6 +2,7 @@
 title: Color System
 category: Guides
 order: 6
+relevantForAI: true
 ---
 
 ## Colors

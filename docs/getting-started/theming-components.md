@@ -2,6 +2,7 @@
 title: Themes
 category: Getting Started
 order: 8
+relevantForAI: true
 ---
 
 ## Themes

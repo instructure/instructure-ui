@@ -2,6 +2,7 @@
 title: Form Errors
 category: Guides
 order: 7
+relevantForAI: true
 ---
 
 # Adding Error Messages to Form Components

@@ -31,11 +31,14 @@ import { theme as canvasTheme } from '@instructure/canvas-theme'
 import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
 import type {
   LibraryOptions,
-  MainDocsData, ProcessedFile
+  MainDocsData,
+  ProcessedFile
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
-import { createRequire } from "module"
+import { createRequire } from 'module'
 import { fileURLToPath, pathToFileURL } from 'url'
+import { generateAIAccessibleMarkdowns } from './ai-accessible-documentation/generate-ai-accessible-markdowns.mjs'
+import { generateAIAccessibleLlmsFile } from './ai-accessible-documentation/generate-ai-accessible-llms-file.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -101,7 +104,7 @@ const pathsToIgnore = [
   // deprecated packages and modules:
   '**/InputModeListener.ts',
   // regression testing app:
-  '**/regression-test/**',
+  '**/regression-test/**'
 ]
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
@@ -146,9 +149,28 @@ function buildDocs() {
         markdownsAndSources
       )
 
+      generateAIAccessibleMarkdowns(
+        buildDir + 'docs/',
+        buildDir + 'markdowns/'
+      )
+
+      const parentOfDocs = path.dirname(buildDir + 'docs/')
+
+      generateAIAccessibleLlmsFile(
+        buildDir + 'markdown-and-sources-data.json',
+        {
+          outputFilePath: path.join(parentOfDocs, 'llms.txt'),
+          baseUrl: 'https://instructure.design/markdowns/',
+          summariesFilePath: path.join(__dirname, '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json')
+        }
+      )
+
       // eslint-disable-next-line no-console
       console.log('Copying icons data...')
-      fs.copyFileSync(projectRoot + '/packages/ui-icons/__build__/icons-data.json', buildDir + 'icons-data.json')
+      fs.copyFileSync(
+        projectRoot + '/packages/ui-icons/__build__/icons-data.json',
+        buildDir + 'icons-data.json'
+      )
 
       // eslint-disable-next-line no-console
       console.log('Finished building documentation data')

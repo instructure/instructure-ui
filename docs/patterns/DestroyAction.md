@@ -2,6 +2,7 @@
 title: Destroy Action
 category: Patterns
 id: DestroyAction
+relevantForAI: true
 ---
 
 ## Destroy Action

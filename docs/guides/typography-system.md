@@ -2,6 +2,7 @@
 title: Typography
 category: Guides
 order: 9
+relevantForAI: true
 ---
 
 # Typography

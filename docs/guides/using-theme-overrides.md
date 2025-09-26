@@ -2,6 +2,7 @@
 title: Using theme overrides
 category: Guides
 order: 3
+relevantForAI: true
 ---
 
 ## Using theme overrides

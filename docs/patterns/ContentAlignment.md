@@ -2,6 +2,7 @@
 title: Content Alignment
 category: Patterns
 id: ContentAlignment
+relevantForAI: true
 ---
 
 ## Content Alignment

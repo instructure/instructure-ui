@@ -2,6 +2,7 @@
 title: Usage
 category: Getting Started
 order: 1
+relevantForAI: true
 ---
 
 ## Quick Start
@@ -73,6 +74,20 @@ Congrats, you have now a (very) basic app that uses Instructure UI :)
 ## Integrating With an Existing Project
 
 Just add the `@instructure/ui` dependency as shown above and wrap the part of your app that will use InstUI in `<InstUISettingsProvider>` and start using InstUI components.
+
+## Using InstUI with AI coding agents
+
+InstUI provides a compressed, downloadable collection of all component documentation and user guides in an AI-agent-friendly markdown format.
+
+You can download the archive from the following link:
+https://instructure.design/markdowns/documentation.zip
+
+The download includes an index.md file that references all available documentation within the compressed folder.
+
+These files are designed to be used as context for AI coding agents.
+
+Additionally, an llms.txt file is available. This file contains a catalog of links pointing to the online markdown files for InstUI components and guides, which are also accessible to AI agents. It can be found at:
+https://instructure.design/llms.txt
 
 ## Further reading
 

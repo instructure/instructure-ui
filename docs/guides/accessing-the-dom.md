@@ -2,6 +2,7 @@
 title: Accessing the DOM
 category: Guides
 order: 5
+relevantForAI: true
 ---
 
 ## Accessing the DOM
