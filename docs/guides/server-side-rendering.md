@@ -1,7 +1,7 @@
 ---
 title: Server side rendering (SSR)
 category: Guides
-order: 2
+order: 7
 ---
 
 # SSR with Next.js

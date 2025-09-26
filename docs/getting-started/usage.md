@@ -28,12 +28,11 @@ We recommend that you add the `@instructure/ui` meta-package, this contains all 
 ---
 type: code
 ---
-
 {
   ...
   "dependencies": {
     ...
-    "@instructure/ui": "^10"
+    "@instructure/ui": "^11"
   }
 }
 ```

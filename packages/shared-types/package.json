@@ -23,6 +23,6 @@
     "access": "public"
   },
   "peerDependencies": {
-    "react": ">=18 <=19"
+    "react": ">=17 <=19"
   }
 }

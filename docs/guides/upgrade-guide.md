@@ -1,14 +1,14 @@
 ---
 title: Upgrade Guide for Version 11
 category: Guides
-order: 7
+order: 1
 ---
 
 # Upgrade Guide for Version 11
 
 ## InstUI and React
 
-> React 16 support was dropped with InstUI 11. Please upgrade to React 18 before upgrading to InstUI v11!
+> React 16 support was dropped with InstUI 11. Please upgrade to React 17 before upgrading to InstUI v11!
 
 ### React 19
 

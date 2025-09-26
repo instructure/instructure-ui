@@ -48,7 +48,7 @@
     "moment-timezone": "^0.6.0"
   },
   "peerDependencies": {
-    "react": ">=18 <=19"
+    "react": ">=17 <=19"
   },
   "publishConfig": {
     "access": "public"
