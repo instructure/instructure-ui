@@ -2842,6 +2842,90 @@
       "backgroundDisabledColor": {
         "value": "{color.background.interactive.input.disabled}",
         "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.stroke.interactive.input.base}",
+        "type": "color"
+      },
+      "borderHoverColor": {
+        "value": "{color.stroke.interactive.input.hover}",
+        "type": "color"
+      },
+      "borderReadonlyColor": {
+        "value": "{color.stroke.interactive.input.readonly}",
+        "type": "color"
+      },
+      "borderDisabledColor": {
+        "value": "{color.stroke.interactive.input.disabled}",
+        "type": "color"
+      },
+      "errorBorderColor": {
+        "value": "{color.stroke.interactive.destructive.base}",
+        "type": "color"
+      },
+      "borderRadius": {
+        "value": "{borderRadius.interactive.base}",
+        "type": "borderRadius"
+      },
+      "borderWidth": {
+        "value": "{borderWidth.interactive.base}",
+        "type": "borderWidth"
+      },
+      "textColor": {
+        "value": "{color.text.interactive.input.base}",
+        "type": "color"
+      },
+      "textHoverColor": {
+        "value": "{color.text.interactive.input.hover}",
+        "type": "color"
+      },
+      "textReadonlyColor": {
+        "value": "{color.text.interactive.input.readonly}",
+        "type": "color"
+      },
+      "textDisabledColor": {
+        "value": "{color.text.interactive.input.disabled}",
+        "type": "color"
+      },
+      "placeholderColor": {
+        "value": "{color.text.interactive.input.placeholder}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "1.375rem",
+        "type": "fontSizes"
+      },
+      "heightSm": {
+        "value": "{size.interactive.height.sm}",
+        "type": "sizing"
+      },
+      "heightMd": {
+        "value": "{size.interactive.height.md}",
+        "type": "sizing"
+      },
+      "heightLg": {
+        "value": "{size.interactive.height.lg}",
+        "type": "sizing"
+      },
+      "spaceBetweenElements": {
+        "value": "{spacing.between.inputElements}",
+        "type": "spacing"
       }
     }
   },
@@ -3463,6 +3547,90 @@
       "backgroundDisabledColor": {
         "value": "{color.background.interactive.input.disabled}",
         "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.stroke.interactive.input.base}",
+        "type": "color"
+      },
+      "borderHoverColor": {
+        "value": "{color.stroke.interactive.input.hover}",
+        "type": "color"
+      },
+      "borderReadonlyColor": {
+        "value": "{color.stroke.interactive.input.readonly}",
+        "type": "color"
+      },
+      "borderDisabledColor": {
+        "value": "{color.stroke.interactive.input.disabled}",
+        "type": "color"
+      },
+      "errorBorderColor": {
+        "value": "{color.stroke.interactive.destructive.base}",
+        "type": "color"
+      },
+      "borderRadius": {
+        "value": "{borderRadius.interactive.base}",
+        "type": "borderRadius"
+      },
+      "borderWidth": {
+        "value": "{borderWidth.interactive.base}",
+        "type": "borderWidth"
+      },
+      "textColor": {
+        "value": "{color.text.interactive.input.base}",
+        "type": "color"
+      },
+      "textHoverColor": {
+        "value": "{color.text.interactive.input.hover}",
+        "type": "color"
+      },
+      "textReadonlyColor": {
+        "value": "{color.text.interactive.input.readonly}",
+        "type": "color"
+      },
+      "textDisabledColor": {
+        "value": "{color.text.interactive.input.disabled}",
+        "type": "color"
+      },
+      "placeholderColor": {
+        "value": "{color.text.interactive.input.placeholder}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "{fontSize.textLg}",
+        "type": "fontSizes"
+      },
+      "heightSm": {
+        "value": "{size.interactive.height.sm}",
+        "type": "sizing"
+      },
+      "heightMd": {
+        "value": "{size.interactive.height.md}",
+        "type": "sizing"
+      },
+      "heightLg": {
+        "value": "{size.interactive.height.lg}",
+        "type": "sizing"
+      },
+      "spaceBetweenElements": {
+        "value": "{spacing.between.inputElements}",
+        "type": "spacing"
       }
     }
   },
