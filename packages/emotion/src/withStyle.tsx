@@ -202,20 +202,30 @@ const withStyle = decorator(
         ...defaultValues
       }
 
-      let componentTheme: ComponentTheme =
+      let baseComponentTheme =
         typeof generateComponentTheme === 'function'
           ? generateComponentTheme(theme as BaseTheme)
           : {}
+      if (
+        //@ts-expect-error TODO fix these later
+        theme.newTheme &&
+        //@ts-expect-error TODO fix these later
+        theme.newTheme.components[ComposedComponent.componentId]
+      ) {
+        baseComponentTheme =
+          //@ts-expect-error TODO fix these later
+          theme.newTheme.components[ComposedComponent.componentId]
+      }
 
       const themeOverride = getComponentThemeOverride(
         theme,
         displayName,
         ComposedComponent.componentId,
         componentProps,
-        componentTheme
+        baseComponentTheme
       )
 
-      componentTheme = { ...componentTheme, ...themeOverride }
+      const componentTheme = { ...baseComponentTheme, ...themeOverride }
 
       const [styles, setStyles] = useState(
         generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}
