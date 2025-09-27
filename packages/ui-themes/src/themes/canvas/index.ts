@@ -24,7 +24,9 @@
 
 import sharedThemeTokens from '../../sharedThemeTokens'
 import { BaseTheme, Colors } from '@instructure/shared-types'
+import { ThemeRegistry } from '@instructure/theme-registry'
 import { colors } from './colors'
+import { canvas as newCanvas, type Canvas as NewCanvas } from '../newThemes'
 
 const key = 'canvas'
 
@@ -55,13 +57,15 @@ const brandVariables = {
 export type CanvasBrandVariables = typeof brandVariables
 
 export type CanvasTheme = BaseTheme & {
+  newTheme?: NewCanvas
   key: 'canvas'
 } & typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
 
 /**
  * Canvas theme
  */
-const canvas: CanvasTheme = {
+const __theme: CanvasTheme = {
+  newTheme: newCanvas,
   key,
   description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
   ...sharedThemeTokens,
@@ -69,5 +73,7 @@ const canvas: CanvasTheme = {
   ...brandVariables
 }
 
-export { canvas }
-export default canvas
+const theme = ThemeRegistry.registerTheme(__theme)
+
+export { theme }
+export { __theme as canvasThemeLocal }

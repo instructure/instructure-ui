@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import type { AvatarTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
 type StyleParams = {
@@ -45,7 +44,7 @@ type StyleParams = {
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: AvatarTheme,
+  componentTheme: NewComponentTypes['Avatar'],
   params: StyleParams
 ): AvatarStyle => {
   const { loaded, size, color, hasInverseColor, shape, src, showBorder } =
@@ -66,49 +65,49 @@ const generateStyle = (
   const sizeStyles = {
     auto: {
       fontSize: 'inherit',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: '2.5em',
       height: '2.5em'
     },
     'xx-small': {
       fontSize: '0.625rem',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: calcNewScaler(0.5, 0.625, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(0.5, 0.625, 2.5)
     },
     'x-small': {
       fontSize: '0.875rem',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: calcNewScaler(0.75, 0.875, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(0.75, 0.875, 2.5)
     },
     small: {
       fontSize: '1.25rem',
-      borderWidth: componentTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSm,
       width: calcNewScaler(1, 1.25, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1, 1.25, 2.5)
     },
     medium: {
       fontSize: '1.5rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(1.25, 1.5, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.25, 1.5, 2.5)
     },
     large: {
       fontSize: '1.75rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(1.5, 1.75, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.5, 1.75, 2.5)
     },
     'x-large': {
       fontSize: '2rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(1.75, 2, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(1.75, 2, 2.5)
     },
     'xx-large': {
       fontSize: '2.25rem',
-      borderWidth: componentTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMd,
       width: calcNewScaler(2, 2.25, shape === 'circle' ? 2.5 : 3),
       height: calcNewScaler(2, 2.25, 2.5)
     }
@@ -153,13 +152,41 @@ const generateStyle = (
   }
 
   const colorVariants = {
-    default: componentTheme.color, // = brand
-    shamrock: componentTheme.colorShamrock,
-    barney: componentTheme.colorBarney,
-    crimson: componentTheme.colorCrimson,
-    fire: componentTheme.colorFire,
-    licorice: componentTheme.colorLicorice,
-    ash: componentTheme.colorAsh,
+    default: {
+      text: componentTheme.accent1TextColor,
+      background: componentTheme.accent1BackgroundColor,
+      icon: componentTheme.accent1IconColor
+    }, // = brand
+    shamrock: {
+      text: componentTheme.accent2TextColor,
+      background: componentTheme.accent2BackgroundColor,
+      icon: componentTheme.accent2IconColor
+    },
+    barney: {
+      text: componentTheme.accent3TextColor,
+      background: componentTheme.accent3BackgroundColor,
+      icon: componentTheme.accent3IconColor
+    },
+    crimson: {
+      text: componentTheme.accent4TextColor,
+      background: componentTheme.accent4BackgroundColor,
+      icon: componentTheme.accent4IconColor
+    },
+    fire: {
+      text: componentTheme.accent5TextColor,
+      background: componentTheme.accent5BackgroundColor,
+      icon: componentTheme.accent5IconColor
+    },
+    licorice: {
+      text: componentTheme.accent6TextColor,
+      background: componentTheme.accent6BackgroundColor,
+      icon: componentTheme.accent6IconColor
+    },
+    ash: {
+      text: componentTheme.accent1TextColor,
+      background: componentTheme.accent1BackgroundColor,
+      icon: componentTheme.accent1IconColor
+    },
     ai: `
         linear-gradient(to bottom,  ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) padding-box,
         linear-gradient(to bottom right, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%) border-box`
@@ -176,11 +203,11 @@ const generateStyle = (
     }
     return hasInverseColor
       ? {
-          backgroundColor: colorVariants[color!],
+          backgroundColor: colorVariants[color!].background,
           backgroundClip: 'content-box'
         }
       : {
-          backgroundColor: componentTheme.background,
+          backgroundColor: componentTheme.backgroundColor,
           backgroundClip: 'content-box'
         }
   }
@@ -189,7 +216,9 @@ const generateStyle = (
     if (color === 'ai') {
       return componentTheme.aiFontColor
     }
-    return hasInverseColor ? componentTheme.background : colorVariants[color!]
+    return hasInverseColor
+      ? componentTheme.backgroundColor
+      : colorVariants[color!].text
   }
 
   return {
@@ -213,7 +242,7 @@ const generateStyle = (
             ...(showBorder !== 'always' && {
               border: 0
             }),
-            boxShadow: `inset 0 0 ${componentTheme.boxShadowBlur} 0 ${componentTheme.boxShadowColor}`
+            boxShadow: `inset 0 0 ${componentTheme.boxShadow.blur} 0 ${componentTheme.boxShadow.color}`
           }
         : {
             backgroundImage: undefined,
@@ -231,7 +260,6 @@ const generateStyle = (
       label: 'avatar__initials',
       color: contentColor(),
       lineHeight: '2.375em',
-      fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       letterSpacing: '0.0313em',
       ...initialSizeStyles[size!]

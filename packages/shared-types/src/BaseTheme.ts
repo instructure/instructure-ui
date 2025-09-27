@@ -202,6 +202,7 @@ type BaseThemeVariableKeys = [
 ]
 
 type BaseTheme = {
+  newTheme?: any
   key: string
   description?: string
 } & BaseThemeVariables
