@@ -38,7 +38,7 @@ import type {
 
 type PillOwnProps = {
   as?: AsElementType
-  color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
+  color?: 'primary' | 'success' | 'info' | 'warning' | 'error'
   /**
    * Provides a reference to the underlying HTML element
    */
@@ -76,14 +76,7 @@ type PillStyle = ComponentStyle<
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf([
-    'primary',
-    'success',
-    'danger',
-    'info',
-    'warning',
-    'alert'
-  ]),
+  color: PropTypes.oneOf(['primary', 'success', 'info', 'warning', 'error']),
   elementRef: PropTypes.func,
   margin: PropTypes.string,
   statusLabel: PropTypes.string,

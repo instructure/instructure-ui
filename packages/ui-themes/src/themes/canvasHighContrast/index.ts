@@ -26,10 +26,15 @@ import sharedThemeTokens from '../../sharedThemeTokens'
 import { BaseTheme, Colors } from '@instructure/shared-types'
 import { ThemeRegistry } from '@instructure/theme-registry'
 import { colors } from './colors'
+import {
+  canvasHighContrast as newCanvasHighContrast,
+  type CanvasHighContrast as NewCanvasHighContrast
+} from '../newThemes'
 
 const key = 'canvas-high-contrast'
 
 export type CanvasHighContrastTheme = BaseTheme & {
+  newTheme?: NewCanvasHighContrast
   key: 'canvas-high-contrast'
 } & typeof sharedThemeTokens & { colors: Colors }
 
@@ -40,6 +45,7 @@ export type CanvasHighContrastTheme = BaseTheme & {
  * Will be default in the next major version of InstUI
  */
 const __theme: CanvasHighContrastTheme = {
+  newTheme: newCanvasHighContrast,
   key,
   description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
   ...sharedThemeTokens,

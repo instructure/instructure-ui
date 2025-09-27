@@ -22,30 +22,37 @@
  * SOFTWARE.
  */
 
-import bump from './bump.js'
-import server from './server.js'
-import tag from './tag.js'
-import deprecate from './deprecate.js'
-import publish from './publish.js'
-import lint from '../test/lint.js'
-import bundle from '../build/webpack.js'
-import clean from '../build/clean.js'
-import build from '../build/babel.js'
-import generateAllTokens from '../build/generate-all-tokens.js'
-import buildIcons from '../icons/build-icons.js'
-import buildThemes from '../build/build-themes.js'
+import sharedThemeTokens from '../../sharedThemeTokens'
+import { BaseTheme, Colors } from '@instructure/shared-types'
+import { ThemeRegistry } from '@instructure/theme-registry'
+import { colors } from './colors'
+import {
+  rebrandLight as newRebrandLight,
+  type RebrandLight as NewRebrandLight
+} from '../newThemes'
 
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  lint,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons,
-  buildThemes
-]
+const key = 'rebrand-light'
+
+export type RebrandLightTheme = BaseTheme & {
+  newTheme?: NewRebrandLight
+  key: 'rebrand-light'
+} & typeof sharedThemeTokens & { colors: Colors }
+
+/**
+ * Canvas high contrast theme without the `use` function and `variables` prop.
+ * Not affected by global theme overrides (`.use()` function).
+ *
+ * Will be default in the next major version of InstUI
+ */
+const __theme: RebrandLightTheme = {
+  newTheme: newRebrandLight,
+  key,
+  description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
+  ...sharedThemeTokens,
+  colors
+}
+
+const theme = ThemeRegistry.registerTheme(__theme)
+export default theme
+// theme without the use() function and `variables` prop
+export { __theme as newRebrandLightThemeLocal }
