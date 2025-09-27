@@ -116,7 +116,7 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
           {description}
         </div>
         <div css={styles?.statusIndicatorWrapper}>
-          <Pill color={pass ? 'success' : 'danger'}>
+          <Pill color={pass ? 'success' : 'error'}>
             {pass ? successLabel : failureLabel}
           </Pill>
         </div>

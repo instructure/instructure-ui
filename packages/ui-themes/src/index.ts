@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import type NewComponentTypes from './themes/newThemes/componentTypes'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
 import type {
@@ -35,11 +35,22 @@ import type {
 import { canvasHighContrast } from './themes/canvasHighContrast'
 import { canvas } from './themes/canvas'
 
+import rebrandDark from './themes/rebrandDark'
+
+import rebrandLight from './themes/rebrandLight'
+
 import {
   primitives,
   additionalPrimitives
 } from './sharedThemeTokens/colors/primitives'
 import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
+
+import type {
+  Canvas as NewCanvas,
+  CanvasHighContrast as NewCanvasHighContrast,
+  RebrandDark as NewRebrandDark,
+  RebrandLight as NewRebrandLight
+} from './themes/newThemes'
 
 type ThemeMap = {
   canvas: CanvasTheme
@@ -60,6 +71,8 @@ type ThemeSpecificStyle<ComponentTheme> = {
 }
 
 export {
+  rebrandDark,
+  rebrandLight,
   canvas,
   canvasHighContrast,
   primitives,
@@ -79,5 +92,10 @@ export type {
   Primitives,
   AdditionalPrimitives,
   DataVisualization,
-  UI
+  UI,
+  NewCanvas,
+  NewCanvasHighContrast,
+  NewRebrandDark,
+  NewRebrandLight,
+  NewComponentTypes
 }
