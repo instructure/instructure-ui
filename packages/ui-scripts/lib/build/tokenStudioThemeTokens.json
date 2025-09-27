@@ -2337,20 +2337,20 @@
         "value": "{color.text.accent.color6}",
         "type": "color"
       },
-      "aiTopGradientColor": {
-        "value": "{color.background.aiTopGradient}",
-        "type": "color"
-      },
       "aiBottomGradientColor": {
         "value": "{color.background.aiBottomGradient}",
         "type": "color"
       },
-      "textOnColor": {
-        "value": "{color.text.onColor}",
+      "aiTopGradientColor": {
+        "value": "{color.background.aiTopGradient}",
         "type": "color"
       },
       "iconOnColor": {
         "value": "{color.icon.onColor}",
+        "type": "color"
+      },
+      "textOnColor": {
+        "value": "{color.text.onColor}",
         "type": "color"
       },
       "size2xs": {
@@ -3050,20 +3050,20 @@
         "value": "{color.text.accent.color6}",
         "type": "color"
       },
-      "aiTopGradientColor": {
-        "value": "{color.background.aiTopGradient}",
-        "type": "color"
-      },
       "aiBottomGradientColor": {
         "value": "{color.background.aiBottomGradient}",
         "type": "color"
       },
-      "textOnColor": {
-        "value": "{color.text.onColor}",
+      "aiTopGradientColor": {
+        "value": "{color.background.aiTopGradient}",
         "type": "color"
       },
       "iconOnColor": {
         "value": "{color.icon.onColor}",
+        "type": "color"
+      },
+      "textOnColor": {
+        "value": "{color.text.onColor}",
         "type": "color"
       },
       "size2xs": {
