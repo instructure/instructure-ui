@@ -2464,6 +2464,26 @@
       "asteriskColor": {
         "value": "{color.text.base}",
         "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.strong}",
+        "type": "fontWeights"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "readonlyTextColor": {
+        "value": "{color.text.muted}",
+        "type": "color"
       }
     }
   },
@@ -3176,6 +3196,26 @@
       },
       "asteriskColor": {
         "value": "{color.text.error}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.strong}",
+        "type": "fontWeights"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "readonlyTextColor": {
+        "value": "{color.text.muted}",
         "type": "color"
       }
     }
@@ -5299,10 +5339,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5697,10 +5737,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -6159,10 +6199,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -6555,10 +6595,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
