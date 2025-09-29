@@ -871,31 +871,31 @@
       }
     },
     "borderRadius": {
-      "roundedXs": {
+      "xs": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "roundedSm": {
+      "sm": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "roundedMd": {
+      "md": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "roundedLg": {
+      "lg": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "roundedXl": {
+      "xl": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "rounded2xl": {
+      "xxl": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "roundedFull": {
+      "full": {
         "value": "999px",
         "type": "borderRadius"
       },
@@ -2520,9 +2520,7 @@
       "errorIconMarginRight": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
-      }
-    },
-    "formfieldMessage": {
+      },
       "fontFamily": {
         "value": "{fontFamily.base}",
         "type": "fontFamilies"
@@ -2768,7 +2766,7 @@
         "type": "color"
       },
       "borderRadius": {
-        "value": "{borderRadius.roundedFull}",
+        "value": "{borderRadius.full}",
         "type": "borderRadius"
       },
       "borderWidth": {
@@ -3505,7 +3503,7 @@
         "type": "color"
       },
       "borderRadius": {
-        "value": "{borderRadius.roundedFull}",
+        "value": "{borderRadius.full}",
         "type": "borderRadius"
       },
       "borderWidth": {
@@ -3832,31 +3830,31 @@
       }
     },
     "borderRadius": {
-      "roundedXs": {
+      "xs": {
         "value": "{size.size2}",
         "type": "borderRadius"
       },
-      "roundedSm": {
+      "sm": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
-      "roundedMd": {
+      "md": {
         "value": "{size.size8}",
         "type": "borderRadius"
       },
-      "roundedLg": {
+      "lg": {
         "value": "{size.size12}",
         "type": "borderRadius"
       },
-      "roundedXl": {
+      "xl": {
         "value": "{size.size16}",
         "type": "borderRadius"
       },
-      "rounded2xl": {
+      "xxl": {
         "value": "{size.size24}",
         "type": "borderRadius"
       },
-      "roundedFull": {
+      "full": {
         "value": "999px",
         "type": "borderRadius"
       },
@@ -5392,6 +5390,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -5521,13 +5520,13 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.rounded2xl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
-        "borderRadius.roundedFull": "64676831cefcab2f0e48931d4762c0952cf92a1f",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
+        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5574,8 +5573,7 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "formfieldMessage.fontFamily": "d818a9309849e560ce78471517e5d95eed4bd6e0"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5796,6 +5794,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -5925,13 +5924,13 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.rounded2xl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
-        "borderRadius.roundedFull": "64676831cefcab2f0e48931d4762c0952cf92a1f",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
+        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5978,8 +5977,7 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "formfieldMessage.fontFamily": "d818a9309849e560ce78471517e5d95eed4bd6e0"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -6030,13 +6028,13 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.rounded2xl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
-        "borderRadius.roundedFull": "64676831cefcab2f0e48931d4762c0952cf92a1f",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
+        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -6264,6 +6262,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -6366,8 +6365,7 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
-        "formFieldMessage.fontFamily": "12bb9abb5d1745ad4635cc3a06b8cef3575290de"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -6432,13 +6430,13 @@
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
         "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
-        "borderRadius.roundedXs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
-        "borderRadius.roundedSm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
-        "borderRadius.roundedMd": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
-        "borderRadius.roundedLg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
-        "borderRadius.roundedXl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.rounded2xl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
-        "borderRadius.roundedFull": "64676831cefcab2f0e48931d4762c0952cf92a1f",
+        "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
+        "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
+        "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
+        "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
+        "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -6666,6 +6664,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -6768,8 +6767,7 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
-        "formFieldMessage.fontFamily": "12bb9abb5d1745ad4635cc3a06b8cef3575290de"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
