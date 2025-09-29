@@ -2521,6 +2521,12 @@
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       }
+    },
+    "formfieldMessage": {
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      }
     }
   },
   "canvas/component/Link": {
@@ -3253,6 +3259,10 @@
       "errorIconMarginRight": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
@@ -5369,6 +5379,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -5559,7 +5574,8 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "formfieldMessage.fontFamily": "d818a9309849e560ce78471517e5d95eed4bd6e0"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -5767,6 +5783,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -5957,7 +5978,8 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "formfieldMessage.fontFamily": "d818a9309849e560ce78471517e5d95eed4bd6e0"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -6229,6 +6251,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -6339,7 +6366,8 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
+        "formFieldMessage.fontFamily": "12bb9abb5d1745ad4635cc3a06b8cef3575290de"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -6625,6 +6653,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -6735,7 +6768,8 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
+        "formFieldMessage.fontFamily": "12bb9abb5d1745ad4635cc3a06b8cef3575290de"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
