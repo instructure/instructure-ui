@@ -752,7 +752,7 @@
             "type": "sizing"
           },
           "md": {
-            "value": "2.375 rem",
+            "value": "2.375rem",
             "type": "sizing"
           },
           "lg": {
@@ -802,19 +802,19 @@
         "type": "spacing"
       },
       "spaceMd": {
-        "value": "{size.size16}",
+        "value": "{size.size12}",
         "type": "spacing"
       },
       "spaceLg": {
-        "value": "{size.size24}",
+        "value": "{size.size16}",
         "type": "spacing"
       },
       "spaceXl": {
-        "value": "{size.size32}",
+        "value": "{size.size24}",
         "type": "spacing"
       },
       "space2xl": {
-        "value": "{size.size40}",
+        "value": "{size.size32}",
         "type": "spacing"
       },
       "between": {
@@ -888,6 +888,10 @@
         "type": "borderRadius"
       },
       "xl": {
+        "value": "{size.size4}",
+        "type": "borderRadius"
+      },
+      "xxl": {
         "value": "{size.size4}",
         "type": "borderRadius"
       },
@@ -2243,10 +2247,6 @@
         "type": "borderWidth"
       },
       "boxShadow": {
-        "color": {
-          "value": "rgba(45,59,69,0.12)",
-          "type": "color"
-        },
         "value": {
           "x": "0",
           "y": "0",
@@ -2255,7 +2255,11 @@
           "color": "rgba(45,59,69,0.12)",
           "type": "innerShadow"
         },
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "color": {
+          "value": "rgba(45,59,69,0.12)",
+          "type": "color"
+        }
       },
       "fontWeight": {
         "value": "{fontWeight.heading.strong}",
@@ -2333,44 +2337,44 @@
         "value": "{color.text.accent.color6}",
         "type": "color"
       },
-      "aiTopGradientColor": {
-        "value": "{color.background.aiTopGradient}",
-        "type": "color"
-      },
       "aiBottomGradientColor": {
         "value": "{color.background.aiBottomGradient}",
         "type": "color"
       },
-      "textOnColor": {
-        "value": "{color.text.onColor}",
+      "aiTopGradientColor": {
+        "value": "{color.background.aiTopGradient}",
         "type": "color"
       },
       "iconOnColor": {
         "value": "{color.icon.onColor}",
         "type": "color"
       },
+      "textOnColor": {
+        "value": "{color.text.onColor}",
+        "type": "color"
+      },
       "size2xs": {
-        "value": "1.5 rem",
+        "value": "1.5rem",
         "type": "sizing"
       },
       "sizeXs": {
-        "value": "2 rem",
+        "value": "2rem",
         "type": "sizing"
       },
       "sizeSm": {
-        "value": "2.5 rem",
+        "value": "2.5rem",
         "type": "sizing"
       },
       "sizeMd": {
-        "value": "3 rem",
+        "value": "3rem",
         "type": "sizing"
       },
       "sizeLg": {
-        "value": "3.5 rem",
+        "value": "3.5rem",
         "type": "sizing"
       },
       "sizeXl": {
-        "value": "4 rem",
+        "value": "4rem",
         "type": "sizing"
       },
       "size2xl": {
@@ -2460,6 +2464,26 @@
       "asteriskColor": {
         "value": "{color.text.base}",
         "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.strong}",
+        "type": "fontWeights"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "readonlyTextColor": {
+        "value": "{color.text.muted}",
+        "type": "color"
       }
     }
   },
@@ -2496,6 +2520,10 @@
       "errorIconMarginRight": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
@@ -2825,6 +2853,118 @@
       }
     }
   },
+  "canvas/component/TextInput": {
+    "textInput": {
+      "backgroundColor": {
+        "value": "{color.background.interactive.input.base}",
+        "type": "color"
+      },
+      "backgroundHoverColor": {
+        "value": "{color.background.interactive.input.hover}",
+        "type": "color"
+      },
+      "backgroundReadonlyColor": {
+        "value": "{color.background.interactive.input.readonly}",
+        "type": "color"
+      },
+      "backgroundDisabledColor": {
+        "value": "{color.background.interactive.input.disabled}",
+        "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.stroke.interactive.input.base}",
+        "type": "color"
+      },
+      "borderHoverColor": {
+        "value": "{color.stroke.interactive.input.hover}",
+        "type": "color"
+      },
+      "borderReadonlyColor": {
+        "value": "{color.stroke.interactive.input.readonly}",
+        "type": "color"
+      },
+      "borderDisabledColor": {
+        "value": "{color.stroke.interactive.input.disabled}",
+        "type": "color"
+      },
+      "errorBorderColor": {
+        "value": "{color.stroke.interactive.destructive.base}",
+        "type": "color"
+      },
+      "errorBorderHoverColor": {
+        "value": "{color.stroke.interactive.destructive.hover}",
+        "type": "color"
+      },
+      "borderRadius": {
+        "value": "{borderRadius.interactive.base}",
+        "type": "borderRadius"
+      },
+      "borderWidth": {
+        "value": "{borderWidth.interactive.base}",
+        "type": "borderWidth"
+      },
+      "textColor": {
+        "value": "{color.text.interactive.input.base}",
+        "type": "color"
+      },
+      "textHoverColor": {
+        "value": "{color.text.interactive.input.hover}",
+        "type": "color"
+      },
+      "textReadonlyColor": {
+        "value": "{color.text.interactive.input.readonly}",
+        "type": "color"
+      },
+      "textDisabledColor": {
+        "value": "{color.text.interactive.input.disabled}",
+        "type": "color"
+      },
+      "placeholderColor": {
+        "value": "{color.text.interactive.input.placeholder}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "1.375rem",
+        "type": "fontSizes"
+      },
+      "heightSm": {
+        "value": "{size.interactive.height.sm}",
+        "type": "sizing"
+      },
+      "heightMd": {
+        "value": "{size.interactive.height.md}",
+        "type": "sizing"
+      },
+      "heightLg": {
+        "value": "{size.interactive.height.lg}",
+        "type": "sizing"
+      },
+      "spaceBetweenElements": {
+        "value": "{spacing.between.inputElements}",
+        "type": "spacing"
+      },
+      "paddingHorizontal": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
+      }
+    }
+  },
   "rebrand/component/Avatar": {
     "avatar": {
       "backgroundColor": {
@@ -2844,10 +2984,6 @@
         "type": "borderWidth"
       },
       "boxShadow": {
-        "color": {
-          "value": "rgba(45,59,69,0.12)",
-          "type": "color"
-        },
         "value": {
           "x": "0",
           "y": "0",
@@ -2856,7 +2992,11 @@
           "color": "rgba(45,59,69,0.12)",
           "type": "innerShadow"
         },
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "color": {
+          "value": "rgba(45,59,69,0.12)",
+          "type": "color"
+        }
       },
       "fontWeight": {
         "value": "{fontWeight.heading.base}",
@@ -2934,44 +3074,44 @@
         "value": "{color.text.accent.color6}",
         "type": "color"
       },
-      "aiTopGradientColor": {
-        "value": "{color.background.aiTopGradient}",
-        "type": "color"
-      },
       "aiBottomGradientColor": {
         "value": "{color.background.aiBottomGradient}",
         "type": "color"
       },
-      "textOnColor": {
-        "value": "{color.text.onColor}",
+      "aiTopGradientColor": {
+        "value": "{color.background.aiTopGradient}",
         "type": "color"
       },
       "iconOnColor": {
         "value": "{color.icon.onColor}",
         "type": "color"
       },
+      "textOnColor": {
+        "value": "{color.text.onColor}",
+        "type": "color"
+      },
       "size2xs": {
-        "value": "1.5 rem",
+        "value": "1.5rem",
         "type": "sizing"
       },
       "sizeXs": {
-        "value": "2 rem",
+        "value": "2rem",
         "type": "sizing"
       },
       "sizeSm": {
-        "value": "2.5 rem",
+        "value": "2.5rem",
         "type": "sizing"
       },
       "sizeMd": {
-        "value": "3 rem",
+        "value": "3rem",
         "type": "sizing"
       },
       "sizeLg": {
-        "value": "3.5 rem",
+        "value": "3.5rem",
         "type": "sizing"
       },
       "sizeXl": {
-        "value": "4 rem",
+        "value": "4rem",
         "type": "sizing"
       },
       "size2xl": {
@@ -3061,6 +3201,26 @@
       "asteriskColor": {
         "value": "{color.text.error}",
         "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.strong}",
+        "type": "fontWeights"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "readonlyTextColor": {
+        "value": "{color.text.muted}",
+        "type": "color"
       }
     }
   },
@@ -3097,6 +3257,10 @@
       "errorIconMarginRight": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
       }
     }
   },
@@ -3426,6 +3590,118 @@
       }
     }
   },
+  "rebrand/component/TextInput": {
+    "textInput": {
+      "backgroundColor": {
+        "value": "{color.background.interactive.input.base}",
+        "type": "color"
+      },
+      "backgroundHoverColor": {
+        "value": "{color.background.interactive.input.hover}",
+        "type": "color"
+      },
+      "backgroundReadonlyColor": {
+        "value": "{color.background.interactive.input.readonly}",
+        "type": "color"
+      },
+      "backgroundDisabledColor": {
+        "value": "{color.background.interactive.input.disabled}",
+        "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.stroke.interactive.input.base}",
+        "type": "color"
+      },
+      "borderHoverColor": {
+        "value": "{color.stroke.interactive.input.hover}",
+        "type": "color"
+      },
+      "borderReadonlyColor": {
+        "value": "{color.stroke.interactive.input.readonly}",
+        "type": "color"
+      },
+      "borderDisabledColor": {
+        "value": "{color.stroke.interactive.input.disabled}",
+        "type": "color"
+      },
+      "errorBorderColor": {
+        "value": "{color.stroke.interactive.destructive.base}",
+        "type": "color"
+      },
+      "errorBorderHoverColor": {
+        "value": "{color.stroke.interactive.destructive.hover}",
+        "type": "color"
+      },
+      "borderRadius": {
+        "value": "{borderRadius.interactive.base}",
+        "type": "borderRadius"
+      },
+      "borderWidth": {
+        "value": "{borderWidth.interactive.base}",
+        "type": "borderWidth"
+      },
+      "textColor": {
+        "value": "{color.text.interactive.input.base}",
+        "type": "color"
+      },
+      "textHoverColor": {
+        "value": "{color.text.interactive.input.hover}",
+        "type": "color"
+      },
+      "textReadonlyColor": {
+        "value": "{color.text.interactive.input.readonly}",
+        "type": "color"
+      },
+      "textDisabledColor": {
+        "value": "{color.text.interactive.input.disabled}",
+        "type": "color"
+      },
+      "placeholderColor": {
+        "value": "{color.text.interactive.input.placeholder}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "{fontSize.textLg}",
+        "type": "fontSizes"
+      },
+      "heightSm": {
+        "value": "{size.interactive.height.sm}",
+        "type": "sizing"
+      },
+      "heightMd": {
+        "value": "{size.interactive.height.md}",
+        "type": "sizing"
+      },
+      "heightLg": {
+        "value": "{size.interactive.height.lg}",
+        "type": "sizing"
+      },
+      "spaceBetweenElements": {
+        "value": "{spacing.between.inputElements}",
+        "type": "spacing"
+      },
+      "paddingHorizontal": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
+      }
+    }
+  },
   "rebrand/semantic/layout/default": {
     "size": {
       "interactive": {
@@ -3485,19 +3761,19 @@
         "type": "spacing"
       },
       "spaceMd": {
-        "value": "{size.size16}",
+        "value": "{size.size12}",
         "type": "spacing"
       },
       "spaceLg": {
-        "value": "{size.size24}",
+        "value": "{size.size16}",
         "type": "spacing"
       },
       "spaceXl": {
-        "value": "{size.size32}",
+        "value": "{size.size24}",
         "type": "spacing"
       },
       "space2xl": {
-        "value": "{size.size40}",
+        "value": "{size.size32}",
         "type": "spacing"
       },
       "between": {
@@ -3574,6 +3850,10 @@
         "value": "{size.size16}",
         "type": "borderRadius"
       },
+      "xxl": {
+        "value": "{size.size24}",
+        "type": "borderRadius"
+      },
       "full": {
         "value": "999px",
         "type": "borderRadius"
@@ -3584,11 +3864,11 @@
           "type": "borderRadius"
         },
         "md": {
-          "value": "{size.size12}",
+          "value": "{size.size16}",
           "type": "borderRadius"
         },
         "lg": {
-          "value": "{size.size16}",
+          "value": "{size.size24}",
           "type": "borderRadius"
         }
       },
@@ -4911,6 +5191,7 @@
     {
       "id": "678e5f2806837b997832806ff4d55383deaf68d2",
       "name": "canvas",
+      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "canvas/semantic/color/canvas": "enabled",
@@ -4922,7 +5203,8 @@
         "canvas/component/FormFieldMessage": "enabled",
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
-        "canvas/component/Link": "enabled"
+        "canvas/component/Link": "enabled",
+        "canvas/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5066,10 +5348,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5096,6 +5378,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -5104,6 +5391,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -5180,6 +5468,33 @@
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
         "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
+        "textInput.backgroundColor": "e86c17e4bb76dcea1a20600bbc9f380d0218b27f",
+        "textInput.backgroundHoverColor": "436196279cf33508438e07c960e14df703a0b343",
+        "textInput.backgroundReadonlyColor": "421333cdcc9e70b9763cb4e8644655f129dadc88",
+        "textInput.backgroundDisabledColor": "795668c0ce9790c6ef7696e095aa74f574c08f9d",
+        "textInput.borderColor": "d8d77517a821a04709eb0c17f3d2c2f1f3013397",
+        "textInput.borderHoverColor": "934c0bc6a221112deb4cbc86137fdda2297a1908",
+        "textInput.borderReadonlyColor": "b602c5bc0ecd3ae4254ed501dfb51fa668162e4c",
+        "textInput.borderDisabledColor": "010643c6ed7388911c8fd3d0111c57c39961b957",
+        "textInput.errorBorderColor": "2123cb82fafbf9b5daf2af9a83ef556a0f329146",
+        "textInput.errorBorderHoverColor": "b8660058bdaa48cf5197693d57a002957d563d95",
+        "textInput.borderRadius": "6cfbdf4cc633c6c71edae8b780945dd35218535e",
+        "textInput.borderWidth": "6696fa096b1d061aca9f2b2d5b865c8b0d0e4b17",
+        "textInput.textColor": "a2f07f66f93f1986abf1aabe90743a42fa79aa34",
+        "textInput.textHoverColor": "316f6f0cc3d7ca54c6ef650c015825c36ac835b5",
+        "textInput.textReadonlyColor": "1f451ff7838e52f1502a8293d05bd42b7f401061",
+        "textInput.textDisabledColor": "5bab807eb96f40dd6ae65c63148605b98304b410",
+        "textInput.placeholderColor": "e9da1f3199edd0f259d283e522983a9cd5665279",
+        "textInput.fontFamily": "8b330dff73bee9338d25e66f74949a9ab95bf63c",
+        "textInput.fontWeight": "49a6067117133dbe39766a6e7e34e1036279ac92",
+        "textInput.fontSizeSm": "234afeb47b2c45e04257a1e51a0bcb30f969eb88",
+        "textInput.fontSizeMd": "cad3d0a2b1d71182a6f967350ade086911608a1b",
+        "textInput.fontSizeLg": "777270a12fffce4d925b68c4235655a0fa1a35bc",
+        "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
+        "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
+        "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
+        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
         "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
@@ -5211,7 +5526,8 @@
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
         "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5261,12 +5577,12 @@
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:0",
-      "group": "Mode"
+      "$figmaModeId": "2374:0"
     },
     {
       "id": "bdbf3faa2d00feb456e13c5e72ae74fabb515ab2",
       "name": "canvasHighContrast",
+      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "canvas/semantic/color/canvasHighContrast": "enabled",
@@ -5278,7 +5594,8 @@
         "canvas/component/FormFieldMessage": "enabled",
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
-        "canvas/component/Link": "enabled"
+        "canvas/component/Link": "enabled",
+        "canvas/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5435,10 +5752,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5465,6 +5782,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -5473,6 +5795,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -5549,6 +5872,33 @@
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
         "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
+        "textInput.backgroundColor": "e86c17e4bb76dcea1a20600bbc9f380d0218b27f",
+        "textInput.backgroundHoverColor": "436196279cf33508438e07c960e14df703a0b343",
+        "textInput.backgroundReadonlyColor": "421333cdcc9e70b9763cb4e8644655f129dadc88",
+        "textInput.backgroundDisabledColor": "795668c0ce9790c6ef7696e095aa74f574c08f9d",
+        "textInput.borderColor": "d8d77517a821a04709eb0c17f3d2c2f1f3013397",
+        "textInput.borderHoverColor": "934c0bc6a221112deb4cbc86137fdda2297a1908",
+        "textInput.borderReadonlyColor": "b602c5bc0ecd3ae4254ed501dfb51fa668162e4c",
+        "textInput.borderDisabledColor": "010643c6ed7388911c8fd3d0111c57c39961b957",
+        "textInput.errorBorderColor": "2123cb82fafbf9b5daf2af9a83ef556a0f329146",
+        "textInput.errorBorderHoverColor": "b8660058bdaa48cf5197693d57a002957d563d95",
+        "textInput.borderRadius": "6cfbdf4cc633c6c71edae8b780945dd35218535e",
+        "textInput.borderWidth": "6696fa096b1d061aca9f2b2d5b865c8b0d0e4b17",
+        "textInput.textColor": "a2f07f66f93f1986abf1aabe90743a42fa79aa34",
+        "textInput.textHoverColor": "316f6f0cc3d7ca54c6ef650c015825c36ac835b5",
+        "textInput.textReadonlyColor": "1f451ff7838e52f1502a8293d05bd42b7f401061",
+        "textInput.textDisabledColor": "5bab807eb96f40dd6ae65c63148605b98304b410",
+        "textInput.placeholderColor": "e9da1f3199edd0f259d283e522983a9cd5665279",
+        "textInput.fontFamily": "8b330dff73bee9338d25e66f74949a9ab95bf63c",
+        "textInput.fontWeight": "49a6067117133dbe39766a6e7e34e1036279ac92",
+        "textInput.fontSizeSm": "234afeb47b2c45e04257a1e51a0bcb30f969eb88",
+        "textInput.fontSizeMd": "cad3d0a2b1d71182a6f967350ade086911608a1b",
+        "textInput.fontSizeLg": "777270a12fffce4d925b68c4235655a0fa1a35bc",
+        "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
+        "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
+        "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
+        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
         "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
@@ -5580,7 +5930,8 @@
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
         "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5630,12 +5981,12 @@
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:1",
-      "group": "Mode"
+      "$figmaModeId": "2374:1"
     },
     {
       "id": "5225163677f0b31bef16d0262817737af28ce5a5",
       "name": "rebrandLight",
+      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "rebrand/semantic/color/rebrandLight": "enabled",
@@ -5647,7 +5998,8 @@
         "rebrand/component/FormFieldMessage": "enabled",
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
-        "rebrand/component/Link": "enabled"
+        "rebrand/component/Link": "enabled",
+        "rebrand/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {},
       "$figmaVariableReferences": {
@@ -5682,7 +6034,8 @@
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
         "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -5867,10 +6220,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -5897,6 +6250,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -5905,6 +6263,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -5980,15 +6339,42 @@
         "spinner.spinnerSizeXs": "6dea11d275093db7e7750da73538bf47d0df3033",
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
-        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44"
+        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
+        "textInput.backgroundColor": "e86c17e4bb76dcea1a20600bbc9f380d0218b27f",
+        "textInput.backgroundHoverColor": "436196279cf33508438e07c960e14df703a0b343",
+        "textInput.backgroundReadonlyColor": "421333cdcc9e70b9763cb4e8644655f129dadc88",
+        "textInput.backgroundDisabledColor": "795668c0ce9790c6ef7696e095aa74f574c08f9d",
+        "textInput.borderColor": "d8d77517a821a04709eb0c17f3d2c2f1f3013397",
+        "textInput.borderHoverColor": "934c0bc6a221112deb4cbc86137fdda2297a1908",
+        "textInput.borderReadonlyColor": "b602c5bc0ecd3ae4254ed501dfb51fa668162e4c",
+        "textInput.borderDisabledColor": "010643c6ed7388911c8fd3d0111c57c39961b957",
+        "textInput.errorBorderColor": "2123cb82fafbf9b5daf2af9a83ef556a0f329146",
+        "textInput.errorBorderHoverColor": "b8660058bdaa48cf5197693d57a002957d563d95",
+        "textInput.borderRadius": "6cfbdf4cc633c6c71edae8b780945dd35218535e",
+        "textInput.borderWidth": "6696fa096b1d061aca9f2b2d5b865c8b0d0e4b17",
+        "textInput.textColor": "a2f07f66f93f1986abf1aabe90743a42fa79aa34",
+        "textInput.textHoverColor": "316f6f0cc3d7ca54c6ef650c015825c36ac835b5",
+        "textInput.textReadonlyColor": "1f451ff7838e52f1502a8293d05bd42b7f401061",
+        "textInput.textDisabledColor": "5bab807eb96f40dd6ae65c63148605b98304b410",
+        "textInput.placeholderColor": "e9da1f3199edd0f259d283e522983a9cd5665279",
+        "textInput.fontFamily": "8b330dff73bee9338d25e66f74949a9ab95bf63c",
+        "textInput.fontWeight": "49a6067117133dbe39766a6e7e34e1036279ac92",
+        "textInput.fontSizeSm": "234afeb47b2c45e04257a1e51a0bcb30f969eb88",
+        "textInput.fontSizeMd": "cad3d0a2b1d71182a6f967350ade086911608a1b",
+        "textInput.fontSizeLg": "777270a12fffce4d925b68c4235655a0fa1a35bc",
+        "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
+        "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
+        "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
+        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:2",
-      "group": "Mode"
+      "$figmaModeId": "2374:2"
     },
     {
       "id": "c95dffbad582ae55127659453f1a9195978f1521",
       "name": "rebrandDark",
+      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "rebrand/semantic/color/rebrandDark": "enabled",
@@ -6000,7 +6386,8 @@
         "rebrand/component/FormFieldMessage": "enabled",
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
-        "rebrand/component/Link": "enabled"
+        "rebrand/component/Link": "enabled",
+        "rebrand/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -6049,7 +6436,8 @@
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
         "borderRadius.lg": "0ca1d822fcff6cbf64b31d74be71f8dacc88b30c",
         "borderRadius.xl": "a19a0dba98bd00fbcf5d663ceba4d55d2670231a",
-        "borderRadius.full": "d5f5914fbb4217df6c4fca64e496cc38f1b713ce",
+        "borderRadius.xxl": "e12c099fd27a1d4f29420c7c25647540a0fc01e5",
+        "borderRadius.full": "64676831cefcab2f0e48931d4762c0952cf92a1f",
         "borderRadius.container.sm": "fe6cc1de83ebf2cebfe1ed91fb5141dbb2a6eeee",
         "borderRadius.container.md": "a7af31e205435670c18a58f99ca261624848b00b",
         "borderRadius.container.lg": "c09d3bb79b3f59224a6b16b86eda342fd9335af0",
@@ -6234,10 +6622,10 @@
         "avatar.accent6BackgroundColor": "6ab8508b8d94e16f6c754587b4c213ccfe2f0d5d",
         "avatar.accent6IconColor": "e6f0e9a0be0ccfa00175a82a3bfb75a1475d40f2",
         "avatar.accent6TextColor": "4dd8f62872615e485541a9f6bb581219346b623b",
-        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.aiBottomGradientColor": "35b02d0518b7337d7441a1e4efd3f5ad8a61c6ea",
-        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
+        "avatar.aiTopGradientColor": "60d956948dc49e8157caf3f9fd3e2b41f2e0ca6e",
         "avatar.iconOnColor": "3e0d5700d39b04e71893e61c81b3ae3faf89ef75",
+        "avatar.textOnColor": "4941dd473b6ed517a3fd31a66eca40fc7ddfb4c9",
         "avatar.size2xs": "49a1976ae2c668ebfb314fd4df60f60435bc2b39",
         "avatar.sizeXs": "75f33192a4f2851e702b475aac503a100ec53c9e",
         "avatar.sizeSm": "0d7033e8afec364b056dec302b60893418816a0d",
@@ -6264,6 +6652,11 @@
         "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
+        "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
+        "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
+        "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
+        "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -6272,6 +6665,7 @@
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
+        "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -6347,11 +6741,37 @@
         "spinner.spinnerSizeXs": "6dea11d275093db7e7750da73538bf47d0df3033",
         "spinner.spinnerSizeSm": "f7b53a54b4f458fabca6de7c402b082a5bed0354",
         "spinner.spinnerSizeMd": "dfdca7b96441e44569db352d3585883295306232",
-        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44"
+        "spinner.spinnerSizeLg": "01cccd9dd68fe9e48e794b01a89fbd9c1fa05e44",
+        "textInput.backgroundColor": "e86c17e4bb76dcea1a20600bbc9f380d0218b27f",
+        "textInput.backgroundHoverColor": "436196279cf33508438e07c960e14df703a0b343",
+        "textInput.backgroundReadonlyColor": "421333cdcc9e70b9763cb4e8644655f129dadc88",
+        "textInput.backgroundDisabledColor": "795668c0ce9790c6ef7696e095aa74f574c08f9d",
+        "textInput.borderColor": "d8d77517a821a04709eb0c17f3d2c2f1f3013397",
+        "textInput.borderHoverColor": "934c0bc6a221112deb4cbc86137fdda2297a1908",
+        "textInput.borderReadonlyColor": "b602c5bc0ecd3ae4254ed501dfb51fa668162e4c",
+        "textInput.borderDisabledColor": "010643c6ed7388911c8fd3d0111c57c39961b957",
+        "textInput.errorBorderColor": "2123cb82fafbf9b5daf2af9a83ef556a0f329146",
+        "textInput.errorBorderHoverColor": "b8660058bdaa48cf5197693d57a002957d563d95",
+        "textInput.borderRadius": "6cfbdf4cc633c6c71edae8b780945dd35218535e",
+        "textInput.borderWidth": "6696fa096b1d061aca9f2b2d5b865c8b0d0e4b17",
+        "textInput.textColor": "a2f07f66f93f1986abf1aabe90743a42fa79aa34",
+        "textInput.textHoverColor": "316f6f0cc3d7ca54c6ef650c015825c36ac835b5",
+        "textInput.textReadonlyColor": "1f451ff7838e52f1502a8293d05bd42b7f401061",
+        "textInput.textDisabledColor": "5bab807eb96f40dd6ae65c63148605b98304b410",
+        "textInput.placeholderColor": "e9da1f3199edd0f259d283e522983a9cd5665279",
+        "textInput.fontFamily": "8b330dff73bee9338d25e66f74949a9ab95bf63c",
+        "textInput.fontWeight": "49a6067117133dbe39766a6e7e34e1036279ac92",
+        "textInput.fontSizeSm": "234afeb47b2c45e04257a1e51a0bcb30f969eb88",
+        "textInput.fontSizeMd": "cad3d0a2b1d71182a6f967350ade086911608a1b",
+        "textInput.fontSizeLg": "777270a12fffce4d925b68c4235655a0fa1a35bc",
+        "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
+        "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
+        "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
+        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:3",
-      "group": "Mode"
+      "$figmaModeId": "2374:3"
     }
   ],
   "$metadata": {
@@ -6368,6 +6788,7 @@
       "canvas/component/Metric",
       "canvas/component/Pill",
       "canvas/component/Spinner",
+      "canvas/component/TextInput",
       "rebrand/component/Avatar",
       "rebrand/component/Breadcrumb",
       "rebrand/component/FormFieldLabel",
@@ -6376,6 +6797,7 @@
       "rebrand/component/Metric",
       "rebrand/component/Pill",
       "rebrand/component/Spinner",
+      "rebrand/component/TextInput",
       "rebrand/semantic/layout/default",
       "rebrand/semantic/color/rebrandLight",
       "rebrand/semantic/color/rebrandDark"
