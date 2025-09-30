@@ -361,6 +361,7 @@ const generateStyle = (
           touchAction: 'manipulation',
           // This sets the focus ring's border radius displayed by the `View`
           borderRadius: componentTheme.borderRadius,
+          ...shapeVariants[shape!],
           // Prevents vertical stretching in flex parents with fixed height
           // Avoids background/focus ring distortion
           height: 'fit-content',
