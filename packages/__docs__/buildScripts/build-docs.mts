@@ -27,14 +27,19 @@ import path from 'path'
 import { getClientProps } from './utils/getClientProps.mjs'
 import { processFile } from './processFile.mjs'
 import fs from 'fs'
-import { theme as canvasTheme } from '@instructure/canvas-theme'
-import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
+import {
+  canvas,
+  canvasHighContrast,
+  rebrandDark,
+  rebrandLight
+} from '@instructure/ui-themes'
 import type {
   LibraryOptions,
-  MainDocsData, ProcessedFile
+  MainDocsData,
+  ProcessedFile
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
-import { createRequire } from "module"
+import { createRequire } from 'module'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -101,7 +106,7 @@ const pathsToIgnore = [
   // deprecated packages and modules:
   '**/InputModeListener.ts',
   // regression testing app:
-  '**/regression-test/**',
+  '**/regression-test/**'
 ]
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
@@ -148,7 +153,10 @@ function buildDocs() {
 
       // eslint-disable-next-line no-console
       console.log('Copying icons data...')
-      fs.copyFileSync(projectRoot + '/packages/ui-icons/__build__/icons-data.json', buildDir + 'icons-data.json')
+      fs.copyFileSync(
+        projectRoot + '/packages/ui-icons/__build__/icons-data.json',
+        buildDir + 'icons-data.json'
+      )
 
       // eslint-disable-next-line no-console
       console.log('Finished building documentation data')
@@ -234,12 +242,20 @@ function tryParseReadme(dirName: string) {
 
 function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
-  parsed[canvasTheme.key] = {
-    resource: canvasTheme,
+  parsed[canvas.key] = {
+    resource: canvas,
     requirePath: '@instructure/canvas-theme'
   }
-  parsed[canvasHighContrastTheme.key] = {
-    resource: canvasHighContrastTheme,
+  parsed[canvasHighContrast.key] = {
+    resource: canvasHighContrast,
+    requirePath: '@instructure/canvas-high-contrast-theme'
+  }
+  parsed[rebrandLight.key] = {
+    resource: rebrandLight,
+    requirePath: '@instructure/canvas-high-contrast-theme'
+  }
+  parsed[rebrandDark.key] = {
+    resource: rebrandDark,
     requirePath: '@instructure/canvas-high-contrast-theme'
   }
   return parsed

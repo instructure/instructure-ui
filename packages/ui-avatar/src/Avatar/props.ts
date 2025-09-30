@@ -23,7 +23,6 @@
  */
 
 import { SyntheticEvent } from 'react'
-import PropTypes from 'prop-types'
 
 import type {
   Spacing,
@@ -33,8 +32,7 @@ import type {
 import type {
   AsElementType,
   AvatarTheme,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
 
@@ -52,7 +50,6 @@ type AvatarOwnProps = {
    */
   alt?: string
   size?:
-    | 'auto'
     | 'xx-small'
     | 'x-small'
     | 'small'
@@ -61,13 +58,12 @@ type AvatarOwnProps = {
     | 'x-large'
     | 'xx-large'
   color?:
-    | 'default' // = brand
-    | 'shamrock'
-    | 'barney'
-    | 'crimson'
-    | 'fire'
-    | 'licorice'
-    | 'ash'
+    | 'accent1'
+    | 'accent2'
+    | 'accent3'
+    | 'accent4'
+    | 'accent5'
+    | 'accent6'
     | 'ai'
   /**
    * In inverse color mode the background and text/icon colors are inverted
@@ -78,7 +74,7 @@ type AvatarOwnProps = {
    */
   showBorder?: 'auto' | 'always' | 'never'
   shape?: 'circle' | 'rectangle'
-  display?: 'inline-block' | 'block'
+  display?: 'inline' | 'block'
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -115,44 +111,7 @@ type AvatarProps = AvatarOwnProps &
   WithStyleProps<AvatarTheme, AvatarStyle> &
   OtherHTMLAttributes<AvatarOwnProps>
 
-type AvatarStyle = ComponentStyle<
-  'avatar' | 'initials' | 'loadImage' | 'iconSVG'
->
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  src: PropTypes.string,
-  alt: PropTypes.string,
-  size: PropTypes.oneOf([
-    'auto',
-    'xx-small',
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large'
-  ]),
-  color: PropTypes.oneOf([
-    'default',
-    'shamrock',
-    'barney',
-    'crimson',
-    'fire',
-    'licorice',
-    'ash',
-    'ai'
-  ]),
-  hasInverseColor: PropTypes.bool,
-  showBorder: PropTypes.oneOf(['auto', 'always', 'never']),
-  shape: PropTypes.oneOf(['circle', 'rectangle']),
-  margin: PropTypes.string,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  onImageLoaded: PropTypes.func,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-}
+type AvatarStyle = ComponentStyle<'avatar' | 'image'>
 
 const allowedProps: AllowedPropKeys = [
   'name',
@@ -165,11 +124,9 @@ const allowedProps: AllowedPropKeys = [
   'margin',
   'display',
   'onImageLoaded',
-  'as',
-  'elementRef',
   'renderIcon',
   'showBorder'
 ]
 
 export type { AvatarProps, AvatarStyle }
-export { propTypes, allowedProps }
+export { allowedProps }
