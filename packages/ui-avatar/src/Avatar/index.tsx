@@ -23,15 +23,8 @@
  */
 
 import { useStyle } from '@instructure/emotion'
-import {
-  useState,
-  SyntheticEvent,
-  useEffect,
-  forwardRef,
-  ForwardedRef
-} from 'react'
+import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
-import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import type { AvatarProps } from './props'
 
@@ -43,28 +36,22 @@ import generateComponentTheme from './theme'
 category: components
 ---
 **/
-const Avatar = forwardRef(
-  (
-    {
+const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
+  (props: AvatarProps, ref) => {
+    const {
       size = 'medium',
-      color = 'default',
+      color = 'accent1',
       hasInverseColor = false,
       showBorder = 'auto',
       shape = 'circle',
-      display = 'inline-block',
+      display = 'inline',
       onImageLoaded = (_event: SyntheticEvent) => {},
       src,
       name,
       renderIcon,
       alt,
-      as,
-      margin,
-      themeOverride,
-      elementRef,
-      ...rest
-    }: AvatarProps,
-    ref: ForwardedRef<View>
-  ) => {
+      themeOverride
+    } = props
     const [loaded, setLoaded] = useState(false)
 
     const styles = useStyle({
@@ -78,7 +65,8 @@ const Avatar = forwardRef(
         shape,
         src,
         showBorder,
-        themeOverride
+        themeOverride,
+        display
       },
       componentId: 'Avatar',
       displayName: 'Avatar'
@@ -92,13 +80,10 @@ const Avatar = forwardRef(
     }, [loaded, src])
 
     const makeInitialsFromName = () => {
-      if (!name || typeof name !== 'string') {
+      if (!name || typeof name !== 'string' || name.trim().length === 0) {
         return
       }
       const currentName = name.trim()
-      if (currentName.length === 0) {
-        return
-      }
 
       if (currentName.match(/\s+/)) {
         const names = currentName.split(/\s+/)
@@ -108,65 +93,64 @@ const Avatar = forwardRef(
       }
     }
 
-    const handleImageLoaded = (event: SyntheticEvent) => {
-      setLoaded(true)
-      onImageLoaded(event)
+    const renderInitials = () => {
+      return <span aria-hidden="true">{makeInitialsFromName()}</span>
     }
 
-    const renderInitials = () => {
-      return (
-        <span css={styles?.initials} aria-hidden="true">
-          {makeInitialsFromName()}
-        </span>
-      )
-    }
+    const renderImage = () => (
+      <img
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          ...(loaded ? {} : { display: 'none' })
+        }}
+        src={src}
+        alt={alt ? alt : ''}
+        onLoad={(event: SyntheticEvent) => {
+          setLoaded(true)
+          onImageLoaded(event)
+        }}
+      />
+    )
 
     const renderContent = () => {
-      if (!renderIcon) {
-        return renderInitials()
+      //image in avatar - prioritize image over icon
+      if (src) {
+        return (
+          <>
+            {renderImage()}
+            {loaded ? null : renderInitials()}
+          </>
+        )
       }
 
-      return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
+      //icon in avatar
+      //TODO-REWORK make the icon inherit the size prop of the Avatar when the icons have it
+      if (renderIcon) {
+        return callRenderProp(renderIcon)
+      }
+
+      //initials in avatar
+      return renderInitials()
     }
 
     return (
-      <View
-        {...passthroughProps({
-          size,
-          color,
-          hasInverseColor,
-          showBorder,
-          shape,
-          display,
-          src,
-          name,
-          renderIcon,
-          alt,
-          as,
-          margin,
-          ...rest
-        })}
+      <div
+        {...passthroughProps({ ...props })}
         ref={ref}
         aria-label={alt ? alt : undefined}
         role={alt ? 'img' : undefined}
-        as={as}
-        elementRef={elementRef}
-        margin={margin}
         css={styles?.avatar}
-        display={display}
       >
-        <img // This is visually hidden and is here for loading purposes only
-          src={src}
-          css={styles?.loadImage}
-          alt={alt}
-          onLoad={handleImageLoaded}
-          aria-hidden="true"
-        />
-        {!loaded && renderContent()}
-      </View>
+        {renderContent()}
+      </div>
     )
   }
 )
+
+Avatar.displayName = 'Avatar'
 
 export default Avatar
 export { Avatar }
