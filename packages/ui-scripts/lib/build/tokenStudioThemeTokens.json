@@ -1268,15 +1268,15 @@
           },
           "secondary": {
             "base": {
-              "value": "{color.grey.grey70}",
+              "value": "{color.grey.grey10}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.grey.grey60}",
+              "value": "{color.grey.grey20}",
               "type": "color"
             },
             "active": {
-              "value": "{color.grey.grey80}",
+              "value": "{color.grey.grey20}",
               "type": "color"
             }
           },
