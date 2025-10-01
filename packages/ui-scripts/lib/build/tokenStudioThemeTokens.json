@@ -2489,6 +2489,14 @@
         "value": "{color.background.interactive.primary.base}",
         "type": "color"
       },
+      "primaryHoverBackgroundColor": {
+        "value": "{color.background.interactive.primary.hover}",
+        "type": "color"
+      },
+      "primaryActiveBackgroundColor": {
+        "value": "{color.background.interactive.primary.active}",
+        "type": "color"
+      },
       "secondaryBackgroundColor": {
         "value": "{color.background.interactive.secondary.base}",
         "type": "color"
