@@ -29,11 +29,10 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { SVGIcon } from '@instructure/ui-svg-images'
 
 import { IconButton } from '@instructure/ui-buttons'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CodeSandboxButtonProps } from './props'
 
 class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     options: {},
@@ -132,14 +131,14 @@ import 'moment/min/locales'
     const dependencies = JSON.stringify(
       {
         dependencies: {
-          '@instructure/debounce': '^10',
-          '@instructure/ui': '^10',
-          '@instructure/ui-icons': '^10',
+          '@instructure/debounce': '^11',
+          '@instructure/ui': '^11',
+          '@instructure/ui-icons': '^11',
           'lorem-ipsum': '^2.0.8',
-          react: '18.2.0',
-          'react-dom': '18.2.0',
+          react: '18.3.1',
+          'react-dom': '18.3.1',
           'react-scripts': '5.0.1',
-          moment: '^2.23.0',
+          moment: '^2.30.1',
           'svg-inline-loader': '0.8.2'
         }
       },

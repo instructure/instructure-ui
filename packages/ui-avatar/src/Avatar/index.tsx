@@ -177,5 +177,8 @@ const Avatar = forwardRef(
 )
 Avatar.displayName = 'Avatar'
 
+// TODO - why is this needed?
+Avatar.displayName = 'Avatar'
+
 export default Avatar
 export { Avatar }

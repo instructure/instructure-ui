@@ -28,7 +28,6 @@ import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -38,7 +37,7 @@ import type { CloseButtonProps } from '@instructure/ui-buttons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ModalHeaderProps, ModalHeaderStyleProps } from './props'
 
 type CloseButtonChild = ComponentElement<CloseButtonProps, CloseButton>
@@ -50,11 +49,9 @@ id: Modal.Header
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ModalHeader extends Component<ModalHeaderProps> {
   static readonly componentId = 'Modal.Header'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     variant: 'default',
@@ -104,6 +101,7 @@ class ModalHeader extends Component<ModalHeaderProps> {
         css={this.props.styles?.modalHeader}
         {...passthroughProps(rest)}
         ref={this.handleRef}
+        data-cid="ModalHeader"
       >
         {children}
       </div>

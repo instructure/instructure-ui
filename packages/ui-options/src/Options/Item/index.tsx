@@ -30,14 +30,13 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { OptionsItemProps, OptionsItemStyle } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -47,12 +46,10 @@ id: Options.Item
 **/
 @withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class Item extends Component<OptionsItemProps> {
   static readonly componentId = 'Options.Item'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',
@@ -138,6 +135,7 @@ class Item extends Component<OptionsItemProps> {
     return (
       <ElementType
         role={voiceoverRoleBugWorkaround ? role : 'none'}
+        data-cid="Options.Item"
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element

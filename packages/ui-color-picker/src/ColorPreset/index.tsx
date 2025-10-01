@@ -26,7 +26,6 @@ import { Component } from 'react'
 
 import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import conversions from '@instructure/ui-color-utils'
 
 import { IconButton, Button } from '@instructure/ui-buttons'
@@ -46,7 +45,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -54,9 +53,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorPreset'
 
@@ -348,6 +345,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         {...omitProps(this.props, ColorPreset.allowedProps)}
         ref={this.handleRef}
         css={styles?.colorPreset}
+        data-cid="ColorPreset"
       >
         {label && (
           <div css={styles?.label}>

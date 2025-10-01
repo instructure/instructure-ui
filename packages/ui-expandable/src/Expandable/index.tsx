@@ -24,7 +24,7 @@
 import { Component } from 'react'
 import { createChainedFunction } from '@instructure/ui-utils'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { ExpandableProps, ExpandableState } from './props'
 import type { ViewProps } from '@instructure/ui-view'
 
@@ -41,7 +41,6 @@ category: components/utilities
 **/
 @withDeterministicId()
 class Expandable extends Component<ExpandableProps, ExpandableState> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     defaultExpanded: false

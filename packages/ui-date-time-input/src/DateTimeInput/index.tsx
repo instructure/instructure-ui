@@ -31,7 +31,6 @@ import type { FormMessage } from '@instructure/ui-form-field'
 import { DateInput } from '@instructure/ui-date-input'
 import { TimeSelect } from '@instructure/ui-time-select'
 import { Calendar } from '@instructure/ui-calendar'
-import { testable } from '@instructure/ui-testable'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { IconButton } from '@instructure/ui-buttons'
 import {
@@ -39,7 +38,7 @@ import {
   IconArrowOpenStartSolid
 } from '@instructure/ui-icons'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import { error } from '@instructure/console'
 
 /**
@@ -47,11 +46,9 @@ import { error } from '@instructure/console'
 category: components
 ---
 **/
-@testable()
 class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   // extra verbose localized date and time
   private static readonly DEFAULT_MESSAGE_FORMAT = 'LLLL'
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     layout: 'inline',
@@ -591,6 +588,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           ...(showMessages && this.state.message ? [this.state.message] : []),
           ...(messages || [])
         ]}
+        data-cid="DateTimeInput"
       >
         <DateInput
           display="block"

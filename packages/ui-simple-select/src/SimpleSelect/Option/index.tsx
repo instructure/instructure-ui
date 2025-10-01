@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import type { SimpleSelectOptionProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -36,7 +36,6 @@ class Option extends Component<SimpleSelectOptionProps> {
   static readonly componentId = 'SimpleSelect.Option'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
   static defaultProps = {
     isDisabled: false
   }

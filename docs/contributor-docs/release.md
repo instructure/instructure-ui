@@ -152,7 +152,11 @@ git push origin release
 
 Major version updates are very similar to minor updates but there are a couple additinal things to take care of.
 
-##### 1. Create a maintenance branch
+##### 1. Write an upgrade guide
+
+Update `upgrade-guide.md` with the new major version and the breaking changes.
+
+##### 2. Create a maintenance branch
 
 Before the update, create a maintenance branch from the current master and push it to remote. If the current major version is 11, then:
 
@@ -164,17 +168,16 @@ git checkout -b v11_maintenance
 git push origin v11_maintenance
 ```
 
-##### 2. Update the version mapping for the docs
+##### 3. Update the version mapping for the docs
 
 Update the fields in the file `./packages/__docs__/versions.json` with the latest version and the maintenance branch map. Remove old unsupported versions if they are no longer needed and you don't want them to appear in the docs page version selector.
 
-##### 3. Update version references in the docs app
+##### 4. Update version references in the docs app
 
 1. In `docs/getting-started/usage.md` update the version in the code snippet for `package.json`
-2. In `packages/__docs__/src/Hero/index.tsx` update the url and title of the Upgrade Guide button
-3. In `packages/__docs__/src/Hero/index.tsx` update the url and title of the Upgrade Guide link in the "What's new?" section
-4. In `packages/__docs__/src/CodeSandboxButton/index.tsx` update the `@instructure/` dependencies to the latest version
+2. In `packages/__docs__/src/Hero/index.tsx` update title of the Upgrade Guide button
+3. In `packages/__docs__/src/CodeSandboxButton/index.tsx` update the `@instructure/` dependencies to the latest version
 
-##### 4. Do a release like it was a minor update
+##### 5. Do a release like it was a minor update
 
 Follow the same process as it's described above. The `npm run bump` command should automatically recognise that there were a breaking commit and it should be a major version change.

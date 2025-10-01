@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
   MainIconsData,
@@ -41,9 +40,6 @@ type PropKeys = keyof AppOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type AppProps = AppOwnProps & WithStyleProps<AppTheme, AppStyle>
 
-const propTypes = {
-  trayWidth: PropTypes.number
-}
 const allowedProps: AllowedPropKeys = ['trayWidth']
 
 type AppStyle = ComponentStyle<
@@ -115,4 +111,4 @@ type DocData = ProcessedFile & {
 }
 
 export type { AppProps, AppState, DocData, LayoutSize, AppStyle, AppTheme }
-export { propTypes, allowedProps }
+export { allowedProps }

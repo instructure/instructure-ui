@@ -4,22 +4,6 @@ describes: CodeEditor
 
 A wrapper around the popular [CodeMirror](https://codemirror.net/) code editor component. CodeMirror provides a text input field with features like line gutters, syntax highlighting, and autocompletion.
 
-```javascript
----
-type: embed
----
-<ToggleBlockquote
-  summary="Upgrade from CodeEditor!"
->
-  <ToggleBlockquote.Paragraph>
-    If you are currently using our <Link href="/#CodeEditor">CodeEditor</Link> component, we suggest upgrading to SourceCodeEditor, because it has many more features and is way more accessible.
-  </ToggleBlockquote.Paragraph>
-  <ToggleBlockquote.Paragraph>
-    See the <Link href="/#CodeEditor/#migration-guide">migration guide</Link> at the bottom of the CodeEditor docs page for more info.
-  </ToggleBlockquote.Paragraph>
-</ToggleBlockquote>
-```
-
 ### Built-in features
 
 SourceCodeEditor has a lot of built-in features that makes editing code easier.

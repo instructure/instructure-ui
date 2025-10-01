@@ -22,19 +22,13 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children, controllable } from '@instructure/ui-prop-types'
-
-import { Page } from './Page'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { PropValidators, PagesTheme } from '@instructure/shared-types'
+import type { PagesTheme } from '@instructure/shared-types'
 import type { PagesContextType } from './PagesContext'
 
 type PagesOwnProps = {
@@ -76,19 +70,6 @@ type PagesStyle = ComponentStyle<'pages'>
 type PagesState = {
   history: PagesContextType['history']
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  children: Children.oneOf([Page]),
-  defaultPageIndex: PropTypes.number,
-  activePageIndex: controllable(
-    PropTypes.number,
-    'onPageIndexChange',
-    'defaultPageIndex'
-  ),
-  onPageIndexChange: PropTypes.func,
-  margin: PropTypes.string
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'defaultPageIndex',
@@ -98,4 +79,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PagesProps, PagesState, PagesStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

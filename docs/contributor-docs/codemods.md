@@ -70,8 +70,8 @@ We support testing these warnings using special fixtures and a console.warn spy.
    ---
    <MyComponent deprecatedProp="value" />
    ```
-3. Create new sample output file with the array of expected warning messages in the `__testfixtures__` folder, filename follows the following naming convention: `[fixtureName].warning.output.[js/ts/tsx]`:
-   ```ts
+3. Create new sample output file with the array of expected warning messages in the `__testfixtures__` folder, filename follows the following naming convention: `[fixtureName].warning.output.json`:
+   ```json
    ---
    type: code
    ---

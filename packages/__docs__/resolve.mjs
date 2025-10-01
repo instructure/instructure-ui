@@ -46,10 +46,6 @@ const alias = {
   '@instructure/ui-byline$': path.resolve(import.meta.dirname, '../ui-byline/src/'),
   '@instructure/ui-calendar$': path.resolve(import.meta.dirname, '../ui-calendar/src/'),
   '@instructure/ui-checkbox$': path.resolve(import.meta.dirname, '../ui-checkbox/src/'),
-  '@instructure/ui-code-editor$': path.resolve(
-    import.meta.dirname,
-    '../ui-code-editor/src/'
-  ),
   '@instructure/ui-color-picker$': path.resolve(
     import.meta.dirname,
     '../ui-color-picker/src/'
@@ -169,7 +165,6 @@ const alias = {
   '@instructure/ui-table$': path.resolve(import.meta.dirname, '../ui-table/src/'),
   '@instructure/ui-tabs$': path.resolve(import.meta.dirname, '../ui-tabs/src/'),
   '@instructure/ui-tag$': path.resolve(import.meta.dirname, '../ui-tag/src/'),
-  '@instructure/ui-testable$': path.resolve(import.meta.dirname, '../ui-testable/src/'),
   '@instructure/ui-text$': path.resolve(import.meta.dirname, '../ui-text/src/'),
   '@instructure/ui-time-select$': path.resolve(
     import.meta.dirname,
@@ -224,11 +219,7 @@ const alias = {
     '../ui-file-drop/src/'
   ),
   '@instructure/ui-heading$': path.resolve(import.meta.dirname, '../ui-heading/src/'),
-  '@instructure/emotion$': path.resolve(import.meta.dirname, '../emotion/src/'),
-  '@instructure/theme-registry$': path.resolve(
-    import.meta.dirname,
-    '../theme-registry/src/'
-  )
+  '@instructure/emotion$': path.resolve(import.meta.dirname, '../emotion/src/')
 }
 
 export default { alias }

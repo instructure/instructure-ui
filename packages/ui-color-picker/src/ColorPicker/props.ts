@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   WithStyleProps,
@@ -33,8 +31,7 @@ import type {
 } from '@instructure/emotion'
 import type {
   ColorPickerTheme,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 type ContrastStrength = 'min' | 'mid' | 'max'
 
@@ -271,70 +268,6 @@ type ColorPickerStyle = ComponentStyle<
   | 'popoverContentContainer'
   | 'colorMixerButtonWrapper'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  checkContrast: PropTypes.shape({
-    isStrict: PropTypes.bool,
-    contrastStrength: PropTypes.oneOf(['min', 'mid', 'max']),
-    contrastAgainst: PropTypes.string,
-    renderContrastSuccessMessage: PropTypes.func,
-    renderContrastErrorMessage: PropTypes.func
-  }),
-  colorMixerSettings: PropTypes.shape({
-    popoverAddButtonLabel: PropTypes.string.isRequired,
-    popoverCloseButtonLabel: PropTypes.string.isRequired,
-    colorMixer: PropTypes.shape({
-      withAlpha: PropTypes.bool,
-      rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
-      rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
-      rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
-      rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
-      colorSliderNavigationExplanationScreenReaderLabel:
-        PropTypes.string.isRequired,
-      alphaSliderNavigationExplanationScreenReaderLabel:
-        PropTypes.string.isRequired,
-      colorPaletteNavigationExplanationScreenReaderLabel:
-        PropTypes.string.isRequired
-    }),
-    colorPreset: PropTypes.shape({
-      colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-      label: PropTypes.string.isRequired
-    }),
-    colorContrast: PropTypes.shape({
-      firstColor: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      successLabel: PropTypes.string.isRequired,
-      failureLabel: PropTypes.string.isRequired,
-      normalTextLabel: PropTypes.string.isRequired,
-      largeTextLabel: PropTypes.string.isRequired,
-      graphicsTextLabel: PropTypes.string.isRequired,
-      firstColorLabel: PropTypes.string.isRequired,
-      secondColorLabel: PropTypes.string.isRequired,
-      onContrastChange: PropTypes.func
-    })
-  }),
-  children: PropTypes.func,
-  disabled: PropTypes.bool,
-  elementRef: PropTypes.func,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node.isRequired,
-  onChange: PropTypes.func,
-  placeholderText: PropTypes.string,
-  popoverScreenReaderLabel: PropTypes.string,
-  popoverButtonScreenReaderLabel: PropTypes.string,
-  popoverMaxHeight: PropTypes.string,
-  renderInvalidColorMessage: PropTypes.func,
-  renderIsRequiredMessage: PropTypes.func,
-  renderMessages: PropTypes.func,
-  tooltip: PropTypes.node,
-  id: PropTypes.string,
-  value: PropTypes.string,
-  width: PropTypes.string,
-  withAlpha: PropTypes.bool,
-  margin: PropTypes.string,
-  inputRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'checkContrast',
@@ -366,4 +299,4 @@ export type {
   ColorPickerState,
   ContrastStrength
 }
-export { propTypes, allowedProps }
+export { allowedProps }

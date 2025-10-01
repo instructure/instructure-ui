@@ -23,14 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   TrayTheme,
   LiveRegion,
   UIElement
@@ -175,43 +170,6 @@ type TrayProps = TrayOwnProps &
   OtherHTMLAttributes<TrayOwnProps>
 
 type TrayStyle = ComponentStyle<'tray' | 'content'>
-
-const propTypes: PropValidators<PropKeys> = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node,
-  size: PropTypes.oneOf(['x-small', 'small', 'regular', 'medium', 'large']),
-  placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end', 'center']),
-  open: PropTypes.bool,
-  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  contentRef: PropTypes.func,
-  shouldContainFocus: PropTypes.bool,
-  shouldReturnFocus: PropTypes.bool,
-  shouldCloseOnDocumentClick: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  onDismiss: PropTypes.func,
-  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  insertAt: PropTypes.oneOf(['bottom', 'top']),
-  liveRegion: PropTypes.oneOfType([
-    element,
-    PropTypes.arrayOf(element),
-    PropTypes.func
-  ]),
-  onTransition: PropTypes.func,
-  onEnter: PropTypes.func,
-  onEntering: PropTypes.func,
-  onEntered: PropTypes.func,
-  onExit: PropTypes.func,
-  onExiting: PropTypes.func,
-  onExited: PropTypes.func,
-  transitionOnMount: PropTypes.bool,
-  transitionEnter: PropTypes.bool,
-  transitionExit: PropTypes.bool,
-  border: PropTypes.bool,
-  shadow: PropTypes.bool,
-  enableMask: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'label',
   'children',
@@ -245,4 +203,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 type TrayState = { transitioning: boolean; open: boolean }
 export type { TrayProps, TrayStyle, TrayState }
-export { propTypes, allowedProps }
+export { allowedProps }

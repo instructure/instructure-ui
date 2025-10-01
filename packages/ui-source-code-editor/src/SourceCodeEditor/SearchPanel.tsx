@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { version, useState } from 'react'
+import { useState } from 'react'
 import {
   setSearchQuery,
   search,
@@ -39,8 +39,7 @@ import {
   IconArrowOpenUpLine,
   IconSearchLine
 } from '@instructure/ui-icons'
-
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
 export type SearchConfig = {
   placeholder: string
@@ -99,7 +98,7 @@ function SearchPanel({
   return (
     <TextInput
       renderLabel=""
-      inputRef={(r) => {
+      inputRef={(r: HTMLInputElement | null) => {
         setTimeout(() => r?.focus(), 0)
       }}
       size="small"
@@ -142,27 +141,8 @@ export default function customSearch(searchConfig: SearchConfig | undefined) {
         createPanel: (view) => {
           const dom = document.createElement('div')
           dom.style.padding = '8px'
-          const reactVersionMajor = Number(version.split('.')[0])
-          if (reactVersionMajor >= 18) {
-            const module = 'react-dom/client'
-            // webpack tries to evaluate imports compile time which would lead to an error on older react versions
-            // Vite errors out during build in React v16/17
-            import(/* webpackIgnore: true */ /* @vite-ignore */ module)
-              .then((r) => {
-                const root = r.createRoot(dom)
-                root.render(
-                  <SearchPanel view={view} searchConfig={searchConfig} />
-                )
-              })
-              .catch((e) => {
-                console.error(e)
-              })
-          } else {
-            ReactDOM.render(
-              <SearchPanel view={view} searchConfig={searchConfig} />,
-              dom
-            )
-          }
+          const root = createRoot(dom)
+          root.render(<SearchPanel view={view} searchConfig={searchConfig} />)
           return { dom }
         }
       })

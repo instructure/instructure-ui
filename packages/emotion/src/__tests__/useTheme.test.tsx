@@ -24,19 +24,12 @@
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import {
-  canvas,
-  canvasHighContrast,
-  canvasThemeLocal
-} from '@instructure/ui-themes'
-import { ThemeRegistry } from '@instructure/theme-registry'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import '@testing-library/jest-dom'
 
 import { useTheme } from '../useTheme'
 import { InstUISettingsProvider } from '../InstUISettingsProvider'
 import type { ThemeOrOverride } from '../EmotionTypes'
-
-const defaultRegistry = ThemeRegistry.getRegistry()
 
 type Props = {
   callback(theme: ThemeOrOverride): void
@@ -55,8 +48,6 @@ describe('useTheme hook', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    ThemeRegistry.clearRegistry()
-
     // Mocking console to prevent test output pollution and expect for messages
     consoleWarningMock = vi
       .spyOn(console, 'warn')
@@ -67,9 +58,6 @@ describe('useTheme hook', () => {
   })
 
   afterEach(() => {
-    //this is needed to not mess up the global Theme Registry
-    ThemeRegistry.setRegistry(defaultRegistry)
-
     consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
   })
@@ -86,43 +74,23 @@ describe('useTheme hook', () => {
       expect(callback).toHaveBeenCalledWith(canvas)
     })
 
-    it('should use global theme when no "theme" is provided', async () => {
+    it('should default to canvas theme when no theme is provided', async () => {
       const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use()
-
       render(
         <InstUISettingsProvider>
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
       )
-
-      expect(callback).toHaveBeenCalledWith(theme)
-    })
-
-    it('should default to canvas theme when no global theme is available and no theme is provided', async () => {
-      const callback = vi.fn()
-
-      render(
-        <InstUISettingsProvider>
-          <ExampleComponent callback={callback}></ExampleComponent>
-        </InstUISettingsProvider>
-      )
-
       expect(callback).toHaveBeenCalledWith(canvas)
     })
 
     it('should use provided theme when theme is provided', async () => {
       const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvas)
-      theme.use()
-
       render(
         <InstUISettingsProvider theme={canvasHighContrast}>
           <ExampleComponent callback={callback}></ExampleComponent>
         </InstUISettingsProvider>
       )
-
       expect(callback).toHaveBeenCalledWith(canvasHighContrast)
     })
 
@@ -153,74 +121,8 @@ describe('useTheme hook', () => {
       )
     })
 
-    it('should override the global theme if that is the only theme available', async () => {
-      const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use()
-
-      render(
-        <InstUISettingsProvider
-          theme={{
-            colors: {
-              primitives: {
-                white: 'red'
-              }
-            }
-          }}
-        >
-          <ExampleComponent callback={callback}></ExampleComponent>
-        </InstUISettingsProvider>
-      )
-
-      expect(callback).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...theme,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              white: 'red'
-            })
-          })
-        })
-      )
-    })
-
-    it('should override the global theme with the "themeOverrides" option if that is the only theme available', async () => {
-      const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use()
-
-      render(
-        <InstUISettingsProvider
-          theme={{
-            themeOverrides: {
-              colors: {
-                primitives: {
-                  white: 'red'
-                }
-              }
-            }
-          }}
-        >
-          <ExampleComponent callback={callback}></ExampleComponent>
-        </InstUISettingsProvider>
-      )
-
-      expect(callback).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...theme,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              white: 'red'
-            })
-          })
-        })
-      )
-    })
-
     it('should override the theme from context when provided', async () => {
       const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use()
 
       render(
         <InstUISettingsProvider theme={canvasHighContrast}>
@@ -252,12 +154,10 @@ describe('useTheme hook', () => {
       )
     })
 
-    it('should use local themes correctly', async () => {
+    it('should use theme overrides correctly', async () => {
       const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvas)
-      theme.use()
       render(
-        <InstUISettingsProvider theme={canvasThemeLocal}>
+        <InstUISettingsProvider theme={canvas}>
           <InstUISettingsProvider
             theme={{
               themeOverrides: {
@@ -276,7 +176,7 @@ describe('useTheme hook', () => {
 
       expect(callback).toHaveBeenCalledWith(
         expect.objectContaining({
-          ...canvasThemeLocal,
+          ...canvas,
           colors: expect.objectContaining({
             primitives: expect.objectContaining({
               white: 'red'
@@ -288,114 +188,47 @@ describe('useTheme hook', () => {
   })
 
   describe('without using InstUISettingsProvider', () => {
-    it('should use theme from global ThemeRegistry', async () => {
-      const callback = vi.fn()
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use()
-
-      render(<ExampleComponent callback={callback}></ExampleComponent>)
-
-      expect(callback).toHaveBeenCalledWith(theme)
-    })
-
-    it('should use default "canvas" theme when no theme is used from ThemeRegistry', async () => {
+    it('should use default "canvas" theme when no theme is provided', async () => {
       const callback = vi.fn()
       render(<ExampleComponent callback={callback}></ExampleComponent>)
-
       expect(callback).toHaveBeenCalledWith(canvas)
     })
   })
 
-  describe('with InstUISettingsProvider and global theme', () => {
-    it('overrides should work correctly', async () => {
-      const [cb1, cb2, cb3, cb4, cb5, cb6] = Array(6)
+  describe('with InstUISettingsProvider', () => {
+    it('theme overrides should work correctly', async () => {
+      const [cb2, cb4] = Array(2)
         .fill(0)
         .map(() => vi.fn())
-
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use({
-        overrides: {
-          colors: {
-            primitives: {
-              red12: 'red',
-              green12: 'yellow',
-              blue12: 'magenta'
-            }
-          }
-        }
-      })
-
       render(
         <>
-          {/* no provider -> canvasHighContrast theme */}
-          <ExampleComponent callback={cb1}></ExampleComponent>
-          <InstUISettingsProvider theme={canvasHighContrast}>
-            {/* theme provided -> canvasHighContrast */}
+          <InstUISettingsProvider theme={canvas}>
+            {/* theme provided -> canvas */}
             <ExampleComponent callback={cb2}></ExampleComponent>
-            <InstUISettingsProvider theme={canvas}>
-              {/* theme provided -> canvas theme */}
-              <ExampleComponent callback={cb3}></ExampleComponent>
-              <InstUISettingsProvider
-                theme={{
-                  colors: {
-                    primitives: {
-                      red12: 'orange'
-                    }
-                  },
-                  themeOverrides: {
-                    colors: {
-                      primitives: {
-                        green12: 'olive'
-                      }
-                    }
-                  }
-                }}
-              >
-                {/* theme provided -> canvas theme with overrides */}
-                <ExampleComponent callback={cb4}></ExampleComponent>
-              </InstUISettingsProvider>
-            </InstUISettingsProvider>
-          </InstUISettingsProvider>
-          <InstUISettingsProvider>
-            {/* no theme provided -> canvasHighContrast theme */}
-            <ExampleComponent callback={cb5}></ExampleComponent>
             <InstUISettingsProvider
               theme={{
                 colors: {
                   primitives: {
-                    red12: 'brown'
+                    red12: 'orange'
                   }
                 },
                 themeOverrides: {
                   colors: {
                     primitives: {
-                      green12: 'pink'
+                      green12: 'olive'
                     }
                   }
                 }
               }}
             >
-              {/* no theme provided -> canvasHighContrast theme with overrides */}
-              <ExampleComponent callback={cb6}></ExampleComponent>
+              {/* theme provided -> canvas theme with overrides */}
+              <ExampleComponent callback={cb4}></ExampleComponent>
             </InstUISettingsProvider>
           </InstUISettingsProvider>
         </>
       )
 
-      expect(cb1).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...theme,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              red12: 'red',
-              green12: 'yellow',
-              blue12: 'magenta'
-            })
-          })
-        })
-      )
-      expect(cb2).toHaveBeenCalledWith(canvasHighContrast)
-      expect(cb3).toHaveBeenCalledWith(canvas)
+      expect(cb2).toHaveBeenCalledWith(canvas)
       expect(cb4).toHaveBeenCalledWith(
         expect.objectContaining({
           ...canvas,
@@ -407,157 +240,6 @@ describe('useTheme hook', () => {
           })
         })
       )
-      expect(cb5).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...theme,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              red12: 'red',
-              green12: 'yellow',
-              blue12: 'magenta'
-            })
-          })
-        })
-      )
-      expect(cb6).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...theme,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              red12: 'brown',
-              green12: 'pink',
-              blue12: 'magenta'
-            })
-          })
-        })
-      )
     })
-
-    it('local themes should work correctly', async () => {
-      const [cb1, cb2, cb3, cb4] = Array(6)
-        .fill(0)
-        .map(() => vi.fn())
-
-      const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-      theme.use({
-        overrides: {
-          colors: {
-            primitives: {
-              red12: 'red',
-              green12: 'yellow',
-              blue12: 'magenta'
-            }
-          }
-        }
-      })
-
-      render(
-        <>
-          {/* no provider -> canvasHighContrast theme */}
-          <ExampleComponent callback={cb1}></ExampleComponent>
-          <InstUISettingsProvider theme={canvas}>
-            {/* theme provided -> canvas */}
-            <ExampleComponent callback={cb2}></ExampleComponent>
-            <InstUISettingsProvider theme={canvasThemeLocal}>
-              {/* theme provided -> canvasThemeLocal theme */}
-              <ExampleComponent callback={cb3}></ExampleComponent>
-              <InstUISettingsProvider
-                theme={{
-                  colors: {
-                    primitives: {
-                      red12: 'orange'
-                    }
-                  },
-                  themeOverrides: {
-                    colors: {
-                      primitives: {
-                        green12: 'olive'
-                      }
-                    }
-                  }
-                }}
-              >
-                {/* theme provided -> canvas theme with overrides */}
-                <ExampleComponent callback={cb4}></ExampleComponent>
-              </InstUISettingsProvider>
-            </InstUISettingsProvider>
-          </InstUISettingsProvider>
-        </>
-      )
-
-      expect(cb1).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...theme,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              red12: 'red',
-              green12: 'yellow',
-              blue12: 'magenta'
-            })
-          })
-        })
-      )
-
-      expect(cb2).toHaveBeenCalledWith(canvas)
-      expect(cb3).toHaveBeenCalledWith(canvasThemeLocal)
-      expect(cb4).toHaveBeenCalledWith(
-        expect.objectContaining({
-          ...canvasThemeLocal,
-          colors: expect.objectContaining({
-            primitives: expect.objectContaining({
-              red12: 'orange',
-              green12: 'olive'
-            })
-          })
-        })
-      )
-    })
-  })
-
-  it('should work correctly when multiple React trees is used', async () => {
-    const callback1 = vi.fn()
-    const callback2 = vi.fn()
-
-    const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-    theme.use()
-
-    //first react tree
-    render(<ExampleComponent callback={callback1}></ExampleComponent>)
-
-    //second react tree
-    render(<ExampleComponent callback={callback2}></ExampleComponent>)
-
-    expect(callback1).toHaveBeenCalledWith(theme)
-    expect(callback2).toHaveBeenCalledWith(theme)
-  })
-
-  it('should work correctly when multiple React trees is used together with InstUISettingsProvider', async () => {
-    const callback1 = vi.fn()
-    const callback2 = vi.fn()
-    const callback3 = vi.fn()
-
-    const theme = ThemeRegistry.registerTheme(canvasHighContrast)
-    theme.use()
-
-    //first react tree
-    render(<ExampleComponent callback={callback1}></ExampleComponent>)
-
-    //second react tree
-    render(
-      <InstUISettingsProvider>
-        <ExampleComponent callback={callback2}></ExampleComponent>
-      </InstUISettingsProvider>
-    )
-
-    //third react tree
-    render(
-      <InstUISettingsProvider theme={canvasHighContrast}>
-        <ExampleComponent callback={callback3}></ExampleComponent>
-      </InstUISettingsProvider>
-    )
-
-    expect(callback1).toHaveBeenCalledWith(theme)
-    expect(callback2).toHaveBeenCalledWith(theme)
-    expect(callback3).toHaveBeenCalledWith(canvasHighContrast)
   })
 })

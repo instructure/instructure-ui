@@ -23,7 +23,6 @@
     { "path": "../ui-popover/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-scripts/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-text/tsconfig.build.json" },
     { "path": "../ui-text-input/tsconfig.build.json" },
     { "path": "../ui-tooltip/tsconfig.build.json" },

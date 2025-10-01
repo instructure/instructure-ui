@@ -32,7 +32,6 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { MenuItem } from '../MenuItem'
 import type { OnMenuItemSelect, MenuItemProps } from '../MenuItem/props'
@@ -42,7 +41,7 @@ import type { MenuSeparatorProps } from '../MenuItemSeparator/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
 
 type MenuItemChild = ComponentElement<MenuItemProps, MenuItem>
@@ -59,11 +58,9 @@ id: Menu.Group
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   static readonly componentId = 'Menu.Group'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
@@ -231,6 +228,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
         {...props}
         css={this.props.styles?.menuItemGroup}
         ref={this.handleRef}
+        data-cid="MenuItemGroup"
       >
         {this.renderLabel()}
         <div

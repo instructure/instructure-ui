@@ -25,7 +25,6 @@
 import { ComponentElement, Fragment, Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
-import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -44,7 +43,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
 
@@ -55,7 +54,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
   RadioInputGroupState
@@ -63,7 +61,6 @@ class RadioInputGroup extends Component<
   static readonly componentId = 'RadioInputGroup'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     disabled: false,
@@ -192,6 +189,7 @@ class RadioInputGroup extends Component<
         messagesId={this._messagesId}
         elementRef={this.handleRef}
         role="radiogroup"
+        data-cid="RadioInputGroup"
       >
         {this.renderChildren()}
       </FormFieldGroup>

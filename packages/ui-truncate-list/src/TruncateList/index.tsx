@@ -26,19 +26,18 @@ import { Children, Component } from 'react'
 
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
-import { px } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
+import { px, combineDataCid } from '@instructure/ui-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
-  getComputedStyle
+  getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TruncateListProps, TruncateListState } from './props'
 
 /**
@@ -47,11 +46,9 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, null)
-@testable()
 class TruncateList extends Component<TruncateListProps, TruncateListState> {
   static readonly componentId = 'TruncateList'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     itemSpacing: '0',
@@ -226,9 +223,10 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
 
     if (this.ref) {
       const { width: navWidth } = getBoundingClientRect(this.ref)
-      const { paddingInlineStart, paddingInlineEnd } = getComputedStyle(
-        this.ref
-      )
+      const style = getCSSStyleDeclaration(this.ref)
+      const paddingInlineStart = style?.paddingInlineStart ?? '0'
+      const paddingInlineEnd = style?.paddingInlineEnd ?? '0'
+
       const navWidthWithoutPadding =
         navWidth - px(paddingInlineStart) - px(paddingInlineEnd)
 
@@ -282,9 +280,10 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
         {...omitProps(this.props, allowedProps)}
         // we have to pass style and className
         // (e.g. if emotion style is provided, it will be passed as a className)
-        className={className}
         style={style}
+        className={className}
         css={styles?.truncateList}
+        data-cid={combineDataCid('TruncateList', this.props)}
       >
         {visibleChildren.map((child, index) => {
           return (

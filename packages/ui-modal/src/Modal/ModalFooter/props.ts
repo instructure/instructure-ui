@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   ModalFooterTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -46,13 +43,7 @@ type ModalFooterProps = ModalFooterOwnProps &
   OtherHTMLAttributes<ModalFooterOwnProps>
 
 type ModalFooterStyle = ComponentStyle<'modalFooter'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(['default', 'inverse'])
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'variant']
 
 export type { ModalFooterProps, ModalFooterStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -131,12 +131,6 @@ describe('<SimpleSelect />', () => {
       const invalidChild = screen.queryByText('invalid')
 
       expect(invalidChild).not.toBeInTheDocument()
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.any(String),
-        expect.stringContaining('Expected one of Group, Option'),
-        expect.any(String)
-      )
     })
   })
 

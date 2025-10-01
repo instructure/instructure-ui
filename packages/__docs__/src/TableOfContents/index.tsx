@@ -33,7 +33,7 @@ import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { SpacingValues } from '@instructure/emotion'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type {
   TableOfContentsProps,
   TableOfContentsState,
@@ -44,7 +44,6 @@ class TableOfContents extends Component<
   TableOfContentsProps,
   TableOfContentsState
 > {
-  static propTypes = propTypes
   static allowedProps = allowedProps
 
   constructor(props: TableOfContentsProps) {

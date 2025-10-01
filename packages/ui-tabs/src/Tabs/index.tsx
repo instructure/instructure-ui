@@ -41,7 +41,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
@@ -57,7 +56,7 @@ import generateComponentTheme from './theme'
 import { Tab } from './Tab'
 import { Panel } from './Panel'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { TabsProps, TabsState } from './props'
 
 import type { TabsTabProps } from './Tab/props'
@@ -72,12 +71,10 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'default',
@@ -391,7 +388,7 @@ class Tabs extends Component<TabsProps, TabsState> {
     if (activePanel !== undefined) {
       // cloning active panel with a proper custom key as a workaround because
       // safeCloneElement overwrites it with the key from the original element
-      activePanelClone = cloneElement(activePanel as ReactElement, {
+      activePanelClone = cloneElement(activePanel as ReactElement<any>, {
         key: `panel-${index}`
       })
 
@@ -514,6 +511,7 @@ class Tabs extends Component<TabsProps, TabsState> {
         margin={margin}
         as="div"
         css={styles?.container}
+        data-cid="Tabs"
       >
         <Focusable ref={this.handleFocusableRef}>
           {() => (

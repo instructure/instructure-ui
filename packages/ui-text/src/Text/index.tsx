@@ -30,7 +30,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TextProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -42,7 +42,6 @@ class Text extends Component<TextProps> {
   static readonly componentId = 'Text'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',
@@ -51,6 +50,16 @@ class Text extends Component<TextProps> {
     letterSpacing: 'normal',
     children: null
   } as const
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    const { elementRef } = this.props
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
 
   checkProps() {
     const { variant, lineHeight, weight, fontStyle } = this.props
@@ -86,7 +95,7 @@ class Text extends Component<TextProps> {
       <ElementType
         {...passthroughProps(this.props)}
         css={this.props.styles?.text}
-        ref={this.props.elementRef}
+        ref={this.handleRef}
       >
         {children}
       </ElementType>
