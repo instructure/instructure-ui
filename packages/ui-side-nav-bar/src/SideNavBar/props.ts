@@ -22,17 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
-
-import { SideNavBarItem } from './SideNavBarItem'
 
 import type {
-  PropValidators,
   SideNavBarTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -88,21 +79,6 @@ type SideNavBarProps = SideNavBarOwnProps &
 type SideNavBarStyle = ComponentStyle<
   'navigation' | 'list' | 'content' | 'toggleIcon'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([SideNavBarItem]),
-  minimized: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized'),
-  defaultMinimized: PropTypes.bool,
-  onMinimized: PropTypes.func,
-  label: PropTypes.string.isRequired,
-  toggleLabel: PropTypes.shape({
-    expandedLabel: PropTypes.string,
-    minimizedLabel: PropTypes.string
-  }).isRequired,
-  href: PropTypes.string,
-  onClick: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'children',
   'minimized',
@@ -115,4 +91,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SideNavBarProps, SideNavBarState, SideNavBarStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

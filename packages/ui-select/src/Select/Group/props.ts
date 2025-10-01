@@ -22,16 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { Option } from '../Option'
-
-import type {
-  OtherHTMLAttributes,
-  PropValidators,
-  Renderable
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 
 type SelectGroupOwnProps = {
   /**
@@ -50,13 +42,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectGroupProps = SelectGroupOwnProps &
   OtherHTMLAttributes<SelectGroupOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  children: ChildrenPropTypes.oneOf([Option])
-}
-
 const allowedProps: AllowedPropKeys = ['renderLabel', 'children']
 
 export type { SelectGroupProps }
-export { propTypes, allowedProps }
+export { allowedProps }

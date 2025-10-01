@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
@@ -37,7 +36,7 @@ import type { TransitionType } from '@instructure/ui-motion'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TrayProps, TrayState } from './props'
 import { Mask } from '@instructure/ui-overlays'
 
@@ -48,12 +47,10 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
-@testable()
 class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     defaultFocusElement: null,
@@ -72,7 +69,7 @@ class Tray extends Component<TrayProps> {
     enableMask: false
   }
   ref: Element | null = null
-  dialogRef: Dialog | null = null
+  dialogRef = createRef<Dialog>()
 
   state: TrayState
 
@@ -93,7 +90,7 @@ class Tray extends Component<TrayProps> {
       if (!this.props.open) {
         // calling Dialog.close() to remove focusregion immediately when transition starts
         // so if a new Tray is opened (during transition) the new focusregion won't get treated as a child of this one
-        this.dialogRef?.close()
+        this.dialogRef.current?.close()
       }
 
       this.setState({ transitioning: true, open: this.props.open })
@@ -210,7 +207,7 @@ class Tray extends Component<TrayProps> {
           ref={contentRef}
         >
           <Dialog
-            ref={(element) => (this.dialogRef = element)}
+            ref={this.dialogRef}
             as="div"
             label={label}
             defaultFocusElement={defaultFocusElement}
@@ -235,6 +232,7 @@ class Tray extends Component<TrayProps> {
         onOpen={this.handlePortalOpen}
         insertAt={insertAt}
         mountNode={mountNode}
+        data-cid="Tray"
       >
         {enableMask ? (
           <Mask placement={'center'} fullscreen={true}>

@@ -31,7 +31,6 @@ import {
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 
@@ -46,7 +45,7 @@ import { Separator } from './Separator'
 import type { OptionsSeparatorProps } from './Separator/props'
 
 import type { OptionsProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { isAndroidOrIOS } from '@instructure/ui-utils'
 
 type ItemChild = ComponentElement<OptionsItemProps, Item>
@@ -61,12 +60,10 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',
@@ -162,7 +159,12 @@ class Options extends Component<OptionsProps> {
     const { as, role, renderLabel, elementRef, styles } = this.props
 
     return (
-      <div css={styles?.options} role="presentation" ref={this.handleRef}>
+      <div
+        css={styles?.options}
+        role="presentation"
+        ref={this.handleRef}
+        data-cid="Options"
+      >
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}

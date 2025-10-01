@@ -33,7 +33,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TabsPanelProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -46,7 +46,6 @@ class Panel extends Component<TabsPanelProps> {
   static readonly componentId = 'Tabs.Panel'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     isDisabled: false,

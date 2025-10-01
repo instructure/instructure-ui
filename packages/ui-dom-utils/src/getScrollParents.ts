@@ -24,7 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
-import { getComputedStyle } from './getComputedStyle'
+import { getCSSStyleDeclaration } from './getCSSStyleDeclaration'
 import { UIElement } from '@instructure/shared-types'
 
 /**
@@ -53,8 +53,8 @@ function getScrollParents(el?: UIElement) {
   if (node) {
     // In firefox if the element is inside an iframe with display: none; window.getComputedStyle() will return null;
     // https://bugzilla.mozilla.org/show_bug.cgi?id=548397
-    const computedStyle = getComputedStyle(node) || {}
-    const position = computedStyle.position
+    const computedStyle = getCSSStyleDeclaration(node)
+    const position = computedStyle?.position
 
     if (position === 'fixed') {
       return [(node as Node).ownerDocument]
@@ -68,7 +68,7 @@ function getScrollParents(el?: UIElement) {
     ) {
       let style
       try {
-        style = getComputedStyle(parent)
+        style = getCSSStyleDeclaration(parent)
       } catch (err: any) {} // eslint-disable-line no-empty
 
       if (typeof style === 'undefined' || style === null) {

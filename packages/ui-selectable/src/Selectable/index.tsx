@@ -30,7 +30,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import type { SelectableProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 import { withDeterministicId } from '@instructure/ui-react-utils'
 
@@ -43,7 +43,6 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 @withDeterministicId()
 class Selectable extends Component<SelectableProps> {
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     isShowingOptions: false

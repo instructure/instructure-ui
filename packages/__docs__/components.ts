@@ -41,7 +41,6 @@ export {
 } from '@instructure/ui-buttons'
 export { Byline } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'
-export { CodeEditor } from '@instructure/ui-code-editor'
 export {
   ColorPicker,
   ColorMixer,
@@ -135,9 +134,4 @@ export { Drilldown } from '@instructure/ui-drilldown'
 export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'
 export { TruncateList } from '@instructure/ui-truncate-list'
-export {
-  canvas,
-  canvasHighContrast,
-  canvasThemeLocal,
-  canvasHighContrastThemeLocal
-} from '@instructure/ui-themes'
+export { canvas, canvasHighContrast } from '@instructure/ui-themes'

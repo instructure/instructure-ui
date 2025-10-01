@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   Renderable,
   TableCellTheme
 } from '@instructure/shared-types'
@@ -55,14 +52,7 @@ type TableCellProps = TableCellOwnProps &
   OtherHTMLAttributes<TableCellOwnProps>
 
 type TableCellStyle = ComponentStyle<'cell'>
-
-const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  textAlign: PropTypes.oneOf(['start', 'center', 'end'])
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'header', 'textAlign']
 
 export type { TableCellProps, TableCellStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

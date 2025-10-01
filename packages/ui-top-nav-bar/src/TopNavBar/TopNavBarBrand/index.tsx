@@ -25,7 +25,6 @@
 import { Component } from 'react'
 
 import { getElementType, omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { withStyle } from '@instructure/emotion'
 
@@ -37,7 +36,7 @@ import { TopNavBarContext } from '../TopNavBarContext'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { TopNavBarBrandProps, TopNavBarBrandStyleProps } from './props'
 
 /**
@@ -48,12 +47,10 @@ id: TopNavBar.Brand
 @module TopNavBarBrand
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {}
 
@@ -106,7 +103,11 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
     const ElementType = getElementType(TopNavBarBrand, this.props)
 
     return (
-      <div ref={this.handleRef} css={styles?.topNavBarBrand}>
+      <div
+        ref={this.handleRef}
+        css={styles?.topNavBarBrand}
+        data-cid="TopNavBarBrand"
+      >
         {renderIcon && (
           <View
             {...omitProps(this.props, allowedProps)}

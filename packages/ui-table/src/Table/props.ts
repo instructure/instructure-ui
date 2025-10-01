@@ -22,18 +22,12 @@
  * SOFTWARE.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  PropValidators,
-  TableTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, TableTheme } from '@instructure/shared-types'
 
 type RowChild = React.ReactElement<{ children: React.ReactElement }>
 
@@ -42,7 +36,7 @@ type TableOwnProps = {
    * Provide a screen reader friendly description. Anything passed to this
    * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
    */
-  caption?: React.ReactNode
+  caption: React.ReactNode
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -81,16 +75,6 @@ type TableProps = TableOwnProps &
   OtherHTMLAttributes<TableOwnProps>
 
 type TableStyle = ComponentStyle<'table'>
-
-const propTypes: PropValidators<PropKeys> = {
-  caption: PropTypes.node.isRequired,
-  children: PropTypes.node,
-  margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  hover: PropTypes.bool,
-  layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'caption',
   'children',
@@ -106,4 +90,4 @@ export type {
   // children
   RowChild
 }
-export { propTypes, allowedProps }
+export { allowedProps }

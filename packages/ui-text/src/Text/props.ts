@@ -23,10 +23,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
-  PropValidators,
   AsElementType,
   TextTheme,
   OtherHTMLAttributes
@@ -107,67 +104,6 @@ type TextProps = TextOwnProps &
   OtherHTMLAttributes<TextOwnProps>
 
 type TextStyle = ComponentStyle<'text'>
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  children: PropTypes.node,
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'brand',
-    'success',
-    'danger',
-    'warning',
-    'alert',
-    'primary-inverse',
-    'secondary-inverse',
-    'ai-highlight'
-  ]),
-  elementRef: PropTypes.func,
-  fontStyle: PropTypes.oneOf(['italic', 'normal']),
-  letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),
-  lineHeight: PropTypes.oneOf([
-    'default',
-    'fit',
-    'condensed',
-    'double',
-    'lineHeight100',
-    'lineHeight125',
-    'lineHeight150'
-  ]),
-  size: PropTypes.oneOf([
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large',
-    'descriptionPage',
-    'descriptionSection',
-    'content',
-    'contentSmall',
-    'legend'
-  ]),
-  transform: PropTypes.oneOf(['none', 'capitalize', 'uppercase', 'lowercase']),
-  variant: PropTypes.oneOf([
-    'descriptionPage',
-    'descriptionSection',
-    'content',
-    'contentImportant',
-    'contentQuote',
-    'contentSmall',
-    'legend'
-  ]),
-  weight: PropTypes.oneOf([
-    'normal',
-    'light',
-    'bold',
-    'weightRegular',
-    'weightImportant'
-  ]),
-  wrap: PropTypes.oneOf(['normal', 'break-word'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'children',
@@ -184,4 +120,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TextProps, TextStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

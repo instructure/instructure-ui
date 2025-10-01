@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-import type { PropValidators } from '@instructure/shared-types'
 type HeaderOwnProps = {
   name: string
   version: string
@@ -38,17 +36,7 @@ type PropKeys = keyof HeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type HeaderProps = HeaderOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  name: PropTypes.string.isRequired,
-  version: PropTypes.string.isRequired,
-  versionsData: PropTypes.shape({
-    latestVersion: PropTypes.string.isRequired,
-    previousVersions: PropTypes.arrayOf(PropTypes.string).isRequired
-  })
-}
-
 const allowedProps: AllowedPropKeys = ['name', 'version', 'versionsData']
 
 export type { HeaderProps }
-export { propTypes, allowedProps }
+export { allowedProps }

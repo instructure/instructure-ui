@@ -27,7 +27,6 @@ import { ComponentElement, Component } from 'react'
 import { withStyle } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 import { Menu } from '@instructure/ui-menu'
@@ -36,7 +35,7 @@ import { Item } from './Item'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import { AppNavItemProps } from './Item/props'
 
 import { TruncateList } from '@instructure/ui-truncate-list'
@@ -47,12 +46,10 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
@@ -139,6 +136,7 @@ class AppNav extends Component<AppNavProps> {
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
         elementRef={this.handleRef}
+        data-cid="AppNav"
       >
         {renderBeforeItems && <span>{renderBeforeItems}</span>}
 

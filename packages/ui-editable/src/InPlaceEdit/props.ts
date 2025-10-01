@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { EditableProps } from '../Editable/props'
 import React from 'react'
@@ -131,21 +128,6 @@ type InPlaceEditProps = InPlaceEditOwnProps &
   WithStyleProps<null, InPlaceEditStyle>
 
 type InPlaceEditStyle = ComponentStyle<'inPlaceEdit'>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderViewer: PropTypes.func.isRequired,
-  renderEditor: PropTypes.func.isRequired,
-  renderEditButton: PropTypes.func.isRequired,
-  mode: PropTypes.oneOf(['view', 'edit']).isRequired,
-  onChangeMode: PropTypes.func.isRequired,
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  readOnly: PropTypes.bool,
-  showFocusRing: PropTypes.bool,
-  editButtonPlacement: PropTypes.oneOf(['start', 'end']),
-  inline: PropTypes.bool
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderViewer',
   'renderEditor',
@@ -161,4 +143,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { InPlaceEditProps, InPlaceEditStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

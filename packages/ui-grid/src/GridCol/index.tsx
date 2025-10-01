@@ -32,7 +32,7 @@ import { logWarn as warn } from '@instructure/console'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { GridColProps } from './props'
 
 /**
@@ -45,7 +45,6 @@ id: Grid.Col
 class GridCol extends Component<GridColProps> {
   static readonly componentId = 'Grid.Col'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     textAlign: 'inherit',
