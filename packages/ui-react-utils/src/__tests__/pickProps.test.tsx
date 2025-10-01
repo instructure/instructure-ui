@@ -22,55 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import '@testing-library/jest-dom'
 import { pickProps } from '../pickProps'
 
 describe('pickProps', () => {
-  it('should work with propTypes', () => {
-    const propTypes = {
-      prop1: PropTypes.string.isRequired,
-      prop2: PropTypes.number
-    }
-
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp: 'excessiveValue'
-    }
-
-    const expectedResult = {
-      prop1: 'hello',
-      prop2: 42
-    }
-
-    const actualResult = pickProps(inputProps, propTypes)
-
-    expect(actualResult).toEqual(expectedResult)
-  })
-
-  it('should add the `include` keys to the result with PropTypes', () => {
-    const propTypes = {
-      prop1: PropTypes.string.isRequired,
-      prop2: PropTypes.number
-    }
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp1: 'excessiveValue1',
-      excessiveProp2: 'excessiveValue2'
-    }
-    const expectedResult = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp2: 'excessiveValue2'
-    }
-
-    const actualResult = pickProps(inputProps, propTypes, ['excessiveProp2'])
-
-    expect(actualResult).toEqual(expectedResult)
-  })
-
   it('should work with an input of a list allowed prop names', () => {
     const allowedPropKeys = ['prop1', 'prop2']
     const inputProps = {

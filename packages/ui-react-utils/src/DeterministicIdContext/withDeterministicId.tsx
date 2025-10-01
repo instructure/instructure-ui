@@ -79,12 +79,6 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
 
   hoistNonReactStatics(WithDeterministicId, ComposedComponent)
 
-  // we have to pass these on, because sometimes users
-  // access propTypes of the component in other components
-  // eslint-disable-next-line react/forbid-foreign-prop-types
-  WithDeterministicId.propTypes = ComposedComponent.propTypes
-  WithDeterministicId.defaultProps = ComposedComponent.defaultProps
-
   // These static fields exist on InstUI components
   //@ts-expect-error fix this
   WithDeterministicId.allowedProps = ComposedComponent.allowedProps

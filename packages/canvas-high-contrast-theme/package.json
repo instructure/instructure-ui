@@ -27,7 +27,6 @@
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@instructure/shared-types": "10.26.0",
-    "@instructure/theme-registry": "10.26.0",
     "@instructure/ui-themes": "10.26.0"
   },
   "publishConfig": {

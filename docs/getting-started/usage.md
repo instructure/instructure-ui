@@ -29,19 +29,18 @@ We recommend that you add the `@instructure/ui` meta-package, this contains all 
 ---
 type: code
 ---
-
 {
   ...
   "dependencies": {
     ...
-    "@instructure/ui": "^10"
+    "@instructure/ui": "^11"
   }
 }
 ```
 
 Run `npm install`, so InstUI is downloaded to your `node_modules` folder and can be used.
 
-##### Try the sample code
+##### Try some sample code
 
 Now you are ready to use InstUI, let's try it out. Replace the code in `App.js` with the following:
 
@@ -82,11 +81,11 @@ InstUI provides a compressed, downloadable collection of all component documenta
 You can download the archive from the following link:
 https://instructure.design/markdowns/documentation.zip
 
-The download includes an index.md file that references all available documentation within the compressed folder.
+The download includes an `index.md` file that references all available documentation within the compressed folder.
 
 These files are designed to be used as context for AI coding agents.
 
-Additionally, an llms.txt file is available. This file contains a catalog of links pointing to the online markdown files for InstUI components and guides, which are also accessible to AI agents. It can be found at:
+Additionally, an `llms.txt` file is available. This file contains a catalog of links pointing to the online markdown files for InstUI components and guides, which are also accessible to AI agents. It can be found at:
 https://instructure.design/llms.txt
 
 ## Further reading

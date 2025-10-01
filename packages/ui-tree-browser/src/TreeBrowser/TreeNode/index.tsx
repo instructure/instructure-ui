@@ -26,13 +26,12 @@ import { Component, ContextType } from 'react'
 
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyles from '../TreeButton/styles'
 import generateComponentTheme from '../TreeButton/theme'
 import type { TreeBrowserNodeProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TreeBrowserContext from '../TreeBrowserContext'
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
@@ -46,12 +45,10 @@ A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class TreeNode extends Component<TreeBrowserNodeProps> {
   static readonly componentId = 'TreeBrowser.Node'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static contextType = TreeBrowserContext
   declare context: ContextType<typeof TreeBrowserContext>
@@ -98,7 +95,12 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
   render() {
     const { children, styles } = this.props
     return (
-      <div ref={this.handleRef} tabIndex={-1} css={styles?.treeButton}>
+      <div
+        ref={this.handleRef}
+        tabIndex={-1}
+        css={styles?.treeButton}
+        data-cid="TreeNode"
+      >
         <span css={styles?.layout}>
           {this.renderItemImage()}
           <span css={styles?.node}>{children}</span>

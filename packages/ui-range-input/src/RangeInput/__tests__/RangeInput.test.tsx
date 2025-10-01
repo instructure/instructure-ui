@@ -24,26 +24,12 @@
 
 import { render, screen } from '@testing-library/react'
 import { vi, expect } from 'vitest'
-import type { MockInstance } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
 import { RangeInput } from '../index'
 
 describe('<RangeInput />', () => {
-  let consoleWarningMock: ReturnType<typeof vi.spyOn>
-
-  beforeEach(() => {
-    // Mocking console to prevent test output pollution
-    consoleWarningMock = vi
-      .spyOn(console, 'warn')
-      .mockImplementation(() => {}) as MockInstance
-  })
-
-  afterEach(() => {
-    consoleWarningMock.mockRestore()
-  })
-
   it('renders an input with type "range"', async () => {
     const { container } = render(
       <RangeInput label="Opacity" name="opacity" max={100} min={0} />
@@ -122,64 +108,6 @@ describe('<RangeInput />', () => {
     const input = container.querySelector('input')
 
     expect(inputRef).toHaveBeenCalledWith(input)
-  })
-
-  describe('thumbVariant prop', () => {
-    it('should throw deprecation warning by default', async () => {
-      render(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={100}
-          min={0}
-          defaultValue={30}
-        />
-      )
-
-      const expectedErrorMessage =
-        "Warning: [RangeInput] The 'deprecated' value for the `thumbVariant` prop is deprecated. The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant."
-
-      expect(consoleWarningMock).toHaveBeenCalledWith(
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
-    })
-
-    it('should throw deprecation warning when explicitly "deprecated"', async () => {
-      render(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={100}
-          min={0}
-          defaultValue={30}
-          thumbVariant="deprecated"
-        />
-      )
-
-      const expectedErrorMessage =
-        "Warning: [RangeInput] The 'deprecated' value for the `thumbVariant` prop is deprecated. The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant."
-
-      expect(consoleWarningMock).toHaveBeenCalledWith(
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
-    })
-
-    it('should not throw deprecation warning when "accessible"', async () => {
-      render(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={100}
-          min={0}
-          defaultValue={30}
-          thumbVariant="accessible"
-        />
-      )
-
-      expect(consoleWarningMock).not.toHaveBeenCalled()
-    })
   })
 
   it('sets min value', async () => {

@@ -25,14 +25,14 @@
 import { Component } from 'react'
 
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
+import { combineDataCid } from '@instructure/ui-utils'
 
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type { InlineSVGProps } from './props'
 
 /**
@@ -42,12 +42,10 @@ category: components/utilities
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class InlineSVG extends Component<InlineSVGProps> {
   static readonly componentId = 'InlineSVG'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     focusable: false,
@@ -188,6 +186,7 @@ class InlineSVG extends Component<InlineSVGProps> {
         css={styles?.inlineSVG}
         className={props.className}
         ref={this.handleRef}
+        data-cid={combineDataCid('InlineSVG', this.props)}
       >
         {this.renderTitle()}
         {this.renderDesc(description)}

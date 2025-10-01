@@ -26,14 +26,13 @@ export * from './BaseTheme'
 export * from './Colors'
 export * from './ComponentThemeMap'
 export * from './ComponentThemeVariables'
-export * from './CommonProps'
 export * from './CommonTypes'
+export * from './CommonProps'
 export type {
   DeepPartial,
   PartialRecord,
   Nullable,
   CSSShorthandValue,
   OtherHTMLAttributes,
-  PropValidators,
   PickPropsWithExceptions
 } from './UtilityTypes'

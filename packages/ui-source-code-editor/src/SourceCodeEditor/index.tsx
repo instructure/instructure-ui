@@ -76,7 +76,6 @@ import { shell } from '@codemirror/legacy-modes/mode/shell'
 import { yaml } from '@codemirror/legacy-modes/mode/yaml'
 // import { oneDarkTheme, oneDarkHighlightStyle } from '@codemirror/theme-one-dark'
 
-import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   passthroughProps,
@@ -97,7 +96,7 @@ import generateComponentTheme from './theme'
 
 import { rtlHorizontalArrowKeymap } from './customKeybinding'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { SourceCodeEditorProps } from './props'
 
 /**
@@ -108,11 +107,9 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
-@testable()
 class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   static readonly componentId = 'SourceCodeEditor'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     language: 'jsx',
@@ -666,6 +663,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
 
     return (
       <div
+        data-cid="SourceCodeEditor"
         ref={this.handleRef}
         css={styles?.codeEditor}
         {...passthroughProps(

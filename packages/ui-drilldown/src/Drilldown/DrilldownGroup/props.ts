@@ -23,16 +23,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { Children } from '@instructure/ui-prop-types'
-
-import DrilldownOption from '../DrilldownOption'
-import DrilldownSeparator from '../DrilldownSeparator'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   OptionsTheme,
   AsElementType
 } from '@instructure/shared-types'
@@ -116,21 +109,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type DrilldownGroupProps = DrilldownGroupOwnProps &
   WithStyleProps<OptionsTheme, null> &
   OtherHTMLAttributes<DrilldownGroupOwnProps>
-
-const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string.isRequired,
-  children: Children.oneOf([DrilldownOption, DrilldownSeparator]),
-  renderGroupTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  withoutSeparators: PropTypes.bool,
-  disabled: PropTypes.bool,
-  role: PropTypes.string,
-  as: PropTypes.elementType,
-  elementRef: PropTypes.func,
-  selectableType: PropTypes.oneOf(['single', 'multiple']),
-  defaultSelected: PropTypes.array,
-  onSelect: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'id',
   'children',
@@ -146,4 +124,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { DrilldownGroupProps, GroupChildren }
-export { propTypes, allowedProps }
+export { allowedProps }

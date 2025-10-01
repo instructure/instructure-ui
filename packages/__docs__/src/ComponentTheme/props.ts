@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
-  PropValidators,
   ComponentTheme,
   BaseThemeVariables
 } from '@instructure/shared-types'
@@ -42,13 +40,7 @@ type ComponentThemeProps = ComponentThemeOwnProps &
   WithStyleProps<null, ComponentThemeStyle>
 
 type ComponentThemeStyle = ComponentStyle<'componentTheme'>
-
-const propTypes: PropValidators<PropKeys> = {
-  componentTheme: PropTypes.object.isRequired,
-  themeVariables: PropTypes.object.isRequired
-}
-
 const allowedProps: AllowedPropKeys = ['componentTheme', 'themeVariables']
 
-export { propTypes, allowedProps }
+export { allowedProps }
 export type { ComponentThemeProps, ComponentThemeStyle }

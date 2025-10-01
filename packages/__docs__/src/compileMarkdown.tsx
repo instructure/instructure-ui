@@ -71,8 +71,11 @@ const getHeadingId = (children: ReactNode): string => {
   const headingId = Children.toArray(children).reduce((id, child) => {
     if (typeof child === 'string') return id + child
 
-    if (isValidElement(child) && typeof child.props.children === 'string') {
-      return id + child.props.children
+    if (
+      isValidElement(child) &&
+      typeof (child.props as { children?: ReactNode }).children === 'string'
+    ) {
+      return id + (child.props as { children: string }).children
     }
 
     return id
@@ -184,9 +187,9 @@ const inferTypeAndLanguage = ({
 }
 
 const renderer = (title?: string) => ({
-  table: (table: ReactElement[]) => {
+  table: (table: ReactElement<any>[]) => {
     const headCells = table?.[0]?.props?.children?.props?.children?.map(
-      (el: ReactElement) => el?.props?.children?.[0]
+      (el: ReactElement<any>) => el?.props?.children?.[0]
     )
     const body = table?.[1]?.props?.children
 
@@ -202,9 +205,9 @@ const renderer = (title?: string) => ({
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {body.map((tr: ReactElement) => (
+          {body.map((tr: ReactElement<any>) => (
             <Table.Row key={uuid()}>
-              {tr?.props?.children?.map((td: ReactElement) => (
+              {tr?.props?.children?.map((td: ReactElement<any>) => (
                 <Table.Cell key={uuid()}>
                   {td?.props?.children?.map((child: ReactElement) => child)}
                 </Table.Cell>
@@ -218,7 +221,7 @@ const renderer = (title?: string) => ({
   image: (href: string, title: string) => (
     <Img key={uuid()} src={href} alt={title} />
   ),
-  list: (list: ReactElement[], ordered: boolean) => {
+  list: (list: ReactElement<any>[], ordered: boolean) => {
     if (list[0].props.children[0][0].type === 'code') {
       const code1 = list?.[0]?.props?.children?.[0]?.[0]?.props?.children
       const code2 = list?.[1]?.props?.children?.[0]?.[0]?.props?.children

@@ -30,20 +30,18 @@
     "@instructure/ui-a11y-content": "10.26.0",
     "@instructure/ui-color-utils": "10.26.0",
     "@instructure/ui-react-utils": "10.26.0",
-    "@instructure/ui-testable": "10.26.0",
-    "@instructure/ui-view": "10.26.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-view": "10.26.0"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.26.0",
     "@instructure/ui-babel-preset": "10.26.0",
     "@instructure/ui-themes": "10.26.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

@@ -18,14 +18,6 @@ npm install @instructure/canvas-high-contrast-theme
 
 Before mounting (rendering) your React application:
 
-- global theming (DEPRECATED):
-
-  ```js
-  import { theme } from '@instructure/canvas-high-contrast-theme'
-
-  theme.use()
-  ```
-
 - application level theming:
 
   ```jsx
@@ -41,27 +33,17 @@ Before mounting (rendering) your React application:
 
 To override the variables:
 
-- globally (DEPRECATED):
+```jsx
+import { theme } from '@instructure/canvas-high-contrast-theme'
+const themeOverrides = { spacing: { xxxSmall: '0.3rem' } }
 
-  ```js
-  import { theme } from '@instructure/canvas-high-contrast-theme'
-
-  theme.use({ overrides: { spacing: { xxxSmall: '0.3rem' } } })
-  ```
-
-- application level:
-
-  ```jsx
-  import { theme } from '@instructure/canvas-high-contrast-theme'
-  const themeOverrides = { spacing: { xxxSmall: '0.3rem' } }
-
-  ReactDOM.render(
-    <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
-      <App />
-    </InstUISettingsProvider>,
-    element
-  )
-  ```
+ReactDOM.render(
+  <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+```
 
 [npm]: https://img.shields.io/npm/v/@instructure/canvas-high-contrast-theme.svg
 [npm-url]: https://npmjs.com/package/@instructure/canvas-high-contrast-theme

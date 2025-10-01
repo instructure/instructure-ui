@@ -22,23 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
-import { Calendar } from '@instructure/ui-calendar'
 import type { CalendarDayProps } from '@instructure/ui-calendar'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { PlacementPropValues } from '@instructure/ui-position'
-import type {
-  Renderable,
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
+import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { InputHTMLAttributes, ReactElement, SyntheticEvent } from 'react'
 
@@ -113,12 +100,10 @@ type DateInputOwnProps = {
    */
   inputRef?: (element: HTMLInputElement | null) => void
   /**
-   * Displays messages and validation for the input. It should be an object
-   * with the following shape:
-   * `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   * }`
+   * Displays informational and error messages, used for input validation,
+   * can also display screenreader-only messages.
+   * Also changes the border color of the component on success/error.
+   * This is automatically set to `invalidDateErrorMessage` when the date is invalid
    */
   messages?: FormMessage[]
   /**
@@ -282,54 +267,6 @@ type DateInputProps = DateInputOwnProps &
   >
 
 type DateInputStyle = ComponentStyle<'dateInput' | 'assistiveText'>
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  value: controllable(PropTypes.string),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  assistiveText: PropTypes.string,
-  layout: PropTypes.oneOf(['stacked', 'inline']),
-  width: PropTypes.string,
-  display: PropTypes.oneOf(['inline-block', 'block']),
-  inputRef: PropTypes.func,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  placement: PositionPropTypes.placement,
-  isShowingCalendar: PropTypes.bool,
-  onRequestValidateDate: PropTypes.func,
-  onRequestShowCalendar: PropTypes.func,
-  onRequestHideCalendar: PropTypes.func,
-  onRequestSelectNextDay: PropTypes.func,
-  onRequestSelectPrevDay: PropTypes.func,
-  onRequestRenderNextMonth: PropTypes.func,
-  onRequestRenderPrevMonth: PropTypes.func,
-  renderNavigationLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  renderWeekdayLabels: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.node])
-  ),
-  renderNextMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  renderPrevMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  children: ChildrenPropTypes.oneOf([Calendar.Day]),
-  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-  currentDate: PropTypes.string,
-  disabledDateErrorMessage: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  invalidDateErrorMessage: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  locale: PropTypes.string,
-  timezone: PropTypes.string,
-  withYearPicker: PropTypes.object
-}
-
 const allowedProps: AllowedPropKeys = [
   'renderLabel',
   'value',
@@ -376,4 +313,4 @@ type DateInputState = {
 }
 
 export type { DateInputProps, DateInputStyle, DateInputState }
-export { propTypes, allowedProps }
+export { allowedProps }

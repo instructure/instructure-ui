@@ -23,16 +23,8 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
-import { element } from '@instructure/ui-prop-types'
-import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-
 import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
-import type {
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 /**
  * The DOM Node of the Portal. It is created as a `span` element.
@@ -86,18 +78,6 @@ type PortalProps = PortalOwnProps & OtherHTMLAttributes<PortalOwnProps>
 type PortalState = {
   mountNode: Element
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  open: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  insertAt: PropTypes.oneOf(['bottom', 'top']),
-  children: PropTypes.node,
-  elementRef: PropTypes.func,
-  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
-}
-
 const allowedProps: AllowedPropKeys = [
   'open',
   'onOpen',
@@ -110,4 +90,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { PortalProps, PortalState, PortalNode }
-export { propTypes, allowedProps }
+export { allowedProps }

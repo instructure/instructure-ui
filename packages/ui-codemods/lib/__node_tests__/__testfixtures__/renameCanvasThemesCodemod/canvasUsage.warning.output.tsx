@@ -1,1 +1,0 @@
-["Found canvas.use(). This will be deleted. Users should wrap each React root in its own InstUISettingsProvider instead."]

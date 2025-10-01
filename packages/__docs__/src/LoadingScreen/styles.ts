@@ -47,9 +47,9 @@ const generateStyle = (): LoadingScreenStyle => {
     boxSizing: 'border-box',
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
-    background: '#ea2127',
+    width: '2rem',
+    height: '2rem',
+    background: '#e7222a',
     transform: 'scale(0) rotate(1turn)',
     animationName: docsLoadingAnimation,
     animationDuration: '1s',
@@ -78,7 +78,7 @@ const generateStyle = (): LoadingScreenStyle => {
       '&::after': {
         ...spinnerBeforeAfterStyles,
         animationDirection: 'alternate-reverse',
-        background: '#f68e1f'
+        background: '#2c7bbd'
       }
     },
     loadingScreen__text: {

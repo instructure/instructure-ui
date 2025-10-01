@@ -22,12 +22,10 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   ColorMixerPaletteTheme
 } from '@instructure/shared-types'
 import type { HSVType } from '@instructure/ui-color-utils'
@@ -61,19 +59,6 @@ type ColorPaletteProps = ColorPaletteOwnProps &
 type ColorPaletteStyle = ComponentStyle<
   'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay' | 'paletteOffset'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  disabled: PropTypes.bool,
-  hue: PropTypes.number.isRequired,
-  color: PropTypes.object.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  indicatorRadius: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-  elementRef: PropTypes.func,
-  navigationExplanationScreenReaderLabel: PropTypes.string.isRequired
-}
-
 const allowedProps: AllowedPropKeys = [
   'disabled',
   'hue',
@@ -87,4 +72,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { ColorPaletteProps, ColorPaletteState, ColorPaletteStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

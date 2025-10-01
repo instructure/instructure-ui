@@ -23,26 +23,18 @@
  */
 
 import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   TopNavBarLayoutSmallViewportTheme,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 import type { DrilldownProps } from '@instructure/ui-drilldown'
-
 import type { TopNavBarItemTooltipType } from '../../TopNavBarItem/props'
 import type { TopNavBarContextType } from '../../TopNavBarContext'
 
-import {
-  commonAllowedProps,
-  commonPropTypes,
-  smallViewportPropTypes,
-  smallViewportAllowedProps
-} from '../props'
+import { commonAllowedProps, smallViewportAllowedProps } from '../props'
 import type { CommonTopNavBarLayoutProps } from '../props'
 
 import { TopNavBarSmallViewportLayout } from './index'
@@ -167,13 +159,6 @@ type TopNavBarSmallViewportLayoutStyleProps = {
   menuBottomPosition: number
   inverseColor: TopNavBarContextType['inverseColor']
 }
-
-const propTypes: PropValidators<PropKeys> = {
-  // Edit PropTypes in TopNavBarLayout/props.ts
-  ...commonPropTypes,
-  ...smallViewportPropTypes
-}
-
 const allowedProps: AllowedPropKeys = [
   // Edit allowed props in TopNavBarLayout/props.ts
   ...commonAllowedProps,
@@ -189,4 +174,4 @@ export type {
   TopNavBarSmallViewportLayoutState,
   TopNavBarSmallViewportLayoutStyleProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

@@ -37,7 +37,7 @@
 // or even better use the native <dialog> component.
 // tabbable has issues with scrollable containers, e.g.
 // https://github.com/focus-trap/tabbable/issues/167
-import { getComputedStyle, findDOMNode } from './'
+import { getCSSStyleDeclaration, findDOMNode } from './'
 import type { UIElement } from '@instructure/shared-types'
 
 const focusableSelector = [
@@ -103,8 +103,8 @@ function findFocusable(
 }
 
 function hidden(element: Element | Node) {
-  const cs = getComputedStyle(element)
-  return cs.display === 'none'
+  const cs = getCSSStyleDeclaration(element)
+  return cs?.display === 'none'
 }
 
 function positioned(element: Element | Node) {
@@ -112,11 +112,12 @@ function positioned(element: Element | Node) {
   if (POS.includes((element as HTMLElement).style.position?.toLowerCase())) {
     return true
   }
-  if (
-    POS.includes(
-      getComputedStyle(element).getPropertyValue('position')?.toLowerCase()
-    )
-  ) {
+
+  const position = getCSSStyleDeclaration(element)
+    ?.getPropertyValue('position')
+    ?.toLowerCase()
+
+  if (position && POS.includes(position)) {
     return true
   }
   return false
@@ -140,6 +141,4 @@ function focusable(element: Element & { disabled?: boolean }) {
 }
 
 export default findFocusable
-export {
-  findFocusable
-}
+export { findFocusable }

@@ -28,7 +28,6 @@ import keycode from 'keycode'
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
@@ -44,7 +43,7 @@ import type {
   TreeBrowserProps,
   TreeBrowserState
 } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import TreeBrowserContext from './TreeBrowserContext'
 
 /**
@@ -53,12 +52,10 @@ category: components
 ---
 **/
 @withStyle(generateStyles, generateComponentTheme)
-@testable()
 class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   static readonly componentId = 'TreeBrowser'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',
@@ -380,6 +377,7 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
             this.ref = el
           }}
           aria-label={this.props.treeLabel}
+          data-cid="TreeBrowser"
         >
           {this.renderRoot()}
         </ul>

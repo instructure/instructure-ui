@@ -1,1 +1,0 @@
-["ThemeRegistry has been deleted and there are no global themes anymore."]

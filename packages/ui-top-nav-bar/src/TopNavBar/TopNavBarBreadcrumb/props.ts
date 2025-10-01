@@ -26,14 +26,9 @@ import { ComponentElement } from 'react'
 import type { ViewOwnProps } from '@instructure/ui-view'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import { TopNavBarContextType } from '../TopNavBarContext'
-import {
-  ChildrenOfType,
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
+import { ChildrenOfType, OtherHTMLAttributes } from '@instructure/shared-types'
 import TopNavBarBreadcrumb from './index'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import PropTypes from 'prop-types'
+
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
 import type { BreadcrumbProps } from '@instructure/ui-breadcrumb'
 
@@ -82,13 +77,6 @@ type TopNavBarBreadcrumbStyleProps = {
 type PropKeys = keyof TopNavBarBreadcrumbOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-const propTypes: PropValidators<PropKeys> = {
-  onClick: PropTypes.func,
-  elementRef: PropTypes.func,
-  children: ChildrenPropTypes.oneOf([Breadcrumb])
-}
-
 const allowedProps: AllowedPropKeys = ['children', 'onClick', 'elementRef']
 
 export type {
@@ -99,4 +87,4 @@ export type {
   BreadcrumbChild
 }
 
-export { propTypes, allowedProps }
+export { allowedProps }

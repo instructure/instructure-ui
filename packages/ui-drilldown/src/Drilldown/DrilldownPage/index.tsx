@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { DrilldownPageProps } from './props'
 
 /**
@@ -37,7 +37,6 @@ id: Drilldown.Page
 class DrilldownPage extends Component<DrilldownPageProps> {
   static readonly componentId = 'Drilldown.Page'
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     renderBackButtonLabel: 'Back',

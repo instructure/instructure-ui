@@ -23,19 +23,13 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type { ViewProps } from '@instructure/ui-view'
 import type {
   Spacing,
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type {
-  OtherHTMLAttributes,
-  PropValidators,
-  TagTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, TagTheme } from '@instructure/shared-types'
 
 type TagOwnProps = {
   className?: string
@@ -81,21 +75,6 @@ type TagProps = TagOwnProps &
   OtherHTMLAttributes<TagOwnProps>
 
 type TagStyle = ComponentStyle<'tag' | 'text' | 'icon'>
-
-const propTypes: PropValidators<PropKeys> = {
-  className: PropTypes.string,
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  title: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  dismissible: PropTypes.bool,
-  margin: PropTypes.string,
-  onClick: PropTypes.func,
-  elementRef: PropTypes.func,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  variant: PropTypes.oneOf(['default', 'inline'])
-}
-
 const allowedProps: AllowedPropKeys = [
   'className',
   'text',
@@ -111,4 +90,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TagProps, TagStyle }
-export { propTypes, allowedProps }
+export { allowedProps }
