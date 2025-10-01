@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
+
+
+### Bug Fixes
+
+* **ui-table:** make TableColHeader focus outline and sorted icon overridable by brand overrides ([5b8231d](https://github.com/instructure/instructure-ui/commit/5b8231d4dc27d6ac05acdb4b88b367b16a964844))
+
+
+
+
+
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-table

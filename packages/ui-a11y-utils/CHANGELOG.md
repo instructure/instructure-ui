@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
+
+
+### Bug Fixes
+
+* **ui-drawer-layout,ui-a11y-utils:** fix DrawerLayout not closing on ESC keypress ([390b294](https://github.com/instructure/instructure-ui/commit/390b2948a53527cd7b582fbe4f17af86443ea7a4))
+
+
+
+
+
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 

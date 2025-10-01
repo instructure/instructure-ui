@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
+
+
+### Bug Fixes
+
+* **ui-utils,ui-drilldown:** make NDVA read options in Drilldown.Group correctly in Firefox ([994f158](https://github.com/instructure/instructure-ui/commit/994f15887ff7e1112208031514aa7e0ae134231b))
+
+
+### Features
+
+* **ui-drilldown:** make Drilldown.Page handle optional Options ([18f6a06](https://github.com/instructure/instructure-ui/commit/18f6a06f6a8b69ed0cd83bae7c11395f34375e9a))
+
+
+
+
+
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-drilldown

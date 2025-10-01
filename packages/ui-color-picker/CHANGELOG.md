@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** prevent selection outside of ColorMixer when dragging the indicator ([2e2bd90](https://github.com/instructure/instructure-ui/commit/2e2bd902da44cd2ca6ee933c2a70e11e1183fe6b))
+
+
+
+
+
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-color-picker

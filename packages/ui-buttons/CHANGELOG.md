@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
+
+
+### Bug Fixes
+
+* **ui-buttons:** fix for AI secondary button visual glitch ([aff6f65](https://github.com/instructure/instructure-ui/commit/aff6f65aabdfb122314761746bcbcbf1b66aaf61))
+
+
+### Features
+
+* **ui-buttons:** expose display prop on CondensedButton ([c827833](https://github.com/instructure/instructure-ui/commit/c8278332fb8cae64cb6e3608baf7a748e118849c))
+
+
+
+
+
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 
