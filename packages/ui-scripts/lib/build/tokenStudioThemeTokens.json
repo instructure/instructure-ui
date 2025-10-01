@@ -2501,8 +2501,36 @@
         "value": "{color.background.interactive.secondary.base}",
         "type": "color"
       },
+      "secondaryHoverBackgroundColor": {
+        "value": "{color.background.interactive.secondary.hover}",
+        "type": "color"
+      },
+      "secondaryActiveBackgroundColor": {
+        "value": "{color.background.interactive.secondary.active}",
+        "type": "color"
+      },
+      "successBackgroundColor": {
+        "value": "{color.background.interactive.success.base}",
+        "type": "color"
+      },
+      "successHoverBackgroundColor": {
+        "value": "{color.background.interactive.success.hover}",
+        "type": "color"
+      },
+      "successActiveBackgroundColor": {
+        "value": "{color.background.interactive.success.active}",
+        "type": "color"
+      },
       "dangerBackgroundColor": {
         "value": "{color.background.interactive.destructive.base}",
+        "type": "color"
+      },
+      "dangerHoverBackgroundColor": {
+        "value": "{color.background.interactive.destructive.hover}",
+        "type": "color"
+      },
+      "dangerActiveBackgroundColor": {
+        "value": "{color.background.interactive.destructive.active}",
         "type": "color"
       }
     }
