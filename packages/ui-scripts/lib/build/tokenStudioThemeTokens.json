@@ -2455,6 +2455,22 @@
       }
     }
   },
+  "canvas/component/Button": {
+    "button": {
+      "primaryBackgroundColor": {
+        "value": "{color.background.interactive.primary.base}",
+        "type": "color"
+      },
+      "secondaryBackgroundColor": {
+        "value": "{color.background.interactive.secondary.base}",
+        "type": "color"
+      },
+      "dangerBackgroundColor": {
+        "value": "{color.background.interactive.destructive.base}",
+        "type": "color"
+      }
+    }
+  },
   "canvas/component/FormFieldLabel": {
     "formFieldLabel": {
       "textColor": {
@@ -6782,6 +6798,7 @@
       "canvas/semantic/color/canvasHighContrast",
       "canvas/component/Avatar",
       "canvas/component/Breadcrumb",
+      "canvas/component/Button",
       "canvas/component/FormFieldLabel",
       "canvas/component/FormFieldMessage",
       "canvas/component/Link",
