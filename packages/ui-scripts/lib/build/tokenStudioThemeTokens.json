@@ -1293,6 +1293,20 @@
               "value": "{color.red.red80}",
               "type": "color"
             }
+          },
+          "success": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            }
           }
         },
         "accent": {
@@ -1815,6 +1829,20 @@
             },
             "active": {
               "value": "{color.red.red110}",
+              "type": "color"
+            }
+          },
+          "success": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
               "type": "color"
             }
           }
@@ -4268,6 +4296,20 @@
               "value": "{color.red.red100}",
               "type": "color"
             }
+          },
+          "success": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            }
           }
         },
         "accent": {
@@ -4790,6 +4832,20 @@
             },
             "active": {
               "value": "{color.red.red50}",
+              "type": "color"
+            }
+          },
+          "success": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
               "type": "color"
             }
           }
