@@ -2532,6 +2532,14 @@
       "dangerActiveBackgroundColor": {
         "value": "{color.background.interactive.destructive.active}",
         "type": "color"
+      },
+      "aiBackgroundBottomGradientColor": {
+        "value": "{avatar.aiBottomGradientColor}",
+        "type": "color"
+      },
+      "aiBackgroundTopGradientColor": {
+        "value": "{avatar.aiTopGradientColor}",
+        "type": "color"
       }
     }
   },
