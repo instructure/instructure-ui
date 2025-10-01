@@ -373,7 +373,7 @@ type: embed
 | Alert | children | `ReactNode` | No | `null` | content to be rendered within Alert |
 | Alert | variant | `'info' \| 'success' \| 'warning' \| 'error'` | No | `'info'` | Determines color and icon |
 | Alert | margin | `Spacing` | No | `'x-small 0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Alert | liveRegion | `() => Element` | No | - | Function that returns the DIV where screenreader alerts will be placed. |
+| Alert | liveRegion | `Element \| null \| (() => Element \| null \| undefined)` | No | - | A DOM element or function that returns an element where screenreader alerts will be placed. |
 | Alert | liveRegionPoliteness | `'polite' \| 'assertive'` | No | `'assertive'` | Choose the politeness level of screenreader alerts, sets the value of `aria-live`. When regions are specified as `polite`, assistive technologies will notify users of updates but generally do not interrupt the current task, and updates take low priority. When regions are specified as `assertive`, assistive technologies will immediately notify the user, and could potentially clear the speech queue of previous updates. |
 | Alert | isLiveRegionAtomic | `boolean` | No | `false` | Value for the `aria-atomic` attribute. `aria-atomic` controls how much is read when a change happens. Should only the specific thing that changed be read or should the entire element be read. |
 | Alert | screenReaderOnly | `boolean` | No | `false` | If the alert should only be visible to screen readers |
