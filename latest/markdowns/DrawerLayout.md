@@ -479,7 +479,7 @@ Multiple `<DrawerLayout />` components can be nested in order to place trays on 
 | DrawerLayout.DrawerTray | shouldContainFocus | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldReturnFocus | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldCloseOnDocumentClick | `boolean` | No | `true` |  |
-| DrawerLayout.DrawerTray | shouldCloseOnEscape | `boolean` | No | `true` |  |
+| DrawerLayout.DrawerTray | shouldCloseOnEscape | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` close when ESC is pressed. Note that it will only close if it's in the overlay mode (if there is less space for the content than `DrawerLayout.props.minWidth`) |
 
 ### Usage
 
