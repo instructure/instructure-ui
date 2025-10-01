@@ -2539,7 +2539,7 @@ type: embed
 | Drilldown.DrilldownGroup | renderGroupTitle | `React.ReactNode \| (() => React.ReactNode)` | No | - | The label of the option group. |
 | Drilldown.DrilldownGroup | withoutSeparators | `boolean` | No | `false` | Hides the separators around the group. |
 | Drilldown.DrilldownGroup | disabled | `boolean` | No | `false` | Is the option group disabled. |
-| Drilldown.DrilldownGroup | role | `string` | No | `'group'` | The ARIA role of the element. |
+| Drilldown.DrilldownGroup | role | `string` | No | `!isMac() && isFirefox() ? 'menu' : 'group'` | The ARIA role of the element. |
 | Drilldown.DrilldownGroup | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | Element type to render as. By default, it inherits Drilldown's `as` prop. |
 | Drilldown.DrilldownGroup | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 | Drilldown.DrilldownGroup | selectableType | `'single' \| 'multiple'` | No | - | Makes the option group selectable (with "check" icon indicators). Can be set to a single-select (radio) or a multi-select (checkbox) group. |
