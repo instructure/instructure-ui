@@ -4294,14 +4294,14 @@ return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContent
 const hash=window.location.hash
 pathname.endsWith("/")&&"/"!==pathname&&(pathname=pathname.slice(0,-1))
 let id,page=pathname.split("/").filter(Boolean)[0]||"index"
-if(page&&"index"!==page||!hash)hash&&(id=hash.substring(1))
-else{const hashContent=hash.substring(1)
+if((!page||"index"===page||"index"===this.state.key)&&hash){const hashContent=hash.substring(1)
 if(hashContent.includes("/#")){const _hashContent$split=hashContent.split("/#"),_hashContent$split2=(0,_slicedToArray2.default)(_hashContent$split,2)
 page=_hashContent$split2[0],id=_hashContent$split2[1]
 const basePath="/"!==pathname?pathname:""
 window.history.replaceState({},"",`${basePath}/${page}${id?`#${id}`:""}`)}else if(hashContent){page=hashContent
 const basePath="/"!==pathname?pathname:""
-window.history.replaceState({},"",`${basePath}/${page}`)}}return[page,id]},this.updateLayout=matches=>{let layout="small"
+window.history.replaceState({},"",`${basePath}/${page}`)}}else hash&&(id=hash.substring(1))
+return[page,id]},this.updateLayout=matches=>{let layout="small"
 matches.length>0&&(matches.includes("medium")&&1===matches.length?layout="medium":matches.includes("large")&&2===matches.length?layout="large":matches.includes("x-large")&&(layout="x-large")),this.setState({layout})},this.updateKey=()=>{const _this$getPathInfo=this.getPathInfo(),_this$getPathInfo2=(0,_slicedToArray2.default)(_this$getPathInfo,2),page=_this$getPathInfo2[0]
 _this$getPathInfo2[1]
 page?this.setState((({key,showMenu})=>({key:page||"index",showMenu:this.handleShowTrayOnURLChange(key,showMenu)})),this.scrollToElement):this.trackPage("index")},this.handleContentRef=el=>{this._content=el},this.handleMenuTriggerRef=el=>{this._menuTrigger=el},this.handleMenuOpen=()=>{this.setState({showMenu:!0},(()=>{var _this$_navRef$current
