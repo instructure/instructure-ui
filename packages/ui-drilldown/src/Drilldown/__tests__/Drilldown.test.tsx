@@ -183,6 +183,49 @@ describe('<Drilldown />', () => {
         expect(option).toHaveAttribute('aria-disabled', 'true')
       })
     })
+
+    it('should not allow selection if the main Drilldown is disabled', async () => {
+      render(
+        <Drilldown rootPageId="page0" disabled>
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" selectableType="multiple">
+              <Drilldown.Option id="opt1">Disabled Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const optionItemContainer = screen.getByLabelText('Disabled Option')
+      const optionContent = screen.getByText('Disabled Option')
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+
+      await userEvent.click(optionContent)
+
+      expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+    })
+
+    it('should always allow back navigation even if the page is disabled', async () => {
+      render(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle="First Page">
+            <Drilldown.Option id="opt1" subPageId="page1">
+              Go to Disabled Page
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1" renderTitle="Disabled Page" disabled>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+    
+      // 1. Navigate to the disabled page
+      await userEvent.click(screen.getByText('Go to Disabled Page'))
+      expect(screen.getByText('Disabled Page')).toBeInTheDocument()
+    
+      await userEvent.click(screen.getByText('Back'))
+    
+      // 4. Verify we have successfully navigated back
+      expect(screen.getByText('First Page')).toBeInTheDocument()
+    })
   })
 
   describe('as prop', () => {
