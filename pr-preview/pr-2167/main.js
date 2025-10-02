@@ -4293,15 +4293,14 @@ return docData},this.fetchVersionData=async signal=>{const versionsData=await(0,
 return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContentRef=el},this.focusContent=()=>{this._mainContentRef&&this._mainContentRef.focus()},this.getPathInfo=()=>{let pathname=window.location.pathname
 const hash=window.location.hash
 pathname.endsWith("/")&&"/"!==pathname&&(pathname=pathname.slice(0,-1))
-const segments=pathname.split("/").filter(Boolean)
-let id,page=segments[0]||"index"
+let id,page=pathname.split("/").filter(Boolean)[0]||"index"
 if(page&&"index"!==page||!hash)hash&&(id=hash.substring(1))
 else{const hashContent=hash.substring(1)
 if(hashContent.includes("/#")){const _hashContent$split=hashContent.split("/#"),_hashContent$split2=(0,_slicedToArray2.default)(_hashContent$split,2)
 page=_hashContent$split2[0],id=_hashContent$split2[1]
-const basePath=segments.length>1?`/${segments.slice(0,-1).join("/")}`:""
+const basePath="/"!==pathname?pathname:""
 window.history.replaceState({},"",`${basePath}/${page}${id?`#${id}`:""}`)}else if(hashContent){page=hashContent
-const basePath=segments.length>1?`/${segments.slice(0,-1).join("/")}`:""
+const basePath="/"!==pathname?pathname:""
 window.history.replaceState({},"",`${basePath}/${page}`)}}return[page,id]},this.updateLayout=matches=>{let layout="small"
 matches.length>0&&(matches.includes("medium")&&1===matches.length?layout="medium":matches.includes("large")&&2===matches.length?layout="large":matches.includes("x-large")&&(layout="x-large")),this.setState({layout})},this.updateKey=()=>{const _this$getPathInfo=this.getPathInfo(),_this$getPathInfo2=(0,_slicedToArray2.default)(_this$getPathInfo,2),page=_this$getPathInfo2[0]
 _this$getPathInfo2[1]
