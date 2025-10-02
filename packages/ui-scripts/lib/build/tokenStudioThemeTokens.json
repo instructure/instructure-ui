@@ -1701,6 +1701,64 @@
             "type": "color"
           }
         }
+      },
+      "dropShadow": {
+        "shadowColor1": {
+          "value": "rgba(0,0,0,0.1)",
+          "type": "color"
+        },
+        "shadowColor2": {
+          "value": "rgba(0,0,0,0.2)",
+          "type": "color"
+        }
+      }
+    },
+    "x": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
+      }
+    },
+    "y": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "1",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "1",
+          "type": "number"
+        }
+      }
+    },
+    "blur": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "3",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "2",
+          "type": "number"
+        }
+      }
+    },
+    "spread": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
       }
     }
   },
@@ -2225,6 +2283,64 @@
             "type": "color"
           }
         }
+      },
+      "dropShadow": {
+        "shadowColor1": {
+          "value": "rgba(0,0,0,0.1)",
+          "type": "color"
+        },
+        "shadowColor2": {
+          "value": "rgba(0,0,0,0.2)",
+          "type": "color"
+        }
+      }
+    },
+    "x": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
+      }
+    },
+    "y": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "1",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "1",
+          "type": "number"
+        }
+      }
+    },
+    "blur": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "3",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "2",
+          "type": "number"
+        }
+      }
+    },
+    "spread": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
       }
     }
   },
@@ -2453,6 +2569,29 @@
         "value": "{spacing.space2xs}",
         "type": "spacing"
       }
+    }
+  },
+  "canvas/component/Elevation": {
+    "elevation1": {
+      "value": [
+        {
+          "x": "{x.elevation1.dropshadow1}",
+          "y": "{y.elevation1.dropshadow1}",
+          "blur": "{blur.elevation1.dropshadow1}",
+          "spread": "{spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{x.elevation1.dropshadow2}",
+          "y": "{y.elevation1.dropshadow2}",
+          "blur": "{blur.elevation1.dropshadow2}",
+          "spread": "{spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow"
     }
   },
   "canvas/component/FormFieldLabel": {
@@ -3190,6 +3329,29 @@
         "value": "{spacing.space2xs}",
         "type": "spacing"
       }
+    }
+  },
+  "rebrand/component/Elevation": {
+    "elevation1": {
+      "value": [
+        {
+          "x": "{x.elevation1.dropshadow1}",
+          "y": "{y.elevation1.dropshadow1}",
+          "blur": "{blur.elevation1.dropshadow1}",
+          "spread": "{spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{x.elevation1.dropshadow2}",
+          "y": "{y.elevation1.dropshadow2}",
+          "blur": "{blur.elevation1.dropshadow2}",
+          "spread": "{spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow"
     }
   },
   "rebrand/component/FormFieldLabel": {
@@ -4660,6 +4822,64 @@
             "type": "color"
           }
         }
+      },
+      "dropShadow": {
+        "shadowColor1": {
+          "value": "rgba(28,34,43,0.3)",
+          "type": "color"
+        },
+        "shadowColor2": {
+          "value": "rgba(28,34,43,0.15)",
+          "type": "color"
+        }
+      }
+    },
+    "x": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
+      }
+    },
+    "y": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "1",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "2",
+          "type": "number"
+        }
+      }
+    },
+    "blur": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "2",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "6",
+          "type": "number"
+        }
+      }
+    },
+    "spread": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "2",
+          "type": "number"
+        }
       }
     }
   },
@@ -5184,6 +5404,64 @@
             "type": "color"
           }
         }
+      },
+      "dropShadow": {
+        "shadowColor1": {
+          "value": "rgba(0,0,0,0.3)",
+          "type": "color"
+        },
+        "shadowColor2": {
+          "value": "rgba(0,0,0,0.15)",
+          "type": "color"
+        }
+      }
+    },
+    "x": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
+      }
+    },
+    "y": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "1",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "1",
+          "type": "number"
+        }
+      }
+    },
+    "blur": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "3",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "2",
+          "type": "number"
+        }
+      }
+    },
+    "spread": {
+      "elevation1": {
+        "dropshadow1": {
+          "value": "0",
+          "type": "number"
+        },
+        "dropshadow2": {
+          "value": "0",
+          "type": "number"
+        }
       }
     }
   },
@@ -5191,7 +5469,6 @@
     {
       "id": "678e5f2806837b997832806ff4d55383deaf68d2",
       "name": "canvas",
-      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "canvas/semantic/color/canvas": "enabled",
@@ -5204,11 +5481,16 @@
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
-        "canvas/component/TextInput": "enabled"
+        "canvas/component/TextInput": "enabled",
+        "canvas/component/Elevation": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
-        "secondaryBg": "S:5988067f45bc08b82245433bf0714eef28ed3a5f,"
+        "secondaryBg": "S:5988067f45bc08b82245433bf0714eef28ed3a5f,",
+        "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
+        "elevation2": "S:d9b620d937a806fc84ee67f090b1f84eb7b46fb2,",
+        "elevation3": "S:38e039876482ed5c0ebac6a4bee16b2f4e039b74,",
+        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,"
       },
       "$figmaVariableReferences": {
         "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -5325,6 +5607,16 @@
         "color.icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "color.icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
+        "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
+        "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
+        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -5577,12 +5869,12 @@
         "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:0"
+      "$figmaModeId": "2374:0",
+      "group": "Mode"
     },
     {
       "id": "bdbf3faa2d00feb456e13c5e72ae74fabb515ab2",
       "name": "canvasHighContrast",
-      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "canvas/semantic/color/canvasHighContrast": "enabled",
@@ -5595,7 +5887,8 @@
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
-        "canvas/component/TextInput": "enabled"
+        "canvas/component/TextInput": "enabled",
+        "canvas/component/Elevation": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5612,7 +5905,11 @@
         "typography.input.large": "S:5edb96309d9edde79b6260108facc5924adc66dd,",
         "typography.inlineLink.small": "S:48893af058bbcc2a1cdab3eb666893362d2da352,",
         "typography.inlineLink.medium": "S:7b059cab6bcd99df80d9d97c46aca302ce7ab9f2,",
-        "typography.inlineLink.large": "S:6d3e5fea338defd161fe95bcfec6e3846e82f52e,"
+        "typography.inlineLink.large": "S:6d3e5fea338defd161fe95bcfec6e3846e82f52e,",
+        "elevation1": "S:f6e56fcfa72eb3ce5c396483c68ee3d46a49b8e1,",
+        "elevation2": "S:d9b620d937a806fc84ee67f090b1f84eb7b46fb2,",
+        "elevation3": "S:38e039876482ed5c0ebac6a4bee16b2f4e039b74,",
+        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,"
       },
       "$figmaVariableReferences": {
         "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -5729,6 +6026,16 @@
         "color.icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "color.icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
+        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
+        "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -5981,12 +6288,12 @@
         "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:1"
+      "$figmaModeId": "2374:1",
+      "group": "Mode"
     },
     {
       "id": "5225163677f0b31bef16d0262817737af28ce5a5",
       "name": "rebrandLight",
-      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "rebrand/semantic/color/rebrandLight": "enabled",
@@ -5999,9 +6306,15 @@
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
-        "rebrand/component/TextInput": "enabled"
+        "rebrand/component/TextInput": "enabled",
+        "rebrand/component/Elevation": "enabled"
       },
-      "$figmaStyleReferences": {},
+      "$figmaStyleReferences": {
+        "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
+        "elevation2": "S:d9b620d937a806fc84ee67f090b1f84eb7b46fb2,",
+        "elevation3": "S:38e039876482ed5c0ebac6a4bee16b2f4e039b74,",
+        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,"
+      },
       "$figmaVariableReferences": {
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
@@ -6197,6 +6510,16 @@
         "color.icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "color.icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
+        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
+        "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -6369,12 +6692,12 @@
         "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:2"
+      "$figmaModeId": "2374:2",
+      "group": "Mode"
     },
     {
       "id": "c95dffbad582ae55127659453f1a9195978f1521",
       "name": "rebrandDark",
-      "group": "Mode",
       "selectedTokenSets": {
         "primitives/default": "source",
         "rebrand/semantic/color/rebrandDark": "enabled",
@@ -6387,7 +6710,8 @@
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
-        "rebrand/component/TextInput": "enabled"
+        "rebrand/component/TextInput": "enabled",
+        "rebrand/component/Elevation": "enabled"
       },
       "$figmaStyleReferences": {
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -6402,7 +6726,11 @@
         "typography.input.large": "S:5edb96309d9edde79b6260108facc5924adc66dd,",
         "typography.inlineLink.small": "S:48893af058bbcc2a1cdab3eb666893362d2da352,",
         "typography.inlineLink.medium": "S:7b059cab6bcd99df80d9d97c46aca302ce7ab9f2,",
-        "typography.inlineLink.large": "S:6d3e5fea338defd161fe95bcfec6e3846e82f52e,"
+        "typography.inlineLink.large": "S:6d3e5fea338defd161fe95bcfec6e3846e82f52e,",
+        "elevation1": "S:f6e56fcfa72eb3ce5c396483c68ee3d46a49b8e1,",
+        "elevation2": "S:d9b620d937a806fc84ee67f090b1f84eb7b46fb2,",
+        "elevation3": "S:38e039876482ed5c0ebac6a4bee16b2f4e039b74,",
+        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,"
       },
       "$figmaVariableReferences": {
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
@@ -6599,6 +6927,16 @@
         "color.icon.accent.color4": "9b07a169127004898d6a7731e38046e2f2d8bb8d",
         "color.icon.accent.color5": "861a1b5004936640220aae10981dd4edd39daa18",
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
+        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
+        "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -6771,7 +7109,8 @@
         "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
-      "$figmaModeId": "2374:3"
+      "$figmaModeId": "2374:3",
+      "group": "Mode"
     }
   ],
   "$metadata": {
@@ -6782,6 +7121,7 @@
       "canvas/semantic/color/canvasHighContrast",
       "canvas/component/Avatar",
       "canvas/component/Breadcrumb",
+      "canvas/component/Elevation",
       "canvas/component/FormFieldLabel",
       "canvas/component/FormFieldMessage",
       "canvas/component/Link",
@@ -6791,6 +7131,7 @@
       "canvas/component/TextInput",
       "rebrand/component/Avatar",
       "rebrand/component/Breadcrumb",
+      "rebrand/component/Elevation",
       "rebrand/component/FormFieldLabel",
       "rebrand/component/FormFieldMessage",
       "rebrand/component/Link",
