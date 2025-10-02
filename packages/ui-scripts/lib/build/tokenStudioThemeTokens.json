@@ -2594,11 +2594,19 @@
         "type": "color"
       },
       "aiBackgroundBottomGradientColor": {
-        "value": "{avatar.aiBottomGradientColor}",
+        "value": "{color.background.interactive.ai.bottomGradient.base}",
+        "type": "color"
+      },
+      "aiHoverBackgroundBottomGradientColor": {
+        "value": "{color.background.interactive.ai.bottomGradient.hover}",
+        "type": "color"
+      },
+      "aiActiveBackgroundBottomGradientColor": {
+        "value": "{color.background.interactive.ai.bottomGradient.active}",
         "type": "color"
       },
       "aiBackgroundTopGradientColor": {
-        "value": "{avatar.aiTopGradientColor}",
+        "value": "{color.background.interactive.ai.topGradient.base}",
         "type": "color"
       }
     }
