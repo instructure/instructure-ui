@@ -650,4 +650,508 @@ describe('<Drilldown.Group />', () => {
       })
     })
   })
+
+  describe('selectedOptions', () => {
+    it('should warn if selectableType="single" but multiple values are passed', () => {
+      render(
+        <Drilldown rootPageId="root">
+          <Drilldown.Page id="root">
+            <Drilldown.Group
+              id="group-single"
+              selectableType="single"
+              selectedOptions={['a', 'b']}
+            >
+              <Drilldown.Option id="opt-a" value="a">
+                A
+              </Drilldown.Option>
+              <Drilldown.Option id="opt-b" value="b">
+                B
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      expect(consoleErrorMock).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: Radio type selectable groups can have only one item selected!'
+        ),
+        expect.any(String)
+      )
+    })
+
+    it('should prevent user selection if selectedOptions provided', async () => {
+      render(
+        <Drilldown rootPageId="root">
+          <Drilldown.Page id="root">
+            <Drilldown.Group
+              id="controlled"
+              selectableType="multiple"
+              selectedOptions={['val-c-1']}
+            >
+              <Drilldown.Option id="item-c-1" value="val-c-1">
+                C1
+              </Drilldown.Option>
+              <Drilldown.Option id="item-c-2" value="val-c-2">
+                C2
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const options = screen.getAllByRole('menuitemcheckbox')
+
+      expect(options[0]).toHaveAttribute('aria-checked', 'true')
+      expect(options[1]).toHaveAttribute('aria-checked', 'false')
+
+      await userEvent.click(screen.getByText('C2'))
+
+      expect(options[0]).toHaveAttribute('aria-checked', 'true')
+      expect(options[1]).toHaveAttribute('aria-checked', 'false')
+    })
+
+    it('should preserve user changes in uncontrolled groups when selectedOptions props change', async () => {
+      const { rerender } = render(
+        <Drilldown rootPageId="root">
+          <Drilldown.Page id="root">
+            <Drilldown.Group
+              id="controlled"
+              selectableType="multiple"
+              selectedOptions={['val-c-1']}
+            >
+              <Drilldown.Option id="c1" value="val-c-1">
+                C1
+              </Drilldown.Option>
+              <Drilldown.Option id="c2" value="val-c-2">
+                C2
+              </Drilldown.Option>
+            </Drilldown.Group>
+            <Drilldown.Group
+              id="default"
+              selectableType="multiple"
+              defaultSelected={['val-d-1']}
+            >
+              <Drilldown.Option id="d1" value="val-d-1">
+                D1
+              </Drilldown.Option>
+              <Drilldown.Option id="d2" value="val-d-2">
+                D2
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const options = screen.getAllByRole('menuitemcheckbox')
+
+      expect(options[0]).toHaveAttribute('aria-checked', 'true') // C1 controlled
+      expect(options[1]).toHaveAttribute('aria-checked', 'false') // C2 controlled
+      expect(options[2]).toHaveAttribute('aria-checked', 'true') // D1 uncontrolled
+      expect(options[3]).toHaveAttribute('aria-checked', 'false') // D2 uncontrolled
+
+      // user changes uncontrolled group (select D2)
+      await userEvent.click(screen.getByText('D2'))
+      expect(options[0]).toHaveAttribute('aria-checked', 'true') // C1 controlled
+      expect(options[1]).toHaveAttribute('aria-checked', 'false') // C2 controlled
+      expect(options[2]).toHaveAttribute('aria-checked', 'true') // D1 uncontrolled
+      expect(options[3]).toHaveAttribute('aria-checked', 'true') // D2 uncontrolled
+
+      // controlled selectedOptions prop changes
+      rerender(
+        <Drilldown rootPageId="root">
+          <Drilldown.Page id="root">
+            <Drilldown.Group
+              id="controlled"
+              selectableType="multiple"
+              selectedOptions={['val-c-2']}
+            >
+              <Drilldown.Option id="c1" value="val-c-1">
+                C1
+              </Drilldown.Option>
+              <Drilldown.Option id="c2" value="val-c-2">
+                C2
+              </Drilldown.Option>
+            </Drilldown.Group>
+            <Drilldown.Group
+              id="default"
+              selectableType="multiple"
+              defaultSelected={['val-d-1']}
+            >
+              <Drilldown.Option id="d1" value="val-d-1">
+                D1
+              </Drilldown.Option>
+              <Drilldown.Option id="d2" value="val-d-2">
+                D2
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      // controlled group updates, uncontrolled keeps user state
+      expect(options[0]).toHaveAttribute('aria-checked', 'false') // C1 controlled
+      expect(options[1]).toHaveAttribute('aria-checked', 'true') // C2 controlled
+      expect(options[2]).toHaveAttribute('aria-checked', 'true') // D1 uncontrolled
+      expect(options[3]).toHaveAttribute('aria-checked', 'true') // D2 uncontrolled
+    })
+
+    describe('Option selection hierarchy at initial render', () => {
+      const TEST_ID = 'opt1'
+      const renderSelectionTest = ({ groupProps = {}, optionProps = {} }) => {
+        return render(
+          <Drilldown rootPageId="root">
+            <Drilldown.Page id="root">
+              <Drilldown.Group
+                id="group1"
+                selectableType="multiple"
+                {...groupProps}
+              >
+                <Drilldown.Option
+                  id="opt1"
+                  data-testid={TEST_ID}
+                  {...optionProps}
+                >
+                  The option being tested
+                </Drilldown.Option>
+              </Drilldown.Group>
+            </Drilldown.Page>
+          </Drilldown>
+        )
+      }
+
+      it('should set correctly when option in selectedOptions prop, in group default prop, option default=false', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['val1'],
+            defaultSelected: ['val1']
+          },
+          optionProps: { value: 'val1', defaultSelected: false }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'true'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option in selectedOptions prop, not in group default prop, option default=false', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['val1'],
+            defaultSelected: ['x']
+          },
+          optionProps: { value: 'val1', defaultSelected: false }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'true'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option not in selectedOptions prop, in group default prop, option default=false', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['x'],
+            defaultSelected: ['val1']
+          },
+          optionProps: { value: 'val1', defaultSelected: false }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'false'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option not in selectedOptions prop, not in group default prop, option default=true', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['x'],
+            defaultSelected: ['x']
+          },
+          optionProps: { value: 'val1', defaultSelected: true }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'false'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option controlled prop not exist, in group default prop, option default=false)', () => {
+        renderSelectionTest({
+          groupProps: {
+            defaultSelected: ['val1']
+          },
+          optionProps: { value: 'val1', defaultSelected: false }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'false'
+        ) // option default wins
+      })
+
+      it('should set correctly when option controlled prop not exist, not in group default prop, option default=true', () => {
+        renderSelectionTest({
+          groupProps: {
+            defaultSelected: ['x']
+          },
+          optionProps: { value: 'val1', defaultSelected: true }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'true'
+        ) // option default wins
+      })
+
+      it('should set correctly when option in selectedOptions prop, group default not exist, option default=false', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['val1']
+          },
+          optionProps: { value: 'val1', defaultSelected: false }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'true'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option not in selectedOptions prop, group default not exist, option default=true', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['x']
+          },
+          optionProps: { value: 'val1', defaultSelected: true }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'false'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option in selectedOptions prop, not in group default prop, option default not exist', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['val1'],
+            defaultSelected: ['x']
+          },
+          optionProps: { value: 'val1' }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'true'
+        ) // selectedOptions prop wins
+      })
+
+      it('should set correctly when option not in selectedOptions prop, in group default prop, option default not exist', () => {
+        renderSelectionTest({
+          groupProps: {
+            selectedOptions: ['x'],
+            defaultSelected: ['val1']
+          },
+          optionProps: { value: 'val1' }
+        })
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'aria-checked',
+          'false'
+        ) // selectedOptions prop wins
+      })
+
+      describe('When the selectedOptions prop changes', () => {
+        const TEST_ID_1 = 'opt1'
+        const TEST_ID_2 = 'opt2'
+        const TEST_ID_3 = 'opt3'
+        const getDrilldownComponent = ({
+          groupProps = {},
+          option_1_Props = {},
+          option_2_Props = {},
+          option_3_Props = {}
+        }) => (
+          <Drilldown rootPageId="root">
+            <Drilldown.Page id="root">
+              <Drilldown.Group
+                id="group1"
+                selectableType="multiple"
+                {...groupProps}
+              >
+                <Drilldown.Option
+                  id="opt1"
+                  data-testid={TEST_ID_1}
+                  {...option_1_Props}
+                >
+                  Option 1
+                </Drilldown.Option>
+                <Drilldown.Option
+                  id="opt2"
+                  data-testid={TEST_ID_2}
+                  {...option_2_Props}
+                >
+                  Option 2
+                </Drilldown.Option>
+                <Drilldown.Option
+                  id="opt3"
+                  data-testid={TEST_ID_3}
+                  {...option_3_Props}
+                >
+                  Option 2
+                </Drilldown.Option>
+              </Drilldown.Group>
+            </Drilldown.Page>
+          </Drilldown>
+        )
+
+        it('should overwrite previous selectedOptions prop selections', () => {
+          const { rerender } = render(
+            getDrilldownComponent({
+              groupProps: {
+                selectedOptions: ['val1', 'val2']
+              },
+              option_1_Props: { value: 'val1' },
+              option_2_Props: { value: 'val2' },
+              option_3_Props: { value: 'val3' }
+            })
+          )
+
+          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+            'aria-checked',
+            'true'
+          )
+          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+            'aria-checked',
+            'true'
+          )
+          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+
+          rerender(
+            getDrilldownComponent({
+              groupProps: {
+                selectedOptions: ['val3']
+              },
+              option_1_Props: { value: 'val1' },
+              option_2_Props: { value: 'val2' },
+              option_3_Props: { value: 'val3' }
+            })
+          )
+
+          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+            'aria-checked',
+            'true'
+          )
+        })
+
+        it('should overwrite group default selection and option default selection', () => {
+          const { rerender } = render(
+            getDrilldownComponent({
+              groupProps: {
+                selectedOptions: ['val1'],
+                defaultSelected: ['val2']
+              },
+              option_1_Props: { value: 'val1' },
+              option_2_Props: { value: 'val2' },
+              option_3_Props: { value: 'val3', defaultSelected: true }
+            })
+          )
+
+          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+            'aria-checked',
+            'true'
+          )
+          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+
+          // Set prop: selectedOptions
+          rerender(
+            getDrilldownComponent({
+              groupProps: {
+                selectedOptions: [],
+                defaultSelected: ['val2']
+              },
+              option_1_Props: { value: 'val1' },
+              option_2_Props: { value: 'val2' },
+              option_3_Props: { value: 'val3', defaultSelected: true }
+            })
+          )
+
+          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+        })
+
+        it('should overwrite group default selection and option default selection when selectedOptions provided', () => {
+          const { rerender } = render(
+            getDrilldownComponent({
+              groupProps: {
+                defaultSelected: ['val2']
+              },
+              option_1_Props: { value: 'val1' },
+              option_2_Props: { value: 'val2' },
+              option_3_Props: { value: 'val3', defaultSelected: true }
+            })
+          )
+
+          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+            'aria-checked',
+            'true'
+          )
+          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+            'aria-checked',
+            'true'
+          )
+
+          // Set new prop: selectedOptions
+          rerender(
+            getDrilldownComponent({
+              groupProps: {
+                selectedOptions: [],
+                defaultSelected: ['val2']
+              },
+              option_1_Props: { value: 'val1' },
+              option_2_Props: { value: 'val2' },
+              option_3_Props: { value: 'val3', defaultSelected: true }
+            })
+          )
+
+          expect(screen.getByTestId(TEST_ID_1)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_2)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+          expect(screen.getByTestId(TEST_ID_3)).toHaveAttribute(
+            'aria-checked',
+            'false'
+          )
+        })
+      })
+    })
+  })
 })
