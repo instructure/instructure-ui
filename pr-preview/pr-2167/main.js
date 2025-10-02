@@ -4291,11 +4291,12 @@ if(docId.includes(".")){const components=docId.split("."),everyComp=EveryCompone
 docData.componentInstance=everyComp[components[0]][components[1]]}else docData.componentInstance=EveryComponent[docId]
 return docData},this.fetchVersionData=async signal=>{const versionsData=await(0,_versionData.fetchVersionData)(signal)
 return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContentRef=el},this.focusContent=()=>{this._mainContentRef&&this._mainContentRef.focus()},this.getPathInfo=()=>{const _window$location=window.location,hash=_window$location.hash,pathname=_window$location.pathname
-if(hash&&hash.startsWith("#")){const path=hash.split("/")
+if(hash&&hash.startsWith("#")&&!hash.startsWith("##")){const path=hash.split("/")
 if(path){const _path$map=path.map((entry=>decodeURI(entry.replace("#","")))),_path$map2=(0,_slicedToArray2.default)(_path$map,2)
-return[_path$map2[0],_path$map2[1]]}}else if(pathname&&"/"!==pathname){const path=pathname.replace(/^\/+/,"").split("/")
-if(path&&path[0]){const _path=(0,_slicedToArray2.default)(path,2)
-return[_path[0],_path[1]]}}return[]},this.updateLayout=matches=>{let layout="small"
+return[_path$map2[0],_path$map2[1]]}}else{const pathSegments=pathname.replace(/^\/+|\/+$/g,"").split("/")
+if(pathSegments.length>0&&""!==pathSegments[0]){const page=pathSegments[pathSegments.length-1]
+let id
+return hash&&hash.startsWith("##")?id=decodeURI(hash.replace("##","")):hash&&!hash.startsWith("#/")&&(id=decodeURI(hash.replace("#",""))),[page,id]}}return[]},this.updateLayout=matches=>{let layout="small"
 matches.length>0&&(matches.includes("medium")&&1===matches.length?layout="medium":matches.includes("large")&&2===matches.length?layout="large":matches.includes("x-large")&&(layout="x-large")),this.setState({layout})},this.updateKey=()=>{const _this$getPathInfo=this.getPathInfo(),_this$getPathInfo2=(0,_slicedToArray2.default)(_this$getPathInfo,2),page=_this$getPathInfo2[0]
 _this$getPathInfo2[1]
 page?this.setState((({key,showMenu})=>({key:page||"index",showMenu:this.handleShowTrayOnURLChange(key,showMenu)})),this.scrollToElement):this.trackPage("index")},this.handleContentRef=el=>{this._content=el},this.handleMenuTriggerRef=el=>{this._menuTrigger=el},this.handleMenuOpen=()=>{this.setState({showMenu:!0},(()=>{var _this$_navRef$current
