@@ -2543,7 +2543,7 @@ type: embed
 | Drilldown.DrilldownGroup | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | Element type to render as. By default, it inherits Drilldown's `as` prop. |
 | Drilldown.DrilldownGroup | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 | Drilldown.DrilldownGroup | selectableType | `'single' \| 'multiple'` | No | - | Makes the option group selectable (with "check" icon indicators). Can be set to a single-select (radio) or a multi-select (checkbox) group. |
-| Drilldown.DrilldownGroup | defaultSelected | `DrilldownOptionValue[]` | No | - | An array of the values for the selected items. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item. |
+| Drilldown.DrilldownGroup | defaultSelected | `DrilldownOptionValue[]` | No | - | An array of the values for the selected items on initial render. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item. |
 | Drilldown.DrilldownGroup | selectedOptions | `DrilldownOptionValue[]` | No | - | An array of the values for the selected items. If defined, the component will act controlled and will not manage its own state. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item. |
 | Drilldown.DrilldownGroup | onSelect | `( event: React.SyntheticEvent, args: { value: DrilldownOptionValue[] isSelected: boolean selectedOption: OptionChild drilldown: Drilldown } ) => void` | No | - | Callback fired when an option within the `<Drilldown.Group />` is selected |
 | Drilldown.DrilldownOption | id | `string` | Yes | - |  |
