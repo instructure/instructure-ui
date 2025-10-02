@@ -4294,7 +4294,8 @@ return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContent
 const hash=window.location.hash
 pathname.endsWith("/")&&"/"!==pathname&&(pathname=pathname.slice(0,-1))
 let id,page=pathname.split("/").filter(Boolean)[0]||"index"
-if((!page||"index"===page||"index"===this.state.key)&&hash){const hashContent=hash.substring(1)
+const isPreviewPath=pathname.includes("/pr-preview/")
+if((!page||"index"===page||isPreviewPath)&&hash){const hashContent=hash.substring(1)
 if(hashContent.includes("/#")){const _hashContent$split=hashContent.split("/#"),_hashContent$split2=(0,_slicedToArray2.default)(_hashContent$split,2)
 page=_hashContent$split2[0],id=_hashContent$split2[1]
 const basePath="/"!==pathname?pathname:""
