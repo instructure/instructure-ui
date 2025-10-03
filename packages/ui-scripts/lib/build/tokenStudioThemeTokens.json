@@ -1351,6 +1351,12 @@
               "value": "{color.grey.grey10}",
               "type": "color"
             }
+          },
+          "aiSecondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "accent": {
@@ -1506,6 +1512,12 @@
                 "value": "{color.sea.sea90}",
                 "type": "color"
               }
+            }
+          },
+          "primaryOnColor": {
+            "base": {
+              "value": "{color.grey.grey80}",
+              "type": "color"
             }
           }
         }
@@ -1953,6 +1965,12 @@
               "value": "{color.grey.grey10}",
               "type": "color"
             }
+          },
+          "aiSecondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "accent": {
@@ -2108,6 +2126,12 @@
                 "value": "{color.sea.sea90}",
                 "type": "color"
               }
+            }
+          },
+          "primaryOnColor": {
+            "base": {
+              "value": "{color.grey.grey80}",
+              "type": "color"
             }
           }
         }
@@ -2669,20 +2693,28 @@
         "value": "{color.stroke.interactive.success.base}",
         "type": "color"
       },
-      "dangerBackgroundColor": {
+      "successTextColor": {
+        "value": "{color.text.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "destructiveBackgroundColor": {
         "value": "{color.background.interactive.destructive.base}",
         "type": "color"
       },
-      "dangerHoverBackgroundColor": {
+      "destructiveHoverBackgroundColor": {
         "value": "{color.background.interactive.destructive.hover}",
         "type": "color"
       },
-      "dangerActiveBackgroundColor": {
+      "destructiveActiveBackgroundColor": {
         "value": "{color.background.interactive.destructive.active}",
         "type": "color"
       },
-      "dangerBorderColor": {
+      "destructiveBorderColor": {
         "value": "{color.stroke.interactive.destructive.base}",
+        "type": "color"
+      },
+      "destructiveTextColor": {
+        "value": "{color.text.interactive.primaryOnColor.base}",
         "type": "color"
       },
       "aiBackgroundBottomGradientColor": {
@@ -2717,6 +2749,14 @@
         "value": "{color.stroke.interactive.ai.bottomGradient.base}",
         "type": "color"
       },
+      "aiTextColor": {
+        "value": "{color.text.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "aiSecondaryBackgroundColor": {
+        "value": "{color.background.interactive.aiSecondary.base}",
+        "type": "color"
+      },
       "primaryOnColorBackgroundColor": {
         "value": "{color.background.interactive.primaryOnColor.base}",
         "type": "color"
@@ -2727,6 +2767,10 @@
       },
       "primaryOnColorActiveBackgroundColor": {
         "value": "{color.background.interactive.primaryOnColor.active}",
+        "type": "color"
+      },
+      "primaryOnColorBorderColor": {
+        "value": "{color.stroke.interactive.primaryOnColor.base}",
         "type": "color"
       }
     }
@@ -4586,6 +4630,12 @@
               "value": "{color.grey.grey10}",
               "type": "color"
             }
+          },
+          "aiSecondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "accent": {
@@ -4741,6 +4791,12 @@
                 "value": "{color.sea.sea90}",
                 "type": "color"
               }
+            }
+          },
+          "primaryOnColor": {
+            "base": {
+              "value": "{color.grey.grey80}",
+              "type": "color"
             }
           }
         }
@@ -5188,6 +5244,12 @@
               "value": "{color.grey.grey10}",
               "type": "color"
             }
+          },
+          "aiSecondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "accent": {
@@ -5343,6 +5405,12 @@
                 "value": "{color.sea.sea90}",
                 "type": "color"
               }
+            }
+          },
+          "primaryOnColor": {
+            "base": {
+              "value": "{color.grey.grey80}",
+              "type": "color"
             }
           }
         }
