@@ -1639,6 +1639,20 @@
               "value": "{color.red.red80}",
               "type": "color"
             }
+          },
+          "ai": {
+            "TopGradient": {
+              "base": {
+                "value": "{color.violet.violet70}",
+                "type": "color"
+              }
+            },
+            "BottomGradient": {
+              "base": {
+                "value": "{color.sea.sea70}",
+                "type": "color"
+              }
+            }
           }
         },
         "accent": {
@@ -2253,6 +2267,20 @@
               "value": "{color.red.red110}",
               "type": "color"
             }
+          },
+          "ai": {
+            "TopGradient": {
+              "base": {
+                "value": "{color.violet.violet70}",
+                "type": "color"
+              }
+            },
+            "BottomGradient": {
+              "base": {
+                "value": "{color.sea.sea70}",
+                "type": "color"
+              }
+            }
           }
         },
         "accent": {
@@ -2755,6 +2783,14 @@
       },
       "aiSecondaryBackgroundColor": {
         "value": "{color.background.interactive.aiSecondary.base}",
+        "type": "color"
+      },
+      "aiSecondaryTextTopGradientColor": {
+        "value": "{color.text.interactive.ai.TopGradient.base}",
+        "type": "color"
+      },
+      "aiSecondaryTextBottomGradientColor": {
+        "value": "{color.text.interactive.ai.BottomGradient.base}",
         "type": "color"
       },
       "primaryOnColorBackgroundColor": {
@@ -4918,6 +4954,20 @@
               "value": "{color.red.red80}",
               "type": "color"
             }
+          },
+          "ai": {
+            "TopGradient": {
+              "base": {
+                "value": "{color.violet.violet70}",
+                "type": "color"
+              }
+            },
+            "BottomGradient": {
+              "base": {
+                "value": "{color.sea.sea70}",
+                "type": "color"
+              }
+            }
           }
         },
         "accent": {
@@ -5531,6 +5581,20 @@
             "active": {
               "value": "{color.red.red40}",
               "type": "color"
+            }
+          },
+          "ai": {
+            "TopGradient": {
+              "base": {
+                "value": "{color.violet.violet70}",
+                "type": "color"
+              }
+            },
+            "BottomGradient": {
+              "base": {
+                "value": "{color.sea.sea70}",
+                "type": "color"
+              }
             }
           }
         },
