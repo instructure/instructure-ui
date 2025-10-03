@@ -738,7 +738,7 @@
         "type": "dimension"
       }
     },
-    "undeline": {
+    "underline": {
       "value": "underline",
       "type": "textDecoration"
     }
@@ -1142,38 +1142,6 @@
             "fontWeight": "{fontWeight.regular}",
             "fontSize": "{size.size20}",
             "lineHeight": "{size.size20}"
-          },
-          "type": "typography"
-        }
-      },
-      "inlineLink": {
-        "small": {
-          "value": {
-            "fontFamily": "{fontFamily.lato}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size14}",
-            "lineHeight": "{size.size20}",
-            "textDecoration": "{undeline}"
-          },
-          "type": "typography"
-        },
-        "medium": {
-          "value": {
-            "fontFamily": "{fontFamily.lato}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size16}",
-            "lineHeight": "{size.size20}",
-            "textDecoration": "{undeline}"
-          },
-          "type": "typography"
-        },
-        "large": {
-          "value": {
-            "fontFamily": "{fontFamily.lato}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size28}",
-            "lineHeight": "{size.size32}",
-            "textDecoration": "{undeline}"
           },
           "type": "typography"
         }
@@ -2777,21 +2745,21 @@
   },
   "canvas/component/Breadcrumb": {
     "breadcrumb": {
-      "fontSizeLg": {
-        "value": "{fontSize.text2xl}",
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
         "type": "fontSizes"
       },
       "fontSizeMd": {
         "value": "{fontSize.textBase}",
         "type": "fontSizes"
       },
+      "fontSizeLg": {
+        "value": "22px",
+        "type": "fontSizes"
+      },
       "separatorColor": {
         "value": "{color.icon.muted}",
         "type": "color"
-      },
-      "fontSizeSm": {
-        "value": "{fontSize.textSm}",
-        "type": "fontSizes"
       },
       "fontColor": {
         "value": "{color.text.base}",
@@ -2946,12 +2914,16 @@
         "type": "fontSizes"
       },
       "fontSizeLg": {
-        "value": "{fontSize.text2xl}",
+        "value": "22px",
         "type": "fontSizes"
       },
       "fontWeight": {
         "value": "{fontWeight.body.base}",
         "type": "fontWeights"
+      },
+      "spaceBetweenElementsSm": {
+        "value": "{spacing.space2xs}",
+        "type": "spacing"
       },
       "spaceBetweenElementsMd": {
         "value": "{spacing.spaceXs}",
@@ -2959,10 +2931,6 @@
       },
       "spaceBetweenElementsLg": {
         "value": "{spacing.spaceXs}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsSm": {
-        "value": "{spacing.space2xs}",
         "type": "spacing"
       },
       "lineHeightSm": {
@@ -2974,12 +2942,44 @@
         "type": "lineHeights"
       },
       "lineHeightLg": {
-        "value": "{lineHeight.standalone.text2xl}",
+        "value": "33px",
         "type": "lineHeights"
       },
       "fontFamily": {
         "value": "{fontFamily.base}",
         "type": "fontFamilies"
+      },
+      "inlineLink": {
+        "small": {
+          "value": {
+            "fontFamily": "{fontFamily.base}",
+            "fontWeight": "{fontWeight.body.base}",
+            "fontSize": "{fontSize.textSm}",
+            "lineHeight": "{lineHeight.paragraph.textSm}",
+            "textDecoration": "underline"
+          },
+          "type": "typography"
+        },
+        "medium": {
+          "value": {
+            "fontFamily": "{fontFamily.base}",
+            "fontWeight": "{fontWeight.body.base}",
+            "fontSize": "{fontSize.textBase}",
+            "lineHeight": "{lineHeight.paragraph.textBase}",
+            "textDecoration": "underline"
+          },
+          "type": "typography"
+        },
+        "large": {
+          "value": {
+            "fontFamily": "{fontFamily.base}",
+            "fontWeight": "{fontWeight.body.base}",
+            "fontSize": "22px",
+            "lineHeight": "33px",
+            "textDecoration": "underline"
+          },
+          "type": "typography"
+        }
       }
     }
   },
@@ -3514,12 +3514,16 @@
   },
   "rebrand/component/Breadcrumb": {
     "breadcrumb": {
-      "fontSizeLg": {
-        "value": "{fontSize.text2xl}",
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
         "type": "fontSizes"
       },
       "fontSizeMd": {
         "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "{fontSize.textXl}",
         "type": "fontSizes"
       },
       "separatorColor": {
@@ -3529,10 +3533,6 @@
       "fontColor": {
         "value": "{color.text.base}",
         "type": "color"
-      },
-      "fontSizeSm": {
-        "value": "{fontSize.textSm}",
-        "type": "fontSizes"
       },
       "iconColor": {
         "value": "{color.icon.base}",
@@ -3683,7 +3683,7 @@
         "type": "fontSizes"
       },
       "fontSizeLg": {
-        "value": "{fontSize.text2xl}",
+        "value": "{fontSize.textXl}",
         "type": "fontSizes"
       },
       "fontWeight": {
@@ -3711,12 +3711,44 @@
         "type": "lineHeights"
       },
       "lineHeightLg": {
-        "value": "{lineHeight.standalone.text2xl}",
+        "value": "{lineHeight.standalone.textXl}",
         "type": "lineHeights"
       },
       "fontFamily": {
         "value": "{fontFamily.base}",
         "type": "fontFamilies"
+      },
+      "inlineLink": {
+        "small": {
+          "value": {
+            "fontFamily": "{fontFamily.base}",
+            "fontWeight": "{fontWeight.body.strong}",
+            "fontSize": "{fontSize.textSm}",
+            "lineHeight": "{lineHeight.standalone.textSm}",
+            "textDecoration": "{underline}"
+          },
+          "type": "typography"
+        },
+        "medium": {
+          "value": {
+            "fontFamily": "{fontFamily.base}",
+            "fontWeight": "{fontWeight.body.strong}",
+            "fontSize": "{fontSize.textBase}",
+            "lineHeight": "{lineHeight.paragraph.textBase}",
+            "textDecoration": "{underline}"
+          },
+          "type": "typography"
+        },
+        "large": {
+          "value": {
+            "fontFamily": "{fontFamily.base}",
+            "fontWeight": "{fontWeight.body.strong}",
+            "fontSize": "{fontSize.textXl}",
+            "lineHeight": "{lineHeight.standalone.textXl}",
+            "textDecoration": "{underline}"
+          },
+          "type": "typography"
+        }
       }
     }
   },
@@ -4472,7 +4504,7 @@
             "fontWeight": "{fontWeight.semiBold}",
             "fontSize": "{size.size14}",
             "lineHeight": "{size.size20}",
-            "textDecoration": "{undeline}"
+            "textDecoration": "{underline}"
           },
           "type": "typography"
         },
@@ -4482,7 +4514,7 @@
             "fontWeight": "{fontWeight.semiBold}",
             "fontSize": "{size.size16}",
             "lineHeight": "{size.size20}",
-            "textDecoration": "{undeline}"
+            "textDecoration": "{underline}"
           },
           "type": "typography"
         },
@@ -4492,7 +4524,7 @@
             "fontWeight": "{fontWeight.semiBold}",
             "fontSize": "{size.size28}",
             "lineHeight": "{size.size32}",
-            "textDecoration": "{undeline}"
+            "textDecoration": "{underline}"
           },
           "type": "typography"
         }
@@ -6124,11 +6156,11 @@
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
         "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
-        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
+        "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
+        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
-        "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
         "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
@@ -6373,7 +6405,10 @@
         "elevation1": "S:f6e56fcfa72eb3ce5c396483c68ee3d46a49b8e1,",
         "elevation2": "S:d9b620d937a806fc84ee67f090b1f84eb7b46fb2,",
         "elevation3": "S:38e039876482ed5c0ebac6a4bee16b2f4e039b74,",
-        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,"
+        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,",
+        "link.inlineLink.small": "S:707e99282efa809c9bfcdc74efee599fec7ae5bc,",
+        "link.inlineLink.medium": "S:832baa9395e18e93d07b3110a86bdd0ad781c2f2,",
+        "link.inlineLink.large": "S:d34f256fce94ad1b7a65c5ebd65e2cf85fe472d2,"
       },
       "$figmaVariableReferences": {
         "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -6566,11 +6601,11 @@
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
         "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
-        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
+        "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
         "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
+        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
-        "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
         "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
@@ -7073,10 +7108,10 @@
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
         "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
-        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
-        "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
-        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
+        "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
+        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
+        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
@@ -7114,9 +7149,9 @@
         "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
         "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
         "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
         "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
@@ -7234,13 +7269,16 @@
         "typography.input.small": "S:bdbea5e88f63f467832c26760a4273b50b83bfc6,",
         "typography.input.medium": "S:44dbbe995948bcfae6243d0dde50fc25eace02dc,",
         "typography.input.large": "S:5edb96309d9edde79b6260108facc5924adc66dd,",
-        "typography.inlineLink.small": "S:48893af058bbcc2a1cdab3eb666893362d2da352,",
-        "typography.inlineLink.medium": "S:7b059cab6bcd99df80d9d97c46aca302ce7ab9f2,",
-        "typography.inlineLink.large": "S:6d3e5fea338defd161fe95bcfec6e3846e82f52e,",
+        "typography.inlineLink.small": "S:11a50ff60e46b766021e9902c124dd3badd5cfa3,",
+        "typography.inlineLink.medium": "S:c6229548c1e5916eaea747e5e340939f772fe63e,",
+        "typography.inlineLink.large": "S:a624d460722359839de743446ce83191bb8bb96a,",
         "elevation1": "S:f6e56fcfa72eb3ce5c396483c68ee3d46a49b8e1,",
         "elevation2": "S:d9b620d937a806fc84ee67f090b1f84eb7b46fb2,",
         "elevation3": "S:38e039876482ed5c0ebac6a4bee16b2f4e039b74,",
-        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,"
+        "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,",
+        "link.inlineLink.small": "S:707e99282efa809c9bfcdc74efee599fec7ae5bc,",
+        "link.inlineLink.medium": "S:832baa9395e18e93d07b3110a86bdd0ad781c2f2,",
+        "link.inlineLink.large": "S:d34f256fce94ad1b7a65c5ebd65e2cf85fe472d2,"
       },
       "$figmaVariableReferences": {
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
@@ -7513,10 +7551,10 @@
         "avatar.fontSizeXl": "385bfd3edfebf08fd2a0391021db2defdee4391f",
         "avatar.fontSize2xl": "024888f10c15856be4bd6c569f78d1590a23d16c",
         "avatar.fontFamily": "e71bd01b1e84aacb9313cca9cf3d06519636aeb8",
-        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
-        "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
-        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontSizeSm": "2e21b3b5bcb6b35f3cbf1a93a1293f154751f2d9",
+        "breadcrumb.fontSizeMd": "d04aaef6b47069fbad44a60d974537e5482678d3",
+        "breadcrumb.fontSizeLg": "4dcedcc85f3b96565aae95882db2af71044eb52a",
+        "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
@@ -7554,9 +7592,9 @@
         "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
         "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
+        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
         "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
         "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
