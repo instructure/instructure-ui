@@ -2811,29 +2811,6 @@
       }
     }
   },
-  "canvas/component/Elevation": {
-    "elevation1": {
-      "value": [
-        {
-          "x": "{x.elevation1.dropshadow1}",
-          "y": "{y.elevation1.dropshadow1}",
-          "blur": "{blur.elevation1.dropshadow1}",
-          "spread": "{spread.elevation1.dropshadow1}",
-          "color": "{color.dropShadow.shadowColor1}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{x.elevation1.dropshadow2}",
-          "y": "{y.elevation1.dropshadow2}",
-          "blur": "{blur.elevation1.dropshadow2}",
-          "spread": "{spread.elevation1.dropshadow2}",
-          "color": "{color.dropShadow.shadowColor2}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
-    }
-  },
   "canvas/component/FormFieldLabel": {
     "formFieldLabel": {
       "textColor": {
@@ -3569,29 +3546,6 @@
         "value": "{spacing.space2xs}",
         "type": "spacing"
       }
-    }
-  },
-  "rebrand/component/Elevation": {
-    "elevation1": {
-      "value": [
-        {
-          "x": "{x.elevation1.dropshadow1}",
-          "y": "{y.elevation1.dropshadow1}",
-          "blur": "{blur.elevation1.dropshadow1}",
-          "spread": "{spread.elevation1.dropshadow1}",
-          "color": "{color.dropShadow.shadowColor1}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{x.elevation1.dropshadow2}",
-          "y": "{y.elevation1.dropshadow2}",
-          "blur": "{blur.elevation1.dropshadow2}",
-          "spread": "{spread.elevation1.dropshadow2}",
-          "color": "{color.dropShadow.shadowColor2}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
     }
   },
   "rebrand/component/FormFieldLabel": {
@@ -5961,8 +5915,7 @@
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
-        "canvas/component/TextInput": "enabled",
-        "canvas/component/Elevation": "enabled"
+        "canvas/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -6391,8 +6344,7 @@
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
-        "canvas/component/TextInput": "enabled",
-        "canvas/component/Elevation": "enabled"
+        "canvas/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -6834,8 +6786,7 @@
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
-        "rebrand/component/TextInput": "enabled",
-        "rebrand/component/Elevation": "enabled"
+        "rebrand/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -7262,8 +7213,7 @@
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
-        "rebrand/component/TextInput": "enabled",
-        "rebrand/component/Elevation": "enabled"
+        "rebrand/component/TextInput": "enabled"
       },
       "$figmaStyleReferences": {
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -7697,7 +7647,6 @@
       "canvas/semantic/color/canvasHighContrast",
       "canvas/component/Avatar",
       "canvas/component/Breadcrumb",
-      "canvas/component/Elevation",
       "canvas/component/FormFieldLabel",
       "canvas/component/FormFieldMessage",
       "canvas/component/Link",
@@ -7707,7 +7656,6 @@
       "canvas/component/TextInput",
       "rebrand/component/Avatar",
       "rebrand/component/Breadcrumb",
-      "rebrand/component/Elevation",
       "rebrand/component/FormFieldLabel",
       "rebrand/component/FormFieldMessage",
       "rebrand/component/Link",
