@@ -22,7 +22,16 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import {
+  forwardRef,
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  useCallback,
+  useImperativeHandle,
+  useMemo
+} from 'react'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
@@ -34,7 +43,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 import { withStyle } from '@instructure/emotion'
 
 import { MenuContext } from '../../MenuContext'
@@ -43,7 +51,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { MenuItemProps, MenuItemState } from './props'
+import type { MenuItemProps } from './props'
 
 /**
 ---
@@ -51,94 +59,83 @@ parent: Menu
 id: Menu.Item
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
-class MenuItem extends Component<MenuItemProps, MenuItemState> {
-  static readonly componentId = 'Menu.Item'
+const MenuItemComponent = forwardRef<any, MenuItemProps>((props, ref) => {
+  const {
+    type = 'button',
+    disabled = false,
+    selected: selectedProp,
+    defaultSelected,
+    onSelect,
+    onClick,
+    onMouseOver,
+    onKeyDown,
+    onKeyUp,
+    value,
+    children,
+    renderLabelInfo,
+    controls,
+    href,
+    target,
+    deterministicId,
+    makeStyles,
+    styles
+  } = props
 
-  static propTypes = propTypes
-  static allowedProps = allowedProps
-  static defaultProps = {
-    type: 'button',
-    disabled: false
-  } as const
+  const context = useContext(MenuContext)
+  const elementRef = useRef<Element | null>(null)
+  const [selectedState, setSelectedState] = useState(!!defaultSelected)
+  const labelIdRef = useRef(deterministicId?.('MenuItem__label'))
+  const labelId = labelIdRef.current!
 
-  declare context: React.ContextType<typeof MenuContext>
-  static contextType = MenuContext
+  const selected =
+    typeof selectedProp === 'undefined' ? selectedState : selectedProp
 
-  constructor(props: MenuItemProps) {
-    super(props)
+  useEffect(() => {
+    makeStyles?.()
+  }, [makeStyles])
 
-    if (typeof props.selected === 'undefined') {
-      this.state = {
-        selected: !!props.defaultSelected
+  useEffect(() => {
+    if (context && context.registerMenuItem) {
+      context.registerMenuItem(imperativeHandle as any)
+    }
+    return () => {
+      if (context && context.removeMenuItem) {
+        context.removeMenuItem(imperativeHandle as any)
       }
     }
+  }, [context])
 
-    this.labelId = props.deterministicId!('MenuItem__label')
-  }
+  const focus = useCallback(() => {
+    const refNode = findDOMNode(elementRef.current) as HTMLElement
+    refNode.focus()
+  }, [])
 
-  get _node() {
-    console.warn(
-      '_node property is deprecated and will be removed in v9, please use ref instead'
-    )
+  const handleClick = useCallback(
+    (e: React.MouseEvent) => {
+      const newSelected = !selected
 
-    return this.ref
-  }
+      if (disabled) {
+        e.preventDefault()
+        return
+      }
 
-  labelId: string
-  ref: Element | null = null
+      if (typeof selectedProp === 'undefined') {
+        setSelectedState(newSelected)
+      }
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
+      if (typeof onSelect === 'function') {
+        e.persist()
+        onSelect(e, value, newSelected, imperativeHandle as any)
+      }
 
-  componentDidMount() {
-    this.props.makeStyles?.()
-    const context = this.context
+      if (typeof onClick === 'function') {
+        onClick(e)
+      }
+    },
+    [disabled, selected, selectedProp, onSelect, value, onClick]
+  )
 
-    if (context && context.registerMenuItem) {
-      context.registerMenuItem(this)
-    }
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  componentWillUnmount() {
-    const context = this.context
-
-    if (context && context.removeMenuItem) {
-      context.removeMenuItem(this)
-    }
-  }
-
-  handleClick = (e: React.MouseEvent) => {
-    const { onSelect, onClick, disabled, value } = this.props
-    const selected = !this.selected
-
-    if (disabled) {
-      e.preventDefault()
-      return
-    }
-
-    if (typeof this.props.selected === 'undefined') {
-      this.setState({ selected })
-    }
-
-    if (typeof onSelect === 'function') {
-      e.persist()
-      onSelect(e, value, selected, this)
-    }
-
-    if (typeof onClick === 'function') {
-      onClick(e)
-    }
-  }
-
-  handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     const spaceKey = e.keyCode === keycode.codes.space
     const enterKey = e.keyCode === keycode.codes.enter
 
@@ -148,13 +145,13 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
 
       if (enterKey) {
         // handle space key on keyUp for FF
-        const refNode = findDOMNode(this.ref) as HTMLElement
+        const refNode = findDOMNode(elementRef.current) as HTMLElement
         refNode.click()
       }
     }
-  }
+  }, [])
 
-  handleKeyUp = (e: React.KeyboardEvent) => {
+  const handleKeyUp = useCallback((e: React.KeyboardEvent) => {
     const spaceKey = e.keyCode === keycode.codes.space
     const enterKey = e.keyCode === keycode.codes.enter
 
@@ -163,28 +160,46 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
       e.stopPropagation()
 
       if (spaceKey) {
-        const refNode = findDOMNode(this.ref) as HTMLElement
+        const refNode = findDOMNode(elementRef.current) as HTMLElement
         refNode.click()
       }
     }
-  }
+  }, [])
 
-  handleMouseOver = (event: React.MouseEvent) => {
-    if (!this.focused) {
-      this.focus()
-    }
+  const handleMouseOver = useCallback(
+    (event: React.MouseEvent) => {
+      if (!isActiveElement(elementRef.current)) {
+        focus()
+      }
 
-    if (typeof this.props.onMouseOver === 'function') {
-      this.props.onMouseOver(event, this)
-    }
-  }
+      if (typeof onMouseOver === 'function') {
+        onMouseOver(event, imperativeHandle as any)
+      }
+    },
+    [focus, onMouseOver]
+  )
 
-  get elementType() {
-    return getElementType(MenuItem, this.props)
-  }
+  const imperativeHandle = useMemo(
+    () => ({
+      focus,
+      get focused() {
+        return isActiveElement(elementRef.current)
+      },
+      ref: elementRef.current,
+      get _node() {
+        console.warn(
+          '_node property is deprecated and will be removed in v9, please use ref instead'
+        )
+        return elementRef.current
+      }
+    }),
+    [focus]
+  )
 
-  get role() {
-    switch (this.props.type) {
+  useImperativeHandle(ref, () => imperativeHandle, [imperativeHandle])
+
+  const role = useMemo(() => {
+    switch (type) {
       case 'checkbox':
         return 'menuitemcheckbox'
       case 'radio':
@@ -192,86 +207,76 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
       default:
         return 'menuitem'
     }
-  }
+  }, [type])
 
-  get selected() {
-    return typeof this.props.selected === 'undefined'
-      ? this.state.selected
-      : this.props.selected
-  }
+  const elementType = useMemo(() => {
+    return getElementType(MenuItemComponent, props)
+  }, [props])
 
-  get focused() {
-    return isActiveElement(this.ref)
-  }
-
-  focus() {
-    const refNode = findDOMNode(this.ref) as HTMLElement
-    refNode.focus()
-  }
-
-  renderContent() {
-    const { children, type, renderLabelInfo } = this.props
-
+  const renderContent = () => {
     return (
       <span>
         {(type === 'checkbox' || type === 'radio') && (
-          <span css={this.props.styles?.icon}>
-            {this.selected && <IconCheckSolid />}
-          </span>
+          <span css={styles?.icon}>{selected && <IconCheckSolid />}</span>
         )}
-        <span css={this.props.styles?.label} id={this.labelId}>
+        <span css={styles?.label} id={labelId}>
           {children}
         </span>
         {type === 'flyout' && (
-          <span css={this.props.styles?.icon}>
+          <span css={styles?.icon}>
             <IconArrowOpenEndSolid />
           </span>
         )}
         {renderLabelInfo && (
-          <span css={this.props.styles?.labelInfo}>
-            {callRenderProp(renderLabelInfo)}
-          </span>
+          <span css={styles?.labelInfo}>{callRenderProp(renderLabelInfo)}</span>
         )}
       </span>
     )
   }
 
-  render() {
-    const { disabled, controls, onKeyDown, onKeyUp, type, href, target } =
-      this.props
+  const omittedProps = omitProps(props, allowedProps)
+  const ElementType = elementType
 
-    const props = omitProps(this.props, MenuItem.allowedProps)
-    const ElementType = this.elementType
+  return (
+    <ElementType
+      tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
+      {...omittedProps}
+      href={href}
+      target={target}
+      role={role}
+      aria-labelledby={labelId}
+      aria-disabled={disabled ? 'true' : undefined}
+      aria-controls={controls}
+      aria-checked={
+        type === 'checkbox' || type === 'radio'
+          ? selected
+            ? 'true'
+            : 'false'
+          : undefined
+      }
+      onClick={handleClick}
+      onKeyUp={createChainedFunction(onKeyUp, handleKeyUp)}
+      onKeyDown={createChainedFunction(onKeyDown, handleKeyDown)}
+      ref={elementRef as any}
+      css={styles?.menuItem}
+      onMouseOver={handleMouseOver}
+    >
+      {renderContent()}
+    </ElementType>
+  )
+})
 
-    return (
-      <ElementType
-        tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
-        {...props}
-        href={href}
-        target={target}
-        role={this.role}
-        aria-labelledby={this.labelId}
-        aria-disabled={disabled ? 'true' : undefined}
-        aria-controls={controls}
-        aria-checked={
-          type === 'checkbox' || type === 'radio'
-            ? this.selected
-              ? 'true'
-              : 'false'
-            : undefined
-        }
-        onClick={this.handleClick}
-        onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
-        onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
-        ref={this.handleRef}
-        css={this.props.styles?.menuItem}
-        onMouseOver={this.handleMouseOver}
-      >
-        {this.renderContent()}
-      </ElementType>
-    )
-  }
-}
+MenuItemComponent.displayName = 'MenuItem'
+
+const StyledMenuItem: any = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(MenuItemComponent as any)
+const MenuItem = withDeterministicId()(StyledMenuItem)
+
+MenuItem.componentId = 'Menu.Item'
+;(MenuItem as any).propTypes = propTypes
+;(MenuItem as any).allowedProps = allowedProps
 
 export default MenuItem
 export { MenuItem }

@@ -30,9 +30,6 @@ import {
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
 
-import { MenuItem } from '../MenuItem'
-import { MenuItemSeparator } from '../MenuItemSeparator'
-
 import type {
   PropValidators,
   MenuGroupTheme,
@@ -42,17 +39,20 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { MenuItemProps } from '../MenuItem/props'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
+import { MenuItem } from '../MenuItem'
+import { MenuItemSeparator } from '../MenuItemSeparator'
+
 type MenuGroupOwnProps = {
   label: React.ReactNode
   allowMultiple?: boolean
   /**
    * children of type `Menu.Item`, `Menu.Separator`
    */
-  children?: React.ReactNode // TODO: oneOf([MenuItem, MenuItemSeparator])
+  children?: React.ReactNode
   /**
    * an array of the values (or indices by default) for the selected items
    */
-  selected?: (string | number)[] // TODO: controllable(PropTypes.array, 'onSelect', 'defaultSelected')
+  selected?: (string | number)[]
   /**
    * an array of the values (or indices by default) for the selected items on initial render
    */
@@ -64,9 +64,9 @@ type MenuGroupOwnProps = {
     e: React.MouseEvent,
     updated: MenuItemProps['value'][],
     selected: MenuItemProps['selected'],
-    item: MenuItem
+    item: any
   ) => void
-  onMouseOver?: (e: React.MouseEvent, args: MenuItem) => void
+  onMouseOver?: (e: React.MouseEvent, args: any) => void
   /**
    * the id of the element that the menu items will act upon
    */
@@ -74,7 +74,7 @@ type MenuGroupOwnProps = {
   /**
    * returns a reference to the `MenuItem`
    */
-  itemRef?: (element: MenuItem | null) => void
+  itemRef?: (element: any | null) => void
   disabled?: boolean
   /**
    * should the group appear in the tab order (the first item will have a tabIndex of 0)

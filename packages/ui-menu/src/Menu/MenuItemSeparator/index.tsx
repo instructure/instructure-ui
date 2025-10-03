@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 
 import { withStyle } from '@instructure/emotion'
-import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
@@ -41,42 +40,48 @@ id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
-class MenuItemSeparator extends Component<MenuSeparatorProps> {
-  static readonly componentId = 'Menu.Separator'
+const MenuItemSeparatorComponent = forwardRef<any, MenuSeparatorProps>(
+  (props, ref) => {
+    const { makeStyles, styles } = props
+    const elementRef = useRef<Element | null>(null)
 
-  static propTypes = propTypes
-  static allowedProps = allowedProps
+    useEffect(() => {
+      makeStyles?.()
+    }, [makeStyles])
 
-  ref: Element | null = null
+    useImperativeHandle(
+      ref,
+      () => ({
+        ref: elementRef.current
+      }),
+      []
+    )
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
+    const omittedProps = omitProps(props, allowedProps)
 
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  render() {
-    const props = omitProps(this.props, MenuItemSeparator.allowedProps)
     // role="separator" would fit better here, but it causes NVDA to stop the
     // MenuItem count after it
     return (
       <div
-        {...props}
+        {...omittedProps}
         role="presentation"
-        css={this.props.styles?.menuItemSeparator}
-        ref={this.handleRef}
+        css={styles?.menuItemSeparator}
+        ref={elementRef as any}
       />
     )
   }
-}
+)
+
+MenuItemSeparatorComponent.displayName = 'MenuItemSeparator'
+
+const MenuItemSeparator: any = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(MenuItemSeparatorComponent as any)
+
+MenuItemSeparator.componentId = 'Menu.Separator'
+;(MenuItemSeparator as any).propTypes = propTypes
+;(MenuItemSeparator as any).allowedProps = allowedProps
 
 export default MenuItemSeparator
 export { MenuItemSeparator }

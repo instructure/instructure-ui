@@ -24,7 +24,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import MenuItem from '../MenuItem'
 import { controllable } from '@instructure/ui-prop-types'
 
 import type {
@@ -40,7 +39,7 @@ type OnMenuItemSelect = (
   e: React.MouseEvent,
   value: MenuItemProps['value'],
   selected: MenuItemProps['selected'],
-  args: MenuItem
+  args: any
 ) => void
 
 type MenuItemOwnProps = {
@@ -63,7 +62,7 @@ type MenuItemOwnProps = {
   onClick?: (e: React.MouseEvent) => void
   onKeyDown?: (e: React.KeyboardEvent) => void
   onKeyUp?: (e: React.KeyboardEvent) => void
-  onMouseOver?: (e: React.MouseEvent, args: MenuItem) => void
+  onMouseOver?: (e: React.MouseEvent, args: any) => void
   /**
    * the id of the element that the menu item will act upon
    */
