@@ -35,8 +35,6 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 
-import { testable } from '@instructure/ui-testable'
-
 import { withStyle } from '@instructure/emotion'
 
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
@@ -47,7 +45,7 @@ import generateComponentTheme from './theme'
 
 import { Day } from './Day'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { CalendarProps, CalendarState } from './props'
 import { Renderable } from '@instructure/shared-types'
 
@@ -66,7 +64,6 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class Calendar extends Component<CalendarProps, CalendarState> {
   static readonly componentId = 'Calendar'
 
@@ -75,7 +72,6 @@ class Calendar extends Component<CalendarProps, CalendarState> {
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',
@@ -264,7 +260,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     const { prevButton, nextButton } = this.renderMonthNavigationButtons()
 
     const cloneButton = (
-      button: ReactElement,
+      button: ReactElement<any>,
       onClick?: (e: React.MouseEvent) => void
     ) =>
       safeCloneElement(button, {
@@ -428,7 +424,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     )
 
     return childrenArr
-      .reduce((days: ReactElement[][], day, i) => {
+      .reduce((days: ReactElement<any>[][], day, i) => {
         const index = Math.floor(i / 7)
         if (!days[index]) days.push([])
         days[index].push(day)
@@ -552,6 +548,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         padding="small"
         background="primary"
         elementRef={this.handleRef}
+        data-cid="Calendar"
       >
         {this.renderHeader()}
         {this.renderBody()}

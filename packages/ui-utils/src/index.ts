@@ -47,3 +47,4 @@ export {
   isAndroidOrIOS,
   isMac
 } from './getBrowser'
+export { combineDataCid } from './combineDataCid'

@@ -30,7 +30,6 @@ import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine
 } from '@instructure/ui-icons'
-import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   pickProps,
@@ -45,7 +44,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 import type {
   NumberInputProps,
   NumberInputState,
@@ -61,11 +60,9 @@ id: NumberInput
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
   static readonly componentId = 'NumberInput'
   static allowedProps = allowedProps
-  static propTypes = propTypes
   static defaultProps = {
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -279,6 +276,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         id={this.id}
         elementRef={this.handleRef}
         margin={margin}
+        data-cid="NumberInput"
       >
         <span
           css={this.props.styles?.inputWidth}

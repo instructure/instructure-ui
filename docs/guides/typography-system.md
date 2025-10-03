@@ -1,7 +1,7 @@
 ---
 title: Typography
 category: Guides
-order: 9
+order: 99
 relevantForAI: true
 ---
 

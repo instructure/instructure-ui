@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import { propTypes, allowedProps } from './props'
+import { allowedProps } from './props'
 import type { PresentationContentProps } from './props'
 
 /**
@@ -36,7 +36,6 @@ category: components/utilities
 @module PresentationContent
 **/
 class PresentationContent extends Component<PresentationContentProps> {
-  static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',

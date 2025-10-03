@@ -35,7 +35,6 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { withStyle } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
-import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   pickProps,
@@ -46,7 +45,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { TextAreaProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
@@ -55,12 +54,10 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 class TextArea extends Component<TextAreaProps> {
   static readonly componentId = 'TextArea'
 
   static allowedProps = allowedProps
-  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',
@@ -381,6 +378,7 @@ class TextArea extends Component<TextAreaProps> {
           this.ref = el
         }}
         margin={margin}
+        data-cid="TextArea"
       >
         <div
           css={this.props.styles?.textAreaLayout}
@@ -395,7 +393,9 @@ class TextArea extends Component<TextAreaProps> {
             <span
               css={this.props.styles?.textAreaOutline}
               aria-hidden="true"
-              ref={(e) => (this._highlightRef = e)}
+              ref={(e) => {
+                this._highlightRef = e
+              }}
             />
           ) : null}
         </div>

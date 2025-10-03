@@ -22,12 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
   ColorMixerSliderTheme
 } from '@instructure/shared-types'
 
@@ -63,20 +60,6 @@ type SliderStyle = ComponentStyle<
   | 'sliderBackground'
   | 'disabledOverlay'
 >
-
-const propTypes: PropValidators<PropKeys> = {
-  isColorSlider: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-  minValue: PropTypes.number.isRequired,
-  maxValue: PropTypes.number.isRequired,
-  indicatorRadius: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  elementRef: PropTypes.func,
-  navigationExplanationScreenReaderLabel: PropTypes.string.isRequired
-}
-
 const allowedProps: AllowedPropKeys = [
   'isColorSlider',
   'onChange',
@@ -91,4 +74,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { SliderProps, SliderStyle, SliderStyleProps }
-export { propTypes, allowedProps }
+export { allowedProps }

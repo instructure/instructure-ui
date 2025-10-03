@@ -22,17 +22,9 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
 import type { SyntheticEvent, InputHTMLAttributes } from 'react'
-
-import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type {
-  OtherHTMLAttributes,
-  Renderable,
-  PropValidators
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 import type { Spacing } from '@instructure/emotion'
 
 type DateInput2OwnProps = {
@@ -90,12 +82,10 @@ type DateInput2OwnProps = {
    */
   width?: string
   /**
-   * Displays messages and validation for the input. It should be an object
-   * with the following shape:
-   * `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   * }`
+   * Displays informational and error messages, used for input validation,
+   * can also display screenreader-only messages.
+   * Also changes the border color of the component on success/error.
+   * This is automatically set to `invalidDateErrorMessage` when the date is invalid
    */
   messages?: FormMessage[]
   /**
@@ -188,40 +178,9 @@ type DateInput2OwnProps = {
   inputRef?: (inputElement: HTMLInputElement | null) => void
 }
 
-type PropKeys = keyof DateInput2OwnProps
-
 type DateInput2Props = DateInput2OwnProps &
   OtherHTMLAttributes<
     DateInput2OwnProps,
     InputHTMLAttributes<DateInput2OwnProps & Element>
   >
-
-const propTypes: PropValidators<PropKeys> = {
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  screenReaderLabels: PropTypes.object.isRequired,
-  value: controllable(PropTypes.string),
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  isRequired: PropTypes.bool,
-  isInline: PropTypes.bool,
-  width: PropTypes.string,
-  messages: PropTypes.arrayOf(FormPropTypes.message),
-  invalidDateErrorMessage: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  locale: PropTypes.string,
-  timezone: PropTypes.string,
-  withYearPicker: PropTypes.object,
-  dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  onRequestValidateDate: PropTypes.func,
-  renderCalendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  margin: PropTypes.string,
-  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-  inputRef: PropTypes.func
-}
-
 export type { DateInput2Props }
-export { propTypes }

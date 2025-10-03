@@ -23,7 +23,6 @@
  */
 
 import sharedThemeTokens from '../../sharedThemeTokens'
-import { ThemeRegistry } from '@instructure/theme-registry'
 import { BaseTheme, Colors } from '@instructure/shared-types'
 import { colors } from './colors'
 
@@ -60,11 +59,9 @@ export type CanvasTheme = BaseTheme & {
 } & typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
 
 /**
- * Canvas theme without the `use` function and `variables` prop.
- * Not affected by global theme overrides (`.use()` function).
- * Will be default in the next major version of InstUI
+ * Canvas theme
  */
-const __theme: CanvasTheme = {
+const canvas: CanvasTheme = {
   key,
   description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
   ...sharedThemeTokens,
@@ -72,7 +69,5 @@ const __theme: CanvasTheme = {
   ...brandVariables
 }
 
-const theme = ThemeRegistry.registerTheme(__theme)
-
-export default theme
-export { __theme as canvasThemeLocal }
+export { canvas }
+export default canvas

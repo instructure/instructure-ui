@@ -21,11 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
 
 import type {
   AsElementType,
-  PropValidators,
   OptionsSeparatorTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
@@ -48,12 +46,7 @@ type OptionsSeparatorProps = OptionsSeparatorOwnProps &
   OtherHTMLAttributes<OptionsSeparatorOwnProps, AllHTMLAttributes<any>>
 
 type OptionsSeparatorStyle = ComponentStyle<'separator'>
-
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType
-}
-
 const allowedProps: AllowedPropKeys = ['as']
 
 export type { OptionsSeparatorProps, OptionsSeparatorStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

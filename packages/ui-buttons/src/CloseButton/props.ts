@@ -23,8 +23,6 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -34,10 +32,9 @@ import type {
   ToProp,
   AsElementType,
   CloseButtonTheme,
-  OtherHTMLAttributes,
-  PropValidators
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { Cursor } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
 
 type CloseButtonOwnProps = {
@@ -130,25 +127,6 @@ type CloseButtonProps = CloseButtonOwnProps &
   ToProp
 
 type CloseButtonStyle = ComponentStyle<'closeButton'>
-
-const propTypes: PropValidators<PropKeys> = {
-  screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-    .isRequired,
-  color: PropTypes.oneOf(['primary', 'primary-inverse']),
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  elementRef: PropTypes.func,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  onClick: PropTypes.func,
-  margin: PropTypes.string,
-  placement: PropTypes.oneOf(['start', 'end', 'static']),
-  offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  as: PropTypes.elementType,
-  href: PropTypes.string,
-  cursor: PropTypes.string,
-  tabIndex: PropTypes.number
-}
-
 const allowedProps: AllowedPropKeys = [
   'as',
   'color',
@@ -167,4 +145,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { CloseButtonProps, CloseButtonStyle }
-export { propTypes, allowedProps }
+export { allowedProps }

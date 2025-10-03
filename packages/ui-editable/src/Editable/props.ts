@@ -21,10 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
+import React from 'react'
 
 type GetContainerProps = (props?: Record<string, any>) => {
   ref: React.RefCallback<any>
@@ -112,18 +110,6 @@ type PropKeys = keyof EditableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type EditableProps = EditableOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
-  mode: PropTypes.oneOf(['view', 'edit']).isRequired,
-  onChangeMode: PropTypes.func.isRequired,
-  children: PropTypes.func,
-  render: PropTypes.func,
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  readOnly: PropTypes.bool,
-  elementRef: PropTypes.func
-}
-
 const allowedProps: AllowedPropKeys = [
   'mode',
   'onChangeMode',
@@ -148,4 +134,4 @@ export type {
   GetEditorProps,
   GetViewerProps
 }
-export { propTypes, allowedProps }
+export { allowedProps }

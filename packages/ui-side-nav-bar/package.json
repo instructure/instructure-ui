@@ -28,7 +28,7 @@
     "@instructure/ui-color-utils": "10.26.0",
     "@instructure/ui-themes": "10.26.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
     "vitest": "^3.2.2"
   },
@@ -41,14 +41,11 @@
     "@instructure/ui-a11y-utils": "10.26.0",
     "@instructure/ui-badge": "10.26.0",
     "@instructure/ui-icons": "10.26.0",
-    "@instructure/ui-prop-types": "10.26.0",
     "@instructure/ui-react-utils": "10.26.0",
-    "@instructure/ui-testable": "10.26.0",
-    "@instructure/ui-tooltip": "10.26.0",
-    "prop-types": "^15.8.1"
+    "@instructure/ui-tooltip": "10.26.0"
   },
   "peerDependencies": {
-    "react": ">=16.14 <=18"
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"

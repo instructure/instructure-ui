@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropValidators } from '@instructure/shared-types'
-import PropTypes from 'prop-types'
 import type { DocDataType } from '../Document/props'
 
 type ParamsOwnProp = {
@@ -33,11 +31,8 @@ type ParamsOwnProp = {
 type PropKeys = keyof ParamsOwnProp
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ParamsProps = ParamsOwnProp
-const propTypes: PropValidators<PropKeys> = {
-  params: PropTypes.array.isRequired,
-  genericParameters: PropTypes.array,
-  layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
-}
+
 const allowedProps: AllowedPropKeys = ['layout', 'params', 'genericParameters']
+
 export type { ParamsProps }
-export { propTypes, allowedProps }
+export { allowedProps }

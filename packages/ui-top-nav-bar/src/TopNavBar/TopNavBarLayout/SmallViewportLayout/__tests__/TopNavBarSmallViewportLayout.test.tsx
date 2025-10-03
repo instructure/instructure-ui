@@ -685,10 +685,9 @@ describe('<TopNavBarSmallViewportLayout />', () => {
               )!
             )
 
-            // TODO convert to e2e
-            // expect(activeOptionStyle.borderBottom).toBe('2px solid rgb(45, 59, 69)')
+            // TODO this should be tested with chromatic
             expect(activeOptionStyle.borderBottom).toBe(
-              '0.125rem solid currentColor'
+              '0.125rem solid rgb(39, 53, 64)'
             )
             expect(option).toHaveAttribute('aria-current', 'page')
           } else {
