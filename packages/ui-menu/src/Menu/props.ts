@@ -45,15 +45,13 @@ import type {
 import type { Popover } from '@instructure/ui-popover'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
-import { MenuItem } from './MenuItem'
-import type { Menu } from './index'
 import type { MenuItemProps } from './MenuItem/props'
 
 type MenuOwnProps = {
   /**
    * Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu`
    */
-  children?: React.ReactNode // TODO: oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu'])
+  children?: React.ReactNode
   /**
    * Description of the `<Menu />`. The component uses it to add its value to
    * the `aria-label` attribute.
@@ -78,12 +76,12 @@ type MenuOwnProps = {
   /**
    * Is the `<Menu />` open (should be accompanied by `onToggle`)
    */
-  show?: boolean // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultShow')
+  show?: boolean
   /**
    * Callback fired when the `<Menu />` is toggled open/closed. When used with `show`,
    * the component will not control its own state.
    */
-  onToggle?: (show: boolean, menu: Menu) => void
+  onToggle?: (show: boolean, menu: any) => void
   /**
    * Callback fired when an item within the `<Menu />` is selected
    */
@@ -91,7 +89,7 @@ type MenuOwnProps = {
     e: React.MouseEvent,
     value: MenuItemProps['value'] | MenuItemProps['value'][],
     selected: MenuItemProps['selected'],
-    args: MenuItem
+    args: any
   ) => void
   /**
    * If a trigger is supplied, callback fired when the `<Menu />` is closed
