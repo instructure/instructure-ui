@@ -4496,38 +4496,6 @@
           },
           "type": "typography"
         }
-      },
-      "inlineLink": {
-        "small": {
-          "value": {
-            "fontFamily": "{fontFamily.Atkinson}",
-            "fontWeight": "{fontWeight.semiBold}",
-            "fontSize": "{size.size14}",
-            "lineHeight": "{size.size20}",
-            "textDecoration": "{underline}"
-          },
-          "type": "typography"
-        },
-        "medium": {
-          "value": {
-            "fontFamily": "{fontFamily.Atkinson}",
-            "fontWeight": "{fontWeight.semiBold}",
-            "fontSize": "{size.size16}",
-            "lineHeight": "{size.size20}",
-            "textDecoration": "{underline}"
-          },
-          "type": "typography"
-        },
-        "large": {
-          "value": {
-            "fontFamily": "{fontFamily.Atkinson}",
-            "fontWeight": "{fontWeight.semiBold}",
-            "fontSize": "{size.size28}",
-            "lineHeight": "{size.size32}",
-            "textDecoration": "{underline}"
-          },
-          "type": "typography"
-        }
       }
     }
   },
@@ -6162,9 +6130,9 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
         "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -6607,9 +6575,9 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
         "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -7114,9 +7082,9 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
         "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -7557,9 +7525,9 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
+        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
         "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
