@@ -2716,6 +2716,18 @@
       "aiBorderBottomGradientColor": {
         "value": "{color.stroke.interactive.ai.bottomGradient.base}",
         "type": "color"
+      },
+      "primaryOnColorBackgroundColor": {
+        "value": "{color.background.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "primaryOnColorHoverBackgroundColor": {
+        "value": "{color.background.interactive.primaryOnColor.hover}",
+        "type": "color"
+      },
+      "primaryOnColorActiveBackgroundColor": {
+        "value": "{color.background.interactive.primaryOnColor.active}",
+        "type": "color"
       }
     }
   },
