@@ -5031,7 +5031,7 @@
     "x": {
       "elevation1": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
