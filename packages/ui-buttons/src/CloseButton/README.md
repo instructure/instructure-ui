@@ -4,7 +4,7 @@ describes: CloseButton
 
 Some design patterns require a `CloseButton` to be placed in the start or end position. This is a helper component that gives you the close icon out of the box and facilitates placement.
 
-The `placement` prop designates the `CloseButton` placement within the parent container. Note that in order to apply an `offset`, `placement` should be set to `start` or `end`. Also make sure that the container has a `position` css style applied other than `static`. In the following example we use [View](#View) as the container and set the `position` to `relative`.
+The `placement` prop designates the `CloseButton` placement within the parent container. Note that in order to apply an `offset`, `placement` should be set to `start` or `end`. Also make sure that the container has a `position` css style applied other than `static`. In the following example we use [View](View) as the container and set the `position` to `relative`.
 
 ```js
 ---
@@ -15,7 +15,7 @@ type: example
 </View>
 ```
 
-If you need the `CloseButton` to work in a layout with other elements vs. absolutely positioning it, you can omit the `placement` prop or set it to `static`. You can then use another tool such as [Flex](#Flex) to handle the layout.
+If you need the `CloseButton` to work in a layout with other elements vs. absolutely positioning it, you can omit the `placement` prop or set it to `static`. You can then use another tool such as [Flex](Flex) to handle the layout.
 
 ```js
 ---
@@ -33,7 +33,7 @@ type: example
 </View>
 ```
 
-If you need even more customization, note that you can always compose this component using the [IconButton](#IconButton) directly. Supply the `renderIcon` prop with [IconXSolid](#icons) and set the `withBorder` and `withBackground` props to `false`.
+If you need even more customization, note that you can always compose this component using the [IconButton](IconButton) directly. Supply the `renderIcon` prop with [IconXSolid](icons) and set the `withBorder` and `withBackground` props to `false`.
 
 ```js
 ---

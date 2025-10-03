@@ -7,6 +7,14 @@ relevantForAI: true
 
 ## Quick Start
 
+http://localhost:9090/Alert
+
+http://localhost:9090/#Alert
+
+http://localhost:9090/#Alert/#Guidelines
+
+http://localhost:9090/Alert#Guidelines
+
 The following steps will create a React app that uses Instructure UI. Recommended if you are starting from scratch.
 
 ##### Create a new React app, e.g. with [create vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
@@ -64,8 +72,8 @@ export default App
 
 What does this code do?
 
-- [InstUISettingsProvider](#InstUISettingsProvider) allows to specify the text direction (default is the direction that the user's browser supplies) and the theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. There are 2 built-in themes: [`canvas`](#canvas) and [`canvasHighContrast`](#canvas-high-contrast). The component examples seen throughout the documentation use the [canvas theme](#canvas) by default.
-- [Button](#Button) is an Instructure UI button component
+- [InstUISettingsProvider](InstUISettingsProvider) allows to specify the text direction (default is the direction that the user's browser supplies) and the theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. There are 2 built-in themes: [`canvas`](canvas) and [`canvasHighContrast`](canvas-high-contrast). The component examples seen throughout the documentation use the [canvas theme](canvas) by default.
+- [Button](Button) is an Instructure UI button component
 
 Finally, run `npm run dev` to start up a basic development server.
 
@@ -91,5 +99,5 @@ https://instructure.design/llms.txt
 
 ## Further reading
 
-- To use a different theme or customize one read about [Using theme overrides](#using-theme-overrides)
-- Make sure you read about [Accessibility](#accessibility) with InstUI.
+- To use a different theme or customize one read about [Using theme overrides](using-theme-overrides)
+- Make sure you read about [Accessibility](accessibility) with InstUI.

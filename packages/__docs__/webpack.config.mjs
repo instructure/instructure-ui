@@ -59,6 +59,7 @@ const config = merge(baseConfig, {
       directory: outputPath,
     },
     host: '0.0.0.0',
+    historyApiFallback: true,
     onListening: function () {
       // devServer is watching source files by default and hot reloading the docs page if they are changed
       // however markdown files (i.e. README.md) need to be recompiled hence the need for chokidar

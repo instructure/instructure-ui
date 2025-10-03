@@ -77,6 +77,7 @@ import type {
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
+import { logError as error } from '@instructure/console'
 
 type AppContextType = {
   themeKey: keyof MainDocsData['themes']
@@ -181,12 +182,11 @@ class App extends Component<AppProps, AppState> {
       this._content.scrollTop = 0
     }
   }
-
   componentDidMount() {
     this._defaultDocumentTitle = document.title
     this.updateKey()
 
-    window.addEventListener('hashchange', this.updateKey, false)
+    window.addEventListener('popstate', this.updateKey, false)
 
     // TODO: Replace with the Responsive component later
     // Using this method directly for now instead to avoid a call to findDOMNode
@@ -243,7 +243,7 @@ class App extends Component<AppProps, AppState> {
   componentWillUnmount() {
     //cancel ongoing requests
     this._controller?.abort()
-    window.removeEventListener('hashchange', this.updateKey, false)
+    window.removeEventListener('popstate', this.updateKey, false)
 
     if (this._mediaQueryListener) {
       this._mediaQueryListener.remove()
@@ -261,17 +261,46 @@ class App extends Component<AppProps, AppState> {
     document.title = title!
   }
 
-  getPathInfo = () => {
-    const { hash } = window.location
+  // pure function (easy to test)
+  parsePath = (pathname: string, hash: string) => {
+    error(false, pathname)
+    error(false, hash)
+    const pathParts = (pathname || '').split('/').filter(Boolean)
+    const hashSegments = (hash || '')
+      .replace(/^#/, '')
+      .split(/[#/]+/) // split on # or / (handles "#Alert/#Guidelines" etc.)
+      .filter(Boolean)
+      .map((s) => {
+        try {
+          return decodeURIComponent(s)
+        } catch (e) {
+          return s
+        }
+      })
 
-    const path = hash && hash.split('/')
-
-    if (path) {
-      const [page, id] = path.map((entry) => decodeURI(entry.replace('#', '')))
-      return [page, id]
+    let page
+    if (pathParts.length > 0) {
+      // Preview build with only pr-preview + id (no page segment)
+      if (pathParts[0] === 'pr-preview' && pathParts.length === 2) {
+        page = hashSegments[0] // take page from hash if available
+      } else {
+        page = (() => {
+          try {
+            return decodeURIComponent(pathParts[pathParts.length - 1])
+          } catch (e) {
+            return pathParts[pathParts.length - 1]
+          }
+        })()
+      }
+    } else {
+      page = hashSegments[0]
     }
-    return []
+    const id = hashSegments.length > 1 ? hashSegments[1] : undefined
+    return [page, id]
   }
+
+  getPathInfo = () =>
+    this.parsePath(window.location.pathname, window.location.hash)
 
   updateLayout = (matches: QueriesMatching) => {
     let layout: LayoutSize = 'small'

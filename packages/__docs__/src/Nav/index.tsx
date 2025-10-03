@@ -281,9 +281,14 @@ class Nav extends Component<NavProps, NavState> {
           />
         )}
         <Link
-          onClick={this.removeFocus}
+          onClick={(e: any) => {
+            e.preventDefault()
+            this.removeFocus(e)
+            window.history.pushState({}, '', `/${docId}`)
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          }}
           display="block"
-          href={`#${docId}`}
+          href={`/${docId}`}
           isWithinText={false}
         >
           {docs[docId].title}
@@ -449,9 +454,14 @@ class Nav extends Component<NavProps, NavState> {
           >
             <Link
               display="block"
-              onClick={this.removeFocus}
+              onClick={(e: any) => {
+                e.preventDefault()
+                this.removeFocus
+                window.history.pushState({}, '', `/${themeKey}`)
+                window.dispatchEvent(new PopStateEvent('popstate'))
+              }}
               isWithinText={false}
-              href={`#${themeKey}`}
+              href={`/${themeKey}`}
             >
               {themeKey}
             </Link>
@@ -477,9 +487,15 @@ class Nav extends Component<NavProps, NavState> {
     const themes = this.renderThemes()
     const icons = (
       <NavToggle
-        key={'icons'}
-        summary={'Icons'}
-        href="#icons"
+        summary="Icons"
+        onToggle={(e: any) => {
+          // Only handle when expanding, not collapsing
+          e.preventDefault()
+          this.removeFocus(e)
+          window.history.pushState({}, '', `/icons`)
+          window.dispatchEvent(new PopStateEvent('popstate'))
+        }}
+        href="icons"
         shouldBlur={true}
       />
     )
