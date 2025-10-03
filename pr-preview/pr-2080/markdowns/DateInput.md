@@ -332,7 +332,7 @@ should be validated. If the value cannot be parsed as a valid date, or if the
 | DateInput | width | `string` | No | - | Specifies the width of the input. |
 | DateInput | display | `'inline-block' \| 'block'` | No | `'inline-block'` | Specifies the display property of the container. |
 | DateInput | inputRef | `(element: HTMLInputElement \| null) => void` | No | - | Provides a ref to the underlying input element. |
-| DateInput | messages | `FormMessage[]` | No | - | Displays messages and validation for the input. It should be an object with the following shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
+| DateInput | messages | `FormMessage[]` | No | - | Displays informational and error messages, used for input validation, can also display screenreader-only messages. Also changes the border color of the component on success/error. This is automatically set to `invalidDateErrorMessage` when the date is invalid |
 | DateInput | placement | `PlacementPropValues` | No | `'bottom center'` | The placement of the calendar in relation to the input. |
 | DateInput | isShowingCalendar | `boolean` | No | `false` | Controls whether the calendar is showing. |
 | DateInput | onRequestValidateDate | `( event: SyntheticEvent, dateString?: string, validation?: FormMessage[] ) => void \| FormMessage[]` | No | - | Callback fired when the input is blurred. Feedback should be provided to the user when this function is called if the selected date or input value is not valid. The component calculates date validity and if it's disabled or nor and passes that information to this callback. |
