@@ -2609,6 +2609,10 @@
         "value": "{color.background.interactive.success.active}",
         "type": "color"
       },
+      "successBorderColor": {
+        "value": "{color.stroke.interactive.success.base}",
+        "type": "color"
+      },
       "dangerBackgroundColor": {
         "value": "{color.background.interactive.destructive.base}",
         "type": "color"
@@ -2619,6 +2623,10 @@
       },
       "dangerActiveBackgroundColor": {
         "value": "{color.background.interactive.destructive.active}",
+        "type": "color"
+      },
+      "dangerBorderColor": {
+        "value": "{color.stroke.interactive.destructive.base}",
         "type": "color"
       },
       "aiBackgroundBottomGradientColor": {
