@@ -2557,6 +2557,14 @@
         "value": "{color.background.interactive.primary.active}",
         "type": "color"
       },
+      "primaryTextColor": {
+        "value": "{color.text.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "primaryIconColor": {
+        "value": "{color.icon.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
       "secondaryBackgroundColor": {
         "value": "{color.background.interactive.secondary.base}",
         "type": "color"
