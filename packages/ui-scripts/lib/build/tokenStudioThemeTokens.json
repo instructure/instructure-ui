@@ -2557,6 +2557,10 @@
         "value": "{color.background.interactive.primary.active}",
         "type": "color"
       },
+      "primaryBorderColor": {
+        "value": "{color.stroke.interactive.primary.base}",
+        "type": "color"
+      },
       "primaryTextColor": {
         "value": "{color.text.interactive.primaryOnColor.base}",
         "type": "color"
