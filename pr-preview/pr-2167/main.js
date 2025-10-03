@@ -3638,7 +3638,8 @@ return(null===(_docs$docId=docs[docId])||void 0===_docs$docId||!_docs$docId.isWI
 return sections[sectionId].sections.map((sectionId=>("function"==typeof markExpanded&&sectionId===selected&&markExpanded(sectionId),sectionId)))}renderDocLink(docId){const _this$props3=this.props,docs=_this$props3.docs,selected=_this$props3.selected,docSelected=docId===selected
 return(0,_jsxRuntime.jsxs)(_uiView.View,{as:"li",display:"block",margin:"xx-small none xx-small",padding:"none none none x-small",position:"relative",children:[docSelected&&(_View||(_View=(0,_jsxRuntime.jsx)(_uiView.View,{"aria-hidden":"true",display:"block",position:"absolute",insetInlineStart:"0",insetBlockStart:"0",insetBlockEnd:"0",width:"0.25rem",background:"brand"}))),(0,_jsxRuntime.jsx)(_uiLink.Link,{onClick:e=>{e.preventDefault(),this.removeFocus(e)
 const currentPath=window.location.pathname
-if(currentPath.endsWith("/")){const newUrl=currentPath+docId
+if(currentPath.includes("/pr-preview/"))window.history.pushState({},"",`#${docId}`)
+else if(currentPath.endsWith("/")){const newUrl=currentPath+docId
 window.history.pushState({},"",newUrl)}else{const segments=currentPath.split("/").filter((segment=>""!==segment))
 if(segments.length>0){segments[segments.length-1]=docId
 const newUrl="/"+segments.join("/")

@@ -1,6 +1,14 @@
 
 ## Quick Start
 
+http://localhost:9090/Alert
+
+http://localhost:9090/#Alert
+
+http://localhost:9090/#Alert/#Guidelines
+
+http://localhost:9090/Alert#Guidelines
+
 The following steps will create a React app that uses Instructure UI. Recommended if you are starting from scratch.
 
 ##### Create a new React app, e.g. with [create vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
