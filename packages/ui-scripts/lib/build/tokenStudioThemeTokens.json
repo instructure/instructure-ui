@@ -1713,171 +1713,173 @@
         }
       }
     },
-    "x": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+    "dropShadow": {
+      "x": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "y": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "1",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "1",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "1",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "1",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
         }
       },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "blur": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "6",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "6",
+            "type": "number"
+          }
         }
       },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "spread": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      }
-    },
-    "y": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "1",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
+        "elevation3": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "1",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "3",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "3",
-          "type": "number"
-        }
-      }
-    },
-    "blur": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "6",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "6",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "6",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "6",
-          "type": "number"
-        }
-      }
-    },
-    "spread": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation4": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       }
     }
@@ -2415,171 +2417,173 @@
         }
       }
     },
-    "x": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+    "dropShadow": {
+      "x": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "y": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "1",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "1",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "1",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "1",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
         }
       },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "blur": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "6",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "6",
+            "type": "number"
+          }
         }
       },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "spread": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      }
-    },
-    "y": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "1",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
+        "elevation3": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "1",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "3",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "3",
-          "type": "number"
-        }
-      }
-    },
-    "blur": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "6",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "6",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "6",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "6",
-          "type": "number"
-        }
-      }
-    },
-    "spread": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation4": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       }
     }
@@ -5028,171 +5032,173 @@
         }
       }
     },
-    "x": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": 0,
-          "type": "number"
+    "dropShadow": {
+      "x": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "y": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "1",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "4",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "1",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "8",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "4",
+            "type": "number"
+          }
         }
       },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "blur": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "2",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "6",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "8",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "10",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "12",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "4",
+            "type": "number"
+          }
         }
       },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "spread": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      }
-    },
-    "y": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": 2,
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": 4,
-          "type": "number"
+        "elevation3": {
+          "dropshadow1": {
+            "value": "4",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": 1,
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": 6,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 2,
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": 8,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 4,
-          "type": "number"
-        }
-      }
-    },
-    "blur": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": 2,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 6,
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": 8,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 3,
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": 10,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 3,
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": 12,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 4,
-          "type": "number"
-        }
-      }
-    },
-    "spread": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 2,
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": 3,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": 4,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": 6,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation4": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       }
     }
@@ -5730,171 +5736,173 @@
         }
       }
     },
-    "x": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+    "dropShadow": {
+      "x": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "y": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "1",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "4",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "1",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "8",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "4",
+            "type": "number"
+          }
         }
       },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "blur": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "2",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "6",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "8",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
+        },
+        "elevation3": {
+          "dropshadow1": {
+            "value": "10",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "3",
+            "type": "number"
+          }
+        },
+        "elevation4": {
+          "dropshadow1": {
+            "value": "12",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "4",
+            "type": "number"
+          }
         }
       },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
+      "spread": {
+        "elevation1": {
+          "dropshadow1": {
+            "value": "0",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "2",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      }
-    },
-    "y": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
+        "elevation2": {
+          "dropshadow1": {
+            "value": "3",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": 2,
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": 4,
-          "type": "number"
+        "elevation3": {
+          "dropshadow1": {
+            "value": "4",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         },
-        "dropshadow2": {
-          "value": 1,
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": 6,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 2,
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": 8,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 4,
-          "type": "number"
-        }
-      }
-    },
-    "blur": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": 2,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 6,
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": 8,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 3,
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": 10,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 3,
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": 12,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 4,
-          "type": "number"
-        }
-      }
-    },
-    "spread": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": 2,
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": 3,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": 4,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": 6,
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
+        "elevation4": {
+          "dropshadow1": {
+            "value": "6",
+            "type": "number"
+          },
+          "dropshadow2": {
+            "value": "0",
+            "type": "number"
+          }
         }
       }
     }
@@ -6042,38 +6050,38 @@
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
         "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
         "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
-        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
-        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
-        "x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
-        "x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
-        "x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
-        "x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
-        "x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
-        "x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
-        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
-        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
-        "y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
-        "y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
-        "y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
-        "y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
-        "y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
-        "y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
-        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
-        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
-        "blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
-        "blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
-        "blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
-        "blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
-        "blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
-        "blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
-        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
-        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
-        "spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
-        "spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
-        "spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
-        "spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
-        "spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
-        "spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
+        "dropShadow.x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "dropShadow.x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "dropShadow.x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
+        "dropShadow.x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
+        "dropShadow.x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
+        "dropShadow.x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
+        "dropShadow.x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
+        "dropShadow.x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
+        "dropShadow.y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "dropShadow.y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "dropShadow.y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
+        "dropShadow.y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
+        "dropShadow.y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
+        "dropShadow.y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
+        "dropShadow.y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
+        "dropShadow.y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
+        "dropShadow.blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "dropShadow.blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "dropShadow.blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
+        "dropShadow.blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
+        "dropShadow.blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
+        "dropShadow.blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
+        "dropShadow.blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
+        "dropShadow.blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
+        "dropShadow.spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "dropShadow.spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "dropShadow.spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
+        "dropShadow.spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
+        "dropShadow.spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
+        "dropShadow.spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
+        "dropShadow.spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
+        "dropShadow.spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -6205,6 +6213,10 @@
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
         "spinner.trackColor": "e5c9a4016100c58fa7082a2ead97e06d0339ff07",
+        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
+        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
+        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
+        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71",
         "spinner.containerSizeXs": "14acac8e97b53abe9ee71a60978d9bb0cbf43ddc",
         "spinner.containerSizeSm": "3b2c6df3894dc29d9e5834d24f3ab323adc04262",
         "spinner.containerSizeMd": "0af268ca4b4f42f508101b6d80d8ef20b64f5863",
@@ -6319,11 +6331,7 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
-        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
-        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
-        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -6484,38 +6492,38 @@
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
         "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
         "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
-        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
-        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
-        "x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
-        "x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
-        "x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
-        "x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
-        "x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
-        "x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
-        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
-        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
-        "y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
-        "y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
-        "y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
-        "y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
-        "y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
-        "y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
-        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
-        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
-        "blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
-        "blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
-        "blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
-        "blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
-        "blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
-        "blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
-        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
-        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
-        "spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
-        "spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
-        "spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
-        "spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
-        "spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
-        "spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
+        "dropShadow.x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "dropShadow.x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "dropShadow.x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
+        "dropShadow.x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
+        "dropShadow.x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
+        "dropShadow.x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
+        "dropShadow.x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
+        "dropShadow.x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
+        "dropShadow.y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "dropShadow.y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "dropShadow.y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
+        "dropShadow.y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
+        "dropShadow.y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
+        "dropShadow.y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
+        "dropShadow.y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
+        "dropShadow.y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
+        "dropShadow.blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "dropShadow.blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "dropShadow.blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
+        "dropShadow.blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
+        "dropShadow.blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
+        "dropShadow.blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
+        "dropShadow.blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
+        "dropShadow.blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
+        "dropShadow.spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "dropShadow.spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "dropShadow.spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
+        "dropShadow.spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
+        "dropShadow.spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
+        "dropShadow.spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
+        "dropShadow.spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
+        "dropShadow.spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -6647,6 +6655,10 @@
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
         "spinner.trackColor": "e5c9a4016100c58fa7082a2ead97e06d0339ff07",
+        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
+        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
+        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
+        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71",
         "spinner.containerSizeXs": "14acac8e97b53abe9ee71a60978d9bb0cbf43ddc",
         "spinner.containerSizeSm": "3b2c6df3894dc29d9e5834d24f3ab323adc04262",
         "spinner.containerSizeMd": "0af268ca4b4f42f508101b6d80d8ef20b64f5863",
@@ -6761,11 +6773,7 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
-        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
-        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
-        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -6991,38 +6999,38 @@
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
         "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
         "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
-        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
-        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
-        "x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
-        "x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
-        "x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
-        "x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
-        "x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
-        "x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
-        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
-        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
-        "y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
-        "y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
-        "y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
-        "y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
-        "y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
-        "y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
-        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
-        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
-        "blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
-        "blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
-        "blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
-        "blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
-        "blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
-        "blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
-        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
-        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
-        "spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
-        "spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
-        "spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
-        "spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
-        "spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
-        "spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
+        "dropShadow.x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "dropShadow.x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "dropShadow.x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
+        "dropShadow.x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
+        "dropShadow.x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
+        "dropShadow.x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
+        "dropShadow.x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
+        "dropShadow.x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
+        "dropShadow.y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "dropShadow.y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "dropShadow.y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
+        "dropShadow.y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
+        "dropShadow.y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
+        "dropShadow.y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
+        "dropShadow.y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
+        "dropShadow.y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
+        "dropShadow.blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "dropShadow.blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "dropShadow.blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
+        "dropShadow.blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
+        "dropShadow.blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
+        "dropShadow.blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
+        "dropShadow.blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
+        "dropShadow.blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
+        "dropShadow.spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "dropShadow.spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "dropShadow.spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
+        "dropShadow.spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
+        "dropShadow.spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
+        "dropShadow.spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
+        "dropShadow.spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
+        "dropShadow.spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -7154,6 +7162,10 @@
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
         "spinner.trackColor": "e5c9a4016100c58fa7082a2ead97e06d0339ff07",
+        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
+        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
+        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
+        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71",
         "spinner.containerSizeXs": "14acac8e97b53abe9ee71a60978d9bb0cbf43ddc",
         "spinner.containerSizeSm": "3b2c6df3894dc29d9e5834d24f3ab323adc04262",
         "spinner.containerSizeMd": "0af268ca4b4f42f508101b6d80d8ef20b64f5863",
@@ -7188,11 +7200,7 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
-        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
-        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
-        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
-        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -7431,38 +7439,38 @@
         "color.icon.accent.color6": "79de8c32da7e7e27a7b82828da3643f87e6dc838",
         "color.dropShadow.shadowColor1": "081dd8949d5a069940c86a3f907578066209c44b",
         "color.dropShadow.shadowColor2": "20e2a629e5665b3000e7caef056c5534a2ac1918",
-        "x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
-        "x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
-        "x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
-        "x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
-        "x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
-        "x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
-        "x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
-        "x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
-        "y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
-        "y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
-        "y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
-        "y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
-        "y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
-        "y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
-        "y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
-        "y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
-        "blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
-        "blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
-        "blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
-        "blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
-        "blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
-        "blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
-        "blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
-        "blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
-        "spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
-        "spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
-        "spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
-        "spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
-        "spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
-        "spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
-        "spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
-        "spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
+        "dropShadow.x.elevation1.dropshadow1": "04b832060ebb758839dc81e6042635db885418a8",
+        "dropShadow.x.elevation1.dropshadow2": "b8bfb086e1685eed0e559320fdfe18fc6b662991",
+        "dropShadow.x.elevation2.dropshadow1": "3d2233b8d5d7f255e5caca7421247e2889ef5311",
+        "dropShadow.x.elevation2.dropshadow2": "9a846d9f9993a3e2ce4b47006b123fbaa8de00a0",
+        "dropShadow.x.elevation3.dropshadow1": "7abfe1ed04331bdfbb161caebbb76b8f72a7e338",
+        "dropShadow.x.elevation3.dropshadow2": "5676b9f9afe86020e32ad33ca3023f87105382ee",
+        "dropShadow.x.elevation4.dropshadow1": "652ccc86452101b0ab80023a2d887a6488a509f0",
+        "dropShadow.x.elevation4.dropshadow2": "4618d6923bb4cb0e5517d6289c2677dbd6aac89b",
+        "dropShadow.y.elevation1.dropshadow1": "9aa1bcac898a4af977ffb47810649f5fe73d5ef8",
+        "dropShadow.y.elevation1.dropshadow2": "ad78c4386c164df06415fae1af339c080eccf426",
+        "dropShadow.y.elevation2.dropshadow1": "7a8d5203cfd4ec8bab36230765f19a72404efb24",
+        "dropShadow.y.elevation2.dropshadow2": "18ff5f351c171ef427e7702f6d8214c33ffa4c88",
+        "dropShadow.y.elevation3.dropshadow1": "6d18d520d7b4e4e0cad804cc0489826406382d83",
+        "dropShadow.y.elevation3.dropshadow2": "2dc3ed25c8e0fff837d2d7fd11a2c4772c43f34b",
+        "dropShadow.y.elevation4.dropshadow1": "dc182785dd3c5a433519897b7f2c3215ace7d583",
+        "dropShadow.y.elevation4.dropshadow2": "c518dbdaa9f4cdbf0ee01a45969b3d1b2b6de11b",
+        "dropShadow.blur.elevation1.dropshadow1": "853a4c83cac8c705c2b20d71dae7cd8450db3215",
+        "dropShadow.blur.elevation1.dropshadow2": "e3ce74b340b2ad7ddcf97848a6244d5e74748a33",
+        "dropShadow.blur.elevation2.dropshadow1": "e4f6b129f3fd8fc31119830c1152f207d8c09ebe",
+        "dropShadow.blur.elevation2.dropshadow2": "22eb45659cf22f30f1b29845b0b93bd1bcca37d5",
+        "dropShadow.blur.elevation3.dropshadow1": "b8ffd90768f6d1cddd68b859c50afb5e8583d41d",
+        "dropShadow.blur.elevation3.dropshadow2": "af3dbd3f1dc11d7d3641704c6a0c20da46040bb9",
+        "dropShadow.blur.elevation4.dropshadow1": "6799b3dec5032cef9c44b99b0a988b54272ec2a2",
+        "dropShadow.blur.elevation4.dropshadow2": "9803cffeef8f9d1d68fb5ab529adafe5af1ef60b",
+        "dropShadow.spread.elevation1.dropshadow1": "6070d47651457ba489c7b8ecb3377c6e9dc910b6",
+        "dropShadow.spread.elevation1.dropshadow2": "27ae22bb67632cd69531719e67cbc3de5ef4d1c7",
+        "dropShadow.spread.elevation2.dropshadow1": "7c60b880b7f8467f66d9a605f3263fafd42a6eca",
+        "dropShadow.spread.elevation2.dropshadow2": "8832a150bc0d223778e2c4f93880f33ed1795f04",
+        "dropShadow.spread.elevation3.dropshadow1": "88a33ec8b5aca22598409717e7ebe68fd49a8c63",
+        "dropShadow.spread.elevation3.dropshadow2": "5f9c5a28e234bfb54036ab50ba47e602afa03a05",
+        "dropShadow.spread.elevation4.dropshadow1": "15a0438ea73a6d9d2206964ba1f42589256d6862",
+        "dropShadow.spread.elevation4.dropshadow2": "a1dd57f2393c7cb342de0545404fce8594d467b0",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -7594,6 +7602,10 @@
         "spinner.color": "fe35cee7f44f5160047f23b08d9aedcfa1627fa9",
         "spinner.inverseColor": "1ed9ec47561d71a46637ce34e32d2c0ebe02e85a",
         "spinner.trackColor": "e5c9a4016100c58fa7082a2ead97e06d0339ff07",
+        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
+        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
+        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
+        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71",
         "spinner.containerSizeXs": "14acac8e97b53abe9ee71a60978d9bb0cbf43ddc",
         "spinner.containerSizeSm": "3b2c6df3894dc29d9e5834d24f3ab323adc04262",
         "spinner.containerSizeMd": "0af268ca4b4f42f508101b6d80d8ef20b64f5863",
@@ -7628,11 +7640,7 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
-        "spinner.strokeWidthXs": "ecf131489223f03f34914f5534c70a8696db48bc",
-        "spinner.strokeWidthSm": "a48cfd42724c588f53faf344ee4ad772028e0c0c",
-        "spinner.strokeWidthMd": "9dd283b1cad55b36450e06be00ff199f768b93d6",
-        "spinner.strokeWidthLg": "171206e9922c0617a7678c42b719531c1b12be71"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
