@@ -2608,6 +2608,14 @@
       "aiBackgroundTopGradientColor": {
         "value": "{color.background.interactive.ai.topGradient.base}",
         "type": "color"
+      },
+      "aiHoverBackgroundTopGradientColor": {
+        "value": "{color.background.interactive.ai.topGradient.hover}",
+        "type": "color"
+      },
+      "aiActiveBackgroundTopGradientColor": {
+        "value": "{color.background.interactive.ai.topGradient.active}",
+        "type": "color"
       }
     }
   },
