@@ -5,7 +5,7 @@ describes: InPlaceEdit
 `InPlaceEdit` provides the DOM structure to organize the components that participate
 in in-place editing by calling the `renderViewer` and `renderEditor` _render props_
 in the context of the containing DOM sub-tree. It also takes care of wiring up the
-event handlers required by [`Editable`](#Editable) to make the user interactions work.
+event handlers required by [`Editable`](Editable) to make the user interactions work.
 
 As a controlled component, it is the responsibility of the consumer to maintain some data to make this work.
 Each time `InPlaceEdit` is rendered, you must provide as props:
@@ -22,7 +22,7 @@ The edit component, as returned by the `renderEditor` property is used to collec
 input. It is up to the consumer to provide the necessary properties to get the user provided value
 (typically `onChange`), and to provide the current value.
 
-Some components, like [Heading](#Heading) and [Text](#Text) can be made editable by setting their `as` property
+Some components, like [Heading](Heading) and [Text](Text) can be made editable by setting their `as` property
 to `input` (and optionally the `type` property). The value of this approach is that the editable version
 will render in the same style as the view, making for a nice user experience. Other transitions,
 `Text` to `Select` or `DateTimeInput` for example, result in a wholesale change in the component's UI, and will alter

@@ -22,7 +22,7 @@ We recommend upgrading your application for each major version gradually, e.g. i
 then migrate first to the latest 9.x and then to version 10.
 
 The places where your code can break during the upgrade are related to theme overrides, color props and color utilities.
-Please check the [theming components](#theming-components) guide to understand the new color system.
+Please check the [theming components](theming-components) guide to understand the new color system.
 
 If you override the theme colors, you must use the new colors provided either in the `canvas-high-contrast` or in the `canvas` theme object.
 The previous color system has been removed, the old color names are no longer available.
@@ -53,7 +53,7 @@ If you had component level overrides of colors you need to migrate using the fol
 | `colors.porcelain` | `colors.contrasts.grey1111`   |
 | `colors.white`     | `colors.contrasts.white1010`  |
 
-You can use the latest [codemod](#ui-codemods) to automate this process.
+You can use the latest [codemod](ui-codemods) to automate this process.
 
 InstUI v9:
 

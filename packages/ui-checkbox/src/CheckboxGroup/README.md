@@ -2,7 +2,7 @@
 describes: CheckboxGroup
 ---
 
-A `<CheckboxGroup/>` is a group of [Checkbox](#Checkbox) components that share the same name. You can
+A `<CheckboxGroup/>` is a group of [Checkbox](Checkbox) components that share the same name. You can
 set an array `value` for the entire group and it will handle setting the `checked` and `name` props for you.
 The Checkbox components can be rendered vertically or horizontally using the `layout` property.
 

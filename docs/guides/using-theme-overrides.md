@@ -210,7 +210,7 @@ type: example
 
 ### Overriding theme for a single component
 
-Themeable components (that implement the [withStyle](#withStyle) decorator) accept a `themeOverride` prop. This prop let's you override the component's own theme. It accepts an object or a function.
+Themeable components (that implement the [withStyle](withStyle) decorator) accept a `themeOverride` prop. This prop let's you override the component's own theme. It accepts an object or a function.
 
 The available theme variables are always displayed at the bottom of the component's page (e.g.: [Button component theme variables](/#Button/#ButtonTheme)).
 

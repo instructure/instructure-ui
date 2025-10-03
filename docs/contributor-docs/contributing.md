@@ -23,7 +23,7 @@ constructed from the existing ones. For these reasons adding a new component has
 
 ### Building InstUI from the source
 
-Please follow the steps on the [how to build guide page](#building-instui).
+Please follow the steps on the [how to build guide page](building-instui).
 
 ### Running the documentation app
 
@@ -41,7 +41,7 @@ Please follow the steps on the [how to build guide page](#building-instui).
 
 ### Testing
 
-See the [testing documentation](#testing-components) for details.
+See the [testing documentation](testing-components) for details.
 
 ### Linters and Code Formatting
 
@@ -119,6 +119,6 @@ Please update the documentation and examples with any changes.
 
 All components should:
 
-1. Be accessible (See the [accessibility requirements](#accessibility) for more information).
+1. Be accessible (See the [accessibility requirements](accessibility) for more information).
 1. Support RTL languages.
 1. Localize all dates, times, numbers and strings (or require localized content passed in via props).
