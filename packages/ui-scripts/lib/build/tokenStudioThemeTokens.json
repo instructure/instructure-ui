@@ -2769,16 +2769,16 @@
         "value": "{color.icon.base}",
         "type": "color"
       },
+      "spaceBetweenElementsSm": {
+        "value": "{spacing.space2xs}",
+        "type": "spacing"
+      },
       "spaceBetweenElementsMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "spaceBetweenElementsLg": {
         "value": "{spacing.spaceSm}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsSm": {
-        "value": "{spacing.space2xs}",
         "type": "spacing"
       }
     }
@@ -3538,16 +3538,16 @@
         "value": "{color.icon.base}",
         "type": "color"
       },
+      "spaceBetweenElementsSm": {
+        "value": "{spacing.space2xs}",
+        "type": "spacing"
+      },
       "spaceBetweenElementsMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "spaceBetweenElementsLg": {
         "value": "{spacing.spaceSm}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsSm": {
-        "value": "{spacing.space2xs}",
         "type": "spacing"
       }
     }
