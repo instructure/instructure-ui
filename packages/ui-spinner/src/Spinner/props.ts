@@ -29,7 +29,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  AsElementType,
   OtherHTMLAttributes,
   PropValidators,
   SpinnerTheme
@@ -38,10 +37,6 @@ import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
-  /**
-   * Render Spinner "as" another HTML element
-   */
-  as?: AsElementType
   /**
    * delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times
    */
@@ -84,7 +79,7 @@ type SpinnerState = {
 }
 
 type SpinnerStyle = ComponentStyle<
-  'spinner' | 'circle' | 'circleTrack' | 'circleSpin'
+  'spinner' | 'circle' | 'circleTrack' | 'circleSpin' | 'radius'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -93,8 +88,7 @@ const propTypes: PropValidators<PropKeys> = {
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
   variant: PropTypes.oneOf(['default', 'inverse']),
   margin: PropTypes.string,
-  elementRef: PropTypes.func,
-  as: PropTypes.elementType
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -103,8 +97,7 @@ const allowedProps: AllowedPropKeys = [
   'size',
   'variant',
   'margin',
-  'elementRef',
-  'as'
+  'elementRef'
 ]
 
 export type { SpinnerProps, SpinnerState, SpinnerStyle }
