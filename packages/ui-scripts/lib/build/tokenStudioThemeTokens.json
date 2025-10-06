@@ -2710,11 +2710,11 @@
         "type": "color"
       },
       "primaryTextColor": {
-        "value": "{color.text.interactive.primaryOnColor.base}",
+        "value": "{color.text.onColor}",
         "type": "color"
       },
       "primaryIconColor": {
-        "value": "{color.icon.interactive.primaryOnColor.base}",
+        "value": "{color.icon.onColor}",
         "type": "color"
       },
       "secondaryBackgroundColor": {
@@ -2750,7 +2750,7 @@
         "type": "color"
       },
       "successTextColor": {
-        "value": "{color.text.interactive.primaryOnColor.base}",
+        "value": "{color.text.onColor}",
         "type": "color"
       },
       "destructiveBackgroundColor": {
@@ -2770,7 +2770,7 @@
         "type": "color"
       },
       "destructiveTextColor": {
-        "value": "{color.text.interactive.primaryOnColor.base}",
+        "value": "{color.text.onColor}",
         "type": "color"
       },
       "aiBackgroundBottomGradientColor": {
@@ -2806,7 +2806,7 @@
         "type": "color"
       },
       "aiTextColor": {
-        "value": "{color.text.interactive.primaryOnColor.base}",
+        "value": "{color.text.onColor}",
         "type": "color"
       },
       "aiSecondaryBackgroundColor": {
