@@ -2892,6 +2892,18 @@
       "fontWeight": {
         "value": "{fontWeight.body.base}",
         "type": "fontWeights"
+      },
+      "gapButtonContentSm": {
+        "value": "{spacing.spaceXs}",
+        "type": "spacing"
+      },
+      "gapButtonContentLg": {
+        "value": "{spacing.spaceSm}",
+        "type": "spacing"
+      },
+      "gapButtonContentMd": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
       }
     }
   },
