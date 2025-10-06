@@ -2880,6 +2880,18 @@
       "borderRadiusBase": {
         "value": "{borderRadius.interactive.base}",
         "type": "borderRadius"
+      },
+      "borderWidth": {
+        "value": "{borderWidth.interactive.base}",
+        "type": "borderWidth"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
       }
     }
   },
