@@ -101,10 +101,45 @@ class Table extends Component<TableProps> {
     })
   }
 
+  getSortedHeaderInfo() {
+    const [headChild] = Children.toArray(this.props.children)
+    if (!headChild || !isValidElement(headChild)) return null
+    const [firstRow] = Children.toArray(headChild.props.children)
+    if (!firstRow || !isValidElement(firstRow)) return null
+    const colHeaders = Children.toArray(firstRow.props.children)
+    for (const colHeader of colHeaders) {
+      if (
+        isValidElement(colHeader) &&
+        colHeader.props.sortDirection &&
+        colHeader.props.sortDirection !== 'none'
+      ) {
+        const headerText =
+          typeof colHeader.props.children === 'string'
+            ? colHeader.props.children
+            : colHeader.props.children?.props?.children ?? ''
+        return {
+          header: headerText,
+          direction: colHeader.props.sortDirection
+        }
+      }
+    }
+    return null
+  }
+
   render() {
     const { margin, layout, caption, children, hover, styles } = this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : undefined
+
+    // Add sorting info to caption for screen readers
+    const sortedHeaderInfo = this.getSortedHeaderInfo()
+    let captionText = caption as string
+    if (sortedHeaderInfo) {
+      captionText = caption
+        ? caption +
+          ` Sorted by ${sortedHeaderInfo.header} (${sortedHeaderInfo.direction})`
+        : `Sorted by ${sortedHeaderInfo.header} (${sortedHeaderInfo.direction})`
+    }
 
     return (
       <TableContext.Provider
@@ -124,12 +159,28 @@ class Table extends Component<TableProps> {
           elementRef={this.handleRef}
           css={styles?.table}
           role={isStacked ? 'table' : undefined}
-          aria-label={isStacked ? (caption as string) : undefined}
+          aria-label={isStacked ? captionText : undefined}
         >
           {!isStacked && (
-            <caption>
-              <ScreenReaderContent>{caption}</ScreenReaderContent>
-            </caption>
+            <>
+              <caption>
+                <ScreenReaderContent>{captionText}</ScreenReaderContent>
+              </caption>
+              {sortedHeaderInfo && (
+                <div
+                  aria-live="polite"
+                  style={{
+                    position: 'absolute',
+                    width: 1,
+                    height: 1,
+                    overflow: 'hidden',
+                    clip: 'rect(1px, 1px, 1px, 1px)'
+                  }}
+                >
+                  {captionText}
+                </div>
+              )}
+            </>
           )}
           {Children.map(children, (child) => {
             if (isValidElement(child)) {
