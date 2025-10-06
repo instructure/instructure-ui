@@ -863,8 +863,16 @@
           }
         },
         "interactive": {
-          "horizontal": {
+          "horizontalSm": {
+            "value": "{size.size8}",
+            "type": "spacing"
+          },
+          "horizontalMd": {
             "value": "{size.size12}",
+            "type": "spacing"
+          },
+          "horizontalLg": {
+            "value": "{size.size24}",
             "type": "spacing"
           }
         }
@@ -2844,6 +2852,34 @@
       "primaryOnColorBorderColor": {
         "value": "{color.stroke.interactive.primaryOnColor.base}",
         "type": "color"
+      },
+      "minHeightSm": {
+        "value": "{size.interactive.height.sm}",
+        "type": "sizing"
+      },
+      "minHeightMd": {
+        "value": "{size.interactive.height.md}",
+        "type": "sizing"
+      },
+      "minHeightLg": {
+        "value": "{size.interactive.height.lg}",
+        "type": "sizing"
+      },
+      "paddingHorizontalSm": {
+        "value": "{spacing.padding.interactive.horizontalSm}",
+        "type": "spacing"
+      },
+      "paddingHorizontalMd": {
+        "value": "{spacing.padding.interactive.horizontalMd}",
+        "type": "spacing"
+      },
+      "paddingHorizontalLg": {
+        "value": "{spacing.padding.interactive.horizontalLg}",
+        "type": "spacing"
+      },
+      "borderRadiusBase": {
+        "value": "{borderRadius.interactive.base}",
+        "type": "borderRadius"
       }
     }
   },
@@ -4214,8 +4250,16 @@
           }
         },
         "interactive": {
-          "horizontal": {
+          "horizontalSm": {
+            "value": "{size.size8}",
+            "type": "spacing"
+          },
+          "horizontalMd": {
             "value": "{size.size12}",
+            "type": "spacing"
+          },
+          "horizontalLg": {
+            "value": "{size.size24}",
             "type": "spacing"
           }
         }
@@ -6158,7 +6202,6 @@
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
-        "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
         "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
@@ -6212,7 +6255,8 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "spacing.padding.interactive.horizontalMd": "bcd73177e8c4524c6980b40d3264e8f97581f4c1"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0"
@@ -6572,7 +6616,6 @@
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
-        "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
         "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
@@ -6626,7 +6669,8 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "spacing.padding.interactive.horizontalMd": "bcd73177e8c4524c6980b40d3264e8f97581f4c1"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1"
@@ -6676,7 +6720,6 @@
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
-        "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
         "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
@@ -7024,7 +7067,8 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
+        "spacing.padding.interactive.horizontalMd": "bcd73177e8c4524c6980b40d3264e8f97581f4c1"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2"
@@ -7088,7 +7132,6 @@
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
-        "spacing.padding.interactive.horizontal": "bcd73177e8c4524c6980b40d3264e8f97581f4c1",
         "borderRadius.xs": "3be42e44637641982119a055fa0baa4bc0aafc2f",
         "borderRadius.sm": "b173f1f49cfe116b5b7e7c112261d21f1937f3ee",
         "borderRadius.md": "560d79bd5868acc4a44d686f7c9a68ff65b84214",
@@ -7436,7 +7479,8 @@
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
         "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
+        "spacing.padding.interactive.horizontalMd": "bcd73177e8c4524c6980b40d3264e8f97581f4c1"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3"
