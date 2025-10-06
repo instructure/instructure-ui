@@ -1012,6 +1012,10 @@
           "value": "{fontWeight.bold}",
           "type": "fontWeights"
         }
+      },
+      "interactive": {
+        "value": "{fontWeight.medium}",
+        "type": "fontWeights"
       }
     },
     "lineHeight": {
@@ -3779,7 +3783,7 @@
         "type": "fontSizes"
       },
       "fontWeight": {
-        "value": "{fontWeight.body.strong}",
+        "value": "{fontWeight.interactive}",
         "type": "fontWeights"
       },
       "spaceBetweenElementsMd": {
@@ -4423,6 +4427,10 @@
           "value": "{fontWeight.bold}",
           "type": "fontWeights"
         }
+      },
+      "interactive": {
+        "value": "{fontWeight.medium}",
+        "type": "fontWeights"
       }
     },
     "lineHeight": {
