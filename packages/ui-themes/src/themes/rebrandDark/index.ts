@@ -24,7 +24,6 @@
 
 import sharedThemeTokens from '../../sharedThemeTokens'
 import { BaseTheme, Colors } from '@instructure/shared-types'
-import { ThemeRegistry } from '@instructure/theme-registry'
 import { colors } from './colors'
 import {
   rebrandDark as newRebrandDark,
@@ -44,7 +43,7 @@ export type RebrandDarkTheme = BaseTheme & {
  *
  * Will be default in the next major version of InstUI
  */
-const __theme: RebrandDarkTheme = {
+const theme: RebrandDarkTheme = {
   newTheme: newRebrandDark,
   key,
   description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
@@ -52,7 +51,4 @@ const __theme: RebrandDarkTheme = {
   colors
 }
 
-const theme = ThemeRegistry.registerTheme(__theme)
 export default theme
-// theme without the use() function and `variables` prop
-export { __theme as newRebrandDarkThemeLocal }
