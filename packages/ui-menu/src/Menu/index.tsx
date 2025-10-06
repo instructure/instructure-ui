@@ -22,7 +22,17 @@
  * SOFTWARE.
  */
 
-import { ComponentElement, Children, Component, ReactElement } from 'react'
+import {
+  ComponentElement,
+  Children,
+  ReactElement,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  forwardRef,
+  useImperativeHandle
+} from 'react'
 import keycode from 'keycode'
 
 import { Popover } from '@instructure/ui-popover'
@@ -33,7 +43,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 
 import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
@@ -50,267 +59,310 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { MenuProps } from './props'
 
-type MenuChild = ComponentElement<MenuProps, Menu>
-type MenuItemChild = ComponentElement<MenuItemProps, MenuItem>
-type MenuGroupChild = ComponentElement<MenuGroupProps, MenuItemGroup>
-type MenuSeparatorChild = ComponentElement<
-  MenuSeparatorProps,
-  MenuItemSeparator
->
+type MenuChild = ComponentElement<MenuProps, any>
+type MenuItemChild = ComponentElement<MenuItemProps, any>
+type MenuGroupChild = ComponentElement<MenuGroupProps, any>
+type MenuSeparatorChild = ComponentElement<MenuSeparatorProps, any>
 
 /**
 ---
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
-class Menu extends Component<MenuProps> {
-  static readonly componentId = 'Menu'
-  static propTypes = propTypes
-  static allowedProps = allowedProps
-  static defaultProps = {
-    label: null,
-    disabled: false,
-    trigger: null,
-    placement: 'bottom center',
-    defaultShow: false,
-    mountNode: null,
-    constrain: 'window',
-    shouldHideOnSelect: true,
-    shouldFocusTriggerOnClose: true,
-    withArrow: true,
-    offsetX: 0,
-    offsetY: 0
-  }
+const MenuComponent = forwardRef<any, MenuProps>((props, ref) => {
+  const {
+    label = null,
+    disabled = false,
+    trigger = null,
+    placement = 'bottom center',
+    defaultShow = false,
+    mountNode = null,
+    shouldHideOnSelect = true,
+    withArrow = true,
+    offsetX = 0,
+    offsetY = 0,
+    children,
+    type,
+    onToggle,
+    onKeyDown,
+    onKeyUp,
+    onSelect,
+    menuRef,
+    popoverRef,
+    show: showProp,
+    onDismiss,
+    onFocus,
+    onMouseOver,
+    positionContainerDisplay,
+    controls,
+    id,
+    deterministicId,
+    makeStyles,
+    styles
+  } = props
 
-  static Item = MenuItem
-  static Group = MenuItemGroup
-  static Separator = MenuItemSeparator
+  // State
+  const [hasFocus, setHasFocus] = useState(false)
 
-  state = { hasFocus: false }
-  _rootNode = null
-  _menuItems: MenuItem[] = []
-  _popover: Popover | null = null
-  _trigger: MenuItem | (React.ReactInstance & { focus?: () => void }) | null =
-    null
-  _menu: HTMLElement | null = null
-  _labelId = this.props.deterministicId!('Menu__label')
+  // Refs
+  const menuItemsRef = useRef<any[]>([])
+  const popoverRef_internal = useRef<Popover | null>(null)
+  const triggerRef = useRef<any | null>(null)
+  const menuRef_internal = useRef<HTMLElement | null>(null)
+  const activeSubMenuRef = useRef<any>(null)
+  const elementRef = useRef<Element | null>(null)
 
-  _activeSubMenu?: Menu | null
-  _id: string
+  // Generate deterministic IDs
+  const labelIdRef = useRef(deterministicId?.('Menu__label'))
+  const menuIdRef = useRef(id || deterministicId?.())
+  const labelId = labelIdRef.current!
+  const menuId = menuIdRef.current!
 
-  ref: Element | null = null
+  // Effects
+  useEffect(() => {
+    makeStyles?.()
+  }, [makeStyles])
 
-  handleRef = (el: HTMLElement | null) => {
-    const { menuRef } = this.props
-    this._menu = el
-    if (typeof menuRef === 'function') {
-      menuRef(el)
-    }
-    // If there is no trigger `<ul>` is the ref, otherwise the trigger
-    if (!this.props.trigger) {
-      this.ref = el
-    }
-  }
+  // Callbacks
+  const registerMenuItem = useCallback((item: any) => {
+    menuItemsRef.current.push(item)
+  }, [])
 
-  constructor(props: MenuProps) {
-    super(props)
-
-    this._id = this.props.id || props.deterministicId!()
-  }
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  static contextType = MenuContext
-
-  registerMenuItem = (item: MenuItem) => {
-    this._menuItems.push(item)
-  }
-
-  removeMenuItem = (item: MenuItem) => {
-    const index = this.getMenuItemIndex(item)
+  const removeMenuItem = useCallback((item: any) => {
+    const index = menuItemsRef.current.findIndex((i) => i === item)
     error(index >= 0, '[Menu] Could not find registered menu item.')
     if (index >= 0) {
-      this._menuItems.splice(index, 1)
+      menuItemsRef.current.splice(index, 1)
     }
-  }
+  }, [])
 
-  get menuItems() {
-    return this._menuItems
-  }
-
-  getMenuItemIndex = (item: MenuItem) => {
-    return this._menuItems.findIndex((i) => i === item)
-  }
-
-  handleTriggerKeyDown = (event: React.KeyboardEvent) => {
-    if (this.props.type === 'flyout' && event.keyCode === keycode.codes.right) {
-      event.persist()
-      this.show(event)
-    }
-  }
-
-  handleTriggerMouseOver = (event: React.MouseEvent) => {
-    if (this.props.type === 'flyout') {
-      this.show(event)
-    }
-  }
-
-  handleToggle = (shown: boolean) => {
-    if (typeof this.props.onToggle === 'function') {
-      this.props.onToggle(shown, this)
-    }
-  }
-
-  handleMenuKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-    const key = event && event.keyCode
-    const { down, up, tab, left } = keycode.codes
-    const pgdn = keycode.codes['page down']
-    const pgup = keycode.codes['page up']
-
-    if (key === down || key === pgdn) {
-      event.preventDefault()
-      event.stopPropagation()
-      this.moveFocus(1)
-      this.hideActiveSubMenu(event)
-    } else if (key === up || key === pgup) {
-      event.preventDefault()
-      event.stopPropagation()
-      this.moveFocus(-1)
-      this.hideActiveSubMenu(event)
-    } else if (key === tab || key === left) {
-      event.persist()
-      this.hide(event)
-    }
-
-    if (typeof this.props.onKeyDown === 'function') {
-      this.props.onKeyDown(event)
-    }
-  }
-
-  handleMenuItemSelect: MenuProps['onSelect'] = (
-    event,
-    value,
-    selected,
-    item
-  ) => {
-    if (this.props.shouldHideOnSelect) {
-      this.hide(event)
-    }
-
-    if (typeof this.props.onSelect === 'function') {
-      this.props.onSelect(event, value, selected, item)
-    }
-  }
-
-  handleMenuItemFocus = () => {
-    this.setState({ hasFocus: true })
-  }
-
-  handleMenuItemBlur = () => {
-    this.setState({ hasFocus: this.focusedIndex >= 0 })
-  }
-
-  handleMenuItemMouseOver: MenuItemProps['onMouseOver'] = (event, menuItem) => {
-    if (this._activeSubMenu && menuItem !== this._activeSubMenu._trigger) {
-      this.hideActiveSubMenu(event)
-    }
-  }
-
-  hideActiveSubMenu = (event: React.MouseEvent | React.KeyboardEvent) => {
-    if (this._activeSubMenu) {
-      this._activeSubMenu.hide(event)
-      this._activeSubMenu = null
-    }
-  }
-
-  handleSubMenuToggle: MenuProps['onToggle'] = (shown, subMenu) => {
-    if (shown) {
-      this._activeSubMenu = subMenu
-    }
-  }
-
-  handleSubMenuDismiss = (
-    event: React.UIEvent | React.FocusEvent,
-    documentClick: boolean
-  ) => {
-    if (
-      (event && (event as React.KeyboardEvent).keyCode === keycode.codes.tab) ||
-      documentClick
-    ) {
-      this.hide(event)
-    }
-  }
-
-  hide = (event: React.UIEvent | React.FocusEvent) => {
-    if (this._popover) {
-      this._popover.hide(event)
-    }
-  }
-
-  show = (event: React.MouseEvent | React.KeyboardEvent) => {
-    if (this._popover) {
-      this._popover.show(event)
-    }
-  }
-
-  focus() {
-    if (this.shown) {
-      error(!!this._menu?.focus, '[Menu] Could not focus the menu.')
-      this._menu!.focus()
-    } else {
-      error(!!this._trigger?.focus, '[Menu] Could not focus the trigger.')
-      this._trigger!.focus!()
-    }
-  }
-
-  focused() {
-    if (this.shown) {
-      return containsActiveElement(this._menu) || this.state.hasFocus
-    } else {
-      return containsActiveElement(this._trigger)
-    }
-  }
-
-  get focusedIndex() {
-    return this.menuItems.findIndex((item) => {
+  const getFocusedIndex = useCallback(() => {
+    return menuItemsRef.current.findIndex((item) => {
       return item && item.focused === true
     })
-  }
+  }, [])
 
-  moveFocus(step: number) {
-    const count = this.menuItems ? this.menuItems.length : 0
+  const moveFocus = useCallback(
+    (step: number) => {
+      const count = menuItemsRef.current ? menuItemsRef.current.length : 0
 
-    if (count <= 0) {
-      return
+      if (count <= 0) {
+        return
+      }
+
+      const focusedIndex = getFocusedIndex()
+      const current = focusedIndex < 0 && step < 0 ? 0 : focusedIndex
+
+      const nextItem = menuItemsRef.current[(current + count + step) % count]
+
+      error(
+        typeof nextItem !== 'undefined' &&
+          typeof nextItem.focus !== 'undefined',
+        '[Menu] Could not focus next menu item.'
+      )
+
+      nextItem.focus()
+    },
+    [getFocusedIndex]
+  )
+
+  const hide = useCallback((event: React.UIEvent | React.FocusEvent) => {
+    if (popoverRef_internal.current) {
+      popoverRef_internal.current.hide(event)
     }
+  }, [])
 
-    const current = this.focusedIndex < 0 && step < 0 ? 0 : this.focusedIndex
+  const show = useCallback((event: React.MouseEvent | React.KeyboardEvent) => {
+    if (popoverRef_internal.current) {
+      popoverRef_internal.current.show(event)
+    }
+  }, [])
 
-    const nextItem = this.menuItems[(current + count + step) % count]
+  const hideActiveSubMenu = useCallback(
+    (event: React.MouseEvent | React.KeyboardEvent) => {
+      if (activeSubMenuRef.current) {
+        activeSubMenuRef.current.hide(event)
+        activeSubMenuRef.current = null
+      }
+    },
+    []
+  )
 
-    error(
-      typeof nextItem !== 'undefined' && typeof nextItem.focus !== 'undefined',
-      '[Menu] Could not focus next menu item.'
-    )
+  const handleRef = useCallback(
+    (el: HTMLElement | null) => {
+      menuRef_internal.current = el
+      if (typeof menuRef === 'function') {
+        menuRef(el)
+      }
+      // If there is no trigger `<ul>` is the ref, otherwise the trigger
+      if (!trigger) {
+        elementRef.current = el
+      }
+    },
+    [menuRef, trigger]
+  )
 
-    nextItem.focus()
-  }
+  const handleTriggerKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (type === 'flyout' && event.keyCode === keycode.codes.right) {
+        event.persist()
+        show(event)
+      }
+    },
+    [type, show]
+  )
 
-  get shown() {
-    return this._popover ? this._popover.shown : true
-  }
+  const handleTriggerMouseOver = useCallback(
+    (event: React.MouseEvent) => {
+      if (type === 'flyout') {
+        show(event)
+      }
+    },
+    [type, show]
+  )
 
-  renderChildren() {
-    const { children, disabled } = this.props
+  const handleToggle = useCallback(
+    (shown: boolean, menuInstance?: any) => {
+      if (typeof onToggle === 'function') {
+        onToggle(shown, menuInstance)
+      }
+    },
+    [onToggle]
+  )
 
+  const handleMenuKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      const key = event && event.keyCode
+      const { down, up, tab, left } = keycode.codes
+      const pgdn = keycode.codes['page down']
+      const pgup = keycode.codes['page up']
+
+      if (key === down || key === pgdn) {
+        event.preventDefault()
+        event.stopPropagation()
+        moveFocus(1)
+        hideActiveSubMenu(event)
+      } else if (key === up || key === pgup) {
+        event.preventDefault()
+        event.stopPropagation()
+        moveFocus(-1)
+        hideActiveSubMenu(event)
+      } else if (key === tab || key === left) {
+        event.persist()
+        hide(event)
+      }
+
+      if (typeof onKeyDown === 'function') {
+        onKeyDown(event)
+      }
+    },
+    [moveFocus, hideActiveSubMenu, hide, onKeyDown]
+  )
+
+  const handleMenuItemSelect = useCallback<NonNullable<MenuProps['onSelect']>>(
+    (event, value, selected, item) => {
+      if (shouldHideOnSelect) {
+        hide(event)
+      }
+
+      if (typeof onSelect === 'function') {
+        onSelect(event, value, selected, item)
+      }
+    },
+    [shouldHideOnSelect, hide, onSelect]
+  )
+
+  const handleMenuItemFocus = useCallback(() => {
+    setHasFocus(true)
+  }, [])
+
+  const handleMenuItemBlur = useCallback(() => {
+    setHasFocus(getFocusedIndex() >= 0)
+  }, [getFocusedIndex])
+
+  const handleMenuItemMouseOver = useCallback<
+    NonNullable<MenuItemProps['onMouseOver']>
+  >(
+    (event, menuItem) => {
+      if (
+        activeSubMenuRef.current &&
+        menuItem !== activeSubMenuRef.current._trigger
+      ) {
+        hideActiveSubMenu(event)
+      }
+    },
+    [hideActiveSubMenu]
+  )
+
+  const handleSubMenuToggle = useCallback<NonNullable<MenuProps['onToggle']>>(
+    (shown, subMenu) => {
+      if (shown) {
+        activeSubMenuRef.current = subMenu
+      }
+    },
+    []
+  )
+
+  const handleSubMenuDismiss = useCallback(
+    (event: React.UIEvent | React.FocusEvent, documentClick: boolean) => {
+      if (
+        (event &&
+          (event as React.KeyboardEvent).keyCode === keycode.codes.tab) ||
+        documentClick
+      ) {
+        hide(event)
+      }
+    },
+    [hide]
+  )
+
+  // Imperative handle for ref
+  useImperativeHandle(
+    ref,
+    () => ({
+      focus: () => {
+        const shown = popoverRef_internal.current
+          ? popoverRef_internal.current.shown
+          : true
+        if (shown) {
+          error(
+            !!menuRef_internal.current?.focus,
+            '[Menu] Could not focus the menu.'
+          )
+          menuRef_internal.current!.focus()
+        } else {
+          error(
+            !!triggerRef.current?.focus,
+            '[Menu] Could not focus the trigger.'
+          )
+          triggerRef.current!.focus!()
+        }
+      },
+      focused: () => {
+        const shown = popoverRef_internal.current
+          ? popoverRef_internal.current.shown
+          : true
+        if (shown) {
+          return containsActiveElement(menuRef_internal.current) || hasFocus
+        } else {
+          return containsActiveElement(triggerRef.current)
+        }
+      },
+      hide,
+      show,
+      get shown() {
+        return popoverRef_internal.current
+          ? popoverRef_internal.current.shown
+          : true
+      },
+      menuItems: menuItemsRef.current,
+      _trigger: triggerRef.current,
+      _activeSubMenu: activeSubMenuRef.current
+    }),
+    [hasFocus, hide, show]
+  )
+
+  const renderChildren = useCallback(() => {
     let count = 0
 
     return Children.map(
@@ -333,7 +385,7 @@ class Menu extends Component<MenuProps> {
 
         count += 1
 
-        const isTabbable = !this.state.hasFocus && count === 1
+        const isTabbable = !hasFocus && count === 1
 
         if (
           matchComponentTypes<MenuSeparatorChild>(child, ['MenuItemSeparator'])
@@ -343,21 +395,21 @@ class Menu extends Component<MenuProps> {
 
         const menuItemChild = child
 
-        const controls =
+        const itemControls =
           menuItemChild.props['aria-controls'] ||
           menuItemChild.props.controls ||
-          this.props['aria-controls'] ||
-          this.props.controls
+          props['aria-controls'] ||
+          controls
 
         if (matchComponentTypes<MenuItemChild>(child, ['MenuItem'])) {
           return safeCloneElement(child, {
-            controls,
+            controls: itemControls,
             children: child.props.children,
             disabled: disabled || child.props.disabled,
-            onFocus: this.handleMenuItemFocus,
-            onBlur: this.handleMenuItemBlur,
-            onSelect: this.handleMenuItemSelect,
-            onMouseOver: this.handleMenuItemMouseOver,
+            onFocus: handleMenuItemFocus,
+            onBlur: handleMenuItemBlur,
+            onSelect: handleMenuItemSelect,
+            onMouseOver: handleMenuItemMouseOver,
             tabIndex: isTabbable ? 0 : -1
           })
         }
@@ -365,12 +417,12 @@ class Menu extends Component<MenuProps> {
         if (matchComponentTypes<MenuGroupChild>(child, ['MenuItemGroup'])) {
           return safeCloneElement(child, {
             label: child.props.label,
-            controls,
+            controls: itemControls,
             disabled: disabled || child.props.disabled,
-            onFocus: this.handleMenuItemFocus,
-            onBlur: this.handleMenuItemBlur,
-            onSelect: this.handleMenuItemSelect,
-            onMouseOver: this.handleMenuItemMouseOver,
+            onFocus: handleMenuItemFocus,
+            onBlur: handleMenuItemBlur,
+            onSelect: handleMenuItemSelect,
+            onMouseOver: handleMenuItemMouseOver,
             isTabbable
           })
         }
@@ -380,20 +432,20 @@ class Menu extends Component<MenuProps> {
 
           return safeCloneElement(child, {
             type: 'flyout',
-            controls,
+            controls: itemControls,
             disabled: submenuDisabled,
-            onSelect: this.handleMenuItemSelect,
+            onSelect: handleMenuItemSelect,
             placement: 'end top',
             offsetX: -5,
             offsetY: 5,
             withArrow: false,
-            onToggle: this.handleSubMenuToggle,
-            onDismiss: this.handleSubMenuDismiss,
+            onToggle: handleSubMenuToggle,
+            onDismiss: handleSubMenuDismiss,
             trigger: (
               <MenuItem
-                onMouseOver={this.handleMenuItemMouseOver}
-                onFocus={this.handleMenuItemFocus}
-                onBlur={this.handleMenuItemBlur}
+                onMouseOver={handleMenuItemMouseOver}
+                onFocus={handleMenuItemFocus}
+                onBlur={handleMenuItemBlur}
                 tabIndex={isTabbable ? 0 : -1}
                 type="flyout"
                 disabled={submenuDisabled}
@@ -407,110 +459,140 @@ class Menu extends Component<MenuProps> {
         return
       }
     )
-  }
+  }, [
+    children,
+    hasFocus,
+    disabled,
+    props,
+    controls,
+    handleMenuItemFocus,
+    handleMenuItemBlur,
+    handleMenuItemSelect,
+    handleMenuItemMouseOver,
+    handleSubMenuToggle,
+    handleSubMenuDismiss
+  ])
 
-  renderMenu() {
-    const { disabled, label, trigger, onKeyUp } = this.props
-
-    const labelledBy = this.props['aria-labelledby']
-    const controls = this.props['aria-controls']
+  const renderMenu = useCallback(() => {
+    const labelledBy = props['aria-labelledby']
 
     return (
       <MenuContext.Provider
         value={{
-          removeMenuItem: this.removeMenuItem,
-          registerMenuItem: this.registerMenuItem
+          removeMenuItem,
+          registerMenuItem
         }}
       >
         <div
           role="menu"
-          aria-label={label}
+          aria-label={label || undefined}
           tabIndex={0}
-          css={this.props.styles?.menu}
-          aria-labelledby={labelledBy || (trigger ? this._labelId : undefined)}
+          css={styles?.menu}
+          aria-labelledby={labelledBy || (trigger ? labelId : undefined)}
           aria-controls={controls}
           aria-disabled={disabled ? 'true' : undefined}
-          onKeyDown={this.handleMenuKeyDown}
+          onKeyDown={handleMenuKeyDown}
           onKeyUp={onKeyUp}
-          ref={this.handleRef}
+          ref={handleRef}
         >
-          {this.renderChildren()}
+          {renderChildren()}
         </div>
       </MenuContext.Provider>
     )
-  }
+  }, [
+    props,
+    removeMenuItem,
+    registerMenuItem,
+    label,
+    styles,
+    trigger,
+    labelId,
+    controls,
+    disabled,
+    handleMenuKeyDown,
+    onKeyUp,
+    handleRef,
+    renderChildren
+  ])
 
-  render() {
-    const {
-      show,
-      defaultShow,
-      placement,
-      withArrow,
-      trigger,
-      mountNode,
-      popoverRef,
-      disabled,
-      onDismiss,
-      onFocus,
-      onMouseOver,
-      positionContainerDisplay,
-      offsetX,
-      offsetY
-    } = this.props
-
-    return trigger ? (
-      <Popover
-        isShowingContent={show}
-        defaultIsShowingContent={defaultShow}
-        onHideContent={(event, { documentClick }) => {
-          if (typeof onDismiss === 'function') {
-            onDismiss(event, documentClick)
-          }
-          this.handleToggle(false)
-        }}
-        onShowContent={() => this.handleToggle(true)}
-        mountNode={mountNode}
-        placement={placement}
-        withArrow={withArrow}
-        id={this._id}
-        on={['click']}
-        shouldContainFocus
-        shouldReturnFocus
-        onFocus={onFocus}
-        onMouseOver={onMouseOver}
-        positionContainerDisplay={positionContainerDisplay}
-        offsetX={offsetX}
-        offsetY={offsetY}
-        elementRef={(element) => {
-          this.ref = element
-        }}
-        ref={(el) => {
-          this._popover = el
-          if (typeof popoverRef === 'function') {
-            popoverRef(el)
-          }
-        }}
-        renderTrigger={safeCloneElement(trigger as ReactElement, {
-          ref: (el: (React.ReactInstance & { ref?: Element }) | null) => {
-            this._trigger = el
-          },
-          'aria-haspopup': true,
-          id: this._labelId,
-          onMouseOver: this.handleTriggerMouseOver,
-          onKeyDown: this.handleTriggerKeyDown,
-          disabled: (trigger as ReactElement).props.disabled || disabled
-        })}
-        defaultFocusElement={() =>
-          this._popover?._contentElement?.querySelector('[class$="menuItem"]')
+  return trigger ? (
+    <Popover
+      isShowingContent={showProp}
+      defaultIsShowingContent={defaultShow}
+      onHideContent={(event, { documentClick }) => {
+        if (typeof onDismiss === 'function') {
+          onDismiss(event, documentClick)
         }
-      >
-        {this.renderMenu()}
-      </Popover>
-    ) : (
-      this.renderMenu()
-    )
-  }
+        handleToggle(false)
+      }}
+      onShowContent={() => handleToggle(true)}
+      mountNode={mountNode}
+      placement={placement}
+      withArrow={withArrow}
+      id={menuId}
+      on={['click']}
+      shouldContainFocus
+      shouldReturnFocus
+      onFocus={onFocus}
+      onMouseOver={onMouseOver}
+      positionContainerDisplay={positionContainerDisplay}
+      offsetX={offsetX}
+      offsetY={offsetY}
+      elementRef={(element) => {
+        elementRef.current = element
+      }}
+      ref={(el) => {
+        popoverRef_internal.current = el
+        if (typeof popoverRef === 'function') {
+          popoverRef(el)
+        }
+      }}
+      renderTrigger={safeCloneElement(trigger as ReactElement, {
+        ref: (el: (React.ReactInstance & { ref?: Element }) | null) => {
+          triggerRef.current = el
+        },
+        'aria-haspopup': true,
+        id: labelId,
+        onMouseOver: handleTriggerMouseOver,
+        onKeyDown: handleTriggerKeyDown,
+        disabled: (trigger as ReactElement).props.disabled || disabled
+      })}
+      defaultFocusElement={() =>
+        popoverRef_internal.current?._contentElement?.querySelector(
+          '[class$="menuItem"]'
+        )
+      }
+    >
+      {renderMenu()}
+    </Popover>
+  ) : (
+    renderMenu()
+  )
+})
+
+MenuComponent.displayName = 'Menu'
+
+const StyledMenu: any = withStyle(
+  generateStyle,
+  generateComponentTheme
+)(MenuComponent as any)
+const MenuWithId = withDeterministicId()(StyledMenu)
+
+const Menu = MenuWithId as typeof MenuComponent & {
+  componentId: string
+  propTypes: typeof propTypes
+  allowedProps: typeof allowedProps
+  Item: typeof MenuItem
+  Group: typeof MenuItemGroup
+  Separator: typeof MenuItemSeparator
 }
+
+Menu.componentId = 'Menu'
+;(Menu as any).propTypes = propTypes
+;(Menu as any).allowedProps = allowedProps
+Menu.Item = MenuItem
+Menu.Group = MenuItemGroup
+Menu.Separator = MenuItemSeparator
 
 export default Menu
 export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator }
