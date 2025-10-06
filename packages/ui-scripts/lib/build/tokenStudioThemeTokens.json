@@ -2797,6 +2797,10 @@
         "value": "{color.text.base}",
         "type": "color"
       },
+      "readonlyTextColor": {
+        "value": "{color.text.muted}",
+        "type": "color"
+      },
       "asteriskColor": {
         "value": "{color.text.base}",
         "type": "color"
@@ -2816,10 +2820,6 @@
       "lineHeight": {
         "value": "{lineHeight.standalone.textBase}",
         "type": "lineHeights"
-      },
-      "readonlyTextColor": {
-        "value": "{color.text.muted}",
-        "type": "color"
       }
     }
   },
@@ -3605,6 +3605,10 @@
         "value": "{color.text.base}",
         "type": "color"
       },
+      "readonlyTextColor": {
+        "value": "{color.text.muted}",
+        "type": "color"
+      },
       "asteriskColor": {
         "value": "{color.text.error}",
         "type": "color"
@@ -3624,10 +3628,6 @@
       "lineHeight": {
         "value": "{lineHeight.standalone.textBase}",
         "type": "lineHeights"
-      },
-      "readonlyTextColor": {
-        "value": "{color.text.muted}",
-        "type": "color"
       }
     }
   },
