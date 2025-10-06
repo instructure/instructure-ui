@@ -817,7 +817,7 @@
         "value": "{size.size32}",
         "type": "spacing"
       },
-      "between": {
+      "gap": {
         "sections": {
           "value": "{size.size48}",
           "type": "spacing"
@@ -2742,15 +2742,15 @@
         "value": "{color.icon.base}",
         "type": "color"
       },
-      "spaceBetweenElementsSm": {
+      "gapSm": {
         "value": "{spacing.space2xs}",
         "type": "spacing"
       },
-      "spaceBetweenElementsMd": {
+      "gapMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
-      "spaceBetweenElementsLg": {
+      "gapLg": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
       }
@@ -2784,6 +2784,10 @@
           "lineHeight": "{lineHeight.paragraph.textBase}"
         },
         "type": "typography"
+      },
+      "gapPrimitives": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
       }
     }
   },
@@ -2929,15 +2933,15 @@
         "value": "{fontWeight.interactive}",
         "type": "fontWeights"
       },
-      "spaceBetweenElementsSm": {
+      "gapSm": {
         "value": "{spacing.space2xs}",
         "type": "spacing"
       },
-      "spaceBetweenElementsMd": {
+      "gapMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
-      "spaceBetweenElementsLg": {
+      "gapLg": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
@@ -3013,7 +3017,7 @@
         "value": "{fontSize.text2xl}",
         "type": "fontSizes"
       },
-      "spaceBetweenTexts": {
+      "gapTexts": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
       },
@@ -3323,8 +3327,8 @@
         "value": "{size.interactive.height.lg}",
         "type": "sizing"
       },
-      "spaceBetweenElements": {
-        "value": "{spacing.between.inputElements}",
+      "gapContent": {
+        "value": "{spacing.spaceMd}",
         "type": "spacing"
       },
       "paddingHorizontal": {
@@ -3546,15 +3550,15 @@
         "value": "{color.icon.base}",
         "type": "color"
       },
-      "spaceBetweenElementsSm": {
+      "gapSm": {
         "value": "{spacing.space2xs}",
         "type": "spacing"
       },
-      "spaceBetweenElementsMd": {
+      "gapMd": {
         "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
-      "spaceBetweenElementsLg": {
+      "gapLg": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
       }
@@ -3588,6 +3592,10 @@
           "lineHeight": "{lineHeight.paragraph.textBase}"
         },
         "type": "typography"
+      },
+      "gapPrimitives": {
+        "value": "{spacing.spaceSm}",
+        "type": "spacing"
       }
     }
   },
@@ -3733,16 +3741,16 @@
         "value": "{fontWeight.interactive}",
         "type": "fontWeights"
       },
-      "spaceBetweenElementsMd": {
-        "value": "{spacing.spaceXs}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsLg": {
-        "value": "{spacing.spaceXs}",
-        "type": "spacing"
-      },
-      "spaceBetweenElementsSm": {
+      "gapSm": {
         "value": "{spacing.space2xs}",
+        "type": "spacing"
+      },
+      "gapMd": {
+        "value": "{spacing.spaceXs}",
+        "type": "spacing"
+      },
+      "gapLg": {
+        "value": "{spacing.spaceXs}",
         "type": "spacing"
       },
       "lineHeightSm": {
@@ -3817,7 +3825,7 @@
         "value": "{fontSize.text2xl}",
         "type": "fontSizes"
       },
-      "spaceBetweenTexts": {
+      "gapTexts": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
       },
@@ -4127,8 +4135,8 @@
         "value": "{size.interactive.height.lg}",
         "type": "sizing"
       },
-      "spaceBetweenElements": {
-        "value": "{spacing.between.inputElements}",
+      "gapContent": {
+        "value": "{spacing.spaceMd}",
         "type": "spacing"
       },
       "paddingHorizontal": {
@@ -4211,7 +4219,7 @@
         "value": "{size.size32}",
         "type": "spacing"
       },
-      "between": {
+      "gap": {
         "sections": {
           "value": "{size.size48}",
           "type": "spacing"
@@ -6147,9 +6155,6 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
-        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
-        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -6183,9 +6188,6 @@
         "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
         "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
@@ -6195,7 +6197,6 @@
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
         "metric.valueColor": "a193e3648981b5d6feec28d5fccb6701bed33868",
         "metric.valueFontSize": "a388d616be32e2341d489bde2e2b46a1c4fd7c4f",
-        "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
@@ -6268,7 +6269,6 @@
         "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
-        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
         "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
@@ -6286,12 +6286,6 @@
         "spacing.spaceLg": "96c851304a95cfc6c279473eb100bc63218049f3",
         "spacing.spaceXl": "f4c478c6333a4ce0a61e5110b017119a2ef76aa3",
         "spacing.space2xl": "5f05115d74047cabdc1ee5f59e25e92de82c5f52",
-        "spacing.between.sections": "720d7c85900dc4471787d6769841be82908209b8",
-        "spacing.between.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
-        "spacing.between.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
-        "spacing.between.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
-        "spacing.between.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
-        "spacing.between.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
@@ -6350,7 +6344,21 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567"
+        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567",
+        "spacing.gap.sections": "720d7c85900dc4471787d6769841be82908209b8",
+        "spacing.gap.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
+        "spacing.gap.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
+        "spacing.gap.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
+        "spacing.gap.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
+        "spacing.gap.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
+        "breadcrumb.gapSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "breadcrumb.gapMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "link.gapSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.gapMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.gapLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "metric.gapTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
+        "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -6598,9 +6606,6 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
-        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
-        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -6634,9 +6639,6 @@
         "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
         "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
@@ -6646,7 +6648,6 @@
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
         "metric.valueColor": "a193e3648981b5d6feec28d5fccb6701bed33868",
         "metric.valueFontSize": "a388d616be32e2341d489bde2e2b46a1c4fd7c4f",
-        "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
@@ -6719,7 +6720,6 @@
         "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
-        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
         "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
@@ -6737,12 +6737,6 @@
         "spacing.spaceLg": "96c851304a95cfc6c279473eb100bc63218049f3",
         "spacing.spaceXl": "f4c478c6333a4ce0a61e5110b017119a2ef76aa3",
         "spacing.space2xl": "5f05115d74047cabdc1ee5f59e25e92de82c5f52",
-        "spacing.between.sections": "720d7c85900dc4471787d6769841be82908209b8",
-        "spacing.between.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
-        "spacing.between.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
-        "spacing.between.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
-        "spacing.between.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
-        "spacing.between.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
@@ -6801,7 +6795,21 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567"
+        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567",
+        "spacing.gap.sections": "720d7c85900dc4471787d6769841be82908209b8",
+        "spacing.gap.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
+        "spacing.gap.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
+        "spacing.gap.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
+        "spacing.gap.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
+        "spacing.gap.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
+        "breadcrumb.gapSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "breadcrumb.gapMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "link.gapSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.gapMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.gapLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "metric.gapTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
+        "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -6848,12 +6856,6 @@
         "spacing.spaceLg": "96c851304a95cfc6c279473eb100bc63218049f3",
         "spacing.spaceXl": "f4c478c6333a4ce0a61e5110b017119a2ef76aa3",
         "spacing.space2xl": "5f05115d74047cabdc1ee5f59e25e92de82c5f52",
-        "spacing.between.sections": "720d7c85900dc4471787d6769841be82908209b8",
-        "spacing.between.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
-        "spacing.between.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
-        "spacing.between.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
-        "spacing.between.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
-        "spacing.between.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
@@ -7109,9 +7111,6 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
-        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
-        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -7145,9 +7144,6 @@
         "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
         "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
@@ -7157,7 +7153,6 @@
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
         "metric.valueColor": "a193e3648981b5d6feec28d5fccb6701bed33868",
         "metric.valueFontSize": "a388d616be32e2341d489bde2e2b46a1c4fd7c4f",
-        "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
@@ -7230,8 +7225,21 @@
         "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
-        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
+        "spacing.gap.sections": "720d7c85900dc4471787d6769841be82908209b8",
+        "spacing.gap.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
+        "spacing.gap.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
+        "spacing.gap.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
+        "spacing.gap.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
+        "spacing.gap.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
+        "breadcrumb.gapSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "breadcrumb.gapMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "link.gapSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.gapMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.gapLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "metric.gapTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
+        "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:2",
@@ -7297,12 +7305,6 @@
         "spacing.spaceLg": "96c851304a95cfc6c279473eb100bc63218049f3",
         "spacing.spaceXl": "f4c478c6333a4ce0a61e5110b017119a2ef76aa3",
         "spacing.space2xl": "5f05115d74047cabdc1ee5f59e25e92de82c5f52",
-        "spacing.between.sections": "720d7c85900dc4471787d6769841be82908209b8",
-        "spacing.between.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
-        "spacing.between.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
-        "spacing.between.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
-        "spacing.between.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
-        "spacing.between.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
         "spacing.padding.container.sm": "3e007ffe23780d5853b60bae7cb779debd377e31",
         "spacing.padding.container.md": "e8aaae6c55dc960c670befd41b61911843febb7a",
         "spacing.padding.container.lg": "8b58c240c5098cb7f608c68d8a30aad72952683d",
@@ -7558,9 +7560,6 @@
         "breadcrumb.separatorColor": "8b94e6ed0e5686413c72a4539e0cb382bcf31a87",
         "breadcrumb.fontColor": "6a83e9a637c12d4edfc725860fd3024ea2a27f3e",
         "breadcrumb.iconColor": "f048a388b48b9ca2fb9e3cb895402591c7d38442",
-        "breadcrumb.spaceBetweenElementsSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
-        "breadcrumb.spaceBetweenElementsMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
-        "breadcrumb.spaceBetweenElementsLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
@@ -7594,9 +7593,6 @@
         "link.fontSizeMd": "7d258b22b87d67185e2c1063a3692f67ce8f9041",
         "link.fontSizeLg": "b675e5cd4521b7dd638995781b5cb4af40d3ece9",
         "link.fontWeight": "bf996cc602b5584085b59686a29c1dfe825c68db",
-        "link.spaceBetweenElementsSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
-        "link.spaceBetweenElementsMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
-        "link.spaceBetweenElementsLg": "3cc2382186d272978a411702afe181eaf69b10aa",
         "link.lineHeightSm": "d7fa12e6f41e71f1102fb0d2ca9d2675f7c5920d",
         "link.lineHeightMd": "88cd897f5b2bdad37f32118277ed34a06858d917",
         "link.lineHeightLg": "d6b5e41838fc4ed7f36403fc4d0dfc5058823616",
@@ -7606,7 +7602,6 @@
         "metric.paddingHorizontal": "7fbb47de0aac37e8cdcf97131202ef545c333e44",
         "metric.valueColor": "a193e3648981b5d6feec28d5fccb6701bed33868",
         "metric.valueFontSize": "a388d616be32e2341d489bde2e2b46a1c4fd7c4f",
-        "metric.spaceBetweenTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
         "metric.labelLineHeight": "09cff7eaad0475b0b6e40f4e3b982ceef9c50951",
         "metric.valueLineHeight": "3152805f453a458f7375acb2ed09aa961709567e",
         "metric.labelFontFamily": "87b31a090eb6547ec5ec24ca3a65361d7c49cf3a",
@@ -7679,8 +7674,21 @@
         "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
         "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
         "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
-        "textInput.spaceBetweenElements": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+        "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
+        "spacing.gap.sections": "720d7c85900dc4471787d6769841be82908209b8",
+        "spacing.gap.cards.sm": "b0753bc1a3deec48aa6867cfcfa866a6614fa92c",
+        "spacing.gap.cards.md": "4e9a62b2e587f968e02635e6383d5855c87db283",
+        "spacing.gap.inputs.horizontal": "04911f80803793d3667b2a9b0153d8e01e2d17ea",
+        "spacing.gap.inputs.vertical": "d6fe77912122e4de25ba4c602bbcbfce3dde93a5",
+        "spacing.gap.inputElements": "9e708e58e2f54300c6d451b4151bacc1e5335cc3",
+        "breadcrumb.gapSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
+        "breadcrumb.gapMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
+        "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
+        "link.gapSm": "a52cdd7edaebb7c04e6a2a49355dc126f9734148",
+        "link.gapMd": "84b1d3ee78cf05c965d2da7c3c9a030acb83a74c",
+        "link.gapLg": "3cc2382186d272978a411702afe181eaf69b10aa",
+        "metric.gapTexts": "138c8c7284991105ceb67f4578618e5108c68ec0",
+        "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:3",
