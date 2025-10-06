@@ -2837,6 +2837,10 @@
         "value": "{color.text.success}",
         "type": "color"
       },
+      "successIconColor": {
+        "value": "{color.icon.success}",
+        "type": "color"
+      },
       "fontWeight": {
         "value": "{fontWeight.body.base}",
         "type": "fontWeights"
@@ -3635,6 +3639,10 @@
       },
       "successTextColor": {
         "value": "{color.text.success}",
+        "type": "color"
+      },
+      "successIconColor": {
+        "value": "{color.icon.success}",
         "type": "color"
       },
       "fontWeight": {
@@ -6153,6 +6161,7 @@
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
         "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "formFieldMessage.successIconColor": "53ce2d35e172e87a2b05c0430411cea1e8464d1e",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -6340,7 +6349,8 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:0",
@@ -6602,6 +6612,7 @@
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
         "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "formFieldMessage.successIconColor": "53ce2d35e172e87a2b05c0430411cea1e8464d1e",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -6789,7 +6800,8 @@
         "fontSize.text3xl": "0464f348e304218d75bc033dd2b7c8e5f1c87102",
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
-        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8"
+        "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
       "$figmaModeId": "2374:1",
@@ -6900,6 +6912,7 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567",
         "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "color.background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "color.background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
@@ -7110,6 +7123,7 @@
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
         "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "formFieldMessage.successIconColor": "53ce2d35e172e87a2b05c0430411cea1e8464d1e",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
@@ -7347,6 +7361,7 @@
         "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
+        "fontWeight.interactive": "9e9e20db4a5880ec4e50c062def10724302cd567",
         "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
         "color.background.muted": "e37b2ac641dc0eca8c856245efaf4a8d9da4e53d",
         "color.background.page": "ef9f3d4a250d4ecb39f1c7f6d187821bfd142a74",
@@ -7557,6 +7572,7 @@
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
         "formFieldMessage.successTextColor": "40f3676445a42c6e70bb3b3e807eb7fb2fa6bd81",
+        "formFieldMessage.successIconColor": "53ce2d35e172e87a2b05c0430411cea1e8464d1e",
         "formFieldMessage.fontWeight": "3c892e9d65a385dec6a0efd6500ae2ffa37fb0b2",
         "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
