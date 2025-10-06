@@ -32,8 +32,8 @@ import type {
   UI
 } from '@instructure/shared-types'
 
-import { canvasHighContrast } from './themes/canvasHighContrast'
-import { canvas } from './themes/canvas'
+import canvasHighContrast from './themes/canvasHighContrast'
+import canvas from './themes/canvas'
 
 import rebrandDark from './themes/rebrandDark'
 
