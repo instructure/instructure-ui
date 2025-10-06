@@ -5,6 +5,7 @@ on:
       - master
       - v8_maintenance
       - v9_maintenance
+      - v10_maintenance
   workflow_dispatch:
 jobs:
   deploy-release:
@@ -31,6 +32,9 @@ jobs:
             "refs/heads/v9_maintenance")
               echo "::set-output name=deploy_dir::v9"
               ;;
+            "refs/heads/v10_maintenance")
+              echo "::set-output name=deploy_dir::v10"
+              ;;
           esac
       - name: Build docs-app
         run: npm run build:docs
@@ -45,6 +49,7 @@ jobs:
             v7
             v8
             v9
+            v10
             latest
           force: false
   deploy-latest:
