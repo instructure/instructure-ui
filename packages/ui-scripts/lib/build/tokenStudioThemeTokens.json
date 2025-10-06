@@ -2756,10 +2756,10 @@
     "formField": {
       "small": {
         "value": {
-          "fontFamily": "{fontFamily.base}",
           "fontWeight": "{fontWeight.body.base}",
           "fontSize": "{fontSize.textSm}",
-          "lineHeight": "{lineHeight.paragraph.textSm}"
+          "lineHeight": "{lineHeight.paragraph.textSm}",
+          "fontFamily": "{fontFamily.base}"
         },
         "type": "typography"
       },
