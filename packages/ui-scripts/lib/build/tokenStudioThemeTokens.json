@@ -760,32 +760,6 @@
             "type": "sizing"
           }
         }
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size12}",
-          "type": "sizing"
-        },
-        "sm": {
-          "value": "{size.size16}",
-          "type": "sizing"
-        },
-        "md": {
-          "value": "{size.size20}",
-          "type": "sizing"
-        },
-        "lg": {
-          "value": "{size.size24}",
-          "type": "sizing"
-        },
-        "xl": {
-          "value": "{size.size32}",
-          "type": "sizing"
-        },
-        "xxl": {
-          "value": "{size.size36}",
-          "type": "sizing"
-        }
       }
     },
     "spacing": {
@@ -932,32 +906,6 @@
       "lg": {
         "value": "{size.size4}",
         "type": "borderWidth"
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size1}",
-          "type": "borderWidth"
-        },
-        "sm": {
-          "value": "{additionalSize.size1_25}",
-          "type": "borderWidth"
-        },
-        "md": {
-          "value": "{additionalSize.size1_5}",
-          "type": "borderWidth"
-        },
-        "lg": {
-          "value": "{size.size2}",
-          "type": "borderWidth"
-        },
-        "xl": {
-          "value": "{additionalSize.size2_5}",
-          "type": "borderWidth"
-        },
-        "xxl": {
-          "value": "{additionalSize.size3}",
-          "type": "borderWidth"
-        }
       },
       "interactive": {
         "base": {
@@ -2867,6 +2815,86 @@
       }
     }
   },
+  "canvas/component/Icon": {
+    "icon": {
+      "sizeXs": {
+        "value": "0.75rem",
+        "type": "sizing"
+      },
+      "sizeSm": {
+        "value": "1rem",
+        "type": "sizing"
+      },
+      "sizeMd": {
+        "value": "1.25rem",
+        "type": "sizing"
+      },
+      "sizeLg": {
+        "value": "1.5rem",
+        "type": "sizing"
+      },
+      "sizeXl": {
+        "value": "2rem",
+        "type": "sizing"
+      },
+      "size2xl": {
+        "value": "2.25rem",
+        "type": "sizing"
+      },
+      "strokeWidthXs": {
+        "value": "0.0625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthSm": {
+        "value": "0.078125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthMd": {
+        "value": "0.09375rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthLg": {
+        "value": "0.125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthXl": {
+        "value": "0.15625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidth2xl": {
+        "value": "0.1875rem",
+        "type": "borderWidth"
+      },
+      "baseColor": {
+        "value": "{color.icon.base}",
+        "type": "color"
+      },
+      "mutedColor": {
+        "value": "{color.icon.muted}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.icon.success}",
+        "type": "color"
+      },
+      "errorColor": {
+        "value": "{color.icon.error}",
+        "type": "color"
+      },
+      "warningColor": {
+        "value": "{color.icon.warning}",
+        "type": "color"
+      },
+      "infoColor": {
+        "value": "{color.icon.info}",
+        "type": "color"
+      },
+      "onColor": {
+        "value": "{color.icon.onColor}",
+        "type": "color"
+      }
+    }
+  },
   "canvas/component/Link": {
     "link": {
       "textColor": {
@@ -3675,6 +3703,86 @@
       }
     }
   },
+  "rebrand/component/Icon": {
+    "icon": {
+      "sizeXs": {
+        "value": "0.75rem",
+        "type": "sizing"
+      },
+      "sizeSm": {
+        "value": "1rem",
+        "type": "sizing"
+      },
+      "sizeMd": {
+        "value": "1.25rem",
+        "type": "sizing"
+      },
+      "sizeLg": {
+        "value": "1.5rem",
+        "type": "sizing"
+      },
+      "sizeXl": {
+        "value": "2rem",
+        "type": "sizing"
+      },
+      "size2xl": {
+        "value": "2.25rem",
+        "type": "sizing"
+      },
+      "strokeWidthXs": {
+        "value": "0.0625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthSm": {
+        "value": "0.078125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthMd": {
+        "value": "0.09375rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthLg": {
+        "value": "0.125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthXl": {
+        "value": "0.15625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidth2xl": {
+        "value": "0.1875rem",
+        "type": "borderWidth"
+      },
+      "baseColor": {
+        "value": "{color.icon.base}",
+        "type": "color"
+      },
+      "mutedColor": {
+        "value": "{color.icon.muted}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.icon.success}",
+        "type": "color"
+      },
+      "errorColor": {
+        "value": "{color.icon.error}",
+        "type": "color"
+      },
+      "warningColor": {
+        "value": "{color.icon.warning}",
+        "type": "color"
+      },
+      "infoColor": {
+        "value": "{color.icon.info}",
+        "type": "color"
+      },
+      "onColor": {
+        "value": "{color.icon.onColor}",
+        "type": "color"
+      }
+    }
+  },
   "rebrand/component/Link": {
     "link": {
       "textColor": {
@@ -4162,32 +4270,6 @@
             "type": "sizing"
           }
         }
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size12}",
-          "type": "sizing"
-        },
-        "sm": {
-          "value": "{size.size16}",
-          "type": "sizing"
-        },
-        "md": {
-          "value": "{size.size20}",
-          "type": "sizing"
-        },
-        "lg": {
-          "value": "{size.size24}",
-          "type": "sizing"
-        },
-        "xl": {
-          "value": "{size.size32}",
-          "type": "sizing"
-        },
-        "xxl": {
-          "value": "{size.size36}",
-          "type": "sizing"
-        }
       }
     },
     "spacing": {
@@ -4334,32 +4416,6 @@
       "lg": {
         "value": "{size.size4}",
         "type": "borderWidth"
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size1}",
-          "type": "borderWidth"
-        },
-        "sm": {
-          "value": "{additionalSize.size1_25}",
-          "type": "borderWidth"
-        },
-        "md": {
-          "value": "{additionalSize.size1_5}",
-          "type": "borderWidth"
-        },
-        "lg": {
-          "value": "{size.size2}",
-          "type": "borderWidth"
-        },
-        "xl": {
-          "value": "{additionalSize.size2_5}",
-          "type": "borderWidth"
-        },
-        "xxl": {
-          "value": "{additionalSize.size3}",
-          "type": "borderWidth"
-        }
       },
       "interactive": {
         "base": {
@@ -7710,6 +7766,7 @@
       "canvas/component/FormField",
       "canvas/component/FormFieldLabel",
       "canvas/component/FormFieldMessage",
+      "canvas/component/Icon",
       "canvas/component/Link",
       "canvas/component/Metric",
       "canvas/component/Pill",
@@ -7720,6 +7777,7 @@
       "rebrand/component/FormField",
       "rebrand/component/FormFieldLabel",
       "rebrand/component/FormFieldMessage",
+      "rebrand/component/Icon",
       "rebrand/component/Link",
       "rebrand/component/Metric",
       "rebrand/component/Pill",
