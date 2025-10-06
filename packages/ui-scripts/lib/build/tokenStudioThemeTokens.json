@@ -2908,6 +2908,18 @@
       "gapButtonContentLg": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "1.375 rem",
+        "type": "fontSizes"
       }
     }
   },
@@ -3626,6 +3638,18 @@
       "gapButtonContentLg": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
+      },
+      "fontSizeSm": {
+        "value": "{fontSize.textSm}",
+        "type": "fontSizes"
+      },
+      "fontSizeMd": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontSizeLg": {
+        "value": "1.375 rem",
+        "type": "fontSizes"
       }
     }
   },
