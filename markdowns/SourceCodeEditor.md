@@ -3,22 +3,6 @@
 
 A wrapper around the popular [CodeMirror](https://codemirror.net/) code editor component. CodeMirror provides a text input field with features like line gutters, syntax highlighting, and autocompletion.
 
-```javascript
----
-type: embed
----
-<ToggleBlockquote
-  summary="Upgrade from CodeEditor!"
->
-  <ToggleBlockquote.Paragraph>
-    If you are currently using our <Link href="/#CodeEditor">CodeEditor</Link> component, we suggest upgrading to SourceCodeEditor, because it has many more features and is way more accessible.
-  </ToggleBlockquote.Paragraph>
-  <ToggleBlockquote.Paragraph>
-    See the <Link href="/#CodeEditor/#migration-guide">migration guide</Link> at the bottom of the CodeEditor docs page for more info.
-  </ToggleBlockquote.Paragraph>
-</ToggleBlockquote>
-```
-
 ### Built-in features
 
 SourceCodeEditor has a lot of built-in features that makes editing code easier.
@@ -1518,11 +1502,11 @@ Nisi anim cupidatat excepteur officia.
 | SourceCodeEditor | lineWrapping | `boolean` | No | `false` | Whether it should scroll or wrap for long lines. Defaults to false (scroll) |
 | SourceCodeEditor | autofocus | `boolean` | No | `false` | Whether the editor should focus itself on initialization |
 | SourceCodeEditor | spellcheck | `boolean` | No | `false` | Whether spellcheck will be enabled on the input |
-| SourceCodeEditor | direction | `'ltr' \| 'rtl'` | No | - | Flips overall layout and selects base paragraph direction to be "LTR" or "RTL". |
-| SourceCodeEditor | rtlMoveVisually | `boolean` | No | `true` | Whether horizontal cursor movement through "RTL" text is visual (pressing the left arrow moves the cursor left) or logical (pressing the left arrow moves to the next lower index in the string, which is visually right in "RTL" text) |
 | SourceCodeEditor | indentOnLoad | `boolean` | No | `false` | Whether the editor should auto-indent the code on this initial load and when the `value` is changed |
 | SourceCodeEditor | indentWithTab | `boolean` | No | `false` | When this feature is on, Tab and Shift-Tab will indent the code. By default, it is turned off, and tabbing will focus the next element in the tab order. __Note__: Even if this feature is on, pressing Escape before tabbing will not handle indentation and will handle focus instead. |
 | SourceCodeEditor | indentUnit | `string` | No | - | Overrides the unit by which indentation happens (defaults to 2 spaces). Should be a string consisting either entirely of spaces or entirely of tabs. |
+| SourceCodeEditor | direction | `'ltr' \| 'rtl'` | No | - | Flips overall layout and selects base paragraph direction to be "LTR" or "RTL". |
+| SourceCodeEditor | rtlMoveVisually | `boolean` | No | `true` | Whether horizontal cursor movement through "RTL" text is visual (pressing the left arrow moves the cursor left) or logical (pressing the left arrow moves to the next lower index in the string, which is visually right in "RTL" text) |
 | SourceCodeEditor | defaultValue | `string` | No | `''` | The default value of the editor (in uncontrolled mode) |
 | SourceCodeEditor | value | `string` | No | - | The selected value for the controlled version (needs an onChange handler to work) |
 | SourceCodeEditor | onChange | `(value: string) => void` | No | - | Called when the value of the component changes. |

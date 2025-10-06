@@ -464,13 +464,6 @@ Multiple `<DrawerLayout />` components can be nested in order to place trays on 
 | DrawerLayout.DrawerTray | onClose | `(transitionType?: TransitionType) => void` | No | - | Called when the `<DrawerLayout.Tray />` is closed |
 | DrawerLayout.DrawerTray | border | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` have a border |
 | DrawerLayout.DrawerTray | shadow | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` have a shadow |
-| DrawerLayout.DrawerTray | onTransition | `( toState: BaseTransitionStatesType, fromState: BaseTransitionStatesType ) => void` | No | - | Callback fired when the `<DrawerLayout.Tray />` transitions in/out |
-| DrawerLayout.DrawerTray | onEnter | `() => void` | No | - | Callback fired before the `<DrawerLayout.Tray />` transitions in |
-| DrawerLayout.DrawerTray | onEntering | `() => void` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition in |
-| DrawerLayout.DrawerTray | onEntered | `(type?: TransitionType) => void` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in |
-| DrawerLayout.DrawerTray | onExit | `() => void` | No | - | Callback fired right before the `<DrawerLayout.Tray />` transitions out |
-| DrawerLayout.DrawerTray | onExiting | `() => void` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition out |
-| DrawerLayout.DrawerTray | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out |
 | DrawerLayout.DrawerTray | contentRef | `(element: HTMLDivElement \| null) => void` | No | - | Ref function for the `<DrawerLayout.Tray />` content |
 | DrawerLayout.DrawerTray | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<DrawerLayout.Tray />` when tray is overlaying content |
 | DrawerLayout.DrawerTray | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
@@ -480,6 +473,13 @@ Multiple `<DrawerLayout />` components can be nested in order to place trays on 
 | DrawerLayout.DrawerTray | shouldReturnFocus | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldCloseOnDocumentClick | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldCloseOnEscape | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` close when ESC is pressed. Note that it will only close if it's in the overlay mode (if there is less space for the content than `DrawerLayout.props.minWidth`) |
+| DrawerLayout.DrawerTray | onTransition | `( toState: BaseTransitionStatesType, fromState: BaseTransitionStatesType ) => void` | No | - | Callback fired when the `<DrawerLayout.Tray />` transitions in/out |
+| DrawerLayout.DrawerTray | onEnter | `() => void` | No | - | Callback fired before the `<DrawerLayout.Tray />` transitions in |
+| DrawerLayout.DrawerTray | onEntering | `() => void` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition in |
+| DrawerLayout.DrawerTray | onEntered | `(type?: TransitionType) => void` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in |
+| DrawerLayout.DrawerTray | onExit | `() => void` | No | - | Callback fired right before the `<DrawerLayout.Tray />` transitions out |
+| DrawerLayout.DrawerTray | onExiting | `() => void` | No | - | Callback fired as the `<DrawerLayout.Tray />` begins to transition out |
+| DrawerLayout.DrawerTray | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out |
 
 ### Usage
 

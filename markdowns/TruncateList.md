@@ -204,8 +204,8 @@ render(<Example />)
 |-----------|------|------|----------|---------|-------------|
 | TruncateList | children | `React.ReactNode` | No | - | List of items in the truncated list |
 | TruncateList | visibleItemsCount | `number` | No | - | Sets the number of navigation items that are visible. If not set, the list is not truncated. |
-| TruncateList | onUpdate | `(visibleItemsCount: { visibleItemsCount: number }) => void` | No | - | Called whenever the navigation items are updated or the size of the navigation changes. Passes in the `visibleItemsCount` as a parameter. |
 | TruncateList | renderHiddenItemMenu | `( hiddenChildren: Exclude<React.ReactNode, boolean \| null \| undefined>[] ) => React.ReactElement` | No | - | When there are list items hidden, an optional element (dropdown menu, link, etc.) can be provided to display them (renders at the end of the list). |
+| TruncateList | onUpdate | `(visibleItemsCount: { visibleItemsCount: number }) => void` | No | - | Called whenever the navigation items are updated or the size of the navigation changes. Passes in the `visibleItemsCount` as a parameter. |
 | TruncateList | itemSpacing | `string` | No | `'0'` | The spacing between list items (in 'rem', 'em' or 'px') |
 | TruncateList | fixMenuTriggerWidth | `string` | No | - | Fix width of the Menu trigger (in 'rem', 'em' or 'px') |
 | TruncateList | debounce | `number` | No | `300` | The rate (in ms) the component responds to container resizing or an update to one of its child items |

@@ -1077,8 +1077,6 @@ type: example
 | View | display | `\| 'auto' \| 'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | `'auto'` | By default the display prop is 'auto', meaning it takes on the display rules of the html element it's rendered as (see `as` prop). |
 | View | overflowX | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
 | View | overflowY | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
-| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
 | View | height | `string \| number` | No | - |  |
 | View | width | `string \| number` | No | - |  |
 | View | maxHeight | `string \| number` | No | - |  |
@@ -1087,13 +1085,8 @@ type: example
 | View | minWidth | `string \| number` | No | - |  |
 | View | children | `React.ReactNode` | No | - | The children to render inside the <View /> |
 | View | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment within the `<View />` |
-| View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
-| View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
 | View | borderColor | `\| string \| 'transparent' \| 'primary' \| 'secondary' \| 'brand' \| 'info' \| 'success' \| 'warning' \| 'alert' \| 'danger'` | No | `'primary'` | Sets the color of the View border. Accepts a color string value (e.g., "#FFFFFF", "red") or one of the predefined theme color options. |
 | View | background | `\| 'transparent' \| 'primary' \| 'secondary' \| 'primary-inverse' \| 'brand' \| 'info' \| 'alert' \| 'success' \| 'danger' \| 'warning'` | No | - | Designates the background style of the `<View />` |
-| View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |
-| View | stacking | `Stacking` | No | - | Controls the z-index depth for the `<View />` |
-| View | cursor | `Cursor` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
 | View | position | `'static' \| 'absolute' \| 'relative' \| 'sticky' \| 'fixed'` | No | `'static'` | Specify a value for the CSS position property. Use `relative` if `focusable` will be true. |
 | View | insetInlineStart | `string` | No | - | The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`. |
 | View | insetInlineEnd | `string` | No | - | The `right` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`. |
@@ -1104,6 +1097,13 @@ type: example
 | View | focusColor | `'info' \| 'inverse' \| 'success' \| 'danger'` | No | `'info'` | Determines the color of the focus outline |
 | View | shouldAnimateFocus | `boolean` | No | `true` | Determines if the focus ring should animate when it appears |
 | View | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
+| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
+| View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
+| View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |
+| View | stacking | `Stacking` | No | - | Controls the z-index depth for the `<View />` |
+| View | cursor | `\| 'auto' \| 'default' \| 'none' \| 'context-menu' \| 'help' \| 'pointer' \| 'progress' \| 'wait' \| 'cell' \| 'crosshair' \| 'text' \| 'vertical-text' \| 'alias' \| 'copy' \| 'move' \| 'no-drop' \| 'not-allowed' \| 'grab' \| 'grabbing' \| 'all-scroll' \| 'col-resize' \| 'row-resize' \| 'n-resize' \| 'e-resize' \| 's-resize' \| 'w-resize' \| 'ne-resize' \| 'nw-resize' \| 'se-resize' \| 'sw-resize' \| 'ew-resize' \| 'ns-resize' \| 'nesw-resize' \| 'nwse-resize' \| 'zoom-in' \| 'zoom-out'` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
 | View | overscrollBehavior | `'auto' \| 'contain' \| 'none'` | No | `'auto'` | Sets what a browser does when reaching the boundary of a scrolling area. Valid values are `auto`, `contain`, `none`. |
 | View | focusRingBorderRadius | `string` | No | - | DEPRECATED, this prop does nothing. Use the focusOutlineOffset theme variable Sets the radius of the focus border ring. For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width. For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width. |
 | View | focusWithin | `boolean` | No | - | Display the focus ring when any of the descendants is focused. (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS selector) |
