@@ -642,9 +642,9 @@ type: example
 | ColorPicker | label | `string` | Yes | - | The label of the component |
 | ColorPicker | onChange | `(value: string) => void` | No | - | If 'value' is set, this must be set. It'll be called on every change |
 | ColorPicker | placeholderText | `string` | Yes | - | Placeholder for the input field |
+| ColorPicker | popoverMaxHeight | `string` | No | `'100vh'` | If set, it will set the popover's max height. Useful when the popover is too big |
 | ColorPicker | popoverScreenReaderLabel | `string` | No | - | Sets the ScreenReaderLabel for the popover |
 | ColorPicker | popoverButtonScreenReaderLabel | `string` | No | - | Sets the ScreenReaderLabel for the popover Button |
-| ColorPicker | popoverMaxHeight | `string` | No | `'100vh'` | If set, it will set the popover's max height. Useful when the popover is too big |
 | ColorPicker | renderInvalidColorMessage | `(hexCode: string) => FormMessage[]` | No | - | If set and the hex is invalid, it will display the message after a blur event and remove it after a change event FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | ColorPicker | renderIsRequiredMessage | `() => FormMessage[]` | No | - | If set, isRequired is true and the input is empty, it will display the message after a blur event and remove it after a change event FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | ColorPicker | renderMessages | `( hexCode: string, isValidHex: boolean, minContrast: number, contrast?: number ) => FormMessage[]` | No | - | If set, it will display the message it returns FormMessage[]: Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |

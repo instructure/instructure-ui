@@ -85,7 +85,7 @@ type: embed
 | CloseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
 | CloseButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `CloseButton` by default. |
 | CloseButton | href | `string` | No | - | Specifies an href attribute for the `CloseButton`'s underlying html element. |
-| CloseButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
+| CloseButton | cursor | `\| 'auto' \| 'default' \| 'none' \| 'context-menu' \| 'help' \| 'pointer' \| 'progress' \| 'wait' \| 'cell' \| 'crosshair' \| 'text' \| 'vertical-text' \| 'alias' \| 'copy' \| 'move' \| 'no-drop' \| 'not-allowed' \| 'grab' \| 'grabbing' \| 'all-scroll' \| 'col-resize' \| 'row-resize' \| 'n-resize' \| 'e-resize' \| 's-resize' \| 'w-resize' \| 'ne-resize' \| 'nw-resize' \| 'se-resize' \| 'sw-resize' \| 'ew-resize' \| 'ns-resize' \| 'nesw-resize' \| 'nwse-resize' \| 'zoom-in' \| 'zoom-out'` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
 | CloseButton | tabIndex | `number` | No | - | Specifies the tabindex of the `CloseButton`. |
 | CloseButton | to | `string` | No | - | Needed for React Router links @private |
 

@@ -55,8 +55,9 @@ type: example
 </div>
 ```
 
-The component has a max-width, set by its theme. Any overflowing text will
-be handled via ellipses.
+The component has a `max-width`, set by its theme. Any overflowing text will be handled via ellipses.
+
+> **DEPRECATED** Please do not make Pills that have overflowing text, it's an a11y anti-pattern. The issue is if text overflows it cannot be read by keyboard-only users. We could make the Pill focusable, but that would be an anti-pattern too because only elements that are interactive should be focusable (and just displaying a tooltip is not a real interaction)
 
 ```js
 ---
@@ -90,10 +91,10 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Pill | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - |  |
-| Pill | children | `React.ReactNode` | Yes | - |  |
 | Pill | color | `'primary' \| 'success' \| 'danger' \| 'info' \| 'warning' \| 'alert'` | No | `'primary'` |  |
 | Pill | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Pill | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Pill | children | `React.ReactNode` | Yes | - |  |
 | Pill | statusLabel | `string` | No | - | Adds a status label to the left of the main text. |
 | Pill | renderIcon | `React.ReactNode` | No | - | An icon displayed to the left of the text. |
 

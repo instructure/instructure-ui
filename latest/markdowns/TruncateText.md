@@ -273,14 +273,14 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | TruncateText | children | `React.ReactNode` | Yes | - | The content to be truncated. |
+| TruncateText | debounce | `number` | No | `0` | Debounce delay in milliseconds |
+| TruncateText | onUpdate | `(isTruncated: boolean, truncatedText?: string) => void` | No | - | Callback when truncated text has changed |
 | TruncateText | maxLines | `'auto' \| number` | No | `1` | Number of lines to allow before truncating. `auto` will fit to parent. Default is 1. |
 | TruncateText | position | `'end' \| 'middle'` | No | `'end'` | Where to place the ellipsis within the string. Default is 'end' |
+| TruncateText | shouldTruncateWhenInvisible | `boolean` | No | - | Force truncation of invisible elements (hack; will be removed in favor of a better fix) |
 | TruncateText | truncate | `'character' \| 'word'` | No | `'character'` | Add ellipsis after words or after any character. Default is 'character' |
 | TruncateText | ellipsis | `string` | No | `'\u2026'` | A string to use as the ellipsis |
 | TruncateText | ignore | `string[]` | No | `[' ', '.', ',']` | Characters to ignore at truncated end of string. Default is ' ', '.', ',' |
-| TruncateText | debounce | `number` | No | `0` | Debounce delay in milliseconds |
-| TruncateText | onUpdate | `(isTruncated: boolean, truncatedText?: string) => void` | No | - | Callback when truncated text has changed |
-| TruncateText | shouldTruncateWhenInvisible | `boolean` | No | - | Force truncation of invisible elements (hack; will be removed in favor of a better fix) |
 
 ### Usage
 

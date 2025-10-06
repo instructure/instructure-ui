@@ -278,8 +278,8 @@ type: embed
 | ToggleDetails | iconExpanded | `(...args: any[]) => React.ReactElement` | No | `IconArrowOpenDownSolid` | The icon to display when content is expanded |
 | ToggleDetails | iconPosition | `'start' \| 'end'` | No | `'start'` | Icon position at the start or end of the summary text |
 | ToggleDetails | fluidWidth | `boolean` | No | `false` | should the summary fill the width of its container |
-| ToggleDetails | children | `React.ReactNode` | No | `null` | The toggleable content passed inside the ToggleDetails component |
 | ToggleDetails | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Choose a size for the expand/collapse icon |
+| ToggleDetails | children | `React.ReactNode` | No | `null` | The toggleable content passed inside the ToggleDetails component |
 
 ### Usage
 
