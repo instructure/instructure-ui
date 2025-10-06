@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.26.1](https://github.com/instructure/instructure-ui/compare/v10.26.0...v10.26.1) (2025-10-06)
+
+**Note:** Version bump only for package @instructure/ui-a11y-content
+
+
+
+
+
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-a11y-content
