@@ -27,9 +27,25 @@ export function mapSpacingToShorthand(
   value: Spacing | undefined,
   spacingMap: { [key: string]: string }
 ) {
+  // array from "space2 space2 space4 space2"
   const splitMargin = value?.split(' ')
-  const cssMargin = splitMargin
-    ? splitMargin.map((m: string) => spacingMap[m] || m).join(' ')
+
+  // array from e.g.: "between.cards.md"
+  const splitMarginPaths = splitMargin?.map((margin) => margin.split('.'))
+
+  const cssMargin = splitMarginPaths
+    ? splitMarginPaths
+        .map((m: string | string[]) => {
+          if (m.length > 1) {
+            return (m as string[]).reduce(
+              (acc: any, key) => acc?.[key],
+              spacingMap
+            )
+          }
+
+          return spacingMap[m[0]] || m[0]
+        })
+        .join(' ')
     : '0'
   return cssMargin
 }
