@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-instructure",
-  "version": "10.26.0",
+  "version": "11.0.0",
   "description": "Collection of specific components for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,20 +24,20 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/emotion": "10.26.0",
-    "@instructure/shared-types": "10.26.0",
-    "@instructure/ui-heading": "10.26.0",
-    "@instructure/ui-modal": "10.26.0",
-    "@instructure/ui-popover": "10.26.0",
-    "@instructure/ui-react-utils": "10.26.0",
-    "@instructure/ui-text": "10.26.0",
-    "@instructure/ui-view": "10.26.0"
+    "@instructure/emotion": "11.0.0",
+    "@instructure/shared-types": "11.0.0",
+    "@instructure/ui-heading": "11.0.0",
+    "@instructure/ui-modal": "11.0.0",
+    "@instructure/ui-popover": "11.0.0",
+    "@instructure/ui-react-utils": "11.0.0",
+    "@instructure/ui-text": "11.0.0",
+    "@instructure/ui-view": "11.0.0"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "10.26.0",
-    "@instructure/ui-babel-preset": "10.26.0",
-    "@instructure/ui-color-utils": "10.26.0",
-    "@instructure/ui-themes": "10.26.0",
+    "@instructure/ui-axe-check": "11.0.0",
+    "@instructure/ui-babel-preset": "11.0.0",
+    "@instructure/ui-color-utils": "11.0.0",
+    "@instructure/ui-themes": "11.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
