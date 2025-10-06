@@ -50,7 +50,8 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       name,
       renderIcon,
       alt,
-      themeOverride
+      themeOverride,
+      margin
     } = props
     const [loaded, setLoaded] = useState(false)
 
@@ -66,7 +67,8 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         src,
         showBorder,
         themeOverride,
-        display
+        display,
+        margin
       },
       componentId: 'Avatar',
       displayName: 'Avatar'
