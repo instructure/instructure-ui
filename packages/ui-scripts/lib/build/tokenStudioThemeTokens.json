@@ -2920,6 +2920,18 @@
       "fontSizeLg": {
         "value": "1.375rem",
         "type": "fontSizes"
+      },
+      "lineHeightSm": {
+        "value": "{lineHeight.standalone.textXs}",
+        "type": "lineHeights"
+      },
+      "lineHeightMd": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "lineHeightLg": {
+        "value": "1.375rem",
+        "type": "lineHeights"
       }
     }
   },
@@ -3650,6 +3662,18 @@
       "fontSizeLg": {
         "value": "1.375rem",
         "type": "fontSizes"
+      },
+      "lineHeightSm": {
+        "value": "{lineHeight.standalone.textXs}",
+        "type": "lineHeights"
+      },
+      "lineHeightMd": {
+        "value": "{lineHeight.standalone.textBase}",
+        "type": "lineHeights"
+      },
+      "lineHeightLg": {
+        "value": "1.375rem",
+        "type": "lineHeights"
       }
     }
   },
