@@ -1115,37 +1115,6 @@
     "visibleInRebrand": {
       "value": "false",
       "type": "boolean"
-    },
-    "typography": {
-      "input": {
-        "small": {
-          "value": {
-            "fontFamily": "{fontFamily.lato}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size14}",
-            "lineHeight": "{size.size14}"
-          },
-          "type": "typography"
-        },
-        "medium": {
-          "value": {
-            "fontFamily": "{fontFamily.lato}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size16}",
-            "lineHeight": "{size.size16}"
-          },
-          "type": "typography"
-        },
-        "large": {
-          "value": {
-            "fontFamily": "{fontFamily.lato}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size20}",
-            "lineHeight": "{size.size20}"
-          },
-          "type": "typography"
-        }
-      }
     }
   },
   "canvas/semantic/color/canvas": {
@@ -2783,6 +2752,37 @@
       }
     }
   },
+  "canvas/component/FormField": {
+    "formField": {
+      "small": {
+        "value": {
+          "fontFamily": "{fontFamily.base}",
+          "fontWeight": "{fontWeight.body.base}",
+          "fontSize": "{fontSize.textSm}",
+          "lineHeight": "{lineHeight.paragraph.textSm}"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{fontFamily.base}",
+          "fontWeight": "{fontWeight.body.base}",
+          "fontSize": "{fontSize.textBase}",
+          "lineHeight": "{lineHeight.paragraph.textBase}"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{fontFamily.base}",
+          "fontWeight": "{fontWeight.body.base}",
+          "fontSize": "{fontSize.textLg}",
+          "lineHeight": "{lineHeight.paragraph.textBase}"
+        },
+        "type": "typography"
+      }
+    }
+  },
   "canvas/component/FormFieldLabel": {
     "formFieldLabel": {
       "textColor": {
@@ -3549,6 +3549,37 @@
       "spaceBetweenElementsLg": {
         "value": "{spacing.spaceSm}",
         "type": "spacing"
+      }
+    }
+  },
+  "rebrand/component/FormField": {
+    "formField": {
+      "small": {
+        "value": {
+          "fontFamily": "{fontFamily.base}",
+          "fontWeight": "{fontWeight.body.base}",
+          "fontSize": "{fontSize.textSm}",
+          "lineHeight": "{lineHeight.paragraph.textSm}"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{fontFamily.base}",
+          "fontWeight": "{fontWeight.body.base}",
+          "fontSize": "{fontSize.textBase}",
+          "lineHeight": "{lineHeight.paragraph.textBase}"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{fontFamily.base}",
+          "fontWeight": "{fontWeight.body.base}",
+          "fontSize": "{fontSize.textLg}",
+          "lineHeight": "{lineHeight.paragraph.textBase}"
+        },
+        "type": "typography"
       }
     }
   },
@@ -4466,37 +4497,6 @@
     "visibleInRebrand": {
       "value": "true",
       "type": "boolean"
-    },
-    "typography": {
-      "input": {
-        "small": {
-          "value": {
-            "fontFamily": "{fontFamily.Atkinson}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size14}",
-            "lineHeight": "{size.size14}"
-          },
-          "type": "typography"
-        },
-        "medium": {
-          "value": {
-            "fontFamily": "{fontFamily.Atkinson}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size16}",
-            "lineHeight": "{size.size16}"
-          },
-          "type": "typography"
-        },
-        "large": {
-          "value": {
-            "fontFamily": "{fontFamily.Atkinson}",
-            "fontWeight": "{fontWeight.regular}",
-            "fontSize": "{size.size20}",
-            "lineHeight": "{size.size20}"
-          },
-          "type": "typography"
-        }
-      }
     }
   },
   "rebrand/semantic/color/rebrandLight": {
@@ -5923,7 +5923,8 @@
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
-        "canvas/component/TextInput": "enabled"
+        "canvas/component/TextInput": "enabled",
+        "canvas/component/FormField": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -6352,7 +6353,8 @@
         "canvas/component/FormFieldLabel": "enabled",
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
-        "canvas/component/TextInput": "enabled"
+        "canvas/component/TextInput": "enabled",
+        "canvas/component/FormField": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -6376,7 +6378,10 @@
         "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,",
         "link.inlineLink.small": "S:707e99282efa809c9bfcdc74efee599fec7ae5bc,",
         "link.inlineLink.medium": "S:832baa9395e18e93d07b3110a86bdd0ad781c2f2,",
-        "link.inlineLink.large": "S:d34f256fce94ad1b7a65c5ebd65e2cf85fe472d2,"
+        "link.inlineLink.large": "S:d34f256fce94ad1b7a65c5ebd65e2cf85fe472d2,",
+        "formField.small": "S:9ee3d9ffbc82f7865d545d16dc31423bd84dc7f9,",
+        "formField.medium": "S:4d2bd2881287d6aa622ee22123b9c430f6297a10,",
+        "formField.large": "S:6b919f197849f507720453b8856adc6dab6f2b93,"
       },
       "$figmaVariableReferences": {
         "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -6797,7 +6802,8 @@
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
-        "rebrand/component/TextInput": "enabled"
+        "rebrand/component/TextInput": "enabled",
+        "rebrand/component/FormField": "enabled"
       },
       "$figmaStyleReferences": {
         "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -7224,7 +7230,8 @@
         "rebrand/component/FormFieldLabel": "enabled",
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
-        "rebrand/component/TextInput": "enabled"
+        "rebrand/component/TextInput": "enabled",
+        "rebrand/component/FormField": "enabled"
       },
       "$figmaStyleReferences": {
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -7246,7 +7253,10 @@
         "elevation4": "S:0706783dacfa093400e45cd839277ea9a68d2dc6,",
         "link.inlineLink.small": "S:707e99282efa809c9bfcdc74efee599fec7ae5bc,",
         "link.inlineLink.medium": "S:832baa9395e18e93d07b3110a86bdd0ad781c2f2,",
-        "link.inlineLink.large": "S:d34f256fce94ad1b7a65c5ebd65e2cf85fe472d2,"
+        "link.inlineLink.large": "S:d34f256fce94ad1b7a65c5ebd65e2cf85fe472d2,",
+        "formField.small": "S:9ee3d9ffbc82f7865d545d16dc31423bd84dc7f9,",
+        "formField.medium": "S:4d2bd2881287d6aa622ee22123b9c430f6297a10,",
+        "formField.large": "S:6b919f197849f507720453b8856adc6dab6f2b93,"
       },
       "$figmaVariableReferences": {
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
@@ -7661,6 +7671,7 @@
       "canvas/semantic/color/canvasHighContrast",
       "canvas/component/Avatar",
       "canvas/component/Breadcrumb",
+      "canvas/component/FormField",
       "canvas/component/FormFieldLabel",
       "canvas/component/FormFieldMessage",
       "canvas/component/Link",
@@ -7670,6 +7681,7 @@
       "canvas/component/TextInput",
       "rebrand/component/Avatar",
       "rebrand/component/Breadcrumb",
+      "rebrand/component/FormField",
       "rebrand/component/FormFieldLabel",
       "rebrand/component/FormFieldMessage",
       "rebrand/component/Link",
