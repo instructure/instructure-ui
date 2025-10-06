@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { mapSpacingToShorthand } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
@@ -34,6 +35,7 @@ type StyleParams = {
   showBorder: AvatarProps['showBorder']
   themeOverride: AvatarProps['themeOverride']
   display: AvatarProps['display']
+  margin: AvatarProps['margin']
 }
 /**
  * ---
@@ -46,10 +48,20 @@ type StyleParams = {
  */
 const generateStyle = (
   componentTheme: NewComponentTypes['Avatar'],
-  params: StyleParams
+  params: StyleParams,
+  //TODO type themes properly
+  theme: any
 ): AvatarStyle => {
-  const { loaded, size, color, hasInverseColor, shape, showBorder, display } =
-    params
+  const {
+    loaded,
+    size,
+    color,
+    hasInverseColor,
+    shape,
+    showBorder,
+    display,
+    margin
+  } = params
 
   const sizeStyles = {
     'xx-small': {
@@ -167,7 +179,8 @@ const generateStyle = (
         : colorVariants[color!].text,
       borderColor: componentTheme.borderColor,
       fontWeight: componentTheme.fontWeight,
-      overflow: 'hidden'
+      overflow: 'hidden',
+      margin: mapSpacingToShorthand(margin, theme.semantics.spacing)
     },
     image: {
       label: 'avatar__image',
