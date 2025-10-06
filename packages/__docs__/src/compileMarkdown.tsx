@@ -221,8 +221,11 @@ const renderer = (title?: string) => ({
   image: (href: string, title: string) => (
     <Img key={uuid()} src={href} alt={title} />
   ),
-  list: (list: ReactElement<any>[], ordered: boolean) => {
-    if (list[0].props.children[0][0].type === 'code') {
+  list: (list: ReactElement[], ordered: boolean) => {
+    if (
+      list?.[0]?.props?.children?.[0]?.[0]?.type === 'code' &&
+      list?.[1]?.props?.children?.[0]?.[0]?.type === 'code'
+    ) {
       const code1 = list?.[0]?.props?.children?.[0]?.[0]?.props?.children
       const code2 = list?.[1]?.props?.children?.[0]?.[0]?.props?.children
       const matter = [
