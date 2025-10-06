@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.26.1](https://github.com/instructure/instructure-ui/compare/v10.26.0...v10.26.1) (2025-10-06)
+
+
+### Bug Fixes
+
+* **ui-buttons:** fix focus ring distortion on circle shape buttons ([04e93c8](https://github.com/instructure/instructure-ui/commit/04e93c82d4c58b1d8b783933dfdeeb183f2c1335))
+
+
+
+
+
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 

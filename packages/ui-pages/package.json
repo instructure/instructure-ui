@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pages",
-  "version": "10.26.0",
+  "version": "10.26.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,9 +23,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.26.0",
-    "@instructure/ui-color-utils": "10.26.0",
-    "@instructure/ui-themes": "10.26.0",
+    "@instructure/ui-babel-preset": "10.26.1",
+    "@instructure/ui-color-utils": "10.26.1",
+    "@instructure/ui-themes": "10.26.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.6.1",
@@ -33,14 +33,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/console": "10.26.0",
-    "@instructure/emotion": "10.26.0",
-    "@instructure/shared-types": "10.26.0",
-    "@instructure/ui-dom-utils": "10.26.0",
-    "@instructure/ui-prop-types": "10.26.0",
-    "@instructure/ui-react-utils": "10.26.0",
-    "@instructure/ui-utils": "10.26.0",
-    "@instructure/ui-view": "10.26.0",
+    "@instructure/console": "10.26.1",
+    "@instructure/emotion": "10.26.1",
+    "@instructure/shared-types": "10.26.1",
+    "@instructure/ui-dom-utils": "10.26.1",
+    "@instructure/ui-prop-types": "10.26.1",
+    "@instructure/ui-react-utils": "10.26.1",
+    "@instructure/ui-utils": "10.26.1",
+    "@instructure/ui-view": "10.26.1",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
