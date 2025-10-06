@@ -26,11 +26,14 @@ import { useTheme } from './useTheme'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import type { BaseTheme, ComponentTheme } from '@instructure/shared-types'
 
+//TODO-rework remove generateComponentTheme references.
 // returns the second parameter of a function
 type SecondParameter<T extends (...args: any) => any> =
   Parameters<T>[1] extends undefined ? never : Parameters<T>[1]
 
-type UseStyleParamsWithTheme<P extends (theme: any, params: any) => any> = {
+type UseStyleParamsWithTheme<
+  P extends (componentTheme: any, params: any, theme: any) => any
+> = {
   generateStyle: P
   params?: SecondParameter<P>
   generateComponentTheme: (theme: BaseTheme) => ComponentTheme
@@ -38,7 +41,9 @@ type UseStyleParamsWithTheme<P extends (theme: any, params: any) => any> = {
   displayName?: string
 }
 
-type UseStyleParamsWithoutTheme<P extends (theme: any, params: any) => any> = {
+type UseStyleParamsWithoutTheme<
+  P extends (componentTheme: any, params: any, theme: any) => any
+> = {
   generateStyle: P
   params?: SecondParameter<P>
   generateComponentTheme?: undefined
@@ -46,7 +51,9 @@ type UseStyleParamsWithoutTheme<P extends (theme: any, params: any) => any> = {
   displayName?: undefined
 }
 
-const useStyle = <P extends (theme: any, params: any) => any>(
+const useStyle = <
+  P extends (componentTheme: any, params: any, theme: any) => any
+>(
   useStyleParams: UseStyleParamsWithTheme<P> | UseStyleParamsWithoutTheme<P>
 ): ReturnType<P> => {
   const {
@@ -83,7 +90,8 @@ const useStyle = <P extends (theme: any, params: any) => any>(
 
   const componentTheme = { ...baseComponentTheme, ...themeOverride }
 
-  return generateStyle(componentTheme, params ? params : {})
+  //@ts-expect-error TODO fix these later
+  return generateStyle(componentTheme, params ? params : {}, theme.newTheme)
 }
 
 export default useStyle
