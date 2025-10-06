@@ -45,7 +45,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       showBorder = 'auto',
       shape = 'circle',
       display = 'inline',
-      onImageLoaded = (_event: SyntheticEvent) => { },
+      onImageLoaded = (_event: SyntheticEvent) => {},
       src,
       name,
       renderIcon,
@@ -78,10 +78,11 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         setLoaded(false)
       }
       // Image already loaded (common in SSR)
-      if (src && !loaded && imgRef.current && imgRef.current.complete) {
-        setLoaded(true)
-        onImageLoaded?.()
-      }
+      //TODO-rework make this work
+      // if (src && !loaded && imgRef.current && imgRef.current.complete) {
+      //   setLoaded(true)
+      //   onImageLoaded?.()
+      // }
     }, [loaded, src])
 
     const makeInitialsFromName = () => {
