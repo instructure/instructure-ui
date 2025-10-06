@@ -1014,7 +1014,7 @@
         }
       },
       "interactive": {
-        "value": "{fontWeight.medium}",
+        "value": "{fontWeight.regular}",
         "type": "fontWeights"
       }
     },
@@ -3046,7 +3046,7 @@
         "type": "fontSizes"
       },
       "fontWeight": {
-        "value": "{fontWeight.body.base}",
+        "value": "{fontWeight.interactive}",
         "type": "fontWeights"
       },
       "spaceBetweenElementsMd": {
