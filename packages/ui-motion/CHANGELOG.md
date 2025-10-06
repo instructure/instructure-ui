@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
+
+
+### Features
+
+* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
+
+
+### BREAKING CHANGES
+
+* **many:** InstUI v11 contains the following breaking changes:
+- React 16 and 17 are no longer supported
+- remove `PropTypes` from all packages
+- remove `CodeEditor` component
+- remove `@instui/theme-registry` package
+- remove `@testable`, `@experimental`, `@hack` decorators
+- InstUISettingsProvider's `as` prop is removed
+- `canvas.use()`, `canvasHighContrast.use()` functions are removed
+- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+- `variables` field on theme objects are removed
+- remove deprecated props from Table: Row's `isStacked`, Body's
+  `isStacked`, `hover`, and `headers`
+- `Table`'s `caption` prop is now required
+- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
+
+
+
+
+
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-motion

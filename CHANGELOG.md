@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
+
+InstUI v11 is a major release that removes deprecated features and adds support for React 19. For details on how to upgrade, codemods see the upgrade guide at https://instructure.design/#upgrade-guide
+
+### Features
+
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
+
+### BREAKING CHANGES
+
+- React 16 and 17 are no longer supported
+- remove `PropTypes` from all packages
+- remove `CodeEditor` component
+- remove `@instui/theme-registry` package
+- remove `@testable`, `@experimental`, `@hack` decorators
+- InstUISettingsProvider's `as` prop is removed
+- `canvas.use()`, `canvasHighContrast.use()` functions are removed
+- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+- `variables` field on theme objects are removed
+- remove deprecated props from Table: Row's `isStacked`, Body's
+  `isStacked`, `hover`, and `headers`
+- `Table`'s `caption` prop is now required
+- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
+
+### Bug Fixes
+
+- **ui-buttons:** fix focus ring distortion on circle shape buttons ([04e93c8](https://github.com/instructure/instructure-ui/commit/04e93c82d4c58b1d8b783933dfdeeb183f2c1335))
+- **ui-drilldown:** fix for prevent option selection when Drilldown or its sub-components get disabled prop ([5fc37f6](https://github.com/instructure/instructure-ui/commit/5fc37f6b7c7622ab248a4d1bd575b2bbac97e0a0))
+
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 ### Bug Fixes
