@@ -2888,6 +2888,30 @@
       "onColor": {
         "value": "{color.icon.onColor}",
         "type": "color"
+      },
+      "accent1Color": {
+        "value": "{color.icon.accent.color1}",
+        "type": "color"
+      },
+      "accent2Color": {
+        "value": "{color.icon.accent.color2}",
+        "type": "color"
+      },
+      "accent3Color": {
+        "value": "{color.icon.accent.color3}",
+        "type": "color"
+      },
+      "accent4Color": {
+        "value": "{color.icon.accent.color4}",
+        "type": "color"
+      },
+      "accent5Color": {
+        "value": "{color.icon.accent.color5}",
+        "type": "color"
+      },
+      "accent6Color": {
+        "value": "{color.icon.accent.color6}",
+        "type": "color"
       }
     }
   },
@@ -3775,6 +3799,30 @@
       },
       "onColor": {
         "value": "{color.icon.onColor}",
+        "type": "color"
+      },
+      "accent1Color": {
+        "value": "{color.icon.accent.color1}",
+        "type": "color"
+      },
+      "accent2Color": {
+        "value": "{color.icon.accent.color2}",
+        "type": "color"
+      },
+      "accent3Color": {
+        "value": "{color.icon.accent.color3}",
+        "type": "color"
+      },
+      "accent4Color": {
+        "value": "{color.icon.accent.color4}",
+        "type": "color"
+      },
+      "accent5Color": {
+        "value": "{color.icon.accent.color5}",
+        "type": "color"
+      },
+      "accent6Color": {
+        "value": "{color.icon.accent.color6}",
         "type": "color"
       }
     }
@@ -6248,6 +6296,12 @@
         "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
         "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
         "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -6708,6 +6762,12 @@
         "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
         "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
         "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -7216,6 +7276,12 @@
         "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
         "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
         "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -7674,6 +7740,12 @@
         "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
         "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
         "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
