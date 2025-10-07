@@ -42,7 +42,7 @@ class ComponentTheme extends Component<ComponentThemeProps> {
     value: undefined | string | object | number,
     colorPrimitives: object
   ) {
-    if (!value) {
+    if (!value && value !== 0) {
       return <code>ERROR - possible bug</code>
     }
     if (typeof value === 'object') {
