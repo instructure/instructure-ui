@@ -181,10 +181,10 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | FileDrop | id | `string` | No | - | The id of the input (to link it to its label for a11y) |
-| FileDrop | renderLabel | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content of FileDrop; can be a component or React node. Components receive `isDragAccepted` and `isDragRejected` as props. |
+| FileDrop | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content of FileDrop; can be a component or React node. Components receive `isDragAccepted` and `isDragRejected` as props. |
 | FileDrop | accept | `string \| string[]` | No | - | The mime media type/s or file extension/s allowed to be dropped inside |
-| FileDrop | messages | `FormMessage[]` | No | `[]` | object with shape: `{ text: PropTypes.node, type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']) }` |
-| FileDrop | onClick | `(e: React.MouseEvent) => void` | No | `function (_e: React.MouseEvent) {}` | Called when clicking on drop area to select files to upload |
+| FileDrop | messages | `FormMessage[]` | No | `[]` | Displays informational and error messages, used for input validation, can also display screenreader-only messages. Also changes the border color of the component on success/error. |
+| FileDrop | onClick | `(e: React.MouseEvent) => void` | No | `function (_e: React.MouseEvent) {}` | Called when clicking on the drop area to select files to upload |
 | FileDrop | onDrop | `( accepted: ArrayLike<DataTransferItem \| File>, rejected: ArrayLike<DataTransferItem \| File>, e: React.DragEvent ) => void` | No | - | Called when dropping files or when file dialog window exits successfully |
 | FileDrop | onDropAccepted | `( accepted: ArrayLike<DataTransferItem \| File>, e: React.DragEvent \| React.ChangeEvent ) => void` | No | - | Called when dropping allowed files |
 | FileDrop | onDropRejected | `( rejected: ArrayLike<DataTransferItem \| File>, e: React.DragEvent \| React.ChangeEvent ) => void` | No | - | Called when dropping rejected files |

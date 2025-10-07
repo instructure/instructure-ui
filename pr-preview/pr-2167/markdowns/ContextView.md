@@ -58,24 +58,24 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ContextView | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | The element to render as the component root |
-| ContextView | elementRef | `(element: Element \| null) => void` | No | `() => {}` | provides a reference to the underlying html root element |
-| ContextView | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| ContextView | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| ContextView | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` |  |
+| ContextView | elementRef | `(element: Element \| null) => void` | No | `() => {}` |  |
 | ContextView | height | `string \| number` | No | `'auto'` |  |
 | ContextView | width | `string \| number` | No | `'auto'` |  |
 | ContextView | maxHeight | `string \| number` | No | - |  |
 | ContextView | maxWidth | `string \| number` | No | - |  |
 | ContextView | minHeight | `string \| number` | No | - |  |
 | ContextView | minWidth | `string \| number` | No | - |  |
-| ContextView | children | `React.ReactNode` | No | `null` | The children to render inside the `<ContextView />` |
-| ContextView | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` | Designates the text alignment within the `<ContextView />` |
-| ContextView | shadow | `Shadow` | No | `'resting'` | Controls the shadow depth for the `<ContextView />` |
-| ContextView | stacking | `Stacking` | No | - | Controls the z-index depth for the `<ContextView />` |
-| ContextView | background | `'default' \| 'inverse'` | No | `'default'` | Designates the background style of the `<ContextView />` |
-| ContextView | placement | `PlacementPropValues` | No | `'center end'` | Specifies how the arrow for `<ContextView />` will be rendered. Ex. `placement="top"` will render with an arrow pointing down. |
-| ContextView | debug | `boolean` | No | `false` | Activate an outline around the component to make building your layout easier |
-| ContextView | borderColor | `string` | No | - | Sets the color of the ContextView border. Accepts a color string value (e.g., "#FFFFFF", "red") |
+| ContextView | children | `React.ReactNode` | No | `null` |  |
+| ContextView | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` |  |
+| ContextView | background | `'default' \| 'inverse'` | No | `'default'` |  |
+| ContextView | debug | `boolean` | No | `false` |  |
+| ContextView | margin | `Spacing` | No | - |  |
+| ContextView | padding | `Spacing` | No | - |  |
+| ContextView | shadow | `Shadow` | No | `'resting'` |  |
+| ContextView | stacking | `Stacking` | No | - |  |
+| ContextView | placement | `PlacementPropValues` | No | `'center end'` |  |
+| ContextView | borderColor | `string` | No | - |  |
 
 ### Usage
 

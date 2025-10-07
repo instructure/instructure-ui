@@ -252,10 +252,10 @@ type: embed
 | RadioInputGroup | disabled | `boolean` | No | `false` |  |
 | RadioInputGroup | readOnly | `boolean` | No | `false` | works just like disabled but keeps the same styles as if it were active |
 | RadioInputGroup | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: ReactNode, type: One of: ['error', 'newError', 'hint', 'success', 'screenreader-only'] }` |
-| RadioInputGroup | children | `React.ReactNode` | No | - | any children (ones that aren't `RadioInput` are passed through) |
 | RadioInputGroup | variant | `'simple' \| 'toggle'` | No | `'simple'` |  |
 | RadioInputGroup | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | RadioInputGroup | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'stacked'` |  |
+| RadioInputGroup | children | `React.ReactNode` | No | - | any children (ones that aren't `RadioInput` are passed through) |
 | RadioInputGroup | isRequired | `boolean` | No | - | Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change. |
 
 ### Usage

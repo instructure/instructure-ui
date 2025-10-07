@@ -494,8 +494,8 @@ A variety of request callbacks are provided as prompts for state updates. They d
 | Selectable | onRequestHighlightFirstOption | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when first option should be highlighted |
 | Selectable | onRequestHighlightLastOption | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when last option should be highlighted |
 | Selectable | onRequestSelectOption | `( event: React.SyntheticEvent, data: { id?: string } ) => void` | No | - | Callback fired when option clicked or selected via keyboard |
-| Selectable | children | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
 | Selectable | render | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
+| Selectable | children | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
 
 ### Usage
 

@@ -153,7 +153,6 @@ type: example
 | List | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | List | itemSpacing | `\| 'none' \| 'xxx-small' \| 'xx-small' \| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large'` | No | `'none'` | Sets the margin separating each ListItem. |
 | List | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| List.ListItem | children | `` | Yes | - |  |
 | List.ListItem | delimiter | `'none' \| 'dashed' \| 'solid'` | No | `'none'` | Inherits delimiter from the parent List component. |
 | List.ListItem | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | List.ListItem | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |

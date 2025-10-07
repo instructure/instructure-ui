@@ -210,7 +210,6 @@ Deprecated `lineHeight` values:
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Text | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
-| Text | children | `React.ReactNode` | No | `null` |  |
 | Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'alert' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'ai-highlight'` | No | - | Color of the text |
 | Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Text | fontStyle | `'italic' \| 'normal'` | No | - |  |
@@ -221,6 +220,7 @@ Deprecated `lineHeight` values:
 | Text | variant | `\| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentImportant' \| 'contentQuote' \| 'contentSmall' \| 'legend'` | No | - | Sets multiple props at once. (size, fontStyle, lineHeight, weight) If set, these props are not allowed. NOTE: this is the recommended way of setting these values |
 | Text | weight | `'normal' \| 'light' \| 'bold' \| 'weightRegular' \| 'weightImportant'` | No | - |  |
 | Text | wrap | `'normal' \| 'break-word'` | No | `'normal'` |  |
+| Text | children | `React.ReactNode` | No | `null` |  |
 
 ### Usage
 

@@ -70,9 +70,9 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
+| Mask | children | `React.ReactNode` | No | - |  |
 | Mask | placement | `'top' \| 'center' \| 'bottom' \| 'stretch'` | No | `'center'` |  |
 | Mask | fullscreen | `boolean` | No | `false` |  |
-| Mask | children | `React.ReactNode` | No | - |  |
 | Mask | onClick | `(event: React.MouseEvent<HTMLSpanElement>) => void` | No | - |  |
 | Mask | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 

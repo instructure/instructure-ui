@@ -84,7 +84,6 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| SideNavBar | children | `React.ReactNode` | No | `null` | children of type SideNavBar.Item |
 | SideNavBar | minimized | `boolean` | No | - | When minimized is set to true, the `<SideNavBar />` shows icons only while the text becomes a tooltip. When it is set to false, the `<SideNavBar />` shows text in addition to the icons |
 | SideNavBar | defaultMinimized | `boolean` | No | `false` | Whether the `<SideNavBar />` is initially minimized (uncontrolled) |
 | SideNavBar | onMinimized | `(event: React.SyntheticEvent, minimized: boolean) => void` | No | - |  |
@@ -92,6 +91,7 @@ type: embed
 | SideNavBar | toggleLabel | `{ expandedLabel?: string minimizedLabel?: string }` | Yes | - | Screen reader label for the toggle button expanded/minimized state |
 | SideNavBar | href | `string` | No | - | If the `<SideNavBar.Item>` goes to a new page, pass an href |
 | SideNavBar | onClick | `(event: React.MouseEvent) => void` | No | `function (_e: React.MouseEvent) {}` | If the `<SideNavBar.Item>` does not go to a new page pass an onClick |
+| SideNavBar | children | `React.ReactNode` | No | `null` | children of type SideNavBar.Item |
 | SideNavBar.SideNavBarItem | elementRef | `(el: Element \| null) => void` | No | - | The reference to the underlying HTML element |
 | SideNavBar.SideNavBarItem | icon | `React.ReactNode` | Yes | - | The visual to display (ex. an Image, Logo, Avatar, or Icon) |
 | SideNavBar.SideNavBarItem | label | `React.ReactNode` | Yes | - | The text to display for the SideNavBar Link |

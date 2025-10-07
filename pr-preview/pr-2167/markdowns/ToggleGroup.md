@@ -105,8 +105,8 @@ type: example
 | ToggleGroup | expanded | `boolean` | No | - | Whether the content is expanded or hidden |
 | ToggleGroup | defaultExpanded | `boolean` | No | `false` | Whether the content is initially expanded or hidden (uncontrolled) |
 | ToggleGroup | onToggle | `(event: React.MouseEvent, expanded: boolean) => void` | No | - | Fired when the content display is toggled |
-| ToggleGroup | icon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenEndSolid` | The icon displayed in the toggle button when the content is hidden |
-| ToggleGroup | iconExpanded | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenDownSolid` | The icon displayed in the toggle button when the content is showing |
+| ToggleGroup | icon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenEndSolid` | The icon displayed in the toggle button when the content is hidden |
+| ToggleGroup | iconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconArrowOpenDownSolid` | The icon displayed in the toggle button when the content is showing |
 | ToggleGroup | transition | `boolean` | No | `true` | Transition content into view |
 | ToggleGroup | border | `boolean` | No | `true` | Toggle the border around the component |
 

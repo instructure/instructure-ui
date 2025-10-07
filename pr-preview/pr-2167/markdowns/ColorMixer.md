@@ -131,9 +131,9 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | ColorMixer | disabled | `boolean` | No | `false` | Makes the component uninteractable |
 | ColorMixer | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's underlying html element. |
-| ColorMixer | withAlpha | `boolean` | No | `false` | Toggles alpha. If true, alpha slider will appear |
-| ColorMixer | value | `string` | No | `'#000'` | Sets the value of the component. If changes, the color changes inside the component as well |
 | ColorMixer | onChange | `(hex: string) => void` | Yes | - | Gets called each time the color changes |
+| ColorMixer | value | `string` | No | `'#000'` | Sets the value of the component. If changes, the color changes inside the component as well |
+| ColorMixer | withAlpha | `boolean` | No | `false` | Toggles alpha. If true, alpha slider will appear |
 | ColorMixer | rgbRedInputScreenReaderLabel | `string` | Yes | - | screenReaderLabel for the RGBA input's red input field |
 | ColorMixer | rgbGreenInputScreenReaderLabel | `string` | Yes | - | screenReaderLabel for the RGBA input's green input field |
 | ColorMixer | rgbBlueInputScreenReaderLabel | `string` | Yes | - | screenReaderLabel for the RGBA input's blue input field |
