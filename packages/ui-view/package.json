@@ -31,7 +31,6 @@
     "@instructure/ui-dom-utils": "11.0.0",
     "@instructure/ui-i18n": "11.0.0",
     "@instructure/ui-position": "11.0.0",
-    "@instructure/ui-prop-types": "10.26.0",
     "@instructure/ui-react-utils": "11.0.0"
   },
   "devDependencies": {
