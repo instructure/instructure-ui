@@ -224,16 +224,16 @@ const SCOPE = '@instructure'
 
 console.log('Finding all packages in monorepo...')
 
-// Get all package names in the monorepo
+// Get all @instructure/* package names in the monorepo
 const packagePaths = globSync('packages/*/package.json')
-const packageNames = packagePaths
+const instructurePackageNames = packagePaths
   .map((p) => {
     const pkg = JSON.parse(fs.readFileSync(p, 'utf8'))
     return pkg.name
   })
   .filter((name) => name && name.startsWith(SCOPE))
 
-console.log(`Found ${packageNames.length} @instructure packages\n`)
+console.log(`Found ${instructurePackageNames.length} @instructure packages\n`)
 
 let totalChanges = 0
 
@@ -243,12 +243,14 @@ for (const pkgPath of packagePaths) {
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
   let changed = false
 
-  // Convert dependencies
+  // Convert ONLY @instructure/* internal dependencies to workspace protocol
+  // External dependencies (react, lodash, etc.) are left unchanged
   for (const depType of ['dependencies', 'devDependencies']) {
     if (!pkg[depType]) continue
 
     for (const [name, version] of Object.entries(pkg[depType])) {
-      if (packageNames.includes(name) && !version.startsWith('workspace:')) {
+      // Only convert if it's one of our @instructure packages
+      if (instructurePackageNames.includes(name) && !version.startsWith('workspace:')) {
         pkg[depType][name] = 'workspace:*'
         changed = true
         totalChanges++
@@ -267,11 +269,13 @@ console.log('\nConverting root package.json...')
 const rootPkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 let rootChanged = false
 
+// Same filtering logic for root: only convert @instructure/* packages
 for (const depType of ['devDependencies']) {
   if (!rootPkg[depType]) continue
 
   for (const [name, version] of Object.entries(rootPkg[depType])) {
-    if (packageNames.includes(name) && !version.startsWith('workspace:')) {
+    // Only convert if it's one of our @instructure packages
+    if (instructurePackageNames.includes(name) && !version.startsWith('workspace:')) {
       rootPkg[depType][name] = 'workspace:*'
       rootChanged = true
       totalChanges++
@@ -360,8 +364,8 @@ type: code
     "clean-node": "node scripts/clean.js --nuke_node",
     "export:icons": "pnpm --filter @instructure/ui-icons export",
 
-    "bump": "ui-scripts bump",
-    "release": "ui-scripts publish",
+    "release": "ui-scripts release",
+    "publish": "ui-scripts publish",
 
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
     "postinstall": "husky",
@@ -668,6 +672,36 @@ This eliminates manual version syncing across 102 packages."
 
 **Risk:** Low-Medium
 
+### Release Workflow Overview
+
+**New workflow:**
+
+1. **Developer runs locally (from master):** `pnpm run release`
+
+   - Creates a new release branch (e.g., `release/v11.1.0`)
+   - Analyzes commits using conventional commits
+   - Bumps all package versions
+   - Generates/updates CHANGELOG.md
+   - Commits changes
+   - Pushes branch to GitHub
+   - Asks for confirmation before creating PR
+   - Creates PR after confirmation
+
+2. **Team reviews PR on GitHub**
+
+   - Review version bumps
+   - Review changelog entries
+   - Approve when ready
+
+3. **PR is merged/rebased to master** (manually via GitHub UI)
+
+4. **CI automatically (triggered by merge to master):**
+   - Detects release commit
+   - Runs tests
+   - Creates git tag
+   - Publishes all 102 packages to npm (with rate limiting)
+   - Deploys documentation site
+
 ### Why release-it?
 
 **Current Lerna workflow:**
@@ -693,16 +727,22 @@ ui-scripts publish
 ---
 type: code
 ---
-# Single command does everything:
-pnpm release
+# Local command creates release PR:
+pnpm run release
   ├─> Analyzes commits (conventional-commits)
   ├─> Determines version bump (major/minor/patch)
+  ├─> Creates new release branch
   ├─> Updates all package.json files
   ├─> Generates changelogs
   ├─> Creates git commit
+  ├─> Pushes branch to remote
+  ├─> Asks for confirmation
+  └─> Creates GitHub PR (after confirmation)
+
+# After PR review and merge to master, CI automatically:
   ├─> Creates git tag
-  ├─> Pushes to remote
-  └─> Publishes to npm
+  ├─> Publishes to npm
+  └─> Deploys docs
 ```
 
 ### Step 2.1: Install release-it
@@ -713,6 +753,17 @@ type: code
 ---
 pnpm add -D release-it @release-it-plugins/workspaces @release-it/conventional-changelog
 ```
+
+**About `@release-it-plugins/workspaces`:**
+
+This plugin is specifically designed for monorepo publishing and handles:
+
+1. **Publishing ALL packages**: Iterates through all workspace packages and publishes each one
+2. **npm rate limiting**: Built-in delays between publish calls to avoid npm API rate limits (critical for 102 packages)
+3. **Workspace protocol conversion**: Automatically converts `workspace:*` to actual versions in published packages
+4. **Failure handling**: If one package fails, continues with others and reports all failures at the end
+
+The plugin uses `pnpm -r publish` under the hood, which respects pnpm's publishing conventions and includes proper rate limiting. For a monorepo with 102 packages, this is essential to avoid hitting npm's API limits.
 
 ### Step 2.2: Create release-it Config
 
@@ -731,12 +782,15 @@ type: code
     "requireUpstream": true,
     "requireCommits": true,
     "requireBranch": ["master", "v*_maintenance"],
-    "addUntrackedFiles": false
+    "addUntrackedFiles": false,
+    "push": true,
+    "tag": false,
+    "commit": true
   },
   "github": {
-    "release": true,
-    "releaseName": "v${version}",
-    "autoGenerate": false
+    "release": false,
+    "draft": false,
+    "tokenRef": "GITHUB_TOKEN"
   },
   "npm": {
     "publish": false
@@ -762,16 +816,94 @@ type: code
   "hooks": {
     "before:init": ["pnpm run lint", "pnpm run test:vitest"],
     "after:bump": ["pnpm install --lockfile-only"],
-    "after:release": "echo Successfully released ${name} v${version}"
+    "before:git:release": "git checkout -b release/v${version}",
+    "after:git:release": "node scripts/create-release-pr.js ${version}"
   }
 }
 ```
 
+**Key configuration notes:**
+
+- `git.push: true` - Pushes the release branch (not master)
+- `git.tag: false` - NO tagging locally (will be done in CI after merge)
+- `git.commit: true` - Creates the version bump commit
+- `github.release: false` - GitHub releases handled by CI
+- `npm.publish: false` - Publishing happens in CI only
+- `before:git:release` hook - Creates new release branch before pushing
+- `after:git:release` hook - Runs custom script to confirm and create PR
+
+### Step 2.2a: Create PR Confirmation Script
+
+Create `scripts/create-release-pr.js`:
+
+```javascript
+---
+type: code
+---
+#!/usr/bin/env node
+
+const { execSync } = require('child_process')
+const readline = require('readline')
+
+const version = process.argv[2]
+
+if (!version) {
+  console.error('Error: version parameter required')
+  process.exit(1)
+}
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+console.log('\n📦 Release branch created and pushed!')
+console.log(`Version: v${version}`)
+console.log(`Branch: release/v${version}`)
+console.log('\nYou can review the changes on GitHub before creating the PR.')
+console.log(`Branch URL: https://github.com/instructure/instructure-ui/tree/release/v${version}`)
+
+rl.question('\n❓ Do you want to create a Pull Request now? (y/N): ', (answer) => {
+  rl.close()
+
+  if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
+    console.log('\n📝 Creating Pull Request...')
+    try {
+      execSync(
+        `gh pr create --title "chore(release): v${version}" --body "Release v${version}\n\nGenerated by release-it\n\nPlease review the version bumps and changelog updates." --base master --head release/v${version}`,
+        { stdio: 'inherit' }
+      )
+      console.log('\n✅ Pull Request created successfully!')
+    } catch (err) {
+      console.error('\n❌ Failed to create PR:', err.message)
+      console.log('You can create it manually with:')
+      console.log(`gh pr create --title "chore(release): v${version}" --base master --head release/v${version}`)
+      process.exit(1)
+    }
+  } else {
+    console.log('\n✋ PR creation skipped.')
+    console.log('To create the PR later, run:')
+    console.log(`gh pr create --title "chore(release): v${version}" --base master --head release/v${version}`)
+  }
+})
+```
+
 ### Step 2.3: Update ui-scripts
 
-#### packages/ui-scripts/lib/commands/bump.js
+#### Rename bump.js to release.js
 
-Replace entire file:
+First, rename the file:
+
+```bash
+---
+type: code
+---
+mv packages/ui-scripts/lib/commands/bump.js packages/ui-scripts/lib/commands/release.js
+```
+
+#### packages/ui-scripts/lib/commands/release.js
+
+Replace entire file content:
 
 ```javascript
 ---
@@ -801,11 +933,11 @@ type: code
  * SOFTWARE.
  */
 
-import { error, runCommandAsync } from '@instructure/command-utils'
+import { error, info, runCommandAsync } from '@instructure/command-utils'
 
 export default {
-  command: 'bump',
-  desc: 'Bump versions and generate changelogs using release-it',
+  command: 'release',
+  desc: 'Create release PR with version bump and changelog (run from master branch)',
   builder: (yargs) => {
     yargs.option('releaseType', {
       type: 'string',
@@ -817,7 +949,7 @@ export default {
     })
     yargs.option('dryRun', {
       type: 'boolean',
-      describe: 'Dry run (no git commits, no publish)',
+      describe: 'Dry run (no git commits, no PR creation)',
       default: false
     })
   },
@@ -825,6 +957,15 @@ export default {
     const { releaseType, preRelease, dryRun } = argv
 
     try {
+      info('🚀 Starting release process...')
+      info('This will:')
+      info('  1. Create a new release branch')
+      info('  2. Bump versions and generate changelogs')
+      info('  3. Push branch to GitHub')
+      info('  4. Ask for confirmation before creating PR')
+      info('  5. After PR is merged, CI will publish to npm')
+      info('')
+
       const args = ['release-it']
 
       // Add version increment
@@ -842,12 +983,12 @@ export default {
         args.push('--dry-run')
       }
 
-      // CI mode (non-interactive)
-      if (process.env.CI) {
-        args.push('--ci')
-      }
-
       await runCommandAsync('pnpm', args, {}, { stdio: 'inherit' })
+
+      if (!dryRun) {
+        info('')
+        info('✅ Release process completed!')
+      }
     } catch (err) {
       error(err)
       process.exit(1)
@@ -858,7 +999,7 @@ export default {
 
 #### packages/ui-scripts/lib/commands/publish.js
 
-Simplify to just call release-it:
+Update to be CI-only for publishing all packages to npm:
 
 ```javascript
 ---
@@ -888,12 +1029,12 @@ type: code
  * SOFTWARE.
  */
 
-import { error, runCommandAsync } from '@instructure/command-utils'
+import { error, info, runCommandAsync } from '@instructure/command-utils'
 import { createNPMRCFile } from '../utils/npm.js'
 
 export default {
   command: 'publish',
-  desc: 'Publish packages using release-it (run after bump, or use release-it directly)',
+  desc: 'Publish all packages to npm (CI only - runs after release PR is merged)',
   builder: (yargs) => {
     yargs.option('dryRun', {
       type: 'boolean',
@@ -902,33 +1043,41 @@ export default {
     })
     yargs.option('isMaintenance', {
       type: 'boolean',
-      describe: 'If true npm publish will use vXYZ_maintenance as tag',
+      describe: 'If true npm publish will use maintenance tag',
       default: false
     })
   },
   handler: async (argv) => {
     const { dryRun, isMaintenance } = argv
 
+    // Enforce CI-only usage
+    if (!process.env.CI && !dryRun) {
+      error('ERROR: This command should only be run in CI!')
+      error('To create a release, use: pnpm run release')
+      error('(Or use --dry-run flag to test locally)')
+      process.exit(1)
+    }
+
     try {
+      info('Publishing all packages to npm...')
+
       // Set up npm authentication
       createNPMRCFile()
 
-      const args = ['release-it', '--no-increment', '--no-git']
+      const args = ['pnpm', '-r', 'publish', '--access', 'public', '--no-git-checks']
 
       if (dryRun) {
         args.push('--dry-run')
       }
 
-      if (process.env.CI) {
-        args.push('--ci')
-      }
-
       // Handle maintenance tag
       if (isMaintenance) {
-        args.push('--npm.tag=maintenance')
+        args.push('--tag', 'maintenance')
       }
 
       await runCommandAsync('pnpm', args, {}, { stdio: 'inherit' })
+
+      info('✓ All packages published successfully!')
     } catch (err) {
       error(err)
       process.exit(1)
@@ -937,11 +1086,19 @@ export default {
 }
 ```
 
+**Key changes:**
+
+- Enforces CI-only execution (exits with error if run locally without `--dry-run`)
+- Uses `pnpm -r publish` to publish all packages with proper npm rate limiting
+- Simplified command structure focused on CI use case
+
 ### Step 2.4: Update pkg-utils
 
 #### packages/pkg-utils/lib/get-packages.js
 
-Replace Lerna dependency:
+**Note:** This file is used by the `deprecate`, `publish`, and `tag` commands in ui-scripts. With the new release workflow, consider whether these commands are still needed. If they're no longer used, this entire file and its usages can be removed in a future cleanup.
+
+For now, replace Lerna dependency:
 
 ```javascript
 ---
@@ -1086,20 +1243,7 @@ Replaced with release-it for version management and publishing."
 
 ### Step 2.7: Update Root Scripts
 
-```json
----
-type: code
----
-{
-  "scripts": {
-    "bump": "ui-scripts bump",
-    "release": "ui-scripts publish",
-    "release:dry": "release-it --dry-run"
-  }
-}
-```
-
-Or use release-it directly:
+Update `package.json` scripts section:
 
 ```json
 ---
@@ -1107,17 +1251,24 @@ type: code
 ---
 {
   "scripts": {
-    "bump": "release-it",
-    "release": "release-it --ci",
-    "release:dry": "release-it --dry-run",
-    "release:snapshot": "release-it --preRelease=snapshot"
+    "release": "ui-scripts release",
+    "release:dry": "ui-scripts release --dryRun",
+    "publish": "ui-scripts publish"
   }
 }
 ```
+
+**Script usage:**
+
+- `pnpm run release` - Creates release branch and PR (run locally from master)
+- `pnpm run release:dry` - Dry run to test the release process
+- `pnpm run publish` - Publishes to npm (CI only)
 
 ### Step 2.8: Update CI/CD
 
 #### .github/workflows/release.yml
+
+Update to publish packages when release PR is merged to master:
 
 ```yaml
 ---
@@ -1128,15 +1279,21 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'packages/*/package.json'
+      - 'package.json'
+      - 'CHANGELOG.md'
 
 jobs:
   release:
+    # Only run if this is a release commit (merged release PR)
+    if: "startsWith(github.event.head_commit.message, 'chore(release)')"
     runs-on: ubuntu-latest
-    name: Release packages
+    name: Publish packages to npm
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Needed for conventional commits
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v4
@@ -1157,33 +1314,72 @@ jobs:
       - name: Run tests
         run: USE_REACT_STRICT_MODE=0 pnpm run test:vitest
 
+      - name: Extract version from package.json
+        id: version
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
       - name: Configure git
         run: |
           git config user.name "instructure-ui-ci"
           git config user.email "instructure-ui-ci@instructure.com"
 
-      - name: Release to npm
+      - name: Create git tag
+        run: |
+          git tag -a v${{ steps.version.outputs.VERSION }} -m "Release v${{ steps.version.outputs.VERSION }}"
+          git push origin v${{ steps.version.outputs.VERSION }}
+
+      - name: Publish to npm
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm run release
 
-  tag:
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ steps.version.outputs.VERSION }} \
+            --title "v${{ steps.version.outputs.VERSION }}" \
+            --notes "See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md) for details."
+
+  deploy-docs:
     needs: release
-    if: "startsWith(github.event.head_commit.message, 'chore(release)')"
     runs-on: ubuntu-latest
-    name: Tag release commit
+    name: Deploy documentation
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
         with:
-          fetch-depth: 0
-      - name: Set up git identity
-        run: git config --global user.name "instructure-ui-ci" && git config --global user.email "instructure-ui-ci@instructure.com"
-      - name: Add tag
-        run: git tag -a v$(./.github/workflows/calculateVersion.sh) -m v$(./.github/workflows/calculateVersion.sh)
-      - name: Push tags
-        run: git push origin v$(./.github/workflows/calculateVersion.sh)
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Bootstrap project
+        run: pnpm run bootstrap
+
+      - name: Build documentation
+        run: pnpm run build:docs
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/__docs__/dist
 ```
+
+**Key changes:**
+
+- Workflow only triggers on release commits (merged release PRs)
+- Creates git tag from version in package.json
+- Publishes all packages to npm using `pnpm run release` (which calls `ui-scripts publish`)
+- Creates GitHub release with link to changelog
+- Deploys documentation automatically after successful publish
 
 ### Step 2.9: Testing release-it
 
@@ -1191,16 +1387,23 @@ jobs:
 ---
 type: code
 ---
-# 1. Dry run to see what would happen
-pnpm release --dry-run
+# 1. Dry run to see what would happen (without creating branches or PRs)
+pnpm run release:dry
 
-# 2. Test version bump only (no publish, no push)
-git checkout -b test-release-it
-pnpm release --no-npm --no-git.push
+# 2. Test the full release process on a test branch
+# This will:
+# - Create a release branch
+# - Bump versions
+# - Generate changelog
+# - Push to GitHub
+# - Ask for confirmation before creating PR
+git checkout master
+pnpm run release
 
-# 3. Verify changes
-git log -1
-git show HEAD
+# Choose "N" when asked to create PR, so you can review first
+
+# 3. Review the changes on GitHub
+# Visit: https://github.com/instructure/instructure-ui/branches
 
 # 4. Verify package.json versions updated
 cat packages/ui-buttons/package.json | grep version
@@ -1215,10 +1418,13 @@ tar -tzf instructure-ui-buttons-*.tgz | grep package.json
 tar -xzf instructure-ui-buttons-*.tgz -O package/package.json | jq .dependencies
 # Should show actual versions, not workspace:*
 
-# 7. Clean up test
-git reset --hard HEAD^
-git checkout feat/pnpm-migration
-git branch -D test-release-it
+# 7. If everything looks good, create the PR manually
+gh pr create --title "chore(release): v11.1.0" --base master --head release/v11.1.0
+
+# 8. Clean up test (if needed)
+git checkout master
+git branch -D release/v11.1.0  # Local cleanup
+gh pr close 1234 --delete-branch  # Close and delete remote branch
 ```
 
 ### Step 2.10: Commit Phase 2 Changes
@@ -1232,12 +1438,13 @@ git commit -m "chore: integrate release-it for automated releases
 
 - Replace Lerna version/publish with release-it
 - Configure conventional commits + changelog generation
-- Update ui-scripts bump/publish commands
+- Rename bump command to release with PR confirmation
+- Update ui-scripts release/publish commands
 - Update pkg-utils to remove Lerna dependency
 - Remove Lerna completely
 - Update CI/CD workflows
 
-Single command releases with full automation."
+Release workflow: pnpm run release → PR → merge → CI publishes to npm"
 ```
 
 ## Testing Strategy
