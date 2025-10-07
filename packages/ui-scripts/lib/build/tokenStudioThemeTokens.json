@@ -3664,7 +3664,7 @@
         "type": "fontSizes"
       },
       "lineHeightSm": {
-        "value": "{lineHeight.standalone.textXs}",
+        "value": "{lineHeight.standalone.textSm}",
         "type": "lineHeights"
       },
       "lineHeightMd": {
