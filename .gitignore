@@ -17,3 +17,12 @@ __build__
 tsconfig.build.tsbuildinfo
 
 .pnp.*
+
+# AI/LLM tool artifacts (Copilot & Claude)
+.copilot/
+.inst-ai/sessions
+
+# Claude Code specific
+.claude/settings.local.json
+.claude/cache/
+.claude/*.local.*
