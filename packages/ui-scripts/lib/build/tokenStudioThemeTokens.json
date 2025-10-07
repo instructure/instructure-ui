@@ -2801,6 +2801,10 @@
         "value": "{color.stroke.interactive.secondary.base}",
         "type": "color"
       },
+      "secondaryTextColor": {
+        "value": "{color.text.interactive.secondary.active}",
+        "type": "color"
+      },
       "successBackgroundColor": {
         "value": "{color.background.interactive.success.base}",
         "type": "color"
@@ -2911,6 +2915,10 @@
       },
       "primaryOnColorBorderColor": {
         "value": "{color.stroke.interactive.primaryOnColor.base}",
+        "type": "color"
+      },
+      "primaryOnColorTextColor": {
+        "value": "{color.text.interactive.secondary.base}",
         "type": "color"
       },
       "minHeightSm": {
