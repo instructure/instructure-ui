@@ -117,21 +117,21 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Overlay | children | `React.ReactNode` | No | - |  |
 | Overlay | open | `boolean` | No | `false` | Whether or not the `<Overlay />` is open |
+| Overlay | transition | `TransitionType` | No | - | The type of `<Transition />` to use for animating in/out |
 | Overlay | onOpen | `(DOMNode: PortalNode) => void` | No | - | Callback fired when `<Portal />` content has been mounted in the DOM |
 | Overlay | onClose | `() => void` | No | - | Callback fired when `<Portal />` has been unmounted from the DOM |
 | Overlay | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<Portal />` (defaults to `document.body`) |
 | Overlay | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
+| Overlay | children | `React.ReactNode` | No | - |  |
 | Overlay | label | `string` | Yes | - | An accessible label for the `<Overlay />` content |
-| Overlay | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Overlay />` is requesting to be closed |
 | Overlay | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
 | Overlay | contentElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element that wraps the content of the `<Overlay />` |
 | Overlay | shouldContainFocus | `boolean` | No | `false` |  |
 | Overlay | shouldReturnFocus | `boolean` | No | `false` |  |
 | Overlay | shouldCloseOnDocumentClick | `boolean` | No | `false` |  |
 | Overlay | shouldCloseOnEscape | `boolean` | No | `true` |  |
-| Overlay | transition | `TransitionType` | No | - | The type of `<Transition />` to use for animating in/out |
+| Overlay | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Overlay />` is requesting to be closed |
 | Overlay | in | `boolean` | No | `false` | Show the component; triggers the enter or exit animation |
 | Overlay | unmountOnExit | `boolean` | No | `false` | Unmount the component (remove it from the DOM) when it is not shown |
 | Overlay | transitionOnMount | `boolean` | No | `false` | Run the enter animation when the component mounts, if it is initially shown |

@@ -103,7 +103,6 @@ type: example
 | InstUISettingsProvider | children | `React.ReactNode` | No | - |  |
 | InstUISettingsProvider | theme | `\| BaseThemeOrOverride \| ((theme: BaseTheme) => BaseThemeOrOverride)` | No | `{}` | A full theme or an override object |
 | InstUISettingsProvider | instanceCounterMap | `DeterministicIdProviderValue` | No | - | @deprecated the `instanceCounterMap` prop is deprecated. You don't need to supply the `instanceCounterMap` to the component. It handles it internally. A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering)) |
-| InstUISettingsProvider | as | `` | No | - |  |
 
 ### Usage
 

@@ -204,7 +204,7 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Tooltip | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tooltip | children | `React.ReactNode \| TooltipRenderChildren` | Yes | - | A ReactNode or a function that returns a ReactNode with the following params: @param {Boolean} focused - Is the Tooltip trigger focused? @param {Function} getTriggerProps - Props to be spread onto the trigger element |
-| Tooltip | renderTip | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content to render in the tooltip |
+| Tooltip | renderTip | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content to render in the tooltip |
 | Tooltip | isShowingContent | `boolean` | No | - | Whether or not the tooltip content is shown, when controlled |
 | Tooltip | defaultIsShowingContent | `boolean` | No | `false` | Whether or not to show the content by default, when uncontrolled |
 | Tooltip | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | the element type to render as (assumes a single child if 'as' is undefined) |

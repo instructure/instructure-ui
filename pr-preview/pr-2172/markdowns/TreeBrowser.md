@@ -1270,32 +1270,27 @@ type: embed
 | TreeBrowser | expanded | `(string \| number \| undefined)[]` | No | - | an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop |
 | TreeBrowser | defaultExpanded | `(string \| number)[]` | No | `[]` | an array of collection ids to expand by default |
 | TreeBrowser | selectionType | `'none' \| 'single'` | No | `'none'` | There are 2 types of tree selection: single and multi. This is set up to allow for "multi" in the future without having to deprecate the old API. |
-| TreeBrowser | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| TreeBrowser | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser | collectionIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconFolderLine` |  |
-| TreeBrowser | collectionIconExpanded | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconFolderLine` |  |
-| TreeBrowser | itemIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconDocumentLine` |  |
-| TreeBrowser | getItemProps | `(props: Record<string, any>) => Record<string, any>` | No | `(props: unknown) => props` | A function called with each item's props as an argument. The return value of this function is a props object which will be passed to the item when it is rendered. This is useful for situations where you need to render the item differently depending on it's props. For example, if you would like to display a different icon for items with a certain name. |
-| TreeBrowser | getCollectionProps | `(props: Record<string, any>) => TreeBrowserButtonProps` | No | `(props: unknown) => props` | A function called with each collection's props as an argument. The return value of this function is a props object which will be passed to the collection when it is rendered. This is useful for situations where you need to render the collection differently depending on it's props. For example, if you would like to display a different icon for collections with a certain name. |
-| TreeBrowser | showRootCollection | `boolean` | No | `true` | Whether or not to show the root collection specified in rootId prop or to begin with its immediate subcollections and items instead |
-| TreeBrowser | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
 | TreeBrowser | onCollectionToggle | `(collection: CollectionData) => void` | No | - |  |
 | TreeBrowser | onItemClick | `(data: CollectionData) => void` | No | - |  |
+| TreeBrowser | showRootCollection | `boolean` | No | `true` | Whether or not to show the root collection specified in rootId prop or to begin with its immediate subcollections and items instead |
 | TreeBrowser | treeLabel | `string` | No | - | An optional label to assist visually impaired users |
-| TreeBrowser | renderContent | `(props: TreeBrowserButtonProps) => JSX.Element` | No | - |  |
 | TreeBrowser | sortOrder | `(obj1: any, obj2: any) => number` | No | `function () {
   return 0
 }` | An optional compare function to specify order of the collections and the items |
 | TreeBrowser | animation | `boolean` | No | `true` | Whether to enable animation for the TreeBrowser |
+| TreeBrowser | getItemProps | `(props: Record<string, any>) => Record<string, any>` | No | `(props: unknown) => props` | A function called with each item's props as an argument. The return value of this function is a props object which will be passed to the item when it is rendered. This is useful for situations where you need to render the item differently depending on it's props. For example, if you would like to display a different icon for items with a certain name. |
+| TreeBrowser | getCollectionProps | `(props: Record<string, any>) => TreeBrowserButtonProps` | No | `(props: unknown) => props` | A function called with each collection's props as an argument. The return value of this function is a props object which will be passed to the collection when it is rendered. This is useful for situations where you need to render the collection differently depending on it's props. For example, if you would like to display a different icon for collections with a certain name. |
+| TreeBrowser | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
+| TreeBrowser | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
+| TreeBrowser | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
+| TreeBrowser | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconFolderLine` |  |
+| TreeBrowser | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconFolderLine` |  |
+| TreeBrowser | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `IconDocumentLine` |  |
+| TreeBrowser | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
 | TreeBrowser.TreeButton | id | `string \| number` | No | - |  |
 | TreeBrowser.TreeButton | name | `string` | No | - |  |
 | TreeBrowser.TreeButton | descriptor | `string` | No | - |  |
 | TreeBrowser.TreeButton | type | `'collection' \| 'item' \| string` | No | `'treeButton'` |  |
-| TreeBrowser.TreeButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| TreeBrowser.TreeButton | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser.TreeButton | collectionIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeButton | collectionIconExpanded | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeButton | itemIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | TreeBrowser.TreeButton | thumbnail | `string` | No | - |  |
 | TreeBrowser.TreeButton | onClick | `(e: React.MouseEvent) => void` | No | - | Called when this button is clicked |
 | TreeBrowser.TreeButton | expanded | `boolean` | No | `false` |  |
@@ -1303,45 +1298,44 @@ type: embed
 | TreeBrowser.TreeButton | focused | `boolean` | No | `false` |  |
 | TreeBrowser.TreeButton | level | `number` | No | - |  |
 | TreeBrowser.TreeButton | containerRef | `(el: HTMLElement \| null) => void` | No | - | A function that returns a reference to the parent li element |
-| TreeBrowser.TreeButton | renderContent | `(props: TreeBrowserButtonProps) => JSX.Element` | No | - |  |
+| TreeBrowser.TreeButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
+| TreeBrowser.TreeButton | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
+| TreeBrowser.TreeButton | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeButton | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeButton | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeButton | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
+| TreeBrowser.TreeCollection | level | `number` | Yes | - |  |
+| TreeBrowser.TreeCollection | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
+| TreeBrowser.TreeCollection | onItemClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
+| TreeBrowser.TreeCollection | numChildren | `number` | No | - |  |
+| TreeBrowser.TreeCollection | position | `number` | No | - |  |
+| TreeBrowser.TreeCollection | selection | `string` | No | `''` |  |
+| TreeBrowser.TreeCollection | collections | `CollectionProps[]` | No | `[]` |  |
+| TreeBrowser.TreeCollection | items | `CollectionItem[]` | No | `[]` |  |
+| TreeBrowser.TreeCollection | expanded | `boolean` | No | `false` |  |
+| TreeBrowser.TreeCollection | isCollectionFlattened | `boolean` | No | `false` |  |
+| TreeBrowser.TreeCollection | compareFunc | `(a: CompareObject, b: CompareObject) => number` | No | - |  |
 | TreeBrowser.TreeCollection | id | `number \| string` | Yes | - |  |
 | TreeBrowser.TreeCollection | name | `string` | Yes | - |  |
 | TreeBrowser.TreeCollection | descriptor | `string` | No | - |  |
-| TreeBrowser.TreeCollection | items | `CollectionItem[]` | No | `[]` |  |
-| TreeBrowser.TreeCollection | collections | `CollectionProps[]` | No | `[]` |  |
-| TreeBrowser.TreeCollection | expanded | `boolean` | No | `false` |  |
-| TreeBrowser.TreeCollection | selection | `string` | No | `''` |  |
-| TreeBrowser.TreeCollection | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
-| TreeBrowser.TreeCollection | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser.TreeCollection | collectionIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeCollection | collectionIconExpanded | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeCollection | itemIcon | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeCollection | getItemProps | `(props: Record<string, any>) => Record<string, any>` | No | `(props: unknown) => props` | A function called with each item's props as an argument. The return value of this function is a props object which will be passed to the item when it is rendered. This is useful for situations where you need to render the item differently depending on it's props. For example, if you would like to display a different icon for items with a certain name. |
-| TreeBrowser.TreeCollection | getCollectionProps | `(props: Record<string, any>) => TreeBrowserButtonProps` | No | `(props: unknown) => props` | A function called with each collection's props as an argument. The return value of this function is a props object which will be passed to the collection when it is rendered. This is useful for situations where you need to render the collection differently depending on it's props. For example, if you would like to display a different icon for collections with a certain name. |
-| TreeBrowser.TreeCollection | onItemClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
-| TreeBrowser.TreeCollection | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
-| TreeBrowser.TreeCollection | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
-| TreeBrowser.TreeCollection | numChildren | `number` | No | - |  |
-| TreeBrowser.TreeCollection | level | `number` | Yes | - |  |
-| TreeBrowser.TreeCollection | position | `number` | No | - |  |
+| TreeBrowser.TreeCollection | containerRef | `(el: HTMLElement \| null) => void` | No | - | A function that returns a reference to the underlying HTML container @param el The DOM HTMLElement |
 | TreeBrowser.TreeCollection | renderBeforeItems | `ReactElement` | No | - | children of type TreeNode |
 | TreeBrowser.TreeCollection | renderAfterItems | `ReactElement` | No | - | children of type TreeNode |
-| TreeBrowser.TreeCollection | containerRef | `(el: HTMLElement \| null) => void` | No | - | A function that returns a reference to the underlying HTML container @param el The DOM HTMLElement |
-| TreeBrowser.TreeCollection | isCollectionFlattened | `boolean` | No | `false` |  |
-| TreeBrowser.TreeCollection | renderContent | `(props: TreeBrowserButtonProps) => JSX.Element` | No | - |  |
-| TreeBrowser.TreeCollection | compareFunc | `(a: CompareObject, b: CompareObject) => number` | No | - |  |
-| TreeBrowser.TreeNode | id | `` | No | - |  |
+| TreeBrowser.TreeCollection | getItemProps | `(props: Record<string, any>) => Record<string, any>` | No | `(props: unknown) => props` | A function called with each item's props as an argument. The return value of this function is a props object which will be passed to the item when it is rendered. This is useful for situations where you need to render the item differently depending on it's props. For example, if you would like to display a different icon for items with a certain name. |
+| TreeBrowser.TreeCollection | getCollectionProps | `(props: Record<string, any>) => TreeBrowserButtonProps` | No | `(props: unknown) => props` | A function called with each collection's props as an argument. The return value of this function is a props object which will be passed to the collection when it is rendered. This is useful for situations where you need to render the collection differently depending on it's props. For example, if you would like to display a different icon for collections with a certain name. |
+| TreeBrowser.TreeCollection | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
+| TreeBrowser.TreeCollection | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
+| TreeBrowser.TreeCollection | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
+| TreeBrowser.TreeCollection | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeCollection | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeCollection | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeCollection | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
+| TreeBrowser.TreeNode | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
+| TreeBrowser.TreeNode | children | `React.ReactNode` | No | - | The children to be rendered within the `<TreeNode />` |
 | TreeBrowser.TreeNode | size | `` | No | `'medium'` |  |
 | TreeBrowser.TreeNode | variant | `` | No | `'folderTree'` |  |
 | TreeBrowser.TreeNode | selected | `` | No | `false` |  |
 | TreeBrowser.TreeNode | focused | `` | No | `false` |  |
-| TreeBrowser.TreeNode | itemIcon | `` | No | - |  |
-| TreeBrowser.TreeNode | thumbnail | `` | No | - |  |
-| TreeBrowser.TreeNode | level | `` | No | - |  |
-| TreeBrowser.TreeNode | children | `React.ReactNode` | No | - | The children to be rendered within the `<TreeNode />` |
-| TreeBrowser.TreeNode | containerRef | `` | No | - |  |
-| TreeBrowser.TreeNode | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
-| TreeBrowser.TreeNode | onClick | `` | No | - |  |
 
 ### Usage
 
