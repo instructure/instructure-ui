@@ -1504,6 +1504,10 @@
             "active": {
               "value": "{color.blue.blue80}",
               "type": "color"
+            },
+            "disabled": {
+              "value": "{color.blue.blue40}",
+              "type": "color"
             }
           },
           "secondary": {
@@ -3782,6 +3786,18 @@
       "aiDisabledBackgroundBottomGradientColor": {
         "value": "{color.background.interactive.ai.bottomGradient.disabled}",
         "type": "color"
+      }
+    },
+    "color": {
+      "stroke": {
+        "interactive": {
+          "primary": {
+            "disabled": {
+              "value": "{color.blue.blue40}",
+              "type": "color"
+            }
+          }
+        }
       }
     }
   },
@@ -6534,6 +6550,11 @@
         "button.lineHeightSm": "6c5c62ec84b07792648cb9de0e024d6efe8ecec1",
         "button.lineHeightMd": "7992a37c766b2db83a19592ea3717cea92f9b6c9",
         "button.lineHeightLg": "8643f701bd73deeab139e94e2af7e3bd3a2293ad",
+        "button.primaryDisabledBackgroundColor": "34510b53f55d72faf14e8b349a6cd7d9419caf10",
+        "button.secondaryDisabledBackgroundColor": "5d15087eea21f50977d945c8e9b6a44673f43e00",
+        "button.successDisabledBackgroundColor": "695c372846774198e00616193d288c65e7d59892",
+        "button.destructiveDisabledBackgroundColor": "bceb3cb09d7726960a2cd36bdc139a267ce6a11f",
+        "button.aiDisabledBackgroundBottomGradientColor": "d6653469c614709369444eb16f3ef8dd7d9d0809",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -6788,6 +6809,7 @@
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
         "button.secondaryTextColor": "09f7db789d225dce8f5ae183b72b91ab106d848a",
+        "button.aiDisabledBackgroundTopGradientColor": "0d06005ed38beafcb9a33fae943ff558add681d8",
         "button.primaryOnColorTextColor": "ef52e86dd77bf68ba2205de0d852cdbc41428ad5"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
@@ -7029,6 +7051,11 @@
         "button.lineHeightSm": "6c5c62ec84b07792648cb9de0e024d6efe8ecec1",
         "button.lineHeightMd": "7992a37c766b2db83a19592ea3717cea92f9b6c9",
         "button.lineHeightLg": "8643f701bd73deeab139e94e2af7e3bd3a2293ad",
+        "button.primaryDisabledBackgroundColor": "34510b53f55d72faf14e8b349a6cd7d9419caf10",
+        "button.secondaryDisabledBackgroundColor": "5d15087eea21f50977d945c8e9b6a44673f43e00",
+        "button.successDisabledBackgroundColor": "695c372846774198e00616193d288c65e7d59892",
+        "button.destructiveDisabledBackgroundColor": "bceb3cb09d7726960a2cd36bdc139a267ce6a11f",
+        "button.aiDisabledBackgroundBottomGradientColor": "d6653469c614709369444eb16f3ef8dd7d9d0809",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -7283,6 +7310,7 @@
         "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
         "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
         "button.secondaryTextColor": "09f7db789d225dce8f5ae183b72b91ab106d848a",
+        "button.aiDisabledBackgroundTopGradientColor": "0d06005ed38beafcb9a33fae943ff558add681d8",
         "button.primaryOnColorTextColor": "ef52e86dd77bf68ba2205de0d852cdbc41428ad5"
       },
       "$figmaCollectionId": "VariableCollectionId:2374:727",
@@ -7588,26 +7616,31 @@
         "button.primaryBackgroundColor": "1234ea67fb478393f314a3d3cd207118dea3274f",
         "button.primaryHoverBackgroundColor": "0a5adc97c1296523c6b1fbda3ec7d97e1726d03a",
         "button.primaryActiveBackgroundColor": "f081b00daf7c958093d219cf661c8e6eed3bf928",
+        "button.primaryDisabledBackgroundColor": "34510b53f55d72faf14e8b349a6cd7d9419caf10",
         "button.primaryBorderColor": "716cadb7282640953782660b8cab10e515e06e9c",
         "button.primaryTextColor": "886dd6c4d56ab2cded308a6da73ee30b4cf35efc",
         "button.primaryIconColor": "2cbff9ba6dc459d6b86d886b9c6840e4e02b9f62",
         "button.secondaryBackgroundColor": "ab490fd227d17db86522434b674569a4d8bce290",
         "button.secondaryHoverBackgroundColor": "891ba5dee1dd2a6f6681cad565bce5a50c71341a",
         "button.secondaryActiveBackgroundColor": "2456e5ca7ac9493e588f8887d6563d28dc97ec2f",
+        "button.secondaryDisabledBackgroundColor": "5d15087eea21f50977d945c8e9b6a44673f43e00",
         "button.secondaryBorderColor": "ec55a98cc4a95b5f22ac172750ec0072fd29aed4",
         "button.successBackgroundColor": "44ae632cc869f74aec79c78a04c2b1d0a47b8c17",
         "button.successHoverBackgroundColor": "8f250ac49bae90cbdbdabf5c8a72858b01a92158",
         "button.successActiveBackgroundColor": "3ee21c945715e9fe98c2327a9f497027b98e80cf",
+        "button.successDisabledBackgroundColor": "695c372846774198e00616193d288c65e7d59892",
         "button.successBorderColor": "5e67ca6801b856202d10c98321238beb70dc1aea",
         "button.successTextColor": "3bb112a184faefe1b1fcfcbae69cea0508a7043e",
         "button.destructiveBackgroundColor": "dd894912e0c2de44122c142ecfb909a2171aead4",
         "button.destructiveHoverBackgroundColor": "1b7abd7c5eba1eca2469ef5476d5c387afbc51e2",
         "button.destructiveActiveBackgroundColor": "121bb59cd034407d45335b90756e9b510faf4ac3",
+        "button.destructiveDisabledBackgroundColor": "bceb3cb09d7726960a2cd36bdc139a267ce6a11f",
         "button.destructiveBorderColor": "ecaf629d94f3be01096794303c693f4a08ca131c",
         "button.destructiveTextColor": "8bd2bcf551fa2d150102693f0c0e86bf773546b1",
         "button.aiBackgroundBottomGradientColor": "bb2afceb08ac3d2c4920c87d4d072e1f384230e1",
         "button.aiHoverBackgroundBottomGradientColor": "092223317e12a664bd02ae7951cdc7da2c86acd4",
         "button.aiActiveBackgroundBottomGradientColor": "aea36e0a23b98966f6743f6124a16ea1fc76b976",
+        "button.aiDisabledBackgroundBottomGradientColor": "d6653469c614709369444eb16f3ef8dd7d9d0809",
         "button.aiBackgroundTopGradientColor": "a151358df4f201e8062d7dda05e98d7a62997332",
         "button.aiHoverBackgroundTopGradientColor": "2fbdb539f67d9b93548a92b975e917598c85835e",
         "button.aiActiveBackgroundTopGradientColor": "2a5e5bda982f09fb30f5ffd0ae63755d4220ca5a",
@@ -8079,26 +8112,31 @@
         "button.primaryBackgroundColor": "1234ea67fb478393f314a3d3cd207118dea3274f",
         "button.primaryHoverBackgroundColor": "0a5adc97c1296523c6b1fbda3ec7d97e1726d03a",
         "button.primaryActiveBackgroundColor": "f081b00daf7c958093d219cf661c8e6eed3bf928",
+        "button.primaryDisabledBackgroundColor": "34510b53f55d72faf14e8b349a6cd7d9419caf10",
         "button.primaryBorderColor": "716cadb7282640953782660b8cab10e515e06e9c",
         "button.primaryTextColor": "886dd6c4d56ab2cded308a6da73ee30b4cf35efc",
         "button.primaryIconColor": "2cbff9ba6dc459d6b86d886b9c6840e4e02b9f62",
         "button.secondaryBackgroundColor": "ab490fd227d17db86522434b674569a4d8bce290",
         "button.secondaryHoverBackgroundColor": "891ba5dee1dd2a6f6681cad565bce5a50c71341a",
         "button.secondaryActiveBackgroundColor": "2456e5ca7ac9493e588f8887d6563d28dc97ec2f",
+        "button.secondaryDisabledBackgroundColor": "5d15087eea21f50977d945c8e9b6a44673f43e00",
         "button.secondaryBorderColor": "ec55a98cc4a95b5f22ac172750ec0072fd29aed4",
         "button.successBackgroundColor": "44ae632cc869f74aec79c78a04c2b1d0a47b8c17",
         "button.successHoverBackgroundColor": "8f250ac49bae90cbdbdabf5c8a72858b01a92158",
         "button.successActiveBackgroundColor": "3ee21c945715e9fe98c2327a9f497027b98e80cf",
+        "button.successDisabledBackgroundColor": "695c372846774198e00616193d288c65e7d59892",
         "button.successBorderColor": "5e67ca6801b856202d10c98321238beb70dc1aea",
         "button.successTextColor": "3bb112a184faefe1b1fcfcbae69cea0508a7043e",
         "button.destructiveBackgroundColor": "dd894912e0c2de44122c142ecfb909a2171aead4",
         "button.destructiveHoverBackgroundColor": "1b7abd7c5eba1eca2469ef5476d5c387afbc51e2",
         "button.destructiveActiveBackgroundColor": "121bb59cd034407d45335b90756e9b510faf4ac3",
+        "button.destructiveDisabledBackgroundColor": "bceb3cb09d7726960a2cd36bdc139a267ce6a11f",
         "button.destructiveBorderColor": "ecaf629d94f3be01096794303c693f4a08ca131c",
         "button.destructiveTextColor": "8bd2bcf551fa2d150102693f0c0e86bf773546b1",
         "button.aiBackgroundBottomGradientColor": "bb2afceb08ac3d2c4920c87d4d072e1f384230e1",
         "button.aiHoverBackgroundBottomGradientColor": "092223317e12a664bd02ae7951cdc7da2c86acd4",
         "button.aiActiveBackgroundBottomGradientColor": "aea36e0a23b98966f6743f6124a16ea1fc76b976",
+        "button.aiDisabledBackgroundBottomGradientColor": "d6653469c614709369444eb16f3ef8dd7d9d0809",
         "button.aiBackgroundTopGradientColor": "a151358df4f201e8062d7dda05e98d7a62997332",
         "button.aiHoverBackgroundTopGradientColor": "2fbdb539f67d9b93548a92b975e917598c85835e",
         "button.aiActiveBackgroundTopGradientColor": "2a5e5bda982f09fb30f5ffd0ae63755d4220ca5a",
