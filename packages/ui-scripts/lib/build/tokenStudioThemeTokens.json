@@ -2785,6 +2785,10 @@
         "value": "{color.stroke.interactive.primary.base}",
         "type": "color"
       },
+      "primaryDisabledBorderColor": {
+        "value": "{color.stroke.interactive.primary.disabled}",
+        "type": "color"
+      },
       "primaryTextColor": {
         "value": "{color.text.interactive.primaryOnColor.base}",
         "type": "color"
@@ -3785,6 +3789,10 @@
       },
       "aiDisabledBackgroundBottomGradientColor": {
         "value": "{color.background.interactive.ai.bottomGradient.disabled}",
+        "type": "color"
+      },
+      "primaryDisabledBorderColor": {
+        "value": "{color.stroke.interactive.primary.disabled}",
         "type": "color"
       }
     },
@@ -6555,6 +6563,7 @@
         "button.successDisabledBackgroundColor": "695c372846774198e00616193d288c65e7d59892",
         "button.destructiveDisabledBackgroundColor": "bceb3cb09d7726960a2cd36bdc139a267ce6a11f",
         "button.aiDisabledBackgroundBottomGradientColor": "d6653469c614709369444eb16f3ef8dd7d9d0809",
+        "color.stroke.interactive.primary.disabled": "466340ed7ccfc6c505ee2f1aca04b457dee32edd",
         "avatar.backgroundColor": "e1481f812d6ac0dc0620c4764ebcf323b29d38ad",
         "avatar.borderColor": "226288e9db85cf3d16bf4368b07c70aa5a18d7a3",
         "avatar.borderWidthSm": "5309df0b1654d29e763049782ece62088d064771",
@@ -7488,6 +7497,7 @@
         "color.stroke.interactive.primary.base": "795b38223df9a259f5c9aec79199d1b234b24da7",
         "color.stroke.interactive.primary.hover": "1d2d266af8fa68045555ea5d6838aa7d571a721c",
         "color.stroke.interactive.primary.active": "8184f1f1e8183394f9d12011f0ada93f74539e74",
+        "color.stroke.interactive.primary.disabled": "466340ed7ccfc6c505ee2f1aca04b457dee32edd",
         "color.stroke.interactive.secondary.base": "edddbbb5d554ed095f28a6034a484bfedd6baf13",
         "color.stroke.interactive.secondary.hover": "9cc9b8afb1eeb362644e4d4b80fd18821da03ede",
         "color.stroke.interactive.secondary.active": "e9ff33ad2fb8493a031f75a165c453d8024e6715",
@@ -7984,6 +7994,7 @@
         "color.stroke.interactive.primary.base": "795b38223df9a259f5c9aec79199d1b234b24da7",
         "color.stroke.interactive.primary.hover": "1d2d266af8fa68045555ea5d6838aa7d571a721c",
         "color.stroke.interactive.primary.active": "8184f1f1e8183394f9d12011f0ada93f74539e74",
+        "color.stroke.interactive.primary.disabled": "466340ed7ccfc6c505ee2f1aca04b457dee32edd",
         "color.stroke.interactive.secondary.base": "edddbbb5d554ed095f28a6034a484bfedd6baf13",
         "color.stroke.interactive.secondary.hover": "9cc9b8afb1eeb362644e4d4b80fd18821da03ede",
         "color.stroke.interactive.secondary.active": "e9ff33ad2fb8493a031f75a165c453d8024e6715",
