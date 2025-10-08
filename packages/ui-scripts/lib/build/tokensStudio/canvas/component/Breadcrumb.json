@@ -1,0 +1,40 @@
+{
+  "breadcrumb": {
+    "fontSizeSm": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "22px",
+      "type": "fontSizes"
+    },
+    "separatorColor": {
+      "value": "{color.icon.muted}",
+      "type": "color"
+    },
+    "fontColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "iconColor": {
+      "value": "{color.icon.base}",
+      "type": "color"
+    },
+    "gapSm": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
+    },
+    "gapMd": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "gapLg": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    }
+  }
+}
