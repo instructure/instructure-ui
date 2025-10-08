@@ -5,7 +5,7 @@ WARNING: providing the `instanceCounterMap` prop will result in unexpected behav
 DEPRECATED: the `instanceCounterMap` prop is deprecated. You don't need to supply the
 `instanceCounterMap` to the component. It handles it internally.
 
-This is utility component for wrapping components with `DeterministicIdContext.Provider`
+This utility component is for wrapping components with `DeterministicIdContext.Provider`
 See detailed documentation about how to use it: [InstUISettingsProvider](/#InstUISettingsProvider)
 
 ### Props

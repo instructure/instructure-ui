@@ -117,17 +117,22 @@
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
 - [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
-- [ApplyLocale](./ApplyLocale.md): Sets locale and timezone context for child components like TimeSelect. Enables internationalization by providing consistent localization settings throughout the component tree.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
 - [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
 - [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
 - [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
 - [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
-- [DeterministicIdContextProvider](./DeterministicIdContextProvider.md): Deprecated utility component for providing deterministic ID context. Do not use the instanceCounterMap prop. Part of InstUISettingsProvider infrastructure.
 - [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [InlineSVG](./InlineSVG.md): Renders accessible SVG content inline with support for fixed dimensions or container filling. Differentiates from SVGIcon by being suitable for non-icon SVG graphics while maintaining accessibility standards.
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
 - [TruncateList](./TruncateList.md): A utility component that truncates items when space is limited, commonly used in navigation bars. Controls visible item count and provides dropdown for hidden items with customizable spacing and menu triggers.
+
+#### contexts
+
+- [ApplyLocale](./ApplyLocale.md): Sets locale and timezone context for child components like TimeSelect. Enables internationalization by providing consistent localization settings throughout the component tree.
+- [DeterministicIdContextProvider](./DeterministicIdContextProvider.md): Deprecated utility component for providing deterministic ID context. Do not use the instanceCounterMap prop. Part of InstUISettingsProvider infrastructure.
+- [TableContext](./TableContext.md)
+- [TreeBrowserContext](./TreeBrowserContext.md)
 
 #### AI Components
 
