@@ -52,12 +52,24 @@
       "value": "{color.stroke.interactive.secondary.base}",
       "type": "color"
     },
+    "secondaryIconColor": {
+      "value": "{color.icon.interactive.secondary.base}",
+      "type": "color"
+    },
     "secondaryTextColor": {
       "value": "{color.text.interactive.secondary.active}",
       "type": "color"
     },
-    "secondaryIconColor": {
-      "value": "{color.icon.interactive.secondary.base}",
+    "secondaryDisabledTextColor": {
+      "value": "{color.text.interactive.secondary.disabled}",
+      "type": "color"
+    },
+    "secondaryDisabledIconColor": {
+      "value": "{color.icon.interactive.secondary.disabled}",
+      "type": "color"
+    },
+    "secondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.secondary.disabled}",
       "type": "color"
     },
     "successBackgroundColor": {

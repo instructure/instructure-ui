@@ -328,6 +328,10 @@
           "active": {
             "value": "{color.grey.grey80}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.grey.grey20}",
+            "type": "color"
           }
         },
         "destructive": {
@@ -474,6 +478,10 @@
           "active": {
             "value": "{color.grey.grey100}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.grey.grey50}",
+            "type": "color"
           }
         },
         "destructive": {
@@ -611,6 +619,10 @@
           },
           "active": {
             "value": "{color.grey.grey100}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.grey.grey50}",
             "type": "color"
           }
         },
