@@ -34,7 +34,7 @@ import type { AccessibleContentProps } from './props'
 
 /**
  * ---
- * category: components/utilities
+ * category: utilities/a11y
  * ---
  * This component hides its children from screenreaders, they will read the text
  * specified by the `alt` prop instead

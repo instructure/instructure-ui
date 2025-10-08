@@ -28,7 +28,7 @@ import { ApplyLocaleProps } from './props'
 
 /**
 ---
-category: components/utilities
+category: components/contexts
 ---
 **/
 export const ApplyLocale = ({

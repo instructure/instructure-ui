@@ -6,41 +6,10 @@ describes: DateInput2
 
 ### Minimal config
 
-- ```js
-  class Example extends React.Component {
-    state = { inputValue: '', dateString: '' }
-
-    render() {
-      return (
-        <div>
-          <DateInput2
-            renderLabel="Choose a date"
-            screenReaderLabels={{
-              calendarIcon: 'Calendar',
-              nextMonthButton: 'Next month',
-              prevMonthButton: 'Previous month'
-            }}
-            value={this.state.inputValue}
-            width="20rem"
-            onChange={(e, inputValue, dateString) => {
-              this.setState({ dateString, inputValue })
-            }}
-            invalidDateErrorMessage="Invalid date"
-          />
-          <p>
-            Input Value: <code>{this.state.inputValue}</code>
-            <br />
-            UTC Date String: <code>{this.state.dateString}</code>
-          </p>
-        </div>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
+```js
+---
+type: example
+---
   const Example = () => {
     const [inputValue, setInputValue] = useState('')
     const [dateString, setDateString] = useState('')
@@ -71,7 +40,7 @@ describes: DateInput2
   }
 
   render(<Example />)
-  ```
+```
 
 ### Parsing and formatting dates
 
@@ -164,46 +133,10 @@ In the examples above you can see that the `onChange` callback also return a UTC
 
 ### With year picker
 
-- ```js
-  class Example extends React.Component {
-    state = { inputValue: '', dateString: '' }
-
-    render() {
-      return (
-        <div>
-          <DateInput2
-            renderLabel="Choose a date"
-            screenReaderLabels={{
-              calendarIcon: 'Calendar',
-              nextMonthButton: 'Next month',
-              prevMonthButton: 'Previous month'
-            }}
-            value={this.state.inputValue}
-            width="20rem"
-            onChange={(e, inputValue, dateString) => {
-              this.setState({ dateString, inputValue })
-            }}
-            invalidDateErrorMessage="Invalid date"
-            withYearPicker={{
-              screenReaderLabel: 'Year picker',
-              startYear: 1900,
-              endYear: 2024
-            }}
-          />
-          <p>
-            Input Value: <code>{this.state.inputValue}</code>
-            <br />
-            UTC Date String: <code>{this.state.dateString}</code>
-          </p>
-        </div>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
+```js
+---
+type: example
+---
   const Example = () => {
     const [inputValue, setInputValue] = useState('')
     const [dateString, setDateString] = useState('')
@@ -239,7 +172,7 @@ In the examples above you can see that the `onChange` callback also return a UTC
   }
 
   render(<Example />)
-  ```
+```
 
 ### Date validation
 

@@ -8,7 +8,7 @@ order: 1
 
 ## InstUI and React
 
-> React 16 support was dropped with InstUI 11. Please upgrade to React 18 before upgrading to InstUI v11!
+> React 16 and 17 support was dropped with InstUI 11. Please upgrade to React 18 before upgrading to InstUI v11!
 
 ### React 19
 

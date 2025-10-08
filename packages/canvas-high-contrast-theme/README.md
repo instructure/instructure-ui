@@ -20,16 +20,16 @@ Before mounting (rendering) your React application:
 
 - application level theming:
 
-  ```jsx
-  import { theme } from '@instructure/canvas-high-contrast-theme'
+```jsx
+import { theme } from '@instructure/canvas-high-contrast-theme'
 
-  ReactDOM.render(
-    <InstUISettingsProvider theme={theme}>
-      <App />
-    </InstUISettingsProvider>,
-    element
-  )
-  ```
+ReactDOM.render(
+  <InstUISettingsProvider theme={theme}>
+    <App />
+  </InstUISettingsProvider>,
+  element
+)
+```
 
 To override the variables:
 
