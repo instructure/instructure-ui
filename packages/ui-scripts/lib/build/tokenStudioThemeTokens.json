@@ -737,10 +737,6 @@
         "value": "0.1875rem",
         "type": "dimension"
       }
-    },
-    "underline": {
-      "value": "underline",
-      "type": "textDecoration"
     }
   },
   "canvas/semantic/layout/default": {
@@ -759,32 +755,6 @@
             "value": "{size.size48}",
             "type": "sizing"
           }
-        }
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size12}",
-          "type": "sizing"
-        },
-        "sm": {
-          "value": "{size.size16}",
-          "type": "sizing"
-        },
-        "md": {
-          "value": "{size.size20}",
-          "type": "sizing"
-        },
-        "lg": {
-          "value": "{size.size24}",
-          "type": "sizing"
-        },
-        "xl": {
-          "value": "{size.size32}",
-          "type": "sizing"
-        },
-        "xxl": {
-          "value": "{size.size36}",
-          "type": "sizing"
         }
       }
     },
@@ -932,32 +902,6 @@
       "lg": {
         "value": "{size.size4}",
         "type": "borderWidth"
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size1}",
-          "type": "borderWidth"
-        },
-        "sm": {
-          "value": "{additionalSize.size1_25}",
-          "type": "borderWidth"
-        },
-        "md": {
-          "value": "{additionalSize.size1_5}",
-          "type": "borderWidth"
-        },
-        "lg": {
-          "value": "{size.size2}",
-          "type": "borderWidth"
-        },
-        "xl": {
-          "value": "{additionalSize.size2_5}",
-          "type": "borderWidth"
-        },
-        "xxl": {
-          "value": "{additionalSize.size3}",
-          "type": "borderWidth"
-        }
       },
       "interactive": {
         "base": {
@@ -2867,6 +2811,110 @@
       }
     }
   },
+  "canvas/component/Icon": {
+    "icon": {
+      "sizeXs": {
+        "value": "0.75rem",
+        "type": "sizing"
+      },
+      "sizeSm": {
+        "value": "1rem",
+        "type": "sizing"
+      },
+      "sizeMd": {
+        "value": "1.25rem",
+        "type": "sizing"
+      },
+      "sizeLg": {
+        "value": "1.5rem",
+        "type": "sizing"
+      },
+      "sizeXl": {
+        "value": "2rem",
+        "type": "sizing"
+      },
+      "size2xl": {
+        "value": "2.25rem",
+        "type": "sizing"
+      },
+      "strokeWidthXs": {
+        "value": "0.0625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthSm": {
+        "value": "0.078125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthMd": {
+        "value": "0.09375rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthLg": {
+        "value": "0.125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthXl": {
+        "value": "0.15625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidth2xl": {
+        "value": "0.1875rem",
+        "type": "borderWidth"
+      },
+      "baseColor": {
+        "value": "{color.icon.base}",
+        "type": "color"
+      },
+      "mutedColor": {
+        "value": "{color.icon.muted}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.icon.success}",
+        "type": "color"
+      },
+      "errorColor": {
+        "value": "{color.icon.error}",
+        "type": "color"
+      },
+      "warningColor": {
+        "value": "{color.icon.warning}",
+        "type": "color"
+      },
+      "infoColor": {
+        "value": "{color.icon.info}",
+        "type": "color"
+      },
+      "onColor": {
+        "value": "{color.icon.onColor}",
+        "type": "color"
+      },
+      "accent1Color": {
+        "value": "{color.icon.accent.color1}",
+        "type": "color"
+      },
+      "accent2Color": {
+        "value": "{color.icon.accent.color2}",
+        "type": "color"
+      },
+      "accent3Color": {
+        "value": "{color.icon.accent.color3}",
+        "type": "color"
+      },
+      "accent4Color": {
+        "value": "{color.icon.accent.color4}",
+        "type": "color"
+      },
+      "accent5Color": {
+        "value": "{color.icon.accent.color5}",
+        "type": "color"
+      },
+      "accent6Color": {
+        "value": "{color.icon.accent.color6}",
+        "type": "color"
+      }
+    }
+  },
   "canvas/component/Link": {
     "link": {
       "textColor": {
@@ -3675,6 +3723,110 @@
       }
     }
   },
+  "rebrand/component/Icon": {
+    "icon": {
+      "sizeXs": {
+        "value": "0.75rem",
+        "type": "sizing"
+      },
+      "sizeSm": {
+        "value": "1rem",
+        "type": "sizing"
+      },
+      "sizeMd": {
+        "value": "1.25rem",
+        "type": "sizing"
+      },
+      "sizeLg": {
+        "value": "1.5rem",
+        "type": "sizing"
+      },
+      "sizeXl": {
+        "value": "2rem",
+        "type": "sizing"
+      },
+      "size2xl": {
+        "value": "2.25rem",
+        "type": "sizing"
+      },
+      "strokeWidthXs": {
+        "value": "0.0625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthSm": {
+        "value": "0.078125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthMd": {
+        "value": "0.09375rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthLg": {
+        "value": "0.125rem",
+        "type": "borderWidth"
+      },
+      "strokeWidthXl": {
+        "value": "0.15625rem",
+        "type": "borderWidth"
+      },
+      "strokeWidth2xl": {
+        "value": "0.1875rem",
+        "type": "borderWidth"
+      },
+      "baseColor": {
+        "value": "{color.icon.base}",
+        "type": "color"
+      },
+      "mutedColor": {
+        "value": "{color.icon.muted}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.icon.success}",
+        "type": "color"
+      },
+      "errorColor": {
+        "value": "{color.icon.error}",
+        "type": "color"
+      },
+      "warningColor": {
+        "value": "{color.icon.warning}",
+        "type": "color"
+      },
+      "infoColor": {
+        "value": "{color.icon.info}",
+        "type": "color"
+      },
+      "onColor": {
+        "value": "{color.icon.onColor}",
+        "type": "color"
+      },
+      "accent1Color": {
+        "value": "{color.icon.accent.color1}",
+        "type": "color"
+      },
+      "accent2Color": {
+        "value": "{color.icon.accent.color2}",
+        "type": "color"
+      },
+      "accent3Color": {
+        "value": "{color.icon.accent.color3}",
+        "type": "color"
+      },
+      "accent4Color": {
+        "value": "{color.icon.accent.color4}",
+        "type": "color"
+      },
+      "accent5Color": {
+        "value": "{color.icon.accent.color5}",
+        "type": "color"
+      },
+      "accent6Color": {
+        "value": "{color.icon.accent.color6}",
+        "type": "color"
+      }
+    }
+  },
   "rebrand/component/Link": {
     "link": {
       "textColor": {
@@ -3776,7 +3928,7 @@
             "fontWeight": "{fontWeight.body.strong}",
             "fontSize": "{fontSize.textSm}",
             "lineHeight": "{lineHeight.standalone.textSm}",
-            "textDecoration": "{underline}"
+            "textDecoration": "underline"
           },
           "type": "typography"
         },
@@ -3786,7 +3938,7 @@
             "fontWeight": "{fontWeight.body.strong}",
             "fontSize": "{fontSize.textBase}",
             "lineHeight": "{lineHeight.paragraph.textBase}",
-            "textDecoration": "{underline}"
+            "textDecoration": "underline"
           },
           "type": "typography"
         },
@@ -3796,7 +3948,7 @@
             "fontWeight": "{fontWeight.body.strong}",
             "fontSize": "{fontSize.textXl}",
             "lineHeight": "{lineHeight.standalone.textXl}",
-            "textDecoration": "{underline}"
+            "textDecoration": "underline"
           },
           "type": "typography"
         }
@@ -4162,32 +4314,6 @@
             "type": "sizing"
           }
         }
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size12}",
-          "type": "sizing"
-        },
-        "sm": {
-          "value": "{size.size16}",
-          "type": "sizing"
-        },
-        "md": {
-          "value": "{size.size20}",
-          "type": "sizing"
-        },
-        "lg": {
-          "value": "{size.size24}",
-          "type": "sizing"
-        },
-        "xl": {
-          "value": "{size.size32}",
-          "type": "sizing"
-        },
-        "xxl": {
-          "value": "{size.size36}",
-          "type": "sizing"
-        }
       }
     },
     "spacing": {
@@ -4334,32 +4460,6 @@
       "lg": {
         "value": "{size.size4}",
         "type": "borderWidth"
-      },
-      "icon": {
-        "xs": {
-          "value": "{size.size1}",
-          "type": "borderWidth"
-        },
-        "sm": {
-          "value": "{additionalSize.size1_25}",
-          "type": "borderWidth"
-        },
-        "md": {
-          "value": "{additionalSize.size1_5}",
-          "type": "borderWidth"
-        },
-        "lg": {
-          "value": "{size.size2}",
-          "type": "borderWidth"
-        },
-        "xl": {
-          "value": "{additionalSize.size2_5}",
-          "type": "borderWidth"
-        },
-        "xxl": {
-          "value": "{additionalSize.size3}",
-          "type": "borderWidth"
-        }
       },
       "interactive": {
         "base": {
@@ -5948,7 +6048,8 @@
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
         "canvas/component/TextInput": "enabled",
-        "canvas/component/FormField": "enabled"
+        "canvas/component/FormField": "enabled",
+        "canvas/component/Icon": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -6160,12 +6261,12 @@
         "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formField.gapFormFieldPrimitives": "2dc0c1193037d6722acf7cfde83e552602712b22",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
         "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
         "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
         "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
-        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -6176,6 +6277,31 @@
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
         "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
+        "icon.sizeXs": "a9fcd361af3c2147f3e2ad8a8c4d3f3dca6a4f71",
+        "icon.sizeSm": "045e91a6cf0479936a9bcb2f617a87f25694b98b",
+        "icon.sizeMd": "ad9980d7968fbdf91c81d1a1f8e8f737ab7d6b3a",
+        "icon.sizeLg": "0bc060791b8f75fe212879d9c7dd142f397ff276",
+        "icon.sizeXl": "165c1a35e00a73047257e16dbb2675b882ddf2cf",
+        "icon.size2xl": "227fb3b74d623e63139888473aae7099ecf81f8a",
+        "icon.strokeWidthXs": "135a44187c9dafb7ccad74b1359a3d90660a0ea0",
+        "icon.strokeWidthSm": "af06288bccb524ff88c3a98fb64b9b4be2188e66",
+        "icon.strokeWidthMd": "aad179c1c22bbe2b195078f9ab91e6a43e83219b",
+        "icon.strokeWidthLg": "579487696fe8ea158e5da7a5ad69b4e40a944272",
+        "icon.strokeWidthXl": "47cbba2c181430d50cc8b12d8b21bffbe1247cca",
+        "icon.strokeWidth2xl": "8d7785ea7ad169081f77b37e723e3c2f80556ee5",
+        "icon.baseColor": "e79a5d0fa396721adbcca3b0fcffc8ea9dba39ee",
+        "icon.mutedColor": "8ebba0d9ad39deede5da4bd911a413f09f7007ac",
+        "icon.successColor": "f5551eb7215978a95ce7cf005c69cad070a4151f",
+        "icon.errorColor": "24280e616d936bbacd7a0012aa91f518c9417b09",
+        "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
+        "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
+        "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -6282,12 +6408,6 @@
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
         "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
-        "size.icon.xs": "6b704e28766df1644e634f03993ed7290e923fbf",
-        "size.icon.sm": "e1fccfe117ca16db009840098f280a9a116b0c25",
-        "size.icon.md": "320d16815c2e8c09382d1ba23a40a831f161d706",
-        "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
-        "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
-        "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
         "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
@@ -6319,12 +6439,6 @@
         "borderWidth.sm": "e2a0abf7ef65839a45aeab576f1752d44a5e1a21",
         "borderWidth.md": "4ba6d97438b2b0ed73980f651385ba24570532c6",
         "borderWidth.lg": "40d392e299c124e18ce5a0aa99af3940a3e1c2ba",
-        "borderWidth.icon.xs": "2853bc9b49ce468543b349a213dbc699cf3c7c73",
-        "borderWidth.icon.sm": "21d92f605f034e29003704ec993aac7e50da777c",
-        "borderWidth.icon.md": "f9b444aa1e75fbd1258d41966a94338d6e5bcb9e",
-        "borderWidth.icon.lg": "89ec4429a0881d4019565602759c256520da99d6",
-        "borderWidth.icon.xl": "ed655bcd65b0f92263f8d9be5d45e52fa89108f1",
-        "borderWidth.icon.xxl": "badb16d65aa13711b79ff70277f996154e3bd183",
         "borderWidth.interactive.base": "10f33e7136928fb01bee92552d5a2053bfb36c47",
         "borderWidth.interactive.focus": "96619724bfee86780992d08589bc9bf45f5daf91",
         "fontFamily.heading": "9a9bc1bea9e9d0a1d92ebae2a0f82bad65896d87",
@@ -6381,7 +6495,8 @@
         "canvas/component/Spinner": "enabled",
         "canvas/component/Link": "enabled",
         "canvas/component/TextInput": "enabled",
-        "canvas/component/FormField": "enabled"
+        "canvas/component/FormField": "enabled",
+        "canvas/component/Icon": "enabled"
       },
       "$figmaStyleReferences": {
         "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -6612,12 +6727,12 @@
         "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formField.gapFormFieldPrimitives": "2dc0c1193037d6722acf7cfde83e552602712b22",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
         "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
         "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
         "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
-        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -6628,6 +6743,31 @@
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
         "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
+        "icon.sizeXs": "a9fcd361af3c2147f3e2ad8a8c4d3f3dca6a4f71",
+        "icon.sizeSm": "045e91a6cf0479936a9bcb2f617a87f25694b98b",
+        "icon.sizeMd": "ad9980d7968fbdf91c81d1a1f8e8f737ab7d6b3a",
+        "icon.sizeLg": "0bc060791b8f75fe212879d9c7dd142f397ff276",
+        "icon.sizeXl": "165c1a35e00a73047257e16dbb2675b882ddf2cf",
+        "icon.size2xl": "227fb3b74d623e63139888473aae7099ecf81f8a",
+        "icon.strokeWidthXs": "135a44187c9dafb7ccad74b1359a3d90660a0ea0",
+        "icon.strokeWidthSm": "af06288bccb524ff88c3a98fb64b9b4be2188e66",
+        "icon.strokeWidthMd": "aad179c1c22bbe2b195078f9ab91e6a43e83219b",
+        "icon.strokeWidthLg": "579487696fe8ea158e5da7a5ad69b4e40a944272",
+        "icon.strokeWidthXl": "47cbba2c181430d50cc8b12d8b21bffbe1247cca",
+        "icon.strokeWidth2xl": "8d7785ea7ad169081f77b37e723e3c2f80556ee5",
+        "icon.baseColor": "e79a5d0fa396721adbcca3b0fcffc8ea9dba39ee",
+        "icon.mutedColor": "8ebba0d9ad39deede5da4bd911a413f09f7007ac",
+        "icon.successColor": "f5551eb7215978a95ce7cf005c69cad070a4151f",
+        "icon.errorColor": "24280e616d936bbacd7a0012aa91f518c9417b09",
+        "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
+        "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
+        "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -6734,12 +6874,6 @@
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
         "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
-        "size.icon.xs": "6b704e28766df1644e634f03993ed7290e923fbf",
-        "size.icon.sm": "e1fccfe117ca16db009840098f280a9a116b0c25",
-        "size.icon.md": "320d16815c2e8c09382d1ba23a40a831f161d706",
-        "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
-        "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
-        "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
         "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
@@ -6771,12 +6905,6 @@
         "borderWidth.sm": "e2a0abf7ef65839a45aeab576f1752d44a5e1a21",
         "borderWidth.md": "4ba6d97438b2b0ed73980f651385ba24570532c6",
         "borderWidth.lg": "40d392e299c124e18ce5a0aa99af3940a3e1c2ba",
-        "borderWidth.icon.xs": "2853bc9b49ce468543b349a213dbc699cf3c7c73",
-        "borderWidth.icon.sm": "21d92f605f034e29003704ec993aac7e50da777c",
-        "borderWidth.icon.md": "f9b444aa1e75fbd1258d41966a94338d6e5bcb9e",
-        "borderWidth.icon.lg": "89ec4429a0881d4019565602759c256520da99d6",
-        "borderWidth.icon.xl": "ed655bcd65b0f92263f8d9be5d45e52fa89108f1",
-        "borderWidth.icon.xxl": "badb16d65aa13711b79ff70277f996154e3bd183",
         "borderWidth.interactive.base": "10f33e7136928fb01bee92552d5a2053bfb36c47",
         "borderWidth.interactive.focus": "96619724bfee86780992d08589bc9bf45f5daf91",
         "fontFamily.heading": "9a9bc1bea9e9d0a1d92ebae2a0f82bad65896d87",
@@ -6833,7 +6961,8 @@
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
         "rebrand/component/TextInput": "enabled",
-        "rebrand/component/FormField": "enabled"
+        "rebrand/component/FormField": "enabled",
+        "rebrand/component/Icon": "enabled"
       },
       "$figmaStyleReferences": {
         "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -6845,12 +6974,6 @@
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
         "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
-        "size.icon.xs": "6b704e28766df1644e634f03993ed7290e923fbf",
-        "size.icon.sm": "e1fccfe117ca16db009840098f280a9a116b0c25",
-        "size.icon.md": "320d16815c2e8c09382d1ba23a40a831f161d706",
-        "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
-        "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
-        "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
         "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
@@ -6882,12 +7005,6 @@
         "borderWidth.sm": "e2a0abf7ef65839a45aeab576f1752d44a5e1a21",
         "borderWidth.md": "4ba6d97438b2b0ed73980f651385ba24570532c6",
         "borderWidth.lg": "40d392e299c124e18ce5a0aa99af3940a3e1c2ba",
-        "borderWidth.icon.xs": "2853bc9b49ce468543b349a213dbc699cf3c7c73",
-        "borderWidth.icon.sm": "21d92f605f034e29003704ec993aac7e50da777c",
-        "borderWidth.icon.md": "f9b444aa1e75fbd1258d41966a94338d6e5bcb9e",
-        "borderWidth.icon.lg": "89ec4429a0881d4019565602759c256520da99d6",
-        "borderWidth.icon.xl": "ed655bcd65b0f92263f8d9be5d45e52fa89108f1",
-        "borderWidth.icon.xxl": "badb16d65aa13711b79ff70277f996154e3bd183",
         "borderWidth.interactive.base": "10f33e7136928fb01bee92552d5a2053bfb36c47",
         "borderWidth.interactive.focus": "96619724bfee86780992d08589bc9bf45f5daf91",
         "fontFamily.heading": "9a9bc1bea9e9d0a1d92ebae2a0f82bad65896d87",
@@ -7124,12 +7241,12 @@
         "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formField.gapFormFieldPrimitives": "2dc0c1193037d6722acf7cfde83e552602712b22",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
         "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
         "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
         "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
-        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -7140,6 +7257,31 @@
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
         "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
+        "icon.sizeXs": "a9fcd361af3c2147f3e2ad8a8c4d3f3dca6a4f71",
+        "icon.sizeSm": "045e91a6cf0479936a9bcb2f617a87f25694b98b",
+        "icon.sizeMd": "ad9980d7968fbdf91c81d1a1f8e8f737ab7d6b3a",
+        "icon.sizeLg": "0bc060791b8f75fe212879d9c7dd142f397ff276",
+        "icon.sizeXl": "165c1a35e00a73047257e16dbb2675b882ddf2cf",
+        "icon.size2xl": "227fb3b74d623e63139888473aae7099ecf81f8a",
+        "icon.strokeWidthXs": "135a44187c9dafb7ccad74b1359a3d90660a0ea0",
+        "icon.strokeWidthSm": "af06288bccb524ff88c3a98fb64b9b4be2188e66",
+        "icon.strokeWidthMd": "aad179c1c22bbe2b195078f9ab91e6a43e83219b",
+        "icon.strokeWidthLg": "579487696fe8ea158e5da7a5ad69b4e40a944272",
+        "icon.strokeWidthXl": "47cbba2c181430d50cc8b12d8b21bffbe1247cca",
+        "icon.strokeWidth2xl": "8d7785ea7ad169081f77b37e723e3c2f80556ee5",
+        "icon.baseColor": "e79a5d0fa396721adbcca3b0fcffc8ea9dba39ee",
+        "icon.mutedColor": "8ebba0d9ad39deede5da4bd911a413f09f7007ac",
+        "icon.successColor": "f5551eb7215978a95ce7cf005c69cad070a4151f",
+        "icon.errorColor": "24280e616d936bbacd7a0012aa91f518c9417b09",
+        "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
+        "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
+        "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -7264,7 +7406,8 @@
         "rebrand/component/Spinner": "enabled",
         "rebrand/component/Link": "enabled",
         "rebrand/component/TextInput": "enabled",
-        "rebrand/component/FormField": "enabled"
+        "rebrand/component/FormField": "enabled",
+        "rebrand/component/Icon": "enabled"
       },
       "$figmaStyleReferences": {
         "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -7295,12 +7438,6 @@
         "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
         "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
         "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
-        "size.icon.xs": "6b704e28766df1644e634f03993ed7290e923fbf",
-        "size.icon.sm": "e1fccfe117ca16db009840098f280a9a116b0c25",
-        "size.icon.md": "320d16815c2e8c09382d1ba23a40a831f161d706",
-        "size.icon.lg": "bab6d98127535fde176e99103369a5a0e9922f58",
-        "size.icon.xl": "f1a065a04b87a4358933c688a6f2ceba8528a5b9",
-        "size.icon.xxl": "a5ff4002ebfb8ac66134346829402f19b6f7dc02",
         "spacing.space2xs": "dc7565dcc694ad7360dd70f94e9873f0bf626bc6",
         "spacing.spaceXs": "b93d5b7b817ca056f3f37c0a06c76b50c2d7ebe4",
         "spacing.spaceSm": "d8f987a25e95dbe673c2e1bdc253321e4084ce4d",
@@ -7332,12 +7469,6 @@
         "borderWidth.sm": "e2a0abf7ef65839a45aeab576f1752d44a5e1a21",
         "borderWidth.md": "4ba6d97438b2b0ed73980f651385ba24570532c6",
         "borderWidth.lg": "40d392e299c124e18ce5a0aa99af3940a3e1c2ba",
-        "borderWidth.icon.xs": "2853bc9b49ce468543b349a213dbc699cf3c7c73",
-        "borderWidth.icon.sm": "21d92f605f034e29003704ec993aac7e50da777c",
-        "borderWidth.icon.md": "f9b444aa1e75fbd1258d41966a94338d6e5bcb9e",
-        "borderWidth.icon.lg": "89ec4429a0881d4019565602759c256520da99d6",
-        "borderWidth.icon.xl": "ed655bcd65b0f92263f8d9be5d45e52fa89108f1",
-        "borderWidth.icon.xxl": "badb16d65aa13711b79ff70277f996154e3bd183",
         "borderWidth.interactive.base": "10f33e7136928fb01bee92552d5a2053bfb36c47",
         "borderWidth.interactive.focus": "96619724bfee86780992d08589bc9bf45f5daf91",
         "fontFamily.heading": "9a9bc1bea9e9d0a1d92ebae2a0f82bad65896d87",
@@ -7574,12 +7705,12 @@
         "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
         "formField.gapFormFieldPrimitives": "2dc0c1193037d6722acf7cfde83e552602712b22",
         "formFieldLabel.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
+        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldLabel.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
         "formFieldLabel.fontFamily": "a016a1b12bb343bf5c984a1aa984c424e4b17801",
         "formFieldLabel.fontWeight": "4f71b8bba5e1f669fbdbc847b7f9c11cb0ecb669",
         "formFieldLabel.fontSize": "5214f88c62d3391b073a0ea84e692012e0886358",
         "formFieldLabel.lineHeight": "ae5fb66212715de00bd9904f7d178e03342d018d",
-        "formFieldLabel.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
         "formFieldMessage.hintTextColor": "376aca078b03f6abf41cb4e946710858da2d721d",
         "formFieldMessage.errorTextColor": "663a0f658d742868513126254e17ba76d466cd0c",
         "formFieldMessage.errorIconColor": "67536b51fc56bc7efb11aed8f70c605d781caff1",
@@ -7590,6 +7721,31 @@
         "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
         "formFieldMessage.errorIconMarginRight": "20582360058260e955d137eab464cb626a10e1d3",
         "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
+        "icon.sizeXs": "a9fcd361af3c2147f3e2ad8a8c4d3f3dca6a4f71",
+        "icon.sizeSm": "045e91a6cf0479936a9bcb2f617a87f25694b98b",
+        "icon.sizeMd": "ad9980d7968fbdf91c81d1a1f8e8f737ab7d6b3a",
+        "icon.sizeLg": "0bc060791b8f75fe212879d9c7dd142f397ff276",
+        "icon.sizeXl": "165c1a35e00a73047257e16dbb2675b882ddf2cf",
+        "icon.size2xl": "227fb3b74d623e63139888473aae7099ecf81f8a",
+        "icon.strokeWidthXs": "135a44187c9dafb7ccad74b1359a3d90660a0ea0",
+        "icon.strokeWidthSm": "af06288bccb524ff88c3a98fb64b9b4be2188e66",
+        "icon.strokeWidthMd": "aad179c1c22bbe2b195078f9ab91e6a43e83219b",
+        "icon.strokeWidthLg": "579487696fe8ea158e5da7a5ad69b4e40a944272",
+        "icon.strokeWidthXl": "47cbba2c181430d50cc8b12d8b21bffbe1247cca",
+        "icon.strokeWidth2xl": "8d7785ea7ad169081f77b37e723e3c2f80556ee5",
+        "icon.baseColor": "e79a5d0fa396721adbcca3b0fcffc8ea9dba39ee",
+        "icon.mutedColor": "8ebba0d9ad39deede5da4bd911a413f09f7007ac",
+        "icon.successColor": "f5551eb7215978a95ce7cf005c69cad070a4151f",
+        "icon.errorColor": "24280e616d936bbacd7a0012aa91f518c9417b09",
+        "icon.warningColor": "9431d87e7c1a2de242940acbb3e86eed4fc19a85",
+        "icon.infoColor": "a29094507bfa64d50286c4d798d9c967c29b7b83",
+        "icon.onColor": "ebcb35468898423797a3f1bc6f7844b96085f23d",
+        "icon.accent1Color": "29d641b7a5f80c122f0cb6a7909b30ac3a51d092",
+        "icon.accent2Color": "20cda186a9c3404f7f1bc340767e1f6a3a95222f",
+        "icon.accent3Color": "274ab5926001fff6d3cb5b588362e7cfa847a847",
+        "icon.accent4Color": "5fde459e11831c5e1dc77ada867eb9b12c9d4fc6",
+        "icon.accent5Color": "cb96de96b9d105472a2da820cf1440f941d3b7ca",
+        "icon.accent6Color": "d42a0ef0b94f9025f923ee6547f77f03bc802e44",
         "link.textColor": "26c93638c45b1403ffc7d89c80f79a53f9651f33",
         "link.textHoverColor": "0837e1781f9ba8170f374d01ce94c4792f487af1",
         "link.textDisabledColor": "644ab51cc6cff8a9ab18fd1c989542463507a28e",
@@ -7710,6 +7866,7 @@
       "canvas/component/FormField",
       "canvas/component/FormFieldLabel",
       "canvas/component/FormFieldMessage",
+      "canvas/component/Icon",
       "canvas/component/Link",
       "canvas/component/Metric",
       "canvas/component/Pill",
@@ -7720,6 +7877,7 @@
       "rebrand/component/FormField",
       "rebrand/component/FormFieldLabel",
       "rebrand/component/FormFieldMessage",
+      "rebrand/component/Icon",
       "rebrand/component/Link",
       "rebrand/component/Metric",
       "rebrand/component/Pill",

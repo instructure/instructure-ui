@@ -1,0 +1,44 @@
+{
+  "formFieldMessage": {
+    "hintTextColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "errorTextColor": {
+      "value": "{color.text.error}",
+      "type": "color"
+    },
+    "errorIconColor": {
+      "value": "{color.icon.error}",
+      "type": "color"
+    },
+    "successTextColor": {
+      "value": "{color.text.success}",
+      "type": "color"
+    },
+    "successIconColor": {
+      "value": "{color.icon.success}",
+      "type": "color"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "errorIconMarginRight": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    }
+  }
+}
