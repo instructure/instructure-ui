@@ -1,0 +1,187 @@
+{
+  "avatar": {
+    "backgroundColor": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderWidthSm": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderWidthMd": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "boxShadow": {
+      "value": {
+        "x": "0",
+        "y": "0",
+        "blur": "1rem",
+        "spread": "0",
+        "color": "rgba(45,59,69,0.12)",
+        "type": "innerShadow"
+      },
+      "type": "boxShadow",
+      "color": {
+        "value": "rgba(45,59,69,0.12)",
+        "type": "color"
+      }
+    },
+    "fontWeight": {
+      "value": "{fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "accent1BackgroundColor": {
+      "value": "{color.background.accent.color1}",
+      "type": "color"
+    },
+    "accent1IconColor": {
+      "value": "{color.icon.accent.color1}",
+      "type": "color"
+    },
+    "accent1TextColor": {
+      "value": "{color.text.accent.color1}",
+      "type": "color"
+    },
+    "accent2BackgroundColor": {
+      "value": "{color.background.accent.color2}",
+      "type": "color"
+    },
+    "accent2IconColor": {
+      "value": "{color.icon.accent.color2}",
+      "type": "color"
+    },
+    "accent2TextColor": {
+      "value": "{color.text.accent.color2}",
+      "type": "color"
+    },
+    "accent3BackgroundColor": {
+      "value": "{color.background.accent.color3}",
+      "type": "color"
+    },
+    "accent3IconColor": {
+      "value": "{color.icon.accent.color3}",
+      "type": "color"
+    },
+    "accent3TextColor": {
+      "value": "{color.text.accent.color3}",
+      "type": "color"
+    },
+    "accent4BackgroundColor": {
+      "value": "{color.background.accent.color4}",
+      "type": "color"
+    },
+    "accent4IconColor": {
+      "value": "{color.icon.accent.color4}",
+      "type": "color"
+    },
+    "accent4TextColor": {
+      "value": "{color.text.accent.color4}",
+      "type": "color"
+    },
+    "accent5BackgroundColor": {
+      "value": "{color.background.accent.color5}",
+      "type": "color"
+    },
+    "accent5IconColor": {
+      "value": "{color.icon.accent.color5}",
+      "type": "color"
+    },
+    "accent5TextColor": {
+      "value": "{color.text.accent.color5}",
+      "type": "color"
+    },
+    "accent6BackgroundColor": {
+      "value": "{color.background.accent.color6}",
+      "type": "color"
+    },
+    "accent6IconColor": {
+      "value": "{color.icon.accent.color6}",
+      "type": "color"
+    },
+    "accent6TextColor": {
+      "value": "{color.text.accent.color6}",
+      "type": "color"
+    },
+    "aiBottomGradientColor": {
+      "value": "{color.background.aiBottomGradient}",
+      "type": "color"
+    },
+    "aiTopGradientColor": {
+      "value": "{color.background.aiTopGradient}",
+      "type": "color"
+    },
+    "iconOnColor": {
+      "value": "{color.icon.onColor}",
+      "type": "color"
+    },
+    "textOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "size2xs": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "sizeXs": {
+      "value": "2rem",
+      "type": "sizing"
+    },
+    "sizeSm": {
+      "value": "2.5rem",
+      "type": "sizing"
+    },
+    "sizeMd": {
+      "value": "3rem",
+      "type": "sizing"
+    },
+    "sizeLg": {
+      "value": "3.5rem",
+      "type": "sizing"
+    },
+    "sizeXl": {
+      "value": "4rem",
+      "type": "sizing"
+    },
+    "size2xl": {
+      "value": "5rem",
+      "type": "sizing"
+    },
+    "fontSize2xs": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontSizeXs": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontSizeSm": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeMd": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLg": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "fontSizeXl": {
+      "value": "{fontSize.textXl}",
+      "type": "fontSizes"
+    },
+    "fontSize2xl": {
+      "value": "{fontSize.text2xl}",
+      "type": "fontSizes"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    }
+  }
+}
