@@ -40,6 +40,13 @@ import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
 
+type CodeData = {
+  code: string
+  language?: string
+  title: string
+  readOnly?: boolean
+}
+
 function trimIndent(str: string) {
   const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split(
     '\n'
@@ -149,7 +156,7 @@ const headingVariants: Record<
   )
 }
 
-const getComponent = (componentType: string, data: Record<string, any>) => {
+const getComponent = (componentType: string, data: CodeData) => {
   const { code, title, readOnly = undefined } = data
   if (componentType === 'Playground') {
     return <Playground title={title} code={code} readOnly={readOnly} />
@@ -186,10 +193,10 @@ const inferTypeAndLanguage = ({
   return { language, type }
 }
 
-const renderer = (title?: string) => ({
-  table: (table: ReactElement<any>[]) => {
+const renderer = (title: string) => ({
+  table: (table: ReactElement[]) => {
     const headCells = table?.[0]?.props?.children?.props?.children?.map(
-      (el: ReactElement<any>) => el?.props?.children?.[0]
+      (el: ReactElement) => el?.props?.children?.[0]
     )
     const body = table?.[1]?.props?.children
 
@@ -205,9 +212,9 @@ const renderer = (title?: string) => ({
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {body.map((tr: ReactElement<any>) => (
+          {body.map((tr: ReactElement) => (
             <Table.Row key={uuid()}>
-              {tr?.props?.children?.map((td: ReactElement<any>) => (
+              {tr?.props?.children?.map((td: ReactElement) => (
                 <Table.Cell key={uuid()}>
                   {td?.props?.children?.map((child: ReactElement) => child)}
                 </Table.Cell>
@@ -221,26 +228,7 @@ const renderer = (title?: string) => ({
   image: (href: string, title: string) => (
     <Img key={uuid()} src={href} alt={title} />
   ),
-  list: (list: ReactElement<any>[], ordered: boolean) => {
-    if (list[0].props.children[0][0].type === 'code') {
-      const code1 = list?.[0]?.props?.children?.[0]?.[0]?.props?.children
-      const code2 = list?.[1]?.props?.children?.[0]?.[0]?.props?.children
-      const matter = [
-        grayMatter(trimIndent(code1)),
-        grayMatter(trimIndent(code2))
-      ]
-
-      const data = {
-        code: [matter[0].content, matter[1].content],
-        language: 'js',
-        title
-      }
-      return (
-        <View key={uuid()} display="block" margin="medium none">
-          {getComponent('Playground', data)}
-        </View>
-      )
-    }
+  list: (list: ReactElement[], ordered: boolean) => {
     return ordered ? <ol key={uuid()}>{list}</ol> : <ul key={uuid()}>{list}</ul>
   },
   code: (code: string, rawLanguage: string) => {
@@ -291,7 +279,7 @@ const renderer = (title?: string) => ({
 })
 
 function compileMarkdown(content: string, title?: string) {
-  return <Markdown renderer={renderer(title)}>{content}</Markdown>
+  return <Markdown renderer={renderer(title ?? 'Untitled')}>{content}</Markdown>
 }
 
 export default compileMarkdown

@@ -35,7 +35,7 @@ import type { ScreenReaderContentProps } from './props'
 
 /**
 ---
-category: components/utilities
+category: utilities/a11y
 ---
 @module ScreenReaderContent
 **/

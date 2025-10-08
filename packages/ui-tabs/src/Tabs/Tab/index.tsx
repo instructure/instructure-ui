@@ -38,7 +38,8 @@ import { allowedProps } from './props'
 
 /**
 ---
-category: components/utilities
+parent: Tabs
+id: Tabs.Tab
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)

@@ -26,42 +26,31 @@ The Mask component can be configured to cover the full screen if it is rendered 
 ---
 type: example
 ---
+const Example = () => {
+  const [open, setOpen] = useState(false)
 
- class Example extends React.Component {
-   constructor (props) {
-     super(props)
+  const handleButtonClick = () => {
+    setOpen(!open)
+  }
 
-     this.state = {
-       open: false
-     }
-   }
+  return (
+    <div>
+      <Button onClick={handleButtonClick}>
+        {open ? 'Close' : 'Open'} the Mask
+      </Button>
+      <Portal open={open}>
+        <Mask
+          fullscreen
+          onClick={() => {
+            setOpen(false)
+          }}
+        >
+          <Heading>Click anywhere around this text to close the Mask</Heading>
+        </Mask>
+      </Portal>
+    </div>
+  )
+}
 
-   handleButtonClick = () => {
-     this.setState(function (state) {
-       return { open: !state.open }
-     })
-   };
-
-   render () {
-     return (
-       <div>
-         <Button onClick={this.handleButtonClick}>
-           {this.state.open ? 'Close' : 'Open'} the Mask
-         </Button>
-         <Portal
-           open={this.state.open}
-         >
-            <Mask
-              fullscreen
-              onClick={() => { this.setState({ open: false }) }}
-            >
-              <Heading>Click anywhere around this text to close the Mask</Heading>
-            </Mask>
-          </Portal>
-       </div>
-     )
-   }
- }
-
- render(<Example />)
+render(<Example />)
 ```

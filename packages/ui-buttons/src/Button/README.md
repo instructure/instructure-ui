@@ -97,56 +97,10 @@ type: example
 
 If you need to prevent text wrapping, you can use the [TruncateText](#TruncateText) util. You can also conditionally render a [Tooltip](#Tooltip) with the full text when truncation occurs.
 
-- ```js
-  class Example extends React.Component {
-    state = {
-      isTruncated: false
-    }
-
-    handleUpdate = (isTruncated) => {
-      if (this.state.isTruncated !== isTruncated) {
-        this.setState({ isTruncated })
-      }
-    }
-
-    renderButton() {
-      return (
-        <Button color="primary">
-          <TruncateText onUpdate={this.handleUpdate}>
-            {this.props.message}
-          </TruncateText>
-        </Button>
-      )
-    }
-
-    render() {
-      return (
-        <View
-          display="block"
-          width="10rem"
-          margin="small"
-          padding="small none"
-          withVisualDebug
-        >
-          {this.state.isTruncated ? (
-            <Tooltip
-              renderTip={this.props.message}
-              mountNode={() => document.getElementById('main')}
-            >
-              {this.renderButton()}
-            </Tooltip>
-          ) : (
-            this.renderButton()
-          )}
-        </View>
-      )
-    }
-  }
-
-  render(<Example message="A Button With a Whole Lot of Text" />)
-  ```
-
-- ```js
+```js
+---
+type: example
+---
   const Example = ({ message }) => {
     const [isTruncated, setIsTruncated] = useState(false)
 
@@ -187,7 +141,7 @@ If you need to prevent text wrapping, you can use the [TruncateText](#TruncateTe
   }
 
   render(<Example message="A Button With a Whole Lot of Text" />)
-  ```
+```
 
 ### Display
 

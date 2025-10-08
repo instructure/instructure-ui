@@ -448,530 +448,264 @@ The focus outline adjusts to account for the shape of the View. For example, the
 `circle`, `pill`, `small`, `medium`, and `large`. In each case, the border radius of the focus outline will automatically adjust
 to match the border radius of the corresponding View. The color of the focus outline can be changed for different contexts via the `focusColor` property.
 
-- ```javascript
-  class FocusedExample extends React.Component {
-    constructor(props) {
-      super(props)
+```js
+---
+type: example
+---
+const FocusedExample = () => {
+  const [isFocused, setIsFocused] = useState(true)
+  const [inset, setInset] = useState(false)
+  const [focusColor, setfocusColor] = useState(undefined)
 
-      this.state = {
-        isFocused: true,
-        inset: false,
-        focusColor: undefined
-      }
-    }
+  const updateFocused = (event) => setIsFocused(event.target.checked)
+  const updateInset = (event) => setInset(event.target.checked)
+  const updateFocusRingColor = (event) => setfocusColor(event.target.value)
 
-    updateFocused = (event) => {
-      this.setState({ isFocused: event.target.checked })
-    }
-
-    updateInset = (event) => {
-      this.setState({ inset: event.target.checked })
-    }
-
-    updateFocusRingColor = (event, value) => {
-      this.setState({ focusColor: value })
-    }
-
-    render() {
-      return (
-        <View as="div">
-          <View
-            as="div"
-            background="primary"
-            padding="small"
-            margin="0 0 small"
-            borderWidth="small"
-          >
-            <FormFieldGroup
-              rowSpacing="small"
-              description={
-                <ScreenReaderContent>
-                  View focus outline examples
-                </ScreenReaderContent>
-              }
-            >
-              <Flex gap="small" direction="row">
-                <Flex gap="small" direction="column" width="15rem">
-                  <Checkbox
-                    label="withFocusOutline"
-                    checked={this.state.isFocused}
-                    onChange={this.updateFocused}
-                  />
-                  <Checkbox
-                    label="focusPosition = inset"
-                    checked={this.state.inset}
-                    onChange={this.updateInset}
-                  />
-                </Flex>
-                <RadioInputGroup
-                  onChange={this.updateFocusRingColor}
-                  name="focusColor"
-                  defaultValue="info"
-                  variant="toggle"
-                  description="Focus ring color"
-                >
-                  <RadioInput label="info" value="info" />
-                  <RadioInput label="inverse" value="inverse" />
-                  <RadioInput label="success" value="success" />
-                  <RadioInput label="danger" value="danger" />
-                </RadioInputGroup>
-              </Flex>
-            </FormFieldGroup>
-          </View>
-          <View as="div">
-            <code>borderRadius =</code>
-            <View
-              display="inline-block"
-              margin="small"
-              padding="small"
-              background="primary"
-              borderRadius="small"
-              borderWidth="small"
-              position="relative"
-              focusColor={this.state.focusColor}
-              withFocusOutline={this.state.isFocused}
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
-            >
-              small
-            </View>
-            <View
-              display="inline-block"
-              margin="small"
-              padding="small"
-              background="primary"
-              borderRadius="medium"
-              borderWidth="small"
-              position="relative"
-              focusColor={this.state.focusColor}
-              withFocusOutline={this.state.isFocused}
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
-            >
-              medium
-            </View>
-            <View
-              display="inline-block"
-              margin="small"
-              padding="small"
-              background="primary"
-              borderRadius="large"
-              borderWidth="small"
-              position="relative"
-              focusColor={this.state.focusColor}
-              withFocusOutline={this.state.isFocused}
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
-            >
-              large
-            </View>
-            <View
-              display="inline-block"
-              height="100px"
-              width="100px"
-              margin="small"
-              background="primary"
-              borderRadius="circle"
-              borderWidth="small"
-              position="relative"
-              focusColor={this.state.focusColor}
-              withFocusOutline={this.state.isFocused}
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
-            >
-              <Flex
-                width="100%"
-                height="100%"
-                alignItems="center"
-                justifyItems="center"
-              >
-                <Flex.Item>circle</Flex.Item>
-              </Flex>
-            </View>
-            <View
-              background="primary-inverse"
-              display="inline-block"
-              padding="small"
-            >
-              <View
-                display="block"
-                margin="small"
-                padding="small"
-                background="primary-inverse"
-                borderRadius="large"
-                borderWidth="small"
-                position="relative"
-                withFocusOutline={this.state.isFocused}
-                focusColor={this.state.focusColor}
-                focusPosition={this.state.inset ? 'inset' : 'offset'}
-              >
-                medium
-              </View>
-            </View>
-            <View
-              display="inline-block"
-              margin="small"
-              padding="small"
-              background="primary"
-              borderRadius="pill"
-              borderWidth="small"
-              position="relative"
-              width="100px"
-              textAlign="center"
-              focusColor={this.state.focusColor}
-              withFocusOutline={this.state.isFocused}
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
-            >
-              pill
-            </View>
-            <View
-              display="inline-block"
-              margin="small"
-              padding="small"
-              background="primary"
-              borderWidth="small"
-              borderRadius="none large"
-              position="relative"
-              focusColor={this.state.focusColor}
-              withFocusOutline={this.state.isFocused}
-              focusPosition={this.state.inset ? 'inset' : 'offset'}
-            >
-              none large
-            </View>
-          </View>
-        </View>
-      )
-    }
-  }
-  render(<FocusedExample />)
-  ```
-
-- ```javascript
-  const FocusedExample = () => {
-    const [isFocused, setIsFocused] = useState(true)
-    const [inset, setInset] = useState(false)
-    const [focusColor, setfocusColor] = useState(undefined)
-
-    const updateFocused = (event) => setIsFocused(event.target.checked)
-    const updateInset = (event) => setInset(event.target.checked)
-    const updateFocusRingColor = (event) => setfocusColor(event.target.value)
-
-    return (
-      <View as="div">
-        <View
-          as="div"
-          background="primary"
-          padding="small"
-          margin="0 0 small"
-          borderWidth="small"
+  return (
+    <View as="div">
+      <View
+        as="div"
+        background="primary"
+        padding="small"
+        margin="0 0 small"
+        borderWidth="small"
+      >
+        <FormFieldGroup
+          rowSpacing="small"
+          description={
+            <ScreenReaderContent>
+              View focus outline examples
+            </ScreenReaderContent>
+          }
         >
-          <FormFieldGroup
-            rowSpacing="small"
-            description={
-              <ScreenReaderContent>
-                View focus outline examples
-              </ScreenReaderContent>
-            }
-          >
-            <Flex gap="small" direction="row">
-              <Flex gap="small" direction="column" width="15rem">
-                <Checkbox
-                  label="withFocusOutline"
-                  checked={isFocused}
-                  onChange={updateFocused}
-                />
-                <Checkbox
-                  label="focusPosition = inset"
-                  checked={inset}
-                  onChange={updateInset}
-                />
-              </Flex>
-              <RadioInputGroup
-                onChange={updateFocusRingColor}
-                name="focusColor_2"
-                defaultValue="info"
-                variant="toggle"
-                description="Focus ring color"
-              >
-                <RadioInput label="info" value="info" />
-                <RadioInput label="inverse" value="inverse" />
-                <RadioInput label="success" value="success" />
-                <RadioInput label="danger" value="danger" />
-              </RadioInputGroup>
+          <Flex gap="small" direction="row">
+            <Flex gap="small" direction="column" width="15rem">
+              <Checkbox
+                label="withFocusOutline"
+                checked={isFocused}
+                onChange={updateFocused}
+              />
+              <Checkbox
+                label="focusPosition = inset"
+                checked={inset}
+                onChange={updateInset}
+              />
             </Flex>
-          </FormFieldGroup>
+            <RadioInputGroup
+              onChange={updateFocusRingColor}
+              name="focusColor_2"
+              defaultValue="info"
+              variant="toggle"
+              description="Focus ring color"
+            >
+              <RadioInput label="info" value="info" />
+              <RadioInput label="inverse" value="inverse" />
+              <RadioInput label="success" value="success" />
+              <RadioInput label="danger" value="danger" />
+            </RadioInputGroup>
+          </Flex>
+        </FormFieldGroup>
+      </View>
+      <View as="div">
+        <code>borderRadius =</code>
+        <View
+          display="inline-block"
+          margin="small"
+          padding="small"
+          background="primary"
+          borderRadius="small"
+          borderWidth="small"
+          position="relative"
+          focusColor={focusColor}
+          withFocusOutline={isFocused}
+          focusPosition={inset ? 'inset' : 'offset'}
+        >
+          small
         </View>
-        <View as="div">
-          <code>borderRadius =</code>
-          <View
-            display="inline-block"
-            margin="small"
-            padding="small"
-            background="primary"
-            borderRadius="small"
-            borderWidth="small"
-            position="relative"
-            focusColor={focusColor}
-            withFocusOutline={isFocused}
-            focusPosition={inset ? 'inset' : 'offset'}
+        <View
+          display="inline-block"
+          margin="small"
+          padding="small"
+          background="primary"
+          borderRadius="medium"
+          borderWidth="small"
+          position="relative"
+          withFocusOutline={isFocused}
+          focusColor={focusColor}
+          focusPosition={inset ? 'inset' : 'offset'}
+        >
+          medium
+        </View>
+        <View
+          display="inline-block"
+          margin="small"
+          padding="small"
+          background="primary"
+          borderRadius="large"
+          borderWidth="small"
+          position="relative"
+          withFocusOutline={isFocused}
+          focusColor={focusColor}
+          focusPosition={inset ? 'inset' : 'offset'}
+        >
+          large
+        </View>
+        <View
+          display="inline-block"
+          height="100px"
+          width="100px"
+          margin="small"
+          background="primary"
+          borderRadius="circle"
+          borderWidth="small"
+          position="relative"
+          withFocusOutline={isFocused}
+          focusColor={focusColor}
+          focusPosition={inset ? 'inset' : 'offset'}
+        >
+          <Flex
+            width="100%"
+            height="100%"
+            alignItems="center"
+            justifyItems="center"
           >
-            small
-          </View>
+            <Flex.Item>circle</Flex.Item>
+          </Flex>
+        </View>
+        <View
+          background="primary-inverse"
+          display="inline-block"
+          padding="small"
+        >
           <View
-            display="inline-block"
+            display="block"
             margin="small"
             padding="small"
-            background="primary"
-            borderRadius="medium"
-            borderWidth="small"
-            position="relative"
-            withFocusOutline={isFocused}
-            focusColor={focusColor}
-            focusPosition={inset ? 'inset' : 'offset'}
-          >
-            medium
-          </View>
-          <View
-            display="inline-block"
-            margin="small"
-            padding="small"
-            background="primary"
+            background="primary-inverse"
             borderRadius="large"
             borderWidth="small"
             position="relative"
             withFocusOutline={isFocused}
             focusColor={focusColor}
+            focusColor="inverse"
             focusPosition={inset ? 'inset' : 'offset'}
           >
-            large
-          </View>
-          <View
-            display="inline-block"
-            height="100px"
-            width="100px"
-            margin="small"
-            background="primary"
-            borderRadius="circle"
-            borderWidth="small"
-            position="relative"
-            withFocusOutline={isFocused}
-            focusColor={focusColor}
-            focusPosition={inset ? 'inset' : 'offset'}
-          >
-            <Flex
-              width="100%"
-              height="100%"
-              alignItems="center"
-              justifyItems="center"
-            >
-              <Flex.Item>circle</Flex.Item>
-            </Flex>
-          </View>
-          <View
-            background="primary-inverse"
-            display="inline-block"
-            padding="small"
-          >
-            <View
-              display="block"
-              margin="small"
-              padding="small"
-              background="primary-inverse"
-              borderRadius="large"
-              borderWidth="small"
-              position="relative"
-              withFocusOutline={isFocused}
-              focusColor={focusColor}
-              focusColor="inverse"
-              focusPosition={inset ? 'inset' : 'offset'}
-            >
-              medium
-            </View>
-          </View>
-          <View
-            display="inline-block"
-            margin="small"
-            padding="small"
-            background="primary"
-            borderRadius="pill"
-            borderWidth="small"
-            position="relative"
-            focusColor="success"
-            width="100px"
-            textAlign="center"
-            focusColor={focusColor}
-            withFocusOutline={isFocused}
-            focusPosition={inset ? 'inset' : 'offset'}
-          >
-            pill
-          </View>
-          <View
-            display="inline-block"
-            margin="small"
-            padding="small"
-            background="primary"
-            borderWidth="small"
-            borderRadius="none large"
-            focusColor="danger"
-            position="relative"
-            focusColor={focusColor}
-            withFocusOutline={isFocused}
-            focusPosition={inset ? 'inset' : 'offset'}
-          >
-            none large
+            medium
           </View>
         </View>
+        <View
+          display="inline-block"
+          margin="small"
+          padding="small"
+          background="primary"
+          borderRadius="pill"
+          borderWidth="small"
+          position="relative"
+          focusColor="success"
+          width="100px"
+          textAlign="center"
+          focusColor={focusColor}
+          withFocusOutline={isFocused}
+          focusPosition={inset ? 'inset' : 'offset'}
+        >
+          pill
+        </View>
+        <View
+          display="inline-block"
+          margin="small"
+          padding="small"
+          background="primary"
+          borderWidth="small"
+          borderRadius="none large"
+          focusColor="danger"
+          position="relative"
+          focusColor={focusColor}
+          withFocusOutline={isFocused}
+          focusPosition={inset ? 'inset' : 'offset'}
+        >
+          none large
+        </View>
       </View>
-    )
-  }
+    </View>
+  )
+}
 
-  render(<FocusedExample />)
-  ```
+render(<FocusedExample />)
+```
 
 Handle vertical and horizontal content overflow with the `overflowX` and `overflowY`
 props.
 
 > **Important CSS note:** Setting one axis to `visible` and setting the other to a different value results in `visible` behaving as `auto`.
 
-- ```javascript
-  class OverflowExample extends React.Component {
-    constructor(props) {
-      super(props)
+```js
+---
+type: example
+---
+const OverflowExample = () => {
+  const [overflowY, setOverflowY] = useState('visible')
+  const [overflowX, setOverflowX] = useState('visible')
 
-      this.state = {
-        overflowY: 'visible',
-        overflowX: 'visible'
-      }
-    }
-
-    updateOverflowY = (event, value) => {
-      this.setState({
-        overflowY: value
-      })
-    }
-
-    updateOverflowX = (event, value) => {
-      this.setState({
-        overflowX: value
-      })
-    }
-
-    render() {
-      return (
-        <View as="div">
-          <FormFieldGroup
-            description={
-              <ScreenReaderContent>Overflow example</ScreenReaderContent>
-            }
-            rowSpacing="small"
-            vAlign="top"
-            layout="columns"
-          >
-            <RadioInputGroup
-              onChange={this.updateOverflowY}
-              name="overflowY"
-              defaultValue="visible"
-              variant="toggle"
-              description="overflowY ="
-            >
-              <RadioInput label="visible" value="visible" />
-              <RadioInput label="auto" value="auto" />
-              <RadioInput label="hidden" value="hidden" />
-            </RadioInputGroup>
-            <RadioInputGroup
-              onChange={this.updateOverflowX}
-              name="overflowX"
-              defaultValue="visible"
-              variant="toggle"
-              description="overflowX ="
-            >
-              <RadioInput label="visible" value="visible" />
-              <RadioInput label="auto" value="auto" />
-              <RadioInput label="hidden" value="hidden" />
-            </RadioInputGroup>
-          </FormFieldGroup>
-          <View
-            as="div"
-            height="7rem"
-            width="20rem"
-            margin="medium none x-large"
-            overflowY={this.state.overflowY}
-            overflowX={this.state.overflowX}
-            withVisualDebug
-          >
-            <div style={{ width: '30rem', height: '10rem' }}>
-              <Img src={avatarSquare} constrain="cover" />
-            </div>
-          </View>
-        </View>
-      )
-    }
+  const updateOverflowY = (event, value) => {
+    setOverflowY(value)
   }
 
-  render(<OverflowExample />)
-  ```
+  const updateOverflowX = (event, value) => {
+    setOverflowX(value)
+  }
 
-- ```javascript
-  const OverflowExample = () => {
-    const [overflowY, setOverflowY] = useState('visible')
-    const [overflowX, setOverflowX] = useState('visible')
-
-    const updateOverflowY = (event, value) => {
-      setOverflowY(value)
-    }
-
-    const updateOverflowX = (event, value) => {
-      setOverflowX(value)
-    }
-
-    return (
-      <View as="div">
-        <FormFieldGroup
-          description={
-            <ScreenReaderContent>Overflow example</ScreenReaderContent>
-          }
-          rowSpacing="small"
-          vAlign="top"
-          layout="columns"
+  return (
+    <View as="div">
+      <FormFieldGroup
+        description={
+          <ScreenReaderContent>Overflow example</ScreenReaderContent>
+        }
+        rowSpacing="small"
+        vAlign="top"
+        layout="columns"
+      >
+        <RadioInputGroup
+          onChange={updateOverflowY}
+          name="overflowY"
+          defaultValue="visible"
+          variant="toggle"
+          description="overflowY ="
         >
-          <RadioInputGroup
-            onChange={updateOverflowY}
-            name="overflowY"
-            defaultValue="visible"
-            variant="toggle"
-            description="overflowY ="
-          >
-            <RadioInput label="visible" value="visible" />
-            <RadioInput label="auto" value="auto" />
-            <RadioInput label="hidden" value="hidden" />
-          </RadioInputGroup>
-          <RadioInputGroup
-            onChange={updateOverflowX}
-            name="overflowX"
-            defaultValue="visible"
-            variant="toggle"
-            description="overflowX ="
-          >
-            <RadioInput label="visible" value="visible" />
-            <RadioInput label="auto" value="auto" />
-            <RadioInput label="hidden" value="hidden" />
-          </RadioInputGroup>
-        </FormFieldGroup>
-        <View
-          as="div"
-          height="7rem"
-          width="20rem"
-          margin="medium none x-large"
-          overflowY={overflowY}
-          overflowX={overflowX}
-          withVisualDebug
+          <RadioInput label="visible" value="visible" />
+          <RadioInput label="auto" value="auto" />
+          <RadioInput label="hidden" value="hidden" />
+        </RadioInputGroup>
+        <RadioInputGroup
+          onChange={updateOverflowX}
+          name="overflowX"
+          defaultValue="visible"
+          variant="toggle"
+          description="overflowX ="
         >
-          <div style={{ width: '30rem', height: '10rem' }}>
-            <Img src={avatarSquare} constrain="cover" />
-          </div>
-        </View>
+          <RadioInput label="visible" value="visible" />
+          <RadioInput label="auto" value="auto" />
+          <RadioInput label="hidden" value="hidden" />
+        </RadioInputGroup>
+      </FormFieldGroup>
+      <View
+        as="div"
+        height="7rem"
+        width="20rem"
+        margin="medium none x-large"
+        overflowY={overflowY}
+        overflowX={overflowX}
+        withVisualDebug
+      >
+        <div style={{ width: '30rem', height: '10rem' }}>
+          <Img src={avatarSquare} constrain="cover" />
+        </div>
       </View>
-    )
-  }
+    </View>
+  )
+}
 
-  render(<OverflowExample />)
-  ```
+render(<OverflowExample />)
+```
 
 ### Debugging
 

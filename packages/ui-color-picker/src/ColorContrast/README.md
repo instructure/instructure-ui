@@ -26,88 +26,10 @@ type: example
 
 ### In-line Color setting
 
-- ```js
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        selectedForeGround: '#0CBF94',
-        selectedBackGround: '#35423A',
-        validationLevel: 'AA'
-      }
-    }
-
-    render() {
-      return (
-        <div>
-          <RadioInputGroup
-            onChange={(_e, value) => this.setState({ validationLevel: value })}
-            name="example1"
-            defaultValue="AA"
-            description="validationLevel"
-          >
-            <RadioInput key="AA" value="AA" label="AA" />
-            <RadioInput key="AAA" value="AAA" label="AAA" />
-          </RadioInputGroup>
-          <ColorPreset
-            label="Background"
-            colors={[
-              '#ffffff',
-              '#0CBF94',
-              '#0C89BF',
-              '#BF0C6D',
-              '#BF8D0C',
-              '#ff0000',
-              '#576A66',
-              '#35423A',
-              '#35423F'
-            ]}
-            selected={this.state.selectedBackGround}
-            onSelect={(selectedBackGround) =>
-              this.setState({ selectedBackGround })
-            }
-          />
-          <ColorPreset
-            label="Foreground"
-            colors={[
-              '#ffffff',
-              '#0CBF94',
-              '#0C89BF',
-              '#BF0C6D',
-              '#BF8D0C',
-              '#ff0000',
-              '#576A66',
-              '#35423A',
-              '#35423F'
-            ]}
-            selected={this.state.selectedForeGround}
-            onSelect={(selectedForeGround) =>
-              this.setState({ selectedForeGround })
-            }
-          />
-          <hr style={{ width: '272px', marginLeft: 0 }} />
-          <ColorContrast
-            withoutColorPreview
-            firstColor={this.state.selectedBackGround}
-            secondColor={this.state.selectedForeGround}
-            label="Contrast Ratio"
-            successLabel="PASS"
-            failureLabel="FAIL"
-            normalTextLabel="Normal text"
-            largeTextLabel="Large text"
-            graphicsTextLabel="Graphics text"
-            validationLevel={this.state.validationLevel}
-            onContrastChange={(contrastData) => console.log(contrastData)}
-          />
-        </div>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
+```js
+---
+type: example
+---
   const Example = () => {
     const [selectedForeGround, setSelectedForeGround] = useState('#0CBF94')
     const [selectedBackGround, setSelectedBackGround] = useState('#35423A')
@@ -179,4 +101,4 @@ type: example
   }
 
   render(<Example />)
-  ```
+```

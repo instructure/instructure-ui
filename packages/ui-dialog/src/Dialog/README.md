@@ -7,71 +7,10 @@ The `Dialog` component is a utility that is used by
 
 Elements outside of the `Dialog` are hidden from screen readers automatically when `shouldContainFocus` is set to `true` or `screenreader`. The `liveRegion` prop can be used to specify any elements that should not be hidden.
 
-- ```js
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = { open: false }
-    }
-
-    render() {
-      return (
-        <View as="div" padding="large">
-          <Button onClick={() => this.setState({ open: true })}>
-            Open the Dialog
-          </Button>
-          <Portal open={this.state.open}>
-            <Mask>
-              <Dialog
-                open={this.state.open}
-                shouldContainFocus
-                defaultFocusElement={() => this._firstName}
-                shouldReturnFocus
-                onDismiss={() => this.setState({ open: false })}
-                label="Full name form"
-              >
-                <View
-                  as="div"
-                  maxWidth="40rem"
-                  maxHeight="30rem"
-                  background="primary"
-                  shadow="above"
-                  style={{ position: 'relative' }}
-                  padding="medium"
-                >
-                  <CloseButton
-                    placement="end"
-                    onClick={() => this.setState({ open: false })}
-                    screenReaderLabel="Close"
-                  />
-                  <FormFieldGroup
-                    description={
-                      <Heading level="h4" as="span">
-                        Full name
-                      </Heading>
-                    }
-                    layout="columns"
-                  >
-                    <TextInput
-                      width="12rem"
-                      renderLabel="First name"
-                      inputRef={(c) => (this._firstName = c)}
-                    />
-                    <TextInput width="12rem" renderLabel="Last name" />
-                  </FormFieldGroup>
-                </View>
-              </Dialog>
-            </Mask>
-          </Portal>
-        </View>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
+```js
+---
+type: example
+---
   const Example = () => {
     const [open, setOpen] = useState(false)
 
@@ -126,7 +65,7 @@ Elements outside of the `Dialog` are hidden from screen readers automatically wh
   }
 
   render(<Example />)
-  ```
+```
 
 ### Guidelines
 

@@ -54,12 +54,12 @@ If a code example is needed with syntax highlighting:
 type: code
 ---
 
-    ```js
-    ---
-    type: code
-    ---
-    console.log("my js example comes here")
-    ```
+```js
+---
+type: code
+---
+console.log("my js example comes here")
+```
 ````
 
 The above code will display like this:
@@ -82,12 +82,12 @@ The `type: embed` will render the containing code into the page. It must be vali
 type: code
 ---
 
-    ```js
-    ---
-    type: embed
-    ---
-    <Button>InstUI button</Button>
-    ```
+```js
+---
+type: embed
+---
+<Button>InstUI button</Button>
+```
 ````
 
 The above code will display like this:
@@ -117,19 +117,19 @@ In the second example, a whole `component` is needed and it must be `rendered` w
 type: code
 ---
 
-    ```js
-    ---
-    type: example
-    ---
-    <div>
-        <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
-        <Avatar name="Sarah Robinson" margin="0 small 0 0" />
-        <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 small 0 0" />
-        <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 small 0 0" />
-        <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 small 0 0" />
-        <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
-    </div>
-    ```
+```js
+---
+type: example
+---
+<div>
+  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
+  <Avatar name="Sarah Robinson" margin="0 small 0 0" />
+  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
+</div>
+```
 ````
 
 The above code will display like this:
@@ -139,12 +139,12 @@ The above code will display like this:
 type: example
 ---
 <div>
-    <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
-    <Avatar name="Sarah Robinson" margin="0 small 0 0" />
-    <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 small 0 0" />
-    <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 small 0 0" />
-    <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 small 0 0" />
-    <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
+  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
+  <Avatar name="Sarah Robinson" margin="0 small 0 0" />
+  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
 </div>
 ```
 
@@ -155,46 +155,38 @@ type: example
 type: code
 ---
 
-    ```js
-    ---
-    type: example
-    ---
-    class Example extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        selected: "",
-        colors: [
-            "#ffffff",
-            "#0CBF94",
-            "#0C89BF00",
-            "#BF0C6D",
-            "#BF8D0C",
-            "#ff0000",
-            "#576A66",
-            "#35423A",
-            "#35423F",
-        ],
-        };
-    }
+```js
+---
+type: example
+---
+const Example = () => {
+  const [selected, setSelected] = useState("")
+  const [colors] = useState([
+    "#ffffff",
+    "#0CBF94",
+    "#0C89BF00",
+    "#BF0C6D",
+    "#BF8D0C",
+    "#ff0000",
+    "#576A66",
+    "#35423A",
+    "#35423F",
+  ])
 
-    render() {
-        return (
-        <div>
-            <ColorPreset
-            label="Choose a color"
-            colors={this.state.colors}
-            selected={this.state.selected}
-            onSelect={(selected) => this.setState({ selected })}
-            />
-        </div>
-        );
-    }
-    }
+  return (
+    <div>
+      <ColorPreset
+        label="Choose a color"
+        colors={colors}
+        selected={selected}
+        onSelect={(selected) => setSelected(selected)}
+      />
+    </div>
+  )
+}
 
-
-    render(<Example />);
-    ```
+render(<Example />)
+```
 ````
 
 The above code will display like this:
@@ -203,139 +195,36 @@ The above code will display like this:
 ---
 type: example
 ---
-class Example extends React.Component {
-constructor(props) {
-    super(props);
-    this.state = {
-    selected: "",
-    colors: [
-        "#ffffff",
-        "#0CBF94",
-        "#0C89BF00",
-        "#BF0C6D",
-        "#BF8D0C",
-        "#ff0000",
-        "#576A66",
-        "#35423A",
-        "#35423F",
-    ],
-    };
-}
+const Example = () => {
+  const [selected, setSelected] = useState("")
+  const [colors] = useState([
+    "#ffffff",
+    "#0CBF94",
+    "#0C89BF00",
+    "#BF0C6D",
+    "#BF8D0C",
+    "#ff0000",
+    "#576A66",
+    "#35423A",
+    "#35423F",
+  ])
 
-render() {
-    return (
+  return (
     <div>
-        <ColorPreset
+      <ColorPreset
         label="Choose a color"
-        colors={this.state.colors}
-        selected={this.state.selected}
-        onSelect={(selected) => this.setState({ selected })}
-        />
+        colors={colors}
+        selected={selected}
+        onSelect={(selected) => setSelected(selected)}
+      />
     </div>
-    );
-    }
+  )
 }
 
-render(<Example />);
+render(<Example />)
 ```
 
-**_Note:_** you can use `funcional React` as well.
-
-#### 4. Multi example
-
-If an example should be shown in `class` and `function` form as well, it needs to be written as a `list` with two items. The first item will be the `class`, the second the `function`.
-
-````md
----
-type: code
----
-
-- ```js
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        counter: 0
-      }
-    }
-
-    render() {
-      return (
-        <div>
-          <Button
-            onClick={() => this.setState({ counter: this.state.counter + 1 })}
-          >
-            I was Clicked {this.state.counter} times
-          </Button>
-        </div>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
-  const Example = () => {
-    const [counter, setCounter] = useState(0)
-
-    return (
-      <div>
-        <Button onClick={() => setCounter(counter + 1)}>
-          I was Clicked {counter} times
-        </Button>
-      </div>
-    )
-  }
-
-  render(<Example />)
-  ```
-````
-
-The above code will display like this:
-
-- ```js
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        counter: 0
-      }
-    }
-
-    render() {
-      return (
-        <div>
-          <Button
-            onClick={() => this.setState({ counter: this.state.counter + 1 })}
-          >
-            I was Clicked {this.state.counter} times
-          </Button>
-        </div>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
-  const Example = () => {
-    const [counter, setCounter] = useState(0)
-
-    return (
-      <div>
-        <Button onClick={() => setCounter(counter + 1)}>
-          I was Clicked {counter} times
-        </Button>
-      </div>
-    )
-  }
-
-  render(<Example />)
-  ```
-
-**_Note:_** beacuse of this feature, code examples can not be displayed by `lists`
+**_Note:_** you should use `funcional React`.
 
 #### 5. comment examples
 
@@ -358,17 +247,17 @@ The other three can be postfixed after the language of the markdown code block:
 ---
 type: code
 ---
-    ```js-code
-    // code here
-    ```
+```js-code
+// code here
+```
 
-    ```js-embed
-    // code here
-    ```
+```js-embed
+// code here
+```
 
-    ```js-example
-    // code here
-    ```
+```js-example
+// code here
+```
 ````
 
 The compiler will strip the postfix and calculate the language and type from it as well.
