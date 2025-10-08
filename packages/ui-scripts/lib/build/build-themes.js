@@ -25,8 +25,10 @@
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
+import pkg from 'glob'
 import setupThemes from './buildThemes/setupThemes.js'
 
+const { glob } = pkg
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -34,9 +36,17 @@ export default {
   command: 'build-themes',
   desc: 'Generate themes',
   handler: async () => {
-    const rawData = fs.readFileSync(
-      path.join(__dirname, 'tokenStudioThemeTokens.json')
-    )
-    setupThemes('packages/ui-themes/src/themes/newThemes', rawData)
+    const tokensStudioDir = path.join(__dirname, 'tokensStudio')
+    const jsonFiles = glob.sync('**/*.json', { cwd: tokensStudioDir })
+
+    const themeTokens = {}
+    jsonFiles.forEach((filePath) => {
+      const fullPath = path.join(tokensStudioDir, filePath)
+      const rawData = fs.readFileSync(fullPath, 'utf8')
+      const relativePath = filePath.replace('.json', '')
+      themeTokens[relativePath] = JSON.parse(rawData)
+    })
+
+    setupThemes('packages/ui-themes/src/themes/newThemes', themeTokens)
   }
 }
