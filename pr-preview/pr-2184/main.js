@@ -4441,7 +4441,7 @@ return(0,emotion_react_jsx_runtime_browser_esm.jsx)(Selectable.n,{isShowingOptio
 var _interopRequireDefault=__webpack_require__(4293).default
 Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=exports.ComponentTheme=void 0
 var _class,_ComponentTheme,_code,_Table$Head,_react=__webpack_require__(14041),_emotion=__webpack_require__(62542),_uiTable=__webpack_require__(92113),_uiView=__webpack_require__(96431),_ColorSwatch=__webpack_require__(92345),_styles=_interopRequireDefault(__webpack_require__(80848)),_props=__webpack_require__(74378),_jsxRuntime=__webpack_require__(54380)
-let ComponentTheme=exports.ComponentTheme=(0,_emotion.withStyle)(_styles.default,null)(((_ComponentTheme=class extends _react.Component{renderValueCell(value,colorPrimitives){if(!value)return _code||(_code=(0,_jsxRuntime.jsx)("code",{children:"ERROR - possible bug"}))
+let ComponentTheme=exports.ComponentTheme=(0,_emotion.withStyle)(_styles.default,null)(((_ComponentTheme=class extends _react.Component{renderValueCell(value,colorPrimitives){if(!value&&0!==value)return _code||(_code=(0,_jsxRuntime.jsx)("code",{children:"ERROR - possible bug"}))
 if("object"==typeof value)return(0,_jsxRuntime.jsx)("code",{children:JSON.stringify(value)})
 if("#"===value.toString().charAt(0)||"rgb"===value.toString().substring(0,3)){var _color$
 const color=Object.entries(colorPrimitives).find(([,v])=>v===value)
