@@ -976,10 +976,12 @@ that selection does not re-paginate or re-sort the table, and pagination does no
                   }
                 >
                   <Table.Row>
-                    <Table.ColHeader id="select">
+                    <Table.ColHeader id="select" aria-label="Select">
                       <Checkbox
                         label={
-                          <ScreenReaderContent>Select all</ScreenReaderContent>
+                          <ScreenReaderContent>
+                            Select all rows
+                          </ScreenReaderContent>
                         }
                         onChange={() => this.handleSelectAll(allSelected)}
                         checked={allSelected}
@@ -1315,10 +1317,12 @@ that selection does not re-paginate or re-sort the table, and pagination does no
                 }
               >
                 <Table.Row>
-                  <Table.ColHeader id="select">
+                  <Table.ColHeader id="select" aria-label="Select">
                     <Checkbox
                       label={
-                        <ScreenReaderContent>Select all</ScreenReaderContent>
+                        <ScreenReaderContent>
+                          Select all rows
+                        </ScreenReaderContent>
                       }
                       onChange={() => handleSelectAll(allSelected)}
                       checked={allSelected}
