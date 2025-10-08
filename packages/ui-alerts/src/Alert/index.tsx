@@ -307,6 +307,9 @@ class Alert extends Component<AlertProps, AlertState> {
   }
 
   render() {
+    // eslint-disable-next-line no-console
+    console.log('Hello from Alert')
+    console.warn('Warning from Alert')
     const liveRegion = this.getLiveRegion()
     const screenReaderContent = liveRegion
       ? this.createScreenReaderPortal(liveRegion)

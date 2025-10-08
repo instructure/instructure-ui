@@ -24,6 +24,8 @@ jobs:
       - name: Build docs-app
         run: npm run build:docs
         if: github.event.action != 'closed'
+        env:
+          GITHUB_PULL_REQUEST_PREVIEW: 'true'
       - uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: ./packages/__docs__/__build__
