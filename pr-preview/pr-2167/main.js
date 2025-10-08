@@ -3447,7 +3447,8 @@ var _View,_ScreenReaderContent,_IconSearchLine,_react=_interopRequireWildcard(__
 class Nav extends _react.Component{constructor(props){super(props),this._themeId=void 0,this.searchTimeout=void 0,this._textInput=void 0,this.setExpandedSections=(expanded,sections)=>{const expandedSections={}
 return Object.keys(sections).forEach(sectionId=>{expandedSections[sectionId]=expanded}),expandedSections.__themes=expanded,expandedSections},this.handleSearchChange=e=>{const value=e.target.value,expandedSections=this.setExpandedSections(!!value,this.state.expandedSections)
 !value&&this.state.queryStr&&this.announceResults(-1),clearTimeout(this.searchTimeout),this.searchTimeout=setTimeout(()=>{this.setState({query:value?new RegExp(value,"i"):null,queryStr:value,expandedSections,userToggling:!1},()=>{value&&this.announceResults(this.countSearchResults())})},500)},this.handleToggleSection=(sectionId,expanded)=>{this.setState(()=>{const newExpandedSections={...this.state.expandedSections}
-return newExpandedSections[sectionId]=expanded,{expandedSections:newExpandedSections,userToggling:!0}})},this.markExpanded=sectionId=>{const _this$state=this.state,expandedSections=_this$state.expandedSections
+return newExpandedSections[sectionId]=expanded,{expandedSections:newExpandedSections,userToggling:!0}})},this.getEffectiveBasePath=()=>{const prPreviewMatch=window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)
+return prPreviewMatch?prPreviewMatch[1]:""},this.markExpanded=sectionId=>{const _this$state=this.state,expandedSections=_this$state.expandedSections
 _this$state.userToggling||(expandedSections[sectionId]=!0)},this.textInputRef=el=>{this._textInput=el},this.focusTextInput=()=>{this._textInput&&this._textInput.focus()},this.removeFocus=event=>{event.target&&event.target.blur&&event.target.blur()},this.state={query:null,expandedSections:this.setExpandedSections(!1,props.sections),userToggling:!1,announcement:null},this._themeId="__themes",this.searchTimeout=null}announceResults(count){const message=-1===count?"Search cleared":0===count?"No results":`${count} ${1===count?"result":"results"} available below`
 setTimeout(()=>{this.setState({announcement:message})},1e3)}countSearchResults(){const sections=this.props.sections
 let count=0
@@ -3460,12 +3461,13 @@ return sections[sectionId].docs.filter(docId=>{var _docs$docId
 return(null===(_docs$docId=docs[docId])||void 0===_docs$docId||!_docs$docId.isWIP)&&(this.matchQuery(docId)||this.matchQuery(docs[docId].title)||this.matchQuery(sectionId)||docs[docId].tags&&this.matchQuery(docs[docId].tags.toLowerCase()))}).map(docId=>("function"==typeof markExpanded&&docId===selected&&markExpanded(sectionId),docId))}matchingSectionsInSection(sectionId,markExpanded){const _this$props2=this.props,sections=_this$props2.sections,selected=_this$props2.selected
 return sections[sectionId].sections.map(sectionId=>("function"==typeof markExpanded&&sectionId===selected&&markExpanded(sectionId),sectionId))}renderDocLink(docId){const _this$props3=this.props,docs=_this$props3.docs,selected=_this$props3.selected,docSelected=docId===selected
 return(0,_jsxRuntime.jsxs)(_uiView.View,{as:"li",display:"block",margin:"xx-small none xx-small",padding:"none none none x-small",position:"relative",children:[docSelected&&(_View||(_View=(0,_jsxRuntime.jsx)(_uiView.View,{"aria-hidden":"true",display:"block",position:"absolute",insetInlineStart:"0",insetBlockStart:"0",insetBlockEnd:"0",width:"0.25rem",background:"brand"}))),(0,_jsxRuntime.jsx)(_uiLink.Link,{onClick:e=>{e.preventDefault(),this.removeFocus(e)
-const currentPath=window.location.pathname
-if(currentPath.endsWith("/")){const newUrl=currentPath+docId
-window.history.pushState({},"",newUrl)}else{const segments=currentPath.split("/").filter(segment=>""!==segment)
+const basePath=this.getEffectiveBasePath(),currentPath=window.location.pathname,pathWithoutBase=basePath?currentPath.replace(basePath,""):currentPath
+if(pathWithoutBase.endsWith("/")){const newUrl=basePath+pathWithoutBase+docId
+window.history.pushState({},"",newUrl)}else{const segments=pathWithoutBase.split("/").filter(segment=>""!==segment)
 if(segments.length>0){segments[segments.length-1]=docId
-const newUrl="/"+segments.join("/")
-window.history.pushState({},"",newUrl)}else window.history.pushState({},"",`/${docId}`)}window.dispatchEvent(new PopStateEvent("popstate"))},display:"block",href:`/${docId}`,isWithinText:!1,children:docs[docId].title})]},docId)}renderSectionChildren(sectionId,markExpanded){const children={},_this$props4=this.props,docs=_this$props4.docs,sections=_this$props4.sections
+const newUrl=basePath+"/"+segments.join("/")
+window.history.pushState({},"",newUrl)}else{const newUrl=basePath?`${basePath}/${docId}`:`/${docId}`
+window.history.pushState({},"",newUrl)}}window.dispatchEvent(new PopStateEvent("popstate"))},display:"block",href:`/${docId}`,isWithinText:!1,children:docs[docId].title})]},docId)}renderSectionChildren(sectionId,markExpanded){const children={},_this$props4=this.props,docs=_this$props4.docs,sections=_this$props4.sections
 return this.matchingSectionsInSection(sectionId,markExpanded).forEach(sectionId=>{const title=(0,_uiUtils.capitalizeFirstLetter)(sections[sectionId].title)
 children[title]={section:!0,id:sectionId,order:"__"}}),this.matchingDocsInSection(sectionId,markExpanded).forEach(docId=>{children[docId]={id:docId,order:docs[docId].order}}),(0,_jsxRuntime.jsx)("ul",{style:{paddingLeft:"0px",margin:"0px"},children:Object.keys(children).sort((a,b)=>{const orderA=children[a].order?children[a].order:"",orderB=children[b].order?children[b].order:"",idA=`${orderA}${a.toUpperCase()}`,idB=`${orderB}${b.toUpperCase()}`
 return idA<idB?-1:idA>idB?1:0}).map(id=>children[id].section?this.renderSectionLink(children[id].id,()=>{markExpanded(sectionId)},"category"):this.renderDocLink(id))})}renderSectionLink(sectionId,markParentExpanded,variant){const markExpanded=sectionId=>{this.markExpanded(sectionId),"function"==typeof markParentExpanded&&markParentExpanded()}
@@ -4078,13 +4080,13 @@ const result=await fetch("docs/"+docId+".json",{signal:null===(_this$_controller
 if(docId.includes(".")){const components=docId.split("."),everyComp=EveryComponent
 docData.componentInstance=everyComp[components[0]][components[1]]}else docData.componentInstance=EveryComponent[docId]
 return docData},this.fetchVersionData=async signal=>{const versionsData=await(0,_versionData.fetchVersionData)(signal)
-return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContentRef=el},this.focusContent=()=>{this._mainContentRef&&this._mainContentRef.focus()},this.getPathInfo=()=>{const _window$location=window.location,hash=_window$location.hash,pathname=_window$location.pathname,pathSegments=pathname.replace(/^\/+|\/+$/g,"").split("/"),hasSubstantialPathname=pathSegments.length>0&&""!==pathSegments[pathSegments.length-1]&&!pathSegments.every(seg=>""===seg)
-if((!hasSubstantialPathname||pathname.endsWith("/"))&&!hash)return[]
-if(!hash||hasSubstantialPathname&&!pathname.endsWith("/")||!hash.startsWith("#")||hash.startsWith("##")){if(pathSegments.length>0&&""!==pathSegments[0]){const page=pathSegments[pathSegments.length-1]
+return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContentRef=el},this.focusContent=()=>{this._mainContentRef&&this._mainContentRef.focus()},this.getPathInfo=()=>{const _window$location=window.location,hash=_window$location.hash,pathname=_window$location.pathname,basePath=(()=>{const prPreviewMatch=pathname.match(/^(\/pr-preview\/pr-\d+)/)
+return prPreviewMatch?prPreviewMatch[1]:""})(),pathWithoutBase=basePath?pathname.replace(basePath,""):pathname,pathSegments=pathWithoutBase.replace(/^\/+|\/+$/g,"").split("/")
+if(!(pathSegments.length>0&&""!==pathSegments[pathSegments.length-1]&&!pathSegments.every(seg=>""===seg)&&!pathWithoutBase.endsWith("/")||hash))return[]
+if(pathSegments.length>0&&""!==pathSegments[0]){const page=pathSegments[pathSegments.length-1]
 let id
-return hash&&hash.startsWith("##")?id=decodeURI(hash.replace("##","")):hash&&!hash.startsWith("#/")&&(id=decodeURI(hash.replace("#",""))),[page,id]}}else{const path=hash.split("/")
-if(path){const _path$map=path.map(entry=>decodeURI(entry.replace("#",""))),_path$map2=(0,_slicedToArray2.default)(_path$map,2)
-return[_path$map2[0],_path$map2[1]]}}return[]},this.updateLayout=matches=>{let layout="small"
+return hash&&hash.startsWith("##")?id=decodeURI(hash.replace("##","")):hash&&!hash.startsWith("#/")&&(id=decodeURI(hash.replace("#",""))),[page,id]}return[]},this.getBasePath=()=>{const prPreviewMatch=window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)
+return prPreviewMatch?prPreviewMatch[1]:""},this.updateLayout=matches=>{let layout="small"
 matches.length>0&&(matches.includes("medium")&&1===matches.length?layout="medium":matches.includes("large")&&2===matches.length?layout="large":matches.includes("x-large")&&(layout="x-large")),this.setState({layout})},this.updateKey=()=>{const _this$getPathInfo=this.getPathInfo(),_this$getPathInfo2=(0,_slicedToArray2.default)(_this$getPathInfo,2),page=_this$getPathInfo2[0]
 _this$getPathInfo2[1]
 page?this.setState(({key,showMenu})=>({key:page||"index",showMenu:this.handleShowTrayOnURLChange(key,showMenu)}),this.scrollToElement):this.trackPage("index")},this.handleContentRef=el=>{this._content=el},this.handleMenuTriggerRef=el=>{this._menuTrigger=el},this.handleMenuOpen=()=>{this.setState({showMenu:!0},()=>{var _this$_navRef$current
@@ -4454,7 +4456,7 @@ return(0,emotion_react_jsx_runtime_browser_esm.jsx)(Selectable.n,{isShowingOptio
 var _interopRequireDefault=__webpack_require__(4293).default
 Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=exports.ComponentTheme=void 0
 var _class,_ComponentTheme,_code,_Table$Head,_react=__webpack_require__(14041),_emotion=__webpack_require__(62542),_uiTable=__webpack_require__(92113),_uiView=__webpack_require__(96431),_ColorSwatch=__webpack_require__(92345),_styles=_interopRequireDefault(__webpack_require__(80848)),_props=__webpack_require__(74378),_jsxRuntime=__webpack_require__(54380)
-let ComponentTheme=exports.ComponentTheme=(0,_emotion.withStyle)(_styles.default,null)(((_ComponentTheme=class extends _react.Component{renderValueCell(value,colorPrimitives){if(!value)return _code||(_code=(0,_jsxRuntime.jsx)("code",{children:"ERROR - possible bug"}))
+let ComponentTheme=exports.ComponentTheme=(0,_emotion.withStyle)(_styles.default,null)(((_ComponentTheme=class extends _react.Component{renderValueCell(value,colorPrimitives){if(!value&&0!==value)return _code||(_code=(0,_jsxRuntime.jsx)("code",{children:"ERROR - possible bug"}))
 if("object"==typeof value)return(0,_jsxRuntime.jsx)("code",{children:JSON.stringify(value)})
 if("#"===value.toString().charAt(0)||"rgb"===value.toString().substring(0,3)){var _color$
 const color=Object.entries(colorPrimitives).find(([,v])=>v===value)
