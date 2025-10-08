@@ -4080,13 +4080,13 @@ const result=await fetch("docs/"+docId+".json",{signal:null===(_this$_controller
 if(docId.includes(".")){const components=docId.split("."),everyComp=EveryComponent
 docData.componentInstance=everyComp[components[0]][components[1]]}else docData.componentInstance=EveryComponent[docId]
 return docData},this.fetchVersionData=async signal=>{const versionsData=await(0,_versionData.fetchVersionData)(signal)
-return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContentRef=el},this.focusContent=()=>{this._mainContentRef&&this._mainContentRef.focus()},this.getPathInfo=()=>{const _window$location=window.location,hash=_window$location.hash,pathname=_window$location.pathname,basePath=(()=>{const prPreviewMatch=pathname.match(/^(\/pr-preview\/pr-\d+)/)
-return prPreviewMatch?prPreviewMatch[1]:""})(),pathWithoutBase=basePath?pathname.replace(basePath,""):pathname,pathSegments=pathWithoutBase.replace(/^\/+|\/+$/g,"").split("/")
-if(!(pathSegments.length>0&&""!==pathSegments[pathSegments.length-1]&&!pathSegments.every(seg=>""===seg)&&!pathWithoutBase.endsWith("/")||hash))return[]
-if(pathSegments.length>0&&""!==pathSegments[0]){const page=pathSegments[pathSegments.length-1]
+return this.setState({versionsData})},this.mainContentRef=el=>{this._mainContentRef=el},this.focusContent=()=>{this._mainContentRef&&this._mainContentRef.focus()},this.getPathInfo=()=>{const _window$location=window.location,hash=_window$location.hash,pathname=_window$location.pathname,pathSegments=pathname.replace(/^\/+|\/+$/g,"").split("/"),hasSubstantialPathname=pathSegments.length>0&&""!==pathSegments[pathSegments.length-1]&&!pathSegments.every(seg=>""===seg)
+if((!hasSubstantialPathname||pathname.endsWith("/"))&&!hash)return[]
+if(!hash||hasSubstantialPathname&&!pathname.endsWith("/")||!hash.startsWith("#")||hash.startsWith("##")){if(pathSegments.length>0&&""!==pathSegments[0]){const page=pathSegments[pathSegments.length-1]
 let id
-return hash&&hash.startsWith("##")?id=decodeURI(hash.replace("##","")):hash&&!hash.startsWith("#/")&&(id=decodeURI(hash.replace("#",""))),[page,id]}return[]},this.getBasePath=()=>{const prPreviewMatch=window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)
-return prPreviewMatch?prPreviewMatch[1]:""},this.updateLayout=matches=>{let layout="small"
+return hash&&hash.startsWith("##")?id=decodeURI(hash.replace("##","")):hash&&!hash.startsWith("#/")&&(id=decodeURI(hash.replace("#",""))),[page,id]}}else{const path=hash.split("/")
+if(path){const _path$map=path.map(entry=>decodeURI(entry.replace("#",""))),_path$map2=(0,_slicedToArray2.default)(_path$map,2)
+return[_path$map2[0],_path$map2[1]]}}return[]},this.updateLayout=matches=>{let layout="small"
 matches.length>0&&(matches.includes("medium")&&1===matches.length?layout="medium":matches.includes("large")&&2===matches.length?layout="large":matches.includes("x-large")&&(layout="x-large")),this.setState({layout})},this.updateKey=()=>{const _this$getPathInfo=this.getPathInfo(),_this$getPathInfo2=(0,_slicedToArray2.default)(_this$getPathInfo,2),page=_this$getPathInfo2[0]
 _this$getPathInfo2[1]
 page?this.setState(({key,showMenu})=>({key:page||"index",showMenu:this.handleShowTrayOnURLChange(key,showMenu)}),this.scrollToElement):this.trackPage("index")},this.handleContentRef=el=>{this._content=el},this.handleMenuTriggerRef=el=>{this._menuTrigger=el},this.handleMenuOpen=()=>{this.setState({showMenu:!0},()=>{var _this$_navRef$current
