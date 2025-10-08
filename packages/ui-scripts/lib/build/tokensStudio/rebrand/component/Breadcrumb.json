@@ -1,15 +1,11 @@
 {
   "breadcrumb": {
-    "fontSizeSm": {
-      "value": "{fontSize.textSm}",
+    "fontSizeLg": {
+      "value": "{fontSize.text2xl}",
       "type": "fontSizes"
     },
     "fontSizeMd": {
       "value": "{fontSize.textBase}",
-      "type": "fontSizes"
-    },
-    "fontSizeLg": {
-      "value": "{fontSize.textXl}",
       "type": "fontSizes"
     },
     "separatorColor": {
@@ -20,20 +16,24 @@
       "value": "{color.text.base}",
       "type": "color"
     },
+    "fontSizeSm": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
     "iconColor": {
       "value": "{color.icon.base}",
       "type": "color"
     },
-    "gapSm": {
-      "value": "{spacing.space2xs}",
-      "type": "spacing"
-    },
-    "gapMd": {
+    "spaceBetweenElementsMd": {
       "value": "{spacing.spaceXs}",
       "type": "spacing"
     },
-    "gapLg": {
+    "spaceBetweenElementsLg": {
       "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "spaceBetweenElementsSm": {
+      "value": "{spacing.space2xs}",
       "type": "spacing"
     }
   }

@@ -82,6 +82,10 @@
           "active": {
             "value": "{color.blue.blue100}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.blue.blue30}",
+            "type": "color"
           }
         },
         "secondary": {
@@ -96,6 +100,10 @@
           "active": {
             "value": "{color.grey.grey100}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.grey.grey10}",
+            "type": "color"
           }
         },
         "destructive": {
@@ -109,6 +117,90 @@
           },
           "active": {
             "value": "{color.red.red100}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.red.red30}",
+            "type": "color"
+          }
+        },
+        "success": {
+          "base": {
+            "value": "{color.green.green70}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.green.green90}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.green.green90}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.green.green30}",
+            "type": "color"
+          }
+        },
+        "ai": {
+          "topGradient": {
+            "base": {
+              "value": "{color.violet.violet70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.violet.violet100}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.violet.violet100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.violet.violet30}",
+              "type": "color"
+            }
+          },
+          "bottomGradient": {
+            "base": {
+              "value": "{color.sea.sea70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.sea.sea100}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.sea.sea100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.sea.sea30}",
+              "type": "color"
+            }
+          }
+        },
+        "primaryOnColor": {
+          "base": {
+            "value": "{color.white}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.grey.grey10}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.grey.grey10}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.white}",
+            "type": "color"
+          }
+        },
+        "aiSecondary": {
+          "base": {
+            "value": "{color.white}",
             "type": "color"
           }
         }
@@ -247,6 +339,32 @@
             "value": "{color.red.red80}",
             "type": "color"
           }
+        },
+        "success": {
+          "base": {
+            "value": "{color.green.green90}",
+            "type": "color"
+          }
+        },
+        "ai": {
+          "topGradient": {
+            "base": {
+              "value": "{color.violet.violet90}",
+              "type": "color"
+            }
+          },
+          "bottomGradient": {
+            "base": {
+              "value": "{color.sea.sea90}",
+              "type": "color"
+            }
+          }
+        },
+        "primaryOnColor": {
+          "base": {
+            "value": "{color.grey.grey80}",
+            "type": "color"
+          }
         }
       }
     },
@@ -366,6 +484,20 @@
           "active": {
             "value": "{color.red.red80}",
             "type": "color"
+          }
+        },
+        "aiSecondary": {
+          "topGradient": {
+            "base": {
+              "value": "{color.violet.violet70}",
+              "type": "color"
+            }
+          },
+          "bottomGradient": {
+            "base": {
+              "value": "{color.sea.sea70}",
+              "type": "color"
+            }
           }
         }
       },
@@ -491,6 +623,20 @@
             "value": "{color.red.red80}",
             "type": "color"
           }
+        },
+        "ai": {
+          "TopGradient": {
+            "base": {
+              "value": "{color.violet.violet70}",
+              "type": "color"
+            }
+          },
+          "BottomGradient": {
+            "base": {
+              "value": "{color.sea.sea70}",
+              "type": "color"
+            }
+          }
         }
       },
       "accent": {
@@ -517,186 +663,6 @@
         "color6": {
           "value": "{color.stone.stone70}",
           "type": "color"
-        }
-      }
-    },
-    "dropShadow": {
-      "shadowColor1": {
-        "value": "rgba(28,34,43,0.3)",
-        "type": "color"
-      },
-      "shadowColor2": {
-        "value": "rgba(28,34,43,0.15)",
-        "type": "color"
-      }
-    }
-  },
-  "dropShadow": {
-    "x": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      }
-    },
-    "y": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "1",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "4",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "1",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "6",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "8",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "4",
-          "type": "number"
-        }
-      }
-    },
-    "blur": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "2",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "6",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "8",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "3",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "10",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "3",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "12",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "4",
-          "type": "number"
-        }
-      }
-    },
-    "spread": {
-      "elevation1": {
-        "dropshadow1": {
-          "value": "0",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "2",
-          "type": "number"
-        }
-      },
-      "elevation2": {
-        "dropshadow1": {
-          "value": "3",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation3": {
-        "dropshadow1": {
-          "value": "4",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
-        }
-      },
-      "elevation4": {
-        "dropshadow1": {
-          "value": "6",
-          "type": "number"
-        },
-        "dropshadow2": {
-          "value": "0",
-          "type": "number"
         }
       }
     }

@@ -15,6 +15,32 @@
           "type": "sizing"
         }
       }
+    },
+    "icon": {
+      "xs": {
+        "value": "{size.size12}",
+        "type": "sizing"
+      },
+      "sm": {
+        "value": "{size.size16}",
+        "type": "sizing"
+      },
+      "md": {
+        "value": "{size.size20}",
+        "type": "sizing"
+      },
+      "lg": {
+        "value": "{size.size24}",
+        "type": "sizing"
+      },
+      "xl": {
+        "value": "{size.size32}",
+        "type": "sizing"
+      },
+      "xxl": {
+        "value": "{size.size36}",
+        "type": "sizing"
+      }
     }
   },
   "spacing": {
@@ -46,7 +72,7 @@
       "value": "{size.size32}",
       "type": "spacing"
     },
-    "gap": {
+    "between": {
       "sections": {
         "value": "{size.size48}",
         "type": "spacing"
@@ -92,8 +118,16 @@
         }
       },
       "interactive": {
-        "horizontal": {
+        "horizontalSm": {
+          "value": "{size.size8}",
+          "type": "spacing"
+        },
+        "horizontalMd": {
           "value": "{size.size12}",
+          "type": "spacing"
+        },
+        "horizontalLg": {
+          "value": "{size.size24}",
           "type": "spacing"
         }
       }
@@ -161,6 +195,32 @@
     "lg": {
       "value": "{size.size4}",
       "type": "borderWidth"
+    },
+    "icon": {
+      "xs": {
+        "value": "{size.size1}",
+        "type": "borderWidth"
+      },
+      "sm": {
+        "value": "{additionalSize.size1_25}",
+        "type": "borderWidth"
+      },
+      "md": {
+        "value": "{additionalSize.size1_5}",
+        "type": "borderWidth"
+      },
+      "lg": {
+        "value": "{size.size2}",
+        "type": "borderWidth"
+      },
+      "xl": {
+        "value": "{additionalSize.size2_5}",
+        "type": "borderWidth"
+      },
+      "xxl": {
+        "value": "{additionalSize.size3}",
+        "type": "borderWidth"
+      }
     },
     "interactive": {
       "base": {
@@ -322,5 +382,68 @@
   "visibleInRebrand": {
     "value": "true",
     "type": "boolean"
+  },
+  "typography": {
+    "input": {
+      "small": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.regular}",
+          "fontSize": "{size.size14}",
+          "lineHeight": "{size.size14}"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.regular}",
+          "fontSize": "{size.size16}",
+          "lineHeight": "{size.size16}"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.regular}",
+          "fontSize": "{size.size20}",
+          "lineHeight": "{size.size20}"
+        },
+        "type": "typography"
+      }
+    },
+    "inlineLink": {
+      "small": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.semiBold}",
+          "fontSize": "{size.size14}",
+          "lineHeight": "{size.size20}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      },
+      "medium": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.semiBold}",
+          "fontSize": "{size.size16}",
+          "lineHeight": "{size.size20}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{fontFamily.Atkinson}",
+          "fontWeight": "{fontWeight.semiBold}",
+          "fontSize": "{size.size28}",
+          "lineHeight": "{size.size32}",
+          "textDecoration": "{undeline}"
+        },
+        "type": "typography"
+      }
+    }
   }
 }

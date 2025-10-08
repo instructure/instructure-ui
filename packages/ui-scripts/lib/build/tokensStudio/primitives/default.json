@@ -736,5 +736,9 @@
       "value": "0.1875rem",
       "type": "dimension"
     }
+  },
+  "undeline": {
+    "value": "underline",
+    "type": "textDecoration"
   }
 }

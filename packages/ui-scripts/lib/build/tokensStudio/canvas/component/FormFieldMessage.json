@@ -16,10 +16,6 @@
       "value": "{color.text.success}",
       "type": "color"
     },
-    "successIconColor": {
-      "value": "{color.icon.success}",
-      "type": "color"
-    },
     "fontWeight": {
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"

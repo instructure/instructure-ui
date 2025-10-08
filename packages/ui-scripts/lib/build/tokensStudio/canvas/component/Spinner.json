@@ -12,19 +12,19 @@
       "value": "{color.background.muted}",
       "type": "color"
     },
-    "strokeWidthXs": {
+    "borderWidthXs": {
       "value": "0.25em",
       "type": "borderWidth"
     },
-    "strokeWidthSm": {
+    "borderWidthSm": {
       "value": "0.375em",
       "type": "borderWidth"
     },
-    "strokeWidthMd": {
+    "borderWidthMd": {
       "value": "0.5em",
       "type": "borderWidth"
     },
-    "strokeWidthLg": {
+    "borderWidthLg": {
       "value": "0.75em",
       "type": "borderWidth"
     },

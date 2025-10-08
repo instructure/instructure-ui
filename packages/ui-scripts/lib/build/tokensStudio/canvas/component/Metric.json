@@ -20,7 +20,7 @@
       "value": "{fontSize.text2xl}",
       "type": "fontSizes"
     },
-    "gapTexts": {
+    "spaceBetweenTexts": {
       "value": "{spacing.spaceSm}",
       "type": "spacing"
     },

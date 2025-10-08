@@ -100,8 +100,8 @@
       "value": "{size.interactive.height.lg}",
       "type": "sizing"
     },
-    "gapContent": {
-      "value": "{spacing.spaceMd}",
+    "spaceBetweenElements": {
+      "value": "{spacing.between.inputElements}",
       "type": "spacing"
     },
     "paddingHorizontal": {

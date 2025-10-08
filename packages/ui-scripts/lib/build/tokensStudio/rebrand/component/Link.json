@@ -57,23 +57,23 @@
       "type": "fontSizes"
     },
     "fontSizeLg": {
-      "value": "{fontSize.textXl}",
+      "value": "{fontSize.text2xl}",
       "type": "fontSizes"
     },
     "fontWeight": {
       "value": "{fontWeight.interactive}",
       "type": "fontWeights"
     },
-    "gapSm": {
+    "spaceBetweenElementsMd": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "spaceBetweenElementsLg": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "spaceBetweenElementsSm": {
       "value": "{spacing.space2xs}",
-      "type": "spacing"
-    },
-    "gapMd": {
-      "value": "{spacing.spaceXs}",
-      "type": "spacing"
-    },
-    "gapLg": {
-      "value": "{spacing.spaceXs}",
       "type": "spacing"
     },
     "lineHeightSm": {
@@ -85,44 +85,12 @@
       "type": "lineHeights"
     },
     "lineHeightLg": {
-      "value": "{lineHeight.standalone.textXl}",
+      "value": "{lineHeight.standalone.text2xl}",
       "type": "lineHeights"
     },
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
-    },
-    "inlineLink": {
-      "small": {
-        "value": {
-          "fontFamily": "{fontFamily.base}",
-          "fontWeight": "{fontWeight.body.strong}",
-          "fontSize": "{fontSize.textSm}",
-          "lineHeight": "{lineHeight.standalone.textSm}",
-          "textDecoration": "underline"
-        },
-        "type": "typography"
-      },
-      "medium": {
-        "value": {
-          "fontFamily": "{fontFamily.base}",
-          "fontWeight": "{fontWeight.body.strong}",
-          "fontSize": "{fontSize.textBase}",
-          "lineHeight": "{lineHeight.paragraph.textBase}",
-          "textDecoration": "underline"
-        },
-        "type": "typography"
-      },
-      "large": {
-        "value": {
-          "fontFamily": "{fontFamily.base}",
-          "fontWeight": "{fontWeight.body.strong}",
-          "fontSize": "{fontSize.textXl}",
-          "lineHeight": "{lineHeight.standalone.textXl}",
-          "textDecoration": "underline"
-        },
-        "type": "typography"
-      }
     }
   }
 }
