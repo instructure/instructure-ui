@@ -56,6 +56,10 @@
       "value": "{color.text.interactive.secondary.active}",
       "type": "color"
     },
+    "secondaryIconColor": {
+      "value": "{color.icon.interactive.secondary.base}",
+      "type": "color"
+    },
     "successBackgroundColor": {
       "value": "{color.background.interactive.success.base}",
       "type": "color"

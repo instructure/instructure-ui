@@ -251,6 +251,14 @@
     "primaryDisabledBorderColor": {
       "value": "{color.stroke.interactive.primary.disabled}",
       "type": "color"
+    },
+    "secondaryTextColor": {
+      "value": "{color.text.interactive.secondary.active}",
+      "type": "color"
+    },
+    "secondaryIconColor": {
+      "value": "{color.icon.interactive.secondary.base}",
+      "type": "color"
     }
   },
   "color": {
