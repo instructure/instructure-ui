@@ -22,22 +22,31 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
+import { useState } from 'react'
 
 import { Tray } from '../index'
 import type { TrayProps } from '../props'
 
 describe('<Tray />', async () => {
-  it('should render nothing and have a node with no parent when closed', async () => {
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
+
+  it('should render nothing and have a node with no parent when closed', () => {
     render(<Tray label="Tray Example">Hello Tray</Tray>)
 
     const trayContent = screen.queryByText('Hello Tray')
     expect(trayContent).not.toBeInTheDocument()
   })
 
-  it('should render children and have a node with a parent when open', async () => {
+  it('should render children and have a node with a parent when open', () => {
     render(
       <Tray label="Tray Example" open>
         Hello Tray
@@ -48,31 +57,30 @@ describe('<Tray />', async () => {
     expect(trayContent).toBeInTheDocument()
   })
 
-  it('should apply the a11y attributes', async () => {
+  it('should apply the a11y attributes', () => {
     render(
       <Tray label="Tray Example" open>
         Hello Tray
       </Tray>
     )
     const tray = screen.getByRole('dialog')
-
     expect(tray).toHaveAttribute('aria-label', 'Tray Example')
   })
 
-  it('should support onOpen prop', async () => {
+  it('should support onOpen prop', () => {
     const onOpen = vi.fn()
     render(
       <Tray label="Tray Example" open onOpen={onOpen}>
         Hello Tray
       </Tray>
     )
-
-    await waitFor(() => {
-      expect(onOpen).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+    expect(onOpen).toHaveBeenCalled()
   })
 
-  it('should support onClose prop', async () => {
+  it('should support onClose prop', () => {
     const onClose = vi.fn()
 
     const { rerender } = render(
@@ -87,13 +95,13 @@ describe('<Tray />', async () => {
         Hello Tray
       </Tray>
     )
-
-    await waitFor(() => {
-      expect(onClose).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+    expect(onClose).toHaveBeenCalled()
   })
 
-  it('should take a prop for finding default focus', async () => {
+  it('should take a prop for finding default focus', () => {
     render(
       <Tray
         label="Tray Example"
@@ -106,10 +114,10 @@ describe('<Tray />', async () => {
       </Tray>
     )
     const input = screen.getByLabelText('my-input-label')
-
-    await waitFor(() => {
-      expect(document.activeElement).toBe(input)
+    act(() => {
+      vi.runAllTimers()
     })
+    expect(document.activeElement).toBe(input)
   })
 
   describe('transition()', () => {
@@ -139,7 +147,6 @@ describe('<Tray />', async () => {
         }
       }
     }
-
     for (const dir in placements) {
       describe(`when text direction is '${dir}'`, () => {
         for (const placement in placements[dir].enteringPlacements) {
@@ -158,15 +165,16 @@ describe('<Tray />', async () => {
                 Hello
               </Tray>
             )
-            await waitFor(() => {
-              expect(onEntered).toHaveBeenCalled()
+            act(() => {
+              vi.runAllTimers()
             })
+            expect(onEntered).toHaveBeenCalled()
           })
         }
 
         for (const placement in placements[dir].exitingPlacements) {
           const val = placements[dir].exitingPlacements[placement]
-          it(`returns ${val} for ${placement} when exiting`, async () => {
+          it(`returns ${val} for ${placement} when exiting`, () => {
             const onExited = vi.fn()
             document.documentElement.setAttribute('dir', dir)
 
@@ -192,12 +200,79 @@ describe('<Tray />', async () => {
                 Hello
               </Tray>
             )
-            await waitFor(() => {
-              expect(onExited).toHaveBeenCalled()
+            act(() => {
+              vi.runAllTimers()
             })
+            expect(onExited).toHaveBeenCalled()
           })
         }
       })
     }
+  })
+
+  it('should open, close via dismiss, and reopen with shouldCloseOnDocumentClick enabled', async () => {
+    const onDismiss = vi.fn()
+    const onEntered = vi.fn()
+    const onExited = vi.fn()
+
+    const TrayWithButton = () => {
+      const [isOpen, setIsOpen] = useState(false)
+
+      const handleDismiss = () => {
+        setIsOpen(false)
+        onDismiss()
+      }
+
+      return (
+        <div>
+          <div>Outside of Tray</div>
+          <button onClick={() => setIsOpen(!isOpen)}>Toggle Tray</button>
+          <Tray
+            label="Tray Example"
+            shouldCloseOnDocumentClick
+            open={isOpen}
+            onDismiss={handleDismiss}
+            onEntered={onEntered}
+            onExited={onExited}
+          >
+            <div>Tray Content</div>
+          </Tray>
+        </div>
+      )
+    }
+    render(<TrayWithButton />)
+    // 1. Open Tray
+    expect(screen.queryByText('Tray Content')).not.toBeInTheDocument()
+    const button = screen.getByText('Toggle Tray')
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
+    })
+    expect(onEntered).toHaveBeenCalled()
+    expect(onDismiss).not.toHaveBeenCalled()
+    expect(screen.getByText('Tray Content')).toBeInTheDocument()
+    // 2. Close Tray be clicking outside it
+    // event.detail and button are needed because FocusRegion.ts/handleDocumentClick
+    fireEvent.click(document, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
+    })
+    expect(onDismiss).toHaveBeenCalled()
+    expect(onExited).toHaveBeenCalled()
+    expect(screen.queryByText('Tray Content')).not.toBeInTheDocument()
+
+    onEntered.mockClear()
+    onDismiss.mockClear()
+    onExited.mockClear()
+
+    // 3. click Button again, Tray should reopen.
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
+    })
+    expect(onEntered).toHaveBeenCalled()
+    expect(onDismiss).not.toHaveBeenCalled()
+    expect(onExited).not.toHaveBeenCalled()
+    expect(screen.getByText('Tray Content')).toBeInTheDocument()
   })
 })
