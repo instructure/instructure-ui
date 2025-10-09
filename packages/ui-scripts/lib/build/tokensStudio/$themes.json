@@ -371,7 +371,6 @@
       "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
       "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
       "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-      "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
       "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
       "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
       "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
@@ -836,7 +835,6 @@
       "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
       "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
       "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-      "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37",
       "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",
       "size.interactive.height.md": "63693437989a35d5b098776e253cff6e0385995c",
       "size.interactive.height.lg": "0889ec620edcf315d3532721d7f626ebee5d6c66",
@@ -1347,8 +1345,7 @@
       "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
       "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
       "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
-      "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-      "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+      "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:2",
@@ -1810,8 +1807,7 @@
       "textInput.heightSm": "a0ad4e6b69166feb4a3dec2dbda72bda3604b0b8",
       "textInput.heightMd": "eaf8de2e4d80aa08167b142de8f320134cf18a90",
       "textInput.heightLg": "b29c17ee6b37a6945b5e737dcc68fb0f7008a545",
-      "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8",
-      "textInput.paddingHorizontal": "454a7042f519863429fe476040a87ec294888d37"
+      "textInput.gapContent": "857000795e3573ec6256a41e4bfcb0a10d177ff8"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:3",

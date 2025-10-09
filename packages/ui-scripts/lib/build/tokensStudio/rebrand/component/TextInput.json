@@ -104,8 +104,16 @@
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
-    "paddingHorizontal": {
-      "value": "{spacing.spaceMd}",
+    "paddingHorizontalSm": {
+      "value": "{spacing.padding.interactive.horizontal.sm}",
+      "type": "spacing"
+    },
+    "paddingHorizontalMd": {
+      "value": "{spacing.padding.interactive.horizontal.md}",
+      "type": "spacing"
+    },
+    "paddingHorizontalLg": {
+      "value": "{spacing.padding.interactive.horizontal.lg}",
       "type": "spacing"
     }
   }
