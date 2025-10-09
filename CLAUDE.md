@@ -81,13 +81,14 @@ npm run clean-node && npm install        # Nuclear option (removes all node_modu
 **Each component has two READMEs:**
 
 1. **Component README**: `/packages/[package]/src/[Component]/README.md` ⭐
-   - Usage examples and guidelines
+   - What the component does and usage examples
    - **Check this first** - it has the detailed information
+   - These READMEs are also used to render the component documentation pages on instructure.design
 
 2. **Package README**: `/packages/[package]/README.md`
    - Package overview, installation, exports
 
-**For complete API details:**
+**For complete API details of a component:**
 - Props: Check `props.ts` files in component source
 - Theme variables: Check `theme.ts` files in component source
 
@@ -95,9 +96,9 @@ npm run clean-node && npm install        # Nuclear option (removes all node_modu
 
 1. Find component in `/packages/ui-[name]/src/[Component]/`
 2. Check Component README for API details
-3. Make changes (functional components only)
+3. Make changes
 4. Run tests: `npm run test:vitest`
-5. Update both README files if needed
+5. Update README if the functionality has changed (e.g., a new prop was added)
 6. Use `/commit` to create commit
 
 ## Breaking Changes
@@ -154,7 +155,7 @@ See `/regression-test/README.md` for detailed instructions.
 
 ## Writing Documentation
 
-InstUI uses custom markdown with special code blocks for interactive examples.
+InstUI uses custom markdown with special code blocks (using [gray-matter](https://github.com/jonschlinkert/gray-matter) YAML syntax) for interactive examples.
 
 **Code block types:**
 - `type: code` - Syntax highlighting only
