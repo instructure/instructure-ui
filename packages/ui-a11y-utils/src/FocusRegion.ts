@@ -85,10 +85,12 @@ class FocusRegion {
     this._contextElement = element
     if (options) {
       this._options = options
-      this.addOrRemoveListeners(
-        options.shouldCloseOnDocumentClick,
-        options.shouldCloseOnEscape
-      )
+      if (this._active) {
+        this.addOrRemoveListeners(
+          options.shouldCloseOnDocumentClick,
+          options.shouldCloseOnEscape
+        )
+      }
     }
     if (this._keyboardFocusRegion) {
       this._keyboardFocusRegion.updateElement(element)
@@ -114,6 +116,9 @@ class FocusRegion {
   }
 
   handleDocumentClick = (event: React.PointerEvent) => {
+    // we used event.pointerType === 'mouse' here, but it is not supported in Safari
+    // https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
+    // TODO: Check this in the future, because the linked Webkit bug is marked as fixed in 2025-09
     if (
       this._options.shouldCloseOnDocumentClick &&
       event.button === 0 &&
