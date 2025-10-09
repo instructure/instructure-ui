@@ -563,7 +563,7 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
   ```
 
 **When you have to display large media inside the Modal (or have no control over the size of the media)**, set `overflow` to `fit`. Doing so makes Modal.Body fill 100% of the available width and height, enabling you to
-use the [Img](#Img) component's `constrain` property to fit the image inside Modal.Body.
+use the [Img](Img) component's `constrain` property to fit the image inside Modal.Body.
 
 > `<Img />` uses CSS's [`object-fit`](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) for its constrain property. If you're not using `<Img />`, add an `object-fit` rule to your media, and it will work with `overflow="fit"`.
 

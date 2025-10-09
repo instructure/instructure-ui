@@ -7,7 +7,7 @@ relevantForAI: true
 
 ## Accessing the DOM
 
-Accessing the DOM directly in React is discouraged, because it pierces the DOM abstraction. Still there are some cases when InstUI is required to do so (for example for focus management or positioning). This happens with the [findDOMNode](#findDOMNode) utility function.
+Accessing the DOM directly in React is discouraged, because it pierces the DOM abstraction. Still there are some cases when InstUI is required to do so (for example for focus management or positioning). This happens with the [findDOMNode](findDOMNode) utility function.
 
 For custom React components this method first tries to access a `ref` property. If this does not exist, then:
 
