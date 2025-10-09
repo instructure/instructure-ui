@@ -136,7 +136,7 @@ type: embed
 | Img | withGrayscale | `boolean` | No | `false` |  |
 | Img | withBlur | `boolean` | No | `false` |  |
 | Img | constrain | `'cover' \| 'contain'` | No | - |  |
-| Img | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
+| Img | elementRef | `(element: Element \| null) => void` | No | - |  |
 | Img | height | `string \| number` | No | - |  |
 | Img | width | `string \| number` | No | - |  |
 

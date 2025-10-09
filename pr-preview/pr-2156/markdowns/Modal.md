@@ -1212,22 +1212,17 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Modal | label | `string` | Yes | - | An accessible label for the `<Modal />` content |
 | Modal | children | `React.ReactNode` | Yes | - | Recommended children types are: `Modal.Header`, `Modal.Body`, `Modal.Footer`. Custom children can be used as well. `Variant` and `overflow` properties are always passed down to children. |
-| Modal | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element to render the dialog as, `span` by default |
 | Modal | size | `'auto' \| 'small' \| 'medium' \| 'large' \| 'fullscreen'` | No | `'auto'` | The size of the `<Modal />` content |
 | Modal | variant | `'default' \| 'inverse'` | No | `'default'` | Designates the background style of the `<Modal />` |
-| Modal | open | `boolean` | No | `false` | Whether or not the `<Modal />` is open |
-| Modal | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
-| Modal | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be returned to the trigger when the `<Modal/>` is closed |
-| Modal | shouldCloseOnDocumentClick | `boolean` | No | `true` | Whether the `<Modal/>` should request close when the document is clicked |
-| Modal | onOpen | `(type?: TransitionType) => void` | No | - | Callback fired when `<Modal />` content has been mounted in the DOM |
-| Modal | onClose | `() => void` | No | - | Callback fired when `<Modal />` has been unmounted from the DOM |
-| Modal | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Modal />` is requesting to be closed |
 | Modal | contentRef | `(dialog: Dialog \| null) => void` | No | - | A function that returns a reference to the content element |
+| Modal | constrain | `'window' \| 'parent'` | No | `'window'` | Constrain the Modal to the document window or its closest positioned parent |
+| Modal | overflow | `'scroll' \| 'fit'` | No | `'scroll'` | Should ModalBody handle overflow with scrollbars, or fit its content within its own height? |
+| Modal | open | `boolean` | No | `false` | Whether or not the `<Modal />` is open |
 | Modal | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<Modal />` (defaults to `document.body`) |
 | Modal | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
-| Modal | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Modal />` is open |
+| Modal | onOpen | `(type?: TransitionType) => void` | No | - | Callback fired when `<Modal />` content has been mounted in the DOM |
+| Modal | onClose | `() => void` | No | - | Callback fired when `<Modal />` has been unmounted from the DOM |
 | Modal | transition | `TransitionType` | No | `'fade'` |  |
 | Modal | onEnter | `() => void` | No | - | Callback fired before the <Modal /> transitions in |
 | Modal | onEntering | `() => void` | No | - | Callback fired as the <Modal /> begins to transition in |
@@ -1235,11 +1230,16 @@ type: embed
 | Modal | onExit | `() => void` | No | - | Callback fired right before the <Modal /> transitions out |
 | Modal | onExiting | `() => void` | No | - | Callback fired as the <Modal /> begins to transition out |
 | Modal | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the <Modal /> finishes transitioning out |
-| Modal | constrain | `'window' \| 'parent'` | No | `'window'` | Constrain the Modal to the document window or its closest positioned parent |
-| Modal | overflow | `'scroll' \| 'fit'` | No | `'scroll'` | Should ModalBody handle overflow with scrollbars, or fit its content within its own height? |
+| Modal | label | `string` | Yes | - | An accessible label for the `<Modal />` content |
+| Modal | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element to render the dialog as, `span` by default |
+| Modal | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be returned to the trigger when the `<Modal/>` is closed |
+| Modal | shouldCloseOnDocumentClick | `boolean` | No | `true` | Whether the `<Modal/>` should request close when the document is clicked |
+| Modal | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Modal />` is requesting to be closed |
+| Modal | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Modal />` is open |
+| Modal | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
 | Modal.ModalBody | children | `React.ReactNode` | No | - |  |
 | Modal.ModalBody | padding | `Spacing` | No | `'medium'` |  |
-| Modal.ModalBody | elementRef | `(element: UIElement \| null) => void` | No | - | provides a reference to the underlying html root element |
+| Modal.ModalBody | elementRef | `(element: UIElement \| null) => void` | No | - |  |
 | Modal.ModalBody | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` |  |
 | Modal.ModalBody | variant | `'default' \| 'inverse'` | No | `'default'` |  |
 | Modal.ModalBody | overflow | `'scroll' \| 'fit'` | No | - |  |

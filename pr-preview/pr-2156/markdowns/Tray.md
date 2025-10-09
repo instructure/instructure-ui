@@ -169,7 +169,6 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Tray | label | `string` | Yes | - |  |
-| Tray | children | `React.ReactNode` | No | - |  |
 | Tray | size | `'x-small' \| 'small' \| 'regular' \| 'medium' \| 'large'` | No | `'small'` | The size (width) of the `<Tray />` when placement is `start` or `end` |
 | Tray | placement | `'top' \| 'bottom' \| 'start' \| 'end' \| 'center'` | No | `'start'` | Placement to determine where the `<Tray />` should display in the viewport |
 | Tray | open | `boolean` | No | `false` | Whether or not the `<Tray />` is open |
@@ -196,6 +195,7 @@ type: embed
 | Tray | transitionExit | `boolean` | No | `true` | Run the exit animation |
 | Tray | border | `boolean` | No | `false` | Should the `<Tray />` have a border |
 | Tray | shadow | `boolean` | No | `true` | Should the `<Tray />` have a box shadow |
+| Tray | children | `React.ReactNode` | No | - |  |
 | Tray | enableMask | `boolean` | No | `false` | Add Mask overlay to the `<Tray />` |
 
 ### Usage

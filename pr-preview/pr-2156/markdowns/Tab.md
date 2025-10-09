@@ -14,7 +14,7 @@
 | Tab | isSelected | `boolean` | No | `false` |  |
 | Tab | onClick | `( event: React.MouseEvent<ViewOwnProps>, tabData: { index: number; id: string } ) => void` | No | - |  |
 | Tab | onKeyDown | `( event: React.KeyboardEvent<ViewOwnProps>, tabData: { index: number; id: string } ) => void` | No | - |  |
-| Tab | children | `\| keyof ReactHTML \| keyof ReactSVG \| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| Tab | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Tab | isOverflowScroll | `boolean` | No | - | Whether tabOverflow prop in Tabs is set to 'scroll'. |
 
 ### Usage
