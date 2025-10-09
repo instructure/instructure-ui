@@ -17,3 +17,6 @@ __build__
 tsconfig.build.tsbuildinfo
 
 .pnp.*
+
+.claude/settings.local.json
+.playwright-mcp
