@@ -706,8 +706,7 @@ if("code"===type)return(0,_jsxRuntime.jsx)(_uiView.View,{display:"block",margin:
 if("embed"===type)return(0,_jsxRuntime.jsx)(_emotion.InstUISettingsProvider,{theme:_uiThemes.default,children:(0,_compileAndRenderExample.compileAndRenderExample)(matter.content)},(0,_uuid.v4)())
 if("example"===type)return(0,_jsxRuntime.jsx)(_uiView.View,{display:"block",margin:"medium none",children:getComponent("Playground",data)},(0,_uuid.v4)())}return(0,_jsxRuntime.jsx)("code",{children:code},(0,_uuid.v4)())},heading:(text,level)=>{var _headingVariants
 return null===(_headingVariants=headingVariants[`h${level}`])||void 0===_headingVariants?void 0:_headingVariants.call(headingVariants,(0,_uuid.v4)(),text)},link:(href,text)=>(0,_jsxRuntime.jsx)(_Link.Link,{href,children:text},(0,_uuid.v4)())})
-function compileMarkdown(content,title){const ti=title||"Untitled"
-return(0,_jsxRuntime.jsx)(_markedReact.default,{renderer:renderer(ti),children:content})}exports.default=compileMarkdown},18435:(__unused_webpack_module,exports,__webpack_require__)=>{"use strict"
+function compileMarkdown(content,title){return(0,_jsxRuntime.jsx)(_markedReact.default,{renderer:renderer(null!=title?title:"Untitled"),children:content})}exports.default=compileMarkdown},18435:(__unused_webpack_module,exports,__webpack_require__)=>{"use strict"
 var _interopRequireDefault=__webpack_require__(4293).default
 Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=exports.Properties=void 0
 var _class,_Properties,_Table$ColHeader,_Table$ColHeader2,_Table$ColHeader3,_Table$ColHeader4,_react=__webpack_require__(14041),_uiTable=__webpack_require__(92113),_emotion=__webpack_require__(62542),_styles=_interopRequireDefault(__webpack_require__(94943)),_compileMarkdown=__webpack_require__(18249),_jsxRuntime=__webpack_require__(54380)

@@ -21,6 +21,8 @@ Places where the `ref` prop is needed for custom components (you can use any Ins
 
 To fix the issue add a `ref` property to the component that returns the underlying DOM node:
 
+In Class components:
+
 ```javascript
 ---
 type: code
@@ -35,6 +37,8 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+In functional components:
 
 ```javascript
 ---
