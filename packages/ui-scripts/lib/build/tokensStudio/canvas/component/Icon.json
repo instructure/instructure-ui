@@ -68,6 +68,14 @@
       "value": "{color.icon.interactive.primary.hover}",
       "type": "color"
     },
+    "destructiveColor": {
+      "value": "{color.icon.interactive.destructive.base}",
+      "type": "color"
+    },
+    "destructiveHoverColor": {
+      "value": "{color.icon.interactive.destructive.hover}",
+      "type": "color"
+    },
     "mutedColor": {
       "value": "{color.icon.muted}",
       "type": "color"
