@@ -24,54 +24,31 @@ type: example
 
 To use `TimeSelect` controlled, simply provide the `value` prop an ISO string. The `onChange` callback provides the ISO value of the corresponding option that was selected. Use this value to update the state.
 
-- ```javascript
-  class Example extends React.Component {
-    state = {
-      value: '2020-05-18T23:59:00'
-    }
+```js
+---
+type: example
+---
+const Example = () => {
+  const [value, setValue] = useState('2020-05-18T23:59:00')
 
-    handleChange = (e, { value }) => {
-      this.setState({ value })
-    }
-
-    render() {
-      return (
-        <TimeSelect
-          renderLabel="Choose a time"
-          placeholder="e.g., 4:00:00 PM"
-          value={this.state.value}
-          step={15}
-          format="LTS"
-          onChange={this.handleChange}
-        />
-      )
-    }
-  }
-  render(<Example />)
-  ```
-
-- ```js
-  const Example = () => {
-    const [value, setValue] = useState('2020-05-18T23:59:00')
-
-    const handleChange = (e, { value }) => {
-      setValue(value)
-    }
-
-    return (
-      <TimeSelect
-        renderLabel="Choose a time"
-        placeholder="e.g., 4:00:00 PM"
-        value={value}
-        step={15}
-        format="LTS"
-        onChange={handleChange}
-      />
-    )
+  const handleChange = (e, { value }) => {
+    setValue(value)
   }
 
-  render(<Example />)
-  ```
+  return (
+    <TimeSelect
+      renderLabel="Choose a time"
+      placeholder="e.g., 4:00:00 PM"
+      value={value}
+      step={15}
+      format="LTS"
+      onChange={handleChange}
+    />
+  )
+}
+
+render(<Example />)
+```
 
 ### Freeform input
 

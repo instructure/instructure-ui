@@ -34,6 +34,7 @@
 
 ### Components
 
+- [InstUISettingsProvider](./InstUISettingsProvider.md): A global configuration component for applying themes and text direction settings across an application. It wraps Emotion's ThemeProvider and supports nested providers for theme inheritance and overrides. Also manages text direction (LTR/RTL) via context for descendant components.
 - [Alert](./Alert.md): Notifies users with contextual variants (success, info, error, warning). Supports dismissible dialogs, automatic timeout dismissal, live regions for screen readers, and inline usage without shadows. Includes accessibility guidelines for proper implementation.
 - [Avatar](./Avatar.md): Displays user avatars with fallback to initials or icons. Supports circle/rectangle shapes, multiple sizes, colors, and inverse styling. Includes special AI avatar variant and accessibility considerations with aria-hidden attribute.
 - [Badge](./Badge.md): Displays numeric counts or notifications with accessibility features. Supports count limits, various placements, standalone usage, and color variants. Requires formatOutput prop for screen reader context beyond simple numbers.
@@ -76,7 +77,6 @@
 - [Modal](./Modal.md): A centered dialog that overlays app content with a mask. Supports headers, bodies, footers, form integration, media display, and constrained positioning. Includes variants (default, inverse) and accessibility features.
 - [AppNav](./AppNav.md): Navigation component for LTI apps that adapts to screen widths by truncating items. Provides update callbacks for visible item count and customizable truncation labels. Supports before/after items and responsive hamburger menu patterns.
 - [NumberInput](./NumberInput.md): A controlled input for numeric values with increment/decrement arrows. Supports validation, error messages, sizing, and accessibility. Must be used with event handlers; does not support uncontrolled usage.
-- [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
 - [Overlay](./Overlay.md): A closable/dismissible component that transitions content in and out via a Portal. Supports focus management, accessibility features, and can be used with Mask components. Includes guidelines for ensuring content behind the overlay is hidden from screen readers and dismissible with ESC key.
 - [Pages](./Pages.md): A component for rendering paginated content across multiple pages. Supports navigation between pages, back buttons, and focus management. Each page should contain at least one focusable element. Useful for multi-step workflows or detailed views like user profiles.
 - [Pagination](./Pagination.md): Component for navigating through multi-page content. Offers compact, full, and input variants with configurable page indicators. Supports large page numbers, custom labels, and accessibility features. Includes both new simplified API and legacy support for complex pagination needs.
@@ -90,7 +90,6 @@
 - [Rating](./Rating.md): Displays 3- or 5-star ratings based on valueNow and valueMax props. Supports rounding decimals, customizable sizes, animations, and accessibility-compliant text formatting for screen readers.
 - [Responsive](./Responsive.md): Renders components differently based on element or viewport size. Supports breakpoint-based props and conditional rendering. Use sparingly to avoid performance issues.
 - [Select](./Select.md): Accessible combobox component for single or multiple selections. Supports autocomplete, grouping, async loading, icons, and screen reader announcements. Fully controllable with extensive state management examples.
-- [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [SideNavBar](./SideNavBar.md): Experimental top-level navigation component with toggleable minimized/expanded states. Supports icons, Avatars, badges, and theming. API may change significantly.
 - [SimpleSelect](./SimpleSelect.md): Simplified Select component mimicking native `<select>` behavior. Supports uncontrolled/controlled usage, option groups, and icons. Less configurable than Select but easier to implement.
 - [SourceCodeEditor](./SourceCodeEditor.md): Wrapper around CodeMirror with syntax highlighting, line numbers, folding, indentation, search, and RTL support. Recommended upgrade from deprecated CodeEditor component.
@@ -114,24 +113,26 @@
 
 #### utilities
 
-- [InstUISettingsProvider](./InstUISettingsProvider.md): A global configuration component for applying themes and text direction settings across an application. It wraps Emotion's ThemeProvider and supports nested providers for theme inheritance and overrides. Also manages text direction (LTR/RTL) via context for descendant components.
-- [AccessibleContent](./AccessibleContent.md): Hides children from screen readers, providing alternative text via the 'alt' prop. Functions similarly to HTML img alt attributes, ensuring screen reader users get descriptive text equivalents of visual content.
-- [PresentationContent](./PresentationContent.md): Attempts to hide content from screen readers while keeping it visible. Use with caution - not fully reliable across all screen readers. Primarily for visual elements that have alternative accessible representations.
-- [ScreenReaderContent](./ScreenReaderContent.md): Renders content accessible only to screen readers, not visible on screen. Essential for providing hidden context or instructions to assistive technologies.
 - [BaseButton](./BaseButton.md): Low-level utility component for composing Instructure UI buttons. Not intended for direct use; developers should use Button, CloseButton, IconButton, or CondensedButton instead.
 - [Dialog](./Dialog.md): A utility component for accessibility in modals, popovers, and trays. Manages focus trapping, screen reader visibility, and keyboard navigation. Essential for WCAG-compliant modal interactions.
 - [Expandable](./Expandable.md): Handles expand/collapse functionality for components like ToggleDetails and ToggleGroup. Provides props for accessibility and event handling. Manages state for expanded content visibility.
 - [Focusable](./Focusable.md): A utility component that detects when elements receive focus. Provides render props for creating accessible focus-based interactions, such as skip-to-content links or focus-triggered tooltips. Ensures WCAG compliance for focus management.
-- [ApplyLocale](./ApplyLocale.md): Sets locale and timezone context for child components like TimeSelect. Enables internationalization by providing consistent localization settings throughout the component tree.
 - [Transition](./Transition.md): A wrapper component for transitioning elements in and out of the UI. Supports fade, scale, and slide transitions with customizable directions. Handles mount/unmount transitions and supports RTL mirroring for slide animations.
+- [Options](./Options.md): A view-only component for building option lists or menus. Supports variants (default, highlighted, selected, disabled), icons, nesting, and custom roles. Does not manage state—requires external event handling.
 - [Mask](./Mask.md): A component that covers its nearest positioned parent element. Can be used fullscreen within a Portal and supports click-to-close functionality. Useful for overlays and blocking UI interactions.
 - [Portal](./Portal.md): Renders a React subtree into a different DOM element. Useful for modal-like components that need to break out of parent containers. Typically used with Overlay, Modal, or other components that need to render outside their parent hierarchy.
 - [Position](./Position.md): Positions content relative to a target element with various placement options. Supports RTL internationalization, offset adjustments, and mounting in specific DOM nodes. Replaces older Target/Content pattern with renderTarget prop.
-- [DeterministicIdContextProvider](./DeterministicIdContextProvider.md): Deprecated utility component for providing deterministic ID context. Do not use the instanceCounterMap prop. Part of InstUISettingsProvider infrastructure.
+- [Selectable](./Selectable.md): Low-level utility for building custom combobox widgets. Provides ARIA-compliant prop getters and state management hooks. Use existing Select component when possible.
 - [InlineSVG](./InlineSVG.md): Renders accessible SVG content inline with support for fixed dimensions or container filling. Differentiates from SVGIcon by being suitable for non-icon SVG graphics while maintaining accessibility standards.
 - [SVGIcon](./SVGIcon.md): Renders accessible inline SVG icons. Supports custom sizing, color theming, rotation, and display properties. Accepts SVG content via children or external source strings.
 - [TruncateList](./TruncateList.md): A utility component that truncates items when space is limited, commonly used in navigation bars. Controls visible item count and provides dropdown for hidden items with customizable spacing and menu triggers.
-- [Tab](./Tab.md): A tab component for organizing content into separate views within a single context. Typically used in tabbed interfaces where users can switch between different sections or categories of information.
+
+#### contexts
+
+- [ApplyLocale](./ApplyLocale.md): Sets locale and timezone context for child components like TimeSelect. Enables internationalization by providing consistent localization settings throughout the component tree.
+- [DeterministicIdContextProvider](./DeterministicIdContextProvider.md): Deprecated utility component for providing deterministic ID context. Do not use the instanceCounterMap prop. Part of InstUISettingsProvider infrastructure.
+- [TableContext](./TableContext.md)
+- [TreeBrowserContext](./TreeBrowserContext.md)
 
 #### AI Components
 
