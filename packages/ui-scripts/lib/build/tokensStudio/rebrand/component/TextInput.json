@@ -107,6 +107,10 @@
     "paddingHorizontal": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
+    },
+    "gapPrimitives": {
+      "value": "{spacing.gap.inputElements}",
+      "type": "spacing"
     }
   }
 }
