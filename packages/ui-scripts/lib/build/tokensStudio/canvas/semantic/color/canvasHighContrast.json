@@ -238,14 +238,6 @@
           "base": {
             "value": "{color.red.red100}",
             "type": "color"
-          },
-          "hover": {
-            "value": "{color.red.red90}",
-            "type": "color"
-          },
-          "active": {
-            "value": "{color.red.red110}",
-            "type": "color"
           }
         }
       }
