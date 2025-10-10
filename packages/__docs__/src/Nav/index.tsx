@@ -141,6 +141,19 @@ class Nav extends Component<NavProps, NavState> {
     })
   }
 
+  getEffectiveBasePath = () => {
+    const pathname = window.location.pathname
+
+    // Check if we're in a PR preview (path contains /pr-preview/)
+    const prPreviewMatch = pathname.match(/^(\/pr-preview\/pr-\d+)/)
+    if (prPreviewMatch) {
+      return prPreviewMatch[1] // Returns "/pr-preview/pr-2167"
+    }
+
+    // Live version - no base path
+    return ''
+  }
+
   matchQuery(str: string): boolean {
     const { query } = this.state
     return query && typeof query.test === 'function' ? query.test(str) : true
@@ -283,9 +296,43 @@ class Nav extends Component<NavProps, NavState> {
           />
         )}
         <Link
-          onClick={this.removeFocus}
+          onClick={(e: any) => {
+            e.preventDefault()
+            this.removeFocus(e)
+
+            const basePath = this.getEffectiveBasePath() // Add this line
+            const currentPath = window.location.pathname
+
+            // Remove base path from current path for processing
+            const pathWithoutBase = basePath
+              ? currentPath.replace(basePath, '')
+              : currentPath
+
+            // Check if we're on a base path (ends with slash)
+            if (pathWithoutBase.endsWith('/')) {
+              // Base path - just append the docId WITH base path
+              const newUrl = basePath + pathWithoutBase + docId
+              window.history.pushState({}, '', newUrl)
+            } else {
+              // Regular path - replace the last segment
+              const segments = pathWithoutBase
+                .split('/')
+                .filter((segment) => segment !== '')
+              if (segments.length > 0) {
+                segments[segments.length - 1] = docId
+                const newUrl = basePath + '/' + segments.join('/')
+                window.history.pushState({}, '', newUrl)
+              } else {
+                // Homepage - just go to the doc WITH base path
+                const newUrl = basePath ? `${basePath}/${docId}` : `/${docId}`
+                window.history.pushState({}, '', newUrl)
+              }
+            }
+
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          }}
           display="block"
-          href={`#${docId}`}
+          href={`/${docId}`} // Keep href simple
           isWithinText={false}
         >
           {docs[docId].title}
@@ -451,9 +498,14 @@ class Nav extends Component<NavProps, NavState> {
           >
             <Link
               display="block"
-              onClick={this.removeFocus}
+              onClick={(e: any) => {
+                e.preventDefault()
+                this.removeFocus
+                window.history.pushState({}, '', `/${themeKey}`)
+                window.dispatchEvent(new PopStateEvent('popstate'))
+              }}
               isWithinText={false}
-              href={`#${themeKey}`}
+              href={`/${themeKey}`}
             >
               {themeKey}
             </Link>
@@ -479,9 +531,15 @@ class Nav extends Component<NavProps, NavState> {
     const themes = this.renderThemes()
     const icons = (
       <NavToggle
-        key={'icons'}
-        summary={'Icons'}
-        href="#icons"
+        summary="Icons"
+        onToggle={(e: any) => {
+          // Only handle when expanding, not collapsing
+          e.preventDefault()
+          this.removeFocus(e)
+          window.history.pushState({}, '', `/icons`)
+          window.dispatchEvent(new PopStateEvent('popstate'))
+        }}
+        href="icons"
         shouldBlur={true}
       />
     )

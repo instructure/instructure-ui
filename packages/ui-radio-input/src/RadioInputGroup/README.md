@@ -200,7 +200,7 @@ type: example
 ```
 
 If you would like to make the description visible only to screen readers you can use the
-[ScreenReaderContent](#ScreenReaderContent) component.
+[ScreenReaderContent](ScreenReaderContent) component.
 
 ```js
 ---

@@ -2,7 +2,7 @@
 describes: InstUISettingsProvider
 ---
 
-The `<InstUISettingsProvider/>` component provides a way to add global configuration to our app. It can be used to apply and handle themes (for all themeable child components that use the [withStyle](#withStyle) decorator), setting the global text direction, etc.
+The `<InstUISettingsProvider/>` component provides a way to add global configuration to our app. It can be used to apply and handle themes (for all themeable child components that use the [withStyle](withStyle) decorator), setting the global text direction, etc.
 
 Note that `<InstUISettingsProvider/>` components can be nested!
 
@@ -66,7 +66,7 @@ There are multiple ways to override themes in InstUI. You can read about how the
 
 ### Text direction management
 
-The `dir` prop sets the text direction for its descendants. It wraps its children in a [TextDirectionContext.Provider](/#TextDirectionContext), so that the text direction context can be consumed by child components that have implemented [textDirectionContextConsumer](#textDirectionContextConsumer).
+The `dir` prop sets the text direction for its descendants. It wraps its children in a [TextDirectionContext.Provider](/#TextDirectionContext), so that the text direction context can be consumed by child components that have implemented [textDirectionContextConsumer](textDirectionContextConsumer).
 
 If no `dir` prop is supplied, it will fall back to its parent context if it
 exists. Otherwise, it queries for and uses the documentElement `dir` attribute and defaults to `ltr` if it is not found.
