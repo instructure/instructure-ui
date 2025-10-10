@@ -36,6 +36,10 @@
       "value": "{color.stroke.interactive.destructive.base}",
       "type": "color"
     },
+    "successBorderColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
     "borderRadius": {
       "value": "{borderRadius.interactive.base}",
       "type": "borderRadius"
