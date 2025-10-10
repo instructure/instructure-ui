@@ -26,6 +26,7 @@ import { Children, Component, ReactElement, ReactNode } from 'react'
 
 import { warn, error } from '@instructure/console'
 import { contains, containsActiveElement } from '@instructure/ui-dom-utils'
+import { deepEqual } from '@instructure/ui-utils'
 import {
   callRenderProp,
   matchComponentTypes,
@@ -54,6 +55,7 @@ import { withStyle } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
+import type { DrilldownOptionValue } from './DrilldownOption/props'
 import { DrilldownGroup } from './DrilldownGroup'
 import type { DrilldownGroupProps, GroupChildren } from './DrilldownGroup/props'
 import { DrilldownPage } from './DrilldownPage'
@@ -147,8 +149,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     [optionId: string]: MappedOption
   } = {}
 
-  // Map of the selected options in groups (grouped by group id)
-
   ref: HTMLDivElement | Element | null = null
 
   handleRef = (el: HTMLDivElement | Element | null) => {
@@ -186,7 +186,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       activePageId: props.rootPageId,
       highlightedOptionId: undefined,
       lastSelectedId: undefined,
-      selectedGroupOptionsMap: this.setDefaultSelected()
+      selectedGroupOptionsMap: this.getSelectedGroupOptionsMap()
     }
     this._pageHistory = [props.rootPageId]
 
@@ -206,7 +206,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
   componentDidUpdate(_prevProps: DrilldownProps, prevState: DrilldownState) {
     this.props.makeStyles?.(this.makeStylesVariables)
-
     if (prevState.activePageId !== this.state.activePageId) {
       // on page change with mouse navigation, some option can get rendered
       // under the cursor and get focused, so we need to wait a tick to see
@@ -234,6 +233,57 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       this.setState({
         highlightedOptionId: undefined
       })
+    }
+
+    // This block syncs the internal state if the selectedOptions prop changes
+    // selectedOptions prop values always win over internal state.
+    let shouldUpdateState = false
+    const nextSelectionMap: SelectedGroupOptionsMap = {
+      ...this.state.selectedGroupOptionsMap
+    }
+
+    this.pages.forEach((page) => {
+      this.getChildrenArray(page.props.children).forEach((child) => {
+        if (matchComponentTypes<GroupChild>(child, [DrilldownGroup])) {
+          const {
+            id: groupId,
+            selectableType,
+            selectedOptions,
+            children: groupChildren
+          } = child.props
+
+          if (!selectableType || !Array.isArray(selectedOptions)) return
+
+          const newGroupMap = new Map()
+
+          this.getChildrenArray(groupChildren)?.forEach((groupChild) => {
+            if (
+              matchComponentTypes<OptionChild>(groupChild, [DrilldownOption])
+            ) {
+              const { id: optionId, value: optionValue } = groupChild.props
+              if (selectedOptions.includes(optionValue)) {
+                newGroupMap.set(optionId, optionValue)
+              }
+            }
+          })
+
+          const currentGroupMapInState =
+            this.state.selectedGroupOptionsMap[groupId] || new Map()
+
+          if (
+            !deepEqual(
+              this.getNormalizedMap(newGroupMap),
+              this.getNormalizedMap(currentGroupMapInState)
+            )
+          ) {
+            nextSelectionMap[groupId] = newGroupMap
+            shouldUpdateState = true
+          }
+        }
+      })
+    })
+    if (shouldUpdateState) {
+      this.setState({ selectedGroupOptionsMap: nextSelectionMap })
     }
   }
 
@@ -346,9 +396,30 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     return id ? this._activeOptionsMap[id] : undefined
   }
 
-  setDefaultSelected() {
-    const selectedGroupOptionsMap: SelectedGroupOptionsMap = {}
+  getNormalizedMap(map: Map<string, DrilldownOptionValue>) {
+    return Array.from(map.entries())
+  }
 
+  /**
+   * Initializes the map of selected options for each group on initial render.
+   *
+   * This function establishes the selection state based on a clear precedence:
+   * 1. **Controlled Mode**: If a `Drilldown.Group` has the `selectedOptions` prop
+   * (as an array), it is treated as the absolute source of truth.
+   *
+   * 2. **Uncontrolled Mode**: If `selectedOptions` is not provided, the selection
+   * is determined by `defaultSelected` props, with the following priority:
+   * a. The `defaultSelected` boolean on an individual `Drilldown.Option`.
+   * b. The `defaultSelected` array of values on the `Drilldown.Group`.
+   *
+   * It also validates that 'single' selection groups do not mistakenly receive
+   * multiple selected or default values.
+   *
+   * @returns {SelectedGroupOptionsMap} An object where keys are group IDs and
+   * values are Maps of the selected { optionId: optionValue } pairs for that group.
+   */
+  getSelectedGroupOptionsMap() {
+    const selectedGroupOptionsMap: SelectedGroupOptionsMap = {}
     this.pages.forEach((page) => {
       const { children } = page.props
 
@@ -357,30 +428,35 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           const {
             id: groupId,
             selectableType,
-            defaultSelected: groupDefaultSelected = [],
+            selectedOptions,
+            defaultSelected = [],
             children: groupChildren
           } = child.props
 
-          if (!selectableType) {
-            return
-          }
-
-          if (selectableType && !selectedGroupOptionsMap[groupId]) {
-            selectedGroupOptionsMap[groupId] = new Map()
-          }
-
-          if (selectableType === 'single' && groupDefaultSelected.length > 1) {
-            error(
-              false,
-              `Radio type selectable groups can have only one item selected! Group with id "${groupId}" cannot select multiple items: [${groupDefaultSelected.join(
-                ', '
-              )}]!`
-            )
-
-            return
-          }
+          if (!selectableType) return
 
           selectedGroupOptionsMap[groupId] = new Map()
+
+          if (selectableType === 'single') {
+            if (Array.isArray(selectedOptions) && selectedOptions.length > 1) {
+              error(
+                false,
+                `Radio type selectable groups can have only one item selected! Group "${groupId}" has multiple values: [${selectedOptions.join(
+                  ', '
+                )}]!`
+              )
+              return
+            }
+            if (defaultSelected.length > 1) {
+              error(
+                false,
+                `Radio type selectable groups can have only one default item selected! Group "${groupId}" has multiple values: [${defaultSelected.join(
+                  ', '
+                )}]!`
+              )
+              return
+            }
+          }
 
           this.getChildrenArray(groupChildren)?.forEach((groupChild) => {
             if (
@@ -392,18 +468,24 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                 defaultSelected: optionDefaultSelected
               } = groupChild.props
 
-              // if explicitly set to false, it should override the group's
-              if (optionDefaultSelected === false) {
-                return
+              if (optionValue == null) return
+
+              let isSelected = false
+              // If the group is controlled via the `selectedOptions` prop, it is the source of truth.
+              // `defaultSelected` values are ignored.
+              if (Array.isArray(selectedOptions)) {
+                isSelected = selectedOptions.includes(optionValue)
+                // Second strongest is the `defaultSelected` value on the option itself.
+              } else if (optionDefaultSelected === false) {
+                isSelected = false
+              } else {
+                // Last is the `defaultSelected` array on the group.
+                const isGroupDefaultSelected =
+                  defaultSelected.includes(optionValue)
+                isSelected = optionDefaultSelected || isGroupDefaultSelected
               }
 
-              const isGroupDefaultSelected =
-                typeof optionValue !== 'undefined' &&
-                groupDefaultSelected
-                  .filter((value) => typeof value !== 'undefined')
-                  .includes(optionValue)
-
-              if (optionDefaultSelected || isGroupDefaultSelected) {
+              if (isSelected) {
                 selectedGroupOptionsMap[groupId].set(optionId, optionValue)
               }
             }
