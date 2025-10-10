@@ -36,10 +36,6 @@
       "value": "{color.stroke.interactive.destructive.base}",
       "type": "color"
     },
-    "errorBorderHoverColor": {
-      "value": "{color.stroke.interactive.destructive.hover}",
-      "type": "color"
-    },
     "borderRadius": {
       "value": "{borderRadius.interactive.base}",
       "type": "borderRadius"
