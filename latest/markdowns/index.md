@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.0.0 
+- version 11.0.1 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
