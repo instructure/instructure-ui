@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* **emotion:** fix useTheme export. The native emotion util was exported instead of our own ([8450778](https://github.com/instructure/instructure-ui/commit/8450778bbcbc2a2f928c1c53ff21147535d61940))
+
+
+
+
+
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 
