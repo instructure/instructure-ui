@@ -13,18 +13,32 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('regression-test/pnpm-lock.yaml') }}
       - name: Build InstUI
-        run: npm ci && npm run bootstrap
-      - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile && pnpm run bootstrap
+      - name: Install regression-test dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: regression-test
+      - name: Install Cypress binary
+        run: pnpm exec cypress install
         working-directory: regression-test
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         env:
           ELECTRON_EXTRA_LAUNCH_ARGS: "--remote-debugging-port=9222"
         with:
-          build: npm run build
-          start: npm start
+          install: false
+          build: pnpm run build
+          start: pnpm start
           working-directory: regression-test
       - name: Upload cypress artifact for chromatic
         uses: actions/upload-artifact@v4
@@ -42,11 +56,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm ci
+          cache: 'pnpm'
+      - name: Build InstUI
+        run: pnpm install --frozen-lockfile && pnpm run bootstrap
+      - name: Install regression-test dependencies
+        run: pnpm install --frozen-lockfile
         working-directory: regression-test
       - name: Download Cypress test results
         uses: actions/download-artifact@v4

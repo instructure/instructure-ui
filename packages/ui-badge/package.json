@@ -24,17 +24,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/emotion": "11.0.1",
-    "@instructure/shared-types": "11.0.1",
-    "@instructure/ui-color-utils": "11.0.1",
-    "@instructure/ui-position": "11.0.1",
-    "@instructure/ui-react-utils": "11.0.1",
-    "@instructure/ui-view": "11.0.1"
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@instructure/ui-position": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-view": "workspace:*"
   },
   "devDependencies": {
-    "@instructure/ui-axe-check": "11.0.1",
-    "@instructure/ui-babel-preset": "11.0.1",
-    "@instructure/ui-themes": "11.0.1",
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"

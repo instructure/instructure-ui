@@ -1,0 +1,4 @@
+# Separate workspace for regression-test
+# Uses link: protocol to consume built packages from parent workspace
+packages:
+  - '.'

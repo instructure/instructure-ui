@@ -20,12 +20,14 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *//** @type {import('next').NextConfig} */
+ */
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   // strict mode needs to be disabled, so deterministic ID generation
   // works. If its enabled, client side double rendering causes IDs to
   // come out of sync. TODO fix
   reactStrictMode: false
-  }
+}
 
 export default nextConfig

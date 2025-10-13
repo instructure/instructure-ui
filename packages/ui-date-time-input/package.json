@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "11.0.1",
+    "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
@@ -31,18 +31,18 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/console": "11.0.1",
-    "@instructure/shared-types": "11.0.1",
-    "@instructure/ui-a11y-content": "11.0.1",
-    "@instructure/ui-buttons": "11.0.1",
-    "@instructure/ui-calendar": "11.0.1",
-    "@instructure/ui-date-input": "11.0.1",
-    "@instructure/ui-form-field": "11.0.1",
-    "@instructure/ui-i18n": "11.0.1",
-    "@instructure/ui-icons": "11.0.1",
-    "@instructure/ui-react-utils": "11.0.1",
-    "@instructure/ui-time-select": "11.0.1",
-    "@instructure/ui-utils": "11.0.1"
+    "@instructure/console": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-a11y-content": "workspace:*",
+    "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-calendar": "workspace:*",
+    "@instructure/ui-date-input": "workspace:*",
+    "@instructure/ui-form-field": "workspace:*",
+    "@instructure/ui-i18n": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-time-select": "workspace:*",
+    "@instructure/ui-utils": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

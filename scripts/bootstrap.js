@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+/* eslint-disable no-console */
 
 /*
  * The MIT License (MIT)
@@ -24,44 +25,35 @@
  * SOFTWARE.
  */
 const { execSync, fork } = require('child_process')
-const { spawn } = require('cross-spawn')
 const path = require('path')
 
 const opts = { stdio: 'inherit' }
 function buildProject() {
-  // this config lets us use the existing shell session for the sub processes stdins and stdouts
-  // and lets us handle the stderrs of sub processes
-  // if one of the sub processes fails, then we terminate the other sub process and exit the main process
-  const spawnStdIoOpts = { stdio: ['inherit', 'inherit', 'pipe'] }
-  execSync(
-    'lerna run prepare-build --scope @instructure/ui-icons --loglevel silent',
-    opts
-  )
-  // eslint-disable-next-line no-console
-  console.info('Starting Babel and TSC...')
-  const tsBuild = spawn('npm', ['run', 'build:types'], spawnStdIoOpts)
-  const babelBuild = spawn('npm', ['run', 'build'], spawnStdIoOpts)
-  tsBuild.on('exit', (code) => {
-    if (code !== 0) {
-      babelBuild.kill()
-      console.error("'npm run build:ts' failed :(")
-      process.exit(code)
-    }
-  })
-  tsBuild.stderr.on('data', (data) => {
-    console.error('tsc stderr', data.toString())
-  })
-  babelBuild.stderr.on('data', (data) => {
-    console.error('babel stderr', data.toString())
-  })
-  babelBuild.on('exit', (code) => {
-    if (code !== 0) {
-      tsBuild.kill()
-      console.error("'npm run build' failed :(")
-      process.exit(code)
-    }
-    execSync('npm run build:tokens', opts)
-  })
+  execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
+
+  console.info('Building packages with Babel...')
+  try {
+    execSync('pnpm run build', opts)
+  } catch (error) {
+    console.error("'pnpm run build' failed", error)
+    process.exit(1)
+  }
+
+  console.info('Generating tokens...')
+  try {
+    execSync('pnpm run build:tokens', opts)
+  } catch (error) {
+    console.error("'pnpm run build:tokens' failed", error)
+    process.exit(1)
+  }
+
+  console.info('Building TypeScript declarations...')
+  try {
+    execSync('pnpm run build:types', opts)
+  } catch (error) {
+    console.error("'pnpm run build:types' failed", error)
+    process.exit(1)
+  }
 }
 function bootstrap() {
   try {

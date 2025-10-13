@@ -41,7 +41,7 @@ import { Heading } from './Heading'
 import { Link } from './Link'
 
 type CodeData = {
-  code: string
+  code: string | string[]
   language?: string
   title: string
   readOnly?: boolean
@@ -158,12 +158,16 @@ const headingVariants: Record<
 
 const getComponent = (componentType: string, data: CodeData) => {
   const { code, title, readOnly = undefined } = data
+
+  // Convert array of code strings to a single string
+  const codeString = Array.isArray(code) ? code.join('\n\n// ---\n\n') : code
+
   if (componentType === 'Playground') {
-    return <Playground title={title} code={code} readOnly={readOnly} />
+    return <Playground title={title} code={codeString} readOnly={readOnly} />
   }
 
   if (componentType === 'SourceCodeEditor') {
-    return <SourceCodeEditor label={title} defaultValue={code} readOnly />
+    return <SourceCodeEditor label={title} defaultValue={codeString} readOnly />
   }
   return undefined
 }
@@ -229,6 +233,28 @@ const renderer = (title: string) => ({
     <Img key={uuid()} src={href} alt={title} />
   ),
   list: (list: ReactElement[], ordered: boolean) => {
+    if (
+      list?.[0]?.props?.children?.[0]?.[0]?.type === 'code' &&
+      list?.[1]?.props?.children?.[0]?.[0]?.type === 'code'
+    ) {
+      const code1 = list?.[0]?.props?.children?.[0]?.[0]?.props?.children
+      const code2 = list?.[1]?.props?.children?.[0]?.[0]?.props?.children
+      const matter = [
+        grayMatter(trimIndent(code1)),
+        grayMatter(trimIndent(code2))
+      ]
+
+      const data = {
+        code: [matter[0].content, matter[1].content],
+        language: 'js',
+        title
+      }
+      return (
+        <View key={uuid()} display="block" margin="medium none">
+          {getComponent('Playground', data)}
+        </View>
+      )
+    }
     return ordered ? <ol key={uuid()}>{list}</ol> : <ul key={uuid()}>{list}</ul>
   },
   code: (code: string, rawLanguage: string) => {

@@ -22,13 +22,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "11.0.1",
+    "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@instructure/shared-types": "11.0.1"
+    "@instructure/shared-types": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

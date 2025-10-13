@@ -23,11 +23,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-axe-check": "11.0.1",
-    "@instructure/ui-babel-preset": "11.0.1",
-    "@instructure/ui-badge": "11.0.1",
-    "@instructure/ui-color-utils": "11.0.1",
-    "@instructure/ui-themes": "11.0.1",
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-badge": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
@@ -35,13 +35,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/emotion": "11.0.1",
-    "@instructure/shared-types": "11.0.1",
-    "@instructure/ui-dom-utils": "11.0.1",
-    "@instructure/ui-form-field": "11.0.1",
-    "@instructure/ui-icons": "11.0.1",
-    "@instructure/ui-react-utils": "11.0.1",
-    "@instructure/ui-tag": "11.0.1"
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-a11y-utils": "workspace:*",
+    "@instructure/ui-dom-utils": "workspace:*",
+    "@instructure/ui-form-field": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-tag": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

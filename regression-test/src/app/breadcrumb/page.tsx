@@ -23,13 +23,13 @@
  */
 'use client'
 import React from 'react'
-import { Breadcrumb as bc } from 'instructure-ui/ui-breadcrumb/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
 import {
+  Breadcrumb as bc,
+  View as vw,
   IconBankLine as ibl,
   IconClockLine as icl,
   IconPlusLine as ipl
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const Breadcrumb = bc as any
 const View = vw as any

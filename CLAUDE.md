@@ -12,7 +12,7 @@ InstUI is a React component library and design system. **Lerna 8 monorepo** with
   - Example: https://instructure.design/markdowns/Alert.md
   - Example: https://instructure.design/markdowns/Button.md
 
-**Tech Stack:** Node.js >=22, npm, React 18.3.1+, TypeScript 5.8.3, Emotion (CSS-in-JS), Vitest, Cypress, Chromatic
+**Tech Stack:** Node.js >=22, pnpm, React 18.3.1+, TypeScript 5.8.3, Emotion (CSS-in-JS), Vitest, Cypress, Chromatic
 
 ## Repository Structure
 
@@ -38,8 +38,8 @@ InstUI is a React component library and design system. **Lerna 8 monorepo** with
 ## Quick Start
 
 ```bash
-npm run bootstrap  # First time setup (clean, build icons, compile, generate tokens)
-npm run dev        # Start dev server at http://localhost:9090
+pnpm run bootstrap  # First time setup (clean, build icons, compile, generate tokens)
+pnpm run dev        # Start dev server at http://localhost:9090
 ```
 
 Most changes hot-reload automatically when dev server is running.
@@ -48,20 +48,20 @@ Most changes hot-reload automatically when dev server is running.
 
 ```bash
 # Development
-npm run dev          # Dev server (http://localhost:9090)
-npm run build:types  # Build TypeScript declarations
+pnpm run dev          # Dev server (http://localhost:9090)
+pnpm run build:types  # Build TypeScript declarations
 
 # Testing
-npm run test:vitest  # Unit tests
-npm run cy:component # Cypress component tests
+pnpm run test:vitest  # Unit tests
+pnpm run cy:component # Cypress component tests
 
 # Linting
-npm run lint:fix     # Auto-fix linting issues
-npm run ts:check     # TypeScript references check
+pnpm run lint:fix     # Auto-fix linting issues
+pnpm run ts:check     # TypeScript references check
 
 # Troubleshooting
-npm run clean && npm run bootstrap       # Fix build issues
-npm run clean-node && npm install        # Nuclear option (removes all node_modules)
+pnpm run clean && pnpm run bootstrap       # Fix build issues
+pnpm run clean-node && pnpm install        # Nuclear option (removes all node_modules)
 ```
 
 ## Code Style
@@ -102,7 +102,7 @@ npm run clean-node && npm install        # Nuclear option (removes all node_modu
 1. Find component in `/packages/ui-[name]/src/[Component]/`
 2. Check Component README for API details
 3. Make changes
-4. Run tests: `npm run test:vitest`
+4. Run tests: `pnpm run test:vitest`
 5. Update README if the functionality has changed (e.g., a new prop was added)
 6. Use `/commit` to create commit
 
@@ -150,13 +150,13 @@ All components **MUST**:
 ### Running Tests
 
 ```bash
-npm run test:vitest  # Unit tests
-npm run cy:component # Cypress tests
+pnpm run test:vitest  # Unit tests
+pnpm run cy:component # Cypress tests
 
 # Visual regression tests (in regression-test directory)
 cd regression-test
-npm run dev              # Start at localhost:3000
-npm run cypress-chrome   # Run with GUI
+pnpm run dev              # Start at localhost:3000
+pnpm run cypress-chrome   # Run with GUI
 ```
 
 ### Adding Visual Regression Test

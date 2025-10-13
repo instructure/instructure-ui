@@ -9,11 +9,11 @@ This is a simple Next.js app importing (locally) @instructure/ui. This allows us
 
 ### To run this app and cypress tests locally
 
-1. Run `npm install` and `npm run bootstrap` from the project root.
+1. Run `pnpm install` and `pnpm run bootstrap` from the project root.
 2. Then open the regression test folder: `cd regression-test`
-3. Run the dev server with `npm run dev`
+3. Run the dev server with `pnpm run dev`
 4. The dev server will be accessible at `localhost:3000`
-5. Once the dev server is running you can start the Cypress e2e tests with the `npm run cypress` command. Run `npm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
+5. Once the dev server is running you can start the Cypress e2e tests with the `pnpm run cypress` command. Run `pnpm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
 
 ### To add a new component
 

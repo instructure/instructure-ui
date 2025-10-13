@@ -23,18 +23,16 @@
  */
 'use client'
 import React from 'react'
-import { Badge as b } from 'instructure-ui/ui-badge/es/index'
 import {
+  Badge as b,
   Button as btn,
-  IconButton as icb
-} from 'instructure-ui/ui-buttons/es/index'
-import { IconUserSolid as ius } from 'instructure-ui/ui-icons/es/index'
-import { Flex as flx } from 'instructure-ui/ui-flex/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import {
+  IconButton as icb,
+  IconUserSolid as ius,
+  Flex as flx,
+  View as vw,
   AccessibleContent as ac,
   ScreenReaderContent as src
-} from 'instructure-ui/ui-a11y-content/es/index'
+} from '@instructure/ui'
 
 // alias to avoid TS/SSR friction like other pages
 const Badge = b as any

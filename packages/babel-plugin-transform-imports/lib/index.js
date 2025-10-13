@@ -79,7 +79,20 @@ function transform(transformOption, importName, matches) {
     // import is not at the root level, construct a relative path from the source root to it's location.
     if (matches && matches[1]) {
       const packageName = matches[1]
-      const sourceIndex = require.resolve(packageName)
+      // For pnpm workspaces, resolve from the project root to find workspace packages
+      let sourceIndex
+      try {
+        sourceIndex = require.resolve(packageName, { paths: [process.cwd()] })
+      } catch (error) {
+        // Fallback to default resolution if workspace resolution fails
+        try {
+          sourceIndex = require.resolve(packageName)
+        } catch (fallbackError) {
+          // During monorepo builds, workspace packages may not be built yet.
+          // Skip the transform and leave the import as-is - it will resolve at runtime.
+          return null
+        }
+      }
       const sourceRoot = dirname(sourceIndex)
 
       const importPaths = globby.sync(
@@ -158,21 +171,33 @@ module.exports = function transformImports({ types: t }) {
           }
         }
 
+        // Try to transform all member imports
+        const memberTransforms = []
+        let allTransformsSucceeded = true
+
         memberImports.forEach((memberImport) => {
           const importName = memberImport.imported.name
           const newImportPath = transform(opts.transform, importName, matches)
 
           if (newImportPath) {
-            transforms.push(
+            memberTransforms.push(
               t.importDeclaration(
                 [memberImport],
                 t.stringLiteral(newImportPath)
               )
             )
+          } else {
+            // If any transform fails, we can't safely transform this import
+            allTransformsSucceeded = false
           }
         })
 
-        if (transforms.length > 0) {
+        // Only apply transforms if ALL member imports transformed successfully
+        if (
+          allTransformsSucceeded &&
+          (memberTransforms.length > 0 || transforms.length > 0)
+        ) {
+          transforms = transforms.concat(memberTransforms)
           path.replaceWithMultiple(transforms)
         }
       }

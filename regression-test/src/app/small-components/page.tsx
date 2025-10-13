@@ -23,22 +23,19 @@
  */
 
 'use client'
-/* eslint-disable no-restricted-imports */
 import React from 'react'
 import {
   Metric as mc,
-  MetricGroup as mcg
-} from 'instructure-ui/ui-metric/es/index'
-import { Pill as pl } from 'instructure-ui/ui-pill/es/index'
-import { Tag as tg } from 'instructure-ui/ui-tag/es/index'
-import { TimeSelect as ts } from 'instructure-ui/ui-time-select/es/index'
-import {
+  MetricGroup as mcg,
+  Pill as pl,
+  Tag as tg,
+  TimeSelect as ts,
   IconMessageLine,
   IconClockLine,
   IconEndLine,
-  IconCheckLine
-} from 'instructure-ui/ui-icons/es/index'
-import { AccessibleContent } from '@instructure/ui-a11y-content/es/index'
+  IconCheckLine,
+  AccessibleContent
+} from '@instructure/ui'
 
 const Metric = mc as any
 const MetricGroup = mcg as any
