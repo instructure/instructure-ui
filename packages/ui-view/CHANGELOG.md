@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* **ui-view:** remove ui-prop-types dependency that was left in accidentally after the v11 release ([93f129b](https://github.com/instructure/instructure-ui/commit/93f129b7dda2bbe7fe29ae3e181c28d664dfff56))
+
+
+
+
+
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* **ui-drawer-layout,ui-a11y-utils:** fix Tray closing immediately after opening and calling onDismiss ([46593a4](https://github.com/instructure/instructure-ui/commit/46593a465f97158549b541d7daea1f453fcc2a56))
+
+
+
+
+
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* **emotion:** fix useTheme export. The native emotion util was exported instead of our own ([8450778](https://github.com/instructure/instructure-ui/commit/8450778bbcbc2a2f928c1c53ff21147535d61940))
+* **ui-drawer-layout,ui-a11y-utils:** fix Tray closing immediately after opening and calling onDismiss ([46593a4](https://github.com/instructure/instructure-ui/commit/46593a465f97158549b541d7daea1f453fcc2a56))
+* **ui-text:** fixed an issue where letterSpacingNormal theme variable previously showed an error because its value was 0 ([856218d](https://github.com/instructure/instructure-ui/commit/856218d9852dc8c8d44d20a600db23ba11a7621f))
+* **ui-view:** remove ui-prop-types dependency that was left in accidentally after the v11 release ([93f129b](https://github.com/instructure/instructure-ui/commit/93f129b7dda2bbe7fe29ae3e181c28d664dfff56))
+
+
+
+
+
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 InstUI v11 is a major release that removes deprecated features and adds support for React 19. For details on how to upgrade, codemods see the upgrade guide at https://instructure.design/#upgrade-guide

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* **ui-text:** fixed an issue where letterSpacingNormal theme variable previously showed an error because its value was 0 ([856218d](https://github.com/instructure/instructure-ui/commit/856218d9852dc8c8d44d20a600db23ba11a7621f))
+
+
+
+
+
 # [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 
