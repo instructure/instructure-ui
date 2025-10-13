@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { keyframes } from '@instructure/emotion'
+import { keyframes, mapSpacingToShorthand } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 
 import type { SpinnerProps, SpinnerStyle } from './props'
@@ -31,6 +31,7 @@ type StyleParams = {
   size: SpinnerProps['size']
   variant: SpinnerProps['variant']
   themeOverride: SpinnerProps['themeOverride']
+  margin: SpinnerProps['margin']
 }
 
 // keyframes have to be outside of 'generateStyle',
@@ -67,9 +68,11 @@ const morph = keyframes`
  */
 const generateStyle = (
   componentTheme: NewComponentTypes['Spinner'],
-  params: StyleParams
+  params: StyleParams,
+  //TODO type themes properly
+  theme: any
 ): SpinnerStyle => {
-  const { size, variant } = params
+  const { size, variant, margin } = params
 
   const spinnerSizes = {
     'x-small': {
@@ -163,7 +166,8 @@ const generateStyle = (
       position: 'relative',
       boxSizing: 'border-box',
       overflow: 'hidden',
-      ...spinnerSizes[size!]
+      ...spinnerSizes[size!],
+      margin: mapSpacingToShorthand(margin, theme.semantics.spacing)
     },
     circle: {
       label: 'spinner__circle',

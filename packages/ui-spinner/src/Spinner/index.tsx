@@ -25,7 +25,6 @@
 import { useState, useEffect, useId, forwardRef } from 'react'
 
 import { useStyle } from '@instructure/emotion'
-import { View } from '@instructure/ui-view'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 
@@ -39,13 +38,13 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-const Spinner = forwardRef<Element, SpinnerProps>((props) => {
+const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   const {
     size = 'medium',
     variant = 'default',
     delay,
     renderTitle,
-    // margin,
+    margin,
     // elementRef,
     themeOverride
   } = props
@@ -59,7 +58,8 @@ const Spinner = forwardRef<Element, SpinnerProps>((props) => {
     params: {
       size,
       variant,
-      themeOverride
+      themeOverride,
+      margin
     },
     componentId: 'Spinner',
     displayName: 'Spinner'
@@ -76,20 +76,6 @@ const Spinner = forwardRef<Element, SpinnerProps>((props) => {
     return undefined
   }, [delay])
 
-  // const handleRef = (el: Element | null) => {
-  //   if (typeof elementRef === 'function') {
-  //     elementRef(el)
-  //   }
-
-  //   if (ref) {
-  //     if (typeof ref === 'function') {
-  //       ref(el)
-  //     } else {
-  //       ; (ref as React.MutableRefObject<Element | null>).current = el
-  //     }
-  //   }
-  // }
-
   const renderSpinner = () => {
     const hasTitle = renderTitle
     error(
@@ -97,14 +83,10 @@ const Spinner = forwardRef<Element, SpinnerProps>((props) => {
       '[Spinner] The renderTitle prop is necessary for screen reader support.'
     )
 
-    // Filter props to only allow View props, excluding Spinner-specific props
-    const passthroughProps = View.omitViewProps(
-      omitProps(props, allowedProps),
-      Spinner
-    )
+    const passthroughProps = omitProps(props, allowedProps)
 
     return (
-      <div {...passthroughProps} css={styles?.spinner}>
+      <div {...passthroughProps} css={styles?.spinner} ref={ref}>
         <svg
           css={styles?.circle}
           role="img"

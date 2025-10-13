@@ -40,13 +40,8 @@ type SpinnerOwnProps = {
    */
   delay?: number
   /**
-   * provides a reference to the underlying html root element
-   */
-  elementRef?: (element: Element | null) => void
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   * Valid values are from themes. See theme.semantics.spacing. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="spaceLg gap.cards.sm 20px padding.container.sm"`.
    */
   margin?: Spacing
   /**
@@ -85,8 +80,7 @@ const allowedProps: AllowedPropKeys = [
   'renderTitle',
   'size',
   'variant',
-  'margin',
-  'elementRef'
+  'margin'
 ]
 
 export type { SpinnerProps, SpinnerState, SpinnerStyle }
