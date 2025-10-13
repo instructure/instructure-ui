@@ -28,7 +28,6 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
-  AsElementType,
   OtherHTMLAttributes,
   SpinnerTheme
 } from '@instructure/shared-types'
@@ -36,10 +35,6 @@ import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
-  /**
-   * Render Spinner "as" another HTML element
-   */
-  as?: AsElementType
   /**
    * delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times
    */
@@ -82,16 +77,16 @@ type SpinnerState = {
 }
 
 type SpinnerStyle = ComponentStyle<
-  'spinner' | 'circle' | 'circleTrack' | 'circleSpin'
+  'spinner' | 'circle' | 'circleTrack' | 'circleSpin' | 'radius'
 >
+
 const allowedProps: AllowedPropKeys = [
   'delay',
   'renderTitle',
   'size',
   'variant',
   'margin',
-  'elementRef',
-  'as'
+  'elementRef'
 ]
 
 export type { SpinnerProps, SpinnerState, SpinnerStyle }

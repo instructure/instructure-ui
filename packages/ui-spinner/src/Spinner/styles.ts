@@ -23,9 +23,15 @@
  */
 
 import { keyframes } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
-import type { SpinnerTheme } from '@instructure/shared-types'
 import type { SpinnerProps, SpinnerStyle } from './props'
+
+type StyleParams = {
+  size: SpinnerProps['size']
+  variant: SpinnerProps['variant']
+  themeOverride: SpinnerProps['themeOverride']
+}
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -40,7 +46,7 @@ const morph = keyframes`
     }
 
     50% {
-      stroke-dashoffset: 50%;
+      stroke-dashoffset: 00%;
       transform: rotate(90deg);
     }
 
@@ -60,84 +66,87 @@ const morph = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: SpinnerTheme,
-  props: SpinnerProps
+  componentTheme: NewComponentTypes['Spinner'],
+  params: StyleParams
 ): SpinnerStyle => {
-  const { size, variant } = props
+  const { size, variant } = params
 
   const spinnerSizes = {
     'x-small': {
-      width: componentTheme.xSmallSize,
-      height: componentTheme.xSmallSize
+      width: componentTheme.containerSizeXs,
+      height: componentTheme.containerSizeXs
     },
     small: {
-      width: componentTheme.smallSize,
-      height: componentTheme.smallSize
+      width: componentTheme.containerSizeSm,
+      height: componentTheme.containerSizeSm
     },
     medium: {
-      width: componentTheme.mediumSize,
-      height: componentTheme.mediumSize
+      width: componentTheme.containerSizeMd,
+      height: componentTheme.containerSizeMd
     },
     large: {
-      width: componentTheme.largeSize,
-      height: componentTheme.largeSize
+      width: componentTheme.containerSizeLg,
+      height: componentTheme.containerSizeLg
     }
   }
 
   const circleSizes = {
     'x-small': {
-      width: componentTheme.xSmallSize,
-      height: componentTheme.xSmallSize
+      width: componentTheme.containerSizeXs,
+      height: componentTheme.containerSizeXs
     },
     small: {
-      width: componentTheme.smallSize,
-      height: componentTheme.smallSize
+      width: componentTheme.containerSizeSm,
+      height: componentTheme.containerSizeSm
     },
     medium: {
-      width: componentTheme.mediumSize,
-      height: componentTheme.mediumSize
+      width: componentTheme.containerSizeMd,
+      height: componentTheme.containerSizeMd
     },
     large: {
-      width: componentTheme.largeSize,
-      height: componentTheme.largeSize
+      width: componentTheme.containerSizeLg,
+      height: componentTheme.containerSizeLg
     }
   }
 
   const circleTrackSizes = {
     'x-small': {
-      strokeWidth: componentTheme.xSmallBorderWidth
+      strokeWidth: componentTheme.strokeWidthXs
     },
     small: {
-      strokeWidth: componentTheme.smallBorderWidth
+      strokeWidth: componentTheme.strokeWidthSm
     },
     medium: {
-      strokeWidth: componentTheme.mediumBorderWidth
+      strokeWidth: componentTheme.strokeWidthMd
     },
     large: {
-      strokeWidth: componentTheme.largeBorderWidth
+      strokeWidth: componentTheme.strokeWidthLg
     }
+  }
+
+  const radii = {
+    'x-small': `calc(50% - ${componentTheme.strokeWidthXs} / 2)`,
+    small: `calc(50% - ${componentTheme.strokeWidthSm} / 2)`,
+    medium: `calc(50% - ${componentTheme.strokeWidthMd} / 2)`,
+    large: `calc(50% - ${componentTheme.strokeWidthLg} / 2)`
   }
 
   const circleSpinSizes = {
     'x-small': {
-      strokeWidth: componentTheme.xSmallBorderWidth,
-      strokeDasharray: '3em',
-      transformOrigin: `calc(${componentTheme.xSmallSize} / 2) calc(${componentTheme.xSmallSize} / 2)`
+      strokeWidth: componentTheme.strokeWidthXs,
+      transformOrigin: `calc(${componentTheme.containerSizeXs} / 2) calc(${componentTheme.containerSizeXs} / 2)`
     },
     small: {
-      strokeWidth: componentTheme.smallBorderWidth,
-      strokeDasharray: '6em',
-      transformOrigin: `calc(${componentTheme.smallSize} / 2) calc(${componentTheme.smallSize} / 2)`
+      strokeWidth: componentTheme.strokeWidthSm,
+      transformOrigin: `calc(${componentTheme.containerSizeSm} / 2) calc(${componentTheme.containerSizeSm} / 2)`
     },
     medium: {
-      strokeWidth: componentTheme.mediumBorderWidth,
-      strokeDasharray: '10.5em',
-      transformOrigin: `calc(${componentTheme.mediumSize} / 2) calc(${componentTheme.mediumSize} / 2)`
+      strokeWidth: componentTheme.strokeWidthMd,
+      transformOrigin: `calc(${componentTheme.containerSizeMd} / 2) calc(${componentTheme.containerSizeMd} / 2)`
     },
     large: {
-      strokeWidth: componentTheme.largeBorderWidth,
-      strokeDasharray: '14em',
-      transformOrigin: `calc(${componentTheme.largeSize} / 2) calc(${componentTheme.largeSize} / 2)`
+      strokeWidth: componentTheme.strokeWidthLg,
+      transformOrigin: `calc(${componentTheme.containerSizeLg} / 2) calc(${componentTheme.containerSizeLg} / 2)` //7em
     }
   }
 
@@ -172,6 +181,8 @@ const generateStyle = (
       label: 'spinner__circleTrack',
       stroke: componentTheme.trackColor,
       fill: 'none',
+      width: '100%',
+      height: '100%',
       ...circleTrackSizes[size!]
     },
     circleSpin: {
@@ -182,9 +193,11 @@ const generateStyle = (
       animationDuration: '1.75s',
       animationIterationCount: 'infinite',
       animationTimingFunction: 'ease',
+      strokeDasharray: `calc(${radii[size!]} * 2 * 3.14159 * 0.75) 1000px`,
       ...circleSpinSizes[size!],
       ...circleSpinVariant[variant!]
-    }
+    },
+    radius: radii[size!]
   }
 }
 
