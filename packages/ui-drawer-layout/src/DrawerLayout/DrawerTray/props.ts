@@ -108,6 +108,15 @@ type PropsPassedToDialog = {
    */
   liveRegion?: LiveRegion
 
+  /**
+   * Event fired when the underlying FocusRegion is dismissed in overlay mode.
+   * This can happen if:
+   * - `shouldCloseOnDocumentClick` is `true` and the user
+   * clicks outside the `<DrawerLayout.Tray />`
+   * - If `shouldCloseOnEscape` is `true` and the user presses the ESC key.
+   *
+   * This should be used to close the `<DrawerLayout.Tray />` in these cases
+   */
   onDismiss?: (
     event: React.UIEvent | React.FocusEvent,
     documentClick?: boolean
