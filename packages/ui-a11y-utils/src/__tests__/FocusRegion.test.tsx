@@ -68,7 +68,6 @@ describe('FocusRegion', () => {
       const outsideElement = document.createElement('div')
       document.body.appendChild(outsideElement)
 
-      fireEvent.mouseDown(outsideElement, { button: 0 })
       fireEvent.click(outsideElement, { button: 0, detail: 1 })
 
       await waitFor(() => {
@@ -91,7 +90,6 @@ describe('FocusRegion', () => {
       const outsideElement = document.createElement('div')
       document.body.appendChild(outsideElement)
 
-      fireEvent.mouseDown(outsideElement, { button: 0 })
       fireEvent.click(outsideElement, { button: 0, detail: 1 })
 
       // Wait a bit to ensure no dismiss is called
@@ -251,6 +249,42 @@ describe('FocusRegion', () => {
 
       // The internal state should be updated
       expect(focusRegion).toBeDefined()
+    })
+
+    it('should not add event listeners when updateElement is called on inactive region', async () => {
+      const onDismiss = vi.fn()
+      focusRegion = new FocusRegion(container, {
+        shouldCloseOnDocumentClick: false,
+        shouldCloseOnEscape: false,
+        onDismiss
+      })
+
+      // Do NOT activate the region - it should remain inactive
+      expect(focusRegion.focused).toBe(false)
+
+      // Update element with options that would add listeners if region was active
+      const newContainer = document.createElement('div')
+      const newOptions = {
+        shouldCloseOnDocumentClick: true,
+        shouldCloseOnEscape: true,
+        onDismiss
+      }
+
+      focusRegion.updateElement(newContainer, newOptions)
+
+      // Region should still be inactive
+      expect(focusRegion.focused).toBe(false)
+
+      // Click outside the container - should NOT dismiss since no listeners were added
+      const outsideElement = document.createElement('div')
+      document.body.appendChild(outsideElement)
+
+      fireEvent.click(outsideElement, { button: 0, detail: 1 })
+
+      fireEvent.keyUp(document, { keyCode: 27 })
+      expect(onDismiss).not.toHaveBeenCalled()
+
+      document.body.removeChild(outsideElement)
     })
   })
 
