@@ -124,6 +124,10 @@
       "value": "{color.stroke.interactive.destructive.base}",
       "type": "color"
     },
+    "destructiveDisabledBorderColor": {
+      "value": "{color.stroke.interactive.destructive.disabled}",
+      "type": "color"
+    },
     "destructiveTextColor": {
       "value": "{color.text.onColor}",
       "type": "color"
