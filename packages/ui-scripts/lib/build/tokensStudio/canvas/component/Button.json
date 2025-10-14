@@ -224,6 +224,10 @@
       "value": "{color.text.interactive.secondary.base}",
       "type": "color"
     },
+    "primaryOnColorIconColor": {
+      "value": "{color.icon.interactive.secondary.base}",
+      "type": "color"
+    },
     "minHeightSm": {
       "value": "{size.interactive.height.sm}",
       "type": "sizing"
