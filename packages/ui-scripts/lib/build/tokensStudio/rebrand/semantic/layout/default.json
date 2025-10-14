@@ -94,15 +94,15 @@
       "interactive": {
         "horizontal": {
           "sm": {
-            "value": "{size.size4}",
-            "type": "spacing"
-          },
-          "md": {
             "value": "{size.size8}",
             "type": "spacing"
           },
-          "lg": {
+          "md": {
             "value": "{size.size12}",
+            "type": "spacing"
+          },
+          "lg": {
+            "value": "{size.size24}",
             "type": "spacing"
           }
         }
