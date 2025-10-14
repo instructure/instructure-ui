@@ -16,7 +16,8 @@
       "canvas/component/Link": "enabled",
       "canvas/component/TextInput": "enabled",
       "canvas/component/FormField": "enabled",
-      "canvas/component/Icon": "enabled"
+      "canvas/component/Icon": "enabled",
+      "canvas/component/Button": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -461,7 +462,8 @@
       "canvas/component/Link": "enabled",
       "canvas/component/TextInput": "enabled",
       "canvas/component/FormField": "enabled",
-      "canvas/component/Icon": "enabled"
+      "canvas/component/Icon": "enabled",
+      "canvas/component/Button": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -925,7 +927,8 @@
       "rebrand/component/Link": "enabled",
       "rebrand/component/TextInput": "enabled",
       "rebrand/component/FormField": "enabled",
-      "rebrand/component/Icon": "enabled"
+      "rebrand/component/Icon": "enabled",
+      "rebrand/component/Button": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -1368,7 +1371,8 @@
       "rebrand/component/Link": "enabled",
       "rebrand/component/TextInput": "enabled",
       "rebrand/component/FormField": "enabled",
-      "rebrand/component/Icon": "enabled"
+      "rebrand/component/Icon": "enabled",
+      "rebrand/component/Button": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
