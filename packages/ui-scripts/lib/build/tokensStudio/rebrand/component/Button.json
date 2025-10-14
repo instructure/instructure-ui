@@ -299,6 +299,10 @@
     "destructiveDisabledBorderColor": {
       "value": "{color.stroke.interactive.destructive.disabled}",
       "type": "color"
+    },
+    "primaryOnColorIconColor": {
+      "value": "{color.icon.interactive.secondary.base}",
+      "type": "color"
     }
   }
 }
