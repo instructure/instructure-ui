@@ -310,6 +310,10 @@
           "active": {
             "value": "{color.blue.blue50}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.blue.blue40}",
+            "type": "color"
           }
         },
         "secondary": {
@@ -323,6 +327,10 @@
           },
           "active": {
             "value": "{color.grey.grey70}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.grey.grey20}",
             "type": "color"
           }
         },
@@ -338,6 +346,30 @@
           "active": {
             "value": "{color.red.red50}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.red.red40}",
+            "type": "color"
+          }
+        },
+        "success": {
+          "base": {
+            "value": "{color.green.green90}",
+            "type": "color"
+          }
+        },
+        "ai": {
+          "topGradient": {
+            "base": {
+              "value": "{color.violet.violet90}",
+              "type": "color"
+            }
+          },
+          "bottomGradient": {
+            "base": {
+              "value": "{color.sea.sea90}",
+              "type": "color"
+            }
           }
         }
       }
