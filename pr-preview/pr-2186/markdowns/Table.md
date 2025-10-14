@@ -766,6 +766,18 @@ render(
 )
 ```
 
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>In the case of a Table with selection, to prevent screenreaders from announcing the label of the select all checkbox when navigating in the rows, an aria-label should be added to the corresponding Table.Colheader like in our example above.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
+
 ### Using Custom Components as Children
 
 In some cases you might want to use custom components in a `Table`, e.g. a HOC for `Table.Row` or `Table.Cell`. This is generally not recommended, but sometimes it could be beneficial for codesplitting or writing cleaner code for larger and more complex Tables.
