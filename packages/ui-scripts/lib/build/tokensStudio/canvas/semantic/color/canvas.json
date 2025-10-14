@@ -318,7 +318,7 @@
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey70}",
+            "value": "{color.grey.grey30}",
             "type": "color"
           },
           "hover": {
