@@ -102,7 +102,7 @@
             "type": "spacing"
           },
           "lg": {
-            "value": "{size.size24}",
+            "value": "{size.size20}",
             "type": "spacing"
           }
         }
