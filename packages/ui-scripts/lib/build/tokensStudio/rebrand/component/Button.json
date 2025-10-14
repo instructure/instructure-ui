@@ -96,6 +96,10 @@
       "value": "{color.text.onColor}",
       "type": "color"
     },
+    "successIconColor": {
+      "value": "{color.icon.onColor}",
+      "type": "color"
+    },
     "destructiveBackgroundColor": {
       "value": "{color.background.interactive.destructive.base}",
       "type": "color"
@@ -118,6 +122,10 @@
     },
     "destructiveTextColor": {
       "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "destructiveIconColor": {
+      "value": "{color.icon.onColor}",
       "type": "color"
     },
     "aiBackgroundBottomGradientColor": {
@@ -162,6 +170,10 @@
     },
     "aiTextColor": {
       "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "aiIconColor": {
+      "value": "{color.icon.onColor}",
       "type": "color"
     },
     "aiSecondaryBackgroundColor": {
