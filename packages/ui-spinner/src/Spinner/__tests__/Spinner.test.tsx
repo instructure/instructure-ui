@@ -28,7 +28,6 @@ import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
-import { View } from '@instructure/ui-view'
 import Spinner from '../index'
 import type { SpinnerProps } from '../props'
 
@@ -82,39 +81,35 @@ describe('<Spinner />', () => {
     expect(spinner).toHaveTextContent('I have translated Loading')
   })
 
-  describe('when passing down props to View', () => {
-    const allowedProps: { [key: string]: any } = {
-      margin: 'small',
-      elementRef: () => {},
-      as: 'div'
-    }
+  describe('when passing down props', () => {
+    it('should allow the "margin" prop', async () => {
+      render(<Spinner renderTitle="Loading" margin="small" />)
+      expect(consoleErrorMock).not.toHaveBeenCalled()
+    })
 
-    View.allowedProps
-      .filter((prop) => prop !== 'children')
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const props = {
-              [prop]: 'foo'
-            }
-            const expectedErrorMessage = `prop '${prop}' is not allowed.`
+    it('should allow the "elementRef" prop', async () => {
+      const ref = vi.fn()
+      render(<Spinner renderTitle="Loading" ref={ref} />)
+      expect(consoleErrorMock).not.toHaveBeenCalled()
+      expect(ref).toHaveBeenCalledWith(expect.any(Element))
+    })
 
-            render(<Spinner renderTitle="Loading" {...props} />)
+    it('should pass through DOM props to the div element', async () => {
+      const { container } = render(
+        <Spinner renderTitle="Loading" data-testid="spinner" id="spinner-id" />
+      )
+      const spinner = container.querySelector('div')
+      expect(spinner).toHaveAttribute('data-testid', 'spinner')
+      expect(spinner).toHaveAttribute('id', 'spinner-id')
+    })
 
-            expect(consoleErrorMock).toHaveBeenCalledWith(
-              expect.stringContaining(expectedErrorMessage),
-              expect.any(String)
-            )
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            const props = { [prop]: allowedProps[prop] }
-            render(<Spinner renderTitle="Loading" {...props} />)
-
-            expect(consoleErrorMock).not.toHaveBeenCalled()
-          })
-        }
-      })
+    it('should not pass through className as it is automatically excluded by omitProps', async () => {
+      const { container } = render(
+        <Spinner renderTitle="Loading" className="custom-class" />
+      )
+      const spinner = container.querySelector('div')
+      expect(spinner).not.toHaveClass('custom-class')
+    })
   })
 
   describe('with the delay prop', () => {
