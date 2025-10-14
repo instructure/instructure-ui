@@ -303,6 +303,18 @@
     "primaryOnColorIconColor": {
       "value": "{color.icon.interactive.secondary.base}",
       "type": "color"
+    },
+    "primaryOnColorDisabledBackgroundColor": {
+      "value": "{color.background.interactive.primaryOnColor.disabled}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledTextColor": {
+      "value": "{color.text.interactive.secondary.disabled}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledIconColor": {
+      "value": "{color.icon.interactive.secondary.disabled}",
+      "type": "color"
     }
   }
 }
