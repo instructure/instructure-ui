@@ -92,6 +92,10 @@
       "value": "{color.stroke.interactive.success.base}",
       "type": "color"
     },
+    "successDisabledBorderColor": {
+      "value": "{color.stroke.interactive.success.disabled}",
+      "type": "color"
+    },
     "successTextColor": {
       "value": "{color.text.onColor}",
       "type": "color"
