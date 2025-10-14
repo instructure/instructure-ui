@@ -295,6 +295,10 @@
     "lineHeightLg": {
       "value": "1.375rem",
       "type": "lineHeights"
+    },
+    "destructiveDisabledBorderColor": {
+      "value": "{color.stroke.interactive.destructive.disabled}",
+      "type": "color"
     }
   }
 }
