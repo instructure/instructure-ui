@@ -476,6 +476,10 @@
           "active": {
             "value": "{color.grey.grey40}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.grey.grey50}",
+            "type": "color"
           }
         },
         "destructive": {
@@ -490,6 +494,20 @@
           "active": {
             "value": "{color.red.red40}",
             "type": "color"
+          }
+        },
+        "aiSecondary": {
+          "topGradient": {
+            "base": {
+              "value": "{color.violet.violet70}",
+              "type": "color"
+            }
+          },
+          "bottomGradient": {
+            "base": {
+              "value": "{color.sea.sea70}",
+              "type": "color"
+            }
           }
         }
       },
