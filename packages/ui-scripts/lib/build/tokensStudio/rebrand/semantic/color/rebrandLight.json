@@ -371,6 +371,12 @@
               "type": "color"
             }
           }
+        },
+        "primaryOnColor": {
+          "base": {
+            "value": "{color.grey.grey80}",
+            "type": "color"
+          }
         }
       }
     },
