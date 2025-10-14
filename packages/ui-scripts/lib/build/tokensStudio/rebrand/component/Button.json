@@ -249,11 +249,11 @@
       "type": "spacing"
     },
     "gapButtonContentMd": {
-      "value": "{spacing.spaceMd}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "gapButtonContentLg": {
-      "value": "{spacing.spaceSm}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "fontSizeSm": {
