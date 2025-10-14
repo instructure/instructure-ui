@@ -216,6 +216,10 @@
       "value": "{color.background.interactive.primaryOnColor.active}",
       "type": "color"
     },
+    "primaryOnColorDisabledBackgroundColor": {
+      "value": "{color.background.interactive.primaryOnColor.disabled}",
+      "type": "color"
+    },
     "primaryOnColorBorderColor": {
       "value": "{color.stroke.interactive.primaryOnColor.base}",
       "type": "color"
@@ -226,6 +230,14 @@
     },
     "primaryOnColorIconColor": {
       "value": "{color.icon.interactive.secondary.base}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledIconColor": {
+      "value": "{color.icon.interactive.secondary.disabled}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledTextColor": {
+      "value": "{color.text.interactive.secondary.disabled}",
       "type": "color"
     },
     "minHeightSm": {
