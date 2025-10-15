@@ -29,57 +29,170 @@ const path = require('path')
 
 const opts = { stdio: 'inherit' }
 
-function runInParallel(commands) {
-  return Promise.all(
-    commands.map(({ name, command }) => {
-      return new Promise((resolve, reject) => {
-        console.info(`${name}...`)
-        const child = spawn('pnpm', ['run', command], {
-          stdio: 'inherit',
-          shell: true
+// Track phases for summary
+const phases = []
+
+function trackPhase(name, fn) {
+  const start = Date.now()
+  const phase = { name, start, end: null, duration: null, status: 'running', error: null }
+  phases.push(phase)
+
+  const finish = (error = null) => {
+    phase.end = Date.now()
+    phase.duration = ((phase.end - phase.start) / 1000).toFixed(1)
+    phase.status = error ? 'failed' : 'success'
+    phase.error = error ? error.message : null
+  }
+
+  try {
+    const result = fn()
+    if (result && typeof result.then === 'function') {
+      return result.then(
+        () => {
+          finish()
+          return Promise.resolve()
+        },
+        (error) => {
+          finish(error)
+          return Promise.reject(error)
+        }
+      )
+    }
+    finish()
+    return result
+  } catch (error) {
+    finish(error)
+    throw error
+  }
+}
+
+function printSummary(actualTotalDuration) {
+  const summedDuration = phases.reduce((sum, p) => sum + parseFloat(p.duration), 0).toFixed(1)
+  const totalDuration = actualTotalDuration || summedDuration
+  const hasErrors = phases.some(p => p.status === 'failed')
+
+  console.log('\n' + '═'.repeat(80))
+  console.log('Bootstrap Summary')
+  console.log('═'.repeat(80))
+  console.log(
+    '│ ' +
+    'Phase'.padEnd(30) +
+    '│ ' +
+    'Duration'.padEnd(10) +
+    '│ ' +
+    'Status'.padEnd(10) +
+    '│'
+  )
+  console.log('├' + '─'.repeat(31) + '┼' + '─'.repeat(11) + '┼' + '─'.repeat(11) + '┤')
+
+  phases.forEach(phase => {
+    const status = phase.status === 'success' ? '✓ Success' : '✗ Failed'
+    console.log(
+      '│ ' +
+      phase.name.padEnd(30) +
+      '│ ' +
+      (phase.duration + 's').padEnd(10) +
+      '│ ' +
+      status.padEnd(10) +
+      '│'
+    )
+    if (phase.error) {
+      console.log('│ ' + 'Error: '.padEnd(30) + '│ ' + phase.error.padEnd(21) + '│')
+    }
+  })
+
+  console.log('├' + '─'.repeat(31) + '┼' + '─'.repeat(11) + '┼' + '─'.repeat(11) + '┤')
+  console.log(
+    '│ ' +
+    'TOTAL'.padEnd(30) +
+    '│ ' +
+    (totalDuration + 's').padEnd(10) +
+    '│ ' +
+    (hasErrors ? '✗ Failed' : '✓ Success').padEnd(10) +
+    '│'
+  )
+  console.log('└' + '─'.repeat(31) + '┴' + '─'.repeat(11) + '┴' + '─'.repeat(11) + '┘')
+
+  if (hasErrors) {
+    console.log('\n⚠️  Bootstrap completed with errors. See details above.')
+  } else {
+    console.log('\n✓ Bootstrap completed successfully!')
+  }
+}
+
+async function buildProject() {
+  await trackPhase('Icon build', () => {
+    execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
+  })
+
+  await trackPhase('SWC compilation', () => {
+    console.info('Building packages with SWC...')
+    execSync('pnpm run build', opts)
+  })
+
+  console.info('Running token generation and TypeScript compilation in parallel...')
+
+  const parallelPhases = [
+    { trackName: 'Token generation', name: 'Generating tokens', command: 'build:tokens' },
+    { trackName: 'TypeScript declarations', name: 'Building TypeScript declarations', command: 'build:types' }
+  ]
+
+  await Promise.all(
+    parallelPhases.map(({ trackName, name, command }) => {
+      return trackPhase(trackName, () => {
+        return new Promise((resolve, reject) => {
+          console.info(`${name}...`)
+          const child = spawn('pnpm', ['run', command], {
+            stdio: 'inherit',
+            shell: true
+          })
+          child.on('close', (code) => {
+            if (code !== 0) {
+              reject(new Error(`'${command}' failed with exit code ${code}`))
+            } else {
+              resolve()
+            }
+          })
+          child.on('error', reject)
         })
-        child.on('close', (code) => {
-          if (code !== 0) {
-            reject(new Error(`'${command}' failed with exit code ${code}`))
-          } else {
-            resolve()
-          }
-        })
-        child.on('error', reject)
       })
     })
   )
 }
-
-function buildProject() {
-  execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
-
-  console.info('Building packages with SWC...')
-  try {
-    execSync('pnpm run build', opts)
-  } catch (error) {
-    console.error("'pnpm run build' failed", error)
-    process.exit(1)
-  }
-
-  console.info('Running token generation and TypeScript compilation in parallel...')
-  return runInParallel([
-    { name: 'Generating tokens', command: 'build:tokens' },
-    { name: 'Building TypeScript declarations', command: 'build:types' }
-  ]).catch((error) => {
-    console.error('Parallel build failed:', error)
-    process.exit(1)
-  })
-}
 async function bootstrap() {
+  const bootstrapStart = Date.now()
+
+  await trackPhase('Clean', () => {
+    return new Promise((resolve, reject) => {
+      const child = fork(path.resolve('scripts/clean.js'), opts)
+      child.on('exit', (code) => {
+        if (code !== 0) {
+          reject(new Error(`clean script failed with exit code ${code}`))
+        } else {
+          resolve()
+        }
+      })
+      child.on('error', reject)
+    })
+  })
+
   try {
-    fork(path.resolve('scripts/clean.js'), opts)
+    await buildProject()
   } catch (error) {
-    console.error('clean failed with error:', error)
-    process.exit(1)
+    // Error already tracked, just print summary
   }
 
-  await buildProject()
+  const actualTotalDuration = ((Date.now() - bootstrapStart) / 1000).toFixed(1)
+  printSummary(actualTotalDuration)
+
+  const hasErrors = phases.some(p => p.status === 'failed')
+  if (hasErrors) {
+    process.exit(1)
+  }
 }
 
-bootstrap()
+bootstrap().catch((error) => {
+  console.error('Bootstrap failed:', error)
+  printSummary() // No actual time available in error case
+  process.exit(1)
+})
