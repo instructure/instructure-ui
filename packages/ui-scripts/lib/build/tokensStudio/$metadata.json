@@ -6,6 +6,7 @@
     "canvas/semantic/color/canvasHighContrast",
     "canvas/component/Avatar",
     "canvas/component/Breadcrumb",
+    "canvas/component/Button",
     "canvas/component/FormField",
     "canvas/component/FormFieldLabel",
     "canvas/component/FormFieldMessage",
@@ -15,9 +16,7 @@
     "canvas/component/Pill",
     "canvas/component/Spinner",
     "canvas/component/TextInput",
-    "rebrand/semantic/layout/default",
-    "rebrand/semantic/color/rebrandLight",
-    "rebrand/semantic/color/rebrandDark",
+    "rebrand/component/Button",
     "rebrand/component/Avatar",
     "rebrand/component/Breadcrumb",
     "rebrand/component/FormField",
@@ -28,6 +27,9 @@
     "rebrand/component/Metric",
     "rebrand/component/Pill",
     "rebrand/component/Spinner",
-    "rebrand/component/TextInput"
+    "rebrand/component/TextInput",
+    "rebrand/semantic/layout/default",
+    "rebrand/semantic/color/rebrandLight",
+    "rebrand/semantic/color/rebrandDark"
   ]
 }

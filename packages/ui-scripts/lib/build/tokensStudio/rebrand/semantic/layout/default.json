@@ -93,8 +93,18 @@
       },
       "interactive": {
         "horizontal": {
-          "value": "{size.size12}",
-          "type": "spacing"
+          "sm": {
+            "value": "{size.size8}",
+            "type": "spacing"
+          },
+          "md": {
+            "value": "{size.size12}",
+            "type": "spacing"
+          },
+          "lg": {
+            "value": "{size.size20}",
+            "type": "spacing"
+          }
         }
       }
     }
