@@ -3,26 +3,63 @@
   "compilerOptions": {
     "outDir": "./types",
     "rootDir": "./src",
-    "composite": true
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "references": [
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../emotion/tsconfig.build.json" },
-    { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui-a11y-content/tsconfig.build.json" },
-    { "path": "../ui-a11y-utils/tsconfig.build.json" },
-    { "path": "../ui-axe-check/tsconfig.build.json" },
-    { "path": "../ui-buttons/tsconfig.build.json" },
-    { "path": "../ui-dom-utils/tsconfig.build.json" },
-    { "path": "../ui-icons/tsconfig.build.json" },
-    { "path": "../ui-portal/tsconfig.build.json" },
-    { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-themes/tsconfig.build.json" },
-    { "path": "../ui-tooltip/tsconfig.build.json" },
-    { "path": "../ui-utils/tsconfig.build.json" },
-    { "path": "../ui-view/tsconfig.build.json" },
-    { "path": "../uid/tsconfig.build.json" },
-    { "path": "../ui-number-input/tsconfig.build.json" }
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../emotion/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-a11y-content/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-a11y-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-axe-check/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-buttons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-dom-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-icons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-portal/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-themes/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tooltip/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-view/tsconfig.build.json"
+    },
+    {
+      "path": "../uid/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-number-input/tsconfig.build.json"
+    }
   ]
 }

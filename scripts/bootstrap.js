@@ -24,14 +24,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { execSync, fork } = require('child_process')
+const { execSync, fork, spawn } = require('child_process')
 const path = require('path')
 
 const opts = { stdio: 'inherit' }
+
+function runInParallel(commands) {
+  return Promise.all(
+    commands.map(({ name, command }) => {
+      return new Promise((resolve, reject) => {
+        console.info(`${name}...`)
+        const child = spawn('pnpm', ['run', command], {
+          stdio: 'inherit',
+          shell: true
+        })
+        child.on('close', (code) => {
+          if (code !== 0) {
+            reject(new Error(`'${command}' failed with exit code ${code}`))
+          } else {
+            resolve()
+          }
+        })
+        child.on('error', reject)
+      })
+    })
+  )
+}
+
 function buildProject() {
   execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
 
-  console.info('Building packages with Babel...')
+  console.info('Building packages with SWC...')
   try {
     execSync('pnpm run build', opts)
   } catch (error) {
@@ -39,23 +62,16 @@ function buildProject() {
     process.exit(1)
   }
 
-  console.info('Generating tokens...')
-  try {
-    execSync('pnpm run build:tokens', opts)
-  } catch (error) {
-    console.error("'pnpm run build:tokens' failed", error)
+  console.info('Running token generation and TypeScript compilation in parallel...')
+  return runInParallel([
+    { name: 'Generating tokens', command: 'build:tokens' },
+    { name: 'Building TypeScript declarations', command: 'build:types' }
+  ]).catch((error) => {
+    console.error('Parallel build failed:', error)
     process.exit(1)
-  }
-
-  console.info('Building TypeScript declarations...')
-  try {
-    execSync('pnpm run build:types', opts)
-  } catch (error) {
-    console.error("'pnpm run build:types' failed", error)
-    process.exit(1)
-  }
+  })
 }
-function bootstrap() {
+async function bootstrap() {
   try {
     fork(path.resolve('scripts/clean.js'), opts)
   } catch (error) {
@@ -63,7 +79,7 @@ function bootstrap() {
     process.exit(1)
   }
 
-  buildProject()
+  await buildProject()
 }
 
 bootstrap()

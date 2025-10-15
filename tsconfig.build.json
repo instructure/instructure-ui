@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "incremental": true,
+    "composite": true,
     "pretty": false,
     "module": "ESNext",
     "moduleResolution": "node",

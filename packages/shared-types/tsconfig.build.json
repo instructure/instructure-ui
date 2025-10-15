@@ -3,7 +3,10 @@
   "compilerOptions": {
     "outDir": "./types",
     "rootDir": "./src",
-    "composite": true
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

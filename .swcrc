@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/swcrc",
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "decorators": true,
+      "decoratorsBeforeExport": false,
+      "dynamicImport": true
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": false,
+      "react": {
+        "runtime": "automatic",
+        "importSource": "@emotion/react",
+        "useBuiltins": true
+      }
+    },
+    "loose": false,
+    "externalHelpers": true,
+    "keepClassNames": true
+  },
+  "module": {
+    "type": "es6",
+    "strict": false,
+    "strictMode": true,
+    "lazy": false,
+    "noInterop": false
+  },
+  "minify": false,
+  "isModule": true,
+  "env": {
+    "targets": {
+      "chrome": "90",
+      "firefox": "88",
+      "safari": "14",
+      "edge": "90"
+    },
+    "mode": "usage",
+    "coreJs": "3.37"
+  }
+}

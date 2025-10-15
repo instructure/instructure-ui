@@ -3,9 +3,12 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./types",
-    "composite": true
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "references": [
     {
       "path": "../emotion/tsconfig.build.json"

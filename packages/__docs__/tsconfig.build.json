@@ -4,7 +4,8 @@
     "outDir": "./types",
     "module": "CommonJS",
     "composite": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "incremental": true
   },
   "include": [
     "src/**/*",
@@ -14,7 +15,9 @@
     "buildScripts/DataTypes.mts",
     "buildScripts/samplemedia/placeholder-image.js"
   ],
-  "exclude": ["__build__/**/*"],
+  "exclude": [
+    "__build__/**/*"
+  ],
   "references": [
     {
       "path": "../canvas-high-contrast-theme/tsconfig.build.json"

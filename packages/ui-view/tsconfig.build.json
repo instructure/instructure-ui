@@ -3,9 +3,12 @@
   "compilerOptions": {
     "outDir": "./types",
     "rootDir": "./src",
-    "composite": true
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "references": [
     {
       "path": "../console/tsconfig.build.json"
@@ -28,7 +31,9 @@
     {
       "path": "../ui-position/tsconfig.build.json"
     },
-    { "path": "../ui-react-utils/tsconfig.build.json" },
+    {
+      "path": "../ui-react-utils/tsconfig.build.json"
+    },
     {
       "path": "../ui-babel-preset/tsconfig.build.json"
     },

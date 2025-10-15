@@ -4,8 +4,15 @@
     "outDir": "./types",
     "module": "CommonJS",
     "composite": true,
-    "rootDir": "./lib"
+    "rootDir": "./lib",
+    "incremental": true
   },
-  "include": ["lib"],
-  "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]
+  "include": [
+    "lib"
+  ],
+  "references": [
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    }
+  ]
 }

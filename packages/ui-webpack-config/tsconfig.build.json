@@ -4,7 +4,10 @@
     "outDir": "./types",
     "module": "CommonJS",
     "composite": true,
-    "rootDir": "./config"
+    "rootDir": "./config",
+    "incremental": true
   },
-  "include": ["config"]
+  "include": [
+    "config"
+  ]
 }

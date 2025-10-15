@@ -70,12 +70,15 @@ async function clean() {
   const deletions = packageDirs
     .filter((dir) => dir.isDirectory())
     .map(async (packageDir) => {
-      const rmDirs = DIRS_TO_DELETE.map((dir) =>
+      let rmDirs = DIRS_TO_DELETE.map((dir) =>
         path.join(packagesPath, packageDir.name, dir)
       )
 
       if (!NODE_PACKAGES.includes(packageDir.name)) {
         rmDirs.push(path.join(packagesPath, packageDir.name, 'lib'))
+      } else {
+        // For tooling packages, don't delete 'es' directory (preserve pre-built code)
+        rmDirs = rmDirs.filter(dir => !dir.endsWith('/es'))
       }
 
       return deleteDirs(rmDirs)

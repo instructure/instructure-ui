@@ -28,6 +28,11 @@ import { defineConfig } from 'vitest/config'
 import path from 'path'
 
 export default defineConfig({
+  resolve: {
+    // Prefer ESM entry points since we're building with SWC to es/ directory
+    conditions: ['import', 'module', 'browser', 'default'],
+    mainFields: ['module', 'main']
+  },
   test: {
     globals: true,
     watchTriggerPatterns: [
