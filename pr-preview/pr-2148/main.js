@@ -201,15 +201,12 @@ this.ref=el,"function"==typeof elementRef&&elementRef(el)}}render(){return(0,_em
 __webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{assert:()=>assert,consoleLog:()=>log,debug:()=>debug,error:()=>error,info:()=>info,log:()=>log,logAssert:()=>assert,logDebug:()=>debug,logError:()=>error,logInfo:()=>info,logWarn:()=>warn,logWarnDeprecated:()=>warnDeprecated,warn:()=>warn,warnDeprecated:()=>warnDeprecated})
 var react=__webpack_require__(14041),process=__webpack_require__(39907)
 let loggedInitialDeprecationWarning=!1
-function logMessage(level,withRenderStack,condition,message,...args){let shouldLog=!1
-try{var _process,_process$env,_process2,_process2$env
-shouldLog="true"===(null===(_process=process)||void 0===process||null===(_process$env=_process.env)||void 0===_process$env?void 0:"true")||"production"!==(null===(_process2=process)||void 0===process||null===(_process2$env=_process2.env)||void 0===_process2$env?void 0:"production")}catch(e){if(!(e instanceof ReferenceError))throw e
-shouldLog=!0}if(shouldLog&&!condition){if("function"!=typeof console[level])throw new Error(`'${level}' is not a valid console method!`)
+function logMessage(level,withRenderStack,condition,message,...args){if(void 0!==process&&!condition){if("function"!=typeof console[level])throw new Error(`'${level}' is not a valid console method!`)
 {const renderStack=withRenderStack?function(){let renderStack=""
 try{renderStack=react.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()}catch(error){}return renderStack}():""
 console[level](`Warning: ${message}`,...args,renderStack)}}}const error=(condition,message,...args)=>logMessage("error",!0,condition,message,...args),warn=(condition,message,...args)=>logMessage("warn",!0,condition,message,...args),warnDeprecated=(condition,message,...args)=>function(condition,message,...args){let shouldLogMessage=!1
-try{var _process3
-null!==(_process3=process)&&void 0!==process&&_process3.env,shouldLogMessage=!0}catch(e){if(!(e instanceof ReferenceError))throw e
+try{var _process
+null!==(_process=process)&&void 0!==process&&_process.env,shouldLogMessage=!0}catch(e){if(!(e instanceof ReferenceError))throw e
 shouldLogMessage=!0}shouldLogMessage?logMessage("warn",!0,condition,message,...args):condition||loggedInitialDeprecationWarning||(loggedInitialDeprecationWarning=!0,logMessage("warn",!1,condition,["There are Instructure UI deprecation warnings that are being hidden because the `OMIT_INSTUI_DEPRECATION_WARNINGS` environment variable is set. Remove or unset this variable to see the full list of warnings in your console.","These warnings will give you advance notice of breaking changes and upgrade guidance to keep your code up to date with the latest Instructure UI versions."].join("\n\n")))}(condition,message,...args),info=(...args)=>console.info(...args),assert=(condition,...data)=>console.assert(condition,data),debug=(message,...optionalParams)=>console.debug(message,optionalParams),log=(message,...optionalParams)=>console.log(message,optionalParams)},7100:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
 __webpack_require__.d(__webpack_exports__,{x:()=>IconArrowOpenDownLine})
 var _path,react__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(14041),_instructure_ui_svg_images__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__(532),_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__(54380)
