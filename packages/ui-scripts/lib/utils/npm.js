@@ -118,8 +118,8 @@ export function createNPMRCFile() {
   }
 
   try {
-    info('running npm whoami:')
-    runCommandSync('npm', ['whoami'])
+    info('running pnpm whoami:')
+    runCommandSync('pnpm', ['whoami'])
   } catch (e) {
     error(`Could not determine if NPM auth was successful: ${e}`)
     process.exit(1)

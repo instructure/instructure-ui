@@ -14,20 +14,25 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-scripts lint",
-    "prepare-build": "npm run build-icons",
-    "build-icons": "ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js",
+    "prepare-build": "pnpm run build-icons",
+    "build-icons": "pnpm exec ui-scripts build-icons --skipOptimization --config icons.config.js",
+    "build-icons:optimize": "pnpm exec ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js",
     "build": "ui-scripts build __build__ --copy-files --modules es,cjs",
-    "export": "npm run build-icons && npm run build:types",
+    "export": "pnpm run build-icons:optimize && pnpm run build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
+  "//script-comments": {
+    "build-icons": "TODO: SVGO optimization temporarily disabled with --skipOptimization during pnpm migration. The build process was modifying all 648 SVG files every time bootstrap ran, causing massive git diffs. Before re-enabling, all SVGs should be optimized in master first (separate PR). Use 'build-icons:optimize' to run with SVGO.",
+    "export": "Note: 'export' uses build-icons:optimize to ensure published icons are optimized, while regular builds skip optimization."
+  },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "11.0.1"
+    "@instructure/ui-babel-preset": "workspace:*"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/ui-svg-images": "11.0.1"
+    "@instructure/ui-svg-images": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

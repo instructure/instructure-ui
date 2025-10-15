@@ -75,7 +75,32 @@ export default {
     const generators = []
     for (const conf of tokenScriptsConfig) {
       const { sourceTokens, themeKey, outputPackage, groupOutput } = conf
-      const tokens = require(sourceTokens).default
+      // For workspace packages in pnpm, construct path from project root
+      // Convert '@instructure/ui-themes/lib/themes/canvas' to 'packages/ui-themes/lib/themes/canvas'
+      let resolvedSource
+      try {
+        // Extract package name and subpath
+        const packageMatch = sourceTokens.match(
+          /^(@instructure\/)?([\w-]+)(.*)$/
+        )
+        if (!packageMatch) {
+          throw new Error(`Invalid package path: ${sourceTokens}`)
+        }
+        const packageName = packageMatch[2]
+        const subpath = packageMatch[3]
+
+        // Construct path from workspace root
+        resolvedSource = path.join(
+          process.cwd(),
+          'packages',
+          packageName,
+          subpath
+        )
+      } catch (err) {
+        error(`Failed to resolve ${sourceTokens}: ${err.message}`)
+        process.exit(1)
+      }
+      const tokens = require(resolvedSource).default
 
       if (Object.keys(tokens).indexOf('colors') < 0) {
         error('Invalid token source')
@@ -83,9 +108,21 @@ export default {
       }
 
       const styleDictionarySource = handleMapJSTokensToSource(tokens)
-      const themePath = path.dirname(
-        require.resolve(path.join(outputPackage, 'package.json'))
-      )
+      // Resolve output package path from workspace root
+      let themePath
+      try {
+        const outputPackageMatch = outputPackage.match(
+          /^(@instructure\/)?([\w-]+)$/
+        )
+        if (!outputPackageMatch) {
+          throw new Error(`Invalid output package: ${outputPackage}`)
+        }
+        const outputPackageName = outputPackageMatch[2]
+        themePath = path.join(process.cwd(), 'packages', outputPackageName)
+      } catch (err) {
+        error(`Failed to resolve ${outputPackage}: ${err.message}`)
+        process.exit(1)
+      }
       const outputPath = groupOutput
         ? path.join(themePath, outputDir, themeKey)
         : path.join(themePath, outputDir)

@@ -27,15 +27,15 @@ Please follow the steps on the [how to build guide page](#building-instui).
 
 ### Running the documentation app
 
-1. Run `npm start`
+1. Run `pnpm start`
 1. Open [http://localhost:9090](http://localhost:9090) in your browser
 
 ### Development
 
-1. Run `npm run build:watch` to build all of the packages for a development environment and watch for changes.
-1. Run `npm run dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:9090](http://localhost:9090) in a browser. When you make changes to the source code you should see the page auto-reload.
-1. Run `npm run test:watch -- --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
-1. Run `npm run test` to run all the tests for every package.
+1. Run `pnpm run build:watch` to build all of the packages for a development environment and watch for changes.
+1. Run `pnpm run dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:9090](http://localhost:9090) in a browser. When you make changes to the source code you should see the page auto-reload.
+1. Run `pnpm run test:watch -- --filter @instructure/[package name]` to run the tests for 'package name' and watch for changes.
+1. Run `pnpm run test` to run all the tests for every package.
 
 ## Code guidelines
 
@@ -49,14 +49,14 @@ Linters are run as part of the build. If you use VSCode, you can set up the foll
 
 1. Install the _Eslint_ plugin [VSCode](https://github.com/Microsoft/vscode-eslint)
 1. Install the _Stylelint_ plugin [VSCode](https://github.com/stylelint/vscode-stylelint)
-1. Run `npm install` to install the dependencies
+1. Run `pnpm install` to install the dependencies
 1. Restart your editor
 
 ### Documentation
 
 Please update the documentation and examples with any changes.
 
-- `npm start` will build the production version of the documentation. You can view it at [http://localhost:9090](http://localhost:9090).
+- `pnpm start` will build the production version of the documentation. You can view it at [http://localhost:9090](http://localhost:9090).
 - All components and utilities should be well documented, including examples.
 - Write documentation inline in code comment blocks. The code and docs should
   always be in sync.

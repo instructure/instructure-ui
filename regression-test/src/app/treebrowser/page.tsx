@@ -24,20 +24,18 @@
 
 'use client'
 import React, { useState } from 'react'
-import { TreeBrowser as tb } from 'instructure-ui/ui-tree-browser/es/index'
 import {
+  TreeBrowser as tb,
   RadioInput as ri,
-  RadioInputGroup as rig
-} from 'instructure-ui/ui-radio-input/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { ScreenReaderContent as src } from 'instructure-ui/ui-a11y-content/es/index'
-import {
+  RadioInputGroup as rig,
+  View as vw,
+  ScreenReaderContent as src,
   IconGradebookLine as igl,
   IconXSolid as ixs,
   IconUserSolid as ius,
   IconModuleLine as iml,
   IconVideoLine as ivl
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const TreeBrowser = tb as any
 const RadioInput = ri as any

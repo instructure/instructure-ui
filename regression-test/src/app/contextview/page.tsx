@@ -24,9 +24,7 @@
 
 'use client'
 import React from 'react'
-import { ContextView as cv } from 'instructure-ui/ui-view/es/index'
-import { Heading as hd } from 'instructure-ui/ui-heading/es/index'
-import { Text as tx } from 'instructure-ui/ui-text/es/index'
+import { ContextView as cv, Heading as hd, Text as tx } from '@instructure/ui'
 
 const ContextView = cv as any
 const Heading = hd as any

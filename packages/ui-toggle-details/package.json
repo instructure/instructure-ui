@@ -23,9 +23,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-axe-check": "11.0.1",
-    "@instructure/ui-babel-preset": "11.0.1",
-    "@instructure/ui-themes": "11.0.1",
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
@@ -33,18 +33,18 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/emotion": "11.0.1",
-    "@instructure/shared-types": "11.0.1",
-    "@instructure/ui-buttons": "11.0.1",
-    "@instructure/ui-dom-utils": "11.0.1",
-    "@instructure/ui-expandable": "11.0.1",
-    "@instructure/ui-flex": "11.0.1",
-    "@instructure/ui-icons": "11.0.1",
-    "@instructure/ui-motion": "11.0.1",
-    "@instructure/ui-react-utils": "11.0.1",
-    "@instructure/ui-utils": "11.0.1",
-    "@instructure/ui-view": "11.0.1",
-    "@instructure/uid": "11.0.1"
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-buttons": "workspace:*",
+    "@instructure/ui-dom-utils": "workspace:*",
+    "@instructure/ui-expandable": "workspace:*",
+    "@instructure/ui-flex": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-motion": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-utils": "workspace:*",
+    "@instructure/ui-view": "workspace:*",
+    "@instructure/uid": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"
