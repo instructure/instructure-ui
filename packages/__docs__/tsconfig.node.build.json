@@ -6,6 +6,7 @@
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "outDir": "./lib",
+    "rootDir": "./buildScripts",
     "resolveJsonModule": true
   },
   "include": ["buildScripts/**/*"]
