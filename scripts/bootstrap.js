@@ -125,20 +125,15 @@ async function buildProject() {
     execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
   })
 
-  await trackPhase('SWC compilation', () => {
-    console.info('Building packages with SWC...')
-    execSync('pnpm run build', opts)
-  })
+  console.info('Running SWC compilation and TypeScript declarations in parallel...')
 
-  console.info('Running token generation and TypeScript compilation in parallel...')
-
-  const parallelPhases = [
-    { trackName: 'Token generation', name: 'Generating tokens', command: 'build:tokens' },
+  const parallelBuildPhases = [
+    { trackName: 'SWC compilation', name: 'Building packages with SWC', command: 'build' },
     { trackName: 'TypeScript declarations', name: 'Building TypeScript declarations', command: 'build:types' }
   ]
 
   await Promise.all(
-    parallelPhases.map(({ trackName, name, command }) => {
+    parallelBuildPhases.map(({ trackName, name, command }) => {
       return trackPhase(trackName, () => {
         return new Promise((resolve, reject) => {
           console.info(`${name}...`)
@@ -158,6 +153,25 @@ async function buildProject() {
       })
     })
   )
+
+  console.info('Generating tokens...')
+
+  await trackPhase('Token generation', () => {
+    return new Promise((resolve, reject) => {
+      const child = spawn('pnpm', ['run', 'build:tokens'], {
+        stdio: 'inherit',
+        shell: true
+      })
+      child.on('close', (code) => {
+        if (code !== 0) {
+          reject(new Error(`'build:tokens' failed with exit code ${code}`))
+        } else {
+          resolve()
+        }
+      })
+      child.on('error', reject)
+    })
+  })
 }
 async function bootstrap() {
   const bootstrapStart = Date.now()

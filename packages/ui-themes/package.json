@@ -3,6 +3,7 @@
   "version": "11.0.1",
   "description": "A library of instructure themes",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "module",
   "module": "./es/index.js",
   "main": "./es/index.js",
   "types": "./types/index.d.ts",
