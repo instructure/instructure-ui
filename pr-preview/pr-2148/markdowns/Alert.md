@@ -102,7 +102,7 @@ const Example = () => {
       }
     ])
     setcount(count + 1)
-}
+  }
 
   const closeAlert = (key) =>
     setAlerts(alerts.filter((alert) => alert.key !== key))
