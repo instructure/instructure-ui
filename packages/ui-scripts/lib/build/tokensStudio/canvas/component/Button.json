@@ -172,8 +172,16 @@
       "value": "{color.stroke.interactive.ai.topGradient.base}",
       "type": "color"
     },
+    "aiDisabledBorderTopGradientColor": {
+      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
+      "type": "color"
+    },
     "aiBorderBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.base}",
+      "type": "color"
+    },
+    "aiDisabledBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
       "type": "color"
     },
     "aiTextColor": {
