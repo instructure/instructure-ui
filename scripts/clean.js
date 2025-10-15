@@ -74,12 +74,11 @@ async function clean() {
         path.join(packagesPath, packageDir.name, dir)
       )
 
-      if (!NODE_PACKAGES.includes(packageDir.name)) {
-        rmDirs.push(path.join(packagesPath, packageDir.name, 'lib'))
-      } else {
+      if (NODE_PACKAGES.includes(packageDir.name)) {
         // For tooling packages, don't delete 'es' directory (preserve pre-built code)
         rmDirs = rmDirs.filter(dir => !dir.endsWith('/es'))
       }
+      // Note: Component packages build to 'es/' which is included in DIRS_TO_DELETE
 
       return deleteDirs(rmDirs)
     })
