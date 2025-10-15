@@ -28,7 +28,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import chokidar from 'chokidar'
 import { globbySync } from 'globby'
 import { merge } from 'webpack-merge'
-import { processSingleFile } from './lib/build-docs.mjs'
+import { processSingleFile } from './lib/buildScripts/build-docs.mjs'
 import resolve from './resolve.mjs'
 
 const ENV = process.env.NODE_ENV || 'production'

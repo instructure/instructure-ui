@@ -11,9 +11,9 @@
   "homepage": "https://instructure.design",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "npm run build:scripts:ts && node lib/build-docs.mjs",
+    "prestart": "npm run build:scripts:ts && node lib/buildScripts/build-docs.mjs",
     "start": "npm run prestart && ui-scripts bundle && ui-scripts server -p 8001",
-    "start:watch": "npm run prestart && ui-scripts bundle --watch",
+    "start:watch": "npm run prestart && NODE_OPTIONS='--max-old-space-size=8192' ui-scripts bundle --watch",
     "start-watch-just-app": "ui-scripts bundle --watch",
     "bundle": "npm run prestart && ui-scripts bundle",
     "lint": "ui-scripts lint",
