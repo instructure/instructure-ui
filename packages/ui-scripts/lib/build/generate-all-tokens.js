@@ -33,35 +33,35 @@ const require = createRequire(import.meta.url)
 const tokenScriptsConfig = [
   {
     themeKey: 'canvas',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvas',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvas',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   },
   {
     themeKey: 'canvas',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvas',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvas',
     outputPackage: '@instructure/canvas-theme'
   },
   {
     themeKey: 'canvas',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvas',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvas',
     outputPackage: '@instructure/ui-themes',
     groupOutput: true
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvasHighContrast',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvasHighContrast',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvasHighContrast',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvasHighContrast',
     outputPackage: '@instructure/canvas-high-contrast-theme'
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-themes/lib/themes/canvasHighContrast',
+    sourceTokens: '@instructure/ui-themes/es/themes/canvasHighContrast',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   }

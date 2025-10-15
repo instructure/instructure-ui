@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import { borders } from './borders'
-import { transitions } from './transitions'
-import { typography } from './typography'
-import { spacing } from './spacing'
-import { forms } from './forms'
-import { media } from './media'
-import { breakpoints } from './breakpoints'
-import { shadows } from './shadows'
-import { stacking } from './stacking'
+import { borders } from './borders.js'
+import { transitions } from './transitions.js'
+import { typography } from './typography.js'
+import { spacing } from './spacing.js'
+import { forms } from './forms.js'
+import { media } from './media.js'
+import { breakpoints } from './breakpoints.js'
+import { shadows } from './shadows.js'
+import { stacking } from './stacking.js'
 
 const canvas = {
   borders,
