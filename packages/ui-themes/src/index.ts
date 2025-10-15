@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
-import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
+import type { CanvasHighContrastTheme } from './themes/canvasHighContrast/index.js'
+import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas/index.js'
 import type {
   BaseTheme,
   Primitives,
@@ -32,14 +32,14 @@ import type {
   UI
 } from '@instructure/shared-types'
 
-import { canvasHighContrast } from './themes/canvasHighContrast'
-import { canvas } from './themes/canvas'
+import { canvasHighContrast } from './themes/canvasHighContrast/index.js'
+import { canvas } from './themes/canvas/index.js'
 
 import {
   primitives,
   additionalPrimitives
-} from './sharedThemeTokens/colors/primitives'
-import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
+} from './sharedThemeTokens/colors/primitives.js'
+import dataVisualization from './sharedThemeTokens/colors/dataVisualization.js'
 
 type ThemeMap = {
   canvas: CanvasTheme

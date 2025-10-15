@@ -4,7 +4,10 @@
     "outDir": "./types",
     "module": "CommonJS",
     "composite": true,
-    "rootDir": "./lib"
+    "rootDir": "./lib",
+    "incremental": true
   },
-  "include": ["lib"]
+  "include": [
+    "lib"
+  ]
 }

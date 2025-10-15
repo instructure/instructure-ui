@@ -47,11 +47,11 @@ const require = createRequire(import.meta.url)
 // This needs to be required otherwise TSC will mess up the directory structure
 // in the output directory
 // eslint-disable-next-line @instructure/no-relative-imports
-const rootPackage = require('../../../package.json') // root package.json
+const projectRoot = path.resolve(__dirname, '../../')
+const rootPackage = require(path.join(projectRoot, 'package.json'))
 
 const buildDir = './__build__/'
-const projectRoot = path.resolve(__dirname, '../../../')
-const packagesDir = '../..'
+const packagesDir = projectRoot
 const library: LibraryOptions = {
   name: rootPackage.name,
   version: rootPackage.version,
@@ -160,7 +160,7 @@ function buildDocs() {
         {
           outputFilePath: path.join(parentOfDocs, 'llms.txt'),
           baseUrl: 'https://instructure.design/markdowns/',
-          summariesFilePath: path.join(__dirname, '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json')
+          summariesFilePath: path.join(__dirname, 'ai-accessible-documentation/summaries-for-llms-file.json')
         }
       )
 

@@ -3,7 +3,7 @@
   "version": "11.0.1",
   "description": "Codemod scripts to help upgrade Instructure UI libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.ts",
+  "main": "./es/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"

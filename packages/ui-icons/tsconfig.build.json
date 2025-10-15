@@ -3,12 +3,22 @@
   "compilerOptions": {
     "outDir": "./types",
     "composite": true,
-    "rootDir": "./__build__"
+    "rootDir": "./__build__",
+    "incremental": true
   },
-  "include": ["__build__"],
-  "exclude": ["/font/Line/**/*", "/font/Solid/**/*"],
+  "include": [
+    "__build__"
+  ],
+  "exclude": [
+    "/font/Line/**/*",
+    "/font/Solid/**/*"
+  ],
   "references": [
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-svg-images/tsconfig.build.json" }
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-svg-images/tsconfig.build.json"
+    }
   ]
 }

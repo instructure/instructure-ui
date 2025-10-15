@@ -3,9 +3,12 @@
   "compilerOptions": {
     "outDir": "./types",
     "composite": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "incremental": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "references": [
     {
       "path": "../console/tsconfig.build.json"

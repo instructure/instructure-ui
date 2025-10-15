@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import sharedThemeTokens from '../../sharedThemeTokens'
+import sharedThemeTokens from '../../sharedThemeTokens/index.js'
 import { BaseTheme, Colors } from '@instructure/shared-types'
-import { colors } from './colors'
+import { colors } from './colors.js'
 
 const key = 'canvas-high-contrast'
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { additionalPrimitives } from './primitives'
+import { additionalPrimitives } from './primitives.js'
 import type { DataVisualization } from '@instructure/shared-types'
 
 const dataVisualization: DataVisualization = {

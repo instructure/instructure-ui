@@ -3,8 +3,15 @@
   "compilerOptions": {
     "outDir": "./types",
     "rootDir": "./src",
-    "composite": true
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src"],
-  "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    }
+  ]
 }

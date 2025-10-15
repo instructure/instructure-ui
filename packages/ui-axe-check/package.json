@@ -3,7 +3,7 @@
   "version": "11.0.1",
   "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
+  "main": "./es/index.js",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",
   "repository": {
@@ -16,7 +16,7 @@
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "clean": "ui-scripts clean",
-    "build": "ui-scripts build --modules es,cjs",
+    "build": "ui-scripts build",
     "build:watch": "ui-scripts build --watch",
     "build:types": "tsc -p tsconfig.build.json"
   },

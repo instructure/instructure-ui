@@ -47,7 +47,8 @@ const DIRS_TO_DELETE = [
   'tokens',
   '.babel-cache',
   '.cache',
-  'es'
+  'es',
+  'lib'
 ]
 
 async function deleteDirs(dirs = []) {
@@ -70,13 +71,15 @@ async function clean() {
   const deletions = packageDirs
     .filter((dir) => dir.isDirectory())
     .map(async (packageDir) => {
-      const rmDirs = DIRS_TO_DELETE.map((dir) =>
+      let rmDirs = DIRS_TO_DELETE.map((dir) =>
         path.join(packagesPath, packageDir.name, dir)
       )
 
-      if (!NODE_PACKAGES.includes(packageDir.name)) {
-        rmDirs.push(path.join(packagesPath, packageDir.name, 'lib'))
+      if (NODE_PACKAGES.includes(packageDir.name)) {
+        // For tooling packages, don't delete 'es' or 'lib' directories (preserve pre-built code)
+        rmDirs = rmDirs.filter(dir => !dir.endsWith('/es') && !dir.endsWith('/lib'))
       }
+      // Note: Component packages build to 'es/' which is included in DIRS_TO_DELETE
 
       return deleteDirs(rmDirs)
     })

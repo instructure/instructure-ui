@@ -3,22 +3,51 @@
   "compilerOptions": {
     "outDir": "./types",
     "composite": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "incremental": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "references": [
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-themes/tsconfig.build.json" },
-    { "path": "../emotion/tsconfig.build.json" },
-    { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui-icons/tsconfig.build.json" },
-    { "path": "../ui-link/tsconfig.build.json" },
-    { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-truncate-text/tsconfig.build.json" },
-    { "path": "../ui-tooltip/tsconfig.build.json" },
-    { "path": "../ui-utils/tsconfig.build.json" },
-    { "path": "../ui-view/tsconfig.build.json" },
-    { "path": "../ui-axe-check/tsconfig.build.json" },
-    { "path": "../ui-scripts/tsconfig.build.json" }
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-themes/tsconfig.build.json"
+    },
+    {
+      "path": "../emotion/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-icons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-link/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-truncate-text/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-tooltip/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-view/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-axe-check/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-scripts/tsconfig.build.json"
+    }
   ]
 }

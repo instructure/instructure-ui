@@ -3,22 +3,51 @@
   "compilerOptions": {
     "outDir": "./types",
     "rootDir": "./src",
-    "composite": true
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "references": [
-    { "path": "../console/tsconfig.build.json" },
-    { "path": "../emotion/tsconfig.build.json" },
-    { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui-dialog/tsconfig.build.json" },
-    { "path": "../ui-i18n/tsconfig.build.json" },
-    { "path": "../ui-motion/tsconfig.build.json" },
-    { "path": "../ui-portal/tsconfig.build.json" },
-    { "path": "../ui-position/tsconfig.build.json" },
-    { "path": "../ui-react-utils/tsconfig.build.json" },
-    { "path": "../ui-overlays/tsconfig.build.json" },
-    { "path": "../ui-utils/tsconfig.build.json" },
-    { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-themes/tsconfig.build.json" }
+    {
+      "path": "../console/tsconfig.build.json"
+    },
+    {
+      "path": "../emotion/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-dialog/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-i18n/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-motion/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-portal/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-position/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-overlays/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-themes/tsconfig.build.json"
+    }
   ]
 }
