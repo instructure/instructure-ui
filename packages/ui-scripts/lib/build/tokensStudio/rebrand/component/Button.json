@@ -315,6 +315,14 @@
     "primaryOnColorDisabledIconColor": {
       "value": "{color.icon.interactive.secondary.disabled}",
       "type": "color"
+    },
+    "aiDisabledBorderTopGradientColor": {
+      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
+      "type": "color"
+    },
+    "aiDisabledBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
+      "type": "color"
     }
   }
 }

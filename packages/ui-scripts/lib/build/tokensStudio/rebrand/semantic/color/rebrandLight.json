@@ -363,11 +363,19 @@
             "base": {
               "value": "{color.violet.violet90}",
               "type": "color"
+            },
+            "disabled": {
+              "value": "{color.violet.violet30}",
+              "type": "color"
             }
           },
           "bottomGradient": {
             "base": {
               "value": "{color.sea.sea90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.sea.sea30}",
               "type": "color"
             }
           }
