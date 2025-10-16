@@ -125,10 +125,10 @@ describe('<Options />', () => {
 
   it('should render nested options properly', async () => {
     const { container } = render(
-      <Options data-testId="outer-list">
+      <Options data-testid="outer-list">
         <Options.Item>Option one </Options.Item>
         <Options.Item>Option two </Options.Item>
-        <Options renderLabel={'Nested list'} data-testId="nested-list">
+        <Options renderLabel={'Nested list'} data-testid="nested-list">
           <Options.Item>Nested option one </Options.Item>
           <Options.Item>Nested option two </Options.Item>
         </Options>
@@ -168,7 +168,10 @@ describe('<Options />', () => {
         </Options>
       )
 
-      // axe-check is more strict now, and expects "list" role to have "listitem" children, but we use "role='none'" children. After discussing it with the A11y team, we agreed to ignore this error because the screen readers can read the component perfectly.
+      // axe-check is more strict now, and expects "list" role to have "listitem"
+      // children, but we use "role='none'" children. After discussing it with
+      // the A11y team, we agreed to ignore this error because the screen readers
+      // can read the component perfectly.
       // TODO: try to remove this ignore if axe-check is updated and isn't this strict anymore
       // https://dequeuniversity.com/rules/axe/4.6/aria-required-children?application=axeAPI
       const axeCheck = await runAxeCheck(container, {

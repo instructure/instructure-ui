@@ -29,10 +29,11 @@ import '@testing-library/jest-dom'
 
 import { FileDrop } from '../index'
 import { FileDropProps } from '../props'
+import { act } from 'react'
 
 describe('<FileDrop/>', () => {
   it('should focus the input when focus is called', async () => {
-    let inputEl: any
+    let inputEl: HTMLInputElement | null | undefined
     const { container } = render(
       <FileDrop
         renderLabel="filedrop"
@@ -42,9 +43,9 @@ describe('<FileDrop/>', () => {
       />
     )
     const input = container.querySelector('input[class$="-fileDrop__input"]')
-
-    inputEl.focus()
-
+    act(() => {
+      inputEl!.focus()
+    })
     expect(input).toHaveFocus()
   })
 

@@ -29,8 +29,28 @@ import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
 import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputedStyleToGetCSSStyleDeclaration'
 import warnTableCaptionMissing from '../warnTableCaptionMissing'
 import warnCodeEditorRemoved from '../warnCodeEditorRemoved'
+import { type MockInstance, vi } from 'vitest'
 
 describe('test codemods', () => {
+  let consoleLogMock: ReturnType<typeof vi.spyOn>
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    // comment these out to see the test output
+    consoleLogMock = vi
+      .spyOn(console, 'log')
+      .mockImplementation(() => {}) as MockInstance
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleLogMock.mockRestore()
+    consoleWarningMock.mockRestore()
+  })
+
   it('test InstUI v10 color codemods', () => {
     runTest(updateV10Breaking)
   })
