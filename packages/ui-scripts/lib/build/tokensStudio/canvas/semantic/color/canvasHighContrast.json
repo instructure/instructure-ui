@@ -356,6 +356,10 @@
           "base": {
             "value": "{color.green.green90}",
             "type": "color"
+          },
+          "disabled": {
+            "value": "{color.green.green40}",
+            "type": "color"
           }
         },
         "ai": {
