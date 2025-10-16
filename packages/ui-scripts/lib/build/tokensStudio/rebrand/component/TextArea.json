@@ -1,5 +1,5 @@
 {
-  "textInput": {
+  "textArea": {
     "backgroundColor": {
       "value": "{color.background.interactive.input.base}",
       "type": "color"
@@ -104,16 +104,8 @@
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
-    "paddingHorizontalSm": {
-      "value": "{spacing.padding.interactive.horizontal.sm}",
-      "type": "spacing"
-    },
-    "paddingHorizontalMd": {
-      "value": "{spacing.padding.interactive.horizontal.md}",
-      "type": "spacing"
-    },
-    "paddingHorizontalLg": {
-      "value": "{spacing.padding.interactive.horizontal.lg}",
+    "paddingHorizontal": {
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "gapPrimitives": {
