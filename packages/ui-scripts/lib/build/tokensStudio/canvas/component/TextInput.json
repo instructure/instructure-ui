@@ -36,8 +36,8 @@
       "value": "{color.stroke.interactive.destructive.base}",
       "type": "color"
     },
-    "errorBorderHoverColor": {
-      "value": "{color.stroke.interactive.destructive.hover}",
+    "successBorderColor": {
+      "value": "{color.stroke.interactive.input.base}",
       "type": "color"
     },
     "borderRadius": {
@@ -102,6 +102,10 @@
     },
     "gapContent": {
       "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "gapPrimitives": {
+      "value": "{spacing.gap.inputElements}",
       "type": "spacing"
     },
     "paddingHorizontalSm": {

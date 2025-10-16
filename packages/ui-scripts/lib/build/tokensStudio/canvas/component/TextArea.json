@@ -1,5 +1,5 @@
 {
-  "textInput": {
+  "textArea": {
     "backgroundColor": {
       "value": "{color.background.interactive.input.base}",
       "type": "color"
@@ -37,7 +37,7 @@
       "type": "color"
     },
     "successBorderColor": {
-      "value": "{color.stroke.success}",
+      "value": "{color.stroke.interactive.input.base}",
       "type": "color"
     },
     "borderRadius": {
@@ -85,7 +85,7 @@
       "type": "fontSizes"
     },
     "fontSizeLg": {
-      "value": "{fontSize.textLg}",
+      "value": "1.375rem",
       "type": "fontSizes"
     },
     "heightSm": {
@@ -104,20 +104,12 @@
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
-    "paddingHorizontalSm": {
-      "value": "{spacing.padding.interactive.horizontal.sm}",
-      "type": "spacing"
-    },
-    "paddingHorizontalMd": {
-      "value": "{spacing.padding.interactive.horizontal.md}",
-      "type": "spacing"
-    },
-    "paddingHorizontalLg": {
-      "value": "{spacing.padding.interactive.horizontal.lg}",
-      "type": "spacing"
-    },
     "gapPrimitives": {
       "value": "{spacing.gap.inputElements}",
+      "type": "spacing"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     }
   }

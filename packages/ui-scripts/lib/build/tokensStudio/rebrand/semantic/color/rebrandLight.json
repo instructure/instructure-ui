@@ -62,7 +62,7 @@
             "type": "color"
           },
           "readonly": {
-            "value": "{color.grey.grey10}",
+            "value": "{color.grey.grey20}",
             "type": "color"
           },
           "disabled": {
@@ -290,7 +290,7 @@
             "type": "color"
           },
           "readonly": {
-            "value": "{color.grey.grey10}",
+            "value": "{color.grey.grey20}",
             "type": "color"
           },
           "disabled": {
