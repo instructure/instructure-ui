@@ -29,7 +29,9 @@ module.exports = {
       {
         coverage: Boolean(process.env.COVERAGE),
         esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
+        removeConsole:
+          process.env.NODE_ENV === 'production' &&
+          process.env.GITHUB_PULL_REQUEST_PREVIEW !== 'true',
         transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
       }
     ]

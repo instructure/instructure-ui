@@ -120,7 +120,11 @@ const textDirectionContextConsumer: TextDirectionContextConsumerType =
           return (
             <TextDirectionContext.Consumer>
               {(dir) => {
-                if (process.env.NODE_ENV !== 'production' && dir === 'auto') {
+                if (
+                  (process.env.NODE_ENV !== 'production' ||
+                    process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true') &&
+                  dir === 'auto'
+                ) {
                   console.warn(
                     "'auto' is not an supported value for the 'dir' prop. Please pass 'ltr' or 'rtl'"
                   )
