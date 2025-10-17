@@ -347,6 +347,22 @@
     "lineHeightLg": {
       "value": "1.375rem",
       "type": "lineHeights"
+    },
+    "primaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.primary.hover}",
+      "type": "color"
+    },
+    "primaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.primary.active}",
+      "type": "color"
+    },
+    "secondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.secondary.active}",
+      "type": "color"
     }
   }
 }
