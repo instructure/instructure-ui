@@ -176,11 +176,19 @@
       "value": "{color.stroke.interactive.ai.topGradient.disabled}",
       "type": "color"
     },
+    "aiSecondaryDisabledTextTopGradientColor": {
+      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
+      "type": "color"
+    },
     "aiBorderBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.base}",
       "type": "color"
     },
     "aiDisabledBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
       "type": "color"
     },
