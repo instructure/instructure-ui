@@ -339,6 +339,14 @@
     "aiSecondaryActiveBackgroundBottomGradientColor": {
       "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
       "type": "color"
+    },
+    "aiSecondaryDisabledTextTopGradientColor": {
+      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextBottomGradientColor": {
+      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
+      "type": "color"
     }
   }
 }
