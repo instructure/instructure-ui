@@ -57,7 +57,7 @@
       "type": "color"
     },
     "secondaryTextColor": {
-      "value": "{color.text.interactive.secondary.active}",
+      "value": "{color.text.interactive.secondary.base}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
