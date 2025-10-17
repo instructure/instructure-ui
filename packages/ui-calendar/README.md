@@ -10,7 +10,7 @@ A calendar component
 
 The `ui-calendar` package contains the following:
 
-- [Calendar](#Calendar)
+- [Calendar](Calendar)
 
 ### Installation
 
@@ -20,7 +20,7 @@ npm install @instructure/ui-calendar
 
 ### Usage
 
-For detailed usage and documentation, see [Calendar](#Calendar).
+For detailed usage and documentation, see [Calendar](Calendar).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-calendar.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-calendar

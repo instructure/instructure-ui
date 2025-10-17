@@ -10,8 +10,8 @@ A UI component for displaying Metrics.
 
 The `ui-metric` package contains the following:
 
-- [Metric](#Metric)
-- [MetricGroup](#MetricGroup)
+- [Metric](Metric)
+- [MetricGroup](MetricGroup)
 
 ### Installation
 

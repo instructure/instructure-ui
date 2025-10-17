@@ -10,12 +10,12 @@ A collection of utilities for managing focus and screen reader behavior
 
 The `ui-a11y-utils` package contains the following utilities:
 
-- [FocusRegion](#FocusRegion)
-- [KeyboardFocusRegion](#KeyboardFocusRegion)
-- [ScreenReaderFocusRegion](#ScreenReaderFocusRegion)
-- [FocusRegionManager](#FocusRegionManager)
-- [scopeTab](#scopeTab)
-- [hasVisibleChildren](#hasVisibleChildren)
+- [FocusRegion](FocusRegion)
+- [KeyboardFocusRegion](KeyboardFocusRegion)
+- [ScreenReaderFocusRegion](ScreenReaderFocusRegion)
+- [FocusRegionManager](FocusRegionManager)
+- [scopeTab](scopeTab)
+- [hasVisibleChildren](hasVisibleChildren)
 
 ### Installation
 

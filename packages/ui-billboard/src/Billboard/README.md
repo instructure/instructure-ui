@@ -26,7 +26,7 @@ type: example
   don't pass interactive content to the `message` prop if you have set the `href`
   or `onClick` props).
 - Use the `size` prop to adjust the size of the icon and text.
-- Pass [Instructure icons](#icons-react) to the `hero` property via a function
+- Pass [Instructure icons](icons-react) to the `hero` property via a function
   _(see examples)_, and they will be sized correctly based on the Billboard's
   `size`.
 

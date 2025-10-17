@@ -10,9 +10,9 @@ Utility components that help provide a good experience for users who navigate th
 
 The `ui-a11y-content` package contains the following components:
 
-- [AccessibleContent](#AccessibleContent)
-- [PresentationContent](#PresentationContent)
-- [ScreenReaderContent](#ScreenReaderContent)
+- [AccessibleContent](AccessibleContent)
+- [PresentationContent](PresentationContent)
+- [ScreenReaderContent](ScreenReaderContent)
 
 ### Installation
 

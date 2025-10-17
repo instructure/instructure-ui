@@ -8,8 +8,8 @@
 
 The `ui-svg-images` package contains the following:
 
-- [InlineSVG](#InlineSVG)
-- [SVGIcon](#SVGIcon)
+- [InlineSVG](InlineSVG)
+- [SVGIcon](SVGIcon)
 
 ### Installation
 

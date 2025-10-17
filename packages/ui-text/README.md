@@ -10,7 +10,7 @@ A component for styling textual content.
 
 The `ui-text` package contains the following:
 
-- [Text](#Text)
+- [Text](Text)
 
 ### Installation
 

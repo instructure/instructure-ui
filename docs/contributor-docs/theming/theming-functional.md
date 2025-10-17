@@ -7,7 +7,7 @@ order: 2
 ## Making InstUI-like components with theming
 
 InstUI uses [Emotion](https://emotion.sh/docs/introduction) under the hood to theme and style its components.
-If you want to read about the design behind the system and how to build `class-based` components with InstUI, please read [this](#theming-class-based).
+If you want to read about the design behind the system and how to build `class-based` components with InstUI, please read [this](theming-class-based).
 
 This page will show you how to build `functional` react components with InstUI.
 

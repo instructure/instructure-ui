@@ -141,6 +141,17 @@ class Nav extends Component<NavProps, NavState> {
     })
   }
 
+  getEffectiveBasePath = () => {
+    const pathname = window.location.pathname
+    // Check if we're in a PR preview (path contains /pr-preview/)
+    const prPreviewMatch = pathname.match(/^(\/pr-preview\/pr-\d+)/)
+    if (prPreviewMatch) {
+      return prPreviewMatch[1]
+    }
+    // Live version - no base path
+    return ''
+  }
+
   matchQuery(str: string): boolean {
     const { query } = this.state
     return query && typeof query.test === 'function' ? query.test(str) : true
@@ -257,6 +268,15 @@ class Nav extends Component<NavProps, NavState> {
     }
   }
 
+  handleInternalNavigation = (targetPath: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    this.removeFocus(e as React.MouseEvent<ViewOwnProps>)
+    const basePath = this.getEffectiveBasePath()
+    const newUrl = basePath ? `${basePath}/${targetPath}` : `/${targetPath}`
+    window.history.pushState({}, '', newUrl)
+    window.dispatchEvent(new PopStateEvent('popstate'))
+  }
+
   renderDocLink(docId: string) {
     const { docs, selected } = this.props
     const docSelected = docId === selected
@@ -283,9 +303,9 @@ class Nav extends Component<NavProps, NavState> {
           />
         )}
         <Link
-          onClick={this.removeFocus}
+          onClick={(e: any) => this.handleInternalNavigation(docId, e)}
           display="block"
-          href={`#${docId}`}
+          href={`/${docId}`} // Keep href simple
           isWithinText={false}
         >
           {docs[docId].title}
@@ -451,9 +471,9 @@ class Nav extends Component<NavProps, NavState> {
           >
             <Link
               display="block"
-              onClick={this.removeFocus}
+              onClick={(e: any) => this.handleInternalNavigation(themeKey, e)}
               isWithinText={false}
-              href={`#${themeKey}`}
+              href={`/${themeKey}`}
             >
               {themeKey}
             </Link>
@@ -479,9 +499,9 @@ class Nav extends Component<NavProps, NavState> {
     const themes = this.renderThemes()
     const icons = (
       <NavToggle
-        key={'icons'}
-        summary={'Icons'}
-        href="#icons"
+        summary="Icons"
+        onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
+        href="icons"
         shouldBlur={true}
       />
     )

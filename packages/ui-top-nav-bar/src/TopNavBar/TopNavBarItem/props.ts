@@ -105,7 +105,7 @@ type TopNavBarItemOwnProps = {
 
   /**
    * Renders the submenu for the item.
-   * Accepts a [Drilldown](#Drilldown) component.
+   * Accepts a [Drilldown](Drilldown) component.
    * The menu toggle logic is controlled by the menu item.
    *
    * If you need more customization, use the `customPopoverConfig` prop.
@@ -120,7 +120,7 @@ type TopNavBarItemOwnProps = {
 
   /**
    * Configures a custom Popover for the menu item.
-   * Accepts [Popover](#Popover) props (except "renderTrigger").
+   * Accepts [Popover](Popover) props (except "renderTrigger").
    *
    * Use this prop for features like search, tooltips, etc., and use
    * the `renderSubmenu` prop for the default submenu!
@@ -138,7 +138,7 @@ type TopNavBarItemOwnProps = {
    * Tooltips can be useful for `variant="icon"` or `variant="avatar"` type
    * menu items where there is no visible text.
    *
-   * Accepts a string or a config object containing a subset of props from [Tooltip](#Tooltip).
+   * Accepts a string or a config object containing a subset of props from [Tooltip](Tooltip).
    */
   tooltip?: TopNavBarItemTooltipType
 
@@ -189,7 +189,7 @@ type TopNavBarItemOwnProps = {
   ) => void
 
   /**
-   * __In desktop mode__, the callback fired when the item's submenu ([Drilldown](#Drilldown)) is toggled open/closed.
+   * __In desktop mode__, the callback fired when the item's submenu ([Drilldown](Drilldown)) is toggled open/closed.
    */
   onSubmenuToggle?: DrilldownProps['onToggle']
 

@@ -3,12 +3,12 @@ describes: DateTimeInput
 ---
 
 A DateTimeInput component is used to enter a date-time value. It is built as a composition
-of the [DateInput](#DateInput) and [TimeSelect](#TimeSelect) components.
+of the [DateInput](DateInput) and [TimeSelect](TimeSelect) components.
 
-The properties of DateTimeInput prefaced with _date_ are passed to the underlying [DateInput](#DateInput)
+The properties of DateTimeInput prefaced with _date_ are passed to the underlying [DateInput](DateInput)
 (e.g. _dateLabel_ is DateInput's _label_), while the properties prefaced
 with _time_ are forwarded to the underlying
-[TimeSelect](#TimeSelect). Others are either shared by both sub-components (e.g. locale), or
+[TimeSelect](TimeSelect). Others are either shared by both sub-components (e.g. locale), or
 are unique to DateTimeInput (e.g. description).
 
 ### Localization

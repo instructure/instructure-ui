@@ -59,7 +59,7 @@ const Example = () => {
 render(<Example />)
 ```
 
-Setting ToggleDetails to `filled` will make the toggle use a full-width [Button](#Button) component.
+Setting ToggleDetails to `filled` will make the toggle use a full-width [Button](Button) component.
 
 ```js
 ---
@@ -79,7 +79,7 @@ Icon size can be adjusted using the `size` prop with small, medium, and large op
 
 The `summary` prop accepts any node, allowing you to format the summary text as
 you see fit. In these examples, we are formatting it with the
-[Text](#Text) component.
+[Text](Text) component.
 
 ```js
 ---

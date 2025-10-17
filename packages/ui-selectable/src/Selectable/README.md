@@ -2,7 +2,7 @@
 describes: Selectable
 ---
 
-`Selectable` is a low level utility component that can be used to create combobox widgets. Before composing your own component, make sure an existing component, like [Select](#Select), can't be adapted for your use case.
+`Selectable` is a low level utility component that can be used to create combobox widgets. Before composing your own component, make sure an existing component, like [Select](Select), can't be adapted for your use case.
 
 ```js
 ---

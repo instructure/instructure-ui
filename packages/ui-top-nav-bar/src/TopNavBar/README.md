@@ -1198,7 +1198,7 @@ type: example
 
 If there is not enough space to display all items, the list is truncated, and the hidden items are available under a dropdown menu.
 
-When a menu item has multiple levels, a submenu can be rendered by passing a [Drilldown](#Drilldown) navigation via it's `renderSubmenu` prop. If a more specialized dropdown is needed, it can be configured by the `customPopoverConfig` prop (see the [Dropdowns](/#TopNavBar/#items-dropdowns) section).
+When a menu item has multiple levels, a submenu can be rendered by passing a [Drilldown](Drilldown) navigation via it's `renderSubmenu` prop. If a more specialized dropdown is needed, it can be configured by the `customPopoverConfig` prop (see the [Dropdowns](/#TopNavBar/#items-dropdowns) section).
 
 The current page is highlighted, if it's id is passed via the `currentPageId` prop. (Note that it doesn't highlight items in submenus, but it highlights items hidden in truncated lists.)
 
@@ -1847,7 +1847,7 @@ The items can display as text, button, icon only or avatar only. The text and bu
 
 Not all 4 variation are available in every container, e.g.: items with avatars can only be used in `<TopNavBar.User>`.
 
-In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` will be converted to dropdown menu items ([Drilldown](#Drilldown) options), thus displaying differently (e.g.: all variants display as text options and icons are not rendered). The items in `<TopNavBar.ActionItems>` will be converted to `icon` variants (and are required to have `renderIcon` prop), and the list will get truncated when there is not enough space to display all actions.
+In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` will be converted to dropdown menu items ([Drilldown](Drilldown) options), thus displaying differently (e.g.: all variants display as text options and icons are not rendered). The items in `<TopNavBar.ActionItems>` will be converted to `icon` variants (and are required to have `renderIcon` prop), and the list will get truncated when there is not enough space to display all actions.
 
 ```js
 ---
@@ -1944,11 +1944,11 @@ type: example
 
 ##### Submenu
 
-The most common use case is when we want to open a submenu by clicking on the item. The `renderSubmenu` prop accepts a [Drilldown](#Drilldown) component, and the toggle logic is handled by `TopNavBar.Item`. The submenu can have multiple levels.
+The most common use case is when we want to open a submenu by clicking on the item. The `renderSubmenu` prop accepts a [Drilldown](Drilldown) component, and the toggle logic is handled by `TopNavBar.Item`. The submenu can have multiple levels.
 
 ##### Custom Popover
 
-If custom content needs to be displayed in the dropdown (e.g. search feature), use the `customPopoverConfig` prop. It accepts a config object of [Popover](#Popover) component props (except `renderTrigger`, since the item itself is the trigger).
+If custom content needs to be displayed in the dropdown (e.g. search feature), use the `customPopoverConfig` prop. It accepts a config object of [Popover](Popover) component props (except `renderTrigger`, since the item itself is the trigger).
 
 **Note**: in "smallViewport" mode items in `TopNavBar.ActionItems` can display custom popovers, but since the items in `TopNavBar.MenuItems` are converted to Drilldown options, custom popovers are not recommended to use in menu items.
 
@@ -1956,7 +1956,7 @@ If custom content needs to be displayed in the dropdown (e.g. search feature), u
 
 The `tooltip` prop can display extra information on hover/focus. Tooltips can be useful for `variant="icon"` or `variant="avatar"` type menu items where there is no visible text.
 
-It accepts either a string or a config object containing a subset of props from [Tooltip](#Tooltip).
+It accepts either a string or a config object containing a subset of props from [Tooltip](Tooltip).
 
 **Note**: items rendered as Drilldown options don't render tooltips.
 

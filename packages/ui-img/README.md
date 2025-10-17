@@ -10,7 +10,7 @@ An accessible image component.
 
 The `ui-img` package contains the following:
 
-- [Img](#Img)
+- [Img](Img)
 
 ### Installation
 

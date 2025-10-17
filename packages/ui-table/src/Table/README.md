@@ -6,9 +6,9 @@ describes: Table
 
 In stacked layout, column header is rendered in each cell, but not in row header.
 
-> If you are using [TruncateText](#TruncateText) (or CSS ellipsis) in your Table, set the
+> If you are using [TruncateText](TruncateText) (or CSS ellipsis) in your Table, set the
 > layout to `fixed` or `stacked`, or the text truncation will not work. To force long strings to break and not
-> exceed the bounds of the table cell, use `fixed` or `stacked`, together with the [Text](#Text) component:
+> exceed the bounds of the table cell, use `fixed` or `stacked`, together with the [Text](Text) component:
 > `<Text wrap="break-word">[long string]</Text>`.
 
 ```js
@@ -220,7 +220,7 @@ render(
 
 ### A sortable table using our Responsive component
 
-Resize the window to see how column headers transition into a `Select` for sorting table content when the traditional Table Header is no longer clickable. The Table layout itself switches from the horizontal view to the stacked view allowing content to be viewed without horizontal scrolling. See [Responsive](#Responsive) for more examples.
+Resize the window to see how column headers transition into a `Select` for sorting table content when the traditional Table Header is no longer clickable. The Table layout itself switches from the horizontal view to the stacked view allowing content to be viewed without horizontal scrolling. See [Responsive](Responsive) for more examples.
 
 By default, the options in the `Select` for sorting in stacked layout are generated from the `id` property of the `Table.ColHeader` components. If you want to display custom strings, use the `stackedSortByLabel` property.
 
@@ -868,7 +868,7 @@ render(<Example />)
 If you want to use fully custom components you have to pay attention to the following:
 
 - Render them as the appropriate HTML Table tags (`tr`, `th`, ...)
-- Read the `hover` prop from [TableContext](#TableContext) to customize hover behaviour
+- Read the `hover` prop from [TableContext](TableContext) to customize hover behaviour
 - A11y: Row header cells must have the `scope='row'` HTML attribute
 - A11y: Column header cells must have the `scope='col'` and `aria-sort` (if sortable) HTML attribute
 
@@ -973,13 +973,13 @@ render(<Example />)
 
 #### Fully custom components with `stacked` layout
 
-This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in [TableContext](#TableContext)), so they can display what column they are rendering.
+This layout for small screens displays the table as a list. To accomplish this the headers are passed down to cells (in [TableContext](TableContext)), so they can display what column they are rendering.
 In this layout for accessibility not render HTML table tags, just plain DOM elements (e.g. `div`) and use the appropriate ARIA role to signify that it's actually a `Table` (e.g. [`cell`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/cell_role), [`row`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/row_role), [`rowheader`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/rowheader_role)).  
 Also you need the following props on the components:
 
 ##### Table rows
 
-- It should read the `headers` array from [TableContext](#TableContext) and pass its nth element to its nth child (if they have such prop).
+- It should read the `headers` array from [TableContext](TableContext) and pass its nth element to its nth child (if they have such prop).
 
 ##### The children of the first row in `Table.Head` (`Table.ColHeader` by default)
 
@@ -987,7 +987,7 @@ Also you need the following props on the components:
 
 ##### Table cells
 
-- It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to (you can read whether the table is using `stacked` layout from [TableContext](#TableContext).
+- It needs to have an optional `header` prop and should display its value so the user knows which column the cell's value belongs to (you can read whether the table is using `stacked` layout from [TableContext](TableContext).
 
 Custom table with `stacked` layout support:
 

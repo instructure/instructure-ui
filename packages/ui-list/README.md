@@ -10,8 +10,8 @@ Components for displaying vertical or horizontal lists.
 
 The `ui-list` package contains the following:
 
-- [InlineList](#InlineList)
-- [List](#List)
+- [InlineList](InlineList)
+- [List](List)
 
 ### Installation
 

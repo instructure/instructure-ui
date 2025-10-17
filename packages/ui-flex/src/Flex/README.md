@@ -12,7 +12,7 @@ layouts with flexbox.
 Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `direction` to
 `column` to stack your Flex.Items.
 
-> **Unless your layout has a specific/finite height, you probably don't need `direction="column"`.** To create a layout of stacked elements, it is simpler to use multiple [View](#View) components with `display="block"`.
+> **Unless your layout has a specific/finite height, you probably don't need `direction="column"`.** To create a layout of stacked elements, it is simpler to use multiple [View](View) components with `display="block"`.
 
 ```js
 ---

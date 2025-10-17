@@ -2,7 +2,7 @@
 describes: Options
 ---
 
-`Options` is a view-only component for creating option lists and menus, like those used in [Select](#Select) and [Menu](#Menu). It should only be used if an existing component doesn't offer the level of customization needed.
+`Options` is a view-only component for creating option lists and menus, like those used in [Select](Select) and [Menu](Menu). It should only be used if an existing component doesn't offer the level of customization needed.
 
 The `variant` prop of `Option.Item` provides several visual treatments. Use the `highlighted` variant to indicate that an option is being hovered, focused, or otherwise interacted with and the `selected` variant to indicate the selected option.
 

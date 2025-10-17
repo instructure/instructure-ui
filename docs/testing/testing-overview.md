@@ -20,7 +20,7 @@ For more information about our unit tests you can check out our [detailed guides
 
 [Cypress Component Testing](https://docs.cypress.io/app/component-testing/get-started) allows us to mount individual components in a real browser environment for precise interaction testing. Unlike traditional unit tests, it renders with full CSS and browser APIs, offering more realistic behavior. This makes it ideal for testing user interactions like clicks, keyboard navigation, focus traps, and animations. While a bit heavier than Vitest, it provides greate visibility and debugging capabilities for complex UI logic.
 
-For more information check out our [detailed guides and examples.](#cypress-component-testing)
+For more information check out our [detailed guides and examples.](cypress-component-testing)
 
 #### Visual Regression Testing with Cypress and Chromatic:
 

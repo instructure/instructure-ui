@@ -20,7 +20,7 @@ type: example
 </View>
 ```
 
-The Mask component can be configured to cover the full screen if it is rendered inside a [Portal](#Portal).
+The Mask component can be configured to cover the full screen if it is rendered inside a [Portal](Portal).
 
 ```js
 ---

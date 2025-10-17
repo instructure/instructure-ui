@@ -11,10 +11,10 @@ The `Menu` component is a special type of Popover that is meant to be used as a 
 - Menu uses Popover internally and provides additional semantic markup and focus behavior.
 
 Passing a node to the `trigger` prop will render a toggle button which, when clicked, shows or hides
-the [Menu](#Menu) in a [Popover](#Popover).
+the [Menu](Menu) in a [Popover](Popover).
 
 Note: `<Menu/>` cannot contain content that is not a `<Menu.Item/>` (links or buttons). If
-you need to include more complex content, take a look at [Popover](#Popover).
+you need to include more complex content, take a look at [Popover](Popover).
 
 ```js
 ---

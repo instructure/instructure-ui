@@ -4,13 +4,13 @@ describes: Select
 
 `Select` is an accessible, custom styled combobox component for inputting a variety of data types.
 
-- It behaves similar to [Popover](#Popover) but provides additional semantic markup and focus behavior as a form input.
-- It should not be used for navigation or as a list of actions/functions. (see [Menu](#Menu)).
+- It behaves similar to [Popover](Popover) but provides additional semantic markup and focus behavior as a form input.
+- It should not be used for navigation or as a list of actions/functions. (see [Menu](Menu)).
 - It can behave like a `<select>` element or implement autocomplete behavior.
 
 > Notes:
 >
-> - Before implementing Select, see if a [SimpleSelect](#SimpleSelect) will suffice.
+> - Before implementing Select, see if a [SimpleSelect](SimpleSelect) will suffice.
 > - The `id` prop on options must be globally unique, it will be translated to an `id` prop in the DOM.
 
 #### Managing state for a Select
@@ -362,7 +362,7 @@ type: example
 
 #### Highlighting and selecting options
 
-To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](#Tag) with [AccessibleContent](#AccessibleContent) for each selected option via the `renderBeforeInput` prop.
+To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](Tag) with [AccessibleContent](AccessibleContent) for each selected option via the `renderBeforeInput` prop.
 
 ```js
 ---
@@ -973,7 +973,7 @@ render(
 
 #### Asynchronous option loading
 
-If no results match the user's search, it's recommended to leave `isShowingOptions` as `true` and to display an "empty option" as a way of communicating that there are no matches. Similarly, it's helpful to display a [Spinner](#Spinner) in an empty option while options load.
+If no results match the user's search, it's recommended to leave `isShowingOptions` as `true` and to display an "empty option" as a way of communicating that there are no matches. Similarly, it's helpful to display a [Spinner](Spinner) in an empty option while options load.
 
 ```js
 ---
@@ -1315,7 +1315,7 @@ render(
 
 #### Providing assistive text for screen readers
 
-It's important to ensure screen reader users receive instruction and feedback while interacting with a `Select`, but screen reader support for the `combobox` role varies. The `assistiveText` prop should always be used to explain how a keyboard user can make a selection. Additionally, a live region should be updated with feedback as the component is interacted with, such as when options are filtered or highlighted. Using an [Alert](#Alert) with the `screenReaderOnly` prop is the easiest way to do this.
+It's important to ensure screen reader users receive instruction and feedback while interacting with a `Select`, but screen reader support for the `combobox` role varies. The `assistiveText` prop should always be used to explain how a keyboard user can make a selection. Additionally, a live region should be updated with feedback as the component is interacted with, such as when options are filtered or highlighted. Using an [Alert](Alert) with the `screenReaderOnly` prop is the easiest way to do this.
 
 > Note: This component uses a native `input` field to render the selected value. When it's included in a native HTML `form`, the text value will be sent to the backend instead of anything specified in the `value` field of the `Select.Option`-s. We do not recommend to use this component this way, rather write your own code that collects information and sends it to the backend.
 

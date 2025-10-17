@@ -40,7 +40,7 @@ let ENTRIES: Entry[] = []
  * category: utilities/a11y
  * ---
  *
- * Class for focus operations, manages multiple [FocusRegion](#FocusRegion)s.
+ * Class for focus operations, manages multiple [FocusRegion](FocusRegion)s.
  * - Scoping focus within a given context,
  * - Mark active element for focus later
  * - Return focus to the marked element

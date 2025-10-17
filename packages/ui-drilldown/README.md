@@ -10,7 +10,7 @@ A drilldown menu component.
 
 The `ui-drilldown` package contains the following:
 
-- [Drilldown](#Drilldown)
+- [Drilldown](Drilldown)
 
 ### Installation
 

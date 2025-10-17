@@ -10,7 +10,7 @@ FileDrop is a flexible facade for an HTML file input.
 
 The `ui-file-drop` package contains the following:
 
-- [FileDrop](#FileDrop)
+- [FileDrop](FileDrop)
 
 ### Installation
 
@@ -20,7 +20,7 @@ npm install @instructure/ui-file-drop
 
 ### Usage
 
-For detailed usage and documentation, see [FileDrop](#FileDrop).
+For detailed usage and documentation, see [FileDrop](FileDrop).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-file-drop.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-file-drop

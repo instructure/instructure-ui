@@ -8,7 +8,7 @@
 
 The `ui-selectable` package contains the following:
 
-- [Selectable](#Selectable)
+- [Selectable](Selectable)
 
 ### Installation
 

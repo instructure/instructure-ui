@@ -10,16 +10,16 @@ Helper components and utilities for internationalization.
 
 The `ui-i18n` package contains the following:
 
-- [ApplyLocale](#ApplyLocale)
+- [ApplyLocale](ApplyLocale)
 
 ### Utilities
 
 The `ui-i18n` package contains the following utilities:
 
-- [bidirectional](#bidirectional)
-- [DateTime](#DateTime)
-- [Decimal](#Decimal)
-- [Locale](#Locale)
+- [bidirectional](bidirectional)
+- [DateTime](DateTime)
+- [Decimal](Decimal)
+- [Locale](Locale)
 
 ### Installation
 
