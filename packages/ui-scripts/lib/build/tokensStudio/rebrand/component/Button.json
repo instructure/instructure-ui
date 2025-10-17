@@ -20,6 +20,14 @@
       "value": "{color.stroke.interactive.primary.base}",
       "type": "color"
     },
+    "primaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.primary.hover}",
+      "type": "color"
+    },
+    "primaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.primary.active}",
+      "type": "color"
+    },
     "primaryDisabledBorderColor": {
       "value": "{color.stroke.interactive.primary.disabled}",
       "type": "color"
@@ -50,6 +58,14 @@
     },
     "secondaryBorderColor": {
       "value": "{color.stroke.interactive.secondary.base}",
+      "type": "color"
+    },
+    "secondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.secondary.active}",
       "type": "color"
     },
     "secondaryIconColor": {
