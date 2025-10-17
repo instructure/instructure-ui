@@ -2,7 +2,7 @@
 describes: ToggleGroup
 ---
 
-Performs the same function as [`ToggleDetails`](#ToggleDetails), but with the summary separated from the
+Performs the same function as [`ToggleDetails`](ToggleDetails), but with the summary separated from the
 toggle button, and built in padding and borders around the summary and main content area.
 
 ### Basic example

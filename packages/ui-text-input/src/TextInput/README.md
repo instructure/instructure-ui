@@ -362,7 +362,7 @@ type: example
 If there is content rendered before the input (via `renderBeforeInput`), the
 input will wrap to a new line when the browser determines it does
 not have enough room (for most browsers, this is 20 characters). Wrapping allows
-the component to accommodate large lists of [Tags](#Tag), for example.
+the component to accommodate large lists of [Tags](Tag), for example.
 
 If not desired, this behavior can be overridden by setting the `shouldNotWrap`
 boolean prop to `true`.

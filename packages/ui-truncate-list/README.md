@@ -10,7 +10,7 @@ A TruncateList utility component made by Instructure Inc.
 
 The `ui-truncate-list` package contains the following:
 
-- [TruncateList](#TruncateList)
+- [TruncateList](TruncateList)
 
 ### Installation
 

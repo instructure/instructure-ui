@@ -7,8 +7,8 @@ Long breadcrumb text will be automatically truncated, ensuring the list always
 remains on a single line.
 
 **Breadcrumbs are best suited for tablet-sized (~768px) screens and larger.**
-For smaller screens, use a [Link](#Link) that returns the user to the previous page or view.
-The example below is implemented with [Responsive](#Responsive). Resize the browser window to see
+For smaller screens, use a [Link](Link) that returns the user to the previous page or view.
+The example below is implemented with [Responsive](Responsive). Resize the browser window to see
 Breadcrumb become a Link at under 768px.
 
 ```js

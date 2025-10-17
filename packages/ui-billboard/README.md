@@ -10,7 +10,7 @@ A billboard component for empty states, 404 pages, redirects, etc.
 
 The `ui-billboard` package contains the following:
 
-- [Billboard](#Billboard)
+- [Billboard](Billboard)
 
 ### Installation
 

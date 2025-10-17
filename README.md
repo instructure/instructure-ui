@@ -20,7 +20,7 @@ The last two versions of all modern browsers (Firefox, Safari, Chrome, Edge).
 
 ## License
 
-[MIT](#LICENSE)
+[MIT](LICENSE)
 
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
 [license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE.md

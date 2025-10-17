@@ -185,7 +185,7 @@ class App extends Component<AppProps, AppState> {
     this._defaultDocumentTitle = document.title
     this.updateKey()
 
-    window.addEventListener('hashchange', this.updateKey, false)
+    window.addEventListener('popstate', this.updateKey, false)
 
     // TODO: Replace with the Responsive component later
     // Using this method directly for now instead to avoid a call to findDOMNode
@@ -225,6 +225,13 @@ class App extends Component<AppProps, AppState> {
         })
       })
       .catch(errorHandler)
+
+    const [page] = this.getPathInfo()
+    const isHomepage = page === 'index' || typeof page === 'undefined'
+    if (isHomepage) {
+      this.setState({ showMenu: false })
+    }
+
     document.addEventListener('focusin', this.handleFocusChange)
   }
 
@@ -242,7 +249,7 @@ class App extends Component<AppProps, AppState> {
   componentWillUnmount() {
     //cancel ongoing requests
     this._controller?.abort()
-    window.removeEventListener('hashchange', this.updateKey, false)
+    window.removeEventListener('popstate', this.updateKey, false)
 
     if (this._mediaQueryListener) {
       this._mediaQueryListener.remove()
@@ -261,13 +268,51 @@ class App extends Component<AppProps, AppState> {
   }
 
   getPathInfo = () => {
-    const { hash } = window.location
+    const { hash, pathname } = window.location
 
-    const path = hash && hash.split('/')
+    // Case 1: Old hash-based routing (hash contains the main content)
+    const cleanPath = pathname.replace(/^\/+|\/+$/g, '')
+    const pathSegments = cleanPath.split('/')
 
-    if (path) {
-      const [page, id] = path.map((entry) => decodeURI(entry.replace('#', '')))
-      return [page, id]
+    // Check if the pathname is just a base path (ends with slash or has no meaningful final segment)
+    const hasSubstantialPathname =
+      pathSegments.length > 0 &&
+      pathSegments[pathSegments.length - 1] !== '' &&
+      !pathSegments.every((seg) => seg === '')
+
+    // If it's just a base path with no hash, treat as homepage
+    if ((!hasSubstantialPathname || pathname.endsWith('/')) && !hash) {
+      return ['index'] // homepage
+    }
+
+    if (
+      hash &&
+      (!hasSubstantialPathname || pathname.endsWith('/')) &&
+      hash.startsWith('#') &&
+      !hash.startsWith('##')
+    ) {
+      const path = hash.split('/')
+      if (path) {
+        const [page, id] = path.map((entry) =>
+          decodeURI(entry.replace('#', ''))
+        )
+        return [page, id]
+      }
+    }
+    // Case 2: New clean URL routing (pathname contains the main content)
+    else {
+      if (pathSegments.length > 0 && pathSegments[0] !== '') {
+        // Get the page from the last segment of the path
+        const page = pathSegments[pathSegments.length - 1]
+        // If there's a hash that's not at the beginning (like #Guidelines), use it as ID
+        let id = undefined
+        if (hash && hash.startsWith('##')) {
+          id = decodeURI(hash.replace('##', ''))
+        } else if (hash && !hash.startsWith('#/')) {
+          id = decodeURI(hash.replace('#', ''))
+        }
+        return [page, id]
+      }
     }
     return []
   }
@@ -289,7 +334,6 @@ class App extends Component<AppProps, AppState> {
 
   updateKey = () => {
     const [page, _id] = this.getPathInfo()
-
     if (page) {
       this.setState(
         ({ key, showMenu }) => ({

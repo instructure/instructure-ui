@@ -10,8 +10,8 @@ A component for basic styles including spacing, sizing, borders, display, positi
 
 The `ui-view` package contains the following:
 
-- [ContextView](#ContextView)
-- [View](#View)
+- [ContextView](ContextView)
+- [View](View)
 
 ### Installation
 

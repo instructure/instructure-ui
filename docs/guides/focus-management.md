@@ -33,7 +33,7 @@ Meeting all of these requirements is difficult. To make things more complex, a d
 
 ### The Dialog component
 
-[Dialog](#Dialog) is a utility component that helps us to cover all the requirements we discussed in the previous section. `Dialog` doesn't actually render any styles so it is more of a utility component. It is being used under the hood in [Modal](#Modal), [Tray](#Tray), [Popover](#Popover), and more. Let's discuss exactly what `Dialog` is doing in the following `Modal` example.
+[Dialog](Dialog) is a utility component that helps us to cover all the requirements we discussed in the previous section. `Dialog` doesn't actually render any styles so it is more of a utility component. It is being used under the hood in [Modal](Modal), [Tray](Tray), [Popover](Popover), and more. Let's discuss exactly what `Dialog` is doing in the following `Modal` example.
 
 ```js
 ---
@@ -173,11 +173,11 @@ Focus management is interesting because it requires coordination as dialogs are 
 
 ### Coordinating focus regions
 
-Now that we have a basic understanding of the complex coordination necessary to manage focus across multiple UI dialogs we can talk about focus regions. A [FocusRegion](#FocusRegion) is what `Dialog` is using under the hood. Each `Dialog` instance is using exactly one instance of `FocusRegion` internally. Every time a `Dialog` is created, we initialize a `FocusRegion` which traps the focus.
+Now that we have a basic understanding of the complex coordination necessary to manage focus across multiple UI dialogs we can talk about focus regions. A [FocusRegion](FocusRegion) is what `Dialog` is using under the hood. Each `Dialog` instance is using exactly one instance of `FocusRegion` internally. Every time a `Dialog` is created, we initialize a `FocusRegion` which traps the focus.
 
 `FocusRegion` doesn't know anything about other `FocusRegion` instances. Yet, in the example above we have two `FocusRegion` instances, one for `Popover` and one for `Modal`. As focus moves from the `Modal` to the `Popover` and back to the `Modal` again we need to activate, deactivate, and reactivate the `FocusRegion` for each component.
 
-To help us keep track of this we use a singleton called [FocusRegionManager](#FocusRegionManager). Every time we create a `FocusRegion`, we register it with the `FocusRegionManager`. `FocusRegionManager` then tracks the order and is able to help us pass focus between regions as necessary.
+To help us keep track of this we use a singleton called [FocusRegionManager](FocusRegionManager). Every time we create a `FocusRegion`, we register it with the `FocusRegionManager`. `FocusRegionManager` then tracks the order and is able to help us pass focus between regions as necessary.
 
 Let's walk through at a high level what is happening with `FocusRegion` and `FocusRegionManager` in our example:
 
@@ -194,7 +194,7 @@ Let's walk through at a high level what is happening with `FocusRegion` and `Foc
 
 `FocusRegion` sets up listeners on the document to detect any escape presses to close on escape. It also adds document listeners for clicking in order to detect if there is a click or touch event that is outside of the Dialog area.
 
-Beyond this, `FocusRegion` coordinates with two other internal classes [KeyboardFocusRegion](#KeyboardFocusRegion) and [ScreenReaderFocusRegion](#ScreenReaderFocusRegion).
+Beyond this, `FocusRegion` coordinates with two other internal classes [KeyboardFocusRegion](KeyboardFocusRegion) and [ScreenReaderFocusRegion](ScreenReaderFocusRegion).
 
 #### KeyboardFocusRegion
 

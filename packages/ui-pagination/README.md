@@ -8,7 +8,7 @@
 
 The `ui-pagination` package contains the following:
 
-- [Pagination](#Pagination)
+- [Pagination](Pagination)
 
 ### Installation
 

@@ -2,7 +2,7 @@
 describes: Drilldown
 ---
 
-`Drilldown` is a diverse component that displays hierarchical data in a fashion that allows the users to "drill down" and dig deeper into the layers (pages) of the data structure. It has similar look and features to the [Menu](#Menu), [Select](#Select) and [TreeBrowser](#TreeBrowser) components.
+`Drilldown` is a diverse component that displays hierarchical data in a fashion that allows the users to "drill down" and dig deeper into the layers (pages) of the data structure. It has similar look and features to the [Menu](Menu), [Select](Select) and [TreeBrowser](TreeBrowser) components.
 
 The `Drilldown` component exists to support navigating and managing tree structures in compact spaces. With WCAG 2.1 requirements around small viewports, and also with general responsiveness standards the classic tree-navigation and flyout menu patterns got outdated.
 
@@ -69,7 +69,7 @@ type: example
 
 `Drilldown.Option` is the main child component of Drilldown. The content can be a ReactNode or a function returning a ReactNode. The function has an object as its parameter, containing the option's `id`, `variant` and `isSelected` state.
 
-> Note: Drilldown is based on the [Options](#Options) component, so the Drilldown.Options are rendered as `Options.Item` components under the hood. This is why the `variant` parameter has the values of Options.Item's `variant` prop.
+> Note: Drilldown is based on the [Options](Options) component, so the Drilldown.Options are rendered as `Options.Item` components under the hood. This is why the `variant` parameter has the values of Options.Item's `variant` prop.
 
 ```js
 ---
@@ -321,7 +321,7 @@ render(
 
 ### Displaying Drilldown in a Popover
 
-Just like [Menu](#Menu), Drilldown accepts a `trigger` property: it will render a toggle button which, when clicked, shows or hides the Drilldown in a [Popover](#Popover). Drilldown passes many of its props to Popover in this case (`mountNode`, `shouldContainFocus`, `withArrow`, etc.).
+Just like [Menu](Menu), Drilldown accepts a `trigger` property: it will render a toggle button which, when clicked, shows or hides the Drilldown in a [Popover](Popover). Drilldown passes many of its props to Popover in this case (`mountNode`, `shouldContainFocus`, `withArrow`, etc.).
 
 ```js
 ---

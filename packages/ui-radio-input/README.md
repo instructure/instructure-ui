@@ -10,8 +10,8 @@ A styled HTML input type="radio" element
 
 The `ui-radio-input` package contains the following:
 
-- [RadioInput](#RadioInput)
-- [RadioInputGroup](#RadioInputGroup)
+- [RadioInput](RadioInput)
+- [RadioInputGroup](RadioInputGroup)
 
 ### Installation
 

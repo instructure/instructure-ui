@@ -11,7 +11,7 @@ We aim to make our software accessible to everyone, including those with vision,
 
 ### Color Contrast
 
-Our [default theme](#canvas) colors meet meets WCAG 2.1 AA rules for color contrast, and our [high contrast theme](#canvas-high-contrast) meets WCAG 2.1 AAA rules for color contrast. This ensures sufficient color contrast between elements so that users with low vision or color blindness can view and use our components.
+Our [default theme](canvas) colors meet meets WCAG 2.1 AA rules for color contrast, and our [high contrast theme](canvas-high-contrast) meets WCAG 2.1 AAA rules for color contrast. This ensures sufficient color contrast between elements so that users with low vision or color blindness can view and use our components.
 
 ### Keyboard Navigation
 

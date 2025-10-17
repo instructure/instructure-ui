@@ -12,7 +12,7 @@ order: 1
 
 ### React 19
 
-InstUI v11 added support for React 19. But upgrading to React 19 might cause issues because InstUI needs to access the native DOM in some cases and React introduced a breaking change here by [removing `ReactDOM.findDOMNode()`](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-reactdom-finddomnode). If you are upgrading to React 19, you will need to add `ref`s to some of your custom components that use InstUI utilities, see [this guide](#accessing-the-dom). We suggest to check your code thoroughly for errors, especially places where you use your own components as some kind of popovers or its triggers (e.g. Menu, Popover, Tooltip, Drilldown,..).
+InstUI v11 added support for React 19. But upgrading to React 19 might cause issues because InstUI needs to access the native DOM in some cases and React introduced a breaking change here by [removing `ReactDOM.findDOMNode()`](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-reactdom-finddomnode). If you are upgrading to React 19, you will need to add `ref`s to some of your custom components that use InstUI utilities, see [this guide](accessing-the-dom). We suggest to check your code thoroughly for errors, especially places where you use your own components as some kind of popovers or its triggers (e.g. Menu, Popover, Tooltip, Drilldown,..).
 
 If you are using React 18 you might just see error messages like (`Error: ${elName} doesn't have "ref" property.`), but your code should work the same as with InstUI v10.
 
@@ -38,7 +38,7 @@ As a result of this change, the **`ALWAYS_APPEND_UI_TESTABLE_LOCATORS`** Node.js
 
 ### InstUISettingsProvider
 
-[InstUISettingsProvider](#InstUISettingsProvider)'s `as` prop was removed, it will always render as a `<span>` (note: it will only render anything to the DOM if you provide a value to the `dir` prop.). The provided codemod will remove this prop automatically (see below).
+[InstUISettingsProvider](InstUISettingsProvider)'s `as` prop was removed, it will always render as a `<span>` (note: it will only render anything to the DOM if you provide a value to the `dir` prop.). The provided codemod will remove this prop automatically (see below).
 
 ### Theming engine changes
 
@@ -51,7 +51,7 @@ As a result of this change, the **`ALWAYS_APPEND_UI_TESTABLE_LOCATORS`** Node.js
 
 ### CodeEditor
 
-The **`<CodeEditor>` component** from the `ui-code-editor` package has been **removed** due to significant accessibility issues. Please use the [SourceCodeEditor](#SourceCodeEditor) component as a replacement.
+The **`<CodeEditor>` component** from the `ui-code-editor` package has been **removed** due to significant accessibility issues. Please use the [SourceCodeEditor](SourceCodeEditor) component as a replacement.
 
 ### Removal of the `deprecated`, `experimental`, `hack` decorators
 
@@ -63,7 +63,7 @@ If you want to still use these we suggest to copy-paste their code from the late
 
 ### Table
 
-[Table](#Table) is now using [TableContext](#TableContext) to pass down data to its child components, the following props are no longer passed down to their children (This should only affect you if you have custom table rows or cells):
+[Table](Table) is now using [TableContext](TableContext) to pass down data to its child components, the following props are no longer passed down to their children (This should only affect you if you have custom table rows or cells):
 
 | Component | Prop removed | Substitute                      |
 | :-------- | :----------- | :------------------------------ |
@@ -72,7 +72,7 @@ If you want to still use these we suggest to copy-paste their code from the late
 | `Body`    | `hover`      | is now stored in `TableContext` |
 | `Body`    | `headers`    | is now stored in `TableContext` |
 
-[Table](#Table)'s `caption` prop is now required.
+[Table](Table)'s `caption` prop is now required.
 
 ---
 

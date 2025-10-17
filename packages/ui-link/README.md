@@ -10,7 +10,7 @@ A styled HTML link component
 
 The `ui-link` package contains the following:
 
-- [Link](#Link)
+- [Link](Link)
 
 ### Installation
 

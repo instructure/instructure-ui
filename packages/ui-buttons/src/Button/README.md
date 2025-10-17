@@ -2,7 +2,7 @@
 describes: Button
 ---
 
-Button allows users to perform actions or trigger changes. If selecting the Button causes the user to navigate to a different location, consider using the [Link](#Link) component instead.
+Button allows users to perform actions or trigger changes. If selecting the Button causes the user to navigate to a different location, consider using the [Link](Link) component instead.
 
 ```js
 ---
@@ -65,7 +65,7 @@ type: example
 
 ### Rendering icons in Buttons
 
-An icon can be rendered alongside the Button content using the `renderIcon` prop. Use [IconButton](#IconButton) instead if your Button only displays an Icon with no other visual content.
+An icon can be rendered alongside the Button content using the `renderIcon` prop. Use [IconButton](IconButton) instead if your Button only displays an Icon with no other visual content.
 
 ```js
 ---
@@ -95,7 +95,7 @@ type: example
 </View>
 ```
 
-If you need to prevent text wrapping, you can use the [TruncateText](#TruncateText) util. You can also conditionally render a [Tooltip](#Tooltip) with the full text when truncation occurs.
+If you need to prevent text wrapping, you can use the [TruncateText](TruncateText) util. You can also conditionally render a [Tooltip](Tooltip) with the full text when truncation occurs.
 
 ```js
 ---
@@ -189,7 +189,7 @@ type: example
 
 ### Styling buttons
 
-[Button](#Button) and [IconButton](#IconButton) share the same styling mechanics (they are `BaseButton`s underneath). You need to set the theme based on their `color` and `withBackground` prop:
+[Button](Button) and [IconButton](IconButton) share the same styling mechanics (they are `BaseButton`s underneath). You need to set the theme based on their `color` and `withBackground` prop:
 
 ```js
 ---

@@ -10,7 +10,7 @@ A component for showing small text-only overlays on hover/focus.
 
 The `ui-tooltip` package contains the following:
 
-- [Tooltip](#Tooltip)
+- [Tooltip](Tooltip)
 
 ### Installation
 

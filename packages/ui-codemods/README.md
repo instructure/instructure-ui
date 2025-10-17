@@ -28,7 +28,7 @@ type: code
 npx jscodeshift@latest -t node_modules/@instructure/ui-codemods/lib/updateV10Breaking.ts <path>
 ```
 
-For more information about what the codemods do, see the [major version upgrade guides](#upgrade-guide)
+For more information about what the codemods do, see the [major version upgrade guides](upgrade-guide)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods

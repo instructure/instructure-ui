@@ -10,7 +10,7 @@ Flex is a component that makes it easy to align content using flexbox CSS.
 
 The `ui-flex` package contains the following:
 
-- [Flex](#Flex)
+- [Flex](Flex)
 
 ### Installation
 
@@ -20,7 +20,7 @@ npm install @instructure/ui-flex
 
 ### Usage
 
-For detailed usage and documentation, see [Flex](#Flex).
+For detailed usage and documentation, see [Flex](Flex).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-flex.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-flex

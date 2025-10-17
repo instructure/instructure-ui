@@ -8,7 +8,7 @@ A grid component.
 
 ### Components
 
-- [Grid](#Grid)
+- [Grid](Grid)
 
 ### Installation
 
@@ -18,7 +18,7 @@ npm install @instructure/ui-grid
 
 ### Usage
 
-For detailed usage and documentation, see [Grid](#Grid).
+For detailed usage and documentation, see [Grid](Grid).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-grid.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-grid

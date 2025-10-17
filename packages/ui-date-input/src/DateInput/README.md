@@ -8,7 +8,7 @@ The `DateInput` component provides a visual interface for inputting date data.
 
 ### Composing a DateInput in your Application
 
-`DateInput` uses `Calendar` internally. See [Calendar](#Calendar) for more detailed
+`DateInput` uses `Calendar` internally. See [Calendar](Calendar) for more detailed
 documentation and guided examples. `DateInput` shares many of the same `Calendar`
 props and it is created the same way with some additional attributes and callback
 methods for the input. The following example is configured similar to the `Calendar`
@@ -281,7 +281,7 @@ render(<Example />)
 
 `DateInput` accepts children of type `DateInput.Day`. Both `DateInput.Day` and
 `Calendar.Day` are exporting the same `Day` component. The documentation for
-`Day` can be found in [Calendar](#Calendar).
+`Day` can be found in [Calendar](Calendar).
 
 #### Handling onChange
 

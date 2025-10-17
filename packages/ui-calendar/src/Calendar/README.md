@@ -243,13 +243,13 @@ month, and the year (Ex. instead of `1` we would provide `1 August 2019`).
 day of the week via the `renderWeekdayLabels` prop. The visible portion of the
 label should be abbreviated (no longer than three characters). Note that screen
 readers will read this content preceding each date as the `Calendar` is navigated.
-Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop
+Consider using [AccessibleContent](AccessibleContent) with the `alt` prop
 containing the full day name for assistive technologies and the children containing
 the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
 
 #### Rendering next and previous month buttons
 
 The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
-[IconButton](#IconButton) component with the `size` prop set to
-`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](#icons) or
-[IconArrowOpenEnd](#icons).
+[IconButton](IconButton) component with the `size` prop set to
+`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](icons) or
+[IconArrowOpenEnd](icons).

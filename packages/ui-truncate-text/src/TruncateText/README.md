@@ -167,7 +167,7 @@ type: example
 
 ### Using tooltips
 
-It's best practice to make the complete text of a truncated element available via a [Tooltip](#Tooltip).
+It's best practice to make the complete text of a truncated element available via a [Tooltip](Tooltip).
 
 ```js
 ---

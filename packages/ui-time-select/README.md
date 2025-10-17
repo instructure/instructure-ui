@@ -10,7 +10,7 @@ A component for selecting time values.
 
 The `ui-time-select` package contains the following:
 
-- [TimeSelect](#TimeSelect)
+- [TimeSelect](TimeSelect)
 
 ### Installation
 
