@@ -46,9 +46,9 @@ type DocumentProps = DocumentOwnProps & WithStyleProps<null, DocumentStyle>
 type DocumentStyle = ComponentStyle<'githubCornerOctoArm' | 'githubCorner'>
 
 type DocumentState = {
-  selectedDetailsTabIndex: number
+  selectedDetailsTabId: string | undefined
   pageRef: HTMLDivElement | null
-  componentTheme: Partial<ThemeVariables[keyof ThemeVariables]>
+  componentTheme: Partial<ThemeVariables[keyof ThemeVariables]> | undefined
 }
 
 const allowedProps: AllowedPropKeys = [

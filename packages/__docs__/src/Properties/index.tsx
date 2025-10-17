@@ -39,6 +39,8 @@ import type {
   TSFunctionSignatureType,
   TypeDescriptor
 } from 'react-docgen'
+import { Heading } from '@instructure/ui-heading'
+import { View } from '@instructure/ui-view'
 
 @withStyle(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
@@ -62,28 +64,28 @@ class Properties extends Component<PropertiesProps> {
     return string.includes('(...args: any[]) => any')
   }
 
-  renderRows(hasDefaultOrRequired: boolean) {
+  getPropsToRender() {
     const { props } = this.props
     const propsToIgnore = ['styles', 'makeStyles', 'dir']
+    return Object.keys(props).filter((name) => {
+      const description = props[name].description || ''
+      // we need to manually pass through the dir prop of InstUISettingsProvider
+      if (name === 'dir' && props.theme && props.instanceCounterMap) {
+        return true
+      }
+      return (
+        description.indexOf('@private') < 0 &&
+        description.indexOf('@deprecated') < 0 &&
+        !propsToIgnore.includes(name)
+      )
+    })
+  }
 
-    return Object.keys(props)
-      .filter((name) => {
-        const description = props[name].description || ''
-
-        // we need to manually pass through the dir prop of InstUISettingsProvider
-        if (name === 'dir' && props.theme && props.instanceCounterMap) {
-          return true
-        }
-
-        return (
-          description.indexOf('@private') < 0 &&
-          description.indexOf('@deprecated') < 0 &&
-          !propsToIgnore.includes(name)
-        )
-      })
+  renderRows(hasDefaultOrRequired: boolean) {
+    return this.getPropsToRender()
       .sort((a, b) => a.localeCompare(b))
       .map((name, idx) => {
-        const prop = props[name]
+        const prop = this.props.props[name]
         return (
           <Table.Row key={idx}>
             <Table.Cell>
@@ -264,8 +266,10 @@ class Properties extends Component<PropertiesProps> {
   }
 
   render() {
-    const { styles } = this.props
-    const { layout } = this.props
+    if (this.getPropsToRender().length == 0) {
+      return null // e.g. Menu.Separator has no props
+    }
+    const { styles, layout } = this.props
     let hasDefaultOrRequired = false
     for (const i in this.props.props) {
       if (this.props.props[i].required || this.props.props[i].defaultValue) {
@@ -274,24 +278,29 @@ class Properties extends Component<PropertiesProps> {
       }
     }
     return (
-      <div css={styles?.properties}>
-        <Table
-          caption="Component Properties"
-          layout={layout === 'small' ? 'stacked' : 'auto'}
-        >
-          <Table.Head>
-            <Table.Row>
-              <Table.ColHeader id="Prop">Prop</Table.ColHeader>
-              <Table.ColHeader id="Type">Type</Table.ColHeader>
-              {hasDefaultOrRequired && (
-                <Table.ColHeader id="Default">Default</Table.ColHeader>
-              )}
-              <Table.ColHeader id="Description">Description</Table.ColHeader>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>{this.renderRows(hasDefaultOrRequired)}</Table.Body>
-        </Table>
-      </div>
+      <View margin="x-large 0" display="block">
+        <Heading level="h2" as="h3" margin="0 0 small 0">
+          Properties
+        </Heading>
+        <div css={styles?.properties}>
+          <Table
+            caption="Component Properties"
+            layout={layout === 'small' ? 'stacked' : 'auto'}
+          >
+            <Table.Head>
+              <Table.Row>
+                <Table.ColHeader id="Prop">Prop</Table.ColHeader>
+                <Table.ColHeader id="Type">Type</Table.ColHeader>
+                {hasDefaultOrRequired && (
+                  <Table.ColHeader id="Default">Default</Table.ColHeader>
+                )}
+                <Table.ColHeader id="Description">Description</Table.ColHeader>
+              </Table.Row>
+            </Table.Head>
+            <Table.Body>{this.renderRows(hasDefaultOrRequired)}</Table.Body>
+          </Table>
+        </div>
+      </View>
     )
   }
 }
