@@ -57,7 +57,7 @@
       "type": "color"
     },
     "secondaryTextColor": {
-      "value": "{color.text.interactive.secondary.base}",
+      "value": "{color.text.interactive.secondary.active}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
@@ -176,19 +176,11 @@
       "value": "{color.stroke.interactive.ai.topGradient.disabled}",
       "type": "color"
     },
-    "aiSecondaryDisabledTextTopGradientColor": {
-      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
-      "type": "color"
-    },
     "aiBorderBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.base}",
       "type": "color"
     },
     "aiDisabledBorderBottomGradientColor": {
-      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledTextBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
       "type": "color"
     },
@@ -214,22 +206,6 @@
     },
     "aiSecondaryIconTopGradientColor": {
       "value": "{color.icon.interactive.ai.TopGradient.base}",
-      "type": "color"
-    },
-    "aiSecondaryHoverBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
-      "type": "color"
-    },
-    "aiSecondaryActiveBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
-      "type": "color"
-    },
-    "aiSecondaryHoverBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
-      "type": "color"
-    },
-    "aiSecondaryActiveBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
       "type": "color"
     },
     "aiSecondaryIconBottomGradientColor": {
@@ -347,22 +323,6 @@
     "lineHeightLg": {
       "value": "1.375rem",
       "type": "lineHeights"
-    },
-    "primaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.primary.hover}",
-      "type": "color"
-    },
-    "primaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.primary.active}",
-      "type": "color"
-    },
-    "secondaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.secondary.hover}",
-      "type": "color"
-    },
-    "secondaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.secondary.active}",
-      "type": "color"
     }
   }
 }

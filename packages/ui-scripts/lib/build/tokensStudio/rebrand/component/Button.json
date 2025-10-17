@@ -20,14 +20,6 @@
       "value": "{color.stroke.interactive.primary.base}",
       "type": "color"
     },
-    "primaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.primary.hover}",
-      "type": "color"
-    },
-    "primaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.primary.active}",
-      "type": "color"
-    },
     "primaryDisabledBorderColor": {
       "value": "{color.stroke.interactive.primary.disabled}",
       "type": "color"
@@ -60,20 +52,12 @@
       "value": "{color.stroke.interactive.secondary.base}",
       "type": "color"
     },
-    "secondaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.secondary.hover}",
-      "type": "color"
-    },
-    "secondaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.secondary.active}",
-      "type": "color"
-    },
     "secondaryIconColor": {
       "value": "{color.icon.interactive.secondary.base}",
       "type": "color"
     },
     "secondaryTextColor": {
-      "value": "{color.text.interactive.secondary.base}",
+      "value": "{color.text.interactive.secondary.active}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
@@ -198,10 +182,6 @@
     },
     "aiSecondaryBackgroundColor": {
       "value": "{color.background.interactive.aiSecondary.base}",
-      "type": "color"
-    },
-    "aiSecondaryHoverBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
       "type": "color"
     },
     "aiSecondaryTextTopGradientColor": {
@@ -341,26 +321,6 @@
       "type": "color"
     },
     "aiDisabledBorderBottomGradientColor": {
-      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryHoverBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
-      "type": "color"
-    },
-    "aiSecondaryActiveBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
-      "type": "color"
-    },
-    "aiSecondaryActiveBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledTextTopGradientColor": {
-      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledTextBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
       "type": "color"
     }
