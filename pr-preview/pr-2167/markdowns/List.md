@@ -3,7 +3,7 @@
 
 > ### What about 'inline' lists?
 >
-> For inline lists use the [InlineList](#InlineList) component.
+> For inline lists use the [InlineList](InlineList) component.
 
 `<List>` accepts only `<List.Item>` as a child.
 

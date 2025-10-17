@@ -2,7 +2,7 @@
 
 
 `<ApplyLocale />` Sets the locale and timezone context for children that can
-use it, such as a [TimeSelect](#TimeSelect).
+use it, such as a [TimeSelect](TimeSelect).
 
 ```js
 ---

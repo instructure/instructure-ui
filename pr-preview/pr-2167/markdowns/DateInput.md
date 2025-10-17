@@ -7,7 +7,7 @@ The `DateInput` component provides a visual interface for inputting date data.
 
 ### Composing a DateInput in your Application
 
-`DateInput` uses `Calendar` internally. See [Calendar](#Calendar) for more detailed
+`DateInput` uses `Calendar` internally. See [Calendar](Calendar) for more detailed
 documentation and guided examples. `DateInput` shares many of the same `Calendar`
 props and it is created the same way with some additional attributes and callback
 methods for the input. The following example is configured similar to the `Calendar`
@@ -280,7 +280,7 @@ render(<Example />)
 
 `DateInput` accepts children of type `DateInput.Day`. Both `DateInput.Day` and
 `Calendar.Day` are exporting the same `Day` component. The documentation for
-`Day` can be found in [Calendar](#Calendar).
+`Day` can be found in [Calendar](Calendar).
 
 #### Handling onChange
 
@@ -343,9 +343,9 @@ should be validated. If the value cannot be parsed as a valid date, or if the
 | DateInput | onRequestRenderNextMonth | `(e: React.MouseEvent) => void` | No | - | Callback fired requesting the next month be rendered. |
 | DateInput | onRequestRenderPrevMonth | `(e: React.MouseEvent) => void` | No | - | Callback fired requesting the previous month be rendered. |
 | DateInput | renderNavigationLabel | `React.ReactNode \| (() => React.ReactNode)` | No | - | Content to render in the calendar navigation header. The recommendation is to include the name of the current rendered month along with the year. |
-| DateInput | renderWeekdayLabels | `(React.ReactNode \| (() => React.ReactNode))[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
-| DateInput | renderNextMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](#Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenEnd](#icons). |
-| DateInput | renderPrevMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](#Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenStart](#icons). |
+| DateInput | renderWeekdayLabels | `(React.ReactNode \| (() => React.ReactNode))[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
+| DateInput | renderNextMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenEnd](icons). |
+| DateInput | renderPrevMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenStart](icons). |
 | DateInput | children | `ReactElement<CalendarDayProps>[]` | No | - | children of type `<DateInput.Day />` There should be exactly 42 provided (6 weeks). |
 | DateInput | disabledDates | `string[] \| ((isoDateToCheck: string) => boolean)` | No | - |  |
 | DateInput | currentDate | `string` | No | - | ISO date string for the current date if necessary. Defaults to the current date in the user's timezone. |

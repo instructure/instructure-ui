@@ -2,7 +2,7 @@
 
 
 `BaseButton` is a low level utility component used to compose Instructure UI buttons. In most cases, it should not be used directly.
-Use [Button](#Button), [CloseButton](#CloseButton), [IconButton](#IconButton), or [CondensedButton](#CondensedButton) instead.
+Use [Button](Button), [CloseButton](CloseButton), [IconButton](IconButton), or [CondensedButton](CondensedButton) instead.
 
 ```js
 ---
