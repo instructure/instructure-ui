@@ -184,6 +184,10 @@
       "value": "{color.background.interactive.aiSecondary.base}",
       "type": "color"
     },
+    "aiSecondaryHoverBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
+      "type": "color"
+    },
     "aiSecondaryTextTopGradientColor": {
       "value": "{color.text.interactive.aiSecondary.topGradient.base}",
       "type": "color"
@@ -322,6 +326,10 @@
     },
     "aiDisabledBorderBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryHoverBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
       "type": "color"
     }
   }
