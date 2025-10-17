@@ -1140,17 +1140,6 @@ type: embed
   </Figure>
 </Guidelines>
 ```
-```js
----
-type: embed
----
-<Guidelines>
-  <Figure recommendation="a11y" title="Accessibility">
-    <Figure.Item>In the case of a Table with selection, to prevent screenreaders from announcing the label of the select all checkbox when navigating in the rows, an aria-label should be added to the corresponding Table.Colheader like in our example above.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
 
 ```js
 ---
