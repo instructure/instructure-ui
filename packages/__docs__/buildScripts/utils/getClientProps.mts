@@ -113,7 +113,7 @@ export function getClientProps(docs: ProcessedFile[], library: LibraryOptions) {
 }
 
 function warning(message: string, ...args: any[]) {
-  if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+  if ((process.env.NODE_ENV !== 'production' || process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true') && typeof console !== 'undefined') {
     console.warn(`Warning: ${message}`, ...args)
   }
 }
