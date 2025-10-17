@@ -272,7 +272,26 @@ const renderer = (title: string) => ({
   heading: (text: string, level: number) =>
     headingVariants[`h${level}`]?.(uuid(), text),
   link: (href: string, text: string) => (
-    <Link key={uuid()} href={href}>
+    <Link
+      key={uuid()}
+      href={href}
+      onClick={(e: any) => {
+        // Check if it's an external link (starts with http, https, or //)
+        if (
+          href.startsWith('http') ||
+          href.startsWith('//') ||
+          href.startsWith('www.')
+        ) {
+          return
+        }
+        e.preventDefault()
+        const basePath =
+          window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)?.[1] || ''
+        const newUrl = basePath ? `${basePath}/${href}` : `/${href}`
+        window.history.pushState({}, '', newUrl)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      }}
+    >
       {text}
     </Link>
   )

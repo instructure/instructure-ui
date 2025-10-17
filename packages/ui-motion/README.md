@@ -8,7 +8,7 @@
 
 The `ui-motion` package contains the following:
 
-- [Transition](#Transition)
+- [Transition](Transition)
 
 ### Installation
 

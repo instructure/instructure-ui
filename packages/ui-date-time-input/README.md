@@ -10,7 +10,7 @@ A component that can be used to enter date and time.
 
 The `ui-date-time-input` package contains the following:
 
-- [DateTimeInput](#DateTimeInput)
+- [DateTimeInput](DateTimeInput)
 
 ### Installation
 

@@ -10,11 +10,11 @@ Accessible button components.
 
 The `ui-buttons` package contains the following:
 
-- [Button](#Button)
-- [CloseButton](#CloseButton)
-- [CondensedButton](#CondensedButton)
-- [IconButton](#IconButton)
-- [ToggleButton](#ToggleButton)
+- [Button](Button)
+- [CloseButton](CloseButton)
+- [CondensedButton](CondensedButton)
+- [IconButton](IconButton)
+- [ToggleButton](ToggleButton)
 
 ### Installation
 

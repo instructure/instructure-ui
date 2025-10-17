@@ -10,7 +10,7 @@ A styled HTML range input.
 
 The `ui-range-input` package contains the following:
 
-- [RangeInput](#RangeInput)
+- [RangeInput](RangeInput)
 
 ### Installation
 

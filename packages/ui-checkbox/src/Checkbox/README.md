@@ -149,7 +149,7 @@ type: example
 ```
 
 You might want to hide the label text when using the toggle switch variant. Do that by wrapping
-the text in the [ScreenReaderContent](#ScreenReaderContent) component.
+the text in the [ScreenReaderContent](ScreenReaderContent) component.
 
 ```js
 ---

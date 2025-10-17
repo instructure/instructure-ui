@@ -10,7 +10,7 @@ A breadcrumb component.
 
 The `ui-breadcrumb` package contains the following:
 
-- [Breadcrumb](#Breadcrumb)
+- [Breadcrumb](Breadcrumb)
 
 ### Installation
 

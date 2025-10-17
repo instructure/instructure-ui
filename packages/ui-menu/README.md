@@ -10,7 +10,7 @@ A dropdown menu component.
 
 The `ui-menu` package contains the following:
 
-- [Menu](#Menu)
+- [Menu](Menu)
 
 ### Installation
 

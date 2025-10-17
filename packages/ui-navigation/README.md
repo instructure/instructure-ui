@@ -10,7 +10,7 @@ Main and application level navigational components.
 
 The `ui-navigation` package contains the following:
 
-- [AppNav](#AppNav)
+- [AppNav](AppNav)
 
 ### Installation
 

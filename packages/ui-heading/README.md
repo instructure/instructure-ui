@@ -10,7 +10,7 @@ Heading is a component for creating typographic headings.
 
 The `ui-heading` package contains the following:
 
-- [Heading](#Heading)
+- [Heading](Heading)
 
 ### Installation
 

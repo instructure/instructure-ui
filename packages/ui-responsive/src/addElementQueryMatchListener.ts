@@ -46,12 +46,12 @@ import { UIElement } from '@instructure/shared-types'
  *
  *
  * This function shares an interface with
- * [addMediaQueryMatchListener](#addMediaQueryMatchListener)
+ * [addMediaQueryMatchListener](addMediaQueryMatchListener)
  * so that they can be used interchangeably.
  *
- * The [Responsive](#Responsive) component with the `match` prop
+ * The [Responsive](Responsive) component with the `match` prop
  * set to `element` utilizes this function. This is a low level
- * utility method and, in most cases, [Responsive](#Responsive)
+ * utility method and, in most cases, [Responsive](Responsive)
  * should be used instead.
  *
  * ```js-code

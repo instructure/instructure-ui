@@ -10,7 +10,7 @@ A component for positioning content with respect to a designated target.
 
 The `ui-position` package contains the following:
 
-- [Position](#Position)
+- [Position](Position)
 
 ### Installation
 
@@ -20,7 +20,7 @@ npm install @instructure/ui-position
 
 ### Usage
 
-For detailed usage and documentation, see [Position](#Position).
+For detailed usage and documentation, see [Position](Position).
 
 ```js
 import React from 'react'

@@ -7,8 +7,8 @@ Tooltips are small text-only contextual overlays that are triggered by hover/foc
 > ### What about 'focusable' elements?
 >
 > Content provided to the `renderTip` prop **should not contain any focusable elements**. If you'd like to do
-> that you should use the [Popover](#Popover) component and handle focus management yourself or
-> consider using a [Modal](#Modal) or a [Tray](#Tray) as those will work better on smaller screens.
+> that you should use the [Popover](Popover) component and handle focus management yourself or
+> consider using a [Modal](Modal) or a [Tray](Tray) as those will work better on smaller screens.
 
 #### Uncontrolled Tooltips
 

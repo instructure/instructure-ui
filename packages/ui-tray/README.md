@@ -10,7 +10,7 @@ Tray component for secondary/menu content.
 
 The `ui-tray` package contains the following:
 
-- [Tray](#Tray)
+- [Tray](Tray)
 
 ### Installation
 

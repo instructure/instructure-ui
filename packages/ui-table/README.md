@@ -10,7 +10,7 @@ A styled HTML table component.
 
 The `ui-table` package contains the following:
 
-- [Table](#Table)
+- [Table](Table)
 
 ### Installation
 

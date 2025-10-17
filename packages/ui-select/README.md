@@ -10,7 +10,7 @@ A component for select and autocomplete behavior.
 
 The `ui-select` package contains the following:
 
-- [Select](#Select)
+- [Select](Select)
 
 ### Installation
 

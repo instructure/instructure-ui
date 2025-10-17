@@ -8,7 +8,7 @@
 
 The `ui-portal` package contains the following:
 
-- [Portal](#Portal)
+- [Portal](Portal)
 
 ### Installation
 

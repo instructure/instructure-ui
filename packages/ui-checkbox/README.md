@@ -10,8 +10,8 @@ A styled HTML input type="checkbox" component.
 
 The `ui-checkbox` package contains the following:
 
-- [Checkbox](#Checkbox)
-- [CheckboxGroup](#CheckboxGroup)
+- [Checkbox](Checkbox)
+- [CheckboxGroup](CheckboxGroup)
 
 ### Installation
 

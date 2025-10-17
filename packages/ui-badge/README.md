@@ -10,7 +10,7 @@ A badge component.
 
 The `ui-badge` package contains the following:
 
-- [Badge](#Badge)
+- [Badge](Badge)
 
 ### Installation
 

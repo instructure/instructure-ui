@@ -22,7 +22,7 @@ const MyComponent = () => {
 }
 ```
 
-For a guide on how to add/modify icons see [Adding Icons](#adding-icons)
+For a guide on how to add/modify icons see [Adding Icons](adding-icons)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-icons.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-icons

@@ -7,8 +7,8 @@ A component that positions content with respect to a designated target.
 ### Internationalization
 
 `Position` placement can be internationalized for right to left languages. The
-following examples are configured utilizing the [TextDirectionContext](#TextDirectionContext)
-component in conjunction with the [mirrorHorizontalPlacement](#mirrorPlacement)
+following examples are configured utilizing the [TextDirectionContext](TextDirectionContext)
+component in conjunction with the [mirrorHorizontalPlacement](mirrorPlacement)
 utility function.
 
 ```js

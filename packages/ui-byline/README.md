@@ -10,7 +10,7 @@ A byline component.
 
 The `ui-byline` package contains the following:
 
-- [Byline](#Byline)
+- [Byline](Byline)
 
 ### Installation
 

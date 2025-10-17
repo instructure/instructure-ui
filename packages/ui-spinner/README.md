@@ -10,7 +10,7 @@ A spinner/loading component
 
 The `ui-spinner` package contains the following:
 
-- [Spinner](#Spinner)
+- [Spinner](Spinner)
 
 ### Installation
 
