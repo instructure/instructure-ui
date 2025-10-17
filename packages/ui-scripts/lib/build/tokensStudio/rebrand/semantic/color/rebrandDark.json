@@ -184,6 +184,16 @@
           "base": {
             "value": "{color.white}",
             "type": "color"
+          },
+          "hover": {
+            "topGradient": {
+              "value": "{color.violet.violet10}",
+              "type": "color"
+            },
+            "bottomGradient": {
+              "value": "{color.sea.sea10}",
+              "type": "color"
+            }
           }
         },
         "primaryOnColor": {

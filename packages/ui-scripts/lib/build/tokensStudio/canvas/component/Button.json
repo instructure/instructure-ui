@@ -208,6 +208,14 @@
       "value": "{color.icon.interactive.ai.TopGradient.base}",
       "type": "color"
     },
+    "aiSecondaryHoverBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
+      "type": "color"
+    },
+    "aiSecondaryHoverBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
+      "type": "color"
+    },
     "aiSecondaryIconBottomGradientColor": {
       "value": "{color.icon.interactive.ai.BottomGradient.base}",
       "type": "color"
