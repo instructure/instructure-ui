@@ -32,7 +32,13 @@ import { RangeInput } from '../index'
 describe('<RangeInput />', () => {
   it('renders an input with type "range"', async () => {
     const { container } = render(
-      <RangeInput label="Opacity" name="opacity" max={100} min={0} />
+      <RangeInput
+        label="Opacity"
+        name="opacity"
+        max={100}
+        min={0}
+        displayValue={false}
+      />
     )
 
     const label = container.querySelector('[class$="-formFieldLayout__label"]')
@@ -111,14 +117,30 @@ describe('<RangeInput />', () => {
   })
 
   it('sets min value', async () => {
-    render(<RangeInput label="Opacity" name="opacity" max={100} min={25} />)
+    render(
+      <RangeInput
+        label="Opacity"
+        name="opacity"
+        max={100}
+        min={25}
+        displayValue={false}
+      />
+    )
     const input = screen.getByLabelText('Opacity')
 
     expect(input).toHaveAttribute('min', '25')
   })
 
   it('sets max value', async () => {
-    render(<RangeInput label="Opacity" name="opacity" max={75} min={0} />)
+    render(
+      <RangeInput
+        label="Opacity"
+        name="opacity"
+        max={75}
+        min={0}
+        displayValue={false}
+      />
+    )
 
     const input = screen.getByLabelText('Opacity')
 
@@ -127,7 +149,14 @@ describe('<RangeInput />', () => {
 
   it('sets step value', async () => {
     render(
-      <RangeInput label="Opacity" name="opacity" max={100} min={0} step={5} />
+      <RangeInput
+        label="Opacity"
+        name="opacity"
+        max={100}
+        min={0}
+        step={5}
+        displayValue={false}
+      />
     )
     const input = screen.getByLabelText('Opacity')
 
