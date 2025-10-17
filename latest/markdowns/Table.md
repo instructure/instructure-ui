@@ -514,10 +514,10 @@ const SelectableTable = ({
               }
             >
               <Table.Row>
-                <Table.ColHeader id="select">
+                <Table.ColHeader id="select" aria-label="Select">
                   <Checkbox
                     label={
-                      <ScreenReaderContent>Select all</ScreenReaderContent>
+                      <ScreenReaderContent>Select all rows</ScreenReaderContent>
                     }
                     onChange={() => handleSelectAll(allSelected)}
                     checked={allSelected}
@@ -1141,6 +1141,17 @@ type: embed
 </Guidelines>
 ```
 
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>In the case of a Table with selection, to prevent screenreaders from announcing the label of the select all checkbox when navigating in the rows, an aria-label should be added to the corresponding Table.Colheader like in our example above.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 ### Props
 
