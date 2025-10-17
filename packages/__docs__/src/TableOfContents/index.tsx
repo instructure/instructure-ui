@@ -150,10 +150,10 @@ class TableOfContents extends Component<
       6: 'x-large'
     }
 
-    const TOC = TOCData.filter((data) => !!data.id).map((data) => {
+    const TOC = TOCData.filter((data) => !!data.id).map((data, index) => {
       return (
         <List.Item
-          key={data.id}
+          key={`${data.id}-${index}`}
           padding={`0 0 0 ${levelPaddingMap[data.level]}`}
         >
           <Link href={`#${doc.id}/#${data.id}`}>{data.innerText}</Link>
