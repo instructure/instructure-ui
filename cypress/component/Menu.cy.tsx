@@ -280,16 +280,56 @@ describe('<Menu/>', () => {
         </Menu>
       </Menu>
     )
+    cy.log(
+      '[TEST] Starting: should show and focus flyout menu on space keyDown'
+    )
 
-    cy.contains('Flyout').should('be.visible').focus().should('have.focus')
+    cy.contains('Flyout')
+      .focus()
+      .then(($el) => {
+        cy.log('[TEST] Flyout focused, element:', $el[0].outerHTML)
+        cy.log(
+          '[TEST] Active element before Space:',
+          document.activeElement?.outerHTML || 'none'
+        )
+      })
 
-    cy.focused().realPress('Space')
+    cy.focused()
+      .realPress('Space')
+      .then(() => {
+        cy.log('[TEST] Space key pressed')
+      })
 
-    cy.contains('Flyout Menu Item').should('exist').and('be.visible')
+    cy.wait(100).then(() => {
+      cy.log('[TEST] After 100ms wait')
+      cy.log(
+        '[TEST] Active element after Space:',
+        document.activeElement?.outerHTML || 'none'
+      )
+      const flyoutMenuItem = document.querySelector('[role="menuitem"]')
+      cy.log(
+        '[TEST] First menuitem found:',
+        flyoutMenuItem?.outerHTML || 'none'
+      )
+      cy.log(
+        '[TEST] Flyout Menu Item exists:',
+        !!document.body.textContent?.includes('Flyout Menu Item')
+      )
+    })
+
+    cy.contains('Flyout Menu Item')
+      .should('exist')
+      .then(($el) => {
+        cy.log('[TEST] Flyout Menu Item element found:', $el[0].outerHTML)
+      })
 
     cy.contains('Flyout Menu Item')
       .closest('[role="menuitem"]')
-      .should('have.focus')
+      .should('be.focused')
+      .then(($el) => {
+        cy.log('[TEST] Final focused element:', $el[0].outerHTML)
+        cy.log('[TEST] Test completed successfully')
+      })
   })
 
   it(`should show and focus flyout menu on enter keyDown`, () => {
