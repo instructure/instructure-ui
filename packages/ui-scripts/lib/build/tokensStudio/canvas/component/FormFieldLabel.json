@@ -1,0 +1,32 @@
+{
+  "formFieldLabel": {
+    "textColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "readonlyTextColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "asteriskColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.standalone.textBase}",
+      "type": "lineHeights"
+    }
+  }
+}

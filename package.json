@@ -14,6 +14,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build:themes": "ui-scripts build-themes",
     "prestart": "npm run bootstrap",
     "start": "npm run start --workspace=docs-app --",
     "start:watch": "npm run start:watch --workspace=docs-app --",
@@ -25,7 +26,7 @@
     "lint:changes": "npm run lint -- --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
     "lint:commits": "commitlint --from=HEAD^1",
-    "bootstrap": "node scripts/bootstrap.js",
+    "bootstrap": "node scripts/bootstrap.js && npm run build:themes",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
     "build:docs": "lerna run bundle --stream --scope docs-app",
