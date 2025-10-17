@@ -104,6 +104,10 @@
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
+    "gapPrimitives": {
+      "value": "{spacing.gap.inputElements}",
+      "type": "spacing"
+    },
     "paddingHorizontalSm": {
       "value": "{spacing.padding.interactive.horizontal.sm}",
       "type": "spacing"
@@ -116,9 +120,29 @@
       "value": "{spacing.padding.interactive.horizontal.lg}",
       "type": "spacing"
     },
-    "gapPrimitives": {
-      "value": "{spacing.gap.inputElements}",
-      "type": "spacing"
+    "arrowsContainerWidth": {
+      "value": "2rem",
+      "type": "sizing"
+    },
+    "arrowsBackgroundColor": {
+      "value": "{color.background.interactive.secondary.base}",
+      "type": "color"
+    },
+    "arrowsHoverBackgroundColor": {
+      "value": "{color.background.interactive.secondary.hover}",
+      "type": "color"
+    },
+    "arrowsActiveBackgroundColor": {
+      "value": "{color.background.interactive.secondary.active}",
+      "type": "color"
+    },
+    "arrowsBorderColor": {
+      "value": "{color.stroke.interactive.secondary.base}",
+      "type": "color"
+    },
+    "arrowsDisabledBackgroundColor": {
+      "value": "{color.background.interactive.secondary.disabled}",
+      "type": "color"
     }
   }
 }
