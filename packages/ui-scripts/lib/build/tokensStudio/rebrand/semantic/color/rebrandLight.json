@@ -310,19 +310,19 @@
         },
         "primary": {
           "base": {
-            "value": "{color.blue.blue70}",
+            "value": "{color.blue.blue90}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue110}",
-            "type": "color"
-          },
-          "active": {
             "value": "{color.blue.blue80}",
             "type": "color"
           },
+          "active": {
+            "value": "{color.blue.blue100}",
+            "type": "color"
+          },
           "disabled": {
-            "value": "{color.blue.blue40}",
+            "value": "{color.blue.blue30}",
             "type": "color"
           }
         },
