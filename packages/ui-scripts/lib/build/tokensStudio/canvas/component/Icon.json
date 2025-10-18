@@ -101,27 +101,27 @@
       "type": "color"
     },
     "accent1Color": {
-      "value": "{color.icon.accent.color1}",
+      "value": "{color.icon.accent.blue}",
       "type": "color"
     },
     "accent2Color": {
-      "value": "{color.icon.accent.color2}",
+      "value": "{color.icon.accent.green}",
       "type": "color"
     },
     "accent3Color": {
-      "value": "{color.icon.accent.color3}",
+      "value": "{color.icon.accent.red}",
       "type": "color"
     },
     "accent4Color": {
-      "value": "{color.icon.accent.color4}",
+      "value": "{color.icon.accent.orange}",
       "type": "color"
     },
     "accent5Color": {
-      "value": "{color.icon.accent.color5}",
+      "value": "{color.icon.accent.grey}",
       "type": "color"
     },
     "accent6Color": {
-      "value": "{color.icon.accent.color6}",
+      "value": "{color.icon.accent.ash}",
       "type": "color"
     }
   }

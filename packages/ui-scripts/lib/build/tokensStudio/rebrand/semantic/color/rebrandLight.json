@@ -216,28 +216,28 @@
         }
       },
       "accent": {
-        "color1": {
-          "value": "{color.sky.sky70}",
+        "blue": {
+          "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
-          "value": "{color.aurora.aurora70}",
+        "green": {
+          "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
-          "value": "{color.plum.plum70}",
+        "red": {
+          "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
-          "value": "{color.honey.honey70}",
+        "orange": {
+          "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
-          "value": "{color.stone.stone110}",
+        "grey": {
+          "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
-          "value": "{color.stone.stone70}",
+        "ash": {
+          "value": "{color.grey.grey70}",
           "type": "color"
         }
       }
@@ -540,28 +540,28 @@
         }
       },
       "accent": {
-        "color1": {
-          "value": "{color.sky.sky70}",
+        "blue": {
+          "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
-          "value": "{color.aurora.aurora70}",
+        "green": {
+          "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
-          "value": "{color.plum.plum70}",
+        "red": {
+          "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
-          "value": "{color.honey.honey70}",
+        "orange": {
+          "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
-          "value": "{color.stone.stone110}",
+        "grey": {
+          "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
-          "value": "{color.stone.stone70}",
+        "ash": {
+          "value": "{color.grey.grey70}",
           "type": "color"
         }
       }
@@ -682,28 +682,28 @@
         }
       },
       "accent": {
-        "color1": {
-          "value": "{color.sky.sky70}",
+        "blue": {
+          "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
-          "value": "{color.aurora.aurora70}",
+        "green": {
+          "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
-          "value": "{color.plum.plum70}",
+        "red": {
+          "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
-          "value": "{color.honey.honey70}",
+        "orange": {
+          "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
-          "value": "{color.stone.stone110}",
+        "grey": {
+          "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
-          "value": "{color.stone.stone70}",
+        "ash": {
+          "value": "{color.grey.grey70}",
           "type": "color"
         }
       }

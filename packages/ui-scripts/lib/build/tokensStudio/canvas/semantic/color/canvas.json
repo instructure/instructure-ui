@@ -216,27 +216,27 @@
         }
       },
       "accent": {
-        "color1": {
+        "blue": {
           "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
+        "green": {
           "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
+        "red": {
           "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
+        "orange": {
           "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
+        "grey": {
           "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
+        "ash": {
           "value": "{color.grey.grey70}",
           "type": "color"
         }
@@ -540,27 +540,27 @@
         }
       },
       "accent": {
-        "color1": {
+        "blue": {
           "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
+        "green": {
           "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
+        "red": {
           "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
+        "orange": {
           "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
+        "grey": {
           "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
+        "ash": {
           "value": "{color.grey.grey70}",
           "type": "color"
         }
@@ -682,27 +682,27 @@
         }
       },
       "accent": {
-        "color1": {
+        "blue": {
           "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
+        "green": {
           "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
+        "red": {
           "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
+        "orange": {
           "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
+        "grey": {
           "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
+        "ash": {
           "value": "{color.grey.grey70}",
           "type": "color"
         }
