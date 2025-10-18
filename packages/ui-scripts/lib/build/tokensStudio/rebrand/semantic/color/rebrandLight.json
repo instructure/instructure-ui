@@ -90,15 +90,15 @@
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey90}",
+            "value": "{color.blue.blue10}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey80}",
+            "value": "{color.blue.blue20}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue20}",
             "type": "color"
           },
           "disabled": {
@@ -328,15 +328,15 @@
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey70}",
+            "value": "{color.blue.blue10}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey60}",
+            "value": "{color.blue.blue20}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey80}",
+            "value": "{color.blue.blue20}",
             "type": "color"
           },
           "disabled": {
@@ -494,15 +494,15 @@
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue100}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue100}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue100}",
             "type": "color"
           },
           "disabled": {
@@ -636,15 +636,15 @@
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue100}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue100}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.blue.blue100}",
             "type": "color"
           },
           "disabled": {
