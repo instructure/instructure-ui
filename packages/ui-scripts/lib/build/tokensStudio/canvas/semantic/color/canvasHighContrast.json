@@ -370,6 +370,14 @@
           "disabled": {
             "value": "{color.green.green40}",
             "type": "color"
+          },
+          "hover": {
+            "value": "{color.green.green90}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.green.green90}",
+            "type": "color"
           }
         },
         "ai": {
