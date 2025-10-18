@@ -256,15 +256,15 @@
       "value": "{color.text.interactive.secondary.disabled}",
       "type": "color"
     },
-    "minHeightSm": {
+    "heightSm": {
       "value": "{size.interactive.height.sm}",
       "type": "sizing"
     },
-    "minHeightMd": {
+    "heightMd": {
       "value": "{size.interactive.height.md}",
       "type": "sizing"
     },
-    "minHeightLg": {
+    "heightLg": {
       "value": "{size.interactive.height.lg}",
       "type": "sizing"
     },
@@ -338,6 +338,50 @@
     },
     "primaryActiveBorderColor": {
       "value": "{color.stroke.interactive.primary.active}",
+      "type": "color"
+    },
+    "successHoverBorderColor": {
+      "value": "{color.stroke.interactive.success.hover}",
+      "type": "color"
+    },
+    "successActiveBorderColor": {
+      "value": "{color.stroke.interactive.success.active}",
+      "type": "color"
+    },
+    "destructiveHoverBorderColor": {
+      "value": "{color.stroke.interactive.destructive.hover}",
+      "type": "color"
+    },
+    "destructiveActiveBorderColor": {
+      "value": "{color.stroke.interactive.destructive.active}",
+      "type": "color"
+    },
+    "primaryOnColorHoverBorderColor": {
+      "value": "{color.stroke.interactive.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "primaryOnColorActiveBorderColor": {
+      "value": "{color.stroke.interactive.primaryOnColor.active}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledBorderColor": {
+      "value": "{color.stroke.interactive.primaryOnColor.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextTopGradientColor": {
+      "value": "{color.text.interactive.aiSecondary.topGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextBottomGradientColor": {
+      "value": "{color.text.interactive.aiSecondary.bottomGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledIconTopGradientColor": {
+      "value": "{color.icon.interactive.aiSecondary.topGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledIconBottomGradientColor": {
+      "value": "{color.icon.interactive.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     }
   }
