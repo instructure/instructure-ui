@@ -364,11 +364,19 @@
         },
         "success": {
           "base": {
+            "value": "{color.green.green70}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.green.green90}",
+            "type": "color"
+          },
+          "active": {
             "value": "{color.green.green90}",
             "type": "color"
           },
           "disabled": {
-            "value": "{color.green.green40}",
+            "value": "{color.green.green30}",
             "type": "color"
           }
         },
