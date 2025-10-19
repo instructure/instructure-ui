@@ -116,6 +116,10 @@
       "value": "{color.text.interactive.action.success.base}",
       "type": "color"
     },
+    "successDisabledTextColor": {
+      "value": "{color.text.interactive.action.success.disabled}",
+      "type": "color"
+    },
     "successIconColor": {
       "value": "{color.icon.interactive.action.success.base}",
       "type": "color"
@@ -150,6 +154,10 @@
     },
     "destructiveTextColor": {
       "value": "{color.text.interactive.action.destructive.base}",
+      "type": "color"
+    },
+    "destructiveDisabledTextColor": {
+      "value": "{color.text.interactive.action.destructive.disabled}",
       "type": "color"
     },
     "destructiveIconColor": {
@@ -382,6 +390,14 @@
     },
     "aiSecondaryHoverBackgroundBottomGradientColor": {
       "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
+      "type": "color"
+    },
+    "successDisabledIconColor": {
+      "value": "{color.icon.interactive.action.success.disabled}",
+      "type": "color"
+    },
+    "destructiveDisabledIconColor": {
+      "value": "{color.icon.interactive.action.destructive.disabled}",
       "type": "color"
     }
   }
