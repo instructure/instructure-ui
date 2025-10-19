@@ -84,25 +84,25 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.blue.blue30}",
+            "value": "{color.grey.grey100}",
             "type": "color"
           }
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey60}",
+            "value": "{color.grey.grey110}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey50}",
+            "value": "{color.grey.grey100}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey70}",
+            "value": "{color.grey.grey110}",
             "type": "color"
           },
           "disabled": {
-            "value": "{color.grey.grey20}",
+            "value": "{color.grey.grey110}",
             "type": "color"
           }
         },
@@ -322,25 +322,25 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.blue.blue40}",
+            "value": "{color.grey.grey100}",
             "type": "color"
           }
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey60}",
+            "value": "{color.grey.grey110}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey50}",
+            "value": "{color.grey.grey100}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey70}",
+            "value": "{color.grey.grey110}",
             "type": "color"
           },
           "disabled": {
-            "value": "{color.grey.grey20}",
+            "value": "{color.grey.grey110}",
             "type": "color"
           }
         },
@@ -517,15 +517,15 @@
         "action": {
           "secondary": {
             "base": {
-              "value": "{color.grey.grey30}",
+              "value": "{color.white}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.grey.grey20}",
+              "value": "{color.white}",
               "type": "color"
             },
             "active": {
-              "value": "{color.grey.grey40}",
+              "value": "{color.white}",
               "type": "color"
             },
             "disabled": {
