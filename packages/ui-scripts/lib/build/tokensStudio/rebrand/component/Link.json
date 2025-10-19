@@ -1,11 +1,11 @@
 {
   "link": {
     "textColor": {
-      "value": "{color.text.interactive.primary.base}",
+      "value": "{color.text.interactive.navigation.primary.base}",
       "type": "color"
     },
     "textHoverColor": {
-      "value": "{color.text.interactive.primary.hover}",
+      "value": "{color.text.interactive.navigation.primary.hover}",
       "type": "color"
     },
     "textDisabledColor": {
@@ -25,11 +25,11 @@
       "type": "color"
     },
     "onColorTextColor": {
-      "value": "{color.text.interactive.primaryOnColor.base}",
+      "value": "{color.text.interactive.navigation.primaryOnColor.base}",
       "type": "color"
     },
     "onColorTextHoverColor": {
-      "value": "{color.text.interactive.primaryOnColor.hover}",
+      "value": "{color.text.interactive.navigation.primaryOnColor.hover}",
       "type": "color"
     },
     "onColorTextDisabledColor": {
