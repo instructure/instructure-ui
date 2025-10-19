@@ -13,11 +13,11 @@
       "type": "color"
     },
     "iconColor": {
-      "value": "{color.icon.interactive.primary.base}",
+      "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
     },
     "iconHoverColor": {
-      "value": "{color.icon.interactive.primary.hover}",
+      "value": "{color.icon.interactive.navigation.primary.hover}",
       "type": "color"
     },
     "iconDisabledColor": {
@@ -37,11 +37,11 @@
       "type": "color"
     },
     "onColorIconColor": {
-      "value": "{color.icon.interactive.primaryOnColor.base}",
+      "value": "{color.icon.interactive.navigation.primaryOnColor.base}",
       "type": "color"
     },
     "onColorIconHoverColor": {
-      "value": "{color.icon.interactive.primaryOnColor.hover}",
+      "value": "{color.icon.interactive.navigation.primaryOnColor.hover}",
       "type": "color"
     },
     "onColorIconDisabledColor": {

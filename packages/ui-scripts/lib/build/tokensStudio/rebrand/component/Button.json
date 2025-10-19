@@ -37,7 +37,7 @@
       "type": "color"
     },
     "primaryIconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.interactive.action.primary.base}",
       "type": "color"
     },
     "secondaryBackgroundColor": {
@@ -61,7 +61,7 @@
       "type": "color"
     },
     "secondaryIconColor": {
-      "value": "{color.icon.interactive.secondary.base}",
+      "value": "{color.icon.interactive.action.secondary.base}",
       "type": "color"
     },
     "secondaryTextColor": {
@@ -73,7 +73,7 @@
       "type": "color"
     },
     "secondaryDisabledIconColor": {
-      "value": "{color.icon.interactive.secondary.disabled}",
+      "value": "{color.icon.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "secondaryDisabledBorderColor": {
@@ -117,7 +117,7 @@
       "type": "color"
     },
     "successIconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.interactive.action.success.base}",
       "type": "color"
     },
     "destructiveBackgroundColor": {
@@ -153,7 +153,7 @@
       "type": "color"
     },
     "destructiveIconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.interactive.action.destructive.base}",
       "type": "color"
     },
     "aiBackgroundBottomGradientColor": {
@@ -201,7 +201,7 @@
       "type": "color"
     },
     "aiIconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.interactive.action.ai.base}",
       "type": "color"
     },
     "aiSecondaryBackgroundColor": {
@@ -221,7 +221,7 @@
       "type": "color"
     },
     "aiSecondaryDisabledIconTopGradientColor": {
-      "value": "{color.icon.interactive.aiSecondary.topGradient.disabled}",
+      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
       "type": "color"
     },
     "aiSecondaryTextBottomGradientColor": {
@@ -233,15 +233,15 @@
       "type": "color"
     },
     "aiSecondaryDisabledIconBottomGradientColor": {
-      "value": "{color.icon.interactive.aiSecondary.bottomGradient.disabled}",
+      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     },
     "aiSecondaryIconTopGradientColor": {
-      "value": "{color.icon.interactive.ai.TopGradient.base}",
+      "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
       "type": "color"
     },
     "aiSecondaryIconBottomGradientColor": {
-      "value": "{color.icon.interactive.ai.BottomGradient.base}",
+      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
       "type": "color"
     },
     "primaryOnColorBackgroundColor": {
@@ -357,7 +357,7 @@
       "type": "color"
     },
     "primaryOnColorIconColor": {
-      "value": "{color.icon.interactive.secondary.base}",
+      "value": "{color.icon.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
     "primaryOnColorDisabledBackgroundColor": {
@@ -369,7 +369,7 @@
       "type": "color"
     },
     "primaryOnColorDisabledIconColor": {
-      "value": "{color.icon.interactive.secondary.disabled}",
+      "value": "{color.icon.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "aiDisabledBorderTopGradientColor": {
