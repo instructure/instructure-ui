@@ -25,7 +25,7 @@
       "type": "color"
     },
     "primaryTextColor": {
-      "value": "{color.text.interactive.navigation.primaryOnColor.base}",
+      "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
     },
     "primaryIconColor": {
@@ -57,7 +57,7 @@
       "type": "color"
     },
     "secondaryTextColor": {
-      "value": "{color.text.interactive.action.secondary.active}",
+      "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
@@ -97,7 +97,7 @@
       "type": "color"
     },
     "successTextColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.interactive.action.success.base}",
       "type": "color"
     },
     "successIconColor": {
@@ -129,7 +129,7 @@
       "type": "color"
     },
     "destructiveTextColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.interactive.action.destructive.base}",
       "type": "color"
     },
     "destructiveIconColor": {
@@ -185,7 +185,7 @@
       "type": "color"
     },
     "aiTextColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.interactive.action.ai.base}",
       "type": "color"
     },
     "aiIconColor": {
@@ -241,7 +241,7 @@
       "type": "color"
     },
     "primaryOnColorTextColor": {
-      "value": "{color.text.interactive.action.secondary.base}",
+      "value": "{color.text.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
     "primaryOnColorIconColor": {
@@ -253,7 +253,7 @@
       "type": "color"
     },
     "primaryOnColorDisabledTextColor": {
-      "value": "{color.text.interactive.action.secondary.disabled}",
+      "value": "{color.text.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "heightSm": {
