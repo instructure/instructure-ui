@@ -545,6 +545,10 @@
             "active": {
               "value": "{color.white}",
               "type": "color"
+            },
+            "disabled": {
+              "value": "{color.white}",
+              "type": "color"
             }
           },
           "aiSecondary": {
@@ -725,6 +729,10 @@
             "active": {
               "value": "{color.white}",
               "type": "color"
+            },
+            "disabled": {
+              "value": "{color.white}",
+              "type": "color"
             }
           },
           "primary": {
@@ -751,6 +759,10 @@
               "type": "color"
             },
             "active": {
+              "value": "{color.white}",
+              "type": "color"
+            },
+            "disabled": {
               "value": "{color.white}",
               "type": "color"
             }
