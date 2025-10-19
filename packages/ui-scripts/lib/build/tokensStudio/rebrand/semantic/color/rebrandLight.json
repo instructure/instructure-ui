@@ -210,7 +210,7 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.white}",
+            "value": "{color.grey.grey30}",
             "type": "color"
           }
         }
@@ -408,7 +408,7 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.white}",
+            "value": "{color.grey.grey30}",
             "type": "color"
           },
           "hover": {
