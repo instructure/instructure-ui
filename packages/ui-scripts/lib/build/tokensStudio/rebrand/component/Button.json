@@ -216,6 +216,10 @@
       "value": "{color.background.interactive.aiSecondary.base}",
       "type": "color"
     },
+    "aiSecondaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.aiSecondary.disabled}",
+      "type": "color"
+    },
     "aiSecondaryHoverBackgroundTopGradientColor": {
       "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
       "type": "color"
@@ -398,6 +402,14 @@
     },
     "destructiveDisabledIconColor": {
       "value": "{color.icon.interactive.action.destructive.disabled}",
+      "type": "color"
+    },
+    "aiDisabledIconColor": {
+      "value": "{color.icon.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "aiDisabledTextColor": {
+      "value": "{color.text.interactive.action.ai.disabled}",
       "type": "color"
     }
   }

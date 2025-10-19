@@ -203,6 +203,10 @@
             "value": "{color.white}",
             "type": "color"
           },
+          "disabled": {
+            "value": "{color.white}",
+            "type": "color"
+          },
           "hover": {
             "topGradient": {
               "value": "{color.violet.violet10}",
@@ -831,6 +835,10 @@
               "type": "color"
             },
             "active": {
+              "value": "{color.white}",
+              "type": "color"
+            },
+            "disabled": {
               "value": "{color.white}",
               "type": "color"
             }
