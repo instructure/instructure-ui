@@ -25,7 +25,7 @@
       "type": "color"
     },
     "primaryTextColor": {
-      "value": "{color.text.interactive.primaryOnColor.base}",
+      "value": "{color.text.interactive.navigation.primaryOnColor.base}",
       "type": "color"
     },
     "primaryIconColor": {
@@ -57,11 +57,11 @@
       "type": "color"
     },
     "secondaryTextColor": {
-      "value": "{color.text.interactive.secondary.active}",
+      "value": "{color.text.interactive.action.secondary.active}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
-      "value": "{color.text.interactive.secondary.disabled}",
+      "value": "{color.text.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "secondaryDisabledIconColor": {
@@ -197,11 +197,11 @@
       "type": "color"
     },
     "aiSecondaryTextTopGradientColor": {
-      "value": "{color.text.interactive.aiSecondary.topGradient.base}",
+      "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
       "type": "color"
     },
     "aiSecondaryTextBottomGradientColor": {
-      "value": "{color.text.interactive.aiSecondary.bottomGradient.base}",
+      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
       "type": "color"
     },
     "aiSecondaryIconTopGradientColor": {
@@ -241,7 +241,7 @@
       "type": "color"
     },
     "primaryOnColorTextColor": {
-      "value": "{color.text.interactive.secondary.base}",
+      "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
     "primaryOnColorIconColor": {
@@ -253,7 +253,7 @@
       "type": "color"
     },
     "primaryOnColorDisabledTextColor": {
-      "value": "{color.text.interactive.secondary.disabled}",
+      "value": "{color.text.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "heightSm": {
@@ -369,11 +369,11 @@
       "type": "color"
     },
     "aiSecondaryDisabledTextTopGradientColor": {
-      "value": "{color.text.interactive.aiSecondary.topGradient.disabled}",
+      "value": "{color.text.interactive.action.aiSecondary.topGradient.disabled}",
       "type": "color"
     },
     "aiSecondaryDisabledTextBottomGradientColor": {
-      "value": "{color.text.interactive.aiSecondary.bottomGradient.disabled}",
+      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     },
     "aiSecondaryDisabledIconTopGradientColor": {
