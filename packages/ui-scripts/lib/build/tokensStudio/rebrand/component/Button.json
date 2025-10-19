@@ -377,7 +377,7 @@
       "type": "color"
     },
     "primaryOnColorDisabledIconColor": {
-      "value": "{color.icon.interactive.action.secondary.disabled}",
+      "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "aiDisabledBorderTopGradientColor": {
