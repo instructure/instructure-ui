@@ -61,19 +61,19 @@
       "type": "color"
     },
     "primaryBaseColor": {
-      "value": "{color.icon.interactive.primary.base}",
+      "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
     },
     "primaryHoverColor": {
-      "value": "{color.icon.interactive.primary.hover}",
+      "value": "{color.icon.interactive.navigation.primary.hover}",
       "type": "color"
     },
     "destructiveColor": {
-      "value": "{color.icon.interactive.destructive.base}",
+      "value": "{color.icon.interactive.action.status.base}",
       "type": "color"
     },
     "destructiveHoverColor": {
-      "value": "{color.icon.interactive.destructive.hover}",
+      "value": "{color.icon.interactive.action.status.hover}",
       "type": "color"
     },
     "mutedColor": {
