@@ -505,15 +505,15 @@
           },
           "primaryOnColor": {
             "base": {
-              "value": "{color.grey.grey120}",
+              "value": "{color.white}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.grey.grey120}",
+              "value": "{color.white}",
               "type": "color"
             },
             "active": {
-              "value": "{color.grey.grey120}",
+              "value": "{color.white}",
               "type": "color"
             }
           }
