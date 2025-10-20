@@ -30,7 +30,11 @@ import type {
   PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { InputHTMLAttributes } from 'react'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -53,6 +57,11 @@ type RangeInputOwnProps = {
    * when used with the `value` prop, the component will not control its own state
    */
   onChange?: (value: number | string) => void
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 
   messages?: FormMessage[]
 
@@ -142,6 +151,7 @@ const allowedProps: AllowedPropKeys = [
   'disabled',
   'readOnly',
   'thumbVariant',
+  'margin',
   'inputRef'
 ]
 

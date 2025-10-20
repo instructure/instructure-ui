@@ -613,7 +613,7 @@ export type FormFieldLayoutTheme = {
   lineHeight: Typography['lineHeightFit']
   inlinePadding: Spacing['xxSmall']
   stackedOrInlineBreakpoint: Breakpoints['medium']
-  spacing: any // TODO remove any
+  spacing: Spacing
 }
 
 export type FormFieldLabelTheme = {
@@ -1203,6 +1203,7 @@ export type RadioInputTheme = {
   toggleSmallFontSize: Typography['fontSizeXSmall']
   toggleMediumFontSize: Typography['fontSizeSmall']
   toggleLargeFontSize: Typography['fontSizeMedium']
+  spacing: any // TODO remove any
 }
 
 export type RangeInputTheme = {
@@ -1460,9 +1461,9 @@ export type TextTheme = Typography & {
   alertColor: string
   warningColor: string
   aiColor: string
-
   aiBackgroundColor: string
   paragraphMargin: string | 0
+  spacing: Spacing
 }
 
 export type TextAreaTheme = {

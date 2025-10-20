@@ -28,7 +28,11 @@ import type {
   OtherHTMLAttributes,
   RadioInputTheme
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputOwnProps = {
@@ -63,6 +67,10 @@ type RadioInputOwnProps = {
   size?: 'small' | 'medium' | 'large'
   context?: 'success' | 'warning' | 'danger' | 'off'
   inline?: boolean
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
   /**
    * Callback fired when the input fires a change event.
@@ -106,6 +114,7 @@ const allowedProps: AllowedPropKeys = [
   'size',
   'context',
   'inline',
+  'margin',
   'onClick',
   'onChange',
   'inputRef'

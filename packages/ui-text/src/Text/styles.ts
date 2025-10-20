@@ -24,6 +24,7 @@
 
 import type { TextTheme } from '@instructure/shared-types'
 import type { TextProps, TextStyle } from './props'
+import { mapSpacingToShorthand } from '@instructure/emotion'
 
 /**
  * ---
@@ -48,8 +49,18 @@ const generateStyle = (
     lineHeight,
     letterSpacing,
     color,
-    variant
+    variant,
+    margin
   } = props
+
+  // Calculate margin and support both theme token values like "space4" and custom values like "10px"
+  const cssMargin = margin
+    ? mapSpacingToShorthand(
+        margin,
+        (componentTheme as TextTheme & { spacing: Record<string, string> })
+          .spacing
+      )
+    : undefined
 
   const variants: Record<NonNullable<TextProps['variant']>, object> = {
     descriptionPage: {
@@ -203,6 +214,7 @@ const generateStyle = (
       label: 'text',
       fontFamily: componentTheme.fontFamily,
       ...baseStyles,
+      ...(margin && { margin: cssMargin }), // Apply margin if provided
 
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(input)[type]': inputStyles,

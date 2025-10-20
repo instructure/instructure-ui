@@ -24,6 +24,7 @@
 
 import type { RadioInputTheme } from '@instructure/shared-types'
 import type { RadioInputProps, RadioInputStyle } from './props'
+import { mapSpacingToShorthand } from '@instructure/emotion'
 
 /**
  * ---
@@ -39,7 +40,19 @@ const generateStyle = (
   componentTheme: RadioInputTheme,
   props: RadioInputProps
 ): RadioInputStyle => {
-  const { disabled, variant, context, size, inline } = props
+  const { disabled, variant, context, size, inline, margin } = props
+
+  // Calculate margin and support both theme token values like "space4" and custom values like "10px"
+  const cssMargin = margin
+    ? mapSpacingToShorthand(
+        margin,
+        (
+          componentTheme as RadioInputTheme & {
+            spacing: Record<string, string>
+          }
+        ).spacing
+      )
+    : undefined
 
   const getInputStateSelector = (state: 'hover' | 'focus' | 'checked') =>
     `[class$=-radioInput__input]:${state} + [class$=-radioInput__control] &`
@@ -261,6 +274,7 @@ const generateStyle = (
       label: 'radioInput',
       position: 'relative',
       width: '100%',
+      ...(margin && { margin: cssMargin }),
       ...(disabled && { opacity: 0.5 }),
       ...(inline && {
         display: 'inline-block',

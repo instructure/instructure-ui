@@ -35,6 +35,7 @@ import type {
 } from '@instructure/ui-position'
 import type { ViewProps } from '@instructure/ui-view'
 import { Renderable } from '@instructure/shared-types'
+import type { Spacing } from '@instructure/emotion'
 
 type ToggleButtonOwnProps = {
   /**
@@ -110,6 +111,11 @@ type ToggleButtonOwnProps = {
    * or a function returning an element.
    */
   constrain?: PositionConstraint
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof ToggleButtonOwnProps
@@ -129,6 +135,7 @@ const allowedProps: AllowedPropKeys = [
   'elementRef',
   'interaction',
   'isShowingTooltip',
+  'margin',
   'mountNode',
   'onClick',
   'placement',
