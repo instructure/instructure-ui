@@ -97,15 +97,15 @@
       "type": "color"
     },
     "successTextColor": {
-      "value": "{color.text.interactive.action.success.base}",
+      "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
     "successIconColor": {
-      "value": "{color.icon.interactive.action.success.base}",
+      "value": "{color.icon.interactive.action.status.base}",
       "type": "color"
     },
     "successDisabledIconColor": {
-      "value": "{color.icon.interactive.action.success.disabled}",
+      "value": "{color.icon.interactive.action.status.disabled}",
       "type": "color"
     },
     "destructiveBackgroundColor": {
@@ -133,15 +133,15 @@
       "type": "color"
     },
     "destructiveTextColor": {
-      "value": "{color.text.interactive.action.destructive.base}",
+      "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
     "destructiveIconColor": {
-      "value": "{color.icon.interactive.action.destructive.base}",
+      "value": "{color.icon.interactive.action.status.base}",
       "type": "color"
     },
     "destructiveDisabledIconColor": {
-      "value": "{color.icon.interactive.action.destructive.disabled}",
+      "value": "{color.icon.interactive.action.status.disabled}",
       "type": "color"
     },
     "aiBackgroundBottomGradientColor": {
@@ -397,11 +397,11 @@
       "type": "color"
     },
     "destructiveDisabledTextColor": {
-      "value": "{color.text.interactive.action.destructive.disabled}",
+      "value": "{color.text.interactive.action.status.disabled}",
       "type": "color"
     },
     "successDisabledTextColor": {
-      "value": "{color.text.interactive.action.success.disabled}",
+      "value": "{color.text.interactive.action.status.disabled}",
       "type": "color"
     },
     "aiDisabledTextColor": {
