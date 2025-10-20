@@ -90,15 +90,15 @@
         },
         "secondary": {
           "base": {
-            "value": "{color.grey.grey100}",
+            "value": "{color.grey.grey10}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey90}",
+            "value": "{color.grey.grey20}",
             "type": "color"
           },
           "active": {
-            "value": "{color.grey.grey110}",
+            "value": "{color.grey.grey20}",
             "type": "color"
           },
           "disabled": {
