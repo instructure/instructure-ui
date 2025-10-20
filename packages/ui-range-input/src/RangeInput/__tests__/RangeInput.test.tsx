@@ -202,4 +202,59 @@ describe('<RangeInput />', () => {
       expect(output).toHaveTextContent('40%')
     })
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with custom CSS value and with tokens', () => {
+      const { container } = render(
+        <div>
+          <RangeInput
+            label="Range 1"
+            name="range1"
+            min={0}
+            max={100}
+            margin="30px"
+          />
+          <RangeInput
+            label="Range 2"
+            name="range2"
+            min={0}
+            max={100}
+            margin="large"
+          />
+          <RangeInput
+            label="Range 3"
+            name="range3"
+            min={0}
+            max={100}
+            margin="space4"
+          />
+          <RangeInput
+            label="Range 4"
+            name="range4"
+            min={0}
+            max={100}
+            margin="small 20px"
+          />
+        </div>
+      )
+
+      const allRangeInputs = container.querySelectorAll(
+        '[data-cid="RangeInput"]'
+      )
+
+      const rangeInputCustom = allRangeInputs[0] as HTMLElement
+      const rangeInputCustomStyle = window.getComputedStyle(rangeInputCustom)
+      const rangeInputLarge = allRangeInputs[1] as HTMLElement
+      const rangeInputLargeStyle = window.getComputedStyle(rangeInputLarge)
+      const rangeInputSpace = allRangeInputs[2] as HTMLElement
+      const rangeInputSpaceStyle = window.getComputedStyle(rangeInputSpace)
+      const rangeInputMixed = allRangeInputs[3] as HTMLElement
+      const rangeInputMixedStyle = window.getComputedStyle(rangeInputMixed)
+
+      expect(rangeInputCustomStyle.margin).toBe('30px')
+      expect(rangeInputLargeStyle.margin).toBe('2.25rem')
+      expect(rangeInputSpaceStyle.margin).toBe('0.25rem')
+      expect(rangeInputMixedStyle.margin).toBe('0.75rem 20px')
+    })
+  })
 })

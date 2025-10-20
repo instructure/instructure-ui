@@ -197,4 +197,59 @@ describe('<ToggleButton />', () => {
       expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with theme tokens', () => {
+      const { container } = render(
+        <div>
+          <ToggleButton
+            screenReaderLabel="test1"
+            renderIcon={icon}
+            renderTooltipContent="tooltip"
+            status="unpressed"
+            margin="medium"
+          />
+          <ToggleButton
+            screenReaderLabel="test2"
+            renderIcon={icon}
+            renderTooltipContent="tooltip"
+            status="unpressed"
+            margin="large"
+          />
+          <ToggleButton
+            screenReaderLabel="test3"
+            renderIcon={icon}
+            renderTooltipContent="tooltip"
+            status="unpressed"
+            margin="space4"
+          />
+          <ToggleButton
+            screenReaderLabel="test4"
+            renderIcon={icon}
+            renderTooltipContent="tooltip"
+            status="unpressed"
+            margin="small medium"
+          />
+        </div>
+      )
+
+      const allButtons = container.querySelectorAll('button')
+
+      const buttonMedium = allButtons[0] as HTMLElement
+      const buttonMediumStyle = window.getComputedStyle(buttonMedium)
+      const buttonLarge = allButtons[1] as HTMLElement
+      const buttonLargeStyle = window.getComputedStyle(buttonLarge)
+      const buttonSpace = allButtons[2] as HTMLElement
+      const buttonSpaceStyle = window.getComputedStyle(buttonSpace)
+      const buttonMixed = allButtons[3] as HTMLElement
+      const buttonMixedStyle = window.getComputedStyle(buttonMixed)
+
+      // Note: ToggleButton passes margin to IconButton, which uses View component
+      // View only accepts theme tokens, not custom CSS values
+      expect(buttonMediumStyle.margin).toBe('1.5rem')
+      expect(buttonLargeStyle.margin).toBe('2.25rem')
+      expect(buttonSpaceStyle.margin).toBe('0.25rem')
+      expect(buttonMixedStyle.margin).toBe('0.75rem 1.5rem')
+    })
+  })
 })
