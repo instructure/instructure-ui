@@ -69,11 +69,11 @@
       "type": "color"
     },
     "destructiveColor": {
-      "value": "{color.icon.interactive.action.destructive.base}",
+      "value": "{color.icon.interactive.action.status.base}",
       "type": "color"
     },
     "destructiveHoverColor": {
-      "value": "{color.icon.interactive.action.destructive.hover}",
+      "value": "{color.icon.interactive.action.status.hover}",
       "type": "color"
     },
     "mutedColor": {
