@@ -52,30 +52,6 @@
       "value": "{color.icon.base}",
       "type": "color"
     },
-    "disabledColor": {
-      "value": "{color.icon.interactive.disabled.base}",
-      "type": "color"
-    },
-    "disabledOnColor": {
-      "value": "{color.icon.interactive.disabled.onColor}",
-      "type": "color"
-    },
-    "primaryBaseColor": {
-      "value": "{color.icon.interactive.navigation.primary.base}",
-      "type": "color"
-    },
-    "primaryHoverColor": {
-      "value": "{color.icon.interactive.navigation.primary.hover}",
-      "type": "color"
-    },
-    "destructiveColor": {
-      "value": "{color.icon.interactive.action.status.base}",
-      "type": "color"
-    },
-    "destructiveHoverColor": {
-      "value": "{color.icon.interactive.action.status.hover}",
-      "type": "color"
-    },
     "mutedColor": {
       "value": "{color.icon.muted}",
       "type": "color"
@@ -98,6 +74,138 @@
     },
     "onColor": {
       "value": "{color.icon.onColor}",
+      "type": "color"
+    },
+    "disabledColor": {
+      "value": "{color.icon.interactive.disabled.base}",
+      "type": "color"
+    },
+    "disabledBaseColor": {
+      "value": "{color.icon.interactive.disabled.base}",
+      "type": "color"
+    },
+    "disabledOnColor": {
+      "value": "{color.icon.interactive.disabled.onColor}",
+      "type": "color"
+    },
+    "navigationPrimaryBaseColor": {
+      "value": "{color.icon.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "navigationPrimaryHoverColor": {
+      "value": "{color.icon.interactive.navigation.primary.hover}",
+      "type": "color"
+    },
+    "navigationPrimaryActiveColor": {
+      "value": "{color.icon.interactive.navigation.primary.active}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorBaseColor": {
+      "value": "{color.icon.interactive.navigation.primaryOnColor.base}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorHoverColor": {
+      "value": "{color.icon.interactive.navigation.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorActiveColor": {
+      "value": "{color.icon.interactive.navigation.primaryOnColor.active}",
+      "type": "color"
+    },
+    "actionSecondaryBaseColor": {
+      "value": "{color.icon.interactive.action.secondary.base}",
+      "type": "color"
+    },
+    "actionSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "actionSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.secondary.active}",
+      "type": "color"
+    },
+    "actionSecondaryDisabledColor": {
+      "value": "{color.icon.interactive.action.secondary.disabled}",
+      "type": "color"
+    },
+    "actionStatusBaseColor": {
+      "value": "{color.icon.interactive.action.status.base}",
+      "type": "color"
+    },
+    "actionStatusHoverColor": {
+      "value": "{color.icon.interactive.action.status.hover}",
+      "type": "color"
+    },
+    "actionStatusActiveColor": {
+      "value": "{color.icon.interactive.action.status.active}",
+      "type": "color"
+    },
+    "actionStatusDisabledColor": {
+      "value": "{color.icon.interactive.action.status.disabled}",
+      "type": "color"
+    },
+    "actionAiSecondaryTopGradientBaseColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
+      "type": "color"
+    },
+    "actionAiSecondaryTopGradientDisabledColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
+      "type": "color"
+    },
+    "actionAiSecondaryBottomGradientBaseColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
+      "type": "color"
+    },
+    "actionAiSecondaryBottomGradientDisabledColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
+      "type": "color"
+    },
+    "actionAiBaseColor": {
+      "value": "{color.icon.interactive.action.ai.base}",
+      "type": "color"
+    },
+    "actionAiHoverColor": {
+      "value": "{color.icon.interactive.action.ai.hover}",
+      "type": "color"
+    },
+    "actionAiActiveColor": {
+      "value": "{color.icon.interactive.action.ai.active}",
+      "type": "color"
+    },
+    "actionAiDisabledColor": {
+      "value": "{color.icon.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "actionPrimaryBaseColor": {
+      "value": "{color.icon.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "actionPrimaryHoverColor": {
+      "value": "{color.icon.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "actionPrimaryActiveColor": {
+      "value": "{color.icon.interactive.action.primary.active}",
+      "type": "color"
+    },
+    "actionPrimaryDisabledColor": {
+      "value": "{color.icon.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorBaseColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.base}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorHoverColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorActiveColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.active}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorDisabledColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "accent1Color": {
