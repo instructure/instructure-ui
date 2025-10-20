@@ -321,7 +321,6 @@
       "button.primaryOnColorActiveBorderColor": "4948a1909e1d658eb8be6051734e77b5efbeff3e",
       "button.primaryOnColorDisabledBorderColor": "9fe63f84201d6aaabf608c8bd857f0d9af41fa6d",
       "button.primaryOnColorTextColor": "ef52e86dd77bf68ba2205de0d852cdbc41428ad5",
-      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033",
       "button.heightMd": "2c0c8b809b4430e309d1f20568adb4fc2ae5f09f",
       "button.heightLg": "dbc1e933e9fe7446ab08c0fcf1783b64fba439cf",
       "button.paddingHorizontalMd": "846d0c4612e0a9ced365f32faddaee5feee00b57",
@@ -658,7 +657,8 @@
       "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "104502cb16e2f2dc39dcf7e3cc06fd07b19afc3b"
+      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "104502cb16e2f2dc39dcf7e3cc06fd07b19afc3b",
+      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:0",
@@ -1005,7 +1005,6 @@
       "button.primaryOnColorActiveBorderColor": "4948a1909e1d658eb8be6051734e77b5efbeff3e",
       "button.primaryOnColorDisabledBorderColor": "9fe63f84201d6aaabf608c8bd857f0d9af41fa6d",
       "button.primaryOnColorTextColor": "ef52e86dd77bf68ba2205de0d852cdbc41428ad5",
-      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033",
       "button.heightMd": "2c0c8b809b4430e309d1f20568adb4fc2ae5f09f",
       "button.heightLg": "dbc1e933e9fe7446ab08c0fcf1783b64fba439cf",
       "button.paddingHorizontalMd": "846d0c4612e0a9ced365f32faddaee5feee00b57",
@@ -1342,7 +1341,8 @@
       "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-      "color.icon.interactive.action.aiSecondary.BottomGradient.base": "5ad61f986a616cd2f4fd9b2f531cc1c1d3f85876"
+      "color.icon.interactive.action.aiSecondary.BottomGradient.base": "5ad61f986a616cd2f4fd9b2f531cc1c1d3f85876",
+      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:1",
@@ -1786,7 +1786,6 @@
       "button.primaryOnColorIconColor": "6cb0390ad987cc5bc615bf0f6ddebf405eec23d1",
       "button.primaryOnColorDisabledIconColor": "ebdf91a5ace79837af5501f987fa6b06c6d52034",
       "button.primaryOnColorDisabledTextColor": "622c5dceacc9764f86a9f9c2cf7650859173e3e7",
-      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033",
       "button.heightMd": "2c0c8b809b4430e309d1f20568adb4fc2ae5f09f",
       "button.heightLg": "dbc1e933e9fe7446ab08c0fcf1783b64fba439cf",
       "button.paddingHorizontalMd": "846d0c4612e0a9ced365f32faddaee5feee00b57",
@@ -2005,7 +2004,8 @@
       "textArea.heightLg": "6ecf050d523df8b757298a4c8589acd002bc7086",
       "textArea.gapContent": "b831fcff3ac0972e5c0e33dd2a824b5d410d8bd0",
       "textArea.gapPrimitives": "c33a156e4a0c1ccc0533f6962b6f1d5d149c689c",
-      "textArea.paddingHorizontal": "23dca6a9627dfc5b8f52f720a3850559d5c263aa"
+      "textArea.paddingHorizontal": "23dca6a9627dfc5b8f52f720a3850559d5c263aa",
+      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:2",
@@ -2468,7 +2468,6 @@
       "button.primaryOnColorIconColor": "6cb0390ad987cc5bc615bf0f6ddebf405eec23d1",
       "button.primaryOnColorDisabledIconColor": "ebdf91a5ace79837af5501f987fa6b06c6d52034",
       "button.primaryOnColorDisabledTextColor": "622c5dceacc9764f86a9f9c2cf7650859173e3e7",
-      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033",
       "button.heightMd": "2c0c8b809b4430e309d1f20568adb4fc2ae5f09f",
       "button.heightLg": "dbc1e933e9fe7446ab08c0fcf1783b64fba439cf",
       "button.paddingHorizontalMd": "846d0c4612e0a9ced365f32faddaee5feee00b57",
@@ -2687,7 +2686,8 @@
       "textArea.heightLg": "6ecf050d523df8b757298a4c8589acd002bc7086",
       "textArea.gapContent": "b831fcff3ac0972e5c0e33dd2a824b5d410d8bd0",
       "textArea.gapPrimitives": "c33a156e4a0c1ccc0533f6962b6f1d5d149c689c",
-      "textArea.paddingHorizontal": "23dca6a9627dfc5b8f52f720a3850559d5c263aa"
+      "textArea.paddingHorizontal": "23dca6a9627dfc5b8f52f720a3850559d5c263aa",
+      "button.heightSm": "13bf96dbefc5408a1e3af6f3ec3a1a928de79033"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:3",
