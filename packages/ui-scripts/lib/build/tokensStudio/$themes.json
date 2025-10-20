@@ -658,7 +658,7 @@
       "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "6487ada900c488e93ef86e954371e0384098401e"
+      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "104502cb16e2f2dc39dcf7e3cc06fd07b19afc3b"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:0",
@@ -1342,7 +1342,7 @@
       "fontSize.text4xl": "8602009e4903c83b92483b2e36be22afed22ce15",
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
-      "color.icon.interactive.action.aiSecondary.BottomGradient.base": "97aa83948509a7bf1d6a0b2bc280628e9e9d1540"
+      "color.icon.interactive.action.aiSecondary.BottomGradient.base": "5ad61f986a616cd2f4fd9b2f531cc1c1d3f85876"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:1",
@@ -1614,7 +1614,7 @@
       "color.icon.interactive.action.status.disabled": "ec5e01943cf2c9030b278a3daaac23afd7ca8136",
       "color.icon.interactive.action.aiSecondary.topGradient.base": "cdfa101a2492fefbcc65585fa148b2616c6ad710",
       "color.icon.interactive.action.aiSecondary.topGradient.disabled": "e3af9d1af72b22554890d5f9b78e07d5094c1e60",
-      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "6487ada900c488e93ef86e954371e0384098401e",
+      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "104502cb16e2f2dc39dcf7e3cc06fd07b19afc3b",
       "color.icon.interactive.action.aiSecondary.bottomGradient.disabled": "b0404b604174dbf28fe18a199b0ff1e85cac3cbe",
       "color.icon.interactive.action.ai.base": "74d4f46350c29e99aff7520374d167d8a7101616",
       "color.icon.interactive.action.ai.hover": "2099738377f13b6843cd72a01aec2eef002e37e8",
@@ -2296,7 +2296,7 @@
       "color.icon.interactive.action.status.disabled": "ec5e01943cf2c9030b278a3daaac23afd7ca8136",
       "color.icon.interactive.action.aiSecondary.topGradient.base": "cdfa101a2492fefbcc65585fa148b2616c6ad710",
       "color.icon.interactive.action.aiSecondary.topGradient.disabled": "e3af9d1af72b22554890d5f9b78e07d5094c1e60",
-      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "6487ada900c488e93ef86e954371e0384098401e",
+      "color.icon.interactive.action.aiSecondary.bottomGradient.base": "104502cb16e2f2dc39dcf7e3cc06fd07b19afc3b",
       "color.icon.interactive.action.aiSecondary.bottomGradient.disabled": "b0404b604174dbf28fe18a199b0ff1e85cac3cbe",
       "color.icon.interactive.action.ai.base": "74d4f46350c29e99aff7520374d167d8a7101616",
       "color.icon.interactive.action.ai.hover": "2099738377f13b6843cd72a01aec2eef002e37e8",
