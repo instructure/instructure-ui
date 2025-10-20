@@ -411,6 +411,14 @@
     "aiDisabledTextColor": {
       "value": "{color.text.interactive.action.ai.disabled}",
       "type": "color"
+    },
+    "primaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "primaryDisabledIconColor": {
+      "value": "{color.icon.interactive.action.primary.disabled}",
+      "type": "color"
     }
   }
 }

@@ -819,6 +819,10 @@
             "active": {
               "value": "{color.white}",
               "type": "color"
+            },
+            "disabled": {
+              "value": "{color.white}",
+              "type": "color"
             }
           },
           "primaryOnColor": {
