@@ -834,13 +834,11 @@
                 "type": "color"
               }
             },
-            "BottomGradient": {
+            "bottomGradient": {
               "base": {
                 "value": "{color.sea.sea70}",
                 "type": "color"
-              }
-            },
-            "bottomGradient": {
+              },
               "disabled": {
                 "value": "{color.sea.sea30}",
                 "type": "color"
