@@ -6,123 +6,58 @@ The Tray is an actionable container that is triggered by click and does not need
 
 > Note that the `size` property only applies when the Tray is positioned at `start` or `end` and defines the width of the Tray.
 
-- ```js
-  const FPO = lorem.paragraph()
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        open: false
-      }
-    }
+```js
+---
+type: example
+---
+const FPO = lorem.paragraph()
 
-    hideTray = () => {
-      this.setState({
-        open: false
-      })
-    }
+const Example = () => {
+  const [open, setOpen] = useState(false)
 
-    renderCloseButton() {
-      return (
-        <Flex>
-          <Flex.Item>
-            <CloseButton
-              placement="end"
-              offset="small"
-              screenReaderLabel="Close"
-              onClick={this.hideTray}
-            />
-          </Flex.Item>
-          <Flex.Item shouldGrow shouldShrink>
-            <Heading>Hello</Heading>
-          </Flex.Item>
-        </Flex>
-      )
-    }
-
-    render() {
-      return (
-        <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
-          <Button
-            onClick={() => {
-              this.setState({ open: true })
-            }}
-          >
-            Show the Tray
-          </Button>
-          <Tray
-            label="Tray Example"
-            open={this.state.open}
-            onDismiss={() => {
-              this.setState({ open: false })
-            }}
-            size="small"
-            placement="start"
-          >
-            <View as="div" padding="medium">
-              {this.renderCloseButton()}
-              <Text as="p" lineHeight="double">
-                {FPO}
-              </Text>
-            </View>
-          </Tray>
-        </div>
-      )
-    }
+  const hideTray = () => {
+    setOpen(false)
   }
 
-  render(<Example />)
-  ```
+  const renderCloseButton = () => (
+    <Flex>
+      <Flex.Item>
+        <CloseButton
+          placement="end"
+          offset="small"
+          screenReaderLabel="Close"
+          onClick={hideTray}
+        />
+      </Flex.Item>
+      <Flex.Item shouldGrow shouldShrink>
+        <Heading>Hello</Heading>
+      </Flex.Item>
+    </Flex>
+  )
 
-- ```js
-  const FPO = lorem.paragraph()
+  return (
+    <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
+      <Button onClick={() => setOpen(true)}>Show the Tray</Button>
+      <Tray
+        label="Tray Example"
+        open={open}
+        onDismiss={() => setOpen(false)}
+        size="small"
+        placement="start"
+      >
+        <View as="div" padding="medium">
+          {renderCloseButton()}
+          <Text as="p" lineHeight="double">
+            {FPO}
+          </Text>
+        </View>
+      </Tray>
+    </div>
+  )
+}
 
-  const Example = () => {
-    const [open, setOpen] = useState(false)
-
-    const hideTray = () => {
-      setOpen(false)
-    }
-
-    const renderCloseButton = () => (
-      <Flex>
-        <Flex.Item>
-          <CloseButton
-            placement="end"
-            offset="small"
-            screenReaderLabel="Close"
-            onClick={hideTray}
-          />
-        </Flex.Item>
-        <Flex.Item shouldGrow shouldShrink>
-          <Heading>Hello</Heading>
-        </Flex.Item>
-      </Flex>
-    )
-
-    return (
-      <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
-        <Button onClick={() => setOpen(true)}>Show the Tray</Button>
-        <Tray
-          label="Tray Example"
-          open={open}
-          onDismiss={() => setOpen(false)}
-          size="small"
-          placement="start"
-        >
-          <View as="div" padding="medium">
-            {renderCloseButton()}
-            <Text as="p" lineHeight="double">
-              {FPO}
-            </Text>
-          </View>
-        </Tray>
-      </div>
-    )
-  }
-
-  render(<Example />)
-  ```
+render(<Example />)
+```
 
 ### Guidelines
 

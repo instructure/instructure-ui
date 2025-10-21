@@ -131,256 +131,130 @@ type: example
 
 Default is `top end`. **Note that standalone badges can't be placed.**
 
-- ```js
-  class EditButton extends React.Component {
-    render() {
-      return (
-        <IconButton
-          renderIcon={IconUserSolid}
-          screenReaderLabel="Edit page"
-          withBorder={false}
-          withBackground={false}
-        />
-      )
-    }
-  }
+```js
+---
+type: example
+---
+const EditButton = () => (
+  <IconButton
+    renderIcon={IconUserSolid}
+    screenReaderLabel="Edit page"
+    withBorder={false}
+    withBackground={false}
+  />
+)
 
-  class Example extends React.Component {
-    render() {
-      return (
-        <div>
-          <View as="div" margin="0 0 medium">
-            <Badge count={21} margin="0 large 0 0" placement="top start">
-              <EditButton />
-            </Badge>
-            <Badge count={21} margin="0 large 0 0">
-              <EditButton />
-            </Badge>
-            <Badge count={21} margin="0 large 0 0" placement="bottom start">
-              <EditButton />
-            </Badge>
-            <Badge count={21} margin="0 large 0 0" placement="bottom end">
-              <EditButton />
-            </Badge>
-            <Badge count={21} margin="0 large 0 0" placement="start center">
-              <EditButton />
-            </Badge>
-            <Badge count={21} placement="end center">
-              <EditButton />
-            </Badge>
-          </View>
-          <View as="div">
-            <Badge
-              type="notification"
-              margin="0 large 0 0"
-              placement="top start"
-              formatOutput={function () {
-                return (
-                  <ScreenReaderContent>
-                    Updates are available for your account
-                  </ScreenReaderContent>
-                )
-              }}
-            >
-              <EditButton />
-            </Badge>
-            <Badge
-              type="notification"
-              margin="0 large 0 0"
-              formatOutput={function () {
-                return (
-                  <ScreenReaderContent>
-                    Updates are available for your account
-                  </ScreenReaderContent>
-                )
-              }}
-            >
-              <EditButton />
-            </Badge>
-            <Badge
-              type="notification"
-              margin="0 large 0 0"
-              placement="bottom start"
-              formatOutput={function () {
-                return (
-                  <ScreenReaderContent>
-                    Updates are available for your account
-                  </ScreenReaderContent>
-                )
-              }}
-            >
-              <EditButton />
-            </Badge>
-            <Badge
-              type="notification"
-              margin="0 large 0 0"
-              placement="bottom end"
-              formatOutput={function () {
-                return (
-                  <ScreenReaderContent>
-                    Updates are available for your account
-                  </ScreenReaderContent>
-                )
-              }}
-            >
-              <EditButton />
-            </Badge>
-            <Badge
-              type="notification"
-              margin="0 large 0 0"
-              placement="start center"
-              formatOutput={function () {
-                return (
-                  <ScreenReaderContent>
-                    Updates are available for your account
-                  </ScreenReaderContent>
-                )
-              }}
-            >
-              <EditButton />
-            </Badge>
-            <Badge
-              type="notification"
-              placement="end center"
-              formatOutput={function () {
-                return (
-                  <ScreenReaderContent>
-                    Updates are available for your account
-                  </ScreenReaderContent>
-                )
-              }}
-            >
-              <EditButton />
-            </Badge>
-          </View>
-        </div>
-      )
-    }
-  }
-  render(<Example />)
-  ```
+const Example = () => (
+  <div>
+    <View as="div" margin="0 0 medium">
+      <Badge count={21} margin="0 large 0 0" placement="top start">
+        <EditButton />
+      </Badge>
+      <Badge count={21} margin="0 large 0 0">
+        <EditButton />
+      </Badge>
+      <Badge count={21} margin="0 large 0 0" placement="bottom start">
+        <EditButton />
+      </Badge>
+      <Badge count={21} margin="0 large 0 0" placement="bottom end">
+        <EditButton />
+      </Badge>
+      <Badge count={21} margin="0 large 0 0" placement="start center">
+        <EditButton />
+      </Badge>
+      <Badge count={21} placement="end center">
+        <EditButton />
+      </Badge>
+    </View>
+    <View as="div">
+      <Badge
+        type="notification"
+        margin="0 large 0 0"
+        placement="top start"
+        formatOutput={function () {
+          return (
+            <ScreenReaderContent>
+              Updates are available for your account
+            </ScreenReaderContent>
+          )
+        }}
+      >
+        <EditButton />
+      </Badge>
+      <Badge
+        type="notification"
+        margin="0 large 0 0"
+        formatOutput={function () {
+          return (
+            <ScreenReaderContent>
+              Updates are available for your account
+            </ScreenReaderContent>
+          )
+        }}
+      >
+        <EditButton />
+      </Badge>
+      <Badge
+        type="notification"
+        margin="0 large 0 0"
+        placement="bottom start"
+        formatOutput={function () {
+          return (
+            <ScreenReaderContent>
+              Updates are available for your account
+            </ScreenReaderContent>
+          )
+        }}
+      >
+        <EditButton />
+      </Badge>
+      <Badge
+        type="notification"
+        margin="0 large 0 0"
+        placement="bottom end"
+        formatOutput={function () {
+          return (
+            <ScreenReaderContent>
+              Updates are available for your account
+            </ScreenReaderContent>
+          )
+        }}
+      >
+        <EditButton />
+      </Badge>
+      <Badge
+        type="notification"
+        margin="0 large 0 0"
+        placement="start center"
+        formatOutput={function () {
+          return (
+            <ScreenReaderContent>
+              Updates are available for your account
+            </ScreenReaderContent>
+          )
+        }}
+      >
+        <EditButton />
+      </Badge>
+      <Badge
+        type="notification"
+        placement="end center"
+        formatOutput={function () {
+          return (
+            <ScreenReaderContent>
+              Updates are available for your account
+            </ScreenReaderContent>
+          )
+        }}
+      >
+        <EditButton />
+      </Badge>
+    </View>
+  </div>
+)
 
-- ```js
-  const EditButton = () => (
-    <IconButton
-      renderIcon={IconUserSolid}
-      screenReaderLabel="Edit page"
-      withBorder={false}
-      withBackground={false}
-    />
-  )
-
-  const Example = () => (
-    <div>
-      <View as="div" margin="0 0 medium">
-        <Badge count={21} margin="0 large 0 0" placement="top start">
-          <EditButton />
-        </Badge>
-        <Badge count={21} margin="0 large 0 0">
-          <EditButton />
-        </Badge>
-        <Badge count={21} margin="0 large 0 0" placement="bottom start">
-          <EditButton />
-        </Badge>
-        <Badge count={21} margin="0 large 0 0" placement="bottom end">
-          <EditButton />
-        </Badge>
-        <Badge count={21} margin="0 large 0 0" placement="start center">
-          <EditButton />
-        </Badge>
-        <Badge count={21} placement="end center">
-          <EditButton />
-        </Badge>
-      </View>
-      <View as="div">
-        <Badge
-          type="notification"
-          margin="0 large 0 0"
-          placement="top start"
-          formatOutput={function () {
-            return (
-              <ScreenReaderContent>
-                Updates are available for your account
-              </ScreenReaderContent>
-            )
-          }}
-        >
-          <EditButton />
-        </Badge>
-        <Badge
-          type="notification"
-          margin="0 large 0 0"
-          formatOutput={function () {
-            return (
-              <ScreenReaderContent>
-                Updates are available for your account
-              </ScreenReaderContent>
-            )
-          }}
-        >
-          <EditButton />
-        </Badge>
-        <Badge
-          type="notification"
-          margin="0 large 0 0"
-          placement="bottom start"
-          formatOutput={function () {
-            return (
-              <ScreenReaderContent>
-                Updates are available for your account
-              </ScreenReaderContent>
-            )
-          }}
-        >
-          <EditButton />
-        </Badge>
-        <Badge
-          type="notification"
-          margin="0 large 0 0"
-          placement="bottom end"
-          formatOutput={function () {
-            return (
-              <ScreenReaderContent>
-                Updates are available for your account
-              </ScreenReaderContent>
-            )
-          }}
-        >
-          <EditButton />
-        </Badge>
-        <Badge
-          type="notification"
-          margin="0 large 0 0"
-          placement="start center"
-          formatOutput={function () {
-            return (
-              <ScreenReaderContent>
-                Updates are available for your account
-              </ScreenReaderContent>
-            )
-          }}
-        >
-          <EditButton />
-        </Badge>
-        <Badge
-          type="notification"
-          placement="end center"
-          formatOutput={function () {
-            return (
-              <ScreenReaderContent>
-                Updates are available for your account
-              </ScreenReaderContent>
-            )
-          }}
-        >
-          <EditButton />
-        </Badge>
-      </View>
-    </div>
-  )
-
-  render(<Example />)
-  ```
+render(<Example />)
+```
 
 ### Guidelines
 

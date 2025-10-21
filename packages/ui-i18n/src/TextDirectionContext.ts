@@ -35,7 +35,7 @@ import { getTextDirection } from './getTextDirection'
  * this is not given then `ltr`. For more info on the values see
  * [mdn](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir).
  * If its set to `ltr` or `rtl` then some InstUI components (e.g.
- * [DrawerLayout](#DrawerLayout) will automatically orient based on its value.
+ * [DrawerLayout](DrawerLayout) will automatically orient based on its value.
  *
  * @module TextDirectionContext
  */

@@ -9,7 +9,7 @@ parsing, localization, etc.) should be handled by a wrapper component.
 
 ### Components
 
-- [NumberInput](#NumberInput)
+- [NumberInput](NumberInput)
 
 ### Installation
 

@@ -10,7 +10,7 @@ A component for displaying a hierarchical view of information.
 
 The `ui-tree-browser` package contains the following:
 
-- [TreeBrowser](#TreeBrowser)
+- [TreeBrowser](TreeBrowser)
 
 ### Installation
 

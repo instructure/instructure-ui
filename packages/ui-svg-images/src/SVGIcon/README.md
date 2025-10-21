@@ -9,7 +9,7 @@ loader like [svg-inline-loader](https://github.com/webpack-contrib/svg-inline-lo
 the SVG source into your react component.
 
 The SVGIcon component will add title and description elements for you if you set the `title`
-and `description` props. See the [InlineSVG](#InlineSVG) component for more props and
+and `description` props. See the [InlineSVG](InlineSVG) component for more props and
 examples.
 
 _A11y note:_ By default the role is set to `presentation`. However, when the `title` prop is set, the `role`
@@ -62,7 +62,7 @@ type: example
 ### Changing icon color
 
 By default SVGIcon inherits the color of its parent element. However,
-[InlineSVG](#InlineSVG), the child component of SVGIcon, supports setting
+[InlineSVG](InlineSVG), the child component of SVGIcon, supports setting
 the icon to one of the theme colors via the `color` property.
 
 > Setting `color` to `auto` will make SVGIcon not set

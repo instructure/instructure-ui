@@ -23,7 +23,7 @@ type: example
 <IconButton color="primary" screenReaderLabel="Add blog post"><IconAddLine /></IconButton>
 ```
 
-Using [Tooltip](#Tooltip) in conjunction with IconButton can also provide necessary context when the IconButton alone would be insufficient.
+Using [Tooltip](Tooltip) in conjunction with IconButton can also provide necessary context when the IconButton alone would be insufficient.
 
 ```js
 ---
@@ -88,4 +88,4 @@ type: example
 
 ### Styling
 
-For an example see [Button](#Button/#Styling%20buttons)
+For an example see [Button](Button/#Styling%20buttons)

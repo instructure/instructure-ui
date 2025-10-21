@@ -20,79 +20,46 @@ type: example
 
 ToggleDetails can be controlled:
 
-- ```js
-  class Example extends React.Component {
-    state = {
-      expanded: true
-    }
+```js
+---
+type: example
+---
+const Example = () => {
+  const [expanded, setExpanded] = useState(true)
 
-    handleChange = (event, expanded) => this.setState({ expanded })
+  const handleChange = (event, expanded) => {
+    setExpanded(expanded)
+  }
 
-    handleToggle = () => this.setState({ expanded: !this.state.expanded })
+  const handleToggle = () => {
+    setExpanded((prevExpanded) => !prevExpanded)
+  }
 
-    render() {
-      return (
-        <div>
-          <Button onClick={this.handleToggle}>
-            <div aria-live="polite">
-              This Button {this.state.expanded ? 'Collapses' : 'Expands'}
-            </div>
-          </Button>
-          <br />
-          <br />
-          <ToggleDetails
-            summary="Click to hide me!"
-            expanded={this.state.expanded}
-            onToggle={this.handleChange}
-          >
-            <Text weight="bold">I am controlled and expanded!</Text>{' '}
-            {lorem.paragraph()}
-          </ToggleDetails>
+  return (
+    <div>
+      <Button onClick={handleToggle}>
+        <div aria-live="polite">
+          This Button {expanded ? 'Collapses' : 'Expands'}
         </div>
-      )
-    }
-  }
+      </Button>
+      <br />
+      <br />
+      <ToggleDetails
+        summary="Click to hide me!"
+        expanded={expanded}
+        onToggle={handleChange}
+      >
+        <Text weight="bold">I am controlled and expanded!</Text>
+        {lorem.paragraph()}
+      </ToggleDetails>
+    </div>
+  )
+}
 
-  render(<Example />)
-  ```
+render(<Example />)
+```
 
-- ```js
-  const Example = () => {
-    const [expanded, setExpanded] = useState(true)
-
-    const handleChange = (event, expanded) => {
-      setExpanded(expanded)
-    }
-
-    const handleToggle = () => {
-      setExpanded((prevExpanded) => !prevExpanded)
-    }
-
-    return (
-      <div>
-        <Button onClick={handleToggle}>
-          <div aria-live="polite">
-            This Button {expanded ? 'Collapses' : 'Expands'}
-          </div>
-        </Button>
-        <br />
-        <br />
-        <ToggleDetails
-          summary="Click to hide me!"
-          expanded={expanded}
-          onToggle={handleChange}
-        >
-          <Text weight="bold">I am controlled and expanded!</Text>
-          {lorem.paragraph()}
-        </ToggleDetails>
-      </div>
-    )
-  }
-
-  render(<Example />)
-  ```
-
-Setting ToggleDetails to `filled` will make the toggle use a full-width [Button](#Button) component.
+Setting ToggleDetails to `filled` will make the toggle use a full-width [Button](Button) component.
 
 ```js
 ---
@@ -112,7 +79,7 @@ Icon size can be adjusted using the `size` prop with small, medium, and large op
 
 The `summary` prop accepts any node, allowing you to format the summary text as
 you see fit. In these examples, we are formatting it with the
-[Text](#Text) component.
+[Text](Text) component.
 
 ```js
 ---

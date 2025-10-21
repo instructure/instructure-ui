@@ -40,14 +40,14 @@ type DeterministicIdProviderProps = React.PropsWithChildren<{
 
 /**
  * ---
- * category: components/utilities
+ * category: components/contexts
  * ---
  * WARNING: providing the `instanceCounterMap` prop will result in unexpected behaviour. DO NOT USE IT!
  *
  * DEPRECATED: the `instanceCounterMap` prop is deprecated. You don't need to supply the
  * `instanceCounterMap` to the component. It handles it internally.
  *
- * This is utility component for wrapping components with `DeterministicIdContext.Provider`
+ * This utility component is for wrapping components with `DeterministicIdContext.Provider`
  * See detailed documentation about how to use it: [InstUISettingsProvider](/#InstUISettingsProvider)
  */
 const DeterministicIdContextProvider = ({

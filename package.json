@@ -2,7 +2,7 @@
   "name": "instructure-ui",
   "description": "A design system by Instructure Inc.",
   "private": true,
-  "version": "11.0.0",
+  "version": "11.0.1",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -83,7 +83,6 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^15.13.0",
     "husky": "^9.1.7",
-    "jsdom": "^26.1.0",
     "lerna": "^8.2.4",
     "lint-staged": "^15.2.10",
     "react": "18.3.1",
@@ -92,9 +91,6 @@
     "typescript-eslint": "^8.33.1",
     "vitest": "^3.2.2",
     "webpack": "^5.99.9"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "*"
   },
   "//dependency-comments": {
     "scripts": "The '--' at the end of commands is needed so user parameters are passed forward",

@@ -3,541 +3,298 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
+**Note:** Version bump only for package @instructure/ui-date-input
+
+# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 ### Features
 
-* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
-
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
 
 ### BREAKING CHANGES
 
-* **many:** InstUI v11 contains the following breaking changes:
-- React 16 and 17 are no longer supported
-- remove `PropTypes` from all packages
-- remove `CodeEditor` component
-- remove `@instui/theme-registry` package
-- remove `@testable`, `@experimental`, `@hack` decorators
-- InstUISettingsProvider's `as` prop is removed
-- `canvas.use()`, `canvasHighContrast.use()` functions are removed
-- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
-- `variables` field on theme objects are removed
-- remove deprecated props from Table: Row's `isStacked`, Body's
+- **many:** InstUI v11 contains the following breaking changes:
+
+* React 16 and 17 are no longer supported
+* remove `PropTypes` from all packages
+* remove `CodeEditor` component
+* remove `@instui/theme-registry` package
+* remove `@testable`, `@experimental`, `@hack` decorators
+* InstUISettingsProvider's `as` prop is removed
+* `canvas.use()`, `canvasHighContrast.use()` functions are removed
+* `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+* `variables` field on theme objects are removed
+* remove deprecated props from Table: Row's `isStacked`, Body's
   `isStacked`, `hover`, and `headers`
-- `Table`'s `caption` prop is now required
-- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
-
-
-
-
+* `Table`'s `caption` prop is now required
+* `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
 
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
-
 
 ### Features
 
-* **ui-text-input,ui-date-input:** properly support IconButtons inside TextInputs ([40ca6bb](https://github.com/instructure/instructure-ui/commit/40ca6bbaa9d113a34c2477501b34ba4342a044d6))
-
-
-
-
+- **ui-text-input,ui-date-input:** properly support IconButtons inside TextInputs ([40ca6bb](https://github.com/instructure/instructure-ui/commit/40ca6bbaa9d113a34c2477501b34ba4342a044d6))
 
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
-
 
 ### Bug Fixes
 
-* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
-
-
-
-
+- **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
 
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
-
 
 ### Bug Fixes
 
-* **ui-date-input:** make DateInput2 date parsing work in every locale and timezone ([7d2ed73](https://github.com/instructure/instructure-ui/commit/7d2ed732a4b8608b6fc29996e416b51ac25faf0c))
-
-
-
-
+- **ui-date-input:** make DateInput2 date parsing work in every locale and timezone ([7d2ed73](https://github.com/instructure/instructure-ui/commit/7d2ed732a4b8608b6fc29996e416b51ac25faf0c))
 
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
-
 
 ### Bug Fixes
 
-* **ui-date-input:** correctly format the DateInput2 placeholder in every timezone ([f8229df](https://github.com/instructure/instructure-ui/commit/f8229df71ae6ad67fc089f7e1ff143842d7a0979))
-
-
-
-
+- **ui-date-input:** correctly format the DateInput2 placeholder in every timezone ([f8229df](https://github.com/instructure/instructure-ui/commit/f8229df71ae6ad67fc089f7e1ff143842d7a0979))
 
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
 
-
 ### Bug Fixes
 
-* **ui-date-input,ui-avatar:** add ref support to functional components ([6a6ba49](https://github.com/instructure/instructure-ui/commit/6a6ba493634a22a515d59b5acbecbc2d93084e0f))
-
-
-
-
+- **ui-date-input,ui-avatar:** add ref support to functional components ([6a6ba49](https://github.com/instructure/instructure-ui/commit/6a6ba493634a22a515d59b5acbecbc2d93084e0f))
 
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
-
 
 ### Bug Fixes
 
-* **many:** fix form label not read by NVDA in hover mode and other layout issues ([ef77281](https://github.com/instructure/instructure-ui/commit/ef77281890511e8eea794196445d3ef2454537ba))
-
+- **many:** fix form label not read by NVDA in hover mode and other layout issues ([ef77281](https://github.com/instructure/instructure-ui/commit/ef77281890511e8eea794196445d3ef2454537ba))
 
 ### Features
 
-* **ui-date-input:** add feature to disable dates and access the input's ref ([411219e](https://github.com/instructure/instructure-ui/commit/411219e4347c75ed2ffeda320b33c591ffc05329))
-
-
-
-
+- **ui-date-input:** add feature to disable dates and access the input's ref ([411219e](https://github.com/instructure/instructure-ui/commit/411219e4347c75ed2ffeda320b33c591ffc05329))
 
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
-
 ### Features
 
-* **many:** introduce new spacing tokens; add margin prop for more components ([048c902](https://github.com/instructure/instructure-ui/commit/048c902406c00611cd117fb2fb8164a6eba62fb8))
-
-
-
-
+- **many:** introduce new spacing tokens; add margin prop for more components ([048c902](https://github.com/instructure/instructure-ui/commit/048c902406c00611cd117fb2fb8164a6eba62fb8))
 
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
-
 
 ### Features
 
-* **ui-date-input:** add support for custom calendar icon ([a0fff9d](https://github.com/instructure/instructure-ui/commit/a0fff9dc8ab96c45f1cb9bf2d4a49d8ba03b7b2b))
-
-
-
-
+- **ui-date-input:** add support for custom calendar icon ([a0fff9d](https://github.com/instructure/instructure-ui/commit/a0fff9dc8ab96c45f1cb9bf2d4a49d8ba03b7b2b))
 
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
-
 
 ### Bug Fixes
 
-* **ui-date-input:** fix DateInput2 not working with NVDA ([34fb8e0](https://github.com/instructure/instructure-ui/commit/34fb8e0d0882d7b45580533ed4218b5b306f6075))
-
-
-
-
+- **ui-date-input:** fix DateInput2 not working with NVDA ([34fb8e0](https://github.com/instructure/instructure-ui/commit/34fb8e0d0882d7b45580533ed4218b5b306f6075))
 
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
-
 
 ### Bug Fixes
 
-* **ui-date-input:** fix DateInput2 to update messages properly ([553a235](https://github.com/instructure/instructure-ui/commit/553a2351fc7f8c6d012d4001ff49c2450d29ee97))
-
+- **ui-date-input:** fix DateInput2 to update messages properly ([553a235](https://github.com/instructure/instructure-ui/commit/553a2351fc7f8c6d012d4001ff49c2450d29ee97))
 
 ### Features
 
-* **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
-
-
-
-
+- **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
 
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
-
 ### Bug Fixes
 
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
-
 ### Bug Fixes
 
-* **ui-calendar:** fix duplicate dates for certain timezones ([f9181aa](https://github.com/instructure/instructure-ui/commit/f9181aa88c35eba1e374240505d32bf618c46b04))
-* **ui-date-input:** fix messages prop sometimes not populating in DateInput2 ([28d2601](https://github.com/instructure/instructure-ui/commit/28d2601f55ec418e32316b77604ec15d6368d23c))
-
-
-
-
+- **ui-calendar:** fix duplicate dates for certain timezones ([f9181aa](https://github.com/instructure/instructure-ui/commit/f9181aa88c35eba1e374240505d32bf618c46b04))
+- **ui-date-input:** fix messages prop sometimes not populating in DateInput2 ([28d2601](https://github.com/instructure/instructure-ui/commit/28d2601f55ec418e32316b77604ec15d6368d23c))
 
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
-
 ### Features
 
-* **ui-calendar,ui-date-input:** update DateInput2 api, add placeholder hint ([ee9dfab](https://github.com/instructure/instructure-ui/commit/ee9dfab8cb5cff76d829bd24163d2052a7da46a9))
-
-
-
-
+- **ui-calendar,ui-date-input:** update DateInput2 api, add placeholder hint ([ee9dfab](https://github.com/instructure/instructure-ui/commit/ee9dfab8cb5cff76d829bd24163d2052a7da46a9))
 
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
-
 
 ### Features
 
-* **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
-
-
-
-
+- **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
 
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
-
 ### Features
 
-* **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
-
-
-
-
+- **ui-date-input,ui-text-input:** add custom validation function and fix small layout issue ([77218be](https://github.com/instructure/instructure-ui/commit/77218be635611c1c674cc6c85d4dceaa76509117))
 
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
-
 ### Features
 
-* **ui,ui-date-input:** add new DateInput2 component ([9c893fc](https://github.com/instructure/instructure-ui/commit/9c893fc6ac1ae5ef4648f573b648cad78997ac86))
-
-
-
-
+- **ui,ui-date-input:** add new DateInput2 component ([9c893fc](https://github.com/instructure/instructure-ui/commit/9c893fc6ac1ae5ef4648f573b648cad78997ac86))
 
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-date-input
 
-
-
-
-
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
 **Note:** Version bump only for package @instructure/ui-date-input
-
-
-
-
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

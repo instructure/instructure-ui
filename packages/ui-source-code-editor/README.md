@@ -10,7 +10,7 @@ A code editor component.
 
 The `ui-source-code-editor` package contains the following:
 
-- [SourceCodeEditor](#SourceCodeEditor)
+- [SourceCodeEditor](SourceCodeEditor)
 
 ### Installation
 

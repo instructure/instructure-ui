@@ -61,7 +61,7 @@ type InstUIProviderProps = {
 
 /**
  * ---
- * category: components/utilities
+ * category: components
  * ---
  * @module InstUISettingsProvider
  */

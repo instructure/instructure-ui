@@ -8,7 +8,7 @@ order: 4
 
 ### Component Properties
 
-- All components should pass through additional props down to the root DOM element using the `passthroughProps` utility. (e.g. `<div {...passthroughProps(this.props)}>`). Note that in addition to allowing only valid DOM node attributes, `passthroughProps` will remove the `className` and `style` props to prevent unexpected style issues. These need to be set explicitly and used with caution. It also removes the `styles` and `makesStyles` properties added by the [withStyle](#withStyle) decorator.
+- All components should pass through additional props down to the root DOM element using the `passthroughProps` utility. (e.g. `<div {...passthroughProps(this.props)}>`). Note that in addition to allowing only valid DOM node attributes, `passthroughProps` will remove the `className` and `style` props to prevent unexpected style issues. These need to be set explicitly and used with caution. It also removes the `styles` and `makesStyles` properties added by the [withStyle](withStyle) decorator.
 - Avoid props that could be computed from other props. (e.g. prefer `<Select filter={handleFilter} />` over `<Select shouldFilter filter={handleFilter} />`. Prefer determining whether filtering should happen based on the presence of the `filter` function prop.)
 - Avoid situations where certain prop combinations are not supported. Prefer splitting the component into separate components with fewer props.
 - Set default prop values for non-required props when possible.
@@ -47,7 +47,7 @@ order: 4
 
 - In the `styles.ts`, use the name of the component in camelCase (e.g. `appNav`) as the key of the root element's style object. Use camelCase for the keys of child elements as well (e.g. `list` and `listItem`).
 - All style object names should be semantic (describe the content, not what it looks like).
-- We make use of the `label` property of [Emotion.js](https://emotion.sh/) so that it gets displayed in the generated class name for easy readability and targetability. We use a naming convention based on [BEM naming convention](#http://getbem.com/naming/):
+- We make use of the `label` property of [Emotion.js](https://emotion.sh/) so that it gets displayed in the generated class name for easy readability and targetability. We use a naming convention based on [BEM naming convention](http://getbem.com/naming/):
   - For the root element, add a label with the name of the component in camelCase \
     (e.g. `appNav: { label: 'appNav' }`).
   - For the child elements, use the double underscore separator to indicate the parent-child relation with the `[rootElementName]__[childName}` format \

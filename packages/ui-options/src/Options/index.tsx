@@ -55,7 +55,7 @@ type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
 
 /**
 ---
-category: components
+category: components/utilities
 ---
 **/
 @withDeterministicId()

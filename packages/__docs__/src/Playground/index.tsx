@@ -24,7 +24,6 @@
 
 import { Component } from 'react'
 
-import { Tabs } from '@instructure/ui-tabs'
 import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -71,8 +70,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
       code: props.code,
       fullscreen: false,
       showCode: false,
-      rtl: false,
-      selectedTab: 0
+      rtl: false
     }
   }
 
@@ -103,8 +101,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     }
   }
 
-  multiExample = () => typeof this.props.code !== 'string'
-
   handleCodeToggle = () => {
     this.setState({
       showCode: !this.state.showCode
@@ -124,15 +120,8 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   }
 
   handleChange = (newCode: string) => {
-    let code: string | [string, string] = newCode
-    if (this.multiExample()) {
-      const codeArr = [...this.state.code] as [string, string]
-      codeArr[this.state.selectedTab] = newCode
-      code = codeArr
-    }
-
     this.setState({
-      code
+      code: newCode
     })
   }
 
@@ -144,10 +133,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
 
   renderEditor() {
     const { styles, title, readOnly } = this.props
-    const { selectedTab } = this.state
-    const code = this.multiExample()
-      ? this.state.code[selectedTab]
-      : this.state.code
+    const code = this.state.code
     return (
       <div>
         <div css={styles?.close}>
@@ -162,8 +148,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
         </div>
         <SourceCodeEditor
           label={`${title} Example Code`}
-          defaultValue={code as string}
-          key={selectedTab}
+          defaultValue={code}
           onChange={this.handleChange}
           readOnly={readOnly}
           attachment="bottom"
@@ -212,36 +197,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     )
   }
 
-  renderTabPanel = (themeKey: string, themes: MainDocsData['themes']) => {
-    const { selectedTab, code } = this.state
-
-    return (
-      <Tabs
-        padding="medium"
-        onRequestTabChange={(_event, { index }) => {
-          this.setState({
-            selectedTab: index
-          })
-        }}
-      >
-        <Tabs.Panel
-          id="tabA"
-          renderTitle="Class"
-          isSelected={selectedTab === 0}
-        >
-          {this.renderPreview(code[0], themeKey, themes)}
-        </Tabs.Panel>
-        <Tabs.Panel
-          id="tabB"
-          renderTitle="Function"
-          isSelected={selectedTab === 1}
-        >
-          {this.renderPreview(code[1], themeKey, themes)}
-        </Tabs.Panel>
-      </Tabs>
-    )
-  }
-
   render() {
     const { styles } = this.props
     const { fullscreen } = this.state
@@ -263,19 +218,11 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                     onClick={this.handleMinimize}
                     screenReaderLabel="Close"
                   />
-                  {this.multiExample()
-                    ? this.renderTabPanel(themeKey, themes)
-                    : this.renderPreview(
-                        this.state.code as string,
-                        themeKey,
-                        themes
-                      )}
+                  {this.renderPreview(this.state.code, themeKey, themes)}
                 </Modal.Body>
               </Modal>
-            ) : this.multiExample() ? (
-              this.renderTabPanel(themeKey, themes)
             ) : (
-              this.renderPreview(this.state.code as string, themeKey, themes)
+              this.renderPreview(this.state.code, themeKey, themes)
             )}
 
             {this.state.showCode && this.renderEditor()}
@@ -327,11 +274,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                   {
                     <Flex.Item>
                       <CodeSandboxButton
-                        code={
-                          this.multiExample()
-                            ? this.state.code[this.state.selectedTab]
-                            : (this.state.code as string)
-                        }
+                        code={this.state.code}
                         title={`${this.props.title} Example`}
                         language={this.props.language}
                       />

@@ -8,7 +8,7 @@
 
 The `ui-tabs` package contains the following:
 
-- [Tabs](#Tabs)
+- [Tabs](Tabs)
 
 ### Installation
 

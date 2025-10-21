@@ -161,23 +161,23 @@ type DateInputOwnProps = {
    * portion of the label should be abbreviated (no longer than three characters).
    * Note that screen readers will read this content preceding each date as the
    * `<Calendar />` is navigated. Consider using
-   * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
+   * [AccessibleContent](AccessibleContent) with the `alt` prop containing the
    * full day name for assistive technologies and the children containing the
    * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
    */
   renderWeekdayLabels?: (React.ReactNode | (() => React.ReactNode))[]
   /**
    * A button to render in the calendar navigation header. The recommendation is
-   * to compose it with the [Button](#Button) component, setting the `variant`
+   * to compose it with the [Button](Button) component, setting the `variant`
    * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
-   * [IconArrowOpenEnd](#icons).
+   * [IconArrowOpenEnd](icons).
    */
   renderNextMonthButton?: Renderable
   /**
    * A button to render in the calendar navigation header. The recommendation is
-   * to compose it with the [Button](#Button) component, setting the `variant`
+   * to compose it with the [Button](Button) component, setting the `variant`
    * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
-   * [IconArrowOpenStart](#icons).
+   * [IconArrowOpenStart](icons).
    */
   renderPrevMonthButton?: Renderable
   /**

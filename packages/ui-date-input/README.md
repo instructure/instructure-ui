@@ -10,7 +10,7 @@ A date input component.
 
 The `ui-date-input` package contains the following:
 
-- [DateInput](#DateInput)
+- [DateInput](DateInput)
 
 ### Installation
 
@@ -20,7 +20,7 @@ npm install @instructure/ui-date-input
 
 ### Usage
 
-For detailed usage and documentation, see [DateInput](#DateInput).
+For detailed usage and documentation, see [DateInput](DateInput).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-date-input.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-date-input

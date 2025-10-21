@@ -130,7 +130,7 @@ type: example
 
 ### Ellipsis text overflow
 
-Use [TruncateText](#TruncateText) if you need to constrain your
+Use [TruncateText](TruncateText) if you need to constrain your
 Heading to a single line (or certain number of lines).
 
 ```js

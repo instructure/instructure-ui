@@ -3,548 +3,304 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
+**Note:** Version bump only for package @instructure/ui-select
+
+# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 ### Features
 
-* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
-
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
 
 ### BREAKING CHANGES
 
-* **many:** InstUI v11 contains the following breaking changes:
-- React 16 and 17 are no longer supported
-- remove `PropTypes` from all packages
-- remove `CodeEditor` component
-- remove `@instui/theme-registry` package
-- remove `@testable`, `@experimental`, `@hack` decorators
-- InstUISettingsProvider's `as` prop is removed
-- `canvas.use()`, `canvasHighContrast.use()` functions are removed
-- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
-- `variables` field on theme objects are removed
-- remove deprecated props from Table: Row's `isStacked`, Body's
+- **many:** InstUI v11 contains the following breaking changes:
+
+* React 16 and 17 are no longer supported
+* remove `PropTypes` from all packages
+* remove `CodeEditor` component
+* remove `@instui/theme-registry` package
+* remove `@testable`, `@experimental`, `@hack` decorators
+* InstUISettingsProvider's `as` prop is removed
+* `canvas.use()`, `canvasHighContrast.use()` functions are removed
+* `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+* `variables` field on theme objects are removed
+* remove deprecated props from Table: Row's `isStacked`, Body's
   `isStacked`, `hover`, and `headers`
-- `Table`'s `caption` prop is now required
-- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
-
-
-
-
+* `Table`'s `caption` prop is now required
+* `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
 
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
-
 
 ### Bug Fixes
 
-* **ui-select:** prevent scrolling when last item is hovered in Chrome ([51cd81a](https://github.com/instructure/instructure-ui/commit/51cd81a5360bbbc78d30e7e2489bb0c02b67a470))
-
+- **ui-select:** prevent scrolling when last item is hovered in Chrome ([51cd81a](https://github.com/instructure/instructure-ui/commit/51cd81a5360bbbc78d30e7e2489bb0c02b67a470))
 
 ### Features
 
-* **ui-simple-select,ui-select:** add layout prop to Select and SimpleSelect ([94f0a6f](https://github.com/instructure/instructure-ui/commit/94f0a6f99f9e813fe44e6c3111fdb4e5f3708b76))
-
-
-
-
+- **ui-simple-select,ui-select:** add layout prop to Select and SimpleSelect ([94f0a6f](https://github.com/instructure/instructure-ui/commit/94f0a6f99f9e813fe44e6c3111fdb4e5f3708b76))
 
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
-
 
 ### Bug Fixes
 
-* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
-* **ui-time-select,ui-simple-select,ui-select:** add missing keyboard interactions and fix duplicate SR announcements ([0f7ffa5](https://github.com/instructure/instructure-ui/commit/0f7ffa5b263b0b287ca1c2387e0b902189706cb2))
-
-
-
-
+- **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
+- **ui-time-select,ui-simple-select,ui-select:** add missing keyboard interactions and fix duplicate SR announcements ([0f7ffa5](https://github.com/instructure/instructure-ui/commit/0f7ffa5b263b0b287ca1c2387e0b902189706cb2))
 
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
-
 ### Bug Fixes
 
-* **ui-utils,ui-select:** make screenreader annouce disabled Select as dimmed in Chrome ([c547c31](https://github.com/instructure/instructure-ui/commit/c547c31b65fd15ebde0f588bbd364d12d1b46615))
-
-
-
-
+- **ui-utils,ui-select:** make screenreader annouce disabled Select as dimmed in Chrome ([c547c31](https://github.com/instructure/instructure-ui/commit/c547c31b65fd15ebde0f588bbd364d12d1b46615))
 
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
 
-
 ### Bug Fixes
 
-* **many:** fix "not a valid selector" exception when an option ID contains quotes ([78e0b96](https://github.com/instructure/instructure-ui/commit/78e0b96edf29f3d476ba30b03134f1726bbdd0f4))
-
-
-
-
+- **many:** fix "not a valid selector" exception when an option ID contains quotes ([78e0b96](https://github.com/instructure/instructure-ui/commit/78e0b96edf29f3d476ba30b03134f1726bbdd0f4))
 
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
-
 
 ### Bug Fixes
 
-* **ui-time-select,ui-simple-select,ui-select:** make Select accessible for iOS VoiceOver ([b501a7b](https://github.com/instructure/instructure-ui/commit/b501a7b38bfa491298085a173a49a1baa0a19b29))
-
-
-
-
+- **ui-time-select,ui-simple-select,ui-select:** make Select accessible for iOS VoiceOver ([b501a7b](https://github.com/instructure/instructure-ui/commit/b501a7b38bfa491298085a173a49a1baa0a19b29))
 
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
-
 
 ### Bug Fixes
 
-* **ui-select,ui-form-field:** fix iOS VoiceOver with Select and SimpleSelect announcing 'readonly' and 'textinput' ([d4378e7](https://github.com/instructure/instructure-ui/commit/d4378e757b2a07c86aa89fe84c063c0406741c10))
-
-
-
-
+- **ui-select,ui-form-field:** fix iOS VoiceOver with Select and SimpleSelect announcing 'readonly' and 'textinput' ([d4378e7](https://github.com/instructure/instructure-ui/commit/d4378e757b2a07c86aa89fe84c063c0406741c10))
 
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
-
 
 ### Bug Fixes
 
-* **many:** fix form label not read by NVDA in hover mode and other layout issues ([ef77281](https://github.com/instructure/instructure-ui/commit/ef77281890511e8eea794196445d3ef2454537ba))
-
-
-
-
+- **many:** fix form label not read by NVDA in hover mode and other layout issues ([ef77281](https://github.com/instructure/instructure-ui/commit/ef77281890511e8eea794196445d3ef2454537ba))
 
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
-
 ### Bug Fixes
 
-* **ui-select:** fix select's dropdown border radius ([7427773](https://github.com/instructure/instructure-ui/commit/74277738698fd9014a6cd5e4043f717914bc863d))
-
+- **ui-select:** fix select's dropdown border radius ([7427773](https://github.com/instructure/instructure-ui/commit/74277738698fd9014a6cd5e4043f717914bc863d))
 
 ### Features
 
-* **ui-popover, ui-select:** allow overriding Select's dropdown border ([90d59d3](https://github.com/instructure/instructure-ui/commit/90d59d3c3689c3a1500c37db363fa43c1b8403d7))
-* **ui-select,ui-simple-select:** add support for rendering selected option's before and after content in Select and SimpleSelect input ([87dc52d](https://github.com/instructure/instructure-ui/commit/87dc52dcd2a23acfe50856c05b8ff28c1046f85a))
-
-
-
-
+- **ui-popover, ui-select:** allow overriding Select's dropdown border ([90d59d3](https://github.com/instructure/instructure-ui/commit/90d59d3c3689c3a1500c37db363fa43c1b8403d7))
+- **ui-select,ui-simple-select:** add support for rendering selected option's before and after content in Select and SimpleSelect input ([87dc52d](https://github.com/instructure/instructure-ui/commit/87dc52dcd2a23acfe50856c05b8ff28c1046f85a))
 
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
-
 
 ### Features
 
-* **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
-* **shared-types,ui-options,ui-select:** allow to change font weight of selected option item in Select ([6818928](https://github.com/instructure/instructure-ui/commit/6818928536ad0145516c8d7d25eb8079c84089b6))
-
-
-
-
+- **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
+- **shared-types,ui-options,ui-select:** allow to change font weight of selected option item in Select ([6818928](https://github.com/instructure/instructure-ui/commit/6818928536ad0145516c8d7d25eb8079c84089b6))
 
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
-
 ### Bug Fixes
 
-* **ui-select,ui-text-input:** fix long before elements overflowing in TextInput, Select, SimpleSelect ([ee9cafd](https://github.com/instructure/instructure-ui/commit/ee9cafdd027b9a1caaa0791d1b6dc4f8401c87e7))
-
-
-
-
+- **ui-select,ui-text-input:** fix long before elements overflowing in TextInput, Select, SimpleSelect ([ee9cafd](https://github.com/instructure/instructure-ui/commit/ee9cafdd027b9a1caaa0791d1b6dc4f8401c87e7))
 
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
-
 
 ### Bug Fixes
 
-* **many:** fix regression where form elements without label got misaligned ([139f7f1](https://github.com/instructure/instructure-ui/commit/139f7f130cd7e8372af869a13cfd50cd6a97fd85))
-
-
-
-
+- **many:** fix regression where form elements without label got misaligned ([139f7f1](https://github.com/instructure/instructure-ui/commit/139f7f130cd7e8372af869a13cfd50cd6a97fd85))
 
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
-
 ### Features
 
-* **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
-
-
-
-
+- **many:** add new form field error msg style + add asterisk for required fields ([9b03683](https://github.com/instructure/instructure-ui/commit/9b03683dadeef4c5deae2c60bea10686f143ff5d))
 
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
-
 ### Bug Fixes
 
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
-
 
 ### Features
 
-* **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
-
+- **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
 
 ### BREAKING CHANGES
 
-* **many:** Breaks color overrides in certain cases
-
-
-
-
+- **many:** Breaks color overrides in certain cases
 
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
-
 
 ### Features
 
-* **shared-types,ui-calendar,ui-select:** add yearpicker functionality to calendar ([2c0c6e0](https://github.com/instructure/instructure-ui/commit/2c0c6e081d96fc821c1296df5c4f1fba9a8c162c))
-
-
-
-
+- **shared-types,ui-calendar,ui-select:** add yearpicker functionality to calendar ([2c0c6e0](https://github.com/instructure/instructure-ui/commit/2c0c6e081d96fc821c1296df5c4f1fba9a8c162c))
 
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
-
 
 ### Features
 
-* **ui-select:** expose prop to control auto-scrolling in select component ([7cd4c22](https://github.com/instructure/instructure-ui/commit/7cd4c22c83bff1a55481e359199865b176dd26df))
-
-
-
-
+- **ui-select:** expose prop to control auto-scrolling in select component ([7cd4c22](https://github.com/instructure/instructure-ui/commit/7cd4c22c83bff1a55481e359199865b176dd26df))
 
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-select
 
-
-
-
-
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
 **Note:** Version bump only for package @instructure/ui-select
-
-
-
-
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

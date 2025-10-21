@@ -11,149 +11,78 @@ The `Menu` component is a special type of Popover that is meant to be used as a 
 - Menu uses Popover internally and provides additional semantic markup and focus behavior.
 
 Passing a node to the `trigger` prop will render a toggle button which, when clicked, shows or hides
-the [Menu](#Menu) in a [Popover](#Popover).
+the [Menu](Menu) in a [Popover](Popover).
 
 Note: `<Menu/>` cannot contain content that is not a `<Menu.Item/>` (links or buttons). If
-you need to include more complex content, take a look at [Popover](#Popover).
+you need to include more complex content, take a look at [Popover](Popover).
 
-- ```js
-  class Example extends React.Component {
-    constructor(props) {
-      super(props)
+```js
+---
+type: example
+---
+const Example = () => {
+  const [singleSelection, setSingleSelection] = useState(['itemOne'])
+  const [multipleSelection, setMultipleSelection] = useState([
+    'optionOne',
+    'optionThree'
+  ])
 
-      this.state = {
-        singleSelection: ['itemOne'],
-        multipleSelection: ['optionOne', 'optionThree']
-      }
-    }
-
-    handleSingleSelect = (e, newSelected) => {
-      this.setState({
-        singleSelection: newSelected
-      })
-    }
-
-    handleMultipleSelect = (e, newSelected) => {
-      this.setState({
-        multipleSelection: newSelected
-      })
-    }
-
-    render() {
-      return (
-        <View padding="medium" textAlign="center">
-          <Menu
-            placement="bottom"
-            trigger={<Button>Menu</Button>}
-            mountNode={() => document.getElementById('main')}
-          >
-            <Menu.Item value="mastery">Learning Mastery</Menu.Item>
-            <Menu.Item
-              href="https://instructure.github.io/instructure-ui/"
-              target="_blank"
-            >
-              Default (Grid view)
-            </Menu.Item>
-            <Menu.Item disabled>Individual (List view)</Menu.Item>
-            <Menu label="More Options">
-              <Menu.Group
-                allowMultiple
-                label="Select Many"
-                selected={this.state.multipleSelection}
-                onSelect={this.handleMultipleSelect}
-              >
-                <Menu.Item value="optionOne">Option 1</Menu.Item>
-                <Menu.Item value="optionTwo">Option 2</Menu.Item>
-                <Menu.Item value="optionThree">Option 3</Menu.Item>
-              </Menu.Group>
-              <Menu.Separator />
-              <Menu.Item value="navigation">Navigation</Menu.Item>
-              <Menu.Item value="set">Set as default</Menu.Item>
-            </Menu>
-            <Menu.Separator />
-            <Menu.Group
-              label="Select One"
-              selected={this.state.singleSelection}
-              onSelect={this.handleSingleSelect}
-            >
-              <Menu.Item value="itemOne">Item 1</Menu.Item>
-              <Menu.Item value="itemTwo">Item 2</Menu.Item>
-            </Menu.Group>
-            <Menu.Separator />
-            <Menu.Item value="baz">Open grading history...</Menu.Item>
-          </Menu>
-        </View>
-      )
-    }
+  const handleSingleSelect = (e, newSelected) => {
+    setSingleSelection(newSelected)
   }
 
-  render(<Example />)
-  ```
+  const handleMultipleSelect = (e, newSelected) => {
+    setMultipleSelection(newSelected)
+  }
 
-- ```js
-  const Example = () => {
-    const [singleSelection, setSingleSelection] = useState(['itemOne'])
-    const [multipleSelection, setMultipleSelection] = useState([
-      'optionOne',
-      'optionThree'
-    ])
-
-    const handleSingleSelect = (e, newSelected) => {
-      setSingleSelection(newSelected)
-    }
-
-    const handleMultipleSelect = (e, newSelected) => {
-      setMultipleSelection(newSelected)
-    }
-
-    return (
-      <View padding="medium" textAlign="center">
-        <Menu
-          placement="bottom"
-          trigger={<Button>Menu</Button>}
-          mountNode={() => document.getElementById('main')}
+  return (
+    <View padding="medium" textAlign="center">
+      <Menu
+        placement="bottom"
+        trigger={<Button>Menu</Button>}
+        mountNode={() => document.getElementById('main')}
+      >
+        <Menu.Item value="mastery">Learning Mastery</Menu.Item>
+        <Menu.Item
+          href="https://instructure.github.io/instructure-ui/"
+          target="_blank"
         >
-          <Menu.Item value="mastery">Learning Mastery</Menu.Item>
-          <Menu.Item
-            href="https://instructure.github.io/instructure-ui/"
-            target="_blank"
-          >
-            Default (Grid view)
-          </Menu.Item>
-          <Menu.Item disabled>Individual (List view)</Menu.Item>
-          <Menu label="More Options">
-            <Menu.Group
-              allowMultiple
-              label="Select Many"
-              selected={multipleSelection}
-              onSelect={handleMultipleSelect}
-            >
-              <Menu.Item value="optionOne">Option 1</Menu.Item>
-              <Menu.Item value="optionTwo">Option 2</Menu.Item>
-              <Menu.Item value="optionThree">Option 3</Menu.Item>
-            </Menu.Group>
-            <Menu.Separator />
-            <Menu.Item value="navigation">Navigation</Menu.Item>
-            <Menu.Item value="set">Set as default</Menu.Item>
-          </Menu>
-          <Menu.Separator />
+          Default (Grid view)
+        </Menu.Item>
+        <Menu.Item disabled>Individual (List view)</Menu.Item>
+        <Menu label="More Options">
           <Menu.Group
-            label="Select One"
-            selected={singleSelection}
-            onSelect={handleSingleSelect}
+            allowMultiple
+            label="Select Many"
+            selected={multipleSelection}
+            onSelect={handleMultipleSelect}
           >
-            <Menu.Item value="itemOne">Item 1</Menu.Item>
-            <Menu.Item value="itemTwo">Item 2</Menu.Item>
+            <Menu.Item value="optionOne">Option 1</Menu.Item>
+            <Menu.Item value="optionTwo">Option 2</Menu.Item>
+            <Menu.Item value="optionThree">Option 3</Menu.Item>
           </Menu.Group>
           <Menu.Separator />
-          <Menu.Item value="baz">Open grading history...</Menu.Item>
+          <Menu.Item value="navigation">Navigation</Menu.Item>
+          <Menu.Item value="set">Set as default</Menu.Item>
         </Menu>
-      </View>
-    )
-  }
+        <Menu.Separator />
+        <Menu.Group
+          label="Select One"
+          selected={singleSelection}
+          onSelect={handleSingleSelect}
+        >
+          <Menu.Item value="itemOne">Item 1</Menu.Item>
+          <Menu.Item value="itemTwo">Item 2</Menu.Item>
+        </Menu.Group>
+        <Menu.Separator />
+        <Menu.Item value="baz">Open grading history...</Menu.Item>
+      </Menu>
+    </View>
+  )
+}
 
-  render(<Example />)
-  ```
+render(<Example />)
+```
 
 ### Guidelines
 

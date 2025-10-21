@@ -4,6 +4,12 @@ category: Contributor Guides
 order: 8
 ---
 
+## AI Coding Assistant Setup
+
+### Using Claude Code
+
+For comprehensive guidance on using Claude Code with this repository, see [CLAUDE.md](https://github.com/instructure/instructure-ui/blob/master/CLAUDE.md) in the repository root.
+
 ## Generating AI agent friendly markdown files for components and guides
 
 InstUI's JSON metadata is used to create a markdown version of the documentation for easier use by AI tools and coding assistants.

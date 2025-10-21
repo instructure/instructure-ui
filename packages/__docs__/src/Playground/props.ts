@@ -27,7 +27,7 @@ import type { Border, Typography } from '@instructure/shared-types'
 
 type PlaygroundOwnProps = {
   title: string
-  code: string | [string, string]
+  code: string
   language: string
   readOnly?: boolean
 }
@@ -48,12 +48,11 @@ type PlaygroundTheme = {
 const allowedProps: AllowedPropKeys = ['code', 'language', 'readOnly', 'title']
 
 export type PlaygroundState = {
-  defaultCode: string | [string, string]
-  code: string | [string, string]
+  defaultCode: string
+  code: string
   fullscreen: boolean
   showCode: boolean
   rtl: boolean
-  selectedTab: number
 }
 export type { PlaygroundProps, PlaygroundStyle, PlaygroundTheme }
 export { allowedProps }

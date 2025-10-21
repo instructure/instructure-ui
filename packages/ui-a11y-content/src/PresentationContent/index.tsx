@@ -31,7 +31,7 @@ import type { PresentationContentProps } from './props'
 
 /**
 ---
-category: components/utilities
+category: utilities/a11y
 ---
 @module PresentationContent
 **/

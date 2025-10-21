@@ -12,188 +12,92 @@ that contains the truncated items. The example below shows how you can use both 
 these props to create a hamburger menu when the number of visible nav items is less
 than two.
 
-- ```js
-  const totalItemsCount = 5
+```js
+---
+type: example
+---
+const totalItemsCount = 5
 
-  class AppNavExample extends React.Component {
-    constructor(props) {
-      super(props)
+const AppNavExample = () => {
+  const [visibleItemsCount, setVisibleItemsCount] = useState(totalItemsCount)
 
-      this.state = {
-        visibleItemsCount: totalItemsCount
+  const handleUpdate = ({ visibleItemsCount }) => {
+    setVisibleItemsCount(visibleItemsCount)
+  }
+
+  return (
+    <AppNav
+      screenReaderLabel="App navigation"
+      visibleItemsCount={visibleItemsCount >= 2 ? visibleItemsCount : 0}
+      onUpdate={handleUpdate}
+      renderBeforeItems={
+        <AppNav.Item
+          renderLabel={<ScreenReaderContent>Instructure</ScreenReaderContent>}
+          renderIcon={
+            <IconCommonsLine inline={false} size="medium" color="primary" />
+          }
+          href="http://instructure.com"
+        />
       }
-    }
-
-    handleUpdate = ({ visibleItemsCount }) => {
-      this.setState({ visibleItemsCount })
-    }
-
-    render() {
-      const visibleItemsCount = this.state.visibleItemsCount
-
-      return (
-        <AppNav
-          screenReaderLabel="App navigation"
-          visibleItemsCount={visibleItemsCount >= 2 ? visibleItemsCount : 0}
-          onUpdate={this.handleUpdate}
-          renderBeforeItems={
-            <AppNav.Item
-              renderLabel={
-                <ScreenReaderContent>Instructure</ScreenReaderContent>
-              }
-              renderIcon={
-                <IconCommonsLine inline={false} size="medium" color="primary" />
-              }
-              href="http://instructure.com"
-            />
-          }
-          renderAfterItems={
-            <IconButton
-              onClick={() => console.log('Add')}
-              renderIcon={IconPlusSolid}
-              margin="0 0 0 x-small"
-              screenReaderLabel="Add something"
-              withBorder={false}
-              withBackground={false}
-            />
-          }
-          renderTruncateLabel={function () {
-            const hiddenItemsCount = totalItemsCount - visibleItemsCount
-            if (visibleItemsCount >= 2) {
-              return `${hiddenItemsCount} More`
-            } else {
+      renderAfterItems={
+        <IconButton
+          onClick={() => console.log('Add')}
+          renderIcon={IconPlusSolid}
+          margin="0 0 0 x-small"
+          screenReaderLabel="Add something"
+          withBorder={false}
+          withBackground={false}
+        />
+      }
+      renderTruncateLabel={() => {
+        const hiddenItemsCount = totalItemsCount - visibleItemsCount
+        if (visibleItemsCount >= 2) {
+          return `${hiddenItemsCount} More`
+        } else {
+          return (
+            <span>
+              <IconHamburgerLine size="small" inline={false} />
+              <ScreenReaderContent>{`${hiddenItemsCount} More`}</ScreenReaderContent>
+            </span>
+          )
+        }
+      }}
+    >
+      <AppNav.Item
+        renderLabel="instructure-ui"
+        href="http://instructure.design"
+        renderAfter={
+          <Badge
+            type="notification"
+            variant="success"
+            standalone
+            formatOutput={() => {
               return (
-                <span>
-                  <IconHamburgerLine size="small" inline={false} />
-                  <ScreenReaderContent>{`${hiddenItemsCount} More`}</ScreenReaderContent>
-                </span>
+                <ScreenReaderContent>
+                  You have notifications from instructure-ui
+                </ScreenReaderContent>
               )
-            }
-          }}
-        >
-          <AppNav.Item
-            renderLabel="instructure-ui"
-            href="http://instructure.design"
-            renderAfter={
-              <Badge
-                type="notification"
-                variant="success"
-                standalone
-                formatOutput={function () {
-                  return (
-                    <ScreenReaderContent>
-                      You have notifications from instructure-ui
-                    </ScreenReaderContent>
-                  )
-                }}
-              />
-            }
-          />
-          <AppNav.Item
-            isSelected
-            renderLabel="Canvas"
-            href="https://www.instructure.com/canvas/"
-          />
-          <AppNav.Item renderLabel="Canvas Network" href="https://canvas.net" />
-          <AppNav.Item
-            renderLabel={() => 'Canvas Community'}
-            href="https://community.canvaslms.com/"
-          />
-          <AppNav.Item
-            renderLabel="Bridge"
-            href="https://www.instructure.com/bridge/"
-          />
-        </AppNav>
-      )
-    }
-  }
-
-  render(<AppNavExample />)
-  ```
-
-- ```js
-  const totalItemsCount = 5
-
-  const AppNavExample = () => {
-    const [visibleItemsCount, setVisibleItemsCount] = useState(totalItemsCount)
-
-    const handleUpdate = ({ visibleItemsCount }) => {
-      setVisibleItemsCount(visibleItemsCount)
-    }
-
-    return (
-      <AppNav
-        screenReaderLabel="App navigation"
-        visibleItemsCount={visibleItemsCount >= 2 ? visibleItemsCount : 0}
-        onUpdate={handleUpdate}
-        renderBeforeItems={
-          <AppNav.Item
-            renderLabel={<ScreenReaderContent>Instructure</ScreenReaderContent>}
-            renderIcon={
-              <IconCommonsLine inline={false} size="medium" color="primary" />
-            }
-            href="http://instructure.com"
+            }}
           />
         }
-        renderAfterItems={
-          <IconButton
-            onClick={() => console.log('Add')}
-            renderIcon={IconPlusSolid}
-            margin="0 0 0 x-small"
-            screenReaderLabel="Add something"
-            withBorder={false}
-            withBackground={false}
-          />
-        }
-        renderTruncateLabel={() => {
-          const hiddenItemsCount = totalItemsCount - visibleItemsCount
-          if (visibleItemsCount >= 2) {
-            return `${hiddenItemsCount} More`
-          } else {
-            return (
-              <span>
-                <IconHamburgerLine size="small" inline={false} />
-                <ScreenReaderContent>{`${hiddenItemsCount} More`}</ScreenReaderContent>
-              </span>
-            )
-          }
-        }}
-      >
-        <AppNav.Item
-          renderLabel="instructure-ui"
-          href="http://instructure.design"
-          renderAfter={
-            <Badge
-              type="notification"
-              variant="success"
-              standalone
-              formatOutput={() => {
-                return (
-                  <ScreenReaderContent>
-                    You have notifications from instructure-ui
-                  </ScreenReaderContent>
-                )
-              }}
-            />
-          }
-        />
-        <AppNav.Item
-          isSelected
-          renderLabel="Canvas"
-          href="https://www.instructure.com/canvas/"
-        />
-        <AppNav.Item renderLabel="Canvas Network" href="https://canvas.net" />
-        <AppNav.Item
-          renderLabel={() => 'Canvas Community'}
-          href="https://community.canvaslms.com/"
-        />
-        <AppNav.Item
-          renderLabel="Bridge"
-          href="https://www.instructure.com/bridge/"
-        />
-      </AppNav>
-    )
-  }
+      />
+      <AppNav.Item
+        isSelected
+        renderLabel="Canvas"
+        href="https://www.instructure.com/canvas/"
+      />
+      <AppNav.Item renderLabel="Canvas Network" href="https://canvas.net" />
+      <AppNav.Item
+        renderLabel={() => 'Canvas Community'}
+        href="https://community.canvaslms.com/"
+      />
+      <AppNav.Item
+        renderLabel="Bridge"
+        href="https://www.instructure.com/bridge/"
+      />
+    </AppNav>
+  )
+}
 
-  render(<AppNavExample />)
-  ```
+render(<AppNavExample />)
+```

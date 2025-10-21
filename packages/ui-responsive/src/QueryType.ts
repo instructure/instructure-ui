@@ -60,10 +60,10 @@ type UpdateMatches = (
  * callback. The callback method is only called when the query
  * matches change, not on all window resizes.
  *
- * The [Responsive](#Responsive) component with the `match` prop
+ * The [Responsive](Responsive) component with the `match` prop
  * set to `media` or `element` utilizes this function.
  * This is a low level utility method and, in most cases,
- * [Responsive](#Responsive) should be used instead.
+ * [Responsive](Responsive) should be used instead.
  *
  * @param {Object} query - object consisting of names and query objects
  * @param {Node|Window|React.ReactElement|React.Component|function} el - a DOM node or a function returning a DOM node

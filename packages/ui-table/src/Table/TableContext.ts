@@ -43,7 +43,7 @@ type TableContextType = {
 
 /**
  * ---
- * category: utilities/react
+ * category: components/contexts
  * ---
  * React context created by the `Table` component to hold its data which are
  * read by its children. You can access these to make custom Table cells/rows.

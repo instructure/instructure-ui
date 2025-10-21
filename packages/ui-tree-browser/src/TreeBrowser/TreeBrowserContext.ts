@@ -33,7 +33,7 @@ type TreeBrowserContextType = {
 
 /**
  * ---
- * category: utilities/react
+ * category: components/contexts
  * ---
  * React context created by the `TreeBrowser` component to hold its data which are
  * read by its children.
