@@ -16,6 +16,7 @@
     "canvas/component/Spinner",
     "canvas/component/TextInput",
     "canvas/component/TextArea",
+    "canvas/component/Utility",
     "rebrand/component/Button",
     "rebrand/component/Avatar",
     "rebrand/component/Breadcrumb",
@@ -28,6 +29,7 @@
     "rebrand/component/Spinner",
     "rebrand/component/TextInput",
     "rebrand/component/TextArea",
+    "rebrand/component/Utility",
     "rebrand/semantic/layout/default",
     "rebrand/semantic/color/rebrandLight",
     "rebrand/semantic/color/rebrandDark"
