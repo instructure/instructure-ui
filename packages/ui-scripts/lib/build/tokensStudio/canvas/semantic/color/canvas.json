@@ -220,28 +220,56 @@
         }
       },
       "accent": {
-        "color1": {
+        "blue": {
           "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
+        "green": {
           "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
+        "red": {
           "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
+        "orange": {
           "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
+        "grey": {
           "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
+        "ash": {
           "value": "{color.grey.grey70}",
+          "type": "color"
+        },
+        "plum": {
+          "value": "{color.plum.plum70}",
+          "type": "color"
+        },
+        "violet": {
+          "value": "{color.violet.violet70}",
+          "type": "color"
+        },
+        "stone": {
+          "value": "{color.stone.stone70}",
+          "type": "color"
+        },
+        "sky": {
+          "value": "{color.sky.sky70}",
+          "type": "color"
+        },
+        "honey": {
+          "value": "{color.honey.honey70}",
+          "type": "color"
+        },
+        "sea": {
+          "value": "{color.sea.sea70}",
+          "type": "color"
+        },
+        "aurora": {
+          "value": "{color.aurora.aurora70}",
           "type": "color"
         }
       }
@@ -634,28 +662,56 @@
         }
       },
       "accent": {
-        "color1": {
+        "blue": {
           "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
+        "green": {
           "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
+        "red": {
           "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
+        "orange": {
           "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
+        "grey": {
           "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
+        "ash": {
           "value": "{color.grey.grey70}",
+          "type": "color"
+        },
+        "plum": {
+          "value": "{color.plum.plum70}",
+          "type": "color"
+        },
+        "violet": {
+          "value": "{color.violet.violet70}",
+          "type": "color"
+        },
+        "stone": {
+          "value": "{color.stone.stone70}",
+          "type": "color"
+        },
+        "sky": {
+          "value": "{color.sky.sky70}",
+          "type": "color"
+        },
+        "honey": {
+          "value": "{color.honey.honey70}",
+          "type": "color"
+        },
+        "sea": {
+          "value": "{color.sea.sea70}",
+          "type": "color"
+        },
+        "aurora": {
+          "value": "{color.aurora.aurora70}",
           "type": "color"
         }
       }
@@ -846,28 +902,56 @@
         }
       },
       "accent": {
-        "color1": {
+        "blue": {
           "value": "{color.blue.blue70}",
           "type": "color"
         },
-        "color2": {
+        "green": {
           "value": "{color.green.green70}",
           "type": "color"
         },
-        "color3": {
+        "red": {
           "value": "{color.red.red70}",
           "type": "color"
         },
-        "color4": {
+        "orange": {
           "value": "{color.orange.orange70}",
           "type": "color"
         },
-        "color5": {
+        "grey": {
           "value": "{color.grey.grey110}",
           "type": "color"
         },
-        "color6": {
+        "ash": {
           "value": "{color.grey.grey70}",
+          "type": "color"
+        },
+        "plum": {
+          "value": "{color.plum.plum70}",
+          "type": "color"
+        },
+        "violet": {
+          "value": "{color.violet.violet70}",
+          "type": "color"
+        },
+        "stone": {
+          "value": "{color.stone.stone70}",
+          "type": "color"
+        },
+        "sky": {
+          "value": "{color.sky.sky70}",
+          "type": "color"
+        },
+        "honey": {
+          "value": "{color.honey.honey70}",
+          "type": "color"
+        },
+        "sea": {
+          "value": "{color.sea.sea70}",
+          "type": "color"
+        },
+        "aurora": {
+          "value": "{color.aurora.aurora70}",
           "type": "color"
         }
       }
@@ -887,41 +971,41 @@
     "x": {
       "elevation1": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       }
@@ -929,41 +1013,41 @@
     "y": {
       "elevation1": {
         "dropshadow1": {
-          "value": "1",
+          "value": 1,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "1",
+          "value": 1,
           "type": "number"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "1",
+          "value": 1,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "1",
+          "value": 1,
           "type": "number"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "3",
+          "value": 3,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "3",
+          "value": 3,
           "type": "number"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "3",
+          "value": 3,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "3",
+          "value": 3,
           "type": "number"
         }
       }
@@ -971,41 +1055,41 @@
     "blur": {
       "elevation1": {
         "dropshadow1": {
-          "value": "3",
+          "value": 3,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "2",
+          "value": 2,
           "type": "number"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "3",
+          "value": 3,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "2",
+          "value": 2,
           "type": "number"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "6",
+          "value": 6,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "6",
+          "value": 6,
           "type": "number"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "6",
+          "value": 6,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "6",
+          "value": 6,
           "type": "number"
         }
       }
@@ -1013,41 +1097,41 @@
     "spread": {
       "elevation1": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         },
         "dropshadow2": {
-          "value": "0",
+          "value": 0,
           "type": "number"
         }
       }

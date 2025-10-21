@@ -36,75 +36,75 @@
       "type": "fontWeights"
     },
     "accent1BackgroundColor": {
-      "value": "{color.background.accent.color1}",
+      "value": "{color.background.accent.blue}",
       "type": "color"
     },
     "accent1IconColor": {
-      "value": "{color.icon.accent.color1}",
+      "value": "{color.icon.accent.blue}",
       "type": "color"
     },
     "accent1TextColor": {
-      "value": "{color.text.accent.color1}",
+      "value": "{color.text.accent.blue}",
       "type": "color"
     },
     "accent2BackgroundColor": {
-      "value": "{color.background.accent.color2}",
+      "value": "{color.background.accent.green}",
       "type": "color"
     },
     "accent2IconColor": {
-      "value": "{color.icon.accent.color2}",
+      "value": "{color.icon.accent.green}",
       "type": "color"
     },
     "accent2TextColor": {
-      "value": "{color.text.accent.color2}",
+      "value": "{color.text.accent.green}",
       "type": "color"
     },
     "accent3BackgroundColor": {
-      "value": "{color.background.accent.color3}",
+      "value": "{color.background.accent.red}",
       "type": "color"
     },
     "accent3IconColor": {
-      "value": "{color.icon.accent.color3}",
+      "value": "{color.icon.accent.red}",
       "type": "color"
     },
     "accent3TextColor": {
-      "value": "{color.text.accent.color3}",
+      "value": "{color.text.accent.red}",
       "type": "color"
     },
     "accent4BackgroundColor": {
-      "value": "{color.background.accent.color4}",
+      "value": "{color.background.accent.orange}",
       "type": "color"
     },
     "accent4IconColor": {
-      "value": "{color.icon.accent.color4}",
+      "value": "{color.icon.accent.orange}",
       "type": "color"
     },
     "accent4TextColor": {
-      "value": "{color.text.accent.color4}",
+      "value": "{color.text.accent.orange}",
       "type": "color"
     },
     "accent5BackgroundColor": {
-      "value": "{color.background.accent.color5}",
+      "value": "{color.background.accent.grey}",
       "type": "color"
     },
     "accent5IconColor": {
-      "value": "{color.icon.accent.color5}",
+      "value": "{color.icon.accent.grey}",
       "type": "color"
     },
     "accent5TextColor": {
-      "value": "{color.text.accent.color5}",
+      "value": "{color.text.accent.grey}",
       "type": "color"
     },
     "accent6BackgroundColor": {
-      "value": "{color.background.accent.color6}",
+      "value": "{color.background.accent.ash}",
       "type": "color"
     },
     "accent6IconColor": {
-      "value": "{color.icon.accent.color6}",
+      "value": "{color.icon.accent.ash}",
       "type": "color"
     },
     "accent6TextColor": {
-      "value": "{color.text.accent.color6}",
+      "value": "{color.text.accent.ash}",
       "type": "color"
     },
     "aiBottomGradientColor": {
