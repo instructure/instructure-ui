@@ -76,20 +76,32 @@
       "value": "{color.background.interactive.secondary.base}",
       "type": "color"
     },
-    "arrowsHoverBackgroundColor": {
+    "arrowsBackgroundHoverColor": {
       "value": "{color.background.interactive.secondary.hover}",
       "type": "color"
     },
-    "arrowsActiveBackgroundColor": {
+    "arrowsBackgroundActiveColor": {
       "value": "{color.background.interactive.secondary.active}",
+      "type": "color"
+    },
+    "arrowsBackgroundDisabledColor": {
+      "value": "{color.background.interactive.secondary.disabled}",
       "type": "color"
     },
     "arrowsBorderColor": {
       "value": "{color.stroke.interactive.secondary.base}",
       "type": "color"
     },
-    "arrowsDisabledBackgroundColor": {
-      "value": "{color.background.interactive.secondary.disabled}",
+    "arrowsBorderHoverColor": {
+      "value": "{color.stroke.interactive.secondary.hover}",
+      "type": "color"
+    },
+    "arrowsBorderActiveColor": {
+      "value": "{color.stroke.interactive.secondary.active}",
+      "type": "color"
+    },
+    "arrowsBorderDisabledColor": {
+      "value": "{color.stroke.interactive.secondary.disabled}",
       "type": "color"
     },
     "fontFamily": {
