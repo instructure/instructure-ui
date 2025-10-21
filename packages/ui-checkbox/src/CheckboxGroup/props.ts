@@ -26,6 +26,7 @@ import { type InputHTMLAttributes } from 'react'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { Spacing } from '@instructure/emotion'
 
 import { Checkbox } from '../Checkbox'
 import type { CheckboxProps } from '../Checkbox/props'
@@ -44,6 +45,10 @@ type CheckboxGroupOwnProps = {
   messages?: FormMessage[]
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'columns' | 'inline'
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof CheckboxGroupOwnProps
@@ -67,7 +72,8 @@ const allowedProps: AllowedPropKeys = [
   'messages',
   'children',
   'size',
-  'layout'
+  'layout',
+  'margin'
 ]
 
 type CheckboxGroupState = {

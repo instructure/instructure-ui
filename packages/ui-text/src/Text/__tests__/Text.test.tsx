@@ -49,4 +49,38 @@ describe('<Text />', () => {
 
     expect(text?.tagName).toBe('LI')
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with custom CSS value and with tokens', () => {
+      const { getByTestId } = render(
+        <div>
+          <Text margin="30px" data-testid="text-custom">
+            test1
+          </Text>
+          <Text margin="large" data-testid="text-large">
+            test2
+          </Text>
+          <Text margin="space4" data-testid="text-space">
+            test3
+          </Text>
+          <Text margin="small 20px" data-testid="text-mixed">
+            test4
+          </Text>
+        </div>
+      )
+      const textCustom = getByTestId('text-custom')
+      const textCustomStyle = window.getComputedStyle(textCustom)
+      const textLarge = getByTestId('text-large')
+      const textLargeStyle = window.getComputedStyle(textLarge)
+      const textSpace = getByTestId('text-space')
+      const textSpaceStyle = window.getComputedStyle(textSpace)
+      const textMixed = getByTestId('text-mixed')
+      const textMixedStyle = window.getComputedStyle(textMixed)
+
+      expect(textCustomStyle.margin).toBe('30px')
+      expect(textLargeStyle.margin).toBe('2.25rem')
+      expect(textSpaceStyle.margin).toBe('0.25rem')
+      expect(textMixedStyle.margin).toBe('0.75rem 20px')
+    })
+  })
 })

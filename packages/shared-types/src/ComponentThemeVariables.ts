@@ -1203,6 +1203,7 @@ export type RadioInputTheme = {
   toggleSmallFontSize: Typography['fontSizeXSmall']
   toggleMediumFontSize: Typography['fontSizeSmall']
   toggleLargeFontSize: Typography['fontSizeMedium']
+  spacing: any // TODO remove any
 }
 
 export type RangeInputTheme = {
@@ -1460,9 +1461,9 @@ export type TextTheme = Typography & {
   alertColor: string
   warningColor: string
   aiColor: string
-
   aiBackgroundColor: string
   paragraphMargin: string | 0
+  spacing: any // TODO remove any
 }
 
 export type TextAreaTheme = {

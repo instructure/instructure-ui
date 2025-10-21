@@ -29,7 +29,7 @@ import '@testing-library/jest-dom'
 
 import { FileDrop } from '../index'
 import { FileDropProps } from '../props'
-import { act } from 'react'
+import { act } from '@testing-library/react'
 
 describe('<FileDrop/>', () => {
   it('should focus the input when focus is called', async () => {

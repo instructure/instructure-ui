@@ -58,7 +58,8 @@ const generateComponentTheme = (theme: Theme): TextTheme => {
 
     aiBackgroundColor: colors?.contrasts?.violet1212,
 
-    paragraphMargin: `${spacing.medium} 0`
+    paragraphMargin: `${spacing.medium} 0`,
+    spacing: spacing
   }
 
   return {

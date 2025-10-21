@@ -302,4 +302,40 @@ describe('<RadioInput />', () => {
       expect(axeCheck).toBe(true)
     })
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with custom CSS value and with tokens', () => {
+      const { container } = render(
+        <div>
+          <RadioInput label="test1" value="val1" name="test" margin="30px" />
+          <RadioInput label="test2" value="val2" name="test" margin="large" />
+          <RadioInput label="test3" value="val3" name="test" margin="space4" />
+          <RadioInput
+            label="test4"
+            value="val4"
+            name="test"
+            margin="small 20px"
+          />
+        </div>
+      )
+
+      const allRadioInputs = container.querySelectorAll(
+        '[data-cid="RadioInput"]'
+      )
+
+      const radioInputCustom = allRadioInputs[0] as HTMLElement
+      const radioInputCustomStyle = window.getComputedStyle(radioInputCustom)
+      const radioInputLarge = allRadioInputs[1] as HTMLElement
+      const radioInputLargeStyle = window.getComputedStyle(radioInputLarge)
+      const radioInputSpace = allRadioInputs[2] as HTMLElement
+      const radioInputSpaceStyle = window.getComputedStyle(radioInputSpace)
+      const radioInputMixed = allRadioInputs[3] as HTMLElement
+      const radioInputMixedStyle = window.getComputedStyle(radioInputMixed)
+
+      expect(radioInputCustomStyle.margin).toBe('30px')
+      expect(radioInputLargeStyle.margin).toBe('2.25rem')
+      expect(radioInputSpaceStyle.margin).toBe('0.25rem')
+      expect(radioInputMixedStyle.margin).toBe('0.75rem 20px')
+    })
+  })
 })

@@ -28,7 +28,11 @@ import type {
   OtherHTMLAttributes,
   ToggleFacadeTheme
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type CheckboxOwnProps = {
@@ -75,6 +79,10 @@ type CheckboxOwnProps = {
   labelPlacement?: 'top' | 'start' | 'end'
   isRequired?: boolean
   /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
+  /**
    * A function that provides a reference to the actual underlying input element
    */
   inputRef?: (inputElement: HTMLInputElement | null) => void
@@ -119,6 +127,7 @@ const allowedProps: AllowedPropKeys = [
   'inline',
   'labelPlacement',
   'isRequired',
+  'margin',
   'inputRef'
 ]
 

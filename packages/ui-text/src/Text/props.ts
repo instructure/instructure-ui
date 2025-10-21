@@ -28,7 +28,11 @@ import type {
   TextTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 
 type TextOwnProps = {
   /**
@@ -92,6 +96,10 @@ type TextOwnProps = {
     | 'legend'
   weight?: 'normal' | 'light' | 'bold' | 'weightRegular' | 'weightImportant'
   wrap?: 'normal' | 'break-word'
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
   children?: React.ReactNode
 }
 
@@ -116,7 +124,8 @@ const allowedProps: AllowedPropKeys = [
   'transform',
   'variant',
   'weight',
-  'wrap'
+  'wrap',
+  'margin'
 ]
 
 export type { TextProps, TextStyle }
