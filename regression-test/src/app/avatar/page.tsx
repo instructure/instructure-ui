@@ -105,163 +105,82 @@ export default function AvatarPage() {
       </div>
       <div>
         <Avatar name="Arthur C. Clarke" margin="0 space8 0 0" />
-        <Avatar name="James Arias" color="shamrock" margin="0 space8 0 0" />
-        <Avatar name="Charles Kimball" color="barney" margin="0 space8 0 0" />
-        <Avatar name="Melissa Reed" color="crimson" margin="0 space8 0 0" />
-        <Avatar name="Heather Wheeler" color="fire" margin="0 space8 0 0" />
-        <Avatar name="David Herbert" color="licorice" margin="0 space8 0 0" />
-        <Avatar name="Isaac Asimov" color="ash" />
+        <Avatar name="James Arias" color="accent1" margin="0 space8 0 0" />
+        <Avatar name="Charles Kimball" color="accent2" margin="0 space8 0 0" />
+        <Avatar name="Melissa Reed" color="accent3" margin="0 space8 0 0" />
+        <Avatar name="Heather Wheeler" color="accent4" margin="0 space8 0 0" />
+        <Avatar name="David Herbert" color="accent5" margin="0 space8 0 0" />
+        <Avatar name="David Herbert" color="accent6" margin="0 space8 0 0" />
       </div>
       <div>
         <Avatar
           renderIcon={<IconGroupLine />}
           name="Arthur C. Clarke"
           margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="James Arias"
-          color="shamrock"
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Charles Kimball"
-          color="barney"
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Melissa Reed"
-          color="crimson"
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Heather Wheeler"
-          color="fire"
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="David Herbert"
-          color="licorice"
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Isaac Asimov"
-          color="ash"
         />
       </div>
       <div>
         <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
         <Avatar
           name="James Arias"
-          color="shamrock"
+          color="accent1"
           hasInverseColor
           margin="0 space8 0 0"
         />
         <Avatar
           name="Charles Kimball"
-          color="barney"
+          color="accent2"
           hasInverseColor
           margin="0 space8 0 0"
         />
         <Avatar
           name="Melissa Reed"
-          color="crimson"
+          color="accent3"
           hasInverseColor
           margin="0 space8 0 0"
         />
         <Avatar
           name="Heather Wheeler"
-          color="fire"
+          color="accent4"
           hasInverseColor
           margin="0 space8 0 0"
         />
         <Avatar
           name="David Herbert"
-          color="licorice"
+          color="accent5"
           hasInverseColor
           margin="0 space8 0 0"
         />
-        <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
-      </div>
-      <div>
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Arthur C. Clarke"
-          hasInverseColor
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="James Arias"
-          color="shamrock"
-          hasInverseColor
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Charles Kimball"
-          color="barney"
-          hasInverseColor
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Melissa Reed"
-          color="crimson"
-          hasInverseColor
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Heather Wheeler"
-          color="fire"
-          hasInverseColor
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="David Herbert"
-          color="licorice"
-          hasInverseColor
-          margin="0 space8 0 0"
-        />
-        <Avatar
-          renderIcon={<IconGroupLine />}
-          name="Isaac Asimov"
-          color="ash"
-          hasInverseColor
-        />
+        <Avatar name="Isaac Asimov" color="accent6" hasInverseColor />
       </div>
       <div>
         <Avatar
           name="Isaac Asimov"
           renderIcon={<IconGroupLine />}
-          themeOverride={{ color: '#efb410' }}
+          themeOverride={{ borderColor: '#ff00ff' }}
           margin="0 space8 0 0"
         />
         <Avatar
           name="Heather Wheeler"
-          color="fire"
-          themeOverride={{ colorFire: 'magenta' }}
+          color="accent1"
+          themeOverride={{ accent1TextColor: '222222' }}
           margin="0 space8 0 0"
         />
         <Avatar
           name="Charles Kimball"
           renderIcon={<IconGroupLine />}
           hasInverseColor
-          themeOverride={{ color: 'lightblue', background: 'black' }}
+          themeOverride={{
+            textOnColor: 'lightblue',
+            accent1BackgroundColor: 'black'
+          }}
           margin="0 space8 0 0"
         />
         <Avatar
           name="David Herbert"
           hasInverseColor
-          color="fire"
-          themeOverride={{ colorFire: '#013410' }}
+          color="accent3"
+          themeOverride={{ accent3BackgroundColor: '#013410' }}
         />
       </div>
       <div>

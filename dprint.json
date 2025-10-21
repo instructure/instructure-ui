@@ -1,0 +1,8 @@
+{
+  "$schema": "https://dprint.dev/schemas/v0.json",
+  "typescript": {
+    "semiColons": "asi"
+  },
+  "excludes": ["**/node_modules", "!packages/ui-themes/src/themes/newThemes/"],
+  "plugins": ["https://plugins.dprint.dev/typescript-0.95.11.wasm"]
+}
