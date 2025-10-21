@@ -29,7 +29,7 @@
           "y": "{dropShadow.y.elevation2.dropshadow1}",
           "blur": "{dropShadow.blur.elevation2.dropshadow1}",
           "spread": "{dropShadow.spread.elevation2.dropshadow1}",
-          "color": "{color.dropShadow.shadowColor1}",
+          "color": "{color.dropShadow.shadowColor2}",
           "type": "dropShadow"
         },
         {
@@ -37,7 +37,7 @@
           "y": "{dropShadow.y.elevation2.dropshadow2}",
           "blur": "{dropShadow.blur.elevation2.dropshadow2}",
           "spread": "{dropShadow.spread.elevation2.dropshadow2}",
-          "color": "{color.dropShadow.shadowColor2}",
+          "color": "{color.dropShadow.shadowColor1}",
           "type": "dropShadow"
         }
       ],
@@ -51,7 +51,7 @@
           "y": "{dropShadow.y.elevation3.dropshadow1}",
           "blur": "{dropShadow.blur.elevation3.dropshadow1}",
           "spread": "{dropShadow.spread.elevation3.dropshadow1}",
-          "color": "{color.dropShadow.shadowColor1}",
+          "color": "{color.dropShadow.shadowColor2}",
           "type": "dropShadow"
         },
         {
@@ -59,7 +59,7 @@
           "y": "{dropShadow.y.elevation3.dropshadow2}",
           "blur": "{dropShadow.blur.elevation3.dropshadow2}",
           "spread": "{dropShadow.spread.elevation3.dropshadow2}",
-          "color": "{color.dropShadow.shadowColor2}",
+          "color": "{color.dropShadow.shadowColor1}",
           "type": "dropShadow"
         }
       ],
@@ -73,7 +73,7 @@
           "y": "{dropShadow.y.elevation4.dropshadow1}",
           "blur": "{dropShadow.blur.elevation4.dropshadow1}",
           "spread": "{dropShadow.spread.elevation4.dropshadow1}",
-          "color": "{color.dropShadow.shadowColor1}",
+          "color": "{color.dropShadow.shadowColor2}",
           "type": "dropShadow"
         },
         {
@@ -81,7 +81,7 @@
           "y": "{dropShadow.y.elevation4.dropshadow2}",
           "blur": "{dropShadow.blur.elevation4.dropshadow2}",
           "spread": "{dropShadow.spread.elevation4.dropshadow2}",
-          "color": "{color.dropShadow.shadowColor2}",
+          "color": "{color.dropShadow.shadowColor1}",
           "type": "dropShadow"
         }
       ],
