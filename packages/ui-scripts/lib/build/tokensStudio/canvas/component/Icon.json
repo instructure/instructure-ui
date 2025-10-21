@@ -52,30 +52,6 @@
       "value": "{color.icon.base}",
       "type": "color"
     },
-    "disabledColor": {
-      "value": "{color.icon.interactive.disabled.base}",
-      "type": "color"
-    },
-    "disabledOnColor": {
-      "value": "{color.icon.interactive.disabled.onColor}",
-      "type": "color"
-    },
-    "primaryBaseColor": {
-      "value": "{color.icon.interactive.primary.base}",
-      "type": "color"
-    },
-    "primaryHoverColor": {
-      "value": "{color.icon.interactive.primary.hover}",
-      "type": "color"
-    },
-    "destructiveColor": {
-      "value": "{color.icon.interactive.destructive.base}",
-      "type": "color"
-    },
-    "destructiveHoverColor": {
-      "value": "{color.icon.interactive.destructive.hover}",
-      "type": "color"
-    },
     "mutedColor": {
       "value": "{color.icon.muted}",
       "type": "color"
@@ -100,28 +76,188 @@
       "value": "{color.icon.onColor}",
       "type": "color"
     },
-    "accent1Color": {
-      "value": "{color.icon.accent.color1}",
+    "disabledColor": {
+      "value": "{color.icon.interactive.disabled.base}",
       "type": "color"
     },
-    "accent2Color": {
-      "value": "{color.icon.accent.color2}",
+    "disabledBaseColor": {
+      "value": "{color.icon.interactive.disabled.base}",
       "type": "color"
     },
-    "accent3Color": {
-      "value": "{color.icon.accent.color3}",
+    "disabledOnColor": {
+      "value": "{color.icon.interactive.disabled.onColor}",
       "type": "color"
     },
-    "accent4Color": {
-      "value": "{color.icon.accent.color4}",
+    "navigationPrimaryBaseColor": {
+      "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
     },
-    "accent5Color": {
-      "value": "{color.icon.accent.color5}",
+    "navigationPrimaryHoverColor": {
+      "value": "{color.icon.interactive.navigation.primary.hover}",
       "type": "color"
     },
-    "accent6Color": {
-      "value": "{color.icon.accent.color6}",
+    "navigationPrimaryActiveColor": {
+      "value": "{color.icon.interactive.navigation.primary.active}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorBaseColor": {
+      "value": "{color.icon.interactive.navigation.primaryOnColor.base}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorHoverColor": {
+      "value": "{color.icon.interactive.navigation.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "navigationPrimaryOnColorActiveColor": {
+      "value": "{color.icon.interactive.navigation.primaryOnColor.active}",
+      "type": "color"
+    },
+    "actionSecondaryBaseColor": {
+      "value": "{color.icon.interactive.action.secondary.base}",
+      "type": "color"
+    },
+    "actionSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "actionSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.secondary.active}",
+      "type": "color"
+    },
+    "actionSecondaryDisabledColor": {
+      "value": "{color.icon.interactive.action.secondary.disabled}",
+      "type": "color"
+    },
+    "actionStatusBaseColor": {
+      "value": "{color.icon.interactive.action.status.base}",
+      "type": "color"
+    },
+    "actionStatusHoverColor": {
+      "value": "{color.icon.interactive.action.status.hover}",
+      "type": "color"
+    },
+    "actionStatusActiveColor": {
+      "value": "{color.icon.interactive.action.status.active}",
+      "type": "color"
+    },
+    "actionStatusDisabledColor": {
+      "value": "{color.icon.interactive.action.status.disabled}",
+      "type": "color"
+    },
+    "actionAiSecondaryTopGradientBaseColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
+      "type": "color"
+    },
+    "actionAiSecondaryTopGradientDisabledColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
+      "type": "color"
+    },
+    "actionAiSecondaryBottomGradientBaseColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
+      "type": "color"
+    },
+    "actionAiSecondaryBottomGradientDisabledColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
+      "type": "color"
+    },
+    "actionAiBaseColor": {
+      "value": "{color.icon.interactive.action.ai.base}",
+      "type": "color"
+    },
+    "actionAiHoverColor": {
+      "value": "{color.icon.interactive.action.ai.hover}",
+      "type": "color"
+    },
+    "actionAiActiveColor": {
+      "value": "{color.icon.interactive.action.ai.active}",
+      "type": "color"
+    },
+    "actionAiDisabledColor": {
+      "value": "{color.icon.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "actionPrimaryBaseColor": {
+      "value": "{color.icon.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "actionPrimaryHoverColor": {
+      "value": "{color.icon.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "actionPrimaryActiveColor": {
+      "value": "{color.icon.interactive.action.primary.active}",
+      "type": "color"
+    },
+    "actionPrimaryDisabledColor": {
+      "value": "{color.icon.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorBaseColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.base}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorHoverColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorActiveColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.active}",
+      "type": "color"
+    },
+    "actionPrimaryOnColorDisabledColor": {
+      "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
+      "type": "color"
+    },
+    "accentBlueColor": {
+      "value": "{color.icon.accent.blue}",
+      "type": "color"
+    },
+    "accentGreenColor": {
+      "value": "{color.icon.accent.green}",
+      "type": "color"
+    },
+    "accentRedColor": {
+      "value": "{color.icon.accent.red}",
+      "type": "color"
+    },
+    "accentOrangeColor": {
+      "value": "{color.icon.accent.orange}",
+      "type": "color"
+    },
+    "accentGreyColor": {
+      "value": "{color.icon.accent.grey}",
+      "type": "color"
+    },
+    "accentAshColor": {
+      "value": "{color.icon.accent.ash}",
+      "type": "color"
+    },
+    "accentPlumColor": {
+      "value": "{color.icon.accent.plum}",
+      "type": "color"
+    },
+    "accentVioletColor": {
+      "value": "{color.icon.accent.violet}",
+      "type": "color"
+    },
+    "accentStoneColor": {
+      "value": "{color.icon.accent.stone}",
+      "type": "color"
+    },
+    "accentSkyColor": {
+      "value": "{color.icon.accent.sky}",
+      "type": "color"
+    },
+    "accentHoneyColor": {
+      "value": "{color.icon.accent.honey}",
+      "type": "color"
+    },
+    "accentSeaColor": {
+      "value": "{color.icon.accent.sea}",
+      "type": "color"
+    },
+    "accentAutoraColor": {
+      "value": "{color.icon.accent.aurora}",
       "type": "color"
     }
   }
