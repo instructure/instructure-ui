@@ -55,14 +55,9 @@ function buildProject() {
     process.exit(1)
   }
 }
-function bootstrap() {
-  try {
-    fork(path.resolve('scripts/clean.js'), opts)
-  } catch (error) {
-    console.error('clean failed with error:', error)
-    process.exit(1)
-  }
 
+function bootstrap() {
+  execSync(path.resolve('scripts/clean.js'), opts)
   buildProject()
 }
 
