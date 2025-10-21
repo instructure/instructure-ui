@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 
-import fs from 'fs'
-import { execSync } from 'child_process'
-
+import { promises } from 'fs'
 const license = `/*
  * The MIT License (MIT)
  *
@@ -51,16 +49,19 @@ const license = `/*
 
 `
 
-const createFile = (filePath, fileContent) => {
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath)
+const createFile = async (filePath, fileContent) => {
+  try {
+    await promises.unlink(filePath)
+  } catch (error) {
+    if (error.code !== 'ENOENT') {
+      // Only throw if it's not a "file not found" error
+      throw error
+    }
   }
-
-  fs.mkdirSync(filePath.split('/').slice(0, -1).join('/'), { recursive: true })
-  fs.writeFileSync(filePath, `${license} ${fileContent}`)
-  // eslint-disable-next-line no-console
-  console.log(`Creating theme file: ${filePath}`)
-  execSync(`npx prettier --write ${filePath} --ignore-path .prettierignore`)
+  await promises.mkdir(filePath.split('/').slice(0, -1).join('/'), {
+    recursive: true
+  })
+  await promises.writeFile(filePath, `${license} ${fileContent}`)
 }
 
 export default createFile
