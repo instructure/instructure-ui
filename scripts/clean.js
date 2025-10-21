@@ -46,7 +46,8 @@ const DIRS_TO_DELETE = [
   'tokens',
   '.babel-cache',
   '.cache',
-  'es'
+  'es',
+  'src/themes/newThemes'
 ]
 function deleteDirs(dirs = []) {
   return dirs.map((dir) => {
@@ -84,7 +85,7 @@ function removeNodeModules() {
 }
 
 // eslint-disable-next-line no-console
-console.info('Deleting built files from tooling packages...')
+console.info('Deleting generated files...')
 clean()
 const args = process.argv.slice(2)
 if (args.length > 0 && args[0] === '--nuke_node') {

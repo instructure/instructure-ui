@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import fs from 'fs'
+import { promises } from 'fs'
 import createFile from './createFile.js'
 import { generatePrimitives, generateType } from './generatePrimitives.js'
 import generateSemantics, {
@@ -32,6 +32,8 @@ import generateSemantics, {
 import generateComponent, {
   generateComponentType
 } from './generateComponents.js'
+import { exec } from 'child_process'
+import { promisify } from 'node:util'
 // transform to an object for easier handling
 export const transformThemes = (themes) =>
   themes.reduce((acc, theme) => {
@@ -57,17 +59,19 @@ export const transformThemes = (themes) =>
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 const unCapitalize = (str) => str.charAt(0).toLowerCase() + str.slice(1)
 
-const setupThemes = (targetPath, input) => {
+const setupThemes = async (targetPath, input) => {
   //clear old themes
-  fs.rmSync(targetPath, { recursive: true, force: true })
+  await promises.rm(targetPath, { recursive: true, force: true })
   //make new root folder
-  fs.mkdirSync(targetPath, { recursive: true })
+  await promises.mkdir(targetPath, { recursive: true })
 
   const themeData = transformThemes(input['$themes'])
-  // console.log(themeData)
-  Object.keys(themeData).forEach((theme, themeIndex) => {
+
+  const themes = Object.keys(themeData)
+  for (let themeIndex = 0; themeIndex < themes.length; themeIndex++) {
+    const theme = themes[themeIndex]
     const themePath = `${targetPath}/${theme}`
-    fs.mkdirSync(themePath, { recursive: true })
+    await promises.mkdir(themePath, { recursive: true })
 
     // primitives
     const primitives = generatePrimitives(input[themeData[theme].primitives])
@@ -80,7 +84,7 @@ const setupThemes = (targetPath, input) => {
           export default primitives
           `
 
-    createFile(`${themePath}/primitives.ts`, primitivesFileContent)
+    await createFile(`${themePath}/primitives.ts`, primitivesFileContent)
 
     // semantics
     const mergedSemanticData = mergeSemanticSets(
@@ -99,10 +103,10 @@ const setupThemes = (targetPath, input) => {
         const semantics: Semantics = {${semantics}}
         export default semantics
           `
-    createFile(`${themePath}/semantics.ts`, semanticsFileContent)
+    await createFile(`${themePath}/semantics.ts`, semanticsFileContent)
 
     //components
-    themeData[theme].components.forEach((componentpath) => {
+    for (const componentpath of themeData[theme].components) {
       const rawComponentName =
         componentpath.split('/')[componentpath.split('/').length - 1]
       const componentName =
@@ -123,7 +127,7 @@ const setupThemes = (targetPath, input) => {
         export default ${componentName}
           `
 
-      createFile(
+      await createFile(
         `${themePath}/components/${componentName}.ts`,
         componentFileContent
       )
@@ -135,12 +139,12 @@ const setupThemes = (targetPath, input) => {
 
           export default ${capitalize(componentName)}
         `
-        createFile(
+        await createFile(
           `${targetPath}/componentTypes/${componentName}.ts`,
           typeFileContent
         )
       }
-    })
+    }
 
     //index file
     const componentImports = themeData[theme].components
@@ -196,7 +200,7 @@ const setupThemes = (targetPath, input) => {
 
       export default theme
       `
-    createFile(`${themePath}/index.ts`, indexFileContent)
+    await createFile(`${themePath}/index.ts`, indexFileContent)
 
     //index type file
     if (themeIndex === 0) {
@@ -227,12 +231,12 @@ const setupThemes = (targetPath, input) => {
 
           export default Theme
         `
-      createFile(
+      await createFile(
         `${targetPath}/componentTypes/index.ts`,
         componentsTypesFileContent
       )
     }
-  })
+  }
 
   // export index.ts
   const themeImports = Object.keys(themeData)
@@ -260,7 +264,20 @@ const setupThemes = (targetPath, input) => {
       ${themeTypeExports}
     }
   `
-  createFile(`${targetPath}/index.ts`, exportIndexFileContent)
+  await createFile(`${targetPath}/index.ts`, exportIndexFileContent)
+  const execAsync = promisify(exec)
+  try {
+    const { stdout, stderr } = await execAsync(
+      "dprint fmt '" + targetPath + "/**/*.*'"
+    )
+    // eslint-disable-next-line no-console
+    console.log('[dprint]', stdout)
+    if (stderr) {
+      console.error('[dprint error]:', stderr)
+    }
+  } catch (error) {
+    throw new Error('dprint: ' + error.message)
+  }
 }
 
 export default setupThemes
