@@ -10,8 +10,8 @@ A styled toggleable, accordion-like component.
 
 The `ui-toggle-details` package contains the following:
 
-- [ToggleDetails](#ToggleDetails)
-- [ToggleGroup](#ToggleGroup)
+- [ToggleDetails](ToggleDetails)
+- [ToggleGroup](ToggleGroup)
 
 ### Installation
 

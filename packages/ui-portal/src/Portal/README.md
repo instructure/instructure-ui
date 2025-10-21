@@ -8,45 +8,37 @@ The `<Portal/>` component allows you to render a subtree into a DOM element.
 ---
 type: example
 ---
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
+const Example = () => {
+  const [isPortalOpen, setIsPortalOpen] = useState(false)
+  const mountNodeRef = useRef(null)
 
-    this.state = {
-      isPortalOpen: false
-    }
+  const handleButtonClick = () => {
+    setIsPortalOpen(!isPortalOpen)
   }
 
-  handleButtonClick = () => {
-    this.setState(state => {
-      return { isPortalOpen: !state.isPortalOpen }
-    })
-  };
+  const firstParagraph = lorem.paragraph()
+  const secondParagraph = lorem.paragraph()
 
-  render () {
-    const firstParagraph = lorem.paragraph()
-    const secondParagraph = lorem.paragraph()
-    return (
-      <div>
-        <Button onClick={this.handleButtonClick}>
-          {this.state.isPortalOpen ? 'Close' : 'Open'} the Portal
-        </Button>
-        <Portal
-          mountNode={this._mountNode}
-          open={this.state.isPortalOpen}
-        >
-          <ContextView placement="center start" padding="0 x-small">
-            <p>Greetings from the portal!</p>
-          </ContextView>
-        </Portal>
-        <Text>
-          <p>{firstParagraph}</p>
-          <div ref={(c) => this._mountNode = c}></div>
-          <p>{secondParagraph}</p>
-        </Text>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Button onClick={handleButtonClick}>
+        {isPortalOpen ? 'Close' : 'Open'} the Portal
+      </Button>
+      <Portal
+        mountNode={mountNodeRef.current}
+        open={isPortalOpen}
+      >
+        <ContextView placement="center start" padding="0 x-small">
+          <p>Greetings from the portal!</p>
+        </ContextView>
+      </Portal>
+      <Text>
+        <p>{firstParagraph}</p>
+        <div ref={mountNodeRef}></div>
+        <p>{secondParagraph}</p>
+      </Text>
+    </div>
+  )
 }
 
 render(<Example />)

@@ -5,7 +5,7 @@ describes: InlineSVG
 The InlineSVG component renders an accessible SVG inline in the html document.
 InlineSVG accepts the `className` prop, which you can use to style your image.
 
-> If you are rendering a square SVG icon, use [SVGIcon](#SVGIcon), which provides
+> If you are rendering a square SVG icon, use [SVGIcon](SVGIcon), which provides
 > props and styles specific to icons, such as pre-defined sizes.
 
 ### Setting a fixed `width` or `height`

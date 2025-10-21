@@ -10,7 +10,7 @@ Use Pills to communicate concise status with an identifiable color and supportiv
 
 The `ui-pill` package contains the following:
 
-- [Pill](#Pill)
+- [Pill](Pill)
 
 ### Installation
 

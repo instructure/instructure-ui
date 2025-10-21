@@ -96,7 +96,7 @@ render(<Example />)
 
 `slide` transitions the horizontal or vertical position of the element. The slide direction can be
 internationalized for right to left (rtl) languages. The following example uses the
-[TextDirectionContext](#TextDirectionContext) util to mirror the slide direction for rtl.
+[TextDirectionContext](TextDirectionContext) util to mirror the slide direction for rtl.
 
 ```js
 ---

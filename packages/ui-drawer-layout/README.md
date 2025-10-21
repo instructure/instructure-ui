@@ -10,7 +10,7 @@ A main-content-plus-tray layout component
 
 The `ui-drawer-layout` package contains the following:
 
-- [DrawerLayout](#DrawerLayout)
+- [DrawerLayout](DrawerLayout)
 
 ### Installation
 

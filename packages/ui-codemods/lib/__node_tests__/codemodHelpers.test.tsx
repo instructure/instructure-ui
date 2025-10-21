@@ -35,9 +35,28 @@ import {
   removeAllChildren,
   findElement
 } from '../utils/codemodHelpers'
-import { expect } from 'vitest'
+import { expect, type MockInstance, vi } from 'vitest'
 
 describe('test codemod helpers', () => {
+  let consoleLogMock: ReturnType<typeof vi.spyOn>
+  let consoleWarningMock: ReturnType<typeof vi.spyOn>
+
+  beforeEach(() => {
+    // Mocking console to prevent test output pollution
+    // comment these out to see the test output
+    consoleLogMock = vi
+      .spyOn(console, 'log')
+      .mockImplementation(() => {}) as MockInstance
+    consoleWarningMock = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {}) as MockInstance
+  })
+
+  afterEach(() => {
+    consoleLogMock.mockRestore()
+    consoleWarningMock.mockRestore()
+  })
+
   it('test findElement', () => {
     // Test finding simple elements by tag name
     const source = `
@@ -536,7 +555,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     let root = j(source)
-    let result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    let result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -562,7 +587,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -586,7 +617,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j.withParser('tsx')(source)
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -609,7 +646,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -632,7 +675,13 @@ import { Modal } from "@instructure/ui-modal";`)
     `
     root = j(source)
     const originalSource = root.toSource()
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(false)
     expect(root.toSource()).toBe(originalSource)
@@ -649,7 +698,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -673,7 +728,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -696,7 +757,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'oldName', 'newName', '@import-path')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'oldName',
+      'newName',
+      '@import-path'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -723,7 +790,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'Button',
+      'PrimaryButton',
+      '@instructure/ui-buttons'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -748,7 +821,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'Button',
+      'PrimaryButton',
+      '@instructure/ui-buttons'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -769,7 +848,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'Button',
+      'PrimaryButton',
+      '@instructure/ui-buttons'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -795,7 +880,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'Button',
+      'PrimaryButton',
+      '@instructure/ui-buttons'
+    )
 
     expect(result).toBe(true)
     expect(root.toSource()).toBe(`
@@ -826,7 +917,13 @@ import { Modal } from "@instructure/ui-modal";`)
       }
     `
     root = j(source)
-    result = renameImportAndUsages(j, root, 'Button', 'PrimaryButton', '@instructure/ui-buttons')
+    result = renameImportAndUsages(
+      j,
+      root,
+      'Button',
+      'PrimaryButton',
+      '@instructure/ui-buttons'
+    )
 
     expect(result).toBe(false)
     expect(root.toSource()).toBe(source)

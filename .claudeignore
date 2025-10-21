@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+coverage/
+__build__/
+.tmp/
+packages/*/lib/
+packages/__docs__/__build__/
+
+# Git
+.git/
+
+# Logs and build info
+*.log
+*.tsbuildinfo
+lerna-debug.log
+npm-debug.log
+
+# Test artifacts
+regression-test/node_modules/
+packages/*/node_modules/
+
+# Images and binary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.woff
+*.woff2
+*.ttf
+*.eot
+full_logo.png
+logo.png
+
+# Large changelog
+CHANGELOG.md
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store

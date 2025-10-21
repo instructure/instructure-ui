@@ -10,7 +10,7 @@ A tag component.
 
 The `ui-tag` package contains the following:
 
-- [Tag](#Tag)
+- [Tag](Tag)
 
 ### Installation
 

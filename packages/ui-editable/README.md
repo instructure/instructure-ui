@@ -10,8 +10,8 @@ Supports in-place editing of content.
 
 The `ui-editable` packages contains the following:
 
-- [Editable](#Editable)
-- [InPlaceEdit](#InPlaceEdit)
+- [Editable](Editable)
+- [InPlaceEdit](InPlaceEdit)
 
 ### Installation
 
@@ -21,7 +21,7 @@ npm install @instructure/ui-editable
 
 ### Usage
 
-For detailed usage and documentation, see [Editable](#Editable).
+For detailed usage and documentation, see [Editable](Editable).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-editable.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-editable

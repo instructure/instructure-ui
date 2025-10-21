@@ -99,16 +99,16 @@ type CalendarOwnProps = {
   renderNavigationLabel?: Renderable
   /**
    * A button to render in the navigation header. The recommendation is to
-   * compose it with the [IconButton](#IconButton) component by setting the `size`
+   * compose it with the [IconButton](IconButton) component by setting the `size`
    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenEnd](#icons).
+   * `renderIcon` to [IconArrowOpenEnd](icons).
    */
   renderNextMonthButton?: Renderable
   /**
    * A button to render in the navigation header. The recommendation is to
-   * compose it with the [IconButton](#Button) component by setting the `size`
+   * compose it with the [IconButton](Button) component by setting the `size`
    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenStart](#icons).
+   * `renderIcon` to [IconArrowOpenStart](icons).
    */
   renderPrevMonthButton?: Renderable
   /**
@@ -116,7 +116,7 @@ type CalendarOwnProps = {
    * portion of the label should be abbreviated (no longer than three characters).
    * Note that screen readers will read this content preceding each date as the
    * `<Calendar />` is navigated. Consider using
-   * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
+   * [AccessibleContent](AccessibleContent) with the `alt` prop containing the
    * full day name for assistive technologies and the children containing the
    * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
    */

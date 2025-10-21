@@ -10,7 +10,7 @@ A utility component for show/hide functionality.
 
 The `ui-expandable` package contains the following utilities:
 
-- [Expandable](#Expandable)
+- [Expandable](Expandable)
 
 ### Installation
 

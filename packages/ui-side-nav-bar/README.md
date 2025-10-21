@@ -10,8 +10,8 @@ Main and application level navigational components.
 
 The `ui-side-nav-bar` package contains the following:
 
-- [SideNavBar](#SideNavBar)
-- [AppNav](#AppNav)
+- [SideNavBar](SideNavBar)
+- [AppNav](AppNav)
 
 ### Installation
 

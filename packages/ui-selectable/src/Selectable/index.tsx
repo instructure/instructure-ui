@@ -36,7 +36,7 @@ import { withDeterministicId } from '@instructure/ui-react-utils'
 
 /**
 ---
-category: components
+category: components/utilities
 tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 **/

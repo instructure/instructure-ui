@@ -10,7 +10,7 @@ A styled HTML text input component.
 
 The `ui-text-input` package contains the following:
 
-- [TextInput](#TextInput)
+- [TextInput](TextInput)
 
 ### Installation
 

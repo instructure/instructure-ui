@@ -3,101 +3,50 @@ describes: Overlay
 ---
 
 The Overlay component is a closable/dismissible component that transitions
-in and out content rendered in a [Portal](#Portal)
+in and out content rendered in a [Portal](Portal)
 
-- ```js
-  class Example extends React.Component {
-    state = {
-      open: false
-    }
+```js
+---
+type: example
+---
+const Example = () => {
+  const [open, setOpen] = useState(false)
+  const maskRef = useRef(null)
 
-    _mask = null
-
-    handleMaskRef = (el) => {
-      this._mask = el
-    }
-
-    render() {
-      return (
-        <div>
-          <Button
-            onClick={() => {
-              this.setState({ open: true })
-            }}
-          >
-            Show the Overlay
-          </Button>
-          <Overlay
-            open={this.state.open}
-            transition="fade"
-            label="Overlay Example"
-            shouldReturnFocus
-            shouldContainFocus
-            onDismiss={() => {
-              this.setState({ open: false })
-            }}
-            defaultFocusElement={() => this._mask}
-          >
-            <Mask
-              onClick={() => {
-                this.setState({ open: false })
-              }}
-              elementRef={this.handleMaskRef}
-            >
-              <Spinner
-                renderTitle="Loading"
-                size="large"
-                margin="0 0 0 medium"
-              />
-            </Mask>
-          </Overlay>
-        </div>
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
-  const Example = () => {
-    const [open, setOpen] = useState(false)
-    const maskRef = useRef(null)
-
-    return (
-      <div>
-        <Button
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          setOpen(true)
+        }}
+      >
+        Show the Overlay
+      </Button>
+      <Overlay
+        open={open}
+        transition="fade"
+        label="Overlay Example"
+        shouldReturnFocus
+        shouldContainFocus
+        onDismiss={() => {
+          setOpen(false)
+        }}
+        defaultFocusElement={() => maskRef.current}
+      >
+        <Mask
           onClick={() => {
-            setOpen(true)
-          }}
-        >
-          Show the Overlay
-        </Button>
-        <Overlay
-          open={open}
-          transition="fade"
-          label="Overlay Example"
-          shouldReturnFocus
-          shouldContainFocus
-          onDismiss={() => {
             setOpen(false)
           }}
-          defaultFocusElement={() => maskRef.current}
+          elementRef={maskRef}
         >
-          <Mask
-            onClick={() => {
-              setOpen(false)
-            }}
-            elementRef={maskRef}
-          >
-            <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
-          </Mask>
-        </Overlay>
-      </div>
-    )
-  }
-  render(<Example />)
-  ```
+          <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
+        </Mask>
+      </Overlay>
+    </div>
+  )
+}
+render(<Example />)
+```
 
 ### Guidelines
 

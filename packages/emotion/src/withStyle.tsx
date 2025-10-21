@@ -113,11 +113,11 @@ const defaultValues = {
  * ### Applying themes
  *
  * A themeable component’s theme can be configured via wrapping it in an
- * [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set
+ * [InstUISettingsProvider](InstUISettingsProvider) component, and/or set
  * explicitly via its `themeOverride` prop.
  *
  * InstUISettingsProvider provides a theme object (e.g. the [canvas theme](/#canvas)).
- * These variables are mapped to the component's own variables in `theme.js` (see [theming](#theming-basics) for more info).
+ * These variables are mapped to the component's own variables in `theme.js` (see [theming](theming-basics) for more info).
  *
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
  *

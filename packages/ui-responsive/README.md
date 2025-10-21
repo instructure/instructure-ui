@@ -10,7 +10,7 @@ A component that allows for rendering a component differently based on either th
 
 The `ui-responsive` package contains the following:
 
-- [Responsive](#Responsive)
+- [Responsive](Responsive)
 
 ### Installation
 

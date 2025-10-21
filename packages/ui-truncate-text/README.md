@@ -10,7 +10,7 @@ A TruncateText component made by Instructure Inc.
 
 The `ui-truncate-text` package contains the following:
 
-- [TruncateText](#TruncateText)
+- [TruncateText](TruncateText)
 
 ### Installation
 

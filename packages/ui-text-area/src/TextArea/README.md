@@ -81,27 +81,10 @@ type: example
 
 A 'controlled' TextArea:
 
-- ```js
-  class Example extends React.Component {
-    state = { description: 'Hello World' }
-
-    handleChange = (e) => this.setState({ description: e.target.value })
-
-    render() {
-      return (
-        <TextArea
-          label="Description"
-          value={this.state.description}
-          onChange={this.handleChange}
-        />
-      )
-    }
-  }
-
-  render(<Example />)
-  ```
-
-- ```js
+```js
+---
+type: example
+---
   const Example = () => {
     const [description, setDescription] = useState('Hello World')
 
@@ -117,7 +100,7 @@ A 'controlled' TextArea:
   }
 
   render(<Example />)
-  ```
+```
 
 ### Guidelines
 

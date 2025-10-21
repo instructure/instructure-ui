@@ -8,7 +8,7 @@
 
 The `ui-pages` package contains the following:
 
-- [Pages](#Pages)
+- [Pages](Pages)
 
 ### Installation
 

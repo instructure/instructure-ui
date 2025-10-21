@@ -32,7 +32,7 @@ It accepts a `theme` prop, which should be an Instructure UI theme.
 
 It can be used in two ways. On the top level, you can provide the theme for the whole application or nested anywhere inside it. You can also provide an object with theme or component theme overrides.
 
-**For detailed usage info and examples, see the [InstUISettingsProvider](#InstUISettingsProvider) documentation page.**
+**For detailed usage info and examples, see the [InstUISettingsProvider](InstUISettingsProvider) documentation page.**
 
 ```jsx
 ---
@@ -53,13 +53,13 @@ const RenderApp = () => {
 
 ### Theme overrides
 
-A themeable component’s theme can be configured by wrapping it in an [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set explicitly via its `themeOverride` prop.
+A themeable component’s theme can be configured by wrapping it in an [InstUISettingsProvider](InstUISettingsProvider) component, and/or set explicitly via its `themeOverride` prop.
 
 #### themeOverride prop
 
 The themeable components accept a `themeOverride` prop which lets you override it's component theme object. It accepts an override object or a function, which has the current `componentTheme` as its parameter.
 
-**See more on the [withStyle](#withStyle/#applying-themes) and [Using theme overrides](/#using-theme-overrides) doc pages for more info.**
+**See more on the [withStyle](withStyle/#applying-themes) and [Using theme overrides](/#using-theme-overrides) doc pages for more info.**
 
 ```js
 ---

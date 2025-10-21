@@ -10,7 +10,7 @@ A static rating component.
 
 The `ui-rating` package contains the following:
 
-- [Rating](#Rating)
+- [Rating](Rating)
 
 ### Installation
 

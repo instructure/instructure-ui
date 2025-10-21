@@ -3,533 +3,293 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
+## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
+**Note:** Version bump only for package @instructure/ui-tabs
+
+# [11.0.0](https://github.com/instructure/instructure-ui/compare/v10.26.0...v11.0.0) (2025-10-06)
 
 ### Features
 
-* **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
-
+- **many:** instUI v11 release ([36f5438](https://github.com/instructure/instructure-ui/commit/36f54382669186227ba24798bbf7201ef2f5cd4c))
 
 ### BREAKING CHANGES
 
-* **many:** InstUI v11 contains the following breaking changes:
-- React 16 and 17 are no longer supported
-- remove `PropTypes` from all packages
-- remove `CodeEditor` component
-- remove `@instui/theme-registry` package
-- remove `@testable`, `@experimental`, `@hack` decorators
-- InstUISettingsProvider's `as` prop is removed
-- `canvas.use()`, `canvasHighContrast.use()` functions are removed
-- `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
-- `variables` field on theme objects are removed
-- remove deprecated props from Table: Row's `isStacked`, Body's
+- **many:** InstUI v11 contains the following breaking changes:
+
+* React 16 and 17 are no longer supported
+* remove `PropTypes` from all packages
+* remove `CodeEditor` component
+* remove `@instui/theme-registry` package
+* remove `@testable`, `@experimental`, `@hack` decorators
+* InstUISettingsProvider's `as` prop is removed
+* `canvas.use()`, `canvasHighContrast.use()` functions are removed
+* `canvasThemeLocal`, `canvasHighContrastThemeLocal` are removed
+* `variables` field on theme objects are removed
+* remove deprecated props from Table: Row's `isStacked`, Body's
   `isStacked`, `hover`, and `headers`
-- `Table`'s `caption` prop is now required
-- `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
-
-
-
-
+* `Table`'s `caption` prop is now required
+* `ui-dom-utils`'s `getComputedStyle` can now return `undefined`
 
 # [10.26.0](https://github.com/instructure/instructure-ui/compare/v10.25.0...v10.26.0) (2025-10-01)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.25.0](https://github.com/instructure/instructure-ui/compare/v10.24.2...v10.25.0) (2025-09-09)
-
 
 ### Bug Fixes
 
-* **ui-tabs,shared-types:** color tabs.panel focus outline from the theme and make it overridable by brand overrides ([b4f9893](https://github.com/instructure/instructure-ui/commit/b4f989343019620c2a25275eab7beba21230b158))
-
-
-
-
+- **ui-tabs,shared-types:** color tabs.panel focus outline from the theme and make it overridable by brand overrides ([b4f9893](https://github.com/instructure/instructure-ui/commit/b4f989343019620c2a25275eab7beba21230b158))
 
 ## [10.24.2](https://github.com/instructure/instructure-ui/compare/v10.24.1...v10.24.2) (2025-08-11)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [10.24.1](https://github.com/instructure/instructure-ui/compare/v10.24.0...v10.24.1) (2025-07-30)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.24.0](https://github.com/instructure/instructure-ui/compare/v10.23.0...v10.24.0) (2025-07-18)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.23.0](https://github.com/instructure/instructure-ui/compare/v10.22.0...v10.23.0) (2025-07-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.22.0](https://github.com/instructure/instructure-ui/compare/v10.21.0...v10.22.0) (2025-07-04)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.21.0](https://github.com/instructure/instructure-ui/compare/v10.20.1...v10.21.0) (2025-06-27)
-
 
 ### Bug Fixes
 
-* **ui-tabs:** fix bottom border of Tab with scrolling overflow in secondary variant ([dabd148](https://github.com/instructure/instructure-ui/commit/dabd14809ce6372b2605aea6edb6ea1a58c86b13))
-
-
-
-
+- **ui-tabs:** fix bottom border of Tab with scrolling overflow in secondary variant ([dabd148](https://github.com/instructure/instructure-ui/commit/dabd14809ce6372b2605aea6edb6ea1a58c86b13))
 
 ## [10.20.1](https://github.com/instructure/instructure-ui/compare/v10.20.0...v10.20.1) (2025-06-17)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.20.0](https://github.com/instructure/instructure-ui/compare/v10.19.1...v10.20.0) (2025-06-13)
-
 
 ### Bug Fixes
 
-* **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
-
-
-
-
+- **many:** update dependencies, browsersdb and moment timezone database ([3813636](https://github.com/instructure/instructure-ui/commit/3813636458c901ad4bc74a4d5ae015cb55defcb2))
 
 ## [10.19.1](https://github.com/instructure/instructure-ui/compare/v10.19.0...v10.19.1) (2025-06-05)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.19.0](https://github.com/instructure/instructure-ui/compare/v10.18.1...v10.19.0) (2025-06-03)
-
 
 ### Bug Fixes
 
-* **many:** fix "not a valid selector" exception when an option ID contains quotes ([78e0b96](https://github.com/instructure/instructure-ui/commit/78e0b96edf29f3d476ba30b03134f1726bbdd0f4))
-
-
-
-
+- **many:** fix "not a valid selector" exception when an option ID contains quotes ([78e0b96](https://github.com/instructure/instructure-ui/commit/78e0b96edf29f3d476ba30b03134f1726bbdd0f4))
 
 ## [10.18.1](https://github.com/instructure/instructure-ui/compare/v10.18.0...v10.18.1) (2025-05-29)
 
-
 ### Bug Fixes
 
-* **ui-tabs:** remove scrollbar from tabs ([7c4e5be](https://github.com/instructure/instructure-ui/commit/7c4e5bedba8c1e9d1972eb702ccacb60c34eb513))
-
-
-
-
+- **ui-tabs:** remove scrollbar from tabs ([7c4e5be](https://github.com/instructure/instructure-ui/commit/7c4e5bedba8c1e9d1972eb702ccacb60c34eb513))
 
 # [10.18.0](https://github.com/instructure/instructure-ui/compare/v10.17.0...v10.18.0) (2025-05-26)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.17.0](https://github.com/instructure/instructure-ui/compare/v10.16.4...v10.17.0) (2025-05-20)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 ## [10.16.4](https://github.com/instructure/instructure-ui/compare/v10.16.3...v10.16.4) (2025-05-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [10.16.3](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.3) (2025-04-30)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 ## [10.16.2](https://github.com/instructure/instructure-ui/compare/v10.16.1...v10.16.2) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [10.16.1](https://github.com/instructure/instructure-ui/compare/v10.16.0...v10.16.1) (2025-04-22)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.16.0](https://github.com/instructure/instructure-ui/compare/v10.15.2...v10.16.0) (2025-04-11)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [10.15.2](https://github.com/instructure/instructure-ui/compare/v10.15.1...v10.15.2) (2025-04-07)
-
 
 ### Bug Fixes
 
-* update PropTypes to align with the new spacing tokens ([223d55b](https://github.com/instructure/instructure-ui/commit/223d55bad95e2a3a8b298d622e5b1d0fbab6b289))
-
-
-
-
+- update PropTypes to align with the new spacing tokens ([223d55b](https://github.com/instructure/instructure-ui/commit/223d55bad95e2a3a8b298d622e5b1d0fbab6b289))
 
 ## [10.15.1](https://github.com/instructure/instructure-ui/compare/v10.15.0...v10.15.1) (2025-04-03)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.15.0](https://github.com/instructure/instructure-ui/compare/v10.14.0...v10.15.0) (2025-03-31)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.14.0](https://github.com/instructure/instructure-ui/compare/v10.13.0...v10.14.0) (2025-03-17)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.13.0](https://github.com/instructure/instructure-ui/compare/v10.12.0...v10.13.0) (2025-03-06)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.12.0](https://github.com/instructure/instructure-ui/compare/v10.11.0...v10.12.0) (2025-02-24)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.11.0](https://github.com/instructure/instructure-ui/compare/v10.10.0...v10.11.0) (2025-02-03)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.10.0](https://github.com/instructure/instructure-ui/compare/v10.9.0...v10.10.0) (2024-12-18)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.9.0](https://github.com/instructure/instructure-ui/compare/v10.8.0...v10.9.0) (2024-12-12)
-
 
 ### Features
 
-* **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
-
-
-
-
+- **many:** make meta package export every component and type definition ([dee9abb](https://github.com/instructure/instructure-ui/commit/dee9abb9cbffa4abc9edf48fb7d8ad41fea385b4))
 
 # [10.8.0](https://github.com/instructure/instructure-ui/compare/v10.7.0...v10.8.0) (2024-12-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.7.0](https://github.com/instructure/instructure-ui/compare/v10.6.1...v10.7.0) (2024-12-03)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 ## [10.6.1](https://github.com/instructure/instructure-ui/compare/v10.6.0...v10.6.1) (2024-11-26)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.6.0](https://github.com/instructure/instructure-ui/compare/v10.5.0...v10.6.0) (2024-11-18)
-
 
 ### Bug Fixes
 
-* **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
-
-
-
-
+- **many:** adjust border colors to meet a11y contrast standards ([2f47e06](https://github.com/instructure/instructure-ui/commit/2f47e066f7107c67e37ce8b7aff483586cf7a6b7))
 
 # [10.5.0](https://github.com/instructure/instructure-ui/compare/v10.4.1...v10.5.0) (2024-11-07)
 
-
 ### Bug Fixes
 
-* **ui-tabs:** tabpanel content is not accessible with keyboard navigation when it does not have focusable element ([297cd03](https://github.com/instructure/instructure-ui/commit/297cd039228cda5bf742f3c0ca5d1cbf6a253893))
-
-
-
-
+- **ui-tabs:** tabpanel content is not accessible with keyboard navigation when it does not have focusable element ([297cd03](https://github.com/instructure/instructure-ui/commit/297cd039228cda5bf742f3c0ca5d1cbf6a253893))
 
 ## [10.4.1](https://github.com/instructure/instructure-ui/compare/v10.4.0...v10.4.1) (2024-10-28)
 
-
 ### Bug Fixes
 
-* docs screenreader alerts are no longer screendeader focusable ([c225853](https://github.com/instructure/instructure-ui/commit/c2258531aa377b698fe932012112704f1879b501))
-* update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
-
-
-
-
+- docs screenreader alerts are no longer screendeader focusable ([c225853](https://github.com/instructure/instructure-ui/commit/c2258531aa377b698fe932012112704f1879b501))
+- update license ([1c039d9](https://github.com/instructure/instructure-ui/commit/1c039d9cbf5a3ea99b59803ddde5c6c0b2d76ba5))
 
 # [10.4.0](https://github.com/instructure/instructure-ui/compare/v10.3.0...v10.4.0) (2024-10-16)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.3.0](https://github.com/instructure/instructure-ui/compare/v10.2.2...v10.3.0) (2024-10-03)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 ## [10.2.2](https://github.com/instructure/instructure-ui/compare/v10.2.1...v10.2.2) (2024-09-13)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [10.2.1](https://github.com/instructure/instructure-ui/compare/v10.2.0...v10.2.1) (2024-08-30)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [10.2.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.2.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.1.0](https://github.com/instructure/instructure-ui/compare/v10.0.0...v10.1.0) (2024-08-23)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [10.0.0](https://github.com/instructure/instructure-ui/compare/v9.5.1...v10.0.0) (2024-07-31)
-
 
 ### Features
 
-* **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
-
+- **many:** rewrite color system ([1e5809e](https://github.com/instructure/instructure-ui/commit/1e5809e28dee8c2a71703a429609b8d2f95d76e6))
 
 ### BREAKING CHANGES
 
-* **many:** Breaks color overrides in certain cases
-
-
-
-
+- **many:** Breaks color overrides in certain cases
 
 ## [9.5.1](https://github.com/instructure/instructure-ui/compare/v9.5.0...v9.5.1) (2024-07-30)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [9.5.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.5.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [9.4.0](https://github.com/instructure/instructure-ui/compare/v9.3.0...v9.4.0) (2024-07-26)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [9.3.0](https://github.com/instructure/instructure-ui/compare/v9.2.0...v9.3.0) (2024-07-17)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [9.2.0](https://github.com/instructure/instructure-ui/compare/v9.1.0...v9.2.0) (2024-07-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
-
 
 ### Bug Fixes
 
-* **ui-tabs:** fix horizontal scrolling with keyboard navigation ([a25c7db](https://github.com/instructure/instructure-ui/commit/a25c7db1ebede622f489dd65872ed8fc5a1b9651))
-* **ui-tabs:** fix id generation when null is present as children ([85765ae](https://github.com/instructure/instructure-ui/commit/85765ae3183ac121714cd814a322dcc012ed2f72))
-
+- **ui-tabs:** fix horizontal scrolling with keyboard navigation ([a25c7db](https://github.com/instructure/instructure-ui/commit/a25c7db1ebede622f489dd65872ed8fc5a1b9651))
+- **ui-tabs:** fix id generation when null is present as children ([85765ae](https://github.com/instructure/instructure-ui/commit/85765ae3183ac121714cd814a322dcc012ed2f72))
 
 ### Features
 
-* **ui-tabs:** add option for persisting tabpanels ([6fe73a3](https://github.com/instructure/instructure-ui/commit/6fe73a3ec76c88fcc7baf2f587276de595316dbc))
-
-
-
-
+- **ui-tabs:** add option for persisting tabpanels ([6fe73a3](https://github.com/instructure/instructure-ui/commit/6fe73a3ec76c88fcc7baf2f587276de595316dbc))
 
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
-
 
 ### Bug Fixes
 
-* **ui-tabs:** fix automatic id generation ([4645981](https://github.com/instructure/instructure-ui/commit/464598168ff9a2fd76fe2e02a8bc7b89f9c1f68f))
-
-
-
-
+- **ui-tabs:** fix automatic id generation ([4645981](https://github.com/instructure/instructure-ui/commit/464598168ff9a2fd76fe2e02a8bc7b89f9c1f68f))
 
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-tabs
 
-
-
-
-
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
 **Note:** Version bump only for package @instructure/ui-tabs
-
-
-
-
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

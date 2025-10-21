@@ -10,7 +10,7 @@ A styled HTML textarea Component.
 
 The `ui-text-area` package contains the following:
 
-- [TextArea](#TextArea)
+- [TextArea](TextArea)
 
 ### Installation
 

@@ -3,34 +3,30 @@ describes: ApplyLocale
 ---
 
 `<ApplyLocale />` Sets the locale and timezone context for children that can
-use it, such as a [TimeSelect](#TimeSelect).
+use it, such as a [TimeSelect](TimeSelect).
 
 ```js
 ---
 type: example
 ---
+const Example = () => {
+  const [value, setValue] = useState('2020-05-18T23:59:00')
 
-class Example extends React.Component {
-  state = {
-    value: '2020-05-18T23:59:00'
+  const handleChange = (e, { value }) => {
+    setValue(value)
+    console.log(value)
   }
 
-  handleChange = (e, { value }) => {
-    this.setState({ value }, () =>console.log(this.state.value))
-  }
-
-  render () {
-    return (
-      <TimeSelect
-        renderLabel="Choose a time"
-        placeholder="e.g., 4:00:00 PM"
-        value={this.state.value}
-        step={15}
-        format="LTS"
-        onChange={this.handleChange}
-      />
-    )
-  }
+  return (
+    <TimeSelect
+      renderLabel="Choose a time"
+      placeholder="e.g., 4:00:00 PM"
+      value={value}
+      step={15}
+      format="LTS"
+      onChange={handleChange}
+    />
+  )
 }
 
 render(

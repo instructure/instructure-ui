@@ -10,8 +10,8 @@ A styled HTML 'progress' element
 
 The `ui-progress` package contains the following:
 
-- [ProgressBar](#ProgressBar)
-- [ProgressCircle](#ProgressCircle)
+- [ProgressBar](ProgressBar)
+- [ProgressCircle](ProgressCircle)
 
 ### Installation
 

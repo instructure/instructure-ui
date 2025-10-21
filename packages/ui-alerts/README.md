@@ -10,7 +10,7 @@ An alert component.
 
 The `ui-alerts` package contains the following:
 
-- [Alert](#Alert)
+- [Alert](Alert)
 
 ### Installation
 
