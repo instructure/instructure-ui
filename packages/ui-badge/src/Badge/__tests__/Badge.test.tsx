@@ -90,7 +90,7 @@ describe('<Badge />', () => {
     expect(badge).not.toBeNull()
     expect(badgeStyle).not.toBeNull()
     expect(badgeStyle).toHaveProperty('bottom')
-    expect(badgeStyle).toHaveProperty('bottom', 'calc(-5px)')
+    expect(badgeStyle).toHaveProperty('bottom', 'calc(-1 * 5px)')
     expect(badgeStyle).toHaveProperty('inset-inline-start', 'calc(-1 * 5px)')
   })
 

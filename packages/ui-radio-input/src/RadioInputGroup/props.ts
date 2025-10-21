@@ -24,7 +24,11 @@
 
 import React from 'react'
 
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  WithStyleProps,
+  ComponentStyle,
+  Spacing
+} from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
@@ -92,6 +96,11 @@ type RadioInputGroupOwnProps = {
    * Setting this to `true` adds and asterisk after the description (group label). It does not cause any behavioural change.
    */
   isRequired?: boolean
+
+  /**
+   * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof RadioInputGroupOwnProps
@@ -121,7 +130,8 @@ const allowedProps: AllowedPropKeys = [
   'variant',
   'size',
   'layout',
-  'isRequired'
+  'isRequired',
+  'margin'
 ]
 
 export type { RadioInputGroupProps, RadioInputGroupState, RadioInputGroupStyle }

@@ -230,4 +230,45 @@ describe('<RadioInputGroup />', () => {
     expect(group).toHaveAttribute('aria-invalid', 'true')
     expect(group).toHaveAttribute('aria-errormessage', expect.anything())
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with custom CSS value and with tokens', () => {
+      const { container } = render(
+        <div>
+          <RadioInputGroup name="group1" description="Group 1" margin="30px">
+            <RadioInput label="Option 1" value="1" />
+          </RadioInputGroup>
+          <RadioInputGroup name="group2" description="Group 2" margin="large">
+            <RadioInput label="Option 1" value="1" />
+          </RadioInputGroup>
+          <RadioInputGroup name="group3" description="Group 3" margin="space4">
+            <RadioInput label="Option 1" value="1" />
+          </RadioInputGroup>
+          <RadioInputGroup
+            name="group4"
+            description="Group 4"
+            margin="small 20px"
+          >
+            <RadioInput label="Option 1" value="1" />
+          </RadioInputGroup>
+        </div>
+      )
+
+      const allFieldsets = container.querySelectorAll('fieldset')
+
+      const fieldsetCustom = allFieldsets[0] as HTMLElement
+      const fieldsetCustomStyle = window.getComputedStyle(fieldsetCustom)
+      const fieldsetLarge = allFieldsets[1] as HTMLElement
+      const fieldsetLargeStyle = window.getComputedStyle(fieldsetLarge)
+      const fieldsetSpace = allFieldsets[2] as HTMLElement
+      const fieldsetSpaceStyle = window.getComputedStyle(fieldsetSpace)
+      const fieldsetMixed = allFieldsets[3] as HTMLElement
+      const fieldsetMixedStyle = window.getComputedStyle(fieldsetMixed)
+
+      expect(fieldsetCustomStyle.margin).toBe('30px')
+      expect(fieldsetLargeStyle.margin).toBe('2.25rem')
+      expect(fieldsetSpaceStyle.margin).toBe('0.25rem')
+      expect(fieldsetMixedStyle.margin).toBe('0.75rem 20px')
+    })
+  })
 })
