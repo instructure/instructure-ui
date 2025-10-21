@@ -208,28 +208,56 @@
       "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
-    "accent1Color": {
+    "accentBlueColor": {
       "value": "{color.icon.accent.blue}",
       "type": "color"
     },
-    "accent2Color": {
+    "accentGreenColor": {
       "value": "{color.icon.accent.green}",
       "type": "color"
     },
-    "accent3Color": {
+    "accentRedColor": {
       "value": "{color.icon.accent.red}",
       "type": "color"
     },
-    "accent4Color": {
+    "accentOrangeColor": {
       "value": "{color.icon.accent.orange}",
       "type": "color"
     },
-    "accent5Color": {
+    "accentGreyColor": {
       "value": "{color.icon.accent.grey}",
       "type": "color"
     },
-    "accent6Color": {
+    "accentAshColor": {
       "value": "{color.icon.accent.ash}",
+      "type": "color"
+    },
+    "accentPlumColor": {
+      "value": "{color.icon.accent.plum}",
+      "type": "color"
+    },
+    "accentVioletColor": {
+      "value": "{color.icon.accent.violet}",
+      "type": "color"
+    },
+    "accentStoneColor": {
+      "value": "{color.icon.accent.stone}",
+      "type": "color"
+    },
+    "accentSkyColor": {
+      "value": "{color.icon.accent.sky}",
+      "type": "color"
+    },
+    "accentHoneyColor": {
+      "value": "{color.icon.accent.honey}",
+      "type": "color"
+    },
+    "accentSeaColor": {
+      "value": "{color.icon.accent.sea}",
+      "type": "color"
+    },
+    "accentAutoraColor": {
+      "value": "{color.icon.accent.aurora}",
       "type": "color"
     }
   }
