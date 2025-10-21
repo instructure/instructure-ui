@@ -24,7 +24,7 @@
 
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import fs from 'fs'
+import { promises } from 'fs'
 import pkg from 'glob'
 import setupThemes from './buildThemes/setupThemes.js'
 
@@ -40,13 +40,13 @@ export default {
     const jsonFiles = glob.sync('**/*.json', { cwd: tokensStudioDir })
 
     const themeTokens = {}
-    jsonFiles.forEach((filePath) => {
+    for (const filePath of jsonFiles) {
       const fullPath = path.join(tokensStudioDir, filePath)
-      const rawData = fs.readFileSync(fullPath, 'utf8')
+      const rawData = await promises.readFile(fullPath, 'utf8')
       const relativePath = filePath.replace('.json', '')
       themeTokens[relativePath] = JSON.parse(rawData)
-    })
+    }
 
-    setupThemes('packages/ui-themes/src/themes/newThemes', themeTokens)
+    await setupThemes('packages/ui-themes/src/themes/newThemes', themeTokens)
   }
 }

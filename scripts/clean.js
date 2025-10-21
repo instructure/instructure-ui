@@ -23,9 +23,9 @@
  * SOFTWARE.
  */
 
-const fs = require('fs').promises
+const fs = require('fs')
 const path = require('path')
-const { execSync } = require('child_process')
+const url = require('url')
 
 const NODE_PACKAGES = [
   'ui-icons-build',
@@ -46,70 +46,50 @@ const DIRS_TO_DELETE = [
   'tokens',
   '.babel-cache',
   '.cache',
-  'es'
+  'es',
+  'src/themes/newThemes'
 ]
-
-async function deleteDirs(dirs = []) {
-  // Delete all in parallel with error handling
-  await Promise.all(
-    dirs.map((dir) =>
-      fs.rm(dir, { force: true, recursive: true }).catch(() => {
-        // Silently ignore errors (file doesn't exist, etc)
-      })
-    )
-  )
+function deleteDirs(dirs = []) {
+  return dirs.map((dir) => {
+    fs.rmSync(dir, { force: true, recursive: true })
+  })
 }
-
 // deletes built files from tooling packages (NODE_PACKAGES const)
-async function clean() {
+function clean() {
   const packagesPath = path.resolve('./packages')
-  const packageDirs = await fs.readdir(packagesPath, { withFileTypes: true })
-
-  // Process all packages in parallel
-  const deletions = packageDirs
-    .filter((dir) => dir.isDirectory())
-    .map(async (packageDir) => {
-      const rmDirs = DIRS_TO_DELETE.map((dir) =>
-        path.join(packagesPath, packageDir.name, dir)
+  const dir = fs.opendirSync(packagesPath)
+  let packageDir
+  while ((packageDir = dir.readSync()) !== null) {
+    if (packageDir.isDirectory()) {
+      const rmDirs = DIRS_TO_DELETE.map(
+        (dir) => `${packagesPath}/${packageDir.name}/${dir}`
       )
-
-      if (!NODE_PACKAGES.includes(packageDir.name)) {
-        rmDirs.push(path.join(packagesPath, packageDir.name, 'lib'))
+      if (NODE_PACKAGES.includes(packageDir.name)) {
+        deleteDirs(rmDirs)
+      } else {
+        deleteDirs([...rmDirs, `${packagesPath}/${packageDir.name}/lib`])
       }
-
-      return deleteDirs(rmDirs)
-    })
-
-  await Promise.all(deletions)
+    }
+  }
 }
-
-// deletes node_modules recursively - OPTIMIZED VERSION
+// deletes node_modules recursively
 function removeNodeModules() {
-  try {
-    // Use native find command - 10-100x faster than Node.js recursive scan
-    console.error('Finding node_modules directories...')
-    execSync(
-      'find . -name "node_modules" -type d -prune -exec rm -rf {} + 2>/dev/null || true',
-      { stdio: 'inherit' }
-    )
-  } catch (error) {
-    console.error('Failed to remove node_modules:', error.message)
-    process.exit(1)
+  const dirs = fs.readdirSync('.', { recursive: true, withFileTypes: true })
+  const toRemove = []
+  for (const dir of dirs) {
+    if (dir.isDirectory() && dir.name.toLowerCase() === 'node_modules') {
+      toRemove.push(url.pathToFileURL(path.join(dir.parentPath, dir.name)))
+    }
   }
+  deleteDirs(toRemove)
 }
 
-async function main() {
-  console.error('Deleting built files from tooling packages...')
-  await clean()
-
-  const args = process.argv.slice(2)
-  if (args.length > 0 && args[0] === '--nuke_node') {
-    console.error('Deleting node_modules recursively...')
-    removeNodeModules()
-  }
+// eslint-disable-next-line no-console
+console.info('Deleting generated files...')
+clean()
+const args = process.argv.slice(2)
+if (args.length > 0 && args[0] === '--nuke_node') {
+  // eslint-disable-next-line no-console
+  console.info('Deleting node_modules recursively...')
+  removeNodeModules()
 }
-
-main().catch((error) => {
-  console.error('Clean script failed:', error)
-  process.exit(1)
-})
