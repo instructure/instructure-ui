@@ -76,8 +76,19 @@ class Document extends Component<DocumentProps, DocumentState> {
     const { doc, themeVariables } = this.props
     let generateTheme
     if (this.state.selectedDetailsTabId === doc.id) {
-      generateTheme = doc?.componentInstance?.generateComponentTheme
+      // @ts-ignore todo type
+      if (this.props.themeVariables.components?.[doc.id]) {
+        // new theme
+        // @ts-ignore todo type
+        generateTheme = this.props.themeVariables.components[doc.id]
+        this.setState({ componentTheme: generateTheme })
+        return
+      } else {
+        // old theme
+        generateTheme = doc?.componentInstance?.generateComponentTheme
+      }
     } else {
+      // TODO make it work for new themes
       generateTheme = doc?.children?.find(
         (value) => value.id === this.state.selectedDetailsTabId
       )?.componentInstance?.generateComponentTheme
@@ -138,6 +149,15 @@ class Document extends Component<DocumentProps, DocumentState> {
           <View as="div" margin="0 0 x-small 0">
             See which global theme variables are mapped to the component here:{' '}
             {this.renderThemeLink(doc)}
+            <br />
+            <br />
+            Note: Theme variables with a dot in their name are nested objects,
+            to override them you need to override the whole object, for example:
+            &nbsp;
+            <code>
+              themeOverride=
+              {`{{ boxShadow: {x: "0.3rem", y: "0.5rem", color: "red"}}}`}
+            </code>
           </View>
         ) : null}
         <ComponentTheme
