@@ -76,8 +76,8 @@
       "value": "{color.icon.onColor}",
       "type": "color"
     },
-    "disabledColor": {
-      "value": "{color.icon.interactive.disabled.base}",
+    "inverseColor": {
+      "value": "{color.icon.inverse}",
       "type": "color"
     },
     "disabledBaseColor": {
