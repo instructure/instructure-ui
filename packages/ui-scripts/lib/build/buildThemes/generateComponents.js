@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+const boxShadowType = 'BoxShadow'
+
 const isReference = (expression) =>
   expression[0] === '{' && expression[expression.length - 1] === '}'
 
@@ -63,7 +65,13 @@ export const resolveReferences = (semantics, key) => {
   if (isReference(value)) {
     return formatReference(value)
   }
-
+  if (value === '') {
+    // token studio returns "" if a value is not set, but defaults to 0
+    console.warn(
+      `WARNING: key "${key}" has empty value, setting to 0. Is this intentional?`
+    )
+    return `0,\n`
+  }
   if (!isNaN(Number(value))) {
     return `${value},\n`
   }
@@ -71,66 +79,92 @@ export const resolveReferences = (semantics, key) => {
   return `"${value}",\n`
 }
 
-export const resolveTypeReferences = (semantics, key) => {
-  const value = key ? semantics[key] : semantics
-  if (typeof value === 'object') {
-    return Object.keys(value).reduce((acc, key, index) => {
-      if (typeof value[key] === 'object') {
-        return (
-          acc +
-          `"${key}": {${resolveTypeReferences(value, key)}}${
-            index + 1 === Object.keys(value).length ? '' : ',\n'
-          }`
-        )
-      }
-      return acc + `"${key}": ${resolveTypeReferences(value, key)}`
-    }, '')
-  }
-
-  if (isReference(value)) {
-    return `Semantics${value
-      .slice(1, -1)
-      .split('.')
-      .map((val) => `['${val}']`)
-      .join('')}, `
-  }
-
-  if (!isNaN(Number(value))) {
-    return 'number, '
-  }
-  return `${typeof value}, `
-}
-
-//this will just convert everything to string type, which is sufficient but could be better, since sometimes number makes sense
-// export const resolveTypeReferences = (semantics, key) => {
-//   const value = key ? semantics[key] : semantics
-//   if (typeof value === 'object') {
-//     return Object.keys(value).reduce((acc, key, index) => {
-//       if (typeof value[key] === 'object') {
-//         return (
-//           acc +
-//           `"${key}": {${resolveTypeReferences(value, key)}}${
-//             index + 1 === Object.keys(value).length ? '' : ',\n'
-//           }`
-//         )
-//       }
-//       return acc + `"${key}": ${resolveTypeReferences(value, key)}`
-//     }, '')
-//   }
-
-//   return `string, `
-// }
-
 const generateComponent = (data) => {
   const formattedSemantic = formatComponent(data)
 
   return resolveReferences(formattedSemantic)
 }
 
-export const generateComponentType = (data) => {
-  const formattedSemantic = formatComponent(data)
-
-  return `{${resolveTypeReferences(formattedSemantic)}}`
+const getGenericType = (value) => {
+  if (isReference(value)) {
+    return `Semantics${value
+      .slice(1, -1)
+      .split('.')
+      .map((val) => `['${val}']`)
+      .join('')}`
+  }
+  return 'string'
 }
 
+const parseType = (key, tokenObject, acc) => {
+  let ret = acc
+  if (tokenObject.type) {
+    switch (tokenObject.type) {
+      case 'border':
+        // This type is coming from Token Studio
+        ret += '{ style: "solid" | "dashed" }'
+        break
+      case 'borderWidth':
+      case 'borderRadius':
+      case 'color':
+      case 'fontFamilies':
+      case 'fontSizes':
+      case 'fontWeights':
+      case 'lineHeights':
+      case 'sizing':
+      case 'spacing':
+        ret += `${getGenericType(tokenObject.value)}`
+        break
+      case 'boxShadow': {
+        // This type is coming from Token Studio,
+        // by convention we always assign a default value to x,y,blur,spread
+        if (Array.isArray(tokenObject.value)) {
+          ret += '{'
+          for (let i = 0; i < tokenObject.value.length; i++) {
+            ret += `"${i}": ${boxShadowType}\n`
+          }
+          ret += '}'
+        } else {
+          ret += boxShadowType
+        }
+        break
+      }
+      case 'typography':
+        ret += ` {
+        fontFamily: ${getGenericType(tokenObject.value.fontFamily)}
+        fontWeight: ${getGenericType(tokenObject.value.fontWeight)}
+        fontSize: ${getGenericType(tokenObject.value.fontSize)}
+        lineHeight: ${getGenericType(tokenObject.value.lineHeight)}
+        textDecoration: "underline"
+        }`
+        break
+      default:
+        throw new Error(
+          `unknown token type ${tokenObject.type} for key ${key}.`
+        )
+    }
+    return ret
+  } else {
+    for (const key of Object.keys(tokenObject)) {
+      if (tokenObject[key].type) {
+        if (tokenObject[key].description) {
+          ret += `/** ${tokenObject[key].description} */\n`
+        }
+        ret += `${key}: ${parseType(key, tokenObject[key], acc)}\n`
+      } else {
+        ret += `${key}: {${parseType(key, tokenObject[key], acc)}}\n`
+      }
+    }
+  }
+  return ret
+}
+
+/**
+ * Generates the type for a component as a JSON string
+ * @param data an object directly from a Tokens Studio JSON file.
+ */
+export const generateComponentType = (data) => {
+  return `{${parseType('', data, '')}}`
+}
+export { boxShadowType }
 export default generateComponent

@@ -45,8 +45,8 @@ export function getPathInfo(
   const themePath = resourcePath.replace('index.tsx', 'theme.ts')
 
   if (fs.existsSync(themePath)) {
-    pathInfo.themePath = pathInfo.srcPath.replace('index.tsx', 'theme.ts')
-    pathInfo.themeUrl = pathInfo.srcUrl.replace('index.tsx', 'theme.ts')
+    pathInfo.themePath = pathInfo.srcPath.replace('index.tsx', 'styles.ts')
+    pathInfo.themeUrl = pathInfo.srcUrl.replace('index.tsx', 'styles.ts')
   }
   return pathInfo
 }
