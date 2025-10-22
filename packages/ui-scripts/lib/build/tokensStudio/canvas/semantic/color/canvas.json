@@ -68,6 +68,10 @@
           "disabled": {
             "value": "{color.white}",
             "type": "color"
+          },
+          "selected": {
+            "value": "{color.grey.grey110}",
+            "type": "color"
           }
         },
         "primary": {
@@ -337,6 +341,10 @@
           },
           "disabled": {
             "value": "{color.grey.grey30}",
+            "type": "color"
+          },
+          "selected": {
+            "value": "{color.grey.grey110}",
             "type": "color"
           }
         },
