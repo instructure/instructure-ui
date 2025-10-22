@@ -745,6 +745,10 @@
         "value": "{color.white}",
         "type": "color"
       },
+      "inverse": {
+        "value": "{color.grey.grey120}",
+        "type": "color"
+      },
       "interactive": {
         "disabled": {
           "base": {
