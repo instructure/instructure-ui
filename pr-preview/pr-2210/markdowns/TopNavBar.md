@@ -1197,7 +1197,7 @@ type: example
 
 If there is not enough space to display all items, the list is truncated, and the hidden items are available under a dropdown menu.
 
-When a menu item has multiple levels, a submenu can be rendered by passing a [Drilldown](#Drilldown) navigation via it's `renderSubmenu` prop. If a more specialized dropdown is needed, it can be configured by the `customPopoverConfig` prop (see the [Dropdowns](/#TopNavBar/#items-dropdowns) section).
+When a menu item has multiple levels, a submenu can be rendered by passing a [Drilldown](Drilldown) navigation via it's `renderSubmenu` prop. If a more specialized dropdown is needed, it can be configured by the `customPopoverConfig` prop (see the [Dropdowns](/#TopNavBar/#items-dropdowns) section).
 
 The current page is highlighted, if it's id is passed via the `currentPageId` prop. (Note that it doesn't highlight items in submenus, but it highlights items hidden in truncated lists.)
 
@@ -1846,7 +1846,7 @@ The items can display as text, button, icon only or avatar only. The text and bu
 
 Not all 4 variation are available in every container, e.g.: items with avatars can only be used in `<TopNavBar.User>`.
 
-In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` will be converted to dropdown menu items ([Drilldown](#Drilldown) options), thus displaying differently (e.g.: all variants display as text options and icons are not rendered). The items in `<TopNavBar.ActionItems>` will be converted to `icon` variants (and are required to have `renderIcon` prop), and the list will get truncated when there is not enough space to display all actions.
+In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` will be converted to dropdown menu items ([Drilldown](Drilldown) options), thus displaying differently (e.g.: all variants display as text options and icons are not rendered). The items in `<TopNavBar.ActionItems>` will be converted to `icon` variants (and are required to have `renderIcon` prop), and the list will get truncated when there is not enough space to display all actions.
 
 ```js
 ---
@@ -1943,11 +1943,11 @@ type: example
 
 ##### Submenu
 
-The most common use case is when we want to open a submenu by clicking on the item. The `renderSubmenu` prop accepts a [Drilldown](#Drilldown) component, and the toggle logic is handled by `TopNavBar.Item`. The submenu can have multiple levels.
+The most common use case is when we want to open a submenu by clicking on the item. The `renderSubmenu` prop accepts a [Drilldown](Drilldown) component, and the toggle logic is handled by `TopNavBar.Item`. The submenu can have multiple levels.
 
 ##### Custom Popover
 
-If custom content needs to be displayed in the dropdown (e.g. search feature), use the `customPopoverConfig` prop. It accepts a config object of [Popover](#Popover) component props (except `renderTrigger`, since the item itself is the trigger).
+If custom content needs to be displayed in the dropdown (e.g. search feature), use the `customPopoverConfig` prop. It accepts a config object of [Popover](Popover) component props (except `renderTrigger`, since the item itself is the trigger).
 
 **Note**: in "smallViewport" mode items in `TopNavBar.ActionItems` can display custom popovers, but since the items in `TopNavBar.MenuItems` are converted to Drilldown options, custom popovers are not recommended to use in menu items.
 
@@ -1955,7 +1955,7 @@ If custom content needs to be displayed in the dropdown (e.g. search feature), u
 
 The `tooltip` prop can display extra information on hover/focus. Tooltips can be useful for `variant="icon"` or `variant="avatar"` type menu items where there is no visible text.
 
-It accepts either a string or a config object containing a subset of props from [Tooltip](#Tooltip).
+It accepts either a string or a config object containing a subset of props from [Tooltip](Tooltip).
 
 **Note**: items rendered as Drilldown options don't render tooltips.
 
@@ -2373,16 +2373,16 @@ type: example
 | TopNavBar.TopNavBarItem | children | `React.ReactNode` | Yes | - | A required label of the navbar item. __Note__ that it is required even for the `variant="icon"` type items: the label will be used as an accessible label for screen readers. |
 | TopNavBar.TopNavBarItem | variant | `'default' \| 'button' \| 'icon' \| 'avatar' \| 'forceIconWithLabel'` | No | `'default'` | The display variant of the item. The __"default"__ variant is displayed as a normal menu item. The __"button"__ variant is displayed as a button. The __"icon"__ variant is displayed as an icon without label. The __"avatar"__ variant is displayed as an avatar without label. The __"forceIconWithLabel"__ variant is displayed as default on desktop and the same way (with label) on mobile. |
 | TopNavBar.TopNavBarItem | status | `'default' \| 'active' \| 'disabled'` | No | `'default'` | The status of the item. The __"active"__ status indicates current page or currently active menu item. Only `variant="default"` items can be set to active. The __"disabled"__ status indicates that the items is disabled. |
-| TopNavBar.TopNavBarItem | renderSubmenu | `React.ComponentElement<DrilldownProps, Drilldown>` | No | - | Renders the submenu for the item. Accepts a [Drilldown](#Drilldown) component. The menu toggle logic is controlled by the menu item. If you need more customization, use the `customPopoverConfig` prop. |
+| TopNavBar.TopNavBarItem | renderSubmenu | `React.ComponentElement<DrilldownProps, Drilldown>` | No | - | Renders the submenu for the item. Accepts a [Drilldown](Drilldown) component. The menu toggle logic is controlled by the menu item. If you need more customization, use the `customPopoverConfig` prop. |
 | TopNavBar.TopNavBarItem | showSubmenuChevron | `boolean` | No | `true` | Displays the open/close chevron next to the item, when it has a submenu or custom popover. |
-| TopNavBar.TopNavBarItem | customPopoverConfig | `Omit< PopoverProps, 'renderTrigger' \| 'positionContainerDisplay' >` | No | - | Configures a custom Popover for the menu item. Accepts [Popover](#Popover) props (except "renderTrigger"). Use this prop for features like search, tooltips, etc., and use the `renderSubmenu` prop for the default submenu! In small viewport mode only items in `<TopNavBar.ActionItems>` can display custom popovers. |
-| TopNavBar.TopNavBarItem | tooltip | `\| string \| { renderTip: TooltipProps['renderTip'] color?: TooltipProps['color'] placement?: TooltipProps['placement'] offsetX?: TooltipProps['offsetX'] offsetY?: TooltipProps['offsetY'] onShowContent?: TooltipProps['onShowContent'] onHideContent?: TooltipProps['onHideContent'] }` | No | - | Configures a Tooltip for the menu item. Tooltips can be useful for `variant="icon"` or `variant="avatar"` type menu items where there is no visible text. Accepts a string or a config object containing a subset of props from [Tooltip](#Tooltip). |
+| TopNavBar.TopNavBarItem | customPopoverConfig | `Omit< PopoverProps, 'renderTrigger' \| 'positionContainerDisplay' >` | No | - | Configures a custom Popover for the menu item. Accepts [Popover](Popover) props (except "renderTrigger"). Use this prop for features like search, tooltips, etc., and use the `renderSubmenu` prop for the default submenu! In small viewport mode only items in `<TopNavBar.ActionItems>` can display custom popovers. |
+| TopNavBar.TopNavBarItem | tooltip | `\| string \| { renderTip: TooltipProps['renderTip'] color?: TooltipProps['color'] placement?: TooltipProps['placement'] offsetX?: TooltipProps['offsetX'] offsetY?: TooltipProps['offsetY'] onShowContent?: TooltipProps['onShowContent'] onHideContent?: TooltipProps['onHideContent'] }` | No | - | Configures a Tooltip for the menu item. Tooltips can be useful for `variant="icon"` or `variant="avatar"` type menu items where there is no visible text. Accepts a string or a config object containing a subset of props from [Tooltip](Tooltip). |
 | TopNavBar.TopNavBarItem | renderAvatar | `{ avatarSrc?: string avatarName: string avatarAlt?: string }` | No | - | Config for displaying an avatar. Used only in `<TopNavBar.User>`, and it is a __required__ prop for the `variant="avatar"` type menu items. - __avatarSrc__: Avatar url - __avatarName__: A __required__ name (user's name) for the avatar - __avatarAlt__: Accessible label for the avatar |
 | TopNavBar.TopNavBarItem | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Renders an icon before the label, or by itself. It is __required__ for the `variant="icon"` type menu items. It is also __required__ for items in `<TopNavBar.ActionItems>` in small viewport mode, because only the icons are displayed due to the lack of space. |
 | TopNavBar.TopNavBarItem | href | `string` | No | - | If the item goes to a new page, pass a href. Items with submenus cannot have href prop. |
 | TopNavBar.TopNavBarItem | onClick | `( event: React.MouseEvent<ViewOwnProps> \| React.KeyboardEvent<ViewOwnProps> ) => void` | No | - | If the item does not go to a new page, pass an onClick. Items with submenus cannot have onClick prop, use the `onSubmenuToggle` prop instead. |
 | TopNavBar.TopNavBarItem | onHiddenClick | `( event: React.MouseEvent<ViewOwnProps> \| React.KeyboardEvent<ViewOwnProps> ) => void` | No | - | Only fires when the item is hidden because of truncation or mobile view. Intended to be used for navigation when the item would otherwise be a link. |
-| TopNavBar.TopNavBarItem | onSubmenuToggle | `DrilldownProps['onToggle']` | No | - | __In desktop mode__, the callback fired when the item's submenu ([Drilldown](#Drilldown)) is toggled open/closed. |
+| TopNavBar.TopNavBarItem | onSubmenuToggle | `DrilldownProps['onToggle']` | No | - | __In desktop mode__, the callback fired when the item's submenu ([Drilldown](Drilldown)) is toggled open/closed. |
 | TopNavBar.TopNavBarItem | onMouseOver | `(event: React.MouseEvent<BaseButtonOwnProps>) => void` | No | - | __In desktop mode__, the callback fired when mouse is over item. |
 | TopNavBar.TopNavBarItem | onMouseOut | `(event: React.MouseEvent<BaseButtonOwnProps>) => void` | No | - | __In desktop mode__, the callback fired when mouse leaves item. |
 | TopNavBar.TopNavBarItem | onFocus | `(event: React.FocusEvent<BaseButtonOwnProps>) => void` | No | - | __In desktop mode__, the callback fired when the item is focused. |

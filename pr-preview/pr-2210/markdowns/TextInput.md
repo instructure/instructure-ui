@@ -18,7 +18,10 @@ type: example
 
 #### Controlled TextInput
 
-- ```javascript
+```js
+---
+type: example
+---
   class ControlledTextInputExample extends React.Component {
     constructor(props) {
       super(props)
@@ -102,9 +105,12 @@ type: example
   }
 
   render(<ControlledTextInputExample />)
-  ```
+```
 
-- ```javascript
+```js
+---
+type: example
+---
   const ControlledTextInputExample = () => {
     const [value, setValue] = useState('Supertramp')
     const [disabled, setDisabled] = useState(false)
@@ -173,7 +179,7 @@ type: example
   }
 
   render(<ControlledTextInputExample />)
-  ```
+```
 
 ### Prepending and appending content
 
@@ -181,7 +187,10 @@ TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
 Focusable content will be focused separately from the input itself.
 
-- ```javascript
+```js
+---
+type: example
+---
   class ExtraContentExample extends React.Component {
     constructor(props) {
       super(props)
@@ -241,9 +250,12 @@ Focusable content will be focused separately from the input itself.
   }
 
   render(<ExtraContentExample />)
-  ```
+```
 
-- ```javascript
+```js
+---
+type: example
+---
   const ExtraContentExample = () => {
     const [value, setValue] = useState('')
 
@@ -295,7 +307,7 @@ Focusable content will be focused separately from the input itself.
   }
 
   render(<ExtraContentExample />)
-  ```
+```
 
 Another common usecase is to add an `IconButton` at the end of a TextInput, e.g. for revealing the content of a password field. In these cases, please use the `withBorder={false}` and `withBackground={false}` props for the IconButton.
 
@@ -349,7 +361,7 @@ type: example
 If there is content rendered before the input (via `renderBeforeInput`), the
 input will wrap to a new line when the browser determines it does
 not have enough room (for most browsers, this is 20 characters). Wrapping allows
-the component to accommodate large lists of [Tags](#Tag), for example.
+the component to accommodate large lists of [Tags](Tag), for example.
 
 If not desired, this behavior can be overridden by setting the `shouldNotWrap`
 boolean prop to `true`.
