@@ -15,6 +15,22 @@
           "type": "sizing"
         }
       }
+    },
+    "choiceControl": {
+      "height": {
+        "sm": {
+          "value": "{size.size16}",
+          "type": "sizing"
+        },
+        "md": {
+          "value": "{size.size20}",
+          "type": "sizing"
+        },
+        "lg": {
+          "value": "{size.size24}",
+          "type": "sizing"
+        }
+      }
     }
   },
   "spacing": {
