@@ -745,6 +745,10 @@
         "value": "{color.white}",
         "type": "color"
       },
+      "inverse": {
+        "value": "{color.white}",
+        "type": "color"
+      },
       "interactive": {
         "action": {
           "aiSecondary": {
