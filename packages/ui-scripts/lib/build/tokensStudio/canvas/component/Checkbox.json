@@ -16,7 +16,7 @@
       "value": "{color.background.interactive.input.disabled}",
       "type": "color"
     },
-    "backgroundChecked": {
+    "backgroundCheckedColor": {
       "value": "{color.background.interactive.input.selected}",
       "type": "color"
     },
@@ -44,7 +44,11 @@
       "value": "{color.stroke.interactive.destructive.hover}",
       "type": "color"
     },
-    "borderChecked": {
+    "asteriskColor": {
+      "value": "{color.text.error}",
+      "type": "color"
+    },
+    "borderCheckedColor": {
       "value": "{color.stroke.interactive.input.selected}",
       "type": "color"
     },
@@ -80,20 +84,8 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
-    "iconSizeSm": {
-      "value": "0.625rem",
-      "type": "sizing"
-    },
-    "iconSizeMd": {
-      "value": "{icon.sizeXs}",
-      "type": "sizing"
-    },
-    "iconSizeLg": {
-      "value": "{icon.sizeSm}",
-      "type": "sizing"
-    },
     "gap": {
-      "value": "{size.size8}",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
     "borderRadius": {
