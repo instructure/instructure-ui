@@ -42,7 +42,9 @@ type TabsOwnProps = {
    */
   screenReaderLabel?: string
   /**
-   * Called when the selected tab should change
+   * Called when the selected tab should change.
+   * @param tabData.index - The zero-based index of the tab that was selected
+   * @param tabData.id - The HTML `id` of the tab that was selected
    */
   onRequestTabChange?: (
     event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,

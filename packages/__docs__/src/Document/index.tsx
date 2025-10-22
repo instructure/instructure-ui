@@ -57,63 +57,66 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   state: DocumentState = {
-    selectedDetailsTabIndex: 0,
+    selectedDetailsTabId: undefined,
     pageRef: null,
-    componentTheme: {}
+    componentTheme: undefined
   }
 
   ref: HTMLDivElement | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
-    this.setState({ pageRef: this.ref })
-    this.fetchGenerateComponentTheme()
+    this.setState({
+      pageRef: this.ref,
+      selectedDetailsTabId: this.props.doc.id
+    })
   }
 
   fetchGenerateComponentTheme = async () => {
     const { doc, themeVariables } = this.props
-    const generateTheme = doc?.componentInstance?.generateComponentTheme
+    let generateTheme
+    if (this.state.selectedDetailsTabId === doc.id) {
+      generateTheme = doc?.componentInstance?.generateComponentTheme
+    } else {
+      generateTheme = doc?.children?.find(
+        (value) => value.id === this.state.selectedDetailsTabId
+      )?.componentInstance?.generateComponentTheme
+    }
     const generateThemeFunctional =
       functionalComponentThemes[
         doc.id as keyof typeof functionalComponentThemes
       ]
-    if (
-      generateTheme &&
-      typeof generateTheme === 'function' &&
-      themeVariables
-    ) {
+    if (typeof generateTheme === 'function' && themeVariables) {
       this.setState({ componentTheme: generateTheme(themeVariables) })
     } else if (generateThemeFunctional && themeVariables) {
       const componentTheme = await generateThemeFunctional(themeVariables)
       this.setState({ componentTheme: componentTheme })
+    } else {
+      this.setState({ componentTheme: undefined })
     }
   }
 
-  componentDidUpdate(prevProps: typeof this.props) {
+  componentDidUpdate(prevProps: typeof this.props, prevState: DocumentState) {
     this.props.makeStyles?.()
-    if (this.props.themeVariables?.key !== prevProps.themeVariables?.key) {
+    if (
+      this.props.themeVariables?.key !== prevProps.themeVariables?.key ||
+      this.state.selectedDetailsTabId != prevState.selectedDetailsTabId
+    ) {
       this.fetchGenerateComponentTheme()
     }
   }
 
   handleDetailsTabChange: TabsProps['onRequestTabChange'] = (
     _event,
-    { index }
+    tabData
   ) => {
-    this.setState({
-      selectedDetailsTabIndex: index
-    })
+    this.setState({ selectedDetailsTabId: tabData.id })
   }
 
   renderProps(doc: DocDataType) {
-    const { id, props } = doc
+    const { props } = doc
     return props ? (
-      <View margin="x-large 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Properties`} margin="0 0 small 0">
-          Properties
-        </Heading>
-        <Properties props={props} layout={this.props.layout} />
-      </View>
+      <Properties props={props} layout={this.props.layout} />
     ) : null
   }
 
@@ -123,7 +126,10 @@ class Document extends Component<DocumentProps, DocumentState> {
 
     const themeVariableKeys = componentTheme && Object.keys(componentTheme)
 
-    return themeVariables && componentTheme && themeVariableKeys.length > 0 ? (
+    return themeVariables &&
+      componentTheme &&
+      themeVariableKeys &&
+      themeVariableKeys.length > 0 ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Default Theme Variables
@@ -345,20 +351,25 @@ import { ${importName} } from '${esPath}'
             <Tabs.Panel
               renderTitle={doc.title}
               key={`${doc.id}TabPanel`}
-              isSelected={this.state.selectedDetailsTabIndex === 0}
+              id={doc.id}
+              isSelected={this.state.selectedDetailsTabId === doc.id}
             >
               {this.renderDetails(doc)}
             </Tabs.Panel>
-            {children.map((child, index) => (
-              <Tabs.Panel
-                renderTitle={child.title}
-                key={`${child.id}TabPanel`}
-                isSelected={this.state.selectedDetailsTabIndex === index + 1}
-              >
-                {this.renderDescription(child, child.description)}
-                {this.renderDetails(child)}
-              </Tabs.Panel>
-            ))}
+            {
+              // Details of the child components (if any)
+              children.map((child) => (
+                <Tabs.Panel
+                  renderTitle={child.title}
+                  key={`${child.id}TabPanel`}
+                  id={child.id}
+                  isSelected={this.state.selectedDetailsTabId === child.id}
+                >
+                  {this.renderDescription(child, child.description)}
+                  {this.renderDetails(child)}
+                </Tabs.Panel>
+              ))
+            }
           </Tabs>
         ) : (
           this.renderDetails(doc)
