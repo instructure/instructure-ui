@@ -563,8 +563,13 @@ class App extends Component<AppProps, AppState> {
     if (olderVersionsGitBranchMap && versionInPath) {
       legacyGitBranch = olderVersionsGitBranchMap[versionInPath]
     }
-
-    const themeVariables = themes[themeKey!].resource
+    let themeVariables
+    if (themes[themeKey!].resource.newTheme.components[docId]) {
+      // new theme
+      themeVariables = themes[themeKey!].resource.newTheme
+    } else {
+      themeVariables = themes[themeKey!].resource // old theme
+    }
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
       <View as="div" padding="x-large none none">

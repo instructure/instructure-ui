@@ -30,6 +30,7 @@ import generateSemantics, {
   mergeSemanticSets
 } from './generateSemantics.js'
 import generateComponent, {
+  boxShadowType,
   generateComponentType
 } from './generateComponents.js'
 import { exec } from 'child_process'
@@ -68,8 +69,18 @@ const setupThemes = async (targetPath, input) => {
   //make new root folder
   await promises.mkdir(targetPath, { recursive: true })
 
+  await createFile(
+    `${targetPath}/commonTypes.ts`,
+    `export type BoxShadow ={
+    x: string | 0
+    y: string | 0
+    blur: string | 0
+    spread: string | 0
+    color: string // CSS color string like "red" or "#f00"
+    type: "dropShadow" | "innerShadow"
+  }`
+  )
   const themeData = transformThemes(input['$themes'])
-
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
   const themes = Object.keys(themeData).filter((t) => t !== 'Primitive')
   for (let themeIndex = 0; themeIndex < themes.length; themeIndex++) {
@@ -136,8 +147,17 @@ const setupThemes = async (targetPath, input) => {
         componentFileContent
       )
       if (themeIndex === 0) {
+        let importSemantics = ''
+        if (componentTypes.includes(`Semantics[`)) {
+          importSemantics = `import type { Semantics } from "../${theme}/semantics"`
+        }
+        let importBoxShadow = ''
+        if (componentTypes.includes(boxShadowType)) {
+          importBoxShadow = `import type { BoxShadow } from '../commonTypes'\n`
+        }
         const typeFileContent = `
-          import type { Semantics } from "../${theme}/semantics"
+          ${importSemantics}
+          ${importBoxShadow}
 
           export type ${capitalize(componentName)} = ${componentTypes}
 
