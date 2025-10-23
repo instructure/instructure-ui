@@ -1,5 +1,5 @@
 {
-  "button": {
+  "baseButton": {
     "primaryBackgroundColor": {
       "value": "{color.background.interactive.primary.base}",
       "type": "color"
