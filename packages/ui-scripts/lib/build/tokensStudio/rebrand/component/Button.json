@@ -385,7 +385,7 @@
       "type": "color"
     },
     "tertiaryDisabledBackgroundColor": {
-      "value": "{color.background.interactive.tertiary.active}",
+      "value": "{color.background.interactive.tertiary.disabled}",
       "type": "color"
     },
     "tertiaryBorderColor": {
