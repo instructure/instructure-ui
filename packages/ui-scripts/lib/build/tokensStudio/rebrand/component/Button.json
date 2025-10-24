@@ -36,10 +36,6 @@
       "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
     },
-    "primaryIconColor": {
-      "value": "{color.icon.interactive.action.primary.base}",
-      "type": "color"
-    },
     "secondaryBackgroundColor": {
       "value": "{color.background.interactive.secondary.base}",
       "type": "color"
@@ -60,20 +56,12 @@
       "value": "{color.stroke.interactive.secondary.base}",
       "type": "color"
     },
-    "secondaryIconColor": {
-      "value": "{color.icon.interactive.action.secondary.base}",
-      "type": "color"
-    },
     "secondaryTextColor": {
       "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
       "value": "{color.text.interactive.action.secondary.disabled}",
-      "type": "color"
-    },
-    "secondaryDisabledIconColor": {
-      "value": "{color.icon.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "secondaryDisabledBorderColor": {
@@ -120,10 +108,6 @@
       "value": "{color.text.interactive.action.status.disabled}",
       "type": "color"
     },
-    "successIconColor": {
-      "value": "{color.icon.interactive.action.status.base}",
-      "type": "color"
-    },
     "destructiveBackgroundColor": {
       "value": "{color.background.interactive.destructive.base}",
       "type": "color"
@@ -158,10 +142,6 @@
     },
     "destructiveDisabledTextColor": {
       "value": "{color.text.interactive.action.status.disabled}",
-      "type": "color"
-    },
-    "destructiveIconColor": {
-      "value": "{color.icon.interactive.action.status.base}",
       "type": "color"
     },
     "aiBackgroundBottomGradientColor": {
@@ -208,10 +188,6 @@
       "value": "{color.text.interactive.action.ai.base}",
       "type": "color"
     },
-    "aiIconColor": {
-      "value": "{color.icon.interactive.action.ai.base}",
-      "type": "color"
-    },
     "aiSecondaryBackgroundColor": {
       "value": "{color.background.interactive.aiSecondary.base}",
       "type": "color"
@@ -236,28 +212,12 @@
       "value": "{color.text.interactive.action.aiSecondary.topGradient.disabled}",
       "type": "color"
     },
-    "aiSecondaryDisabledIconTopGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
-      "type": "color"
-    },
     "aiSecondaryTextBottomGradientColor": {
       "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
       "type": "color"
     },
     "aiSecondaryDisabledTextBottomGradientColor": {
       "value": "{color.text.interactive.action.aiSecondary.bottomGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledIconBottomGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryIconTopGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
-      "type": "color"
-    },
-    "aiSecondaryIconBottomGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
       "type": "color"
     },
     "primaryOnColorBackgroundColor": {
@@ -372,20 +332,12 @@
       "value": "{color.stroke.interactive.destructive.disabled}",
       "type": "color"
     },
-    "primaryOnColorIconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
     "primaryOnColorDisabledBackgroundColor": {
       "value": "{color.background.interactive.primaryOnColor.disabled}",
       "type": "color"
     },
     "primaryOnColorDisabledTextColor": {
       "value": "{color.text.interactive.action.primaryOnColor.disabled}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledIconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "aiDisabledBorderTopGradientColor": {
@@ -404,28 +356,12 @@
       "value": "{color.background.interactive.aiSecondary.active.bottomGradient}",
       "type": "color"
     },
-    "successDisabledIconColor": {
-      "value": "{color.icon.interactive.action.status.disabled}",
-      "type": "color"
-    },
-    "destructiveDisabledIconColor": {
-      "value": "{color.icon.interactive.action.status.disabled}",
-      "type": "color"
-    },
-    "aiDisabledIconColor": {
-      "value": "{color.icon.interactive.action.ai.disabled}",
-      "type": "color"
-    },
     "aiDisabledTextColor": {
       "value": "{color.text.interactive.action.ai.disabled}",
       "type": "color"
     },
     "primaryDisabledTextColor": {
       "value": "{color.text.interactive.action.primary.disabled}",
-      "type": "color"
-    },
-    "primaryDisabledIconColor": {
-      "value": "{color.icon.interactive.action.primary.disabled}",
       "type": "color"
     },
     "secondaryHoverBorderColor": {

@@ -28,10 +28,6 @@
       "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
     },
-    "primaryIconColor": {
-      "value": "{color.icon.interactive.action.primary.base}",
-      "type": "color"
-    },
     "secondaryBackgroundColor": {
       "value": "{color.background.interactive.secondary.base}",
       "type": "color"
@@ -52,20 +48,12 @@
       "value": "{color.stroke.interactive.secondary.base}",
       "type": "color"
     },
-    "secondaryIconColor": {
-      "value": "{color.icon.interactive.action.secondary.base}",
-      "type": "color"
-    },
     "secondaryTextColor": {
       "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
       "value": "{color.text.interactive.action.secondary.disabled}",
-      "type": "color"
-    },
-    "secondaryDisabledIconColor": {
-      "value": "{color.icon.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "secondaryDisabledBorderColor": {
@@ -100,14 +88,6 @@
       "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
-    "successIconColor": {
-      "value": "{color.icon.interactive.action.status.base}",
-      "type": "color"
-    },
-    "successDisabledIconColor": {
-      "value": "{color.icon.interactive.action.status.disabled}",
-      "type": "color"
-    },
     "destructiveBackgroundColor": {
       "value": "{color.background.interactive.destructive.base}",
       "type": "color"
@@ -134,14 +114,6 @@
     },
     "destructiveTextColor": {
       "value": "{color.text.interactive.action.status.base}",
-      "type": "color"
-    },
-    "destructiveIconColor": {
-      "value": "{color.icon.interactive.action.status.base}",
-      "type": "color"
-    },
-    "destructiveDisabledIconColor": {
-      "value": "{color.icon.interactive.action.status.disabled}",
       "type": "color"
     },
     "aiBackgroundBottomGradientColor": {
@@ -196,14 +168,6 @@
       "value": "{color.text.interactive.action.ai.base}",
       "type": "color"
     },
-    "aiIconColor": {
-      "value": "{color.icon.interactive.action.ai.base}",
-      "type": "color"
-    },
-    "aiDisabledIconColor": {
-      "value": "{color.icon.interactive.action.ai.disabled}",
-      "type": "color"
-    },
     "aiSecondaryBackgroundColor": {
       "value": "{color.background.interactive.aiSecondary.base}",
       "type": "color"
@@ -216,20 +180,12 @@
       "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
       "type": "color"
     },
-    "aiSecondaryIconTopGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
-      "type": "color"
-    },
     "aiSecondaryHoverBackgroundTopGradientColor": {
       "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
       "type": "color"
     },
     "aiSecondaryHoverBackgroundBottomGradientColor": {
       "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
-      "type": "color"
-    },
-    "aiSecondaryIconBottomGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
       "type": "color"
     },
     "primaryOnColorBackgroundColor": {
@@ -254,14 +210,6 @@
     },
     "primaryOnColorTextColor": {
       "value": "{color.text.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorIconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledIconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "primaryOnColorDisabledTextColor": {
@@ -388,14 +336,6 @@
       "value": "{color.text.interactive.action.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     },
-    "aiSecondaryDisabledIconTopGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledIconBottomGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
-      "type": "color"
-    },
     "destructiveDisabledTextColor": {
       "value": "{color.text.interactive.action.status.disabled}",
       "type": "color"
@@ -414,10 +354,6 @@
     },
     "primaryDisabledTextColor": {
       "value": "{color.text.interactive.action.primary.disabled}",
-      "type": "color"
-    },
-    "primaryDisabledIconColor": {
-      "value": "{color.icon.interactive.action.primary.disabled}",
       "type": "color"
     },
     "secondaryHoverBorderColor": {
