@@ -275,6 +275,14 @@
     "actionTertiaryDisabledColor": {
       "value": "{color.icon.interactive.action.tertiary.disabled}",
       "type": "color"
+    },
+    "actionSuccessSecondaryBaseColor": {
+      "value": "{color.icon.interactive.action.successSecondary.base}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryDisabledColor": {
+      "value": "{color.icon.interactive.action.successSecondary.disabled}",
+      "type": "color"
     }
   }
 }
