@@ -144,6 +144,24 @@
           "disabled": {
             "value": "{color.green.green30}",
             "type": "color"
+          },
+          "secondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "ai": {
@@ -446,6 +464,24 @@
           "active": {
             "value": "{color.green.green90}",
             "type": "color"
+          },
+          "secondary": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            }
           }
         },
         "ai": {
@@ -730,6 +766,24 @@
               "value": "{color.grey.grey50}",
               "type": "color"
             }
+          },
+          "successSecondary": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            }
           }
         }
       },
@@ -990,6 +1044,24 @@
             },
             "disabled": {
               "value": "{color.grey.grey50}",
+              "type": "color"
+            }
+          },
+          "successSecondary": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.green.green30}",
               "type": "color"
             }
           }
