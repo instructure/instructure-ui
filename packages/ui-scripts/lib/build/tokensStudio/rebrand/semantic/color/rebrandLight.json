@@ -151,11 +151,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.green.green30}",
+              "value": "{color.green.green10}",
               "type": "color"
             },
             "active": {
-              "value": "{color.green.green30}",
+              "value": "{color.green.green10}",
               "type": "color"
             },
             "disabled": {
