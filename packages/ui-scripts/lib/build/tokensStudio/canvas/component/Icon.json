@@ -259,6 +259,22 @@
     "accentAutoraColor": {
       "value": "{color.icon.accent.aurora}",
       "type": "color"
+    },
+    "actionTertiaryBaseColor": {
+      "value": "{color.icon.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "actionTertiaryHoverColor": {
+      "value": "{color.icon.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "actionTertiaryActiveColor": {
+      "value": "{color.icon.interactive.action.tertiary.active}",
+      "type": "color"
+    },
+    "actionTertiaryDisabledColor": {
+      "value": "{color.icon.interactive.action.tertiary.disabled}",
+      "type": "color"
     }
   }
 }
