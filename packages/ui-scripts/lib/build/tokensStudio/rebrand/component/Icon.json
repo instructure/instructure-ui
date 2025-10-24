@@ -196,6 +196,18 @@
       "value": "{color.icon.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
+    "actionTertiaryBaseColor": {
+      "value": "{color.icon.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "actionTertiaryHoverColor": {
+      "value": "{color.icon.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "actionTertiaryActiveColor": {
+      "value": "{color.icon.interactive.action.tertiary.active}",
+      "type": "color"
+    },
     "actionPrimaryOnColorHoverColor": {
       "value": "{color.icon.interactive.action.primaryOnColor.hover}",
       "type": "color"
@@ -206,6 +218,10 @@
     },
     "actionPrimaryOnColorDisabledColor": {
       "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
+      "type": "color"
+    },
+    "actionTertiaryDisabledColor": {
+      "value": "{color.icon.interactive.action.tertiary.disabled}",
       "type": "color"
     },
     "accentBlueColor": {

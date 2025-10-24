@@ -231,6 +231,24 @@
               "type": "color"
             }
           }
+        },
+        "tertiary": {
+          "base": {
+            "value": "{color.white}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.blue.blue10}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.blue.blue10}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.white}",
+            "type": "color"
+          }
         }
       },
       "accent": {
@@ -469,6 +487,24 @@
             "value": "{color.white}",
             "type": "color"
           }
+        },
+        "tertiary": {
+          "base": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          }
         }
       }
     },
@@ -670,6 +706,24 @@
             },
             "active": {
               "value": "{color.grey.grey100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.grey.grey50}",
+              "type": "color"
+            }
+          },
+          "tertiary": {
+            "base": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.blue.blue100}",
               "type": "color"
             },
             "disabled": {
@@ -914,6 +968,24 @@
             },
             "active": {
               "value": "{color.grey.grey100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.grey.grey50}",
+              "type": "color"
+            }
+          },
+          "tertiary": {
+            "base": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.blue.blue100}",
               "type": "color"
             },
             "disabled": {
