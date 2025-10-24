@@ -419,6 +419,22 @@
     "primaryDisabledIconColor": {
       "value": "{color.icon.interactive.action.primary.disabled}",
       "type": "color"
+    },
+    "secondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.secondary.active}",
+      "type": "color"
+    },
+    "aiSecondaryActiveBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.active.topGradient}",
+      "type": "color"
+    },
+    "aiSecondaryActiveBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.active.bottomGradient}",
+      "type": "color"
     }
   }
 }
