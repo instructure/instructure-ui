@@ -371,6 +371,46 @@
     "aiSecondaryActiveBackgroundBottomGradientColor": {
       "value": "{color.background.interactive.aiSecondary.active.bottomGradient}",
       "type": "color"
+    },
+    "tertiaryBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.base}",
+      "type": "color"
+    },
+    "tertiaryHoverBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.hover}",
+      "type": "color"
+    },
+    "tertiaryActiveBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.base}",
+      "type": "color"
+    },
+    "tertiaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.hover}",
+      "type": "color"
+    },
+    "tertiaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.disabled}",
+      "type": "color"
+    },
+    "tertiaryTextColor": {
+      "value": "{color.text.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "tertiaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.tertiary.disabled}",
+      "type": "color"
     }
   }
 }
