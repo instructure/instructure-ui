@@ -411,6 +411,46 @@
     "tertiaryDisabledTextColor": {
       "value": "{color.text.interactive.action.tertiary.disabled}",
       "type": "color"
+    },
+    "successSecondaryBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.base}",
+      "type": "color"
+    },
+    "successSecondaryHoverBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.hover}",
+      "type": "color"
+    },
+    "successSecondaryActiveBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.active}",
+      "type": "color"
+    },
+    "successSecondaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.base}",
+      "type": "color"
+    },
+    "successSecondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.base}",
+      "type": "color"
+    },
+    "successSecondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.hover}",
+      "type": "color"
+    },
+    "successSecondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.active}",
+      "type": "color"
+    },
+    "successSecondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.disabled}",
+      "type": "color"
     }
   }
 }
