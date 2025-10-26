@@ -283,6 +283,14 @@
     "actionSuccessSecondaryDisabledColor": {
       "value": "{color.icon.interactive.action.successSecondary.disabled}",
       "type": "color"
+    },
+    "actionDestructiveSecondaryBaseColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.base}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryDisabledColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.disabled}",
+      "type": "color"
     }
   }
 }
