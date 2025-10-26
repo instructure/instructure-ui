@@ -820,6 +820,24 @@
               "value": "{color.green.green30}",
               "type": "color"
             }
+          },
+          "destructiveSecondary": {
+            "base": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.red90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.red.red30}",
+              "type": "color"
+            }
           }
         }
       },
@@ -1098,6 +1116,24 @@
             },
             "disabled": {
               "value": "{color.green.green30}",
+              "type": "color"
+            }
+          },
+          "destructiveSecondary": {
+            "base": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.red90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.red.red30}",
               "type": "color"
             }
           }
