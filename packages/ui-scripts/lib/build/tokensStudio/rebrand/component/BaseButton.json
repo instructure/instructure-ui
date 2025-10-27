@@ -1,5 +1,5 @@
 {
-  "button": {
+  "baseButton": {
     "primaryBackgroundColor": {
       "value": "{color.background.interactive.primary.base}",
       "type": "color"
@@ -20,16 +20,20 @@
       "value": "{color.stroke.interactive.primary.base}",
       "type": "color"
     },
+    "primaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.primary.hover}",
+      "type": "color"
+    },
+    "primaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.primary.active}",
+      "type": "color"
+    },
     "primaryDisabledBorderColor": {
       "value": "{color.stroke.interactive.primary.disabled}",
       "type": "color"
     },
     "primaryTextColor": {
       "value": "{color.text.interactive.action.primary.base}",
-      "type": "color"
-    },
-    "primaryIconColor": {
-      "value": "{color.icon.interactive.action.primary.base}",
       "type": "color"
     },
     "secondaryBackgroundColor": {
@@ -52,20 +56,12 @@
       "value": "{color.stroke.interactive.secondary.base}",
       "type": "color"
     },
-    "secondaryIconColor": {
-      "value": "{color.icon.interactive.action.secondary.base}",
-      "type": "color"
-    },
     "secondaryTextColor": {
       "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
     "secondaryDisabledTextColor": {
       "value": "{color.text.interactive.action.secondary.disabled}",
-      "type": "color"
-    },
-    "secondaryDisabledIconColor": {
-      "value": "{color.icon.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "secondaryDisabledBorderColor": {
@@ -92,6 +88,14 @@
       "value": "{color.stroke.interactive.success.base}",
       "type": "color"
     },
+    "successHoverBorderColor": {
+      "value": "{color.stroke.interactive.success.hover}",
+      "type": "color"
+    },
+    "successActiveBorderColor": {
+      "value": "{color.stroke.interactive.success.active}",
+      "type": "color"
+    },
     "successDisabledBorderColor": {
       "value": "{color.stroke.interactive.success.disabled}",
       "type": "color"
@@ -100,12 +104,8 @@
       "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
-    "successIconColor": {
-      "value": "{color.icon.interactive.action.status.base}",
-      "type": "color"
-    },
-    "successDisabledIconColor": {
-      "value": "{color.icon.interactive.action.status.disabled}",
+    "successDisabledTextColor": {
+      "value": "{color.text.interactive.action.status.disabled}",
       "type": "color"
     },
     "destructiveBackgroundColor": {
@@ -128,20 +128,20 @@
       "value": "{color.stroke.interactive.destructive.base}",
       "type": "color"
     },
-    "destructiveDisabledBorderColor": {
-      "value": "{color.stroke.interactive.destructive.disabled}",
+    "destructiveHoverBorderColor": {
+      "value": "{color.stroke.interactive.destructive.hover}",
+      "type": "color"
+    },
+    "destructiveActiveBorderColor": {
+      "value": "{color.stroke.interactive.destructive.active}",
       "type": "color"
     },
     "destructiveTextColor": {
       "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
-    "destructiveIconColor": {
-      "value": "{color.icon.interactive.action.status.base}",
-      "type": "color"
-    },
-    "destructiveDisabledIconColor": {
-      "value": "{color.icon.interactive.action.status.disabled}",
+    "destructiveDisabledTextColor": {
+      "value": "{color.text.interactive.action.status.disabled}",
       "type": "color"
     },
     "aiBackgroundBottomGradientColor": {
@@ -180,56 +180,44 @@
       "value": "{color.stroke.interactive.ai.topGradient.base}",
       "type": "color"
     },
-    "aiDisabledBorderTopGradientColor": {
-      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
-      "type": "color"
-    },
     "aiBorderBottomGradientColor": {
       "value": "{color.stroke.interactive.ai.bottomGradient.base}",
-      "type": "color"
-    },
-    "aiDisabledBorderBottomGradientColor": {
-      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
       "type": "color"
     },
     "aiTextColor": {
       "value": "{color.text.interactive.action.ai.base}",
       "type": "color"
     },
-    "aiIconColor": {
-      "value": "{color.icon.interactive.action.ai.base}",
-      "type": "color"
-    },
-    "aiDisabledIconColor": {
-      "value": "{color.icon.interactive.action.ai.disabled}",
-      "type": "color"
-    },
     "aiSecondaryBackgroundColor": {
       "value": "{color.background.interactive.aiSecondary.base}",
       "type": "color"
     },
-    "aiSecondaryTextTopGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
-      "type": "color"
-    },
-    "aiSecondaryTextBottomGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
-      "type": "color"
-    },
-    "aiSecondaryIconTopGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
+    "aiSecondaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.aiSecondary.disabled}",
       "type": "color"
     },
     "aiSecondaryHoverBackgroundTopGradientColor": {
       "value": "{color.background.interactive.aiSecondary.hover.topGradient}",
       "type": "color"
     },
-    "aiSecondaryHoverBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
+    "aiSecondaryActiveBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.active.topGradient}",
       "type": "color"
     },
-    "aiSecondaryIconBottomGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
+    "aiSecondaryTextTopGradientColor": {
+      "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextTopGradientColor": {
+      "value": "{color.text.interactive.action.aiSecondary.topGradient.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryTextBottomGradientColor": {
+      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextBottomGradientColor": {
+      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     },
     "primaryOnColorBackgroundColor": {
@@ -244,28 +232,24 @@
       "value": "{color.background.interactive.primaryOnColor.active}",
       "type": "color"
     },
-    "primaryOnColorDisabledBackgroundColor": {
-      "value": "{color.background.interactive.primaryOnColor.disabled}",
-      "type": "color"
-    },
     "primaryOnColorBorderColor": {
       "value": "{color.stroke.interactive.primaryOnColor.base}",
       "type": "color"
     },
+    "primaryOnColorHoverBorderColor": {
+      "value": "{color.stroke.interactive.primaryOnColor.hover}",
+      "type": "color"
+    },
+    "primaryOnColorActiveBorderColor": {
+      "value": "{color.stroke.interactive.primaryOnColor.active}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledBorderColor": {
+      "value": "{color.stroke.interactive.primaryOnColor.disabled}",
+      "type": "color"
+    },
     "primaryOnColorTextColor": {
       "value": "{color.text.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorIconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledIconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.disabled}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledTextColor": {
-      "value": "{color.text.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "heightSm": {
@@ -305,7 +289,7 @@
       "type": "fontFamilies"
     },
     "fontWeight": {
-      "value": "{fontWeight.body.base}",
+      "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
     "gapButtonContentSm": {
@@ -344,80 +328,168 @@
       "value": "1.375rem",
       "type": "lineHeights"
     },
-    "primaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.primary.hover}",
+    "destructiveDisabledBorderColor": {
+      "value": "{color.stroke.interactive.destructive.disabled}",
       "type": "color"
     },
-    "primaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.primary.active}",
+    "primaryOnColorDisabledBackgroundColor": {
+      "value": "{color.background.interactive.primaryOnColor.disabled}",
       "type": "color"
     },
-    "successHoverBorderColor": {
-      "value": "{color.stroke.interactive.success.hover}",
+    "primaryOnColorDisabledTextColor": {
+      "value": "{color.text.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
-    "successActiveBorderColor": {
-      "value": "{color.stroke.interactive.success.active}",
+    "aiDisabledBorderTopGradientColor": {
+      "value": "{color.stroke.interactive.ai.topGradient.disabled}",
       "type": "color"
     },
-    "destructiveHoverBorderColor": {
-      "value": "{color.stroke.interactive.destructive.hover}",
+    "aiDisabledBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.ai.bottomGradient.disabled}",
       "type": "color"
     },
-    "destructiveActiveBorderColor": {
-      "value": "{color.stroke.interactive.destructive.active}",
+    "aiSecondaryHoverBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.hover.bottomGradient}",
       "type": "color"
     },
-    "primaryOnColorHoverBorderColor": {
-      "value": "{color.stroke.interactive.primaryOnColor.hover}",
-      "type": "color"
-    },
-    "primaryOnColorActiveBorderColor": {
-      "value": "{color.stroke.interactive.primaryOnColor.active}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledBorderColor": {
-      "value": "{color.stroke.interactive.primaryOnColor.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledTextTopGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.topGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledTextBottomGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledIconTopGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
-      "type": "color"
-    },
-    "aiSecondaryDisabledIconBottomGradientColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
-      "type": "color"
-    },
-    "destructiveDisabledTextColor": {
-      "value": "{color.text.interactive.action.status.disabled}",
-      "type": "color"
-    },
-    "successDisabledTextColor": {
-      "value": "{color.text.interactive.action.status.disabled}",
+    "aiSecondaryActiveBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.aiSecondary.active.bottomGradient}",
       "type": "color"
     },
     "aiDisabledTextColor": {
       "value": "{color.text.interactive.action.ai.disabled}",
       "type": "color"
     },
-    "aiSecondaryDisabledBackgroundColor": {
-      "value": "{color.background.interactive.aiSecondary.disabled}",
-      "type": "color"
-    },
     "primaryDisabledTextColor": {
       "value": "{color.text.interactive.action.primary.disabled}",
       "type": "color"
     },
-    "primaryDisabledIconColor": {
-      "value": "{color.icon.interactive.action.primary.disabled}",
+    "secondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.secondary.active}",
+      "type": "color"
+    },
+    "tertiaryBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.base}",
+      "type": "color"
+    },
+    "tertiaryHoverBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.hover}",
+      "type": "color"
+    },
+    "tertiaryActiveBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.tertiary.disabled}",
+      "type": "color"
+    },
+    "tertiaryBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.base}",
+      "type": "color"
+    },
+    "tertiaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.hover}",
+      "type": "color"
+    },
+    "tertiaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.tertiary.disabled}",
+      "type": "color"
+    },
+    "tertiaryTextColor": {
+      "value": "{color.text.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "tertiaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.tertiary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.base}",
+      "type": "color"
+    },
+    "successSecondaryHoverBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.hover}",
+      "type": "color"
+    },
+    "successSecondaryActiveBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.active}",
+      "type": "color"
+    },
+    "successSecondaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.success.secondary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.base}",
+      "type": "color"
+    },
+    "successSecondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.base}",
+      "type": "color"
+    },
+    "successSecondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.hover}",
+      "type": "color"
+    },
+    "successSecondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.active}",
+      "type": "color"
+    },
+    "successSecondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.success.secondary.disabled}",
+      "type": "color"
+    },
+    "destructiveSecondaryBackgroundColor": {
+      "value": "{color.background.interactive.destructive.secondary.base}",
+      "type": "color"
+    },
+    "destructiveSecondaryHoverBackgroundColor": {
+      "value": "{color.background.interactive.destructive.secondary.hover}",
+      "type": "color"
+    },
+    "destructiveSecondaryActiveBackgroundColor": {
+      "value": "{color.background.interactive.destructive.secondary.active}",
+      "type": "color"
+    },
+    "destructiveSecondaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.destructive.secondary.disabled}",
+      "type": "color"
+    },
+    "destructiveSecondaryTextColor": {
+      "value": "{color.text.interactive.action.destructiveSecondary.base}",
+      "type": "color"
+    },
+    "destructiveSecondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.destructiveSecondary.disabled}",
+      "type": "color"
+    },
+    "destructiveSecondaryBorderColor": {
+      "value": "{color.stroke.interactive.destructive.secondary.base}",
+      "type": "color"
+    },
+    "destructiveSecondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.destructive.secondary.hover}",
+      "type": "color"
+    },
+    "destructiveSecondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.destructive.secondary.active}",
+      "type": "color"
+    },
+    "destructiveSecondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.destructive.secondary.disabled}",
       "type": "color"
     }
   }

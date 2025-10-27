@@ -126,6 +126,24 @@
           "disabled": {
             "value": "{color.red.red120}",
             "type": "color"
+          },
+          "secondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.red10}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.red10}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "success": {
@@ -144,6 +162,24 @@
           "disabled": {
             "value": "{color.green.green120}",
             "type": "color"
+          },
+          "secondary": {
+            "base": {
+              "value": "{color.white}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.white}",
+              "type": "color"
+            }
           }
         },
         "ai": {
@@ -202,6 +238,16 @@
               "value": "{color.sea.sea120}",
               "type": "color"
             }
+          },
+          "active": {
+            "topGradient": {
+              "value": "{color.violet.violet120}",
+              "type": "color"
+            },
+            "bottomGradient": {
+              "value": "{color.sea.sea120}",
+              "type": "color"
+            }
           }
         },
         "primaryOnColor": {
@@ -219,6 +265,24 @@
           },
           "disabled": {
             "value": "{color.grey.grey60}",
+            "type": "color"
+          }
+        },
+        "tertiary": {
+          "base": {
+            "value": "{color.white}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.blue.blue10}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.blue.blue10}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.white}",
             "type": "color"
           }
         }
@@ -400,6 +464,24 @@
           "disabled": {
             "value": "{color.red.red120}",
             "type": "color"
+          },
+          "secondary": {
+            "base": {
+              "value": "{color.red.red90}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.red100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.red.red30}",
+              "type": "color"
+            }
           }
         },
         "success": {
@@ -418,6 +500,24 @@
           "active": {
             "value": "{color.green.green90}",
             "type": "color"
+          },
+          "secondary": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            }
           }
         },
         "ai": {
@@ -457,6 +557,24 @@
           },
           "disabled": {
             "value": "{color.grey.grey60}",
+            "type": "color"
+          }
+        },
+        "tertiary": {
+          "base": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.blue.blue20}",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "{color.blue.blue20}",
             "type": "color"
           }
         }
@@ -664,6 +782,60 @@
             },
             "disabled": {
               "value": "{color.grey.grey20}",
+              "type": "color"
+            }
+          },
+          "tertiary": {
+            "base": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.grey.grey50}",
+              "type": "color"
+            }
+          },
+          "successSecondary": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            }
+          },
+          "destructiveSecondary": {
+            "base": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.red90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.red.red30}",
               "type": "color"
             }
           }
@@ -908,6 +1080,60 @@
             },
             "disabled": {
               "value": "{color.grey.grey50}",
+              "type": "color"
+            }
+          },
+          "tertiary": {
+            "base": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.blue.blue100}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.grey.grey50}",
+              "type": "color"
+            }
+          },
+          "successSecondary": {
+            "base": {
+              "value": "{color.green.green70}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.green.green90}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.green.green30}",
+              "type": "color"
+            }
+          },
+          "destructiveSecondary": {
+            "base": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.red90}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.red80}",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "{color.red.red30}",
               "type": "color"
             }
           }
