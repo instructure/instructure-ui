@@ -13,8 +13,9 @@
   "scripts": {
     "prestart": "npm run build:scripts:ts && node lib/build-docs.mjs",
     "start": "npm run prestart && ui-scripts bundle && ui-scripts server -p 8001",
-    "start:watch": "npm run prestart && ui-scripts bundle --watch",
+    "start:watch": "npm run prestart && concurrently -n markdown,webpack -c cyan,yellow \"node buildScripts/watch-markdown.mjs\" \"ui-scripts bundle --watch\"",
     "start-watch-just-app": "ui-scripts bundle --watch",
+    "watch:markdown": "node buildScripts/watch-markdown.mjs",
     "bundle": "npm run prestart && ui-scripts bundle",
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",

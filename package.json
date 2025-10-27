@@ -73,6 +73,7 @@
     "chai": "^4.4.1",
     "chalk": "^4.1.2",
     "commitizen": "^4.3.1",
+    "concurrently": "^9.1.2",
     "cross-spawn": "^7.0.6",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
