@@ -8,8 +8,8 @@
 
 The `ui-overlays` package contains the following:
 
-- [Mask](#Mask)
-- [Overlay](#Overlay)
+- [Mask](Mask)
+- [Overlay](Overlay)
 
 ### Installation
 

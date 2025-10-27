@@ -89,6 +89,12 @@ type DrilldownGroupOwnProps = {
   defaultSelected?: DrilldownOptionValue[]
 
   /**
+   * An array of the values for the selected items. If defined, the component will act controlled and will not manage its own state. Works only with "selectableType" set.
+   * If "selectableType" is "single", the array has to have 1 item.
+   */
+  selectedOptions?: DrilldownOptionValue[]
+
+  /**
    * Callback fired when an option within the `<Drilldown.Group />` is selected
    */
   onSelect?: (
@@ -120,6 +126,7 @@ const allowedProps: AllowedPropKeys = [
   'elementRef',
   'selectableType',
   'defaultSelected',
+  'selectedOptions',
   'onSelect'
 ]
 

@@ -43,8 +43,8 @@ import { FocusRegionOptions } from './FocusRegionOptions'
  * category: utilities/a11y
  * ---
  *
- * Class for focus operations, manages [ScreenReaderFocusRegion](#ScreenReaderFocusRegion)
- * and [KeyboardFocusRegion](#KeyboardFocusRegion) for the given DOM element.
+ * Class for focus operations, manages [ScreenReaderFocusRegion](ScreenReaderFocusRegion)
+ * and [KeyboardFocusRegion](KeyboardFocusRegion) for the given DOM element.
  * - Scoping focus within a given context (DOM node),
  * - Mark active element for focus later
  * - Return focus to the marked element

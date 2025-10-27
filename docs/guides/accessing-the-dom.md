@@ -7,7 +7,7 @@ relevantForAI: true
 
 ## Accessing the DOM
 
-Accessing the DOM directly in React is discouraged, because it pierces the DOM abstraction. Still there are some cases when InstUI is required to do so (for example for focus management or positioning). This happens with the [findDOMNode](#findDOMNode) utility function.
+Accessing the DOM directly in React is discouraged, because it pierces the DOM abstraction. Still there are some cases when InstUI is required to do so (for example for focus management or positioning). This happens with the [findDOMNode](findDOMNode) utility function.
 
 For custom React components this method first tries to access a `ref` property. If this does not exist, then:
 
@@ -16,13 +16,13 @@ For custom React components this method first tries to access a `ref` property. 
 
 Places where the `ref` prop is needed for custom components (you can use any InstUI component, they have this prop already:
 
-- [Tooltip](#Tooltip)'s children (if there is no `as` prop)
-- [Popover](#Popover)'s `renderTrigger` prop
-- [Menu](#Menu)'s `trigger` prop
-- [AiInformation](#AiInformation)'s `trigger` prop
-- [Position](#Position)'s child and `target` prop
-- [Transition](#Transition)'s child
-- [Dialog](#Dialog)'s `contentElement`prop
+- [Tooltip](Tooltip)'s children (if there is no `as` prop)
+- [Popover](Popover)'s `renderTrigger` prop
+- [Menu](Menu)'s `trigger` prop
+- [AiInformation](AiInformation)'s `trigger` prop
+- [Position](Position)'s child and `target` prop
+- [Transition](Transition)'s child
+- [Dialog](Dialog)'s `contentElement`prop
 - ... and possibly others, please check your console for errors!
 
 To fix the issue add a `ref` property to the component that returns the underlying DOM node:

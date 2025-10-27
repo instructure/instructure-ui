@@ -143,7 +143,7 @@ type DateTimeInputProps = {
   /**
    * The layout of this component.
    * Vertically stacked, horizontally arranged in 2 columns, or inline (default).
-   * See [FormFieldGroup](#FormFieldGroup) for details.
+   * See [FormFieldGroup](FormFieldGroup) for details.
    **/
   layout?: 'stacked' | 'columns' | 'inline'
   /**
@@ -168,7 +168,7 @@ type DateTimeInputProps = {
    * portion of the label should be abbreviated (no longer than three characters).
    * Note that screen readers will read this content preceding each date as the
    * `<Calendar />` is navigated. Consider using
-   * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
+   * [AccessibleContent](AccessibleContent) with the `alt` prop containing the
    * full day name for assistive technologies and the children containing the
    * abbreviation. ex. `[<AccessibleContent alt="Monday">Mon</AccessibleContent>, ...]`
    *

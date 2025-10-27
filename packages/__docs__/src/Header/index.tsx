@@ -135,7 +135,20 @@ class Header extends Component<HeaderProps> {
     const { versionsData } = this.props
     return (
       <View as="div" margin="none none medium" padding="none medium">
-        <Link href="#index" isWithinText={false} display="block">
+        <Link
+          href="index"
+          isWithinText={false}
+          display="block"
+          onClick={(e) => {
+            e.preventDefault()
+            const basePath =
+              window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/)?.[1] ||
+              ''
+            const newUrl = basePath ? `${basePath}/index` : `/`
+            window.history.pushState({}, '', newUrl)
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          }}
+        >
           <View display="block" textAlign="center">
             <InlineSVG src={logo} height="6rem" fontSize="12rem" />
             <ScreenReaderContent>Instructure logo</ScreenReaderContent>
@@ -145,7 +158,21 @@ class Header extends Component<HeaderProps> {
           {versionsData ? (
             this.renderVersionsBlock()
           ) : (
-            <Link href="#index" isWithinText={false} display="block">
+            <Link
+              href="index"
+              isWithinText={false}
+              display="block"
+              onClick={(e) => {
+                e.preventDefault()
+                const basePath =
+                  window.location.pathname.match(
+                    /^(\/pr-preview\/pr-\d+)/
+                  )?.[1] || ''
+                const newUrl = basePath ? `${basePath}/index` : `/`
+                window.history.pushState({}, '', newUrl)
+                window.dispatchEvent(new PopStateEvent('popstate'))
+              }}
+            >
               <View display="block" margin="small none none">
                 <Text size="large">
                   {this.props.name}

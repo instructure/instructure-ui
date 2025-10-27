@@ -10,7 +10,7 @@ A utility used to identify when an element receives focus.
 
 The `ui-focusable` package contains the following:
 
-- [Focusable](#Focusable)
+- [Focusable](Focusable)
 
 ### Installation
 

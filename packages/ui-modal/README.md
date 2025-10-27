@@ -10,7 +10,7 @@ A component for displaying content in a dialog overlay.
 
 The `ui-modal` package contains the following:
 
-- [Modal](#Modal)
+- [Modal](Modal)
 
 ### Installation
 

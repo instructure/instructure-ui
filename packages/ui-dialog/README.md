@@ -10,7 +10,7 @@ A utility component for managing keyboard accessibility and screen reader behavi
 
 The `ui-dialog` package contains the following:
 
-- [Dialog](#Dialog)
+- [Dialog](Dialog)
 
 ### Installation
 

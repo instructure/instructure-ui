@@ -86,8 +86,8 @@ interface ForwardRefComponentWithStatics
  * export default textDirectionContextConsumer()(Example)
  * ```
  *
- * When used as a child of [InstUISettingsProvider](#InstUISettingsProvider), textDirectionContextConsumer components use
- * the direction provided in `TextDirectionContext`. When used without [InstUISettingsProvider](#InstUISettingsProvider),
+ * When used as a child of [InstUISettingsProvider](InstUISettingsProvider), textDirectionContextConsumer components use
+ * the direction provided in `TextDirectionContext`. When used without [InstUISettingsProvider](InstUISettingsProvider),
  * the direction can be supplied explicitly via the `dir` prop. If no `dir` prop is provided,
  * textDirectionContextConsumer components query the documentElement for the `dir` attribute, defaulting to `ltr`
  * if it is not present.

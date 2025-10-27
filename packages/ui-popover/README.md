@@ -10,7 +10,7 @@ A component for hiding or showing content based on user interaction.
 
 The `ui-popover` package contains the following:
 
-- [Popover](#Popover)
+- [Popover](Popover)
 
 ### Installation
 
@@ -20,7 +20,7 @@ npm install @instructure/ui-popover
 
 ### Usage
 
-For detailed usage and documentation, see [Popover](#Popover).
+For detailed usage and documentation, see [Popover](Popover).
 
 ```js
 import React from 'react'

@@ -32,7 +32,7 @@ import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
  * ---
  * category: utilities/a11y
  * ---
- * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
+ * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](ScreenReaderContent).
  * @module hasVisibleChildren
  * @param children - A React component's children prop
  * @return whether any of the children are visible

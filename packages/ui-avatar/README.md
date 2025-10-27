@@ -10,7 +10,7 @@ An image or letters that represents a user.
 
 The `ui-avatar` package contains the following:
 
-- [Avatar](#Avatar)
+- [Avatar](Avatar)
 
 ### Installation
 

@@ -10,7 +10,7 @@ A component for standard select element behavior.
 
 The `ui-simple-select` package contains the following:
 
-- [SimpleSelect](#SimpleSelect)
+- [SimpleSelect](SimpleSelect)
 
 ### Installation
 
