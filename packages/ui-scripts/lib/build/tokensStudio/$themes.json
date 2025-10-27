@@ -17,9 +17,9 @@
       "canvas/component/TextInput": "enabled",
       "canvas/component/TextArea": "enabled",
       "canvas/component/Icon": "enabled",
-      "canvas/component/Button": "enabled",
       "canvas/component/Checkbox": "enabled",
-      "canvas/component/Utility": "enabled"
+      "canvas/component/Utility": "enabled",
+      "canvas/component/BaseButton": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -978,9 +978,9 @@
       "canvas/component/TextInput": "enabled",
       "canvas/component/TextArea": "enabled",
       "canvas/component/Icon": "enabled",
-      "canvas/component/Button": "enabled",
       "canvas/component/Checkbox": "enabled",
-      "canvas/component/Utility": "enabled"
+      "canvas/component/Utility": "enabled",
+      "canvas/component/BaseButton": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1845,9 +1845,9 @@
       "rebrand/component/TextInput": "enabled",
       "rebrand/component/TextArea": "enabled",
       "rebrand/component/Icon": "enabled",
-      "rebrand/component/Button": "enabled",
       "rebrand/component/Utility": "enabled",
-      "rebrand/component/Checkbox": "enabled"
+      "rebrand/component/Checkbox": "enabled",
+      "rebrand/component/BaseButton": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -2804,9 +2804,9 @@
       "rebrand/component/TextInput": "enabled",
       "rebrand/component/TextArea": "enabled",
       "rebrand/component/Icon": "enabled",
-      "rebrand/component/Button": "enabled",
       "rebrand/component/Utility": "enabled",
-      "rebrand/component/Checkbox": "enabled"
+      "rebrand/component/Checkbox": "enabled",
+      "rebrand/component/BaseButton": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
