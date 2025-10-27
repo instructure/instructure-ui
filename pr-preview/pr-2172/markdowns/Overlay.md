@@ -2,7 +2,7 @@
 
 
 The Overlay component is a closable/dismissible component that transitions
-in and out content rendered in a [Portal](#Portal)
+in and out content rendered in a [Portal](Portal)
 
 ```js
 ---

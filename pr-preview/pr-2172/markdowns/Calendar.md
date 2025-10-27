@@ -242,16 +242,16 @@ month, and the year (Ex. instead of `1` we would provide `1 August 2019`).
 day of the week via the `renderWeekdayLabels` prop. The visible portion of the
 label should be abbreviated (no longer than three characters). Note that screen
 readers will read this content preceding each date as the `Calendar` is navigated.
-Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop
+Consider using [AccessibleContent](AccessibleContent) with the `alt` prop
 containing the full day name for assistive technologies and the children containing
 the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
 
 #### Rendering next and previous month buttons
 
 The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
-[IconButton](#IconButton) component with the `size` prop set to
-`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](#icons) or
-[IconArrowOpenEnd](#icons).
+[IconButton](IconButton) component with the `size` prop set to
+`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](icons) or
+[IconArrowOpenEnd](icons).
 
 
 ### Props
@@ -267,9 +267,9 @@ The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using th
 | Calendar | onRequestRenderNextMonth | `( e: React.MouseEvent, requestedMonth: string ) => void` | No | - | Callback fired when the next month button is clicked in the navigation header, requesting to render the next month. |
 | Calendar | onRequestRenderPrevMonth | `( e: React.MouseEvent, requestedMonth: string ) => void` | No | - | Callback fired when the previous month button is clicked in the navigation header, requesting to render the previous month. |
 | Calendar | renderNavigationLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to render in the navigation header. The recommendation is to include the name of the current rendered month along with the year. |
-| Calendar | renderNextMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](#IconButton) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenEnd](#icons). |
-| Calendar | renderPrevMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](#Button) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenStart](#icons). |
-| Calendar | renderWeekdayLabels | `Renderable[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
+| Calendar | renderNextMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](IconButton) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenEnd](icons). |
+| Calendar | renderPrevMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the navigation header. The recommendation is to compose it with the [IconButton](Button) component by setting the `size` prop to `small`, `withBorder` and `withBackground` to `false`, and setting `renderIcon` to [IconArrowOpenStart](icons). |
+| Calendar | renderWeekdayLabels | `Renderable[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
 | Calendar | role | `'table' \| 'listbox'` | No | `'table'` | The role of the underlying table. This can be set to 'listbox' when assistive technologies need to read the `<Calendar.Day />` children as a list. |
 | Calendar | selectedDate | `string` | No | - | ISO date string for the selected date. It needs onDateSelected to be specified too. |
 | Calendar | timezone | `string` | No | - | A timezone identifier in the format: *Area/Location* See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list of possible options. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's timezone will be used if no value is set via a component property or a context property. |
