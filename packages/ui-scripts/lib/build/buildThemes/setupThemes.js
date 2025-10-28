@@ -36,25 +36,28 @@ import { exec } from 'child_process'
 import { promisify } from 'node:util'
 // transform to an object for easier handling
 export const transformThemes = (themes) =>
-  themes.reduce((acc, theme) => {
-    const tokenSets = Object.keys(theme.selectedTokenSets).reduce(
-      (acc, tokenSet) => {
-        if (tokenSet.includes('primitives')) {
-          return { ...acc, primitives: tokenSet }
-        }
-        if (tokenSet.includes('semantic')) {
-          return { ...acc, semantic: [...acc.semantic, tokenSet] }
-        }
-        if (theme.selectedTokenSets[tokenSet] === 'enabled') {
-          return { ...acc, components: [...acc.components, tokenSet] }
-        }
-        return acc
-      },
-      { primitives: '', semantic: '', components: [] }
-    )
+  //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
+  themes
+    .filter((t) => t.name !== 'Primitive')
+    .reduce((acc, theme) => {
+      const tokenSets = Object.keys(theme.selectedTokenSets).reduce(
+        (acc, tokenSet) => {
+          if (tokenSet.includes('primitives')) {
+            return { ...acc, primitives: tokenSet }
+          }
+          if (tokenSet.includes('semantic')) {
+            return { ...acc, semantic: [...acc.semantic, tokenSet] }
+          }
+          if (theme.selectedTokenSets[tokenSet] === 'enabled') {
+            return { ...acc, components: [...acc.components, tokenSet] }
+          }
+          return acc
+        },
+        { primitives: '', semantic: '', components: [] }
+      )
 
-    return { ...acc, [theme.name]: tokenSets }
-  }, {})
+      return { ...acc, [theme.name]: tokenSets }
+    }, {})
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 const unCapitalize = (str) => str.charAt(0).toLowerCase() + str.slice(1)
