@@ -1209,168 +1209,168 @@
     "x": {
       "elevation1": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       }
     },
     "y": {
       "elevation1": {
         "dropshadow1": {
-          "value": "1",
-          "type": "number"
+          "value": "1px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "1",
-          "type": "number"
+          "value": "1px",
+          "type": "sizing"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "1",
-          "type": "number"
+          "value": "1px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "1",
-          "type": "number"
+          "value": "1px",
+          "type": "sizing"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "3",
-          "type": "number"
+          "value": "3px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "3",
-          "type": "number"
+          "value": "3px",
+          "type": "sizing"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "3",
-          "type": "number"
+          "value": "3px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "3",
-          "type": "number"
+          "value": "3px",
+          "type": "sizing"
         }
       }
     },
     "blur": {
       "elevation1": {
         "dropshadow1": {
-          "value": "3",
-          "type": "number"
+          "value": "3px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "2",
-          "type": "number"
+          "value": "2px",
+          "type": "sizing"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "3",
-          "type": "number"
+          "value": "3px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "2",
-          "type": "number"
+          "value": "2px",
+          "type": "sizing"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "6",
-          "type": "number"
+          "value": "6px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "6",
-          "type": "number"
+          "value": "6px",
+          "type": "sizing"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "6",
-          "type": "number"
+          "value": "6px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "6",
-          "type": "number"
+          "value": "6px",
+          "type": "sizing"
         }
       }
     },
     "spread": {
       "elevation1": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         },
         "dropshadow2": {
-          "value": "0",
-          "type": "number"
+          "value": "0px",
+          "type": "sizing"
         }
       }
     }
