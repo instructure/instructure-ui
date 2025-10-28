@@ -67,7 +67,8 @@ const setupThemes = async (targetPath, input) => {
 
   const themeData = transformThemes(input['$themes'])
 
-  const themes = Object.keys(themeData)
+  //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
+  const themes = Object.keys(themeData).filter((t) => t !== 'Primitive')
   for (let themeIndex = 0; themeIndex < themes.length; themeIndex++) {
     const theme = themes[themeIndex]
     const themePath = `${targetPath}/${theme}`
