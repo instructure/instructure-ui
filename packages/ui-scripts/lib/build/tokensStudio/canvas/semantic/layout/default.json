@@ -209,7 +209,7 @@
       "type": "fontFamilies"
     },
     "code": {
-      "value": "{fontFamily.lato}",
+      "value": "{fontFamily.menlo}",
       "type": "fontFamilies"
     }
   },

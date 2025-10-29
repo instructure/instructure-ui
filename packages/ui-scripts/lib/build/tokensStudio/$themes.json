@@ -19,7 +19,8 @@
       "canvas/component/Icon": "enabled",
       "canvas/component/Checkbox": "enabled",
       "canvas/component/Utility": "enabled",
-      "canvas/component/BaseButton": "enabled"
+      "canvas/component/BaseButton": "enabled",
+      "canvas/component/Text": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -980,7 +981,8 @@
       "canvas/component/Icon": "enabled",
       "canvas/component/Checkbox": "enabled",
       "canvas/component/Utility": "enabled",
-      "canvas/component/BaseButton": "enabled"
+      "canvas/component/BaseButton": "enabled",
+      "canvas/component/Text": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1847,7 +1849,8 @@
       "rebrand/component/Icon": "enabled",
       "rebrand/component/Utility": "enabled",
       "rebrand/component/Checkbox": "enabled",
-      "rebrand/component/BaseButton": "enabled"
+      "rebrand/component/BaseButton": "enabled",
+      "rebrand/component/Text": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -2806,7 +2809,8 @@
       "rebrand/component/Icon": "enabled",
       "rebrand/component/Utility": "enabled",
       "rebrand/component/Checkbox": "enabled",
-      "rebrand/component/BaseButton": "enabled"
+      "rebrand/component/BaseButton": "enabled",
+      "rebrand/component/Text": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -3824,7 +3828,6 @@
       "size.size64": "3777dcd880d7f121eac0033a59cba56a9aaeb4ad",
       "fontFamily.lato": "22bd7c3200a76569cb1c9d7789a7daafed7e124c",
       "fontFamily.inclusiveSans": "9bf28b739cd2440634ac340a629093f5f4da0030",
-      "fontFamily.Atkinson": "cf8b25d7fef2d9307b1451ddb29bc286f78768a3",
       "fontWeight.thin": "673d1d0a4d460fed408832252e3e592b18a77b5d",
       "fontWeight.extraLight": "6db296631e01d6d14d3666c70ad26aaa1d8e3a04",
       "fontWeight.light": "1a4c7cc9cce804e3cd3ffe2a34850296f3747bc4",
@@ -3837,7 +3840,8 @@
       "additionalSize.size1_25": "56a09f2d068bb962b55caeea772ba143a69b2642",
       "additionalSize.size1_5": "e4569d49760815151cac9b0b259637fa538504e9",
       "additionalSize.size2_5": "9bf8f7be10bbc1ab93912ac4a79192106257ddab",
-      "additionalSize.size3": "896927bdaec1f57b594597c10c746c66b215b1e4"
+      "additionalSize.size3": "896927bdaec1f57b594597c10c746c66b215b1e4",
+      "fontFamily.atkinson": "cf8b25d7fef2d9307b1451ddb29bc286f78768a3"
     }
   }
 ]

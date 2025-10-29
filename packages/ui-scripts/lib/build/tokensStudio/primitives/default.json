@@ -676,8 +676,12 @@
       "value": "Inclusive Sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "type": "fontFamilies"
     },
-    "Atkinson": {
+    "atkinson": {
       "value": "Atkinson Hyperlegible Next, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "type": "fontFamilies"
+    },
+    "menlo": {
+      "value": "Menlo, Consolas, Monaco, \"Andale Mono\", monospace",
       "type": "fontFamilies"
     }
   },
