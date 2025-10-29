@@ -1,0 +1,75 @@
+{
+  "text": {
+    "descriptionPage": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textLg}",
+        "lineHeight": "{lineHeight.heading.textLg}"
+      },
+      "type": "typography"
+    },
+    "descriptionSection": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "content": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "contentImportant": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.strong}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "contentQuote": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.strong}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}",
+        "textDecoration": "italic"
+      },
+      "type": "typography"
+    },
+    "contentSmall": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textSm}",
+        "lineHeight": "{lineHeight.paragraph.textSm}"
+      },
+      "type": "typography"
+    },
+    "legend": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "letterSpacing": "0rem",
+        "fontSize": "{fontSize.textXs}",
+        "lineHeight": "{lineHeight.paragraph.textXs}"
+      },
+      "type": "typography"
+    }
+  }
+}
