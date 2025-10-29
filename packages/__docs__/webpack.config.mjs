@@ -27,9 +27,12 @@ import baseConfig from '@instructure/ui-webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { merge } from 'webpack-merge'
 import resolve from './resolve.mjs'
+import webpack from 'webpack'
+import TerserPlugin from 'terser-webpack-plugin'
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
+const GITHUB_PULL_REQUEST_PREVIEW = process.env.GITHUB_PULL_REQUEST_PREVIEW || 'false'
 
 const outputPath = resolvePath(import.meta.dirname, '__build__')
 const resolveAliases = DEBUG ? { resolve } : {}
@@ -65,6 +68,9 @@ const config = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       chunks: ['main'],
+    }),
+    new webpack.DefinePlugin({
+      'process.env.GITHUB_PULL_REQUEST_PREVIEW': JSON.stringify(GITHUB_PULL_REQUEST_PREVIEW),
     }),
   ],
   optimization: {

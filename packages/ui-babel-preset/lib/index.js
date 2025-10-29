@@ -108,7 +108,10 @@ module.exports = function (
     )
   }
 
-  if (opts.removeConsole) {
+  if (
+    process.env.GITHUB_PULL_REQUEST_PREVIEW !== 'true' &&
+    opts.removeConsole
+  ) {
     if (typeof opts.removeConsole === 'object') {
       plugins.push([
         require('babel-plugin-transform-remove-console'),
