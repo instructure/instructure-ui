@@ -12,6 +12,8 @@ on:
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PULL_REQUEST_PREVIEW: 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Install Node 22
