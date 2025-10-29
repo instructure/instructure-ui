@@ -94,7 +94,9 @@ class View extends Component<ViewProps> {
 
     let shouldLogError = true
     try {
-      shouldLogError = process.env.NODE_ENV !== 'production'
+      shouldLogError =
+        process.env.NODE_ENV !== 'production' ||
+        process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true'
     } catch (e) {
       if (e instanceof ReferenceError) {
         // if process is not available a ReferenceError is thrown
