@@ -110,15 +110,20 @@ const setupThemes = async (targetPath, input) => {
     await createFile(`${themePath}/semantics.ts`, semanticsFileContent)
 
     //components
-    for (const componentpath of themeData[theme].components) {
+    for (const componentPath of themeData[theme].components) {
       const rawComponentName =
-        componentpath.split('/')[componentpath.split('/').length - 1]
+        componentPath.split('/')[componentPath.split('/').length - 1]
       const componentName =
         rawComponentName[0].toLowerCase() + rawComponentName.slice(1)
 
-      const component = generateComponent(input[componentpath][componentName])
+      const component = generateComponent(input[componentPath][componentName])
+      if (!component) {
+        throw new Error(
+          `can't find component under input[${componentPath}][${componentName}]. The most probable reason is not having the same component name consistently in the path and underneath a level`
+        )
+      }
       const componentTypes = generateComponentType(
-        input[componentpath][componentName]
+        input[componentPath][componentName]
       )
 
       const componentFileContent = `
@@ -152,9 +157,9 @@ const setupThemes = async (targetPath, input) => {
 
     //index file
     const componentImports = themeData[theme].components
-      .map((componentpath) => {
+      .map((componentPath) => {
         const componentName =
-          componentpath.split('/')[componentpath.split('/').length - 1]
+          componentPath.split('/')[componentPath.split('/').length - 1]
 
         return `import ${unCapitalize(
           componentName
@@ -166,17 +171,17 @@ const setupThemes = async (targetPath, input) => {
       .join('\n')
 
     const componentTypes = themeData[theme].components
-      .map((componentpath) => {
+      .map((componentPath) => {
         const componentName =
-          componentpath.split('/')[componentpath.split('/').length - 1]
+          componentPath.split('/')[componentPath.split('/').length - 1]
 
         return `${componentName}: ${capitalize(componentName)}`
       })
       .join('\n')
     const componentNames = themeData[theme].components
-      .map((componentpath) => {
+      .map((componentPath) => {
         const componentName =
-          componentpath.split('/')[componentpath.split('/').length - 1]
+          componentPath.split('/')[componentPath.split('/').length - 1]
         return `${componentName}: ${unCapitalize(componentName)}`
       })
       .join(',\n')
@@ -209,9 +214,9 @@ const setupThemes = async (targetPath, input) => {
     //index type file
     if (themeIndex === 0) {
       const componentTypeImports = themeData[theme].components
-        .map((componentpath) => {
+        .map((componentPath) => {
           const componentName =
-            componentpath.split('/')[componentpath.split('/').length - 1]
+            componentPath.split('/')[componentPath.split('/').length - 1]
 
           return `import type ${capitalize(
             componentName
@@ -219,9 +224,9 @@ const setupThemes = async (targetPath, input) => {
         })
         .join('\n')
       const componentTypeExport = themeData[theme].components
-        .map((componentpath) => {
+        .map((componentPath) => {
           const componentName =
-            componentpath.split('/')[componentpath.split('/').length - 1]
+            componentPath.split('/')[componentPath.split('/').length - 1]
 
           return `${capitalize(componentName)}:${capitalize(componentName)}`
         })
