@@ -45,7 +45,7 @@ To clean out built/generated files from a package:
 
 #### deprecate
 
-Deprecates ALL of a certain version of instUI npm packages by running `npm deprecate`.
+Deprecates ALL of a certain version of instUI pnpm packages by running `pnpm deprecate`.
 `versionToDeprecate` defaults to the current version.
 
 `pnpm run ui-scripts deprecate --versionToDeprecate 5.11.0 --fixVersion 5.11.1`
@@ -74,19 +74,19 @@ To fix lint issues:
 
 `pnpm run ui-scripts lint --fix`
 
-#### publish to npm
+#### publish to pnpm
 
 To publish all packages (defaults to current version):
 
 `pnpm run ui-scripts publish [version]`
 
-#### npm tag
+#### pnpm tag
 
-To add an NPM dist-tag for all packages:
+To add a pnpm dist-tag for all packages:
 
 `pnpm run ui-scripts tag add 5.11.0 latest`
 
-To remove an NPM dist-tag for all packages:
+To remove a pnpm dist-tag for all packages:
 
 `pnpm run ui-scripts tag rm 5.11.0 latest`
 
