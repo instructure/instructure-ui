@@ -457,7 +457,7 @@ type: embed
 | Tabs | children | `React.ReactNode` | No | - | children of type `Tabs.Panel` |
 | Tabs | variant | `'default' \| 'secondary'` | No | `'default'` |  |
 | Tabs | screenReaderLabel | `string` | No | - | A screen ready only label for the list of tabs |
-| Tabs | onRequestTabChange | `( event: React.MouseEvent<ViewOwnProps> \| React.KeyboardEvent<ViewOwnProps>, tabData: { index: number; id?: string } ) => void` | No | - | Called when the selected tab should change |
+| Tabs | onRequestTabChange | `( event: React.MouseEvent<ViewOwnProps> \| React.KeyboardEvent<ViewOwnProps>, tabData: { index: number; id?: string } ) => void` | No | - | Called when the selected tab should change. @param tabData.index - The zero-based index of the tab that was selected @param tabData.id - The HTML `id` of the tab that was selected |
 | Tabs | maxWidth | `string \| number` | No | - |  |
 | Tabs | maxHeight | `string \| number` | No | - |  |
 | Tabs | minHeight | `string \| number` | No | - |  |

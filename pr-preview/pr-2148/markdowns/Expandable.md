@@ -1,8 +1,8 @@
 # Expandable
 
 
-`Expandable` handles the show/hide functionality for both [`ToggleDetails`](#ToggleDetails)
-and [`ToggleGroup`](#ToggleGroup). `getToggleProps` and `getDetailsProps` are needed for the component to function properly, these add necessary ARIA tags and event listeners.
+`Expandable` handles the show/hide functionality for both [`ToggleDetails`](ToggleDetails)
+and [`ToggleGroup`](ToggleGroup). `getToggleProps` and `getDetailsProps` are needed for the component to function properly, these add necessary ARIA tags and event listeners.
 
 ### Basic example
 

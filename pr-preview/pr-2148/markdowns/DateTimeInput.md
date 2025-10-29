@@ -2,12 +2,12 @@
 
 
 A DateTimeInput component is used to enter a date-time value. It is built as a composition
-of the [DateInput](#DateInput) and [TimeSelect](#TimeSelect) components.
+of the [DateInput](DateInput) and [TimeSelect](TimeSelect) components.
 
-The properties of DateTimeInput prefaced with _date_ are passed to the underlying [DateInput](#DateInput)
+The properties of DateTimeInput prefaced with _date_ are passed to the underlying [DateInput](DateInput)
 (e.g. _dateLabel_ is DateInput's _label_), while the properties prefaced
 with _time_ are forwarded to the underlying
-[TimeSelect](#TimeSelect). Others are either shared by both sub-components (e.g. locale), or
+[TimeSelect](TimeSelect). Others are either shared by both sub-components (e.g. locale), or
 are unique to DateTimeInput (e.g. description).
 
 ### Localization
@@ -285,12 +285,12 @@ type: example
 | DateTimeInput | showMessages | `boolean` | No | `true` | Toggles whether to show built-in messages (the date/time, or the `invalidDateTimeMessage`). Even when set to `false` the component will show user supplied messages by the `messages` prop. @default true |
 | DateTimeInput | messages | `FormMessage[]` | No | - | Extra message(s) to be displayed. |
 | DateTimeInput | messageFormat | `string` | No | `'LLLL'` | This format of the composite date-time when displayed in messages. Valid formats are defined in the [Moment docs](https://momentjs.com/docs/#/displaying/format/) |
-| DateTimeInput | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'inline'` | The layout of this component. Vertically stacked, horizontally arranged in 2 columns, or inline (default). See [FormFieldGroup](#FormFieldGroup) for details. |
+| DateTimeInput | layout | `'stacked' \| 'columns' \| 'inline'` | No | `'inline'` | The layout of this component. Vertically stacked, horizontally arranged in 2 columns, or inline (default). See [FormFieldGroup](FormFieldGroup) for details. |
 | DateTimeInput | rowSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'small'` | Controls the spacing between the inputs when they are in a vertical layout. |
 | DateTimeInput | colSpacing | `'none' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` | Controls the spacing between the inputs when they are in a horizontal layout. |
 | DateTimeInput | value | `string` | No | - | An ISO 8601 formatted date string representing the current date-time (must be accompanied by an onChange prop). |
 | DateTimeInput | defaultValue | `string` | No | - | An ISO 8601 formatted date string to use if `value` isn't provided. |
-| DateTimeInput | renderWeekdayLabels | `( \| React.ReactNode \| ((...args: any[]) => React.ReactNode) )[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](#AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Monday">Mon</AccessibleContent>, ...]` You must render set the starting day of the week to the one specified by the current locale (e.g. Sunday in the US, Monday in Germany), dates are already displayed this way. By default it will render accessible, localized, abbreviated weekdays with week starts according to the current locale. |
+| DateTimeInput | renderWeekdayLabels | `( \| React.ReactNode \| ((...args: any[]) => React.ReactNode) )[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Monday">Mon</AccessibleContent>, ...]` You must render set the starting day of the week to the one specified by the current locale (e.g. Sunday in the US, Monday in Germany), dates are already displayed this way. By default it will render accessible, localized, abbreviated weekdays with week starts according to the current locale. |
 | DateTimeInput | isRequired | `boolean` | No | `false` | Specifies if the input is required (its passed down to the native DOM elements). If its `true` then an empty input will produce an error message (`invalidDateTimeMessage`) |
 | DateTimeInput | interaction | `InteractionType` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
 | DateTimeInput | onChange | `(event: SyntheticEvent, isoValue?: string) => void` | No | - | Called when the date-time value has changed. The passed in parameters are: - *event*: The triggering event (which may be from the underlying `DateInput` or `TimeSelect`) - *isoValue*: The new date value in ISO8601 format, undefined if its invalid |

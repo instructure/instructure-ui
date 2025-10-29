@@ -1,10 +1,10 @@
 
 ## Themes
 
-Instructure UI ships with two built-in themes: [canvas theme](#canvas) (default), [high contrast canvas theme](#canvas-high-contrast).
+Instructure UI ships with two built-in themes: [canvas theme](canvas) (default), [high contrast canvas theme](canvas-high-contrast).
 They are meant to be used together, `canvas` provides 4.5:1 contrast, while `canvas-high-contrast` 7.0:1.
 
-You can change the theme used with the [InstUISettingsProvider](#InstUISettingsProvider) component:
+You can change the theme used with the [InstUISettingsProvider](InstUISettingsProvider) component:
 
 ```jsx
 ---
@@ -23,7 +23,7 @@ render() {
 For more details on how to customize themes or apply different ones to parts of you application see [Using Theme Overrides](/#using-theme-overrides).
 
 If you are interested in how InstUI's theming engine works and/or you want to make your own components that use the themes,
-read our documentation on the theming engine [here](#theming-basics).
+read our documentation on the theming engine [here](theming-basics).
 
 ## Colors
 
