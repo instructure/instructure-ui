@@ -274,11 +274,11 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue10}",
+            "value": "{color.navy.navy20}",
             "type": "color"
           },
           "active": {
-            "value": "{color.blue.blue10}",
+            "value": "{color.navy.navy30}",
             "type": "color"
           },
           "disabled": {
@@ -562,15 +562,15 @@
         },
         "tertiary": {
           "base": {
-            "value": "{color.blue.blue20}",
+            "value": "{color.navy.navy50}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue20}",
+            "value": "{color.navy.navy50}",
             "type": "color"
           },
           "active": {
-            "value": "{color.blue.blue20}",
+            "value": "{color.navy.navy50}",
             "type": "color"
           },
           "disabled": {
@@ -787,15 +787,15 @@
           },
           "tertiary": {
             "base": {
-              "value": "{color.blue.blue100}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.blue.blue100}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "active": {
-              "value": "{color.blue.blue100}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "disabled": {
@@ -1045,15 +1045,15 @@
           },
           "tertiary": {
             "base": {
-              "value": "{color.blue.blue100}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.blue.blue100}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "active": {
-              "value": "{color.blue.blue100}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "disabled": {
