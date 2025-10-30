@@ -4,7 +4,6 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textLg}",
         "lineHeight": "{lineHeight.heading.textLg}"
       },
@@ -14,7 +13,6 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
@@ -24,7 +22,6 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
@@ -34,7 +31,6 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.strong}",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
@@ -44,10 +40,8 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "Medium Italic",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.paragraph.textBase}",
-        "textDecoration": "italic"
+        "lineHeight": "{lineHeight.paragraph.textBase}"
       },
       "type": "typography"
     },
@@ -55,7 +49,6 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textSm}",
         "lineHeight": "{lineHeight.paragraph.textSm}"
       },
@@ -65,7 +58,6 @@
       "value": {
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
-        "letterSpacing": "0rem",
         "fontSize": "{fontSize.textXs}",
         "lineHeight": "{lineHeight.paragraph.textXs}"
       },
