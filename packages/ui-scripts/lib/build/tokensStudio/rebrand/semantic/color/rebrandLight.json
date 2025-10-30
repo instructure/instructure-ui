@@ -76,7 +76,7 @@
         },
         "primary": {
           "base": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.navy.navy110}",
             "type": "color"
           },
           "hover": {
@@ -414,7 +414,7 @@
         },
         "primary": {
           "base": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.navy.navy110}",
             "type": "color"
           },
           "hover": {
