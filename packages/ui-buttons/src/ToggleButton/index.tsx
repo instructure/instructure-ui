@@ -90,6 +90,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
       status,
       placement,
       onClick,
+      margin,
       ...props
     } = this.props
 
@@ -122,6 +123,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           interaction={interaction}
           aria-pressed={status === 'pressed'}
           data-cid="ToggleButton"
+          margin={margin}
         >
           {callRenderProp(renderIcon)}
         </IconButton>

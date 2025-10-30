@@ -36,6 +36,7 @@ const generateComponentTheme = (theme: Theme): any => {
     requiredInvalidColor: colors?.contrasts?.red5782,
     toggleErrorInsetWidth: `calc(${forms?.inputHeightSmall}*1.5 + ${spacing?.small})`,
     checkErrorInsetWidth: `calc(1.25em + ${spacing?.xSmall})`,
+    spacing: spacing
   }
 
   return {

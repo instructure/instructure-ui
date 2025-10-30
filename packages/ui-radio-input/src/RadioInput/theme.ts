@@ -94,7 +94,8 @@ const generateComponentTheme = (theme: Theme): RadioInputTheme => {
     // toggle font is uppercase, so sizes are smaller below
     toggleSmallFontSize: typography?.fontSizeXSmall,
     toggleMediumFontSize: typography?.fontSizeSmall,
-    toggleLargeFontSize: typography?.fontSizeMedium
+    toggleLargeFontSize: typography?.fontSizeMedium,
+    spacing: spacing
   }
 
   return {
