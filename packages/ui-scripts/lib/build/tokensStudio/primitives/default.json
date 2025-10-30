@@ -603,6 +603,56 @@
         "value": "#024531",
         "type": "color"
       }
+    },
+    "navy": {
+      "navy10": {
+        "value": "#EBF0F7",
+        "type": "color"
+      },
+      "navy20": {
+        "value": "#D8E2EE",
+        "type": "color"
+      },
+      "navy30": {
+        "value": "#BECEE3",
+        "type": "color"
+      },
+      "navy40": {
+        "value": "#A0B7D6",
+        "type": "color"
+      },
+      "navy50": {
+        "value": "#809FC9",
+        "type": "color"
+      },
+      "navy60": {
+        "value": "#6889B6",
+        "type": "color"
+      },
+      "navy70": {
+        "value": "#54739C",
+        "type": "color"
+      },
+      "navy80": {
+        "value": "#3B5D8A",
+        "type": "color"
+      },
+      "navy90": {
+        "value": "#274974",
+        "type": "color"
+      },
+      "navy100": {
+        "value": "#103868",
+        "type": "color"
+      },
+      "navy110": {
+        "value": "#0C294A",
+        "type": "color"
+      },
+      "navy120": {
+        "value": "#0C1B2F",
+        "type": "color"
+      }
     }
   },
   "size": {
