@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-const boxShadowType = 'BoxShadow'
-
 const isReference = (expression) =>
   expression[0] === '{' && expression[expression.length - 1] === '}'
 
@@ -75,68 +73,69 @@ export const resolveReferences = (semantics, key) => {
   if (!isNaN(Number(value))) {
     return `${value},\n`
   }
-
   return `"${value}",\n`
 }
 
 const generateComponent = (data) => {
   const formattedSemantic = formatComponent(data)
-
   return resolveReferences(formattedSemantic)
-}
-
-const getGenericType = (value) => {
-  if (isReference(value)) {
-    return `Semantics${value
-      .slice(1, -1)
-      .split('.')
-      .map((val) => `['${val}']`)
-      .join('')}`
-  }
-  return 'string'
 }
 
 const parseType = (key, tokenObject, acc) => {
   let ret = acc
   if (tokenObject.type) {
+    // Add composition token support if needed
     switch (tokenObject.type) {
       case 'border':
-        // This type is coming from Token Studio
-        ret += '{ style: "solid" | "dashed" }'
+        ret += 'TokenBorderValue'
         break
-      case 'borderWidth':
+      // the following types are coming from SingleXYToken in @token-studio/types
+      // we could add them as imports from @token-studio/types if needed
+      case 'boolean':
+        ret += 'true' | 'false'
+        break
+      case 'textDecoration':
+        ret += "'none' | 'underline' | 'line-through' | 'strikethrough'"
+        break
+      case 'textCase':
+        ret +=
+          "'uppercase' | 'upper' | 'lowercase' | 'lower' | 'capitalize' | 'title' | 'small-caps' | 'small_caps' | 'all-small-caps' | 'small_caps_forced' | 'none'"
+        break
+      case 'asset':
       case 'borderRadius':
+      case 'borderWidth':
       case 'color':
+      case 'dimension':
       case 'fontFamilies':
       case 'fontSizes':
-      case 'fontWeights':
-      case 'lineHeights':
+      case 'letterSpacing':
+      case 'number':
+      case 'paragraphSpacing':
       case 'sizing':
       case 'spacing':
-        ret += `${getGenericType(tokenObject.value)}`
+      case 'text':
+        ret += 'string'
+        break
+      case 'fontWeights':
+      case 'lineHeights':
+      case 'opacity':
+      case 'other':
+        ret += 'string | number'
         break
       case 'boxShadow': {
-        // This type is coming from Token Studio,
-        // by convention we always assign a default value to x,y,blur,spread
         if (Array.isArray(tokenObject.value)) {
           ret += '{'
           for (let i = 0; i < tokenObject.value.length; i++) {
-            ret += `"${i}": ${boxShadowType}\n`
+            ret += `"${i}": TokenBoxshadowValueInst\n`
           }
           ret += '}'
         } else {
-          ret += boxShadowType
+          ret += 'TokenBoxshadowValueInst'
         }
         break
       }
       case 'typography':
-        ret += ` {
-        fontFamily: ${getGenericType(tokenObject.value.fontFamily)}
-        fontWeight: ${getGenericType(tokenObject.value.fontWeight)}
-        fontSize: ${getGenericType(tokenObject.value.fontSize)}
-        lineHeight: ${getGenericType(tokenObject.value.lineHeight)}
-        textDecoration: "underline"
-        }`
+        ret += `TokenTypographyValueInst`
         break
       default:
         throw new Error(
@@ -166,5 +165,5 @@ const parseType = (key, tokenObject, acc) => {
 export const generateComponentType = (data) => {
   return `{${parseType('', data, '')}}`
 }
-export { boxShadowType }
+
 export default generateComponent

@@ -30,11 +30,11 @@ import generateSemantics, {
   mergeSemanticSets
 } from './generateSemantics.js'
 import generateComponent, {
-  boxShadowType,
   generateComponentType
 } from './generateComponents.js'
 import { exec } from 'child_process'
 import { promisify } from 'node:util'
+
 // transform to an object for easier handling
 export const transformThemes = (themes) =>
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
@@ -69,17 +69,6 @@ const setupThemes = async (targetPath, input) => {
   //make new root folder
   await promises.mkdir(targetPath, { recursive: true })
 
-  await createFile(
-    `${targetPath}/commonTypes.ts`,
-    `export type BoxShadow ={
-    x: string | 0
-    y: string | 0
-    blur: string | 0
-    spread: string | 0
-    color: string // CSS color string like "red" or "#f00"
-    type: "dropShadow" | "innerShadow"
-  }`
-  )
   const themeData = transformThemes(input['$themes'])
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
   const themes = Object.keys(themeData).filter((t) => t !== 'Primitive')
@@ -152,12 +141,22 @@ const setupThemes = async (targetPath, input) => {
           importSemantics = `import type { Semantics } from "../${theme}/semantics"`
         }
         let importBoxShadow = ''
-        if (componentTypes.includes(boxShadowType)) {
-          importBoxShadow = `import type { BoxShadow } from '../commonTypes'\n`
+        if (componentTypes.includes('TokenBoxshadowValueInst')) {
+          importBoxShadow = `import type { TokenBoxshadowValueInst } from '../commonTypes'`
+        }
+        let importBorder = ''
+        if (componentTypes.includes('TokenBorderValue')) {
+          importBorder = `import type { TokenBorderValue } from '@tokens-studio/types'`
+        }
+        let importTypography = ''
+        if (componentTypes.includes('TokenTypographyValueInst')) {
+          importTypography = `import type { TokenTypographyValueInst } from '../commonTypes'`
         }
         const typeFileContent = `
           ${importSemantics}
           ${importBoxShadow}
+          ${importBorder}
+          ${importTypography}
 
           export type ${capitalize(componentName)} = ${componentTypes}
 
@@ -178,19 +177,7 @@ const setupThemes = async (targetPath, input) => {
 
         return `import ${unCapitalize(
           componentName
-        )} from "./components/${unCapitalize(componentName)}"\n
-        import type ${capitalize(
-          componentName
-        )} from "../componentTypes/${unCapitalize(componentName)}"`
-      })
-      .join('\n')
-
-    const componentTypes = themeData[theme].components
-      .map((componentpath) => {
-        const componentName =
-          componentpath.split('/')[componentpath.split('/').length - 1]
-
-        return `${componentName}: ${capitalize(componentName)}`
+        )} from "./components/${unCapitalize(componentName)}"`
       })
       .join('\n')
     const componentNames = themeData[theme].components
@@ -203,18 +190,12 @@ const setupThemes = async (targetPath, input) => {
     const indexFileContent = `
       import primitives, {type Primitives} from "./primitives";
       import semantics, {type Semantics} from "./semantics";
+      import type { BaseTheme } from '../commonTypes';
       ${componentImports}
 
-      export type Theme={
-        primitives: Primitives
-        semantics: Semantics
-        components: {
-          ${componentTypes}
-        }
-      }
+      export type Theme = BaseTheme<Primitives, Semantics>
 
-
-      const theme = {
+      const theme: Theme = {
         primitives,
         semantics,
         components: {
@@ -249,11 +230,12 @@ const setupThemes = async (targetPath, input) => {
 
       const componentsTypesFileContent = `
           ${componentTypeImports} \n
-          type Theme = {
+          type ComponentTypes = {
           ${componentTypeExport} \n
           }
 
-          export default Theme
+          export type { ComponentTypes }
+          export default ComponentTypes
         `
       await createFile(
         `${targetPath}/componentTypes/index.ts`,
@@ -261,6 +243,39 @@ const setupThemes = async (targetPath, input) => {
       )
     }
   }
+  // export common types
+  const commonTypes = `import type { ComponentTypes } from "./componentTypes"
+    import type { TokenTextCaseValue, TokenTextDecorationValue } from '@tokens-studio/types'
+
+    // This type is broken in Token Studio, use their version when the bug is fixed
+    export type TokenBoxshadowValueInst = {
+        color: string
+        type: 'dropShadow' | 'innerShadow' // BUG: this is an enum in the original
+        x: string | number
+        y: string | number
+        blur: string | number
+        spread: string | number
+        blendMode?: string
+    }
+    // This type is broken in Token Studio, use their version when the bug is fixed
+    export type TokenTypographyValueInst = {
+    fontFamily?: string
+    fontWeight?: string | number // BUG: this is just 'string' in the original
+    fontSize?: string
+    lineHeight?: string | number
+    letterSpacing?: string
+    paragraphSpacing?: string
+    paragraphIndent?: string
+    textCase?: TokenTextCaseValue
+    textDecoration?: TokenTextDecorationValue
+  }
+
+  export type BaseTheme<P extends Record<string, any>, S extends Record<string, any>> = {
+    primitives: P
+    semantics: S
+    components: ComponentTypes
+  }`
+  await createFile(`${targetPath}/commonTypes.ts`, commonTypes)
 
   // export index.ts
   const themeImports = Object.keys(themeData)
