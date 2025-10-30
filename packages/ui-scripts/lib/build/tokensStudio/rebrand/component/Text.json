@@ -43,7 +43,7 @@
     "contentQuote": {
       "value": {
         "fontFamily": "{fontFamily.base}",
-        "fontWeight": "{fontWeight.body.strong}",
+        "fontWeight": "Medium Italic",
         "letterSpacing": "0rem",
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}",
@@ -70,6 +70,42 @@
         "lineHeight": "{lineHeight.paragraph.textXs}"
       },
       "type": "typography"
+    },
+    "fontSizeLarge": {
+      "value": "1.375rem",
+      "type": "fontSizes"
+    },
+    "fontSizeMedium": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeSmall": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeXSmall": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontSizeXXLarge": {
+      "value": "2.375rem",
+      "type": "fontSizes"
+    },
+    "fontWeightLight": {
+      "value": "300",
+      "type": "fontWeights"
+    },
+    "fontWeightNormal": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "fontWeightBold": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "label": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
     }
   }
 }
