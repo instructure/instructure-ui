@@ -35,7 +35,7 @@ import type {
 
 type PillOwnProps = {
   as?: AsElementType
-  color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
+  color?: 'primary' | 'success' | 'info' | 'warning' | 'error'
   /**
    * Provides a reference to the underlying HTML element
    */

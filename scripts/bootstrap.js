@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { execSync, fork } = require('child_process')
+const { execSync } = require('child_process')
 const { spawn } = require('cross-spawn')
 const path = require('path')
 
@@ -33,6 +33,8 @@ function buildProject() {
   // and lets us handle the stderrs of sub processes
   // if one of the sub processes fails, then we terminate the other sub process and exit the main process
   const spawnStdIoOpts = { stdio: ['inherit', 'inherit', 'pipe'] }
+
+  execSync('npm run build:themes', opts)
   execSync(
     'lerna run prepare-build --scope @instructure/ui-icons --loglevel silent',
     opts
@@ -63,14 +65,9 @@ function buildProject() {
     execSync('npm run build:tokens', opts)
   })
 }
-function bootstrap() {
-  try {
-    fork(path.resolve('scripts/clean.js'), opts)
-  } catch (error) {
-    console.error('clean failed with error:', error)
-    process.exit(1)
-  }
 
+function bootstrap() {
+  execSync(path.resolve('scripts/clean.js'), opts)
   buildProject()
 }
 
