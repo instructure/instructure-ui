@@ -46,7 +46,8 @@ type DialogOwnProps = {
    */
   label?: string
   /**
-   * Whether or not the `<Dialog />` is open
+   * Controls whether the `<Dialog />` is open. If this prop is changed, the focus region will be updated
+   * a bit later with `requestAnimationFrame()` to ensure that the elements in the `Dialog` are in the focus region.
    */
   open?: boolean
   /**
