@@ -107,18 +107,6 @@
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
-    "letterSpacingCondensed": {
-      "value": "-0.0625rem",
-      "type": "letterSpacing"
-    },
-    "letterSpacingExpanded": {
-      "value": "0.0625rem",
-      "type": "letterSpacing"
-    },
-    "letterSpacingNormal": {
-      "value": "0rem",
-      "type": "letterSpacing"
-    },
     "lineHeight": {
       "value": "1.5",
       "type": "lineHeights"
@@ -146,10 +134,6 @@
     "lineHeightFit": {
       "value": "1.125",
       "type": "lineHeights"
-    },
-    "paragraphMargin": {
-      "value": "1.5rem 0",
-      "type": "paragraphSpacing"
     },
     "titleCardLarge": {
       "value": "1.5rem",
