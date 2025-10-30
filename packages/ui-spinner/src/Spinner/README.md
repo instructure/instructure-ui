@@ -13,9 +13,9 @@ type: example
 ---
 <div>
   <Spinner renderTitle="Loading" size="x-small"/>
-  <Spinner renderTitle="Loading" size="small" margin="0 0 0 medium" />
-  <Spinner renderTitle="Loading" margin="0 0 0 medium" />
-  <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
+  <Spinner renderTitle="Loading" size="small" margin="0 0 0 spaceMd" />
+  <Spinner renderTitle="Loading" margin="0 0 0 spaceMd" />
+  <Spinner renderTitle="Loading" size="large" margin="0 0 0 spaceMd" />
 </div>
 ```
 
@@ -43,9 +43,9 @@ type: example
 ---
 <div>
   <Spinner renderTitle="Loading" size="x-small" delay={1000} />
-  <Spinner renderTitle="Loading" size="small" margin="0 0 0 medium" delay={2000} />
-  <Spinner renderTitle="Loading" margin="0 0 0 medium"  delay={3000} />
-  <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium"  delay={4000} />
+  <Spinner renderTitle="Loading" size="small" margin="0 0 0 spaceMd" delay={2000} />
+  <Spinner renderTitle="Loading" margin="0 0 0 spaceMd"  delay={3000} />
+  <Spinner renderTitle="Loading" size="large" margin="0 0 0 spaceMd"  delay={4000} />
 </div>
 ```
 
