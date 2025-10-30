@@ -31,3 +31,5 @@ tsconfig.build.tsbuildinfo
 .claude/commands/*
 !.claude/commands/commit.md
 !.claude/commands/pr.md
+!.claude/commands/ticket.md
+!.claude/commands/plan.md
