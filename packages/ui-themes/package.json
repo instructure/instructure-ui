@@ -30,6 +30,10 @@
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
   },
+  "dependencies": {
+    "@instructure/shared-types": "11.0.1",
+    "@tokens-studio/types": "^0.5.2"
+  },
   "publishConfig": {
     "access": "public"
   },

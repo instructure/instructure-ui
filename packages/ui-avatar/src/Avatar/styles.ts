@@ -50,7 +50,7 @@ const generateStyle = (
   componentTheme: NewComponentTypes['Avatar'],
   params: StyleParams,
   //TODO type themes properly
-  theme: any
+  theme: any // TODO BaseTheme is is not good, it accesses theme.semantics.spacing
 ): AvatarStyle => {
   const {
     loaded,
