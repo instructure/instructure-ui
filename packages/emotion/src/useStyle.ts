@@ -71,14 +71,10 @@ const useStyle = <
       : {}
 
   if (
-    //@ts-expect-error TODO fix these later
-    theme.newTheme &&
-    //@ts-expect-error TODO fix these later
-    theme.newTheme.components[componentId]
+    (theme as BaseTheme).newTheme &&
+    (theme as BaseTheme).newTheme.components[componentId!]
   ) {
-    baseComponentTheme =
-      //@ts-expect-error TODO fix these later
-      theme.newTheme.components[componentId]
+    baseComponentTheme = (theme as BaseTheme).newTheme.components[componentId!]
   }
   const themeOverride = getComponentThemeOverride(
     theme,
