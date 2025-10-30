@@ -75,7 +75,19 @@ module.exports = {
     'header-max-length': [0, 'always', 150], // 0 === rule is disabled
     'subject-max-length': [2, 'always', 150]
   },
-
+  ignores: [
+    (_commitStr) => {
+      const output = execSync("git log -1 --format='%an'", {
+        encoding: 'utf-8'
+      })
+      if (output.trim() === 'svc-instui') {
+        // eslint-disable-next-line no-console
+        console.log('Skipping commit message lint because of author: ', output)
+        return true
+      }
+      return false
+    }
+  ],
   // https://cz-git.qbb.sh/config/
   prompt: {
     enableMultipleScopes: true,
