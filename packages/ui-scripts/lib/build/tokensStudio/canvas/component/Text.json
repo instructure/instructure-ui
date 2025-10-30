@@ -106,6 +106,62 @@
     "label": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
+    },
+    "letterSpacingCondensed": {
+      "value": "-0.0625rem",
+      "type": "letterSpacing"
+    },
+    "letterSpacingExpanded": {
+      "value": "0.0625rem",
+      "type": "letterSpacing"
+    },
+    "letterSpacingNormal": {
+      "value": "0rem",
+      "type": "letterSpacing"
+    },
+    "lineHeight": {
+      "value": "1.5",
+      "type": "lineHeights"
+    },
+    "lineHeight100": {
+      "value": "1",
+      "type": "lineHeights"
+    },
+    "lineHeight125": {
+      "value": "1.25",
+      "type": "lineHeights"
+    },
+    "lineHeight150": {
+      "value": "1.50",
+      "type": "lineHeights"
+    },
+    "lineHeightCondensed": {
+      "value": "1.25",
+      "type": "lineHeights"
+    },
+    "lineHeightDouble": {
+      "value": "2",
+      "type": "lineHeights"
+    },
+    "lineHeightFit": {
+      "value": "1.125",
+      "type": "lineHeights"
+    },
+    "paragraphMargin": {
+      "value": "1.5rem 0",
+      "type": "paragraphSpacing"
+    },
+    "titleCardLarge": {
+      "value": "1.5rem",
+      "type": "fontSizes"
+    },
+    "titleCardMini": {
+      "value": "1rem",
+      "type": "fontSizes"
+    },
+    "titleCardRegular": {
+      "value": "1.25rem",
+      "type": "fontSizes"
     }
   }
 }
