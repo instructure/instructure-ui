@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type NewComponentTypes from './themes/newThemes/componentTypes'
+import type { ComponentTypes as NewComponentTypes } from './themes/newThemes/componentTypes'
+import type { BaseTheme as NewBaseTheme } from './themes/newThemes/commonTypes'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
 import type {
@@ -97,5 +98,6 @@ export type {
   NewCanvasHighContrast,
   NewRebrandDark,
   NewRebrandLight,
-  NewComponentTypes
+  NewComponentTypes,
+  NewBaseTheme
 }

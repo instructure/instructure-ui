@@ -22,20 +22,12 @@
  * SOFTWARE.
  */
 
-// TODO get this type from token types, now its coming from generateComponents.js
-type BoxShadowObject = {
-  x: string | 0 | number
-  y: string | 0 | number
-  blur: string | 0 | number
-  spread: string | 0 | number
-  color: string // CSS color string like "red" or "#f00"
-  type: 'dropShadow' | 'innerShadow'
-}
+import { TokenBoxshadowValueInst } from '../themes/newThemes/commonTypes'
 
 /**
  * Converts a BoxShadowObject from Token Studio to a CSS box-shadow string
  */
-function boxShadowObjectToString(boxShadowObject: BoxShadowObject) {
+function boxShadowObjectToString(boxShadowObject: TokenBoxshadowValueInst) {
   if (boxShadowObject.type === 'innerShadow') {
     return `inset ${boxShadowObject.x}
     ${boxShadowObject.y}
