@@ -6341,9 +6341,9 @@ const data={id,innerText,level:tagName[1]}
 TOCData.push(data)}),hasLinkToTitle||TOCData.unshift({id:doc.id,innerText:doc.id,level:"1"}),1===TOCData.length&&TOCData.pop(),this.setState({TOCData})}render(){var _doc$category
 const doc=this.props.doc,TOCData=this.state.TOCData,category=null===(_doc$category=doc.category)||void 0===_doc$category?void 0:_doc$category.toLowerCase()
 if(!this.shouldDisplayToC)return null
-const levelPaddingMap={1:"0",2:"0",3:"0",4:"small",5:"medium",6:"x-large"},TOC=TOCData.filter(data=>!!data.id).map(data=>(0,_jsxRuntime.jsx)(_uiList.List.Item,{padding:`0 0 0 ${levelPaddingMap[data.level]}`,children:(0,_jsxRuntime.jsx)(_uiLink.Link,{href:`#${data.id}`,onClick:e=>{e.preventDefault()
+const levelPaddingMap={1:"0",2:"0",3:"0",4:"small",5:"medium",6:"x-large"},TOC=TOCData.filter(data=>!!data.id).map((data,index)=>(0,_jsxRuntime.jsx)(_uiList.List.Item,{padding:`0 0 0 ${levelPaddingMap[data.level]}`,children:(0,_jsxRuntime.jsx)(_uiLink.Link,{href:`#${data.id}`,onClick:e=>{e.preventDefault()
 const prPreviewMatch=window.location.pathname.match(/^(\/pr-preview\/pr-\d+)/),basePath=(null==prPreviewMatch?void 0:prPreviewMatch[1])||"",newUrl=basePath?`${basePath}/${doc.id}#${data.id}`:`/${doc.id}#${data.id}`
-window.history.pushState({},"",newUrl),window.dispatchEvent(new PopStateEvent("popstate"))},children:data.innerText})},data.id))
+window.history.pushState({},"",newUrl),window.dispatchEvent(new PopStateEvent("popstate"))},children:data.innerText})},`${data.id}-${index}`))
 return(0,_jsxRuntime.jsx)(_emotion.InstUISettingsProvider,{children:(0,_jsxRuntime.jsx)(_uiView.View,{as:"div",margin:"medium 0",children:(0,_jsxRuntime.jsx)(_uiToggleDetails.ToggleDetails,{summary:"Table of Contents",defaultExpanded:(null==category?void 0:category.includes("components"))||"guides"===category,size:"large",children:(0,_jsxRuntime.jsx)(_uiList.List,{margin:"0 0 large",isUnstyled:!0,size:"small",itemSpacing:"xx-small",children:TOC})})})})}}exports.TableOfContents=TableOfContents,TableOfContents.displayName="TableOfContents",TableOfContents.allowedProps=_props.allowedProps
 exports.default=TableOfContents},94943:(__unused_webpack_module,exports)=>{"use strict"
 Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0
