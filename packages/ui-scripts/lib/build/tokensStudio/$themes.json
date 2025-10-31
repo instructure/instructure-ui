@@ -20,7 +20,8 @@
       "canvas/component/Checkbox": "enabled",
       "canvas/component/Utility": "enabled",
       "canvas/component/BaseButton": "enabled",
-      "canvas/component/Text": "enabled"
+      "canvas/component/Text": "enabled",
+      "canvas/component/RadioInput": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1001,7 +1002,8 @@
       "canvas/component/Checkbox": "enabled",
       "canvas/component/Utility": "enabled",
       "canvas/component/BaseButton": "enabled",
-      "canvas/component/Text": "enabled"
+      "canvas/component/Text": "enabled",
+      "canvas/component/RadioInput": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1895,7 +1897,8 @@
       "rebrand/component/Utility": "enabled",
       "rebrand/component/Checkbox": "enabled",
       "rebrand/component/BaseButton": "enabled",
-      "rebrand/component/Text": "enabled"
+      "rebrand/component/Text": "enabled",
+      "rebrand/component/RadioInput": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -2874,7 +2877,8 @@
       "rebrand/component/Utility": "enabled",
       "rebrand/component/Checkbox": "enabled",
       "rebrand/component/BaseButton": "enabled",
-      "rebrand/component/Text": "enabled"
+      "rebrand/component/Text": "enabled",
+      "rebrand/component/RadioInput": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
