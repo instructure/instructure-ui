@@ -32,7 +32,7 @@
       "value": "{color.stroke.interactive.input.disabled}",
       "type": "color"
     },
-    "borderCheckedColor": {
+    "borderSelectedColor": {
       "value": "{color.stroke.interactive.input.selected}",
       "type": "color"
     },
@@ -45,7 +45,7 @@
       "type": "fontSizes"
     },
     "fontSizeLg": {
-      "value": "1.375rem",
+      "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
     "lineHeightSm": {
@@ -102,6 +102,18 @@
     },
     "controlSizeLg": {
       "value": "{size.choiceControl.height.lg}",
+      "type": "sizing"
+    },
+    "checkedInsetSm": {
+      "value": "0.1875rem",
+      "type": "sizing"
+    },
+    "checkedInsetMd": {
+      "value": "0.25rem",
+      "type": "sizing"
+    },
+    "checkedInsetLg": {
+      "value": "0.375rem",
       "type": "sizing"
     }
   }
