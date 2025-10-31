@@ -1,0 +1,143 @@
+{
+  "text": {
+    "descriptionPage": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "fontSize": "{fontSize.textLg}",
+        "lineHeight": "{lineHeight.heading.textLg}"
+      },
+      "type": "typography"
+    },
+    "descriptionSection": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "content": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "contentImportant": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.strong}",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "contentQuote": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "Medium Italic",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.paragraph.textBase}"
+      },
+      "type": "typography"
+    },
+    "contentSmall": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "fontSize": "{fontSize.textSm}",
+        "lineHeight": "{lineHeight.paragraph.textSm}"
+      },
+      "type": "typography"
+    },
+    "legend": {
+      "value": {
+        "fontFamily": "{fontFamily.base}",
+        "fontWeight": "{fontWeight.body.base}",
+        "fontSize": "{fontSize.textXs}",
+        "lineHeight": "{lineHeight.paragraph.textXs}"
+      },
+      "type": "typography"
+    },
+    "fontSizeLarge": {
+      "value": "1.375rem",
+      "type": "fontSizes"
+    },
+    "fontSizeMedium": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeSmall": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontSizeXSmall": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "fontSizeXXLarge": {
+      "value": "2.375rem",
+      "type": "fontSizes"
+    },
+    "fontWeightLight": {
+      "value": "300",
+      "type": "fontWeights"
+    },
+    "fontWeightNormal": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "fontWeightBold": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "label": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "1.5",
+      "type": "lineHeights"
+    },
+    "lineHeight100": {
+      "value": "1",
+      "type": "lineHeights"
+    },
+    "lineHeight125": {
+      "value": "1.25",
+      "type": "lineHeights"
+    },
+    "lineHeight150": {
+      "value": "1.50",
+      "type": "lineHeights"
+    },
+    "lineHeightCondensed": {
+      "value": "1.25",
+      "type": "lineHeights"
+    },
+    "lineHeightDouble": {
+      "value": "2",
+      "type": "lineHeights"
+    },
+    "lineHeightFit": {
+      "value": "1.125",
+      "type": "lineHeights"
+    },
+    "titleCardLarge": {
+      "value": "1.5rem",
+      "type": "fontSizes"
+    },
+    "titleCardMini": {
+      "value": "1rem",
+      "type": "fontSizes"
+    },
+    "titleCardRegular": {
+      "value": "1.25rem",
+      "type": "fontSizes"
+    }
+  }
+}

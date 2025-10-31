@@ -590,7 +590,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.green.green40}",
+        "value": "{color.green.green30}",
         "type": "color"
       },
       "error": {
@@ -598,11 +598,11 @@
         "type": "color"
       },
       "warning": {
-        "value": "{color.orange.orange40}",
+        "value": "{color.orange.orange30}",
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.blue40}",
+        "value": "{color.blue.blue30}",
         "type": "color"
       },
       "onColor": {
