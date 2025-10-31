@@ -42,7 +42,7 @@
         }
       ],
       "type": "boxShadow",
-      "description": "Menus & Popovers: Anchored, contextual layers such as dropdowns, popovers, and context menus."
+      "description": "Menus & Popovers: Anchored, contextual layers such as dropdowns, popovers, and context menus."
     },
     "elevation3": {
       "value": [
@@ -64,7 +64,7 @@
         }
       ],
       "type": "boxShadow",
-      "description": "Floating UI: Detached, transient elements like tooltips, hover cards, and floating actions."
+      "description": "Floating UI: Detached, transient elements like tooltips, hover cards, and floating actions."
     },
     "elevation4": {
       "value": [
@@ -86,7 +86,7 @@
         }
       ],
       "type": "boxShadow",
-      "description": "Dialogs & Panels Top-priority surfaces including modals, alerts, and side panels."
+      "description": "Dialogs & Panels: Top-priority surfaces including modals, alerts, and side panels."
     }
   }
 }
