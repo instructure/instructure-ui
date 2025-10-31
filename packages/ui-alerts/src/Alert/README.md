@@ -14,43 +14,33 @@ space above or below the alert.
 ---
 type: example
 ---
-<div>
-  <Alert
-    variant="success"
-    renderCloseButtonLabel="Close"
-    margin="small"
-    transition="none"
-    variantScreenReaderLabel="Success, "
-  >
-    Sample success alert text. I will close w/o a transition out if you close me
-  </Alert>
-  <Alert
-    variant="info"
-    renderCloseButtonLabel="Close"
-    margin="small"
-    variantScreenReaderLabel="Information, "
-  >
-    Sample info text. I will fade out if you close me.
-  </Alert>
-  <Alert
-    variant="error"
-    renderCloseButtonLabel="Close"
-    margin="small"
-    variantScreenReaderLabel="Error, "
-  >
-    Sample error text that continues for a while
-    to demonstrate what happens when the content stretches over
-    several lines. It really does take a lot of prose to get the
-    text to wrap when you are on a high resolution screen.
-  </Alert>
-  <Alert
-    variant="warning"
-    margin="small"
-    variantScreenReaderLabel="Warning, "
-  >
-    Sample warning text. This alert is not dismissible and cannot be closed.
-  </Alert>
-</div>
+const Example = () => {
+	const [modalOpen, setModalOpen] = React.useState(false);
+
+	return (
+		<>
+			<Button onClick={() => setModalOpen(true)}>Open modal</Button>
+			<Modal open={modalOpen} onDismiss={() => setModalOpen(false)} label="Modal">
+				<div style={{ display: 'flex', gap: '20px' }}>
+					<SimpleSelect renderLabel="Use only keyboard to open this select">
+						<SimpleSelect.Option id="foo" value="foo">
+							Foo
+						</SimpleSelect.Option>
+						<SimpleSelect.Option id="bar" value="bar">
+							Bar
+						</SimpleSelect.Option>
+						<SimpleSelect.Option id="baz" value="baz">
+							Baz
+						</SimpleSelect.Option>
+					</SimpleSelect>
+					<Button>Click by mouse when select is open</Button>
+				</div>
+			</Modal>
+		</>
+	);
+};
+
+render(<Example/>)
 ```
 
 The `timeout` prop can be used to automatically dismiss an alert after a time.
