@@ -116,6 +116,14 @@ class FocusRegion {
   }
 
   handleDocumentClick = (event: React.PointerEvent) => {
+    // Only proceed if we have a valid mouse down target from this interaction.
+    // This prevents dismissal when a FocusRegion is activated via keyboard
+    // (e.g., opening a select dropdown with keyboard) and then a click occurs
+    // in a parent FocusRegion before any mousedown was captured.
+    if (!this._documentClickTarget) {
+      return
+    }
+
     // we used event.pointerType === 'mouse' here, but it is not supported in Safari
     // https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
     // TODO: Check this in the future, because the linked Webkit bug is marked as fixed in 2025-09
