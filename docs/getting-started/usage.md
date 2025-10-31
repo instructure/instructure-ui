@@ -19,7 +19,7 @@ type: code
 npm create vite@latest my-cool-app
 ```
 
-During the interactive project generation phase, please choose React and either JavaScript or TypeScript as the project language. After you have installed the dependencies by running `npm install`, you can try it by running `npm run dev`.
+During the interactive project generation phase, please choose React and either JavaScript or TypeScript as the project language. After you have installed the dependencies by running `pnpm install`, you can try it by running `pnpm run dev`.
 
 ##### Add InstUI dependencies to your `package.json`
 
@@ -38,7 +38,7 @@ type: code
 }
 ```
 
-Run `npm install`, so InstUI is downloaded to your `node_modules` folder and can be used.
+Run `pnpm install`, so InstUI is downloaded to your `node_modules` folder and can be used.
 
 ##### Try some sample code
 
@@ -66,7 +66,7 @@ What does this code do?
 - [InstUISettingsProvider](InstUISettingsProvider) allows to specify the text direction (default is the direction that the user's browser supplies) and the theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. There are 2 built-in themes: [`canvas`](canvas) and [`canvasHighContrast`](canvas-high-contrast). The component examples seen throughout the documentation use the [canvas theme](canvas) by default.
 - [Button](Button) is an Instructure UI button component
 
-Finally, run `npm run dev` to start up a basic development server.
+Finally, run `pnpm run dev` to start up a basic development server.
 
 Congrats, you have now a (very) basic app that uses Instructure UI :)
 

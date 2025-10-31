@@ -35,8 +35,8 @@ import { createNPMRCFile } from '../utils/npm.js'
 export default {
   command: 'deprecate',
   desc:
-    'deprecate ALL of a certain version of instUI npm packages by ' +
-    'running "npm deprecate".',
+    'deprecate ALL of a certain version of instUI pnpm packages by ' +
+    'running "pnpm deprecate".',
   builder: (yargs) => {
     yargs.option('versionToDeprecate', {
       type: 'string',
@@ -86,7 +86,7 @@ async function doDeprecate(versionToDeprecate, fixVersion) {
       const toDeprecate = `${pkg.name}@${versionToDeprecate}`
       info(`📦 Deprecating ${toDeprecate}...`)
       try {
-        await runCommandAsync('npm', ['deprecate', toDeprecate, message])
+        await runCommandAsync('pnpm', ['deprecate', toDeprecate, message])
         info(`📦 ${toDeprecate} was successfully deprecated!`)
       } catch (err) {
         error(err)

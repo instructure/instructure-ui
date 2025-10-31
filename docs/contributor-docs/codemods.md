@@ -55,7 +55,7 @@ You should write unit tests for your codemods. They are tested via test fixtures
 2. Create a folder named `sampleCodemod` in `packages/ui-codemods/lib/__node_tests__/__testfixtures__`
 3. Here create sample input-output file pairs whose filename follows the following naming convention: `[fixtureName].input.[js/ts/tsx]`, `[fixtureName].output.[js/ts/tsx]`. These should be your test cases that ensure that the codemod does the transformation correctly.
 
-Done! Run `npm run test:vitest ui-codemods` to run your test.
+Done! Run `pnpm run test:vitest ui-codemods` to run your test.
 
 #### Testing codemod warnings
 
@@ -77,7 +77,7 @@ We support testing these warnings using special fixtures and a console.warn spy.
    ---
    ["Warn for deprecated prop usage.", "Warn for something else."]
    ```
-4. When you run `npm run test:vitest ui-codemods`, your test will pass and ensure your codemod warns as expected.
+4. When you run `pnpm run test:vitest ui-codemods`, your test will pass and ensure your codemod warns as expected.
 
 Finally, you should try to run your codemod as users will do:
 

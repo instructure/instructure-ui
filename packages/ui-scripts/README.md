@@ -18,45 +18,45 @@ ui-scripts <command> --help
 
 To build (babel transpile) a package to be consumed as a library:
 
-`npm run ui-scripts build --modules cjs` writes commonjs modules to the lib/ directory.
+`pnpm run ui-scripts build --modules cjs` writes commonjs modules to the lib/ directory.
 
-`npm run ui-scripts build --modules es` writes es modules to the es/ directory.
+`pnpm run ui-scripts build --modules es` writes es modules to the es/ directory.
 
-`npm run ui-scripts build --modules es,cjs` writes es modules to both directories.
+`pnpm run ui-scripts build --modules es,cjs` writes es modules to both directories.
 
 If not specified, `modules` defaults to `es`.
 
 To build (webpack) a package to be consumed as an application:
 
-`npm run ui-scripts bundle`
+`pnpm run ui-scripts bundle`
 
 #### bump version
 
 To update all package versions
 (defaults to determining the version automatically using commit messages):
 
-`npm run ui-scripts bump [version|major|minor|patch]`
+`pnpm run ui-scripts bump [version|major|minor|patch]`
 
 #### clean
 
 To clean out built/generated files from a package:
 
-`npm run ui-scripts clean`
+`pnpm run ui-scripts clean`
 
 #### deprecate
 
-Deprecates ALL of a certain version of instUI npm packages by running `npm deprecate`.
+Deprecates ALL of a certain version of instUI pnpm packages by running `pnpm deprecate`.
 `versionToDeprecate` defaults to the current version.
 
-`npm run ui-scripts deprecate --versionToDeprecate 5.11.0 --fixVersion 5.11.1`
+`pnpm run ui-scripts deprecate --versionToDeprecate 5.11.0 --fixVersion 5.11.1`
 
 #### generating design tokens
 
-`npm run generate-tokens <options>`
+`pnpm run generate-tokens <options>`
 
 Generate cross-platform design tokens for the given theme.
 
-`npm run generate-all-tokens`
+`pnpm run generate-all-tokens`
 
 Generate cross-platform design tokens for all themes in the repo.
 
@@ -64,41 +64,41 @@ Generate cross-platform design tokens for all themes in the repo.
 
 To lint (eslint/stylelint) all files:
 
-`npm run ui-scripts lint`
+`pnpm run ui-scripts lint`
 
 To lint specific files:
 
-`npm run ui-scripts lint ./somefile.ts ./someotherfile.css`
+`pnpm run ui-scripts lint ./somefile.ts ./someotherfile.css`
 
 To fix lint issues:
 
-`npm run ui-scripts lint --fix`
+`pnpm run ui-scripts lint --fix`
 
-#### publish to npm
+#### publish to pnpm
 
 To publish all packages (defaults to current version):
 
-`npm run ui-scripts publish [version]`
+`pnpm run ui-scripts publish [version]`
 
-#### npm tag
+#### pnpm tag
 
-To add an NPM dist-tag for all packages:
+To add a pnpm dist-tag for all packages:
 
-`npm run ui-scripts tag add 5.11.0 latest`
+`pnpm run ui-scripts tag add 5.11.0 latest`
 
-To remove an NPM dist-tag for all packages:
+To remove a pnpm dist-tag for all packages:
 
-`npm run ui-scripts tag rm 5.11.0 latest`
+`pnpm run ui-scripts tag rm 5.11.0 latest`
 
 #### running tests
 
 To run all tests:
 
-`npm run ui-scripts test`
+`pnpm run ui-scripts test`
 
 To run tests for a package:
 
-`npm run ui-scripts test -- --scope @instructure/ui-avatar`
+`pnpm run ui-scripts test -- --scope @instructure/ui-avatar`
 
 ### Configuration
 

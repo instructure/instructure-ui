@@ -14,15 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - name: Install Node 22
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Npm install and bootstrap
-        run: npm ci && npm run bootstrap
+          cache: 'pnpm'
+      - name: Install and bootstrap
+        run: pnpm install --frozen-lockfile && pnpm run bootstrap
         if: github.event.action != 'closed' # don't run install and bootstrap unnecessarily when pr is closed
       - name: Build docs-app
-        run: npm run build:docs
+        run: pnpm run build:docs
         if: github.event.action != 'closed'
       - uses: rossjrw/pr-preview-action@v1
         with:

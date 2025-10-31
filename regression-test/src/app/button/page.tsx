@@ -27,20 +27,18 @@ import {
   Button,
   CondensedButton,
   CloseButton,
-  IconButton
-} from 'instructure-ui/ui-buttons/es/index'
-import { View } from 'instructure-ui/ui-view/es/index'
-import { Flex } from 'instructure-ui/ui-flex/es/index'
-import {
+  IconButton,
+  View,
+  Flex,
   IconAddLine,
   IconUserLine,
   IconAiSolid,
   IconAiColoredSolid,
   IconXSolid
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 export default function ButtonPage() {
-  const myElementRef = useRef<HTMLButtonElement>(null)
+  const myElementRef = useRef<any>(null)
   useEffect(() => {
     myElementRef?.current?.focus()
   })
@@ -50,8 +48,8 @@ export default function ButtonPage() {
     'secondary',
     'success',
     'danger'
-  ]
-  const sizes = ['small', 'medium', 'large']
+  ] as const
+  const sizes = ['small', 'medium', 'large'] as const
   return (
     <main className="flex gap-8 p-8 flex-col items-start axe-test">
       <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -69,7 +67,7 @@ export default function ButtonPage() {
           </Button>
         ))}
       </div>
-      <Button renderIcon={IconAddLine}>Icon Button</Button>
+      <Button renderIcon={<IconAddLine />}>Icon Button</Button>
       <Button disabled>Disabled Button</Button>
       <Button ref={myElementRef}>focused button</Button>
       <CondensedButton>CondensedButton</CondensedButton>
