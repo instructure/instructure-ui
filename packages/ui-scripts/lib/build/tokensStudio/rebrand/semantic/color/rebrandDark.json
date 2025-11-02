@@ -76,15 +76,15 @@
         },
         "primary": {
           "base": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.navy.navy10}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue80}",
+            "value": "{color.blue.blue20}",
             "type": "color"
           },
           "active": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.blue.blue30}",
             "type": "color"
           },
           "disabled": {
@@ -414,15 +414,15 @@
         },
         "primary": {
           "base": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.navy.navy10}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.blue.blue80}",
+            "value": "{color.blue.blue20}",
             "type": "color"
           },
           "active": {
-            "value": "{color.blue.blue90}",
+            "value": "{color.blue.blue30}",
             "type": "color"
           },
           "disabled": {
@@ -733,15 +733,15 @@
           },
           "primary": {
             "base": {
-              "value": "{color.white}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.white}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "active": {
-              "value": "{color.white}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "disabled": {
@@ -1031,15 +1031,15 @@
           },
           "primary": {
             "base": {
-              "value": "{color.white}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.white}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "active": {
-              "value": "{color.white}",
+              "value": "{color.navy.navy110}",
               "type": "color"
             },
             "disabled": {
