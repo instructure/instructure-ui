@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, fireEvent, act } from '@testing-library/react'
 import type { MockInstance } from 'vitest'
 import { vi } from 'vitest'
 
@@ -65,7 +64,8 @@ describe('<RadioInputGroup />', () => {
     expect(inputs.length).toBe(3)
   })
 
-  it('calls the onChange prop', async () => {
+  it('calls the onChange prop', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
     const { container } = render(
       <RadioInputGroup
@@ -80,14 +80,18 @@ describe('<RadioInputGroup />', () => {
     )
     const input = container.querySelector('input')
 
-    userEvent.click(input!)
-
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalled()
+    fireEvent.click(input!, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onChange).toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 
-  it('does not call the onChange prop when disabled', async () => {
+  it('does not call the onChange prop when disabled', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
     const { container } = render(
       <RadioInputGroup
@@ -104,14 +108,18 @@ describe('<RadioInputGroup />', () => {
     const input = container.querySelector('input')
 
     fireEvent.click(input!)
-
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
-      expect(input).toBeDisabled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onChange).not.toHaveBeenCalled()
+    expect(input).toBeDisabled()
+
+    vi.useRealTimers()
   })
 
-  it('does not call the onChange prop when readOnly', async () => {
+  it('does not call the onChange prop when readOnly', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
     const { container } = render(
       <RadioInputGroup
@@ -128,14 +136,18 @@ describe('<RadioInputGroup />', () => {
     const input = container.querySelector('input')
 
     fireEvent.click(input!)
-
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
-      expect(input).toBeDisabled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onChange).not.toHaveBeenCalled()
+    expect(input).toBeDisabled()
+
+    vi.useRealTimers()
   })
 
-  it('should not update the value when the value prop is set', async () => {
+  it('should not update the value when the value prop is set', () => {
+    vi.useFakeTimers()
     const { container } = render(
       <RadioInputGroup
         name="fruit"
@@ -153,11 +165,14 @@ describe('<RadioInputGroup />', () => {
 
     expect(orange).toHaveAttribute('checked')
 
-    userEvent.click(banana!)
-
-    await waitFor(() => {
-      expect(orange).toHaveAttribute('checked')
+    fireEvent.click(banana!, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(orange).toHaveAttribute('checked')
+
+    vi.useRealTimers()
   })
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {

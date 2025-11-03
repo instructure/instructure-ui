@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -179,8 +179,6 @@ describe('<CondensedButton/>', () => {
 
     await userEvent.click(button)
 
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalledTimes(1)
-    })
+    expect(onClick).toHaveBeenCalledTimes(1)
   })
 })

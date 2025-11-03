@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Drilldown } from '../../index'
@@ -160,7 +159,8 @@ describe('<Drilldown.Page />', () => {
       expect(title).not.toBeInTheDocument()
     })
 
-    it('should fire header action callback', async () => {
+    it('should fire header action callback', () => {
+      vi.useFakeTimers()
       const actionCallback = vi.fn()
       render(
         <Drilldown rootPageId="page0">
@@ -175,11 +175,13 @@ describe('<Drilldown.Page />', () => {
       )
       const actionLabel = screen.getByText('ActionWithCallback')
 
-      await userEvent.click(actionLabel)
-
-      await waitFor(() => {
-        expect(actionCallback).toHaveBeenCalled()
+      fireEvent.click(actionLabel, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(actionCallback).toHaveBeenCalled()
+      vi.useRealTimers()
     })
   })
 
@@ -197,7 +199,8 @@ describe('<Drilldown.Page />', () => {
       expect(label).not.toBeInTheDocument()
     })
 
-    it('should be displayed on subpages', async () => {
+    it('should be displayed on subpages', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
@@ -212,16 +215,19 @@ describe('<Drilldown.Page />', () => {
       )
       const option = screen.getByText('Option')
 
-      await userEvent.click(option)
-
-      await waitFor(() => {
-        const label = screen.queryByText('HeaderBackString')
-
-        expect(label).toBeInTheDocument()
+      fireEvent.click(option, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      const label = screen.queryByText('HeaderBackString')
+      expect(label).toBeInTheDocument()
+
+      vi.useRealTimers()
     })
 
-    it('should be displayed when function is passed, and can use former page title', async () => {
+    it('should be displayed when function is passed, and can use former page title', () => {
+      vi.useFakeTimers()
       const pageTitle = 'Page Title'
       render(
         <Drilldown rootPageId="page0">
@@ -242,13 +248,15 @@ describe('<Drilldown.Page />', () => {
       )
       const option = screen.getByText('Option')
 
-      await userEvent.click(option)
-
-      await waitFor(() => {
-        const label = screen.queryByText(`Back to ${pageTitle}`)
-
-        expect(label).toBeInTheDocument()
+      fireEvent.click(option, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      const label = screen.queryByText(`Back to ${pageTitle}`)
+      expect(label).toBeInTheDocument()
+
+      vi.useRealTimers()
     })
   })
 
@@ -315,7 +323,8 @@ describe('<Drilldown.Page />', () => {
       })
     })
 
-    it('should not allow selection if the Drilldown.Page is disabled', async () => {
+    it('should not allow selection if the Drilldown.Page is disabled', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" disabled>
@@ -330,12 +339,17 @@ describe('<Drilldown.Page />', () => {
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
-      await userEvent.click(optionContent)
+      fireEvent.click(optionContent, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+      vi.useRealTimers()
     })
 
-    it("shouldn't make header Back options disabled", async () => {
+    it("shouldn't make header Back options disabled", () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
@@ -354,18 +368,21 @@ describe('<Drilldown.Page />', () => {
       )
       const subPageOption = screen.getByText('Option1')
 
-      await userEvent.click(subPageOption)
-
-      await waitFor(() => {
-        const option2 = screen.getByLabelText('Option2')
-        const backOption = screen.getByLabelText('HeaderBackString')
-
-        expect(option2).toHaveAttribute('role', 'menuitem')
-        expect(option2).toHaveAttribute('aria-disabled', 'true')
-
-        expect(backOption).toHaveAttribute('role', 'menuitem')
-        expect(backOption).not.toHaveAttribute('aria-disabled')
+      fireEvent.click(subPageOption, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      const option2 = screen.getByLabelText('Option2')
+      const backOption = screen.getByLabelText('HeaderBackString')
+
+      expect(option2).toHaveAttribute('role', 'menuitem')
+      expect(option2).toHaveAttribute('aria-disabled', 'true')
+
+      expect(backOption).toHaveAttribute('role', 'menuitem')
+      expect(backOption).not.toHaveAttribute('aria-disabled')
+
+      vi.useRealTimers()
     })
   })
 })

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
@@ -213,9 +213,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalledTimes(1)
-      })
+      expect(onClick).toHaveBeenCalledTimes(1)
     })
 
     it('should not call onClick when interaction is "disabled"', async () => {
@@ -230,9 +228,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should not call onClick when disabled is set"', async () => {
@@ -247,9 +243,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should not call onClick when interaction is "readonly"', async () => {
@@ -264,9 +258,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should not call onClick when readOnly is set', async () => {
@@ -281,9 +273,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should not call onClick when button is disabled and an href prop is provided', async () => {
@@ -295,9 +285,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should not call onClick when interaction is "readonly" and an href prop is provided', async () => {
@@ -313,9 +301,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should call onClick when space key is pressed if href is provided', async () => {
@@ -331,9 +317,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.type(button, '{space}')
 
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalled()
-      })
+      expect(onClick).toHaveBeenCalled()
     })
 
     it('should call onClick when enter key is pressed when not a button or link', async () => {
@@ -349,9 +333,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.type(button, '{enter}')
 
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalled()
-      })
+      expect(onClick).toHaveBeenCalled()
     })
 
     it('should not call onClick when interaction is "disabled" and space key is pressed', async () => {
@@ -367,9 +349,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.type(button, '{space}')
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
 
     it('should not call onClick when interaction is "readonly" and space key is pressed', async () => {
@@ -384,9 +364,7 @@ describe('<BaseButton/>', () => {
 
       await userEvent.type(button, '{space}')
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
     })
   })
 
@@ -420,11 +398,9 @@ describe('<BaseButton/>', () => {
 
       await userEvent.click(button)
 
-      await waitFor(async () => {
-        const axeCheck = await runAxeCheck(button)
+      const axeCheck = await runAxeCheck(button)
 
-        expect(axeCheck).toBe(true)
-      })
+      expect(axeCheck).toBe(true)
     })
 
     describe('when disabled', () => {

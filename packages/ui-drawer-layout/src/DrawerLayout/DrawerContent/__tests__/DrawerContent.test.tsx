@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -49,7 +49,8 @@ describe('<DrawerContent />', () => {
     expect(contentRef).toHaveBeenCalledWith(drawerContent)
   })
 
-  it('should not transition on mount, just on update', async () => {
+  it('should not transition on mount, just on update', () => {
+    vi.useFakeTimers()
     const { rerender } = render(
       <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
     )
@@ -59,12 +60,15 @@ describe('<DrawerContent />', () => {
     expect(styleOnMount.transition).toBe('')
 
     rerender(<DrawerContent label="test">Hello World</DrawerContent>)
-
-    await waitFor(() => {
-      const drawerContentUpdated = screen.getByLabelText('test')
-      const updatedStyle = getComputedStyle(drawerContentUpdated)
-
-      expect(updatedStyle.transition).not.toBe('')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const drawerContentUpdated = screen.getByLabelText('test')
+    const updatedStyle = getComputedStyle(drawerContentUpdated)
+
+    expect(updatedStyle.transition).not.toBe('')
+
+    vi.useRealTimers()
   })
 })

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
@@ -223,13 +223,11 @@ describe('<ColorMixer />', () => {
       const colorHex = conversions.colorToHex8({ r, g, b, a })
       expect(colorHex).toBe('#000000FF')
 
-      await waitFor(() => {
-        expect(consoleWarningMock.mock.calls[0][0]).toEqual(
-          expect.stringContaining(
-            'Warning: [ColorMixer] The passed color value is not valid.'
-          )
+      expect(consoleWarningMock.mock.calls[0][0]).toEqual(
+        expect.stringContaining(
+          'Warning: [ColorMixer] The passed color value is not valid.'
         )
-      })
+      )
     })
   })
 
@@ -252,9 +250,7 @@ describe('<ColorMixer />', () => {
       colorSlider.focus()
       await userEvent.tab()
 
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
-      })
+      expect(onChange).not.toHaveBeenCalled()
     })
 
     it('onChange should not be call when component is disabled', async () => {
@@ -273,9 +269,7 @@ describe('<ColorMixer />', () => {
 
       await userEvent.type(colorSlider, '{arrowright}')
 
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
-      })
+      expect(onChange).not.toHaveBeenCalled()
     })
   })
 
@@ -297,9 +291,7 @@ describe('<ColorMixer />', () => {
       alphaSlider.focus()
       await userEvent.tab()
 
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
-      })
+      expect(onChange).not.toHaveBeenCalled()
     })
 
     it('should not call onChange when the component is disabled', async () => {
@@ -321,9 +313,7 @@ describe('<ColorMixer />', () => {
 
       await userEvent.type(alphaSlider, '{arrowright}')
 
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
-      })
+      expect(onChange).not.toHaveBeenCalled()
     })
 
     it('the alpha slider does not show when withAlpha is false', async () => {
@@ -468,9 +458,7 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[2], fakeValue)
       await userEvent.type(inputs[3], fakeValue)
 
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
-      })
+      expect(onChange).not.toHaveBeenCalled()
     })
 
     it('should set the disabled attribute when `disabled` and `withAlpha` is set', async () => {
@@ -526,12 +514,10 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[2], invalidColor)
       await userEvent.type(inputs[3], invalidColor)
 
-      await waitFor(() => {
-        expect(inputs[0]).not.toHaveValue(invalidColor)
-        expect(inputs[1]).not.toHaveValue(invalidColor)
-        expect(inputs[2]).not.toHaveValue(invalidColor)
-        expect(inputs[3]).not.toHaveValue(invalidColor)
-      })
+      expect(inputs[0]).not.toHaveValue(invalidColor)
+      expect(inputs[1]).not.toHaveValue(invalidColor)
+      expect(inputs[2]).not.toHaveValue(invalidColor)
+      expect(inputs[3]).not.toHaveValue(invalidColor)
     })
 
     it('should not accept negative value', async () => {
@@ -552,12 +538,10 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[2], invalidColor)
       await userEvent.type(inputs[3], invalidColor)
 
-      await waitFor(() => {
-        expect(inputs[0]).not.toHaveValue(invalidColor)
-        expect(inputs[1]).not.toHaveValue(invalidColor)
-        expect(inputs[2]).not.toHaveValue(invalidColor)
-        expect(inputs[3]).not.toHaveValue(invalidColor)
-      })
+      expect(inputs[0]).not.toHaveValue(invalidColor)
+      expect(inputs[1]).not.toHaveValue(invalidColor)
+      expect(inputs[2]).not.toHaveValue(invalidColor)
+      expect(inputs[3]).not.toHaveValue(invalidColor)
     })
 
     it('should not accept value that bigger than 255', async () => {
@@ -576,11 +560,9 @@ describe('<ColorMixer />', () => {
       await userEvent.type(inputs[1], invalidColor)
       await userEvent.type(inputs[2], invalidColor)
 
-      await waitFor(() => {
-        expect(inputs[0]).not.toHaveValue(invalidColor)
-        expect(inputs[1]).not.toHaveValue(invalidColor)
-        expect(inputs[2]).not.toHaveValue(invalidColor)
-      })
+      expect(inputs[0]).not.toHaveValue(invalidColor)
+      expect(inputs[1]).not.toHaveValue(invalidColor)
+      expect(inputs[2]).not.toHaveValue(invalidColor)
     })
 
     it('for alpha input, should not accept value that bigger than 100', async () => {
@@ -598,9 +580,7 @@ describe('<ColorMixer />', () => {
 
       await userEvent.type(inputs[3], invalidColor)
 
-      await waitFor(() => {
-        expect(inputs[3]).not.toHaveValue(invalidColor)
-      })
+      expect(inputs[3]).not.toHaveValue(invalidColor)
     })
   })
 })

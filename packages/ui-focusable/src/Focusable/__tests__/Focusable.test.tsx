@@ -23,7 +23,7 @@
  */
 
 import { Component } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -35,6 +35,14 @@ import type { FocusableRenderOptions } from '../props'
 describe('<Focusable />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
@@ -52,7 +60,7 @@ describe('<Focusable />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render', async () => {
+  it('should render', () => {
     render(<Focusable>{() => <button>hello world</button>}</Focusable>)
     const button = screen.getByRole('button')
 
@@ -61,6 +69,9 @@ describe('<Focusable />', () => {
   })
 
   it('should call children function with focused when element receives focus', async () => {
+    // Use real timers for this test due to userEvent async behavior
+    vi.useRealTimers()
+
     const renderSpy = vi.fn()
     render(
       <Focusable>
@@ -72,39 +83,38 @@ describe('<Focusable />', () => {
     )
     const focusable = screen.getByRole('button')
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-      expect(args).toHaveProperty('focused', false)
-      expect(args).toHaveProperty('focusable', focusable)
-      expect(args).toHaveProperty('focusVisible', false)
-    })
+    const args1 = renderSpy.mock.lastCall![0]
+    expect(args1).toHaveProperty('focused', false)
+    expect(args1).toHaveProperty('focusable', focusable)
+    expect(args1).toHaveProperty('focusVisible', false)
 
     await userEvent.type(focusable, '{enter}')
     await focusable.focus()
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-      expect(document.activeElement).toBe(focusable)
-      expect(args).toHaveProperty('focused', true)
-      expect(args).toHaveProperty('focusable', focusable)
-      expect(args).toHaveProperty('focusVisible', true)
-    })
+    const args2 = renderSpy.mock.lastCall![0]
+    expect(document.activeElement).toBe(focusable)
+    expect(args2).toHaveProperty('focused', true)
+    expect(args2).toHaveProperty('focusable', focusable)
+    expect(args2).toHaveProperty('focusVisible', true)
 
     await focusable.blur()
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-      expect(document.activeElement).not.toBe(focusable)
-      expect(args).toHaveProperty('focused', false)
-      expect(args).toHaveProperty('focusable', focusable)
-      expect(args).toHaveProperty('focusVisible', false)
-    })
+    const args3 = renderSpy.mock.lastCall![0]
+    expect(document.activeElement).not.toBe(focusable)
+    expect(args3).toHaveProperty('focused', false)
+    expect(args3).toHaveProperty('focusable', focusable)
+    expect(args3).toHaveProperty('focusVisible', false)
+
+    vi.useFakeTimers()
   })
 
-  it('should handle conditionally rendered focus elements', async () => {
+  it('should handle conditionally rendered focus elements', () => {
     const renderSpy = vi.fn(({ focused }) => (
       <div>
         {focused ? <input type="text" /> : <a href="http://focus.net">Click</a>}
@@ -117,58 +127,70 @@ describe('<Focusable />', () => {
     expect(firstFocusable.tagName).toBe('A')
     expect(firstFocusable).not.toHaveFocus()
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-
-      expect(args.focused).toBe(false)
-      expect(args.focusable).toBe(firstFocusable)
+    act(() => {
+      vi.runAllTimers()
     })
 
-    await firstFocusable.focus()
+    const args1 = renderSpy.mock.lastCall![0]
+    expect(args1.focused).toBe(false)
+    expect(args1.focusable).toBe(firstFocusable)
+
+    act(() => {
+      firstFocusable.focus()
+      vi.runAllTimers()
+    })
 
     const nextFocusable = screen.getByRole('textbox')
 
     expect(nextFocusable.tagName).toBe('INPUT')
     expect(nextFocusable).toHaveFocus()
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-      expect(args.focused).toBe(true)
-      expect(args.focusable).toBe(nextFocusable)
+    act(() => {
+      vi.runAllTimers()
     })
 
-    await nextFocusable.blur()
+    const args2 = renderSpy.mock.lastCall![0]
+    expect(args2.focused).toBe(true)
+    expect(args2.focusable).toBe(nextFocusable)
+
+    act(() => {
+      nextFocusable.blur()
+      vi.runAllTimers()
+    })
 
     const lastFocusable = screen.getByText('Click')
 
     expect(lastFocusable.tagName).toBe('A')
     expect(lastFocusable).not.toHaveFocus()
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-      expect(args.focused).toBe(false)
-      expect(args.focusable).toBe(lastFocusable)
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const args3 = renderSpy.mock.lastCall![0]
+    expect(args3.focused).toBe(false)
+    expect(args3.focusable).toBe(lastFocusable)
   })
 
-  it('should maintain focus when the focus element changes', async () => {
+  it('should maintain focus when the focus element changes', () => {
     const renderSpy = vi.fn(() => <a href="http://focus.net">Click</a>)
 
     const { rerender } = render(<Focusable render={renderSpy} />)
     const firstFocusable = screen.getByText('Click')
 
-    await firstFocusable.focus()
-
-    await waitFor(() => {
-      const lastCall = renderSpy.mock.lastCall as
-        | [{ focused: boolean; focusable: HTMLElement }]
-        | undefined
-      const args = lastCall?.[0]
-
-      expect(firstFocusable).toHaveFocus()
-      expect(args?.focused).toBe(true)
-      expect(args?.focusable).toBe(firstFocusable)
+    act(() => {
+      firstFocusable.focus()
+      vi.runAllTimers()
     })
+
+    const lastCall = renderSpy.mock.lastCall as
+      | [{ focused: boolean; focusable: HTMLElement }]
+      | undefined
+    const args = lastCall?.[0]
+
+    expect(firstFocusable).toHaveFocus()
+    expect(args?.focused).toBe(true)
+    expect(args?.focusable).toBe(firstFocusable)
 
     // Set prop: render
     const nextRenderSpy = vi.fn(() => <button>Click</button>)
@@ -179,19 +201,21 @@ describe('<Focusable />', () => {
     expect(nextFocusable.tagName).toBe('BUTTON')
     expect(nextFocusable).toHaveFocus()
 
-    await waitFor(() => {
-      const nextLastCall = nextRenderSpy.mock.lastCall as
-        | [{ focused: boolean; focusable: HTMLElement }]
-        | undefined
-      const nextArgs = nextLastCall?.[0]
-
-      expect(nextFocusable).toHaveFocus()
-      expect(nextArgs?.focused).toBe(true)
-      expect(nextArgs?.focusable).toBe(nextFocusable)
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const nextLastCall = nextRenderSpy.mock.lastCall as
+      | [{ focused: boolean; focusable: HTMLElement }]
+      | undefined
+    const nextArgs = nextLastCall?.[0]
+
+    expect(nextFocusable).toHaveFocus()
+    expect(nextArgs?.focused).toBe(true)
+    expect(nextArgs?.focusable).toBe(nextFocusable)
   })
 
-  it('should update the focus element correctly', async () => {
+  it('should update the focus element correctly', () => {
     const renderSpy = vi.fn()
 
     const { rerender } = render(
@@ -205,21 +229,21 @@ describe('<Focusable />', () => {
 
     const firstButton = screen.getByText('foo')
 
-    await firstButton.focus()
-
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-
-      expect(args.focused).toBe(true)
+    act(() => {
+      firstButton.focus()
+      vi.runAllTimers()
     })
 
-    await firstButton.blur()
+    const args1 = renderSpy.mock.lastCall![0]
+    expect(args1.focused).toBe(true)
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-
-      expect(args.focused).toBe(false)
+    act(() => {
+      firstButton.blur()
+      vi.runAllTimers()
     })
+
+    const args2 = renderSpy.mock.lastCall![0]
+    expect(args2.focused).toBe(false)
 
     // Set child
     rerender(
@@ -236,16 +260,16 @@ describe('<Focusable />', () => {
     )
     const secondButton = screen.getByText('bar')
 
-    await secondButton.focus()
-
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-
-      expect(args.focused).toBe(true)
+    act(() => {
+      secondButton.focus()
+      vi.runAllTimers()
     })
+
+    const args3 = renderSpy.mock.lastCall![0]
+    expect(args3.focused).toBe(true)
   })
 
-  it('should warn when there is more than one focusable descendant', async () => {
+  it('should warn when there is more than one focusable descendant', () => {
     render(
       <Focusable>
         {() => {
@@ -270,7 +294,7 @@ describe('<Focusable />', () => {
     )
   })
 
-  it('should warn when there are no focusable descendants', async () => {
+  it('should warn when there are no focusable descendants', () => {
     render(
       <Focusable>
         {() => {
@@ -288,7 +312,7 @@ describe('<Focusable />', () => {
     )
   })
 
-  it('should attach event listener correctly even when the focusable element is not the root', async () => {
+  it('should attach event listener correctly even when the focusable element is not the root', () => {
     const renderSpy = vi.fn()
 
     render(
@@ -310,22 +334,23 @@ describe('<Focusable />', () => {
 
     const button = screen.getByRole('button')
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-
-      expect(args.focused).toBe(false)
+    act(() => {
+      vi.runAllTimers()
     })
 
-    await button.focus()
+    const args1 = renderSpy.mock.lastCall![0]
+    expect(args1.focused).toBe(false)
 
-    await waitFor(() => {
-      const args = renderSpy.mock.lastCall![0]
-
-      expect(args.focused).toBe(true)
+    act(() => {
+      button.focus()
+      vi.runAllTimers()
     })
+
+    const args2 = renderSpy.mock.lastCall![0]
+    expect(args2.focused).toBe(true)
   })
 
-  it('should provide a focus method', async () => {
+  it('should provide a focus method', () => {
     let focusable: Focusable
     render(
       <Focusable
@@ -337,14 +362,14 @@ describe('<Focusable />', () => {
       </Focusable>
     )
 
-    await focusable!.focus()
+    focusable!.focus()
 
     const button = screen.getByText('hello world')
 
     expect(button).toHaveFocus()
   })
 
-  it('should provide a focused getter', async () => {
+  it('should provide a focused getter', () => {
     let focusableInstance: any
 
     render(
@@ -359,15 +384,16 @@ describe('<Focusable />', () => {
 
     expect(focusableInstance?.focused).toBe(false)
 
-    await button.focus()
-
-    await waitFor(() => {
-      expect(focusableInstance?.focused).toBe(true)
-      expect(button).toHaveFocus()
+    act(() => {
+      button.focus()
+      vi.runAllTimers()
     })
+
+    expect(focusableInstance?.focused).toBe(true)
+    expect(button).toHaveFocus()
   })
 
-  it('should properly restore the event handlers', async () => {
+  it('should properly restore the event handlers', () => {
     let inputRef: HTMLInputElement | null = null
     class TestComponent extends Component<{ changeValue: string }> {
       render() {
@@ -393,21 +419,27 @@ describe('<Focusable />', () => {
     const { rerender, container } = render(<TestComponent changeValue="A" />)
     const initialInput = container.querySelector('input')
 
-    await waitFor(() => {
-      expect(initialInput).toHaveValue('false_A')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(initialInput).toHaveValue('false_A')
 
     // Set Prop: changeValue
     rerender(<TestComponent changeValue="B" />)
 
-    await inputRef!.focus()
-
-    await waitFor(() => {
-      expect(inputRef).toHaveValue('true_B')
+    act(() => {
+      inputRef!.focus()
+      vi.runAllTimers()
     })
+
+    expect(inputRef).toHaveValue('true_B')
   })
 
   it('should properly clear the focusable / focused state when focus is unexpectedly lost', async () => {
+    // Use real timers for this test due to userEvent async behavior
+    vi.useRealTimers()
+
     let buttonRef: HTMLButtonElement | null
     let focusableRef: Focusable | null
     let labelRef: HTMLLabelElement | null
@@ -466,20 +498,22 @@ describe('<Focusable />', () => {
     const { container } = render(<TestComponent />)
     const input = container.querySelector('input')
 
-    await waitFor(() => {
-      expect(focusableRef!.focused).toBe(false)
-    })
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    expect(focusableRef!.focused).toBe(false)
 
     await userEvent.click(labelRef!)
 
-    await waitFor(() => {
-      expect(input).toHaveFocus()
-    })
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    expect(input).toHaveFocus()
 
     await userEvent.click(buttonRef!)
 
-    await waitFor(() => {
-      expect(input).not.toHaveFocus()
-    })
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    expect(input).not.toHaveFocus()
+
+    vi.useFakeTimers()
   })
 })

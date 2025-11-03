@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
@@ -35,6 +35,14 @@ import { RatingIcon } from '../index'
 describe('<RatingIcon />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
@@ -52,6 +60,9 @@ describe('<RatingIcon />', () => {
   })
 
   it('transitions when filled on render and animateFill is true', async () => {
+    // Use real timers for this test as it relies on CSS transition timing
+    vi.useRealTimers()
+
     const { container } = render(
       <InstUISettingsProvider
         theme={{
@@ -66,19 +77,22 @@ describe('<RatingIcon />', () => {
       </InstUISettingsProvider>
     )
 
-    await waitFor(
-      () => {
-        const icon = container.querySelector('svg')
+    // Wait for animation delay + transition to complete
+    await new Promise((resolve) => setTimeout(resolve, 400))
 
-        expect(icon).toBeInTheDocument()
-        expect(icon!.getAttribute('name')).toBe('IconStar')
-        expect(icon).toHaveClass('transition--scale-entered')
-      },
-      { timeout: 500 }
-    )
+    const icon = container.querySelector('svg')
+
+    expect(icon).toBeInTheDocument()
+    expect(icon!.getAttribute('name')).toBe('IconStar')
+    expect(icon).toHaveClass('transition--scale-entered')
+
+    vi.useFakeTimers()
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
+    // Use real timers for this test as it relies on CSS transition timing
+    vi.useRealTimers()
+
     const { container, rerender } = render(
       <InstUISettingsProvider
         theme={{
@@ -92,16 +106,12 @@ describe('<RatingIcon />', () => {
         <RatingIcon filled={false} animateFill={true} />
       </InstUISettingsProvider>
     )
-    await waitFor(
-      () => {
-        const icon = container.querySelector('svg')
 
-        expect(icon).toBeInTheDocument()
-        expect(icon!.getAttribute('name')).toBe('IconStarLight')
-        expect(icon).not.toHaveClass('transition--scale-entered')
-      },
-      { timeout: 500 }
-    )
+    let icon = container.querySelector('svg')
+
+    expect(icon).toBeInTheDocument()
+    expect(icon!.getAttribute('name')).toBe('IconStarLight')
+    expect(icon).not.toHaveClass('transition--scale-entered')
 
     rerender(
       <InstUISettingsProvider
@@ -117,22 +127,24 @@ describe('<RatingIcon />', () => {
       </InstUISettingsProvider>
     )
 
-    await waitFor(
-      () => {
-        const icon = container.querySelector('svg')
+    // Wait for RAF + transition to complete
+    await new Promise((resolve) => setTimeout(resolve, 200))
 
-        expect(icon).toBeInTheDocument()
-        expect(icon!.getAttribute('name')).toBe('IconStar')
-        expect(icon).toHaveClass('transition--scale-entered')
-      },
-      { timeout: 500 }
-    )
+    icon = container.querySelector('svg')
+
+    expect(icon).toBeInTheDocument()
+    expect(icon!.getAttribute('name')).toBe('IconStar')
+    expect(icon).toHaveClass('transition--scale-entered')
+
+    vi.useFakeTimers()
   })
 
   it('should meet a11y standards', async () => {
+    vi.useRealTimers()
     const { container } = render(<RatingIcon filled animateFill />)
 
     const axeCheck = await runAxeCheck(container)
     expect(axeCheck).toBe(true)
+    vi.useFakeTimers()
   })
 })

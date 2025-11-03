@@ -23,7 +23,7 @@
  */
 
 import { createRef } from 'react'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -89,11 +89,10 @@ describe('<Checkbox />', () => {
 
     expect(svgElement).not.toBeInTheDocument()
 
-    userEvent.click(checkboxElement!)
-    await waitFor(() => {
-      const svgElementAfterClick = container.querySelector('svg')
-      expect(svgElementAfterClick).toBeInTheDocument()
-    })
+    await userEvent.click(checkboxElement!)
+
+    const svgElementAfterClick = container.querySelector('svg')
+    expect(svgElementAfterClick).toBeInTheDocument()
   })
 
   it('`simple` variant supports indeterminate/mixed state', () => {
@@ -120,12 +119,10 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onClick, onChange })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.click(checkboxElement)
+      await userEvent.click(checkboxElement)
 
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalled()
-        expect(onChange).toHaveBeenCalled()
-      })
+      expect(onClick).toHaveBeenCalled()
+      expect(onChange).toHaveBeenCalled()
     })
 
     it('when clicked, does not call onClick or onChange when disabled', async () => {
@@ -136,11 +133,9 @@ describe('<Checkbox />', () => {
 
       fireEvent.click(checkboxElement)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-        expect(onChange).not.toHaveBeenCalled()
-        expect(checkboxElement).toBeDisabled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
+      expect(onChange).not.toHaveBeenCalled()
+      expect(checkboxElement).toBeDisabled()
     })
 
     it('when clicked, does not call onClick or onChange when readOnly', async () => {
@@ -151,10 +146,8 @@ describe('<Checkbox />', () => {
 
       fireEvent.click(checkboxElement)
 
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-        expect(onChange).not.toHaveBeenCalled()
-      })
+      expect(onClick).not.toHaveBeenCalled()
+      expect(onChange).not.toHaveBeenCalled()
     })
 
     it('calls onChange when enter key is pressed', async () => {
@@ -162,34 +155,28 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onChange })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.type(checkboxElement, '{enter}')
+      await userEvent.type(checkboxElement, '{enter}')
 
-      await waitFor(() => {
-        expect(onChange).toHaveBeenCalled()
-      })
+      expect(onChange).toHaveBeenCalled()
     })
 
     it('responds to onBlur event', async () => {
       const onBlur = vi.fn()
       renderCheckbox({ onBlur })
 
-      userEvent.tab()
-      userEvent.tab()
+      await userEvent.tab()
+      await userEvent.tab()
 
-      await waitFor(() => {
-        expect(onBlur).toHaveBeenCalled()
-      })
+      expect(onBlur).toHaveBeenCalled()
     })
 
     it('responds to onFocus event', async () => {
       const onFocus = vi.fn()
       renderCheckbox({ onFocus })
 
-      userEvent.tab()
+      await userEvent.tab()
 
-      await waitFor(() => {
-        expect(onFocus).toHaveBeenCalled()
-      })
+      expect(onFocus).toHaveBeenCalled()
     })
 
     it('focuses with the focus helper', () => {
@@ -209,11 +196,9 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onMouseOver })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.hover(checkboxElement)
+      await userEvent.hover(checkboxElement)
 
-      await waitFor(() => {
-        expect(onMouseOver).toHaveBeenCalled()
-      })
+      expect(onMouseOver).toHaveBeenCalled()
     })
 
     it('calls onMouseOut', async () => {
@@ -221,12 +206,10 @@ describe('<Checkbox />', () => {
       renderCheckbox({ onMouseOut })
       const checkboxElement = screen.getByRole('checkbox')
 
-      userEvent.hover(checkboxElement)
-      userEvent.unhover(checkboxElement)
+      await userEvent.hover(checkboxElement)
+      await userEvent.unhover(checkboxElement)
 
-      await waitFor(() => {
-        expect(onMouseOut).toHaveBeenCalled()
-      })
+      expect(onMouseOut).toHaveBeenCalled()
     })
   })
 

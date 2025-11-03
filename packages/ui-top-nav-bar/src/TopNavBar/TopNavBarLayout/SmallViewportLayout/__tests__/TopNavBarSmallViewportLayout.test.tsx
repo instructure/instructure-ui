@@ -23,15 +23,8 @@
  */
 
 import { Component } from 'react'
-import {
-  render,
-  screen,
-  fireEvent,
-  within,
-  waitFor
-} from '@testing-library/react'
+import { render, screen, fireEvent, within, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import {
@@ -1312,7 +1305,9 @@ describe('<TopNavBarSmallViewportLayout />', () => {
         expect(inPlaceDialogContainer).not.toBeInTheDocument()
       })
 
-      it('returnFocusElement prop should help returning the focus', async () => {
+      it('returnFocusElement prop should help returning the focus', () => {
+        vi.useFakeTimers()
+
         class ReturnFocusExample extends Component {
           state = {
             isDialogOpen: true
@@ -1348,16 +1343,19 @@ describe('<TopNavBarSmallViewportLayout />', () => {
 
         expect(inPlaceDialogContainer).toBeInTheDocument()
 
-        userEvent.click(inPlaceDialogCloseButton!)
-
-        await waitFor(() => {
-          const inPlaceDialogContainerAfterClick = container.querySelector(
-            "[class*='inPlaceDialogContainer']"
-          )
-
-          expect(inPlaceDialogContainerAfterClick).not.toBeInTheDocument()
-          expect(document.activeElement).toHaveAttribute('id', 'Search')
+        fireEvent.click(inPlaceDialogCloseButton!, { button: 0, detail: 1 })
+        act(() => {
+          vi.runAllTimers()
         })
+
+        const inPlaceDialogContainerAfterClick = container.querySelector(
+          "[class*='inPlaceDialogContainer']"
+        )
+
+        expect(inPlaceDialogContainerAfterClick).not.toBeInTheDocument()
+        expect(document.activeElement).toHaveAttribute('id', 'Search')
+
+        vi.useRealTimers()
       })
     })
   })

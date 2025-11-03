@@ -23,7 +23,7 @@
  */
 
 import { Component } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { MockInstance, vi } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -35,6 +35,14 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<Table />', async () => {
   let consoleErrorMock: MockInstance<typeof console.error>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution
@@ -72,10 +80,12 @@ describe('<Table />', async () => {
   })
 
   it('should meet a11y standards', async () => {
+    vi.useRealTimers()
     const { container } = renderTable()
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
+    vi.useFakeTimers()
   })
 
   it('applies a fixed column layout', async () => {
@@ -270,7 +280,7 @@ describe('<Table />', async () => {
       expect(arrow).toHaveAttribute('name', 'IconMiniArrowDown')
     })
 
-    it('calls onRequestSort when column header is clicked', async () => {
+    it('calls onRequestSort when column header is clicked', () => {
       const onRequestSort = vi.fn()
       renderSortableTable(
         {
@@ -282,14 +292,19 @@ describe('<Table />', async () => {
       )
       const button = screen.getByRole('button', { name: 'Foo' })
 
-      userEvent.click(button)
+      fireEvent.click(button, { button: 0, detail: 1 })
 
-      await waitFor(() => {
-        expect(onRequestSort).toHaveBeenCalledTimes(1)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onRequestSort).toHaveBeenCalledTimes(1)
     })
 
     it('can display custom label in the select in stacked layout', async () => {
+      // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+      vi.useRealTimers()
+
       renderSortableTable(
         {
           id: 'id',
@@ -302,14 +317,17 @@ describe('<Table />', async () => {
       )
       const input = screen.getByRole('combobox')
 
-      userEvent.click(input)
+      await userEvent.click(input)
 
-      await waitFor(async () => {
-        const options = screen.getAllByRole('option')
+      // Wait for the dropdown to open
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
-        expect(options[0]).toHaveTextContent('Custom Text')
-        expect(options[1]).toHaveTextContent('bar')
-      })
+      const options = screen.getAllByRole('option')
+
+      expect(options[0]).toHaveTextContent('Custom Text')
+      expect(options[1]).toHaveTextContent('bar')
+
+      vi.useFakeTimers()
     })
 
     it('can render check mark for sorted column in stacked layout', async () => {

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -157,7 +156,8 @@ describe('<SideNavBar />', () => {
     expect(navElements.length).toBe(2)
   })
 
-  it('should switch aria-expanded when the Toggle SideNavBar button is clicked', async () => {
+  it('should switch aria-expanded when the Toggle SideNavBar button is clicked', () => {
+    vi.useFakeTimers()
     render(
       <SideNavBar
         label="Main navigation"
@@ -188,15 +188,18 @@ describe('<SideNavBar />', () => {
     expect(nav).toHaveTextContent('Minimize SideNavBar')
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true')
 
-    userEvent.click(toggleBtn)
-
-    await waitFor(() => {
-      const updatedToggleBtn = screen.getByRole('button')
-      const updatedNav = screen.getByRole('navigation')
-
-      expect(updatedNav).toHaveTextContent('Expand SideNavBar')
-      expect(updatedToggleBtn).toHaveAttribute('aria-expanded', 'false')
+    fireEvent.click(toggleBtn, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const updatedToggleBtn = screen.getByRole('button')
+    const updatedNav = screen.getByRole('navigation')
+
+    expect(updatedNav).toHaveTextContent('Expand SideNavBar')
+    expect(updatedToggleBtn).toHaveAttribute('aria-expanded', 'false')
+
+    vi.useRealTimers()
   })
 
   it('should meet a11y standards', async () => {

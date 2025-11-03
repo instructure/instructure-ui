@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -90,7 +89,8 @@ describe('<TreeBrowser />', () => {
     expect(tree).toBeInTheDocument()
   })
 
-  it('should render subcollections', async () => {
+  it('should render subcollections', () => {
+    vi.useFakeTimers()
     render(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -102,12 +102,15 @@ describe('<TreeBrowser />', () => {
 
     expect(items.length).toEqual(1)
 
-    await userEvent.click(items[0])
-
-    await waitFor(() => {
-      const itemsAfterClick = screen.getAllByRole('treeitem')
-      expect(itemsAfterClick.length).toEqual(4)
+    fireEvent.click(items[0], { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const itemsAfterClick = screen.getAllByRole('treeitem')
+    expect(itemsAfterClick.length).toEqual(4)
+
+    vi.useRealTimers()
   })
 
   it('should render all collections at top level if showRootCollection is true and rootId is undefined', async () => {
@@ -162,7 +165,8 @@ describe('<TreeBrowser />', () => {
   })
 
   describe('selected', () => {
-    it('should not show the selection if selectionType is none', async () => {
+    it('should not show the selection if selectionType is none', () => {
+      vi.useFakeTimers()
       render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -172,14 +176,18 @@ describe('<TreeBrowser />', () => {
       )
       const item = screen.getByRole('treeitem')
 
-      await userEvent.click(item)
-
-      await waitFor(() => {
-        expect(item).not.toHaveAttribute('aria-selected')
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(item).not.toHaveAttribute('aria-selected')
+
+      vi.useRealTimers()
     })
 
-    it('should show the selection indicator on last clicked collection or item', async () => {
+    it('should show the selection indicator on last clicked collection or item', () => {
+      vi.useFakeTimers()
       render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -190,19 +198,23 @@ describe('<TreeBrowser />', () => {
       )
       const item = screen.getByLabelText('Root Directory')
 
-      await userEvent.click(item)
-
-      await waitFor(() => {
-        expect(item).toHaveAttribute('aria-selected')
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(item).toHaveAttribute('aria-selected')
 
       const nestedItem = screen.getByLabelText('Item 1')
 
-      await userEvent.click(nestedItem)
-
-      await waitFor(() => {
-        expect(nestedItem).toHaveAttribute('aria-selected')
+      fireEvent.click(nestedItem, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(nestedItem).toHaveAttribute('aria-selected')
+
+      vi.useRealTimers()
     })
   })
 
@@ -313,7 +325,8 @@ describe('<TreeBrowser />', () => {
       expect(icon).not.toBeInTheDocument()
     })
 
-    it('should call onCollectionToggle when expanding and collapsing with mouse', async () => {
+    it('should call onCollectionToggle when expanding and collapsing with mouse', () => {
+      vi.useFakeTimers()
       const onCollectionToggle = vi.fn()
 
       render(
@@ -326,14 +339,18 @@ describe('<TreeBrowser />', () => {
       )
       const item = screen.getByRole('treeitem')
 
-      await userEvent.click(item)
-
-      await waitFor(() => {
-        expect(onCollectionToggle).toHaveBeenCalled()
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onCollectionToggle).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('should call onCollectionClick on button activation (space/enter or click)', async () => {
+    it('should call onCollectionClick on button activation (space/enter or click)', () => {
+      vi.useFakeTimers()
       const onCollectionClick = vi.fn()
 
       render(
@@ -346,13 +363,27 @@ describe('<TreeBrowser />', () => {
       )
       const item = screen.getByLabelText('Root Directory')
 
-      await userEvent.click(item)
-      await userEvent.type(item, '{space}')
-      await userEvent.type(item, '{enter}')
-
-      await waitFor(() => {
-        expect(onCollectionClick).toHaveBeenCalledTimes(3)
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      item.focus()
+      fireEvent.keyDown(item, { key: ' ', keyCode: 32, which: 32 })
+      fireEvent.keyUp(item, { key: ' ', keyCode: 32, which: 32 })
+      act(() => {
+        vi.runAllTimers()
+      })
+
+      fireEvent.keyDown(item, { key: 'Enter', keyCode: 13, which: 13 })
+      fireEvent.keyUp(item, { key: 'Enter', keyCode: 13, which: 13 })
+      act(() => {
+        vi.runAllTimers()
+      })
+
+      expect(onCollectionClick).toHaveBeenCalledTimes(3)
+
+      vi.useRealTimers()
     })
 
     it('should render before, after nodes of the provided collection', async () => {
@@ -471,7 +502,8 @@ describe('<TreeBrowser />', () => {
       expect(tree).toBeInTheDocument()
     })
 
-    it('should toggle aria-expanded', async () => {
+    it('should toggle aria-expanded', () => {
+      vi.useFakeTimers()
       render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -483,14 +515,18 @@ describe('<TreeBrowser />', () => {
 
       expect(item).toHaveAttribute('aria-expanded', 'false')
 
-      await userEvent.click(item)
-
-      await waitFor(() => {
-        expect(item).toHaveAttribute('aria-expanded', 'true')
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(item).toHaveAttribute('aria-expanded', 'true')
+
+      vi.useRealTimers()
     })
 
-    it('should use aria-selected when selectionType is not none', async () => {
+    it('should use aria-selected when selectionType is not none', () => {
+      vi.useFakeTimers()
       render(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -502,14 +538,17 @@ describe('<TreeBrowser />', () => {
       const item = screen.getByRole('treeitem')
       expect(item).not.toHaveAttribute('aria-selected')
 
-      await userEvent.click(item)
-
-      await waitFor(() => {
-        expect(item).toHaveAttribute('aria-selected', 'true')
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(item).toHaveAttribute('aria-selected', 'true')
 
       const nestedItem = screen.getByLabelText('Sub Root 1')
       expect(nestedItem).toHaveAttribute('aria-selected', 'false')
+
+      vi.useRealTimers()
     })
   })
 

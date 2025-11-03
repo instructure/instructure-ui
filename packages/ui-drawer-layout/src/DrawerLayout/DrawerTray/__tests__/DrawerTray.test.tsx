@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -30,6 +30,10 @@ import { DrawerTray } from '../index'
 import { DrawerLayoutContext } from '../../index'
 
 describe('<DrawerTray />', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('should render tray content when open', async () => {
     render(
       <DrawerTray
@@ -63,7 +67,8 @@ describe('<DrawerTray />', () => {
     expect(contentRef).toHaveBeenCalledWith(drawerTray.parentElement)
   })
 
-  it('should call onOpen', async () => {
+  it('should call onOpen', () => {
+    vi.useFakeTimers()
     const onOpen = vi.fn()
 
     const { rerender } = render(
@@ -91,12 +96,15 @@ describe('<DrawerTray />', () => {
       />
     )
 
-    await waitFor(() => {
-      expect(onOpen).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onOpen).toHaveBeenCalled()
   })
 
-  it('should call onOpen when open initially', async () => {
+  it('should call onOpen when open initially', () => {
+    vi.useFakeTimers()
     const onOpen = vi.fn()
     render(
       <DrawerTray
@@ -109,12 +117,15 @@ describe('<DrawerTray />', () => {
       />
     )
 
-    await waitFor(() => {
-      expect(onOpen).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onOpen).toHaveBeenCalled()
   })
 
-  it('should call onClose', async () => {
+  it('should call onClose', () => {
+    vi.useFakeTimers()
     const onClose = vi.fn()
 
     const { rerender } = render(
@@ -142,9 +153,11 @@ describe('<DrawerTray />', () => {
       />
     )
 
-    await waitFor(() => {
-      expect(onClose).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClose).toHaveBeenCalled()
   })
 
   describe('should apply the a11y attributes', () => {

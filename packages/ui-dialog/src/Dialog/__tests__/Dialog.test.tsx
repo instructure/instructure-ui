@@ -29,9 +29,8 @@ import {
   useRef,
   useState
 } from 'react'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { vi } from 'vitest'
-import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Dialog } from '../index'
@@ -122,6 +121,10 @@ const NestedDialogExample = (props: DialogProps) => {
 NestedDialogExample.displayName = 'NestedDialogExample'
 
 describe('<Dialog />', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('should render nothing when closed', () => {
     const { container } = renderDialog({ open: false })
 
@@ -156,34 +159,54 @@ describe('<Dialog />', () => {
     expect(label).toBeInTheDocument()
   })
 
-  it('should call onDismiss prop when Esc key pressed', async () => {
+  it('should call onDismiss prop when Esc key pressed', () => {
+    vi.useFakeTimers()
     const onDismiss = vi.fn()
     const { getByRole } = renderDialog({ onDismiss })
+
+    // Run RAF to set up focus region and event listeners
+    act(() => {
+      vi.runAllTimers()
+    })
+
     const dialog = getByRole('dialog')
 
-    await waitFor(() => {
+    act(() => {
       fireEvent.keyUp(dialog, {
         key: 'Escape',
         code: 'Escape',
         keyCode: 27,
         charCode: 27
       })
-      expect(onDismiss).toHaveBeenCalled()
+      vi.runAllTimers() // Run any timers triggered by the event
     })
+
+    expect(onDismiss).toHaveBeenCalled()
   })
 
-  it('should call onDismiss prop when the document is clicked', async () => {
+  it('should call onDismiss prop when the document is clicked', () => {
+    vi.useFakeTimers()
     const onDismiss = vi.fn()
     renderDialog({ onDismiss, shouldCloseOnDocumentClick: true })
 
-    await waitFor(() => {
-      userEvent.click(document.body)
-      expect(onDismiss).toHaveBeenCalled()
+    // Run RAF to set up focus region and event listeners
+    act(() => {
+      vi.runAllTimers()
     })
+
+    act(() => {
+      // Fire mousedown first to capture the target, then click
+      fireEvent.mouseDown(document.body, { button: 0, detail: 1 })
+      fireEvent.click(document.body, { button: 0, detail: 1 })
+      vi.runAllTimers() // Run any timers triggered by the event
+    })
+
+    expect(onDismiss).toHaveBeenCalled()
   })
 
   describe('managed focus', () => {
-    it('should provide focus method', async () => {
+    it('should provide focus method', () => {
+      vi.useFakeTimers()
       const { getByTestId } = render(
         <div>
           <DialogExample
@@ -199,10 +222,18 @@ describe('<Dialog />', () => {
       )
       const nonTabbableContent = getByTestId('non-tabbable')
 
-      userEvent.tab()
-      await waitFor(() => {
-        expect(document.activeElement).toBe(nonTabbableContent)
+      fireEvent.keyDown(document.activeElement!, {
+        key: 'Tab',
+        code: 'Tab',
+        keyCode: 9
       })
+
+      act(() => {
+        vi.runAllTimers()
+      })
+
+      expect(document.activeElement).toBe(nonTabbableContent)
+      vi.useRealTimers()
     })
 
     it('should warn when trying to focus or blur a closed dialog', () => {
@@ -225,32 +256,43 @@ describe('<Dialog />', () => {
       consoleError.mockRestore()
     })
 
-    it('should focus the first tabbable element by default', async () => {
+    it('should focus the first tabbable element by default', () => {
+      vi.useFakeTimers()
       const { getByTestId } = render(<DialogExample open />)
       const inputOne = getByTestId('input-one')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputOne)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(inputOne)
+      vi.useRealTimers()
     })
 
-    it('should focus the first tabbable element when open prop becomes true', async () => {
+    it('should focus the first tabbable element when open prop becomes true', () => {
+      vi.useFakeTimers()
       const { rerender, getByTestId } = render(<DialogExample open={false} />)
       const inputTrigger = getByTestId('input-trigger')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputTrigger)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(inputTrigger)
 
       rerender(<DialogExample open={true} />)
       const inputOne = getByTestId('input-one')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputOne)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(inputOne)
+      vi.useRealTimers()
     })
 
-    it('should take a prop for finding default focus', async () => {
+    it('should take a prop for finding default focus', () => {
+      vi.useFakeTimers()
       const { getByTestId } = render(
         <DialogExample
           open
@@ -259,12 +301,16 @@ describe('<Dialog />', () => {
       )
       const inputTwo = getByTestId('input-two')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(inputTwo)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(inputTwo)
+      vi.useRealTimers()
     })
 
-    it('should still focus the defaultFocusElement when it is focusable but not tabbable', async () => {
+    it('should still focus the defaultFocusElement when it is focusable but not tabbable', () => {
+      vi.useFakeTimers()
       const { getByTestId } = render(
         <DialogExample
           open
@@ -277,12 +323,16 @@ describe('<Dialog />', () => {
       )
       const nonTabbableContent = getByTestId('non-tabbable')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(nonTabbableContent)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(nonTabbableContent)
+      vi.useRealTimers()
     })
 
-    it('should focus the contentElement by default if focusable and no defaultFocusElement is provided', async () => {
+    it('should focus the contentElement by default if focusable and no defaultFocusElement is provided', () => {
+      vi.useFakeTimers()
       const { getByTestId } = render(
         <div>
           <DialogExample
@@ -298,12 +348,16 @@ describe('<Dialog />', () => {
       )
       const nonTabbableContent = getByTestId('non-tabbable')
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(nonTabbableContent)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(nonTabbableContent)
+      vi.useRealTimers()
     })
 
-    it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', async () => {
+    it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', () => {
+      vi.useFakeTimers()
       const { rerender, getByTestId } = render(
         <DialogExample open={false}>{TEST_TEXT}</DialogExample>
       )
@@ -312,28 +366,38 @@ describe('<Dialog />', () => {
 
       rerender(<DialogExample open={true}>{TEST_TEXT}</DialogExample>)
 
-      await waitFor(() => {
-        expect(document.activeElement).toBe(document.body)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(document.body)
+      vi.useRealTimers()
     })
 
-    it('should return focus', async () => {
+    it('should return focus', () => {
+      vi.useFakeTimers()
       const { rerender, getByTestId } = render(<DialogExample open={false} />)
       expect(document.activeElement).toBe(getByTestId('input-trigger'))
 
       rerender(<DialogExample open={true} />)
-      await waitFor(() => {
-        expect(document.activeElement).toBe(getByTestId('input-one'))
+      act(() => {
+        vi.runAllTimers()
       })
 
+      expect(document.activeElement).toBe(getByTestId('input-one'))
+
       rerender(<DialogExample open={false} />)
-      await waitFor(() => {
-        expect(document.activeElement).toBe(getByTestId('input-trigger'))
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(getByTestId('input-trigger'))
+      vi.useRealTimers()
     })
 
     describe('when focus leaves the first and last tabbable', () => {
-      it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, async () => {
+      it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, () => {
+        vi.useFakeTimers()
         const onBlur = vi.fn()
         const { getByTestId } = render(
           <DialogExample
@@ -346,18 +410,25 @@ describe('<Dialog />', () => {
         const inputOne = getByTestId('input-one')
         const inputTwo = getByTestId('input-two')
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputTwo)
+        act(() => {
+          vi.runAllTimers()
         })
 
-        await waitFor(() => {
-          userEvent.tab()
-          expect(onBlur).not.toHaveBeenCalled()
-          expect(document.activeElement).toBe(inputOne)
+        expect(document.activeElement).toBe(inputTwo)
+
+        fireEvent.keyDown(inputTwo, { key: 'Tab', code: 'Tab', keyCode: 9 })
+
+        act(() => {
+          vi.runAllTimers()
         })
+
+        expect(onBlur).not.toHaveBeenCalled()
+        expect(document.activeElement).toBe(inputOne)
+        vi.useRealTimers()
       })
 
-      it('should NOT call onBlur when shouldContainFocus=true and Shift+Tab pressing first tabbable', async () => {
+      it('should NOT call onBlur when shouldContainFocus=true and Shift+Tab pressing first tabbable', () => {
+        vi.useFakeTimers()
         const onBlur = vi.fn()
 
         const { getByTestId } = render(
@@ -371,23 +442,31 @@ describe('<Dialog />', () => {
         const inputOne = getByTestId('input-one')
         const inputTwo = getByTestId('input-two')
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputOne)
-
-          fireEvent.keyDown(inputOne, {
-            key: 'Tab',
-            code: 'Tab',
-            keyCode: 9,
-            charCode: 9,
-            shiftKey: true
-          })
-
-          expect(onBlur).not.toHaveBeenCalled()
-          expect(document.activeElement).toBe(inputTwo)
+        act(() => {
+          vi.runAllTimers()
         })
+
+        expect(document.activeElement).toBe(inputOne)
+
+        fireEvent.keyDown(inputOne, {
+          key: 'Tab',
+          code: 'Tab',
+          keyCode: 9,
+          charCode: 9,
+          shiftKey: true
+        })
+
+        act(() => {
+          vi.runAllTimers()
+        })
+
+        expect(onBlur).not.toHaveBeenCalled()
+        expect(document.activeElement).toBe(inputTwo)
+        vi.useRealTimers()
       })
 
-      it('should call onBlur when shouldContainFocus=false and tab pressing last tabbable', async () => {
+      it('should call onBlur when shouldContainFocus=false and tab pressing last tabbable', () => {
+        vi.useFakeTimers()
         const onBlur = vi.fn()
 
         const { getByTestId } = render(
@@ -401,20 +480,29 @@ describe('<Dialog />', () => {
         const inputTwo = getByTestId('input-two')
         inputTwo.focus()
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputTwo)
-
-          fireEvent.keyDown(inputTwo, {
-            key: 'Tab',
-            code: 'Tab',
-            keyCode: 9,
-            charCode: 9
-          })
-          expect(onBlur).toHaveBeenCalled()
+        act(() => {
+          vi.runAllTimers()
         })
+
+        expect(document.activeElement).toBe(inputTwo)
+
+        fireEvent.keyDown(inputTwo, {
+          key: 'Tab',
+          code: 'Tab',
+          keyCode: 9,
+          charCode: 9
+        })
+
+        act(() => {
+          vi.runAllTimers()
+        })
+
+        expect(onBlur).toHaveBeenCalled()
+        vi.useRealTimers()
       })
 
-      it('should call onBlur when shouldContainFocus=false and pressing Shift+Tab on the first tabbable', async () => {
+      it('should call onBlur when shouldContainFocus=false and pressing Shift+Tab on the first tabbable', () => {
+        vi.useFakeTimers()
         const onBlur = vi.fn()
 
         const { getByTestId } = render(
@@ -428,18 +516,26 @@ describe('<Dialog />', () => {
         const inputOne = getByTestId('input-one')
         inputOne.focus()
 
-        await waitFor(() => {
-          expect(document.activeElement).toBe(inputOne)
-
-          fireEvent.keyDown(inputOne, {
-            key: 'Tab',
-            code: 'Tab',
-            keyCode: 9,
-            charCode: 9,
-            shiftKey: true
-          })
-          expect(onBlur).toHaveBeenCalled()
+        act(() => {
+          vi.runAllTimers()
         })
+
+        expect(document.activeElement).toBe(inputOne)
+
+        fireEvent.keyDown(inputOne, {
+          key: 'Tab',
+          code: 'Tab',
+          keyCode: 9,
+          charCode: 9,
+          shiftKey: true
+        })
+
+        act(() => {
+          vi.runAllTimers()
+        })
+
+        expect(onBlur).toHaveBeenCalled()
+        vi.useRealTimers()
       })
     })
   })

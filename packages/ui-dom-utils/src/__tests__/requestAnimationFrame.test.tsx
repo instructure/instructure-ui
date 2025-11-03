@@ -22,18 +22,23 @@
  * SOFTWARE.
  */
 
-import { waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
+import { act } from '@testing-library/react'
 import { requestAnimationFrame } from '../requestAnimationFrame'
 
 describe('requestAnimationFrame', () => {
-  it('should provide a cancel method', async () => {
+  it('should provide a cancel method', () => {
+    vi.useFakeTimers()
     const callback = vi.fn()
     const raf = requestAnimationFrame(callback)
 
-    await waitFor(() => {
-      expect(callback).toHaveBeenCalledTimes(1)
-      expect(typeof raf.cancel).toBe('function')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect(typeof raf.cancel).toBe('function')
+
+    vi.useRealTimers()
   })
 })

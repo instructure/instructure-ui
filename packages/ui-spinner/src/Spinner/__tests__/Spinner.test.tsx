@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
@@ -118,21 +118,28 @@ describe('<Spinner />', () => {
   })
 
   describe('with the delay prop', () => {
-    it('should delay rendering', async () => {
+    beforeAll(() => {
+      vi.useFakeTimers()
+    })
+
+    afterAll(() => {
+      vi.useRealTimers()
+    })
+
+    it('should delay rendering', () => {
       render(<Spinner renderTitle="Loading" delay={300} />)
 
       expect(screen.queryByText('Loading')).not.toBeInTheDocument()
 
-      await waitFor(
-        async () => {
-          const title = await screen.findByText('Loading')
-          const icon = await screen.findByRole('img')
+      act(() => {
+        vi.runAllTimers()
+      })
 
-          expect(title).toBeInTheDocument()
-          expect(icon).toBeInTheDocument()
-        },
-        { timeout: 400 }
-      )
+      const title = screen.getByText('Loading')
+      const icon = screen.getByRole('img')
+
+      expect(title).toBeInTheDocument()
+      expect(icon).toBeInTheDocument()
     })
   })
 })

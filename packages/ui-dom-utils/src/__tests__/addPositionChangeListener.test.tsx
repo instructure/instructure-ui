@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { addPositionChangeListener } from '../addPositionChangeListener'
@@ -40,7 +40,8 @@ const mockRect = {
 }
 
 describe('addPositionChangeListener', () => {
-  it('should provide a remove method', async () => {
+  it('should provide a remove method', () => {
+    vi.useFakeTimers()
     const callback = vi.fn()
     Element.prototype.getBoundingClientRect = vi.fn(() => mockRect as DOMRect)
 
@@ -54,12 +55,14 @@ describe('addPositionChangeListener', () => {
       return { ...mockRect, top: 200 } as DOMRect
     })
 
-    await waitFor(() => {
-      expect(callback).toHaveBeenCalledTimes(1)
-      expect(typeof listener.remove).toBe('function')
-    })
+    // Advance by one frame to trigger the check
+    vi.advanceTimersByTime(16)
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect(typeof listener.remove).toBe('function')
 
     listener.remove()
     vi.restoreAllMocks()
+    vi.useRealTimers()
   })
 })

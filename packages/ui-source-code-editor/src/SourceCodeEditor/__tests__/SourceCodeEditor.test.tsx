@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
@@ -126,7 +125,8 @@ describe('<SourceCodeEditor />', () => {
       expect(inputUpdated).toHaveTextContent('hello world')
     })
 
-    it('should still be focusable', async () => {
+    it('should still be focusable', () => {
+      vi.useFakeTimers()
       let elementRef: SourceCodeEditor | null = null
 
       render(
@@ -141,11 +141,14 @@ describe('<SourceCodeEditor />', () => {
       const input = screen.getByRole('textbox')
 
       elementRef!.focus()
-
-      await waitFor(() => {
-        expect(input).toHaveFocus()
-        expect(document.activeElement).toBe(input)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(input).toHaveFocus()
+      expect(document.activeElement).toBe(input)
+
+      vi.useRealTimers()
     })
   })
 
@@ -157,7 +160,8 @@ describe('<SourceCodeEditor />', () => {
       expect(input).toHaveAttribute('contenteditable', 'false')
     })
 
-    it('should not be focusable', async () => {
+    it('should not be focusable', () => {
+      vi.useFakeTimers()
       let elementRef: HTMLDivElement | null = null
 
       render(
@@ -173,11 +177,14 @@ describe('<SourceCodeEditor />', () => {
       const input = screen.getByRole('textbox')
 
       elementRef!.focus()
-
-      await waitFor(() => {
-        expect(elementRef).not.toHaveFocus()
-        expect(document.activeElement).not.toBe(input)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(elementRef).not.toHaveFocus()
+      expect(document.activeElement).not.toBe(input)
+
+      vi.useRealTimers()
     })
   })
 
@@ -220,7 +227,8 @@ describe('<SourceCodeEditor />', () => {
       expect(gutterIcon).toBeVisible()
     })
 
-    it('should fold lines on click', async () => {
+    it('should fold lines on click', () => {
+      vi.useFakeTimers()
       const { container } = render(
         <SourceCodeEditor
           label="foo"
@@ -235,12 +243,17 @@ describe('<SourceCodeEditor />', () => {
 
       expect(gutterIcon).toBeInTheDocument()
 
-      await userEvent.click(gutterIcon)
+      fireEvent.click(gutterIcon, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
 
       const unfoldIcons = screen.getAllByTitle('Unfold line')
 
       expect(editor).not.toHaveTextContent("console.log('foo')")
       expect(unfoldIcons[1]).toBeVisible()
+
+      vi.useRealTimers()
     })
   })
 

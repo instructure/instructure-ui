@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -55,7 +55,8 @@ describe('FocusRegion', () => {
       expect(focusRegion.focused).toBe(false)
     })
 
-    it('should handle shouldCloseOnDocumentClick option', async () => {
+    it('should handle shouldCloseOnDocumentClick option', () => {
+      vi.useFakeTimers()
       const onDismiss = vi.fn()
       focusRegion = new FocusRegion(container, {
         shouldCloseOnDocumentClick: true,
@@ -68,16 +69,19 @@ describe('FocusRegion', () => {
       const outsideElement = document.createElement('div')
       document.body.appendChild(outsideElement)
 
-      fireEvent.click(outsideElement, { button: 0, detail: 1 })
-
-      await waitFor(() => {
-        expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), true)
+      act(() => {
+        fireEvent.click(outsideElement, { button: 0, detail: 1 })
+        vi.runAllTimers()
       })
 
+      expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), true)
+
       document.body.removeChild(outsideElement)
+      vi.useRealTimers()
     })
 
-    it('should not close on document click when shouldCloseOnDocumentClick is false', async () => {
+    it('should not close on document click when shouldCloseOnDocumentClick is false', () => {
+      vi.useFakeTimers()
       const onDismiss = vi.fn()
       focusRegion = new FocusRegion(container, {
         shouldCloseOnDocumentClick: false,
@@ -90,16 +94,19 @@ describe('FocusRegion', () => {
       const outsideElement = document.createElement('div')
       document.body.appendChild(outsideElement)
 
-      fireEvent.click(outsideElement, { button: 0, detail: 1 })
+      act(() => {
+        fireEvent.click(outsideElement, { button: 0, detail: 1 })
+        vi.runAllTimers()
+      })
 
-      // Wait a bit to ensure no dismiss is called
-      await new Promise((resolve) => setTimeout(resolve, 50))
       expect(onDismiss).not.toHaveBeenCalled()
 
       document.body.removeChild(outsideElement)
+      vi.useRealTimers()
     })
 
-    it('should handle shouldCloseOnEscape option', async () => {
+    it('should handle shouldCloseOnEscape option', () => {
+      vi.useFakeTimers()
       const onDismiss = vi.fn()
       focusRegion = new FocusRegion(container, {
         shouldCloseOnEscape: true,
@@ -108,14 +115,18 @@ describe('FocusRegion', () => {
 
       focusRegion.activate()
 
-      fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
-
-      await waitFor(() => {
-        expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), undefined)
+      act(() => {
+        fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
+        vi.runAllTimers()
       })
+
+      expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), undefined)
+
+      vi.useRealTimers()
     })
 
-    it('should not close on escape when shouldCloseOnEscape is false', async () => {
+    it('should not close on escape when shouldCloseOnEscape is false', () => {
+      vi.useFakeTimers()
       const onDismiss = vi.fn()
       focusRegion = new FocusRegion(container, {
         shouldCloseOnEscape: false,
@@ -124,14 +135,18 @@ describe('FocusRegion', () => {
 
       focusRegion.activate()
 
-      fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
+      act(() => {
+        fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
+        vi.runAllTimers()
+      })
 
-      // Wait a bit to ensure no dismiss is called
-      await new Promise((resolve) => setTimeout(resolve, 50))
       expect(onDismiss).not.toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('should handle isTooltip option for escape key behavior', async () => {
+    it('should handle isTooltip option for escape key behavior', () => {
+      vi.useFakeTimers()
       const onDismiss = vi.fn()
       focusRegion = new FocusRegion(container, {
         shouldCloseOnEscape: true,
@@ -144,15 +159,19 @@ describe('FocusRegion', () => {
       const escapeEvent = new KeyboardEvent('keyup', { keyCode: 27 })
       const stopPropagationSpy = vi.spyOn(escapeEvent, 'stopPropagation')
 
-      fireEvent(document, escapeEvent)
-
-      await waitFor(() => {
-        expect(stopPropagationSpy).toHaveBeenCalled()
-        expect(onDismiss).toHaveBeenCalled()
+      act(() => {
+        fireEvent(document, escapeEvent)
+        vi.runAllTimers()
       })
+
+      expect(stopPropagationSpy).toHaveBeenCalled()
+      expect(onDismiss).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('should handle file input focus with escape key', async () => {
+    it('should handle file input focus with escape key', () => {
+      vi.useFakeTimers()
       const { container: fileContainer } = render(
         <div data-testid="file-container">
           <input type="file" data-testid="file-input" />
@@ -170,13 +189,15 @@ describe('FocusRegion', () => {
 
       const blurSpy = vi.spyOn(fileInput, 'blur')
 
-      fireEvent.keyUp(document, { keyCode: 27 })
-
-      await waitFor(() => {
-        expect(blurSpy).toHaveBeenCalled()
+      act(() => {
+        fireEvent.keyUp(document, { keyCode: 27 })
+        vi.runAllTimers()
       })
 
+      expect(blurSpy).toHaveBeenCalled()
+
       fileRegion.deactivate()
+      vi.useRealTimers()
     })
 
     it('should handle onDismiss callback', async () => {
@@ -189,7 +210,8 @@ describe('FocusRegion', () => {
       expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), undefined)
     })
 
-    it('should handle iframe clicks for dismissal', async () => {
+    it('should handle iframe clicks for dismissal', () => {
+      vi.useFakeTimers()
       const onDismiss = vi.fn()
       focusRegion = new FocusRegion(container, {
         shouldCloseOnDocumentClick: true,
@@ -200,13 +222,16 @@ describe('FocusRegion', () => {
       document.body.appendChild(iframe)
 
       focusRegion.activate()
-      focusRegion.handleFrameClick(new MouseEvent('click') as any, iframe)
 
-      await waitFor(() => {
-        expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), true)
+      act(() => {
+        focusRegion.handleFrameClick(new MouseEvent('click') as any, iframe)
+        vi.runAllTimers()
       })
 
+      expect(onDismiss).toHaveBeenCalledWith(expect.any(Object), true)
+
       document.body.removeChild(iframe)
+      vi.useRealTimers()
     })
   })
 

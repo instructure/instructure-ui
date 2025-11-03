@@ -23,7 +23,7 @@
  */
 
 import { Component } from 'react'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
@@ -53,6 +53,14 @@ const variants: ('default' | 'button' | 'icon' | 'avatar')[] = [
 describe('<TopNavBarItem />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
@@ -538,6 +546,9 @@ describe('<TopNavBarItem />', () => {
       })
 
       it('should disable submenus too', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -558,11 +569,12 @@ describe('<TopNavBarItem />', () => {
         expect(submenuTrigger).toHaveAttribute('disabled')
         expect(submenuTrigger).toHaveAttribute('aria-disabled', 'true')
 
-        userEvent.click(item)
+        await userEvent.click(item)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(item).toBeVisible()
-        })
+        expect(item).toBeVisible()
+
+        vi.useFakeTimers()
       })
     })
   })
@@ -583,6 +595,9 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should render submenu', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       const { container, findAllByRole } = render(
         <TopNavBarItem id="item" renderSubmenu={itemSubmenuExample}>
           Menu Item
@@ -601,21 +616,20 @@ describe('<TopNavBarItem />', () => {
       expect(button).toHaveAttribute('aria-haspopup', 'menu')
       expect(button).toHaveAttribute('aria-expanded', 'false')
 
-      userEvent.click(button!)
+      await userEvent.click(button!)
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-      await waitFor(() => {
-        expect(button).toHaveAttribute('aria-haspopup', 'menu')
-        expect(button).toHaveAttribute('aria-expanded', 'true')
+      expect(button).toHaveAttribute('aria-haspopup', 'menu')
+      expect(button).toHaveAttribute('aria-expanded', 'true')
 
-        const customElementDrilldown = container.querySelector(
-          "span[class$='-position']"
-        )
-        expect(customElementDrilldown).toBeInTheDocument()
-        expect(customElementDrilldown).toHaveAttribute(
-          'data-cid',
-          expect.stringContaining('Drilldown')
-        )
-      })
+      const customElementDrilldown = container.querySelector(
+        "span[class$='-position']"
+      )
+      expect(customElementDrilldown).toBeInTheDocument()
+      expect(customElementDrilldown).toHaveAttribute(
+        'data-cid',
+        expect.stringContaining('Drilldown')
+      )
 
       const options = await findAllByRole('link')
       expect(options).toHaveLength(3)
@@ -627,6 +641,8 @@ describe('<TopNavBarItem />', () => {
         )
         expect(option).toBeVisible()
       })
+
+      vi.useFakeTimers()
     })
 
     it('should throw warning about controlled Drilldown', () => {
@@ -682,6 +698,9 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should open on ArrowDown', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       const { container, findAllByRole } = render(
         <TopNavBarItem id="item" renderSubmenu={itemSubmenuExample}>
           Menu Item
@@ -700,21 +719,20 @@ describe('<TopNavBarItem />', () => {
       expect(button).toHaveAttribute('aria-haspopup', 'menu')
       expect(button).toHaveAttribute('aria-expanded', 'false')
 
-      userEvent.type(button!, '{arrowdown}')
+      await userEvent.type(button!, '{arrowdown}')
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-      await waitFor(() => {
-        expect(button).toHaveAttribute('aria-haspopup', 'menu')
-        expect(button).toHaveAttribute('aria-expanded', 'true')
+      expect(button).toHaveAttribute('aria-haspopup', 'menu')
+      expect(button).toHaveAttribute('aria-expanded', 'true')
 
-        const customElementDrilldown = container.querySelector(
-          "span[class$='-position']"
-        )
-        expect(customElementDrilldown).toBeInTheDocument()
-        expect(customElementDrilldown).toHaveAttribute(
-          'data-cid',
-          expect.stringContaining('Drilldown')
-        )
-      })
+      const customElementDrilldown = container.querySelector(
+        "span[class$='-position']"
+      )
+      expect(customElementDrilldown).toBeInTheDocument()
+      expect(customElementDrilldown).toHaveAttribute(
+        'data-cid',
+        expect.stringContaining('Drilldown')
+      )
 
       const options = await findAllByRole('link')
       expect(options).toHaveLength(3)
@@ -726,11 +744,16 @@ describe('<TopNavBarItem />', () => {
         )
         expect(option).toBeVisible()
       })
+
+      vi.useFakeTimers()
     })
   })
 
   describe('customPopoverConfig prop', () => {
     it('should render popover', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       render(
         <TopNavBarItem
           id="item"
@@ -748,15 +771,16 @@ describe('<TopNavBarItem />', () => {
       expect(button).toHaveAttribute('aria-haspopup', 'true')
       expect(button).toHaveAttribute('aria-expanded', 'false')
 
-      userEvent.click(button!)
+      await userEvent.click(button!)
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-      await waitFor(() => {
-        expect(button).toHaveAttribute('aria-haspopup', 'true')
-        expect(button).toHaveAttribute('aria-expanded', 'true')
-      })
+      expect(button).toHaveAttribute('aria-haspopup', 'true')
+      expect(button).toHaveAttribute('aria-expanded', 'true')
 
       const popoverContent = screen.getByText('dialog content')
       expect(popoverContent).toBeInTheDocument()
+
+      vi.useFakeTimers()
     })
 
     it('should throw error when passed to item with submenu', () => {
@@ -832,6 +856,9 @@ describe('<TopNavBarItem />', () => {
 
     describe('should not put aria-expanded on the popover trigger, just the button', () => {
       it('when popover `shouldContainFocus="true"`', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -860,32 +887,36 @@ describe('<TopNavBarItem />', () => {
         expect(popoverTrigger).toHaveAttribute('data-popover-trigger', 'true')
         expect(popoverTrigger).not.toHaveAttribute('aria-expanded')
 
-        userEvent.click(button!)
+        await userEvent.click(button!)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(button).toHaveAttribute('aria-haspopup', 'true')
-          expect(button).toHaveAttribute('aria-expanded', 'true')
+        expect(button).toHaveAttribute('aria-haspopup', 'true')
+        expect(button).toHaveAttribute('aria-expanded', 'true')
 
-          const customElementPopover = container.querySelector(
-            "span[class$='-position']"
-          )
-          expect(customElementPopover).toBeInTheDocument()
-          expect(customElementPopover).toHaveAttribute(
-            'data-cid',
-            expect.stringContaining('Popover')
-          )
+        const customElementPopover = container.querySelector(
+          "span[class$='-position']"
+        )
+        expect(customElementPopover).toBeInTheDocument()
+        expect(customElementPopover).toHaveAttribute(
+          'data-cid',
+          expect.stringContaining('Popover')
+        )
 
-          const popoverTriggerActive = container.querySelector(
-            "div[class$='submenuTriggerContainer']"
-          )
-          expect(popoverTriggerActive).not.toHaveAttribute('aria-expanded')
+        const popoverTriggerActive = container.querySelector(
+          "div[class$='submenuTriggerContainer']"
+        )
+        expect(popoverTriggerActive).not.toHaveAttribute('aria-expanded')
 
-          const popoverContent = screen.getByText('dialog content')
-          expect(popoverContent).toBeInTheDocument()
-        })
+        const popoverContent = screen.getByText('dialog content')
+        expect(popoverContent).toBeInTheDocument()
+
+        vi.useFakeTimers()
       })
 
       it('when popover `shouldContainFocus="false"`', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -914,33 +945,37 @@ describe('<TopNavBarItem />', () => {
         expect(popoverTrigger).toHaveAttribute('data-popover-trigger', 'true')
         expect(popoverTrigger).not.toHaveAttribute('aria-expanded')
 
-        userEvent.click(button!)
+        await userEvent.click(button!)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(button).toHaveAttribute('aria-haspopup', 'true')
-          expect(button).toHaveAttribute('aria-expanded', 'true')
+        expect(button).toHaveAttribute('aria-haspopup', 'true')
+        expect(button).toHaveAttribute('aria-expanded', 'true')
 
-          const customElementPopover = container.querySelector(
-            "span[class$='-position']"
-          )
-          expect(customElementPopover).toBeInTheDocument()
-          expect(customElementPopover).toHaveAttribute(
-            'data-cid',
-            expect.stringContaining('Popover')
-          )
+        const customElementPopover = container.querySelector(
+          "span[class$='-position']"
+        )
+        expect(customElementPopover).toBeInTheDocument()
+        expect(customElementPopover).toHaveAttribute(
+          'data-cid',
+          expect.stringContaining('Popover')
+        )
 
-          const popoverTriggerActive = container.querySelector(
-            "div[class$='submenuTriggerContainer']"
-          )
-          expect(popoverTriggerActive).not.toHaveAttribute('aria-expanded')
+        const popoverTriggerActive = container.querySelector(
+          "div[class$='submenuTriggerContainer']"
+        )
+        expect(popoverTriggerActive).not.toHaveAttribute('aria-expanded')
 
-          const popoverContent = screen.getByText('dialog content')
-          expect(popoverContent).toBeInTheDocument()
-        })
+        const popoverContent = screen.getByText('dialog content')
+        expect(popoverContent).toBeInTheDocument()
+
+        vi.useFakeTimers()
       })
     })
 
     it('should open on ArrowDown', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       render(
         <TopNavBarItem
           id="item"
@@ -957,15 +992,19 @@ describe('<TopNavBarItem />', () => {
       expect(popoverContentInitial).not.toBeInTheDocument()
 
       const button = screen.getByRole('button')
-      userEvent.type(button!, '{arrowdown}')
+      await userEvent.type(button!, '{arrowdown}')
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-      await waitFor(() => {
-        const popoverContentActive = screen.getByText('dialog content')
-        expect(popoverContentActive).toBeInTheDocument()
-      })
+      const popoverContentActive = screen.getByText('dialog content')
+      expect(popoverContentActive).toBeInTheDocument()
+
+      vi.useFakeTimers()
     })
 
     it('should work controlled too', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       class ControlledExample extends Component {
         state = {
           isPopoverOpen: false
@@ -997,19 +1036,19 @@ describe('<TopNavBarItem />', () => {
 
       expect(popoverContentInitial).not.toBeInTheDocument()
 
-      userEvent.type(button!, '{arrowdown}')
+      await userEvent.type(button!, '{arrowdown}')
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-      await waitFor(() => {
-        const popoverContentActive = screen.getByText('dialog content')
-        expect(popoverContentActive).toBeInTheDocument()
-      })
+      const popoverContentActive = screen.getByText('dialog content')
+      expect(popoverContentActive).toBeInTheDocument()
 
-      userEvent.click(button!)
+      await userEvent.click(button!)
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
-      await waitFor(() => {
-        const popoverContentInactive = screen.queryByText('dialog content')
-        expect(popoverContentInactive).toBeVisible()
-      })
+      const popoverContentInactive = screen.queryByText('dialog content')
+      expect(popoverContentInactive).not.toBeInTheDocument()
+
+      vi.useFakeTimers()
     })
   })
 
@@ -1025,6 +1064,9 @@ describe('<TopNavBarItem />', () => {
 
     describe('when true (by default), should show chevron icon', () => {
       it('next to items with submenu', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem id="item" renderSubmenu={itemSubmenuExample}>
             Menu Item
@@ -1037,17 +1079,21 @@ describe('<TopNavBarItem />', () => {
         )
         expect(chevronClosed).toBeVisible()
 
-        userEvent.click(button!)
+        await userEvent.click(button!)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          const chevronOpen = container.querySelector(
-            'svg[name="IconArrowOpenUp"]'
-          )
-          expect(chevronOpen).toBeVisible()
-        })
+        const chevronOpen = container.querySelector(
+          'svg[name="IconArrowOpenUp"]'
+        )
+        expect(chevronOpen).toBeVisible()
+
+        vi.useFakeTimers()
       })
 
       it('next to items with custom popover', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -1066,19 +1112,23 @@ describe('<TopNavBarItem />', () => {
         )
         expect(chevronClosed).toBeVisible()
 
-        userEvent.click(button!)
+        await userEvent.click(button!)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          const chevronOpen = container.querySelector(
-            'svg[name="IconArrowOpenUp"]'
-          )
-          expect(chevronOpen).toBeVisible()
-        })
+        const chevronOpen = container.querySelector(
+          'svg[name="IconArrowOpenUp"]'
+        )
+        expect(chevronOpen).toBeVisible()
+
+        vi.useFakeTimers()
       })
 
       describe('should show for all variants:', () => {
         variants.forEach((variant) => {
           it(`with "${variant}" variant`, async () => {
+            // Use real timers for userEvent
+            vi.useRealTimers()
+
             const { container } = render(
               <TopNavBarItem
                 id="item"
@@ -1097,14 +1147,15 @@ describe('<TopNavBarItem />', () => {
             )
             expect(chevronClosed).toBeVisible()
 
-            userEvent.click(button!)
+            await userEvent.click(button!)
+            await new Promise((resolve) => setTimeout(resolve, 0))
 
-            await waitFor(() => {
-              const chevronOpen = container.querySelector(
-                'svg[name="IconArrowOpenUp"]'
-              )
-              expect(chevronOpen).toBeVisible()
-            })
+            const chevronOpen = container.querySelector(
+              'svg[name="IconArrowOpenUp"]'
+            )
+            expect(chevronOpen).toBeVisible()
+
+            vi.useFakeTimers()
           })
         })
       })
@@ -1112,6 +1163,9 @@ describe('<TopNavBarItem />', () => {
 
     describe('when false, should not show chevron icon', () => {
       it('next to items with submenu', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -1128,17 +1182,21 @@ describe('<TopNavBarItem />', () => {
         )
         expect(chevron).not.toBeInTheDocument()
 
-        userEvent.click(button!)
+        await userEvent.click(button!)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          const chevronAfterClick = container.querySelector(
-            "svg[class$='inlineSVG-svgIcon']"
-          )
-          expect(chevronAfterClick).not.toBeInTheDocument()
-        })
+        const chevronAfterClick = container.querySelector(
+          "svg[class$='inlineSVG-svgIcon']"
+        )
+        expect(chevronAfterClick).not.toBeInTheDocument()
+
+        vi.useFakeTimers()
       })
 
       it('next to items with custom popover', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const { container } = render(
           <TopNavBarItem
             id="item"
@@ -1158,19 +1216,23 @@ describe('<TopNavBarItem />', () => {
         )
         expect(chevron).not.toBeInTheDocument()
 
-        userEvent.click(button!)
+        await userEvent.click(button!)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          const chevronAfterClick = container.querySelector(
-            "svg[class$='inlineSVG-svgIcon']"
-          )
-          expect(chevronAfterClick).not.toBeInTheDocument()
-        })
+        const chevronAfterClick = container.querySelector(
+          "svg[class$='inlineSVG-svgIcon']"
+        )
+        expect(chevronAfterClick).not.toBeInTheDocument()
+
+        vi.useFakeTimers()
       })
 
       describe('should show for all variants:', () => {
         variants.forEach((variant) => {
           it(`with "${variant}" variant`, async () => {
+            // Use real timers for userEvent
+            vi.useRealTimers()
+
             const { container } = render(
               <TopNavBarItem
                 id="item"
@@ -1190,14 +1252,15 @@ describe('<TopNavBarItem />', () => {
             )
             expect(chevronClosed).not.toBeInTheDocument()
 
-            userEvent.click(button!)
+            await userEvent.click(button!)
+            await new Promise((resolve) => setTimeout(resolve, 0))
 
-            await waitFor(() => {
-              const chevronOpen = container.querySelector(
-                'svg[name="IconArrowOpenUp"]'
-              )
-              expect(chevronOpen).not.toBeInTheDocument()
-            })
+            const chevronOpen = container.querySelector(
+              'svg[name="IconArrowOpenUp"]'
+            )
+            expect(chevronOpen).not.toBeInTheDocument()
+
+            vi.useFakeTimers()
           })
         })
       })
@@ -1813,12 +1876,17 @@ describe('<TopNavBarItem />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
+      // Use real timers for axe check
+      vi.useRealTimers()
+
       const { container } = render(
         <TopNavBarItem id="item">Menu Item</TopNavBarItem>
       )
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
+
+      vi.useFakeTimers()
     })
   })
 })

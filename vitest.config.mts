@@ -30,6 +30,18 @@ import path from 'path'
 export default defineConfig({
   test: {
     globals: true,
+    // Enable parallel test execution with threads
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        minThreads: 6,
+        maxThreads: 10,
+        // Isolate environment for each test file for better test isolation
+        isolate: true
+      }
+    },
+    // Increase max concurrency for better parallelization
+    maxConcurrency: 8,
     watchTriggerPatterns: [
       {
         // matches any file inside the __testfixtures__ directory
@@ -51,7 +63,13 @@ export default defineConfig({
           include: ['**/__tests__/**/*.test.tsx'],
           environment: 'jsdom',
           setupFiles: './vitest.setup.ts',
-          name: { label: 'web', color: 'blue' }
+          name: { label: 'web', color: 'blue' },
+          // Optimize jsdom environment
+          environmentOptions: {
+            jsdom: {
+              resources: 'usable'
+            }
+          }
         }
       },
       {

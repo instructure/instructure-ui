@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -32,7 +32,9 @@ const MOCK_EVENT = new KeyboardEvent('mockEvent', { shiftKey: false })
 MOCK_EVENT.preventDefault = () => {}
 
 describe('scopeTab', () => {
-  it('should scope tab within container', async () => {
+  it('should scope tab within container', () => {
+    vi.useFakeTimers()
+
     render(
       <div>
         <div data-testid="container">
@@ -48,18 +50,21 @@ describe('scopeTab', () => {
 
     second.focus()
 
-    await waitFor(() => {
-      expect(document.activeElement).toBe(second)
+    expect(document.activeElement).toBe(second)
+
+    act(() => {
+      scopeTab(container, MOCK_EVENT as any)
+      vi.runAllTimers()
     })
 
-    scopeTab(container, MOCK_EVENT as any)
+    expect(document.activeElement).toBe(first)
 
-    await waitFor(() => {
-      expect(document.activeElement).toBe(first)
-    })
+    vi.useRealTimers()
   })
 
-  it('should not attempt scoping when no tabbable children', async () => {
+  it('should not attempt scoping when no tabbable children', () => {
+    vi.useFakeTimers()
+
     render(
       <div>
         <div data-testid="container">Hello</div>
@@ -72,14 +77,18 @@ describe('scopeTab', () => {
 
     input.focus()
 
-    scopeTab(container, MOCK_EVENT as any)
-
-    await waitFor(() => {
-      expect(document.activeElement).toBe(input)
+    act(() => {
+      scopeTab(container, MOCK_EVENT as any)
+      vi.runAllTimers()
     })
+
+    expect(document.activeElement).toBe(input)
+
+    vi.useRealTimers()
   })
 
-  it('should execute callback when provided instead of default behavior', async () => {
+  it('should execute callback when provided instead of default behavior', () => {
+    vi.useFakeTimers()
     const cb = vi.fn()
 
     render(
@@ -95,10 +104,13 @@ describe('scopeTab', () => {
 
     input.focus()
 
-    scopeTab(container, MOCK_EVENT as any, cb)
-
-    await waitFor(() => {
-      expect(cb).toHaveBeenCalled()
+    act(() => {
+      scopeTab(container, MOCK_EVENT as any, cb)
+      vi.runAllTimers()
     })
+
+    expect(cb).toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 })

@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { IconCheckSolid } from '@instructure/ui-icons'
@@ -232,7 +231,8 @@ describe('<Drilldown.Option />', () => {
       expect(option).toHaveAttribute('aria-disabled', 'true')
     })
 
-    it('should not allow selection if the Drilldown.Option itself is disabled', async () => {
+    it('should not allow selection if the Drilldown.Option itself is disabled', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
@@ -249,9 +249,13 @@ describe('<Drilldown.Option />', () => {
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
-      await userEvent.click(optionContent)
+      fireEvent.click(optionContent, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+      vi.useRealTimers()
     })
   })
 
@@ -638,7 +642,8 @@ describe('<Drilldown.Option />', () => {
   })
 
   describe('onOptionClick callback', () => {
-    it('should fire on click with correct params', async () => {
+    it('should fire on click with correct params', () => {
+      vi.useFakeTimers()
       const onOptionClick = vi.fn()
       render(
         <Drilldown rootPageId="page0">
@@ -651,25 +656,29 @@ describe('<Drilldown.Option />', () => {
       )
       const option = screen.getByText('Option')
 
-      await userEvent.click(option)
-
-      await waitFor(() => {
-        expect(onOptionClick).toHaveBeenCalledTimes(1)
-
-        const args = onOptionClick.mock.calls[0][1]
-
-        expect(args).toHaveProperty('optionId', 'option1')
-        expect(args).toHaveProperty('pageHistory', ['page0'])
-
-        expect(args.drilldown).toBeInstanceOf(Object)
-        expect(args.drilldown.props).toHaveProperty('role', 'menu')
-
-        expect(args.goToPage).toBeInstanceOf(Function)
-        expect(args.goToPreviousPage).toBeInstanceOf(Function)
+      fireEvent.click(option, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onOptionClick).toHaveBeenCalledTimes(1)
+
+      const args = onOptionClick.mock.calls[0][1]
+
+      expect(args).toHaveProperty('optionId', 'option1')
+      expect(args).toHaveProperty('pageHistory', ['page0'])
+
+      expect(args.drilldown).toBeInstanceOf(Object)
+      expect(args.drilldown.props).toHaveProperty('role', 'menu')
+
+      expect(args.goToPage).toBeInstanceOf(Function)
+      expect(args.goToPreviousPage).toBeInstanceOf(Function)
+
+      vi.useRealTimers()
     })
 
-    it('should provide goToPreviousPage method that throws a warning, if there is no previous page', async () => {
+    it('should provide goToPreviousPage method that throws a warning, if there is no previous page', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
@@ -686,21 +695,25 @@ describe('<Drilldown.Option />', () => {
       )
       const option = screen.getByText('Option')
 
-      await userEvent.click(option)
-
-      await waitFor(() => {
-        const expectedErrorMessage =
-          'Warning: There is no previous page to go to. The current page history is: [page0].'
-
-        expect(consoleWarningMock).toHaveBeenCalledWith(
-          expect.stringContaining(expectedErrorMessage),
-          expect.any(String)
-        )
+      fireEvent.click(option, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      const expectedErrorMessage =
+        'Warning: There is no previous page to go to. The current page history is: [page0].'
+
+      expect(consoleWarningMock).toHaveBeenCalledWith(
+        expect.stringContaining(expectedErrorMessage),
+        expect.any(String)
+      )
+
+      vi.useRealTimers()
     })
 
     describe('provide goToPage method', () => {
-      it("should throws warning if page doesn't exist", async () => {
+      it("should throws warning if page doesn't exist", () => {
+        vi.useFakeTimers()
         render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
@@ -717,20 +730,24 @@ describe('<Drilldown.Option />', () => {
         )
         const option = screen.getByText('Option')
 
-        await userEvent.click(option)
-
-        await waitFor(() => {
-          const expectedErrorMessage =
-            'Warning: Cannot go to page because page with id: "page1" doesn\'t exist.'
-
-          expect(consoleWarningMock).toHaveBeenCalledWith(
-            expect.stringContaining(expectedErrorMessage),
-            expect.any(String)
-          )
+        fireEvent.click(option, { button: 0, detail: 1 })
+        act(() => {
+          vi.runAllTimers()
         })
+
+        const expectedErrorMessage =
+          'Warning: Cannot go to page because page with id: "page1" doesn\'t exist.'
+
+        expect(consoleWarningMock).toHaveBeenCalledWith(
+          expect.stringContaining(expectedErrorMessage),
+          expect.any(String)
+        )
+
+        vi.useRealTimers()
       })
 
-      it('should throws warning if if no page id is provided', async () => {
+      it('should throws warning if if no page id is provided', () => {
+        vi.useFakeTimers()
         render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
@@ -748,20 +765,24 @@ describe('<Drilldown.Option />', () => {
         )
         const option = screen.getByText('Option')
 
-        await userEvent.click(option)
-
-        await waitFor(() => {
-          const expectedErrorMessage =
-            'Warning: Cannot go to page because there was no page id provided.'
-
-          expect(consoleWarningMock).toHaveBeenCalledWith(
-            expect.stringContaining(expectedErrorMessage),
-            expect.any(String)
-          )
+        fireEvent.click(option, { button: 0, detail: 1 })
+        act(() => {
+          vi.runAllTimers()
         })
+
+        const expectedErrorMessage =
+          'Warning: Cannot go to page because there was no page id provided.'
+
+        expect(consoleWarningMock).toHaveBeenCalledWith(
+          expect.stringContaining(expectedErrorMessage),
+          expect.any(String)
+        )
+
+        vi.useRealTimers()
       })
 
-      it('should throws warning if parameter is not string', async () => {
+      it('should throws warning if parameter is not string', () => {
+        vi.useFakeTimers()
         render(
           <Drilldown rootPageId="page0">
             <Drilldown.Page id="page0">
@@ -779,17 +800,20 @@ describe('<Drilldown.Option />', () => {
         )
         const option = screen.getByText('Option')
 
-        await userEvent.click(option)
-
-        await waitFor(() => {
-          const expectedErrorMessage =
-            'Warning: Cannot go to page because parameter newPageId has to be string (valid page id). Current newPageId is "object".'
-
-          expect(consoleWarningMock).toHaveBeenCalledWith(
-            expect.stringContaining(expectedErrorMessage),
-            expect.any(String)
-          )
+        fireEvent.click(option, { button: 0, detail: 1 })
+        act(() => {
+          vi.runAllTimers()
         })
+
+        const expectedErrorMessage =
+          'Warning: Cannot go to page because parameter newPageId has to be string (valid page id). Current newPageId is "object".'
+
+        expect(consoleWarningMock).toHaveBeenCalledWith(
+          expect.stringContaining(expectedErrorMessage),
+          expect.any(String)
+        )
+
+        vi.useRealTimers()
       })
     })
   })

@@ -23,10 +23,9 @@
  */
 
 import { useState } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -164,7 +163,8 @@ describe('<Tabs />', () => {
     expect(childContent).toBeNull()
   })
 
-  it('should render the same content in second tab when selected', async () => {
+  it('should render the same content in second tab when selected', () => {
+    vi.useFakeTimers()
     const onIndexChange = vi.fn()
 
     const { container } = render(<TabExample onIndexChange={onIndexChange} />)
@@ -172,15 +172,18 @@ describe('<Tabs />', () => {
 
     const secondTab = screen.getAllByRole('tab')[1]
 
-    await userEvent.click(secondTab)
-
-    await waitFor(() => {
-      expect(onIndexChange).toHaveBeenCalledWith(1)
+    fireEvent.click(secondTab, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onIndexChange).toHaveBeenCalledWith(1)
 
     const panelContent = screen.queryByText('CONTENT')
 
     expect(panelContent).toBeInTheDocument()
+
+    vi.useRealTimers()
   })
 
   it('should warn if multiple active tabs exist', () => {
@@ -276,7 +279,8 @@ describe('<Tabs />', () => {
     expect(panels[2]).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('should call onRequestTabChange when selection changes via click', async () => {
+  it('should call onRequestTabChange when selection changes via click', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
 
     render(
@@ -294,19 +298,23 @@ describe('<Tabs />', () => {
     )
     const secondTab = screen.getByText('Second Tab')
 
-    await userEvent.click(secondTab)
-
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalled()
-
-      const args = onChange.mock.calls[0][1]
-
-      expect(args).toHaveProperty('index', 1)
-      expect(args).toHaveProperty('id', 'two')
+    fireEvent.click(secondTab, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onChange).toHaveBeenCalled()
+
+    const args = onChange.mock.calls[0][1]
+
+    expect(args).toHaveProperty('index', 1)
+    expect(args).toHaveProperty('id', 'two')
+
+    vi.useRealTimers()
   })
 
-  it('should focus the selected tab when shouldFocusOnRender is set', async () => {
+  it('should focus the selected tab when shouldFocusOnRender is set', () => {
+    vi.useFakeTimers()
     render(
       <Tabs shouldFocusOnRender>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -320,12 +328,17 @@ describe('<Tabs />', () => {
     )
     const secondTab = screen.getByText('Second Tab')
 
-    await waitFor(() => {
-      expect(document.activeElement).toBe(secondTab)
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(document.activeElement).toBe(secondTab)
+
+    vi.useRealTimers()
   })
 
-  it('should not call onRequestTabChange when clicking a disabled tab', async () => {
+  it('should not call onRequestTabChange when clicking a disabled tab', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
     render(
       <Tabs onRequestTabChange={onChange}>
@@ -338,11 +351,14 @@ describe('<Tabs />', () => {
     )
     const thirdTab = screen.getByText('Third Tab')
 
-    await userEvent.click(thirdTab)
-
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
+    fireEvent.click(thirdTab, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onChange).not.toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 
   it('should meet a11y standards when set to the secondary variant', async () => {

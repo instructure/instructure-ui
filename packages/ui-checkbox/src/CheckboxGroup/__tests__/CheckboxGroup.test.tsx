@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -105,33 +105,29 @@ describe('<CheckboxGroup />', () => {
     expect(legend).toHaveTextContent(TEST_DESCRIPTION)
   })
 
-  it('does not call the onChange prop when disabled', async () => {
+  it('does not call the onChange prop when disabled', () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange, disabled: true })
     const checkboxElement = screen.getAllByRole('checkbox')[0]
 
     fireEvent.click(checkboxElement)
 
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
-      expect(checkboxElement).toBeDisabled()
-    })
+    expect(onChange).not.toHaveBeenCalled()
+    expect(checkboxElement).toBeDisabled()
   })
 
-  it('does not call the onChange prop when readOnly', async () => {
+  it('does not call the onChange prop when readOnly', () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange, readOnly: true })
     const checkboxElement = screen.getAllByRole('checkbox')[0]
 
     fireEvent.click(checkboxElement)
 
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
-      expect(checkboxElement).toBeDisabled()
-    })
+    expect(onChange).not.toHaveBeenCalled()
+    expect(checkboxElement).toBeDisabled()
   })
 
-  it('should not update the value when the value prop is set', async () => {
+  it('should not update the value when the value prop is set', () => {
     const onChange = vi.fn()
     renderCheckboxGroup({ onChange, value: ['tester'] })
     const checkboxes = screen.getAllByRole('checkbox')
@@ -141,11 +137,9 @@ describe('<CheckboxGroup />', () => {
 
     userEvent.click(checkboxes[0])
 
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
-      expect(checkboxes[0]).not.toBeChecked()
-      expect(checkboxes[1]).not.toBeChecked()
-    })
+    expect(onChange).not.toHaveBeenCalled()
+    expect(checkboxes[0]).not.toBeChecked()
+    expect(checkboxes[1]).not.toBeChecked()
   })
 
   it('should add the checkbox value to the value list when it is checked', async () => {
@@ -156,14 +150,12 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
-    userEvent.click(checkboxes[0])
-    userEvent.click(checkboxes[1])
+    await userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[1])
 
-    await waitFor(() => {
-      expect(checkboxes[0]).toBeChecked()
-      expect(checkboxes[1]).toBeChecked()
-      expect(onChange).toHaveBeenCalledWith([TEST_VALUE_1, TEST_VALUE_2])
-    })
+    expect(checkboxes[0]).toBeChecked()
+    expect(checkboxes[1]).toBeChecked()
+    expect(onChange).toHaveBeenCalledWith([TEST_VALUE_1, TEST_VALUE_2])
   })
 
   it('should check the checkboxes based on the defaultValue prop', () => {
@@ -184,13 +176,11 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
-    userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0])
 
-    await waitFor(() => {
-      expect(checkboxes[0]).not.toBeChecked()
-      expect(checkboxes[1]).toBeChecked()
-      expect(onChange).toHaveBeenCalledWith([TEST_VALUE_2])
-    })
+    expect(checkboxes[0]).not.toBeChecked()
+    expect(checkboxes[1]).toBeChecked()
+    expect(onChange).toHaveBeenCalledWith([TEST_VALUE_2])
   })
 
   it('passes the array of selected values to onChange handler', async () => {
@@ -202,13 +192,11 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[0]).not.toBeChecked()
     expect(checkboxes[1]).toBeChecked()
 
-    userEvent.click(checkboxes[0])
+    await userEvent.click(checkboxes[0])
 
-    await waitFor(() => {
-      expect(checkboxes[0]).toBeChecked()
-      expect(checkboxes[1]).toBeChecked()
-      expect(onChange).toHaveBeenCalledWith([TEST_VALUE_2, TEST_VALUE_1])
-    })
+    expect(checkboxes[0]).toBeChecked()
+    expect(checkboxes[1]).toBeChecked()
+    expect(onChange).toHaveBeenCalledWith([TEST_VALUE_2, TEST_VALUE_1])
   })
 
   describe('for a11y', () => {

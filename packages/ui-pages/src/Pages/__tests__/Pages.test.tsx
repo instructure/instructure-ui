@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 import { Pages, Page } from '../index'
 
 describe('<Pages />', () => {
@@ -91,7 +90,8 @@ describe('<Pages />', () => {
     expect(pages).toHaveTextContent('Bar')
   })
 
-  it('should pass history and navigateToPreviousPage to Page', async () => {
+  it('should pass history and navigateToPreviousPage to Page', () => {
+    vi.useFakeTimers()
     const pageSpy = vi.fn()
     render(
       <Pages>
@@ -99,16 +99,21 @@ describe('<Pages />', () => {
       </Pages>
     )
 
-    await waitFor(() => {
-      const args = pageSpy.mock.calls[0]
-
-      expect(pageSpy).toHaveBeenCalledTimes(1)
-      expect(Array.isArray(args[0])).toEqual(true)
-      expect(typeof args[1]).toBe('function')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const args = pageSpy.mock.calls[0]
+
+    expect(pageSpy).toHaveBeenCalledTimes(1)
+    expect(Array.isArray(args[0])).toEqual(true)
+    expect(typeof args[1]).toBe('function')
+
+    vi.useRealTimers()
   })
 
-  it('should fire onPageIndexChange event', async () => {
+  it('should fire onPageIndexChange event', () => {
+    vi.useFakeTimers()
     const onPageIndexChange = vi.fn()
 
     const { container, rerender } = render(
@@ -132,11 +137,14 @@ describe('<Pages />', () => {
 
     const button = container.querySelector('button')!
 
-    userEvent.click(button)
-
-    await waitFor(() => {
-      expect(onPageIndexChange).toHaveBeenCalledTimes(1)
-      expect(onPageIndexChange).toHaveBeenCalledWith(0, 1)
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onPageIndexChange).toHaveBeenCalledTimes(1)
+    expect(onPageIndexChange).toHaveBeenCalledWith(0, 1)
+
+    vi.useRealTimers()
   })
 })

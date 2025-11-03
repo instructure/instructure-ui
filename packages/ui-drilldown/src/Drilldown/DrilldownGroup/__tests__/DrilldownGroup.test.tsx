@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Drilldown } from '../../index'
@@ -49,7 +47,8 @@ describe('<Drilldown.Group />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should not allow de-selecting an option when selectableType = "single"', async () => {
+  it('should not allow de-selecting an option when selectableType = "single"', () => {
+    vi.useFakeTimers()
     const options = ['one', 'two', 'three']
     const Example = ({ opts }: { opts: typeof options }) => {
       return (
@@ -82,13 +81,15 @@ describe('<Drilldown.Group />', () => {
 
     expect(selectedOption).toHaveAttribute('aria-checked', 'true')
 
-    await userEvent.click(selectedOption)
-
-    await waitFor(() => {
-      const updatedSelectedOption = screen.getByTestId('three')
-
-      expect(updatedSelectedOption).toHaveAttribute('aria-checked', 'true')
+    fireEvent.click(selectedOption, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const updatedSelectedOption = screen.getByTestId('three')
+    expect(updatedSelectedOption).toHaveAttribute('aria-checked', 'true')
+
+    vi.useRealTimers()
   })
 
   it("shouldn't render non-DrilldownGroup children", async () => {
@@ -235,7 +236,8 @@ describe('<Drilldown.Group />', () => {
       expect(option_2).not.toHaveAttribute('aria-disabled')
     })
 
-    it('should not allow selection if the Drilldown.Group is disabled', async () => {
+    it('should not allow selection if the Drilldown.Group is disabled', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
@@ -250,9 +252,13 @@ describe('<Drilldown.Group />', () => {
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
-      await userEvent.click(optionContent)
+      fireEvent.click(optionContent, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+      vi.useRealTimers()
     })
   })
 
@@ -602,7 +608,8 @@ describe('<Drilldown.Group />', () => {
   })
 
   describe('selection', () => {
-    it('should fire "onSelect" callback', async () => {
+    it('should fire "onSelect" callback', () => {
+      vi.useFakeTimers()
       const onSelect = vi.fn()
       render(
         <Drilldown rootPageId="page0">
@@ -627,27 +634,30 @@ describe('<Drilldown.Group />', () => {
       )
       const option2 = screen.getByText('Option 2')
 
-      await userEvent.click(option2)
-
-      await waitFor(() => {
-        expect(onSelect).toHaveBeenCalledTimes(1)
-
-        const args = onSelect.mock.calls[0][1]
-        const event = onSelect.mock.calls[0][0]
-
-        expect(args).toHaveProperty('value', ['item2'])
-        expect(args).toHaveProperty('isSelected', true)
-
-        expect(args.selectedOption).toBeInstanceOf(Object)
-        expect(args.selectedOption.props).toHaveProperty('id', 'groupOption02')
-        expect(args.selectedOption.props).toHaveProperty('value', 'item2')
-
-        expect(args.drilldown).toBeInstanceOf(Object)
-        expect(args.drilldown.props).toHaveProperty('role', 'menu')
-        expect(args.drilldown.hide).toBeInstanceOf(Function)
-
-        expect(event.target).toBe(option2)
+      fireEvent.click(option2, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onSelect).toHaveBeenCalledTimes(1)
+
+      const args = onSelect.mock.calls[0][1]
+      const event = onSelect.mock.calls[0][0]
+
+      expect(args).toHaveProperty('value', ['item2'])
+      expect(args).toHaveProperty('isSelected', true)
+
+      expect(args.selectedOption).toBeInstanceOf(Object)
+      expect(args.selectedOption.props).toHaveProperty('id', 'groupOption02')
+      expect(args.selectedOption.props).toHaveProperty('value', 'item2')
+
+      expect(args.drilldown).toBeInstanceOf(Object)
+      expect(args.drilldown.props).toHaveProperty('role', 'menu')
+      expect(args.drilldown.hide).toBeInstanceOf(Function)
+
+      expect(event.target).toBe(option2)
+
+      vi.useRealTimers()
     })
   })
 
@@ -680,7 +690,8 @@ describe('<Drilldown.Group />', () => {
       )
     })
 
-    it('should prevent user selection if selectedOptions provided', async () => {
+    it('should prevent user selection if selectedOptions provided', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="root">
           <Drilldown.Page id="root">
@@ -704,13 +715,18 @@ describe('<Drilldown.Group />', () => {
       expect(options[0]).toHaveAttribute('aria-checked', 'true')
       expect(options[1]).toHaveAttribute('aria-checked', 'false')
 
-      await userEvent.click(screen.getByText('C2'))
+      fireEvent.click(screen.getByText('C2'), { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
 
       expect(options[0]).toHaveAttribute('aria-checked', 'true')
       expect(options[1]).toHaveAttribute('aria-checked', 'false')
+      vi.useRealTimers()
     })
 
-    it('should preserve user changes in uncontrolled groups when selectedOptions props change', async () => {
+    it('should preserve user changes in uncontrolled groups when selectedOptions props change', () => {
+      vi.useFakeTimers()
       const { rerender } = render(
         <Drilldown rootPageId="root">
           <Drilldown.Page id="root">
@@ -749,7 +765,10 @@ describe('<Drilldown.Group />', () => {
       expect(options[3]).toHaveAttribute('aria-checked', 'false') // D2 uncontrolled
 
       // user changes uncontrolled group (select D2)
-      await userEvent.click(screen.getByText('D2'))
+      fireEvent.click(screen.getByText('D2'), { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
       expect(options[0]).toHaveAttribute('aria-checked', 'true') // C1 controlled
       expect(options[1]).toHaveAttribute('aria-checked', 'false') // C2 controlled
       expect(options[2]).toHaveAttribute('aria-checked', 'true') // D1 uncontrolled
@@ -792,6 +811,7 @@ describe('<Drilldown.Group />', () => {
       expect(options[1]).toHaveAttribute('aria-checked', 'true') // C2 controlled
       expect(options[2]).toHaveAttribute('aria-checked', 'true') // D1 uncontrolled
       expect(options[3]).toHaveAttribute('aria-checked', 'true') // D2 uncontrolled
+      vi.useRealTimers()
     })
 
     describe('Option selection hierarchy at initial render', () => {

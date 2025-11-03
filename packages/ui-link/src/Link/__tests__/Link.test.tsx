@@ -24,8 +24,7 @@
 
 /** jsxImportSource @emotion/react */
 import { Component, PropsWithChildren } from 'react'
-import { userEvent } from '@testing-library/user-event'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { expect, vi } from 'vitest'
 
@@ -121,30 +120,36 @@ describe('<Link />', () => {
     expect(link).toHaveStyle('display: inline-flex')
   })
 
-  it('should call the onClick prop when clicked', async () => {
+  it('should call the onClick prop when clicked', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     render(<Link onClick={onClick}>Hello World</Link>)
     const link = screen.getByRole('button')
 
-    userEvent.click(link)
-
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalledTimes(1)
+    fireEvent.click(link, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    vi.useRealTimers()
   })
 
-  it('should call the onMouseEnter prop when mouseEntered', async () => {
+  it('should call the onMouseEnter prop when mouseEntered', () => {
+    vi.useFakeTimers()
     const onMouseEnter = vi.fn()
     const { container } = render(
       <Link onMouseEnter={onMouseEnter}>Hello World</Link>
     )
     const link = container.querySelector('span[class*="-link"]')!
 
-    userEvent.hover(link)
-
-    await waitFor(() => {
-      expect(onMouseEnter).toHaveBeenCalledTimes(1)
+    fireEvent.mouseEnter(link)
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onMouseEnter).toHaveBeenCalledTimes(1)
+    vi.useRealTimers()
   })
 
   it('should pass down an icon via the icon property', async () => {

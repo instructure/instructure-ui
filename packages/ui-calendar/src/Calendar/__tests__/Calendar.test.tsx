@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
@@ -331,10 +331,8 @@ describe('<Calendar />', () => {
     await userEvent.click(prevButton)
     await userEvent.click(nextButton)
 
-    await waitFor(() => {
-      expect(onRequestRenderPrevMonth).toHaveBeenCalledTimes(1)
-      expect(onRequestRenderNextMonth).toHaveBeenCalledTimes(1)
-    })
+    expect(onRequestRenderPrevMonth).toHaveBeenCalledTimes(1)
+    expect(onRequestRenderNextMonth).toHaveBeenCalledTimes(1)
   })
 
   describe('when role="listbox"', () => {

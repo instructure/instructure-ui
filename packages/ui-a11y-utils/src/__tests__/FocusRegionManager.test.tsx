@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { FocusRegionManager } from '../FocusRegionManager'
@@ -32,7 +33,9 @@ describe('FocusRegionManager', () => {
     FocusRegionManager.clearEntries()
   })
 
-  it('should focus the first tabbable element when focused', async () => {
+  it('should focus the first tabbable element when focused', () => {
+    vi.useFakeTimers()
+
     render(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
@@ -84,14 +87,19 @@ describe('FocusRegionManager', () => {
 
     expect(document.activeElement).toBe(button)
 
-    FocusRegionManager.focusRegion(content)
-
-    await waitFor(() => {
-      expect(document.activeElement).toBe(firstTabbable)
+    act(() => {
+      FocusRegionManager.focusRegion(content)
+      vi.runAllTimers()
     })
+
+    expect(document.activeElement).toBe(firstTabbable)
+
+    vi.useRealTimers()
   })
 
-  it('should return focus when blurred', async () => {
+  it('should return focus when blurred', () => {
+    vi.useFakeTimers()
+
     render(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
@@ -141,11 +149,14 @@ describe('FocusRegionManager', () => {
 
     expect(document.activeElement).toBe(button)
 
-    FocusRegionManager.focusRegion(content)
-    FocusRegionManager.blurRegion(content)
-
-    await waitFor(() => {
-      expect(document.activeElement).toBe(button)
+    act(() => {
+      FocusRegionManager.focusRegion(content)
+      FocusRegionManager.blurRegion(content)
+      vi.runAllTimers()
     })
+
+    expect(document.activeElement).toBe(button)
+
+    vi.useRealTimers()
   })
 })

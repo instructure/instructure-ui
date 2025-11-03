@@ -23,11 +23,7 @@
  */
 
 import { Component, createRef, RefObject } from 'react'
-import {
-  render,
-  waitFor,
-  waitForElementToBeRemoved
-} from '@testing-library/react'
+import { act, render, waitForElementToBeRemoved } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
@@ -62,6 +58,14 @@ class ExampleComponent extends Component<any, any> {
 describe('<Transition />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
@@ -115,7 +119,7 @@ describe('<Transition />', () => {
     expectTypeClass(type)
   })
 
-  it('should correctly apply enter and exit classes', async () => {
+  it('should correctly apply enter and exit classes', () => {
     const type = 'fade'
 
     const { getByText, rerender } = render(
@@ -133,12 +137,17 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
-      expect(element).toHaveClass(getClass(type, 'exited'))
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(element).toHaveClass(getClass(type, 'exited'))
   })
 
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
+    // Use real timers for this test since waitForElementToBeRemoved has internal timeouts
+    vi.useRealTimers()
+
     const { getByText, rerender } = render(
       <Transition type="fade" in={true} unmountOnExit={true}>
         <div>hello</div>
@@ -154,9 +163,12 @@ describe('<Transition />', () => {
     )
 
     await waitForElementToBeRemoved(() => getByText('hello'))
+
+    // Restore fake timers for subsequent tests
+    vi.useFakeTimers()
   })
 
-  it('should not execute enter transition with `transitionEnter` set to false', async () => {
+  it('should not execute enter transition with `transitionEnter` set to false', () => {
     const onEntering = vi.fn()
 
     const { rerender } = render(
@@ -181,12 +193,14 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
-      expect(onEntering).not.toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onEntering).not.toHaveBeenCalled()
   })
 
-  it('should not execute exit transition with `transitionExit` set to false', async () => {
+  it('should not execute exit transition with `transitionExit` set to false', () => {
     const onExiting = vi.fn()
 
     const { rerender } = render(
@@ -211,12 +225,14 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
-      expect(onExiting).not.toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onExiting).not.toHaveBeenCalled()
   })
 
-  it('should correctly call enter methods', async () => {
+  it('should correctly call enter methods', () => {
     const onEnter = vi.fn()
     const onEntering = vi.fn()
     const onEntered = vi.fn()
@@ -233,14 +249,16 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
-      expect(onEnter).toHaveBeenCalled()
-      expect(onEntering).toHaveBeenCalled()
-      expect(onEntered).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onEnter).toHaveBeenCalled()
+    expect(onEntering).toHaveBeenCalled()
+    expect(onEntered).toHaveBeenCalled()
   })
 
-  it('should correctly call exit methods', async () => {
+  it('should correctly call exit methods', () => {
     const onExit = vi.fn()
     const onExiting = vi.fn()
     const onExited = vi.fn()
@@ -269,10 +287,12 @@ describe('<Transition />', () => {
       </Transition>
     )
 
-    await waitFor(() => {
-      expect(onExit).toHaveBeenCalled()
-      expect(onExiting).toHaveBeenCalled()
-      expect(onExited).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onExit).toHaveBeenCalled()
+    expect(onExiting).toHaveBeenCalled()
+    expect(onExited).toHaveBeenCalled()
   })
 })

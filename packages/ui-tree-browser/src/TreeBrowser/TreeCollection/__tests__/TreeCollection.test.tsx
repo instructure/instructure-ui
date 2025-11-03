@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
@@ -204,7 +203,8 @@ describe('<TreeCollection />', () => {
     })
 
     describe('onCollectionClick', () => {
-      it('should return the correct collection params on click', async () => {
+      it('should return the correct collection params on click', () => {
+        vi.useFakeTimers()
         const onCollectionClick = vi.fn()
 
         render(
@@ -221,18 +221,21 @@ describe('<TreeCollection />', () => {
         )
         const item = screen.getByRole('treeitem')
 
-        await userEvent.click(item)
-
-        await waitFor(() => {
-          const args = onCollectionClick.mock.calls[0][1]
-
-          expect(onCollectionClick).toHaveBeenCalledTimes(1)
-          expect(args).toStrictEqual({
-            id: 1,
-            expanded: true,
-            type: 'collection'
-          })
+        fireEvent.click(item, { button: 0, detail: 1 })
+        act(() => {
+          vi.runAllTimers()
         })
+
+        const args = onCollectionClick.mock.calls[0][1]
+
+        expect(onCollectionClick).toHaveBeenCalledTimes(1)
+        expect(args).toStrictEqual({
+          id: 1,
+          expanded: true,
+          type: 'collection'
+        })
+
+        vi.useRealTimers()
       })
     })
   })
@@ -259,7 +262,8 @@ describe('<TreeCollection />', () => {
       expect(button).not.toHaveAttribute('aria-expanded')
     })
 
-    it('should call custom functions passed by onItemClick', async () => {
+    it('should call custom functions passed by onItemClick', () => {
+      vi.useFakeTimers()
       const onItemClick = vi.fn()
 
       render(
@@ -277,17 +281,20 @@ describe('<TreeCollection />', () => {
       )
       const item = screen.getByLabelText('Item 1')
 
-      await userEvent.click(item)
-
-      await waitFor(() => {
-        const args = onItemClick.mock.calls[0][1]
-
-        expect(onItemClick).toHaveBeenCalledTimes(1)
-        expect(args).toStrictEqual({
-          id: 1,
-          type: 'item'
-        })
+      fireEvent.click(item, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      const args = onItemClick.mock.calls[0][1]
+
+      expect(onItemClick).toHaveBeenCalledTimes(1)
+      expect(args).toStrictEqual({
+        id: 1,
+        type: 'item'
+      })
+
+      vi.useRealTimers()
     })
 
     it('should correctly evaluate `getItemProps` for each item', async () => {

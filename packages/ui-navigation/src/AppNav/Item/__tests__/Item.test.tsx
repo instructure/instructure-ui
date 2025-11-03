@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -102,17 +101,20 @@ describe('<AppNav.Item />', () => {
     expect(after.tagName).toBe('STRONG')
   })
 
-  it('should respond to an onClick event', async () => {
+  it('should respond to an onClick event', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     render(<Item renderLabel="Some label" onClick={onClick} />)
 
     const button = screen.getByRole('button')
 
-    await userEvent.click(button)
-
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalledTimes(1)
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    vi.useRealTimers()
   })
 
   it('should output a console error if icon is used with non-screenreader label text', async () => {

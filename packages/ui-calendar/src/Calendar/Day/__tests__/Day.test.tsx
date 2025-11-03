@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
@@ -166,12 +166,10 @@ describe('Day', () => {
 
     await userEvent.click(day!)
 
-    await waitFor(() => {
-      const args = onClick.mock.calls[0][1]
+    const args = onClick.mock.calls[0][1]
 
-      expect(onClick).toHaveBeenCalledTimes(1)
-      expect(args).toHaveProperty('date', date)
-    })
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(args).toHaveProperty('date', date)
   })
 
   it('should call onKeyDown with date', async () => {
@@ -191,14 +189,12 @@ describe('Day', () => {
 
     const day = container.querySelector('[class*="-calendarDay"]')!
 
-    userEvent.type(day, '{enter}')
+    await userEvent.type(day, '{enter}')
 
-    await waitFor(() => {
-      const args = onKeyDown.mock.calls[0][1]
+    const args = onKeyDown.mock.calls[0][1]
 
-      expect(onKeyDown).toHaveBeenCalledTimes(1)
-      expect(args).toHaveProperty('date', date)
-    })
+    expect(onKeyDown).toHaveBeenCalledTimes(1)
+    expect(args).toHaveProperty('date', date)
   })
 
   it('should apply disabled when interaction is `disabled`', async () => {
@@ -216,12 +212,10 @@ describe('Day', () => {
     )
     const day = container.querySelector('[class*="-calendarDay"]')!
 
-    userEvent.click(day)
+    await userEvent.click(day)
 
-    await waitFor(() => {
-      expect(onClick).not.toHaveBeenCalled()
-      expect(day).toHaveAttribute('disabled')
-    })
+    expect(onClick).not.toHaveBeenCalled()
+    expect(day).toHaveAttribute('disabled')
   })
 
   it('should provide an elementRef', async () => {

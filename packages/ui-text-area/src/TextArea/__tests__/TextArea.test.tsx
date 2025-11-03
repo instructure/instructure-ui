@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
@@ -130,16 +129,20 @@ describe('TextArea', () => {
   })
 
   describe('events', () => {
-    it('responds to onChange event', async () => {
+    it('responds to onChange event', () => {
+      vi.useFakeTimers()
       const onChange = vi.fn()
       render(<TextArea label="Name" autoGrow={false} onChange={onChange} />)
       const input = screen.getByRole('textbox')
 
       fireEvent.change(input, { target: { value: 'foo' } })
-
-      await waitFor(() => {
-        expect(onChange).toHaveBeenCalledTimes(1)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      vi.useRealTimers()
     })
 
     it('does not respond to onChange event when disabled', async () => {
@@ -166,28 +169,37 @@ describe('TextArea', () => {
       expect(onChange).not.toHaveBeenCalled()
     })
 
-    it('responds to onBlur event', async () => {
+    it('responds to onBlur event', () => {
+      vi.useFakeTimers()
       const onBlur = vi.fn()
       render(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
+      const input = screen.getByRole('textbox')
 
-      userEvent.tab()
-      userEvent.tab()
-
-      await waitFor(() => {
-        expect(onBlur).toHaveBeenCalled()
+      input.focus()
+      input.blur()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onBlur).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('responds to onFocus event', async () => {
+    it('responds to onFocus event', () => {
+      vi.useFakeTimers()
       const onFocus = vi.fn()
       render(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
       const input = screen.getByRole('textbox')
 
       input.focus()
-
-      await waitFor(() => {
-        expect(onFocus).toHaveBeenCalled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onFocus).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
   })
 

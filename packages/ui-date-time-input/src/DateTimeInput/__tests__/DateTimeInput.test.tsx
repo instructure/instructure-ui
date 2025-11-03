@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { DateTimeInput } from '../index'
@@ -47,6 +46,7 @@ describe('<DateTimeInput />', () => {
   afterEach(() => {
     consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
+    vi.useRealTimers()
   })
 
   it('should use the default value', () => {
@@ -156,7 +156,8 @@ describe('<DateTimeInput />', () => {
     expect(timeInput).toHaveValue('12:00 AM')
   })
 
-  it('should call invalidDateTimeMessage if time is set w/o a date and is required', async () => {
+  it('should call invalidDateTimeMessage if time is set w/o a date and is required', () => {
+    vi.useFakeTimers()
     const invalidDateTimeMessage = vi.fn((_rawd) => 'whoops')
 
     const { container } = render(
@@ -174,16 +175,18 @@ describe('<DateTimeInput />', () => {
     )
     const timeInput = screen.getByLabelText('time-input *')
 
-    await userEvent.type(timeInput, '1:00 PM')
+    fireEvent.change(timeInput, { target: { value: '1:00 PM' } })
     fireEvent.blur(timeInput)
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
-      expect(invalidDateTimeMessage).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('whoops')
+    expect(invalidDateTimeMessage).toHaveBeenCalled()
   })
 
-  it('should not call invalidDateTimeMessage if time is set w/o a date', async () => {
+  it('should not call invalidDateTimeMessage if time is set w/o a date', () => {
     const invalidDateTimeMessage = vi.fn((_rawd) => 'whoops')
 
     render(
@@ -200,17 +203,17 @@ describe('<DateTimeInput />', () => {
     )
     const timeInput = screen.getByLabelText('time-input')
 
-    await userEvent.type(timeInput, '1:00 PM{enter}')
+    fireEvent.change(timeInput, { target: { value: '1:00 PM' } })
+    fireEvent.keyDown(timeInput, { key: 'Enter', code: 'Enter' })
 
-    await waitFor(() => {
-      const errorMessages = screen.queryByText('whoops')
+    const errorMessages = screen.queryByText('whoops')
 
-      expect(errorMessages).not.toBeInTheDocument()
-      expect(invalidDateTimeMessage).not.toHaveBeenCalled()
-    })
+    expect(errorMessages).not.toBeInTheDocument()
+    expect(invalidDateTimeMessage).not.toHaveBeenCalled()
   })
 
-  it('should fire the onChange event when TimeInput value changes', async () => {
+  it('should fire the onChange event when TimeInput value changes', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
 
     const locale = 'en-US'
@@ -237,10 +240,12 @@ describe('<DateTimeInput />', () => {
     fireEvent.keyDown(timeInput, { key: 'Enter', code: 'Enter' })
     fireEvent.blur(timeInput)
 
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalled()
-      expect(onChange.mock.calls[0][0].target.value).toMatch('3:00 AM')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onChange).toHaveBeenCalled()
+    expect(onChange.mock.calls[0][0].target.value).toMatch('3:00 AM')
   })
 
   it('should show correct message when TimeInput value changes', () => {
@@ -415,7 +420,8 @@ describe('<DateTimeInput />', () => {
     expect(container).toHaveTextContent('May 1, 2017 7:30 PM')
   })
 
-  it('should show error message if initial value is invalid', async () => {
+  it('should show error message if initial value is invalid', () => {
+    vi.useFakeTimers()
     const { container } = render(
       <DateTimeInput
         description="date_time"
@@ -430,12 +436,15 @@ describe('<DateTimeInput />', () => {
     const dateInput = screen.getByLabelText('date-input')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('whoops')
   })
 
-  it('should show error message if initial defaultValue is invalid', async () => {
+  it('should show error message if initial defaultValue is invalid', () => {
+    vi.useFakeTimers()
     const { container } = render(
       <DateTimeInput
         description="date_time"
@@ -450,12 +459,15 @@ describe('<DateTimeInput />', () => {
     const dateInput = screen.getByLabelText('date-input')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('whoops')
   })
 
-  it('should update error message when value is invalid', async () => {
+  it('should update error message when value is invalid', () => {
+    vi.useFakeTimers()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -477,12 +489,15 @@ describe('<DateTimeInput />', () => {
     const dateInput = screen.getByLabelText('date-input')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('whoops')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('whoops')
   })
 
-  it('should show supplied message', async () => {
+  it('should show supplied message', () => {
+    vi.useFakeTimers()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -509,13 +524,16 @@ describe('<DateTimeInput />', () => {
     const dateInput = screen.getByLabelText('date-input')
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
-      expect(container).toHaveTextContent('message_text')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+    expect(container).toHaveTextContent('message_text')
   })
 
-  it('should not show built in message when `showMessages` is false', async () => {
+  it('should not show built in message when `showMessages` is false', () => {
+    vi.useFakeTimers()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -546,10 +564,12 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(container).not.toHaveTextContent('2017')
-      expect(container).toHaveTextContent('message_text')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).not.toHaveTextContent('2017')
+    expect(container).toHaveTextContent('message_text')
 
     rerender(
       <DateTimeInput
@@ -561,10 +581,12 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.blur(screen.getByLabelText('date-input'))
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('2017')
-      expect(container).toHaveTextContent('message_text')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('2017')
+    expect(container).toHaveTextContent('message_text')
   })
 
   it('should read locale and timezone from context', () => {
@@ -589,7 +611,8 @@ describe('<DateTimeInput />', () => {
     expect(container).toHaveTextContent('lundi 1 mai 2017 20:30')
   })
 
-  it('should format date according to dateFormat', async () => {
+  it('should format date according to dateFormat', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const props = {
@@ -617,12 +640,15 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.blur(screen.getByLabelText('date-input'))
 
-    await waitFor(() => {
-      expect(dateInput).toHaveValue('2017 May')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(dateInput).toHaveValue('2017 May')
   })
 
-  it('should format bottom message according to messageFormat', async () => {
+  it('should format bottom message according to messageFormat', () => {
+    vi.useFakeTimers()
     const onChange = vi.fn()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const props = {
@@ -644,12 +670,15 @@ describe('<DateTimeInput />', () => {
     rerender(<DateTimeInput {...props} messageFormat="l, LT" />)
     fireEvent.blur(screen.getByLabelText('date-input'))
 
-    await waitFor(() => {
-      expect(container).toHaveTextContent('5/1/2017, 1:30 PM')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(container).toHaveTextContent('5/1/2017, 1:30 PM')
   })
 
-  it('should update Date and Time inputs when value prop changes', async () => {
+  it('should update Date and Time inputs when value prop changes', () => {
+    vi.useFakeTimers()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -676,13 +705,16 @@ describe('<DateTimeInput />', () => {
 
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(dateInput).toHaveValue(newDateTime.format('LL'))
-      expect(timeInput).toHaveValue(newDateTime.format('LT'))
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(dateInput).toHaveValue(newDateTime.format('LL'))
+    expect(timeInput).toHaveValue(newDateTime.format('LT'))
   })
 
-  it("should throw warning if date select and initialTimeForNewDate prop's value is not HH:MM", async () => {
+  it("should throw warning if date select and initialTimeForNewDate prop's value is not HH:MM", () => {
+    vi.useFakeTimers()
     const initialTimeForNewDate = 'WRONG_FORMAT'
 
     render(
@@ -705,14 +737,17 @@ describe('<DateTimeInput />', () => {
     fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(consoleErrorMock.mock.calls[0][0]).toBe(
-        `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
-      )
+    act(() => {
+      vi.advanceTimersByTime(100)
     })
+
+    expect(consoleErrorMock.mock.calls[0][0]).toBe(
+      `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
+    )
   })
 
-  it('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', async () => {
+  it('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', () => {
+    vi.useFakeTimers()
     const initialTimeForNewDate = '99:99'
 
     render(
@@ -734,16 +769,18 @@ describe('<DateTimeInput />', () => {
     fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(consoleErrorMock.mock.calls[0][0]).toEqual(
-        expect.stringContaining(
-          `Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
-        )
-      )
+    act(() => {
+      vi.advanceTimersByTime(100)
     })
+
+    expect(consoleErrorMock.mock.calls[0][0]).toEqual(
+      expect.stringContaining(
+        `Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
+      )
+    )
   })
 
-  it('should initial render prefer defaultValue time over initialTimeForNewDate', async () => {
+  it('should initial render prefer defaultValue time over initialTimeForNewDate', () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const initialTimeForNewDate = '16:16'

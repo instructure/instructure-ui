@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -102,7 +101,8 @@ describe('<Drilldown />', () => {
       expect(notAllowedChild).not.toBeInTheDocument()
     })
 
-    it('should not crash for weird option ids', async () => {
+    it('should not crash for weird option ids', () => {
+      vi.useFakeTimers()
       const onSelect = vi.fn()
       const weirdID = 'some"_weird!@#$%^&*()\\|`id'
       render(
@@ -122,11 +122,13 @@ describe('<Drilldown />', () => {
         </Drilldown>
       )
       const option_1 = screen.getByTestId(weirdID + 'opt_1')
-      await userEvent.click(option_1)
-
-      await waitFor(() => {
-        expect(onSelect).toHaveBeenCalled()
+      fireEvent.click(option_1, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onSelect).toHaveBeenCalled()
+      vi.useRealTimers()
     })
   })
 
@@ -184,7 +186,8 @@ describe('<Drilldown />', () => {
       })
     })
 
-    it('should not allow selection if the main Drilldown is disabled', async () => {
+    it('should not allow selection if the main Drilldown is disabled', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0" disabled>
           <Drilldown.Page id="page0">
@@ -199,12 +202,17 @@ describe('<Drilldown />', () => {
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
 
-      await userEvent.click(optionContent)
+      fireEvent.click(optionContent, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
 
       expect(optionItemContainer).toHaveAttribute('aria-checked', 'false')
+      vi.useRealTimers()
     })
 
-    it('should always allow back navigation even if the page is disabled', async () => {
+    it('should always allow back navigation even if the page is disabled', () => {
+      vi.useFakeTimers()
       render(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle="First Page">
@@ -212,19 +220,32 @@ describe('<Drilldown />', () => {
               Go to Disabled Page
             </Drilldown.Option>
           </Drilldown.Page>
-          <Drilldown.Page id="page1" renderTitle="Disabled Page" disabled>
-          </Drilldown.Page>
+          <Drilldown.Page
+            id="page1"
+            renderTitle="Disabled Page"
+            disabled
+          ></Drilldown.Page>
         </Drilldown>
       )
-    
+
       // 1. Navigate to the disabled page
-      await userEvent.click(screen.getByText('Go to Disabled Page'))
+      fireEvent.click(screen.getByText('Go to Disabled Page'), {
+        button: 0,
+        detail: 1
+      })
+      act(() => {
+        vi.runAllTimers()
+      })
       expect(screen.getByText('Disabled Page')).toBeInTheDocument()
-    
-      await userEvent.click(screen.getByText('Back'))
-    
+
+      fireEvent.click(screen.getByText('Back'), { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
+      })
+
       // 4. Verify we have successfully navigated back
       expect(screen.getByText('First Page')).toBeInTheDocument()
+      vi.useRealTimers()
     })
   })
 
@@ -470,7 +491,8 @@ describe('<Drilldown />', () => {
   })
 
   describe('onSelect prop', () => {
-    it('should fire when option is selected', async () => {
+    it('should fire when option is selected', () => {
+      vi.useFakeTimers()
       const onSelect = vi.fn()
       render(
         <Drilldown rootPageId="page0" onSelect={onSelect}>
@@ -490,29 +512,32 @@ describe('<Drilldown />', () => {
       )
       const option_1 = screen.getByTestId('opt_1')
 
-      await userEvent.click(option_1)
-
-      await waitFor(() => {
-        expect(onSelect).toHaveBeenCalled()
-
-        const args = onSelect.mock.calls[0][1]
-        const event = onSelect.mock.calls[0][0]
-
-        expect(args.value).toBe('opt_1')
-        expect(args.isSelected).toBe(true)
-
-        expect(args.selectedOption.props).toHaveProperty('id', 'opt_1')
-        expect(args.selectedOption.props).toHaveProperty('role', 'menuitem')
-        expect(args.selectedOption.props).toHaveProperty('value', 'opt_1')
-
-        expect(args.drilldown.props).toHaveProperty('role', 'menu')
-        expect(args.drilldown.hide).toBeInstanceOf(Function)
-
-        expect(event.target).toBe(option_1)
+      fireEvent.click(option_1, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onSelect).toHaveBeenCalled()
+
+      const args = onSelect.mock.calls[0][1]
+      const event = onSelect.mock.calls[0][0]
+
+      expect(args.value).toBe('opt_1')
+      expect(args.isSelected).toBe(true)
+
+      expect(args.selectedOption.props).toHaveProperty('id', 'opt_1')
+      expect(args.selectedOption.props).toHaveProperty('role', 'menuitem')
+      expect(args.selectedOption.props).toHaveProperty('value', 'opt_1')
+
+      expect(args.drilldown.props).toHaveProperty('role', 'menu')
+      expect(args.drilldown.hide).toBeInstanceOf(Function)
+
+      expect(event.target).toBe(option_1)
+      vi.useRealTimers()
     })
 
-    it('should not fire when drilldown is disabled', async () => {
+    it('should not fire when drilldown is disabled', () => {
+      vi.useFakeTimers()
       const onSelect = vi.fn()
       render(
         <Drilldown rootPageId="page0" onSelect={onSelect} disabled>
@@ -531,11 +556,13 @@ describe('<Drilldown />', () => {
       )
       const option_1 = screen.getByTestId('opt_1')
 
-      await userEvent.click(option_1)
-
-      await waitFor(() => {
-        expect(onSelect).not.toHaveBeenCalled()
+      fireEvent.click(option_1, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onSelect).not.toHaveBeenCalled()
+      vi.useRealTimers()
     })
   })
 
@@ -553,7 +580,8 @@ describe('<Drilldown />', () => {
       expect(option_0).not.toBeInTheDocument()
     })
 
-    it('should render into a mountNode', async () => {
+    it('should render into a mountNode', () => {
+      vi.useFakeTimers()
       const container = document.createElement('div')
       container.setAttribute('data-testid', 'container')
       document.body.appendChild(container)
@@ -574,13 +602,12 @@ describe('<Drilldown />', () => {
 
       expect(optionsContainer).not.toHaveTextContent('Option 0')
 
-      await userEvent.click(trigger)
+      fireEvent.click(trigger, { button: 0, detail: 1 })
+      vi.advanceTimersByTime(0)
 
-      await waitFor(() => {
-        const updatedOptionsContainer = screen.getByTestId('container')
-
-        expect(updatedOptionsContainer).toHaveTextContent('Option 0')
-      })
+      const updatedOptionsContainer = screen.getByTestId('container')
+      expect(updatedOptionsContainer).toHaveTextContent('Option 0')
+      vi.useRealTimers()
     })
 
     it('should have an aria-haspopup attribute', async () => {
@@ -596,7 +623,8 @@ describe('<Drilldown />', () => {
       expect(trigger).toHaveAttribute('aria-haspopup')
     })
 
-    it('should call onToggle when Drilldown is opened', async () => {
+    it('should call onToggle when Drilldown is opened', () => {
+      vi.useFakeTimers()
       const onToggle = vi.fn()
       render(
         <Drilldown
@@ -612,25 +640,26 @@ describe('<Drilldown />', () => {
       )
       const trigger = screen.getByRole('button')
 
-      await userEvent.click(trigger)
+      fireEvent.click(trigger, { button: 0, detail: 1 })
+      vi.advanceTimersByTime(0)
 
-      await waitFor(() => {
-        expect(onToggle).toHaveBeenCalled()
+      expect(onToggle).toHaveBeenCalled()
 
-        const args = onToggle.mock.calls[0][1]
+      const args = onToggle.mock.calls[0][1]
 
-        expect(args).toHaveProperty('shown', true)
-        expect(args).toHaveProperty('pageHistory', ['page0'])
+      expect(args).toHaveProperty('shown', true)
+      expect(args).toHaveProperty('pageHistory', ['page0'])
 
-        expect(args.goToPage).toBeInstanceOf(Function)
-        expect(args.goToPreviousPage).toBeInstanceOf(Function)
+      expect(args.goToPage).toBeInstanceOf(Function)
+      expect(args.goToPreviousPage).toBeInstanceOf(Function)
 
-        expect(args.drilldown.props).toHaveProperty('role', 'menu')
-        expect(args.drilldown.props).toHaveProperty('data-testid', 'drilldown')
-      })
+      expect(args.drilldown.props).toHaveProperty('role', 'menu')
+      expect(args.drilldown.props).toHaveProperty('data-testid', 'drilldown')
+      vi.useRealTimers()
     })
 
-    it('should call onToggle when Drilldown is closed', async () => {
+    it('should call onToggle when Drilldown is closed', () => {
+      vi.useFakeTimers()
       const onToggle = vi.fn()
       render(
         <Drilldown
@@ -646,20 +675,22 @@ describe('<Drilldown />', () => {
       )
       const trigger = screen.getByRole('button')
 
-      await userEvent.click(trigger)
-
-      await waitFor(() => {
-        expect(onToggle).toHaveBeenCalled()
-
-        const args = onToggle.mock.calls[0][1]
-
-        expect(args).toHaveProperty('shown', false)
-        expect(args).toHaveProperty('pageHistory', ['page0'])
-        expect(args).toHaveProperty('drilldown')
-
-        expect(args.goToPage).toBeInstanceOf(Function)
-        expect(args.goToPreviousPage).toBeInstanceOf(Function)
+      fireEvent.click(trigger, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onToggle).toHaveBeenCalled()
+
+      const args = onToggle.mock.calls[0][1]
+
+      expect(args).toHaveProperty('shown', false)
+      expect(args).toHaveProperty('pageHistory', ['page0'])
+      expect(args).toHaveProperty('drilldown')
+
+      expect(args.goToPage).toBeInstanceOf(Function)
+      expect(args.goToPreviousPage).toBeInstanceOf(Function)
+      vi.useRealTimers()
     })
   })
 

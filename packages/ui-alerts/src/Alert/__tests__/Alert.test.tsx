@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
@@ -80,17 +80,16 @@ describe('<Alert />', () => {
         variant="success"
         renderCloseButtonLabel={<div>Close</div>}
         onDismiss={onDismiss}
+        transition="none"
       >
         Success: Sample alert text.
       </Alert>
     )
     const closeButton = screen.getByRole('button')
 
-    userEvent.click(closeButton)
+    await userEvent.click(closeButton)
 
-    await waitFor(() => {
-      expect(onDismiss).toHaveBeenCalled()
-    })
+    expect(onDismiss).toHaveBeenCalled()
   })
 
   const iconComponentsVariants: Record<
@@ -191,23 +190,28 @@ describe('<Alert />', () => {
       expect(liveRegion.children.length).toBe(1)
     })
 
-    it('should warn if `liveRegion` is not defined', async () => {
+    it('should warn if `liveRegion` is not defined', () => {
+      vi.useFakeTimers()
       const consoleWarningSpy = vi
         .spyOn(console, 'error')
         .mockImplementation(() => {})
       const warning =
         "Warning: [Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'."
-      render(
-        <Alert variant="success" screenReaderOnly={true}>
-          Success: Sample alert text.
-        </Alert>
+
+      act(() => {
+        render(
+          <Alert variant="success" screenReaderOnly={true}>
+            Success: Sample alert text.
+          </Alert>
+        )
+        vi.runAllTimers()
+      })
+
+      expect(consoleWarningSpy.mock.calls[0][0]).toEqual(
+        expect.stringContaining(warning)
       )
 
-      await waitFor(() => {
-        expect(consoleWarningSpy.mock.calls[0][0]).toEqual(
-          expect.stringContaining(warning)
-        )
-      })
+      vi.useRealTimers()
     })
 
     it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
@@ -228,7 +232,8 @@ describe('<Alert />', () => {
       expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
     })
 
-    it('should close when told to, with transition', async () => {
+    it('should close when told to, with transition', () => {
+      vi.useFakeTimers()
       const liveRegion = document.getElementById('_alertLiveRegion')!
       const { rerender } = render(
         <Alert variant="success" liveRegion={() => liveRegion}>
@@ -239,18 +244,22 @@ describe('<Alert />', () => {
       expect(liveRegion.children.length).toBe(1)
 
       //set open to false
-      rerender(
-        <Alert variant="success" open={false} liveRegion={() => liveRegion}>
-          Success: Sample alert text.
-        </Alert>
-      )
-
-      await waitFor(() => {
-        expect(liveRegion.children.length).toBe(0)
+      act(() => {
+        rerender(
+          <Alert variant="success" open={false} liveRegion={() => liveRegion}>
+            Success: Sample alert text.
+          </Alert>
+        )
+        vi.runAllTimers()
       })
+
+      expect(liveRegion.children.length).toBe(0)
+
+      vi.useRealTimers()
     })
 
-    it('should close when told to, without transition', async () => {
+    it('should close when told to, without transition', () => {
+      vi.useFakeTimers()
       const liveRegion = document.getElementById('_alertLiveRegion')!
       const { rerender, container } = render(
         <Alert
@@ -265,21 +274,26 @@ describe('<Alert />', () => {
       expect(liveRegion.children.length).toBe(1)
 
       //set open to false
-      rerender(
-        <Alert
-          open={false}
-          variant="success"
-          transition="none"
-          liveRegion={() => liveRegion}
-        >
-          Success: Sample alert text.
-        </Alert>
-      )
-
-      await waitFor(() => {
-        expect(container).not.toHaveTextContent('Success: Sample alert text.')
-        expect(liveRegion.children.length).toBe(0)
+      act(() => {
+        rerender(
+          <Alert
+            open={false}
+            variant="success"
+            transition="none"
+            liveRegion={() => liveRegion}
+          >
+            Success: Sample alert text.
+          </Alert>
+        )
+        act(() => {
+          vi.runAllTimers()
+        })
       })
+
+      expect(container).not.toHaveTextContent('Success: Sample alert text.')
+      expect(liveRegion.children.length).toBe(0)
+
+      vi.useRealTimers()
     })
   })
 })

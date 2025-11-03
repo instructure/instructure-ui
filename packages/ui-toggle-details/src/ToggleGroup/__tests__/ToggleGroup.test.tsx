@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
@@ -118,7 +117,8 @@ describe('<ToggleGroup />', () => {
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('should toggle on click events', async () => {
+  it('should toggle on click events', () => {
+    vi.useFakeTimers()
     const { container } = render(
       <ToggleGroup
         transition={false}
@@ -132,14 +132,18 @@ describe('<ToggleGroup />', () => {
 
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
 
-    await userEvent.click(toggle)
-
-    await waitFor(() => {
-      expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    fireEvent.click(toggle, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+
+    vi.useRealTimers()
   })
 
-  it('should call onToggle on click events', async () => {
+  it('should call onToggle on click events', () => {
+    vi.useFakeTimers()
     const onToggle = vi.fn()
 
     const { container } = render(
@@ -155,18 +159,22 @@ describe('<ToggleGroup />', () => {
     )
     const toggle = container.querySelector('button')!
 
-    await userEvent.click(toggle)
-
-    await waitFor(() => {
-      const args = onToggle.mock.calls[0]
-
-      expect(onToggle).toHaveBeenCalledTimes(1)
-      expect(args[0].type).toBe('click')
-      expect(args[1]).toBe(true)
+    fireEvent.click(toggle, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const args = onToggle.mock.calls[0]
+
+    expect(onToggle).toHaveBeenCalledTimes(1)
+    expect(args[0].type).toBe('click')
+    expect(args[1]).toBe(true)
+
+    vi.useRealTimers()
   })
 
-  it('should update the toggle screenreader label based on the expanded state', async () => {
+  it('should update the toggle screenreader label based on the expanded state', () => {
+    vi.useFakeTimers()
     const { container } = render(
       <ToggleGroup
         transition={false}
@@ -183,14 +191,18 @@ describe('<ToggleGroup />', () => {
 
     expect(scrContent).toHaveTextContent('Show content')
 
-    await userEvent.click(toggle)
-
-    await waitFor(() => {
-      expect(scrContent).toHaveTextContent('Hide content')
+    fireEvent.click(toggle, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(scrContent).toHaveTextContent('Hide content')
+
+    vi.useRealTimers()
   })
 
-  it('should accept custom icons', async () => {
+  it('should accept custom icons', () => {
+    vi.useFakeTimers()
     const Icon = (
       <svg height="50" width="50">
         <title>Icon collapsed</title>
@@ -221,11 +233,14 @@ describe('<ToggleGroup />', () => {
 
     expect(svg).toHaveTextContent('Icon collapsed')
 
-    await userEvent.click(toggle)
-
-    await waitFor(() => {
-      expect(svg).toHaveTextContent('Icon expanded')
+    fireEvent.click(toggle, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(svg).toHaveTextContent('Icon expanded')
+
+    vi.useRealTimers()
   })
 
   it('should meet a11y standards', async () => {

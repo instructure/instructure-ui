@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -91,10 +91,8 @@ describe('<DateInput />', () => {
       '[id^="Selectable_"][id$="-list"]'
     )
 
-    await waitFor(() => {
-      expect(calendarWrapper).toBeInTheDocument()
-      expect(calendarTable).toBeInTheDocument()
-    })
+    expect(calendarWrapper).toBeInTheDocument()
+    expect(calendarTable).toBeInTheDocument()
   })
 
   describe('input', () => {
@@ -148,12 +146,10 @@ describe('<DateInput />', () => {
       fireEvent.keyDown(dateInput, { key: 'Enter', code: 'Enter' })
       fireEvent.blur(dateInput)
 
-      await waitFor(() => {
-        expect(onChange).toHaveBeenCalledTimes(1)
-        expect(onChange.mock.calls[0][1].value).toEqual(
-          expect.stringContaining(value)
-        )
-      })
+      expect(onChange).toHaveBeenCalledTimes(1)
+      expect(onChange.mock.calls[0][1].value).toEqual(
+        expect.stringContaining(value)
+      )
     })
 
     it('should call onBlur', () => {
@@ -200,9 +196,7 @@ describe('<DateInput />', () => {
 
       const dateInputAfterUpdate = screen.getByLabelText('Choose date')
 
-      await waitFor(() => {
-        expect(dateInputAfterUpdate).toHaveAttribute('readonly')
-      })
+      expect(dateInputAfterUpdate).toHaveAttribute('readonly')
     })
 
     it('should correctly set disabled', () => {
@@ -355,11 +349,9 @@ describe('<DateInput />', () => {
         '[id^="Selectable_"][id$="-list"]'
       )
 
-      await waitFor(() => {
-        expect(dateInputAfterUpdate).toBeInTheDocument()
-        expect(calendarTableAfterUpdate).toBeInTheDocument()
-        expect(calendarWrapperAfterUpdate).toBeInTheDocument()
-      })
+      expect(dateInputAfterUpdate).toBeInTheDocument()
+      expect(calendarTableAfterUpdate).toBeInTheDocument()
+      expect(calendarWrapperAfterUpdate).toBeInTheDocument()
     })
 
     describe('onRequestShowCalendar', () => {
@@ -383,9 +375,7 @@ describe('<DateInput />', () => {
 
         await userEvent.click(dateInput!)
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).toHaveBeenCalled()
-        })
+        expect(onRequestShowCalendar).toHaveBeenCalled()
       })
 
       it('should call onRequestShowCalendar when input is clicked', async () => {
@@ -404,9 +394,7 @@ describe('<DateInput />', () => {
 
         await userEvent.click(dateInput!)
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
       })
 
       it('should call onRequestShowCalendar when input receives space event', async () => {
@@ -425,9 +413,7 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{space}')
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
       })
 
       it('should not call onRequestShowCalendar when input receives space event if calendar is already showing', async () => {
@@ -447,9 +433,7 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{space}')
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).not.toHaveBeenCalled()
-        })
+        expect(onRequestShowCalendar).not.toHaveBeenCalled()
       })
 
       it('should call onRequestShowCalendar when input receives down arrow event', async () => {
@@ -468,9 +452,7 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{arrowdown}')
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
       })
 
       it('should not call onRequestShowCalendar when input receives down arrow event if calendar is already showing', async () => {
@@ -490,9 +472,7 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{arrowdown}')
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).not.toHaveBeenCalled()
-        })
+        expect(onRequestShowCalendar).not.toHaveBeenCalled()
       })
 
       it('should call onRequestShowCalendar when input receives up arrow event', async () => {
@@ -511,9 +491,7 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{arrowup}')
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
       })
 
       it('should not call onRequestShowCalendar when input receives up arrow event if calendar is already showing', async () => {
@@ -533,9 +511,7 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{arrowup}')
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).not.toHaveBeenCalled()
-        })
+        expect(onRequestShowCalendar).not.toHaveBeenCalled()
       })
 
       it('should call onRequestShowCalendar when input receives onChange event', async () => {
@@ -554,9 +530,7 @@ describe('<DateInput />', () => {
 
         fireEvent.change(dateInput, { target: { value: 'January 5' } })
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowCalendar).toHaveBeenCalledTimes(1)
       })
 
       it('should not call onRequestShowCalendar when disabled', async () => {
@@ -582,9 +556,7 @@ describe('<DateInput />', () => {
           { skipClick: true }
         )
 
-        await waitFor(() => {
-          expect(onRequestShowCalendar).not.toHaveBeenCalled()
-        })
+        expect(onRequestShowCalendar).not.toHaveBeenCalled()
       })
     })
 
@@ -608,10 +580,8 @@ describe('<DateInput />', () => {
 
         fireEvent.blur(dateInput)
 
-        await waitFor(() => {
-          expect(onRequestHideCalendar).toHaveBeenCalledTimes(1)
-          expect(onRequestValidateDate).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestHideCalendar).toHaveBeenCalledTimes(1)
+        expect(onRequestValidateDate).toHaveBeenCalledTimes(1)
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives esc event', async () => {
@@ -633,10 +603,8 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{esc}')
 
-        await waitFor(() => {
-          expect(onRequestHideCalendar).toHaveBeenCalledTimes(1)
-          expect(onRequestValidateDate).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestHideCalendar).toHaveBeenCalledTimes(1)
+        expect(onRequestValidateDate).toHaveBeenCalledTimes(1)
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives enter event', async () => {
@@ -665,10 +633,8 @@ describe('<DateInput />', () => {
 
         await userEvent.type(dateInput, '{enter}')
 
-        await waitFor(() => {
-          expect(onRequestHideCalendar).toHaveBeenCalledTimes(1)
-          expect(onRequestValidateDate).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestHideCalendar).toHaveBeenCalledTimes(1)
+        expect(onRequestValidateDate).toHaveBeenCalledTimes(1)
       })
     })
 
@@ -839,10 +805,8 @@ describe('<DateInput />', () => {
       )
       const calendarButtons = calendarWrapper!.querySelectorAll('button')
 
-      await waitFor(() => {
-        expect(calendarButtons).toHaveLength(44)
-        expect(calendarDays).toHaveLength(42)
-      })
+      expect(calendarButtons).toHaveLength(44)
+      expect(calendarDays).toHaveLength(42)
     })
   })
 })

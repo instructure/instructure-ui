@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
@@ -38,7 +38,8 @@ describe('<Item />', () => {
     expect(item).toHaveTextContent('Flex item 1')
   })
 
-  it('should support an elementRef prop', async () => {
+  it('should support an elementRef prop', () => {
+    vi.useFakeTimers()
     const elementRef = vi.fn()
 
     const { container } = render(
@@ -46,9 +47,11 @@ describe('<Item />', () => {
     )
     const item = container.querySelector('[class*="-flexItem"]')
 
-    await waitFor(() => {
-      expect(elementRef).toHaveBeenCalledWith(item)
+    act(() => {
+      vi.runAllTimers()
     })
+    expect(elementRef).toHaveBeenCalledWith(item)
+    vi.useRealTimers()
   })
 
   it('should meet a11y standards', async () => {

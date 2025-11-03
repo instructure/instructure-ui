@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
@@ -42,6 +42,14 @@ import type { TopNavBarItemProps } from '../../TopNavBarItem/props'
 describe('<TopNavBarMenuItems />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
@@ -142,6 +150,9 @@ describe('<TopNavBarMenuItems />', () => {
 
     // TODO: this test is super flaky, breaks even with the try catch fix below. Turned it off for now, try to fix later.
     it('should render submenu as subpages in hidden items', async () => {
+      // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+      vi.useRealTimers()
+
       render(
         <div style={{ width: '400px' }}>
           {getMenuItems({
@@ -163,11 +174,14 @@ describe('<TopNavBarMenuItems />', () => {
       )
       const menuTriggerButton = screen.getByRole('button')
 
-      userEvent.click(menuTriggerButton)
+      await userEvent.click(menuTriggerButton)
 
-      await waitFor(() => {
-        expect(menuTriggerButton).toBeInTheDocument()
-      })
+      // Wait for the menu to open
+      await new Promise((resolve) => setTimeout(resolve, 100))
+
+      expect(menuTriggerButton).toBeInTheDocument()
+
+      vi.useFakeTimers()
 
       // TODO convert to e2e
       // const component = await TopNavBarMenuItemsLocator.find()
@@ -680,10 +694,12 @@ describe('<TopNavBarMenuItems />', () => {
 
   describe('should be accessible', () => {
     it('a11y', async () => {
+      vi.useRealTimers()
       const { container } = render(getMenuItems())
       const axeCheck = await runAxeCheck(container)
 
       expect(axeCheck).toBe(true)
+      vi.useFakeTimers()
     })
   })
 })

@@ -25,8 +25,7 @@
 import { useState } from 'react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { InstUISettingsProvider, WithStyleProps, useStyle } from '../index'
 
@@ -247,7 +246,9 @@ describe('useStyle', () => {
       expect(getComputedStyle(updatedComponent).color).toEqual(blue4570)
     })
 
-    it('when state is updated', async () => {
+    it('when state is updated', () => {
+      vi.useFakeTimers()
+
       render(
         <InstUISettingsProvider theme={exampleTheme}>
           <ThemedComponent />
@@ -260,13 +261,16 @@ describe('useStyle', () => {
         'rgb(255, 255, 0)'
       )
 
-      await userEvent.click(clearBackgroundButton)
-
-      await waitFor(() => {
-        expect(getComputedStyle(component).backgroundColor).toEqual(
-          'rgba(0, 0, 0, 0)'
-        )
+      act(() => {
+        fireEvent.click(clearBackgroundButton)
+        vi.runAllTimers()
       })
+
+      expect(getComputedStyle(component).backgroundColor).toEqual(
+        'rgba(0, 0, 0, 0)'
+      )
+
+      vi.useRealTimers()
     })
   })
 })

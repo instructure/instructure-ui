@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Tab } from '../index'
@@ -119,7 +118,8 @@ describe('<Tabs.Tab />', () => {
     expect(tab).not.toHaveAttribute('tabindex')
   })
 
-  it('should call onClick when clicked', async () => {
+  it('should call onClick when clicked', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     const index = 2
 
@@ -130,17 +130,21 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = screen.getByRole('tab')
 
-    await userEvent.click(tab)
-
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalled()
-
-      const args = onClick.mock.calls[0][1]
-      expect(args).toHaveProperty('index', index)
+    fireEvent.click(tab, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).toHaveBeenCalled()
+
+    const args = onClick.mock.calls[0][1]
+    expect(args).toHaveProperty('index', index)
+
+    vi.useRealTimers()
   })
 
-  it('should NOT call onClick when clicked and tab is disabled', async () => {
+  it('should NOT call onClick when clicked and tab is disabled', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
 
     render(
@@ -150,14 +154,18 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = screen.getByRole('tab')
 
-    await userEvent.click(tab)
-
-    await waitFor(() => {
-      expect(onClick).not.toHaveBeenCalled()
+    fireEvent.click(tab, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).not.toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 
-  it('should call onKeyDown when keys are pressed and tab is selected', async () => {
+  it('should call onKeyDown when keys are pressed and tab is selected', () => {
+    vi.useFakeTimers()
     const onKeyDown = vi.fn()
     const index = 2
 
@@ -174,17 +182,22 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = screen.getByRole('tab')
 
-    await userEvent.type(tab, '{enter}')
-
-    await waitFor(() => {
-      expect(onKeyDown).toHaveBeenCalled()
-
-      const args = onKeyDown.mock.calls[0][1]
-      expect(args).toHaveProperty('index', index)
+    fireEvent.keyDown(tab, { key: 'Enter' })
+    fireEvent.keyUp(tab, { key: 'Enter' })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onKeyDown).toHaveBeenCalled()
+
+    const args = onKeyDown.mock.calls[0][1]
+    expect(args).toHaveProperty('index', index)
+
+    vi.useRealTimers()
   })
 
-  it('should NOT call onKeyDown when keys are pressed and tab is disabled', async () => {
+  it('should NOT call onKeyDown when keys are pressed and tab is disabled', () => {
+    vi.useFakeTimers()
     const onKeyDown = vi.fn()
 
     render(
@@ -200,10 +213,14 @@ describe('<Tabs.Tab />', () => {
     )
     const tab = screen.getByRole('tab')
 
-    await userEvent.type(tab, '{enter}')
-
-    await waitFor(() => {
-      expect(onKeyDown).not.toHaveBeenCalled()
+    fireEvent.keyDown(tab, { key: 'Enter' })
+    fireEvent.keyUp(tab, { key: 'Enter' })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onKeyDown).not.toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 })

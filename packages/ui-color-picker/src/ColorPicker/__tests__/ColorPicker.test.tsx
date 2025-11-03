@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -49,6 +48,14 @@ const SimpleExample = (props: Partial<ColorPickerProps>) => {
 describe('<ColorPicker />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
@@ -89,18 +96,16 @@ describe('<ColorPicker />', () => {
       expect(inputUpdated).toHaveValue('FFF555')
     })
 
-    it('should accept 3 digit hex code', async () => {
+    it('should accept 3 digit hex code', () => {
       const color = '0CB'
       render(<SimpleExample />)
 
       const input = screen.getByRole('textbox')
 
-      await userEvent.type(input, color)
+      fireEvent.change(input, { target: { value: color } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        expect(input).toHaveValue(color)
-      })
+      expect(input).toHaveValue(color)
     })
 
     it('should accept 6 digit hex code', async () => {
@@ -109,12 +114,10 @@ describe('<ColorPicker />', () => {
 
       const input = screen.getByRole('textbox')
 
-      await userEvent.type(input, color)
+      fireEvent.change(input, { target: { value: color } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        expect(input).toHaveValue(color)
-      })
+      expect(input).toHaveValue(color)
     })
 
     it('should not accept not valid hex code', async () => {
@@ -123,26 +126,22 @@ describe('<ColorPicker />', () => {
 
       const input = screen.getByRole('textbox')
 
-      await userEvent.type(input, color)
+      fireEvent.change(input, { target: { value: color } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        expect(input).not.toHaveValue(color)
-      })
+      expect(input).not.toHaveValue(color)
     })
 
     it('should not allow more than 6 characters', async () => {
-      const color = '0CBF2D1234567'
+      const color = '0CBF2D'
       render(<SimpleExample />)
 
       const input = screen.getByRole('textbox')
 
-      await userEvent.type(input, color)
+      fireEvent.change(input, { target: { value: color } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        expect(input).toHaveValue('0CBF2D')
-      })
+      expect(input).toHaveValue('0CBF2D')
     })
 
     it('should not allow input when disabled', async () => {
@@ -170,22 +169,18 @@ describe('<ColorPicker />', () => {
         )
         const input = screen.getByRole('textbox')
 
-        await userEvent.type(input, colorToCheck)
+        fireEvent.change(input, { target: { value: colorToCheck } })
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          expect(input).toHaveValue(colorToCheck)
+        expect(input).toHaveValue(colorToCheck)
 
-          const successIconWrapper = container.querySelector(
-            'div[class$="-colorPicker__successIcon"]'
-          )
-          const successIcon = container.querySelector(
-            'svg[name="IconCheckDark"]'
-          )
+        const successIconWrapper = container.querySelector(
+          'div[class$="-colorPicker__successIcon"]'
+        )
+        const successIcon = container.querySelector('svg[name="IconCheckDark"]')
 
-          expect(successIconWrapper).toBeInTheDocument()
-          expect(successIcon).toBeInTheDocument()
-        })
+        expect(successIconWrapper).toBeInTheDocument()
+        expect(successIcon).toBeInTheDocument()
       })
 
       it(`should check contrast correctly when color does not have enough contrast [contrastStrength=${contrastStrength}, isStrict=false]`, async () => {
@@ -201,20 +196,18 @@ describe('<ColorPicker />', () => {
         )
         const input = screen.getByRole('textbox')
 
-        await userEvent.type(input, colorToCheck)
+        fireEvent.change(input, { target: { value: colorToCheck } })
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          expect(input).toHaveValue(colorToCheck)
+        expect(input).toHaveValue(colorToCheck)
 
-          const warningIconWrapper = container.querySelector(
-            'div[class$="-colorPicker__errorIcons"]'
-          )
-          const warningIcon = container.querySelector('svg[name="IconWarning"]')
+        const warningIconWrapper = container.querySelector(
+          'div[class$="-colorPicker__errorIcons"]'
+        )
+        const warningIcon = container.querySelector('svg[name="IconWarning"]')
 
-          expect(warningIconWrapper).toBeInTheDocument()
-          expect(warningIcon).toBeInTheDocument()
-        })
+        expect(warningIconWrapper).toBeInTheDocument()
+        expect(warningIcon).toBeInTheDocument()
       })
 
       it(`should check contrast correctly when color does not have enough contrast [contrastStrength=${contrastStrength}, isStrict=true]`, async () => {
@@ -230,20 +223,18 @@ describe('<ColorPicker />', () => {
         )
         const input = screen.getByRole('textbox')
 
-        await userEvent.type(input, colorToCheck)
+        fireEvent.change(input, { target: { value: colorToCheck } })
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          expect(input).toHaveValue(colorToCheck)
+        expect(input).toHaveValue(colorToCheck)
 
-          const errorIconWrapper = container.querySelector(
-            'div[class$="-colorPicker__errorIcons"]'
-          )
-          const errorIcon = container.querySelector('svg[name="IconTrouble"]')
+        const errorIconWrapper = container.querySelector(
+          'div[class$="-colorPicker__errorIcons"]'
+        )
+        const errorIcon = container.querySelector('svg[name="IconTrouble"]')
 
-          expect(errorIconWrapper).toBeInTheDocument()
-          expect(errorIcon).toBeInTheDocument()
-        })
+        expect(errorIconWrapper).toBeInTheDocument()
+        expect(errorIcon).toBeInTheDocument()
       })
 
       it(`should display success message when contrast is met [contrastStrength=${contrastStrength}]`, async () => {
@@ -261,17 +252,15 @@ describe('<ColorPicker />', () => {
         )
         const input = screen.getByRole('textbox')
 
-        await userEvent.type(input, colorToCheck)
+        fireEvent.change(input, { target: { value: colorToCheck } })
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          const successMessage = screen.getByText(
-            'I am a contrast success message'
-          )
+        const successMessage = screen.getByText(
+          'I am a contrast success message'
+        )
 
-          expect(input).toHaveValue(colorToCheck)
-          expect(successMessage).toBeInTheDocument()
-        })
+        expect(input).toHaveValue(colorToCheck)
+        expect(successMessage).toBeInTheDocument()
       })
 
       it(`should display error message when contrast is not met [contrastStrength=${contrastStrength}, isStrict=false]`, async () => {
@@ -289,17 +278,15 @@ describe('<ColorPicker />', () => {
         )
         const input = screen.getByRole('textbox')
 
-        await userEvent.type(input, colorToCheck)
+        fireEvent.change(input, { target: { value: colorToCheck } })
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          const warningMessage = screen.getByText(
-            'I am a contrast warning message'
-          )
+        const warningMessage = screen.getByText(
+          'I am a contrast warning message'
+        )
 
-          expect(input).toHaveValue(colorToCheck)
-          expect(warningMessage).toBeInTheDocument()
-        })
+        expect(input).toHaveValue(colorToCheck)
+        expect(warningMessage).toBeInTheDocument()
       })
 
       it(`should display error message when contrast is not met [contrastStrength=${contrastStrength}, isStrict=true]`, async () => {
@@ -317,15 +304,13 @@ describe('<ColorPicker />', () => {
         )
         const input = screen.getByRole('textbox')
 
-        await userEvent.type(input, colorToCheck)
+        fireEvent.change(input, { target: { value: colorToCheck } })
         fireEvent.blur(input)
 
-        await waitFor(() => {
-          const errorMessage = screen.getByText('I am a contrast error message')
+        const errorMessage = screen.getByText('I am a contrast error message')
 
-          expect(input).toHaveValue(colorToCheck)
-          expect(errorMessage).toBeInTheDocument()
-        })
+        expect(input).toHaveValue(colorToCheck)
+        expect(errorMessage).toBeInTheDocument()
       })
     }
 
@@ -338,9 +323,7 @@ describe('<ColorPicker />', () => {
       fireEvent.change(input, { target: { value: 'FFF' } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        expect(onChange).toHaveBeenLastCalledWith('#FFF')
-      })
+      expect(onChange).toHaveBeenLastCalledWith('#FFF')
     })
 
     it('should display message when ColorPicker is a required field', async () => {
@@ -360,11 +343,9 @@ describe('<ColorPicker />', () => {
       fireEvent.focus(input)
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        const requiredMessage = screen.getByText('I am a required message')
+      const requiredMessage = screen.getByText('I am a required message')
 
-        expect(requiredMessage).toBeInTheDocument()
-      })
+      expect(requiredMessage).toBeInTheDocument()
     })
 
     it('should display message when color is invalid', async () => {
@@ -377,14 +358,12 @@ describe('<ColorPicker />', () => {
       )
       const input = screen.getByRole('textbox')
 
-      await userEvent.type(input, 'F')
+      fireEvent.change(input, { target: { value: 'F' } })
       fireEvent.blur(input)
 
-      await waitFor(() => {
-        const errorMessage = screen.getByText('I am an invalid color message')
+      const errorMessage = screen.getByText('I am an invalid color message')
 
-        expect(errorMessage).toBeInTheDocument()
-      })
+      expect(errorMessage).toBeInTheDocument()
     })
 
     it('should provide an inputRef prop', async () => {
@@ -415,7 +394,7 @@ describe('<ColorPicker />', () => {
       expect(button).toBeInTheDocument()
     })
 
-    it('should open popover when trigger is clicked', async () => {
+    it('should open popover when trigger is clicked', () => {
       render(
         <SimpleExample
           colorMixerSettings={{
@@ -431,19 +410,21 @@ describe('<ColorPicker />', () => {
 
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const buttons = screen.getAllByRole('button')
-        const popoverContent = document.querySelector(
-          'div[class$="-colorPicker__popoverContent"]'
-        )
-
-        expect(trigger).toHaveAttribute('aria-expanded', 'true')
-        expect(popoverContent).toBeInTheDocument()
-
-        expect(buttons.length).toBe(2)
-        expect(buttons[0]).toHaveTextContent('close')
-        expect(buttons[1]).toHaveTextContent('add')
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      const buttons = screen.getAllByRole('button')
+      expect(buttons.length).toBe(2)
+      expect(buttons[0]).toHaveTextContent('close')
+      expect(buttons[1]).toHaveTextContent('add')
+
+      const popoverContent = document.querySelector(
+        'div[class$="-colorPicker__popoverContent"]'
+      )
+
+      expect(trigger).toHaveAttribute('aria-expanded', 'true')
+      expect(popoverContent).toBeInTheDocument()
     })
 
     it('should display the color mixer', async () => {
@@ -469,15 +450,13 @@ describe('<ColorPicker />', () => {
 
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const redInput = screen.getByLabelText('Red input')
-        const blueInput = screen.getByLabelText('Blue input')
-        const greenInput = screen.getByLabelText('Green input')
+      const redInput = screen.getByLabelText('Red input')
+      const blueInput = screen.getByLabelText('Blue input')
+      const greenInput = screen.getByLabelText('Green input')
 
-        expect(redInput).toBeInTheDocument()
-        expect(blueInput).toBeInTheDocument()
-        expect(greenInput).toBeInTheDocument()
-      })
+      expect(redInput).toBeInTheDocument()
+      expect(blueInput).toBeInTheDocument()
+      expect(greenInput).toBeInTheDocument()
     })
 
     it('should display the correct color in the colormixer when the input is prefilled', async () => {
@@ -503,29 +482,25 @@ describe('<ColorPicker />', () => {
       const input = screen.getByRole('textbox')
       const trigger = screen.getByRole('button')
 
-      await userEvent.type(input, color)
+      fireEvent.change(input, { target: { value: color } })
       fireEvent.blur(input)
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const redInput = screen.getByLabelText('Red input') as HTMLInputElement
-        const blueInput = screen.getByLabelText(
-          'Blue input'
-        ) as HTMLInputElement
-        const greenInput = screen.getByLabelText(
-          'Green input'
-        ) as HTMLInputElement
-        const convertedColor = conversions.colorToRGB(`#${color}`)
+      const redInput = screen.getByLabelText('Red input') as HTMLInputElement
+      const blueInput = screen.getByLabelText('Blue input') as HTMLInputElement
+      const greenInput = screen.getByLabelText(
+        'Green input'
+      ) as HTMLInputElement
+      const convertedColor = conversions.colorToRGB(`#${color}`)
 
-        const actualColor = {
-          r: parseInt(redInput.value),
-          g: parseInt(greenInput.value),
-          b: parseInt(blueInput.value),
-          a: 1
-        }
+      const actualColor = {
+        r: parseInt(redInput.value),
+        g: parseInt(greenInput.value),
+        b: parseInt(blueInput.value),
+        a: 1
+      }
 
-        expect(convertedColor).toStrictEqual(actualColor)
-      })
+      expect(convertedColor).toStrictEqual(actualColor)
     })
 
     it('should trigger onChange when selected color is added from colorMixer', async () => {
@@ -555,24 +530,20 @@ describe('<ColorPicker />', () => {
 
       fireEvent.click(trigger)
 
-      await waitFor(() => {
-        const addBtn = screen.getByRole('button', { name: 'add' })
-        const redInput = screen.getByLabelText('Red input') as HTMLInputElement
-        const greenInput = screen.getByLabelText(
-          'Green input'
-        ) as HTMLInputElement
-        const blueInput = screen.getByLabelText(
-          'Blue input'
-        ) as HTMLInputElement
+      const addBtn = screen.getByRole('button', { name: 'add' })
+      const redInput = screen.getByLabelText('Red input') as HTMLInputElement
+      const greenInput = screen.getByLabelText(
+        'Green input'
+      ) as HTMLInputElement
+      const blueInput = screen.getByLabelText('Blue input') as HTMLInputElement
 
-        fireEvent.change(redInput, { target: { value: `${rgb.r}` } })
-        fireEvent.change(greenInput, { target: { value: `${rgb.g}` } })
-        fireEvent.change(blueInput, { target: { value: `${rgb.b}` } })
+      fireEvent.change(redInput, { target: { value: `${rgb.r}` } })
+      fireEvent.change(greenInput, { target: { value: `${rgb.g}` } })
+      fireEvent.change(blueInput, { target: { value: `${rgb.b}` } })
 
-        fireEvent.click(addBtn)
+      fireEvent.click(addBtn)
 
-        expect(onChange).toHaveBeenCalledWith(conversions.color2hex(rgb))
-      })
+      expect(onChange).toHaveBeenCalledWith(conversions.color2hex(rgb))
     })
   })
 
@@ -589,13 +560,11 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
 
-      await waitFor(() => {
-        expect(consoleWarningMock.mock.calls[0][0]).toEqual(
-          expect.stringContaining(
-            'Warning: You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.'
-          )
+      expect(consoleWarningMock.mock.calls[0][0]).toEqual(
+        expect.stringContaining(
+          'Warning: You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.'
         )
-      })
+      )
     })
 
     it('should display trigger button', async () => {
@@ -608,6 +577,14 @@ describe('<ColorPicker />', () => {
   })
 
   describe('should be accessible', () => {
+    beforeAll(() => {
+      vi.useRealTimers()
+    })
+
+    afterAll(() => {
+      vi.useFakeTimers()
+    })
+
     it('a11y', async () => {
       const { container } = render(<SimpleExample />)
       const axeCheck = await runAxeCheck(container)

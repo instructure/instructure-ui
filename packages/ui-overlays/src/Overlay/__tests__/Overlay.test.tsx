@@ -22,13 +22,20 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { Overlay } from '../index'
 
 describe('<Overlay />', () => {
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
   it('should render nothing when closed', () => {
     render(<Overlay label="Overlay Example" />)
     const overlay = screen.queryByText('Overlay Example')
@@ -47,7 +54,7 @@ describe('<Overlay />', () => {
     expect(overlay).toHaveTextContent('Hello World')
   })
 
-  it('should fire transition callback props', async () => {
+  it('should fire transition callback props', () => {
     const onEnter = vi.fn()
     const onEntering = vi.fn()
     const onEntered = vi.fn()
@@ -63,24 +70,28 @@ describe('<Overlay />', () => {
       />
     )
 
-    await waitFor(() => {
-      expect(onEnter).toHaveBeenCalled()
-      expect(onEntering).toHaveBeenCalled()
-      expect(onEntered).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onEnter).toHaveBeenCalled()
+    expect(onEntering).toHaveBeenCalled()
+    expect(onEntered).toHaveBeenCalled()
   })
 
-  it('should support onOpen prop', async () => {
+  it('should support onOpen prop', () => {
     const onOpen = vi.fn()
 
     render(<Overlay open label="Overlay Example" onOpen={onOpen} />)
 
-    await waitFor(() => {
-      expect(onOpen).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onOpen).toHaveBeenCalled()
   })
 
-  it('should support onClose prop', async () => {
+  it('should support onClose prop', () => {
     const onClose = vi.fn()
 
     const { rerender } = render(
@@ -89,8 +100,10 @@ describe('<Overlay />', () => {
 
     rerender(<Overlay label="Overlay Example" onClose={onClose} open={false} />)
 
-    await waitFor(() => {
-      expect(onClose).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClose).toHaveBeenCalled()
   })
 })

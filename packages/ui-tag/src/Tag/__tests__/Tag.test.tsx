@@ -23,8 +23,7 @@
  */
 
 import { ComponentType } from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
 
@@ -62,18 +61,22 @@ describe('<Tag />', async () => {
     expect(tag).toBeInTheDocument()
   })
 
-  it('should render as a button and respond to onClick event', async () => {
+  it('should render as a button and respond to onClick event', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     render(<Tag data-testid="summer-button" text="Summer" onClick={onClick} />)
 
     const button = screen.getByTestId('summer-button')
 
-    userEvent.click(button)
-
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalledTimes(1)
-      expect(button.tagName).toBe('BUTTON')
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(button.tagName).toBe('BUTTON')
+
+    vi.useRealTimers()
   })
 
   it('should render a close icon when it is dismissible and clickable', async () => {

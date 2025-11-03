@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { within } from '@instructure/ui-utils'
@@ -30,6 +30,14 @@ import { within } from '@instructure/ui-utils'
 import { Position } from '../index'
 
 describe('<Position />', () => {
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
+
   const parentDefaults = {
     width: 500,
     height: 150,
@@ -84,7 +92,7 @@ describe('<Position />', () => {
     expect(style.position).toBe('absolute')
   })
 
-  it('should render right of target', async () => {
+  it('should render right of target', () => {
     const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
@@ -105,9 +113,11 @@ describe('<Position />', () => {
     const target = screen.getByTestId('target')
     const content = screen.getByTestId('content')
 
-    await waitFor(() => {
-      expect(onPositionChanged).toHaveBeenCalled()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    expect(onPositionChanged).toHaveBeenCalled()
 
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
@@ -117,7 +127,7 @@ describe('<Position />', () => {
     ).toBe(true)
   })
 
-  it('should render below target', async () => {
+  it('should render below target', () => {
     const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
@@ -138,9 +148,11 @@ describe('<Position />', () => {
     const target = screen.getByTestId('target')
     const content = screen.getByTestId('content')
 
-    await waitFor(() => {
-      expect(onPositionChanged).toHaveBeenCalled()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    expect(onPositionChanged).toHaveBeenCalled()
 
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
@@ -150,7 +162,7 @@ describe('<Position />', () => {
     ).toBe(true)
   })
 
-  it('should render left of target', async () => {
+  it('should render left of target', () => {
     const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
@@ -171,9 +183,11 @@ describe('<Position />', () => {
     const target = screen.getByTestId('target')
     const content = screen.getByTestId('content')
 
-    await waitFor(() => {
-      expect(onPositionChanged).toHaveBeenCalled()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    expect(onPositionChanged).toHaveBeenCalled()
 
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
@@ -183,7 +197,7 @@ describe('<Position />', () => {
     ).toBe(true)
   })
 
-  it('should render above target', async () => {
+  it('should render above target', () => {
     const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
@@ -204,9 +218,11 @@ describe('<Position />', () => {
     const target = screen.getByTestId('target')
     const content = screen.getByTestId('content')
 
-    await waitFor(() => {
-      expect(onPositionChanged).toHaveBeenCalled()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    expect(onPositionChanged).toHaveBeenCalled()
 
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
@@ -214,7 +230,7 @@ describe('<Position />', () => {
     expect(Math.floor(contentRect.bottom)).toEqual(Math.floor(targetRect.top))
   })
 
-  it('should center vertically', async () => {
+  it('should center vertically', () => {
     const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
@@ -235,9 +251,11 @@ describe('<Position />', () => {
     const target = screen.getByTestId('target')
     const content = screen.getByTestId('content')
 
-    await waitFor(() => {
-      expect(onPositionChanged).toHaveBeenCalled()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    expect(onPositionChanged).toHaveBeenCalled()
 
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
@@ -250,7 +268,7 @@ describe('<Position />', () => {
     expect(within(top, center)).toBe(true)
   })
 
-  it('should center horizontally', async () => {
+  it('should center horizontally', () => {
     const onPositionChanged = vi.fn()
     render(
       <div style={{ padding: '50px' }}>
@@ -271,9 +289,11 @@ describe('<Position />', () => {
     const target = screen.getByTestId('target')
     const content = screen.getByTestId('content')
 
-    await waitFor(() => {
-      expect(onPositionChanged).toHaveBeenCalled()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    expect(onPositionChanged).toHaveBeenCalled()
 
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
@@ -287,7 +307,7 @@ describe('<Position />', () => {
   })
 
   describe('when constrained to scroll-parent', () => {
-    it('should re-position below target', async () => {
+    it('should re-position below target', () => {
       const onPositionChanged = vi.fn()
 
       render(
@@ -319,9 +339,11 @@ describe('<Position />', () => {
       const target = screen.getByTestId('target')
       const content = screen.getByTestId('content')
 
-      await waitFor(() => {
-        expect(onPositionChanged).toHaveBeenCalled()
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      expect(onPositionChanged).toHaveBeenCalled()
 
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
@@ -331,7 +353,7 @@ describe('<Position />', () => {
       ).toBe(true)
     })
 
-    it('should re-position above target', async () => {
+    it('should re-position above target', () => {
       const onPositionChanged = vi.fn()
 
       render(
@@ -363,9 +385,11 @@ describe('<Position />', () => {
       const target = screen.getByTestId('target')
       const content = screen.getByTestId('content')
 
-      await waitFor(() => {
-        expect(onPositionChanged).toHaveBeenCalled()
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      expect(onPositionChanged).toHaveBeenCalled()
 
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
@@ -375,7 +399,7 @@ describe('<Position />', () => {
       ).toBe(true)
     })
 
-    it('should re-position after target', async () => {
+    it('should re-position after target', () => {
       const onPositionChanged = vi.fn()
 
       render(
@@ -407,9 +431,11 @@ describe('<Position />', () => {
       const target = screen.getByTestId('target')
       const content = screen.getByTestId('content')
 
-      await waitFor(() => {
-        expect(onPositionChanged).toHaveBeenCalled()
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      expect(onPositionChanged).toHaveBeenCalled()
 
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
@@ -419,7 +445,7 @@ describe('<Position />', () => {
       ).toBe(true)
     })
 
-    it('should re-position before target', async () => {
+    it('should re-position before target', () => {
       const onPositionChanged = vi.fn()
 
       render(
@@ -451,9 +477,11 @@ describe('<Position />', () => {
       const target = screen.getByTestId('target')
       const content = screen.getByTestId('content')
 
-      await waitFor(() => {
-        expect(onPositionChanged).toHaveBeenCalled()
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      expect(onPositionChanged).toHaveBeenCalled()
 
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
@@ -475,7 +503,7 @@ describe('<Position />', () => {
       document.documentElement.style.top = ''
     })
 
-    it('should position correctly', async () => {
+    it('should position correctly', () => {
       render(
         <div style={{ padding: '100px' }}>
           <Position
@@ -492,14 +520,16 @@ describe('<Position />', () => {
       const target = screen.getByTestId('target')
       const content = screen.getByTestId('content')
 
-      await waitFor(() => {
-        expect(content.getBoundingClientRect().top).toEqual(
-          target.getBoundingClientRect().bottom
-        )
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      expect(content.getBoundingClientRect().top).toEqual(
+        target.getBoundingClientRect().bottom
+      )
     })
 
-    it('should position correctly with mountNode', async () => {
+    it('should position correctly with mountNode', () => {
       render(
         <div style={{ padding: '100px' }}>
           <div data-testid="mountNode">mount</div>
@@ -528,11 +558,13 @@ describe('<Position />', () => {
       const target = screen.getByTestId('target')
       const content = screen.getByTestId('content')
 
-      await waitFor(() => {
-        expect(content.getBoundingClientRect().top).toEqual(
-          target.getBoundingClientRect().bottom
-        )
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      expect(content.getBoundingClientRect().top).toEqual(
+        target.getBoundingClientRect().bottom
+      )
     })
   })
 

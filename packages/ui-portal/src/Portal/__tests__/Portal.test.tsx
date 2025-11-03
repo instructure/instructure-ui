@@ -24,7 +24,7 @@
  */
 
 import { vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
@@ -32,6 +32,13 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { Portal } from '../index'
 
 describe(`<Portal />`, () => {
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
   it('should render', async () => {
     render(<Portal open>Hello World</Portal>)
     const portal = screen.getByText('Hello World')
@@ -40,6 +47,7 @@ describe(`<Portal />`, () => {
   })
 
   it('should be accessible', async () => {
+    vi.useRealTimers()
     const { container } = render(
       <Portal open data-testid="portal">
         Hello World
@@ -48,6 +56,7 @@ describe(`<Portal />`, () => {
     const axeCheck = await runAxeCheck(container)
 
     expect(axeCheck).toBe(true)
+    vi.useFakeTimers()
   })
 
   it('should support onOpen prop', async () => {
@@ -109,6 +118,9 @@ describe(`<Portal />`, () => {
     })
 
     it('should render children and have a node with a parent when open', async () => {
+      // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+      vi.useRealTimers()
+
       const onKeyDown = vi.fn()
       render(
         <Portal open data-testid="portal">
@@ -120,11 +132,13 @@ describe(`<Portal />`, () => {
 
       await userEvent.type(button, '{enter}')
 
-      await waitFor(() => {
-        expect(onKeyDown).toHaveBeenCalled()
-      })
+      // Wait for event to be processed
+      await new Promise((resolve) => setTimeout(resolve, 50))
 
+      expect(onKeyDown).toHaveBeenCalled()
       expect(portal).toContainElement(button)
+
+      vi.useFakeTimers()
     })
   })
 

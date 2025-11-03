@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import userEvent from '@testing-library/user-event'
 
 import '@testing-library/jest-dom'
 import { Pagination, PaginationButton } from '../index'
@@ -54,11 +53,13 @@ describe('<Pagination />', () => {
     consoleErrorMock = vi
       .spyOn(console, 'error')
       .mockImplementation(() => {}) as any
+    vi.useFakeTimers()
   })
 
   afterEach(() => {
     consoleWarningMock.mockRestore()
     consoleErrorMock.mockRestore()
+    vi.useRealTimers()
   })
 
   it('should render all pages buttons', async () => {
@@ -120,6 +121,7 @@ describe('<Pagination />', () => {
 
   describe('should meet a11y standards', () => {
     it('by default', async () => {
+      vi.useRealTimers()
       const { container } = render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
           {buildPages(5)}
@@ -127,9 +129,11 @@ describe('<Pagination />', () => {
       )
       const axeCheck = await runAxeCheck(container)
       expect(axeCheck).toBe(true)
+      vi.useFakeTimers()
     })
 
     it('by default with more pages', async () => {
+      vi.useRealTimers()
       const { container } = render(
         <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
           {buildPages(8)}
@@ -137,9 +141,11 @@ describe('<Pagination />', () => {
       )
       const axeCheck = await runAxeCheck(container)
       expect(axeCheck).toBe(true)
+      vi.useFakeTimers()
     })
 
     it('with first/last arrows', async () => {
+      vi.useRealTimers()
       const { container } = render(
         <Pagination
           variant="compact"
@@ -154,9 +160,11 @@ describe('<Pagination />', () => {
       )
       const axeCheck = await runAxeCheck(container)
       expect(axeCheck).toBe(true)
+      vi.useFakeTimers()
     })
 
     it('with disabled arrows', async () => {
+      vi.useRealTimers()
       const { container } = render(
         <Pagination
           variant="compact"
@@ -172,6 +180,7 @@ describe('<Pagination />', () => {
       )
       const axeCheck = await runAxeCheck(container)
       expect(axeCheck).toBe(true)
+      vi.useFakeTimers()
     })
   })
 
@@ -772,29 +781,33 @@ describe('<Pagination />', () => {
                   {buildPages(6)}
                 </Pagination>
               )
-              await waitFor(() => {
-                expect(consoleErrorMock.mock.calls[0][0]).toMatch(
-                  expectedErrorMessageRegExp
-                )
+              act(() => {
+                vi.runAllTimers()
               })
+              expect(consoleErrorMock.mock.calls[0][0]).toMatch(
+                expectedErrorMessageRegExp
+              )
             })
           } else {
             it(`should allow the '${prop}' prop`, async () => {
               const props = { [prop]: allowedProps[prop] }
 
-              render(
-                <Pagination
-                  variant="compact"
-                  labelNext="Next"
-                  labelPrev="Previous"
-                  {...props}
-                >
-                  {buildPages(6)}
-                </Pagination>
-              )
-              await waitFor(() => {
-                expect(consoleErrorMock).not.toHaveBeenCalled()
+              act(() => {
+                render(
+                  <Pagination
+                    variant="compact"
+                    labelNext="Next"
+                    labelPrev="Previous"
+                    {...props}
+                  >
+                    {buildPages(6)}
+                  </Pagination>
+                )
+                act(() => {
+                  vi.runAllTimers()
+                })
               })
+              expect(consoleErrorMock).not.toHaveBeenCalled()
             })
           }
         })
@@ -816,7 +829,7 @@ describe('<Pagination />', () => {
       expect(elementRef).toHaveBeenCalledWith(container.firstChild)
     })
 
-    it('should navigate to adjacent pages', async () => {
+    it('should navigate to adjacent pages', () => {
       const onClick = vi.fn()
 
       render(
@@ -831,11 +844,12 @@ describe('<Pagination />', () => {
       )
       const nextButton = screen.getByRole('button', { name: 'Next' })
 
-      await userEvent.click(nextButton)
-
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalled()
+      fireEvent.click(nextButton, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onClick).toHaveBeenCalled()
     })
   })
 
@@ -919,7 +933,7 @@ describe('<Pagination />', () => {
       expect(container).toHaveTextContent('number: 6, current: 3')
     })
 
-    it('should change pages on input change', async () => {
+    it('should change pages on input change', () => {
       const onClick1 = vi.fn()
       const onClick2 = vi.fn()
 
@@ -944,11 +958,13 @@ describe('<Pagination />', () => {
       )
       const numberInput = container.querySelector('input')
 
-      await userEvent.type(numberInput!, '2{enter}')
-
-      await waitFor(() => {
-        expect(onClick2).toHaveBeenCalled()
+      fireEvent.change(numberInput!, { target: { value: '2' } })
+      fireEvent.keyDown(numberInput!, { key: 'Enter', code: 'Enter' })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onClick2).toHaveBeenCalled()
     })
   })
 

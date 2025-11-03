@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -97,39 +96,52 @@ describe('<TextInput/>', () => {
   })
 
   describe('events', () => {
-    it('responds to onChange event', async () => {
+    it('responds to onChange event', () => {
+      vi.useFakeTimers()
       const onChange = vi.fn()
       render(<TextInput renderLabel="Name" onChange={onChange} />)
       const input = screen.getByRole('textbox')
       fireEvent.change(input, { target: { value: 'foo' } })
-
-      await waitFor(() => {
-        expect(onChange).toHaveBeenCalledTimes(1)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      vi.useRealTimers()
     })
 
-    it('responds to onBlur event', async () => {
+    it('responds to onBlur event', () => {
+      vi.useFakeTimers()
       const onBlur = vi.fn()
       render(<TextInput renderLabel="Name" onBlur={onBlur} />)
+      const input = screen.getByRole('textbox')
 
-      userEvent.tab()
-      userEvent.tab()
-
-      await waitFor(() => {
-        expect(onBlur).toHaveBeenCalled()
+      input.focus()
+      input.blur()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onBlur).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('responds to onFocus event', async () => {
+    it('responds to onFocus event', () => {
+      vi.useFakeTimers()
       const onFocus = vi.fn()
       render(<TextInput renderLabel="Name" onFocus={onFocus} />)
       const input = screen.getByRole('textbox')
 
       input.focus()
-
-      await waitFor(() => {
-        expect(onFocus).toHaveBeenCalled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onFocus).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
   })
 

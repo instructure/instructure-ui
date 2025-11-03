@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi, expect } from 'vitest'
-import userEvent from '@testing-library/user-event'
 
 import '@testing-library/jest-dom'
 import { IconCheckSolid } from '@instructure/ui-icons'
@@ -129,7 +128,8 @@ describe('<Item />', () => {
     expect(optionItemContainer).toHaveAttribute('data-custom-attr', 'true')
   })
 
-  it('should pass event handlers through to label', async () => {
+  it('should pass event handlers through to label', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     const { container } = render(<Item onClick={onClick}>Hello World</Item>)
 
@@ -138,15 +138,18 @@ describe('<Item />', () => {
       '[class$="-optionItem__container"]'
     )
 
-    userEvent.click(optionItem!)
-    await waitFor(() => {
-      expect(onClick).not.toHaveBeenCalled()
+    fireEvent.click(optionItem!, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+    expect(onClick).not.toHaveBeenCalled()
 
-    userEvent.click(optionItemContainer!)
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalledTimes(1)
+    fireEvent.click(optionItemContainer!, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+    expect(onClick).toHaveBeenCalledTimes(1)
+    vi.useRealTimers()
   })
 
   it('should render content before label', async () => {

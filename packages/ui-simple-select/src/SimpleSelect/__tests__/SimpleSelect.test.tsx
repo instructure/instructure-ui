@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { vi, MockInstance, it } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { IconCheckSolid } from '@instructure/ui-icons'
 
@@ -48,6 +47,14 @@ const getOptions = (disabled?: ExampleOption) =>
 describe('<SimpleSelect />', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
 
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
+
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
     consoleErrorMock = vi
@@ -59,7 +66,7 @@ describe('<SimpleSelect />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should render an input and a list', async () => {
+  it('should render an input and a list', () => {
     render(
       <SimpleSelect renderLabel="Choose an option">{getOptions()}</SimpleSelect>
     )
@@ -69,16 +76,17 @@ describe('<SimpleSelect />', () => {
     expect(listInitial).not.toBeInTheDocument()
     expect(input).toBeInTheDocument()
 
-    await userEvent.click(input)
+    fireEvent.click(input, { button: 0, detail: 1 })
 
-    await waitFor(() => {
-      const list = screen.queryByRole('listbox')
-
-      expect(list).toBeInTheDocument()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    const list = screen.queryByRole('listbox')
+    expect(list).toBeInTheDocument()
   })
 
-  it('should render groups', async () => {
+  it('should render groups', () => {
     render(
       <SimpleSelect renderLabel="Choose an option">
         <SimpleSelect.Option id="0" value="0">
@@ -101,20 +109,22 @@ describe('<SimpleSelect />', () => {
     )
     const input = screen.getByLabelText('Choose an option')
 
-    await userEvent.click(input)
+    fireEvent.click(input, { button: 0, detail: 1 })
 
-    await waitFor(() => {
-      const groups = screen.getAllByRole('group')
-      const labelOne = screen.getByText('Group one')
-      const labelOneID = labelOne.getAttribute('id')
-
-      expect(groups.length).toBe(2)
-      expect(groups[0]).toHaveAttribute('aria-labelledby', labelOneID)
-      expect(labelOne).toHaveAttribute('role', 'presentation')
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    const groups = screen.getAllByRole('group')
+    const labelOne = screen.getByText('Group one')
+    const labelOneID = labelOne.getAttribute('id')
+
+    expect(groups.length).toBe(2)
+    expect(groups[0]).toHaveAttribute('aria-labelledby', labelOneID)
+    expect(labelOne).toHaveAttribute('role', 'presentation')
   })
 
-  it('should ignore invalid children', async () => {
+  it('should ignore invalid children', () => {
     render(
       <SimpleSelect renderLabel="Choose an option">
         <SimpleSelect.Option id="0" value={0}>
@@ -125,16 +135,17 @@ describe('<SimpleSelect />', () => {
     )
     const input = screen.getByLabelText('Choose an option')
 
-    await userEvent.click(input)
+    fireEvent.click(input, { button: 0, detail: 1 })
 
-    await waitFor(() => {
-      const invalidChild = screen.queryByText('invalid')
-
-      expect(invalidChild).not.toBeInTheDocument()
+    act(() => {
+      vi.runOnlyPendingTimers()
     })
+
+    const invalidChild = screen.queryByText('invalid')
+    expect(invalidChild).not.toBeInTheDocument()
   })
 
-  it('should fire onFocus when input gains focus', async () => {
+  it('should fire onFocus when input gains focus', () => {
     const onFocus = vi.fn()
     render(
       <SimpleSelect renderLabel="Choose an option" onFocus={onFocus}>
@@ -145,20 +156,22 @@ describe('<SimpleSelect />', () => {
 
     input.focus()
 
-    await waitFor(() => {
-      expect(onFocus).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onFocus).toHaveBeenCalled()
   })
 
   describe('input', () => {
-    it('should render with a custom id if given', async () => {
+    it('should render with a custom id if given', () => {
       render(<SimpleSelect renderLabel="Choose an option" id="customSelect" />)
       const input = screen.getByLabelText('Choose an option')
 
       expect(input).toHaveAttribute('id', 'customSelect')
     })
 
-    it('should always render readonly', async () => {
+    it('should always render readonly', () => {
       render(
         <SimpleSelect renderLabel="Choose an option" interaction="enabled" />
       )
@@ -168,7 +181,7 @@ describe('<SimpleSelect />', () => {
       expect(input).not.toHaveAttribute('disabled')
     })
 
-    it('should render disabled when interaction="disabled"', async () => {
+    it('should render disabled when interaction="disabled"', () => {
       render(
         <SimpleSelect renderLabel="Choose an option" interaction="disabled" />
       )
@@ -178,14 +191,14 @@ describe('<SimpleSelect />', () => {
       expect(input).not.toHaveAttribute('readonly')
     })
 
-    it('should render required when isRequired={true}', async () => {
+    it('should render required when isRequired={true}', () => {
       render(<SimpleSelect renderLabel="Choose an option" isRequired />)
       const input = screen.getByLabelText('Choose an option *')
 
       expect(input).toHaveAttribute('required')
     })
 
-    it('should allow assistive text', async () => {
+    it('should allow assistive text', () => {
       render(
         <SimpleSelect
           renderLabel="Choose an option"
@@ -201,7 +214,7 @@ describe('<SimpleSelect />', () => {
       expect(input).toHaveAttribute('aria-describedby', assistiveTextID)
     })
 
-    it('should allow custom props to pass through', async () => {
+    it('should allow custom props to pass through', () => {
       render(
         <SimpleSelect renderLabel="Choose an option" data-custom-attr="true">
           {getOptions()}
@@ -212,7 +225,7 @@ describe('<SimpleSelect />', () => {
       expect(input).toHaveAttribute('data-custom-attr', 'true')
     })
 
-    it('should provide a ref to the input element', async () => {
+    it('should provide a ref to the input element', () => {
       const inputRef = vi.fn()
 
       render(
@@ -226,7 +239,7 @@ describe('<SimpleSelect />', () => {
     })
   })
 
-  it('should render icons before option and call renderBeforeLabel callback with necessary props', async () => {
+  it('should render icons before option and call renderBeforeLabel callback with necessary props', () => {
     const renderBeforeLabel = vi.fn(() => (
       <IconCheckSolid data-testid="option-icon" />
     ))
@@ -252,38 +265,40 @@ describe('<SimpleSelect />', () => {
     )
     const input = screen.getByLabelText('Choose an option')
 
-    await userEvent.click(input)
+    fireEvent.click(input, { button: 0, detail: 1 })
 
-    await waitFor(() => {
-      const optionIcons = screen.getAllByTestId('option-icon')
-      expect(optionIcons.length).toBe(2)
+    act(() => {
+      vi.runOnlyPendingTimers()
+    })
 
-      expect(renderBeforeLabel).toHaveBeenCalledTimes(2)
+    const optionIcons = screen.getAllByTestId('option-icon')
+    expect(optionIcons.length).toBe(2)
 
-      type MockCallType = Parameters<(...args: any) => any>[]
-      const [[argsOption1], [argsOption2]] = renderBeforeLabel.mock
-        .calls as MockCallType
+    expect(renderBeforeLabel).toHaveBeenCalledTimes(2)
 
-      expect(argsOption1).toMatchObject({
-        id: 'option-1',
-        isDisabled: true,
-        isSelected: true,
-        isHighlighted: true,
-        children: 'option one'
-      })
+    type MockCallType = Parameters<(...args: any) => any>[]
+    const [[argsOption1], [argsOption2]] = renderBeforeLabel.mock
+      .calls as MockCallType
 
-      expect(argsOption2).toMatchObject({
-        id: 'option-2',
-        isDisabled: false,
-        isSelected: false,
-        isHighlighted: false,
-        children: 'option two'
-      })
+    expect(argsOption1).toMatchObject({
+      id: 'option-1',
+      isDisabled: true,
+      isSelected: true,
+      isHighlighted: true,
+      children: 'option one'
+    })
+
+    expect(argsOption2).toMatchObject({
+      id: 'option-2',
+      isDisabled: false,
+      isSelected: false,
+      isHighlighted: false,
+      children: 'option two'
     })
   })
 
   describe('list', () => {
-    it('should set aria-disabled on options when isDisabled={true}', async () => {
+    it('should set aria-disabled on options when isDisabled={true}', () => {
       render(
         <SimpleSelect renderLabel="Choose an option">
           {getOptions(defaultOptions[2])}
@@ -291,17 +306,19 @@ describe('<SimpleSelect />', () => {
       )
       const input = screen.getByLabelText('Choose an option')
 
-      await userEvent.click(input)
+      fireEvent.click(input, { button: 0, detail: 1 })
 
-      await waitFor(() => {
-        const options = screen.getAllByRole('option')
-
-        expect(options[0]).not.toHaveAttribute('aria-disabled')
-        expect(options[2]).toHaveAttribute('aria-disabled', 'true')
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      const options = screen.getAllByRole('option')
+
+      expect(options[0]).not.toHaveAttribute('aria-disabled')
+      expect(options[2]).toHaveAttribute('aria-disabled', 'true')
     })
 
-    it('should provide a ref to the list element', async () => {
+    it('should provide a ref to the list element', () => {
       const listRef = vi.fn()
 
       render(
@@ -311,13 +328,15 @@ describe('<SimpleSelect />', () => {
       )
       const input = screen.getByLabelText('Choose an option')
 
-      await userEvent.click(input)
+      fireEvent.click(input, { button: 0, detail: 1 })
 
-      await waitFor(() => {
-        const listbox = screen.getByRole('listbox')
-
-        expect(listRef).toHaveBeenCalledWith(listbox)
+      act(() => {
+        vi.runOnlyPendingTimers()
       })
+
+      const listbox = screen.getByRole('listbox')
+
+      expect(listRef).toHaveBeenCalledWith(listbox)
     })
   })
 

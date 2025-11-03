@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
+import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
 import { ScreenReaderFocusRegion } from '../ScreenReaderFocusRegion'
@@ -73,7 +74,9 @@ describe('ScreenReaderFocusRegion', () => {
     </div>
   )
 
-  it('should accept a function for liveRegion', async () => {
+  it('should accept a function for liveRegion', () => {
+    vi.useFakeTimers()
+
     render(element)
 
     const ignore = screen.getByTestId('ignore')
@@ -84,11 +87,14 @@ describe('ScreenReaderFocusRegion', () => {
       shouldContainFocus: true
     })
 
-    screenReaderFocusRegion.activate()
-
-    await waitFor(() => {
-      expect(ignore).not.toHaveAttribute('aria-hidden')
+    act(() => {
+      screenReaderFocusRegion.activate()
+      vi.runAllTimers()
     })
+
+    expect(ignore).not.toHaveAttribute('aria-hidden')
+
+    vi.useRealTimers()
   })
 
   it("should apply aria-hidden to all children of content's parent nodes unless they are live regions", async () => {

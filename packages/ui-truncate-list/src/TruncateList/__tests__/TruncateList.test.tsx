@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -30,7 +30,8 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TruncateList } from '../index'
 
 describe('<TruncateList />', () => {
-  it('should return ref with elementRef prop', async () => {
+  it('should return ref with elementRef prop', () => {
+    vi.useFakeTimers()
     const elementRef = vi.fn()
 
     const { container } = render(
@@ -42,9 +43,13 @@ describe('<TruncateList />', () => {
     )
     const list = container.querySelector('ul[class$="-truncateList"]')
 
-    await waitFor(() => {
-      expect(elementRef).toHaveBeenCalledWith(list)
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(elementRef).toHaveBeenCalledWith(list)
+
+    vi.useRealTimers()
   })
 
   it('should render <ul> and <li> items', async () => {

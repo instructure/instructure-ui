@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Editable } from '../index'
@@ -134,7 +133,8 @@ describe('<Editable />', () => {
     expect(onChangeModeSpy).toHaveBeenCalledWith('edit')
   })
 
-  it('should change to edit mode on component click', async () => {
+  it('should change to edit mode on component click', () => {
+    vi.useFakeTimers()
     const onChangeModeSpy = vi.fn()
 
     render(
@@ -146,12 +146,17 @@ describe('<Editable />', () => {
     )
     const childContainer = screen.getByTestId('child-container')
 
-    userEvent.click(childContainer)
+    fireEvent.mouseDown(childContainer, { buttons: 1 })
+    act(() => {
+      vi.runAllTimers()
+    })
 
-    await waitFor(() => expect(onChangeModeSpy).toHaveBeenCalledWith('edit'))
+    expect(onChangeModeSpy).toHaveBeenCalledWith('edit')
+    vi.useRealTimers()
   })
 
-  it('should set the button to visible on mouse over', async () => {
+  it('should set the button to visible on mouse over', () => {
+    vi.useFakeTimers()
     const onChangeModeSpy = vi.fn()
 
     render(
@@ -166,16 +171,19 @@ describe('<Editable />', () => {
     expect(editButton).toHaveClass('test-hidden')
 
     fireEvent.mouseOver(editButton)
-
-    await waitFor(() => {
-      expect(editButton).toHaveClass('test-visible')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(editButton).toHaveClass('test-visible')
 
     fireEvent.mouseOut(editButton)
-
-    await waitFor(() => {
-      expect(editButton).toHaveClass('test-hidden')
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(editButton).toHaveClass('test-hidden')
+    vi.useRealTimers()
   })
 
   it('should change to view mode on editor blur', () => {

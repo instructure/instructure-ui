@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor, fireEvent, act } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
@@ -32,6 +32,13 @@ import { Button } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 
 describe('<DrawerLayout />', () => {
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
   it('should render', () => {
     const { container } = render(<DrawerLayoutFixture />)
 
@@ -55,7 +62,7 @@ describe('<DrawerLayout />', () => {
     expect(contentWrapper).toHaveAttribute('aria-label', 'Test DrawerContent')
   })
 
-  it('should close the tray when ESC is pressed in overlay mode', async () => {
+  it('should close the tray when ESC is pressed in overlay mode', () => {
     let open = true
     const msg = 'This is in the Tray'
     const onDismiss = vi.fn(() => {
@@ -88,14 +95,25 @@ describe('<DrawerLayout />', () => {
     )
     const { rerender } = render(<TestComponent />)
     expect(screen.getByText(msg)).toBeInTheDocument()
-    await act(() => new Promise((resolve) => requestAnimationFrame(resolve)))
+
+    act(() => {
+      vi.runAllTimers() // Run requestAnimationFrame
+    })
+
     fireEvent.keyUp(document, { keyCode: 27 }) // ESC key
-    await waitFor(() => {
-      expect(onDismiss).toHaveBeenCalled()
+
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onDismiss).toHaveBeenCalled()
+
     rerender(<TestComponent />)
-    await waitFor(() => {
-      expect(screen.queryByText(msg)).not.toBeInTheDocument()
+
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(screen.queryByText(msg)).not.toBeInTheDocument()
   })
 })

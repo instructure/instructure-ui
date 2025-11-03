@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react'
 import { vi } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { Mask } from '../index'
@@ -62,18 +61,21 @@ describe('<Mask />', () => {
     expect(mask).toHaveAttribute('tabindex', '-1')
   })
 
-  it('should call onClick prop when clicked', async () => {
+  it('should call onClick prop when clicked', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
 
     render(<Mask onClick={onClick} />)
 
     const mask = document.querySelector("span[class$='-mask']")
 
-    await userEvent.click(mask!)
-
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalled()
+    fireEvent.click(mask!, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).toHaveBeenCalled()
+    vi.useRealTimers()
   })
 
   it('should apply fullscreen CSS when prop is true', () => {

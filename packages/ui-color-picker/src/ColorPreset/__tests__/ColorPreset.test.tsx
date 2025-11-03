@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
@@ -158,9 +158,7 @@ describe('<ColorPreset />', () => {
 
       await userEvent.click(indicators[1])
 
-      await waitFor(() => {
-        expect(onSelect).toHaveBeenCalledWith(testValue.colors[1])
-      })
+      expect(onSelect).toHaveBeenCalledWith(testValue.colors[1])
     })
 
     it('should fire with color hex when transparent indicator clicked', async () => {
@@ -173,9 +171,7 @@ describe('<ColorPreset />', () => {
 
       await userEvent.click(indicators[0])
 
-      await waitFor(() => {
-        expect(onSelect).toHaveBeenCalledWith(testColor)
-      })
+      expect(onSelect).toHaveBeenCalledWith(testColor)
     })
 
     it('should not fire when disabled prop is set', async () => {
@@ -186,9 +182,7 @@ describe('<ColorPreset />', () => {
 
       await userEvent.click(indicators[1])
 
-      await waitFor(() => {
-        expect(onSelect).not.toHaveBeenCalled()
-      })
+      expect(onSelect).not.toHaveBeenCalled()
     })
   })
 

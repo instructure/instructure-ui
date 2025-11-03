@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, fireEvent, act } from '@testing-library/react'
 import type { MockInstance } from 'vitest'
 import { vi } from 'vitest'
 
@@ -77,7 +76,8 @@ describe('<RadioInput />', () => {
   })
 
   describe('events', () => {
-    it('responds to onClick event', async () => {
+    it('responds to onClick event', () => {
+      vi.useFakeTimers()
       const onClick = vi.fn()
 
       const { container } = render(
@@ -91,14 +91,18 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      userEvent.click(input!)
-
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalled()
+      fireEvent.click(input!, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onClick).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('does not respond to onClick event when disabled', async () => {
+    it('does not respond to onClick event when disabled', () => {
+      vi.useFakeTimers()
       const onClick = vi.fn()
 
       const { container } = render(
@@ -114,14 +118,18 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       fireEvent.click(input!)
-
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-        expect(input).toBeDisabled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onClick).not.toHaveBeenCalled()
+      expect(input).toBeDisabled()
+
+      vi.useRealTimers()
     })
 
-    it('does not respond to onClick event when readOnly', async () => {
+    it('does not respond to onClick event when readOnly', () => {
+      vi.useFakeTimers()
       const onClick = vi.fn()
 
       const { container } = render(
@@ -137,14 +145,18 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       fireEvent.click(input!)
-
-      await waitFor(() => {
-        expect(onClick).not.toHaveBeenCalled()
-        expect(input).toBeDisabled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onClick).not.toHaveBeenCalled()
+      expect(input).toBeDisabled()
+
+      vi.useRealTimers()
     })
 
-    it('responds to onChange event', async () => {
+    it('responds to onChange event', () => {
+      vi.useFakeTimers()
       const onChange = vi.fn()
 
       const { container } = render(
@@ -158,14 +170,18 @@ describe('<RadioInput />', () => {
 
       const input = container.querySelector('input')
 
-      userEvent.click(input!)
-
-      await waitFor(() => {
-        expect(onChange).toHaveBeenCalled()
+      fireEvent.click(input!, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onChange).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('does not respond to onChange event when disabled', async () => {
+    it('does not respond to onChange event when disabled', () => {
+      vi.useFakeTimers()
       const onChange = vi.fn()
 
       const { container } = render(
@@ -181,13 +197,17 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       fireEvent.click(input!)
-
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onChange).not.toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('does not respond to onChange event when readOnly', async () => {
+    it('does not respond to onChange event when readOnly', () => {
+      vi.useFakeTimers()
       const onChange = vi.fn()
 
       const { container } = render(
@@ -203,13 +223,17 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       fireEvent.click(input!)
-
-      await waitFor(() => {
-        expect(onChange).not.toHaveBeenCalled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onChange).not.toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('responds to onBlur event', async () => {
+    it('responds to onBlur event', () => {
+      vi.useFakeTimers()
       const onBlur = vi.fn()
 
       const { container } = render(
@@ -224,13 +248,17 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       fireEvent.focusOut(input!)
-
-      await waitFor(() => {
-        expect(onBlur).toHaveBeenCalled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onBlur).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
-    it('responds to onFocus event', async () => {
+    it('responds to onFocus event', () => {
+      vi.useFakeTimers()
       const onFocus = vi.fn()
 
       const { container } = render(
@@ -244,10 +272,13 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       fireEvent.focus(input!)
-
-      await waitFor(() => {
-        expect(onFocus).toHaveBeenCalled()
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(onFocus).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
 
     it('sets input to checked when selected', async () => {
@@ -264,7 +295,8 @@ describe('<RadioInput />', () => {
       expect(input).toHaveAttribute('checked')
     })
 
-    it('focuses with the focus helper', async () => {
+    it('focuses with the focus helper', () => {
+      vi.useFakeTimers()
       let ref: RadioInput
 
       const { container } = render(
@@ -280,10 +312,13 @@ describe('<RadioInput />', () => {
       const input = container.querySelector('input')
 
       ref!.focus()
-
-      await waitFor(() => {
-        expect(document.activeElement).toBe(input)
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(document.activeElement).toBe(input)
+
+      vi.useRealTimers()
     })
   })
 

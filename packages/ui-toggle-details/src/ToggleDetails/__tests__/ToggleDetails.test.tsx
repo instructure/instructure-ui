@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
@@ -103,7 +102,8 @@ describe('<ToggleDetails />', () => {
     expect(toggle).not.toHaveAttribute('aria-expanded')
   })
 
-  it('should toggle on click events', async () => {
+  it('should toggle on click events', () => {
+    vi.useFakeTimers()
     const { container } = render(
       <ToggleDetails summary="Click me">Details</ToggleDetails>
     )
@@ -111,14 +111,18 @@ describe('<ToggleDetails />', () => {
 
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
 
-    await userEvent.click(screen.getByText('Click me'))
-
-    await waitFor(() => {
-      expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    fireEvent.click(screen.getByText('Click me'), { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+
+    vi.useRealTimers()
   })
 
-  it('should call onToggle on click events', async () => {
+  it('should call onToggle on click events', () => {
+    vi.useFakeTimers()
     const onToggle = vi.fn()
 
     render(
@@ -127,18 +131,22 @@ describe('<ToggleDetails />', () => {
       </ToggleDetails>
     )
 
-    await userEvent.click(screen.getByText('Click me'))
-
-    await waitFor(() => {
-      const args = onToggle.mock.calls[0]
-
-      expect(onToggle).toHaveBeenCalledTimes(1)
-      expect(args[0].type).toBe('click')
-      expect(args[1]).toBe(true)
+    fireEvent.click(screen.getByText('Click me'), { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const args = onToggle.mock.calls[0]
+
+    expect(onToggle).toHaveBeenCalledTimes(1)
+    expect(args[0].type).toBe('click')
+    expect(args[1]).toBe(true)
+
+    vi.useRealTimers()
   })
 
-  it('should call onToggle on click events when it has no children', async () => {
+  it('should call onToggle on click events when it has no children', () => {
+    vi.useFakeTimers()
     const onToggle = vi.fn()
 
     render(
@@ -150,15 +158,18 @@ describe('<ToggleDetails />', () => {
       ></ToggleDetails>
     )
     const toggle = screen.getByTestId('td__1')
-    await userEvent.click(toggle)
-
-    await waitFor(() => {
-      const args = onToggle.mock.calls[0]
-
-      expect(onToggle).toHaveBeenCalledTimes(1)
-      expect(args[0].type).toBe('click')
-      expect(args[1]).toBe(true)
+    fireEvent.click(toggle, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    const args = onToggle.mock.calls[0]
+
+    expect(onToggle).toHaveBeenCalledTimes(1)
+    expect(args[0].type).toBe('click')
+    expect(args[1]).toBe(true)
+
+    vi.useRealTimers()
   })
 
   it('should be initialized by defaultExpanded prop', async () => {

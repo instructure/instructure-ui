@@ -24,8 +24,7 @@
 
 import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -173,7 +172,8 @@ describe('<TopNavBarBrand />', () => {
   })
 
   describe('onClick prop', () => {
-    it('should render component button', async () => {
+    it('should render component button', () => {
+      vi.useFakeTimers()
       const onClick = vi.fn()
       render(
         <TopNavBarBrand
@@ -185,17 +185,21 @@ describe('<TopNavBarBrand />', () => {
       )
       const button = screen.getByRole('button')
 
-      userEvent.click(button)
-
-      await waitFor(() => {
-        expect(button.tagName).toBe('BUTTON')
-        expect(onClick).toHaveBeenCalled()
+      fireEvent.click(button, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(button.tagName).toBe('BUTTON')
+      expect(onClick).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
   })
 
   describe('as prop', () => {
-    it('should render component as passed element', async () => {
+    it('should render component as passed element', () => {
+      vi.useFakeTimers()
       const onClick = vi.fn()
       render(
         <TopNavBarBrand
@@ -208,12 +212,15 @@ describe('<TopNavBarBrand />', () => {
       )
       const button = screen.getByRole('button')
 
-      userEvent.click(button)
-
-      await waitFor(() => {
-        expect(button.tagName).toBe('BUTTON')
-        expect(onClick).toHaveBeenCalled()
+      fireEvent.click(button, { button: 0, detail: 1 })
+      act(() => {
+        vi.runAllTimers()
       })
+
+      expect(button.tagName).toBe('BUTTON')
+      expect(onClick).toHaveBeenCalled()
+
+      vi.useRealTimers()
     })
   })
 

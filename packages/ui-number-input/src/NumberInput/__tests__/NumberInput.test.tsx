@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, act, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
@@ -34,6 +34,14 @@ import { IconZoomInLine, IconZoomOutLine } from '@instructure/ui-icons'
 describe('<NumberInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution
@@ -50,7 +58,7 @@ describe('<NumberInput />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('sets value on the input', async () => {
+  it('sets value on the input', () => {
     const onChange = vi.fn()
     render(<NumberInput renderLabel="Label" onChange={onChange} value="42" />)
     const input = screen.getByRole('spinbutton')
@@ -58,7 +66,7 @@ describe('<NumberInput />', () => {
     expect(input).toHaveValue(42)
   })
 
-  it('should accept a number for the value', async () => {
+  it('should accept a number for the value', () => {
     const onChange = vi.fn()
     render(<NumberInput renderLabel="Label" onChange={onChange} value={42} />)
     const input = screen.getByRole('spinbutton')
@@ -66,7 +74,7 @@ describe('<NumberInput />', () => {
     expect(input).toHaveValue(42)
   })
 
-  it('displays the label', async () => {
+  it('displays the label', () => {
     const { container } = render(<NumberInput renderLabel="Label" />)
     const label = container.querySelector(
       'span[class$="-formFieldLayout__label"]'
@@ -75,7 +83,7 @@ describe('<NumberInput />', () => {
     expect(label).toHaveTextContent('Label')
   })
 
-  it('passes the input element to inputRef', async () => {
+  it('passes the input element to inputRef', () => {
     const inputRef = vi.fn()
     render(<NumberInput renderLabel="Label" inputRef={inputRef} />)
     const input = screen.getByRole('spinbutton')
@@ -84,59 +92,64 @@ describe('<NumberInput />', () => {
     expect(inputRef).toHaveBeenCalledWith(input)
   })
 
-  it('passes change events to onChange handler', async () => {
+  it('passes change events to onChange handler', () => {
     const onChange = vi.fn()
     render(<NumberInput renderLabel="Label" onChange={onChange} />)
     const input = screen.getByRole('spinbutton')
 
-    userEvent.type(input, '5')
-
-    await waitFor(() => {
-      const event = onChange.mock.calls[0][0]
-      const args = onChange.mock.calls[0][1]
-      expect(onChange).toHaveBeenCalledTimes(1)
-      expect(args).toBe('5')
-      expect(event.target.value).toBe('5')
+    act(() => {
+      fireEvent.change(input, { target: { value: '5' } })
+      vi.runAllTimers()
     })
+
+    const event = onChange.mock.calls[0][0]
+    const args = onChange.mock.calls[0][1]
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(args).toBe('5')
+    expect(event.target.value).toBe('5')
   })
 
-  it('passes keyboard events to the onKeyDown handler', async () => {
+  it('passes keyboard events to the onKeyDown handler', () => {
     const onKeyDown = vi.fn()
     render(<NumberInput renderLabel="Label" onKeyDown={onKeyDown} />)
     const input = screen.getByRole('spinbutton')
 
-    userEvent.type(input, '5')
-
-    await waitFor(() => {
-      expect(onKeyDown).toHaveBeenCalledTimes(1)
+    act(() => {
+      fireEvent.keyDown(input, { key: '5' })
+      vi.runAllTimers()
     })
+
+    expect(onKeyDown).toHaveBeenCalledTimes(1)
   })
 
-  it('passes blur events to onBlur handler', async () => {
+  it('passes blur events to onBlur handler', () => {
     const onBlur = vi.fn()
     render(<NumberInput renderLabel="Label" onBlur={onBlur} />)
+    const input = screen.getByRole('spinbutton')
 
-    userEvent.tab()
-    userEvent.tab()
-
-    await waitFor(() => {
-      expect(onBlur).toHaveBeenCalledTimes(1)
+    act(() => {
+      input.focus()
+      fireEvent.blur(input)
+      vi.runAllTimers()
     })
+
+    expect(onBlur).toHaveBeenCalledTimes(1)
   })
 
-  it('passes focus events to onFocus handler', async () => {
+  it('passes focus events to onFocus handler', () => {
     const onFocus = vi.fn()
     render(<NumberInput renderLabel="Label" onFocus={onFocus} />)
     const input = screen.getByRole('spinbutton')
 
-    input.focus()
-
-    await waitFor(() => {
-      expect(onFocus).toHaveBeenCalledTimes(1)
+    act(() => {
+      fireEvent.focus(input)
+      vi.runAllTimers()
     })
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
-  it('shows arrow spinbuttons by default', async () => {
+  it('shows arrow spinbuttons by default', () => {
     const { container } = render(<NumberInput renderLabel="Label" />)
     const buttons = container.querySelectorAll(
       'button[class$="-numberInput_arrow'
@@ -145,7 +158,7 @@ describe('<NumberInput />', () => {
     expect(buttons).toHaveLength(2)
   })
 
-  it('hides arrow spinbuttons when showArrows is false', async () => {
+  it('hides arrow spinbuttons when showArrows is false', () => {
     const { container } = render(
       <NumberInput renderLabel="Label" showArrows={false} />
     )
@@ -157,6 +170,9 @@ describe('<NumberInput />', () => {
   })
 
   it('calls onIncrement when up arrow spinbutton is clicked', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onIncrement = vi.fn()
     const { container } = render(
       <NumberInput renderLabel="Label" onIncrement={onIncrement} />
@@ -165,14 +181,18 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onIncrement).toHaveBeenCalledTimes(1)
-    })
+    expect(onIncrement).toHaveBeenCalledTimes(1)
+
+    vi.useFakeTimers()
   })
 
   it('does not call onIncrement when `interaction` is set to readonly', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onIncrement = vi.fn()
     const { container } = render(
       <NumberInput
@@ -185,14 +205,18 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onIncrement).toHaveBeenCalledTimes(0)
-    })
+    expect(onIncrement).toHaveBeenCalledTimes(0)
+
+    vi.useFakeTimers()
   })
 
   it('does not call onIncrement when `readOnly` is set', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onIncrement = vi.fn()
     const { container } = render(
       <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
@@ -201,14 +225,18 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[0])
+    await userEvent.click(buttons[0])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onIncrement).toHaveBeenCalledTimes(0)
-    })
+    expect(onIncrement).toHaveBeenCalledTimes(0)
+
+    vi.useFakeTimers()
   })
 
   it('calls onDecrement when down arrow spinbutton is clicked', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onDecrement = vi.fn()
     const { container } = render(
       <NumberInput renderLabel="Label" onDecrement={onDecrement} />
@@ -218,14 +246,18 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onDecrement).toHaveBeenCalledTimes(1)
-    })
+    expect(onDecrement).toHaveBeenCalledTimes(1)
+
+    vi.useFakeTimers()
   })
 
   it('does not call onDecrement when `interaction` is set to readonly', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onDecrement = vi.fn()
     const { container } = render(
       <NumberInput
@@ -238,14 +270,18 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onDecrement).toHaveBeenCalledTimes(0)
-    })
+    expect(onDecrement).toHaveBeenCalledTimes(0)
+
+    vi.useFakeTimers()
   })
 
   it('does not call onDecrement when `readOnly` is set', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onDecrement = vi.fn()
     const { container } = render(
       <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
@@ -254,14 +290,15 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[1])
+    await userEvent.click(buttons[1])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onDecrement).toHaveBeenCalledTimes(0)
-    })
+    expect(onDecrement).toHaveBeenCalledTimes(0)
+
+    vi.useFakeTimers()
   })
 
-  it('puts inputMode prop to input', async () => {
+  it('puts inputMode prop to input', () => {
     render(<NumberInput renderLabel="Label" inputMode="decimal" />)
     const input = screen.getByRole('spinbutton')
 
@@ -269,6 +306,9 @@ describe('<NumberInput />', () => {
   })
 
   it('renders custom interactive icons', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onDecrement = vi.fn()
     const onIncrement = vi.fn()
     const { container } = render(
@@ -292,14 +332,16 @@ describe('<NumberInput />', () => {
       'button[class$="-numberInput_arrow'
     )
 
-    userEvent.click(buttons[0])
-    await waitFor(() => {
-      expect(onIncrement).toHaveBeenCalledTimes(1)
-    })
+    await userEvent.click(buttons[0])
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    userEvent.click(buttons[1])
-    await waitFor(() => {
-      expect(onDecrement).toHaveBeenCalledTimes(1)
-    })
+    expect(onIncrement).toHaveBeenCalledTimes(1)
+
+    await userEvent.click(buttons[1])
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    expect(onDecrement).toHaveBeenCalledTimes(1)
+
+    vi.useFakeTimers()
   })
 })

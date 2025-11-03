@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, waitFor } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
@@ -46,7 +46,9 @@ describe('<TruncateText />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should warn if children prop receives too deep of a node tree', async () => {
+  it('should warn if children prop receives too deep of a node tree', () => {
+    vi.useFakeTimers()
+
     render(
       <div style={{ width: '200px' }}>
         <TruncateText>
@@ -62,12 +64,16 @@ describe('<TruncateText />', () => {
     const expectedErrorMessage =
       'Some children are too deep in the node tree and will not render.'
 
-    await waitFor(() => {
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.stringContaining(expectedErrorMessage),
-        expect.any(String)
-      )
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(consoleErrorMock).toHaveBeenCalledWith(
+      expect.stringContaining(expectedErrorMessage),
+      expect.any(String)
+    )
+
+    vi.useRealTimers()
   })
 
   it('should handle the empty string as a child', async () => {

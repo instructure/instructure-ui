@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import moment from 'moment-timezone'
@@ -35,6 +35,14 @@ import { TimeSelect } from '../index'
 describe('<TimeSelect />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
   let consoleErrorMock: ReturnType<typeof vi.spyOn>
+
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution
@@ -51,7 +59,7 @@ describe('<TimeSelect />', () => {
     consoleErrorMock.mockRestore()
   })
 
-  it('should fire onFocus when input gains focus', async () => {
+  it('should fire onFocus when input gains focus', () => {
     const onFocus = vi.fn()
     render(<TimeSelect renderLabel="Choose a time" onFocus={onFocus} />)
 
@@ -59,9 +67,11 @@ describe('<TimeSelect />', () => {
 
     input.focus()
 
-    await waitFor(() => {
-      expect(onFocus).toHaveBeenCalled()
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onFocus).toHaveBeenCalled()
   })
 
   it('should render a default value', async () => {
@@ -226,6 +236,9 @@ describe('<TimeSelect />', () => {
   })
 
   it('adding event listeners does not break functionality', async () => {
+    // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+    vi.useRealTimers()
+
     const onChange = vi.fn()
     const onKeyDown = vi.fn()
     const handleInputChange = vi.fn()
@@ -252,9 +265,14 @@ describe('<TimeSelect />', () => {
     expect(onKeyDown).toHaveBeenCalled()
     expect(handleInputChange).toHaveBeenCalled()
     expect(input).toHaveValue('7:45 PM')
+
+    vi.useFakeTimers()
   })
 
   it('allowClearingSelection allows to clear the value', async () => {
+    // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+    vi.useRealTimers()
+
     const defaultValue = moment.tz(
       '1986-05-17T18:00:00.000Z', // 2:00 PM in US/Eastern
       moment.ISO_8601,
@@ -286,9 +304,14 @@ describe('<TimeSelect />', () => {
       value: ''
     })
     expect(input).toHaveValue('')
+
+    vi.useFakeTimers()
   })
 
   it('Can change from defaultValue', async () => {
+    // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+    vi.useRealTimers()
+
     const defaultValue = moment.tz(
       '1986-05-17T18:00:00.000Z', // 2:00 PM in US/Eastern
       moment.ISO_8601,
@@ -324,9 +347,14 @@ describe('<TimeSelect />', () => {
     expect(onKeyDown).toHaveBeenCalled()
     expect(handleInputChange).toHaveBeenCalled()
     expect(input).toHaveValue('7:45 PM')
+
+    vi.useFakeTimers()
   })
 
   it('Reverts to a set value if the current one is invalid', async () => {
+    // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+    vi.useRealTimers()
+
     const defaultValue = moment.tz(
       '1986-05-17T18:00:00.000Z', // 2:00 PM in US/Eastern
       moment.ISO_8601,
@@ -364,6 +392,8 @@ describe('<TimeSelect />', () => {
     expect(onKeyDown).toHaveBeenCalled()
     expect(handleInputChange).toHaveBeenCalled()
     expect(input).toHaveValue('7:45 PM')
+
+    vi.useFakeTimers()
   })
 
   describe('input', () => {
@@ -417,6 +447,9 @@ describe('<TimeSelect />', () => {
 
   describe('list', () => {
     it('should provide a ref to the list element', async () => {
+      // Use real timers for this test as userEvent has internal timing that doesn't work with fake timers
+      vi.useRealTimers()
+
       const listRef = vi.fn()
       render(<TimeSelect renderLabel="Choose a time" listRef={listRef} />)
 
@@ -424,11 +457,14 @@ describe('<TimeSelect />', () => {
 
       await userEvent.click(input)
 
-      await waitFor(() => {
-        const listbox = screen.getByRole('listbox')
+      // Wait for the listbox to appear
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
-        expect(listRef).toHaveBeenCalledWith(listbox)
-      })
+      const listbox = screen.getByRole('listbox')
+
+      expect(listRef).toHaveBeenCalledWith(listbox)
+
+      vi.useFakeTimers()
     })
   })
 })

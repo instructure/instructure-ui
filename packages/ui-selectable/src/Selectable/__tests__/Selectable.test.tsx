@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -33,6 +33,14 @@ import { SelectableRender } from '../props'
 const defaultOptions = ['foo', 'bar', 'baz']
 
 describe('<Selectable />', () => {
+  beforeAll(() => {
+    vi.useFakeTimers()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
+  })
+
   const getSelectable = (selectable: SelectableRender) => (
     <span {...selectable.getRootProps()}>
       <label {...selectable.getLabelProps()}>Selectable</label>
@@ -51,7 +59,7 @@ describe('<Selectable />', () => {
     </span>
   )
 
-  it('should focus trigger when label is clicked', async () => {
+  it('should focus trigger when label is clicked', () => {
     render(
       <Selectable>
         {(selectable) => (
@@ -78,14 +86,18 @@ describe('<Selectable />', () => {
 
     expect(document.activeElement).not.toBe(input)
 
-    userEvent.click(label)
-
-    await waitFor(() => {
-      expect(document.activeElement).toBe(input)
+    act(() => {
+      fireEvent.click(label, { button: 0, detail: 1 })
+      vi.runAllTimers()
     })
+
+    expect(document.activeElement).toBe(input)
   })
 
   it('should not blur trigger when label is clicked', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onFocus = vi.fn()
     const onBlur = vi.fn()
 
@@ -117,15 +129,19 @@ describe('<Selectable />', () => {
 
     expect(document.activeElement).not.toBe(input)
 
-    userEvent.click(label)
+    await userEvent.click(label)
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onFocus).toHaveBeenCalledTimes(1)
-      expect(onBlur).not.toHaveBeenCalled()
-    })
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onBlur).not.toHaveBeenCalled()
+
+    vi.useFakeTimers()
   })
 
   it('should not hide options when list is clicked', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onClick = vi.fn()
     const onMouseDown = vi.fn()
     const onRequestHideOptions = vi.fn()
@@ -158,17 +174,21 @@ describe('<Selectable />', () => {
     const list = screen.getByRole('listbox')
 
     input.focus()
-    userEvent.click(list)
+    await userEvent.click(list)
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(document.activeElement).toBe(input)
-      expect(onClick).toHaveBeenCalledTimes(1)
-      expect(onMouseDown).toHaveBeenCalledTimes(1)
-      expect(onRequestHideOptions).not.toHaveBeenCalled()
-    })
+    expect(document.activeElement).toBe(input)
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(onMouseDown).toHaveBeenCalledTimes(1)
+    expect(onRequestHideOptions).not.toHaveBeenCalled()
+
+    vi.useFakeTimers()
   })
 
   it('should not hide options when an option is clicked', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onClick = vi.fn()
     const onMouseDown = vi.fn()
     const onRequestHideOptions = vi.fn()
@@ -208,17 +228,21 @@ describe('<Selectable />', () => {
     const option = screen.getByText('foo')
 
     input.focus()
-    userEvent.click(option)
+    await userEvent.click(option)
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(document.activeElement).toBe(input)
-      expect(onClick).toHaveBeenCalledTimes(1)
-      expect(onMouseDown).toHaveBeenCalledTimes(1)
-      expect(onRequestHideOptions).not.toHaveBeenCalled()
-    })
+    expect(document.activeElement).toBe(input)
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(onMouseDown).toHaveBeenCalledTimes(1)
+    expect(onRequestHideOptions).not.toHaveBeenCalled()
+
+    vi.useFakeTimers()
   })
 
   it('should not prevent events on other children', async () => {
+    // Use real timers for userEvent
+    vi.useRealTimers()
+
     const onMouseDown = vi.fn()
     const onClick = vi.fn()
     const onKeyDown = vi.fn()
@@ -255,17 +279,21 @@ describe('<Selectable />', () => {
 
     userEvent.click(button)
     await userEvent.type(button, '{enter}')
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalled()
-      expect(onMouseDown).toHaveBeenCalled()
-      expect(onKeyDown).toHaveBeenCalled()
-    })
+    expect(onClick).toHaveBeenCalled()
+    expect(onMouseDown).toHaveBeenCalled()
+    expect(onKeyDown).toHaveBeenCalled()
+
+    vi.useFakeTimers()
   })
 
   describe('with callbacks', () => {
     describe('should fire onRequestShowOptions', () => {
       it('when label is clicked', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const onRequestShowOptions = vi.fn()
 
         const { rerender } = render(
@@ -278,11 +306,10 @@ describe('<Selectable />', () => {
         )
         const label = screen.getByText('Selectable')
 
-        userEvent.click(label)
+        await userEvent.click(label)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
 
         // Set isShowingOptions:
         rerender(
@@ -294,14 +321,18 @@ describe('<Selectable />', () => {
           </Selectable>
         )
 
-        userEvent.click(label)
+        await userEvent.click(label)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
+
+        vi.useFakeTimers()
       })
 
       it('when input is clicked', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const onRequestShowOptions = vi.fn()
 
         const { rerender } = render(
@@ -314,11 +345,10 @@ describe('<Selectable />', () => {
         )
         const input = screen.getByRole('combobox')
 
-        userEvent.click(input)
+        await userEvent.click(input)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
 
         rerender(
           <Selectable
@@ -329,14 +359,18 @@ describe('<Selectable />', () => {
           </Selectable>
         )
 
-        userEvent.click(input)
+        await userEvent.click(input)
+        await new Promise((resolve) => setTimeout(resolve, 0))
 
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-        })
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
+
+        vi.useFakeTimers()
       })
 
       it('when up/down arrows are pressed', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const onRequestShowOptions = vi.fn()
 
         render(
@@ -350,17 +384,22 @@ describe('<Selectable />', () => {
         const input = screen.getByRole('combobox')
 
         await userEvent.type(input, '{arrowdown}')
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
 
         await userEvent.type(input, '{arrowup}')
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(2)
+
+        vi.useFakeTimers()
       })
 
       it('when space is pressed', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const onRequestShowOptions = vi.fn()
 
         const { rerender } = render(
@@ -382,14 +421,19 @@ describe('<Selectable />', () => {
         )
 
         await userEvent.type(input, '{space}')
-        await waitFor(() => {
-          expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
+
+        vi.useFakeTimers()
       })
     })
 
     describe('should fire onRequestHideOptions', () => {
       it('when label is clicked', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const onRequestHideOptions = vi.fn()
 
         const { rerender } = render(
@@ -403,9 +447,9 @@ describe('<Selectable />', () => {
         const label = screen.getByText('Selectable')
 
         await userEvent.click(label)
-        await waitFor(() => {
-          expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
 
         rerender(
           <Selectable
@@ -417,12 +461,17 @@ describe('<Selectable />', () => {
         )
 
         await userEvent.click(label)
-        await waitFor(() => {
-          expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
+
+        vi.useFakeTimers()
       })
 
       it('when input is clicked', async () => {
+        // Use real timers for userEvent
+        vi.useRealTimers()
+
         const onRequestHideOptions = vi.fn()
 
         const { rerender } = render(
@@ -436,9 +485,9 @@ describe('<Selectable />', () => {
         const input = screen.getByRole('combobox')
 
         await userEvent.click(input)
-        await waitFor(() => {
-          expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
 
         rerender(
           <Selectable
@@ -450,9 +499,11 @@ describe('<Selectable />', () => {
         )
 
         await userEvent.click(input)
-        await waitFor(() => {
-          expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
-        })
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
+        expect(onRequestHideOptions).toHaveBeenCalledTimes(1)
+
+        vi.useFakeTimers()
       })
     })
   })
@@ -502,6 +553,9 @@ describe('<Selectable />', () => {
     })
 
     it('should allow supplemental onClick behavior', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       const onClick = vi.fn()
       const onRequestShowOptions = vi.fn()
 
@@ -521,10 +575,12 @@ describe('<Selectable />', () => {
       const input = screen.getByRole('combobox')
 
       await userEvent.click(input)
-      await waitFor(() => {
-        expect(onClick).toHaveBeenCalledTimes(1)
-        expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
-      })
+      await new Promise((resolve) => setTimeout(resolve, 0))
+
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(onRequestShowOptions).toHaveBeenCalledTimes(1)
+
+      vi.useFakeTimers()
     })
   })
 
@@ -1170,6 +1226,9 @@ describe('<Selectable />', () => {
     })
 
     it('should allow supplemental onClick behavior', async () => {
+      // Use real timers for userEvent
+      vi.useRealTimers()
+
       const onClick = vi.fn()
       const onRequestSelectOption = vi.fn()
 
@@ -1198,13 +1257,14 @@ describe('<Selectable />', () => {
       const option_0 = screen.getByText(defaultOptions[0])
       const option_1 = screen.getByText(defaultOptions[1])
 
-      userEvent.click(option_0)
-      userEvent.click(option_1)
+      await userEvent.click(option_0)
+      await userEvent.click(option_1)
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-      await waitFor(() => {
-        expect(onRequestSelectOption).toHaveBeenCalledTimes(2)
-        expect(onClick).toHaveBeenCalledTimes(2)
-      })
+      expect(onRequestSelectOption).toHaveBeenCalledTimes(2)
+      expect(onClick).toHaveBeenCalledTimes(2)
+
+      vi.useFakeTimers()
     })
   })
 

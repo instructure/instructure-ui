@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi, MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -183,10 +183,8 @@ describe('<DateInput2 />', () => {
 
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const calendarTable = screen.queryByRole('table')
-      expect(calendarTable).toBeInTheDocument()
-    })
+    const calendarTable = screen.queryByRole('table')
+    expect(calendarTable).toBeInTheDocument()
   })
 
   it('should render navigation arrow buttons with screen reader labels', async () => {
@@ -208,33 +206,31 @@ describe('<DateInput2 />', () => {
 
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const prevMonthButton = screen.getByRole('button', {
-        name: prevMonthLabel
-      })
-      const nextMonthButton = screen.getByRole('button', {
-        name: nextMonthLabel
-      })
-
-      expect(prevMonthButton).toBeInTheDocument()
-      expect(nextMonthButton).toBeInTheDocument()
-
-      const prevButtonLabel = screen.getByText(prevMonthLabel)
-      const nextButtonLabel = screen.getByText(nextMonthLabel)
-
-      expect(prevButtonLabel).toBeInTheDocument()
-      expect(nextButtonLabel).toBeInTheDocument()
-
-      const prevMonthIcon = prevMonthButton.querySelector(
-        'svg[name="IconArrowOpenStart"]'
-      )
-      const nextMonthIcon = nextMonthButton.querySelector(
-        'svg[name="IconArrowOpenEnd"]'
-      )
-
-      expect(prevMonthIcon).toBeInTheDocument()
-      expect(nextMonthIcon).toBeInTheDocument()
+    const prevMonthButton = screen.getByRole('button', {
+      name: prevMonthLabel
     })
+    const nextMonthButton = screen.getByRole('button', {
+      name: nextMonthLabel
+    })
+
+    expect(prevMonthButton).toBeInTheDocument()
+    expect(nextMonthButton).toBeInTheDocument()
+
+    const prevButtonLabel = screen.getByText(prevMonthLabel)
+    const nextButtonLabel = screen.getByText(nextMonthLabel)
+
+    expect(prevButtonLabel).toBeInTheDocument()
+    expect(nextButtonLabel).toBeInTheDocument()
+
+    const prevMonthIcon = prevMonthButton.querySelector(
+      'svg[name="IconArrowOpenStart"]'
+    )
+    const nextMonthIcon = nextMonthButton.querySelector(
+      'svg[name="IconArrowOpenEnd"]'
+    )
+
+    expect(prevMonthIcon).toBeInTheDocument()
+    expect(nextMonthIcon).toBeInTheDocument()
   })
 
   it('should programmatically set and render the initial value', async () => {
@@ -299,11 +295,9 @@ describe('<DateInput2 />', () => {
 
     await userEvent.click(calendarButton)
 
-    await waitFor(() => {
-      const calendarTable = screen.queryByRole('table')
+    const calendarTable = screen.queryByRole('table')
 
-      expect(calendarTable).not.toBeInTheDocument()
-    })
+    expect(calendarTable).not.toBeInTheDocument()
   })
 
   it('should set required', async () => {
@@ -342,12 +336,11 @@ describe('<DateInput2 />', () => {
 
     fireEvent.blur(dateInput)
 
-    await waitFor(() => {
-      expect(onBlur).toHaveBeenCalled()
-    })
+    expect(onBlur).toHaveBeenCalled()
   })
 
-  it('should validate if the invalidDateErrorMessage prop is provided', async () => {
+  it('should validate if the invalidDateErrorMessage prop is provided', () => {
+    vi.useFakeTimers()
     const errorMsg = 'errorMsg'
     const Example = () => {
       const [inputValue, setInputValue] = useState('')
@@ -375,14 +368,24 @@ describe('<DateInput2 />', () => {
 
     const dateInput = screen.getByLabelText(LABEL_TEXT)
 
-    await userEvent.click(dateInput)
-    await userEvent.type(dateInput, 'Not a date')
-
-    dateInput.blur()
-
-    await waitFor(() => {
-      expect(screen.getByText(errorMsg)).toBeInTheDocument()
+    fireEvent.click(dateInput, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    fireEvent.change(dateInput, { target: { value: 'Not a date' } })
+    act(() => {
+      vi.runAllTimers()
+    })
+
+    fireEvent.blur(dateInput)
+    act(() => {
+      vi.runAllTimers()
+    })
+
+    expect(screen.getByText(errorMsg)).toBeInTheDocument()
+
+    vi.useRealTimers()
   })
 
   it('should show form field messages', async () => {

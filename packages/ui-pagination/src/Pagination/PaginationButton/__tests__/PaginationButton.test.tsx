@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, act } from '@testing-library/react'
 import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
@@ -36,20 +36,25 @@ describe('<PaginationButton />', () => {
     expect(button).toHaveAttribute('aria-current', 'page')
   })
 
-  it('should navigate using button when onClick provided', async () => {
+  it('should navigate using button when onClick provided', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     render(<PaginationButton onClick={onClick}>1</PaginationButton>)
 
     const button = screen.getByRole('button', { name: '1' })
 
-    button.click()
-
-    await waitFor(() => {
-      expect(onClick).toHaveBeenCalled()
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 
-  it('should disable navigation to current page', async () => {
+  it('should disable navigation to current page', () => {
+    vi.useFakeTimers()
     const onClick = vi.fn()
     render(
       <PaginationButton onClick={onClick} current>
@@ -58,11 +63,14 @@ describe('<PaginationButton />', () => {
     )
     const button = screen.getByRole('button', { name: '1' })
 
-    button.click()
-
-    await waitFor(() => {
-      expect(onClick).not.toHaveBeenCalled()
+    fireEvent.click(button, { button: 0, detail: 1 })
+    act(() => {
+      vi.runAllTimers()
     })
+
+    expect(onClick).not.toHaveBeenCalled()
+
+    vi.useRealTimers()
   })
 
   it('should navigate using link when href provided', async () => {
