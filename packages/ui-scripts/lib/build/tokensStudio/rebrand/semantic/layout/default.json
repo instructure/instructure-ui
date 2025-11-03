@@ -19,11 +19,11 @@
     "choiceControl": {
       "height": {
         "sm": {
-          "value": "{size.size16}",
+          "value": "{size.size24}",
           "type": "sizing"
         },
         "md": {
-          "value": "{size.size20}",
+          "value": "{size.size24}",
           "type": "sizing"
         },
         "lg": {
