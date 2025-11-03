@@ -13,11 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - name: Install Node 22
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci && npm run bootstrap
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile && pnpm run bootstrap
       - name: Set build directory and deployment path based on branch
         id: set-build-dir
         run: |
@@ -37,7 +39,7 @@ jobs:
               ;;
           esac
       - name: Build docs-app
-        run: npm run build:docs
+        run: pnpm run build:docs
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -57,13 +59,15 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - name: Install Node 22
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci && npm run bootstrap
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile && pnpm run bootstrap
       - name: Build docs-app
-        run: npm run build:docs
+        run: pnpm run build:docs
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

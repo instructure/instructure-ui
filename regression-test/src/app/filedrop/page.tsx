@@ -24,20 +24,20 @@
 
 'use client'
 import React from 'react'
-import { FileDrop as fd } from 'instructure-ui/ui-file-drop/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { Heading as hd } from 'instructure-ui/ui-heading/es/index'
-import { Text as tx } from 'instructure-ui/ui-text/es/index'
-import { Billboard as bb } from 'instructure-ui/ui-billboard/es/index'
-import { Flex as fl } from 'instructure-ui/ui-flex/es/index'
 import {
+  FileDrop as fd,
+  View as vw,
+  Heading as hd,
+  Text as tx,
+  Billboard as bb,
+  Flex as fl,
   IconModuleLine as iml,
   IconUploadSolid as ius,
   IconVideoLine as ivl,
   IconImageLine as iil,
   IconAnnotateLine as ial,
   IconPdfLine as ipfl
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const FileDrop = fd as any
 const View = vw as any

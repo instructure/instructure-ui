@@ -17,15 +17,15 @@
     "lint:fix": "ui-scripts lint --fix",
     "clean": "ui-scripts clean",
     "build": "ui-scripts build --modules es,cjs",
-    "build:watch": "npm run ts:check -- --watch & ui-scripts build --watch",
+    "build:watch": "pnpm run ts:check -- --watch & ui-scripts build --watch",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "11.0.1",
-    "@instructure/ui-color-utils": "11.0.1",
-    "@instructure/ui-themes": "11.0.1",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
@@ -33,13 +33,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/console": "11.0.1",
-    "@instructure/emotion": "11.0.1",
-    "@instructure/shared-types": "11.0.1",
-    "@instructure/ui-dom-utils": "11.0.1",
-    "@instructure/ui-react-utils": "11.0.1",
-    "@instructure/ui-utils": "11.0.1",
-    "@instructure/ui-view": "11.0.1"
+    "@instructure/console": "workspace:*",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-dom-utils": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-utils": "workspace:*",
+    "@instructure/ui-view": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"

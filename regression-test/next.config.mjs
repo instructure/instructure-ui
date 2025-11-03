@@ -20,12 +20,21 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *//** @type {import('next').NextConfig} */
+ */
+
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   // strict mode needs to be disabled, so deterministic ID generation
   // works. If its enabled, client side double rendering causes IDs to
   // come out of sync. TODO fix
-  reactStrictMode: false
-  }
+  reactStrictMode: false,
+  // Use regression-test as its own workspace root (simulates external usage)
+  outputFileTracingRoot: __dirname
+}
 
 export default nextConfig

@@ -8,7 +8,7 @@ order: 2
 
 Instructure UI is a mono-repository which means it has multiple packages (almost always a component means an individual package) and they are treated as one whole package when dealing with dependencies and building them.
 
-The project uses `npm` for managing these packages and also for resolving dependencies, running scripts and managing the whole mono-repository itself.
+The project uses `pnpm` for managing these packages and also for resolving dependencies, running scripts and managing the whole mono-repository itself.
 
 > **Note**: Windows is only partially supported. One can build the project and documentation apps, running other commands (like testing) fail.
 >
@@ -16,7 +16,7 @@ The project uses `npm` for managing these packages and also for resolving depend
 
 ### How to build the project
 
-In order to build the project one should have [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [`node`](https://nodejs.org/en/download/) (supported version is defined in the root [package.json](https://github.com/instructure/instructure-ui/blob/master/package.json#L90)) installed.
+In order to build the project one should have [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [`node`](https://nodejs.org/en/download/) (supported version is defined in the root [package.json](https://github.com/instructure/instructure-ui/blob/master/package.json#L90)), and [`pnpm`](https://pnpm.io/installation) installed.
 
 1. Download the source code and go into the root directory of instructure-ui:
 
@@ -34,7 +34,7 @@ In order to build the project one should have [`git`](https://git-scm.com/book/e
    ---
    type: code
    ---
-   npm install
+   pnpm install
    ```
 
 3. Run the bootstrap script:
@@ -43,7 +43,7 @@ In order to build the project one should have [`git`](https://git-scm.com/book/e
    ---
    type: code
    ---
-   npm run bootstrap
+   pnpm run bootstrap
    ```
 
    This script will invoke:
@@ -72,7 +72,7 @@ In order to build the static files for the documentation, from the project root 
 ---
 type: code
 ---
-npm run build:docs
+pnpm run build:docs
 ```
 
 This should create the static bundle using `webpack`, the output files can be found in `instructure-ui/packages/__docs__/__build__/`.

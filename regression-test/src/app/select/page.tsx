@@ -24,14 +24,14 @@
 
 'use client'
 import React, { useRef, useState } from 'react'
-import { Select as sl } from 'instructure-ui/ui-select/es/index'
-import { SimpleSelect as ss } from 'instructure-ui/ui-simple-select/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
 import {
+  Select as sl,
+  SimpleSelect as ss,
+  View as vw,
   IconUserSolid as ius,
   IconUserLine as iul,
   IconSearchLine as isl
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const Select = sl as any
 const SimpleSelect = ss as any

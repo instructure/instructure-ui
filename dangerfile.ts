@@ -67,7 +67,7 @@ const calculateSizes = async () => {
   // eslint-disable-next-line no-console
   console.log('switching to master branch...')
   await git(`checkout -d ${baseCommitSha}`)
-  execSync('npm install')
+  execSync('pnpm install')
 
   const { outFile } = await esBuild(META_FILE, baseCommitSha)
   const baseStats = await gzip(outFile)
@@ -92,12 +92,12 @@ const calculateSizes = async () => {
   **${calculateSizeDiff({ base: baseStats.size, head: prHeadStats.size })}**
   `)
 
-  // We have to switch back to the feature branch and run npm install
+  // We have to switch back to the feature branch and run pnpm install
   // so that the rest of the workflow actions are not executed on master
   // eslint-disable-next-line no-console
   console.log('switching back to feature branch...')
   await git(`checkout -d ${headCommitSha}`)
-  execSync('npm install')
+  execSync('pnpm install')
 }
 
 const formatSize = (sizeInBytes: number) => {

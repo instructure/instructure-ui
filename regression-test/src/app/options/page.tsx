@@ -24,13 +24,13 @@
 
 'use client'
 import React from 'react'
-import { Options as op } from 'instructure-ui/ui-options/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
 import {
+  Options as op,
+  View as vw,
   IconArrowOpenEndSolid as iaoes,
   IconCheckSolid as ics,
   IconCheckLine as icl
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const Options = op as any
 const View = vw as any

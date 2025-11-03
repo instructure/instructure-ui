@@ -47,7 +47,7 @@ type TrayOwnProps = {
    */
   placement?: 'top' | 'bottom' | 'start' | 'end' | 'center'
   /**
-   * Whether the `<Tray />` is open or not
+   * Whether or not the `<Tray />` is open
    */
   open?: boolean
   /**

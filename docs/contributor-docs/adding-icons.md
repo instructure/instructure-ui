@@ -64,9 +64,9 @@ type: code
 
 - If the icon has to be bidirectional (being mirrored in RTL mode, typically arrow icons), add the icon name to the bidirectional list in `packages/ui-icons/icons.config.js`. Deprecated icons are handled here as well.
 
-- Run `npm run bootstrap`.
+- Run `pnpm run bootstrap`.
 
-- Finally, run `npm run dev` and verify that the icons are displayed correctly under [Icons](/#icons). Check all 3 versions (React, SVG and icon font).
+- Finally, run `pnpm run dev` and verify that the icons are displayed correctly under [Icons](/#icons). Check all 3 versions (React, SVG and icon font).
 
 (Note: The fonts are sometimes not rendered correctly, but we decided not to fix them, because they are not really used anywhere, and we might stop supporting icon fonts in the future in general.)
 
