@@ -1,1 +1,1 @@
-npm run husky:pre-commit
+pnpm run husky:pre-commit

@@ -24,12 +24,14 @@
 
 'use client'
 import React from 'react'
-import { Link as lk } from 'instructure-ui/ui-link/es/index'
-import { Text as tx } from 'instructure-ui/ui-text/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { IconUserLine as iul } from 'instructure-ui/ui-icons/es/index'
-import { ScreenReaderContent as src } from 'instructure-ui/ui-a11y-content/es/index'
-import { TruncateText as tt } from 'instructure-ui/ui-truncate-text/es/index'
+import {
+  Link as lk,
+  Text as tx,
+  View as vw,
+  IconUserLine as iul,
+  ScreenReaderContent as src,
+  TruncateText as tt
+} from '@instructure/ui'
 
 const Link = lk as any
 const Text = tx as any

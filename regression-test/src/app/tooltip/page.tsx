@@ -64,7 +64,7 @@ import {
   TextInput as textInput,
   Tooltip as to,
   View as vi
-} from 'instructure-ui/ui/es/index'
+} from '@instructure/ui'
 
 export default function TooltipPage() {
   const Alert = al as any

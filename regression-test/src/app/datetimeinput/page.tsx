@@ -24,8 +24,10 @@
 
 'use client'
 import React, { useRef, useState } from 'react'
-import { DateTimeInput as dti } from 'instructure-ui/ui-date-time-input/es/index'
-import { ScreenReaderContent as src } from 'instructure-ui/ui-a11y-content/es/index'
+import {
+  DateTimeInput as dti,
+  ScreenReaderContent as src
+} from '@instructure/ui'
 
 const DateTimeInput = dti as any
 const ScreenReaderContent = src as any

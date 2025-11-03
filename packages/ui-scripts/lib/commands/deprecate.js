@@ -30,13 +30,13 @@ import {
   confirm
 } from '@instructure/command-utils'
 
-import { createNPMRCFile } from '../utils/npm.js'
+import { createNPMRCFile, cleanupNPMRCFile } from '../utils/npm.js'
 
 export default {
   command: 'deprecate',
   desc:
-    'deprecate ALL of a certain version of instUI npm packages by ' +
-    'running "npm deprecate".',
+    'deprecate ALL of a certain version of instUI pnpm packages by ' +
+    'running "pnpm deprecate".',
   builder: (yargs) => {
     yargs.option('versionToDeprecate', {
       type: 'string',
@@ -67,31 +67,35 @@ async function doDeprecate(versionToDeprecate, fixVersion) {
   const message = `A critical bug was fixed in ${fixVersion}`
   createNPMRCFile()
 
-  info(
-    `📦 Deprecating ALL packages with version: ${versionToDeprecate} with message: "${message}"`
-  )
-  const reply = await confirm('Continue? [y/n]\n')
-  if (!['Y', 'y'].includes(reply.trim())) {
-    process.exit(0)
-  }
-  const wait = (delay) =>
-    new Promise((resolve) => {
-      setTimeout(resolve, delay)
-    })
-  const allPackages = pkgUtils.getPackages()
-  for (const pkg of allPackages) {
-    if (pkg.private) {
-      info(`${pkg.name} is private.`)
-    } else {
-      const toDeprecate = `${pkg.name}@${versionToDeprecate}`
-      info(`📦 Deprecating ${toDeprecate}...`)
-      try {
-        await runCommandAsync('npm', ['deprecate', toDeprecate, message])
-        info(`📦 ${toDeprecate} was successfully deprecated!`)
-      } catch (err) {
-        error(err)
-      }
-      await wait(500) // wait some time to not DDOS npmjs.org
+  try {
+    info(
+      `📦 Deprecating ALL packages with version: ${versionToDeprecate} with message: "${message}"`
+    )
+    const reply = await confirm('Continue? [y/n]\n')
+    if (!['Y', 'y'].includes(reply.trim())) {
+      process.exit(0)
     }
+    const wait = (delay) =>
+      new Promise((resolve) => {
+        setTimeout(resolve, delay)
+      })
+    const allPackages = pkgUtils.getPackages()
+    for (const pkg of allPackages) {
+      if (pkg.private) {
+        info(`${pkg.name} is private.`)
+      } else {
+        const toDeprecate = `${pkg.name}@${versionToDeprecate}`
+        info(`📦 Deprecating ${toDeprecate}...`)
+        try {
+          await runCommandAsync('pnpm', ['deprecate', toDeprecate, message])
+          info(`📦 ${toDeprecate} was successfully deprecated!`)
+        } catch (err) {
+          error(err)
+        }
+        await wait(500) // wait some time to not DDOS npmjs.org
+      }
+    }
+  } finally {
+    cleanupNPMRCFile()
   }
 }

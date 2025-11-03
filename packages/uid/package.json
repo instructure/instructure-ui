@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "11.0.1",
+    "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "vitest": "^3.2.2"
   },
