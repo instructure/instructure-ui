@@ -24,6 +24,7 @@
 
 import type { CheckboxProps, CheckboxStyle } from './props'
 import type { ComponentTheme } from '@instructure/shared-types'
+import { mapSpacingToShorthand } from '@instructure/emotion'
 
 /**
  * ---
@@ -39,7 +40,16 @@ const generateStyle = (
   componentTheme: ComponentTheme,
   props: CheckboxProps
 ): CheckboxStyle => {
-  const { inline, disabled } = props
+  const { inline, disabled, margin } = props
+
+  // Calculate margin and support both theme token values like "space4" and custom values like "10px"
+  const cssMargin = margin
+    ? mapSpacingToShorthand(
+        margin,
+        (componentTheme as ComponentTheme & { spacing: Record<string, string> })
+          .spacing
+      )
+    : undefined
 
   return {
     requiredInvalid: {
@@ -49,12 +59,13 @@ const generateStyle = (
       paddingLeft: componentTheme.checkErrorInsetWidth
     },
     indentedToggleError: {
-      paddingLeft: componentTheme.toggleErrorInsetWidth,
+      paddingLeft: componentTheme.toggleErrorInsetWidth
     },
     checkbox: {
       label: 'checkbox',
       position: 'relative',
       width: '100%',
+      ...(margin && { margin: cssMargin }),
       ...(disabled && {
         cursor: 'not-allowed',
         pointerEvents: 'none',

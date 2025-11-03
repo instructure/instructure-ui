@@ -245,4 +245,33 @@ describe('<Checkbox />', () => {
       expect(axeCheck).toBe(true)
     })
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with custom CSS value and with tokens', () => {
+      const { container } = render(
+        <div>
+          <Checkbox label="test1" margin="30px" />
+          <Checkbox label="test2" margin="large" />
+          <Checkbox label="test3" margin="space4" />
+          <Checkbox label="test4" margin="small 20px" />
+        </div>
+      )
+
+      const allCheckboxes = container.querySelectorAll('[data-cid="Checkbox"]')
+
+      const checkboxCustom = allCheckboxes[0] as HTMLElement
+      const checkboxCustomStyle = window.getComputedStyle(checkboxCustom)
+      const checkboxLarge = allCheckboxes[1] as HTMLElement
+      const checkboxLargeStyle = window.getComputedStyle(checkboxLarge)
+      const checkboxSpace = allCheckboxes[2] as HTMLElement
+      const checkboxSpaceStyle = window.getComputedStyle(checkboxSpace)
+      const checkboxMixed = allCheckboxes[3] as HTMLElement
+      const checkboxMixedStyle = window.getComputedStyle(checkboxMixed)
+
+      expect(checkboxCustomStyle.margin).toBe('30px')
+      expect(checkboxLargeStyle.margin).toBe('2.25rem')
+      expect(checkboxSpaceStyle.margin).toBe('0.25rem')
+      expect(checkboxMixedStyle.margin).toBe('0.75rem 20px')
+    })
+  })
 })

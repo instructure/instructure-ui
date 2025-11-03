@@ -233,4 +233,49 @@ describe('<CheckboxGroup />', () => {
       expect(group).not.toHaveAttribute('aria-invalid')
     })
   })
+
+  describe('margin prop', () => {
+    it('should apply margin with custom CSS value and with tokens', () => {
+      const { container } = render(
+        <div>
+          <CheckboxGroup name="group1" description="Group 1" margin="30px">
+            <Checkbox label="Option 1" value="1" />
+            <Checkbox label="Option 2" value="2" />
+          </CheckboxGroup>
+          <CheckboxGroup name="group2" description="Group 2" margin="large">
+            <Checkbox label="Option 1" value="1" />
+            <Checkbox label="Option 2" value="2" />
+          </CheckboxGroup>
+          <CheckboxGroup name="group3" description="Group 3" margin="small">
+            <Checkbox label="Option 1" value="1" />
+            <Checkbox label="Option 2" value="2" />
+          </CheckboxGroup>
+          <CheckboxGroup
+            name="group4"
+            description="Group 4"
+            margin="small 20px"
+          >
+            <Checkbox label="Option 1" value="1" />
+            <Checkbox label="Option 2" value="2" />
+          </CheckboxGroup>
+        </div>
+      )
+
+      const allFieldsets = container.querySelectorAll('fieldset')
+
+      const fieldsetCustom = allFieldsets[0] as HTMLElement
+      const fieldsetCustomStyle = window.getComputedStyle(fieldsetCustom)
+      const fieldsetLarge = allFieldsets[1] as HTMLElement
+      const fieldsetLargeStyle = window.getComputedStyle(fieldsetLarge)
+      const fieldsetSmall = allFieldsets[2] as HTMLElement
+      const fieldsetSmallStyle = window.getComputedStyle(fieldsetSmall)
+      const fieldsetMixed = allFieldsets[3] as HTMLElement
+      const fieldsetMixedStyle = window.getComputedStyle(fieldsetMixed)
+
+      expect(fieldsetCustomStyle.margin).toBe('30px')
+      expect(fieldsetLargeStyle.margin).toBe('2.25rem')
+      expect(fieldsetSmallStyle.margin).toBe('0.75rem')
+      expect(fieldsetMixedStyle.margin).toBe('0.75rem 20px')
+    })
+  })
 })
