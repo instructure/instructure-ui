@@ -91,33 +91,35 @@
       }
     },
     "margin": {
-      "space2xs": {
-        "value": "{spacing.space2xs}",
-        "type": "spacing"
-      },
-      "spaceXs": {
-        "value": "{spacing.spaceXs}",
-        "type": "spacing"
-      },
-      "spaceSm": {
-        "value": "{spacing.spaceSm}",
-        "type": "spacing"
-      },
-      "spaceMd": {
-        "value": "{spacing.spaceMd}",
-        "type": "spacing"
-      },
-      "spaceLg": {
-        "value": "{spacing.spaceLg}",
-        "type": "spacing"
-      },
-      "spaceXl": {
-        "value": "{spacing.spaceXl}",
-        "type": "spacing"
-      },
-      "space2xl": {
-        "value": "{spacing.space2xl}",
-        "type": "spacing"
+      "spacing": {
+        "space2xs": {
+          "value": "{spacing.space2xs}",
+          "type": "spacing"
+        },
+        "spaceXs": {
+          "value": "{spacing.spaceXs}",
+          "type": "spacing"
+        },
+        "spaceSm": {
+          "value": "{spacing.spaceSm}",
+          "type": "spacing"
+        },
+        "spaceMd": {
+          "value": "{spacing.spaceMd}",
+          "type": "spacing"
+        },
+        "spaceLg": {
+          "value": "{spacing.spaceLg}",
+          "type": "spacing"
+        },
+        "spaceXl": {
+          "value": "{spacing.spaceXl}",
+          "type": "spacing"
+        },
+        "space2xl": {
+          "value": "{spacing.space2xl}",
+          "type": "spacing"
+        }
       },
       "gap": {
         "sections": {
