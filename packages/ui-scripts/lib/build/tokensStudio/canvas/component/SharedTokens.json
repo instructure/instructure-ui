@@ -152,7 +152,7 @@
     },
     "focusOutline": {
       "offset": {
-        "value": "{sharedTokens.margin.space2xs}",
+        "value": "{spacing.space2xs}",
         "type": "spacing"
       },
       "inset": {
