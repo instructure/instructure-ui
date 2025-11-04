@@ -27,7 +27,8 @@ export { makeThemeVars } from './makeThemeVars'
 export { getShorthandPropValue } from './getShorthandPropValue'
 export { mirrorShorthandCorners } from './mirrorShorthandCorners'
 export { mirrorShorthandEdges } from './mirrorShorthandEdges'
-export { mapSpacingToShorthand } from './mapSpacingToShorthand'
+export { calcMarginFromShorthand } from './calcMarginFromShorthand'
+export { calcFocusOutlineStyles } from './calcFocusOutlineStyles'
 
 export type {
   SpacingValues,
