@@ -86,8 +86,12 @@ const useStyle = <
 
   const componentTheme = { ...baseComponentTheme, ...themeOverride }
 
-  //@ts-expect-error TODO fix these later
-  return generateStyle(componentTheme, params ? params : {}, theme.newTheme)
+  return generateStyle(
+    componentTheme,
+    params ? params : {},
+    //@ts-expect-error TODO fix these later
+    theme?.newTheme?.components?.SharedTokens
+  )
 }
 
 export default useStyle

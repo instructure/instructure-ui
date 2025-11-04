@@ -28,7 +28,7 @@ import type {
   FormFieldStyleProps
 } from './props'
 import type { FormFieldLayoutTheme } from '@instructure/shared-types'
-import { mapSpacingToShorthand } from '@instructure/emotion'
+import { calcMarginFromShorthand } from '@instructure/emotion'
 
 const generateGridLayout = (
   isInlineLayout: boolean,
@@ -77,7 +77,7 @@ const generateStyle = (
 ): FormFieldLayoutStyle => {
   const { inline, layout, vAlign, labelAlign, margin, messages } = props
   const { hasMessages, hasVisibleLabel, hasNewErrorMsgAndIsGroup } = styleProps
-  const cssMargin = mapSpacingToShorthand(margin, componentTheme.spacing)
+  const cssMargin = calcMarginFromShorthand(margin, componentTheme.spacing)
   const isInlineLayout = layout === 'inline'
 
   const hasNonEmptyMessages = messages?.reduce(

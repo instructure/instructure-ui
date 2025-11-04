@@ -32,6 +32,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { mapSpacingToShorthand } from '@instructure/emotion'
+import { calcMarginFromShorthand } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
@@ -49,8 +49,7 @@ type StyleParams = {
 const generateStyle = (
   componentTheme: NewComponentTypes['Avatar'],
   params: StyleParams,
-  //TODO type themes properly
-  theme: any // TODO BaseTheme is is not good, it accesses theme.semantics.spacing
+  sharedTokens: NewComponentTypes['SharedTokens']
 ): AvatarStyle => {
   const {
     loaded,
@@ -180,7 +179,7 @@ const generateStyle = (
       borderColor: componentTheme.borderColor,
       fontWeight: componentTheme.fontWeight,
       overflow: 'hidden',
-      margin: mapSpacingToShorthand(margin, theme.semantics.spacing)
+      margin: calcMarginFromShorthand(margin, sharedTokens.margin)
     },
     image: {
       label: 'avatar__image',
