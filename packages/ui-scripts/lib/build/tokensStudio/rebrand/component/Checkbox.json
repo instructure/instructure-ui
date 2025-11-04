@@ -123,6 +123,10 @@
     "labelReadonlyColor": {
       "value": "{color.text.base}",
       "type": "color"
+    },
+    "controlVerticalMargin": {
+      "value": "0rem",
+      "type": "spacing"
     }
   }
 }

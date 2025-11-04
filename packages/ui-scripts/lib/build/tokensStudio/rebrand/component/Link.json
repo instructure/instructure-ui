@@ -12,18 +12,6 @@
       "value": "{color.text.interactive.disabled.base}",
       "type": "color"
     },
-    "iconColor": {
-      "value": "{color.icon.interactive.navigation.primary.base}",
-      "type": "color"
-    },
-    "iconHoverColor": {
-      "value": "{color.icon.interactive.navigation.primary.hover}",
-      "type": "color"
-    },
-    "iconDisabledColor": {
-      "value": "{color.icon.interactive.disabled.base}",
-      "type": "color"
-    },
     "onColorTextColor": {
       "value": "{color.text.interactive.navigation.primaryOnColor.base}",
       "type": "color"
@@ -34,18 +22,6 @@
     },
     "onColorTextDisabledColor": {
       "value": "{color.text.interactive.disabled.onColor}",
-      "type": "color"
-    },
-    "onColorIconColor": {
-      "value": "{color.icon.interactive.navigation.primaryOnColor.base}",
-      "type": "color"
-    },
-    "onColorIconHoverColor": {
-      "value": "{color.icon.interactive.navigation.primaryOnColor.hover}",
-      "type": "color"
-    },
-    "onColorIconDisabledColor": {
-      "value": "{color.icon.interactive.disabled.onColor}",
       "type": "color"
     },
     "fontSizeSm": {
