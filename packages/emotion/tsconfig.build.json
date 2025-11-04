@@ -30,6 +30,9 @@
     },
     {
       "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-color-utils/tsconfig.build.json"
     }
   ]
 }

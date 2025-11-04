@@ -23,9 +23,23 @@
  */
 import type { Spacing } from './ThemeablePropValues'
 
-export function mapSpacingToShorthand(
+/**
+ * Converts shorthand margin values into CSS margin strings using theme spacing tokens.
+ *
+ * This function parses space-separated margin values and resolves theme tokens to their
+ * actual CSS values. It supports CSS shorthand syntax (1-4 values) and nested theme
+ * token paths using dot notation.
+ *
+ * @param {Spacing | undefined} value - The shorthand margin value string containing space-separated tokens or CSS values.
+ *   Can be undefined, in which case '0' is returned.
+ * @param {Record<string, any>} spacingMap - The spacing theme object containing margin tokens and nested values.
+ *   Typically comes from `sharedTokens.margin` in the component theme.
+ *
+ * @returns {string} The resolved CSS margin string ready to be used in styles.
+ */
+export function calcMarginFromShorthand(
   value: Spacing | undefined,
-  spacingMap: { [key: string]: string }
+  spacingMap: { [key: string]: any }
 ) {
   // array from "space2 space2 space4 space2"
   const splitMargin = value?.split(' ')
