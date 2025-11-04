@@ -105,16 +105,20 @@
       "type": "sizing"
     },
     "checkedInsetSm": {
-      "value": "0.1875rem",
+      "value": "0.375rem",
       "type": "sizing"
     },
     "checkedInsetMd": {
-      "value": "0.25rem",
+      "value": "0.375rem",
       "type": "sizing"
     },
     "checkedInsetLg": {
       "value": "0.375rem",
       "type": "sizing"
+    },
+    "controlVerticalMargin": {
+      "value": "0rem",
+      "type": "spacing"
     }
   }
 }
