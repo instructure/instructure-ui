@@ -25,7 +25,6 @@
     "lint": "lerna run lint --stream",
     "lint:changes": "npm run lint -- --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
-    "lint:commits": "commitlint --from=HEAD^1",
     "bootstrap": "node scripts/bootstrap.js",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
