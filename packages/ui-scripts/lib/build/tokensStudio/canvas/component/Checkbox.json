@@ -88,6 +88,10 @@
       "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
+    "controlVerticalMargin": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
+    },
     "borderRadius": {
       "value": "{borderRadius.sm}",
       "type": "borderRadius"

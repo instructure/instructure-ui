@@ -115,6 +115,10 @@
     "checkedInsetLg": {
       "value": "0.375rem",
       "type": "sizing"
+    },
+    "controlVerticalMargin": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
     }
   }
 }
