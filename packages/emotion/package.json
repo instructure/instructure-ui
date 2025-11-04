@@ -32,6 +32,7 @@
     "@instructure/ui-react-utils": "11.0.1",
     "@instructure/ui-themes": "11.0.1",
     "@instructure/ui-utils": "11.0.1",
+    "@instructure/ui-color-utils": "11.0.1",
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {

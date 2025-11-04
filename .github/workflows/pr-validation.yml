@@ -16,8 +16,8 @@ jobs:
         run: npm ci
       - name: Bootstrap project
         run: npm run bootstrap
-      - name: Lint commits
-        run: npm run lint:commits
+      - name: Run commitlint for the commits in the PR
+        uses: wagoid/commitlint-github-action@v6
       - name: Lint code
         run: npm run lint:changes
 
