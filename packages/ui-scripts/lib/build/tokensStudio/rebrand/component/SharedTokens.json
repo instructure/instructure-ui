@@ -149,6 +149,36 @@
           "type": "spacing"
         }
       }
+    },
+    "focusOutline": {
+      "offset": {
+        "value": "{sharedTokens.margin.space2xs}",
+        "type": "spacing"
+      },
+      "inset": {
+        "value": "0rem",
+        "type": "spacing"
+      },
+      "width": {
+        "value": "{borderWidth.md}",
+        "type": "borderWidth"
+      },
+      "infoColor": {
+        "value": "{color.stroke.interactive.focusRing.base}",
+        "type": "color"
+      },
+      "onColor": {
+        "value": "{color.stroke.interactive.focusRing.onColor}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.stroke.interactive.success.base}",
+        "type": "color"
+      },
+      "dangerColor": {
+        "value": "{color.stroke.interactive.destructive.base}",
+        "type": "color"
+      }
     }
   }
 }
