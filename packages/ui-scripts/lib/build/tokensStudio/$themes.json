@@ -18,10 +18,10 @@
       "canvas/component/TextArea": "enabled",
       "canvas/component/Icon": "enabled",
       "canvas/component/Checkbox": "enabled",
-      "canvas/component/Utility": "enabled",
       "canvas/component/BaseButton": "enabled",
       "canvas/component/Text": "enabled",
-      "canvas/component/RadioInput": "enabled"
+      "canvas/component/RadioInput": "enabled",
+      "canvas/component/SharedTokens": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1025,10 +1025,10 @@
       "canvas/component/TextArea": "enabled",
       "canvas/component/Icon": "enabled",
       "canvas/component/Checkbox": "enabled",
-      "canvas/component/Utility": "enabled",
       "canvas/component/BaseButton": "enabled",
       "canvas/component/Text": "enabled",
-      "canvas/component/RadioInput": "enabled"
+      "canvas/component/RadioInput": "enabled",
+      "canvas/component/SharedTokens": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1066,7 +1066,11 @@
       "text.contentImportant": "S:160a2a27af16947819e71c592383009028a16362,",
       "text.contentQuote": "S:719a61fdbd8fa9dd6b5962785f25dba6d0c0e8db,",
       "text.contentSmall": "S:06b6316d506e070783fdeb5c72aef385a8754a23,",
-      "text.legend": "S:8abec4c5d273a75e6f1ff8c39dc1b287e9b2f49b,"
+      "text.legend": "S:8abec4c5d273a75e6f1ff8c39dc1b287e9b2f49b,",
+      "sharedTokens.elevation1": "S:d1ad0c9b38f5b95cf5acd45210377c5561fa8911,",
+      "sharedTokens.elevation2": "S:c7cc94b40295e726272d660b13a5a8c669a11096,",
+      "sharedTokens.elevation3": "S:1df70b1c8b709314b8283f70e5cb2ad66516e5a9,",
+      "sharedTokens.elevation4": "S:156e4e6fe75c2b475668317449ead7428e1f6e49,"
     },
     "$figmaVariableReferences": {
       "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -1944,11 +1948,11 @@
       "rebrand/component/TextInput": "enabled",
       "rebrand/component/TextArea": "enabled",
       "rebrand/component/Icon": "enabled",
-      "rebrand/component/Utility": "enabled",
       "rebrand/component/Checkbox": "enabled",
       "rebrand/component/BaseButton": "enabled",
       "rebrand/component/Text": "enabled",
-      "rebrand/component/RadioInput": "enabled"
+      "rebrand/component/RadioInput": "enabled",
+      "rebrand/component/SharedTokens": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -2949,11 +2953,11 @@
       "rebrand/component/TextInput": "enabled",
       "rebrand/component/TextArea": "enabled",
       "rebrand/component/Icon": "enabled",
-      "rebrand/component/Utility": "enabled",
       "rebrand/component/Checkbox": "enabled",
       "rebrand/component/BaseButton": "enabled",
       "rebrand/component/Text": "enabled",
-      "rebrand/component/RadioInput": "enabled"
+      "rebrand/component/RadioInput": "enabled",
+      "rebrand/component/SharedTokens": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -2989,7 +2993,11 @@
       "text.contentImportant": "S:160a2a27af16947819e71c592383009028a16362,",
       "text.contentQuote": "S:719a61fdbd8fa9dd6b5962785f25dba6d0c0e8db,",
       "text.contentSmall": "S:06b6316d506e070783fdeb5c72aef385a8754a23,",
-      "text.legend": "S:8abec4c5d273a75e6f1ff8c39dc1b287e9b2f49b,"
+      "text.legend": "S:8abec4c5d273a75e6f1ff8c39dc1b287e9b2f49b,",
+      "sharedTokens.elevation1": "S:d1ad0c9b38f5b95cf5acd45210377c5561fa8911,",
+      "sharedTokens.elevation2": "S:c7cc94b40295e726272d660b13a5a8c669a11096,",
+      "sharedTokens.elevation3": "S:1df70b1c8b709314b8283f70e5cb2ad66516e5a9,",
+      "sharedTokens.elevation4": "S:156e4e6fe75c2b475668317449ead7428e1f6e49,"
     },
     "$figmaVariableReferences": {
       "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",

@@ -19,7 +19,7 @@
     "canvas/component/TextInput",
     "canvas/component/TextArea",
     "canvas/component/Text",
-    "canvas/component/Utility",
+    "canvas/component/SharedTokens",
     "rebrand/component/BaseButton",
     "rebrand/component/Avatar",
     "rebrand/component/Breadcrumb",
@@ -35,7 +35,7 @@
     "rebrand/component/TextInput",
     "rebrand/component/TextArea",
     "rebrand/component/Text",
-    "rebrand/component/Utility",
+    "rebrand/component/SharedTokens",
     "rebrand/semantic/layout/default",
     "rebrand/semantic/color/rebrandLight",
     "rebrand/semantic/color/rebrandDark"
