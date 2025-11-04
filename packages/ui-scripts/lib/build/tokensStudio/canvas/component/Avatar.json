@@ -182,6 +182,10 @@
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
+    },
+    "rectangleRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
     }
   }
 }
