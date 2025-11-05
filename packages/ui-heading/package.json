@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-heading",
-  "version": "11.0.1",
+  "version": "11.1.0",
   "description": "A component for creating typographic headings",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
