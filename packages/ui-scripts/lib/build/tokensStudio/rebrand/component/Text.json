@@ -154,6 +154,22 @@
     "letterSpacingNormal": {
       "value": "0rem",
       "type": "letterSpacing"
+    },
+    "aiBackgroundColor": {
+      "value": "{color.background.interactive.aiSecondary.active.topGradient}",
+      "type": "color"
+    },
+    "aiTextColor": {
+      "value": "{color.text.accent.violet}",
+      "type": "color"
+    },
+    "primaryColor": {
+      "value": "{color.text.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "errorColor": {
+      "value": "{color.text.error}",
+      "type": "color"
     }
   }
 }
