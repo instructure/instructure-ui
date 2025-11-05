@@ -201,8 +201,8 @@ type BaseThemeVariableKeys = [
   'typography'
 ]
 
+// old base theme, TODO delete if we only have the new themes
 type BaseTheme = {
-  newTheme?: any
   key: string
   description?: string
 } & BaseThemeVariables

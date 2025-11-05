@@ -23,9 +23,10 @@
  */
 
 import sharedThemeTokens from '../../sharedThemeTokens'
-import { BaseTheme, Colors } from '@instructure/shared-types'
+import { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
 import { canvas as newCanvas, type Canvas as NewCanvas } from '../newThemes'
+import { Theme } from '../../index'
 
 const key = 'canvas'
 
@@ -55,15 +56,11 @@ const brandVariables = {
 
 export type CanvasBrandVariables = typeof brandVariables
 
-export type CanvasTheme = BaseTheme & {
-  newTheme?: NewCanvas
-  key: 'canvas'
-} & typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
+export type CanvasTheme = Theme<NewCanvas, 'canvas'> &
+  typeof sharedThemeTokens & { colors: Colors } & CanvasBrandVariables
 
 /**
- * Canvas theme without the `use` function and `variables` prop.
- * Not affected by global theme overrides (`.use()` function).
- * Will be default in the next major version of InstUI
+ * Canvas theme object
  */
 const theme: CanvasTheme = {
   newTheme: newCanvas,

@@ -23,6 +23,10 @@
  */
 import type { Spacing } from './ThemeablePropValues'
 
+type DeepStringRecord = {
+  [key: string]: string | DeepStringRecord
+}
+
 /**
  * Converts shorthand margin values into CSS margin strings using theme spacing tokens.
  *
@@ -32,34 +36,51 @@ import type { Spacing } from './ThemeablePropValues'
  *
  * @param {Spacing | undefined} value - The shorthand margin value string containing space-separated tokens or CSS values.
  *   Can be undefined, in which case '0' is returned.
- * @param {Record<string, any>} spacingMap - The spacing theme object containing margin tokens and nested values.
- *   Typically comes from `sharedTokens.margin` in the component theme.
+ * @param {Record<string, string>} spacingMap - The spacing theme object containing margin tokens and nested values.
+ *   Typically comes from `sharedTokens.margin.spacing` in the component theme.
  *
  * @returns {string} The resolved CSS margin string ready to be used in styles.
  */
 export function calcMarginFromShorthand(
   value: Spacing | undefined,
-  spacingMap: { [key: string]: any }
+  spacingMap: DeepStringRecord
 ) {
-  // array from "space2 space2 space4 space2"
-  const splitMargin = value?.split(' ')
+  if (value === undefined) {
+    return '0'
+  }
+  const tokens = value.trim().split(' ')
 
-  // array from e.g.: "between.cards.md"
-  const splitMarginPaths = splitMargin?.map((margin) => margin.split('.'))
+  // Map each token to its resolved CSS value
+  const resolvedValues = tokens.map(token => {
+    // If the token is already a direct key in spacingMap, and it's a string, return its value
+    const directValue = spacingMap[token]
+    if (typeof directValue === 'string') {
+      return directValue
+    }
 
-  const cssMargin = splitMarginPaths
-    ? splitMarginPaths
-        .map((m: string | string[]) => {
-          if (m.length > 1) {
-            return (m as string[]).reduce(
-              (acc: any, key) => acc?.[key],
-              spacingMap
-            )
-          }
+    // Handle dot notation for nested theme token paths
+    if (token.includes('.')) {
+      const path = token.split('.')
+      let currentLevel: string | DeepStringRecord = spacingMap
 
-          return spacingMap[m[0]] || m[0]
-        })
-        .join(' ')
-    : '0'
-  return cssMargin
+      for (const key of path) {
+        if (currentLevel && typeof currentLevel === 'object' && key in currentLevel) {
+          currentLevel = currentLevel[key]
+        } else {
+          console.warn(`Theme token path "${token}" not found in theme.`)
+          // If path doesn't resolve, return the original token as fallback
+          return token
+        }
+      }
+      if (typeof currentLevel === 'string') {
+        return currentLevel
+      }
+    }
+    // Return the original token if not found (could be a direct CSS value like 'auto', '10px', etc.)
+    console.warn(`Theme token path "${token}" not found in theme.`)
+    return token
+  })
+
+  // Return the space-separated resolved values
+  return resolvedValues.join(' ')
 }

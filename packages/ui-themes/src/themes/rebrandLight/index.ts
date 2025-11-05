@@ -23,20 +23,18 @@
  */
 
 import sharedThemeTokens from '../../sharedThemeTokens'
-import { BaseTheme, Colors } from '@instructure/shared-types'
+import type { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
 import {
   rebrandLight as newRebrandLight,
   type RebrandLight as NewRebrandLight
 } from '../newThemes'
+import { Theme } from '../../index'
 
 const key = 'rebrand-light'
 
-export type RebrandLightTheme = BaseTheme & {
-  newTheme?: NewRebrandLight
-  key: 'rebrand-light'
-} & typeof sharedThemeTokens & { colors: Colors }
-
+export type RebrandLightTheme = Theme<NewRebrandLight, 'rebrand-light'> &
+  typeof sharedThemeTokens & { colors: Colors }
 /**
  * Canvas high contrast theme without the `use` function and `variables` prop.
  * Not affected by global theme overrides (`.use()` function).
