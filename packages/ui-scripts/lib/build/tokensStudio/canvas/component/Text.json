@@ -95,6 +95,14 @@
       "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
+    "fontWeightImportant": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "fontWeightRegular": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
     "label": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
@@ -127,17 +135,25 @@
       "value": "1.125",
       "type": "lineHeights"
     },
-    "titleCardLarge": {
-      "value": "1.5rem",
+    "fontSizeXLarge": {
+      "value": "{fontSize.text2xl}",
       "type": "fontSizes"
     },
-    "titleCardMini": {
-      "value": "1rem",
-      "type": "fontSizes"
+    "paragraphMargin": {
+      "value": "1.5rem 0rem",
+      "type": "paragraphSpacing"
     },
-    "titleCardRegular": {
-      "value": "1.25rem",
-      "type": "fontSizes"
+    "letterSpacingCondensed": {
+      "value": "-0.0625rem",
+      "type": "letterSpacing"
+    },
+    "letterSpacingExpanded": {
+      "value": "0.0625rem",
+      "type": "letterSpacing"
+    },
+    "letterSpacingNormal": {
+      "value": "0rem",
+      "type": "letterSpacing"
     }
   }
 }
