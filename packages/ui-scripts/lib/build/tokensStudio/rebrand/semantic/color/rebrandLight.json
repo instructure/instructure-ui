@@ -88,7 +88,7 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.blue.blue30}",
+            "value": "{color.grey.grey30}",
             "type": "color"
           }
         },
@@ -426,7 +426,7 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.blue.blue30}",
+            "value": "{color.grey.grey30}",
             "type": "color"
           }
         },
@@ -479,7 +479,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.red.red30}",
+              "value": "{color.grey.grey30}",
               "type": "color"
             }
           }
@@ -515,7 +515,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.green.green30}",
+              "value": "{color.grey.grey30}",
               "type": "color"
             }
           }
@@ -745,7 +745,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.white}",
+              "value": "{color.grey.grey40}",
               "type": "color"
             }
           },
@@ -817,7 +817,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.green.green30}",
+              "value": "{color.grey.grey40}",
               "type": "color"
             }
           },
@@ -835,7 +835,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.red.red30}",
+              "value": "{color.grey.grey40}",
               "type": "color"
             }
           }
@@ -1003,7 +1003,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.white}",
+              "value": "{color.grey.grey40}",
               "type": "color"
             }
           },
@@ -1075,7 +1075,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.green.green30}",
+              "value": "{color.grey.grey40}",
               "type": "color"
             }
           },
@@ -1093,7 +1093,7 @@
               "type": "color"
             },
             "disabled": {
-              "value": "{color.red.red30}",
+              "value": "{color.grey.grey40}",
               "type": "color"
             }
           }
