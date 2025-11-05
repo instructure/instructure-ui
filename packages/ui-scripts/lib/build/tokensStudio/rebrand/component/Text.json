@@ -7,7 +7,8 @@
         "fontSize": "{fontSize.textLg}",
         "lineHeight": "{lineHeight.heading.textLg}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for introductory or overview text that explains the purpose or context of an entire page."
     },
     "descriptionSection": {
       "value": {
@@ -16,7 +17,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for text that introduces or summarizes a specific section within a page."
     },
     "content": {
       "value": {
@@ -25,7 +27,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for standard descriptive body text that provides detailed information."
     },
     "contentImportant": {
       "value": {
@@ -34,7 +37,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used to highlight key statements or essential information within descriptive text."
     },
     "contentQuote": {
       "value": {
@@ -43,7 +47,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used to style quoted or referenced text distinct from the main content."
     },
     "contentSmall": {
       "value": {
@@ -52,7 +57,8 @@
         "fontSize": "{fontSize.textSm}",
         "lineHeight": "{lineHeight.paragraph.textSm}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for fine-print or secondary descriptions such as notes or disclaimers."
     },
     "legend": {
       "value": {
@@ -61,7 +67,8 @@
         "fontSize": "{fontSize.textXs}",
         "lineHeight": "{lineHeight.paragraph.textXs}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for short explanatory text accompanying data visualizations, icons, or UI elements."
     },
     "fontSizeLarge": {
       "value": "1.375rem",
