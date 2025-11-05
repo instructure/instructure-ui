@@ -80,7 +80,7 @@ type TableProps = TableOwnProps &
   WithStyleProps<TableTheme, TableStyle> &
   OtherHTMLAttributes<TableOwnProps>
 
-type TableStyle = ComponentStyle<'table'>
+type TableStyle = ComponentStyle<'table' | 'liveRegion'>
 
 const propTypes: PropValidators<PropKeys> = {
   caption: PropTypes.node.isRequired,
