@@ -32,7 +32,6 @@ import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import functionalComponentThemes from '../../functionalComponentThemes'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -88,20 +87,13 @@ class Document extends Component<DocumentProps, DocumentState> {
         generateTheme = doc?.componentInstance?.generateComponentTheme
       }
     } else {
-      // TODO make it work for new themes
       generateTheme = doc?.children?.find(
         (value) => value.id === this.state.selectedDetailsTabId
       )?.componentInstance?.generateComponentTheme
     }
-    const generateThemeFunctional =
-      functionalComponentThemes[
-        doc.id as keyof typeof functionalComponentThemes
-      ]
     if (typeof generateTheme === 'function' && themeVariables) {
+      // @ts-ignore todo type
       this.setState({ componentTheme: generateTheme(themeVariables) })
-    } else if (generateThemeFunctional && themeVariables) {
-      const componentTheme = await generateThemeFunctional(themeVariables)
-      this.setState({ componentTheme: componentTheme })
     } else {
       this.setState({ componentTheme: undefined })
     }
@@ -110,6 +102,7 @@ class Document extends Component<DocumentProps, DocumentState> {
   componentDidUpdate(prevProps: typeof this.props, prevState: DocumentState) {
     this.props.makeStyles?.()
     if (
+      // @ts-ignore todo check
       this.props.themeVariables?.key !== prevProps.themeVariables?.key ||
       this.state.selectedDetailsTabId != prevState.selectedDetailsTabId
     ) {
@@ -160,10 +153,7 @@ class Document extends Component<DocumentProps, DocumentState> {
             </code>
           </View>
         ) : null}
-        <ComponentTheme
-          componentTheme={componentTheme}
-          themeVariables={themeVariables}
-        />
+        <ComponentTheme componentTheme={componentTheme} />
 
         <View margin="x-large 0 0" display="block">
           <Heading

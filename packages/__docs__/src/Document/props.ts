@@ -22,17 +22,17 @@
  * SOFTWARE.
  */
 
-import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { ThemeVariables } from '@instructure/shared-types'
+import { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { BaseTheme, ThemeVariables } from '@instructure/shared-types'
 import { DocData } from '../App/props'
-import { Theme } from '@instructure/ui-themes'
+import { NewBaseTheme } from '@instructure/ui-themes'
 
 type DocDataType = DocData & { legacyGitBranch?: string }
 
 type DocumentOwnProps = {
   doc: DocDataType
   description: string
-  themeVariables?: Theme
+  themeVariables?: BaseTheme | NewBaseTheme
   repository?: string
   layout?: 'small' | 'medium' | 'large' | 'x-large'
 }

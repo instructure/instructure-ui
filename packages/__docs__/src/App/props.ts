@@ -99,10 +99,6 @@ type ThemeFunctionsClassic = {
   [K in keyof ThemeVariables]: (theme: Theme) => ThemeVariables[K]
 }
 
-export type ThemeFunctionsFunctional = Partial<{
-  [K in keyof ThemeVariables]: (theme: Theme) => Promise<ThemeVariables[K]>
-}>
-
 type DocData = ProcessedFile & {
   componentInstance: Record<string, any> & {
     generateComponentTheme?: ThemeFunctionsClassic[keyof ThemeFunctionsClassic]

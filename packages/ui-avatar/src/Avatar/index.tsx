@@ -29,7 +29,6 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import type { AvatarProps } from './props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
@@ -57,7 +56,6 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 
     const styles = useStyle({
       generateStyle,
-      generateComponentTheme,
       params: {
         loaded,
         size,
