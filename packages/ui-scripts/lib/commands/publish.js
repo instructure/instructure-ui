@@ -85,7 +85,7 @@ async function publish({ packageName, version, isMaintenance, prRelease }) {
         ? `v${version.split('.')[0]}_maintenance`
         : 'latest'
       info(`📦  Version: ${version}, Tag: ${tag}`)
-      return publishRegularVersion({
+      await publishRegularVersion({
         version,
         tag,
         packages
@@ -93,7 +93,7 @@ async function publish({ packageName, version, isMaintenance, prRelease }) {
     } else {
       const tag = prRelease ? 'pr-snapshot' : 'snapshot'
       info(`📦  Version: ${version}, Tag: ${tag}`)
-      return publishSnapshotVersion({
+      await publishSnapshotVersion({
         version,
         packageName,
         packages,
@@ -215,7 +215,7 @@ async function publishPackage(pkg, tag) {
       setTimeout(resolve, delay)
     })
 
-  const publishArgs = ['publish', pkg.location, '--tag', tag]
+  const publishArgs = ['publish', pkg.location, '--tag', tag, '--no-git-checks']
   await runCommandAsync('pnpm', publishArgs)
 
   return wait(500)
