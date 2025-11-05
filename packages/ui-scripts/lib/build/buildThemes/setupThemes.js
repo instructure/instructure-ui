@@ -270,7 +270,7 @@ const setupThemes = async (targetPath, input) => {
     textDecoration?: TokenTextDecorationValue
   }
 
-  export type BaseTheme<P extends Record<string, any>, S extends Record<string, any>> = {
+export type BaseTheme<P extends Record<string, any> = Record<string, any>, S extends Record<string, any> = Record<string, any>> = {
     primitives: P
     semantics: S
     components: ComponentTypes

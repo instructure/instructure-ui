@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 import type { ComponentTypes as NewComponentTypes } from './themes/newThemes/componentTypes'
-import type { BaseTheme as NewBaseTheme } from './themes/newThemes/commonTypes'
+import type {
+  BaseTheme as NewBaseTheme,
+  TokenBoxshadowValueInst,
+  TokenTypographyValueInst
+} from './themes/newThemes/commonTypes'
+import type { SharedTokens } from './themes/newThemes/componentTypes/sharedTokens'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
 import type {
@@ -56,15 +61,17 @@ import type {
 type ThemeMap = {
   canvas: CanvasTheme
   'canvas-high-contrast': CanvasHighContrastTheme
-
   // needed for custom theme support
   [k: string]: BaseTheme
 }
 
 type ThemeKeys = keyof ThemeMap
 
-type Theme = BaseTheme & {
-  key: ThemeKeys
+type Theme<
+  NewThemeType extends NewBaseTheme = NewBaseTheme,
+  K extends ThemeKeys = ThemeKeys
+> = BaseTheme & { newTheme: NewThemeType } & {
+  key: K
 } & Partial<CanvasBrandVariables>
 
 type ThemeSpecificStyle<ComponentTheme> = {
@@ -99,5 +106,8 @@ export type {
   NewRebrandDark,
   NewRebrandLight,
   NewComponentTypes,
-  NewBaseTheme
+  NewBaseTheme,
+  TokenBoxshadowValueInst,
+  TokenTypographyValueInst,
+  SharedTokens
 }
