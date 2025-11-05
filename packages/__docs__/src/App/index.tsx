@@ -76,6 +76,7 @@ import type {
 } from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 import type { Spacing } from '@instructure/emotion'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 type AppContextType = {
@@ -494,11 +495,7 @@ class App extends Component<AppProps, AppState> {
         <Heading level="h1" as="h2" margin="0 0 medium 0">
           Theme: {themeKey}
         </Heading>
-        <Theme
-          themeKey={themeKey}
-          variables={theme.resource}
-          requirePath={theme.requirePath}
-        />
+        <Theme themeKey={themeKey} variables={theme.resource} />
       </View>
     )
     return (
@@ -528,7 +525,7 @@ class App extends Component<AppProps, AppState> {
     return <Section id={key}>{this.renderWrappedContent(iconContent)}</Section>
   }
 
-  renderDocument(docId: string, repository: string) {
+  renderDocument(docId: keyof NewComponentTypes, repository: string) {
     const { parents } = this.state.docsData!
     const children: any[] = []
     const currentData = this.state.currentDocData
@@ -723,7 +720,7 @@ class App extends Component<AppProps, AppState> {
         </View>
       )
     } else if (doc) {
-      return this.renderDocument(key!, repository)
+      return this.renderDocument((key as keyof NewComponentTypes)!, repository)
     } else {
       return (
         <View

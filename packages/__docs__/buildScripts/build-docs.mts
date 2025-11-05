@@ -259,22 +259,10 @@ function tryParseReadme(dirName: string) {
 
 function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
-  parsed[canvas.key] = {
-    resource: canvas,
-    requirePath: '@instructure/canvas-theme'
-  }
-  parsed[canvasHighContrast.key] = {
-    resource: canvasHighContrast,
-    requirePath: '@instructure/canvas-high-contrast-theme'
-  }
-  parsed[rebrandLight.key] = {
-    resource: rebrandLight,
-    requirePath: '@instructure/canvas-high-contrast-theme'
-  }
-  parsed[rebrandDark.key] = {
-    resource: rebrandDark,
-    requirePath: '@instructure/canvas-high-contrast-theme'
-  }
+  parsed[canvas.key] = { resource: canvas }
+  parsed[canvasHighContrast.key] = { resource: canvasHighContrast }
+  parsed[rebrandLight.key] = { resource: rebrandLight }
+  parsed[rebrandDark.key] = { resource: rebrandDark }
   return parsed
 }
 
