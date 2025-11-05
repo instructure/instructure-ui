@@ -159,7 +159,7 @@
       "value": "{color.background.interactive.aiSecondary.active.topGradient}",
       "type": "color"
     },
-    "aiTextColor": {
+    "aiColor": {
       "value": "{color.text.accent.violet}",
       "type": "color"
     },
@@ -169,6 +169,30 @@
     },
     "errorColor": {
       "value": "{color.text.error}",
+      "type": "color"
+    },
+    "baseColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "baseOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "mutedColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "mutedOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "successColor": {
+      "value": "{color.text.success}",
+      "type": "color"
+    },
+    "warningColor": {
+      "value": "{color.text.warning}",
       "type": "color"
     }
   }
