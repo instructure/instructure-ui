@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { calcMarginFromShorthand } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
 type StyleParams = {
@@ -44,12 +45,13 @@ type StyleParams = {
  * Generates the style object from the theme and provided additional information
  * @param componentTheme The theme variable object.
  * @param params Additional parameters to customize the style.
+ * @param sharedTokens Shared token object that stores common values for the theme.
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
   componentTheme: NewComponentTypes['Avatar'],
   params: StyleParams,
-  sharedTokens: NewComponentTypes['SharedTokens']
+  sharedTokens: SharedTokens
 ): AvatarStyle => {
   const {
     loaded,

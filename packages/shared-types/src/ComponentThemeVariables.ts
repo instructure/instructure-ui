@@ -36,7 +36,8 @@ import {
 } from './BaseTheme'
 
 export interface ComponentTheme {
-  [variableName: string]: string | number | undefined
+  // it can have multiple levels in SharedTokens
+  [variableName: string]: string | number | undefined | Record<string, any>
 }
 
 export type AlertTheme = {
