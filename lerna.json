@@ -3,7 +3,6 @@
   "npmClient": "pnpm",
   "command": {
     "version": {
-      "allowBranch": ["master", "v*_maintenance"],
       "message": "chore(release): %s"
     }
   },
