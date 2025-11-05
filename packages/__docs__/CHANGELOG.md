@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.1.0) (2025-11-05)
+
+
+### Bug Fixes
+
+* fix themes for subcomponents displaying wrong in the docs app ([d0d821e](https://github.com/instructure/instructure-ui/commit/d0d821edbc9eb90b3a1217b20d412e1a86a93fd7))
+
+
+### Features
+
+* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
+
+
+
+
+
 ## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-alerts",
-  "version": "11.0.1",
+  "version": "11.1.0",
   "description": "An alert component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

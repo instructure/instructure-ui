@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.1.0) (2025-11-05)
+
+
+### Bug Fixes
+
+* **ui-table:** fix selectable table screen reader issue on select all checkbox in the column header ([93a9847](https://github.com/instructure/instructure-ui/commit/93a9847800eea63e874587d19cf06c76bcb9ab95))
+
+
+### Features
+
+* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
+
+
+
+
+
 ## [11.0.1](https://github.com/instructure/instructure-ui/compare/v11.0.0...v11.0.1) (2025-10-13)
 
 **Note:** Version bump only for package @instructure/ui-table

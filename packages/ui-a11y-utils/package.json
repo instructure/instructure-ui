@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y-utils",
-  "version": "11.0.1",
+  "version": "11.1.0",
   "description": "A collection of utilities for managing focus and screen reader behavior",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
