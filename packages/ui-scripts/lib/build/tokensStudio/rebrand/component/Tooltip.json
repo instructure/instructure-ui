@@ -1,0 +1,50 @@
+{
+  "tooltip": {
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingVertical": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "borderRadiusBase": {
+      "value": "{borderRadius.xs}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "baseBackgroundColor": {
+      "value": "{color.background.elevatedSurface.inverted}",
+      "type": "color"
+    },
+    "onColorBackgroundColor": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "baseTextColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "onColorTextColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    }
+  },
+  "baseButton": {
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    }
+  }
+}
