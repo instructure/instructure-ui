@@ -88,18 +88,6 @@
       "value": "1.375rem",
       "type": "fontSizes"
     },
-    "heightSm": {
-      "value": "{size.interactive.height.sm}",
-      "type": "sizing"
-    },
-    "heightMd": {
-      "value": "{size.interactive.height.md}",
-      "type": "sizing"
-    },
-    "heightLg": {
-      "value": "{size.interactive.height.lg}",
-      "type": "sizing"
-    },
     "gapContent": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
