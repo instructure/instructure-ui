@@ -7,7 +7,8 @@
         "fontSize": "{fontSize.textLg}",
         "lineHeight": "{lineHeight.heading.textLg}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for introductory or overview text that explains the purpose or context of an entire page."
     },
     "descriptionSection": {
       "value": {
@@ -16,7 +17,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for text that introduces or summarizes a specific section within a page."
     },
     "content": {
       "value": {
@@ -25,7 +27,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for standard descriptive body text that provides detailed information."
     },
     "contentImportant": {
       "value": {
@@ -34,7 +37,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used to highlight key statements or essential information within descriptive text."
     },
     "contentQuote": {
       "value": {
@@ -43,7 +47,8 @@
         "fontSize": "{fontSize.textBase}",
         "lineHeight": "{lineHeight.paragraph.textBase}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used to style quoted or referenced text distinct from the main content."
     },
     "contentSmall": {
       "value": {
@@ -52,7 +57,8 @@
         "fontSize": "{fontSize.textSm}",
         "lineHeight": "{lineHeight.paragraph.textSm}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for fine-print or secondary descriptions such as notes or disclaimers."
     },
     "legend": {
       "value": {
@@ -61,7 +67,8 @@
         "fontSize": "{fontSize.textXs}",
         "lineHeight": "{lineHeight.paragraph.textXs}"
       },
-      "type": "typography"
+      "type": "typography",
+      "description": "Used for short explanatory text accompanying data visualizations, icons, or UI elements."
     },
     "fontSizeLarge": {
       "value": "1.375rem",
@@ -95,6 +102,14 @@
       "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
+    "fontWeightImportant": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "fontWeightRegular": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
     "label": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
@@ -112,7 +127,7 @@
       "type": "lineHeights"
     },
     "lineHeight150": {
-      "value": "1.50",
+      "value": "1.5",
       "type": "lineHeights"
     },
     "lineHeightCondensed": {
@@ -127,17 +142,65 @@
       "value": "1.125",
       "type": "lineHeights"
     },
-    "titleCardLarge": {
-      "value": "1.5rem",
+    "fontSizeXLarge": {
+      "value": "{fontSize.text2xl}",
       "type": "fontSizes"
     },
-    "titleCardMini": {
-      "value": "1rem",
-      "type": "fontSizes"
+    "paragraphMargin": {
+      "value": "1.5rem 0rem",
+      "type": "paragraphSpacing"
     },
-    "titleCardRegular": {
-      "value": "1.25rem",
-      "type": "fontSizes"
+    "letterSpacingCondensed": {
+      "value": "-0.0625rem",
+      "type": "letterSpacing"
+    },
+    "letterSpacingExpanded": {
+      "value": "0.0625rem",
+      "type": "letterSpacing"
+    },
+    "letterSpacingNormal": {
+      "value": "0rem",
+      "type": "letterSpacing"
+    },
+    "aiBackgroundColor": {
+      "value": "{color.background.interactive.aiSecondary.active.topGradient}",
+      "type": "color"
+    },
+    "aiColor": {
+      "value": "{color.text.accent.violet}",
+      "type": "color"
+    },
+    "primaryColor": {
+      "value": "{color.text.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "errorColor": {
+      "value": "{color.text.error}",
+      "type": "color"
+    },
+    "baseColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "baseOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "mutedColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "mutedOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "successColor": {
+      "value": "{color.text.success}",
+      "type": "color"
+    },
+    "warningColor": {
+      "value": "{color.text.warning}",
+      "type": "color"
     }
   }
 }
