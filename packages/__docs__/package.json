@@ -1,7 +1,7 @@
 {
   "name": "docs-app",
   "private": true,
-  "version": "11.1.0",
+  "version": "11.2.0",
   "description": "Documentation and showcase application for Instructure-UI.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {

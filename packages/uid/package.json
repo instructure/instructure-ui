@@ -1,6 +1,6 @@
 {
   "name": "@instructure/uid",
-  "version": "11.1.0",
+  "version": "11.2.0",
   "description": "A unique (CSS-safe) id generator made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
