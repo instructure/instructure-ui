@@ -343,11 +343,11 @@
       },
       "elevatedSurface": {
         "base": {
-          "value": "{color.white}",
+          "value": "{color.grey.grey110}",
           "type": "color"
         },
         "inverted": {
-          "value": "{color.grey.grey100}",
+          "value": "{color.grey.grey40}",
           "type": "color"
         }
       }
