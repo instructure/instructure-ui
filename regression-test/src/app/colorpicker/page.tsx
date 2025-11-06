@@ -29,7 +29,7 @@ import {
   ColorIndicator as ci,
   ColorMixer as cm,
   ColorPreset as cp
-} from 'instructure-ui/ui-color-picker/es/index'
+} from '@instructure/ui'
 
 const ColorContrast = cc as any
 const ColorIndicator = ci as any

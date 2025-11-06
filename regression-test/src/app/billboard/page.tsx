@@ -23,13 +23,13 @@
  */
 'use client'
 import React from 'react'
-import { Billboard as bb } from 'instructure-ui/ui-billboard/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
 import {
+  Billboard as bb,
+  View as vw,
   IconUserLine as iul,
   IconGradebookLine as igl,
   IconPlusLine as ipl
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const Billboard = bb as any
 const View = vw as any

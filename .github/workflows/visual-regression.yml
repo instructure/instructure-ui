@@ -13,16 +13,30 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('regression-test/package-lock.json') }}
       - name: Build InstUI
-        run: npm ci && npm run bootstrap
-      - name: Install dependencies
+        run: pnpm install --frozen-lockfile && pnpm run bootstrap
+      - name: Install regression-test dependencies
         run: npm ci
+        working-directory: regression-test
+      - name: Install Cypress binary
+        run: npx cypress install
         working-directory: regression-test
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         env:
           ELECTRON_EXTRA_LAUNCH_ARGS: "--remote-debugging-port=9222"
         with:
+          install: false
           build: npm run build
           start: npm start
           working-directory: regression-test
@@ -42,10 +56,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install dependencies
+          cache: 'pnpm'
+      - name: Build InstUI
+        run: pnpm install --frozen-lockfile && pnpm run bootstrap
+      - name: Install regression-test dependencies
         run: npm ci
         working-directory: regression-test
       - name: Download Cypress test results

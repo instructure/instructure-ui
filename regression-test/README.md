@@ -5,15 +5,26 @@ This is a simple Next.js app importing (locally) @instructure/ui. This allows us
 - With Cypress and Chromatic we can detect visual changes in our components (e.g. the `<Button/>` component got a larger padding)
 - With Cypress and axe-core we can detect a11y issues (e.g. the `<Button/>` component is missing an `aria-label`)
 
+## Why npm instead of pnpm?
+
+This app uses **npm** for package management, while the main InstUI monorepo uses **pnpm**. This is intentional to simulate how external consumers would use the `@instructure/ui` package.
+
+Since most external users install packages via npm, using it here helps us:
+
+- Test the package as it would be consumed in real-world scenarios
+- Catch potential issues with dependency resolution that differ between npm and pnpm
+- Ensure published packages work correctly with npm's installation behavior
+
 ## Development
 
 ### To run this app and cypress tests locally
 
-1. Run `npm install` and `npm run bootstrap` from the project root.
+1. Run `pnpm install` and `pnpm run bootstrap` from the project root.
 2. Then open the regression test folder: `cd regression-test`
-3. Run the dev server with `npm run dev`
-4. The dev server will be accessible at `localhost:3000`
-5. Once the dev server is running you can start the Cypress e2e tests with the `npm run cypress` command. Run `npm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
+3. Install dependencies: `npm install`
+4. Run the dev server with `npm run dev`
+5. The dev server will be accessible at `localhost:3000`
+6. Once the dev server is running you can start the Cypress e2e tests with the `npm run cypress` command. Run `npm run cypress-chrome` to open the Cypress GUI where you can see detailed error logs, snapshots etc.
 
 ### To add a new component
 

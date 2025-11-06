@@ -24,5 +24,6 @@
     "noUnusedParameters": true,
     "lib": ["ES2019", "DOM", "DOM.Iterable"],
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "exclude": ["regression-test", "node_modules"]
 }

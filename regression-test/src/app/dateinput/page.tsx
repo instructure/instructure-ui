@@ -26,9 +26,9 @@
 import React, { useState } from 'react'
 import {
   DateInput as di,
-  DateInput2 as di2
-} from 'instructure-ui/ui-date-input/es/index'
-import { IconAddLine } from 'instructure-ui/ui-icons/es/index'
+  DateInput2 as di2,
+  IconAddLine
+} from '@instructure/ui'
 
 const DateInput = di as any
 const DateInput2 = di2 as any

@@ -23,7 +23,7 @@
  */
 
 'use client'
-import { Link } from 'instructure-ui/ui-link/es/index'
+import { Link } from '@instructure/ui'
 
 const components = [
   'small-components',

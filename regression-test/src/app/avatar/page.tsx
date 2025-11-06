@@ -23,11 +23,11 @@
  */
 'use client'
 import React from 'react'
-import { Avatar as avv } from 'instructure-ui/ui-avatar/es/index'
 import {
+  Avatar as avv,
   IconGroupLine as igl,
   IconAiSolid
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const Avatar = avv as any
 const IconGroupLine = igl as any

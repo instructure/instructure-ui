@@ -24,13 +24,13 @@
 
 'use client'
 import React from 'react'
-import { Drilldown as dd } from 'instructure-ui/ui-drilldown/es/index'
-import { Button as btn } from 'instructure-ui/ui-buttons/es/index'
-import { Pill as pl } from 'instructure-ui/ui-pill/es/index'
 import {
+  Drilldown as dd,
+  Button as btn,
+  Pill as pl,
   IconCheckSolid as ics,
   IconArrowOpenEndSolid as iaoes
-} from 'instructure-ui/ui-icons/es/index'
+} from '@instructure/ui'
 
 const Drilldown = dd as any
 const Button = btn as any

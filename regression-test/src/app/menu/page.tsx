@@ -24,8 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Menu as mn } from 'instructure-ui/ui-menu/es/index'
-import { Button as btn } from 'instructure-ui/ui-buttons/es/index'
+import { Menu as mn, Button as btn } from '@instructure/ui'
 import { NoSSR } from '../NoSSR'
 
 const Menu = mn as any

@@ -25,10 +25,10 @@
 import React from 'react'
 import {
   Checkbox as cb,
-  CheckboxGroup as cg
-} from 'instructure-ui/ui-checkbox/es/index'
-import { FormFieldGroup as ffg } from 'instructure-ui/ui-form-field/es/index'
-import { ScreenReaderContent as src } from 'instructure-ui/ui-a11y-content/es/index'
+  CheckboxGroup as cg,
+  FormFieldGroup as ffg,
+  ScreenReaderContent as src
+} from '@instructure/ui'
 
 const Checkbox = cb as any
 const CheckboxGroup = cg as any

@@ -25,10 +25,7 @@
 import { resolve as resolvePath } from 'path'
 import baseConfig from '@instructure/ui-webpack-config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import chokidar from 'chokidar'
-import { globbySync } from 'globby'
 import { merge } from 'webpack-merge'
-import { processSingleFile } from './lib/build-docs.mjs'
 import resolve from './resolve.mjs'
 import webpack from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
@@ -62,18 +59,6 @@ const config = merge(baseConfig, {
       directory: outputPath,
     },
     host: '0.0.0.0',
-    historyApiFallback: true,
-    onListening: function () {
-      // devServer is watching source files by default and hot reloading the docs page if they are changed
-      // however markdown files (i.e. README.md) need to be recompiled hence the need for chokidar
-      const paths = globbySync(['packages/**/*.md', 'docs/**/*.md'], { cwd: '../../' }).map(p => '../../' + p)
-      chokidar
-        .watch(paths)
-        .on('change', (evt) => {
-          const fullPath = resolvePath(import.meta.dirname, evt)
-          processSingleFile(fullPath)
-        })
-    },
     client: {
       overlay: false,
     },

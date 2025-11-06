@@ -31,7 +31,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "instructure-ui": "file:../packages",
+    "@instructure/ui": "file:../packages/ui",
     "next": "^15",
     "react": "^19.1",
     "react-dom": "^19.1"

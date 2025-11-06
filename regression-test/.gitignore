@@ -39,3 +39,10 @@ next-env.d.ts
 # cypress
 /cypress/downloads
 /cypress/screenshots
+
+# claude
+.claude/settings.local.json
+
+# This app uses npm, not pnpm
+pnpm-lock.yaml
+pnpm-workspace.yaml

@@ -42,6 +42,11 @@ export default {
       demandOption: true
     })
     yargs.option('svgoConfig', { string: true, desc: 'svgo config file' })
+    yargs.option('skipOptimization', {
+      boolean: true,
+      desc: 'skip SVGO optimization (temporary workaround)',
+      default: false
+    })
   },
   handler: async (argv) => {
     const configFile = path.join(process.cwd(), argv.config)
@@ -52,16 +57,24 @@ export default {
       argv.svgoConfig && path.join(process.cwd(), argv.svgoConfig)
     const svgoConfigOption = svgoConfigFile ? ['--config', svgoConfigFile] : []
 
-    // optimize svgs in place
-    runCommandSync('svgo', [
-      '--quiet',
-      '--recursive',
-      '--folder',
-      svgSourceDir,
-      '--output',
-      svgSourceDir,
-      ...svgoConfigOption
-    ])
+    // TODO: SVGO optimization temporarily skippable during pnpm migration
+    // The build-icons script runs SVGO which modifies all 648 SVG files in-place,
+    // causing massive git diffs. This is a pre-existing issue. The --skipOptimization
+    // flag allows bootstrap to generate icon components without modifying source SVGs.
+    // To re-enable: remove --skipOptimization flag and ensure all SVGs are optimized
+    // in master first (separate PR).
+    if (!argv.skipOptimization) {
+      // optimize svgs in place
+      runCommandSync('svgo', [
+        '--quiet',
+        '--recursive',
+        '--folder',
+        svgSourceDir,
+        '--output',
+        svgSourceDir,
+        ...svgoConfigOption
+      ])
+    }
 
     // cleanup before generating output
     if (fs.existsSync(config.destination)) {

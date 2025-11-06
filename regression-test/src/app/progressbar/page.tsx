@@ -26,10 +26,10 @@
 import React from 'react'
 import {
   ProgressBar as pb,
-  ProgressCircle as pc
-} from 'instructure-ui/ui-progress/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { Text as tx } from 'instructure-ui/ui-text/es/index'
+  ProgressCircle as pc,
+  View as vw,
+  Text as tx
+} from '@instructure/ui'
 
 const ProgressCircle = pc as any
 const ProgressBar = pb as any

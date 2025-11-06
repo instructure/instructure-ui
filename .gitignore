@@ -1,5 +1,6 @@
 node_modules/
 npm-debug.log
+pnpm-debug.log
 lerna-debug.log
 ./build-storybook.log
 coverage/
@@ -9,10 +10,10 @@ __build__
 .idea
 .DS_Store
 .viminfo
-.npmrc
 .env
 .env.test
 .tmp/
+.pnpm-store/
 
 tsconfig.build.tsbuildinfo
 
@@ -31,3 +32,6 @@ tsconfig.build.tsbuildinfo
 .claude/commands/*
 !.claude/commands/commit.md
 !.claude/commands/pr.md
+
+# Playwright MCP
+.playwright-mcp
