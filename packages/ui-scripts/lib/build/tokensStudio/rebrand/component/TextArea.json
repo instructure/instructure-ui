@@ -92,7 +92,7 @@
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
-    "paddingHorizontal": {
+    "padding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
