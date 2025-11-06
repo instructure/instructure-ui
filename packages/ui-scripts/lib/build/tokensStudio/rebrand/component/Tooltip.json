@@ -8,6 +8,10 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
     "paddingHorizontal": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
@@ -17,7 +21,7 @@
       "type": "spacing"
     },
     "borderRadiusBase": {
-      "value": "{borderRadius.xs}",
+      "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
     "borderWidth": {
@@ -39,12 +43,10 @@
     "onColorTextColor": {
       "value": "{color.text.base}",
       "type": "color"
-    }
-  },
-  "baseButton": {
-    "fontSize": {
-      "value": "{fontSize.textSm}",
-      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
     }
   }
 }
