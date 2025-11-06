@@ -23,12 +23,14 @@
  */
 'use client'
 import React from 'react'
-import { Byline as bl } from 'instructure-ui/ui-byline/es/index'
-import { Avatar as av } from 'instructure-ui/ui-avatar/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { Heading as hd } from 'instructure-ui/ui-heading/es/index'
-import { Link as lk } from 'instructure-ui/ui-link/es/index'
-import { Text as tx } from 'instructure-ui/ui-text/es/index'
+import {
+  Byline as bl,
+  Avatar as av,
+  View as vw,
+  Heading as hd,
+  Link as lk,
+  Text as tx
+} from '@instructure/ui'
 
 const Byline = bl as any
 const Avatar = av as any

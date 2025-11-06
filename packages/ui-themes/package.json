@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "11.0.1",
+  "version": "11.2.0",
   "description": "A library of instructure themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,13 +22,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "11.0.1",
+    "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@instructure/shared-types": "11.0.1",
+    "@instructure/shared-types": "workspace:*",
     "@tokens-studio/types": "^0.5.2"
   },
   "publishConfig": {

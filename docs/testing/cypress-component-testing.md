@@ -14,13 +14,13 @@ InstUI uses [Cypress Component Testing](https://docs.cypress.io/guides/component
 You can run them from the root with the following command:
 
 ```
-npm run cy:component
+pnpm run cy:component
 ```
 
 Run specific test file:
 
 ```
-npm run cy:component -- --spec "cypress/component/Alerts.cy.tsx"
+pnpm run cy:component -- --spec "cypress/component/Alerts.cy.tsx"
 ```
 
 ### Creating new tests

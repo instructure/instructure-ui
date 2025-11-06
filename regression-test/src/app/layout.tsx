@@ -25,7 +25,7 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { InstUISettingsProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/ui'
 
 const inter = Inter({ subsets: ['latin'] })
 

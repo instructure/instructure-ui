@@ -1,5 +1,10 @@
 {
-  "version": "11.0.1",
-  "npmClient": "npm",
+  "version": "11.2.0",
+  "npmClient": "pnpm",
+  "command": {
+    "version": {
+      "message": "chore(release): %s"
+    }
+  },
   "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

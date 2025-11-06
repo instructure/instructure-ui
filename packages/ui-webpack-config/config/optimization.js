@@ -29,6 +29,7 @@ export default {
     chunks: 'all'
   },
   sideEffects: true,
+  /** @type {Array<any>} */
   minimizer: [
     new TerserWebpackPlugin({
       parallel: true,

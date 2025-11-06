@@ -24,20 +24,18 @@
 
 'use client'
 import React from 'react'
-import { TextInput as ti } from 'instructure-ui/ui-text-input/es/index'
-import { NumberInput as ni } from 'instructure-ui/ui-number-input/es/index'
-import { TextArea as ta } from 'instructure-ui/ui-text-area/es/index'
 import {
+  TextInput as ti,
+  NumberInput as ni,
+  TextArea as ta,
   Checkbox as cb,
-  CheckboxGroup as cg
-} from 'instructure-ui/ui-checkbox/es/index'
-import {
+  CheckboxGroup as cg,
   RadioInput as ri,
-  RadioInputGroup as rig
-} from 'instructure-ui/ui-radio-input/es/index'
-import { FileDrop as fd } from 'instructure-ui/ui-file-drop/es/index'
-import { ColorPicker as cp } from 'instructure-ui/ui-color-picker/es/index'
-import { DateTimeInput as dti } from 'instructure-ui/ui-date-time-input/es/index'
+  RadioInputGroup as rig,
+  FileDrop as fd,
+  ColorPicker as cp,
+  DateTimeInput as dti
+} from '@instructure/ui'
 
 const TextInput = ti as any
 const NumberInput = ni as any

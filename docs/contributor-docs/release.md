@@ -28,7 +28,7 @@ type: code
 git checkout -b release
 ```
 
-##### 3. Run Npm Bump Command
+##### 3. Run Pnpm Bump Command
 
 - This will propose new version numbers.
 
@@ -36,7 +36,7 @@ git checkout -b release
 ---
 type: code
 ---
-npm run bump
+pnpm run bump
 ```
 
 - Check if the proposed version numbers are correct. If they are, accept them.
@@ -108,7 +108,7 @@ type: code
 git checkout -b release
 ```
 
-##### 3. Run Npm Bump Command
+##### 3. Run Pnpm Bump Command
 
 - This will propose new version numbers.
 
@@ -116,7 +116,7 @@ git checkout -b release
 ---
 type: code
 ---
-npm run bump
+pnpm run bump
 ```
 
 - Check if the proposed version numbers are correct. If they are, accept them.
@@ -180,4 +180,4 @@ Update the fields in the file `./packages/__docs__/versions.json` with the lates
 
 ##### 5. Do a release like it was a minor update
 
-Follow the same process as it's described above. The `npm run bump` command should automatically recognise that there were a breaking commit and it should be a major version change.
+Follow the same process as it's described above. The `pnpm run bump` command should automatically recognise that there were a breaking commit and it should be a major version change.

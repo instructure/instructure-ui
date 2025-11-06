@@ -23,10 +23,12 @@
  */
 'use client'
 import React from 'react'
-import { Checkbox as cb } from 'instructure-ui/ui-checkbox/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { ScreenReaderContent as src } from 'instructure-ui/ui-a11y-content/es/index'
-import { FormFieldGroup as ffg } from 'instructure-ui/ui-form-field/es/index'
+import {
+  Checkbox as cb,
+  View as vw,
+  ScreenReaderContent as src,
+  FormFieldGroup as ffg
+} from '@instructure/ui'
 
 const Checkbox = cb as any
 const View = vw as any

@@ -13,7 +13,7 @@ order: 2
 Vitest can be run from the project root with the following command. It's configured in our CI pipeline so pushing a branch to remote runs these tests automatically.
 
 ```
-npm run test:vitest
+pnpm run test:vitest
 ```
 
 You can scope the tests you want to run by specifying the path and also enable watch mode to automatically rerun tests when files change.
@@ -21,13 +21,13 @@ You can scope the tests you want to run by specifying the path and also enable w
 Run all tests of the selected component in wach mode:
 
 ```
-npm run test:vitest-watch ui-avatar
+pnpm run test:vitest-watch ui-avatar
 ```
 
 Run specific test file in wach mode:
 
 ```
-npm run test:vitest-watch ui-avatar/src/Avatar/__tests__/Avatar.test.tsx
+pnpm run test:vitest-watch ui-avatar/src/Avatar/__tests__/Avatar.test.tsx
 ```
 
 > DO NOT forget to `rebuild` the changed package before testing!

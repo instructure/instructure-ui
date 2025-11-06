@@ -2,7 +2,7 @@
   "name": "instructure-ui",
   "description": "A design system by Instructure Inc.",
   "private": true,
-  "version": "11.0.1",
+  "version": "11.2.0",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -15,36 +15,40 @@
   ],
   "scripts": {
     "build:themes": "ui-scripts build-themes",
-    "prestart": "npm run bootstrap",
-    "start": "npm run start --workspace=docs-app --",
-    "start:watch": "npm run start:watch --workspace=docs-app --",
-    "dev": "npm run start:watch --",
+    "prestart": "pnpm run bootstrap",
+    "start": "pnpm --filter docs-app start",
+    "start:watch": "pnpm --filter docs-app start:watch",
+    "dev": "pnpm run start:watch",
     "cy:component": "cypress run --component",
     "test:vitest": "vitest --watch=false",
     "test:vitest-watch": "vitest",
-    "lint": "lerna run lint --stream",
-    "lint:changes": "npm run lint -- --since HEAD^",
-    "lint:fix": "lerna run lint:fix --stream",
+    "lint": "pnpm -r --stream lint",
+    "lint:changes": "pnpm run lint -- --since HEAD^",
+    "lint:fix": "pnpm -r --stream lint:fix",
+    "lint:commits": "commitlint --from=HEAD^1",
     "bootstrap": "node scripts/bootstrap.js",
-    "build": "lerna run build --stream",
-    "build:watch": "lerna run build:watch --stream",
-    "build:docs": "lerna run bundle --stream --scope docs-app",
+    "build": "pnpm -r --stream build",
+    "build:watch": "pnpm -r --stream build:watch",
+    "build:docs": "pnpm --filter docs-app bundle",
     "build:tokens": "ui-scripts generate-all-tokens",
     "build:types": "tsc -b tsconfig.references.json",
-    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && npm run build:types",
+    "build:ts": "pnpm --filter @instructure/ui-icons prepare-build && pnpm run build:types",
     "clean": "node scripts/clean.js",
     "clean-node": "node scripts/clean.js --nuke_node",
-    "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
+    "export:icons": "pnpm --filter @instructure/ui-icons export",
     "bump": "ui-scripts bump",
     "release": "ui-scripts publish",
     "husky:pre-commit": "lint-staged && node scripts/checkTSReferences.js",
     "postinstall": "husky",
-    "ts:check": "lerna run ts:check --stream"
+    "ts:check": "pnpm -r --stream ts:check"
   },
   "license": "MIT",
-  "resolutions": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+  "pnpm": {
+    "overrides": {
+      "react": "18.3.1",
+      "react-dom": "18.3.1",
+      "@types/react": "18.3.26"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
@@ -55,18 +59,22 @@
     "@eslint/js": "^9.28.0",
     "@instructure/browserslist-config-instui": "workspace:*",
     "@instructure/pkg-utils": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-scripts": "workspace:*",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22",
+    "@types/react": "18.3.26",
     "@types/react-dom": "18.3.1",
     "@vitejs/plugin-react": "^4.5.1",
     "@vitest/eslint-plugin": "^1.2.1",
     "chai": "^4.4.1",
     "chalk": "^4.1.2",
     "commitizen": "^4.3.1",
+    "concurrently": "^9.1.2",
     "cross-spawn": "^7.0.6",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
@@ -82,6 +90,7 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^15.13.0",
     "husky": "^9.1.7",
+    "jsdom": "^25.0.1",
     "lerna": "^8.2.4",
     "lint-staged": "^15.2.10",
     "react": "18.3.1",
@@ -102,7 +111,8 @@
   },
   "engines": {
     "node": ">=22",
-    "yarn": "YARN NO LONGER USED - use npm instead."
+    "npm": "Use pnpm instead.",
+    "pnpm": ">=10"
   },
   "config": {
     "commitizen": {
@@ -120,5 +130,6 @@
   },
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
-  ]
+  ],
+  "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d"
 }

@@ -30,22 +30,26 @@ import {
   isReleaseCommit,
   runGitCommand
 } from '../utils/git.js'
-import { bumpPackages, createNPMRCFile } from '../utils/npm.js'
+import {
+  bumpPackages,
+  createNPMRCFile,
+  cleanupNPMRCFile
+} from '../utils/npm.js'
 import semver from 'semver'
 
 export default {
   command: 'publish',
-  desc: 'publishes ALL packages to npm with the "npm publish" command',
+  desc: 'publishes ALL packages to pnpm with the "pnpm publish" command',
   builder: (yargs) => {
     yargs.option('isMaintenance', {
       type: 'boolean',
-      describe: 'If true npm publish will use vXYZ_maintenance as tag',
+      describe: 'If true pnpm publish will use vXYZ_maintenance as tag',
       default: false
     })
 
     yargs.option('prRelease', {
       type: 'boolean',
-      describe: 'If true npm publish will use vXYZ-pr-snapshot as version',
+      describe: 'If true pnpm publish will use vXYZ-pr-snapshot as version',
       default: false
     })
   },
@@ -71,35 +75,39 @@ async function publish({ packageName, version, isMaintenance, prRelease }) {
 
   createNPMRCFile()
 
-  checkWorkingDirectory()
-  const packages = pkgUtils.getPackages().filter((pkg) => !pkg.private)
+  try {
+    checkWorkingDirectory()
+    const packages = pkgUtils.getPackages().filter((pkg) => !pkg.private)
 
-  if (isRegularRelease) {
-    // If on legacy branch, and it is a release, its tag should say vx_maintenance
-    const tag = isMaintenance
-      ? `v${version.split('.')[0]}_maintenance`
-      : 'latest'
-    info(`📦  Version: ${version}, Tag: ${tag}`)
-    return publishRegularVersion({
-      version,
-      tag,
-      packages
-    })
-  } else {
-    const tag = prRelease ? 'pr-snapshot' : 'snapshot'
-    info(`📦  Version: ${version}, Tag: ${tag}`)
-    return publishSnapshotVersion({
-      version,
-      packageName,
-      packages,
-      tag,
-      prRelease
-    })
+    if (isRegularRelease) {
+      // If on legacy branch, and it is a release, its tag should say vx_maintenance
+      const tag = isMaintenance
+        ? `v${version.split('.')[0]}_maintenance`
+        : 'latest'
+      info(`📦  Version: ${version}, Tag: ${tag}`)
+      await publishRegularVersion({
+        version,
+        tag,
+        packages
+      })
+    } else {
+      const tag = prRelease ? 'pr-snapshot' : 'snapshot'
+      info(`📦  Version: ${version}, Tag: ${tag}`)
+      await publishSnapshotVersion({
+        version,
+        packageName,
+        packages,
+        tag,
+        prRelease
+      })
+    }
+  } finally {
+    cleanupNPMRCFile()
   }
 }
 
 /**
- * Publishes each package to npm.
+ * Publishes each package to pnpm.
  */
 async function publishRegularVersion(arg) {
   const { version, packages, tag } = arg
@@ -171,7 +179,7 @@ async function* publishPackages(packages, version, tag) {
     let packageVersions = []
     try {
       const { stdout } = await runCommandAsync(
-        'npm',
+        'pnpm',
         ['info', pkg.name, '--json'],
         {},
         {
@@ -179,15 +187,15 @@ async function* publishPackages(packages, version, tag) {
         }
       )
       packageVersions = JSON.parse(stdout).versions
-    } catch (npmErr) {
+    } catch (pnpmErr) {
       // if we run into this error that probably means that the
       // pkg we try to release is not in the registry yet (i.e. it is a new package).
       // let's just swallow the error and continue with the publish.
       info(
-        `It looks like package (${pkg.name}) is currently not in the npm registry. Continuing publishing...`
+        `It looks like package (${pkg.name}) is currently not in the pnpm registry. Continuing publishing...`
       )
-      info('Original NPM error:')
-      info(npmErr)
+      info('Original pnpm error:')
+      info(pnpmErr)
     }
 
     // if the package is already in the registry then don't try
@@ -207,8 +215,8 @@ async function publishPackage(pkg, tag) {
       setTimeout(resolve, delay)
     })
 
-  const publishArgs = ['publish', pkg.location, '--tag', tag]
-  await runCommandAsync('npm', publishArgs)
+  const publishArgs = ['publish', pkg.location, '--tag', tag, '--no-git-checks']
+  await runCommandAsync('pnpm', publishArgs)
 
   return wait(500)
 }

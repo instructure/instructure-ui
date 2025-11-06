@@ -24,9 +24,11 @@
 
 'use client'
 import React from 'react'
-import { Heading as hd } from 'instructure-ui/ui-heading/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { IconAdminSolid as ias } from 'instructure-ui/ui-icons/es/index'
+import {
+  Heading as hd,
+  View as vw,
+  IconAdminSolid as ias
+} from '@instructure/ui'
 
 const Heading = hd as any
 const View = vw as any

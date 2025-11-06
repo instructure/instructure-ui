@@ -23,10 +23,10 @@
  */
 'use client'
 import React, { useRef } from 'react'
-import { Alert } from 'instructure-ui/ui-alerts/es/index'
+import { Alert } from '@instructure/ui'
 
 export default function AlertPage() {
-  const variants = ['info', 'success', 'warning', 'error']
+  const variants = ['info', 'success', 'warning', 'error'] as const
   const myElementRef = useRef(null)
   return (
     <main className="flex gap-8 p-8 flex-row items-start axe-test">

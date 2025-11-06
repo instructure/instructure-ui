@@ -23,6 +23,7 @@
  */
 import fs from 'fs'
 import path from 'path'
+import os from 'os'
 import semver from 'semver'
 import pkgUtils from '@instructure/pkg-utils'
 import {
@@ -35,6 +36,9 @@ import {
 import { Project } from '@lerna/project'
 
 const NPM_SCOPE = '@instructure:registry=https://registry.npmjs.org/'
+
+// Track user .npmrc backup for cleanup
+let userNpmrcBackup = null
 const syncRootPackageVersion = async (useProjectVersion) => {
   const project = new Project(process.cwd())
   const rootPkg = pkgUtils.getPackage()
@@ -111,17 +115,75 @@ export function createNPMRCFile() {
 
   // Only write an npmrc file if these are defined, otherwise assume the system is properly configured
   if (NPM_TOKEN) {
-    fs.writeFileSync(
-      path.resolve(process.cwd(), '.npmrc'),
-      `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${NPM_SCOPE}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
-    )
+    const userHome = os.homedir()
+    const userNpmrcPath = path.join(userHome, '.npmrc')
+
+    // Backup existing user .npmrc if it exists
+    if (fs.existsSync(userNpmrcPath)) {
+      const existingContent = fs.readFileSync(userNpmrcPath, 'utf8')
+      userNpmrcBackup = {
+        path: userNpmrcPath,
+        content: existingContent,
+        existed: true
+      }
+      info(`📦  Backing up existing ${userNpmrcPath}`)
+    } else {
+      userNpmrcBackup = {
+        path: userNpmrcPath,
+        content: null,
+        existed: false
+      }
+    }
+
+    // Write auth credentials to user .npmrc
+    const authConfig = `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${NPM_SCOPE}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}\n`
+
+    if (userNpmrcBackup.existed) {
+      // Append to existing content
+      fs.writeFileSync(
+        userNpmrcPath,
+        userNpmrcBackup.content + '\n' + authConfig
+      )
+    } else {
+      // Create new file
+      fs.writeFileSync(userNpmrcPath, authConfig)
+    }
+
+    info(`📦  Written auth config to ${userNpmrcPath}`)
   }
 
   try {
-    info('running npm whoami:')
-    runCommandSync('npm', ['whoami'])
+    info('running pnpm whoami:')
+    runCommandSync('pnpm', ['whoami'])
   } catch (e) {
     error(`Could not determine if NPM auth was successful: ${e}`)
     process.exit(1)
+  }
+}
+
+export function cleanupNPMRCFile() {
+  if (!userNpmrcBackup) {
+    // Nothing to cleanup
+    return
+  }
+
+  try {
+    if (userNpmrcBackup.existed) {
+      // Restore original content
+      fs.writeFileSync(userNpmrcBackup.path, userNpmrcBackup.content)
+      info(`📦  Restored original ${userNpmrcBackup.path}`)
+    } else {
+      // Remove the file we created
+      if (fs.existsSync(userNpmrcBackup.path)) {
+        fs.unlinkSync(userNpmrcBackup.path)
+        info(`📦  Removed ${userNpmrcBackup.path}`)
+      }
+    }
+  } catch (e) {
+    error(`Failed to cleanup .npmrc: ${e}`)
+    // Don't exit - cleanup failure shouldn't break the release
+  } finally {
+    // Reset backup state
+    userNpmrcBackup = null
   }
 }

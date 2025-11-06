@@ -24,9 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Tabs as tbs } from 'instructure-ui/ui-tabs/es/index'
-import { View as vw } from 'instructure-ui/ui-view/es/index'
-import { Text as tx } from 'instructure-ui/ui-text/es/index'
+import { Tabs as tbs, View as vw, Text as tx } from '@instructure/ui'
 
 const Tabs = tbs as any
 const View = vw as any
