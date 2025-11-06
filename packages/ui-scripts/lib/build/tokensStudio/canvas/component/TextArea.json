@@ -96,7 +96,7 @@
       "value": "{spacing.gap.inputElements}",
       "type": "spacing"
     },
-    "paddingHorizontal": {
+    "padding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     }
