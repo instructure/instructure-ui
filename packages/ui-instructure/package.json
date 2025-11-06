@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-instructure",
-  "version": "11.1.0",
+  "version": "11.2.0",
   "description": "Collection of specific components for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

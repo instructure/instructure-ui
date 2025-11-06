@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
+
+
+### Features
+
+* **many:** migrate from npm to pnpm ([f7bb16e](https://github.com/instructure/instructure-ui/commit/f7bb16e114df83984c67d5a6e07fb4d9c65efc53))
+* **ui-icons:** add compliance-draft icons ([b66ff1f](https://github.com/instructure/instructure-ui/commit/b66ff1f698b2b1d21ff8d5f4a96928d30b51d81c))
+
+
+
+
+
 # [11.1.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.1.0) (2025-11-05)
 
 

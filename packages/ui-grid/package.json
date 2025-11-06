@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-grid",
-  "version": "11.1.0",
+  "version": "11.2.0",
   "description": "A Grid component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
