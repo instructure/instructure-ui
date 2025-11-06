@@ -340,6 +340,16 @@
           "value": "{color.aurora.aurora100}",
           "type": "color"
         }
+      },
+      "elevatedSurface": {
+        "base": {
+          "value": "{color.white}",
+          "type": "color"
+        },
+        "inverted": {
+          "value": "{color.grey.grey100}",
+          "type": "color"
+        }
       }
     },
     "stroke": {
