@@ -39,7 +39,16 @@ All PRs must include:
      - Present the analysis to user
      - Draft a single comprehensive commit message covering all changes
      - Ask for confirmation before squashing
-     - Squash with: `git reset --soft master && git commit -m "$(cat <<'EOF'...EOF)"`
+     - Squash with: `git reset --soft master && git commit -m "$(cat <<'EOF'
+chore: add new feature
+
+Add comprehensive feature implementation with tests and documentation.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"`
 
 3. Run `git status` to check current branch and remote tracking
 4. Run `git log master..HEAD` to see all commits that will be in the PR
