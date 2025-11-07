@@ -37,7 +37,7 @@
       "type": "color"
     },
     "baseTextColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "onColorTextColor": {

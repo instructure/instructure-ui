@@ -347,7 +347,7 @@
           "type": "color"
         },
         "inverted": {
-          "value": "{color.grey.grey40}",
+          "value": "{color.grey.grey10}",
           "type": "color"
         }
       }
@@ -613,6 +613,10 @@
       },
       "info": {
         "value": "{color.blue.blue30}",
+        "type": "color"
+      },
+      "inverse": {
+        "value": "{color.grey.grey120}",
         "type": "color"
       },
       "onColor": {
