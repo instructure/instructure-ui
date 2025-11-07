@@ -20,10 +20,6 @@
       "value": "{color.text.base}",
       "type": "color"
     },
-    "iconColor": {
-      "value": "{color.icon.base}",
-      "type": "color"
-    },
     "gapSm": {
       "value": "{spacing.space2xs}",
       "type": "spacing"
