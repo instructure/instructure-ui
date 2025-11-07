@@ -24,10 +24,6 @@
       "value": "{lineHeight.paragraph.textSm}",
       "type": "lineHeights"
     },
-    "errorIconMarginRight": {
-      "value": "{spacing.spaceXs}",
-      "type": "spacing"
-    },
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
