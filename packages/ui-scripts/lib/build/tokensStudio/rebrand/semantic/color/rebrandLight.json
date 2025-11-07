@@ -904,6 +904,10 @@
           "value": "{color.aurora.aurora70}",
           "type": "color"
         }
+      },
+      "inverse": {
+        "value": "{color.white}",
+        "type": "color"
       }
     },
     "icon": {
