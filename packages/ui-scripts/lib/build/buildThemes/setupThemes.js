@@ -99,8 +99,8 @@ const setupThemes = async (targetPath, input) => {
     const semantics = generateSemantics(mergedSemanticData)
     const semanticsTypes = generateSemanticsType(mergedSemanticData)
     const semanticsFileContent = `
-        import primitives from "./primitives.js"
-        import type {Primitives} from "./primitives.js"
+        import primitives from "./primitives"
+        import type {Primitives} from "./primitives"
 
         export type Semantics = ${semanticsTypes}
 
@@ -122,10 +122,10 @@ const setupThemes = async (targetPath, input) => {
       )
 
       const componentFileContent = `
-        import semantics from "../semantics.js"
+        import semantics from "../semantics"
         import type { ${capitalize(
           componentName
-        )} } from '../../componentTypes/${componentName}.js'
+        )} } from '../../componentTypes/${componentName}'
 
         const ${componentName}: ${capitalize(componentName)} = {${component}}
         export default ${componentName}

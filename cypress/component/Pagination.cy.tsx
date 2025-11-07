@@ -99,7 +99,7 @@ describe('<Pagination/>', () => {
       })
     })
 
-    cy.viewport(300, 800)
+    cy.viewport(100, 800)
 
     cy.get('[role="navigation"]').within(() => {
       cy.get('button').then(($items) => {
