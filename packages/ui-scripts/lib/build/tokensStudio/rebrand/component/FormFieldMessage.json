@@ -8,16 +8,8 @@
       "value": "{color.text.error}",
       "type": "color"
     },
-    "errorIconColor": {
-      "value": "{color.icon.error}",
-      "type": "color"
-    },
     "successTextColor": {
       "value": "{color.text.success}",
-      "type": "color"
-    },
-    "successIconColor": {
-      "value": "{color.icon.success}",
       "type": "color"
     },
     "fontWeight": {
