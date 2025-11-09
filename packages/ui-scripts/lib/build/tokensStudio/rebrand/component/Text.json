@@ -201,6 +201,14 @@
     "warningColor": {
       "value": "{color.text.warning}",
       "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontFamilyMonospace": {
+      "value": "{fontFamily.code}",
+      "type": "fontFamilies"
     }
   }
 }

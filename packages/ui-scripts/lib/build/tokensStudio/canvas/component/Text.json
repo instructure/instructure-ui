@@ -201,6 +201,14 @@
       },
       "type": "typography",
       "description": "Used for short explanatory text accompanying data visualizations, icons, or UI elements."
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontFamilyMonospace": {
+      "value": "{fontFamily.code}",
+      "type": "fontFamilies"
     }
   }
 }
