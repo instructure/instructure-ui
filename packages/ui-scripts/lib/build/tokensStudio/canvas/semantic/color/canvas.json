@@ -41,6 +41,10 @@
         "value": "{color.violet.violet70}",
         "type": "color"
       },
+      "aiText": {
+        "value": "{color.violet.violet10}",
+        "type": "color"
+      },
       "divider": {
         "base": {
           "value": "{color.grey.grey30}",
@@ -615,7 +619,15 @@
         "value": "{color.blue.blue70}",
         "type": "color"
       },
+      "aiColor": {
+        "value": "{color.violet.violet90}",
+        "type": "color"
+      },
       "onColor": {
+        "value": "{color.white}",
+        "type": "color"
+      },
+      "inverse": {
         "value": "{color.white}",
         "type": "color"
       },
@@ -904,10 +916,6 @@
           "value": "{color.aurora.aurora70}",
           "type": "color"
         }
-      },
-      "inverse": {
-        "value": "{color.white}",
-        "type": "color"
       }
     },
     "icon": {
