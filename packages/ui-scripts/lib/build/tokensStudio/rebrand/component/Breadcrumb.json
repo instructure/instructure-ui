@@ -1,21 +1,5 @@
 {
   "breadcrumb": {
-    "fontSizeSm": {
-      "value": "{fontSize.textSm}",
-      "type": "fontSizes"
-    },
-    "fontSizeMd": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
-    },
-    "fontSizeLg": {
-      "value": "{fontSize.textXl}",
-      "type": "fontSizes"
-    },
-    "separatorColor": {
-      "value": "{color.icon.muted}",
-      "type": "color"
-    },
     "gapSm": {
       "value": "{spacing.space2xs}",
       "type": "spacing"
