@@ -1,19 +1,27 @@
 {
   "text": {
-    "fontSizeLarge": {
-      "value": "1.375rem",
+    "label": {
+      "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
-    "fontSizeMedium": {
-      "value": "{fontSize.textBase}",
+    "fontSizeXSmall": {
+      "value": "{fontSize.textXs}",
       "type": "fontSizes"
     },
     "fontSizeSmall": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
     },
-    "fontSizeXSmall": {
-      "value": "{fontSize.textXs}",
+    "fontSizeMedium": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeLarge": {
+      "value": "1.375rem",
+      "type": "fontSizes"
+    },
+    "fontSizeXLarge": {
+      "value": "{fontSize.text2xl}",
       "type": "fontSizes"
     },
     "fontSizeXXLarge": {
@@ -39,10 +47,6 @@
     "fontWeightRegular": {
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
-    },
-    "label": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
     },
     "lineHeight": {
       "value": "1.5",
@@ -72,10 +76,6 @@
       "value": "1.125",
       "type": "lineHeights"
     },
-    "fontSizeXLarge": {
-      "value": "{fontSize.text2xl}",
-      "type": "fontSizes"
-    },
     "paragraphMargin": {
       "value": "1.5rem 0rem",
       "type": "paragraphSpacing"
@@ -93,11 +93,11 @@
       "type": "letterSpacing"
     },
     "aiBackgroundColor": {
-      "value": "{color.background.interactive.aiSecondary.active.topGradient}",
+      "value": "{color.background.aiText}",
       "type": "color"
     },
     "aiColor": {
-      "value": "{color.text.accent.violet}",
+      "value": "{color.text.aiColor}",
       "type": "color"
     },
     "primaryColor": {
