@@ -71,7 +71,7 @@
       "description": "Used for short explanatory text accompanying data visualizations, icons, or UI elements."
     },
     "fontSizeLarge": {
-      "value": "1.375rem",
+      "value": "{fontSize.textXl}",
       "type": "fontSizes"
     },
     "fontSizeMedium": {
