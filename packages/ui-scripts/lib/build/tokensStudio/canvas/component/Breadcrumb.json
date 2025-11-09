@@ -16,10 +16,6 @@
       "value": "{color.icon.muted}",
       "type": "color"
     },
-    "fontColor": {
-      "value": "{color.text.base}",
-      "type": "color"
-    },
     "gapSm": {
       "value": "{spacing.space2xs}",
       "type": "spacing"
