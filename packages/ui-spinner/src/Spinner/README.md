@@ -11,11 +11,11 @@ The `size` prop allows you to select from `x-small`, `small`, `medium` and `larg
 ---
 type: example
 ---
-<div>
-  <Spinner renderTitle="Loading" size="x-small"/>
-  <Spinner renderTitle="Loading" size="small" margin="0 0 0 medium" />
-  <Spinner renderTitle="Loading" margin="0 0 0 medium" />
-  <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
+<div style={{ display: 'flex', alignItems: 'center', gap: 'spacing.spaceMd' }}>
+  <Spinner renderTitle="Loading" size="x-small" margin="spacing.spaceXs"/>
+  <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" size="large" margin="spacing.spaceXs" />
 </div>
 ```
 
@@ -28,8 +28,8 @@ dark backgrounds.
 ---
 type: example
 ---
-<View background="primary-inverse" as="div">
-  <Spinner renderTitle="Loading" variant="inverse" />
+<View background="primary-inverse" as="div" margin="spacing.spaceXs" padding="spacing.spaceLg">
+  <Spinner renderTitle="Loading" variant="inverse" margin="spacing.spaceXs" />
 </View>
 ```
 
@@ -41,11 +41,11 @@ The `delay` prop allows you to delay the rendering of the spinner a desired time
 ---
 type: example
 ---
-<div>
-  <Spinner renderTitle="Loading" size="x-small" delay={1000} />
-  <Spinner renderTitle="Loading" size="small" margin="0 0 0 medium" delay={2000} />
-  <Spinner renderTitle="Loading" margin="0 0 0 medium"  delay={3000} />
-  <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium"  delay={4000} />
+<div style={{ display: 'flex', alignItems: 'center', gap: 'spacing.spaceMd' }}>
+  <Spinner renderTitle="Loading" size="x-small" delay={1000} margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" delay={2000} />
+  <Spinner renderTitle="Loading" margin="spacing.spaceXs" delay={3000} />
+  <Spinner renderTitle="Loading" size="large" margin="spacing.spaceXs" delay={4000} />
 </div>
 ```
 
@@ -57,5 +57,7 @@ The `renderTitle` prop is read to screen readers.
 ---
 type: example
 ---
-<Spinner renderTitle={() => "Hello world"} />
+<div>
+  <Spinner renderTitle={() => "Hello world"} margin="spacing.spaceXs" />
+</div>
 ```
