@@ -41,6 +41,11 @@ The new icons automatically sync with theme changes, support all InstUI color to
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
 - its DOM structure has been significantly simplified
 
+### Spinner
+
+- `as` prop has been removed, `Spinner` will always render as a `<div>` element.
+- `elementRef` prop has been removed, use the `ref` prop instead.
+
 ## Codemods
 
 To ease the upgrade, we provide codemods that will automate most of the changes. Pay close attention to its output, it cannot refactor complex code! The codemod scripts can be run via the following commands:
