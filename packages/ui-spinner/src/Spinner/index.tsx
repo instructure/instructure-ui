@@ -22,21 +22,18 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { useState, useEffect, forwardRef } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { useStyle } from '@instructure/emotion'
 import {
   callRenderProp,
   omitProps,
-  withDeterministicId
+  useDeterministicId
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
-
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
-import type { SpinnerProps, SpinnerState } from './props'
+import type { SpinnerProps } from './props'
 import { allowedProps } from './props'
 
 /**
@@ -44,128 +41,94 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class Spinner extends Component<SpinnerProps, SpinnerState> {
-  static readonly componentId = 'Spinner'
-  static allowedProps = allowedProps
-  static defaultProps = {
-    as: 'div',
-    size: 'medium',
-    variant: 'default'
-  }
+const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
+  const {
+    size = 'medium',
+    variant = 'default',
+    delay,
+    renderTitle,
+    margin,
+    themeOverride
+  } = props
 
-  ref: Element | null = null
-  private readonly titleId?: string
-  private delayTimeout?: NodeJS.Timeout
+  const [shouldRender, setShouldRender] = useState(!delay)
+  // Deterministic ID generation
+  const [titleId, setTitleId] = useState<string | undefined>()
+  const getId = useDeterministicId('Spinner')
+  useEffect(() => {
+    setTitleId(getId())
+  }, [])
 
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
+  const styles = useStyle({
+    generateStyle,
+    themeOverride,
+    params: {
+      size,
+      variant,
+      margin
+    },
+    componentId: 'Spinner',
+    displayName: 'Spinner'
+  })
 
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
-
-  constructor(props: SpinnerProps) {
-    super(props)
-
-    this.titleId = props.deterministicId!()
-
-    this.state = {
-      shouldRender: !props.delay
-    }
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-    const { delay } = this.props
-
+  useEffect(() => {
     if (delay) {
-      this.delayTimeout = setTimeout(() => {
-        this.setState({ shouldRender: true })
+      const delayTimeout = setTimeout(() => {
+        setShouldRender(true)
       }, delay)
+
+      return () => clearTimeout(delayTimeout)
     }
-  }
+    return undefined
+  }, [delay])
 
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.delayTimeout)
-  }
-
-  radius() {
-    switch (this.props.size) {
-      case 'x-small':
-        return '0.5em'
-      case 'small':
-        return '1em'
-      case 'large':
-        return '2.25em'
-      default:
-        return '1.75em'
-    }
-  }
-
-  renderSpinner() {
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Spinner.allowedProps),
-      Spinner
-    )
-
-    const hasTitle = this.props.renderTitle
+  const renderSpinner = () => {
     error(
-      !!hasTitle,
-      '[Spinner] The renderTitle prop is necessary for screen reader support.'
+      !!renderTitle,
+      '[Spinner] The `renderTitle` prop is necessary for screen reader support.'
     )
+
+    const passthroughProps = omitProps(props, allowedProps)
 
     return (
-      <View
+      <div
         {...passthroughProps}
-        as={this.props.as}
-        elementRef={this.handleRef}
-        css={this.props.styles?.spinner}
-        margin={this.props.margin}
+        css={styles?.spinner}
+        ref={ref}
         data-cid="Spinner"
       >
         <svg
-          css={this.props.styles?.circle}
+          css={styles?.circle}
           role="img"
-          aria-labelledby={this.titleId}
+          aria-labelledby={titleId}
           focusable="false"
         >
-          <title id={this.titleId}>
-            {callRenderProp(this.props.renderTitle)}
-          </title>
+          <title id={titleId}>{callRenderProp(renderTitle)}</title>
           <g role="presentation">
-            {this.props.variant !== 'inverse' && (
+            {variant !== 'inverse' && (
               <circle
-                css={this.props.styles?.circleTrack}
+                css={styles?.circleTrack}
                 cx="50%"
                 cy="50%"
-                r={this.radius()}
+                r={styles?.radius as string}
               />
             )}
             <circle
-              css={this.props.styles?.circleSpin}
+              css={styles?.circleSpin}
               cx="50%"
               cy="50%"
-              r={this.radius()}
+              r={styles?.radius as string}
             />
           </g>
         </svg>
-      </View>
+      </div>
     )
   }
 
-  render() {
-    return this.state.shouldRender ? this.renderSpinner() : null
-  }
-}
+  return shouldRender ? renderSpinner() : null
+})
+
+Spinner.displayName = 'Spinner'
 
 export default Spinner
 export { Spinner }
