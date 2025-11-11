@@ -11,6 +11,14 @@
     "borderColor": {
       "value": "{color.stroke.interactive.input.base}",
       "type": "color"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.full}",
+      "type": "borderRadius"
     }
   }
 }
