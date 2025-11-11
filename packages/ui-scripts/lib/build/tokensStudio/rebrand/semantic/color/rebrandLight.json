@@ -366,7 +366,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.aurora.aurora70}",
+        "value": "{color.green.green70}",
         "type": "color"
       },
       "error": {
@@ -406,7 +406,7 @@
         },
         "input": {
           "base": {
-            "value": "{color.grey.grey50}",
+            "value": "{color.grey.grey60}",
             "type": "color"
           },
           "hover": {
@@ -604,7 +604,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.aurora.aurora80}",
+        "value": "{color.green.green80}",
         "type": "color"
       },
       "error": {
@@ -928,7 +928,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.aurora.aurora80}",
+        "value": "{color.green.green80}",
         "type": "color"
       },
       "error": {
@@ -1133,7 +1133,7 @@
         "navigation": {
           "primary": {
             "base": {
-              "value": "{color.blue.blue70}",
+              "value": "{color.blue.blue80}",
               "type": "color"
             },
             "hover": {
