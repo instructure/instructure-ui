@@ -45,7 +45,7 @@ import generateComponentTheme from './theme'
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps } from './props'
 
-type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
+type RadioInputChild = ComponentElement<RadioInputProps, any>
 
 /**
 ---
