@@ -29,7 +29,7 @@ import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { RadioInput } from '../index'
+import { RadioInput, type RadioInputHandle } from '../index'
 
 describe('<RadioInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -265,15 +265,14 @@ describe('<RadioInput />', () => {
     })
 
     it('focuses with the focus helper', async () => {
-      let ref: RadioInput
+      let ref: RadioInputHandle
 
       const { container } = render(
         <RadioInput
           label="fake label"
           value="someValue"
           name="someName"
-          // @ts-expect-error this is managed by the testing framework
-          ref={(el) => (ref = el)}
+          ref={(el) => (ref = el!)}
         />
       )
 
