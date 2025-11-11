@@ -1,0 +1,89 @@
+# Spinner
+
+
+### Choose from four sizes and add margin as needed
+
+The `size` prop allows you to select from `x-small`, `small`, `medium` and `large`
+-sized spinners. Margin can be added as needed using the `margin` prop.
+
+```js
+---
+type: example
+---
+<div style={{ display: 'flex', alignItems: 'center', gap: 'spacing.spaceMd' }}>
+  <Spinner renderTitle="Loading" size="x-small" margin="spacing.spaceXs"/>
+  <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" size="large" margin="spacing.spaceXs" />
+</div>
+```
+
+### Different color schemes for use with light and dark backgrounds
+
+Spinner provides an `inverse` color scheme designed to be used with
+dark backgrounds.
+
+```js
+---
+type: example
+---
+<View background="primary-inverse" as="div" margin="spacing.spaceXs" padding="spacing.spaceLg">
+  <Spinner renderTitle="Loading" variant="inverse" margin="spacing.spaceXs" />
+</View>
+```
+
+### Delay rendering
+
+The `delay` prop allows you to delay the rendering of the spinner a desired time to prevent flickering in cases of very fast load times.
+
+```js
+---
+type: example
+---
+<div style={{ display: 'flex', alignItems: 'center', gap: 'spacing.spaceMd' }}>
+  <Spinner renderTitle="Loading" size="x-small" delay={1000} margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" delay={2000} />
+  <Spinner renderTitle="Loading" margin="spacing.spaceXs" delay={3000} />
+  <Spinner renderTitle="Loading" size="large" margin="spacing.spaceXs" delay={4000} />
+</div>
+```
+
+### Screen reader support
+
+The `renderTitle` prop is read to screen readers.
+
+```js
+---
+type: example
+---
+<div>
+  <Spinner renderTitle={() => "Hello world"} margin="spacing.spaceXs" />
+</div>
+```
+
+
+### Props
+
+| Component | Prop | Type | Required | Default | Description |
+|-----------|------|------|----------|---------|-------------|
+| Spinner | delay | `number` | No | - | delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times |
+| Spinner | margin | `Spacing` | No | - | Valid values are from themes. See theme.semantics.spacing. Apply these values via familiar CSS-like shorthand. For example: `margin="spaceLg gap.cards.sm 20px padding.container.sm"`. |
+| Spinner | renderTitle | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Give the spinner a title to be read by screenreaders |
+| Spinner | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | - | Different-sized spinners |
+| Spinner | variant | `'default' \| 'inverse'` | No | - | Different color schemes for use with light or dark backgrounds |
+
+### Usage
+
+Install the package:
+
+```shell
+npm install @instructure/ui-spinner
+```
+
+Import the component:
+
+```javascript
+/*** ES Modules (with tree shaking) ***/
+import { Spinner } from '@instructure/ui-spinner'
+```
+
