@@ -150,6 +150,51 @@
           "value": "{spacing.gap.inputElements}",
           "type": "spacing"
         }
+      },
+      "xxxSmall": {
+        "value": "0.125rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "xxSmall": {
+        "value": "0.375rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "xSmall": {
+        "value": "0.5rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "small": {
+        "value": "0.75rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "mediumSmall": {
+        "value": "1rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "medium": {
+        "value": "1.5rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "large": {
+        "value": "2.25rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "xLarge": {
+        "value": "3rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
+      },
+      "xxLarge": {
+        "value": "3.75rem",
+        "type": "spacing",
+        "description": "Legacy spacing token"
       }
     },
     "focusOutline": {
