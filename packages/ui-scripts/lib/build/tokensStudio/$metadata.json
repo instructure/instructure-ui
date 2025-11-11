@@ -20,10 +20,9 @@
     "canvas/component/TextArea",
     "canvas/component/Text",
     "canvas/component/Tooltip",
+    "canvas/component/Toggle",
     "canvas/component/SharedTokens",
-    "rebrand/semantic/layout/default",
-    "rebrand/semantic/color/rebrandLight",
-    "rebrand/semantic/color/rebrandDark",
+    "rebrand/component/Toggle",
     "rebrand/component/Avatar",
     "rebrand/component/BaseButton",
     "rebrand/component/Breadcrumb",
@@ -40,6 +39,9 @@
     "rebrand/component/TextArea",
     "rebrand/component/Text",
     "rebrand/component/Tooltip",
-    "rebrand/component/SharedTokens"
+    "rebrand/component/SharedTokens",
+    "rebrand/semantic/layout/default",
+    "rebrand/semantic/color/rebrandLight",
+    "rebrand/semantic/color/rebrandDark"
   ]
 }

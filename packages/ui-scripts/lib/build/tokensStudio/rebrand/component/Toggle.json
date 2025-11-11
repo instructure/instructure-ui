@@ -1,0 +1,16 @@
+{
+  "toggle": {
+    "errorBorderColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "backgroundColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    }
+  }
+}
