@@ -12,6 +12,14 @@
       "value": "{color.stroke.interactive.input.base}",
       "type": "color"
     },
+    "borderHoverColor": {
+      "value": "{color.stroke.interactive.input.hover}",
+      "type": "color"
+    },
+    "borderReadonlyColor": {
+      "value": "{color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
     "borderWidth": {
       "value": "{borderWidth.sm}",
       "type": "borderWidth"
@@ -28,12 +36,24 @@
       "value": "{color.text.base}",
       "type": "color"
     },
+    "labelDisabledColor": {
+      "value": "{color.text.interactive.disabled.base}",
+      "type": "color"
+    },
     "uncheckedIconBorderColor": {
       "value": "{color.stroke.interactive.input.base}",
       "type": "color"
     },
-    "checkedIconBorderColor-copy": {
-      "value": "{color.stroke.interactive.input.base}",
+    "uncheckedIconBorderHoverColor": {
+      "value": "{color.stroke.interactive.input.hover}",
+      "type": "color"
+    },
+    "uncheckedIconBorderDisabledColor": {
+      "value": "{color.stroke.interactive.input.disabled}",
+      "type": "color"
+    },
+    "checkedIconBorderColor": {
+      "value": "{color.stroke.success}",
       "type": "color"
     },
     "marginStart": {
@@ -70,7 +90,7 @@
       "type": "boxShadow"
     },
     "toggleSize": {
-      "value": "1.5rem",
+      "value": "{size.choiceControl.height.md}",
       "type": "sizing"
     },
     "labelFontFamily": {
