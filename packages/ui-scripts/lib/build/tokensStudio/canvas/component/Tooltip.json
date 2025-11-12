@@ -1,0 +1,28 @@
+{
+  "tooltip": {
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingVertical": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}

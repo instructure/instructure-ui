@@ -32,20 +32,12 @@
       "value": "{color.text.base}",
       "type": "color"
     },
-    "baseIconColor": {
-      "value": "{color.icon.base}",
-      "type": "color"
-    },
     "baseBorderColor": {
       "value": "{color.stroke.base}",
       "type": "color"
     },
     "infoTextColor": {
       "value": "{color.text.info}",
-      "type": "color"
-    },
-    "infoIconColor": {
-      "value": "{color.icon.info}",
       "type": "color"
     },
     "infoBorderColor": {
@@ -56,10 +48,6 @@
       "value": "{color.text.error}",
       "type": "color"
     },
-    "errorIconColor": {
-      "value": "{color.icon.error}",
-      "type": "color"
-    },
     "errorBorderColor": {
       "value": "{color.stroke.error}",
       "type": "color"
@@ -68,20 +56,12 @@
       "value": "{color.text.success}",
       "type": "color"
     },
-    "successIconColor": {
-      "value": "{color.icon.success}",
-      "type": "color"
-    },
     "successBorderColor": {
       "value": "{color.stroke.success}",
       "type": "color"
     },
     "warningTextColor": {
       "value": "{color.text.warning}",
-      "type": "color"
-    },
-    "warningIconColor": {
-      "value": "{color.icon.warning}",
       "type": "color"
     },
     "warningBorderColor": {

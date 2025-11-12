@@ -151,7 +151,7 @@
       "type": "borderRadius"
     },
     "full": {
-      "value": "999px",
+      "value": "999rem",
       "type": "borderRadius"
     },
     "container": {

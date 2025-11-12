@@ -1,23 +1,15 @@
 {
   "formFieldMessage": {
     "hintTextColor": {
-      "value": "{color.text.base}",
+      "value": "{color.text.muted}",
       "type": "color"
     },
     "errorTextColor": {
       "value": "{color.text.error}",
       "type": "color"
     },
-    "errorIconColor": {
-      "value": "{color.icon.error}",
-      "type": "color"
-    },
     "successTextColor": {
       "value": "{color.text.success}",
-      "type": "color"
-    },
-    "successIconColor": {
-      "value": "{color.icon.success}",
       "type": "color"
     },
     "fontWeight": {
@@ -31,10 +23,6 @@
     "lineHeight": {
       "value": "{lineHeight.paragraph.textSm}",
       "type": "lineHeights"
-    },
-    "errorIconMarginRight": {
-      "value": "{spacing.spaceXs}",
-      "type": "spacing"
     },
     "fontFamily": {
       "value": "{fontFamily.base}",
