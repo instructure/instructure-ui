@@ -74,6 +74,8 @@ type UseStyleParamsNew<
   params?: SecondParameter<P>
   componentId: keyof NewComponentTypes
   displayName?: string
+  //in case of a child component needed to use it's parent's tokens, provide parent's name
+  useTokensFrom?: keyof NewComponentTypes
 }
 
 const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
@@ -89,6 +91,7 @@ const useStyle = <
     | UseStyleParamsNew<P>
 ): ReturnType<P> => {
   const { generateStyle, params, componentId, displayName } = useStyleParams
+  const useTokensFrom = (useStyleParams as UseStyleParamsNew<P>).useTokensFrom
   const generateComponentTheme: GenerateComponentTheme = (
     useStyleParams as UseStyleParamsWithTheme<P>
   )?.generateComponentTheme
@@ -98,18 +101,21 @@ const useStyle = <
     typeof generateComponentTheme === 'function'
       ? generateComponentTheme(theme as Theme)
       : {}
+  const componentWithTokensId = useTokensFrom ?? componentId
 
   if (
     isNewThemeObject(theme) &&
-    theme.newTheme.components[componentId as keyof NewComponentTypes]
+    theme.newTheme.components[componentWithTokensId as keyof NewComponentTypes]
   ) {
     baseComponentTheme =
-      theme.newTheme.components[componentId as keyof NewComponentTypes]
+      theme.newTheme.components[
+        componentWithTokensId as keyof NewComponentTypes
+      ]
   }
   const themeOverride = getComponentThemeOverride(
     theme,
-    displayName ? displayName : componentId || '',
-    componentId,
+    useTokensFrom ?? displayName ?? componentId ?? '',
+    componentWithTokensId,
     params,
     baseComponentTheme
   )
