@@ -8,6 +8,10 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
     "fontSize": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
@@ -19,34 +23,6 @@
     "paddingVertical": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
-    },
-    "borderRadiusBase": {
-      "value": "{borderRadius.xs}",
-      "type": "borderRadius"
-    },
-    "borderWidth": {
-      "value": "{borderWidth.sm}",
-      "type": "borderWidth"
-    },
-    "baseBackgroundColor": {
-      "value": "{color.background.elevatedSurface.inverted}",
-      "type": "color"
-    },
-    "onColorBackgroundColor": {
-      "value": "{color.background.elevatedSurface.base}",
-      "type": "color"
-    },
-    "baseTextColor": {
-      "value": "{color.text.inverse}",
-      "type": "color"
-    },
-    "onColorTextColor": {
-      "value": "{color.text.base}",
-      "type": "color"
-    },
-    "lineHeight": {
-      "value": "{lineHeight.paragraph.textSm}",
-      "type": "lineHeights"
     }
   }
 }
