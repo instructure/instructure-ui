@@ -600,7 +600,7 @@
         "type": "color"
       },
       "muted": {
-        "value": "{color.grey.grey80}",
+        "value": "{color.grey.grey70}",
         "type": "color"
       },
       "success": {
