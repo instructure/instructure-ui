@@ -87,9 +87,7 @@ type RadioInputProps = RadioInputOwnProps &
   > &
   WithDeterministicIdProps
 
-type RadioInputStyle = ComponentStyle<
-  'radioInput' | 'input' | 'control' | 'facade' | 'label' | 'container'
->
+type RadioInputStyle = ComponentStyle<'radioInput' | 'input' | 'label'>
 
 type RadioInputState = {
   checked?: boolean

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import { alpha } from '@instructure/ui-color-utils'
+import type { SharedTokens } from '@instructure/ui-themes'
 
 /**
  * Generates consistent focus outline styles.
@@ -46,15 +47,7 @@ import { alpha } from '@instructure/ui-color-utils'
  * @returns {Object} CSS-in-JS style object containing focus outline styles ready for use with emotion or similar libraries.
  */
 const calcFocusOutlineStyles = (
-  theme: {
-    offset: string
-    inset: string
-    width: string
-    infoColor: string
-    onColor: string
-    successColor: string
-    dangerColor: string
-  },
+  theme: SharedTokens['focusOutline'],
   params?: {
     focusColor?: 'info' | 'inverse' | 'success' | 'danger'
     focusPosition?: 'offset' | 'inset'
