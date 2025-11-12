@@ -105,16 +105,24 @@
       "value": "{lineHeight.paragraph.textBase}",
       "type": "lineHeights"
     },
+    "labelLineHeightLg": {
+      "value": "{lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelLineHeightSm": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "labelFontSizeSm": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
     "labelFontSizeMd": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "labelFontSizeLg": {
       "value": "{fontSize.textLg}",
-      "type": "fontSizes"
-    },
-    "labelFontSizeSm": {
-      "value": "{fontSize.textSm}",
       "type": "fontSizes"
     }
   }
