@@ -53,6 +53,7 @@ pnpm run build:types  # Build TypeScript declarations
 
 # Testing
 pnpm run test:vitest  # Unit tests
+pnpm run test:vitest ui-radio-input # Run tests for a single package
 pnpm run cy:component # Cypress component tests
 
 # Linting
@@ -152,6 +153,7 @@ All components **MUST**:
 ```bash
 pnpm run test:vitest  # Unit tests
 pnpm run cy:component # Cypress tests
+pnpm run test:vitest ui-radio-input # Run tests for a single package
 
 # Visual regression tests (in regression-test directory)
 cd regression-test
