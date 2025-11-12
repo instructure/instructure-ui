@@ -140,7 +140,8 @@ describe('<RadioInput />', () => {
 
       await waitFor(() => {
         expect(onClick).not.toHaveBeenCalled()
-        expect(input).toBeDisabled()
+        expect(input).not.toBeDisabled()
+        expect(input).toHaveAttribute('readonly')
       })
     })
 

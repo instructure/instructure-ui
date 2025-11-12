@@ -131,7 +131,8 @@ describe('<RadioInputGroup />', () => {
 
     await waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
-      expect(input).toBeDisabled()
+      expect(input).not.toBeDisabled()
+      expect(input).toHaveAttribute('readonly')
     })
   })
 
