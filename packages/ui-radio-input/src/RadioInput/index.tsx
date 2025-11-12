@@ -27,7 +27,8 @@ import {
   useRef,
   useImperativeHandle,
   forwardRef,
-  useCallback
+  useCallback,
+  useEffect
 } from 'react'
 
 import {
@@ -41,7 +42,6 @@ import { useStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import type { RadioInputProps } from './props'
-import generateComponentTheme from './theme'
 
 /**
 ---
@@ -67,7 +67,7 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
       inputRef,
       ...rest
     } = props
-
+    const [hovered, setHovered] = useState(false)
     // State for uncontrolled mode
     const [internalChecked, setInternalChecked] = useState(false)
 
@@ -76,9 +76,12 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
     const inputElementRef = useRef<HTMLInputElement | null>(null)
 
     // Deterministic ID generation
-    const deterministicId = useDeterministicId('RadioInput')
-    const defaultId = deterministicId()
-    const id = idProp || defaultId
+    const [deterministicId, setDeterministicId] = useState<string | undefined>()
+    const getId = useDeterministicId('RadioInput')
+    useEffect(() => {
+      setDeterministicId(getId())
+    }, [])
+    const id = idProp || deterministicId
 
     // Computed checked value
     const checked =
@@ -88,15 +91,14 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
     const styles = useStyle({
       generateStyle,
       params: {
-        ...props,
-        variant,
-        size,
         disabled,
-        inline,
         context,
-        readOnly
+        inline,
+        hovered,
+        readOnly,
+        size,
+        variant
       },
-      generateComponentTheme,
       componentId: 'RadioInput',
       displayName: 'RadioInput'
     })
@@ -165,28 +167,42 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
       [checked, id]
     )
 
+    const handleMouseOver = () => {
+      setHovered(true)
+    }
+
+    const handleMouseOut = () => {
+      setHovered(false)
+    }
+
     const passedProps = passthroughProps(rest)
     return (
-      <div css={styles?.radioInput} data-cid="RadioInput" ref={containerRef}>
-        <div css={styles?.container}>
-          <input
-            {...passedProps}
-            id={id}
-            ref={handleInputRef}
-            value={value}
-            name={name}
-            checked={checked}
-            type="radio"
-            css={styles?.input}
-            disabled={disabled || readOnly}
-            onChange={handleChange}
-            onClick={handleClick}
-          />
-          <label css={styles?.control} htmlFor={id}>
-            <span css={styles?.facade} aria-hidden="true" />
-            <span css={styles?.label}>{label}</span>
-          </label>
-        </div>
+      <div
+        css={styles?.radioInput}
+        data-cid="RadioInput"
+        ref={containerRef}
+        /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
+        onMouseOver={handleMouseOver}
+        /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
+        onMouseOut={handleMouseOut}
+      >
+        <input
+          {...passedProps}
+          id={id}
+          ref={handleInputRef}
+          value={value}
+          name={name}
+          checked={checked}
+          type="radio"
+          css={styles?.input}
+          readOnly={readOnly}
+          disabled={disabled}
+          onChange={handleChange}
+          onClick={handleClick}
+        />
+        <label htmlFor={id} css={styles?.label}>
+          {label}
+        </label>
       </div>
     )
   }
@@ -198,7 +214,7 @@ export interface RadioInputHandle {
   focus: () => void
   readonly focused: boolean
   readonly checked: boolean
-  readonly id: string
+  readonly id: string | undefined
 }
 
 export default RadioInput
