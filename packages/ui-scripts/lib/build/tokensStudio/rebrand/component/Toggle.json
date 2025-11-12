@@ -52,8 +52,20 @@
       "value": "{color.stroke.interactive.input.disabled}",
       "type": "color"
     },
+    "uncheckedIconBorderReadonlyColor": {
+      "value": "{color.stroke.interactive.input.disabled}",
+      "type": "color"
+    },
     "checkedIconBorderColor": {
       "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedIconBorderHoverColor": {
+      "value": "{color.stroke.interactive.success.hover}",
+      "type": "color"
+    },
+    "checkedIconBorderDisabledColor": {
+      "value": "{color.stroke.interactive.success.disabled}",
       "type": "color"
     },
     "marginStart": {
@@ -124,6 +136,14 @@
     "labelFontSizeSm": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
+    },
+    "checkedIconBorderReadonlyColor": {
+      "value": "{color.stroke.interactive.success.disabled}",
+      "type": "color"
+    },
+    "toggleBackground": {
+      "value": "{color.background.base}",
+      "type": "color"
     }
   }
 }
