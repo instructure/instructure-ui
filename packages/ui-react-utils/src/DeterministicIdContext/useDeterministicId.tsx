@@ -42,11 +42,12 @@ import { DeterministicIdContext } from './DeterministicIdContext'
  * @example
  * ```tsx
  * const MyComponent = () => {
- *   const deterministicId = useDeterministicId('MyComponent')
- *   const id = deterministicId() // generates: MyComponent___0
- *   const labelId = deterministicId('MyComponent-label') // generates: MyComponent-label___0
- *
- *   return <div id={id}>Content</div>
+ *     const [deterministicId, setDeterministicId] = useState()
+ *     const getId = useDeterministicId('MyComponent')
+ *     useEffect(() => {
+ *       setDeterministicId(getId())
+ *     }, [])
+ *   return <div id={deterministicId}>Content</div>
  * }
  * ```
  */
