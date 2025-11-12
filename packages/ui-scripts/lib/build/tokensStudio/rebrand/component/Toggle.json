@@ -19,6 +19,83 @@
     "borderRadius": {
       "value": "{borderRadius.full}",
       "type": "borderRadius"
+    },
+    "checkedBackgroundColor": {
+      "value": "{color.background.interactive.success.base}",
+      "type": "color"
+    },
+    "labelColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "uncheckedIconBorderColor": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "checkedIconBorderColor-copy": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "marginStart": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "marginEnd": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "marginVertical": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "toggleShadow": {
+      "value": [
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow1}",
+          "y": "{dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow2}",
+          "y": "{dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow"
+    },
+    "toggleSize": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "labelFontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "labelFontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "labelLineHeightMd": {
+      "value": "{lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelFontSizeMd": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "labelFontSizeLg": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "labelFontSizeSm": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
     }
   }
 }
