@@ -1,7 +1,7 @@
 {
   "formFieldMessage": {
     "hintTextColor": {
-      "value": "{color.text.base}",
+      "value": "{color.text.muted}",
       "type": "color"
     },
     "errorTextColor": {
