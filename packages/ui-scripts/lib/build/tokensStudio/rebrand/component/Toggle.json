@@ -101,7 +101,15 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
+    "labelLineHeightSm": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
     "labelLineHeightMd": {
+      "value": "{lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelLineHeightLg": {
       "value": "{lineHeight.paragraph.textBase}",
       "type": "lineHeights"
     },
