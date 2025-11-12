@@ -1,11 +1,15 @@
 {
   "toggle": {
-    "errorBorderColor": {
-      "value": "{color.stroke.error}",
-      "type": "color"
-    },
     "backgroundColor": {
       "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundHoverColor": {
+      "value": "{color.background.interactive.input.hover}",
+      "type": "color"
+    },
+    "backgroundDisabledColor": {
+      "value": "{color.background.interactive.input.disabled}",
       "type": "color"
     },
     "borderColor": {
@@ -18,6 +22,10 @@
     },
     "borderReadonlyColor": {
       "value": "{color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{color.stroke.error}",
       "type": "color"
     },
     "borderWidth": {
