@@ -56,6 +56,7 @@ const config = merge(baseConfig, {
       directory: outputPath,
     },
     host: '0.0.0.0',
+    historyApiFallback: true,
     client: {
       overlay: false,
     },
