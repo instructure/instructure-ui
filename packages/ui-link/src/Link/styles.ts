@@ -22,22 +22,30 @@
  * SOFTWARE.
  */
 
-import type { LinkTheme } from '@instructure/shared-types'
+import { NewComponentTypes } from '@instructure/ui-themes'
 import type { LinkProps, LinkStyleProps, LinkStyle } from './props'
 
+type StyleParams = {
+  themeOverride: LinkProps['themeOverride']
+  isWithinText: LinkProps['isWithinText']
+  renderIcon: LinkProps['renderIcon']
+  iconPlacement: LinkProps['iconPlacement']
+  color: LinkProps['color']
+  variant: LinkProps['variant']
+}
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} params the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: LinkTheme,
-  props: LinkProps,
+  componentTheme: NewComponentTypes['Link'],
+  params: StyleParams,
   state: LinkStyleProps
 ): LinkStyle => {
   const {
@@ -46,30 +54,30 @@ const generateStyle = (
     iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
     color,
     variant
-  } = props
+  } = params
 
   const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'
 
   const variantStyles = {
     inline: {
-      fontSize: componentTheme.fontSize,
-      lineHeight: componentTheme.lineHeight,
+      fontSize: componentTheme.fontSizeMd,
+      lineHeight: componentTheme.lineHeightMd,
       textDecoration: 'underline'
     },
     'inline-small': {
-      fontSize: componentTheme.fontSizeSmall,
-      lineHeight: '1.3125rem',
+      fontSize: componentTheme.fontSizeSm,
+      lineHeight: componentTheme.lineHeightSm,
       textDecoration: 'underline'
     },
     standalone: {
-      fontSize: componentTheme.fontSize,
-      lineHeight: componentTheme.lineHeight,
+      fontSize: componentTheme.fontSizeMd,
+      lineHeight: componentTheme.lineHeightMd,
       textDecoration: 'none'
     },
     'standalone-small': {
-      fontSize: componentTheme.fontSizeSmall,
-      lineHeight: componentTheme.lineHeight,
+      fontSize: componentTheme.fontSizeSm,
+      lineHeight: componentTheme.lineHeightSm,
       textDecoration: 'none'
     }
   }
@@ -83,11 +91,11 @@ const generateStyle = (
 
     // set up focus styles
     outlineColor: 'transparent',
-    outlineWidth: componentTheme.focusOutlineWidth,
-    outlineStyle: componentTheme.focusOutlineStyle,
-    borderRadius: componentTheme.focusOutlineBorderRadius,
+    outlineWidth: '0.125rem', // TODO waiting for focusOutlineWidth
+    outlineStyle: 'solid', // TODO waiting for focusOutlineStyle
+    borderRadius: '0.125rem', // TODO waiting for focusOutlineBorderRadius
     outlineOffset: '0.25rem',
-    textUnderlineOffset: componentTheme.textUnderlineOffset,
+    textUnderlineOffset: 'auto',
 
     // If TruncateText is used in Link with icon, align the icon and the text vertically
     ...(renderIcon &&
@@ -95,14 +103,14 @@ const generateStyle = (
       hasVisibleChildren && {
         alignItems: 'center'
       }),
-
     '&:focus': {
-      outlineColor: componentTheme.focusOutlineColor
+      outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
     },
     '&[aria-disabled]': {
       cursor: 'not-allowed',
       pointerEvents: 'none',
-      opacity: '0.5'
+      opacity: '1',
+      color: componentTheme.textDisabledColor
     },
     '&::-moz-focus-inner': {
       border: 0 // removes default dotted focus outline in Firefox
@@ -113,13 +121,13 @@ const generateStyle = (
   const isClickableStyles = {
     ...baseStyles,
     cursor: 'pointer',
-    color: componentTheme.color,
+    color: componentTheme.textColor,
     '&:focus': {
-      color: componentTheme.color,
-      outlineColor: componentTheme.focusOutlineColor
+      color: componentTheme.textColor,
+      outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
     },
     '&:hover, &:active': {
-      color: componentTheme.hoverColor,
+      color: componentTheme.textHoverColor,
       textDecoration: isWithinText
         ? componentTheme.hoverTextDecorationWithinText
         : componentTheme.hoverTextDecorationOutsideText
@@ -146,38 +154,35 @@ const generateStyle = (
   }
 
   const inverseStyles = {
-    color: componentTheme.colorInverse,
+    color: componentTheme.onColorTextColor,
     '&:focus': {
-      outlineColor: componentTheme.focusInverseIconOutlineColor
+      outlineColor: componentTheme.onColorTextColor, // TODO waiting for focusInverseOutlineColor
+      color: componentTheme.onColorTextColor
     },
-    '&:hover, &:focus, &:active': {
-      color: componentTheme.colorInverse
+    '&:hover, &:active': {
+      color: componentTheme.onColorTextHoverColor
+    },
+    '&[aria-disabled]': {
+      color: componentTheme.onColorTextDisabledColor
     }
   }
+
   const variantIconStyles = {
     inline: {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
+      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapMd,
+      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapMd : 0
     },
     'inline-small': {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMarginSmall,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMarginSmall : 0
+      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapSm,
+      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapSm : 0
     },
     standalone: {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
+      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapMd,
+      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapMd : 0
     },
     'standalone-small': {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMarginSmall,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMarginSmall : 0
+      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapSm,
+      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapSm : 0
     }
   }
   return {
@@ -202,19 +207,15 @@ const generateStyle = (
     icon: {
       label: 'icon',
       ...(renderIcon && {
-        fontSize: componentTheme.iconSize,
+        fontSize: '1.125em', // TODO old componentTheme.iconSize to S, M, L
         boxSizing: 'border-box',
         ...(variant
           ? variantIconStyles[variant]
           : {
               paddingInlineStart:
-                iconPlacement === 'start'
-                  ? 0
-                  : componentTheme.iconPlusTextMargin,
+                iconPlacement === 'start' ? 0 : componentTheme.gapMd,
               paddingInlineEnd:
-                iconPlacement === 'start'
-                  ? componentTheme.iconPlusTextMargin
-                  : 0
+                iconPlacement === 'start' ? componentTheme.gapMd : 0
             })
       })
     }
