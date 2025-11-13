@@ -115,15 +115,15 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | RadioInput | label | `React.ReactNode` | Yes | - | The label displayed next to the checkbox |
 | RadioInput | value | `string \| number` | No | - | This maps to the low level HTML attribute [with the same name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#value) |
-| RadioInput | id | `string` | No | - |  |
+| RadioInput | id | `string` | No | - | The id of the input element. If not provided, a unique id will be generated. |
 | RadioInput | name | `string` | No | - | The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group) defines which group it belongs to, it's managed by the `RadioInputGroup` this component belongs to. Do not set it manually. |
-| RadioInput | checked | `boolean` | No | - |  |
+| RadioInput | checked | `boolean` | No | - | Sets the `checked` prop of the underlying input element. If left undefined, the component will control its own state. |
 | RadioInput | disabled | `boolean` | No | - | Whether to disable the input |
 | RadioInput | readOnly | `boolean` | No | - | Works just like disabled but keeps the same styles as if it were active |
-| RadioInput | variant | `'simple' \| 'toggle'` | No | - |  |
+| RadioInput | variant | `'simple' \| 'toggle'` | No | - | The visual style of the radio button |
 | RadioInput | size | `'small' \| 'medium' \| 'large'` | No | - |  |
-| RadioInput | context | `'success' \| 'warning' \| 'danger' \| 'off'` | No | - |  |
-| RadioInput | inline | `boolean` | No | - |  |
+| RadioInput | context | `'success' \| 'warning' \| 'danger' \| 'off'` | No | - | Sets the background color of the radio button when `variant="toggle"` |
+| RadioInput | inline | `boolean` | No | - | Sets the `display:inline-flex` in CSS |
 | RadioInput | onClick | `(event: React.MouseEvent<HTMLInputElement>) => void` | No | - |  |
 | RadioInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>) => void` | No | - | Callback fired when the input fires a change event. event.target.value will contain the new value. It will always be a string. |
 | RadioInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
