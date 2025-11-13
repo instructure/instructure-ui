@@ -41,6 +41,9 @@ type RadioInputOwnProps = {
    * [with the same name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#value)
    */
   value?: string | number
+  /**
+   * The id of the input element. If not provided, a unique id will be generated.
+   */
   id?: string
   /**
    * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group)
@@ -50,6 +53,10 @@ type RadioInputOwnProps = {
    * Do not set it manually.
    */
   name?: string
+  /**
+   * Sets the `checked` prop of the underlying input element. If left undefined,
+   * the component will control its own state.
+   */
   checked?: boolean
   /**
    * Whether to disable the input
@@ -59,9 +66,18 @@ type RadioInputOwnProps = {
    * Works just like disabled but keeps the same styles as if it were active
    */
   readOnly?: boolean
+  /**
+   * The visual style of the radio button
+   */
   variant?: 'simple' | 'toggle'
   size?: 'small' | 'medium' | 'large'
+  /**
+   * Sets the background color of the radio button when `variant="toggle"`
+   */
   context?: 'success' | 'warning' | 'danger' | 'off'
+  /**
+   * Sets the `display:inline-flex` in CSS
+   */
   inline?: boolean
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
   /**
