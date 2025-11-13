@@ -40,12 +40,16 @@ import { X } from '@instructure/ui-icons-lucide'
 import { Link } from '@instructure/ui-link'
 import { Flex } from '@instructure/ui-flex'
 
-// Get all exported Lucide icons (excluding utilities)
+// Get all exported Lucide icons (excluding utilities and types)
 const lucideIconNames = Object.keys(LucideIcons).filter(
   (name) =>
     name !== 'withRTL' &&
+    name !== 'wrapLucideIcon' &&
     name !== 'LucideProps' &&
     name !== 'LucideIcon' &&
+    name !== 'LucideIconWrapperProps' &&
+    name !== 'InstUIIconProps' &&
+    name !== 'LucideIconTheme' &&
     name !== 'BIDIRECTIONAL_ICONS'
 )
 

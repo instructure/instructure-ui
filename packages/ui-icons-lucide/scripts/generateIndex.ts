@@ -118,13 +118,6 @@ function generateIndex() {
     fs.readFileSync(mappingPath, 'utf-8')
   )
 
-  // Extract bidirectional icons from mapping
-  const bidirectionalIconsSet = new Set(
-    mappingData.mappings
-      .filter((m) => m.bidirectional)
-      .map((m) => m.lucide.name)
-  )
-
   // Get all Lucide icon names by importing the package
   const lucideReact = require('lucide-react')
   const allLucideIcons = Object.keys(lucideReact).filter((key) => {
@@ -144,36 +137,59 @@ function generateIndex() {
     )
   })
 
-  // Generate export statements for all icons
+  // JavaScript built-ins that need to be renamed to avoid conflicts
+  const CONFLICTING_NAMES = ['Infinity', 'Map']
+
+  // Generate export statements for all icons (all bidirectional by default)
   const iconExports = allLucideIcons
     .map((iconName) => {
-      const isBidirectional = bidirectionalIconsSet.has(iconName)
-      return `export const ${iconName} = withRTL(Lucide.${iconName}, { flipsInRTL: ${isBidirectional} })`
+      // Rename icons that conflict with JavaScript built-ins
+      if (CONFLICTING_NAMES.includes(iconName)) {
+        return `// Renamed from '${iconName}' to avoid conflict with JavaScript built-in\nexport const Icon${iconName} = wrapLucideIcon(Lucide.${iconName})`
+      }
+      return `export const ${iconName} = wrapLucideIcon(Lucide.${iconName})`
     })
     .join('\n')
 
   // Generate index.ts content
   const content = `${HEADER}
 import * as Lucide from 'lucide-react'
-import { withRTL } from './withRTL'
+import { wrapLucideIcon } from './wrapLucideIcon'
 
 // Re-export types
 export type { LucideProps, LucideIcon } from 'lucide-react'
+export type {
+  LucideIconWrapperProps,
+  InstUIIconProps,
+  LucideIconTheme
+} from './wrapLucideIcon'
 
 // Re-export utilities
-export { withRTL }
-export { BIDIRECTIONAL_ICONS } from './bidirectional'
+export { wrapLucideIcon }
 
 /**
- * All Lucide icons wrapped with RTL support
+ * All Lucide icons wrapped with InstUI theming and RTL support
  *
- * All icons are wrapped with the withRTL utility. Bidirectional icons
- * (arrows, chevrons, etc.) automatically flip horizontally in RTL contexts.
- * Non-directional icons pass through unchanged.
+ * All icons are wrapped with wrapLucideIcon and are bidirectional by default.
+ * Icons automatically flip horizontally in RTL contexts.
+ *
+ * To disable RTL flipping for a specific instance:
+ * \\\`\\\`\\\`tsx
+ * <IconName bidirectional={false} />
+ * \\\`\\\`\\\`
+ *
+ * InstUI-style usage:
+ * \\\`\\\`\\\`tsx
+ * <IconName size="large" color="primary" rotate="90" />
+ * \\\`\\\`\\\`
+ *
+ * Lucide-style usage (still supported):
+ * \\\`\\\`\\\`tsx
+ * <IconName size={24} strokeWidth={2} color="#ff0000" />
+ * \\\`\\\`\\\`
  *
  * Based on mapping.json version ${mappingData.version} (updated ${mappingData.lastUpdated})
  * Total icons: ${allLucideIcons.length}
- * Bidirectional: ${bidirectionalIconsSet.size}
  */
 
 ${iconExports}
@@ -184,11 +200,8 @@ ${iconExports}
 
   console.error(`✓ Generated index.ts`)
   console.error(`✓ Total Lucide icons: ${allLucideIcons.length}`)
-  console.error(`✓ Bidirectional icons: ${bidirectionalIconsSet.size}`)
   console.error(
-    `✓ Non-directional icons: ${
-      allLucideIcons.length - bidirectionalIconsSet.size
-    }`
+    `✓ All icons are bidirectional by default (can be disabled per-instance)`
   )
   console.error(
     `✓ Total mapped icons from InstUI: ${mappingData.mappings.length}`

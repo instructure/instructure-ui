@@ -59,2669 +59,1880 @@
  */
 
 import * as Lucide from 'lucide-react'
-import { withRTL } from './withRTL'
+import { wrapLucideIcon } from './wrapLucideIcon'
 
 // Re-export types
 export type { LucideProps, LucideIcon } from 'lucide-react'
+export type {
+  LucideIconWrapperProps,
+  InstUIIconProps,
+  LucideIconTheme
+} from './wrapLucideIcon'
 
 // Re-export utilities
-export { withRTL }
-export { BIDIRECTIONAL_ICONS } from './bidirectional'
+export { wrapLucideIcon }
 
 /**
- * All Lucide icons wrapped with RTL support
+ * All Lucide icons wrapped with InstUI theming and RTL support
  *
- * All icons are wrapped with the withRTL utility. Bidirectional icons
- * (arrows, chevrons, etc.) automatically flip horizontally in RTL contexts.
- * Non-directional icons pass through unchanged.
+ * All icons are wrapped with wrapLucideIcon and are bidirectional by default.
+ * Icons automatically flip horizontally in RTL contexts.
+ *
+ * To disable RTL flipping for a specific instance:
+ * \`\`\`tsx
+ * <IconName bidirectional={false} />
+ * \`\`\`
+ *
+ * InstUI-style usage:
+ * \`\`\`tsx
+ * <IconName size="large" color="primary" rotate="90" />
+ * \`\`\`
+ *
+ * Lucide-style usage (still supported):
+ * \`\`\`tsx
+ * <IconName size={24} strokeWidth={2} color="#ff0000" />
+ * \`\`\`
  *
  * Based on mapping.json version 1.0 (updated 2025-11-07)
  * Total icons: 1737
- * Bidirectional: 2
  */
 
-export const AArrowDown = withRTL(Lucide.AArrowDown, { flipsInRTL: false })
-export const AArrowUp = withRTL(Lucide.AArrowUp, { flipsInRTL: false })
-export const ALargeSmall = withRTL(Lucide.ALargeSmall, { flipsInRTL: false })
-export const Accessibility = withRTL(Lucide.Accessibility, {
-  flipsInRTL: false
-})
-export const Activity = withRTL(Lucide.Activity, { flipsInRTL: false })
-export const ActivitySquare = withRTL(Lucide.ActivitySquare, {
-  flipsInRTL: false
-})
-export const AirVent = withRTL(Lucide.AirVent, { flipsInRTL: false })
-export const Airplay = withRTL(Lucide.Airplay, { flipsInRTL: false })
-export const AlarmCheck = withRTL(Lucide.AlarmCheck, { flipsInRTL: false })
-export const AlarmClock = withRTL(Lucide.AlarmClock, { flipsInRTL: false })
-export const AlarmClockCheck = withRTL(Lucide.AlarmClockCheck, {
-  flipsInRTL: false
-})
-export const AlarmClockMinus = withRTL(Lucide.AlarmClockMinus, {
-  flipsInRTL: false
-})
-export const AlarmClockOff = withRTL(Lucide.AlarmClockOff, {
-  flipsInRTL: false
-})
-export const AlarmClockPlus = withRTL(Lucide.AlarmClockPlus, {
-  flipsInRTL: false
-})
-export const AlarmMinus = withRTL(Lucide.AlarmMinus, { flipsInRTL: false })
-export const AlarmPlus = withRTL(Lucide.AlarmPlus, { flipsInRTL: false })
-export const AlarmSmoke = withRTL(Lucide.AlarmSmoke, { flipsInRTL: false })
-export const Album = withRTL(Lucide.Album, { flipsInRTL: false })
-export const AlertCircle = withRTL(Lucide.AlertCircle, { flipsInRTL: false })
-export const AlertOctagon = withRTL(Lucide.AlertOctagon, { flipsInRTL: false })
-export const AlertTriangle = withRTL(Lucide.AlertTriangle, {
-  flipsInRTL: false
-})
-export const AlignCenter = withRTL(Lucide.AlignCenter, { flipsInRTL: false })
-export const AlignCenterHorizontal = withRTL(Lucide.AlignCenterHorizontal, {
-  flipsInRTL: false
-})
-export const AlignCenterVertical = withRTL(Lucide.AlignCenterVertical, {
-  flipsInRTL: false
-})
-export const AlignEndHorizontal = withRTL(Lucide.AlignEndHorizontal, {
-  flipsInRTL: false
-})
-export const AlignEndVertical = withRTL(Lucide.AlignEndVertical, {
-  flipsInRTL: false
-})
-export const AlignHorizontalDistributeCenter = withRTL(
-  Lucide.AlignHorizontalDistributeCenter,
-  { flipsInRTL: false }
+export const AArrowDown = wrapLucideIcon(Lucide.AArrowDown)
+export const AArrowUp = wrapLucideIcon(Lucide.AArrowUp)
+export const ALargeSmall = wrapLucideIcon(Lucide.ALargeSmall)
+export const Accessibility = wrapLucideIcon(Lucide.Accessibility)
+export const Activity = wrapLucideIcon(Lucide.Activity)
+export const ActivitySquare = wrapLucideIcon(Lucide.ActivitySquare)
+export const AirVent = wrapLucideIcon(Lucide.AirVent)
+export const Airplay = wrapLucideIcon(Lucide.Airplay)
+export const AlarmCheck = wrapLucideIcon(Lucide.AlarmCheck)
+export const AlarmClock = wrapLucideIcon(Lucide.AlarmClock)
+export const AlarmClockCheck = wrapLucideIcon(Lucide.AlarmClockCheck)
+export const AlarmClockMinus = wrapLucideIcon(Lucide.AlarmClockMinus)
+export const AlarmClockOff = wrapLucideIcon(Lucide.AlarmClockOff)
+export const AlarmClockPlus = wrapLucideIcon(Lucide.AlarmClockPlus)
+export const AlarmMinus = wrapLucideIcon(Lucide.AlarmMinus)
+export const AlarmPlus = wrapLucideIcon(Lucide.AlarmPlus)
+export const AlarmSmoke = wrapLucideIcon(Lucide.AlarmSmoke)
+export const Album = wrapLucideIcon(Lucide.Album)
+export const AlertCircle = wrapLucideIcon(Lucide.AlertCircle)
+export const AlertOctagon = wrapLucideIcon(Lucide.AlertOctagon)
+export const AlertTriangle = wrapLucideIcon(Lucide.AlertTriangle)
+export const AlignCenter = wrapLucideIcon(Lucide.AlignCenter)
+export const AlignCenterHorizontal = wrapLucideIcon(
+  Lucide.AlignCenterHorizontal
 )
-export const AlignHorizontalDistributeEnd = withRTL(
-  Lucide.AlignHorizontalDistributeEnd,
-  { flipsInRTL: false }
+export const AlignCenterVertical = wrapLucideIcon(Lucide.AlignCenterVertical)
+export const AlignEndHorizontal = wrapLucideIcon(Lucide.AlignEndHorizontal)
+export const AlignEndVertical = wrapLucideIcon(Lucide.AlignEndVertical)
+export const AlignHorizontalDistributeCenter = wrapLucideIcon(
+  Lucide.AlignHorizontalDistributeCenter
 )
-export const AlignHorizontalDistributeStart = withRTL(
-  Lucide.AlignHorizontalDistributeStart,
-  { flipsInRTL: false }
+export const AlignHorizontalDistributeEnd = wrapLucideIcon(
+  Lucide.AlignHorizontalDistributeEnd
 )
-export const AlignHorizontalJustifyCenter = withRTL(
-  Lucide.AlignHorizontalJustifyCenter,
-  { flipsInRTL: false }
+export const AlignHorizontalDistributeStart = wrapLucideIcon(
+  Lucide.AlignHorizontalDistributeStart
 )
-export const AlignHorizontalJustifyEnd = withRTL(
-  Lucide.AlignHorizontalJustifyEnd,
-  { flipsInRTL: false }
+export const AlignHorizontalJustifyCenter = wrapLucideIcon(
+  Lucide.AlignHorizontalJustifyCenter
 )
-export const AlignHorizontalJustifyStart = withRTL(
-  Lucide.AlignHorizontalJustifyStart,
-  { flipsInRTL: false }
+export const AlignHorizontalJustifyEnd = wrapLucideIcon(
+  Lucide.AlignHorizontalJustifyEnd
 )
-export const AlignHorizontalSpaceAround = withRTL(
-  Lucide.AlignHorizontalSpaceAround,
-  { flipsInRTL: false }
+export const AlignHorizontalJustifyStart = wrapLucideIcon(
+  Lucide.AlignHorizontalJustifyStart
 )
-export const AlignHorizontalSpaceBetween = withRTL(
-  Lucide.AlignHorizontalSpaceBetween,
-  { flipsInRTL: false }
+export const AlignHorizontalSpaceAround = wrapLucideIcon(
+  Lucide.AlignHorizontalSpaceAround
 )
-export const AlignJustify = withRTL(Lucide.AlignJustify, { flipsInRTL: false })
-export const AlignLeft = withRTL(Lucide.AlignLeft, { flipsInRTL: false })
-export const AlignRight = withRTL(Lucide.AlignRight, { flipsInRTL: false })
-export const AlignStartHorizontal = withRTL(Lucide.AlignStartHorizontal, {
-  flipsInRTL: false
-})
-export const AlignStartVertical = withRTL(Lucide.AlignStartVertical, {
-  flipsInRTL: false
-})
-export const AlignVerticalDistributeCenter = withRTL(
-  Lucide.AlignVerticalDistributeCenter,
-  { flipsInRTL: false }
+export const AlignHorizontalSpaceBetween = wrapLucideIcon(
+  Lucide.AlignHorizontalSpaceBetween
 )
-export const AlignVerticalDistributeEnd = withRTL(
-  Lucide.AlignVerticalDistributeEnd,
-  { flipsInRTL: false }
+export const AlignJustify = wrapLucideIcon(Lucide.AlignJustify)
+export const AlignLeft = wrapLucideIcon(Lucide.AlignLeft)
+export const AlignRight = wrapLucideIcon(Lucide.AlignRight)
+export const AlignStartHorizontal = wrapLucideIcon(Lucide.AlignStartHorizontal)
+export const AlignStartVertical = wrapLucideIcon(Lucide.AlignStartVertical)
+export const AlignVerticalDistributeCenter = wrapLucideIcon(
+  Lucide.AlignVerticalDistributeCenter
 )
-export const AlignVerticalDistributeStart = withRTL(
-  Lucide.AlignVerticalDistributeStart,
-  { flipsInRTL: false }
+export const AlignVerticalDistributeEnd = wrapLucideIcon(
+  Lucide.AlignVerticalDistributeEnd
 )
-export const AlignVerticalJustifyCenter = withRTL(
-  Lucide.AlignVerticalJustifyCenter,
-  { flipsInRTL: false }
+export const AlignVerticalDistributeStart = wrapLucideIcon(
+  Lucide.AlignVerticalDistributeStart
 )
-export const AlignVerticalJustifyEnd = withRTL(Lucide.AlignVerticalJustifyEnd, {
-  flipsInRTL: false
-})
-export const AlignVerticalJustifyStart = withRTL(
-  Lucide.AlignVerticalJustifyStart,
-  { flipsInRTL: false }
+export const AlignVerticalJustifyCenter = wrapLucideIcon(
+  Lucide.AlignVerticalJustifyCenter
 )
-export const AlignVerticalSpaceAround = withRTL(
-  Lucide.AlignVerticalSpaceAround,
-  { flipsInRTL: false }
+export const AlignVerticalJustifyEnd = wrapLucideIcon(
+  Lucide.AlignVerticalJustifyEnd
 )
-export const AlignVerticalSpaceBetween = withRTL(
-  Lucide.AlignVerticalSpaceBetween,
-  { flipsInRTL: false }
+export const AlignVerticalJustifyStart = wrapLucideIcon(
+  Lucide.AlignVerticalJustifyStart
 )
-export const Ambulance = withRTL(Lucide.Ambulance, { flipsInRTL: false })
-export const Ampersand = withRTL(Lucide.Ampersand, { flipsInRTL: false })
-export const Ampersands = withRTL(Lucide.Ampersands, { flipsInRTL: false })
-export const Amphora = withRTL(Lucide.Amphora, { flipsInRTL: false })
-export const Anchor = withRTL(Lucide.Anchor, { flipsInRTL: false })
-export const Angry = withRTL(Lucide.Angry, { flipsInRTL: false })
-export const Annoyed = withRTL(Lucide.Annoyed, { flipsInRTL: false })
-export const Antenna = withRTL(Lucide.Antenna, { flipsInRTL: false })
-export const Anvil = withRTL(Lucide.Anvil, { flipsInRTL: false })
-export const Aperture = withRTL(Lucide.Aperture, { flipsInRTL: false })
-export const AppWindow = withRTL(Lucide.AppWindow, { flipsInRTL: false })
-export const AppWindowMac = withRTL(Lucide.AppWindowMac, { flipsInRTL: false })
-export const Apple = withRTL(Lucide.Apple, { flipsInRTL: false })
-export const Archive = withRTL(Lucide.Archive, { flipsInRTL: false })
-export const ArchiveRestore = withRTL(Lucide.ArchiveRestore, {
-  flipsInRTL: false
-})
-export const ArchiveX = withRTL(Lucide.ArchiveX, { flipsInRTL: false })
-export const AreaChart = withRTL(Lucide.AreaChart, { flipsInRTL: false })
-export const Armchair = withRTL(Lucide.Armchair, { flipsInRTL: false })
-export const ArrowBigDown = withRTL(Lucide.ArrowBigDown, { flipsInRTL: false })
-export const ArrowBigDownDash = withRTL(Lucide.ArrowBigDownDash, {
-  flipsInRTL: false
-})
-export const ArrowBigLeft = withRTL(Lucide.ArrowBigLeft, { flipsInRTL: false })
-export const ArrowBigLeftDash = withRTL(Lucide.ArrowBigLeftDash, {
-  flipsInRTL: false
-})
-export const ArrowBigRight = withRTL(Lucide.ArrowBigRight, {
-  flipsInRTL: false
-})
-export const ArrowBigRightDash = withRTL(Lucide.ArrowBigRightDash, {
-  flipsInRTL: false
-})
-export const ArrowBigUp = withRTL(Lucide.ArrowBigUp, { flipsInRTL: false })
-export const ArrowBigUpDash = withRTL(Lucide.ArrowBigUpDash, {
-  flipsInRTL: false
-})
-export const ArrowDown = withRTL(Lucide.ArrowDown, { flipsInRTL: false })
-export const ArrowDown01 = withRTL(Lucide.ArrowDown01, { flipsInRTL: false })
-export const ArrowDown10 = withRTL(Lucide.ArrowDown10, { flipsInRTL: false })
-export const ArrowDownAZ = withRTL(Lucide.ArrowDownAZ, { flipsInRTL: false })
-export const ArrowDownAz = withRTL(Lucide.ArrowDownAz, { flipsInRTL: false })
-export const ArrowDownCircle = withRTL(Lucide.ArrowDownCircle, {
-  flipsInRTL: false
-})
-export const ArrowDownFromLine = withRTL(Lucide.ArrowDownFromLine, {
-  flipsInRTL: false
-})
-export const ArrowDownLeft = withRTL(Lucide.ArrowDownLeft, {
-  flipsInRTL: false
-})
-export const ArrowDownLeftFromCircle = withRTL(Lucide.ArrowDownLeftFromCircle, {
-  flipsInRTL: false
-})
-export const ArrowDownLeftFromSquare = withRTL(Lucide.ArrowDownLeftFromSquare, {
-  flipsInRTL: false
-})
-export const ArrowDownLeftSquare = withRTL(Lucide.ArrowDownLeftSquare, {
-  flipsInRTL: false
-})
-export const ArrowDownNarrowWide = withRTL(Lucide.ArrowDownNarrowWide, {
-  flipsInRTL: false
-})
-export const ArrowDownRight = withRTL(Lucide.ArrowDownRight, {
-  flipsInRTL: false
-})
-export const ArrowDownRightFromCircle = withRTL(
-  Lucide.ArrowDownRightFromCircle,
-  { flipsInRTL: false }
+export const AlignVerticalSpaceAround = wrapLucideIcon(
+  Lucide.AlignVerticalSpaceAround
 )
-export const ArrowDownRightFromSquare = withRTL(
-  Lucide.ArrowDownRightFromSquare,
-  { flipsInRTL: false }
+export const AlignVerticalSpaceBetween = wrapLucideIcon(
+  Lucide.AlignVerticalSpaceBetween
 )
-export const ArrowDownRightSquare = withRTL(Lucide.ArrowDownRightSquare, {
-  flipsInRTL: false
-})
-export const ArrowDownSquare = withRTL(Lucide.ArrowDownSquare, {
-  flipsInRTL: false
-})
-export const ArrowDownToDot = withRTL(Lucide.ArrowDownToDot, {
-  flipsInRTL: false
-})
-export const ArrowDownToLine = withRTL(Lucide.ArrowDownToLine, {
-  flipsInRTL: false
-})
-export const ArrowDownUp = withRTL(Lucide.ArrowDownUp, { flipsInRTL: false })
-export const ArrowDownWideNarrow = withRTL(Lucide.ArrowDownWideNarrow, {
-  flipsInRTL: false
-})
-export const ArrowDownZA = withRTL(Lucide.ArrowDownZA, { flipsInRTL: false })
-export const ArrowDownZa = withRTL(Lucide.ArrowDownZa, { flipsInRTL: false })
-export const ArrowLeft = withRTL(Lucide.ArrowLeft, { flipsInRTL: true })
-export const ArrowLeftCircle = withRTL(Lucide.ArrowLeftCircle, {
-  flipsInRTL: false
-})
-export const ArrowLeftFromLine = withRTL(Lucide.ArrowLeftFromLine, {
-  flipsInRTL: false
-})
-export const ArrowLeftRight = withRTL(Lucide.ArrowLeftRight, {
-  flipsInRTL: false
-})
-export const ArrowLeftSquare = withRTL(Lucide.ArrowLeftSquare, {
-  flipsInRTL: false
-})
-export const ArrowLeftToLine = withRTL(Lucide.ArrowLeftToLine, {
-  flipsInRTL: false
-})
-export const ArrowRight = withRTL(Lucide.ArrowRight, { flipsInRTL: true })
-export const ArrowRightCircle = withRTL(Lucide.ArrowRightCircle, {
-  flipsInRTL: false
-})
-export const ArrowRightFromLine = withRTL(Lucide.ArrowRightFromLine, {
-  flipsInRTL: false
-})
-export const ArrowRightLeft = withRTL(Lucide.ArrowRightLeft, {
-  flipsInRTL: false
-})
-export const ArrowRightSquare = withRTL(Lucide.ArrowRightSquare, {
-  flipsInRTL: false
-})
-export const ArrowRightToLine = withRTL(Lucide.ArrowRightToLine, {
-  flipsInRTL: false
-})
-export const ArrowUp = withRTL(Lucide.ArrowUp, { flipsInRTL: false })
-export const ArrowUp01 = withRTL(Lucide.ArrowUp01, { flipsInRTL: false })
-export const ArrowUp10 = withRTL(Lucide.ArrowUp10, { flipsInRTL: false })
-export const ArrowUpAZ = withRTL(Lucide.ArrowUpAZ, { flipsInRTL: false })
-export const ArrowUpAz = withRTL(Lucide.ArrowUpAz, { flipsInRTL: false })
-export const ArrowUpCircle = withRTL(Lucide.ArrowUpCircle, {
-  flipsInRTL: false
-})
-export const ArrowUpDown = withRTL(Lucide.ArrowUpDown, { flipsInRTL: false })
-export const ArrowUpFromDot = withRTL(Lucide.ArrowUpFromDot, {
-  flipsInRTL: false
-})
-export const ArrowUpFromLine = withRTL(Lucide.ArrowUpFromLine, {
-  flipsInRTL: false
-})
-export const ArrowUpLeft = withRTL(Lucide.ArrowUpLeft, { flipsInRTL: false })
-export const ArrowUpLeftFromCircle = withRTL(Lucide.ArrowUpLeftFromCircle, {
-  flipsInRTL: false
-})
-export const ArrowUpLeftFromSquare = withRTL(Lucide.ArrowUpLeftFromSquare, {
-  flipsInRTL: false
-})
-export const ArrowUpLeftSquare = withRTL(Lucide.ArrowUpLeftSquare, {
-  flipsInRTL: false
-})
-export const ArrowUpNarrowWide = withRTL(Lucide.ArrowUpNarrowWide, {
-  flipsInRTL: false
-})
-export const ArrowUpRight = withRTL(Lucide.ArrowUpRight, { flipsInRTL: false })
-export const ArrowUpRightFromCircle = withRTL(Lucide.ArrowUpRightFromCircle, {
-  flipsInRTL: false
-})
-export const ArrowUpRightFromSquare = withRTL(Lucide.ArrowUpRightFromSquare, {
-  flipsInRTL: false
-})
-export const ArrowUpRightSquare = withRTL(Lucide.ArrowUpRightSquare, {
-  flipsInRTL: false
-})
-export const ArrowUpSquare = withRTL(Lucide.ArrowUpSquare, {
-  flipsInRTL: false
-})
-export const ArrowUpToLine = withRTL(Lucide.ArrowUpToLine, {
-  flipsInRTL: false
-})
-export const ArrowUpWideNarrow = withRTL(Lucide.ArrowUpWideNarrow, {
-  flipsInRTL: false
-})
-export const ArrowUpZA = withRTL(Lucide.ArrowUpZA, { flipsInRTL: false })
-export const ArrowUpZa = withRTL(Lucide.ArrowUpZa, { flipsInRTL: false })
-export const ArrowsUpFromLine = withRTL(Lucide.ArrowsUpFromLine, {
-  flipsInRTL: false
-})
-export const Asterisk = withRTL(Lucide.Asterisk, { flipsInRTL: false })
-export const AsteriskSquare = withRTL(Lucide.AsteriskSquare, {
-  flipsInRTL: false
-})
-export const AtSign = withRTL(Lucide.AtSign, { flipsInRTL: false })
-export const Atom = withRTL(Lucide.Atom, { flipsInRTL: false })
-export const AudioLines = withRTL(Lucide.AudioLines, { flipsInRTL: false })
-export const AudioWaveform = withRTL(Lucide.AudioWaveform, {
-  flipsInRTL: false
-})
-export const Award = withRTL(Lucide.Award, { flipsInRTL: false })
-export const Axe = withRTL(Lucide.Axe, { flipsInRTL: false })
-export const Axis3D = withRTL(Lucide.Axis3D, { flipsInRTL: false })
-export const Axis3d = withRTL(Lucide.Axis3d, { flipsInRTL: false })
-export const Baby = withRTL(Lucide.Baby, { flipsInRTL: false })
-export const Backpack = withRTL(Lucide.Backpack, { flipsInRTL: false })
-export const Badge = withRTL(Lucide.Badge, { flipsInRTL: false })
-export const BadgeAlert = withRTL(Lucide.BadgeAlert, { flipsInRTL: false })
-export const BadgeCent = withRTL(Lucide.BadgeCent, { flipsInRTL: false })
-export const BadgeCheck = withRTL(Lucide.BadgeCheck, { flipsInRTL: false })
-export const BadgeDollarSign = withRTL(Lucide.BadgeDollarSign, {
-  flipsInRTL: false
-})
-export const BadgeEuro = withRTL(Lucide.BadgeEuro, { flipsInRTL: false })
-export const BadgeHelp = withRTL(Lucide.BadgeHelp, { flipsInRTL: false })
-export const BadgeIndianRupee = withRTL(Lucide.BadgeIndianRupee, {
-  flipsInRTL: false
-})
-export const BadgeInfo = withRTL(Lucide.BadgeInfo, { flipsInRTL: false })
-export const BadgeJapaneseYen = withRTL(Lucide.BadgeJapaneseYen, {
-  flipsInRTL: false
-})
-export const BadgeMinus = withRTL(Lucide.BadgeMinus, { flipsInRTL: false })
-export const BadgePercent = withRTL(Lucide.BadgePercent, { flipsInRTL: false })
-export const BadgePlus = withRTL(Lucide.BadgePlus, { flipsInRTL: false })
-export const BadgePoundSterling = withRTL(Lucide.BadgePoundSterling, {
-  flipsInRTL: false
-})
-export const BadgeRussianRuble = withRTL(Lucide.BadgeRussianRuble, {
-  flipsInRTL: false
-})
-export const BadgeSwissFranc = withRTL(Lucide.BadgeSwissFranc, {
-  flipsInRTL: false
-})
-export const BadgeX = withRTL(Lucide.BadgeX, { flipsInRTL: false })
-export const BaggageClaim = withRTL(Lucide.BaggageClaim, { flipsInRTL: false })
-export const Ban = withRTL(Lucide.Ban, { flipsInRTL: false })
-export const Banana = withRTL(Lucide.Banana, { flipsInRTL: false })
-export const Bandage = withRTL(Lucide.Bandage, { flipsInRTL: false })
-export const Banknote = withRTL(Lucide.Banknote, { flipsInRTL: false })
-export const BarChart = withRTL(Lucide.BarChart, { flipsInRTL: false })
-export const BarChart2 = withRTL(Lucide.BarChart2, { flipsInRTL: false })
-export const BarChart3 = withRTL(Lucide.BarChart3, { flipsInRTL: false })
-export const BarChart4 = withRTL(Lucide.BarChart4, { flipsInRTL: false })
-export const BarChartBig = withRTL(Lucide.BarChartBig, { flipsInRTL: false })
-export const BarChartHorizontal = withRTL(Lucide.BarChartHorizontal, {
-  flipsInRTL: false
-})
-export const BarChartHorizontalBig = withRTL(Lucide.BarChartHorizontalBig, {
-  flipsInRTL: false
-})
-export const Barcode = withRTL(Lucide.Barcode, { flipsInRTL: false })
-export const Baseline = withRTL(Lucide.Baseline, { flipsInRTL: false })
-export const Bath = withRTL(Lucide.Bath, { flipsInRTL: false })
-export const Battery = withRTL(Lucide.Battery, { flipsInRTL: false })
-export const BatteryCharging = withRTL(Lucide.BatteryCharging, {
-  flipsInRTL: false
-})
-export const BatteryFull = withRTL(Lucide.BatteryFull, { flipsInRTL: false })
-export const BatteryLow = withRTL(Lucide.BatteryLow, { flipsInRTL: false })
-export const BatteryMedium = withRTL(Lucide.BatteryMedium, {
-  flipsInRTL: false
-})
-export const BatteryWarning = withRTL(Lucide.BatteryWarning, {
-  flipsInRTL: false
-})
-export const Beaker = withRTL(Lucide.Beaker, { flipsInRTL: false })
-export const Bean = withRTL(Lucide.Bean, { flipsInRTL: false })
-export const BeanOff = withRTL(Lucide.BeanOff, { flipsInRTL: false })
-export const Bed = withRTL(Lucide.Bed, { flipsInRTL: false })
-export const BedDouble = withRTL(Lucide.BedDouble, { flipsInRTL: false })
-export const BedSingle = withRTL(Lucide.BedSingle, { flipsInRTL: false })
-export const Beef = withRTL(Lucide.Beef, { flipsInRTL: false })
-export const Beer = withRTL(Lucide.Beer, { flipsInRTL: false })
-export const BeerOff = withRTL(Lucide.BeerOff, { flipsInRTL: false })
-export const Bell = withRTL(Lucide.Bell, { flipsInRTL: false })
-export const BellDot = withRTL(Lucide.BellDot, { flipsInRTL: false })
-export const BellElectric = withRTL(Lucide.BellElectric, { flipsInRTL: false })
-export const BellMinus = withRTL(Lucide.BellMinus, { flipsInRTL: false })
-export const BellOff = withRTL(Lucide.BellOff, { flipsInRTL: false })
-export const BellPlus = withRTL(Lucide.BellPlus, { flipsInRTL: false })
-export const BellRing = withRTL(Lucide.BellRing, { flipsInRTL: false })
-export const BetweenHorizonalEnd = withRTL(Lucide.BetweenHorizonalEnd, {
-  flipsInRTL: false
-})
-export const BetweenHorizonalStart = withRTL(Lucide.BetweenHorizonalStart, {
-  flipsInRTL: false
-})
-export const BetweenHorizontalEnd = withRTL(Lucide.BetweenHorizontalEnd, {
-  flipsInRTL: false
-})
-export const BetweenHorizontalStart = withRTL(Lucide.BetweenHorizontalStart, {
-  flipsInRTL: false
-})
-export const BetweenVerticalEnd = withRTL(Lucide.BetweenVerticalEnd, {
-  flipsInRTL: false
-})
-export const BetweenVerticalStart = withRTL(Lucide.BetweenVerticalStart, {
-  flipsInRTL: false
-})
-export const BicepsFlexed = withRTL(Lucide.BicepsFlexed, { flipsInRTL: false })
-export const Bike = withRTL(Lucide.Bike, { flipsInRTL: false })
-export const Binary = withRTL(Lucide.Binary, { flipsInRTL: false })
-export const Binoculars = withRTL(Lucide.Binoculars, { flipsInRTL: false })
-export const Biohazard = withRTL(Lucide.Biohazard, { flipsInRTL: false })
-export const Bird = withRTL(Lucide.Bird, { flipsInRTL: false })
-export const Bitcoin = withRTL(Lucide.Bitcoin, { flipsInRTL: false })
-export const Blend = withRTL(Lucide.Blend, { flipsInRTL: false })
-export const Blinds = withRTL(Lucide.Blinds, { flipsInRTL: false })
-export const Blocks = withRTL(Lucide.Blocks, { flipsInRTL: false })
-export const Bluetooth = withRTL(Lucide.Bluetooth, { flipsInRTL: false })
-export const BluetoothConnected = withRTL(Lucide.BluetoothConnected, {
-  flipsInRTL: false
-})
-export const BluetoothOff = withRTL(Lucide.BluetoothOff, { flipsInRTL: false })
-export const BluetoothSearching = withRTL(Lucide.BluetoothSearching, {
-  flipsInRTL: false
-})
-export const Bold = withRTL(Lucide.Bold, { flipsInRTL: false })
-export const Bolt = withRTL(Lucide.Bolt, { flipsInRTL: false })
-export const Bomb = withRTL(Lucide.Bomb, { flipsInRTL: false })
-export const Bone = withRTL(Lucide.Bone, { flipsInRTL: false })
-export const Book = withRTL(Lucide.Book, { flipsInRTL: false })
-export const BookA = withRTL(Lucide.BookA, { flipsInRTL: false })
-export const BookAudio = withRTL(Lucide.BookAudio, { flipsInRTL: false })
-export const BookCheck = withRTL(Lucide.BookCheck, { flipsInRTL: false })
-export const BookCopy = withRTL(Lucide.BookCopy, { flipsInRTL: false })
-export const BookDashed = withRTL(Lucide.BookDashed, { flipsInRTL: false })
-export const BookDown = withRTL(Lucide.BookDown, { flipsInRTL: false })
-export const BookHeadphones = withRTL(Lucide.BookHeadphones, {
-  flipsInRTL: false
-})
-export const BookHeart = withRTL(Lucide.BookHeart, { flipsInRTL: false })
-export const BookImage = withRTL(Lucide.BookImage, { flipsInRTL: false })
-export const BookKey = withRTL(Lucide.BookKey, { flipsInRTL: false })
-export const BookLock = withRTL(Lucide.BookLock, { flipsInRTL: false })
-export const BookMarked = withRTL(Lucide.BookMarked, { flipsInRTL: false })
-export const BookMinus = withRTL(Lucide.BookMinus, { flipsInRTL: false })
-export const BookOpen = withRTL(Lucide.BookOpen, { flipsInRTL: false })
-export const BookOpenCheck = withRTL(Lucide.BookOpenCheck, {
-  flipsInRTL: false
-})
-export const BookOpenText = withRTL(Lucide.BookOpenText, { flipsInRTL: false })
-export const BookPlus = withRTL(Lucide.BookPlus, { flipsInRTL: false })
-export const BookTemplate = withRTL(Lucide.BookTemplate, { flipsInRTL: false })
-export const BookText = withRTL(Lucide.BookText, { flipsInRTL: false })
-export const BookType = withRTL(Lucide.BookType, { flipsInRTL: false })
-export const BookUp = withRTL(Lucide.BookUp, { flipsInRTL: false })
-export const BookUp2 = withRTL(Lucide.BookUp2, { flipsInRTL: false })
-export const BookUser = withRTL(Lucide.BookUser, { flipsInRTL: false })
-export const BookX = withRTL(Lucide.BookX, { flipsInRTL: false })
-export const Bookmark = withRTL(Lucide.Bookmark, { flipsInRTL: false })
-export const BookmarkCheck = withRTL(Lucide.BookmarkCheck, {
-  flipsInRTL: false
-})
-export const BookmarkMinus = withRTL(Lucide.BookmarkMinus, {
-  flipsInRTL: false
-})
-export const BookmarkPlus = withRTL(Lucide.BookmarkPlus, { flipsInRTL: false })
-export const BookmarkX = withRTL(Lucide.BookmarkX, { flipsInRTL: false })
-export const BoomBox = withRTL(Lucide.BoomBox, { flipsInRTL: false })
-export const Bot = withRTL(Lucide.Bot, { flipsInRTL: false })
-export const BotMessageSquare = withRTL(Lucide.BotMessageSquare, {
-  flipsInRTL: false
-})
-export const BotOff = withRTL(Lucide.BotOff, { flipsInRTL: false })
-export const Box = withRTL(Lucide.Box, { flipsInRTL: false })
-export const BoxSelect = withRTL(Lucide.BoxSelect, { flipsInRTL: false })
-export const Boxes = withRTL(Lucide.Boxes, { flipsInRTL: false })
-export const Braces = withRTL(Lucide.Braces, { flipsInRTL: false })
-export const Brackets = withRTL(Lucide.Brackets, { flipsInRTL: false })
-export const Brain = withRTL(Lucide.Brain, { flipsInRTL: false })
-export const BrainCircuit = withRTL(Lucide.BrainCircuit, { flipsInRTL: false })
-export const BrainCog = withRTL(Lucide.BrainCog, { flipsInRTL: false })
-export const BrickWall = withRTL(Lucide.BrickWall, { flipsInRTL: false })
-export const Briefcase = withRTL(Lucide.Briefcase, { flipsInRTL: false })
-export const BriefcaseBusiness = withRTL(Lucide.BriefcaseBusiness, {
-  flipsInRTL: false
-})
-export const BriefcaseConveyorBelt = withRTL(Lucide.BriefcaseConveyorBelt, {
-  flipsInRTL: false
-})
-export const BriefcaseMedical = withRTL(Lucide.BriefcaseMedical, {
-  flipsInRTL: false
-})
-export const BringToFront = withRTL(Lucide.BringToFront, { flipsInRTL: false })
-export const Brush = withRTL(Lucide.Brush, { flipsInRTL: false })
-export const Bug = withRTL(Lucide.Bug, { flipsInRTL: false })
-export const BugOff = withRTL(Lucide.BugOff, { flipsInRTL: false })
-export const BugPlay = withRTL(Lucide.BugPlay, { flipsInRTL: false })
-export const Building = withRTL(Lucide.Building, { flipsInRTL: false })
-export const Building2 = withRTL(Lucide.Building2, { flipsInRTL: false })
-export const Bus = withRTL(Lucide.Bus, { flipsInRTL: false })
-export const BusFront = withRTL(Lucide.BusFront, { flipsInRTL: false })
-export const Cable = withRTL(Lucide.Cable, { flipsInRTL: false })
-export const CableCar = withRTL(Lucide.CableCar, { flipsInRTL: false })
-export const Cake = withRTL(Lucide.Cake, { flipsInRTL: false })
-export const CakeSlice = withRTL(Lucide.CakeSlice, { flipsInRTL: false })
-export const Calculator = withRTL(Lucide.Calculator, { flipsInRTL: false })
-export const Calendar = withRTL(Lucide.Calendar, { flipsInRTL: false })
-export const Calendar1 = withRTL(Lucide.Calendar1, { flipsInRTL: false })
-export const CalendarArrowDown = withRTL(Lucide.CalendarArrowDown, {
-  flipsInRTL: false
-})
-export const CalendarArrowUp = withRTL(Lucide.CalendarArrowUp, {
-  flipsInRTL: false
-})
-export const CalendarCheck = withRTL(Lucide.CalendarCheck, {
-  flipsInRTL: false
-})
-export const CalendarCheck2 = withRTL(Lucide.CalendarCheck2, {
-  flipsInRTL: false
-})
-export const CalendarClock = withRTL(Lucide.CalendarClock, {
-  flipsInRTL: false
-})
-export const CalendarCog = withRTL(Lucide.CalendarCog, { flipsInRTL: false })
-export const CalendarDays = withRTL(Lucide.CalendarDays, { flipsInRTL: false })
-export const CalendarFold = withRTL(Lucide.CalendarFold, { flipsInRTL: false })
-export const CalendarHeart = withRTL(Lucide.CalendarHeart, {
-  flipsInRTL: false
-})
-export const CalendarMinus = withRTL(Lucide.CalendarMinus, {
-  flipsInRTL: false
-})
-export const CalendarMinus2 = withRTL(Lucide.CalendarMinus2, {
-  flipsInRTL: false
-})
-export const CalendarOff = withRTL(Lucide.CalendarOff, { flipsInRTL: false })
-export const CalendarPlus = withRTL(Lucide.CalendarPlus, { flipsInRTL: false })
-export const CalendarPlus2 = withRTL(Lucide.CalendarPlus2, {
-  flipsInRTL: false
-})
-export const CalendarRange = withRTL(Lucide.CalendarRange, {
-  flipsInRTL: false
-})
-export const CalendarSearch = withRTL(Lucide.CalendarSearch, {
-  flipsInRTL: false
-})
-export const CalendarX = withRTL(Lucide.CalendarX, { flipsInRTL: false })
-export const CalendarX2 = withRTL(Lucide.CalendarX2, { flipsInRTL: false })
-export const Camera = withRTL(Lucide.Camera, { flipsInRTL: false })
-export const CameraOff = withRTL(Lucide.CameraOff, { flipsInRTL: false })
-export const CandlestickChart = withRTL(Lucide.CandlestickChart, {
-  flipsInRTL: false
-})
-export const Candy = withRTL(Lucide.Candy, { flipsInRTL: false })
-export const CandyCane = withRTL(Lucide.CandyCane, { flipsInRTL: false })
-export const CandyOff = withRTL(Lucide.CandyOff, { flipsInRTL: false })
-export const Cannabis = withRTL(Lucide.Cannabis, { flipsInRTL: false })
-export const Captions = withRTL(Lucide.Captions, { flipsInRTL: false })
-export const CaptionsOff = withRTL(Lucide.CaptionsOff, { flipsInRTL: false })
-export const Car = withRTL(Lucide.Car, { flipsInRTL: false })
-export const CarFront = withRTL(Lucide.CarFront, { flipsInRTL: false })
-export const CarTaxiFront = withRTL(Lucide.CarTaxiFront, { flipsInRTL: false })
-export const Caravan = withRTL(Lucide.Caravan, { flipsInRTL: false })
-export const Carrot = withRTL(Lucide.Carrot, { flipsInRTL: false })
-export const CaseLower = withRTL(Lucide.CaseLower, { flipsInRTL: false })
-export const CaseSensitive = withRTL(Lucide.CaseSensitive, {
-  flipsInRTL: false
-})
-export const CaseUpper = withRTL(Lucide.CaseUpper, { flipsInRTL: false })
-export const CassetteTape = withRTL(Lucide.CassetteTape, { flipsInRTL: false })
-export const Cast = withRTL(Lucide.Cast, { flipsInRTL: false })
-export const Castle = withRTL(Lucide.Castle, { flipsInRTL: false })
-export const Cat = withRTL(Lucide.Cat, { flipsInRTL: false })
-export const Cctv = withRTL(Lucide.Cctv, { flipsInRTL: false })
-export const ChartArea = withRTL(Lucide.ChartArea, { flipsInRTL: false })
-export const ChartBar = withRTL(Lucide.ChartBar, { flipsInRTL: false })
-export const ChartBarBig = withRTL(Lucide.ChartBarBig, { flipsInRTL: false })
-export const ChartBarDecreasing = withRTL(Lucide.ChartBarDecreasing, {
-  flipsInRTL: false
-})
-export const ChartBarIncreasing = withRTL(Lucide.ChartBarIncreasing, {
-  flipsInRTL: false
-})
-export const ChartBarStacked = withRTL(Lucide.ChartBarStacked, {
-  flipsInRTL: false
-})
-export const ChartCandlestick = withRTL(Lucide.ChartCandlestick, {
-  flipsInRTL: false
-})
-export const ChartColumn = withRTL(Lucide.ChartColumn, { flipsInRTL: false })
-export const ChartColumnBig = withRTL(Lucide.ChartColumnBig, {
-  flipsInRTL: false
-})
-export const ChartColumnDecreasing = withRTL(Lucide.ChartColumnDecreasing, {
-  flipsInRTL: false
-})
-export const ChartColumnIncreasing = withRTL(Lucide.ChartColumnIncreasing, {
-  flipsInRTL: false
-})
-export const ChartColumnStacked = withRTL(Lucide.ChartColumnStacked, {
-  flipsInRTL: false
-})
-export const ChartGantt = withRTL(Lucide.ChartGantt, { flipsInRTL: false })
-export const ChartLine = withRTL(Lucide.ChartLine, { flipsInRTL: false })
-export const ChartNetwork = withRTL(Lucide.ChartNetwork, { flipsInRTL: false })
-export const ChartNoAxesColumn = withRTL(Lucide.ChartNoAxesColumn, {
-  flipsInRTL: false
-})
-export const ChartNoAxesColumnDecreasing = withRTL(
-  Lucide.ChartNoAxesColumnDecreasing,
-  { flipsInRTL: false }
+export const Ambulance = wrapLucideIcon(Lucide.Ambulance)
+export const Ampersand = wrapLucideIcon(Lucide.Ampersand)
+export const Ampersands = wrapLucideIcon(Lucide.Ampersands)
+export const Amphora = wrapLucideIcon(Lucide.Amphora)
+export const Anchor = wrapLucideIcon(Lucide.Anchor)
+export const Angry = wrapLucideIcon(Lucide.Angry)
+export const Annoyed = wrapLucideIcon(Lucide.Annoyed)
+export const Antenna = wrapLucideIcon(Lucide.Antenna)
+export const Anvil = wrapLucideIcon(Lucide.Anvil)
+export const Aperture = wrapLucideIcon(Lucide.Aperture)
+export const AppWindow = wrapLucideIcon(Lucide.AppWindow)
+export const AppWindowMac = wrapLucideIcon(Lucide.AppWindowMac)
+export const Apple = wrapLucideIcon(Lucide.Apple)
+export const Archive = wrapLucideIcon(Lucide.Archive)
+export const ArchiveRestore = wrapLucideIcon(Lucide.ArchiveRestore)
+export const ArchiveX = wrapLucideIcon(Lucide.ArchiveX)
+export const AreaChart = wrapLucideIcon(Lucide.AreaChart)
+export const Armchair = wrapLucideIcon(Lucide.Armchair)
+export const ArrowBigDown = wrapLucideIcon(Lucide.ArrowBigDown)
+export const ArrowBigDownDash = wrapLucideIcon(Lucide.ArrowBigDownDash)
+export const ArrowBigLeft = wrapLucideIcon(Lucide.ArrowBigLeft)
+export const ArrowBigLeftDash = wrapLucideIcon(Lucide.ArrowBigLeftDash)
+export const ArrowBigRight = wrapLucideIcon(Lucide.ArrowBigRight)
+export const ArrowBigRightDash = wrapLucideIcon(Lucide.ArrowBigRightDash)
+export const ArrowBigUp = wrapLucideIcon(Lucide.ArrowBigUp)
+export const ArrowBigUpDash = wrapLucideIcon(Lucide.ArrowBigUpDash)
+export const ArrowDown = wrapLucideIcon(Lucide.ArrowDown)
+export const ArrowDown01 = wrapLucideIcon(Lucide.ArrowDown01)
+export const ArrowDown10 = wrapLucideIcon(Lucide.ArrowDown10)
+export const ArrowDownAZ = wrapLucideIcon(Lucide.ArrowDownAZ)
+export const ArrowDownAz = wrapLucideIcon(Lucide.ArrowDownAz)
+export const ArrowDownCircle = wrapLucideIcon(Lucide.ArrowDownCircle)
+export const ArrowDownFromLine = wrapLucideIcon(Lucide.ArrowDownFromLine)
+export const ArrowDownLeft = wrapLucideIcon(Lucide.ArrowDownLeft)
+export const ArrowDownLeftFromCircle = wrapLucideIcon(
+  Lucide.ArrowDownLeftFromCircle
 )
-export const ChartNoAxesColumnIncreasing = withRTL(
-  Lucide.ChartNoAxesColumnIncreasing,
-  { flipsInRTL: false }
+export const ArrowDownLeftFromSquare = wrapLucideIcon(
+  Lucide.ArrowDownLeftFromSquare
 )
-export const ChartNoAxesCombined = withRTL(Lucide.ChartNoAxesCombined, {
-  flipsInRTL: false
-})
-export const ChartNoAxesGantt = withRTL(Lucide.ChartNoAxesGantt, {
-  flipsInRTL: false
-})
-export const ChartPie = withRTL(Lucide.ChartPie, { flipsInRTL: false })
-export const ChartScatter = withRTL(Lucide.ChartScatter, { flipsInRTL: false })
-export const ChartSpline = withRTL(Lucide.ChartSpline, { flipsInRTL: false })
-export const Check = withRTL(Lucide.Check, { flipsInRTL: false })
-export const CheckCheck = withRTL(Lucide.CheckCheck, { flipsInRTL: false })
-export const CheckCircle = withRTL(Lucide.CheckCircle, { flipsInRTL: false })
-export const CheckCircle2 = withRTL(Lucide.CheckCircle2, { flipsInRTL: false })
-export const CheckSquare = withRTL(Lucide.CheckSquare, { flipsInRTL: false })
-export const CheckSquare2 = withRTL(Lucide.CheckSquare2, { flipsInRTL: false })
-export const ChefHat = withRTL(Lucide.ChefHat, { flipsInRTL: false })
-export const Cherry = withRTL(Lucide.Cherry, { flipsInRTL: false })
-export const ChevronDown = withRTL(Lucide.ChevronDown, { flipsInRTL: false })
-export const ChevronDownCircle = withRTL(Lucide.ChevronDownCircle, {
-  flipsInRTL: false
-})
-export const ChevronDownSquare = withRTL(Lucide.ChevronDownSquare, {
-  flipsInRTL: false
-})
-export const ChevronFirst = withRTL(Lucide.ChevronFirst, { flipsInRTL: false })
-export const ChevronLast = withRTL(Lucide.ChevronLast, { flipsInRTL: false })
-export const ChevronLeft = withRTL(Lucide.ChevronLeft, { flipsInRTL: false })
-export const ChevronLeftCircle = withRTL(Lucide.ChevronLeftCircle, {
-  flipsInRTL: false
-})
-export const ChevronLeftSquare = withRTL(Lucide.ChevronLeftSquare, {
-  flipsInRTL: false
-})
-export const ChevronRight = withRTL(Lucide.ChevronRight, { flipsInRTL: false })
-export const ChevronRightCircle = withRTL(Lucide.ChevronRightCircle, {
-  flipsInRTL: false
-})
-export const ChevronRightSquare = withRTL(Lucide.ChevronRightSquare, {
-  flipsInRTL: false
-})
-export const ChevronUp = withRTL(Lucide.ChevronUp, { flipsInRTL: false })
-export const ChevronUpCircle = withRTL(Lucide.ChevronUpCircle, {
-  flipsInRTL: false
-})
-export const ChevronUpSquare = withRTL(Lucide.ChevronUpSquare, {
-  flipsInRTL: false
-})
-export const ChevronsDown = withRTL(Lucide.ChevronsDown, { flipsInRTL: false })
-export const ChevronsDownUp = withRTL(Lucide.ChevronsDownUp, {
-  flipsInRTL: false
-})
-export const ChevronsLeft = withRTL(Lucide.ChevronsLeft, { flipsInRTL: false })
-export const ChevronsLeftRight = withRTL(Lucide.ChevronsLeftRight, {
-  flipsInRTL: false
-})
-export const ChevronsLeftRightEllipsis = withRTL(
-  Lucide.ChevronsLeftRightEllipsis,
-  { flipsInRTL: false }
+export const ArrowDownLeftSquare = wrapLucideIcon(Lucide.ArrowDownLeftSquare)
+export const ArrowDownNarrowWide = wrapLucideIcon(Lucide.ArrowDownNarrowWide)
+export const ArrowDownRight = wrapLucideIcon(Lucide.ArrowDownRight)
+export const ArrowDownRightFromCircle = wrapLucideIcon(
+  Lucide.ArrowDownRightFromCircle
 )
-export const ChevronsRight = withRTL(Lucide.ChevronsRight, {
-  flipsInRTL: false
-})
-export const ChevronsRightLeft = withRTL(Lucide.ChevronsRightLeft, {
-  flipsInRTL: false
-})
-export const ChevronsUp = withRTL(Lucide.ChevronsUp, { flipsInRTL: false })
-export const ChevronsUpDown = withRTL(Lucide.ChevronsUpDown, {
-  flipsInRTL: false
-})
-export const Chrome = withRTL(Lucide.Chrome, { flipsInRTL: false })
-export const Church = withRTL(Lucide.Church, { flipsInRTL: false })
-export const Cigarette = withRTL(Lucide.Cigarette, { flipsInRTL: false })
-export const CigaretteOff = withRTL(Lucide.CigaretteOff, { flipsInRTL: false })
-export const Circle = withRTL(Lucide.Circle, { flipsInRTL: false })
-export const CircleAlert = withRTL(Lucide.CircleAlert, { flipsInRTL: false })
-export const CircleArrowDown = withRTL(Lucide.CircleArrowDown, {
-  flipsInRTL: false
-})
-export const CircleArrowLeft = withRTL(Lucide.CircleArrowLeft, {
-  flipsInRTL: false
-})
-export const CircleArrowOutDownLeft = withRTL(Lucide.CircleArrowOutDownLeft, {
-  flipsInRTL: false
-})
-export const CircleArrowOutDownRight = withRTL(Lucide.CircleArrowOutDownRight, {
-  flipsInRTL: false
-})
-export const CircleArrowOutUpLeft = withRTL(Lucide.CircleArrowOutUpLeft, {
-  flipsInRTL: false
-})
-export const CircleArrowOutUpRight = withRTL(Lucide.CircleArrowOutUpRight, {
-  flipsInRTL: false
-})
-export const CircleArrowRight = withRTL(Lucide.CircleArrowRight, {
-  flipsInRTL: false
-})
-export const CircleArrowUp = withRTL(Lucide.CircleArrowUp, {
-  flipsInRTL: false
-})
-export const CircleCheck = withRTL(Lucide.CircleCheck, { flipsInRTL: false })
-export const CircleCheckBig = withRTL(Lucide.CircleCheckBig, {
-  flipsInRTL: false
-})
-export const CircleChevronDown = withRTL(Lucide.CircleChevronDown, {
-  flipsInRTL: false
-})
-export const CircleChevronLeft = withRTL(Lucide.CircleChevronLeft, {
-  flipsInRTL: false
-})
-export const CircleChevronRight = withRTL(Lucide.CircleChevronRight, {
-  flipsInRTL: false
-})
-export const CircleChevronUp = withRTL(Lucide.CircleChevronUp, {
-  flipsInRTL: false
-})
-export const CircleDashed = withRTL(Lucide.CircleDashed, { flipsInRTL: false })
-export const CircleDivide = withRTL(Lucide.CircleDivide, { flipsInRTL: false })
-export const CircleDollarSign = withRTL(Lucide.CircleDollarSign, {
-  flipsInRTL: false
-})
-export const CircleDot = withRTL(Lucide.CircleDot, { flipsInRTL: false })
-export const CircleDotDashed = withRTL(Lucide.CircleDotDashed, {
-  flipsInRTL: false
-})
-export const CircleEllipsis = withRTL(Lucide.CircleEllipsis, {
-  flipsInRTL: false
-})
-export const CircleEqual = withRTL(Lucide.CircleEqual, { flipsInRTL: false })
-export const CircleFadingArrowUp = withRTL(Lucide.CircleFadingArrowUp, {
-  flipsInRTL: false
-})
-export const CircleFadingPlus = withRTL(Lucide.CircleFadingPlus, {
-  flipsInRTL: false
-})
-export const CircleGauge = withRTL(Lucide.CircleGauge, { flipsInRTL: false })
-export const CircleHelp = withRTL(Lucide.CircleHelp, { flipsInRTL: false })
-export const CircleMinus = withRTL(Lucide.CircleMinus, { flipsInRTL: false })
-export const CircleOff = withRTL(Lucide.CircleOff, { flipsInRTL: false })
-export const CircleParking = withRTL(Lucide.CircleParking, {
-  flipsInRTL: false
-})
-export const CircleParkingOff = withRTL(Lucide.CircleParkingOff, {
-  flipsInRTL: false
-})
-export const CirclePause = withRTL(Lucide.CirclePause, { flipsInRTL: false })
-export const CirclePercent = withRTL(Lucide.CirclePercent, {
-  flipsInRTL: false
-})
-export const CirclePlay = withRTL(Lucide.CirclePlay, { flipsInRTL: false })
-export const CirclePlus = withRTL(Lucide.CirclePlus, { flipsInRTL: false })
-export const CirclePower = withRTL(Lucide.CirclePower, { flipsInRTL: false })
-export const CircleSlash = withRTL(Lucide.CircleSlash, { flipsInRTL: false })
-export const CircleSlash2 = withRTL(Lucide.CircleSlash2, { flipsInRTL: false })
-export const CircleSlashed = withRTL(Lucide.CircleSlashed, {
-  flipsInRTL: false
-})
-export const CircleStop = withRTL(Lucide.CircleStop, { flipsInRTL: false })
-export const CircleUser = withRTL(Lucide.CircleUser, { flipsInRTL: false })
-export const CircleUserRound = withRTL(Lucide.CircleUserRound, {
-  flipsInRTL: false
-})
-export const CircleX = withRTL(Lucide.CircleX, { flipsInRTL: false })
-export const CircuitBoard = withRTL(Lucide.CircuitBoard, { flipsInRTL: false })
-export const Citrus = withRTL(Lucide.Citrus, { flipsInRTL: false })
-export const Clapperboard = withRTL(Lucide.Clapperboard, { flipsInRTL: false })
-export const Clipboard = withRTL(Lucide.Clipboard, { flipsInRTL: false })
-export const ClipboardCheck = withRTL(Lucide.ClipboardCheck, {
-  flipsInRTL: false
-})
-export const ClipboardCopy = withRTL(Lucide.ClipboardCopy, {
-  flipsInRTL: false
-})
-export const ClipboardEdit = withRTL(Lucide.ClipboardEdit, {
-  flipsInRTL: false
-})
-export const ClipboardList = withRTL(Lucide.ClipboardList, {
-  flipsInRTL: false
-})
-export const ClipboardMinus = withRTL(Lucide.ClipboardMinus, {
-  flipsInRTL: false
-})
-export const ClipboardPaste = withRTL(Lucide.ClipboardPaste, {
-  flipsInRTL: false
-})
-export const ClipboardPen = withRTL(Lucide.ClipboardPen, { flipsInRTL: false })
-export const ClipboardPenLine = withRTL(Lucide.ClipboardPenLine, {
-  flipsInRTL: false
-})
-export const ClipboardPlus = withRTL(Lucide.ClipboardPlus, {
-  flipsInRTL: false
-})
-export const ClipboardSignature = withRTL(Lucide.ClipboardSignature, {
-  flipsInRTL: false
-})
-export const ClipboardType = withRTL(Lucide.ClipboardType, {
-  flipsInRTL: false
-})
-export const ClipboardX = withRTL(Lucide.ClipboardX, { flipsInRTL: false })
-export const Clock = withRTL(Lucide.Clock, { flipsInRTL: false })
-export const Clock1 = withRTL(Lucide.Clock1, { flipsInRTL: false })
-export const Clock10 = withRTL(Lucide.Clock10, { flipsInRTL: false })
-export const Clock11 = withRTL(Lucide.Clock11, { flipsInRTL: false })
-export const Clock12 = withRTL(Lucide.Clock12, { flipsInRTL: false })
-export const Clock2 = withRTL(Lucide.Clock2, { flipsInRTL: false })
-export const Clock3 = withRTL(Lucide.Clock3, { flipsInRTL: false })
-export const Clock4 = withRTL(Lucide.Clock4, { flipsInRTL: false })
-export const Clock5 = withRTL(Lucide.Clock5, { flipsInRTL: false })
-export const Clock6 = withRTL(Lucide.Clock6, { flipsInRTL: false })
-export const Clock7 = withRTL(Lucide.Clock7, { flipsInRTL: false })
-export const Clock8 = withRTL(Lucide.Clock8, { flipsInRTL: false })
-export const Clock9 = withRTL(Lucide.Clock9, { flipsInRTL: false })
-export const ClockAlert = withRTL(Lucide.ClockAlert, { flipsInRTL: false })
-export const ClockArrowDown = withRTL(Lucide.ClockArrowDown, {
-  flipsInRTL: false
-})
-export const ClockArrowUp = withRTL(Lucide.ClockArrowUp, { flipsInRTL: false })
-export const Cloud = withRTL(Lucide.Cloud, { flipsInRTL: false })
-export const CloudAlert = withRTL(Lucide.CloudAlert, { flipsInRTL: false })
-export const CloudCog = withRTL(Lucide.CloudCog, { flipsInRTL: false })
-export const CloudDownload = withRTL(Lucide.CloudDownload, {
-  flipsInRTL: false
-})
-export const CloudDrizzle = withRTL(Lucide.CloudDrizzle, { flipsInRTL: false })
-export const CloudFog = withRTL(Lucide.CloudFog, { flipsInRTL: false })
-export const CloudHail = withRTL(Lucide.CloudHail, { flipsInRTL: false })
-export const CloudLightning = withRTL(Lucide.CloudLightning, {
-  flipsInRTL: false
-})
-export const CloudMoon = withRTL(Lucide.CloudMoon, { flipsInRTL: false })
-export const CloudMoonRain = withRTL(Lucide.CloudMoonRain, {
-  flipsInRTL: false
-})
-export const CloudOff = withRTL(Lucide.CloudOff, { flipsInRTL: false })
-export const CloudRain = withRTL(Lucide.CloudRain, { flipsInRTL: false })
-export const CloudRainWind = withRTL(Lucide.CloudRainWind, {
-  flipsInRTL: false
-})
-export const CloudSnow = withRTL(Lucide.CloudSnow, { flipsInRTL: false })
-export const CloudSun = withRTL(Lucide.CloudSun, { flipsInRTL: false })
-export const CloudSunRain = withRTL(Lucide.CloudSunRain, { flipsInRTL: false })
-export const CloudUpload = withRTL(Lucide.CloudUpload, { flipsInRTL: false })
-export const Cloudy = withRTL(Lucide.Cloudy, { flipsInRTL: false })
-export const Clover = withRTL(Lucide.Clover, { flipsInRTL: false })
-export const Club = withRTL(Lucide.Club, { flipsInRTL: false })
-export const Code = withRTL(Lucide.Code, { flipsInRTL: false })
-export const Code2 = withRTL(Lucide.Code2, { flipsInRTL: false })
-export const CodeSquare = withRTL(Lucide.CodeSquare, { flipsInRTL: false })
-export const CodeXml = withRTL(Lucide.CodeXml, { flipsInRTL: false })
-export const Codepen = withRTL(Lucide.Codepen, { flipsInRTL: false })
-export const Codesandbox = withRTL(Lucide.Codesandbox, { flipsInRTL: false })
-export const Coffee = withRTL(Lucide.Coffee, { flipsInRTL: false })
-export const Cog = withRTL(Lucide.Cog, { flipsInRTL: false })
-export const Coins = withRTL(Lucide.Coins, { flipsInRTL: false })
-export const Columns = withRTL(Lucide.Columns, { flipsInRTL: false })
-export const Columns2 = withRTL(Lucide.Columns2, { flipsInRTL: false })
-export const Columns3 = withRTL(Lucide.Columns3, { flipsInRTL: false })
-export const Columns4 = withRTL(Lucide.Columns4, { flipsInRTL: false })
-export const Combine = withRTL(Lucide.Combine, { flipsInRTL: false })
-export const Command = withRTL(Lucide.Command, { flipsInRTL: false })
-export const Compass = withRTL(Lucide.Compass, { flipsInRTL: false })
-export const Component = withRTL(Lucide.Component, { flipsInRTL: false })
-export const Computer = withRTL(Lucide.Computer, { flipsInRTL: false })
-export const ConciergeBell = withRTL(Lucide.ConciergeBell, {
-  flipsInRTL: false
-})
-export const Cone = withRTL(Lucide.Cone, { flipsInRTL: false })
-export const Construction = withRTL(Lucide.Construction, { flipsInRTL: false })
-export const Contact = withRTL(Lucide.Contact, { flipsInRTL: false })
-export const Contact2 = withRTL(Lucide.Contact2, { flipsInRTL: false })
-export const ContactRound = withRTL(Lucide.ContactRound, { flipsInRTL: false })
-export const Container = withRTL(Lucide.Container, { flipsInRTL: false })
-export const Contrast = withRTL(Lucide.Contrast, { flipsInRTL: false })
-export const Cookie = withRTL(Lucide.Cookie, { flipsInRTL: false })
-export const CookingPot = withRTL(Lucide.CookingPot, { flipsInRTL: false })
-export const Copy = withRTL(Lucide.Copy, { flipsInRTL: false })
-export const CopyCheck = withRTL(Lucide.CopyCheck, { flipsInRTL: false })
-export const CopyMinus = withRTL(Lucide.CopyMinus, { flipsInRTL: false })
-export const CopyPlus = withRTL(Lucide.CopyPlus, { flipsInRTL: false })
-export const CopySlash = withRTL(Lucide.CopySlash, { flipsInRTL: false })
-export const CopyX = withRTL(Lucide.CopyX, { flipsInRTL: false })
-export const Copyleft = withRTL(Lucide.Copyleft, { flipsInRTL: false })
-export const Copyright = withRTL(Lucide.Copyright, { flipsInRTL: false })
-export const CornerDownLeft = withRTL(Lucide.CornerDownLeft, {
-  flipsInRTL: false
-})
-export const CornerDownRight = withRTL(Lucide.CornerDownRight, {
-  flipsInRTL: false
-})
-export const CornerLeftDown = withRTL(Lucide.CornerLeftDown, {
-  flipsInRTL: false
-})
-export const CornerLeftUp = withRTL(Lucide.CornerLeftUp, { flipsInRTL: false })
-export const CornerRightDown = withRTL(Lucide.CornerRightDown, {
-  flipsInRTL: false
-})
-export const CornerRightUp = withRTL(Lucide.CornerRightUp, {
-  flipsInRTL: false
-})
-export const CornerUpLeft = withRTL(Lucide.CornerUpLeft, { flipsInRTL: false })
-export const CornerUpRight = withRTL(Lucide.CornerUpRight, {
-  flipsInRTL: false
-})
-export const Cpu = withRTL(Lucide.Cpu, { flipsInRTL: false })
-export const CreativeCommons = withRTL(Lucide.CreativeCommons, {
-  flipsInRTL: false
-})
-export const CreditCard = withRTL(Lucide.CreditCard, { flipsInRTL: false })
-export const Croissant = withRTL(Lucide.Croissant, { flipsInRTL: false })
-export const Crop = withRTL(Lucide.Crop, { flipsInRTL: false })
-export const Cross = withRTL(Lucide.Cross, { flipsInRTL: false })
-export const Crosshair = withRTL(Lucide.Crosshair, { flipsInRTL: false })
-export const Crown = withRTL(Lucide.Crown, { flipsInRTL: false })
-export const Cuboid = withRTL(Lucide.Cuboid, { flipsInRTL: false })
-export const CupSoda = withRTL(Lucide.CupSoda, { flipsInRTL: false })
-export const CurlyBraces = withRTL(Lucide.CurlyBraces, { flipsInRTL: false })
-export const Currency = withRTL(Lucide.Currency, { flipsInRTL: false })
-export const Cylinder = withRTL(Lucide.Cylinder, { flipsInRTL: false })
-export const Dam = withRTL(Lucide.Dam, { flipsInRTL: false })
-export const Database = withRTL(Lucide.Database, { flipsInRTL: false })
-export const DatabaseBackup = withRTL(Lucide.DatabaseBackup, {
-  flipsInRTL: false
-})
-export const DatabaseZap = withRTL(Lucide.DatabaseZap, { flipsInRTL: false })
-export const Delete = withRTL(Lucide.Delete, { flipsInRTL: false })
-export const Dessert = withRTL(Lucide.Dessert, { flipsInRTL: false })
-export const Diameter = withRTL(Lucide.Diameter, { flipsInRTL: false })
-export const Diamond = withRTL(Lucide.Diamond, { flipsInRTL: false })
-export const DiamondMinus = withRTL(Lucide.DiamondMinus, { flipsInRTL: false })
-export const DiamondPercent = withRTL(Lucide.DiamondPercent, {
-  flipsInRTL: false
-})
-export const DiamondPlus = withRTL(Lucide.DiamondPlus, { flipsInRTL: false })
-export const Dice1 = withRTL(Lucide.Dice1, { flipsInRTL: false })
-export const Dice2 = withRTL(Lucide.Dice2, { flipsInRTL: false })
-export const Dice3 = withRTL(Lucide.Dice3, { flipsInRTL: false })
-export const Dice4 = withRTL(Lucide.Dice4, { flipsInRTL: false })
-export const Dice5 = withRTL(Lucide.Dice5, { flipsInRTL: false })
-export const Dice6 = withRTL(Lucide.Dice6, { flipsInRTL: false })
-export const Dices = withRTL(Lucide.Dices, { flipsInRTL: false })
-export const Diff = withRTL(Lucide.Diff, { flipsInRTL: false })
-export const Disc = withRTL(Lucide.Disc, { flipsInRTL: false })
-export const Disc2 = withRTL(Lucide.Disc2, { flipsInRTL: false })
-export const Disc3 = withRTL(Lucide.Disc3, { flipsInRTL: false })
-export const DiscAlbum = withRTL(Lucide.DiscAlbum, { flipsInRTL: false })
-export const Divide = withRTL(Lucide.Divide, { flipsInRTL: false })
-export const DivideCircle = withRTL(Lucide.DivideCircle, { flipsInRTL: false })
-export const DivideSquare = withRTL(Lucide.DivideSquare, { flipsInRTL: false })
-export const Dna = withRTL(Lucide.Dna, { flipsInRTL: false })
-export const DnaOff = withRTL(Lucide.DnaOff, { flipsInRTL: false })
-export const Dock = withRTL(Lucide.Dock, { flipsInRTL: false })
-export const Dog = withRTL(Lucide.Dog, { flipsInRTL: false })
-export const DollarSign = withRTL(Lucide.DollarSign, { flipsInRTL: false })
-export const Donut = withRTL(Lucide.Donut, { flipsInRTL: false })
-export const DoorClosed = withRTL(Lucide.DoorClosed, { flipsInRTL: false })
-export const DoorOpen = withRTL(Lucide.DoorOpen, { flipsInRTL: false })
-export const Dot = withRTL(Lucide.Dot, { flipsInRTL: false })
-export const DotSquare = withRTL(Lucide.DotSquare, { flipsInRTL: false })
-export const Download = withRTL(Lucide.Download, { flipsInRTL: false })
-export const DownloadCloud = withRTL(Lucide.DownloadCloud, {
-  flipsInRTL: false
-})
-export const DraftingCompass = withRTL(Lucide.DraftingCompass, {
-  flipsInRTL: false
-})
-export const Drama = withRTL(Lucide.Drama, { flipsInRTL: false })
-export const Dribbble = withRTL(Lucide.Dribbble, { flipsInRTL: false })
-export const Drill = withRTL(Lucide.Drill, { flipsInRTL: false })
-export const Droplet = withRTL(Lucide.Droplet, { flipsInRTL: false })
-export const Droplets = withRTL(Lucide.Droplets, { flipsInRTL: false })
-export const Drum = withRTL(Lucide.Drum, { flipsInRTL: false })
-export const Drumstick = withRTL(Lucide.Drumstick, { flipsInRTL: false })
-export const Dumbbell = withRTL(Lucide.Dumbbell, { flipsInRTL: false })
-export const Ear = withRTL(Lucide.Ear, { flipsInRTL: false })
-export const EarOff = withRTL(Lucide.EarOff, { flipsInRTL: false })
-export const Earth = withRTL(Lucide.Earth, { flipsInRTL: false })
-export const EarthLock = withRTL(Lucide.EarthLock, { flipsInRTL: false })
-export const Eclipse = withRTL(Lucide.Eclipse, { flipsInRTL: false })
-export const Edit = withRTL(Lucide.Edit, { flipsInRTL: false })
-export const Edit2 = withRTL(Lucide.Edit2, { flipsInRTL: false })
-export const Edit3 = withRTL(Lucide.Edit3, { flipsInRTL: false })
-export const Egg = withRTL(Lucide.Egg, { flipsInRTL: false })
-export const EggFried = withRTL(Lucide.EggFried, { flipsInRTL: false })
-export const EggOff = withRTL(Lucide.EggOff, { flipsInRTL: false })
-export const Ellipsis = withRTL(Lucide.Ellipsis, { flipsInRTL: false })
-export const EllipsisVertical = withRTL(Lucide.EllipsisVertical, {
-  flipsInRTL: false
-})
-export const Equal = withRTL(Lucide.Equal, { flipsInRTL: false })
-export const EqualApproximately = withRTL(Lucide.EqualApproximately, {
-  flipsInRTL: false
-})
-export const EqualNot = withRTL(Lucide.EqualNot, { flipsInRTL: false })
-export const EqualSquare = withRTL(Lucide.EqualSquare, { flipsInRTL: false })
-export const Eraser = withRTL(Lucide.Eraser, { flipsInRTL: false })
-export const EthernetPort = withRTL(Lucide.EthernetPort, { flipsInRTL: false })
-export const Euro = withRTL(Lucide.Euro, { flipsInRTL: false })
-export const Expand = withRTL(Lucide.Expand, { flipsInRTL: false })
-export const ExternalLink = withRTL(Lucide.ExternalLink, { flipsInRTL: false })
-export const Eye = withRTL(Lucide.Eye, { flipsInRTL: false })
-export const EyeClosed = withRTL(Lucide.EyeClosed, { flipsInRTL: false })
-export const EyeOff = withRTL(Lucide.EyeOff, { flipsInRTL: false })
-export const Facebook = withRTL(Lucide.Facebook, { flipsInRTL: false })
-export const Factory = withRTL(Lucide.Factory, { flipsInRTL: false })
-export const Fan = withRTL(Lucide.Fan, { flipsInRTL: false })
-export const FastForward = withRTL(Lucide.FastForward, { flipsInRTL: false })
-export const Feather = withRTL(Lucide.Feather, { flipsInRTL: false })
-export const Fence = withRTL(Lucide.Fence, { flipsInRTL: false })
-export const FerrisWheel = withRTL(Lucide.FerrisWheel, { flipsInRTL: false })
-export const Figma = withRTL(Lucide.Figma, { flipsInRTL: false })
-export const File = withRTL(Lucide.File, { flipsInRTL: false })
-export const FileArchive = withRTL(Lucide.FileArchive, { flipsInRTL: false })
-export const FileAudio = withRTL(Lucide.FileAudio, { flipsInRTL: false })
-export const FileAudio2 = withRTL(Lucide.FileAudio2, { flipsInRTL: false })
-export const FileAxis3D = withRTL(Lucide.FileAxis3D, { flipsInRTL: false })
-export const FileAxis3d = withRTL(Lucide.FileAxis3d, { flipsInRTL: false })
-export const FileBadge = withRTL(Lucide.FileBadge, { flipsInRTL: false })
-export const FileBadge2 = withRTL(Lucide.FileBadge2, { flipsInRTL: false })
-export const FileBarChart = withRTL(Lucide.FileBarChart, { flipsInRTL: false })
-export const FileBarChart2 = withRTL(Lucide.FileBarChart2, {
-  flipsInRTL: false
-})
-export const FileBox = withRTL(Lucide.FileBox, { flipsInRTL: false })
-export const FileChartColumn = withRTL(Lucide.FileChartColumn, {
-  flipsInRTL: false
-})
-export const FileChartColumnIncreasing = withRTL(
-  Lucide.FileChartColumnIncreasing,
-  { flipsInRTL: false }
+export const ArrowDownRightFromSquare = wrapLucideIcon(
+  Lucide.ArrowDownRightFromSquare
 )
-export const FileChartLine = withRTL(Lucide.FileChartLine, {
-  flipsInRTL: false
-})
-export const FileChartPie = withRTL(Lucide.FileChartPie, { flipsInRTL: false })
-export const FileCheck = withRTL(Lucide.FileCheck, { flipsInRTL: false })
-export const FileCheck2 = withRTL(Lucide.FileCheck2, { flipsInRTL: false })
-export const FileClock = withRTL(Lucide.FileClock, { flipsInRTL: false })
-export const FileCode = withRTL(Lucide.FileCode, { flipsInRTL: false })
-export const FileCode2 = withRTL(Lucide.FileCode2, { flipsInRTL: false })
-export const FileCog = withRTL(Lucide.FileCog, { flipsInRTL: false })
-export const FileCog2 = withRTL(Lucide.FileCog2, { flipsInRTL: false })
-export const FileDiff = withRTL(Lucide.FileDiff, { flipsInRTL: false })
-export const FileDigit = withRTL(Lucide.FileDigit, { flipsInRTL: false })
-export const FileDown = withRTL(Lucide.FileDown, { flipsInRTL: false })
-export const FileEdit = withRTL(Lucide.FileEdit, { flipsInRTL: false })
-export const FileHeart = withRTL(Lucide.FileHeart, { flipsInRTL: false })
-export const FileImage = withRTL(Lucide.FileImage, { flipsInRTL: false })
-export const FileInput = withRTL(Lucide.FileInput, { flipsInRTL: false })
-export const FileJson = withRTL(Lucide.FileJson, { flipsInRTL: false })
-export const FileJson2 = withRTL(Lucide.FileJson2, { flipsInRTL: false })
-export const FileKey = withRTL(Lucide.FileKey, { flipsInRTL: false })
-export const FileKey2 = withRTL(Lucide.FileKey2, { flipsInRTL: false })
-export const FileLineChart = withRTL(Lucide.FileLineChart, {
-  flipsInRTL: false
-})
-export const FileLock = withRTL(Lucide.FileLock, { flipsInRTL: false })
-export const FileLock2 = withRTL(Lucide.FileLock2, { flipsInRTL: false })
-export const FileMinus = withRTL(Lucide.FileMinus, { flipsInRTL: false })
-export const FileMinus2 = withRTL(Lucide.FileMinus2, { flipsInRTL: false })
-export const FileMusic = withRTL(Lucide.FileMusic, { flipsInRTL: false })
-export const FileOutput = withRTL(Lucide.FileOutput, { flipsInRTL: false })
-export const FilePen = withRTL(Lucide.FilePen, { flipsInRTL: false })
-export const FilePenLine = withRTL(Lucide.FilePenLine, { flipsInRTL: false })
-export const FilePieChart = withRTL(Lucide.FilePieChart, { flipsInRTL: false })
-export const FilePlus = withRTL(Lucide.FilePlus, { flipsInRTL: false })
-export const FilePlus2 = withRTL(Lucide.FilePlus2, { flipsInRTL: false })
-export const FileQuestion = withRTL(Lucide.FileQuestion, { flipsInRTL: false })
-export const FileScan = withRTL(Lucide.FileScan, { flipsInRTL: false })
-export const FileSearch = withRTL(Lucide.FileSearch, { flipsInRTL: false })
-export const FileSearch2 = withRTL(Lucide.FileSearch2, { flipsInRTL: false })
-export const FileSignature = withRTL(Lucide.FileSignature, {
-  flipsInRTL: false
-})
-export const FileSliders = withRTL(Lucide.FileSliders, { flipsInRTL: false })
-export const FileSpreadsheet = withRTL(Lucide.FileSpreadsheet, {
-  flipsInRTL: false
-})
-export const FileStack = withRTL(Lucide.FileStack, { flipsInRTL: false })
-export const FileSymlink = withRTL(Lucide.FileSymlink, { flipsInRTL: false })
-export const FileTerminal = withRTL(Lucide.FileTerminal, { flipsInRTL: false })
-export const FileText = withRTL(Lucide.FileText, { flipsInRTL: false })
-export const FileType = withRTL(Lucide.FileType, { flipsInRTL: false })
-export const FileType2 = withRTL(Lucide.FileType2, { flipsInRTL: false })
-export const FileUp = withRTL(Lucide.FileUp, { flipsInRTL: false })
-export const FileUser = withRTL(Lucide.FileUser, { flipsInRTL: false })
-export const FileVideo = withRTL(Lucide.FileVideo, { flipsInRTL: false })
-export const FileVideo2 = withRTL(Lucide.FileVideo2, { flipsInRTL: false })
-export const FileVolume = withRTL(Lucide.FileVolume, { flipsInRTL: false })
-export const FileVolume2 = withRTL(Lucide.FileVolume2, { flipsInRTL: false })
-export const FileWarning = withRTL(Lucide.FileWarning, { flipsInRTL: false })
-export const FileX = withRTL(Lucide.FileX, { flipsInRTL: false })
-export const FileX2 = withRTL(Lucide.FileX2, { flipsInRTL: false })
-export const Files = withRTL(Lucide.Files, { flipsInRTL: false })
-export const Film = withRTL(Lucide.Film, { flipsInRTL: false })
-export const Filter = withRTL(Lucide.Filter, { flipsInRTL: false })
-export const FilterX = withRTL(Lucide.FilterX, { flipsInRTL: false })
-export const Fingerprint = withRTL(Lucide.Fingerprint, { flipsInRTL: false })
-export const FireExtinguisher = withRTL(Lucide.FireExtinguisher, {
-  flipsInRTL: false
-})
-export const Fish = withRTL(Lucide.Fish, { flipsInRTL: false })
-export const FishOff = withRTL(Lucide.FishOff, { flipsInRTL: false })
-export const FishSymbol = withRTL(Lucide.FishSymbol, { flipsInRTL: false })
-export const Flag = withRTL(Lucide.Flag, { flipsInRTL: false })
-export const FlagOff = withRTL(Lucide.FlagOff, { flipsInRTL: false })
-export const FlagTriangleLeft = withRTL(Lucide.FlagTriangleLeft, {
-  flipsInRTL: false
-})
-export const FlagTriangleRight = withRTL(Lucide.FlagTriangleRight, {
-  flipsInRTL: false
-})
-export const Flame = withRTL(Lucide.Flame, { flipsInRTL: false })
-export const FlameKindling = withRTL(Lucide.FlameKindling, {
-  flipsInRTL: false
-})
-export const Flashlight = withRTL(Lucide.Flashlight, { flipsInRTL: false })
-export const FlashlightOff = withRTL(Lucide.FlashlightOff, {
-  flipsInRTL: false
-})
-export const FlaskConical = withRTL(Lucide.FlaskConical, { flipsInRTL: false })
-export const FlaskConicalOff = withRTL(Lucide.FlaskConicalOff, {
-  flipsInRTL: false
-})
-export const FlaskRound = withRTL(Lucide.FlaskRound, { flipsInRTL: false })
-export const FlipHorizontal = withRTL(Lucide.FlipHorizontal, {
-  flipsInRTL: false
-})
-export const FlipHorizontal2 = withRTL(Lucide.FlipHorizontal2, {
-  flipsInRTL: false
-})
-export const FlipVertical = withRTL(Lucide.FlipVertical, { flipsInRTL: false })
-export const FlipVertical2 = withRTL(Lucide.FlipVertical2, {
-  flipsInRTL: false
-})
-export const Flower = withRTL(Lucide.Flower, { flipsInRTL: false })
-export const Flower2 = withRTL(Lucide.Flower2, { flipsInRTL: false })
-export const Focus = withRTL(Lucide.Focus, { flipsInRTL: false })
-export const FoldHorizontal = withRTL(Lucide.FoldHorizontal, {
-  flipsInRTL: false
-})
-export const FoldVertical = withRTL(Lucide.FoldVertical, { flipsInRTL: false })
-export const Folder = withRTL(Lucide.Folder, { flipsInRTL: false })
-export const FolderArchive = withRTL(Lucide.FolderArchive, {
-  flipsInRTL: false
-})
-export const FolderCheck = withRTL(Lucide.FolderCheck, { flipsInRTL: false })
-export const FolderClock = withRTL(Lucide.FolderClock, { flipsInRTL: false })
-export const FolderClosed = withRTL(Lucide.FolderClosed, { flipsInRTL: false })
-export const FolderCode = withRTL(Lucide.FolderCode, { flipsInRTL: false })
-export const FolderCog = withRTL(Lucide.FolderCog, { flipsInRTL: false })
-export const FolderCog2 = withRTL(Lucide.FolderCog2, { flipsInRTL: false })
-export const FolderDot = withRTL(Lucide.FolderDot, { flipsInRTL: false })
-export const FolderDown = withRTL(Lucide.FolderDown, { flipsInRTL: false })
-export const FolderEdit = withRTL(Lucide.FolderEdit, { flipsInRTL: false })
-export const FolderGit = withRTL(Lucide.FolderGit, { flipsInRTL: false })
-export const FolderGit2 = withRTL(Lucide.FolderGit2, { flipsInRTL: false })
-export const FolderHeart = withRTL(Lucide.FolderHeart, { flipsInRTL: false })
-export const FolderInput = withRTL(Lucide.FolderInput, { flipsInRTL: false })
-export const FolderKanban = withRTL(Lucide.FolderKanban, { flipsInRTL: false })
-export const FolderKey = withRTL(Lucide.FolderKey, { flipsInRTL: false })
-export const FolderLock = withRTL(Lucide.FolderLock, { flipsInRTL: false })
-export const FolderMinus = withRTL(Lucide.FolderMinus, { flipsInRTL: false })
-export const FolderOpen = withRTL(Lucide.FolderOpen, { flipsInRTL: false })
-export const FolderOpenDot = withRTL(Lucide.FolderOpenDot, {
-  flipsInRTL: false
-})
-export const FolderOutput = withRTL(Lucide.FolderOutput, { flipsInRTL: false })
-export const FolderPen = withRTL(Lucide.FolderPen, { flipsInRTL: false })
-export const FolderPlus = withRTL(Lucide.FolderPlus, { flipsInRTL: false })
-export const FolderRoot = withRTL(Lucide.FolderRoot, { flipsInRTL: false })
-export const FolderSearch = withRTL(Lucide.FolderSearch, { flipsInRTL: false })
-export const FolderSearch2 = withRTL(Lucide.FolderSearch2, {
-  flipsInRTL: false
-})
-export const FolderSymlink = withRTL(Lucide.FolderSymlink, {
-  flipsInRTL: false
-})
-export const FolderSync = withRTL(Lucide.FolderSync, { flipsInRTL: false })
-export const FolderTree = withRTL(Lucide.FolderTree, { flipsInRTL: false })
-export const FolderUp = withRTL(Lucide.FolderUp, { flipsInRTL: false })
-export const FolderX = withRTL(Lucide.FolderX, { flipsInRTL: false })
-export const Folders = withRTL(Lucide.Folders, { flipsInRTL: false })
-export const Footprints = withRTL(Lucide.Footprints, { flipsInRTL: false })
-export const ForkKnife = withRTL(Lucide.ForkKnife, { flipsInRTL: false })
-export const ForkKnifeCrossed = withRTL(Lucide.ForkKnifeCrossed, {
-  flipsInRTL: false
-})
-export const Forklift = withRTL(Lucide.Forklift, { flipsInRTL: false })
-export const FormInput = withRTL(Lucide.FormInput, { flipsInRTL: false })
-export const Forward = withRTL(Lucide.Forward, { flipsInRTL: false })
-export const Frame = withRTL(Lucide.Frame, { flipsInRTL: false })
-export const Framer = withRTL(Lucide.Framer, { flipsInRTL: false })
-export const Frown = withRTL(Lucide.Frown, { flipsInRTL: false })
-export const Fuel = withRTL(Lucide.Fuel, { flipsInRTL: false })
-export const Fullscreen = withRTL(Lucide.Fullscreen, { flipsInRTL: false })
-export const FunctionSquare = withRTL(Lucide.FunctionSquare, {
-  flipsInRTL: false
-})
-export const GalleryHorizontal = withRTL(Lucide.GalleryHorizontal, {
-  flipsInRTL: false
-})
-export const GalleryHorizontalEnd = withRTL(Lucide.GalleryHorizontalEnd, {
-  flipsInRTL: false
-})
-export const GalleryThumbnails = withRTL(Lucide.GalleryThumbnails, {
-  flipsInRTL: false
-})
-export const GalleryVertical = withRTL(Lucide.GalleryVertical, {
-  flipsInRTL: false
-})
-export const GalleryVerticalEnd = withRTL(Lucide.GalleryVerticalEnd, {
-  flipsInRTL: false
-})
-export const Gamepad = withRTL(Lucide.Gamepad, { flipsInRTL: false })
-export const Gamepad2 = withRTL(Lucide.Gamepad2, { flipsInRTL: false })
-export const GanttChart = withRTL(Lucide.GanttChart, { flipsInRTL: false })
-export const GanttChartSquare = withRTL(Lucide.GanttChartSquare, {
-  flipsInRTL: false
-})
-export const Gauge = withRTL(Lucide.Gauge, { flipsInRTL: false })
-export const GaugeCircle = withRTL(Lucide.GaugeCircle, { flipsInRTL: false })
-export const Gavel = withRTL(Lucide.Gavel, { flipsInRTL: false })
-export const Gem = withRTL(Lucide.Gem, { flipsInRTL: false })
-export const Ghost = withRTL(Lucide.Ghost, { flipsInRTL: false })
-export const Gift = withRTL(Lucide.Gift, { flipsInRTL: false })
-export const GitBranch = withRTL(Lucide.GitBranch, { flipsInRTL: false })
-export const GitBranchPlus = withRTL(Lucide.GitBranchPlus, {
-  flipsInRTL: false
-})
-export const GitCommit = withRTL(Lucide.GitCommit, { flipsInRTL: false })
-export const GitCommitHorizontal = withRTL(Lucide.GitCommitHorizontal, {
-  flipsInRTL: false
-})
-export const GitCommitVertical = withRTL(Lucide.GitCommitVertical, {
-  flipsInRTL: false
-})
-export const GitCompare = withRTL(Lucide.GitCompare, { flipsInRTL: false })
-export const GitCompareArrows = withRTL(Lucide.GitCompareArrows, {
-  flipsInRTL: false
-})
-export const GitFork = withRTL(Lucide.GitFork, { flipsInRTL: false })
-export const GitGraph = withRTL(Lucide.GitGraph, { flipsInRTL: false })
-export const GitMerge = withRTL(Lucide.GitMerge, { flipsInRTL: false })
-export const GitPullRequest = withRTL(Lucide.GitPullRequest, {
-  flipsInRTL: false
-})
-export const GitPullRequestArrow = withRTL(Lucide.GitPullRequestArrow, {
-  flipsInRTL: false
-})
-export const GitPullRequestClosed = withRTL(Lucide.GitPullRequestClosed, {
-  flipsInRTL: false
-})
-export const GitPullRequestCreate = withRTL(Lucide.GitPullRequestCreate, {
-  flipsInRTL: false
-})
-export const GitPullRequestCreateArrow = withRTL(
-  Lucide.GitPullRequestCreateArrow,
-  { flipsInRTL: false }
+export const ArrowDownRightSquare = wrapLucideIcon(Lucide.ArrowDownRightSquare)
+export const ArrowDownSquare = wrapLucideIcon(Lucide.ArrowDownSquare)
+export const ArrowDownToDot = wrapLucideIcon(Lucide.ArrowDownToDot)
+export const ArrowDownToLine = wrapLucideIcon(Lucide.ArrowDownToLine)
+export const ArrowDownUp = wrapLucideIcon(Lucide.ArrowDownUp)
+export const ArrowDownWideNarrow = wrapLucideIcon(Lucide.ArrowDownWideNarrow)
+export const ArrowDownZA = wrapLucideIcon(Lucide.ArrowDownZA)
+export const ArrowDownZa = wrapLucideIcon(Lucide.ArrowDownZa)
+export const ArrowLeft = wrapLucideIcon(Lucide.ArrowLeft)
+export const ArrowLeftCircle = wrapLucideIcon(Lucide.ArrowLeftCircle)
+export const ArrowLeftFromLine = wrapLucideIcon(Lucide.ArrowLeftFromLine)
+export const ArrowLeftRight = wrapLucideIcon(Lucide.ArrowLeftRight)
+export const ArrowLeftSquare = wrapLucideIcon(Lucide.ArrowLeftSquare)
+export const ArrowLeftToLine = wrapLucideIcon(Lucide.ArrowLeftToLine)
+export const ArrowRight = wrapLucideIcon(Lucide.ArrowRight)
+export const ArrowRightCircle = wrapLucideIcon(Lucide.ArrowRightCircle)
+export const ArrowRightFromLine = wrapLucideIcon(Lucide.ArrowRightFromLine)
+export const ArrowRightLeft = wrapLucideIcon(Lucide.ArrowRightLeft)
+export const ArrowRightSquare = wrapLucideIcon(Lucide.ArrowRightSquare)
+export const ArrowRightToLine = wrapLucideIcon(Lucide.ArrowRightToLine)
+export const ArrowUp = wrapLucideIcon(Lucide.ArrowUp)
+export const ArrowUp01 = wrapLucideIcon(Lucide.ArrowUp01)
+export const ArrowUp10 = wrapLucideIcon(Lucide.ArrowUp10)
+export const ArrowUpAZ = wrapLucideIcon(Lucide.ArrowUpAZ)
+export const ArrowUpAz = wrapLucideIcon(Lucide.ArrowUpAz)
+export const ArrowUpCircle = wrapLucideIcon(Lucide.ArrowUpCircle)
+export const ArrowUpDown = wrapLucideIcon(Lucide.ArrowUpDown)
+export const ArrowUpFromDot = wrapLucideIcon(Lucide.ArrowUpFromDot)
+export const ArrowUpFromLine = wrapLucideIcon(Lucide.ArrowUpFromLine)
+export const ArrowUpLeft = wrapLucideIcon(Lucide.ArrowUpLeft)
+export const ArrowUpLeftFromCircle = wrapLucideIcon(
+  Lucide.ArrowUpLeftFromCircle
 )
-export const GitPullRequestDraft = withRTL(Lucide.GitPullRequestDraft, {
-  flipsInRTL: false
-})
-export const Github = withRTL(Lucide.Github, { flipsInRTL: false })
-export const Gitlab = withRTL(Lucide.Gitlab, { flipsInRTL: false })
-export const GlassWater = withRTL(Lucide.GlassWater, { flipsInRTL: false })
-export const Glasses = withRTL(Lucide.Glasses, { flipsInRTL: false })
-export const Globe = withRTL(Lucide.Globe, { flipsInRTL: false })
-export const Globe2 = withRTL(Lucide.Globe2, { flipsInRTL: false })
-export const GlobeLock = withRTL(Lucide.GlobeLock, { flipsInRTL: false })
-export const Goal = withRTL(Lucide.Goal, { flipsInRTL: false })
-export const Grab = withRTL(Lucide.Grab, { flipsInRTL: false })
-export const GraduationCap = withRTL(Lucide.GraduationCap, {
-  flipsInRTL: false
-})
-export const Grape = withRTL(Lucide.Grape, { flipsInRTL: false })
-export const Grid = withRTL(Lucide.Grid, { flipsInRTL: false })
-export const Grid2X2 = withRTL(Lucide.Grid2X2, { flipsInRTL: false })
-export const Grid2X2Plus = withRTL(Lucide.Grid2X2Plus, { flipsInRTL: false })
-export const Grid2x2 = withRTL(Lucide.Grid2x2, { flipsInRTL: false })
-export const Grid2x2Check = withRTL(Lucide.Grid2x2Check, { flipsInRTL: false })
-export const Grid2x2Plus = withRTL(Lucide.Grid2x2Plus, { flipsInRTL: false })
-export const Grid2x2X = withRTL(Lucide.Grid2x2X, { flipsInRTL: false })
-export const Grid3X3 = withRTL(Lucide.Grid3X3, { flipsInRTL: false })
-export const Grid3x3 = withRTL(Lucide.Grid3x3, { flipsInRTL: false })
-export const Grip = withRTL(Lucide.Grip, { flipsInRTL: false })
-export const GripHorizontal = withRTL(Lucide.GripHorizontal, {
-  flipsInRTL: false
-})
-export const GripVertical = withRTL(Lucide.GripVertical, { flipsInRTL: false })
-export const Group = withRTL(Lucide.Group, { flipsInRTL: false })
-export const Guitar = withRTL(Lucide.Guitar, { flipsInRTL: false })
-export const Ham = withRTL(Lucide.Ham, { flipsInRTL: false })
-export const Hammer = withRTL(Lucide.Hammer, { flipsInRTL: false })
-export const Hand = withRTL(Lucide.Hand, { flipsInRTL: false })
-export const HandCoins = withRTL(Lucide.HandCoins, { flipsInRTL: false })
-export const HandHeart = withRTL(Lucide.HandHeart, { flipsInRTL: false })
-export const HandHelping = withRTL(Lucide.HandHelping, { flipsInRTL: false })
-export const HandMetal = withRTL(Lucide.HandMetal, { flipsInRTL: false })
-export const HandPlatter = withRTL(Lucide.HandPlatter, { flipsInRTL: false })
-export const Handshake = withRTL(Lucide.Handshake, { flipsInRTL: false })
-export const HardDrive = withRTL(Lucide.HardDrive, { flipsInRTL: false })
-export const HardDriveDownload = withRTL(Lucide.HardDriveDownload, {
-  flipsInRTL: false
-})
-export const HardDriveUpload = withRTL(Lucide.HardDriveUpload, {
-  flipsInRTL: false
-})
-export const HardHat = withRTL(Lucide.HardHat, { flipsInRTL: false })
-export const Hash = withRTL(Lucide.Hash, { flipsInRTL: false })
-export const Haze = withRTL(Lucide.Haze, { flipsInRTL: false })
-export const HdmiPort = withRTL(Lucide.HdmiPort, { flipsInRTL: false })
-export const Heading = withRTL(Lucide.Heading, { flipsInRTL: false })
-export const Heading1 = withRTL(Lucide.Heading1, { flipsInRTL: false })
-export const Heading2 = withRTL(Lucide.Heading2, { flipsInRTL: false })
-export const Heading3 = withRTL(Lucide.Heading3, { flipsInRTL: false })
-export const Heading4 = withRTL(Lucide.Heading4, { flipsInRTL: false })
-export const Heading5 = withRTL(Lucide.Heading5, { flipsInRTL: false })
-export const Heading6 = withRTL(Lucide.Heading6, { flipsInRTL: false })
-export const HeadphoneOff = withRTL(Lucide.HeadphoneOff, { flipsInRTL: false })
-export const Headphones = withRTL(Lucide.Headphones, { flipsInRTL: false })
-export const Headset = withRTL(Lucide.Headset, { flipsInRTL: false })
-export const Heart = withRTL(Lucide.Heart, { flipsInRTL: false })
-export const HeartCrack = withRTL(Lucide.HeartCrack, { flipsInRTL: false })
-export const HeartHandshake = withRTL(Lucide.HeartHandshake, {
-  flipsInRTL: false
-})
-export const HeartOff = withRTL(Lucide.HeartOff, { flipsInRTL: false })
-export const HeartPulse = withRTL(Lucide.HeartPulse, { flipsInRTL: false })
-export const Heater = withRTL(Lucide.Heater, { flipsInRTL: false })
-export const HelpCircle = withRTL(Lucide.HelpCircle, { flipsInRTL: false })
-export const HelpingHand = withRTL(Lucide.HelpingHand, { flipsInRTL: false })
-export const Hexagon = withRTL(Lucide.Hexagon, { flipsInRTL: false })
-export const Highlighter = withRTL(Lucide.Highlighter, { flipsInRTL: false })
-export const History = withRTL(Lucide.History, { flipsInRTL: false })
-export const Home = withRTL(Lucide.Home, { flipsInRTL: false })
-export const Hop = withRTL(Lucide.Hop, { flipsInRTL: false })
-export const HopOff = withRTL(Lucide.HopOff, { flipsInRTL: false })
-export const Hospital = withRTL(Lucide.Hospital, { flipsInRTL: false })
-export const Hotel = withRTL(Lucide.Hotel, { flipsInRTL: false })
-export const Hourglass = withRTL(Lucide.Hourglass, { flipsInRTL: false })
-export const House = withRTL(Lucide.House, { flipsInRTL: false })
-export const HousePlug = withRTL(Lucide.HousePlug, { flipsInRTL: false })
-export const HousePlus = withRTL(Lucide.HousePlus, { flipsInRTL: false })
-export const IceCream = withRTL(Lucide.IceCream, { flipsInRTL: false })
-export const IceCream2 = withRTL(Lucide.IceCream2, { flipsInRTL: false })
-export const IceCreamBowl = withRTL(Lucide.IceCreamBowl, { flipsInRTL: false })
-export const IceCreamCone = withRTL(Lucide.IceCreamCone, { flipsInRTL: false })
-export const IdCard = withRTL(Lucide.IdCard, { flipsInRTL: false })
-export const Image = withRTL(Lucide.Image, { flipsInRTL: false })
-export const ImageDown = withRTL(Lucide.ImageDown, { flipsInRTL: false })
-export const ImageMinus = withRTL(Lucide.ImageMinus, { flipsInRTL: false })
-export const ImageOff = withRTL(Lucide.ImageOff, { flipsInRTL: false })
-export const ImagePlay = withRTL(Lucide.ImagePlay, { flipsInRTL: false })
-export const ImagePlus = withRTL(Lucide.ImagePlus, { flipsInRTL: false })
-export const ImageUp = withRTL(Lucide.ImageUp, { flipsInRTL: false })
-export const Images = withRTL(Lucide.Images, { flipsInRTL: false })
-export const Import = withRTL(Lucide.Import, { flipsInRTL: false })
-export const Inbox = withRTL(Lucide.Inbox, { flipsInRTL: false })
-export const Indent = withRTL(Lucide.Indent, { flipsInRTL: false })
-export const IndentDecrease = withRTL(Lucide.IndentDecrease, {
-  flipsInRTL: false
-})
-export const IndentIncrease = withRTL(Lucide.IndentIncrease, {
-  flipsInRTL: false
-})
-export const IndianRupee = withRTL(Lucide.IndianRupee, { flipsInRTL: false })
-// export const Infinity = withRTL(Lucide.Infinity, { flipsInRTL: false })
-export const Info = withRTL(Lucide.Info, { flipsInRTL: false })
-export const Inspect = withRTL(Lucide.Inspect, { flipsInRTL: false })
-export const InspectionPanel = withRTL(Lucide.InspectionPanel, {
-  flipsInRTL: false
-})
-export const Instagram = withRTL(Lucide.Instagram, { flipsInRTL: false })
-export const Italic = withRTL(Lucide.Italic, { flipsInRTL: false })
-export const IterationCcw = withRTL(Lucide.IterationCcw, { flipsInRTL: false })
-export const IterationCw = withRTL(Lucide.IterationCw, { flipsInRTL: false })
-export const JapaneseYen = withRTL(Lucide.JapaneseYen, { flipsInRTL: false })
-export const Joystick = withRTL(Lucide.Joystick, { flipsInRTL: false })
-export const Kanban = withRTL(Lucide.Kanban, { flipsInRTL: false })
-export const KanbanSquare = withRTL(Lucide.KanbanSquare, { flipsInRTL: false })
-export const KanbanSquareDashed = withRTL(Lucide.KanbanSquareDashed, {
-  flipsInRTL: false
-})
-export const Key = withRTL(Lucide.Key, { flipsInRTL: false })
-export const KeyRound = withRTL(Lucide.KeyRound, { flipsInRTL: false })
-export const KeySquare = withRTL(Lucide.KeySquare, { flipsInRTL: false })
-export const Keyboard = withRTL(Lucide.Keyboard, { flipsInRTL: false })
-export const KeyboardMusic = withRTL(Lucide.KeyboardMusic, {
-  flipsInRTL: false
-})
-export const KeyboardOff = withRTL(Lucide.KeyboardOff, { flipsInRTL: false })
-export const Lamp = withRTL(Lucide.Lamp, { flipsInRTL: false })
-export const LampCeiling = withRTL(Lucide.LampCeiling, { flipsInRTL: false })
-export const LampDesk = withRTL(Lucide.LampDesk, { flipsInRTL: false })
-export const LampFloor = withRTL(Lucide.LampFloor, { flipsInRTL: false })
-export const LampWallDown = withRTL(Lucide.LampWallDown, { flipsInRTL: false })
-export const LampWallUp = withRTL(Lucide.LampWallUp, { flipsInRTL: false })
-export const LandPlot = withRTL(Lucide.LandPlot, { flipsInRTL: false })
-export const Landmark = withRTL(Lucide.Landmark, { flipsInRTL: false })
-export const Languages = withRTL(Lucide.Languages, { flipsInRTL: false })
-export const Laptop = withRTL(Lucide.Laptop, { flipsInRTL: false })
-export const Laptop2 = withRTL(Lucide.Laptop2, { flipsInRTL: false })
-export const LaptopMinimal = withRTL(Lucide.LaptopMinimal, {
-  flipsInRTL: false
-})
-export const LaptopMinimalCheck = withRTL(Lucide.LaptopMinimalCheck, {
-  flipsInRTL: false
-})
-export const Lasso = withRTL(Lucide.Lasso, { flipsInRTL: false })
-export const LassoSelect = withRTL(Lucide.LassoSelect, { flipsInRTL: false })
-export const Laugh = withRTL(Lucide.Laugh, { flipsInRTL: false })
-export const Layers = withRTL(Lucide.Layers, { flipsInRTL: false })
-export const Layers2 = withRTL(Lucide.Layers2, { flipsInRTL: false })
-export const Layers3 = withRTL(Lucide.Layers3, { flipsInRTL: false })
-export const Layout = withRTL(Lucide.Layout, { flipsInRTL: false })
-export const LayoutDashboard = withRTL(Lucide.LayoutDashboard, {
-  flipsInRTL: false
-})
-export const LayoutGrid = withRTL(Lucide.LayoutGrid, { flipsInRTL: false })
-export const LayoutList = withRTL(Lucide.LayoutList, { flipsInRTL: false })
-export const LayoutPanelLeft = withRTL(Lucide.LayoutPanelLeft, {
-  flipsInRTL: false
-})
-export const LayoutPanelTop = withRTL(Lucide.LayoutPanelTop, {
-  flipsInRTL: false
-})
-export const LayoutTemplate = withRTL(Lucide.LayoutTemplate, {
-  flipsInRTL: false
-})
-export const Leaf = withRTL(Lucide.Leaf, { flipsInRTL: false })
-export const LeafyGreen = withRTL(Lucide.LeafyGreen, { flipsInRTL: false })
-export const Lectern = withRTL(Lucide.Lectern, { flipsInRTL: false })
-export const LetterText = withRTL(Lucide.LetterText, { flipsInRTL: false })
-export const Library = withRTL(Lucide.Library, { flipsInRTL: false })
-export const LibraryBig = withRTL(Lucide.LibraryBig, { flipsInRTL: false })
-export const LibrarySquare = withRTL(Lucide.LibrarySquare, {
-  flipsInRTL: false
-})
-export const LifeBuoy = withRTL(Lucide.LifeBuoy, { flipsInRTL: false })
-export const Ligature = withRTL(Lucide.Ligature, { flipsInRTL: false })
-export const Lightbulb = withRTL(Lucide.Lightbulb, { flipsInRTL: false })
-export const LightbulbOff = withRTL(Lucide.LightbulbOff, { flipsInRTL: false })
-export const LineChart = withRTL(Lucide.LineChart, { flipsInRTL: false })
-export const Link = withRTL(Lucide.Link, { flipsInRTL: false })
-export const Link2 = withRTL(Lucide.Link2, { flipsInRTL: false })
-export const Link2Off = withRTL(Lucide.Link2Off, { flipsInRTL: false })
-export const Linkedin = withRTL(Lucide.Linkedin, { flipsInRTL: false })
-export const List = withRTL(Lucide.List, { flipsInRTL: false })
-export const ListCheck = withRTL(Lucide.ListCheck, { flipsInRTL: false })
-export const ListChecks = withRTL(Lucide.ListChecks, { flipsInRTL: false })
-export const ListCollapse = withRTL(Lucide.ListCollapse, { flipsInRTL: false })
-export const ListEnd = withRTL(Lucide.ListEnd, { flipsInRTL: false })
-export const ListFilter = withRTL(Lucide.ListFilter, { flipsInRTL: false })
-export const ListMinus = withRTL(Lucide.ListMinus, { flipsInRTL: false })
-export const ListMusic = withRTL(Lucide.ListMusic, { flipsInRTL: false })
-export const ListOrdered = withRTL(Lucide.ListOrdered, { flipsInRTL: false })
-export const ListPlus = withRTL(Lucide.ListPlus, { flipsInRTL: false })
-export const ListRestart = withRTL(Lucide.ListRestart, { flipsInRTL: false })
-export const ListStart = withRTL(Lucide.ListStart, { flipsInRTL: false })
-export const ListTodo = withRTL(Lucide.ListTodo, { flipsInRTL: false })
-export const ListTree = withRTL(Lucide.ListTree, { flipsInRTL: false })
-export const ListVideo = withRTL(Lucide.ListVideo, { flipsInRTL: false })
-export const ListX = withRTL(Lucide.ListX, { flipsInRTL: false })
-export const Loader = withRTL(Lucide.Loader, { flipsInRTL: false })
-export const Loader2 = withRTL(Lucide.Loader2, { flipsInRTL: false })
-export const LoaderCircle = withRTL(Lucide.LoaderCircle, { flipsInRTL: false })
-export const LoaderPinwheel = withRTL(Lucide.LoaderPinwheel, {
-  flipsInRTL: false
-})
-export const Locate = withRTL(Lucide.Locate, { flipsInRTL: false })
-export const LocateFixed = withRTL(Lucide.LocateFixed, { flipsInRTL: false })
-export const LocateOff = withRTL(Lucide.LocateOff, { flipsInRTL: false })
-export const Lock = withRTL(Lucide.Lock, { flipsInRTL: false })
-export const LockKeyhole = withRTL(Lucide.LockKeyhole, { flipsInRTL: false })
-export const LockKeyholeOpen = withRTL(Lucide.LockKeyholeOpen, {
-  flipsInRTL: false
-})
-export const LockOpen = withRTL(Lucide.LockOpen, { flipsInRTL: false })
-export const LogIn = withRTL(Lucide.LogIn, { flipsInRTL: false })
-export const LogOut = withRTL(Lucide.LogOut, { flipsInRTL: false })
-export const Logs = withRTL(Lucide.Logs, { flipsInRTL: false })
-export const Lollipop = withRTL(Lucide.Lollipop, { flipsInRTL: false })
-export const Luggage = withRTL(Lucide.Luggage, { flipsInRTL: false })
-export const MSquare = withRTL(Lucide.MSquare, { flipsInRTL: false })
-export const Magnet = withRTL(Lucide.Magnet, { flipsInRTL: false })
-export const Mail = withRTL(Lucide.Mail, { flipsInRTL: false })
-export const MailCheck = withRTL(Lucide.MailCheck, { flipsInRTL: false })
-export const MailMinus = withRTL(Lucide.MailMinus, { flipsInRTL: false })
-export const MailOpen = withRTL(Lucide.MailOpen, { flipsInRTL: false })
-export const MailPlus = withRTL(Lucide.MailPlus, { flipsInRTL: false })
-export const MailQuestion = withRTL(Lucide.MailQuestion, { flipsInRTL: false })
-export const MailSearch = withRTL(Lucide.MailSearch, { flipsInRTL: false })
-export const MailWarning = withRTL(Lucide.MailWarning, { flipsInRTL: false })
-export const MailX = withRTL(Lucide.MailX, { flipsInRTL: false })
-export const Mailbox = withRTL(Lucide.Mailbox, { flipsInRTL: false })
-export const Mails = withRTL(Lucide.Mails, { flipsInRTL: false })
-export const Map = withRTL(Lucide.Map, { flipsInRTL: false })
-export const MapPin = withRTL(Lucide.MapPin, { flipsInRTL: false })
-export const MapPinCheck = withRTL(Lucide.MapPinCheck, { flipsInRTL: false })
-export const MapPinCheckInside = withRTL(Lucide.MapPinCheckInside, {
-  flipsInRTL: false
-})
-export const MapPinHouse = withRTL(Lucide.MapPinHouse, { flipsInRTL: false })
-export const MapPinMinus = withRTL(Lucide.MapPinMinus, { flipsInRTL: false })
-export const MapPinMinusInside = withRTL(Lucide.MapPinMinusInside, {
-  flipsInRTL: false
-})
-export const MapPinOff = withRTL(Lucide.MapPinOff, { flipsInRTL: false })
-export const MapPinPlus = withRTL(Lucide.MapPinPlus, { flipsInRTL: false })
-export const MapPinPlusInside = withRTL(Lucide.MapPinPlusInside, {
-  flipsInRTL: false
-})
-export const MapPinX = withRTL(Lucide.MapPinX, { flipsInRTL: false })
-export const MapPinXInside = withRTL(Lucide.MapPinXInside, {
-  flipsInRTL: false
-})
-export const MapPinned = withRTL(Lucide.MapPinned, { flipsInRTL: false })
-export const Martini = withRTL(Lucide.Martini, { flipsInRTL: false })
-export const Maximize = withRTL(Lucide.Maximize, { flipsInRTL: false })
-export const Maximize2 = withRTL(Lucide.Maximize2, { flipsInRTL: false })
-export const Medal = withRTL(Lucide.Medal, { flipsInRTL: false })
-export const Megaphone = withRTL(Lucide.Megaphone, { flipsInRTL: false })
-export const MegaphoneOff = withRTL(Lucide.MegaphoneOff, { flipsInRTL: false })
-export const Meh = withRTL(Lucide.Meh, { flipsInRTL: false })
-export const MemoryStick = withRTL(Lucide.MemoryStick, { flipsInRTL: false })
-export const Menu = withRTL(Lucide.Menu, { flipsInRTL: false })
-export const MenuSquare = withRTL(Lucide.MenuSquare, { flipsInRTL: false })
-export const Merge = withRTL(Lucide.Merge, { flipsInRTL: false })
-export const MessageCircle = withRTL(Lucide.MessageCircle, {
-  flipsInRTL: false
-})
-export const MessageCircleCode = withRTL(Lucide.MessageCircleCode, {
-  flipsInRTL: false
-})
-export const MessageCircleDashed = withRTL(Lucide.MessageCircleDashed, {
-  flipsInRTL: false
-})
-export const MessageCircleHeart = withRTL(Lucide.MessageCircleHeart, {
-  flipsInRTL: false
-})
-export const MessageCircleMore = withRTL(Lucide.MessageCircleMore, {
-  flipsInRTL: false
-})
-export const MessageCircleOff = withRTL(Lucide.MessageCircleOff, {
-  flipsInRTL: false
-})
-export const MessageCirclePlus = withRTL(Lucide.MessageCirclePlus, {
-  flipsInRTL: false
-})
-export const MessageCircleQuestion = withRTL(Lucide.MessageCircleQuestion, {
-  flipsInRTL: false
-})
-export const MessageCircleReply = withRTL(Lucide.MessageCircleReply, {
-  flipsInRTL: false
-})
-export const MessageCircleWarning = withRTL(Lucide.MessageCircleWarning, {
-  flipsInRTL: false
-})
-export const MessageCircleX = withRTL(Lucide.MessageCircleX, {
-  flipsInRTL: false
-})
-export const MessageSquare = withRTL(Lucide.MessageSquare, {
-  flipsInRTL: false
-})
-export const MessageSquareCode = withRTL(Lucide.MessageSquareCode, {
-  flipsInRTL: false
-})
-export const MessageSquareDashed = withRTL(Lucide.MessageSquareDashed, {
-  flipsInRTL: false
-})
-export const MessageSquareDiff = withRTL(Lucide.MessageSquareDiff, {
-  flipsInRTL: false
-})
-export const MessageSquareDot = withRTL(Lucide.MessageSquareDot, {
-  flipsInRTL: false
-})
-export const MessageSquareHeart = withRTL(Lucide.MessageSquareHeart, {
-  flipsInRTL: false
-})
-export const MessageSquareLock = withRTL(Lucide.MessageSquareLock, {
-  flipsInRTL: false
-})
-export const MessageSquareMore = withRTL(Lucide.MessageSquareMore, {
-  flipsInRTL: false
-})
-export const MessageSquareOff = withRTL(Lucide.MessageSquareOff, {
-  flipsInRTL: false
-})
-export const MessageSquarePlus = withRTL(Lucide.MessageSquarePlus, {
-  flipsInRTL: false
-})
-export const MessageSquareQuote = withRTL(Lucide.MessageSquareQuote, {
-  flipsInRTL: false
-})
-export const MessageSquareReply = withRTL(Lucide.MessageSquareReply, {
-  flipsInRTL: false
-})
-export const MessageSquareShare = withRTL(Lucide.MessageSquareShare, {
-  flipsInRTL: false
-})
-export const MessageSquareText = withRTL(Lucide.MessageSquareText, {
-  flipsInRTL: false
-})
-export const MessageSquareWarning = withRTL(Lucide.MessageSquareWarning, {
-  flipsInRTL: false
-})
-export const MessageSquareX = withRTL(Lucide.MessageSquareX, {
-  flipsInRTL: false
-})
-export const MessagesSquare = withRTL(Lucide.MessagesSquare, {
-  flipsInRTL: false
-})
-export const Mic = withRTL(Lucide.Mic, { flipsInRTL: false })
-export const Mic2 = withRTL(Lucide.Mic2, { flipsInRTL: false })
-export const MicOff = withRTL(Lucide.MicOff, { flipsInRTL: false })
-export const MicVocal = withRTL(Lucide.MicVocal, { flipsInRTL: false })
-export const Microchip = withRTL(Lucide.Microchip, { flipsInRTL: false })
-export const Microscope = withRTL(Lucide.Microscope, { flipsInRTL: false })
-export const Microwave = withRTL(Lucide.Microwave, { flipsInRTL: false })
-export const Milestone = withRTL(Lucide.Milestone, { flipsInRTL: false })
-export const Milk = withRTL(Lucide.Milk, { flipsInRTL: false })
-export const MilkOff = withRTL(Lucide.MilkOff, { flipsInRTL: false })
-export const Minimize = withRTL(Lucide.Minimize, { flipsInRTL: false })
-export const Minimize2 = withRTL(Lucide.Minimize2, { flipsInRTL: false })
-export const Minus = withRTL(Lucide.Minus, { flipsInRTL: false })
-export const MinusCircle = withRTL(Lucide.MinusCircle, { flipsInRTL: false })
-export const MinusSquare = withRTL(Lucide.MinusSquare, { flipsInRTL: false })
-export const Monitor = withRTL(Lucide.Monitor, { flipsInRTL: false })
-export const MonitorCheck = withRTL(Lucide.MonitorCheck, { flipsInRTL: false })
-export const MonitorCog = withRTL(Lucide.MonitorCog, { flipsInRTL: false })
-export const MonitorDot = withRTL(Lucide.MonitorDot, { flipsInRTL: false })
-export const MonitorDown = withRTL(Lucide.MonitorDown, { flipsInRTL: false })
-export const MonitorOff = withRTL(Lucide.MonitorOff, { flipsInRTL: false })
-export const MonitorPause = withRTL(Lucide.MonitorPause, { flipsInRTL: false })
-export const MonitorPlay = withRTL(Lucide.MonitorPlay, { flipsInRTL: false })
-export const MonitorSmartphone = withRTL(Lucide.MonitorSmartphone, {
-  flipsInRTL: false
-})
-export const MonitorSpeaker = withRTL(Lucide.MonitorSpeaker, {
-  flipsInRTL: false
-})
-export const MonitorStop = withRTL(Lucide.MonitorStop, { flipsInRTL: false })
-export const MonitorUp = withRTL(Lucide.MonitorUp, { flipsInRTL: false })
-export const MonitorX = withRTL(Lucide.MonitorX, { flipsInRTL: false })
-export const Moon = withRTL(Lucide.Moon, { flipsInRTL: false })
-export const MoonStar = withRTL(Lucide.MoonStar, { flipsInRTL: false })
-export const MoreHorizontal = withRTL(Lucide.MoreHorizontal, {
-  flipsInRTL: false
-})
-export const MoreVertical = withRTL(Lucide.MoreVertical, { flipsInRTL: false })
-export const Mountain = withRTL(Lucide.Mountain, { flipsInRTL: false })
-export const MountainSnow = withRTL(Lucide.MountainSnow, { flipsInRTL: false })
-export const Mouse = withRTL(Lucide.Mouse, { flipsInRTL: false })
-export const MouseOff = withRTL(Lucide.MouseOff, { flipsInRTL: false })
-export const MousePointer = withRTL(Lucide.MousePointer, { flipsInRTL: false })
-export const MousePointer2 = withRTL(Lucide.MousePointer2, {
-  flipsInRTL: false
-})
-export const MousePointerBan = withRTL(Lucide.MousePointerBan, {
-  flipsInRTL: false
-})
-export const MousePointerClick = withRTL(Lucide.MousePointerClick, {
-  flipsInRTL: false
-})
-export const MousePointerSquareDashed = withRTL(
-  Lucide.MousePointerSquareDashed,
-  { flipsInRTL: false }
+export const ArrowUpLeftFromSquare = wrapLucideIcon(
+  Lucide.ArrowUpLeftFromSquare
 )
-export const Move = withRTL(Lucide.Move, { flipsInRTL: false })
-export const Move3D = withRTL(Lucide.Move3D, { flipsInRTL: false })
-export const Move3d = withRTL(Lucide.Move3d, { flipsInRTL: false })
-export const MoveDiagonal = withRTL(Lucide.MoveDiagonal, { flipsInRTL: false })
-export const MoveDiagonal2 = withRTL(Lucide.MoveDiagonal2, {
-  flipsInRTL: false
-})
-export const MoveDown = withRTL(Lucide.MoveDown, { flipsInRTL: false })
-export const MoveDownLeft = withRTL(Lucide.MoveDownLeft, { flipsInRTL: false })
-export const MoveDownRight = withRTL(Lucide.MoveDownRight, {
-  flipsInRTL: false
-})
-export const MoveHorizontal = withRTL(Lucide.MoveHorizontal, {
-  flipsInRTL: false
-})
-export const MoveLeft = withRTL(Lucide.MoveLeft, { flipsInRTL: false })
-export const MoveRight = withRTL(Lucide.MoveRight, { flipsInRTL: false })
-export const MoveUp = withRTL(Lucide.MoveUp, { flipsInRTL: false })
-export const MoveUpLeft = withRTL(Lucide.MoveUpLeft, { flipsInRTL: false })
-export const MoveUpRight = withRTL(Lucide.MoveUpRight, { flipsInRTL: false })
-export const MoveVertical = withRTL(Lucide.MoveVertical, { flipsInRTL: false })
-export const Music = withRTL(Lucide.Music, { flipsInRTL: false })
-export const Music2 = withRTL(Lucide.Music2, { flipsInRTL: false })
-export const Music3 = withRTL(Lucide.Music3, { flipsInRTL: false })
-export const Music4 = withRTL(Lucide.Music4, { flipsInRTL: false })
-export const Navigation = withRTL(Lucide.Navigation, { flipsInRTL: false })
-export const Navigation2 = withRTL(Lucide.Navigation2, { flipsInRTL: false })
-export const Navigation2Off = withRTL(Lucide.Navigation2Off, {
-  flipsInRTL: false
-})
-export const NavigationOff = withRTL(Lucide.NavigationOff, {
-  flipsInRTL: false
-})
-export const Network = withRTL(Lucide.Network, { flipsInRTL: false })
-export const Newspaper = withRTL(Lucide.Newspaper, { flipsInRTL: false })
-export const Nfc = withRTL(Lucide.Nfc, { flipsInRTL: false })
-export const Notebook = withRTL(Lucide.Notebook, { flipsInRTL: false })
-export const NotebookPen = withRTL(Lucide.NotebookPen, { flipsInRTL: false })
-export const NotebookTabs = withRTL(Lucide.NotebookTabs, { flipsInRTL: false })
-export const NotebookText = withRTL(Lucide.NotebookText, { flipsInRTL: false })
-export const NotepadText = withRTL(Lucide.NotepadText, { flipsInRTL: false })
-export const NotepadTextDashed = withRTL(Lucide.NotepadTextDashed, {
-  flipsInRTL: false
-})
-export const Nut = withRTL(Lucide.Nut, { flipsInRTL: false })
-export const NutOff = withRTL(Lucide.NutOff, { flipsInRTL: false })
-export const Octagon = withRTL(Lucide.Octagon, { flipsInRTL: false })
-export const OctagonAlert = withRTL(Lucide.OctagonAlert, { flipsInRTL: false })
-export const OctagonMinus = withRTL(Lucide.OctagonMinus, { flipsInRTL: false })
-export const OctagonPause = withRTL(Lucide.OctagonPause, { flipsInRTL: false })
-export const OctagonX = withRTL(Lucide.OctagonX, { flipsInRTL: false })
-export const Omega = withRTL(Lucide.Omega, { flipsInRTL: false })
-export const Option = withRTL(Lucide.Option, { flipsInRTL: false })
-export const Orbit = withRTL(Lucide.Orbit, { flipsInRTL: false })
-export const Origami = withRTL(Lucide.Origami, { flipsInRTL: false })
-export const Outdent = withRTL(Lucide.Outdent, { flipsInRTL: false })
-export const Package = withRTL(Lucide.Package, { flipsInRTL: false })
-export const Package2 = withRTL(Lucide.Package2, { flipsInRTL: false })
-export const PackageCheck = withRTL(Lucide.PackageCheck, { flipsInRTL: false })
-export const PackageMinus = withRTL(Lucide.PackageMinus, { flipsInRTL: false })
-export const PackageOpen = withRTL(Lucide.PackageOpen, { flipsInRTL: false })
-export const PackagePlus = withRTL(Lucide.PackagePlus, { flipsInRTL: false })
-export const PackageSearch = withRTL(Lucide.PackageSearch, {
-  flipsInRTL: false
-})
-export const PackageX = withRTL(Lucide.PackageX, { flipsInRTL: false })
-export const PaintBucket = withRTL(Lucide.PaintBucket, { flipsInRTL: false })
-export const PaintRoller = withRTL(Lucide.PaintRoller, { flipsInRTL: false })
-export const Paintbrush = withRTL(Lucide.Paintbrush, { flipsInRTL: false })
-export const Paintbrush2 = withRTL(Lucide.Paintbrush2, { flipsInRTL: false })
-export const PaintbrushVertical = withRTL(Lucide.PaintbrushVertical, {
-  flipsInRTL: false
-})
-export const Palette = withRTL(Lucide.Palette, { flipsInRTL: false })
-export const Palmtree = withRTL(Lucide.Palmtree, { flipsInRTL: false })
-export const PanelBottom = withRTL(Lucide.PanelBottom, { flipsInRTL: false })
-export const PanelBottomClose = withRTL(Lucide.PanelBottomClose, {
-  flipsInRTL: false
-})
-export const PanelBottomDashed = withRTL(Lucide.PanelBottomDashed, {
-  flipsInRTL: false
-})
-export const PanelBottomInactive = withRTL(Lucide.PanelBottomInactive, {
-  flipsInRTL: false
-})
-export const PanelBottomOpen = withRTL(Lucide.PanelBottomOpen, {
-  flipsInRTL: false
-})
-export const PanelLeft = withRTL(Lucide.PanelLeft, { flipsInRTL: false })
-export const PanelLeftClose = withRTL(Lucide.PanelLeftClose, {
-  flipsInRTL: false
-})
-export const PanelLeftDashed = withRTL(Lucide.PanelLeftDashed, {
-  flipsInRTL: false
-})
-export const PanelLeftInactive = withRTL(Lucide.PanelLeftInactive, {
-  flipsInRTL: false
-})
-export const PanelLeftOpen = withRTL(Lucide.PanelLeftOpen, {
-  flipsInRTL: false
-})
-export const PanelRight = withRTL(Lucide.PanelRight, { flipsInRTL: false })
-export const PanelRightClose = withRTL(Lucide.PanelRightClose, {
-  flipsInRTL: false
-})
-export const PanelRightDashed = withRTL(Lucide.PanelRightDashed, {
-  flipsInRTL: false
-})
-export const PanelRightInactive = withRTL(Lucide.PanelRightInactive, {
-  flipsInRTL: false
-})
-export const PanelRightOpen = withRTL(Lucide.PanelRightOpen, {
-  flipsInRTL: false
-})
-export const PanelTop = withRTL(Lucide.PanelTop, { flipsInRTL: false })
-export const PanelTopClose = withRTL(Lucide.PanelTopClose, {
-  flipsInRTL: false
-})
-export const PanelTopDashed = withRTL(Lucide.PanelTopDashed, {
-  flipsInRTL: false
-})
-export const PanelTopInactive = withRTL(Lucide.PanelTopInactive, {
-  flipsInRTL: false
-})
-export const PanelTopOpen = withRTL(Lucide.PanelTopOpen, { flipsInRTL: false })
-export const PanelsLeftBottom = withRTL(Lucide.PanelsLeftBottom, {
-  flipsInRTL: false
-})
-export const PanelsLeftRight = withRTL(Lucide.PanelsLeftRight, {
-  flipsInRTL: false
-})
-export const PanelsRightBottom = withRTL(Lucide.PanelsRightBottom, {
-  flipsInRTL: false
-})
-export const PanelsTopBottom = withRTL(Lucide.PanelsTopBottom, {
-  flipsInRTL: false
-})
-export const PanelsTopLeft = withRTL(Lucide.PanelsTopLeft, {
-  flipsInRTL: false
-})
-export const Paperclip = withRTL(Lucide.Paperclip, { flipsInRTL: false })
-export const Parentheses = withRTL(Lucide.Parentheses, { flipsInRTL: false })
-export const ParkingCircle = withRTL(Lucide.ParkingCircle, {
-  flipsInRTL: false
-})
-export const ParkingCircleOff = withRTL(Lucide.ParkingCircleOff, {
-  flipsInRTL: false
-})
-export const ParkingMeter = withRTL(Lucide.ParkingMeter, { flipsInRTL: false })
-export const ParkingSquare = withRTL(Lucide.ParkingSquare, {
-  flipsInRTL: false
-})
-export const ParkingSquareOff = withRTL(Lucide.ParkingSquareOff, {
-  flipsInRTL: false
-})
-export const PartyPopper = withRTL(Lucide.PartyPopper, { flipsInRTL: false })
-export const Pause = withRTL(Lucide.Pause, { flipsInRTL: false })
-export const PauseCircle = withRTL(Lucide.PauseCircle, { flipsInRTL: false })
-export const PauseOctagon = withRTL(Lucide.PauseOctagon, { flipsInRTL: false })
-export const PawPrint = withRTL(Lucide.PawPrint, { flipsInRTL: false })
-export const PcCase = withRTL(Lucide.PcCase, { flipsInRTL: false })
-export const Pen = withRTL(Lucide.Pen, { flipsInRTL: false })
-export const PenBox = withRTL(Lucide.PenBox, { flipsInRTL: false })
-export const PenLine = withRTL(Lucide.PenLine, { flipsInRTL: false })
-export const PenOff = withRTL(Lucide.PenOff, { flipsInRTL: false })
-export const PenSquare = withRTL(Lucide.PenSquare, { flipsInRTL: false })
-export const PenTool = withRTL(Lucide.PenTool, { flipsInRTL: false })
-export const Pencil = withRTL(Lucide.Pencil, { flipsInRTL: false })
-export const PencilLine = withRTL(Lucide.PencilLine, { flipsInRTL: false })
-export const PencilOff = withRTL(Lucide.PencilOff, { flipsInRTL: false })
-export const PencilRuler = withRTL(Lucide.PencilRuler, { flipsInRTL: false })
-export const Pentagon = withRTL(Lucide.Pentagon, { flipsInRTL: false })
-export const Percent = withRTL(Lucide.Percent, { flipsInRTL: false })
-export const PercentCircle = withRTL(Lucide.PercentCircle, {
-  flipsInRTL: false
-})
-export const PercentDiamond = withRTL(Lucide.PercentDiamond, {
-  flipsInRTL: false
-})
-export const PercentSquare = withRTL(Lucide.PercentSquare, {
-  flipsInRTL: false
-})
-export const PersonStanding = withRTL(Lucide.PersonStanding, {
-  flipsInRTL: false
-})
-export const PhilippinePeso = withRTL(Lucide.PhilippinePeso, {
-  flipsInRTL: false
-})
-export const Phone = withRTL(Lucide.Phone, { flipsInRTL: false })
-export const PhoneCall = withRTL(Lucide.PhoneCall, { flipsInRTL: false })
-export const PhoneForwarded = withRTL(Lucide.PhoneForwarded, {
-  flipsInRTL: false
-})
-export const PhoneIncoming = withRTL(Lucide.PhoneIncoming, {
-  flipsInRTL: false
-})
-export const PhoneMissed = withRTL(Lucide.PhoneMissed, { flipsInRTL: false })
-export const PhoneOff = withRTL(Lucide.PhoneOff, { flipsInRTL: false })
-export const PhoneOutgoing = withRTL(Lucide.PhoneOutgoing, {
-  flipsInRTL: false
-})
-export const Pi = withRTL(Lucide.Pi, { flipsInRTL: false })
-export const PiSquare = withRTL(Lucide.PiSquare, { flipsInRTL: false })
-export const Piano = withRTL(Lucide.Piano, { flipsInRTL: false })
-export const Pickaxe = withRTL(Lucide.Pickaxe, { flipsInRTL: false })
-export const PictureInPicture = withRTL(Lucide.PictureInPicture, {
-  flipsInRTL: false
-})
-export const PictureInPicture2 = withRTL(Lucide.PictureInPicture2, {
-  flipsInRTL: false
-})
-export const PieChart = withRTL(Lucide.PieChart, { flipsInRTL: false })
-export const PiggyBank = withRTL(Lucide.PiggyBank, { flipsInRTL: false })
-export const Pilcrow = withRTL(Lucide.Pilcrow, { flipsInRTL: false })
-export const PilcrowLeft = withRTL(Lucide.PilcrowLeft, { flipsInRTL: false })
-export const PilcrowRight = withRTL(Lucide.PilcrowRight, { flipsInRTL: false })
-export const PilcrowSquare = withRTL(Lucide.PilcrowSquare, {
-  flipsInRTL: false
-})
-export const Pill = withRTL(Lucide.Pill, { flipsInRTL: false })
-export const PillBottle = withRTL(Lucide.PillBottle, { flipsInRTL: false })
-export const Pin = withRTL(Lucide.Pin, { flipsInRTL: false })
-export const PinOff = withRTL(Lucide.PinOff, { flipsInRTL: false })
-export const Pipette = withRTL(Lucide.Pipette, { flipsInRTL: false })
-export const Pizza = withRTL(Lucide.Pizza, { flipsInRTL: false })
-export const Plane = withRTL(Lucide.Plane, { flipsInRTL: false })
-export const PlaneLanding = withRTL(Lucide.PlaneLanding, { flipsInRTL: false })
-export const PlaneTakeoff = withRTL(Lucide.PlaneTakeoff, { flipsInRTL: false })
-export const Play = withRTL(Lucide.Play, { flipsInRTL: false })
-export const PlayCircle = withRTL(Lucide.PlayCircle, { flipsInRTL: false })
-export const PlaySquare = withRTL(Lucide.PlaySquare, { flipsInRTL: false })
-export const Plug = withRTL(Lucide.Plug, { flipsInRTL: false })
-export const Plug2 = withRTL(Lucide.Plug2, { flipsInRTL: false })
-export const PlugZap = withRTL(Lucide.PlugZap, { flipsInRTL: false })
-export const PlugZap2 = withRTL(Lucide.PlugZap2, { flipsInRTL: false })
-export const Plus = withRTL(Lucide.Plus, { flipsInRTL: false })
-export const PlusCircle = withRTL(Lucide.PlusCircle, { flipsInRTL: false })
-export const PlusSquare = withRTL(Lucide.PlusSquare, { flipsInRTL: false })
-export const Pocket = withRTL(Lucide.Pocket, { flipsInRTL: false })
-export const PocketKnife = withRTL(Lucide.PocketKnife, { flipsInRTL: false })
-export const Podcast = withRTL(Lucide.Podcast, { flipsInRTL: false })
-export const Pointer = withRTL(Lucide.Pointer, { flipsInRTL: false })
-export const PointerOff = withRTL(Lucide.PointerOff, { flipsInRTL: false })
-export const Popcorn = withRTL(Lucide.Popcorn, { flipsInRTL: false })
-export const Popsicle = withRTL(Lucide.Popsicle, { flipsInRTL: false })
-export const PoundSterling = withRTL(Lucide.PoundSterling, {
-  flipsInRTL: false
-})
-export const Power = withRTL(Lucide.Power, { flipsInRTL: false })
-export const PowerCircle = withRTL(Lucide.PowerCircle, { flipsInRTL: false })
-export const PowerOff = withRTL(Lucide.PowerOff, { flipsInRTL: false })
-export const PowerSquare = withRTL(Lucide.PowerSquare, { flipsInRTL: false })
-export const Presentation = withRTL(Lucide.Presentation, { flipsInRTL: false })
-export const Printer = withRTL(Lucide.Printer, { flipsInRTL: false })
-export const PrinterCheck = withRTL(Lucide.PrinterCheck, { flipsInRTL: false })
-export const Projector = withRTL(Lucide.Projector, { flipsInRTL: false })
-export const Proportions = withRTL(Lucide.Proportions, { flipsInRTL: false })
-export const Puzzle = withRTL(Lucide.Puzzle, { flipsInRTL: false })
-export const Pyramid = withRTL(Lucide.Pyramid, { flipsInRTL: false })
-export const QrCode = withRTL(Lucide.QrCode, { flipsInRTL: false })
-export const Quote = withRTL(Lucide.Quote, { flipsInRTL: false })
-export const Rabbit = withRTL(Lucide.Rabbit, { flipsInRTL: false })
-export const Radar = withRTL(Lucide.Radar, { flipsInRTL: false })
-export const Radiation = withRTL(Lucide.Radiation, { flipsInRTL: false })
-export const Radical = withRTL(Lucide.Radical, { flipsInRTL: false })
-export const Radio = withRTL(Lucide.Radio, { flipsInRTL: false })
-export const RadioReceiver = withRTL(Lucide.RadioReceiver, {
-  flipsInRTL: false
-})
-export const RadioTower = withRTL(Lucide.RadioTower, { flipsInRTL: false })
-export const Radius = withRTL(Lucide.Radius, { flipsInRTL: false })
-export const RailSymbol = withRTL(Lucide.RailSymbol, { flipsInRTL: false })
-export const Rainbow = withRTL(Lucide.Rainbow, { flipsInRTL: false })
-export const Rat = withRTL(Lucide.Rat, { flipsInRTL: false })
-export const Ratio = withRTL(Lucide.Ratio, { flipsInRTL: false })
-export const Receipt = withRTL(Lucide.Receipt, { flipsInRTL: false })
-export const ReceiptCent = withRTL(Lucide.ReceiptCent, { flipsInRTL: false })
-export const ReceiptEuro = withRTL(Lucide.ReceiptEuro, { flipsInRTL: false })
-export const ReceiptIndianRupee = withRTL(Lucide.ReceiptIndianRupee, {
-  flipsInRTL: false
-})
-export const ReceiptJapaneseYen = withRTL(Lucide.ReceiptJapaneseYen, {
-  flipsInRTL: false
-})
-export const ReceiptPoundSterling = withRTL(Lucide.ReceiptPoundSterling, {
-  flipsInRTL: false
-})
-export const ReceiptRussianRuble = withRTL(Lucide.ReceiptRussianRuble, {
-  flipsInRTL: false
-})
-export const ReceiptSwissFranc = withRTL(Lucide.ReceiptSwissFranc, {
-  flipsInRTL: false
-})
-export const ReceiptText = withRTL(Lucide.ReceiptText, { flipsInRTL: false })
-export const RectangleEllipsis = withRTL(Lucide.RectangleEllipsis, {
-  flipsInRTL: false
-})
-export const RectangleHorizontal = withRTL(Lucide.RectangleHorizontal, {
-  flipsInRTL: false
-})
-export const RectangleVertical = withRTL(Lucide.RectangleVertical, {
-  flipsInRTL: false
-})
-export const Recycle = withRTL(Lucide.Recycle, { flipsInRTL: false })
-export const Redo = withRTL(Lucide.Redo, { flipsInRTL: false })
-export const Redo2 = withRTL(Lucide.Redo2, { flipsInRTL: false })
-export const RedoDot = withRTL(Lucide.RedoDot, { flipsInRTL: false })
-export const RefreshCcw = withRTL(Lucide.RefreshCcw, { flipsInRTL: false })
-export const RefreshCcwDot = withRTL(Lucide.RefreshCcwDot, {
-  flipsInRTL: false
-})
-export const RefreshCw = withRTL(Lucide.RefreshCw, { flipsInRTL: false })
-export const RefreshCwOff = withRTL(Lucide.RefreshCwOff, { flipsInRTL: false })
-export const Refrigerator = withRTL(Lucide.Refrigerator, { flipsInRTL: false })
-export const Regex = withRTL(Lucide.Regex, { flipsInRTL: false })
-export const RemoveFormatting = withRTL(Lucide.RemoveFormatting, {
-  flipsInRTL: false
-})
-export const Repeat = withRTL(Lucide.Repeat, { flipsInRTL: false })
-export const Repeat1 = withRTL(Lucide.Repeat1, { flipsInRTL: false })
-export const Repeat2 = withRTL(Lucide.Repeat2, { flipsInRTL: false })
-export const Replace = withRTL(Lucide.Replace, { flipsInRTL: false })
-export const ReplaceAll = withRTL(Lucide.ReplaceAll, { flipsInRTL: false })
-export const Reply = withRTL(Lucide.Reply, { flipsInRTL: false })
-export const ReplyAll = withRTL(Lucide.ReplyAll, { flipsInRTL: false })
-export const Rewind = withRTL(Lucide.Rewind, { flipsInRTL: false })
-export const Ribbon = withRTL(Lucide.Ribbon, { flipsInRTL: false })
-export const Rocket = withRTL(Lucide.Rocket, { flipsInRTL: false })
-export const RockingChair = withRTL(Lucide.RockingChair, { flipsInRTL: false })
-export const RollerCoaster = withRTL(Lucide.RollerCoaster, {
-  flipsInRTL: false
-})
-export const Rotate3D = withRTL(Lucide.Rotate3D, { flipsInRTL: false })
-export const Rotate3d = withRTL(Lucide.Rotate3d, { flipsInRTL: false })
-export const RotateCcw = withRTL(Lucide.RotateCcw, { flipsInRTL: false })
-export const RotateCcwSquare = withRTL(Lucide.RotateCcwSquare, {
-  flipsInRTL: false
-})
-export const RotateCw = withRTL(Lucide.RotateCw, { flipsInRTL: false })
-export const RotateCwSquare = withRTL(Lucide.RotateCwSquare, {
-  flipsInRTL: false
-})
-export const Route = withRTL(Lucide.Route, { flipsInRTL: false })
-export const RouteOff = withRTL(Lucide.RouteOff, { flipsInRTL: false })
-export const Router = withRTL(Lucide.Router, { flipsInRTL: false })
-export const Rows = withRTL(Lucide.Rows, { flipsInRTL: false })
-export const Rows2 = withRTL(Lucide.Rows2, { flipsInRTL: false })
-export const Rows3 = withRTL(Lucide.Rows3, { flipsInRTL: false })
-export const Rows4 = withRTL(Lucide.Rows4, { flipsInRTL: false })
-export const Rss = withRTL(Lucide.Rss, { flipsInRTL: false })
-export const Ruler = withRTL(Lucide.Ruler, { flipsInRTL: false })
-export const RussianRuble = withRTL(Lucide.RussianRuble, { flipsInRTL: false })
-export const Sailboat = withRTL(Lucide.Sailboat, { flipsInRTL: false })
-export const Salad = withRTL(Lucide.Salad, { flipsInRTL: false })
-export const Sandwich = withRTL(Lucide.Sandwich, { flipsInRTL: false })
-export const Satellite = withRTL(Lucide.Satellite, { flipsInRTL: false })
-export const SatelliteDish = withRTL(Lucide.SatelliteDish, {
-  flipsInRTL: false
-})
-export const Save = withRTL(Lucide.Save, { flipsInRTL: false })
-export const SaveAll = withRTL(Lucide.SaveAll, { flipsInRTL: false })
-export const SaveOff = withRTL(Lucide.SaveOff, { flipsInRTL: false })
-export const Scale = withRTL(Lucide.Scale, { flipsInRTL: false })
-export const Scale3D = withRTL(Lucide.Scale3D, { flipsInRTL: false })
-export const Scale3d = withRTL(Lucide.Scale3d, { flipsInRTL: false })
-export const Scaling = withRTL(Lucide.Scaling, { flipsInRTL: false })
-export const Scan = withRTL(Lucide.Scan, { flipsInRTL: false })
-export const ScanBarcode = withRTL(Lucide.ScanBarcode, { flipsInRTL: false })
-export const ScanEye = withRTL(Lucide.ScanEye, { flipsInRTL: false })
-export const ScanFace = withRTL(Lucide.ScanFace, { flipsInRTL: false })
-export const ScanLine = withRTL(Lucide.ScanLine, { flipsInRTL: false })
-export const ScanQrCode = withRTL(Lucide.ScanQrCode, { flipsInRTL: false })
-export const ScanSearch = withRTL(Lucide.ScanSearch, { flipsInRTL: false })
-export const ScanText = withRTL(Lucide.ScanText, { flipsInRTL: false })
-export const ScatterChart = withRTL(Lucide.ScatterChart, { flipsInRTL: false })
-export const School = withRTL(Lucide.School, { flipsInRTL: false })
-export const School2 = withRTL(Lucide.School2, { flipsInRTL: false })
-export const Scissors = withRTL(Lucide.Scissors, { flipsInRTL: false })
-export const ScissorsLineDashed = withRTL(Lucide.ScissorsLineDashed, {
-  flipsInRTL: false
-})
-export const ScissorsSquare = withRTL(Lucide.ScissorsSquare, {
-  flipsInRTL: false
-})
-export const ScissorsSquareDashedBottom = withRTL(
-  Lucide.ScissorsSquareDashedBottom,
-  { flipsInRTL: false }
+export const ArrowUpLeftSquare = wrapLucideIcon(Lucide.ArrowUpLeftSquare)
+export const ArrowUpNarrowWide = wrapLucideIcon(Lucide.ArrowUpNarrowWide)
+export const ArrowUpRight = wrapLucideIcon(Lucide.ArrowUpRight)
+export const ArrowUpRightFromCircle = wrapLucideIcon(
+  Lucide.ArrowUpRightFromCircle
 )
-export const ScreenShare = withRTL(Lucide.ScreenShare, { flipsInRTL: false })
-export const ScreenShareOff = withRTL(Lucide.ScreenShareOff, {
-  flipsInRTL: false
-})
-export const Scroll = withRTL(Lucide.Scroll, { flipsInRTL: false })
-export const ScrollText = withRTL(Lucide.ScrollText, { flipsInRTL: false })
-export const Search = withRTL(Lucide.Search, { flipsInRTL: false })
-export const SearchCheck = withRTL(Lucide.SearchCheck, { flipsInRTL: false })
-export const SearchCode = withRTL(Lucide.SearchCode, { flipsInRTL: false })
-export const SearchSlash = withRTL(Lucide.SearchSlash, { flipsInRTL: false })
-export const SearchX = withRTL(Lucide.SearchX, { flipsInRTL: false })
-export const Section = withRTL(Lucide.Section, { flipsInRTL: false })
-export const Send = withRTL(Lucide.Send, { flipsInRTL: false })
-export const SendHorizonal = withRTL(Lucide.SendHorizonal, {
-  flipsInRTL: false
-})
-export const SendHorizontal = withRTL(Lucide.SendHorizontal, {
-  flipsInRTL: false
-})
-export const SendToBack = withRTL(Lucide.SendToBack, { flipsInRTL: false })
-export const SeparatorHorizontal = withRTL(Lucide.SeparatorHorizontal, {
-  flipsInRTL: false
-})
-export const SeparatorVertical = withRTL(Lucide.SeparatorVertical, {
-  flipsInRTL: false
-})
-export const Server = withRTL(Lucide.Server, { flipsInRTL: false })
-export const ServerCog = withRTL(Lucide.ServerCog, { flipsInRTL: false })
-export const ServerCrash = withRTL(Lucide.ServerCrash, { flipsInRTL: false })
-export const ServerOff = withRTL(Lucide.ServerOff, { flipsInRTL: false })
-export const Settings = withRTL(Lucide.Settings, { flipsInRTL: false })
-export const Settings2 = withRTL(Lucide.Settings2, { flipsInRTL: false })
-export const Shapes = withRTL(Lucide.Shapes, { flipsInRTL: false })
-export const Share = withRTL(Lucide.Share, { flipsInRTL: false })
-export const Share2 = withRTL(Lucide.Share2, { flipsInRTL: false })
-export const Sheet = withRTL(Lucide.Sheet, { flipsInRTL: false })
-export const Shell = withRTL(Lucide.Shell, { flipsInRTL: false })
-export const Shield = withRTL(Lucide.Shield, { flipsInRTL: false })
-export const ShieldAlert = withRTL(Lucide.ShieldAlert, { flipsInRTL: false })
-export const ShieldBan = withRTL(Lucide.ShieldBan, { flipsInRTL: false })
-export const ShieldCheck = withRTL(Lucide.ShieldCheck, { flipsInRTL: false })
-export const ShieldClose = withRTL(Lucide.ShieldClose, { flipsInRTL: false })
-export const ShieldEllipsis = withRTL(Lucide.ShieldEllipsis, {
-  flipsInRTL: false
-})
-export const ShieldHalf = withRTL(Lucide.ShieldHalf, { flipsInRTL: false })
-export const ShieldMinus = withRTL(Lucide.ShieldMinus, { flipsInRTL: false })
-export const ShieldOff = withRTL(Lucide.ShieldOff, { flipsInRTL: false })
-export const ShieldPlus = withRTL(Lucide.ShieldPlus, { flipsInRTL: false })
-export const ShieldQuestion = withRTL(Lucide.ShieldQuestion, {
-  flipsInRTL: false
-})
-export const ShieldX = withRTL(Lucide.ShieldX, { flipsInRTL: false })
-export const Ship = withRTL(Lucide.Ship, { flipsInRTL: false })
-export const ShipWheel = withRTL(Lucide.ShipWheel, { flipsInRTL: false })
-export const Shirt = withRTL(Lucide.Shirt, { flipsInRTL: false })
-export const ShoppingBag = withRTL(Lucide.ShoppingBag, { flipsInRTL: false })
-export const ShoppingBasket = withRTL(Lucide.ShoppingBasket, {
-  flipsInRTL: false
-})
-export const ShoppingCart = withRTL(Lucide.ShoppingCart, { flipsInRTL: false })
-export const Shovel = withRTL(Lucide.Shovel, { flipsInRTL: false })
-export const ShowerHead = withRTL(Lucide.ShowerHead, { flipsInRTL: false })
-export const Shrink = withRTL(Lucide.Shrink, { flipsInRTL: false })
-export const Shrub = withRTL(Lucide.Shrub, { flipsInRTL: false })
-export const Shuffle = withRTL(Lucide.Shuffle, { flipsInRTL: false })
-export const Sidebar = withRTL(Lucide.Sidebar, { flipsInRTL: false })
-export const SidebarClose = withRTL(Lucide.SidebarClose, { flipsInRTL: false })
-export const SidebarOpen = withRTL(Lucide.SidebarOpen, { flipsInRTL: false })
-export const Sigma = withRTL(Lucide.Sigma, { flipsInRTL: false })
-export const SigmaSquare = withRTL(Lucide.SigmaSquare, { flipsInRTL: false })
-export const Signal = withRTL(Lucide.Signal, { flipsInRTL: false })
-export const SignalHigh = withRTL(Lucide.SignalHigh, { flipsInRTL: false })
-export const SignalLow = withRTL(Lucide.SignalLow, { flipsInRTL: false })
-export const SignalMedium = withRTL(Lucide.SignalMedium, { flipsInRTL: false })
-export const SignalZero = withRTL(Lucide.SignalZero, { flipsInRTL: false })
-export const Signature = withRTL(Lucide.Signature, { flipsInRTL: false })
-export const Signpost = withRTL(Lucide.Signpost, { flipsInRTL: false })
-export const SignpostBig = withRTL(Lucide.SignpostBig, { flipsInRTL: false })
-export const Siren = withRTL(Lucide.Siren, { flipsInRTL: false })
-export const SkipBack = withRTL(Lucide.SkipBack, { flipsInRTL: false })
-export const SkipForward = withRTL(Lucide.SkipForward, { flipsInRTL: false })
-export const Skull = withRTL(Lucide.Skull, { flipsInRTL: false })
-export const Slack = withRTL(Lucide.Slack, { flipsInRTL: false })
-export const Slash = withRTL(Lucide.Slash, { flipsInRTL: false })
-export const SlashSquare = withRTL(Lucide.SlashSquare, { flipsInRTL: false })
-export const Slice = withRTL(Lucide.Slice, { flipsInRTL: false })
-export const Sliders = withRTL(Lucide.Sliders, { flipsInRTL: false })
-export const SlidersHorizontal = withRTL(Lucide.SlidersHorizontal, {
-  flipsInRTL: false
-})
-export const SlidersVertical = withRTL(Lucide.SlidersVertical, {
-  flipsInRTL: false
-})
-export const Smartphone = withRTL(Lucide.Smartphone, { flipsInRTL: false })
-export const SmartphoneCharging = withRTL(Lucide.SmartphoneCharging, {
-  flipsInRTL: false
-})
-export const SmartphoneNfc = withRTL(Lucide.SmartphoneNfc, {
-  flipsInRTL: false
-})
-export const Smile = withRTL(Lucide.Smile, { flipsInRTL: false })
-export const SmilePlus = withRTL(Lucide.SmilePlus, { flipsInRTL: false })
-export const Snail = withRTL(Lucide.Snail, { flipsInRTL: false })
-export const Snowflake = withRTL(Lucide.Snowflake, { flipsInRTL: false })
-export const Sofa = withRTL(Lucide.Sofa, { flipsInRTL: false })
-export const SortAsc = withRTL(Lucide.SortAsc, { flipsInRTL: false })
-export const SortDesc = withRTL(Lucide.SortDesc, { flipsInRTL: false })
-export const Soup = withRTL(Lucide.Soup, { flipsInRTL: false })
-export const Space = withRTL(Lucide.Space, { flipsInRTL: false })
-export const Spade = withRTL(Lucide.Spade, { flipsInRTL: false })
-export const Sparkle = withRTL(Lucide.Sparkle, { flipsInRTL: false })
-export const Sparkles = withRTL(Lucide.Sparkles, { flipsInRTL: false })
-export const Speaker = withRTL(Lucide.Speaker, { flipsInRTL: false })
-export const Speech = withRTL(Lucide.Speech, { flipsInRTL: false })
-export const SpellCheck = withRTL(Lucide.SpellCheck, { flipsInRTL: false })
-export const SpellCheck2 = withRTL(Lucide.SpellCheck2, { flipsInRTL: false })
-export const Spline = withRTL(Lucide.Spline, { flipsInRTL: false })
-export const Split = withRTL(Lucide.Split, { flipsInRTL: false })
-export const SplitSquareHorizontal = withRTL(Lucide.SplitSquareHorizontal, {
-  flipsInRTL: false
-})
-export const SplitSquareVertical = withRTL(Lucide.SplitSquareVertical, {
-  flipsInRTL: false
-})
-export const SprayCan = withRTL(Lucide.SprayCan, { flipsInRTL: false })
-export const Sprout = withRTL(Lucide.Sprout, { flipsInRTL: false })
-export const Square = withRTL(Lucide.Square, { flipsInRTL: false })
-export const SquareActivity = withRTL(Lucide.SquareActivity, {
-  flipsInRTL: false
-})
-export const SquareArrowDown = withRTL(Lucide.SquareArrowDown, {
-  flipsInRTL: false
-})
-export const SquareArrowDownLeft = withRTL(Lucide.SquareArrowDownLeft, {
-  flipsInRTL: false
-})
-export const SquareArrowDownRight = withRTL(Lucide.SquareArrowDownRight, {
-  flipsInRTL: false
-})
-export const SquareArrowLeft = withRTL(Lucide.SquareArrowLeft, {
-  flipsInRTL: false
-})
-export const SquareArrowOutDownLeft = withRTL(Lucide.SquareArrowOutDownLeft, {
-  flipsInRTL: false
-})
-export const SquareArrowOutDownRight = withRTL(Lucide.SquareArrowOutDownRight, {
-  flipsInRTL: false
-})
-export const SquareArrowOutUpLeft = withRTL(Lucide.SquareArrowOutUpLeft, {
-  flipsInRTL: false
-})
-export const SquareArrowOutUpRight = withRTL(Lucide.SquareArrowOutUpRight, {
-  flipsInRTL: false
-})
-export const SquareArrowRight = withRTL(Lucide.SquareArrowRight, {
-  flipsInRTL: false
-})
-export const SquareArrowUp = withRTL(Lucide.SquareArrowUp, {
-  flipsInRTL: false
-})
-export const SquareArrowUpLeft = withRTL(Lucide.SquareArrowUpLeft, {
-  flipsInRTL: false
-})
-export const SquareArrowUpRight = withRTL(Lucide.SquareArrowUpRight, {
-  flipsInRTL: false
-})
-export const SquareAsterisk = withRTL(Lucide.SquareAsterisk, {
-  flipsInRTL: false
-})
-export const SquareBottomDashedScissors = withRTL(
-  Lucide.SquareBottomDashedScissors,
-  { flipsInRTL: false }
+export const ArrowUpRightFromSquare = wrapLucideIcon(
+  Lucide.ArrowUpRightFromSquare
 )
-export const SquareChartGantt = withRTL(Lucide.SquareChartGantt, {
-  flipsInRTL: false
-})
-export const SquareCheck = withRTL(Lucide.SquareCheck, { flipsInRTL: false })
-export const SquareCheckBig = withRTL(Lucide.SquareCheckBig, {
-  flipsInRTL: false
-})
-export const SquareChevronDown = withRTL(Lucide.SquareChevronDown, {
-  flipsInRTL: false
-})
-export const SquareChevronLeft = withRTL(Lucide.SquareChevronLeft, {
-  flipsInRTL: false
-})
-export const SquareChevronRight = withRTL(Lucide.SquareChevronRight, {
-  flipsInRTL: false
-})
-export const SquareChevronUp = withRTL(Lucide.SquareChevronUp, {
-  flipsInRTL: false
-})
-export const SquareCode = withRTL(Lucide.SquareCode, { flipsInRTL: false })
-export const SquareDashed = withRTL(Lucide.SquareDashed, { flipsInRTL: false })
-export const SquareDashedBottom = withRTL(Lucide.SquareDashedBottom, {
-  flipsInRTL: false
-})
-export const SquareDashedBottomCode = withRTL(Lucide.SquareDashedBottomCode, {
-  flipsInRTL: false
-})
-export const SquareDashedKanban = withRTL(Lucide.SquareDashedKanban, {
-  flipsInRTL: false
-})
-export const SquareDashedMousePointer = withRTL(
-  Lucide.SquareDashedMousePointer,
-  { flipsInRTL: false }
+export const ArrowUpRightSquare = wrapLucideIcon(Lucide.ArrowUpRightSquare)
+export const ArrowUpSquare = wrapLucideIcon(Lucide.ArrowUpSquare)
+export const ArrowUpToLine = wrapLucideIcon(Lucide.ArrowUpToLine)
+export const ArrowUpWideNarrow = wrapLucideIcon(Lucide.ArrowUpWideNarrow)
+export const ArrowUpZA = wrapLucideIcon(Lucide.ArrowUpZA)
+export const ArrowUpZa = wrapLucideIcon(Lucide.ArrowUpZa)
+export const ArrowsUpFromLine = wrapLucideIcon(Lucide.ArrowsUpFromLine)
+export const Asterisk = wrapLucideIcon(Lucide.Asterisk)
+export const AsteriskSquare = wrapLucideIcon(Lucide.AsteriskSquare)
+export const AtSign = wrapLucideIcon(Lucide.AtSign)
+export const Atom = wrapLucideIcon(Lucide.Atom)
+export const AudioLines = wrapLucideIcon(Lucide.AudioLines)
+export const AudioWaveform = wrapLucideIcon(Lucide.AudioWaveform)
+export const Award = wrapLucideIcon(Lucide.Award)
+export const Axe = wrapLucideIcon(Lucide.Axe)
+export const Axis3D = wrapLucideIcon(Lucide.Axis3D)
+export const Axis3d = wrapLucideIcon(Lucide.Axis3d)
+export const Baby = wrapLucideIcon(Lucide.Baby)
+export const Backpack = wrapLucideIcon(Lucide.Backpack)
+export const Badge = wrapLucideIcon(Lucide.Badge)
+export const BadgeAlert = wrapLucideIcon(Lucide.BadgeAlert)
+export const BadgeCent = wrapLucideIcon(Lucide.BadgeCent)
+export const BadgeCheck = wrapLucideIcon(Lucide.BadgeCheck)
+export const BadgeDollarSign = wrapLucideIcon(Lucide.BadgeDollarSign)
+export const BadgeEuro = wrapLucideIcon(Lucide.BadgeEuro)
+export const BadgeHelp = wrapLucideIcon(Lucide.BadgeHelp)
+export const BadgeIndianRupee = wrapLucideIcon(Lucide.BadgeIndianRupee)
+export const BadgeInfo = wrapLucideIcon(Lucide.BadgeInfo)
+export const BadgeJapaneseYen = wrapLucideIcon(Lucide.BadgeJapaneseYen)
+export const BadgeMinus = wrapLucideIcon(Lucide.BadgeMinus)
+export const BadgePercent = wrapLucideIcon(Lucide.BadgePercent)
+export const BadgePlus = wrapLucideIcon(Lucide.BadgePlus)
+export const BadgePoundSterling = wrapLucideIcon(Lucide.BadgePoundSterling)
+export const BadgeRussianRuble = wrapLucideIcon(Lucide.BadgeRussianRuble)
+export const BadgeSwissFranc = wrapLucideIcon(Lucide.BadgeSwissFranc)
+export const BadgeX = wrapLucideIcon(Lucide.BadgeX)
+export const BaggageClaim = wrapLucideIcon(Lucide.BaggageClaim)
+export const Ban = wrapLucideIcon(Lucide.Ban)
+export const Banana = wrapLucideIcon(Lucide.Banana)
+export const Bandage = wrapLucideIcon(Lucide.Bandage)
+export const Banknote = wrapLucideIcon(Lucide.Banknote)
+export const BarChart = wrapLucideIcon(Lucide.BarChart)
+export const BarChart2 = wrapLucideIcon(Lucide.BarChart2)
+export const BarChart3 = wrapLucideIcon(Lucide.BarChart3)
+export const BarChart4 = wrapLucideIcon(Lucide.BarChart4)
+export const BarChartBig = wrapLucideIcon(Lucide.BarChartBig)
+export const BarChartHorizontal = wrapLucideIcon(Lucide.BarChartHorizontal)
+export const BarChartHorizontalBig = wrapLucideIcon(
+  Lucide.BarChartHorizontalBig
 )
-export const SquareDivide = withRTL(Lucide.SquareDivide, { flipsInRTL: false })
-export const SquareDot = withRTL(Lucide.SquareDot, { flipsInRTL: false })
-export const SquareEqual = withRTL(Lucide.SquareEqual, { flipsInRTL: false })
-export const SquareFunction = withRTL(Lucide.SquareFunction, {
-  flipsInRTL: false
-})
-export const SquareGanttChart = withRTL(Lucide.SquareGanttChart, {
-  flipsInRTL: false
-})
-export const SquareKanban = withRTL(Lucide.SquareKanban, { flipsInRTL: false })
-export const SquareLibrary = withRTL(Lucide.SquareLibrary, {
-  flipsInRTL: false
-})
-export const SquareM = withRTL(Lucide.SquareM, { flipsInRTL: false })
-export const SquareMenu = withRTL(Lucide.SquareMenu, { flipsInRTL: false })
-export const SquareMinus = withRTL(Lucide.SquareMinus, { flipsInRTL: false })
-export const SquareMousePointer = withRTL(Lucide.SquareMousePointer, {
-  flipsInRTL: false
-})
-export const SquareParking = withRTL(Lucide.SquareParking, {
-  flipsInRTL: false
-})
-export const SquareParkingOff = withRTL(Lucide.SquareParkingOff, {
-  flipsInRTL: false
-})
-export const SquarePen = withRTL(Lucide.SquarePen, { flipsInRTL: false })
-export const SquarePercent = withRTL(Lucide.SquarePercent, {
-  flipsInRTL: false
-})
-export const SquarePi = withRTL(Lucide.SquarePi, { flipsInRTL: false })
-export const SquarePilcrow = withRTL(Lucide.SquarePilcrow, {
-  flipsInRTL: false
-})
-export const SquarePlay = withRTL(Lucide.SquarePlay, { flipsInRTL: false })
-export const SquarePlus = withRTL(Lucide.SquarePlus, { flipsInRTL: false })
-export const SquarePower = withRTL(Lucide.SquarePower, { flipsInRTL: false })
-export const SquareRadical = withRTL(Lucide.SquareRadical, {
-  flipsInRTL: false
-})
-export const SquareScissors = withRTL(Lucide.SquareScissors, {
-  flipsInRTL: false
-})
-export const SquareSigma = withRTL(Lucide.SquareSigma, { flipsInRTL: false })
-export const SquareSlash = withRTL(Lucide.SquareSlash, { flipsInRTL: false })
-export const SquareSplitHorizontal = withRTL(Lucide.SquareSplitHorizontal, {
-  flipsInRTL: false
-})
-export const SquareSplitVertical = withRTL(Lucide.SquareSplitVertical, {
-  flipsInRTL: false
-})
-export const SquareSquare = withRTL(Lucide.SquareSquare, { flipsInRTL: false })
-export const SquareStack = withRTL(Lucide.SquareStack, { flipsInRTL: false })
-export const SquareTerminal = withRTL(Lucide.SquareTerminal, {
-  flipsInRTL: false
-})
-export const SquareUser = withRTL(Lucide.SquareUser, { flipsInRTL: false })
-export const SquareUserRound = withRTL(Lucide.SquareUserRound, {
-  flipsInRTL: false
-})
-export const SquareX = withRTL(Lucide.SquareX, { flipsInRTL: false })
-export const Squircle = withRTL(Lucide.Squircle, { flipsInRTL: false })
-export const Squirrel = withRTL(Lucide.Squirrel, { flipsInRTL: false })
-export const Stamp = withRTL(Lucide.Stamp, { flipsInRTL: false })
-export const Star = withRTL(Lucide.Star, { flipsInRTL: false })
-export const StarHalf = withRTL(Lucide.StarHalf, { flipsInRTL: false })
-export const StarOff = withRTL(Lucide.StarOff, { flipsInRTL: false })
-export const Stars = withRTL(Lucide.Stars, { flipsInRTL: false })
-export const StepBack = withRTL(Lucide.StepBack, { flipsInRTL: false })
-export const StepForward = withRTL(Lucide.StepForward, { flipsInRTL: false })
-export const Stethoscope = withRTL(Lucide.Stethoscope, { flipsInRTL: false })
-export const Sticker = withRTL(Lucide.Sticker, { flipsInRTL: false })
-export const StickyNote = withRTL(Lucide.StickyNote, { flipsInRTL: false })
-export const StopCircle = withRTL(Lucide.StopCircle, { flipsInRTL: false })
-export const Store = withRTL(Lucide.Store, { flipsInRTL: false })
-export const StretchHorizontal = withRTL(Lucide.StretchHorizontal, {
-  flipsInRTL: false
-})
-export const StretchVertical = withRTL(Lucide.StretchVertical, {
-  flipsInRTL: false
-})
-export const Strikethrough = withRTL(Lucide.Strikethrough, {
-  flipsInRTL: false
-})
-export const Subscript = withRTL(Lucide.Subscript, { flipsInRTL: false })
-export const Subtitles = withRTL(Lucide.Subtitles, { flipsInRTL: false })
-export const Sun = withRTL(Lucide.Sun, { flipsInRTL: false })
-export const SunDim = withRTL(Lucide.SunDim, { flipsInRTL: false })
-export const SunMedium = withRTL(Lucide.SunMedium, { flipsInRTL: false })
-export const SunMoon = withRTL(Lucide.SunMoon, { flipsInRTL: false })
-export const SunSnow = withRTL(Lucide.SunSnow, { flipsInRTL: false })
-export const Sunrise = withRTL(Lucide.Sunrise, { flipsInRTL: false })
-export const Sunset = withRTL(Lucide.Sunset, { flipsInRTL: false })
-export const Superscript = withRTL(Lucide.Superscript, { flipsInRTL: false })
-export const SwatchBook = withRTL(Lucide.SwatchBook, { flipsInRTL: false })
-export const SwissFranc = withRTL(Lucide.SwissFranc, { flipsInRTL: false })
-export const SwitchCamera = withRTL(Lucide.SwitchCamera, { flipsInRTL: false })
-export const Sword = withRTL(Lucide.Sword, { flipsInRTL: false })
-export const Swords = withRTL(Lucide.Swords, { flipsInRTL: false })
-export const Syringe = withRTL(Lucide.Syringe, { flipsInRTL: false })
-export const Table = withRTL(Lucide.Table, { flipsInRTL: false })
-export const Table2 = withRTL(Lucide.Table2, { flipsInRTL: false })
-export const TableCellsMerge = withRTL(Lucide.TableCellsMerge, {
-  flipsInRTL: false
-})
-export const TableCellsSplit = withRTL(Lucide.TableCellsSplit, {
-  flipsInRTL: false
-})
-export const TableColumnsSplit = withRTL(Lucide.TableColumnsSplit, {
-  flipsInRTL: false
-})
-export const TableOfContents = withRTL(Lucide.TableOfContents, {
-  flipsInRTL: false
-})
-export const TableProperties = withRTL(Lucide.TableProperties, {
-  flipsInRTL: false
-})
-export const TableRowsSplit = withRTL(Lucide.TableRowsSplit, {
-  flipsInRTL: false
-})
-export const Tablet = withRTL(Lucide.Tablet, { flipsInRTL: false })
-export const TabletSmartphone = withRTL(Lucide.TabletSmartphone, {
-  flipsInRTL: false
-})
-export const Tablets = withRTL(Lucide.Tablets, { flipsInRTL: false })
-export const Tag = withRTL(Lucide.Tag, { flipsInRTL: false })
-export const Tags = withRTL(Lucide.Tags, { flipsInRTL: false })
-export const Tally1 = withRTL(Lucide.Tally1, { flipsInRTL: false })
-export const Tally2 = withRTL(Lucide.Tally2, { flipsInRTL: false })
-export const Tally3 = withRTL(Lucide.Tally3, { flipsInRTL: false })
-export const Tally4 = withRTL(Lucide.Tally4, { flipsInRTL: false })
-export const Tally5 = withRTL(Lucide.Tally5, { flipsInRTL: false })
-export const Tangent = withRTL(Lucide.Tangent, { flipsInRTL: false })
-export const Target = withRTL(Lucide.Target, { flipsInRTL: false })
-export const Telescope = withRTL(Lucide.Telescope, { flipsInRTL: false })
-export const Tent = withRTL(Lucide.Tent, { flipsInRTL: false })
-export const TentTree = withRTL(Lucide.TentTree, { flipsInRTL: false })
-export const Terminal = withRTL(Lucide.Terminal, { flipsInRTL: false })
-export const TerminalSquare = withRTL(Lucide.TerminalSquare, {
-  flipsInRTL: false
-})
-export const TestTube = withRTL(Lucide.TestTube, { flipsInRTL: false })
-export const TestTube2 = withRTL(Lucide.TestTube2, { flipsInRTL: false })
-export const TestTubeDiagonal = withRTL(Lucide.TestTubeDiagonal, {
-  flipsInRTL: false
-})
-export const TestTubes = withRTL(Lucide.TestTubes, { flipsInRTL: false })
-export const Text = withRTL(Lucide.Text, { flipsInRTL: false })
-export const TextCursor = withRTL(Lucide.TextCursor, { flipsInRTL: false })
-export const TextCursorInput = withRTL(Lucide.TextCursorInput, {
-  flipsInRTL: false
-})
-export const TextQuote = withRTL(Lucide.TextQuote, { flipsInRTL: false })
-export const TextSearch = withRTL(Lucide.TextSearch, { flipsInRTL: false })
-export const TextSelect = withRTL(Lucide.TextSelect, { flipsInRTL: false })
-export const TextSelection = withRTL(Lucide.TextSelection, {
-  flipsInRTL: false
-})
-export const Theater = withRTL(Lucide.Theater, { flipsInRTL: false })
-export const Thermometer = withRTL(Lucide.Thermometer, { flipsInRTL: false })
-export const ThermometerSnowflake = withRTL(Lucide.ThermometerSnowflake, {
-  flipsInRTL: false
-})
-export const ThermometerSun = withRTL(Lucide.ThermometerSun, {
-  flipsInRTL: false
-})
-export const ThumbsDown = withRTL(Lucide.ThumbsDown, { flipsInRTL: false })
-export const ThumbsUp = withRTL(Lucide.ThumbsUp, { flipsInRTL: false })
-export const Ticket = withRTL(Lucide.Ticket, { flipsInRTL: false })
-export const TicketCheck = withRTL(Lucide.TicketCheck, { flipsInRTL: false })
-export const TicketMinus = withRTL(Lucide.TicketMinus, { flipsInRTL: false })
-export const TicketPercent = withRTL(Lucide.TicketPercent, {
-  flipsInRTL: false
-})
-export const TicketPlus = withRTL(Lucide.TicketPlus, { flipsInRTL: false })
-export const TicketSlash = withRTL(Lucide.TicketSlash, { flipsInRTL: false })
-export const TicketX = withRTL(Lucide.TicketX, { flipsInRTL: false })
-export const Tickets = withRTL(Lucide.Tickets, { flipsInRTL: false })
-export const TicketsPlane = withRTL(Lucide.TicketsPlane, { flipsInRTL: false })
-export const Timer = withRTL(Lucide.Timer, { flipsInRTL: false })
-export const TimerOff = withRTL(Lucide.TimerOff, { flipsInRTL: false })
-export const TimerReset = withRTL(Lucide.TimerReset, { flipsInRTL: false })
-export const ToggleLeft = withRTL(Lucide.ToggleLeft, { flipsInRTL: false })
-export const ToggleRight = withRTL(Lucide.ToggleRight, { flipsInRTL: false })
-export const Toilet = withRTL(Lucide.Toilet, { flipsInRTL: false })
-export const Tornado = withRTL(Lucide.Tornado, { flipsInRTL: false })
-export const Torus = withRTL(Lucide.Torus, { flipsInRTL: false })
-export const Touchpad = withRTL(Lucide.Touchpad, { flipsInRTL: false })
-export const TouchpadOff = withRTL(Lucide.TouchpadOff, { flipsInRTL: false })
-export const TowerControl = withRTL(Lucide.TowerControl, { flipsInRTL: false })
-export const ToyBrick = withRTL(Lucide.ToyBrick, { flipsInRTL: false })
-export const Tractor = withRTL(Lucide.Tractor, { flipsInRTL: false })
-export const TrafficCone = withRTL(Lucide.TrafficCone, { flipsInRTL: false })
-export const Train = withRTL(Lucide.Train, { flipsInRTL: false })
-export const TrainFront = withRTL(Lucide.TrainFront, { flipsInRTL: false })
-export const TrainFrontTunnel = withRTL(Lucide.TrainFrontTunnel, {
-  flipsInRTL: false
-})
-export const TrainTrack = withRTL(Lucide.TrainTrack, { flipsInRTL: false })
-export const TramFront = withRTL(Lucide.TramFront, { flipsInRTL: false })
-export const Trash = withRTL(Lucide.Trash, { flipsInRTL: false })
-export const Trash2 = withRTL(Lucide.Trash2, { flipsInRTL: false })
-export const TreeDeciduous = withRTL(Lucide.TreeDeciduous, {
-  flipsInRTL: false
-})
-export const TreePalm = withRTL(Lucide.TreePalm, { flipsInRTL: false })
-export const TreePine = withRTL(Lucide.TreePine, { flipsInRTL: false })
-export const Trees = withRTL(Lucide.Trees, { flipsInRTL: false })
-export const Trello = withRTL(Lucide.Trello, { flipsInRTL: false })
-export const TrendingDown = withRTL(Lucide.TrendingDown, { flipsInRTL: false })
-export const TrendingUp = withRTL(Lucide.TrendingUp, { flipsInRTL: false })
-export const TrendingUpDown = withRTL(Lucide.TrendingUpDown, {
-  flipsInRTL: false
-})
-export const Triangle = withRTL(Lucide.Triangle, { flipsInRTL: false })
-export const TriangleAlert = withRTL(Lucide.TriangleAlert, {
-  flipsInRTL: false
-})
-export const TriangleRight = withRTL(Lucide.TriangleRight, {
-  flipsInRTL: false
-})
-export const Trophy = withRTL(Lucide.Trophy, { flipsInRTL: false })
-export const Truck = withRTL(Lucide.Truck, { flipsInRTL: false })
-export const Turtle = withRTL(Lucide.Turtle, { flipsInRTL: false })
-export const Tv = withRTL(Lucide.Tv, { flipsInRTL: false })
-export const Tv2 = withRTL(Lucide.Tv2, { flipsInRTL: false })
-export const TvMinimal = withRTL(Lucide.TvMinimal, { flipsInRTL: false })
-export const TvMinimalPlay = withRTL(Lucide.TvMinimalPlay, {
-  flipsInRTL: false
-})
-export const Twitch = withRTL(Lucide.Twitch, { flipsInRTL: false })
-export const Twitter = withRTL(Lucide.Twitter, { flipsInRTL: false })
-export const Type = withRTL(Lucide.Type, { flipsInRTL: false })
-export const TypeOutline = withRTL(Lucide.TypeOutline, { flipsInRTL: false })
-export const Umbrella = withRTL(Lucide.Umbrella, { flipsInRTL: false })
-export const UmbrellaOff = withRTL(Lucide.UmbrellaOff, { flipsInRTL: false })
-export const Underline = withRTL(Lucide.Underline, { flipsInRTL: false })
-export const Undo = withRTL(Lucide.Undo, { flipsInRTL: false })
-export const Undo2 = withRTL(Lucide.Undo2, { flipsInRTL: false })
-export const UndoDot = withRTL(Lucide.UndoDot, { flipsInRTL: false })
-export const UnfoldHorizontal = withRTL(Lucide.UnfoldHorizontal, {
-  flipsInRTL: false
-})
-export const UnfoldVertical = withRTL(Lucide.UnfoldVertical, {
-  flipsInRTL: false
-})
-export const Ungroup = withRTL(Lucide.Ungroup, { flipsInRTL: false })
-export const University = withRTL(Lucide.University, { flipsInRTL: false })
-export const Unlink = withRTL(Lucide.Unlink, { flipsInRTL: false })
-export const Unlink2 = withRTL(Lucide.Unlink2, { flipsInRTL: false })
-export const Unlock = withRTL(Lucide.Unlock, { flipsInRTL: false })
-export const UnlockKeyhole = withRTL(Lucide.UnlockKeyhole, {
-  flipsInRTL: false
-})
-export const Unplug = withRTL(Lucide.Unplug, { flipsInRTL: false })
-export const Upload = withRTL(Lucide.Upload, { flipsInRTL: false })
-export const UploadCloud = withRTL(Lucide.UploadCloud, { flipsInRTL: false })
-export const Usb = withRTL(Lucide.Usb, { flipsInRTL: false })
-export const User = withRTL(Lucide.User, { flipsInRTL: false })
-export const User2 = withRTL(Lucide.User2, { flipsInRTL: false })
-export const UserCheck = withRTL(Lucide.UserCheck, { flipsInRTL: false })
-export const UserCheck2 = withRTL(Lucide.UserCheck2, { flipsInRTL: false })
-export const UserCircle = withRTL(Lucide.UserCircle, { flipsInRTL: false })
-export const UserCircle2 = withRTL(Lucide.UserCircle2, { flipsInRTL: false })
-export const UserCog = withRTL(Lucide.UserCog, { flipsInRTL: false })
-export const UserCog2 = withRTL(Lucide.UserCog2, { flipsInRTL: false })
-export const UserMinus = withRTL(Lucide.UserMinus, { flipsInRTL: false })
-export const UserMinus2 = withRTL(Lucide.UserMinus2, { flipsInRTL: false })
-export const UserPen = withRTL(Lucide.UserPen, { flipsInRTL: false })
-export const UserPlus = withRTL(Lucide.UserPlus, { flipsInRTL: false })
-export const UserPlus2 = withRTL(Lucide.UserPlus2, { flipsInRTL: false })
-export const UserRound = withRTL(Lucide.UserRound, { flipsInRTL: false })
-export const UserRoundCheck = withRTL(Lucide.UserRoundCheck, {
-  flipsInRTL: false
-})
-export const UserRoundCog = withRTL(Lucide.UserRoundCog, { flipsInRTL: false })
-export const UserRoundMinus = withRTL(Lucide.UserRoundMinus, {
-  flipsInRTL: false
-})
-export const UserRoundPen = withRTL(Lucide.UserRoundPen, { flipsInRTL: false })
-export const UserRoundPlus = withRTL(Lucide.UserRoundPlus, {
-  flipsInRTL: false
-})
-export const UserRoundSearch = withRTL(Lucide.UserRoundSearch, {
-  flipsInRTL: false
-})
-export const UserRoundX = withRTL(Lucide.UserRoundX, { flipsInRTL: false })
-export const UserSearch = withRTL(Lucide.UserSearch, { flipsInRTL: false })
-export const UserSquare = withRTL(Lucide.UserSquare, { flipsInRTL: false })
-export const UserSquare2 = withRTL(Lucide.UserSquare2, { flipsInRTL: false })
-export const UserX = withRTL(Lucide.UserX, { flipsInRTL: false })
-export const UserX2 = withRTL(Lucide.UserX2, { flipsInRTL: false })
-export const Users = withRTL(Lucide.Users, { flipsInRTL: false })
-export const Users2 = withRTL(Lucide.Users2, { flipsInRTL: false })
-export const UsersRound = withRTL(Lucide.UsersRound, { flipsInRTL: false })
-export const Utensils = withRTL(Lucide.Utensils, { flipsInRTL: false })
-export const UtensilsCrossed = withRTL(Lucide.UtensilsCrossed, {
-  flipsInRTL: false
-})
-export const UtilityPole = withRTL(Lucide.UtilityPole, { flipsInRTL: false })
-export const Variable = withRTL(Lucide.Variable, { flipsInRTL: false })
-export const Vault = withRTL(Lucide.Vault, { flipsInRTL: false })
-export const Vegan = withRTL(Lucide.Vegan, { flipsInRTL: false })
-export const VenetianMask = withRTL(Lucide.VenetianMask, { flipsInRTL: false })
-export const Verified = withRTL(Lucide.Verified, { flipsInRTL: false })
-export const Vibrate = withRTL(Lucide.Vibrate, { flipsInRTL: false })
-export const VibrateOff = withRTL(Lucide.VibrateOff, { flipsInRTL: false })
-export const Video = withRTL(Lucide.Video, { flipsInRTL: false })
-export const VideoOff = withRTL(Lucide.VideoOff, { flipsInRTL: false })
-export const Videotape = withRTL(Lucide.Videotape, { flipsInRTL: false })
-export const View = withRTL(Lucide.View, { flipsInRTL: false })
-export const Voicemail = withRTL(Lucide.Voicemail, { flipsInRTL: false })
-export const Volleyball = withRTL(Lucide.Volleyball, { flipsInRTL: false })
-export const Volume = withRTL(Lucide.Volume, { flipsInRTL: false })
-export const Volume1 = withRTL(Lucide.Volume1, { flipsInRTL: false })
-export const Volume2 = withRTL(Lucide.Volume2, { flipsInRTL: false })
-export const VolumeOff = withRTL(Lucide.VolumeOff, { flipsInRTL: false })
-export const VolumeX = withRTL(Lucide.VolumeX, { flipsInRTL: false })
-export const Vote = withRTL(Lucide.Vote, { flipsInRTL: false })
-export const Wallet = withRTL(Lucide.Wallet, { flipsInRTL: false })
-export const Wallet2 = withRTL(Lucide.Wallet2, { flipsInRTL: false })
-export const WalletCards = withRTL(Lucide.WalletCards, { flipsInRTL: false })
-export const WalletMinimal = withRTL(Lucide.WalletMinimal, {
-  flipsInRTL: false
-})
-export const Wallpaper = withRTL(Lucide.Wallpaper, { flipsInRTL: false })
-export const Wand = withRTL(Lucide.Wand, { flipsInRTL: false })
-export const Wand2 = withRTL(Lucide.Wand2, { flipsInRTL: false })
-export const WandSparkles = withRTL(Lucide.WandSparkles, { flipsInRTL: false })
-export const Warehouse = withRTL(Lucide.Warehouse, { flipsInRTL: false })
-export const WashingMachine = withRTL(Lucide.WashingMachine, {
-  flipsInRTL: false
-})
-export const Watch = withRTL(Lucide.Watch, { flipsInRTL: false })
-export const Waves = withRTL(Lucide.Waves, { flipsInRTL: false })
-export const Waypoints = withRTL(Lucide.Waypoints, { flipsInRTL: false })
-export const Webcam = withRTL(Lucide.Webcam, { flipsInRTL: false })
-export const Webhook = withRTL(Lucide.Webhook, { flipsInRTL: false })
-export const WebhookOff = withRTL(Lucide.WebhookOff, { flipsInRTL: false })
-export const Weight = withRTL(Lucide.Weight, { flipsInRTL: false })
-export const Wheat = withRTL(Lucide.Wheat, { flipsInRTL: false })
-export const WheatOff = withRTL(Lucide.WheatOff, { flipsInRTL: false })
-export const WholeWord = withRTL(Lucide.WholeWord, { flipsInRTL: false })
-export const Wifi = withRTL(Lucide.Wifi, { flipsInRTL: false })
-export const WifiHigh = withRTL(Lucide.WifiHigh, { flipsInRTL: false })
-export const WifiLow = withRTL(Lucide.WifiLow, { flipsInRTL: false })
-export const WifiOff = withRTL(Lucide.WifiOff, { flipsInRTL: false })
-export const WifiZero = withRTL(Lucide.WifiZero, { flipsInRTL: false })
-export const Wind = withRTL(Lucide.Wind, { flipsInRTL: false })
-export const WindArrowDown = withRTL(Lucide.WindArrowDown, {
-  flipsInRTL: false
-})
-export const Wine = withRTL(Lucide.Wine, { flipsInRTL: false })
-export const WineOff = withRTL(Lucide.WineOff, { flipsInRTL: false })
-export const Workflow = withRTL(Lucide.Workflow, { flipsInRTL: false })
-export const Worm = withRTL(Lucide.Worm, { flipsInRTL: false })
-export const WrapText = withRTL(Lucide.WrapText, { flipsInRTL: false })
-export const Wrench = withRTL(Lucide.Wrench, { flipsInRTL: false })
-export const X = withRTL(Lucide.X, { flipsInRTL: false })
-export const XCircle = withRTL(Lucide.XCircle, { flipsInRTL: false })
-export const XOctagon = withRTL(Lucide.XOctagon, { flipsInRTL: false })
-export const XSquare = withRTL(Lucide.XSquare, { flipsInRTL: false })
-export const Youtube = withRTL(Lucide.Youtube, { flipsInRTL: false })
-export const Zap = withRTL(Lucide.Zap, { flipsInRTL: false })
-export const ZapOff = withRTL(Lucide.ZapOff, { flipsInRTL: false })
-export const ZoomIn = withRTL(Lucide.ZoomIn, { flipsInRTL: false })
-export const ZoomOut = withRTL(Lucide.ZoomOut, { flipsInRTL: false })
+export const Barcode = wrapLucideIcon(Lucide.Barcode)
+export const Baseline = wrapLucideIcon(Lucide.Baseline)
+export const Bath = wrapLucideIcon(Lucide.Bath)
+export const Battery = wrapLucideIcon(Lucide.Battery)
+export const BatteryCharging = wrapLucideIcon(Lucide.BatteryCharging)
+export const BatteryFull = wrapLucideIcon(Lucide.BatteryFull)
+export const BatteryLow = wrapLucideIcon(Lucide.BatteryLow)
+export const BatteryMedium = wrapLucideIcon(Lucide.BatteryMedium)
+export const BatteryWarning = wrapLucideIcon(Lucide.BatteryWarning)
+export const Beaker = wrapLucideIcon(Lucide.Beaker)
+export const Bean = wrapLucideIcon(Lucide.Bean)
+export const BeanOff = wrapLucideIcon(Lucide.BeanOff)
+export const Bed = wrapLucideIcon(Lucide.Bed)
+export const BedDouble = wrapLucideIcon(Lucide.BedDouble)
+export const BedSingle = wrapLucideIcon(Lucide.BedSingle)
+export const Beef = wrapLucideIcon(Lucide.Beef)
+export const Beer = wrapLucideIcon(Lucide.Beer)
+export const BeerOff = wrapLucideIcon(Lucide.BeerOff)
+export const Bell = wrapLucideIcon(Lucide.Bell)
+export const BellDot = wrapLucideIcon(Lucide.BellDot)
+export const BellElectric = wrapLucideIcon(Lucide.BellElectric)
+export const BellMinus = wrapLucideIcon(Lucide.BellMinus)
+export const BellOff = wrapLucideIcon(Lucide.BellOff)
+export const BellPlus = wrapLucideIcon(Lucide.BellPlus)
+export const BellRing = wrapLucideIcon(Lucide.BellRing)
+export const BetweenHorizonalEnd = wrapLucideIcon(Lucide.BetweenHorizonalEnd)
+export const BetweenHorizonalStart = wrapLucideIcon(
+  Lucide.BetweenHorizonalStart
+)
+export const BetweenHorizontalEnd = wrapLucideIcon(Lucide.BetweenHorizontalEnd)
+export const BetweenHorizontalStart = wrapLucideIcon(
+  Lucide.BetweenHorizontalStart
+)
+export const BetweenVerticalEnd = wrapLucideIcon(Lucide.BetweenVerticalEnd)
+export const BetweenVerticalStart = wrapLucideIcon(Lucide.BetweenVerticalStart)
+export const BicepsFlexed = wrapLucideIcon(Lucide.BicepsFlexed)
+export const Bike = wrapLucideIcon(Lucide.Bike)
+export const Binary = wrapLucideIcon(Lucide.Binary)
+export const Binoculars = wrapLucideIcon(Lucide.Binoculars)
+export const Biohazard = wrapLucideIcon(Lucide.Biohazard)
+export const Bird = wrapLucideIcon(Lucide.Bird)
+export const Bitcoin = wrapLucideIcon(Lucide.Bitcoin)
+export const Blend = wrapLucideIcon(Lucide.Blend)
+export const Blinds = wrapLucideIcon(Lucide.Blinds)
+export const Blocks = wrapLucideIcon(Lucide.Blocks)
+export const Bluetooth = wrapLucideIcon(Lucide.Bluetooth)
+export const BluetoothConnected = wrapLucideIcon(Lucide.BluetoothConnected)
+export const BluetoothOff = wrapLucideIcon(Lucide.BluetoothOff)
+export const BluetoothSearching = wrapLucideIcon(Lucide.BluetoothSearching)
+export const Bold = wrapLucideIcon(Lucide.Bold)
+export const Bolt = wrapLucideIcon(Lucide.Bolt)
+export const Bomb = wrapLucideIcon(Lucide.Bomb)
+export const Bone = wrapLucideIcon(Lucide.Bone)
+export const Book = wrapLucideIcon(Lucide.Book)
+export const BookA = wrapLucideIcon(Lucide.BookA)
+export const BookAudio = wrapLucideIcon(Lucide.BookAudio)
+export const BookCheck = wrapLucideIcon(Lucide.BookCheck)
+export const BookCopy = wrapLucideIcon(Lucide.BookCopy)
+export const BookDashed = wrapLucideIcon(Lucide.BookDashed)
+export const BookDown = wrapLucideIcon(Lucide.BookDown)
+export const BookHeadphones = wrapLucideIcon(Lucide.BookHeadphones)
+export const BookHeart = wrapLucideIcon(Lucide.BookHeart)
+export const BookImage = wrapLucideIcon(Lucide.BookImage)
+export const BookKey = wrapLucideIcon(Lucide.BookKey)
+export const BookLock = wrapLucideIcon(Lucide.BookLock)
+export const BookMarked = wrapLucideIcon(Lucide.BookMarked)
+export const BookMinus = wrapLucideIcon(Lucide.BookMinus)
+export const BookOpen = wrapLucideIcon(Lucide.BookOpen)
+export const BookOpenCheck = wrapLucideIcon(Lucide.BookOpenCheck)
+export const BookOpenText = wrapLucideIcon(Lucide.BookOpenText)
+export const BookPlus = wrapLucideIcon(Lucide.BookPlus)
+export const BookTemplate = wrapLucideIcon(Lucide.BookTemplate)
+export const BookText = wrapLucideIcon(Lucide.BookText)
+export const BookType = wrapLucideIcon(Lucide.BookType)
+export const BookUp = wrapLucideIcon(Lucide.BookUp)
+export const BookUp2 = wrapLucideIcon(Lucide.BookUp2)
+export const BookUser = wrapLucideIcon(Lucide.BookUser)
+export const BookX = wrapLucideIcon(Lucide.BookX)
+export const Bookmark = wrapLucideIcon(Lucide.Bookmark)
+export const BookmarkCheck = wrapLucideIcon(Lucide.BookmarkCheck)
+export const BookmarkMinus = wrapLucideIcon(Lucide.BookmarkMinus)
+export const BookmarkPlus = wrapLucideIcon(Lucide.BookmarkPlus)
+export const BookmarkX = wrapLucideIcon(Lucide.BookmarkX)
+export const BoomBox = wrapLucideIcon(Lucide.BoomBox)
+export const Bot = wrapLucideIcon(Lucide.Bot)
+export const BotMessageSquare = wrapLucideIcon(Lucide.BotMessageSquare)
+export const BotOff = wrapLucideIcon(Lucide.BotOff)
+export const Box = wrapLucideIcon(Lucide.Box)
+export const BoxSelect = wrapLucideIcon(Lucide.BoxSelect)
+export const Boxes = wrapLucideIcon(Lucide.Boxes)
+export const Braces = wrapLucideIcon(Lucide.Braces)
+export const Brackets = wrapLucideIcon(Lucide.Brackets)
+export const Brain = wrapLucideIcon(Lucide.Brain)
+export const BrainCircuit = wrapLucideIcon(Lucide.BrainCircuit)
+export const BrainCog = wrapLucideIcon(Lucide.BrainCog)
+export const BrickWall = wrapLucideIcon(Lucide.BrickWall)
+export const Briefcase = wrapLucideIcon(Lucide.Briefcase)
+export const BriefcaseBusiness = wrapLucideIcon(Lucide.BriefcaseBusiness)
+export const BriefcaseConveyorBelt = wrapLucideIcon(
+  Lucide.BriefcaseConveyorBelt
+)
+export const BriefcaseMedical = wrapLucideIcon(Lucide.BriefcaseMedical)
+export const BringToFront = wrapLucideIcon(Lucide.BringToFront)
+export const Brush = wrapLucideIcon(Lucide.Brush)
+export const Bug = wrapLucideIcon(Lucide.Bug)
+export const BugOff = wrapLucideIcon(Lucide.BugOff)
+export const BugPlay = wrapLucideIcon(Lucide.BugPlay)
+export const Building = wrapLucideIcon(Lucide.Building)
+export const Building2 = wrapLucideIcon(Lucide.Building2)
+export const Bus = wrapLucideIcon(Lucide.Bus)
+export const BusFront = wrapLucideIcon(Lucide.BusFront)
+export const Cable = wrapLucideIcon(Lucide.Cable)
+export const CableCar = wrapLucideIcon(Lucide.CableCar)
+export const Cake = wrapLucideIcon(Lucide.Cake)
+export const CakeSlice = wrapLucideIcon(Lucide.CakeSlice)
+export const Calculator = wrapLucideIcon(Lucide.Calculator)
+export const Calendar = wrapLucideIcon(Lucide.Calendar)
+export const Calendar1 = wrapLucideIcon(Lucide.Calendar1)
+export const CalendarArrowDown = wrapLucideIcon(Lucide.CalendarArrowDown)
+export const CalendarArrowUp = wrapLucideIcon(Lucide.CalendarArrowUp)
+export const CalendarCheck = wrapLucideIcon(Lucide.CalendarCheck)
+export const CalendarCheck2 = wrapLucideIcon(Lucide.CalendarCheck2)
+export const CalendarClock = wrapLucideIcon(Lucide.CalendarClock)
+export const CalendarCog = wrapLucideIcon(Lucide.CalendarCog)
+export const CalendarDays = wrapLucideIcon(Lucide.CalendarDays)
+export const CalendarFold = wrapLucideIcon(Lucide.CalendarFold)
+export const CalendarHeart = wrapLucideIcon(Lucide.CalendarHeart)
+export const CalendarMinus = wrapLucideIcon(Lucide.CalendarMinus)
+export const CalendarMinus2 = wrapLucideIcon(Lucide.CalendarMinus2)
+export const CalendarOff = wrapLucideIcon(Lucide.CalendarOff)
+export const CalendarPlus = wrapLucideIcon(Lucide.CalendarPlus)
+export const CalendarPlus2 = wrapLucideIcon(Lucide.CalendarPlus2)
+export const CalendarRange = wrapLucideIcon(Lucide.CalendarRange)
+export const CalendarSearch = wrapLucideIcon(Lucide.CalendarSearch)
+export const CalendarX = wrapLucideIcon(Lucide.CalendarX)
+export const CalendarX2 = wrapLucideIcon(Lucide.CalendarX2)
+export const Camera = wrapLucideIcon(Lucide.Camera)
+export const CameraOff = wrapLucideIcon(Lucide.CameraOff)
+export const CandlestickChart = wrapLucideIcon(Lucide.CandlestickChart)
+export const Candy = wrapLucideIcon(Lucide.Candy)
+export const CandyCane = wrapLucideIcon(Lucide.CandyCane)
+export const CandyOff = wrapLucideIcon(Lucide.CandyOff)
+export const Cannabis = wrapLucideIcon(Lucide.Cannabis)
+export const Captions = wrapLucideIcon(Lucide.Captions)
+export const CaptionsOff = wrapLucideIcon(Lucide.CaptionsOff)
+export const Car = wrapLucideIcon(Lucide.Car)
+export const CarFront = wrapLucideIcon(Lucide.CarFront)
+export const CarTaxiFront = wrapLucideIcon(Lucide.CarTaxiFront)
+export const Caravan = wrapLucideIcon(Lucide.Caravan)
+export const Carrot = wrapLucideIcon(Lucide.Carrot)
+export const CaseLower = wrapLucideIcon(Lucide.CaseLower)
+export const CaseSensitive = wrapLucideIcon(Lucide.CaseSensitive)
+export const CaseUpper = wrapLucideIcon(Lucide.CaseUpper)
+export const CassetteTape = wrapLucideIcon(Lucide.CassetteTape)
+export const Cast = wrapLucideIcon(Lucide.Cast)
+export const Castle = wrapLucideIcon(Lucide.Castle)
+export const Cat = wrapLucideIcon(Lucide.Cat)
+export const Cctv = wrapLucideIcon(Lucide.Cctv)
+export const ChartArea = wrapLucideIcon(Lucide.ChartArea)
+export const ChartBar = wrapLucideIcon(Lucide.ChartBar)
+export const ChartBarBig = wrapLucideIcon(Lucide.ChartBarBig)
+export const ChartBarDecreasing = wrapLucideIcon(Lucide.ChartBarDecreasing)
+export const ChartBarIncreasing = wrapLucideIcon(Lucide.ChartBarIncreasing)
+export const ChartBarStacked = wrapLucideIcon(Lucide.ChartBarStacked)
+export const ChartCandlestick = wrapLucideIcon(Lucide.ChartCandlestick)
+export const ChartColumn = wrapLucideIcon(Lucide.ChartColumn)
+export const ChartColumnBig = wrapLucideIcon(Lucide.ChartColumnBig)
+export const ChartColumnDecreasing = wrapLucideIcon(
+  Lucide.ChartColumnDecreasing
+)
+export const ChartColumnIncreasing = wrapLucideIcon(
+  Lucide.ChartColumnIncreasing
+)
+export const ChartColumnStacked = wrapLucideIcon(Lucide.ChartColumnStacked)
+export const ChartGantt = wrapLucideIcon(Lucide.ChartGantt)
+export const ChartLine = wrapLucideIcon(Lucide.ChartLine)
+export const ChartNetwork = wrapLucideIcon(Lucide.ChartNetwork)
+export const ChartNoAxesColumn = wrapLucideIcon(Lucide.ChartNoAxesColumn)
+export const ChartNoAxesColumnDecreasing = wrapLucideIcon(
+  Lucide.ChartNoAxesColumnDecreasing
+)
+export const ChartNoAxesColumnIncreasing = wrapLucideIcon(
+  Lucide.ChartNoAxesColumnIncreasing
+)
+export const ChartNoAxesCombined = wrapLucideIcon(Lucide.ChartNoAxesCombined)
+export const ChartNoAxesGantt = wrapLucideIcon(Lucide.ChartNoAxesGantt)
+export const ChartPie = wrapLucideIcon(Lucide.ChartPie)
+export const ChartScatter = wrapLucideIcon(Lucide.ChartScatter)
+export const ChartSpline = wrapLucideIcon(Lucide.ChartSpline)
+export const Check = wrapLucideIcon(Lucide.Check)
+export const CheckCheck = wrapLucideIcon(Lucide.CheckCheck)
+export const CheckCircle = wrapLucideIcon(Lucide.CheckCircle)
+export const CheckCircle2 = wrapLucideIcon(Lucide.CheckCircle2)
+export const CheckSquare = wrapLucideIcon(Lucide.CheckSquare)
+export const CheckSquare2 = wrapLucideIcon(Lucide.CheckSquare2)
+export const ChefHat = wrapLucideIcon(Lucide.ChefHat)
+export const Cherry = wrapLucideIcon(Lucide.Cherry)
+export const ChevronDown = wrapLucideIcon(Lucide.ChevronDown)
+export const ChevronDownCircle = wrapLucideIcon(Lucide.ChevronDownCircle)
+export const ChevronDownSquare = wrapLucideIcon(Lucide.ChevronDownSquare)
+export const ChevronFirst = wrapLucideIcon(Lucide.ChevronFirst)
+export const ChevronLast = wrapLucideIcon(Lucide.ChevronLast)
+export const ChevronLeft = wrapLucideIcon(Lucide.ChevronLeft)
+export const ChevronLeftCircle = wrapLucideIcon(Lucide.ChevronLeftCircle)
+export const ChevronLeftSquare = wrapLucideIcon(Lucide.ChevronLeftSquare)
+export const ChevronRight = wrapLucideIcon(Lucide.ChevronRight)
+export const ChevronRightCircle = wrapLucideIcon(Lucide.ChevronRightCircle)
+export const ChevronRightSquare = wrapLucideIcon(Lucide.ChevronRightSquare)
+export const ChevronUp = wrapLucideIcon(Lucide.ChevronUp)
+export const ChevronUpCircle = wrapLucideIcon(Lucide.ChevronUpCircle)
+export const ChevronUpSquare = wrapLucideIcon(Lucide.ChevronUpSquare)
+export const ChevronsDown = wrapLucideIcon(Lucide.ChevronsDown)
+export const ChevronsDownUp = wrapLucideIcon(Lucide.ChevronsDownUp)
+export const ChevronsLeft = wrapLucideIcon(Lucide.ChevronsLeft)
+export const ChevronsLeftRight = wrapLucideIcon(Lucide.ChevronsLeftRight)
+export const ChevronsLeftRightEllipsis = wrapLucideIcon(
+  Lucide.ChevronsLeftRightEllipsis
+)
+export const ChevronsRight = wrapLucideIcon(Lucide.ChevronsRight)
+export const ChevronsRightLeft = wrapLucideIcon(Lucide.ChevronsRightLeft)
+export const ChevronsUp = wrapLucideIcon(Lucide.ChevronsUp)
+export const ChevronsUpDown = wrapLucideIcon(Lucide.ChevronsUpDown)
+export const Chrome = wrapLucideIcon(Lucide.Chrome)
+export const Church = wrapLucideIcon(Lucide.Church)
+export const Cigarette = wrapLucideIcon(Lucide.Cigarette)
+export const CigaretteOff = wrapLucideIcon(Lucide.CigaretteOff)
+export const Circle = wrapLucideIcon(Lucide.Circle)
+export const CircleAlert = wrapLucideIcon(Lucide.CircleAlert)
+export const CircleArrowDown = wrapLucideIcon(Lucide.CircleArrowDown)
+export const CircleArrowLeft = wrapLucideIcon(Lucide.CircleArrowLeft)
+export const CircleArrowOutDownLeft = wrapLucideIcon(
+  Lucide.CircleArrowOutDownLeft
+)
+export const CircleArrowOutDownRight = wrapLucideIcon(
+  Lucide.CircleArrowOutDownRight
+)
+export const CircleArrowOutUpLeft = wrapLucideIcon(Lucide.CircleArrowOutUpLeft)
+export const CircleArrowOutUpRight = wrapLucideIcon(
+  Lucide.CircleArrowOutUpRight
+)
+export const CircleArrowRight = wrapLucideIcon(Lucide.CircleArrowRight)
+export const CircleArrowUp = wrapLucideIcon(Lucide.CircleArrowUp)
+export const CircleCheck = wrapLucideIcon(Lucide.CircleCheck)
+export const CircleCheckBig = wrapLucideIcon(Lucide.CircleCheckBig)
+export const CircleChevronDown = wrapLucideIcon(Lucide.CircleChevronDown)
+export const CircleChevronLeft = wrapLucideIcon(Lucide.CircleChevronLeft)
+export const CircleChevronRight = wrapLucideIcon(Lucide.CircleChevronRight)
+export const CircleChevronUp = wrapLucideIcon(Lucide.CircleChevronUp)
+export const CircleDashed = wrapLucideIcon(Lucide.CircleDashed)
+export const CircleDivide = wrapLucideIcon(Lucide.CircleDivide)
+export const CircleDollarSign = wrapLucideIcon(Lucide.CircleDollarSign)
+export const CircleDot = wrapLucideIcon(Lucide.CircleDot)
+export const CircleDotDashed = wrapLucideIcon(Lucide.CircleDotDashed)
+export const CircleEllipsis = wrapLucideIcon(Lucide.CircleEllipsis)
+export const CircleEqual = wrapLucideIcon(Lucide.CircleEqual)
+export const CircleFadingArrowUp = wrapLucideIcon(Lucide.CircleFadingArrowUp)
+export const CircleFadingPlus = wrapLucideIcon(Lucide.CircleFadingPlus)
+export const CircleGauge = wrapLucideIcon(Lucide.CircleGauge)
+export const CircleHelp = wrapLucideIcon(Lucide.CircleHelp)
+export const CircleMinus = wrapLucideIcon(Lucide.CircleMinus)
+export const CircleOff = wrapLucideIcon(Lucide.CircleOff)
+export const CircleParking = wrapLucideIcon(Lucide.CircleParking)
+export const CircleParkingOff = wrapLucideIcon(Lucide.CircleParkingOff)
+export const CirclePause = wrapLucideIcon(Lucide.CirclePause)
+export const CirclePercent = wrapLucideIcon(Lucide.CirclePercent)
+export const CirclePlay = wrapLucideIcon(Lucide.CirclePlay)
+export const CirclePlus = wrapLucideIcon(Lucide.CirclePlus)
+export const CirclePower = wrapLucideIcon(Lucide.CirclePower)
+export const CircleSlash = wrapLucideIcon(Lucide.CircleSlash)
+export const CircleSlash2 = wrapLucideIcon(Lucide.CircleSlash2)
+export const CircleSlashed = wrapLucideIcon(Lucide.CircleSlashed)
+export const CircleStop = wrapLucideIcon(Lucide.CircleStop)
+export const CircleUser = wrapLucideIcon(Lucide.CircleUser)
+export const CircleUserRound = wrapLucideIcon(Lucide.CircleUserRound)
+export const CircleX = wrapLucideIcon(Lucide.CircleX)
+export const CircuitBoard = wrapLucideIcon(Lucide.CircuitBoard)
+export const Citrus = wrapLucideIcon(Lucide.Citrus)
+export const Clapperboard = wrapLucideIcon(Lucide.Clapperboard)
+export const Clipboard = wrapLucideIcon(Lucide.Clipboard)
+export const ClipboardCheck = wrapLucideIcon(Lucide.ClipboardCheck)
+export const ClipboardCopy = wrapLucideIcon(Lucide.ClipboardCopy)
+export const ClipboardEdit = wrapLucideIcon(Lucide.ClipboardEdit)
+export const ClipboardList = wrapLucideIcon(Lucide.ClipboardList)
+export const ClipboardMinus = wrapLucideIcon(Lucide.ClipboardMinus)
+export const ClipboardPaste = wrapLucideIcon(Lucide.ClipboardPaste)
+export const ClipboardPen = wrapLucideIcon(Lucide.ClipboardPen)
+export const ClipboardPenLine = wrapLucideIcon(Lucide.ClipboardPenLine)
+export const ClipboardPlus = wrapLucideIcon(Lucide.ClipboardPlus)
+export const ClipboardSignature = wrapLucideIcon(Lucide.ClipboardSignature)
+export const ClipboardType = wrapLucideIcon(Lucide.ClipboardType)
+export const ClipboardX = wrapLucideIcon(Lucide.ClipboardX)
+export const Clock = wrapLucideIcon(Lucide.Clock)
+export const Clock1 = wrapLucideIcon(Lucide.Clock1)
+export const Clock10 = wrapLucideIcon(Lucide.Clock10)
+export const Clock11 = wrapLucideIcon(Lucide.Clock11)
+export const Clock12 = wrapLucideIcon(Lucide.Clock12)
+export const Clock2 = wrapLucideIcon(Lucide.Clock2)
+export const Clock3 = wrapLucideIcon(Lucide.Clock3)
+export const Clock4 = wrapLucideIcon(Lucide.Clock4)
+export const Clock5 = wrapLucideIcon(Lucide.Clock5)
+export const Clock6 = wrapLucideIcon(Lucide.Clock6)
+export const Clock7 = wrapLucideIcon(Lucide.Clock7)
+export const Clock8 = wrapLucideIcon(Lucide.Clock8)
+export const Clock9 = wrapLucideIcon(Lucide.Clock9)
+export const ClockAlert = wrapLucideIcon(Lucide.ClockAlert)
+export const ClockArrowDown = wrapLucideIcon(Lucide.ClockArrowDown)
+export const ClockArrowUp = wrapLucideIcon(Lucide.ClockArrowUp)
+export const Cloud = wrapLucideIcon(Lucide.Cloud)
+export const CloudAlert = wrapLucideIcon(Lucide.CloudAlert)
+export const CloudCog = wrapLucideIcon(Lucide.CloudCog)
+export const CloudDownload = wrapLucideIcon(Lucide.CloudDownload)
+export const CloudDrizzle = wrapLucideIcon(Lucide.CloudDrizzle)
+export const CloudFog = wrapLucideIcon(Lucide.CloudFog)
+export const CloudHail = wrapLucideIcon(Lucide.CloudHail)
+export const CloudLightning = wrapLucideIcon(Lucide.CloudLightning)
+export const CloudMoon = wrapLucideIcon(Lucide.CloudMoon)
+export const CloudMoonRain = wrapLucideIcon(Lucide.CloudMoonRain)
+export const CloudOff = wrapLucideIcon(Lucide.CloudOff)
+export const CloudRain = wrapLucideIcon(Lucide.CloudRain)
+export const CloudRainWind = wrapLucideIcon(Lucide.CloudRainWind)
+export const CloudSnow = wrapLucideIcon(Lucide.CloudSnow)
+export const CloudSun = wrapLucideIcon(Lucide.CloudSun)
+export const CloudSunRain = wrapLucideIcon(Lucide.CloudSunRain)
+export const CloudUpload = wrapLucideIcon(Lucide.CloudUpload)
+export const Cloudy = wrapLucideIcon(Lucide.Cloudy)
+export const Clover = wrapLucideIcon(Lucide.Clover)
+export const Club = wrapLucideIcon(Lucide.Club)
+export const Code = wrapLucideIcon(Lucide.Code)
+export const Code2 = wrapLucideIcon(Lucide.Code2)
+export const CodeSquare = wrapLucideIcon(Lucide.CodeSquare)
+export const CodeXml = wrapLucideIcon(Lucide.CodeXml)
+export const Codepen = wrapLucideIcon(Lucide.Codepen)
+export const Codesandbox = wrapLucideIcon(Lucide.Codesandbox)
+export const Coffee = wrapLucideIcon(Lucide.Coffee)
+export const Cog = wrapLucideIcon(Lucide.Cog)
+export const Coins = wrapLucideIcon(Lucide.Coins)
+export const Columns = wrapLucideIcon(Lucide.Columns)
+export const Columns2 = wrapLucideIcon(Lucide.Columns2)
+export const Columns3 = wrapLucideIcon(Lucide.Columns3)
+export const Columns4 = wrapLucideIcon(Lucide.Columns4)
+export const Combine = wrapLucideIcon(Lucide.Combine)
+export const Command = wrapLucideIcon(Lucide.Command)
+export const Compass = wrapLucideIcon(Lucide.Compass)
+export const Component = wrapLucideIcon(Lucide.Component)
+export const Computer = wrapLucideIcon(Lucide.Computer)
+export const ConciergeBell = wrapLucideIcon(Lucide.ConciergeBell)
+export const Cone = wrapLucideIcon(Lucide.Cone)
+export const Construction = wrapLucideIcon(Lucide.Construction)
+export const Contact = wrapLucideIcon(Lucide.Contact)
+export const Contact2 = wrapLucideIcon(Lucide.Contact2)
+export const ContactRound = wrapLucideIcon(Lucide.ContactRound)
+export const Container = wrapLucideIcon(Lucide.Container)
+export const Contrast = wrapLucideIcon(Lucide.Contrast)
+export const Cookie = wrapLucideIcon(Lucide.Cookie)
+export const CookingPot = wrapLucideIcon(Lucide.CookingPot)
+export const Copy = wrapLucideIcon(Lucide.Copy)
+export const CopyCheck = wrapLucideIcon(Lucide.CopyCheck)
+export const CopyMinus = wrapLucideIcon(Lucide.CopyMinus)
+export const CopyPlus = wrapLucideIcon(Lucide.CopyPlus)
+export const CopySlash = wrapLucideIcon(Lucide.CopySlash)
+export const CopyX = wrapLucideIcon(Lucide.CopyX)
+export const Copyleft = wrapLucideIcon(Lucide.Copyleft)
+export const Copyright = wrapLucideIcon(Lucide.Copyright)
+export const CornerDownLeft = wrapLucideIcon(Lucide.CornerDownLeft)
+export const CornerDownRight = wrapLucideIcon(Lucide.CornerDownRight)
+export const CornerLeftDown = wrapLucideIcon(Lucide.CornerLeftDown)
+export const CornerLeftUp = wrapLucideIcon(Lucide.CornerLeftUp)
+export const CornerRightDown = wrapLucideIcon(Lucide.CornerRightDown)
+export const CornerRightUp = wrapLucideIcon(Lucide.CornerRightUp)
+export const CornerUpLeft = wrapLucideIcon(Lucide.CornerUpLeft)
+export const CornerUpRight = wrapLucideIcon(Lucide.CornerUpRight)
+export const Cpu = wrapLucideIcon(Lucide.Cpu)
+export const CreativeCommons = wrapLucideIcon(Lucide.CreativeCommons)
+export const CreditCard = wrapLucideIcon(Lucide.CreditCard)
+export const Croissant = wrapLucideIcon(Lucide.Croissant)
+export const Crop = wrapLucideIcon(Lucide.Crop)
+export const Cross = wrapLucideIcon(Lucide.Cross)
+export const Crosshair = wrapLucideIcon(Lucide.Crosshair)
+export const Crown = wrapLucideIcon(Lucide.Crown)
+export const Cuboid = wrapLucideIcon(Lucide.Cuboid)
+export const CupSoda = wrapLucideIcon(Lucide.CupSoda)
+export const CurlyBraces = wrapLucideIcon(Lucide.CurlyBraces)
+export const Currency = wrapLucideIcon(Lucide.Currency)
+export const Cylinder = wrapLucideIcon(Lucide.Cylinder)
+export const Dam = wrapLucideIcon(Lucide.Dam)
+export const Database = wrapLucideIcon(Lucide.Database)
+export const DatabaseBackup = wrapLucideIcon(Lucide.DatabaseBackup)
+export const DatabaseZap = wrapLucideIcon(Lucide.DatabaseZap)
+export const Delete = wrapLucideIcon(Lucide.Delete)
+export const Dessert = wrapLucideIcon(Lucide.Dessert)
+export const Diameter = wrapLucideIcon(Lucide.Diameter)
+export const Diamond = wrapLucideIcon(Lucide.Diamond)
+export const DiamondMinus = wrapLucideIcon(Lucide.DiamondMinus)
+export const DiamondPercent = wrapLucideIcon(Lucide.DiamondPercent)
+export const DiamondPlus = wrapLucideIcon(Lucide.DiamondPlus)
+export const Dice1 = wrapLucideIcon(Lucide.Dice1)
+export const Dice2 = wrapLucideIcon(Lucide.Dice2)
+export const Dice3 = wrapLucideIcon(Lucide.Dice3)
+export const Dice4 = wrapLucideIcon(Lucide.Dice4)
+export const Dice5 = wrapLucideIcon(Lucide.Dice5)
+export const Dice6 = wrapLucideIcon(Lucide.Dice6)
+export const Dices = wrapLucideIcon(Lucide.Dices)
+export const Diff = wrapLucideIcon(Lucide.Diff)
+export const Disc = wrapLucideIcon(Lucide.Disc)
+export const Disc2 = wrapLucideIcon(Lucide.Disc2)
+export const Disc3 = wrapLucideIcon(Lucide.Disc3)
+export const DiscAlbum = wrapLucideIcon(Lucide.DiscAlbum)
+export const Divide = wrapLucideIcon(Lucide.Divide)
+export const DivideCircle = wrapLucideIcon(Lucide.DivideCircle)
+export const DivideSquare = wrapLucideIcon(Lucide.DivideSquare)
+export const Dna = wrapLucideIcon(Lucide.Dna)
+export const DnaOff = wrapLucideIcon(Lucide.DnaOff)
+export const Dock = wrapLucideIcon(Lucide.Dock)
+export const Dog = wrapLucideIcon(Lucide.Dog)
+export const DollarSign = wrapLucideIcon(Lucide.DollarSign)
+export const Donut = wrapLucideIcon(Lucide.Donut)
+export const DoorClosed = wrapLucideIcon(Lucide.DoorClosed)
+export const DoorOpen = wrapLucideIcon(Lucide.DoorOpen)
+export const Dot = wrapLucideIcon(Lucide.Dot)
+export const DotSquare = wrapLucideIcon(Lucide.DotSquare)
+export const Download = wrapLucideIcon(Lucide.Download)
+export const DownloadCloud = wrapLucideIcon(Lucide.DownloadCloud)
+export const DraftingCompass = wrapLucideIcon(Lucide.DraftingCompass)
+export const Drama = wrapLucideIcon(Lucide.Drama)
+export const Dribbble = wrapLucideIcon(Lucide.Dribbble)
+export const Drill = wrapLucideIcon(Lucide.Drill)
+export const Droplet = wrapLucideIcon(Lucide.Droplet)
+export const Droplets = wrapLucideIcon(Lucide.Droplets)
+export const Drum = wrapLucideIcon(Lucide.Drum)
+export const Drumstick = wrapLucideIcon(Lucide.Drumstick)
+export const Dumbbell = wrapLucideIcon(Lucide.Dumbbell)
+export const Ear = wrapLucideIcon(Lucide.Ear)
+export const EarOff = wrapLucideIcon(Lucide.EarOff)
+export const Earth = wrapLucideIcon(Lucide.Earth)
+export const EarthLock = wrapLucideIcon(Lucide.EarthLock)
+export const Eclipse = wrapLucideIcon(Lucide.Eclipse)
+export const Edit = wrapLucideIcon(Lucide.Edit)
+export const Edit2 = wrapLucideIcon(Lucide.Edit2)
+export const Edit3 = wrapLucideIcon(Lucide.Edit3)
+export const Egg = wrapLucideIcon(Lucide.Egg)
+export const EggFried = wrapLucideIcon(Lucide.EggFried)
+export const EggOff = wrapLucideIcon(Lucide.EggOff)
+export const Ellipsis = wrapLucideIcon(Lucide.Ellipsis)
+export const EllipsisVertical = wrapLucideIcon(Lucide.EllipsisVertical)
+export const Equal = wrapLucideIcon(Lucide.Equal)
+export const EqualApproximately = wrapLucideIcon(Lucide.EqualApproximately)
+export const EqualNot = wrapLucideIcon(Lucide.EqualNot)
+export const EqualSquare = wrapLucideIcon(Lucide.EqualSquare)
+export const Eraser = wrapLucideIcon(Lucide.Eraser)
+export const EthernetPort = wrapLucideIcon(Lucide.EthernetPort)
+export const Euro = wrapLucideIcon(Lucide.Euro)
+export const Expand = wrapLucideIcon(Lucide.Expand)
+export const ExternalLink = wrapLucideIcon(Lucide.ExternalLink)
+export const Eye = wrapLucideIcon(Lucide.Eye)
+export const EyeClosed = wrapLucideIcon(Lucide.EyeClosed)
+export const EyeOff = wrapLucideIcon(Lucide.EyeOff)
+export const Facebook = wrapLucideIcon(Lucide.Facebook)
+export const Factory = wrapLucideIcon(Lucide.Factory)
+export const Fan = wrapLucideIcon(Lucide.Fan)
+export const FastForward = wrapLucideIcon(Lucide.FastForward)
+export const Feather = wrapLucideIcon(Lucide.Feather)
+export const Fence = wrapLucideIcon(Lucide.Fence)
+export const FerrisWheel = wrapLucideIcon(Lucide.FerrisWheel)
+export const Figma = wrapLucideIcon(Lucide.Figma)
+export const File = wrapLucideIcon(Lucide.File)
+export const FileArchive = wrapLucideIcon(Lucide.FileArchive)
+export const FileAudio = wrapLucideIcon(Lucide.FileAudio)
+export const FileAudio2 = wrapLucideIcon(Lucide.FileAudio2)
+export const FileAxis3D = wrapLucideIcon(Lucide.FileAxis3D)
+export const FileAxis3d = wrapLucideIcon(Lucide.FileAxis3d)
+export const FileBadge = wrapLucideIcon(Lucide.FileBadge)
+export const FileBadge2 = wrapLucideIcon(Lucide.FileBadge2)
+export const FileBarChart = wrapLucideIcon(Lucide.FileBarChart)
+export const FileBarChart2 = wrapLucideIcon(Lucide.FileBarChart2)
+export const FileBox = wrapLucideIcon(Lucide.FileBox)
+export const FileChartColumn = wrapLucideIcon(Lucide.FileChartColumn)
+export const FileChartColumnIncreasing = wrapLucideIcon(
+  Lucide.FileChartColumnIncreasing
+)
+export const FileChartLine = wrapLucideIcon(Lucide.FileChartLine)
+export const FileChartPie = wrapLucideIcon(Lucide.FileChartPie)
+export const FileCheck = wrapLucideIcon(Lucide.FileCheck)
+export const FileCheck2 = wrapLucideIcon(Lucide.FileCheck2)
+export const FileClock = wrapLucideIcon(Lucide.FileClock)
+export const FileCode = wrapLucideIcon(Lucide.FileCode)
+export const FileCode2 = wrapLucideIcon(Lucide.FileCode2)
+export const FileCog = wrapLucideIcon(Lucide.FileCog)
+export const FileCog2 = wrapLucideIcon(Lucide.FileCog2)
+export const FileDiff = wrapLucideIcon(Lucide.FileDiff)
+export const FileDigit = wrapLucideIcon(Lucide.FileDigit)
+export const FileDown = wrapLucideIcon(Lucide.FileDown)
+export const FileEdit = wrapLucideIcon(Lucide.FileEdit)
+export const FileHeart = wrapLucideIcon(Lucide.FileHeart)
+export const FileImage = wrapLucideIcon(Lucide.FileImage)
+export const FileInput = wrapLucideIcon(Lucide.FileInput)
+export const FileJson = wrapLucideIcon(Lucide.FileJson)
+export const FileJson2 = wrapLucideIcon(Lucide.FileJson2)
+export const FileKey = wrapLucideIcon(Lucide.FileKey)
+export const FileKey2 = wrapLucideIcon(Lucide.FileKey2)
+export const FileLineChart = wrapLucideIcon(Lucide.FileLineChart)
+export const FileLock = wrapLucideIcon(Lucide.FileLock)
+export const FileLock2 = wrapLucideIcon(Lucide.FileLock2)
+export const FileMinus = wrapLucideIcon(Lucide.FileMinus)
+export const FileMinus2 = wrapLucideIcon(Lucide.FileMinus2)
+export const FileMusic = wrapLucideIcon(Lucide.FileMusic)
+export const FileOutput = wrapLucideIcon(Lucide.FileOutput)
+export const FilePen = wrapLucideIcon(Lucide.FilePen)
+export const FilePenLine = wrapLucideIcon(Lucide.FilePenLine)
+export const FilePieChart = wrapLucideIcon(Lucide.FilePieChart)
+export const FilePlus = wrapLucideIcon(Lucide.FilePlus)
+export const FilePlus2 = wrapLucideIcon(Lucide.FilePlus2)
+export const FileQuestion = wrapLucideIcon(Lucide.FileQuestion)
+export const FileScan = wrapLucideIcon(Lucide.FileScan)
+export const FileSearch = wrapLucideIcon(Lucide.FileSearch)
+export const FileSearch2 = wrapLucideIcon(Lucide.FileSearch2)
+export const FileSignature = wrapLucideIcon(Lucide.FileSignature)
+export const FileSliders = wrapLucideIcon(Lucide.FileSliders)
+export const FileSpreadsheet = wrapLucideIcon(Lucide.FileSpreadsheet)
+export const FileStack = wrapLucideIcon(Lucide.FileStack)
+export const FileSymlink = wrapLucideIcon(Lucide.FileSymlink)
+export const FileTerminal = wrapLucideIcon(Lucide.FileTerminal)
+export const FileText = wrapLucideIcon(Lucide.FileText)
+export const FileType = wrapLucideIcon(Lucide.FileType)
+export const FileType2 = wrapLucideIcon(Lucide.FileType2)
+export const FileUp = wrapLucideIcon(Lucide.FileUp)
+export const FileUser = wrapLucideIcon(Lucide.FileUser)
+export const FileVideo = wrapLucideIcon(Lucide.FileVideo)
+export const FileVideo2 = wrapLucideIcon(Lucide.FileVideo2)
+export const FileVolume = wrapLucideIcon(Lucide.FileVolume)
+export const FileVolume2 = wrapLucideIcon(Lucide.FileVolume2)
+export const FileWarning = wrapLucideIcon(Lucide.FileWarning)
+export const FileX = wrapLucideIcon(Lucide.FileX)
+export const FileX2 = wrapLucideIcon(Lucide.FileX2)
+export const Files = wrapLucideIcon(Lucide.Files)
+export const Film = wrapLucideIcon(Lucide.Film)
+export const Filter = wrapLucideIcon(Lucide.Filter)
+export const FilterX = wrapLucideIcon(Lucide.FilterX)
+export const Fingerprint = wrapLucideIcon(Lucide.Fingerprint)
+export const FireExtinguisher = wrapLucideIcon(Lucide.FireExtinguisher)
+export const Fish = wrapLucideIcon(Lucide.Fish)
+export const FishOff = wrapLucideIcon(Lucide.FishOff)
+export const FishSymbol = wrapLucideIcon(Lucide.FishSymbol)
+export const Flag = wrapLucideIcon(Lucide.Flag)
+export const FlagOff = wrapLucideIcon(Lucide.FlagOff)
+export const FlagTriangleLeft = wrapLucideIcon(Lucide.FlagTriangleLeft)
+export const FlagTriangleRight = wrapLucideIcon(Lucide.FlagTriangleRight)
+export const Flame = wrapLucideIcon(Lucide.Flame)
+export const FlameKindling = wrapLucideIcon(Lucide.FlameKindling)
+export const Flashlight = wrapLucideIcon(Lucide.Flashlight)
+export const FlashlightOff = wrapLucideIcon(Lucide.FlashlightOff)
+export const FlaskConical = wrapLucideIcon(Lucide.FlaskConical)
+export const FlaskConicalOff = wrapLucideIcon(Lucide.FlaskConicalOff)
+export const FlaskRound = wrapLucideIcon(Lucide.FlaskRound)
+export const FlipHorizontal = wrapLucideIcon(Lucide.FlipHorizontal)
+export const FlipHorizontal2 = wrapLucideIcon(Lucide.FlipHorizontal2)
+export const FlipVertical = wrapLucideIcon(Lucide.FlipVertical)
+export const FlipVertical2 = wrapLucideIcon(Lucide.FlipVertical2)
+export const Flower = wrapLucideIcon(Lucide.Flower)
+export const Flower2 = wrapLucideIcon(Lucide.Flower2)
+export const Focus = wrapLucideIcon(Lucide.Focus)
+export const FoldHorizontal = wrapLucideIcon(Lucide.FoldHorizontal)
+export const FoldVertical = wrapLucideIcon(Lucide.FoldVertical)
+export const Folder = wrapLucideIcon(Lucide.Folder)
+export const FolderArchive = wrapLucideIcon(Lucide.FolderArchive)
+export const FolderCheck = wrapLucideIcon(Lucide.FolderCheck)
+export const FolderClock = wrapLucideIcon(Lucide.FolderClock)
+export const FolderClosed = wrapLucideIcon(Lucide.FolderClosed)
+export const FolderCode = wrapLucideIcon(Lucide.FolderCode)
+export const FolderCog = wrapLucideIcon(Lucide.FolderCog)
+export const FolderCog2 = wrapLucideIcon(Lucide.FolderCog2)
+export const FolderDot = wrapLucideIcon(Lucide.FolderDot)
+export const FolderDown = wrapLucideIcon(Lucide.FolderDown)
+export const FolderEdit = wrapLucideIcon(Lucide.FolderEdit)
+export const FolderGit = wrapLucideIcon(Lucide.FolderGit)
+export const FolderGit2 = wrapLucideIcon(Lucide.FolderGit2)
+export const FolderHeart = wrapLucideIcon(Lucide.FolderHeart)
+export const FolderInput = wrapLucideIcon(Lucide.FolderInput)
+export const FolderKanban = wrapLucideIcon(Lucide.FolderKanban)
+export const FolderKey = wrapLucideIcon(Lucide.FolderKey)
+export const FolderLock = wrapLucideIcon(Lucide.FolderLock)
+export const FolderMinus = wrapLucideIcon(Lucide.FolderMinus)
+export const FolderOpen = wrapLucideIcon(Lucide.FolderOpen)
+export const FolderOpenDot = wrapLucideIcon(Lucide.FolderOpenDot)
+export const FolderOutput = wrapLucideIcon(Lucide.FolderOutput)
+export const FolderPen = wrapLucideIcon(Lucide.FolderPen)
+export const FolderPlus = wrapLucideIcon(Lucide.FolderPlus)
+export const FolderRoot = wrapLucideIcon(Lucide.FolderRoot)
+export const FolderSearch = wrapLucideIcon(Lucide.FolderSearch)
+export const FolderSearch2 = wrapLucideIcon(Lucide.FolderSearch2)
+export const FolderSymlink = wrapLucideIcon(Lucide.FolderSymlink)
+export const FolderSync = wrapLucideIcon(Lucide.FolderSync)
+export const FolderTree = wrapLucideIcon(Lucide.FolderTree)
+export const FolderUp = wrapLucideIcon(Lucide.FolderUp)
+export const FolderX = wrapLucideIcon(Lucide.FolderX)
+export const Folders = wrapLucideIcon(Lucide.Folders)
+export const Footprints = wrapLucideIcon(Lucide.Footprints)
+export const ForkKnife = wrapLucideIcon(Lucide.ForkKnife)
+export const ForkKnifeCrossed = wrapLucideIcon(Lucide.ForkKnifeCrossed)
+export const Forklift = wrapLucideIcon(Lucide.Forklift)
+export const FormInput = wrapLucideIcon(Lucide.FormInput)
+export const Forward = wrapLucideIcon(Lucide.Forward)
+export const Frame = wrapLucideIcon(Lucide.Frame)
+export const Framer = wrapLucideIcon(Lucide.Framer)
+export const Frown = wrapLucideIcon(Lucide.Frown)
+export const Fuel = wrapLucideIcon(Lucide.Fuel)
+export const Fullscreen = wrapLucideIcon(Lucide.Fullscreen)
+export const FunctionSquare = wrapLucideIcon(Lucide.FunctionSquare)
+export const GalleryHorizontal = wrapLucideIcon(Lucide.GalleryHorizontal)
+export const GalleryHorizontalEnd = wrapLucideIcon(Lucide.GalleryHorizontalEnd)
+export const GalleryThumbnails = wrapLucideIcon(Lucide.GalleryThumbnails)
+export const GalleryVertical = wrapLucideIcon(Lucide.GalleryVertical)
+export const GalleryVerticalEnd = wrapLucideIcon(Lucide.GalleryVerticalEnd)
+export const Gamepad = wrapLucideIcon(Lucide.Gamepad)
+export const Gamepad2 = wrapLucideIcon(Lucide.Gamepad2)
+export const GanttChart = wrapLucideIcon(Lucide.GanttChart)
+export const GanttChartSquare = wrapLucideIcon(Lucide.GanttChartSquare)
+export const Gauge = wrapLucideIcon(Lucide.Gauge)
+export const GaugeCircle = wrapLucideIcon(Lucide.GaugeCircle)
+export const Gavel = wrapLucideIcon(Lucide.Gavel)
+export const Gem = wrapLucideIcon(Lucide.Gem)
+export const Ghost = wrapLucideIcon(Lucide.Ghost)
+export const Gift = wrapLucideIcon(Lucide.Gift)
+export const GitBranch = wrapLucideIcon(Lucide.GitBranch)
+export const GitBranchPlus = wrapLucideIcon(Lucide.GitBranchPlus)
+export const GitCommit = wrapLucideIcon(Lucide.GitCommit)
+export const GitCommitHorizontal = wrapLucideIcon(Lucide.GitCommitHorizontal)
+export const GitCommitVertical = wrapLucideIcon(Lucide.GitCommitVertical)
+export const GitCompare = wrapLucideIcon(Lucide.GitCompare)
+export const GitCompareArrows = wrapLucideIcon(Lucide.GitCompareArrows)
+export const GitFork = wrapLucideIcon(Lucide.GitFork)
+export const GitGraph = wrapLucideIcon(Lucide.GitGraph)
+export const GitMerge = wrapLucideIcon(Lucide.GitMerge)
+export const GitPullRequest = wrapLucideIcon(Lucide.GitPullRequest)
+export const GitPullRequestArrow = wrapLucideIcon(Lucide.GitPullRequestArrow)
+export const GitPullRequestClosed = wrapLucideIcon(Lucide.GitPullRequestClosed)
+export const GitPullRequestCreate = wrapLucideIcon(Lucide.GitPullRequestCreate)
+export const GitPullRequestCreateArrow = wrapLucideIcon(
+  Lucide.GitPullRequestCreateArrow
+)
+export const GitPullRequestDraft = wrapLucideIcon(Lucide.GitPullRequestDraft)
+export const Github = wrapLucideIcon(Lucide.Github)
+export const Gitlab = wrapLucideIcon(Lucide.Gitlab)
+export const GlassWater = wrapLucideIcon(Lucide.GlassWater)
+export const Glasses = wrapLucideIcon(Lucide.Glasses)
+export const Globe = wrapLucideIcon(Lucide.Globe)
+export const Globe2 = wrapLucideIcon(Lucide.Globe2)
+export const GlobeLock = wrapLucideIcon(Lucide.GlobeLock)
+export const Goal = wrapLucideIcon(Lucide.Goal)
+export const Grab = wrapLucideIcon(Lucide.Grab)
+export const GraduationCap = wrapLucideIcon(Lucide.GraduationCap)
+export const Grape = wrapLucideIcon(Lucide.Grape)
+export const Grid = wrapLucideIcon(Lucide.Grid)
+export const Grid2X2 = wrapLucideIcon(Lucide.Grid2X2)
+export const Grid2X2Plus = wrapLucideIcon(Lucide.Grid2X2Plus)
+export const Grid2x2 = wrapLucideIcon(Lucide.Grid2x2)
+export const Grid2x2Check = wrapLucideIcon(Lucide.Grid2x2Check)
+export const Grid2x2Plus = wrapLucideIcon(Lucide.Grid2x2Plus)
+export const Grid2x2X = wrapLucideIcon(Lucide.Grid2x2X)
+export const Grid3X3 = wrapLucideIcon(Lucide.Grid3X3)
+export const Grid3x3 = wrapLucideIcon(Lucide.Grid3x3)
+export const Grip = wrapLucideIcon(Lucide.Grip)
+export const GripHorizontal = wrapLucideIcon(Lucide.GripHorizontal)
+export const GripVertical = wrapLucideIcon(Lucide.GripVertical)
+export const Group = wrapLucideIcon(Lucide.Group)
+export const Guitar = wrapLucideIcon(Lucide.Guitar)
+export const Ham = wrapLucideIcon(Lucide.Ham)
+export const Hammer = wrapLucideIcon(Lucide.Hammer)
+export const Hand = wrapLucideIcon(Lucide.Hand)
+export const HandCoins = wrapLucideIcon(Lucide.HandCoins)
+export const HandHeart = wrapLucideIcon(Lucide.HandHeart)
+export const HandHelping = wrapLucideIcon(Lucide.HandHelping)
+export const HandMetal = wrapLucideIcon(Lucide.HandMetal)
+export const HandPlatter = wrapLucideIcon(Lucide.HandPlatter)
+export const Handshake = wrapLucideIcon(Lucide.Handshake)
+export const HardDrive = wrapLucideIcon(Lucide.HardDrive)
+export const HardDriveDownload = wrapLucideIcon(Lucide.HardDriveDownload)
+export const HardDriveUpload = wrapLucideIcon(Lucide.HardDriveUpload)
+export const HardHat = wrapLucideIcon(Lucide.HardHat)
+export const Hash = wrapLucideIcon(Lucide.Hash)
+export const Haze = wrapLucideIcon(Lucide.Haze)
+export const HdmiPort = wrapLucideIcon(Lucide.HdmiPort)
+export const Heading = wrapLucideIcon(Lucide.Heading)
+export const Heading1 = wrapLucideIcon(Lucide.Heading1)
+export const Heading2 = wrapLucideIcon(Lucide.Heading2)
+export const Heading3 = wrapLucideIcon(Lucide.Heading3)
+export const Heading4 = wrapLucideIcon(Lucide.Heading4)
+export const Heading5 = wrapLucideIcon(Lucide.Heading5)
+export const Heading6 = wrapLucideIcon(Lucide.Heading6)
+export const HeadphoneOff = wrapLucideIcon(Lucide.HeadphoneOff)
+export const Headphones = wrapLucideIcon(Lucide.Headphones)
+export const Headset = wrapLucideIcon(Lucide.Headset)
+export const Heart = wrapLucideIcon(Lucide.Heart)
+export const HeartCrack = wrapLucideIcon(Lucide.HeartCrack)
+export const HeartHandshake = wrapLucideIcon(Lucide.HeartHandshake)
+export const HeartOff = wrapLucideIcon(Lucide.HeartOff)
+export const HeartPulse = wrapLucideIcon(Lucide.HeartPulse)
+export const Heater = wrapLucideIcon(Lucide.Heater)
+export const HelpCircle = wrapLucideIcon(Lucide.HelpCircle)
+export const HelpingHand = wrapLucideIcon(Lucide.HelpingHand)
+export const Hexagon = wrapLucideIcon(Lucide.Hexagon)
+export const Highlighter = wrapLucideIcon(Lucide.Highlighter)
+export const History = wrapLucideIcon(Lucide.History)
+export const Home = wrapLucideIcon(Lucide.Home)
+export const Hop = wrapLucideIcon(Lucide.Hop)
+export const HopOff = wrapLucideIcon(Lucide.HopOff)
+export const Hospital = wrapLucideIcon(Lucide.Hospital)
+export const Hotel = wrapLucideIcon(Lucide.Hotel)
+export const Hourglass = wrapLucideIcon(Lucide.Hourglass)
+export const House = wrapLucideIcon(Lucide.House)
+export const HousePlug = wrapLucideIcon(Lucide.HousePlug)
+export const HousePlus = wrapLucideIcon(Lucide.HousePlus)
+export const IceCream = wrapLucideIcon(Lucide.IceCream)
+export const IceCream2 = wrapLucideIcon(Lucide.IceCream2)
+export const IceCreamBowl = wrapLucideIcon(Lucide.IceCreamBowl)
+export const IceCreamCone = wrapLucideIcon(Lucide.IceCreamCone)
+export const IdCard = wrapLucideIcon(Lucide.IdCard)
+export const Image = wrapLucideIcon(Lucide.Image)
+export const ImageDown = wrapLucideIcon(Lucide.ImageDown)
+export const ImageMinus = wrapLucideIcon(Lucide.ImageMinus)
+export const ImageOff = wrapLucideIcon(Lucide.ImageOff)
+export const ImagePlay = wrapLucideIcon(Lucide.ImagePlay)
+export const ImagePlus = wrapLucideIcon(Lucide.ImagePlus)
+export const ImageUp = wrapLucideIcon(Lucide.ImageUp)
+export const Images = wrapLucideIcon(Lucide.Images)
+export const Import = wrapLucideIcon(Lucide.Import)
+export const Inbox = wrapLucideIcon(Lucide.Inbox)
+export const Indent = wrapLucideIcon(Lucide.Indent)
+export const IndentDecrease = wrapLucideIcon(Lucide.IndentDecrease)
+export const IndentIncrease = wrapLucideIcon(Lucide.IndentIncrease)
+export const IndianRupee = wrapLucideIcon(Lucide.IndianRupee)
+// Renamed from 'Infinity' to avoid conflict with JavaScript built-in
+export const IconInfinity = wrapLucideIcon(Lucide.Infinity)
+export const Info = wrapLucideIcon(Lucide.Info)
+export const Inspect = wrapLucideIcon(Lucide.Inspect)
+export const InspectionPanel = wrapLucideIcon(Lucide.InspectionPanel)
+export const Instagram = wrapLucideIcon(Lucide.Instagram)
+export const Italic = wrapLucideIcon(Lucide.Italic)
+export const IterationCcw = wrapLucideIcon(Lucide.IterationCcw)
+export const IterationCw = wrapLucideIcon(Lucide.IterationCw)
+export const JapaneseYen = wrapLucideIcon(Lucide.JapaneseYen)
+export const Joystick = wrapLucideIcon(Lucide.Joystick)
+export const Kanban = wrapLucideIcon(Lucide.Kanban)
+export const KanbanSquare = wrapLucideIcon(Lucide.KanbanSquare)
+export const KanbanSquareDashed = wrapLucideIcon(Lucide.KanbanSquareDashed)
+export const Key = wrapLucideIcon(Lucide.Key)
+export const KeyRound = wrapLucideIcon(Lucide.KeyRound)
+export const KeySquare = wrapLucideIcon(Lucide.KeySquare)
+export const Keyboard = wrapLucideIcon(Lucide.Keyboard)
+export const KeyboardMusic = wrapLucideIcon(Lucide.KeyboardMusic)
+export const KeyboardOff = wrapLucideIcon(Lucide.KeyboardOff)
+export const Lamp = wrapLucideIcon(Lucide.Lamp)
+export const LampCeiling = wrapLucideIcon(Lucide.LampCeiling)
+export const LampDesk = wrapLucideIcon(Lucide.LampDesk)
+export const LampFloor = wrapLucideIcon(Lucide.LampFloor)
+export const LampWallDown = wrapLucideIcon(Lucide.LampWallDown)
+export const LampWallUp = wrapLucideIcon(Lucide.LampWallUp)
+export const LandPlot = wrapLucideIcon(Lucide.LandPlot)
+export const Landmark = wrapLucideIcon(Lucide.Landmark)
+export const Languages = wrapLucideIcon(Lucide.Languages)
+export const Laptop = wrapLucideIcon(Lucide.Laptop)
+export const Laptop2 = wrapLucideIcon(Lucide.Laptop2)
+export const LaptopMinimal = wrapLucideIcon(Lucide.LaptopMinimal)
+export const LaptopMinimalCheck = wrapLucideIcon(Lucide.LaptopMinimalCheck)
+export const Lasso = wrapLucideIcon(Lucide.Lasso)
+export const LassoSelect = wrapLucideIcon(Lucide.LassoSelect)
+export const Laugh = wrapLucideIcon(Lucide.Laugh)
+export const Layers = wrapLucideIcon(Lucide.Layers)
+export const Layers2 = wrapLucideIcon(Lucide.Layers2)
+export const Layers3 = wrapLucideIcon(Lucide.Layers3)
+export const Layout = wrapLucideIcon(Lucide.Layout)
+export const LayoutDashboard = wrapLucideIcon(Lucide.LayoutDashboard)
+export const LayoutGrid = wrapLucideIcon(Lucide.LayoutGrid)
+export const LayoutList = wrapLucideIcon(Lucide.LayoutList)
+export const LayoutPanelLeft = wrapLucideIcon(Lucide.LayoutPanelLeft)
+export const LayoutPanelTop = wrapLucideIcon(Lucide.LayoutPanelTop)
+export const LayoutTemplate = wrapLucideIcon(Lucide.LayoutTemplate)
+export const Leaf = wrapLucideIcon(Lucide.Leaf)
+export const LeafyGreen = wrapLucideIcon(Lucide.LeafyGreen)
+export const Lectern = wrapLucideIcon(Lucide.Lectern)
+export const LetterText = wrapLucideIcon(Lucide.LetterText)
+export const Library = wrapLucideIcon(Lucide.Library)
+export const LibraryBig = wrapLucideIcon(Lucide.LibraryBig)
+export const LibrarySquare = wrapLucideIcon(Lucide.LibrarySquare)
+export const LifeBuoy = wrapLucideIcon(Lucide.LifeBuoy)
+export const Ligature = wrapLucideIcon(Lucide.Ligature)
+export const Lightbulb = wrapLucideIcon(Lucide.Lightbulb)
+export const LightbulbOff = wrapLucideIcon(Lucide.LightbulbOff)
+export const LineChart = wrapLucideIcon(Lucide.LineChart)
+export const Link = wrapLucideIcon(Lucide.Link)
+export const Link2 = wrapLucideIcon(Lucide.Link2)
+export const Link2Off = wrapLucideIcon(Lucide.Link2Off)
+export const Linkedin = wrapLucideIcon(Lucide.Linkedin)
+export const List = wrapLucideIcon(Lucide.List)
+export const ListCheck = wrapLucideIcon(Lucide.ListCheck)
+export const ListChecks = wrapLucideIcon(Lucide.ListChecks)
+export const ListCollapse = wrapLucideIcon(Lucide.ListCollapse)
+export const ListEnd = wrapLucideIcon(Lucide.ListEnd)
+export const ListFilter = wrapLucideIcon(Lucide.ListFilter)
+export const ListMinus = wrapLucideIcon(Lucide.ListMinus)
+export const ListMusic = wrapLucideIcon(Lucide.ListMusic)
+export const ListOrdered = wrapLucideIcon(Lucide.ListOrdered)
+export const ListPlus = wrapLucideIcon(Lucide.ListPlus)
+export const ListRestart = wrapLucideIcon(Lucide.ListRestart)
+export const ListStart = wrapLucideIcon(Lucide.ListStart)
+export const ListTodo = wrapLucideIcon(Lucide.ListTodo)
+export const ListTree = wrapLucideIcon(Lucide.ListTree)
+export const ListVideo = wrapLucideIcon(Lucide.ListVideo)
+export const ListX = wrapLucideIcon(Lucide.ListX)
+export const Loader = wrapLucideIcon(Lucide.Loader)
+export const Loader2 = wrapLucideIcon(Lucide.Loader2)
+export const LoaderCircle = wrapLucideIcon(Lucide.LoaderCircle)
+export const LoaderPinwheel = wrapLucideIcon(Lucide.LoaderPinwheel)
+export const Locate = wrapLucideIcon(Lucide.Locate)
+export const LocateFixed = wrapLucideIcon(Lucide.LocateFixed)
+export const LocateOff = wrapLucideIcon(Lucide.LocateOff)
+export const Lock = wrapLucideIcon(Lucide.Lock)
+export const LockKeyhole = wrapLucideIcon(Lucide.LockKeyhole)
+export const LockKeyholeOpen = wrapLucideIcon(Lucide.LockKeyholeOpen)
+export const LockOpen = wrapLucideIcon(Lucide.LockOpen)
+export const LogIn = wrapLucideIcon(Lucide.LogIn)
+export const LogOut = wrapLucideIcon(Lucide.LogOut)
+export const Logs = wrapLucideIcon(Lucide.Logs)
+export const Lollipop = wrapLucideIcon(Lucide.Lollipop)
+export const Luggage = wrapLucideIcon(Lucide.Luggage)
+export const MSquare = wrapLucideIcon(Lucide.MSquare)
+export const Magnet = wrapLucideIcon(Lucide.Magnet)
+export const Mail = wrapLucideIcon(Lucide.Mail)
+export const MailCheck = wrapLucideIcon(Lucide.MailCheck)
+export const MailMinus = wrapLucideIcon(Lucide.MailMinus)
+export const MailOpen = wrapLucideIcon(Lucide.MailOpen)
+export const MailPlus = wrapLucideIcon(Lucide.MailPlus)
+export const MailQuestion = wrapLucideIcon(Lucide.MailQuestion)
+export const MailSearch = wrapLucideIcon(Lucide.MailSearch)
+export const MailWarning = wrapLucideIcon(Lucide.MailWarning)
+export const MailX = wrapLucideIcon(Lucide.MailX)
+export const Mailbox = wrapLucideIcon(Lucide.Mailbox)
+export const Mails = wrapLucideIcon(Lucide.Mails)
+// Renamed from 'Map' to avoid conflict with JavaScript built-in
+export const IconMap = wrapLucideIcon(Lucide.Map)
+export const MapPin = wrapLucideIcon(Lucide.MapPin)
+export const MapPinCheck = wrapLucideIcon(Lucide.MapPinCheck)
+export const MapPinCheckInside = wrapLucideIcon(Lucide.MapPinCheckInside)
+export const MapPinHouse = wrapLucideIcon(Lucide.MapPinHouse)
+export const MapPinMinus = wrapLucideIcon(Lucide.MapPinMinus)
+export const MapPinMinusInside = wrapLucideIcon(Lucide.MapPinMinusInside)
+export const MapPinOff = wrapLucideIcon(Lucide.MapPinOff)
+export const MapPinPlus = wrapLucideIcon(Lucide.MapPinPlus)
+export const MapPinPlusInside = wrapLucideIcon(Lucide.MapPinPlusInside)
+export const MapPinX = wrapLucideIcon(Lucide.MapPinX)
+export const MapPinXInside = wrapLucideIcon(Lucide.MapPinXInside)
+export const MapPinned = wrapLucideIcon(Lucide.MapPinned)
+export const Martini = wrapLucideIcon(Lucide.Martini)
+export const Maximize = wrapLucideIcon(Lucide.Maximize)
+export const Maximize2 = wrapLucideIcon(Lucide.Maximize2)
+export const Medal = wrapLucideIcon(Lucide.Medal)
+export const Megaphone = wrapLucideIcon(Lucide.Megaphone)
+export const MegaphoneOff = wrapLucideIcon(Lucide.MegaphoneOff)
+export const Meh = wrapLucideIcon(Lucide.Meh)
+export const MemoryStick = wrapLucideIcon(Lucide.MemoryStick)
+export const Menu = wrapLucideIcon(Lucide.Menu)
+export const MenuSquare = wrapLucideIcon(Lucide.MenuSquare)
+export const Merge = wrapLucideIcon(Lucide.Merge)
+export const MessageCircle = wrapLucideIcon(Lucide.MessageCircle)
+export const MessageCircleCode = wrapLucideIcon(Lucide.MessageCircleCode)
+export const MessageCircleDashed = wrapLucideIcon(Lucide.MessageCircleDashed)
+export const MessageCircleHeart = wrapLucideIcon(Lucide.MessageCircleHeart)
+export const MessageCircleMore = wrapLucideIcon(Lucide.MessageCircleMore)
+export const MessageCircleOff = wrapLucideIcon(Lucide.MessageCircleOff)
+export const MessageCirclePlus = wrapLucideIcon(Lucide.MessageCirclePlus)
+export const MessageCircleQuestion = wrapLucideIcon(
+  Lucide.MessageCircleQuestion
+)
+export const MessageCircleReply = wrapLucideIcon(Lucide.MessageCircleReply)
+export const MessageCircleWarning = wrapLucideIcon(Lucide.MessageCircleWarning)
+export const MessageCircleX = wrapLucideIcon(Lucide.MessageCircleX)
+export const MessageSquare = wrapLucideIcon(Lucide.MessageSquare)
+export const MessageSquareCode = wrapLucideIcon(Lucide.MessageSquareCode)
+export const MessageSquareDashed = wrapLucideIcon(Lucide.MessageSquareDashed)
+export const MessageSquareDiff = wrapLucideIcon(Lucide.MessageSquareDiff)
+export const MessageSquareDot = wrapLucideIcon(Lucide.MessageSquareDot)
+export const MessageSquareHeart = wrapLucideIcon(Lucide.MessageSquareHeart)
+export const MessageSquareLock = wrapLucideIcon(Lucide.MessageSquareLock)
+export const MessageSquareMore = wrapLucideIcon(Lucide.MessageSquareMore)
+export const MessageSquareOff = wrapLucideIcon(Lucide.MessageSquareOff)
+export const MessageSquarePlus = wrapLucideIcon(Lucide.MessageSquarePlus)
+export const MessageSquareQuote = wrapLucideIcon(Lucide.MessageSquareQuote)
+export const MessageSquareReply = wrapLucideIcon(Lucide.MessageSquareReply)
+export const MessageSquareShare = wrapLucideIcon(Lucide.MessageSquareShare)
+export const MessageSquareText = wrapLucideIcon(Lucide.MessageSquareText)
+export const MessageSquareWarning = wrapLucideIcon(Lucide.MessageSquareWarning)
+export const MessageSquareX = wrapLucideIcon(Lucide.MessageSquareX)
+export const MessagesSquare = wrapLucideIcon(Lucide.MessagesSquare)
+export const Mic = wrapLucideIcon(Lucide.Mic)
+export const Mic2 = wrapLucideIcon(Lucide.Mic2)
+export const MicOff = wrapLucideIcon(Lucide.MicOff)
+export const MicVocal = wrapLucideIcon(Lucide.MicVocal)
+export const Microchip = wrapLucideIcon(Lucide.Microchip)
+export const Microscope = wrapLucideIcon(Lucide.Microscope)
+export const Microwave = wrapLucideIcon(Lucide.Microwave)
+export const Milestone = wrapLucideIcon(Lucide.Milestone)
+export const Milk = wrapLucideIcon(Lucide.Milk)
+export const MilkOff = wrapLucideIcon(Lucide.MilkOff)
+export const Minimize = wrapLucideIcon(Lucide.Minimize)
+export const Minimize2 = wrapLucideIcon(Lucide.Minimize2)
+export const Minus = wrapLucideIcon(Lucide.Minus)
+export const MinusCircle = wrapLucideIcon(Lucide.MinusCircle)
+export const MinusSquare = wrapLucideIcon(Lucide.MinusSquare)
+export const Monitor = wrapLucideIcon(Lucide.Monitor)
+export const MonitorCheck = wrapLucideIcon(Lucide.MonitorCheck)
+export const MonitorCog = wrapLucideIcon(Lucide.MonitorCog)
+export const MonitorDot = wrapLucideIcon(Lucide.MonitorDot)
+export const MonitorDown = wrapLucideIcon(Lucide.MonitorDown)
+export const MonitorOff = wrapLucideIcon(Lucide.MonitorOff)
+export const MonitorPause = wrapLucideIcon(Lucide.MonitorPause)
+export const MonitorPlay = wrapLucideIcon(Lucide.MonitorPlay)
+export const MonitorSmartphone = wrapLucideIcon(Lucide.MonitorSmartphone)
+export const MonitorSpeaker = wrapLucideIcon(Lucide.MonitorSpeaker)
+export const MonitorStop = wrapLucideIcon(Lucide.MonitorStop)
+export const MonitorUp = wrapLucideIcon(Lucide.MonitorUp)
+export const MonitorX = wrapLucideIcon(Lucide.MonitorX)
+export const Moon = wrapLucideIcon(Lucide.Moon)
+export const MoonStar = wrapLucideIcon(Lucide.MoonStar)
+export const MoreHorizontal = wrapLucideIcon(Lucide.MoreHorizontal)
+export const MoreVertical = wrapLucideIcon(Lucide.MoreVertical)
+export const Mountain = wrapLucideIcon(Lucide.Mountain)
+export const MountainSnow = wrapLucideIcon(Lucide.MountainSnow)
+export const Mouse = wrapLucideIcon(Lucide.Mouse)
+export const MouseOff = wrapLucideIcon(Lucide.MouseOff)
+export const MousePointer = wrapLucideIcon(Lucide.MousePointer)
+export const MousePointer2 = wrapLucideIcon(Lucide.MousePointer2)
+export const MousePointerBan = wrapLucideIcon(Lucide.MousePointerBan)
+export const MousePointerClick = wrapLucideIcon(Lucide.MousePointerClick)
+export const MousePointerSquareDashed = wrapLucideIcon(
+  Lucide.MousePointerSquareDashed
+)
+export const Move = wrapLucideIcon(Lucide.Move)
+export const Move3D = wrapLucideIcon(Lucide.Move3D)
+export const Move3d = wrapLucideIcon(Lucide.Move3d)
+export const MoveDiagonal = wrapLucideIcon(Lucide.MoveDiagonal)
+export const MoveDiagonal2 = wrapLucideIcon(Lucide.MoveDiagonal2)
+export const MoveDown = wrapLucideIcon(Lucide.MoveDown)
+export const MoveDownLeft = wrapLucideIcon(Lucide.MoveDownLeft)
+export const MoveDownRight = wrapLucideIcon(Lucide.MoveDownRight)
+export const MoveHorizontal = wrapLucideIcon(Lucide.MoveHorizontal)
+export const MoveLeft = wrapLucideIcon(Lucide.MoveLeft)
+export const MoveRight = wrapLucideIcon(Lucide.MoveRight)
+export const MoveUp = wrapLucideIcon(Lucide.MoveUp)
+export const MoveUpLeft = wrapLucideIcon(Lucide.MoveUpLeft)
+export const MoveUpRight = wrapLucideIcon(Lucide.MoveUpRight)
+export const MoveVertical = wrapLucideIcon(Lucide.MoveVertical)
+export const Music = wrapLucideIcon(Lucide.Music)
+export const Music2 = wrapLucideIcon(Lucide.Music2)
+export const Music3 = wrapLucideIcon(Lucide.Music3)
+export const Music4 = wrapLucideIcon(Lucide.Music4)
+export const Navigation = wrapLucideIcon(Lucide.Navigation)
+export const Navigation2 = wrapLucideIcon(Lucide.Navigation2)
+export const Navigation2Off = wrapLucideIcon(Lucide.Navigation2Off)
+export const NavigationOff = wrapLucideIcon(Lucide.NavigationOff)
+export const Network = wrapLucideIcon(Lucide.Network)
+export const Newspaper = wrapLucideIcon(Lucide.Newspaper)
+export const Nfc = wrapLucideIcon(Lucide.Nfc)
+export const Notebook = wrapLucideIcon(Lucide.Notebook)
+export const NotebookPen = wrapLucideIcon(Lucide.NotebookPen)
+export const NotebookTabs = wrapLucideIcon(Lucide.NotebookTabs)
+export const NotebookText = wrapLucideIcon(Lucide.NotebookText)
+export const NotepadText = wrapLucideIcon(Lucide.NotepadText)
+export const NotepadTextDashed = wrapLucideIcon(Lucide.NotepadTextDashed)
+export const Nut = wrapLucideIcon(Lucide.Nut)
+export const NutOff = wrapLucideIcon(Lucide.NutOff)
+export const Octagon = wrapLucideIcon(Lucide.Octagon)
+export const OctagonAlert = wrapLucideIcon(Lucide.OctagonAlert)
+export const OctagonMinus = wrapLucideIcon(Lucide.OctagonMinus)
+export const OctagonPause = wrapLucideIcon(Lucide.OctagonPause)
+export const OctagonX = wrapLucideIcon(Lucide.OctagonX)
+export const Omega = wrapLucideIcon(Lucide.Omega)
+export const Option = wrapLucideIcon(Lucide.Option)
+export const Orbit = wrapLucideIcon(Lucide.Orbit)
+export const Origami = wrapLucideIcon(Lucide.Origami)
+export const Outdent = wrapLucideIcon(Lucide.Outdent)
+export const Package = wrapLucideIcon(Lucide.Package)
+export const Package2 = wrapLucideIcon(Lucide.Package2)
+export const PackageCheck = wrapLucideIcon(Lucide.PackageCheck)
+export const PackageMinus = wrapLucideIcon(Lucide.PackageMinus)
+export const PackageOpen = wrapLucideIcon(Lucide.PackageOpen)
+export const PackagePlus = wrapLucideIcon(Lucide.PackagePlus)
+export const PackageSearch = wrapLucideIcon(Lucide.PackageSearch)
+export const PackageX = wrapLucideIcon(Lucide.PackageX)
+export const PaintBucket = wrapLucideIcon(Lucide.PaintBucket)
+export const PaintRoller = wrapLucideIcon(Lucide.PaintRoller)
+export const Paintbrush = wrapLucideIcon(Lucide.Paintbrush)
+export const Paintbrush2 = wrapLucideIcon(Lucide.Paintbrush2)
+export const PaintbrushVertical = wrapLucideIcon(Lucide.PaintbrushVertical)
+export const Palette = wrapLucideIcon(Lucide.Palette)
+export const Palmtree = wrapLucideIcon(Lucide.Palmtree)
+export const PanelBottom = wrapLucideIcon(Lucide.PanelBottom)
+export const PanelBottomClose = wrapLucideIcon(Lucide.PanelBottomClose)
+export const PanelBottomDashed = wrapLucideIcon(Lucide.PanelBottomDashed)
+export const PanelBottomInactive = wrapLucideIcon(Lucide.PanelBottomInactive)
+export const PanelBottomOpen = wrapLucideIcon(Lucide.PanelBottomOpen)
+export const PanelLeft = wrapLucideIcon(Lucide.PanelLeft)
+export const PanelLeftClose = wrapLucideIcon(Lucide.PanelLeftClose)
+export const PanelLeftDashed = wrapLucideIcon(Lucide.PanelLeftDashed)
+export const PanelLeftInactive = wrapLucideIcon(Lucide.PanelLeftInactive)
+export const PanelLeftOpen = wrapLucideIcon(Lucide.PanelLeftOpen)
+export const PanelRight = wrapLucideIcon(Lucide.PanelRight)
+export const PanelRightClose = wrapLucideIcon(Lucide.PanelRightClose)
+export const PanelRightDashed = wrapLucideIcon(Lucide.PanelRightDashed)
+export const PanelRightInactive = wrapLucideIcon(Lucide.PanelRightInactive)
+export const PanelRightOpen = wrapLucideIcon(Lucide.PanelRightOpen)
+export const PanelTop = wrapLucideIcon(Lucide.PanelTop)
+export const PanelTopClose = wrapLucideIcon(Lucide.PanelTopClose)
+export const PanelTopDashed = wrapLucideIcon(Lucide.PanelTopDashed)
+export const PanelTopInactive = wrapLucideIcon(Lucide.PanelTopInactive)
+export const PanelTopOpen = wrapLucideIcon(Lucide.PanelTopOpen)
+export const PanelsLeftBottom = wrapLucideIcon(Lucide.PanelsLeftBottom)
+export const PanelsLeftRight = wrapLucideIcon(Lucide.PanelsLeftRight)
+export const PanelsRightBottom = wrapLucideIcon(Lucide.PanelsRightBottom)
+export const PanelsTopBottom = wrapLucideIcon(Lucide.PanelsTopBottom)
+export const PanelsTopLeft = wrapLucideIcon(Lucide.PanelsTopLeft)
+export const Paperclip = wrapLucideIcon(Lucide.Paperclip)
+export const Parentheses = wrapLucideIcon(Lucide.Parentheses)
+export const ParkingCircle = wrapLucideIcon(Lucide.ParkingCircle)
+export const ParkingCircleOff = wrapLucideIcon(Lucide.ParkingCircleOff)
+export const ParkingMeter = wrapLucideIcon(Lucide.ParkingMeter)
+export const ParkingSquare = wrapLucideIcon(Lucide.ParkingSquare)
+export const ParkingSquareOff = wrapLucideIcon(Lucide.ParkingSquareOff)
+export const PartyPopper = wrapLucideIcon(Lucide.PartyPopper)
+export const Pause = wrapLucideIcon(Lucide.Pause)
+export const PauseCircle = wrapLucideIcon(Lucide.PauseCircle)
+export const PauseOctagon = wrapLucideIcon(Lucide.PauseOctagon)
+export const PawPrint = wrapLucideIcon(Lucide.PawPrint)
+export const PcCase = wrapLucideIcon(Lucide.PcCase)
+export const Pen = wrapLucideIcon(Lucide.Pen)
+export const PenBox = wrapLucideIcon(Lucide.PenBox)
+export const PenLine = wrapLucideIcon(Lucide.PenLine)
+export const PenOff = wrapLucideIcon(Lucide.PenOff)
+export const PenSquare = wrapLucideIcon(Lucide.PenSquare)
+export const PenTool = wrapLucideIcon(Lucide.PenTool)
+export const Pencil = wrapLucideIcon(Lucide.Pencil)
+export const PencilLine = wrapLucideIcon(Lucide.PencilLine)
+export const PencilOff = wrapLucideIcon(Lucide.PencilOff)
+export const PencilRuler = wrapLucideIcon(Lucide.PencilRuler)
+export const Pentagon = wrapLucideIcon(Lucide.Pentagon)
+export const Percent = wrapLucideIcon(Lucide.Percent)
+export const PercentCircle = wrapLucideIcon(Lucide.PercentCircle)
+export const PercentDiamond = wrapLucideIcon(Lucide.PercentDiamond)
+export const PercentSquare = wrapLucideIcon(Lucide.PercentSquare)
+export const PersonStanding = wrapLucideIcon(Lucide.PersonStanding)
+export const PhilippinePeso = wrapLucideIcon(Lucide.PhilippinePeso)
+export const Phone = wrapLucideIcon(Lucide.Phone)
+export const PhoneCall = wrapLucideIcon(Lucide.PhoneCall)
+export const PhoneForwarded = wrapLucideIcon(Lucide.PhoneForwarded)
+export const PhoneIncoming = wrapLucideIcon(Lucide.PhoneIncoming)
+export const PhoneMissed = wrapLucideIcon(Lucide.PhoneMissed)
+export const PhoneOff = wrapLucideIcon(Lucide.PhoneOff)
+export const PhoneOutgoing = wrapLucideIcon(Lucide.PhoneOutgoing)
+export const Pi = wrapLucideIcon(Lucide.Pi)
+export const PiSquare = wrapLucideIcon(Lucide.PiSquare)
+export const Piano = wrapLucideIcon(Lucide.Piano)
+export const Pickaxe = wrapLucideIcon(Lucide.Pickaxe)
+export const PictureInPicture = wrapLucideIcon(Lucide.PictureInPicture)
+export const PictureInPicture2 = wrapLucideIcon(Lucide.PictureInPicture2)
+export const PieChart = wrapLucideIcon(Lucide.PieChart)
+export const PiggyBank = wrapLucideIcon(Lucide.PiggyBank)
+export const Pilcrow = wrapLucideIcon(Lucide.Pilcrow)
+export const PilcrowLeft = wrapLucideIcon(Lucide.PilcrowLeft)
+export const PilcrowRight = wrapLucideIcon(Lucide.PilcrowRight)
+export const PilcrowSquare = wrapLucideIcon(Lucide.PilcrowSquare)
+export const Pill = wrapLucideIcon(Lucide.Pill)
+export const PillBottle = wrapLucideIcon(Lucide.PillBottle)
+export const Pin = wrapLucideIcon(Lucide.Pin)
+export const PinOff = wrapLucideIcon(Lucide.PinOff)
+export const Pipette = wrapLucideIcon(Lucide.Pipette)
+export const Pizza = wrapLucideIcon(Lucide.Pizza)
+export const Plane = wrapLucideIcon(Lucide.Plane)
+export const PlaneLanding = wrapLucideIcon(Lucide.PlaneLanding)
+export const PlaneTakeoff = wrapLucideIcon(Lucide.PlaneTakeoff)
+export const Play = wrapLucideIcon(Lucide.Play)
+export const PlayCircle = wrapLucideIcon(Lucide.PlayCircle)
+export const PlaySquare = wrapLucideIcon(Lucide.PlaySquare)
+export const Plug = wrapLucideIcon(Lucide.Plug)
+export const Plug2 = wrapLucideIcon(Lucide.Plug2)
+export const PlugZap = wrapLucideIcon(Lucide.PlugZap)
+export const PlugZap2 = wrapLucideIcon(Lucide.PlugZap2)
+export const Plus = wrapLucideIcon(Lucide.Plus)
+export const PlusCircle = wrapLucideIcon(Lucide.PlusCircle)
+export const PlusSquare = wrapLucideIcon(Lucide.PlusSquare)
+export const Pocket = wrapLucideIcon(Lucide.Pocket)
+export const PocketKnife = wrapLucideIcon(Lucide.PocketKnife)
+export const Podcast = wrapLucideIcon(Lucide.Podcast)
+export const Pointer = wrapLucideIcon(Lucide.Pointer)
+export const PointerOff = wrapLucideIcon(Lucide.PointerOff)
+export const Popcorn = wrapLucideIcon(Lucide.Popcorn)
+export const Popsicle = wrapLucideIcon(Lucide.Popsicle)
+export const PoundSterling = wrapLucideIcon(Lucide.PoundSterling)
+export const Power = wrapLucideIcon(Lucide.Power)
+export const PowerCircle = wrapLucideIcon(Lucide.PowerCircle)
+export const PowerOff = wrapLucideIcon(Lucide.PowerOff)
+export const PowerSquare = wrapLucideIcon(Lucide.PowerSquare)
+export const Presentation = wrapLucideIcon(Lucide.Presentation)
+export const Printer = wrapLucideIcon(Lucide.Printer)
+export const PrinterCheck = wrapLucideIcon(Lucide.PrinterCheck)
+export const Projector = wrapLucideIcon(Lucide.Projector)
+export const Proportions = wrapLucideIcon(Lucide.Proportions)
+export const Puzzle = wrapLucideIcon(Lucide.Puzzle)
+export const Pyramid = wrapLucideIcon(Lucide.Pyramid)
+export const QrCode = wrapLucideIcon(Lucide.QrCode)
+export const Quote = wrapLucideIcon(Lucide.Quote)
+export const Rabbit = wrapLucideIcon(Lucide.Rabbit)
+export const Radar = wrapLucideIcon(Lucide.Radar)
+export const Radiation = wrapLucideIcon(Lucide.Radiation)
+export const Radical = wrapLucideIcon(Lucide.Radical)
+export const Radio = wrapLucideIcon(Lucide.Radio)
+export const RadioReceiver = wrapLucideIcon(Lucide.RadioReceiver)
+export const RadioTower = wrapLucideIcon(Lucide.RadioTower)
+export const Radius = wrapLucideIcon(Lucide.Radius)
+export const RailSymbol = wrapLucideIcon(Lucide.RailSymbol)
+export const Rainbow = wrapLucideIcon(Lucide.Rainbow)
+export const Rat = wrapLucideIcon(Lucide.Rat)
+export const Ratio = wrapLucideIcon(Lucide.Ratio)
+export const Receipt = wrapLucideIcon(Lucide.Receipt)
+export const ReceiptCent = wrapLucideIcon(Lucide.ReceiptCent)
+export const ReceiptEuro = wrapLucideIcon(Lucide.ReceiptEuro)
+export const ReceiptIndianRupee = wrapLucideIcon(Lucide.ReceiptIndianRupee)
+export const ReceiptJapaneseYen = wrapLucideIcon(Lucide.ReceiptJapaneseYen)
+export const ReceiptPoundSterling = wrapLucideIcon(Lucide.ReceiptPoundSterling)
+export const ReceiptRussianRuble = wrapLucideIcon(Lucide.ReceiptRussianRuble)
+export const ReceiptSwissFranc = wrapLucideIcon(Lucide.ReceiptSwissFranc)
+export const ReceiptText = wrapLucideIcon(Lucide.ReceiptText)
+export const RectangleEllipsis = wrapLucideIcon(Lucide.RectangleEllipsis)
+export const RectangleHorizontal = wrapLucideIcon(Lucide.RectangleHorizontal)
+export const RectangleVertical = wrapLucideIcon(Lucide.RectangleVertical)
+export const Recycle = wrapLucideIcon(Lucide.Recycle)
+export const Redo = wrapLucideIcon(Lucide.Redo)
+export const Redo2 = wrapLucideIcon(Lucide.Redo2)
+export const RedoDot = wrapLucideIcon(Lucide.RedoDot)
+export const RefreshCcw = wrapLucideIcon(Lucide.RefreshCcw)
+export const RefreshCcwDot = wrapLucideIcon(Lucide.RefreshCcwDot)
+export const RefreshCw = wrapLucideIcon(Lucide.RefreshCw)
+export const RefreshCwOff = wrapLucideIcon(Lucide.RefreshCwOff)
+export const Refrigerator = wrapLucideIcon(Lucide.Refrigerator)
+export const Regex = wrapLucideIcon(Lucide.Regex)
+export const RemoveFormatting = wrapLucideIcon(Lucide.RemoveFormatting)
+export const Repeat = wrapLucideIcon(Lucide.Repeat)
+export const Repeat1 = wrapLucideIcon(Lucide.Repeat1)
+export const Repeat2 = wrapLucideIcon(Lucide.Repeat2)
+export const Replace = wrapLucideIcon(Lucide.Replace)
+export const ReplaceAll = wrapLucideIcon(Lucide.ReplaceAll)
+export const Reply = wrapLucideIcon(Lucide.Reply)
+export const ReplyAll = wrapLucideIcon(Lucide.ReplyAll)
+export const Rewind = wrapLucideIcon(Lucide.Rewind)
+export const Ribbon = wrapLucideIcon(Lucide.Ribbon)
+export const Rocket = wrapLucideIcon(Lucide.Rocket)
+export const RockingChair = wrapLucideIcon(Lucide.RockingChair)
+export const RollerCoaster = wrapLucideIcon(Lucide.RollerCoaster)
+export const Rotate3D = wrapLucideIcon(Lucide.Rotate3D)
+export const Rotate3d = wrapLucideIcon(Lucide.Rotate3d)
+export const RotateCcw = wrapLucideIcon(Lucide.RotateCcw)
+export const RotateCcwSquare = wrapLucideIcon(Lucide.RotateCcwSquare)
+export const RotateCw = wrapLucideIcon(Lucide.RotateCw)
+export const RotateCwSquare = wrapLucideIcon(Lucide.RotateCwSquare)
+export const Route = wrapLucideIcon(Lucide.Route)
+export const RouteOff = wrapLucideIcon(Lucide.RouteOff)
+export const Router = wrapLucideIcon(Lucide.Router)
+export const Rows = wrapLucideIcon(Lucide.Rows)
+export const Rows2 = wrapLucideIcon(Lucide.Rows2)
+export const Rows3 = wrapLucideIcon(Lucide.Rows3)
+export const Rows4 = wrapLucideIcon(Lucide.Rows4)
+export const Rss = wrapLucideIcon(Lucide.Rss)
+export const Ruler = wrapLucideIcon(Lucide.Ruler)
+export const RussianRuble = wrapLucideIcon(Lucide.RussianRuble)
+export const Sailboat = wrapLucideIcon(Lucide.Sailboat)
+export const Salad = wrapLucideIcon(Lucide.Salad)
+export const Sandwich = wrapLucideIcon(Lucide.Sandwich)
+export const Satellite = wrapLucideIcon(Lucide.Satellite)
+export const SatelliteDish = wrapLucideIcon(Lucide.SatelliteDish)
+export const Save = wrapLucideIcon(Lucide.Save)
+export const SaveAll = wrapLucideIcon(Lucide.SaveAll)
+export const SaveOff = wrapLucideIcon(Lucide.SaveOff)
+export const Scale = wrapLucideIcon(Lucide.Scale)
+export const Scale3D = wrapLucideIcon(Lucide.Scale3D)
+export const Scale3d = wrapLucideIcon(Lucide.Scale3d)
+export const Scaling = wrapLucideIcon(Lucide.Scaling)
+export const Scan = wrapLucideIcon(Lucide.Scan)
+export const ScanBarcode = wrapLucideIcon(Lucide.ScanBarcode)
+export const ScanEye = wrapLucideIcon(Lucide.ScanEye)
+export const ScanFace = wrapLucideIcon(Lucide.ScanFace)
+export const ScanLine = wrapLucideIcon(Lucide.ScanLine)
+export const ScanQrCode = wrapLucideIcon(Lucide.ScanQrCode)
+export const ScanSearch = wrapLucideIcon(Lucide.ScanSearch)
+export const ScanText = wrapLucideIcon(Lucide.ScanText)
+export const ScatterChart = wrapLucideIcon(Lucide.ScatterChart)
+export const School = wrapLucideIcon(Lucide.School)
+export const School2 = wrapLucideIcon(Lucide.School2)
+export const Scissors = wrapLucideIcon(Lucide.Scissors)
+export const ScissorsLineDashed = wrapLucideIcon(Lucide.ScissorsLineDashed)
+export const ScissorsSquare = wrapLucideIcon(Lucide.ScissorsSquare)
+export const ScissorsSquareDashedBottom = wrapLucideIcon(
+  Lucide.ScissorsSquareDashedBottom
+)
+export const ScreenShare = wrapLucideIcon(Lucide.ScreenShare)
+export const ScreenShareOff = wrapLucideIcon(Lucide.ScreenShareOff)
+export const Scroll = wrapLucideIcon(Lucide.Scroll)
+export const ScrollText = wrapLucideIcon(Lucide.ScrollText)
+export const Search = wrapLucideIcon(Lucide.Search)
+export const SearchCheck = wrapLucideIcon(Lucide.SearchCheck)
+export const SearchCode = wrapLucideIcon(Lucide.SearchCode)
+export const SearchSlash = wrapLucideIcon(Lucide.SearchSlash)
+export const SearchX = wrapLucideIcon(Lucide.SearchX)
+export const Section = wrapLucideIcon(Lucide.Section)
+export const Send = wrapLucideIcon(Lucide.Send)
+export const SendHorizonal = wrapLucideIcon(Lucide.SendHorizonal)
+export const SendHorizontal = wrapLucideIcon(Lucide.SendHorizontal)
+export const SendToBack = wrapLucideIcon(Lucide.SendToBack)
+export const SeparatorHorizontal = wrapLucideIcon(Lucide.SeparatorHorizontal)
+export const SeparatorVertical = wrapLucideIcon(Lucide.SeparatorVertical)
+export const Server = wrapLucideIcon(Lucide.Server)
+export const ServerCog = wrapLucideIcon(Lucide.ServerCog)
+export const ServerCrash = wrapLucideIcon(Lucide.ServerCrash)
+export const ServerOff = wrapLucideIcon(Lucide.ServerOff)
+export const Settings = wrapLucideIcon(Lucide.Settings)
+export const Settings2 = wrapLucideIcon(Lucide.Settings2)
+export const Shapes = wrapLucideIcon(Lucide.Shapes)
+export const Share = wrapLucideIcon(Lucide.Share)
+export const Share2 = wrapLucideIcon(Lucide.Share2)
+export const Sheet = wrapLucideIcon(Lucide.Sheet)
+export const Shell = wrapLucideIcon(Lucide.Shell)
+export const Shield = wrapLucideIcon(Lucide.Shield)
+export const ShieldAlert = wrapLucideIcon(Lucide.ShieldAlert)
+export const ShieldBan = wrapLucideIcon(Lucide.ShieldBan)
+export const ShieldCheck = wrapLucideIcon(Lucide.ShieldCheck)
+export const ShieldClose = wrapLucideIcon(Lucide.ShieldClose)
+export const ShieldEllipsis = wrapLucideIcon(Lucide.ShieldEllipsis)
+export const ShieldHalf = wrapLucideIcon(Lucide.ShieldHalf)
+export const ShieldMinus = wrapLucideIcon(Lucide.ShieldMinus)
+export const ShieldOff = wrapLucideIcon(Lucide.ShieldOff)
+export const ShieldPlus = wrapLucideIcon(Lucide.ShieldPlus)
+export const ShieldQuestion = wrapLucideIcon(Lucide.ShieldQuestion)
+export const ShieldX = wrapLucideIcon(Lucide.ShieldX)
+export const Ship = wrapLucideIcon(Lucide.Ship)
+export const ShipWheel = wrapLucideIcon(Lucide.ShipWheel)
+export const Shirt = wrapLucideIcon(Lucide.Shirt)
+export const ShoppingBag = wrapLucideIcon(Lucide.ShoppingBag)
+export const ShoppingBasket = wrapLucideIcon(Lucide.ShoppingBasket)
+export const ShoppingCart = wrapLucideIcon(Lucide.ShoppingCart)
+export const Shovel = wrapLucideIcon(Lucide.Shovel)
+export const ShowerHead = wrapLucideIcon(Lucide.ShowerHead)
+export const Shrink = wrapLucideIcon(Lucide.Shrink)
+export const Shrub = wrapLucideIcon(Lucide.Shrub)
+export const Shuffle = wrapLucideIcon(Lucide.Shuffle)
+export const Sidebar = wrapLucideIcon(Lucide.Sidebar)
+export const SidebarClose = wrapLucideIcon(Lucide.SidebarClose)
+export const SidebarOpen = wrapLucideIcon(Lucide.SidebarOpen)
+export const Sigma = wrapLucideIcon(Lucide.Sigma)
+export const SigmaSquare = wrapLucideIcon(Lucide.SigmaSquare)
+export const Signal = wrapLucideIcon(Lucide.Signal)
+export const SignalHigh = wrapLucideIcon(Lucide.SignalHigh)
+export const SignalLow = wrapLucideIcon(Lucide.SignalLow)
+export const SignalMedium = wrapLucideIcon(Lucide.SignalMedium)
+export const SignalZero = wrapLucideIcon(Lucide.SignalZero)
+export const Signature = wrapLucideIcon(Lucide.Signature)
+export const Signpost = wrapLucideIcon(Lucide.Signpost)
+export const SignpostBig = wrapLucideIcon(Lucide.SignpostBig)
+export const Siren = wrapLucideIcon(Lucide.Siren)
+export const SkipBack = wrapLucideIcon(Lucide.SkipBack)
+export const SkipForward = wrapLucideIcon(Lucide.SkipForward)
+export const Skull = wrapLucideIcon(Lucide.Skull)
+export const Slack = wrapLucideIcon(Lucide.Slack)
+export const Slash = wrapLucideIcon(Lucide.Slash)
+export const SlashSquare = wrapLucideIcon(Lucide.SlashSquare)
+export const Slice = wrapLucideIcon(Lucide.Slice)
+export const Sliders = wrapLucideIcon(Lucide.Sliders)
+export const SlidersHorizontal = wrapLucideIcon(Lucide.SlidersHorizontal)
+export const SlidersVertical = wrapLucideIcon(Lucide.SlidersVertical)
+export const Smartphone = wrapLucideIcon(Lucide.Smartphone)
+export const SmartphoneCharging = wrapLucideIcon(Lucide.SmartphoneCharging)
+export const SmartphoneNfc = wrapLucideIcon(Lucide.SmartphoneNfc)
+export const Smile = wrapLucideIcon(Lucide.Smile)
+export const SmilePlus = wrapLucideIcon(Lucide.SmilePlus)
+export const Snail = wrapLucideIcon(Lucide.Snail)
+export const Snowflake = wrapLucideIcon(Lucide.Snowflake)
+export const Sofa = wrapLucideIcon(Lucide.Sofa)
+export const SortAsc = wrapLucideIcon(Lucide.SortAsc)
+export const SortDesc = wrapLucideIcon(Lucide.SortDesc)
+export const Soup = wrapLucideIcon(Lucide.Soup)
+export const Space = wrapLucideIcon(Lucide.Space)
+export const Spade = wrapLucideIcon(Lucide.Spade)
+export const Sparkle = wrapLucideIcon(Lucide.Sparkle)
+export const Sparkles = wrapLucideIcon(Lucide.Sparkles)
+export const Speaker = wrapLucideIcon(Lucide.Speaker)
+export const Speech = wrapLucideIcon(Lucide.Speech)
+export const SpellCheck = wrapLucideIcon(Lucide.SpellCheck)
+export const SpellCheck2 = wrapLucideIcon(Lucide.SpellCheck2)
+export const Spline = wrapLucideIcon(Lucide.Spline)
+export const Split = wrapLucideIcon(Lucide.Split)
+export const SplitSquareHorizontal = wrapLucideIcon(
+  Lucide.SplitSquareHorizontal
+)
+export const SplitSquareVertical = wrapLucideIcon(Lucide.SplitSquareVertical)
+export const SprayCan = wrapLucideIcon(Lucide.SprayCan)
+export const Sprout = wrapLucideIcon(Lucide.Sprout)
+export const Square = wrapLucideIcon(Lucide.Square)
+export const SquareActivity = wrapLucideIcon(Lucide.SquareActivity)
+export const SquareArrowDown = wrapLucideIcon(Lucide.SquareArrowDown)
+export const SquareArrowDownLeft = wrapLucideIcon(Lucide.SquareArrowDownLeft)
+export const SquareArrowDownRight = wrapLucideIcon(Lucide.SquareArrowDownRight)
+export const SquareArrowLeft = wrapLucideIcon(Lucide.SquareArrowLeft)
+export const SquareArrowOutDownLeft = wrapLucideIcon(
+  Lucide.SquareArrowOutDownLeft
+)
+export const SquareArrowOutDownRight = wrapLucideIcon(
+  Lucide.SquareArrowOutDownRight
+)
+export const SquareArrowOutUpLeft = wrapLucideIcon(Lucide.SquareArrowOutUpLeft)
+export const SquareArrowOutUpRight = wrapLucideIcon(
+  Lucide.SquareArrowOutUpRight
+)
+export const SquareArrowRight = wrapLucideIcon(Lucide.SquareArrowRight)
+export const SquareArrowUp = wrapLucideIcon(Lucide.SquareArrowUp)
+export const SquareArrowUpLeft = wrapLucideIcon(Lucide.SquareArrowUpLeft)
+export const SquareArrowUpRight = wrapLucideIcon(Lucide.SquareArrowUpRight)
+export const SquareAsterisk = wrapLucideIcon(Lucide.SquareAsterisk)
+export const SquareBottomDashedScissors = wrapLucideIcon(
+  Lucide.SquareBottomDashedScissors
+)
+export const SquareChartGantt = wrapLucideIcon(Lucide.SquareChartGantt)
+export const SquareCheck = wrapLucideIcon(Lucide.SquareCheck)
+export const SquareCheckBig = wrapLucideIcon(Lucide.SquareCheckBig)
+export const SquareChevronDown = wrapLucideIcon(Lucide.SquareChevronDown)
+export const SquareChevronLeft = wrapLucideIcon(Lucide.SquareChevronLeft)
+export const SquareChevronRight = wrapLucideIcon(Lucide.SquareChevronRight)
+export const SquareChevronUp = wrapLucideIcon(Lucide.SquareChevronUp)
+export const SquareCode = wrapLucideIcon(Lucide.SquareCode)
+export const SquareDashed = wrapLucideIcon(Lucide.SquareDashed)
+export const SquareDashedBottom = wrapLucideIcon(Lucide.SquareDashedBottom)
+export const SquareDashedBottomCode = wrapLucideIcon(
+  Lucide.SquareDashedBottomCode
+)
+export const SquareDashedKanban = wrapLucideIcon(Lucide.SquareDashedKanban)
+export const SquareDashedMousePointer = wrapLucideIcon(
+  Lucide.SquareDashedMousePointer
+)
+export const SquareDivide = wrapLucideIcon(Lucide.SquareDivide)
+export const SquareDot = wrapLucideIcon(Lucide.SquareDot)
+export const SquareEqual = wrapLucideIcon(Lucide.SquareEqual)
+export const SquareFunction = wrapLucideIcon(Lucide.SquareFunction)
+export const SquareGanttChart = wrapLucideIcon(Lucide.SquareGanttChart)
+export const SquareKanban = wrapLucideIcon(Lucide.SquareKanban)
+export const SquareLibrary = wrapLucideIcon(Lucide.SquareLibrary)
+export const SquareM = wrapLucideIcon(Lucide.SquareM)
+export const SquareMenu = wrapLucideIcon(Lucide.SquareMenu)
+export const SquareMinus = wrapLucideIcon(Lucide.SquareMinus)
+export const SquareMousePointer = wrapLucideIcon(Lucide.SquareMousePointer)
+export const SquareParking = wrapLucideIcon(Lucide.SquareParking)
+export const SquareParkingOff = wrapLucideIcon(Lucide.SquareParkingOff)
+export const SquarePen = wrapLucideIcon(Lucide.SquarePen)
+export const SquarePercent = wrapLucideIcon(Lucide.SquarePercent)
+export const SquarePi = wrapLucideIcon(Lucide.SquarePi)
+export const SquarePilcrow = wrapLucideIcon(Lucide.SquarePilcrow)
+export const SquarePlay = wrapLucideIcon(Lucide.SquarePlay)
+export const SquarePlus = wrapLucideIcon(Lucide.SquarePlus)
+export const SquarePower = wrapLucideIcon(Lucide.SquarePower)
+export const SquareRadical = wrapLucideIcon(Lucide.SquareRadical)
+export const SquareScissors = wrapLucideIcon(Lucide.SquareScissors)
+export const SquareSigma = wrapLucideIcon(Lucide.SquareSigma)
+export const SquareSlash = wrapLucideIcon(Lucide.SquareSlash)
+export const SquareSplitHorizontal = wrapLucideIcon(
+  Lucide.SquareSplitHorizontal
+)
+export const SquareSplitVertical = wrapLucideIcon(Lucide.SquareSplitVertical)
+export const SquareSquare = wrapLucideIcon(Lucide.SquareSquare)
+export const SquareStack = wrapLucideIcon(Lucide.SquareStack)
+export const SquareTerminal = wrapLucideIcon(Lucide.SquareTerminal)
+export const SquareUser = wrapLucideIcon(Lucide.SquareUser)
+export const SquareUserRound = wrapLucideIcon(Lucide.SquareUserRound)
+export const SquareX = wrapLucideIcon(Lucide.SquareX)
+export const Squircle = wrapLucideIcon(Lucide.Squircle)
+export const Squirrel = wrapLucideIcon(Lucide.Squirrel)
+export const Stamp = wrapLucideIcon(Lucide.Stamp)
+export const Star = wrapLucideIcon(Lucide.Star)
+export const StarHalf = wrapLucideIcon(Lucide.StarHalf)
+export const StarOff = wrapLucideIcon(Lucide.StarOff)
+export const Stars = wrapLucideIcon(Lucide.Stars)
+export const StepBack = wrapLucideIcon(Lucide.StepBack)
+export const StepForward = wrapLucideIcon(Lucide.StepForward)
+export const Stethoscope = wrapLucideIcon(Lucide.Stethoscope)
+export const Sticker = wrapLucideIcon(Lucide.Sticker)
+export const StickyNote = wrapLucideIcon(Lucide.StickyNote)
+export const StopCircle = wrapLucideIcon(Lucide.StopCircle)
+export const Store = wrapLucideIcon(Lucide.Store)
+export const StretchHorizontal = wrapLucideIcon(Lucide.StretchHorizontal)
+export const StretchVertical = wrapLucideIcon(Lucide.StretchVertical)
+export const Strikethrough = wrapLucideIcon(Lucide.Strikethrough)
+export const Subscript = wrapLucideIcon(Lucide.Subscript)
+export const Subtitles = wrapLucideIcon(Lucide.Subtitles)
+export const Sun = wrapLucideIcon(Lucide.Sun)
+export const SunDim = wrapLucideIcon(Lucide.SunDim)
+export const SunMedium = wrapLucideIcon(Lucide.SunMedium)
+export const SunMoon = wrapLucideIcon(Lucide.SunMoon)
+export const SunSnow = wrapLucideIcon(Lucide.SunSnow)
+export const Sunrise = wrapLucideIcon(Lucide.Sunrise)
+export const Sunset = wrapLucideIcon(Lucide.Sunset)
+export const Superscript = wrapLucideIcon(Lucide.Superscript)
+export const SwatchBook = wrapLucideIcon(Lucide.SwatchBook)
+export const SwissFranc = wrapLucideIcon(Lucide.SwissFranc)
+export const SwitchCamera = wrapLucideIcon(Lucide.SwitchCamera)
+export const Sword = wrapLucideIcon(Lucide.Sword)
+export const Swords = wrapLucideIcon(Lucide.Swords)
+export const Syringe = wrapLucideIcon(Lucide.Syringe)
+export const Table = wrapLucideIcon(Lucide.Table)
+export const Table2 = wrapLucideIcon(Lucide.Table2)
+export const TableCellsMerge = wrapLucideIcon(Lucide.TableCellsMerge)
+export const TableCellsSplit = wrapLucideIcon(Lucide.TableCellsSplit)
+export const TableColumnsSplit = wrapLucideIcon(Lucide.TableColumnsSplit)
+export const TableOfContents = wrapLucideIcon(Lucide.TableOfContents)
+export const TableProperties = wrapLucideIcon(Lucide.TableProperties)
+export const TableRowsSplit = wrapLucideIcon(Lucide.TableRowsSplit)
+export const Tablet = wrapLucideIcon(Lucide.Tablet)
+export const TabletSmartphone = wrapLucideIcon(Lucide.TabletSmartphone)
+export const Tablets = wrapLucideIcon(Lucide.Tablets)
+export const Tag = wrapLucideIcon(Lucide.Tag)
+export const Tags = wrapLucideIcon(Lucide.Tags)
+export const Tally1 = wrapLucideIcon(Lucide.Tally1)
+export const Tally2 = wrapLucideIcon(Lucide.Tally2)
+export const Tally3 = wrapLucideIcon(Lucide.Tally3)
+export const Tally4 = wrapLucideIcon(Lucide.Tally4)
+export const Tally5 = wrapLucideIcon(Lucide.Tally5)
+export const Tangent = wrapLucideIcon(Lucide.Tangent)
+export const Target = wrapLucideIcon(Lucide.Target)
+export const Telescope = wrapLucideIcon(Lucide.Telescope)
+export const Tent = wrapLucideIcon(Lucide.Tent)
+export const TentTree = wrapLucideIcon(Lucide.TentTree)
+export const Terminal = wrapLucideIcon(Lucide.Terminal)
+export const TerminalSquare = wrapLucideIcon(Lucide.TerminalSquare)
+export const TestTube = wrapLucideIcon(Lucide.TestTube)
+export const TestTube2 = wrapLucideIcon(Lucide.TestTube2)
+export const TestTubeDiagonal = wrapLucideIcon(Lucide.TestTubeDiagonal)
+export const TestTubes = wrapLucideIcon(Lucide.TestTubes)
+export const Text = wrapLucideIcon(Lucide.Text)
+export const TextCursor = wrapLucideIcon(Lucide.TextCursor)
+export const TextCursorInput = wrapLucideIcon(Lucide.TextCursorInput)
+export const TextQuote = wrapLucideIcon(Lucide.TextQuote)
+export const TextSearch = wrapLucideIcon(Lucide.TextSearch)
+export const TextSelect = wrapLucideIcon(Lucide.TextSelect)
+export const TextSelection = wrapLucideIcon(Lucide.TextSelection)
+export const Theater = wrapLucideIcon(Lucide.Theater)
+export const Thermometer = wrapLucideIcon(Lucide.Thermometer)
+export const ThermometerSnowflake = wrapLucideIcon(Lucide.ThermometerSnowflake)
+export const ThermometerSun = wrapLucideIcon(Lucide.ThermometerSun)
+export const ThumbsDown = wrapLucideIcon(Lucide.ThumbsDown)
+export const ThumbsUp = wrapLucideIcon(Lucide.ThumbsUp)
+export const Ticket = wrapLucideIcon(Lucide.Ticket)
+export const TicketCheck = wrapLucideIcon(Lucide.TicketCheck)
+export const TicketMinus = wrapLucideIcon(Lucide.TicketMinus)
+export const TicketPercent = wrapLucideIcon(Lucide.TicketPercent)
+export const TicketPlus = wrapLucideIcon(Lucide.TicketPlus)
+export const TicketSlash = wrapLucideIcon(Lucide.TicketSlash)
+export const TicketX = wrapLucideIcon(Lucide.TicketX)
+export const Tickets = wrapLucideIcon(Lucide.Tickets)
+export const TicketsPlane = wrapLucideIcon(Lucide.TicketsPlane)
+export const Timer = wrapLucideIcon(Lucide.Timer)
+export const TimerOff = wrapLucideIcon(Lucide.TimerOff)
+export const TimerReset = wrapLucideIcon(Lucide.TimerReset)
+export const ToggleLeft = wrapLucideIcon(Lucide.ToggleLeft)
+export const ToggleRight = wrapLucideIcon(Lucide.ToggleRight)
+export const Toilet = wrapLucideIcon(Lucide.Toilet)
+export const Tornado = wrapLucideIcon(Lucide.Tornado)
+export const Torus = wrapLucideIcon(Lucide.Torus)
+export const Touchpad = wrapLucideIcon(Lucide.Touchpad)
+export const TouchpadOff = wrapLucideIcon(Lucide.TouchpadOff)
+export const TowerControl = wrapLucideIcon(Lucide.TowerControl)
+export const ToyBrick = wrapLucideIcon(Lucide.ToyBrick)
+export const Tractor = wrapLucideIcon(Lucide.Tractor)
+export const TrafficCone = wrapLucideIcon(Lucide.TrafficCone)
+export const Train = wrapLucideIcon(Lucide.Train)
+export const TrainFront = wrapLucideIcon(Lucide.TrainFront)
+export const TrainFrontTunnel = wrapLucideIcon(Lucide.TrainFrontTunnel)
+export const TrainTrack = wrapLucideIcon(Lucide.TrainTrack)
+export const TramFront = wrapLucideIcon(Lucide.TramFront)
+export const Trash = wrapLucideIcon(Lucide.Trash)
+export const Trash2 = wrapLucideIcon(Lucide.Trash2)
+export const TreeDeciduous = wrapLucideIcon(Lucide.TreeDeciduous)
+export const TreePalm = wrapLucideIcon(Lucide.TreePalm)
+export const TreePine = wrapLucideIcon(Lucide.TreePine)
+export const Trees = wrapLucideIcon(Lucide.Trees)
+export const Trello = wrapLucideIcon(Lucide.Trello)
+export const TrendingDown = wrapLucideIcon(Lucide.TrendingDown)
+export const TrendingUp = wrapLucideIcon(Lucide.TrendingUp)
+export const TrendingUpDown = wrapLucideIcon(Lucide.TrendingUpDown)
+export const Triangle = wrapLucideIcon(Lucide.Triangle)
+export const TriangleAlert = wrapLucideIcon(Lucide.TriangleAlert)
+export const TriangleRight = wrapLucideIcon(Lucide.TriangleRight)
+export const Trophy = wrapLucideIcon(Lucide.Trophy)
+export const Truck = wrapLucideIcon(Lucide.Truck)
+export const Turtle = wrapLucideIcon(Lucide.Turtle)
+export const Tv = wrapLucideIcon(Lucide.Tv)
+export const Tv2 = wrapLucideIcon(Lucide.Tv2)
+export const TvMinimal = wrapLucideIcon(Lucide.TvMinimal)
+export const TvMinimalPlay = wrapLucideIcon(Lucide.TvMinimalPlay)
+export const Twitch = wrapLucideIcon(Lucide.Twitch)
+export const Twitter = wrapLucideIcon(Lucide.Twitter)
+export const Type = wrapLucideIcon(Lucide.Type)
+export const TypeOutline = wrapLucideIcon(Lucide.TypeOutline)
+export const Umbrella = wrapLucideIcon(Lucide.Umbrella)
+export const UmbrellaOff = wrapLucideIcon(Lucide.UmbrellaOff)
+export const Underline = wrapLucideIcon(Lucide.Underline)
+export const Undo = wrapLucideIcon(Lucide.Undo)
+export const Undo2 = wrapLucideIcon(Lucide.Undo2)
+export const UndoDot = wrapLucideIcon(Lucide.UndoDot)
+export const UnfoldHorizontal = wrapLucideIcon(Lucide.UnfoldHorizontal)
+export const UnfoldVertical = wrapLucideIcon(Lucide.UnfoldVertical)
+export const Ungroup = wrapLucideIcon(Lucide.Ungroup)
+export const University = wrapLucideIcon(Lucide.University)
+export const Unlink = wrapLucideIcon(Lucide.Unlink)
+export const Unlink2 = wrapLucideIcon(Lucide.Unlink2)
+export const Unlock = wrapLucideIcon(Lucide.Unlock)
+export const UnlockKeyhole = wrapLucideIcon(Lucide.UnlockKeyhole)
+export const Unplug = wrapLucideIcon(Lucide.Unplug)
+export const Upload = wrapLucideIcon(Lucide.Upload)
+export const UploadCloud = wrapLucideIcon(Lucide.UploadCloud)
+export const Usb = wrapLucideIcon(Lucide.Usb)
+export const User = wrapLucideIcon(Lucide.User)
+export const User2 = wrapLucideIcon(Lucide.User2)
+export const UserCheck = wrapLucideIcon(Lucide.UserCheck)
+export const UserCheck2 = wrapLucideIcon(Lucide.UserCheck2)
+export const UserCircle = wrapLucideIcon(Lucide.UserCircle)
+export const UserCircle2 = wrapLucideIcon(Lucide.UserCircle2)
+export const UserCog = wrapLucideIcon(Lucide.UserCog)
+export const UserCog2 = wrapLucideIcon(Lucide.UserCog2)
+export const UserMinus = wrapLucideIcon(Lucide.UserMinus)
+export const UserMinus2 = wrapLucideIcon(Lucide.UserMinus2)
+export const UserPen = wrapLucideIcon(Lucide.UserPen)
+export const UserPlus = wrapLucideIcon(Lucide.UserPlus)
+export const UserPlus2 = wrapLucideIcon(Lucide.UserPlus2)
+export const UserRound = wrapLucideIcon(Lucide.UserRound)
+export const UserRoundCheck = wrapLucideIcon(Lucide.UserRoundCheck)
+export const UserRoundCog = wrapLucideIcon(Lucide.UserRoundCog)
+export const UserRoundMinus = wrapLucideIcon(Lucide.UserRoundMinus)
+export const UserRoundPen = wrapLucideIcon(Lucide.UserRoundPen)
+export const UserRoundPlus = wrapLucideIcon(Lucide.UserRoundPlus)
+export const UserRoundSearch = wrapLucideIcon(Lucide.UserRoundSearch)
+export const UserRoundX = wrapLucideIcon(Lucide.UserRoundX)
+export const UserSearch = wrapLucideIcon(Lucide.UserSearch)
+export const UserSquare = wrapLucideIcon(Lucide.UserSquare)
+export const UserSquare2 = wrapLucideIcon(Lucide.UserSquare2)
+export const UserX = wrapLucideIcon(Lucide.UserX)
+export const UserX2 = wrapLucideIcon(Lucide.UserX2)
+export const Users = wrapLucideIcon(Lucide.Users)
+export const Users2 = wrapLucideIcon(Lucide.Users2)
+export const UsersRound = wrapLucideIcon(Lucide.UsersRound)
+export const Utensils = wrapLucideIcon(Lucide.Utensils)
+export const UtensilsCrossed = wrapLucideIcon(Lucide.UtensilsCrossed)
+export const UtilityPole = wrapLucideIcon(Lucide.UtilityPole)
+export const Variable = wrapLucideIcon(Lucide.Variable)
+export const Vault = wrapLucideIcon(Lucide.Vault)
+export const Vegan = wrapLucideIcon(Lucide.Vegan)
+export const VenetianMask = wrapLucideIcon(Lucide.VenetianMask)
+export const Verified = wrapLucideIcon(Lucide.Verified)
+export const Vibrate = wrapLucideIcon(Lucide.Vibrate)
+export const VibrateOff = wrapLucideIcon(Lucide.VibrateOff)
+export const Video = wrapLucideIcon(Lucide.Video)
+export const VideoOff = wrapLucideIcon(Lucide.VideoOff)
+export const Videotape = wrapLucideIcon(Lucide.Videotape)
+export const View = wrapLucideIcon(Lucide.View)
+export const Voicemail = wrapLucideIcon(Lucide.Voicemail)
+export const Volleyball = wrapLucideIcon(Lucide.Volleyball)
+export const Volume = wrapLucideIcon(Lucide.Volume)
+export const Volume1 = wrapLucideIcon(Lucide.Volume1)
+export const Volume2 = wrapLucideIcon(Lucide.Volume2)
+export const VolumeOff = wrapLucideIcon(Lucide.VolumeOff)
+export const VolumeX = wrapLucideIcon(Lucide.VolumeX)
+export const Vote = wrapLucideIcon(Lucide.Vote)
+export const Wallet = wrapLucideIcon(Lucide.Wallet)
+export const Wallet2 = wrapLucideIcon(Lucide.Wallet2)
+export const WalletCards = wrapLucideIcon(Lucide.WalletCards)
+export const WalletMinimal = wrapLucideIcon(Lucide.WalletMinimal)
+export const Wallpaper = wrapLucideIcon(Lucide.Wallpaper)
+export const Wand = wrapLucideIcon(Lucide.Wand)
+export const Wand2 = wrapLucideIcon(Lucide.Wand2)
+export const WandSparkles = wrapLucideIcon(Lucide.WandSparkles)
+export const Warehouse = wrapLucideIcon(Lucide.Warehouse)
+export const WashingMachine = wrapLucideIcon(Lucide.WashingMachine)
+export const Watch = wrapLucideIcon(Lucide.Watch)
+export const Waves = wrapLucideIcon(Lucide.Waves)
+export const Waypoints = wrapLucideIcon(Lucide.Waypoints)
+export const Webcam = wrapLucideIcon(Lucide.Webcam)
+export const Webhook = wrapLucideIcon(Lucide.Webhook)
+export const WebhookOff = wrapLucideIcon(Lucide.WebhookOff)
+export const Weight = wrapLucideIcon(Lucide.Weight)
+export const Wheat = wrapLucideIcon(Lucide.Wheat)
+export const WheatOff = wrapLucideIcon(Lucide.WheatOff)
+export const WholeWord = wrapLucideIcon(Lucide.WholeWord)
+export const Wifi = wrapLucideIcon(Lucide.Wifi)
+export const WifiHigh = wrapLucideIcon(Lucide.WifiHigh)
+export const WifiLow = wrapLucideIcon(Lucide.WifiLow)
+export const WifiOff = wrapLucideIcon(Lucide.WifiOff)
+export const WifiZero = wrapLucideIcon(Lucide.WifiZero)
+export const Wind = wrapLucideIcon(Lucide.Wind)
+export const WindArrowDown = wrapLucideIcon(Lucide.WindArrowDown)
+export const Wine = wrapLucideIcon(Lucide.Wine)
+export const WineOff = wrapLucideIcon(Lucide.WineOff)
+export const Workflow = wrapLucideIcon(Lucide.Workflow)
+export const Worm = wrapLucideIcon(Lucide.Worm)
+export const WrapText = wrapLucideIcon(Lucide.WrapText)
+export const Wrench = wrapLucideIcon(Lucide.Wrench)
+export const X = wrapLucideIcon(Lucide.X)
+export const XCircle = wrapLucideIcon(Lucide.XCircle)
+export const XOctagon = wrapLucideIcon(Lucide.XOctagon)
+export const XSquare = wrapLucideIcon(Lucide.XSquare)
+export const Youtube = wrapLucideIcon(Lucide.Youtube)
+export const Zap = wrapLucideIcon(Lucide.Zap)
+export const ZapOff = wrapLucideIcon(Lucide.ZapOff)
+export const ZoomIn = wrapLucideIcon(Lucide.ZoomIn)
+export const ZoomOut = wrapLucideIcon(Lucide.ZoomOut)

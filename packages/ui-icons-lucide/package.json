@@ -13,7 +13,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "generate": "ts-node --project tsconfig.scripts.json scripts/generateBidirectional.ts && ts-node --project tsconfig.scripts.json scripts/generateIndex.ts",
+    "generate": "ts-node --project tsconfig.scripts.json scripts/generateIndex.ts",
     "lint": "ui-scripts lint",
     "build": "ui-scripts build --modules es,cjs",
     "build:types": "tsc -p tsconfig.build.json",
@@ -23,6 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "lucide-react": "^0.460.0"
   },
   "devDependencies": {
