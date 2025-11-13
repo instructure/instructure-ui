@@ -244,6 +244,8 @@ type ColorPickerState = {
   openColorPicker: boolean
   mixedColor: string
   labelHeight: number
+  calculatedPopoverMaxHeight: string | undefined
+  isHeightCalculated: boolean
 }
 
 type PropKeys = keyof ColorPickerOwnProps
