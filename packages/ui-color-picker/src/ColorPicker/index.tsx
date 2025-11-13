@@ -107,7 +107,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       showHelperErrorMessages: false,
       openColorPicker: false,
       mixedColor: '',
-      labelHeight: 0
+      labelHeight: 0,
+      calculatedPopoverMaxHeight: undefined,
+      isHeightCalculated: false
     }
   }
 
@@ -130,12 +132,74 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     this.setLabelHeight()
   }
 
+  popoverContentRef: HTMLDivElement | null = null
+
+  handlePopoverContentRef = (el: HTMLDivElement | null) => {
+    this.popoverContentRef = el
+  }
+
   setLabelHeight = () => {
     if (this.inputContainerRef) {
       this.setState({
         labelHeight:
           this.inputContainerRef.getBoundingClientRect().y -
           (this.inputContainerRef.parentElement?.getBoundingClientRect().y || 0)
+      })
+    }
+  }
+
+  // Calculate the maximum height the popover can have without extending beyond
+  // the viewport. This enables scrolling when the ColorPicker's content (all
+  // color mixing controls, presets, and contrast checker) would otherwise exceed
+  // the available viewport space. Without this calculation, the popover would
+  // render off-screen on smaller viewports.
+  handlePopoverPositioned = (position?: { placement?: string }) => {
+    if (this.popoverContentRef) {
+      // Double requestAnimationFrame ensures measurements happen after all child components
+      // (ColorMixer, ColorPreset, ColorContrast) complete their mount lifecycle and Emotion
+      // finishes injecting CSS-in-JS styles. A single rAF was insufficient as styles are
+      // injected dynamically in componentDidMount(). This timing issue only manifested when
+      // StrictMode was disabled, since StrictMode's double-rendering provided an accidental
+      // second measurement pass.
+      requestAnimationFrame(() => {
+        // First frame: DOM structure is laid out
+        requestAnimationFrame(() => {
+          // Second frame: styles injected, child components mounted, dimensions stable
+          if (!this.popoverContentRef) return
+
+          const rect = this.popoverContentRef.getBoundingClientRect()
+          const viewportHeight = window.innerHeight
+
+          // Detect if popover is positioned above (top) or below (bottom) the trigger.
+          // The Position component provides placement strings like "top center" or "bottom center".
+          const placement = position?.placement || ''
+          const isPositionedAbove = placement.startsWith('top')
+
+          let availableHeight: number
+
+          if (isPositionedAbove) {
+            // When opening upward: available space is from viewport top to popover bottom.
+            // This is the space where the popover can expand within the viewport.
+            availableHeight = rect.top + rect.height - 16
+          } else {
+            // When opening downward: available space is from popover top to viewport bottom.
+            // Subtract a small buffer (16px) for padding/margin.
+            availableHeight = viewportHeight - rect.top - 16
+          }
+
+          const propMaxHeight = this.props.popoverMaxHeight
+          let calculatedMaxHeight = `${Math.max(100, availableHeight)}px`
+
+          // If prop specifies a maxHeight, respect it as an additional constraint
+          if (propMaxHeight && propMaxHeight !== '100vh') {
+            calculatedMaxHeight = propMaxHeight
+          }
+
+          this.setState({
+            calculatedPopoverMaxHeight: calculatedMaxHeight,
+            isHeightCalculated: true
+          })
+        })
       })
     }
   }
@@ -427,7 +491,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.setState({ openColorPicker: true, mixedColor: this.state.hexCode })
       }}
       onHideContent={() => {
-        this.setState({ openColorPicker: false })
+        this.setState({
+          openColorPicker: false,
+          calculatedPopoverMaxHeight: undefined,
+          isHeightCalculated: false
+        })
       }}
       on="click"
       screenReaderLabel={this.props.popoverScreenReaderLabel}
@@ -435,8 +503,13 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       shouldReturnFocus
       shouldCloseOnDocumentClick
       offsetY="10rem"
+      onPositioned={this.handlePopoverPositioned}
+      onPositionChanged={this.handlePopoverPositioned}
     >
-      <div css={this.props.styles?.popoverContentContainer}>
+      <div
+        css={this.props.styles?.popoverContentContainer}
+        ref={this.handlePopoverContentRef}
+      >
         {this.isDefaultPopover
           ? this.renderDefaultPopoverContent()
           : this.renderCustomPopoverContent()}
@@ -467,7 +540,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             () =>
               this.setState({
                 openColorPicker: false,
-                mixedColor: this.state.hexCode
+                mixedColor: this.state.hexCode,
+                calculatedPopoverMaxHeight: undefined,
+                isHeightCalculated: false
               })
           )}
       </div>
@@ -573,7 +648,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           onClick={() =>
             this.setState({
               openColorPicker: false,
-              mixedColor: this.state.hexCode
+              mixedColor: this.state.hexCode,
+              calculatedPopoverMaxHeight: undefined,
+              isHeightCalculated: false
             })
           }
           color="secondary"
