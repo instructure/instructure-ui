@@ -64,6 +64,7 @@
     "@instructure/ui-heading": "workspace:*",
     "@instructure/ui-i18n": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-icons-lucide": "workspace:*",
     "@instructure/ui-img": "workspace:*",
     "@instructure/ui-instructure": "workspace:*",
     "@instructure/ui-link": "workspace:*",
