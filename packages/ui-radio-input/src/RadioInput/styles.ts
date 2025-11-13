@@ -120,6 +120,7 @@ const generateStyle = (
   const inputVariants = {
     simple: {
       base: {
+        all: 'initial',
         boxSizing: 'border-box',
         appearance: 'none',
         display: 'block',
@@ -140,6 +141,8 @@ const generateStyle = (
             : componentTheme.borderSelectedColor,
           boxShadow: inputColors.checkedBoxShadow
         },
+        marginTop: componentTheme.controlVerticalMargin,
+        marginBottom: componentTheme.controlVerticalMargin,
         ...focusOutline
       },
       small: {
