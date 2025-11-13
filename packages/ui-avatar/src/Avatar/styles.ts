@@ -112,33 +112,39 @@ const generateStyle = (
   const colorVariants = {
     accent1: {
       text: componentTheme.accent1TextColor,
-      background: componentTheme.accent1BackgroundColor,
-      icon: componentTheme.accent1IconColor
+      background: componentTheme.accent1BackgroundColor
+      //TODO-rework add icon handling
+      // icon: componentTheme.accent1IconColor
     },
     accent2: {
       text: componentTheme.accent2TextColor,
-      background: componentTheme.accent2BackgroundColor,
-      icon: componentTheme.accent2IconColor
+      background: componentTheme.accent2BackgroundColor
+      //TODO-rework add icon handling
+      // icon: componentTheme.accent2IconColor
     },
     accent3: {
       text: componentTheme.accent3TextColor,
-      background: componentTheme.accent3BackgroundColor,
-      icon: componentTheme.accent3IconColor
+      background: componentTheme.accent3BackgroundColor
+      //TODO-rework add icon handling
+      // icon: componentTheme.accent3IconColor
     },
     accent4: {
       text: componentTheme.accent4TextColor,
-      background: componentTheme.accent4BackgroundColor,
-      icon: componentTheme.accent4IconColor
+      background: componentTheme.accent4BackgroundColor
+      //TODO-rework add icon handling
+      // icon: componentTheme.accent4IconColor
     },
     accent5: {
       text: componentTheme.accent5TextColor,
-      background: componentTheme.accent5BackgroundColor,
-      icon: componentTheme.accent5IconColor
+      background: componentTheme.accent5BackgroundColor
+      //TODO-rework add icon handling
+      // icon: componentTheme.accent5IconColor
     },
     accent6: {
       text: componentTheme.accent6TextColor,
-      background: componentTheme.accent6BackgroundColor,
-      icon: componentTheme.accent6IconColor
+      background: componentTheme.accent6BackgroundColor
+      //TODO-rework add icon handling
+      // icon: componentTheme.accent6IconColor
     },
     ai: {
       text: componentTheme.textOnColor,
