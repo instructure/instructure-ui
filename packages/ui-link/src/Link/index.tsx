@@ -146,11 +146,16 @@ const Link = forwardRef<LinkHandle, LinkProps>(
     }, [forceButtonRole, onClick, element, role])
 
     const styles = useStyle({
-      generateStyle: (componentTheme: any) => {
-        return generateStyle(componentTheme, props, {
-          containsTruncateText,
-          hasVisibleChildren: hasVisibleChildrenValue
-        })
+      generateStyle: (componentTheme: any, _params: any, sharedTokens: any) => {
+        return generateStyle(
+          componentTheme,
+          props,
+          {
+            containsTruncateText,
+            hasVisibleChildren: hasVisibleChildrenValue
+          },
+          sharedTokens
+        )
       },
       generateComponentTheme,
       componentId: 'Link',

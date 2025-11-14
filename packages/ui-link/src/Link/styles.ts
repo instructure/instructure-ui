@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
-import { NewComponentTypes } from '@instructure/ui-themes'
+import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { LinkProps, LinkStyleProps, LinkStyle } from './props'
 
-type StyleParams = {
-  themeOverride: LinkProps['themeOverride']
-  isWithinText: LinkProps['isWithinText']
-  renderIcon: LinkProps['renderIcon']
-  iconPlacement: LinkProps['iconPlacement']
-  color: LinkProps['color']
-  variant: LinkProps['variant']
-}
+type StyleParams = Pick<
+  LinkProps,
+  | 'themeOverride'
+  | 'isWithinText'
+  | 'renderIcon'
+  | 'iconPlacement'
+  | 'color'
+  | 'variant'
+>
 /**
  * ---
  * private: true
@@ -46,7 +47,8 @@ type StyleParams = {
 const generateStyle = (
   componentTheme: NewComponentTypes['Link'],
   params: StyleParams,
-  state: LinkStyleProps
+  state: LinkStyleProps,
+  sharedTokens: SharedTokens
 ): LinkStyle => {
   const {
     isWithinText,
@@ -91,10 +93,10 @@ const generateStyle = (
 
     // set up focus styles
     outlineColor: 'transparent',
-    outlineWidth: '0.125rem', // TODO waiting for focusOutlineWidth
+    outlineWidth: sharedTokens.focusOutline.width,
     outlineStyle: 'solid', // TODO waiting for focusOutlineStyle
     borderRadius: '0.125rem', // TODO waiting for focusOutlineBorderRadius
-    outlineOffset: '0.25rem',
+    outlineOffset: sharedTokens.focusOutline.offset,
     textUnderlineOffset: 'auto',
 
     // If TruncateText is used in Link with icon, align the icon and the text vertically
