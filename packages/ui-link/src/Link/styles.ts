@@ -32,6 +32,7 @@ type StyleParams = Pick<
   | 'renderIcon'
   | 'iconPlacement'
   | 'color'
+  | 'size'
   | 'variant'
 >
 /**
@@ -55,34 +56,50 @@ const generateStyle = (
     renderIcon,
     iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
     color,
+    size,
     variant
   } = params
 
   const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'
 
-  const variantStyles = {
-    inline: {
-      fontSize: componentTheme.fontSizeMd,
-      lineHeight: componentTheme.lineHeightMd,
-      textDecoration: 'underline'
-    },
-    'inline-small': {
+  // Size mappings for font size, line height, and icon gaps
+  const sizeStyles = {
+    small: {
       fontSize: componentTheme.fontSizeSm,
       lineHeight: componentTheme.lineHeightSm,
+      gap: componentTheme.gapSm
+    },
+    medium: {
+      fontSize: componentTheme.fontSizeMd,
+      lineHeight: componentTheme.lineHeightMd,
+      gap: componentTheme.gapMd
+    },
+    large: {
+      fontSize: componentTheme.fontSizeLg,
+      lineHeight: componentTheme.lineHeightLg,
+      gap: componentTheme.gapLg
+    }
+  }
+
+  // Variant mappings for text decoration only
+  const variantStyles = {
+    inline: {
       textDecoration: 'underline'
     },
     standalone: {
-      fontSize: componentTheme.fontSizeMd,
-      lineHeight: componentTheme.lineHeightMd,
-      textDecoration: 'none'
-    },
-    'standalone-small': {
-      fontSize: componentTheme.fontSizeSm,
-      lineHeight: componentTheme.lineHeightSm,
       textDecoration: 'none'
     }
   }
+
+  // Get size styles or use inherit if no size is provided
+  const currentSize = size
+    ? sizeStyles[size]
+    : {
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
+        gap: componentTheme.gapMd // Default gap for icons when no size is specified
+      }
 
   const baseStyles = {
     boxSizing: 'border-box',
@@ -124,6 +141,8 @@ const generateStyle = (
     ...baseStyles,
     cursor: 'pointer',
     color: componentTheme.textColor,
+    fontSize: currentSize.fontSize,
+    lineHeight: currentSize.lineHeight,
     '&:focus': {
       color: componentTheme.textColor,
       outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
@@ -152,7 +171,9 @@ const generateStyle = (
     margin: 0,
     padding: 0,
     textAlign: 'inherit',
-    ...(variant ? variantStyles[variant] : { fontSize: '1em' })
+    fontSize: currentSize.fontSize,
+    lineHeight: currentSize.lineHeight,
+    ...(variant && variantStyles[variant])
   }
 
   const inverseStyles = {
@@ -169,23 +190,10 @@ const generateStyle = (
     }
   }
 
-  const variantIconStyles = {
-    inline: {
-      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapMd,
-      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapMd : 0
-    },
-    'inline-small': {
-      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapSm,
-      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapSm : 0
-    },
-    standalone: {
-      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapMd,
-      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapMd : 0
-    },
-    'standalone-small': {
-      paddingInlineStart: iconPlacement === 'start' ? 0 : componentTheme.gapSm,
-      paddingInlineEnd: iconPlacement === 'start' ? componentTheme.gapSm : 0
-    }
+  // Icon styles based on size
+  const iconStyles = {
+    paddingInlineStart: iconPlacement === 'start' ? 0 : currentSize.gap,
+    paddingInlineEnd: iconPlacement === 'start' ? currentSize.gap : 0
   }
   return {
     link: {
@@ -211,14 +219,7 @@ const generateStyle = (
       ...(renderIcon && {
         fontSize: '1.125em', // TODO old componentTheme.iconSize to S, M, L
         boxSizing: 'border-box',
-        ...(variant
-          ? variantIconStyles[variant]
-          : {
-              paddingInlineStart:
-                iconPlacement === 'start' ? 0 : componentTheme.gapMd,
-              paddingInlineEnd:
-                iconPlacement === 'start' ? componentTheme.gapMd : 0
-            })
+        ...iconStyles
       })
     }
   }

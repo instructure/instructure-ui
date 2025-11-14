@@ -128,9 +128,14 @@ type LinkOwnProps = {
   onMouseEnter?: (event: React.MouseEvent<ViewOwnProps>) => void
 
   /**
+   * Sets the size of the link (font size, line height, and icon gap)
+   */
+  size?: 'small' | 'medium' | 'large'
+
+  /**
    * Sets pre-defined values for the component to achieve specific roles for the component
    */
-  variant?: 'inline' | 'inline-small' | 'standalone' | 'standalone-small'
+  variant?: 'inline' | 'standalone'
 }
 
 export type LinkStyleProps = {
@@ -170,6 +175,7 @@ const allowedProps: AllowedPropKeys = [
   'onClick',
   'onFocus',
   'onMouseEnter',
+  'size',
   'variant'
 ]
 

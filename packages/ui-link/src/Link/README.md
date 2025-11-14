@@ -41,34 +41,56 @@ type: example
 </Link>
 ```
 
-### Variant
+### Size
 
-In order to make it easy to get the most commonly used links, we have the variant prop. It will set all the necessary styles (fontSize, lineHeight, and textDecoration).
+The `size` prop controls the font size, line height, and icon gap. Available sizes are `small`, `medium`, and `large`. If no size is provided, the link will inherit the font size and line height from its parent context.
 
 ```js
 ---
 type: example
 ---
 <div>
-<div>
-In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+  <div>
+    <Link href="https://instructure.github.io/instructure-ui/" size="small">
+      Small link
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Link href="https://instructure.github.io/instructure-ui/" size="medium">
+      Medium link
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Link href="https://instructure.github.io/instructure-ui/" size="large">
+      Large link
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Text size="large">This is large text with an <Link href="https://instructure.github.io/instructure-ui/">inherited size link</Link></Text>
+  </div>
 </div>
+```
 
-<br></br>
-<div>
-<Text variant="contentSmall">In a line of text, where the text is smaller, use the <Link variant="inline-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline-small</Link> link variant
-</Text>
-</div>
+### Variant
 
-<br></br>
-<div>
-If the link is standalone (not in a text), use the <code>standalone</code> <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
-</div>
+The `variant` prop controls the text decoration and intended use case. Available variants are `inline` (underlined, for use within text) and `standalone` (no underline, for standalone links).
 
-<br></br>
+```js
+---
+type: example
+---
 <div>
-If the link is standalone (not in a text), but smaller, use the <code>standalone-small</code> <Link display="block" variant="standalone-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone-small</Link>
-</div>
+  <div>
+    In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+  </div>
+  <br />
+  <div>
+    If the link is standalone (not in a text), use the <code>standalone</code> variant:
+    <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+  </div>
 </div>
 ```
 
