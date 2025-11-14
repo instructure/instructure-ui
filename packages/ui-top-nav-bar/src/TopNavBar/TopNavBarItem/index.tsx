@@ -508,13 +508,9 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       </BaseButton>
     )
 
-    return (
-      <div css={styles?.container}>
-        {this.props.tooltip
-          ? this.wrapButtonInTooltip(button, children)
-          : button}
-      </div>
-    )
+    return this.props.tooltip
+      ? this.wrapButtonInTooltip(button, children)
+      : button
   }
 
   wrapButtonInTooltip(button: BaseButtonElement, content: React.ReactNode) {
@@ -543,37 +539,41 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
 
     const contentAndTooltipIdentical = tipContent === content
 
+    // The `div` here is a workaround for a crash that triggers
+    // because something tries to attach a `ref` to InstUISettingsProvider
     return (
-      <InstUISettingsProvider
-        theme={{
-          componentOverrides: {
-            View: {
-              // moves tooltips above submenus/popovers
-              stackingTopmost: tooltipStacking
+      <div>
+        <InstUISettingsProvider
+          theme={{
+            componentOverrides: {
+              View: {
+                // moves tooltips above submenus/popovers
+                stackingTopmost: tooltipStacking
+              }
             }
-          }
-        }}
-      >
-        <Tooltip
-          {...tooltipProps}
-          renderTip={
-            contentAndTooltipIdentical ? (
-              tipContent
-            ) : (
-              <div id={this._tooltipContentId}>{tipContent}</div>
-            )
-          }
-          positionContainerDisplay="block"
+          }}
         >
-          <div css={styles?.submenuTriggerContainer}>
-            {contentAndTooltipIdentical
-              ? button
-              : safeCloneElement(button, {
-                  'aria-describedby': this._tooltipContentId
-                })}
-          </div>
-        </Tooltip>
-      </InstUISettingsProvider>
+          <Tooltip
+            {...tooltipProps}
+            renderTip={
+              contentAndTooltipIdentical ? (
+                tipContent
+              ) : (
+                <div id={this._tooltipContentId}>{tipContent}</div>
+              )
+            }
+            positionContainerDisplay="block"
+          >
+            <div css={styles?.submenuTriggerContainer}>
+              {contentAndTooltipIdentical
+                ? button
+                : safeCloneElement(button, {
+                    'aria-describedby': this._tooltipContentId
+                  })}
+            </div>
+          </Tooltip>
+        </InstUISettingsProvider>
+      </div>
     )
   }
 
@@ -602,7 +602,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   }
 
   renderDropdownMenu() {
-    const { id, renderSubmenu, status, styles } = this.props
+    const { id, renderSubmenu, status } = this.props
 
     if (!renderSubmenu || !this.shouldRenderSubmenu) {
       return null
@@ -623,9 +623,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     }
 
     return safeCloneElement(renderSubmenu, {
-      trigger: (
-        <div css={styles?.submenuTriggerContainer}>{this.renderContent()}</div>
-      ),
+      trigger: this.renderContent(),
       show: this.state.isSubmenuOpen,
       onToggle: createChainedFunction(
         renderSubmenu.props?.onToggle,
@@ -636,7 +634,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       withArrow: false,
       minWidth: renderSubmenu.props?.minWidth || '18.5rem',
       maxHeight: renderSubmenu.props?.maxHeight || `calc(100vh - 10rem)`,
-
+      mountNode: this.ref,
+      positionTarget: this.ref, // TODO figure out why this is needed
       ...(status === 'disabled' && {
         disabled: true,
         show: false,
@@ -673,7 +672,9 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       // fix overrides:
       positionContainerDisplay: 'block',
       renderTrigger: (
-        <div css={styles?.submenuTriggerContainer}>{this.renderContent()}</div>
+        <div css={styles?.submenuTriggerContainer}>
+          <div css={styles?.container}>{this.renderContent()}</div>
+        </div>
       ),
       onShowContent: createChainedFunction(
         customPopoverConfig.onShowContent,
@@ -733,11 +734,13 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
             }
           }}
         >
-          {this.renderDropdownMenu()}
+          <div css={styles?.submenuTriggerContainer}>
+            <div css={styles?.container}>{this.renderDropdownMenu()}</div>
+          </div>
         </InstUISettingsProvider>
       )
     } else {
-      content = this.renderContent()
+      content = <div css={styles?.container}>{this.renderContent()}</div>
     }
 
     return (
