@@ -27,6 +27,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-utils": "workspace:*",
     "lucide-react": "^0.460.0"
   },
   "devDependencies": {
