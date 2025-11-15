@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { useState, memo, useCallback } from 'react'
+import { useState, memo, useCallback, useMemo, useRef } from 'react'
+import { FixedSizeGrid as Grid } from 'react-window'
 
 import { Heading } from '@instructure/ui-heading'
 import { TextInput } from '@instructure/ui-text-input'
@@ -137,15 +138,33 @@ const LucideIconTile = memo(
 )
 LucideIconTile.displayName = 'LucideIconTile'
 
+// Virtualization settings
+const TILE_WIDTH = 256 // 16em in pixels (256px)
+const TILE_HEIGHT = 150 // Approximate height of tile
+const COLUMN_COUNT = 5 // Number of columns to display
+const GRID_WIDTH = TILE_WIDTH * COLUMN_COUNT
+
 const LucideIconsGallery = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchInput, setSearchInput] = useState<string>('')
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null)
   const [rtl, setRtl] = useState<boolean>(false)
+  const timeoutId = useRef<NodeJS.Timeout | null>(null)
 
-  // Memoize handlers to prevent unnecessary re-renders
+  // Debounced search - only update searchQuery after 300ms of no typing
   const handleSearchChange = useCallback(
     (_e: React.ChangeEvent, value: string) => {
-      setSearchQuery(value)
+      setSearchInput(value)
+
+      // Clear existing timeout
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current)
+      }
+
+      // Debounce search to avoid re-rendering 1,737 icons on every keystroke
+      timeoutId.current = setTimeout(() => {
+        setSearchQuery(value)
+      }, 300)
     },
     []
   )
@@ -162,10 +181,16 @@ const LucideIconsGallery = () => {
     setSelectedIcon(null)
   }, [])
 
-  const filteredIcons = lucideIconNames.filter((name) => {
-    if (!searchQuery) return true
-    return name.toLowerCase().includes(searchQuery.toLowerCase())
-  })
+  // Memoize filtered list to avoid recalculating on every render
+  const filteredIcons = useMemo(() => {
+    if (!searchQuery) return lucideIconNames
+    return lucideIconNames.filter((name) =>
+      name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  }, [searchQuery])
+
+  // Calculate grid dimensions
+  const rowCount = Math.ceil(filteredIcons.length / COLUMN_COUNT)
 
   return (
     <div>
@@ -184,7 +209,7 @@ const LucideIconsGallery = () => {
       >
         <TextInput
           placeholder="Filter icons..."
-          value={searchQuery}
+          value={searchInput}
           onChange={handleSearchChange}
           renderLabel={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
         />
@@ -200,22 +225,46 @@ const LucideIconsGallery = () => {
         />
       </FormFieldGroup>
 
+      {/* Virtualized grid - only renders visible icons */}
       <div
         css={{
-          display: 'flex',
-          flexWrap: 'wrap',
           margin: '0 auto',
-          paddingTop: '1rem'
+          paddingTop: '1rem',
+          maxWidth: `${GRID_WIDTH}px`
         }}
       >
-        {filteredIcons.map((name) => (
-          <LucideIconTile
-            name={name}
-            key={name}
-            rtl={rtl}
-            onClick={handleIconClick}
-          />
-        ))}
+        <Grid
+          columnCount={COLUMN_COUNT}
+          columnWidth={TILE_WIDTH}
+          height={600} // Visible viewport height
+          rowCount={rowCount}
+          rowHeight={TILE_HEIGHT}
+          width={GRID_WIDTH}
+        >
+          {({
+            columnIndex,
+            rowIndex,
+            style
+          }: {
+            columnIndex: number
+            rowIndex: number
+            style: React.CSSProperties
+          }) => {
+            const index = rowIndex * COLUMN_COUNT + columnIndex
+            if (index >= filteredIcons.length) return null
+
+            const iconName = filteredIcons[index]
+            return (
+              <div style={style}>
+                <LucideIconTile
+                  name={iconName}
+                  rtl={rtl}
+                  onClick={handleIconClick}
+                />
+              </div>
+            )
+          }}
+        </Grid>
       </div>
 
       {selectedIcon && (

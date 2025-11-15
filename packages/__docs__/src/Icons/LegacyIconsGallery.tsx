@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { useState, useRef, memo, useCallback } from 'react'
+import { useState, useRef, memo, useCallback, useMemo } from 'react'
+import { FixedSizeGrid as Grid } from 'react-window'
 
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { Heading } from '@instructure/ui-heading'
@@ -182,9 +183,16 @@ const IconTile = memo(
 )
 IconTile.displayName = 'IconTile'
 
+// Virtualization settings
+const TILE_WIDTH = 256 // 16em in pixels (256px)
+const TILE_HEIGHT = 180 // Approximate height of tile (taller than Lucide due to 2 icons)
+const COLUMN_COUNT = 5 // Number of columns to display
+const GRID_WIDTH = TILE_WIDTH * COLUMN_COUNT
+
 const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
   const [selectedFormat, setSelectedFormat] = useState<Format>('react')
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchInput, setSearchInput] = useState<string>('')
   const [selectedGlyph, setSelectedGlyph] = useState<{
     glyph: Glyph
     styleType: StyleType
@@ -192,41 +200,31 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
   const [rtl, setRtl] = useState<boolean>(false)
   const timeoutId = useRef<NodeJS.Timeout | null>(null)
 
-  // Memoize handlers to prevent unnecessary re-renders
+  // Debounced search with immediate input feedback
   const handleSearchChange = useCallback(
     (_e: React.ChangeEvent, value: string) => {
-      // don't debounce when typing, it should be instant because of React.memo
-      if (value.startsWith(searchQuery)) {
-        setSearchQuery(value)
-        return
-      }
+      setSearchInput(value)
 
-      // clear already running timeout on search query change
+      // Clear existing timeout
       if (timeoutId.current) {
         clearTimeout(timeoutId.current)
       }
 
-      // 500ms debounce so the UI doesn't lag when reloading all icons
+      // 300ms debounce - faster than before
       timeoutId.current = setTimeout(() => {
         setSearchQuery(value)
-      }, 500)
+      }, 300)
     },
-    [searchQuery]
+    []
   )
 
   const handleBidirectionToggle = useCallback((e: React.ChangeEvent<any>) => {
-    // 0ms timeout so the UI doesn't freeze
-    setTimeout(() => {
-      setRtl(e.target.checked)
-    }, 0)
+    setRtl(e.target.checked)
   }, [])
 
   const handleFormatChange = useCallback(
     (_e: React.SyntheticEvent, { value }: { value?: string | number }) => {
-      // 0ms timeout so the UI doesn't freeze
-      setTimeout(() => {
-        setSelectedFormat(value as Format)
-      }, 0)
+      setSelectedFormat(value as Format)
     },
     []
   )
@@ -244,10 +242,17 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
     svg: 'SVG',
     font: 'Icon Font'
   }
-  const allMatch = glyphs.filter((g) => {
-    if (!searchQuery) return true
-    return g.glyphName.toLowerCase().includes(searchQuery.toLowerCase())
-  })
+
+  // Memoize filtered list to avoid recalculating on every render
+  const filteredGlyphs = useMemo(() => {
+    if (!searchQuery) return glyphs
+    return glyphs.filter((g) =>
+      g.glyphName.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  }, [glyphs, searchQuery])
+
+  // Calculate grid dimensions
+  const rowCount = Math.ceil(filteredGlyphs.length / COLUMN_COUNT)
 
   return (
     <div>
@@ -265,6 +270,7 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
       >
         <TextInput
           placeholder="Filter icons..."
+          value={searchInput}
           onChange={handleSearchChange}
           renderLabel={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
         />
@@ -304,23 +310,48 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
           that, please use the React format.
         </Alert>
       )}
+
+      {/* Virtualized grid - only renders visible icons */}
       <div
         css={{
-          display: 'flex',
-          flexWrap: 'wrap',
           margin: '0 auto',
-          paddingTop: '1rem'
+          paddingTop: '1rem',
+          maxWidth: `${GRID_WIDTH}px`
         }}
       >
-        {allMatch.map((g) => (
-          <IconTile
-            glyph={g}
-            format={selectedFormat}
-            key={g.name}
-            rtl={rtl}
-            onClick={handleIconClick}
-          />
-        ))}
+        <Grid
+          columnCount={COLUMN_COUNT}
+          columnWidth={TILE_WIDTH}
+          height={600} // Visible viewport height
+          rowCount={rowCount}
+          rowHeight={TILE_HEIGHT}
+          width={GRID_WIDTH}
+        >
+          {({
+            columnIndex,
+            rowIndex,
+            style
+          }: {
+            columnIndex: number
+            rowIndex: number
+            style: React.CSSProperties
+          }) => {
+            const index = rowIndex * COLUMN_COUNT + columnIndex
+            if (index >= filteredGlyphs.length) return null
+
+            const glyph = filteredGlyphs[index]
+            return (
+              <div style={style}>
+                <IconTile
+                  glyph={glyph}
+                  format={selectedFormat}
+                  rtl={rtl}
+                  onClick={handleIconClick}
+                />
+              </div>
+            )
+          }}
+        </Grid>
       </div>
       {selectedGlyph && (
         <Modal
