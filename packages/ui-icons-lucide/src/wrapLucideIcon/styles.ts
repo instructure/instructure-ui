@@ -48,24 +48,10 @@ const generateStyle = (
   componentTheme: LucideIconTheme,
   params: StyleParams
 ): LucideIconStyle => {
-  const {
-    size,
-    color,
-    rotate = '0',
-    bidirectional = true,
-    inline = true
-  } = params
-
-  // Size mapping to CSS font-size (icons use em-based sizing)
-  const sizeVariants = {
-    'x-small': { fontSize: componentTheme.sizeXSmall },
-    small: { fontSize: componentTheme.sizeSmall },
-    medium: { fontSize: componentTheme.sizeMedium },
-    large: { fontSize: componentTheme.sizeLarge },
-    'x-large': { fontSize: componentTheme.sizeXLarge }
-  }
+  const { color, rotate = '0', bidirectional = true, inline = true } = params
 
   // Color mapping (semantic colors from theme)
+  // Note: Size is no longer applied here - it's passed directly to Lucide as pixels
   const colorVariants = {
     inherit: { color: 'inherit' },
     primary: { color: componentTheme.primaryColor },
@@ -100,10 +86,8 @@ const generateStyle = (
       label: 'lucideIcon',
       display: inline ? 'inline-block' : 'block',
       verticalAlign: 'middle',
-      lineHeight: 1,
-
-      // Apply size if specified
-      ...(size && sizeVariants[size]),
+      lineHeight: 0, // Remove extra line-height to prevent wrapper from being taller than icon
+      fontSize: 0, // Remove font-size to prevent wrapper from having its own dimensions
 
       // Apply color (semantic or custom)
       ...(color &&

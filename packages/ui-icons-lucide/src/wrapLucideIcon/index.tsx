@@ -24,7 +24,8 @@
 
 import React, { forwardRef } from 'react'
 import type { LucideIcon } from 'lucide-react'
-import { useStyle } from '@instructure/emotion'
+import { useStyle, useTheme } from '@instructure/emotion'
+import { px } from '@instructure/ui-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -120,10 +121,31 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
         ...rest
       } = props
 
+      // Get theme to convert semantic sizes to pixels
+      const theme = useTheme()
+      const componentTheme = generateComponentTheme(theme as any)
+
       // Determine if using InstUI semantic size or Lucide numeric size
       const isSemanticSize = typeof instUISize === 'string'
       const semanticSize = isSemanticSize ? instUISize : undefined
-      const numericSize = isSemanticSize ? undefined : instUISize
+
+      // Convert semantic size to pixels for Lucide, or use numeric size directly
+      // Lucide doesn't inherit fontSize, so we need explicit pixel values
+      let numericSize: number | undefined
+      if (isSemanticSize) {
+        const sizeMap = {
+          'x-small': componentTheme.sizeXSmall,
+          small: componentTheme.sizeSmall,
+          medium: componentTheme.sizeMedium,
+          large: componentTheme.sizeLarge,
+          'x-large': componentTheme.sizeXLarge
+        }
+        const themeSizeValue = sizeMap[instUISize as keyof typeof sizeMap]
+        // Use InstUI's px utility to convert rem/em to pixels
+        numericSize = px(themeSizeValue)
+      } else {
+        numericSize = instUISize
+      }
 
       // Determine if using InstUI semantic color or custom color
       const semanticColors = [

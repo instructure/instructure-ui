@@ -2434,6 +2434,9 @@ importers:
       '@instructure/ui-themes':
         specifier: workspace:*
         version: link:../ui-themes
+      '@instructure/ui-utils':
+        specifier: workspace:*
+        version: link:../ui-utils
       lucide-react:
         specifier: ^0.460.0
         version: 0.460.0(react@18.3.1)
