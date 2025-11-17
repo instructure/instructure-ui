@@ -122,13 +122,14 @@ const generateStyle = (
     },
     colorMixerButtonContainer: {
       label: 'colorPicker__colorMixerButtonContainer',
-      alignSelf: 'flex-start',
       marginInlineStart: componentTheme.colorMixerButtonContainerLeftMargin
     },
     popoverContentContainer: {
       label: 'colorPicker__popoverContentContainer',
       maxHeight: calculatedPopoverMaxHeight || popoverMaxHeight || '100vh',
-      overflow: 'auto',
+      overflowY: 'auto',
+      overflowX: 'hidden',
+      scrollbarGutter: 'stable',
       display: 'flex',
       flexDirection: 'column',
       opacity: state.isHeightCalculated ? 1 : 0,
