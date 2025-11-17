@@ -129,7 +129,13 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
   handleInputContainerRef = (el: Element | null) => {
     this.inputContainerRef = el
-    this.setLabelHeight()
+
+    if (el) {
+      // Defer measurement until after layout is complete and CSS-in-JS styles are applied
+      requestAnimationFrame(() => {
+        this.setLabelHeight()
+      })
+    }
   }
 
   popoverContentRef: HTMLDivElement | null = null
@@ -488,14 +494,15 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       }
       isShowingContent={this.state.openColorPicker}
       onShowContent={() => {
-        this.setState({ openColorPicker: true, mixedColor: this.state.hexCode })
-      }}
-      onHideContent={() => {
         this.setState({
-          openColorPicker: false,
+          openColorPicker: true,
+          mixedColor: this.state.hexCode,
           calculatedPopoverMaxHeight: undefined,
           isHeightCalculated: false
         })
+      }}
+      onHideContent={() => {
+        this.setState({ openColorPicker: false })
       }}
       on="click"
       screenReaderLabel={this.props.popoverScreenReaderLabel}
@@ -714,7 +721,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         {!this.isSimple && (
           <div
             css={this.props.styles?.colorMixerButtonContainer}
-            style={{ paddingTop: this.state.labelHeight }}
+            style={{
+              alignSelf: this.state.labelHeight > 0 ? 'flex-start' : 'flex-end',
+              paddingTop: this.state.labelHeight
+            }}
           >
             <div css={this.props.styles?.colorMixerButtonWrapper}>
               {this.renderPopover()}
