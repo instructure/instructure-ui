@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { LucideIconTheme } from './theme'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { LucideIconStyle } from './props'
 
 interface StyleParams {
@@ -31,7 +31,7 @@ interface StyleParams {
   rotate?: '0' | '90' | '180' | '270'
   bidirectional?: boolean
   inline?: boolean
-  themeOverride?: Partial<LucideIconTheme>
+  themeOverride?: Partial<NewComponentTypes['Icon']>
 }
 
 /**
@@ -42,27 +42,30 @@ interface StyleParams {
  *
  * @param componentTheme The theme variable object
  * @param params The reactive parameters (props that affect styling)
+ * @param _sharedTokens Shared token object that stores common values for the theme
  * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: LucideIconTheme,
-  params: StyleParams
+  componentTheme: NewComponentTypes['Icon'],
+  params: StyleParams,
+  _sharedTokens: SharedTokens
 ): LucideIconStyle => {
   const { color, rotate = '0', bidirectional = true, inline = true } = params
 
   // Color mapping (semantic colors from theme)
   // Note: Size is no longer applied here - it's passed directly to Lucide as pixels
+  // Maps InstUI semantic color names to v12 Icon theme properties
   const colorVariants = {
     inherit: { color: 'inherit' },
-    primary: { color: componentTheme.primaryColor },
-    secondary: { color: componentTheme.secondaryColor },
-    'primary-inverse': { color: componentTheme.primaryInverseColor },
-    'secondary-inverse': { color: componentTheme.secondaryInverseColor },
+    primary: { color: componentTheme.baseColor },
+    secondary: { color: componentTheme.mutedColor },
+    'primary-inverse': { color: componentTheme.inverseColor },
+    'secondary-inverse': { color: componentTheme.inverseColor },
     success: { color: componentTheme.successColor },
     error: { color: componentTheme.errorColor },
     warning: { color: componentTheme.warningColor },
-    alert: { color: componentTheme.alertColor },
-    brand: { color: componentTheme.brandColor }
+    alert: { color: componentTheme.infoColor },
+    brand: { color: componentTheme.infoColor }
   }
 
   // Rotation transforms (LTR context)

@@ -26,14 +26,10 @@ import React, { forwardRef } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { useStyle, useTheme } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
+import type { Theme } from '@instructure/ui-themes'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
-import type {
-  LucideIconWrapperProps,
-  InstUIIconProps,
-  LucideIconTheme
-} from './props'
+import type { LucideIconWrapperProps, InstUIIconProps } from './props'
 
 /**
  * Wraps a Lucide icon component with InstUI theming and RTL support.
@@ -121,9 +117,9 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
         ...rest
       } = props
 
-      // Get theme to convert semantic sizes to pixels
-      const theme = useTheme()
-      const componentTheme = generateComponentTheme(theme as any)
+      // Get theme to access Icon component theme properties
+      const theme = useTheme() as Theme
+      const iconTheme = themeOverride || theme?.newTheme?.components?.Icon
 
       // Determine if using InstUI semantic size or Lucide numeric size
       const isSemanticSize = typeof instUISize === 'string'
@@ -133,12 +129,14 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
       // Lucide doesn't inherit fontSize, so we need explicit pixel values
       let numericSize: number | undefined
       if (isSemanticSize) {
+        // Map InstUI semantic sizes to Icon theme size properties
+        // We map InstUI sizes to Icon theme sizes based on relative scale
         const sizeMap = {
-          'x-small': componentTheme.sizeXSmall,
-          small: componentTheme.sizeSmall,
-          medium: componentTheme.sizeMedium,
-          large: componentTheme.sizeLarge,
-          'x-large': componentTheme.sizeXLarge
+          'x-small': iconTheme?.sizeSm || '1rem', // sizeSm (16px)
+          small: iconTheme?.sizeMd || '1.25rem', // sizeMd (20px)
+          medium: iconTheme?.sizeLg || '1.5rem', // sizeLg (24px)
+          large: iconTheme?.sizeXl || '2rem', // sizeXl (32px)
+          'x-large': iconTheme?.size2xl || '2.25rem' // size2xl (36px)
         }
         const themeSizeValue = sizeMap[instUISize as keyof typeof sizeMap]
         // Use InstUI's px utility to convert rem/em to pixels
@@ -169,7 +167,6 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
       // Using useStyle hook for functional component theming
       const styles = useStyle({
         generateStyle,
-        generateComponentTheme,
         params: {
           size: semanticSize,
           color: colorValue,
@@ -178,7 +175,7 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
           inline,
           themeOverride
         },
-        componentId: 'LucideIcon',
+        componentId: 'Icon',
         displayName: `LucideIcon(${Icon.displayName || Icon.name})`
       })
 
@@ -240,6 +237,5 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
   return WrappedIcon as LucideIcon
 }
 
-export type { LucideIconWrapperProps, InstUIIconProps, LucideIconTheme }
-export { default as generateComponentTheme } from './theme'
+export type { LucideIconWrapperProps, InstUIIconProps }
 export { default as generateStyle } from './styles'
