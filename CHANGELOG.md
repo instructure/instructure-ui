@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.26.3](https://github.com/instructure/instructure-ui/compare/v10.26.2...v10.26.3) (2025-11-19)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** fix popover scrolling and button alignment issues ([b7fbf0b](https://github.com/instructure/instructure-ui/commit/b7fbf0b807ddf480ab0f5fab35bf9a38666f8dd0))
+
+
+
+
+
 ## [10.26.2](https://github.com/instructure/instructure-ui/compare/v10.26.1...v10.26.2) (2025-10-13)
 
 
