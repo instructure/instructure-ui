@@ -76,14 +76,6 @@
     }
   },
   "modalHeader": {
-    "backgroundColor": {
-      "value": "{color.background.container}",
-      "type": "color"
-    },
-    "inverseBackgroundColor": {
-      "value": "{color.background.dark}",
-      "type": "color"
-    },
     "borderColor": {
       "value": "{color.stroke.container.base}",
       "type": "color"
