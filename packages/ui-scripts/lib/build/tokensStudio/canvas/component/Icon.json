@@ -123,6 +123,10 @@
     "accent6Color": {
       "value": "{color.icon.accent.color6}",
       "type": "color"
+    },
+    "dark": {
+      "value": "{color.icon.dark}",
+      "type": "color"
     }
   }
 }
