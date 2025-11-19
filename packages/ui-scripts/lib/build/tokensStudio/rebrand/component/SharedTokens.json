@@ -219,11 +219,11 @@
         "type": "color"
       },
       "successColor": {
-        "value": "{color.stroke.interactive.success.base}",
+        "value": "{color.stroke.interactive.action.success.base}",
         "type": "color"
       },
       "dangerColor": {
-        "value": "{color.stroke.interactive.destructive.base}",
+        "value": "{color.stroke.interactive.action.destructive.base}",
         "type": "color"
       }
     }
