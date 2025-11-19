@@ -1,5 +1,5 @@
 {
-  "formFieldLabel": {
+  "formFieldLayout": {
     "textColor": {
       "value": "{color.text.base}",
       "type": "color"
@@ -9,7 +9,7 @@
       "type": "color"
     },
     "asteriskColor": {
-      "value": "{color.text.error}",
+      "value": "{color.text.base}",
       "type": "color"
     },
     "fontFamily": {
@@ -27,6 +27,10 @@
     "lineHeight": {
       "value": "{lineHeight.standalone.textBase}",
       "type": "lineHeights"
+    },
+    "gapPrimitives": {
+      "value": "{spacing.gap.inputElements}",
+      "type": "spacing"
     }
   }
 }

@@ -291,6 +291,10 @@
     "accentAutoraColor": {
       "value": "{color.icon.accent.aurora}",
       "type": "color"
+    },
+    "dark": {
+      "value": "{color.icon.dark}",
+      "type": "color"
     }
   }
 }

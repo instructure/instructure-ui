@@ -5,11 +5,23 @@
       "type": "color"
     },
     "backgroundHoverColor": {
-      "value": "{color.background.interactive.input.hover}",
+      "value": "{color.background.muted}",
       "type": "color"
     },
     "backgroundDisabledColor": {
-      "value": "{color.background.interactive.input.disabled}",
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundReadonlyColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "errorBackgroundColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "errorBackgroundHoverColor": {
+      "value": "{color.background.muted}",
       "type": "color"
     },
     "borderColor": {
@@ -20,12 +32,32 @@
       "value": "{color.stroke.interactive.input.hover}",
       "type": "color"
     },
+    "borderDisabledColor": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    },
     "borderReadonlyColor": {
       "value": "{color.stroke.interactive.input.readonly}",
       "type": "color"
     },
     "errorBorderColor": {
       "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "checkedBorderColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderHoverColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderDisabledColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderReadonlyColor": {
+      "value": "{color.stroke.success}",
       "type": "color"
     },
     "borderWidth": {
@@ -37,7 +69,19 @@
       "type": "borderRadius"
     },
     "checkedBackgroundColor": {
-      "value": "{color.background.interactive.success.base}",
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundHoverColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundDisabledColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundReadonlyColor": {
+      "value": "{color.background.success}",
       "type": "color"
     },
     "labelColor": {
@@ -45,39 +89,43 @@
       "type": "color"
     },
     "labelDisabledColor": {
-      "value": "{color.text.interactive.disabled.base}",
+      "value": "{color.text.base}",
       "type": "color"
     },
     "uncheckedIconBorderColor": {
-      "value": "{color.stroke.interactive.input.base}",
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconErrorBorderColor": {
+      "value": "{color.stroke.strong}",
       "type": "color"
     },
     "uncheckedIconBorderHoverColor": {
-      "value": "{color.stroke.interactive.input.hover}",
+      "value": "{color.stroke.strong}",
       "type": "color"
     },
     "uncheckedIconBorderDisabledColor": {
-      "value": "{color.stroke.interactive.input.disabled}",
+      "value": "{color.stroke.strong}",
       "type": "color"
     },
     "uncheckedIconBorderReadonlyColor": {
-      "value": "{color.stroke.interactive.input.disabled}",
+      "value": "{color.stroke.strong}",
       "type": "color"
     },
     "checkedIconBorderColor": {
-      "value": "{color.stroke.interactive.success.base}",
+      "value": "{color.stroke.interactive.action.success.base}",
       "type": "color"
     },
     "checkedIconBorderHoverColor": {
-      "value": "{color.stroke.interactive.success.hover}",
+      "value": "{color.stroke.interactive.action.success.hover}",
       "type": "color"
     },
     "checkedIconBorderDisabledColor": {
-      "value": "{color.stroke.interactive.success.disabled}",
+      "value": "{color.stroke.interactive.action.success.base}",
       "type": "color"
     },
     "checkedIconBorderReadonlyColor": {
-      "value": "{color.stroke.interactive.success.disabled}",
+      "value": "{color.stroke.interactive.action.success.base}",
       "type": "color"
     },
     "marginStart": {
@@ -117,6 +165,10 @@
       "value": "1.625rem",
       "type": "sizing"
     },
+    "toggleWidth": {
+      "value": "2.5rem",
+      "type": "sizing"
+    },
     "labelFontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
@@ -152,6 +204,14 @@
     "toggleBackground": {
       "value": "{color.background.base}",
       "type": "color"
+    },
+    "padding": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
+    },
+    "disabledOpacity": {
+      "value": "{opacity.disabled}",
+      "type": "opacity"
     }
   }
 }

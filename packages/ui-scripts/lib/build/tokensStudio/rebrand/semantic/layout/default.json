@@ -2,6 +2,10 @@
   "size": {
     "interactive": {
       "height": {
+        "xxs": {
+          "value": "{size.size20}",
+          "type": "sizing"
+        },
         "sm": {
           "value": "{size.size32}",
           "type": "sizing"
@@ -12,6 +16,10 @@
         },
         "lg": {
           "value": "{size.size48}",
+          "type": "sizing"
+        },
+        "xs": {
+          "value": "{size.size24}",
           "type": "sizing"
         }
       }
@@ -348,5 +356,15 @@
   "visibleInRebrand": {
     "value": "true",
     "type": "boolean"
+  },
+  "opacity": {
+    "base": {
+      "value": "{opacity100}",
+      "type": "opacity"
+    },
+    "disabled": {
+      "value": "{opacity50}",
+      "type": "opacity"
+    }
   }
 }

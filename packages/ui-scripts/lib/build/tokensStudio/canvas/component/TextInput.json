@@ -33,7 +33,7 @@
       "type": "color"
     },
     "errorBorderColor": {
-      "value": "{color.stroke.interactive.destructive.base}",
+      "value": "{color.stroke.interactive.action.destructive.base}",
       "type": "color"
     },
     "successBorderColor": {
@@ -73,35 +73,35 @@
       "type": "sizing"
     },
     "arrowsBackgroundColor": {
-      "value": "{color.background.interactive.secondary.base}",
+      "value": "{color.background.interactive.action.secondary.base}",
       "type": "color"
     },
     "arrowsBackgroundHoverColor": {
-      "value": "{color.background.interactive.secondary.hover}",
+      "value": "{color.background.interactive.action.secondary.hover}",
       "type": "color"
     },
     "arrowsBackgroundActiveColor": {
-      "value": "{color.background.interactive.secondary.active}",
+      "value": "{color.background.interactive.action.secondary.active}",
       "type": "color"
     },
     "arrowsBackgroundDisabledColor": {
-      "value": "{color.background.interactive.secondary.disabled}",
+      "value": "{color.background.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "arrowsBorderColor": {
-      "value": "{color.stroke.interactive.secondary.base}",
+      "value": "{color.stroke.interactive.action.secondary.base}",
       "type": "color"
     },
     "arrowsBorderHoverColor": {
-      "value": "{color.stroke.interactive.secondary.hover}",
+      "value": "{color.stroke.interactive.action.secondary.hover}",
       "type": "color"
     },
     "arrowsBorderActiveColor": {
-      "value": "{color.stroke.interactive.secondary.active}",
+      "value": "{color.stroke.interactive.action.secondary.active}",
       "type": "color"
     },
     "arrowsBorderDisabledColor": {
-      "value": "{color.stroke.interactive.secondary.disabled}",
+      "value": "{color.stroke.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "fontFamily": {
@@ -138,10 +138,6 @@
     },
     "gapContent": {
       "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
-    "gapPrimitives": {
-      "value": "{spacing.gap.inputElements}",
       "type": "spacing"
     },
     "paddingHorizontalSm": {

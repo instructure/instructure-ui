@@ -1,7 +1,7 @@
 {
   "toggle": {
     "backgroundColor": {
-      "value": "{color.background.muted}",
+      "value": "{color.background.interactive.input.base}",
       "type": "color"
     },
     "backgroundHoverColor": {
@@ -12,6 +12,18 @@
       "value": "{color.background.interactive.input.disabled}",
       "type": "color"
     },
+    "backgroundReadonlyColor": {
+      "value": "{color.background.interactive.input.readonly}",
+      "type": "color"
+    },
+    "errorBackgroundColor": {
+      "value": "{color.background.interactive.input.base}",
+      "type": "color"
+    },
+    "errorBackgroundHoverColor": {
+      "value": "{color.background.interactive.action.destructive.secondary.hover}",
+      "type": "color"
+    },
     "borderColor": {
       "value": "{color.stroke.interactive.input.base}",
       "type": "color"
@@ -20,12 +32,12 @@
       "value": "{color.stroke.interactive.input.hover}",
       "type": "color"
     },
-    "borderReadonlyColor": {
-      "value": "{color.stroke.interactive.input.readonly}",
+    "borderDisabledColor": {
+      "value": "{color.stroke.interactive.input.disabled}",
       "type": "color"
     },
-    "errorBorderColor": {
-      "value": "{color.stroke.error}",
+    "borderReadonlyColor": {
+      "value": "{color.stroke.interactive.input.readonly}",
       "type": "color"
     },
     "borderWidth": {
@@ -36,8 +48,40 @@
       "value": "{borderRadius.full}",
       "type": "borderRadius"
     },
+    "errorBorderColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "checkedBorderColor": {
+      "value": "{color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "checkedBorderHoverColor": {
+      "value": "{color.stroke.interactive.action.success.hover}",
+      "type": "color"
+    },
+    "checkedBorderDisabledColor": {
+      "value": "{color.stroke.interactive.action.success.disabled}",
+      "type": "color"
+    },
+    "checkedBorderReadonlyColor": {
+      "value": "{color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
     "checkedBackgroundColor": {
-      "value": "{color.background.interactive.success.base}",
+      "value": "{color.background.interactive.action.success.base}",
+      "type": "color"
+    },
+    "checkedBackgroundHoverColor": {
+      "value": "{color.background.interactive.action.success.hover}",
+      "type": "color"
+    },
+    "checkedBackgroundDisabledColor": {
+      "value": "{color.background.interactive.action.success.disabled}",
+      "type": "color"
+    },
+    "checkedBackgroundReadonlyColor": {
+      "value": "{color.background.interactive.input.readonly}",
       "type": "color"
     },
     "labelColor": {
@@ -52,6 +96,10 @@
       "value": "{color.stroke.interactive.input.base}",
       "type": "color"
     },
+    "uncheckedIconErrorBorderColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
     "uncheckedIconBorderHoverColor": {
       "value": "{color.stroke.interactive.input.hover}",
       "type": "color"
@@ -61,19 +109,19 @@
       "type": "color"
     },
     "uncheckedIconBorderReadonlyColor": {
-      "value": "{color.stroke.interactive.input.disabled}",
+      "value": "{color.stroke.interactive.input.readonly}",
       "type": "color"
     },
     "checkedIconBorderColor": {
-      "value": "{color.stroke.success}",
+      "value": "{color.stroke.interactive.action.success.base}",
       "type": "color"
     },
     "checkedIconBorderHoverColor": {
-      "value": "{color.stroke.interactive.success.hover}",
+      "value": "{color.stroke.interactive.action.success.hover}",
       "type": "color"
     },
     "checkedIconBorderDisabledColor": {
-      "value": "{color.stroke.interactive.success.disabled}",
+      "value": "{color.stroke.interactive.action.success.disabled}",
       "type": "color"
     },
     "marginStart": {
@@ -88,26 +136,9 @@
       "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
-    "toggleShadow": {
-      "value": [
-        {
-          "x": "{dropShadow.x.elevation1.dropshadow1}",
-          "y": "{dropShadow.y.elevation1.dropshadow1}",
-          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
-          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
-          "color": "{color.dropShadow.shadowColor1}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{dropShadow.x.elevation1.dropshadow2}",
-          "y": "{dropShadow.y.elevation1.dropshadow2}",
-          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
-          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
-          "color": "{color.dropShadow.shadowColor2}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
+    "padding": {
+      "value": "0rem",
+      "type": "spacing"
     },
     "toggleSize": {
       "value": "{size.choiceControl.height.md}",
@@ -146,12 +177,41 @@
       "type": "fontSizes"
     },
     "checkedIconBorderReadonlyColor": {
-      "value": "{color.stroke.interactive.success.disabled}",
+      "value": "{color.stroke.interactive.input.readonly}",
       "type": "color"
     },
     "toggleBackground": {
       "value": "{color.background.base}",
       "type": "color"
+    },
+    "toggleWidth": {
+      "value": "2.5rem",
+      "type": "sizing"
+    },
+    "toggleShadow": {
+      "value": [
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow1}",
+          "y": "{dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow2}",
+          "y": "{dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow"
+    },
+    "disabledOpacity": {
+      "value": "{opacity.base}",
+      "type": "opacity"
     }
   }
 }
