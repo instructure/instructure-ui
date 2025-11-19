@@ -4,24 +4,12 @@
       "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
-    "borderWidth": {
-      "value": "{borderWidth.sm}",
-      "type": "borderWidth"
-    },
     "baseBackgroundColor": {
-      "value": "{color.background.elevatedSurface.inverted}",
+      "value": "{color.background.elevatedSurface.inverse}",
       "type": "color"
     },
     "onColorBackgroundColor": {
       "value": "{color.background.elevatedSurface.base}",
-      "type": "color"
-    },
-    "baseTextColor": {
-      "value": "{color.text.inverse}",
-      "type": "color"
-    },
-    "onColorTextColor": {
-      "value": "{color.text.base}",
       "type": "color"
     }
   }

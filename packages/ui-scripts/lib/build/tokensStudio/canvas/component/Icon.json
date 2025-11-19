@@ -291,6 +291,10 @@
     "actionDestructiveSecondaryDisabledColor": {
       "value": "{color.icon.interactive.action.destructiveSecondary.disabled}",
       "type": "color"
+    },
+    "dark": {
+      "value": "{color.icon.dark}",
+      "type": "color"
     }
   }
 }

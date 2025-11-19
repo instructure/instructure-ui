@@ -1,0 +1,88 @@
+{
+  "tag": {
+    "oceanBackgroundColor": {
+      "value": "{color.background.accent.blue}",
+      "type": "color"
+    },
+    "copperBackgroundColor": {
+      "value": "{color.background.accent.orange}",
+      "type": "color"
+    },
+    "forestBackgroundColor": {
+      "value": "{color.background.accent.green}",
+      "type": "color"
+    },
+    "roseBackgroundColor": {
+      "value": "{color.background.accent.red}",
+      "type": "color"
+    },
+    "skyBackgroundColor": {
+      "value": "{color.background.accent.sky}",
+      "type": "color"
+    },
+    "auroraBackgroundColor": {
+      "value": "{color.background.accent.aurora}",
+      "type": "color"
+    },
+    "plumBackgroundColor": {
+      "value": "{color.background.accent.plum}",
+      "type": "color"
+    },
+    "honeyBackgroundColor": {
+      "value": "{color.background.accent.honey}",
+      "type": "color"
+    },
+    "violetBackgroundColor": {
+      "value": "{color.background.accent.violet}",
+      "type": "color"
+    },
+    "seaBackgroundColor": {
+      "value": "{color.background.accent.sea}",
+      "type": "color"
+    },
+    "stoneBackgroundColor": {
+      "value": "{color.background.accent.stone}",
+      "type": "color"
+    },
+    "paddingVertical": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "gap": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.md}",
+      "type": "borderRadius"
+    },
+    "textColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.standalone.textSm}",
+      "type": "lineHeights"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "height": {
+      "value": "1.75rem",
+      "type": "sizing"
+    }
+  }
+}

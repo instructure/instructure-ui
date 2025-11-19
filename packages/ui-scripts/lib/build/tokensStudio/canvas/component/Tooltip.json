@@ -23,6 +23,14 @@
     "paddingVertical": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
+    },
+    "baseTextColor": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
+    "onColorTextColor": {
+      "value": "{color.text.base}",
+      "type": "color"
     }
   }
 }
