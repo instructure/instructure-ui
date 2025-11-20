@@ -122,7 +122,6 @@ const generateStyle = (
     },
     colorMixerButtonContainer: {
       label: 'colorPicker__colorMixerButtonContainer',
-      alignSelf: 'flex-start',
       marginInlineStart: componentTheme.colorMixerButtonContainerLeftMargin
     },
     popoverContentContainer: {
