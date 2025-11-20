@@ -24,6 +24,7 @@
 
 import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { LinkProps, LinkStyleProps, LinkStyle } from './props'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 type StyleParams = Pick<
   LinkProps,
@@ -109,12 +110,12 @@ const generateStyle = (
     verticalAlign: 'baseline',
 
     // set up focus styles
-    outlineColor: 'transparent',
-    outlineWidth: sharedTokens.focusOutline.width,
-    outlineStyle: 'solid', // TODO waiting for focusOutlineStyle
+    // outlineColor: 'transparent',
+    // outlineWidth: sharedTokens.focusOutline.width,
+    // outlineStyle: 'solid', // TODO waiting for focusOutlineStyle
     borderRadius: '0.125rem', // TODO waiting for focusOutlineBorderRadius
-    outlineOffset: sharedTokens.focusOutline.offset,
-    textUnderlineOffset: 'auto',
+    // outlineOffset: sharedTokens.focusOutline.offset,
+    // textUnderlineOffset: 'auto',
 
     // If TruncateText is used in Link with icon, align the icon and the text vertically
     ...(renderIcon &&
@@ -122,18 +123,18 @@ const generateStyle = (
       hasVisibleChildren && {
         alignItems: 'center'
       }),
-    '&:focus': {
-      outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
-    },
+    // '&:focus': {
+    //   outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
+    // },
     '&[aria-disabled]': {
       cursor: 'not-allowed',
       pointerEvents: 'none',
       opacity: '1',
       color: componentTheme.textDisabledColor
-    },
-    '&::-moz-focus-inner': {
-      border: 0 // removes default dotted focus outline in Firefox
     }
+    // '&::-moz-focus-inner': {
+    //   border: 0 // removes default dotted focus outline in Firefox
+    // }
   }
 
   // If Link is a button or link, it should look clickable
@@ -143,10 +144,10 @@ const generateStyle = (
     color: componentTheme.textColor,
     fontSize: currentSize.fontSize,
     lineHeight: currentSize.lineHeight,
-    '&:focus': {
-      color: componentTheme.textColor,
-      outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
-    },
+    // '&:focus': {
+    //   color: componentTheme.textColor,
+    //   outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
+    // },
     '&:hover, &:active': {
       color: componentTheme.textHoverColor,
       textDecoration: isWithinText
@@ -178,10 +179,10 @@ const generateStyle = (
 
   const inverseStyles = {
     color: componentTheme.onColorTextColor,
-    '&:focus': {
-      outlineColor: componentTheme.onColorTextColor, // TODO waiting for focusInverseOutlineColor
-      color: componentTheme.onColorTextColor
-    },
+    // '&:focus': {
+    //   outlineColor: componentTheme.onColorTextColor, // TODO waiting for focusInverseOutlineColor
+    //   color: componentTheme.onColorTextColor
+    // },
     '&:hover, &:active': {
       color: componentTheme.onColorTextHoverColor
     },
@@ -199,6 +200,7 @@ const generateStyle = (
     link: {
       label: 'link',
       ...baseStyles,
+      ...calcFocusOutlineStyles(sharedTokens.focusOutline),
 
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(a), &:is(button)': isClickableStyles,

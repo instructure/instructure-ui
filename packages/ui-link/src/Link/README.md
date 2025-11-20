@@ -51,25 +51,25 @@ type: example
 ---
 <div>
   <div>
-    <Link href="https://instructure.github.io/instructure-ui/" size="small">
+    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="small">
       Small link
     </Link>
   </div>
   <br />
   <div>
-    <Link href="https://instructure.github.io/instructure-ui/" size="medium">
+    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="medium">
       Medium link
     </Link>
   </div>
   <br />
   <div>
-    <Link href="https://instructure.github.io/instructure-ui/" size="large">
+    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="large">
       Large link
     </Link>
   </div>
   <br />
   <div>
-    <Text size="large">This is large text with an <Link href="https://instructure.github.io/instructure-ui/">inherited size link</Link></Text>
+    <Text size="large">This is large text with an <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inherited size link</Link></Text>
   </div>
 </div>
 ```
@@ -136,7 +136,7 @@ type: example
 <Link
   onClick={() => console.log('clicked')}
   isWithinText={false}
-  renderIcon={<IconUserLine size="small" />}
+  renderIcon={<IconUserLine />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Link>
@@ -156,7 +156,7 @@ type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
+    <Link href="https://instructure.design" renderIcon={<IconUserLine />}>Icon before text</Link> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
