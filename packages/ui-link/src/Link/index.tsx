@@ -91,8 +91,39 @@ const Link = forwardRef<LinkHandle, LinkProps>(
       role,
       display,
       elementRef,
+      variant: variantProp,
+      size: sizeProp,
       ...rest
     } = props
+
+    // This block handle deprecated variant values by mapping them to new variant + size props
+    let variant: 'inline' | 'standalone' | undefined = variantProp as
+      | 'inline'
+      | 'standalone'
+      | undefined
+    let size: 'small' | 'medium' | 'large' | undefined = sizeProp
+
+    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
+      warn(
+        false,
+        `[Link] The variant value "${variantProp}" is deprecated. Use variant="${variantProp.replace(
+          '-small',
+          ''
+        )}" with size="small" instead.`
+      )
+      variant = variantProp.replace('-small', '') as 'inline' | 'standalone'
+      // Only set size from deprecated variant if size prop is not explicitly provided
+      if (!sizeProp) {
+        size = 'small'
+      }
+    } else if (
+      (variantProp === 'inline' || variantProp === 'standalone') &&
+      !sizeProp
+    ) {
+      // When using new variant values without explicit size, default to medium
+      // This maintains the old behavior where 'inline' and 'standalone' were medium-sized
+      size = 'medium'
+    }
 
     const linkRef = useRef<Element | null>(null)
 
@@ -149,7 +180,7 @@ const Link = forwardRef<LinkHandle, LinkProps>(
       generateStyle: (componentTheme: any, _params: any, sharedTokens: any) => {
         return generateStyle(
           componentTheme,
-          props,
+          { ...props, variant, size },
           {
             containsTruncateText,
             hasVisibleChildren: hasVisibleChildrenValue

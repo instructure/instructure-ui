@@ -78,20 +78,44 @@ type: example
 
 The `variant` prop controls the text decoration and intended use case. Available variants are `inline` (underlined, for use within text) and `standalone` (no underline, for standalone links).
 
+Use the `variant` prop in combination with the `size` prop to control both the appearance and size of the link.
+
 ```js
 ---
 type: example
 ---
 <div>
   <div>
-    In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
   </div>
   <br />
   <div>
     If the link is standalone (not in a text), use the <code>standalone</code> variant:
-    <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+    <Link display="block" variant="standalone" size="medium" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
   </div>
 </div>
+```
+
+#### Deprecated variant values
+
+**The following variant values are deprecated and will be removed in a future version:**
+
+- `inline-small`
+- `standalone-small`
+
+These deprecated values are still supported for backward compatibility but will trigger console warnings. Please update your code to use the new `variant` + `size` prop combination.
+
+```js
+---
+type: code
+---
+// Deprecated (still works but triggers warning)
+<Link variant="inline-small" href="#">Link</Link>
+<Link variant="standalone-small" href="#">Link</Link>
+
+// Recommended
+<Link variant="inline" size="small" href="#">Link</Link>
+<Link variant="standalone" size="small" href="#">Link</Link>
 ```
 
 ### Adding margin

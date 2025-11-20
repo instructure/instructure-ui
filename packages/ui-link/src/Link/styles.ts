@@ -110,12 +110,7 @@ const generateStyle = (
     verticalAlign: 'baseline',
 
     // set up focus styles
-    // outlineColor: 'transparent',
-    // outlineWidth: sharedTokens.focusOutline.width,
-    // outlineStyle: 'solid', // TODO waiting for focusOutlineStyle
-    borderRadius: '0.125rem', // TODO waiting for focusOutlineBorderRadius
-    // outlineOffset: sharedTokens.focusOutline.offset,
-    // textUnderlineOffset: 'auto',
+    borderRadius: '0.125rem',
 
     // If TruncateText is used in Link with icon, align the icon and the text vertically
     ...(renderIcon &&
@@ -123,18 +118,13 @@ const generateStyle = (
       hasVisibleChildren && {
         alignItems: 'center'
       }),
-    // '&:focus': {
-    //   outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
-    // },
+
     '&[aria-disabled]': {
       cursor: 'not-allowed',
       pointerEvents: 'none',
       opacity: '1',
       color: componentTheme.textDisabledColor
     }
-    // '&::-moz-focus-inner': {
-    //   border: 0 // removes default dotted focus outline in Firefox
-    // }
   }
 
   // If Link is a button or link, it should look clickable
@@ -144,18 +134,14 @@ const generateStyle = (
     color: componentTheme.textColor,
     fontSize: currentSize.fontSize,
     lineHeight: currentSize.lineHeight,
-    // '&:focus': {
-    //   color: componentTheme.textColor,
-    //   outlineColor: componentTheme.textColor // TODO waiting for focusOutlineColor
-    // },
     '&:hover, &:active': {
       color: componentTheme.textHoverColor,
       textDecoration: isWithinText
         ? componentTheme.hoverTextDecorationWithinText
         : componentTheme.hoverTextDecorationOutsideText
     },
-    ...(variant
-      ? variantStyles[variant]
+    ...(variant && variantStyles[variant as keyof typeof variantStyles]
+      ? variantStyles[variant as keyof typeof variantStyles]
       : {
           textDecoration: isWithinText
             ? componentTheme.textDecorationWithinText
@@ -174,15 +160,13 @@ const generateStyle = (
     textAlign: 'inherit',
     fontSize: currentSize.fontSize,
     lineHeight: currentSize.lineHeight,
-    ...(variant && variantStyles[variant])
+    ...(variant &&
+      variantStyles[variant as keyof typeof variantStyles] &&
+      variantStyles[variant as keyof typeof variantStyles])
   }
 
   const inverseStyles = {
     color: componentTheme.onColorTextColor,
-    // '&:focus': {
-    //   outlineColor: componentTheme.onColorTextColor, // TODO waiting for focusInverseOutlineColor
-    //   color: componentTheme.onColorTextColor
-    // },
     '&:hover, &:active': {
       color: componentTheme.onColorTextHoverColor
     },
@@ -219,7 +203,7 @@ const generateStyle = (
     icon: {
       label: 'icon',
       ...(renderIcon && {
-        fontSize: '1.125em', // TODO old componentTheme.iconSize to S, M, L
+        fontSize: '1.125em', // TODO old componentTheme.iconSize to S, M, L icon comatibility
         boxSizing: 'border-box',
         ...iconStyles
       })
