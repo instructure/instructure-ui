@@ -5,10 +5,12 @@ This directory contains prompt templates for generating Jira tickets from Slack 
 ## Template Types
 
 ### Bug Report Templates
+
 - `bug-report.extraction.md` - Extracts structured data from bug report conversations
 - `bug-report.generation.md` - Generates final Jira ticket content for bugs
 
 ### Feature Request Templates
+
 - `feature-request.extraction.md` - Extracts structured data from feature request conversations
 - `feature-request.generation.md` - Generates final Jira ticket content for features
 

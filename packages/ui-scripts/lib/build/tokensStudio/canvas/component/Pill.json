@@ -1,0 +1,114 @@
+{
+  "pill": {
+    "paddingHorizontal": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "height": {
+      "value": "24px",
+      "type": "sizing"
+    },
+    "backgroundColor": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "textFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "textFontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "statusLabelFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "maxWidth": {
+      "value": "240px",
+      "type": "sizing"
+    },
+    "baseTextColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "baseIconColor": {
+      "value": "{color.icon.base}",
+      "type": "color"
+    },
+    "baseBorderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "infoTextColor": {
+      "value": "{color.text.info}",
+      "type": "color"
+    },
+    "infoIconColor": {
+      "value": "{color.icon.info}",
+      "type": "color"
+    },
+    "infoBorderColor": {
+      "value": "{color.stroke.info}",
+      "type": "color"
+    },
+    "errorTextColor": {
+      "value": "{color.text.error}",
+      "type": "color"
+    },
+    "errorIconColor": {
+      "value": "{color.icon.error}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "successTextColor": {
+      "value": "{color.text.success}",
+      "type": "color"
+    },
+    "successIconColor": {
+      "value": "{color.icon.success}",
+      "type": "color"
+    },
+    "successBorderColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "warningTextColor": {
+      "value": "{color.text.warning}",
+      "type": "color"
+    },
+    "warningIconColor": {
+      "value": "{color.icon.warning}",
+      "type": "color"
+    },
+    "warningBorderColor": {
+      "value": "{color.stroke.warning}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.full}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderStyle": {
+      "value": {
+        "style": "solid"
+      },
+      "type": "border"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.standalone.textSm}",
+      "type": "lineHeights"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    }
+  }
+}
