@@ -487,6 +487,14 @@
     "heightXs": {
       "value": "{size.interactive.height.xs}",
       "type": "sizing"
+    },
+    "opacityBase": {
+      "value": "{opacity.base}",
+      "type": "opacity"
+    },
+    "opacityDisabled": {
+      "value": "{opacity.disabled}",
+      "type": "opacity"
     }
   }
 }
