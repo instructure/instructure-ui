@@ -2,6 +2,8 @@
   "tokenSetOrder": [
     "primitives/default",
     "canvas/semantic/layout/default",
+    "canvas/semantic/color/canvas",
+    "canvas/semantic/color/canvasHighContrast",
     "canvas/component/Avatar",
     "canvas/component/Badge",
     "canvas/component/BaseButton",
@@ -26,6 +28,9 @@
     "canvas/component/Toggle",
     "canvas/component/Tooltip",
     "canvas/component/SharedTokens",
+    "rebrand/semantic/layout/default",
+    "rebrand/semantic/color/rebrandLight",
+    "rebrand/semantic/color/rebrandDark",
     "rebrand/component/Avatar",
     "rebrand/component/Badge",
     "rebrand/component/BaseButton",
@@ -49,11 +54,6 @@
     "rebrand/component/Tag",
     "rebrand/component/Toggle",
     "rebrand/component/Tooltip",
-    "rebrand/component/SharedTokens",
-    "canvas/semantic/color/canvas",
-    "canvas/semantic/color/canvasHighContrast",
-    "rebrand/semantic/layout/default",
-    "rebrand/semantic/color/rebrandLight",
-    "rebrand/semantic/color/rebrandDark"
+    "rebrand/component/SharedTokens"
   ]
 }
