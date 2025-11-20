@@ -31,6 +31,10 @@
     "gapPrimitives": {
       "value": "{spacing.gap.inputElements}",
       "type": "spacing"
+    },
+    "stackedOrInlineBreakpoint": {
+      "value": "48em",
+      "type": "sizing"
     }
   }
 }
