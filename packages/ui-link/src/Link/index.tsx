@@ -254,7 +254,19 @@ const Link = forwardRef<LinkHandle, LinkProps>(
     const type =
       element === 'button' || element === 'input' ? 'button' : undefined
 
-    const tabIndex = roleValue === 'button' && !isDisabled ? 0 : undefined
+    // Determine tabIndex based on role and disabled state
+    const tabIndex = useMemo(() => {
+      if (isDisabled) {
+        // Disabled links should not be focusable
+        return -1
+      }
+      if (roleValue === 'button') {
+        // Elements with button role need explicit tabIndex
+        return 0
+      }
+      // Otherwise let the browser handle default focusability
+      return undefined
+    }, [isDisabled, roleValue])
 
     return (
       <View
