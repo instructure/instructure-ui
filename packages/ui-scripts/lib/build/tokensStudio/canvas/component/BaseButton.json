@@ -24,7 +24,7 @@
       "value": "{color.stroke.interactive.action.primary.disabled}",
       "type": "color"
     },
-    "primaryTextColor": {
+    "primaryBaseTextColor": {
       "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
     },
@@ -186,6 +186,18 @@
     },
     "aiSecondaryHoverBackgroundBottomGradientColor": {
       "value": "{color.background.interactive.action.aiSecondary.hover.bottomGradient}",
+      "type": "color"
+    },
+    "primaryHoverTextColor": {
+      "value": "{color.text.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "primaryActiveTextColor": {
+      "value": "{color.text.interactive.action.primary.active}",
+      "type": "color"
+    },
+    "primaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.primary.disabled}",
       "type": "color"
     },
     "primaryOnColorBackgroundColor": {
@@ -350,10 +362,6 @@
     },
     "aiSecondaryDisabledBackgroundColor": {
       "value": "{color.background.interactive.action.aiSecondary.disabled}",
-      "type": "color"
-    },
-    "primaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.primary.disabled}",
       "type": "color"
     },
     "secondaryHoverBorderColor": {
