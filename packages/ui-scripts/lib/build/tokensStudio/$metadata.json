@@ -2,8 +2,6 @@
   "tokenSetOrder": [
     "primitives/default",
     "canvas/semantic/layout/default",
-    "canvas/semantic/color/canvas",
-    "canvas/semantic/color/canvasHighContrast",
     "canvas/component/Avatar",
     "canvas/component/Badge",
     "canvas/component/BaseButton",
@@ -11,6 +9,7 @@
     "canvas/component/Checkbox",
     "canvas/component/FormFieldLayout",
     "canvas/component/FormFieldMessage",
+    "canvas/component/Heading",
     "canvas/component/Icon",
     "canvas/component/Link",
     "canvas/component/Mask",
@@ -34,6 +33,7 @@
     "rebrand/component/Checkbox",
     "rebrand/component/FormFieldLayout",
     "rebrand/component/FormFieldMessage",
+    "rebrand/component/Heading",
     "rebrand/component/Icon",
     "rebrand/component/Link",
     "rebrand/component/Mask",
@@ -50,6 +50,8 @@
     "rebrand/component/Toggle",
     "rebrand/component/Tooltip",
     "rebrand/component/SharedTokens",
+    "canvas/semantic/color/canvas",
+    "canvas/semantic/color/canvasHighContrast",
     "rebrand/semantic/layout/default",
     "rebrand/semantic/color/rebrandLight",
     "rebrand/semantic/color/rebrandDark"
