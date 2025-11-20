@@ -1250,11 +1250,11 @@
     },
     "dropShadow": {
       "shadowColor1": {
-        "value": "rgba(28,34,43,0.3)",
+        "value": "rgba(28,34,43,0.2)",
         "type": "color"
       },
       "shadowColor2": {
-        "value": "rgba(28,34,43,0.15)",
+        "value": "rgba(28,34,43,0.1)",
         "type": "color"
       }
     }
