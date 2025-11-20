@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.26.4](https://github.com/instructure/instructure-ui/compare/v10.26.3...v10.26.4) (2025-11-20)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** complete color mixer button alignment fix ([c3fd3b1](https://github.com/instructure/instructure-ui/commit/c3fd3b1c79f29757f530d38da0ff501dee8521a2))
+* **ui-top-nav-bar:** fix aria-expanded added twice when displaying menus/popups ([a212bb4](https://github.com/instructure/instructure-ui/commit/a212bb44499d4ffc387c66079334b77ea6d7e66e))
+
+
+
+
+
 ## [10.26.3](https://github.com/instructure/instructure-ui/compare/v10.26.2...v10.26.3) (2025-11-19)
 
 

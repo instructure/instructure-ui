@@ -1,6 +1,6 @@
 {
   "name": "@instructure/uid",
-  "version": "10.26.3",
+  "version": "10.26.4",
   "description": "A unique (CSS-safe) id generator made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.26.3",
+    "@instructure/ui-babel-preset": "10.26.4",
     "@testing-library/jest-dom": "^6.6.3",
     "vitest": "^3.2.2"
   },
