@@ -493,7 +493,7 @@
       "type": "opacity"
     },
     "opacityDisabled": {
-      "value": "{opacity.disabled}",
+      "value": "{opacity.base}",
       "type": "opacity"
     }
   }
