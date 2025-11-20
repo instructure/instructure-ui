@@ -50,25 +50,25 @@ type: example
 ---
 <div>
   <div>
-    <Link href="https://instructure.github.io/instructure-ui/" size="small">
+    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="small">
       Small link
     </Link>
   </div>
   <br />
   <div>
-    <Link href="https://instructure.github.io/instructure-ui/" size="medium">
+    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="medium">
       Medium link
     </Link>
   </div>
   <br />
   <div>
-    <Link href="https://instructure.github.io/instructure-ui/" size="large">
+    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="large">
       Large link
     </Link>
   </div>
   <br />
   <div>
-    <Text size="large">This is large text with an <Link href="https://instructure.github.io/instructure-ui/">inherited size link</Link></Text>
+    <Text size="large">This is large text with an <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inherited size link</Link></Text>
   </div>
 </div>
 ```
@@ -77,20 +77,44 @@ type: example
 
 The `variant` prop controls the text decoration and intended use case. Available variants are `inline` (underlined, for use within text) and `standalone` (no underline, for standalone links).
 
+Use the `variant` prop in combination with the `size` prop to control both the appearance and size of the link.
+
 ```js
 ---
 type: example
 ---
 <div>
   <div>
-    In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
   </div>
   <br />
   <div>
     If the link is standalone (not in a text), use the <code>standalone</code> variant:
-    <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+    <Link display="block" variant="standalone" size="medium" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
   </div>
 </div>
+```
+
+#### Deprecated variant values
+
+**The following variant values are deprecated and will be removed in a future version:**
+
+- `inline-small`
+- `standalone-small`
+
+These deprecated values are still supported for backward compatibility but will trigger console warnings. Please update your code to use the new `variant` + `size` prop combination.
+
+```js
+---
+type: code
+---
+// Deprecated (still works but triggers warning)
+<Link variant="inline-small" href="#">Link</Link>
+<Link variant="standalone-small" href="#">Link</Link>
+
+// Recommended
+<Link variant="inline" size="small" href="#">Link</Link>
+<Link variant="standalone" size="small" href="#">Link</Link>
 ```
 
 ### Adding margin
@@ -135,7 +159,7 @@ type: example
 <Link
   onClick={() => console.log('clicked')}
   isWithinText={false}
-  renderIcon={<IconUserLine size="small" />}
+  renderIcon={<IconUserLine />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Link>
@@ -155,7 +179,7 @@ type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
+    <Link href="https://instructure.design" renderIcon={<IconUserLine />}>Icon before text</Link> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
@@ -212,7 +236,7 @@ type: embed
 | Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
 | Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
 | Link | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the size of the link (font size, line height, and icon gap) |
-| Link | variant | `'inline' \| 'standalone'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component |
+| Link | variant | `'inline' \| 'standalone' \| 'inline-small' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component - `inline` - `standalone` __Deprecated values:__ - `inline-small` - `standalone-small` |
 | Link | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
