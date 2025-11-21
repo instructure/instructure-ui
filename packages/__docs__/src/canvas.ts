@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
+import { canvas as OriginalCanvasTheme } from '@instructure/ui-themes'
 /**
  * Old (InstUI v11) theme, used just by docs components.
  */
 const canvas = {
   key: 'canvas',
   description: 'This theme meets WCAG 2.1 AA rules for color contrast.',
+  newTheme: OriginalCanvasTheme.newTheme,
   borders: {
     radiusSmall: '0.125rem',
     radiusMedium: '0.25rem',
