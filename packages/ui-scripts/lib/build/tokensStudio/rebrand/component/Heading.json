@@ -161,6 +161,52 @@
     "h6FontFamily": {
       "value": "{fontFamily.heading}",
       "type": "fontFamilies"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.heading.base}",
+      "type": "lineHeights"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "baseColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "onColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "secondaryOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "mutedColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "aiTextTopGradientColor": {
+      "value": "{color.text.accent.violet}",
+      "type": "color"
+    },
+    "aiTextBottomGradientColor": {
+      "value": "{color.text.accent.sea}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderStyle": {
+      "value": {
+        "style": "solid"
+      },
+      "type": "border"
+    },
+    "borderPadding": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
     }
   }
 }
