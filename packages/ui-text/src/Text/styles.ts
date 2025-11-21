@@ -22,89 +22,103 @@
  * SOFTWARE.
  */
 
-import type { TextTheme } from '@instructure/shared-types'
 import type { TextProps, TextStyle } from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { TokenTypographyValueInst } from '@instructure/ui-themes/src'
+
+type StyleParams = {
+  color: TextProps['color']
+  fontStyle: TextProps['fontStyle']
+  lineHeight: TextProps['lineHeight']
+  letterSpacing: TextProps['letterSpacing']
+  transform: TextProps['transform']
+  size: TextProps['size']
+  variant: TextProps['variant']
+  weight: TextProps['weight']
+  wrap: TextProps['wrap']
+}
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TextTheme,
-  props: TextProps
+  componentTheme: NewComponentTypes['Text'],
+  params: StyleParams
 ): TextStyle => {
   const {
-    size,
-    wrap,
-    weight,
+    color,
     fontStyle,
-    transform,
     lineHeight,
     letterSpacing,
-    color,
-    variant
-  } = props
+    transform,
+    size,
+    variant,
+    weight,
+    wrap
+  } = params
 
-  const variants: Record<NonNullable<TextProps['variant']>, object> = {
+  const variants: Record<
+    NonNullable<TextProps['variant']>,
+    TokenTypographyValueInst
+  > = {
     descriptionPage: {
-      fontStyle: 'normal',
-      fontWeight: componentTheme.weightRegular,
-      fontSize: componentTheme.descriptionPage,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.descriptionPage.fontFamily,
+      fontWeight: componentTheme.descriptionPage.fontWeight,
+      fontSize: componentTheme.descriptionPage.fontSize,
+      lineHeight: componentTheme.descriptionPage.lineHeight
     },
     descriptionSection: {
-      fontStyle: 'normal',
-      fontWeight: componentTheme.weightRegular,
-      fontSize: componentTheme.descriptionSection,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.descriptionSection.fontFamily,
+      fontWeight: componentTheme.descriptionSection.fontWeight,
+      fontSize: componentTheme.descriptionSection.fontSize,
+      lineHeight: componentTheme.descriptionSection.lineHeight
     },
     content: {
-      fontStyle: 'normal',
-      fontWeight: componentTheme.weightRegular,
-      fontSize: componentTheme.content,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.content.fontFamily,
+      fontWeight: componentTheme.content.fontWeight,
+      fontSize: componentTheme.content.fontSize,
+      lineHeight: componentTheme.content.lineHeight
     },
     contentImportant: {
-      fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.content,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.contentImportant.fontFamily,
+      fontWeight: componentTheme.contentImportant.fontWeight,
+      fontSize: componentTheme.contentImportant.fontSize,
+      lineHeight: componentTheme.contentImportant.lineHeight
     },
     contentQuote: {
-      fontStyle: 'italic',
-      fontWeight: componentTheme.weightRegular,
-      fontSize: componentTheme.content,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.contentQuote.fontFamily,
+      fontWeight: componentTheme.contentQuote.fontWeight,
+      fontSize: componentTheme.contentQuote.fontSize,
+      lineHeight: componentTheme.contentQuote.lineHeight
     },
     contentSmall: {
-      fontStyle: 'normal',
-      fontWeight: componentTheme.weightRegular,
-      fontSize: componentTheme.contentSmall,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.contentSmall.fontFamily,
+      fontWeight: componentTheme.contentSmall.fontWeight,
+      fontSize: componentTheme.contentSmall.fontSize,
+      lineHeight: componentTheme.contentSmall.lineHeight
     },
     legend: {
-      fontStyle: 'normal',
-      fontWeight: componentTheme.weightRegular,
-      fontSize: componentTheme.legend,
-      lineHeight: componentTheme.lineHeight150
+      fontFamily: componentTheme.legend.fontFamily,
+      fontWeight: componentTheme.legend.fontWeight,
+      fontSize: componentTheme.legend.fontSize,
+      lineHeight: componentTheme.legend.lineHeight
     }
   }
 
   const colorVariants = {
-    primary: { color: componentTheme.primaryColor },
-    secondary: { color: componentTheme.secondaryColor },
-    'primary-inverse': { color: componentTheme.primaryInverseColor },
-    'secondary-inverse': { color: componentTheme.secondaryInverseColor },
+    primary: { color: componentTheme.baseColor },
+    secondary: { color: componentTheme.mutedColor },
+    'primary-inverse': { color: componentTheme.baseOnColor },
+    'secondary-inverse': { color: componentTheme.mutedOnColor },
     success: { color: componentTheme.successColor },
-    brand: { color: componentTheme.brandColor },
-    danger: { color: componentTheme.dangerColor },
-    alert: { color: componentTheme.alertColor },
+    brand: { color: componentTheme.primaryColor },
+    danger: { color: componentTheme.errorColor },
     warning: { color: componentTheme.warningColor },
     'ai-highlight': {
       color: componentTheme.aiColor,
@@ -122,8 +136,8 @@ const generateStyle = (
     normal: { fontWeight: componentTheme.fontWeightNormal },
     light: { fontWeight: componentTheme.fontWeightLight },
     bold: { fontWeight: componentTheme.fontWeightBold },
-    weightRegular: { fontWeight: componentTheme.weightRegular },
-    weightImportant: { fontWeight: componentTheme.weightImportant }
+    weightRegular: { fontWeight: componentTheme.fontWeightRegular },
+    weightImportant: { fontWeight: componentTheme.fontWeightImportant }
   }
 
   const fontSizeVariants = {
@@ -133,11 +147,12 @@ const generateStyle = (
     large: componentTheme.fontSizeLarge,
     'x-large': componentTheme.fontSizeXLarge,
     'xx-large': componentTheme.fontSizeXXLarge,
-    descriptionPage: componentTheme.descriptionPage,
-    descriptionSection: componentTheme.descriptionSection,
-    content: componentTheme.content,
-    contentSmall: componentTheme.contentSmall,
-    legend: componentTheme.legend
+    // these are deprecated
+    descriptionPage: componentTheme.descriptionPage.fontSize,
+    descriptionSection: componentTheme.descriptionSection.fontSize,
+    content: componentTheme.content.fontSize,
+    contentSmall: componentTheme.contentSmall.fontSize,
+    legend: componentTheme.legend.fontSize
   }
 
   const lineHeightVariants = {
@@ -172,7 +187,7 @@ const generateStyle = (
     '&:focus': {
       outline: 'none'
     },
-    ...(color ? colorVariants[color] : {}),
+    ...(color ? colorVariants[color] : { color: componentTheme.baseColor }),
     ...(wrap === 'break-word' ? wrapStyle : {}),
     letterSpacing: letterSpacingVariants[letterSpacing!],
     ...(transform ? { textTransform: transform } : {}),
@@ -204,7 +219,8 @@ const generateStyle = (
       fontFamily: componentTheme.fontFamily,
       ...baseStyles,
 
-      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because
+      // of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(input)[type]': inputStyles,
       '&:-webkit-any(input)[type]': inputStyles,
 
