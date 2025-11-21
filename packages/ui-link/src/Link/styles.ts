@@ -80,12 +80,8 @@ const generateStyle = (
     fontWeight: componentTheme.fontWeight,
     transition: 'outline-color 0.2s',
     verticalAlign: 'baseline',
-
     // set up focus styles
     outlineColor: 'transparent',
-    outlineWidth: componentTheme.focusOutlineWidth,
-    outlineStyle: componentTheme.focusOutlineStyle,
-    borderRadius: componentTheme.focusOutlineBorderRadius,
     outlineOffset: '0.25rem',
     textUnderlineOffset: componentTheme.textUnderlineOffset,
 
@@ -96,7 +92,10 @@ const generateStyle = (
         alignItems: 'center'
       }),
 
-    '&:focus': {
+    '&&&&&&:focus': {
+      outlineWidth: componentTheme.focusOutlineWidth,
+      outlineStyle: componentTheme.focusOutlineStyle,
+      borderRadius: componentTheme.focusOutlineBorderRadius,
       outlineColor: componentTheme.focusOutlineColor
     },
     '&[aria-disabled]': {
@@ -114,7 +113,8 @@ const generateStyle = (
     ...baseStyles,
     cursor: 'pointer',
     color: componentTheme.color,
-    '&:focus': {
+    // This needs stronger specificity than `View`
+    '&&&&&:focus': {
       color: componentTheme.color,
       outlineColor: componentTheme.focusOutlineColor
     },
@@ -147,10 +147,15 @@ const generateStyle = (
 
   const inverseStyles = {
     color: componentTheme.colorInverse,
-    '&:focus': {
-      outlineColor: componentTheme.focusInverseIconOutlineColor
+    '&&&&&:focus': {
+      outlineColor: componentTheme.focusInverseOutlineColor
     },
-    '&:hover, &:focus, &:active': {
+    ...(renderIcon && {
+      '&&&&&:focus': {
+        outlineColor: componentTheme.focusInverseIconOutlineColor
+      }
+    }),
+    '&:hover, &&&&&:focus, &:active': {
       color: componentTheme.colorInverse
     }
   }
