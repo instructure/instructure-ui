@@ -25,7 +25,7 @@
       "type": "fontSizes"
     },
     "lineHeight": {
-      "value": "{lineHeight.standalone.textBase}",
+      "value": "{lineHeight.label.base}",
       "type": "lineHeights"
     },
     "gapPrimitives": {
