@@ -51,7 +51,9 @@ const generateStyle = (
 
       ...(ordered && {
         listStyleType: 'none',
-        paddingInlineStart: `calc(${componentTheme.listPadding} / 2)`,
+        // 1.3 rem is removed to have the ordered list start at the same point
+        // as the unordered vertically
+        paddingInlineStart: `calc(${componentTheme.listPadding} - 1.3rem)`,
         paddingInlineEnd: 0,
         counterReset: 'ol-counter',
 
