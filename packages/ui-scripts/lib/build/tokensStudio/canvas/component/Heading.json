@@ -113,6 +113,54 @@
     "h6Fontsize": {
       "value": "{fontSize.textXs}",
       "type": "fontSizes"
+    },
+    "h1FontWeight": {
+      "value": "{fontWeight.heading.strong}",
+      "type": "fontWeights"
+    },
+    "h2FontWeight": {
+      "value": "{fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "h3FontWeight": {
+      "value": "{fontWeight.heading.strong}",
+      "type": "fontWeights"
+    },
+    "h4FontWeight": {
+      "value": "{fontWeight.heading.strong}",
+      "type": "fontWeights"
+    },
+    "h5FontWeight": {
+      "value": "{fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "h6FontWeight": {
+      "value": "{fontWeight.heading.base}",
+      "type": "fontWeights"
+    },
+    "h1FontFamily": {
+      "value": "{fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h2FontFamily": {
+      "value": "{fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h3FontFamily": {
+      "value": "{fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h4FontFamily": {
+      "value": "{fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h5FontFamily": {
+      "value": "{fontFamily.heading}",
+      "type": "fontFamilies"
+    },
+    "h6FontFamily": {
+      "value": "{fontFamily.heading}",
+      "type": "fontFamilies"
     }
   }
 }

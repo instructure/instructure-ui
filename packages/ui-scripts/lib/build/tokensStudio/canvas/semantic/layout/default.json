@@ -234,7 +234,7 @@
     },
     "heading": {
       "base": {
-        "value": "{fontWeight.semiBold}",
+        "value": "{fontWeight.regular}",
         "type": "fontWeights"
       },
       "strong": {
