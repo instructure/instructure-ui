@@ -28,6 +28,7 @@ import type {
   ComponentThemeMap,
   DeepPartial
 } from '@instructure/shared-types'
+import type { Theme } from '@instructure/ui-themes'
 
 /**
  * A theme object where every prop is optional
@@ -101,7 +102,7 @@ type Overrides = {
   componentOverrides?: ComponentOverride
 }
 
-type BaseThemeOrOverride = BaseTheme | PartialTheme | Overrides
+type BaseThemeOrOverride = Theme | PartialTheme | Overrides
 
 type ThemeOrOverride =
   | BaseThemeOrOverride

@@ -29,6 +29,14 @@ const path = require('path')
 
 const opts = { stdio: 'inherit' }
 function buildProject() {
+  console.info('Building themes...')
+  try {
+    execSync('pnpm run build:themes', opts)
+  } catch (error) {
+    console.error("'pnpm run build:themes' failed", error)
+    process.exit(1)
+  }
+
   execSync('pnpm --filter @instructure/ui-icons prepare-build', opts)
 
   console.info('Building packages with Babel...')
@@ -55,14 +63,9 @@ function buildProject() {
     process.exit(1)
   }
 }
-function bootstrap() {
-  try {
-    fork(path.resolve('scripts/clean.js'), opts)
-  } catch (error) {
-    console.error('clean failed with error:', error)
-    process.exit(1)
-  }
 
+function bootstrap() {
+  execSync(path.resolve('scripts/clean.js'), opts)
   buildProject()
 }
 

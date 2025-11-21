@@ -21,15 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { Spacing } from './ThemeablePropValues'
 
-export function mapSpacingToShorthand(
-  value: Spacing | undefined,
-  spacingMap: { [key: string]: string }
-) {
-  const splitMargin = value?.split(' ')
-  const cssMargin = splitMargin
-    ? splitMargin.map((m: string) => spacingMap[m] || m).join(' ')
-    : '0'
-  return cssMargin
+import sharedThemeTokens from '../../sharedThemeTokens'
+import type { Colors } from '@instructure/shared-types'
+import { colors } from './colors'
+import {
+  rebrandLight as newRebrandLight,
+  type RebrandLight as NewRebrandLight
+} from '../newThemes'
+import { Theme } from '../../index'
+
+const key = 'rebrand-light'
+
+export type RebrandLightTheme = Theme<NewRebrandLight, 'rebrand-light'> &
+  typeof sharedThemeTokens & { colors: Colors }
+/**
+ * Canvas high contrast theme without the `use` function and `variables` prop.
+ * Not affected by global theme overrides (`.use()` function).
+ *
+ * Will be default in the next major version of InstUI
+ */
+const theme: RebrandLightTheme = {
+  newTheme: newRebrandLight,
+  key,
+  description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
+  ...sharedThemeTokens,
+  colors
 }
+
+export default theme
