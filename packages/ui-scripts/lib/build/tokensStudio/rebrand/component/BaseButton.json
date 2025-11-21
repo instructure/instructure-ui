@@ -29,7 +29,7 @@
       "type": "color"
     },
     "primaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.primary.disabled}",
+      "value": "{color.stroke.interactive.action.disabled}",
       "type": "color"
     },
     "primaryBaseTextColor": {
@@ -229,7 +229,7 @@
       "type": "color"
     },
     "primaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.primary.disabled}",
+      "value": "{color.text.interactive.disabled.base}",
       "type": "color"
     },
     "primaryOnColorBackgroundColor": {

@@ -93,7 +93,7 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.navy.navy160}",
+              "value": "{color.navy.navy150}",
               "type": "color"
             },
             "active": {
@@ -451,7 +451,7 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.navy.navy160}",
+              "value": "{color.navy.navy150}",
               "type": "color"
             },
             "active": {
