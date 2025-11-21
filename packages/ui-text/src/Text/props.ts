@@ -37,7 +37,6 @@ type TextOwnProps = {
   as?: AsElementType
   /**
    * Color of the text
-   *
    */
   color?:
     | 'primary'
@@ -45,7 +44,6 @@ type TextOwnProps = {
     | 'brand'
     | 'success'
     | 'danger'
-    | 'alert'
     | 'warning'
     | 'primary-inverse'
     | 'secondary-inverse'
@@ -56,6 +54,10 @@ type TextOwnProps = {
   elementRef?: (element: Element | null) => void
   fontStyle?: 'italic' | 'normal'
   letterSpacing?: 'normal' | 'condensed' | 'expanded'
+  /**
+   * Line height. Use `variant` if possible instead.
+   * `lineHeight100`, `lineHeight125`, `lineHeight150` are deprecated
+   */
   lineHeight?:
     | 'default'
     | 'fit'
@@ -64,6 +66,11 @@ type TextOwnProps = {
     | 'lineHeight100'
     | 'lineHeight125'
     | 'lineHeight150'
+  /**
+   * Size of the text. Use `variant` if possible instead.
+   * `descriptionPage`, `descriptionSection`, `content`, `contentSmall`,
+   * `legend` are deprecated
+   */
   size?:
     | 'x-small'
     | 'small'
@@ -90,6 +97,10 @@ type TextOwnProps = {
     | 'contentQuote'
     | 'contentSmall'
     | 'legend'
+  /**
+   * Weight of the text. Use `variant` if possible instead.
+   * `weightRegular`, `weightImportant` are deprecated
+   */
   weight?: 'normal' | 'light' | 'bold' | 'weightRegular' | 'weightImportant'
   wrap?: 'normal' | 'break-word'
   children?: React.ReactNode
