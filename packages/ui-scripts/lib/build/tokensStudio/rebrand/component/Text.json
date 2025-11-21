@@ -70,10 +70,6 @@
       "type": "typography",
       "description": "Used for short explanatory text accompanying data visualizations, icons, or UI elements."
     },
-    "label": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
-    },
     "fontSizeXSmall": {
       "value": "{fontSize.textXs}",
       "type": "fontSizes"
