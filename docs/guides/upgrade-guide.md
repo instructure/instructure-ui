@@ -16,6 +16,11 @@ InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We a
 
 ## Removal of deprecated props/components/APIs
 
+### Text
+
+- `alert` color has been removed. Please use `primary` instead.
+- Some prop values have been deprecated, see [Text](/Text) for more details.
+
 ## API Changes
 
 ## Codemods
