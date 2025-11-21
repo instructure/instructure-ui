@@ -54,7 +54,7 @@ const generateStyle = (
     spacing
   } = componentTheme
   const { checkContrast, popoverMaxHeight, margin } = props
-  const { isSimple } = state
+  const { isSimple, calculatedPopoverMaxHeight } = state
 
   const cssMargin = calcMarginFromShorthand(margin, spacing)
   return {
@@ -122,13 +122,18 @@ const generateStyle = (
     },
     colorMixerButtonContainer: {
       label: 'colorPicker__colorMixerButtonContainer',
-      alignSelf: 'flex-start',
       marginInlineStart: componentTheme.colorMixerButtonContainerLeftMargin
     },
     popoverContentContainer: {
       label: 'colorPicker__popoverContentContainer',
-      maxHeight: popoverMaxHeight || '100vh',
-      overflow: 'auto'
+      maxHeight: calculatedPopoverMaxHeight || popoverMaxHeight || '100vh',
+      overflowY: 'auto',
+      overflowX: 'hidden',
+      scrollbarGutter: 'stable',
+      display: 'flex',
+      flexDirection: 'column',
+      opacity: state.isHeightCalculated ? 1 : 0,
+      transition: 'opacity 150ms ease-in'
     },
     colorMixerButtonWrapper: {
       label: 'colorPicker__colorMixerButtonWrapper',
