@@ -28,17 +28,20 @@ import {
   ColorContrast as cc,
   ColorIndicator as ci,
   ColorMixer as cm,
-  ColorPreset as cp
+  ColorPreset as cp,
+  ColorPicker as cpk
 } from '@instructure/ui'
 
 const ColorContrast = cc as any
 const ColorIndicator = ci as any
 const ColorMixer = cm as any
 const ColorPreset = cp as any
+const ColorPicker = cpk as any
 
 export default function ColorPickerPage() {
   const value = '#328DCFC2'
   const [selected, setSelected] = useState('')
+  const [pickerValue, setPickerValue] = useState('#FF0000')
   const [colors, setColors] = useState([
     '#ffffff',
     '#0CBF94',
@@ -179,6 +182,67 @@ export default function ColorPickerPage() {
           `color with hex code ${hexCode}${isSelected ? ' selected' : ''}`
         }
       />
+
+      <h2 data-test-id="colorpicker-scrollable-title">
+        ColorPicker with Scrollable Popover
+      </h2>
+      <p>
+        This ColorPicker has a tall popover with all three sections (ColorMixer,
+        ColorPreset, and ColorContrast). When opened near the bottom of the
+        viewport, the popover should be scrollable.
+      </p>
+      <div
+        style={{ marginTop: '50vh' }}
+        data-test-id="colorpicker-scrollable-container"
+      >
+        <ColorPicker
+          label="Color"
+          placeholderText="Enter HEX"
+          value={pickerValue}
+          onChange={(newValue: string) => setPickerValue(newValue)}
+          popoverButtonScreenReaderLabel="View and choose color"
+          popoverScreenReaderLabel="Color picker popup"
+          colorMixerSettings={{
+            popoverAddButtonLabel: 'Apply',
+            popoverCloseButtonLabel: 'Cancel',
+            colorMixer: {
+              withAlpha: true,
+              rgbRedInputScreenReaderLabel: 'Input field for red',
+              rgbGreenInputScreenReaderLabel: 'Input field for green',
+              rgbBlueInputScreenReaderLabel: 'Input field for blue',
+              rgbAlphaInputScreenReaderLabel: 'Input field for alpha',
+              colorSliderNavigationExplanationScreenReaderLabel: `You are on a color slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`,
+              alphaSliderNavigationExplanationScreenReaderLabel: `You are on an alpha slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`,
+              colorPaletteNavigationExplanationScreenReaderLabel: `You are on a color palette. To navigate on the palette up, left, down or right, use the 'W', 'A', 'S' and 'D' buttons respectively`
+            },
+            colorPreset: {
+              label: 'Preset Colors',
+              colors: [
+                '#FF0000',
+                '#00FF00',
+                '#0000FF',
+                '#FFFF00',
+                '#FF00FF',
+                '#00FFFF',
+                '#000000',
+                '#FFFFFF',
+                '#808080'
+              ]
+            },
+            colorContrast: {
+              firstColor: '#FFFFFF',
+              label: 'Color Contrast Ratio',
+              successLabel: 'PASS',
+              failureLabel: 'FAIL',
+              normalTextLabel: 'Normal text',
+              largeTextLabel: 'Large text',
+              graphicsTextLabel: 'Graphics text',
+              firstColorLabel: 'Background',
+              secondColorLabel: 'Foreground'
+            }
+          }}
+        />
+      </div>
     </main>
   )
 }
