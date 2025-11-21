@@ -11,6 +11,7 @@
     "canvas/component/Checkbox",
     "canvas/component/FormFieldLayout",
     "canvas/component/FormFieldMessage",
+    "canvas/component/Heading",
     "canvas/component/Icon",
     "canvas/component/Link",
     "canvas/component/Mask",
@@ -27,6 +28,9 @@
     "canvas/component/Toggle",
     "canvas/component/Tooltip",
     "canvas/component/SharedTokens",
+    "rebrand/semantic/layout/default",
+    "rebrand/semantic/color/rebrandLight",
+    "rebrand/semantic/color/rebrandDark",
     "rebrand/component/Avatar",
     "rebrand/component/Badge",
     "rebrand/component/BaseButton",
@@ -34,6 +38,7 @@
     "rebrand/component/Checkbox",
     "rebrand/component/FormFieldLayout",
     "rebrand/component/FormFieldMessage",
+    "rebrand/component/Heading",
     "rebrand/component/Icon",
     "rebrand/component/Link",
     "rebrand/component/Mask",
@@ -49,9 +54,6 @@
     "rebrand/component/Tag",
     "rebrand/component/Toggle",
     "rebrand/component/Tooltip",
-    "rebrand/component/SharedTokens",
-    "rebrand/semantic/layout/default",
-    "rebrand/semantic/color/rebrandLight",
-    "rebrand/semantic/color/rebrandDark"
+    "rebrand/component/SharedTokens"
   ]
 }
