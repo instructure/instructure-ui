@@ -47,9 +47,11 @@ import type {
   ComponentStyle,
   ComponentOverride,
   GenerateComponentTheme,
-  GenerateStyle,
+  GenerateStyleRework,
   Props
 } from './EmotionTypes'
+
+import type { NewComponentTypes, Theme } from '@instructure/ui-themes'
 
 // Extract is needed because it would allow number otherwise
 // https://stackoverflow.com/a/51808262/319473
@@ -160,14 +162,13 @@ const defaultValues = {
  * @module withStyle
  *
  * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
  * @returns {ReactElement} The decorated WithStyle Component
  */
-const withStyle = decorator(
+const withStyleRework = decorator(
   (
     ComposedComponent: WithStyleComponent,
-    generateStyle: GenerateStyle,
-    generateComponentTheme: GenerateComponentTheme
+    generateStyle: GenerateStyleRework,
+    useTokensFrom?: keyof NewComponentTypes
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
@@ -179,7 +180,7 @@ const withStyle = decorator(
       originalType?: WithStyleComponent
       defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
-      const theme = useTheme()
+      const theme = useTheme() as Theme
 
       if (props.styles) {
         warn(
@@ -202,10 +203,12 @@ const withStyle = decorator(
         ...defaultValues
       }
 
+      const componentWithTokensId = useTokensFrom ?? displayName
+
       const baseComponentTheme =
-        typeof generateComponentTheme === 'function'
-          ? generateComponentTheme(theme as BaseTheme)
-          : {}
+        theme.newTheme.components[
+          componentWithTokensId as keyof NewComponentTypes
+        ]
 
       const themeOverride = getComponentThemeOverride(
         theme,
@@ -218,13 +221,21 @@ const withStyle = decorator(
       const componentTheme = { ...baseComponentTheme, ...themeOverride }
 
       const [styles, setStyles] = useState(
-        generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}
+        generateStyle
+          ? generateStyle(
+              componentTheme,
+              componentProps,
+              (theme as Theme).newTheme.components.SharedTokens,
+              {}
+            )
+          : {}
       )
 
       const makeStyleHandler: WithStyleProps['makeStyles'] = (extraArgs) => {
         const calculatedStyles = generateStyle(
           componentTheme,
           componentProps,
+          (theme as Theme).newTheme.components.SharedTokens,
           extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
@@ -256,9 +267,6 @@ const withStyle = decorator(
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 
-    // we are exposing the theme generator for the docs generation
-    WithStyle.generateComponentTheme = generateComponentTheme
-
     // we have to add defaults to makeStyles and styles added by this decorator
     // eslint-disable-next-line no-param-reassign
     ComposedComponent.defaultProps = {
@@ -275,6 +283,6 @@ const withStyle = decorator(
   }
 )
 
-export default withStyle
-export { withStyle }
+export default withStyleRework
+export { withStyleRework }
 export type { WithStyleProps }
