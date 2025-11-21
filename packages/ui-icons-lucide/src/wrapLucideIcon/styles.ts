@@ -22,53 +22,145 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import type { LucideIconStyle } from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { LucideIconWrapperProps, LucideIconStyle } from './props'
 
-interface StyleParams {
-  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+type StyleParams = {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   color?: string
   rotate?: '0' | '90' | '180' | '270'
   bidirectional?: boolean
   inline?: boolean
-  themeOverride?: Partial<NewComponentTypes['Icon']>
+  themeOverride?: LucideIconWrapperProps['themeOverride']
 }
 
-/**
- * Generates the style object from the theme and provided props.
- *
- * This function is called by useStyle hook and generates dynamic CSS-in-JS
- * styles based on the component theme and current prop values.
- *
- * @param componentTheme The theme variable object
- * @param params The reactive parameters (props that affect styling)
- * @param _sharedTokens Shared token object that stores common values for the theme
- * @return The final style object, which will be used in the component
- */
 const generateStyle = (
   componentTheme: NewComponentTypes['Icon'],
-  params: StyleParams,
-  _sharedTokens: SharedTokens
+  params: StyleParams
 ): LucideIconStyle => {
   const { color, rotate = '0', bidirectional = true, inline = true } = params
 
-  // Color mapping (semantic colors from theme)
-  // Note: Size is no longer applied here - it's passed directly to Lucide as pixels
-  // Maps InstUI semantic color names to v12 Icon theme properties
   const colorVariants = {
     inherit: { color: 'inherit' },
-    primary: { color: componentTheme.baseColor },
-    secondary: { color: componentTheme.mutedColor },
-    'primary-inverse': { color: componentTheme.inverseColor },
-    'secondary-inverse': { color: componentTheme.inverseColor },
-    success: { color: componentTheme.successColor },
-    error: { color: componentTheme.errorColor },
-    warning: { color: componentTheme.warningColor },
-    alert: { color: componentTheme.infoColor },
-    brand: { color: componentTheme.infoColor }
+    baseColor: { color: componentTheme.baseColor },
+    mutedColor: { color: componentTheme.mutedColor },
+    successColor: { color: componentTheme.successColor },
+    errorColor: { color: componentTheme.errorColor },
+    warningColor: { color: componentTheme.warningColor },
+    infoColor: { color: componentTheme.infoColor },
+    onColor: { color: componentTheme.onColor },
+    inverseColor: { color: componentTheme.inverseColor },
+    disabledBaseColor: { color: componentTheme.disabledBaseColor },
+    disabledOnColor: { color: componentTheme.disabledOnColor },
+    navigationPrimaryBaseColor: {
+      color: componentTheme.navigationPrimaryBaseColor
+    },
+    navigationPrimaryHoverColor: {
+      color: componentTheme.navigationPrimaryHoverColor
+    },
+    navigationPrimaryActiveColor: {
+      color: componentTheme.navigationPrimaryActiveColor
+    },
+    navigationPrimaryOnColorBaseColor: {
+      color: componentTheme.navigationPrimaryOnColorBaseColor
+    },
+    navigationPrimaryOnColorHoverColor: {
+      color: componentTheme.navigationPrimaryOnColorHoverColor
+    },
+    navigationPrimaryOnColorActiveColor: {
+      color: componentTheme.navigationPrimaryOnColorActiveColor
+    },
+    actionSecondaryBaseColor: {
+      color: componentTheme.actionSecondaryBaseColor
+    },
+    actionSecondaryHoverColor: {
+      color: componentTheme.actionSecondaryHoverColor
+    },
+    actionSecondaryActiveColor: {
+      color: componentTheme.actionSecondaryActiveColor
+    },
+    actionSecondaryDisabledColor: {
+      color: componentTheme.actionSecondaryDisabledColor
+    },
+    actionStatusBaseColor: { color: componentTheme.actionStatusBaseColor },
+    actionStatusHoverColor: { color: componentTheme.actionStatusHoverColor },
+    actionStatusActiveColor: { color: componentTheme.actionStatusActiveColor },
+    actionStatusDisabledColor: {
+      color: componentTheme.actionStatusDisabledColor
+    },
+    actionAiSecondaryTopGradientBaseColor: {
+      color: componentTheme.actionAiSecondaryTopGradientBaseColor
+    },
+    actionAiSecondaryTopGradientDisabledColor: {
+      color: componentTheme.actionAiSecondaryTopGradientDisabledColor
+    },
+    actionAiSecondaryBottomGradientBaseColor: {
+      color: componentTheme.actionAiSecondaryBottomGradientBaseColor
+    },
+    actionAiSecondaryBottomGradientDisabledColor: {
+      color: componentTheme.actionAiSecondaryBottomGradientDisabledColor
+    },
+    actionAiBaseColor: { color: componentTheme.actionAiBaseColor },
+    actionAiHoverColor: { color: componentTheme.actionAiHoverColor },
+    actionAiActiveColor: { color: componentTheme.actionAiActiveColor },
+    actionAiDisabledColor: { color: componentTheme.actionAiDisabledColor },
+    actionPrimaryBaseColor: { color: componentTheme.actionPrimaryBaseColor },
+    actionPrimaryHoverColor: { color: componentTheme.actionPrimaryHoverColor },
+    actionPrimaryActiveColor: {
+      color: componentTheme.actionPrimaryActiveColor
+    },
+    actionPrimaryDisabledColor: {
+      color: componentTheme.actionPrimaryDisabledColor
+    },
+    actionPrimaryOnColorBaseColor: {
+      color: componentTheme.actionPrimaryOnColorBaseColor
+    },
+    actionPrimaryOnColorHoverColor: {
+      color: componentTheme.actionPrimaryOnColorHoverColor
+    },
+    actionPrimaryOnColorActiveColor: {
+      color: componentTheme.actionPrimaryOnColorActiveColor
+    },
+    actionPrimaryOnColorDisabledColor: {
+      color: componentTheme.actionPrimaryOnColorDisabledColor
+    },
+    accentBlueColor: { color: componentTheme.accentBlueColor },
+    accentGreenColor: { color: componentTheme.accentGreenColor },
+    accentRedColor: { color: componentTheme.accentRedColor },
+    accentOrangeColor: { color: componentTheme.accentOrangeColor },
+    accentGreyColor: { color: componentTheme.accentGreyColor },
+    accentAshColor: { color: componentTheme.accentAshColor },
+    accentPlumColor: { color: componentTheme.accentPlumColor },
+    accentVioletColor: { color: componentTheme.accentVioletColor },
+    accentStoneColor: { color: componentTheme.accentStoneColor },
+    accentSkyColor: { color: componentTheme.accentSkyColor },
+    accentHoneyColor: { color: componentTheme.accentHoneyColor },
+    accentSeaColor: { color: componentTheme.accentSeaColor },
+    accentAutoraColor: { color: componentTheme.accentAutoraColor },
+    actionTertiaryBaseColor: { color: componentTheme.actionTertiaryBaseColor },
+    actionTertiaryHoverColor: {
+      color: componentTheme.actionTertiaryHoverColor
+    },
+    actionTertiaryActiveColor: {
+      color: componentTheme.actionTertiaryActiveColor
+    },
+    actionTertiaryDisabledColor: {
+      color: componentTheme.actionTertiaryDisabledColor
+    },
+    actionSuccessSecondaryBaseColor: {
+      color: componentTheme.actionSuccessSecondaryBaseColor
+    },
+    actionSuccessSecondaryDisabledColor: {
+      color: componentTheme.actionSuccessSecondaryDisabledColor
+    },
+    actionDestructiveSecondaryBaseColor: {
+      color: componentTheme.actionDestructiveSecondaryBaseColor
+    },
+    actionDestructiveSecondaryDisabledColor: {
+      color: componentTheme.actionDestructiveSecondaryDisabledColor
+    }
   }
 
-  // Rotation transforms (LTR context)
   const rotateVariants = {
     '0': {},
     '90': { transform: 'rotate(90deg)' },
@@ -76,7 +168,6 @@ const generateStyle = (
     '270': { transform: 'rotate(270deg)' }
   }
 
-  // Bidirectional + rotation (RTL context) - flip + rotate
   const bidirectionalRotateVariants = {
     '0': { transform: 'scaleX(-1)' },
     '90': { transform: 'scaleX(-1) rotate(90deg)' },
@@ -89,17 +180,11 @@ const generateStyle = (
       label: 'lucideIcon',
       display: inline ? 'inline-block' : 'block',
       verticalAlign: 'middle',
-      lineHeight: 0, // Remove extra line-height to prevent wrapper from being taller than icon
-      fontSize: 0, // Remove font-size to prevent wrapper from having its own dimensions
-
-      // Apply color (semantic or custom)
+      lineHeight: 0,
+      fontSize: 0,
       ...(color &&
         (colorVariants[color as keyof typeof colorVariants] || { color })),
-
-      // Apply rotation in LTR
       ...rotateVariants[rotate],
-
-      // Apply bidirectional flip + rotation in RTL
       ...(bidirectional && {
         '[dir="rtl"] &': bidirectionalRotateVariants[rotate]
       })

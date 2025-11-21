@@ -23,115 +23,120 @@
  */
 
 import type { LucideProps } from 'lucide-react'
-import type { ComponentStyle } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-/**
- * InstUI-specific props added to Lucide icons.
- *
- * These props provide InstUI-style API for icons, including semantic sizing,
- * theme-aware colors, rotation, RTL support, and accessibility features.
- */
-export interface InstUIIconProps {
-  /**
-   * Size of the icon.
-   * Can be a semantic size name (uses theme-based sizing) or a numeric pixel value.
-   *
-   * - Semantic sizes: 'x-small' (18px), 'small' (32px), 'medium' (48px), 'large' (80px), 'x-large' (160px)
-   * - Numeric: Any number for pixel-based sizing (e.g., 24)
-   */
-  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | number
+type InstUIIconOwnProps = {
+  /** Semantic size ('xs', 'sm', 'md', 'lg', 'xl', '2xl') or numeric pixels */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number
 
-  /**
-   * Color of the icon.
-   * Can be a semantic color name (uses theme colors) or any valid CSS color string.
-   *
-   * - Semantic colors: 'primary', 'secondary', 'success', 'error', 'warning', 'alert', 'brand'
-   * - CSS colors: Any valid CSS color (e.g., '#ff0000', 'rgb(255, 0, 0)', 'currentColor')
-   */
+  /** Semantic size ('xs', 'sm', 'md', 'lg', 'xl', '2xl') or numeric value */
+  strokeWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number | string
+
+  /** Icon theme token or CSS color */
   color?:
     | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'primary-inverse'
-    | 'secondary-inverse'
-    | 'success'
-    | 'error'
-    | 'warning'
-    | 'alert'
-    | 'brand'
+    | 'baseColor'
+    | 'mutedColor'
+    | 'successColor'
+    | 'errorColor'
+    | 'warningColor'
+    | 'infoColor'
+    | 'onColor'
+    | 'inverseColor'
+    | 'disabledBaseColor'
+    | 'disabledOnColor'
+    | 'navigationPrimaryBaseColor'
+    | 'navigationPrimaryHoverColor'
+    | 'navigationPrimaryActiveColor'
+    | 'navigationPrimaryOnColorBaseColor'
+    | 'navigationPrimaryOnColorHoverColor'
+    | 'navigationPrimaryOnColorActiveColor'
+    | 'actionSecondaryBaseColor'
+    | 'actionSecondaryHoverColor'
+    | 'actionSecondaryActiveColor'
+    | 'actionSecondaryDisabledColor'
+    | 'actionStatusBaseColor'
+    | 'actionStatusHoverColor'
+    | 'actionStatusActiveColor'
+    | 'actionStatusDisabledColor'
+    | 'actionAiSecondaryTopGradientBaseColor'
+    | 'actionAiSecondaryTopGradientDisabledColor'
+    | 'actionAiSecondaryBottomGradientBaseColor'
+    | 'actionAiSecondaryBottomGradientDisabledColor'
+    | 'actionAiBaseColor'
+    | 'actionAiHoverColor'
+    | 'actionAiActiveColor'
+    | 'actionAiDisabledColor'
+    | 'actionPrimaryBaseColor'
+    | 'actionPrimaryHoverColor'
+    | 'actionPrimaryActiveColor'
+    | 'actionPrimaryDisabledColor'
+    | 'actionPrimaryOnColorBaseColor'
+    | 'actionPrimaryOnColorHoverColor'
+    | 'actionPrimaryOnColorActiveColor'
+    | 'actionPrimaryOnColorDisabledColor'
+    | 'accentBlueColor'
+    | 'accentGreenColor'
+    | 'accentRedColor'
+    | 'accentOrangeColor'
+    | 'accentGreyColor'
+    | 'accentAshColor'
+    | 'accentPlumColor'
+    | 'accentVioletColor'
+    | 'accentStoneColor'
+    | 'accentSkyColor'
+    | 'accentHoneyColor'
+    | 'accentSeaColor'
+    | 'accentAutoraColor'
+    | 'actionTertiaryBaseColor'
+    | 'actionTertiaryHoverColor'
+    | 'actionTertiaryActiveColor'
+    | 'actionTertiaryDisabledColor'
+    | 'actionSuccessSecondaryBaseColor'
+    | 'actionSuccessSecondaryDisabledColor'
+    | 'actionDestructiveSecondaryBaseColor'
+    | 'actionDestructiveSecondaryDisabledColor'
     | string
 
-  /**
-   * Rotation angle in degrees.
-   * The icon will be rotated by the specified amount.
-   */
+  /** Rotation angle in degrees */
   rotate?: '0' | '90' | '180' | '270'
 
   /**
-   * Whether the icon should flip horizontally in RTL contexts.
-   *
+   * Flip horizontally in RTL contexts
    * @default true
-   *
-   * When true (default), the icon automatically flips horizontally when the
-   * document direction is RTL. Set to false to prevent flipping for icons
-   * that should maintain their orientation in all contexts.
    */
   bidirectional?: boolean
 
   /**
-   * Display mode for the icon.
-   *
+   * Display mode: inline-block (true) or block (false)
    * @default true
-   *
-   * - true: display as inline-block (flows with text)
-   * - false: display as block (takes full width)
    */
   inline?: boolean
 
-  /**
-   * Accessible title for the icon.
-   * If provided, the icon will have role="img" and proper aria-labelledby.
-   */
+  /** Accessible title (adds role="img" and aria-label) */
   title?: string
 
-  /**
-   * Accessible description for the icon.
-   * Used in combination with title for more detailed accessibility information.
-   */
+  /** Accessible description (combined with title in aria-label) */
   description?: string
 
-  /**
-   * Ref forwarding for the underlying SVG element.
-   * Alternative to the standard `ref` prop for compatibility with InstUI patterns.
-   */
+  /** Ref for the underlying SVG element */
   elementRef?: React.Ref<SVGSVGElement>
-
-  /**
-   * Theme overrides for this specific icon instance.
-   * Allows customization of theme variables on a per-component basis.
-   */
-  themeOverride?: Partial<NewComponentTypes['Icon']>
 }
 
 /**
- * Combined props: InstUI + Lucide.
- *
- * This interface merges InstUI props with Lucide's native props, with InstUI
- * props taking precedence for `size`, `color`, and `rotate` (to support both semantic
- * and numeric/string values).
+ * Full props: Lucide native + InstUI semantic + theme support.
+ * InstUI props override Lucide's size, color, strokeWidth, rotate.
  */
-export interface LucideIconWrapperProps
-  extends Omit<LucideProps, 'size' | 'color' | 'rotate'>,
-    InstUIIconProps {
-  // size, color, and rotate are redefined in InstUIIconProps to support both formats:
-  // - size: semantic ('small') OR numeric (24)
-  // - color: semantic ('primary') OR CSS string ('#ff0000')
-  // - rotate: semantic ('0', '90', '180', '270')
-}
+type LucideIconWrapperProps = Omit<
+  LucideProps,
+  'size' | 'color' | 'strokeWidth' | 'rotate'
+> &
+  InstUIIconOwnProps &
+  WithStyleProps<NewComponentTypes['Icon'], LucideIconStyle> &
+  OtherHTMLAttributes<InstUIIconOwnProps>
 
-/**
- * Style object type for the icon wrapper.
- * Generated by the generateStyle function and consumed by the useStyle hook.
- */
-export type LucideIconStyle = ComponentStyle<'lucideIcon'>
+type LucideIconStyle = ComponentStyle<'lucideIcon'>
+
+export type { LucideIconWrapperProps, InstUIIconOwnProps, LucideIconStyle }

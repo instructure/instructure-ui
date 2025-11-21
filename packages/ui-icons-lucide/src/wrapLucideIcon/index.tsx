@@ -22,83 +22,95 @@
  * SOFTWARE.
  */
 
-import React, { forwardRef } from 'react'
-import type { LucideIcon } from 'lucide-react'
+import { forwardRef } from 'react'
+
 import { useStyle, useTheme } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import type { Theme } from '@instructure/ui-themes'
+import type { LucideIcon } from 'lucide-react'
 
+import type { LucideIconWrapperProps, InstUIIconOwnProps } from './props'
 import generateStyle from './styles'
-import type { LucideIconWrapperProps, InstUIIconProps } from './props'
+
+const SEMANTIC_STROKE_WIDTHS = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const
+
+const SEMANTIC_COLORS = [
+  'inherit',
+  'baseColor',
+  'mutedColor',
+  'successColor',
+  'errorColor',
+  'warningColor',
+  'infoColor',
+  'onColor',
+  'inverseColor',
+  'disabledBaseColor',
+  'disabledOnColor',
+  'navigationPrimaryBaseColor',
+  'navigationPrimaryHoverColor',
+  'navigationPrimaryActiveColor',
+  'navigationPrimaryOnColorBaseColor',
+  'navigationPrimaryOnColorHoverColor',
+  'navigationPrimaryOnColorActiveColor',
+  'actionSecondaryBaseColor',
+  'actionSecondaryHoverColor',
+  'actionSecondaryActiveColor',
+  'actionSecondaryDisabledColor',
+  'actionStatusBaseColor',
+  'actionStatusHoverColor',
+  'actionStatusActiveColor',
+  'actionStatusDisabledColor',
+  'actionAiSecondaryTopGradientBaseColor',
+  'actionAiSecondaryTopGradientDisabledColor',
+  'actionAiSecondaryBottomGradientBaseColor',
+  'actionAiSecondaryBottomGradientDisabledColor',
+  'actionAiBaseColor',
+  'actionAiHoverColor',
+  'actionAiActiveColor',
+  'actionAiDisabledColor',
+  'actionPrimaryBaseColor',
+  'actionPrimaryHoverColor',
+  'actionPrimaryActiveColor',
+  'actionPrimaryDisabledColor',
+  'actionPrimaryOnColorBaseColor',
+  'actionPrimaryOnColorHoverColor',
+  'actionPrimaryOnColorActiveColor',
+  'actionPrimaryOnColorDisabledColor',
+  'accentBlueColor',
+  'accentGreenColor',
+  'accentRedColor',
+  'accentOrangeColor',
+  'accentGreyColor',
+  'accentAshColor',
+  'accentPlumColor',
+  'accentVioletColor',
+  'accentStoneColor',
+  'accentSkyColor',
+  'accentHoneyColor',
+  'accentSeaColor',
+  'accentAutoraColor',
+  'actionTertiaryBaseColor',
+  'actionTertiaryHoverColor',
+  'actionTertiaryActiveColor',
+  'actionTertiaryDisabledColor',
+  'actionSuccessSecondaryBaseColor',
+  'actionSuccessSecondaryDisabledColor',
+  'actionDestructiveSecondaryBaseColor',
+  'actionDestructiveSecondaryDisabledColor'
+] as const
 
 /**
- * Wraps a Lucide icon component with InstUI theming and RTL support.
- *
- * This HOC transforms a Lucide icon into an InstUI-compatible component with:
- * - Semantic sizing (x-small through x-large)
- * - Theme-aware colors (primary, secondary, success, error, etc.)
- * - Automatic RTL flipping (bidirectional by default)
- * - Rotation support (0°, 90°, 180°, 270°)
- * - Accessibility features (title, description)
- * - Full Lucide props compatibility
- * - Themeable via InstUI emotion system with useStyle hook
- *
- * @param Icon - The Lucide icon component to wrap
- * @returns A themed, RTL-aware icon component
- *
- * @example
- * Basic usage (automatic in generated index.ts):
- * ```tsx
- * import { ArrowLeft } from 'lucide-react'
- * import { wrapLucideIcon } from './wrapLucideIcon'
- *
- * const IconArrowLeft = wrapLucideIcon(ArrowLeft)
- * ```
- *
- * @example
- * InstUI-style props:
- * ```tsx
- * import { ArrowLeft } from '@instructure/ui-icons-lucide'
- *
- * <ArrowLeft
- *   size="large"
- *   color="primary"
- *   rotate="90"
- *   title="Navigate left"
- * />
- * ```
- *
- * @example
- * Lucide-style props (still supported):
- * ```tsx
- * <ArrowLeft
- *   size={24}
- *   strokeWidth={2}
- *   color="#ff0000"
- * />
- * ```
- *
- * @example
- * Disable RTL flipping:
- * ```tsx
- * <ArrowLeft bidirectional={false} />
- * ```
- *
- * @example
- * With accessibility:
- * ```tsx
- * <ArrowLeft
- *   title="Previous page"
- *   description="Navigate to the previous page in the sequence"
- * />
- * ```
+ * Wraps a Lucide icon with InstUI theming, RTL support, and semantic sizing.
+ * Supports both InstUI semantic props (size="lg", color="baseColor") and
+ * native Lucide props (size={24}, color="#ff0000").
  */
 export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
   const WrappedIcon = forwardRef<SVGSVGElement, LucideIconWrapperProps>(
     (props, ref) => {
       const {
-        // Extract InstUI props
         size: instUISize,
+        strokeWidth: instUIStrokeWidth,
         color: instUIColor,
         rotate = '0',
         bidirectional = true,
@@ -107,65 +119,67 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
         description,
         elementRef,
         themeOverride,
-
-        // Lucide native props
-        strokeWidth,
         absoluteStrokeWidth,
         className,
         style,
-
         ...rest
       } = props
 
-      // Get theme to access Icon component theme properties
       const theme = useTheme() as Theme
-      const iconTheme = themeOverride || theme?.newTheme?.components?.Icon
+      const iconTheme = theme?.newTheme?.components?.Icon
 
-      // Determine if using InstUI semantic size or Lucide numeric size
+      // Convert semantic size to pixels for Lucide
       const isSemanticSize = typeof instUISize === 'string'
       const semanticSize = isSemanticSize ? instUISize : undefined
-
-      // Convert semantic size to pixels for Lucide, or use numeric size directly
-      // Lucide doesn't inherit fontSize, so we need explicit pixel values
       let numericSize: number | undefined
-      if (isSemanticSize) {
-        // Map InstUI semantic sizes to Icon theme size properties
-        // We map InstUI sizes to Icon theme sizes based on relative scale
+      if (isSemanticSize && iconTheme) {
         const sizeMap = {
-          'x-small': iconTheme?.sizeSm || '1rem', // sizeSm (16px)
-          small: iconTheme?.sizeMd || '1.25rem', // sizeMd (20px)
-          medium: iconTheme?.sizeLg || '1.5rem', // sizeLg (24px)
-          large: iconTheme?.sizeXl || '2rem', // sizeXl (32px)
-          'x-large': iconTheme?.size2xl || '2.25rem' // size2xl (36px)
+          xs: iconTheme.sizeXs,
+          sm: iconTheme.sizeSm,
+          md: iconTheme.sizeMd,
+          lg: iconTheme.sizeLg,
+          xl: iconTheme.sizeXl,
+          '2xl': iconTheme.size2xl
         }
-        const themeSizeValue = sizeMap[instUISize as keyof typeof sizeMap]
-        // Use InstUI's px utility to convert rem/em to pixels
-        numericSize = px(themeSizeValue)
-      } else {
+        numericSize = px(sizeMap[instUISize as keyof typeof sizeMap])
+      } else if (!isSemanticSize) {
         numericSize = instUISize
       }
 
-      // Determine if using InstUI semantic color or custom color
-      const semanticColors = [
-        'inherit',
-        'primary',
-        'secondary',
-        'primary-inverse',
-        'secondary-inverse',
-        'success',
-        'error',
-        'warning',
-        'alert',
-        'brand'
-      ]
+      // Convert semantic strokeWidth to pixels for Lucide
+      const isSemanticStrokeWidth =
+        typeof instUIStrokeWidth === 'string' &&
+        SEMANTIC_STROKE_WIDTHS.includes(
+          instUIStrokeWidth as (typeof SEMANTIC_STROKE_WIDTHS)[number]
+        )
+      let numericStrokeWidth: number | string | undefined
+      if (isSemanticStrokeWidth && iconTheme) {
+        const strokeWidthMap = {
+          xs: iconTheme.strokeWidthXs,
+          sm: iconTheme.strokeWidthSm,
+          md: iconTheme.strokeWidthMd,
+          lg: iconTheme.strokeWidthLg,
+          xl: iconTheme.strokeWidthXl,
+          '2xl': iconTheme.strokeWidth2xl
+        }
+        numericStrokeWidth = px(
+          strokeWidthMap[instUIStrokeWidth as keyof typeof strokeWidthMap]
+        )
+      } else if (!isSemanticStrokeWidth) {
+        numericStrokeWidth = instUIStrokeWidth
+      }
+
+      // Determine if color is semantic (theme token) or custom CSS
       const isSemanticColor = instUIColor
-        ? semanticColors.includes(instUIColor)
+        ? SEMANTIC_COLORS.includes(
+            instUIColor as (typeof SEMANTIC_COLORS)[number]
+          )
         : false
       const colorValue = isSemanticColor ? instUIColor : undefined
       const customColor = isSemanticColor ? undefined : instUIColor
 
-      // Using useStyle hook for functional component theming
       const styles = useStyle({
+        componentId: 'Icon' as const,
         generateStyle,
         params: {
           size: semanticSize,
@@ -175,11 +189,10 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
           inline,
           themeOverride
         },
-        componentId: 'Icon',
         displayName: `LucideIcon(${Icon.displayName || Icon.name})`
       })
 
-      // Merge refs (both ref and elementRef)
+      // Merge both ref and elementRef
       const iconRef = (node: SVGSVGElement | null) => {
         if (ref) {
           if (typeof ref === 'function') {
@@ -204,7 +217,6 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
         }
       }
 
-      // Build accessibility props
       const accessibilityProps: Record<string, any> = {}
       if (title) {
         accessibilityProps['aria-label'] = description
@@ -221,11 +233,11 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
           <Icon
             ref={iconRef}
             size={numericSize}
-            color={customColor || 'currentColor'}
-            strokeWidth={strokeWidth}
+            color={customColor}
+            strokeWidth={numericStrokeWidth}
             absoluteStrokeWidth={absoluteStrokeWidth}
             {...accessibilityProps}
-            {...rest}
+            {...passthroughProps(rest)}
           />
         </span>
       )
@@ -237,5 +249,5 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
   return WrappedIcon as LucideIcon
 }
 
-export type { LucideIconWrapperProps, InstUIIconProps }
+export type { LucideIconWrapperProps, InstUIIconOwnProps }
 export { default as generateStyle } from './styles'

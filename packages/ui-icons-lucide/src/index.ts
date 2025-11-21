@@ -63,7 +63,10 @@ import { wrapLucideIcon } from './wrapLucideIcon'
 
 // Re-export types
 export type { LucideProps, LucideIcon } from 'lucide-react'
-export type { LucideIconWrapperProps, InstUIIconProps } from './wrapLucideIcon'
+export type {
+  LucideIconWrapperProps,
+  InstUIIconOwnProps
+} from './wrapLucideIcon'
 
 // Re-export utilities
 export { wrapLucideIcon }
