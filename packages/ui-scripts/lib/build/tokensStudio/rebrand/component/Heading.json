@@ -89,6 +89,30 @@
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
+    },
+    "h1FontSize": {
+      "value": "{fontSize.text2xl}",
+      "type": "fontSizes"
+    },
+    "h2FontSize": {
+      "value": "{fontSize.textXl}",
+      "type": "fontSizes"
+    },
+    "h3FontSize": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "h4Fontsize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "h5Fontsize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "h6Fontsize": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
     }
   }
 }
