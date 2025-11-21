@@ -317,6 +317,12 @@
         "value": "125%",
         "type": "lineHeights"
       }
+    },
+    "label": {
+      "base": {
+        "value": "1.125rem",
+        "type": "lineHeights"
+      }
     }
   },
   "fontSize": {
