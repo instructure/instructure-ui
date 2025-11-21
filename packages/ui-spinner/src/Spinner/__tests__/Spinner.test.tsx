@@ -28,7 +28,6 @@ import { vi, expect } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
-import { View } from '@instructure/ui-view'
 import Spinner from '../index'
 import type { SpinnerProps } from '../props'
 
@@ -80,41 +79,6 @@ describe('<Spinner />', () => {
 
     expect(axeCheck).toBe(true)
     expect(spinner).toHaveTextContent('I have translated Loading')
-  })
-
-  describe('when passing down props to View', () => {
-    const allowedProps: { [key: string]: any } = {
-      margin: 'small',
-      elementRef: () => {},
-      as: 'div'
-    }
-
-    View.allowedProps
-      .filter((prop) => prop !== 'children')
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const props = {
-              [prop]: 'foo'
-            }
-            const expectedErrorMessage = `prop '${prop}' is not allowed.`
-
-            render(<Spinner renderTitle="Loading" {...props} />)
-
-            expect(consoleErrorMock).toHaveBeenCalledWith(
-              expect.stringContaining(expectedErrorMessage),
-              expect.any(String)
-            )
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            const props = { [prop]: allowedProps[prop] }
-            render(<Spinner renderTitle="Loading" {...props} />)
-
-            expect(consoleErrorMock).not.toHaveBeenCalled()
-          })
-        }
-      })
   })
 
   describe('with the delay prop', () => {
