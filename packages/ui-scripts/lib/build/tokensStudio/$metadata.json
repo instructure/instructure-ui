@@ -27,10 +27,8 @@
     "canvas/component/Tag",
     "canvas/component/Toggle",
     "canvas/component/Tooltip",
+    "canvas/component/Tray",
     "canvas/component/SharedTokens",
-    "rebrand/semantic/layout/default",
-    "rebrand/semantic/color/rebrandLight",
-    "rebrand/semantic/color/rebrandDark",
     "rebrand/component/Avatar",
     "rebrand/component/Badge",
     "rebrand/component/BaseButton",
@@ -54,6 +52,10 @@
     "rebrand/component/Tag",
     "rebrand/component/Toggle",
     "rebrand/component/Tooltip",
-    "rebrand/component/SharedTokens"
+    "rebrand/component/Tray",
+    "rebrand/component/SharedTokens",
+    "rebrand/semantic/layout/default",
+    "rebrand/semantic/color/rebrandLight",
+    "rebrand/semantic/color/rebrandDark"
   ]
 }
