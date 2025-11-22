@@ -339,23 +339,15 @@
       "type": "fontSizes"
     },
     "textLg": {
-      "value": "{size.size20}",
+      "value": "1.375rem",
       "type": "fontSizes"
     },
     "textXl": {
-      "value": "{size.size24}",
-      "type": "fontSizes"
-    },
-    "text2xl": {
       "value": "{size.size28}",
       "type": "fontSizes"
     },
-    "text3xl": {
-      "value": "{size.size32}",
-      "type": "fontSizes"
-    },
-    "text4xl": {
-      "value": "{size.size36}",
+    "text2xl": {
+      "value": "2.375rem",
       "type": "fontSizes"
     }
   },

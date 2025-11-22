@@ -1,95 +1,5 @@
 {
   "heading": {
-    "titlePageDesktop": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text4xl}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titlePageMobile": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text3xl}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titleSection": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text2xl}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titleCardSection": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text2xl}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titleModule": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textXl}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titleCardLarge": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textXl}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titleCardRegular": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textLg}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "titleCardMini": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "label": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
-    "labelInline": {
-      "value": {
-        "fontFamily": "{fontFamily.heading}",
-        "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.heading.base}"
-      },
-      "type": "typography"
-    },
     "h1FontSize": {
       "value": "{fontSize.text2xl}",
       "type": "fontSizes"
@@ -207,6 +117,96 @@
     "borderPadding": {
       "value": "{spacing.space2xs}",
       "type": "spacing"
+    },
+    "titlePageDesktop": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.text2xl}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titlePageMobile": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "2rem",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleSection": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.textXl}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardSection": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.textXl}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleModule": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "1.5rem",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardLarge": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "1.5rem",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardRegular": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.textLg}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "titleCardMini": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "label": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
+    },
+    "labelInline": {
+      "value": {
+        "fontFamily": "{fontFamily.heading}",
+        "fontWeight": "{fontWeight.heading.strong}",
+        "fontSize": "{fontSize.textBase}",
+        "lineHeight": "{lineHeight.heading.base}"
+      },
+      "type": "typography"
     }
   }
 }
