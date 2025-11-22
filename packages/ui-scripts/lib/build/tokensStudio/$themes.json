@@ -1304,7 +1304,7 @@
       "heading.titleCardMini": "S:6875d4c864c1cefe806cf907f3ef777b7c3f7fed,",
       "heading.label": "S:478f772831810fbbd50a355ee0c6b24be0144c97,",
       "heading.labelInline": "S:17c6056175bef81643393c95a964a18a9fff33ed,",
-      "tray.boxShadow": "S:451fc2be285bd0731e8b2db4192d24a6eb4080a5,"
+      "tray.boxShadow": "S:c851904b30cbc374fafd0b0d8eb941b9c383a860,"
     },
     "$figmaVariableReferences": {
       "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -3664,7 +3664,7 @@
       "heading.titleCardMini": "S:6875d4c864c1cefe806cf907f3ef777b7c3f7fed,",
       "heading.label": "S:478f772831810fbbd50a355ee0c6b24be0144c97,",
       "heading.labelInline": "S:17c6056175bef81643393c95a964a18a9fff33ed,",
-      "tray.boxShadow": "S:451fc2be285bd0731e8b2db4192d24a6eb4080a5,"
+      "tray.boxShadow": "S:c851904b30cbc374fafd0b0d8eb941b9c383a860,"
     },
     "$figmaVariableReferences": {
       "size.interactive.height.sm": "3b32db09604a47795ca27cbdab5386bcdf152e20",

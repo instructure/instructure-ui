@@ -1335,11 +1335,11 @@
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "3px",
+          "value": "0.375rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "3px",
+          "value": "0.625rem",
           "type": "sizing"
         }
       }
@@ -1377,11 +1377,11 @@
       },
       "elevation4": {
         "dropshadow1": {
-          "value": "6px",
+          "value": "0.4375rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "6px",
+          "value": "1.75rem",
           "type": "sizing"
         }
       }
