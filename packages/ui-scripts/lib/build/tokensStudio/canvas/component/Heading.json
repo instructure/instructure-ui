@@ -4,7 +4,7 @@
       "value": {
         "fontFamily": "{fontFamily.heading}",
         "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text4xl}",
+        "fontSize": "{fontSize.text2xl}",
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
@@ -13,7 +13,7 @@
       "value": {
         "fontFamily": "{fontFamily.heading}",
         "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text3xl}",
+        "fontSize": "2rem",
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
@@ -22,7 +22,7 @@
       "value": {
         "fontFamily": "{fontFamily.heading}",
         "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text2xl}",
+        "fontSize": "{fontSize.textXl}",
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
@@ -31,7 +31,7 @@
       "value": {
         "fontFamily": "{fontFamily.heading}",
         "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.text2xl}",
+        "fontSize": "{fontSize.textXl}",
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
@@ -40,7 +40,7 @@
       "value": {
         "fontFamily": "{fontFamily.heading}",
         "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textXl}",
+        "fontSize": "1.5rem",
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
@@ -49,7 +49,7 @@
       "value": {
         "fontFamily": "{fontFamily.heading}",
         "fontWeight": "{fontWeight.heading.strong}",
-        "fontSize": "{fontSize.textXl}",
+        "fontSize": "1.5rem",
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
