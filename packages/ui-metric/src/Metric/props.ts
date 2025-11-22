@@ -30,14 +30,14 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MetricOwnProps = {
-  textAlign: 'start' | 'center' | 'end'
+  textAlign?: 'start' | 'center' | 'end'
   renderLabel?: Renderable
   renderValue?: Renderable
   /**
    * Set to true when a child of MetricGroup so the appropriate
    * aria labels get set
    */
-  isGroupChild: boolean
+  isGroupChild?: boolean
 }
 
 type PropKeys = keyof MetricOwnProps
