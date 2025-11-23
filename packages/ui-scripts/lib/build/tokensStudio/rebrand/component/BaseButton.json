@@ -68,6 +68,14 @@
       "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
+    "secondaryHoverTextColor": {
+      "value": "{color.text.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryActiveTextColor": {
+      "value": "{color.text.interactive.action.secondary.active}",
+      "type": "color"
+    },
     "secondaryDisabledTextColor": {
       "value": "{color.text.interactive.action.secondary.disabled}",
       "type": "color"
