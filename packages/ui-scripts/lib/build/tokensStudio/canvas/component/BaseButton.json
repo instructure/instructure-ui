@@ -48,7 +48,7 @@
       "value": "{color.stroke.interactive.action.secondary.base}",
       "type": "color"
     },
-    "secondaryTextColor": {
+    "secondaryBaseTextColor": {
       "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
@@ -84,7 +84,7 @@
       "value": "{color.stroke.interactive.action.success.disabled}",
       "type": "color"
     },
-    "successTextColor": {
+    "successBaseTextColor": {
       "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
@@ -112,7 +112,7 @@
       "value": "{color.stroke.interactive.action.destructive.disabled}",
       "type": "color"
     },
-    "destructiveTextColor": {
+    "destructiveBaseTextColor": {
       "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
@@ -164,7 +164,7 @@
       "value": "{color.stroke.interactive.action.ai.bottomGradient.disabled}",
       "type": "color"
     },
-    "aiTextColor": {
+    "aiBaseTextColor": {
       "value": "{color.text.interactive.action.ai.base}",
       "type": "color"
     },
@@ -220,7 +220,7 @@
       "value": "{color.stroke.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
-    "primaryOnColorTextColor": {
+    "primaryOnColorBaseTextColor": {
       "value": "{color.text.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
@@ -404,7 +404,7 @@
       "value": "{color.stroke.interactive.action.tertiary.disabled}",
       "type": "color"
     },
-    "tertiaryTextColor": {
+    "tertiaryBaseTextColor": {
       "value": "{color.text.interactive.action.tertiary.base}",
       "type": "color"
     },
@@ -420,7 +420,7 @@
       "value": "{color.background.interactive.action.success.secondary.active}",
       "type": "color"
     },
-    "successSecondaryTextColor": {
+    "successSecondaryBaseTextColor": {
       "value": "{color.text.interactive.action.successSecondary.base}",
       "type": "color"
     },
@@ -452,7 +452,7 @@
       "value": "{color.background.interactive.action.destructive.secondary.active}",
       "type": "color"
     },
-    "destructiveSecondaryTextColor": {
+    "destructiveSecondaryBaseTextColor": {
       "value": "{color.text.interactive.action.destructiveSecondary.base}",
       "type": "color"
     },
