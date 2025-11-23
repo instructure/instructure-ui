@@ -377,7 +377,7 @@
       "type": "color"
     },
     "primaryOnColorDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.disabled}",
+      "value": "{color.background.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
     "primaryOnColorDisabledTextColor": {
