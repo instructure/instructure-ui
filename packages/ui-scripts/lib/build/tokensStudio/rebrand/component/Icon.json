@@ -148,16 +148,8 @@
       "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
       "type": "color"
     },
-    "actionAiSecondaryTopGradientDisabledColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
-      "type": "color"
-    },
     "actionAiSecondaryBottomGradientBaseColor": {
       "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
-      "type": "color"
-    },
-    "actionAiSecondaryBottomGradientDisabledColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     },
     "actionAiBaseColor": {
@@ -294,6 +286,10 @@
     },
     "dark": {
       "value": "{color.icon.dark}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.disabled}",
       "type": "color"
     }
   }
