@@ -503,6 +503,14 @@
     "opacityDisabled": {
       "value": "{opacity.disabled}",
       "type": "opacity"
+    },
+    "secondaryHoverTextColor": {
+      "value": "{color.text.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryActiveTextColor": {
+      "value": "{color.text.interactive.action.secondary.active}",
+      "type": "color"
     }
   }
 }
