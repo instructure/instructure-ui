@@ -288,8 +288,24 @@
       "value": "{color.icon.dark}",
       "type": "color"
     },
-    "aiSecondaryDisabledColor": {
+    "actionAiSecondaryDisabledColor": {
       "value": "{color.icon.interactive.action.aiSecondary.disabled}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorBaseColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorHoverColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorActiveColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorDisabledColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.disabled}",
       "type": "color"
     }
   }
