@@ -571,6 +571,46 @@
     "aiDisabledBorderColor": {
       "value": "{color.stroke.interactive.action.ai.disabled}",
       "type": "color"
+    },
+    "secondaryOnColorHoverBackgroundColor": {
+      "value": "{color.background.interactive.action.ghost.onColor.hover}",
+      "type": "color"
+    },
+    "secondaryOnColorActiveBackgroundColor": {
+      "value": "{color.background.interactive.action.ghost.onColor.hover}",
+      "type": "color"
+    },
+    "secondaryOnColorBaseTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "secondaryOnColorHoverTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "secondaryOnColorActiveTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "secondaryOnColorDisabledTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
+    },
+    "secondaryOnColorBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "secondaryOnColorHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "secondaryOnColorActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "secondaryOnColorDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
     }
   }
 }
