@@ -17,7 +17,7 @@
       "type": "color"
     },
     "valueFontSize": {
-      "value": "{fontSize.text2xl}",
+      "value": "{fontSize.textXl}",
       "type": "fontSizes"
     },
     "gapTexts": {
