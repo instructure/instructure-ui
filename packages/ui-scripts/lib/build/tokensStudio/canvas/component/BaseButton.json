@@ -611,6 +611,10 @@
     "secondaryOnColorDisabledBorderColor": {
       "value": "{color.stroke.interactive.action.secondaryOnColor.disabled}",
       "type": "color"
+    },
+    "borderRadiusFull": {
+      "value": "{borderRadius.full}",
+      "type": "borderRadius"
     }
   }
 }
