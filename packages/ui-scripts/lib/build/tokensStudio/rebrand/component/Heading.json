@@ -207,6 +207,18 @@
         "lineHeight": "{lineHeight.heading.base}"
       },
       "type": "typography"
+    },
+    "gapIconSm": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
+    },
+    "gapIconMd": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "gapIconLg": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
     }
   }
 }
