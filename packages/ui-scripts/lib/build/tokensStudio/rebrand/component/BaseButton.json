@@ -13,7 +13,7 @@
       "type": "color"
     },
     "primaryDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.disabled}",
+      "value": "{color.background.interactive.action.primary.disabled}",
       "type": "color"
     },
     "primaryBorderColor": {
@@ -29,7 +29,7 @@
       "type": "color"
     },
     "primaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.disabled}",
+      "value": "{color.stroke.interactive.action.primary.disabled}",
       "type": "color"
     },
     "primaryBaseTextColor": {
@@ -53,7 +53,7 @@
       "type": "color"
     },
     "secondaryDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.disabled}",
+      "value": "{color.background.interactive.action.secondary.disabled}",
       "type": "color"
     },
     "secondaryBorderColor": {
@@ -93,7 +93,7 @@
       "type": "color"
     },
     "successDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.disabled}",
+      "value": "{color.background.interactive.action.success.disabled}",
       "type": "color"
     },
     "successBorderColor": {
@@ -141,7 +141,7 @@
       "type": "color"
     },
     "destructiveDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.disabled}",
+      "value": "{color.background.interactive.action.destructive.disabled}",
       "type": "color"
     },
     "destructiveBorderColor": {

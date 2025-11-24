@@ -307,6 +307,22 @@
     "actionSecondaryOnColorDisabledColor": {
       "value": "{color.icon.interactive.action.secondaryOnColor.disabled}",
       "type": "color"
+    },
+    "actionSuccessSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.successSecondary.hover}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.successSecondary.active}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.hover}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.active}",
+      "type": "color"
     }
   }
 }
