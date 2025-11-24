@@ -220,12 +220,28 @@
       "value": "{color.icon.interactive.action.successSecondary.base}",
       "type": "color"
     },
+    "actionSuccessSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.successSecondary.hover}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.successSecondary.active}",
+      "type": "color"
+    },
     "actionSuccessSecondaryDisabledColor": {
       "value": "{color.icon.interactive.action.successSecondary.disabled}",
       "type": "color"
     },
     "actionDestructiveSecondaryBaseColor": {
       "value": "{color.icon.interactive.action.destructiveSecondary.base}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.hover}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.active}",
       "type": "color"
     },
     "actionDestructiveSecondaryDisabledColor": {
