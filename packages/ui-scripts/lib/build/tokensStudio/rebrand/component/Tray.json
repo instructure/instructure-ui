@@ -9,7 +9,7 @@
       "type": "color"
     },
     "borderWidth": {
-      "value": "{avatar.borderWidthSm}",
+      "value": "{borderWidth.sm}",
       "type": "borderWidth"
     },
     "boxShadow": {
