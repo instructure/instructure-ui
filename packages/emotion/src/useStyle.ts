@@ -24,87 +24,58 @@
 
 import { useTheme } from './useTheme'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
-import type { ComponentTheme } from '@instructure/shared-types'
 import type {
   SharedTokens,
   NewComponentTypes,
   Theme
 } from '@instructure/ui-themes'
-import { BaseThemeOrOverride } from './EmotionTypes'
+import type { BaseThemeOrOverride } from './EmotionTypes'
 
 // returns the second parameter of a function
 type SecondParameter<T extends (...args: any) => any> =
   Parameters<T>[1] extends undefined ? never : Parameters<T>[1]
 
-type GenerateComponentTheme = (theme: Theme) => ComponentTheme
+type GenerateStyleParams =
+  | ((componentTheme: any, params: any, sharedTokens: SharedTokens) => any)
+  | ((componentTheme: any, params: any) => any)
+  | ((componentTheme: any) => any)
 
-// TODO this is only used by the old themes, remove when everything uses the new
-// theming system
-type UseStyleParamsWithTheme<
-  P extends (componentTheme: any, params: any, theme: any) => any
-> = {
-  generateStyle: P
-  params?: SecondParameter<P>
-  generateComponentTheme: GenerateComponentTheme
-  componentId: string
-  displayName?: string
-}
-
-// TODO this is only used by the old themes, remove when everything uses the new
-// theming system
-type UseStyleParamsWithoutTheme<
-  P extends (componentTheme: any, params: any, theme: any) => any
-> = {
-  generateStyle: P
-  params?: SecondParameter<P>
-  generateComponentTheme?: undefined
-  componentId?: undefined
-  displayName?: undefined
-}
-
-// new useStyle syntax, use this with new themes
-type UseStyleParamsNew<
-  P extends (
-    componentTheme: any,
-    params: any,
-    sharedTokens: SharedTokens
-  ) => any
-> = {
-  generateStyle: P
-  params?: SecondParameter<P>
-  componentId: keyof NewComponentTypes
-  displayName?: string
-  //in case of a child component needed to use it's parent's tokens, provide parent's name
-  useTokensFrom?: keyof NewComponentTypes
-}
+/**
+ * Type for a theme override
+ */
+type ThemeOverrideValue =
+  | Partial<Theme>
+  | ((
+      componentTheme: Theme,
+      currentTheme: NewComponentTypes[keyof NewComponentTypes]
+    ) => Partial<Theme>)
 
 const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
   return typeof (obj as any)?.newTheme === 'object'
 }
 
-const useStyle = <
-  P extends (componentTheme: any, params: any, themeOrSharedTokens: any) => any
->(
-  useStyleParams:
-    | UseStyleParamsWithTheme<P>
-    | UseStyleParamsWithoutTheme<P>
-    | UseStyleParamsNew<P>
-): ReturnType<P> => {
-  const { generateStyle, params, componentId, displayName } = useStyleParams
-  const useTokensFrom = (useStyleParams as UseStyleParamsNew<P>).useTokensFrom
-  const generateComponentTheme: GenerateComponentTheme = (
-    useStyleParams as UseStyleParamsWithTheme<P>
-  )?.generateComponentTheme
+/**
+ * new useStyle syntax, use this with v12 themes
+ */
+const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
+  generateStyle: P
+  params?: SecondParameter<P>
+  componentId: keyof NewComponentTypes
+  themeOverride: ThemeOverrideValue | undefined
+  displayName?: string
+  //in case of a child component needed to use it's parent's tokens, provide parent's name
+  useTokensFrom?: keyof NewComponentTypes
+}): ReturnType<P> => {
+  const { generateStyle, params, componentId, displayName, themeOverride } =
+    useStyleParams
+  const useTokensFrom = useStyleParams.useTokensFrom
   const theme = useTheme()
 
-  let baseComponentTheme =
-    typeof generateComponentTheme === 'function'
-      ? generateComponentTheme(theme as Theme)
-      : {}
+  let baseComponentTheme = {}
   const componentWithTokensId = useTokensFrom ?? componentId
 
   if (
-    isNewThemeObject(theme) &&
+    isNewThemeObject(theme) && // TODO: is it possible not to have a theme object here?
     theme.newTheme.components[componentWithTokensId as keyof NewComponentTypes]
   ) {
     baseComponentTheme =
@@ -112,22 +83,23 @@ const useStyle = <
         componentWithTokensId as keyof NewComponentTypes
       ]
   }
-  const themeOverride = getComponentThemeOverride(
+  const finalOverride = getComponentThemeOverride(
     theme,
     useTokensFrom ?? displayName ?? componentId ?? '',
     componentWithTokensId,
-    params,
+    themeOverride,
     baseComponentTheme
   )
 
-  const componentTheme = { ...baseComponentTheme, ...themeOverride }
+  const componentTheme = { ...baseComponentTheme, ...finalOverride }
 
   return generateStyle(
     componentTheme,
-    params ? params : {},
+    params,
     (theme as Theme).newTheme.components.SharedTokens
   )
 }
 
 export default useStyle
 export { useStyle }
+export type { ThemeOverrideValue }

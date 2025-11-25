@@ -1,5 +1,5 @@
 ---
-title: Upgrade Guide for Version 11
+title: Upgrade Guide for Version 12
 category: Guides
 order: 1
 ---
@@ -35,6 +35,11 @@ The new icons automatically sync with theme changes, support all InstUI color to
 ## Removal of deprecated props/components/APIs
 
 ## API Changes
+
+### RadioInput
+
+- Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
+- its DOM structure has been significantly simplified
 
 ## Codemods
 
