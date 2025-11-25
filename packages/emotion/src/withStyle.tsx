@@ -193,7 +193,7 @@ const withStyle = decorator(
         theme,
         displayName,
         ComposedComponent.componentId,
-        componentProps,
+        (componentProps as any).themeOverride,
         baseComponentTheme
       )
 
@@ -264,4 +264,4 @@ const withStyle = decorator(
 
 export default withStyle
 export { withStyle }
-export type { WithStyleProps }
+export type { WithStyleProps, ThemeOverrideProp }

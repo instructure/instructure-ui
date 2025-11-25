@@ -26,7 +26,7 @@ import { Popover } from '@instructure/ui-popover'
 import { CloseButton } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-heading'
 import { Text } from '@instructure/ui-text'
-import { useStyle } from '@instructure/emotion'
+import { useStyleRework } from '@instructure/emotion'
 import { NutritionFacts, DataPermissionLevels } from '../'
 
 import { AiInformationProps } from './props'
@@ -61,7 +61,7 @@ const AiInformation = ({
 }: AiInformationProps) => {
   const [open, setOpen] = useState(false)
 
-  const styles = useStyle({
+  const styles = useStyleRework({
     generateStyle,
     generateComponentTheme,
     componentId: 'AiInformation',

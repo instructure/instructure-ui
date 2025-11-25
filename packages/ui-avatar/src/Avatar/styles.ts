@@ -34,7 +34,6 @@ type StyleParams = {
   shape: AvatarProps['shape']
   src: AvatarProps['src']
   showBorder: AvatarProps['showBorder']
-  themeOverride: AvatarProps['themeOverride']
   display: AvatarProps['display']
   margin: AvatarProps['margin']
   iconTokens: NewComponentTypes['Icon']
