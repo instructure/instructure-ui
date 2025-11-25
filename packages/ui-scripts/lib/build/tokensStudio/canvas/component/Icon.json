@@ -148,16 +148,8 @@
       "value": "{color.icon.interactive.action.aiSecondary.topGradient.base}",
       "type": "color"
     },
-    "actionAiSecondaryTopGradientDisabledColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.topGradient.disabled}",
-      "type": "color"
-    },
     "actionAiSecondaryBottomGradientBaseColor": {
       "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.base}",
-      "type": "color"
-    },
-    "actionAiSecondaryBottomGradientDisabledColor": {
-      "value": "{color.icon.interactive.action.aiSecondary.bottomGradient.disabled}",
       "type": "color"
     },
     "actionAiBaseColor": {
@@ -294,6 +286,42 @@
     },
     "dark": {
       "value": "{color.icon.dark}",
+      "type": "color"
+    },
+    "actionAiSecondaryDisabledColor": {
+      "value": "{color.icon.interactive.action.aiSecondary.disabled}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorBaseColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorHoverColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorActiveColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "actionSecondaryOnColorDisabledColor": {
+      "value": "{color.icon.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.successSecondary.hover}",
+      "type": "color"
+    },
+    "actionSuccessSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.successSecondary.active}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryHoverColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.hover}",
+      "type": "color"
+    },
+    "actionDestructiveSecondaryActiveColor": {
+      "value": "{color.icon.interactive.action.destructiveSecondary.active}",
       "type": "color"
     }
   }

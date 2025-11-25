@@ -76,14 +76,6 @@
     }
   },
   "modalHeader": {
-    "borderColor": {
-      "value": "{color.stroke.container.base}",
-      "type": "color"
-    },
-    "inverseBorderColor": {
-      "value": "{color.stroke.container.dark}",
-      "type": "color"
-    },
     "padding": {
       "value": "{spacing.gap.cards.md}",
       "type": "spacing"
@@ -94,10 +86,6 @@
     }
   },
   "modalBody": {
-    "inverseBackgroundColor": {
-      "value": "{color.background.dark}",
-      "type": "color"
-    },
     "padding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
@@ -114,14 +102,6 @@
     },
     "inverseBackgroundColor": {
       "value": "{color.background.dark}",
-      "type": "color"
-    },
-    "borderColor": {
-      "value": "{color.stroke.container.base}",
-      "type": "color"
-    },
-    "inverseBorderColor": {
-      "value": "{color.stroke.container.dark}",
       "type": "color"
     },
     "padding": {
