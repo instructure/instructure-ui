@@ -53,6 +53,10 @@
     "widthXl": {
       "value": "62em",
       "type": "sizing"
+    },
+    "padding": {
+      "value": "{spacing.padding.container.md}",
+      "type": "spacing"
     }
   }
 }
