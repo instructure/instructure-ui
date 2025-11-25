@@ -123,13 +123,13 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
     const styles = useStyle({
       componentId: 'Icon' as const,
       generateStyle,
+      themeOverride,
       params: {
         size: semanticSize as InstUIIconOwnProps['size'],
         color: colorValue,
         rotate,
         bidirectional,
-        inline,
-        themeOverride
+        inline
       },
       displayName: `LucideIcon(${Icon.displayName || Icon.name})`
     })

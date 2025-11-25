@@ -39,11 +39,13 @@ export {
   calcFocusOutlineStyles
 } from './styleUtils'
 
+export { useStyleRework } from './useStyleRework'
 export { useStyle } from './useStyle'
 export { useTheme } from './useTheme'
 
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
 export type { WithStyleProps } from './withStyleRework'
+export type { ThemeOverrideValue } from './useStyle'
 export type {
   SpacingValues,
   Spacing,

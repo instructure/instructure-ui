@@ -58,6 +58,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 
     const styles = useStyle({
       generateStyle,
+      themeOverride,
       params: {
         loaded,
         size,
@@ -66,7 +67,6 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         shape,
         src,
         showBorder,
-        themeOverride,
         display,
         margin,
         iconTokens
