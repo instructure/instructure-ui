@@ -65,6 +65,7 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
       onClick,
       onChange,
       inputRef,
+      themeOverride,
       ...rest
     } = props
     const [hovered, setHovered] = useState(false)
@@ -90,6 +91,7 @@ const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
     // Styles - pass props with defaults applied for generateStyle
     const styles = useStyle({
       generateStyle,
+      themeOverride,
       params: {
         disabled,
         context,

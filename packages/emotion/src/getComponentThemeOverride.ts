@@ -27,8 +27,9 @@ import type {
   Overrides,
   ComponentOverride
 } from './EmotionTypes'
-import type { BaseTheme, ComponentTheme } from '@instructure/shared-types'
-import type { WithStyleProps } from './withStyleRework'
+import type { ComponentTheme } from '@instructure/shared-types'
+import { ThemeOverrideProp } from './withStyle'
+import { ThemeOverrideValue } from './useStyle'
 
 type ComponentName = keyof ComponentOverride | undefined
 
@@ -42,7 +43,7 @@ type ComponentName = keyof ComponentOverride | undefined
  * @param theme - Theme object
  * @param displayName - Name of the component
  * @param componentId - componentId of the component
- * @param props - The component's props object
+ * @param themeOverride - The theme override object
  * @param componentTheme - The component's default theme
  * @returns The calculated theme override object
  */
@@ -50,13 +51,12 @@ const getComponentThemeOverride = (
   theme: ThemeOrOverride,
   displayName: string,
   componentId?: string,
-  props?: { [k: string]: unknown } & WithStyleProps,
+  // ThemeOverrideProp is the old type, ThemeOverrideValue is the new one
+  themeOverride?: ThemeOverrideProp['themeOverride'] | ThemeOverrideValue,
   componentTheme?: ComponentTheme
 ): Partial<ComponentTheme> => {
   const name = displayName as ComponentName
   const id = componentId as ComponentName
-
-  const themeOverride = props ? props.themeOverride : undefined
 
   const { componentOverrides } = theme as Overrides
 
@@ -71,10 +71,11 @@ const getComponentThemeOverride = (
   if (themeOverride) {
     if (typeof themeOverride === 'function') {
       overrideFromComponent = themeOverride(
-        componentTheme || {},
+        //TODO type properly when the old theme is gone
+        componentTheme || ({} as any),
         // the `theme` technically could be a partial theme / override object too,
         // but we want to display all possible options
-        theme as BaseTheme
+        theme as any
       )
     } else {
       overrideFromComponent = themeOverride

@@ -81,9 +81,7 @@ describe('@getComponentThemeOverride', () => {
         canvas,
         componentName,
         componentId,
-        {
-          themeOverride: componentOverride
-        }
+        componentOverride
       )
 
       expect(override).toEqual(componentOverride)
@@ -100,12 +98,10 @@ describe('@getComponentThemeOverride', () => {
         canvas,
         componentName,
         componentId,
-        {
-          themeOverride: (componentTheme, currentTheme) => ({
-            backgroundBlue: componentTheme.backgroundGreen,
-            backgroundDark: currentTheme.colors.contrasts.white1010
-          })
-        },
+        (componentTheme: any, currentTheme: any) => ({
+          backgroundBlue: componentTheme.backgroundGreen,
+          backgroundDark: currentTheme.colors.contrasts.white1010
+        }),
         theme
       )
 
@@ -128,9 +124,7 @@ describe('@getComponentThemeOverride', () => {
         componentName,
         componentId,
         {
-          themeOverride: {
-            componentColor: 'rgb(0, 150, 0)'
-          }
+          componentColor: 'rgb(0, 150, 0)'
         }
       )
 

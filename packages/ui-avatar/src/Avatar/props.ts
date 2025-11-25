@@ -26,12 +26,11 @@ import { SyntheticEvent } from 'react'
 
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  ThemeOverrideValue
 } from '@instructure/emotion'
 import type {
   AsElementType,
-  AvatarTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
@@ -109,9 +108,9 @@ type PropKeys = keyof AvatarOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AvatarProps = AvatarOwnProps &
-  WithStyleProps<AvatarTheme, AvatarStyle> &
-  OtherHTMLAttributes<AvatarOwnProps>
+type AvatarProps = AvatarOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<AvatarOwnProps>
 
 type AvatarStyle = ComponentStyle<'avatar' | 'image'>
 
