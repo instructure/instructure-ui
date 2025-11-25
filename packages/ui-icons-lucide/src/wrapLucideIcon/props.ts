@@ -23,7 +23,7 @@
  */
 
 import type { LucideProps } from 'lucide-react'
-import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
@@ -101,9 +101,9 @@ type LucideIconWrapperProps = Omit<
   LucideProps,
   'size' | 'color' | 'strokeWidth' | 'rotate'
 > &
-  InstUIIconOwnProps &
-  WithStyleProps<NewComponentTypes['Icon'], LucideIconStyle> &
-  OtherHTMLAttributes<InstUIIconOwnProps>
+  InstUIIconOwnProps & {
+    themeOverride?: ThemeOverrideValue
+  } & OtherHTMLAttributes<InstUIIconOwnProps>
 
 type LucideIconStyle = ComponentStyle<'lucideIcon'>
 

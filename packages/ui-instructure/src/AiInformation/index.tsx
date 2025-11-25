@@ -26,9 +26,7 @@ import { Popover } from '@instructure/ui-popover'
 import { CloseButton } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-heading'
 import { Text } from '@instructure/ui-text'
-import { Link } from '@instructure/ui-link'
-import { IconExternalLinkLine } from '@instructure/ui-icons'
-import { useStyle } from '@instructure/emotion'
+import { useStyleRework } from '@instructure/emotion'
 import { NutritionFacts, DataPermissionLevels } from '../'
 
 import { AiInformationProps } from './props'
@@ -63,7 +61,7 @@ const AiInformation = ({
 }: AiInformationProps) => {
   const [open, setOpen] = useState(false)
 
-  const styles = useStyle({
+  const styles = useStyleRework({
     generateStyle,
     generateComponentTheme,
     componentId: 'AiInformation',
@@ -101,8 +99,6 @@ const AiInformation = ({
               (
                 {
                   featureName,
-                  privacyNoticeText,
-                  privacyNoticeUrl,
                   permissionLevelText,
                   permissionLevel,
                   description,
@@ -114,17 +110,6 @@ const AiInformation = ({
                 index
               ) => (
                 <div key={index}>
-                  <div css={styles?.privacyNotice}>
-                    <Link
-                      href={privacyNoticeUrl}
-                      renderIcon={<IconExternalLinkLine />}
-                      iconPlacement="end"
-                      variant="standalone"
-                      target="_blank"
-                    >
-                      {privacyNoticeText}
-                    </Link>
-                  </div>
                   <div css={styles?.featureName}>
                     <Heading level="h3" variant="titleCardRegular">
                       {featureName}
