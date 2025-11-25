@@ -150,8 +150,8 @@ type: embed
 | Breadcrumb | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Breadcrumb.BreadcrumbLink | children | `React.ReactNode` | Yes | - | Content to render as the crumb, generally should be text. |
 | Breadcrumb.BreadcrumbLink | href | `string` | No | - | Link the crumb should direct to; if an href is provided, the crumb will render as a link |
-| Breadcrumb.BreadcrumbLink | onClick | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button |
-| Breadcrumb.BreadcrumbLink | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | Fires when the Link is hovered |
+| Breadcrumb.BreadcrumbLink | onClick | `(event: React.MouseEvent) => void` | No | - | If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button |
+| Breadcrumb.BreadcrumbLink | onMouseEnter | `(event: React.MouseEvent) => void` | No | - | Fires when the Link is hovered |
 | Breadcrumb.BreadcrumbLink | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the font-size of the breadcrumb text |
 | Breadcrumb.BreadcrumbLink | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an icon to the Breadcrumb.Link |
 | Breadcrumb.BreadcrumbLink | iconPlacement | `'start' \| 'end'` | No | - | Place the icon before or after the text in the Breadcrumb.Link |

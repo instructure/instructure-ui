@@ -351,6 +351,63 @@ type: example
 
 ```
 
+### Scrollable Popover Content
+
+When the ColorPicker popover contains tall content (e.g., ColorMixer + ColorPreset + ColorContrast), the component automatically calculates the available viewport space and makes the popover scrollable.
+
+The `popoverMaxHeight` prop can be used to set a custom maximum height for the popover content. By default, it's set to `'100vh'`, but the component dynamically adjusts this based on the available space to ensure the popover fits within the viewport and remains scrollable.
+
+```js
+---
+type: example
+---
+<ColorPicker
+  label="Color"
+  placeholderText="Enter HEX"
+  popoverButtonScreenReaderLabel="Open color mixer popover"
+  popoverMaxHeight="500px"
+  colorMixerSettings={{
+    popoverAddButtonLabel: "Add",
+    popoverCloseButtonLabel: "Cancel",
+    colorMixer: {
+      withAlpha: true,
+      rgbRedInputScreenReaderLabel:'Input field for red',
+      rgbGreenInputScreenReaderLabel:'Input field for green',
+      rgbBlueInputScreenReaderLabel:'Input field for blue',
+      rgbAlphaInputScreenReaderLabel:'Input field for alpha',
+      colorSliderNavigationExplanationScreenReaderLabel:`You are on a color slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`,
+      alphaSliderNavigationExplanationScreenReaderLabel:`You are on an alpha slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`,
+      colorPaletteNavigationExplanationScreenReaderLabel:`You are on a color palette. To navigate on the palette up, left, down or right, use the 'W', 'A', 'S' and 'D' buttons respectively`
+    },
+    colorPreset: {
+      label: "Preset Colors",
+      colors: [
+        "#FF0000",
+        "#00FF00",
+        "#0000FF",
+        "#FFFF00",
+        "#FF00FF",
+        "#00FFFF",
+        "#000000",
+        "#FFFFFF",
+        "#808080"
+      ]
+    },
+    colorContrast: {
+      firstColor: "#FFFFFF",
+      label: "Color Contrast Ratio",
+      successLabel: "PASS",
+      failureLabel: "FAIL",
+      normalTextLabel: "Normal text",
+      largeTextLabel: "Large text",
+      graphicsTextLabel: "Graphics text",
+      firstColorLabel: "Background",
+      secondColorLabel: "Foreground"
+    }
+  }}
+/>
+```
+
 
 ### Props
 

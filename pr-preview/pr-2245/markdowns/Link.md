@@ -226,15 +226,15 @@ type: embed
 | Link | role | `string` | No | - | The ARIA role of the element. |
 | Link | forceButtonRole | `boolean` | No | - | If the Link has an onClick handler but is not a button element, force ARIA role to be "button". |
 | Link | interaction | `'enabled' \| 'disabled'` | No | - | Determines if the link is enabled or disabled |
-| Link | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Link | margin | `Spacing` | No | - | Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens) Apply these values via familiar CSS-like shorthand. |
 | Link | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. |
 | Link | iconPlacement | `'start' \| 'end'` | No | - | Place the icon before or after the text in the Link. |
 | Link | display | `'auto' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
 | Link | isWithinText | `boolean` | No | - | Set `false` to remove default underline if Link does not appear inline with text |
-| Link | onBlur | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link loses focus |
-| Link | onClick | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is clicked |
-| Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
-| Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
+| Link | onBlur | `(event: React.FocusEvent) => void` | No | - | Fires when the Link loses focus |
+| Link | onClick | `(event: React.MouseEvent) => void` | No | - | Fires when the Link is clicked |
+| Link | onFocus | `(event: React.FocusEvent) => void` | No | - | Fires when the Link gains focus |
+| Link | onMouseEnter | `(event: React.MouseEvent) => void` | No | - | Fires when the Link is hovered |
 | Link | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the size of the link (font size, line height, and icon gap) |
 | Link | variant | `'inline' \| 'standalone' \| 'inline-small' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component - `inline` - `standalone` __Deprecated values:__ - `inline-small` - `standalone-small` |
 | Link | to | `string` | No | - | Needed for React Router links @private |
