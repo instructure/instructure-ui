@@ -30,7 +30,9 @@
       "canvas/component/Tag": "enabled",
       "canvas/component/FormFieldLayout": "enabled",
       "canvas/component/Heading": "enabled",
-      "canvas/component/Tray": "enabled"
+      "canvas/component/Tray": "enabled",
+      "canvas/component/ContextView": "enabled",
+      "canvas/component/View": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1290,7 +1292,9 @@
       "canvas/component/Tag": "enabled",
       "canvas/component/FormFieldLayout": "enabled",
       "canvas/component/Heading": "enabled",
-      "canvas/component/Tray": "enabled"
+      "canvas/component/Tray": "enabled",
+      "canvas/component/ContextView": "enabled",
+      "canvas/component/View": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -2484,7 +2488,9 @@
       "rebrand/component/Tag": "enabled",
       "rebrand/component/FormFieldLayout": "enabled",
       "rebrand/component/Heading": "enabled",
-      "rebrand/component/Tray": "enabled"
+      "rebrand/component/Tray": "enabled",
+      "rebrand/component/ContextView": "enabled",
+      "rebrand/component/View": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -3742,7 +3748,9 @@
       "rebrand/component/Tag": "enabled",
       "rebrand/component/FormFieldLayout": "enabled",
       "rebrand/component/Heading": "enabled",
-      "rebrand/component/Tray": "enabled"
+      "rebrand/component/Tray": "enabled",
+      "rebrand/component/ContextView": "enabled",
+      "rebrand/component/View": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
