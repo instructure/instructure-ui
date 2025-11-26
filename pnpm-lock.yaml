@@ -1032,6 +1032,9 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
+      '@instructure/ui-icons-lucide':
+        specifier: workspace:*
+        version: link:../ui-icons-lucide
       '@instructure/ui-themes':
         specifier: workspace:*
         version: link:../ui-themes

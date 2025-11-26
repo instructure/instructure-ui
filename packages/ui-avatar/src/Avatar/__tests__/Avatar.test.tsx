@@ -29,6 +29,10 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 import Avatar from '../index'
 import { IconGroupLine } from '@instructure/ui-icons'
+import {
+  UserInstUIIcon,
+  CircleUserInstUIIcon
+} from '@instructure/ui-icons-lucide'
 
 describe('<Avatar />', () => {
   describe('for a11y', () => {
@@ -109,6 +113,113 @@ describe('<Avatar />', () => {
           Hello World
         </Avatar>
       )
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
+    })
+
+    it('should pass the correct size prop to icon based on Avatar size', async () => {
+      const MockIcon = vi.fn((props: any) => (
+        <svg data-testid="mock-icon" data-size={props.size}>
+          <circle cx="25" cy="75" r="20" />
+        </svg>
+      ))
+
+      const { container } = render(
+        <Avatar name="avatar name" size="medium" renderIcon={MockIcon} />
+      )
+
+      expect(MockIcon).toHaveBeenCalledWith(
+        expect.objectContaining({ size: 'md' })
+      )
+      const icon = container.querySelector('[data-testid="mock-icon"]')
+      expect(icon).toHaveAttribute('data-size', 'md')
+    })
+
+    it('should map xx-small Avatar to lg icon size', async () => {
+      const MockIcon = vi.fn(() => (
+        <svg data-testid="mock-icon">
+          <circle cx="25" cy="75" r="20" />
+        </svg>
+      ))
+
+      render(
+        <Avatar name="avatar name" size="xx-small" renderIcon={MockIcon} />
+      )
+
+      expect(MockIcon).toHaveBeenCalledWith(
+        expect.objectContaining({ size: 'xs' })
+      )
+    })
+
+    it('should map x-small Avatar to xl icon size', async () => {
+      const MockIcon = vi.fn(() => (
+        <svg data-testid="mock-icon">
+          <circle cx="25" cy="75" r="20" />
+        </svg>
+      ))
+
+      render(<Avatar name="avatar name" size="x-small" renderIcon={MockIcon} />)
+
+      expect(MockIcon).toHaveBeenCalledWith(
+        expect.objectContaining({ size: 'xs' })
+      )
+    })
+
+    it('should work with icons that ignore the size prop (backwards compatibility)', async () => {
+      const IconWithoutSize = () => (
+        <svg data-testid="icon-without-size">
+          <circle cx="25" cy="75" r="20" />
+        </svg>
+      )
+
+      const { container } = render(
+        <Avatar name="avatar name" size="large" renderIcon={IconWithoutSize} />
+      )
+
+      const icon = container.querySelector('[data-testid="icon-without-size"]')
+      expect(icon).toBeInTheDocument()
+    })
+
+    it('should display a Lucide icon with default size', async () => {
+      const { container } = render(
+        <Avatar name="avatar name" renderIcon={UserInstUIIcon} />
+      )
+
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
+    })
+
+    it('should display a Lucide icon with medium Avatar size', async () => {
+      const { container } = render(
+        <Avatar
+          name="avatar name"
+          size="medium"
+          renderIcon={CircleUserInstUIIcon}
+        />
+      )
+
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
+    })
+
+    it('should display a Lucide icon with xx-small Avatar size', async () => {
+      const { container } = render(
+        <Avatar
+          name="avatar name"
+          size="xx-small"
+          renderIcon={UserInstUIIcon}
+        />
+      )
+
+      const avatarSvg = container.querySelector('svg')
+      expect(avatarSvg).toBeInTheDocument()
+    })
+
+    it('should display a Lucide icon with x-small Avatar size', async () => {
+      const { container } = render(
+        <Avatar name="avatar name" size="x-small" renderIcon={UserInstUIIcon} />
+      )
+
       const avatarSvg = container.querySelector('svg')
       expect(avatarSvg).toBeInTheDocument()
     })
