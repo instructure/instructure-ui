@@ -14,6 +14,24 @@ TODO add details
 
 InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set (see below).
 
+### Lucide Icons Package
+
+InstUI v12 introduces a new icon package **`@instructure/ui-icons-lucide`** based on the [Lucide](https://lucide.dev/icons/) icon library, providing 1,700+ icons with improved theming and RTL support. The new Lucide icons are wrapped with `wrapLucideIcon` to integrate with InstUI's theming system while maintaining access to all native Lucide props.
+
+**Key differences from `SVGIcon`/`InlineSVG`:**
+
+| Property        | Old API (SVGIcon)                                                                               | New API (Lucide)                                                                                      |
+| :-------------- | :---------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| **size**        | `'x-small'` \| `'small'` \| `'medium'` \| `'large'` \| `'x-large'`                              | `'xs'` \| `'sm'` \| `'md'` \| `'lg'` \| `'xl'` \| `'2xl'` \| `number` (pixels)                        |
+| **color**       | Limited tokens: `'primary'` \| `'secondary'` \| `'success'` \| `'error'` \| `'warning'` \| etc. | 60+ theme tokens (`'baseColor'`, `'successColor'`, `'actionPrimaryBaseColor'`, etc.) or any CSS color |
+| **strokeWidth** | ❌ Not available                                                                                | `'xs'` \| `'sm'` \| `'md'` \| `'lg'` \| `'xl'` \| `'2xl'` \| `number` \| `string`                     |
+| **children**    | `React.ReactNode`                                                                               | ❌ Removed                                                                                            |
+| **focusable**   | `boolean`                                                                                       | ❌ Removed                                                                                            |
+| **description** | `string` (combined with title)                                                                  | ❌ Removed (use `title` only)                                                                         |
+| **src**         | `string`                                                                                        | ❌ Removed                                                                                            |
+
+The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to Lucide icons and will be spread onto the nested SVG element. Existing `@instructure/ui-icons` package remains available for legacy Instructure-specific icons.
+
 ## Removal of deprecated props/components/APIs
 
 ## API Changes
