@@ -36,7 +36,6 @@ type StyleParams = {
   showBorder: AvatarProps['showBorder']
   display: AvatarProps['display']
   margin: AvatarProps['margin']
-  iconTokens: NewComponentTypes['Icon']
 }
 /**
  * ---
@@ -61,8 +60,7 @@ const generateStyle = (
     shape,
     showBorder,
     display,
-    margin,
-    iconTokens
+    margin
   } = params
 
   const sizeStyles = {
@@ -113,38 +111,31 @@ const generateStyle = (
   const colorVariants = {
     accent1: {
       text: componentTheme.blueTextColor,
-      background: componentTheme.blueBackgroundColor,
-      icon: iconTokens.accentBlueColor
+      background: componentTheme.blueBackgroundColor
     },
     accent2: {
       text: componentTheme.greenTextColor,
-      background: componentTheme.greenBackgroundColor,
-      icon: iconTokens.accentGreenColor
+      background: componentTheme.greenBackgroundColor
     },
     accent3: {
       text: componentTheme.redTextColor,
-      background: componentTheme.redBackgroundColor,
-      icon: iconTokens.accentRedColor
+      background: componentTheme.redBackgroundColor
     },
     accent4: {
       text: componentTheme.orangeTextColor,
-      background: componentTheme.orangeBackgroundColor,
-      icon: iconTokens.accentOrangeColor
+      background: componentTheme.orangeBackgroundColor
     },
     accent5: {
       text: componentTheme.greyTextColor,
-      background: componentTheme.greyBackgroundColor,
-      icon: iconTokens.accentGreyColor
+      background: componentTheme.greyBackgroundColor
     },
     accent6: {
       text: componentTheme.ashTextColor,
-      background: componentTheme.ashBackgroundColor,
-      icon: iconTokens.accentAshColor
+      background: componentTheme.ashBackgroundColor
     },
     ai: {
       text: componentTheme.textOnColor,
-      background: `linear-gradient(135deg, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%)`,
-      icon: componentTheme.textOnColor
+      background: `linear-gradient(135deg, ${componentTheme.aiTopGradientColor} 0%, ${componentTheme.aiBottomGradientColor} 100%)`
     }
   }
 
@@ -161,6 +152,20 @@ const generateStyle = (
     }
     return 'solid'
   }
+
+  const iconColorMap = {
+    accent1: 'accentBlueColor',
+    accent2: 'accentGreenColor',
+    accent3: 'accentRedColor',
+    accent4: 'accentOrangeColor',
+    accent5: 'accentGreyColor',
+    accent6: 'accentAshColor',
+    ai: componentTheme.textOnColor
+  }
+
+  const iconColor = hasInverseColor
+    ? componentTheme.textOnColor
+    : iconColorMap[color!]
 
   return {
     avatar: {
@@ -195,7 +200,8 @@ const generateStyle = (
       objectFit: 'cover',
       objectPosition: 'center',
       ...(loaded ? {} : { display: 'none' })
-    }
+    },
+    iconColor
   }
 }
 
