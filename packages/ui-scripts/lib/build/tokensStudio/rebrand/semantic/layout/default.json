@@ -6,6 +6,10 @@
           "value": "{size.size20}",
           "type": "sizing"
         },
+        "xs": {
+          "value": "{size.size24}",
+          "type": "sizing"
+        },
         "sm": {
           "value": "{size.size32}",
           "type": "sizing"
@@ -16,10 +20,6 @@
         },
         "lg": {
           "value": "{size.size48}",
-          "type": "sizing"
-        },
-        "xs": {
-          "value": "{size.size24}",
           "type": "sizing"
         }
       }
@@ -38,6 +38,37 @@
           "value": "{size.size24}",
           "type": "sizing"
         }
+      }
+    },
+    "breakpoints": {
+      "xxs": {
+        "value": "8em",
+        "type": "sizing"
+      },
+      "xs": {
+        "value": "16em",
+        "type": "sizing"
+      },
+      "sm": {
+        "value": "30em",
+        "type": "sizing"
+      },
+      "md": {
+        "value": "48em",
+        "type": "sizing",
+        "description": "Tablet"
+      },
+      "lg": {
+        "value": "62em",
+        "type": "sizing"
+      },
+      "desktop": {
+        "value": "64em",
+        "type": "sizing"
+      },
+      "xl": {
+        "value": "75em",
+        "type": "sizing"
       }
     }
   },
