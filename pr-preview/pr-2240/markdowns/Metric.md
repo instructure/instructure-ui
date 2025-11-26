@@ -1,11 +1,6 @@
 # Metric
 
 
-### Upgrade Guide for V12
-
-> - theme variable `padding` is now removed, left-right padding can be set now with the `paddingHorizontal` theme variable
-> - theme variable `fontFamily` is now removed, font can be set independently on the value and label elements using the `valueFontFamily` and `labelFontFamily` variables respectively
-
 The Metric component displays 'value' and 'label'. The default alignment is 'center'.
 
 ```javascript
