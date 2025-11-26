@@ -68,6 +68,8 @@ describe('FocusRegion', () => {
       const outsideElement = document.createElement('div')
       document.body.appendChild(outsideElement)
 
+      // Proper mousedown + click sequence (as happens in real user interactions)
+      fireEvent.mouseDown(outsideElement)
       fireEvent.click(outsideElement, { button: 0, detail: 1 })
 
       await waitFor(() => {
