@@ -389,6 +389,10 @@
         "value": "{color.blue.blue130}",
         "type": "color"
       },
+      "brand": {
+        "value": "{color.blue.blue130}",
+        "type": "color"
+      },
       "aiTopGradient": {
         "value": "{color.violet.violet130}",
         "type": "color"

@@ -1,0 +1,48 @@
+{
+  "view": {
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "textColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "textOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "borderColorPrimary": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderColorSecondary": {
+      "value": "{color.stroke.muted}",
+      "type": "color"
+    },
+    "borderColorSuccess": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "borderColorBrand": {
+      "value": "{color.stroke.brand}",
+      "type": "color"
+    },
+    "borderColorInfo": {
+      "value": "{color.stroke.info}",
+      "type": "color"
+    },
+    "borderColorWarning": {
+      "value": "{color.stroke.warning}",
+      "type": "color"
+    },
+    "borderColorError": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "debugOutlineColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    }
+  }
+}
