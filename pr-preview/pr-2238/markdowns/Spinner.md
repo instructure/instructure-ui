@@ -11,10 +11,10 @@ The `size` prop allows you to select from `x-small`, `small`, `medium` and `larg
 type: example
 ---
 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-  <Spinner renderTitle="Loading" size="x-small" margin="spacing.spaceXs"/>
-  <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" />
-  <Spinner renderTitle="Loading" margin="spacing.spaceXs" />
-  <Spinner renderTitle="Loading" size="large" margin="spacing.spaceXs" />
+  <Spinner renderTitle="Loading" size="x-small" />
+  <Spinner renderTitle="Loading" size="small" />
+  <Spinner renderTitle="Loading" />
+  <Spinner renderTitle="Loading" size="large" />
 </div>
 ```
 
@@ -41,10 +41,10 @@ The `delay` prop allows you to delay the rendering of the spinner a desired time
 type: example
 ---
 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-  <Spinner renderTitle="Loading" size="x-small" delay={1000} margin="spacing.spaceXs" />
-  <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" delay={2000} />
-  <Spinner renderTitle="Loading" margin="spacing.spaceXs" delay={3000} />
-  <Spinner renderTitle="Loading" size="large" margin="spacing.spaceXs" delay={4000} />
+  <Spinner renderTitle="Loading" size="x-small" delay={1000} />
+  <Spinner renderTitle="Loading" size="small" delay={2000} />
+  <Spinner renderTitle="Loading" delay={3000} />
+  <Spinner renderTitle="Loading" size="large" delay={4000} />
 </div>
 ```
 
