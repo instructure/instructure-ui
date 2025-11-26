@@ -18,6 +18,15 @@ InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We a
 
 ## API Changes
 
+### Metric
+
+- theme variable `padding` is now removed, left-right padding can be set now with the `paddingHorizontal` theme variable
+- theme variable `fontFamily` is now removed, font can be set independently on the value and label elements using the `valueFontFamily` and `labelFontFamily` variables respectively
+
+### MetricGroup
+
+- theme variable `lineHeight` is now removed.
+
 ## Codemods
 
 To ease the upgrade, we provide codemods that will automate most of the changes. Pay close attention to its output, it cannot refactor complex code! The codemod scripts can be run via the following commands:

@@ -82,6 +82,9 @@ const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
   return typeof (obj as any)?.newTheme === 'object'
 }
 
+// TODO: improve useStyle to handle generateStyle functions that don't use params
+// or don't have a theme. Currently, components with simple static styles still need
+// to provide generateComponentTheme even when they don't use any theme variables.
 const useStyle = <
   P extends (componentTheme: any, params: any, themeOrSharedTokens: any) => any
 >(
