@@ -43,6 +43,54 @@
     "debugOutlineColor": {
       "value": "{color.stroke.error}",
       "type": "color"
+    },
+    "backgroundPrimary": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "backgroundSecondary": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundDark": {
+      "value": "{color.background.dark}",
+      "type": "color"
+    },
+    "backgroundBrand": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "backgroundInfo": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "backgroundSuccess": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "backgroundError": {
+      "value": "{color.background.error}",
+      "type": "color"
+    },
+    "backgroundWarning": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "xSmallMaxWidth": {
+      "value": "{size.breakpoints.xs}",
+      "type": "sizing"
+    },
+    "smallMaxWidth": {
+      "value": "{size.breakpoints.sm}",
+      "type": "sizing"
+    },
+    "mediumMaxWidth": {
+      "value": "{size.breakpoints.md}",
+      "type": "sizing"
+    },
+    "largeMaxWidth": {
+      "value": "{size.breakpoints.lg}",
+      "type": "sizing"
     }
   }
 }
