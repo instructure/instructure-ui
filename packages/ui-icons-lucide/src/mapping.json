@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-11-07",
+  "mappings": [
+    {
+      "instUI": {
+        "line": "IconAddLine",
+        "solid": "IconAddSolid"
+      },
+      "lucide": {
+        "name": "Plus"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconCheckLine",
+        "solid": "IconCheckSolid"
+      },
+      "lucide": {
+        "name": "Check"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconSearchLine",
+        "solid": "IconSearchSolid"
+      },
+      "lucide": {
+        "name": "Search"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconCloseLine",
+        "solid": "IconCloseSolid"
+      },
+      "lucide": {
+        "name": "X"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconArrowStartLine",
+        "solid": "IconArrowStartSolid"
+      },
+      "lucide": {
+        "name": "ArrowLeft"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconArrowEndLine",
+        "solid": "IconArrowEndSolid"
+      },
+      "lucide": {
+        "name": "ArrowRight"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconSettingsLine",
+        "solid": "IconSettingsSolid"
+      },
+      "lucide": {
+        "name": "Settings"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconHomeLine",
+        "solid": "IconHomeSolid"
+      },
+      "lucide": {
+        "name": "Home"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconUserLine",
+        "solid": "IconUserSolid"
+      },
+      "lucide": {
+        "name": "User"
+      }
+    },
+    {
+      "instUI": {
+        "line": "IconTrashLine",
+        "solid": "IconTrashSolid"
+      },
+      "lucide": {
+        "name": "Trash2"
+      }
+    }
+  ],
+  "unmapped": [
+    {
+      "instUI": {
+        "line": "IconCanvasLogoLine",
+        "solid": "IconCanvasLogoSolid"
+      },
+      "reason": "Product-specific logo, no Lucide equivalent",
+      "action": "Keep in @instructure/ui-icons"
+    },
+    {
+      "instUI": {
+        "line": "IconInstructureLogoLine",
+        "solid": "IconInstructureLogoSolid"
+      },
+      "reason": "Product-specific logo, no Lucide equivalent",
+      "action": "Keep in @instructure/ui-icons"
+    }
+  ]
+}

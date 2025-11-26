@@ -271,6 +271,9 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
+      '@instructure/ui-icons-lucide':
+        specifier: workspace:*
+        version: link:../ui-icons-lucide
       '@instructure/ui-img':
         specifier: workspace:*
         version: link:../ui-img
@@ -442,6 +445,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      react-window:
+        specifier: ^2.2.3
+        version: 2.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       semver:
         specifier: ^7.7.2
         version: 7.7.3
@@ -2416,6 +2422,37 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
+
+  packages/ui-icons-lucide:
+    dependencies:
+      '@babel/runtime':
+        specifier: ^7.27.6
+        version: 7.28.4
+      '@instructure/emotion':
+        specifier: workspace:*
+        version: link:../emotion
+      '@instructure/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+      '@instructure/ui-react-utils':
+        specifier: workspace:*
+        version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
+      '@instructure/ui-utils':
+        specifier: workspace:*
+        version: link:../ui-utils
+      lucide-react:
+        specifier: ^0.460.0
+        version: 0.460.0(react@18.3.1)
+    devDependencies:
+      '@instructure/ui-babel-preset':
+        specifier: workspace:*
+        version: link:../ui-babel-preset
+      '@types/node':
+        specifier: ^22.5.4
+        version: 22.18.10
 
   packages/ui-img:
     dependencies:
@@ -10488,6 +10525,11 @@ packages:
   lru-queue@0.1.0:
     resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
 
+  lucide-react@0.460.0:
+    resolution: {integrity: sha512-BVtq/DykVeIvRTJvRAgCsOwaGL8Un3Bxh8MbDxMhEWlZay3T4IpEKDEpwt5KZ0KJMHzgm6jrltxlT5eXOWXDHg==}
+    peerDependencies:
+      react: 18.3.1
+
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -11606,6 +11648,12 @@ packages:
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
+
+  react-window@2.2.3:
+    resolution: {integrity: sha512-gTRqQYC8ojbiXyd9duYFiSn2TJw0ROXCgYjenOvNKITWzK0m0eCvkUsEUM08xvydkMh7ncp+LE0uS3DeNGZxnQ==}
+    peerDependencies:
+      react: 18.3.1
+      react-dom: 18.3.1
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -19665,6 +19713,10 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
 
+  lucide-react@0.460.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   lz-string@1.5.0: {}
 
   magic-string@0.30.19:
@@ -20967,6 +21019,11 @@ snapshots:
   react-is@18.3.1: {}
 
   react-refresh@0.17.0: {}
+
+  react-window@2.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   react@18.3.1:
     dependencies:
