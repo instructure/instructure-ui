@@ -1,10 +1,6 @@
 # MetricGroup
 
 
-### Upgrade Guide for V12
-
-> - theme variable `lineHeight` is now removed.
-
 A `MetricGroup` component displays multiple `Metric` (value + label) in rows.
 
 ```javascript
