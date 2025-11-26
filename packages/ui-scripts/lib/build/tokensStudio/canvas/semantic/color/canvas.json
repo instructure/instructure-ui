@@ -41,12 +41,16 @@
         "value": "{color.blue.blue100}",
         "type": "color"
       },
-      "aiBottomGradient": {
-        "value": "{color.sea.sea100}",
+      "brand": {
+        "value": "{color.blue.blue100}",
         "type": "color"
       },
       "aiTopGradient": {
         "value": "{color.violet.violet100}",
+        "type": "color"
+      },
+      "aiBottomGradient": {
+        "value": "{color.sea.sea100}",
         "type": "color"
       },
       "aiText": {

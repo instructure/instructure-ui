@@ -30,7 +30,6 @@
     "canvas/component/Tray",
     "canvas/component/SharedTokens",
     "canvas/component/View",
-    "rebrand/component/View",
     "rebrand/component/Avatar",
     "rebrand/component/Badge",
     "rebrand/component/BaseButton",
@@ -56,6 +55,7 @@
     "rebrand/component/Tooltip",
     "rebrand/component/Tray",
     "rebrand/component/SharedTokens",
+    "rebrand/component/View",
     "rebrand/semantic/layout/default",
     "rebrand/semantic/color/rebrandLight",
     "rebrand/semantic/color/rebrandDark"
