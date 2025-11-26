@@ -10,7 +10,7 @@ The `size` prop allows you to select from `x-small`, `small`, `medium` and `larg
 ---
 type: example
 ---
-<div style={{ display: 'flex', alignItems: 'center', gap: 'spacing.spaceMd' }}>
+<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
   <Spinner renderTitle="Loading" size="x-small" margin="spacing.spaceXs"/>
   <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" />
   <Spinner renderTitle="Loading" margin="spacing.spaceXs" />
@@ -40,7 +40,7 @@ The `delay` prop allows you to delay the rendering of the spinner a desired time
 ---
 type: example
 ---
-<div style={{ display: 'flex', alignItems: 'center', gap: 'spacing.spaceMd' }}>
+<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
   <Spinner renderTitle="Loading" size="x-small" delay={1000} margin="spacing.spaceXs" />
   <Spinner renderTitle="Loading" size="small" margin="spacing.spaceXs" delay={2000} />
   <Spinner renderTitle="Loading" margin="spacing.spaceXs" delay={3000} />
@@ -67,7 +67,7 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Spinner | delay | `number` | No | - | delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times |
-| Spinner | margin | `Spacing` | No | - | Valid values are from themes. See theme.semantics.spacing. Apply these values via familiar CSS-like shorthand. For example: `margin="spaceLg gap.cards.sm 20px padding.container.sm"`. |
+| Spinner | margin | `Spacing` | No | - | Valid values are from themes. See theme.semantics.spacing. Apply these values via familiar CSS-like shorthand. For an example see `theme.sharedTokens.spacing`. |
 | Spinner | renderTitle | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Give the spinner a title to be read by screenreaders |
 | Spinner | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | - | Different-sized spinners |
 | Spinner | variant | `'default' \| 'inverse'` | No | - | Different color schemes for use with light or dark backgrounds |
