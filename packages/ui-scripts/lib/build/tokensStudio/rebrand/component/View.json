@@ -4,11 +4,11 @@
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
     },
-    "textColor": {
+    "color": {
       "value": "{color.text.base}",
       "type": "color"
     },
-    "textOnColor": {
+    "colorPrimaryInverse": {
       "value": "{color.text.onColor}",
       "type": "color"
     },
@@ -36,7 +36,7 @@
       "value": "{color.stroke.warning}",
       "type": "color"
     },
-    "borderColorError": {
+    "borderColorDanger": {
       "value": "{color.stroke.error}",
       "type": "color"
     },
@@ -52,7 +52,7 @@
       "value": "{color.background.muted}",
       "type": "color"
     },
-    "backgroundDark": {
+    "backgroundPrimaryInverse": {
       "value": "{color.background.dark}",
       "type": "color"
     },
@@ -68,7 +68,7 @@
       "value": "{color.background.success}",
       "type": "color"
     },
-    "backgroundError": {
+    "backgroundDanger": {
       "value": "{color.background.error}",
       "type": "color"
     },
@@ -91,6 +91,38 @@
     "largeMaxWidth": {
       "value": "{size.breakpoints.lg}",
       "type": "sizing"
+    },
+    "focusOutlineStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "focusOutlineWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "focusOutlineOffset": {
+      "value": "0.3125rem",
+      "type": "spacing"
+    },
+    "focusOutlineInset": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "focusColorInfo": {
+      "value": "{color.stroke.interactive.focusRing.base}",
+      "type": "color"
+    },
+    "focusColorDanger": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "focusColorSuccess": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "focusColorInverse": {
+      "value": "{color.stroke.interactive.focusRing.onColor}",
+      "type": "color"
     }
   }
 }
