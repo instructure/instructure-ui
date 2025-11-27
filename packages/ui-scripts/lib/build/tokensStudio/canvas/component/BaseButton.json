@@ -152,10 +152,6 @@
       "value": "{color.text.interactive.action.ai.base}",
       "type": "color"
     },
-    "aiSecondaryBackgroundColor": {
-      "value": "{color.background.interactive.action.aiSecondary.base}",
-      "type": "color"
-    },
     "aiSecondaryTextTopGradientColor": {
       "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
       "type": "color"
