@@ -22,58 +22,106 @@
  * SOFTWARE.
  */
 
-import type { NumberInputTheme } from '@instructure/shared-types'
-import type {
-  NumberInputProps,
-  NumberInputStyleProps,
-  NumberInputStyle
-} from './props'
+import type { NumberInputProps, NumberInputStyle } from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
+
+type StyleParams = {
+  size: NumberInputProps['size']
+  textAlign: NumberInputProps['textAlign']
+  interaction: NumberInputProps['interaction']
+  invalid: boolean
+  success: boolean
+}
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
+ * @param sharedTokens Shared token object that stores common values for the theme.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NumberInputTheme,
-  props: NumberInputProps,
-  state: NumberInputStyleProps
+  componentTheme: NewComponentTypes['TextInput'],
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): NumberInputStyle => {
-  const { size, textAlign } = props
-  const { interaction, hasFocus, invalid } = state
+  const { size, textAlign, interaction, success, invalid } = params
 
-  const disabledStyles =
-    interaction === 'disabled'
-      ? {
-          cursor: 'not-allowed',
-          pointerEvents: 'none',
-          opacity: 0.5
-        }
-      : {}
-
-  const focusStyles = hasFocus
-    ? {
-        opacity: 1,
-        transform: 'scale(1)'
-      }
-    : {}
-
-  const invalidStyles = invalid
-    ? {
-        borderColor: componentTheme.errorOutlineColor
-      }
-    : {}
-
-  const invalidContainerStyles = invalid
-    ? {
+  const containerInteractionStates = {
+    ...(interaction === 'enabled' && {
+      backgroundColor: componentTheme.backgroundColor,
+      borderColor: componentTheme.borderColor,
+      ...(success && {
+        borderColor: componentTheme.successBorderColor
+      }),
+      ...(invalid && {
         borderColor: componentTheme.errorBorderColor
+      }),
+      '&:hover': {
+        backgroundColor: componentTheme.backgroundHoverColor,
+        borderColor: componentTheme.borderHoverColor,
+        ...(success && {
+          borderColor: componentTheme.successBorderColor
+        }),
+        ...(invalid && {
+          borderColor: componentTheme.errorBorderColor
+        })
       }
-    : {}
+    }),
+    ...(interaction === 'readonly' && {
+      backgroundColor: componentTheme.backgroundReadonlyColor,
+      borderColor: componentTheme.borderReadonlyColor
+    }),
+    ...(interaction === 'disabled' && {
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+      backgroundColor: componentTheme.backgroundDisabledColor,
+      borderColor: componentTheme.borderDisabledColor
+    })
+  }
+  const arrowInteractionStates = {
+    ...(interaction === 'enabled' && {
+      backgroundColor: componentTheme.arrowsBackgroundColor,
+      borderColor: componentTheme.arrowsBorderColor,
+      '&:hover': {
+        backgroundColor: componentTheme.arrowsBackgroundHoverColor,
+        borderColor: componentTheme.arrowsBorderHoverColor
+      },
+      '&:active': {
+        backgroundColor: componentTheme.arrowsBackgroundActiveColor,
+        borderColor: componentTheme.arrowsBorderActiveColor
+      }
+    }),
+    ...(interaction === 'disabled' && {
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+      backgroundColor: componentTheme.arrowsBackgroundDisabledColor,
+      borderColor: componentTheme.arrowsBorderDisabledColor
+    })
+    // arrow buttons are not rendered in the `readOnly` state
+  }
+  const inputInteractionStates = {
+    ...(interaction === 'enabled' && {
+      color: componentTheme.textColor,
+      '&::placeholder': {
+        color: componentTheme.placeholderColor
+      },
+      '&:hover::placeholder': {
+        color: componentTheme.placeholderHoverColor
+      }
+      // placeholder is not rendered in the `readOnly` and `disabled` state
+    }),
+    ...(interaction === 'readonly' && {
+      color: componentTheme.textReadonlyColor
+    }),
+    ...(interaction === 'disabled' && {
+      color: componentTheme.textDisabledColor
+    })
+  }
 
   const inputStyle = {
     all: 'initial',
@@ -89,17 +137,24 @@ const generateStyle = (
     boxSizing: 'border-box',
     fontFamily: 'inherit',
     fontSize: 'inherit',
-    fontWeight: componentTheme.fontWeight,
-    color: componentTheme.color,
-    background: componentTheme.background,
-    padding: componentTheme.padding,
-    textyAlign: textAlign,
-    '&::placeholder': { color: componentTheme.placeholderColor }
+    fontWeight: 'inherit',
+    ...(size === 'medium'
+      ? {
+          padding: componentTheme.paddingHorizontalMd
+        }
+      : {
+          padding: componentTheme.paddingHorizontalLg
+        }),
+    ...inputInteractionStates
   }
 
+  const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline, {
+    focusWithin: true
+  })
   return {
     requiredInvalid: {
-      color: componentTheme.requiredInvalidColor
+      // color of the small required star
+      //color: componentTheme.requiredInvalidColor TODO handle in FormFieldLayout
     },
     numberInput: {
       label: 'numberInput'
@@ -108,8 +163,7 @@ const generateStyle = (
       label: 'numberInput_arrowContainer',
       flex: `0 0 ${componentTheme.arrowsContainerWidth}`,
       display: 'flex',
-      flexDirection: 'column',
-      ...disabledStyles
+      flexDirection: 'column'
     },
     arrow: {
       label: 'numberInput_arrow',
@@ -120,59 +174,38 @@ const generateStyle = (
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: componentTheme.arrowsBackgroundColor,
       borderTop: 'none',
       borderInlineEnd: 'none',
-      borderInlineStart: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.arrowsBorderColor}`,
-      borderBottom: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.arrowsBorderColor}`,
-      color: componentTheme.arrowsColor,
+      borderInlineStart: `${componentTheme.borderWidth} solid`,
+      borderBottom: `${componentTheme.borderWidth} solid`,
       '&:last-child': { borderBottom: 'none' },
-      '&:hover': { backgroundColor: componentTheme.arrowsHoverBackgroundColor },
-      '&:active': { boxShadow: componentTheme.arrowsActiveBoxShadow }
+      ...arrowInteractionStates
     },
     inputWidth: {
       label: 'numberInput_inputWidth',
       display: 'block',
-      position: 'relative',
-      '&::before': {
-        content: '""',
-        pointerEvents: 'none',
-        boxSizing: 'border-box',
-        display: 'block',
-        position: 'absolute',
-        top: '-0.25rem',
-        bottom: '-0.25rem',
-        left: '-0.25rem',
-        right: '-0.25rem',
-        border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-        transition: 'all 0.2s',
-        opacity: 0,
-        transform: 'scale(0.95)',
-        ...focusStyles,
-        ...invalidStyles
-      }
+      position: 'relative'
     },
     inputContainer: {
       label: 'numberInput_inputContainer',
       display: 'flex',
       margin: '0',
       boxSizing: 'border-box',
-      transition: 'all 0.2s',
       overflow: 'hidden',
       fontFamily: componentTheme.fontFamily,
-      border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
+      fontWeight: componentTheme.fontWeight,
+      border: `${componentTheme.borderWidth} solid`,
       borderRadius: componentTheme.borderRadius,
-      ...disabledStyles,
-      ...invalidContainerStyles,
+      ...containerInteractionStates,
+      ...focusOutline,
       ...(size === 'medium'
         ? {
-            fontSize: componentTheme.mediumFontSize,
-            height: componentTheme.mediumHeight
+            fontSize: componentTheme.fontSizeMd,
+            height: componentTheme.heightMd
           }
         : {
-            fontSize: componentTheme.largeFontSize,
-            height: componentTheme.largeHeight
+            fontSize: componentTheme.fontSizeLg,
+            height: componentTheme.heightLg
           })
     },
     input: {

@@ -63,7 +63,8 @@ const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
 const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   generateStyle: P
   params?: SecondParameter<P>
-  componentId: keyof NewComponentTypes
+  // needs to be a string too because it might be a child component
+  componentId: keyof NewComponentTypes | string
   themeOverride: ThemeOverrideValue | undefined
   displayName?: string
   //in case of a child component needed to use it's parent's tokens, provide parent's name

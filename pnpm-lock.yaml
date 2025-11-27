@@ -2969,9 +2969,9 @@ importers:
       '@instructure/ui-form-field':
         specifier: workspace:*
         version: link:../ui-form-field
-      '@instructure/ui-icons':
+      '@instructure/ui-icons-lucide':
         specifier: workspace:*
-        version: link:../ui-icons
+        version: link:../ui-icons-lucide
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
