@@ -24,7 +24,10 @@
 
 import { Component } from 'react'
 
-import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
+import {
+  withStyleRework as withStyle,
+  InstUISettingsProvider
+} from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isValid, contrast as getContrast } from '@instructure/ui-color-utils'

@@ -26,7 +26,7 @@ import { Component, Children, ReactElement, isValidElement } from 'react'
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import { SideNavBarItem } from './SideNavBarItem'
 

@@ -30,7 +30,7 @@ import {
   contrastWithAlpha,
   validateContrast
 } from '@instructure/ui-color-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
 import { Pill } from '@instructure/ui-pill'

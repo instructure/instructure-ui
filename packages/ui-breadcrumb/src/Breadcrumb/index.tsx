@@ -32,7 +32,7 @@ import {
 
 import { View } from '@instructure/ui-view'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 

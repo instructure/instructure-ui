@@ -32,7 +32,8 @@ import {
 } from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
-import { InstUISettingsProvider, withStyle, Global } from '@instructure/emotion'
+import { InstUISettingsProvider, Global } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
