@@ -23,7 +23,7 @@
  */
 
 import React, { Component } from 'react'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import { px } from '@instructure/ui-utils'
 

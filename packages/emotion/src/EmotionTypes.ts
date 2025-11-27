@@ -28,7 +28,7 @@ import type {
   ComponentThemeMap,
   DeepPartial
 } from '@instructure/shared-types'
-import type { Theme } from '@instructure/ui-themes'
+import type { Theme, SharedTokens } from '@instructure/ui-themes'
 
 /**
  * A theme object where every prop is optional
@@ -121,6 +121,13 @@ type GenerateStyle = (
   state?: State
 ) => StyleObject
 
+type GenerateStyleRework = (
+  componentTheme: ComponentTheme,
+  props: Props,
+  sharedTokens: SharedTokens,
+  state?: State
+) => StyleObject
+
 type GenerateStyleFunctional = (
   componentTheme: ComponentTheme,
   params: Record<string, unknown>
@@ -150,6 +157,7 @@ export type {
   State,
   GenerateComponentTheme,
   GenerateStyle,
+  GenerateStyleRework,
   GenerateStyleFunctional,
   ComponentStyle
 }

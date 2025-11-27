@@ -233,6 +233,9 @@ importers:
       '@instructure/ui-date-time-input':
         specifier: workspace:*
         version: link:../ui-date-time-input
+      '@instructure/ui-decorator':
+        specifier: workspace:*
+        version: link:../ui-decorator
       '@instructure/ui-dialog':
         specifier: workspace:*
         version: link:../ui-dialog

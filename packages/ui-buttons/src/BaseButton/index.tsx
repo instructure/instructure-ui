@@ -41,7 +41,7 @@ import type { ViewProps } from '@instructure/ui-view'
 import { isSafari } from '@instructure/ui-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'

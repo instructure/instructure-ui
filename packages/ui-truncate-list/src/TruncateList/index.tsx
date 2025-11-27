@@ -33,7 +33,7 @@ import {
   getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

@@ -87,7 +87,7 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import customSearch from './SearchPanel'
 

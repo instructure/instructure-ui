@@ -34,7 +34,7 @@ import { List } from '@instructure/ui-list'
 import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
