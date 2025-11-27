@@ -78,6 +78,7 @@ const calcFocusOutlineStyles = (
       transition: 'outline-color 0.2s, outline-offset 0.25s'
     }),
     outlineOffset: '-0.8rem',
+    outlineStyle: 'solid',
     outlineColor: alpha(outlineStyle.outlineColor, 0),
     '&:focus': {
       ...outlineStyle,

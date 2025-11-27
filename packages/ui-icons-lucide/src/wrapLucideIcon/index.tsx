@@ -146,6 +146,7 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
     return (
       <span css={styles?.lucideIcon} className={className} style={style}>
         <Icon
+          name={Icon.displayName}
           ref={handleElementRef}
           size={numericSize}
           color={customColor}

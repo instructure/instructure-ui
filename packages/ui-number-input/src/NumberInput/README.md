@@ -8,9 +8,7 @@ Note that this field **does not work
 uncontrolled** - you must pass event handlers if you want it to respond to
 user input.
 
-This example handles arrow buttons, up/down arrow keys, and typing into
-the input. It also includes an `onBlur` handler that displays an error message
-if the input is invalid or missing.
+This example handles arrow buttons, up/down arrow keys, and typing into the input. It also includes an `onBlur` handler that displays an error message if the input is invalid or missing.
 
 ```js
 ---
@@ -150,16 +148,43 @@ render(<Example />)
 
 > Note: `NumberInput` accepts a string or number as its `value`. However, the value returned by the `onChange` callback is always a string and should be converted to a number before attempting to augment it.
 
-NumberInput comes in 2 sizes. The default size is "medium".
+You can see here most of the visual states of the component.
 
 ```js
 ---
-type: example
+  type: example
 ---
-<div>
-  <NumberInput renderLabel="Default-size input" /><br/>
-  <NumberInput size="large" renderLabel="Large-size input" />
-</div>
+  <Flex gap='medium' direction='column'>
+    <NumberInput
+      renderLabel='normal'
+      placeholder="placeholder"
+    />
+    <NumberInput
+      interaction='disabled'
+      renderLabel='disabled'
+      placeholder="placeholder"
+    />
+    <NumberInput
+      interaction='readonly'
+      renderLabel='readonly'
+      placeholder="placeholder"
+    />
+    <NumberInput
+      renderLabel='with error message'
+      placeholder="placeholder"
+      messages={[{ text: 'This is an error.', type: 'error' }]}
+    />
+    <NumberInput
+      renderLabel='with success message'
+      placeholder="placeholder"
+      messages={[{ text: 'Great success!', type: 'success' }]}
+    />
+    <NumberInput
+      renderLabel='large size (default is "medium")'
+      placeholder="placeholder"
+      size='large'
+    />
+  </Flex>
 ```
 
 ### Guidelines

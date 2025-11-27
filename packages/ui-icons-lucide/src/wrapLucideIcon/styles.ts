@@ -49,16 +49,12 @@ const generateStyle = (
     if (color === 'inherit') {
       colorStyle = { color: 'inherit' }
     } else if (color in componentTheme) {
-      /**
-       * Direct theme property access
-       */
+      // Direct theme property access
       colorStyle = {
         color: componentTheme[color as keyof typeof componentTheme] as string
       }
     } else {
-      /**
-       * Custom CSS color (e.g., "#ff0000", "rgb(255, 0, 0)")
-       */
+      // Custom CSS color (e.g., "#ff0000", "rgb(255, 0, 0)")
       colorStyle = { color }
     }
   }
