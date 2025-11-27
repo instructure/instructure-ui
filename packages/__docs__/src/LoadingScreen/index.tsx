@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import generateStyle from './styles'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import type { LoadingScreenProps } from './props'
 @withStyle(generateStyle, null)
 class LoadingScreen extends Component<LoadingScreenProps> {

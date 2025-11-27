@@ -34,7 +34,7 @@ import {
 
 import { View } from '@instructure/ui-view'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'

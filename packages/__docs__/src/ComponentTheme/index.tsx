@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
