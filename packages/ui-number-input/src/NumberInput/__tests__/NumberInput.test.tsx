@@ -29,7 +29,10 @@ import '@testing-library/jest-dom'
 
 import { NumberInput } from '../index'
 
-import { IconZoomInLine, IconZoomOutLine } from '@instructure/ui-icons'
+import {
+  ChevronUpInstUIIcon,
+  ChevronDownInstUIIcon
+} from '@instructure/ui-icons-lucide'
 
 describe('<NumberInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -139,7 +142,7 @@ describe('<NumberInput />', () => {
   it('shows arrow spinbuttons by default', async () => {
     const { container } = render(<NumberInput renderLabel="Label" />)
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     expect(buttons).toHaveLength(2)
@@ -150,7 +153,7 @@ describe('<NumberInput />', () => {
       <NumberInput renderLabel="Label" showArrows={false} />
     )
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     expect(buttons).toHaveLength(0)
@@ -162,7 +165,7 @@ describe('<NumberInput />', () => {
       <NumberInput renderLabel="Label" onIncrement={onIncrement} />
     )
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[0])
@@ -182,7 +185,7 @@ describe('<NumberInput />', () => {
       />
     )
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[0])
@@ -198,7 +201,7 @@ describe('<NumberInput />', () => {
       <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
     )
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[0])
@@ -215,7 +218,7 @@ describe('<NumberInput />', () => {
     )
 
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[1])
@@ -235,7 +238,7 @@ describe('<NumberInput />', () => {
       />
     )
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[1])
@@ -251,7 +254,7 @@ describe('<NumberInput />', () => {
       <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
     )
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[1])
@@ -277,19 +280,19 @@ describe('<NumberInput />', () => {
         onIncrement={onIncrement}
         onDecrement={onDecrement}
         renderIcons={{
-          increase: <IconZoomInLine />,
-          decrease: <IconZoomOutLine />
+          increase: <ChevronUpInstUIIcon />,
+          decrease: <ChevronDownInstUIIcon />
         }}
       />
     )
 
-    const zoomInIcon = container.querySelector('svg[name="IconZoomIn"]')
-    const zoomOutIcon = container.querySelector('svg[name="IconZoomOut"]')
+    const zoomInIcon = container.querySelector('svg[name="ChevronUp"]')
+    const zoomOutIcon = container.querySelector('svg[name="ChevronDown"]')
     expect(zoomInIcon).toBeInTheDocument()
     expect(zoomOutIcon).toBeInTheDocument()
 
     const buttons = container.querySelectorAll(
-      'button[class$="-numberInput_arrow'
+      'button[class$="-numberInput_arrow"]'
     )
 
     userEvent.click(buttons[0])
