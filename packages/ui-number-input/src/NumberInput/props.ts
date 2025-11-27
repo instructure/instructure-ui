@@ -26,14 +26,13 @@ import React from 'react'
 import type { InputHTMLAttributes } from 'react'
 
 import type {
-  NumberInputTheme,
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type {
-  WithStyleProps,
   ComponentStyle,
-  Spacing
+  Spacing,
+  ThemeOverrideValue
 } from '@instructure/emotion'
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type {
@@ -70,8 +69,9 @@ type NumberInputOwnProps = {
   messages?: FormMessage[]
 
   /**
-   * Html placeholder text to display when the input has no value. This
+   * HTML placeholder text to display when the input has no value. This
    * should be hint text, not a label replacement.
+   * Not visible when `disabled` or `readonly`
    */
   placeholder?: string
 
@@ -82,6 +82,7 @@ type NumberInputOwnProps = {
 
   /**
    * Whether or not to display the up/down arrow buttons.
+   * They are not visible when `readonly`
    */
   showArrows?: boolean
 
@@ -180,15 +181,6 @@ type NumberInputOwnProps = {
   margin?: Spacing
 }
 
-type NumberInputState = {
-  hasFocus: boolean
-}
-
-type NumberInputStyleProps = NumberInputState & {
-  interaction: InteractionType
-  invalid: boolean
-}
-
 type PropKeys = keyof NumberInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
@@ -199,9 +191,9 @@ type NumberInputProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    NumberInputOwnProps &
-    WithStyleProps<NumberInputTheme, NumberInputStyle> &
-    OtherHTMLAttributes<
+    NumberInputOwnProps & {
+      themeOverride?: ThemeOverrideValue
+    } & OtherHTMLAttributes<
       NumberInputOwnProps,
       InputHTMLAttributes<NumberInputOwnProps & Element>
     > &
@@ -242,10 +234,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type {
-  NumberInputProps,
-  NumberInputState,
-  NumberInputStyleProps,
-  NumberInputStyle
-}
+export type { NumberInputProps, NumberInputStyle }
 export { allowedProps }

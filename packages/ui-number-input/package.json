@@ -37,7 +37,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-icons-lucide": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/uid": "workspace:*",
