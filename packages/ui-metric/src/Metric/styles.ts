@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import type { MetricTheme } from '@instructure/shared-types'
 import type { MetricProps, MetricStyle } from './props'
+import { NewComponentTypes } from '@instructure/ui-themes'
+
+type StyleParams = {
+  textAlign: MetricProps['textAlign']
+}
 
 /**
  * ---
@@ -31,14 +35,14 @@ import type { MetricProps, MetricStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} params the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: MetricTheme,
-  props: MetricProps
+  componentTheme: NewComponentTypes['Metric'],
+  params: StyleParams
 ): MetricStyle => {
-  const { textAlign } = props
+  const { textAlign } = params
 
   return {
     metric: {
@@ -46,20 +50,26 @@ const generateStyle = (
       display: 'flex',
       flexDirection: 'column-reverse',
       boxSizing: 'border-box',
-      padding: componentTheme.padding,
-      fontFamily: componentTheme.fontFamily,
-      textAlign
+      paddingLeft: componentTheme.paddingHorizontal,
+      paddingRight: componentTheme.paddingHorizontal,
+      textAlign,
+      gap: componentTheme.gapTexts
     },
     label: {
       label: 'metric__label',
+      fontWeight: componentTheme.labelFontWeight,
       fontSize: componentTheme.labelFontSize,
-      color: componentTheme.labelColor
+      color: componentTheme.labelColor,
+      fontFamily: componentTheme.labelFontFamily,
+      lineHeight: componentTheme.labelLineHeight
     },
     value: {
       label: 'metric__value',
       fontWeight: componentTheme.valueFontWeight,
       fontSize: componentTheme.valueFontSize,
-      color: componentTheme.valueColor
+      color: componentTheme.valueColor,
+      fontFamily: componentTheme.valueFontFamily,
+      lineHeight: componentTheme.valueLineHeight
     }
   }
 }
