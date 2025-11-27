@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { useStyle } from '@instructure/emotion'
+import { useStyle, useTheme } from '@instructure/emotion'
 import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
@@ -53,6 +53,8 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       margin
     } = props
     const [loaded, setLoaded] = useState(false)
+    const theme = useTheme()
+    const iconTokens = (theme as any).newTheme.components.Icon
 
     const styles = useStyle({
       generateStyle,
@@ -66,7 +68,8 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         showBorder,
         themeOverride,
         display,
-        margin
+        margin,
+        iconTokens
       },
       componentId: 'Avatar',
       displayName: 'Avatar'

@@ -37,6 +37,7 @@ type StyleParams = {
   themeOverride: AvatarProps['themeOverride']
   display: AvatarProps['display']
   margin: AvatarProps['margin']
+  iconTokens: NewComponentTypes['Icon']
 }
 /**
  * ---
@@ -61,7 +62,8 @@ const generateStyle = (
     shape,
     showBorder,
     display,
-    margin
+    margin,
+    iconTokens
   } = params
 
   const sizeStyles = {
@@ -111,40 +113,34 @@ const generateStyle = (
 
   const colorVariants = {
     accent1: {
-      text: componentTheme.accent1TextColor,
-      background: componentTheme.accent1BackgroundColor
-      //TODO-rework add icon handling
-      // icon: componentTheme.accent1IconColor
+      text: componentTheme.blueTextColor,
+      background: componentTheme.blueBackgroundColor,
+      icon: iconTokens.accentBlueColor
     },
     accent2: {
-      text: componentTheme.accent2TextColor,
-      background: componentTheme.accent2BackgroundColor
-      //TODO-rework add icon handling
-      // icon: componentTheme.accent2IconColor
+      text: componentTheme.greenTextColor,
+      background: componentTheme.greenBackgroundColor,
+      icon: iconTokens.accentGreenColor
     },
     accent3: {
-      text: componentTheme.accent3TextColor,
-      background: componentTheme.accent3BackgroundColor
-      //TODO-rework add icon handling
-      // icon: componentTheme.accent3IconColor
+      text: componentTheme.redTextColor,
+      background: componentTheme.redBackgroundColor,
+      icon: iconTokens.accentRedColor
     },
     accent4: {
-      text: componentTheme.accent4TextColor,
-      background: componentTheme.accent4BackgroundColor
-      //TODO-rework add icon handling
-      // icon: componentTheme.accent4IconColor
+      text: componentTheme.orangeTextColor,
+      background: componentTheme.orangeBackgroundColor,
+      icon: iconTokens.accentOrangeColor
     },
     accent5: {
-      text: componentTheme.accent5TextColor,
-      background: componentTheme.accent5BackgroundColor
-      //TODO-rework add icon handling
-      // icon: componentTheme.accent5IconColor
+      text: componentTheme.greyTextColor,
+      background: componentTheme.greyBackgroundColor,
+      icon: iconTokens.accentGreyColor
     },
     accent6: {
-      text: componentTheme.accent6TextColor,
-      background: componentTheme.accent6BackgroundColor
-      //TODO-rework add icon handling
-      // icon: componentTheme.accent6IconColor
+      text: componentTheme.ashTextColor,
+      background: componentTheme.ashBackgroundColor,
+      icon: iconTokens.accentAshColor
     },
     ai: {
       text: componentTheme.textOnColor,
