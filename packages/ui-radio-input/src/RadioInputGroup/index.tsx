@@ -37,7 +37,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { RadioInput } from '../RadioInput'
 import type { RadioInputProps } from '../RadioInput/props'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

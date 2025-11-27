@@ -24,7 +24,7 @@
 
 import { ComponentElement, Children, Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 import {
   omitProps,
   safeCloneElement,

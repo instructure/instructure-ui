@@ -30,7 +30,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 import { FormFieldMessages } from '../FormFieldMessages'
 import generateStyle from './styles'
 import { allowedProps, FormFieldStyleProps } from './props'

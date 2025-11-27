@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import noScroll from 'no-scroll'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 

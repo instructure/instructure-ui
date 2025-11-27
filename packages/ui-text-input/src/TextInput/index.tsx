@@ -36,7 +36,7 @@ import {
   getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'

@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import { IconSearchLine } from '@instructure/ui-icons'
 
 import generateStyle from './styles'
