@@ -40,9 +40,20 @@ type: example
 </Link>
 ```
 
+If neither `href` nor `onClick` is provided, the Link will render as plain text (a `<span>` element) without interactive styling:
+
+```js
+---
+type: example
+---
+<div>
+  <Text>This is a Link with no href or onClick: <Link>I look like plain text</Link></Text>
+</div>
+```
+
 ### Size
 
-The `size` prop controls the font size, line height, and icon gap. Available sizes are `small`, `medium`, and `large`. If no size is provided, the link will inherit the font size and line height from its parent context.
+The `size` prop controls the font size, line height, and icon size, icon gap. Available sizes are `small`, `medium`, and `large`.
 
 ```js
 ---
@@ -50,26 +61,23 @@ type: example
 ---
 <div>
   <div>
-    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="small">
-      Small link
+    <Link renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/" size="small">
+      Link small
     </Link>
   </div>
   <br />
   <div>
-    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="medium">
-      Medium link
+    <Link renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/" size="medium">
+      Link medium
     </Link>
   </div>
   <br />
   <div>
-    <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/" size="large">
-      Large link
+    <Link renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/" size="large">
+      Link large
     </Link>
   </div>
   <br />
-  <div>
-    <Text size="large">This is large text with an <Link renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inherited size link</Link></Text>
-  </div>
 </div>
 ```
 
@@ -85,12 +93,12 @@ type: example
 ---
 <div>
   <div>
-    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
   </div>
   <br />
   <div>
     If the link is standalone (not in a text), use the <code>standalone</code> variant:
-    <Link display="block" variant="standalone" size="medium" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+    <Link display="block" variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
   </div>
 </div>
 ```
@@ -159,7 +167,7 @@ type: example
 <Link
   onClick={() => console.log('clicked')}
   isWithinText={false}
-  renderIcon={<IconUserLine />}
+  renderIcon={<DiamondInstUIIcon />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Link>
@@ -171,20 +179,18 @@ Use the `renderIcon` property to put an [icon](icons) inside a Link. To position
 icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
 render a Link with just an icon. Don't forget to add text for screen readers, though.
 
-NOTE: if you want the icon to have the same `font-size` as the link, do not specify its `size`!
-
 ```js
 ---
 type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<IconUserLine />}>Icon before text</Link> with the quick brown fox
+    <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
       href="https://instructure.design"
-      renderIcon={<IconUserLine />}
+      renderIcon={<DiamondInstUIIcon />}
       iconPlacement="end"
     >
       Icon appears after Link text
@@ -192,7 +198,7 @@ type: example
   </View>
   <View as="div">
     This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} renderIcon={IconUserLine}>
+    <Link onClick={() => console.log('clicked!')} renderIcon={<DiamondInstUIIcon />}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
     </Link>.
   </View>
@@ -227,7 +233,7 @@ type: embed
 | Link | forceButtonRole | `boolean` | No | - | If the Link has an onClick handler but is not a button element, force ARIA role to be "button". |
 | Link | interaction | `'enabled' \| 'disabled'` | No | - | Determines if the link is enabled or disabled |
 | Link | margin | `Spacing` | No | - | Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens) Apply these values via familiar CSS-like shorthand. |
-| Link | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. |
+| Link | renderIcon | `Renderable \| Renderable<{ size?: string \| number }>` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size. |
 | Link | iconPlacement | `'start' \| 'end'` | No | - | Place the icon before or after the text in the Link. |
 | Link | display | `'auto' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
 | Link | isWithinText | `boolean` | No | - | Set `false` to remove default underline if Link does not appear inline with text |
