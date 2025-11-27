@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { isValid } from '@instructure/ui-color-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

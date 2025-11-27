@@ -28,7 +28,7 @@ import type {
   ComponentOverride
 } from './EmotionTypes'
 import type { BaseTheme, ComponentTheme } from '@instructure/shared-types'
-import type { WithStyleProps } from './withStyle'
+import type { WithStyleProps } from './withStyleRework'
 
 type ComponentName = keyof ComponentOverride | undefined
 

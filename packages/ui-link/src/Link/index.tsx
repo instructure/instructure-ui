@@ -37,7 +37,7 @@ import {
 import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

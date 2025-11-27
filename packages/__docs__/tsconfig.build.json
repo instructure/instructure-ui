@@ -80,6 +80,9 @@
       "path": "../ui-date-time-input/tsconfig.build.json"
     },
     {
+      "path": "../ui-decorator/tsconfig.build.json"
+    },
+    {
       "path": "../ui-dialog/tsconfig.build.json"
     },
     {

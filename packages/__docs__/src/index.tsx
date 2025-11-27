@@ -26,12 +26,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './App'
+import canvas from './canvas'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
 createRoot(document.getElementById('app')!).render(
   <StrictMode>
-    <InstUISettingsProvider>
+    <InstUISettingsProvider theme={canvas}>
       <App />
     </InstUISettingsProvider>
   </StrictMode>

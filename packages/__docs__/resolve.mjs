@@ -58,6 +58,7 @@ const alias = {
     import.meta.dirname,
     '../ui-date-time-input/src/'
   ),
+  '@instructure/ui-decorator$': path.resolve(import.meta.dirname, '../ui-decorator/src/'),
   '@instructure/ui-dialog$': path.resolve(import.meta.dirname, '../ui-dialog/src/'),
   '@instructure/ui-docs-client$': path.resolve(
     import.meta.dirname,

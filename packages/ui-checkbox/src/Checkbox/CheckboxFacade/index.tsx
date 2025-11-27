@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { IconCheckMarkSolid } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

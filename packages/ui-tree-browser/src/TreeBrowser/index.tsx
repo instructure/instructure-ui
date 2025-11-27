@@ -28,7 +28,7 @@ import keycode from 'keycode'
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
 import { TreeButton } from './TreeButton'

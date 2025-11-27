@@ -44,7 +44,7 @@ import {
 import type { ToggleGroupProps } from './props'
 import { allowedProps } from './props'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
