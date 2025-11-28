@@ -2252,6 +2252,9 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
+      '@instructure/ui-icons-lucide':
+        specifier: workspace:*
+        version: link:../ui-icons-lucide
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils

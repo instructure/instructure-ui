@@ -214,7 +214,6 @@ type NumberInputStyle = ComponentStyle<
   | 'inputWidth'
   | 'inputContainer'
   | 'input'
-  | 'requiredInvalid'
 >
 const allowedProps: AllowedPropKeys = [
   'renderLabel',

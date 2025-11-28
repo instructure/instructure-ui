@@ -22,188 +22,202 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { forwardRef, useEffect, useState, useCallback } from 'react'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import {
-  omitProps,
-  getElementType,
-  withDeterministicId
-} from '@instructure/ui-react-utils'
+import { omitProps, useDeterministicId } from '@instructure/ui-react-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import { FormFieldMessages } from '../FormFieldMessages'
 import generateStyle from './styles'
-import { allowedProps, FormFieldStyleProps } from './props'
+import { allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
-import generateComponentTheme from './theme'
 
 /**
 ---
 parent: FormField
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldLayout extends Component<FormFieldLayoutProps> {
-  static readonly componentId = 'FormFieldLayout'
+const FormFieldLayout = forwardRef<Element, FormFieldLayoutProps>(
+  (props, ref) => {
+    const {
+      inline = false,
+      layout = 'stacked',
+      as = 'label',
+      labelAlign = 'end',
+      vAlign,
+      label,
+      messages,
+      messagesId: messagesIdProp,
+      children,
+      width,
+      elementRef,
+      inputContainerRef,
+      isGroup,
+      isRequired = false,
+      margin,
+      themeOverride,
+      ...rest
+    } = props
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    inline: false,
-    layout: 'stacked',
-    as: 'label',
-    labelAlign: 'end'
-  } as const
+    // Deterministic ID generation
+    const [deterministicId, setDeterministicId] = useState<string | undefined>()
+    const getId = useDeterministicId('FormFieldLayout')
+    useEffect(() => {
+      setDeterministicId(getId())
+    }, [])
 
-  constructor(props: FormFieldLayoutProps) {
-    super(props)
-    this._messagesId = props.messagesId || props.deterministicId!()
-    this._labelId = props.deterministicId!('FormField-Label')
-  }
+    const messagesId = messagesIdProp || deterministicId
+    const labelId = deterministicId ? `${deterministicId}-Label` : undefined
 
-  private _messagesId: string
-  private _labelId: string
+    // Compute style props
+    const hasMessages =
+      messages && messages.length > 0
+        ? messages.some((msg) => {
+            if (msg.text) {
+              if (typeof msg.text === 'string') {
+                return msg.text.length > 0
+              }
+              return true
+            }
+            return false
+          })
+        : false
 
-  ref: Element | null = null
+    const hasVisibleLabel = label ? hasVisibleChildren(label) : false
 
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
+    const hasErrorMsgAndIsGroup =
+      !!messages?.find((m) => m.type === 'error' || m.type === 'newError') &&
+      !!isGroup
 
-    this.ref = el
+    const invalid = !!messages?.find(
+      (m) => m.type === 'error' || m.type === 'newError'
+    )
 
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
+    // Styles
+    const styles = useStyle({
+      generateStyle,
+      themeOverride,
+      params: {
+        hasMessages,
+        hasVisibleLabel,
+        hasErrorMsgAndIsGroup,
+        inline,
+        layout,
+        vAlign,
+        labelAlign,
+        margin,
+        messages,
+        isRequired,
+        invalid
+      },
+      componentId: 'FormFieldLayout',
+      displayName: 'FormFieldLayout'
+    })
 
-  componentDidMount() {
-    this.props.makeStyles?.(this.makeStyleProps())
-  }
+    const ElementType = as
 
-  componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStyleProps())
-  }
-
-  makeStyleProps = (): FormFieldStyleProps => {
-    const hasNewErrorMsgAndIsGroup =
-      !!this.props.messages?.find((m) => m.type === 'newError') &&
-      !!this.props.isGroup
-    return {
-      hasMessages: this.hasMessages,
-      hasVisibleLabel: this.hasVisibleLabel,
-      // if true render error message above the controls (and below the label)
-      hasNewErrorMsgAndIsGroup: hasNewErrorMsgAndIsGroup
-    }
-  }
-
-  get hasVisibleLabel() {
-    return this.props.label ? hasVisibleChildren(this.props.label) : false
-  }
-
-  get hasMessages() {
-    if (!this.props.messages || this.props.messages.length == 0) {
-      return false
-    }
-    for (const msg of this.props.messages) {
-      if (msg.text) {
-        if (typeof msg.text === 'string') {
-          return msg.text.length > 0
+    const handleRef = useCallback(
+      (el: Element | null) => {
+        if (typeof ref === 'function') {
+          ref(el)
+        } else if (ref) {
+          const refObject = ref as React.MutableRefObject<Element | null>
+          refObject.current = el
         }
-        // this is more complicated (e.g. an array, a Component,...)
-        // but we don't try to optimize here for these cases
-        return true
-      }
-    }
-    return false
-  }
 
-  get elementType() {
-    return getElementType(FormFieldLayout, this.props)
-  }
+        if (typeof elementRef === 'function') {
+          elementRef(el)
+        }
+      },
+      [ref, elementRef]
+    )
 
-  handleInputContainerRef = (node: HTMLElement | null) => {
-    if (typeof this.props.inputContainerRef === 'function') {
-      this.props.inputContainerRef(node)
-    }
-  }
+    const handleInputContainerRef = useCallback(
+      (node: HTMLElement | null) => {
+        if (typeof inputContainerRef === 'function') {
+          inputContainerRef(node)
+        }
+      },
+      [inputContainerRef]
+    )
 
-  renderLabel() {
-    if (this.hasVisibleLabel) {
-      if (this.elementType == 'fieldset') {
-        // `legend` has some special built in CSS, this can only be reset
-        // this way https://stackoverflow.com/a/65866981/319473
-        return (
-          <legend style={{ display: 'contents' }}>
-            <span css={this.props.styles?.formFieldLabel}>
-              {this.props.label}
+    const renderLabel = () => {
+      const labelContent = hasVisibleLabel ? (
+        <>
+          {label}
+          {isRequired && (
+            <span
+              css={invalid ? styles?.requiredAsterisk : {}}
+              aria-hidden={true}
+            >
+              {' '}
+              *
             </span>
-          </legend>
-        )
-      }
-      return (
-        <span css={this.props.styles?.formFieldLabel}>{this.props.label}</span>
+          )}
+        </>
+      ) : (
+        label
       )
-    } else if (this.props.label) {
-      if (this.elementType == 'fieldset') {
+
+      if (hasVisibleLabel) {
+        if (ElementType === 'fieldset') {
+          // `legend` has some special built in CSS, this can only be reset
+          // this way https://stackoverflow.com/a/65866981/319473
+          return (
+            <legend style={{ display: 'contents' }}>
+              <span css={styles?.formFieldLabel}>{labelContent}</span>
+            </legend>
+          )
+        }
+        return <span css={styles?.formFieldLabel}>{labelContent}</span>
+      } else if (label) {
+        if (ElementType === 'fieldset') {
+          return (
+            <legend id={labelId} style={{ display: 'contents' }}>
+              {label}
+            </legend>
+          )
+        }
+        // needs to be wrapped because it needs an `id`
         return (
-          <legend id={this._labelId} style={{ display: 'contents' }}>
-            {this.props.label}
-          </legend>
+          <div id={labelId} style={{ display: 'contents' }}>
+            {label}
+          </div>
         )
-      }
-      // needs to be wrapped because it needs an `id`
-      return (
-        <div id={this._labelId} style={{ display: 'contents' }}>
-          {this.props.label}
-        </div>
-      )
-    } else return null
-  }
+      } else return null
+    }
 
-  renderVisibleMessages() {
-    return this.hasMessages ? (
-      <FormFieldMessages
-        id={this._messagesId}
-        messages={this.props.messages}
-        gridArea="messages"
-      />
-    ) : null
-  }
+    const renderVisibleMessages = () => {
+      return hasMessages ? (
+        <FormFieldMessages
+          id={messagesId}
+          messages={messages}
+          gridArea="messages"
+        />
+      ) : null
+    }
 
-  render() {
-    // Should be `<label>` if it's a FormField, fieldset if it's a group
-    const ElementType = this.elementType
-
-    const { makeStyles, styles, messages, isGroup, ...props } = this.props
-
-    const { width, children } = props
-
-    const hasNewErrorMsgAndIsGroup =
-      !!messages?.find((m) => m.type === 'newError') && isGroup
     return (
       <ElementType
-        {...omitProps(props, [...FormFieldLayout.allowedProps])}
+        {...omitProps(rest, [...allowedProps])}
         css={styles?.formFieldLayout}
-        aria-describedby={this.hasMessages ? this._messagesId : undefined}
-        aria-errormessage={
-          this.props['aria-invalid'] ? this._messagesId : undefined
-        }
+        aria-describedby={hasMessages ? messagesId : undefined}
+        aria-errormessage={rest['aria-invalid'] ? messagesId : undefined}
         style={{ width }}
-        ref={this.handleRef}
+        ref={handleRef}
       >
-        {this.renderLabel()}
-        {hasNewErrorMsgAndIsGroup && this.renderVisibleMessages()}
-        <span
-          css={styles?.formFieldChildren}
-          ref={this.handleInputContainerRef}
-        >
+        {renderLabel()}
+        {hasErrorMsgAndIsGroup && renderVisibleMessages()}
+        <span css={styles?.formFieldChildren} ref={handleInputContainerRef}>
           {children}
         </span>
-        {!hasNewErrorMsgAndIsGroup && this.renderVisibleMessages()}
+        {!hasErrorMsgAndIsGroup && renderVisibleMessages()}
       </ElementType>
     )
   }
-}
+)
+
+FormFieldLayout.displayName = 'FormFieldLayout'
 
 export default FormFieldLayout
-export { FormFieldLayout }
+export { FormFieldLayout, allowedProps }

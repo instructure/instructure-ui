@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Fragment, Component } from 'react'
+import { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormField } from '@instructure/ui-form-field'
@@ -37,7 +37,6 @@ import {
   getInteraction,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { withStyleRework as withStyle } from '@instructure/emotion'
 
@@ -242,7 +241,6 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       showArrows,
       value,
       width,
-      styles,
       allowStringValue,
       renderIcons,
       margin
@@ -250,23 +248,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
 
     const { interaction } = this
 
-    const rawLabel = callRenderProp(renderLabel)
-    const label = hasVisibleChildren(rawLabel) ? (
-      <Fragment>
-        {rawLabel}
-        {isRequired && (
-          <span
-            css={this.invalid ? styles?.requiredInvalid : {}}
-            aria-hidden={true}
-          >
-            {' '}
-            *
-          </span>
-        )}
-      </Fragment>
-    ) : (
-      rawLabel
-    )
+    const label = callRenderProp(renderLabel)
 
     return (
       <FormField
@@ -276,6 +258,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         id={this.id}
         elementRef={this.handleRef}
         margin={margin}
+        isRequired={isRequired}
         data-cid="NumberInput"
       >
         <span

@@ -61,10 +61,6 @@ type FormFieldGroupOwnProps = {
   elementRef?: (element: Element | null) => void
 }
 
-type FormFieldGroupStyleProps = {
-  invalid: boolean
-}
-
 type PropKeys = keyof FormFieldGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
@@ -95,9 +91,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type {
-  FormFieldGroupProps,
-  FormFieldGroupStyleProps,
-  FormFieldGroupStyle
-}
+export type { FormFieldGroupProps, FormFieldGroupStyle }
 export { allowedProps }
