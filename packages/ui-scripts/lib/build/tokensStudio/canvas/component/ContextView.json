@@ -20,7 +20,7 @@
       "value": "{color.stroke.base}",
       "type": "color"
     },
-    " arrowBorderColorInverse": {
+    "arrowBorderColorInverse": {
       "value": "#00000000",
       "type": "color"
     }
