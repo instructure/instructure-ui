@@ -28,13 +28,16 @@ import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
 import { withStyleRework as withStyle } from '@instructure/emotion'
 
-import { FormFieldLayout } from '../FormFieldLayout'
+import {
+  FormFieldLayout,
+  allowedProps as formFieldLayoutAllowedProps
+} from '../FormFieldLayout'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
-import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
+import type { FormFieldGroupProps } from './props'
 
 /**
 ---
@@ -68,21 +71,11 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.(this.makeStylesVariables)
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStylesVariables)
-  }
-
-  get makeStylesVariables(): FormFieldGroupStyleProps {
-    // new form errors dont need borders
-    const oldInvalid =
-      !!this.props.messages &&
-      this.props.messages.findIndex((message) => {
-        return message.type === 'error'
-      }) >= 0
-    return { invalid: oldInvalid }
+    this.props.makeStyles?.()
   }
 
   get invalid() {
@@ -172,7 +165,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     return (
       <FormFieldLayout
         {...omitProps(props, FormFieldGroup.allowedProps)}
-        {...pickProps(props, FormFieldLayout.allowedProps)}
+        {...pickProps(props, formFieldLayoutAllowedProps)}
         vAlign={props.vAlign}
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
         label={props.description}

@@ -185,8 +185,10 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     return isActiveElement(this._input)
   }
 
-  get isNewError() {
-    return !!this.props.messages?.find((m) => m.type === 'newError')
+  get isError() {
+    return !!this.props.messages?.find(
+      (m) => m.type === 'error' || m.type === 'newError'
+    )
   }
 
   get invalid() {
@@ -278,7 +280,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         display="block"
         margin="small 0 0"
         css={
-          this.isNewError &&
+          this.isError &&
           (variant === 'toggle'
             ? styles?.indentedToggleError
             : styles?.indentedError)

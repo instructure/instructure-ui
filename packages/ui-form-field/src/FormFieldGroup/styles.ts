@@ -23,11 +23,7 @@
  */
 
 import type { FormFieldGroupTheme } from '@instructure/shared-types'
-import type {
-  FormFieldGroupProps,
-  FormFieldGroupStyleProps,
-  FormFieldGroupStyle
-} from './props'
+import type { FormFieldGroupProps, FormFieldGroupStyle } from './props'
 
 /**
  * ---
@@ -41,11 +37,9 @@ import type {
  */
 const generateStyle = (
   componentTheme: FormFieldGroupTheme,
-  props: FormFieldGroupProps,
-  state: FormFieldGroupStyleProps
+  props: FormFieldGroupProps
 ): FormFieldGroupStyle => {
   const { disabled } = props
-  const { invalid } = state
 
   return {
     formFieldGroup: {
@@ -53,11 +47,6 @@ const generateStyle = (
       border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
       borderRadius: componentTheme.borderRadius,
       display: 'block',
-
-      ...(invalid && {
-        borderColor: componentTheme.errorBorderColor,
-        padding: componentTheme.errorFieldsPadding
-      }),
 
       ...(disabled && {
         opacity: 0.6,
