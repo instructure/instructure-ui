@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import type { BreadcrumbTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { BreadcrumbProps, BreadcrumbStyle } from './props'
+
+type StyleParams = {
+  size: BreadcrumbProps['size']
+}
 
 /**
  * ---
@@ -31,59 +35,60 @@ import type { BreadcrumbProps, BreadcrumbStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props of the component, the style is applied to
+ * @param  {Object} _sharedTokens Shared token object that stores common values for the theme.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: BreadcrumbTheme,
-  props: BreadcrumbProps
+  componentTheme: NewComponentTypes['Breadcrumb'],
+  params: StyleParams
 ): BreadcrumbStyle => {
-  const { size } = props
+  const { size } = params
 
   const crumbSizeVariants = {
+    // TODO fix padding calculations or gap tokens after View rework
     small: {
-      fontSize: componentTheme.smallFontSize,
-      paddingInlineEnd: `calc(${componentTheme.smallSeparatorFontSize} * 2)`,
+      fontSize: '0.875rem', // oldComponentTheme.smallFontSize,
+      paddingInlineEnd: componentTheme.gapSm, // `calc(${oldComponentTheme.smallSeparatorFontSize} * 2)`,
       paddingInlineStart: 0
     },
     medium: {
-      fontSize: componentTheme.mediumFontSize,
-      paddingInlineEnd: `calc(${componentTheme.mediumSeparatorFontSize} * 2)`,
+      fontSize: '1rem', // oldComponentTheme.mediumFontSize,
+      paddingInlineEnd: componentTheme.gapMd, // `calc(${oldComponentTheme.mediumSeparatorFontSize} * 2)`,
       paddingInlineStart: 0
     },
     large: {
-      fontSize: componentTheme.largeFontSize,
-      paddingInlineEnd: `calc(${componentTheme.largeSeparatorFontSize} * 2)`,
+      fontSize: '1.375rem', // oldComponentTheme.largeFontSize,
+      paddingInlineEnd: componentTheme.gapLg, // `calc(${oldComponentTheme.largeSeparatorFontSize} * 2)`,
       paddingInlineStart: 0
     }
   }
 
   const separatorSizeVariants = {
     small: {
-      fontSize: componentTheme.smallSeparatorFontSize,
-      insetInlineEnd: `calc(${componentTheme.smallSeparatorFontSize} / 2)`,
+      fontSize: '0.5rem', // oldComponentTheme.smallSeparatorFontSize,
+      insetInlineEnd: `calc(0.5rem + ${componentTheme.gapSm})`, // `calc(${oldComponentTheme.smallSeparatorFontSize} / 2)`
       insetInlineStart: 'auto',
-      marginTop: `calc(-1 * (${componentTheme.smallSeparatorFontSize} / 2))`
+      marginTop: `calc(-1 * (0.5rem / 2))` // `calc(-1 * (${oldComponentTheme.smallSeparatorFontSize} / 2))`
     },
     medium: {
-      fontSize: componentTheme.mediumSeparatorFontSize,
-      insetInlineEnd: `calc(${componentTheme.mediumSeparatorFontSize} / 2)`,
+      fontSize: '0.75rem', // oldComponentTheme.mediumSeparatorFontSize,
+      insetInlineEnd: `calc(0.75rem + ${componentTheme.gapMd})`, // `calc(${oldComponentTheme.mediumSeparatorFontSize} / 2)`
       insetInlineStart: 'auto',
-      marginTop: `calc(-1 * (${componentTheme.mediumSeparatorFontSize} / 2))`
+      marginTop: `calc(-1 * (0.75rem / 2))` // `calc(-1 * (${oldComponentTheme.mediumSeparatorFontSize} / 2))`
     },
     large: {
-      fontSize: componentTheme.largeSeparatorFontSize,
-      insetInlineEnd: `calc(${componentTheme.largeSeparatorFontSize} / 2)`,
+      fontSize: '1rem', // oldComponentTheme.largeSeparatorFontSize,
+      insetInlineEnd: `calc(1rem + ${componentTheme.gapLg})`, // `calc(${oldComponentTheme.largeSeparatorFontSize} / 2)`
       insetInlineStart: 'auto',
-      marginTop: `calc(-1 * (${componentTheme.largeSeparatorFontSize} / 2))`
+      marginTop: `calc(-1 * (1rem / 2))` // `calc(-1 * (${oldComponentTheme.largeSeparatorFontSize} / 2))`
     }
   }
 
   return {
     breadcrumb: {
       label: 'breadcrumb',
-      fontFamily: componentTheme.fontFamily,
+      fontFamily: 'LatoWeb, Lato, Helvetica Neue, Helvetica, Arial, sans-serif', // oldComponentTheme.fontFamily,
       margin: 0,
       padding: 0,
       listStyleType: 'none',
@@ -107,7 +112,7 @@ const generateStyle = (
       boxSizing: 'border-box',
       position: 'absolute',
       top: '50%',
-      color: componentTheme.separatorColor,
+      color: '#6A7883', // oldComponentTheme.separatorColor,
       ...separatorSizeVariants[size!]
     }
   }

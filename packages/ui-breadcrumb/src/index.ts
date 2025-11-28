@@ -25,3 +25,4 @@ export { Breadcrumb, BreadcrumbLink } from './Breadcrumb'
 
 export type { BreadcrumbProps } from './Breadcrumb/props'
 export type { BreadcrumbLinkProps } from './Breadcrumb/BreadcrumbLink/props'
+export type { BreadcrumbComponent } from './Breadcrumb'

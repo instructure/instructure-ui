@@ -26,20 +26,19 @@ import {
   isValidElement,
   cloneElement,
   Children,
-  Component,
-  ReactElement
+  ReactElement,
+  forwardRef,
+  useImperativeHandle,
+  useRef
 } from 'react'
 
 import { View } from '@instructure/ui-view'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
-
-import { allowedProps } from './props'
 import type { BreadcrumbProps } from './props'
 
 /**
@@ -48,95 +47,92 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
-class Breadcrumb extends Component<BreadcrumbProps> {
-  static readonly componentId = 'Breadcrumb'
+interface BreadcrumbComponent
+  extends React.ForwardRefExoticComponent<
+    BreadcrumbProps & React.RefAttributes<Element>
+  > {
+  Link: typeof BreadcrumbLink
+}
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    size: 'medium',
-    children: null
-  }
+const Breadcrumb = forwardRef<Element, BreadcrumbProps>(
+  ({ size = 'medium', children = null, margin, label }, ref) => {
+    const elementRef = useRef<Element | null>(null)
 
-  ref: Element | null = null
+    useImperativeHandle(ref, () => elementRef.current as Element)
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  addAriaCurrent = (child: React.ReactNode) => {
-    const updatedChild = cloneElement(
-      child as React.ReactElement<{ 'aria-current'?: string }>,
-      {
-        'aria-current': 'page'
-      }
-    )
-    return updatedChild
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  static Link = BreadcrumbLink
-
-  renderChildren() {
-    const { styles, children } = this.props
-    const numChildren = Children.count(children)
-    const inlineStyle = {
-      maxWidth: `${Math.floor(100 / numChildren)}%`
-    }
-    let isAriaCurrentSet = false
-
-    return Children.map(children, (child, index) => {
-      const isLastElement = index === numChildren - 1
-      if (isValidElement(child)) {
-        const isCurrentPage =
-          (child as ReactElement<any>).props.isCurrentPage || false
-        if (isAriaCurrentSet && isCurrentPage) {
-          console.warn(
-            `Warning: Multiple elements with isCurrentPage=true found. Only one element should be set to current.`
-          )
-        }
-        if (isCurrentPage) {
-          isAriaCurrentSet = true
-        }
-      }
-      return (
-        <li css={styles?.crumb} style={inlineStyle}>
-          {!isAriaCurrentSet &&
-          isLastElement &&
-          (child as React.ReactElement<any>).props.isCurrentPage !== false
-            ? this.addAriaCurrent(child)
-            : child}
-          {index < numChildren - 1 && (
-            <IconArrowOpenEndSolid color="auto" css={styles?.separator} />
-          )}
-        </li>
-      )
+    const styles = useStyle({
+      generateStyle,
+      params: { size },
+      componentId: 'Breadcrumb',
+      displayName: 'Breadcrumb'
     })
-  }
 
-  render() {
-    const { styles } = this.props
+    const addAriaCurrent = (child: React.ReactNode) => {
+      const updatedChild = cloneElement(
+        child as React.ReactElement<{ 'aria-current'?: string }>,
+        {
+          'aria-current': 'page'
+        }
+      )
+      return updatedChild
+    }
+
+    const renderChildren = () => {
+      const numChildren = Children.count(children)
+      const inlineStyle = {
+        maxWidth: `${Math.floor(100 / numChildren)}%`
+      }
+      let isAriaCurrentSet = false
+
+      return Children.map(children, (child, index) => {
+        const isLastElement = index === numChildren - 1
+        if (isValidElement(child)) {
+          const isCurrentPage =
+            (child as ReactElement<any>).props.isCurrentPage || false
+          if (isAriaCurrentSet && isCurrentPage) {
+            console.warn(
+              `Warning: Multiple elements with isCurrentPage=true found. Only one element should be set to current.`
+            )
+          }
+          if (isCurrentPage) {
+            isAriaCurrentSet = true
+          }
+        }
+        return (
+          <li css={styles?.crumb} style={inlineStyle}>
+            {!isAriaCurrentSet &&
+            isLastElement &&
+            (child as React.ReactElement<any>).props.isCurrentPage !== false
+              ? addAriaCurrent(child)
+              : child}
+            {index < numChildren - 1 && (
+              <IconArrowOpenEndSolid color="auto" css={styles?.separator} />
+            )}
+          </li>
+        )
+      })
+    }
 
     return (
       <View
         role="navigation"
         as="div"
-        margin={this.props.margin}
-        aria-label={this.props.label}
-        elementRef={this.handleRef}
+        margin={margin}
+        aria-label={label}
+        elementRef={(el) => {
+          elementRef.current = el
+        }}
         data-cid="Breadcrumb"
       >
-        <ol css={styles?.breadcrumb}>{this.renderChildren()}</ol>
+        <ol css={styles?.breadcrumb}>{renderChildren()}</ol>
       </View>
     )
   }
-}
+) as BreadcrumbComponent
+
+Breadcrumb.displayName = 'Breadcrumb'
+Breadcrumb.Link = BreadcrumbLink
 
 export default Breadcrumb
 export { Breadcrumb, BreadcrumbLink }
+export type { BreadcrumbComponent }

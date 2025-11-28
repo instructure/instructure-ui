@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react'
 
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
@@ -30,7 +30,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 
 import { allowedProps } from './props'
-import type { BreadcrumbLinkProps, BreadcrumbLinkState } from './props'
+import type { BreadcrumbLinkProps } from './props'
 
 /**
 ---
@@ -39,46 +39,32 @@ id: Breadcrumb.Link
 ---
 **/
 
-class BreadcrumbLink extends Component<
-  BreadcrumbLinkProps,
-  BreadcrumbLinkState
-> {
-  static readonly componentId = 'Breadcrumb.Link'
-
-  static allowedProps = allowedProps
-  static defaultProps = {}
-
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-  constructor(props: BreadcrumbLinkProps) {
-    super(props)
-
-    this.state = {
-      isTruncated: false
-    }
-  }
-  handleTruncation(isTruncated: boolean) {
-    if (isTruncated !== this.state.isTruncated) {
-      this.setState({ isTruncated })
-    }
-  }
-
-  render() {
-    const {
+const BreadcrumbLink = forwardRef<Element, BreadcrumbLinkProps>(
+  (
+    {
       children,
       href,
       renderIcon,
       iconPlacement,
       onClick,
       onMouseEnter,
-      isCurrentPage
-    } = this.props
+      isCurrentPage,
+      ...rest
+    },
+    ref
+  ) => {
+    const [isTruncated, setIsTruncated] = useState(false)
+    const elementRef = useRef<Element | null>(null)
 
-    const { isTruncated } = this.state
-    const props = omitProps(this.props, BreadcrumbLink.allowedProps)
+    useImperativeHandle(ref, () => elementRef.current as Element)
+
+    const handleTruncation = (truncated: boolean) => {
+      if (truncated !== isTruncated) {
+        setIsTruncated(truncated)
+      }
+    }
+
+    const props = omitProps({ ...rest }, allowedProps)
 
     const isInteractive = onClick || href
     return (
@@ -97,7 +83,9 @@ class BreadcrumbLink extends Component<
           onClick={onClick}
           onMouseEnter={onMouseEnter}
           isWithinText={false}
-          elementRef={this.handleRef}
+          elementRef={(el) => {
+            elementRef.current = el
+          }}
           forceButtonRole={false}
           {...(isCurrentPage && { 'aria-current': 'page' })}
           {...(isTruncated && {
@@ -106,16 +94,16 @@ class BreadcrumbLink extends Component<
           })}
           data-cid="BreadcrumbLink"
         >
-          <TruncateText
-            onUpdate={(isTruncated) => this.handleTruncation(isTruncated)}
-          >
+          <TruncateText onUpdate={handleTruncation}>
             <span aria-hidden={isTruncated}>{children}</span>
           </TruncateText>
         </Link>
       </Tooltip>
     )
   }
-}
+)
+
+BreadcrumbLink.displayName = 'BreadcrumbLink'
 
 export default BreadcrumbLink
 export { BreadcrumbLink }
