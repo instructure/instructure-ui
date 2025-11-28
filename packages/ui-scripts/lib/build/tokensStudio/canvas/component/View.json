@@ -32,12 +32,20 @@
       "value": "{color.stroke.info}",
       "type": "color"
     },
+    "borderColorAlert": {
+      "value": "{color.stroke.info}",
+      "type": "color"
+    },
     "borderColorWarning": {
       "value": "{color.stroke.warning}",
       "type": "color"
     },
     "borderColorDanger": {
       "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "borderColorTransparent": {
+      "value": "#00000000",
       "type": "color"
     },
     "debugOutlineColor": {
@@ -61,6 +69,10 @@
       "type": "color"
     },
     "backgroundInfo": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "backgroundAlert": {
       "value": "{color.background.info}",
       "type": "color"
     },
@@ -123,6 +135,22 @@
     "focusColorInverse": {
       "value": "{color.stroke.interactive.focusRing.onColor}",
       "type": "color"
+    },
+    "stackingTopmost": {
+      "value": 999,
+      "type": "number"
+    },
+    "stackingAbove": {
+      "value": 1,
+      "type": "number"
+    },
+    "stackingBelow": {
+      "value": -1,
+      "type": "number"
+    },
+    "stackingDeepest": {
+      "value": -999,
+      "type": "number"
     }
   }
 }
