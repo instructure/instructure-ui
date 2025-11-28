@@ -1,0 +1,108 @@
+{
+  "progressBar": {
+    "borderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.heading.base}",
+      "type": "lineHeights"
+    },
+    "smallHeight": {
+      "value": "1.125rem",
+      "type": "sizing"
+    },
+    "mediumHeight": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "meterColorAlert": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "meterColorAlertInverse": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "meterColorBrand": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "meterColorBrandInverse": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "meterColorDanger": {
+      "value": "{color.background.error}",
+      "type": "color"
+    },
+    "meterColorDangerInverse": {
+      "value": "{color.background.error}",
+      "type": "color"
+    },
+    "meterColorInfo": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "meterColorInfoInverse": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "meterColoSuccess": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "meterColoSuccessInverse": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "meterColoWarning": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "meterColoWarningInverse": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "largeHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
+    "trackBottomBorderColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "trackBottomBorderColorInverse": {
+      "value": "{color.stroke.onColor}",
+      "type": "color"
+    },
+    "trackBottomBorderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "trackColor": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "valuePadding": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "xSmallHeight": {
+      "value": "0.5rem",
+      "type": "sizing"
+    }
+  }
+}
