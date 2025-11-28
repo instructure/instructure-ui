@@ -22,34 +22,36 @@
  * SOFTWARE.
  */
 
-import { Fragment, Component } from 'react'
+import {
+  Fragment,
+  useState,
+  useRef,
+  useCallback,
+  useImperativeHandle,
+  forwardRef,
+  useEffect
+} from 'react'
 import keycode from 'keycode'
 
 import { FormField } from '@instructure/ui-form-field'
 import {
-  IconArrowOpenDownLine,
-  IconArrowOpenUpLine
-} from '@instructure/ui-icons'
+  ChevronUpInstUIIcon,
+  ChevronDownInstUIIcon
+} from '@instructure/ui-icons-lucide'
 import {
-  omitProps,
   pickProps,
   callRenderProp,
   getInteraction,
-  withDeterministicId
+  useDeterministicId,
+  passthroughProps
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
-import { allowedProps } from './props'
-import type {
-  NumberInputProps,
-  NumberInputState,
-  NumberInputStyleProps
-} from './props'
+import type { NumberInputProps } from './props'
 import { Renderable } from '@instructure/shared-types'
 
 /**
@@ -58,207 +60,270 @@ category: components
 id: NumberInput
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class NumberInput extends Component<NumberInputProps, NumberInputState> {
-  static readonly componentId = 'NumberInput'
-  static allowedProps = allowedProps
-  static defaultProps = {
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    messages: [],
-    isRequired: false,
-    showArrows: true,
-    size: 'medium',
-    display: 'block',
-    textAlign: 'start',
-    inputMode: 'numeric',
-    allowStringValue: false
-  }
-
-  state: NumberInputState = { hasFocus: false }
-
-  ref: Element | null = null
-
-  private _input: HTMLInputElement | null = null
-  private _id?: string
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  get id() {
-    if (this.props.id) {
-      return this.props.id
-    }
-    if (!this._id) {
-      this._id = this.props.deterministicId!()
-    }
-    return this._id
-  }
-
-  get invalid() {
-    return (
-      !!this.props.messages &&
-      this.props.messages.some(
-        (message) => message.type === 'error' || message.type === 'newError'
-      )
-    )
-  }
-
-  get interaction() {
-    return getInteraction({ props: this.props })
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.(this.makeStyleVariables)
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStyleVariables)
-  }
-
-  get makeStyleVariables(): NumberInputStyleProps {
-    return {
-      interaction: this.interaction,
-      hasFocus: this.state.hasFocus,
-      invalid: this.invalid
-    }
-  }
-
-  handleInputRef = (element: HTMLInputElement | null) => {
-    this._input = element
-
-    if (typeof this.props.inputRef === 'function') {
-      this.props.inputRef(element)
-    }
-  }
-
-  handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    this.setState({ hasFocus: true })
-
-    if (typeof this.props.onFocus === 'function') {
-      this.props.onFocus(event)
-    }
-  }
-
-  handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    this.setState({ hasFocus: false })
-
-    if (typeof this.props.onBlur === 'function') {
-      this.props.onBlur(event)
-    }
-  }
-
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(event, event.target.value)
-    }
-  }
-
-  handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const { onKeyDown, onDecrement, onIncrement } = this.props
-
-    if (typeof onKeyDown === 'function') {
-      onKeyDown(event)
-    }
-
-    if (event.keyCode === keycode.codes.down) {
-      event.preventDefault()
-      if (typeof onDecrement === 'function') {
-        onDecrement(event)
-      }
-    } else if (event.keyCode === keycode.codes.up) {
-      event.preventDefault()
-      if (typeof onIncrement === 'function') {
-        onIncrement(event)
-      }
-    }
-  }
-
-  handleClickUpArrow = (event: React.MouseEvent<HTMLButtonElement>) => {
-    this.arrowClicked(event, this.props.onIncrement)
-  }
-
-  handleClickDownArrow = (event: React.MouseEvent<HTMLButtonElement>) => {
-    this.arrowClicked(event, this.props.onDecrement)
-  }
-
-  arrowClicked(
-    event: React.MouseEvent<HTMLButtonElement>,
-    callback: NumberInputProps['onIncrement'] | NumberInputProps['onDecrement']
-  ) {
-    const { interaction } = this
-
-    event.preventDefault()
-    if (interaction === 'enabled') {
-      this._input?.focus()
-
-      if (typeof callback === 'function') {
-        callback(event)
-      }
-    }
-  }
-
-  renderArrows(customIcons?: { increase: Renderable; decrease: Renderable }) {
-    return (
-      <span css={this.props.styles?.arrowContainer}>
-        <button
-          aria-hidden
-          css={this.props.styles?.arrow}
-          onMouseDown={this.handleClickUpArrow}
-          tabIndex={-1}
-          type="button"
-        >
-          {customIcons?.increase ? (
-            callRenderProp(customIcons.increase)
-          ) : (
-            <IconArrowOpenUpLine />
-          )}
-        </button>
-        <button
-          aria-hidden
-          css={this.props.styles?.arrow}
-          onMouseDown={this.handleClickDownArrow}
-          tabIndex={-1}
-          type="button"
-        >
-          {customIcons?.decrease ? (
-            callRenderProp(customIcons.decrease)
-          ) : (
-            <IconArrowOpenDownLine />
-          )}
-        </button>
-      </span>
-    )
-  }
-
-  render() {
+const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
+  (props, ref) => {
     const {
+      messages = [],
+      isRequired = false,
+      showArrows = true,
+      size = 'medium',
+      display = 'block',
+      textAlign = 'start',
+      inputMode = 'numeric',
+      allowStringValue = false,
       renderLabel,
-      display,
       placeholder,
-      isRequired,
-      showArrows,
       value,
       width,
-      styles,
-      allowStringValue,
       renderIcons,
-      margin
-    } = this.props
+      margin,
+      inputRef: inputRefProp,
+      onFocus,
+      onBlur,
+      onChange,
+      onKeyDown,
+      onDecrement,
+      onIncrement,
+      id: idProp,
+      themeOverride,
+      ...rest
+    } = props
+    // these are icon tokens
+    type ArrowButtonColors =
+      | 'actionSecondaryBaseColor'
+      | 'actionSecondaryHoverColor'
+      | 'actionSecondaryActiveColor'
+      | 'actionSecondaryDisabledColor'
+    const [upButtonState, setUpButtonState] = useState<ArrowButtonColors>(
+      'actionSecondaryBaseColor'
+    )
+    const [downButtonState, setDownButtonState] = useState<ArrowButtonColors>(
+      'actionSecondaryBaseColor'
+    )
+    // Refs
+    const containerRef = useRef<Element | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
 
-    const { interaction } = this
+    // Deterministic ID generation
+    const [deterministicId, setDeterministicId] = useState<string | undefined>()
+    const getId = useDeterministicId('NumberInput')
+    useEffect(() => {
+      setDeterministicId(getId())
+    }, []) // Empty deps array - only run once on mount
+    const id = idProp || deterministicId
+
+    // Computed values
+    const invalid =
+      !!messages &&
+      messages.some(
+        (message) => message.type === 'error' || message.type === 'newError'
+      )
+    const success =
+      !!messages && messages.some((message) => message.type === 'success')
+
+    const interaction = getInteraction({ props })
+    if (
+      interaction === 'disabled' &&
+      upButtonState !== 'actionSecondaryDisabledColor'
+    ) {
+      setUpButtonState('actionSecondaryDisabledColor')
+      setDownButtonState('actionSecondaryDisabledColor')
+    } else if (
+      interaction === 'enabled' &&
+      downButtonState !== 'actionSecondaryBaseColor'
+    ) {
+      setUpButtonState('actionSecondaryBaseColor')
+      setDownButtonState('actionSecondaryBaseColor')
+    }
+    // Styles - useStyle will pass these to generateStyle(componentTheme, params as props, params as state)
+    // We need to provide all values that generateStyle needs from both props and state
+    const styles = useStyle({
+      generateStyle,
+      themeOverride,
+      params: {
+        size,
+        textAlign,
+        interaction,
+        invalid,
+        success
+      },
+      componentId: 'NumberInput',
+      displayName: 'NumberInput',
+      useTokensFrom: 'TextInput'
+    })
+
+    // Event handlers
+    const handleInputRef = useCallback(
+      (element: HTMLInputElement | null) => {
+        inputRef.current = element
+
+        if (typeof inputRefProp === 'function') {
+          inputRefProp(element)
+        }
+      },
+      [inputRefProp]
+    )
+
+    const handleRef = useCallback((el: Element | null) => {
+      containerRef.current = el
+    }, [])
+
+    const handleFocus = useCallback(
+      (event: React.FocusEvent<HTMLInputElement>) => {
+        if (typeof onFocus === 'function') {
+          onFocus(event)
+        }
+      },
+      [onFocus]
+    )
+
+    const handleBlur = useCallback(
+      (event: React.FocusEvent<HTMLInputElement>) => {
+        if (typeof onBlur === 'function') {
+          onBlur(event)
+        }
+      },
+      [onBlur]
+    )
+
+    const handleChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (typeof onChange === 'function') {
+          onChange(event, event.target.value)
+        }
+      },
+      [onChange]
+    )
+
+    const handleKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (typeof onKeyDown === 'function') {
+          onKeyDown(event)
+        }
+
+        if (event.keyCode === keycode.codes.down) {
+          event.preventDefault()
+          if (typeof onDecrement === 'function') {
+            onDecrement(event)
+          }
+        } else if (event.keyCode === keycode.codes.up) {
+          event.preventDefault()
+          if (typeof onIncrement === 'function') {
+            onIncrement(event)
+          }
+        }
+      },
+      [onKeyDown, onDecrement, onIncrement]
+    )
+
+    const arrowClicked = useCallback(
+      (
+        event: React.MouseEvent<HTMLButtonElement>,
+        callback:
+          | NumberInputProps['onIncrement']
+          | NumberInputProps['onDecrement']
+      ) => {
+        event.preventDefault()
+        if (interaction === 'enabled') {
+          inputRef.current?.focus()
+
+          if (typeof callback === 'function') {
+            callback(event)
+          }
+        }
+      },
+      [interaction]
+    )
+
+    const handleClickUpArrow = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        setUpButtonState('actionSecondaryActiveColor')
+        arrowClicked(event, onIncrement)
+      },
+      [arrowClicked, onIncrement]
+    )
+
+    const handleClickDownArrow = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        setDownButtonState('actionSecondaryActiveColor')
+        arrowClicked(event, onDecrement)
+      },
+      [arrowClicked, onDecrement]
+    )
+
+    // Expose imperative API via ref
+    useImperativeHandle(
+      ref,
+      () => ({
+        focus: () => {
+          inputRef.current?.focus()
+        },
+        get id() {
+          return id
+        },
+        get invalid() {
+          return invalid
+        },
+        get interaction() {
+          return interaction
+        },
+        get value() {
+          return inputRef.current?.value
+        }
+      }),
+      [id, invalid, interaction]
+    )
+
+    // Render methods
+    const renderArrows = (customIcons?: {
+      increase: Renderable
+      decrease: Renderable
+    }) => {
+      return (
+        <span css={styles?.arrowContainer}>
+          {/* eslint-disable jsx-a11y/mouse-events-have-key-events */}
+          <button
+            aria-hidden
+            css={styles?.arrow}
+            onMouseDown={handleClickUpArrow}
+            onMouseOver={() => setUpButtonState('actionSecondaryHoverColor')}
+            onMouseOut={() => setUpButtonState('actionSecondaryBaseColor')}
+            tabIndex={-1}
+            type="button"
+          >
+            {customIcons?.increase ? (
+              callRenderProp(customIcons.increase)
+            ) : (
+              <ChevronUpInstUIIcon size="sm" color={upButtonState} />
+            )}
+          </button>
+
+          <button
+            aria-hidden
+            css={styles?.arrow}
+            onMouseDown={handleClickDownArrow}
+            onMouseOver={() => setDownButtonState('actionSecondaryHoverColor')}
+            onMouseOut={() => setDownButtonState('actionSecondaryBaseColor')}
+            tabIndex={-1}
+            type="button"
+          >
+            {customIcons?.decrease ? (
+              callRenderProp(customIcons.decrease)
+            ) : (
+              <ChevronDownInstUIIcon size="sm" color={downButtonState} />
+            )}
+          </button>
+          {/* eslint-enable jsx-a11y/mouse-events-have-key-events */}
+        </span>
+      )
+    }
 
     const rawLabel = callRenderProp(renderLabel)
     const label = hasVisibleChildren(rawLabel) ? (
       <Fragment>
         {rawLabel}
         {isRequired && (
-          <span
-            css={this.invalid ? styles?.requiredInvalid : {}}
-            aria-hidden={true}
-          >
+          <span css={invalid ? styles?.requiredInvalid : {}} aria-hidden={true}>
             {' '}
             *
           </span>
@@ -268,48 +333,61 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       rawLabel
     )
 
+    const passedProps = passthroughProps(rest)
+
+    // Don't render until we have an ID
+    if (!id) {
+      return null
+    }
+
     return (
       <FormField
-        {...pickProps(this.props, FormField.allowedProps)}
+        {...pickProps(props, FormField.allowedProps)}
         label={label}
         inline={display === 'inline-block'}
-        id={this.id}
-        elementRef={this.handleRef}
+        id={id}
+        elementRef={handleRef}
         margin={margin}
         data-cid="NumberInput"
       >
-        <span
-          css={this.props.styles?.inputWidth}
-          style={width ? { width } : undefined}
-        >
-          <span css={this.props.styles?.inputContainer}>
+        <span css={styles?.inputWidth} style={width ? { width } : undefined}>
+          <span css={styles?.inputContainer}>
             <input
-              {...omitProps(this.props, [
-                ...FormField.allowedProps,
-                ...NumberInput.allowedProps
-              ])}
-              css={this.props.styles?.input}
-              aria-invalid={this.invalid ? 'true' : undefined}
-              id={this.id}
+              {...passedProps}
+              css={styles?.input}
+              aria-invalid={invalid ? 'true' : undefined}
+              id={id}
               type={allowStringValue ? 'text' : 'number'}
-              inputMode={this.props.inputMode}
-              placeholder={placeholder}
-              ref={this.handleInputRef}
+              inputMode={inputMode}
+              placeholder={interaction === 'enabled' ? placeholder : undefined}
+              ref={handleInputRef}
               required={isRequired}
               value={value}
               disabled={interaction === 'disabled'}
               readOnly={interaction === 'readonly'}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-              onChange={this.handleChange}
-              onKeyDown={this.handleKeyDown}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
-            {showArrows ? this.renderArrows(renderIcons) : null}
+            {showArrows && interaction !== 'readonly'
+              ? renderArrows(renderIcons)
+              : null}
           </span>
         </span>
       </FormField>
     )
   }
+)
+
+NumberInput.displayName = 'NumberInput'
+
+export interface NumberInputHandle {
+  focus: () => void
+  readonly id: string | undefined
+  readonly invalid: boolean
+  readonly interaction: ReturnType<typeof getInteraction>
+  readonly value: string | undefined
 }
 
 export default NumberInput
