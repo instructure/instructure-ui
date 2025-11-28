@@ -291,6 +291,10 @@
       "textBase": {
         "value": "{size.size24}",
         "type": "lineHeights"
+      },
+      "base": {
+        "value": "150%",
+        "type": "lineHeights"
       }
     },
     "standalone": {
@@ -324,6 +328,10 @@
       },
       "text4xl": {
         "value": "{size.size36}",
+        "type": "lineHeights"
+      },
+      "base": {
+        "value": "125%",
         "type": "lineHeights"
       }
     },
