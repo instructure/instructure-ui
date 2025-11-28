@@ -28,7 +28,6 @@ import type {
   OtherHTMLAttributes,
   Renderable
 } from '@instructure/shared-types'
-import type { ViewOwnProps } from '@instructure/ui-view'
 import type { LinkProps } from '@instructure/ui-link'
 
 type BreadcrumbLinkOwnProps = {
@@ -43,11 +42,11 @@ type BreadcrumbLinkOwnProps = {
   /**
    * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
    */
-  onClick?: (event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void
+  onClick?: (event: React.MouseEvent) => void
   /**
    * Fires when the Link is hovered
    */
-  onMouseEnter?: (event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void
+  onMouseEnter?: (event: React.MouseEvent) => void
   /**
    * Sets the font-size of the breadcrumb text
    */

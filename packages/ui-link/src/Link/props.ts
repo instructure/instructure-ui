@@ -34,7 +34,6 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { ViewOwnProps } from '@instructure/ui-view'
 import { Renderable } from '@instructure/shared-types'
 
 type LinkOwnProps = {
@@ -80,17 +79,18 @@ type LinkOwnProps = {
   interaction?: 'enabled' | 'disabled'
 
   /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   * Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens)
+   *
+   * Apply these values via familiar CSS-like shorthand.
    */
   margin?: Spacing
 
   /**
    * Add an SVG icon to the Link. Do not add icons directly as
    * children.
+   * When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size.
    */
-  renderIcon?: Renderable
+  renderIcon?: Renderable | Renderable<{ size?: string | number }>
 
   /**
    * Place the icon before or after the text in the Link.
@@ -110,27 +110,38 @@ type LinkOwnProps = {
   /**
    * Fires when the Link loses focus
    */
-  onBlur?: (event: React.FocusEvent<ViewOwnProps>) => void
+  onBlur?: (event: React.FocusEvent) => void
 
   /**
    * Fires when the Link is clicked
    */
-  onClick?: (event: React.MouseEvent<ViewOwnProps>) => void
+  onClick?: (event: React.MouseEvent) => void
 
   /**
    * Fires when the Link gains focus
    */
-  onFocus?: (event: React.FocusEvent<ViewOwnProps>) => void
+  onFocus?: (event: React.FocusEvent) => void
 
   /**
    * Fires when the Link is hovered
    */
-  onMouseEnter?: (event: React.MouseEvent<ViewOwnProps>) => void
+  onMouseEnter?: (event: React.MouseEvent) => void
+
+  /**
+   * Sets the size of the link (font size, line height, and icon gap)
+   */
+  size?: 'small' | 'medium' | 'large'
 
   /**
    * Sets pre-defined values for the component to achieve specific roles for the component
+   * - `inline`
+   * - `standalone`
+   *
+   * __Deprecated values:__
+   * - `inline-small`
+   * - `standalone-small`
    */
-  variant?: 'inline' | 'inline-small' | 'standalone' | 'standalone-small'
+  variant?: 'inline' | 'standalone' | 'inline-small' | 'standalone-small'
 }
 
 export type LinkStyleProps = {
@@ -170,6 +181,7 @@ const allowedProps: AllowedPropKeys = [
   'onClick',
   'onFocus',
   'onMouseEnter',
+  'size',
   'variant'
 ]
 

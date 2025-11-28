@@ -22,57 +22,93 @@
  * SOFTWARE.
  */
 
-import type { LinkTheme } from '@instructure/shared-types'
-import type { LinkProps, LinkStyleProps, LinkStyle } from './props'
+import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { LinkProps, LinkStyle } from './props'
+import {
+  calcFocusOutlineStyles,
+  calcMarginFromShorthand
+} from '@instructure/emotion'
 
+type StyleParams = Pick<
+  LinkProps,
+  | 'themeOverride'
+  | 'isWithinText'
+  | 'renderIcon'
+  | 'iconPlacement'
+  | 'color'
+  | 'size'
+  | 'variant'
+  | 'margin'
+  | 'display'
+> & {
+  containsTruncateText?: boolean
+  hasVisibleChildren?: boolean
+}
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: LinkTheme,
-  props: LinkProps,
-  state: LinkStyleProps
+  componentTheme: NewComponentTypes['Link'],
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): LinkStyle => {
   const {
     isWithinText,
     renderIcon,
     iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
     color,
-    variant
-  } = props
+    size,
+    variant,
+    margin,
+    display,
+    hasVisibleChildren
+  } = params
+  const isInverseStyle = color === 'link-inverse'
 
-  const { containsTruncateText, hasVisibleChildren } = state
-  const inverseStyle = color === 'link-inverse'
+  // Size mappings for font size, line height, and icon gaps
+  const sizeStyles = {
+    small: {
+      fontSize: componentTheme.fontSizeSm,
+      lineHeight: componentTheme.lineHeightSm,
+      gap: componentTheme.gapSm
+    },
+    medium: {
+      fontSize: componentTheme.fontSizeMd,
+      lineHeight: componentTheme.lineHeightMd,
+      gap: componentTheme.gapMd
+    },
+    large: {
+      fontSize: componentTheme.fontSizeLg,
+      lineHeight: componentTheme.lineHeightLg,
+      gap: componentTheme.gapLg
+    }
+  }
 
+  // Variant mappings for text decoration only
   const variantStyles = {
     inline: {
-      fontSize: componentTheme.fontSize,
-      lineHeight: componentTheme.lineHeight,
-      textDecoration: 'underline'
-    },
-    'inline-small': {
-      fontSize: componentTheme.fontSizeSmall,
-      lineHeight: '1.3125rem',
       textDecoration: 'underline'
     },
     standalone: {
-      fontSize: componentTheme.fontSize,
-      lineHeight: componentTheme.lineHeight,
-      textDecoration: 'none'
-    },
-    'standalone-small': {
-      fontSize: componentTheme.fontSizeSmall,
-      lineHeight: componentTheme.lineHeight,
       textDecoration: 'none'
     }
   }
+
+  // Get size styles or use inherit if no size is provided
+  const currentSize = size
+    ? sizeStyles[size]
+    : {
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
+        gap: componentTheme.gapMd // Default gap for icons when no size is specified
+      }
 
   const baseStyles = {
     boxSizing: 'border-box',
@@ -82,30 +118,21 @@ const generateStyle = (
     verticalAlign: 'baseline',
 
     // set up focus styles
-    outlineColor: 'transparent',
-    outlineWidth: componentTheme.focusOutlineWidth,
-    outlineStyle: componentTheme.focusOutlineStyle,
-    borderRadius: componentTheme.focusOutlineBorderRadius,
-    outlineOffset: '0.25rem',
-    textUnderlineOffset: componentTheme.textUnderlineOffset,
+    borderRadius: '0.125rem',
 
-    // If TruncateText is used in Link with icon, align the icon and the text vertically
+    // If icon is present, use flex to align icon with text
+    // Use 'flex' for standalone variant (block-level), 'inline-flex' for inline variant
     ...(renderIcon &&
-      containsTruncateText &&
       hasVisibleChildren && {
+        display: variant === 'standalone' ? 'flex' : 'inline-flex',
         alignItems: 'center'
       }),
 
-    '&:focus': {
-      outlineColor: componentTheme.focusOutlineColor
-    },
     '&[aria-disabled]': {
       cursor: 'not-allowed',
       pointerEvents: 'none',
-      opacity: '0.5'
-    },
-    '&::-moz-focus-inner': {
-      border: 0 // removes default dotted focus outline in Firefox
+      opacity: '1',
+      color: componentTheme.textDisabledColor
     }
   }
 
@@ -113,19 +140,17 @@ const generateStyle = (
   const isClickableStyles = {
     ...baseStyles,
     cursor: 'pointer',
-    color: componentTheme.color,
-    '&:focus': {
-      color: componentTheme.color,
-      outlineColor: componentTheme.focusOutlineColor
-    },
+    color: componentTheme.textColor,
+    fontSize: currentSize.fontSize,
+    lineHeight: currentSize.lineHeight,
     '&:hover, &:active': {
-      color: componentTheme.hoverColor,
+      color: componentTheme.textHoverColor,
       textDecoration: isWithinText
         ? componentTheme.hoverTextDecorationWithinText
         : componentTheme.hoverTextDecorationOutsideText
     },
-    ...(variant
-      ? variantStyles[variant]
+    ...(variant && variantStyles[variant as keyof typeof variantStyles]
+      ? variantStyles[variant as keyof typeof variantStyles]
       : {
           textDecoration: isWithinText
             ? componentTheme.textDecorationWithinText
@@ -142,49 +167,50 @@ const generateStyle = (
     margin: 0,
     padding: 0,
     textAlign: 'inherit',
-    ...(variant ? variantStyles[variant] : { fontSize: '1em' })
+    fontSize: currentSize.fontSize,
+    lineHeight: currentSize.lineHeight,
+    ...(variant &&
+      variantStyles[variant as keyof typeof variantStyles] &&
+      variantStyles[variant as keyof typeof variantStyles])
   }
 
   const inverseStyles = {
-    color: componentTheme.colorInverse,
-    '&:focus': {
-      outlineColor: componentTheme.focusInverseIconOutlineColor
+    color: componentTheme.onColorTextColor,
+    '&:hover, &:active': {
+      color: componentTheme.onColorTextHoverColor
     },
-    '&:hover, &:focus, &:active': {
-      color: componentTheme.colorInverse
+    '&[aria-disabled]': {
+      color: componentTheme.onColorTextDisabledColor
     }
   }
-  const variantIconStyles = {
-    inline: {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
-    },
-    'inline-small': {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMarginSmall,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMarginSmall : 0
-    },
-    standalone: {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
-    },
-    'standalone-small': {
-      paddingInlineStart:
-        iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMarginSmall,
-      paddingInlineEnd:
-        iconPlacement === 'start' ? componentTheme.iconPlusTextMarginSmall : 0
-    }
+
+  // Icon styles based on size
+  const iconStyles = {
+    paddingInlineStart: iconPlacement === 'start' ? 0 : currentSize.gap,
+    paddingInlineEnd: iconPlacement === 'start' ? currentSize.gap : 0
   }
+
+  // Display variants similar to View component
+  const displayVariants = {
+    inline: { display: 'inline' },
+    block: { display: 'block' },
+    'inline-block': { display: 'inline-block', verticalAlign: 'middle' },
+    flex: { display: 'flex' },
+    'inline-flex': { display: 'inline-flex', verticalAlign: 'middle' },
+    auto: {}
+  }
+
   return {
     link: {
-      label: 'link',
+      label: display === 'block' ? 'link--block-link' : 'link',
       ...baseStyles,
-
+      margin: calcMarginFromShorthand(margin, sharedTokens.margin),
+      // Handle display prop - apply display variant
+      ...(display && displayVariants[display as keyof typeof displayVariants]),
+      ...calcFocusOutlineStyles(
+        sharedTokens.focusOutline,
+        isInverseStyle ? { focusColor: 'inverse' } : undefined
+      ),
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(a), &:is(button)': isClickableStyles,
       '&:-webkit-any(a), &:-webkit-any(button)': isClickableStyles,
@@ -192,7 +218,7 @@ const generateStyle = (
       '&:is(button)': buttonStyle,
       '&:-webkit-any(button)': buttonStyle,
 
-      ...(inverseStyle && {
+      ...(isInverseStyle && {
         ...inverseStyles,
         '&:is(a):link, &:is(a):visited, &:is(button)': inverseStyles,
         '&:-webkit-any(a):link, &:-webkit-any(a):visited, &:-webkit-any(button)':
@@ -202,20 +228,10 @@ const generateStyle = (
     icon: {
       label: 'icon',
       ...(renderIcon && {
-        fontSize: componentTheme.iconSize,
         boxSizing: 'border-box',
-        ...(variant
-          ? variantIconStyles[variant]
-          : {
-              paddingInlineStart:
-                iconPlacement === 'start'
-                  ? 0
-                  : componentTheme.iconPlusTextMargin,
-              paddingInlineEnd:
-                iconPlacement === 'start'
-                  ? componentTheme.iconPlusTextMargin
-                  : 0
-            })
+        display: 'inline-flex',
+        alignItems: 'center',
+        ...iconStyles
       })
     }
   }

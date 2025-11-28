@@ -22,11 +22,18 @@
  * SOFTWARE.
  */
 
-import { Children, Component } from 'react'
+import {
+  Children,
+  useRef,
+  forwardRef,
+  useMemo,
+  cloneElement,
+  isValidElement
+} from 'react'
+import type { ForwardedRef } from 'react'
+import { jsx } from '@emotion/react'
 
-import { View } from '@instructure/ui-view'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
   getElementType,
   getInteraction,
@@ -37,226 +44,261 @@ import {
 import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
-import { allowedProps } from './props'
-import type { LinkProps, LinkState, LinkStyleProps } from './props'
-
-import type { ViewOwnProps } from '@instructure/ui-view'
+import type { LinkProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Link extends Component<LinkProps, LinkState> {
-  static readonly componentId = 'Link'
-
-  static allowedProps = allowedProps
-  static defaultProps = {
-    // Leave interaction default undefined so that `disabled` can also be supplied
+// Create a component-like object for getElementType compatibility
+const LinkComponentForGetElementType = {
+  displayName: 'Link',
+  defaultProps: {
     interaction: undefined,
     color: 'link',
     iconPlacement: 'start',
     isWithinText: true,
     forceButtonRole: true
-  } as const
-
-  state = { hasFocus: false }
-
-  get _link() {
-    console.warn(
-      '_link property is deprecated and will be removed in v9, please use ref instead'
-    )
-
-    return this.ref
   }
-  ref: Element | null = null
+} as any
 
-  componentDidMount() {
-    this.props.makeStyles?.(this.makeStyleProps())
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStyleProps())
-  }
-
-  makeStyleProps = (): LinkStyleProps => {
-    return {
-      containsTruncateText: this.containsTruncateText,
-      hasVisibleChildren: this.hasVisibleChildren
-    }
-  }
-
-  handleElementRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
-
-  handleClick: React.MouseEventHandler<ViewOwnProps> = (event) => {
-    const { onClick } = this.props
-    const { interaction } = this
-
-    if (interaction === 'disabled') {
-      event.preventDefault()
-      event.stopPropagation()
-    } else if (typeof onClick === 'function') {
-      onClick(event)
-    }
-  }
-
-  handleFocus: React.FocusEventHandler<ViewOwnProps> = (event) => {
-    this.setState({ hasFocus: true })
-    if (typeof this.props.onFocus === 'function') {
-      this.props.onFocus(event)
-    }
-  }
-
-  handleBlur: React.FocusEventHandler<ViewOwnProps> = (event) => {
-    this.setState({ hasFocus: false })
-    if (typeof this.props.onBlur === 'function') {
-      this.props.onBlur(event)
-    }
-  }
-
-  get containsTruncateText() {
-    let truncateText = false
-
-    Children.forEach(this.props.children, (child) => {
-      if (child && matchComponentTypes(child, ['TruncateText'])) {
-        truncateText = true
-      }
-    })
-
-    warn(
-      // if display prop is used, warn about icon or TruncateText
-      !truncateText || this.props.display === undefined,
-      '[Link] Using the display property with TruncateText may cause layout issues.'
-    )
-
-    return truncateText
-  }
-
-  get display() {
-    if (this.props.display) {
-      return this.props.display // user-entered display property
-    }
-
-    const { containsTruncateText } = this
-
-    if (this.props.renderIcon) {
-      return containsTruncateText ? 'inline-flex' : 'inline-block'
-    } else {
-      return containsTruncateText ? 'block' : 'auto'
-    }
-  }
-
-  get interaction() {
-    return getInteraction({ props: this.props, interactionTypes: ['disabled'] })
-  }
-
-  get element() {
-    return getElementType(Link, this.props)
-  }
-
-  get focused() {
-    return isActiveElement(this.ref)
-  }
-
-  get focusable() {
-    return findFocusable(this.ref)
-  }
-
-  get hasVisibleChildren() {
-    return hasVisibleChildren(this.props.children)
-  }
-
-  get role() {
-    const { role, forceButtonRole, onClick } = this.props
-
-    if (forceButtonRole) {
-      return onClick && this.element !== 'button' ? 'button' : role
-    }
-
-    return role
-  }
-
-  focus() {
-    this.ref && (this.ref as HTMLElement).focus()
-  }
-
-  renderIcon() {
-    warn(
-      // if display prop is used, warn about icon or TruncateText
-      this.props.display === undefined,
-      '[Link] Using the display property with an icon may cause layout issues.'
-    )
-    return (
-      <span css={this.props.styles?.icon}>
-        {callRenderProp(this.props.renderIcon)}
-      </span>
-    )
-  }
-
-  render() {
+const Link = forwardRef<Element, LinkProps>(
+  (props: LinkProps, ref: ForwardedRef<Element>) => {
     const {
       children,
       onClick,
       onMouseEnter,
-      color,
+      onFocus,
+      onBlur,
       href,
       margin,
       renderIcon,
-      iconPlacement,
-      isWithinText,
-      ...props
-    } = this.props
+      iconPlacement = 'start',
+      forceButtonRole = true,
+      role,
+      display,
+      elementRef,
+      variant: variantProp,
+      size: sizeProp,
+      ...rest
+    } = props
 
-    const { interaction } = this
+    // This block handle deprecated variant values by mapping them to new variant + size props
+    let variant: 'inline' | 'standalone' | undefined = variantProp as
+      | 'inline'
+      | 'standalone'
+      | undefined
+    let size: 'small' | 'medium' | 'large' | undefined = sizeProp
+
+    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
+      warn(
+        false,
+        `[Link] The variant value "${variantProp}" is deprecated. Use variant="${variantProp.replace(
+          '-small',
+          ''
+        )}" with size="small" instead.`
+      )
+      variant = variantProp.replace('-small', '') as 'inline' | 'standalone'
+      // Only set size from deprecated variant if size prop is not explicitly provided
+      if (!sizeProp) {
+        size = 'small'
+      }
+    } else if (
+      (variantProp === 'inline' || variantProp === 'standalone') &&
+      !sizeProp
+    ) {
+      // When using new variant values without explicit size, default to medium
+      // This maintains the old behavior where 'inline' and 'standalone' were medium-sized
+      size = 'medium'
+    }
+
+    const linkRef = useRef<Element | null>(null)
+
+    const containsTruncateText = useMemo(() => {
+      let truncateText = false
+
+      Children.forEach(children, (child) => {
+        if (child && matchComponentTypes(child, ['TruncateText'])) {
+          truncateText = true
+        }
+      })
+
+      warn(
+        // if display prop is used, warn about icon or TruncateText
+        !truncateText || display === undefined,
+        '[Link] Using the display property with TruncateText may cause layout issues.'
+      )
+
+      return truncateText
+    }, [children, display])
+
+    const hasVisibleChildrenValue = useMemo(
+      () => hasVisibleChildren(children),
+      [children]
+    )
+
+    const displayValue = useMemo(() => {
+      if (display) {
+        return display // user-entered display property
+      }
+
+      if (renderIcon) {
+        return containsTruncateText ? 'inline-flex' : 'inline-block'
+      } else {
+        return containsTruncateText ? 'block' : 'auto'
+      }
+    }, [display, containsTruncateText, renderIcon])
+
+    const interaction = getInteraction({
+      props,
+      interactionTypes: ['disabled']
+    })
+
+    const element = getElementType(LinkComponentForGetElementType, props)
+
+    const roleValue = useMemo(() => {
+      if (forceButtonRole) {
+        return onClick && element !== 'button' ? 'button' : role
+      }
+      return role
+    }, [forceButtonRole, onClick, element, role])
+
+    const styles = useStyle({
+      generateStyle,
+      params: {
+        ...props,
+        variant,
+        size,
+        display: displayValue,
+        margin,
+        containsTruncateText,
+        hasVisibleChildren: hasVisibleChildrenValue
+      },
+      componentId: 'Link',
+      displayName: 'Link'
+    })
+
+    const handleElementRef = (el: Element | null) => {
+      linkRef.current = el
+
+      if (typeof elementRef === 'function') {
+        elementRef(el)
+      }
+
+      // Forward ref to the DOM element for compatibility with Position/Popover/Tooltip
+      if (typeof ref === 'function') {
+        ref(el)
+      } else if (ref) {
+        // eslint-disable-next-line no-param-reassign
+        ;(ref as React.MutableRefObject<Element | null>).current = el
+      }
+    }
+
+    const handleClick: React.MouseEventHandler<HTMLElement> = (event) => {
+      if (interaction === 'disabled') {
+        event.preventDefault()
+        event.stopPropagation()
+      } else if (typeof onClick === 'function') {
+        onClick(event)
+      }
+    }
+
+    const handleFocus: React.FocusEventHandler<HTMLElement> = (event) => {
+      if (typeof onFocus === 'function') {
+        onFocus(event)
+      }
+    }
+
+    const handleBlur: React.FocusEventHandler<HTMLElement> = (event) => {
+      if (typeof onBlur === 'function') {
+        onBlur(event)
+      }
+    }
+
+    const renderIconElement = () => {
+      warn(
+        // if display prop is used, warn about icon or TruncateText
+        display === undefined,
+        '[Link] Using the display property with an icon may cause layout issues.'
+      )
+
+      // Map Link sizes to Lucide icon semantic size tokens
+      const linkSizeToIconSize = {
+        small: 'xs',
+        medium: 'sm',
+        large: 'md'
+      } as const
+
+      const iconSize = linkSizeToIconSize[size || 'medium']
+
+      // Lucide icons - pass size prop to control icon size
+      // Wrap with span for gap/spacing but without fontSize override
+      const isLucideIcon =
+        renderIcon &&
+        isValidElement(renderIcon) &&
+        (renderIcon as any).type?.displayName?.startsWith('wrapLucideIcon')
+
+      if (isLucideIcon && isValidElement(renderIcon)) {
+        // Lucide icons - clone the element with size prop
+        return (
+          <span css={styles?.icon}>
+            {cloneElement(renderIcon, { size: iconSize } as any)}
+          </span>
+        )
+      }
+
+      // Non-Lucide icons or functions - render without size prop
+      return <span css={styles?.icon}>{callRenderProp(renderIcon as any)}</span>
+    }
 
     const isDisabled = interaction === 'disabled'
 
     const type =
-      this.element === 'button' || this.element === 'input'
-        ? 'button'
-        : undefined
+      element === 'button' || element === 'input' ? 'button' : undefined
 
-    const tabIndex = this.role === 'button' && !isDisabled ? 0 : undefined
+    // Determine tabIndex based on role and disabled state
+    const tabIndex = useMemo(() => {
+      if (isDisabled) {
+        // Disabled links should not be focusable
+        return -1
+      }
+      if (roleValue === 'button') {
+        // Elements with button role need explicit tabIndex
+        return 0
+      }
+      // Otherwise let the browser handle default focusability
+      return undefined
+    }, [isDisabled, roleValue])
 
-    return (
-      <View
-        {...passthroughProps(props)}
-        elementRef={this.handleElementRef}
-        as={this.element}
-        display={this.display}
-        margin={margin}
-        href={href}
-        onMouseEnter={onMouseEnter}
-        onClick={this.handleClick}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-        aria-disabled={isDisabled ? 'true' : undefined}
-        role={this.role}
-        type={type}
-        tabIndex={tabIndex}
-        css={this.props.styles?.link}
-        data-cid={combineDataCid('Link', this.props)}
-      >
-        {renderIcon && iconPlacement === 'start' ? this.renderIcon() : null}
-        {children}
-        {renderIcon && iconPlacement === 'end' ? this.renderIcon() : null}
-      </View>
+    return jsx(
+      element,
+      {
+        ...passthroughProps(rest),
+        ref: handleElementRef,
+        href,
+        onMouseEnter,
+        onClick: handleClick,
+        onFocus: handleFocus,
+        onBlur: handleBlur,
+        'aria-disabled': isDisabled ? 'true' : undefined,
+        role: roleValue,
+        type,
+        tabIndex,
+        css: styles?.link,
+        'data-cid': combineDataCid('Link', props)
+      },
+      renderIcon && iconPlacement === 'start' ? renderIconElement() : null,
+      children,
+      renderIcon && iconPlacement === 'end' ? renderIconElement() : null
     )
   }
-}
+)
+
+Link.displayName = 'Link'
 
 export default Link
 export { Link }
