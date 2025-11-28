@@ -45,7 +45,7 @@
       "type": "fontWeights"
     },
     "valueFontWeight": {
-      "value": "{fontWeight.heading.base}",
+      "value": "{fontWeight.heading.strong}",
       "type": "fontWeights"
     }
   }

@@ -1,0 +1,12 @@
+{
+  "menu": {
+    "backgroundColor": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.sm}",
+      "type": "borderRadius"
+    }
+  }
+}

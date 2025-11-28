@@ -405,6 +405,10 @@
         "value": "{color.sea.sea70}",
         "type": "color"
       },
+      "onColor": {
+        "value": "{color.white}",
+        "type": "color"
+      },
       "container": {
         "base": {
           "value": "{color.grey.grey150}",
