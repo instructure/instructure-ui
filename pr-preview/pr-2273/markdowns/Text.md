@@ -5,8 +5,9 @@ A component for styling textual content
 
 ## Variant
 
-Variant takes care of - almost - all use-cases when it comes to texts on pages. Their name reflects the places they meant to be used. It sets `size`, `weight`, `fontStyle` and `lineHeight`
-We recommend using `variants` instead of the aforementioned props.
+Variant takes care of - almost - all use-cases when it comes to texts on pages. Their name reflects the places they meant to be used. It sets `font family`, `size`, `weight` and `lineHeight`.
+
+> We recommend using `variant` instead of setting values directly.
 
 NOTE: when `variant` is set, `size`, `weight`, `fontStyle` and `lineHeight` props are ignored
 
@@ -38,8 +39,11 @@ type: example
   <Text color="success">I&#39;m success text</Text><br/>
   <Text color="warning">I&#39;m warning text</Text><br />
   <Text color="danger">I&#39;m danger text</Text><br />
-  <Text color="ai-highlight">I&#39;m a highlighted text (by AI)</Text><br />
-  <Text color="alert">I&#39;m alert text - DEPRECATED - DO NOT USE</Text>
+  <Text color="ai-highlight">I&#39;m an ai-highlight text</Text><br />
+  <View background="primary-inverse">
+    <Text color="primary-inverse">I&#39;m primary-inverse text</Text><br />
+    <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text><br />
+  </View>
 </div>
 ```
 
@@ -50,11 +54,12 @@ type: example
 type: example
 ---
 <div>
-  <Text size='descriptionPage'>descriptionPage</Text><br/>
-  <Text size='descriptionSection'>descriptionSection</Text><br/>
-  <Text size='content'>content</Text><br/>
-  <Text size='contentSmall'>contentSmall</Text><br/>
-  <Text size='legend'>legend</Text>
+  <Text size='x-small'>x-small</Text><br/>
+  <Text size='small'>small</Text><br/>
+  <Text size='medium'>medium</Text><br/>
+  <Text size='large'>large</Text><br/>
+  <Text size='x-large'>x-large</Text><br/>
+  <Text size='xx-large'>xx-large</Text>
 </div>
 ```
 
@@ -65,8 +70,9 @@ type: example
 type: example
 ---
 <div>
-  <Text weight="weightRegular">weightRegular</Text><br/>
-  <Text weight="weightImportant">weightImportant</Text>
+  <Text weight="light">light text</Text><br/>
+  <Text weight="normal">normal text</Text><br/>
+  <Text weight="bold">bold text</Text>
 </div>
 ```
 
@@ -89,20 +95,22 @@ type: example
 type: example
 ---
 <div>
-  <br/><br/>
-  <Text lineHeight="lineHeight100">
-    <p>{lorem.paragraph()}</p>
+  <Text lineHeight="default">
+    <p><b>default:</b> {lorem.paragraph()}</p>
   </Text>
-  <Text lineHeight="lineHeight125">
-    <p>{lorem.paragraph()}</p>
+  <Text lineHeight="fit">
+    <p><b>fit:</b> {lorem.paragraph()}</p>
   </Text>
-  <Text lineHeight="lineHeight150">
-    <p>{lorem.paragraph()}</p>
+  <Text lineHeight="condensed">
+    <p><b>condensed:</b> {lorem.paragraph()}</p>
+  </Text>
+  <Text lineHeight="double">
+    <p><b>double:</b> {lorem.paragraph()}</p>
   </Text>
 </div>
 ```
 
-### Text transform
+### Text transformations
 
 ```js
 ---
@@ -151,17 +159,9 @@ type: example
 </div>
 ```
 
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-    <Text color="primary-inverse">I&#39;m primary text</Text><br/>
-    <Text color="secondary-inverse">I&#39;m secondary text</Text>
-</View>
-```
-
 ### Element styles
+
+You can use simple HTML tags to style your text.
 
 ```js
 ---
@@ -172,9 +172,9 @@ type: example
   <strong>strong </strong>
   <i>italic </i>
   <em>emphasis </em>
-  <pre>preformatted</pre>
-  <code>code</code>
-  This<sup>is</sup> some<sub>text</sub>.
+  <pre>preformatted </pre>
+  <code>code </code><br/>
+  This <sup>sup</sup> normal <sub>sub </sub> text.
 </Text>
 ```
 
@@ -184,25 +184,15 @@ Multiple values from `size`, `weight` and `lineHeight` are deprecated, but still
 
 Deprecated `size` values:
 
-- x-small
-- small
-- medium
-- large
-- x-large
-- xx-large
+`descriptionPage`, `descriptionSection`, `content`, `contentSmall`, `legend`
 
 Deprecated `weight` values:
 
-- normal
-- light
-- bold
+`weightRegular`, `weightImportant`
 
 Deprecated `lineHeight` values:
 
-- default
-- fit
-- condensed
-- double
+`lineHeight100`, `lineHeight125`, `lineHeight150`
 
 
 ### Props
@@ -210,15 +200,15 @@ Deprecated `lineHeight` values:
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Text | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
-| Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'alert' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'ai-highlight'` | No | - | Color of the text |
+| Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'ai-highlight'` | No | - | Color of the text |
 | Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Text | fontStyle | `'italic' \| 'normal'` | No | - |  |
 | Text | letterSpacing | `'normal' \| 'condensed' \| 'expanded'` | No | `'normal'` |  |
-| Text | lineHeight | `\| 'default' \| 'fit' \| 'condensed' \| 'double' \| 'lineHeight100' \| 'lineHeight125' \| 'lineHeight150'` | No | - |  |
-| Text | size | `\| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large' \| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentSmall' \| 'legend'` | No | `'medium'` |  |
+| Text | lineHeight | `\| 'default' \| 'fit' \| 'condensed' \| 'double' \| 'lineHeight100' \| 'lineHeight125' \| 'lineHeight150'` | No | - | Line height. Use `variant` if possible instead. `lineHeight100`, `lineHeight125`, `lineHeight150` are deprecated |
+| Text | size | `\| 'x-small' \| 'small' \| 'medium' \| 'large' \| 'x-large' \| 'xx-large' \| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentSmall' \| 'legend'` | No | `'medium'` | Size of the text. Use `variant` if possible instead. `descriptionPage`, `descriptionSection`, `content`, `contentSmall`, `legend` are deprecated |
 | Text | transform | `'none' \| 'capitalize' \| 'uppercase' \| 'lowercase'` | No | - |  |
 | Text | variant | `\| 'descriptionPage' \| 'descriptionSection' \| 'content' \| 'contentImportant' \| 'contentQuote' \| 'contentSmall' \| 'legend'` | No | - | Sets multiple props at once. (size, fontStyle, lineHeight, weight) If set, these props are not allowed. NOTE: this is the recommended way of setting these values |
-| Text | weight | `'normal' \| 'light' \| 'bold' \| 'weightRegular' \| 'weightImportant'` | No | - |  |
+| Text | weight | `'normal' \| 'light' \| 'bold' \| 'weightRegular' \| 'weightImportant'` | No | - | Weight of the text. Use `variant` if possible instead. `weightRegular`, `weightImportant` are deprecated |
 | Text | wrap | `'normal' \| 'break-word'` | No | `'normal'` |  |
 | Text | children | `React.ReactNode` | No | `null` |  |
 
