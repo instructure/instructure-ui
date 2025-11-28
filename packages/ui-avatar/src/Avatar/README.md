@@ -56,6 +56,34 @@ readonly: true
 </View>
 ```
 
+### Using Lucide Icons
+
+Avatar automatically sizes Lucide icons based on the Avatar's `size` prop. You don't need to manually set the icon size - the Avatar component handles this for you.
+
+```js
+---
+type: example
+---
+<div>
+  <View display="block" padding="small medium">
+    <Avatar name="User Avatar" size="xx-small" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="x-small" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="small" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="medium" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="large" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="x-large" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="xx-large" renderIcon={UserInstUIIcon} />
+  </View>
+  <View display="block" padding="small medium">
+    <Avatar name="Profile" size="small" color="accent2" renderIcon={CircleUserInstUIIcon} />
+    <Avatar name="Group" size="medium" color="accent3" renderIcon={UsersInstUIIcon} />
+    <Avatar name="Settings" size="large" color="accent4" renderIcon={SettingsInstUIIcon} />
+  </View>
+</div>
+```
+
+**Note:** When using Lucide icons with Avatar, do not specify the `size` prop on the icon itself. The Avatar component will automatically pass the appropriate size based on its own `size` prop.
+
 ### Size
 
 The `size` prop allows you to select from `xx-small`, `x-small`, `small`, `medium` _(default)_, `large`, `x-large`, and `xx-large`. Each size has predefined dimensions and typography scales.

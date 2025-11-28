@@ -124,6 +124,17 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       />
     )
 
+    // Map Avatar sizes to Lucide icon semantic size tokens
+    const avatarSizeToIconSize = {
+      'xx-small': 'xs',
+      'x-small': 'xs',
+      small: 'sm',
+      medium: 'md',
+      large: 'lg',
+      'x-large': 'xl',
+      'xx-large': '2xl'
+    } as const
+
     const renderContent = () => {
       //image in avatar - prioritize image over icon
       if (src) {
@@ -136,9 +147,14 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       }
 
       //icon in avatar
-      //TODO-REWORK make the icon inherit the size prop of the Avatar when the icons have it
-      if (renderIcon) {
-        return callRenderProp(renderIcon)
+      if (
+        renderIcon &&
+        (renderIcon as React.ComponentType)?.displayName?.startsWith(
+          'wrapLucideIcon'
+        )
+      ) {
+        const iconSize = avatarSizeToIconSize[size]
+        return callRenderProp(renderIcon, { size: iconSize })
       }
 
       //initials in avatar

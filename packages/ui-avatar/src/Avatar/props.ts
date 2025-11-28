@@ -96,8 +96,9 @@ type AvatarOwnProps = {
   elementRef?: (element: Element | null) => void
   /**
    * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
+   * When using Lucide icons, Avatar will automatically pass the appropriate size prop based on the Avatar's size.
    */
-  renderIcon?: Renderable
+  renderIcon?: Renderable<{ size?: string | number }>
 }
 
 export type AvatarState = {
