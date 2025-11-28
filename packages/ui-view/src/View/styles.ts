@@ -30,7 +30,8 @@ import {
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 
-import type { OtherHTMLAttributes, ViewTheme } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { ViewProps, ViewStyle, BorderColor } from './props'
 import { alpha } from '@instructure/ui-color-utils'
 
@@ -40,7 +41,7 @@ const getBorderStyle = ({
   dir,
   theme
 }: {
-  theme: ViewTheme
+  theme: NewComponentTypes['View']
   borderRadius: ViewProps['borderRadius']
   borderWidth: ViewProps['borderWidth']
   dir: ViewProps['dir']
@@ -69,7 +70,7 @@ const getSpacingStyle = ({
   dir,
   theme
 }: {
-  theme: ViewTheme
+  theme: NewComponentTypes['View']
   margin: ViewProps['margin']
   padding: ViewProps['padding']
   dir: ViewProps['dir']
@@ -165,7 +166,7 @@ const withBorder = (props: ViewProps) => {
   return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
 }
 
-const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
+const getFocusStyles = (props: ViewProps, componentTheme: NewComponentTypes['View']) => {
   const {
     focusColor,
     focusPosition,
@@ -229,8 +230,9 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ViewTheme,
-  props: ViewProps
+  componentTheme: NewComponentTypes['View'],
+  props: ViewProps,
+  sharedTokens: SharedTokens,
 ): ViewStyle => {
   const {
     borderRadius,
@@ -315,7 +317,7 @@ const generateStyle = (
 
   const borderColorVariants: Record<BorderColor, { borderColor: string }> = {
     transparent: {
-      borderColor: componentTheme.borderColorTransparent
+      borderColor: 'transparent'
     },
     primary: {
       borderColor: componentTheme.borderColorPrimary
@@ -336,7 +338,7 @@ const generateStyle = (
       borderColor: componentTheme.borderColorWarning
     },
     alert: {
-      borderColor: componentTheme.borderColorAlert
+      borderColor: componentTheme.borderColorInfo
     },
     danger: {
       borderColor: componentTheme.borderColorDanger
@@ -370,7 +372,7 @@ const generateStyle = (
     },
     alert: {
       color: componentTheme.colorPrimaryInverse,
-      background: componentTheme.backgroundAlert
+      background: componentTheme.backgroundInfo
     },
     success: {
       color: componentTheme.colorPrimaryInverse,
@@ -388,7 +390,7 @@ const generateStyle = (
 
   const stackingVariants = {
     topmost: {
-      zIndex: componentTheme.stackingTopmost
+      zIndex: sharedToken
     },
     above: {
       zIndex: componentTheme.stackingAbove
@@ -404,7 +406,7 @@ const generateStyle = (
 
   const shadowVariants = {
     topmost: {
-      boxShadow: componentTheme.shadowTopmost
+      boxShadow: sharedTokens.boxShadow.elevation1
     },
     resting: {
       boxShadow: componentTheme.shadowResting
