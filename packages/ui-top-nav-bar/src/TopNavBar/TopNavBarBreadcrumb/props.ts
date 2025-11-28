@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import { ComponentElement } from 'react'
+import { ReactElement } from 'react'
 import type { ViewOwnProps } from '@instructure/ui-view'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import { TopNavBarContextType } from '../TopNavBarContext'
-import { ChildrenOfType, OtherHTMLAttributes } from '@instructure/shared-types'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 import TopNavBarBreadcrumb from './index'
 
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
 import type { BreadcrumbProps } from '@instructure/ui-breadcrumb'
 
 type TopNavBarBreadcrumbProps = TopNavBarBreadcrumbOwnProps &
@@ -47,7 +46,7 @@ type TopNavBarBreadcrumbOwnProps = {
   /**
    * The children to be rendered within the `<TopNavBarBreadcrumb />`. Children must be type of `Breadcrumb`.
    */
-  children: ChildrenOfType<ComponentElement<BreadcrumbProps, Breadcrumb>>
+  children: ReactElement<BreadcrumbProps>
 
   /**
    * A callback function to be called, if the user clicks on the hamburger icon.
