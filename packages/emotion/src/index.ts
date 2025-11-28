@@ -26,6 +26,8 @@
 export * from '@emotion/react'
 
 export { InstUISettingsProvider } from './InstUISettingsProvider'
+export { withStyleRework } from './withStyleRework'
+export { getComponentThemeOverride } from './getComponentThemeOverride'
 export { withStyle } from './withStyle'
 export {
   ThemeablePropValues,
@@ -33,14 +35,17 @@ export {
   getShorthandPropValue,
   mirrorShorthandCorners,
   mirrorShorthandEdges,
-  mapSpacingToShorthand
+  calcMarginFromShorthand,
+  calcFocusOutlineStyles
 } from './styleUtils'
 
+export { useStyleRework } from './useStyleRework'
 export { useStyle } from './useStyle'
 export { useTheme } from './useTheme'
 
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
+export type { WithStyleProps } from './withStyleRework'
+export type { ThemeOverrideValue } from './useStyle'
 export type {
   SpacingValues,
   Spacing,

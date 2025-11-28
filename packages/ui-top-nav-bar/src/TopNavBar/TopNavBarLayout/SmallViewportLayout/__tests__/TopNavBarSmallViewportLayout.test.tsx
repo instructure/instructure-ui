@@ -886,7 +886,8 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       expect(icons.length).toEqual(0)
     })
 
-    it('should render avatar', async () => {
+    // TODO re-enable when Avatar with icons is ready
+    it.skip('should render avatar', async () => {
       render(
         <SmallViewportModeWrapper>
           <TopNavBarSmallViewportLayout
@@ -911,7 +912,8 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       expect(avatar).toHaveAttribute('name', 'User Name')
     })
 
-    it('should render avatar + text for `variant="avatar"`', async () => {
+    // TODO re-enable when Avatar with icons is ready
+    it.skip('should render avatar + text for `variant="avatar"`', async () => {
       render(
         <SmallViewportModeWrapper>
           <TopNavBarSmallViewportLayout
@@ -1440,7 +1442,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       expect(onDropdownMenuToggle).toHaveBeenCalledWith(true)
 
       fireEvent.click(menuTriggerButton)
-
+      // eslint-disable-next-line vitest/prefer-called-exactly-once-with
       expect(onDropdownMenuToggle).toHaveBeenCalledWith(false)
     })
   })

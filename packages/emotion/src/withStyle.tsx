@@ -46,10 +46,11 @@ import type {
 import type {
   ComponentStyle,
   ComponentOverride,
-  GenerateComponentTheme,
-  GenerateStyle,
+  GenerateStyleRework,
   Props
 } from './EmotionTypes'
+
+import type { NewComponentTypes, Theme } from '@instructure/ui-themes'
 
 // Extract is needed because it would allow number otherwise
 // https://stackoverflow.com/a/51808262/319473
@@ -102,9 +103,8 @@ const defaultValues = {
  * ```js-code
  * import { withStyle } from '@instructure/emotion'
  * import generateStyle from './styles'
- * import generateComponentTheme from './theme'
  *
- * export default withStyle(generateStyle, generateComponentTheme)(ExampleComponent)
+ * export default withStyle(generateStyle)(ExampleComponent)
  * ```
  *
  * Themeable components inject their themed styles into the document
@@ -122,24 +122,6 @@ const defaultValues = {
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
  *
  * See more about the overrides on the [Using theme overrides](/#using-theme-overrides) docs page.
- *
- * ```js-code
- * // ExampleComponent/theme.js
- * const generateComponentTheme = (theme) => {
- *   const { colors } = theme
- *
- *   const componentVariables = {
- *     background: colors?.backgroundMedium,
- *     color: colors?.textDarkest,
- *
- *     hoverColor: colors?.textLightest,
- *     hoverBackground: colors?.backgroundDarkest
- *   }
- *
- *   return componentVariables
- * }
- * export default generateComponentTheme
- * ```
  *
  * ```jsx-code
  * {// global theme override}
@@ -160,26 +142,24 @@ const defaultValues = {
  * @module withStyle
  *
  * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
  * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
   (
     ComposedComponent: WithStyleComponent,
-    generateStyle: GenerateStyle,
-    generateComponentTheme: GenerateComponentTheme
+    generateStyle: GenerateStyleRework,
+    useTokensFrom?: keyof NewComponentTypes
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
     > & {
-      generateComponentTheme?: GenerateComponentTheme
       allowedProps?: string[]
       originalType?: WithStyleComponent
       defaultProps?: Partial<any>
     } = forwardRef((props, ref) => {
-      const theme = useTheme()
+      const theme = useTheme() as Theme
 
       if (props.styles) {
         warn(
@@ -202,29 +182,39 @@ const withStyle = decorator(
         ...defaultValues
       }
 
-      let componentTheme: ComponentTheme =
-        typeof generateComponentTheme === 'function'
-          ? generateComponentTheme(theme as BaseTheme)
-          : {}
+      const componentWithTokensId = useTokensFrom ?? displayName
+
+      const baseComponentTheme =
+        theme.newTheme.components[
+          componentWithTokensId as keyof NewComponentTypes
+        ]
 
       const themeOverride = getComponentThemeOverride(
         theme,
         displayName,
         ComposedComponent.componentId,
-        componentProps,
-        componentTheme
+        (componentProps as any).themeOverride,
+        baseComponentTheme
       )
 
-      componentTheme = { ...componentTheme, ...themeOverride }
+      const componentTheme = { ...baseComponentTheme, ...themeOverride }
 
       const [styles, setStyles] = useState(
-        generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}
+        generateStyle
+          ? generateStyle(
+              componentTheme,
+              componentProps,
+              (theme as Theme).newTheme.components.SharedTokens,
+              {}
+            )
+          : {}
       )
 
       const makeStyleHandler: WithStyleProps['makeStyles'] = (extraArgs) => {
         const calculatedStyles = generateStyle(
           componentTheme,
           componentProps,
+          (theme as Theme).newTheme.components.SharedTokens,
           extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
@@ -256,9 +246,6 @@ const withStyle = decorator(
     // These static fields exist on InstUI components
     WithStyle.allowedProps = ComposedComponent.allowedProps
 
-    // we are exposing the theme generator for the docs generation
-    WithStyle.generateComponentTheme = generateComponentTheme
-
     // we have to add defaults to makeStyles and styles added by this decorator
     // eslint-disable-next-line no-param-reassign
     ComposedComponent.defaultProps = {
@@ -277,4 +264,4 @@ const withStyle = decorator(
 
 export default withStyle
 export { withStyle }
-export type { WithStyleProps }
+export type { WithStyleProps, ThemeOverrideProp }

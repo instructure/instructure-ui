@@ -80,6 +80,9 @@
       "path": "../ui-date-time-input/tsconfig.build.json"
     },
     {
+      "path": "../ui-decorator/tsconfig.build.json"
+    },
+    {
       "path": "../ui-dialog/tsconfig.build.json"
     },
     {
@@ -120,6 +123,9 @@
     },
     {
       "path": "../ui-icons/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-icons-lucide/tsconfig.build.json"
     },
     {
       "path": "../ui-img/tsconfig.build.json"

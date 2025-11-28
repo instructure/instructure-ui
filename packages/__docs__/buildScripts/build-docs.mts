@@ -27,8 +27,12 @@ import path from 'path'
 import { getClientProps } from './utils/getClientProps.mjs'
 import { processFile } from './processFile.mjs'
 import fs from 'fs'
-import { theme as canvasTheme } from '@instructure/canvas-theme'
-import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
+import {
+  canvas,
+  canvasHighContrast,
+  rebrandDark,
+  rebrandLight
+} from '@instructure/ui-themes'
 import type {
   LibraryOptions,
   MainDocsData,
@@ -255,14 +259,10 @@ function tryParseReadme(dirName: string) {
 
 function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
-  parsed[canvasTheme.key] = {
-    resource: canvasTheme,
-    requirePath: '@instructure/canvas-theme'
-  }
-  parsed[canvasHighContrastTheme.key] = {
-    resource: canvasHighContrastTheme,
-    requirePath: '@instructure/canvas-high-contrast-theme'
-  }
+  parsed[canvas.key] = { resource: canvas }
+  parsed[canvasHighContrast.key] = { resource: canvasHighContrast }
+  parsed[rebrandLight.key] = { resource: rebrandLight }
+  parsed[rebrandDark.key] = { resource: rebrandDark }
   return parsed
 }
 

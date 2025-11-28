@@ -35,7 +35,7 @@ import { IconGithubSolid, IconCheckMarkSolid } from '@instructure/ui-icons'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

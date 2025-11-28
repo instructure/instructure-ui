@@ -22,14 +22,7 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@instructure/ui-themes'
-// eslint-disable-next-line no-restricted-imports
-import type { ThemeFunctionsFunctional } from './src/App/props'
-
-const themes: ThemeFunctionsFunctional = {
-  // TODO figure out subcomponents e.g.: Table.Cell
-  Avatar: async (theme: Theme) =>
-    (await import('@instructure/ui-avatar/src/Avatar/theme')).default(theme)
+module.exports = function (api) {
+  api.cache(true)
+  return require('@instructure/ui-babel-preset')(api)
 }
-
-export default themes

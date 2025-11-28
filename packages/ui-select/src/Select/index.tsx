@@ -59,7 +59,7 @@ import type {
   SelectableRender
 } from '@instructure/ui-selectable'
 
-import { withStyle, BorderWidth } from '@instructure/emotion'
+import { withStyleRework as withStyle, BorderWidth } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

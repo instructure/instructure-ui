@@ -29,10 +29,9 @@ import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import generateStyle from './styles'
-import functionalComponentThemes from '../../functionalComponentThemes'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -76,21 +75,25 @@ class Document extends Component<DocumentProps, DocumentState> {
     const { doc, themeVariables } = this.props
     let generateTheme
     if (this.state.selectedDetailsTabId === doc.id) {
-      generateTheme = doc?.componentInstance?.generateComponentTheme
+      // @ts-ignore todo type
+      if (this.props.themeVariables.components?.[doc.id]) {
+        // new theme
+        // @ts-ignore todo type
+        generateTheme = this.props.themeVariables.components[doc.id]
+        this.setState({ componentTheme: generateTheme })
+        return
+      } else {
+        // old theme
+        generateTheme = doc?.componentInstance?.generateComponentTheme
+      }
     } else {
       generateTheme = doc?.children?.find(
         (value) => value.id === this.state.selectedDetailsTabId
       )?.componentInstance?.generateComponentTheme
     }
-    const generateThemeFunctional =
-      functionalComponentThemes[
-        doc.id as keyof typeof functionalComponentThemes
-      ]
     if (typeof generateTheme === 'function' && themeVariables) {
+      // @ts-ignore todo type
       this.setState({ componentTheme: generateTheme(themeVariables) })
-    } else if (generateThemeFunctional && themeVariables) {
-      const componentTheme = await generateThemeFunctional(themeVariables)
-      this.setState({ componentTheme: componentTheme })
     } else {
       this.setState({ componentTheme: undefined })
     }
@@ -99,6 +102,7 @@ class Document extends Component<DocumentProps, DocumentState> {
   componentDidUpdate(prevProps: typeof this.props, prevState: DocumentState) {
     this.props.makeStyles?.()
     if (
+      // @ts-ignore todo check
       this.props.themeVariables?.key !== prevProps.themeVariables?.key ||
       this.state.selectedDetailsTabId != prevState.selectedDetailsTabId
     ) {
@@ -138,12 +142,18 @@ class Document extends Component<DocumentProps, DocumentState> {
           <View as="div" margin="0 0 x-small 0">
             See which global theme variables are mapped to the component here:{' '}
             {this.renderThemeLink(doc)}
+            <br />
+            <br />
+            Note: Theme variables with a dot in their name are nested objects,
+            to override them you need to override the whole object, for example:
+            &nbsp;
+            <code>
+              themeOverride=
+              {`{{ boxShadow: {x: "0.3rem", y: "0.5rem", color: "red"}}}`}
+            </code>
           </View>
         ) : null}
-        <ComponentTheme
-          componentTheme={componentTheme}
-          themeVariables={themeVariables}
-        />
+        <ComponentTheme componentTheme={componentTheme} />
 
         <View margin="x-large 0 0" display="block">
           <Heading

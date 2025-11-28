@@ -24,34 +24,21 @@
 
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  ThemeOverrideValue
 } from '@instructure/emotion'
-import type {
-  AsElementType,
-  OtherHTMLAttributes,
-  SpinnerTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
   /**
-   * Render Spinner "as" another HTML element
-   */
-  as?: AsElementType
-  /**
    * delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times
    */
   delay?: number
   /**
-   * provides a reference to the underlying html root element
-   */
-  elementRef?: (element: Element | null) => void
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   * Valid values are from themes. See theme.semantics.spacing. Apply these values via
+   * familiar CSS-like shorthand. For an example see `theme.sharedTokens.spacing`.
    */
   margin?: Spacing
   /**
@@ -72,27 +59,22 @@ type PropKeys = keyof SpinnerOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SpinnerProps = SpinnerOwnProps &
-  WithStyleProps<SpinnerTheme, SpinnerStyle> &
-  OtherHTMLAttributes<SpinnerOwnProps> &
+type SpinnerProps = SpinnerOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<SpinnerOwnProps> &
   WithDeterministicIdProps
 
-type SpinnerState = {
-  shouldRender: boolean
-}
-
 type SpinnerStyle = ComponentStyle<
-  'spinner' | 'circle' | 'circleTrack' | 'circleSpin'
+  'spinner' | 'circle' | 'circleTrack' | 'circleSpin' | 'radius'
 >
+
 const allowedProps: AllowedPropKeys = [
   'delay',
   'renderTitle',
   'size',
   'variant',
-  'margin',
-  'elementRef',
-  'as'
+  'margin'
 ]
 
-export type { SpinnerProps, SpinnerState, SpinnerStyle }
+export type { SpinnerProps, SpinnerStyle }
 export { allowedProps }

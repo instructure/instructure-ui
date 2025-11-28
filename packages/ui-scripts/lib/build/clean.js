@@ -24,6 +24,8 @@
 
 import fs from 'fs'
 
+// TODO merge this with/scripts/clean.js
+
 export default {
   command: 'clean',
   desc: 'Delete generated files and build outputs',
@@ -37,7 +39,8 @@ export default {
       '.babel-cache',
       '.cache',
       'types',
-      'tsconfig.build.tsbuildinfo'
+      'tsconfig.build.tsbuildinfo',
+      'src/themes/newThemes'
     ]
     for (const dir of dirs) {
       if (fs.existsSync(dir)) {

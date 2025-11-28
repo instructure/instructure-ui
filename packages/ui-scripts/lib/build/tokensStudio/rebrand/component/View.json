@@ -1,0 +1,156 @@
+{
+  "view": {
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "color": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "colorPrimaryInverse": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "borderColorPrimary": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderColorSecondary": {
+      "value": "{color.stroke.muted}",
+      "type": "color"
+    },
+    "borderColorSuccess": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "borderColorBrand": {
+      "value": "{color.stroke.brand}",
+      "type": "color"
+    },
+    "borderColorInfo": {
+      "value": "{color.stroke.info}",
+      "type": "color"
+    },
+    "borderColorAlert": {
+      "value": "{color.stroke.info}",
+      "type": "color"
+    },
+    "borderColorWarning": {
+      "value": "{color.stroke.warning}",
+      "type": "color"
+    },
+    "borderColorDanger": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "borderColorTransparent": {
+      "value": "#00000000",
+      "type": "color"
+    },
+    "debugOutlineColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "backgroundPrimary": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "backgroundSecondary": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundPrimaryInverse": {
+      "value": "{color.background.dark}",
+      "type": "color"
+    },
+    "backgroundBrand": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "backgroundInfo": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "backgroundAlert": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "backgroundSuccess": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "backgroundDanger": {
+      "value": "{color.background.error}",
+      "type": "color"
+    },
+    "backgroundWarning": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "xSmallMaxWidth": {
+      "value": "{size.breakpoints.xs}",
+      "type": "sizing"
+    },
+    "smallMaxWidth": {
+      "value": "{size.breakpoints.sm}",
+      "type": "sizing"
+    },
+    "mediumMaxWidth": {
+      "value": "{size.breakpoints.md}",
+      "type": "sizing"
+    },
+    "largeMaxWidth": {
+      "value": "{size.breakpoints.lg}",
+      "type": "sizing"
+    },
+    "focusOutlineStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "focusOutlineWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "focusOutlineOffset": {
+      "value": "0.3125rem",
+      "type": "spacing"
+    },
+    "focusOutlineInset": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "focusColorInfo": {
+      "value": "{color.stroke.interactive.focusRing.base}",
+      "type": "color"
+    },
+    "focusColorDanger": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "focusColorSuccess": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "focusColorInverse": {
+      "value": "{color.stroke.interactive.focusRing.onColor}",
+      "type": "color"
+    },
+    "stackingTopmost": {
+      "value": "999",
+      "type": "number"
+    },
+    "stackingAbove": {
+      "value": "1",
+      "type": "number"
+    },
+    "stackingBelow": {
+      "value": "-1",
+      "type": "number"
+    },
+    "stackingDeepest": {
+      "value": "-999",
+      "type": "number"
+    }
+  }
+}

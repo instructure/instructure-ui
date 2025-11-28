@@ -1,0 +1,72 @@
+{
+  "badge": {
+    "borderRadius": {
+      "value": "{borderRadius.full}",
+      "type": "borderRadius"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "baseTextColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "onColorTextColor": {
+      "value": "{color.text.dark}",
+      "type": "color"
+    },
+    "errorBackgroundColor": {
+      "value": "{color.background.error}",
+      "type": "color"
+    },
+    "successBackgroundColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "infoBackgroundColor": {
+      "value": "{color.background.info}",
+      "type": "color"
+    },
+    "warningBackgroundColor": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "dotSize": {
+      "value": "0.75rem",
+      "type": "sizing"
+    },
+    "onColorBackgroundColor": {
+      "value": "{color.background.onColor}",
+      "type": "color"
+    },
+    "maxHeight": {
+      "value": "1.25rem",
+      "type": "sizing"
+    },
+    "minWidth": {
+      "value": "1.25rem",
+      "type": "sizing"
+    },
+    "iconVariantSize": {
+      "value": "1.25rem",
+      "type": "sizing"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.standalone.textSm}",
+      "type": "lineHeights"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    }
+  }
+}

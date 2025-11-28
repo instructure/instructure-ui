@@ -25,5 +25,6 @@
 export { DeterministicIdContextProvider } from './DeterministicIdContextProvider'
 export { DeterministicIdContext } from './DeterministicIdContext'
 export { withDeterministicId } from './withDeterministicId'
+export { useDeterministicId } from './useDeterministicId'
 export type { DeterministicIdProviderValue } from './DeterministicIdContextProvider'
 export type { WithDeterministicIdProps } from './withDeterministicId'

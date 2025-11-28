@@ -21,15 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { Spacing } from './ThemeablePropValues'
 
-export function mapSpacingToShorthand(
-  value: Spacing | undefined,
-  spacingMap: { [key: string]: string }
-) {
-  const splitMargin = value?.split(' ')
-  const cssMargin = splitMargin
-    ? splitMargin.map((m: string) => spacingMap[m] || m).join(' ')
-    : '0'
-  return cssMargin
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { promises } from 'fs'
+import pkg from 'glob'
+import setupThemes from './buildThemes/setupThemes.js'
+
+const { glob } = pkg
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+export default {
+  command: 'build-themes',
+  desc: 'Generate themes',
+  handler: async () => {
+    const tokensStudioDir = path.join(__dirname, 'tokensStudio')
+    const jsonFiles = glob.sync('**/*.json', { cwd: tokensStudioDir })
+
+    const themeTokens = {}
+    for (const filePath of jsonFiles) {
+      const fullPath = path.join(tokensStudioDir, filePath)
+      const rawData = await promises.readFile(fullPath, 'utf8')
+      const relativePath = filePath.replace('.json', '')
+      themeTokens[relativePath] = JSON.parse(rawData)
+    }
+
+    await setupThemes('packages/ui-themes/src/themes/newThemes', themeTokens)
+  }
 }

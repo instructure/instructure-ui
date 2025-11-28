@@ -35,7 +35,10 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
+import {
+  withStyleRework as withStyle,
+  InstUISettingsProvider
+} from '@instructure/emotion'
 
 import {
   IconArrowOpenDownSolid,
