@@ -127,6 +127,7 @@ type: embed
 | RadioInput | onClick | `(event: React.MouseEvent<HTMLInputElement>) => void` | No | - |  |
 | RadioInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>) => void` | No | - | Callback fired when the input fires a change event. event.target.value will contain the new value. It will always be a string. |
 | RadioInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
+| RadioInput | themeOverride | `ThemeOverrideValue` | No | - |  |
 
 ### Usage
 
