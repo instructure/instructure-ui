@@ -1377,31 +1377,31 @@
     "y": {
       "elevation1": {
         "dropshadow1": {
-          "value": "1px",
+          "value": "0.0625rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "1px",
+          "value": "0.0625rem",
           "type": "sizing"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "1px",
+          "value": "0.1875rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "1px",
+          "value": "0.1875rem",
           "type": "sizing"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "3px",
+          "value": "0.1875rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "3px",
+          "value": "0.1875rem",
           "type": "sizing"
         }
       },
@@ -1419,31 +1419,31 @@
     "blur": {
       "elevation1": {
         "dropshadow1": {
-          "value": "3px",
+          "value": "0.125rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "2px",
+          "value": "0.1875rem",
           "type": "sizing"
         }
       },
       "elevation2": {
         "dropshadow1": {
-          "value": "3px",
+          "value": "0.375rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "2px",
+          "value": "0.375rem",
           "type": "sizing"
         }
       },
       "elevation3": {
         "dropshadow1": {
-          "value": "6px",
+          "value": "0.375rem",
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "6px",
+          "value": "0.375rem",
           "type": "sizing"
         }
       },
