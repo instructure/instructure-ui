@@ -109,7 +109,6 @@ const parseType = (key, tokenObject, acc) => {
       case 'fontFamilies':
       case 'fontSizes':
       case 'letterSpacing':
-      case 'number':
       case 'paragraphSpacing':
       case 'sizing':
       case 'spacing':
@@ -121,6 +120,9 @@ const parseType = (key, tokenObject, acc) => {
       case 'opacity':
       case 'other':
         ret += 'string | number'
+        break
+      case 'number':
+        ret += 'number'
         break
       case 'boxShadow': {
         if (Array.isArray(tokenObject.value)) {
