@@ -41,35 +41,89 @@ type: example
 </Link>
 ```
 
-### Variant
-
-In order to make it easy to get the most commonly used links, we have the variant prop. It will set all the necessary styles (fontSize, lineHeight, and textDecoration).
+If neither `href` nor `onClick` is provided, the Link will render as plain text (a `<span>` element) without interactive styling:
 
 ```js
 ---
 type: example
 ---
 <div>
-<div>
-In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+  <Text>This is a Link with no href or onClick: <Link>I look like plain text</Link></Text>
 </div>
+```
 
-<br></br>
-<div>
-<Text variant="contentSmall">In a line of text, where the text is smaller, use the <Link variant="inline-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline-small</Link> link variant
-</Text>
-</div>
+### Size
 
-<br></br>
-<div>
-If the link is standalone (not in a text), use the <code>standalone</code> <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
-</div>
+The `size` prop controls the font size, line height, and icon size, icon gap. Available sizes are `small`, `medium`, and `large`.
 
-<br></br>
+```js
+---
+type: example
+---
 <div>
-If the link is standalone (not in a text), but smaller, use the <code>standalone-small</code> <Link display="block" variant="standalone-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone-small</Link>
+  <div>
+    <Link renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/" size="small">
+      Link small
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Link renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/" size="medium">
+      Link medium
+    </Link>
+  </div>
+  <br />
+  <div>
+    <Link renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/" size="large">
+      Link large
+    </Link>
+  </div>
+  <br />
 </div>
+```
+
+### Variant
+
+The `variant` prop controls the text decoration and intended use case. Available variants are `inline` (underlined, for use within text) and `standalone` (no underline, for standalone links).
+
+Use the `variant` prop in combination with the `size` prop to control both the appearance and size of the link.
+
+```js
+---
+type: example
+---
+<div>
+  <div>
+    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
+  </div>
+  <br />
+  <div>
+    If the link is standalone (not in a text), use the <code>standalone</code> variant:
+    <Link display="block" variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+  </div>
 </div>
+```
+
+#### Deprecated variant values
+
+**The following variant values are deprecated and will be removed in a future version:**
+
+- `inline-small`
+- `standalone-small`
+
+These deprecated values are still supported for backward compatibility but will trigger console warnings. Please update your code to use the new `variant` + `size` prop combination.
+
+```js
+---
+type: code
+---
+// Deprecated (still works but triggers warning)
+<Link variant="inline-small" href="#">Link</Link>
+<Link variant="standalone-small" href="#">Link</Link>
+
+// Recommended
+<Link variant="inline" size="small" href="#">Link</Link>
+<Link variant="standalone" size="small" href="#">Link</Link>
 ```
 
 ### Adding margin
@@ -114,7 +168,7 @@ type: example
 <Link
   onClick={() => console.log('clicked')}
   isWithinText={false}
-  renderIcon={<IconUserLine size="small" />}
+  renderIcon={<DiamondInstUIIcon />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Link>
@@ -126,20 +180,18 @@ Use the `renderIcon` property to put an [icon](icons) inside a Link. To position
 icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
 render a Link with just an icon. Don't forget to add text for screen readers, though.
 
-NOTE: if you want the icon to have the same `font-size` as the link, do not specify its `size`!
-
 ```js
 ---
 type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
+    <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
       href="https://instructure.design"
-      renderIcon={<IconUserLine />}
+      renderIcon={<DiamondInstUIIcon />}
       iconPlacement="end"
     >
       Icon appears after Link text
@@ -147,7 +199,7 @@ type: example
   </View>
   <View as="div">
     This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} renderIcon={IconUserLine}>
+    <Link onClick={() => console.log('clicked!')} renderIcon={<DiamondInstUIIcon />}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
     </Link>.
   </View>
