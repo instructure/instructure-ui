@@ -366,7 +366,7 @@
     },
     "stroke": {
       "base": {
-        "value": "{color.grey.grey70}",
+        "value": "{color.grey.grey100}",
         "type": "color"
       },
       "muted": {
