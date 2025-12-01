@@ -6,6 +6,10 @@
           "value": "{size.size20}",
           "type": "sizing"
         },
+        "xs": {
+          "value": "{size.size24}",
+          "type": "sizing"
+        },
         "sm": {
           "value": "{size.size32}",
           "type": "sizing"
@@ -17,27 +21,54 @@
         "lg": {
           "value": "{size.size48}",
           "type": "sizing"
-        },
-        "xs": {
-          "value": "{size.size24}",
-          "type": "sizing"
         }
       }
     },
     "choiceControl": {
       "height": {
         "sm": {
-          "value": "{size.size16}",
+          "value": "{size.size24}",
           "type": "sizing"
         },
         "md": {
-          "value": "{size.size20}",
+          "value": "{size.size24}",
           "type": "sizing"
         },
         "lg": {
           "value": "{size.size24}",
           "type": "sizing"
         }
+      }
+    },
+    "breakpoints": {
+      "xxs": {
+        "value": "8em",
+        "type": "sizing"
+      },
+      "xs": {
+        "value": "16em",
+        "type": "sizing"
+      },
+      "sm": {
+        "value": "30em",
+        "type": "sizing"
+      },
+      "md": {
+        "value": "48em",
+        "type": "sizing",
+        "description": "Tablet"
+      },
+      "lg": {
+        "value": "62em",
+        "type": "sizing"
+      },
+      "desktop": {
+        "value": "64em",
+        "type": "sizing"
+      },
+      "xl": {
+        "value": "75em",
+        "type": "sizing"
       }
     }
   },
@@ -159,7 +190,7 @@
       "type": "borderRadius"
     },
     "full": {
-      "value": "999px",
+      "value": "999rem",
       "type": "borderRadius"
     },
     "container": {
@@ -213,7 +244,7 @@
       "type": "fontFamilies"
     },
     "base": {
-      "value": "{fontFamily.Atkinson}",
+      "value": "{fontFamily.atkinson}",
       "type": "fontFamilies"
     },
     "code": {
@@ -260,6 +291,10 @@
       "textBase": {
         "value": "{size.size24}",
         "type": "lineHeights"
+      },
+      "base": {
+        "value": "150%",
+        "type": "lineHeights"
       }
     },
     "standalone": {
@@ -294,6 +329,10 @@
       "text4xl": {
         "value": "{size.size36}",
         "type": "lineHeights"
+      },
+      "base": {
+        "value": "125%",
+        "type": "lineHeights"
       }
     },
     "heading": {
@@ -311,6 +350,20 @@
       },
       "text3xl": {
         "value": "{size.size40}",
+        "type": "lineHeights"
+      },
+      "base": {
+        "value": "125%",
+        "type": "lineHeights"
+      },
+      "loose": {
+        "value": "150%",
+        "type": "lineHeights"
+      }
+    },
+    "label": {
+      "base": {
+        "value": "1.125rem",
         "type": "lineHeights"
       }
     }
@@ -333,19 +386,11 @@
       "type": "fontSizes"
     },
     "textXl": {
-      "value": "{size.size24}",
-      "type": "fontSizes"
-    },
-    "text2xl": {
       "value": "{size.size28}",
       "type": "fontSizes"
     },
-    "text3xl": {
-      "value": "{size.size32}",
-      "type": "fontSizes"
-    },
-    "text4xl": {
-      "value": "{size.size36}",
+    "text2xl": {
+      "value": "{size.size40}",
       "type": "fontSizes"
     }
   },

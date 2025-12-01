@@ -2,6 +2,14 @@
   "size": {
     "interactive": {
       "height": {
+        "xxs": {
+          "value": "{size.size20}",
+          "type": "sizing"
+        },
+        "xs": {
+          "value": "{size.size24}",
+          "type": "sizing"
+        },
         "sm": {
           "value": "{size.size28}",
           "type": "sizing"
@@ -12,14 +20,6 @@
         },
         "lg": {
           "value": "{size.size48}",
-          "type": "sizing"
-        },
-        "xxs": {
-          "value": "{size.size20}",
-          "type": "sizing"
-        },
-        "xs": {
-          "value": "{size.size24}",
           "type": "sizing"
         }
       }
@@ -38,6 +38,37 @@
           "value": "{size.size28}",
           "type": "sizing"
         }
+      }
+    },
+    "breakpoints": {
+      "xxs": {
+        "value": "8em",
+        "type": "sizing"
+      },
+      "xs": {
+        "value": "16em",
+        "type": "sizing"
+      },
+      "sm": {
+        "value": "30em",
+        "type": "sizing"
+      },
+      "md": {
+        "value": "48em",
+        "type": "sizing",
+        "description": "Tablet"
+      },
+      "lg": {
+        "value": "62em",
+        "type": "sizing"
+      },
+      "desktop": {
+        "value": "64em",
+        "type": "sizing"
+      },
+      "xl": {
+        "value": "75em",
+        "type": "sizing"
       }
     }
   },
@@ -159,7 +190,7 @@
       "type": "borderRadius"
     },
     "full": {
-      "value": "999px",
+      "value": "999rem",
       "type": "borderRadius"
     },
     "container": {
@@ -217,7 +248,7 @@
       "type": "fontFamilies"
     },
     "code": {
-      "value": "{fontFamily.lato}",
+      "value": "{fontFamily.menlo}",
       "type": "fontFamilies"
     }
   },
@@ -234,7 +265,7 @@
     },
     "heading": {
       "base": {
-        "value": "{fontWeight.semiBold}",
+        "value": "{fontWeight.regular}",
         "type": "fontWeights"
       },
       "strong": {
@@ -259,6 +290,10 @@
       },
       "textBase": {
         "value": "{size.size24}",
+        "type": "lineHeights"
+      },
+      "base": {
+        "value": "150%",
         "type": "lineHeights"
       }
     },
@@ -294,6 +329,10 @@
       "text4xl": {
         "value": "{size.size36}",
         "type": "lineHeights"
+      },
+      "base": {
+        "value": "125%",
+        "type": "lineHeights"
       }
     },
     "heading": {
@@ -312,6 +351,20 @@
       "text3xl": {
         "value": "{size.size40}",
         "type": "lineHeights"
+      },
+      "base": {
+        "value": "125%",
+        "type": "lineHeights"
+      },
+      "loose": {
+        "value": "150%",
+        "type": "lineHeights"
+      }
+    },
+    "label": {
+      "base": {
+        "value": "1.125rem",
+        "type": "lineHeights"
       }
     }
   },
@@ -329,23 +382,15 @@
       "type": "fontSizes"
     },
     "textLg": {
-      "value": "{size.size20}",
+      "value": "1.375rem",
       "type": "fontSizes"
     },
     "textXl": {
-      "value": "{size.size24}",
-      "type": "fontSizes"
-    },
-    "text2xl": {
       "value": "{size.size28}",
       "type": "fontSizes"
     },
-    "text3xl": {
-      "value": "{size.size32}",
-      "type": "fontSizes"
-    },
-    "text4xl": {
-      "value": "{size.size36}",
+    "text2xl": {
+      "value": "2.375rem",
       "type": "fontSizes"
     }
   },

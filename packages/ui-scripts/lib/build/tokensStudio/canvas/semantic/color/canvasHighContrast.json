@@ -620,7 +620,7 @@
     },
     "text": {
       "base": {
-        "value": "{color.grey.grey180}",
+        "value": "{color.grey.grey170}",
         "type": "color"
       },
       "muted": {
@@ -632,7 +632,7 @@
         "type": "color"
       },
       "error": {
-        "value": "{color.red.red130}",
+        "value": "{color.red.red140}",
         "type": "color"
       },
       "warning": {
@@ -668,15 +668,15 @@
         },
         "input": {
           "base": {
-            "value": "{color.grey.grey180}",
+            "value": "{color.grey.grey170}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.grey.grey180}",
+            "value": "{color.grey.grey170}",
             "type": "color"
           },
           "readonly": {
-            "value": "{color.grey.grey180}",
+            "value": "{color.grey.grey170}",
             "type": "color"
           },
           "placeholder": {
@@ -960,7 +960,7 @@
         "type": "color"
       },
       "error": {
-        "value": "{color.red.red130}",
+        "value": "{color.red.red140}",
         "type": "color"
       },
       "warning": {
