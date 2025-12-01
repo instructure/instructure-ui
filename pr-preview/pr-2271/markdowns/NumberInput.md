@@ -153,7 +153,7 @@ You can see here most of the visual states of the component.
 ---
   type: example
 ---
-  <Flex gap='2rem' direction='column'>
+  <Flex gap='medium' direction='column'>
     <NumberInput
       renderLabel='normal'
       placeholder="placeholder"
@@ -169,7 +169,7 @@ You can see here most of the visual states of the component.
       placeholder="placeholder"
     />
     <NumberInput
-      renderLabel='has error'
+      renderLabel='with error message'
       placeholder="placeholder"
       messages={[{ text: 'This is an error.', type: 'error' }]}
     />
@@ -179,7 +179,7 @@ You can see here most of the visual states of the component.
       messages={[{ text: 'Great success!', type: 'success' }]}
     />
     <NumberInput
-      renderLabel='Large size. Default is "medium"'
+      renderLabel='large size (default is "medium")'
       placeholder="placeholder"
       size='large'
     />
