@@ -37,6 +37,7 @@ type: example
 | Metric | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Metric | renderValue | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
 | Metric | isGroupChild | `boolean` | No | - | Set to true when a child of MetricGroup so the appropriate aria labels get set |
+| Metric | themeOverride | `ThemeOverrideValue` | No | - |  |
 
 ### Usage
 
