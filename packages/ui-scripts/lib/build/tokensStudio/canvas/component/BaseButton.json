@@ -600,13 +600,28 @@
       "value": "{color.stroke.interactive.action.secondaryOnColor.hover}",
       "type": "color"
     },
+    "secondaryOnColorDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
+    },
     "secondaryOnColorActiveBorderColor": {
       "value": "{color.stroke.interactive.action.secondaryOnColor.active}",
       "type": "color"
     },
-    "secondaryOnColorDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.secondaryOnColor.disabled}",
-      "type": "color"
+    "secondaryGhostHoverBackground": {
+      "value": "{color.background.interactive.action.secondary.hover}",
+      "type": "color",
+      "description": "This token is not used in design, kept only for backward compatibility reasons."
+    },
+    "secondaryGhostBorderColor": {
+      "value": "{color.stroke.interactive.action.secondary.base}",
+      "type": "color",
+      "description": "This token is not used in design, kept only for backward compatibility reasons."
+    },
+    "secondaryGhostColor": {
+      "value": "{color.text.interactive.action.secondary.base}",
+      "type": "color",
+      "description": "This token is not used in design, kept only for backward compatibility reasons."
     },
     "borderRadiusFull": {
       "value": "{borderRadius.full}",

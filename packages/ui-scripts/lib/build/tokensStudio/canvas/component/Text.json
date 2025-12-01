@@ -45,31 +45,31 @@
       "type": "fontWeights"
     },
     "lineHeight": {
-      "value": "1.5",
+      "value": "150%",
       "type": "lineHeights"
     },
     "lineHeight100": {
-      "value": "1",
+      "value": "100%",
       "type": "lineHeights"
     },
     "lineHeight125": {
-      "value": "1.25",
+      "value": "125%",
       "type": "lineHeights"
     },
     "lineHeight150": {
-      "value": "1.5",
+      "value": "150%",
       "type": "lineHeights"
     },
     "lineHeightCondensed": {
-      "value": "1.25",
+      "value": "125%",
       "type": "lineHeights"
     },
     "lineHeightDouble": {
-      "value": "2",
+      "value": "200%",
       "type": "lineHeights"
     },
     "lineHeightFit": {
-      "value": "1.125",
+      "value": "112.5%",
       "type": "lineHeights"
     },
     "paragraphMargin": {
@@ -133,7 +133,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
         "fontSize": "{fontSize.textLg}",
-        "lineHeight": "{lineHeight.heading.textLg}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used for introductory or overview text that explains the purpose or context of an entire page."
@@ -143,7 +143,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
         "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.paragraph.textBase}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used for text that introduces or summarizes a specific section within a page."
@@ -153,7 +153,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
         "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.paragraph.textBase}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used for standard descriptive body text that provides detailed information."
@@ -163,7 +163,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.strong}",
         "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.paragraph.textBase}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used to highlight key statements or essential information within descriptive text."
@@ -173,7 +173,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "Medium Italic",
         "fontSize": "{fontSize.textBase}",
-        "lineHeight": "{lineHeight.paragraph.textBase}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used to style quoted or referenced text distinct from the main content."
@@ -183,7 +183,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
         "fontSize": "{fontSize.textSm}",
-        "lineHeight": "{lineHeight.paragraph.textSm}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used for fine-print or secondary descriptions such as notes or disclaimers."
@@ -193,7 +193,7 @@
         "fontFamily": "{fontFamily.base}",
         "fontWeight": "{fontWeight.body.base}",
         "fontSize": "{fontSize.textXs}",
-        "lineHeight": "{lineHeight.paragraph.textXs}"
+        "lineHeight": "{lineHeight.paragraph.base}"
       },
       "type": "typography",
       "description": "Used for short explanatory text accompanying data visualizations, icons, or UI elements."

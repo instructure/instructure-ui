@@ -166,7 +166,11 @@ const generateStyle = (
       overflow: 'hidden',
       verticalAlign: 'middle',
       ...spinnerSizes[size!],
-      margin: calcMarginFromShorthand(margin, sharedTokens.margin)
+      // TODO handle the merging on tokens inside the util
+      margin: calcMarginFromShorthand(margin, {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacySpacing
+      })
     },
     circle: {
       label: 'spinner__circle',
