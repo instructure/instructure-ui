@@ -27,8 +27,8 @@ dark backgrounds.
 ---
 type: example
 ---
-<View background="primary-inverse" as="div" margin="spacing.spaceXs" padding="spacing.spaceLg">
-  <Spinner renderTitle="Loading" variant="inverse" margin="spacing.spaceXs" />
+<View background="primary-inverse" as="div" >
+  <Spinner renderTitle="Loading" variant="inverse"  />
 </View>
 ```
 
@@ -57,7 +57,7 @@ The `renderTitle` prop is read to screen readers.
 type: example
 ---
 <div>
-  <Spinner renderTitle={() => "Hello world"} margin="spacing.spaceXs" />
+  <Spinner renderTitle={() => "Hello world"} />
 </div>
 ```
 
