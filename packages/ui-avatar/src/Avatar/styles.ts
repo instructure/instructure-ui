@@ -182,7 +182,11 @@ const generateStyle = (
       borderColor: componentTheme.borderColor,
       fontWeight: componentTheme.fontWeight,
       overflow: 'hidden',
-      margin: calcMarginFromShorthand(margin, sharedTokens.margin)
+      // TODO handle the merging on tokens inside the util
+      margin: calcMarginFromShorthand(margin, {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacySpacing
+      })
     },
     image: {
       label: 'avatar__image',

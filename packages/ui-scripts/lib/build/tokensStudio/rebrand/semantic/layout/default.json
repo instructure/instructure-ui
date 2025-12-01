@@ -355,6 +355,10 @@
       "base": {
         "value": "125%",
         "type": "lineHeights"
+      },
+      "loose": {
+        "value": "150%",
+        "type": "lineHeights"
       }
     },
     "label": {
