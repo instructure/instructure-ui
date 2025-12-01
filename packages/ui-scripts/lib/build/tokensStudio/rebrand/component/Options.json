@@ -1,0 +1,16 @@
+{
+  "options": {
+    "background": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "labelColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "labelFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    }
+  }
+}
