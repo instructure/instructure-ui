@@ -3287,6 +3287,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
       '@instructure/ui-tooltip':
         specifier: workspace:*
         version: link:../ui-tooltip
@@ -3315,9 +3318,6 @@ importers:
       '@instructure/ui-scripts':
         specifier: workspace:*
         version: link:../ui-scripts
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -4531,15 +4531,15 @@ importers:
       '@instructure/ui-form-field':
         specifier: workspace:*
         version: link:../ui-form-field
-      '@instructure/ui-icons':
-        specifier: workspace:*
-        version: link:../ui-icons
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
       '@instructure/ui-tag':
         specifier: workspace:*
         version: link:../ui-tag
+      '@instructure/ui-themes':
+        specifier: workspace:*
+        version: link:../ui-themes
     devDependencies:
       '@instructure/ui-axe-check':
         specifier: workspace:*
@@ -4553,9 +4553,6 @@ importers:
       '@instructure/ui-color-utils':
         specifier: workspace:*
         version: link:../ui-color-utils
-      '@instructure/ui-themes':
-        specifier: workspace:*
-        version: link:../ui-themes
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1

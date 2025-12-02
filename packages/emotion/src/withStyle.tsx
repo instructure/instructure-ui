@@ -199,6 +199,7 @@ const withStyle = decorator(
 
       const componentTheme = { ...baseComponentTheme, ...themeOverride }
 
+      // TODO do not call here generateStyle, it does not receive the extraArgs
       const [styles, setStyles] = useState(
         generateStyle
           ? generateStyle(

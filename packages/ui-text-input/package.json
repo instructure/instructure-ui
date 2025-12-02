@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-text-input",
-  "version": "11.6.0",
+  "version": "11.2.0",
   "description": "A styled HTML text input component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,6 +22,16 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-badge": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "15.0.7",
+    "@testing-library/user-event": "^14.6.1",
+    "vitest": "^3.2.2"
+  },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "workspace:*",
@@ -29,20 +39,9 @@
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-tag": "workspace:*"
-  },
-  "devDependencies": {
-    "@instructure/ui-axe-check": "workspace:*",
-    "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-badge": "workspace:*",
-    "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "15.0.7",
-    "@testing-library/user-event": "^14.6.1",
-    "vitest": "^3.2.2"
+    "@instructure/ui-tag": "workspace:*",
+    "@instructure/ui-themes": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"
@@ -50,18 +49,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    },
-    "./lib/*": "./lib/*",
-    "./es/*": "./es/*",
-    "./types/*": "./types/*",
-    "./package.json": "./package.json",
-    "./src/*": "./src/*"
-  }
+  "sideEffects": false
 }
