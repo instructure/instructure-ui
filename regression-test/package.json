@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@instructure/ui": "file:../packages/ui",
-    "next": "^15",
+    "next": "^15.5.7",
     "react": "^19.1",
     "react-dom": "^19.1"
   }

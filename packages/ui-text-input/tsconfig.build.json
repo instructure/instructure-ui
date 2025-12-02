@@ -35,9 +35,6 @@
       "path": "../ui-form-field/tsconfig.build.json"
     },
     {
-      "path": "../ui-icons/tsconfig.build.json"
-    },
-    {
       "path": "../ui-react-utils/tsconfig.build.json"
     },
     {
