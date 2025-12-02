@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Children, Component } from 'react'
+import { Children, Component, isValidElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -32,14 +32,14 @@ import {
   getInteraction,
   matchComponentTypes,
   passthroughProps,
-  callRenderProp
+  callRenderProp,
+  safeCloneElement
 } from '@instructure/ui-react-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
@@ -51,7 +51,7 @@ import type { ViewOwnProps } from '@instructure/ui-view'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 
@@ -84,10 +84,43 @@ class Link extends Component<LinkProps, LinkState> {
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
-  makeStyleProps = (): LinkStyleProps => {
+  makeStyleProps = (): LinkStyleProps & {
+    variant?: LinkProps['variant']
+    size?: LinkProps['size']
+  } => {
+    const { variant: variantProp, size: sizeProp } = this.props
+
+    // Handle deprecated variant values by mapping them to new variant + size props
+    let variant: 'inline' | 'standalone' | undefined = variantProp as any
+    let size = sizeProp
+
+    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
+      warn(
+        false,
+        `[Link] The variant value "${variantProp}" is deprecated. Use variant="${variantProp.replace(
+          '-small',
+          ''
+        )}" with size="small" instead.`
+      )
+      variant = variantProp.replace('-small', '') as 'inline' | 'standalone'
+      // Only set size from deprecated variant if size prop is not explicitly provided
+      if (!sizeProp) {
+        size = 'small'
+      }
+    } else if (
+      (variantProp === 'inline' || variantProp === 'standalone') &&
+      !sizeProp
+    ) {
+      // When using new variant values without explicit size, default to medium
+      // This maintains the old behavior where 'inline' and 'standalone' were medium-sized
+      size = 'medium'
+    }
+
     return {
       containsTruncateText: this.containsTruncateText,
-      hasVisibleChildren: this.hasVisibleChildren
+      hasVisibleChildren: this.hasVisibleChildren,
+      variant,
+      size
     }
   }
 
@@ -194,14 +227,58 @@ class Link extends Component<LinkProps, LinkState> {
   }
 
   renderIcon() {
+    const {
+      display,
+      renderIcon,
+      variant: variantProp,
+      size: sizeProp
+    } = this.props
+
     warn(
       // if display prop is used, warn about icon or TruncateText
-      this.props.display === undefined,
+      display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
+
+    // Determine the actual size being used (considering deprecated variants)
+    let size = sizeProp
+    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
+      size = sizeProp || 'small'
+    } else if (
+      (variantProp === 'inline' || variantProp === 'standalone') &&
+      !sizeProp
+    ) {
+      size = 'medium'
+    }
+
+    // Map Link sizes to Lucide icon semantic size tokens
+    const linkSizeToIconSize = {
+      small: 'xs',
+      medium: 'sm',
+      large: 'lg'
+    } as const
+
+    const iconSize = linkSizeToIconSize[size || 'medium']
+
+    // TODO use utility function for this in the furure
+    const isLucideIcon =
+      renderIcon &&
+      isValidElement(renderIcon) &&
+      (renderIcon as any).type?.displayName?.startsWith('wrapLucideIcon')
+
+    if (isLucideIcon) {
+      // Lucide icons - render with size prop
+      return (
+        <span css={this.props.styles?.icon}>
+          {safeCloneElement(renderIcon, { size: iconSize })}
+        </span>
+      )
+    }
+
+    // Non-Lucide icons or functions - render without size prop
     return (
       <span css={this.props.styles?.icon}>
-        {callRenderProp(this.props.renderIcon)}
+        {callRenderProp(renderIcon as any)}
       </span>
     )
   }
