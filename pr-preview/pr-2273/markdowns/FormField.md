@@ -60,6 +60,8 @@ type: example
 | FormField | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | FormField | isRequired | `boolean` | No | - | If `true`, displays an asterisk after the label to indicate the field is required |
 | FormField | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| FormField | disabled | `boolean` | No | - | Whether the field is disabled. When true, error and success messages will be hidden. |
+| FormField | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLabel | children | `React.ReactNode` | Yes | - |  |
 | FormField.FormFieldLabel | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` |  |
 | FormField.FormFieldLayout | label | `React.ReactNode` | Yes | - |  |
@@ -78,6 +80,8 @@ type: example
 | FormField.FormFieldLayout | isGroup | `boolean` | No | - |  |
 | FormField.FormFieldLayout | isRequired | `boolean` | No | - | If `true`, displays an asterisk after the label to indicate the field is required |
 | FormField.FormFieldLayout | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| FormField.FormFieldLayout | disabled | `boolean` | No | - | Whether the field is disabled. When true, error and success messages will be hidden. |
+| FormField.FormFieldLayout | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLayout | themeOverride | `ThemeOverrideValue` | No | - |  |
 | FormField.FormFieldMessage | variant | `\| 'newError' \| 'error' \| 'hint' \| 'success' \| 'screenreader-only'` | No | `'hint'` |  |
 | FormField.FormFieldMessage | children | `React.ReactNode` | No | - |  |
