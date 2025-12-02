@@ -1,0 +1,76 @@
+{
+  "rangeInput": {
+    "handleBackground": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "handleHoverBackground": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "handleBorderColor": {
+      "value": "{color.stroke.brand}",
+      "type": "color"
+    },
+    "handleBorderSize": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "handleFocusInset": {
+      "value": "{spacing.space2xs}",
+      "type": "spacing"
+    },
+    "trackBackground": {
+      "value": "{color.background.interactive.input.base}",
+      "type": "color"
+    },
+    "valueFontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "valueFontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "valueSmallFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "valueMediumFontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "valueFontSize": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "valueSmallPadding": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "valueMediumPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "valueLargePadding": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "smallLineHeight": {
+      "value": "1.75rem",
+      "type": "lineHeights"
+    },
+    "mediumLineHeight": {
+      "value": "2.375rem",
+      "type": "lineHeights"
+    },
+    "largeLineHeight-copy": {
+      "value": "3rem",
+      "type": "lineHeights"
+    },
+    "trackBorderColor": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    }
+  }
+}
