@@ -57,6 +57,9 @@ const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
 /**
  * new useStyle syntax, use this with v12 themes
  */
+
+// TODO: improve useStyle to handle generateStyle functions that don't
+// have a theme.
 const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   generateStyle: P
   params?: SecondParameter<P>

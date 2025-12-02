@@ -22,15 +22,12 @@
  * SOFTWARE.
  */
 
-import { Children, Component, ReactElement } from 'react'
+import { Children, forwardRef, ReactElement } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
-import { allowedProps } from './props'
 import type { MetricGroupProps } from './props'
 
 /**
@@ -38,52 +35,36 @@ import type { MetricGroupProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class MetricGroup extends Component<MetricGroupProps> {
-  static readonly componentId = 'MetricGroup'
+const MetricGroup = forwardRef<HTMLDivElement, MetricGroupProps>(
+  (props, ref) => {
+    const { children = null, ...rest } = props
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    children: null
-  }
+    const styles = generateStyle()
 
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  renderChildren() {
-    return Children.map(this.props.children, (child) => {
-      return safeCloneElement(child as ReactElement, {
-        isGroupChild: true
+    const renderChildren = () => {
+      return Children.map(children, (child) => {
+        return safeCloneElement(child as ReactElement, {
+          isGroupChild: true
+        })
       })
-    })
-  }
+    }
 
-  render() {
     return (
       <div
-        {...passthroughProps(this.props)}
-        css={this.props.styles?.metricGroup}
+        {...passthroughProps(rest)}
+        css={styles?.metricGroup}
         role="grid"
         aria-readonly="true"
-        ref={this.handleRef}
+        ref={ref}
         data-cid="MetricGroup"
       >
-        {this.renderChildren()}
+        {renderChildren()}
       </div>
     )
   }
-}
+)
+
+MetricGroup.displayName = 'MetricGroup'
 
 export default MetricGroup
 export { MetricGroup }

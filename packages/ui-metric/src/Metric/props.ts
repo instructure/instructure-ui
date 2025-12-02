@@ -28,16 +28,17 @@ import type {
   Renderable
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { ThemeOverrideValue } from '@instructure/emotion'
 
 type MetricOwnProps = {
-  textAlign: 'start' | 'center' | 'end'
+  textAlign?: 'start' | 'center' | 'end'
   renderLabel?: Renderable
   renderValue?: Renderable
   /**
    * Set to true when a child of MetricGroup so the appropriate
    * aria labels get set
    */
-  isGroupChild: boolean
+  isGroupChild?: boolean
 }
 
 type PropKeys = keyof MetricOwnProps
@@ -46,7 +47,9 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MetricProps = MetricOwnProps &
   WithStyleProps<MetricTheme, MetricStyle> &
-  OtherHTMLAttributes<MetricOwnProps>
+  OtherHTMLAttributes<MetricOwnProps> & {
+    themeOverride?: ThemeOverrideValue
+  }
 
 type MetricStyle = ComponentStyle<'metric' | 'label' | 'value'>
 const allowedProps: AllowedPropKeys = [

@@ -49,7 +49,16 @@ The new icons automatically sync with theme changes, support all InstUI color to
 ### Spinner
 
 - `as` prop has been removed, `Spinner` will always render as a `<div>` element.
-- `elementRef` prop has been removed, use the `ref` prop instead.
+- # `elementRef` prop has been removed, use the `ref` prop instead.
+
+### Metric
+
+- theme variable `padding` is now removed, left-right padding can be set now with the `paddingHorizontal` theme variable
+- theme variable `fontFamily` is now removed, font can be set independently on the value and label elements using the `valueFontFamily` and `labelFontFamily` variables respectively
+
+### MetricGroup
+
+- theme variable `lineHeight` is now removed.
 
 ## Codemods
 
