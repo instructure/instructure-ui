@@ -241,8 +241,8 @@ type: embed
 | Link | onClick | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is clicked |
 | Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
 | Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
-| Link | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the size of the link (font size, line height, and icon gap) |
 | Link | variant | `'inline' \| 'standalone' \| 'inline-small' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component - `inline` - `standalone` __Deprecated values:__ - `inline-small` - `standalone-small` |
+| Link | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the size of the link (font size, line height, and icon gap) |
 | Link | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
