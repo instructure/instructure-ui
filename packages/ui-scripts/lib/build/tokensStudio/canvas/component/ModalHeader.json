@@ -1,0 +1,12 @@
+{
+  "modalHeader": {
+    "padding": {
+      "value": "{spacing.gap.cards.md}",
+      "type": "spacing"
+    },
+    "paddingCompact": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}
