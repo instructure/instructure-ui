@@ -91,7 +91,7 @@ type LinkOwnProps = {
    * children.
    * When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size.
    */
-  renderIcon?: Renderable
+  renderIcon?: Renderable | Renderable<{ size?: string | number }>
 
   /**
    * Place the icon before or after the text in the Link.
