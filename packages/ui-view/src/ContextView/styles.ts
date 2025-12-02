@@ -302,7 +302,10 @@ const generateStyle = (
       label: 'contextView',
       boxSizing: 'border-box',
       minHeight: `calc(${componentTheme?.arrowSize} * 2)`,
-      ...getPlacementStyle(placement!, componentTheme)
+      // Use high specificity to prevent View's inlineStyles from overriding placement padding
+      '&&&&&&&&&&': {
+        ...getPlacementStyle(placement!, componentTheme)
+      }
     },
     contextView__content: {
       label: 'contextView__content',
