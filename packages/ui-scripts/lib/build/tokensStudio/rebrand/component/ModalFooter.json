@@ -9,11 +9,11 @@
       "type": "color"
     },
     "padding": {
-      "value": "{spacing.spaceXl}",
+      "value": "{spacing.padding.container.md}",
       "type": "spacing"
     },
     "paddingCompact": {
-      "value": "{spacing.spaceMd}",
+      "value": "{spacing.padding.container.xs}",
       "type": "spacing"
     }
   }
