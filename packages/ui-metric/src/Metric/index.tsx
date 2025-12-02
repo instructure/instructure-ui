@@ -22,15 +22,13 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { forwardRef } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
-import { allowedProps } from './props'
 import type { MetricProps } from './props'
 
 /**
@@ -38,58 +36,44 @@ import type { MetricProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Metric extends Component<MetricProps> {
-  static readonly componentId = 'Metric'
+const Metric = forwardRef<HTMLDivElement, MetricProps>((props, ref) => {
+  const {
+    textAlign = 'center',
+    renderLabel,
+    renderValue,
+    isGroupChild = false,
+    themeOverride
+  } = props
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    textAlign: 'center',
-    isGroupChild: false
-  }
+  const styles = useStyle({
+    generateStyle,
+    themeOverride,
+    params: {
+      textAlign
+    },
+    componentId: 'Metric',
+    displayName: 'Metric'
+  })
 
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  render() {
-    const { textAlign, renderLabel, renderValue, isGroupChild, ...rest } =
-      this.props
-
-    return (
-      <div
-        {...passthroughProps(rest)}
-        role={isGroupChild ? 'row' : undefined}
-        css={this.props.styles?.metric}
-        ref={this.handleRef}
-        data-cid="Metric"
-      >
-        <div
-          role={isGroupChild ? 'rowheader' : undefined}
-          css={this.props.styles?.label}
-        >
-          {callRenderProp(renderLabel)}
-        </div>
-        <div
-          role={isGroupChild ? 'gridcell' : undefined}
-          css={this.props.styles?.value}
-        >
-          {callRenderProp(renderValue)}
-        </div>
+  return (
+    <div
+      {...passthroughProps(props)}
+      role={isGroupChild ? 'row' : undefined}
+      css={styles?.metric}
+      ref={ref}
+      data-cid="Metric"
+    >
+      <div role={isGroupChild ? 'rowheader' : undefined} css={styles?.label}>
+        {callRenderProp(renderLabel)}
       </div>
-    )
-  }
-}
+      <div role={isGroupChild ? 'gridcell' : undefined} css={styles?.value}>
+        {callRenderProp(renderValue)}
+      </div>
+    </div>
+  )
+})
+
+Metric.displayName = 'Metric'
 
 export default Metric
 export { Metric }

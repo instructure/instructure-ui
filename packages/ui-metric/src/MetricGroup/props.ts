@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-import type {
-  MetricGroupTheme,
-  OtherHTMLAttributes
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { ComponentStyle } from '@instructure/emotion'
 
 type MetricGroupOwnProps = {
   /**
@@ -40,7 +37,6 @@ type PropKeys = keyof MetricGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MetricGroupProps = MetricGroupOwnProps &
-  WithStyleProps<MetricGroupTheme, MetricGroupStyle> &
   OtherHTMLAttributes<MetricGroupOwnProps>
 
 type MetricGroupStyle = ComponentStyle<'metricGroup'>
