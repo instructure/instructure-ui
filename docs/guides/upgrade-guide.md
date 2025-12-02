@@ -10,6 +10,43 @@ order: 1
 
 TODO add details
 
+## Link
+
+### New `size` prop
+
+A new `size` prop has been added to control the font size, line height, and icon size/gap. Available values are:
+
+- `'small'`
+- `'medium'` (default)
+- `'large'`
+
+### Deprecated variant values
+
+The following variant values have been **deprecated** and will be removed in a future version (still supported but warn):
+
+- `'inline-small'`
+- `'standalone-small'`
+
+
+### Theme variable changes
+
+- theme variable `fontSize` is now removed
+- theme variable `fontSizeSmall` is now removed
+- theme variable `lineHeight` is now removed
+- theme variable `color` has been renamed to `textColor`
+- theme variable `hoverColor` has been renamed to `textHoverColor`
+- theme variable `colorInverse` has been renamed to `onColorTextColor`
+- theme variable `focusOutlineWidth` is now removed
+- theme variable `focusOutlineStyle` is now removed
+- theme variable `focusOutlineColor` is now removed
+- theme variable `focusOutlineBorderRadius` is now removed
+- theme variable `focusInverseOutlineColor` is now removed
+- theme variable `focusInverseIconOutlineColor` is now removed
+- theme variable `iconSize` is now removed
+- theme variable `iconPlusTextMargin` is now removed
+- theme variable `iconPlusTextMarginSmall` is now removed
+- theme variable `textUnderlineOffset` is now removed
+
 ## New icons
 
 InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set (see below).
