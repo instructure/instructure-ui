@@ -28,18 +28,38 @@ type DeepStringRecord = {
 }
 
 /**
+ * Converts hyphen-case strings to camelCase
+ * Example: 'medium-small' -> 'mediumSmall'
+ */
+function camelize(str: string): string {
+  return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+}
+
+/**
  * Converts shorthand margin values into CSS margin strings using theme spacing tokens.
  *
  * This function parses space-separated margin values and resolves theme tokens to their
- * actual CSS values. It supports CSS shorthand syntax (1-4 values) and nested theme
- * token paths using dot notation.
+ * actual CSS values. It supports CSS shorthand syntax (1-4 values), nested theme
+ * token paths using dot notation, and automatically converts hyphen-case tokens to camelCase.
  *
  * @param {Spacing | undefined} value - The shorthand margin value string containing space-separated tokens or CSS values.
+ *   Tokens can be in camelCase (mediumSmall) or hyphen-case (medium-small).
  *   Can be undefined, in which case '0' is returned.
  * @param {Record<string, string>} spacingMap - The spacing theme object containing margin tokens and nested values.
  *   Typically comes from `sharedTokens.margin.spacing` in the component theme.
  *
  * @returns {string} The resolved CSS margin string ready to be used in styles.
+ *
+ * @example
+ * // Hyphen-case tokens are converted to camelCase
+ * calcMarginFromShorthand('medium-small', spacingMap) // resolves to spacingMap.mediumSmall
+ * calcMarginFromShorthand('x-large small', spacingMap) // resolves to spacingMap.xLarge + spacingMap.small
+ *
+ * // Dot notation paths are NOT converted
+ * calcMarginFromShorthand('gap.nested-value', spacingMap) // resolves to spacingMap.gap['nested-value']
+ *
+ * // CSS values like 'none', 'auto', '10px' are returned as-is
+ * calcMarginFromShorthand('none', spacingMap) // returns 'none'
  */
 export function calcMarginFromShorthand(
   value: Spacing | undefined,
@@ -51,20 +71,28 @@ export function calcMarginFromShorthand(
   const tokens = value.trim().split(' ')
 
   // Map each token to its resolved CSS value
-  const resolvedValues = tokens.map(token => {
-    // If the token is already a direct key in spacingMap, and it's a string, return its value
-    const directValue = spacingMap[token]
-    if (typeof directValue === 'string') {
-      return directValue
+  const resolvedValues = tokens.map((token) => {
+    // Handle special CSS value 'none' - convert to 0 for valid CSS
+    if (token === 'none') {
+      return '0'
     }
 
-    // Handle dot notation for nested theme token paths
+    // Handle valid CSS numeric and keyword values
+    if (token === '0' || token === 'auto') {
+      return token
+    }
+
+    // Handle dot notation for nested theme token paths (no camelization)
     if (token.includes('.')) {
       const path = token.split('.')
       let currentLevel: string | DeepStringRecord = spacingMap
 
       for (const key of path) {
-        if (currentLevel && typeof currentLevel === 'object' && key in currentLevel) {
+        if (
+          currentLevel &&
+          typeof currentLevel === 'object' &&
+          key in currentLevel
+        ) {
           currentLevel = currentLevel[key]
         } else {
           console.warn(`Theme token path "${token}" not found in theme.`)
@@ -76,6 +104,14 @@ export function calcMarginFromShorthand(
         return currentLevel
       }
     }
+
+    // For direct tokens, try camelized version
+    const camelizedToken = camelize(token)
+    const directValue = spacingMap[camelizedToken]
+    if (typeof directValue === 'string') {
+      return directValue
+    }
+
     // Return the original token if not found (could be a direct CSS value like 'auto', '10px', etc.)
     console.warn(`Theme token path "${token}" not found in theme.`)
     return token

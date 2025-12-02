@@ -24,7 +24,7 @@
 
 import { DIRECTION } from '@instructure/ui-i18n'
 import {
-  getShorthandPropValue,
+  calcMarginFromShorthand,
   mirrorShorthandEdges,
   mirrorShorthandCorners
 } from '@instructure/emotion'
@@ -36,31 +36,80 @@ import type { ViewProps, ViewStyle, BorderColor } from './props'
 import { alpha } from '@instructure/ui-color-utils'
 import { elevationTokenToBoxShadow } from '@instructure/ui-themes'
 
+const processBorderRadiusValue = (
+  value: string | undefined,
+  sharedTokens: SharedTokens
+): string => {
+  if (!value) return ''
+
+  // Split by spaces to handle CSS shorthand (1-4 values)
+  const values = value.split(' ')
+
+  const processedValues = values.map((v) => {
+    // Handle special cases
+    if (v === 'auto' || v === '0') return v
+    if (v === 'none') return '0'
+    if (v === 'circle') return '100%'
+    if (v === 'pill') return '999em'
+
+    // Handle SharedTokens values
+    if (v === 'small') return sharedTokens.radiusSmall
+    if (v === 'medium') return sharedTokens.radiusMedium
+    if (v === 'large') return sharedTokens.radiusLarge
+
+    // Pass through CSS values (1rem, 12px, etc.)
+    return v
+  })
+
+  return processedValues.join(' ')
+}
+
+const processBorderWidthValue = (
+  value: string | undefined,
+  sharedTokens: SharedTokens
+): string => {
+  if (!value) return ''
+
+  // Split by spaces to handle CSS shorthand (1-4 values)
+  const values = value.split(' ')
+
+  const processedValues = values.map((v) => {
+    // Handle special cases
+    if (v === 'auto' || v === '0') return v
+    if (v === 'none') return '0'
+
+    // Handle SharedTokens values
+    if (v === 'small') return sharedTokens.widthSmall
+    if (v === 'medium') return sharedTokens.widthMedium
+    if (v === 'large') return sharedTokens.widthLarge
+
+    // Pass through CSS values (1rem, 2px, etc.)
+    return v
+  })
+
+  return processedValues.join(' ')
+}
+
 const getBorderStyle = ({
   borderRadius,
   borderWidth,
   dir,
-  theme
+  sharedTokens
 }: {
-  theme: NewComponentTypes['View']
+  sharedTokens: SharedTokens
   borderRadius: ViewProps['borderRadius']
   borderWidth: ViewProps['borderWidth']
   dir: ViewProps['dir']
 }) => {
   const isRtlDirection = dir === DIRECTION.rtl
   return {
-    borderRadius: getShorthandPropValue(
-      'View',
-      theme,
+    borderRadius: processBorderRadiusValue(
       isRtlDirection ? mirrorShorthandCorners(borderRadius) : borderRadius,
-      'borderRadius',
-      true
+      sharedTokens
     ),
-    borderWidth: getShorthandPropValue(
-      'View',
-      theme,
+    borderWidth: processBorderWidthValue(
       isRtlDirection ? mirrorShorthandEdges(borderWidth) : borderWidth,
-      'borderWidth'
+      sharedTokens
     )
   }
 }
@@ -69,9 +118,9 @@ const getSpacingStyle = ({
   margin,
   padding,
   dir,
-  theme
+  sharedTokens
 }: {
-  theme: NewComponentTypes['View']
+  sharedTokens: SharedTokens
   margin: ViewProps['margin']
   padding: ViewProps['padding']
   dir: ViewProps['dir']
@@ -79,17 +128,20 @@ const getSpacingStyle = ({
   const isRtlDirection = dir === DIRECTION.rtl
 
   return {
-    margin: getShorthandPropValue(
-      'View',
-      theme,
+    // TODO handle the merging on tokens inside the util
+    margin: calcMarginFromShorthand(
       isRtlDirection ? mirrorShorthandEdges(margin) : margin,
-      'margin'
+      {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacySpacing
+      }
     ),
-    padding: getShorthandPropValue(
-      'View',
-      theme,
+    padding: calcMarginFromShorthand(
       isRtlDirection ? mirrorShorthandEdges(padding) : padding,
-      'padding'
+      {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacySpacing
+      }
     )
   }
 }
@@ -267,7 +319,7 @@ const generateStyle = (
     dir
   } = props
   const borderStyle = getBorderStyle({
-    theme: componentTheme,
+    sharedTokens,
     borderRadius,
     borderWidth,
     dir
@@ -275,7 +327,7 @@ const generateStyle = (
   const spacingStyle = getSpacingStyle({
     margin,
     padding,
-    theme: componentTheme,
+    sharedTokens,
     dir
   })
 
