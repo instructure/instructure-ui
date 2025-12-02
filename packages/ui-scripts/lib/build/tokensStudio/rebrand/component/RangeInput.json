@@ -53,7 +53,7 @@
       "type": "spacing"
     },
     "valueLargePadding": {
-      "value": "{spacing.spaceXl}",
+      "value": "{spacing.spaceLg}",
       "type": "spacing"
     },
     "smallLineHeight": {
