@@ -26,14 +26,13 @@ import React from 'react'
 import type { TextareaHTMLAttributes } from 'react'
 import type {
   OtherHTMLAttributes,
-  TextAreaTheme,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
 import type {
-  WithStyleProps,
   ComponentStyle,
-  Spacing
+  Spacing,
+  ThemeOverrideValue
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -125,17 +124,15 @@ type TextAreaProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    TextAreaOwnProps &
-    WithStyleProps<TextAreaTheme, TextAreaStyle> &
-    OtherHTMLAttributes<
+    TextAreaOwnProps & {
+      themeOverride?: ThemeOverrideValue
+    } & OtherHTMLAttributes<
       TextAreaOwnProps,
       TextareaHTMLAttributes<TextAreaOwnProps & Element>
     > &
     WithDeterministicIdProps
 
-type TextAreaStyle = ComponentStyle<
-  'textArea' | 'textAreaLayout' | 'textAreaOutline' | 'requiredInvalid'
->
+type TextAreaStyle = ComponentStyle<'textArea' | 'textAreaLayout'>
 const allowedProps: AllowedPropKeys = [
   'label',
   'id',

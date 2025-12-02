@@ -60,6 +60,62 @@ The new icons automatically sync with theme changes, support all InstUI color to
 
 - theme variable `lineHeight` is now removed.
 
+### FormFieldGroup
+
+- theme variable `errorBorderColor` is now removed
+- theme variable `errorFieldsPaddin` is now removed
+
+### FormFieldLayout
+
+- theme variable `spacing` is now removed
+- theme variable `color` has been renamed to `textColor`
+- theme variable `inlinePadding` is now removed
+- theme variable `asteriskColor` is now removed
+
+### FormFieldMessage
+
+- theme variable `colorHint` has been renamed to `hintTextColor`
+- theme variable `colorError` has been renamed to `errorTextColor`
+- theme variable `colorSuccess` has been renamed to `successTextColor`
+- theme variable `errorIconMarginRight` is now removed
+
+### FormFieldMessages
+
+- theme variable `topMargin` is now removed
+
+### TextArea
+
+- theme variable `smallFontSize` is now renamed to `fontSizeSm`
+- theme variable `mediumFontSize` is now renamed to `fontSizeMd`
+- theme variable `largeFontMedium` is now renamed to `fontSizeLg`
+- theme variable `requiredInvalidColor` is now removed
+- theme variable `borderStyle` is now removed
+- theme variable `borderTopColor` is now removed
+- theme variable `borderBottomColor` is now removed
+- theme variable `borderLeftColor` is now removed
+- theme variable `borderRightColor` is now removed
+- theme variable `color` is now renamed to `textColor`
+- theme variable `background` is now renamed to `backgroundColor`
+- theme variable `focusOutlineWidth` is now removed
+- theme variable `focusOutlineStyle` is now removed
+- theme variable `focusOutlineColor` is now removed
+- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+
+### NumberInput
+
+- theme variable `requiredInvalidColor` is now removed
+- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+
+### RadioInputGroup
+
+- theme variable `invalidAsteriskColor` is now removed
+- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+
+### TextInput
+
+- theme variable `requiredInvalidColor` is now removed
+- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+
 ## Codemods
 
 To ease the upgrade, we provide codemods that will automate most of the changes. Pay close attention to its output, it cannot refactor complex code! The codemod scripts can be run via the following commands:

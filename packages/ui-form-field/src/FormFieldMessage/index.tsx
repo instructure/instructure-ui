@@ -22,18 +22,18 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { forwardRef } from 'react'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { IconWarningSolid } from '@instructure/ui-icons'
+import {
+  AlertCircleInstUIIcon,
+  CheckCircle2InstUIIcon
+} from '@instructure/ui-icons-lucide'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
-
+import { useStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
-import { allowedProps } from './props'
 import type { FormFieldMessageProps } from './props'
 
 /**
@@ -51,50 +51,54 @@ type: example
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class FormFieldMessage extends Component<FormFieldMessageProps> {
-  static readonly componentId = 'FormFieldMessage'
+const FormFieldMessage = forwardRef<HTMLSpanElement, FormFieldMessageProps>(
+  ({ variant = 'hint', children, themeOverride }, ref) => {
+    const styles = useStyle({
+      generateStyle,
+      themeOverride,
+      params: {
+        variant
+      },
+      componentId: 'FormFieldMessage',
+      displayName: 'FormFieldMessage'
+    })
 
-  static allowedProps = allowedProps
-  static defaultProps = {
-    variant: 'hint'
-  }
+    const handleRef = (el: Element | null) => {
+      if (typeof ref === 'function') {
+        ref(el as HTMLSpanElement)
+      } else if (ref) {
+        const refObject = ref
+        refObject.current = el as HTMLSpanElement
+      }
+    }
 
-  ref: Element | null = null
+    const isErrorVariant = variant === 'error' || variant === 'newError'
+    const shouldShowIcon = (isErrorVariant || variant === 'success') && children
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
-  render() {
-    const { children, styles } = this.props
-
-    return this.props.variant !== 'screenreader-only' ? (
+    return variant !== 'screenreader-only' ? (
       <span css={{ display: 'flex' }}>
-        {this.props.variant === 'newError' && this.props.children && (
-          <span css={styles?.errorIcon}>
-            <IconWarningSolid color="error" />
+        {shouldShowIcon && (
+          <span css={styles?.icon}>
+            {isErrorVariant ? (
+              <AlertCircleInstUIIcon size="sm" color="errorColor" />
+            ) : (
+              <CheckCircle2InstUIIcon size="sm" color="successColor" />
+            )}
           </span>
         )}
-        <span css={styles?.formFieldMessage} ref={this.handleRef}>
+        <span css={styles?.formFieldMessage} ref={handleRef}>
           {children}
         </span>
       </span>
     ) : (
-      <ScreenReaderContent elementRef={this.handleRef}>
+      <ScreenReaderContent elementRef={handleRef}>
         {children}
       </ScreenReaderContent>
     )
   }
-}
+)
+
+FormFieldMessage.displayName = 'FormFieldMessage'
 
 export default FormFieldMessage
 export { FormFieldMessage }
