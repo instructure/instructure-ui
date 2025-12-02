@@ -22,6 +22,16 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-badge": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "15.0.7",
+    "@testing-library/user-event": "^14.6.1",
+    "vitest": "^3.2.2"
+  },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "workspace:*",
@@ -29,16 +39,15 @@
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-tag": "workspace:*"
+    "@instructure/ui-tag": "workspace:*",
+    "@instructure/ui-themes": "workspace:*"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "workspace:*",
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-badge": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",

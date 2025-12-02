@@ -224,14 +224,13 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 type TextInputState = {
-  hasFocus: boolean
   afterElementHasWidth?: boolean
 }
 
 type TextInputStyleProps = {
-  disabled: boolean
+  interaction: InteractionType
+  success: boolean
   invalid: boolean
-  focused: TextInputState['hasFocus']
   afterElementHasWidth: TextInputState['afterElementHasWidth']
   beforeElementExists: boolean
 }

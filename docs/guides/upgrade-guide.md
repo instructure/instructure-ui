@@ -78,6 +78,33 @@ The new icons automatically sync with theme changes, support all InstUI color to
 
 ## API Changes
 
+### Focus rings
+
+Focus rings are now styled in a central pseudo-component called `SharedTokens`. You can override here how it looks, for example:
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider
+  theme={{
+  themeOverrides: {
+    canvas: {
+      componentOverrides: {
+        SharedTokens: {
+          focusOutline: {
+            infoColor: 'red',
+            offset: '2rem'
+          }
+        }
+      }
+    }
+  }
+}}>
+  <TextInput renderLabel="Name" placeholder="Doe, John Doe"/>
+</InstUISettingsProvider>
+```
+
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
@@ -86,7 +113,7 @@ The new icons automatically sync with theme changes, support all InstUI color to
 ### Spinner
 
 - `as` prop has been removed, `Spinner` will always render as a `<div>` element.
-- # `elementRef` prop has been removed, use the `ref` prop instead.
+- `elementRef` prop has been removed, use the `ref` prop instead.
 
 ### Metric
 
@@ -136,10 +163,41 @@ The new icons automatically sync with theme changes, support all InstUI color to
 - theme variable `focusOutlineWidth` is now removed
 - theme variable `focusOutlineStyle` is now removed
 - theme variable `focusOutlineColor` is now removed
-- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+- `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
+
+### TextInput
+
+- theme variable `smallFontSize` is now renamed to `fontSizeSm`
+- theme variable `mediumFontSize` is now renamed to `fontSizeMd`
+- theme variable `largeFontSize` is now renamed to `fontSizeLg`
+- theme variable `smallHeight` is now renamed to `heightSm`
+- theme variable `mediumHeight` is now renamed to `heightMd`
+- theme variable `largeHeight` is now renamed to `textColor`
+- theme variable `color` is now renamed to `textColor`
+- theme variable `background` is now renamed to `backgroundColor`
+- theme variable `padding` is now removed
+- theme variable `borderStyle` is now removed
+- theme variable `errorOutlineColor` is now removed
+- theme variable `focusOutlineWidth` is now removed
+- theme variable `focusOutlineStyle` is now removed
+- theme variable `focusOutlineColor` is now removed
+- theme variable `requiredInvalidColor` is now removed
+- `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
 
 ### NumberInput
 
+- theme variable `mediumFontSize` is now renamed to `fontSizeMd`
+- theme variable `largeFontSize` is now renamed to `fontSizeLg`
+- theme variable `mediumHeight` is now renamed to `heightMd`
+- theme variable `largeHeight` is now renamed to `textColor`
+- theme variable `color` is now renamed to `textColor`
+- theme variable `background` is now renamed to `backgroundColor`
+- theme variable `padding` is now removed
+- theme variable `borderStyle` is now removed
+- theme variable `errorOutlineColor` is now removed
+- theme variable `focusOutlineWidth` is now removed
+- theme variable `focusOutlineStyle` is now removed
+- theme variable `focusOutlineColor` is now removed
 - theme variable `requiredInvalidColor` is now removed
 - `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
 
