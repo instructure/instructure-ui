@@ -7,6 +7,12 @@
     "borderRadius": {
       "value": "{borderRadius.sm}",
       "type": "borderRadius"
+    },
+    "item": {
+      "activeBackground": {
+        "value": "{color.background.interactive.action.primary.base}",
+        "type": "color"
+      }
     }
   }
 }

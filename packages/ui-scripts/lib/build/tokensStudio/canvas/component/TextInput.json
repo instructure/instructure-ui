@@ -65,7 +65,7 @@
       "type": "color"
     },
     "placeholderHoverColor": {
-      "value": "{color.text.interactive.input.hover}",
+      "value": "{color.text.interactive.input.placeholder}",
       "type": "color"
     },
     "arrowsContainerWidth": {

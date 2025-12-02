@@ -133,6 +133,10 @@
     },
     "padding": {
       "container": {
+        "xs": {
+          "value": "{size.size12}",
+          "type": "spacing"
+        },
         "sm": {
           "value": "{size.size16}",
           "type": "spacing"

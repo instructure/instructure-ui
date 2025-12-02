@@ -52,10 +52,6 @@
       "value": "{color.text.interactive.input.base}",
       "type": "color"
     },
-    "textHoverColor": {
-      "value": "{color.text.interactive.input.hover}",
-      "type": "color"
-    },
     "textReadonlyColor": {
       "value": "{color.text.interactive.input.readonly}",
       "type": "color"
@@ -66,6 +62,10 @@
     },
     "placeholderColor": {
       "value": "{color.text.interactive.input.placeholder}",
+      "type": "color"
+    },
+    "placeholderHoverColor": {
+      "value": "{color.text.interactive.input.hover}",
       "type": "color"
     },
     "fontFamily": {
