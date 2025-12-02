@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import type { FormFieldMessageTheme } from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
 import type { FormMessageType, FormMessageChild } from '../FormPropTypes'
 
 type FormFieldMessageOwnProps = {
@@ -35,10 +34,11 @@ type PropKeys = keyof FormFieldMessageOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldMessageProps = FormFieldMessageOwnProps &
-  WithStyleProps<FormFieldMessageTheme, FormFieldMessageStyle>
+type FormFieldMessageProps = FormFieldMessageOwnProps & {
+  themeOverride?: ThemeOverrideValue
+}
 
-type FormFieldMessageStyle = ComponentStyle<'formFieldMessage' | 'errorIcon'>
+type FormFieldMessageStyle = ComponentStyle<'formFieldMessage' | 'icon'>
 const allowedProps: AllowedPropKeys = ['variant', 'children']
 
 export type { FormFieldMessageProps, FormFieldMessageStyle }
