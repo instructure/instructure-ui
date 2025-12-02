@@ -7,9 +7,7 @@ Note that this field **does not work
 uncontrolled** - you must pass event handlers if you want it to respond to
 user input.
 
-This example handles arrow buttons, up/down arrow keys, and typing into
-the input. It also includes an `onBlur` handler that displays an error message
-if the input is invalid or missing.
+This example handles arrow buttons, up/down arrow keys, and typing into the input. It also includes an `onBlur` handler that displays an error message if the input is invalid or missing.
 
 ```js
 ---
@@ -149,16 +147,43 @@ render(<Example />)
 
 > Note: `NumberInput` accepts a string or number as its `value`. However, the value returned by the `onChange` callback is always a string and should be converted to a number before attempting to augment it.
 
-NumberInput comes in 2 sizes. The default size is "medium".
+You can see here most of the visual states of the component.
 
 ```js
 ---
-type: example
+  type: example
 ---
-<div>
-  <NumberInput renderLabel="Default-size input" /><br/>
-  <NumberInput size="large" renderLabel="Large-size input" />
-</div>
+  <Flex gap='medium' direction='column'>
+    <NumberInput
+      renderLabel='normal'
+      placeholder="placeholder"
+    />
+    <NumberInput
+      interaction='disabled'
+      renderLabel='disabled'
+      placeholder="placeholder"
+    />
+    <NumberInput
+      interaction='readonly'
+      renderLabel='readonly'
+      placeholder="placeholder"
+    />
+    <NumberInput
+      renderLabel='with error message'
+      placeholder="placeholder"
+      messages={[{ text: 'This is an error.', type: 'error' }]}
+    />
+    <NumberInput
+      renderLabel='with success message'
+      placeholder="placeholder"
+      messages={[{ text: 'Great success!', type: 'success' }]}
+    />
+    <NumberInput
+      renderLabel='large size (default is "medium")'
+      placeholder="placeholder"
+      size='large'
+    />
+  </Flex>
 ```
 
 ### Guidelines
@@ -185,15 +210,15 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | NumberInput | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The form field label. |
 | NumberInput | id | `string` | No | - | The id of the input. One is generated if not supplied. |
-| NumberInput | interaction | `InteractionType` | No | `undefined` | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
-| NumberInput | messages | `FormMessage[]` | No | `[]` | Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
-| NumberInput | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
-| NumberInput | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
-| NumberInput | showArrows | `boolean` | No | `true` | Whether or not to display the up/down arrow buttons. |
-| NumberInput | size | `'medium' \| 'large'` | No | `'medium'` | The size of the input. |
+| NumberInput | interaction | `InteractionType` | No | - | Specifies if interaction with the input is enabled, disabled, or readonly. When "disabled", the input changes visibly to indicate that it cannot receive user interactions. When "readonly" the input still cannot receive user interactions but it keeps the same styles as if it were enabled. |
+| NumberInput | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
+| NumberInput | placeholder | `string` | No | - | HTML placeholder text to display when the input has no value. This should be hint text, not a label replacement. Not visible when `disabled` or `readonly` |
+| NumberInput | isRequired | `boolean` | No | - | Whether or not the text input is required. |
+| NumberInput | showArrows | `boolean` | No | - | Whether or not to display the up/down arrow buttons. They are not visible when `readonly` |
+| NumberInput | size | `'medium' \| 'large'` | No | - | The size of the input. |
 | NumberInput | value | `string \| number` | No | - | The value of the input (should be accompanied by an `onChange` prop). |
 | NumberInput | width | `string` | No | - | The width of the input. |
-| NumberInput | display | `'inline-block' \| 'block'` | No | `'block'` | The display of the root element. |
+| NumberInput | display | `'inline-block' \| 'block'` | No | - | The display of the root element. |
 | NumberInput | inputRef | `(element: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual input element. |
 | NumberInput | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input receives focus. |
 | NumberInput | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when the input loses focus. |
@@ -201,11 +226,12 @@ type: embed
 | NumberInput | onDecrement | `( event: \| React.KeyboardEvent<HTMLInputElement> \| React.MouseEvent<HTMLButtonElement> ) => void` | No | - | Called when the down arrow button is clicked, or the down arrow key is pressed. |
 | NumberInput | onIncrement | `( event: \| React.KeyboardEvent<HTMLInputElement> \| React.MouseEvent<HTMLButtonElement> ) => void` | No | - | Called when the up arrow button is clicked, or the up arrow key is pressed. |
 | NumberInput | onKeyDown | `(event: React.KeyboardEvent<HTMLInputElement>) => void` | No | - | Callback fired when a key is pressed. |
-| NumberInput | inputMode | `'numeric' \| 'decimal' \| 'tel'` | No | `'numeric'` | The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel'] |
-| NumberInput | textAlign | `'start' \| 'center'` | No | `'start'` | The text alignment of the input. |
-| NumberInput | allowStringValue | `boolean` | No | `false` | sets the input type to string and allows string as value |
+| NumberInput | inputMode | `'numeric' \| 'decimal' \| 'tel'` | No | - | The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel'] |
+| NumberInput | textAlign | `'start' \| 'center'` | No | - | The text alignment of the input. |
+| NumberInput | allowStringValue | `boolean` | No | - | sets the input type to string and allows string as value |
 | NumberInput | renderIcons | `{ increase: Renderable decrease: Renderable }` | No | - | Sets the icons to be rendered for increase and decrease buttons |
 | NumberInput | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| NumberInput | themeOverride | `ThemeOverrideValue` | No | - |  |
 
 ### Usage
 
