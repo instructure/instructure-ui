@@ -26,7 +26,10 @@ import { Component } from 'react'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import { FormFieldLayout } from '../FormFieldLayout'
+import {
+  FormFieldLayout,
+  allowedProps as formFieldLayoutAllowedProps
+} from '../FormFieldLayout'
 
 import { allowedProps } from './props'
 import type { FormFieldProps } from './props'
@@ -63,7 +66,7 @@ class FormField extends Component<FormFieldProps> {
     return (
       <FormFieldLayout
         {...omitProps(this.props, FormField.allowedProps)}
-        {...pickProps(this.props, FormFieldLayout.allowedProps)}
+        {...pickProps(this.props, formFieldLayoutAllowedProps)}
         label={this.props.label}
         vAlign={this.props.vAlign}
         as="label"
@@ -73,6 +76,9 @@ class FormField extends Component<FormFieldProps> {
         htmlFor={this.props.id}
         elementRef={this.handleRef}
         margin={this.props.margin}
+        isRequired={this.props.isRequired}
+        disabled={this.props.disabled}
+        readOnly={this.props.readOnly}
       />
     )
   }

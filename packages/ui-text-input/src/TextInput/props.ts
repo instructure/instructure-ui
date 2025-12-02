@@ -194,12 +194,7 @@ type TextInputProps = TextInputOwnProps &
   WithDeterministicIdProps
 
 type TextInputStyle = ComponentStyle<
-  | 'textInput'
-  | 'facade'
-  | 'layout'
-  | 'afterElement'
-  | 'requiredInvalid'
-  | 'inputLayout'
+  'textInput' | 'facade' | 'layout' | 'afterElement' | 'inputLayout'
 >
 const allowedProps: AllowedPropKeys = [
   'renderLabel',

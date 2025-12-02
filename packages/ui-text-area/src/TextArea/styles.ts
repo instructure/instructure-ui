@@ -22,8 +22,17 @@
  * SOFTWARE.
  */
 
-import type { TextAreaTheme } from '@instructure/shared-types'
 import type { TextAreaProps, TextAreaStyle } from './props'
+import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
+
+type StyleParams = {
+  disabled: TextAreaProps['disabled']
+  readOnly: TextAreaProps['readOnly']
+  size: TextAreaProps['size']
+  success: boolean
+  invalid: boolean
+}
 
 /**
  * ---
@@ -31,32 +40,38 @@ import type { TextAreaProps, TextAreaStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params Additional parameters to customize the style.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TextAreaTheme,
-  props: TextAreaProps
+  componentTheme: NewComponentTypes['TextArea'],
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): TextAreaStyle => {
-  const { disabled, size } = props
+  const { disabled, size, success, invalid, readOnly } = params
 
   const fontSizeVariants = {
     small: {
-      fontSize: componentTheme.smallFontSize
+      fontSize: componentTheme.fontSizeSm
     },
     medium: {
-      fontSize: componentTheme.mediumFontSize
+      fontSize: componentTheme.fontSizeMd
     },
     large: {
-      fontSize: componentTheme.largeFontSize
+      fontSize: componentTheme.fontSizeLg
     }
   }
 
+  const focusColor =
+    disabled || readOnly
+      ? 'info'
+      : invalid
+      ? 'danger'
+      : success
+      ? 'success'
+      : 'info'
+
   return {
-    requiredInvalid: {
-      color: componentTheme.requiredInvalidColor
-    },
     textArea: {
       label: 'textArea',
       all: 'initial',
@@ -72,54 +87,68 @@ const generateStyle = (
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       borderWidth: componentTheme.borderWidth,
-      borderStyle: componentTheme.borderStyle,
-      borderTopColor: componentTheme.borderTopColor,
-      borderRightColor: componentTheme.borderRightColor,
-      borderBottomColor: componentTheme.borderBottomColor,
-      borderLeftColor: componentTheme.borderLeftColor,
+      borderStyle: 'solid',
+      borderColor: componentTheme.borderColor,
       borderRadius: componentTheme.borderRadius,
-      color: componentTheme.color,
-      background: componentTheme.background,
+      color: componentTheme.textColor,
+      background: componentTheme.backgroundColor,
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
       textAlign: 'start',
-      ...fontSizeVariants[size!],
-      '&:focus + [class$=-textArea__outline]': {
-        transform: 'scale(1)',
-        opacity: 1
-      },
-      '&[aria-invalid], &[aria-invalid]:focus, &[aria-invalid]:focus + [class$=-textArea__outline]': {
-        borderColor: componentTheme.errorBorderColor
-      },
-      '&::placeholder': {
-        color: componentTheme.placeholderColor
-      },
+      ...(!disabled &&
+        !readOnly && {
+          '&:hover': {
+            background: componentTheme.backgroundHoverColor,
+            borderColor: componentTheme.borderHoverColor,
+            '&::placeholder': {
+              color: componentTheme.placeholderHoverColor
+            }
+          }
+        }),
+      ...(readOnly && {
+        color: componentTheme.textReadonlyColor,
+        background: componentTheme.backgroundReadonlyColor,
+        borderColor: componentTheme.borderReadonlyColor
+      }),
       ...(disabled && {
+        color: componentTheme.textDisabledColor,
+        background: componentTheme.backgroundDisabledColor,
+        borderColor: componentTheme.borderDisabledColor,
         cursor: 'not-allowed',
         pointerEvents: 'none',
         opacity: 0.5
-      })
+      }),
+      ...(!disabled &&
+        !readOnly &&
+        success && {
+          borderColor: componentTheme.successBorderColor
+        }),
+      ...fontSizeVariants[size!],
+      ...calcFocusOutlineStyles(sharedTokens.focusOutline, {
+        focusColor
+      }),
+      ...(!disabled &&
+        !readOnly && {
+          '&[aria-invalid], &[aria-invalid]:focus': {
+            borderColor: componentTheme.errorBorderColor
+          }
+        }),
+      '&::placeholder': {
+        color: componentTheme.placeholderColor
+      },
+      '&::-webkit-resizer': {
+        backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M8.35352 0.353516L0.353516 8.35352M8.35352 4.35352L4.35352 8.35352" stroke="#8D959F"/></svg>'
+        )}")`,
+        backgroundColor: 'transparent',
+        backgroundPosition: 'bottom 2px right 2px', // Position away from edges
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '10px 10px'
+      }
     },
     textAreaLayout: {
       label: 'textArea__layout',
       position: 'relative'
-    },
-    textAreaOutline: {
-      label: 'textArea__outline',
-      pointerEvents: 'none',
-      position: 'absolute',
-      display: 'block',
-      boxSizing: 'border-box',
-      top: '-0.25rem',
-      bottom: '-0.25rem',
-      left: '-0.25rem',
-      right: '-0.25rem',
-      border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-      borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-      transition: 'all 0.2s',
-      // properties to transition on :focus
-      opacity: 0,
-      transform: 'scale(0.95)'
     }
   }
 }

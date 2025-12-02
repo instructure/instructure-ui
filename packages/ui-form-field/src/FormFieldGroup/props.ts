@@ -48,7 +48,14 @@ type FormFieldGroupOwnProps = {
    * id for the form field messages
    */
   messagesId?: string
+  /**
+   * Whether the field group is disabled. When true, error and success messages will be hidden.
+   */
   disabled?: boolean
+  /**
+   * Whether the field group is read-only. When true, error and success messages will be hidden.
+   */
+  readOnly?: boolean
   children?: React.ReactNode
   layout?: 'stacked' | 'columns' | 'inline'
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
@@ -59,10 +66,6 @@ type FormFieldGroupOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
-}
-
-type FormFieldGroupStyleProps = {
-  invalid: boolean
 }
 
 type PropKeys = keyof FormFieldGroupOwnProps
@@ -86,6 +89,7 @@ const allowedProps: AllowedPropKeys = [
   'messages',
   'messagesId',
   'disabled',
+  'readOnly',
   'children',
   'layout',
   'rowSpacing',
@@ -95,9 +99,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type {
-  FormFieldGroupProps,
-  FormFieldGroupStyleProps,
-  FormFieldGroupStyle
-}
+export type { FormFieldGroupProps, FormFieldGroupStyle }
 export { allowedProps }
