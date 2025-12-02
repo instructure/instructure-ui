@@ -74,43 +74,5 @@
       "value": "{borderWidth.sm}",
       "type": "borderWidth"
     }
-  },
-  "modalHeader": {
-    "padding": {
-      "value": "{spacing.gap.cards.md}",
-      "type": "spacing"
-    },
-    "paddingCompact": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    }
-  },
-  "modalBody": {
-    "padding": {
-      "value": "{spacing.gap.cards.md}",
-      "type": "spacing"
-    },
-    "paddingCompact": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    }
-  },
-  "modalFooter": {
-    "backgroundColor": {
-      "value": "{color.background.container}",
-      "type": "color"
-    },
-    "inverseBackgroundColor": {
-      "value": "{color.background.dark}",
-      "type": "color"
-    },
-    "padding": {
-      "value": "{spacing.spaceXl}",
-      "type": "spacing"
-    },
-    "paddingCompact": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    }
   }
 }

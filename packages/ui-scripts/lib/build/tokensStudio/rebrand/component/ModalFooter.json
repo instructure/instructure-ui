@@ -1,0 +1,20 @@
+{
+  "modalFooter": {
+    "backgroundColor": {
+      "value": "{color.background.container}",
+      "type": "color"
+    },
+    "inverseBackgroundColor": {
+      "value": "{color.background.dark}",
+      "type": "color"
+    },
+    "padding": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "paddingCompact": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}

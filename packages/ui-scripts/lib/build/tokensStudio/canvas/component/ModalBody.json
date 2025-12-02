@@ -1,0 +1,12 @@
+{
+  "modalBody": {
+    "padding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingCompact": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}
