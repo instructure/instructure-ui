@@ -34,6 +34,7 @@ import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { ViewProps, ViewStyle, BorderColor } from './props'
 import { alpha } from '@instructure/ui-color-utils'
+import { elevationTokenToBoxShadow } from '@instructure/ui-themes'
 
 const getBorderStyle = ({
   borderRadius,
@@ -166,7 +167,10 @@ const withBorder = (props: ViewProps) => {
   return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
 }
 
-const getFocusStyles = (props: ViewProps, componentTheme: NewComponentTypes['View']) => {
+const getFocusStyles = (
+  props: ViewProps,
+  componentTheme: NewComponentTypes['View']
+) => {
   const {
     focusColor,
     focusPosition,
@@ -232,7 +236,7 @@ const getFocusStyles = (props: ViewProps, componentTheme: NewComponentTypes['Vie
 const generateStyle = (
   componentTheme: NewComponentTypes['View'],
   props: ViewProps,
-  sharedTokens: SharedTokens,
+  sharedTokens: SharedTokens
 ): ViewStyle => {
   const {
     borderRadius,
@@ -317,7 +321,7 @@ const generateStyle = (
 
   const borderColorVariants: Record<BorderColor, { borderColor: string }> = {
     transparent: {
-      borderColor: 'transparent'
+      borderColor: componentTheme.borderColorTransparent
     },
     primary: {
       borderColor: componentTheme.borderColorPrimary
@@ -390,7 +394,7 @@ const generateStyle = (
 
   const stackingVariants = {
     topmost: {
-      zIndex: sharedToken
+      zIndex: componentTheme.stackingTopmost
     },
     above: {
       zIndex: componentTheme.stackingAbove
@@ -406,13 +410,13 @@ const generateStyle = (
 
   const shadowVariants = {
     topmost: {
-      boxShadow: sharedTokens.boxShadow.elevation1
+      boxShadow: elevationTokenToBoxShadow(sharedTokens.boxShadow.elevation4)
     },
     resting: {
-      boxShadow: componentTheme.shadowResting
+      boxShadow: elevationTokenToBoxShadow(sharedTokens.boxShadow.elevation1)
     },
     above: {
-      boxShadow: componentTheme.shadowAbove
+      boxShadow: elevationTokenToBoxShadow(sharedTokens.boxShadow.elevation2)
     },
     none: {}
   }
@@ -441,7 +445,7 @@ const generateStyle = (
         : {}),
       ...(withBorder(props)
         ? {
-            borderStyle: componentTheme.borderStyle,
+            borderStyle: 'solid',
             ...(borderColorVariants[borderColor!] || {
               borderColor: borderColor
             })

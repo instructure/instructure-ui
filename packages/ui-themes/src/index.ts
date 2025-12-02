@@ -50,6 +50,7 @@ import {
   additionalPrimitives
 } from './sharedThemeTokens/colors/primitives'
 import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
+import { elevationTokenToBoxShadow } from './utils/boxShadowObjectToString'
 
 import type {
   Canvas as NewCanvas,
@@ -85,7 +86,8 @@ export {
   canvasHighContrast,
   primitives,
   additionalPrimitives,
-  dataVisualization
+  dataVisualization,
+  elevationTokenToBoxShadow
 }
 export default canvas
 export type {
