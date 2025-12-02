@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, isValidElement } from 'react'
 
 import {
   callRenderProp,
   getInteraction,
   passthroughProps,
-  withDeterministicId
+  withDeterministicId,
+  safeCloneElement
 } from '@instructure/ui-react-utils'
 import {
   isActiveElement,
@@ -36,25 +37,25 @@ import {
   getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type {
   TextInputProps,
   TextInputState,
   TextInputStyleProps
 } from './props'
 import { allowedProps } from './props'
+import type { Renderable } from '@instructure/shared-types'
 
 /**
 ---
 category: components
-tags: form, field
+tags: form, field, input
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class TextInput extends Component<TextInputProps, TextInputState> {
   static readonly componentId = 'TextInput'
 
@@ -74,10 +75,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
   constructor(props: TextInputProps) {
     super(props)
-    this.state = {
-      hasFocus: false,
-      afterElementHasWidth: undefined
-    }
+    this.state = { afterElementHasWidth: undefined }
     this._defaultId = props.deterministicId!()
     this._messagesId = props.deterministicId!('TextInput-messages')
   }
@@ -129,17 +127,29 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         afterElementHasWidth: this.getElementHasWidth(this._afterElement)
       })
     }
-
-    if (
-      getInteraction({ props: prevProps }) !== 'disabled' &&
-      getInteraction({ props: this.props }) === 'disabled'
-    ) {
-      this.setState({
-        hasFocus: false
-      })
-    }
-
     this.props.makeStyles?.(this.makeStyleProps())
+  }
+
+  renderInstUIIcon(elementToRender: Renderable) {
+    if (!elementToRender) {
+      return null
+    }
+    const rendered = callRenderProp(elementToRender)
+    // Map sizes to Lucide icon semantic size tokens
+    const linkSizeToIconSize = {
+      small: 'sm',
+      medium: 'md',
+      large: 'lg'
+    } as const
+    const iconSize = linkSizeToIconSize[this.props.size || 'medium']
+    if (
+      isValidElement(elementToRender) &&
+      (elementToRender as React.FunctionComponentElement<unknown>).type
+        ?.name === 'WrappedIcon'
+    ) {
+      return safeCloneElement(rendered, { size: iconSize })
+    }
+    return rendered
   }
 
   adjustAfterElementHeight() {
@@ -172,15 +182,17 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
 
   makeStyleProps = (): TextInputStyleProps => {
-    const { interaction } = this
-    const { hasFocus, afterElementHasWidth } = this.state
+    const { afterElementHasWidth } = this.state
     const beforeElement = this.props.renderBeforeInput
       ? callRenderProp(this.props.renderBeforeInput)
       : null
+    const success =
+      !!this.props.messages &&
+      this.props.messages.some((message) => message.type === 'success')
     return {
-      disabled: interaction === 'disabled',
+      interaction: this.interaction,
       invalid: this.invalid,
-      focused: hasFocus,
+      success: success,
       afterElementHasWidth: afterElementHasWidth,
       beforeElementExists: !!beforeElement
     }
@@ -237,18 +249,12 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     if (typeof this.props.onBlur === 'function') {
       this.props.onBlur(event)
     }
-    this.setState({
-      hasFocus: false
-    })
   }
 
   handleFocus: React.FocusEventHandler<HTMLInputElement> = (event) => {
     if (typeof this.props.onFocus === 'function') {
       this.props.onFocus(event)
     }
-    this.setState({
-      hasFocus: true
-    })
   }
 
   renderInput() {
@@ -281,7 +287,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         css={this.props.styles?.textInput}
         defaultValue={defaultValue}
         value={value}
-        placeholder={placeholder}
+        placeholder={interaction === 'enabled' ? placeholder : undefined}
         ref={this.handleInputRef}
         type={type}
         id={this.id}
@@ -338,12 +344,8 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       styles
     } = this.props
 
-    const beforeElement: React.ReactNode = renderBeforeInput
-      ? callRenderProp(renderBeforeInput)
-      : null
-    const afterElement: React.ReactNode = renderAfterInput
-      ? callRenderProp(renderAfterInput)
-      : null
+    const beforeElement = this.renderInstUIIcon(renderBeforeInput)
+    const afterElement = this.renderInstUIIcon(renderAfterInput)
 
     const renderBeforeOrAfter =
       !!beforeElement ||

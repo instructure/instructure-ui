@@ -22,90 +22,80 @@
  * SOFTWARE.
  */
 
-import type { TextInputTheme } from '@instructure/shared-types'
-import type {
-  TextInputProps,
-  TextInputStyleProps,
-  TextInputStyle
-} from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { TextInputProps, TextInputStyle, TextInputStyleProps } from './props'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param props the props of the component, the style is applied to
+ * @param sharedTokens Shared token object that stores common values for the theme.
+ * @param state the state of the component, the style is applied to
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TextInputTheme,
+  componentTheme: NewComponentTypes['TextInput'],
   props: TextInputProps,
+  sharedTokens: SharedTokens,
   state: TextInputStyleProps
 ): TextInputStyle => {
   const { size, textAlign, shouldNotWrap } = props
   const {
-    disabled,
+    interaction,
+    success,
     invalid,
-    focused,
     afterElementHasWidth,
     beforeElementExists
   } = state
 
   const sizeVariants = {
     small: {
-      fontSize: componentTheme.smallFontSize,
-      height: `calc(${componentTheme.smallHeight} - (2 * ${componentTheme.borderWidth}))`,
-      lineHeight: `calc(${componentTheme.smallHeight} - (2 * ${componentTheme.borderWidth}))`
+      fontSize: componentTheme.fontSizeSm,
+      height: `calc(${componentTheme.heightSm} - (2 * ${componentTheme.borderWidth}))`,
+      lineHeight: `calc(${componentTheme.heightSm} - (2 * ${componentTheme.borderWidth}))`
     },
     medium: {
-      fontSize: componentTheme.mediumFontSize,
-      height: `calc(${componentTheme.mediumHeight} - (2 * ${componentTheme.borderWidth}))`,
-      lineHeight: `calc(${componentTheme.mediumHeight} - (2 * ${componentTheme.borderWidth}))`
+      fontSize: componentTheme.fontSizeMd,
+      height: `calc(${componentTheme.heightMd} - (2 * ${componentTheme.borderWidth}))`,
+      lineHeight: `calc(${componentTheme.heightMd} - (2 * ${componentTheme.borderWidth}))`
     },
     large: {
-      fontSize: componentTheme.largeFontSize,
-      height: `calc(${componentTheme.largeHeight} - (2 * ${componentTheme.borderWidth}))`,
-      lineHeight: `calc(${componentTheme.largeHeight} - (2 * ${componentTheme.borderWidth}))`
+      fontSize: componentTheme.fontSizeLg,
+      height: `calc(${componentTheme.heightLg} - (2 * ${componentTheme.borderWidth}))`,
+      lineHeight: `calc(${componentTheme.heightLg} - (2 * ${componentTheme.borderWidth}))`
     }
   }
-  const disabledStyle = disabled
-    ? {
-        cursor: 'not-allowed',
-        pointerEvents: 'none',
-        opacity: '0.5'
-      }
-    : {}
+  const paddingHorizontalVariants = {
+    small: componentTheme.paddingHorizontalSm,
+    medium: componentTheme.paddingHorizontalMd,
+    large: componentTheme.paddingHorizontalLg
+  }
 
-  const focusedStyle = focused
-    ? {
-        opacity: 1,
-        transform: 'scale(1)'
+  const inputInteractionStates = {
+    ...(interaction === 'enabled' && {
+      color: componentTheme.textColor,
+      '&::placeholder': {
+        color: componentTheme.placeholderColor
+      },
+      '&:hover::placeholder': {
+        color: componentTheme.placeholderHoverColor
       }
-    : {
-        opacity: 0,
-        transform: 'scale(0.95)'
-      }
-
-  const invalidStyle = invalid
-    ? {
-        borderColor: componentTheme.errorBorderColor
-      }
-    : {}
-
-  const invalidAndFocusedStyle =
-    invalid && focused
-      ? {
-          borderColor: componentTheme.errorBorderColor
-        }
-      : {}
+      // placeholder is not rendered in the `readOnly` and `disabled` state
+    }),
+    ...(interaction === 'readonly' && {
+      color: componentTheme.textReadonlyColor
+    }),
+    ...(interaction === 'disabled' && {
+      color: componentTheme.textDisabledColor
+    })
+  }
 
   const inputStyle = {
     all: 'initial',
-    '&::-ms-clear': {
-      display: 'none'
-    },
     width: '100%',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
@@ -116,8 +106,8 @@ const generateStyle = (
     outline: 'none',
     fontFamily: componentTheme.fontFamily,
     fontWeight: componentTheme.fontWeight,
-    color: componentTheme.color,
-    padding: `0 ${componentTheme.padding}`,
+    // padding of the text in the input
+    padding: `0 ${componentTheme.gapContent} 0  ${componentTheme.gapContent}`,
     background: 'transparent',
     border: 'none',
     verticalAlign: 'baseline',
@@ -127,11 +117,9 @@ const generateStyle = (
     '&:focus': {
       boxShadow: 'initial'
     },
-    '&::placeholder': {
-      color: componentTheme.placeholderColor
-    },
     ...sizeVariants[size!],
-    textAlign: textAlign
+    textAlign: textAlign,
+    ...inputInteractionStates
   }
 
   const viewBase = {
@@ -142,13 +130,43 @@ const generateStyle = (
     unicodeBidi: 'isolate'
   }
 
-  const flexBase = {
-    ...viewBase,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row'
+  const containerInteractionStates = {
+    ...(interaction === 'enabled' && {
+      backgroundColor: componentTheme.backgroundColor,
+      borderColor: componentTheme.borderColor,
+      ...(success && {
+        borderColor: componentTheme.successBorderColor
+      }),
+      ...(invalid && {
+        borderColor: componentTheme.errorBorderColor
+      }),
+      '&:hover': {
+        backgroundColor: componentTheme.backgroundHoverColor,
+        borderColor: componentTheme.borderHoverColor,
+        ...(success && {
+          borderColor: componentTheme.successBorderColor
+        }),
+        ...(invalid && {
+          borderColor: componentTheme.errorBorderColor
+        })
+      }
+    }),
+    ...(interaction === 'readonly' && {
+      backgroundColor: componentTheme.backgroundReadonlyColor,
+      borderColor: componentTheme.borderReadonlyColor
+    }),
+    ...(interaction === 'disabled' && {
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+      backgroundColor: componentTheme.backgroundDisabledColor,
+      borderColor: componentTheme.borderDisabledColor
+    })
   }
+
+  const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline, {
+    focusWithin: true,
+    focusColor: invalid ? 'danger' : success ? 'success' : undefined
+  })
 
   return {
     textInput: {
@@ -162,30 +180,11 @@ const generateStyle = (
       position: 'relative',
       display: 'block',
       boxSizing: 'border-box',
-      border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
+      border: `${componentTheme.borderWidth} solid`,
       borderRadius: componentTheme.borderRadius,
-      background: componentTheme.background,
-      color: componentTheme.color,
-
-      '&::before': {
-        content: '""',
-        pointerEvents: 'none',
-        position: 'absolute',
-        display: 'block',
-        boxSizing: 'border-box',
-        top: '-0.25rem',
-        bottom: '-0.25rem',
-        left: '-0.25rem',
-        right: '-0.25rem',
-        border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-        transition: 'all 0.2s',
-
-        ...focusedStyle, // properties to transition on :focus
-        ...invalidAndFocusedStyle
-      },
-      ...disabledStyle,
-      ...invalidStyle
+      color: componentTheme.textColor,
+      ...containerInteractionStates,
+      ...focusOutline
     },
     layout: {
       label: 'textInput__layout',
@@ -195,22 +194,30 @@ const generateStyle = (
       justifyContent: 'flex-start',
       flexDirection: 'row',
       ...(!shouldNotWrap && { flexWrap: 'wrap' }),
-      ...(beforeElementExists && { paddingInlineStart: componentTheme.padding })
+      // left padding of the `renderBeforeInput` element
+      ...(beforeElementExists && {
+        paddingInlineStart: paddingHorizontalVariants[size!]
+      })
     },
     inputLayout: {
       label: 'textInput__inputLayout',
       flexGrow: 1,
-      ...flexBase
+      ...viewBase,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      flexDirection: 'row'
     },
     afterElement: {
       // the next couple lines (until the `label`) is needed so the IconButton looks OK inside the TextInput
       // explanation: if the content inside is not a button or a popover (which could contain a button) it should have some padding on the right
       // lineHeight is only needed if it is not popover or button
       '& > :not(button):not([data-position^="Popover"])': {
-        marginRight: componentTheme.padding,
-        ...(sizeVariants[size!] && {
-          lineHeight: sizeVariants[size!].lineHeight
-        })
+        marginRight: paddingHorizontalVariants[size!]
+        // TODO check if it looks OK with the new buttons. With this it does not look OK with new icons
+        //...(sizeVariants[size!] && {
+        //  lineHeight: sizeVariants[size!]?.lineHeight
+        //})
       },
       display: 'flex',
       alignItems: 'center',

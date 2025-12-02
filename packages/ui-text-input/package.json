@@ -27,7 +27,6 @@
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-badge": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "^14.6.1",
@@ -40,9 +39,9 @@
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-tag": "workspace:*"
+    "@instructure/ui-tag": "workspace:*",
+    "@instructure/ui-themes": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"
