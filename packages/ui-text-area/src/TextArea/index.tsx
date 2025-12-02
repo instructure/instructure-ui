@@ -22,7 +22,15 @@
  * SOFTWARE.
  */
 
-import { Fragment, Component } from 'react'
+import {
+  forwardRef,
+  useRef,
+  useEffect,
+  useContext,
+  useImperativeHandle,
+  useCallback,
+  useMemo
+} from 'react'
 import { FormField } from '@instructure/ui-form-field'
 import {
   addEventListener,
@@ -33,65 +41,108 @@ import {
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
-import { withStyleRework as withStyle } from '@instructure/emotion'
-import { px } from '@instructure/ui-utils'
+
+import { useStyle } from '@instructure/emotion'
+import { generateId, px } from '@instructure/ui-utils'
+
 import {
-  omitProps,
+  passthroughProps,
   pickProps,
-  withDeterministicId
+  DeterministicIdContext
 } from '@instructure/ui-react-utils'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { TextAreaProps } from './props'
-import { allowedProps } from './props'
+
+export type TextAreaElement = {
+  focus: () => void
+  readonly value: string
+  readonly minHeight: string
+  readonly focused: boolean
+  readonly invalid: boolean
+  readonly id: string
+}
 
 /**
 ---
 category: components
 ---
 **/
-@withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
-class TextArea extends Component<TextAreaProps> {
-  static readonly componentId = 'TextArea'
+const TextArea = forwardRef<TextAreaElement, TextAreaProps>((props, ref) => {
+  const {
+    size = 'medium',
+    autoGrow = true,
+    resize = 'none',
+    inline = false,
+    messages = [],
+    disabled = false,
+    readOnly = false,
+    layout = 'stacked',
+    required = false,
+    placeholder,
+    value,
+    defaultValue,
+    width,
+    height,
+    maxHeight,
+    textareaRef,
+    margin,
+    label,
+    onChange,
+    id: propId,
+    themeOverride,
+    ...rest
+  } = props
 
-  static allowedProps = allowedProps
+  // Use deterministic ID
+  const instanceCounterMap = useContext(DeterministicIdContext)
+  const defaultId = useMemo(
+    () => generateId('TextArea', instanceCounterMap),
+    [instanceCounterMap]
+  )
+  const id = propId || defaultId
 
-  static defaultProps = {
-    size: 'medium',
-    autoGrow: true,
-    resize: 'none',
-    inline: false,
-    messages: [],
-    disabled: false,
-    readOnly: false,
-    layout: 'stacked',
-    required: false
-  }
+  // Use refs for mutable values
+  const _listener = useRef<{ remove(): void } | undefined>()
+  const _request = useRef<RequestAnimationFrameType | undefined>()
+  const _textareaResizeListener = useRef<ResizeObserver | undefined>()
+  const _debounced = useRef<Debounced<() => void> | undefined>()
+  const _textarea = useRef<HTMLTextAreaElement | null>(null)
+  const _container = useRef<HTMLDivElement | null>(null)
+  const _height = useRef<string | undefined>()
+  const _manuallyResized = useRef(false)
+  const formFieldRef = useRef<Element | null>(null)
 
-  private _listener?: { remove(): void }
-  private _request?: RequestAnimationFrameType
-  private _defaultId: string
-  private _textareaResizeListener?: ResizeObserver
-  private _debounced?: Debounced<typeof this.grow>
-  private _textarea: HTMLTextAreaElement | null = null
-  private _container: HTMLDivElement | null = null
-  private _height?: string
-  private _manuallyResized = false
-  private _highlightRef: HTMLSpanElement | null = null
-  private myObserver: ResizeObserver | null = null
-  private resizeTimeout?: NodeJS.Timeout
+  // Compute invalid state
+  const { isInvalid, isSuccess } = useMemo(() => {
+    const isInvalid =
+      messages &&
+      messages.findIndex(
+        (message) => message.type === 'error' || message.type === 'newError'
+      ) >= 0
+    const isSuccess =
+      messages &&
+      messages.findIndex((message) => message.type === 'success') >= 0
+    return { isInvalid, isSuccess }
+  }, [messages])
 
-  ref: Element | null = null
+  // Use styles
+  const styles = useStyle({
+    generateStyle,
+    themeOverride,
+    params: {
+      size,
+      disabled,
+      readOnly,
+      success: isSuccess,
+      invalid: isInvalid
+    },
+    componentId: 'TextArea',
+    displayName: 'TextArea'
+  })
 
-  constructor(props: TextAreaProps) {
-    super(props)
-
-    this._defaultId = props.deterministicId!()
-
-    //mock ResizeObserver for ssr
+  // Mock ResizeObserver for SSR
+  useEffect(() => {
     if (typeof window === 'undefined') {
       global.ResizeObserver = class ResizeObserver {
         observe() {
@@ -105,304 +156,279 @@ class TextArea extends Component<TextAreaProps> {
         }
       }
     }
-  }
+  }, [])
 
-  componentDidMount() {
-    this.myObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (this._highlightRef) {
-          const entryStyle = window.getComputedStyle(entry.target)
-          this._highlightRef.style.transition = 'none'
-          this._highlightRef.style.width = `calc(${entryStyle.width} + 0.5rem)`
-          this._highlightRef.style.height = `calc(${entryStyle.height} + 0.5rem)`
-          clearTimeout(this.resizeTimeout)
-
-          this.resizeTimeout = setTimeout(() => {
-            if (this._highlightRef) {
-              this._highlightRef.style.transition = 'all 0.2s'
-            }
-          }, 500)
-        }
-      }
-    })
-
-    this.autoGrow()
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.autoGrow()
-    this.props.makeStyles?.()
-  }
-
-  componentWillUnmount() {
-    if (this._listener) {
-      this._listener.remove()
-    }
-
-    if (this._textareaResizeListener) {
-      this._textareaResizeListener.disconnect()
-    }
-
-    if (this._request) {
-      this._request.cancel()
-    }
-
-    if (this._debounced) {
-      this._debounced.cancel()
-    }
-
-    if (this.myObserver) {
-      this.myObserver.disconnect()
-    }
-  }
-
-  _textareaResize = () => {
-    const textareaHeight = this._textarea!.style.height
-    if (textareaHeight !== '' && textareaHeight !== this._height) {
-      this._manuallyResized = true
-      this._textarea!.style.overflowY = 'auto'
-
-      // update container minHeight to ensure focus ring always wraps input
-      this._container!.style.minHeight = textareaHeight
-    }
-  }
-
-  autoGrow() {
-    if (this.props.autoGrow) {
-      if (!this._debounced) {
-        this._debounced = debounce(this.grow, 200, {
-          leading: false,
-          trailing: true
-        })
-      }
-
-      if (!this._listener) {
-        this._listener = addEventListener(window, 'resize', this._debounced)
-      }
-
-      if (this._textarea && !this._textareaResizeListener) {
-        const { height: origHeight } = getBoundingClientRect(this._textarea)
-        this._textareaResizeListener = new ResizeObserver((entries) => {
-          for (const entry of entries) {
-            const { height } = entry.contentRect
-
-            if (origHeight !== height) {
-              this._textareaResize()
-            }
-          }
-        })
-
-        this._textareaResizeListener.observe(this._textarea)
-      }
-
-      this._request = requestAnimationFrame(this.grow)
-    }
-  }
-
-  grow = () => {
-    if (!this._textarea || this._manuallyResized) {
+  // Grow function
+  const grow = useCallback(() => {
+    if (!_textarea.current || _manuallyResized.current) {
       return
     }
-    const offset = this._textarea.offsetHeight - this._textarea.clientHeight
-    let height = ''
+    const offset =
+      _textarea.current.offsetHeight - _textarea.current.clientHeight
+    let heightValue = ''
 
     // Notes:
     // 1. height has to be reset to `auto` every time this method runs, or scrollHeight will not reset
-    // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
-    this._textarea.style.height = 'auto'
-    this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
-    height = this._textarea.scrollHeight + offset + 'px'
+    // 2. `_textarea.current.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
+    _textarea.current.style.height = 'auto'
+    _textarea.current.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
+    heightValue = _textarea.current.scrollHeight + offset + 'px'
 
-    const maxHeight = this.props.maxHeight
-      ? px(this.props.maxHeight, this._container)
+    const maxHeightPx = maxHeight
+      ? px(maxHeight, _container.current)
       : undefined
 
     if (
-      this.props.maxHeight &&
-      maxHeight !== undefined &&
-      this._textarea.scrollHeight > maxHeight
+      maxHeight &&
+      maxHeightPx !== undefined &&
+      _textarea.current.scrollHeight > maxHeightPx
     ) {
-      this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
-    } else if (this.props.height) {
-      if (this._textarea.value === '') {
-        height = this.props.height
+      _textarea.current.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
+    } else if (height) {
+      if (_textarea.current.value === '') {
+        heightValue = height
       } else if (
-        px(this.props.height, this._container) > this._textarea.scrollHeight
+        px(height, _container.current) > _textarea.current.scrollHeight
       ) {
-        this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
-        height = this.props.height
+        _textarea.current.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
+        heightValue = height
       }
     }
 
     // preserve container height to prevent scroll jumping on long textareas,
     // but make sure container doesn't exceed maxHeight prop
-    const heightExceedsMax = maxHeight !== undefined && px(height) > maxHeight
-    if (!heightExceedsMax) {
-      this._container!.style.minHeight = height
+    const heightExceedsMax =
+      maxHeightPx !== undefined && px(heightValue) > maxHeightPx
+    if (!heightExceedsMax && _container.current) {
+      _container.current.style.minHeight = heightValue
     }
 
-    this._height = height
-    this._textarea.style.height = height
-  }
+    _height.current = heightValue
+    _textarea.current.style.height = heightValue
+  }, [height, maxHeight])
 
-  focus() {
-    this._textarea!.focus()
-  }
+  // Textarea resize handler
+  const _textareaResize = useCallback(() => {
+    if (!_textarea.current) return
 
-  handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { onChange, value, disabled, readOnly } = this.props
+    const textareaHeight = _textarea.current.style.height
+    if (textareaHeight !== '' && textareaHeight !== _height.current) {
+      _manuallyResized.current = true
+      _textarea.current.style.overflowY = 'auto'
 
-    if (disabled || readOnly) {
-      event.preventDefault()
-      return
+      // update container minHeight to ensure focus ring always wraps input
+      if (_container.current) {
+        _container.current.style.minHeight = textareaHeight
+      }
     }
+  }, [])
 
-    if (typeof value === 'undefined') {
-      // if uncontrolled
-      this.autoGrow()
+  // AutoGrow effect
+  useEffect(() => {
+    if (autoGrow) {
+      if (!_debounced.current) {
+        _debounced.current = debounce(grow, 200, {
+          leading: false,
+          trailing: true
+        })
+      }
+
+      if (!_listener.current) {
+        _listener.current = addEventListener(
+          window,
+          'resize',
+          _debounced.current
+        )
+      }
+
+      if (_textarea.current && !_textareaResizeListener.current) {
+        const { height: origHeight } = getBoundingClientRect(_textarea.current)
+        _textareaResizeListener.current = new ResizeObserver((entries) => {
+          for (const entry of entries) {
+            const { height: entryHeight } = entry.contentRect
+
+            if (origHeight !== entryHeight) {
+              _textareaResize()
+            }
+          }
+        })
+
+        _textareaResizeListener.current.observe(_textarea.current)
+      }
+
+      _request.current = requestAnimationFrame(grow)
     }
+  }, [autoGrow, grow, _textareaResize])
 
-    if (typeof onChange === 'function') {
-      onChange(event)
+  // Cleanup effect
+  useEffect(() => {
+    return () => {
+      if (_listener.current) {
+        _listener.current.remove()
+      }
+
+      if (_textareaResizeListener.current) {
+        _textareaResizeListener.current.disconnect()
+      }
+
+      if (_request.current) {
+        _request.current.cancel()
+      }
+
+      if (_debounced.current) {
+        _debounced.current.cancel()
+      }
     }
-  }
+  }, [])
 
-  handleContainerRef = (node: HTMLDivElement | null) => {
-    this._container = node
-  }
+  // Handle change
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (disabled || readOnly) {
+        event.preventDefault()
+        return
+      }
 
-  get minHeight() {
-    return this._textarea!.style.minHeight
-  }
-
-  get invalid() {
-    return (
-      this.props.messages &&
-      this.props.messages.findIndex((message) => {
-        return message.type === 'error' || message.type === 'newError'
-      }) >= 0
-    )
-  }
-
-  get id() {
-    return this.props.id || this._defaultId
-  }
-
-  get focused() {
-    return isActiveElement(this._textarea)
-  }
-
-  get value() {
-    return this._textarea!.value
-  }
-
-  render() {
-    const {
-      autoGrow,
-      placeholder,
-      value,
-      defaultValue,
-      disabled,
-      readOnly,
-      required,
-      width,
-      height,
-      maxHeight,
-      textareaRef,
-      resize,
-      styles,
-      margin
-    } = this.props
-
-    const props = omitProps(this.props, TextArea.allowedProps)
-
-    const style = {
-      width,
-      resize,
-      height: !autoGrow ? height : undefined,
-      maxHeight
-    }
-
-    const textarea = (
-      <textarea
-        {...props}
-        value={value}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        ref={(textarea) => {
-          if (textarea) {
-            this.myObserver?.observe(textarea)
+      if (typeof value === 'undefined') {
+        // if uncontrolled
+        if (autoGrow) {
+          if (!_debounced.current) {
+            _debounced.current = debounce(grow, 200, {
+              leading: false,
+              trailing: true
+            })
           }
 
-          this._textarea = textarea
-          if (typeof textareaRef === 'function') {
-            textareaRef(textarea)
+          if (!_listener.current) {
+            _listener.current = addEventListener(
+              window,
+              'resize',
+              _debounced.current
+            )
           }
-        }}
-        style={style}
-        id={this.id}
-        required={required}
-        aria-required={required}
-        aria-invalid={this.invalid ? 'true' : undefined}
-        disabled={disabled || readOnly}
-        css={this.props.styles?.textArea}
-        onChange={this.handleChange}
-      />
-    )
 
-    const label = hasVisibleChildren(this.props.label) ? (
-      <Fragment>
-        {this.props.label}
-        {required && (
-          <span
-            css={this.invalid ? styles?.requiredInvalid : {}}
-            aria-hidden={true}
-          >
-            {' '}
-            *
-          </span>
-        )}
-      </Fragment>
-    ) : (
-      this.props.label
-    )
+          if (_textarea.current && !_textareaResizeListener.current) {
+            const { height: origHeight } = getBoundingClientRect(
+              _textarea.current
+            )
+            _textareaResizeListener.current = new ResizeObserver((entries) => {
+              for (const entry of entries) {
+                const { height: entryHeight } = entry.contentRect
 
-    return (
-      <FormField
-        {...pickProps(this.props, FormField.allowedProps)}
-        label={label}
-        vAlign="top"
-        id={this.id}
-        elementRef={(el) => {
-          this.ref = el
+                if (origHeight !== entryHeight) {
+                  _textareaResize()
+                }
+              }
+            })
+
+            _textareaResizeListener.current.observe(_textarea.current)
+          }
+
+          _request.current = requestAnimationFrame(grow)
+        }
+      }
+
+      if (typeof onChange === 'function') {
+        onChange(event)
+      }
+    },
+    [disabled, readOnly, value, onChange, autoGrow, grow, _textareaResize]
+  )
+
+  // Expose API through ref using useImperativeHandle
+  useImperativeHandle(
+    ref,
+    () => ({
+      focus: () => {
+        _textarea.current?.focus()
+      },
+      get value() {
+        return _textarea.current?.value || ''
+      },
+      get minHeight() {
+        return _textarea.current?.style.minHeight || ''
+      },
+      get focused() {
+        return isActiveElement(_textarea.current)
+      },
+      get invalid() {
+        return (
+          messages &&
+          messages.findIndex(
+            (message) => message.type === 'error' || message.type === 'newError'
+          ) >= 0
+        )
+      },
+      get id() {
+        return id
+      }
+    }),
+    [id, messages]
+  )
+
+  const style = {
+    width,
+    resize,
+    height: !autoGrow ? height : undefined,
+    maxHeight
+  }
+
+  const textarea = (
+    <textarea
+      {...passthroughProps(rest)}
+      value={value}
+      defaultValue={defaultValue}
+      placeholder={placeholder}
+      ref={(textarea) => {
+        _textarea.current = textarea
+        if (typeof textareaRef === 'function') {
+          textareaRef(textarea)
+        }
+      }}
+      style={style}
+      id={id}
+      required={required}
+      aria-required={required}
+      aria-invalid={isInvalid ? 'true' : undefined}
+      disabled={disabled}
+      readOnly={readOnly}
+      css={styles?.textArea}
+      onChange={handleChange}
+    />
+  )
+
+  return (
+    <FormField
+      {...pickProps(props, FormField.allowedProps)}
+      label={label}
+      vAlign="top"
+      id={id}
+      elementRef={(el) => {
+        formFieldRef.current = el
+      }}
+      margin={margin}
+      isRequired={required}
+      disabled={disabled}
+      readOnly={readOnly}
+      data-cid="TextArea"
+    >
+      <div
+        css={styles?.textAreaLayout}
+        style={{
+          width,
+          maxHeight
         }}
-        margin={margin}
-        data-cid="TextArea"
+        ref={(node) => {
+          _container.current = node
+        }}
       >
-        <div
-          css={this.props.styles?.textAreaLayout}
-          style={{
-            width,
-            maxHeight
-          }}
-          ref={this.handleContainerRef}
-        >
-          {textarea}
-          {!disabled && !readOnly ? (
-            <span
-              css={this.props.styles?.textAreaOutline}
-              aria-hidden="true"
-              ref={(e) => {
-                this._highlightRef = e
-              }}
-            />
-          ) : null}
-        </div>
-      </FormField>
-    )
-  }
-}
+        {textarea}
+      </div>
+    </FormField>
+  )
+})
+
+TextArea.displayName = 'TextArea'
 
 export default TextArea
 export { TextArea }

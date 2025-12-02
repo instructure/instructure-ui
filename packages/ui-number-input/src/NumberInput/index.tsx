@@ -23,7 +23,6 @@
  */
 
 import {
-  Fragment,
   useState,
   useRef,
   useCallback,
@@ -45,7 +44,6 @@ import {
   useDeterministicId,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { useStyle } from '@instructure/emotion'
 
@@ -318,20 +316,7 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
       )
     }
 
-    const rawLabel = callRenderProp(renderLabel)
-    const label = hasVisibleChildren(rawLabel) ? (
-      <Fragment>
-        {rawLabel}
-        {isRequired && (
-          <span css={invalid ? styles?.requiredInvalid : {}} aria-hidden={true}>
-            {' '}
-            *
-          </span>
-        )}
-      </Fragment>
-    ) : (
-      rawLabel
-    )
+    const label = callRenderProp(renderLabel)
 
     const passedProps = passthroughProps(rest)
 
@@ -348,6 +333,9 @@ const NumberInput = forwardRef<NumberInputHandle, NumberInputProps>(
         id={id}
         elementRef={handleRef}
         margin={margin}
+        isRequired={isRequired}
+        disabled={interaction === 'disabled'}
+        readOnly={interaction === 'readonly'}
         data-cid="NumberInput"
       >
         <span css={styles?.inputWidth} style={width ? { width } : undefined}>

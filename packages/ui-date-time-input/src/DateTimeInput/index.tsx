@@ -162,7 +162,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
                 ? this.props.invalidDateTimeMessage(parsed.toISOString(true))
                 : this.props.invalidDateTimeMessage
           }
-          errorMsg = text ? { text, type: 'newError' } : undefined
+          errorMsg = text ? { text, type: 'error' } : undefined
           return {
             iso: parsed.clone(),
             calendarSelectedDate: parsed.clone(),
@@ -345,7 +345,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           ? this.props.invalidDateTimeMessage(dateStr ? dateStr : '')
           : this.props.invalidDateTimeMessage
       // eslint-disable-next-line no-param-reassign
-      newState.message = { text: text, type: 'newError' }
+      newState.message = { text: text, type: 'error' }
     }
     if (this.areDifferentDates(this.state.iso, newState.iso)) {
       if (typeof this.props.onChange === 'function') {
@@ -569,10 +569,12 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       ...(messages || [])
     ]
 
-    const hasError = allMessages.find((m) => m.type === 'newError')
+    const hasError = allMessages.find(
+      (m) => m.type === 'newError' || m.type === 'error'
+    )
     // if the component is in error state, create an empty error message to pass down to the subcomponents (DateInput and TimeInput) so they get a red outline and red required asterisk
     const subComponentMessages: FormMessage[] = hasError
-      ? [{ type: 'newError', text: '' }]
+      ? [{ type: 'error', text: '' }]
       : []
 
     return (

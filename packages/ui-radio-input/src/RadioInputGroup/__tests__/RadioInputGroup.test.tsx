@@ -217,7 +217,7 @@ describe('<RadioInputGroup />', () => {
         description="Select a fruit"
         disabled={true}
         data-id="group"
-        messages={[{ type: 'newError', text: 'abc' }]}
+        messages={[{ type: 'error', text: 'abc' }]}
       >
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />

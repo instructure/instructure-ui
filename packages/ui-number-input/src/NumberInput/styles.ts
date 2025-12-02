@@ -152,10 +152,6 @@ const generateStyle = (
     focusWithin: true
   })
   return {
-    requiredInvalid: {
-      // color of the small required star
-      //color: componentTheme.requiredInvalidColor TODO handle in FormFieldLayout
-    },
     numberInput: {
       label: 'numberInput'
     },

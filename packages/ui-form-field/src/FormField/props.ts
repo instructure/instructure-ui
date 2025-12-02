@@ -57,11 +57,23 @@ type FormFieldOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * If `true`, displays an asterisk after the label to indicate the field is required
+   */
+  isRequired?: boolean
 
   /**
    * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
    */
   margin?: Spacing
+  /**
+   * Whether the field is disabled. When true, error and success messages will be hidden.
+   */
+  disabled?: boolean
+  /**
+   * Whether the field is read-only. When true, error and success messages will be hidden.
+   */
+  readOnly?: boolean
 }
 
 type PropKeys = keyof FormFieldOwnProps
@@ -82,7 +94,10 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'inputContainerRef',
   'elementRef',
-  'margin'
+  'isRequired',
+  'margin',
+  'disabled',
+  'readOnly'
 ]
 
 export type { FormFieldOwnProps, FormFieldProps }
