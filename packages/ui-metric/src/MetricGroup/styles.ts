@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import type { MetricGroupTheme } from '@instructure/shared-types'
 import type { MetricGroupStyle } from './props'
 
 /**
@@ -30,10 +29,9 @@ import type { MetricGroupStyle } from './props'
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MetricGroupTheme): MetricGroupStyle => {
+const generateStyle = (): MetricGroupStyle => {
   return {
     metricGroup: {
       label: 'metricGroup',
@@ -41,8 +39,7 @@ const generateStyle = (componentTheme: MetricGroupTheme): MetricGroupStyle => {
       display: 'flex',
       flexWrap: 'wrap',
       alignItems: 'flex-start',
-      justifyContent: 'space-around',
-      lineHeight: componentTheme.lineHeight
+      justifyContent: 'space-around'
     }
   }
 }
