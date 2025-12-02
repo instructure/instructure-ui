@@ -40,7 +40,7 @@
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
-    "valueFontSize": {
+    "valueLargeFontSize": {
       "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
