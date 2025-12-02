@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Fragment, Component } from 'react'
+import { Component } from 'react'
 
 import {
   callRenderProp,
@@ -37,7 +37,6 @@ import {
 } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { withStyleRework as withStyle } from '@instructure/emotion'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -352,23 +351,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       renderBeforeInput !== undefined ||
       renderAfterInput !== undefined
 
-    const rawLabel = callRenderProp(renderLabel)
-    const label = hasVisibleChildren(rawLabel) ? (
-      <Fragment>
-        {rawLabel}
-        {isRequired && (
-          <span
-            css={this.invalid ? styles?.requiredInvalid : {}}
-            aria-hidden={true}
-          >
-            {' '}
-            *
-          </span>
-        )}
-      </Fragment>
-    ) : (
-      rawLabel
-    )
+    const label = callRenderProp(renderLabel)
 
     return (
       <FormField
@@ -382,6 +365,9 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         layout={this.props.layout}
         elementRef={this.handleRef}
         margin={this.props.margin}
+        isRequired={isRequired}
+        disabled={this.interaction === 'disabled'}
+        readOnly={this.interaction === 'readonly'}
         data-cid="TextInput"
       >
         <span css={styles?.facade}>

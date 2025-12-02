@@ -27,9 +27,9 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
-  WithStyleProps,
   ComponentStyle,
-  Spacing
+  Spacing,
+  ThemeOverrideValue
 } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -86,24 +86,39 @@ type FormFieldLayoutOwnProps = {
    */
   elementRef?: (element: Element | null) => void
   isGroup?: boolean
+  /**
+   * If `true`, displays an asterisk after the label to indicate the field is required
+   */
+  isRequired?: boolean
 
   /**
    * Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing).
    */
   margin?: Spacing
+  /**
+   * Whether the field is disabled. When true, error and success messages will be hidden.
+   */
+  disabled?: boolean
+  /**
+   * Whether the field is read-only. When true, error and success messages will be hidden.
+   */
+  readOnly?: boolean
 }
 
 type PropKeys = keyof FormFieldLayoutOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldLayoutProps = FormFieldLayoutOwnProps &
-  WithStyleProps<null, FormFieldLayoutStyle> &
-  OtherHTMLAttributes<FormFieldLayoutOwnProps> &
+type FormFieldLayoutProps = FormFieldLayoutOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<FormFieldLayoutOwnProps> &
   WithDeterministicIdProps
 
 type FormFieldLayoutStyle = ComponentStyle<
-  'formFieldLayout' | 'formFieldLabel' | 'formFieldChildren'
+  | 'formFieldLayout'
+  | 'formFieldLabel'
+  | 'formFieldChildren'
+  | 'requiredAsterisk'
 >
 const allowedProps: AllowedPropKeys = [
   'label',
@@ -119,13 +134,16 @@ const allowedProps: AllowedPropKeys = [
   'inputContainerRef',
   'elementRef',
   'margin',
-  'vAlign'
+  'vAlign',
+  'isRequired',
+  'disabled',
+  'readOnly'
 ]
 
 type FormFieldStyleProps = {
   hasMessages: boolean
   hasVisibleLabel: boolean
-  hasNewErrorMsgAndIsGroup: boolean
+  hasErrorMsgAndIsGroup: boolean
 }
 
 export type {

@@ -27,17 +27,28 @@ import type {
   FormFieldLayoutStyle,
   FormFieldStyleProps
 } from './props'
-import type { FormFieldLayoutTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import { calcMarginFromShorthand } from '@instructure/emotion'
+
+type StyleParams = FormFieldStyleProps & {
+  inline: FormFieldLayoutProps['inline']
+  layout: FormFieldLayoutProps['layout']
+  vAlign: FormFieldLayoutProps['vAlign']
+  labelAlign: FormFieldLayoutProps['labelAlign']
+  margin: FormFieldLayoutProps['margin']
+  messages: FormFieldLayoutProps['messages']
+  isRequired: FormFieldLayoutProps['isRequired']
+  invalid: boolean
+}
 
 const generateGridLayout = (
   isInlineLayout: boolean,
-  hasNewErrorMsgAndIsGroup: boolean,
+  hasErrorMsgAndIsGroup: boolean,
   hasVisibleLabel: boolean,
   hasMessages: boolean
 ) => {
   if (isInlineLayout) {
-    if (hasNewErrorMsgAndIsGroup) {
+    if (hasErrorMsgAndIsGroup) {
       if (hasMessages) {
         return `${hasVisibleLabel ? ' "label messages"' : '. messages'}
                                       ". controls"`
@@ -50,7 +61,7 @@ const generateGridLayout = (
     }
   }
   // stacked layout -- in this case we could use a simple `Flex`
-  if (hasNewErrorMsgAndIsGroup) {
+  if (hasErrorMsgAndIsGroup) {
     return `${hasVisibleLabel ? ' "label"' : ''}
             ${hasMessages ? ' "messages"' : ''}
             "controls"`
@@ -65,19 +76,19 @@ const generateGridLayout = (
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} styleProps
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
+ * @param sharedTokens Shared token object that stores common values for the theme.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: FormFieldLayoutTheme,
-  props: FormFieldLayoutProps,
-  styleProps: FormFieldStyleProps
+  componentTheme: NewComponentTypes['FormFieldLayout'],
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): FormFieldLayoutStyle => {
-  const { inline, layout, vAlign, labelAlign, margin, messages } = props
-  const { hasMessages, hasVisibleLabel, hasNewErrorMsgAndIsGroup } = styleProps
-  const cssMargin = calcMarginFromShorthand(margin, componentTheme.spacing)
+  const { inline, layout, vAlign, labelAlign, margin, messages } = params
+  const { hasMessages, hasVisibleLabel, hasErrorMsgAndIsGroup } = params
+  const cssMargin = calcMarginFromShorthand(margin, sharedTokens.spacing)
   const isInlineLayout = layout === 'inline'
 
   const hasNonEmptyMessages = messages?.reduce(
@@ -88,7 +99,7 @@ const generateStyle = (
   // This is quite ugly, we should simplify it
   const gridTemplateAreas = generateGridLayout(
     isInlineLayout,
-    hasNewErrorMsgAndIsGroup,
+    hasErrorMsgAndIsGroup,
     hasVisibleLabel,
     hasMessages
   )
@@ -103,7 +114,7 @@ const generateStyle = (
     all: 'initial',
     display: 'block',
     gridArea: 'label',
-    color: componentTheme.color,
+    color: componentTheme.textColor,
     fontFamily: componentTheme.fontFamily,
     fontWeight: componentTheme.fontWeight,
     fontSize: componentTheme.fontSize,
@@ -111,7 +122,7 @@ const generateStyle = (
     ...(isInlineLayout && {
       margin: '0',
       // when inline add a small padding between the label and the control
-      paddingRight: componentTheme.inlinePadding,
+      paddingRight: componentTheme.gapPrimitives,
       // and use the horizontal alignment prop
       [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
         {
@@ -150,13 +161,13 @@ const generateStyle = (
           gridTemplateColumns: '100%',
           gridTemplateAreas: generateGridLayout(
             false,
-            hasNewErrorMsgAndIsGroup,
+            hasErrorMsgAndIsGroup,
             hasVisibleLabel,
             hasMessages
           )
         },
       columnGap: '0.375rem',
-      rowGap: hasNonEmptyMessages ? '0.75rem' : '0',
+      rowGap: hasNonEmptyMessages ? componentTheme.gapPrimitives : '0',
       width: '100%',
       ...(inline && {
         display: 'inline-grid',
@@ -170,13 +181,13 @@ const generateStyle = (
       '&:is(label)': labelStyles,
       '&:-webkit-any(label)': labelStyles,
 
-      paddingBottom: hasNonEmptyMessages ? '0' : '0.75rem'
+      paddingBottom: hasNonEmptyMessages ? '0' : componentTheme.gapPrimitives
     },
     formFieldChildren: {
       label: 'formFieldLayout__children',
       gridArea: 'controls',
       // add a small margin between the message and the controls
-      ...(hasMessages && hasNewErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
+      ...(hasMessages && hasErrorMsgAndIsGroup && { marginTop: '0.375rem' }),
       ...(isInlineLayout &&
         inline && {
           [`@media screen and (width >= ${componentTheme.stackedOrInlineBreakpoint})`]:
@@ -184,6 +195,10 @@ const generateStyle = (
               justifySelf: 'start'
             }
         })
+    },
+    requiredAsterisk: {
+      label: 'formFieldLayout__requiredAsterisk',
+      color: componentTheme.asteriskColor
     }
   }
 }
