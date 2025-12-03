@@ -25,7 +25,11 @@
 import { useStyle, useTheme } from '@instructure/emotion'
 import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
-import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  passthroughProps,
+  safeCloneElement
+} from '@instructure/ui-react-utils'
 import type { AvatarProps } from './props'
 
 import generateStyle from './styles'
@@ -124,6 +128,21 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       />
     )
 
+    const colorToIconMapping = {
+      accent1: 'accentBlueColor',
+      accent2: 'accentGreenColor',
+      accent3: 'accentRedColor',
+      accent4: 'accentOrangeColor',
+      accent5: 'accentGreyColor',
+      accent6: 'accentAshColor',
+      ai: ''
+    }
+
+    const renderIconHandler = () =>
+      safeCloneElement(callRenderProp(renderIcon), {
+        color: colorToIconMapping[color]
+      })
+
     const renderContent = () => {
       //image in avatar - prioritize image over icon
       if (src) {
@@ -138,7 +157,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       //icon in avatar
       //TODO-REWORK make the icon inherit the size prop of the Avatar when the icons have it
       if (renderIcon) {
-        return callRenderProp(renderIcon)
+        return renderIconHandler()
       }
 
       //initials in avatar
