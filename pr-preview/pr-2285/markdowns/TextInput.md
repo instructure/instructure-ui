@@ -11,9 +11,23 @@ type: example
 ---
   <Flex gap='medium' direction='column'>
     <TextInput
-      renderAfterInput={<SVGIcon src={iconExample} />}
-      renderBeforeInput={<SVGIcon src={iconExample} />}
+      size="small"
+      renderAfterInput={<AlarmClockInstUIIcon />}
+      renderBeforeInput={<AlarmClockInstUIIcon />}
+      renderLabel='small'
+      placeholder="placeholder"
+    />
+    <TextInput
+      renderAfterInput={<AlarmClockInstUIIcon />}
+      renderBeforeInput={<AlarmClockInstUIIcon />}
       renderLabel='normal'
+      placeholder="placeholder"
+    />
+    <TextInput
+      size="large"
+      renderAfterInput={<AlarmClockInstUIIcon />}
+      renderBeforeInput={<AlarmClockInstUIIcon />}
+      renderLabel='large'
       placeholder="placeholder"
     />
     <TextInput
