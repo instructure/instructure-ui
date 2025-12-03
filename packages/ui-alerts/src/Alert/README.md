@@ -2,6 +2,10 @@
 describes: Alert
 ---
 
+http://localhost:9090/Alert
+
+http://localhost:9090/#Alert
+
 The Alert component can be used to notify the user. It supports several
 variants to provide context to the message.
 
