@@ -12,6 +12,59 @@
       "activeBackground": {
         "value": "{color.background.interactive.action.primary.base}",
         "type": "color"
+      },
+      "activeIconColor": {
+        "value": "{color.icon.interactive.action.primary.base}",
+        "type": "color"
+      },
+      "activeLabelColor": {
+        "value": "{color.text.interactive.action.primary.base}",
+        "type": "color"
+      },
+      "background": {
+        "value": "{color.background.elevatedSurface.base}",
+        "type": "color"
+      },
+      "fontFamily": {
+        "value": "{fontFamily.base}",
+        "type": "fontFamilies"
+      },
+      "fontSize": {
+        "value": "{fontSize.textBase}",
+        "type": "fontSizes"
+      },
+      "fontWeight": {
+        "value": "{fontWeight.body.base}",
+        "type": "fontWeights"
+      },
+      "iconColor": {
+        "value": "{color.icon.base}",
+        "type": "color"
+      },
+      "iconPadding": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing",
+        "description": "code only token"
+      },
+      "labelColor": {
+        "value": "{color.text.base}",
+        "type": "color"
+      },
+      "labelInfoColor": {
+        "value": "{color.text.muted}",
+        "type": "color"
+      },
+      "lineHeight": {
+        "value": "{lineHeight.paragraph.textSm}",
+        "type": "lineHeights"
+      },
+      "paddingHorizontal": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
+      },
+      "paddingVertical": {
+        "value": "{spacing.spaceMd}",
+        "type": "spacing"
       }
     }
   }
