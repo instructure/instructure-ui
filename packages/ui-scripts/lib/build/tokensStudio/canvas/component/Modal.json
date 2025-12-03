@@ -99,6 +99,10 @@
     "paddingCompact": {
       "value": "{spacing.padding.container.xs}",
       "type": "spacing"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
     }
   },
   "modalFooter": {
