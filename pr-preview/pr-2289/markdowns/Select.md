@@ -494,7 +494,7 @@ type: example
       const newOptions = filterOptions(value)
       setInputValue(value)
       setFilteredOptions(newOptions)
-      sethHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
+      setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
       setIsShowingOptions(true)
       setAnnouncement(getOptionsChangedMessage(newOptions))
     }
