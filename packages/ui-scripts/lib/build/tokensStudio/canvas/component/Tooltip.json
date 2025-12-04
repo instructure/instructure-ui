@@ -12,11 +12,7 @@
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
     },
-    "paddingHorizontal": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
-    "paddingVertical": {
+    "padding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     }
