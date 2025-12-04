@@ -102,9 +102,9 @@ You can include icons in `Breadcrumb.Link`:
 type: example
 ---
 <Breadcrumb label="Breadcrumb with icons">
-  <Breadcrumb.Link renderIcon={<IconBankLine size="small" />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
-  <Breadcrumb.Link renderIcon={<IconClockLine size="small" />} onClick={() => {}}>History</Breadcrumb.Link>
-  <Breadcrumb.Link renderIcon={IconPlusLine} iconPlacement="end">New Question</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<FolderOpenInstUIIcon />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<Clock4InstUIIcon />} onClick={() => {}}>History</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<PlusInstUIIcon />} iconPlacement="end">New Question</Breadcrumb.Link>
 </Breadcrumb>
 ```
 
