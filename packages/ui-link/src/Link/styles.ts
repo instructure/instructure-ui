@@ -145,6 +145,7 @@ const generateStyle = (
     verticalAlign: 'baseline',
     fontSize: variantStyles.fontSize,
     lineHeight: variantStyles.lineHeight,
+    color: componentTheme.unstyledTextColor,
 
     // set up focus styles
     borderRadius: '0.125rem',
