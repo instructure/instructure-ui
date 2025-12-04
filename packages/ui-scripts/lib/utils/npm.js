@@ -140,7 +140,10 @@ export function createNPMRCFile() {
 
     if (userNpmrcBackup.existed) {
       // Append to existing content
-      fs.writeFileSync(userNpmrcPath, userNpmrcBackup.content + '\n' + authConfig)
+      fs.writeFileSync(
+        userNpmrcPath,
+        userNpmrcBackup.content + '\n' + authConfig
+      )
     } else {
       // Create new file
       fs.writeFileSync(userNpmrcPath, authConfig)

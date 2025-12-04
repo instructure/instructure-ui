@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { PillTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PillProps, PillStyle } from './props'
 
 /**
@@ -36,35 +36,31 @@ import type { PillProps, PillStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: PillTheme,
+  componentTheme: NewComponentTypes['Pill'],
   props: PillProps
 ): PillStyle => {
   const { color } = props
 
   const pillColorVariants = {
     primary: {
-      color: componentTheme.primaryColor,
-      borderColor: componentTheme.primaryColor
+      color: componentTheme.baseTextColor,
+      borderColor: componentTheme.baseBorderColor
     },
     success: {
-      color: componentTheme.successColor,
-      borderColor: componentTheme.successColor
-    },
-    danger: {
-      color: componentTheme.dangerColor,
-      borderColor: componentTheme.dangerColor
+      color: componentTheme.successTextColor,
+      borderColor: componentTheme.successBorderColor
     },
     info: {
-      color: componentTheme.infoColor,
-      borderColor: componentTheme.infoColor
+      color: componentTheme.infoTextColor,
+      borderColor: componentTheme.infoBorderColor
     },
     warning: {
-      color: componentTheme.warningColor,
-      borderColor: componentTheme.warningColor
+      color: componentTheme.warningTextColor,
+      borderColor: componentTheme.warningBorderColor
     },
-    alert: {
-      color: componentTheme.alertColor,
-      borderColor: componentTheme.alertColor
+    error: {
+      color: componentTheme.errorTextColor,
+      borderColor: componentTheme.errorBorderColor
     }
   }
 
@@ -74,12 +70,11 @@ const generateStyle = (
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontFamily: componentTheme.fontFamily,
       boxSizing: 'border-box',
-      padding: componentTheme.padding,
-      background: componentTheme.background,
+      padding: `0 ${componentTheme.paddingHorizontal}`,
+      background: componentTheme.backgroundColor,
       borderWidth: componentTheme.borderWidth,
-      borderStyle: componentTheme.borderStyle,
+      borderStyle: componentTheme.borderStyle.style,
       borderRadius: componentTheme.borderRadius,
       /* line-height does not account for top/bottom border width */
       lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,

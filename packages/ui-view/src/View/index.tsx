@@ -33,7 +33,7 @@ import {
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -94,7 +94,9 @@ class View extends Component<ViewProps> {
 
     let shouldLogError = true
     try {
-      shouldLogError = process.env.NODE_ENV !== 'production'
+      shouldLogError =
+        process.env.NODE_ENV !== 'production' ||
+        process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true'
     } catch (e) {
       if (e instanceof ReferenceError) {
         // if process is not available a ReferenceError is thrown

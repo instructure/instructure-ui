@@ -22,9 +22,13 @@
  * SOFTWARE.
  */
 
-import type { FormFieldMessageTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { FormFieldMessageProps, FormFieldMessageStyle } from './props'
 import type { FormMessageType } from '../FormPropTypes'
+
+type StyleParams = {
+  variant: FormFieldMessageProps['variant']
+}
 
 /**
  * ---
@@ -37,24 +41,25 @@ import type { FormMessageType } from '../FormPropTypes'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: FormFieldMessageTheme,
-  props: FormFieldMessageProps
+  componentTheme: NewComponentTypes['FormFieldMessage'],
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): FormFieldMessageStyle => {
-  const { variant } = props
+  const { variant } = params
 
   const variants: Record<FormMessageType, { color?: string }> = {
-    hint: { color: componentTheme.colorHint },
-    error: { color: componentTheme.colorError },
-    newError: { color: componentTheme.colorError },
-    success: { color: componentTheme.colorSuccess },
+    hint: { color: componentTheme.hintTextColor },
+    error: { color: componentTheme.errorTextColor },
+    newError: { color: componentTheme.errorTextColor },
+    success: { color: componentTheme.successTextColor },
     'screenreader-only': {}
   }
 
   return {
-    errorIcon: {
+    icon: {
       fontSize: componentTheme.fontSize,
-      marginRight: componentTheme.errorIconMarginRight,
-      lineHeight: 1.25,
+      marginRight: sharedTokens.spacing.general.spaceXs,
+      lineHeight: 1.25
     },
     formFieldMessage: {
       label: 'formFieldMessage',

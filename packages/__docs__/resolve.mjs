@@ -58,6 +58,7 @@ const alias = {
     import.meta.dirname,
     '../ui-date-time-input/src/'
   ),
+  '@instructure/ui-decorator$': path.resolve(import.meta.dirname, '../ui-decorator/src/'),
   '@instructure/ui-dialog$': path.resolve(import.meta.dirname, '../ui-dialog/src/'),
   '@instructure/ui-docs-client$': path.resolve(
     import.meta.dirname,
@@ -91,6 +92,7 @@ const alias = {
   ),
   '@instructure/ui-grid$': path.resolve(import.meta.dirname, '../ui-grid/src/'),
   '@instructure/ui-i18n$': path.resolve(import.meta.dirname, '../ui-i18n/src/'),
+  '@instructure/ui-icons-lucide': path.resolve(import.meta.dirname, '../ui-icons-lucide/src/'),
   '@instructure/ui-img$': path.resolve(import.meta.dirname, '../ui-img/src/'),
   '@instructure/ui-instructure$': path.resolve(import.meta.dirname, '../ui-instructure/src/'),
   '@instructure/ui-link$': path.resolve(import.meta.dirname, '../ui-link/src/'),

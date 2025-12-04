@@ -1,0 +1,360 @@
+{
+  "sharedTokens": {
+    "legacySpacing": {
+      "xxxSmall": {
+        "value": "0.125rem",
+        "type": "spacing"
+      },
+      "xxSmall": {
+        "value": "0.375rem",
+        "type": "spacing"
+      },
+      "xSmall": {
+        "value": "0.5rem",
+        "type": "spacing"
+      },
+      "small": {
+        "value": "0.75rem",
+        "type": "spacing"
+      },
+      "mediumSmall": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "medium": {
+        "value": "1.5rem",
+        "type": "spacing"
+      },
+      "large": {
+        "value": "2.25rem",
+        "type": "spacing"
+      },
+      "xLarge": {
+        "value": "3rem",
+        "type": "spacing"
+      },
+      "xxLarge": {
+        "value": "3.75rem",
+        "type": "spacing"
+      },
+      "space0": {
+        "value": "0rem",
+        "type": "spacing"
+      },
+      "space2": {
+        "value": "0.125rem",
+        "type": "spacing"
+      },
+      "space4": {
+        "value": "0.25rem",
+        "type": "spacing"
+      },
+      "space8": {
+        "value": "0.5rem",
+        "type": "spacing"
+      },
+      "space12": {
+        "value": "0.75rem",
+        "type": "spacing"
+      },
+      "space16": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "space24": {
+        "value": "1.5rem",
+        "type": "spacing"
+      },
+      "space36": {
+        "value": "2.25rem",
+        "type": "spacing"
+      },
+      "space48": {
+        "value": "3rem",
+        "type": "spacing"
+      },
+      "space60": {
+        "value": "3.75rem",
+        "type": "spacing"
+      },
+      "sections": {
+        "value": "2.25rem",
+        "type": "spacing"
+      },
+      "sectionElements": {
+        "value": "1.5em",
+        "type": "spacing"
+      },
+      "trayElements": {
+        "value": "1.5em",
+        "type": "spacing"
+      },
+      "modalElements": {
+        "value": "1.5em",
+        "type": "spacing"
+      },
+      "moduleElements": {
+        "value": "1em",
+        "type": "spacing"
+      },
+      "paddingCardLarge": {
+        "value": "1.5rem",
+        "type": "spacing"
+      },
+      "paddingCardMedium": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "paddingCardSmall": {
+        "value": "0.75rem",
+        "type": "spacing"
+      },
+      "selects": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "textareas": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "inputFields": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "checkboxes": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "radios": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "toggles": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "buttons": {
+        "value": "0.75rem",
+        "type": "spacing"
+      },
+      "tags": {
+        "value": "0.75rem",
+        "type": "spacing"
+      },
+      "statusIndicators": {
+        "value": "0.75rem",
+        "type": "spacing"
+      },
+      "dataPoints": {
+        "value": "0.75rem",
+        "type": "spacing"
+      }
+    },
+    "boxShadow": {
+      "elevation1": {
+        "value": [
+          {
+            "x": "{dropShadow.x.elevation1.dropshadow1}",
+            "y": "{dropShadow.y.elevation1.dropshadow1}",
+            "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+            "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+            "color": "{color.dropShadow.shadowColor1}",
+            "type": "dropShadow"
+          },
+          {
+            "x": "{dropShadow.x.elevation1.dropshadow2}",
+            "y": "{dropShadow.y.elevation1.dropshadow2}",
+            "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+            "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+            "color": "{color.dropShadow.shadowColor2}",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Elevated base surfaces: Persistent UI and everyday interactive surfaces like navigation, cards, inputs, and buttons."
+      },
+      "elevation2": {
+        "value": [
+          {
+            "x": "{dropShadow.x.elevation2.dropshadow1}",
+            "y": "{dropShadow.y.elevation2.dropshadow1}",
+            "blur": "{dropShadow.blur.elevation2.dropshadow1}",
+            "spread": "{dropShadow.spread.elevation2.dropshadow1}",
+            "color": "{color.dropShadow.shadowColor2}",
+            "type": "dropShadow"
+          },
+          {
+            "x": "{dropShadow.x.elevation2.dropshadow2}",
+            "y": "{dropShadow.y.elevation2.dropshadow2}",
+            "blur": "{dropShadow.blur.elevation2.dropshadow2}",
+            "spread": "{dropShadow.spread.elevation2.dropshadow2}",
+            "color": "{color.dropShadow.shadowColor1}",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Menus & Popovers: Anchored, contextual layers such as dropdowns, popovers, and context menus."
+      },
+      "elevation3": {
+        "value": [
+          {
+            "x": "{dropShadow.x.elevation3.dropshadow1}",
+            "y": "{dropShadow.y.elevation3.dropshadow1}",
+            "blur": "{dropShadow.blur.elevation3.dropshadow1}",
+            "spread": "{dropShadow.spread.elevation3.dropshadow1}",
+            "color": "{color.dropShadow.shadowColor2}",
+            "type": "dropShadow"
+          },
+          {
+            "x": "{dropShadow.x.elevation3.dropshadow2}",
+            "y": "{dropShadow.y.elevation3.dropshadow2}",
+            "blur": "{dropShadow.blur.elevation3.dropshadow2}",
+            "spread": "{dropShadow.spread.elevation3.dropshadow2}",
+            "color": "{color.dropShadow.shadowColor1}",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Floating UI: Detached, transient elements like tooltips, hover cards, and floating actions."
+      },
+      "elevation4": {
+        "value": [
+          {
+            "x": "{dropShadow.x.elevation4.dropshadow1}",
+            "y": "{dropShadow.y.elevation4.dropshadow1}",
+            "blur": "{dropShadow.blur.elevation4.dropshadow1}",
+            "spread": "{dropShadow.spread.elevation4.dropshadow1}",
+            "color": "{color.dropShadow.shadowColor2}",
+            "type": "dropShadow"
+          },
+          {
+            "x": "{dropShadow.x.elevation4.dropshadow2}",
+            "y": "{dropShadow.y.elevation4.dropshadow2}",
+            "blur": "{dropShadow.blur.elevation4.dropshadow2}",
+            "spread": "{dropShadow.spread.elevation4.dropshadow2}",
+            "color": "{color.dropShadow.shadowColor1}",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Dialogs & Panels: Top-priority surfaces including modals, alerts, and side panels."
+      }
+    },
+    "spacing": {
+      "general": {
+        "space2xs": {
+          "value": "{spacing.space2xs}",
+          "type": "spacing"
+        },
+        "spaceXs": {
+          "value": "{spacing.spaceXs}",
+          "type": "spacing"
+        },
+        "spaceSm": {
+          "value": "{spacing.spaceSm}",
+          "type": "spacing"
+        },
+        "spaceMd": {
+          "value": "{spacing.spaceMd}",
+          "type": "spacing"
+        },
+        "spaceLg": {
+          "value": "{spacing.spaceLg}",
+          "type": "spacing"
+        },
+        "spaceXl": {
+          "value": "{spacing.spaceXl}",
+          "type": "spacing"
+        },
+        "space2xl": {
+          "value": "{spacing.space2xl}",
+          "type": "spacing"
+        }
+      },
+      "gap": {
+        "sections": {
+          "value": "{spacing.gap.sections}",
+          "type": "spacing"
+        },
+        "buttons": {
+          "value": "{spacing.spaceSm}",
+          "type": "spacing"
+        },
+        "cards": {
+          "sm": {
+            "value": "{spacing.gap.cards.sm}",
+            "type": "spacing"
+          },
+          "md": {
+            "value": "{spacing.gap.cards.md}",
+            "type": "spacing"
+          }
+        },
+        "inputs": {
+          "horizontal": {
+            "value": "{spacing.gap.inputs.horizontal}",
+            "type": "spacing"
+          },
+          "vertical": {
+            "value": "{spacing.gap.inputs.vertical}",
+            "type": "spacing"
+          }
+        }
+      }
+    },
+    "focusOutline": {
+      "offset": {
+        "value": "{spacing.space2xs}",
+        "type": "spacing"
+      },
+      "inset": {
+        "value": "0rem",
+        "type": "spacing"
+      },
+      "width": {
+        "value": "{borderWidth.md}",
+        "type": "borderWidth"
+      },
+      "infoColor": {
+        "value": "{color.stroke.interactive.focusRing.base}",
+        "type": "color"
+      },
+      "onColor": {
+        "value": "{color.stroke.interactive.focusRing.onColor}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.stroke.interactive.action.success.base}",
+        "type": "color"
+      },
+      "dangerColor": {
+        "value": "{color.stroke.interactive.action.destructive.base}",
+        "type": "color"
+      }
+    },
+    "radiusSmall": {
+      "value": "0.125rem",
+      "type": "borderRadius"
+    },
+    "radiusMedium": {
+      "value": "0.25rem",
+      "type": "borderRadius"
+    },
+    "radiusLarge": {
+      "value": "0.5rem",
+      "type": "borderRadius"
+    },
+    "widthSmall": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "widthMedium": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "widthLarge": {
+      "value": "{borderWidth.lg}",
+      "type": "borderWidth"
+    }
+  }
+}
