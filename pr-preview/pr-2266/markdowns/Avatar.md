@@ -57,7 +57,7 @@ readonly: true
 
 ### Using Lucide Icons
 
-Avatar automatically sizes Lucide icons based on the Avatar's `size` prop. You don't need to manually set the icon size - the Avatar component handles this for you.
+Lucide icons in Avatar are automatically sized and colored according to the Avatar's `size` and `color` props, so manual adjustments are not needed on the icon itself.
 
 ```js
 ---
@@ -78,10 +78,13 @@ type: example
     <Avatar name="Group" size="medium" color="accent3" renderIcon={<UsersInstUIIcon />} />
     <Avatar name="Settings" size="large" color="accent4" renderIcon={<SettingsInstUIIcon />} />
   </View>
+  <View display="block" padding="small medium">
+    <Avatar name="Profile" size="large" color="accent4" renderIcon={()=><CircleUserInstUIIcon />} />
+    <Avatar name="Group" size="x-large" color="accent5" renderIcon={()=><UsersInstUIIcon />} />
+    <Avatar name="Settings" size="xx-large" color="accent6" renderIcon={()=><SettingsInstUIIcon />} />
+  </View>
 </div>
 ```
-
-**Note:** When using Lucide icons with Avatar, do not specify the `size` and `color` prop on the icon itself. The Avatar component will automatically pass the appropriate size and color based on the current theme. Icon should be passed as either a reference to the icon component (`UserInstUIIcon`) or as JSX (`<UserInstUIIcon />`).
 
 ### Size
 
