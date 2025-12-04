@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { BreadcrumbTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { BreadcrumbProps, BreadcrumbStyle } from './props'
 
 /**
@@ -32,83 +32,53 @@ import type { BreadcrumbProps, BreadcrumbStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: BreadcrumbTheme,
-  props: BreadcrumbProps
+  componentTheme: NewComponentTypes['Breadcrumb'],
+  props: BreadcrumbProps,
 ): BreadcrumbStyle => {
   const { size } = props
 
-  const crumbSizeVariants = {
-    small: {
-      fontSize: componentTheme.smallFontSize,
-      paddingInlineEnd: `calc(${componentTheme.smallSeparatorFontSize} * 2)`,
-      paddingInlineStart: 0
-    },
-    medium: {
-      fontSize: componentTheme.mediumFontSize,
-      paddingInlineEnd: `calc(${componentTheme.mediumSeparatorFontSize} * 2)`,
-      paddingInlineStart: 0
-    },
-    large: {
-      fontSize: componentTheme.largeFontSize,
-      paddingInlineEnd: `calc(${componentTheme.largeSeparatorFontSize} * 2)`,
-      paddingInlineStart: 0
-    }
-  }
-
-  const separatorSizeVariants = {
-    small: {
-      fontSize: componentTheme.smallSeparatorFontSize,
-      insetInlineEnd: `calc(${componentTheme.smallSeparatorFontSize} / 2)`,
-      insetInlineStart: 'auto',
-      marginTop: `calc(-1 * (${componentTheme.smallSeparatorFontSize} / 2))`
-    },
-    medium: {
-      fontSize: componentTheme.mediumSeparatorFontSize,
-      insetInlineEnd: `calc(${componentTheme.mediumSeparatorFontSize} / 2)`,
-      insetInlineStart: 'auto',
-      marginTop: `calc(-1 * (${componentTheme.mediumSeparatorFontSize} / 2))`
-    },
-    large: {
-      fontSize: componentTheme.largeSeparatorFontSize,
-      insetInlineEnd: `calc(${componentTheme.largeSeparatorFontSize} / 2)`,
-      insetInlineStart: 'auto',
-      marginTop: `calc(-1 * (${componentTheme.largeSeparatorFontSize} / 2))`
-    }
+  const gapSizeVariants = {
+    small: componentTheme.gapSm,
+    medium: componentTheme.gapMd,
+    large: componentTheme.gapLg
   }
 
   return {
     breadcrumb: {
       label: 'breadcrumb',
-      fontFamily: componentTheme.fontFamily,
       margin: 0,
       padding: 0,
       listStyleType: 'none',
       overflow: 'visible',
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      gap: gapSizeVariants[size!]
     },
     crumb: {
       label: 'breadcrumb__crumb',
       boxSizing: 'border-box',
-      position: 'relative',
-      ...crumbSizeVariants[size!],
+      display: 'flex',
+      alignItems: 'center',
 
-      '&:last-child': {
-        paddingInlineEnd: 0
+      // prevent text clipping
+      '[data-cid~="TruncateText"]': {
+        overflow: 'visible',
+
+        // prevent extra spacing after the '...'
+        '& [class*="truncateText__spacer"]': {
+          display: 'inline'
+        }
       }
     },
     separator: {
       label: 'breadcrumb__separator',
-
       boxSizing: 'border-box',
-      position: 'absolute',
-      top: '50%',
-      color: componentTheme.separatorColor,
-      ...separatorSizeVariants[size!]
+      display: 'inline-flex',
+      alignItems: 'center',
+      flexShrink: 0
     }
   }
 }
