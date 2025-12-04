@@ -1,12 +1,21 @@
 {
   "rangeInput": {
-    "handleBackground": {
+    "handleBackgroundColor": {
       "value": "{color.background.brand}",
       "type": "color"
     },
     "handleHoverBackground": {
       "value": "{color.background.brand}",
       "type": "color"
+    },
+    "handleFocusBackground": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "handleShadowColor": {
+      "value": "{color.background.brand}",
+      "type": "color",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant\n"
     },
     "handleBorderColor": {
       "value": "{color.stroke.brand}",
@@ -20,7 +29,7 @@
       "value": "{spacing.space2xs}",
       "type": "spacing"
     },
-    "trackBackground": {
+    "trackBackgroundColor": {
       "value": "{color.background.interactive.input.base}",
       "type": "color"
     },
@@ -71,6 +80,45 @@
     "trackBorderColor": {
       "value": "{color.stroke.interactive.input.base}",
       "type": "color"
+    },
+    "minWidth": {
+      "value": "12.5rem",
+      "type": "sizing"
+    },
+    "handleSize": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "boxShadow": {
+      "value": [
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow1}",
+          "y": "{dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow2}",
+          "y": "{dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "innerShadow"
+        }
+      ],
+      "type": "boxShadow"
+    },
+    "handleFocusOutlineColor": {
+      "value": "{color.background.brand}",
+      "type": "color",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant"
+    },
+    "handleFocusOutlineWidth": {
+      "value": "0.75em",
+      "type": "borderWidth",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant"
     }
   }
 }

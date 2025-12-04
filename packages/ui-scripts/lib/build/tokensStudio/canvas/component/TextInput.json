@@ -141,15 +141,15 @@
       "type": "spacing"
     },
     "paddingHorizontalSm": {
-      "value": "{spacing.padding.interactive.horizontal.sm}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "paddingHorizontalMd": {
-      "value": "{spacing.padding.interactive.horizontal.md}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "paddingHorizontalLg": {
-      "value": "{spacing.padding.interactive.horizontal.lg}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     }
   }

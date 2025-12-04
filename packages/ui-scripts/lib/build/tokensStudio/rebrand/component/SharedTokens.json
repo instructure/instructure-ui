@@ -276,6 +276,10 @@
           "value": "{spacing.gap.sections}",
           "type": "spacing"
         },
+        "buttons": {
+          "value": "{spacing.spaceMd}",
+          "type": "spacing"
+        },
         "cards": {
           "sm": {
             "value": "{spacing.gap.cards.sm}",
@@ -295,10 +299,6 @@
             "value": "{spacing.gap.inputs.vertical}",
             "type": "spacing"
           }
-        },
-        "inputElements": {
-          "value": "{spacing.gap.inputElements}",
-          "type": "spacing"
         }
       }
     },
