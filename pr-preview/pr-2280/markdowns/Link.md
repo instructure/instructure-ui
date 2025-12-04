@@ -98,7 +98,7 @@ type: example
   <br />
   <div>
     If the link is standalone (not in a text), use the <code>standalone</code> variant:
-    <Link display="block" variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+    <Link variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
   </div>
 </div>
 ```
