@@ -38,7 +38,8 @@
       "canvas/component/Drilldown": "enabled",
       "canvas/component/Options": "enabled",
       "canvas/component/RangeInput": "enabled",
-      "canvas/component/Menu": "enabled"
+      "canvas/component/Menu": "enabled",
+      "canvas/component/FileDrop": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -742,6 +743,13 @@
       "drilldown.headerActionColor": "0f53eff4edc5cf9f040a3afa20ca0cc68316faf2",
       "drilldown.headerTitleFontWeight": "2cbcbb7c172c952c92ad5537a084f40ba2d5429e",
       "drilldown.labelInfoColor": "d77241bd85aafaa919abc515362e5f643cd1e03a",
+      "fileDrop.acceptedColor": "54adea0182e538e181c5ddbe98d3735e7098485e",
+      "fileDrop.backgroundColor": "2130cf335244a39ec22243ed0de9df3837d1a112",
+      "fileDrop.borderColor": "29354b57427d151255b53a6f4d63632aaad1f3f8",
+      "fileDrop.borderRadius": "cc300be87ba01c418d946a1c6f15511edcb04f15",
+      "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
+      "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
+      "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
@@ -1519,7 +1527,8 @@
       "canvas/component/Drilldown": "enabled",
       "canvas/component/Options": "enabled",
       "canvas/component/RangeInput": "enabled",
-      "canvas/component/Menu": "enabled"
+      "canvas/component/Menu": "enabled",
+      "canvas/component/FileDrop": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -2158,6 +2167,13 @@
       "drilldown.headerActionColor": "0f53eff4edc5cf9f040a3afa20ca0cc68316faf2",
       "drilldown.headerTitleFontWeight": "2cbcbb7c172c952c92ad5537a084f40ba2d5429e",
       "drilldown.labelInfoColor": "d77241bd85aafaa919abc515362e5f643cd1e03a",
+      "fileDrop.acceptedColor": "54adea0182e538e181c5ddbe98d3735e7098485e",
+      "fileDrop.backgroundColor": "2130cf335244a39ec22243ed0de9df3837d1a112",
+      "fileDrop.borderColor": "29354b57427d151255b53a6f4d63632aaad1f3f8",
+      "fileDrop.borderRadius": "cc300be87ba01c418d946a1c6f15511edcb04f15",
+      "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
+      "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
+      "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
@@ -2935,7 +2951,8 @@
       "rebrand/component/Drilldown": "enabled",
       "rebrand/component/Menu": "enabled",
       "rebrand/component/Options": "enabled",
-      "rebrand/component/RangeInput": "enabled"
+      "rebrand/component/RangeInput": "enabled",
+      "rebrand/component/FileDrop": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -3722,6 +3739,13 @@
       "drilldown.headerActionColor": "0f53eff4edc5cf9f040a3afa20ca0cc68316faf2",
       "drilldown.headerTitleFontWeight": "2cbcbb7c172c952c92ad5537a084f40ba2d5429e",
       "drilldown.labelInfoColor": "d77241bd85aafaa919abc515362e5f643cd1e03a",
+      "fileDrop.acceptedColor": "54adea0182e538e181c5ddbe98d3735e7098485e",
+      "fileDrop.backgroundColor": "2130cf335244a39ec22243ed0de9df3837d1a112",
+      "fileDrop.borderColor": "29354b57427d151255b53a6f4d63632aaad1f3f8",
+      "fileDrop.borderRadius": "cc300be87ba01c418d946a1c6f15511edcb04f15",
+      "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
+      "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
+      "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
@@ -4414,7 +4438,8 @@
       "rebrand/component/Drilldown": "enabled",
       "rebrand/component/Menu": "enabled",
       "rebrand/component/Options": "enabled",
-      "rebrand/component/RangeInput": "enabled"
+      "rebrand/component/RangeInput": "enabled",
+      "rebrand/component/FileDrop": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -5136,6 +5161,13 @@
       "drilldown.headerActionColor": "0f53eff4edc5cf9f040a3afa20ca0cc68316faf2",
       "drilldown.headerTitleFontWeight": "2cbcbb7c172c952c92ad5537a084f40ba2d5429e",
       "drilldown.labelInfoColor": "d77241bd85aafaa919abc515362e5f643cd1e03a",
+      "fileDrop.acceptedColor": "54adea0182e538e181c5ddbe98d3735e7098485e",
+      "fileDrop.backgroundColor": "2130cf335244a39ec22243ed0de9df3837d1a112",
+      "fileDrop.borderColor": "29354b57427d151255b53a6f4d63632aaad1f3f8",
+      "fileDrop.borderRadius": "cc300be87ba01c418d946a1c6f15511edcb04f15",
+      "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
+      "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
+      "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
