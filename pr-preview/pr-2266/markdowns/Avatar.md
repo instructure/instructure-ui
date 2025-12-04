@@ -228,8 +228,8 @@ By default only avatars without an image have borders but you can force it to `a
 type: example
 ---
 <div>
-  <Avatar name="Sarah Robinson" src={avatarSquare} showBorder="always" margin="spacing.spaceXs"/>
-  <Avatar name="Sarah Robinson" renderIcon={UsersInstUIIcon} showBorder="never" margin="spacing.spaceXs"/>
+  <Avatar name="Sarah Robinson" src={avatarSquare} showBorder="always" />
+  <Avatar name="Sarah Robinson" renderIcon={UsersInstUIIcon} showBorder="never" />
 </div>
 ```
 
@@ -246,7 +246,6 @@ type: example
     name="John Doe"
     src={avatarSquare}
     renderIcon={UsersInstUIIcon}
-    margin="spacing.spaceXs"
   />
   <Text>Image takes priority over icon</Text>
 </div>
