@@ -28,6 +28,35 @@ type DeepStringRecord = {
 }
 
 /**
+ * Checks if a token is a valid CSS value that should not be looked up in the theme.
+ *
+ * @param token - The token to check
+ * @returns true if the token is a valid CSS value (like '0', 'auto', '12px', etc.)
+ */
+function isCSSValue(token: string): boolean {
+  // Special CSS keywords
+  if (token === 'auto' || token === '0' || token === 'none') {
+    return true
+  }
+  // CSS units like '4rem', '.5em', '2.6px', '100%', '-10px'
+  // Matches: optional sign, number (with optional decimal), unit (letters or %)
+  return /^([+-]?(\d+\.?\d*|\.\d+))([a-zA-Z]+|%)$/.test(token)
+}
+
+/**
+ * Normalizes CSS values to their canonical form.
+ *
+ * @param token - The CSS value to normalize
+ * @returns The normalized CSS value
+ */
+function normalizeCSSValue(token: string): string {
+  if (token === 'none') {
+    return '0'
+  }
+  return token
+}
+
+/**
  * Converts shorthand margin values into CSS margin strings using theme spacing tokens.
  *
  * This function parses space-separated margin values and resolves theme tokens to their
@@ -51,7 +80,12 @@ export function calcMarginFromShorthand(
   const tokens = value.trim().split(' ')
 
   // Map each token to its resolved CSS value
-  const resolvedValues = tokens.map(token => {
+  const resolvedValues = tokens.map((token) => {
+    // Check if it's a valid CSS value first (before trying theme lookup)
+    if (isCSSValue(token)) {
+      return normalizeCSSValue(token)
+    }
+
     // If the token is already a direct key in spacingMap, and it's a string, return its value
     const directValue = spacingMap[token]
     if (typeof directValue === 'string') {
@@ -64,7 +98,11 @@ export function calcMarginFromShorthand(
       let currentLevel: string | DeepStringRecord = spacingMap
 
       for (const key of path) {
-        if (currentLevel && typeof currentLevel === 'object' && key in currentLevel) {
+        if (
+          currentLevel &&
+          typeof currentLevel === 'object' &&
+          key in currentLevel
+        ) {
           currentLevel = currentLevel[key]
         } else {
           console.warn(`Theme token path "${token}" not found in theme.`)
@@ -76,7 +114,7 @@ export function calcMarginFromShorthand(
         return currentLevel
       }
     }
-    // Return the original token if not found (could be a direct CSS value like 'auto', '10px', etc.)
+    // Return the original token if not found
     console.warn(`Theme token path "${token}" not found in theme.`)
     return token
   })
