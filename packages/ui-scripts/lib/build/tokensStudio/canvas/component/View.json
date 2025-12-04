@@ -61,7 +61,7 @@
       "type": "color"
     },
     "backgroundPrimaryInverse": {
-      "value": "{color.background.dark}",
+      "value": "{color.background.elevatedSurface.inverse}",
       "type": "color"
     },
     "backgroundBrand": {
