@@ -743,7 +743,7 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.blue.blue110}",
+              "value": "{color.blue.blue140}",
               "type": "color"
             },
             "active": {
