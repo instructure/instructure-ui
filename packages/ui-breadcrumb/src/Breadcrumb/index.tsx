@@ -22,22 +22,16 @@
  * SOFTWARE.
  */
 
-import {
-  isValidElement,
-  cloneElement,
-  Children,
-  Component,
-  ReactElement
-} from 'react'
+import { isValidElement, Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
+import { safeCloneElement } from '@instructure/ui-react-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
-import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
+import { withStyle } from '@instructure/emotion'
+import { ChevronRightInstUIIcon } from '@instructure/ui-icons-lucide'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { BreadcrumbProps } from './props'
@@ -48,7 +42,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 
@@ -65,7 +59,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
   }
 
   addAriaCurrent = (child: React.ReactNode) => {
-    const updatedChild = cloneElement(
+    const updatedChild = safeCloneElement(
       child as React.ReactElement<{ 'aria-current'?: string }>,
       {
         'aria-current': 'page'
@@ -77,6 +71,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
   componentDidMount() {
     this.props.makeStyles?.()
   }
+
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
@@ -84,7 +79,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
   static Link = BreadcrumbLink
 
   renderChildren() {
-    const { styles, children } = this.props
+    const { styles, children, size } = this.props
     const numChildren = Children.count(children)
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
@@ -105,17 +100,36 @@ class Breadcrumb extends Component<BreadcrumbProps> {
           isAriaCurrentSet = true
         }
       }
+
+      // Clone child (BreadcrumbLink) and pass size prop
+      const childWithSize = isValidElement(child)
+        ? safeCloneElement(child as ReactElement<any>, { size })
+        : child
+
+      // Map Breadcrumb sizes to icon size tokens
+      const breadcrumbSizeToIconSize = {
+        small: 'sm',
+        medium: 'md',
+        large: 'lg'
+      } as const
+
+      const iconSize = breadcrumbSizeToIconSize[size || 'small']
+
       return (
-        <li css={styles?.crumb} style={inlineStyle}>
-          {!isAriaCurrentSet &&
-          isLastElement &&
-          (child as React.ReactElement<any>).props.isCurrentPage !== false
-            ? this.addAriaCurrent(child)
-            : child}
+        <>
+          <li css={styles?.crumb} style={inlineStyle}>
+            {!isAriaCurrentSet &&
+            isLastElement &&
+            (child as React.ReactElement<any>).props.isCurrentPage !== false
+              ? this.addAriaCurrent(childWithSize)
+              : childWithSize}
+          </li>
           {index < numChildren - 1 && (
-            <IconArrowOpenEndSolid color="auto" css={styles?.separator} />
+            <li aria-hidden="true" css={styles?.separator}>
+              <ChevronRightInstUIIcon size={iconSize} color={'mutedColor'} />
+            </li>
           )}
-        </li>
+        </>
       )
     })
   }

@@ -29,6 +29,7 @@ The following variant values have been **deprecated** and will be removed in a f
 
 ### Theme variable changes
 
+- theme variable `unstyledTextColor` is newly added for non-interactive Links
 - theme variable `fontSize` is now removed
 - theme variable `fontSizeSmall` is now removed
 - theme variable `lineHeight` is now removed
@@ -103,6 +104,24 @@ type: example
   <TextInput renderLabel="Name" placeholder="Doe, John Doe"/>
 </InstUISettingsProvider>
 ```
+### Breadcrumb
+
+#### New tokens 
+
+- gapSm - Gap spacing for small size breadcrumbs
+- gapMd - Gap spacing for medium size breadcrumbs
+- gapLg - Gap spacing for large size breadcrumbs
+
+#### Theme variable changes
+
+- theme variable `fontFamily` is now removed (handled in link component)
+- theme variable `separatorColor` is now removed (handled in link component)
+- theme variable `smallSeparatorFontSize` is now removed (handled in link component)
+- theme variable `smallFontSize` is now removed (handled in link component)
+- theme variable `mediumSeparatorFontSize` is now removed (handled in link component)
+- theme variable `mediumFontSize` is now removed (handled in link component)
+- theme variable `largeSeparatorFontSize` is now removed (handled in link component)
+- theme variable `largeFontSize` is now removed (handled in link component)
 
 ### RadioInput
 
