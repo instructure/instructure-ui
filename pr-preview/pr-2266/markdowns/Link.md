@@ -9,13 +9,7 @@
 ---
 type: example
 ---
-  <div>
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/"
-                                themeOverride={{
-                                  focusOutlineColor: 'pink'
-                                }}>jumps</Link> over the lazy dog.</Text>
-<Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link>
-</div>
+<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
 ```
 
 ```js
@@ -23,9 +17,7 @@ type: example
 type: example
 ---
 <View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/" themeOverride={{
-    focusInverseIconOutlineColor: 'pink'
-  }}>jumps</Link> over the lazy dog.</Text>
+  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
 </View>
 ```
 
@@ -159,57 +151,6 @@ type: example
     </Link>.
   </View>
 </div>
-```
-
-### Theme overrides
-
-Examples showing how theme overrides work for Link:
-
-```js
----
-type: example
----
-<div>
-  <Text>The quick brown fox <Link
-    href="https://instructure.github.io/instructure-ui/"
-    themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusOutlineColor: 'pink'
-    }}>jumps</Link> over the lazy dog.
-  </Text>
-</div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
-    href="https://instructure.github.io/instructure-ui/"
-    themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseOutlineColor: 'green'
-  }}
-  >jumps</Link> over the lazy dog.</Text>
-  <br />
-  <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
-    href="https://instructure.github.io/instructure-ui/"
-    renderIcon={<IconUserLine />}
-    themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseIconOutlineColor: 'red'
-  }}
-  >jumps</Link> over the lazy dog.</Text>
-</View>
 ```
 
 ### Guidelines
