@@ -60,19 +60,19 @@
       "value": "{color.background.info}",
       "type": "color"
     },
-    "meterColoSuccess": {
+    "meterColorSuccess": {
       "value": "{color.background.success}",
       "type": "color"
     },
-    "meterColoSuccessInverse": {
+    "meterColorSuccessInverse": {
       "value": "{color.background.success}",
       "type": "color"
     },
-    "meterColoWarning": {
+    "meterColorWarning": {
       "value": "{color.background.warning}",
       "type": "color"
     },
-    "meterColoWarningInverse": {
+    "meterColorWarningInverse": {
       "value": "{color.background.warning}",
       "type": "color"
     },
