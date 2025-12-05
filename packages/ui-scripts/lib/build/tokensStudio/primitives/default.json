@@ -977,6 +977,10 @@
     "greyOpacity75": {
       "value": "rgba(28,34,43,0.75)",
       "type": "color"
+    },
+    "greyOpacity10": {
+      "value": "rgba(28,34,43,0.1)",
+      "type": "color"
     }
   },
   "size": {

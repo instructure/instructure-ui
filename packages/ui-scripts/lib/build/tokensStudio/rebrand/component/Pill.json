@@ -69,7 +69,7 @@
       "type": "color"
     },
     "borderRadius": {
-      "value": "{borderRadius.full}",
+      "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
     "borderWidth": {
