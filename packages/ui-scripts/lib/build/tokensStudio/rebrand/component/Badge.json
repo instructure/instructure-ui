@@ -8,28 +8,24 @@
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
     },
-    "baseTextColor": {
+    "color": {
       "value": "{color.text.onColor}",
       "type": "color"
     },
-    "onColorTextColor": {
+    "colorInverse": {
       "value": "{color.text.dark}",
       "type": "color"
     },
-    "errorBackgroundColor": {
+    "colorDanger": {
       "value": "{color.background.error}",
       "type": "color"
     },
-    "successBackgroundColor": {
+    "colorSuccess": {
       "value": "{color.background.success}",
       "type": "color"
     },
-    "infoBackgroundColor": {
+    "colorPrimary": {
       "value": "{color.background.info}",
-      "type": "color"
-    },
-    "warningBackgroundColor": {
-      "value": "{color.background.warning}",
       "type": "color"
     },
     "fontSize": {
@@ -40,33 +36,33 @@
       "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
-    "dotSize": {
+    "sizeNotification": {
       "value": "0.75rem",
       "type": "sizing"
     },
-    "onColorBackgroundColor": {
-      "value": "{color.background.onColor}",
-      "type": "color"
-    },
-    "maxHeight": {
+    "size": {
       "value": "1.25rem",
       "type": "sizing"
     },
-    "minWidth": {
-      "value": "1.25rem",
-      "type": "sizing"
-    },
-    "iconVariantSize": {
-      "value": "1.25rem",
-      "type": "sizing"
-    },
-    "lineHeight": {
-      "value": "{lineHeight.standalone.textSm}",
-      "type": "lineHeights"
-    },
-    "paddingHorizontal": {
+    "padding": {
       "value": "{spacing.spaceXs}",
       "type": "spacing"
+    },
+    "countOffset": {
+      "value": "0.5rem",
+      "type": "number"
+    },
+    "notificationOffset": {
+      "value": "0.125rem",
+      "type": "number"
+    },
+    "notificationZIndex": {
+      "value": "1",
+      "type": "number"
+    },
+    "pulseBorderThickness": {
+      "value": "0.125rem",
+      "type": "number"
     }
   }
 }
