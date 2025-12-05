@@ -57,6 +57,10 @@
         "value": "{color.violet.violet20}",
         "type": "color"
       },
+      "opacity": {
+        "value": "{color.greyOpacity10}",
+        "type": "color"
+      },
       "divider": {
         "base": {
           "value": "{color.grey.grey40}",

@@ -20,6 +20,10 @@
       "value": "{lineHeight.heading.base}",
       "type": "lineHeights"
     },
+    "xSmallHeight": {
+      "value": "0.5rem",
+      "type": "sizing"
+    },
     "smallHeight": {
       "value": "1.125rem",
       "type": "sizing"
@@ -96,13 +100,13 @@
       "value": "{color.background.base}",
       "type": "color"
     },
+    "textColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
     "valuePadding": {
       "value": "0.375rem",
       "type": "spacing"
-    },
-    "xSmallHeight": {
-      "value": "0.5rem",
-      "type": "sizing"
     }
   }
 }
