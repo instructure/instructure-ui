@@ -1,11 +1,11 @@
 {
   "rangeInput": {
     "handleBackgroundColor": {
-      "value": "{color.background.brand}",
+      "value": "{color.background.interactive.action.primary.base}",
       "type": "color"
     },
     "handleHoverBackground": {
-      "value": "{color.background.brand}",
+      "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
     },
     "handleFocusBackground": {

@@ -76,12 +76,6 @@
       "value": "{borderWidth.sm}",
       "type": "borderWidth"
     },
-    "borderStyle": {
-      "value": {
-        "style": "solid"
-      },
-      "type": "border"
-    },
     "lineHeight": {
       "value": "{lineHeight.standalone.textSm}",
       "type": "lineHeights"
@@ -89,6 +83,10 @@
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
+    },
+    "borderStyle": {
+      "value": "solid",
+      "type": "text"
     }
   }
 }

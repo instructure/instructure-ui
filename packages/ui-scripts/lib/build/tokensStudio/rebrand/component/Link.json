@@ -115,6 +115,10 @@
     "textDecorationOutsideText": {
       "value": "none",
       "type": "textDecoration"
+    },
+    "unstyledTextColor": {
+      "value": "{color.text.base}",
+      "type": "color"
     }
   }
 }
