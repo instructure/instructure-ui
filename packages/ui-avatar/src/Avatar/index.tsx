@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
-import { useStyle, useTheme } from '@instructure/emotion'
+import { useStyle } from '@instructure/emotion'
 import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
-import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import type { AvatarProps } from './props'
+import {
+  passthroughProps,
+  renderLucideIconWithProps
+} from '@instructure/ui-react-utils'
+import { AvatarProps, avatarSizeToIconSize } from './props'
 
 import generateStyle from './styles'
 
@@ -53,8 +56,6 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       margin
     } = props
     const [loaded, setLoaded] = useState(false)
-    const theme = useTheme()
-    const iconTokens = (theme as any).newTheme.components.Icon
 
     const styles = useStyle({
       generateStyle,
@@ -68,8 +69,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         src,
         showBorder,
         display,
-        margin,
-        iconTokens
+        margin
       },
       componentId: 'Avatar',
       displayName: 'Avatar'
@@ -136,9 +136,14 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       }
 
       //icon in avatar
-      //TODO-REWORK make the icon inherit the size prop of the Avatar when the icons have it
       if (renderIcon) {
-        return callRenderProp(renderIcon)
+        const iconSize = avatarSizeToIconSize[size]
+        const iconColor = styles?.iconColor
+
+        return renderLucideIconWithProps(renderIcon, {
+          size: iconSize,
+          color: iconColor
+        })
       }
 
       //initials in avatar

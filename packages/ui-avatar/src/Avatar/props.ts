@@ -35,6 +35,16 @@ import type {
 } from '@instructure/shared-types'
 import { Renderable } from '@instructure/shared-types'
 
+const avatarSizeToIconSize = {
+  'xx-small': 'xs',
+  'x-small': 'xs',
+  small: 'sm',
+  medium: 'md',
+  large: 'lg',
+  'x-large': 'xl',
+  'xx-large': '2xl'
+} as const
+
 type AvatarOwnProps = {
   /**
    * The name to display. It will be automatically converted to initials.
@@ -48,14 +58,7 @@ type AvatarOwnProps = {
    * Accessible label
    */
   alt?: string
-  size?:
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
+  size?: keyof typeof avatarSizeToIconSize
   color?:
     | 'accent1'
     | 'accent2'
@@ -96,8 +99,9 @@ type AvatarOwnProps = {
   elementRef?: (element: Element | null) => void
   /**
    * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
+   * When using Lucide icons, Avatar will automatically pass the appropriate size and color props based on the Avatar's size and color.
    */
-  renderIcon?: Renderable
+  renderIcon?: Renderable<{ size?: string | number; color?: string }>
 }
 
 export type AvatarState = {
@@ -112,7 +116,9 @@ type AvatarProps = AvatarOwnProps & {
   themeOverride?: ThemeOverrideValue
 } & OtherHTMLAttributes<AvatarOwnProps>
 
-type AvatarStyle = ComponentStyle<'avatar' | 'image'>
+type AvatarStyle = ComponentStyle<'avatar' | 'image'> & {
+  iconColor?: string
+}
 
 const allowedProps: AllowedPropKeys = [
   'name',
@@ -130,4 +136,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { AvatarProps, AvatarStyle }
-export { allowedProps }
+export { allowedProps, avatarSizeToIconSize }

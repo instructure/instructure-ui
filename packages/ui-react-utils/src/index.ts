@@ -32,6 +32,7 @@ export { matchComponentTypes } from './matchComponentTypes'
 export { omitProps } from './omitProps'
 export { passthroughProps } from './passthroughProps'
 export { pickProps } from './pickProps'
+export { renderLucideIconWithProps } from './renderLucideIconWithProps'
 export { safeCloneElement } from './safeCloneElement'
 export { windowMessageListener } from './windowMessageListener'
 export {
