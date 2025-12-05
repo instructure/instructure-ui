@@ -1,7 +1,7 @@
 {
   "progressBar": {
     "borderRadius": {
-      "value": "0rem",
+      "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
     "fontFamily": {
@@ -20,8 +20,12 @@
       "value": "{lineHeight.heading.base}",
       "type": "lineHeights"
     },
+    "xSmallHeight": {
+      "value": "0.5rem",
+      "type": "sizing"
+    },
     "smallHeight": {
-      "value": "1.125rem",
+      "value": "1rem",
       "type": "sizing"
     },
     "mediumHeight": {
@@ -77,15 +81,15 @@
       "type": "color"
     },
     "largeHeight": {
-      "value": "2.25rem",
+      "value": "2rem",
       "type": "sizing"
     },
     "trackBottomBorderColor": {
-      "value": "{color.stroke.strong}",
+      "value": "#00000000",
       "type": "color"
     },
     "trackBottomBorderColorInverse": {
-      "value": "{color.stroke.onColor}",
+      "value": "#00000000",
       "type": "color"
     },
     "trackBottomBorderWidth": {
@@ -93,16 +97,16 @@
       "type": "borderWidth"
     },
     "trackColor": {
-      "value": "{color.background.base}",
+      "value": "{color.background.opacity}",
       "type": "color"
     },
     "valuePadding": {
-      "value": "0.375rem",
+      "value": "{spacing.spaceSm}",
       "type": "spacing"
     },
-    "xSmallHeight": {
-      "value": "0.5rem",
-      "type": "sizing"
+    "textColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
     }
   }
 }
