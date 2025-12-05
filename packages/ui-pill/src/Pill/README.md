@@ -12,9 +12,6 @@ you can use the `statusLabel` prop to add a label to the left of the main text.
 type: example
 ---
 <div>
-
-<InstUISettingsProvider theme={canvas}>
-<div>
   <Pill
     margin="x-small"
   >
@@ -29,142 +26,26 @@ type: example
   </Pill>
   <Pill
     statusLabel="Status"
-    renderIcon={<IconCheckLine />}
+    renderIcon={<CheckInstUIIcon size="sm" />}
     color="success"
     margin="x-small"
   >
     Checked In
   </Pill>
   <Pill
-    renderIcon={<IconClockLine />}
+    renderIcon={<Clock4InstUIIcon size="sm" />}
     color="warning"
     margin="x-small"
   >
     Late
   </Pill>
   <Pill
-    renderIcon={<IconMessageLine />}
+    renderIcon={<MailInstUIIcon size="sm" />}
     color="error"
     margin="x-small"
   >
     Notification
   </Pill>
-</div>
-</InstUISettingsProvider>
-<InstUISettingsProvider theme={canvasHighContrast}>
-<div>
-  <Pill
-    margin="x-small"
-  >
-    Excused
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    color="info"
-    margin="x-small"
-  >
-    Draft
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    renderIcon={<IconCheckLine />}
-    color="success"
-    margin="x-small"
-  >
-    Checked In
-  </Pill>
-  <Pill
-    renderIcon={<IconClockLine />}
-    color="warning"
-    margin="x-small"
-  >
-    Late
-  </Pill>
-  <Pill
-    renderIcon={<IconMessageLine />}
-    color="error"
-    margin="x-small"
-  >
-    Notification
-  </Pill>
-</div>
-</InstUISettingsProvider>
-<InstUISettingsProvider theme={rebrandLight}>
-<div>
-  <Pill
-    margin="x-small"
-  >
-    Excused
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    color="info"
-    margin="x-small"
-  >
-    Draft
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    renderIcon={<IconCheckLine />}
-    color="success"
-    margin="x-small"
-  >
-    Checked In
-  </Pill>
-  <Pill
-    renderIcon={<IconClockLine />}
-    color="warning"
-    margin="x-small"
-  >
-    Late
-  </Pill>
-  <Pill
-    renderIcon={<IconMessageLine />}
-    color="error"
-    margin="x-small"
-  >
-    Notification
-  </Pill>
-</div>
-</InstUISettingsProvider>
-<InstUISettingsProvider theme={rebrandDark}>
-<div>
-  <Pill
-    margin="x-small"
-  >
-    Excused
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    color="info"
-    margin="x-small"
-  >
-    Draft
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    renderIcon={<IconCheckLine />}
-    color="success"
-    margin="x-small"
-  >
-    Checked In
-  </Pill>
-  <Pill
-    renderIcon={<IconClockLine />}
-    color="warning"
-    margin="x-small"
-  >
-    Late
-  </Pill>
-  <Pill
-    renderIcon={<IconMessageLine />}
-    color="error"
-    margin="x-small"
-  >
-    Notification
-  </Pill>
-</div>
-</InstUISettingsProvider>
 </div>
 ```
 
