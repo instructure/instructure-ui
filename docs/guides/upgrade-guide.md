@@ -76,6 +76,37 @@ The new icons automatically sync with theme changes, support all InstUI color to
 - `alert` color has been removed. Please use `primary` instead.
 - Some prop values have been deprecated, see [Text](/Text) for more details.
 
+### Pill
+
+#### Deprecated color prop values
+
+The following `color` prop values have been **removed**:
+
+- `'danger'` - use `'error'` instead
+- `'alert'` - use `'info'` instead
+
+#### Theme variable changes
+
+- theme variable `fontFamily` has been added
+- theme variable `padding` has been renamed to `paddingHorizontal` (now only controls horizontal padding)
+- theme variable `background` has been renamed to `backgroundColor`
+- theme variable `primaryColor` has been split into:
+  - `baseTextColor` (for text color)
+  - `baseBorderColor` (for border color)
+- theme variable `successColor` has been split into:
+  - `successTextColor` (for text color)
+  - `successBorderColor` (for border color)
+- theme variable `infoColor` has been split into:
+  - `infoTextColor` (for text color)
+  - `infoBorderColor` (for border color)
+- theme variable `warningColor` has been split into:
+  - `warningTextColor` (for text color)
+  - `warningBorderColor` (for border color)
+- theme variable `dangerColor` has been removed, replaced with:
+  - `errorTextColor` (for text color)
+  - `errorBorderColor` (for border color)
+- theme variable `alertColor` has been removed (use `info*` variables instead)
+
 ## API Changes
 
 ### Focus rings
