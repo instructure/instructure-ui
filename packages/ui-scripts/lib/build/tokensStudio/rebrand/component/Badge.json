@@ -48,21 +48,21 @@
       "value": "{spacing.spaceXs}",
       "type": "spacing"
     },
-    "countOffset": {
-      "value": "0.5rem",
-      "type": "number"
-    },
     "notificationOffset": {
       "value": "0.125rem",
-      "type": "number"
+      "type": "other"
     },
     "notificationZIndex": {
-      "value": "1",
+      "value": 1,
       "type": "number"
     },
     "pulseBorderThickness": {
       "value": "0.125rem",
-      "type": "number"
+      "type": "other"
+    },
+    "countOffset": {
+      "value": "0.5rem",
+      "type": "other"
     }
   }
 }
