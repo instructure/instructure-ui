@@ -192,6 +192,7 @@ type: example
 - theme variable `colorError` has been renamed to `errorTextColor`
 - theme variable `colorSuccess` has been renamed to `successTextColor`
 - theme variable `errorIconMarginRight` is now removed
+- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
 
 ### FormFieldMessages
 
@@ -233,6 +234,7 @@ type: example
 - theme variable `focusOutlineColor` is now removed
 - theme variable `requiredInvalidColor` is now removed
 - `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
+- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
 
 ### NumberInput
 
@@ -250,16 +252,19 @@ type: example
 - theme variable `focusOutlineColor` is now removed
 - theme variable `requiredInvalidColor` is now removed
 - `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
 
 ### RadioInputGroup
 
 - theme variable `invalidAsteriskColor` is now removed
 - `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
 
 ### TextInput
 
 - theme variable `requiredInvalidColor` is now removed
 - `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
 
 ### Tabs.Panel
 
