@@ -107,6 +107,22 @@
     "textColor": {
       "value": "{color.text.muted}",
       "type": "color"
+    },
+    "xSmallValueFontSize": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "smallValueFontSize": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "mediumValueFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "largeValueFontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
     }
   }
 }
