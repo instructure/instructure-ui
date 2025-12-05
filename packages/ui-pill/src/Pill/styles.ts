@@ -68,15 +68,15 @@ const generateStyle = (
       label: 'pill',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
       boxSizing: 'border-box',
       padding: `0 ${componentTheme.paddingHorizontal}`,
       background: componentTheme.backgroundColor,
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
-      /* line-height does not account for top/bottom border width */
-      lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
+      fontFamily: componentTheme.fontFamily,
+      height: componentTheme.height,
+      lineHeight: componentTheme.lineHeight,
       ...pillColorVariants[color!]
     },
     status: {
