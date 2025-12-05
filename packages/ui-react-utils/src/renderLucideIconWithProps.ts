@@ -58,7 +58,7 @@ const isLucideIcon = (element: any): boolean => {
  * @returns Rendered React element or null
  */
 function renderLucideIconWithProps<P extends Record<string, unknown>>(
-  elementToRender: Renderable<P> | React.ReactElement | undefined,
+  elementToRender: Renderable<P>,
   propsToApply: P
 ): React.ReactElement | null {
   if (!elementToRender) return null
@@ -69,7 +69,7 @@ function renderLucideIconWithProps<P extends Record<string, unknown>>(
   // Use case 2: JSX element like <UserIcon />
   if (React.isValidElement(elementToRender)) {
     return isInputLucide
-      ? React.cloneElement(elementToRender, propsToApply as any)
+      ? React.cloneElement(elementToRender, propsToApply)
       : elementToRender
   }
 
@@ -77,31 +77,19 @@ function renderLucideIconWithProps<P extends Record<string, unknown>>(
   // callRenderProp "extracts" the JSX element by either:
   // 1. Creating it from a component reference: React.createElement(UserIcon, props)
   // 2. Calling the function to get the JSX it returns: (() => <UserIcon />)()
-  // The extracted result is then checked below to apply props if needed (use case 3)
   const result = callRenderProp(
     elementToRender,
     isInputLucide ? propsToApply : ({} as P)
   )
 
-  // Check if the result is a React element that needs props applied
-  if (React.isValidElement(result)) {
-    // Use case 3: Arrow function returning Lucide icon (e.g., () => <UserIcon />)
-    // If function wasn't directly Lucide but result is, apply props now
-    if (!isInputLucide && isLucideIcon(result)) {
-      return React.cloneElement(result, {
-        ...(result.props as Record<string, unknown>),
-        ...propsToApply
-      })
-    }
-
-    // Use case 1: Function with Lucide displayName that ignored props
-    // Force props application by cloning the result
-    if (isInputLucide) {
-      return React.cloneElement(result, {
-        ...(result.props as Record<string, unknown>),
-        ...propsToApply
-      })
-    }
+  // Apply props if result is a valid element and either:
+  // - Input was Lucide (trust that we should apply props to whatever it returns)
+  // - Result itself is Lucide (arrow function returned a Lucide icon)
+  if (React.isValidElement(result) && (isInputLucide || isLucideIcon(result))) {
+    return React.cloneElement(result, {
+      ...(result.props as Record<string, unknown>),
+      ...propsToApply
+    })
   }
 
   return result
