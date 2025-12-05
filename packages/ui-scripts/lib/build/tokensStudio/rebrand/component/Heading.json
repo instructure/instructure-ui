@@ -12,15 +12,15 @@
       "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
-    "h4Fontsize": {
+    "h4FontSize": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
-    "h5Fontsize": {
+    "h5FontSize": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
     },
-    "h6Fontsize": {
+    "h6FontSize": {
       "value": "{fontSize.textXs}",
       "type": "fontSizes"
     },
