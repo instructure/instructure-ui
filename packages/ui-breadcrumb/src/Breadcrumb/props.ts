@@ -26,7 +26,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { BreadcrumbTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 type BreadcrumbOwnProps = {
   /**
@@ -54,9 +54,10 @@ type PropKeys = keyof BreadcrumbOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BreadcrumbProps = BreadcrumbOwnProps &
-  WithStyleProps<BreadcrumbTheme, BreadcrumbStyle>
+  WithStyleProps<NewComponentTypes['Breadcrumb'], BreadcrumbStyle>
 
 type BreadcrumbStyle = ComponentStyle<'breadcrumb' | 'crumb' | 'separator'>
+
 const allowedProps: AllowedPropKeys = ['children', 'label', 'margin', 'size']
 
 export type { BreadcrumbProps, BreadcrumbStyle }

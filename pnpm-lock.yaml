@@ -1245,9 +1245,9 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
-      '@instructure/ui-icons':
+      '@instructure/ui-icons-lucide':
         specifier: workspace:*
-        version: link:../ui-icons
+        version: link:../ui-icons-lucide
       '@instructure/ui-link':
         specifier: workspace:*
         version: link:../ui-link
