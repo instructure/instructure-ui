@@ -109,15 +109,15 @@
       "type": "color"
     },
     "xSmallValueFontSize": {
-      "value": "{fontSize.textXs}",
+      "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "smallValueFontSize": {
-      "value": "{fontSize.textXs}",
+      "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "mediumValueFontSize": {
-      "value": "{fontSize.textSm}",
+      "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "largeValueFontSize": {
