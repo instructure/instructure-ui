@@ -103,7 +103,7 @@ type: example
 <Breadcrumb label="Breadcrumb with icons">
   <Breadcrumb.Link renderIcon={<FolderOpenInstUIIcon />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
   <Breadcrumb.Link renderIcon={<Clock4InstUIIcon />} onClick={() => {}}>History</Breadcrumb.Link>
-  <Breadcrumb.Link renderIcon={IconPlusLine} iconPlacement="end">New Question</Breadcrumb.Link>
+  <Breadcrumb.Link renderIcon={<PlusInstUIIcon />} iconPlacement="end">New Question</Breadcrumb.Link>
 </Breadcrumb>
 ```
 
