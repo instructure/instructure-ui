@@ -75,6 +75,7 @@ const generateStyle = (
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
+      fontFamily: componentTheme.fontFamily,
       /* line-height does not account for top/bottom border width */
       lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
       ...pillColorVariants[color!]
