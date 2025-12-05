@@ -25,6 +25,15 @@
 import { TokenBoxshadowValueInst } from '../themes/newThemes/commonTypes'
 
 /**
+ * Elevation tokens contain multiple layered shadows.
+ * Keys "0" and "1" represent the shadow layers.
+ */
+type ElevationToken = {
+  '0': TokenBoxshadowValueInst
+  '1': TokenBoxshadowValueInst
+}
+
+/**
  * Converts a BoxShadowObject from Token Studio to a CSS box-shadow string
  */
 function boxShadowObjectToString(boxShadowObject: TokenBoxshadowValueInst) {
@@ -42,5 +51,32 @@ function boxShadowObjectToString(boxShadowObject: TokenBoxshadowValueInst) {
     ${boxShadowObject.color}`
 }
 
+/**
+ * Converts an elevation token to a valid CSS box-shadow string.
+ *
+ * Input: sharedTokens.boxShadow.elevation{1,2,3,4} - nested object structure
+ * Output: valid CSS box-shadow value (e.g., "0px 2px 4px 0px rgba(0,0,0,0.1), 0px 4px 8px 0px rgba(0,0,0,0.05)")
+ *
+ * Elevation tokens contain two shadow objects ("0" and "1") that are
+ * combined into a comma-separated CSS value for layered shadows.
+ *
+ * @param elevationToken - Token with "0" and "1" shadow objects from sharedTokens.boxShadow
+ * @returns Valid CSS box-shadow string with comma-separated shadows
+ */
+function elevationTokenToBoxShadow(elevationToken: ElevationToken): string {
+  const shadows: string[] = []
+
+  if (elevationToken['0']) {
+    shadows.push(boxShadowObjectToString(elevationToken['0']))
+  }
+
+  if (elevationToken['1']) {
+    shadows.push(boxShadowObjectToString(elevationToken['1']))
+  }
+
+  return shadows.join(', ')
+}
+
 export default boxShadowObjectToString
-export { boxShadowObjectToString }
+export { boxShadowObjectToString, elevationTokenToBoxShadow }
+export type { ElevationToken }
