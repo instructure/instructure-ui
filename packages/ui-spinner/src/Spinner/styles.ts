@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { keyframes, calcMarginFromShorthand } from '@instructure/emotion'
+import { keyframes, calcSpacingFromShorthand } from '@instructure/emotion'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 
 import type { SpinnerProps, SpinnerStyle } from './props'
@@ -167,7 +167,7 @@ const generateStyle = (
       verticalAlign: 'middle',
       ...spinnerSizes[size!],
       // TODO handle the merging on tokens inside the util
-      margin: calcMarginFromShorthand(margin, {
+      margin: calcSpacingFromShorthand(margin, {
         ...sharedTokens.spacing,
         ...sharedTokens.legacySpacing
       })

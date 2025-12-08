@@ -27,20 +27,63 @@ import { TokenBoxshadowValueInst } from '../themes/newThemes/commonTypes'
 /**
  * Converts a BoxShadowObject from Token Studio to a CSS box-shadow string
  */
-function boxShadowObjectToString(boxShadowObject: TokenBoxshadowValueInst) {
+function boxShadowToCSSString(boxShadowObject: TokenBoxshadowValueInst) {
+  // weird string concatenation is to make it look nice in the debugger
   if (boxShadowObject.type === 'innerShadow') {
-    return `inset ${boxShadowObject.x}
-    ${boxShadowObject.y}
-    ${boxShadowObject.blur ? boxShadowObject.blur : ''}
-    ${boxShadowObject.spread ? boxShadowObject.spread : ''}
-    ${boxShadowObject.color}`
+    return (
+      `inset ${boxShadowObject.x} ` +
+      `${boxShadowObject.y} ` +
+      `${boxShadowObject.blur ? boxShadowObject.blur : ''} ` +
+      `${boxShadowObject.spread ? boxShadowObject.spread : ''} ` +
+      `${boxShadowObject.color}`
+    )
   }
-  return `${boxShadowObject.x}
-    ${boxShadowObject.y}
-    ${boxShadowObject.blur ? boxShadowObject.blur : ''}
-    ${boxShadowObject.spread ? boxShadowObject.spread : ''}
-    ${boxShadowObject.color}`
+  return (
+    `${boxShadowObject.x} ` +
+    `${boxShadowObject.y} ` +
+    `${boxShadowObject.blur ? boxShadowObject.blur : ''} ` +
+    `${boxShadowObject.spread ? boxShadowObject.spread : ''} ` +
+    `${boxShadowObject.color}`
+  )
 }
 
-export default boxShadowObjectToString
-export { boxShadowObjectToString }
+function getShadowsInOrder(
+  shadowsObj: Record<string, TokenBoxshadowValueInst>
+) {
+  return Object.keys(shadowsObj)
+    .sort((a, b) => {
+      const numA = parseInt(a)
+      const numB = parseInt(b)
+      return numA - numB
+    })
+    .map((key) => shadowsObj[key])
+}
+
+/**
+ * Converts a box shadow object that looks like this:
+ * ```
+ * {
+ *   '1': {color: 'rgba(12, 0, 0, 0.2)', x:...},
+ *   '2': {color: 'rgba(0, 0, 0, 0.1)', x:...},
+ *   '0': {color: 'rgba(0, 0, 0, 0.1)', x:...}
+ * }
+ * ```
+ * to a CSS box-shadow string e.g.
+ * ```
+ * 0px 0.375rem 0.4375rem 0px rgba(12,0,0,0.2),
+ * 0px 0.625rem 1.75rem 0px rgba(0,0,0,0.1),
+ * 0px 0.625rem 1.75rem 0px rgba(0,0,0,0.1)
+ * ```
+ */
+function boxShadowObjectsToCSSString(
+  shadowObject: Record<string, TokenBoxshadowValueInst>
+) {
+  const shadows = getShadowsInOrder(shadowObject)
+  let result = ''
+  for (const shadow of shadows) {
+    result += boxShadowToCSSString(shadow) + ',\n'
+  }
+  return result.slice(0, -2)
+}
+
+export { boxShadowToCSSString, boxShadowObjectsToCSSString }

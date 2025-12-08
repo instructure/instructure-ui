@@ -23,9 +23,9 @@
  */
 
 import { describe, it, expect, vi } from 'vitest'
-import { calcMarginFromShorthand } from '../calcMarginFromShorthand'
+import { calcSpacingFromShorthand } from '../calcSpacingFromShorthand'
 
-describe('calcMarginFromShorthand', () => {
+describe('calcSpacingFromShorthand', () => {
   const spacingMap = {
     space0: '0px',
     space4: '4px',
@@ -47,65 +47,65 @@ describe('calcMarginFromShorthand', () => {
 
   describe('single token values', () => {
     it('should resolve a direct key to its value', () => {
-      expect(calcMarginFromShorthand('space4', spacingMap)).toBe('4px')
+      expect(calcSpacingFromShorthand('space4', spacingMap)).toBe('4px')
     })
 
     it('should resolve space0 to 0px', () => {
-      expect(calcMarginFromShorthand('space0', spacingMap)).toBe('0px')
+      expect(calcSpacingFromShorthand('space0', spacingMap)).toBe('0px')
     })
 
     it('should resolve space16 to 16px', () => {
-      expect(calcMarginFromShorthand('space16', spacingMap)).toBe('16px')
+      expect(calcSpacingFromShorthand('space16', spacingMap)).toBe('16px')
     })
   })
 
   describe('multiple token values (CSS shorthand)', () => {
     it('should handle two token values', () => {
-      expect(calcMarginFromShorthand('space4 space8', spacingMap)).toBe('4px 8px')
+      expect(calcSpacingFromShorthand('space4 space8', spacingMap)).toBe('4px 8px')
     })
 
     it('should handle three token values', () => {
-      expect(calcMarginFromShorthand('space4 gap.sm space16', spacingMap)).toBe('4px 2px 16px')
+      expect(calcSpacingFromShorthand('space4 gap.sm space16', spacingMap)).toBe('4px 2px 16px')
     })
 
     it('should handle four token values', () => {
-      expect(calcMarginFromShorthand('space0 space4 space8 space16', spacingMap)).toBe('0px 4px 8px 16px')
+      expect(calcSpacingFromShorthand('space0 space4 space8 space16', spacingMap)).toBe('0px 4px 8px 16px')
     })
   })
 
   describe('nested token paths with dot notation', () => {
     it('should resolve single-level nested path', () => {
-      expect(calcMarginFromShorthand('gap.sm', spacingMap)).toBe('2px')
+      expect(calcSpacingFromShorthand('gap.sm', spacingMap)).toBe('2px')
     })
 
     it('should resolve two-level nested path', () => {
-      expect(calcMarginFromShorthand('gap.nested.xl', spacingMap)).toBe('24px')
+      expect(calcSpacingFromShorthand('gap.nested.xl', spacingMap)).toBe('24px')
     })
 
     it('should handle multiple nested paths', () => {
-      expect(calcMarginFromShorthand('gap.sm gap.nested.xl', spacingMap)).toBe('2px 24px')
+      expect(calcSpacingFromShorthand('gap.sm gap.nested.xl', spacingMap)).toBe('2px 24px')
     })
 
     it('should handle padding.small', () => {
-      expect(calcMarginFromShorthand('padding.small', spacingMap)).toBe('4px')
+      expect(calcSpacingFromShorthand('padding.small', spacingMap)).toBe('4px')
     })
 
     it('should handle padding.large', () => {
-      expect(calcMarginFromShorthand('padding.large', spacingMap)).toBe('16px')
+      expect(calcSpacingFromShorthand('padding.large', spacingMap)).toBe('16px')
     })
   })
 
   describe('mixing direct keys and nested paths', () => {
     it('should handle space0 and gap.sm', () => {
-      expect(calcMarginFromShorthand('space0 gap.sm', spacingMap)).toBe('0px 2px')
+      expect(calcSpacingFromShorthand('space0 gap.sm', spacingMap)).toBe('0px 2px')
     })
 
     it('should handle padding.small and gap.md', () => {
-      expect(calcMarginFromShorthand('padding.small gap.md', spacingMap)).toBe('4px 8px')
+      expect(calcSpacingFromShorthand('padding.small gap.md', spacingMap)).toBe('4px 8px')
     })
 
     it('should handle four mixed values', () => {
-      expect(calcMarginFromShorthand('space4 gap.sm padding.large space16', spacingMap)).toBe('4px 2px 16px 16px')
+      expect(calcSpacingFromShorthand('space4 gap.sm padding.large space16', spacingMap)).toBe('4px 2px 16px 16px')
     })
   })
 
@@ -113,7 +113,7 @@ describe('calcMarginFromShorthand', () => {
     it('should return the original token when not found in spacingMap', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('nonExistent', spacingMap)
+      const result = calcSpacingFromShorthand('nonExistent', spacingMap)
       expect(result).toBe('nonExistent')
       expect(consoleWarnSpy).toHaveBeenCalledWith('Theme token path "nonExistent" not found in theme.')
 
@@ -123,7 +123,7 @@ describe('calcMarginFromShorthand', () => {
     it('should handle CSS values like auto', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('auto', spacingMap)
+      const result = calcSpacingFromShorthand('auto', spacingMap)
       expect(result).toBe('auto')
 
       consoleWarnSpy.mockRestore()
@@ -132,7 +132,7 @@ describe('calcMarginFromShorthand', () => {
     it('should handle direct CSS values like 10px', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('10px', spacingMap)
+      const result = calcSpacingFromShorthand('10px', spacingMap)
       expect(result).toBe('10px')
 
       consoleWarnSpy.mockRestore()
@@ -141,7 +141,7 @@ describe('calcMarginFromShorthand', () => {
     it('should handle mixed valid tokens and CSS values', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('auto 10px', spacingMap)
+      const result = calcSpacingFromShorthand('auto 10px', spacingMap)
       expect(result).toBe('auto 10px')
 
       consoleWarnSpy.mockRestore()
@@ -150,7 +150,7 @@ describe('calcMarginFromShorthand', () => {
     it('should handle mixed valid tokens and invalid nested paths', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('space4 gap.invalid', spacingMap)
+      const result = calcSpacingFromShorthand('space4 gap.invalid', spacingMap)
       expect(result).toBe('4px gap.invalid')
       expect(consoleWarnSpy).toHaveBeenCalledWith('Theme token path "gap.invalid" not found in theme.')
 
@@ -160,7 +160,7 @@ describe('calcMarginFromShorthand', () => {
     it('should handle deeply nested invalid path', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('gap.nested.xl.invalid', spacingMap)
+      const result = calcSpacingFromShorthand('gap.nested.xl.invalid', spacingMap)
       expect(result).toBe('gap.nested.xl.invalid')
       expect(consoleWarnSpy).toHaveBeenCalledWith('Theme token path "gap.nested.xl.invalid" not found in theme.')
 
@@ -169,24 +169,24 @@ describe('calcMarginFromShorthand', () => {
   })
 
   describe('undefined and edge cases', () => {
-    it('should return "0" for undefined value', () => {
-      expect(calcMarginFromShorthand(undefined, spacingMap)).toBe('0')
+    it('should return undefined for undefined value', () => {
+      expect(calcSpacingFromShorthand(undefined, spacingMap)).toBe(undefined)
     })
 
     it('should handle empty string', () => {
-      expect(calcMarginFromShorthand('', spacingMap)).toBe('')
+      expect(calcSpacingFromShorthand('', spacingMap)).toBe(undefined)
     })
 
     it('should handle string with only whitespace', () => {
-      expect(calcMarginFromShorthand('   ', spacingMap)).toBe('')
+      expect(calcSpacingFromShorthand('   ', spacingMap)).toBe('')
     })
 
     it('should handle extra spaces between tokens', () => {
-      expect(calcMarginFromShorthand('space4  space8', spacingMap)).toBe('4px  8px')
+      expect(calcSpacingFromShorthand('space4  space8', spacingMap)).toBe('4px  8px')
     })
 
     it('should trim leading and trailing whitespace', () => {
-      expect(calcMarginFromShorthand('  space4 space8  ', spacingMap)).toBe('4px 8px')
+      expect(calcSpacingFromShorthand('  space4 space8  ', spacingMap)).toBe('4px 8px')
     })
   })
 
@@ -194,7 +194,7 @@ describe('calcMarginFromShorthand', () => {
     it('should warn when a direct key is not found', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      calcMarginFromShorthand('invalidToken', spacingMap)
+      calcSpacingFromShorthand('invalidToken', spacingMap)
       expect(consoleWarnSpy).toHaveBeenCalledWith('Theme token path "invalidToken" not found in theme.')
 
       consoleWarnSpy.mockRestore()
@@ -203,7 +203,7 @@ describe('calcMarginFromShorthand', () => {
     it('should warn when a nested path is not found', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      calcMarginFromShorthand('gap.invalid', spacingMap)
+      calcSpacingFromShorthand('gap.invalid', spacingMap)
       expect(consoleWarnSpy).toHaveBeenCalledWith('Theme token path "gap.invalid" not found in theme.')
 
       consoleWarnSpy.mockRestore()
@@ -212,7 +212,7 @@ describe('calcMarginFromShorthand', () => {
     it('should warn for each invalid token in a multi-token value', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      calcMarginFromShorthand('invalid1 invalid2', spacingMap)
+      calcSpacingFromShorthand('invalid1 invalid2', spacingMap)
       expect(consoleWarnSpy).toHaveBeenCalledTimes(2)
       expect(consoleWarnSpy).toHaveBeenNthCalledWith(1, 'Theme token path "invalid1" not found in theme.')
       expect(consoleWarnSpy).toHaveBeenNthCalledWith(2, 'Theme token path "invalid2" not found in theme.')
@@ -223,17 +223,17 @@ describe('calcMarginFromShorthand', () => {
 
   describe('complex scenarios', () => {
     it('should handle all direct keys', () => {
-      expect(calcMarginFromShorthand('space0 space4 space8 space16', spacingMap)).toBe('0px 4px 8px 16px')
+      expect(calcSpacingFromShorthand('space0 space4 space8 space16', spacingMap)).toBe('0px 4px 8px 16px')
     })
 
     it('should handle all nested paths', () => {
-      expect(calcMarginFromShorthand('gap.sm gap.md gap.lg gap.nested.xl', spacingMap)).toBe('2px 8px 16px 24px')
+      expect(calcSpacingFromShorthand('gap.sm gap.md gap.lg gap.nested.xl', spacingMap)).toBe('2px 8px 16px 24px')
     })
 
     it('should handle mix of everything', () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const result = calcMarginFromShorthand('space4 gap.md auto padding.small', spacingMap)
+      const result = calcSpacingFromShorthand('space4 gap.md auto padding.small', spacingMap)
       expect(result).toBe('4px 8px auto 4px')
 
       consoleWarnSpy.mockRestore()

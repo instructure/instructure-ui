@@ -33,10 +33,9 @@ import {
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ViewProps } from './props'
@@ -48,7 +47,7 @@ category: components
 @module View
 **/
 @textDirectionContextConsumer()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps
