@@ -1,88 +1,108 @@
 {
   "tag": {
-    "oceanBackgroundColor": {
-      "value": "{color.background.accent.blue}",
+    "defaultBackground": {
+      "value": "{color.background.muted}",
       "type": "color"
     },
-    "copperBackgroundColor": {
-      "value": "{color.background.accent.orange}",
+    "defaultBackgroundHover": {
+      "value": "{color.background.mutedHover}",
       "type": "color"
     },
-    "forestBackgroundColor": {
-      "value": "{color.background.accent.green}",
+    "defaultBorderColor": {
+      "value": "{color.stroke.base}",
       "type": "color"
     },
-    "roseBackgroundColor": {
-      "value": "{color.background.accent.red}",
-      "type": "color"
-    },
-    "skyBackgroundColor": {
-      "value": "{color.background.accent.sky}",
-      "type": "color"
-    },
-    "auroraBackgroundColor": {
-      "value": "{color.background.accent.aurora}",
-      "type": "color"
-    },
-    "plumBackgroundColor": {
-      "value": "{color.background.accent.plum}",
-      "type": "color"
-    },
-    "honeyBackgroundColor": {
-      "value": "{color.background.accent.honey}",
-      "type": "color"
-    },
-    "violetBackgroundColor": {
-      "value": "{color.background.accent.violet}",
-      "type": "color"
-    },
-    "seaBackgroundColor": {
-      "value": "{color.background.accent.sea}",
-      "type": "color"
-    },
-    "stoneBackgroundColor": {
-      "value": "{color.background.accent.stone}",
-      "type": "color"
-    },
-    "paddingVertical": {
-      "value": "{spacing.spaceXs}",
-      "type": "spacing"
-    },
-    "gap": {
-      "value": "{spacing.spaceSm}",
-      "type": "spacing"
-    },
-    "borderRadius": {
+    "defaultBorderRadius": {
       "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
-    "textColor": {
-      "value": "{color.text.onColor}",
+    "defaultBorderStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "inlineBorderStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "defaultBorderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "inlineBorderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "defaultColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "inlineColor": {
+      "value": "{color.text.base}",
       "type": "color"
     },
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
     },
-    "fontWeight": {
-      "value": "{fontWeight.body.strong}",
-      "type": "fontWeights"
+    "fontSizeLarge": {
+      "value": "{avatar.fontSizeMd}",
+      "type": "fontSizes"
     },
-    "fontSize": {
+    "fontSizeMedium": {
       "value": "{fontSize.textSm}",
       "type": "fontSizes"
     },
-    "lineHeight": {
-      "value": "{lineHeight.standalone.textSm}",
-      "type": "lineHeights"
+    "fontSizeSmall": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
     },
-    "paddingHorizontal": {
-      "value": "{spacing.spaceSm}",
-      "type": "spacing"
+    "heightLarge": {
+      "value": "2.375rem",
+      "type": "sizing"
     },
-    "height": {
+    "heightMedium": {
       "value": "1.75rem",
       "type": "sizing"
+    },
+    "heightSmall": {
+      "value": "1.3125rem",
+      "type": "sizing"
+    },
+    "iconMargin": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "inlineBackground": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "inlineBackgroundHover": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "inlineBorderColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "inlineBorderRadius": {
+      "value": "{borderRadius.sm}",
+      "type": "borderRadius"
+    },
+    "maxWidth": {
+      "value": "10rem",
+      "type": "sizing"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.padding.container.xxs}",
+      "type": "spacing"
+    },
+    "paddingHorizontalSmall": {
+      "value": "{spacing.padding.container.xxs}",
+      "type": "spacing"
+    },
+    "transitionTiming": {
+      "value": "0.2s",
+      "type": "text"
     }
   }
 }

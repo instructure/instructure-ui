@@ -148,6 +148,10 @@
         "lg": {
           "value": "{size.size32}",
           "type": "spacing"
+        },
+        "xxs": {
+          "value": "{size.size8}",
+          "type": "spacing"
         }
       },
       "interactive": {
