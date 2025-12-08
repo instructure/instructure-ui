@@ -36,5 +36,55 @@
       "value": "{spacing.spaceLg}",
       "type": "spacing"
     }
+  },
+  "calendarDay": {
+    "background": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "color": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "outsideMonthColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "selectedBackground": {
+      "value": "{color.background.interactive.action.success.base}",
+      "type": "color"
+    },
+    "selectedColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "todayColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "todayBackground": {
+      "value": "{color.background.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "height": {
+      "value": "{size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "minWidth": {
+      "value": "{size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "selectedBorderRadius": {
+      "value": "{borderRadius.lg}",
+      "type": "borderRadius"
+    },
+    "todayBorderRadius": {
+      "value": "{borderRadius.full}",
+      "type": "borderRadius"
+    }
   }
 }
