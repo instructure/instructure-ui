@@ -39,7 +39,8 @@
       "canvas/component/Menu": "enabled",
       "canvas/component/FileDrop": "enabled",
       "canvas/component/Popover": "enabled",
-      "canvas/component/Badge": "enabled"
+      "canvas/component/Badge": "enabled",
+      "canvas/component/FormFieldGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -747,6 +748,12 @@
       "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
       "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
       "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
+      "formFieldGroup.borderColor": "bad836e90a1f74d5014811c8fc97f1278fd05da2",
+      "formFieldGroup.errorBorderColor": "b0243703bc1e631746c0e20119b35a89a8e3b3ba",
+      "formFieldGroup.borderRadius": "3ec3ef812a4921f5289dd93ec85e629a08a9699c",
+      "formFieldGroup.borderStyle": "16b62b9dc39324d57dd1ada555d423004c1ab651",
+      "formFieldGroup.borderWidth": "c58332da97e0194131e394f684f383705a17d588",
+      "formFieldGroup.errorFieldsPadding": "142a2b2276627e1ff2245ecbd4f857a06918d8b7",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
@@ -1526,7 +1533,8 @@
       "canvas/component/Menu": "enabled",
       "canvas/component/FileDrop": "enabled",
       "canvas/component/Popover": "enabled",
-      "canvas/component/Badge": "enabled"
+      "canvas/component/Badge": "enabled",
+      "canvas/component/FormFieldGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -2169,6 +2177,12 @@
       "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
       "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
       "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
+      "formFieldGroup.borderColor": "bad836e90a1f74d5014811c8fc97f1278fd05da2",
+      "formFieldGroup.errorBorderColor": "b0243703bc1e631746c0e20119b35a89a8e3b3ba",
+      "formFieldGroup.borderRadius": "3ec3ef812a4921f5289dd93ec85e629a08a9699c",
+      "formFieldGroup.borderStyle": "16b62b9dc39324d57dd1ada555d423004c1ab651",
+      "formFieldGroup.borderWidth": "c58332da97e0194131e394f684f383705a17d588",
+      "formFieldGroup.errorFieldsPadding": "142a2b2276627e1ff2245ecbd4f857a06918d8b7",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
@@ -2948,7 +2962,8 @@
       "rebrand/component/Menu": "enabled",
       "rebrand/component/Options": "enabled",
       "rebrand/component/RangeInput": "enabled",
-      "rebrand/component/FileDrop": "enabled"
+      "rebrand/component/FileDrop": "enabled",
+      "rebrand/component/FormFieldGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -3739,6 +3754,12 @@
       "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
       "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
       "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
+      "formFieldGroup.borderColor": "bad836e90a1f74d5014811c8fc97f1278fd05da2",
+      "formFieldGroup.errorBorderColor": "b0243703bc1e631746c0e20119b35a89a8e3b3ba",
+      "formFieldGroup.borderRadius": "3ec3ef812a4921f5289dd93ec85e629a08a9699c",
+      "formFieldGroup.borderStyle": "16b62b9dc39324d57dd1ada555d423004c1ab651",
+      "formFieldGroup.borderWidth": "c58332da97e0194131e394f684f383705a17d588",
+      "formFieldGroup.errorFieldsPadding": "142a2b2276627e1ff2245ecbd4f857a06918d8b7",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
@@ -4433,7 +4454,8 @@
       "rebrand/component/Menu": "enabled",
       "rebrand/component/Options": "enabled",
       "rebrand/component/RangeInput": "enabled",
-      "rebrand/component/FileDrop": "enabled"
+      "rebrand/component/FileDrop": "enabled",
+      "rebrand/component/FormFieldGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -5159,6 +5181,12 @@
       "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
       "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
       "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
+      "formFieldGroup.borderColor": "bad836e90a1f74d5014811c8fc97f1278fd05da2",
+      "formFieldGroup.errorBorderColor": "b0243703bc1e631746c0e20119b35a89a8e3b3ba",
+      "formFieldGroup.borderRadius": "3ec3ef812a4921f5289dd93ec85e629a08a9699c",
+      "formFieldGroup.borderStyle": "16b62b9dc39324d57dd1ada555d423004c1ab651",
+      "formFieldGroup.borderWidth": "c58332da97e0194131e394f684f383705a17d588",
+      "formFieldGroup.errorFieldsPadding": "142a2b2276627e1ff2245ecbd4f857a06918d8b7",
       "formFieldLayout.textColor": "02702235fbfad166e120832358e7e30ce3447a65",
       "formFieldLayout.readonlyTextColor": "be7c05a880036267117a8b4139c853edcf7aed0c",
       "formFieldLayout.asteriskColor": "feaaa45f0f4c0db898ee09699adc051fffc43695",
