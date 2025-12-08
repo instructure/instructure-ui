@@ -1,6 +1,6 @@
 {
   "rangeInput": {
-    "handleBackgroundColor": {
+    "handleBackground": {
       "value": "{color.background.interactive.action.primary.base}",
       "type": "color"
     },
@@ -11,6 +11,11 @@
     "handleFocusBackground": {
       "value": "{color.background.brand}",
       "type": "color"
+    },
+    "handleFocusOutlineColor": {
+      "value": "{color.background.brand}",
+      "type": "color",
+      "description": "Deprecated, remove with \"deprecated\" thumbVariant"
     },
     "handleShadowColor": {
       "value": "{color.background.brand}",
@@ -29,7 +34,7 @@
       "value": "{spacing.space2xs}",
       "type": "spacing"
     },
-    "trackBackgroundColor": {
+    "trackBackground": {
       "value": "{color.background.interactive.input.base}",
       "type": "color"
     },
@@ -109,11 +114,6 @@
         }
       ],
       "type": "boxShadow"
-    },
-    "handleFocusOutlineColor": {
-      "value": "{color.background.brand}",
-      "type": "color",
-      "description": "Deprecated, remove with \"deprecated\" thumbVariant"
     },
     "handleFocusOutlineWidth": {
       "value": "0.75em",
