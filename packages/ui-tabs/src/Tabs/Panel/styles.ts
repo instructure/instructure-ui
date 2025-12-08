@@ -22,8 +22,14 @@
  * SOFTWARE.
  */
 
-import type { TabsPanelTheme } from '@instructure/shared-types'
 import type { TabsPanelProps, TabsPanelStyle } from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+
+type StyleParams = {
+  maxHeight: TabsPanelProps['maxHeight']
+  isSelected: TabsPanelProps['isSelected']
+  isHidden: boolean
+}
 
 /**
  * ---
@@ -31,17 +37,15 @@ import type { TabsPanelProps, TabsPanelStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props and passed through data of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TabsPanelTheme,
-  props: TabsPanelProps,
-  state: { isHidden: boolean }
+  componentTheme: NewComponentTypes['TabsPanel'],
+  params: StyleParams,
+  sharedTokens: SharedTokens
 ): TabsPanelStyle => {
-  const { maxHeight, isSelected } = props
-  const { isHidden } = state
+  const { maxHeight, isSelected, isHidden } = params
 
   return {
     panel: {
@@ -61,7 +65,7 @@ const generateStyle = (
         display: 'none'
       }),
       '&:focus': {
-        outlineColor: componentTheme.focusOutlineColor
+        outlineColor: sharedTokens.focusOutline.infoColor
       }
     },
     content: {
@@ -70,10 +74,10 @@ const generateStyle = (
       width: '100%',
       height: '100%',
       borderWidth: componentTheme.borderWidth,
-      borderStyle: componentTheme.borderStyle,
+      borderStyle: 'solid',
       background: componentTheme.background,
       borderColor: componentTheme.borderColor,
-      color: componentTheme.color,
+      color: componentTheme.textColor,
       borderLeft: 'none',
       borderRight: 'none',
       borderBottom: 'none',

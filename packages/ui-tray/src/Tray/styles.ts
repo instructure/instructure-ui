@@ -21,30 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import type { TrayTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TrayProps, TrayStyle } from './props'
 
+type StyleParams = {
+  border: TrayProps['border']
+  shadow: TrayProps['shadow']
+  size: TrayProps['size']
+  placement: TrayProps['placement']
+}
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props and passed through data of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TrayTheme,
-  props: TrayProps
+  componentTheme: NewComponentTypes['Tray'],
+  params: StyleParams
 ): TrayStyle => {
-  const { border, shadow, size, placement } = props
+  const { border, shadow, size, placement } = params
 
   const borderStyle = {
     borderWidth: 0,
     borderColor: componentTheme.borderColor,
-    borderStyle: componentTheme.borderStyle
+    borderStyle: 'solid'
   }
 
   const shadowStyle = shadow
@@ -111,11 +115,11 @@ const generateStyle = (
     : {}
 
   const sizeVariants = {
-    'x-small': componentTheme.xSmallWidth,
-    small: componentTheme.smallWidth,
-    regular: componentTheme.regularWidth,
-    medium: componentTheme.mediumWidth,
-    large: componentTheme.largeWidth
+    'x-small': componentTheme.widthXs,
+    small: componentTheme.widthSm,
+    regular: componentTheme.widthMd,
+    medium: componentTheme.widthLg,
+    large: componentTheme.widthXl
   }
 
   const sizeStyle =
@@ -128,8 +132,9 @@ const generateStyle = (
   return {
     tray: {
       label: 'tray',
-      backgroundColor: componentTheme.background,
-      position: componentTheme.position,
+      padding: componentTheme.padding,
+      backgroundColor: componentTheme.backgroundColor,
+      position: 'fixed',
       overflowY: 'auto',
       overflowX: 'hidden',
       boxSizing: 'border-box',
