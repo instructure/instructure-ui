@@ -1,0 +1,40 @@
+{
+  "calendar": {
+    "background": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "color": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "maxHeaderWidth": {
+      "value": "1.5rem",
+      "type": "sizing"
+    },
+    "navMargin": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "navWithYearMargin": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "yearPickerMargin": {
+      "value": "{spacing.spaceLg}",
+      "type": "spacing"
+    }
+  }
+}
