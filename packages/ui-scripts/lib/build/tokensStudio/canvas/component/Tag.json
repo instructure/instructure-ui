@@ -9,7 +9,7 @@
       "type": "color"
     },
     "defaultBorderColor": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.container.base}",
       "type": "color"
     },
     "defaultBorderRadius": {

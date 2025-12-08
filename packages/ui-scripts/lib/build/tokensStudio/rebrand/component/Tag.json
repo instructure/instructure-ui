@@ -9,7 +9,7 @@
       "type": "color"
     },
     "defaultBorderColor": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.container.base}",
       "type": "color"
     },
     "defaultBorderRadius": {
@@ -57,7 +57,7 @@
       "type": "fontSizes"
     },
     "heightLarge": {
-      "value": "2.375rem",
+      "value": "2rem",
       "type": "sizing"
     },
     "heightMedium": {
@@ -65,7 +65,7 @@
       "type": "sizing"
     },
     "heightSmall": {
-      "value": "1.3125rem",
+      "value": "1.5rem",
       "type": "sizing"
     },
     "iconMargin": {
