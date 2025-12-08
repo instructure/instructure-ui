@@ -57,6 +57,10 @@
     "padding": {
       "value": "{spacing.padding.container.md}",
       "type": "spacing"
+    },
+    "zIndex": {
+      "value": 9999,
+      "type": "number"
     }
   }
 }
