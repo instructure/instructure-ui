@@ -22,7 +22,7 @@ Changes needed:
 
 If tokens are from a different (usually parent) components, add the `componentID` of that component as second paramater of `@withStyle` and use that name in the `generateStyle` function in `style.ts`: `NewComponentTypes['ParentComponentNameWithTheTokens']`
 
-`generateStyle` accepts a third parameter as well, which are the `sharedTokens`. These provide tokens for shared behaviors such as focus rings, shadows or margins. `'@instructure/emotion'` has various util functions that uses these, such as `calcMarginFromShorthand` and `calcFocusOutlineStyles`.
+`generateStyle` accepts a third parameter as well, which are the `sharedTokens`. These provide tokens for shared behaviors such as focus rings, shadows or margins. `'@instructure/emotion'` has various util functions that uses these, such as `calcSpacingFromShorthand` and `calcFocusOutlineStyles`.
 
 ## Removing View
 
