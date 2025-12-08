@@ -13,7 +13,7 @@
       "type": "color"
     },
     "borderRadius": {
-      "value": "{borderRadius.container.md}",
+      "value": "{borderRadius.container.sm}",
       "type": "borderRadius"
     },
     "borderStyle": {
