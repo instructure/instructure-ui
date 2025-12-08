@@ -116,6 +116,10 @@
       "value": "{color.background.base}",
       "type": "color"
     },
+    "trackColorInverse": {
+      "value": "#00000000",
+      "type": "color"
+    },
     "textColor": {
       "value": "{color.text.base}",
       "type": "color"
