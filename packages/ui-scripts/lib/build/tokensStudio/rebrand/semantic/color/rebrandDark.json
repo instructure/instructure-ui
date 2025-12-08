@@ -366,6 +366,10 @@
           "value": "{color.greyOpacity75}",
           "type": "color"
         }
+      },
+      "mutedHover": {
+        "value": "{color.grey.grey180}",
+        "type": "color"
       }
     },
     "stroke": {
