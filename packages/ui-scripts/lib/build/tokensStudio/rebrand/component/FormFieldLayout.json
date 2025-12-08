@@ -39,6 +39,10 @@
     "gapInputs": {
       "value": "0.75rem",
       "type": "spacing"
+    },
+    "gapColumns": {
+      "value": "0.375rem",
+      "type": "spacing"
     }
   }
 }
