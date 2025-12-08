@@ -45,7 +45,7 @@
       "type": "fontFamilies"
     },
     "fontSizeLarge": {
-      "value": "{avatar.fontSizeMd}",
+      "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
     "fontSizeMedium": {
