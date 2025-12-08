@@ -35,6 +35,10 @@
     "stackedOrInlineBreakpoint": {
       "value": "48em",
       "type": "sizing"
+    },
+    "gapInputs": {
+      "value": "0.75rem",
+      "type": "spacing"
     }
   }
 }
