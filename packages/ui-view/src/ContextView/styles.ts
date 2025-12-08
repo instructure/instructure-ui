@@ -24,8 +24,8 @@
 
 import { mirrorPlacement } from '@instructure/ui-position'
 
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { PlacementPropValues } from '@instructure/ui-position'
-import type { ContextViewTheme } from '@instructure/shared-types'
 import type { ContextViewProps, ContextViewStyle } from './props'
 
 type PlacementArray = PlacementPropValues[]
@@ -63,7 +63,7 @@ const topPlacements: PlacementArray = [
 
 const getPlacementStyle = (
   placement: PlacementPropValues,
-  theme: ContextViewTheme
+  theme: NewComponentTypes['ContextView']
 ) => {
   if (endPlacements.includes(placement)) {
     return { paddingInlineStart: theme?.arrowSize, paddingInlineEnd: '0' }
@@ -83,7 +83,7 @@ const getPlacementStyle = (
 
 const getArrowCorrections = (
   placement: PlacementPropValues,
-  theme: ContextViewTheme
+  theme: NewComponentTypes['ContextView']
 ) => {
   const center: PlacementArray = [
     'top',
@@ -132,7 +132,7 @@ const getArrowCorrections = (
 const getArrowPlacementVariant = (
   placement: PlacementPropValues,
   background: ContextViewProps['background'],
-  theme: ContextViewTheme,
+  theme: NewComponentTypes['ContextView'],
   props: ContextViewProps
 ) => {
   const transformedPlacement = mirrorPlacement(placement, ' ')
@@ -266,11 +266,10 @@ const getArrowPlacementVariant = (
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ContextViewTheme,
+  componentTheme: NewComponentTypes['ContextView'],
   props: ContextViewProps
 ): ContextViewStyle => {
   const { placement, background, borderColor } = props
