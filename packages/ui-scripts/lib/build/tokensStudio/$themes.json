@@ -41,7 +41,8 @@
       "canvas/component/Badge": "enabled",
       "canvas/component/FormFieldGroup": "enabled",
       "canvas/component/Tag": "enabled",
-      "canvas/component/Calendar": "enabled"
+      "canvas/component/Calendar": "enabled",
+      "canvas/component/Grid": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -771,6 +772,12 @@
       "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
       "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
       "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
+      "grid.mediumMin": "27f8ce9bbcbc1414cf29c3641c59a1b28b545f40",
+      "grid.LargeMin": "7598344ec81ecb90ef8375d97ab37d8b7670e82c",
+      "grid.XLargeMin": "b56255ac4b66bdfd1ac4d69f3995a613a30251d5",
+      "grid.spacingLarge": "3843f18ae7187580f8650dc29b3d8c6fefdb0048",
+      "grid.spacingMedium": "b0535a60312bc079e91bda9e187960ba42c0ca37",
+      "grid.spacingSmall": "4b26e00705857d4cffef087619f5e49681f4afbd",
       "formFieldGroup.borderColor": "bad836e90a1f74d5014811c8fc97f1278fd05da2",
       "formFieldGroup.errorBorderColor": "b0243703bc1e631746c0e20119b35a89a8e3b3ba",
       "formFieldGroup.borderRadius": "3ec3ef812a4921f5289dd93ec85e629a08a9699c",
@@ -1568,7 +1575,8 @@
       "canvas/component/Badge": "enabled",
       "canvas/component/FormFieldGroup": "enabled",
       "canvas/component/Tag": "enabled",
-      "canvas/component/Calendar": "enabled"
+      "canvas/component/Calendar": "enabled",
+      "canvas/component/Grid": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -2233,6 +2241,12 @@
       "fileDrop.borderWidth": "a15cf566b62ce2a9808859072ccfecd69d8aa75d",
       "fileDrop.hoverBorderColor": "3d2adfc11c375e9dd3270793fa9be3145491f191",
       "fileDrop.rejectedColor": "988ec00262493ac39cc18f8bdbc6ab6a7864056f",
+      "grid.mediumMin": "27f8ce9bbcbc1414cf29c3641c59a1b28b545f40",
+      "grid.LargeMin": "7598344ec81ecb90ef8375d97ab37d8b7670e82c",
+      "grid.XLargeMin": "b56255ac4b66bdfd1ac4d69f3995a613a30251d5",
+      "grid.spacingLarge": "3843f18ae7187580f8650dc29b3d8c6fefdb0048",
+      "grid.spacingMedium": "b0535a60312bc079e91bda9e187960ba42c0ca37",
+      "grid.spacingSmall": "4b26e00705857d4cffef087619f5e49681f4afbd",
       "formFieldGroup.borderColor": "bad836e90a1f74d5014811c8fc97f1278fd05da2",
       "formFieldGroup.errorBorderColor": "b0243703bc1e631746c0e20119b35a89a8e3b3ba",
       "formFieldGroup.borderRadius": "3ec3ef812a4921f5289dd93ec85e629a08a9699c",
@@ -3030,7 +3044,8 @@
       "rebrand/component/FileDrop": "enabled",
       "rebrand/component/FormFieldGroup": "enabled",
       "rebrand/component/Tag": "enabled",
-      "rebrand/component/Calendar": "enabled"
+      "rebrand/component/Calendar": "enabled",
+      "rebrand/component/Grid": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -3868,6 +3883,12 @@
       "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
       "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
       "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
+      "grid.mediumMin": "27f8ce9bbcbc1414cf29c3641c59a1b28b545f40",
+      "grid.LargeMin": "7598344ec81ecb90ef8375d97ab37d8b7670e82c",
+      "grid.XLargeMin": "b56255ac4b66bdfd1ac4d69f3995a613a30251d5",
+      "grid.spacingLarge": "3843f18ae7187580f8650dc29b3d8c6fefdb0048",
+      "grid.spacingMedium": "b0535a60312bc079e91bda9e187960ba42c0ca37",
+      "grid.spacingSmall": "4b26e00705857d4cffef087619f5e49681f4afbd",
       "heading.h1FontSize": "50ba66b4083f6b764d606d533d006121317a9d24",
       "heading.h2FontSize": "425f824ca9474600adb8b7482a60de06973b3953",
       "heading.h3FontSize": "497ed1789e8c19384c7910a2d6db0764316b14e3",
@@ -4555,7 +4576,8 @@
       "rebrand/component/FileDrop": "enabled",
       "rebrand/component/FormFieldGroup": "enabled",
       "rebrand/component/Tag": "enabled",
-      "rebrand/component/Calendar": "enabled"
+      "rebrand/component/Calendar": "enabled",
+      "rebrand/component/Grid": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -5328,6 +5350,12 @@
       "formFieldMessage.fontSize": "8a021f8007bbcf96fcde07bfccd0aa888da730b4",
       "formFieldMessage.lineHeight": "4877a457ef96d25c2430aa7ae69bc25451a6f749",
       "formFieldMessage.fontFamily": "fc549ba82a84fb741eaf3c6ff5ca1191ececfe0f",
+      "grid.mediumMin": "27f8ce9bbcbc1414cf29c3641c59a1b28b545f40",
+      "grid.LargeMin": "7598344ec81ecb90ef8375d97ab37d8b7670e82c",
+      "grid.XLargeMin": "b56255ac4b66bdfd1ac4d69f3995a613a30251d5",
+      "grid.spacingLarge": "3843f18ae7187580f8650dc29b3d8c6fefdb0048",
+      "grid.spacingMedium": "b0535a60312bc079e91bda9e187960ba42c0ca37",
+      "grid.spacingSmall": "4b26e00705857d4cffef087619f5e49681f4afbd",
       "heading.h1FontSize": "50ba66b4083f6b764d606d533d006121317a9d24",
       "heading.h2FontSize": "425f824ca9474600adb8b7482a60de06973b3953",
       "heading.h3FontSize": "497ed1789e8c19384c7910a2d6db0764316b14e3",

@@ -59,7 +59,7 @@
       "type": "spacing"
     },
     "zIndex": {
-      "value": 9999,
+      "value": "9999",
       "type": "number"
     }
   }

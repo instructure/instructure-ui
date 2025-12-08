@@ -1,0 +1,28 @@
+{
+  "grid": {
+    "mediumMin": {
+      "value": "48em",
+      "type": "sizing"
+    },
+    "LargeMin": {
+      "value": "62em",
+      "type": "sizing"
+    },
+    "XLargeMin": {
+      "value": "75em",
+      "type": "sizing"
+    },
+    "spacingLarge": {
+      "value": "{spacing.space2xl}",
+      "type": "spacing"
+    },
+    "spacingMedium": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "spacingSmall": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    }
+  }
+}
