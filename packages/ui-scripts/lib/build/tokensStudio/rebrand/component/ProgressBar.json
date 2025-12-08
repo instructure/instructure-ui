@@ -33,11 +33,11 @@
       "type": "sizing"
     },
     "meterColorAlert": {
-      "value": "{color.background.info}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorAlertInverse": {
-      "value": "{color.background.info}",
+      "value": "{color.background.onColor}",
       "type": "color"
     },
     "meterColorBrand": {
@@ -45,15 +45,15 @@
       "type": "color"
     },
     "meterColorBrandInverse": {
-      "value": "{color.background.brand}",
+      "value": "{color.background.onColor}",
       "type": "color"
     },
     "meterColorDanger": {
-      "value": "{color.background.error}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorDangerInverse": {
-      "value": "{color.background.error}",
+      "value": "{color.background.onColor}",
       "type": "color"
     },
     "meterColorInfo": {
@@ -61,7 +61,7 @@
       "type": "color"
     },
     "meterColorInfoInverse": {
-      "value": "{color.background.info}",
+      "value": "{color.background.onColor}",
       "type": "color"
     },
     "meterColorSuccess": {
@@ -69,15 +69,15 @@
       "type": "color"
     },
     "meterColorSuccessInverse": {
-      "value": "{color.background.success}",
+      "value": "{color.background.onColor}",
       "type": "color"
     },
     "meterColorWarning": {
-      "value": "{color.background.warning}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorWarningInverse": {
-      "value": "{color.background.warning}",
+      "value": "{color.background.onColor}",
       "type": "color"
     },
     "largeHeight": {
