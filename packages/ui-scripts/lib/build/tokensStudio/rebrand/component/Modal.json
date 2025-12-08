@@ -75,7 +75,7 @@
       "type": "borderWidth"
     }
   },
-  "modalHeader": {
+  "header": {
     "backgroundColor": {
       "value": "{color.background.container}",
       "type": "color"
@@ -105,7 +105,7 @@
       "type": "borderWidth"
     }
   },
-  "modalBody": {
+  "body": {
     "inverseBackgroundColor": {
       "value": "{color.background.dark}",
       "type": "color"
@@ -119,7 +119,7 @@
       "type": "spacing"
     }
   },
-  "modalFooter": {
+  "footer": {
     "borderColor": {
       "value": "{color.stroke.container.base}",
       "type": "color"
