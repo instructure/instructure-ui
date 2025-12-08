@@ -152,6 +152,8 @@ const withStyle = decorator(
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
+    const componentId = ComposedComponent.componentId?.replace('.', '')
+
     const WithStyle: ForwardRefExoticComponent<
       PropsWithoutRef<Props> & RefAttributes<any>
     > & {
@@ -182,7 +184,7 @@ const withStyle = decorator(
         ...defaultValues
       }
 
-      const componentWithTokensId = useTokensFrom ?? displayName
+      const componentWithTokensId = useTokensFrom ?? componentId
 
       const baseComponentTheme =
         theme.newTheme.components[

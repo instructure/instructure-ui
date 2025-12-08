@@ -48,10 +48,9 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
@@ -70,7 +69,7 @@ type PanelChild = ComponentElement<TabsPanelProps, Panel>
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
 

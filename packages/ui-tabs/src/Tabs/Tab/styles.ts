@@ -24,8 +24,15 @@
 
 import { keyframes } from '@instructure/emotion'
 
-import type { TabsTabTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TabsTabProps, TabsTabStyle } from './props'
+
+type StyleParams = {
+  variant: TabsTabProps['variant']
+  isSelected: TabsTabProps['isSelected']
+  isDisabled: TabsTabProps['isDisabled']
+  isOverflowScroll: TabsTabProps['isOverflowScroll']
+}
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -41,15 +48,14 @@ const selectedTab = keyframes`
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props and passed through data of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TabsTabTheme,
-  props: TabsTabProps
+  componentTheme: NewComponentTypes['TabsTab'],
+  params: StyleParams
 ): TabsTabStyle => {
-  const { variant, isSelected, isDisabled, isOverflowScroll } = props
+  const { variant, isSelected, isDisabled, isOverflowScroll } = params
 
   const variants = {
     default: {
@@ -57,7 +63,7 @@ const generateStyle = (
       lineHeight: 1,
       position: 'relative',
       zIndex: componentTheme.zIndex,
-      color: componentTheme.defaultColor,
+      color: componentTheme.defaultTextColor,
 
       ...(isDisabled && { fontWeight: 'normal' }),
 
@@ -88,7 +94,7 @@ const generateStyle = (
     },
     secondary: {
       padding: '0.75rem 1rem', // if horizontal padding changes, update `scrollOverlayWidthSecondary` in `Tabs/theme.js`
-      color: componentTheme.secondaryColor,
+      color: componentTheme.secondaryTextColor,
       marginInlineEnd: '0.2em',
       marginBottom: isOverflowScroll ? '0rem' : '-0.0625rem',
       border: '0.0625rem solid transparent',
