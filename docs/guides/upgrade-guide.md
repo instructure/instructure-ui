@@ -27,7 +27,6 @@ The following variant values have been **deprecated** and will be removed in a f
 - `'inline-small'`
 - `'standalone-small'`
 
-
 ### Theme variable changes
 
 - theme variable `fontSize` is now removed
@@ -210,6 +209,27 @@ type: example
 
 - theme variable `requiredInvalidColor` is now removed
 - `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
+
+### Tabs.Panel
+
+- theme variable `color` is now renamed to `textColor`
+- theme variable `focusOutlineColor` is now removed and the style uses the `sharedTokens.focusOutline.infoColor`
+
+### Tabs.Tab
+
+- theme variable `defaultColor` is now renamed to `defaultTextColor`
+- theme variable `defaultHoverBorderColor` is now removed as it was unused
+
+### Tray
+
+- theme variable `background` is now renamed to `backgroundColor`
+- theme variable `xSmallWidth` is now renamed to `widthXs`
+- theme variable `smallWidth` is now renamed to `widthSm`
+- theme variable `regularWidth` is now renamed to `widthMg`
+- theme variable `mediumWidth` is now renamed to `widthLg`
+- theme variable `largeWidth` is now renamed to `widthXl`
+- theme variable `borderStyle` is now removed
+- theme variable `position` is now removed
 
 ## Codemods
 
