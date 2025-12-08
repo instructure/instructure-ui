@@ -95,7 +95,7 @@ const setupThemes = async (targetPath, input) => {
       input,
       themeData[theme].semantic
     )
-    // console.log(JSON.stringify(mergedSemanticData));
+
     const semantics = generateSemantics(mergedSemanticData)
     const semanticsTypes = generateSemanticsType(mergedSemanticData)
     const semanticsFileContent = `
@@ -109,19 +109,44 @@ const setupThemes = async (targetPath, input) => {
           `
     await createFile(`${themePath}/semantics.ts`, semanticsFileContent)
 
+    const componentAndSubcomponentNames = []
     //components
     for (const componentpath of themeData[theme].components) {
       const rawComponentName =
         componentpath.split('/')[componentpath.split('/').length - 1]
-      const componentName =
+      const mainComponentName =
         rawComponentName[0].toLowerCase() + rawComponentName.slice(1)
 
-      const component = generateComponent(input[componentpath][componentName])
-      const componentTypes = generateComponentType(
-        input[componentpath][componentName]
+      //figma needs prefixed subcomponents, e.g.: for modal => modalHeader, modalBody, etc... and we need only the name of the subcomponent, so we access the data with the subcomponent object, containing the prefixed version and making a non-prefixed list of the same components to produce files, variable, theme names
+      const subcomponents = Object.keys(input[componentpath])
+      const subcomponentNames = subcomponents.reduce(
+        (acc, subcomponent) => [
+          ...acc,
+          ...(subcomponent.startsWith(acc[0]) &&
+          subcomponent.length > acc[0].length
+            ? [unCapitalize(subcomponent.slice(acc[0].length))]
+            : [])
+        ],
+        [subcomponents[0]]
       )
 
-      const componentFileContent = `
+      subcomponents.forEach(async (subcomponent, subcomponentIndex) => {
+        const subcomponentName = subcomponentNames[subcomponentIndex]
+
+        const componentName =
+          subcomponent === mainComponentName
+            ? mainComponentName
+            : `${mainComponentName}${capitalize(subcomponentName)}`
+
+        componentAndSubcomponentNames.push(componentName)
+
+        const component = generateComponent(input[componentpath][subcomponent])
+
+        const componentTypes = generateComponentType(
+          input[componentpath][subcomponent]
+        )
+
+        const componentFileContent = `
         import semantics from "../semantics"
         import type { ${capitalize(
           componentName
@@ -131,28 +156,28 @@ const setupThemes = async (targetPath, input) => {
         export default ${componentName}
           `
 
-      await createFile(
-        `${themePath}/components/${componentName}.ts`,
-        componentFileContent
-      )
-      if (themeIndex === 0) {
-        let importSemantics = ''
-        if (componentTypes.includes(`Semantics[`)) {
-          importSemantics = `import type { Semantics } from "../${theme}/semantics"`
-        }
-        let importBoxShadow = ''
-        if (componentTypes.includes('TokenBoxshadowValueInst')) {
-          importBoxShadow = `import type { TokenBoxshadowValueInst } from '../commonTypes'`
-        }
-        let importBorder = ''
-        if (componentTypes.includes('TokenBorderValue')) {
-          importBorder = `import type { TokenBorderValue } from '@tokens-studio/types'`
-        }
-        let importTypography = ''
-        if (componentTypes.includes('TokenTypographyValueInst')) {
-          importTypography = `import type { TokenTypographyValueInst } from '../commonTypes'`
-        }
-        const typeFileContent = `
+        await createFile(
+          `${themePath}/components/${componentName}.ts`,
+          componentFileContent
+        )
+        if (themeIndex === 0) {
+          let importSemantics = ''
+          if (componentTypes.includes(`Semantics[`)) {
+            importSemantics = `import type { Semantics } from "../${theme}/semantics"`
+          }
+          let importBoxShadow = ''
+          if (componentTypes.includes('TokenBoxshadowValueInst')) {
+            importBoxShadow = `import type { TokenBoxshadowValueInst } from '../commonTypes'`
+          }
+          let importBorder = ''
+          if (componentTypes.includes('TokenBorderValue')) {
+            importBorder = `import type { TokenBorderValue } from '@tokens-studio/types'`
+          }
+          let importTypography = ''
+          if (componentTypes.includes('TokenTypographyValueInst')) {
+            importTypography = `import type { TokenTypographyValueInst } from '../commonTypes'`
+          }
+          const typeFileContent = `
           ${importSemantics}
           ${importBoxShadow}
           ${importBorder}
@@ -162,30 +187,28 @@ const setupThemes = async (targetPath, input) => {
 
           export default ${capitalize(componentName)}
         `
-        await createFile(
-          `${targetPath}/componentTypes/${componentName}.ts`,
-          typeFileContent
-        )
-      }
+          await createFile(
+            `${targetPath}/componentTypes/${componentName}.ts`,
+            typeFileContent
+          )
+        }
+      })
     }
 
     //index file
-    const componentImports = themeData[theme].components
-      .map((componentpath) => {
-        const componentName =
-          componentpath.split('/')[componentpath.split('/').length - 1]
-
-        return `import ${unCapitalize(
-          componentName
-        )} from "./components/${unCapitalize(componentName)}"`
-      })
+    const componentImports = componentAndSubcomponentNames
+      .map(
+        (componentName) =>
+          `import ${unCapitalize(
+            componentName
+          )} from "./components/${unCapitalize(componentName)}"`
+      )
       .join('\n')
-    const componentNames = themeData[theme].components
-      .map((componentpath) => {
-        const componentName =
-          componentpath.split('/')[componentpath.split('/').length - 1]
-        return `${componentName}: ${unCapitalize(componentName)}`
-      })
+    const componentNames = componentAndSubcomponentNames
+      .map(
+        (componentName) =>
+          `${capitalize(componentName)}: ${unCapitalize(componentName)}`
+      )
       .join(',\n')
     const indexFileContent = `
       import primitives, {type Primitives} from "./primitives";
@@ -209,23 +232,19 @@ const setupThemes = async (targetPath, input) => {
 
     //index type file
     if (themeIndex === 0) {
-      const componentTypeImports = themeData[theme].components
-        .map((componentpath) => {
-          const componentName =
-            componentpath.split('/')[componentpath.split('/').length - 1]
-
-          return `import type ${capitalize(
-            componentName
-          )} from './${unCapitalize(componentName)}'`
-        })
+      const componentTypeImports = componentAndSubcomponentNames
+        .map(
+          (componentName) =>
+            `import type ${capitalize(componentName)} from './${unCapitalize(
+              componentName
+            )}'`
+        )
         .join('\n')
-      const componentTypeExport = themeData[theme].components
-        .map((componentpath) => {
-          const componentName =
-            componentpath.split('/')[componentpath.split('/').length - 1]
-
-          return `${capitalize(componentName)}:${capitalize(componentName)}`
-        })
+      const componentTypeExport = componentAndSubcomponentNames
+        .map(
+          (componentName) =>
+            `${capitalize(componentName)}:${capitalize(componentName)}`
+        )
         .join(',\n')
 
       const componentsTypesFileContent = `
@@ -270,7 +289,7 @@ const setupThemes = async (targetPath, input) => {
     textDecoration?: TokenTextDecorationValue
   }
 
-export type BaseTheme<P extends Record<string, any> = Record<string, any>, S extends Record<string, any> = Record<string, any>> = {
+  export type BaseTheme<P extends Record<string, any> = Record<string, any>, S extends Record<string, any> = Record<string, any>> = {
     primitives: P
     semantics: S
     components: ComponentTypes
