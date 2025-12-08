@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { calcMarginFromShorthand } from '@instructure/emotion'
+import { calcSpacingFromShorthand } from '@instructure/emotion'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import { AvatarProps, AvatarStyle } from './props'
 
@@ -183,7 +183,7 @@ const generateStyle = (
       fontWeight: componentTheme.fontWeight,
       overflow: 'hidden',
       // TODO handle the merging on tokens inside the util
-      margin: calcMarginFromShorthand(margin, {
+      margin: calcSpacingFromShorthand(margin, {
         ...sharedTokens.spacing,
         ...sharedTokens.legacySpacing
       })

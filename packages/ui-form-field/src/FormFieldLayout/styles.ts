@@ -28,7 +28,7 @@ import type {
   FormFieldStyleProps
 } from './props'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import { calcMarginFromShorthand } from '@instructure/emotion'
+import { calcSpacingFromShorthand } from '@instructure/emotion'
 
 type StyleParams = FormFieldStyleProps & {
   inline: FormFieldLayoutProps['inline']
@@ -88,7 +88,7 @@ const generateStyle = (
 ): FormFieldLayoutStyle => {
   const { inline, layout, vAlign, labelAlign, margin, messages } = params
   const { hasMessages, hasVisibleLabel, hasErrorMsgAndIsGroup } = params
-  const cssMargin = calcMarginFromShorthand(margin, sharedTokens.spacing)
+  const cssMargin = calcSpacingFromShorthand(margin, {...sharedTokens.spacing, ...sharedTokens.legacySpacing})
   const isInlineLayout = layout === 'inline'
 
   const hasNonEmptyMessages = messages?.reduce(
