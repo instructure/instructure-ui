@@ -22,24 +22,28 @@
  * SOFTWARE.
  */
 
-import type { TabsTheme } from '@instructure/shared-types'
 import type { TabsProps, TabsStyle } from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
+type StyleParams = {
+  tabOverflow: TabsProps['tabOverflow']
+  fixHeight: TabsProps['fixHeight']
+  variant: TabsProps['variant']
+}
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props and passed through data of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TabsTheme,
-  props: TabsProps
+  componentTheme: NewComponentTypes['Tabs'],
+  params: StyleParams
 ): TabsStyle => {
-  const { variant, tabOverflow, fixHeight } = props
+  const { variant, tabOverflow, fixHeight } = params
 
   // fixHeight can be 0, so simply `fixheight` could return falsy value
   const hasFixedHeight = typeof fixHeight !== 'undefined'
@@ -51,7 +55,7 @@ const generateStyle = (
       scrollOverlay: { width: componentTheme.scrollOverlayWidthDefault }
     },
     secondary: {
-      container: {},
+      container: { background: componentTheme.defaultBackground },
       tabs: {},
       scrollOverlay: { width: componentTheme.scrollOverlayWidthSecondary }
     }

@@ -28,10 +28,9 @@ import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import type { TabsTabProps } from './props'
 import { allowedProps } from './props'
@@ -42,7 +41,7 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Tab extends Component<TabsTabProps> {
   static readonly componentId = 'Tabs.Tab'
 

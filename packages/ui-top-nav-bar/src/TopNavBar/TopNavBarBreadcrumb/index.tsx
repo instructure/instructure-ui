@@ -51,6 +51,7 @@ class TopNavBarBreadcrumb extends Component<
   TopNavBarBreadcrumbProps,
   TopNavBarBreadcrumbState
 > {
+  static readonly componentId = 'TopNavBar.Breadcrumb'
   static allowedProps = allowedProps
   static defaultProps = {}
 

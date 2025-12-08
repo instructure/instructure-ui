@@ -52,12 +52,12 @@ export const resolveReferences = (semantics, key) => {
       if (typeof value[key] === 'object') {
         return (
           acc +
-          `"${key}": {${resolveReferences(value, key)}}${
+          `${key}: {${resolveReferences(value, key)}}${
             index + 1 === Object.keys(value).length ? '' : ',\n'
           }`
         )
       }
-      return acc + `"${key}": ${resolveReferences(value, key)}`
+      return acc + `${key}: ${resolveReferences(value, key)}`
     }, '')
   }
   if (isReference(value)) {
