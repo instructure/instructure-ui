@@ -35,7 +35,7 @@ export {
   getShorthandPropValue,
   mirrorShorthandCorners,
   mirrorShorthandEdges,
-  calcMarginFromShorthand,
+  calcSpacingFromShorthand,
   calcFocusOutlineStyles
 } from './styleUtils'
 

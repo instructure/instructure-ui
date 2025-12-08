@@ -26,7 +26,7 @@ import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { LinkProps, LinkStyle, LinkStyleProps } from './props'
 import {
   calcFocusOutlineStyles,
-  calcMarginFromShorthand
+  calcSpacingFromShorthand,
 } from '@instructure/emotion'
 /**
  * ---
@@ -236,7 +236,7 @@ const generateStyle = (
       label: 'link',
       ...baseStyles,
       // TODO handle the merging on tokens inside the util
-      margin: calcMarginFromShorthand(margin, {
+      margin: calcSpacingFromShorthand(margin, {
         ...sharedTokens.spacing,
         ...sharedTokens.legacySpacing
       }),
