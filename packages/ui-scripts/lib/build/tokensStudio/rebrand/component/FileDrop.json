@@ -23,7 +23,7 @@
       "type": "border"
     },
     "borderWidth": {
-      "value": "{borderWidth.md}",
+      "value": "{borderWidth.sm}",
       "type": "borderWidth"
     },
     "hoverBorderColor": {
