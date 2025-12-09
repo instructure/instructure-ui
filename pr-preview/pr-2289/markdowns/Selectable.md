@@ -249,8 +249,8 @@ A variety of request callbacks are provided as prompts for state updates. They d
 | Selectable | onRequestShowOptions | `(event: React.KeyboardEvent \| React.MouseEvent) => void` | No | - | Callback fired when the options want to become visible |
 | Selectable | onRequestHideOptions | `( event: React.KeyboardEvent \| React.MouseEvent \| React.FocusEvent ) => void` | No | - | Callback fired when the options no longer want to be visible |
 | Selectable | onRequestHighlightOption | `( event: React.KeyboardEvent \| React.MouseEvent, data: { id?: string; direction?: 1 \| -1 } ) => void` | No | - | Callback fired when option is hovered or highlighted via keyboard. Either the `id` or the `direction` parameter is supplied |
-| Selectable | onRequestHighlightFirstOption | `(event: React.KeyboardEvent) => void` | No | - | Callback fired when first option should be highlighted |
-| Selectable | onRequestHighlightLastOption | `(event: React.KeyboardEvent) => void` | No | - | Callback fired when last option should be highlighted |
+| Selectable | onRequestHighlightFirstOption | `(event: React.KeyboardEvent) => void` | No | - | Callback fired when first option should be highlighted (triggered by the Home key) |
+| Selectable | onRequestHighlightLastOption | `(event: React.KeyboardEvent) => void` | No | - | Callback fired when last option should be highlighted (triggered by the End key) |
 | Selectable | onRequestSelectOption | `( event: React.KeyboardEvent \| React.MouseEvent, data: { id?: string } ) => void` | No | - | Callback fired when option clicked or selected via keyboard |
 | Selectable | render | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
 | Selectable | children | `(propGetters: SelectableRender) => ReactNode` | No | - | A function with prop getters |
