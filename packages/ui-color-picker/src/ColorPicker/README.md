@@ -218,7 +218,7 @@ type: example
               contrastAgainst,
               renderContrastErrorMessage: (contrast, minContrast) => [
                 {
-                  type: 'error',
+                  type: 'newError',
                   text: `Not high enough contrast. Minimum required is ${minContrast}:1, current is ${contrast}:1`
                 }
               ]
@@ -226,13 +226,13 @@ type: example
           }
           renderInvalidColorMessage={(hexCode) => [
             {
-              type: 'error',
+              type: 'newError',
               text: `Not valid hex color. It should be either 3, 6 or 8 character long.`
             }
           ]}
           renderIsRequiredMessage={() => [
             {
-              type: 'error',
+              type: 'newError',
               text: `This field is required, please enter a valid hex code`
             }
           ]}
@@ -334,17 +334,17 @@ type: example
         { type: "success", text: "I am a contrast success message" },
       ],
       renderContrastErrorMessage: () => [
-        { type: "error", text: "I am a contrast warning message" },
+        { type: "newError", text: "I am a contrast warning message" },
       ],
     }}
     renderMessages={() => [
       { type: "hint", text: "I can display anything, at any time" },
     ]}
     renderInvalidColorMessage={() => [
-      { type: "error", text: "I am an invalid color message" },
+      { type: "newError", text: "I am an invalid color message" },
     ]}
     renderIsRequiredMessage={() => [
-      { type: "error", text: "I am a required message" },
+      { type: "newError", text: "I am a required message" },
     ]}
     placeholderText="Enter HEX"
   />

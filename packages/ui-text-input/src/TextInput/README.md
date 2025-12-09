@@ -48,7 +48,7 @@ type: example
           messages: [
             {
               text: `Come on. There's no way your favorite band is really Supertramp.`,
-              type: 'error'
+              type: 'newError'
             }
           ]
         })
@@ -129,7 +129,7 @@ type: example
         setMessages([
           {
             text: "Come on. There's no way your favorite band is really Supertramp.",
-            type: 'error'
+            type: 'newError'
           }
         ])
       }
