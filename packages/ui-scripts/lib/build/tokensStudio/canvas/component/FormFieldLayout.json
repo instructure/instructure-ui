@@ -36,10 +36,6 @@
       "value": "0.75rem",
       "type": "spacing"
     },
-    "gapColumns": {
-      "value": "0.375rem",
-      "type": "spacing"
-    },
     "stackedOrInlineBreakpoint": {
       "value": "48em",
       "type": "sizing"
