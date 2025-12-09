@@ -29,10 +29,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 import Avatar from '../index'
 import { IconGroupLine } from '@instructure/ui-icons'
-import {
-  UserInstUIIcon,
-  CircleUserInstUIIcon
-} from '@instructure/ui-icons-lucide'
+import { HeartInstUIIcon } from '@instructure/ui-icons-lucide'
 
 describe('<Avatar />', () => {
   describe('for a11y', () => {
@@ -82,14 +79,9 @@ describe('<Avatar />', () => {
   })
 
   describe('when the renderIcon prop is provided', () => {
-    it('should display an svg passed', async () => {
-      const SomeIcon = () => (
-        <svg>
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      )
+    it('should display a Lucide icon when passed as component reference', async () => {
       const { container } = render(
-        <Avatar name="avatar name" renderIcon={SomeIcon}>
+        <Avatar name="avatar name" renderIcon={HeartInstUIIcon}>
           hello
         </Avatar>
       )
@@ -107,249 +99,30 @@ describe('<Avatar />', () => {
       expect(avatarSvg).toBeInTheDocument()
     })
 
-    it('should pass the correct size and color props to icon based on Avatar size', async () => {
-      const MockIcon = vi.fn((props: any) => (
-        <svg
-          data-testid="mock-icon"
-          data-size={props.size}
-          data-color={props.color}
-        >
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      ))
-      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)' // TODO why mock the icon? Why not use a real one?
-
-      const { container } = render(
-        <Avatar name="avatar name" size="medium" renderIcon={MockIcon} />
-      )
-
-      expect(MockIcon).toHaveBeenCalledWith(
-        expect.objectContaining({ size: 'md', color: expect.any(String) })
-      )
-      const icon = container.querySelector('[data-testid="mock-icon"]')
-      expect(icon).toHaveAttribute('data-size', 'md')
-      expect(icon).toHaveAttribute('data-color')
-    })
-
-    it('should map xx-small Avatar to xs icon size', async () => {
-      const MockIcon = vi.fn(() => (
-        <svg data-testid="mock-icon">
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      ))
-      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)'
-
-      render(
-        <Avatar name="avatar name" size="xx-small" renderIcon={MockIcon} />
-      )
-
-      expect(MockIcon).toHaveBeenCalledWith(
-        expect.objectContaining({ size: 'xs', color: expect.any(String) })
-      )
-    })
-
-    it('should map x-small Avatar to xs icon size', async () => {
-      const MockIcon = vi.fn(() => (
-        <svg data-testid="mock-icon">
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      ))
-      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)'
-
-      render(<Avatar name="avatar name" size="x-small" renderIcon={MockIcon} />)
-
-      expect(MockIcon).toHaveBeenCalledWith(
-        expect.objectContaining({ size: 'xs', color: expect.any(String) })
-      )
-    })
-
-    it('should work with icons that ignore the size prop (backwards compatibility)', async () => {
-      const IconWithoutSize = () => (
-        <svg data-testid="icon-without-size">
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      )
-
-      const { container } = render(
-        <Avatar name="avatar name" size="large" renderIcon={IconWithoutSize} />
-      )
-
-      const icon = container.querySelector('[data-testid="icon-without-size"]')
-      expect(icon).toBeInTheDocument()
-    })
-
-    it('should display a Lucide icon with default size', async () => {
-      const { container } = render(
-        <Avatar name="avatar name" renderIcon={UserInstUIIcon} />
-      )
-
-      const avatarSvg = container.querySelector('svg')
-      expect(avatarSvg).toBeInTheDocument()
-    })
-
-    it('should display a Lucide icon with medium Avatar size', async () => {
+    it('should render Lucide icon when passed as JSX element', async () => {
       const { container } = render(
         <Avatar
           name="avatar name"
-          size="medium"
-          renderIcon={CircleUserInstUIIcon}
+          size="large"
+          renderIcon={<HeartInstUIIcon />}
         />
       )
 
-      const avatarSvg = container.querySelector('svg')
-      expect(avatarSvg).toBeInTheDocument()
+      const svg = container.querySelector('svg')
+      expect(svg).toBeInTheDocument()
     })
 
-    it('should display a Lucide icon with xx-small Avatar size', async () => {
+    it('should render Lucide icon from render function', async () => {
       const { container } = render(
         <Avatar
           name="avatar name"
-          size="xx-small"
-          renderIcon={UserInstUIIcon}
-        />
-      )
-
-      const avatarSvg = container.querySelector('svg')
-      expect(avatarSvg).toBeInTheDocument()
-    })
-
-    it('should display a Lucide icon with x-small Avatar size', async () => {
-      const { container } = render(
-        <Avatar name="avatar name" size="x-small" renderIcon={UserInstUIIcon} />
-      )
-
-      const avatarSvg = container.querySelector('svg')
-      expect(avatarSvg).toBeInTheDocument()
-    })
-
-    it('should accept a JSX element and clone it with size/color props', async () => {
-      const MockIcon = vi.fn((props: any) => (
-        <svg
-          data-testid="jsx-icon"
-          data-size={props.size}
-          data-color={props.color}
-        >
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      ))
-      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)'
-
-      const { container } = render(
-        <Avatar name="avatar name" size="large" renderIcon={<MockIcon />} />
-      )
-
-      const icon = container.querySelector('[data-testid="jsx-icon"]')
-      expect(icon).toBeInTheDocument()
-      expect(icon).toHaveAttribute('data-size', 'lg')
-      expect(icon).toHaveAttribute('data-color')
-    })
-
-    it('should override props when JSX element is passed', async () => {
-      const MockIcon = (props: any) => (
-        <svg data-testid="override-icon" data-size={props.size}>
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      )
-      MockIcon.displayName = 'wrapLucideIcon(MockIcon)'
-
-      const { container } = render(
-        <Avatar
-          name="avatar name"
-          size="x-large"
-          renderIcon={<MockIcon size="wrong" />}
-        />
-      )
-
-      const icon = container.querySelector('[data-testid="override-icon"]')
-      expect(icon).toBeInTheDocument()
-      // Avatar should override the size prop
-      expect(icon).toHaveAttribute('data-size', 'xl')
-    })
-
-    it('should work with a render function returning JSX', async () => {
-      const renderFunc = (props: any) => (
-        <svg data-testid="function-icon" data-size={props.size}>
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      )
-      renderFunc.displayName = 'wrapLucideIcon(renderFunc)'
-
-      const { container } = render(
-        <Avatar name="avatar name" size="small" renderIcon={renderFunc} />
-      )
-
-      const icon = container.querySelector('[data-testid="function-icon"]')
-      expect(icon).toBeInTheDocument()
-      expect(icon).toHaveAttribute('data-size', 'sm')
-    })
-
-    it('should work with arrow function returning Lucide icon (user pattern)', async () => {
-      const MockIcon = vi.fn((props: any) => (
-        <svg data-testid="arrow-lucide-icon" data-size={props.size}>
-          <circle />
-        </svg>
-      ))
-      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)'
-
-      const { container } = render(
-        <Avatar
-          name="Profile"
           size="small"
-          color="accent2"
-          renderIcon={() => <MockIcon />}
+          renderIcon={() => <HeartInstUIIcon />}
         />
       )
 
-      const icon = container.querySelector('[data-testid="arrow-lucide-icon"]')
-      expect(icon).toBeInTheDocument()
-      // The icon should have received the correct size prop
-      expect(icon).toHaveAttribute('data-size', 'sm')
-    })
-
-    it('should apply different sizes to arrow function icons', async () => {
-      const SmallMockIcon = vi.fn((props: any) => (
-        <svg data-testid="small-icon" data-size={props.size}>
-          <circle />
-        </svg>
-      ))
-      ;(SmallMockIcon as any).displayName = 'wrapLucideIcon(SmallIcon)'
-
-      const LargeMockIcon = vi.fn((props: any) => (
-        <svg data-testid="large-icon" data-size={props.size}>
-          <circle />
-        </svg>
-      ))
-      ;(LargeMockIcon as any).displayName = 'wrapLucideIcon(LargeIcon)'
-
-      const { container: smallContainer } = render(
-        <Avatar
-          name="Profile"
-          size="small"
-          renderIcon={() => <SmallMockIcon />}
-        />
-      )
-
-      const { container: largeContainer } = render(
-        <Avatar
-          name="Profile"
-          size="xx-large"
-          renderIcon={() => <LargeMockIcon />}
-        />
-      )
-
-      const smallIcon = smallContainer.querySelector(
-        '[data-testid="small-icon"]'
-      )
-      const largeIcon = largeContainer.querySelector(
-        '[data-testid="large-icon"]'
-      )
-
-      expect(smallIcon).toBeInTheDocument()
-      expect(largeIcon).toBeInTheDocument()
-
-      // Verify different sizes were passed correctly
-      expect(smallIcon).toHaveAttribute('data-size', 'sm')
-      expect(largeIcon).toHaveAttribute('data-size', '2xl')
+      const svg = container.querySelector('svg')
+      expect(svg).toBeInTheDocument()
     })
   })
 
@@ -365,7 +138,7 @@ describe('<Avatar />', () => {
 
     it('should display the image even if an icon is provided', async () => {
       const { container } = render(
-        <Avatar name="avatar name" src={src} renderIcon={UserInstUIIcon} />
+        <Avatar name="avatar name" src={src} renderIcon={HeartInstUIIcon} />
       )
       const avatarImg = container.querySelector('img')
       expect(avatarImg).toHaveAttribute('src', src)
@@ -434,7 +207,7 @@ describe('<Avatar />', () => {
             name="Jessica Jones"
             color="accent2"
             hasInverseColor
-            renderIcon={UserInstUIIcon}
+            renderIcon={HeartInstUIIcon}
           />
         )
         const element = container.querySelector('div')

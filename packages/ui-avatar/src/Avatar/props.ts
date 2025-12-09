@@ -31,9 +31,9 @@ import type {
 } from '@instructure/emotion'
 import type {
   AsElementType,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
-import { Renderable } from '@instructure/shared-types'
 
 const avatarSizeToIconSize = {
   'xx-small': 'xs',
@@ -101,7 +101,7 @@ type AvatarOwnProps = {
    * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
    * When using Lucide icons, Avatar will automatically pass the appropriate size and color props based on the Avatar's size and color.
    */
-  renderIcon?: Renderable<{ size?: string | number; color?: string }>
+  renderIcon?: Renderable
 }
 
 export type AvatarState = {
@@ -116,9 +116,7 @@ type AvatarProps = AvatarOwnProps & {
   themeOverride?: ThemeOverrideValue
 } & OtherHTMLAttributes<AvatarOwnProps>
 
-type AvatarStyle = ComponentStyle<'avatar' | 'image'> & {
-  iconColor?: string
-}
+type AvatarStyle = ComponentStyle<'avatar' | 'image'>
 
 const allowedProps: AllowedPropKeys = [
   'name',

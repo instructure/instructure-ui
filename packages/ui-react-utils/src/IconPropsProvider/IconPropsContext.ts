@@ -22,34 +22,9 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ensureSingleChild } from './ensureSingleChild'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { getInteraction } from './getInteraction'
-export {
-  IconPropsProvider,
-  IconPropsContext,
-  useIconProps
-} from './IconPropsProvider'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps } from './omitProps'
-export { passthroughProps } from './passthroughProps'
-export { pickProps } from './pickProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
-export {
-  DeterministicIdContext,
-  DeterministicIdContextProvider,
-  withDeterministicId,
-  useDeterministicId
-} from './DeterministicIdContext'
+import React from 'react'
+import type { IconPropsContextValue } from './IconPropsProvider'
 
-export type { GetInteractionOptions } from './getInteraction'
-export type { InteractionType } from './getInteraction'
-export type { IconPropsContextValue } from './IconPropsProvider'
-export type {
-  DeterministicIdProviderValue,
-  WithDeterministicIdProps
-} from './DeterministicIdContext'
+const IconPropsContext = React.createContext<IconPropsContextValue>({})
+
+export { IconPropsContext }

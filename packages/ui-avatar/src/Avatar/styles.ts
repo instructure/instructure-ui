@@ -153,20 +153,6 @@ const generateStyle = (
     return 'solid'
   }
 
-  const iconColorMap = {
-    accent1: 'accentBlueColor',
-    accent2: 'accentGreenColor',
-    accent3: 'accentRedColor',
-    accent4: 'accentOrangeColor',
-    accent5: 'accentGreyColor',
-    accent6: 'accentAshColor',
-    ai: componentTheme.textOnColor // TODO why is this an exception? if this is not here it can work nicely
-  }
-
-  const iconColor = hasInverseColor
-    ? componentTheme.textOnColor
-    : iconColorMap[color!]
-
   return {
     avatar: {
       label: 'avatar',
@@ -200,8 +186,7 @@ const generateStyle = (
       objectFit: 'cover',
       objectPosition: 'center',
       ...(loaded ? {} : { display: 'none' })
-    },
-    iconColor
+    }
   }
 }
 

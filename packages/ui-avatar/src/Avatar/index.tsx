@@ -23,15 +23,25 @@
  */
 
 import { useStyle } from '@instructure/emotion'
-import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
+import React, { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
 import {
   passthroughProps,
-  renderLucideIconWithProps
+  IconPropsProvider
 } from '@instructure/ui-react-utils'
 import { AvatarProps, avatarSizeToIconSize } from './props'
 
 import generateStyle from './styles'
+
+const ICON_COLOR_MAP = {
+  accent1: 'accentBlueColor',
+  accent2: 'accentGreenColor',
+  accent3: 'accentRedColor',
+  accent4: 'accentOrangeColor',
+  accent5: 'accentGreyColor',
+  accent6: 'accentAshColor',
+  ai: 'onColor'
+} as const
 
 /**
 ---
@@ -138,13 +148,15 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       //icon in avatar
       if (renderIcon) {
         const iconSize = avatarSizeToIconSize[size]
-        // TODO we should never do this, do not create a fake style
-        const iconColor = styles?.iconColor
+        const iconColor = hasInverseColor ? 'onColor' : ICON_COLOR_MAP[color]
 
-        return renderLucideIconWithProps(renderIcon, {
-          size: iconSize,
-          color: iconColor
-        })
+        return (
+          <IconPropsProvider size={iconSize} color={iconColor}>
+            {typeof renderIcon === 'function'
+              ? React.createElement(renderIcon as any)
+              : (renderIcon as React.ReactElement)}
+          </IconPropsProvider>
+        )
       }
 
       //initials in avatar

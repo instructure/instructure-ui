@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import { useStyle, useTheme } from '@instructure/emotion'
-import { px } from '@instructure/ui-utils'
-import { passthroughProps } from '@instructure/ui-react-utils'
-import type { Theme } from '@instructure/ui-themes'
+import React from 'react'
+import { useStyle } from '@instructure/emotion'
+import { passthroughProps, useIconProps } from '@instructure/ui-react-utils'
 import type { LucideIcon } from 'lucide-react'
 
 import type { LucideIconWrapperProps, InstUIIconOwnProps } from './props'
@@ -36,8 +35,9 @@ import generateStyle from './styles'
  * Supports both InstUI semantic props (size="lg", color="baseColor") and
  * native Lucide props (size={24}, color="#ff0000").
  */
-export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
-  // TODO why is this returning LucideIcon we should have our own API
+export function wrapLucideIcon(
+  Icon: LucideIcon
+): React.ComponentType<LucideIconWrapperProps> {
   const WrappedIcon = (props: LucideIconWrapperProps) => {
     const {
       size,
@@ -50,76 +50,19 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
       elementRef,
       themeOverride,
       absoluteStrokeWidth,
-      className,
-      style,
       ...rest
     } = props
-    // TODO we should never do this
-    const theme = useTheme() as Theme
-    const iconTheme = theme?.newTheme?.components?.Icon
+
+    // Get icon props from context (if available)
+    const contextProps = useIconProps()
+
+    // Merge props: direct props take precedence over context props
+    const finalSize = size ?? contextProps?.size
+    const finalColor = color ?? contextProps?.color
 
     const handleElementRef = (el: SVGSVGElement | null) => {
       if (typeof elementRef === 'function') {
         elementRef(el)
-      }
-    }
-
-    // Convert semantic size to pixels for Lucide
-    let numericSize: number | undefined
-    let semanticSize: string | undefined
-    if (typeof size === 'string' && iconTheme) {
-      // TODO why is tons of "&& iconTheme"? why not bail at the beginning?
-      // Construct theme property name (e.g., 'xs' -> 'sizeXs')
-      // TODO why convert here back? Why not use `sizeXs` as prop?
-      const propName = `size${size.charAt(0).toUpperCase()}${size.slice(
-        1
-      )}` as keyof typeof iconTheme
-      if (propName in iconTheme) {
-        // Semantic size token from theme
-        semanticSize = size
-        numericSize = px(iconTheme[propName] as string)
-      }
-    } else if (typeof size === 'number') {
-      numericSize = size
-    }
-
-    // Convert semantic strokeWidth to pixels for Lucide
-    let numericStrokeWidth: number | string | undefined
-    if (typeof strokeWidth === 'string' && iconTheme) {
-      // Construct theme property name (e.g., 'xs' -> 'strokeWidthXs')
-      const propName = `strokeWidth${strokeWidth
-        .charAt(0)
-        .toUpperCase()}${strokeWidth.slice(1)}` as keyof typeof iconTheme
-      if (propName in iconTheme) {
-        // Semantic stroke width token from theme
-        numericStrokeWidth = px(iconTheme[propName] as string)
-      } else {
-        // Not a semantic token, use as-is (custom string value)
-        numericStrokeWidth = strokeWidth
-      }
-    } else {
-      // Numeric value (custom stroke width)
-      numericStrokeWidth = strokeWidth
-    }
-
-    // Determine if color is semantic (theme token) or custom CSS
-    let colorValue: string | undefined
-    let customColor: string | undefined
-    if (color) {
-      if (color === 'inherit') {
-        colorValue = color
-      } else if (
-        iconTheme &&
-        color in iconTheme &&
-        !color.startsWith('size') && // TODO this would be much simpler if color would be enum
-        !color.startsWith('strokeWidth') &&
-        color !== 'dark' // TODO what is dark??
-      ) {
-        // Semantic color token from theme (exclude size/strokeWidth/dark properties)
-        colorValue = color
-      } else {
-        // Custom CSS color (e.g., "#ff0000", "rgb(255, 0, 0)")
-        customColor = color
       }
     }
 
@@ -128,8 +71,9 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
       generateStyle,
       themeOverride,
       params: {
-        size: semanticSize as InstUIIconOwnProps['size'],
-        color: colorValue,
+        size: finalSize as LucideIconWrapperProps['size'],
+        strokeWidth,
+        color: finalColor,
         rotate,
         bidirectional,
         inline
@@ -147,17 +91,16 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
     }
 
     return (
-      // TODO why apply here className and style??
-      <span css={styles?.lucideIcon} className={className} style={style}>
+      <span css={styles.lucideIcon}>
         <Icon
+          {...passthroughProps(rest)}
           name={Icon.displayName}
           ref={handleElementRef}
-          size={numericSize}
-          color={customColor}
-          strokeWidth={numericStrokeWidth}
+          size={styles.numericSize}
+          color={styles.customColor}
+          strokeWidth={styles.numericStrokeWidth}
           absoluteStrokeWidth={absoluteStrokeWidth}
           {...accessibilityProps}
-          {...passthroughProps(rest)} // TODO passtroughProps should be alyways at the beginning otherwise it overwrites stuff
         />
       </span>
     )
@@ -165,7 +108,7 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
 
   WrappedIcon.displayName = `wrapLucideIcon(${Icon.displayName || Icon.name})`
 
-  return WrappedIcon as LucideIcon
+  return WrappedIcon
 }
 
 export type { LucideIconWrapperProps, InstUIIconOwnProps }

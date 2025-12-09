@@ -299,7 +299,6 @@ const LucideIconsGallery = () => {
                 <li>
                   <code>strokeWidth</code>: Number - e.g., <code>2</code>
                 </li>
-                <li>Plus all standard SVG props (className, style, etc.)</li>
               </ul>
               <p>
                 These icons use the pure Lucide API. See{' '}

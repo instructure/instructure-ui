@@ -24,40 +24,91 @@
 
 import type { LucideProps } from 'lucide-react'
 import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 /**
- * Extract size tokens from Icon theme (sizeXs, sizeSm, etc.)
- * and transform to lowercase literals ('xs', 'sm', etc.)
+ * Semantic size tokens for icons
  */
-type ExtractSizeTokens<T> = {
-  // TODO why this complexity? hardcoding would be much better
-  [K in keyof T]: K extends `size${infer Size}` ? Lowercase<Size> : never
-}[keyof T]
+type IconSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 /**
- * Extract strokeWidth tokens from Icon theme (strokeWidthXs, etc.)
- * and transform to lowercase literals ('xs', 'sm', etc.)
+ * Semantic stroke width tokens for icons
  */
-type ExtractStrokeWidthTokens<T> = {
-  // TODO why this complexity? hardcoding would be much better
-  [K in keyof T]: K extends `strokeWidth${infer Size}` ? Lowercase<Size> : never
-}[keyof T]
+type IconStrokeWidthToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 /**
- * Extract color tokens from Icon theme
- * (all properties except size/strokeWidth and 'dark')
+ * Semantic color tokens from Icon theme
  */
-type ExtractColorTokens<T> = Exclude<
-  // TODO why this complexity? hardcoding would be much better
-  keyof T,
-  `size${string}` | `strokeWidth${string}` | 'dark' // TODO what is 'dark'?
->
-
-type IconSizeToken = ExtractSizeTokens<NewComponentTypes['Icon']>
-type IconStrokeWidthToken = ExtractStrokeWidthTokens<NewComponentTypes['Icon']>
-type IconColorToken = ExtractColorTokens<NewComponentTypes['Icon']>
+type IconColorToken =
+  | 'baseColor'
+  | 'mutedColor'
+  | 'successColor'
+  | 'errorColor'
+  | 'warningColor'
+  | 'infoColor'
+  | 'onColor'
+  | 'inverseColor'
+  | 'disabledBaseColor'
+  | 'disabledOnColor'
+  | 'dark'
+  | 'navigationPrimaryBaseColor'
+  | 'navigationPrimaryHoverColor'
+  | 'navigationPrimaryActiveColor'
+  | 'navigationPrimaryOnColorBaseColor'
+  | 'navigationPrimaryOnColorHoverColor'
+  | 'navigationPrimaryOnColorActiveColor'
+  | 'actionSecondaryBaseColor'
+  | 'actionSecondaryHoverColor'
+  | 'actionSecondaryActiveColor'
+  | 'actionSecondaryDisabledColor'
+  | 'actionStatusBaseColor'
+  | 'actionStatusHoverColor'
+  | 'actionStatusActiveColor'
+  | 'actionStatusDisabledColor'
+  | 'actionAiSecondaryTopGradientBaseColor'
+  | 'actionAiSecondaryBottomGradientBaseColor'
+  | 'actionAiBaseColor'
+  | 'actionAiHoverColor'
+  | 'actionAiActiveColor'
+  | 'actionAiDisabledColor'
+  | 'actionPrimaryBaseColor'
+  | 'actionPrimaryHoverColor'
+  | 'actionPrimaryActiveColor'
+  | 'actionPrimaryDisabledColor'
+  | 'actionPrimaryOnColorBaseColor'
+  | 'actionPrimaryOnColorHoverColor'
+  | 'actionPrimaryOnColorActiveColor'
+  | 'actionPrimaryOnColorDisabledColor'
+  | 'accentBlueColor'
+  | 'accentGreenColor'
+  | 'accentRedColor'
+  | 'accentOrangeColor'
+  | 'accentGreyColor'
+  | 'accentAshColor'
+  | 'accentPlumColor'
+  | 'accentVioletColor'
+  | 'accentStoneColor'
+  | 'accentSkyColor'
+  | 'accentHoneyColor'
+  | 'accentSeaColor'
+  | 'accentAutoraColor'
+  | 'actionTertiaryBaseColor'
+  | 'actionTertiaryHoverColor'
+  | 'actionTertiaryActiveColor'
+  | 'actionTertiaryDisabledColor'
+  | 'actionSuccessSecondaryBaseColor'
+  | 'actionSuccessSecondaryDisabledColor'
+  | 'actionDestructiveSecondaryBaseColor'
+  | 'actionDestructiveSecondaryDisabledColor'
+  | 'actionAiSecondaryDisabledColor'
+  | 'actionSecondaryOnColorBaseColor'
+  | 'actionSecondaryOnColorHoverColor'
+  | 'actionSecondaryOnColorActiveColor'
+  | 'actionSecondaryOnColorDisabledColor'
+  | 'actionSuccessSecondaryHoverColor'
+  | 'actionSuccessSecondaryActiveColor'
+  | 'actionDestructiveSecondaryHoverColor'
+  | 'actionDestructiveSecondaryActiveColor'
 
 type InstUIIconOwnProps = {
   /**
@@ -108,6 +159,19 @@ type LucideIconWrapperProps = Omit<
     themeOverride?: ThemeOverrideValue
   } & OtherHTMLAttributes<InstUIIconOwnProps>
 
-type LucideIconStyle = ComponentStyle<'lucideIcon'>
+type LucideIconStyle = ComponentStyle<'lucideIcon'> & {
+  /**
+   * Computed numeric size for Lucide icon (in pixels)
+   */
+  numericSize?: number
+  /**
+   * Computed numeric stroke width for Lucide icon
+   */
+  numericStrokeWidth?: number | string
+  /**
+   * Custom CSS color value (non-semantic)
+   */
+  customColor?: string
+}
 
 export type { LucideIconWrapperProps, InstUIIconOwnProps, LucideIconStyle }

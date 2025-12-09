@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
+import { px } from '@instructure/ui-utils'
 import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { LucideIconWrapperProps, LucideIconStyle } from './props'
 
 type StyleParams = {
   size?: LucideIconWrapperProps['size']
+  strokeWidth?: LucideIconWrapperProps['strokeWidth']
   color?: LucideIconWrapperProps['color']
   rotate?: LucideIconWrapperProps['rotate']
   bidirectional?: LucideIconWrapperProps['bidirectional']
@@ -34,29 +36,105 @@ type StyleParams = {
   themeOverride?: LucideIconWrapperProps['themeOverride']
 }
 
+/**
+ * Convert semantic size token to numeric pixels for Lucide
+ */
+const convertSemanticSize = (
+  size: LucideIconWrapperProps['size'],
+  componentTheme: NewComponentTypes['Icon']
+) => {
+  if (typeof size === 'string') {
+    const propName = `size${size.charAt(0).toUpperCase()}${size.slice(
+      1
+    )}` as keyof typeof componentTheme
+    if (propName in componentTheme) {
+      return px(componentTheme[propName])
+    }
+  } else if (typeof size === 'number') {
+    return size
+  }
+  return undefined
+}
+
+/**
+ * Convert semantic stroke width token to numeric value for Lucide
+ */
+const convertSemanticStrokeWidth = (
+  strokeWidth: LucideIconWrapperProps['strokeWidth'],
+  componentTheme: NewComponentTypes['Icon']
+) => {
+  if (typeof strokeWidth === 'string') {
+    const propName = `strokeWidth${strokeWidth
+      .charAt(0)
+      .toUpperCase()}${strokeWidth.slice(1)}` as keyof typeof componentTheme
+    if (propName in componentTheme) {
+      return px(componentTheme[propName])
+    }
+    return strokeWidth
+  }
+  return strokeWidth
+}
+
+/**
+ * Determine color values: semantic (for CSS) vs custom (for Lucide)
+ */
+const determineColorValues = (
+  color: LucideIconWrapperProps['color'],
+  componentTheme: NewComponentTypes['Icon']
+) => {
+  if (!color) {
+    return {}
+  }
+
+  if (color === 'inherit') {
+    return { colorValue: color }
+  }
+
+  if (
+    color in componentTheme &&
+    !color.startsWith('size') &&
+    !color.startsWith('strokeWidth')
+  ) {
+    return { colorValue: color }
+  }
+
+  return { customColor: color }
+}
+
 const generateStyle = (
   componentTheme: NewComponentTypes['Icon'],
   params: StyleParams
 ): LucideIconStyle => {
-  const { color, rotate = '0', bidirectional = true, inline = true } = params
+  const {
+    size,
+    strokeWidth,
+    color,
+    rotate = '0',
+    bidirectional = true,
+    inline = true
+  } = params
 
-  /**
-   * Determine color value from theme or custom CSS
-   */
-  let colorStyle: { color: string } | undefined
+  const numericSize = convertSemanticSize(size, componentTheme)
+  const numericStrokeWidth = convertSemanticStrokeWidth(
+    strokeWidth,
+    componentTheme
+  )
+  const { colorValue, customColor } = determineColorValues(
+    color,
+    componentTheme
+  )
 
-  if (color) {
-    if (color === 'inherit') {
+  let colorStyle
+  if (colorValue) {
+    if (colorValue === 'inherit') {
       colorStyle = { color: 'inherit' }
-    } else if (color in componentTheme) {
-      // Direct theme property access
+    } else if (colorValue in componentTheme) {
       colorStyle = {
-        color: componentTheme[color as keyof typeof componentTheme] as string
+        color: componentTheme[colorValue as keyof typeof componentTheme]
       }
-    } else {
-      // Custom CSS color (e.g., "#ff0000", "rgb(255, 0, 0)")
-      colorStyle = { color }
     }
+  } else if (customColor) {
+    colorStyle = { color: customColor }
   }
 
   const rotateVariants = {
@@ -85,7 +163,10 @@ const generateStyle = (
       ...(bidirectional && {
         '[dir="rtl"] &': bidirectionalRotateVariants[rotate]
       })
-    }
+    },
+    numericSize,
+    numericStrokeWidth,
+    customColor
   }
 }
 
