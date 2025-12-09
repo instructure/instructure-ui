@@ -61,6 +61,10 @@
         "value": "{color.greyOpacity10}",
         "type": "color"
       },
+      "opacityOnColor": {
+        "value": "{color.whiteOpacity20}",
+        "type": "color"
+      },
       "divider": {
         "base": {
           "value": "{color.grey.grey40}",
