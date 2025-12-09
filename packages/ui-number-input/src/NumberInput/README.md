@@ -79,12 +79,12 @@ const Example = () => {
 
   const invalidNumber = (value) => {
     setMessages([
-      { text: `'${value}' is not a valid number.`, type: 'error' }
+      { text: `'${value}' is not a valid number.`, type: 'newError' }
     ])
   }
 
   const required = () => {
-    setMessages([{ text: 'This is required.', type: 'error' }])
+    setMessages([{ text: 'This is required.', type: 'newError' }])
   }
 
   const toggleDisabled = (event) => {
