@@ -193,7 +193,7 @@ const withStyle = decorator(
         theme,
         displayName,
         ComposedComponent.componentId,
-        (componentProps as any).themeOverride,
+        (componentProps as ThemeOverrideProp).themeOverride,
         baseComponentTheme
       )
 
