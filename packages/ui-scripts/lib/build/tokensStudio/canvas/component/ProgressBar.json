@@ -127,6 +127,10 @@
     "valuePadding": {
       "value": "0.375rem",
       "type": "spacing"
+    },
+    "textColorInverse": {
+      "value": "{color.text.onColor}",
+      "type": "color"
     }
   }
 }

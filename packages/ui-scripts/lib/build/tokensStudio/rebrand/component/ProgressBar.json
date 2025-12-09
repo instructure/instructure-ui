@@ -57,7 +57,7 @@
       "type": "color"
     },
     "meterColorInfo": {
-      "value": "{color.background.info}",
+      "value": "{color.text.info}",
       "type": "color"
     },
     "meterColorInfoInverse": {
@@ -65,7 +65,7 @@
       "type": "color"
     },
     "meterColorSuccess": {
-      "value": "{color.background.success}",
+      "value": "{color.text.success}",
       "type": "color"
     },
     "meterColorSuccessInverse": {
@@ -101,7 +101,7 @@
       "type": "color"
     },
     "trackColorInverse": {
-      "value": "{color.background.opacity}",
+      "value": "{color.background.opacityOnColor}",
       "type": "color"
     },
     "valuePadding": {
@@ -110,6 +110,10 @@
     },
     "textColor": {
       "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "textColorInverse": {
+      "value": "{color.text.onColor}",
       "type": "color"
     },
     "xSmallValueFontSize": {
