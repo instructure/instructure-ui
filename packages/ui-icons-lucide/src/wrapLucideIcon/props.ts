@@ -32,6 +32,7 @@ import type { OtherHTMLAttributes } from '@instructure/shared-types'
  * and transform to lowercase literals ('xs', 'sm', etc.)
  */
 type ExtractSizeTokens<T> = {
+  // TODO why this complexity? hardcoding would be much better
   [K in keyof T]: K extends `size${infer Size}` ? Lowercase<Size> : never
 }[keyof T]
 
@@ -40,6 +41,7 @@ type ExtractSizeTokens<T> = {
  * and transform to lowercase literals ('xs', 'sm', etc.)
  */
 type ExtractStrokeWidthTokens<T> = {
+  // TODO why this complexity? hardcoding would be much better
   [K in keyof T]: K extends `strokeWidth${infer Size}` ? Lowercase<Size> : never
 }[keyof T]
 
@@ -48,8 +50,9 @@ type ExtractStrokeWidthTokens<T> = {
  * (all properties except size/strokeWidth and 'dark')
  */
 type ExtractColorTokens<T> = Exclude<
+  // TODO why this complexity? hardcoding would be much better
   keyof T,
-  `size${string}` | `strokeWidth${string}` | 'dark'
+  `size${string}` | `strokeWidth${string}` | 'dark' // TODO what is 'dark'?
 >
 
 type IconSizeToken = ExtractSizeTokens<NewComponentTypes['Icon']>

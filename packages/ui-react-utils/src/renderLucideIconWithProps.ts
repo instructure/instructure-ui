@@ -33,10 +33,11 @@ import { callRenderProp } from './callRenderProp'
  */
 const isLucideIcon = (element: any): boolean => {
   if (React.isValidElement(element)) {
+    // like <UserIcon />
     const displayName = (element.type as any)?.displayName
     return displayName?.startsWith('wrapLucideIcon(')
   }
-  return element?.displayName?.startsWith('wrapLucideIcon(')
+  return element?.displayName?.startsWith('wrapLucideIcon(') // like `UserIcon`
 }
 
 /**
@@ -63,17 +64,17 @@ function renderLucideIconWithProps<P extends Record<string, unknown>>(
 ): React.ReactElement | null {
   if (!elementToRender) return null
 
-  // Check once if the input is a Lucide icon
+  // Check once if the input is a Lucide icon e.g. `<UserIcon />` or `UserIcon`
   const isInputLucide = isLucideIcon(elementToRender)
 
-  // Use case 2: JSX element like <UserIcon />
+  // Use case 1: JSX element like <UserIcon />
   if (React.isValidElement(elementToRender)) {
     return isInputLucide
       ? React.cloneElement(elementToRender, propsToApply)
       : elementToRender
   }
 
-  // Use cases 1 & 3: Component/function reference
+  // Use case 2: `UserIcon` or `() => <UserIcon />`
   // callRenderProp "extracts" the JSX element by either:
   // 1. Creating it from a component reference: React.createElement(UserIcon, props)
   // 2. Calling the function to get the JSX it returns: (() => <UserIcon />)()
@@ -85,8 +86,10 @@ function renderLucideIconWithProps<P extends Record<string, unknown>>(
   // Apply props if result is a valid element and either:
   // - Input was Lucide (trust that we should apply props to whatever it returns)
   // - Result itself is Lucide (arrow function returned a Lucide icon)
+  // TODO isInputLucide check is needed here? isLucideIcon(result) is not enough?
   if (React.isValidElement(result) && (isInputLucide || isLucideIcon(result))) {
     return React.cloneElement(result, {
+      // TODO didnt callRenderProp already apply the props?
       ...(result.props as Record<string, unknown>),
       ...propsToApply
     })

@@ -160,7 +160,7 @@ const generateStyle = (
     accent4: 'accentOrangeColor',
     accent5: 'accentGreyColor',
     accent6: 'accentAshColor',
-    ai: componentTheme.textOnColor
+    ai: componentTheme.textOnColor // TODO why is this an exception? if this is not here it can work nicely
   }
 
   const iconColor = hasInverseColor

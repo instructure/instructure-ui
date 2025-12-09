@@ -43,6 +43,7 @@ describe('renderLucideIconWithProps', () => {
 
   describe('with component reference', () => {
     it('should render component with props', () => {
+      // TODO why fake here an icon? Why not use a real one?
       const TestComponent = ({ size, color }: any) => (
         <div data-testid="test" data-size={size} data-color={color}>
           Test

@@ -138,6 +138,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       //icon in avatar
       if (renderIcon) {
         const iconSize = avatarSizeToIconSize[size]
+        // TODO we should never do this, do not create a fake style
         const iconColor = styles?.iconColor
 
         return renderLucideIconWithProps(renderIcon, {

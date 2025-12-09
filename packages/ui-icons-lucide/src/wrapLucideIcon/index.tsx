@@ -37,6 +37,7 @@ import generateStyle from './styles'
  * native Lucide props (size={24}, color="#ff0000").
  */
 export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
+  // TODO why is this returning LucideIcon we should have our own API
   const WrappedIcon = (props: LucideIconWrapperProps) => {
     const {
       size,
@@ -53,7 +54,7 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
       style,
       ...rest
     } = props
-
+    // TODO we should never do this
     const theme = useTheme() as Theme
     const iconTheme = theme?.newTheme?.components?.Icon
 
@@ -67,7 +68,9 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
     let numericSize: number | undefined
     let semanticSize: string | undefined
     if (typeof size === 'string' && iconTheme) {
+      // TODO why is tons of "&& iconTheme"? why not bail at the beginning?
       // Construct theme property name (e.g., 'xs' -> 'sizeXs')
+      // TODO why convert here back? Why not use `sizeXs` as prop?
       const propName = `size${size.charAt(0).toUpperCase()}${size.slice(
         1
       )}` as keyof typeof iconTheme
@@ -108,9 +111,9 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
       } else if (
         iconTheme &&
         color in iconTheme &&
-        !color.startsWith('size') &&
+        !color.startsWith('size') && // TODO this would be much simpler if color would be enum
         !color.startsWith('strokeWidth') &&
-        color !== 'dark'
+        color !== 'dark' // TODO what is dark??
       ) {
         // Semantic color token from theme (exclude size/strokeWidth/dark properties)
         colorValue = color
@@ -144,6 +147,7 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
     }
 
     return (
+      // TODO why apply here className and style??
       <span css={styles?.lucideIcon} className={className} style={style}>
         <Icon
           name={Icon.displayName}
@@ -153,7 +157,7 @@ export function wrapLucideIcon(Icon: LucideIcon): LucideIcon {
           strokeWidth={numericStrokeWidth}
           absoluteStrokeWidth={absoluteStrokeWidth}
           {...accessibilityProps}
-          {...passthroughProps(rest)}
+          {...passthroughProps(rest)} // TODO passtroughProps should be alyways at the beginning otherwise it overwrites stuff
         />
       </span>
     )

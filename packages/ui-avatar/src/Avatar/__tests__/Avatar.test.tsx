@@ -117,7 +117,7 @@ describe('<Avatar />', () => {
           <circle cx="25" cy="75" r="20" />
         </svg>
       ))
-      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)'
+      ;(MockIcon as any).displayName = 'wrapLucideIcon(MockIcon)' // TODO why mock the icon? Why not use a real one?
 
       const { container } = render(
         <Avatar name="avatar name" size="medium" renderIcon={MockIcon} />
