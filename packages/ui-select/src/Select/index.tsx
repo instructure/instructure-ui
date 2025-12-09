@@ -308,7 +308,7 @@ class Select extends Component<SelectProps> {
     }
   }
 
-  highlightOption(event: React.SyntheticEvent, id: string) {
+  highlightOption(event: React.KeyboardEvent | React.MouseEvent, id: string) {
     const { onRequestHighlightOption } = this.props
     if (id) {
       onRequestHighlightOption?.(event, { id })
