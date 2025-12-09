@@ -25,7 +25,7 @@
       "type": "spacing"
     }
   },
-  "col": {
+  "gridCol": {
     "mediumMin": {
       "value": "48em",
       "type": "sizing"
@@ -51,7 +51,7 @@
       "type": "spacing"
     }
   },
-  "row": {
+  "gridRow": {
     "mediumMin": {
       "value": "48em",
       "type": "sizing"
