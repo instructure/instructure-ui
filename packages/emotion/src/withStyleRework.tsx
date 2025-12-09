@@ -143,7 +143,7 @@ const withStyleRework = decorator(
         theme,
         displayName,
         ComposedComponent.componentId,
-        componentProps,
+        (componentProps as ThemeOverrideProp).themeOverride,
         componentTheme
       )
 
