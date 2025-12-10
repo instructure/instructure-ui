@@ -1,15 +1,15 @@
 {
   "tag": {
     "defaultBackground": {
-      "value": "{color.background.muted}",
+      "value": "{color.background.interactive.action.secondary.base}",
       "type": "color"
     },
     "defaultBackgroundHover": {
-      "value": "{color.background.mutedHover}",
+      "value": "{color.background.interactive.action.secondary.hover}",
       "type": "color"
     },
     "defaultBorderColor": {
-      "value": "{color.stroke.container.base}",
+      "value": "{color.stroke.interactive.action.secondary.base}",
       "type": "color"
     },
     "defaultBorderRadius": {
@@ -73,15 +73,15 @@
       "type": "spacing"
     },
     "inlineBackground": {
-      "value": "{color.background.base}",
+      "value": "{color.background.interactive.action.secondary.base}",
       "type": "color"
     },
     "inlineBackgroundHover": {
-      "value": "{color.background.muted}",
+      "value": "{color.background.interactive.action.secondary.hover}",
       "type": "color"
     },
     "inlineBorderColor": {
-      "value": "{color.stroke.strong}",
+      "value": "{color.stroke.interactive.action.secondary.base}",
       "type": "color"
     },
     "inlineBorderRadius": {
