@@ -32,6 +32,10 @@
       "value": "{spacing.gap.inputElements}",
       "type": "spacing"
     },
+    "gapInputs": {
+      "value": "0.75rem",
+      "type": "spacing"
+    },
     "stackedOrInlineBreakpoint": {
       "value": "48em",
       "type": "sizing"

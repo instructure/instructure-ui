@@ -1,6 +1,6 @@
 {
   "rangeInput": {
-    "handleBackgroundColor": {
+    "handleBackground": {
       "value": "{color.background.brand}",
       "type": "color"
     },
@@ -39,7 +39,7 @@
       "value": "{spacing.space2xs}",
       "type": "spacing"
     },
-    "trackBackgroundColor": {
+    "trackBackground": {
       "value": "{color.background.accent.grey}",
       "type": "color"
     },

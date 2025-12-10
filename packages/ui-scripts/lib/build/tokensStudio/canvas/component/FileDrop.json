@@ -13,7 +13,7 @@
       "type": "color"
     },
     "borderRadius": {
-      "value": "{borderRadius.container.md}",
+      "value": "{borderRadius.container.sm}",
       "type": "borderRadius"
     },
     "borderStyle": {
@@ -31,7 +31,7 @@
       "type": "color"
     },
     "rejectedColor": {
-      "value": "{color.stroke.interactive.action.destructive.base}",
+      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
       "type": "color"
     }
   }

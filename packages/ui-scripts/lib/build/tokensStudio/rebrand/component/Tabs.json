@@ -25,7 +25,7 @@
       "type": "number"
     }
   },
-  "panel": {
+  "tabsPanel": {
     "background": {
       "value": "{color.background.base}",
       "type": "color"
@@ -63,7 +63,7 @@
       "type": "lineHeights"
     }
   },
-  "tab": {
+  "tabsTab": {
     "defaultTextColor": {
       "value": "{color.text.base}",
       "type": "color"

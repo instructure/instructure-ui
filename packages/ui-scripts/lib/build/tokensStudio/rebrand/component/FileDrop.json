@@ -23,7 +23,7 @@
       "type": "border"
     },
     "borderWidth": {
-      "value": "{borderWidth.md}",
+      "value": "{borderWidth.sm}",
       "type": "borderWidth"
     },
     "hoverBorderColor": {
@@ -31,7 +31,7 @@
       "type": "color"
     },
     "rejectedColor": {
-      "value": "{color.stroke.interactive.action.destructive.base}",
+      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
       "type": "color"
     }
   }

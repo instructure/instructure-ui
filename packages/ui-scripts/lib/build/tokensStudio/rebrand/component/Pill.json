@@ -17,7 +17,7 @@
       "type": "fontSizes"
     },
     "textFontWeight": {
-      "value": "{fontWeight.body.base}",
+      "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
     "statusLabelFontWeight": {

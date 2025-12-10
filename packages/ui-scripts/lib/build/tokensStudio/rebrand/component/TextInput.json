@@ -33,11 +33,11 @@
       "type": "color"
     },
     "errorBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.base}",
+      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
       "type": "color"
     },
     "successBorderColor": {
-      "value": "{color.stroke.success}",
+      "value": "{color.stroke.interactive.action.success.secondary.base}",
       "type": "color"
     },
     "borderRadius": {
