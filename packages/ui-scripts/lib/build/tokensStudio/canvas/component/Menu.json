@@ -1,6 +1,6 @@
 {
   "menu": {
-    "backgroundColor": {
+    "background": {
       "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
@@ -8,64 +8,105 @@
       "value": "{borderRadius.sm}",
       "type": "borderRadius"
     },
-    "item": {
-      "activeBackground": {
-        "value": "{color.background.interactive.action.primary.base}",
-        "type": "color"
-      },
-      "activeIconColor": {
-        "value": "{color.icon.interactive.action.primary.base}",
-        "type": "color"
-      },
-      "activeLabelColor": {
-        "value": "{color.text.interactive.action.primary.base}",
-        "type": "color"
-      },
-      "background": {
-        "value": "{color.background.elevatedSurface.base}",
-        "type": "color"
-      },
-      "fontFamily": {
-        "value": "{fontFamily.base}",
-        "type": "fontFamilies"
-      },
-      "fontSize": {
-        "value": "{fontSize.textBase}",
-        "type": "fontSizes"
-      },
-      "fontWeight": {
-        "value": "{fontWeight.body.base}",
-        "type": "fontWeights"
-      },
-      "iconColor": {
-        "value": "{color.icon.base}",
-        "type": "color"
-      },
-      "iconPadding": {
-        "value": "{spacing.spaceMd}",
-        "type": "spacing",
-        "description": "code only token"
-      },
-      "labelColor": {
-        "value": "{color.text.base}",
-        "type": "color"
-      },
-      "labelInfoColor": {
-        "value": "{color.text.muted}",
-        "type": "color"
-      },
-      "lineHeight": {
-        "value": "{lineHeight.paragraph.textSm}",
-        "type": "lineHeights"
-      },
-      "paddingHorizontal": {
-        "value": "{spacing.spaceMd}",
-        "type": "spacing"
-      },
-      "paddingVertical": {
-        "value": "{spacing.spaceMd}",
-        "type": "spacing"
-      }
+    "maxWidth": {
+      "value": "16em",
+      "type": "sizing"
+    },
+    "minWidth": {
+      "value": "8em",
+      "type": "sizing"
+    }
+  },
+  "menuGroup": {
+    "background": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "color": {
+      "value": "{color.text.base}",
+      "type": "color"
+    }
+  },
+  "menuItem": {
+    "activeBackground": {
+      "value": "{color.background.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "activeIconColor": {
+      "value": "{color.icon.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "activeLabelColor": {
+      "value": "{color.text.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "background": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "iconPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing",
+      "description": "code only token"
+    },
+    "labelColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "labelInfoColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "padding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "labelPadding": {
+      "value": "2.25rem",
+      "type": "spacing"
+    }
+  },
+  "menuSeparator": {
+    "background": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "height": {
+      "value": "0.0625rem",
+      "type": "sizing"
+    },
+    "margin": {
+      "value": "0 0.75rem",
+      "type": "sizing",
+      "description": "code only token"
     }
   }
 }
