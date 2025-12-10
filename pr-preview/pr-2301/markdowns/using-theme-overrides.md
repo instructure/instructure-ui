@@ -231,7 +231,7 @@ type: example
     <InstUISettingsProvider
       theme={{
         componentOverrides: {
-          TextInput: { background: "yellow" }
+          TextInput: { backgroundColor: "yellow" }
         }
       }}
     >
