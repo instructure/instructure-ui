@@ -35,6 +35,10 @@
     "yearPickerMargin": {
       "value": "{spacing.spaceLg}",
       "type": "spacing"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.base}",
+      "type": "lineHeights"
     }
   },
   "calendarDay": {
