@@ -9,7 +9,7 @@
       "type": "color"
     },
     "borderColor": {
-      "value": "{color.stroke.interactive.input.base}",
+      "value": "{color.stroke.interactive.action.secondary.base}",
       "type": "color"
     },
     "borderRadius": {
@@ -27,7 +27,7 @@
       "type": "borderWidth"
     },
     "hoverBorderColor": {
-      "value": "{color.stroke.interactive.input.hover}",
+      "value": "{color.stroke.brand}",
       "type": "color"
     },
     "rejectedColor": {
