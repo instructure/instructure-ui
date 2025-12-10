@@ -90,8 +90,9 @@
       "type": "spacing"
     },
     "labelPadding": {
-      "value": "2.25rem",
-      "type": "spacing"
+      "value": "0",
+      "type": "spacing",
+      "description": "code only token"
     }
   },
   "menuSeparator": {
