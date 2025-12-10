@@ -9,6 +9,10 @@
         "value": "{color.grey.grey10}",
         "type": "color"
       },
+      "mutedHover": {
+        "value": "{color.grey.grey20}",
+        "type": "color"
+      },
       "page": {
         "value": "{color.grey.grey10}",
         "type": "color"
@@ -62,7 +66,7 @@
         "type": "color"
       },
       "opacityOnColor": {
-        "value": "{color.whiteOpacity20}",
+        "value": "{color.whiteOpacity10}",
         "type": "color"
       },
       "divider": {
@@ -370,10 +374,6 @@
           "value": "{color.greyOpacity75}",
           "type": "color"
         }
-      },
-      "mutedHover": {
-        "value": "{color.grey.grey20}",
-        "type": "color"
       }
     },
     "stroke": {

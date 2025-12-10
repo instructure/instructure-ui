@@ -9,6 +9,10 @@
         "value": "{color.grey.grey170}",
         "type": "color"
       },
+      "mutedHover": {
+        "value": "{color.grey.grey180}",
+        "type": "color"
+      },
       "page": {
         "value": "{color.grey.grey180}",
         "type": "color"
@@ -58,6 +62,10 @@
         "type": "color"
       },
       "opacity": {
+        "value": "{color.whiteOpacity10}",
+        "type": "color"
+      },
+      "opacityOnColor": {
         "value": "{color.whiteOpacity10}",
         "type": "color"
       },
@@ -366,14 +374,6 @@
           "value": "{color.greyOpacity75}",
           "type": "color"
         }
-      },
-      "mutedHover": {
-        "value": "{color.grey.grey180}",
-        "type": "color"
-      },
-      "opacityOnColor": {
-        "value": "{color.whiteOpacity20}",
-        "type": "color"
       }
     },
     "stroke": {
