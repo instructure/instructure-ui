@@ -17,7 +17,7 @@
       "type": "fontSizes"
     },
     "fontWeight": {
-      "value": "{fontWeight.body.base}",
+      "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
     "maxHeaderWidth": {
@@ -63,7 +63,7 @@
       "type": "color"
     },
     "todayColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "todayBackground": {
