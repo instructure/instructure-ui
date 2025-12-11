@@ -95,6 +95,7 @@ type: embed
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Run more than two checkboxes horizontally</Figure.Item>
+    <Figure.Item>Attempt to set `onChange` on `Checkbox` contained within a `CheckboxGroup`</Figure.Item>
   </Figure>
 </Guidelines>
 ```
