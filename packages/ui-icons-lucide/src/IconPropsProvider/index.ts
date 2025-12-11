@@ -22,28 +22,7 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ensureSingleChild } from './ensureSingleChild'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { getInteraction } from './getInteraction'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps } from './omitProps'
-export { passthroughProps } from './passthroughProps'
-export { pickProps } from './pickProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
-export {
-  DeterministicIdContext,
-  DeterministicIdContextProvider,
-  withDeterministicId,
-  useDeterministicId
-} from './DeterministicIdContext'
-
-export type { GetInteractionOptions } from './getInteraction'
-export type { InteractionType } from './getInteraction'
-export type {
-  DeterministicIdProviderValue,
-  WithDeterministicIdProps
-} from './DeterministicIdContext'
+export { IconPropsProvider } from './IconPropsProvider'
+export { IconPropsContext } from './IconPropsContext'
+export { renderIconWithProps } from './renderIconWithProps'
+export type { IconPropsContextValue } from './IconPropsProvider'

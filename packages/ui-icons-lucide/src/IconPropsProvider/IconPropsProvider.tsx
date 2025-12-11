@@ -22,28 +22,26 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ensureSingleChild } from './ensureSingleChild'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { getInteraction } from './getInteraction'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps } from './omitProps'
-export { passthroughProps } from './passthroughProps'
-export { pickProps } from './pickProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
-export {
-  DeterministicIdContext,
-  DeterministicIdContextProvider,
-  withDeterministicId,
-  useDeterministicId
-} from './DeterministicIdContext'
+import { IconPropsContext } from './IconPropsContext'
+import type { InstUIIconOwnProps } from '../wrapLucideIcon/props'
 
-export type { GetInteractionOptions } from './getInteraction'
-export type { InteractionType } from './getInteraction'
-export type {
-  DeterministicIdProviderValue,
-  WithDeterministicIdProps
-} from './DeterministicIdContext'
+type IconPropsContextValue = Pick<InstUIIconOwnProps, 'size' | 'color'>
+
+type IconPropsProviderProps = React.PropsWithChildren<IconPropsContextValue>
+
+const IconPropsProvider: React.FC<IconPropsProviderProps> = ({
+  children,
+  size,
+  color
+}) => {
+  const value = { size, color }
+
+  return (
+    <IconPropsContext.Provider value={value}>
+      {children}
+    </IconPropsContext.Provider>
+  )
+}
+
+export { IconPropsProvider }
+export type { IconPropsContextValue }

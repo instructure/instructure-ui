@@ -23,12 +23,10 @@
  */
 
 import { useStyle } from '@instructure/emotion'
-import React, { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
+import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
-import {
-  passthroughProps,
-  IconPropsProvider
-} from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
+import { renderIconWithProps } from '@instructure/ui-icons-lucide'
 import { AvatarProps, avatarSizeToIconSize } from './props'
 
 import generateStyle from './styles'
@@ -150,13 +148,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         const iconSize = avatarSizeToIconSize[size]
         const iconColor = hasInverseColor ? 'onColor' : ICON_COLOR_MAP[color]
 
-        return (
-          <IconPropsProvider size={iconSize} color={iconColor}>
-            {typeof renderIcon === 'function'
-              ? React.createElement(renderIcon as any)
-              : (renderIcon as React.ReactElement)}
-          </IconPropsProvider>
-        )
+        return renderIconWithProps(renderIcon, iconSize, iconColor)
       }
 
       //initials in avatar

@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { useId, useContext } from 'react'
 import { useStyle } from '@instructure/emotion'
-import { passthroughProps, useIconProps } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import type { LucideIcon } from 'lucide-react'
+
+import { IconPropsContext } from '../IconPropsProvider'
 
 import type { LucideIconWrapperProps, InstUIIconOwnProps } from './props'
 import generateStyle from './styles'
@@ -54,7 +56,7 @@ export function wrapLucideIcon(
     } = props
 
     // Get icon props from context (if available)
-    const contextProps = useIconProps()
+    const contextProps = useContext(IconPropsContext)
 
     // Merge props: direct props take precedence over context props
     const finalSize = size ?? contextProps?.size
@@ -90,6 +92,53 @@ export function wrapLucideIcon(
       accessibilityProps['role'] = 'presentation'
     }
 
+    const gradientId = useId()
+
+    // AI Gradient Implementation:
+    // SVG gradients must be defined BEFORE they're referenced. Since Lucide renders
+    // icon paths before any children we pass, we inject the gradient in a separate
+    // hidden SVG element that comes BEFORE the icon in the DOM. We use
+    // gradientUnits="userSpaceOnUse" with coordinates (0,0) to (24,24) matching
+    // Lucide's viewBox, ensuring one gradient spans the entire icon space rather
+    // than scaling separately for each shape (which causes small elements to lose
+    // gradient visibility). The icon then references this gradient via stroke="url(#id)".
+    if (styles.gradientColors) {
+      // Use viewBox coordinates for gradient (Lucide icons use 0 0 24 24 viewBox)
+      const gradientSize = 24
+
+      return (
+        <span css={styles.lucideIcon}>
+          {/* Hidden SVG to define the gradient - must come before the icon uses it */}
+          <svg width={0} height={0} style={{ position: 'absolute' }}>
+            <defs>
+              <linearGradient
+                id={gradientId}
+                x1="0"
+                y1="0"
+                x2={gradientSize}
+                y2={gradientSize}
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0%" stopColor={styles.gradientColors.top} />
+                <stop offset="100%" stopColor={styles.gradientColors.bottom} />
+              </linearGradient>
+            </defs>
+          </svg>
+          <Icon
+            {...passthroughProps(rest)}
+            name={Icon.displayName}
+            ref={handleElementRef}
+            size={styles.numericSize}
+            color={`url(#${gradientId})`}
+            strokeWidth={styles.numericStrokeWidth}
+            absoluteStrokeWidth={absoluteStrokeWidth}
+            {...accessibilityProps}
+          />
+        </span>
+      )
+    }
+
+    // Normal rendering (non-gradient)
     return (
       <span css={styles.lucideIcon}>
         <Icon

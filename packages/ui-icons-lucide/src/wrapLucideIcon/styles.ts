@@ -24,7 +24,7 @@
 
 import { px } from '@instructure/ui-utils'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { LucideIconWrapperProps, LucideIconStyle } from './props'
+import { LucideIconWrapperProps, LucideIconStyle } from './props'
 
 type StyleParams = {
   size?: LucideIconWrapperProps['size']
@@ -36,6 +36,14 @@ type StyleParams = {
   themeOverride?: LucideIconWrapperProps['themeOverride']
 }
 
+const svgIconSizeMapping = {
+  'x-small': '1.125rem',
+  small: '2rem',
+  medium: '3rem',
+  large: '5rem',
+  'x-large': '10rem'
+}
+
 /**
  * Convert semantic size token to numeric pixels for Lucide
  */
@@ -44,6 +52,12 @@ const convertSemanticSize = (
   componentTheme: NewComponentTypes['Icon']
 ) => {
   if (typeof size === 'string') {
+    // Check SVGIcon tokens first (for legacy size tokens)
+    if (size in svgIconSizeMapping) {
+      return px(svgIconSizeMapping[size as keyof typeof svgIconSizeMapping])
+    }
+
+    // Fall back to componentTheme (for other tokens like xs, sm, md, lg, xl, 2xl)
     const propName = `size${size.charAt(0).toUpperCase()}${size.slice(
       1
     )}` as keyof typeof componentTheme
@@ -86,7 +100,7 @@ const determineColorValues = (
     return {}
   }
 
-  if (color === 'inherit') {
+  if (color === 'inherit' || color === 'ai') {
     return { colorValue: color }
   }
 
@@ -125,9 +139,17 @@ const generateStyle = (
   )
 
   let colorStyle
+  let gradientColors: { top: string; bottom: string } | undefined
+
   if (colorValue) {
     if (colorValue === 'inherit') {
       colorStyle = { color: 'inherit' }
+    } else if (colorValue === 'ai') {
+      // Special handling for AI gradient color
+      gradientColors = {
+        top: componentTheme.actionAiSecondaryTopGradientBaseColor,
+        bottom: componentTheme.actionAiSecondaryBottomGradientBaseColor
+      }
     } else if (colorValue in componentTheme) {
       colorStyle = {
         color: componentTheme[colorValue as keyof typeof componentTheme]
@@ -166,7 +188,8 @@ const generateStyle = (
     },
     numericSize,
     numericStrokeWidth,
-    customColor
+    customColor,
+    gradientColors
   }
 }
 

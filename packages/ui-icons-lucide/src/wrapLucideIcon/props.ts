@@ -27,9 +27,14 @@ import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 /**
- * Semantic size tokens for icons
+ * SVGIcon size tokens (legacy) - DEPRECATED
  */
-type IconSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+type SVGIconSizeToken = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+
+/**
+ * Semantic size tokens for icons - includes SVGIcon legacy tokens, they are DEPRECATED and will be deleted, DON'T USE THEM.
+ */
+type IconSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | SVGIconSizeToken
 
 /**
  * Semantic stroke width tokens for icons
@@ -51,6 +56,7 @@ type IconColorToken =
   | 'disabledBaseColor'
   | 'disabledOnColor'
   | 'dark'
+  | 'ai' // symbolic token for AI gradient colors, this does not exist in the theme
   | 'navigationPrimaryBaseColor'
   | 'navigationPrimaryHoverColor'
   | 'navigationPrimaryActiveColor'
@@ -65,8 +71,8 @@ type IconColorToken =
   | 'actionStatusHoverColor'
   | 'actionStatusActiveColor'
   | 'actionStatusDisabledColor'
-  | 'actionAiSecondaryTopGradientBaseColor'
-  | 'actionAiSecondaryBottomGradientBaseColor'
+  // | 'actionAiSecondaryTopGradientBaseColor' internally used for AI gradient
+  // | 'actionAiSecondaryBottomGradientBaseColor' internally used for AI gradient
   | 'actionAiBaseColor'
   | 'actionAiHoverColor'
   | 'actionAiActiveColor'
@@ -150,14 +156,15 @@ type InstUIIconOwnProps = {
 /**
  * Full props: Lucide native + InstUI semantic + theme support.
  * InstUI props override Lucide's size, color, strokeWidth, rotate.
+ * children, style, and className are explicitly omitted.
  */
 type LucideIconWrapperProps = Omit<
-  LucideProps,
-  'size' | 'color' | 'strokeWidth' | 'rotate'
-> &
-  InstUIIconOwnProps & {
-    themeOverride?: ThemeOverrideValue
-  } & OtherHTMLAttributes<InstUIIconOwnProps>
+  Omit<LucideProps, 'size' | 'color' | 'strokeWidth' | 'rotate'> &
+    InstUIIconOwnProps & {
+      themeOverride?: ThemeOverrideValue
+    } & OtherHTMLAttributes<InstUIIconOwnProps>,
+  'children' | 'style' | 'className'
+>
 
 type LucideIconStyle = ComponentStyle<'lucideIcon'> & {
   /**
@@ -172,6 +179,15 @@ type LucideIconStyle = ComponentStyle<'lucideIcon'> & {
    * Custom CSS color value (non-semantic)
    */
   customColor?: string
+  /**
+   * Gradient colors for AI gradient (top and bottom)
+   */
+  gradientColors?: { top: string; bottom: string }
 }
 
-export type { LucideIconWrapperProps, InstUIIconOwnProps, LucideIconStyle }
+export type {
+  LucideIconWrapperProps,
+  InstUIIconOwnProps,
+  LucideIconStyle,
+  SVGIconSizeToken
+}

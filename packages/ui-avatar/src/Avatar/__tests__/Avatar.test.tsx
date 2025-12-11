@@ -28,7 +28,6 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
 import Avatar from '../index'
-import { IconGroupLine } from '@instructure/ui-icons'
 import { HeartInstUIIcon } from '@instructure/ui-icons-lucide'
 
 describe('<Avatar />', () => {
@@ -91,7 +90,7 @@ describe('<Avatar />', () => {
 
     it('should display correctly when an icon renderer is passed', async () => {
       const { container } = render(
-        <Avatar name="Jessica Jones" renderIcon={() => <IconGroupLine />}>
+        <Avatar name="Jessica Jones" renderIcon={() => <HeartInstUIIcon />}>
           Hello World
         </Avatar>
       )
