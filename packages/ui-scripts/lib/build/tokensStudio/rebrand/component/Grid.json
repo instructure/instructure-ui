@@ -39,15 +39,15 @@
       "type": "sizing"
     },
     "spacingLarge": {
-      "value": "2.25rem",
+      "value": "1.125rem",
       "type": "spacing"
     },
     "spacingMedium": {
-      "value": "{spacing.spaceXl}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "spacingSmall": {
-      "value": "{spacing.spaceMd}",
+      "value": "0.375rem",
       "type": "spacing"
     }
   },
