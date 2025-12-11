@@ -57,7 +57,7 @@
       "type": "color"
     },
     "meterColorInfo": {
-      "value": "{color.text.info}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorInfoInverse": {
@@ -65,7 +65,7 @@
       "type": "color"
     },
     "meterColorSuccess": {
-      "value": "{color.text.success}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorSuccessInverse": {
