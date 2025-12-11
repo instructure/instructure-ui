@@ -20,10 +20,6 @@
       "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
-    "maxHeaderWidth": {
-      "value": "1.5rem",
-      "type": "sizing"
-    },
     "navMargin": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
