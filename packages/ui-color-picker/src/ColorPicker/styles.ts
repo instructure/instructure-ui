@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { calcMarginFromShorthand } from '@instructure/emotion'
+import { calcSpacingFromShorthand } from '@instructure/emotion'
 import type { ColorPickerTheme } from '@instructure/shared-types'
 
 import type {
@@ -56,7 +56,7 @@ const generateStyle = (
   const { checkContrast, popoverMaxHeight, margin } = props
   const { isSimple, calculatedPopoverMaxHeight } = state
 
-  const cssMargin = calcMarginFromShorthand(margin, spacing)
+  const cssMargin = calcSpacingFromShorthand(margin, spacing)
   return {
     colorPicker: {
       label: 'colorPicker',

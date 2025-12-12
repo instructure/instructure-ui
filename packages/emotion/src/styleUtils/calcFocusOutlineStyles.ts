@@ -53,12 +53,14 @@ const calcFocusOutlineStyles = (
     focusPosition?: 'offset' | 'inset'
     shouldAnimateFocus?: boolean
     focusWithin?: boolean
+    withFocusOutline?: boolean
   }
 ) => {
   const focusColor = params?.focusColor ?? 'info'
   const focusPosition = params?.focusPosition ?? 'offset'
   const shouldAnimateFocus = params?.shouldAnimateFocus ?? true
   const focusWithin = params?.focusWithin ?? false
+  const withFocusOutline = params?.withFocusOutline ?? false
 
   const focusColorVariants = {
     info: theme.infoColor,
@@ -80,6 +82,7 @@ const calcFocusOutlineStyles = (
     outlineOffset: '-0.8rem',
     outlineStyle: 'solid',
     outlineColor: alpha(outlineStyle.outlineColor, 0),
+    ...(withFocusOutline && outlineStyle),
     '&:focus': {
       ...outlineStyle,
       '&:hover, &:active': {

@@ -24,41 +24,92 @@
 
 import { DIRECTION } from '@instructure/ui-i18n'
 import {
-  getShorthandPropValue,
+  calcSpacingFromShorthand,
   mirrorShorthandEdges,
-  mirrorShorthandCorners
+  mirrorShorthandCorners,
+  calcFocusOutlineStyles
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 
-import type { OtherHTMLAttributes, ViewTheme } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { ViewProps, ViewStyle, BorderColor } from './props'
-import { alpha } from '@instructure/ui-color-utils'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+
+const processBorderRadiusValue = (
+  value: string | undefined,
+  sharedTokens: SharedTokens
+): string => {
+  if (!value) return ''
+
+  // Split by spaces to handle CSS shorthand (1-4 values)
+  const values = value.split(' ')
+
+  const processedValues = values.map((v) => {
+    // Handle special cases
+    if (v === 'auto' || v === '0') return v
+    if (v === 'none') return '0'
+    if (v === 'circle') return '100%'
+    if (v === 'pill') return '999em'
+
+    // Handle SharedTokens values
+    if (v === 'small') return sharedTokens.radiusSmall
+    if (v === 'medium') return sharedTokens.radiusMedium
+    if (v === 'large') return sharedTokens.radiusLarge
+
+    // Pass through CSS values (1rem, 12px, etc.)
+    return v
+  })
+
+  return processedValues.join(' ')
+}
+
+const processBorderWidthValue = (
+  value: string | undefined,
+  sharedTokens: SharedTokens
+): string => {
+  if (!value) return ''
+
+  // Split by spaces to handle CSS shorthand (1-4 values)
+  const values = value.split(' ')
+
+  const processedValues = values.map((v) => {
+    // Handle special cases
+    if (v === 'auto' || v === '0') return v
+    if (v === 'none') return '0'
+
+    // Handle SharedTokens values
+    if (v === 'small') return sharedTokens.widthSmall
+    if (v === 'medium') return sharedTokens.widthMedium
+    if (v === 'large') return sharedTokens.widthLarge
+
+    // Pass through CSS values (1rem, 2px, etc.)
+    return v
+  })
+
+  return processedValues.join(' ')
+}
 
 const getBorderStyle = ({
   borderRadius,
   borderWidth,
   dir,
-  theme
+  sharedTokens
 }: {
-  theme: ViewTheme
+  sharedTokens: SharedTokens
   borderRadius: ViewProps['borderRadius']
   borderWidth: ViewProps['borderWidth']
   dir: ViewProps['dir']
 }) => {
   const isRtlDirection = dir === DIRECTION.rtl
   return {
-    borderRadius: getShorthandPropValue(
-      'View',
-      theme,
+    borderRadius: processBorderRadiusValue(
       isRtlDirection ? mirrorShorthandCorners(borderRadius) : borderRadius,
-      'borderRadius',
-      true
+      sharedTokens
     ),
-    borderWidth: getShorthandPropValue(
-      'View',
-      theme,
+    borderWidth: processBorderWidthValue(
       isRtlDirection ? mirrorShorthandEdges(borderWidth) : borderWidth,
-      'borderWidth'
+      sharedTokens
     )
   }
 }
@@ -67,9 +118,9 @@ const getSpacingStyle = ({
   margin,
   padding,
   dir,
-  theme
+  sharedTokens
 }: {
-  theme: ViewTheme
+  sharedTokens: SharedTokens
   margin: ViewProps['margin']
   padding: ViewProps['padding']
   dir: ViewProps['dir']
@@ -77,17 +128,20 @@ const getSpacingStyle = ({
   const isRtlDirection = dir === DIRECTION.rtl
 
   return {
-    margin: getShorthandPropValue(
-      'View',
-      theme,
+    // TODO handle the merging on tokens inside the util
+    margin: calcSpacingFromShorthand(
       isRtlDirection ? mirrorShorthandEdges(margin) : margin,
-      'margin'
+      {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacySpacing
+      }
     ),
-    padding: getShorthandPropValue(
-      'View',
-      theme,
+    padding: calcSpacingFromShorthand(
       isRtlDirection ? mirrorShorthandEdges(padding) : padding,
-      'padding'
+      {
+        ...sharedTokens.spacing,
+        ...sharedTokens.legacySpacing
+      }
     )
   }
 }
@@ -165,63 +219,6 @@ const withBorder = (props: ViewProps) => {
   return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
 }
 
-const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
-  const {
-    focusColor,
-    focusPosition,
-    shouldAnimateFocus,
-    withFocusOutline,
-    focusWithin
-  } = props
-
-  const focusPos =
-    focusPosition == 'offset' || focusPosition == 'inset'
-      ? focusPosition
-      : 'offset'
-  const focusPositionVariants = {
-    offset: {
-      outlineOffset: `calc(${componentTheme.focusOutlineOffset} - ${componentTheme.focusOutlineWidth})`
-    },
-    inset: {
-      outlineOffset: `calc(${componentTheme.focusOutlineInset} - ${componentTheme.focusOutlineWidth})`
-    }
-  }
-  const focusColorVariants = {
-    info: componentTheme.focusColorInfo,
-    inverse: componentTheme.focusColorInverse,
-    success: componentTheme.focusColorSuccess,
-    danger: componentTheme.focusColorDanger
-  }
-  const visibleFocusStyle = {
-    ...focusPositionVariants[focusPos],
-    outlineColor: focusColorVariants[focusColor!]
-  }
-  const outlineStyle = {
-    outlineOffset: '-0.8rem', // value when not in focus, its invisible
-    outlineColor: alpha(focusColorVariants[focusColor!], 0),
-    outlineStyle: componentTheme.focusOutlineStyle,
-    outlineWidth: componentTheme.focusOutlineWidth,
-    ...(withFocusOutline && visibleFocusStyle)
-  }
-  return {
-    ...(shouldAnimateFocus && {
-      transition: 'outline-color 0.2s, outline-offset 0.25s'
-    }),
-    ...outlineStyle,
-    '&:hover, &:active': {
-      // apply the same style so it's not overridden by some global style
-      ...outlineStyle
-    },
-    ...(typeof withFocusOutline === 'undefined' && {
-      // user focuses the element
-      '&:focus': visibleFocusStyle
-    }),
-    ...(focusWithin && {
-      '&:focus-within': visibleFocusStyle
-    })
-  }
-}
-
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
@@ -229,8 +226,9 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ViewTheme,
-  props: ViewProps
+  componentTheme: NewComponentTypes['View'],
+  props: ViewProps,
+  sharedTokens: SharedTokens
 ): ViewStyle => {
   const {
     borderRadius,
@@ -261,7 +259,7 @@ const generateStyle = (
     dir
   } = props
   const borderStyle = getBorderStyle({
-    theme: componentTheme,
+    sharedTokens,
     borderRadius,
     borderWidth,
     dir
@@ -269,7 +267,7 @@ const generateStyle = (
   const spacingStyle = getSpacingStyle({
     margin,
     padding,
-    theme: componentTheme,
+    sharedTokens,
     dir
   })
 
@@ -404,18 +402,31 @@ const generateStyle = (
 
   const shadowVariants = {
     topmost: {
-      boxShadow: componentTheme.shadowTopmost
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation4)
     },
     resting: {
-      boxShadow: componentTheme.shadowResting
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation1)
     },
     above: {
-      boxShadow: componentTheme.shadowAbove
+      boxShadow: boxShadowObjectsToCSSString(sharedTokens.boxShadow.elevation2)
     },
     none: {}
   }
 
-  const focusStyles = getFocusStyles(props, componentTheme)
+  const {
+    focusColor,
+    focusPosition,
+    shouldAnimateFocus,
+    withFocusOutline,
+    focusWithin
+  } = props
+  const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline, {
+    focusColor,
+    focusPosition,
+    shouldAnimateFocus,
+    focusWithin,
+    withFocusOutline
+  })
   return {
     view: {
       label: 'view',
@@ -439,7 +450,7 @@ const generateStyle = (
         : {}),
       ...(withBorder(props)
         ? {
-            borderStyle: componentTheme.borderStyle,
+            borderStyle: 'solid',
             ...(borderColorVariants[borderColor!] || {
               borderColor: borderColor
             })
@@ -451,16 +462,16 @@ const generateStyle = (
       //every '&' symbol will add another class to the rule, so it will be stronger
       //making an accidental override less likely
       '&&&&&&&&&&': {
-        ...spacingStyle,
         ...offsetStyle,
-        ...focusStyles,
+        ...focusOutline,
         width,
         height,
         minWidth,
         minHeight,
         maxWidth,
         maxHeight,
-        ...getStyleProps(props)
+        ...getStyleProps(props),
+        ...spacingStyle
       }
     }
   }
