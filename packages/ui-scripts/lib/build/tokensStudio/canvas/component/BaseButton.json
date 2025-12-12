@@ -552,7 +552,7 @@
       "type": "fontFamilies"
     },
     "fontWeight": {
-      "value": "{fontWeight.body.strong}",
+      "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
     "gapButtonContentLg": {
