@@ -1,617 +1,168 @@
 {
   "baseButton": {
-    "primaryBackgroundColor": {
-      "value": "{color.background.interactive.action.primary.base}",
-      "type": "color"
-    },
-    "primaryHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.primary.hover}",
-      "type": "color"
-    },
-    "primaryActiveBackgroundColor": {
+    "primaryActiveBackground": {
       "value": "{color.background.interactive.action.primary.active}",
-      "type": "color"
-    },
-    "primaryDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.primary.disabled}",
-      "type": "color"
-    },
-    "primaryBorderColor": {
-      "value": "{color.stroke.interactive.action.primary.base}",
-      "type": "color"
-    },
-    "primaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.primary.disabled}",
-      "type": "color"
-    },
-    "primaryBaseTextColor": {
-      "value": "{color.text.interactive.action.primary.base}",
-      "type": "color"
-    },
-    "secondaryBackgroundColor": {
-      "value": "{color.background.interactive.action.secondary.base}",
-      "type": "color"
-    },
-    "secondaryHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.secondary.hover}",
-      "type": "color"
-    },
-    "secondaryActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.secondary.active}",
-      "type": "color"
-    },
-    "secondaryDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.secondary.disabled}",
-      "type": "color"
-    },
-    "secondaryBorderColor": {
-      "value": "{color.stroke.interactive.action.secondary.base}",
-      "type": "color"
-    },
-    "secondaryBaseTextColor": {
-      "value": "{color.text.interactive.action.secondary.base}",
-      "type": "color"
-    },
-    "secondaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.secondary.disabled}",
-      "type": "color"
-    },
-    "secondaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.secondary.disabled}",
-      "type": "color"
-    },
-    "successBackgroundColor": {
-      "value": "{color.background.interactive.action.success.base}",
-      "type": "color"
-    },
-    "successHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.success.hover}",
-      "type": "color"
-    },
-    "successActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.success.active}",
-      "type": "color"
-    },
-    "successDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.success.disabled}",
-      "type": "color"
-    },
-    "successBorderColor": {
-      "value": "{color.stroke.interactive.action.success.base}",
-      "type": "color"
-    },
-    "successDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.success.disabled}",
-      "type": "color"
-    },
-    "successBaseTextColor": {
-      "value": "{color.text.interactive.action.status.base}",
-      "type": "color"
-    },
-    "destructiveBackgroundColor": {
-      "value": "{color.background.interactive.action.destructive.base}",
-      "type": "color"
-    },
-    "destructiveHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.destructive.hover}",
-      "type": "color"
-    },
-    "destructiveActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.destructive.active}",
-      "type": "color"
-    },
-    "destructiveDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.destructive.disabled}",
-      "type": "color"
-    },
-    "destructiveBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.base}",
-      "type": "color"
-    },
-    "destructiveDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.disabled}",
-      "type": "color"
-    },
-    "destructiveBaseTextColor": {
-      "value": "{color.text.interactive.action.status.base}",
-      "type": "color"
-    },
-    "aiBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.action.ai.bottomGradient.base}",
-      "type": "color"
-    },
-    "aiHoverBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.action.ai.bottomGradient.hover}",
-      "type": "color"
-    },
-    "aiActiveBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.action.ai.bottomGradient.active}",
-      "type": "color"
-    },
-    "aiBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.action.ai.topGradient.base}",
-      "type": "color"
-    },
-    "aiHoverBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.action.ai.topGradient.hover}",
-      "type": "color"
-    },
-    "aiActiveBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.action.ai.topGradient.active}",
-      "type": "color"
-    },
-    "aiBorderTopGradientColor": {
-      "value": "{color.stroke.interactive.action.ai.topGradient.base}",
-      "type": "color"
-    },
-    "aiBorderBottomGradientColor": {
-      "value": "{color.stroke.interactive.action.ai.bottomGradient.base}",
-      "type": "color"
-    },
-    "aiBaseTextColor": {
-      "value": "{color.text.interactive.action.ai.base}",
-      "type": "color"
-    },
-    "aiSecondaryTextTopGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
-      "type": "color"
-    },
-    "aiSecondaryTextBottomGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
-      "type": "color"
-    },
-    "aiSecondaryHoverBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.action.aiSecondary.hover.topGradient}",
-      "type": "color"
-    },
-    "aiSecondaryHoverBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.action.aiSecondary.hover.bottomGradient}",
-      "type": "color"
-    },
-    "primaryHoverTextColor": {
-      "value": "{color.text.interactive.action.primary.hover}",
-      "type": "color"
-    },
-    "primaryActiveTextColor": {
-      "value": "{color.text.interactive.action.primary.active}",
-      "type": "color"
-    },
-    "primaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.primary.disabled}",
-      "type": "color"
-    },
-    "primaryOnColorBackgroundColor": {
-      "value": "{color.background.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.primaryOnColor.hover}",
-      "type": "color"
-    },
-    "primaryOnColorActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.primaryOnColor.active}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.primaryOnColor.disabled}",
-      "type": "color"
-    },
-    "primaryOnColorBorderColor": {
-      "value": "{color.stroke.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorBaseTextColor": {
-      "value": "{color.text.interactive.action.primaryOnColor.base}",
-      "type": "color"
-    },
-    "primaryOnColorDisabledTextColor": {
-      "value": "{color.text.interactive.action.primaryOnColor.disabled}",
-      "type": "color"
-    },
-    "heightSm": {
-      "value": "{size.interactive.height.sm}",
-      "type": "sizing"
-    },
-    "heightMd": {
-      "value": "{size.interactive.height.md}",
-      "type": "sizing"
-    },
-    "heightLg": {
-      "value": "{size.interactive.height.lg}",
-      "type": "sizing"
-    },
-    "paddingHorizontalMd": {
-      "value": "{spacing.padding.interactive.horizontal.md}",
-      "type": "spacing"
-    },
-    "paddingHorizontalSm": {
-      "value": "{spacing.padding.interactive.horizontal.sm}",
-      "type": "spacing"
-    },
-    "paddingHorizontalLg": {
-      "value": "{spacing.padding.interactive.horizontal.lg}",
-      "type": "spacing"
-    },
-    "borderRadiusBase": {
-      "value": "{borderRadius.interactive.base}",
-      "type": "borderRadius"
-    },
-    "borderWidth": {
-      "value": "{borderWidth.interactive.base}",
-      "type": "borderWidth"
-    },
-    "fontFamily": {
-      "value": "{fontFamily.base}",
-      "type": "fontFamilies"
-    },
-    "fontWeight": {
-      "value": "{fontWeight.body.base}",
-      "type": "fontWeights"
-    },
-    "gapButtonContentSm": {
-      "value": "{spacing.spaceXs}",
-      "type": "spacing"
-    },
-    "gapButtonContentMd": {
-      "value": "{spacing.spaceSm}",
-      "type": "spacing"
-    },
-    "gapButtonContentLg": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
-    "fontSizeSm": {
-      "value": "{fontSize.textSm}",
-      "type": "fontSizes"
-    },
-    "fontSizeMd": {
-      "value": "{fontSize.textBase}",
-      "type": "fontSizes"
-    },
-    "fontSizeLg": {
-      "value": "1.375rem",
-      "type": "fontSizes"
-    },
-    "lineHeightSm": {
-      "value": "{lineHeight.standalone.textSm}",
-      "type": "lineHeights"
-    },
-    "lineHeightMd": {
-      "value": "{lineHeight.standalone.textBase}",
-      "type": "lineHeights"
-    },
-    "lineHeightLg": {
-      "value": "1.375rem",
-      "type": "lineHeights"
-    },
-    "primaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.primary.hover}",
       "type": "color"
     },
     "primaryActiveBorderColor": {
       "value": "{color.stroke.interactive.action.primary.active}",
       "type": "color"
     },
-    "successHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.success.hover}",
+    "primaryActiveTextColor": {
+      "value": "{color.text.interactive.action.primary.active}",
       "type": "color"
     },
-    "successActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.success.active}",
+    "primaryBackground": {
+      "value": "{color.background.interactive.action.primary.base}",
       "type": "color"
     },
-    "destructiveHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.hover}",
+    "primaryBorderColor": {
+      "value": "{color.stroke.interactive.action.primary.base}",
       "type": "color"
     },
-    "destructiveActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.active}",
+    "primaryColor": {
+      "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
     },
-    "primaryOnColorHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.primaryOnColor.hover}",
+    "primaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "primaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "primaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.primary.disabled}",
+      "type": "color"
+    },
+    "primaryGhostActiveBackground": {
+      "value": "{color.background.interactive.action.tertiary.active}",
+      "type": "color"
+    },
+    "primaryGhostBorderColor": {
+      "value": "{color.stroke.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "primaryGhostColor": {
+      "value": "{color.text.interactive.action.tertiary.base}",
+      "type": "color"
+    },
+    "primaryGhostHoverBackground": {
+      "value": "{color.background.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "primaryHoverBackground": {
+      "value": "{color.background.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "primaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "primaryHoverTextColor": {
+      "value": "{color.text.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "primaryInverseActiveBackground": {
+      "value": "{color.background.interactive.action.primaryOnColor.active}",
+      "type": "color"
+    },
+    "primaryInverseBackground": {
+      "value": "{color.background.interactive.action.primaryOnColor.base}",
+      "type": "color"
+    },
+    "primaryInverseBorderColor": {
+      "value": "{color.stroke.interactive.action.primaryOnColor.base}",
+      "type": "color"
+    },
+    "primaryInverseColor": {
+      "value": "{color.text.interactive.action.primaryOnColor.base}",
+      "type": "color"
+    },
+    "primaryInverseGhostActiveBackground": {
+      "value": "{color.background.interactive.action.ghost.onColor.hover}",
+      "type": "color"
+    },
+    "primaryInverseGhostBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "primaryInverseGhostColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.base}",
+      "type": "color"
+    },
+    "primaryInverseGhostHoverBackground": {
+      "value": "{color.background.interactive.action.ghost.onColor.hover}",
+      "type": "color"
+    },
+    "primaryInverseHoverBackground": {
+      "value": "{color.background.interactive.action.primaryOnColor.hover}",
       "type": "color"
     },
     "primaryOnColorActiveBorderColor": {
       "value": "{color.stroke.interactive.action.primaryOnColor.active}",
       "type": "color"
     },
+    "primaryOnColorActiveTextColor": {
+      "value": "{color.text.interactive.action.primaryOnColor.active}",
+      "type": "color"
+    },
+    "primaryOnColorDisabledBackgroundColor": {
+      "value": "{color.background.interactive.action.primaryOnColor.disabled}",
+      "type": "color"
+    },
     "primaryOnColorDisabledBorderColor": {
       "value": "{color.stroke.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
-    "destructiveDisabledTextColor": {
-      "value": "{color.text.interactive.action.status.disabled}",
+    "primaryOnColorDisabledTextColor": {
+      "value": "{color.text.interactive.action.primaryOnColor.disabled}",
       "type": "color"
     },
-    "successDisabledTextColor": {
-      "value": "{color.text.interactive.action.status.disabled}",
-      "type": "color"
-    },
-    "aiDisabledTextColor": {
-      "value": "{color.text.interactive.action.ai.disabled}",
-      "type": "color"
-    },
-    "secondaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.secondary.hover}",
-      "type": "color"
-    },
-    "secondaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.secondary.active}",
-      "type": "color"
-    },
-    "aiSecondaryActiveBackgroundTopGradientColor": {
-      "value": "{color.background.interactive.action.aiSecondary.active.topGradient}",
-      "type": "color"
-    },
-    "aiSecondaryActiveBackgroundBottomGradientColor": {
-      "value": "{color.background.interactive.action.aiSecondary.active.bottomGradient}",
-      "type": "color"
-    },
-    "tertiaryHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.tertiary.hover}",
-      "type": "color"
-    },
-    "tertiaryActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.tertiary.active}",
-      "type": "color"
-    },
-    "tertiaryBorderColor": {
-      "value": "{color.stroke.interactive.action.tertiary.base}",
-      "type": "color"
-    },
-    "tertiaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.tertiary.hover}",
-      "type": "color"
-    },
-    "tertiaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.tertiary.active}",
-      "type": "color"
-    },
-    "tertiaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.tertiary.disabled}",
-      "type": "color"
-    },
-    "tertiaryBaseTextColor": {
-      "value": "{color.text.interactive.action.tertiary.base}",
-      "type": "color"
-    },
-    "tertiaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.tertiary.disabled}",
-      "type": "color"
-    },
-    "successSecondaryHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.success.secondary.hover}",
-      "type": "color"
-    },
-    "successSecondaryActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.success.secondary.active}",
-      "type": "color"
-    },
-    "successSecondaryBaseTextColor": {
-      "value": "{color.text.interactive.action.successSecondary.base}",
-      "type": "color"
-    },
-    "successSecondaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.successSecondary.disabled}",
-      "type": "color"
-    },
-    "successSecondaryBorderColor": {
-      "value": "{color.stroke.interactive.action.success.secondary.base}",
-      "type": "color"
-    },
-    "successSecondaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.success.secondary.hover}",
-      "type": "color"
-    },
-    "successSecondaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.success.secondary.active}",
-      "type": "color"
-    },
-    "successSecondaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.success.secondary.disabled}",
-      "type": "color"
-    },
-    "destructiveSecondaryHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.destructive.secondary.hover}",
-      "type": "color"
-    },
-    "destructiveSecondaryActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.destructive.secondary.active}",
-      "type": "color"
-    },
-    "destructiveSecondaryBaseTextColor": {
-      "value": "{color.text.interactive.action.destructiveSecondary.base}",
-      "type": "color"
-    },
-    "destructiveSecondaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.destructiveSecondary.disabled}",
-      "type": "color"
-    },
-    "destructiveSecondaryBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
-      "type": "color"
-    },
-    "destructiveSecondaryHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.secondary.hover}",
-      "type": "color"
-    },
-    "destructiveSecondaryActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.secondary.active}",
-      "type": "color"
-    },
-    "destructiveSecondaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.destructive.secondary.disabled}",
-      "type": "color"
-    },
-    "ghostOncolorHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.ghost.onColor.hover}",
-      "type": "color"
-    },
-    "ghostOncolorActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.ghost.onColor.hover}",
-      "type": "color"
-    },
-    "borderRadiusSm": {
-      "value": "{borderRadius.sm}",
-      "type": "borderRadius"
-    },
-    "heightXxs": {
-      "value": "{size.interactive.height.xxs}",
-      "type": "sizing"
-    },
-    "heightXs": {
-      "value": "{size.interactive.height.xs}",
-      "type": "sizing"
-    },
-    "opacityBase": {
-      "value": "{opacity.base}",
-      "type": "opacity"
-    },
-    "opacityDisabled": {
-      "value": "{opacity.disabled}",
-      "type": "opacity"
-    },
-    "secondaryHoverTextColor": {
-      "value": "{color.text.interactive.action.secondary.hover}",
-      "type": "color"
-    },
-    "secondaryActiveTextColor": {
-      "value": "{color.text.interactive.action.secondary.active}",
-      "type": "color"
-    },
-    "tertiaryHoverTextColor": {
-      "value": "{color.text.interactive.action.tertiary.hover}",
-      "type": "color"
-    },
-    "tertiaryActiveTextColor": {
-      "value": "{color.text.interactive.action.tertiary.active}",
-      "type": "color"
-    },
-    "successHoverTextColor": {
-      "value": "{color.text.interactive.action.status.hover}",
-      "type": "color"
-    },
-    "successActiveTextColor": {
-      "value": "{color.text.interactive.action.status.active}",
-      "type": "color"
-    },
-    "destructiveHoverTextColor": {
-      "value": "{color.text.interactive.action.status.hover}",
-      "type": "color"
-    },
-    "successSecondaryHoverTextColor": {
-      "value": "{color.text.interactive.action.successSecondary.hover}",
-      "type": "color"
-    },
-    "successSecondaryActiveTextColor": {
-      "value": "{color.text.interactive.action.successSecondary.active}",
-      "type": "color"
-    },
-    "destructiveSecondaryHoverTextColor": {
-      "value": "{color.text.interactive.action.destructiveSecondary.hover}",
-      "type": "color"
-    },
-    "destructiveSecondaryActiveTextColor": {
-      "value": "{color.text.interactive.action.destructiveSecondary.active}",
-      "type": "color"
-    },
-    "aiHoverTextColor": {
-      "value": "{color.text.interactive.action.ai.hover}",
-      "type": "color"
-    },
-    "aiActiveTextColor": {
-      "value": "{color.text.interactive.action.ai.active}",
+    "primaryOnColorHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.primaryOnColor.hover}",
       "type": "color"
     },
     "primaryOnColorHoverTextColor": {
       "value": "{color.text.interactive.action.primaryOnColor.hover}",
       "type": "color"
     },
-    "primaryOnColorActiveTextColor": {
-      "value": "{color.text.interactive.action.primaryOnColor.active}",
+    "secondaryActiveBackground": {
+      "value": "{color.background.interactive.action.secondary.active}",
       "type": "color"
     },
-    "destructiveActiveTextColor": {
-      "value": "{color.text.interactive.action.status.active}",
+    "secondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.secondary.active}",
       "type": "color"
     },
-    "aiHoverBorderTopGradientColor": {
-      "value": "{color.stroke.interactive.action.ai.topGradient.hover}",
+    "secondaryActiveTextColor": {
+      "value": "{color.text.interactive.action.secondary.active}",
       "type": "color"
     },
-    "aiActiveBorderTopGradientColor": {
-      "value": "{color.stroke.interactive.action.ai.topGradient.active}",
+    "secondaryBackground": {
+      "value": "{color.background.interactive.action.secondary.base}",
       "type": "color"
     },
-    "aiHoverBorderBottomGradientColor": {
-      "value": "{color.stroke.interactive.action.ai.bottomGradient.hover}",
+    "secondaryBorderColor": {
+      "value": "{color.stroke.interactive.action.secondary.base}",
       "type": "color"
     },
-    "aiActiveBorderBottomGradientColor": {
-      "value": "{color.stroke.interactive.action.ai.bottomGradient.active}",
+    "secondaryColor": {
+      "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
-    "aiSecondaryDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.aiSecondary.disabled}",
+    "secondaryDisabledBackgroundColor": {
+      "value": "{color.background.interactive.action.secondary.disabled}",
       "type": "color"
     },
-    "aiSecondaryDisabledTextColor": {
-      "value": "{color.text.interactive.action.aiSecondary.disabled}",
+    "secondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.secondary.disabled}",
       "type": "color"
     },
-    "aiDisabledBackgroundColor": {
-      "value": "{color.background.interactive.action.ai.disabled}",
+    "secondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.secondary.disabled}",
       "type": "color"
-    },
-    "aiDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.ai.disabled}",
-      "type": "color"
-    },
-    "secondaryOnColorHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.ghost.onColor.hover}",
-      "type": "color"
-    },
-    "secondaryOnColorActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.ghost.onColor.hover}",
-      "type": "color"
-    },
-    "secondaryOnColorBaseTextColor": {
-      "value": "{color.text.interactive.action.secondaryOnColor.base}",
-      "type": "color"
-    },
-    "secondaryOnColorHoverTextColor": {
-      "value": "{color.text.interactive.action.secondaryOnColor.hover}",
-      "type": "color"
-    },
-    "secondaryOnColorActiveTextColor": {
-      "value": "{color.text.interactive.action.secondaryOnColor.active}",
-      "type": "color"
-    },
-    "secondaryOnColorDisabledTextColor": {
-      "value": "{color.text.interactive.action.secondaryOnColor.disabled}",
-      "type": "color"
-    },
-    "secondaryOnColorBorderColor": {
-      "value": "{color.stroke.interactive.action.secondaryOnColor.base}",
-      "type": "color"
-    },
-    "secondaryOnColorHoverBorderColor": {
-      "value": "{color.stroke.interactive.action.secondaryOnColor.hover}",
-      "type": "color"
-    },
-    "secondaryOnColorDisabledBorderColor": {
-      "value": "{color.stroke.interactive.action.secondaryOnColor.disabled}",
-      "type": "color"
-    },
-    "secondaryOnColorActiveBorderColor": {
-      "value": "{color.stroke.interactive.action.secondaryOnColor.active}",
-      "type": "color"
-    },
-    "secondaryGhostHoverBackground": {
-      "value": "{color.background.interactive.action.secondary.hover}",
-      "type": "color",
-      "description": "This token is not used in design, kept only for backward compatibility reasons."
     },
     "secondaryGhostBorderColor": {
       "value": "{color.stroke.interactive.action.secondary.base}",
@@ -623,9 +174,602 @@
       "type": "color",
       "description": "This token is not used in design, kept only for backward compatibility reasons."
     },
+    "secondaryGhostHoverBackground": {
+      "value": "{color.background.interactive.action.secondary.hover}",
+      "type": "color",
+      "description": "This token is not used in design, kept only for backward compatibility reasons."
+    },
+    "secondaryHoverBackground": {
+      "value": "{color.background.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryHoverTextColor": {
+      "value": "{color.text.interactive.action.secondary.hover}",
+      "type": "color"
+    },
+    "secondaryOnColorActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "secondaryOnColorActiveTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.active}",
+      "type": "color"
+    },
+    "secondaryOnColorDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
+    },
+    "secondaryOnColorDisabledTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.disabled}",
+      "type": "color"
+    },
+    "secondaryOnColorHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "secondaryOnColorHoverTextColor": {
+      "value": "{color.text.interactive.action.secondaryOnColor.hover}",
+      "type": "color"
+    },
+    "successActiveBackground": {
+      "value": "{color.background.interactive.action.success.active}",
+      "type": "color"
+    },
+    "successActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.success.active}",
+      "type": "color"
+    },
+    "successActiveTextColor": {
+      "value": "{color.text.interactive.action.status.active}",
+      "type": "color"
+    },
+    "successBackground": {
+      "value": "{color.background.interactive.action.success.base}",
+      "type": "color"
+    },
+    "successBorderColor": {
+      "value": "{color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "successColor": {
+      "value": "{color.text.interactive.action.status.base}",
+      "type": "color"
+    },
+    "successDisabledBackgroundColor": {
+      "value": "{color.background.interactive.action.success.disabled}",
+      "type": "color"
+    },
+    "successDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.success.disabled}",
+      "type": "color"
+    },
+    "successDisabledTextColor": {
+      "value": "{color.text.interactive.action.status.disabled}",
+      "type": "color"
+    },
+    "successGhostActiveBackground": {
+      "value": "{color.background.interactive.action.success.secondary.active}",
+      "type": "color"
+    },
+    "successGhostBorderColor": {
+      "value": "{color.stroke.interactive.action.success.secondary.base}",
+      "type": "color"
+    },
+    "successGhostColor": {
+      "value": "{color.text.interactive.action.successSecondary.base}",
+      "type": "color"
+    },
+    "successGhostHoverBackground": {
+      "value": "{color.background.interactive.action.success.secondary.hover}",
+      "type": "color"
+    },
+    "successHoverBackground": {
+      "value": "{color.background.interactive.action.success.hover}",
+      "type": "color"
+    },
+    "successHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.success.hover}",
+      "type": "color"
+    },
+    "successHoverTextColor": {
+      "value": "{color.text.interactive.action.status.hover}",
+      "type": "color"
+    },
+    "successSecondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.success.secondary.active}",
+      "type": "color"
+    },
+    "successSecondaryActiveTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.active}",
+      "type": "color"
+    },
+    "successSecondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.success.secondary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.disabled}",
+      "type": "color"
+    },
+    "successSecondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.success.secondary.hover}",
+      "type": "color"
+    },
+    "successSecondaryHoverTextColor": {
+      "value": "{color.text.interactive.action.successSecondary.hover}",
+      "type": "color"
+    },
+    "dangerActiveBackground": {
+      "value": "{color.background.interactive.action.destructive.active}",
+      "type": "color"
+    },
+    "dangerBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.base}",
+      "type": "color"
+    },
+    "dangerGhostActiveBackground": {
+      "value": "{color.background.interactive.action.destructive.secondary.active}",
+      "type": "color"
+    },
+    "dangerGhostBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.secondary.base}",
+      "type": "color"
+    },
+    "dangerGhostColor": {
+      "value": "{color.text.interactive.action.destructiveSecondary.base}",
+      "type": "color"
+    },
+    "dangerGhostHoverBackground": {
+      "value": "{color.background.interactive.action.destructive.secondary.hover}",
+      "type": "color"
+    },
+    "dangerHoverBackground": {
+      "value": "{color.background.interactive.action.destructive.hover}",
+      "type": "color"
+    },
+    "destructiveActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.active}",
+      "type": "color"
+    },
+    "destructiveActiveTextColor": {
+      "value": "{color.text.interactive.action.status.active}",
+      "type": "color"
+    },
+    "destructiveBackgroundColor": {
+      "value": "{color.background.interactive.action.destructive.base}",
+      "type": "color"
+    },
+    "destructiveBaseTextColor": {
+      "value": "{color.text.interactive.action.status.base}",
+      "type": "color"
+    },
+    "destructiveDisabledBackgroundColor": {
+      "value": "{color.background.interactive.action.destructive.disabled}",
+      "type": "color"
+    },
+    "destructiveDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.disabled}",
+      "type": "color"
+    },
+    "destructiveDisabledTextColor": {
+      "value": "{color.text.interactive.action.status.disabled}",
+      "type": "color"
+    },
+    "destructiveHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.hover}",
+      "type": "color"
+    },
+    "destructiveHoverTextColor": {
+      "value": "{color.text.interactive.action.status.hover}",
+      "type": "color"
+    },
+    "destructiveSecondaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.secondary.active}",
+      "type": "color"
+    },
+    "destructiveSecondaryActiveTextColor": {
+      "value": "{color.text.interactive.action.destructiveSecondary.active}",
+      "type": "color"
+    },
+    "destructiveSecondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.secondary.disabled}",
+      "type": "color"
+    },
+    "destructiveSecondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.destructiveSecondary.disabled}",
+      "type": "color"
+    },
+    "destructiveSecondaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.destructive.secondary.hover}",
+      "type": "color"
+    },
+    "destructiveSecondaryHoverTextColor": {
+      "value": "{color.text.interactive.action.destructiveSecondary.hover}",
+      "type": "color"
+    },
+    "aiActiveBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.action.ai.bottomGradient.active}",
+      "type": "color"
+    },
+    "aiActiveBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.action.ai.topGradient.active}",
+      "type": "color"
+    },
+    "aiActiveBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.action.ai.bottomGradient.active}",
+      "type": "color"
+    },
+    "aiActiveBorderTopGradientColor": {
+      "value": "{color.stroke.interactive.action.ai.topGradient.active}",
+      "type": "color"
+    },
+    "aiActiveTextColor": {
+      "value": "{color.text.interactive.action.ai.active}",
+      "type": "color"
+    },
+    "aiBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.action.ai.bottomGradient.base}",
+      "type": "color"
+    },
+    "aiBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.action.ai.topGradient.base}",
+      "type": "color"
+    },
+    "aiBaseTextColor": {
+      "value": "{color.text.interactive.action.ai.base}",
+      "type": "color"
+    },
+    "aiBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.action.ai.bottomGradient.base}",
+      "type": "color"
+    },
+    "aiBorderTopGradientColor": {
+      "value": "{color.stroke.interactive.action.ai.topGradient.base}",
+      "type": "color"
+    },
+    "aiDisabledBackgroundColor": {
+      "value": "{color.background.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "aiDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "aiDisabledTextColor": {
+      "value": "{color.text.interactive.action.ai.disabled}",
+      "type": "color"
+    },
+    "aiHoverBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.action.ai.bottomGradient.hover}",
+      "type": "color"
+    },
+    "aiHoverBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.action.ai.topGradient.hover}",
+      "type": "color"
+    },
+    "aiHoverBorderBottomGradientColor": {
+      "value": "{color.stroke.interactive.action.ai.bottomGradient.hover}",
+      "type": "color"
+    },
+    "aiHoverBorderTopGradientColor": {
+      "value": "{color.stroke.interactive.action.ai.topGradient.hover}",
+      "type": "color"
+    },
+    "aiHoverTextColor": {
+      "value": "{color.text.interactive.action.ai.hover}",
+      "type": "color"
+    },
+    "aiSecondaryActiveBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.action.aiSecondary.active.bottomGradient}",
+      "type": "color"
+    },
+    "aiSecondaryActiveBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.action.aiSecondary.active.topGradient}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.aiSecondary.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.aiSecondary.disabled}",
+      "type": "color"
+    },
+    "aiSecondaryHoverBackgroundBottomGradientColor": {
+      "value": "{color.background.interactive.action.aiSecondary.hover.bottomGradient}",
+      "type": "color"
+    },
+    "aiSecondaryHoverBackgroundTopGradientColor": {
+      "value": "{color.background.interactive.action.aiSecondary.hover.topGradient}",
+      "type": "color"
+    },
+    "aiSecondaryTextBottomGradientColor": {
+      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
+      "type": "color"
+    },
+    "aiSecondaryTextTopGradientColor": {
+      "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
+      "type": "color"
+    },
+    "mediumFontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "largeFontSize": {
+      "value": "1.375rem",
+      "type": "fontSizes"
+    },
+    "largeHeight": {
+      "value": "{size.interactive.height.lg}",
+      "type": "sizing"
+    },
+    "largePaddingHorizontal": {
+      "value": "{spacing.padding.interactive.horizontal.lg}",
+      "type": "spacing"
+    },
+    "mediumHeight": {
+      "value": "{size.interactive.height.md}",
+      "type": "sizing"
+    },
+    "mediumPaddingHorizontal": {
+      "value": "{spacing.padding.interactive.horizontal.md}",
+      "type": "spacing"
+    },
+    "smallFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "smallHeight": {
+      "value": "{size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "smallPaddingHorizontal": {
+      "value": "{spacing.padding.interactive.horizontal.sm}",
+      "type": "spacing"
+    },
+    "borderRadiusBase": {
+      "value": "{borderRadius.interactive.base}",
+      "type": "borderRadius"
+    },
     "borderRadiusFull": {
       "value": "{borderRadius.full}",
       "type": "borderRadius"
+    },
+    "borderRadiusSm": {
+      "value": "{borderRadius.sm}",
+      "type": "borderRadius"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.interactive.base}",
+      "type": "borderWidth"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "gapButtonContentLg": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "gapButtonContentMd": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "gapButtonContentSm": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "ghostOncolorActiveBackgroundColor": {
+      "value": "{color.background.interactive.action.ghost.onColor.hover}",
+      "type": "color"
+    },
+    "ghostOncolorHoverBackgroundColor": {
+      "value": "{color.background.interactive.action.ghost.onColor.hover}",
+      "type": "color"
+    },
+    "heightXs": {
+      "value": "{size.interactive.height.xs}",
+      "type": "sizing"
+    },
+    "heightXxs": {
+      "value": "{size.interactive.height.xxs}",
+      "type": "sizing"
+    },
+    "opacityBase": {
+      "value": "{opacity.base}",
+      "type": "opacity"
+    },
+    "opacityDisabled": {
+      "value": "{opacity.base}",
+      "type": "opacity"
+    },
+    "tertiaryActiveBorderColor": {
+      "value": "{color.stroke.interactive.action.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryActiveTextColor": {
+      "value": "{color.text.interactive.action.tertiary.active}",
+      "type": "color"
+    },
+    "tertiaryDisabledBorderColor": {
+      "value": "{color.stroke.interactive.action.tertiary.disabled}",
+      "type": "color"
+    },
+    "tertiaryDisabledTextColor": {
+      "value": "{color.text.interactive.action.tertiary.disabled}",
+      "type": "color"
+    },
+    "tertiaryHoverBorderColor": {
+      "value": "{color.stroke.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "tertiaryHoverTextColor": {
+      "value": "{color.text.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "dangerActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
+      "type": "text"
+    },
+    "dangerBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "dangerGhostActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem rgba(230, 36, 41, 0.28)",
+      "type": "text"
+    },
+    "dangerGhostBackground": {
+      "value": "transparent",
+      "type": "text"
+    },
+    "dangerGhostBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "dangerGhostHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "dangerHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "hoverTransform": {
+      "value": "none",
+      "type": "text"
+    },
+    "letterSpacing": {
+      "value": "normal",
+      "type": "text"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.label.base}",
+      "type": "lineHeights"
+    },
+    "primaryActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem #2B7ABC",
+      "type": "text"
+    },
+    "primaryBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "primaryGhostActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem rgba(43, 122, 188, 0.28)",
+      "type": "text"
+    },
+    "primaryGhostBackground": {
+      "value": "transparent",
+      "type": "text"
+    },
+    "primaryHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "primaryInverseActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
+      "type": "text"
+    },
+    "primaryInverseBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "primaryInverseGhostActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem rgba(255, 255, 255, 0.28)",
+      "type": "text"
+    },
+    "primaryInverseGhostBackground": {
+      "value": "transparent",
+      "type": "text"
+    },
+    "primaryInverseGhostBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "primaryInverseGhostHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "primaryInverseHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "secondaryActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
+      "type": "text"
+    },
+    "secondaryBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "secondaryGhostActiveBackground": {
+      "value": "transparent",
+      "type": "text"
+    },
+    "secondaryGhostActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem rgba(39, 53, 64, 0.28)",
+      "type": "text"
+    },
+    "secondaryGhostBackground": {
+      "value": "transparent",
+      "type": "text"
+    },
+    "secondaryGhostBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "secondaryGhostHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "secondaryHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "successActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
+      "type": "text"
+    },
+    "successBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "successGhostActiveBoxShadow": {
+      "value": "inset 0 0 0.1875rem 0.0625rem rgba(3, 137, 61, 0.28)",
+      "type": "text"
+    },
+    "successGhostBackground": {
+      "value": "transparent",
+      "type": "text"
+    },
+    "successGhostBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "successGhostHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "successHoverBoxShadow": {
+      "value": "none",
+      "type": "text"
+    },
+    "textTransform": {
+      "value": "none",
+      "type": "text"
+    },
+    "transform": {
+      "value": "none",
+      "type": "text"
     }
   }
 }

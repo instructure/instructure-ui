@@ -17,12 +17,8 @@
       "type": "fontSizes"
     },
     "fontWeight": {
-      "value": "{fontWeight.body.base}",
+      "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
-    },
-    "maxHeaderWidth": {
-      "value": "1.5rem",
-      "type": "sizing"
     },
     "navMargin": {
       "value": "{spacing.spaceMd}",
@@ -35,6 +31,10 @@
     "yearPickerMargin": {
       "value": "{spacing.spaceLg}",
       "type": "spacing"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.base}",
+      "type": "lineHeights"
     }
   },
   "calendarDay": {
@@ -59,7 +59,7 @@
       "type": "color"
     },
     "todayColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "todayBackground": {

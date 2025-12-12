@@ -114,6 +114,10 @@
         "md": {
           "value": "{size.size24}",
           "type": "spacing"
+        },
+        "lg": {
+          "value": "{size.size24}",
+          "type": "spacing"
         }
       },
       "inputs": {

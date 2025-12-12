@@ -20,10 +20,6 @@
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
-    "maxHeaderWidth": {
-      "value": "1.5rem",
-      "type": "sizing"
-    },
     "navMargin": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
@@ -35,6 +31,10 @@
     "yearPickerMargin": {
       "value": "{spacing.spaceLg}",
       "type": "spacing"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.base}",
+      "type": "lineHeights"
     }
   },
   "calendarDay": {

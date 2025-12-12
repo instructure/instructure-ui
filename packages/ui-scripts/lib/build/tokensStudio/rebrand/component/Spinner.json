@@ -9,7 +9,7 @@
       "type": "color"
     },
     "trackColor": {
-      "value": "{color.background.muted}",
+      "value": "{color.background.opacity}",
       "type": "color"
     },
     "strokeWidthXs": {

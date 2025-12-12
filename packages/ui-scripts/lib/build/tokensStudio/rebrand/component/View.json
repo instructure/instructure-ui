@@ -88,54 +88,6 @@
       "value": "{color.background.warning}",
       "type": "color"
     },
-    "xSmallMaxWidth": {
-      "value": "{size.breakpoints.xs}",
-      "type": "sizing"
-    },
-    "smallMaxWidth": {
-      "value": "{size.breakpoints.sm}",
-      "type": "sizing"
-    },
-    "mediumMaxWidth": {
-      "value": "{size.breakpoints.md}",
-      "type": "sizing"
-    },
-    "largeMaxWidth": {
-      "value": "{size.breakpoints.lg}",
-      "type": "sizing"
-    },
-    "focusOutlineStyle": {
-      "value": "solid",
-      "type": "text"
-    },
-    "focusOutlineWidth": {
-      "value": "{borderWidth.md}",
-      "type": "borderWidth"
-    },
-    "focusOutlineOffset": {
-      "value": "0.3125rem",
-      "type": "spacing"
-    },
-    "focusOutlineInset": {
-      "value": "0rem",
-      "type": "spacing"
-    },
-    "focusColorInfo": {
-      "value": "{color.stroke.interactive.focusRing.base}",
-      "type": "color"
-    },
-    "focusColorDanger": {
-      "value": "{color.stroke.error}",
-      "type": "color"
-    },
-    "focusColorSuccess": {
-      "value": "{color.stroke.success}",
-      "type": "color"
-    },
-    "focusColorInverse": {
-      "value": "{color.stroke.interactive.focusRing.onColor}",
-      "type": "color"
-    },
     "stackingTopmost": {
       "value": "999",
       "type": "number"

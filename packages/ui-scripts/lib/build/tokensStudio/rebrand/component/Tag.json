@@ -103,6 +103,14 @@
     "transitionTiming": {
       "value": "0.2s",
       "type": "text"
+    },
+    "inlineIconColor": {
+      "value": "{color.background.interactive.action.primary.base}",
+      "type": "color"
+    },
+    "inlineIconHoverColor": {
+      "value": "{color.background.interactive.action.primary.hover}",
+      "type": "color"
     }
   }
 }

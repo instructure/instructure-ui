@@ -57,7 +57,7 @@
       "type": "color"
     },
     "meterColorInfo": {
-      "value": "{color.text.info}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorInfoInverse": {
@@ -65,7 +65,7 @@
       "type": "color"
     },
     "meterColorSuccess": {
-      "value": "{color.text.success}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "meterColorSuccessInverse": {
@@ -85,11 +85,11 @@
       "type": "sizing"
     },
     "trackBottomBorderColor": {
-      "value": "#00000000",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "trackBottomBorderColorInverse": {
-      "value": "#00000000",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "trackBottomBorderWidth": {

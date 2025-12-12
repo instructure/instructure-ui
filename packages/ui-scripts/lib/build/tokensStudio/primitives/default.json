@@ -4,6 +4,10 @@
       "value": "#ffffff",
       "type": "color"
     },
+    "transparent": {
+      "value": "#00000000",
+      "type": "color"
+    },
     "green": {
       "green10": {
         "value": "#DBFCDF",
