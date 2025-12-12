@@ -44,13 +44,15 @@ type: example
       setIsShowingOptions(true)
       if (inputValue || selectedOptionId || options.length === 0) return
 
-      switch (event.key) {
-        case 'ArrowDown':
-          return handleHighlightOption(event, { id: options[0].id })
-        case 'ArrowUp':
-          return handleHighlightOption(event, {
-            id: options[options.length - 1].id
-          })
+      if ('key' in event) {
+        switch (event.key) {
+          case 'ArrowDown':
+            return handleHighlightOption(event, { id: options[0].id })
+          case 'ArrowUp':
+            return handleHighlightOption(event, {
+              id: options[options.length - 1].id
+            })
+        }
       }
     }
 
@@ -234,13 +236,15 @@ type: example
       )
       if (inputValue || selectedOptionId || options.length === 0) return
 
-      switch (event.key) {
-        case 'ArrowDown':
-          return handleHighlightOption(event, { id: options[0].id })
-        case 'ArrowUp':
-          return handleHighlightOption(event, {
-            id: options[options.length - 1].id
-          })
+      if ('key' in event) {
+        switch (event.key) {
+          case 'ArrowDown':
+            return handleHighlightOption(event, { id: options[0].id })
+          case 'ArrowUp':
+            return handleHighlightOption(event, {
+              id: options[options.length - 1].id
+            })
+        }
       }
     }
 
@@ -436,21 +440,23 @@ type: example
 
       if (inputValue || options.length === 0) return
 
-      switch (event.key) {
-        case 'ArrowDown':
-          return handleHighlightOption(event, {
-            id: options.find((option) => !selectedOptionId.includes(option.id))
-              .id
-          })
-        case 'ArrowUp':
-          // Highlight last non-selected option
-          return handleHighlightOption(event, {
-            id: options[
-              options.findLastIndex(
-                (option) => !selectedOptionId.includes(option.id)
-              )
-            ].id
-          })
+      if ('key' in event) {
+        switch (event.key) {
+          case 'ArrowDown':
+            return handleHighlightOption(event, {
+              id: options.find((option) => !selectedOptionId.includes(option.id))
+                .id
+            })
+          case 'ArrowUp':
+            // Highlight last non-selected option
+            return handleHighlightOption(event, {
+              id: options[
+                options.findLastIndex(
+                  (option) => !selectedOptionId.includes(option.id)
+                )
+              ].id
+            })
+        }
       }
     }
 
@@ -489,13 +495,13 @@ type: example
       const newOptions = filterOptions(value)
       setInputValue(value)
       setFilteredOptions(newOptions)
-      sethHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
+      setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
       setIsShowingOptions(true)
       setAnnouncement(getOptionsChangedMessage(newOptions))
     }
 
     const handleKeyDown = (event) => {
-      if (event.keyCode === 8) {
+      if ('keyCode' in event && event.keyCode === 8) {
         // when backspace key is pressed
         if (inputValue === '' && selectedOptionId.length > 0) {
           // remove last selected option, if input has no entered text
@@ -660,17 +666,19 @@ const GroupSelectExample = ({ options }) => {
   const handleShowOptions = (event) => {
     setIsShowingOptions(true)
     setHighlightedOptionId(null)
-    if (inputValue || selectedOptionId || options.length === 0) return
+    if (inputValue || selectedOptionId || Object.keys(options).length === 0) return
 
-    switch (event.key) {
-      case 'ArrowDown':
-        return handleHighlightOption(event, {
-          id: options[Object.keys(options)[0]][0].id
-        })
-      case 'ArrowUp':
-        return handleHighlightOption(event, {
-          id: Object.values(options).at(-1)?.at(-1)?.id
-        })
+    if ('key' in event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
   }
 
@@ -840,17 +848,19 @@ const GroupSelectAutocompleteExample = ({ options }) => {
     setIsShowingOptions(true)
     setHighlightedOptionId(null)
 
-    if (inputValue || selectedOptionId || options.length === 0) return
+    if (inputValue || selectedOptionId || Object.keys(options).length === 0) return
 
-    switch (event.key) {
-      case 'ArrowDown':
-        return handleHighlightOption(event, {
-          id: options[Object.keys(options)[0]][0].id
-        })
-      case 'ArrowUp':
-        return handleHighlightOption(event, {
-          id: Object.values(options).at(-1)?.at(-1)?.id
-        })
+    if ('key' in event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
   }
 
@@ -1205,13 +1215,15 @@ const SingleSelectExample = ({ options }) => {
 
     if (inputValue || selectedOptionId || options.length === 0) return
 
-    switch (event.key) {
-      case 'ArrowDown':
-        return handleHighlightOption(event, { id: options[0].id })
-      case 'ArrowUp':
-        return handleHighlightOption(event, {
-          id: options[options.length - 1].id
-        })
+    if ('key' in event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
   }
 
