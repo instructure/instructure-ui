@@ -69,7 +69,7 @@
       "type": "fontSizes"
     },
     "descriptionFontWeight": {
-      "value": "{fontWeight.regular}",
+      "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
     "descriptionLineHeight": {
@@ -90,11 +90,11 @@
       "type": "fontSizes"
     },
     "fontWeight": {
-      "value": "{fontWeight.regular}",
+      "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
     "fontWeightSelected": {
-      "value": "{fontWeight.regular}",
+      "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
     "highlightedBackground": {
