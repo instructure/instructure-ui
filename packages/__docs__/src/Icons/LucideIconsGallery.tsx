@@ -65,7 +65,7 @@ function getUsageInfo(iconName: string) {
 
 const MyIcon = () => {
   return (
-    <${iconName} size={24} />
+    <${iconName} size={'2xl'}  color='successColor'/>
   )
 }`
 }
@@ -290,16 +290,21 @@ const LucideIconsGallery = () => {
               </Heading>
               <ul>
                 <li>
-                  <code>size</code>: Number (pixels) - e.g., <code>24</code>
+                  <code>size</code>: Number (pixels) or semantic token - e.g.,{' '}
+                  <code>&quot;sm&quot;</code>
                 </li>
                 <li>
-                  <code>color</code>: CSS color - e.g.,{' '}
-                  <code>&quot;currentColor&quot;</code>
+                  <code>color</code>: CSS color or semantic token- e.g.,{' '}
+                  <code>&quot;successColor&quot;</code>
                 </li>
                 <li>
-                  <code>strokeWidth</code>: Number - e.g., <code>2</code>
+                  <code>strokeWidth</code>: Number or semantic token - e.g.,{' '}
+                  <code>&quot;sm&quot;</code>
                 </li>
-                <li>Plus all standard SVG props (className, style, etc.)</li>
+                <li>
+                  Plus all standard SVG props (except for className, style, css,
+                  children etc.)
+                </li>
               </ul>
               <p>
                 These icons use the pure Lucide API. See{' '}

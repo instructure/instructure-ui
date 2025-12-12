@@ -109,6 +109,8 @@ import { wrapLucideIcon } from './wrapLucideIcon'
 export type { LucideProps, LucideIcon } from 'lucide-react'
 export type { LucideIconWrapperProps, InstUIIconOwnProps } from './wrapLucideIcon'
 export { wrapLucideIcon }
+export { IconPropsProvider, IconPropsContext, renderIconWithProps } from './IconPropsProvider'
+export type { IconPropsContextValue } from './IconPropsProvider'
 
 ${iconExports}
 `

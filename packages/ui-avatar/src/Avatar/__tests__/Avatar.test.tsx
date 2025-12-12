@@ -28,7 +28,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
 import Avatar from '../index'
-import { IconGroupLine } from '@instructure/ui-icons'
+import { HeartInstUIIcon } from '@instructure/ui-icons-lucide'
 
 describe('<Avatar />', () => {
   describe('for a11y', () => {
@@ -78,24 +78,9 @@ describe('<Avatar />', () => {
   })
 
   describe('when the renderIcon prop is provided', () => {
-    it('should display an svg passed', async () => {
-      const SomeIcon = () => (
-        <svg>
-          <circle cx="25" cy="75" r="20" />
-        </svg>
-      )
+    it('should display a Lucide icon when passed as component reference', async () => {
       const { container } = render(
-        <Avatar name="avatar name" renderIcon={SomeIcon}>
-          hello
-        </Avatar>
-      )
-      const avatarSvg = container.querySelector('svg')
-      expect(avatarSvg).toBeInTheDocument()
-    })
-
-    it('should display an InstUI icon passed', async () => {
-      const { container } = render(
-        <Avatar name="avatar name" renderIcon={<IconGroupLine />}>
+        <Avatar name="avatar name" renderIcon={HeartInstUIIcon}>
           hello
         </Avatar>
       )
@@ -105,12 +90,38 @@ describe('<Avatar />', () => {
 
     it('should display correctly when an icon renderer is passed', async () => {
       const { container } = render(
-        <Avatar name="Jessica Jones" renderIcon={() => <IconGroupLine />}>
+        <Avatar name="Jessica Jones" renderIcon={() => <HeartInstUIIcon />}>
           Hello World
         </Avatar>
       )
       const avatarSvg = container.querySelector('svg')
       expect(avatarSvg).toBeInTheDocument()
+    })
+
+    it('should render Lucide icon when passed as JSX element', async () => {
+      const { container } = render(
+        <Avatar
+          name="avatar name"
+          size="large"
+          renderIcon={<HeartInstUIIcon />}
+        />
+      )
+
+      const svg = container.querySelector('svg')
+      expect(svg).toBeInTheDocument()
+    })
+
+    it('should render Lucide icon from render function', async () => {
+      const { container } = render(
+        <Avatar
+          name="avatar name"
+          size="small"
+          renderIcon={() => <HeartInstUIIcon />}
+        />
+      )
+
+      const svg = container.querySelector('svg')
+      expect(svg).toBeInTheDocument()
     })
   })
 
@@ -126,7 +137,7 @@ describe('<Avatar />', () => {
 
     it('should display the image even if an icon is provided', async () => {
       const { container } = render(
-        <Avatar name="avatar name" src={src} renderIcon={<IconGroupLine />} />
+        <Avatar name="avatar name" src={src} renderIcon={HeartInstUIIcon} />
       )
       const avatarImg = container.querySelector('img')
       expect(avatarImg).toHaveAttribute('src', src)
@@ -195,7 +206,7 @@ describe('<Avatar />', () => {
             name="Jessica Jones"
             color="accent2"
             hasInverseColor
-            renderIcon={<IconGroupLine />}
+            renderIcon={HeartInstUIIcon}
           />
         )
         const element = container.querySelector('div')

@@ -24,37 +24,97 @@
 
 import type { LucideProps } from 'lucide-react'
 import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
-import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 /**
- * Extract size tokens from Icon theme (sizeXs, sizeSm, etc.)
- * and transform to lowercase literals ('xs', 'sm', etc.)
+ * SVGIcon size tokens (legacy) - DEPRECATED
  */
-type ExtractSizeTokens<T> = {
-  [K in keyof T]: K extends `size${infer Size}` ? Lowercase<Size> : never
-}[keyof T]
+type SVGIconSizeToken = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
 
 /**
- * Extract strokeWidth tokens from Icon theme (strokeWidthXs, etc.)
- * and transform to lowercase literals ('xs', 'sm', etc.)
+ * Semantic size tokens for icons - includes SVGIcon legacy tokens, they are DEPRECATED and will be deleted, DON'T USE THEM.
  */
-type ExtractStrokeWidthTokens<T> = {
-  [K in keyof T]: K extends `strokeWidth${infer Size}` ? Lowercase<Size> : never
-}[keyof T]
+type IconSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | SVGIconSizeToken
 
 /**
- * Extract color tokens from Icon theme
- * (all properties except size/strokeWidth and 'dark')
+ * Semantic stroke width tokens for icons
  */
-type ExtractColorTokens<T> = Exclude<
-  keyof T,
-  `size${string}` | `strokeWidth${string}` | 'dark'
->
+type IconStrokeWidthToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
-type IconSizeToken = ExtractSizeTokens<NewComponentTypes['Icon']>
-type IconStrokeWidthToken = ExtractStrokeWidthTokens<NewComponentTypes['Icon']>
-type IconColorToken = ExtractColorTokens<NewComponentTypes['Icon']>
+/**
+ * Semantic color tokens from Icon theme
+ */
+type IconColorToken =
+  | 'baseColor'
+  | 'mutedColor'
+  | 'successColor'
+  | 'errorColor'
+  | 'warningColor'
+  | 'infoColor'
+  | 'onColor'
+  | 'inverseColor'
+  | 'disabledBaseColor'
+  | 'disabledOnColor'
+  | 'dark'
+  | 'ai' // symbolic token for AI gradient colors, this does not exist in the theme
+  | 'navigationPrimaryBaseColor'
+  | 'navigationPrimaryHoverColor'
+  | 'navigationPrimaryActiveColor'
+  | 'navigationPrimaryOnColorBaseColor'
+  | 'navigationPrimaryOnColorHoverColor'
+  | 'navigationPrimaryOnColorActiveColor'
+  | 'actionSecondaryBaseColor'
+  | 'actionSecondaryHoverColor'
+  | 'actionSecondaryActiveColor'
+  | 'actionSecondaryDisabledColor'
+  | 'actionStatusBaseColor'
+  | 'actionStatusHoverColor'
+  | 'actionStatusActiveColor'
+  | 'actionStatusDisabledColor'
+  // | 'actionAiSecondaryTopGradientBaseColor' internally used for AI gradient
+  // | 'actionAiSecondaryBottomGradientBaseColor' internally used for AI gradient
+  | 'actionAiBaseColor'
+  | 'actionAiHoverColor'
+  | 'actionAiActiveColor'
+  | 'actionAiDisabledColor'
+  | 'actionPrimaryBaseColor'
+  | 'actionPrimaryHoverColor'
+  | 'actionPrimaryActiveColor'
+  | 'actionPrimaryDisabledColor'
+  | 'actionPrimaryOnColorBaseColor'
+  | 'actionPrimaryOnColorHoverColor'
+  | 'actionPrimaryOnColorActiveColor'
+  | 'actionPrimaryOnColorDisabledColor'
+  | 'accentBlueColor'
+  | 'accentGreenColor'
+  | 'accentRedColor'
+  | 'accentOrangeColor'
+  | 'accentGreyColor'
+  | 'accentAshColor'
+  | 'accentPlumColor'
+  | 'accentVioletColor'
+  | 'accentStoneColor'
+  | 'accentSkyColor'
+  | 'accentHoneyColor'
+  | 'accentSeaColor'
+  | 'accentAutoraColor'
+  | 'actionTertiaryBaseColor'
+  | 'actionTertiaryHoverColor'
+  | 'actionTertiaryActiveColor'
+  | 'actionTertiaryDisabledColor'
+  | 'actionSuccessSecondaryBaseColor'
+  | 'actionSuccessSecondaryDisabledColor'
+  | 'actionDestructiveSecondaryBaseColor'
+  | 'actionDestructiveSecondaryDisabledColor'
+  | 'actionAiSecondaryDisabledColor'
+  | 'actionSecondaryOnColorBaseColor'
+  | 'actionSecondaryOnColorHoverColor'
+  | 'actionSecondaryOnColorActiveColor'
+  | 'actionSecondaryOnColorDisabledColor'
+  | 'actionSuccessSecondaryHoverColor'
+  | 'actionSuccessSecondaryActiveColor'
+  | 'actionDestructiveSecondaryHoverColor'
+  | 'actionDestructiveSecondaryActiveColor'
 
 type InstUIIconOwnProps = {
   /**
@@ -96,15 +156,38 @@ type InstUIIconOwnProps = {
 /**
  * Full props: Lucide native + InstUI semantic + theme support.
  * InstUI props override Lucide's size, color, strokeWidth, rotate.
+ * children, style, and className are explicitly omitted.
  */
 type LucideIconWrapperProps = Omit<
-  LucideProps,
-  'size' | 'color' | 'strokeWidth' | 'rotate'
-> &
-  InstUIIconOwnProps & {
-    themeOverride?: ThemeOverrideValue
-  } & OtherHTMLAttributes<InstUIIconOwnProps>
+  Omit<LucideProps, 'size' | 'color' | 'strokeWidth' | 'rotate'> &
+    InstUIIconOwnProps & {
+      themeOverride?: ThemeOverrideValue
+    } & OtherHTMLAttributes<InstUIIconOwnProps>,
+  'children' | 'style' | 'className'
+>
 
-type LucideIconStyle = ComponentStyle<'lucideIcon'>
+type LucideIconStyle = ComponentStyle<'lucideIcon'> & {
+  /**
+   * Computed numeric size for Lucide icon (in pixels)
+   */
+  numericSize?: number
+  /**
+   * Computed numeric stroke width for Lucide icon
+   */
+  numericStrokeWidth?: number | string
+  /**
+   * Custom CSS color value (non-semantic)
+   */
+  customColor?: string
+  /**
+   * Gradient colors for AI gradient (top and bottom)
+   */
+  gradientColors?: { top: string; bottom: string }
+}
 
-export type { LucideIconWrapperProps, InstUIIconOwnProps, LucideIconStyle }
+export type {
+  LucideIconWrapperProps,
+  InstUIIconOwnProps,
+  LucideIconStyle,
+  SVGIconSizeToken
+}
