@@ -171,6 +171,27 @@
     "toggleBorderWidth": {
       "value": "{borderWidth.lg}",
       "type": "borderWidth"
+    },
+    "toggleShadow": {
+      "value": [
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow1}",
+          "y": "{dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow2}",
+          "y": "{dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "innerShadow"
+        }
+      ],
+      "type": "boxShadow"
     }
   }
 }
