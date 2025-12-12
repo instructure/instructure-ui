@@ -1758,7 +1758,8 @@
       "heading.label": "S:9f72e05a7b1a555a0cfb3a996c0f7f2ddf7316ae,",
       "heading.labelInline": "S:6f4d0b4f3e27d4864bb35f351e63f69d1b2bc4bc,",
       "tray.boxShadow": "S:d330470f3c5337cbafb36bb2cc592613b8052181,",
-      "rangeInput.boxShadow": "S:1f6e520481cfe8f1e277d5567f6519970f9eb2f4,"
+      "rangeInput.boxShadow": "S:1f6e520481cfe8f1e277d5567f6519970f9eb2f4,",
+      "radioInput.toggleShadow": "S:b8a03468b3581a96f16d4b8aec6274a4a20bc267,"
     },
     "$figmaVariableReferences": {
       "color.background.base": "99fe5b07913dbf600b5c83fa43554af37c758216",
@@ -4999,7 +5000,8 @@
       "heading.label": "S:9f72e05a7b1a555a0cfb3a996c0f7f2ddf7316ae,",
       "heading.labelInline": "S:6f4d0b4f3e27d4864bb35f351e63f69d1b2bc4bc,",
       "tray.boxShadow": "S:d330470f3c5337cbafb36bb2cc592613b8052181,",
-      "rangeInput.boxShadow": "S:1f6e520481cfe8f1e277d5567f6519970f9eb2f4,"
+      "rangeInput.boxShadow": "S:1f6e520481cfe8f1e277d5567f6519970f9eb2f4,",
+      "radioInput.toggleShadow": "S:b8a03468b3581a96f16d4b8aec6274a4a20bc267,"
     },
     "$figmaVariableReferences": {
       "size.interactive.height.xxs": "7b7b916bb9b59c700497107b1ee02ca6da195d47",
