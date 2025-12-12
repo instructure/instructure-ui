@@ -26,7 +26,7 @@ type: example
       }}
     >
       <IconButton
-        renderIcon={IconUserSolid}
+        renderIcon={<UserRoundInstUIIcon />}
         screenReaderLabel="Edits"
         withBorder={false}
         withBackground={false}
@@ -39,7 +39,7 @@ type: example
       }}
     >
       <IconButton
-        renderIcon={IconUserSolid}
+        renderIcon={<UserRoundInstUIIcon />}
         screenReaderLabel="Edits"
         withBorder={false}
         withBackground={false}
@@ -137,7 +137,7 @@ type: example
 ---
 const EditButton = () => (
   <IconButton
-    renderIcon={IconUserSolid}
+    renderIcon={<UserRoundInstUIIcon />}
     screenReaderLabel="Edit page"
     withBorder={false}
     withBackground={false}
