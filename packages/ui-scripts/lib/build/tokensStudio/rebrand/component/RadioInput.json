@@ -48,6 +48,18 @@
       "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
+    "toggleSmallFontSize": {
+      "value": "{fontSize.textXs}",
+      "type": "fontSizes"
+    },
+    "toggleMediumFontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "toggleLargeFontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
     "lineHeightSm": {
       "value": "{lineHeight.paragraph.textSm}",
       "type": "lineHeights"
@@ -116,9 +128,49 @@
       "value": "0.375rem",
       "type": "sizing"
     },
+    "toggleSmallHeight": {
+      "value": "{size.interactive.height.sm}",
+      "type": "sizing"
+    },
+    "toggleMediumHeight": {
+      "value": "{size.interactive.height.md}",
+      "type": "sizing"
+    },
+    "toggleLargeHeight": {
+      "value": "{size.interactive.height.lg}",
+      "type": "sizing"
+    },
     "controlVerticalMargin": {
       "value": "0rem",
       "type": "spacing"
+    },
+    "toggleBackgroundDanger": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "toggleBackgroundOff": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "toggleBackgroundSuccess": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "toggleBackgroundWarning": {
+      "value": "{color.background.warning}",
+      "type": "color"
+    },
+    "toggleHandleText": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "toggleBorderRadius": {
+      "value": "{borderRadius.sm}",
+      "type": "borderRadius"
+    },
+    "toggleBorderWidth": {
+      "value": "{borderWidth.lg}",
+      "type": "borderWidth"
     }
   }
 }
