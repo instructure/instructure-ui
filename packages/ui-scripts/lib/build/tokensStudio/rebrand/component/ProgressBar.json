@@ -131,6 +131,10 @@
     "largeValueFontSize": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
+    },
+    "borderColor": {
+      "value": "{color.stroke.brand}",
+      "type": "color"
     }
   }
 }
