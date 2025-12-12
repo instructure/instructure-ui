@@ -117,7 +117,7 @@
       "type": "color"
     },
     "trackColorInverse": {
-      "value": "#00000000",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "textColor": {
