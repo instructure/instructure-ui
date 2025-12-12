@@ -90,7 +90,7 @@
       "type": "spacing"
     },
     "labelPadding": {
-      "value": "0",
+      "value": "0rem",
       "type": "spacing",
       "description": "code only token"
     }
