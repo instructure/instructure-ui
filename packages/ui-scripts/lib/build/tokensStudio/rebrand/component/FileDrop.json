@@ -17,10 +17,8 @@
       "type": "borderRadius"
     },
     "borderStyle": {
-      "value": {
-        "style": "dashed"
-      },
-      "type": "border"
+      "value": "dashed",
+      "type": "text"
     },
     "borderWidth": {
       "value": "{borderWidth.sm}",
