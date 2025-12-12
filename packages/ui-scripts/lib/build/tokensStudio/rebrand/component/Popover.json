@@ -1,7 +1,7 @@
 {
   "popover": {
     "borderColor": {
-      "value": "{color.stroke.container.base}",
+      "value": "#00000000",
       "type": "color"
     }
   }

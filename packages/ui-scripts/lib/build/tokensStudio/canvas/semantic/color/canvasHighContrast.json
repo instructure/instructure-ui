@@ -378,7 +378,7 @@
     },
     "stroke": {
       "base": {
-        "value": "{color.grey.grey140}",
+        "value": "{color.grey.grey100}",
         "type": "color"
       },
       "muted": {
@@ -423,7 +423,7 @@
       },
       "container": {
         "base": {
-          "value": "{color.grey.grey60}",
+          "value": "{color.grey.grey100}",
           "type": "color"
         },
         "dark": {
