@@ -74,10 +74,6 @@
       "value": "{color.text.base}",
       "type": "color"
     },
-    "borderColor": {
-      "value": "{color.stroke.base}",
-      "type": "color"
-    },
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
