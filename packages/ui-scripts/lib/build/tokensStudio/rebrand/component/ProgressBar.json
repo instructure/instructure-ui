@@ -97,11 +97,11 @@
       "type": "borderWidth"
     },
     "trackColor": {
-      "value": "{color.background.opacity}",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "trackColorInverse": {
-      "value": "{color.background.opacityOnColor}",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "valuePadding": {
@@ -134,6 +134,10 @@
     },
     "borderColor": {
       "value": "{color.stroke.brand}",
+      "type": "color"
+    },
+    "borderColorInverse": {
+      "value": "{color.stroke.onColor}",
       "type": "color"
     }
   }

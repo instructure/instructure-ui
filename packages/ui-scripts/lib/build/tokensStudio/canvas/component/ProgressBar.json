@@ -135,6 +135,10 @@
     "borderColor": {
       "value": "{color.transparentColor}",
       "type": "color"
+    },
+    "borderColorInverse": {
+      "value": "{color.transparentColor}",
+      "type": "color"
     }
   }
 }
