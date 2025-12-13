@@ -188,10 +188,6 @@
       "value": "{color.text.base}",
       "type": "color"
     },
-    "borderColor": {
-      "value": "{color.stroke.muted}",
-      "type": "color"
-    },
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
