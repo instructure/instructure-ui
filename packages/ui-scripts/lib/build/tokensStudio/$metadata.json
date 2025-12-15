@@ -2,8 +2,6 @@
   "tokenSetOrder": [
     "primitives/default",
     "canvas/semantic/layout/default",
-    "canvas/semantic/color/canvas",
-    "canvas/semantic/color/canvasHighContrast",
     "canvas/component/Avatar",
     "canvas/component/Badge",
     "canvas/component/BaseButton",
@@ -45,6 +43,8 @@
     "canvas/component/Tooltip",
     "canvas/component/Tray",
     "canvas/component/View",
+    "canvas/semantic/color/canvas",
+    "canvas/semantic/color/canvasHighContrast",
     "rebrand/component/SourceCodeEditor",
     "rebrand/component/Table",
     "rebrand/component/Avatar",

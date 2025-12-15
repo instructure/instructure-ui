@@ -330,6 +330,10 @@
       "dangerColor": {
         "value": "{color.stroke.interactive.action.destructive.base}",
         "type": "color"
+      },
+      "style": {
+        "value": "solid",
+        "type": "text"
       }
     },
     "radiusSmall": {
