@@ -37,13 +37,12 @@ import {
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
-import type { FileDropProps, FileDropState, FileDropStyleProps } from './props'
-
+import type { FileDropProps, FileDropState } from './props'
+import type { StyleParams } from './styles'
 function keyEventIsClickButton(e: React.KeyboardEvent) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
 }
@@ -54,7 +53,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class FileDrop extends Component<FileDropProps, FileDropState> {
   static readonly componentId = 'FileDrop'
 
@@ -90,8 +89,9 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     else return fileLikeItem
   }
 
-  makeStyleProps = (): FileDropStyleProps => {
+  makeStyleProps = (): StyleParams => {
     return {
+      ...this.props,
       functionallyDisabled: this.functionallyDisabled,
       visuallyDisabled: this.interaction === 'disabled',
       dragRejected: this.state.isDragRejected || this.invalid,
