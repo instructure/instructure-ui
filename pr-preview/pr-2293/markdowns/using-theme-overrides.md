@@ -221,14 +221,17 @@ type: example
 
   <div>
     <Button color='primary'
-      themeOverride={{ primaryBackground: "purple" }}
+      themeOverride={{
+        primaryBackground: "purple",
+        borderRadius: '999rem'
+    }}
       margin="small 0 large">
-      Purple Primary Button
+      Purple Primary Button with rounded corners
     </Button>
     <InstUISettingsProvider
       theme={{
         componentOverrides: {
-          TextInput: { background: "yellow" }
+          TextInput: { backgroundColor: "yellow" }
         }
       }}
     >
