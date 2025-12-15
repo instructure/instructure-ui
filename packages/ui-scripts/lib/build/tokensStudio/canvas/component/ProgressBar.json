@@ -131,6 +131,14 @@
     "textColorInverse": {
       "value": "{color.text.onColor}",
       "type": "color"
+    },
+    "borderColor": {
+      "value": "{color.transparentColor}",
+      "type": "color"
+    },
+    "borderColorInverse": {
+      "value": "{color.transparentColor}",
+      "type": "color"
     }
   }
 }

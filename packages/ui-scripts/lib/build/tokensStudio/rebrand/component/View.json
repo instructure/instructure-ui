@@ -103,6 +103,10 @@
     "stackingDeepest": {
       "value": "-999",
       "type": "number"
+    },
+    "borderStyle": {
+      "value": "solid",
+      "type": "text"
     }
   }
 }
