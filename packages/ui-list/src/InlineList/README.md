@@ -95,49 +95,49 @@ type: example
 ---
 <div>
   <InlineList itemSpacing="xxx-small">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to xxx-small</Link></InlineList.Item>
   </InlineList>
   <InlineList itemSpacing="xx-small">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to xx-small</Link></InlineList.Item>
   </InlineList>
   <InlineList itemSpacing="x-small">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b>  Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to x-small</Link></InlineList.Item>
   </InlineList>
     <InlineList itemSpacing="small">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b>  Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to small</Link></InlineList.Item>
   </InlineList>
   <InlineList itemSpacing="medium">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b>  Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to medium</Link></InlineList.Item>
   </InlineList>
   <InlineList itemSpacing="large">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to large</Link></InlineList.Item>
   </InlineList>
     <InlineList itemSpacing="x-large">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to x-large</Link></InlineList.Item>
   </InlineList>
   <InlineList itemSpacing="xx-large">
-    <InlineList.Item>{lorem.sentence()}</InlineList.Item>
+    <InlineList.Item>Adding predefined space</InlineList.Item>
     <InlineList.Item>10pts</InlineList.Item>
     <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
     <InlineList.Item><Link href="#">Set to xx-large</Link></InlineList.Item>

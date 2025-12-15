@@ -26,12 +26,9 @@ import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
-
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
-
 import { allowedProps } from './props'
 import type { ListItemProps } from './props'
 
@@ -41,7 +38,7 @@ parent: List
 id: List.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'ListListItem')
 class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 
