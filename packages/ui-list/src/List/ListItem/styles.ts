@@ -23,8 +23,7 @@
  */
 
 import { logError as error } from '@instructure/console'
-
-import type { ListItemTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ListItemProps, ListItemStyle } from './props'
 
 /**
@@ -40,7 +39,7 @@ import type { ListItemProps, ListItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ListItemTheme,
+  componentTheme: NewComponentTypes['ListListItem'],
   props: ListItemProps
 ): ListItemStyle => {
   const { size, delimiter, spacing } = props
@@ -99,13 +98,23 @@ const generateStyle = (
     dashed: {
       listStylePosition: 'inside',
       '&:not(:first-of-type)': {
-        borderTop: componentTheme.delimiterDashedBorder
+        borderTop:
+          `
+            ${componentTheme.delimiterDashedBorder.width}
+            ${componentTheme.delimiterDashedBorder.style}
+            ${componentTheme.delimiterDashedBorder.color}
+          `
       }
     },
     solid: {
       listStylePosition: 'inside',
       '&:not(:first-of-type)': {
-        borderTop: componentTheme.delimiterSolidBorder
+        borderTop:
+          `
+            ${componentTheme.delimiterSolidBorder.width}
+            ${componentTheme.delimiterSolidBorder.style}
+            ${componentTheme.delimiterSolidBorder.color}
+          `
       }
     },
     none: {}

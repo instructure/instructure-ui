@@ -24,7 +24,7 @@
 
 import { logError as error } from '@instructure/console'
 
-import type { InlineListItemTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { InlineListItemProps, InlineListItemStyle } from './props'
 
 /**
@@ -40,7 +40,7 @@ import type { InlineListItemProps, InlineListItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: InlineListItemTheme,
+  componentTheme: NewComponentTypes['InlineListInlineListItem'],
   props: InlineListItemProps
 ): InlineListItemStyle => {
   const { size, delimiter, spacing } = props
