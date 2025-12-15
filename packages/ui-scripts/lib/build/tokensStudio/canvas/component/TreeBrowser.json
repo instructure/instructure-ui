@@ -90,5 +90,31 @@
       "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     }
+  },
+  "treeCollection": {
+    "baseSpacingLarge": {
+      "value": "{spacing.spaceLg}",
+      "type": "spacing"
+    },
+    "baseSpacingMedium": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "baseSpacingSmall": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "borderColor": {
+      "value": "{color.stroke.base}",
+      "type": "color"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    }
   }
 }
