@@ -26,14 +26,10 @@ import { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
+import { withStyle } from '@instructure/emotion'
 
 import { ListItem } from './ListItem'
-
-import { withStyleRework as withStyle } from '@instructure/emotion'
-
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
-
 import { allowedProps } from './props'
 import type { ListProps } from './props'
 
@@ -42,7 +38,7 @@ import type { ListProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class List extends Component<ListProps> {
   static readonly componentId = 'List'
 
