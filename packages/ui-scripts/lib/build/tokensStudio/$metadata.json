@@ -1,6 +1,8 @@
 {
   "tokenSetOrder": [
     "primitives/default",
+    "canvas/semantic/color/canvas",
+    "canvas/semantic/color/canvasHighContrast",
     "canvas/semantic/layout/default",
     "canvas/component/Avatar",
     "canvas/component/Badge",
@@ -42,9 +44,8 @@
     "canvas/component/Toggle",
     "canvas/component/Tooltip",
     "canvas/component/Tray",
+    "canvas/component/TreeBrowser",
     "canvas/component/View",
-    "canvas/semantic/color/canvas",
-    "canvas/semantic/color/canvasHighContrast",
     "rebrand/component/SourceCodeEditor",
     "rebrand/component/Table",
     "rebrand/component/Avatar",
@@ -85,6 +86,7 @@
     "rebrand/component/Toggle",
     "rebrand/component/Tooltip",
     "rebrand/component/Tray",
+    "rebrand/component/TreeBrowser",
     "rebrand/component/View",
     "rebrand/semantic/layout/default",
     "rebrand/semantic/color/rebrandLight",
