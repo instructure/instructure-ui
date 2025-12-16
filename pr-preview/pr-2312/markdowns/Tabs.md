@@ -388,6 +388,7 @@ const Example = () => {
     >
       <Tabs.Panel
         id="tabA"
+        tabIndex={-1}
         renderTitle="I will persist"
         textAlign="center"
         padding="large"
@@ -398,6 +399,7 @@ const Example = () => {
       </Tabs.Panel>
       <Tabs.Panel
         id="tabB"
+        tabIndex={-1}
         renderTitle="I will unmount"
         isSelected={selectedIndex === 1}
         textAlign="center"
