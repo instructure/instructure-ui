@@ -62,6 +62,11 @@ type TabsPanelOwnProps = {
    * When set to false, the tabPanel only will be hidden, but not dismounted when not active
    */
   unmountOnExit?: boolean
+  /**
+   * The tabIndex of the tabpanel element. Set to 0 for text-only panels to make them
+   * accessible to keyboard and screen reader users.
+   */
+  tabIndex?: number
 }
 
 type PropKeys = keyof TabsPanelOwnProps
@@ -87,7 +92,8 @@ const allowedProps: AllowedPropKeys = [
   'textAlign',
   'elementRef',
   'active',
-  'unmountOnExit'
+  'unmountOnExit',
+  'tabIndex'
 ]
 
 export type { TabsPanelProps, TabsPanelStyle }
