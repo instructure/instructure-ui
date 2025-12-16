@@ -135,9 +135,10 @@ type: example
   <TextInput renderLabel="Name" placeholder="Doe, John Doe"/>
 </InstUISettingsProvider>
 ```
+
 ### Breadcrumb
 
-#### New tokens 
+#### New tokens
 
 - gapSm - Gap spacing for small size breadcrumbs
 - gapMd - Gap spacing for medium size breadcrumbs
@@ -280,6 +281,20 @@ type: example
 - theme variable `largeWidth` is now renamed to `widthXl`
 - theme variable `borderStyle` is now removed
 - theme variable `position` is now removed
+
+### View
+
+#### Theme variable changes
+
+| Old Variable                                                                                                                             | Status  | Notes                                       |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------- |
+| `arrowSize`                                                                                                                              | Removed | Moved to ContextView component              |
+| `marginXxxSmall`, `marginXxSmall`, `marginXSmall`, `marginSmall`, `marginMedium`, `marginLarge`, `marginXLarge`, `marginXxLarge`         | Removed | Use `sharedTokens.spacing`                  |
+| `paddingXxxSmall`, `paddingXxSmall`, `paddingXSmall`, `paddingSmall`, `paddingMedium`, `paddingLarge`, `paddingXLarge`, `paddingXxLarge` | Removed | Use `sharedTokens.spacing`                  |
+| `shadowDepth1`, `shadowDepth2`, `shadowDepth3`                                                                                           | Removed | Use `sharedTokens.boxShadow.elevation1/2/3` |
+| `shadowResting`, `shadowAbove`, `shadowTopmost`                                                                                          | Removed | Use `sharedTokens.boxShadow.elevation*`     |
+| `borderRadiusSmall`, `borderRadiusMedium`, `borderRadiusLarge`                                                                           | Removed | Use `sharedTokens.radius*`                  |
+| `borderWidthSmall`, `borderWidthMedium`, `borderWidthLarge`                                                                              | Removed | Use `sharedTokens.width*`                   |
 
 ## Codemods
 

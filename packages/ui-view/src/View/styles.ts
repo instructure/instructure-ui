@@ -450,7 +450,7 @@ const generateStyle = (
         : {}),
       ...(withBorder(props)
         ? {
-            borderStyle: 'solid',
+            borderStyle: componentTheme.borderStyle,
             ...(borderColorVariants[borderColor!] || {
               borderColor: borderColor
             })
