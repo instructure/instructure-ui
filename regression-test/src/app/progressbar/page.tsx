@@ -101,9 +101,7 @@ export default function ProgressBarPage() {
             color="primary-inverse"
             valueNow={30}
             valueMax={60}
-            renderValue={({ valueNow, valueMax }: any) => (
-              <Text>{Math.round((valueNow / valueMax) * 100)}%</Text>
-            )}
+            renderValue={({ valueNow, valueMax }: any) => `${Math.round((valueNow / valueMax) * 100)}%`}
             formatScreenReaderValue={({ valueNow, valueMax }: any) =>
               Math.round((valueNow / valueMax) * 100) + ' percent'
             }
