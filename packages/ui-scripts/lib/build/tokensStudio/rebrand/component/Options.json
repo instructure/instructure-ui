@@ -14,7 +14,7 @@
     }
   },
   "optionsItem": {
-    "contentGap": {
+    "afterLabelContentVOffset": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
@@ -27,7 +27,7 @@
       "type": "spacing",
       "description": "code only token"
     },
-    "itemColor": {
+    "color": {
       "value": "{color.text.base}",
       "type": "color"
     },
@@ -51,15 +51,15 @@
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
     },
-    "itemFontSize": {
+    "fontSize": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
     },
-    "itemFontWeight": {
+    "fontWeight": {
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
-    "itemFontWeightSelected": {
+    "fontWeightSelected": {
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
@@ -76,7 +76,7 @@
       "type": "spacing",
       "description": "code only token"
     },
-    "itemLineHeight": {
+    "lineHeight": {
       "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     },
@@ -92,13 +92,17 @@
       "value": "{color.background.interactive.action.primary.base}",
       "type": "color"
     },
-    "selectedHoverBackgroundColor": {
+    "selectedHighlightedBackground": {
       "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
     },
     "selectedLabelColor": {
       "value": "{color.text.interactive.action.primary.base}",
       "type": "color"
+    },
+    "descriptionPaddingStart": {
+      "value": "0.25em",
+      "type": "spacing"
     }
   },
   "optionsSeparator": {
