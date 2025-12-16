@@ -101,7 +101,7 @@
       "type": "color"
     },
     "descriptionPaddingStart": {
-      "value": "0.25em",
+      "value": "0",
       "type": "spacing"
     }
   },

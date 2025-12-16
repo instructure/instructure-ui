@@ -77,7 +77,7 @@
       "type": "lineHeights"
     },
     "descriptionPaddingStart": {
-      "value": "0.25rem",
+      "value": "0",
       "type": "spacing",
       "description": "code only token"
     },
