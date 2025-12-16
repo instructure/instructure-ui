@@ -75,15 +75,15 @@
       "value": "{spacing.spaceXl}",
       "type": "spacing"
     },
-    "smallLineHeight": {
+    "valueSmallLineHeight": {
       "value": "1.75rem",
       "type": "lineHeights"
     },
-    "mediumLineHeight": {
+    "valueMediumLineHeight": {
       "value": "2.375rem",
       "type": "lineHeights"
     },
-    "largeLineHeight": {
+    "valueLargeLineHeight": {
       "value": "3rem",
       "type": "lineHeights"
     },
