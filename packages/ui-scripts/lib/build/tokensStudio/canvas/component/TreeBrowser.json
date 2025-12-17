@@ -5,7 +5,7 @@
       "type": "borderRadius"
     }
   },
-  "treeButton": {
+  "treeBrowserTreeButton": {
     "baseSpacingLarge": {
       "value": "{spacing.spaceLg}",
       "type": "spacing"
@@ -91,7 +91,7 @@
       "type": "lineHeights"
     }
   },
-  "treeCollection": {
+  "treeBrowserTreeCollection": {
     "baseSpacingLarge": {
       "value": "{spacing.spaceLg}",
       "type": "spacing"
