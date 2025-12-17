@@ -466,6 +466,26 @@ type: embed
 
 ```
 
+### ProgressBar
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderColor",note:"full border color for rebrand theme"},
+    {name:"borderColorInverse",note:"full border color for rebrand theme"}
+  ]}
+  removed={[
+    {name:"lineHeight",note:""},
+    {name:"meterBorderColorInverse",note:""},
+    {name:"meterBorderWidthInverse",note:""},
+  ]}
+/>
+
+```
+
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
