@@ -23,6 +23,7 @@
  */
 
 import type { ColorContrastTheme } from '@instructure/shared-types'
+import type { ColorContrastProps } from './props'
 /**
  * ---
  * private: true
@@ -33,7 +34,10 @@ import type { ColorContrastTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ColorContrastTheme) => {
+const generateStyle = (
+  componentTheme: ColorContrastTheme,
+  props: ColorContrastProps
+) => {
   const statusDescriptionStyle = (pass: boolean) => ({
     label: pass
       ? 'colorContrast__successDescription'
@@ -94,7 +98,8 @@ const generateStyle = (componentTheme: ColorContrastTheme) => {
     },
     label: {
       label: 'colorContrast__label',
-      marginBottom: componentTheme.labelBottomMargin
+      marginBottom: componentTheme.labelBottomMargin,
+      ...(props.labelLevel && { fontWeight: 'bold' })
     }
   }
 }

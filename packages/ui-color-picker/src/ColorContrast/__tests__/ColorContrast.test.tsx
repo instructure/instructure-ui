@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
@@ -73,6 +73,53 @@ describe('<ColorContrast />', () => {
 
         expect(container).toHaveTextContent(text)
       })
+    })
+  })
+
+  describe('labelLevel prop', () => {
+    it('should render label as div when labelLevel is not provided', async () => {
+      render(<ColorContrast {...testColors} {...testLabels} />)
+
+      const heading = screen.queryByRole('heading', {
+        name: testLabels.label
+      })
+      expect(heading).not.toBeInTheDocument()
+
+      const labelText = screen.getByText(testLabels.label)
+      expect(labelText).toBeInTheDocument()
+      expect(labelText.tagName.toLowerCase()).toBe('div')
+    })
+
+    it('should render label as Heading when labelLevel is provided', async () => {
+      render(<ColorContrast {...testColors} {...testLabels} labelLevel="h2" />)
+
+      const heading = screen.getByRole('heading', {
+        name: testLabels.label,
+        level: 2
+      })
+      expect(heading).toBeInTheDocument()
+    })
+
+    it('should render correct heading level', async () => {
+      const { rerender } = render(
+        <ColorContrast {...testColors} {...testLabels} labelLevel="h3" />
+      )
+
+      let heading = screen.getByRole('heading', {
+        name: testLabels.label,
+        level: 3
+      })
+      expect(heading).toBeInTheDocument()
+
+      rerender(
+        <ColorContrast {...testColors} {...testLabels} labelLevel="h1" />
+      )
+
+      heading = screen.getByRole('heading', {
+        name: testLabels.label,
+        level: 1
+      })
+      expect(heading).toBeInTheDocument()
     })
   })
 

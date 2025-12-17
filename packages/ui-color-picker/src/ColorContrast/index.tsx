@@ -33,6 +33,7 @@ import {
 import { withStyle } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
+import { Heading } from '@instructure/ui-heading'
 import { Pill } from '@instructure/ui-pill'
 
 import ColorIndicator from '../ColorIndicator'
@@ -191,6 +192,7 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
     const {
       styles,
       label,
+      labelLevel,
       normalTextLabel,
       largeTextLabel,
       graphicsTextLabel
@@ -211,9 +213,15 @@ class ColorContrast extends Component<ColorContrastProps, ColorContrastState> {
         data-cid="ColorContrast"
       >
         <div css={styles?.label}>
-          <Text weight="bold" as="div">
-            {label}
-          </Text>
+          {labelLevel ? (
+            <Heading as={labelLevel} level="reset">
+              {label}
+            </Heading>
+          ) : (
+            <Text weight="bold" as="div">
+              {label}
+            </Text>
+          )}
         </div>
         <Text size="x-large">{contrast}:1</Text>
         {this.renderPreview()}
