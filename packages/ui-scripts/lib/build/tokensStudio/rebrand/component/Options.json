@@ -101,7 +101,7 @@
       "type": "color"
     },
     "descriptionPaddingStart": {
-      "value": "0",
+      "value": "0rem",
       "type": "spacing"
     }
   },
@@ -111,7 +111,7 @@
       "type": "color"
     },
     "marginVertical": {
-      "value": "0",
+      "value": "0rem",
       "type": "spacing",
       "description": "code only token"
     },
