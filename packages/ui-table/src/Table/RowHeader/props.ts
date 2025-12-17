@@ -22,12 +22,8 @@
  * SOFTWARE.
  */
 
-import type {
-  OtherHTMLAttributes,
-  Renderable,
-  TableRowHeaderTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
 type TableRowHeaderOwnProps = {
   /**
@@ -42,7 +38,7 @@ type PropKeys = keyof TableRowHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowHeaderProps = TableRowHeaderOwnProps &
-  WithStyleProps<TableRowHeaderTheme, TableRowHeaderStyle> &
+  WithStyleProps<null, TableRowHeaderStyle> &
   OtherHTMLAttributes<TableRowHeaderOwnProps>
 
 type TableRowHeaderStyle = ComponentStyle<'rowHeader'>

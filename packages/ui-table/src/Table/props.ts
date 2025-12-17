@@ -24,10 +24,10 @@
 import React from 'react'
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  WithStyleProps
 } from '@instructure/emotion'
-import type { OtherHTMLAttributes, TableTheme } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 type RowChild = React.ReactElement<{ children: React.ReactElement }>
 
@@ -71,7 +71,7 @@ type PropKeys = keyof TableOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableProps = TableOwnProps &
-  WithStyleProps<TableTheme, TableStyle> &
+  WithStyleProps<null, TableStyle> &
   OtherHTMLAttributes<TableOwnProps>
 
 type TableStyle = ComponentStyle<'table'>

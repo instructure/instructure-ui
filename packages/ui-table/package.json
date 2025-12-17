@@ -28,7 +28,7 @@
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-a11y-content": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-icons-lucide": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-simple-select": "workspace:*",
     "@instructure/ui-utils": "workspace:*",

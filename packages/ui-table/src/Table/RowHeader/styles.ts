@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TableRowHeaderTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TableRowHeaderProps, TableRowHeaderStyle } from './props'
 
 /**
@@ -32,11 +32,10 @@ import type { TableRowHeaderProps, TableRowHeaderStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TableRowHeaderTheme,
+  componentTheme: NewComponentTypes['TableRowHeader'],
   props: TableRowHeaderProps
 ): TableRowHeaderStyle => {
   const { textAlign } = props
@@ -52,7 +51,7 @@ const generateStyle = (
       boxSizing: 'border-box',
       verticalAlign: 'middle',
       lineHeight: componentTheme.lineHeight,
-      padding: componentTheme.padding,
+      padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`,
       ...(textAlign && { textAlign })
     }
   }
