@@ -104,8 +104,13 @@
       "value": "0.0625rem",
       "type": "sizing"
     },
-    "margin": {
-      "value": "0 0.75rem",
+    "marginVertical": {
+      "value": "0",
+      "type": "sizing",
+      "description": "code only token"
+    },
+    "marginHorizontal": {
+      "value": "0.75rem",
       "type": "sizing",
       "description": "code only token"
     }
