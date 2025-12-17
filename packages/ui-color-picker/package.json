@@ -33,6 +33,7 @@
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-drilldown": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
+    "@instructure/ui-heading": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-pill": "workspace:*",
     "@instructure/ui-popover": "workspace:*",
