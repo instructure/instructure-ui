@@ -23,11 +23,12 @@
  */
 import { ThHTMLAttributes } from 'react'
 
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
-  OtherHTMLAttributes,
-  TableColHeaderTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+  ThemeOverrideValue,
+  ComponentStyle,
+  WithStyleProps
+} from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
   /**
@@ -72,18 +73,15 @@ type PropKeys = keyof TableColHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableColHeaderProps = TableColHeaderOwnProps &
-  WithStyleProps<TableColHeaderTheme, TableColHeaderStyle> &
-  OtherHTMLAttributes<
+  WithStyleProps<null, TableColHeaderStyle> & {
+    themeOverride?: ThemeOverrideValue
+  } & OtherHTMLAttributes<
     TableColHeaderOwnProps,
     ThHTMLAttributes<TableColHeaderOwnProps>
   >
 
 type TableColHeaderStyle = ComponentStyle<
-  | 'colHeader'
-  | 'button'
-  | 'buttonContent'
-  | 'unSortedIconColor'
-  | 'sortedIconColor'
+  'colHeader' | 'button' | 'buttonContent'
 >
 const allowedProps: AllowedPropKeys = [
   'id',

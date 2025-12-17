@@ -23,11 +23,12 @@
  */
 
 import React from 'react'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
-  OtherHTMLAttributes,
-  TableRowTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+  ThemeOverrideValue,
+  ComponentStyle,
+  WithStyleProps
+} from '@instructure/emotion'
 
 type TableRowOwnProps = {
   /**
@@ -59,8 +60,9 @@ type PropKeys = keyof TableRowOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowProps = TableRowOwnProps &
-  WithStyleProps<TableRowTheme, TableRowStyle> &
-  OtherHTMLAttributes<TableRowOwnProps>
+  WithStyleProps<null, TableRowStyle> & {
+    themeOverride?: ThemeOverrideValue
+  } & OtherHTMLAttributes<TableRowOwnProps>
 
 type TableRowStyle = ComponentStyle<'row'>
 

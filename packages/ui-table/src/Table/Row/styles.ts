@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TableRowTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TableRowProps, TableRowStyle } from './props'
 
 /**
@@ -36,7 +36,7 @@ import type { TableRowProps, TableRowStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TableRowTheme,
+  componentTheme: NewComponentTypes['TableRow'],
   props: TableRowProps,
   extraArgs: { isStacked: boolean; hover: boolean }
 ): TableRowStyle => {
@@ -66,7 +66,9 @@ const generateStyle = (
         ...(setHoverStateTo === true ? hoverStyles : { '&:hover': hoverStyles })
       }),
 
-      ...(extraArgs.isStacked && { padding: componentTheme.padding })
+      ...(extraArgs.isStacked && {
+        padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`
+      })
     }
   }
 }

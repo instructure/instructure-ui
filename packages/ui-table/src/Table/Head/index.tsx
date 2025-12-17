@@ -28,13 +28,12 @@ import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
 import type { SimpleSelectProps } from '@instructure/ui-simple-select'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { IconCheckLine } from '@instructure/ui-icons'
+import { CheckInstUIIcon } from '@instructure/ui-icons-lucide'
 import { warn } from '@instructure/console'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
@@ -48,7 +47,7 @@ parent: Table
 id: Table.Head
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Head extends Component<TableHeadProps> {
   static readonly componentId = 'Table.Head'
   static contextType = TableContext
@@ -154,7 +153,7 @@ class Head extends Component<TableHeadProps> {
                   <ScreenReaderContent></ScreenReaderContent>
                 )
               }
-              renderBeforeInput={selectedOption && IconCheckLine}
+              renderBeforeInput={selectedOption && CheckInstUIIcon}
               value={selectedOption}
               onChange={handleSelect}
             >
@@ -165,8 +164,12 @@ class Head extends Component<TableHeadProps> {
                   value={id}
                   renderBeforeLabel={
                     id === selectedOption
-                      ? IconCheckLine
-                      : () => <IconCheckLine style={{ color: 'transparent' }} />
+                      ? CheckInstUIIcon
+                      : () => (
+                          <span style={{ visibility: 'hidden' }}>
+                            <CheckInstUIIcon />
+                          </span>
+                        )
                   }
                 >
                   {label}

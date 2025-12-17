@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
+import type { Renderable, OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
-  OtherHTMLAttributes,
-  Renderable,
-  TableRowHeaderTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+  ThemeOverrideValue,
+  ComponentStyle,
+  WithStyleProps
+} from '@instructure/emotion'
 
 type TableRowHeaderOwnProps = {
   /**
@@ -42,8 +42,9 @@ type PropKeys = keyof TableRowHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowHeaderProps = TableRowHeaderOwnProps &
-  WithStyleProps<TableRowHeaderTheme, TableRowHeaderStyle> &
-  OtherHTMLAttributes<TableRowHeaderOwnProps>
+  WithStyleProps<null, TableRowHeaderStyle> & {
+    themeOverride?: ThemeOverrideValue
+  } & OtherHTMLAttributes<TableRowHeaderOwnProps>
 
 type TableRowHeaderStyle = ComponentStyle<'rowHeader'>
 const allowedProps: AllowedPropKeys = ['children', 'textAlign']

@@ -4243,9 +4243,9 @@ importers:
       '@instructure/ui-a11y-content':
         specifier: workspace:*
         version: link:../ui-a11y-content
-      '@instructure/ui-icons':
+      '@instructure/ui-icons-lucide':
         specifier: workspace:*
-        version: link:../ui-icons
+        version: link:../ui-icons-lucide
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils

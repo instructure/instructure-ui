@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 import React from 'react'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type {
-  OtherHTMLAttributes,
-  TableBodyTheme
-} from '@instructure/shared-types'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+  ThemeOverrideValue,
+  ComponentStyle,
+  WithStyleProps
+} from '@instructure/emotion'
 
 type TableBodyOwnProps = {
   /**
@@ -43,8 +44,9 @@ type PropKeys = keyof TableBodyOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableBodyProps = TableBodyOwnProps &
-  WithStyleProps<TableBodyTheme, TableBodyStyle> &
-  OtherHTMLAttributes<TableBodyOwnProps>
+  WithStyleProps<null, TableBodyStyle> & {
+    themeOverride?: ThemeOverrideValue
+  } & OtherHTMLAttributes<TableBodyOwnProps>
 
 type TableBodyStyle = ComponentStyle<'body'>
 const allowedProps: AllowedPropKeys = ['children']
