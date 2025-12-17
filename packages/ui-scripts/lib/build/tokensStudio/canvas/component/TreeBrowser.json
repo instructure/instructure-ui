@@ -1,7 +1,7 @@
 {
   "treeBrowser": {
     "borderRadius": {
-      "value": "0.375rem",
+      "value": "{borderRadius.md}",
       "type": "borderRadius"
     }
   },
