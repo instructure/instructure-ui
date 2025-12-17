@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ProgressBarTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { ProgressBarProps, ProgressBarStyle } from './props'
 
 /**
@@ -32,12 +32,13 @@ import type { ProgressBarProps, ProgressBarStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ProgressBarTheme,
-  props: ProgressBarProps
+  componentTheme: NewComponentTypes['ProgressBar'],
+  props: ProgressBarProps,
+  _sharedTokens: SharedTokens
 ): ProgressBarStyle => {
   const {
     valueNow = 0,
@@ -82,12 +83,24 @@ const generateStyle = (
       trackLayout: { background: componentTheme.trackColor },
       trackBorder: {
         borderBottomColor: componentTheme.trackBottomBorderColor
+      },
+      value: {
+        color: componentTheme.textColor
+      },
+      htmlProgress: {
+        borderColor: componentTheme.borderColor
       }
     },
     'primary-inverse': {
       trackLayout: { background: componentTheme.trackColorInverse },
       trackBorder: {
         borderBottomColor: componentTheme.trackBottomBorderColorInverse
+      },
+      value: {
+        color: componentTheme.textColorInverse
+      },
+      htmlProgress: {
+        borderColor: componentTheme.borderColorInverse
       }
     }
   }
@@ -167,7 +180,8 @@ const generateStyle = (
       paddingInlineStart: componentTheme.valuePadding,
       flex: '0 0 5.625rem',
 
-      ...sizeVariants[size!].value
+      ...sizeVariants[size!].value,
+      ...colorVariants[color!].value
     },
 
     htmlProgress: {
@@ -180,7 +194,9 @@ const generateStyle = (
       height: '100%',
       boxSizing: 'border-box',
       zIndex: -1,
-      opacity: 0
+      opacity: 0,
+
+      ...colorVariants[color!].htmlProgress
     }
   }
 }
