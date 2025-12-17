@@ -117,6 +117,35 @@ The following variant values have been **deprecated** and will be removed in a f
 - theme variable `iconPlusTextMarginSmall` is now removed
 - theme variable `textUnderlineOffset` is now removed
 
+## New icons
+
+InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set (see below).
+
+### Lucide Icons Package
+
+InstUI v12 introduces a new icon package **`@instructure/ui-icons-lucide`** based on the [Lucide](https://lucide.dev/icons/) icon library, providing 1,700+ icons with improved theming and RTL support. The new Lucide icons are wrapped with `wrapLucideIcon` to integrate with InstUI's theming system while maintaining access to all native Lucide props.
+
+**Key differences from `SVGIcon`/`InlineSVG`:**
+
+| Property        | Old API (SVGIcon)                                                                               | New API (Lucide)                                                                                      |
+| :-------------- | :---------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| **size**        | `'x-small'` \| `'small'` \| `'medium'` \| `'large'` \| `'x-large'`                              | `'xs'` \| `'sm'` \| `'md'` \| `'lg'` \| `'xl'` \| `'2xl'` \| `number` (pixels)                        |
+| **color**       | Limited tokens: `'primary'` \| `'secondary'` \| `'success'` \| `'error'` \| `'warning'` \| etc. | 60+ theme tokens (`'baseColor'`, `'successColor'`, `'actionPrimaryBaseColor'`, etc.) or any CSS color |
+| **strokeWidth** | ❌ Not available                                                                                | `'xs'` \| `'sm'` \| `'md'` \| `'lg'` \| `'xl'` \| `'2xl'` \| `number` \| `string`                     |
+| **children**    | `React.ReactNode`                                                                               | ❌ Removed                                                                                            |
+| **focusable**   | `boolean`                                                                                       | ❌ Removed                                                                                            |
+| **description** | `string` (combined with title)                                                                  | ❌ Removed (use `title` only)                                                                         |
+| **src**         | `string`                                                                                        | ❌ Removed                                                                                            |
+
+The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to Lucide icons and will be spread onto the nested SVG element. Existing `@instructure/ui-icons` package remains available for legacy Instructure-specific icons.
+
+## Removal of deprecated props/components/APIs
+
+### Text
+
+- `alert` color has been removed. Please use `primary` instead.
+- Some prop values have been deprecated, see [Text](/Text) for more details.
+
 ### Pill
 
 #### Deprecated color prop values
@@ -147,6 +176,53 @@ The following `color` prop values have been **removed**:
   - `errorTextColor` (for text color)
   - `errorBorderColor` (for border color)
 - theme variable `alertColor` has been removed (use `info*` variables instead)
+
+## API Changes
+
+### Focus rings
+
+Focus rings are now styled in a central pseudo-component called `SharedTokens`. You can override here how it looks, for example:
+
+```js
+---
+type: example
+---
+<InstUISettingsProvider
+  theme={{
+  themeOverrides: {
+    canvas: {
+      componentOverrides: {
+        SharedTokens: {
+          focusOutline: {
+            infoColor: 'red',
+            offset: '2rem'
+          }
+        }
+      }
+    }
+  }
+}}>
+  <TextInput renderLabel="Name" placeholder="Doe, John Doe"/>
+</InstUISettingsProvider>
+```
+### Breadcrumb
+
+#### New tokens 
+
+- gapSm - Gap spacing for small size breadcrumbs
+- gapMd - Gap spacing for medium size breadcrumbs
+- gapLg - Gap spacing for large size breadcrumbs
+
+#### Theme variable changes
+
+- theme variable `fontFamily` is now removed (handled in link component)
+- theme variable `separatorColor` is now removed (handled in link component)
+- theme variable `smallSeparatorFontSize` is now removed (handled in link component)
+- theme variable `smallFontSize` is now removed (handled in link component)
+- theme variable `mediumSeparatorFontSize` is now removed (handled in link component)
+- theme variable `mediumFontSize` is now removed (handled in link component)
+- theme variable `largeSeparatorFontSize` is now removed (handled in link component)
+- theme variable `largeFontSize` is now removed (handled in link component)
 
 ### RadioInput
 
@@ -326,6 +402,37 @@ The following theme variables have been removed. Gap styling now uses `sharedTok
 - theme variable `largeWidth` is now renamed to `widthXl`
 - theme variable `borderStyle` is now removed
 - theme variable `position` is now removed
+
+### Table.Cell
+
+- theme variable `padding` is now removed
+- theme variable `borderColor` is now removed
+- theme variable `paddingVertical` has been added
+- theme variable `paddingHorizontal` has been added
+
+### Table.ColHeader
+
+- theme variable `padding` is now removed
+- theme variable `paddingVertical` has been added
+- theme variable `paddingHorizontal` has been added
+- theme variable `borderColor` is now removed
+- theme variable `focusOutlineColor` is now removed
+- theme variable `focusOutlineStyle` is now removed
+- theme variable `focusOutlineWidth` is now removed
+- theme variable `sortedIconColor` is now removed
+- theme variable `unsortedIconColor` is now removed
+
+### Table.Row
+
+- theme variable `padding` is now removed
+- theme variable `paddingVertical` has been added
+- theme variable `paddingHorizontal` has been added
+
+### Table.RowHeader
+
+- theme variable `padding` is now removed
+- theme variable `paddingVertical` has been added
+- theme variable `paddingHorizontal` has been added
 
 ### View
 

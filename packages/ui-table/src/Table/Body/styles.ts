@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TableBodyTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TableBodyStyle } from './props'
 
 /**
@@ -33,7 +33,9 @@ import type { TableBodyStyle } from './props'
  * @param  {Object} componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TableBodyTheme): TableBodyStyle => {
+const generateStyle = (
+  componentTheme: NewComponentTypes['TableBody']
+): TableBodyStyle => {
   return {
     body: {
       label: 'body',

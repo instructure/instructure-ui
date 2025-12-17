@@ -25,18 +25,17 @@
 import { Component } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
-import {
-  IconMiniArrowUpLine,
-  IconMiniArrowDownLine,
-  IconMiniArrowDoubleLine
-} from '@instructure/ui-icons'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { TableColHeaderProps } from './props'
 import { allowedProps } from './props'
+import {
+  ChevronsUpDownInstUIIcon,
+  ChevronUpInstUIIcon,
+  ChevronDownInstUIIcon
+} from '@instructure/ui-icons-lucide'
 
 /**
 ---
@@ -44,7 +43,7 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ColHeader extends Component<TableColHeaderProps> {
   static readonly componentId = 'Table.ColHeader'
 
@@ -72,16 +71,16 @@ class ColHeader extends Component<TableColHeaderProps> {
   }
 
   renderSortArrow() {
-    const { sortDirection, onRequestSort, styles } = this.props
+    const { sortDirection, onRequestSort } = this.props
 
     if (sortDirection === 'ascending') {
-      return <IconMiniArrowUpLine css={styles?.sortedIconColor} />
+      return <ChevronUpInstUIIcon color="infoColor" size="sm" />
     }
     if (sortDirection === 'descending') {
-      return <IconMiniArrowDownLine css={styles?.sortedIconColor} />
+      return <ChevronDownInstUIIcon color="infoColor" size="sm" />
     }
     if (onRequestSort) {
-      return <IconMiniArrowDoubleLine css={styles?.unSortedIconColor} />
+      return <ChevronsUpDownInstUIIcon color="baseColor" size="sm" />
     }
     return undefined
   }
