@@ -110,14 +110,19 @@
       "value": "{color.stroke.base}",
       "type": "color"
     },
-    "margin": {
-      "value": "0 0.75rem",
+    "marginVertical": {
+      "value": "0",
       "type": "spacing",
       "description": "code only token"
     },
     "height": {
       "value": "{borderWidth.sm}",
       "type": "borderWidth"
+    },
+    "marginHorizontal": {
+      "value": "0.75rem",
+      "type": "spacing",
+      "description": "code only token"
     }
   }
 }
