@@ -22,7 +22,7 @@
       "description": "code only token"
     },
     "horizontalLabelPadding": {
-      "value": "0",
+      "value": "0rem",
       "type": "spacing"
     },
     "verticalNestedLabelPadding": {
@@ -157,7 +157,7 @@
       "type": "sizing"
     },
     "marginVertical": {
-      "value": "0",
+      "value": "0rem",
       "type": "spacing",
       "description": "code only"
     },
