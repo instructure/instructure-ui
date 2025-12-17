@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TableHeadTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TableHeadStyle } from './props'
 
 /**
@@ -33,7 +33,9 @@ import type { TableHeadStyle } from './props'
  * @param  {Object} componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TableHeadTheme): TableHeadStyle => {
+const generateStyle = (
+  componentTheme: NewComponentTypes['TableHead']
+): TableHeadStyle => {
   return {
     head: {
       label: 'head',
