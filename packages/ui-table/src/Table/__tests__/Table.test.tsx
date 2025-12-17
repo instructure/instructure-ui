@@ -257,7 +257,7 @@ describe('<Table />', async () => {
       })
       const arrow = container.querySelector('svg')
 
-      expect(arrow).toHaveAttribute('name', 'IconMiniArrowUp')
+      expect(arrow).toHaveAttribute('name', 'ChevronUp')
     })
 
     it('can render down arrow for descending order', async () => {
@@ -267,7 +267,7 @@ describe('<Table />', async () => {
       })
       const arrow = container.querySelector('svg')
 
-      expect(arrow).toHaveAttribute('name', 'IconMiniArrowDown')
+      expect(arrow).toHaveAttribute('name', 'ChevronDown')
     })
 
     it('calls onRequestSort when column header is clicked', async () => {
@@ -325,7 +325,7 @@ describe('<Table />', async () => {
       )
       const icon = container.querySelector('svg')
 
-      expect(icon).toHaveAttribute('name', 'IconCheck')
+      expect(icon).toHaveAttribute('name', 'Check')
     })
 
     it('creates proper aria-sort attributes (ascending)', async () => {

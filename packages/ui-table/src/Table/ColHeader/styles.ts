@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TableColHeaderTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { TableColHeaderProps, TableColHeaderStyle } from './props'
 
 /**
@@ -32,11 +32,13 @@ import type { TableColHeaderProps, TableColHeaderStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TableColHeaderTheme,
-  props: TableColHeaderProps
+  componentTheme: NewComponentTypes['TableColHeader'],
+  props: TableColHeaderProps,
+  sharedTokens: SharedTokens
 ): TableColHeaderStyle => {
   const { onRequestSort, textAlign } = props
 
@@ -46,7 +48,7 @@ const generateStyle = (
     fontFamily: componentTheme.fontFamily,
     fontWeight: 'bold',
     lineHeight: componentTheme.lineHeight,
-    padding: componentTheme.padding
+    padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`
   }
 
   const buttonTextAlignVariants = {
@@ -62,7 +64,7 @@ const generateStyle = (
       verticalAlign: 'middle',
       boxSizing: 'border-box',
       ...(!onRequestSort && headerStyle),
-      textAlign
+      textAlign: textAlign
     },
     button: {
       label: 'colHeader__button',
@@ -78,22 +80,14 @@ const generateStyle = (
       outline: 'none',
       '&::-moz-focus-inner': { border: 0 },
       '&:focus': {
-        outline: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`
+        outline: `${sharedTokens.focusOutline.width} ${sharedTokens.focusOutline.style} ${sharedTokens.focusOutline.infoColor}`
       },
-      ...buttonTextAlignVariants[textAlign!]
+      ...(textAlign && buttonTextAlignVariants[textAlign])
     },
     buttonContent: {
       label: 'colHeader__buttonContent',
       display: 'flex',
       alignItems: 'center'
-    },
-    unSortedIconColor: {
-      label: 'colHeader__unSortedIconColor',
-      color: componentTheme.unSortedIconColor
-    },
-    sortedIconColor: {
-      label: 'colHeader__sortedIconColor',
-      color: componentTheme.sortedIconColor
     }
   }
 }

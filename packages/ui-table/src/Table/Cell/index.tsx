@@ -27,10 +27,9 @@ import { Component, ContextType } from 'react'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { TableCellProps } from './props'
 import { allowedProps } from './props'
 import TableContext from '../TableContext'
@@ -41,7 +40,7 @@ parent: Table
 id: Table.Cell
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Cell extends Component<TableCellProps> {
   static readonly componentId = 'Table.Cell'
   static contextType = TableContext
