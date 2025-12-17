@@ -104,7 +104,7 @@
       "type": "sizing"
     },
     "marginVertical": {
-      "value": "0",
+      "value": "0rem",
       "type": "sizing",
       "description": "code only token"
     },
