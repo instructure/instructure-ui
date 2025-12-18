@@ -13,7 +13,7 @@
       "type": "color"
     },
     "handleFocusOutlineColor": {
-      "value": "{color.background.brand}",
+      "value": "{color.background.info}",
       "type": "color",
       "description": "Deprecated, remove with \"deprecated\" thumbVariant"
     },
@@ -110,7 +110,7 @@
           "blur": "{dropShadow.blur.elevation1.dropshadow2}",
           "spread": "{dropShadow.spread.elevation1.dropshadow2}",
           "color": "{color.dropShadow.shadowColor2}",
-          "type": "innerShadow"
+          "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
