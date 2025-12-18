@@ -1,0 +1,76 @@
+{
+  "toggleDetails": {
+    "filledBackgroundColor": {
+      "value": "{color.background.interactive.action.secondary.base}",
+      "type": "color"
+    },
+    "filledBorderColor": {
+      "value": "{color.stroke.interactive.action.secondary.base}",
+      "type": "color"
+    },
+    "filledBorderRadius": {
+      "value": "{borderRadius.interactive.base}",
+      "type": "borderRadius"
+    },
+    "filledBorderStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "filledBorderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "filledPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSizeLarge": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "fontSizeMedium": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontSizeSmall": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "iconMargin": {
+      "value": "0.375rem",
+      "type": "spacing"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.base}",
+      "type": "lineHeights"
+    },
+    "textColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "toggleBorderRadius": {
+      "value": "{borderRadius.interactive.base}",
+      "type": "borderRadius"
+    },
+    "toggleBorderStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "toggleBorderWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "togglePadding": {
+      "value": "0.375rem",
+      "type": "spacing"
+    }
+  }
+}
