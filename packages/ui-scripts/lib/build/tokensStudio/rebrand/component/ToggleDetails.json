@@ -1,29 +1,5 @@
 {
   "toggleDetails": {
-    "filledBackgroundColor": {
-      "value": "{color.background.interactive.action.secondary.base}",
-      "type": "color"
-    },
-    "filledBorderColor": {
-      "value": "{color.stroke.interactive.action.secondary.base}",
-      "type": "color"
-    },
-    "filledBorderRadius": {
-      "value": "{borderRadius.interactive.base}",
-      "type": "borderRadius"
-    },
-    "filledBorderStyle": {
-      "value": "solid",
-      "type": "text"
-    },
-    "filledBorderWidth": {
-      "value": "{borderWidth.sm}",
-      "type": "borderWidth"
-    },
-    "filledPadding": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
     "fontFamily": {
       "value": "{fontFamily.base}",
       "type": "fontFamilies"
