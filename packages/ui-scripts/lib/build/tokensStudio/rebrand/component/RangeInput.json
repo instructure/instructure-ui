@@ -9,7 +9,7 @@
       "type": "color"
     },
     "handleFocusBackground": {
-      "value": "{color.background.brand}",
+      "value": "{color.background.info}",
       "type": "color"
     },
     "handleFocusOutlineColor": {
