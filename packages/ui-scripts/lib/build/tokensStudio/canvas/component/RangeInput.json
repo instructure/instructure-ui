@@ -115,7 +115,7 @@
           "blur": "{dropShadow.blur.elevation1.dropshadow2}",
           "spread": "{dropShadow.spread.elevation1.dropshadow2}",
           "color": "{color.dropShadow.shadowColor2}",
-          "type": "innerShadow"
+          "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
