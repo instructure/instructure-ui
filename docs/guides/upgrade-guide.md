@@ -174,6 +174,48 @@ type: example
 
 - theme variable `lineHeight` is now removed.
 
+### Flex
+
+The following theme variables have been removed. Gap styling now uses `sharedTokens.legacySpacing`:
+
+- `gapButtons`
+- `gapCheckboxes`
+- `gapDataPoints`
+- `gapInputFields`
+- `gapLarge`
+- `gapMedium`
+- `gapMediumSmall`
+- `gapModalElements`
+- `gapModuleElements`
+- `gapPaddingCardLarge`
+- `gapPaddingCardMedium`
+- `gapPaddingCardSmall`
+- `gapRadios`
+- `gapSectionElements`
+- `gapSections`
+- `gapSelects`
+- `gapSmall`
+- `gapSpace0`
+- `gapSpace12`
+- `gapSpace16`
+- `gapSpace2`
+- `gapSpace24`
+- `gapSpace36`
+- `gapSpace4`
+- `gapSpace48`
+- `gapSpace60`
+- `gapSpace8`
+- `gapStatusIndicators`
+- `gapTags`
+- `gapTextareas`
+- `gapToggles`
+- `gapTrayElements`
+- `gapXLarge`
+- `gapXSmall`
+- `gapXxLarge`
+- `gapXxSmall`
+- `gapXxxSmall`
+
 ### FormFieldGroup
 
 - theme variable `errorBorderColor` is now removed

@@ -31,13 +31,12 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Item } from './Item'
 import type { FlexItemProps } from './Item/props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { FlexProps } from './props'
@@ -48,7 +47,7 @@ category: components
 ---
 @module Flex
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Flex extends Component<FlexProps> {
   static readonly componentId = 'Flex'
 
