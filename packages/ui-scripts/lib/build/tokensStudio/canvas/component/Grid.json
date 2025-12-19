@@ -1,12 +1,12 @@
 {
   "grid": {
     "mediumMin": {
-      "value": "48em",
-      "type": "sizing"
+      "value": "min-width: 48em",
+      "type": "other"
     },
     "xLargeMin": {
-      "value": "75em",
-      "type": "sizing"
+      "value": "min-width: 75em",
+      "type": "other"
     },
     "spacingLarge": {
       "value": "2.25rem",
@@ -27,16 +27,16 @@
   },
   "gridCol": {
     "mediumMin": {
-      "value": "48em",
-      "type": "sizing"
+      "value": "min-width: 48em",
+      "type": "other"
     },
     "largeMin": {
-      "value": "62em",
-      "type": "sizing"
+      "value": "min-width: 62em",
+      "type": "other"
     },
     "xLargeMin": {
-      "value": "75em",
-      "type": "sizing"
+      "value": "min-width: 75em",
+      "type": "other"
     },
     "spacingLarge": {
       "value": "1.125rem",
@@ -53,16 +53,16 @@
   },
   "gridRow": {
     "mediumMin": {
-      "value": "48em",
-      "type": "sizing"
+      "value": "min-width: 48em",
+      "type": "other"
     },
     "largeMin": {
-      "value": "62em",
-      "type": "sizing"
+      "value": "min-width: 62em",
+      "type": "other"
     },
     "xLargeMin": {
-      "value": "75em",
-      "type": "sizing"
+      "value": "min-width: 75em",
+      "type": "other"
     },
     "spacingLarge": {
       "value": "2.25rem",
