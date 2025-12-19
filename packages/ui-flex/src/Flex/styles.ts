@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { getShorthandPropValue } from '@instructure/emotion'
-import type { FlexTheme } from '@instructure/shared-types'
+import { getShorthandPropValue, makeThemeVars } from '@instructure/emotion'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { FlexProps, FlexStyle } from './props'
 
 /**
@@ -42,8 +42,9 @@ import type { FlexProps, FlexStyle } from './props'
  */
 
 const generateStyle = (
-  componentTheme: FlexTheme,
-  props: FlexProps
+  componentTheme: NewComponentTypes['Flex'],
+  props: FlexProps,
+  SharedTokens: SharedTokens
 ): FlexStyle => {
   const { justifyItems, wrap, direction, gap } = props
 
@@ -87,8 +88,9 @@ const generateStyle = (
   }
 
   // gap css prop
-  const getGapValue = (gap: FlexProps['gap'], theme: FlexTheme) =>
-    getShorthandPropValue('Flex', theme, gap, 'gap')
+  const gapValues = makeThemeVars('gap', SharedTokens.legacySpacing)
+  const getGapValue = (gap: FlexProps['gap'], values: Record<string, string>) =>
+    getShorthandPropValue('Flex', values, gap, 'gap')
 
   return {
     flex: {
@@ -99,7 +101,7 @@ const generateStyle = (
       justifyContent: justifyItemsValues[justifyItems!],
       flexWrap: wrapValues[wrap!],
       flexDirection: flexDirectionValues[direction!],
-      gap: getGapValue(gap!, componentTheme)
+      gap: getGapValue(gap!, gapValues)
     }
   }
 }
