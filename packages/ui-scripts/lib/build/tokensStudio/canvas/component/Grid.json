@@ -4,10 +4,6 @@
       "value": "48em",
       "type": "sizing"
     },
-    "largeMin": {
-      "value": "62em",
-      "type": "sizing"
-    },
     "xLargeMin": {
       "value": "75em",
       "type": "sizing"
@@ -23,6 +19,10 @@
     "spacingSmall": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
+    },
+    "largeMin": {
+      "value": "min-width: 62em",
+      "type": "other"
     }
   },
   "gridCol": {
