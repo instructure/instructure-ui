@@ -532,7 +532,7 @@ type: embed
 | Tabs.Panel | elementRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tabs.Panel | active | `boolean` | No | `false` | Only one `<Tabs.Panel />` can be marked as active. The marked panel's content is rendered for all the `<Tabs.Panel />`s. |
 | Tabs.Panel | unmountOnExit | `boolean` | No | `true` | When set to false, the tabPanel only will be hidden, but not dismounted when not active |
-| Tabs.Panel | tabIndex | `number \| null` | No | - | The tabIndex of the tabpanel element. According to WCAG guidelines, this should only be set to 0 when the panel doesn't contain any focusable elements. If the panel contains focusable elements (like buttons, inputs, etc.), this should be set to -1 or null to omit the attribute entirely. Defaults to 0 for backwards compatibility. |
+| Tabs.Panel | tabIndex | `number` | No | - | The tabIndex of the tabpanel element. According to WCAG guidelines, this should only be set to 0 when the panel doesn't contain any focusable elements. If the panel contains focusable elements (like buttons, inputs, etc.), this should be set to -1. |
 | Tabs.Tab | variant | `'default' \| 'secondary'` | No | `'default'` |  |
 | Tabs.Tab | id | `string` | Yes | - |  |
 | Tabs.Tab | index | `number` | Yes | - |  |
