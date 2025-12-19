@@ -4,11 +4,11 @@
       "value": "48em",
       "type": "sizing"
     },
-    "LargeMin": {
+    "largeMin": {
       "value": "62em",
       "type": "sizing"
     },
-    "XLargeMin": {
+    "xLargeMin": {
       "value": "75em",
       "type": "sizing"
     },
@@ -30,11 +30,11 @@
       "value": "48em",
       "type": "sizing"
     },
-    "LargeMin": {
+    "largeMin": {
       "value": "62em",
       "type": "sizing"
     },
-    "XLargeMin": {
+    "xLargeMin": {
       "value": "75em",
       "type": "sizing"
     },
@@ -56,11 +56,11 @@
       "value": "48em",
       "type": "sizing"
     },
-    "LargeMin": {
+    "largeMin": {
       "value": "62em",
       "type": "sizing"
     },
-    "XLargeMin": {
+    "xLargeMin": {
       "value": "75em",
       "type": "sizing"
     },
