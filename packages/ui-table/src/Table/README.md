@@ -908,7 +908,7 @@ By default, the options in the `Select` for sorting in stacked layout are genera
 ### A sortable table with selection and pagination
 
 The composition order is important. `SelectableTable` -> `PaginatedTable` -> `SortableTable`, so
-that selection does not re-paginate or re-sort the table, and pagination does not re-sort the table.
+that selection does not re-paginate or re-sort the table, and pagination does not re-sort the table. To prevent screen readers from announcing the label of the `Select All` checkbox when navigating through the rows, an aria-label should be added to the corresponding `Table.ColHeader`, as shown in our example.
 
 - ```javascript
   class SelectableTable extends React.Component {
@@ -976,10 +976,12 @@ that selection does not re-paginate or re-sort the table, and pagination does no
                   }
                 >
                   <Table.Row>
-                    <Table.ColHeader id="select">
+                    <Table.ColHeader id="select" aria-label="Select">
                       <Checkbox
                         label={
-                          <ScreenReaderContent>Select all</ScreenReaderContent>
+                          <ScreenReaderContent>
+                            Select all rows
+                          </ScreenReaderContent>
                         }
                         onChange={() => this.handleSelectAll(allSelected)}
                         checked={allSelected}
@@ -1315,10 +1317,12 @@ that selection does not re-paginate or re-sort the table, and pagination does no
                 }
               >
                 <Table.Row>
-                  <Table.ColHeader id="select">
+                  <Table.ColHeader id="select" aria-label="Select">
                     <Checkbox
                       label={
-                        <ScreenReaderContent>Select all</ScreenReaderContent>
+                        <ScreenReaderContent>
+                          Select all rows
+                        </ScreenReaderContent>
                       }
                       onChange={() => handleSelectAll(allSelected)}
                       checked={allSelected}
@@ -2260,6 +2264,18 @@ Custom table with `stacked` layout support:
   ```
 
 ### Guidelines
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>In the case of a Table with selection, to prevent screenreaders from announcing the label of the select all checkbox when navigating in the rows, an aria-label should be added to the corresponding Table.Colheader like in our example above.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 ```js
 ---
