@@ -8,18 +8,6 @@
       "value": "min-width: 75em",
       "type": "other"
     },
-    "spacingLarge": {
-      "value": "2.25rem",
-      "type": "spacing"
-    },
-    "spacingMedium": {
-      "value": "{spacing.spaceXl}",
-      "type": "spacing"
-    },
-    "spacingSmall": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
     "largeMin": {
       "value": "min-width: 62em",
       "type": "other"
