@@ -56,17 +56,13 @@
       "value": "{color.icon.onColor}",
       "type": "color"
     },
-    "infoBoderColor": {
+    "infoBorderColor": {
       "value": "{color.stroke.info}",
       "type": "color"
     },
     "infoIconBackground": {
       "value": "{color.background.info}",
       "type": "color"
-    },
-    "marginTop": {
-      "value": "0.75rem",
-      "type": "other"
     },
     "successBorderColor": {
       "value": "{color.stroke.success}",
