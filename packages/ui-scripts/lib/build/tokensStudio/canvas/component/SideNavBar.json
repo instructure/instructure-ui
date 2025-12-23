@@ -1,0 +1,107 @@
+{
+  "sideNavBar": {
+    "backgroundColor": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "fill": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "fontColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "marginBottom": {
+      "value": "0.75rem",
+      "type": "other"
+    },
+    "minimizedWidth": {
+      "value": "3.375rem",
+      "type": "other"
+    },
+    "toggleTransition": {
+      "value": "300ms",
+      "type": "other"
+    },
+    "width": {
+      "value": "5.25rem",
+      "type": "sizing"
+    }
+  },
+  "sideNavBarItem": {
+    "backgroundColor": {
+      "value": "transparent",
+      "type": "other"
+    },
+    "contentPadding": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "fontColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontSize": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "hoverBackgroundColor": {
+      "value": "{color.background.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "iconColor": {
+      "value": "{color.icon.onColor}",
+      "type": "color"
+    },
+    "iconSize": {
+      "value": "1.625rem",
+      "type": "sizing"
+    },
+    "innerFocusOutline": {
+      "value": "inset 0 0 0 0.25rem #FFFFFF",
+      "type": "other",
+      "description": "code only token"
+    },
+    "lineHeight": {
+      "value": "{lineHeight.paragraph.base}",
+      "type": "lineHeights"
+    },
+    "linkTextDecoration": {
+      "value": "none",
+      "type": "other"
+    },
+    "outerFocusOutline": {
+      "value": "inset 0 0 0 0.125rem #6A7883",
+      "type": "other"
+    },
+    "selectedBackgroundColor": {
+      "value": "{color.background.brand}",
+      "type": "color"
+    },
+    "selectedFontColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "selectedIconColor": {
+      "value": "{color.icon.onColor}",
+      "type": "color"
+    },
+    "selectedInnerFocusOutline": {
+      "value": "inset 0 0 0 0.25rem #2B7ABC",
+      "type": "other"
+    },
+    "selectedOuterFocusOutline": {
+      "value": "inset 0 0 0 0.125rem #FFFFFF",
+      "type": "other"
+    }
+  }
+}
