@@ -30,7 +30,7 @@ const Example = () => {
       >
         <Button>Focus Me</Button>
       </Tabs.Panel>
-      <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled tabIndex={0}>
+      <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -91,7 +91,7 @@ const Example = () => {
       <Tabs.Panel renderTitle="First Tab" isSelected={selectedIndex === 0} tabIndex={0}>
         Hello World
       </Tabs.Panel>
-      <Tabs.Panel renderTitle="Disabled Tab" isDisabled tabIndex={0}>
+      <Tabs.Panel renderTitle="Disabled Tab" isDisabled>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -285,7 +285,7 @@ const Example = () => {
           >
             <Button>Focus Me</Button>
           </Tabs.Panel>
-          <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled tabIndex={0}>
+          <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
