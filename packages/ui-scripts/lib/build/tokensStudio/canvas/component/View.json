@@ -13,11 +13,11 @@
       "type": "color"
     },
     "borderColorPrimary": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.muted}",
       "type": "color"
     },
     "borderColorSecondary": {
-      "value": "{color.stroke.muted}",
+      "value": "{color.stroke.base}",
       "type": "color"
     },
     "borderColorSuccess": {
@@ -53,7 +53,7 @@
       "type": "color"
     },
     "backgroundPrimary": {
-      "value": "{color.background.base}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "backgroundSecondary": {

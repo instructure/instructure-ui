@@ -1,16 +1,42 @@
 {
   "grid": {
     "mediumMin": {
-      "value": "48em",
-      "type": "sizing"
+      "value": "min-width: 48em",
+      "type": "other"
     },
-    "LargeMin": {
-      "value": "62em",
-      "type": "sizing"
+    "xLargeMin": {
+      "value": "min-width: 75em",
+      "type": "other"
     },
-    "XLargeMin": {
-      "value": "75em",
-      "type": "sizing"
+    "spacingLarge": {
+      "value": "2.25rem",
+      "type": "spacing"
+    },
+    "spacingMedium": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "spacingSmall": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "largeMin": {
+      "value": "min-width: 62em",
+      "type": "other"
+    }
+  },
+  "gridCol": {
+    "mediumMin": {
+      "value": "min-width: 48em",
+      "type": "other"
+    },
+    "largeMin": {
+      "value": "min-width: 62em",
+      "type": "other"
+    },
+    "xLargeMin": {
+      "value": "min-width: 75em",
+      "type": "other"
     },
     "spacingLarge": {
       "value": "2.25rem",
@@ -25,44 +51,18 @@
       "type": "spacing"
     }
   },
-  "gridCol": {
-    "mediumMin": {
-      "value": "48em",
-      "type": "sizing"
-    },
-    "LargeMin": {
-      "value": "62em",
-      "type": "sizing"
-    },
-    "XLargeMin": {
-      "value": "75em",
-      "type": "sizing"
-    },
-    "spacingLarge": {
-      "value": "1.125rem",
-      "type": "spacing"
-    },
-    "spacingMedium": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
-    "spacingSmall": {
-      "value": "0.375rem",
-      "type": "spacing"
-    }
-  },
   "gridRow": {
     "mediumMin": {
-      "value": "48em",
-      "type": "sizing"
+      "value": "min-width: 48em",
+      "type": "other"
     },
-    "LargeMin": {
-      "value": "62em",
-      "type": "sizing"
+    "largeMin": {
+      "value": "min-width: 62em",
+      "type": "other"
     },
-    "XLargeMin": {
-      "value": "75em",
-      "type": "sizing"
+    "xLargeMin": {
+      "value": "min-width: 75em",
+      "type": "other"
     },
     "spacingLarge": {
       "value": "2.25rem",

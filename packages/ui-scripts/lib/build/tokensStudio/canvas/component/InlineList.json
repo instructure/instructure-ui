@@ -36,10 +36,6 @@
       "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     },
-    "marginBottomDefault": {
-      "value": "{spacing.space2xs}",
-      "type": "spacing"
-    },
     "noneSpacing": {
       "value": "{spacing.spaceSm}",
       "type": "spacing"

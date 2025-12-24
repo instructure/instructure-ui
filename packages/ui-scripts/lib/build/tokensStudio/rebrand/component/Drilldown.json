@@ -16,15 +16,23 @@
       "value": "{color.text.muted}",
       "type": "color"
     },
-    "labelPadding": {
-      "value": "0.5rem 0",
+    "verticalLabelPadding": {
+      "value": "0.5rem",
       "type": "spacing",
       "description": "code only token"
     },
-    "nestedLabelPadding": {
-      "value": "0.5rem 0.75rem",
+    "horizontalLabelPadding": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "verticalNestedLabelPadding": {
+      "value": "0.5rem",
       "type": "spacing",
       "description": "code only token"
+    },
+    "horizontalNestedLabelPadding": {
+      "value": "0.75rem",
+      "type": "spacing"
     }
   },
   "drilldownGroup": {
@@ -77,7 +85,7 @@
       "type": "lineHeights"
     },
     "descriptionPaddingStart": {
-      "value": "0.25rem",
+      "value": "0rem",
       "type": "spacing",
       "description": "code only token"
     },
@@ -125,14 +133,18 @@
       "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     },
-    "padding": {
-      "value": "0.5rem 0.75rem",
+    "paddingVertical": {
+      "value": "0.5rem",
       "type": "spacing",
       "description": "code only"
     },
     "selectedBackground": {
       "value": "{color.background.interactive.action.primary.base}",
       "type": "color"
+    },
+    "paddingHorizontal": {
+      "value": "0.75rem",
+      "type": "spacing"
     }
   },
   "drilldownSeparator": {
@@ -144,10 +156,14 @@
       "value": "0.0625rem",
       "type": "sizing"
     },
-    "margin": {
-      "value": "0 0.75rem",
+    "marginVertical": {
+      "value": "0rem",
       "type": "spacing",
       "description": "code only"
+    },
+    "marginHorizontal": {
+      "value": "0.75rem",
+      "type": "spacing"
     }
   }
 }
