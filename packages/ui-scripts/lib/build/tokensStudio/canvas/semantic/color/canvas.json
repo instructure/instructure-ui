@@ -382,7 +382,7 @@
         "type": "color"
       },
       "muted": {
-        "value": "{color.grey.grey20}",
+        "value": "{color.grey.grey30}",
         "type": "color"
       },
       "strong": {
