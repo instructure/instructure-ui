@@ -53,11 +53,11 @@
       "type": "color"
     },
     "messageColorClickable": {
-      "value": "{color.text.interactive.navigation.primary.base}",
+      "value": "{color.text.interactive.action.secondary.base}",
       "type": "color"
     },
     "clickableActiveText": {
-      "value": "{color.text.interactive.navigation.primary.active}",
+      "value": "{color.text.interactive.action.secondary.active}",
       "type": "color"
     },
     "messageFontSizeSmall": {
