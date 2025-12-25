@@ -1,0 +1,8 @@
+{
+  "billboard": {
+    "backgroundColor": {
+      "value": "{color.background.base}",
+      "type": "color"
+    }
+  }
+}
