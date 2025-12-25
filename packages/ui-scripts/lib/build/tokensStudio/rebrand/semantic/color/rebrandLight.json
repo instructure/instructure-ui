@@ -1334,11 +1334,11 @@
     },
     "dropShadow": {
       "shadowColor1": {
-        "value": "rgba(28,34,43,0.2)",
+        "value": "rgba(35,68,101,0.15)",
         "type": "color"
       },
       "shadowColor2": {
-        "value": "rgba(28,34,43,0.1)",
+        "value": "rgba(35,68,101,0.1)",
         "type": "color"
       }
     },
@@ -1439,7 +1439,7 @@
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "6px",
+          "value": "4px",
           "type": "sizing"
         }
       },
@@ -1481,7 +1481,7 @@
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "2px",
+          "value": "1px",
           "type": "sizing"
         }
       },
