@@ -62,7 +62,7 @@
         "type": "color"
       },
       "opacity": {
-        "value": "{color.greyOpacity10}",
+        "value": "{color.navyOpacity10}",
         "type": "color"
       },
       "opacityOnColor": {

@@ -986,6 +986,10 @@
       "value": "rgba(28,34,43,0.75)",
       "type": "color"
     },
+    "navyOpacity10": {
+      "value": "rgba(35,68,101,0.1)",
+      "type": "color"
+    },
     "greyOpacity10": {
       "value": "rgba(28,34,43,0.1)",
       "type": "color"
