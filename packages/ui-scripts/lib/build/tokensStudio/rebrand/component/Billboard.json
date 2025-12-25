@@ -3,6 +3,74 @@
     "backgroundColor": {
       "value": "{color.background.base}",
       "type": "color"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "paddingSmall": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingMedium": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "paddingLarge": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
+    },
+    "mediumMargin": {
+      "value": "{sharedTokens.spacing.general.spaceMd}",
+      "type": "spacing"
+    },
+    "largeMargin": {
+      "value": "{sharedTokens.spacing.general.spaceXl}",
+      "type": "spacing"
+    },
+    "buttonBorderWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
+    },
+    "buttonBorderStyle": {
+      "value": "solid",
+      "type": "text"
+    },
+    "buttonHoverBorderStyle": {
+      "value": "dashed",
+      "type": "text"
+    },
+    "buttonBorderRadius": {
+      "value": "0.5rem",
+      "type": "borderRadius"
+    },
+    "messageColor": {
+      "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "messageColorClickable": {
+      "value": "{color.text.interactive.navigation.primary.base}",
+      "type": "color"
+    },
+    "clickableActiveBg": {
+      "value": "{color.background.interactive.action.secondary.active}",
+      "type": "color"
+    },
+    "clickableActiveText": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "messageFontSizeSmall": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "messageFontSizeMedium": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "messageFontSizeLarge": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
     }
   }
 }
