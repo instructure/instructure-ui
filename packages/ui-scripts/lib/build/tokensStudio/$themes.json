@@ -50,7 +50,8 @@
       "canvas/component/TreeBrowser": "enabled",
       "canvas/component/ToggleDetails": "enabled",
       "canvas/component/Alert": "enabled",
-      "canvas/component/SideNavBar": "enabled"
+      "canvas/component/SideNavBar": "enabled",
+      "canvas/component/ToggleGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1632,6 +1633,7 @@
       "toggleDetails.toggleBorderStyle": "fa7e404eeeb6f65e8e2cc232ba31e4abf14e089e",
       "toggleDetails.toggleBorderWidth": "838a958ac4d60da1630bf1af6c69fcaeaae19918",
       "toggleDetails.togglePadding": "8988e5173f18c1bd02a77fe8ad070827c4b90c3c",
+      "toggleGroup.borderColor": "cf2b191b98b0ac8268cd87d22e211d09b3cd5fe6",
       "tooltip.padding": "fed61eb256e58d79905560f8eb6ecd00d310add9",
       "tooltip.fontFamily": "d1ef8cea902e36c567d004e56f61d46817886ebc",
       "tooltip.fontWeight": "da0369dc2bea573afefe518d9cc21314c9ba0733",
@@ -1843,7 +1845,8 @@
       "canvas/component/TreeBrowser": "enabled",
       "canvas/component/ToggleDetails": "enabled",
       "canvas/component/Alert": "enabled",
-      "canvas/component/SideNavBar": "enabled"
+      "canvas/component/SideNavBar": "enabled",
+      "canvas/component/ToggleGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -3361,6 +3364,7 @@
       "toggleDetails.toggleBorderStyle": "fa7e404eeeb6f65e8e2cc232ba31e4abf14e089e",
       "toggleDetails.toggleBorderWidth": "838a958ac4d60da1630bf1af6c69fcaeaae19918",
       "toggleDetails.togglePadding": "8988e5173f18c1bd02a77fe8ad070827c4b90c3c",
+      "toggleGroup.borderColor": "cf2b191b98b0ac8268cd87d22e211d09b3cd5fe6",
       "tooltip.padding": "fed61eb256e58d79905560f8eb6ecd00d310add9",
       "tooltip.fontFamily": "d1ef8cea902e36c567d004e56f61d46817886ebc",
       "tooltip.fontWeight": "da0369dc2bea573afefe518d9cc21314c9ba0733",
@@ -3572,7 +3576,8 @@
       "rebrand/component/TreeBrowser": "enabled",
       "rebrand/component/ToggleDetails": "enabled",
       "rebrand/component/Alert": "enabled",
-      "rebrand/component/SideNavBar": "enabled"
+      "rebrand/component/SideNavBar": "enabled",
+      "rebrand/component/ToggleGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -5239,6 +5244,7 @@
       "toggleDetails.toggleBorderStyle": "fa7e404eeeb6f65e8e2cc232ba31e4abf14e089e",
       "toggleDetails.toggleBorderWidth": "838a958ac4d60da1630bf1af6c69fcaeaae19918",
       "toggleDetails.togglePadding": "8988e5173f18c1bd02a77fe8ad070827c4b90c3c",
+      "toggleGroup.borderColor": "cf2b191b98b0ac8268cd87d22e211d09b3cd5fe6",
       "tooltip.fontFamily": "d1ef8cea902e36c567d004e56f61d46817886ebc",
       "tooltip.fontWeight": "da0369dc2bea573afefe518d9cc21314c9ba0733",
       "tooltip.fontSize": "d27af41a22f6473a8937991a58255844c64e7ac5",
@@ -5363,7 +5369,8 @@
       "rebrand/component/TreeBrowser": "enabled",
       "rebrand/component/ToggleDetails": "enabled",
       "rebrand/component/Alert": "enabled",
-      "rebrand/component/SideNavBar": "enabled"
+      "rebrand/component/SideNavBar": "enabled",
+      "rebrand/component/ToggleGroup": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -6966,6 +6973,7 @@
       "toggleDetails.toggleBorderStyle": "fa7e404eeeb6f65e8e2cc232ba31e4abf14e089e",
       "toggleDetails.toggleBorderWidth": "838a958ac4d60da1630bf1af6c69fcaeaae19918",
       "toggleDetails.togglePadding": "8988e5173f18c1bd02a77fe8ad070827c4b90c3c",
+      "toggleGroup.borderColor": "cf2b191b98b0ac8268cd87d22e211d09b3cd5fe6",
       "tooltip.fontFamily": "d1ef8cea902e36c567d004e56f61d46817886ebc",
       "tooltip.fontWeight": "da0369dc2bea573afefe518d9cc21314c9ba0733",
       "tooltip.fontSize": "d27af41a22f6473a8937991a58255844c64e7ac5",
