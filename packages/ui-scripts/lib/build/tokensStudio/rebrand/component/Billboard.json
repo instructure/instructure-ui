@@ -1,7 +1,11 @@
 {
   "billboard": {
     "backgroundColor": {
-      "value": "{color.background.base}",
+      "value": "{color.background.interactive.action.secondary.base}",
+      "type": "color"
+    },
+    "clickableActiveBg": {
+      "value": "{color.background.interactive.action.secondary.active}",
       "type": "color"
     },
     "fontFamily": {
@@ -52,12 +56,8 @@
       "value": "{color.text.interactive.navigation.primary.base}",
       "type": "color"
     },
-    "clickableActiveBg": {
-      "value": "{color.background.interactive.action.secondary.active}",
-      "type": "color"
-    },
     "clickableActiveText": {
-      "value": "{color.text.base}",
+      "value": "{color.text.interactive.navigation.primary.active}",
       "type": "color"
     },
     "messageFontSizeSmall": {
