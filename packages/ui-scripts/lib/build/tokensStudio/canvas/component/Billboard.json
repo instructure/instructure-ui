@@ -21,11 +21,11 @@
       "type": "spacing"
     },
     "mediumMargin": {
-      "value": "{sharedTokens.spacing.general.spaceMd}",
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     },
     "largeMargin": {
-      "value": "{sharedTokens.spacing.general.spaceXl}",
+      "value": "{spacing.spaceXl}",
       "type": "spacing"
     },
     "buttonBorderWidth": {
