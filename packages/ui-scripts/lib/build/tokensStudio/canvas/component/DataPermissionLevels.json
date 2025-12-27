@@ -29,11 +29,11 @@
       "type": "color"
     },
     "aiTextLeftGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.topGradient.base}",
+      "value": "{color.stroke.aiTopGradient}",
       "type": "color"
     },
     "aiTextRightGradientColor": {
-      "value": "{color.text.interactive.action.aiSecondary.bottomGradient.base}",
+      "value": "{color.stroke.aiBottomGradient}",
       "type": "color"
     },
     "bodyPadding": {
