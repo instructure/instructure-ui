@@ -39,6 +39,10 @@
     "bodyPadding": {
       "value": "{spacing.gap.cards.lg}",
       "type": "spacing"
+    },
+    "contentContainerColor": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
     }
   }
 }
