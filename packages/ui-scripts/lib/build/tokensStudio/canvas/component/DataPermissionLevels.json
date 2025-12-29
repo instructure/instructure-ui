@@ -1,7 +1,7 @@
 {
   "dataPermissionLevels": {
     "cardBorderRadius": {
-      "value": "{borderRadius.lg}",
+      "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
     "cardBorderColor": {
