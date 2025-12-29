@@ -54,7 +54,8 @@
       "canvas/component/ToggleGroup": "enabled",
       "canvas/component/Billboard": "enabled",
       "canvas/component/AiInformation": "enabled",
-      "canvas/component/DataPermissionLevels": "enabled"
+      "canvas/component/DataPermissionLevels": "enabled",
+      "canvas/component/NutritionFacts": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1174,6 +1175,14 @@
       "modalFooter.inverseBackgroundColor": "619b512404155ac8d1fd177aee294f99dacc887b",
       "modalFooter.padding": "14a2b2401dd003b300babe73895a32c53db3c6dc",
       "modalFooter.paddingCompact": "0271a1acdc4493f2cd1a742f190780faddf7a185",
+      "nutritionFacts.borderRadius": "428fa5ee90c2b5ccd2881ac78a9e73e8ead55936",
+      "nutritionFacts.cardBorderColor": "9648355f45f49c76c67b1e28de3c32118583edb8",
+      "nutritionFacts.cardBorderWidth": "b276cd77fb23ad24e5ba59b0fe450dbcfe78b240",
+      "nutritionFacts.cardPadding": "1f538402832020ee576cc23a219e2d8a72a6d49a",
+      "nutritionFacts.cardExplainerContainerBottomMargin": "f22aaa2a716baa95f46d3324d5e774f584f54a8f",
+      "nutritionFacts.cardGap": "a5c8aba6c459278e7c91382d427720595c393a67",
+      "nutritionFacts.bodyPadding": "4fb5cdde50414be6bdae8ac064a04ae5a1ce3410",
+      "nutritionFacts.blockGap": "4ab60d3047327cec39343d9785ff6844fc0fa7a4",
       "options.background": "2fc02e1251669173f6a17a7d3d613ee0e8b184cf",
       "options.labelColor": "42352531fbf7bb413abfd694a2abf57452738938",
       "options.labelFontWeight": "f73e91746961a4fdd3f5dc830b3a7f3dd512c0eb",
@@ -1891,7 +1900,8 @@
       "canvas/component/ToggleGroup": "enabled",
       "canvas/component/Billboard": "enabled",
       "canvas/component/AiInformation": "enabled",
-      "canvas/component/DataPermissionLevels": "enabled"
+      "canvas/component/DataPermissionLevels": "enabled",
+      "canvas/component/NutritionFacts": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -2947,6 +2957,14 @@
       "modalFooter.inverseBackgroundColor": "619b512404155ac8d1fd177aee294f99dacc887b",
       "modalFooter.padding": "14a2b2401dd003b300babe73895a32c53db3c6dc",
       "modalFooter.paddingCompact": "0271a1acdc4493f2cd1a742f190780faddf7a185",
+      "nutritionFacts.borderRadius": "428fa5ee90c2b5ccd2881ac78a9e73e8ead55936",
+      "nutritionFacts.cardBorderColor": "9648355f45f49c76c67b1e28de3c32118583edb8",
+      "nutritionFacts.cardBorderWidth": "b276cd77fb23ad24e5ba59b0fe450dbcfe78b240",
+      "nutritionFacts.cardPadding": "1f538402832020ee576cc23a219e2d8a72a6d49a",
+      "nutritionFacts.cardExplainerContainerBottomMargin": "f22aaa2a716baa95f46d3324d5e774f584f54a8f",
+      "nutritionFacts.cardGap": "a5c8aba6c459278e7c91382d427720595c393a67",
+      "nutritionFacts.bodyPadding": "4fb5cdde50414be6bdae8ac064a04ae5a1ce3410",
+      "nutritionFacts.blockGap": "4ab60d3047327cec39343d9785ff6844fc0fa7a4",
       "options.background": "2fc02e1251669173f6a17a7d3d613ee0e8b184cf",
       "options.labelColor": "42352531fbf7bb413abfd694a2abf57452738938",
       "options.labelFontWeight": "f73e91746961a4fdd3f5dc830b3a7f3dd512c0eb",
@@ -3664,7 +3682,8 @@
       "rebrand/component/ToggleGroup": "enabled",
       "rebrand/component/Billboard": "enabled",
       "rebrand/component/AiInformation": "enabled",
-      "rebrand/component/DataPermissionLevels": "enabled"
+      "rebrand/component/DataPermissionLevels": "enabled",
+      "rebrand/component/NutritionFacts": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -4869,6 +4888,14 @@
       "modalBody.inverseBackgroundColor": "64676d4b58ca84ce43a59f2605eeb3b3fc7cb60a",
       "modalBody.padding": "e216ea8f2284b70ff23de9e1db148d459921d192",
       "modalBody.paddingCompact": "af56db7da95b99e589f9a13dc29a5bd451a6a5c4",
+      "nutritionFacts.borderRadius": "428fa5ee90c2b5ccd2881ac78a9e73e8ead55936",
+      "nutritionFacts.cardBorderColor": "9648355f45f49c76c67b1e28de3c32118583edb8",
+      "nutritionFacts.cardBorderWidth": "b276cd77fb23ad24e5ba59b0fe450dbcfe78b240",
+      "nutritionFacts.cardPadding": "1f538402832020ee576cc23a219e2d8a72a6d49a",
+      "nutritionFacts.cardExplainerContainerBottomMargin": "f22aaa2a716baa95f46d3324d5e774f584f54a8f",
+      "nutritionFacts.cardGap": "a5c8aba6c459278e7c91382d427720595c393a67",
+      "nutritionFacts.bodyPadding": "4fb5cdde50414be6bdae8ac064a04ae5a1ce3410",
+      "nutritionFacts.blockGap": "4ab60d3047327cec39343d9785ff6844fc0fa7a4",
       "options.background": "2fc02e1251669173f6a17a7d3d613ee0e8b184cf",
       "options.labelColor": "42352531fbf7bb413abfd694a2abf57452738938",
       "options.labelFontWeight": "f73e91746961a4fdd3f5dc830b3a7f3dd512c0eb",
@@ -5499,7 +5526,8 @@
       "rebrand/component/ToggleGroup": "enabled",
       "rebrand/component/Billboard": "enabled",
       "rebrand/component/AiInformation": "enabled",
-      "rebrand/component/DataPermissionLevels": "enabled"
+      "rebrand/component/DataPermissionLevels": "enabled",
+      "rebrand/component/NutritionFacts": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -6640,6 +6668,14 @@
       "modalBody.inverseBackgroundColor": "64676d4b58ca84ce43a59f2605eeb3b3fc7cb60a",
       "modalBody.padding": "e216ea8f2284b70ff23de9e1db148d459921d192",
       "modalBody.paddingCompact": "af56db7da95b99e589f9a13dc29a5bd451a6a5c4",
+      "nutritionFacts.borderRadius": "428fa5ee90c2b5ccd2881ac78a9e73e8ead55936",
+      "nutritionFacts.cardBorderColor": "9648355f45f49c76c67b1e28de3c32118583edb8",
+      "nutritionFacts.cardBorderWidth": "b276cd77fb23ad24e5ba59b0fe450dbcfe78b240",
+      "nutritionFacts.cardPadding": "1f538402832020ee576cc23a219e2d8a72a6d49a",
+      "nutritionFacts.cardExplainerContainerBottomMargin": "f22aaa2a716baa95f46d3324d5e774f584f54a8f",
+      "nutritionFacts.cardGap": "a5c8aba6c459278e7c91382d427720595c393a67",
+      "nutritionFacts.bodyPadding": "4fb5cdde50414be6bdae8ac064a04ae5a1ce3410",
+      "nutritionFacts.blockGap": "4ab60d3047327cec39343d9785ff6844fc0fa7a4",
       "options.background": "2fc02e1251669173f6a17a7d3d613ee0e8b184cf",
       "options.labelColor": "42352531fbf7bb413abfd694a2abf57452738938",
       "options.labelFontWeight": "f73e91746961a4fdd3f5dc830b3a7f3dd512c0eb",
