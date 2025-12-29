@@ -43,6 +43,10 @@
     "levelColor": {
       "value": "{color.text.aiColor}",
       "type": "color"
+    },
+    "permissionLevelsModalTriggerBottomMargin": {
+      "value": "{spacing.spaceXl}",
+      "type": "spacing"
     }
   }
 }
