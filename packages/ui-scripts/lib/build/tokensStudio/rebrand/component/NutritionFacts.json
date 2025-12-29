@@ -13,7 +13,7 @@
       "type": "borderWidth"
     },
     "cardPadding": {
-      "value": "{spacing.gap.cards.md}",
+      "value": "{spacing.gap.cards.sm}",
       "type": "spacing"
     },
     "cardExplainerContainerBottomMargin": {

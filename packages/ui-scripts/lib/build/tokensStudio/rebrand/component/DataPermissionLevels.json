@@ -37,7 +37,7 @@
       "type": "color"
     },
     "bodyPadding": {
-      "value": "{spacing.gap.cards.sm}",
+      "value": "{spacing.gap.cards.lg}",
       "type": "spacing"
     },
     "contentContainerColor": {
