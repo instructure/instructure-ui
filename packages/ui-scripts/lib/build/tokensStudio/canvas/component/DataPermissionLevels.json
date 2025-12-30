@@ -29,11 +29,11 @@
       "type": "color"
     },
     "aiTextLeftGradientColor": {
-      "value": "{color.stroke.aiTopGradient}",
+      "value": "{color.background.aiTopGradient}",
       "type": "color"
     },
     "aiTextRightGradientColor": {
-      "value": "{color.stroke.aiBottomGradient}",
+      "value": "{color.background.aiBottomGradient}",
       "type": "color"
     },
     "bodyPadding": {
@@ -43,6 +43,10 @@
     "contentContainerColor": {
       "value": "{color.background.elevatedSurface.base}",
       "type": "color"
+    },
+    "contentContainerBorderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
     }
   }
 }

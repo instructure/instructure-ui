@@ -1,7 +1,11 @@
 {
   "dataPermissionLevels": {
     "cardBorderRadius": {
-      "value": "{borderRadius.sm}",
+      "value": "{borderRadius.lg}",
+      "type": "borderRadius"
+    },
+    "contentContainerBorderRadius": {
+      "value": "0.625rem",
       "type": "borderRadius"
     },
     "cardBorderColor": {
@@ -29,11 +33,11 @@
       "type": "color"
     },
     "aiTextLeftGradientColor": {
-      "value": "{color.stroke.aiTopGradient}",
+      "value": "{color.background.aiTopGradient}",
       "type": "color"
     },
     "aiTextRightGradientColor": {
-      "value": "{color.stroke.aiBottomGradient}",
+      "value": "{color.background.aiBottomGradient}",
       "type": "color"
     },
     "bodyPadding": {
