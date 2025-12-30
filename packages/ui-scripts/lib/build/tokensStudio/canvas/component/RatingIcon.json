@@ -13,7 +13,7 @@
       "type": "color"
     },
     "smallIconFontSize": {
-      "value": "{icon.sizeSm}",
+      "value": "1rem",
       "type": "sizing"
     },
     "mediumIconFontSize": {
