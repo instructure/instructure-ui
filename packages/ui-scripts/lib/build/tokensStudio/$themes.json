@@ -55,7 +55,8 @@
       "canvas/component/Billboard": "enabled",
       "canvas/component/AiInformation": "enabled",
       "canvas/component/DataPermissionLevels": "enabled",
-      "canvas/component/NutritionFacts": "enabled"
+      "canvas/component/NutritionFacts": "enabled",
+      "canvas/component/Rating": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -1337,6 +1338,12 @@
       "rangeInput.minWidth": "36cd989a6988cebf4081e3a0b5280e029925f5f4",
       "rangeInput.handleSize": "0f1ea68169cc5c3425765f1580d329bb71492c9a",
       "rangeInput.handleFocusOutlineWidth": "5d6848f94594501ac6aace2d827fc7a14ef79599",
+      "ratingIcon.iconMargin": "75c02e73bdb6fb7fe27a34090a8aaf3555c3355b",
+      "ratingIcon.iconEmptyColor": "90fa0847aa58a5f48d77cf83fe15efe183c0960e",
+      "ratingIcon.iconFilledColor": "1def6bb579ffb1ea7ef8d4225419f3167733eb44",
+      "ratingIcon.smallIconFontSize": "4b1fec85d0e75d4a7130dad53708b71a414122c6",
+      "ratingIcon.mediumIconFontSize": "24b2a9e7cd688898e83a41838e30f58133c302bc",
+      "ratingIcon.largeIconFontSize": "2b97152498a144c009af358506aec029de970dc9",
       "sharedTokens.legacySpacing.xxxSmall": "3e4dc7f03a18a32666f12f589dceb073e92297a1",
       "sharedTokens.legacySpacing.xxSmall": "25f192a9ce7f94731c162b4127646c38123ec160",
       "sharedTokens.legacySpacing.xSmall": "22c63a9717a56fbe87a1f60e53cfb0d273f49eb2",
@@ -1904,7 +1911,8 @@
       "canvas/component/Billboard": "enabled",
       "canvas/component/AiInformation": "enabled",
       "canvas/component/DataPermissionLevels": "enabled",
-      "canvas/component/NutritionFacts": "enabled"
+      "canvas/component/NutritionFacts": "enabled",
+      "canvas/component/Rating": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -3122,6 +3130,12 @@
       "rangeInput.minWidth": "36cd989a6988cebf4081e3a0b5280e029925f5f4",
       "rangeInput.handleSize": "0f1ea68169cc5c3425765f1580d329bb71492c9a",
       "rangeInput.handleFocusOutlineWidth": "5d6848f94594501ac6aace2d827fc7a14ef79599",
+      "ratingIcon.iconMargin": "75c02e73bdb6fb7fe27a34090a8aaf3555c3355b",
+      "ratingIcon.iconEmptyColor": "90fa0847aa58a5f48d77cf83fe15efe183c0960e",
+      "ratingIcon.iconFilledColor": "1def6bb579ffb1ea7ef8d4225419f3167733eb44",
+      "ratingIcon.smallIconFontSize": "4b1fec85d0e75d4a7130dad53708b71a414122c6",
+      "ratingIcon.mediumIconFontSize": "24b2a9e7cd688898e83a41838e30f58133c302bc",
+      "ratingIcon.largeIconFontSize": "2b97152498a144c009af358506aec029de970dc9",
       "sharedTokens.legacySpacing.xxxSmall": "3e4dc7f03a18a32666f12f589dceb073e92297a1",
       "sharedTokens.legacySpacing.xxSmall": "25f192a9ce7f94731c162b4127646c38123ec160",
       "sharedTokens.legacySpacing.xSmall": "22c63a9717a56fbe87a1f60e53cfb0d273f49eb2",
@@ -3689,7 +3703,8 @@
       "rebrand/component/Billboard": "enabled",
       "rebrand/component/AiInformation": "enabled",
       "rebrand/component/DataPermissionLevels": "enabled",
-      "rebrand/component/NutritionFacts": "enabled"
+      "rebrand/component/NutritionFacts": "enabled",
+      "rebrand/component/Rating": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -5056,6 +5071,12 @@
       "rangeInput.trackBorderColor": "8872aa54c9c1caea600ae681d13f6bd41f44d7bd",
       "rangeInput.minWidth": "36cd989a6988cebf4081e3a0b5280e029925f5f4",
       "rangeInput.handleSize": "0f1ea68169cc5c3425765f1580d329bb71492c9a",
+      "ratingIcon.iconMargin": "75c02e73bdb6fb7fe27a34090a8aaf3555c3355b",
+      "ratingIcon.iconEmptyColor": "90fa0847aa58a5f48d77cf83fe15efe183c0960e",
+      "ratingIcon.iconFilledColor": "1def6bb579ffb1ea7ef8d4225419f3167733eb44",
+      "ratingIcon.smallIconFontSize": "4b1fec85d0e75d4a7130dad53708b71a414122c6",
+      "ratingIcon.mediumIconFontSize": "24b2a9e7cd688898e83a41838e30f58133c302bc",
+      "ratingIcon.largeIconFontSize": "2b97152498a144c009af358506aec029de970dc9",
       "sharedTokens.legacySpacing.xxxSmall": "3e4dc7f03a18a32666f12f589dceb073e92297a1",
       "sharedTokens.legacySpacing.xxSmall": "25f192a9ce7f94731c162b4127646c38123ec160",
       "sharedTokens.legacySpacing.xSmall": "22c63a9717a56fbe87a1f60e53cfb0d273f49eb2",
@@ -5536,7 +5557,8 @@
       "rebrand/component/Billboard": "enabled",
       "rebrand/component/AiInformation": "enabled",
       "rebrand/component/DataPermissionLevels": "enabled",
-      "rebrand/component/NutritionFacts": "enabled"
+      "rebrand/component/NutritionFacts": "enabled",
+      "rebrand/component/Rating": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -6839,6 +6861,12 @@
       "rangeInput.trackBorderColor": "8872aa54c9c1caea600ae681d13f6bd41f44d7bd",
       "rangeInput.minWidth": "36cd989a6988cebf4081e3a0b5280e029925f5f4",
       "rangeInput.handleSize": "0f1ea68169cc5c3425765f1580d329bb71492c9a",
+      "ratingIcon.iconMargin": "75c02e73bdb6fb7fe27a34090a8aaf3555c3355b",
+      "ratingIcon.iconEmptyColor": "90fa0847aa58a5f48d77cf83fe15efe183c0960e",
+      "ratingIcon.iconFilledColor": "1def6bb579ffb1ea7ef8d4225419f3167733eb44",
+      "ratingIcon.smallIconFontSize": "4b1fec85d0e75d4a7130dad53708b71a414122c6",
+      "ratingIcon.mediumIconFontSize": "24b2a9e7cd688898e83a41838e30f58133c302bc",
+      "ratingIcon.largeIconFontSize": "2b97152498a144c009af358506aec029de970dc9",
       "sharedTokens.legacySpacing.xxxSmall": "3e4dc7f03a18a32666f12f589dceb073e92297a1",
       "sharedTokens.legacySpacing.xxSmall": "25f192a9ce7f94731c162b4127646c38123ec160",
       "sharedTokens.legacySpacing.xSmall": "22c63a9717a56fbe87a1f60e53cfb0d273f49eb2",
