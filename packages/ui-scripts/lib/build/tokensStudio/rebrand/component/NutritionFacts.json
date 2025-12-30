@@ -1,7 +1,7 @@
 {
   "nutritionFacts": {
     "borderRadius": {
-      "value": "{borderRadius.md}",
+      "value": "{borderRadius.lg}",
       "type": "borderRadius"
     },
     "cardBorderColor": {
