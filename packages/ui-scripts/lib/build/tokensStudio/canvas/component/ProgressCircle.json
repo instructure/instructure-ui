@@ -143,6 +143,38 @@
     "meterColorWarningInverse": {
       "value": "{color.stroke.warning}",
       "type": "color"
+    },
+    "xSmallRadius": {
+      "value": "1em",
+      "type": "borderRadius"
+    },
+    "smallRadius": {
+      "value": "1.8em",
+      "type": "borderRadius"
+    },
+    "mediumRadius": {
+      "value": "2.75em",
+      "type": "borderRadius"
+    },
+    "largeRadius": {
+      "value": "3.5em",
+      "type": "borderRadius"
+    },
+    "xSmallBorderOffset": {
+      "value": "1.2em",
+      "type": "spacing"
+    },
+    "smallBorderOffset": {
+      "value": "1.6125em",
+      "type": "spacing"
+    },
+    " mediumBorderOffset": {
+      "value": "2.5em",
+      "type": "spacing"
+    },
+    "largeBorderOffset": {
+      "value": "3.125em",
+      "type": "spacing"
     }
   }
 }
