@@ -8,6 +8,7 @@ overrides:
   react: 18.3.1
   react-dom: 18.3.1
   '@types/react': 18.3.26
+  git-raw-commits>dargs: 7.0.0
 
 importers:
 
@@ -8332,10 +8333,6 @@ packages:
   dargs@7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
     engines: {node: '>=8'}
-
-  dargs@8.1.0:
-    resolution: {integrity: sha512-wAV9QHOsNbwnWdNW2FYvE1P56wtgSbM+3SZcdGiWQILwVjACCXDCI3Ai8QlCjMDB8YK5zySiXZYBiwGmNY3lnw==}
-    engines: {node: '>=12'}
 
   dashdash@1.14.1:
     resolution: {integrity: sha512-jRFi8UDGo6j+odZiEpjazZaWqEal3w/basFjQHQEwVtZJGDpxbH1MeYluwCS8Xq5wmLJooDlMgvVarmWfGM44g==}
@@ -17102,8 +17099,6 @@ snapshots:
 
   dargs@7.0.0: {}
 
-  dargs@8.1.0: {}
-
   dashdash@1.14.1:
     dependencies:
       assert-plus: 1.0.0
@@ -18300,7 +18295,7 @@ snapshots:
 
   git-raw-commits@4.0.0:
     dependencies:
-      dargs: 8.1.0
+      dargs: 7.0.0
       meow: 12.1.1
       split2: 4.2.0
 

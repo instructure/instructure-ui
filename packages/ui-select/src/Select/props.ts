@@ -142,18 +142,20 @@ type PropsFromSelectable = {
   /**
    * Callback fired requesting that the options list be shown.
    */
-  onRequestShowOptions?: (event: React.SyntheticEvent) => void
+  onRequestShowOptions?: (event: React.KeyboardEvent | React.MouseEvent) => void
 
   /**
    * Callback fired requesting that the options list be hidden.
    */
-  onRequestHideOptions?: (event: React.SyntheticEvent) => void
+  onRequestHideOptions?: (
+    event: React.KeyboardEvent | React.MouseEvent | React.FocusEvent
+  ) => void
 
   /**
    * Callback fired requesting a particular option be highlighted.
    */
   onRequestHighlightOption?: (
-    event: React.SyntheticEvent,
+    event: React.KeyboardEvent | React.MouseEvent,
     data: { id?: string; direction?: 1 | -1 }
   ) => void
 
@@ -161,7 +163,7 @@ type PropsFromSelectable = {
    * Callback fired requesting a particular option be selected.
    */
   onRequestSelectOption?: (
-    event: React.SyntheticEvent,
+    event: React.KeyboardEvent | React.MouseEvent,
     data: { id?: string }
   ) => void
 }
