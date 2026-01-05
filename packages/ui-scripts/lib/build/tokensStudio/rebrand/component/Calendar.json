@@ -1,7 +1,7 @@
 {
   "calendar": {
     "background": {
-      "value": "{color.background.base}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "color": {
@@ -43,7 +43,7 @@
   },
   "calendarDay": {
     "background": {
-      "value": "{color.background.base}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "color": {
