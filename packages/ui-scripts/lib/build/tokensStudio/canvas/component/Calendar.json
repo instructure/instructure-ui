@@ -35,6 +35,10 @@
     "lineHeight": {
       "value": "{lineHeight.paragraph.base}",
       "type": "lineHeights"
+    },
+    "maxHeaderWidth": {
+      "value": "1.5rem",
+      "type": "sizing"
     }
   },
   "calendarDay": {
