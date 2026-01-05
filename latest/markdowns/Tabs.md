@@ -22,6 +22,7 @@ const Example = () => {
     >
       <Tabs.Panel
         id="tabA"
+        tabIndex={-1}
         renderTitle="Tab A"
         textAlign="center"
         padding="large"
@@ -30,21 +31,35 @@ const Example = () => {
         <Button>Focus Me</Button>
       </Tabs.Panel>
       <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled>
-        {lorem.paragraphs()}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabC"
         renderTitle="Tab C"
         isSelected={selectedIndex === 2}
+        tabIndex={0}
       >
-        {lorem.paragraphs()}
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabD"
         renderTitle="Tab D"
         isSelected={selectedIndex === 3}
+        tabIndex={0}
       >
-        {lorem.paragraphs()}
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        praesentium voluptatum deleniti atque corrupti. Quos dolores et quas
+        molestias excepturi sint occaecati cupiditate non provident, similique
+        sunt in culpa. Qui officia deserunt mollitia animi, id est laborum et
+        dolorum fuga.
       </Tabs.Panel>
     </Tabs>
   )
@@ -73,17 +88,29 @@ const Example = () => {
       minHeight="10rem"
       maxHeight="10rem"
     >
-      <Tabs.Panel renderTitle="First Tab" isSelected={selectedIndex === 0}>
+      <Tabs.Panel renderTitle="First Tab" isSelected={selectedIndex === 0} tabIndex={0}>
         Hello World
       </Tabs.Panel>
       <Tabs.Panel renderTitle="Disabled Tab" isDisabled>
-        {lorem.paragraphs()}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.
       </Tabs.Panel>
-      <Tabs.Panel renderTitle="Third Tab" isSelected={selectedIndex === 2}>
-        {lorem.paragraphs()}
+      <Tabs.Panel renderTitle="Third Tab" isSelected={selectedIndex === 2} tabIndex={0}>
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores.
       </Tabs.Panel>
-      <Tabs.Panel renderTitle="Fourth Tab" isSelected={selectedIndex === 3}>
-        {lorem.paragraphs()}
+      <Tabs.Panel renderTitle="Fourth Tab" isSelected={selectedIndex === 3} tabIndex={0}>
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        praesentium voluptatum deleniti atque corrupti. Quos dolores et quas
+        molestias excepturi sint occaecati cupiditate non provident, similique
+        sunt in culpa. Qui officia deserunt mollitia animi, id est laborum et
+        dolorum fuga.
       </Tabs.Panel>
     </Tabs>
   )
@@ -121,50 +148,57 @@ const Example = () => {
         id="tabA"
         renderTitle="Tab A"
         isSelected={selectedIndex === 0}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabB"
         renderTitle="Tab B"
         isSelected={selectedIndex === 1}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabC"
         renderTitle="Tab C"
         isSelected={selectedIndex === 2}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabD"
         renderTitle="Tab D"
         isSelected={selectedIndex === 3}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Duis aute irure dolor in reprehenderit in voluptate velit esse.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabE"
         renderTitle="Tab E"
         isSelected={selectedIndex === 4}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabF"
         renderTitle="Tab F"
         isSelected={selectedIndex === 5}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem.
       </Tabs.Panel>
       <Tabs.Panel
         id="tabG"
         renderTitle="Tab G"
         isSelected={selectedIndex === 6}
+        tabIndex={0}
       >
-        {lorem.sentence()}
+        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.
       </Tabs.Panel>
     </Tabs>
   )
@@ -243,6 +277,7 @@ const Example = () => {
         >
           <Tabs.Panel
             id="tabA"
+            tabIndex={-1}
             renderTitle="Tab A"
             textAlign="center"
             padding="large"
@@ -251,21 +286,36 @@ const Example = () => {
             <Button>Focus Me</Button>
           </Tabs.Panel>
           <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled>
-            {lorem.paragraphs()}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
           </Tabs.Panel>
           <Tabs.Panel
             id="tabC"
             renderTitle="Tab C"
             isSelected={selectedIndex === 2}
+            tabIndex={0}
           >
-            {lorem.paragraphs()}
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium. Totam rem aperiam, eaque ipsa quae
+            ab illo inventore veritatis et quasi architecto beatae vitae dicta
+            sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.
           </Tabs.Panel>
           <Tabs.Panel
             id="tabD"
             renderTitle="Tab D"
             isSelected={selectedIndex === 3}
+            tabIndex={0}
           >
-            {lorem.paragraphs()}
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            blanditiis praesentium voluptatum deleniti atque corrupti. Quos
+            dolores et quas molestias excepturi sint occaecati cupiditate non
+            provident, similique sunt in culpa. Qui officia deserunt mollitia
+            animi, id est laborum et dolorum fuga.
           </Tabs.Panel>
         </Tabs>
       </View>
@@ -298,7 +348,14 @@ const Outlet = () => {
         {show ? 'Hello Developer' : 'Simulating network call...'}
       </Heading>
       {show ? (
-        lorem.paragraphs()
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.
+        </div>
       ) : (
         <Spinner renderTitle="Loading" size="medium" />
       )}
@@ -326,6 +383,7 @@ const Example = () => {
         padding="large"
         isSelected={selectedIndex === 0}
         active
+        tabIndex={0}
       >
         <Outlet />
       </Tabs.Panel>
@@ -386,6 +444,7 @@ const Example = () => {
     >
       <Tabs.Panel
         id="tabA"
+        tabIndex={-1}
         renderTitle="I will persist"
         textAlign="center"
         padding="large"
@@ -396,6 +455,7 @@ const Example = () => {
       </Tabs.Panel>
       <Tabs.Panel
         id="tabB"
+        tabIndex={-1}
         renderTitle="I will unmount"
         isSelected={selectedIndex === 1}
         textAlign="center"
@@ -407,6 +467,7 @@ const Example = () => {
         id="tabC"
         renderTitle="Tab C"
         isSelected={selectedIndex === 2}
+        tabIndex={0}
       >
         Tab C
       </Tabs.Panel>
@@ -414,8 +475,55 @@ const Example = () => {
         id="tabD"
         renderTitle="Tab D"
         isSelected={selectedIndex === 3}
+        tabIndex={0}
       >
         Tab D
+      </Tabs.Panel>
+    </Tabs>
+  )
+}
+
+render(<Example />)
+```
+
+### Managing focus with tabIndex
+
+**Best practice:** For text-only panels, set `tabIndex={0}` to include the panel in the keyboard tab sequence—this ensures screen reader users can navigate to and read the content. For panels containing interactive elements (buttons, inputs, links), leave `tabIndex` unset so keyboard users tab directly to the controls without stopping on the panel container first.
+
+```js
+---
+type: example
+---
+const Example = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const handleTabChange = (event, { index }) => {
+    setSelectedIndex(index)
+  }
+
+  return (
+    <Tabs
+      margin="large auto"
+      padding="medium"
+      onRequestTabChange={handleTabChange}
+    >
+      <Tabs.Panel
+        id="tabA"
+        renderTitle="Panel with button"
+        textAlign="center"
+        padding="large"
+        isSelected={selectedIndex === 0}
+        tabIndex={-1}
+      >
+        <Button>Focus Me First</Button>
+      </Tabs.Panel>
+      <Tabs.Panel
+        id="tabB"
+        renderTitle="Panel with text only"
+        isSelected={selectedIndex === 1}
+        tabIndex={0}
+      >
+        This panel only contains text, so tabIndex is set to 0 to include it in the tab sequence.
       </Tabs.Panel>
     </Tabs>
   )
@@ -482,6 +590,7 @@ type: embed
 | Tabs.Panel | elementRef | `(element: HTMLDivElement \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tabs.Panel | active | `boolean` | No | `false` | Only one `<Tabs.Panel />` can be marked as active. The marked panel's content is rendered for all the `<Tabs.Panel />`s. |
 | Tabs.Panel | unmountOnExit | `boolean` | No | `true` | When set to false, the tabPanel only will be hidden, but not dismounted when not active |
+| Tabs.Panel | tabIndex | `number` | No | - | The tabIndex of the tabpanel element. Set to 0 for text-only panels to make them accessible to keyboard and screen reader users. |
 | Tabs.Tab | variant | `'default' \| 'secondary'` | No | `'default'` |  |
 | Tabs.Tab | id | `string` | Yes | - |  |
 | Tabs.Tab | index | `number` | Yes | - |  |
