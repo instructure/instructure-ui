@@ -1439,7 +1439,7 @@
           "type": "sizing"
         },
         "dropshadow2": {
-          "value": "6px",
+          "value": "4px",
           "type": "sizing"
         }
       },

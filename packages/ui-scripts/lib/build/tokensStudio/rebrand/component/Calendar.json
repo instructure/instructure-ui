@@ -1,7 +1,7 @@
 {
   "calendar": {
     "background": {
-      "value": "{color.background.base}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "color": {
@@ -35,11 +35,15 @@
     "lineHeight": {
       "value": "{lineHeight.paragraph.base}",
       "type": "lineHeights"
+    },
+    "maxHeaderWidth": {
+      "value": "1.5rem",
+      "type": "sizing"
     }
   },
   "calendarDay": {
     "background": {
-      "value": "{color.background.base}",
+      "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     },
     "color": {
