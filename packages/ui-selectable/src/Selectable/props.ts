@@ -49,37 +49,39 @@ type SelectableOwnProps = {
   /**
    * Callback fired when the options want to become visible
    */
-  onRequestShowOptions?: (event: React.SyntheticEvent) => void
+  onRequestShowOptions?: (event: React.KeyboardEvent | React.MouseEvent) => void
 
   /**
    * Callback fired when the options no longer want to be visible
    */
-  onRequestHideOptions?: (event: React.SyntheticEvent) => void
+  onRequestHideOptions?: (
+    event: React.KeyboardEvent | React.MouseEvent | React.FocusEvent
+  ) => void
 
   /**
    * Callback fired when option is hovered or highlighted via keyboard.
    * Either the `id` or the `direction` parameter is supplied
    */
   onRequestHighlightOption?: (
-    event: React.SyntheticEvent,
+    event: React.KeyboardEvent | React.MouseEvent,
     data: { id?: string; direction?: 1 | -1 }
   ) => void
 
   /**
-   * Callback fired when first option should be highlighted
+   * Callback fired when first option should be highlighted (triggered by the Home key)
    */
-  onRequestHighlightFirstOption?: (event: React.SyntheticEvent) => void
+  onRequestHighlightFirstOption?: (event: React.KeyboardEvent) => void
 
   /**
-   * Callback fired when last option should be highlighted
+   * Callback fired when last option should be highlighted (triggered by the End key)
    */
-  onRequestHighlightLastOption?: (event: React.SyntheticEvent) => void
+  onRequestHighlightLastOption?: (event: React.KeyboardEvent) => void
 
   /**
    * Callback fired when option clicked or selected via keyboard
    */
   onRequestSelectOption?: (
-    event: React.SyntheticEvent,
+    event: React.KeyboardEvent | React.MouseEvent,
     data: { id?: string }
   ) => void
 

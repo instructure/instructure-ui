@@ -97,6 +97,7 @@ class Panel extends Component<TabsPanelProps> {
       styles,
       active,
       unmountOnExit,
+      tabIndex,
       ...props
     } = this.props
 
@@ -105,10 +106,10 @@ class Panel extends Component<TabsPanelProps> {
         {...passthroughProps(props)}
         css={styles?.panel}
         role="tabpanel"
-        tabIndex={0}
         id={id}
         aria-labelledby={labelledBy}
         aria-hidden={this.isHidden ? 'true' : undefined}
+        tabIndex={this.isHidden ? undefined : tabIndex}
         ref={this.handleRef}
       >
         <Transition

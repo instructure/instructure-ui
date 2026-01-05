@@ -47,7 +47,8 @@
     "overrides": {
       "react": "18.3.1",
       "react-dom": "18.3.1",
-      "@types/react": "18.3.26"
+      "@types/react": "18.3.26",
+      "git-raw-commits>dargs": "7.0.0"
     }
   },
   "devDependencies": {
@@ -107,7 +108,8 @@
     "tar": "Lerna 8 needs tar for this fixed(?) bug: https://github.com/lerna/lerna/issues/4005",
     "eslint-import-resolver-typescript": "^3.6.1 not supported by ESLint 9",
     "eslint-plugin-import-x": "^3.1.0 not supported by ESLint 9",
-    "@types/jest": "needed because https://github.com/testing-library/jest-dom/issues/544 recheck if fixed"
+    "@types/jest": "needed because https://github.com/testing-library/jest-dom/issues/544 recheck if fixed",
+    "git-raw-commits>dargs": "Force dargs@7.0.0 (CommonJS) for git-raw-commits@3.0.0 used by lerna. pnpm hoisting was causing ESM dargs@8.1.0 to be resolved instead, breaking 'pnpm run bump' with 'TypeError: dargs is not a function'"
   },
   "engines": {
     "node": ">=22",

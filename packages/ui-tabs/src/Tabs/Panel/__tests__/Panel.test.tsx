@@ -49,4 +49,26 @@ describe('<Tabs.Panel />', () => {
 
     expect(tabPanel).toHaveAttribute('role', 'tabpanel')
   })
+
+  it('should not have tabIndex 0 by default', async () => {
+    const { container } = render(
+      <Panel isSelected renderTitle="Panel Title">
+        Panel contents
+      </Panel>
+    )
+    const tabPanel = container.querySelector('[role="tabpanel"]')
+
+    expect(tabPanel).not.toHaveAttribute('tabIndex', '0')
+  })
+
+  it('should allow custom tabIndex', async () => {
+    const { container } = render(
+      <Panel isSelected renderTitle="Panel Title" tabIndex={-1}>
+        Panel contents
+      </Panel>
+    )
+    const tabPanel = container.querySelector('[role="tabpanel"]')
+
+    expect(tabPanel).toHaveAttribute('tabIndex', '-1')
+  })
 })

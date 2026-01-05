@@ -639,7 +639,9 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       withArrow: false,
       minWidth: renderSubmenu.props?.minWidth || '18.5rem',
       maxHeight: renderSubmenu.props?.maxHeight || `calc(100vh - 10rem)`,
-
+      // this is needed because the trigger is not a button. `aria-expanded`
+      // is set on `get itemProps()`
+      shouldSetAriaExpanded: false,
       ...(status === 'disabled' && {
         disabled: true,
         show: false,
@@ -695,10 +697,9 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
         }
       ),
       isShowingContent: this.state.isPopoverOpen,
-      // @ts-expect-error This is a force override for Popover, because it puts
-      // aria-expanded on the trigger when shouldContainFocus="true",
-      // even when it should be on the item's <button>
-      'aria-expanded': undefined
+      // this is needed because the trigger is not a button. `aria-expanded`
+      // is set on `get itemProps()`
+      shouldSetAriaExpanded: false
     }
 
     return <Popover {...popoverProps}>{customPopoverConfig.children}</Popover>
