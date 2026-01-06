@@ -27,6 +27,8 @@
     "@instructure/emotion": "10.26.4",
     "@instructure/shared-types": "10.26.4",
     "@instructure/ui-heading": "10.26.4",
+    "@instructure/ui-link": "10.26.4",
+    "@instructure/ui-icons": "10.26.4",
     "@instructure/ui-modal": "10.26.4",
     "@instructure/ui-popover": "10.26.4",
     "@instructure/ui-react-utils": "10.26.4",

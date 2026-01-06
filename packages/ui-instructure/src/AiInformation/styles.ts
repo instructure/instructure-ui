@@ -49,6 +49,10 @@ const generateStyle = (
       label: 'ai-information__header',
       marginBottom: componentTheme.headingBottomMargin
     },
+    privacyNotice: {
+      label: 'ai-information__privacyNotice',
+      marginBottom: componentTheme.headingBottomMargin
+    },
     featureName: {
       label: 'ai-information__feature-name',
       marginBottom: componentTheme.featureNameBottomMargin
