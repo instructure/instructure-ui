@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import type { FormFieldGroupTheme } from '@instructure/shared-types'
 import type { FormFieldGroupProps, FormFieldGroupStyle } from './props'
 
 /**
@@ -36,7 +35,8 @@ import type { FormFieldGroupProps, FormFieldGroupStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: FormFieldGroupTheme,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  _componentTheme: {},
   props: FormFieldGroupProps
 ): FormFieldGroupStyle => {
   const { disabled } = props
@@ -44,8 +44,6 @@ const generateStyle = (
   return {
     formFieldGroup: {
       label: 'formFieldGroup',
-      border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
-      borderRadius: componentTheme.borderRadius,
       display: 'block',
 
       ...(disabled && {
