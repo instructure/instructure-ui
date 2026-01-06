@@ -26,7 +26,7 @@ import { Component, Children, ReactElement, AriaAttributes } from 'react'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import {
   FormFieldLayout,
@@ -34,7 +34,6 @@ import {
 } from '../FormFieldLayout'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { FormFieldGroupProps } from './props'
@@ -44,7 +43,7 @@ import type { FormFieldGroupProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class FormFieldGroup extends Component<FormFieldGroupProps> {
   static readonly componentId = 'FormFieldGroup'
 
