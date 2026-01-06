@@ -44,6 +44,12 @@
       "path": "../ui-heading/tsconfig.build.json"
     },
     {
+      "path": "../ui-link/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-icons/tsconfig.build.json"
+    },
+    {
       "path": "../ui-text/tsconfig.build.json"
     }
   ]

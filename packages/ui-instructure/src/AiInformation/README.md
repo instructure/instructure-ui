@@ -23,6 +23,8 @@ readonly: true
   data={[
     {
       featureName: "Feature name",
+      privacyNoticeText: "AI Privacy Notice",
+      privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
       permissionLevelText: "Permission Level",
       permissionLevel: "LEVEL 1",
       description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
@@ -169,6 +171,8 @@ readonly: true
   data={[
     {
       featureName: "Feature name",
+      privacyNoticeText: "AI Privacy Notice",
+      privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
       permissionLevelText: "Permission Level",
       permissionLevel: "LEVEL 1",
       description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
