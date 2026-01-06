@@ -5420,7 +5420,7 @@ const propName=`size${size.charAt(0).toUpperCase()}${size.slice(1)}`
 if(propName in componentTheme)return(0,_px.px)(componentTheme[propName])}})(size,componentTheme),numericStrokeWidth=((size,componentTheme)=>{if("string"==typeof size){const propName=`strokeWidth${size.charAt(0).toUpperCase()}${size.slice(1)}`
 if(propName in componentTheme)return(0,_px.px)(componentTheme[propName])}})(size,componentTheme),colorValue=((color,componentTheme)=>{if(color)return"inherit"===color||"ai"===color?color:!(color in componentTheme)||color.startsWith("size")||color.startsWith("strokeWidth")?void 0:color})(color,componentTheme)
 let colorStyle,gradientColors,resolvedColor
-if(colorValue)if("inherit"===colorValue)colorStyle={color:"inherit"},resolvedColor="currentColor"
+if(colorValue)if("inherit"===colorValue)resolvedColor="inherit"
 else if("ai"===colorValue)gradientColors={top:componentTheme.actionAiSecondaryTopGradientBaseColor,bottom:componentTheme.actionAiSecondaryBottomGradientBaseColor}
 else if(colorValue in componentTheme){const themeColor=componentTheme[colorValue]
 colorStyle={color:themeColor},resolvedColor=themeColor}return{lucideIcon:{label:"lucideIcon",display:inline?"inline-block":"block",verticalAlign:"middle",lineHeight:0,fontSize:0,...colorStyle,...{0:{},90:{transform:"rotate(90deg)"},180:{transform:"rotate(180deg)"},270:{transform:"rotate(270deg)"}}[rotate],...bidirectional&&{'[dir="rtl"] &':{0:{transform:"scaleX(-1)"},90:{transform:"scaleX(-1) rotate(90deg)"},180:{transform:"scaleX(-1) rotate(180deg)"},270:{transform:"scaleX(-1) rotate(270deg)"}}[rotate]}},numericSize,numericStrokeWidth,resolvedColor,gradientColors}}},77856:(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{"use strict"
