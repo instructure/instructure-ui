@@ -97,7 +97,7 @@
   },
   "menuSeparator": {
     "background": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.muted}",
       "type": "color"
     },
     "height": {
