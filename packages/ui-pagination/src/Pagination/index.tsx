@@ -113,6 +113,7 @@ class Pagination extends Component<PaginationProps> {
 
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
+  static PageInput = PaginationPageInput
 
   private readonly _labelId: string
 
