@@ -219,7 +219,11 @@ The following theme variables have been removed. Gap styling now uses `sharedTok
 ### FormFieldGroup
 
 - theme variable `errorBorderColor` is now removed
-- theme variable `errorFieldsPaddin` is now removed
+- theme variable `errorFieldsPadding` is now removed
+- theme variable `borderColor` is now removed
+- theme variable `borderStyle` is now removed
+- theme variable `borderWidth` is now removed
+- `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
 
 ### FormFieldLayout
 
