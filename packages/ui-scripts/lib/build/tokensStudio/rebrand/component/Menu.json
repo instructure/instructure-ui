@@ -31,7 +31,7 @@
       "type": "fontSizes"
     },
     "fontWeight": {
-      "value": "{fontWeight.body.base}",
+      "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     },
     "color": {
@@ -97,7 +97,7 @@
   },
   "menuSeparator": {
     "background": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.muted}",
       "type": "color"
     },
     "height": {
