@@ -58,10 +58,6 @@
       "value": "{color.text.onColor}",
       "type": "color"
     },
-    "iconsMarginRight": {
-      "value": "{spacing.spaceSm}",
-      "type": "spacing"
-    },
     "nameFontSizeLarge": {
       "value": "{fontSize.textBase}",
       "type": "fontSizes"
