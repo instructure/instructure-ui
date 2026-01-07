@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 
-import type { TreeBrowserCollectionTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type {
   TreeBrowserCollectionProps,
   TreeBrowserCollectionStyle
@@ -47,7 +47,7 @@ const list = keyframes`
  */
 
 const generateStyles = (
-  componentTheme: TreeBrowserCollectionTheme,
+  componentTheme: NewComponentTypes['TreeBrowserTreeCollection'],
   props: TreeBrowserCollectionProps,
   state: { animation?: boolean }
 ): TreeBrowserCollectionStyle => {

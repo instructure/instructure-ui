@@ -25,17 +25,19 @@
 import { Component, SyntheticEvent } from 'react'
 import keycode from 'keycode'
 
-import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
+import {
+  FolderClosedInstUIIcon,
+  FileTextInstUIIcon
+} from '@instructure/ui-icons-lucide'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
 import { TreeButton } from './TreeButton'
 import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
-import generateComponentTheme from './theme'
 import type {
   Collection,
   CollectionData,
@@ -46,12 +48,19 @@ import type {
 import { allowedProps } from './props'
 import TreeBrowserContext from './TreeBrowserContext'
 
+// Map TreeBrowser sizes to Lucide icon semantic size tokens
+const treeBrowserSizeToIconSize = {
+  small: 'md',
+  medium: 'lg',
+  large: 'xl'
+} as const
+
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles)
 class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   static readonly componentId = 'TreeBrowser'
 
@@ -61,9 +70,36 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     size: 'medium',
     variant: 'folderTree',
     showRootCollection: true,
-    collectionIcon: IconFolderLine,
-    collectionIconExpanded: IconFolderLine,
-    itemIcon: IconDocumentLine,
+    collectionIcon: (props: any) => (
+      <FolderClosedInstUIIcon
+        size={
+          treeBrowserSizeToIconSize[
+            props?.size as keyof typeof treeBrowserSizeToIconSize
+          ]
+        }
+        color={props?.color}
+      />
+    ),
+    collectionIconExpanded: (props: any) => (
+      <FolderClosedInstUIIcon
+        size={
+          treeBrowserSizeToIconSize[
+            props?.size as keyof typeof treeBrowserSizeToIconSize
+          ]
+        }
+        color={props?.color}
+      />
+    ),
+    itemIcon: (props: any) => (
+      <FileTextInstUIIcon
+        size={
+          treeBrowserSizeToIconSize[
+            props?.size as keyof typeof treeBrowserSizeToIconSize
+          ]
+        }
+        color={props?.color}
+      />
+    ),
     getItemProps: (props: unknown) => props,
     getCollectionProps: (props: unknown) => props,
     defaultExpanded: [],

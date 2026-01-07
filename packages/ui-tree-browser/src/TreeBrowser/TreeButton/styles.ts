@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 
-import type { TreeBrowserButtonTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TreeBrowserButtonProps, TreeBrowserButtonStyle } from './props'
 
 const transform = keyframes`
@@ -49,7 +49,7 @@ const transform = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyles = (
-  componentTheme: TreeBrowserButtonTheme,
+  componentTheme: NewComponentTypes['TreeBrowserTreeButton'],
   props: TreeBrowserButtonProps,
   state: { animation?: boolean }
 ): TreeBrowserButtonStyle => {
@@ -269,7 +269,7 @@ const generateStyles = (
         bottom: '-0.25rem',
         left: '-0.25rem',
         right: '-0.25rem',
-        border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
+        // border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
         borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
         transition: 'all 0.2s',
         opacity: 0,
@@ -329,10 +329,6 @@ const generateStyles = (
       minWidth: '0.0625rem',
       position: 'relative',
       zIndex: 1,
-      color: selected
-        ? componentTheme.selectedTextColor
-        : componentTheme.iconColor,
-      display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       ...sizeMap[size!][variant!].icon

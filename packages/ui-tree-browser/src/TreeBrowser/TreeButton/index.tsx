@@ -26,10 +26,9 @@ import { Component, ContextType } from 'react'
 
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
-import generateComponentTheme from './theme'
 import type { TreeBrowserButtonProps } from './props'
 import { allowedProps } from './props'
 import TreeBrowserContext from '../TreeBrowserContext'
@@ -42,8 +41,11 @@ parent: TreeBrowser
 id: TreeBrowser.Button
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
-class TreeButton extends Component<TreeBrowserButtonProps> {
+@withStyle(generateStyles, 'TreeBrowserTreeButton')
+class TreeButton extends Component<
+  TreeBrowserButtonProps,
+  { isHovered: boolean }
+> {
   static readonly componentId = 'TreeBrowser.Button'
 
   static allowedProps = allowedProps
@@ -61,6 +63,10 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   }
 
   ref: Element | null = null
+
+  state = {
+    isHovered: false
+  }
 
   componentDidMount() {
     this.props.makeStyles?.({ animation: this.context?.animation })
@@ -101,13 +107,32 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   }
 
   renderCollectionIcon() {
-    const { expanded, collectionIcon, collectionIconExpanded, styles } =
-      this.props
+    const {
+      expanded,
+      collectionIcon,
+      collectionIconExpanded,
+      styles,
+      size,
+      selected
+    } = this.props
+    const { isHovered } = this.state
 
     if (collectionIcon || collectionIconExpanded) {
+      // Determine icon color based on state
+      let iconColor: 'baseColor' | 'onColor' = 'baseColor'
+      if (selected || isHovered) {
+        iconColor = 'onColor'
+      }
+
       return (
         <div css={styles?.icon}>
-          {callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}
+          {callRenderProp(
+            (expanded ? collectionIconExpanded : collectionIcon) as any,
+            {
+              size,
+              color: iconColor
+            }
+          )}
         </div>
       )
     }
@@ -115,7 +140,9 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   }
 
   renderItemImage() {
-    const { thumbnail, itemIcon, styles } = this.props
+    const { thumbnail, itemIcon, styles, size, selected } = this.props
+    const { isHovered } = this.state
+
     if (thumbnail) {
       return (
         <div css={styles?.thumbnail}>
@@ -124,7 +151,20 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
       )
     }
     if (itemIcon) {
-      return <div css={styles?.icon}>{callRenderProp(itemIcon)}</div>
+      // Determine icon color based on state
+      let iconColor: 'baseColor' | 'onColor' = 'baseColor'
+      if (selected || isHovered) {
+        iconColor = 'onColor'
+      }
+
+      return (
+        <div css={styles?.icon}>
+          {callRenderProp(itemIcon as any, {
+            size,
+            color: iconColor
+          })}
+        </div>
+      )
     }
     return undefined
   }
@@ -134,6 +174,14 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
       this.props.containerRef(el.parentElement)
     }
     this.ref = el
+  }
+
+  handleMouseEnter = () => {
+    this.setState({ isHovered: true })
+  }
+
+  handleMouseLeave = () => {
+    this.setState({ isHovered: false })
   }
 
   render() {
@@ -149,6 +197,8 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
         type="button"
         css={styles?.treeButton}
         data-cid="TreeButton"
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         {buttonContent}
       </button>

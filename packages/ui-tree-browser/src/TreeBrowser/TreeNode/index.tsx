@@ -29,7 +29,6 @@ import { callRenderProp } from '@instructure/ui-react-utils'
 import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyles from '../TreeButton/styles'
-import generateComponentTheme from '../TreeButton/theme'
 import type { TreeBrowserNodeProps } from './props'
 import { allowedProps } from './props'
 import TreeBrowserContext from '../TreeBrowserContext'
@@ -44,7 +43,7 @@ id: TreeBrowser.Node
 A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, 'TreeBrowserTreeButton')
 class TreeNode extends Component<TreeBrowserNodeProps> {
   static readonly componentId = 'TreeBrowser.Node'
 

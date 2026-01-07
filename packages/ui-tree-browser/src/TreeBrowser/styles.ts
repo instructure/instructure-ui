@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TreeBrowserTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TreeBrowserStyle } from './props'
 
 /**
@@ -33,10 +33,13 @@ import type { TreeBrowserStyle } from './props'
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @return {Object} The final style object, which will be used in the component
  */
 
-const generateStyles = (componentTheme: TreeBrowserTheme): TreeBrowserStyle => {
+const generateStyles = (
+  componentTheme: NewComponentTypes['TreeBrowser']
+): TreeBrowserStyle => {
   return {
     treeBrowser: {
       label: 'treeBrowser',
@@ -56,11 +59,13 @@ const generateStyles = (componentTheme: TreeBrowserTheme): TreeBrowserStyle => {
         bottom: '-0.25rem',
         left: '-0.25rem',
         right: '-0.25rem',
-        border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
         transition: 'all 0.2s',
         opacity: 0,
-        transform: 'scale(0.95)'
+        transform: 'scale(0.95)',
+        borderRadius: componentTheme.borderRadius
+        // ...calcFocusOutlineStyles(sharedTokens.focusOutline) // TODO border
+        // OLD border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
+        // OLD borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
       },
       '&:focus::before': {
         opacity: 1,
