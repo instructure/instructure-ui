@@ -88,6 +88,10 @@
       "value": "{color.background.base}",
       "type": "color"
     },
+    "trackColorInverse": {
+      "value": "{color.transparentColor}",
+      "type": "color"
+    },
     "trackBorderColor": {
       "value": "{color.stroke.base}",
       "type": "color"
