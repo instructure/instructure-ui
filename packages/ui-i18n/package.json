@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-i18n",
-  "version": "10.26.4",
+  "version": "10.27.0",
   "description": "Helper components and utilities for internationalization.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.26.4",
+    "@instructure/ui-babel-preset": "10.27.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@types/hoist-non-react-statics": "^3.3.6",
@@ -32,12 +32,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/shared-types": "10.26.4",
-    "@instructure/ui-decorator": "10.26.4",
-    "@instructure/ui-dom-utils": "10.26.4",
-    "@instructure/ui-prop-types": "10.26.4",
-    "@instructure/ui-react-utils": "10.26.4",
-    "@instructure/ui-utils": "10.26.4",
+    "@instructure/shared-types": "10.27.0",
+    "@instructure/ui-decorator": "10.27.0",
+    "@instructure/ui-dom-utils": "10.27.0",
+    "@instructure/ui-prop-types": "10.27.0",
+    "@instructure/ui-react-utils": "10.27.0",
+    "@instructure/ui-utils": "10.27.0",
     "hoist-non-react-statics": "^3.3.2",
     "moment-timezone": "^0.6.0",
     "prop-types": "^15.8.1"
