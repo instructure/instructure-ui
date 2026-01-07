@@ -37,8 +37,7 @@ const generateStyle = (
   componentTheme: PreviewTheme,
   props: PreviewProps
 ): PreviewStyle => {
-  const { fullscreen, frameless } = props
-
+  const { fullscreen, frameless, themeKey } = props
   const previewStyle = {
     boxSizing: 'border-box',
     margin: 0,
@@ -48,7 +47,7 @@ const generateStyle = (
     borderStyle: 'solid',
     borderColor: componentTheme.borderColor,
     borderRadius: componentTheme.borderRadius,
-    backgroundColor: componentTheme.backgroundColor,
+    backgroundColor: themeKey === 'rebrand-dark' ? '#000000' : '#FFFFFF',
     ...(fullscreen && {
       position: 'fixed',
       width: '100vw',

@@ -81,6 +81,9 @@ import type { NewComponentTypes } from '@instructure/ui-themes'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 type AppContextType = {
+  /**
+   * The ID of the currently selected theme.
+   */
   themeKey: keyof MainDocsData['themes']
   themes: MainDocsData['themes']
   library?: LibraryOptions
