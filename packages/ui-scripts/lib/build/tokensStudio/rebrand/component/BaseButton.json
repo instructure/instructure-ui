@@ -339,11 +339,11 @@
       "value": "{color.text.interactive.action.status.active}",
       "type": "color"
     },
-    "destructiveBackgroundColor": {
+    "dangerBackground": {
       "value": "{color.background.interactive.action.destructive.base}",
       "type": "color"
     },
-    "destructiveBaseTextColor": {
+    "dangerColor": {
       "value": "{color.text.interactive.action.status.base}",
       "type": "color"
     },
@@ -531,7 +531,7 @@
       "value": "{spacing.padding.interactive.horizontal.sm}",
       "type": "spacing"
     },
-    "borderRadiusBase": {
+    "borderRadius": {
       "value": "{borderRadius.interactive.base}",
       "type": "borderRadius"
     },
@@ -770,6 +770,10 @@
     "transform": {
       "value": "none",
       "type": "text"
+    },
+    "borderStyle": {
+      "value": "solid",
+      "type": "other"
     }
   }
 }
