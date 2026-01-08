@@ -1,15 +1,15 @@
 {
   "sideNavBar": {
     "backgroundColor": {
-      "value": "{color.background.elevatedSurface.base}",
+      "value": "{color.background.dark}",
       "type": "color"
     },
     "fill": {
-      "value": "{color.background.brand}",
+      "value": "{color.icon.onColor}",
       "type": "color"
     },
     "fontColor": {
-      "value": "{color.text.base}",
+      "value": "{color.text.onColor}",
       "type": "color"
     },
     "marginBottom": {
@@ -39,7 +39,7 @@
       "type": "spacing"
     },
     "fontColor": {
-      "value": "{color.text.base}",
+      "value": "{color.text.onColor}",
       "type": "color"
     },
     "fontFamily": {
@@ -55,7 +55,7 @@
       "type": "fontWeights"
     },
     "hoverBackgroundColor": {
-      "value": "{color.background.interactive.action.tertiary.hover}",
+      "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
     },
     "iconColor": {
@@ -84,15 +84,15 @@
       "type": "other"
     },
     "selectedBackgroundColor": {
-      "value": "{color.background.brand}",
+      "value": "{color.background.base}",
       "type": "color"
     },
     "selectedFontColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.interactive.navigation.primary.base}",
       "type": "color"
     },
     "selectedIconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
     },
     "selectedInnerFocusOutline": {
