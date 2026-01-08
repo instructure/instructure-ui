@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ProgressCircleTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   ProgressCircleProps,
   ProgressCircleState,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ProgressCircleTheme,
+  componentTheme: NewComponentTypes['ProgressCircle'],
   props: ProgressCircleProps,
+  _sharedTokens: SharedTokens,
   state: ProgressCircleState
 ): ProgressCircleStyle => {
   const { size, color, meterColor, valueNow = 0, valueMax = 100 } = props
