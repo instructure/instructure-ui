@@ -85,6 +85,18 @@
     "textLineHeight": {
       "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
+    },
+    "iconsMarginRightSmall": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "iconsMarginRightMedium": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "iconsMarginRightLarge": {
+      "value": "{spacing.spaceLg}",
+      "type": "spacing"
     }
   },
   "treeBrowserTreeCollection": {
