@@ -5,7 +5,7 @@
       "type": "color"
     },
     "fill": {
-      "value": "{color.background.brand}",
+      "value": "{color.icon.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
     "fontColor": {
@@ -59,7 +59,7 @@
       "type": "color"
     },
     "iconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.interactive.action.primaryOnColor.base}",
       "type": "color"
     },
     "iconSize": {
