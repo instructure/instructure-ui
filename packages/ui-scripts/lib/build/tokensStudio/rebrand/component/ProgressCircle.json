@@ -165,7 +165,7 @@
       "type": "borderRadius"
     },
     "xSmallBorderOffset": {
-      "value": "1.2em",
+      "value": "0.94em",
       "type": "spacing"
     },
     "smallBorderOffset": {
