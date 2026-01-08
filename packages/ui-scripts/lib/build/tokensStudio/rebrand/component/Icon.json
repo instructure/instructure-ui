@@ -296,7 +296,7 @@
       "value": "{color.icon.accent.sea}",
       "type": "color"
     },
-    "accentAutoraColor": {
+    "accentAuroraColor": {
       "value": "{color.icon.accent.aurora}",
       "type": "color"
     },

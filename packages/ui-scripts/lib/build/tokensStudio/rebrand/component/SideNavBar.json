@@ -59,7 +59,7 @@
       "type": "color"
     },
     "iconColor": {
-      "value": "{color.icon.interactive.action.primaryOnColor.base}",
+      "value": "{color.icon.base}",
       "type": "color"
     },
     "iconSize": {
@@ -88,11 +88,11 @@
       "type": "color"
     },
     "selectedFontColor": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "selectedIconColor": {
-      "value": "{color.icon.onColor}",
+      "value": "{color.icon.inverse}",
       "type": "color"
     },
     "selectedInnerFocusOutline": {
