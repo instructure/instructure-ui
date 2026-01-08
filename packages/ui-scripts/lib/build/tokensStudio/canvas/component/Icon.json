@@ -88,6 +88,18 @@
       "value": "{color.icon.interactive.disabled.onColor}",
       "type": "color"
     },
+    "dark": {
+      "value": "{color.icon.dark}",
+      "type": "color"
+    },
+    "sideNavColor": {
+      "value": "{color.icon.onColor}",
+      "type": "color"
+    },
+    "sideNavActiveColor": {
+      "value": "{color.icon.info}",
+      "type": "color"
+    },
     "navigationPrimaryBaseColor": {
       "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
@@ -282,10 +294,6 @@
     },
     "actionDestructiveSecondaryDisabledColor": {
       "value": "{color.icon.interactive.action.destructiveSecondary.disabled}",
-      "type": "color"
-    },
-    "dark": {
-      "value": "{color.icon.dark}",
       "type": "color"
     },
     "actionAiSecondaryDisabledColor": {
