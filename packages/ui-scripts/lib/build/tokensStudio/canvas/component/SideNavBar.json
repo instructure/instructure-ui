@@ -52,6 +52,10 @@
         }
       ],
       "type": "boxShadow"
+    },
+    "borderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
     }
   },
   "sideNavBarItem": {
