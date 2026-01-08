@@ -27,6 +27,31 @@
     "width": {
       "value": "5.25rem",
       "type": "sizing"
+    },
+    "margin": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "boxShadow": {
+      "value": [
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow1}",
+          "y": "{dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow2}",
+          "y": "{dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow"
     }
   },
   "sideNavBarItem": {
@@ -58,10 +83,6 @@
       "value": "{color.background.interactive.action.tertiary.hover}",
       "type": "color"
     },
-    "iconColor": {
-      "value": "{color.icon.base}",
-      "type": "color"
-    },
     "iconSize": {
       "value": "1.625rem",
       "type": "sizing"
@@ -89,10 +110,6 @@
     },
     "selectedFontColor": {
       "value": "{color.text.inverse}",
-      "type": "color"
-    },
-    "selectedIconColor": {
-      "value": "{color.icon.inverse}",
       "type": "color"
     },
     "selectedInnerFocusOutline": {

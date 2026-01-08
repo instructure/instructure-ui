@@ -27,6 +27,31 @@
     "width": {
       "value": "5.25rem",
       "type": "sizing"
+    },
+    "margin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "boxShadow": {
+      "value": [
+        {
+          "x": "0rem",
+          "y": "0rem",
+          "blur": "0rem",
+          "spread": "0rem",
+          "color": "{color.transparentColor}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0rem",
+          "y": "0rem",
+          "blur": "0rem",
+          "spread": "0rem",
+          "color": "{color.transparentColor}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow"
     }
   },
   "sideNavBarItem": {
@@ -58,10 +83,6 @@
       "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
     },
-    "iconColor": {
-      "value": "{color.icon.onColor}",
-      "type": "color"
-    },
     "iconSize": {
       "value": "1.625rem",
       "type": "sizing"
@@ -89,10 +110,6 @@
     },
     "selectedFontColor": {
       "value": "{color.text.interactive.navigation.primary.base}",
-      "type": "color"
-    },
-    "selectedIconColor": {
-      "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
     },
     "selectedInnerFocusOutline": {

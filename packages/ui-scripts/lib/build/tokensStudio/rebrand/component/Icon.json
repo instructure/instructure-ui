@@ -88,6 +88,18 @@
       "value": "{color.icon.interactive.disabled.onColor}",
       "type": "color"
     },
+    "dark": {
+      "value": "{color.icon.dark}",
+      "type": "color"
+    },
+    "sideNavColor": {
+      "value": "{color.icon.base}",
+      "type": "color"
+    },
+    "sideNavActiveColor": {
+      "value": "{color.icon.inverse}",
+      "type": "color"
+    },
     "navigationPrimaryBaseColor": {
       "value": "{color.icon.interactive.navigation.primary.base}",
       "type": "color"
@@ -298,10 +310,6 @@
     },
     "accentAuroraColor": {
       "value": "{color.icon.accent.aurora}",
-      "type": "color"
-    },
-    "dark": {
-      "value": "{color.icon.dark}",
       "type": "color"
     },
     "actionAiSecondaryDisabledColor": {
