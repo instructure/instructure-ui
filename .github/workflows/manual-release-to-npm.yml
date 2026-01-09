@@ -18,7 +18,7 @@ jobs:
         run: npm run bootstrap
       - name: Release to NPM
         env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN_NEW}}
           NPM_EMAIL: ${{secrets.NPM_EMAIL}}
           NPM_USERNAME: ${{secrets.NPM_USERNAME}}
         run: npm run release
