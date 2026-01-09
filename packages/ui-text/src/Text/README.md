@@ -45,6 +45,10 @@ type: example
     <Text color="primary-inverse">I&#39;m primary-inverse text</Text><br />
     <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text><br />
   </View>
+  <View background="success">
+    <Text color="primary-on">I&#39;m primary-on text</Text><br />
+    <Text color="secondary-on">I&#39;m secondary-on text</Text><br />
+  </View>
 </div>
 ```
 
