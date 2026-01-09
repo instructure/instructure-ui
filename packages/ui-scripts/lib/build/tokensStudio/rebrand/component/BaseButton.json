@@ -516,7 +516,7 @@
       "type": "sizing"
     },
     "mediumPaddingHorizontal": {
-      "value": "{spacing.padding.interactive.horizontal.md}",
+      "value": "{spacing.padding.interactive.horizontal.lg}",
       "type": "spacing"
     },
     "smallFontSize": {
@@ -528,7 +528,7 @@
       "type": "sizing"
     },
     "smallPaddingHorizontal": {
-      "value": "{spacing.padding.interactive.horizontal.sm}",
+      "value": "{spacing.padding.interactive.horizontal.md}",
       "type": "spacing"
     },
     "borderRadius": {
