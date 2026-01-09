@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.28.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.28.0) (2026-01-09)
+
+
+### Features
+
+* **ui-instructure:** add privacy notice link to the ai information panel ([e6bbcb5](https://github.com/instructure/instructure-ui/commit/e6bbcb5869f597ef79a805921c39cb4f3dda6a94))
+
+
+
+
+
 # [10.27.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.27.0) (2026-01-07)
 
 

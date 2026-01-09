@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.28.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.28.0) (2026-01-09)
+
+**Note:** Version bump only for package @instructure/ui-pill
+
+
+
+
+
 # [10.27.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.27.0) (2026-01-07)
 
 **Note:** Version bump only for package @instructure/ui-pill
