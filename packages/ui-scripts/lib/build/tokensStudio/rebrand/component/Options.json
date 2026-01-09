@@ -103,6 +103,10 @@
     "descriptionPaddingStart": {
       "value": "0rem",
       "type": "spacing"
+    },
+    "nestedPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
     }
   },
   "optionsSeparator": {

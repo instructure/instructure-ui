@@ -17,7 +17,7 @@
       "type": "borderWidth"
     },
     "closeButtonMarginRight": {
-      "value": "0.375rem",
+      "value": "0.5rem",
       "type": "other"
     },
     "closeButtonMarginTop": {

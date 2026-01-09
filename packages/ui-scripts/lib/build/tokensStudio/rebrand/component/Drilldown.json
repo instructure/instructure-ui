@@ -33,6 +33,10 @@
     "horizontalNestedLabelPadding": {
       "value": "0.75rem",
       "type": "spacing"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.md}",
+      "type": "borderRadius"
     }
   },
   "drilldownGroup": {
