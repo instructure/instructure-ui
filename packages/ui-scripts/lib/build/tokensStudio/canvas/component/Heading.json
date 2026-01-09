@@ -170,20 +170,20 @@
       "value": "{color.text.base}",
       "type": "color"
     },
-    "onColor": {
-      "value": "{color.text.onColor}",
-      "type": "color"
-    },
-    "inverseColor": {
-      "value": "{color.text.inverse}",
-      "type": "color"
-    },
-    "secondaryOnColor": {
+    "baseOnColor": {
       "value": "{color.text.onColor}",
       "type": "color"
     },
     "mutedColor": {
       "value": "{color.text.muted}",
+      "type": "color"
+    },
+    "mutedOnColor": {
+      "value": "{color.text.onColor}",
+      "type": "color"
+    },
+    "inverseColor": {
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "aiTextTopGradientColor": {
