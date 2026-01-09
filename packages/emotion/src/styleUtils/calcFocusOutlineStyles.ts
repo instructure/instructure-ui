@@ -25,35 +25,40 @@ import { alpha } from '@instructure/ui-color-utils'
 import type { SharedTokens } from '@instructure/ui-themes'
 
 /**
- * Generates consistent focus outline styles.
- *
  * This function creates CSS-in-JS styles for focus indicators.
  *
- * @param {Object} theme - The focus outline theme configuration object containing color and sizing tokens.
- * @param {string} theme.offset - Outline offset value for 'offset' positioning (e.g., '2px').
- * @param {string} theme.inset - Outline offset value for 'inset' positioning (e.g., '-2px').
- * @param {string} theme.width - Outline width value (e.g., '2px').
- * @param {string} theme.infoColor - Default info/primary focus color (typically blue).
- * @param {string} theme.onColor - High contrast color for use on dark backgrounds.
- * @param {string} theme.successColor - Success state focus color (typically green).
- * @param {string} theme.dangerColor - Error/danger state focus color (typically red).
- *
- * @param {Object} [params] - Optional configuration parameters to customize the focus styles.
- * @param {'info' | 'inverse' | 'success' | 'danger'} [params.focusColor='info'] - The color variant to use for the focus outline.
- * @param {'offset' | 'inset'} [params.focusPosition='offset'] - Whether to position the outline outside ('offset') or inside ('inset') the element.
- * @param {boolean} [params.shouldAnimateFocus=true] - Whether to include smooth transition animations for focus changes.
- * @param {boolean} [params.focusWithin=false] - Whether to apply focus styles to :focus-within pseudo-class for container elements.
- *
- * @returns {Object} CSS-in-JS style object containing focus outline styles ready for use with emotion or similar libraries.
+ * @returns CSS-in-JS style object containing focus outline styles ready for use with emotion or similar libraries.
  */
 const calcFocusOutlineStyles = (
+  /**
+   * The focus outline theme configuration object containing color and sizing tokens.
+   */
   theme: SharedTokens['focusOutline'],
   params?: {
+    /**
+     * The color variant to use for the focus outline
+     */
     focusColor?: 'info' | 'inverse' | 'success' | 'danger'
+    /**
+     * Whether to position the outline outside ('offset') or inside ('inset') the element.
+     */
     focusPosition?: 'offset' | 'inset'
+    /**
+     * Whether to include smooth transition animations for focus changes.
+     */
     shouldAnimateFocus?: boolean
+    /**
+     * Whether to apply focus styles to :focus-within pseudo-class for container elements.
+     */
     focusWithin?: boolean
+    /**
+     * Whether to force showing the focus outline.
+     */
     withFocusOutline?: boolean
+    /**
+     * What CSS selector to use to display the focus ring, `:focus` by default.
+     */
+    customCSSSelector?: string
   }
 ) => {
   const focusColor = params?.focusColor ?? 'info'
@@ -61,6 +66,7 @@ const calcFocusOutlineStyles = (
   const shouldAnimateFocus = params?.shouldAnimateFocus ?? true
   const focusWithin = params?.focusWithin ?? false
   const withFocusOutline = params?.withFocusOutline ?? false
+  const selector = params?.customCSSSelector ?? '&:focus'
 
   const focusColorVariants = {
     info: theme.infoColor,
@@ -83,7 +89,7 @@ const calcFocusOutlineStyles = (
     outlineStyle: 'solid',
     outlineColor: alpha(outlineStyle.outlineColor, 0),
     ...(withFocusOutline && outlineStyle),
-    '&:focus': {
+    [selector]: {
       ...outlineStyle,
       '&:hover, &:active': {
         // apply the same style so it's not overridden by some global style

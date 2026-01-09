@@ -164,8 +164,11 @@ const generateStyle = (
   }
 
   const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline, {
-    focusWithin: true,
-    focusColor: invalid ? 'danger' : success ? 'success' : undefined
+    focusColor: invalid ? 'danger' : success ? 'success' : undefined,
+    // Only display the focus outline when the input is focused.
+    // This is to prevent double focus ring when e.g., a Button is rendered in
+    // `renderBeforeInput`
+    customCSSSelector: '&:has(input:focus)'
   })
 
   return {
