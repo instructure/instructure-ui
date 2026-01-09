@@ -10,43 +10,6 @@ order: 1
 
 TODO add details
 
-## Link
-
-### New `size` prop
-
-A new `size` prop has been added to control the font size, line height, and icon size/gap. Available values are:
-
-- `'small'`
-- `'medium'` (default)
-- `'large'`
-
-### Deprecated variant values
-
-The following variant values have been **deprecated** and will be removed in a future version (still supported but warn):
-
-- `'inline-small'`
-- `'standalone-small'`
-
-### Theme variable changes
-
-- theme variable `unstyledTextColor` is newly added for non-interactive Links
-- theme variable `fontSize` is now removed
-- theme variable `fontSizeSmall` is now removed
-- theme variable `lineHeight` is now removed
-- theme variable `color` has been renamed to `textColor`
-- theme variable `hoverColor` has been renamed to `textHoverColor`
-- theme variable `colorInverse` has been renamed to `onColorTextColor`
-- theme variable `focusOutlineWidth` is now removed
-- theme variable `focusOutlineStyle` is now removed
-- theme variable `focusOutlineColor` is now removed
-- theme variable `focusOutlineBorderRadius` is now removed
-- theme variable `focusInverseOutlineColor` is now removed
-- theme variable `focusInverseIconOutlineColor` is now removed
-- theme variable `iconSize` is now removed
-- theme variable `iconPlusTextMargin` is now removed
-- theme variable `iconPlusTextMarginSmall` is now removed
-- theme variable `textUnderlineOffset` is now removed
-
 ## New icons
 
 InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set (see below).
@@ -68,44 +31,6 @@ InstUI v12 introduces a new icon package **`@instructure/ui-icons-lucide`** base
 | **src**         | `string`                                                                                        | ❌ Removed                                                                                            |
 
 The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to Lucide icons and will be spread onto the nested SVG element. Existing `@instructure/ui-icons` package remains available for legacy Instructure-specific icons.
-
-## Removal of deprecated props/components/APIs
-
-### Text
-
-- `alert` color has been removed. Please use `primary` instead.
-- Some prop values have been deprecated, see [Text](/Text) for more details.
-
-### Pill
-
-#### Deprecated color prop values
-
-The following `color` prop values have been **removed**:
-
-- `'danger'` - use `'error'` instead
-- `'alert'` - use `'info'` instead
-
-#### Theme variable changes
-
-- theme variable `fontFamily` has been added
-- theme variable `padding` has been renamed to `paddingHorizontal` (now only controls horizontal padding)
-- theme variable `background` has been renamed to `backgroundColor`
-- theme variable `primaryColor` has been split into:
-  - `baseTextColor` (for text color)
-  - `baseBorderColor` (for border color)
-- theme variable `successColor` has been split into:
-  - `successTextColor` (for text color)
-  - `successBorderColor` (for border color)
-- theme variable `infoColor` has been split into:
-  - `infoTextColor` (for text color)
-  - `infoBorderColor` (for border color)
-- theme variable `warningColor` has been split into:
-  - `warningTextColor` (for text color)
-  - `warningBorderColor` (for border color)
-- theme variable `dangerColor` has been removed, replaced with:
-  - `errorTextColor` (for text color)
-  - `errorBorderColor` (for border color)
-- theme variable `alertColor` has been removed (use `info*` variables instead)
 
 ## API Changes
 
@@ -138,11 +63,11 @@ type: example
 
 ### Breadcrumb
 
-#### New tokens
+#### New theme tokens
 
-- gapSm - Gap spacing for small size breadcrumbs
-- gapMd - Gap spacing for medium size breadcrumbs
-- gapLg - Gap spacing for large size breadcrumbs
+- `gapSm` - Gap spacing for small size breadcrumbs
+- `gapMd` - Gap spacing for medium size breadcrumbs
+- `gapLg` - Gap spacing for large size breadcrumbs
 
 #### Theme variable changes
 
@@ -154,6 +79,74 @@ type: example
 - theme variable `mediumFontSize` is now removed (handled in link component)
 - theme variable `largeSeparatorFontSize` is now removed (handled in link component)
 - theme variable `largeFontSize` is now removed (handled in link component)
+
+### Link
+
+#### New `size` prop
+
+A new `size` prop has been added to control the font size, line height, and icon size/gap. Available values are:
+
+- `'small'`
+- `'medium'` (default)
+- `'large'`
+
+#### Deprecated variant values
+
+The following variant values have been **deprecated** and will be removed in a future version (still supported but warn):
+
+- `'inline-small'`
+- `'standalone-small'`
+
+#### Theme variable changes
+
+- theme variable `unstyledTextColor` is newly added for non-interactive Links
+- theme variable `fontSize` is now removed
+- theme variable `fontSizeSmall` is now removed
+- theme variable `lineHeight` is now removed
+- theme variable `color` has been renamed to `textColor`
+- theme variable `hoverColor` has been renamed to `textHoverColor`
+- theme variable `colorInverse` has been renamed to `onColorTextColor`
+- theme variable `focusOutlineWidth` is now removed
+- theme variable `focusOutlineStyle` is now removed
+- theme variable `focusOutlineColor` is now removed
+- theme variable `focusOutlineBorderRadius` is now removed
+- theme variable `focusInverseOutlineColor` is now removed
+- theme variable `focusInverseIconOutlineColor` is now removed
+- theme variable `iconSize` is now removed
+- theme variable `iconPlusTextMargin` is now removed
+- theme variable `iconPlusTextMarginSmall` is now removed
+- theme variable `textUnderlineOffset` is now removed
+
+### Pill
+
+#### Deprecated color prop values
+
+The following `color` prop values have been **removed**:
+
+- `'danger'` - use `'error'` instead
+- `'alert'` - use `'info'` instead
+
+#### Theme variable changes
+
+- theme variable `fontFamily` has been added
+- theme variable `padding` has been renamed to `paddingHorizontal` (now only controls horizontal padding)
+- theme variable `background` has been renamed to `backgroundColor`
+- theme variable `primaryColor` has been split into:
+  - `baseTextColor` (for text color)
+  - `baseBorderColor` (for border color)
+- theme variable `successColor` has been split into:
+  - `successTextColor` (for text color)
+  - `successBorderColor` (for border color)
+- theme variable `infoColor` has been split into:
+  - `infoTextColor` (for text color)
+  - `infoBorderColor` (for border color)
+- theme variable `warningColor` has been split into:
+  - `warningTextColor` (for text color)
+  - `warningBorderColor` (for border color)
+- theme variable `dangerColor` has been removed, replaced with:
+  - `errorTextColor` (for text color)
+  - `errorBorderColor` (for border color)
+- theme variable `alertColor` has been removed (use `info*` variables instead)
 
 ### RadioInput
 
@@ -242,6 +235,12 @@ The following theme variables have been removed. Gap styling now uses `sharedTok
 ### FormFieldMessages
 
 - theme variable `topMargin` is now removed
+
+### Text
+
+- `alert` color has been removed. Please use `primary` instead.
+- Some prop values have been deprecated, see [Text](/Text) for more details.
+- `color` has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
 
 ### TextArea
 
