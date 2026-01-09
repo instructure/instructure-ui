@@ -169,6 +169,10 @@
             "type": "spacing"
           },
           "lg": {
+            "value": "{size.size16}",
+            "type": "spacing"
+          },
+          "xl": {
             "value": "{size.size20}",
             "type": "spacing"
           }
