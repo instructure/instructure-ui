@@ -32,6 +32,10 @@
       "value": "0rem",
       "type": "spacing"
     },
+    "contentMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
     "boxShadow": {
       "value": [
         {
@@ -59,6 +63,10 @@
     }
   },
   "sideNavBarItem": {
+    "borderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
+    },
     "backgroundColor": {
       "value": "transparent",
       "type": "other"
