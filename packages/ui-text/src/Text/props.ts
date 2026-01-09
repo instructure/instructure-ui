@@ -47,6 +47,8 @@ type TextOwnProps = {
     | 'warning'
     | 'primary-inverse'
     | 'secondary-inverse'
+    | 'primary-on' // used on colored surfaces like warning, same color in dark and light themes
+    | 'secondary-on' // used on colored surfaces like warning, same color in dark and light themes
     | 'ai-highlight'
   /**
    * Provides a reference to the underlying HTML element

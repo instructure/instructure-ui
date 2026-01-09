@@ -73,7 +73,7 @@ const axeOptions: { runOnly: RunOnly } = {
 }
 
 describe('visual regression test', () => {
-  it('Metric, Pill, Tag, TimeSelect', () => {
+  it('Metric, Pill, Tag, TimeSelect, Text', () => {
     cy.visit('http://localhost:3000/small-components')
     cy.injectAxe()
     cy.checkA11y('.axe-test', axeOptions, terminalLog)

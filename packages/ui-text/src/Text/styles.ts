@@ -114,12 +114,14 @@ const generateStyle = (
   const colorVariants = {
     primary: { color: componentTheme.baseColor },
     secondary: { color: componentTheme.mutedColor },
-    'primary-inverse': { color: componentTheme.baseOnColor },
-    'secondary-inverse': { color: componentTheme.mutedOnColor },
+    'primary-inverse': { color: componentTheme.inverseColor },
+    'secondary-inverse': { color: componentTheme.inverseColor },
     success: { color: componentTheme.successColor },
     brand: { color: componentTheme.primaryColor },
     danger: { color: componentTheme.errorColor },
     warning: { color: componentTheme.warningColor },
+    'primary-on': { color: componentTheme.baseOnColor },
+    'secondary-on': { color: componentTheme.mutedOnColor },
     'ai-highlight': {
       color: componentTheme.aiColor,
       background: componentTheme.aiBackgroundColor
