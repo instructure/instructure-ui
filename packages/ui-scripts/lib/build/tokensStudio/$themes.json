@@ -1902,7 +1902,8 @@
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
       "opacity.base": "86ce8d7f5016628d3c9f5f268385cd5c2105baf7",
-      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea"
+      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea",
+      "spacing.padding.interactive.horizontal.xl": "edae92c454db22fadcf21a741445a01a532d8524"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:0",
@@ -3748,7 +3749,8 @@
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
       "opacity.base": "86ce8d7f5016628d3c9f5f268385cd5c2105baf7",
-      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea"
+      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea",
+      "spacing.padding.interactive.horizontal.xl": "edae92c454db22fadcf21a741445a01a532d8524"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:1",
@@ -4351,6 +4353,7 @@
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
       "opacity.base": "86ce8d7f5016628d3c9f5f268385cd5c2105baf7",
       "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea",
+      "spacing.padding.interactive.horizontal.xl": "edae92c454db22fadcf21a741445a01a532d8524",
       "aiInformation.bodyPadding": "56a9fbff12ee9eccabb8e25881d1c2be2c97f71c",
       "aiInformation.headingBottomMargin": "da7f5258b9dac3ae812f86a75d8bb5cc0d955a0b",
       "aiInformation.featureNameBottomMargin": "e60a258058bc7adee26c3624a936912429e67f96",
@@ -6195,6 +6198,7 @@
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
       "opacity.base": "86ce8d7f5016628d3c9f5f268385cd5c2105baf7",
       "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea",
+      "spacing.padding.interactive.horizontal.xl": "edae92c454db22fadcf21a741445a01a532d8524",
       "aiInformation.bodyPadding": "56a9fbff12ee9eccabb8e25881d1c2be2c97f71c",
       "aiInformation.headingBottomMargin": "da7f5258b9dac3ae812f86a75d8bb5cc0d955a0b",
       "aiInformation.featureNameBottomMargin": "e60a258058bc7adee26c3624a936912429e67f96",
