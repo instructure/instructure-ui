@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import type { NewComponentTypes } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { TrayProps, TrayStyle } from './props'
 
 type StyleParams = {
@@ -53,7 +54,7 @@ const generateStyle = (
 
   const shadowStyle = shadow
     ? {
-        boxShadow: componentTheme.boxShadow
+        boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow)
       }
     : {}
 
