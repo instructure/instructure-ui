@@ -23,11 +23,11 @@
  */
 import type { ComponentTypes as NewComponentTypes } from './themes/newThemes/componentTypes'
 import type {
+  SharedTokens,
   BaseTheme as NewBaseTheme,
   TokenBoxshadowValueInst,
   TokenTypographyValueInst
 } from './themes/newThemes/commonTypes'
-import type { SharedTokens } from './themes/newThemes/componentTypes/sharedTokens'
 import type { CanvasHighContrastTheme } from './themes/canvasHighContrast'
 import type { CanvasTheme, CanvasBrandVariables } from './themes/canvas'
 import type {
