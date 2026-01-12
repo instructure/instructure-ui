@@ -215,7 +215,14 @@ async function publishPackage(pkg, tag) {
       setTimeout(resolve, delay)
     })
 
-  const publishArgs = ['publish', pkg.location, '--tag', tag, '--no-git-checks']
+  const publishArgs = [
+    'publish',
+    pkg.location,
+    '--tag',
+    tag,
+    '--no-git-checks',
+    '--provenance'
+  ]
   await runCommandAsync('pnpm', publishArgs)
 
   return wait(500)
