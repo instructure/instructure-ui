@@ -17,7 +17,7 @@
       "type": "spacing"
     },
     "minimizedWidth": {
-      "value": "3.375rem",
+      "value": "3.75rem",
       "type": "sizing"
     },
     "toggleTransition": {
@@ -25,7 +25,7 @@
       "type": "other"
     },
     "width": {
-      "value": "5.25rem",
+      "value": "5.625rem",
       "type": "sizing"
     },
     "margin": {
