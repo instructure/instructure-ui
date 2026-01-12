@@ -1,5 +1,13 @@
-name: npm release from PR
-on: workflow_dispatch
+name: Manual release to npm (Reusable)
+on:
+  workflow_call:
+    secrets:
+      inherit
+
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -9,7 +17,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Install Node 22
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
@@ -18,11 +27,7 @@ jobs:
       - name: Set up project
         run: pnpm run bootstrap
       - name: Release to NPM
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_EMAIL: ${{secrets.NPM_EMAIL}}
-          NPM_USERNAME: ${{secrets.NPM_USERNAME}}
-        run: pnpm run release -- --prRelease
+        run: pnpm run release
       - name: Get commit message
         run: | # puts the first line of the last commit message to the commmit_message env var
           echo "commmit_message=$(git log --format=%B -n 1 ${{ github.event.after }} | head -n 1)" >> $GITHUB_ENV
