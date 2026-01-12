@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-i18n",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "description": "Helper components and utilities for internationalization.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

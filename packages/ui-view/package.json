@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-view",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "description": "A component for basic styles including spacing, sizing, borders, display, positioning, and focus states.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

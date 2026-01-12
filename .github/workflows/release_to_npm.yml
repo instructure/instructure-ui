@@ -1,0 +1,48 @@
+name: Release to npm (OIDC Entry Point)
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of release to perform'
+        required: true
+        type: choice
+        options:
+          - manual
+          - pr-snapshot
+        default: 'manual'
+
+permissions:
+  id-token: write    # Required for OIDC token generation
+  contents: write    # Required for git operations (tagging)
+
+jobs:
+  # Automatic production release on push to master
+  auto-release:
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/_release-reusable.yml
+    permissions:
+      id-token: write
+      contents: write
+    secrets: inherit
+
+  # Manual release (on-demand)
+  manual-release:
+    if: github.event_name == 'workflow_dispatch' && inputs.release_type == 'manual'
+    uses: ./.github/workflows/_manual-release-reusable.yml
+    permissions:
+      id-token: write
+      contents: write
+    secrets: inherit
+
+  # PR snapshot release
+  pr-release:
+    if: github.event_name == 'workflow_dispatch' && inputs.release_type == 'pr-snapshot'
+    uses: ./.github/workflows/_pr-release-reusable.yml
+    permissions:
+      id-token: write
+      contents: write
+    secrets: inherit

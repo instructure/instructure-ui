@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "description": "A meta package exporting all UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

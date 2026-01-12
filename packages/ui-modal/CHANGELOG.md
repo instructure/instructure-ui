@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
+
+### Bug Fixes
+
+- **ui-modal:** adjust scrollbar detection tolerance in ModalBody ([5ae1f42](https://github.com/instructure/instructure-ui/commit/5ae1f42f47102b87a8c7afabdd9ab51b331de96a))
+
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
 
 ### Features

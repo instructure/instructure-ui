@@ -100,18 +100,6 @@ To run tests for a package:
 
 `pnpm run ui-scripts test -- --scope @instructure/ui-avatar`
 
-### Configuration
-
-If you'd like to use the publish, deploy, and release scripts, you'll need to configure your project as follows:
-
-Add a `.env` file to your project root or define these env vars for your shell:
-
-```sh
-NPM_TOKEN=
-NPM_USERNAME=
-NPM_EMAIL=
-```
-
 [npm]: https://img.shields.io/npm/v/@instructure/ui-scripts.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-scripts
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square

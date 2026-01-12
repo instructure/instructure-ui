@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import fs from 'fs'
-import path from 'path'
-import os from 'os'
 import semver from 'semver'
 import pkgUtils from '@instructure/pkg-utils'
 import {
@@ -34,11 +31,6 @@ import {
 } from '@instructure/command-utils'
 
 import { Project } from '@lerna/project'
-
-const NPM_SCOPE = '@instructure:registry=https://registry.npmjs.org/'
-
-// Track user .npmrc backup for cleanup
-let userNpmrcBackup = null
 const syncRootPackageVersion = async (useProjectVersion) => {
   const project = new Project(process.cwd())
   const rootPkg = pkgUtils.getPackage()
@@ -110,80 +102,24 @@ export async function bumpPackages(packageName, requestedVersion) {
   return releaseVersion
 }
 
-export function createNPMRCFile() {
-  const { NPM_TOKEN, NPM_EMAIL, NPM_USERNAME } = process.env
+export function checkNpmAuth() {
+  info('📦  Using OIDC authentication (npm trusted publishing)')
 
-  // Only write an npmrc file if these are defined, otherwise assume the system is properly configured
-  if (NPM_TOKEN) {
-    const userHome = os.homedir()
-    const userNpmrcPath = path.join(userHome, '.npmrc')
-
-    // Backup existing user .npmrc if it exists
-    if (fs.existsSync(userNpmrcPath)) {
-      const existingContent = fs.readFileSync(userNpmrcPath, 'utf8')
-      userNpmrcBackup = {
-        path: userNpmrcPath,
-        content: existingContent,
-        existed: true
-      }
-      info(`📦  Backing up existing ${userNpmrcPath}`)
-    } else {
-      userNpmrcBackup = {
-        path: userNpmrcPath,
-        content: null,
-        existed: false
-      }
-    }
-
-    // Write auth credentials to user .npmrc
-    const authConfig = `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${NPM_SCOPE}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}\n`
-
-    if (userNpmrcBackup.existed) {
-      // Append to existing content
-      fs.writeFileSync(
-        userNpmrcPath,
-        userNpmrcBackup.content + '\n' + authConfig
-      )
-    } else {
-      // Create new file
-      fs.writeFileSync(userNpmrcPath, authConfig)
-    }
-
-    info(`📦  Written auth config to ${userNpmrcPath}`)
-  }
-
+  // Verify OIDC authentication works
   try {
-    info('running pnpm whoami:')
+    info('📦  Running pnpm whoami to verify OIDC auth:')
     runCommandSync('pnpm', ['whoami'])
   } catch (e) {
-    error(`Could not determine if NPM auth was successful: ${e}`)
+    error(`Could not verify OIDC authentication: ${e}`)
+    error('Make sure:')
+    error('  1. Workflow has id-token: write permissions')
+    error('  2. npm packages are configured for trusted publishing')
+    error('  3. Workflow is running in GitHub Actions')
     process.exit(1)
   }
 }
 
 export function cleanupNPMRCFile() {
-  if (!userNpmrcBackup) {
-    // Nothing to cleanup
-    return
-  }
-
-  try {
-    if (userNpmrcBackup.existed) {
-      // Restore original content
-      fs.writeFileSync(userNpmrcBackup.path, userNpmrcBackup.content)
-      info(`📦  Restored original ${userNpmrcBackup.path}`)
-    } else {
-      // Remove the file we created
-      if (fs.existsSync(userNpmrcBackup.path)) {
-        fs.unlinkSync(userNpmrcBackup.path)
-        info(`📦  Removed ${userNpmrcBackup.path}`)
-      }
-    }
-  } catch (e) {
-    error(`Failed to cleanup .npmrc: ${e}`)
-    // Don't exit - cleanup failure shouldn't break the release
-  } finally {
-    // Reset backup state
-    userNpmrcBackup = null
-  }
+  // No cleanup needed with OIDC authentication
+  // This function is kept for backward compatibility
 }
