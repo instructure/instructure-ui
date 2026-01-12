@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-calendar",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "description": "A calendar component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

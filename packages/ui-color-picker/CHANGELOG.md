@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** fix mixer button alignment and visual jump ([68c3e60](https://github.com/instructure/instructure-ui/commit/68c3e60acc5e1f410ed79a623a35fa3eaf7107f5))
+* **ui-color-picker:** fix popover scrolling when content exceeds viewport ([66f2b18](https://github.com/instructure/instructure-ui/commit/66f2b18af0dead1f62ee61629262c39c6273dad0))
+
+
+
+
+
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
 
 

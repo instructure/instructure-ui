@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
+
+
+### Bug Fixes
+
+* **ui-top-nav-bar:** fix aria-expanded added twice when displaying menus/popups ([b58a1bc](https://github.com/instructure/instructure-ui/commit/b58a1bc8daba596c987dc368d7772e53253c1d77))
+
+
+
+
+
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
 
 
