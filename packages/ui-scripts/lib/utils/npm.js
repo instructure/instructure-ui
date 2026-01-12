@@ -102,7 +102,7 @@ export async function bumpPackages(packageName, requestedVersion) {
   return releaseVersion
 }
 
-export function createNPMRCFile() {
+export function checkNpmAuth() {
   info('📦  Using OIDC authentication (npm trusted publishing)')
 
   // Verify OIDC authentication works

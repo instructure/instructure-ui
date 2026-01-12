@@ -30,7 +30,7 @@ import {
   confirm
 } from '@instructure/command-utils'
 
-import { createNPMRCFile, cleanupNPMRCFile } from '../utils/npm.js'
+import { checkNpmAuth, cleanupNPMRCFile } from '../utils/npm.js'
 
 export default {
   command: 'deprecate',
@@ -65,7 +65,7 @@ export default {
 
 async function doDeprecate(versionToDeprecate, fixVersion) {
   const message = `A critical bug was fixed in ${fixVersion}`
-  createNPMRCFile()
+  checkNpmAuth()
 
   try {
     info(
