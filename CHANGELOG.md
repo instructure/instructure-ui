@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
+
+### Bug Fixes
+
+- **ui-color-picker:** fix mixer button alignment and visual jump ([68c3e60](https://github.com/instructure/instructure-ui/commit/68c3e60acc5e1f410ed79a623a35fa3eaf7107f5))
+- **ui-color-picker:** fix popover scrolling when content exceeds viewport ([66f2b18](https://github.com/instructure/instructure-ui/commit/66f2b18af0dead1f62ee61629262c39c6273dad0))
+- **ui-icons:** fix ai info icon ([723ef9f](https://github.com/instructure/instructure-ui/commit/723ef9fb972fbcbf7627653698d2e47f8af49822))
+- **ui-link:** fix Link outline styles and overrides ([f23269e](https://github.com/instructure/instructure-ui/commit/f23269ed1139bb9833abbc894493a95bb80e27f4))
+- **ui-list:** align ordered list start position with unordered lists ([baed912](https://github.com/instructure/instructure-ui/commit/baed912a2f246797b5bcd58c40c64b26de6baaf2))
+- **ui-modal:** adjust scrollbar detection tolerance in ModalBody ([5ae1f42](https://github.com/instructure/instructure-ui/commit/5ae1f42f47102b87a8c7afabdd9ab51b331de96a))
+- **ui-selectable,ui-select:** fix typing of Select and Selectable event types and TypeScript errors in the examples ([bde40cc](https://github.com/instructure/instructure-ui/commit/bde40cc121674666cceb7eb24e116a50e1879445))
+- **ui-top-nav-bar:** fix aria-expanded added twice when displaying menus/popups ([b58a1bc](https://github.com/instructure/instructure-ui/commit/b58a1bc8daba596c987dc368d7772e53253c1d77))
+
+### Features
+
+- **ui-tabs:** add tabIndex prop to the Panel for WCAG-compliant focus control (defaults to 0 for backward compatibility) ([9b2121f](https://github.com/instructure/instructure-ui/commit/9b2121f3e0f5fb0abf4ad12158f9972aa1acc5a4))
+
 # [11.2.0](https://github.com/instructure/instructure-ui/compare/v11.0.1...v11.2.0) (2025-11-06)
 
 ### Bug Fixes

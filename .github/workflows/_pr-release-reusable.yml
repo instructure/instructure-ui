@@ -1,5 +1,11 @@
-name: npm release from PR
-on: workflow_dispatch
+name: PR release to npm (Reusable)
+on:
+  workflow_call:
+
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -11,18 +17,15 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'pnpm'
+          registry-url: "https://registry.npmjs.org"
       - name: Install packages
         run: pnpm install --frozen-lockfile
       - name: Set up project
         run: pnpm run bootstrap
       - name: Release to NPM
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_EMAIL: ${{secrets.NPM_EMAIL}}
-          NPM_USERNAME: ${{secrets.NPM_USERNAME}}
-        run: pnpm run release -- --prRelease
+        run: pnpm run release --prRelease
       - name: Get commit message
         run: | # puts the first line of the last commit message to the commmit_message env var
           echo "commmit_message=$(git log --format=%B -n 1 ${{ github.event.after }} | head -n 1)" >> $GITHUB_ENV
