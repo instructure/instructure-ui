@@ -37,7 +37,7 @@ A `TextArea` with errors:
 ---
 type: example
 ---
-<TextArea messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
+<TextArea messages={[{ text: 'Invalid description', type: 'newError' }]} label="Description" />
 ```
 
 A disabled `TextArea`:

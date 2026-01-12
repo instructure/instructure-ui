@@ -91,14 +91,14 @@ class Example extends React.Component {
       // could not be parsed and so the date is invalid
       if (!selectedDate && value) {
         return {
-          messages: [{ type: 'error', text: 'This date is invalid' }],
+          messages: [{ type: 'newError', text: 'This date is invalid' }],
         }
       }
       // Display a message if the user has typed in a value that corresponds to a
       // disabledDate
       if (this.isDisabledDate(parseDate(selectedDate))) {
         return {
-          messages: [{ type: 'error', text: 'This date is disabled' }],
+          messages: [{ type: 'newError', text: 'This date is disabled' }],
         }
       }
     })
