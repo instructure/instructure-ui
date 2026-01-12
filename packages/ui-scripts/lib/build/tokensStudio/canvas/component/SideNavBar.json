@@ -65,7 +65,7 @@
       "value": "0rem",
       "type": "borderRadius"
     },
-    "minimizedborderRadius": {
+    "minimizedBorderRadius": {
       "value": "0rem",
       "type": "borderRadius"
     }
