@@ -1,8 +1,6 @@
 name: Manual release to npm (Reusable)
 on:
   workflow_call:
-    secrets:
-      inherit
 
 permissions:
   id-token: write
@@ -17,11 +15,12 @@ jobs:
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v4
-      - name: Install Node 22
+      - name: Install Node 24
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'pnpm'
+          registry-url: "https://registry.npmjs.org"
       - name: Install packages
         run: pnpm install --frozen-lockfile
       - name: Set up project

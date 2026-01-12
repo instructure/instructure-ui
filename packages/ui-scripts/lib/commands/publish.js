@@ -30,11 +30,7 @@ import {
   isReleaseCommit,
   runGitCommand
 } from '../utils/git.js'
-import {
-  bumpPackages,
-  createNPMRCFile,
-  cleanupNPMRCFile
-} from '../utils/npm.js'
+import { bumpPackages, checkNpmAuth, cleanupNPMRCFile } from '../utils/npm.js'
 import semver from 'semver'
 
 export default {
@@ -73,7 +69,7 @@ export default {
 async function publish({ packageName, version, isMaintenance, prRelease }) {
   const isRegularRelease = isReleaseCommit(version)
 
-  createNPMRCFile()
+  checkNpmAuth()
 
   try {
     checkWorkingDirectory()

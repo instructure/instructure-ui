@@ -1,8 +1,6 @@
 name: Release to npm (Reusable)
 on:
   workflow_call:
-    secrets:
-      inherit
 
 permissions:
   id-token: write    # Required for OIDC
@@ -19,8 +17,9 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'pnpm'
+          registry-url: "https://registry.npmjs.org"
       - name: Install packages.
         run: pnpm install --frozen-lockfile
       - name: Set up project.
