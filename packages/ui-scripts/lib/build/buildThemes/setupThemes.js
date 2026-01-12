@@ -63,11 +63,37 @@ export const transformThemes = (themes) =>
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 const unCapitalize = (str) => str.charAt(0).toLowerCase() + str.slice(1)
 
+const getTypeImports = (componentTypes, theme) => {
+  let imports = ''
+  if (componentTypes.includes(`Semantics[`)) {
+    imports =
+      imports + `import type { Semantics } from "../${theme}/semantics"\n`
+  }
+  if (componentTypes.includes('TokenBoxshadowValueInst')) {
+    imports =
+      imports +
+      `import type { TokenBoxshadowValueInst } from '../commonTypes'\n`
+  }
+  if (componentTypes.includes('TokenBorderValue')) {
+    imports =
+      imports + `import type { TokenBorderValue } from '@tokens-studio/types'\n`
+  }
+  if (componentTypes.includes('TokenTypographyValueInst')) {
+    imports =
+      imports +
+      `import type { TokenTypographyValueInst } from '../commonTypes'\n`
+  }
+  return imports
+}
+
 const setupThemes = async (targetPath, input) => {
   //clear old themes
   await promises.rm(targetPath, { recursive: true, force: true })
   //make new root folder
   await promises.mkdir(targetPath, { recursive: true })
+
+  // we need to put sharedTokensTypes to the commonTypes where it makes sense, however it comes from token studio as a component. This variable is seen by both parts of the code
+  let sharedTokensTypes = ''
 
   const themeData = transformThemes(input['$themes'])
   //TODO-rework the Primitive theme is a hackaround for design and only for the duration of the v12 work. This should be removed before the release (.filter(t=>t!=="Primitive"))
@@ -114,6 +140,7 @@ const setupThemes = async (targetPath, input) => {
     for (const componentpath of themeData[theme].components) {
       const rawComponentName =
         componentpath.split('/')[componentpath.split('/').length - 1]
+
       const mainComponentName =
         rawComponentName[0].toLowerCase() + rawComponentName.slice(1)
 
@@ -137,8 +164,9 @@ const setupThemes = async (targetPath, input) => {
           subcomponent === mainComponentName
             ? mainComponentName
             : `${mainComponentName}${capitalize(subcomponentName)}`
-
-        componentAndSubcomponentNames.push(componentName)
+        if (componentName !== 'sharedTokens') {
+          componentAndSubcomponentNames.push(componentName)
+        }
 
         const component = generateComponent(input[componentpath][subcomponent])
 
@@ -146,51 +174,53 @@ const setupThemes = async (targetPath, input) => {
           input[componentpath][subcomponent]
         )
 
-        const componentFileContent = `
-        import semantics from "../semantics"
-        import type { ${capitalize(
-          componentName
-        )} } from '../../componentTypes/${componentName}'
+        //SharedTokens have to be at the component level in the input data because of figma, but it should be one level higher for our purposes
+        if (rawComponentName !== 'SharedTokens') {
+          const componentFileContent = `
+          import semantics from "../semantics"
+          import type { ${capitalize(
+            componentName
+          )} } from '../../componentTypes/${componentName}'
+
+          const ${componentName}: ${capitalize(componentName)} = {${component}}
+          export default ${componentName}
+            `
+          await createFile(
+            `${themePath}/components/${componentName}.ts`,
+            componentFileContent
+          )
+        }
+
+        if (rawComponentName === 'SharedTokens') {
+          sharedTokensTypes = componentTypes
+          const componentFileContent = `
+        import semantics from "./semantics"
+        import { SharedTokens } from '../commonTypes'
 
         const ${componentName}: ${capitalize(componentName)} = {${component}}
         export default ${componentName}
           `
 
-        await createFile(
-          `${themePath}/components/${componentName}.ts`,
-          componentFileContent
-        )
+          await createFile(
+            `${themePath}/${componentName}.ts`,
+            componentFileContent
+          )
+        }
+
         if (themeIndex === 0) {
-          let importSemantics = ''
-          if (componentTypes.includes(`Semantics[`)) {
-            importSemantics = `import type { Semantics } from "../${theme}/semantics"`
-          }
-          let importBoxShadow = ''
-          if (componentTypes.includes('TokenBoxshadowValueInst')) {
-            importBoxShadow = `import type { TokenBoxshadowValueInst } from '../commonTypes'`
-          }
-          let importBorder = ''
-          if (componentTypes.includes('TokenBorderValue')) {
-            importBorder = `import type { TokenBorderValue } from '@tokens-studio/types'`
-          }
-          let importTypography = ''
-          if (componentTypes.includes('TokenTypographyValueInst')) {
-            importTypography = `import type { TokenTypographyValueInst } from '../commonTypes'`
-          }
           const typeFileContent = `
-          ${importSemantics}
-          ${importBoxShadow}
-          ${importBorder}
-          ${importTypography}
+          ${getTypeImports(componentTypes, theme)}
 
           export type ${capitalize(componentName)} = ${componentTypes}
 
           export default ${capitalize(componentName)}
         `
-          await createFile(
-            `${targetPath}/componentTypes/${componentName}.ts`,
-            typeFileContent
-          )
+          if (rawComponentName !== 'SharedTokens') {
+            await createFile(
+              `${targetPath}/componentTypes/${componentName}.ts`,
+              typeFileContent
+            )
+          }
         }
       })
     }
@@ -211,16 +241,20 @@ const setupThemes = async (targetPath, input) => {
       )
       .join(',\n')
     const indexFileContent = `
+      import sharedTokens from "./sharedTokens";
       import primitives, {type Primitives} from "./primitives";
       import semantics, {type Semantics} from "./semantics";
-      import type { BaseTheme } from '../commonTypes';
+      
       ${componentImports}
+
+      import type { BaseTheme } from '../commonTypes';
 
       export type Theme = BaseTheme<Primitives, Semantics>
 
       const theme: Theme = {
         primitives,
         semantics,
+        sharedTokens,
         components: {
           ${componentNames}
         },
@@ -266,6 +300,7 @@ const setupThemes = async (targetPath, input) => {
   const commonTypes = `import type { ComponentTypes } from "./componentTypes"
     import type { TokenTextCaseValue, TokenTextDecorationValue } from '@tokens-studio/types'
 
+
     // This type is broken in Token Studio, use their version when the bug is fixed
     export type TokenBoxshadowValueInst = {
         color: string
@@ -289,11 +324,17 @@ const setupThemes = async (targetPath, input) => {
     textDecoration?: TokenTextDecorationValue
   }
 
+  export type SharedTokens = ${sharedTokensTypes}  
+
   export type BaseTheme<P extends Record<string, any> = Record<string, any>, S extends Record<string, any> = Record<string, any>> = {
     primitives: P
     semantics: S
+    sharedTokens: SharedTokens
     components: ComponentTypes
-  }`
+  }
+  
+  
+  `
   await createFile(`${targetPath}/commonTypes.ts`, commonTypes)
 
   // export index.ts
