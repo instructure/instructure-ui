@@ -100,7 +100,7 @@ const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   return generateStyle(
     componentTheme,
     params,
-    (theme as Theme).newTheme.components.SharedTokens
+    (theme as Theme).newTheme.sharedTokens
   )
 }
 

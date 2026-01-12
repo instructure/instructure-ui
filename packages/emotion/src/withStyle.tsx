@@ -207,7 +207,7 @@ const withStyle = decorator(
           ? generateStyle(
               componentTheme,
               componentProps,
-              (theme as Theme).newTheme.components.SharedTokens,
+              (theme as Theme).newTheme.sharedTokens,
               {}
             )
           : {}
@@ -217,7 +217,7 @@ const withStyle = decorator(
         const calculatedStyles = generateStyle(
           componentTheme,
           componentProps,
-          (theme as Theme).newTheme.components.SharedTokens,
+          (theme as Theme).newTheme.sharedTokens,
           extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
