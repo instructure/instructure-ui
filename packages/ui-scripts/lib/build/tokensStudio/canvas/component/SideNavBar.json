@@ -14,11 +14,11 @@
     },
     "marginBottom": {
       "value": "0.75rem",
-      "type": "other"
+      "type": "spacing"
     },
     "minimizedWidth": {
       "value": "3.375rem",
-      "type": "other"
+      "type": "sizing"
     },
     "toggleTransition": {
       "value": "300ms",
@@ -69,10 +69,10 @@
     },
     "backgroundColor": {
       "value": "transparent",
-      "type": "other"
+      "type": "color"
     },
     "contentPadding": {
-      "value": "{spacing.spaceSm}",
+      "value": "0.375rem",
       "type": "spacing"
     },
     "fontColor": {
