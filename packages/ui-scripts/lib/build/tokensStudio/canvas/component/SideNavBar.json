@@ -32,6 +32,10 @@
       "value": "0rem",
       "type": "spacing"
     },
+    "minimizedMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
     "contentMargin": {
       "value": "0rem",
       "type": "spacing"
@@ -58,6 +62,10 @@
       "type": "boxShadow"
     },
     "borderRadius": {
+      "value": "0rem",
+      "type": "borderRadius"
+    },
+    "minimizedborderRadius": {
       "value": "0rem",
       "type": "borderRadius"
     }
