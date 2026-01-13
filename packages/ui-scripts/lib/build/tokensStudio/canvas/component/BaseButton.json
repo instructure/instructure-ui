@@ -588,7 +588,7 @@
       "type": "opacity"
     },
     "opacityDisabled": {
-      "value": "{opacity.base}",
+      "value": "{opacity.disabled}",
       "type": "opacity"
     },
     "tertiaryActiveBorderColor": {
