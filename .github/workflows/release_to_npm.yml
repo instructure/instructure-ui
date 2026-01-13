@@ -1,0 +1,79 @@
+name: Release to npm (OIDC Entry Point)
+
+# Manual trigger only for v10_maintenance branch
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of release to perform'
+        required: true
+        type: choice
+        options:
+          - regular
+          - pr-snapshot
+        default: 'regular'
+
+permissions:
+  id-token: write    # Required for OIDC token generation
+  contents: write    # Required for git operations (tagging)
+
+jobs:
+  # Regular release (workflow_dispatch with 'regular' option)
+  regular-release:
+    if: inputs.release_type == 'regular'
+    runs-on: ubuntu-latest
+    name: Regular Release to npm
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install packages
+        run: npm ci
+      - name: Set up project
+        run: npm run bootstrap
+      - name: Release to NPM
+        run: npm run release
+      - name: Get commit message
+        run: |
+          echo "commmit_message=$(git log --format=%B -n 1 HEAD | head -n 1)" >> $GITHUB_ENV
+      - name: Set up git identity
+        if: "startsWith(env.commmit_message, 'chore(release)')"
+        run: git config --global user.name "instructure-ui-ci" && git config --global user.email "instructure-ui-ci@instructure.com"
+      - name: Add tag
+        if: "startsWith(env.commmit_message, 'chore(release)')"
+        run: git tag -a v$(./.github/workflows/calculateVersion.sh) -m v$(./.github/workflows/calculateVersion.sh)
+      - name: Push tags
+        if: "startsWith(env.commmit_message, 'chore(release)')"
+        run: git push origin v$(./.github/workflows/calculateVersion.sh)
+
+  # PR snapshot release (workflow_dispatch with 'pr-snapshot' option)
+  pr-release:
+    if: inputs.release_type == 'pr-snapshot'
+    runs-on: ubuntu-latest
+    name: PR Snapshot Release
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install packages
+        run: npm ci
+      - name: Set up project
+        run: npm run bootstrap
+      - name: Release to NPM
+        run: npm run release -- --prRelease

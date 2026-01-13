@@ -13,10 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Node 22
+      - name: Install Node 24
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
       - run: npm ci && npm run bootstrap
       - name: Set build directory and deployment path based on branch
         id: set-build-dir
@@ -57,10 +59,12 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
-      - name: Install Node 22
+      - name: Install Node 24
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
       - run: npm ci && npm run bootstrap
       - name: Build docs-app
         run: npm run build:docs

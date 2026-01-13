@@ -7,14 +7,18 @@ jobs:
   release:
     runs-on: ubuntu-latest
     name: Release to npm
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install packages.
         run: npm ci
       - name: Set up project.
@@ -22,10 +26,6 @@ jobs:
       - name: Run tests.
         run: USE_REACT_STRICT_MODE=0 npm run test:vitest
       - name: Release to NPM
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_EMAIL: ${{secrets.NPM_EMAIL}}
-          NPM_USERNAME: ${{secrets.NPM_USERNAME}}
         run: npm run release
   tag:
     needs: release

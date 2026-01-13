@@ -29,7 +29,7 @@ import {
   info,
   confirm
 } from '@instructure/command-utils'
-import { createNPMRCFile } from '../utils/npm.js'
+import { checkNpmAuth } from '../utils/npm.js'
 
 export default {
   command: 'tag',
@@ -57,7 +57,7 @@ export default {
 }
 
 async function distTag(command, versionToTag, tag) {
-  createNPMRCFile()
+  checkNpmAuth()
   if (command === 'add') {
     info(
       `Command: "npm dist-tag ${command}". Version to tag as "${tag}": ${versionToTag}`
