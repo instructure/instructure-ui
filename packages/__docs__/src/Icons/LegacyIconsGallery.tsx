@@ -249,13 +249,6 @@ const LegacyIconsGallery = ({ glyphs }: LegacyIconsGalleryProps) => {
 
   return (
     <div css={{ overflowX: 'hidden' }}>
-      <Alert variant="warning" margin="0 0 medium 0">
-        <strong>Deprecated:</strong> These icons will be removed in v12. Please
-        migrate to Lucide icons using the codemod:
-        <br />
-        <code>npx @instructure/ui-codemods migrate-lucide-icons src/</code>
-      </Alert>
-
       <FormFieldGroup
         layout="columns"
         colSpacing="small"

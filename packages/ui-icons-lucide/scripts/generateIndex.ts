@@ -106,9 +106,8 @@ async function generateIndex() {
 import * as Lucide from 'lucide-react'
 import { wrapLucideIcon } from './wrapLucideIcon'
 
-export type { LucideProps, LucideIcon } from 'lucide-react'
-export type { LucideIconWrapperProps, InstUIIconOwnProps } from './wrapLucideIcon'
-export { wrapLucideIcon }
+export type { LucideIconWrapperProps } from './wrapLucideIcon/props'
+export { renderIconWithProps } from './IconPropsProvider'
 
 ${iconExports}
 `
