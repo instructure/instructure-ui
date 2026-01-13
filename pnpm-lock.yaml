@@ -4368,9 +4368,9 @@ importers:
       '@instructure/ui-dom-utils':
         specifier: workspace:*
         version: link:../ui-dom-utils
-      '@instructure/ui-icons-lucide':
+      '@instructure/ui-icons':
         specifier: workspace:*
-        version: link:../ui-icons-lucide
+        version: link:../ui-icons
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
