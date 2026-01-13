@@ -128,7 +128,7 @@
       "type": "color"
     },
     "selectedInnerFocusOutlineColor": {
-      "value": "{color.stroke.interactive.focusRing.onColor}",
+      "value": "{icon.sideNavActiveColor}",
       "type": "color"
     },
     "outerFocusOutlineColor": {
