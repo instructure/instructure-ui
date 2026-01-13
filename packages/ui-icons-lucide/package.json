@@ -28,7 +28,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
-    "lucide-react": "^0.460.0"
+    "lucide-react": "^0.559.0"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
