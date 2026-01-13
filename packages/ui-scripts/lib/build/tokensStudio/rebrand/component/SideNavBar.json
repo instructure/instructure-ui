@@ -107,21 +107,12 @@
       "value": "1.625rem",
       "type": "sizing"
     },
-    "innerFocusOutline": {
-      "value": "inset 0 0 0 0.25rem #FFFFFF",
-      "type": "other",
-      "description": "code only token"
-    },
     "lineHeight": {
       "value": "{lineHeight.paragraph.base}",
       "type": "lineHeights"
     },
     "linkTextDecoration": {
       "value": "none",
-      "type": "other"
-    },
-    "outerFocusOutline": {
-      "value": "inset 0 0 0 0.125rem #6A7883",
       "type": "other"
     },
     "selectedBackgroundColor": {
@@ -132,13 +123,21 @@
       "value": "{color.text.inverse}",
       "type": "color"
     },
-    "selectedInnerFocusOutline": {
-      "value": "inset 0 0 0 0.25rem #2B7ABC",
-      "type": "other"
+    "innerFocusOutlineColor": {
+      "value": "{color.stroke.interactive.focusRing.base}",
+      "type": "color"
     },
-    "selectedOuterFocusOutline": {
-      "value": "inset 0 0 0 0.125rem #FFFFFF",
-      "type": "other"
+    "selectedInnerFocusOutlineColor": {
+      "value": "{color.stroke.interactive.focusRing.onColor}",
+      "type": "color"
+    },
+    "outerFocusOutlineColor": {
+      "value": "{color.transparentColor}",
+      "type": "color"
+    },
+    "selectedOuterFocusOutlineColor": {
+      "value": "{color.transparentColor}",
+      "type": "color"
     }
   }
 }
