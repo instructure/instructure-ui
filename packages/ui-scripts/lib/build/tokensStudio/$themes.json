@@ -1469,6 +1469,7 @@
       "sideNavBar.minimizedMargin": "e373226078d55eaecda1f419161b79189f34fa86",
       "sideNavBar.contentMargin": "b346368fa8a90b80c7fe5b17c9469bf993668121",
       "sideNavBar.borderRadius": "1f06f82533a557bde483a704a204142a7aee951c",
+      "sideNavBar.minimizedBorderRadius": "0996477ffac3c43f2725f1a3fcfa3e3f7a026448",
       "sideNavBarItem.borderRadius": "328ad7cf30fccff6f1f4ec457e62a0373e64210e",
       "sideNavBarItem.backgroundColor": "29bb1f4519360d8eeab51988e469c69828522b9f",
       "sideNavBarItem.contentPadding": "c539459a61efa77cc72509373eac1da78f357030",
@@ -1909,8 +1910,7 @@
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
       "opacity.base": "86ce8d7f5016628d3c9f5f268385cd5c2105baf7",
-      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea",
-      "sideNavBar.minimizedborderRadius": "07dcffee82ad9447f82e50ab327e03059b47ac8f"
+      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:0",
@@ -3323,6 +3323,7 @@
       "sideNavBar.minimizedMargin": "e373226078d55eaecda1f419161b79189f34fa86",
       "sideNavBar.contentMargin": "b346368fa8a90b80c7fe5b17c9469bf993668121",
       "sideNavBar.borderRadius": "1f06f82533a557bde483a704a204142a7aee951c",
+      "sideNavBar.minimizedBorderRadius": "0996477ffac3c43f2725f1a3fcfa3e3f7a026448",
       "sideNavBarItem.borderRadius": "328ad7cf30fccff6f1f4ec457e62a0373e64210e",
       "sideNavBarItem.backgroundColor": "29bb1f4519360d8eeab51988e469c69828522b9f",
       "sideNavBarItem.contentPadding": "c539459a61efa77cc72509373eac1da78f357030",
@@ -3763,8 +3764,7 @@
       "visibleInCanvas": "8a17b3ca8bbbd0ba6ebc849026a3e46de551ecbb",
       "visibleInRebrand": "a739f61d44fc012d8d4044d559ec9ba7744e94f8",
       "opacity.base": "86ce8d7f5016628d3c9f5f268385cd5c2105baf7",
-      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea",
-      "sideNavBar.minimizedborderRadius": "07dcffee82ad9447f82e50ab327e03059b47ac8f"
+      "opacity.disabled": "d22899731dafb77b8ce5fd08e2387d95ccb473ea"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:1",
@@ -5326,6 +5326,7 @@
       "sideNavBar.minimizedMargin": "e373226078d55eaecda1f419161b79189f34fa86",
       "sideNavBar.contentMargin": "b346368fa8a90b80c7fe5b17c9469bf993668121",
       "sideNavBar.borderRadius": "1f06f82533a557bde483a704a204142a7aee951c",
+      "sideNavBar.minimizedBorderRadius": "0996477ffac3c43f2725f1a3fcfa3e3f7a026448",
       "sideNavBarItem.borderRadius": "328ad7cf30fccff6f1f4ec457e62a0373e64210e",
       "sideNavBarItem.backgroundColor": "29bb1f4519360d8eeab51988e469c69828522b9f",
       "sideNavBarItem.contentPadding": "c539459a61efa77cc72509373eac1da78f357030",
@@ -5678,8 +5679,7 @@
       "view.stackingAbove": "5546c5f4795ebcb9d5e47ce79b86805267b1ebf8",
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
-      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
-      "sideNavBar.minimizedBorderRadius": "0996477ffac3c43f2725f1a3fcfa3e3f7a026448"
+      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:2",
@@ -7178,6 +7178,7 @@
       "sideNavBar.minimizedMargin": "e373226078d55eaecda1f419161b79189f34fa86",
       "sideNavBar.contentMargin": "b346368fa8a90b80c7fe5b17c9469bf993668121",
       "sideNavBar.borderRadius": "1f06f82533a557bde483a704a204142a7aee951c",
+      "sideNavBar.minimizedBorderRadius": "0996477ffac3c43f2725f1a3fcfa3e3f7a026448",
       "sideNavBarItem.borderRadius": "328ad7cf30fccff6f1f4ec457e62a0373e64210e",
       "sideNavBarItem.backgroundColor": "29bb1f4519360d8eeab51988e469c69828522b9f",
       "sideNavBarItem.contentPadding": "c539459a61efa77cc72509373eac1da78f357030",
@@ -7530,8 +7531,7 @@
       "view.stackingAbove": "5546c5f4795ebcb9d5e47ce79b86805267b1ebf8",
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
-      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
-      "sideNavBar.minimizedBorderRadius": "0996477ffac3c43f2725f1a3fcfa3e3f7a026448"
+      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:3",
