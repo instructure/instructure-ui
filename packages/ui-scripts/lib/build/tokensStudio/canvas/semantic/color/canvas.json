@@ -94,7 +94,7 @@
             "type": "color"
           },
           "disabled": {
-            "value": "{color.white}",
+            "value": "{color.grey.grey10}",
             "type": "color"
           },
           "selected": {
