@@ -40,7 +40,7 @@ type BillboardOwnProps = {
   /**
    * Provide an <Img> component or Instructure Icon for the hero image
    */
-  hero?: React.ReactElement | ((iconSize: HeroIconSize) => React.ReactElement)
+  hero?: React.ReactElement | ((iconSize?: HeroIconSize) => React.ReactElement)
   /**
    * If you're using an icon, this prop will size it. Also sets the font-size
    * of the headline and message.

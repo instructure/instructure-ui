@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, MouseEvent } from 'react'
+import { Component, MouseEvent, isValidElement, cloneElement } from 'react'
 
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
@@ -32,22 +32,28 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
-import type { BillboardProps, HeroIconSize } from './props'
+import type { BillboardProps } from './props'
 import type { ViewProps } from '@instructure/ui-view'
+
+// Map Billboard sizes to Lucide icon sizes (in pixels)
+const billboardSizeToIconSize = {
+  small: 45,
+  medium: 75,
+  large: 145
+} as const
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
-class Billboard extends Component<BillboardProps> {
+@withStyle(generateStyle)
+class Billboard extends Component<BillboardProps, { isHovered: boolean }> {
   static readonly componentId = 'Billboard'
 
   static allowedProps = allowedProps
@@ -60,6 +66,10 @@ class Billboard extends Component<BillboardProps> {
     as: 'span',
     elementRef: () => {}
   } as const
+
+  state = {
+    isHovered: false
+  }
 
   ref: Element | null = null
 
@@ -93,25 +103,44 @@ class Billboard extends Component<BillboardProps> {
     )
   }
 
-  get SVGIconSize(): HeroIconSize {
-    const size = this.props.size
+  handleMouseEnter = () => {
+    this.setState({ isHovered: true })
+  }
 
-    // serve up appropriate SVGIcon size for each Billboard size
-    if (size === 'small') {
-      return 'medium'
-    } else if (size === 'large') {
-      return 'x-large'
-    } else {
-      return 'large'
-    }
+  handleMouseLeave = () => {
+    this.setState({ isHovered: false })
   }
 
   renderHero() {
-    if (typeof this.props.hero === 'function') {
-      return this.props.hero(this.SVGIconSize)
-    } else {
-      return this.props.hero
+    const { hero, size } = this.props
+    const { isHovered } = this.state
+
+    if (!hero) return null
+
+    const lucideSize = billboardSizeToIconSize[size!]
+    const iconColor = isHovered ? 'infoColor' : 'baseColor'
+
+    const iconElement = typeof hero === 'function' ? hero() : hero
+
+    if (isValidElement(iconElement)) {
+      const existingProps = iconElement.props as Record<string, unknown>
+
+      // Use explicit size if provided, otherwise use Billboard's mapped size
+      const finalSize =
+        existingProps.size !== undefined ? existingProps.size : lucideSize
+
+      const newProps = {
+        ...existingProps,
+        size: finalSize,
+        color: iconColor
+      }
+      return cloneElement(
+        iconElement,
+        newProps as Partial<typeof iconElement.props>
+      )
     }
+
+    return iconElement
   }
 
   renderContent() {
@@ -157,6 +186,8 @@ class Billboard extends Component<BillboardProps> {
           css={styles?.billboard}
           href={href}
           onClick={this.handleClick}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
           disabled={disabled}
           aria-disabled={disabled || readOnly ? 'true' : undefined}
         >
