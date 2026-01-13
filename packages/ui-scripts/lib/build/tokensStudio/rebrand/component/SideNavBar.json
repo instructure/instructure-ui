@@ -128,7 +128,7 @@
       "type": "color"
     },
     "selectedInnerFocusOutlineColor": {
-      "value": "{icon.sideNavActiveColor}",
+      "value": "{color.icon.inverse}",
       "type": "color"
     },
     "outerFocusOutlineColor": {
