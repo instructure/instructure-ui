@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { XInstUIIcon } from '@instructure/ui-icons-lucide'
+import { XInstUIIcon } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
