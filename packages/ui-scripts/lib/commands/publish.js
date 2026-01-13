@@ -30,7 +30,7 @@ import {
   isReleaseCommit,
   runGitCommand
 } from '../utils/git.js'
-import { bumpPackages, createNPMRCFile } from '../utils/npm.js'
+import { bumpPackages, checkNpmAuth } from '../utils/npm.js'
 import semver from 'semver'
 
 export default {
@@ -69,7 +69,7 @@ export default {
 async function publish({ packageName, version, isMaintenance, prRelease }) {
   const isRegularRelease = isReleaseCommit(version)
 
-  createNPMRCFile()
+  checkNpmAuth()
 
   checkWorkingDirectory()
   const packages = pkgUtils.getPackages().filter((pkg) => !pkg.private)
@@ -207,7 +207,7 @@ async function publishPackage(pkg, tag) {
       setTimeout(resolve, delay)
     })
 
-  const publishArgs = ['publish', pkg.location, '--tag', tag]
+  const publishArgs = ['publish', pkg.location, '--tag', tag, '--provenance']
   await runCommandAsync('npm', publishArgs)
 
   return wait(500)

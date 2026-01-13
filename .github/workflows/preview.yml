@@ -14,10 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Node 22
+      - name: Install Node 24
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
       - name: Npm install and bootstrap
         run: npm ci && npm run bootstrap
         if: github.event.action != 'closed' # don't run install and bootstrap unnecessarily when pr is closed

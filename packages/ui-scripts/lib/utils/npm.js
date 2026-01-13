@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import fs from 'fs'
-import path from 'path'
 import semver from 'semver'
 import pkgUtils from '@instructure/pkg-utils'
 import {
@@ -34,7 +32,6 @@ import {
 
 import { Project } from '@lerna/project'
 
-const NPM_SCOPE = '@instructure:registry=https://registry.npmjs.org/'
 const syncRootPackageVersion = async (useProjectVersion) => {
   const project = new Project(process.cwd())
   const rootPkg = pkgUtils.getPackage()
@@ -106,22 +103,29 @@ export async function bumpPackages(packageName, requestedVersion) {
   return releaseVersion
 }
 
-export function createNPMRCFile() {
-  const { NPM_TOKEN, NPM_EMAIL, NPM_USERNAME } = process.env
+export function checkNpmAuth() {
+  info('📦  Using OIDC authentication (npm trusted publishing)')
 
-  // Only write an npmrc file if these are defined, otherwise assume the system is properly configured
-  if (NPM_TOKEN) {
-    fs.writeFileSync(
-      path.resolve(process.cwd(), '.npmrc'),
-      `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${NPM_SCOPE}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
-    )
-  }
-
+  // Verify OIDC authentication works
   try {
-    info('running npm whoami:')
+    info('📦  Running npm whoami to verify OIDC auth:')
     runCommandSync('npm', ['whoami'])
   } catch (e) {
-    error(`Could not determine if NPM auth was successful: ${e}`)
+    error(`Could not verify OIDC authentication: ${e}`)
+    error('Make sure:')
+    error('  1. Workflow has id-token: write permissions')
+    error('  2. npm packages are configured for trusted publishing')
+    error('  3. Workflow is running in GitHub Actions')
     process.exit(1)
   }
+}
+
+export function cleanupNPMRCFile() {
+  // No cleanup needed with OIDC authentication
+  // This function is kept for backward compatibility
+}
+
+// Deprecated: Use checkNpmAuth() instead
+export function createNPMRCFile() {
+  checkNpmAuth()
 }

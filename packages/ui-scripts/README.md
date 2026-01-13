@@ -102,15 +102,7 @@ To run tests for a package:
 
 ### Configuration
 
-If you'd like to use the publish, deploy, and release scripts, you'll need to configure your project as follows:
-
-Add a `.env` file to your project root or define these env vars for your shell:
-
-```sh
-NPM_TOKEN=
-NPM_USERNAME=
-NPM_EMAIL=
-```
+The publish, deploy, and release scripts use npm trusted publishing with OIDC authentication. No manual token configuration is required. The scripts will automatically authenticate when running in GitHub Actions with the appropriate permissions.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-scripts.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-scripts
