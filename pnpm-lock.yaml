@@ -1020,9 +1020,9 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
-      '@instructure/ui-icons':
+      '@instructure/ui-icons-lucide':
         specifier: workspace:*
-        version: link:../ui-icons
+        version: link:../ui-icons-lucide
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
@@ -2457,8 +2457,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-utils
       lucide-react:
-        specifier: ^0.460.0
-        version: 0.460.0(react@18.3.1)
+        specifier: ^0.559.0
+        version: 0.559.0(react@18.3.1)
     devDependencies:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
@@ -10539,8 +10539,8 @@ packages:
   lru-queue@0.1.0:
     resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
 
-  lucide-react@0.460.0:
-    resolution: {integrity: sha512-BVtq/DykVeIvRTJvRAgCsOwaGL8Un3Bxh8MbDxMhEWlZay3T4IpEKDEpwt5KZ0KJMHzgm6jrltxlT5eXOWXDHg==}
+  lucide-react@0.559.0:
+    resolution: {integrity: sha512-3ymrkBPXWk3U2bwUDg6TdA6hP5iGDMgPEAMLhchEgTQmA+g0Zk24tOtKtXMx35w1PizTmsBC3RhP88QYm+7mHQ==}
     peerDependencies:
       react: 18.3.1
 
@@ -19734,7 +19734,7 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
 
-  lucide-react@0.460.0(react@18.3.1):
+  lucide-react@0.559.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
