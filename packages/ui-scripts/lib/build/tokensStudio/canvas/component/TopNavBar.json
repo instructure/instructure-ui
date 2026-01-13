@@ -1,0 +1,38 @@
+{
+  "topNavBarActionItems": {
+    "smallViewportActionItemContainerMargin": {
+      "value": "3.75rem",
+      "type": "spacing"
+    },
+    "smallViewportActionItemContainerMaxWidth": {
+      "value": "50%",
+      "type": "sizing"
+    },
+    "smallViewportDropdownMenuActiveOptionFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "smallViewportDropdownMenuActiveOptionIndicatorSpacing": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "smallViewportDropdownMenuActiveOptionIndicatorWidth": {
+      "value": "{borderWidth.lg}",
+      "type": "borderWidth"
+    }
+  },
+  "topNavBarBrand": {
+    "logoHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
+    "iconPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "focusOutlineInset": {
+      "value": "-0.25rem",
+      "type": "spacing"
+    }
+  }
+}
