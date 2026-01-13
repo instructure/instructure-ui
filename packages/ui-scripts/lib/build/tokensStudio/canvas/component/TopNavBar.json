@@ -19,6 +19,10 @@
     "smallViewportDropdownMenuActiveOptionIndicatorWidth": {
       "value": "{borderWidth.lg}",
       "type": "borderWidth"
+    },
+    "activeIndicatorWidth": {
+      "value": "{borderWidth.md}",
+      "type": "borderWidth"
     }
   },
   "topNavBarBrand": {
@@ -33,6 +37,63 @@
     "focusOutlineInset": {
       "value": "-0.25rem",
       "type": "spacing"
+    }
+  },
+  "topNavBarItem": {
+    "fontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "fontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "fontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "color": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
+    "inverseColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "itemInlinePadding": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "itemSpacing": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "iconTextGap": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "activeItemFontWeight": {
+      "value": "{fontWeight.body.strong}",
+      "type": "fontWeights"
+    },
+    "activeItemIndicatorSpacing": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "activeIndicatorColor": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
+    "activeIndicatorColorInverse": {
+      "value": "{color.text.base}",
+      "type": "color"
+    }
+  },
+  "topNavBar": {
+    "placeholderToken": {
+      "value": "{color.transparentColor}",
+      "type": "color",
+      "description": "TODO: delete this when we fixed the build"
     }
   }
 }
