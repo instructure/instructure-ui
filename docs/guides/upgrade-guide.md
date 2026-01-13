@@ -604,6 +604,26 @@ type: embed
 />
 
 ```
+### RangeInput
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"handleFocusRingSize",note:"style uses sharedTokens.focusOutline.width token"},
+    {name:"handleFocusRingColor",note:"style uses sharedTokens.focusOutline.onColor token"}
+  ]}
+  changed={[
+    {oldName:"handleShadow",newName:"boxShadow",note:""},
+    {oldName:"valueSmallPadding",newName:"valueSmallPadding",note:"now only sets horizontal padding of the value"},
+    {oldName:"valueMediumPadding",newName:"valueMediumPadding",note:"now only sets horizontal padding of the value"},
+    {oldName:"valueLargePadding",newName:"valueLargePadding",note:"now only sets horizontal padding of the value"}
+  ]}
+/>
+
+```
 
 ### Tray
 

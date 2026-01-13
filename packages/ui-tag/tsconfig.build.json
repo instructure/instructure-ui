@@ -26,7 +26,7 @@
       "path": "../ui-dom-utils/tsconfig.build.json"
     },
     {
-      "path": "../ui-icons-lucide/tsconfig.build.json"
+      "path": "../ui-icons/tsconfig.build.json"
     },
     {
       "path": "../ui-react-utils/tsconfig.build.json"
