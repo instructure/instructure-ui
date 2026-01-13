@@ -12,10 +12,6 @@
       "value": "{color.text.onColor}",
       "type": "color"
     },
-    "marginBottom": {
-      "value": "0.75rem",
-      "type": "spacing"
-    },
     "minimizedWidth": {
       "value": "3.375rem",
       "type": "sizing"
@@ -37,6 +33,10 @@
       "type": "spacing"
     },
     "contentMargin": {
+      "value": "0rem",
+      "type": "spacing"
+    },
+    "contentGap": {
       "value": "0rem",
       "type": "spacing"
     },
