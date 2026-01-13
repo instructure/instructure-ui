@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-import type { RangeInputTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { RangeInputProps, RangeInputStyle } from './props'
+import { darken, alpha } from '@instructure/ui-color-utils'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 
 /**
  * ---
@@ -36,31 +38,36 @@ import type { RangeInputProps, RangeInputStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: RangeInputTheme,
-  props: RangeInputProps
+  componentTheme: NewComponentTypes['RangeInput'],
+  props: RangeInputProps,
+  sharedTokens: SharedTokens
 ): RangeInputStyle => {
   const { size, thumbVariant } = props
   const valueSizeVariants = {
     small: {
       fontSize: componentTheme.valueSmallFontSize,
-      padding: componentTheme.valueSmallPadding,
+      paddingInline: componentTheme.valueSmallPadding,
       lineHeight: componentTheme.valueSmallLineHeight
     },
     medium: {
       fontSize: componentTheme.valueMediumFontSize,
-      padding: componentTheme.valueMediumPadding,
+      paddingInline: componentTheme.valueMediumPadding,
       lineHeight: componentTheme.valueMediumLineHeight
     },
     large: {
       fontSize: componentTheme.valueLargeFontSize,
-      padding: componentTheme.valueLargePadding,
+      paddingInline: componentTheme.valueLargePadding,
       lineHeight: componentTheme.valueLargeLineHeight
     }
   }
 
+  const trackBorderWidth = '1px'
+
   const trackStyle = {
     borderRadius: '0.312em',
-    borderColor: 'transparent',
+    borderWidth: trackBorderWidth,
+    borderStyle: 'solid',
+    borderColor: componentTheme.trackBorderColor,
     color: 'transparent',
     cursor: 'pointer',
     background: componentTheme.trackBackground,
@@ -73,7 +80,7 @@ const generateStyle = (
     deprecated: {
       width: componentTheme.handleSize,
       height: componentTheme.handleSize,
-      boxShadow: `0 0.0625rem 0 ${componentTheme.handleShadowColor}`
+      boxShadow: `0 0.0625rem 0 ${darken(componentTheme.handleShadowColor)}`
     },
     accessible: {
       width: borderedHandleSize,
@@ -82,7 +89,7 @@ const generateStyle = (
       borderColor: componentTheme.handleBorderColor,
       borderStyle: 'solid',
       boxSizing: 'border-box',
-      boxShadow: componentTheme.handleShadow
+      boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow)
     }
   }
 
@@ -99,27 +106,32 @@ const generateStyle = (
     }
   }
 
+  // Center the thumb vertically on the track by accounting for the track borders
   const thumbPosition = {
     deprecated: {
-      marginTop: `calc(-1 * ${componentTheme.handleSize} / 4)`
+      marginTop: `calc(-1 * ${componentTheme.handleSize} / 4 - ${trackBorderWidth})`
     },
     accessible: {
-      marginTop: `calc(-1 * ${borderedHandleSize} / 4)`
+      marginTop: `calc(-1 * ${borderedHandleSize} / 4 - ${trackBorderWidth})`
     }
   }
 
   const thumbFocusActiveStyle = {
     deprecated: {
       background: componentTheme.handleFocusBackground,
-      boxShadow: `0 0.0625rem 0 ${componentTheme.handleShadowColor}, 0 0 0 ${componentTheme.handleFocusOutlineWidth} ${componentTheme.handleFocusOutlineColor}`
+      boxShadow: `0 0.0625rem 0 ${darken(
+        componentTheme.handleShadowColor
+      )}, 0 0 0 ${componentTheme.handleFocusOutlineWidth} ${alpha(
+        componentTheme.handleFocusOutlineColor,
+        40
+      )}`
     },
     accessible: {
       background: componentTheme.handleFocusBackground,
       boxShadow:
-        componentTheme.handleShadow +
-        ', ' +
+        `${boxShadowObjectsToCSSString(componentTheme.boxShadow)}, ` +
         `inset 0 0 0 ${componentTheme.handleFocusInset} ${componentTheme.handleFocusBackground}, ` +
-        `inset 0 0 0 calc(${componentTheme.handleFocusInset} + ${componentTheme.handleFocusRingSize}) ${componentTheme.handleFocusRingColor}`
+        `inset 0 0 0 calc(${componentTheme.handleFocusInset} + ${sharedTokens.focusOutline.width}) ${sharedTokens.focusOutline.onColor}`
     }
   }
 
