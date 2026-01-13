@@ -32,8 +32,8 @@ const MyComponent = () => {
   return (
     <div>
       <Plus size="medium" />
-      <ArrowLeft size={24} />
-      <Check size="large" color="success" />
+      <ArrowLeft size="lg" />
+      <Check size="large" color="successColor" />
     </div>
   )
 }

@@ -38,20 +38,11 @@ import { Modal } from '@instructure/ui-modal'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import * as LucideIcons from '@instructure/ui-icons-lucide'
 import { XInstUIIcon } from '@instructure/ui-icons-lucide'
-import { Link } from '@instructure/ui-link'
 import { Flex } from '@instructure/ui-flex'
 
 // Get all exported Lucide icons (excluding utilities and types)
 const lucideIconNames = Object.keys(LucideIcons).filter(
-  (name) =>
-    name !== 'withRTL' &&
-    name !== 'wrapLucideIcon' &&
-    name !== 'LucideProps' &&
-    name !== 'LucideIcon' &&
-    name !== 'LucideIconWrapperProps' &&
-    name !== 'InstUIIconProps' &&
-    name !== 'LucideIconTheme' &&
-    name !== 'BIDIRECTIONAL_ICONS'
+  (name) => name !== 'renderIconWithProps' && name !== 'LucideIconWrapperProps'
 )
 
 type LucideIconTileProps = {
@@ -65,7 +56,7 @@ function getUsageInfo(iconName: string) {
 
 const MyIcon = () => {
   return (
-    <${iconName} size={24} />
+    <${iconName} size={'2xl'}  color='successColor'/>
   )
 }`
 }
@@ -118,7 +109,7 @@ const LucideIconTile = memo(
               }}
               aria-label={name}
             >
-              <IconComponent size={32} />
+              <IconComponent size="xl" />
             </button>
           </div>
         </div>
@@ -290,24 +281,25 @@ const LucideIconsGallery = () => {
               </Heading>
               <ul>
                 <li>
-                  <code>size</code>: Number (pixels) - e.g., <code>24</code>
+                  <code>size</code>: Semantic token - e.g.,{' '}
+                  <code>&quot;sm&quot;</code>, <code>&quot;md&quot;</code>,{' '}
+                  <code>&quot;lg&quot;</code>
+                  <br />
+                  <em>
+                    Note: Stroke width is automatically derived from size for
+                    consistent pixel-perfect rendering across all icon sizes.
+                  </em>
                 </li>
                 <li>
-                  <code>color</code>: CSS color - e.g.,{' '}
-                  <code>&quot;currentColor&quot;</code>
+                  <code>color</code>: Semantic token - e.g.,{' '}
+                  <code>&quot;successColor&quot;</code>,{' '}
+                  <code>&quot;baseColor&quot;</code>
                 </li>
                 <li>
-                  <code>strokeWidth</code>: Number - e.g., <code>2</code>
+                  Plus all standard SVG props (except for className, style, css,
+                  children etc.)
                 </li>
-                <li>Plus all standard SVG props (className, style, etc.)</li>
               </ul>
-              <p>
-                These icons use the pure Lucide API. See{' '}
-                <Link href="https://lucide.dev/guide/" target="_blank">
-                  Lucide documentation
-                </Link>{' '}
-                for more details.
-              </p>
             </div>
           </Modal.Body>
         </Modal>

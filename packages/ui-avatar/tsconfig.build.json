@@ -32,7 +32,7 @@
       "path": "../ui-themes/tsconfig.build.json"
     },
     {
-      "path": "../ui-icons/tsconfig.build.json"
+      "path": "../ui-icons-lucide/tsconfig.build.json"
     }
   ]
 }
