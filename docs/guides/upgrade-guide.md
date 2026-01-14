@@ -367,7 +367,6 @@ type: embed
 />
 
 ```
-
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
@@ -518,6 +517,28 @@ type: embed
 - `alert` color has been removed. Please use `primary` instead.
 - Some prop values have been deprecated, see [Text](/Text) for more details.
 - `color` has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
+
+### Tag
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"defaultIconColor",note:""},
+    {name:"defaultIconHoverColor",note:""},
+    {name:"inlineIconColor",note:""},
+    {name:"inlineIconHoverColor",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"focusOutlineStyle",note:""},
+    {name:"focusOutlineWidth",note:""},
+    {name:"padding",note:"paddingHorizontal replaces padding for horizontal padding control"},
+    {name:"paddingSmall",note:"paddingHorizontalSmall replaces paddingSmall for horizontal padding control"}
+  ]}
+/>
+
+```
 
 ### TextArea
 
