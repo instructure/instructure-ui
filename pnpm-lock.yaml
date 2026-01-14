@@ -2478,6 +2478,9 @@ importers:
       '@instructure/ui-heading':
         specifier: workspace:*
         version: link:../ui-heading
+      '@instructure/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
       '@instructure/ui-link':
         specifier: workspace:*
         version: link:../ui-link
