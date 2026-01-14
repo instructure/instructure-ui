@@ -83,7 +83,7 @@ describe('<Tag />', async () => {
     )
     const icon = container.querySelector('svg')
 
-    expect(icon).toHaveAttribute('name', 'IconX')
+    expect(icon).toHaveAttribute('name', 'X')
   })
 
   it('should meet a11y standards', async () => {
