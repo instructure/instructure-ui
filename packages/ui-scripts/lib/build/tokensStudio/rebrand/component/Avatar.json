@@ -29,7 +29,8 @@
       "color": {
         "value": "rgba(45,59,69,0.12)",
         "type": "color"
-      }
+      },
+      "description": "Do not use this for other components"
     },
     "fontWeight": {
       "value": "{fontWeight.heading.base}",
