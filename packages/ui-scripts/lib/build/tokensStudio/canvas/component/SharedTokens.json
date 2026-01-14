@@ -300,6 +300,30 @@
             "type": "spacing"
           }
         }
+      },
+      "padding": {
+        "container": {
+          "xxs": {
+            "value": "{spacing.padding.container.xxs}",
+            "type": "spacing"
+          },
+          "xs": {
+            "value": "{spacing.padding.container.xs}",
+            "type": "spacing"
+          },
+          "sm": {
+            "value": "{spacing.padding.container.sm}",
+            "type": "spacing"
+          },
+          "md": {
+            "value": "{spacing.padding.container.md}",
+            "type": "spacing"
+          },
+          "lg": {
+            "value": "{spacing.padding.container.lg}",
+            "type": "spacing"
+          }
+        }
       }
     },
     "focusOutline": {
@@ -361,85 +385,85 @@
       "type": "borderWidth"
     },
     "background": {
-      "base": {
+      "baseColor": {
         "value": "{color.background.base}",
         "type": "color"
       },
-      "muted": {
+      "mutedColor": {
         "value": "{color.background.muted}",
         "type": "color"
       },
-      "brand": {
+      "brandColor": {
         "value": "{color.background.brand}",
         "type": "color"
       },
-      "success": {
+      "successColor": {
         "value": "{color.background.success}",
         "type": "color"
       },
-      "error": {
+      "errorColor": {
         "value": "{color.background.error}",
         "type": "color"
       },
-      "warning": {
+      "warningColor": {
         "value": "{color.background.warning}",
         "type": "color"
       },
-      "info": {
+      "infoColor": {
         "value": "{color.background.info}",
         "type": "color"
       },
-      "aiTopGradient": {
+      "aiTopGradientColor": {
         "value": "{color.background.aiTopGradient}",
         "type": "color"
       },
-      "aiBottomGradient": {
+      "aiBottomGradientColor": {
         "value": "{color.background.aiBottomGradient}",
         "type": "color"
       },
-      "aiText": {
+      "aiTextColor": {
         "value": "{color.background.aiText}",
         "type": "color"
       }
     },
     "stroke": {
-      "base": {
+      "baseColor": {
         "value": "{color.stroke.base}",
         "type": "color"
       },
-      "muted": {
+      "mutedColor": {
         "value": "{color.stroke.muted}",
         "type": "color"
       },
-      "strong": {
+      "strongColor": {
         "value": "{color.stroke.strong}",
         "type": "color"
       },
-      "brand": {
+      "brandColor": {
         "value": "{color.stroke.brand}",
         "type": "color"
       },
-      "success": {
+      "successColor": {
         "value": "{color.stroke.success}",
         "type": "color"
       },
-      "error": {
+      "errorColor": {
         "value": "{color.stroke.error}",
         "type": "color"
       },
-      "warning": {
+      "warningColor": {
         "value": "{color.stroke.warning}",
         "type": "color"
       },
-      "info": {
+      "infoColor": {
         "value": "{color.stroke.info}",
         "type": "color"
       },
-      "aiTopGradient": {
+      "aiTopGradientColor": {
         "value": "{color.stroke.aiTopGradient}",
         "type": "color"
       },
-      "aiBottomGradient": {
+      "aiBottomGradientColor": {
         "value": "{color.stroke.aiBottomGradient}",
         "type": "color"
       }
