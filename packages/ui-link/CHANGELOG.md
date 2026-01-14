@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.29.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.29.0) (2026-01-14)
+
+
+### Bug Fixes
+
+* **ui-link:** fix Link not applying focusOutlineColor and focusInverseOutlineColor overrides ([855260d](https://github.com/instructure/instructure-ui/commit/855260d9c59d6796dd17c3b5a4be04a8bffc231c))
+
+
+
+
+
 # [10.28.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.28.0) (2026-01-09)
 
 **Note:** Version bump only for package @instructure/ui-link
