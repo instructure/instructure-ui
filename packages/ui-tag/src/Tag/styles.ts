@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { TagTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { TagProps, TagStyle } from './props'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 /**
  * ---
@@ -32,10 +33,14 @@ import type { TagProps, TagStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} sharedTokens the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
+const generateStyle = (
+  componentTheme: NewComponentTypes['Tag'],
+  props: TagProps,
+  sharedTokens: SharedTokens
+): TagStyle => {
   const { variant, size, dismissible, onClick, disabled } = props
 
   const isButton = !!onClick
@@ -43,33 +48,33 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
   const sizeVariants = {
     small: {
       tag: {
-        padding: componentTheme.paddingSmall,
+        paddingLeft: componentTheme.paddingHorizontalSmall,
+        paddingRight: componentTheme.paddingHorizontalSmall,
         fontSize: componentTheme.fontSizeSmall
       },
       text: {
         lineHeight: `calc(${componentTheme.heightSmall} - (${componentTheme.defaultBorderWidth} * 2))`
-      },
-      icon: { fontSize: '0.75rem' }
+      }
     },
     medium: {
       tag: {
-        padding: componentTheme.padding,
+        paddingLeft: componentTheme.paddingHorizontal,
+        paddingRight: componentTheme.paddingHorizontal,
         fontSize: `calc(${componentTheme.fontSizeMedium} - 0.0625rem)`
       },
       text: {
         lineHeight: `calc(${componentTheme.heightMedium} - (${componentTheme.defaultBorderWidth} * 2))`
-      },
-      icon: { fontSize: '0.875rem' }
+      }
     },
     large: {
       tag: {
-        padding: componentTheme.padding,
+        paddingLeft: componentTheme.paddingHorizontalSmall,
+        paddingRight: componentTheme.paddingHorizontal,
         fontSize: `calc(${componentTheme.fontSizeLarge} - 0.0625rem)`
       },
       text: {
         lineHeight: `calc(${componentTheme.heightLarge} - (${componentTheme.defaultBorderWidth} * 2))`
-      },
-      icon: { fontSize: '1rem' }
+      }
     }
   }
 
@@ -99,7 +104,7 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
         tagBefore: {
           content: '""',
           boxSizing: 'border-box',
-          border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
+          border: calcFocusOutlineStyles(sharedTokens.focusOutline),
           position: 'absolute',
           top: '-0.3125rem',
           bottom: '-0.3125rem',
@@ -150,37 +155,28 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
     }
   }
 
-  const iconVariantVariants = {
-    default: {
-      ...(dismissible && {
-        color: componentTheme.defaultIconColor,
+  const inlineIconVariant =
+    variant === 'inline' && dismissible
+      ? {
+          backgroundColor: componentTheme.inlineIconColor,
+          borderRadius: '50%',
+          padding: '0.25rem',
+          position: 'absolute',
+          insetInlineEnd: 0,
+          insetInlineStart: 'auto',
+          top: 0,
+          transform: 'translate(40%, -40%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
 
-        '[class$="-tag"]:hover > &': {
-          color: componentTheme.defaultIconHoverColor
+          '[class$="-tag"]:hover > &': {
+            backgroundColor: componentTheme.inlineIconHoverColor
+          },
+
+          '[dir="rtl"] &': { transform: 'translate(-40%, -40%)' }
         }
-      })
-    },
-    inline: {
-      ...(dismissible && {
-        backgroundColor: componentTheme.inlineIconColor,
-        borderRadius: '50%',
-        color: componentTheme.inlineBackground,
-        fontSize: '0.75rem',
-        padding: '0.25rem',
-        position: 'absolute',
-        insetInlineEnd: 0,
-        insetInlineStart: 'auto',
-        top: 0,
-        transform: 'translate(40%, -40%)',
-
-        '[class$="-tag"]:hover > &': {
-          backgroundColor: componentTheme.inlineIconHoverColor
-        },
-
-        '[dir="rtl"] &': { transform: 'translate(-40%, -40%)' }
-      })
-    }
-  }
+      : {}
 
   return {
     tag: {
@@ -215,8 +211,7 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
       marginInlineEnd: 0,
       transition: `all ${componentTheme.transitionTiming}`,
       cursor: 'pointer',
-      ...sizeVariants[size!].icon,
-      ...iconVariantVariants[variant!]
+      ...inlineIconVariant
     }
   }
 }
