@@ -359,6 +359,90 @@
     "widthLarge": {
       "value": "{borderWidth.lg}",
       "type": "borderWidth"
+    },
+    "background": {
+      "base": {
+        "value": "{color.background.base}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.background.muted}",
+        "type": "color"
+      },
+      "brand": {
+        "value": "{color.background.brand}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{color.background.success}",
+        "type": "color"
+      },
+      "error": {
+        "value": "{color.background.error}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.background.info}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "{color.background.warning}",
+        "type": "color"
+      },
+      "aiTopGradient": {
+        "value": "{color.background.aiTopGradient}",
+        "type": "color"
+      },
+      "aiBottomGradient": {
+        "value": "{color.background.aiBottomGradient}",
+        "type": "color"
+      },
+      "aiText": {
+        "value": "{color.background.aiText}",
+        "type": "color"
+      }
+    },
+    "stroke": {
+      "base": {
+        "value": "{color.stroke.base}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.stroke.muted}",
+        "type": "color"
+      },
+      "strong": {
+        "value": "{color.stroke.strong}",
+        "type": "color"
+      },
+      "brand": {
+        "value": "{color.stroke.brand}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{color.stroke.success}",
+        "type": "color"
+      },
+      "error": {
+        "value": "{color.stroke.error}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "{color.stroke.warning}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.stroke.info}",
+        "type": "color"
+      },
+      "aiTopGradient": {
+        "value": "{color.stroke.aiTopGradient}",
+        "type": "color"
+      },
+      "aiBottomGradient": {
+        "value": "{color.stroke.aiBottomGradient}",
+        "type": "color"
+      }
     }
   }
 }

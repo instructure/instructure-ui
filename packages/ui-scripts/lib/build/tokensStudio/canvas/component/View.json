@@ -89,19 +89,19 @@
       "type": "color"
     },
     "stackingTopmost": {
-      "value": 9999,
+      "value": "9999",
       "type": "number"
     },
     "stackingAbove": {
-      "value": 1,
+      "value": "1",
       "type": "number"
     },
     "stackingBelow": {
-      "value": -1,
+      "value": "-1",
       "type": "number"
     },
     "stackingDeepest": {
-      "value": -9999,
+      "value": "-9999",
       "type": "number"
     },
     "borderStyle": {
