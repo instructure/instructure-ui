@@ -9,16 +9,14 @@
 ---
 type: example
 ---
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
-</View>
+<div>
+  <View as="div" padding="medium">
+  <Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
+  </View>
+  <View background="primary-inverse" as="div" padding="medium">
+    <Text>The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
+  </View>
+</div>
 ```
 
 ### Controlled navigation
@@ -151,6 +149,54 @@ type: example
     </Link>.
   </View>
 </div>
+```
+
+### Theme overrides
+
+Examples showing how theme overrides work for Link:
+
+```js
+---
+type: example
+---
+<div>
+  <Text>The quick brown fox <Link
+    href="https://instructure.github.io/instructure-ui/"
+    themeOverride={{
+      focusOutlineWidth: '0.5rem',
+      focusOutlineBorderRadius: '0',
+      focusOutlineColor: 'pink'
+    }}>jumps</Link> over the lazy dog.
+  </Text>
+</div>
+```
+
+```js
+---
+type: example
+---
+<View background="primary-inverse" as="div">
+  <Text color="primary-inverse">The quick brown fox <Link
+    color="link-inverse"
+    href="https://instructure.github.io/instructure-ui/"
+    themeOverride={{
+      focusOutlineWidth: '0.5rem',
+      focusOutlineBorderRadius: '0',
+      focusInverseOutlineColor: 'green'
+  }}
+  >jumps</Link> over the lazy dog.</Text>
+  <br />
+  <Text color="primary-inverse">The quick brown fox <Link
+    color="link-inverse"
+    href="https://instructure.github.io/instructure-ui/"
+    renderIcon={<IconUserLine />}
+    themeOverride={{
+      focusOutlineWidth: '0.5rem',
+      focusOutlineBorderRadius: '0',
+      focusInverseIconOutlineColor: 'red'
+  }}
+  >jumps</Link> over the lazy dog.</Text>
+</View>
 ```
 
 ### Guidelines
