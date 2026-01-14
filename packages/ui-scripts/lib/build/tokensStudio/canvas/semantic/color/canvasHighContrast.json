@@ -421,6 +421,10 @@
         "value": "{color.white}",
         "type": "color"
       },
+      "inverse": {
+        "value": "{color.white}",
+        "type": "color"
+      },
       "container": {
         "base": {
           "value": "{color.grey.grey100}",
