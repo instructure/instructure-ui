@@ -68,7 +68,7 @@
         }
       ],
       "type": "boxShadow",
-      "description": "Dialogs & Panels: Top-priority surfaces including modals, alerts, and side panels."
+      "description": "Do not use this for other components"
     },
     "borderWidth": {
       "value": "{borderWidth.sm}",
