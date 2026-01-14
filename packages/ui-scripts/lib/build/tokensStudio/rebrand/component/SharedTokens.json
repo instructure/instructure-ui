@@ -385,6 +385,10 @@
       "type": "borderWidth"
     },
     "background": {
+      "containerColor": {
+        "value": "{color.background.container}",
+        "type": "color"
+      },
       "baseColor": {
         "value": "{color.background.base}",
         "type": "color"
