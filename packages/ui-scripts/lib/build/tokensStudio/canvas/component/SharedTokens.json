@@ -389,6 +389,10 @@
         "value": "{color.background.base}",
         "type": "color"
       },
+      "pageColor": {
+        "value": "{color.background.page}",
+        "type": "color"
+      },
       "mutedColor": {
         "value": "{color.background.muted}",
         "type": "color"
