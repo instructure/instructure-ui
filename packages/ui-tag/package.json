@@ -29,7 +29,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-icons-lucide": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*"
   },

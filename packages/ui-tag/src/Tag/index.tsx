@@ -24,15 +24,14 @@
 
 import { Component } from 'react'
 
-import { IconXLine } from '@instructure/ui-icons'
+import { XInstUIIcon } from '@instructure/ui-icons-lucide'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { TagProps } from './props'
 import { allowedProps } from './props'
 
@@ -42,7 +41,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Tag extends Component<TagProps> {
   static readonly componentId = 'Tag'
 
@@ -53,6 +52,10 @@ class Tag extends Component<TagProps> {
     variant: 'default',
     disabled: false,
     readOnly: false
+  }
+
+  state = {
+    iconHovered: false
   }
 
   ref: Element | null = null
@@ -71,6 +74,14 @@ class Tag extends Component<TagProps> {
 
   focus = () => {
     this.ref && (this.ref as HTMLElement).focus()
+  }
+
+  handleIconMouseEnter = () => {
+    this.setState({ iconHovered: true })
+  }
+
+  handleIconMouseLeave = () => {
+    this.setState({ iconHovered: false })
   }
 
   handleClick = (e: React.MouseEvent<ViewProps & Element>) => {
@@ -92,6 +103,22 @@ class Tag extends Component<TagProps> {
     }
   }
 
+  getIconSize = () => {
+    const { size, variant } = this.props
+
+    if (variant === 'inline') {
+      return 'xs'
+    }
+
+    const sizeMap = {
+      small: 'xs',
+      medium: 'sm',
+      large: 'md'
+    } as const
+
+    return sizeMap[size!]
+  }
+
   render() {
     const {
       className,
@@ -102,13 +129,24 @@ class Tag extends Component<TagProps> {
       title,
       onClick,
       margin,
-      styles
+      styles,
+      variant
     } = this.props
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Tag.allowedProps),
       Tag
     )
+
+    const getIconColor = () => {
+      if (disabled) {
+        return 'mutedColor'
+      }
+      if (variant === 'inline') {
+        return 'inverseColor'
+      }
+      return this.state.iconHovered ? 'actionSecondaryHoverColor' : 'baseColor'
+    }
 
     return (
       <View
@@ -124,9 +162,15 @@ class Tag extends Component<TagProps> {
         display={undefined}
         title={title || (typeof text === 'string' ? text : undefined)}
         data-cid="Tag"
+        onMouseEnter={this.handleIconMouseEnter}
+        onMouseLeave={this.handleIconMouseLeave}
       >
         <span css={styles?.text}>{text}</span>
-        {onClick && dismissible ? <IconXLine css={styles?.icon} /> : null}
+        {onClick && dismissible ? (
+          <span css={styles?.icon}>
+            <XInstUIIcon size={this.getIconSize()} color={getIconColor()} />
+          </span>
+        ) : null}
       </View>
     )
   }
