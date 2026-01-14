@@ -39,6 +39,8 @@ type AiInformationOwnProps = {
    */
   data: {
     featureName: string
+    privacyNoticeText: string
+    privacyNoticeUrl: string
     permissionLevelText: string
     permissionLevel: string
     description: string
@@ -127,6 +129,7 @@ type AiInformationProps = AiInformationOwnProps &
 type AiInformationStyle = ComponentStyle<
   | 'aiInformation'
   | 'header'
+  | 'privacyNotice'
   | 'featureName'
   | 'permissionLevelText'
   | 'permissionLevel'
