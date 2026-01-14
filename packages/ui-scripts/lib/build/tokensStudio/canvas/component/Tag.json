@@ -93,11 +93,11 @@
       "type": "sizing"
     },
     "paddingHorizontal": {
-      "value": "{spacing.padding.container.xxs}",
+      "value": "{sharedTokens.spacing.padding.container.xxs}",
       "type": "spacing"
     },
     "paddingHorizontalSmall": {
-      "value": "{spacing.padding.container.xxs}",
+      "value": "{sharedTokens.spacing.padding.container.xxs}",
       "type": "spacing"
     },
     "transitionTiming": {
