@@ -204,7 +204,7 @@ type: example
   defaultExpanded={[1]}
 
   collectionIcon = {<BookCheckInstUIIcon />}
-  collectionIconExpanded = {<XInstUIIcon />}
+  collectionIconExpanded = {XInstUIIcon}
   itemIcon = {(props) => <UserInstUIIcon size={props.size} color={props.color} />}
 
   rootId={1}
@@ -394,7 +394,7 @@ const Example = () => {
               onKeyDown={(e) => handleKeyPress(e, false)}
               margin="0 0 0 small"
             >
-              <IconXSolid />
+              <XInstUIIcon />
             </IconButton>
             <IconButton
               screenReaderLabel="Add new group"
@@ -402,7 +402,7 @@ const Example = () => {
               onKeyDown={(e) => handleKeyPress(e, false)}
               margin="0 0 0 small"
             >
-              <IconCheckSolid />
+              <CheckInstUIIcon />
             </IconButton>
           </View>
         </InstUISettingsProvider>
@@ -417,7 +417,7 @@ const Example = () => {
       containerRef={(el) => (nodeRef.current = el)}
       onClick={(e) => handleExpandToggle(e, !expanded)}
       onKeyDown={(e) => handleKeyPress(e, !expanded)}
-      itemIcon={expanded ? '' : <IconPlusLine />}
+      itemIcon={expanded ? '' : <PlusInstUIIcon />}
       size="large"
     >
       {renderInput()}
@@ -630,7 +630,7 @@ const Example = () => {
 
   const renderNode = () => {
     return (
-      <TreeBrowser.Node itemIcon={<IconPlusLine />}>More</TreeBrowser.Node>
+      <TreeBrowser.Node itemIcon={<PlusInstUIIcon />}>More</TreeBrowser.Node>
     )
   }
 
