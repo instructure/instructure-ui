@@ -1,4 +1,11 @@
 {
+  "topNavBar": {
+    "placeholderToken": {
+      "value": "{color.transparentColor}",
+      "type": "color",
+      "description": "TODO: delete this when we fixed the build"
+    }
+  },
   "topNavBarActionItems": {
     "smallViewportActionItemContainerMargin": {
       "value": "3.75rem",
