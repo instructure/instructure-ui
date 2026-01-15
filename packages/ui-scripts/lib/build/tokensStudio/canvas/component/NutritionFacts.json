@@ -25,7 +25,7 @@
       "type": "spacing"
     },
     "bodyPadding": {
-      "value": "{sharedTokens.spacing.padding.container.md}",
+      "value": "{spacing.padding.container.md}",
       "type": "spacing"
     },
     "blockGap": {
