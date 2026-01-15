@@ -126,11 +126,11 @@
       "type": "color"
     },
     "iconPadding": {
-      "value": "{sharedTokens.spacing.padding.container.xs}",
+      "value": "{spacing.padding.container.xs}",
       "type": "spacing"
     },
     "nestedPadding": {
-      "value": "{sharedTokens.spacing.padding.container.xs}",
+      "value": "{spacing.padding.container.xs}",
       "type": "spacing"
     },
     "lineHeight": {
