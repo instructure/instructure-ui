@@ -81,7 +81,7 @@
       "type": "color"
     },
     "colorInverse": {
-      "value": "{color.text.onColor}",
+      "value": "{color.text.inverse}",
       "type": "color"
     },
     "trackColor": {
@@ -97,7 +97,7 @@
       "type": "color"
     },
     "trackBorderColorInverse": {
-      "value": "{color.stroke.onColor}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "meterColorAlert": {
@@ -105,7 +105,7 @@
       "type": "color"
     },
     "meterColorAlertInverse": {
-      "value": "{color.stroke.info}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "meterColorBrand": {
@@ -113,7 +113,7 @@
       "type": "color"
     },
     "meterColorBrandInverse": {
-      "value": "{color.stroke.brand}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "meterColorDanger": {
@@ -121,7 +121,7 @@
       "type": "color"
     },
     "meterColorDangerInverse": {
-      "value": "{color.stroke.error}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "meterColorInfo": {
@@ -129,7 +129,7 @@
       "type": "color"
     },
     "meterColorInfoInverse": {
-      "value": "{color.stroke.info}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "meterColorSuccess": {
@@ -137,7 +137,7 @@
       "type": "color"
     },
     "meterColorSuccessInverse": {
-      "value": "{color.stroke.success}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "meterColorWarning": {
@@ -145,7 +145,7 @@
       "type": "color"
     },
     "meterColorWarningInverse": {
-      "value": "{color.stroke.warning}",
+      "value": "{color.stroke.inverse}",
       "type": "color"
     },
     "xSmallRadius": {

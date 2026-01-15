@@ -118,7 +118,8 @@
           "type": "dropShadow"
         }
       ],
-      "type": "boxShadow"
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
     }
   }
 }

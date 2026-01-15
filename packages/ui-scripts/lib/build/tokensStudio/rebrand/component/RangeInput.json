@@ -113,7 +113,8 @@
           "type": "dropShadow"
         }
       ],
-      "type": "boxShadow"
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
     },
     "handleFocusOutlineWidth": {
       "value": "0.75em",

@@ -99,6 +99,10 @@
     "tagInvalidColor": {
       "value": "#e60000",
       "type": "color"
+    },
+    "tagAtomColor": {
+      "value": "#219",
+      "type": "color"
     }
   }
 }

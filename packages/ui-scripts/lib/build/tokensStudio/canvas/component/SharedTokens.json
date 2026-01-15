@@ -300,6 +300,30 @@
             "type": "spacing"
           }
         }
+      },
+      "padding": {
+        "container": {
+          "xxs": {
+            "value": "{spacing.padding.container.xxs}",
+            "type": "spacing"
+          },
+          "xs": {
+            "value": "{spacing.padding.container.xs}",
+            "type": "spacing"
+          },
+          "sm": {
+            "value": "{spacing.padding.container.sm}",
+            "type": "spacing"
+          },
+          "md": {
+            "value": "{spacing.padding.container.md}",
+            "type": "spacing"
+          },
+          "lg": {
+            "value": "{spacing.padding.container.lg}",
+            "type": "spacing"
+          }
+        }
       }
     },
     "focusOutline": {
@@ -359,6 +383,98 @@
     "widthLarge": {
       "value": "{borderWidth.lg}",
       "type": "borderWidth"
+    },
+    "background": {
+      "containerColor": {
+        "value": "{color.background.container}",
+        "type": "color"
+      },
+      "baseColor": {
+        "value": "{color.background.base}",
+        "type": "color"
+      },
+      "pageColor": {
+        "value": "{color.background.page}",
+        "type": "color"
+      },
+      "mutedColor": {
+        "value": "{color.background.muted}",
+        "type": "color"
+      },
+      "brandColor": {
+        "value": "{color.background.brand}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.background.success}",
+        "type": "color"
+      },
+      "errorColor": {
+        "value": "{color.background.error}",
+        "type": "color"
+      },
+      "warningColor": {
+        "value": "{color.background.warning}",
+        "type": "color"
+      },
+      "infoColor": {
+        "value": "{color.background.info}",
+        "type": "color"
+      },
+      "aiTopGradientColor": {
+        "value": "{color.background.aiTopGradient}",
+        "type": "color"
+      },
+      "aiBottomGradientColor": {
+        "value": "{color.background.aiBottomGradient}",
+        "type": "color"
+      },
+      "aiTextColor": {
+        "value": "{color.background.aiText}",
+        "type": "color"
+      }
+    },
+    "stroke": {
+      "baseColor": {
+        "value": "{color.stroke.base}",
+        "type": "color"
+      },
+      "mutedColor": {
+        "value": "{color.stroke.muted}",
+        "type": "color"
+      },
+      "strongColor": {
+        "value": "{color.stroke.strong}",
+        "type": "color"
+      },
+      "brandColor": {
+        "value": "{color.stroke.brand}",
+        "type": "color"
+      },
+      "successColor": {
+        "value": "{color.stroke.success}",
+        "type": "color"
+      },
+      "errorColor": {
+        "value": "{color.stroke.error}",
+        "type": "color"
+      },
+      "warningColor": {
+        "value": "{color.stroke.warning}",
+        "type": "color"
+      },
+      "infoColor": {
+        "value": "{color.stroke.info}",
+        "type": "color"
+      },
+      "aiTopGradientColor": {
+        "value": "{color.stroke.aiTopGradient}",
+        "type": "color"
+      },
+      "aiBottomGradientColor": {
+        "value": "{color.stroke.aiBottomGradient}",
+        "type": "color"
+      }
     }
   }
 }

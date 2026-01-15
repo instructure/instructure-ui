@@ -99,6 +99,10 @@
     "tagInvalidColor": {
       "value": "{color.text.error}",
       "type": "color"
+    },
+    "tagAtomColor": {
+      "value": "{color.text.accent.blue}",
+      "type": "color"
     }
   }
 }
