@@ -1,6 +1,6 @@
 # Instructure UI (InstUI) - React Component Library
 
-- version 11.2.0 
+- version 11.3.0 
 
 - Instructure UI (InstUI) is a comprehensive React component library.
 
@@ -41,8 +41,8 @@
 - [Billboard](https://instructure.design/markdowns/Billboard.md): Used for empty states, 404 pages, and redirects. Supports various sizes, hero icons, and interactive behaviors (button or link). Can be disabled and includes structured messaging with headings and calls to action.
 - [Breadcrumb](https://instructure.design/markdowns/Breadcrumb.md): Shows navigation path location with automatic text truncation. Best for tablet+ screens; use Link for mobile. Supports multiple sizes, icons, and accessibility with aria-current attribute for current page indication.
 - [Button](https://instructure.design/markdowns/Button.md): Triggers actions or changes with multiple color schemes, sizes, and display options. Supports icons, text wrapping control, and backgroundless variants. Includes specific AI button styles with gradients and icons.
-- [CloseButton](https://instructure.design/markdowns/CloseButton.md): Specialized button for closing modals, dialogs, or containers. Supports absolute positioning with placement options (start/end/static) and offset control. Built with accessibility in mind using IconButton with X icon and screen reader labels.
 - [CondensedButton](https://instructure.design/markdowns/CondensedButton.md): Button variant without padding for tight spaces or alignment with other content. Ideal for table cells or areas where standard button padding would disrupt layout. Maintains button functionality while minimizing visual footprint.
+- [CloseButton](https://instructure.design/markdowns/CloseButton.md): Specialized button for closing modals, dialogs, or containers. Supports absolute positioning with placement options (start/end/static) and offset control. Built with accessibility in mind using IconButton with X icon and screen reader labels.
 - [IconButton](https://instructure.design/markdowns/IconButton.md): A button component designed specifically for icon-only actions. Requires screen reader labels for accessibility, supports various shapes (rectangle/circle), and can remove background/border for minimalist designs. Works well with Tooltip for additional context.
 - [ToggleButton](https://instructure.design/markdowns/ToggleButton.md): Controlled button for toggling between two states (on/off), featuring icon support, tooltips, inverse variants for dark backgrounds, and accessibility labels. Perfect for status toggles like lock/unlock.
 - [Byline](https://instructure.design/markdowns/Byline.md): Combines visual elements (avatars, icons) with descriptive captions. Supports titles, various sizes, content alignment options, and margin control. Useful for author attribution or content metadata displays.
