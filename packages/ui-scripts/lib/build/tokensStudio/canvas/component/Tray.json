@@ -55,7 +55,7 @@
       "type": "sizing"
     },
     "padding": {
-      "value": "{sharedTokens.spacing.padding.container.md}",
+      "value": "{spacing.padding.container.md}",
       "type": "spacing"
     },
     "zIndex": {
