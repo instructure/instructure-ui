@@ -93,11 +93,11 @@
       "type": "color"
     },
     "padding": {
-      "value": "{sharedTokens.spacing.padding.container.md}",
+      "value": "{spacing.padding.container.md}",
       "type": "spacing"
     },
     "paddingCompact": {
-      "value": "{sharedTokens.spacing.padding.container.xs}",
+      "value": "{spacing.padding.container.xs}",
       "type": "spacing"
     },
     "borderWidth": {
@@ -131,11 +131,11 @@
       "type": "color"
     },
     "padding": {
-      "value": "{sharedTokens.spacing.padding.container.md}",
+      "value": "{spacing.padding.container.md}",
       "type": "spacing"
     },
     "paddingCompact": {
-      "value": "{sharedTokens.spacing.padding.container.xs}",
+      "value": "{spacing.padding.container.xs}",
       "type": "spacing"
     }
   },
@@ -145,11 +145,11 @@
       "type": "color"
     },
     "padding": {
-      "value": "{sharedTokens.spacing.padding.container.md}",
+      "value": "{spacing.padding.container.md}",
       "type": "spacing"
     },
     "paddingCompact": {
-      "value": "{sharedTokens.spacing.padding.container.xs}",
+      "value": "{spacing.padding.container.xs}",
       "type": "spacing"
     }
   }
