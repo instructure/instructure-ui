@@ -1,5 +1,49 @@
 {
   "sharedTokens": {
+    "borderRadius": {
+      "xs": {
+        "value": "{borderRadius.xs}",
+        "type": "borderRadius"
+      },
+      "sm": {
+        "value": "borderRadius.sm",
+        "type": "borderRadius"
+      },
+      "md": {
+        "value": "borderRadius.md",
+        "type": "borderRadius"
+      },
+      "lg": {
+        "value": "borderRadius.lg",
+        "type": "borderRadius"
+      },
+      "xl": {
+        "value": "borderRadius.xl",
+        "type": "borderRadius"
+      },
+      "xxl": {
+        "value": "borderRadius.xxl",
+        "type": "borderRadius"
+      },
+      "full": {
+        "value": "999rem",
+        "type": "borderRadius"
+      },
+      "container": {
+        "sm": {
+          "value": "{borderRadius.container.sm}",
+          "type": "borderRadius"
+        },
+        "md": {
+          "value": "{borderRadius.container.md}",
+          "type": "borderRadius"
+        },
+        "lg": {
+          "value": "{borderRadius.container.lg}",
+          "type": "borderRadius"
+        }
+      }
+    },
     "legacySpacing": {
       "xxxSmall": {
         "value": "0.125rem",
