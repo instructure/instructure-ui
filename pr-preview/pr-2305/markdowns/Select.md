@@ -43,13 +43,15 @@ type: example
       setIsShowingOptions(true)
       if (inputValue || selectedOptionId || options.length === 0) return
 
-      switch (event.key) {
-        case 'ArrowDown':
-          return handleHighlightOption(event, { id: options[0].id })
-        case 'ArrowUp':
-          return handleHighlightOption(event, {
-            id: options[options.length - 1].id
-          })
+      if ('key' in event) {
+        switch (event.key) {
+          case 'ArrowDown':
+            return handleHighlightOption(event, { id: options[0].id })
+          case 'ArrowUp':
+            return handleHighlightOption(event, {
+              id: options[options.length - 1].id
+            })
+        }
       }
     }
 
@@ -233,13 +235,15 @@ type: example
       )
       if (inputValue || selectedOptionId || options.length === 0) return
 
-      switch (event.key) {
-        case 'ArrowDown':
-          return handleHighlightOption(event, { id: options[0].id })
-        case 'ArrowUp':
-          return handleHighlightOption(event, {
-            id: options[options.length - 1].id
-          })
+      if ('key' in event) {
+        switch (event.key) {
+          case 'ArrowDown':
+            return handleHighlightOption(event, { id: options[0].id })
+          case 'ArrowUp':
+            return handleHighlightOption(event, {
+              id: options[options.length - 1].id
+            })
+        }
       }
     }
 
@@ -435,21 +439,23 @@ type: example
 
       if (inputValue || options.length === 0) return
 
-      switch (event.key) {
-        case 'ArrowDown':
-          return handleHighlightOption(event, {
-            id: options.find((option) => !selectedOptionId.includes(option.id))
-              .id
-          })
-        case 'ArrowUp':
-          // Highlight last non-selected option
-          return handleHighlightOption(event, {
-            id: options[
-              options.findLastIndex(
-                (option) => !selectedOptionId.includes(option.id)
-              )
-            ].id
-          })
+      if ('key' in event) {
+        switch (event.key) {
+          case 'ArrowDown':
+            return handleHighlightOption(event, {
+              id: options.find((option) => !selectedOptionId.includes(option.id))
+                .id
+            })
+          case 'ArrowUp':
+            // Highlight last non-selected option
+            return handleHighlightOption(event, {
+              id: options[
+                options.findLastIndex(
+                  (option) => !selectedOptionId.includes(option.id)
+                )
+              ].id
+            })
+        }
       }
     }
 
@@ -488,13 +494,13 @@ type: example
       const newOptions = filterOptions(value)
       setInputValue(value)
       setFilteredOptions(newOptions)
-      sethHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
+      setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null)
       setIsShowingOptions(true)
       setAnnouncement(getOptionsChangedMessage(newOptions))
     }
 
     const handleKeyDown = (event) => {
-      if (event.keyCode === 8) {
+      if ('keyCode' in event && event.keyCode === 8) {
         // when backspace key is pressed
         if (inputValue === '' && selectedOptionId.length > 0) {
           // remove last selected option, if input has no entered text
@@ -659,17 +665,19 @@ const GroupSelectExample = ({ options }) => {
   const handleShowOptions = (event) => {
     setIsShowingOptions(true)
     setHighlightedOptionId(null)
-    if (inputValue || selectedOptionId || options.length === 0) return
+    if (inputValue || selectedOptionId || Object.keys(options).length === 0) return
 
-    switch (event.key) {
-      case 'ArrowDown':
-        return handleHighlightOption(event, {
-          id: options[Object.keys(options)[0]][0].id
-        })
-      case 'ArrowUp':
-        return handleHighlightOption(event, {
-          id: Object.values(options).at(-1)?.at(-1)?.id
-        })
+    if ('key' in event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
   }
 
@@ -839,17 +847,19 @@ const GroupSelectAutocompleteExample = ({ options }) => {
     setIsShowingOptions(true)
     setHighlightedOptionId(null)
 
-    if (inputValue || selectedOptionId || options.length === 0) return
+    if (inputValue || selectedOptionId || Object.keys(options).length === 0) return
 
-    switch (event.key) {
-      case 'ArrowDown':
-        return handleHighlightOption(event, {
-          id: options[Object.keys(options)[0]][0].id
-        })
-      case 'ArrowUp':
-        return handleHighlightOption(event, {
-          id: Object.values(options).at(-1)?.at(-1)?.id
-        })
+    if ('key' in event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, {
+            id: options[Object.keys(options)[0]][0].id
+          })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: Object.values(options).at(-1)?.at(-1)?.id
+          })
+      }
     }
   }
 
@@ -1204,13 +1214,15 @@ const SingleSelectExample = ({ options }) => {
 
     if (inputValue || selectedOptionId || options.length === 0) return
 
-    switch (event.key) {
-      case 'ArrowDown':
-        return handleHighlightOption(event, { id: options[0].id })
-      case 'ArrowUp':
-        return handleHighlightOption(event, {
-          id: options[options.length - 1].id
-        })
+    if ('key' in event) {
+      switch (event.key) {
+        case 'ArrowDown':
+          return handleHighlightOption(event, { id: options[0].id })
+        case 'ArrowUp':
+          return handleHighlightOption(event, {
+            id: options[options.length - 1].id
+          })
+      }
     }
   }
 
@@ -1351,10 +1363,10 @@ type: embed
 | Select | scrollToHighlightedOption | `boolean` | No | `true` | Enable/disable auto scroll to the highlighted option on every re-render |
 | Select | children | `React.ReactNode` | No | - | Children of type `<Select.Option />` or `<Select.Group />`. |
 | Select | isShowingOptions | `boolean` | No | `false` | Whether or not to show the options list. |
-| Select | onRequestShowOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired requesting that the options list be shown. |
-| Select | onRequestHideOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired requesting that the options list be hidden. |
-| Select | onRequestHighlightOption | `( event: React.SyntheticEvent, data: { id?: string; direction?: 1 \| -1 } ) => void` | No | - | Callback fired requesting a particular option be highlighted. |
-| Select | onRequestSelectOption | `( event: React.SyntheticEvent, data: { id?: string } ) => void` | No | - | Callback fired requesting a particular option be selected. |
+| Select | onRequestShowOptions | `(event: React.KeyboardEvent \| React.MouseEvent) => void` | No | - | Callback fired requesting that the options list be shown. |
+| Select | onRequestHideOptions | `( event: React.KeyboardEvent \| React.MouseEvent \| React.FocusEvent ) => void` | No | - | Callback fired requesting that the options list be hidden. |
+| Select | onRequestHighlightOption | `( event: React.KeyboardEvent \| React.MouseEvent, data: { id?: string; direction?: 1 \| -1 } ) => void` | No | - | Callback fired requesting a particular option be highlighted. |
+| Select | onRequestSelectOption | `( event: React.KeyboardEvent \| React.MouseEvent, data: { id?: string } ) => void` | No | - | Callback fired requesting a particular option be selected. |
 | Select | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The form field label. |
 | Select | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the text input. |
 | Select | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
