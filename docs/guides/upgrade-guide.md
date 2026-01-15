@@ -32,9 +32,7 @@ InstUI v12 introduces a new icon package **`@instructure/ui-icons-lucide`** base
 
 The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to Lucide icons and will be spread onto the nested SVG element. Existing `@instructure/ui-icons` package remains available for legacy Instructure-specific icons.
 
-## API Changes
-
-### Focus rings
+## Focus rings
 
 Focus rings are now styled in a central pseudo-component called `SharedTokens`. You can override here how it looks, for example:
 
@@ -61,24 +59,161 @@ type: example
 </InstUISettingsProvider>
 ```
 
+## API Changes
+
 ### Breadcrumb
 
-#### New theme tokens
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"gapSm",note:"Gap spacing for small size breadcrumbs"},
+    {name:"gapMd",note:"Gap spacing for medium size breadcrumbs"},
+    {name:"gapLg",note:"Gap spacing for large size breadcrumbs"}
+  ]}
+  removed={[
+    {name:"fontFamily",note:"handled in link component"},
+    {name:"separatorColor",note:"handled in link component"},
+    {name:"smallSeparatorFontSize",note:"handled in link component"},
+    {name:"smallFontSize",note:"handled in link component"},
+    {name:"mediumSeparatorFontSize",note:"handled in link component"},
+    {name:"mediumFontSize",note:"handled in link component"},
+    {name:"largeSeparatorFontSize",note:"handled in link component"},
+    {name:"largeFontSize",note:"handled in link component"}
+  ]}
+/>
 
-- `gapSm` - Gap spacing for small size breadcrumbs
-- `gapMd` - Gap spacing for medium size breadcrumbs
-- `gapLg` - Gap spacing for large size breadcrumbs
+```
 
-#### Theme variable changes
+### Flex
 
-- theme variable `fontFamily` is now removed (handled in link component)
-- theme variable `separatorColor` is now removed (handled in link component)
-- theme variable `smallSeparatorFontSize` is now removed (handled in link component)
-- theme variable `smallFontSize` is now removed (handled in link component)
-- theme variable `mediumSeparatorFontSize` is now removed (handled in link component)
-- theme variable `mediumFontSize` is now removed (handled in link component)
-- theme variable `largeSeparatorFontSize` is now removed (handled in link component)
-- theme variable `largeFontSize` is now removed (handled in link component)
+Gap styling now uses `sharedTokens.legacySpacing`.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"gapButtons",note:""},
+    {name:"gapCheckboxes",note:""},
+    {name:"gapDataPoints",note:""},
+    {name:"gapInputFields",note:""},
+    {name:"gapLarge",note:""},
+    {name:"gapMedium",note:""},
+    {name:"gapMediumSmall",note:""},
+    {name:"gapModalElements",note:""},
+    {name:"gapModuleElements",note:""},
+    {name:"gapPaddingCardLarge",note:""},
+    {name:"gapPaddingCardMedium",note:""},
+    {name:"gapPaddingCardSmall",note:""},
+    {name:"gapRadios",note:""},
+    {name:"gapSectionElements",note:""},
+    {name:"gapSections",note:""},
+    {name:"gapSelects",note:""},
+    {name:"gapSmall",note:""},
+    {name:"gapSpace0",note:""},
+    {name:"gapSpace12",note:""},
+    {name:"gapSpace16",note:""},
+    {name:"gapSpace2",note:""},
+    {name:"gapSpace24",note:""},
+    {name:"gapSpace36",note:""},
+    {name:"gapSpace4",note:""},
+    {name:"gapSpace48",note:""},
+    {name:"gapSpace60",note:""},
+    {name:"gapSpace8",note:""},
+    {name:"gapStatusIndicators",note:""},
+    {name:"gapTags",note:""},
+    {name:"gapTextareas",note:""},
+    {name:"gapToggles",note:""},
+    {name:"gapTrayElements",note:""},
+    {name:"gapXLarge",note:""},
+    {name:"gapXSmall",note:""},
+    {name:"gapXxLarge",note:""},
+    {name:"gapXxSmall",note:""},
+    {name:"gapXxxSmall",note:""}
+  ]}
+/>
+
+```
+
+### FormField
+
+#### FormFieldGroup
+
+`error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"errorBorderColor",note:""},
+    {name:"errorFieldsPadding",note:""},
+    {name:"borderColor",note:""},
+    {name:"borderStyle",note:""},
+    {name:"borderWidth",note:""}
+  ]}
+/>
+
+```
+
+#### FormFieldLayout
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"spacing",note:""},
+    {name:"inlinePadding",note:""},
+    {name:"asteriskColor",note:""}
+  ]}
+  changed={[
+    {oldName:"color",newName:"textColor",note:""}
+  ]}
+/>
+
+```
+
+#### FormFieldMessage
+
+`newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`).
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"errorIconMarginRight",note:""}
+  ]}
+  changed={[
+    {oldName:"colorHint",newName:"hintTextColor",note:""},
+    {oldName:"colorError",newName:"errorTextColor",note:""},
+    {oldName:"colorSuccess",newName:"successTextColor",note:""}
+  ]}
+/>
+
+```
+
+#### FormFieldMessages
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"topMargin",note:""}
+  ]}
+/>
+
+```
 
 ### Link
 
@@ -97,54 +232,98 @@ The following variant values have been **deprecated** and will be removed in a f
 - `'inline-small'`
 - `'standalone-small'`
 
-#### Theme variable changes
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"unstyledTextColor",note:"for non-interactive Links"}
+  ]}
+  removed={[
+    {name:"fontSize",note:""},
+    {name:"fontSizeSmall",note:""},
+    {name:"lineHeight",note:""},
+    {name:"focusOutlineWidth",note:""},
+    {name:"focusOutlineStyle",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"focusOutlineBorderRadius",note:""},
+    {name:"focusInverseOutlineColor",note:""},
+    {name:"focusInverseIconOutlineColor",note:""},
+    {name:"iconSize",note:""},
+    {name:"iconPlusTextMargin",note:""},
+    {name:"iconPlusTextMarginSmall",note:""},
+    {name:"textUnderlineOffset",note:""}
+  ]}
+  changed={[
+    {oldName:"color",newName:"textColor",note:""},
+    {oldName:"hoverColor",newName:"textHoverColor",note:""},
+    {oldName:"colorInverse",newName:"onColorTextColor",note:""}
+  ]}
+/>
 
-- theme variable `unstyledTextColor` is newly added for non-interactive Links
-- theme variable `fontSize` is now removed
-- theme variable `fontSizeSmall` is now removed
-- theme variable `lineHeight` is now removed
-- theme variable `color` has been renamed to `textColor`
-- theme variable `hoverColor` has been renamed to `textHoverColor`
-- theme variable `colorInverse` has been renamed to `onColorTextColor`
-- theme variable `focusOutlineWidth` is now removed
-- theme variable `focusOutlineStyle` is now removed
-- theme variable `focusOutlineColor` is now removed
-- theme variable `focusOutlineBorderRadius` is now removed
-- theme variable `focusInverseOutlineColor` is now removed
-- theme variable `focusInverseIconOutlineColor` is now removed
-- theme variable `iconSize` is now removed
-- theme variable `iconPlusTextMargin` is now removed
-- theme variable `iconPlusTextMarginSmall` is now removed
-- theme variable `textUnderlineOffset` is now removed
+```
 
-## New icons
+### Metric
 
-InstUI has switched to a new icon set, [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set (see below).
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:"left-right padding can be set now with the paddingHorizontal theme variable"},
+    {name:"fontFamily",note:"font can be set independently on the value and label elements using the valueFontFamily and labelFontFamily variables"}
+  ]}
+/>
 
-### Lucide Icons Package
+```
 
-InstUI v12 introduces a new icon package **`@instructure/ui-icons-lucide`** based on the [Lucide](https://lucide.dev/icons/) icon library, providing 1,700+ icons with improved theming and RTL support. The new Lucide icons are wrapped with `wrapLucideIcon` to integrate with InstUI's theming system while maintaining access to all native Lucide props.
+#### MetricGroup
 
-**Key differences from `SVGIcon`/`InlineSVG`:**
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"lineHeight",note:""}
+  ]}
+/>
 
-| Property        | Old API (SVGIcon)                                                                               | New API (Lucide)                                                                                      |
-| :-------------- | :---------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| **size**        | `'x-small'` \| `'small'` \| `'medium'` \| `'large'` \| `'x-large'`                              | `'xs'` \| `'sm'` \| `'md'` \| `'lg'` \| `'xl'` \| `'2xl'` \| `number` (pixels)                        |
-| **color**       | Limited tokens: `'primary'` \| `'secondary'` \| `'success'` \| `'error'` \| `'warning'` \| etc. | 60+ theme tokens (`'baseColor'`, `'successColor'`, `'actionPrimaryBaseColor'`, etc.) or any CSS color |
-| **strokeWidth** | ❌ Not available                                                                                | `'xs'` \| `'sm'` \| `'md'` \| `'lg'` \| `'xl'` \| `'2xl'` \| `number` \| `string`                     |
-| **children**    | `React.ReactNode`                                                                               | ❌ Removed                                                                                            |
-| **focusable**   | `boolean`                                                                                       | ❌ Removed                                                                                            |
-| **description** | `string` (combined with title)                                                                  | ❌ Removed (use `title` only)                                                                         |
-| **src**         | `string`                                                                                        | ❌ Removed                                                                                            |
+```
 
-The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to Lucide icons and will be spread onto the nested SVG element. Existing `@instructure/ui-icons` package remains available for legacy Instructure-specific icons.
+### NumberInput
 
-## Removal of deprecated props/components/APIs
+`error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
 
-### Text
+`newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`).
 
-- `alert` color has been removed. Please use `primary` instead.
-- Some prop values have been deprecated, see [Text](/Text) for more details.
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:""},
+    {name:"borderStyle",note:""},
+    {name:"errorOutlineColor",note:""},
+    {name:"focusOutlineWidth",note:""},
+    {name:"focusOutlineStyle",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"requiredInvalidColor",note:""}
+  ]}
+  changed={[
+    {oldName:"mediumFontSize",newName:"fontSizeMd",note:""},
+    {oldName:"largeFontSize",newName:"fontSizeLg",note:""},
+    {oldName:"mediumHeight",newName:"heightMd",note:""},
+    {oldName:"largeHeight",newName:"textColor",note:""},
+    {oldName:"color",newName:"textColor",note:""},
+    {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
+
+```
 
 ### Pill
 
@@ -155,163 +334,184 @@ The following `color` prop values have been **removed**:
 - `'danger'` - use `'error'` instead
 - `'alert'` - use `'info'` instead
 
-#### Theme variable changes
-
-- theme variable `fontFamily` has been added
-- theme variable `padding` has been renamed to `paddingHorizontal` (now only controls horizontal padding)
-- theme variable `background` has been renamed to `backgroundColor`
-- theme variable `primaryColor` has been split into:
-  - `baseTextColor` (for text color)
-  - `baseBorderColor` (for border color)
-- theme variable `successColor` has been split into:
-  - `successTextColor` (for text color)
-  - `successBorderColor` (for border color)
-- theme variable `infoColor` has been split into:
-  - `infoTextColor` (for text color)
-  - `infoBorderColor` (for border color)
-- theme variable `warningColor` has been split into:
-  - `warningTextColor` (for text color)
-  - `warningBorderColor` (for border color)
-- theme variable `dangerColor` has been removed, replaced with:
-  - `errorTextColor` (for text color)
-  - `errorBorderColor` (for border color)
-- theme variable `alertColor` has been removed (use `info*` variables instead)
-
-## API Changes
-
-### Focus rings
-
-Focus rings are now styled in a central pseudo-component called `SharedTokens`. You can override here how it looks, for example:
-
 ```js
 ---
-type: example
+type: embed
 ---
-<InstUISettingsProvider
-  theme={{
-  themeOverrides: {
-    canvas: {
-      componentOverrides: {
-        SharedTokens: {
-          focusOutline: {
-            infoColor: 'red',
-            offset: '2rem'
-          }
-        }
-      }
-    }
-  }
-}}>
-  <TextInput renderLabel="Name" placeholder="Doe, John Doe"/>
-</InstUISettingsProvider>
+<V12ChangelogTable
+  added={[
+    {name:"fontFamily",note:""},
+    {name:"baseTextColor",note:"split from primaryColor"},
+    {name:"baseBorderColor",note:"split from primaryColor"},
+    {name:"successTextColor",note:"split from successColor"},
+    {name:"successBorderColor",note:"split from successColor"},
+    {name:"infoTextColor",note:"split from infoColor"},
+    {name:"infoBorderColor",note:"split from infoColor"},
+    {name:"warningTextColor",note:"split from warningColor"},
+    {name:"warningBorderColor",note:"split from warningColor"},
+    {name:"errorTextColor",note:"split from dangerColor"},
+    {name:"errorBorderColor",note:"split from dangerColor"}
+  ]}
+  removed={[
+    {name:"primaryColor",note:"split into baseTextColor and baseBorderColor"},
+    {name:"successColor",note:"split into successTextColor and successBorderColor"},
+    {name:"infoColor",note:"split into infoTextColor and infoBorderColor"},
+    {name:"warningColor",note:"split into warningTextColor and warningBorderColor"},
+    {name:"dangerColor",note:"replaced with errorTextColor and errorBorderColor"},
+    {name:"alertColor",note:"use info* variables instead"}
+  ]}
+  changed={[
+    {oldName:"padding",newName:"paddingHorizontal",note:"now only controls horizontal padding"},
+    {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
+
 ```
-### Breadcrumb
-
-#### New tokens 
-
-- gapSm - Gap spacing for small size breadcrumbs
-- gapMd - Gap spacing for medium size breadcrumbs
-- gapLg - Gap spacing for large size breadcrumbs
-
-#### Theme variable changes
-
-- theme variable `fontFamily` is now removed (handled in link component)
-- theme variable `separatorColor` is now removed (handled in link component)
-- theme variable `smallSeparatorFontSize` is now removed (handled in link component)
-- theme variable `smallFontSize` is now removed (handled in link component)
-- theme variable `mediumSeparatorFontSize` is now removed (handled in link component)
-- theme variable `mediumFontSize` is now removed (handled in link component)
-- theme variable `largeSeparatorFontSize` is now removed (handled in link component)
-- theme variable `largeFontSize` is now removed (handled in link component)
 
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
-- its DOM structure has been significantly simplified
+- Its DOM structure has been significantly simplified
+
+### RadioInputGroup
+
+`error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
+
+`newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`).
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"invalidAsteriskColor",note:""}
+  ]}
+/>
+
+```
 
 ### Spinner
 
 - `as` prop has been removed, `Spinner` will always render as a `<div>` element.
 - `elementRef` prop has been removed, use the `ref` prop instead.
 
-### Metric
+### Table
 
-- theme variable `padding` is now removed, left-right padding can be set now with the `paddingHorizontal` theme variable
-- theme variable `fontFamily` is now removed, font can be set independently on the value and label elements using the `valueFontFamily` and `labelFontFamily` variables respectively
+#### Table.Cell
 
-### MetricGroup
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingVertical",note:"split from padding"},
+    {name:"paddingHorizontal",note:"split from padding"}
+  ]}
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"},
+    {name:"borderColor",note:""}
+  ]}
+/>
 
-- theme variable `lineHeight` is now removed.
+```
 
-### Flex
+#### Table.ColHeader
 
-The following theme variables have been removed. Gap styling now uses `sharedTokens.legacySpacing`:
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingVertical",note:"split from padding"},
+    {name:"paddingHorizontal",note:"split from padding"}
+  ]}
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"},
+    {name:"borderColor",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"focusOutlineStyle",note:""},
+    {name:"focusOutlineWidth",note:""},
+    {name:"sortedIconColor",note:""},
+    {name:"unsortedIconColor",note:""}
+  ]}
+/>
 
-- `gapButtons`
-- `gapCheckboxes`
-- `gapDataPoints`
-- `gapInputFields`
-- `gapLarge`
-- `gapMedium`
-- `gapMediumSmall`
-- `gapModalElements`
-- `gapModuleElements`
-- `gapPaddingCardLarge`
-- `gapPaddingCardMedium`
-- `gapPaddingCardSmall`
-- `gapRadios`
-- `gapSectionElements`
-- `gapSections`
-- `gapSelects`
-- `gapSmall`
-- `gapSpace0`
-- `gapSpace12`
-- `gapSpace16`
-- `gapSpace2`
-- `gapSpace24`
-- `gapSpace36`
-- `gapSpace4`
-- `gapSpace48`
-- `gapSpace60`
-- `gapSpace8`
-- `gapStatusIndicators`
-- `gapTags`
-- `gapTextareas`
-- `gapToggles`
-- `gapTrayElements`
-- `gapXLarge`
-- `gapXSmall`
-- `gapXxLarge`
-- `gapXxSmall`
-- `gapXxxSmall`
+```
 
-### FormFieldGroup
+#### Table.Row
 
-- theme variable `errorBorderColor` is now removed
-- theme variable `errorFieldsPadding` is now removed
-- theme variable `borderColor` is now removed
-- theme variable `borderStyle` is now removed
-- theme variable `borderWidth` is now removed
-- `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingVertical",note:"split from padding"},
+    {name:"paddingHorizontal",note:"split from padding"}
+  ]}
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
 
-### FormFieldLayout
+```
 
-- theme variable `spacing` is now removed
-- theme variable `color` has been renamed to `textColor`
-- theme variable `inlinePadding` is now removed
-- theme variable `asteriskColor` is now removed
+#### Table.RowHeader
 
-### FormFieldMessage
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingVertical",note:"split from padding"},
+    {name:"paddingHorizontal",note:"split from padding"}
+  ]}
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
 
-- theme variable `colorHint` has been renamed to `hintTextColor`
-- theme variable `colorError` has been renamed to `errorTextColor`
-- theme variable `colorSuccess` has been renamed to `successTextColor`
-- theme variable `errorIconMarginRight` is now removed
-- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
+```
 
-### FormFieldMessages
+### Tabs
 
-- theme variable `topMargin` is now removed
+#### Tabs.Panel
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusOutlineColor",note:"style uses sharedTokens.focusOutline.infoColor"}
+  ]}
+  changed={[
+    {oldName:"color",newName:"textColor",note:""}
+  ]}
+/>
+
+```
+
+#### Tabs.Tab
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"defaultHoverBorderColor",note:"was unused"}
+  ]}
+  changed={[
+    {oldName:"defaultColor",newName:"defaultTextColor",note:""}
+  ]}
+/>
+
+```
 
 ### Text
 
@@ -321,137 +521,133 @@ The following theme variables have been removed. Gap styling now uses `sharedTok
 
 ### TextArea
 
-- theme variable `smallFontSize` is now renamed to `fontSizeSm`
-- theme variable `mediumFontSize` is now renamed to `fontSizeMd`
-- theme variable `largeFontMedium` is now renamed to `fontSizeLg`
-- theme variable `requiredInvalidColor` is now removed
-- theme variable `borderStyle` is now removed
-- theme variable `borderTopColor` is now removed
-- theme variable `borderBottomColor` is now removed
-- theme variable `borderLeftColor` is now removed
-- theme variable `borderRightColor` is now removed
-- theme variable `color` is now renamed to `textColor`
-- theme variable `background` is now renamed to `backgroundColor`
-- theme variable `focusOutlineWidth` is now removed
-- theme variable `focusOutlineStyle` is now removed
-- theme variable `focusOutlineColor` is now removed
-- `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
+`error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"requiredInvalidColor",note:""},
+    {name:"borderStyle",note:""},
+    {name:"borderTopColor",note:""},
+    {name:"borderBottomColor",note:""},
+    {name:"borderLeftColor",note:""},
+    {name:"borderRightColor",note:""},
+    {name:"focusOutlineWidth",note:""},
+    {name:"focusOutlineStyle",note:""},
+    {name:"focusOutlineColor",note:""}
+  ]}
+  changed={[
+    {oldName:"smallFontSize",newName:"fontSizeSm",note:""},
+    {oldName:"mediumFontSize",newName:"fontSizeMd",note:""},
+    {oldName:"largeFontMedium",newName:"fontSizeLg",note:""},
+    {oldName:"color",newName:"textColor",note:""},
+    {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
+
+```
 
 ### TextInput
 
-- theme variable `smallFontSize` is now renamed to `fontSizeSm`
-- theme variable `mediumFontSize` is now renamed to `fontSizeMd`
-- theme variable `largeFontSize` is now renamed to `fontSizeLg`
-- theme variable `smallHeight` is now renamed to `heightSm`
-- theme variable `mediumHeight` is now renamed to `heightMd`
-- theme variable `largeHeight` is now renamed to `textColor`
-- theme variable `color` is now renamed to `textColor`
-- theme variable `background` is now renamed to `backgroundColor`
-- theme variable `padding` is now removed
-- theme variable `borderStyle` is now removed
-- theme variable `errorOutlineColor` is now removed
-- theme variable `focusOutlineWidth` is now removed
-- theme variable `focusOutlineStyle` is now removed
-- theme variable `focusOutlineColor` is now removed
-- theme variable `requiredInvalidColor` is now removed
-- `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`
-- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
+`error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
 
-### NumberInput
+`newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`).
 
-- theme variable `mediumFontSize` is now renamed to `fontSizeMd`
-- theme variable `largeFontSize` is now renamed to `fontSizeLg`
-- theme variable `mediumHeight` is now renamed to `heightMd`
-- theme variable `largeHeight` is now renamed to `textColor`
-- theme variable `color` is now renamed to `textColor`
-- theme variable `background` is now renamed to `backgroundColor`
-- theme variable `padding` is now removed
-- theme variable `borderStyle` is now removed
-- theme variable `errorOutlineColor` is now removed
-- theme variable `focusOutlineWidth` is now removed
-- theme variable `focusOutlineStyle` is now removed
-- theme variable `focusOutlineColor` is now removed
-- theme variable `requiredInvalidColor` is now removed
-- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
-- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:""},
+    {name:"borderStyle",note:""},
+    {name:"errorOutlineColor",note:""},
+    {name:"focusOutlineWidth",note:""},
+    {name:"focusOutlineStyle",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"requiredInvalidColor",note:""}
+  ]}
+  changed={[
+    {oldName:"smallFontSize",newName:"fontSizeSm",note:""},
+    {oldName:"mediumFontSize",newName:"fontSizeMd",note:""},
+    {oldName:"largeFontSize",newName:"fontSizeLg",note:""},
+    {oldName:"smallHeight",newName:"heightSm",note:""},
+    {oldName:"mediumHeight",newName:"heightMd",note:""},
+    {oldName:"largeHeight",newName:"textColor",note:""},
+    {oldName:"color",newName:"textColor",note:""},
+    {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
 
-### RadioInputGroup
-
-- theme variable `invalidAsteriskColor` is now removed
-- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
-- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
-
-### TextInput
-
-- theme variable `requiredInvalidColor` is now removed
-- `error` or `success` messages are no longer displayed when the component is '`readOnly` or `disabled`
-- `newError` message type is now deprecated. Both `newError` and the original `error` type now behave identically (using the new implementation that was previously exclusive to `newError`)
-
-### Tabs.Panel
-
-- theme variable `color` is now renamed to `textColor`
-- theme variable `focusOutlineColor` is now removed and the style uses the `sharedTokens.focusOutline.infoColor`
-
-### Tabs.Tab
-
-- theme variable `defaultColor` is now renamed to `defaultTextColor`
-- theme variable `defaultHoverBorderColor` is now removed as it was unused
+```
 
 ### Tray
 
-- theme variable `background` is now renamed to `backgroundColor`
-- theme variable `xSmallWidth` is now renamed to `widthXs`
-- theme variable `smallWidth` is now renamed to `widthSm`
-- theme variable `regularWidth` is now renamed to `widthMg`
-- theme variable `mediumWidth` is now renamed to `widthLg`
-- theme variable `largeWidth` is now renamed to `widthXl`
-- theme variable `borderStyle` is now removed
-- theme variable `position` is now removed
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"borderStyle",note:""},
+    {name:"position",note:""}
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"xSmallWidth",newName:"widthXs",note:""},
+    {oldName:"smallWidth",newName:"widthSm",note:""},
+    {oldName:"regularWidth",newName:"widthMg",note:""},
+    {oldName:"mediumWidth",newName:"widthLg",note:""},
+    {oldName:"largeWidth",newName:"widthXl",note:""}
+  ]}
+/>
 
-### Table.Cell
-
-- theme variable `padding` is now removed
-- theme variable `borderColor` is now removed
-- theme variable `paddingVertical` has been added
-- theme variable `paddingHorizontal` has been added
-
-### Table.ColHeader
-
-- theme variable `padding` is now removed
-- theme variable `paddingVertical` has been added
-- theme variable `paddingHorizontal` has been added
-- theme variable `borderColor` is now removed
-- theme variable `focusOutlineColor` is now removed
-- theme variable `focusOutlineStyle` is now removed
-- theme variable `focusOutlineWidth` is now removed
-- theme variable `sortedIconColor` is now removed
-- theme variable `unsortedIconColor` is now removed
-
-### Table.Row
-
-- theme variable `padding` is now removed
-- theme variable `paddingVertical` has been added
-- theme variable `paddingHorizontal` has been added
-
-### Table.RowHeader
-
-- theme variable `padding` is now removed
-- theme variable `paddingVertical` has been added
-- theme variable `paddingHorizontal` has been added
+```
 
 ### View
 
-#### Theme variable changes
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"arrowSize",note:"Moved to ContextView component"},
+    {name:"marginXxxSmall",note:"Use sharedTokens.spacing"},
+    {name:"marginXxSmall",note:"Use sharedTokens.spacing"},
+    {name:"marginXSmall",note:"Use sharedTokens.spacing"},
+    {name:"marginSmall",note:"Use sharedTokens.spacing"},
+    {name:"marginMedium",note:"Use sharedTokens.spacing"},
+    {name:"marginLarge",note:"Use sharedTokens.spacing"},
+    {name:"marginXLarge",note:"Use sharedTokens.spacing"},
+    {name:"marginXxLarge",note:"Use sharedTokens.spacing"},
+    {name:"paddingXxxSmall",note:"Use sharedTokens.spacing"},
+    {name:"paddingXxSmall",note:"Use sharedTokens.spacing"},
+    {name:"paddingXSmall",note:"Use sharedTokens.spacing"},
+    {name:"paddingSmall",note:"Use sharedTokens.spacing"},
+    {name:"paddingMedium",note:"Use sharedTokens.spacing"},
+    {name:"paddingLarge",note:"Use sharedTokens.spacing"},
+    {name:"paddingXLarge",note:"Use sharedTokens.spacing"},
+    {name:"paddingXxLarge",note:"Use sharedTokens.spacing"},
+    {name:"shadowDepth1",note:"Use sharedTokens.boxShadow.elevation1/2/3"},
+    {name:"shadowDepth2",note:"Use sharedTokens.boxShadow.elevation1/2/3"},
+    {name:"shadowDepth3",note:"Use sharedTokens.boxShadow.elevation1/2/3"},
+    {name:"shadowResting",note:"Use sharedTokens.boxShadow.elevation*"},
+    {name:"shadowAbove",note:"Use sharedTokens.boxShadow.elevation*"},
+    {name:"shadowTopmost",note:"Use sharedTokens.boxShadow.elevation*"},
+    {name:"borderRadiusSmall",note:"Use sharedTokens.radius*"},
+    {name:"borderRadiusMedium",note:"Use sharedTokens.radius*"},
+    {name:"borderRadiusLarge",note:"Use sharedTokens.radius*"},
+    {name:"borderWidthSmall",note:"Use sharedTokens.width*"},
+    {name:"borderWidthMedium",note:"Use sharedTokens.width*"},
+    {name:"borderWidthLarge",note:"Use sharedTokens.width*"}
+  ]}
+/>
 
-| Old Variable                                                                                                                             | Status  | Notes                                       |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------- |
-| `arrowSize`                                                                                                                              | Removed | Moved to ContextView component              |
-| `marginXxxSmall`, `marginXxSmall`, `marginXSmall`, `marginSmall`, `marginMedium`, `marginLarge`, `marginXLarge`, `marginXxLarge`         | Removed | Use `sharedTokens.spacing`                  |
-| `paddingXxxSmall`, `paddingXxSmall`, `paddingXSmall`, `paddingSmall`, `paddingMedium`, `paddingLarge`, `paddingXLarge`, `paddingXxLarge` | Removed | Use `sharedTokens.spacing`                  |
-| `shadowDepth1`, `shadowDepth2`, `shadowDepth3`                                                                                           | Removed | Use `sharedTokens.boxShadow.elevation1/2/3` |
-| `shadowResting`, `shadowAbove`, `shadowTopmost`                                                                                          | Removed | Use `sharedTokens.boxShadow.elevation*`     |
-| `borderRadiusSmall`, `borderRadiusMedium`, `borderRadiusLarge`                                                                           | Removed | Use `sharedTokens.radius*`                  |
-| `borderWidthSmall`, `borderWidthMedium`, `borderWidthLarge`                                                                              | Removed | Use `sharedTokens.width*`                   |
+```
 
 ## Codemods
 
