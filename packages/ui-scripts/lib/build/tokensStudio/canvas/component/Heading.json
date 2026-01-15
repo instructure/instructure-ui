@@ -203,10 +203,8 @@
       "type": "borderWidth"
     },
     "borderStyle": {
-      "value": {
-        "style": "solid"
-      },
-      "type": "border"
+      "value": "solid",
+      "type": "text"
     },
     "borderPadding": {
       "value": "{spacing.space2xs}",
