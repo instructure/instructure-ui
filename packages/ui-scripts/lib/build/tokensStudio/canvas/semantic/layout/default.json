@@ -70,6 +70,20 @@
         "value": "75em",
         "type": "sizing"
       }
+    },
+    "media": {
+      "mediumMin": {
+        "value": "48em",
+        "type": "sizing"
+      },
+      "largeMin": {
+        "value": "62em",
+        "type": "sizing"
+      },
+      "xLargeMin": {
+        "value": "75em",
+        "type": "sizing"
+      }
     }
   },
   "spacing": {
@@ -137,6 +151,10 @@
     },
     "padding": {
       "container": {
+        "xxs": {
+          "value": "{size.size8}",
+          "type": "spacing"
+        },
         "xs": {
           "value": "{size.size12}",
           "type": "spacing"
@@ -151,10 +169,6 @@
         },
         "lg": {
           "value": "{size.size32}",
-          "type": "spacing"
-        },
-        "xxs": {
-          "value": "{size.size8}",
           "type": "spacing"
         }
       },
