@@ -31,7 +31,6 @@
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-grid": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
-    "@instructure/ui-icons-lucide": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/uid": "workspace:*"

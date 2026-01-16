@@ -278,9 +278,6 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
-      '@instructure/ui-icons-lucide':
-        specifier: workspace:*
-        version: link:../ui-icons-lucide
       '@instructure/ui-img':
         specifier: workspace:*
         version: link:../ui-img
@@ -1020,9 +1017,9 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
-      '@instructure/ui-icons-lucide':
+      '@instructure/ui-icons':
         specifier: workspace:*
-        version: link:../ui-icons-lucide
+        version: link:../ui-icons
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
@@ -1249,9 +1246,9 @@ importers:
       '@instructure/shared-types':
         specifier: workspace:*
         version: link:../shared-types
-      '@instructure/ui-icons-lucide':
+      '@instructure/ui-icons':
         specifier: workspace:*
-        version: link:../ui-icons-lucide
+        version: link:../ui-icons
       '@instructure/ui-link':
         specifier: workspace:*
         version: link:../ui-link
@@ -2259,9 +2256,6 @@ importers:
       '@instructure/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
-      '@instructure/ui-icons-lucide':
-        specifier: workspace:*
-        version: link:../ui-icons-lucide
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
@@ -2428,19 +2422,6 @@ importers:
       '@babel/runtime':
         specifier: ^7.27.6
         version: 7.28.4
-      '@instructure/ui-svg-images':
-        specifier: workspace:*
-        version: link:../ui-svg-images
-    devDependencies:
-      '@instructure/ui-babel-preset':
-        specifier: workspace:*
-        version: link:../ui-babel-preset
-
-  packages/ui-icons-lucide:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.27.6
-        version: 7.28.4
       '@instructure/emotion':
         specifier: workspace:*
         version: link:../emotion
@@ -2450,6 +2431,9 @@ importers:
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
+      '@instructure/ui-svg-images':
+        specifier: workspace:*
+        version: link:../ui-svg-images
       '@instructure/ui-themes':
         specifier: workspace:*
         version: link:../ui-themes
@@ -2982,9 +2966,9 @@ importers:
       '@instructure/ui-form-field':
         specifier: workspace:*
         version: link:../ui-form-field
-      '@instructure/ui-icons-lucide':
+      '@instructure/ui-icons':
         specifier: workspace:*
-        version: link:../ui-icons-lucide
+        version: link:../ui-icons
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
@@ -4253,9 +4237,9 @@ importers:
       '@instructure/ui-a11y-content':
         specifier: workspace:*
         version: link:../ui-a11y-content
-      '@instructure/ui-icons-lucide':
+      '@instructure/ui-icons':
         specifier: workspace:*
-        version: link:../ui-icons-lucide
+        version: link:../ui-icons
       '@instructure/ui-react-utils':
         specifier: workspace:*
         version: link:../ui-react-utils
