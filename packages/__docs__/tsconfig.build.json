@@ -125,9 +125,6 @@
       "path": "../ui-icons/tsconfig.build.json"
     },
     {
-      "path": "../ui-icons-lucide/tsconfig.build.json"
-    },
-    {
       "path": "../ui-img/tsconfig.build.json"
     },
     {

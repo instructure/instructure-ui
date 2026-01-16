@@ -78,7 +78,7 @@ const HEADER = `/*
 `
 
 async function generateIndex() {
-  const mappingPath = path.join(__dirname, '../src/mapping.json')
+  const mappingPath = path.join(__dirname, '../lucide/mapping.json')
   const mappingData: MappingData = JSON.parse(
     fs.readFileSync(mappingPath, 'utf-8')
   )
@@ -112,7 +112,7 @@ export { renderIconWithProps } from './IconPropsProvider'
 ${iconExports}
 `
 
-  const outputPath = path.join(__dirname, '../src/index.ts')
+  const outputPath = path.join(__dirname, '../lucide/index.ts')
   fs.writeFileSync(outputPath, content, 'utf-8')
 
   console.error(`Generated index.ts with ${allLucideIcons.length} icons`)

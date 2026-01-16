@@ -6,6 +6,21 @@
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./lucide": {
+      "import": "./es/lucide/index.js",
+      "require": "./lib/lucide/index.js",
+      "types": "./types/lucide/index.d.ts"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -14,10 +29,13 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-scripts lint",
+    "generate-lucide": "node --experimental-strip-types scripts/generateLucideIndex.ts",
     "prepare-build": "pnpm run build-icons",
     "build-icons": "pnpm exec ui-scripts build-icons --skipOptimization --config icons.config.js",
     "build-icons:optimize": "pnpm exec ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js",
-    "build": "ui-scripts build __build__ --copy-files --modules es,cjs",
+    "build": "pnpm run build:main && pnpm run build:lucide",
+    "build:main": "ui-scripts build __build__ --copy-files --modules es,cjs",
+    "build:lucide": "pnpm exec babel lucide --out-dir lib/lucide --extensions .ts,.tsx,.js,.jsx && ES_MODULES=true pnpm exec babel lucide --out-dir es/lucide --extensions .ts,.tsx,.js,.jsx",
     "export": "pnpm run build-icons:optimize && pnpm run build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
@@ -28,11 +46,18 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*"
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@types/node": "^22.5.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/ui-svg-images": "workspace:*"
+    "@instructure/ui-svg-images": "workspace:*",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-utils": "workspace:*",
+    "lucide-react": "^0.559.0"
   },
   "peerDependencies": {
     "react": ">=18 <=19"
