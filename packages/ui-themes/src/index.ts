@@ -53,10 +53,10 @@ import dataVisualization from './sharedThemeTokens/colors/dataVisualization'
 import { boxShadowObjectsToCSSString } from './utils/boxShadowObjectToString'
 
 import type {
-  Canvas as NewCanvas,
-  CanvasHighContrast as NewCanvasHighContrast,
-  RebrandDark as NewRebrandDark,
-  RebrandLight as NewRebrandLight
+  LegacyCanvas as NewCanvas,
+  LegacyCanvasHighContrast as NewCanvasHighContrast,
+  Dark as NewRebrandDark,
+  Light as NewRebrandLight
 } from './themes/newThemes'
 
 type ThemeMap = {
@@ -87,7 +87,7 @@ export {
   primitives,
   additionalPrimitives,
   dataVisualization,
-  boxShadowObjectsToCSSString,
+  boxShadowObjectsToCSSString
 }
 export default canvas
 export type {
