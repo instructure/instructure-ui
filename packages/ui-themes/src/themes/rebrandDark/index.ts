@@ -25,15 +25,12 @@
 import sharedThemeTokens from '../../sharedThemeTokens'
 import { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
-import {
-  rebrandDark as newRebrandDark,
-  type RebrandDark as NewRebrandDark
-} from '../newThemes'
+import { dark as rebrandDark, type Dark as RebrandDark } from '../newThemes'
 import { Theme } from '../../index'
 
 const key = 'rebrand-dark'
 
-export type RebrandDarkTheme = Theme<NewRebrandDark, 'rebrand-dark'> &
+export type RebrandDarkTheme = Theme<RebrandDark, 'rebrand-dark'> &
   typeof sharedThemeTokens & { colors: Colors }
 
 /**
@@ -43,7 +40,7 @@ export type RebrandDarkTheme = Theme<NewRebrandDark, 'rebrand-dark'> &
  * Will be default in the next major version of InstUI
  */
 const theme: RebrandDarkTheme = {
-  newTheme: newRebrandDark,
+  newTheme: rebrandDark,
   key,
   description: 'This theme meets WCAG 2.1 AAA rules for color contrast.',
   ...sharedThemeTokens,

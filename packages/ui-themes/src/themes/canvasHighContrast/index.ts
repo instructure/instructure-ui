@@ -26,8 +26,8 @@ import sharedThemeTokens from '../../sharedThemeTokens'
 import { Colors } from '@instructure/shared-types'
 import { colors } from './colors'
 import {
-  canvasHighContrast as newCanvasHighContrast,
-  type CanvasHighContrast as NewCanvasHighContrast
+  legacyCanvasHighContrast as newCanvasHighContrast,
+  type LegacyCanvasHighContrast as NewCanvasHighContrast
 } from '../newThemes'
 import { Theme } from '../../index'
 
