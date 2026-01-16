@@ -738,36 +738,9 @@ type: embed
 | TreeBrowser | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
 | TreeBrowser | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | TreeBrowser | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `(props: any) => (
-  <FolderClosedInstUIIcon
-    size={
-      treeBrowserSizeToIconSize[
-        props?.size as keyof typeof treeBrowserSizeToIconSize
-      ]
-    }
-    color={props?.color}
-  />
-)` |  |
-| TreeBrowser | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `(props: any) => (
-  <FolderClosedInstUIIcon
-    size={
-      treeBrowserSizeToIconSize[
-        props?.size as keyof typeof treeBrowserSizeToIconSize
-      ]
-    }
-    color={props?.color}
-  />
-)` |  |
-| TreeBrowser | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `(props: any) => (
-  <FileTextInstUIIcon
-    size={
-      treeBrowserSizeToIconSize[
-        props?.size as keyof typeof treeBrowserSizeToIconSize
-      ]
-    }
-    color={props?.color}
-  />
-)` |  |
+| TreeBrowser | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `FolderClosedInstUIIcon` |  |
+| TreeBrowser | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `FolderClosedInstUIIcon` |  |
+| TreeBrowser | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `FileTextInstUIIcon` |  |
 | TreeBrowser | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
 | TreeBrowser.TreeButton | id | `string \| number` | No | - |  |
 | TreeBrowser.TreeButton | name | `string` | No | - |  |
