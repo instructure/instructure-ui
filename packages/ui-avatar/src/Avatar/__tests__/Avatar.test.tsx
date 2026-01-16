@@ -28,7 +28,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import '@testing-library/jest-dom'
 import Avatar from '../index'
-import { HeartInstUIIcon } from '@instructure/ui-icons-lucide'
+import { HeartInstUIIcon } from '@instructure/ui-icons/lucide'
 
 describe('<Avatar />', () => {
   describe('for a11y', () => {

@@ -35,7 +35,7 @@ import {
   ChevronsUpDownInstUIIcon,
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
-} from '@instructure/ui-icons-lucide'
+} from '@instructure/ui-icons/lucide'
 
 /**
 ---

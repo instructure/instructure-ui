@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'
-import { ChevronRightInstUIIcon } from '@instructure/ui-icons-lucide'
+import { ChevronRightInstUIIcon } from '@instructure/ui-icons/lucide'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'

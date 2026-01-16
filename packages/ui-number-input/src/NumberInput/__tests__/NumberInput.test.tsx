@@ -32,7 +32,7 @@ import { NumberInput } from '../index'
 import {
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
-} from '@instructure/ui-icons-lucide'
+} from '@instructure/ui-icons/lucide'
 
 describe('<NumberInput />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
