@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-module.exports = function (api) {
-  api.cache(true)
-  return require('@instructure/ui-babel-preset')(api)
-}
+export { IconPropsProvider } from './IconPropsProvider'
+export { IconPropsContext } from './IconPropsContext'
+export { useIconProps } from './useIconProps'
+export { renderIconWithProps } from './renderIconWithProps'
+export type { IconPropsContextValue } from './IconPropsProvider'

@@ -36,8 +36,8 @@ import {
 } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import * as LucideIcons from '@instructure/ui-icons-lucide'
-import { XInstUIIcon } from '@instructure/ui-icons-lucide'
+import * as LucideIcons from '@instructure/ui-icons/lucide'
+import { XInstUIIcon } from '@instructure/ui-icons/lucide'
 import { Flex } from '@instructure/ui-flex'
 
 // Get all exported Lucide icons (excluding utilities and types)

@@ -28,7 +28,6 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import type { LucideIcon } from 'lucide-react'
 
 import { IconPropsContext } from '../IconPropsProvider'
-
 import type { LucideIconWrapperProps } from './props'
 import generateStyle from './styles'
 
