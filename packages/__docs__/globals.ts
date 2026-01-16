@@ -40,6 +40,7 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
+import * as LucideIcons from '@instructure/ui-icons/lucide'
 import { rebrandDark, rebrandLight } from '@instructure/ui-themes'
 import { debounce } from '@instructure/debounce'
 
@@ -74,8 +75,12 @@ const lorem = new LoremIpsum({
   }
 })
 
+// Extract and exclude utility functions from Lucide icons
+const { renderIconWithProps, ...lucideIconComponents } = LucideIcons
+
 const globals = {
   ...Components,
+  ...lucideIconComponents,
   debounce,
   rebrandLight,
   rebrandDark,

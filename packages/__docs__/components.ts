@@ -123,7 +123,6 @@ export { View, ContextView } from '@instructure/ui-view'
 export { Tray } from '@instructure/ui-tray'
 export { Spinner } from '@instructure/ui-spinner'
 export * from '@instructure/ui-icons'
-export * from '@instructure/ui-icons-lucide'
 // eslint-disable-next-line no-restricted-imports
 export { Guidelines } from './src/Guidelines'
 // eslint-disable-next-line no-restricted-imports

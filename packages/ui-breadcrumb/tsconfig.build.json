@@ -11,7 +11,7 @@
     { "path": "../ui-themes/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
-    { "path": "../ui-icons-lucide/tsconfig.build.json" },
+    { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-link/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-truncate-text/tsconfig.build.json" },

@@ -35,7 +35,7 @@
     "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "workspace:*",
     "@instructure/shared-types": "workspace:*",
-    "@instructure/ui-icons-lucide": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-link": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",

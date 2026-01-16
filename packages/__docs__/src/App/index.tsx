@@ -151,8 +151,8 @@ class App extends Component<AppProps, AppState> {
       const everyComp = EveryComponent as Record<string, any>
       docData.componentInstance = everyComp[components[0]][components[1]]
     } else {
-      docData.componentInstance =
-        EveryComponent[docId as keyof typeof EveryComponent]
+      const everyComp = EveryComponent as Record<string, any>
+      docData.componentInstance = everyComp[docId]
     }
     return docData
   }
