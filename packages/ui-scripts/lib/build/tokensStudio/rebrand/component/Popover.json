@@ -3,6 +3,10 @@
     "borderColor": {
       "value": "{color.stroke.muted}",
       "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.md}",
+      "type": "borderRadius"
     }
   }
 }

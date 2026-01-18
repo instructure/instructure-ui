@@ -23,6 +23,10 @@
     "arrowBorderColorInverse": {
       "value": "{color.transparentColor}",
       "type": "color"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.md}",
+      "type": "borderRadius"
     }
   }
 }

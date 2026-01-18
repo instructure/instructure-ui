@@ -103,6 +103,10 @@
     "tagAtomColor": {
       "value": "#219",
       "type": "color"
+    },
+    "activeLineColor": {
+      "value": "#99999912",
+      "type": "color"
     }
   }
 }
