@@ -114,7 +114,7 @@ class ContextView extends Component<ContextViewProps> {
         <View
           css={styles?.contextView__content}
           display="block"
-          borderRadius="medium"
+          borderRadius={styles?.borderRadius}
           borderWidth="small"
           borderColor={
             borderColor ||

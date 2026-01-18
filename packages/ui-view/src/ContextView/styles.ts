@@ -298,6 +298,7 @@ const generateStyle = (
   )
 
   return {
+    borderRadius: componentTheme?.borderRadius,
     contextView: {
       label: 'contextView',
       boxSizing: 'border-box',
