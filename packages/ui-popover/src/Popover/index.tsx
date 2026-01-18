@@ -596,9 +596,14 @@ class Popover extends Component<PopoverProps, PopoverState> {
           borderRadius: 'medium',
           ...(color === 'primary-inverse' && { borderColor: 'transparent' })
         } as Partial<ViewProps> & { ref: any }
-
         return (
-          <View {...viewProps} borderColor={styles?.borderColor}>
+          <View
+            {...viewProps}
+            borderColor={styles?.borderColor}
+            borderRadius={styles?.borderRadius}
+            overflowX="hidden"
+            overflowY="hidden"
+          >
             {content}
           </View>
         )

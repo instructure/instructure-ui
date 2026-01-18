@@ -302,7 +302,7 @@ type PropKeys = keyof PopoverOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PopoverStyle = { borderColor: string }
+type PopoverStyle = { borderRadius: string; borderColor: string }
 const allowedProps: AllowedPropKeys = [
   'isShowingContent',
   'defaultIsShowingContent',
