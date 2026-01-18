@@ -71,6 +71,7 @@ type ContextViewStyle = ComponentStyle<
 > & {
   arrowSize: string | 0
   arrowBorderWidth: string | 0
+  borderRadius: string
 }
 const allowedProps: AllowedPropKeys = [
   'as',
