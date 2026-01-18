@@ -37,7 +37,8 @@ const generateStyle = (
   componentTheme: NewComponentTypes['Popover']
 ): PopoverStyle => {
   return {
-    borderColor: componentTheme.borderColor
+    borderColor: componentTheme.borderColor,
+    borderRadius: componentTheme.borderRadius
   }
 }
 
