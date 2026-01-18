@@ -59,7 +59,7 @@
       "value": "{color.text.inverse}",
       "type": "color"
     },
-    "inverseColor": {
+    "colorInverse": {
       "value": "{color.text.base}",
       "type": "color"
     },
@@ -90,6 +90,40 @@
     "activeIndicatorColorInverse": {
       "value": "{color.text.base}",
       "type": "color"
+    }
+  },
+  "topNavBarLayout": {
+    "desktopHeight": {
+      "value": "{size.size64}",
+      "type": "sizing"
+    },
+    "desktopInlinePadding": {
+      "value": "{spacing.padding.container.xs}",
+      "type": "spacing"
+    },
+    "desktopBackground": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
+    },
+    "desktopBackgroundInverse": {
+      "value": "{color.background.elevatedSurface.inverse}",
+      "type": "color"
+    },
+    "desktopFontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "desktopFontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "desktopFontSize": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "desktopBottomBorder": {
+      "value": "none",
+      "type": "other"
     }
   }
 }
