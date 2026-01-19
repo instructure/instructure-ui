@@ -118,7 +118,7 @@
       "type": "fontWeights"
     },
     "desktopHeight": {
-      "value": "{size.size64}",
+      "value": "4rem",
       "type": "sizing"
     },
     "desktopInlinePadding": {
