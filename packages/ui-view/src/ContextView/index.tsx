@@ -112,6 +112,8 @@ class ContextView extends Component<ContextViewProps> {
         stacking={stacking}
       >
         <View
+          overflowX="hidden"
+          overflowY="hidden"
           css={styles?.contextView__content}
           display="block"
           borderRadius={styles?.borderRadius}
