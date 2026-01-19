@@ -30,7 +30,6 @@ import { View } from '@instructure/ui-view'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { TableRowHeaderProps } from './props'
 import { allowedProps } from './props'
 import TableContext from '../TableContext'
@@ -41,7 +40,7 @@ parent: Table
 id: Table.RowHeader
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class RowHeader extends Component<TableRowHeaderProps> {
   static readonly componentId = 'Table.RowHeader'
   static contextType = TableContext

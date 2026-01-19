@@ -30,7 +30,6 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '../View'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { ContextViewProps } from './props'
 
@@ -40,7 +39,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ContextView extends Component<ContextViewProps> {
   static readonly componentId = 'ContextView'
   static allowedProps = allowedProps

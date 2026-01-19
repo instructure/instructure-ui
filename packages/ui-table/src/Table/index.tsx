@@ -31,7 +31,6 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { Head } from './Head'
 import { Body } from './Body'
@@ -51,7 +50,7 @@ import { error } from '@instructure/console'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Table extends Component<TableProps> {
   static readonly componentId = 'Table'
 

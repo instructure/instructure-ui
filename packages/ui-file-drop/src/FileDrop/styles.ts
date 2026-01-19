@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-import type { FileDropTheme } from '@instructure/shared-types'
 import type { FileDropProps, FileDropStyleProps, FileDropStyle } from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+
+type StyleParams = FileDropProps & FileDropStyleProps
 
 /**
  * ---
@@ -31,22 +33,22 @@ import type { FileDropProps, FileDropStyleProps, FileDropStyle } from './props'
  * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} params the props and state of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared tokens from the theme
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: FileDropTheme,
-  props: FileDropProps,
-  state: FileDropStyleProps
+  componentTheme: NewComponentTypes['FileDrop'],
+  params: StyleParams,
+  _sharedTokens: SharedTokens
 ): FileDropStyle => {
-  const { height } = props
   const {
+    height,
     functionallyDisabled,
     visuallyDisabled,
     dragRejected,
     dragAccepted
-  } = state
+  } = params
 
   const dragAcceptedStyle = dragAccepted
     ? {
@@ -110,6 +112,7 @@ const generateStyle = (
     fileDropLabelContent: {
       label: 'fileDrop__labelContent',
       display: 'block',
+      backgroundColor: componentTheme.backgroundColor,
       boxSizing: 'border-box',
       zIndex: 1,
       textAlign: 'center',
@@ -134,3 +137,4 @@ const generateStyle = (
 }
 
 export default generateStyle
+export type { StyleParams }

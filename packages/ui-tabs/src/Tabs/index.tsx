@@ -51,7 +51,6 @@ import { px } from '@instructure/ui-utils'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
@@ -70,7 +69,7 @@ type PanelChild = ComponentElement<TabsPanelProps, Panel>
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
 

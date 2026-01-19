@@ -24,7 +24,8 @@
 
 import { Component } from 'react'
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
-import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { compileAndRenderExample } from '../compileAndRenderExample'

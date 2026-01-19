@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { allowedProps } from './props'

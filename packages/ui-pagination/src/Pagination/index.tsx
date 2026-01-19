@@ -33,7 +33,7 @@ import { View } from '@instructure/ui-view'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
@@ -113,6 +113,7 @@ class Pagination extends Component<PaginationProps> {
 
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
+  static PageInput = PaginationPageInput
 
   private readonly _labelId: string
 

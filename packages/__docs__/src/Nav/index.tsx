@@ -499,6 +499,7 @@ class Nav extends Component<NavProps, NavState> {
     const themes = this.renderThemes()
     const icons = (
       <NavToggle
+        key="Icons button"
         summary="Icons"
         onToggle={(e: any) => this.handleInternalNavigation('icons', e)}
         href="icons"

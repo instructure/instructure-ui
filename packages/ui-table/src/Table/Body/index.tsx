@@ -35,7 +35,6 @@ import { View } from '@instructure/ui-view'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { TableBodyProps } from './props'
 import { allowedProps } from './props'
 import TableContext from '../TableContext'
@@ -46,7 +45,7 @@ parent: Table
 id: Table.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Body extends Component<TableBodyProps> {
   static readonly componentId = 'Table.Body'
   static contextType = TableContext

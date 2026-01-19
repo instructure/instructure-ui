@@ -36,7 +36,6 @@ import {
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ViewProps } from './props'
@@ -48,7 +47,7 @@ category: components
 @module View
 **/
 @textDirectionContextConsumer()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps
@@ -94,7 +93,9 @@ class View extends Component<ViewProps> {
 
     let shouldLogError = true
     try {
-      shouldLogError = process.env.NODE_ENV !== 'production'
+      shouldLogError =
+        process.env.NODE_ENV !== 'production' ||
+        process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true'
     } catch (e) {
       if (e instanceof ReferenceError) {
         // if process is not available a ReferenceError is thrown

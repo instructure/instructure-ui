@@ -26,15 +26,24 @@ import { SyntheticEvent } from 'react'
 
 import type {
   Spacing,
-  WithStyleProps,
-  ComponentStyle
+  ComponentStyle,
+  ThemeOverrideValue
 } from '@instructure/emotion'
 import type {
   AsElementType,
-  AvatarTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
-import { Renderable } from '@instructure/shared-types'
+
+const avatarSizeToIconSize = {
+  'xx-small': 'xs',
+  'x-small': 'xs',
+  small: 'sm',
+  medium: 'md',
+  large: 'lg',
+  'x-large': 'xl',
+  'xx-large': '2xl'
+} as const
 
 type AvatarOwnProps = {
   /**
@@ -49,23 +58,14 @@ type AvatarOwnProps = {
    * Accessible label
    */
   alt?: string
-  size?:
-    | 'auto'
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
+  size?: keyof typeof avatarSizeToIconSize
   color?:
-    | 'default' // = brand
-    | 'shamrock'
-    | 'barney'
-    | 'crimson'
-    | 'fire'
-    | 'licorice'
-    | 'ash'
+    | 'accent1'
+    | 'accent2'
+    | 'accent3'
+    | 'accent4'
+    | 'accent5'
+    | 'accent6'
     | 'ai'
   /**
    * In inverse color mode the background and text/icon colors are inverted
@@ -76,7 +76,7 @@ type AvatarOwnProps = {
    */
   showBorder?: 'auto' | 'always' | 'never'
   shape?: 'circle' | 'rectangle'
-  display?: 'inline-block' | 'block'
+  display?: 'inline' | 'block'
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -99,6 +99,7 @@ type AvatarOwnProps = {
   elementRef?: (element: Element | null) => void
   /**
    * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
+   * When using Lucide icons, Avatar will automatically pass the appropriate size and color props based on the Avatar's size and color.
    */
   renderIcon?: Renderable
 }
@@ -111,13 +112,12 @@ type PropKeys = keyof AvatarOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AvatarProps = AvatarOwnProps &
-  WithStyleProps<AvatarTheme, AvatarStyle> &
-  OtherHTMLAttributes<AvatarOwnProps>
+type AvatarProps = AvatarOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<AvatarOwnProps>
 
-type AvatarStyle = ComponentStyle<
-  'avatar' | 'initials' | 'loadImage' | 'iconSVG'
->
+type AvatarStyle = ComponentStyle<'avatar' | 'image'>
+
 const allowedProps: AllowedPropKeys = [
   'name',
   'src',
@@ -129,11 +129,9 @@ const allowedProps: AllowedPropKeys = [
   'margin',
   'display',
   'onImageLoaded',
-  'as',
-  'elementRef',
   'renderIcon',
   'showBorder'
 ]
 
 export type { AvatarProps, AvatarStyle }
-export { allowedProps }
+export { allowedProps, avatarSizeToIconSize }

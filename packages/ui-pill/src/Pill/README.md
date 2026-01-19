@@ -26,29 +26,22 @@ type: example
   </Pill>
   <Pill
     statusLabel="Status"
-    renderIcon={<IconCheckLine />}
+    renderIcon={<CheckInstUIIcon size="sm" />}
     color="success"
     margin="x-small"
   >
     Checked In
   </Pill>
   <Pill
-    renderIcon={<IconEndLine />}
-    color="danger"
-    margin="x-small"
-  >
-    Missing
-  </Pill>
-  <Pill
-    renderIcon={<IconClockLine />}
+    renderIcon={<Clock4InstUIIcon size="sm" />}
     color="warning"
     margin="x-small"
   >
     Late
   </Pill>
   <Pill
-    renderIcon={<IconMessageLine />}
-    color="alert"
+    renderIcon={<MailInstUIIcon size="sm" />}
+    color="error"
     margin="x-small"
   >
     Notification

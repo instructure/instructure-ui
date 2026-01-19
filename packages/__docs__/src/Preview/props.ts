@@ -53,7 +53,6 @@ type PreviewProps = PreviewOwnProps & WithStyleProps<PreviewTheme, PreviewStyle>
 type PreviewTheme = {
   padding: Spacing['small']
   borderRadius: Border['radiusMedium']
-  backgroundColor: Colors['contrasts']['white1010']
   borderWidth: Border['widthSmall']
   borderColor: string
   fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace'

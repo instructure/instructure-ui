@@ -29,6 +29,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { TextArea } from '../index'
+import type { TextAreaElement } from '../index'
 
 describe('TextArea', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>
@@ -73,13 +74,13 @@ describe('TextArea', () => {
   })
 
   it('should focus the textarea when focus is called', async () => {
-    let ref: TextArea
+    let ref: TextAreaElement
     render(
       <TextArea
         label="Name"
         autoGrow={false}
         // @ts-expect-error this is managed by the testing framework
-        textareaRef={(el: TextArea) => (ref = el)}
+        textareaRef={(el: TextAreaElement) => (ref = el)}
       />
     )
     const input = screen.getByRole('textbox')
@@ -90,12 +91,12 @@ describe('TextArea', () => {
   })
 
   it('provides a focused getter', async () => {
-    let ref: TextArea
+    let ref: TextAreaElement
     render(
       <TextArea
         label="Name"
         autoGrow={false}
-        ref={(el: TextArea) => {
+        ref={(el: TextAreaElement) => {
           ref = el
         }}
       />
@@ -115,14 +116,14 @@ describe('TextArea', () => {
   })
 
   it('should provide a value getter', async () => {
-    let ref: TextArea
+    let ref: TextAreaElement
     render(
       <TextArea
         label="Name"
         autoGrow={false}
         defaultValue="bar"
         // @ts-expect-error this is managed by the testing framework
-        textareaRef={(el: TextArea) => (ref = el)}
+        textareaRef={(el: TextAreaElement) => (ref = el)}
       />
     )
 

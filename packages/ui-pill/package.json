@@ -30,6 +30,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",
     "@instructure/ui-truncate-text": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*"
   },
@@ -39,7 +40,6 @@
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"

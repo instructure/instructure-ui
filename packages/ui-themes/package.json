@@ -28,7 +28,8 @@
     "vitest": "^3.2.2"
   },
   "dependencies": {
-    "@instructure/shared-types": "workspace:*"
+    "@instructure/shared-types": "workspace:*",
+    "@tokens-studio/types": "^0.5.2"
   },
   "publishConfig": {
     "access": "public"

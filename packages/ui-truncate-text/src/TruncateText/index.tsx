@@ -32,7 +32,7 @@ import {
   ensureSingleChild
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -268,6 +268,8 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
     // this spacer element is set to the max width the full text could
     // potentially be without this, text in `width: auto` elements won't expand
     // to accommodate more text, once truncated
+    // Breadcrumb is modifying this element's display to inline to prevent layout issues
+    // TODO: find a better way to handle this
     childElements.push(
       <span
         css={this.props.styles?.spacer}

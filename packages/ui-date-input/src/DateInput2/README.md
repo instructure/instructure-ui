@@ -197,12 +197,12 @@ const Example = () => {
     // don't validate empty input
     if (!utcIsoDate && inputValue.length > 0) {
       setMessages([{
-        type: 'newError',
+        type: 'error',
         text: 'This is not a valid date'
       }])
     } else if (date < new Date('1990-01-01')) {
       setMessages([{
-        type: 'newError',
+        type: 'error',
         text: 'Select date after January 1, 1990'
       }])
     } else {

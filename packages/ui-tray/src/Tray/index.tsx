@@ -35,7 +35,6 @@ import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { TrayProps, TrayState } from './props'
 import { Mask } from '@instructure/ui-overlays'
@@ -45,7 +44,7 @@ import { Mask } from '@instructure/ui-overlays'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 @textDirectionContextConsumer()
 class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'

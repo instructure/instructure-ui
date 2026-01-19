@@ -24,12 +24,8 @@
 
 import React from 'react'
 
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type {
-  OtherHTMLAttributes,
-  RadioInputGroupTheme
-} from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputGroupOwnProps = {
@@ -99,7 +95,6 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
-  WithStyleProps<RadioInputGroupTheme, RadioInputGroupStyle> &
   OtherHTMLAttributes<RadioInputGroupOwnProps> &
   WithDeterministicIdProps
 
@@ -107,7 +102,6 @@ type RadioInputGroupState = {
   value?: string | number
 }
 
-type RadioInputGroupStyle = ComponentStyle<'invalidAsterisk'>
 const allowedProps: AllowedPropKeys = [
   'name',
   'description',
@@ -124,5 +118,5 @@ const allowedProps: AllowedPropKeys = [
   'isRequired'
 ]
 
-export type { RadioInputGroupProps, RadioInputGroupState, RadioInputGroupStyle }
+export type { RadioInputGroupProps, RadioInputGroupState }
 export { allowedProps }

@@ -23,7 +23,7 @@
  */
 
 // This is the format of the saved JSON files
-import { Documentation } from 'react-docgen'
+import type { Documentation } from 'react-docgen'
 import type { Theme } from '@instructure/ui-themes'
 
 type ProcessedFile =
@@ -142,7 +142,7 @@ type MainIconsData = {
 }
 
 type MainDocsData = {
-  themes: Record<string, { resource: Theme; requirePath: string }>
+  themes: Record<string, { resource: Theme }>
   library: LibraryOptions
 } & ParsedDoc
 

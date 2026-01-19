@@ -4,22 +4,35 @@ describes: Avatar
 
 The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display.
 
-Instead of the initials, an SVG icon can be displayed with the `renderIcon` property.
+Instead of the initials, an SVG icon can be displayed with the `renderIcon` property. **Note: If both `src` and `renderIcon` are provided, the image (`src`) takes priority.**
 
-The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
+The avatar can be `circle` _(default)_ or `rectangle`. The component uses flexbox layout and can be displayed as `inline` _(default)_ or `block` using the `display` prop.
 
 ```js
 ---
 type: example
 readonly: true
 ---
+
 <div>
-  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 space8 0 0" />
-  <Avatar name="Sarah Robinson" margin="0 space8 0 0" />
-  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 space8 0 0" />
-  <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 space8 0 0" />
-  <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 space8 0 0" />
-  <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" />
+    <Avatar name="James Arias" color="accent2" />
+    <Avatar name="Charles Kimball" color="accent3" />
+    <Avatar name="Melissa Reed" color="accent4" />
+    <Avatar name="Heather Wheeler" color="accent5" />
+    <Avatar name="David Herbert" color="accent6" />
+    <Avatar name="Isaac Asimov" color="accent1" />
+  </View>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" hasInverseColor />
+    <Avatar name="James Arias" color="accent2" hasInverseColor />
+    <Avatar name="Charles Kimball" color="accent3" hasInverseColor />
+    <Avatar name="Melissa Reed" color="accent4" hasInverseColor />
+    <Avatar name="Heather Wheeler" color="accent5" hasInverseColor />
+    <Avatar name="David Herbert" color="accent6" hasInverseColor />
+    <Avatar name="Isaac Asimov" color="accent1" hasInverseColor />
+  </View>
 </div>
 ```
 
@@ -33,20 +46,19 @@ type: example
 readonly: true
 ---
 <View display="block" padding="small medium" background="primary">
-  <Avatar size="xx-small" color="ai"  renderIcon={IconAiSolid} margin="0 space8 0 0"/>
-  <Avatar size="x-small" color="ai" renderIcon={IconAiSolid} margin="0 space8 0 0"/>
-  <Avatar size="small" color="ai" renderIcon={IconAiSolid} margin="0 space8 0 0"/>
-  <Avatar size="medium" color="ai" renderIcon={IconAiSolid} margin="0 space8 0 0"/>
-  <Avatar size="large" color="ai" renderIcon={IconAiSolid} margin="0 space8 0 0"/>
-  <Avatar size="x-large"  color="ai" renderIcon={IconAiSolid} margin="0 space8 0 0"/>
-  <Avatar size="xx-large" color="ai" renderIcon={IconAiSolid} />
+  <Avatar size="xx-small" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="x-small" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="small" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="medium" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="large" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="x-large" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
+  <Avatar size="xx-large" color="ai" name="AI Assistant" renderIcon={IconAiSolid} />
 </View>
 ```
 
-### Size
+### Using Lucide Icons
 
-The `size` prop allows you to select from `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, and `xx-large`. If the `auto` prop is set, the avatar size will adjust according to the font-size
-of its container.
+Lucide icons in Avatar are automatically sized and colored according to the Avatar's `size` and `color` props, so manual adjustments are not needed on the icon itself.
 
 ```js
 ---
@@ -54,38 +66,69 @@ type: example
 ---
 <div>
   <View display="block" padding="small medium">
-    <Avatar name="Arthur C. Clarke" size="xx-small" margin="0 space8 0 0" />
-    <Avatar name="James Arias" size="x-small" margin="0 space8 0 0" />
-    <Avatar name="Charles Kimball" size="small" margin="0 space8 0 0" />
-    <Avatar name="Melissa Reed" size="medium" margin="0 space8 0 0" />
-    <Avatar name="Heather Wheeler" size="large" margin="0 space8 0 0" />
-    <Avatar name="David Herbert" size="x-large" margin="0 space8 0 0" />
+    <Avatar name="User Avatar" size="xx-small" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="x-small" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="small" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="medium" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="large" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="x-large" renderIcon={UserInstUIIcon} />
+    <Avatar name="User Avatar" size="xx-large" renderIcon={UserInstUIIcon} />
+  </View>
+  <View display="block" padding="small medium">
+    <Avatar name="Profile" size="small" color="accent2" renderIcon={<CircleUserInstUIIcon />} />
+    <Avatar name="Group" size="medium" color="accent3" renderIcon={<UsersInstUIIcon />} />
+    <Avatar name="Settings" size="large" color="accent4" renderIcon={<SettingsInstUIIcon />} />
+  </View>
+  <View display="block" padding="small medium">
+    <Avatar name="Profile" size="large" color="accent4" renderIcon={()=><CircleUserInstUIIcon />} />
+    <Avatar name="Group" size="x-large" color="accent5" renderIcon={()=><UsersInstUIIcon />} />
+    <Avatar name="Settings" size="xx-large" color="accent6" renderIcon={()=><SettingsInstUIIcon />} />
+  </View>
+</div>
+```
+
+### Size
+
+The `size` prop allows you to select from `xx-small`, `x-small`, `small`, `medium` _(default)_, `large`, `x-large`, and `xx-large`. Each size has predefined dimensions and typography scales.
+
+```js
+---
+type: example
+---
+<div>
+  <View display="block" padding="small medium">
+    <Avatar name="Arthur C. Clarke" size="xx-small" />
+    <Avatar name="James Arias" size="x-small" />
+    <Avatar name="Charles Kimball" size="small" />
+    <Avatar name="Melissa Reed" size="medium" />
+    <Avatar name="Heather Wheeler" size="large" />
+    <Avatar name="David Herbert" size="x-large" />
     <Avatar name="Isaac Asimov" size="xx-large" />
   </View>
   <View display="block" padding="small medium" background="primary">
-    <Avatar name="Arthur C. Clarke" size="xx-small" margin="0 space8 0 0"  src={avatarSquare} />
-    <Avatar name="James Arias" size="x-small" margin="0 space8 0 0"  src={avatarSquare} />
-    <Avatar name="Charles Kimball" size="small" margin="0 space8 0 0"  src={avatarSquare} />
-    <Avatar name="Melissa Reed" size="medium" margin="0 space8 0 0"  src={avatarSquare} />
-    <Avatar name="Heather Wheeler" size="large" margin="0 space8 0 0"  src={avatarSquare} />
-    <Avatar name="David Herbert" size="x-large" margin="0 space8 0 0"  src={avatarSquare} />
-    <Avatar name="Isaac Asimov" size="xx-large"  src={avatarSquare} />
+    <Avatar name="Arthur C. Clarke" size="xx-small" src={avatarSquare} />
+    <Avatar name="James Arias" size="x-small" src={avatarSquare} />
+    <Avatar name="Charles Kimball" size="small" src={avatarSquare} />
+    <Avatar name="Melissa Reed" size="medium" src={avatarSquare} />
+    <Avatar name="Heather Wheeler" size="large" src={avatarSquare} />
+    <Avatar name="David Herbert" size="x-large" src={avatarSquare} />
+    <Avatar name="Isaac Asimov" size="xx-large" src={avatarSquare} />
   </View>
   <View display="block" padding="small medium">
-    <Avatar name="Arthur C. Clarke" renderIcon={<IconGroupLine />} size="xx-small" margin="0 space8 0 0" />
-    <Avatar name="James Arias" renderIcon={<IconGroupLine />} size="x-small" margin="0 space8 0 0" />
-    <Avatar name="Charles Kimball" renderIcon={<IconGroupLine />} size="small" margin="0 space8 0 0" />
-    <Avatar name="Melissa Reed" renderIcon={<IconGroupLine />} size="medium" margin="0 space8 0 0" />
-    <Avatar name="Heather Wheeler" renderIcon={<IconGroupLine />} size="large" margin="0 space8 0 0" />
-    <Avatar name="David Herbert" renderIcon={<IconGroupLine />} size="x-large" margin="0 space8 0 0" />
-    <Avatar name="Isaac Asimov" renderIcon={<IconGroupLine />} size="xx-large" />
+    <Avatar name="Arthur C. Clarke" renderIcon={UsersInstUIIcon} size="xx-small" />
+    <Avatar name="James Arias" renderIcon={UsersInstUIIcon} size="x-small" />
+    <Avatar name="Charles Kimball" renderIcon={UsersInstUIIcon} size="small" />
+    <Avatar name="Melissa Reed" renderIcon={UsersInstUIIcon} size="medium" />
+    <Avatar name="Heather Wheeler" renderIcon={UsersInstUIIcon} size="large" />
+    <Avatar name="David Herbert" renderIcon={UsersInstUIIcon} size="x-large" />
+    <Avatar name="Isaac Asimov" renderIcon={UsersInstUIIcon} size="xx-large" />
   </View>
 </div>
 ```
 
 ### Colors
 
-The color of the initials and icons can be set with the `color` prop, and it allows you to select from `default`, `shamrock`, `barney`, `crimson`, `fire`, `licorice` and `ash`.
+The color of the initials and icons can be set with the `color` prop, and it allows you to select from `accent1` _(default)_, `accent2`, `accent3`, `accent4`, `accent5`, `accent6`, and `ai` _(for AI avatars with gradient background)_.
 
 ```js
 ---
@@ -93,22 +136,22 @@ type: example
 ---
 <div>
   <View display="block" padding="small medium">
-    <Avatar name="Arthur C. Clarke" margin="0 space8 0 0" />
-    <Avatar name="James Arias" color="shamrock" margin="0 space8 0 0" />
-    <Avatar name="Charles Kimball" color="barney" margin="0 space8 0 0" />
-    <Avatar name="Melissa Reed" color="crimson" margin="0 space8 0 0" />
-    <Avatar name="Heather Wheeler" color="fire" margin="0 space8 0 0" />
-    <Avatar name="David Herbert" color="licorice" margin="0 space8 0 0" />
-    <Avatar name="Isaac Asimov" color="ash" />
+    <Avatar name="Arthur C. Clarke" />
+    <Avatar name="James Arias" color="accent2" />
+    <Avatar name="Charles Kimball" color="accent3" />
+    <Avatar name="Melissa Reed" color="accent4" />
+    <Avatar name="Heather Wheeler" color="accent5" />
+    <Avatar name="David Herbert" color="accent6" />
+    <Avatar name="Isaac Asimov" color="accent1" />
   </View>
   <View display="block" padding="small medium">
-    <Avatar renderIcon={<IconGroupLine />} name="Arthur C. Clarke" margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="James Arias" color="shamrock" margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Charles Kimball" color="barney" margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Melissa Reed" color="crimson" margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Heather Wheeler" color="fire" margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="David Herbert" color="licorice" margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Isaac Asimov" color="ash" />
+    <Avatar renderIcon={UsersInstUIIcon} name="Arthur C. Clarke" />
+    <Avatar renderIcon={UsersInstUIIcon} name="James Arias" color="accent2" />
+    <Avatar renderIcon={UsersInstUIIcon} name="Charles Kimball" color="accent3" />
+    <Avatar renderIcon={UsersInstUIIcon} name="Melissa Reed" color="accent4" />
+    <Avatar renderIcon={UsersInstUIIcon} name="Heather Wheeler" color="accent5" />
+    <Avatar renderIcon={UsersInstUIIcon} name="David Herbert" color="accent6" />
+    <Avatar renderIcon={UsersInstUIIcon} name="Isaac Asimov" color="accent1" />
   </View>
 </div>
 ```
@@ -123,22 +166,22 @@ type: example
 ---
 <div>
   <View display="block" padding="small medium" background="primary">
-    <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
-    <Avatar name="James Arias" color="shamrock" hasInverseColor margin="0 space8 0 0" />
-    <Avatar name="Charles Kimball" color="barney" hasInverseColor margin="0 space8 0 0" />
-    <Avatar name="Melissa Reed" color="crimson" hasInverseColor margin="0 space8 0 0" />
-    <Avatar name="Heather Wheeler" color="fire" hasInverseColor margin="0 space8 0 0" />
-    <Avatar name="David Herbert" color="licorice" hasInverseColor margin="0 space8 0 0" />
-    <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
+    <Avatar name="Arthur C. Clarke" hasInverseColor />
+    <Avatar name="James Arias" color="accent2" hasInverseColor />
+    <Avatar name="Charles Kimball" color="accent3" hasInverseColor />
+    <Avatar name="Melissa Reed" color="accent4" hasInverseColor />
+    <Avatar name="Heather Wheeler" color="accent5" hasInverseColor />
+    <Avatar name="David Herbert" color="accent6" hasInverseColor />
+    <Avatar name="Isaac Asimov" color="accent1" hasInverseColor />
   </View>
   <View display="block" padding="small medium" background="primary">
-    <Avatar renderIcon={<IconGroupLine />} name="Arthur C. Clarke" hasInverseColor margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="James Arias" color="shamrock" hasInverseColor margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Charles Kimball" color="barney" hasInverseColor margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Melissa Reed" color="crimson" hasInverseColor margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Heather Wheeler" color="fire" hasInverseColor margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="David Herbert" color="licorice" hasInverseColor margin="0 space8 0 0" />
-    <Avatar renderIcon={<IconGroupLine />} name="Isaac Asimov" color="ash" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="Arthur C. Clarke" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="James Arias" color="accent2" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="Charles Kimball" color="accent3" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="Melissa Reed" color="accent4" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="Heather Wheeler" color="accent5" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="David Herbert" color="accent6" hasInverseColor />
+    <Avatar renderIcon={UsersInstUIIcon} name="Isaac Asimov" color="accent1" hasInverseColor />
   </View>
 </div>
 ```
@@ -150,10 +193,33 @@ In case you need more control over the color, feel free to use the `themeOverrid
 type: example
 ---
 <div>
-  <Avatar name="Isaac Asimov" renderIcon={<IconGroupLine />} themeOverride={{ color: '#efb410' }} margin="0 space8 0 0" />
-  <Avatar name="Heather Wheeler" color="fire" themeOverride={{ colorFire: 'magenta' }} margin="0 space8 0 0" />
-  <Avatar name="Charles Kimball" renderIcon={<IconGroupLine />} hasInverseColor themeOverride={{ color: 'lightblue', background: 'black' }} margin="0 space8 0 0" />
-  <Avatar name="David Herbert" hasInverseColor color="fire" themeOverride={{ colorFire: '#efb410' }} />
+  <Avatar name="Isaac Asimov" renderIcon={UsersInstUIIcon} themeOverride={{ accent1TextColor: '#efb410' }} />
+  <Avatar name="Heather Wheeler" color="accent5" themeOverride={{ accent5TextColor: 'magenta' }} />
+  <Avatar name="Charles Kimball" renderIcon={UsersInstUIIcon} hasInverseColor themeOverride={{ textOnColor: 'lightblue', backgroundColor: 'black' }} />
+  <Avatar name="David Herbert" hasInverseColor color="accent5" themeOverride={{ accent5BackgroundColor: '#efb410' }} />
+</div>
+```
+
+### Display
+
+The `display` prop controls whether the avatar is displayed as `inline` _(default)_ or `block`. This affects the CSS display property and layout behavior.
+
+```js
+---
+type: example
+---
+<div>
+  <Text>Inline avatars: </Text>
+  <Avatar name="John Doe" size="small" display="inline" />
+  <Avatar name="Jane Smith" size="small" display="inline" />
+  <Text> are displayed inline with text.</Text>
+
+  <div style={{ marginTop: '1rem' }}>
+    <Text>Block avatars:</Text>
+    <Avatar name="John Doe" size="small" display="block" />
+    <Avatar name="Jane Smith" size="small" display="block" />
+    <Text>stack vertically.</Text>
+  </div>
 </div>
 ```
 
@@ -166,8 +232,26 @@ By default only avatars without an image have borders but you can force it to `a
 type: example
 ---
 <div>
-  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 space8 0 0" showBorder="always"/>
-  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 space8 0 0" showBorder="never"/>
+  <Avatar name="Sarah Robinson" src={avatarSquare} showBorder="always" />
+  <Avatar name="Sarah Robinson" renderIcon={UsersInstUIIcon} showBorder="never" />
+</div>
+```
+
+### Priority and Behavior
+
+When both `src` and `renderIcon` props are provided, the **image (`src`) takes priority** and will be displayed instead of the icon. The icon will only be shown as a fallback while the image is loading or if the image fails to load.
+
+```js
+---
+type: example
+---
+<div>
+  <Avatar
+    name="John Doe"
+    src={avatarSquare}
+    renderIcon={UsersInstUIIcon}
+  />
+  <Text>Image takes priority over icon</Text>
 </div>
 ```
 

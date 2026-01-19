@@ -27,7 +27,7 @@ import { Button, CloseButton } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-heading'
 import { Text } from '@instructure/ui-text'
 import { Link } from '@instructure/ui-link'
-import { useStyle } from '@instructure/emotion'
+import { useStyleRework } from '@instructure/emotion'
 
 import { NutritionFactsProps } from './props'
 import generateStyle from './styles'
@@ -50,7 +50,7 @@ const NutritionFacts = ({
 }: NutritionFactsProps) => {
   const [open, setOpen] = useState(false)
 
-  const styles = useStyle({
+  const styles = useStyleRework({
     generateStyle,
     generateComponentTheme,
     componentId: 'NutritionFacts',

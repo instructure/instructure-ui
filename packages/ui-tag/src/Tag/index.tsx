@@ -29,7 +29,7 @@ import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

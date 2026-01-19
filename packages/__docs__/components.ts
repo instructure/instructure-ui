@@ -123,6 +123,7 @@ export { View, ContextView } from '@instructure/ui-view'
 export { Tray } from '@instructure/ui-tray'
 export { Spinner } from '@instructure/ui-spinner'
 export * from '@instructure/ui-icons'
+export * from '@instructure/ui-icons-lucide'
 // eslint-disable-next-line no-restricted-imports
 export { Guidelines } from './src/Guidelines'
 // eslint-disable-next-line no-restricted-imports
@@ -135,3 +136,5 @@ export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'
 export { TruncateList } from '@instructure/ui-truncate-list'
 export { canvas, canvasHighContrast } from '@instructure/ui-themes'
+// eslint-disable-next-line no-restricted-imports
+export { V12ChangelogTable } from './src/V12ChangelogTable'
