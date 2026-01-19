@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import { dirname } from 'path'
+import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import webpack from 'webpack'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -34,7 +35,22 @@ const nextConfig = {
   // come out of sync. TODO fix
   reactStrictMode: false,
   // Use regression-test as its own workspace root (simulates external usage)
-  outputFileTracingRoot: __dirname
+  outputFileTracingRoot: __dirname,
+
+  webpack: (config, { dev, isServer }) => {
+    // for some reason webpack HMR wants to use CJS modules, force it to use ESM
+    // otherwise `npm run dev` crashes
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /@instructure\/(.*)\/lib\/(.*)/,
+        (resource) => {
+          // Replace /lib/ with /es/ in the request
+          resource.request = resource.request.replace('/lib/', '/es/')
+        }
+      )
+    )
+    return config
+  }
 }
 
 export default nextConfig
