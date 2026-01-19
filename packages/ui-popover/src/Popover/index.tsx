@@ -84,7 +84,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     defaultIsShowingContent: false,
     placement: 'bottom center',
     stacking: 'topmost',
-    shadow: 'resting',
+    shadow: 'above',
     offsetX: 0,
     offsetY: 0,
     color: 'primary',
