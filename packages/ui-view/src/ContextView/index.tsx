@@ -52,7 +52,7 @@ class ContextView extends Component<ContextViewProps> {
     children: null,
     textAlign: 'start',
     background: 'default',
-    shadow: 'resting',
+    shadow: 'above',
     placement: 'center end'
   }
 
@@ -112,8 +112,6 @@ class ContextView extends Component<ContextViewProps> {
         stacking={stacking}
       >
         <View
-          overflowX="hidden"
-          overflowY="hidden"
           css={styles?.contextView__content}
           display="block"
           borderRadius={styles?.borderRadius}
