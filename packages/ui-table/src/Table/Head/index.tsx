@@ -28,7 +28,7 @@ import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
 import type { SimpleSelectProps } from '@instructure/ui-simple-select'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { CheckInstUIIcon } from '@instructure/ui-icons/lucide'
+import { CheckInstUIIcon } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'
 
 import { withStyle } from '@instructure/emotion'
