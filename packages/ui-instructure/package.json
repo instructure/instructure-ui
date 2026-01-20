@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-instructure",
-  "version": "11.3.0",
+  "version": "11.4.0",
   "description": "Collection of specific components for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -28,8 +28,8 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
     "@instructure/ui-heading": "workspace:*",
-    "@instructure/ui-link": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-link": "workspace:*",
     "@instructure/ui-modal": "workspace:*",
     "@instructure/ui-popover": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",

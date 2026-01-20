@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-date-time-input",
-  "version": "11.3.0",
+  "version": "11.4.0",
   "description": "A UI component that allows to select date and time.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
