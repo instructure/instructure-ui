@@ -161,7 +161,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         color={color === 'primary' ? 'primary-inverse' : 'primary'}
         mountNode={mountNode}
         constrain={constrain}
-        shadow="none"
+        shadow="resting"
         offsetX={offsetX}
         offsetY={offsetY}
         positionTarget={positionTarget}
