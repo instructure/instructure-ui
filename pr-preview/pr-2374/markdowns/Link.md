@@ -9,24 +9,9 @@
 ---
 type: example
 ---
-  <div>
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/"
-                                themeOverride={{
-                                  focusOutlineColor: 'pink'
-                                }}>jumps</Link> over the lazy dog.</Text>
-<Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link>
-</div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/" themeOverride={{
-    focusInverseIconOutlineColor: 'pink'
-  }}>jumps</Link> over the lazy dog.</Text>
-</View>
+<Link href="https://instructure.github.io/instructure-ui/" target="_blank">
+  Link text
+</Link>
 ```
 
 ### Controlled navigation
@@ -225,10 +210,9 @@ type: example
   <Text>The quick brown fox <Link
     href="https://instructure.github.io/instructure-ui/"
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusOutlineColor: 'pink'
+      textColor: 'red',
+      textHoverColor: 'green',
+      fontWeight: 700
     }}>jumps</Link> over the lazy dog.
   </Text>
 </div>
@@ -240,25 +224,27 @@ type: example
 ---
 <View background="primary-inverse" as="div">
   <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
+    color="link"
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseOutlineColor: 'green'
+      textColor: 'red',
+      textHoverColor: 'magenta',
+      onColorTextColor: 'orange',
+      onColorTextHoverColor: 'lime',
+      fontWeight: 100
   }}
   >jumps</Link> over the lazy dog.</Text>
   <br />
   <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
-    renderIcon={<IconUserLine />}
+    color="link-inverse"
+    renderIcon={<LogOutInstUIIcon />}
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseIconOutlineColor: 'red'
+      textColor: 'red',
+      textHoverColor: 'magenta',
+      onColorTextColor: 'orange',
+      onColorTextHoverColor: 'lime',
+      fontWeight: 700
   }}
   >jumps</Link> over the lazy dog.</Text>
 </View>
