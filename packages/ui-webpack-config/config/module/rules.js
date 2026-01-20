@@ -33,9 +33,19 @@ const babelLoader = {
 }
 
 const rules = [
+  // Lucide icons: Process directly with babel-loader, skipping thread-loader
+  // The lucide/index.ts file is very large (~2400 lines, 133KB) with icon wrapper exports.
+  // thread-loader has a 2-second poolTimeout which is insufficient for this file,
+  // causing webpack to hang during dev server startup. Processing it directly avoids the timeout.
   {
     test: /\.(js|mjs|jsx|ts|tsx)$/,
     exclude: [...exclude],
+    include: /lucide/,
+    use: [babelLoader]
+  },
+  {
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
+    exclude: [...exclude, /lucide/],
     use: [
       {
         loader: 'thread-loader',

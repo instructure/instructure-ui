@@ -36,13 +36,14 @@ import {
 } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import * as LucideIcons from '@instructure/ui-icons/lucide'
-import { XInstUIIcon } from '@instructure/ui-icons/lucide'
+import * as LucideIcons from '@instructure/ui-icons'
+import { XInstUIIcon } from '@instructure/ui-icons'
 import { Flex } from '@instructure/ui-flex'
 
 // Get all exported Lucide icons (excluding utilities and types)
-const lucideIconNames = Object.keys(LucideIcons).filter(
-  (name) => name !== 'renderIconWithProps' && name !== 'LucideIconWrapperProps'
+// Lucide icons end with 'InstUIIcon', while generated SVG icons have patterns like 'IconAddLine'
+const lucideIconNames = Object.keys(LucideIcons).filter((name) =>
+  name.endsWith('InstUIIcon')
 )
 
 type LucideIconTileProps = {
@@ -52,7 +53,7 @@ type LucideIconTileProps = {
 }
 
 function getUsageInfo(iconName: string) {
-  return `import { ${iconName} } from '@instructure/ui-icons-lucide'
+  return `import { ${iconName} } from '@instructure/ui-icons'
 
 const MyIcon = () => {
   return (

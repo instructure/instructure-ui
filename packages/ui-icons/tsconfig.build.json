@@ -3,9 +3,9 @@
   "compilerOptions": {
     "outDir": "./types",
     "composite": true,
-    "rootDir": "./"
+    "rootDir": "./src"
   },
-  "include": ["__build__", "lucide"],
+  "include": ["src"],
   "exclude": ["/font/Line/**/*", "/font/Solid/**/*"],
   "references": [
     { "path": "../ui-babel-preset/tsconfig.build.json" },

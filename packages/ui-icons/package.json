@@ -6,21 +6,6 @@
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "types": "./types/index.d.ts"
-    },
-    "./lucide": {
-      "import": "./es/lucide/index.js",
-      "require": "./lib/lucide/index.js",
-      "types": "./types/lucide/index.d.ts"
-    },
-    "./lib/*": "./lib/*",
-    "./es/*": "./es/*",
-    "./types/*": "./types/*"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -33,9 +18,7 @@
     "prepare-build": "pnpm run build-icons",
     "build-icons": "pnpm exec ui-scripts build-icons --skipOptimization --config icons.config.cjs",
     "build-icons:optimize": "pnpm exec ui-scripts build-icons --svgoConfig svgo.config.cjs --config icons.config.cjs",
-    "build": "pnpm run build:main && pnpm run build:lucide",
-    "build:main": "ui-scripts build __build__ --copy-files --modules es,cjs",
-    "build:lucide": "pnpm exec babel lucide --out-dir lib/lucide --extensions .ts,.tsx,.js,.jsx && ES_MODULES=true pnpm exec babel lucide --out-dir es/lucide --extensions .ts,.tsx,.js,.jsx",
+    "build": "ui-scripts build --modules es,cjs",
     "export": "pnpm run build-icons:optimize && pnpm run build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"

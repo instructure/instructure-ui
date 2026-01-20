@@ -36,7 +36,7 @@ import { FormField } from '@instructure/ui-form-field'
 import {
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
-} from '@instructure/ui-icons/lucide'
+} from '@instructure/ui-icons'
 import {
   pickProps,
   callRenderProp,
