@@ -314,13 +314,13 @@ type: example
   size="large"
   renderContent={(props)=> {
     if (props.level > 1) {
-      return <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0.6rem 0 0.6rem 1rem', color: '#666666' }}>
+      return <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange' }}>
         <span>{props.name}</span>
         <Tag text="done" size="small" margin="0 xx-small 0 xx-small"/>
         <Tag text="class A" size="small"/>
       </div>
     }
-    return <div style={{padding: '0.6rem 0 0.6rem 1rem', color: '#666666'}}>{props.name}</div>
+    return <div style={{padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange'}}>{props.name}</div>
   }}
 />
 ```
