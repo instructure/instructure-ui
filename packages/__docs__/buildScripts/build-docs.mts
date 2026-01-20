@@ -104,6 +104,9 @@ const pathsToIgnore = [
   '**/ui-test-*/src/**',
   '**/ui-scripts/src/**',
 
+  // large generated files:
+  '**/lucide/**', // Lucide icons directory (large generated file)
+
   // deprecated packages and modules:
   '**/InputModeListener.ts',
   // regression testing app:
@@ -171,7 +174,7 @@ function buildDocs() {
       // eslint-disable-next-line no-console
       console.log('Copying icons data...')
       fs.copyFileSync(
-        projectRoot + '/packages/ui-icons/__build__/icons-data.json',
+        projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
         buildDir + 'icons-data.json'
       )
 
