@@ -26,7 +26,7 @@ import { useStyle } from '@instructure/emotion'
 import { useState, useEffect, forwardRef, SyntheticEvent } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { renderIconWithProps } from '@instructure/ui-icons/lucide'
+import { renderIconWithProps } from '@instructure/ui-icons'
 import { AvatarProps, avatarSizeToIconSize } from './props'
 
 import generateStyle from './styles'

@@ -29,7 +29,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
   AlertCircleInstUIIcon,
   CheckCircle2InstUIIcon
-} from '@instructure/ui-icons/lucide'
+} from '@instructure/ui-icons'
 
 import { useStyle } from '@instructure/emotion'
 import generateStyle from './styles'
