@@ -1,7 +1,7 @@
 {
   "tabs": {
     "defaultBackground": {
-      "value": "{color.background.base}",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "scrollFadeColor": {
@@ -27,7 +27,7 @@
   },
   "tabsPanel": {
     "background": {
-      "value": "{color.background.base}",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "borderColor": {

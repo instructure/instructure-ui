@@ -14,7 +14,7 @@
         "type": "color"
       },
       "page": {
-        "value": "{color.grey.grey10}",
+        "value": "{color.white}",
         "type": "color"
       },
       "container": {
