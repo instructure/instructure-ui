@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-dom-utils",
-  "version": "11.3.0",
+  "version": "11.4.0",
   "description": "A DOM utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

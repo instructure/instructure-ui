@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-responsive",
-  "version": "11.3.0",
+  "version": "11.4.0",
   "description": "A component that allows for rendering a component differently based on either the element or the viewport size",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

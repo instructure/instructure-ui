@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
+
+
+### Features
+
+* **ui-color-picker:** add new labelLevel prop to set heading level in ColorContrast ([06c9e79](https://github.com/instructure/instructure-ui/commit/06c9e79fc87c31da4ca8eff61e93094aa09c8be5))
+
+
+
+
+
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
 
