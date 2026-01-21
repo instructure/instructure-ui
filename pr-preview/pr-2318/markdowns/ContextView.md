@@ -70,7 +70,7 @@ type: example
 | ContextView | debug | `boolean` | No | `false` |  |
 | ContextView | margin | `Spacing` | No | - |  |
 | ContextView | padding | `Spacing` | No | - |  |
-| ContextView | shadow | `Shadow` | No | `'resting'` |  |
+| ContextView | shadow | `Shadow` | No | `'above'` |  |
 | ContextView | stacking | `Stacking` | No | - |  |
 | ContextView | placement | `PlacementPropValues` | No | `'center end'` |  |
 | ContextView | borderColor | `string` | No | - |  |
