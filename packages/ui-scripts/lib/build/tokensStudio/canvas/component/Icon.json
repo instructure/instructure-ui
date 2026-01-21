@@ -24,6 +24,18 @@
       "value": "2.25rem",
       "type": "sizing"
     },
+    "illuSm": {
+      "value": "3rem",
+      "type": "sizing"
+    },
+    "illuMd": {
+      "value": "5rem",
+      "type": "sizing"
+    },
+    "illuLg": {
+      "value": "10rem",
+      "type": "sizing"
+    },
     "strokeWidthXs": {
       "value": "0.0625rem",
       "type": "borderWidth"
@@ -46,6 +58,18 @@
     },
     "strokeWidth2xl": {
       "value": "0.1875rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthIlluSm": {
+      "value": "0.25rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthIlluMd": {
+      "value": "0.5rem",
+      "type": "borderWidth"
+    },
+    "strokeWidthIlluLg": {
+      "value": "0.75rem",
       "type": "borderWidth"
     },
     "baseColor": {
