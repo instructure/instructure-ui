@@ -215,6 +215,54 @@ type: embed
 
 ```
 
+### Grid
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  ]}
+/>
+
+```
+
+### Grid.Row
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  ]}
+/>
+
+```
+
+### Grid.Col
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"mediumMin",newName:"mediumMin",note:"now only provides the value, not the full media query (e.g., '768px' instead of 'min-width: 768px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"largeMin",newName:"largeMin",note:"now only provides the value, not the full media query (e.g., '1024px' instead of 'min-width: 1024px'). The component now adds the `min-width:` prefix automatically in the generated styles."},
+    {oldName:"xLargeMin",newName:"xLargeMin",note:"now only provides the value, not the full media query (e.g., '1440px' instead of 'min-width: 1440px'). The component now adds the `min-width:` prefix automatically in the generated styles."}
+  ]}
+/>
+
+```
+
 ### Link
 
 #### New `size` prop
@@ -367,6 +415,7 @@ type: embed
 />
 
 ```
+
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
@@ -604,6 +653,7 @@ type: embed
 />
 
 ```
+
 ### RangeInput
 
 ```js

@@ -34,10 +34,9 @@ import {
 import { GridCol } from '../GridCol'
 import type { GridColProps } from '../GridCol/props'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { GridRowProps } from './props'
@@ -48,7 +47,7 @@ parent: Grid
 id: Grid.Row
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class GridRow extends Component<GridRowProps> {
   static readonly componentId = 'Grid.Row'
 
