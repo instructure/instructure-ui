@@ -83,6 +83,31 @@ describe('<CheckboxGroup />', () => {
     expect(checkboxes[1]).toHaveAttribute('name', TEST_NAME)
   })
 
+  it('should not issue a warning/error by default', () => {
+    renderCheckboxGroup({ name: TEST_NAME })
+
+    expect(consoleWarningMock).not.toHaveBeenCalled()
+    expect(consoleErrorMock).not.toHaveBeenCalled()
+  })
+
+  it('should issue a warning when a child Checkbox has an onChange prop', () => {
+    const changeSpy = vi.fn()
+    render(
+      <CheckboxGroup name={TEST_NAME} description={TEST_DESCRIPTION}>
+        <Checkbox
+          label={TEST_LABEL_1}
+          value={TEST_VALUE_1}
+          onChange={changeSpy}
+        />
+      </CheckboxGroup>
+    )
+
+    expect(consoleErrorMock).toHaveBeenCalled()
+    expect(consoleErrorMock.mock.calls[0][0]).toBe(
+      'Warning: [CheckboxGroup] When part of a CheckboxGroup, Checkbox components cannot have their own `onChange` prop.'
+    )
+  })
+
   it('links the messages to the fieldset via aria-describedby', () => {
     const { container } = renderCheckboxGroup({
       messages: [{ text: TEST_ERROR_MESSAGE, type: 'error' }]
