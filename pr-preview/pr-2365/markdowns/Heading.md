@@ -25,7 +25,7 @@ type: embed
 ---
 type: example
 ---
-  <div>
+  <View as="div" background="primary" >
     <Heading variant="titlePageDesktop" level="h1"> titlePageDesktop </Heading><br/>
     <Heading variant="titlePageMobile" level="h1"> titlePageMobile </Heading><br/>
     <Heading variant="titleSection" level="h2"> titleSection </Heading><br/>
@@ -36,7 +36,7 @@ type: example
     <Heading variant="titleCardMini" level="h4"> titleCardMini </Heading><br/>
     <Heading variant="label" level="h5"> label </Heading><br/>
     <Heading variant="labelInline" level="h6"> labelInline </Heading><br/>
-  </div>
+  </View>
 ```
 
 ### AI Heading
@@ -47,11 +47,13 @@ Pre-configured and with unique styles, the `ai-headings` are used for standardiz
 ---
 type: example
 ---
+<View as="div" background="primary">
 <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
   <Heading aiVariant="stacked" level="h2">Nutrition Facts</Heading>
   <Heading aiVariant="horizontal" level="h3">Nutrition Facts</Heading>
   <Heading aiVariant="iconOnly" level="h4">Nutrition Facts</Heading>
 </div>
+</View>
 ```
 
 ### Heading level
@@ -69,23 +71,35 @@ The `variant` and `level` props sets its appearance in this order.
 ---
 type: example
 ---
-<div>
+<View as="div" background="primary">
   <Heading level="h1" as="h3" margin="0 0 x-small">This renders as <code>&lt;h3&gt;</code></Heading>
-</div>
+</View>
 ```
 
 ### Heading colors
 
-The default is for the color to inherit, but it can be set to `primary` or `secondary` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_).
+The default is for the color to inherit, but it can be set to `primary`, `secondary`, `primary-on`, `secondary-on`, `primary-inverse`, or `secondary-inverse` via the `color` prop.
 
 ```js
 ---
 type: example
 ---
-<div>
-  <Heading>I inherit my color via the CSS cascade (default)</Heading>
+<div >
+  <div style={{color: '#0084D1'}}>
+    <Heading>I inherit my color via the CSS cascade (default)</Heading>
+  </div>
   <Heading color="primary">I am primary color</Heading>
   <Heading color="secondary">I am secondary color</Heading>
+  <View background="primary-inverse" as="div" padding="small" margin="small 0">
+
+    <Heading color="primary-inverse">I am primary-inverse color</Heading>
+    <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
+  </View>
+  <View background="alert" as="div" padding="small" margin="small 0">
+
+    <Heading color="primary-on">I am primary-inverse color</Heading>
+    <Heading color="secondary-on">I am secondary-inverse color</Heading>
+  </View>
 </div>
 ```
 
@@ -97,19 +111,9 @@ With the `renderIcon` prop, an icon can be rendered before the text.
 ---
 type: example
 ---
-<div>
+<View as="div" background="primary">
  <Heading renderIcon={<ShieldUserInstUIIcon/>}>I am heading with icon</Heading>
-</div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Heading color="primary-inverse">I am primary-inverse color</Heading>
-  <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
-</View>
+ </View>
 ```
 
 ### Heading borders
@@ -121,10 +125,10 @@ add either `top` or `bottom` borders to your heading.
 ---
 type: example
 ---
-<div>
+<View as="div" background="primary">
   <Heading margin="0 0 medium" border="bottom">I have a bottom border</Heading>
   <Heading border="top">I have a top border</Heading>
-</div>
+ </View>
 ```
 
 ### Ellipsis text overflow
@@ -136,9 +140,11 @@ Heading to a single line (or certain number of lines).
 ---
 type: example
 ---
+<View as="div" background="primary">
 <Heading level="h2">
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Heading>
+ </View>
 ```
 
 ### Guidelines
