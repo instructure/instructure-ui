@@ -278,7 +278,7 @@
       "type": "fontFamilies"
     },
     "code": {
-      "value": "{fontFamily.inclusiveSans}",
+      "value": "{fontFamily.menlo}",
       "type": "fontFamilies"
     }
   },

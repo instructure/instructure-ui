@@ -37,7 +37,7 @@
       "type": "color"
     },
     "successBorderColor": {
-      "value": "{color.stroke.interactive.input.base}",
+      "value": "{color.stroke.interactive.action.success.secondary.base}",
       "type": "color"
     },
     "borderRadius": {

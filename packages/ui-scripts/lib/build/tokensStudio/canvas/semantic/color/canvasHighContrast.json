@@ -390,19 +390,19 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.green.green130}",
+        "value": "{color.green.green140}",
         "type": "color"
       },
       "error": {
-        "value": "{color.red.red130}",
+        "value": "{color.red.red140}",
         "type": "color"
       },
       "warning": {
-        "value": "{color.orange.orange130}",
+        "value": "{color.orange.orange140}",
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.blue130}",
+        "value": "{color.blue.blue140}",
         "type": "color"
       },
       "brand": {

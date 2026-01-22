@@ -1,7 +1,7 @@
 {
   "popover": {
     "borderColor": {
-      "value": "{color.stroke.muted}",
+      "value": "{color.stroke.base}",
       "type": "color"
     },
     "borderRadius": {
