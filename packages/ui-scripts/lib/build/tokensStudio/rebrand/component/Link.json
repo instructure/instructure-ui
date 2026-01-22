@@ -100,14 +100,6 @@
         "type": "typography"
       }
     },
-    "hoverTextDecorationOutsideText": {
-      "value": "underline",
-      "type": "textDecoration"
-    },
-    "hoverTextDecorationWithinText": {
-      "value": "none",
-      "type": "textDecoration"
-    },
     "textDecorationWithinText": {
       "value": "underline",
       "type": "textDecoration"
