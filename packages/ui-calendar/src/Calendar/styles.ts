@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { CalendarTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { CalendarStyle, CalendarProps } from './props'
 
 /**
@@ -34,7 +34,7 @@ import type { CalendarStyle, CalendarProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: CalendarTheme,
+  componentTheme: NewComponentTypes['Calendar'],
   props: CalendarProps
 ): CalendarStyle => {
   const { withYearPicker } = props
@@ -60,7 +60,8 @@ const generateStyle = (
     weekdayHeader: {
       label: 'calendar__weekdayHeader',
       textAlign: 'center',
-      maxWidth: componentTheme.maxHeaderWidth
+      maxWidth: componentTheme.maxHeaderWidth,
+      lineHeight: componentTheme.lineHeight
     },
     yearPicker: {
       display: 'flex',

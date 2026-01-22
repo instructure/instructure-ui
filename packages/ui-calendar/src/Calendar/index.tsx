@@ -35,13 +35,12 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { Day } from './Day'
 
@@ -51,8 +50,8 @@ import { Renderable } from '@instructure/shared-types'
 
 import { IconButton } from '@instructure/ui-buttons'
 import {
-  IconArrowOpenStartSolid,
-  IconArrowOpenEndSolid
+  ChevronLeftInstUIIcon,
+  ChevronRightInstUIIcon
 } from '@instructure/ui-icons'
 
 import { SimpleSelect } from '@instructure/ui-simple-select'
@@ -63,7 +62,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Calendar extends Component<CalendarProps, CalendarState> {
   static readonly componentId = 'Calendar'
 
@@ -184,7 +183,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           size="small"
           withBackground={false}
           withBorder={false}
-          renderIcon={<IconArrowOpenStartSolid color="primary" />}
+          renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
           screenReaderLabel="Previous month"
         />
       ),
@@ -195,7 +194,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           size="small"
           withBackground={false}
           withBorder={false}
-          renderIcon={<IconArrowOpenEndSolid color="primary" />}
+          renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
           screenReaderLabel="Next month"
         />
       )
