@@ -367,6 +367,7 @@ type: embed
 />
 
 ```
+
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
@@ -604,6 +605,7 @@ type: embed
 />
 
 ```
+
 ### RangeInput
 
 ```js
@@ -620,6 +622,20 @@ type: embed
     {oldName:"valueSmallPadding",newName:"valueSmallPadding",note:"now only sets horizontal padding of the value"},
     {oldName:"valueMediumPadding",newName:"valueMediumPadding",note:"now only sets horizontal padding of the value"},
     {oldName:"valueLargePadding",newName:"valueLargePadding",note:"now only sets horizontal padding of the value"}
+  ]}
+/>
+
+```
+
+### SourceCodeEditor
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusBorderColor",note:"now uses sharedTokens.focusOutline.infoColor"}
   ]}
 />
 
