@@ -90,6 +90,21 @@ type: embed
     {oldName:"titleCardMini",newName:"titleCardMini",note:"now returns a full typography object instead of just a font size"},
     {oldName:"label",newName:"label",note:"now returns a full typography object instead of just a font size"},
     {oldName:"labelInline",newName:"labelInline",note:"now returns a full typography object instead of just a font size"}
+      ]}
+/>
+
+```
+
+### Alert
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"boxShadow",note:"now uses sharedTokens.boxShadow.elevation4"},
+    {name:"contentPadding",note:"split into contentPaddingVertical and contentPaddingHorizontal"}
   ]}
 />
 
