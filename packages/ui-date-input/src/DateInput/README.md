@@ -222,8 +222,8 @@ class Example extends React.Component {
       withBackground: false,
       withBorder: false,
       renderIcon: type === 'prev'
-        ? <IconArrowOpenStartSolid color="primary" />
-        : <IconArrowOpenEndSolid color="primary" />,
+        ? <ChevronLeftInstUIIcon color="baseColor" />
+        : <ChevronRightInstUIIcon color="baseColor" />,
       screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
     })
 
