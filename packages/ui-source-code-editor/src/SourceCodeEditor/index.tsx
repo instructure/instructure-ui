@@ -87,12 +87,11 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import customSearch from './SearchPanel'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { rtlHorizontalArrowKeymap } from './customKeybinding'
 
@@ -105,7 +104,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 @textDirectionContextConsumer()
 class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   static readonly componentId = 'SourceCodeEditor'
