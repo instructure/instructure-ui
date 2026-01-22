@@ -106,7 +106,8 @@ const generateStyle = (
         background: componentTheme.secondarySelectedBackground,
         borderColor: componentTheme.secondarySelectedBorderColor,
         zIndex: componentTheme.zIndex,
-        borderBottomColor: componentTheme.secondarySelectedBackground
+        borderBottomColor: componentTheme.secondarySelectedBackground,
+        color: componentTheme.secondarySelectedTextColor
       }),
 
       '&:first-of-type': { marginInlineStart: '0' },
@@ -115,7 +116,8 @@ const generateStyle = (
         ...(!isDisabled &&
           !isSelected && {
             background: componentTheme.secondarySelectedBackground,
-            borderColor: componentTheme.secondarySelectedBorderColor
+            borderColor: componentTheme.secondarySelectedBorderColor,
+            color: componentTheme.secondarySelectedTextColor
           })
       }
     }
