@@ -96,12 +96,16 @@
       "value": "{color.text.base}",
       "type": "color"
     },
+    "secondarySelectedTextColor": {
+      "value": "{color.text.inverse}",
+      "type": "color"
+    },
     "secondarySelectedBackground": {
-      "value": "{color.background.base}",
+      "value": "{color.background.brand}",
       "type": "color"
     },
     "secondarySelectedBorderColor": {
-      "value": "{color.stroke.base}",
+      "value": "{color.stroke.brand}",
       "type": "color"
     },
     "zIndex": {
