@@ -29,7 +29,7 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { Alert } from '../index'
 import type { AlertProps } from '../props'
-import { IconGroupLine } from '@instructure/ui-icons'
+import { GroupInstUIIcon } from '@instructure/ui-icons'
 
 describe('<Alert />', () => {
   let srdiv: HTMLDivElement | null
@@ -97,10 +97,10 @@ describe('<Alert />', () => {
     NonNullable<AlertProps['variant']>,
     string
   > = {
-    error: 'IconNo',
-    info: 'IconInfoBorderless',
-    success: 'IconCheckMark',
-    warning: 'IconWarningBorderless'
+    error: 'CircleX',
+    info: 'Info',
+    success: 'CircleCheck',
+    warning: 'TriangleAlert'
   }
 
   ;(
@@ -115,7 +115,7 @@ describe('<Alert />', () => {
           Success: Sample alert text.
         </Alert>
       )
-      const icon = container.querySelector('svg[class$="-svgIcon"]')
+      const icon = container.querySelector('svg[class^="lucide"]')
 
       expect(icon).toHaveAttribute('name', iconComponent)
     })
@@ -167,10 +167,12 @@ describe('<Alert />', () => {
   })
 
   it('should render an icon when provided as the `renderIcon` prop', () => {
-    const { container } = render(<Alert renderCustomIcon={<IconGroupLine />} />)
-    const icon = container.querySelector('svg[class$="-svgIcon"]')
+    const { container } = render(
+      <Alert renderCustomIcon={<GroupInstUIIcon />} />
+    )
+    const icon = container.querySelector('svg[class^="lucide"]')
 
-    expect(icon).toHaveAttribute('name', 'IconGroup')
+    expect(icon).toHaveAttribute('name', 'Group')
     expect(icon).toBeInTheDocument()
   })
 
