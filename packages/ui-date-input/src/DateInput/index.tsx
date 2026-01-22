@@ -26,7 +26,7 @@ import { Children, Component, ReactElement } from 'react'
 
 import { Calendar } from '@instructure/ui-calendar'
 import type { CalendarProps, CalendarDayProps } from '@instructure/ui-calendar'
-import { IconCalendarMonthLine } from '@instructure/ui-icons'
+import { CalendarInstUIIcon } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 import { Selectable } from '@instructure/ui-selectable'
 import type {
@@ -45,7 +45,7 @@ import {
 
 import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -58,7 +58,7 @@ import type { FormMessage } from '@instructure/ui-form-field'
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyle(generateStyle)
 class DateInput extends Component<DateInputProps, DateInputState> {
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
@@ -423,7 +423,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
           interaction,
           isRequired,
           display: isInline ? 'inline-block' : 'block',
-          renderAfterInput: <IconCalendarMonthLine inline={false} />
+          renderAfterInput: <CalendarInstUIIcon />
         })}
         onKeyDown={(e) => {
           if (!this.props.children) {

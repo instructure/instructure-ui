@@ -27,9 +27,9 @@ import type { SyntheticEvent } from 'react'
 import { Calendar } from '@instructure/ui-calendar'
 import { IconButton } from '@instructure/ui-buttons'
 import {
-  IconCalendarMonthLine,
-  IconArrowOpenEndSolid,
-  IconArrowOpenStartSolid
+  CalendarInstUIIcon,
+  ChevronLeftInstUIIcon,
+  ChevronRightInstUIIcon
 } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 import { TextInput } from '@instructure/ui-text-input'
@@ -287,7 +287,7 @@ const DateInput2 = forwardRef(
                 {renderCalendarIcon ? (
                   callRenderProp(renderCalendarIcon)
                 ) : (
-                  <IconCalendarMonthLine />
+                  <CalendarInstUIIcon color="baseColor" />
                 )}
               </IconButton>
             }
@@ -312,7 +312,7 @@ const DateInput2 = forwardRef(
                   size="small"
                   withBackground={false}
                   withBorder={false}
-                  renderIcon={<IconArrowOpenEndSolid color="primary" />}
+                  renderIcon={<ChevronRightInstUIIcon color="baseColor" />}
                   screenReaderLabel={screenReaderLabels.nextMonthButton}
                 />
               }
@@ -321,7 +321,7 @@ const DateInput2 = forwardRef(
                   size="small"
                   withBackground={false}
                   withBorder={false}
-                  renderIcon={<IconArrowOpenStartSolid color="primary" />}
+                  renderIcon={<ChevronLeftInstUIIcon color="baseColor" />}
                   screenReaderLabel={screenReaderLabels.prevMonthButton}
                 />
               }

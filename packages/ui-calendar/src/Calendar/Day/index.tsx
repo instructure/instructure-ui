@@ -33,10 +33,9 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { CalendarDayProps, CalendarDayStyleProps } from './props'
@@ -47,7 +46,7 @@ parent: Calendar
 id: Calendar.Day
 ---
  **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Day extends Component<CalendarDayProps> {
   static readonly componentId = 'Calendar.Day'
 
