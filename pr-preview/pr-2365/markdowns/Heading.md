@@ -25,7 +25,7 @@ type: embed
 ---
 type: example
 ---
-  <View as="div" background="primary" >
+  <div>
     <Heading variant="titlePageDesktop" level="h1"> titlePageDesktop </Heading><br/>
     <Heading variant="titlePageMobile" level="h1"> titlePageMobile </Heading><br/>
     <Heading variant="titleSection" level="h2"> titleSection </Heading><br/>
@@ -36,7 +36,7 @@ type: example
     <Heading variant="titleCardMini" level="h4"> titleCardMini </Heading><br/>
     <Heading variant="label" level="h5"> label </Heading><br/>
     <Heading variant="labelInline" level="h6"> labelInline </Heading><br/>
-  </View>
+  </div>
 ```
 
 ### AI Heading
@@ -47,13 +47,11 @@ Pre-configured and with unique styles, the `ai-headings` are used for standardiz
 ---
 type: example
 ---
-<View as="div" background="primary">
 <div style={{display: 'flex', flexDirection: 'column', gap: '24px'}}>
   <Heading aiVariant="stacked" level="h2">Nutrition Facts</Heading>
   <Heading aiVariant="horizontal" level="h3">Nutrition Facts</Heading>
   <Heading aiVariant="iconOnly" level="h4">Nutrition Facts</Heading>
 </div>
-</View>
 ```
 
 ### Heading level
@@ -71,14 +69,14 @@ The `variant` and `level` props sets its appearance in this order.
 ---
 type: example
 ---
-<View as="div" background="primary">
+<div>
   <Heading level="h1" as="h3" margin="0 0 x-small">This renders as <code>&lt;h3&gt;</code></Heading>
-</View>
+</div>
 ```
 
 ### Heading colors
 
-The default is for the color to inherit, but it can be set to `primary`, `secondary`, `primary-on`, `secondary-on`, `primary-inverse`, or `secondary-inverse` via the `color` prop.
+The default color is `primary`, but it can be set to `secondary`, `primary-on`, `secondary-on` or `inherit` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_).
 
 ```js
 ---
@@ -86,19 +84,17 @@ type: example
 ---
 <div >
   <div style={{color: '#0084D1'}}>
-    <Heading>I inherit my color via the CSS cascade (default)</Heading>
+    <Heading color="inherit">I inherit my color via the CSS cascade</Heading>
   </div>
-  <Heading color="primary">I am primary color</Heading>
+  <Heading color="primary">I am primary color (default)</Heading>
   <Heading color="secondary">I am secondary color</Heading>
-  <View background="primary-inverse" as="div" padding="small" margin="small 0">
-
+  <View background="primary-inverse" as="div">
     <Heading color="primary-inverse">I am primary-inverse color</Heading>
     <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
   </View>
-  <View background="alert" as="div" padding="small" margin="small 0">
-
-    <Heading color="primary-on">I am primary-inverse color</Heading>
-    <Heading color="secondary-on">I am secondary-inverse color</Heading>
+  <View background="alert" as="div">
+    <Heading color="primary-on">I am primary-on color</Heading>
+    <Heading color="secondary-on">I am secondary-on color</Heading>
   </View>
 </div>
 ```
@@ -111,9 +107,9 @@ With the `renderIcon` prop, an icon can be rendered before the text.
 ---
 type: example
 ---
-<View as="div" background="primary">
+<div>
  <Heading renderIcon={<ShieldUserInstUIIcon/>}>I am heading with icon</Heading>
- </View>
+</div>
 ```
 
 ### Heading borders
@@ -125,10 +121,10 @@ add either `top` or `bottom` borders to your heading.
 ---
 type: example
 ---
-<View as="div" background="primary">
+<div>
   <Heading margin="0 0 medium" border="bottom">I have a bottom border</Heading>
   <Heading border="top">I have a top border</Heading>
- </View>
+</div>
 ```
 
 ### Ellipsis text overflow
@@ -140,11 +136,9 @@ Heading to a single line (or certain number of lines).
 ---
 type: example
 ---
-<View as="div" background="primary">
 <Heading level="h2">
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Heading>
- </View>
 ```
 
 ### Guidelines
@@ -170,7 +164,7 @@ type: embed
 | Heading | aiVariant | `'stacked' \| 'horizontal' \| 'iconOnly'` | No | - | transforms heading into an `ai` variant |
 | Heading | children | `React.ReactNode` | No | `null` | The text content of the Heading |
 | Heading | border | `'none' \| 'top' \| 'bottom'` | No | `'none'` | Add a top- or bottom-border to the Heading |
-| Heading | color | `\| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'inherit' \| 'primary-on' \| 'secondary-on' \| 'ai'` | No | `'inherit'` | The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead |
+| Heading | color | `\| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'inherit' \| 'primary-on' \| 'secondary-on' \| 'ai'` | No | `'primary'` | The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead |
 | Heading | level | `HeadingLevel<'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'> \| 'reset'` | No | - | The level of the heading in the DOM: h1 is largest; h6 is smallest. |
 | Heading | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | What DOM element is output is determined in the following order: 1. (deprecated) If `variant` is set, then use the `level` prop, if that's not set use `<h1>`-`<h6>` based on the `variant` prop's value 2. The value of the `as` prop 3. The value of the `level` prop 4. `<h2>` |
 | Heading | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
