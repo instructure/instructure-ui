@@ -24,7 +24,7 @@
 
 import { tags } from '@lezer/highlight'
 
-import type { SourceCodeEditorTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { SourceCodeEditorProps, SourceCodeEditorStyle } from './props'
 
 /**
@@ -37,8 +37,9 @@ import type { SourceCodeEditorProps, SourceCodeEditorStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: SourceCodeEditorTheme,
-  props: SourceCodeEditorProps
+  componentTheme: NewComponentTypes['SourceCodeEditor'],
+  props: SourceCodeEditorProps,
+  sharedTokens: SharedTokens
 ): SourceCodeEditorStyle => {
   const { attachment, height, width } = props
 
@@ -121,7 +122,7 @@ const generateStyle = (
         // are, for some reason, drawn behind the element content, which
         // will cause things like the active line background to cover
         // the outline (#297).
-        outline: `${componentTheme?.borderWidth} solid ${componentTheme?.focusBorderColor}`
+        outline: `${componentTheme?.borderWidth} solid ${sharedTokens.focusOutline.infoColor}`
       },
 
       '.cm-content': {
@@ -142,16 +143,23 @@ const generateStyle = (
         padding: `0 ${componentTheme.horizontalPadding}`
       },
 
+      '.cm-activeLine': {
+        backgroundColor: componentTheme.activeLineColor
+      },
+
+      '&.cm-focused .cm-cursor': { borderLeftColor: componentTheme.color },
+
       '.cm-selectionBackground': {
         background: 'transparent'
       },
-      '.cm-focused .cm-selectionBackground': {
-        background: '#d7d4f0'
+      '.cm-selectionBackground, .cm-editor::selection': {
+        backgroundColor:
+          componentTheme.focusedSelectionBackgroundColor + ' !important'
       },
 
       '.cm-placeholder': {
         // for better contrast
-        color: '#707070'
+        color: componentTheme.placeholderBackgroundColor
       }
     },
 
@@ -165,7 +173,7 @@ const generateStyle = (
       { tag: tags.emphasis, fontStyle: 'italic' },
       { tag: tags.strong, fontWeight: 'bold' },
       { tag: tags.strikethrough, textDecoration: 'line-through' },
-      { tag: tags.keyword, color: '#708' },
+      { tag: tags.keyword, color: componentTheme.tagKeywordColor },
       {
         tag: [
           tags.atom,
@@ -174,24 +182,39 @@ const generateStyle = (
           tags.contentSeparator,
           tags.labelName
         ],
-        color: '#219'
+        color: componentTheme.tagAtomColor
       },
-      { tag: [tags.literal, tags.inserted], color: '#164' },
-      { tag: [tags.string, tags.deleted], color: '#a11' },
+      {
+        tag: [tags.literal, tags.inserted],
+        color: componentTheme.tagLiteralColor
+      },
+      {
+        tag: [tags.string, tags.deleted],
+        color: componentTheme.tagStringColor
+      },
       // {
       //   tag: [tags.regexp, tags.escape, tags.special(tags.string)],
       //   color: '#e40'
       // },
-      { tag: tags.definition(tags.variableName), color: '#00f' },
-      { tag: tags.local(tags.variableName), color: '#30a' },
+      {
+        tag: tags.definition(tags.variableName),
+        color: componentTheme.tagDefinitionVariableNameColor
+      },
+      {
+        tag: tags.local(tags.variableName),
+        color: componentTheme.tagLocalVariableNameColor
+      },
       // { tag: [tags.typeName, tags.namespace], color: '#085' },
-      { tag: tags.className, color: '#167' },
+      { tag: tags.className, color: componentTheme.tagClassNameColor },
       {
         tag: [tags.special(tags.variableName), tags.macroName],
-        color: '#256'
+        color: componentTheme.tagSpecialVariableNameColor
       },
-      { tag: tags.definition(tags.propertyName), color: '#00c' },
-      { tag: tags.comment, color: '#940' },
+      {
+        tag: tags.definition(tags.propertyName),
+        color: componentTheme.tagDefinitionPropertyNameColor
+      },
+      { tag: tags.comment, color: componentTheme.tagCommentColor },
       // { tag: tags.invalid, color: '#f00' },
 
       /**
@@ -199,13 +222,16 @@ const generateStyle = (
        * (where original colors don't have enough contrast against #fff
        * or active highlight background)
        */
-      { tag: tags.meta, color: '#757075' },
+      { tag: tags.meta, color: componentTheme.tagMetaColor },
       {
         tag: [tags.regexp, tags.escape, tags.special(tags.string)],
-        color: '#d13b00'
+        color: componentTheme.tagRegExpColor
       },
-      { tag: [tags.typeName, tags.namespace], color: '#008051' },
-      { tag: tags.invalid, color: '#e60000' }
+      {
+        tag: [tags.typeName, tags.namespace],
+        color: componentTheme.tagTypeNameColor
+      },
+      { tag: tags.invalid, color: componentTheme.tagInvalidColor }
     ]
   }
 }
