@@ -96,6 +96,10 @@
       "value": "{color.text.base}",
       "type": "color"
     },
+    "secondarySelectedTextColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
     "secondarySelectedBackground": {
       "value": "{color.background.base}",
       "type": "color"
