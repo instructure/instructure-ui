@@ -26,7 +26,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { vi, MockInstance } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { IconHeartLine } from '@instructure/ui-icons'
+import { HeartInstUIIcon } from '@instructure/ui-icons'
 
 import { DateInput2 } from '../index'
 import { TextInput } from '@instructure/ui-text-input'
@@ -116,9 +116,7 @@ describe('<DateInput2 />', () => {
         value=""
       />
     )
-    const calendarIcon = container.querySelector(
-      'svg[name="IconCalendarMonth"]'
-    )
+    const calendarIcon = container.querySelector('svg[name="Calendar"]')
     const calendarLabel = screen.getByText(iconLabel)
 
     expect(calendarIcon).toBeInTheDocument()
@@ -158,10 +156,10 @@ describe('<DateInput2 />', () => {
           prevMonthButton: 'Previous month'
         }}
         value=""
-        renderCalendarIcon={<IconHeartLine />}
+        renderCalendarIcon={<HeartInstUIIcon />}
       />
     )
-    const calendarIcon = container.querySelector('svg[name="IconHeart"]')
+    const calendarIcon = container.querySelector('svg[name="Heart"]')
     const calendarLabel = screen.getByText(iconLabel)
 
     expect(calendarIcon).toBeInTheDocument()
@@ -226,10 +224,10 @@ describe('<DateInput2 />', () => {
       expect(nextButtonLabel).toBeInTheDocument()
 
       const prevMonthIcon = prevMonthButton.querySelector(
-        'svg[name="IconArrowOpenStart"]'
+        'svg[name="ChevronLeft"]'
       )
       const nextMonthIcon = nextMonthButton.querySelector(
-        'svg[name="IconArrowOpenEnd"]'
+        'svg[name="ChevronRight"]'
       )
 
       expect(prevMonthIcon).toBeInTheDocument()

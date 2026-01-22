@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { CalendarDayTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   CalendarDayProps,
   CalendarDayStyleProps,
@@ -40,8 +40,9 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: CalendarDayTheme,
+  componentTheme: NewComponentTypes['CalendarDay'],
   props: CalendarDayProps,
+  _sharedTokens: SharedTokens,
   state: CalendarDayStyleProps
 ): CalendarDayStyle => {
   const { isOutsideMonth, isSelected, isToday } = props

@@ -32,9 +32,9 @@ type: example
           invalidDateErrorMessage="Invalid date"
         />
         <p>
-          Input Value: <code>{inputValue}</code>
+          <Text>Input Value: </Text><code>{inputValue}</code>
           <br />
-          UTC Date String: <code>{dateString}</code>
+          <Text>UTC Date String: </Text><code>{dateString}</code>
         </p>
       </div>
     )
@@ -64,7 +64,7 @@ const Example = () => {
 
   return (
     <div>
-      <p>US locale with default format:</p>
+      <Text as="p">US locale with default format:</Text>
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -78,7 +78,7 @@ const Example = () => {
         locale="en-us"
         onChange={(e, value) => setValue(value)}
       />
-      <p>US locale with german date format:</p>
+      <Text as="p">US locale with german date format:</Text>
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -93,7 +93,7 @@ const Example = () => {
         dateFormat="de-de"
         onChange={(e, value) => setValue2(value)}
       />
-      <p>US locale with ISO date format:</p>
+      <Text as="p">US locale with ISO date format:</Text>
       <DateInput2
         renderLabel="Choose a date"
         screenReaderLabels={{
@@ -168,9 +168,9 @@ type: example
           }}
         />
         <p>
-          Input Value: <code>{inputValue}</code>
+          <Text>Input Value: </Text><code>{inputValue}</code>
           <br />
-          UTC Date String: <code>{dateString}</code>
+          <Text>UTC Date String: </Text><code>{dateString}</code>
         </p>
       </div>
     )
