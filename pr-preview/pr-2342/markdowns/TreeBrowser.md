@@ -358,20 +358,17 @@ const Example = () => {
     if (expanded) {
       return (
         <InstUISettingsProvider
-          theme={
-            hoveredLine === 'renderAfter'
-              ? {
-                  componentOverrides: {
-                    View: {
-                      focusColorInfo: 'white'
-                    },
-                    TextInput: {
-                      focusOutlineColor: 'white'
-                    }
-                  }
+          theme={(theme) => ({
+            newTheme: {
+              sharedTokens: {
+                focusOutline: {
+                  ...(hoveredLine && {
+                    infoColor: theme.key === 'rebrand-dark' ? 'black' : 'white'
+                  })
                 }
-              : undefined
-          }
+              }
+            }
+          })}
         >
           <View
             as="div"
