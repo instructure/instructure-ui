@@ -206,6 +206,18 @@
       "radiusLarge": {
         "value": "0.5rem",
         "type": "borderRadius"
+      },
+      "widthSmall": {
+        "value": "{borderWidth.sm}",
+        "type": "borderWidth"
+      },
+      "widthMedium": {
+        "value": "{borderWidth.md}",
+        "type": "borderWidth"
+      },
+      "widthLarge": {
+        "value": "{borderWidth.lg}",
+        "type": "borderWidth"
       }
     },
     "boxShadow": {
@@ -418,18 +430,6 @@
         "type": "text"
       }
     },
-    "widthSmall": {
-      "value": "{borderWidth.sm}",
-      "type": "borderWidth"
-    },
-    "widthMedium": {
-      "value": "{borderWidth.md}",
-      "type": "borderWidth"
-    },
-    "widthLarge": {
-      "value": "{borderWidth.lg}",
-      "type": "borderWidth"
-    },
     "background": {
       "containerColor": {
         "value": "{color.background.container}",
@@ -520,6 +520,20 @@
       "aiBottomGradientColor": {
         "value": "{color.stroke.aiBottomGradient}",
         "type": "color"
+      }
+    },
+    "strokeWidth": {
+      "sm": {
+        "value": "{borderWidth.sm}",
+        "type": "borderWidth"
+      },
+      "md": {
+        "value": "{borderWidth.md}",
+        "type": "borderWidth"
+      },
+      "lg": {
+        "value": "{borderWidth.lg}",
+        "type": "borderWidth"
       }
     }
   }
