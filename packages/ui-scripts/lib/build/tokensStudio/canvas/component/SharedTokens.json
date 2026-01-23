@@ -6,23 +6,23 @@
         "type": "borderRadius"
       },
       "sm": {
-        "value": "borderRadius.sm",
+        "value": "{borderRadius.sm}",
         "type": "borderRadius"
       },
       "md": {
-        "value": "borderRadius.md",
+        "value": "{borderRadius.md}",
         "type": "borderRadius"
       },
       "lg": {
-        "value": "borderRadius.lg",
+        "value": "{borderRadius.lg}",
         "type": "borderRadius"
       },
       "xl": {
-        "value": "borderRadius.xl",
+        "value": "{borderRadius.xl}",
         "type": "borderRadius"
       },
       "xxl": {
-        "value": "borderRadius.xxl",
+        "value": "{borderRadius.xxl}",
         "type": "borderRadius"
       },
       "full": {
@@ -44,154 +44,168 @@
         }
       }
     },
-    "legacySpacing": {
-      "xxxSmall": {
+    "legacy": {
+      "spacing": {
+        "xxxSmall": {
+          "value": "0.125rem",
+          "type": "spacing"
+        },
+        "xxSmall": {
+          "value": "0.375rem",
+          "type": "spacing"
+        },
+        "xSmall": {
+          "value": "0.5rem",
+          "type": "spacing"
+        },
+        "small": {
+          "value": "0.75rem",
+          "type": "spacing"
+        },
+        "mediumSmall": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "medium": {
+          "value": "1.5rem",
+          "type": "spacing"
+        },
+        "large": {
+          "value": "2.25rem",
+          "type": "spacing"
+        },
+        "xLarge": {
+          "value": "3rem",
+          "type": "spacing"
+        },
+        "xxLarge": {
+          "value": "3.75rem",
+          "type": "spacing"
+        },
+        "space0": {
+          "value": "0rem",
+          "type": "spacing"
+        },
+        "space2": {
+          "value": "0.125rem",
+          "type": "spacing"
+        },
+        "space4": {
+          "value": "0.25rem",
+          "type": "spacing"
+        },
+        "space8": {
+          "value": "0.5rem",
+          "type": "spacing"
+        },
+        "space12": {
+          "value": "0.75rem",
+          "type": "spacing"
+        },
+        "space16": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "space24": {
+          "value": "1.5rem",
+          "type": "spacing"
+        },
+        "space36": {
+          "value": "2.25rem",
+          "type": "spacing"
+        },
+        "space48": {
+          "value": "3rem",
+          "type": "spacing"
+        },
+        "space60": {
+          "value": "3.75rem",
+          "type": "spacing"
+        },
+        "sections": {
+          "value": "2.25rem",
+          "type": "spacing"
+        },
+        "sectionElements": {
+          "value": "1.5em",
+          "type": "spacing"
+        },
+        "trayElements": {
+          "value": "1.5em",
+          "type": "spacing"
+        },
+        "modalElements": {
+          "value": "1.5em",
+          "type": "spacing"
+        },
+        "moduleElements": {
+          "value": "1em",
+          "type": "spacing"
+        },
+        "paddingCardLarge": {
+          "value": "1.5rem",
+          "type": "spacing"
+        },
+        "paddingCardMedium": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "paddingCardSmall": {
+          "value": "0.75rem",
+          "type": "spacing"
+        },
+        "selects": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "textareas": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "inputFields": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "checkboxes": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "radios": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "toggles": {
+          "value": "1rem",
+          "type": "spacing"
+        },
+        "buttons": {
+          "value": "0.75rem",
+          "type": "spacing"
+        },
+        "tags": {
+          "value": "0.75rem",
+          "type": "spacing"
+        },
+        "statusIndicators": {
+          "value": "0.75rem",
+          "type": "spacing"
+        },
+        "dataPoints": {
+          "value": "0.75rem",
+          "type": "spacing"
+        }
+      },
+      "radiusSmall": {
         "value": "0.125rem",
-        "type": "spacing"
+        "type": "borderRadius"
       },
-      "xxSmall": {
-        "value": "0.375rem",
-        "type": "spacing"
-      },
-      "xSmall": {
-        "value": "0.5rem",
-        "type": "spacing"
-      },
-      "small": {
-        "value": "0.75rem",
-        "type": "spacing"
-      },
-      "mediumSmall": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "medium": {
-        "value": "1.5rem",
-        "type": "spacing"
-      },
-      "large": {
-        "value": "2.25rem",
-        "type": "spacing"
-      },
-      "xLarge": {
-        "value": "3rem",
-        "type": "spacing"
-      },
-      "xxLarge": {
-        "value": "3.75rem",
-        "type": "spacing"
-      },
-      "space0": {
-        "value": "0rem",
-        "type": "spacing"
-      },
-      "space2": {
-        "value": "0.125rem",
-        "type": "spacing"
-      },
-      "space4": {
+      "radiusMedium": {
         "value": "0.25rem",
-        "type": "spacing"
+        "type": "borderRadius"
       },
-      "space8": {
+      "radiusLarge": {
         "value": "0.5rem",
-        "type": "spacing"
-      },
-      "space12": {
-        "value": "0.75rem",
-        "type": "spacing"
-      },
-      "space16": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "space24": {
-        "value": "1.5rem",
-        "type": "spacing"
-      },
-      "space36": {
-        "value": "2.25rem",
-        "type": "spacing"
-      },
-      "space48": {
-        "value": "3rem",
-        "type": "spacing"
-      },
-      "space60": {
-        "value": "3.75rem",
-        "type": "spacing"
-      },
-      "sections": {
-        "value": "2.25rem",
-        "type": "spacing"
-      },
-      "sectionElements": {
-        "value": "1.5em",
-        "type": "spacing"
-      },
-      "trayElements": {
-        "value": "1.5em",
-        "type": "spacing"
-      },
-      "modalElements": {
-        "value": "1.5em",
-        "type": "spacing"
-      },
-      "moduleElements": {
-        "value": "1em",
-        "type": "spacing"
-      },
-      "paddingCardLarge": {
-        "value": "1.5rem",
-        "type": "spacing"
-      },
-      "paddingCardMedium": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "paddingCardSmall": {
-        "value": "0.75rem",
-        "type": "spacing"
-      },
-      "selects": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "textareas": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "inputFields": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "checkboxes": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "radios": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "toggles": {
-        "value": "1rem",
-        "type": "spacing"
-      },
-      "buttons": {
-        "value": "0.75rem",
-        "type": "spacing"
-      },
-      "tags": {
-        "value": "0.75rem",
-        "type": "spacing"
-      },
-      "statusIndicators": {
-        "value": "0.75rem",
-        "type": "spacing"
-      },
-      "dataPoints": {
-        "value": "0.75rem",
-        "type": "spacing"
+        "type": "borderRadius"
       }
     },
     "boxShadow": {
@@ -403,18 +417,6 @@
         "value": "solid",
         "type": "text"
       }
-    },
-    "radiusSmall": {
-      "value": "0.125rem",
-      "type": "borderRadius"
-    },
-    "radiusMedium": {
-      "value": "0.25rem",
-      "type": "borderRadius"
-    },
-    "radiusLarge": {
-      "value": "0.5rem",
-      "type": "borderRadius"
     },
     "widthSmall": {
       "value": "{borderWidth.sm}",
