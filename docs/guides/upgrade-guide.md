@@ -59,7 +59,20 @@ type: example
 </InstUISettingsProvider>
 ```
 
-## API Changes
+### Alert
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"boxShadow",note:"now uses sharedTokens.boxShadow.elevation4"},
+    {name:"contentPadding",note:"split into contentPaddingVertical and contentPaddingHorizontal"}
+  ]}
+/>
+
+```
 
 ### Breadcrumb
 
@@ -367,6 +380,7 @@ type: embed
 />
 
 ```
+
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
@@ -604,6 +618,7 @@ type: embed
 />
 
 ```
+
 ### RangeInput
 
 ```js

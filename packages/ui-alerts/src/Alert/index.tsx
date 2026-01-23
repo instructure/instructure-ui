@@ -36,17 +36,16 @@ import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
-  IconCheckMarkSolid,
-  IconInfoBorderlessSolid,
-  IconWarningBorderlessSolid,
-  IconNoSolid
+  InfoInstUIIcon,
+  XCircleInstUIIcon,
+  CircleCheckInstUIIcon,
+  TriangleAlertInstUIIcon
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { AlertProps, AlertState } from './props'
@@ -57,7 +56,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'
 
@@ -88,10 +87,10 @@ class Alert extends Component<AlertProps, AlertState> {
   srid: string
 
   variantUI = {
-    error: IconNoSolid,
-    info: IconInfoBorderlessSolid,
-    success: IconCheckMarkSolid,
-    warning: IconWarningBorderlessSolid
+    error: XCircleInstUIIcon,
+    info: InfoInstUIIcon,
+    success: CircleCheckInstUIIcon,
+    warning: TriangleAlertInstUIIcon
   }
 
   ref: Element | null = null
