@@ -77,16 +77,26 @@ type: example
 
 ### Heading colors
 
-The default is for the color to inherit, but it can be set to `primary` or `secondary` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_).
+The default color is `primary`, but it can be set to `secondary`, `primary-on`, `secondary-on` or `inherit` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_).
 
 ```js
 ---
 type: example
 ---
-<div>
-  <Heading>I inherit my color via the CSS cascade (default)</Heading>
-  <Heading color="primary">I am primary color</Heading>
+<div >
+  <div style={{color: '#0084D1'}}>
+    <Heading color="inherit">I inherit my color via the CSS cascade</Heading>
+  </div>
+  <Heading color="primary">I am primary color (default)</Heading>
   <Heading color="secondary">I am secondary color</Heading>
+  <View background="primary-inverse" as="div">
+    <Heading color="primary-inverse">I am primary-inverse color</Heading>
+    <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
+  </View>
+  <View background="alert" as="div">
+    <Heading color="primary-on">I am primary-on color</Heading>
+    <Heading color="secondary-on">I am secondary-on color</Heading>
+  </View>
 </div>
 ```
 
@@ -99,18 +109,8 @@ With the `renderIcon` prop, an icon can be rendered before the text.
 type: example
 ---
 <div>
- <Heading renderIcon={<IconAdminSolid/>}>I am heading with icon</Heading>
+ <Heading renderIcon={<ShieldUserInstUIIcon/>}>I am heading with icon</Heading>
 </div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Heading color="primary-inverse">I am primary-inverse color</Heading>
-  <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
-</View>
 ```
 
 ### Heading borders

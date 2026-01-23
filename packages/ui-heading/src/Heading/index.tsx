@@ -25,13 +25,12 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
-import { IconAiColoredSolid } from '@instructure/ui-icons'
+import { passthroughProps } from '@instructure/ui-react-utils'
+import { StarsInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { HeadingProps } from './props'
@@ -53,12 +52,68 @@ const variantLevels: Record<
   labelInline: 'h5'
 }
 
+const variantToIconSize: Record<
+  NonNullable<HeadingProps['variant']>,
+  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+> = {
+  titlePageDesktop: '2xl',
+  titlePageMobile: 'xl',
+  titleSection: 'xl',
+  titleCardSection: 'xl',
+  titleModule: 'xl',
+  titleCardLarge: 'xl',
+  titleCardRegular: 'lg',
+  titleCardMini: 'md',
+  label: 'md',
+  labelInline: 'md'
+}
+
+const levelToIconSize: Record<
+  Exclude<HeadingProps['level'], 'reset' | undefined>,
+  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+> = {
+  h1: '2xl',
+  h2: 'xl',
+  h3: 'xl',
+  h4: 'lg',
+  h5: 'md',
+  h6: 'md'
+}
+
+const variantToAIHorizontalIconSize: Record<
+  NonNullable<HeadingProps['variant']>,
+  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+> = {
+  titlePageDesktop: '2xl',
+  titlePageMobile: 'xl',
+  titleSection: 'xl',
+  titleCardSection: 'xl',
+  titleModule: 'md',
+  titleCardLarge: 'md',
+  titleCardRegular: 'md',
+  titleCardMini: 'xs',
+  label: 'xs',
+  labelInline: 'xs'
+}
+
+const levelToAIHorizontalIconSize: Record<
+  Exclude<HeadingProps['level'], 'reset' | undefined>,
+  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+> = {
+  h1: '2xl',
+  h2: 'lg',
+  h3: 'md',
+  h4: 'sm',
+  h5: 'xs',
+  h6: 'xs'
+}
+
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 
@@ -66,7 +121,7 @@ class Heading extends Component<HeadingProps> {
   static defaultProps = {
     children: null,
     border: 'none',
-    color: 'inherit'
+    color: 'primary'
   } as const
 
   ref: Element | null = null
@@ -100,13 +155,40 @@ class Heading extends Component<HeadingProps> {
     this.checkProps()
   }
 
+  getIconSize(forAIHorizontal = false) {
+    const { variant, level, as } = this.props
+
+    if (variant) {
+      return forAIHorizontal
+        ? variantToAIHorizontalIconSize[variant]
+        : variantToIconSize[variant]
+    }
+    if (level && level !== 'reset') {
+      return forAIHorizontal
+        ? levelToAIHorizontalIconSize[level]
+        : levelToIconSize[level]
+    }
+    if (
+      as &&
+      typeof as === 'string' &&
+      ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(as)
+    ) {
+      const asLevel = as as Exclude<HeadingProps['level'], 'reset' | undefined>
+      return forAIHorizontal
+        ? levelToAIHorizontalIconSize[asLevel]
+        : levelToIconSize[asLevel]
+    }
+    return 'md'
+  }
+
   renderContent() {
     const { children, renderIcon, aiVariant } = this.props
 
     if (renderIcon && !aiVariant) {
       return (
         <span css={[this.props.styles?.withIcon]} aria-hidden="true">
-          {callRenderProp(renderIcon)}&nbsp;{children}
+          {renderIconWithProps(renderIcon, this.getIconSize(), 'inherit')}
+          {children}
         </span>
       )
     }
@@ -114,7 +196,7 @@ class Heading extends Component<HeadingProps> {
       return (
         <span css={[this.props.styles?.withIcon]} aria-hidden="true">
           <span css={this.props.styles?.igniteAIStacked}>
-            <IconAiColoredSolid />
+            <StarsInstUIIcon color="ai" size="sm" />
             <span css={this.props.styles?.igniteAI}>IgniteAI</span>
           </span>
           {children}
@@ -124,8 +206,10 @@ class Heading extends Component<HeadingProps> {
     if (aiVariant === 'horizontal') {
       return (
         <span css={this.props.styles?.withIcon} aria-hidden="true">
-          <IconAiColoredSolid />
-          <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          <span css={this.props.styles?.igniteAIHorizontal}>
+            <StarsInstUIIcon color="ai" size={this.getIconSize(true)} />
+            <span css={this.props.styles?.igniteAI}>IgniteAI</span>
+          </span>
           {children}
         </span>
       )
@@ -133,37 +217,9 @@ class Heading extends Component<HeadingProps> {
     if (aiVariant === 'iconOnly') {
       return (
         <span css={this.props.styles?.withIcon} aria-hidden="true">
-          <IconAiColoredSolid />
-          &nbsp;{children}
+          <StarsInstUIIcon color="ai" size={this.getIconSize(true)} />
+          {children}
         </span>
-      )
-    }
-    if (aiVariant === 'stacked') {
-      return (
-        <>
-          <span css={this.props.styles?.igniteAIStacked}>
-            <IconAiColoredSolid />
-            <span css={this.props.styles?.igniteAI}>IgniteAI</span>
-          </span>
-          {children}
-        </>
-      )
-    }
-    if (aiVariant === 'horizontal') {
-      return (
-        <>
-          <IconAiColoredSolid />
-          <span css={this.props.styles?.igniteAI}>IgniteAI</span>
-          {children}
-        </>
-      )
-    }
-    if (aiVariant === 'iconOnly') {
-      return (
-        <>
-          <IconAiColoredSolid />
-          &nbsp;{children}
-        </>
       )
     }
     return children
