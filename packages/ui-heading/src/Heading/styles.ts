@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { HeadingTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { HeadingProps, HeadingStyle } from './props'
 
 /**
@@ -32,11 +32,10 @@ import type { HeadingProps, HeadingStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: HeadingTheme,
+  componentTheme: NewComponentTypes['Heading'],
   props: HeadingProps
 ): HeadingStyle => {
   const { level, color, border, variant, aiVariant } = props
@@ -44,63 +43,43 @@ const generateStyle = (
   const variants: Record<NonNullable<HeadingProps['variant']>, object> = {
     titlePageDesktop: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titlePageDesktop,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titlePageDesktop
     },
     titlePageMobile: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titlePageMobile,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titlePageMobile
     },
     titleSection: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titleSection,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titleSection
     },
     titleCardSection: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titleSection,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titleCardSection
     },
     titleModule: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titleModule,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titleModule
     },
     titleCardLarge: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titleCardLarge,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titleCardLarge
     },
     titleCardRegular: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titleCardRegular,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titleCardRegular
     },
     titleCardMini: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.titleCardMini,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.titleCardMini
     },
     label: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.label,
-      lineHeight: componentTheme.lineHeight125
+      ...componentTheme.label
     },
     labelInline: {
       fontStyle: 'normal',
-      fontWeight: componentTheme.weightImportant,
-      fontSize: componentTheme.label,
-      lineHeight: componentTheme.lineHeight150
+      ...componentTheme.labelInline
     }
   }
 
@@ -145,10 +124,12 @@ const generateStyle = (
 
   const colorStyles = {
     inherit: { color: 'inherit' },
-    primary: { color: componentTheme.primaryColor },
-    secondary: { color: componentTheme.secondaryColor },
-    'primary-inverse': { color: componentTheme.primaryInverseColor },
-    'secondary-inverse': { color: componentTheme.secondaryInverseColor },
+    primary: { color: componentTheme.baseColor },
+    secondary: { color: componentTheme.mutedColor },
+    'primary-inverse': { color: componentTheme.inverseColor },
+    'secondary-inverse': { color: componentTheme.inverseColor },
+    'primary-on': { color: componentTheme.baseOnColor },
+    'secondary-on': { color: componentTheme.mutedOnColor },
     ai: {
       background: `
         linear-gradient(to bottom, ${componentTheme.aiTextTopGradientColor} 0%, ${componentTheme.aiTextBottomGradientColor} 100%) text`,
@@ -192,6 +173,51 @@ const generateStyle = (
     '&:focus': { outline: 'none' }
   }
 
+  const iconGapVariants: Record<
+    NonNullable<HeadingProps['variant']>,
+    string
+  > = {
+    titlePageDesktop: componentTheme.gapIconLg,
+    titlePageMobile: componentTheme.gapIconLg,
+    titleSection: componentTheme.gapIconLg,
+    titleCardSection: componentTheme.gapIconLg,
+    titleModule: componentTheme.gapIconMd,
+    titleCardLarge: componentTheme.gapIconMd,
+    titleCardRegular: componentTheme.gapIconMd,
+    titleCardMini: componentTheme.gapIconSm,
+    label: componentTheme.gapIconSm,
+    labelInline: componentTheme.gapIconSm
+  }
+
+  const iconGapLevels: Record<
+    Exclude<HeadingProps['level'], 'reset' | undefined>,
+    string
+  > = {
+    h1: componentTheme.gapIconLg,
+    h2: componentTheme.gapIconLg,
+    h3: componentTheme.gapIconMd,
+    h4: componentTheme.gapIconMd,
+    h5: componentTheme.gapIconSm,
+    h6: componentTheme.gapIconSm
+  }
+
+  const getIconGap = () => {
+    if (variant) return { gap: iconGapVariants[variant] }
+    if (level && level !== 'reset') return { gap: iconGapLevels[level] }
+    if (
+      props.as &&
+      typeof props.as === 'string' &&
+      ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(props.as)
+    ) {
+      return {
+        gap: iconGapLevels[
+          props.as as Exclude<HeadingProps['level'], 'reset' | undefined>
+        ]
+      }
+    }
+    return { gap: componentTheme.gapIconLg }
+  }
+
   return {
     heading: {
       label: 'heading',
@@ -216,26 +242,31 @@ const generateStyle = (
         background: 'transparent',
         WebkitTextFillColor: 'unset'
       },
-      paddingRight: '.25rem'
+      ...(aiVariant !== 'stacked' && { paddingRight: '.25rem' })
     },
     igniteAIStacked: {
       label: 'heading__ignite-ai-stacked',
       fontSize: '1rem',
       lineHeight: '1.25rem',
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      gap: componentTheme.gapIconSm
+    },
+    igniteAIHorizontal: {
+      label: 'heading__ignite-ai-horizontal',
+      display: 'flex',
+      alignItems: 'center',
+      ...getIconGap()
     },
     withIcon: {
       label: 'heading__with-icon',
       display: 'flex',
       alignItems: 'center',
-      ...(aiVariant === 'stacked'
-        ? {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start'
-          }
-        : {})
+      ...(aiVariant === 'stacked' && {
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+      }),
+      ...getIconGap()
     }
   }
 }

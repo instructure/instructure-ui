@@ -59,6 +59,8 @@ type HeadingOwnProps = {
     | 'primary-inverse'
     | 'secondary-inverse'
     | 'inherit'
+    | 'primary-on'
+    | 'secondary-on'
     | 'ai'
   /**
    * The level of the heading in the DOM: h1 is largest; h6 is smallest.
@@ -113,7 +115,7 @@ type HeadingProps = HeadingOwnProps &
   OtherHTMLAttributes<HeadingOwnProps>
 
 type HeadingStyle = ComponentStyle<
-  'heading' | 'igniteAI' | 'igniteAIStacked' | 'withIcon'
+  'heading' | 'igniteAI' | 'igniteAIStacked' | 'igniteAIHorizontal' | 'withIcon'
 >
 const allowedProps: AllowedPropKeys = [
   'aiVariant',
