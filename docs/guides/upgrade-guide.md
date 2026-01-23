@@ -59,7 +59,41 @@ type: example
 </InstUISettingsProvider>
 ```
 
-## API Changes
+### Heading
+
+`color` prop has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
+
+The default value of the `color` prop has changed from `'inherit'` to `'primary'`. If you need to preserve the previous behavior, explicitly set `color="inherit"`.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"weightImportant",note:""},
+    {name:"lineHeight125",note:""},
+    {name:"lineHeight150",note:""}
+  ]}
+  changed={[
+    {oldName:"primaryColor",newName:"baseColor",note:""},
+    {oldName:"secondaryColor",newName:"mutedColor",note:""},
+    {oldName:"primaryInverseColor",newName:"inverseColor",note:""},
+    {oldName:"secondaryInverseColor",newName:"inverseColor",note:""},
+    {oldName:"titlePageDesktop",newName:"titlePageDesktop",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titlePageMobile",newName:"titlePageMobile",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleSection",newName:"titleSection",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardSection",newName:"titleCardSection",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleModule",newName:"titleModule",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardLarge",newName:"titleCardLarge",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardRegular",newName:"titleCardRegular",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"titleCardMini",newName:"titleCardMini",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"label",newName:"label",note:"now returns a full typography object instead of just a font size"},
+    {oldName:"labelInline",newName:"labelInline",note:"now returns a full typography object instead of just a font size"}
+  ]}
+/>
+
+```
 
 ### Breadcrumb
 
