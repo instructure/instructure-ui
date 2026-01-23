@@ -217,13 +217,14 @@ describe('<ToggleGroup />', () => {
       </ToggleGroup>
     )
     const toggle = container.querySelector('button')!
-    const svg = container.querySelector('svg')!
+    let svg = container.querySelector('svg')!
 
     expect(svg).toHaveTextContent('Icon collapsed')
 
     await userEvent.click(toggle)
 
     await waitFor(() => {
+      svg = container.querySelector('svg')!
       expect(svg).toHaveTextContent('Icon expanded')
     })
   })
