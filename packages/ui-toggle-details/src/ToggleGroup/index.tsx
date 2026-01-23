@@ -27,8 +27,7 @@ import { Component } from 'react'
 import {
   omitProps,
   pickProps,
-  getElementType,
-  callRenderProp
+  getElementType
 } from '@instructure/ui-react-utils'
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
@@ -38,23 +37,29 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 import {
-  IconArrowOpenEndSolid,
-  IconArrowOpenDownSolid
+  ChevronRightInstUIIcon,
+  ChevronDownInstUIIcon,
+  renderIconWithProps
 } from '@instructure/ui-icons'
 import type { ToggleGroupProps } from './props'
 import { allowedProps } from './props'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
+
+const toggleGroupSizeToIconSize = {
+  small: 'md',
+  medium: 'md',
+  large: 'lg'
+} as const
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 
@@ -62,8 +67,8 @@ class ToggleGroup extends Component<ToggleGroupProps> {
 
   static defaultProps = {
     size: 'medium',
-    icon: IconArrowOpenEndSolid,
-    iconExpanded: IconArrowOpenDownSolid,
+    icon: ChevronRightInstUIIcon,
+    iconExpanded: ChevronDownInstUIIcon,
     defaultExpanded: false,
     transition: true,
     as: 'span',
@@ -106,7 +111,10 @@ class ToggleGroup extends Component<ToggleGroupProps> {
 
   renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
-    return Icon ? callRenderProp(Icon) : null
+    if (!Icon) return null
+
+    const iconSize = toggleGroupSizeToIconSize[this.props.size!]
+    return renderIconWithProps(Icon, iconSize, 'baseColor')
   }
 
   renderToggle(
