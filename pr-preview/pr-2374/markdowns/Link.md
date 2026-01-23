@@ -131,23 +131,6 @@ type: example
 <Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
 ```
 
-### Underlines
-
-Link's primary use is inline with other content, which is why it is underlined by default. For rare situations where Link needs
-to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. **Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.**
-
-```js
----
-type: example
----
-<Link
-  href="http://instructure.design"
-  isWithinText={false}
->
-  I have no default underline
-</Link>
-```
-
 ### Truncating text
 
 Use [TruncateText](TruncateText) to truncate text within Link. Note this will cause Link to display `inline-flex`,
@@ -159,7 +142,6 @@ type: example
 ---
 <Link
   onClick={() => console.log('clicked')}
-  isWithinText={false}
   renderIcon={<DiamondInstUIIcon />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
@@ -200,21 +182,34 @@ type: example
 
 ### Theme overrides
 
-Examples showing how theme overrides work for Link:
+Examples showing how [theme overrides](using-theme-overrides) work for Link:
 
 ```js
 ---
 type: example
 ---
 <div>
-  <Text>The quick brown fox <Link
-    href="https://instructure.github.io/instructure-ui/"
-    themeOverride={{
-      textColor: 'red',
-      textHoverColor: 'green',
-      fontWeight: 700
-    }}>jumps</Link> over the lazy dog.
-  </Text>
+  <InstUISettingsProvider
+    theme={{
+      newTheme: {
+        sharedTokens: {
+          focusOutline: {
+            infoColor: 'pink',
+            width: '0.5rem',
+          }
+        }
+      }
+    }}
+  >
+    <Text>The quick brown fox <Link
+      href="https://instructure.github.io/instructure-ui/"
+      themeOverride={{
+        textColor: 'red',
+        textHoverColor: 'green',
+        fontWeight: 700
+      }}>jumps</Link> over the lazy dog.
+    </Text>
+  </InstUISettingsProvider>
 </div>
 ```
 
@@ -231,14 +226,14 @@ type: example
       textHoverColor: 'magenta',
       onColorTextColor: 'orange',
       onColorTextHoverColor: 'lime',
-      fontWeight: 100
+      fontWeight: 700
   }}
   >jumps</Link> over the lazy dog.</Text>
   <br />
   <Text color="primary-inverse">The quick brown fox <Link
     href="https://instructure.github.io/instructure-ui/"
-    color="link-inverse"
     renderIcon={<LogOutInstUIIcon />}
+    color="link-inverse"
     themeOverride={{
       textColor: 'red',
       textHoverColor: 'magenta',
@@ -281,7 +276,6 @@ type: embed
 | Link | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size. |
 | Link | iconPlacement | `'start' \| 'end'` | No | `'start'` | Place the icon before or after the text in the Link. |
 | Link | display | `'auto' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
-| Link | isWithinText | `boolean` | No | `true` | Set `false` to remove default underline if Link does not appear inline with text |
 | Link | onBlur | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link loses focus |
 | Link | onClick | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is clicked |
 | Link | onFocus | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link gains focus |
