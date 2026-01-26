@@ -34,7 +34,7 @@ type: example
       return (
         <Link
           href="#"
-          isWithinText={false}
+          variant="standalone"
           renderIcon={IconArrowOpenStartLine}
         >
           <TruncateText>University of Utah Colleges</TruncateText>

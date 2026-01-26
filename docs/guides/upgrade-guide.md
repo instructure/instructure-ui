@@ -217,6 +217,8 @@ type: embed
 
 ### Link
 
+- `isWithinText` prop has been removed.
+
 #### New `size` prop
 
 A new `size` prop has been added to control the font size, line height, and icon size/gap. Available values are:

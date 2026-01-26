@@ -356,7 +356,7 @@ class Hero extends Component<HeroProps> {
         <Link
           display="block"
           href="https://www.instructure.com/canvas/"
-          isWithinText={false}
+          variant="standalone"
           themeOverride={{
             hoverTextDecorationOutsideText: 'none'
           }}
