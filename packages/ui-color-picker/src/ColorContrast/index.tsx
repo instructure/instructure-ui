@@ -33,7 +33,7 @@ import {
 import { withStyleRework as withStyle } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
-import { Pill } from '@instructure/ui-pill'
+import { Pill } from '@instructure/ui-pill/v11.5'
 
 import ColorIndicator from '../ColorIndicator'
 

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./types",
     "module": "CommonJS",
+    "moduleResolution": "node",
     "composite": true,
     "rootDir": "./config"
   },

@@ -6,6 +6,18 @@
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./v11.5": {
+      "import": "./es/Pill_v1/index.js",
+      "require": "./lib/Pill_v1/index.js",
+      "types": "./types/Pill_v1/index.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"

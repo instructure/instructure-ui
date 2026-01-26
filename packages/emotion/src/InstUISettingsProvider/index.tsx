@@ -26,7 +26,10 @@ import { useContext } from 'react'
 import { ThemeProvider } from '@emotion/react'
 
 import { TextDirectionContext } from '@instructure/ui-i18n'
-import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
+import {
+  DeterministicIdContextProvider,
+  VersionProvider
+} from '@instructure/ui-react-utils'
 
 import { getTheme } from '../getTheme'
 
@@ -57,6 +60,10 @@ type InstUIProviderProps = {
    *   - The default `ltr`
    */
   dir?: 'ltr' | 'rtl'
+  /**
+   TODO
+   */
+  version?: string
 }
 
 /**
@@ -69,7 +76,8 @@ function InstUISettingsProvider({
   children,
   theme = {},
   dir,
-  instanceCounterMap
+  instanceCounterMap,
+  version
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -84,13 +92,15 @@ function InstUISettingsProvider({
   }
 
   let providers = (
-    <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
-      <ThemeProvider theme={getTheme(theme)}>
-        <TextDirectionContext.Provider value={finalDir}>
-          {children}
-        </TextDirectionContext.Provider>
-      </ThemeProvider>
-    </DeterministicIdContextProvider>
+    <VersionProvider version={version}>
+      <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
+        <ThemeProvider theme={getTheme(theme)}>
+          <TextDirectionContext.Provider value={finalDir}>
+            {children}
+          </TextDirectionContext.Provider>
+        </ThemeProvider>
+      </DeterministicIdContextProvider>
+    </VersionProvider>
   )
 
   if (dir) {

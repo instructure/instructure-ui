@@ -3,6 +3,7 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "module": "CommonJS",
+    "moduleResolution": "node",
     "sourceMap": true
   }
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { PillTheme } from '@instructure/shared-types'
 import type { PillProps, PillStyle } from './props'
 
 /**
@@ -32,34 +32,39 @@ import type { PillProps, PillStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Pill'],
+  componentTheme: PillTheme,
   props: PillProps
 ): PillStyle => {
   const { color } = props
 
   const pillColorVariants = {
     primary: {
-      color: componentTheme.baseTextColor,
-      borderColor: componentTheme.baseBorderColor
+      color: 'red',
+      borderColor: 'purple'
     },
     success: {
-      color: componentTheme.successTextColor,
-      borderColor: componentTheme.successBorderColor
+      color: componentTheme.successColor,
+      borderColor: componentTheme.successColor
+    },
+    danger: {
+      color: componentTheme.dangerColor,
+      borderColor: componentTheme.dangerColor
     },
     info: {
-      color: componentTheme.infoTextColor,
-      borderColor: componentTheme.infoBorderColor
+      color: componentTheme.infoColor,
+      borderColor: componentTheme.infoColor
     },
     warning: {
-      color: componentTheme.warningTextColor,
-      borderColor: componentTheme.warningBorderColor
+      color: componentTheme.warningColor,
+      borderColor: componentTheme.warningColor
     },
-    error: {
-      color: componentTheme.errorTextColor,
-      borderColor: componentTheme.errorBorderColor
+    alert: {
+      color: componentTheme.alertColor,
+      borderColor: componentTheme.alertColor
     }
   }
 
@@ -68,15 +73,16 @@ const generateStyle = (
       label: 'pill',
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: componentTheme.fontFamily,
       boxSizing: 'border-box',
-      padding: `0 ${componentTheme.paddingHorizontal}`,
-      background: componentTheme.backgroundColor,
+      padding: componentTheme.padding,
+      background: componentTheme.background,
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
-      fontFamily: componentTheme.fontFamily,
-      height: componentTheme.height,
-      lineHeight: componentTheme.lineHeight,
+      /* line-height does not account for top/bottom border width */
+      lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
       ...pillColorVariants[color!]
     },
     status: {

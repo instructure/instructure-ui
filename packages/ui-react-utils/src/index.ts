@@ -40,6 +40,7 @@ export {
   withDeterministicId,
   useDeterministicId
 } from './DeterministicIdContext'
+export { VersionContext, VersionProvider, useVersion } from './VersionContext'
 
 export type { GetInteractionOptions } from './getInteraction'
 export type { InteractionType } from './getInteraction'
@@ -47,3 +48,4 @@ export type {
   DeterministicIdProviderValue,
   WithDeterministicIdProps
 } from './DeterministicIdContext'
+export type { VersionContextValue } from './VersionContext'
