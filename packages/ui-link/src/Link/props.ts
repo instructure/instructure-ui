@@ -104,11 +104,6 @@ type LinkOwnProps = {
   display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
 
   /**
-   * Set `false` to remove default underline if Link does not appear inline with text
-   */
-  isWithinText?: boolean
-
-  /**
    * Fires when the Link loses focus
    */
   onBlur?: (event: React.FocusEvent<ViewOwnProps>) => void
@@ -177,7 +172,6 @@ const allowedProps: AllowedPropKeys = [
   'renderIcon',
   'iconPlacement',
   'display',
-  'isWithinText',
   'onBlur',
   'onClick',
   'onFocus',
