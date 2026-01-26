@@ -131,7 +131,7 @@ class TopNavBarBreadcrumb extends Component<
             {lastButOneLink && (
               <Link
                 href={lastButOneLink.props.href}
-                isWithinText={false}
+                variant="standalone"
                 renderIcon={IconArrowOpenStartLine}
               >
                 {lastButOneLink.props.children}

@@ -26,7 +26,7 @@ import { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { LinkProps, LinkStyle, LinkStyleProps } from './props'
 import {
   calcFocusOutlineStyles,
-  calcSpacingFromShorthand,
+  calcSpacingFromShorthand
 } from '@instructure/emotion'
 /**
  * ---
@@ -51,7 +51,6 @@ const generateStyle = (
   > = {}
 ): LinkStyle => {
   const {
-    isWithinText,
     renderIcon,
     iconPlacement = 'start', // TODO workaround needed for react 19 where defaultprops doesn't apply for some reasong
     color,
@@ -175,20 +174,15 @@ const generateStyle = (
     lineHeight: variantStyles.lineHeight,
     ...(variantStyles.fontFamily && { fontFamily: variantStyles.fontFamily }),
     ...(variantStyles.fontWeight && { fontWeight: variantStyles.fontWeight }),
-    '&:hover, &:active': {
+    '&:hover, &:active, &:focus': {
       color: componentTheme.textHoverColor,
-      textDecoration: isWithinText
-        ? componentTheme.hoverTextDecorationWithinText
-        : componentTheme.hoverTextDecorationOutsideText
+      // a11y requirement: interactive links must be underlined on interaction
+      textDecoration: 'underline'
     },
     // Use textDecoration from variantStyles if available (from inlineLink token), otherwise fallback
     ...(variantStyles.textDecoration
       ? { textDecoration: variantStyles.textDecoration }
-      : {
-        textDecoration: isWithinText
-          ? componentTheme.textDecorationWithinText
-          : componentTheme.textDecorationOutsideText
-      })
+      : { textDecoration: 'underline' })
   }
 
   const buttonStyle = {

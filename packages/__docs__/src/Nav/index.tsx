@@ -306,7 +306,7 @@ class Nav extends Component<NavProps, NavState> {
           onClick={(e: any) => this.handleInternalNavigation(docId, e)}
           display="block"
           href={`/${docId}`} // Keep href simple
-          isWithinText={false}
+          variant="standalone"
         >
           {docs[docId].title}
         </Link>
@@ -472,7 +472,7 @@ class Nav extends Component<NavProps, NavState> {
             <Link
               display="block"
               onClick={(e: any) => this.handleInternalNavigation(themeKey, e)}
-              isWithinText={false}
+              variant="standalone"
               href={`/${themeKey}`}
             >
               {themeKey}

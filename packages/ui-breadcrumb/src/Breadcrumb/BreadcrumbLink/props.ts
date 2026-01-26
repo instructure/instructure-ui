@@ -78,7 +78,6 @@ type BreadcrumbLinkProps = PickPropsWithExceptions<
   | 'onClick'
   | 'renderIcon'
   | 'iconPlacement'
-  | 'isWithinText'
   | 'elementRef'
 > &
   BreadcrumbLinkOwnProps &
