@@ -10,24 +10,9 @@ describes: Link
 ---
 type: example
 ---
-  <div>
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/"
-                                themeOverride={{
-                                  focusOutlineColor: 'pink'
-                                }}>jumps</Link> over the lazy dog.</Text>
-<Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link>
-</div>
-```
-
-```js
----
-type: example
----
-<View background="primary-inverse" as="div">
-  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/" themeOverride={{
-    focusInverseIconOutlineColor: 'pink'
-  }}>jumps</Link> over the lazy dog.</Text>
-</View>
+<Link href="https://instructure.github.io/instructure-ui/" target="_blank">
+  Link text
+</Link>
 ```
 
 ### Controlled navigation
@@ -147,23 +132,6 @@ type: example
 <Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
 ```
 
-### Underlines
-
-Link's primary use is inline with other content, which is why it is underlined by default. For rare situations where Link needs
-to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. **Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.**
-
-```js
----
-type: example
----
-<Link
-  href="http://instructure.design"
-  isWithinText={false}
->
-  I have no default underline
-</Link>
-```
-
 ### Truncating text
 
 Use [TruncateText](TruncateText) to truncate text within Link. Note this will cause Link to display `inline-flex`,
@@ -175,7 +143,6 @@ type: example
 ---
 <Link
   onClick={() => console.log('clicked')}
-  isWithinText={false}
   renderIcon={<DiamondInstUIIcon />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
@@ -216,22 +183,34 @@ type: example
 
 ### Theme overrides
 
-Examples showing how theme overrides work for Link:
+Examples showing how [theme overrides](using-theme-overrides) work for Link:
 
 ```js
 ---
 type: example
 ---
 <div>
-  <Text>The quick brown fox <Link
-    href="https://instructure.github.io/instructure-ui/"
-    themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusOutlineColor: 'pink'
-    }}>jumps</Link> over the lazy dog.
-  </Text>
+  <InstUISettingsProvider
+    theme={{
+      newTheme: {
+        sharedTokens: {
+          focusOutline: {
+            infoColor: 'pink',
+            width: '0.5rem',
+          }
+        }
+      }
+    }}
+  >
+    <Text>The quick brown fox <Link
+      href="https://instructure.github.io/instructure-ui/"
+      themeOverride={{
+        textColor: 'red',
+        textHoverColor: 'green',
+        fontWeight: 700
+      }}>jumps</Link> over the lazy dog.
+    </Text>
+  </InstUISettingsProvider>
 </div>
 ```
 
@@ -241,25 +220,27 @@ type: example
 ---
 <View background="primary-inverse" as="div">
   <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
+    color="link"
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseOutlineColor: 'green'
+      textColor: 'red',
+      textHoverColor: 'magenta',
+      onColorTextColor: 'orange',
+      onColorTextHoverColor: 'lime',
+      fontWeight: 700
   }}
   >jumps</Link> over the lazy dog.</Text>
   <br />
   <Text color="primary-inverse">The quick brown fox <Link
-    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
-    renderIcon={<IconUserLine />}
+    renderIcon={<LogOutInstUIIcon />}
+    color="link-inverse"
     themeOverride={{
-      focusOutlineWidth: '0.5rem',
-      focusOutlineStyle: 'dashed',
-      focusOutlineBorderRadius: '0',
-      focusInverseIconOutlineColor: 'red'
+      textColor: 'red',
+      textHoverColor: 'magenta',
+      onColorTextColor: 'orange',
+      onColorTextHoverColor: 'lime',
+      fontWeight: 700
   }}
   >jumps</Link> over the lazy dog.</Text>
 </View>
