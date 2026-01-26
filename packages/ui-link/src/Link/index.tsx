@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Children, Component, isValidElement } from 'react'
+import { Children, Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -31,12 +31,11 @@ import {
   getElementType,
   getInteraction,
   matchComponentTypes,
-  passthroughProps,
-  callRenderProp,
-  safeCloneElement
+  passthroughProps
 } from '@instructure/ui-react-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
+import { renderIconWithProps } from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -61,7 +60,6 @@ class Link extends Component<LinkProps, LinkState> {
     interaction: undefined,
     color: 'link',
     iconPlacement: 'start',
-    isWithinText: true,
     forceButtonRole: true
   } as const
 
@@ -251,34 +249,19 @@ class Link extends Component<LinkProps, LinkState> {
       size = 'medium'
     }
 
-    // Map Link sizes to Lucide icon semantic size tokens
+    // Map Link sizes to icon sizes
     const linkSizeToIconSize = {
       small: 'xs',
       medium: 'sm',
       large: 'lg'
     } as const
 
-    const iconSize = linkSizeToIconSize[size || 'medium']
+    const iconSize =
+      linkSizeToIconSize[(size || 'medium') as keyof typeof linkSizeToIconSize]
 
-    // TODO use utility function for this in the furure
-    const isLucideIcon =
-      renderIcon &&
-      isValidElement(renderIcon) &&
-      (renderIcon as any).type?.displayName?.startsWith('wrapLucideIcon')
-
-    if (isLucideIcon) {
-      // Lucide icons - render with size prop
-      return (
-        <span css={this.props.styles?.icon}>
-          {safeCloneElement(renderIcon, { size: iconSize })}
-        </span>
-      )
-    }
-
-    // Non-Lucide icons or functions - render without size prop
     return (
       <span css={this.props.styles?.icon}>
-        {callRenderProp(renderIcon as any)}
+        {renderIconWithProps(renderIcon, iconSize, undefined)}
       </span>
     )
   }
@@ -293,7 +276,6 @@ class Link extends Component<LinkProps, LinkState> {
       margin,
       renderIcon,
       iconPlacement,
-      isWithinText,
       ...props
     } = this.props
 

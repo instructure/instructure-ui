@@ -96,7 +96,7 @@ class BreadcrumbLink extends Component<
           iconPlacement={iconPlacement}
           onClick={onClick}
           onMouseEnter={onMouseEnter}
-          isWithinText={false}
+          variant="standalone"
           elementRef={this.handleRef}
           forceButtonRole={false}
           size={size}

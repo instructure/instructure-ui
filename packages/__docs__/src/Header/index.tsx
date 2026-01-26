@@ -137,7 +137,7 @@ class Header extends Component<HeaderProps> {
       <View as="div" margin="none none medium" padding="none medium">
         <Link
           href="index"
-          isWithinText={false}
+          variant="standalone"
           display="block"
           onClick={(e) => {
             e.preventDefault()
@@ -160,7 +160,7 @@ class Header extends Component<HeaderProps> {
           ) : (
             <Link
               href="index"
-              isWithinText={false}
+              variant="standalone"
               display="block"
               onClick={(e) => {
                 e.preventDefault()
