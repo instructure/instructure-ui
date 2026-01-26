@@ -358,6 +358,10 @@
           "md": {
             "value": "{spacing.gap.cards.md}",
             "type": "spacing"
+          },
+          "lg": {
+            "value": "{spacing.gap.cards.lg}",
+            "type": "spacing"
           }
         },
         "inputs": {
