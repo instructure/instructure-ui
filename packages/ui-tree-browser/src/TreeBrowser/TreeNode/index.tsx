@@ -25,14 +25,20 @@
 import { Component, ContextType } from 'react'
 
 import { Img } from '@instructure/ui-img'
-import { callRenderProp } from '@instructure/ui-react-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
+import { renderIconWithProps } from '@instructure/ui-icons'
 
 import generateStyles from '../TreeButton/styles'
-import generateComponentTheme from '../TreeButton/theme'
 import type { TreeBrowserNodeProps } from './props'
 import { allowedProps } from './props'
 import TreeBrowserContext from '../TreeBrowserContext'
+
+// Map TreeBrowser size tokens to icon size tokens
+const treeBrowserSizeToIconSize = {
+  small: 'md',
+  medium: 'lg',
+  large: 'xl'
+} as const
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
@@ -44,8 +50,8 @@ id: TreeBrowser.Node
 A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/
-@withStyle(generateStyles, generateComponentTheme)
-class TreeNode extends Component<TreeBrowserNodeProps> {
+@withStyle(generateStyles, 'TreeBrowserTreeButton')
+class TreeNode extends Component<TreeBrowserNodeProps, { isHovered: boolean }> {
   static readonly componentId = 'TreeBrowser.Node'
 
   static allowedProps = allowedProps
@@ -57,17 +63,28 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
     size: 'medium',
     variant: 'folderTree',
     selected: false,
-    focused: false
+    focused: false,
+    hoverable: true
   }
 
   ref: Element | null = null
 
+  state = {
+    isHovered: false
+  }
+
   componentDidMount() {
-    this.props.makeStyles?.({ animation: this.context?.animation })
+    this.props.makeStyles?.({
+      animation: this.context?.animation,
+      hoverable: this.props.hoverable
+    })
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.({ animation: this.context?.animation })
+    this.props.makeStyles?.({
+      animation: this.context?.animation,
+      hoverable: this.props.hoverable
+    })
   }
 
   handleRef = (el: HTMLDivElement) => {
@@ -77,8 +94,29 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
     this.ref = el
   }
 
+  handleMouseEnter = () => {
+    if (this.props.hoverable) {
+      this.setState({ isHovered: true })
+    }
+  }
+
+  handleMouseLeave = () => {
+    if (this.props.hoverable) {
+      this.setState({ isHovered: false })
+    }
+  }
+  getIconColor(): 'baseColor' | 'onColor' | 'inverseColor' {
+    const { selected } = this.props
+    const { isHovered } = this.state
+
+    // Priority: selected > hover > default
+    if (selected) return 'onColor'
+    if (isHovered) return 'inverseColor'
+    return 'baseColor'
+  }
   renderItemImage() {
-    const { thumbnail, itemIcon, styles } = this.props
+    const { thumbnail, itemIcon, styles, size } = this.props
+
     if (thumbnail) {
       return (
         <div css={styles?.thumbnail}>
@@ -87,7 +125,11 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
       )
     }
     if (itemIcon) {
-      return <div css={styles?.icon}>{callRenderProp(itemIcon)}</div>
+      const iconSize = treeBrowserSizeToIconSize[size!]
+      const iconColor = this.getIconColor()
+      const iconElement = renderIconWithProps(itemIcon, iconSize, iconColor)
+
+      return <div css={styles?.icon}>{iconElement}</div>
     }
     return undefined
   }
@@ -100,6 +142,8 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
         tabIndex={-1}
         css={styles?.treeButton}
         data-cid="TreeNode"
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         <span css={styles?.layout}>
           {this.renderItemImage()}

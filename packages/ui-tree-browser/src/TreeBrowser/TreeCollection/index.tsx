@@ -24,13 +24,12 @@
 
 import { Component, ContextType, ReactElement, SyntheticEvent } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
 import { TreeButton } from '../TreeButton'
 
 import generateStyles from './styles'
-import generateComponentTheme from './theme'
 import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import type { CompareObject } from '../props'
 import { allowedProps } from './props'
@@ -45,7 +44,7 @@ parent: TreeBrowser
 id: TreeBrowser.Collection
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, 'TreeBrowserTreeCollection')
 class TreeCollection extends Component<
   TreeBrowserCollectionProps,
   TreeCollectionState
@@ -227,7 +226,9 @@ class TreeCollection extends Component<
       key: key,
       selected: selection === `child_${key}`,
       focused: this.state.focused === `child_${key}`,
-      level: this.itemsLevel
+      level: this.itemsLevel,
+      size: this.props.size,
+      variant: this.props.variant
     })
     return (
       <li
