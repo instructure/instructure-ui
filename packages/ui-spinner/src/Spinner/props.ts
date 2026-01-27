@@ -37,8 +37,9 @@ type SpinnerOwnProps = {
    */
   delay?: number
   /**
-   * Valid values are from themes. See theme.semantics.spacing. Apply these values via
-   * familiar CSS-like shorthand. For an example see `theme.sharedTokens.spacing`.
+   * Valid values are `0`, `none`, `auto`, and Spacing token values,
+   * see https://instructure.design/layout-spacing. Apply these values via
+   * familiar CSS-like shorthand. For example, `gap="small auto large"`.
    */
   margin?: Spacing
   /**

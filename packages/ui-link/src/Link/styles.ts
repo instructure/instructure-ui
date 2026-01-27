@@ -232,7 +232,7 @@ const generateStyle = (
       // TODO handle the merging on tokens inside the util
       margin: calcSpacingFromShorthand(margin, {
         ...sharedTokens.spacing,
-        ...sharedTokens.legacySpacing
+        ...sharedTokens.legacy.spacing
       }),
       ...calcFocusOutlineStyles(
         sharedTokens.focusOutline,
