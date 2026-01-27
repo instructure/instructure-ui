@@ -195,17 +195,17 @@
           "type": "spacing"
         }
       },
-      "widthSmall": {
-        "value": "{borderWidth.sm}",
-        "type": "borderWidth"
+      "radiusSmall": {
+        "value": "0.125rem",
+        "type": "borderRadius"
       },
-      "widthMedium": {
-        "value": "{borderWidth.md}",
-        "type": "borderWidth"
+      "radiusMedium": {
+        "value": "0.25rem",
+        "type": "borderRadius"
       },
-      "widthLarge": {
-        "value": "{borderWidth.lg}",
-        "type": "borderWidth"
+      "radiusLarge": {
+        "value": "0.5rem",
+        "type": "borderRadius"
       }
     },
     "boxShadow": {
