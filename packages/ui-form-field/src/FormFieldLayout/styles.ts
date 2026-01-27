@@ -88,7 +88,10 @@ const generateStyle = (
 ): FormFieldLayoutStyle => {
   const { inline, layout, vAlign, labelAlign, margin, messages } = params
   const { hasMessages, hasVisibleLabel, hasErrorMsgAndIsGroup } = params
-  const cssMargin = calcSpacingFromShorthand(margin, {...sharedTokens.spacing, ...sharedTokens.legacySpacing})
+  const cssMargin = calcSpacingFromShorthand(margin, {
+    ...sharedTokens.spacing,
+    ...sharedTokens.legacy.spacing
+  })
   const isInlineLayout = layout === 'inline'
 
   const hasNonEmptyMessages = messages?.reduce(

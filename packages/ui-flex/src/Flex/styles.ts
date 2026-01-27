@@ -44,7 +44,7 @@ import type { FlexProps, FlexStyle } from './props'
 const generateStyle = (
   componentTheme: NewComponentTypes['Flex'],
   props: FlexProps,
-  SharedTokens: SharedTokens
+  sharedTokens: SharedTokens
 ): FlexStyle => {
   const { justifyItems, wrap, direction, gap } = props
 
@@ -88,7 +88,10 @@ const generateStyle = (
   }
 
   // gap css prop
-  const gapValues = makeThemeVars('gap', SharedTokens.legacySpacing)
+  const gapValues = makeThemeVars('gap', {
+    ...sharedTokens.spacing,
+    ...sharedTokens.legacy.spacing
+  })
   const getGapValue = (gap: FlexProps['gap'], values: Record<string, string>) =>
     getShorthandPropValue('Flex', values, gap, 'gap')
 
