@@ -329,6 +329,10 @@ type: example
 
 An example of a `<TreeBrowser />` with a custom item after each collection.
 
+When rendering custom interactive content (such as input fields), use the `hoverable` prop on `<TreeBrowser.Node />` to control the default hover behavior. Set it to `false` to disable hover effects while custom interactive elements are shown.
+
+This example uses controlled selection (the `selection` prop with the `onSelectionChange` callback) to manage the selected state. Clicking the custom node clears the current selection by calling `setSelection('')`, ensuring a clean and predictable user experience.
+
 ```js
 ---
 type: example
@@ -336,11 +340,13 @@ type: example
 const Example = () => {
   const [expanded, setExpanded] = useState(true)
   const [hoveredLine, setHoveredLine] = useState(null)
+  const [selection, setSelection] = useState('')
   const nodeRef = useRef(null)
 
   const handleExpandToggle = useCallback((e, newExpandedState) => {
     e.stopPropagation()
     setExpanded(newExpandedState)
+    setSelection('')
     nodeRef.current?.focus()
   }, [])
 
@@ -357,52 +363,42 @@ const Example = () => {
   const renderInput = () => {
     if (expanded) {
       return (
-        <InstUISettingsProvider
-          theme={(theme) => ({
-            newTheme: {
-              sharedTokens: {
-                focusOutline: {
-                  ...(hoveredLine && {
-                    infoColor: theme.key === 'rebrand-dark' ? 'black' : 'white'
-                  })
-                }
-              }
-            }
-          })}
+        <View
+          as="div"
+          padding="xx-small"
+          onFocus={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation()
+            setSelection('')
+          }}
+          onMouseEnter={() => setHoveredLine('renderAfter')}
+          onMouseLeave={() => setHoveredLine(null)}
         >
-          <View
-            as="div"
-            padding="xx-small"
-            onFocus={(e) => e.stopPropagation()}
-            onClick={(e) => e.stopPropagation()}
-            onMouseEnter={() => setHoveredLine('renderAfter')}
-            onMouseLeave={() => setHoveredLine(null)}
+          <TextInput
+            placeholder="Enter new group name"
+            display="inline-block"
+            width="12rem"
+            renderLabel=""
+            onKeyDown={(e) => e.stopPropagation()}
+            onFocus={() => setSelection('')}
+          />
+          <IconButton
+            screenReaderLabel="Cancel"
+            onClick={(e) => handleExpandToggle(e, false)}
+            onKeyDown={(e) => handleKeyPress(e, false)}
+            margin="0 0 0 small"
           >
-            <TextInput
-              placeholder="Enter new group name"
-              display="inline-block"
-              width="12rem"
-              renderLabel=""
-              onKeyDown={(e) => e.stopPropagation()}
-            />
-            <IconButton
-              screenReaderLabel="Cancel"
-              onClick={(e) => handleExpandToggle(e, false)}
-              onKeyDown={(e) => handleKeyPress(e, false)}
-              margin="0 0 0 small"
-            >
-              <XInstUIIcon />
-            </IconButton>
-            <IconButton
-              screenReaderLabel="Add new group"
-              onClick={(e) => handleExpandToggle(e, false)}
-              onKeyDown={(e) => handleKeyPress(e, false)}
-              margin="0 0 0 small"
-            >
-              <CheckInstUIIcon />
-            </IconButton>
-          </View>
-        </InstUISettingsProvider>
+            <XInstUIIcon />
+          </IconButton>
+          <IconButton
+            screenReaderLabel="Add new group"
+            onClick={(e) => handleExpandToggle(e, false)}
+            onKeyDown={(e) => handleKeyPress(e, false)}
+            margin="0 0 0 small"
+          >
+            <CheckInstUIIcon />
+          </IconButton>
+        </View>
       )
     }
 
@@ -416,6 +412,7 @@ const Example = () => {
       onKeyDown={(e) => handleKeyPress(e, !expanded)}
       itemIcon={expanded ? '' : <PlusInstUIIcon />}
       size="large"
+      hoverable={!expanded}
     >
       {renderInput()}
     </TreeBrowser.Node>
@@ -424,6 +421,8 @@ const Example = () => {
   return (
     <TreeBrowser
       selectionType="single"
+      selection={selection}
+      onSelectionChange={(newSelection) => setSelection(newSelection)}
       size="large"
       defaultExpanded={[1, 2]}
       collections={{
@@ -722,6 +721,9 @@ type: embed
 | TreeBrowser | expanded | `(string \| number \| undefined)[]` | No | - | an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop |
 | TreeBrowser | defaultExpanded | `(string \| number)[]` | No | `[]` | an array of collection ids to expand by default |
 | TreeBrowser | selectionType | `'none' \| 'single'` | No | `'none'` | There are 2 types of tree selection: single and multi. This is set up to allow for "multi" in the future without having to deprecate the old API. |
+| TreeBrowser | selection | `string` | No | - | The currently selected item or collection (controlled). Format: 'item_<id>' or 'collection_<id>' or empty string for no selection. Must be used with onSelectionChange callback. |
+| TreeBrowser | defaultSelection | `string` | No | - | The default selected item or collection (uncontrolled). Format: 'item_<id>' or 'collection_<id>' or empty string for no selection. @default '' |
+| TreeBrowser | onSelectionChange | `( selection: string, type: 'item' \| 'collection', id: string \| number \| undefined ) => void` | No | - | Called when selection changes. @param selection - The new selection string ('item_<id>', 'collection_<id>', or '') @param type - The type of the selected node ('item' or 'collection') @param id - The id of the selected node |
 | TreeBrowser | onCollectionToggle | `(collection: CollectionData) => void` | No | - |  |
 | TreeBrowser | onItemClick | `(data: CollectionData) => void` | No | - |  |
 | TreeBrowser | showRootCollection | `boolean` | No | `true` | Whether or not to show the root collection specified in rootId prop or to begin with its immediate subcollections and items instead |
@@ -750,6 +752,7 @@ type: embed
 | TreeBrowser.TreeButton | focused | `boolean` | No | `false` |  |
 | TreeBrowser.TreeButton | level | `number` | No | - |  |
 | TreeBrowser.TreeButton | containerRef | `(el: HTMLElement \| null) => void` | No | - | A function that returns a reference to the parent li element |
+| TreeBrowser.TreeButton | hoverable | `boolean` | No | `true` | Whether the button should show hover effects. Set to false to disable hover styling when the button contains custom interactive content. @default true |
 | TreeBrowser.TreeButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | TreeBrowser.TreeButton | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
 | TreeBrowser.TreeButton | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
@@ -784,6 +787,7 @@ type: embed
 | TreeBrowser.TreeCollection | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
 | TreeBrowser.TreeNode | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
 | TreeBrowser.TreeNode | children | `React.ReactNode` | No | - | The children to be rendered within the `<TreeNode />` |
+| TreeBrowser.TreeNode | hoverable | `boolean` | No | `true` | Whether the node should show hover effects. Set to false to disable hover styling when the node contains custom interactive content. @default true |
 | TreeBrowser.TreeNode | size | `` | No | `'medium'` |  |
 | TreeBrowser.TreeNode | variant | `` | No | `'folderTree'` |  |
 | TreeBrowser.TreeNode | selected | `` | No | `false` |  |
