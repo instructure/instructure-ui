@@ -53,9 +53,9 @@ const processBorderRadiusValue = (
     if (v === 'pill') return '999em'
 
     // Handle SharedTokens values
-    if (v === 'small') return sharedTokens.radiusSmall
-    if (v === 'medium') return sharedTokens.radiusMedium
-    if (v === 'large') return sharedTokens.radiusLarge
+    if (v === 'small') return sharedTokens.legacy.radiusSmall // 2px in Canvas
+    if (v === 'medium') return sharedTokens.legacy.radiusMedium // 4px in Canvas
+    if (v === 'large') return sharedTokens.legacy.radiusLarge // 8px in Canvas
 
     // Pass through CSS values (1rem, 12px, etc.)
     return v
@@ -79,9 +79,9 @@ const processBorderWidthValue = (
     if (v === 'none') return '0'
 
     // Handle SharedTokens values
-    if (v === 'small') return sharedTokens.widthSmall
-    if (v === 'medium') return sharedTokens.widthMedium
-    if (v === 'large') return sharedTokens.widthLarge
+    if (v === 'small') return sharedTokens.strokeWidth.sm
+    if (v === 'medium') return sharedTokens.strokeWidth.md
+    if (v === 'large') return sharedTokens.strokeWidth.lg
 
     // Pass through CSS values (1rem, 2px, etc.)
     return v
@@ -133,14 +133,14 @@ const getSpacingStyle = ({
       isRtlDirection ? mirrorShorthandEdges(margin) : margin,
       {
         ...sharedTokens.spacing,
-        ...sharedTokens.legacySpacing
+        ...sharedTokens.legacy.spacing
       }
     ),
     padding: calcSpacingFromShorthand(
       isRtlDirection ? mirrorShorthandEdges(padding) : padding,
       {
         ...sharedTokens.spacing,
-        ...sharedTokens.legacySpacing
+        ...sharedTokens.legacy.spacing
       }
     )
   }
