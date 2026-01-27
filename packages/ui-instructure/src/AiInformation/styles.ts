@@ -22,21 +22,23 @@
  * SOFTWARE.
  */
 
-import type { AiInformationTheme } from '@instructure/shared-types'
-import type { AiInformationProps, AiInformationStyle } from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { AiInformationStyle } from './props'
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @param componentTheme The theme variable object.
+ * @param params Additional parameters to customize the style.
+ * @param sharedTokens Shared token object that stores common values for the theme.
+ * @return The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: AiInformationTheme,
-  _props: AiInformationProps
+  componentTheme: NewComponentTypes['AiInformation'],
+  _params: Record<string, never>,
+  _sharedTokens: SharedTokens
 ): AiInformationStyle => {
   return {
     aiInformation: {
@@ -47,6 +49,10 @@ const generateStyle = (
     },
     header: {
       label: 'ai-information__header',
+      marginBottom: componentTheme.headingBottomMargin
+    },
+    privacyNotice: {
+      label: 'ai-information__privacyNotice',
       marginBottom: componentTheme.headingBottomMargin
     },
     featureName: {
@@ -60,7 +66,10 @@ const generateStyle = (
     permissionLevel: {
       label: 'ai-information__permission-level',
       marginBottom: componentTheme.permissionLevelBottomMargin,
-      color: componentTheme.levelColor
+      color: componentTheme.levelColor,
+      '& > *': {
+        color: `${componentTheme.levelColor} !important`
+      }
     },
     description: {
       label: 'ai-information__description',

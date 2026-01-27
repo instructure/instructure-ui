@@ -29,6 +29,7 @@
     "@instructure/ui-buttons": "workspace:*",
     "@instructure/ui-heading": "workspace:*",
     "@instructure/ui-link": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-modal": "workspace:*",
     "@instructure/ui-popover": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
