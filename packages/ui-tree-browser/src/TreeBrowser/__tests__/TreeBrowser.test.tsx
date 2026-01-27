@@ -270,7 +270,7 @@ describe('<TreeBrowser />', () => {
           rootId={2}
         />
       )
-      const iconFolder = container.querySelectorAll('svg[name="IconFolder"]')
+      const iconFolder = container.querySelectorAll('svg[name="FolderClosed"]')
 
       expect(iconFolder.length).toEqual(1)
     })
@@ -399,9 +399,7 @@ describe('<TreeBrowser />', () => {
           defaultExpanded={[2]}
         />
       )
-      const iconDocument = container.querySelectorAll(
-        'svg[name="IconDocument"]'
-      )
+      const iconDocument = container.querySelectorAll('svg[name="FileText"]')
 
       expect(iconDocument.length).toEqual(1)
     })

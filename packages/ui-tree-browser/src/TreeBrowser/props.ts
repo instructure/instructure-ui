@@ -61,6 +61,29 @@ type TreeBrowserOwnProps = {
    * This is set up to allow for "multi" in the future without having to deprecate the old API.
    */
   selectionType?: 'none' | 'single'
+  /**
+   * The currently selected item or collection (controlled).
+   * Format: 'item_<id>' or 'collection_<id>' or empty string for no selection.
+   * Must be used with onSelectionChange callback.
+   */
+  selection?: string
+  /**
+   * The default selected item or collection (uncontrolled).
+   * Format: 'item_<id>' or 'collection_<id>' or empty string for no selection.
+   * @default ''
+   */
+  defaultSelection?: string
+  /**
+   * Called when selection changes.
+   * @param selection - The new selection string ('item_<id>', 'collection_<id>', or '')
+   * @param type - The type of the selected node ('item' or 'collection')
+   * @param id - The id of the selected node
+   */
+  onSelectionChange?: (
+    selection: string,
+    type: 'item' | 'collection',
+    id: string | number | undefined
+  ) => void
   onCollectionToggle?: (collection: CollectionData) => void
   onItemClick?: (data: CollectionData) => void
   /**
@@ -179,6 +202,9 @@ const allowedProps: AllowedPropKeys = [
   'rootId',
   'expanded',
   'defaultExpanded',
+  'selection',
+  'defaultSelection',
+  'onSelectionChange',
   'selectionType',
   'size',
   'variant',

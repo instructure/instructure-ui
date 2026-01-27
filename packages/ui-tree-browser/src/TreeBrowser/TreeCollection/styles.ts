@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { keyframes } from '@instructure/emotion'
+import { keyframes, calcFocusOutlineStyles } from '@instructure/emotion'
 
-import type { TreeBrowserCollectionTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   TreeBrowserCollectionProps,
   TreeBrowserCollectionStyle
@@ -42,13 +42,15 @@ const list = keyframes`
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 
 const generateStyles = (
-  componentTheme: TreeBrowserCollectionTheme,
+  componentTheme: NewComponentTypes['TreeBrowserTreeCollection'],
   props: TreeBrowserCollectionProps,
+  sharedTokens: SharedTokens,
   state: { animation?: boolean }
 ): TreeBrowserCollectionStyle => {
   const { size, variant } = props
@@ -97,7 +99,12 @@ const generateStyles = (
       margin: 0,
       padding: 0,
       '&:focus': {
-        outline: 0
+        outline: 0,
+        '> button, > div': {
+          ...calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            withFocusOutline: true
+          })
+        }
       }
     },
     list: {
@@ -128,7 +135,7 @@ const generateStyles = (
             : {}),
           pointerEvents: 'none',
           width: componentTheme.borderWidth,
-          background: componentTheme.borderColor
+          background: componentTheme.borderColor // Tree vertical lines
         }
       }),
       ...sizeMap[size!][variant!]
@@ -136,7 +143,12 @@ const generateStyles = (
     item: {
       label: 'treeCollection__label',
       '&:focus': {
-        outline: 0
+        outline: 0,
+        '> button, > div': {
+          ...calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            withFocusOutline: true
+          })
+        }
       }
     }
   }
