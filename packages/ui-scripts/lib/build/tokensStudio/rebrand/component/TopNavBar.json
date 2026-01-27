@@ -1,11 +1,4 @@
 {
-  "topNavBar": {
-    "placeholderToken": {
-      "value": "{color.transparentColor}",
-      "type": "color",
-      "description": "TODO: delete this when we fixed the build"
-    }
-  },
   "topNavBarActionItems": {
     "smallViewportActionItemContainerMargin": {
       "value": "3.75rem",
@@ -39,6 +32,10 @@
     },
     "iconPadding": {
       "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "focusOutlineInset": {
+      "value": "-0.25rem",
       "type": "spacing"
     }
   },
