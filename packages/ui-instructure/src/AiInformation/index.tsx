@@ -26,12 +26,13 @@ import { Popover } from '@instructure/ui-popover'
 import { CloseButton } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-heading'
 import { Text } from '@instructure/ui-text'
-import { useStyleRework } from '@instructure/emotion'
+import { Link } from '@instructure/ui-link'
+import { ExternalLinkInstUIIcon } from '@instructure/ui-icons'
+import { useStyle } from '@instructure/emotion'
 import { NutritionFacts, DataPermissionLevels } from '../'
 
 import { AiInformationProps } from './props'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
@@ -57,13 +58,14 @@ const AiInformation = ({
   nutritionFactsFeatureName,
   nutritionFactsData,
   nutritionFactsCloseButtonText,
-  nutritionFactsCloseIconButtonScreenReaderLabel
+  nutritionFactsCloseIconButtonScreenReaderLabel,
+  themeOverride
 }: AiInformationProps) => {
   const [open, setOpen] = useState(false)
 
-  const styles = useStyleRework({
+  const styles = useStyle({
     generateStyle,
-    generateComponentTheme,
+    themeOverride,
     componentId: 'AiInformation',
     displayName: 'AiInformation'
   })
@@ -99,6 +101,8 @@ const AiInformation = ({
               (
                 {
                   featureName,
+                  privacyNoticeText,
+                  privacyNoticeUrl,
                   permissionLevelText,
                   permissionLevel,
                   description,
@@ -110,6 +114,16 @@ const AiInformation = ({
                 index
               ) => (
                 <div key={index}>
+                  <div css={styles?.privacyNotice}>
+                    <Link
+                      href={privacyNoticeUrl}
+                      renderIcon={<ExternalLinkInstUIIcon size="sm" />}
+                      iconPlacement="end"
+                      variant="standalone"
+                    >
+                      {privacyNoticeText}
+                    </Link>
+                  </div>
                   <div css={styles?.featureName}>
                     <Heading level="h3" variant="titleCardRegular">
                       {featureName}
