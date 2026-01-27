@@ -42,20 +42,17 @@ type: example
 ---
 <InstUISettingsProvider
   theme={{
-  themeOverrides: {
-    canvas: {
-      componentOverrides: {
-        SharedTokens: {
-          focusOutline: {
-            infoColor: 'red',
-            offset: '2rem'
-          }
+    newTheme: { // TODO remove this when we remove the old theme
+      sharedTokens: {
+        focusOutline: {
+          infoColor: 'green',
+          width: '0.4rem',
+          offset: '0rem'
         }
       }
     }
-  }
-}}>
-  <TextInput renderLabel="Name" placeholder="Doe, John Doe"/>
+  }}>
+  <TextInput renderLabel="Name" placeholder="Note: Change example when the old theme is renamed!"/>
 </InstUISettingsProvider>
 ```
 
