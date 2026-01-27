@@ -367,6 +367,7 @@ type: embed
 />
 
 ```
+
 ### RadioInput
 
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
@@ -518,6 +519,33 @@ type: embed
 - Some prop values have been deprecated, see [Text](/Text) for more details.
 - `color` has 2 new values: `primary-on` and `secondary-on`, these are used for colored surfaces.
 
+### TreeBrowser
+
+#### Icon system migration
+
+TreeBrowser now uses Lucide icons instead of the legacy icon system:
+
+- Default `collectionIcon` changed from `IconFolderLine` to `FolderClosedInstUIIcon`
+- Default `collectionIconExpanded` changed from `IconFolderLine` to `FolderClosedInstUIIcon`
+- Default `itemIcon` changed from `IconDocumentLine` to `FileTextInstUIIcon`
+
+#### Theme variable changes
+
+**TreeBrowser:**
+
+- theme variable `focusOutlineWidth` is now removed (handled by `sharedTokens`)
+- theme variable `focusOutlineStyle` is now removed (handled by `sharedTokens`)
+- theme variable `focusOutlineColor` is now removed (handled by `sharedTokens`)
+
+**TreeButton:**
+
+- theme variable `focusOutlineWidth` is now removed (handled by `sharedTokens`)
+- theme variable `focusOutlineStyle` is now removed (handled by `sharedTokens`)
+- theme variable `focusOutlineColor` is now removed (handled by `sharedTokens`)
+- theme variable `selectedOutlineWidth` is now removed (handled by `sharedTokens`)
+- theme variable `iconColor` is now removed
+- theme variable `iconsMarginRight` is now removed
+
 ### Tag
 
 ```js
@@ -604,6 +632,7 @@ type: embed
 />
 
 ```
+
 ### RangeInput
 
 ```js

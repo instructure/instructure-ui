@@ -25,17 +25,19 @@
 import { Component, SyntheticEvent } from 'react'
 import keycode from 'keycode'
 
-import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
+import {
+  FolderClosedInstUIIcon,
+  FileTextInstUIIcon
+} from '@instructure/ui-icons'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
 import { TreeButton } from './TreeButton'
 import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
-import generateComponentTheme from './theme'
 import type {
   Collection,
   CollectionData,
@@ -51,7 +53,7 @@ import TreeBrowserContext from './TreeBrowserContext'
 category: components
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles)
 class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   static readonly componentId = 'TreeBrowser'
 
@@ -61,9 +63,9 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     size: 'medium',
     variant: 'folderTree',
     showRootCollection: true,
-    collectionIcon: IconFolderLine,
-    collectionIconExpanded: IconFolderLine,
-    itemIcon: IconDocumentLine,
+    collectionIcon: FolderClosedInstUIIcon,
+    collectionIconExpanded: FolderClosedInstUIIcon,
+    itemIcon: FileTextInstUIIcon,
     getItemProps: (props: unknown) => props,
     getCollectionProps: (props: unknown) => props,
     defaultExpanded: [],
@@ -82,11 +84,21 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
 
   constructor(props: TreeBrowserProps) {
     super(props)
-    if (typeof this.props.expanded === 'undefined') {
-      this.state = { expanded: this.props.defaultExpanded, selection: '' }
-    } else {
-      this.state = { selection: '' }
+    const initialState: TreeBrowserState = {
+      selection: ''
     }
+
+    // Handle expanded state (controlled vs uncontrolled)
+    if (typeof this.props.expanded === 'undefined') {
+      initialState.expanded = this.props.defaultExpanded
+    }
+
+    // Handle selection state (controlled vs uncontrolled)
+    if (typeof this.props.selection === 'undefined') {
+      initialState.selection = this.props.defaultSelection || ''
+    }
+
+    this.state = initialState
   }
 
   componentDidMount() {
@@ -177,6 +189,16 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
       : props.expanded
   }
 
+  get selection() {
+    return this.getSelection(this.state, this.props)
+  }
+
+  getSelection(state: TreeBrowserState, props: TreeBrowserProps) {
+    return typeof props.selection === 'undefined'
+      ? state.selection
+      : props.selection
+  }
+
   expandOrCollapseNode(collection: CollectionData) {
     this.props.onCollectionToggle?.(collection)
     if (typeof this.props.expanded === 'undefined') {
@@ -194,16 +216,41 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   }
 
   handleSelection(id: string | number | undefined, type: string) {
-    const { selectionType } = this.props
-    selectionType === 'single' &&
+    const { selectionType, onSelectionChange } = this.props
+
+    if (selectionType !== 'single') return
+
+    const selection = `${type}_${id}`
+
+    // Call the callback if provided (for controlled selection)
+    if (onSelectionChange) {
+      onSelectionChange(selection, type as 'item' | 'collection', id)
+    }
+
+    // Update internal state only if uncontrolled
+    if (typeof this.props.selection === 'undefined') {
       this.setState((state) => {
-        const selection = `${type}_${id}`
         if (state.selection !== selection) {
           return { selection }
         } else {
           return state
         }
       })
+    }
+  }
+
+  clearSelection = () => {
+    const { onSelectionChange } = this.props
+
+    // Call the callback if provided (for controlled selection)
+    if (onSelectionChange) {
+      onSelectionChange('', 'item', undefined)
+    }
+
+    // Update internal state only if uncontrolled
+    if (typeof this.props.selection === 'undefined') {
+      this.setState({ selection: '' })
+    }
   }
 
   getNavigableNodes() {
@@ -347,7 +394,7 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
           key={i}
           {...pickProps(omitProps(this.props), TreeCollection.allowedProps)}
           {...this.getCollectionProps(collection)}
-          selection={this.state.selection}
+          selection={this.selection}
           onItemClick={this.handleItemClick}
           onCollectionClick={this.handleCollectionClick}
           onKeyDown={this.handleKeyDown}
@@ -365,7 +412,8 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
     return (
       <TreeBrowserContext.Provider
         value={{
-          animation: this.props.animation
+          animation: this.props.animation,
+          clearSelection: this.clearSelection
         }}
       >
         <ul
