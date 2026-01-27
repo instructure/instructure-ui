@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { keyframes } from '@instructure/emotion'
+import { keyframes, calcFocusOutlineStyles } from '@instructure/emotion'
 
-import type { TreeBrowserButtonTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { TreeBrowserButtonProps, TreeBrowserButtonStyle } from './props'
 
 const transform = keyframes`
@@ -49,11 +49,12 @@ const transform = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyles = (
-  componentTheme: TreeBrowserButtonTheme,
+  componentTheme: NewComponentTypes['TreeBrowserTreeButton'],
   props: TreeBrowserButtonProps,
-  state: { animation?: boolean }
+  sharedTokens: SharedTokens,
+  state: { animation?: boolean; hoverable?: boolean }
 ): TreeBrowserButtonStyle => {
-  const { size, variant, selected, focused, level } = props
+  const { size, variant, selected, level } = props
 
   const isRootButton = level && level === 1
 
@@ -61,30 +62,28 @@ const generateStyles = (
     small: {
       folderTree: {
         before: {
-          width: `calc(${componentTheme.baseSpacingSmall} - 0.0625rem)`
+          width: componentTheme.baseSpacingSmall
         },
         icon: {
-          fontSize: `calc(${componentTheme.baseSpacingSmall} * 2)`,
-          marginInlineEnd: componentTheme.baseSpacingSmall,
+          marginInlineEnd: componentTheme.iconsMarginRightSmall,
           marginInlineStart: '0'
         },
         thumbnail: {
           height: `calc(${componentTheme.baseSpacingSmall} * 2)`,
           width: `calc(${componentTheme.baseSpacingSmall}* 2)`,
-          marginInlineEnd: componentTheme.baseSpacingSmall,
+          marginInlineEnd: componentTheme.iconsMarginRightSmall,
           marginInlineStart: '0'
         }
       },
       indent: {
         icon: {
-          fontSize: `calc(${componentTheme.baseSpacingSmall} * 2)`,
-          marginInlineEnd: `calc(${componentTheme.baseSpacingSmall} / 2)`,
+          marginInlineEnd: componentTheme.iconsMarginRightSmall,
           marginInlineStart: '0'
         },
         thumbnail: {
           height: `calc(${componentTheme.baseSpacingSmall} * 2)`,
           width: `calc(${componentTheme.baseSpacingSmall} * 2)`,
-          marginInlineEnd: `calc(${componentTheme.baseSpacingSmall} / 2)`,
+          marginInlineEnd: componentTheme.iconsMarginRightSmall,
           marginInlineStart: '0'
         }
       },
@@ -98,30 +97,28 @@ const generateStyles = (
     medium: {
       folderTree: {
         before: {
-          width: `calc(${componentTheme.baseSpacingMedium} - 0.0625rem)`
+          width: componentTheme.baseSpacingMedium
         },
         icon: {
-          fontSize: `calc(${componentTheme.baseSpacingMedium} * 2)`,
-          marginInlineEnd: componentTheme.baseSpacingMedium,
+          marginInlineEnd: componentTheme.iconsMarginRightMedium,
           marginInlineStart: '0'
         },
         thumbnail: {
           height: `calc(${componentTheme.baseSpacingMedium} * 2)`,
           width: `calc(${componentTheme.baseSpacingMedium} * 2)`,
-          marginInlineEnd: componentTheme.baseSpacingMedium,
+          marginInlineEnd: componentTheme.iconsMarginRightMedium,
           marginInlineStart: '0'
         }
       },
       indent: {
         icon: {
-          fontSize: `calc(${componentTheme.baseSpacingMedium} * 2)`,
-          marginInlineEnd: `calc(${componentTheme.baseSpacingMedium} / 2)`,
+          marginInlineEnd: componentTheme.iconsMarginRightMedium,
           marginInlineStart: '0'
         },
         thumbnail: {
           height: `calc(${componentTheme.baseSpacingMedium} * 2)`,
           width: `calc(${componentTheme.baseSpacingMedium} * 2)`,
-          marginInlineEnd: `calc(${componentTheme.baseSpacingMedium} / 2)`,
+          marginInlineEnd: componentTheme.iconsMarginRightMedium,
           marginInlineStart: '0'
         }
       },
@@ -135,30 +132,28 @@ const generateStyles = (
     large: {
       folderTree: {
         before: {
-          width: `calc(${componentTheme.baseSpacingLarge} - 0.0625rem)`
+          width: componentTheme.baseSpacingLarge
         },
         icon: {
-          fontSize: `calc(${componentTheme.baseSpacingLarge} * 2)`,
-          marginInlineEnd: componentTheme.baseSpacingLarge,
+          marginInlineEnd: componentTheme.iconsMarginRightLarge,
           marginInlineStart: '0'
         },
         thumbnail: {
           height: `calc(${componentTheme.baseSpacingLarge} * 2)`,
           width: `calc(${componentTheme.baseSpacingLarge} * 2)`,
-          marginInlineEnd: componentTheme.baseSpacingLarge,
+          marginInlineEnd: componentTheme.iconsMarginRightLarge,
           marginInlineStart: '0'
         }
       },
       indent: {
         icon: {
-          fontSize: `calc(${componentTheme.baseSpacingLarge} * 2)`,
-          marginInlineEnd: `calc(${componentTheme.baseSpacingLarge} / 2)`,
+          marginInlineEnd: componentTheme.iconsMarginRightLarge,
           marginInlineStart: '0'
         },
         thumbnail: {
           height: `calc(${componentTheme.baseSpacingLarge} * 2)`,
           width: `calc(${componentTheme.baseSpacingLarge}* 2)`,
-          marginInlineEnd: `calc(${componentTheme.baseSpacingLarge} / 2)`,
+          marginInlineEnd: componentTheme.iconsMarginRightLarge,
           marginInlineStart: '0'
         }
       },
@@ -228,7 +223,7 @@ const generateStyles = (
       borderRadius: componentTheme.borderRadius,
       position: 'relative',
       zIndex: 1,
-      ...(state.animation
+      ...(state?.animation
         ? {
             transform: 'translate3d(-2%, 0, 0)',
             opacity: 0.01,
@@ -242,12 +237,15 @@ const generateStyles = (
         : {}),
       outline: '0',
       padding: '0',
+      ...(sharedTokens?.focusOutline
+        ? calcFocusOutlineStyles(sharedTokens.focusOutline)
+        : {}),
       ...(variant === 'folderTree' &&
         !isRootButton && {
           '&::before': {
             content: '""',
             height: componentTheme.borderWidth,
-            background: componentTheme.borderColor,
+            background: componentTheme.borderColor, // Tree horizontal lines
             position: 'absolute',
             insetInlineStart: '0',
             insetInlineEnd: 'auto',
@@ -256,39 +254,23 @@ const generateStyles = (
             ...sizeMap[size!][variant!].before
           },
           '&:hover::before': {
-            visibility: 'hidden'
+            visibility: state?.hoverable ? 'hidden' : 'visible'
           }
         }),
-      '&::after': {
-        content: '""',
-        pointerEvents: 'none',
-        boxSizing: 'border-box',
-        display: 'block',
-        position: 'absolute',
-        top: '-0.25rem',
-        bottom: '-0.25rem',
-        left: '-0.25rem',
-        right: '-0.25rem',
-        border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-        transition: 'all 0.2s',
-        opacity: 0,
-        transform: 'scale(0.95)',
-        ...(focused && {
-          opacity: 1,
-          transform: 'scale(1)'
-        })
-      },
-      '&:hover': {
-        backgroundColor: selected
-          ? componentTheme.selectedBackgroundColor
-          : componentTheme.hoverBackgroundColor,
+      ...(state?.hoverable !== false && {
+        '&:hover': {
+          backgroundColor: selected
+            ? componentTheme.selectedBackgroundColor
+            : componentTheme.hoverBackgroundColor,
 
-        '[class$=-treeButton__textName], [class$=-treeButton__textDescriptor], [class$=-treeButton__icon], [class$=-treeButton__node]':
-          {
-            color: componentTheme.hoverTextColor
-          }
-      },
+          '[class$=-treeButton__textName], [class$=-treeButton__textDescriptor], [class$=-treeButton__node]':
+            {
+              color: selected
+                ? componentTheme.selectedTextColor
+                : componentTheme.hoverTextColor
+            }
+        }
+      }),
       ...(selected && {
         backgroundColor: componentTheme.selectedBackgroundColor
       })
@@ -329,10 +311,6 @@ const generateStyles = (
       minWidth: '0.0625rem',
       position: 'relative',
       zIndex: 1,
-      color: selected
-        ? componentTheme.selectedTextColor
-        : componentTheme.iconColor,
-      display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       ...sizeMap[size!][variant!].icon
@@ -344,7 +322,8 @@ const generateStyles = (
     node: {
       label: 'treeButton__node',
       ...textStyle,
-      ...textNameStyle
+      ...textNameStyle,
+      color: componentTheme.descriptorTextColor
     }
   }
 }

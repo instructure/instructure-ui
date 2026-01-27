@@ -29,6 +29,10 @@ type TreeBrowserContextType = {
    * Whether to enable animation for the TreeBrowser
    */
   animation?: boolean
+  /**
+   * Function to clear the current selection
+   */
+  clearSelection?: () => void
 }
 
 /**
