@@ -126,7 +126,9 @@ class Flex extends Component<FlexProps> {
 
     const gapValuesArray = gap?.split(' ')
     if (gapValuesArray!.length > 1 && wrap === 'no-wrap')
-      console.warn('The `gap` prop is supplied with an improper `wrap` prop.')
+      console.warn(
+        'The `gap` prop is supplied with an improper `wrap=no-wrap` prop.'
+      )
     if (children && Children.count(children) > 0) {
       return (
         <View
