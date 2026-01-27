@@ -195,18 +195,6 @@
           "type": "spacing"
         }
       },
-      "radiusSmall": {
-        "value": "0.125rem",
-        "type": "borderRadius"
-      },
-      "radiusMedium": {
-        "value": "0.25rem",
-        "type": "borderRadius"
-      },
-      "radiusLarge": {
-        "value": "0.5rem",
-        "type": "borderRadius"
-      },
       "widthSmall": {
         "value": "{borderWidth.sm}",
         "type": "borderWidth"
