@@ -205,7 +205,7 @@ type: example
 
   collectionIcon = {<BookCheckInstUIIcon />}
   collectionIconExpanded = {XInstUIIcon}
-  itemIcon = {(props) => <UserInstUIIcon size={props.size} color={props.color} />}
+  itemIcon={() => <UserInstUIIcon />}
 
   rootId={1}
   size="large"
