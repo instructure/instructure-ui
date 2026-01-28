@@ -435,7 +435,7 @@ type: example
   </View>
   <View focusWithin>
     if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
-    <div tabindex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
+    <div tabIndex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
   </View>
 </Flex>
 ```
