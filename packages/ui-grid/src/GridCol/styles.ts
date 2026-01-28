@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { GridTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { GridBreakpoints } from '../GridTypes'
 import type { GridColProps, GridColStyle } from './props'
 
@@ -39,7 +39,7 @@ type BreakPoints = NonNullable<GridBreakpoints>
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: GridTheme,
+  componentTheme: NewComponentTypes['GridCol'],
   props: GridColProps
 ): GridColStyle => {
   const {
@@ -203,13 +203,13 @@ const generateStyle = (
 
       ...getBreakpointStyles('small'),
 
-      [`@media screen and (${componentTheme.mediumMin})`]: {
+      [`@media screen and (min-width: ${componentTheme.mediumMin})`]: {
         ...getBreakpointStyles('medium')
       },
-      [`@media screen and (${componentTheme.largeMin})`]: {
+      [`@media screen and (min-width: ${componentTheme.largeMin})`]: {
         ...getBreakpointStyles('large')
       },
-      [`@media screen and (${componentTheme.xLargeMin})`]: {
+      [`@media screen and (min-width: ${componentTheme.xLargeMin})`]: {
         ...getBreakpointStyles('x-large')
       },
 
