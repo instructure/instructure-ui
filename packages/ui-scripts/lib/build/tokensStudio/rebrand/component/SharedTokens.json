@@ -31,15 +31,15 @@
       },
       "card": {
         "sm": {
-          "value": "{borderRadius.container.sm}",
-          "type": "borderRadius"
-        },
-        "md": {
           "value": "{borderRadius.container.md}",
           "type": "borderRadius"
         },
-        "lg": {
+        "md": {
           "value": "{borderRadius.container.lg}",
+          "type": "borderRadius"
+        },
+        "lg": {
+          "value": "{borderRadius.container.xl}",
           "type": "borderRadius"
         }
       }
@@ -366,15 +366,15 @@
       "padding": {
         "card": {
           "sm": {
-            "value": "{spacing.padding.container.sm}",
+            "value": "{spacing.padding.container.xs}",
             "type": "spacing"
           },
           "md": {
-            "value": "{spacing.padding.container.md}",
+            "value": "{spacing.padding.container.sm}",
             "type": "spacing"
           },
           "lg": {
-            "value": "{spacing.padding.container.lg}",
+            "value": "{spacing.padding.container.md}",
             "type": "spacing"
           }
         }
