@@ -1,0 +1,8 @@
+{
+  "pagination": {
+    "pageIndicatorGap": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    }
+  }
+}
