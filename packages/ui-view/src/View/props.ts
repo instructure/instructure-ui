@@ -72,6 +72,13 @@ type ViewOwnProps = {
     | 'inline-block'
     | 'flex'
     | 'inline-flex'
+    | 'contents'
+    // these are global CSS values
+    | 'inherit' // inherit the parent's display value
+    | 'initial' // reset the property back to the spec default
+    | 'revert' // reset to user agent stylesheet
+    | 'revert-layer'
+    | 'unset' // same as initial
   overflowX?: 'auto' | 'hidden' | 'visible'
   overflowY?: 'auto' | 'hidden' | 'visible'
   height?: string | number
