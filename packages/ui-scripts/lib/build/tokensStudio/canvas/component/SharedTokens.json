@@ -29,7 +29,7 @@
         "value": "999rem",
         "type": "borderRadius"
       },
-      "container": {
+      "card": {
         "sm": {
           "value": "{borderRadius.container.sm}",
           "type": "borderRadius"
@@ -364,15 +364,7 @@
         }
       },
       "padding": {
-        "container": {
-          "xxs": {
-            "value": "{spacing.padding.container.xxs}",
-            "type": "spacing"
-          },
-          "xs": {
-            "value": "{spacing.padding.container.xs}",
-            "type": "spacing"
-          },
+        "card": {
           "sm": {
             "value": "{spacing.padding.container.sm}",
             "type": "spacing"
