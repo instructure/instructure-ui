@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { BaseButtonTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   BaseButtonProps,
   BaseButtonStyleProps,
@@ -31,20 +31,11 @@ import type {
 
 import { darken, lighten } from '@instructure/ui-color-utils'
 
-/**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
 const generateStyle = (
-  componentTheme: BaseButtonTheme,
-  props: BaseButtonProps,
-  state: BaseButtonStyleProps
+  componentTheme: NewComponentTypes['BaseButton'],
+  params: BaseButtonProps,
+  _sharedTokens: SharedTokens,
+  extraArgs: BaseButtonStyleProps
 ): BaseButtonStyle => {
   const {
     size,
@@ -54,9 +45,9 @@ const generateStyle = (
     withBackground,
     withBorder,
     isCondensed
-  } = props
+  } = params
 
-  const { isDisabled, hasOnlyIconVisible, isEnabled } = state
+  const { isDisabled, hasOnlyIconVisible, isEnabled } = extraArgs
 
   const shapeVariants = {
     circle: { borderRadius: '50%' },
@@ -69,21 +60,16 @@ const generateStyle = (
         fontSize: componentTheme.smallFontSize,
         paddingLeft: componentTheme.smallPaddingHorizontal,
         paddingRight: componentTheme.smallPaddingHorizontal,
+        height: componentTheme.smallHeight,
         ...(hasOnlyIconVisible && {
           paddingLeft: 0,
           paddingRight: 0,
-          height: componentTheme.smallHeight,
           width: componentTheme.smallHeight
         })
       },
-      children: {
-        paddingTop: componentTheme.smallPaddingTop,
-        paddingBottom: componentTheme.smallPaddingBottom
-      },
       iconSVG: {
-        fontSize: isCondensed
-          ? componentTheme.smallFontSize
-          : componentTheme.iconSizeSmall
+        // TODO
+        fontSize: isCondensed ? componentTheme.smallFontSize : '1rem'
       }
     },
     medium: {
@@ -91,21 +77,16 @@ const generateStyle = (
         fontSize: componentTheme.mediumFontSize,
         paddingLeft: componentTheme.mediumPaddingHorizontal,
         paddingRight: componentTheme.mediumPaddingHorizontal,
+        height: componentTheme.mediumHeight,
         ...(hasOnlyIconVisible && {
           paddingLeft: 0,
           paddingRight: 0,
-          height: componentTheme.mediumHeight,
           width: componentTheme.mediumHeight
         })
       },
-      children: {
-        paddingTop: componentTheme.mediumPaddingTop,
-        paddingBottom: componentTheme.mediumPaddingBottom
-      },
       iconSVG: {
-        fontSize: isCondensed
-          ? componentTheme.mediumFontSize
-          : componentTheme.iconSizeMedium
+        // TODO
+        fontSize: isCondensed ? componentTheme.mediumFontSize : '1.25rem'
       }
     },
     large: {
@@ -113,21 +94,16 @@ const generateStyle = (
         fontSize: componentTheme.largeFontSize,
         paddingLeft: componentTheme.largePaddingHorizontal,
         paddingRight: componentTheme.largePaddingHorizontal,
+        height: componentTheme.largeHeight,
         ...(hasOnlyIconVisible && {
           paddingLeft: 0,
           paddingRight: 0,
-          height: componentTheme.largeHeight,
           width: componentTheme.largeHeight
         })
       },
-      children: {
-        paddingTop: componentTheme.largePaddingTop,
-        paddingBottom: componentTheme.largePaddingBottom
-      },
       iconSVG: {
-        fontSize: isCondensed
-          ? componentTheme.largeFontSize
-          : componentTheme.iconSizeLarge
+        // TODO
+        fontSize: isCondensed ? componentTheme.largeFontSize : '1.625rem'
       }
     }
   }
@@ -390,7 +366,9 @@ const generateStyle = (
                   padding: componentTheme.borderWidth,
                   ...(shape !== 'circle'
                     ? {
-                        borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
+                        borderRadius: `calc(${componentTheme.borderRadius} + ${
+                          componentTheme.borderWidth
+                        })`
                       }
                     : { borderRadius: '50%' })
                 }
@@ -406,7 +384,8 @@ const generateStyle = (
       label: 'baseButton__content',
       boxSizing: 'border-box',
       width: '100%',
-      display: 'block',
+      display: 'flex',
+      alignItems: 'center',
       direction: 'inherit',
       userSelect: 'none',
       transition: 'background 0.2s, transform 0.2s',
@@ -454,8 +433,6 @@ const generateStyle = (
     children: {
       label: 'baseButton__children',
       display: 'block',
-
-      ...sizeVariants[size!].children,
 
       ...(isCondensed && {
         paddingTop: 0,
@@ -510,9 +487,8 @@ const generateStyle = (
       label: 'baseButton__iconWrapper',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
-      paddingInlineEnd: isCondensed
-        ? componentTheme.iconTextGapCondensed
-        : componentTheme.iconTextGap,
+      // TODO
+      paddingInlineEnd: isCondensed ? '0.375rem' : '',
       flexShrink: 0,
       maxWidth: '100%',
       overflowX: 'visible',
