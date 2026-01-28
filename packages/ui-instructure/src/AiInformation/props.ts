@@ -21,12 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  AiInformationTheme,
-  OtherHTMLAttributes,
-  Renderable
-} from '@instructure/shared-types'
+import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
+import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
 import type { NutritionFactsProps, DataPermissionLevelsProps } from '../'
 
 type AiInformationOwnProps = {
@@ -39,6 +35,8 @@ type AiInformationOwnProps = {
    */
   data: {
     featureName: string
+    privacyNoticeText: string
+    privacyNoticeUrl: string
     permissionLevelText: string
     permissionLevel: string
     description: string
@@ -120,13 +118,14 @@ type PropKeys = keyof AiInformationOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AiInformationProps = AiInformationOwnProps &
-  WithStyleProps<AiInformationTheme, AiInformationStyle> &
-  OtherHTMLAttributes<AiInformationOwnProps>
+type AiInformationProps = AiInformationOwnProps & {
+  themeOverride?: ThemeOverrideValue
+} & OtherHTMLAttributes<AiInformationOwnProps>
 
 type AiInformationStyle = ComponentStyle<
   | 'aiInformation'
   | 'header'
+  | 'privacyNotice'
   | 'featureName'
   | 'permissionLevelText'
   | 'permissionLevel'
