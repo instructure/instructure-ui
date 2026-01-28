@@ -304,6 +304,30 @@ const generateStyle = (
       display: 'inline-flex',
       verticalAlign: 'middle'
     },
+    contents: {
+      label: 'view--contents',
+      display: 'contents'
+    },
+    inherit: {
+      label: 'view--inherit',
+      display: 'inherit'
+    },
+    initial: {
+      label: 'view--initial',
+      display: 'initial'
+    },
+    revert: {
+      label: 'view--revert',
+      display: 'revert'
+    },
+    'revert-layer': {
+      label: 'view--revertLayer',
+      display: 'revert-layer'
+    },
+    unset: {
+      label: 'view--unset',
+      display: 'unset'
+    },
     auto: {}
   }
 
