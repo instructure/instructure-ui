@@ -37,6 +37,14 @@
     "color": {
       "value": "{color.text.base}",
       "type": "color"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "paddingVertical": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
     }
   },
   "menuItem": {
@@ -85,12 +93,16 @@
       "value": "{lineHeight.paragraph.textSm}",
       "type": "lineHeights"
     },
-    "padding": {
-      "value": "{spacing.spaceMd}",
-      "type": "spacing"
-    },
     "labelPadding": {
       "value": "2.25rem",
+      "type": "spacing"
+    },
+    "paddingVertical": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "paddingHorizontal": {
+      "value": "{spacing.spaceMd}",
       "type": "spacing"
     }
   },
