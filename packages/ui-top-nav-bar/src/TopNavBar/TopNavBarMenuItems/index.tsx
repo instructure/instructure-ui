@@ -138,7 +138,11 @@ class TopNavBarMenuItems extends Component<
   }
 
   renderHiddenItemsMenu(hiddenItems: ItemChild[]) {
-    const { renderHiddenItemsMenuTriggerLabel, currentPageId } = this.props
+    const {
+      currentPageId,
+      renderHiddenItemsMenuTriggerLabel,
+      renderHiddenItemsMenuTriggerAriaLabel
+    } = this.props
 
     if (!hiddenItems.length) {
       return <span></span>
@@ -157,6 +161,11 @@ class TopNavBarMenuItems extends Component<
 
     return (
       <TopNavBarItem
+        aria-label={
+          renderHiddenItemsMenuTriggerAriaLabel
+            ? renderHiddenItemsMenuTriggerAriaLabel(hiddenItems.length)
+            : undefined
+        }
         id={this._hiddenMenuItemsMenuTriggerId}
         status={hasActiveChild ? 'active' : 'default'}
         renderSubmenu={
