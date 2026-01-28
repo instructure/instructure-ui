@@ -50,6 +50,12 @@ type TreeBrowserNodeOwnProps = Pick<
    * The children to be rendered within the `<TreeNode />`
    */
   children?: React.ReactNode
+  /**
+   * Whether the node should show hover effects.
+   * Set to false to disable hover styling when the node contains custom interactive content.
+   * @default true
+   */
+  hoverable?: boolean
 }
 
 type PropKeys = keyof TreeBrowserNodeOwnProps
@@ -70,7 +76,8 @@ const allowedProps: AllowedPropKeys = [
   'children',
   'containerRef',
   'onKeyDown',
-  'onClick'
+  'onClick',
+  'hoverable'
 ]
 
 export type { TreeBrowserNodeProps }

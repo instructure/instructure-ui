@@ -45,6 +45,12 @@ type TreeBrowserButtonOwnProps = {
    * A function that returns a reference to the parent li element
    */
   containerRef?: (el: HTMLElement | null) => void
+  /**
+   * Whether the button should show hover effects.
+   * Set to false to disable hover styling when the button contains custom interactive content.
+   * @default true
+   */
+  hoverable?: boolean
 } & TreeBrowserCommonProps
 
 type PropKeys = keyof TreeBrowserButtonOwnProps
@@ -81,7 +87,8 @@ const allowedProps: AllowedPropKeys = [
   'focused',
   'level',
   'containerRef',
-  'renderContent'
+  'renderContent',
+  'hoverable'
 ]
 
 export type { TreeBrowserButtonProps, TreeBrowserButtonStyle }

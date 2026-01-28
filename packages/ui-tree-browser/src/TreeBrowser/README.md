@@ -203,9 +203,11 @@ type: example
     3: { id: 3, name: "Juan" }
   }}
   defaultExpanded={[1]}
-  collectionIcon={IconGradebookLine}
-  collectionIconExpanded={IconXSolid}
-  itemIcon={IconUserSolid}
+
+  collectionIcon = {<BookCheckInstUIIcon />}
+  collectionIconExpanded = {XInstUIIcon}
+  itemIcon={() => <UserInstUIIcon />}
+
   rootId={1}
   size="large"
 />
@@ -237,14 +239,14 @@ type: example
   rootId={1}
   size="large"
   getItemProps={({ name, ...props }) => {
-    let itemIcon = IconUserSolid
+    let itemIcon = <UserInstUIIcon />
 
     if (name === 'Modules') {
-      itemIcon = IconModuleLine
+      itemIcon = <BoxesInstUIIcon />
     }
 
     if (name === 'Videos') {
-      itemIcon = IconVideoLine
+      itemIcon = <PlaySquareInstUIIcon />
     }
 
     return {
@@ -277,7 +279,7 @@ type: example
     3: { id: 3, name: "Mei Xiang", thumbnail: avatarPortrait }
   }}
   defaultExpanded={[1]}
-  itemIcon={IconUserSolid}
+  itemIcon={<UserInstUIIcon />}
   rootId={1}
   size="large"
 />
@@ -308,18 +310,18 @@ type: example
     3: { id: 3, name: "Mei Xiang" }
   }}
   defaultExpanded={[1]}
-  itemIcon={IconUserSolid}
+  itemIcon={<UserInstUIIcon />}
   rootId={1}
   size="large"
   renderContent={(props)=> {
     if (props.level > 1) {
-      return <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0.6rem 0 0.6rem 1rem' }}>
+      return <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange' }}>
         <span>{props.name}</span>
         <Tag text="done" size="small" margin="0 xx-small 0 xx-small"/>
         <Tag text="class A" size="small"/>
       </div>
     }
-    return <div style={{padding: '0.6rem 0 0.6rem 1rem'}}>{props.name}</div>
+    return <div style={{padding: '0.6rem 0 0.6rem 1rem', color: 'darkorange'}}>{props.name}</div>
   }}
 />
 ```
@@ -328,6 +330,10 @@ type: example
 
 An example of a `<TreeBrowser />` with a custom item after each collection.
 
+When rendering custom interactive content (such as input fields), use the `hoverable` prop on `<TreeBrowser.Node />` to control the default hover behavior. Set it to `false` to disable hover effects while custom interactive elements are shown.
+
+This example uses controlled selection (the `selection` prop with the `onSelectionChange` callback) to manage the selected state. Clicking the custom node clears the current selection by calling `setSelection('')`, ensuring a clean and predictable user experience.
+
 ```js
 ---
 type: example
@@ -335,11 +341,13 @@ type: example
 const Example = () => {
   const [expanded, setExpanded] = useState(true)
   const [hoveredLine, setHoveredLine] = useState(null)
+  const [selection, setSelection] = useState('')
   const nodeRef = useRef(null)
 
   const handleExpandToggle = useCallback((e, newExpandedState) => {
     e.stopPropagation()
     setExpanded(newExpandedState)
+    setSelection('')
     nodeRef.current?.focus()
   }, [])
 
@@ -356,55 +364,42 @@ const Example = () => {
   const renderInput = () => {
     if (expanded) {
       return (
-        <InstUISettingsProvider
-          theme={
-            hoveredLine === 'renderAfter'
-              ? {
-                  componentOverrides: {
-                    View: {
-                      focusColorInfo: 'white'
-                    },
-                    TextInput: {
-                      focusOutlineColor: 'white'
-                    }
-                  }
-                }
-              : undefined
-          }
+        <View
+          as="div"
+          padding="xx-small"
+          onFocus={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation()
+            setSelection('')
+          }}
+          onMouseEnter={() => setHoveredLine('renderAfter')}
+          onMouseLeave={() => setHoveredLine(null)}
         >
-          <View
-            as="div"
-            padding="xx-small"
-            onFocus={(e) => e.stopPropagation()}
-            onClick={(e) => e.stopPropagation()}
-            onMouseEnter={() => setHoveredLine('renderAfter')}
-            onMouseLeave={() => setHoveredLine(null)}
+          <TextInput
+            placeholder="Enter new group name"
+            display="inline-block"
+            width="12rem"
+            renderLabel=""
+            onKeyDown={(e) => e.stopPropagation()}
+            onFocus={() => setSelection('')}
+          />
+          <IconButton
+            screenReaderLabel="Cancel"
+            onClick={(e) => handleExpandToggle(e, false)}
+            onKeyDown={(e) => handleKeyPress(e, false)}
+            margin="0 0 0 small"
           >
-            <TextInput
-              placeholder="Enter new group name"
-              display="inline-block"
-              width="12rem"
-              renderLabel=""
-              onKeyDown={(e) => e.stopPropagation()}
-            />
-            <IconButton
-              screenReaderLabel="Cancel"
-              onClick={(e) => handleExpandToggle(e, false)}
-              onKeyDown={(e) => handleKeyPress(e, false)}
-              margin="0 0 0 small"
-            >
-              <IconXSolid />
-            </IconButton>
-            <IconButton
-              screenReaderLabel="Add new group"
-              onClick={(e) => handleExpandToggle(e, false)}
-              onKeyDown={(e) => handleKeyPress(e, false)}
-              margin="0 0 0 small"
-            >
-              <IconCheckSolid />
-            </IconButton>
-          </View>
-        </InstUISettingsProvider>
+            <XInstUIIcon />
+          </IconButton>
+          <IconButton
+            screenReaderLabel="Add new group"
+            onClick={(e) => handleExpandToggle(e, false)}
+            onKeyDown={(e) => handleKeyPress(e, false)}
+            margin="0 0 0 small"
+          >
+            <CheckInstUIIcon />
+          </IconButton>
+        </View>
       )
     }
 
@@ -416,8 +411,9 @@ const Example = () => {
       containerRef={(el) => (nodeRef.current = el)}
       onClick={(e) => handleExpandToggle(e, !expanded)}
       onKeyDown={(e) => handleKeyPress(e, !expanded)}
-      itemIcon={expanded ? '' : <IconPlusLine />}
+      itemIcon={expanded ? '' : <PlusInstUIIcon />}
       size="large"
+      hoverable={!expanded}
     >
       {renderInput()}
     </TreeBrowser.Node>
@@ -426,6 +422,8 @@ const Example = () => {
   return (
     <TreeBrowser
       selectionType="single"
+      selection={selection}
+      onSelectionChange={(newSelection) => setSelection(newSelection)}
       size="large"
       defaultExpanded={[1, 2]}
       collections={{
@@ -629,7 +627,7 @@ const Example = () => {
 
   const renderNode = () => {
     return (
-      <TreeBrowser.Node itemIcon={<IconPlusLine />}>More</TreeBrowser.Node>
+      <TreeBrowser.Node itemIcon={<PlusInstUIIcon />}>More</TreeBrowser.Node>
     )
   }
 
