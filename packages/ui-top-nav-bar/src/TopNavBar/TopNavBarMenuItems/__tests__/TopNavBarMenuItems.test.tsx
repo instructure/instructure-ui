@@ -253,6 +253,29 @@ describe('<TopNavBarMenuItems />', () => {
     })
   })
 
+  describe('renderHiddenItemsMenuTriggerAriaLabel prop', () => {
+    it('should set the aria-label for the trigger item of the hidden list items menu', () => {
+      const { container } = render(
+        <div style={{ width: '400px' }}>
+          {getMenuItems({
+            menuItemsCount: 6,
+            menuItemsProps: {
+              renderHiddenItemsMenuTriggerLabel: (hiddenChildrenCount) =>
+                `${hiddenChildrenCount} More`,
+              renderHiddenItemsMenuTriggerAriaLabel: (hiddenChildrenCount) =>
+                `${hiddenChildrenCount} more menu items`
+            }
+          })}
+        </div>
+      )
+      const triggerItem = container.querySelector(
+        '[id*="-hiddenMenuItemsMenuTrigger"]'
+      )
+
+      expect(triggerItem).toHaveAttribute('aria-label', '6 more menu items')
+    })
+  })
+
   describe('currentPageId prop', () => {
     it('should set the item with id as active', async () => {
       const { container } = render(
