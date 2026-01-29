@@ -289,7 +289,7 @@ type: embed
 | Avatar | showBorder | `'auto' \| 'always' \| 'never'` | No | - | `auto` only shows a border when there is no source image. This prop can force to always or never show that border. |
 | Avatar | shape | `'circle' \| 'rectangle'` | No | - |  |
 | Avatar | display | `'inline' \| 'block'` | No | - |  |
-| Avatar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| Avatar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="small auto large"`. |
 | Avatar | onImageLoaded | `(event?: SyntheticEvent) => void` | No | - | Callback fired when the avatar image has loaded. `event` can be `undefined`, if its already loaded when the page renders (can happen in SSR) |
 | Avatar | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element type to render as |
 | Avatar | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |

@@ -428,7 +428,7 @@ type: example
 | Flex | height | `string \| number` | No | - | Sets the height of the component's container (optional) |
 | Flex | width | `string \| number` | No | - | Sets the width of the component's container (optional) |
 | Flex | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Flex | gap | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `gap="small large"`. |
+| Flex | gap | `Spacing` | No | `'none'` | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `gap="small auto large"`. |
 | Flex | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
 | Flex | display | `'flex' \| 'inline-flex'` | No | `'flex'` | Sets the CSS display rule for the component's container |
 | Flex | textAlign | `'start' \| 'center' \| 'end'` | No | - | Designates the text alignment |
