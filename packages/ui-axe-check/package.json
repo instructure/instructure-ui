@@ -3,8 +3,8 @@
   "version": "11.4.0",
   "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
   "module": "./es/index.js",
+  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -21,14 +21,27 @@
     "build:types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*"
-  },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "axe-core": "^4.10.3"
   },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "workspace:*"
+  },
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
   }
 }

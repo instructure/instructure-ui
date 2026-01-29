@@ -18,5 +18,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

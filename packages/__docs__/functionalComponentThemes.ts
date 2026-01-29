@@ -29,7 +29,7 @@ import type { ThemeFunctionsFunctional } from './src/App/props'
 const themes: ThemeFunctionsFunctional = {
   // TODO figure out subcomponents e.g.: Table.Cell
   Avatar: async (theme: Theme) =>
-    (await import('@instructure/ui-avatar/src/Avatar/theme')).default(theme)
+    (await import('../ui-avatar/src/Avatar/theme')).default(theme)
 }
 
 export default themes
