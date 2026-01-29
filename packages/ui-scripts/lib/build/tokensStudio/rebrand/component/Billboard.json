@@ -1,7 +1,7 @@
 {
   "billboard": {
     "backgroundColor": {
-      "value": "{color.background.interactive.action.secondary.base}",
+      "value": "{color.transparentColor}",
       "type": "color"
     },
     "clickableActiveBg": {
