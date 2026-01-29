@@ -51,6 +51,9 @@ const convertSemanticSize = (
     lg: componentTheme.sizeLg,
     xl: componentTheme.sizeXl,
     '2xl': componentTheme.size2xl,
+    'illu-sm': componentTheme.illuSm,
+    'illu-md': componentTheme.illuMd,
+    'illu-lg': componentTheme.illuLg,
     // Legacy SVGIcon size tokens (DEPRECATED)
     'x-small': '1.125rem',
     small: '2rem',
@@ -78,6 +81,9 @@ const convertSizeToStrokeWidth = (
     lg: componentTheme.strokeWidthLg,
     xl: componentTheme.strokeWidthXl,
     '2xl': componentTheme.strokeWidth2xl,
+    'illu-sm': componentTheme.strokeWidthIlluSm,
+    'illu-md': componentTheme.strokeWidthIlluMd,
+    'illu-lg': componentTheme.strokeWidthIlluLg,
     // Legacy SVGIcon stroke tokens (DEPRECATED)
     'x-small': '0.0859375rem',
     small: '0.15625rem',
