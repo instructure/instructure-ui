@@ -21,13 +21,26 @@
     "build:types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*"
-  },
   "dependencies": {
     "@babel/runtime": "^7.27.6"
   },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "workspace:*"
+  },
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
   }
 }

@@ -3,26 +3,38 @@
   "version": "11.4.0",
   "description": "Shared TypeScript typings for Instructure UI packages.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "homepage": "https://instructure.design/#shared-types",
-  "license": "MIT",
-  "main": "src/index.ts",
-  "types": "types/index.d.ts",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.design/#shared-types",
+  "bugs": {
+    "url": "https://github.com/instructure/instructure-ui/issues"
   },
   "scripts": {
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "build:types": "tsc -p tsconfig.build.json"
   },
-  "bugs": {
-    "url": "https://github.com/instructure/instructure-ui/issues"
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "react": ">=18 <=19"
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
   }
 }

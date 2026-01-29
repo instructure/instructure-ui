@@ -32,10 +32,10 @@ import type {
   OtherHTMLAttributes,
   UIElement
 } from '@instructure/shared-types'
-import {
+import type {
   BaseTransitionStatesType,
   TransitionType
-} from '@instructure/ui-motion/src/Transition/BaseTransition/props'
+} from '@instructure/ui-motion'
 
 type DrawerTrayPlacement = 'start' | 'end'
 

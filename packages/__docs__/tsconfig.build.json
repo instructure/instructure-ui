@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./types",
-    "module": "CommonJS",
+    "module": "ESNext",
     "composite": true,
     "allowImportingTsExtensions": true
   },

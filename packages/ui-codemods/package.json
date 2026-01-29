@@ -3,7 +3,8 @@
   "version": "11.4.0",
   "description": "Codemod scripts to help upgrade Instructure UI libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.ts",
+  "module": "./lib/index.ts",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -17,6 +18,11 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
+  "dependencies": {
+    "babel-core": "^7.0.0-bridge.0",
+    "jscodeshift": "^17.3.0",
+    "prettier": "^2.8.8"
+  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
     "@types/jscodeshift": "^17.3.0",
@@ -24,15 +30,22 @@
     "esbuild": "^0.25.5",
     "vitest": "^3.2.2"
   },
-  "dependencies": {
-    "babel-core": "^7.0.0-bridge.0",
-    "jscodeshift": "^17.3.0",
-    "prettier": "^2.8.8"
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./lib/index.ts",
+      "default": "./lib/index.ts"
+    },
+    "./lib/*": "./lib/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
   },
   "//dependency-comments": {
     "prettier": "Prettier 3 is async, https://prettier.io/blog/2023/07/05/3.0.0.html#api-1"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "type": "module"
 }
