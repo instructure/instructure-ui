@@ -5,7 +5,7 @@
       "type": "color"
     },
     "borderRadius": {
-      "value": "{borderRadius.md}",
+      "value": "{borderRadius.lg}",
       "type": "borderRadius"
     },
     "maxWidth": {
@@ -50,10 +50,6 @@
   "menuItem": {
     "activeBackground": {
       "value": "{color.background.interactive.action.primary.base}",
-      "type": "color"
-    },
-    "activeIconColor": {
-      "value": "{color.icon.interactive.action.primary.base}",
       "type": "color"
     },
     "activeLabelColor": {
