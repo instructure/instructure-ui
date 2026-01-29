@@ -117,7 +117,7 @@ class PlaygroundExample extends React.Component {
             <View as="div" margin="medium 0 0">
               <Text weight="bold">
                 <div>Contact person</div>
-                <Link href="/#TopNavBar" isWithinText={false}>
+                <Link href="/#TopNavBar" variant="standalone">
                   contact.person@example.com
                 </Link>
                 <div>(801) 123-4567</div>
@@ -2057,7 +2057,7 @@ type: example
                       <View as="div" margin="medium 0 0">
                         <Text weight="bold">
                           <div>Contact person</div>
-                          <Link href="/#TopNavBar" isWithinText={false}>
+                          <Link href="/#TopNavBar" variant="standalone">
                             contact.person@example.com
                           </Link>
                           <div>(801) 123-4567</div>
