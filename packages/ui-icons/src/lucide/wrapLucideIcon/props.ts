@@ -48,7 +48,17 @@ type LegacyColorTokens =
 /**
  * Semantic size tokens for icons - includes SVGIcon legacy tokens, they are DEPRECATED and will be deleted, DON'T USE THEM.
  */
-type IconSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | SVGIconSizeToken
+type IconSizeToken =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | 'illu-sm'
+  | 'illu-md'
+  | 'illu-lg'
+  | SVGIconSizeToken
 
 /**
  * Semantic color tokens from Icon theme

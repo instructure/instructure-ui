@@ -95,6 +95,23 @@ type: embed
 
 ```
 
+### Billboard
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"iconHoverColorInverse",note:""},
+    {name:"iconHoverColor",note:""},
+    {name:"iconColor",note:""},
+    {name:"messageColorInverse",note:""}
+  ]}
+/>
+
+```
+
 ### Breadcrumb
 
 ```js

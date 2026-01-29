@@ -43,7 +43,7 @@ type: example
     onClick={function () {
       alert('This Billboard was clicked!')
     }}
-    hero={(size) => <IconUserLine size={size} />}
+    hero={(size) => <UserInstUIIcon size={size} />}
   />
 </View>
 ```
@@ -57,7 +57,7 @@ type: example
     margin="large"
     message="Click this link"
     href="http://instructure.com"
-    hero={(size) => <IconGradebookLine size={size} />}
+    hero={(size) => <BookCheckInstUIIcon size={size} />}
   />
 </View>
 ```
@@ -73,7 +73,7 @@ type: example
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconPlusLine size={size} />}
+  hero={(size) => <PlusInstUIIcon size={size} />}
 />
 ```
 
@@ -89,7 +89,7 @@ type: example
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconUserLine size={size} />}
+  hero={(size) => <UserInstUIIcon size={size} />}
   disabled
 />
 ```

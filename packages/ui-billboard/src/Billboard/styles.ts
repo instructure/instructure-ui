@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { BillboardTheme } from '@instructure/shared-types'
 import type { BillboardProps, BillboardStyle } from './props'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 /**
  * ---
@@ -36,7 +36,7 @@ import type { BillboardProps, BillboardStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: BillboardTheme,
+  componentTheme: NewComponentTypes['Billboard'],
   props: BillboardProps
 ): BillboardStyle => {
   const { size, href, onClick, disabled, hero, heading } = props
@@ -83,15 +83,11 @@ const generateStyle = (
         '&:hover, &:focus': {
           textDecoration: 'none',
           outline: 'none',
-          borderColor: componentTheme.iconHoverColor,
-
-          '& [class$=-billboard__hero]': {
-            color: componentTheme.iconHoverColor
-          }
+          borderColor: componentTheme.messageColorClickable
         },
         '&:active': {
           background: componentTheme.clickableActiveBg,
-          borderColor: componentTheme.iconHoverColor,
+          borderColor: componentTheme.messageColorClickable,
 
           '& [class$=-billboard__hero], & [class$=-billboard__message]': {
             color: componentTheme.clickableActiveText
@@ -128,7 +124,6 @@ const generateStyle = (
     hero: {
       label: 'billboard__hero',
       display: 'block',
-      color: componentTheme.iconColor,
       ...sizeVariants[size!].hero,
 
       '& > img, & > svg': {
