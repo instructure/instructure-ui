@@ -37,6 +37,16 @@
     "labelFontWeight": {
       "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
+    },
+    "labelPadding": {
+      "value": "0.5rem 0",
+      "type": "spacing",
+      "description": "code-only token"
+    },
+    "nestedLabelPadding": {
+      "value": "0.5rem 0.75rem",
+      "type": "spacing",
+      "description": "code-only token"
     }
   },
   "drilldownOption": {
