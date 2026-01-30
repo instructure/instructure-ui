@@ -20,7 +20,7 @@
       "value": "{borderRadius.md}",
       "type": "borderRadius"
     },
-    "lableInfoPadding": {
+    "labelInfoPadding": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
     }
