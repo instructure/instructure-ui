@@ -1,9 +1,5 @@
 {
   "options": {
-    "background": {
-      "value": "{color.background.elevatedSurface.base}",
-      "type": "color"
-    },
     "labelColor": {
       "value": "{color.text.base}",
       "type": "color"
@@ -11,6 +7,14 @@
     "labelFontWeight": {
       "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
+    },
+    "nestedLabelPaddingVertical": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "nestedLabelPaddingHorizontal": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
     }
   },
   "optionsItem": {
