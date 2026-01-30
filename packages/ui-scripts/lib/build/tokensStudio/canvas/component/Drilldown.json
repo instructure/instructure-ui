@@ -16,27 +16,13 @@
       "value": "{color.text.muted}",
       "type": "color"
     },
-    "verticalLabelPadding": {
-      "value": "0.5rem",
-      "type": "spacing",
-      "description": "code only token"
-    },
-    "horizontalLabelPadding": {
-      "value": "0rem",
-      "type": "spacing"
-    },
-    "verticalNestedLabelPadding": {
-      "value": "0.5rem",
-      "type": "spacing",
-      "description": "code only token"
-    },
-    "horizontalNestedLabelPadding": {
-      "value": "0.75rem",
-      "type": "spacing"
-    },
     "borderRadius": {
       "value": "{borderRadius.sm}",
       "type": "borderRadius"
+    },
+    "labelInfoPadding": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
     }
   },
   "drilldownGroup": {
