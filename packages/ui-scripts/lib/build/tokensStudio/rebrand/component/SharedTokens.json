@@ -41,6 +41,20 @@
         "lg": {
           "value": "{borderRadius.container.xl}",
           "type": "borderRadius"
+        },
+        "nestedContainer": {
+          "sm": {
+            "value": "{borderRadius.sm}",
+            "type": "borderRadius"
+          },
+          "md": {
+            "value": "{borderRadius.md}",
+            "type": "borderRadius"
+          },
+          "lg": {
+            "value": "{borderRadius.md}",
+            "type": "borderRadius"
+          }
         }
       }
     },
@@ -350,6 +364,20 @@
           "lg": {
             "value": "{spacing.gap.cards.lg}",
             "type": "spacing"
+          },
+          "nestedContainers": {
+            "sm": {
+              "value": "{spacing.spaceSm}",
+              "type": "spacing"
+            },
+            "md": {
+              "value": "{spacing.spaceMd}",
+              "type": "spacing"
+            },
+            "lg": {
+              "value": "{spacing.spaceLg}",
+              "type": "spacing"
+            }
           }
         },
         "inputs": {
