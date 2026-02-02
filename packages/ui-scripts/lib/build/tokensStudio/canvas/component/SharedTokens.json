@@ -463,6 +463,15 @@
         "value": "{color.background.brand}",
         "type": "color"
       },
+      "onColor": {
+        "value": "{color.background.onColor}",
+        "type": "color"
+      },
+      "inverseColor": {
+        "value": "{color.background.inverse}",
+        "type": "color",
+        "description": "Background color for inverse components. Dark grey in light mode; light grey in dark mode."
+      },
       "successColor": {
         "value": "{color.background.success}",
         "type": "color"
