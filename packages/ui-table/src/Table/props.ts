@@ -61,6 +61,11 @@ type TableOwnProps = {
    */
   layout?: 'auto' | 'fixed' | 'stacked'
   /**
+   * Sets the CSS prop `min-width` on the table.
+   * Same as {@link React.CSSProperties.minWidth}
+   */
+  minWidth?: React.CSSProperties['minWidth']
+  /**
    * `Table.Head` or `Table.Body`
    */
   children?: React.ReactNode
