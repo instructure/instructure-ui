@@ -1367,7 +1367,7 @@ type: embed
 | Select | onRequestHideOptions | `( event: React.KeyboardEvent \| React.MouseEvent \| React.FocusEvent ) => void` | No | - | Callback fired requesting that the options list be hidden. |
 | Select | onRequestHighlightOption | `( event: React.KeyboardEvent \| React.MouseEvent, data: { id?: string; direction?: 1 \| -1 } ) => void` | No | - | Callback fired requesting a particular option be highlighted. |
 | Select | onRequestSelectOption | `( event: React.KeyboardEvent \| React.MouseEvent, data: { id?: string } ) => void` | No | - | Callback fired requesting a particular option be selected. |
-| Select | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The form field label. |
+| Select | renderLabel | `Renderable` | Yes | - | The form field label. |
 | Select | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the text input. |
 | Select | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
 | Select | isRequired | `boolean` | No | `false` | Whether or not the text input is required. |
@@ -1377,22 +1377,22 @@ type: embed
 | Select | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input receives focus. |
 | Select | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input loses focus. |
 | Select | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A ref to the html `input` element. |
-| Select | renderBeforeInput | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the text input. This will commonly be an icon or tags to show multiple selections. |
-| Select | renderAfterInput | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
+| Select | renderBeforeInput | `Renderable` | No | - | Content to display before the text input. This will commonly be an icon or tags to show multiple selections. |
+| Select | renderAfterInput | `Renderable` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
 | Select | shouldNotWrap | `boolean` | No | `false` | Prevents the default behavior of wrapping the input and rendered content when available space is exceeded. |
 | Select | layout | `'stacked' \| 'inline'` | No | - | In `stacked` mode the input is below the label. In `inline` mode the input is to the right/left (depending on text direction) of the label, and the layout will look like `stacked` for small screens. |
 | Select | placement | `PlacementPropValues` | No | `'bottom stretch'` | The placement of the options list. |
 | Select | constrain | `PositionConstraint` | No | `'window'` | The parent in which to constrain the placement. |
 | Select | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use mount the options list to in the DOM (defaults to `document.body`) |
-| Select.Group | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The label associated with the group options. |
+| Select.Group | renderLabel | `Renderable` | Yes | - | The label associated with the group options. |
 | Select.Group | children | `React.ReactNode` | No | - | Children of type `<SimpleSelect.Option />` that will be considered part of the group. |
 | Select.Option | id | `string` | Yes | - | The id for the option. **Must be globally unique**, it will be translated to an `id` prop in the DOM. |
 | Select.Option | isHighlighted | `boolean` | No | `false` | Whether or not this option is highlighted. |
 | Select.Option | isSelected | `boolean` | No | `false` | Whether or not this option is selected. |
 | Select.Option | isDisabled | `boolean` | No | `false` | Whether or not this option is disabled. |
 | Select.Option | children | `React.ReactNode` | No | - | Content to display as the option label. |
-| Select.Option | renderBeforeLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the option label, such as an icon. |
-| Select.Option | renderAfterLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the option label, such as an icon. |
+| Select.Option | renderBeforeLabel | `Renderable<OptionProps>` | No | - | Content to display before the option label, such as an icon. |
+| Select.Option | renderAfterLabel | `Renderable<OptionProps>` | No | - | Content to display after the option label, such as an icon. |
 
 ### Usage
 

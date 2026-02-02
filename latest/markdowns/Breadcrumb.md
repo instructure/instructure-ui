@@ -153,7 +153,7 @@ type: embed
 | Breadcrumb.BreadcrumbLink | onClick | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button |
 | Breadcrumb.BreadcrumbLink | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void` | No | - | Fires when the Link is hovered |
 | Breadcrumb.BreadcrumbLink | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the font-size of the breadcrumb text |
-| Breadcrumb.BreadcrumbLink | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an icon to the Breadcrumb.Link |
+| Breadcrumb.BreadcrumbLink | renderIcon | `Renderable` | No | - | Add an icon to the Breadcrumb.Link |
 | Breadcrumb.BreadcrumbLink | iconPlacement | `'start' \| 'end'` | No | - | Place the icon before or after the text in the Breadcrumb.Link |
 | Breadcrumb.BreadcrumbLink | isCurrentPage | `boolean` | No | - | Whether the page this breadcrumb points to is the current one. If true, it sets aria-current="page". If this prop is not set to true on any breadcrumb element, the one recieving the aria-current="page" will always be the last element, unless the last element's isCurrentPage prop is explicity set to false. |
 

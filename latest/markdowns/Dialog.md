@@ -92,11 +92,11 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Dialog | children | `React.ReactNode` | No | - | The children to be rendered within the `<Dialog />` |
-| Dialog | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element to render as the component root, `span` by default |
+| Dialog | as | `AsElementType` | No | - | The element to render as the component root, `span` by default |
 | Dialog | display | `'auto' \| 'block' \| 'inline-block'` | No | - |  |
 | Dialog | label | `string` | No | - | The aria-label to read for screen reader. When specified, it will automatically set role="dialog". |
 | Dialog | open | `boolean` | No | `false` | Whether or not the `<Dialog />` is open |
-| Dialog | contentElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element that wraps the content of the `<Dialog />` |
+| Dialog | contentElement | `UIElement` | No | - | An element or a function returning an element that wraps the content of the `<Dialog />` |
 | Dialog | shouldFocusOnOpen | `` | No | `true` |  |
 | Dialog | shouldContainFocus | `` | No | `false` |  |
 | Dialog | shouldReturnFocus | `` | No | `false` |  |

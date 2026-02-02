@@ -160,7 +160,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| SimpleSelect | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The form field label. |
+| SimpleSelect | renderLabel | `Renderable` | Yes | - | The form field label. |
 | SimpleSelect | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
 | SimpleSelect | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the text input. |
 | SimpleSelect | assistiveText | `string` | No | - | Additional helpful text to provide to screen readers about the operation of the component. Provided via aria-describedby. |
@@ -178,8 +178,8 @@ type: example
 | SimpleSelect | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use mount the options list to in the DOM (defaults to `document.body`) |
 | SimpleSelect | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A ref to the html `input` element. |
 | SimpleSelect | listRef | `(listElement: HTMLUListElement \| null) => void` | No | - | A ref to the html `ul` element. |
-| SimpleSelect | renderBeforeInput | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the text input. This will commonly be an icon. |
-| SimpleSelect | renderAfterInput | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
+| SimpleSelect | renderBeforeInput | `Renderable` | No | - | Content to display before the text input. This will commonly be an icon. |
+| SimpleSelect | renderAfterInput | `Renderable` | No | - | Content to display after the text input. This content will replace the default arrow icons. |
 | SimpleSelect | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input receives focus. |
 | SimpleSelect | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when text input loses focus. |
 | SimpleSelect | isOptionContentAppliedToInput | `boolean` | No | `false` | Whether or not the content of the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` appear in the input field. If the selected `SimpleSelect.Option` has both `renderBeforeLabel` and `renderAfterLabel` content, both will be displayed in the input field. `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` content will not be displayed, if `SimpleSelect`'s `inputValue` is an empty value, null or undefined. If `true` and the selected `SimpleSelect.Option` has a `renderAfterLabel` value, it will replace the default arrow icon. If `true` and `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` prop is set, it will display the selected `SimpleSelect.Option`'s `renderBeforeLabel` and `renderAfterLabel` instead of `SimpleSelect`'s `renderBeforeInput` or `renderAfterInput` value. If the selected `SimpleSelect.Option`'s `renderAfterLabel` value is empty, default arrow icon will be rendered. |
@@ -189,7 +189,7 @@ type: example
 | SimpleSelect | onChange | `( event: React.SyntheticEvent, data: { value?: string \| number id?: string } ) => void` | No | - | Callback fired when a new option is selected. |
 | SimpleSelect | onShowOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the options list is shown. |
 | SimpleSelect | onHideOptions | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the options list is hidden. |
-| SimpleSelect | renderEmptyOption | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `'---'` | Content to display in the list when no options are available. |
+| SimpleSelect | renderEmptyOption | `Renderable` | No | `'---'` | Content to display in the list when no options are available. |
 | SimpleSelect | children | `React.ReactNode` | No | - | Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`. |
 | SimpleSelect.Group | renderLabel | `React.ReactNode \| (() => React.ReactNode)` | Yes | - | The label associated with the group options. |
 | SimpleSelect.Group | children | `React.ReactNode` | No | - | Children of type `<SimpleSelect.Option />` that will be considered part of the group. |
@@ -197,8 +197,8 @@ type: example
 | SimpleSelect.Option | value | `string \| number` | Yes | - | The value for the option. |
 | SimpleSelect.Option | isDisabled | `boolean` | No | `false` | Whether or not this option is disabled. |
 | SimpleSelect.Option | children | `string` | No | - | Content to display as the option label. |
-| SimpleSelect.Option | renderBeforeLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the option label, such as an icon. |
-| SimpleSelect.Option | renderAfterLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the option label, such as an icon. |
+| SimpleSelect.Option | renderBeforeLabel | `Renderable<OptionProps>` | No | - | Content to display before the option label, such as an icon. |
+| SimpleSelect.Option | renderAfterLabel | `Renderable<OptionProps>` | No | - | Content to display after the option label, such as an icon. |
 
 ### Usage
 

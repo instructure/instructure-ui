@@ -64,11 +64,11 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Spinner | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Render Spinner "as" another HTML element |
+| Spinner | as | `AsElementType` | No | `'div'` | Render Spinner "as" another HTML element |
 | Spinner | delay | `number` | No | - | delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times |
 | Spinner | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Spinner | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Spinner | renderTitle | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Give the spinner a title to be read by screenreaders |
+| Spinner | renderTitle | `Renderable` | No | - | Give the spinner a title to be read by screenreaders |
 | Spinner | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | `'medium'` | Different-sized spinners |
 | Spinner | variant | `'default' \| 'inverse'` | No | `'default'` | Different color schemes for use with light or dark backgrounds |
 

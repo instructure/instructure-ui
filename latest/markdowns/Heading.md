@@ -166,10 +166,10 @@ type: embed
 | Heading | border | `'none' \| 'top' \| 'bottom'` | No | `'none'` | Add a top- or bottom-border to the Heading |
 | Heading | color | `\| 'primary' \| 'secondary' \| 'primary-inverse' \| 'secondary-inverse' \| 'inherit' \| 'ai'` | No | `'inherit'` | The font color to render, NOTE: `ai` color is deprecated. Use the `aiVariant` prop instead |
 | Heading | level | `HeadingLevel<'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'> \| 'reset'` | No | - | The level of the heading in the DOM: h1 is largest; h6 is smallest. |
-| Heading | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | What DOM element is output is determined in the following order: 1. (deprecated) If `variant` is set, then use the `level` prop, if that's not set use `<h1>`-`<h6>` based on the `variant` prop's value 2. The value of the `as` prop 3. The value of the `level` prop 4. `<h2>` |
+| Heading | as | `AsElementType` | No | - | What DOM element is output is determined in the following order: 1. (deprecated) If `variant` is set, then use the `level` prop, if that's not set use `<h1>`-`<h6>` based on the `variant` prop's value 2. The value of the `as` prop 3. The value of the `level` prop 4. `<h2>` |
 | Heading | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Heading | elementRef | `(element: Element \| null) => void` | No | - | Provides a ref to the underlying HTML element |
-| Heading | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon that gets displayed before the text. |
+| Heading | renderIcon | `Renderable` | No | - | An icon, or function that returns an icon that gets displayed before the text. |
 | Heading | variant | `\| 'titlePageDesktop' \| 'titlePageMobile' \| 'titleSection' \| 'titleCardSection' \| 'titleModule' \| 'titleCardLarge' \| 'titleCardRegular' \| 'titleCardMini' \| 'label' \| 'labelInline'` | No | - | Sets appearance of the heading. Will also set its heading level, if not specified by the `level` prop (deprecated, not recommended!) |
 
 ### Usage

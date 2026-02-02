@@ -18,7 +18,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ScreenReaderContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| ScreenReaderContent | as | `AsElementType` | No | `'span'` | the element type to render as |
 | ScreenReaderContent | children | `ReactNode` | No | `null` | content meant for screen readers only |
 | ScreenReaderContent | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 

@@ -108,23 +108,23 @@ render(<AppNavExample />)
 |-----------|------|------|----------|---------|-------------|
 | AppNav | screenReaderLabel | `string` | Yes | - | Screenreader label for the overall navigation |
 | AppNav | debounce | `number` | No | `300` | The rate (in ms) the component responds to container resizing or an update to one of its child items |
-| AppNav | renderBeforeItems | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the navigation items, such as a logo |
-| AppNav | renderAfterItems | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the navigation items, aligned to the far end of the navigation |
+| AppNav | renderBeforeItems | `Renderable` | No | - | Content to display before the navigation items, such as a logo |
+| AppNav | renderAfterItems | `Renderable` | No | - | Content to display after the navigation items, aligned to the far end of the navigation |
 | AppNav | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | AppNav | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying nav element |
-| AppNav | renderTruncateLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `() => 'More'` | Customize the text displayed in the menu trigger when links overflow the overall nav width. |
+| AppNav | renderTruncateLabel | `Renderable` | No | `() => 'More'` | Customize the text displayed in the menu trigger when links overflow the overall nav width. |
 | AppNav | onUpdate | `(visibleItemsCount: { visibleItemsCount: number }) => void` | No | - | Called whenever the navigation items are updated or the size of the navigation changes. Passes in the `visibleItemsCount` as a parameter. |
 | AppNav | visibleItemsCount | `number` | No | `0` | Sets the number of navigation items that are visible. |
 | AppNav | children | `React.ReactNode` | No | `null` | Only accepts `AppNav.Item` as children |
-| AppNav.Item | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The text to display. If the `icon` prop is used, label text must be wrapped in `ScreenReaderContent`. |
-| AppNav.Item | renderAfter | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the renderLabel text, such as a badge |
-| AppNav.Item | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The visual to display (ex. an Image, Logo, Avatar, or Icon) |
+| AppNav.Item | renderLabel | `Renderable` | Yes | - | The text to display. If the `icon` prop is used, label text must be wrapped in `ScreenReaderContent`. |
+| AppNav.Item | renderAfter | `Renderable` | No | - | Content to display after the renderLabel text, such as a badge |
+| AppNav.Item | renderIcon | `Renderable` | No | - | The visual to display (ex. an Image, Logo, Avatar, or Icon) |
 | AppNav.Item | href | `string` | No | - | If the item goes to a new page, pass an href |
 | AppNav.Item | onClick | `(event: React.MouseEvent) => void` | No | - | If the item does not go to a new page, pass an onClick |
 | AppNav.Item | isSelected | `boolean` | No | `false` | Denotes which item is currently selected |
 | AppNav.Item | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying focusable (`button` or `a`) element |
-| AppNav.Item | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element type to render as (will default to `<a>` if href is provided) |
-| AppNav.Item | cursor | `\| 'auto' \| 'default' \| 'none' \| 'context-menu' \| 'help' \| 'pointer' \| 'progress' \| 'wait' \| 'cell' \| 'crosshair' \| 'text' \| 'vertical-text' \| 'alias' \| 'copy' \| 'move' \| 'no-drop' \| 'not-allowed' \| 'grab' \| 'grabbing' \| 'all-scroll' \| 'col-resize' \| 'row-resize' \| 'n-resize' \| 'e-resize' \| 's-resize' \| 'w-resize' \| 'ne-resize' \| 'nw-resize' \| 'se-resize' \| 'sw-resize' \| 'ew-resize' \| 'ns-resize' \| 'nesw-resize' \| 'nwse-resize' \| 'zoom-in' \| 'zoom-out'` | No | `'pointer'` | Specify the mouse cursor to use on :hover. The `pointer` cursor is used by default. |
+| AppNav.Item | as | `AsElementType` | No | - | The element type to render as (will default to `<a>` if href is provided) |
+| AppNav.Item | cursor | `Cursor` | No | `'pointer'` | Specify the mouse cursor to use on :hover. The `pointer` cursor is used by default. |
 | AppNav.Item | isDisabled | `boolean` | No | `false` | Disables the link or button visually and functionally |
 | AppNav.Item | children | `` | No | `null` |  |
 

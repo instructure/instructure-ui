@@ -423,7 +423,7 @@ type: embed
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| TextInput | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The form field label. |
+| TextInput | renderLabel | `Renderable` | No | - | The form field label. |
 | TextInput | type | `'text' \| 'email' \| 'url' \| 'tel' \| 'search' \| 'password'` | No | `'text'` | Determines the underlying native HTML `<input>` element's `type`. For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url |
 | TextInput | id | `string` | No | - | The id of the text input. One is generated if not supplied. |
 | TextInput | value | `string` | No | - | the selected value (must be accompanied by an `onChange` prop) |
@@ -441,8 +441,8 @@ type: embed
 | TextInput | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | TextInput | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | a function that provides a reference to the actual input element |
 | TextInput | inputContainerRef | `(element: HTMLSpanElement \| null) => void` | No | - | a function that provides a reference a parent of the input element |
-| TextInput | renderBeforeInput | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display before the input text, such as an icon |
-| TextInput | renderAfterInput | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to display after the input text, such as an icon |
+| TextInput | renderBeforeInput | `Renderable` | No | - | Content to display before the input text, such as an icon |
+| TextInput | renderAfterInput | `Renderable` | No | - | Content to display after the input text, such as an icon |
 | TextInput | onChange | `(event: React.ChangeEvent<HTMLInputElement>, value: string) => void` | No | - | Callback executed when the input fires a change event. @param {Object} event - the event object @param {string} value - the string value of the input |
 | TextInput | onBlur | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input loses focus. |
 | TextInput | onFocus | `(event: React.FocusEvent<HTMLInputElement>) => void` | No | - | Callback fired when input receives focus. |
