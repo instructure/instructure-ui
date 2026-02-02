@@ -463,6 +463,14 @@
         "value": "{color.background.brand}",
         "type": "color"
       },
+      "onColor": {
+        "value": "{color.background.onColor}",
+        "type": "color"
+      },
+      "inverseColor": {
+        "value": "{color.background.inverse}",
+        "type": "color"
+      },
       "successColor": {
         "value": "{color.background.success}",
         "type": "color"
