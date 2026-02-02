@@ -38,7 +38,7 @@ parent: InlineList
 id: InlineList.Item
 ---
 **/
-@withStyle(generateStyle, 'InlineListInlineListItem')
+@withStyle(generateStyle)
 class InlineListItem extends Component<InlineListItemProps> {
   static readonly componentId = 'InlineList.Item'
 

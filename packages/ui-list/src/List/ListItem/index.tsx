@@ -38,7 +38,7 @@ parent: List
 id: List.Item
 ---
 **/
-@withStyle(generateStyle, 'ListListItem')
+@withStyle(generateStyle)
 class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 

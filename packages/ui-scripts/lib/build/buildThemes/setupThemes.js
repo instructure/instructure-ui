@@ -106,14 +106,12 @@ const setupThemes = async (targetPath, input) => {
     // primitives
     const primitives = generatePrimitives(input[themeData[theme].primitives])
     const primitiveTypes = generateType(primitives)
-
     const primitivesFileContent = `
           export type Primitives = ${primitiveTypes}
 
           const primitives: Primitives = ${JSON.stringify(primitives)}
           export default primitives
           `
-
     await createFile(`${themePath}/primitives.ts`, primitivesFileContent)
 
     // semantics
@@ -121,7 +119,6 @@ const setupThemes = async (targetPath, input) => {
       input,
       themeData[theme].semantic
     )
-
     const semantics = generateSemantics(mergedSemanticData)
     const semanticsTypes = generateSemanticsType(mergedSemanticData)
     const semanticsFileContent = `
@@ -140,53 +137,50 @@ const setupThemes = async (targetPath, input) => {
     for (const componentpath of themeData[theme].components) {
       const rawComponentName =
         componentpath.split('/')[componentpath.split('/').length - 1]
-
-      const mainComponentName =
-        rawComponentName[0].toLowerCase() + rawComponentName.slice(1)
-
-      //figma needs prefixed subcomponents, e.g.: for modal => modalHeader, modalBody, etc... and we need only the name of the subcomponent, so we access the data with the subcomponent object, containing the prefixed version and making a non-prefixed list of the same components to produce files, variable, theme names
-      const subcomponents = Object.keys(input[componentpath])
-      const subcomponentNames = subcomponents.reduce(
-        (acc, subcomponent) => [
-          ...acc,
-          ...(subcomponent.startsWith(acc[0]) &&
-          subcomponent.length > acc[0].length
-            ? [unCapitalize(subcomponent.slice(acc[0].length))]
-            : [])
-        ],
-        [subcomponents[0]]
-      )
-
-      subcomponents.forEach(async (subcomponent, subcomponentIndex) => {
-        const subcomponentName = subcomponentNames[subcomponentIndex]
-
-        const componentName =
-          subcomponent === mainComponentName
-            ? mainComponentName
-            : `${mainComponentName}${capitalize(subcomponentName)}`
-        if (componentName !== 'sharedTokens') {
-          componentAndSubcomponentNames.push(componentName)
+      // e.g. ['tabs', 'tabsPanel', 'tabsTab']
+      const componentAndSubComponents = Object.keys(input[componentpath])
+      const componentNameDict = {}
+      for (let i = 0; i < componentAndSubComponents.length; i++) {
+        // e.g. 'tag' or 'menuSeparator'
+        const fullComponentName = componentAndSubComponents[i]
+        if (componentNameDict[fullComponentName]) {
+          throw new Error(
+            'Component names must be unique. The following name' +
+              ' appears more than once: ',
+            fullComponentName
+          )
+        } else {
+          componentNameDict[fullComponentName] = true
         }
-
-        const component = generateComponent(input[componentpath][subcomponent])
-
-        const componentTypes = generateComponentType(
-          input[componentpath][subcomponent]
+        if (fullComponentName !== 'sharedTokens') {
+          componentAndSubcomponentNames.push(fullComponentName)
+        }
+        const componentThemeVars = generateComponent(
+          input[componentpath][fullComponentName]
         )
 
-        //SharedTokens have to be at the component level in the input data because of figma, but it should be one level higher for our purposes
+        const componentTypes = generateComponentType(
+          input[componentpath][fullComponentName]
+        )
+        const semanticsImport = componentThemeVars.includes('semantics.')
+          ? 'import semantics from "../semantics"'
+          : ''
+        // SharedTokens have to be at the component level in the input data
+        // because of Figma, but it should be one level higher for our purposes
         if (rawComponentName !== 'SharedTokens') {
           const componentFileContent = `
-          import semantics from "../semantics"
+          ${semanticsImport}
           import type { ${capitalize(
-            componentName
-          )} } from '../../componentTypes/${componentName}'
+            fullComponentName
+          )} } from '../../componentTypes/${fullComponentName}'
 
-          const ${componentName}: ${capitalize(componentName)} = {${component}}
-          export default ${componentName}
+          const ${fullComponentName}: ${capitalize(
+            fullComponentName
+          )} = {${componentThemeVars}}
+          export default ${fullComponentName}
             `
           await createFile(
-            `${themePath}/components/${componentName}.ts`,
+            `${themePath}/components/${fullComponentName}.ts`,
             componentFileContent
           )
         }
@@ -197,12 +191,14 @@ const setupThemes = async (targetPath, input) => {
         import semantics from "./semantics"
         import { SharedTokens } from '../commonTypes'
 
-        const ${componentName}: ${capitalize(componentName)} = {${component}}
-        export default ${componentName}
+        const ${fullComponentName}: ${capitalize(
+            fullComponentName
+          )} = {${componentThemeVars}}
+        export default ${fullComponentName}
           `
 
           await createFile(
-            `${themePath}/${componentName}.ts`,
+            `${themePath}/${fullComponentName}.ts`,
             componentFileContent
           )
         }
@@ -211,18 +207,18 @@ const setupThemes = async (targetPath, input) => {
           const typeFileContent = `
           ${getTypeImports(componentTypes, theme)}
 
-          export type ${capitalize(componentName)} = ${componentTypes}
+          export type ${capitalize(fullComponentName)} = ${componentTypes}
 
-          export default ${capitalize(componentName)}
+          export default ${capitalize(fullComponentName)}
         `
           if (rawComponentName !== 'SharedTokens') {
             await createFile(
-              `${targetPath}/componentTypes/${componentName}.ts`,
+              `${targetPath}/componentTypes/${fullComponentName}.ts`,
               typeFileContent
             )
           }
         }
-      })
+      }
     }
 
     //index file
@@ -244,7 +240,7 @@ const setupThemes = async (targetPath, input) => {
       import sharedTokens from "./sharedTokens";
       import primitives, {type Primitives} from "./primitives";
       import semantics, {type Semantics} from "./semantics";
-      
+
       ${componentImports}
 
       import type { BaseTheme } from '../commonTypes';
@@ -324,7 +320,7 @@ const setupThemes = async (targetPath, input) => {
     textDecoration?: TokenTextDecorationValue
   }
 
-  export type SharedTokens = ${sharedTokensTypes}  
+  export type SharedTokens = ${sharedTokensTypes}
 
   export type BaseTheme<P extends Record<string, any> = Record<string, any>, S extends Record<string, any> = Record<string, any>> = {
     primitives: P
@@ -332,8 +328,8 @@ const setupThemes = async (targetPath, input) => {
     sharedTokens: SharedTokens
     components: ComponentTypes
   }
-  
-  
+
+
   `
   await createFile(`${targetPath}/commonTypes.ts`, commonTypes)
 
