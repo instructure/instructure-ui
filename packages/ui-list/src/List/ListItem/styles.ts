@@ -33,13 +33,10 @@ import type { ListItemProps, ListItemStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {String} props.delimiter
- * @param  {String} props.spacing
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ListListItem'],
+  componentTheme: NewComponentTypes['ListItem'],
   props: ListItemProps
 ): ListItemStyle => {
   const { size, delimiter, spacing } = props
@@ -98,8 +95,7 @@ const generateStyle = (
     dashed: {
       listStylePosition: 'inside',
       '&:not(:first-of-type)': {
-        borderTop:
-          `
+        borderTop: `
             ${componentTheme.delimiterDashedBorder.width}
             ${componentTheme.delimiterDashedBorder.style}
             ${componentTheme.delimiterDashedBorder.color}
@@ -109,8 +105,7 @@ const generateStyle = (
     solid: {
       listStylePosition: 'inside',
       '&:not(:first-of-type)': {
-        borderTop:
-          `
+        borderTop: `
             ${componentTheme.delimiterSolidBorder.width}
             ${componentTheme.delimiterSolidBorder.style}
             ${componentTheme.delimiterSolidBorder.color}
