@@ -52,10 +52,6 @@
       "value": "{color.background.interactive.action.primary.base}",
       "type": "color"
     },
-    "activeIconColor": {
-      "value": "{color.icon.interactive.action.primary.base}",
-      "type": "color"
-    },
     "activeLabelColor": {
       "value": "{color.text.interactive.action.primary.base}",
       "type": "color"

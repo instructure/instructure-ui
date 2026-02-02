@@ -25,6 +25,11 @@
         "value": "{color.white}",
         "type": "color"
       },
+      "inverse": {
+        "value": "{color.grey.grey10}",
+        "type": "color",
+        "description": "Background color for inverse components. Dark grey in light mode; light grey in dark mode."
+      },
       "dark": {
         "value": "{color.grey.grey170}",
         "type": "color"

@@ -235,6 +235,10 @@
       "lg": {
         "value": "{size.size4}",
         "type": "borderRadius"
+      },
+      "xl": {
+        "value": "{size.size4}",
+        "type": "borderRadius"
       }
     },
     "interactive": {
