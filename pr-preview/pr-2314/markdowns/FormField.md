@@ -79,7 +79,7 @@ type: example
 | FormField.FormFieldLayout | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | FormField.FormFieldLayout | isGroup | `boolean` | No | - |  |
 | FormField.FormFieldLayout | isRequired | `boolean` | No | - | If `true`, displays an asterisk after the label to indicate the field is required |
-| FormField.FormFieldLayout | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| FormField.FormFieldLayout | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="small auto large"`. |
 | FormField.FormFieldLayout | disabled | `boolean` | No | - | Whether the field is disabled. When true, error and success messages will be hidden. |
 | FormField.FormFieldLayout | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLayout | themeOverride | `ThemeOverrideValue` | No | - |  |

@@ -463,7 +463,7 @@ type: embed
 | Popover | on | `('click' \| 'hover' \| 'focus') \| ('click' \| 'hover' \| 'focus')[]` | No | `['hover', 'focus']` | The action that causes the content to display (`click`, `hover`, `focus`) |
 | Popover | withArrow | `boolean` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
 | Popover | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Color variant of the popover content |
-| Popover | shadow | `Shadow` | No | `'resting'` | Controls the shadow depth for the `<Popover />` |
+| Popover | shadow | `Shadow` | No | `'above'` | Controls the shadow depth for the `<Popover />` |
 | Popover | stacking | `Stacking` | No | `'topmost'` | Controls the z-index depth for the `<Popover />` content |
 | Popover | contentRef | `(contentElement: Element \| null) => void` | No | - | A function that returns a reference to the content element |
 | Popover | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |

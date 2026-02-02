@@ -89,7 +89,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 ---
 type: example
 ---
-<View background="primary-inverse" as="div">
+<View background="primary-inverse" padding="medium" as="div">
   <ProgressBar
     screenReaderLabel="Loading completion"
     color="primary-inverse"
