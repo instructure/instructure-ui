@@ -737,9 +737,9 @@ type: embed
 | TreeBrowser | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
 | TreeBrowser | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | TreeBrowser | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `FolderClosedInstUIIcon` |  |
-| TreeBrowser | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `FolderClosedInstUIIcon` |  |
-| TreeBrowser | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `FileTextInstUIIcon` |  |
+| TreeBrowser | collectionIcon | `Renderable` | No | `FolderClosedInstUIIcon` |  |
+| TreeBrowser | collectionIconExpanded | `Renderable` | No | `FolderClosedInstUIIcon` |  |
+| TreeBrowser | itemIcon | `Renderable` | No | `FileTextInstUIIcon` |  |
 | TreeBrowser | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
 | TreeBrowser.TreeButton | id | `string \| number` | No | - |  |
 | TreeBrowser.TreeButton | name | `string` | No | - |  |
@@ -755,9 +755,9 @@ type: embed
 | TreeBrowser.TreeButton | hoverable | `boolean` | No | `true` | Whether the button should show hover effects. Set to false to disable hover styling when the button contains custom interactive content. @default true |
 | TreeBrowser.TreeButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | TreeBrowser.TreeButton | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser.TreeButton | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeButton | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeButton | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeButton | collectionIcon | `Renderable` | No | - |  |
+| TreeBrowser.TreeButton | collectionIconExpanded | `Renderable` | No | - |  |
+| TreeBrowser.TreeButton | itemIcon | `Renderable` | No | - |  |
 | TreeBrowser.TreeButton | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
 | TreeBrowser.TreeCollection | level | `number` | Yes | - |  |
 | TreeBrowser.TreeCollection | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
@@ -781,9 +781,9 @@ type: embed
 | TreeBrowser.TreeCollection | onCollectionClick | `(e: React.MouseEvent, data: CollectionData) => void` | No | - |  |
 | TreeBrowser.TreeCollection | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | TreeBrowser.TreeCollection | variant | `'folderTree' \| 'indent'` | No | `'folderTree'` |  |
-| TreeBrowser.TreeCollection | collectionIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeCollection | collectionIconExpanded | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| TreeBrowser.TreeCollection | itemIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| TreeBrowser.TreeCollection | collectionIcon | `Renderable` | No | - |  |
+| TreeBrowser.TreeCollection | collectionIconExpanded | `Renderable` | No | - |  |
+| TreeBrowser.TreeCollection | itemIcon | `Renderable` | No | - |  |
 | TreeBrowser.TreeCollection | renderContent | `(props: TreeBrowserButtonProps) => React.JSX.Element` | No | - |  |
 | TreeBrowser.TreeNode | onKeyDown | `(e: React.KeyboardEvent, data: CollectionData) => void` | No | - |  |
 | TreeBrowser.TreeNode | children | `React.ReactNode` | No | - | The children to be rendered within the `<TreeNode />` |

@@ -74,8 +74,8 @@ type: embed
 | Overlay | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
 | Overlay | children | `React.ReactNode` | No | - |  |
 | Overlay | label | `string` | Yes | - | An accessible label for the `<Overlay />` content |
-| Overlay | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
-| Overlay | contentElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element that wraps the content of the `<Overlay />` |
+| Overlay | defaultFocusElement | `UIElement` | No | - | An element or a function returning an element to focus by default |
+| Overlay | contentElement | `UIElement` | No | - | An element or a function returning an element that wraps the content of the `<Overlay />` |
 | Overlay | shouldContainFocus | `boolean` | No | `false` |  |
 | Overlay | shouldReturnFocus | `boolean` | No | `false` |  |
 | Overlay | shouldCloseOnDocumentClick | `boolean` | No | `false` |  |

@@ -599,7 +599,7 @@ type: embed
 | Tabs.Tab | isSelected | `boolean` | No | `false` |  |
 | Tabs.Tab | onClick | `( event: React.MouseEvent<ViewOwnProps>, tabData: { index: number; id: string } ) => void` | No | - |  |
 | Tabs.Tab | onKeyDown | `( event: React.KeyboardEvent<ViewOwnProps>, tabData: { index: number; id: string } ) => void` | No | - |  |
-| Tabs.Tab | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| Tabs.Tab | children | `Renderable` | No | - |  |
 | Tabs.Tab | isOverflowScroll | `boolean` | No | - | Whether tabOverflow prop in Tabs is set to 'scroll'. |
 
 ### Usage
