@@ -698,6 +698,22 @@ type: embed
 
 ```
 
+### ToggleDetails
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"smallIconSize",newName:"contentPaddingSmall",note:""},
+    {oldName:"mediumIconSize",newName:"contentPaddingMedium",note:""},
+    {oldName:"largeIconSize",newName:"contentPaddingLarge",note:""}
+  ]}
+/>
+
+```
+
 ### View
 
 ```js

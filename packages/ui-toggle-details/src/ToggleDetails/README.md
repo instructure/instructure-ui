@@ -205,9 +205,9 @@ const Example = () => {
         size={size}
         variant={variant}
       >
-        <Text weight="bold">
+        <span>
           I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!I am controlled and expanded!
-        </Text>
+        </span>
       </ToggleDetails>
     </div>
   );
