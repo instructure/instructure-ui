@@ -1162,6 +1162,7 @@ type: embed
 | Table | elementRef | `(element: Element \| null) => void` | No | - | Provide a reference to the underlying html element |
 | Table | hover | `boolean` | No | `false` | Highlight each row on hover |
 | Table | layout | `'auto' \| 'fixed' \| 'stacked'` | No | `'auto'` | `auto` lets the browser determine table column widths based on cell content, while `fixed` forces columns of equal width (sets the [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) CSS prop to `fixed`). `stacked` renders table in one column to be more readable on narrow screens |
+| Table | minWidth | `React.CSSProperties['minWidth']` | No | - | Sets the CSS prop `min-width` on the table. Same as {@link React.CSSProperties.minWidth} |
 | Table | children | `React.ReactNode` | No | `null` | `Table.Head` or `Table.Body` |
 | Table.Body | children | `React.ReactNode` | No | `null` | Body's children should be a container component where each child represents a row. `Table.Row` by default |
 | Table.Cell | header | `Renderable` | No | - | Contains the column header for this cell. This gets rendered in `stacked` layout to identify the column the data belongs to. |

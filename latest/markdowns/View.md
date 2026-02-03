@@ -808,7 +808,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | View | as | `AsElementType` | No | - | The element to render as the component root, `span` by default |
 | View | elementRef | `(element: HTMLElement \| null) => void` | No | - | provides a reference to the underlying html element |
-| View | display | `\| 'auto' \| 'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | `'auto'` | By default the display prop is 'auto', meaning it takes on the display rules of the html element it's rendered as (see `as` prop). |
+| View | display | `\| 'auto' \| 'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex' \| 'contents' // these are global CSS values \| 'inherit' // inherit the parent's display value \| 'initial' // reset the property back to the spec default \| 'revert' // reset to user agent stylesheet \| 'revert-layer' \| 'unset'` | No | `'auto'` | By default the display prop is 'auto', meaning it takes on the display rules of the html element it's rendered as (see `as` prop). |
 | View | overflowX | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
 | View | overflowY | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
 | View | height | `string \| number` | No | - |  |
