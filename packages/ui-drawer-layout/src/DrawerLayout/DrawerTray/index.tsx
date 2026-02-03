@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'

@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'

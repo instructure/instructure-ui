@@ -32,7 +32,7 @@ import {
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TableBodyProps } from './props'

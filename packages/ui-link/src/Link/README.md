@@ -10,9 +10,24 @@ describes: Link
 ---
 type: example
 ---
-<Link href="https://instructure.github.io/instructure-ui/" target="_blank">
-  Link text
-</Link>
+  <div>
+<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/"
+                                themeOverride={{
+                                  focusOutlineColor: 'pink'
+                                }}>jumps</Link> over the lazy dog.</Text>
+<Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link>
+</div>
+```
+
+```js
+---
+type: example
+---
+<View background="primary-inverse" as="div">
+  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/" themeOverride={{
+    focusInverseIconOutlineColor: 'pink'
+  }}>jumps</Link> over the lazy dog.</Text>
+</View>
 ```
 
 ### Controlled navigation
@@ -34,89 +49,35 @@ type: example
 </Link>
 ```
 
-If neither `href` nor `onClick` is provided, the Link will render as plain text (a `<span>` element) without interactive styling:
-
-```js
----
-type: example
----
-<div>
-  <Text>This is a Link with no href or onClick: <Link>I look like plain text</Link></Text>
-</div>
-```
-
-### Size
-
-The `size` prop controls the font size, line height, and icon size, icon gap. Available sizes are `small`, `medium`, and `large`.
-
-```js
----
-type: example
----
-<div>
-  <div>
-    <Link renderIcon={<DiamondInstUIIcon />} variant="standalone" href="https://instructure.github.io/instructure-ui/" size="small">
-      Link small
-    </Link>
-  </div>
-  <br />
-  <div>
-    <Link renderIcon={<DiamondInstUIIcon />} variant="standalone" href="https://instructure.github.io/instructure-ui/" size="medium">
-      Link medium
-    </Link>
-  </div>
-  <br />
-  <div>
-    <Link renderIcon={<DiamondInstUIIcon />} variant="standalone" href="https://instructure.github.io/instructure-ui/" size="large">
-      Link large
-    </Link>
-  </div>
-  <br />
-</div>
-```
-
 ### Variant
 
-The `variant` prop controls the text decoration and intended use case. Available variants are `inline` (underlined, for use within text) and `standalone` (no underline, for standalone links).
-
-Use the `variant` prop in combination with the `size` prop to control both the appearance and size of the link.
+In order to make it easy to get the most commonly used links, we have the variant prop. It will set all the necessary styles (fontSize, lineHeight, and textDecoration).
 
 ```js
 ---
 type: example
 ---
 <div>
-  <div>
-    In a line of text you should use the <Link variant="inline" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
-  </div>
-  <br />
-  <div>
-    If the link is standalone (not in a text), use the <code>standalone</code> variant:
-    <Link variant="standalone" size="medium" renderIcon={<DiamondInstUIIcon />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
-  </div>
+<div>
+In a line of text you should use the <Link variant="inline" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline</Link> link variant.
 </div>
-```
 
-#### Deprecated variant values
+<br></br>
+<div>
+<Text variant="contentSmall">In a line of text, where the text is smaller, use the <Link variant="inline-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">inline-small</Link> link variant
+</Text>
+</div>
 
-**The following variant values are deprecated and will be removed in a future version:**
+<br></br>
+<div>
+If the link is standalone (not in a text), use the <code>standalone</code> <Link display="block" variant="standalone" renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone</Link>
+</div>
 
-- `inline-small`
-- `standalone-small`
-
-These deprecated values are still supported for backward compatibility but will trigger console warnings. Please update your code to use the new `variant` + `size` prop combination.
-
-```js
----
-type: code
----
-// Deprecated (still works but triggers warning)
-<Link variant="inline-small" href="#">Link</Link>
-<Link variant="standalone-small" href="#">Link</Link>
-
-// Recommended
-<Link variant="inline" size="small" href="#">Link</Link>
-<Link variant="standalone" size="small" href="#">Link</Link>
+<br></br>
+<div>
+If the link is standalone (not in a text), but smaller, use the <code>standalone-small</code> <Link display="block" variant="standalone-small"  renderIcon={<IconUserLine />} href="https://instructure.github.io/instructure-ui/">standalone-small</Link>
+</div>
+</div>
 ```
 
 ### Adding margin
@@ -132,6 +93,23 @@ type: example
 <Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
 ```
 
+### Underlines
+
+Link's primary use is inline with other content, which is why it is underlined by default. For rare situations where Link needs
+to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. **Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.**
+
+```js
+---
+type: example
+---
+<Link
+  href="http://instructure.design"
+  isWithinText={false}
+>
+  I have no default underline
+</Link>
+```
+
 ### Truncating text
 
 Use [TruncateText](TruncateText) to truncate text within Link. Note this will cause Link to display `inline-flex`,
@@ -143,7 +121,8 @@ type: example
 ---
 <Link
   onClick={() => console.log('clicked')}
-  renderIcon={<DiamondInstUIIcon />}
+  isWithinText={false}
+  renderIcon={<IconUserLine size="small" />}
 >
   <TruncateText>{lorem.paragraph()}</TruncateText>
 </Link>
@@ -155,18 +134,20 @@ Use the `renderIcon` property to put an [icon](icons) inside a Link. To position
 icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
 render a Link with just an icon. Don't forget to add text for screen readers, though.
 
+NOTE: if you want the icon to have the same `font-size` as the link, do not specify its `size`!
+
 ```js
 ---
 type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" renderIcon={<DiamondInstUIIcon />}>Icon before text</Link> with the quick brown fox
+    <Link href="https://instructure.design" renderIcon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
       href="https://instructure.design"
-      renderIcon={<DiamondInstUIIcon />}
+      renderIcon={<IconUserLine />}
       iconPlacement="end"
     >
       Icon appears after Link text
@@ -174,7 +155,7 @@ type: example
   </View>
   <View as="div">
     This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} renderIcon={<DiamondInstUIIcon />}>
+    <Link onClick={() => console.log('clicked!')} renderIcon={IconUserLine}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
     </Link>.
   </View>
@@ -183,34 +164,22 @@ type: example
 
 ### Theme overrides
 
-Examples showing how [theme overrides](using-theme-overrides) work for Link:
+Examples showing how theme overrides work for Link:
 
 ```js
 ---
 type: example
 ---
 <div>
-  <InstUISettingsProvider
-    theme={{
-      newTheme: {
-        sharedTokens: {
-          focusOutline: {
-            infoColor: 'pink',
-            width: '0.5rem',
-          }
-        }
-      }
-    }}
-  >
-    <Text>The quick brown fox <Link
-      href="https://instructure.github.io/instructure-ui/"
-      themeOverride={{
-        textColor: 'red',
-        textHoverColor: 'green',
-        fontWeight: 700
-      }}>jumps</Link> over the lazy dog.
-    </Text>
-  </InstUISettingsProvider>
+  <Text>The quick brown fox <Link
+    href="https://instructure.github.io/instructure-ui/"
+    themeOverride={{
+      focusOutlineWidth: '0.5rem',
+      focusOutlineStyle: 'dashed',
+      focusOutlineBorderRadius: '0',
+      focusOutlineColor: 'pink'
+    }}>jumps</Link> over the lazy dog.
+  </Text>
 </div>
 ```
 
@@ -220,27 +189,25 @@ type: example
 ---
 <View background="primary-inverse" as="div">
   <Text color="primary-inverse">The quick brown fox <Link
+    color="link-inverse"
     href="https://instructure.github.io/instructure-ui/"
-    color="link"
     themeOverride={{
-      textColor: 'red',
-      textHoverColor: 'magenta',
-      onColorTextColor: 'orange',
-      onColorTextHoverColor: 'lime',
-      fontWeight: 700
+      focusOutlineWidth: '0.5rem',
+      focusOutlineStyle: 'dashed',
+      focusOutlineBorderRadius: '0',
+      focusInverseOutlineColor: 'green'
   }}
   >jumps</Link> over the lazy dog.</Text>
   <br />
   <Text color="primary-inverse">The quick brown fox <Link
-    href="https://instructure.github.io/instructure-ui/"
-    renderIcon={<LogOutInstUIIcon />}
     color="link-inverse"
+    href="https://instructure.github.io/instructure-ui/"
+    renderIcon={<IconUserLine />}
     themeOverride={{
-      textColor: 'red',
-      textHoverColor: 'magenta',
-      onColorTextColor: 'orange',
-      onColorTextHoverColor: 'lime',
-      fontWeight: 700
+      focusOutlineWidth: '0.5rem',
+      focusOutlineStyle: 'dashed',
+      focusOutlineBorderRadius: '0',
+      focusInverseIconOutlineColor: 'red'
   }}
   >jumps</Link> over the lazy dog.</Text>
 </View>

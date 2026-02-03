@@ -58,6 +58,12 @@
       "require": "./lib/index.js",
       "default": "./es/index.js"
     },
+    "./v11_5": {
+      "types": "./types/Link/11_5/index.d.ts",
+      "import": "./es/Link/11_5/index.js",
+      "require": "./lib/Link/11_5/index.js",
+      "default": "./es/Link/11_5/index.js"
+    },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",
     "./types/*": "./types/*",

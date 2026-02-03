@@ -31,14 +31,15 @@ import {
   getElementType,
   getInteraction,
   matchComponentTypes,
-  passthroughProps
+  passthroughProps,
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
-import { renderIconWithProps } from '@instructure/ui-icons'
 
 import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
@@ -50,7 +51,7 @@ import type { ViewOwnProps } from '@instructure/ui-view'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 
@@ -60,6 +61,7 @@ class Link extends Component<LinkProps, LinkState> {
     interaction: undefined,
     color: 'link',
     iconPlacement: 'start',
+    isWithinText: true,
     forceButtonRole: true
   } as const
 
@@ -82,43 +84,10 @@ class Link extends Component<LinkProps, LinkState> {
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
-  makeStyleProps = (): LinkStyleProps & {
-    variant?: LinkProps['variant']
-    size?: LinkProps['size']
-  } => {
-    const { variant: variantProp, size: sizeProp } = this.props
-
-    // Handle deprecated variant values by mapping them to new variant + size props
-    let variant: 'inline' | 'standalone' | undefined = variantProp as any
-    let size = sizeProp
-
-    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
-      warn(
-        false,
-        `[Link] The variant value "${variantProp}" is deprecated. Use variant="${variantProp.replace(
-          '-small',
-          ''
-        )}" with size="small" instead.`
-      )
-      variant = variantProp.replace('-small', '') as 'inline' | 'standalone'
-      // Only set size from deprecated variant if size prop is not explicitly provided
-      if (!sizeProp) {
-        size = 'small'
-      }
-    } else if (
-      (variantProp === 'inline' || variantProp === 'standalone') &&
-      !sizeProp
-    ) {
-      // When using new variant values without explicit size, default to medium
-      // This maintains the old behavior where 'inline' and 'standalone' were medium-sized
-      size = 'medium'
-    }
-
+  makeStyleProps = (): LinkStyleProps => {
     return {
       containsTruncateText: this.containsTruncateText,
-      hasVisibleChildren: this.hasVisibleChildren,
-      variant,
-      size
+      hasVisibleChildren: this.hasVisibleChildren
     }
   }
 
@@ -225,43 +194,14 @@ class Link extends Component<LinkProps, LinkState> {
   }
 
   renderIcon() {
-    const {
-      display,
-      renderIcon,
-      variant: variantProp,
-      size: sizeProp
-    } = this.props
-
     warn(
       // if display prop is used, warn about icon or TruncateText
-      display === undefined,
+      this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
-
-    // Determine the actual size being used (considering deprecated variants)
-    let size = sizeProp
-    if (variantProp === 'inline-small' || variantProp === 'standalone-small') {
-      size = sizeProp || 'small'
-    } else if (
-      (variantProp === 'inline' || variantProp === 'standalone') &&
-      !sizeProp
-    ) {
-      size = 'medium'
-    }
-
-    // Map Link sizes to icon sizes
-    const linkSizeToIconSize = {
-      small: 'xs',
-      medium: 'sm',
-      large: 'lg'
-    } as const
-
-    const iconSize =
-      linkSizeToIconSize[(size || 'medium') as keyof typeof linkSizeToIconSize]
-
     return (
       <span css={this.props.styles?.icon}>
-        {renderIconWithProps(renderIcon, iconSize, undefined)}
+        {callRenderProp(this.props.renderIcon)}
       </span>
     )
   }
@@ -276,6 +216,7 @@ class Link extends Component<LinkProps, LinkState> {
       margin,
       renderIcon,
       iconPlacement,
+      isWithinText,
       ...props
     } = this.props
 

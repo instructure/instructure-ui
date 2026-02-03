@@ -17,7 +17,7 @@ Changes needed:
 - Import token types from `@instructure/ui-themes` instead of `@instructure/shared-types`
 - Update `generateStyle` function to use `NewComponentTypes['ComponentName']` for the theme parameter
 - Replace old theme tokens with new token names from the design system
-- Replace `@withStyleRework` decorator with `@withStyle` and remove `generateComponentTheme`
+- Replace `@TODO_EXPLAIN` decorator with `@withStyle` and remove `generateComponentTheme`
 - delete `theme.ts`
 
 If tokens are from a different (usually parent) components, add the `componentID` of that component as second paramater of `@withStyle` and use that name in the `generateStyle` function in `style.ts`: `NewComponentTypes['ParentComponentNameWithTheTokens']`

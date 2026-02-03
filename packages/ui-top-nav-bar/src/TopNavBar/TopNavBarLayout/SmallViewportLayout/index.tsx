@@ -37,7 +37,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
-import { withStyleRework as withStyle, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 import { Tray } from '@instructure/ui-tray'
 import {

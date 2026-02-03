@@ -33,6 +33,7 @@ import {
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { BadgeProps } from './props'
@@ -43,7 +44,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Badge extends Component<BadgeProps> {
   static readonly componentId = 'Badge'
 

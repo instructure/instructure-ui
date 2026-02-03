@@ -25,7 +25,7 @@
 import { Component, ContextType } from 'react'
 
 import { Img } from '@instructure/ui-img'
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 import { renderIconWithProps } from '@instructure/ui-icons'
 
 import generateStyles from './styles'

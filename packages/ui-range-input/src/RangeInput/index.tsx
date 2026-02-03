@@ -28,7 +28,7 @@ import { warn } from '@instructure/console'
 import { ContextView } from '@instructure/ui-view'
 import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 import {
   omitProps,
   pickProps,

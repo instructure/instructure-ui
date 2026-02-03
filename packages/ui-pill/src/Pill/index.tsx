@@ -32,6 +32,7 @@ import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import type { PillProps, PillState } from './props'
 import { allowedProps } from './props'
@@ -41,8 +42,7 @@ import { allowedProps } from './props'
 category: components
 ---
 **/
-
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Pill extends Component<PillProps, PillState> {
   static readonly componentId = 'Pill'
 

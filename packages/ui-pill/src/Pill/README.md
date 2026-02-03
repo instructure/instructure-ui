@@ -12,40 +12,92 @@ you can use the `statusLabel` prop to add a label to the left of the main text.
 type: example
 ---
 <div>
-  <Pill
-    margin="x-small"
-  >
-    Excused
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    color="info"
-    margin="x-small"
-  >
-    Draft
-  </Pill>
-  <Pill
-    statusLabel="Status"
-    renderIcon={<CheckInstUIIcon size="sm" />}
-    color="success"
-    margin="x-small"
-  >
-    Checked In
-  </Pill>
-  <Pill
-    renderIcon={<Clock4InstUIIcon size="sm" />}
-    color="warning"
-    margin="x-small"
-  >
-    Late
-  </Pill>
-  <Pill
-    renderIcon={<MailInstUIIcon size="sm" />}
-    color="error"
-    margin="x-small"
-  >
-    Notification
-  </Pill>
+  <div>
+    <Pill
+      margin="x-small"
+    >
+      Excused
+    </Pill>
+    <Pill
+      statusLabel="Status"
+      color="info"
+      margin="x-small"
+    >
+      Draft
+    </Pill>
+    <Pill
+      statusLabel="Status"
+      renderIcon={<IconCheckLine />}
+      color="success"
+      margin="x-small"
+    >
+      Checked In
+    </Pill>
+    <Pill
+      renderIcon={<IconEndLine />}
+      color="danger"
+      margin="x-small"
+    >
+      Missing
+    </Pill>
+    <Pill
+      renderIcon={<IconClockLine />}
+      color="warning"
+      margin="x-small"
+    >
+      Late
+    </Pill>
+    <Pill
+      renderIcon={<IconMessageLine />}
+      color="alert"
+      margin="x-small"
+    >
+      Notification
+    </Pill>
+  </div>
+  <div>
+    <Pill_11_5
+      margin="x-small"
+    >
+      Excused
+    </Pill_11_5>
+    <Pill_11_5
+      statusLabel="Status"
+      color="info"
+      margin="x-small"
+    >
+      Draft
+    </Pill_11_5>
+    <Pill_11_5
+      statusLabel="Status"
+      renderIcon={<IconCheckLine />}
+      color="success"
+      margin="x-small"
+    >
+      Checked In
+    </Pill_11_5>
+    <Pill_11_5
+      renderIcon={<IconEndLine />}
+      color="danger"
+      margin="x-small"
+    >
+      Missing
+    </Pill_11_5>
+    <Pill_11_5
+      renderIcon={<IconClockLine />}
+      color="warning"
+      margin="x-small"
+    >
+      Late
+    </Pill_11_5>
+    <Pill_11_5
+      renderIcon={<IconMessageLine />}
+      color="alert"
+      margin="x-small"
+    >
+      Notification
+    </Pill_11_5>
+  </div>
 </div>
 ```
 

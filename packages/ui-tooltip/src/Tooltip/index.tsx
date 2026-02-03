@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { Popover } from '@instructure/ui-popover'
 import type { PopoverProps } from '@instructure/ui-popover'
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

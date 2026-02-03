@@ -74,9 +74,9 @@ class BreadcrumbLink extends Component<
       iconPlacement,
       onClick,
       onMouseEnter,
-      isCurrentPage,
-      size
+      isCurrentPage
     } = this.props
+
     const { isTruncated } = this.state
     const props = omitProps(this.props, BreadcrumbLink.allowedProps)
 
@@ -96,10 +96,9 @@ class BreadcrumbLink extends Component<
           iconPlacement={iconPlacement}
           onClick={onClick}
           onMouseEnter={onMouseEnter}
-          variant="standalone"
+          isWithinText={false}
           elementRef={this.handleRef}
           forceButtonRole={false}
-          size={size}
           {...(isCurrentPage && { 'aria-current': 'page' })}
           {...(isTruncated && {
             ...(typeof children === 'string' && { 'aria-label': children }),

@@ -26,18 +26,17 @@ import canvas from '@instructure/ui-themes'
 
 import type { CanvasTheme } from '@instructure/ui-themes'
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = canvas
+const borders: CanvasTheme['borders'] = canvas.borders
+const breakpoints: CanvasTheme['breakpoints'] = canvas.breakpoints
+const colors: CanvasTheme['colors'] = canvas.colors
+const forms: CanvasTheme['forms'] = canvas.forms
+const media: CanvasTheme['media'] = canvas.media
+const shadows: CanvasTheme['shadows'] = canvas.shadows
+const spacing: CanvasTheme['spacing'] = canvas.spacing
+const stacking: CanvasTheme['stacking'] = canvas.stacking
+const transitions: CanvasTheme['transitions'] = canvas.transitions
+const typography: CanvasTheme['typography'] = canvas.typography
+
 const theme = canvas
 const key = 'canvas'
 

@@ -80,16 +80,15 @@ type LinkOwnProps = {
   interaction?: 'enabled' | 'disabled'
 
   /**
-   * Valid values are `0`, `none`, `auto`, and Spacing token values,
-   * see https://instructure.design/layout-spacing. Apply these values via
-   * familiar CSS-like shorthand. For example, `margin="small auto large"`.
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
   margin?: Spacing
 
   /**
    * Add an SVG icon to the Link. Do not add icons directly as
    * children.
-   * When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size.
    */
   renderIcon?: Renderable
 
@@ -102,6 +101,11 @@ type LinkOwnProps = {
    * Set the CSS display property of the Link element. 'auto' sets no display property.
    */
   display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
+
+  /**
+   * Set `false` to remove default underline if Link does not appear inline with text
+   */
+  isWithinText?: boolean
 
   /**
    * Fires when the Link loses focus
@@ -125,19 +129,8 @@ type LinkOwnProps = {
 
   /**
    * Sets pre-defined values for the component to achieve specific roles for the component
-   * - `inline`
-   * - `standalone`
-   *
-   * __Deprecated values:__
-   * - `inline-small`
-   * - `standalone-small`
    */
-  variant?: 'inline' | 'standalone' | 'inline-small' | 'standalone-small'
-
-  /**
-   * Sets the size of the link (font size, line height, and icon gap)
-   */
-  size?: 'small' | 'medium' | 'large'
+  variant?: 'inline' | 'inline-small' | 'standalone' | 'standalone-small'
 }
 
 export type LinkStyleProps = {
@@ -172,11 +165,11 @@ const allowedProps: AllowedPropKeys = [
   'renderIcon',
   'iconPlacement',
   'display',
+  'isWithinText',
   'onBlur',
   'onClick',
   'onFocus',
   'onMouseEnter',
-  'size',
   'variant'
 ]
 

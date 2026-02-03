@@ -59,7 +59,7 @@ import type { ViewProps, ContextViewProps } from '@instructure/ui-view'
 import type { PositionProps } from '@instructure/ui-position'
 import type { DialogProps } from '@instructure/ui-dialog'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

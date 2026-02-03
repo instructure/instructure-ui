@@ -24,7 +24,7 @@
 
 import { ComponentElement, Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 

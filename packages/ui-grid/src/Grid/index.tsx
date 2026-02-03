@@ -35,7 +35,7 @@ import { GridRow } from '../GridRow'
 import type { GridRowProps } from '../GridRow/props'
 import { GridCol } from '../GridCol'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

@@ -51,7 +51,7 @@ import {
   IconCheckSolid
 } from '@instructure/ui-icons'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
@@ -870,12 +870,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
 
     const isOptionDisabled =
-    id !== this._headerBackId && (
-      this.props.disabled ||
-      this.currentPage?.disabled ||
-      selectedOption.groupProps?.disabled ||
-      selectedOption.props.disabled
-      )
+      id !== this._headerBackId &&
+      (this.props.disabled ||
+        this.currentPage?.disabled ||
+        selectedOption.groupProps?.disabled ||
+        selectedOption.props.disabled)
 
     if (isOptionDisabled) {
       event.preventDefault()

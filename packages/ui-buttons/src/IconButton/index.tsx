@@ -28,7 +28,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'

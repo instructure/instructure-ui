@@ -48,7 +48,7 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

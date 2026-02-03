@@ -26,7 +26,7 @@ import { Component, Children, ReactElement, AriaAttributes } from 'react'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import {
   FormFieldLayout,

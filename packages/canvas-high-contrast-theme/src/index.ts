@@ -25,18 +25,20 @@
 import { canvasHighContrast } from '@instructure/ui-themes'
 import type { CanvasHighContrastTheme } from '@instructure/ui-themes'
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = canvasHighContrast
+const borders: CanvasHighContrastTheme['borders'] = canvasHighContrast.borders
+const breakpoints: CanvasHighContrastTheme['breakpoints'] =
+  canvasHighContrast.breakpoints
+const colors: CanvasHighContrastTheme['colors'] = canvasHighContrast.colors
+const forms: CanvasHighContrastTheme['forms'] = canvasHighContrast.forms
+const media: CanvasHighContrastTheme['media'] = canvasHighContrast.media
+const shadows: CanvasHighContrastTheme['shadows'] = canvasHighContrast.shadows
+const spacing: CanvasHighContrastTheme['spacing'] = canvasHighContrast.spacing
+const stacking: CanvasHighContrastTheme['stacking'] =
+  canvasHighContrast.stacking
+const transitions: CanvasHighContrastTheme['transitions'] =
+  canvasHighContrast.transitions
+const typography: CanvasHighContrastTheme['typography'] =
+  canvasHighContrast.typography
 
 const key = 'canvas-high-contrast'
 

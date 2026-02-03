@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { BadgeTheme } from '@instructure/shared-types'
 import type { BadgeProps, BadgeStyle } from './props'
 
 // keyframes have to be outside of 'generateStyle',
@@ -46,7 +46,7 @@ const pulseAnimation = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['Badge'],
+  componentTheme: BadgeTheme,
   props: BadgeProps
 ): BadgeStyle => {
   const { type, variant, placement = '', standalone, pulse } = props

@@ -31,7 +31,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { CheckInstUIIcon } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

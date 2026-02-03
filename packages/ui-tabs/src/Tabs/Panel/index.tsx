@@ -28,7 +28,7 @@ import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle_11_5 as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import type { TabsPanelProps } from './props'

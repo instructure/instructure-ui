@@ -2447,9 +2447,6 @@ importers:
       '@instructure/ui-babel-preset':
         specifier: workspace:*
         version: link:../ui-babel-preset
-      '@types/node':
-        specifier: ^22.5.4
-        version: 22.18.10
 
   packages/ui-img:
     dependencies:
@@ -4566,8 +4563,8 @@ importers:
   packages/ui-themes:
     dependencies:
       '@instructure/shared-types':
-        specifier: workspace:*
-        version: link:../shared-types
+        specifier: 11.0.1
+        version: 11.0.1(react@18.3.1)
       '@tokens-studio/types':
         specifier: ^0.5.2
         version: 0.5.2
@@ -6351,6 +6348,11 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
+
+  '@instructure/shared-types@11.0.1':
+    resolution: {integrity: sha512-nJ6kGt6dGaq0ahyo3zaGKXJF20jILu+zZfAsO8lGSSUzeoyj+h9IA8Q8aU76FT0IxqE9/3Aj3my/p1h7D6CgWA==}
+    peerDependencies:
+      react: 18.3.1
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -14701,6 +14703,10 @@ snapshots:
       iconv-lite: 0.7.0
     optionalDependencies:
       '@types/node': 22.18.10
+
+  '@instructure/shared-types@11.0.1(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
 
   '@isaacs/cliui@8.0.2':
     dependencies:

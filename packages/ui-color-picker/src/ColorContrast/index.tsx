@@ -30,11 +30,11 @@ import {
   contrastWithAlpha,
   validateContrast
 } from '@instructure/ui-color-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
 import { Heading } from '@instructure/ui-heading'
-import { Pill } from '@instructure/ui-pill'
+import { Pill } from '@instructure/ui-pill/v11_5'
 
 import ColorIndicator from '../ColorIndicator'
 

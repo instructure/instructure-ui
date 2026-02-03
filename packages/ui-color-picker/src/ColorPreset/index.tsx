@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import conversions from '@instructure/ui-color-utils'
 

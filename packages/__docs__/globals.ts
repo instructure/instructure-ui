@@ -61,6 +61,8 @@ import ColorTable from './src/ColorTable'
 
 import { additionalPrimitives, dataVisualization } from '@instructure/ui-themes'
 
+import { Pill as Pill_11_5 } from '@instructure/ui-pill/v11_5'
+
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 8,
@@ -102,7 +104,8 @@ const globals = {
   additionalPrimitives,
   dataVisualization,
   ThemeColors,
-  ColorTable
+  ColorTable,
+  Pill_11_5
 }
 
 Object.keys(globals).forEach((key) => {
