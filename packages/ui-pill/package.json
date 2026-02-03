@@ -53,10 +53,16 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
+      "types": "./types/Pill/11_5/index.d.ts",
+      "import": "./es/Pill/11_5/index.js",
+      "require": "./lib/Pill/11_5/index.js",
+      "default": "./es/Pill/11_5/index.js"
+    },
+    "./v11_6": {
+      "types": "./types/Pill/11_6/index.d.ts",
+      "import": "./es/Pill/11_6/index.js",
+      "require": "./lib/Pill/11_6/index.js",
+      "default": "./es/Pill/11_6/index.js"
     },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",

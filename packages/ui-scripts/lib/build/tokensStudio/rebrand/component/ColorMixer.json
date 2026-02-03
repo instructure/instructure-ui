@@ -66,7 +66,7 @@
       "value": "1",
       "type": "other"
     },
-    "checkerboardBackgroundImage": {
+    "backgroundImage": {
       "value": "linear-gradient(45deg, #E8EAEC 25%, transparent 25%), linear-gradient(-45deg, #E8EAEC 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #E8EAEC 75%), linear-gradient(-45deg, transparent 75%, #E8EAEC 75%)",
       "type": "other"
     }
@@ -81,16 +81,12 @@
       "type": "spacing"
     },
     "tgbInputTopMargin": {
-      "value": "0.5rem",
+      "value": "1rem",
       "type": "spacing"
     },
     "labelFontWeight": {
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
-    },
-    "rgbaInputLabel": {
-      "value": "{color.text.base}",
-      "type": "color"
     }
   }
 }

@@ -24,6 +24,10 @@
       "value": "5.25rem",
       "type": "sizing"
     },
+    "iconWrapperHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
     "margin": {
       "value": "0rem",
       "type": "spacing"
@@ -72,10 +76,6 @@
     }
   },
   "sideNavBarItem": {
-    "iconWrapperHeight": {
-      "value": "2.25rem",
-      "type": "sizing"
-    },
     "borderRadius": {
       "value": "0rem",
       "type": "borderRadius"

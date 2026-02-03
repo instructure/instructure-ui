@@ -37,7 +37,7 @@
       "type": "lineHeights"
     },
     "pickedHexColor": {
-      "value": "{color.text.base}",
+      "value": "{color.background.dark}",
       "type": "color"
     },
     "smallBorder": {

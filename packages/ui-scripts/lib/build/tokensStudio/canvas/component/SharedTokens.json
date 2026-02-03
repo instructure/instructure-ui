@@ -649,10 +649,6 @@
       "accentViolet": {
         "value": "{color.stroke.accent.violet}",
         "type": "color"
-      },
-      "visualSeparator": {
-        "value": "{color.background.container}",
-        "type": "color"
       }
     },
     "strokeWidth": {
