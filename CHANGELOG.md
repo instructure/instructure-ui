@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
+
+### Features
+
+- **ui-table:** expose min-width prop, so one can make a table where each column has no wrapping text ([317897a](https://github.com/instructure/instructure-ui/commit/317897a996288108865e8204be075b1cfab7530f))
+- **ui-top-nav-bar:** allow to set aria-label on TopNavBar's overflow menu button ([2702ad4](https://github.com/instructure/instructure-ui/commit/2702ad42e42e67f1d69d8aa11d4135d9eea6bff2))
+- **ui-view:** allow to set View's display prop to contents, inherit, initial, revert, revert-layer, unset ([3c3c93f](https://github.com/instructure/instructure-ui/commit/3c3c93f824317155552778c7dbe24c5e18b32615))
+
+# [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
+
+### Features
+
+- **ui-color-picker:** add new labelLevel prop to set heading level in ColorContrast ([06c9e79](https://github.com/instructure/instructure-ui/commit/06c9e79fc87c31da4ca8eff61e93094aa09c8be5))
+- **ui-instructure:** add privacy notice link to the ai information panel ([447e40b](https://github.com/instructure/instructure-ui/commit/447e40b8ef1a5b776e01e831b2c5a6d45ca8274e))
+
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
 ### Bug Fixes

@@ -40,6 +40,8 @@ jobs:
           esac
       - name: Build docs-app
         run: pnpm run build:docs
+      - name: Copy index.html to 404.html for GitHub Pages
+        run: cp ./packages/__docs__/__build__/index.html ./packages/__docs__/__build__/404.html
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

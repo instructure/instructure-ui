@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-spinner",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A spinner/loading component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -47,5 +47,18 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

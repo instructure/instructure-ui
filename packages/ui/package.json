@@ -1,18 +1,11 @@
 {
   "name": "@instructure/ui",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A meta package exporting all UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -108,12 +101,25 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*"
   },
+  "peerDependencies": {
+    "react": ">=18 <=19",
+    "react-dom": ">=18 <=19"
+  },
   "publishConfig": {
     "access": "public"
   },
   "sideEffects": false,
-  "peerDependencies": {
-    "react": ">=18 <=19",
-    "react-dom": ">=18 <=19"
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
   }
 }

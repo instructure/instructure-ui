@@ -67,7 +67,7 @@ class ${name}${variant} extends Component<SVGIconProps> {
   static variant = '${variant}'
   static displayName = '${name}${variant}'
   ${deprecated ? `static deprecated = true` : ''}
-  static allowedProps = [ ...SVGIcon.allowedProps ]
+  static allowedProps: Array<string> = [ ...SVGIcon.allowedProps ]
 
   ref: Element | null = null
 

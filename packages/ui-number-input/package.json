@@ -1,10 +1,8 @@
 {
   "name": "@instructure/ui-number-input",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "homepage": "https://instructure.github.io/instructure-ui/",
-  "license": "MIT",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -12,6 +10,7 @@
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
   },
+  "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-scripts lint",
@@ -22,15 +21,7 @@
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-scripts": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "15.0.7",
-    "@testing-library/user-event": "^14.6.1",
-    "vitest": "^3.2.2"
-  },
+  "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "workspace:*",
@@ -43,11 +34,33 @@
     "@instructure/uid": "workspace:*",
     "keycode": "^2"
   },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-scripts": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "15.0.7",
+    "@testing-library/user-event": "^14.6.1",
+    "vitest": "^3.2.2"
+  },
   "peerDependencies": {
     "react": ">=18 <=19"
   },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

@@ -633,6 +633,9 @@ class PlaygroundExample extends React.Component {
                   renderHiddenItemsMenuTriggerLabel={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} More`}
+                  renderHiddenItemsMenuTriggerAriaLabel={(
+                    hiddenChildrenCount
+                  ) => `${hiddenChildrenCount} more menu items`}
                 >
                   {navItems.map(item => (
                     <TopNavBar.Item
@@ -1223,6 +1226,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+              renderHiddenItemsMenuTriggerAriaLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} more menu items`}
             >
               {Array.from(Array(4)).map((_item, idx) => (
                 <TopNavBar.Item
@@ -1271,6 +1277,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+              renderHiddenItemsMenuTriggerAriaLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} more menu items`}
             >
               {Array.from(Array(14)).map((_item, idx) => (
                 <TopNavBar.Item
@@ -1694,6 +1703,9 @@ class LayoutExample extends React.Component {
                         renderHiddenItemsMenuTriggerLabel={(
                           hiddenChildrenCount
                         ) => `${hiddenChildrenCount} More`}
+                        renderHiddenItemsMenuTriggerAriaLabel={(
+                          hiddenChildrenCount
+                        ) => `${hiddenChildrenCount} more menu items`}
                       >
                         <TopNavBar.Item
                           id="OverviewPage"
@@ -1981,6 +1993,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+             renderHiddenItemsMenuTriggerAriaLabel={(
+               hiddenChildrenCount
+             ) => `${hiddenChildrenCount} more menu items`}
             >
               <TopNavBar.Item
                 id="itemSubmenuExample"
@@ -2018,6 +2033,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+             renderHiddenItemsMenuTriggerAriaLabel={(
+               hiddenChildrenCount
+             ) => `${hiddenChildrenCount} more menu items`}
             >
               <TopNavBar.Item
                 id="itemTooltipExample"
@@ -2164,6 +2182,9 @@ class InPlaceDialogExample extends React.Component {
                   renderHiddenItemsMenuTriggerLabel={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} More`}
+                 renderHiddenItemsMenuTriggerAriaLabel={(
+                   hiddenChildrenCount
+                 ) => `${hiddenChildrenCount} more menu items`}
                 >
                   <TopNavBar.Item
                     id="Search2"
@@ -2248,6 +2269,9 @@ type: example
                 renderHiddenItemsMenuTriggerLabel={(
                   hiddenChildrenCount
                 ) => `${hiddenChildrenCount} More`}
+                renderHiddenItemsMenuTriggerAriaLabel={(
+                  hiddenChildrenCount
+                ) => `${hiddenChildrenCount} more menu items`}
               >
                 <TopNavBar.Item
                   id="OverviewPage"

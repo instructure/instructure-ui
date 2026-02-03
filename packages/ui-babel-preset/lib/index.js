@@ -129,6 +129,14 @@ module.exports = function (
     ])
   }
 
+  // Add .js extensions to imports for ES modules
+  if (opts.esModules) {
+    plugins.push([
+      require('babel-plugin-add-import-extension'),
+      { extension: 'js' }
+    ])
+  }
+
   if (opts.coverage) {
     plugins = [
       [

@@ -27,7 +27,7 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 
 import '@testing-library/jest-dom'
-import { canvasHighContrast } from '@instructure/ui-themes/src/index'
+import { canvasHighContrast } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '../index'
 
 describe('<InstUISettingsProvider />', () => {

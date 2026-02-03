@@ -68,6 +68,15 @@ type TopNavBarMenuItemsOwnProps = {
   ) => React.ReactNode
 
   /**
+   * The screenreader label (`aria-label`) used for the overflow dropdown button.
+   * By default, screenreaders will read the button text (e.g. "4 More"), but
+   * this is usually not descriptive enough for screenreader users. One should
+   * specify a more descriptive label for the button, such as "4 more menu items".
+   */
+  renderHiddenItemsMenuTriggerAriaLabel?: (
+    hiddenChildrenCount: number
+  ) => string
+  /**
    * In __desktop__ mode, 'aria-label' for the `<ul>` container.
    */
   listLabel?: string
@@ -101,6 +110,7 @@ const allowedProps: AllowedPropKeys = [
   'children',
   'currentPageId',
   'renderHiddenItemsMenuTriggerLabel',
+  'renderHiddenItemsMenuTriggerAriaLabel',
   'listLabel',
   'elementRef'
 ]

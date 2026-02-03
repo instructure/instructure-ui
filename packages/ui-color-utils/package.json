@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-color-utils",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A color utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -21,16 +21,29 @@
     "build:types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*",
-    "@types/tinycolor2": "^1.4.6"
-  },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "tinycolor2": "^1.6.0"
   },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@types/tinycolor2": "^1.4.6"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

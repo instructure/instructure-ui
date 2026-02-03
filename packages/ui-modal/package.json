@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-modal",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A component for displaying content in a dialog overlay",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -37,9 +37,6 @@
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*"
   },
-  "peerDependencies": {
-    "react": ">=18 <=19"
-  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
     "@instructure/ui-color-utils": "workspace:*",
@@ -50,8 +47,24 @@
     "@testing-library/user-event": "^14.6.1",
     "vitest": "^3.2.2"
   },
+  "peerDependencies": {
+    "react": ">=18 <=19"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

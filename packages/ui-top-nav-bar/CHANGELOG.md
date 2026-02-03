@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
+
+### Features
+
+- **ui-top-nav-bar:** allow to set aria-label on TopNavBar's overflow menu button ([2702ad4](https://github.com/instructure/instructure-ui/commit/2702ad42e42e67f1d69d8aa11d4135d9eea6bff2))
+
+# [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
+
+**Note:** Version bump only for package @instructure/ui-top-nav-bar
+
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
 ### Bug Fixes
