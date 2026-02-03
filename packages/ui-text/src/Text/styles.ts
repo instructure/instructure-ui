@@ -24,7 +24,7 @@
 
 import type { TextProps, TextStyle } from './props'
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { TokenTypographyValueInst } from '@instructure/ui-themes/src'
+import type { TokenTypographyValueInst } from '@instructure/ui-themes'
 
 type StyleParams = {
   color: TextProps['color']
