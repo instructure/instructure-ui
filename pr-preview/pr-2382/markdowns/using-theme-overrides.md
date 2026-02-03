@@ -344,7 +344,7 @@ const generateStyle = (componentTheme) => {
 
 ### Theme overrides for focus rings, border radii, shadows, spacing
 
-Certain visuals as now styled via a central object called `SharedTokens`. You can override this too, for example:
+Certain visuals as of now styled via a central object called `SharedTokens`. You can override this too, for example:
 
 ```js
 ---
