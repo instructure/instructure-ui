@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-color-picker",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -33,6 +33,7 @@
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-drilldown": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
+    "@instructure/ui-heading": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-pill": "workspace:*",
     "@instructure/ui-popover": "workspace:*",
@@ -59,5 +60,18 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

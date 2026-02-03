@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-instructure",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "Collection of specific components for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -28,6 +28,7 @@
     "@instructure/shared-types": "workspace:*",
     "@instructure/ui-buttons": "workspace:*",
     "@instructure/ui-heading": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-link": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-modal": "workspace:*",
@@ -51,5 +52,18 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

@@ -106,7 +106,8 @@ class Table extends Component<TableProps> {
   }
 
   render() {
-    const { margin, layout, caption, children, hover, styles } = this.props
+    const { margin, layout, caption, children, hover, styles, minWidth } =
+      this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : undefined
 
@@ -123,10 +124,12 @@ class Table extends Component<TableProps> {
         }}
       >
         <View
+          // All HTML props, except the ones accepted by `View` and `Table`
           {...View.omitViewProps(
             omitProps(this.props, Table.allowedProps),
             Table
           )}
+          minWidth={minWidth}
           as={isStacked ? 'div' : 'table'}
           margin={margin}
           elementRef={this.handleRef}

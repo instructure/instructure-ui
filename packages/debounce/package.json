@@ -1,10 +1,10 @@
 {
   "name": "@instructure/debounce",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A debounce util made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
   "module": "./es/index.js",
+  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -21,14 +21,27 @@
     "build:types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "workspace:*"
-  },
   "dependencies": {
     "@babel/runtime": "^7.27.6"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "workspace:*"
   },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  }
 }

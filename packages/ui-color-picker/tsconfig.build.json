@@ -18,6 +18,7 @@
     { "path": "../ui-buttons/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },
+    { "path": "../ui-heading/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-pill/tsconfig.build.json" },
     { "path": "../ui-popover/tsconfig.build.json" },

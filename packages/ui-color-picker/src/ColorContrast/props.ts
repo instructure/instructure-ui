@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
   ColorContrastTheme
 } from '@instructure/shared-types'
+
+type HeadingLevel<U extends keyof React.JSX.IntrinsicElements> = U
 
 type ColorContrastOwnProps = {
   /**
@@ -53,6 +56,10 @@ type ColorContrastOwnProps = {
    * Label of the component
    */
   label: string
+  /**
+   * The heading level for the label. If provided, the label will be rendered as a `<Heading />` instead of `<Text />`.
+   */
+  labelLevel?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>
   /**
    * Text of the second check (Suggested english text: Large text)
    */
@@ -154,6 +161,7 @@ const allowedProps: AllowedPropKeys = [
   'graphicsTextLabel',
   'withoutColorPreview',
   'label',
+  'labelLevel',
   'largeTextLabel',
   'normalTextLabel',
   'secondColor',

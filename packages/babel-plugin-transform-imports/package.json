@@ -1,9 +1,10 @@
 {
   "name": "@instructure/babel-plugin-transform-imports",
-  "version": "11.3.0",
+  "version": "11.5.0",
   "description": "A babel plugin made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -18,10 +19,21 @@
   "dependencies": {
     "globby": "^11.1.0"
   },
-  "//dependency-comments": {
-    "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"
-  },
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "require": "./lib/index.js",
+      "default": "./lib/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
+  },
+  "//dependency-comments": {
+    "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"
   }
 }

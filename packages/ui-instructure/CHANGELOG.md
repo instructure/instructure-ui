@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
+
+**Note:** Version bump only for package @instructure/ui-instructure
+
+# [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
+
+### Features
+
+- **ui-instructure:** add privacy notice link to the ai information panel ([447e40b](https://github.com/instructure/instructure-ui/commit/447e40b8ef1a5b776e01e831b2c5a6d45ca8274e))
+
 # [11.3.0](https://github.com/instructure/instructure-ui/compare/v11.2.0...v11.3.0) (2026-01-12)
 
 **Note:** Version bump only for package @instructure/ui-instructure
