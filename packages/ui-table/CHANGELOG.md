@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
+
+
+### Features
+
+* **ui-table:** expose min-width prop, so one can make a table where each column has no wrapping text ([317897a](https://github.com/instructure/instructure-ui/commit/317897a996288108865e8204be075b1cfab7530f))
+
+
+
+
+
 # [11.4.0](https://github.com/instructure/instructure-ui/compare/v11.3.0...v11.4.0) (2026-01-20)
 
 **Note:** Version bump only for package @instructure/ui-table

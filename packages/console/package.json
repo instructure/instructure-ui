@@ -1,6 +1,6 @@
 {
   "name": "@instructure/console",
-  "version": "11.4.0",
+  "version": "11.5.0",
   "description": "A babel macro made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

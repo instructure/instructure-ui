@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-side-nav-bar",
-  "version": "11.4.0",
+  "version": "11.5.0",
   "description": "Main and application level navigational components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-modal",
-  "version": "11.4.0",
+  "version": "11.5.0",
   "description": "A component for displaying content in a dialog overlay",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

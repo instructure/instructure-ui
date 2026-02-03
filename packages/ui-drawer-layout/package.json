@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-drawer-layout",
-  "version": "11.4.0",
+  "version": "11.5.0",
   "description": "A main-content-plus-tray layout component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
