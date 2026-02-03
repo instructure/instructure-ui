@@ -22,8 +22,10 @@ readonly: true
   data={[
     {
       featureName: "Feature name",
+      privacyNoticeText: "AI Privacy Notice",
+      privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
       permissionLevelText: "Permission Level",
-      permissionLevel: "LEVEL 1",
+      permissionLevel: "Level 1",
       description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
       permissionLevelsModalTriggerText: "Permission Levels",
       modelNameText: "Base Model",
@@ -41,23 +43,23 @@ readonly: true
   dataPermissionLevelsTriggerText="Data Permission Levels"
   dataPermissionLevelsData={[
     {
-    level: "LEVEL 1",
+    level: "Level 1",
     title: "Descriptive Analytics and Research",
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted:true
   },
     {
-    level: "LEVEL 2",
+    level: "Level 2",
     title: "AI-Powered Features Without Data Training",
     description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model."
   },
     {
-    level: "LEVEL 3",
+    level: "Level 3",
     title: "AI Customization for Individual Institutions",
     description: "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution’s data only serves them through trained models."
   },
     {
-    level: "LEVEL 4",
+    level: "Level 4",
     title: "Collaborative AI Consortium",
     description: "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more."
   },
@@ -168,8 +170,10 @@ readonly: true
   data={[
     {
       featureName: "Feature name",
+      privacyNoticeText: "AI Privacy Notice",
+      privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
       permissionLevelText: "Permission Level",
-      permissionLevel: "LEVEL 1",
+      permissionLevel: "Level 1",
       description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
       permissionLevelsModalTriggerText: "Permission Levels",
       modelNameText: "Base Model",
@@ -187,23 +191,23 @@ readonly: true
   dataPermissionLevelsTriggerText="Data Permission Levels"
   dataPermissionLevelsData={[
     {
-    level: "LEVEL 1",
+    level: "Level 1",
     title: "Descriptive Analytics and Research",
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted:true
   },
     {
-    level: "LEVEL 2",
+    level: "Level 2",
     title: "AI-Powered Features Without Data Training",
     description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model."
   },
     {
-    level: "LEVEL 3",
+    level: "Level 3",
     title: "AI Customization for Individual Institutions",
     description: "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution’s data only serves them through trained models."
   },
     {
-    level: "LEVEL 4",
+    level: "Level 4",
     title: "Collaborative AI Consortium",
     description: "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more."
   },
@@ -302,7 +306,7 @@ readonly: true
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | AiInformation | title | `string` | Yes | - | i18n text for the title of popover |
-| AiInformation | data | `{ featureName: string permissionLevelText: string permissionLevel: string description: string permissionLevelsModalTriggerText: string modelNameText: string modelName: string nutritionFactsModalTriggerText: string }[]` | Yes | - | the data structure of the Features on the popover |
+| AiInformation | data | `{ featureName: string privacyNoticeText: string privacyNoticeUrl: string permissionLevelText: string permissionLevel: string description: string permissionLevelsModalTriggerText: string modelNameText: string modelName: string nutritionFactsModalTriggerText: string }[]` | Yes | - | the data structure of the Features on the popover |
 | AiInformation | fullscreenModals | `boolean` | No | `false` | sets the modal size to 'fullscreen' for NutritionFacts and DataPermissionLevels. Used for small viewports |
 | AiInformation | trigger | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The element that triggers the popover |
 | AiInformation | dataPermissionLevelsModalLabel | `DataPermissionLevelsProps['modalLabel']` | Yes | - | i18n text for the label of the dataPermissionLevels modal |
@@ -318,6 +322,7 @@ readonly: true
 | AiInformation | nutritionFactsData | `NutritionFactsProps['data']` | Yes | - | i18n text for the "model and data" heading of the NutritionFacts |
 | AiInformation | nutritionFactsCloseButtonText | `NutritionFactsProps['closeButtonText']` | Yes | - | i18n text for the NutritionFacts close button |
 | AiInformation | nutritionFactsCloseIconButtonScreenReaderLabel | `NutritionFactsProps['closeIconButtonScreenReaderLabel']` | Yes | - | i18n text for the NutritionFacts close iconButton |
+| AiInformation | themeOverride | `ThemeOverrideValue` | No | - |  |
 
 ### Usage
 
