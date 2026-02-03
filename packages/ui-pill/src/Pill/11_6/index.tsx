@@ -180,3 +180,4 @@ class Pill extends Component<PillProps, PillState> {
 
 export default Pill
 export { Pill }
+export type { PillProps }
