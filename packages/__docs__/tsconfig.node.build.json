@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "declarationDir": "./types",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "esModuleInterop": true,
     "outDir": "./lib",
     "resolveJsonModule": true
