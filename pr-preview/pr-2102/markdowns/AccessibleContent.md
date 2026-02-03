@@ -24,7 +24,7 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | AccessibleContent | alt | `string` | No | - | The text that screenreaders will read. Will not be visible. |
-| AccessibleContent | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render the screen reader content as |
+| AccessibleContent | as | `AsElementType` | No | `'span'` | the element type to render the screen reader content as |
 | AccessibleContent | children | `React.ReactNode` | No | `null` | Content that will be hidden from screenreaders (via `aria-hidden` set to `true`) |
 
 ### Usage

@@ -437,7 +437,7 @@ type: embed
 | Pagination | screenReaderLabelPageButton | `( currentPage: number, totalPageNumber: number ) => string` | No | - | ScreenReaderLabel for page number buttons (__only__ for `full` and `compact variants) |
 | Pagination | variant | `'full' \| 'compact' \| 'input'` | No | `'full'` | The compact variant truncates the page navigation to show only the first, last, and pages immediately surrounding the current page. Fewer than 5 pages, no next/previous arrow buttons will be shown, and all pages will be listed |
 | Pagination | margin | `Spacing` | No | `'space8'` | Spacing token values can be found here: [Spacing Tokens](https://instructure.design/#layout-spacing/%23Tokens) Apply these values via familiar CSS-like shorthand. For example: `margin="space8 0 space12"`. |
-| Pagination | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | the element type to render as |
+| Pagination | as | `AsElementType` | No | `'div'` | the element type to render as |
 | Pagination | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Pagination | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | provides a reference to the html input element (__only__ for `input` variant) |
 | Pagination | shouldHandleFocus | `boolean` | No | `true` | For accessibility, Pagination sets focus on the first or last Pagination.Pages, respectively, when the Previous or Next arrow buttons are removed from the DOM. Set this property to `false` to prevent this behavior. |

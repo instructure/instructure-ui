@@ -203,7 +203,7 @@ Deprecated `lineHeight` values:
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Text | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Text | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'primary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'secondary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'ai-highlight'` | No | - | Color of the text |
 | Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Text | fontStyle | `'italic' \| 'normal'` | No | - |  |

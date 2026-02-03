@@ -228,13 +228,13 @@ type: embed
 | ProgressCircle | valueNow | `Values['valueNow']` | No | `0` | Receives the progress of the event |
 | ProgressCircle | formatScreenReaderValue | `(values: Values) => string` | No | `({ valueNow, valueMax }: Values) =>
 `${valueNow} / ${valueMax}`` | A function for formatting the text provided to screen readers via `aria-valuenow` |
-| ProgressCircle | renderValue | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A function to format the displayed value. If null the value will not display. Takes `valueNow` and `valueMax` as parameters. |
+| ProgressCircle | renderValue | `Renderable<Values>` | No | - | A function to format the displayed value. If null the value will not display. Takes `valueNow` and `valueMax` as parameters. |
 | ProgressCircle | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Controls the overall color scheme of the component |
 | ProgressCircle | meterColor | `\| ((values: Values) => ProgressCircleMeterColor) \| ProgressCircleMeterColor` | No | `({ valueNow, valueMax }: Values) =>
 valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progress meter. Defaults to showing theme success color on completion, based on `valueNow` and `valueMax`. |
 | ProgressCircle | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | ProgressCircle | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's root HTML element |
-| ProgressCircle | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Set the element type of the component's root |
+| ProgressCircle | as | `AsElementType` | No | `'div'` | Set the element type of the component's root |
 | ProgressCircle | shouldAnimateOnMount | `boolean` | No | `false` |  |
 | ProgressCircle | animationDelay | `number` | No | - |  |
 

@@ -434,7 +434,7 @@ type: example
   </View>
   <View focusWithin>
     if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
-    <div tabindex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
+    <div tabIndex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
   </View>
 </Flex>
 ```
@@ -806,9 +806,9 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| View | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element to render as the component root, `span` by default |
+| View | as | `AsElementType` | No | - | The element to render as the component root, `span` by default |
 | View | elementRef | `(element: HTMLElement \| null) => void` | No | - | provides a reference to the underlying html element |
-| View | display | `\| 'auto' \| 'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | `'auto'` | By default the display prop is 'auto', meaning it takes on the display rules of the html element it's rendered as (see `as` prop). |
+| View | display | `\| 'auto' \| 'inline' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex' \| 'contents' // these are global CSS values \| 'inherit' // inherit the parent's display value \| 'initial' // reset the property back to the spec default \| 'revert' // reset to user agent stylesheet \| 'revert-layer' \| 'unset'` | No | `'auto'` | By default the display prop is 'auto', meaning it takes on the display rules of the html element it's rendered as (see `as` prop). |
 | View | overflowX | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
 | View | overflowY | `'auto' \| 'hidden' \| 'visible'` | No | `'visible'` |  |
 | View | height | `string \| number` | No | - |  |
@@ -831,13 +831,13 @@ type: example
 | View | focusColor | `'info' \| 'inverse' \| 'success' \| 'danger'` | No | `'info'` | Determines the color of the focus outline |
 | View | shouldAnimateFocus | `boolean` | No | `true` | Determines if the focus ring should animate when it appears |
 | View | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
-| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
+| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="small auto large"`. |
+| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="small auto large"`. |
 | View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
 | View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
 | View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |
 | View | stacking | `Stacking` | No | - | Controls the z-index depth for the `<View />` |
-| View | cursor | `\| 'auto' \| 'default' \| 'none' \| 'context-menu' \| 'help' \| 'pointer' \| 'progress' \| 'wait' \| 'cell' \| 'crosshair' \| 'text' \| 'vertical-text' \| 'alias' \| 'copy' \| 'move' \| 'no-drop' \| 'not-allowed' \| 'grab' \| 'grabbing' \| 'all-scroll' \| 'col-resize' \| 'row-resize' \| 'n-resize' \| 'e-resize' \| 's-resize' \| 'w-resize' \| 'ne-resize' \| 'nw-resize' \| 'se-resize' \| 'sw-resize' \| 'ew-resize' \| 'ns-resize' \| 'nesw-resize' \| 'nwse-resize' \| 'zoom-in' \| 'zoom-out'` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
+| View | cursor | `Cursor` | No | - | Specify a mouse cursor to use when hovering over the `<View />` |
 | View | overscrollBehavior | `'auto' \| 'contain' \| 'none'` | No | `'auto'` | Sets what a browser does when reaching the boundary of a scrolling area. Valid values are `auto`, `contain`, `none`. |
 | View | focusRingBorderRadius | `string` | No | - | DEPRECATED, this prop does nothing. Use the focusOutlineOffset theme variable Sets the radius of the focus border ring. For offset type, the given value is increased by the difference between the focus ring' offset and the focus ring's width. For inset type, the given value is decreased by the sum of the focus ring' offset and the focus ring's width. |
 | View | focusWithin | `boolean` | No | - | Display the focus ring when any of the descendants is focused. (uses the [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS selector) |

@@ -63,10 +63,10 @@ type: example
 | FormField | disabled | `boolean` | No | - | Whether the field is disabled. When true, error and success messages will be hidden. |
 | FormField | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLabel | children | `React.ReactNode` | Yes | - |  |
-| FormField.FormFieldLabel | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` |  |
+| FormField.FormFieldLabel | as | `AsElementType` | No | `'span'` |  |
 | FormField.FormFieldLayout | label | `React.ReactNode` | Yes | - |  |
 | FormField.FormFieldLayout | id | `string` | No | - | the id of the input (to link it to its label for a11y) |
-| FormField.FormFieldLayout | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | the element type to render as |
+| FormField.FormFieldLayout | as | `AsElementType` | No | - | the element type to render as |
 | FormField.FormFieldLayout | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormField.FormFieldLayout | messagesId | `string` | No | - | id for the form field messages |
 | FormField.FormFieldLayout | children | `React.ReactNode` | No | - |  |
@@ -79,7 +79,7 @@ type: example
 | FormField.FormFieldLayout | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | FormField.FormFieldLayout | isGroup | `boolean` | No | - |  |
 | FormField.FormFieldLayout | isRequired | `boolean` | No | - | If `true`, displays an asterisk after the label to indicate the field is required |
-| FormField.FormFieldLayout | margin | `Spacing` | No | - | Margin around the component. Accepts a `Spacing` token. See token values and example usage in [this guide](https://instructure.design/#layout-spacing). |
+| FormField.FormFieldLayout | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="small auto large"`. |
 | FormField.FormFieldLayout | disabled | `boolean` | No | - | Whether the field is disabled. When true, error and success messages will be hidden. |
 | FormField.FormFieldLayout | readOnly | `boolean` | No | - | Whether the field is read-only. When true, error and success messages will be hidden. |
 | FormField.FormFieldLayout | themeOverride | `ThemeOverrideValue` | No | - |  |

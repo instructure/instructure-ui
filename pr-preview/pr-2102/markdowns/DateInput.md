@@ -221,8 +221,8 @@ class Example extends React.Component {
       withBackground: false,
       withBorder: false,
       renderIcon: type === 'prev'
-        ? <IconArrowOpenStartSolid color="primary" />
-        : <IconArrowOpenEndSolid color="primary" />,
+        ? <ChevronLeftInstUIIcon color="baseColor" />
+        : <ChevronRightInstUIIcon color="baseColor" />,
       screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
     })
 
@@ -318,7 +318,7 @@ should be validated. If the value cannot be parsed as a valid date, or if the
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| DateInput | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | Specifies the input label. |
+| DateInput | renderLabel | `Renderable` | Yes | - | Specifies the input label. |
 | DateInput | value | `string` | No | `''` | Specifies the input value. |
 | DateInput | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | Specifies the input size. |
 | DateInput | placeholder | `string` | No | - | Html placeholder text to display when the input has no value. This should be hint text, not a label replacement. |
@@ -344,8 +344,8 @@ should be validated. If the value cannot be parsed as a valid date, or if the
 | DateInput | onRequestRenderPrevMonth | `(e: React.MouseEvent) => void` | No | - | Callback fired requesting the previous month be rendered. |
 | DateInput | renderNavigationLabel | `React.ReactNode \| (() => React.ReactNode)` | No | - | Content to render in the calendar navigation header. The recommendation is to include the name of the current rendered month along with the year. |
 | DateInput | renderWeekdayLabels | `(React.ReactNode \| (() => React.ReactNode))[]` | No | - | An array of labels containing the name of each day of the week. The visible portion of the label should be abbreviated (no longer than three characters). Note that screen readers will read this content preceding each date as the `<Calendar />` is navigated. Consider using [AccessibleContent](AccessibleContent) with the `alt` prop containing the full day name for assistive technologies and the children containing the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]` |
-| DateInput | renderNextMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenEnd](icons). |
-| DateInput | renderPrevMonthButton | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenStart](icons). |
+| DateInput | renderNextMonthButton | `Renderable` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenEnd](icons). |
+| DateInput | renderPrevMonthButton | `Renderable` | No | - | A button to render in the calendar navigation header. The recommendation is to compose it with the [Button](Button) component, setting the `variant` prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to [IconArrowOpenStart](icons). |
 | DateInput | children | `ReactElement<CalendarDayProps>[]` | No | - | children of type `<DateInput.Day />` There should be exactly 42 provided (6 weeks). |
 | DateInput | disabledDates | `string[] \| ((isoDateToCheck: string) => boolean)` | No | - |  |
 | DateInput | currentDate | `string` | No | - | ISO date string for the current date if necessary. Defaults to the current date in the user's timezone. |

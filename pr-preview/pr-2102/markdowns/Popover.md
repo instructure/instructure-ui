@@ -463,11 +463,11 @@ type: embed
 | Popover | on | `('click' \| 'hover' \| 'focus') \| ('click' \| 'hover' \| 'focus')[]` | No | `['hover', 'focus']` | The action that causes the content to display (`click`, `hover`, `focus`) |
 | Popover | withArrow | `boolean` | No | `true` | Whether or not an arrow pointing to the trigger should be rendered |
 | Popover | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Color variant of the popover content |
-| Popover | shadow | `Shadow` | No | `'resting'` | Controls the shadow depth for the `<Popover />` |
+| Popover | shadow | `Shadow` | No | `'above'` | Controls the shadow depth for the `<Popover />` |
 | Popover | stacking | `Stacking` | No | `'topmost'` | Controls the z-index depth for the `<Popover />` content |
 | Popover | contentRef | `(contentElement: Element \| null) => void` | No | - | A function that returns a reference to the content element |
-| Popover | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
-| Popover | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Popover />` is open |
+| Popover | defaultFocusElement | `UIElement` | No | - | An element or a function returning an element to focus by default |
+| Popover | liveRegion | `LiveRegion` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Popover />` is open |
 | Popover | screenReaderLabel | `string` | No | - | An accessible label for the `<Popover />` content |
 | Popover | offsetX | `string \| number` | No | `0` | The horizontal offset for the positioned content |
 | Popover | offsetY | `string \| number` | No | `0` | The vertical offset for the positioned content |
@@ -497,8 +497,8 @@ type: embed
 | Popover | onKeyUp | `(event: React.KeyboardEvent) => void` | No | - | Callback fired on keyup |
 | Popover | onMouseOver | `(event: React.MouseEvent) => void` | No | - | Callback fired when mouse is over trigger |
 | Popover | onMouseOut | `(event: React.MouseEvent) => void` | No | - | Callback fired when mouse leaves trigger |
-| Popover | renderTrigger | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The element that triggers the popover |
-| Popover | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The content to be shown by the popover |
+| Popover | renderTrigger | `Renderable` | No | - | The element that triggers the popover |
+| Popover | children | `Renderable` | No | - | The content to be shown by the popover |
 | Popover | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML root element |
 | Popover | borderWidth | `BorderWidth` | No | - | Allowed values: 0, 'none', 'small', 'medium', 'large'. Accepts the familiar CSS shorthand to designate border widths corresponding to edges. (e.g. 'none large none large). Only applies to a Popover without an arrow. |
 | Popover | shouldSetAriaExpanded | `boolean` | No | `true` | If true (default), then the aria-expanded prop is added to the trigger. If its supplied via the aria-expanded prop then it takes the given value, otherwise its calculated automatically based on whether the content is shown. |

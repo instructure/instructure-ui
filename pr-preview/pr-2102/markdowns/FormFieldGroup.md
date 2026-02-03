@@ -118,7 +118,7 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | FormFieldGroup | description | `React.ReactNode` | Yes | - |  |
-| FormFieldGroup | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'fieldset'` | the element type to render as |
+| FormFieldGroup | as | `AsElementType` | No | `'fieldset'` | the element type to render as |
 | FormFieldGroup | messages | `FormMessage[]` | No | - | Array of objects with shape: `{ text: React.ReactNode, type: One of: ['newError', 'error', 'hint', 'success', 'screenreader-only'] }` |
 | FormFieldGroup | messagesId | `string` | No | - | id for the form field messages |
 | FormFieldGroup | disabled | `boolean` | No | `false` | Whether the field group is disabled. When true, error and success messages will be hidden. |
