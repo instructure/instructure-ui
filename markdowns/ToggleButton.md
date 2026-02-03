@@ -90,9 +90,9 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | ToggleButton | screenReaderLabel | `string` | Yes | - | Text to output only to screen readers |
 | ToggleButton | renderTooltipContent | `React.ReactNode \| ((...args: any[]) => any)` | Yes | - | Text to render in the tooltip shown on hover/focus |
-| ToggleButton | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | An icon or function that returns an icon |
+| ToggleButton | renderIcon | `Renderable` | Yes | - | An icon or function that returns an icon |
 | ToggleButton | status | `'pressed' \| 'unpressed'` | Yes | - | Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`) |
-| ToggleButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root; `button` by default |
+| ToggleButton | as | `AsElementType` | No | `'button'` | The element to render as the component root; `button` by default |
 | ToggleButton | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly` |
 | ToggleButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `ToggleButton` |
 | ToggleButton | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to `ToggleButton`'s underlying HTML element |

@@ -207,9 +207,9 @@ type: embed
 | Avatar | display | `'inline-block' \| 'block'` | No | `'inline-block'` |  |
 | Avatar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Avatar | onImageLoaded | `(event?: SyntheticEvent) => void` | No | - | Callback fired when the avatar image has loaded. `event` can be `undefined`, if its already loaded when the page renders (can happen in SSR) |
-| Avatar | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element type to render as |
+| Avatar | as | `AsElementType` | No | - | The element type to render as |
 | Avatar | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
-| Avatar | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority. |
+| Avatar | renderIcon | `Renderable` | No | - | An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority. |
 
 ### Usage
 

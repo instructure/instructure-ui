@@ -34,8 +34,8 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Metric | textAlign | `'start' \| 'center' \| 'end'` | No | `'center'` |  |
-| Metric | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| Metric | renderValue | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
+| Metric | renderLabel | `Renderable` | No | - |  |
+| Metric | renderValue | `Renderable` | No | - |  |
 | Metric | isGroupChild | `boolean` | No | `false` | Set to true when a child of MetricGroup so the appropriate aria labels get set |
 
 ### Usage

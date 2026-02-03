@@ -308,7 +308,7 @@ readonly: true
 | AiInformation | title | `string` | Yes | - | i18n text for the title of popover |
 | AiInformation | data | `{ featureName: string privacyNoticeText: string privacyNoticeUrl: string permissionLevelText: string permissionLevel: string description: string permissionLevelsModalTriggerText: string modelNameText: string modelName: string nutritionFactsModalTriggerText: string }[]` | Yes | - | the data structure of the Features on the popover |
 | AiInformation | fullscreenModals | `boolean` | No | `false` | sets the modal size to 'fullscreen' for NutritionFacts and DataPermissionLevels. Used for small viewports |
-| AiInformation | trigger | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The element that triggers the popover |
+| AiInformation | trigger | `Renderable` | Yes | - | The element that triggers the popover |
 | AiInformation | dataPermissionLevelsModalLabel | `DataPermissionLevelsProps['modalLabel']` | Yes | - | i18n text for the label of the dataPermissionLevels modal |
 | AiInformation | dataPermissionLevelsTitle | `DataPermissionLevelsProps['title']` | Yes | - | i18n text for the dataPermissionLevels title |
 | AiInformation | dataPermissionLevelsData | `DataPermissionLevelsProps['data']` | Yes | - | i18n text for the "model and data" heading of the dataPermissionLevels |

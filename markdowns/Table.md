@@ -1162,11 +1162,12 @@ type: embed
 | Table | elementRef | `(element: Element \| null) => void` | No | - | Provide a reference to the underlying html element |
 | Table | hover | `boolean` | No | `false` | Highlight each row on hover |
 | Table | layout | `'auto' \| 'fixed' \| 'stacked'` | No | `'auto'` | `auto` lets the browser determine table column widths based on cell content, while `fixed` forces columns of equal width (sets the [tableLayout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) CSS prop to `fixed`). `stacked` renders table in one column to be more readable on narrow screens |
+| Table | minWidth | `React.CSSProperties['minWidth']` | No | - | Sets the CSS prop `min-width` on the table. Same as {@link React.CSSProperties.minWidth} |
 | Table | children | `React.ReactNode` | No | `null` | `Table.Head` or `Table.Body` |
 | Table.Body | children | `React.ReactNode` | No | `null` | Body's children should be a container component where each child represents a row. `Table.Row` by default |
-| Table.Cell | header | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Contains the column header for this cell. This gets rendered in `stacked` layout to identify the column the data belongs to. |
+| Table.Cell | header | `Renderable` | No | - | Contains the column header for this cell. This gets rendered in `stacked` layout to identify the column the data belongs to. |
 | Table.Cell | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` | Controls the text alignment in cell. |
-| Table.Cell | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `null` |  |
+| Table.Cell | children | `Renderable` | No | `null` |  |
 | Table.ColHeader | id | `string` | Yes | - | A unique id for this column. The `id` is also used as option in combobox, when sortable table is in stacked layout, and no `stackedSortByLabel` is provided. |
 | Table.ColHeader | stackedSortByLabel | `string` | No | - | A custom string to display as option text in the combobox (instead of using the `id` prop), when sortable table is in stacked layout. |
 | Table.ColHeader | width | `string \| number` | No | - | Control the width of column. |
@@ -1175,12 +1176,12 @@ type: embed
 | Table.ColHeader | onRequestSort | `( event: React.SyntheticEvent, param: { id: TableColHeaderOwnProps['id'] } ) => void` | No | - | Callback fired when column header is clicked. |
 | Table.ColHeader | scope | `'row' \| 'col' \| 'rowgroup' \| 'colgroup' \| 'auto'` | No | `'col'` | The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#scope |
 | Table.ColHeader | children | `React.ReactNode` | No | `null` |  |
-| Table.Head | renderSortLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The sort `Select`'s label when using `stacked` layout and the table is sortable. If you don't want to display anything you should use `ScreenReaderContent` so screen readers can read the `Select`'s purpose |
+| Table.Head | renderSortLabel | `Renderable` | No | - | The sort `Select`'s label when using `stacked` layout and the table is sortable. If you don't want to display anything you should use `ScreenReaderContent` so screen readers can read the `Select`'s purpose |
 | Table.Head | children | `React.ReactElement<{ children: React.ReactElement }>` | No | `null` | The header row(s). Default type: `Table.Row` Its first child is treated specially if the table is sortable and has `stacked` layout: A `Select` is created which reads options from the first child's children, that tries to read the following props: `id`, `stackedSortByLabel`,`sortDirection`, `onRequestSort` (Available on `Table.ColHeader`). These are used to sort the table in this layout. |
 | Table.Row | children | `\| React.ReactElement<any> \| null \| undefined \| boolean \| (React.ReactElement<any> \| null \| undefined \| boolean)[]` | No | `null` | A row's children should be table cells. Its children should have the `header` prop to render the column header in `stacked` layout By default, `Table.ColHeader` or `Table.RowHeader` or `Table.Cell`. Falsy values are also allowed to be able to use syntax like `{condition && <Table.Cell>bla<Table.Cell>}` |
 | Table.Row | setHoverStateTo | `boolean` | No | - | Controls the hover state of the row. When set to true, the row will appear highlighted even when not hovered. When set to false, the row will not highlight on hover even if the hover prop is set to true. |
 | Table.RowHeader | textAlign | `'start' \| 'center' \| 'end'` | No | `'start'` | Control the text alignment in row header |
-| Table.RowHeader | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `null` |  |
+| Table.RowHeader | children | `Renderable` | No | `null` |  |
 
 ### Usage
 

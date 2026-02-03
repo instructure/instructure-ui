@@ -100,12 +100,12 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | Billboard | hero | `React.ReactElement \| ((iconSize: HeroIconSize) => React.ReactElement)` | No | - | Provide an <Img> component or Instructure Icon for the hero image |
 | Billboard | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | If you're using an icon, this prop will size it. Also sets the font-size of the headline and message. |
-| Billboard | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Billboard | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Billboard | elementRef | `(element: Element \| null) => void` | No | `() => {}` | provides a reference to the underlying html root element |
 | Billboard | heading | `string` | No | - | The headline for the Billboard. Is styled as an h1 element by default |
 | Billboard | headingAs | `'h1' \| 'h2' \| 'h3' \| 'span'` | No | `'span'` | Choose the appropriately semantic tag for the heading |
 | Billboard | headingLevel | `'h1' \| 'h2' \| 'h3' \| 'h4'` | No | `'h1'` | Choose the font-size for the heading (see the Heading component) |
-| Billboard | message | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Instructions or information for the Billboard. Note: you should not pass interactive content to this prop if you are also providing an `href` or `onClick`. That would cause the Billboard to render as a button or link and would result in nested interactive content. |
+| Billboard | message | `Renderable` | No | - | Instructions or information for the Billboard. Note: you should not pass interactive content to this prop if you are also providing an `href` or `onClick`. That would cause the Billboard to render as a button or link and would result in nested interactive content. |
 | Billboard | onClick | `(e: MouseEvent<ViewProps>) => void` | No | - | If you add an onClick prop, the Billboard renders as a clickable button |
 | Billboard | href | `string` | No | - | If `href` is provided, Billboard will render as a link |
 | Billboard | disabled | `boolean` | No | `false` | Whether or not to disable the billboard |

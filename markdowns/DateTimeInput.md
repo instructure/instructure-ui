@@ -270,13 +270,13 @@ type: example
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | DateTimeInput | description | `React.ReactNode` | Yes | - | The label over the composite `DateTimeInput` component |
-| DateTimeInput | dateRenderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The label over the DateInput |
+| DateTimeInput | dateRenderLabel | `Renderable` | Yes | - | The label over the DateInput |
 | DateTimeInput | prevMonthLabel | `string` | Yes | - | The screen reader label for the calendar navigation header's prev month button |
 | DateTimeInput | nextMonthLabel | `string` | Yes | - | The screen reader label for the calendar navigation header's next month button |
 | DateTimeInput | datePlaceholder | `string` | No | - | HTML placeholder text to display when the date input has no value. This should be hint text, not a label replacement. |
 | DateTimeInput | timePlaceholder | `string` | No | - | HTML placeholder text to display when the time input has no value. This should be hint text, not a label replacement. |
 | DateTimeInput | dateFormat | `string` | No | `'LL'` | The format of the date shown in the `DateInput` when a date is selected. Valid formats are compatible with [Moment formats](https://momentjs.com/docs/#/displaying/format/), including localized formats. If omitted, it will use 'LL' which is a localized date with full month, e.g. "August 6, 2014" |
-| DateTimeInput | timeRenderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The label over the time input |
+| DateTimeInput | timeRenderLabel | `Renderable` | Yes | - | The label over the time input |
 | DateTimeInput | timeStep | `5 \| 10 \| 15 \| 20 \| 30 \| 60` | No | `30` | The number of minutes to increment by when generating the allowable time options. |
 | DateTimeInput | timeFormat | `string` | No | - | The format of the time shown in the `TimeSelect` when a time is selected. Valid formats are compatible with [Moment formats](https://momentjs.com/docs/#/displaying/format/), including localized formats. If omitted, defers to the underlying `TimeSelect`'s default. |
 | DateTimeInput | locale | `string` | No | - | A standard language identifier. See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for more details. This property can also be set via a context property and if both are set then the component property takes precedence over the context property. The web browser's locale will be used if no value is set via a component property or a context property. |
