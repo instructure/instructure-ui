@@ -632,6 +632,9 @@ class PlaygroundExample extends React.Component {
                   renderHiddenItemsMenuTriggerLabel={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} More`}
+                  renderHiddenItemsMenuTriggerAriaLabel={(
+                    hiddenChildrenCount
+                  ) => `${hiddenChildrenCount} more menu items`}
                 >
                   {navItems.map(item => (
                     <TopNavBar.Item
@@ -1222,6 +1225,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+              renderHiddenItemsMenuTriggerAriaLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} more menu items`}
             >
               {Array.from(Array(4)).map((_item, idx) => (
                 <TopNavBar.Item
@@ -1270,6 +1276,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+              renderHiddenItemsMenuTriggerAriaLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} more menu items`}
             >
               {Array.from(Array(14)).map((_item, idx) => (
                 <TopNavBar.Item
@@ -1693,6 +1702,9 @@ class LayoutExample extends React.Component {
                         renderHiddenItemsMenuTriggerLabel={(
                           hiddenChildrenCount
                         ) => `${hiddenChildrenCount} More`}
+                        renderHiddenItemsMenuTriggerAriaLabel={(
+                          hiddenChildrenCount
+                        ) => `${hiddenChildrenCount} more menu items`}
                       >
                         <TopNavBar.Item
                           id="OverviewPage"
@@ -1980,6 +1992,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+             renderHiddenItemsMenuTriggerAriaLabel={(
+               hiddenChildrenCount
+             ) => `${hiddenChildrenCount} more menu items`}
             >
               <TopNavBar.Item
                 id="itemSubmenuExample"
@@ -2017,6 +2032,9 @@ type: example
               renderHiddenItemsMenuTriggerLabel={(
                 hiddenChildrenCount
               ) => `${hiddenChildrenCount} More`}
+             renderHiddenItemsMenuTriggerAriaLabel={(
+               hiddenChildrenCount
+             ) => `${hiddenChildrenCount} more menu items`}
             >
               <TopNavBar.Item
                 id="itemTooltipExample"
@@ -2163,6 +2181,9 @@ class InPlaceDialogExample extends React.Component {
                   renderHiddenItemsMenuTriggerLabel={(
                     hiddenChildrenCount
                   ) => `${hiddenChildrenCount} More`}
+                 renderHiddenItemsMenuTriggerAriaLabel={(
+                   hiddenChildrenCount
+                 ) => `${hiddenChildrenCount} more menu items`}
                 >
                   <TopNavBar.Item
                     id="Search2"
@@ -2247,6 +2268,9 @@ type: example
                 renderHiddenItemsMenuTriggerLabel={(
                   hiddenChildrenCount
                 ) => `${hiddenChildrenCount} More`}
+                renderHiddenItemsMenuTriggerAriaLabel={(
+                  hiddenChildrenCount
+                ) => `${hiddenChildrenCount} more menu items`}
               >
                 <TopNavBar.Item
                   id="OverviewPage"
@@ -2404,6 +2428,7 @@ type: example
 | TopNavBar.TopNavBarMenuItems | children | `ChildrenOfType<ItemChild>` | No | - | Children of type: `<TopNavBar.Item>`. In __desktop__ mode the items are listed on the navbar. See `renderHiddenItemsMenuTriggerLabel` prop description for overflow logic. In __smallViewport__ mode the items are accessible under the main "hamburger" menu. |
 | TopNavBar.TopNavBarMenuItems | currentPageId | `string` | No | - | The `id` of the link to the current page. Marks the item by setting `aria-current="page"` attribute on it and setting its status to 'active'. (Note: only non-disabled, `variant="default"` items can be set to current/active.) |
 | TopNavBar.TopNavBarMenuItems | renderHiddenItemsMenuTriggerLabel | `( hiddenChildrenCount: number ) => React.ReactNode` | Yes | - | In __desktop__ mode, required label for the trigger item of the hidden list items menu. When there is not enough room to list all the menu items, they will be accessible via a dropdown menu at the end of the list. |
+| TopNavBar.TopNavBarMenuItems | renderHiddenItemsMenuTriggerAriaLabel | `( hiddenChildrenCount: number ) => string` | No | - | The screenreader label (`aria-label`) used for the overflow dropdown button. By default, screenreaders will read the button text (e.g. "4 More"), but this is usually not descriptive enough for screenreader users. One should specify a more descriptive label for the button, such as "4 more menu items". |
 | TopNavBar.TopNavBarMenuItems | listLabel | `string` | No | - | In __desktop__ mode, 'aria-label' for the `<ul>` container. |
 | TopNavBar.TopNavBarMenuItems | elementRef | `(el: HTMLUListElement \| null) => void` | No | - | A function that returns a reference to root HTML element |
 | TopNavBar.TopNavBarUser | children | `ChildrenOfType<ItemChild>` | Yes | - | Required children of type TopNavBar.Item. Only accepts 'default', 'button' and 'avatar' variants. In "smallViewport" mode it will always display as text (with or without avatar). |
