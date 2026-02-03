@@ -509,6 +509,122 @@ type: embed
 
 ```
 
+### Checkbox
+
+#### Checkbox (simple variant)
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"controlVerticalMargin",note:""},
+    {name:"backgroundHoverColor",note:""},
+    {name:"backgroundReadonlyColor",note:""},
+    {name:"backgroundDisabledColor",note:""},
+    {name:"borderReadonlyColor",note:""},
+    {name:"borderDisabledColor",note:""},
+    {name:"errorBorderColor",note:""},
+    {name:"errorBorderHoverColor",note:""},
+    {name:"borderRadius",note:""},
+    {name:"borderWidth",note:""},
+    {name:"labelHoverColor",note:""},
+    {name:"labelDisabledColor",note:""},
+    {name:"labelReadonlyColor",note:""},
+  ]}
+  removed={[
+    {name:"iconSizeSmall",note:""},
+    {name:"iconSizeMedium",note:""},
+    {name:"iconSizeLarge",note:""},
+    {name:"padding",note:""},
+    {name:"checkedLabelColor",note:""},
+    {name:"color",note:""},
+    {name:"checkErrorInsetWidth",note:"split into new size variants"},
+    {name:"toggleErrorInsetWidth",note:"custom calculation added"},
+  ]}
+  changed={[
+    {oldName:"facadeSizeSmall",newName:"controlSizeSm",note:""},
+    {oldName:"facadeSizeMedium",newName:"controlSizeMd",note:""},
+    {oldName:"facadeSizeLarge",newName:"controlSizeLg",note:""},
+    {oldName:"labelFontSizeSmall",newName:"fontSizeSm",note:""},
+    {oldName:"labelFontSizeMedium",newName:"fontSizeMd",note:""},
+    {oldName:"labelFontSizeLarge",newName:"fontSizeLg",note:""},
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"marginRight",newName:"gap",note:""},
+    {oldName:"checkedBackground",newName:"backgroundCheckedColor",note:""},
+    {oldName:"checkedBorderColor",newName:"borderCheckedColor",note:""},
+    {oldName:"hoverBorderColor",newName:"borderHoverColor",note:""},
+    {oldName:"labelColor",newName:"labelBaseColor",note:""},
+    {oldName:"checkedLabelColor",newName:"labelBaseColor",note:""},
+    {oldName:"labelFontFamily",newName:"fontFamily",note:""},
+    {oldName:"labelFontWeight",newName:"fontWeight",note:""},
+    {oldName:"labelLineHeight",newName:"lineHeight",note:""},
+    {oldName:"requiredInvalidColor",newName:"asteriskColor",note:""},
+  ]}
+/>
+
+```
+
+#### Checkbox (toggle variant)
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"labelLineHeightSm",note:""},
+    {name:"labelLineHeightMd",note:""},
+    {name:"labelLineHeightLg",note:""},
+    {name:"labelDisabledColor",note:""},
+    {name:"backgroundHoverColor",note:""},
+    {name:"backgroundDisabledColor",note:""},
+    {name:"backgroundReadonlyColor",note:""},
+    {name:"errorBackgroundColor",note:""},
+    {name:"errorBackgroundHoverColor",note:""},
+    {name:"borderHoverColor",note:""},
+    {name:"borderDisabledColor",note:""},
+    {name:"borderReadOnlyColor",note:""},
+    {name:"errorBorderColor",note:""},
+    {name:"checkedBorderColor",note:""},
+    {name:"checkedBorderHoverColor",note:""},
+    {name:"checkedBorderDisabledColor",note:""},
+    {name:"checkedBorderReadOnlyColor",note:""},
+    {name:"checkedBackgroundHoverColor",note:""},
+    {name:"checkedBackgroundDisabledColor",note:""},
+    {name:"checkedBackgroundReadonlyColor",note:""},
+    {name:"uncheckedIconErrorBorderColor",note:""},
+    {name:"uncheckedIconBorderHoverColor",note:""},
+    {name:"uncheckedIconBorderDisabledColor",note:""},
+    {name:"uncheckedIconBorderReadonlyColor",note:""},
+    {name:"checkedIconBorderHoverColor",note:""},
+    {name:"checkedIconBorderDisabledColor",note:""},
+    {name:"checkedIconBorderReadonlyColor",note:""},
+    {name:"checkedIconBorderReadonlyColor",note:""},
+    {name:"disabledOpacity",note:""},
+  ]}
+  removed={[
+    {name:"color",note:""},
+    {name:"checkedIconColor",note:""},
+    {name:"uncheckedIconColor",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"focusBorderWidth",note:""},
+    {name:"focusBorderStyle",note:""},
+    {name:"focusBorderStyle",note:""},
+    {name:"labelLineHeight",note:"split into new size variants"},
+  ]}
+  changed={[
+    {oldName:"labelFontSizeSmall",newName:"labelFontSizeSm",note:""},
+    {oldName:"labelFontSizeMedium",newName:"labelFontSizeMd",note:""},
+    {oldName:"labelFontSizeLarge",newName:"labelFontSizeLg",note:""},
+    {oldName:"background",newName:"toggleBackground",note:""},
+    {oldName:"checkedBackground",newName:"checkedBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
 ### Spinner
 
 - `as` prop has been removed, `Spinner` will always render as a `<div>` element.

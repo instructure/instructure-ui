@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import type { CheckboxFacadeTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 import type { CheckboxFacadeProps, CheckboxFacadeStyle } from './props'
 
 /**
@@ -32,41 +33,137 @@ import type { CheckboxFacadeProps, CheckboxFacadeStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: CheckboxFacadeTheme,
-  props: CheckboxFacadeProps
+  componentTheme: NewComponentTypes['Checkbox'],
+  props: CheckboxFacadeProps,
+  sharedTokens: SharedTokens
 ): CheckboxFacadeStyle => {
-  const { size, checked, focused, hovered, indeterminate, invalid } = props
+  const { size, checked, disabled, readOnly, focused, hovered, indeterminate, invalid } = props
 
   const isChecked = checked || indeterminate
 
   const sizeVariants = {
     small: {
-      label: { fontSize: componentTheme.labelFontSizeSmall },
+      label: { fontSize: componentTheme.fontSizeSm },
       facade: {
-        fontSize: componentTheme.iconSizeSmall,
-        width: componentTheme.facadeSizeSmall,
-        height: componentTheme.facadeSizeSmall
+        fontSize: componentTheme.fontSizeSm,
+        width: componentTheme.controlSizeSm,
+        height: componentTheme.controlSizeSm,
+        margin: `${componentTheme.controlVerticalMargin} ${componentTheme.gap} 0 0`
       }
     },
     medium: {
-      label: { fontSize: componentTheme.labelFontSizeMedium },
+      label: { fontSize: componentTheme.fontSizeMd },
       facade: {
-        fontSize: componentTheme.iconSizeMedium,
-        width: componentTheme.facadeSizeMedium,
-        height: componentTheme.facadeSizeMedium
+        fontSize: componentTheme.fontSizeMd,
+        width: componentTheme.controlSizeMd,
+        height: componentTheme.controlSizeMd
       }
     },
     large: {
-      label: { fontSize: componentTheme.labelFontSizeLarge },
+      label: { fontSize: componentTheme.fontSizeLg },
       facade: {
-        fontSize: componentTheme.iconSizeLarge,
-        width: componentTheme.facadeSizeLarge,
-        height: componentTheme.facadeSizeLarge
+        fontSize: componentTheme.fontSizeLg,
+        width: componentTheme.controlSizeLg,
+        height: componentTheme.controlSizeLg
       }
+    }
+  }
+
+  const getLabelColor = () => {
+    if (disabled) {
+      return componentTheme.labelDisabledColor
+    }
+
+    if (readOnly) {
+      return componentTheme.labelReadonlyColor
+    }
+
+    // DEFAULT state
+    return hovered ? componentTheme.labelHoverColor : componentTheme.labelBaseColor
+  }
+
+  const getFacadeStyles = () => {
+    const baseStyles = {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      boxSizing: 'border-box',
+      flexShrink: 0,
+      transition: 'all 0.2s',
+      borderRadius: componentTheme.borderRadius,
+      marginInlineEnd: componentTheme.gap,
+      marginInlineStart: '0',
+      ...sizeVariants[size!].facade
+    }
+
+    if (disabled) {
+      return {
+        ...baseStyles,
+        background: componentTheme.backgroundDisabledColor,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderDisabledColor}`,
+        cursor: 'not-allowed',
+        pointerEvents: 'none'
+      }
+    }
+
+    if (readOnly) {
+      return {
+        ...baseStyles,
+        background: componentTheme.backgroundReadonlyColor,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderReadonlyColor}`,
+        cursor: 'default',
+        pointerEvents: 'none'
+      }
+    }
+
+    if (invalid) {
+      return {
+        ...baseStyles,
+        ...(isChecked && {
+          background: componentTheme.backgroundCheckedColor,
+          border: `${componentTheme.borderWidth} solid ${
+            hovered
+              ? componentTheme.errorBorderHoverColor
+              : componentTheme.errorBorderColor
+          }`
+        }),
+        ...(!isChecked && {
+          background: hovered
+            ? componentTheme.backgroundHoverColor
+            : componentTheme.backgroundColor,
+          border: `${componentTheme.borderWidth} solid ${
+            hovered
+              ? componentTheme.errorBorderHoverColor
+              : componentTheme.errorBorderColor
+          }`
+        })
+      }
+    }
+
+    if (isChecked) {
+      return {
+        ...baseStyles,
+        background: componentTheme.backgroundCheckedColor,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderCheckedColor}`
+      }
+    }
+
+    // DEFAULT (unchecked) state
+    return {
+      ...baseStyles,
+      background: hovered
+        ? componentTheme.backgroundHoverColor
+        : componentTheme.backgroundColor,
+      border: `${componentTheme.borderWidth} solid ${
+        hovered ? componentTheme.borderHoverColor : componentTheme.borderColor
+      }`
     }
   }
 
@@ -78,63 +175,23 @@ const generateStyle = (
     },
     facade: {
       label: 'checkboxFacade__facade',
-      color: componentTheme.color,
-      background: componentTheme.background,
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      boxSizing: 'border-box',
-      flexShrink: 0,
-      transition: 'all 0.2s',
-      border: `${componentTheme.borderWidth} solid ${invalid ? componentTheme.errorBorderColor : componentTheme.borderColor}`,
-      borderRadius: componentTheme.borderRadius,
-      marginInlineEnd: componentTheme.marginRight,
-      marginInlineStart: '0',
-      padding: componentTheme.padding,
-      ...sizeVariants[size!].facade,
-
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: '-0.3125rem',
-        bottom: '-0.3125rem',
-        left: '-0.3125rem',
-        right: '-0.3125rem',
-        boxSizing: 'border-box',
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-        border: `${componentTheme.focusBorderWidth} ${componentTheme.focusBorderStyle} ${componentTheme.focusBorderColor}`,
-        transition: 'all 0.2s',
-        transform: 'scale(0.75)',
-        opacity: 0,
-        pointerEvents: 'none',
-        ...(focused && {
-          transform: 'scale(1)',
-          opacity: 1
-        })
-      },
-
-      ...(isChecked && {
-        background: componentTheme.checkedBackground,
-        borderColor: componentTheme.checkedBorderColor
-      }),
-      ...(hovered && {
-        borderColor: componentTheme.hoverBorderColor
-      })
+      ...getFacadeStyles(),
+      ...(sharedTokens?.focusOutline
+        ? calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            withFocusOutline: focused
+          })
+        : {})
     },
     label: {
       label: 'checkboxFacade__label',
       flex: '1 1 auto',
+      alignSelf: 'center',
       minWidth: '0.0625rem',
-      color: componentTheme.labelColor,
-      fontFamily: componentTheme.labelFontFamily,
-      fontWeight: componentTheme.labelFontWeight,
-      lineHeight: componentTheme.labelLineHeight,
-      ...sizeVariants[size!].label,
-
-      ...(isChecked && {
-        color: componentTheme.checkedLabelColor
-      })
+      color: getLabelColor(),
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      lineHeight: componentTheme.lineHeight,
+      ...sizeVariants[size!].label
     }
   }
 }

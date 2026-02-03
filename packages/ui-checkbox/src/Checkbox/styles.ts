@@ -23,7 +23,7 @@
  */
 
 import type { CheckboxProps, CheckboxStyle } from './props'
-import type { ComponentTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 
 /**
  * ---
@@ -32,24 +32,49 @@ import type { ComponentTheme } from '@instructure/shared-types'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ComponentTheme,
+  componentTheme: NewComponentTypes['Checkbox'],
   props: CheckboxProps
 ): CheckboxStyle => {
-  const { inline, disabled } = props
+  const { inline, disabled, size, variant } = props
+
+  // toggleFullWidth calculation based on Toggle facade width (1.625rem * 1.5) and the marginInlineEnd (0.75rem)
+  const toggleFullWidth = `calc(1.625rem * 1.5 + 0.75rem)`
+
+  const sizeVariants = {
+    small: {
+      paddingLeft:
+        variant === 'toggle'
+          ? toggleFullWidth
+          : `calc(${componentTheme.gap} + ${componentTheme.controlSizeSm})`
+    },
+    medium: {
+      paddingLeft:
+        variant === 'toggle'
+          ? toggleFullWidth
+          : `calc(${componentTheme.gap} + ${componentTheme.controlSizeMd})`
+    },
+    large: {
+      paddingLeft:
+        variant === 'toggle'
+          ? toggleFullWidth
+          : `calc(${componentTheme.gap} + ${componentTheme.controlSizeLg})`
+    }
+  }
 
   return {
     requiredInvalid: {
-      color: componentTheme.requiredInvalidColor
+      color: componentTheme.asteriskColor
     },
     indentedError: {
-      paddingLeft: componentTheme.checkErrorInsetWidth
+      paddingLeft: sizeVariants[size!].paddingLeft
     },
     indentedToggleError: {
-      paddingLeft: componentTheme.toggleErrorInsetWidth,
+      paddingLeft: sizeVariants[size!].paddingLeft
     },
     checkbox: {
       label: 'checkbox',
@@ -58,7 +83,6 @@ const generateStyle = (
       ...(disabled && {
         cursor: 'not-allowed',
         pointerEvents: 'none',
-        opacity: 0.5
       }),
       ...(inline && {
         display: 'inline-block',
