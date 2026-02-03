@@ -64,16 +64,8 @@
       "value": "{fontSize.textLg}",
       "type": "fontSizes"
     },
-    "lineHeightSm": {
-      "value": "{lineHeight.paragraph.textSm}",
-      "type": "lineHeights"
-    },
-    "lineHeightMd": {
-      "value": "{lineHeight.paragraph.textBase}",
-      "type": "lineHeights"
-    },
-    "lineHeightLg": {
-      "value": "{lineHeight.paragraph.textBase}",
+    "lineHeight": {
+      "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     },
     "fontFamily": {
