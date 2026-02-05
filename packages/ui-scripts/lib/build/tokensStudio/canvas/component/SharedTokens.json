@@ -394,15 +394,15 @@
       "padding": {
         "card": {
           "sm": {
-            "value": "{spacing.padding.container.xs}",
+            "value": "{spacing.padding.container.xxs}",
             "type": "spacing"
           },
           "md": {
-            "value": "{spacing.padding.container.sm}",
+            "value": "{spacing.padding.container.xs}",
             "type": "spacing"
           },
           "lg": {
-            "value": "{spacing.padding.container.md}",
+            "value": "{spacing.padding.container.sm}",
             "type": "spacing"
           }
         }
