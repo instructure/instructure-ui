@@ -1062,6 +1062,10 @@
         "value": "{color.white}",
         "type": "color"
       },
+      "brand": {
+        "value": "{color.blue.blue130}",
+        "type": "color"
+      },
       "interactive": {
         "disabled": {
           "base": {
