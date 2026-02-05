@@ -1062,6 +1062,15 @@
         "value": "{color.white}",
         "type": "color"
       },
+      "brand": {
+        "value": "{color.navy.navy170}",
+        "type": "color",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
       "interactive": {
         "action": {
           "aiSecondary": {

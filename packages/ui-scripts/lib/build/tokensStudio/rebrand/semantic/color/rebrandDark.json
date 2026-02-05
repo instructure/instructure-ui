@@ -1062,6 +1062,15 @@
         "value": "{color.grey.grey180}",
         "type": "color"
       },
+      "brand": {
+        "value": "{color.navy.navy10}",
+        "type": "color",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
       "interactive": {
         "disabled": {
           "base": {
