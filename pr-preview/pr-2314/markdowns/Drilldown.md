@@ -1454,7 +1454,7 @@ type: embed
 | Drilldown | label | `string` | No | - | Description of the `<Drilldown />` (used as `aria-label` attribute) |
 | Drilldown | disabled | `boolean` | No | `false` | Is the `<Drilldown />` disabled |
 | Drilldown | rotateFocus | `boolean` | No | `true` | Whether the focus should rotate with keyboard navigation when reaching the first or last option |
-| Drilldown | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'ul'` | Element type to render as. |
+| Drilldown | as | `AsElementType` | No | `'ul'` | Element type to render as. |
 | Drilldown | role | `string` | No | `'menu'` | The ARIA role of the element |
 | Drilldown | elementRef | `(el: Element \| null) => void` | No | - | A function that returns a reference to root HTML element |
 | Drilldown | drilldownRef | `(el: HTMLDivElement \| null) => void` | No | - | A function that returns a reference to the `<Drilldown />` |
@@ -1493,7 +1493,7 @@ type: embed
 | Drilldown.DrilldownGroup | withoutSeparators | `boolean` | No | `false` | Hides the separators around the group. |
 | Drilldown.DrilldownGroup | disabled | `boolean` | No | `false` | Is the option group disabled. |
 | Drilldown.DrilldownGroup | role | `string` | No | `!isMac() && isFirefox() ? 'menu' : 'group'` | The ARIA role of the element. |
-| Drilldown.DrilldownGroup | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | Element type to render as. By default, it inherits Drilldown's `as` prop. |
+| Drilldown.DrilldownGroup | as | `AsElementType` | No | - | Element type to render as. By default, it inherits Drilldown's `as` prop. |
 | Drilldown.DrilldownGroup | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying html root element |
 | Drilldown.DrilldownGroup | selectableType | `'single' \| 'multiple'` | No | - | Makes the option group selectable (with "check" icon indicators). Can be set to a single-select (radio) or a multi-select (checkbox) group. |
 | Drilldown.DrilldownGroup | defaultSelected | `DrilldownOptionValue[]` | No | - | An array of the values for the selected items on initial render. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item. |
@@ -1506,11 +1506,11 @@ type: embed
 | Drilldown.DrilldownOption | selected | `boolean` | No | - | Whether the option is selected or not. (Setting this property assumes controlled behaviour) |
 | Drilldown.DrilldownOption | value | `string \| number \| undefined` | No | - | The value of the option. Should be set for options in selectable groups. |
 | Drilldown.DrilldownOption | href | `string` | No | - | Providing href will render the option as `<a>`. Doesn't work, if subPageId is provided or is in a selectable group. |
-| Drilldown.DrilldownOption | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'li'` | Element type to render as. Will be set to `<a>` if href is provided. If the parent is "ul" or "ol", the option is forced to be "li" element. *Important*: `Drilldown` is rendered as `ul` by default so you *have to* change that as well if you want to use this prop. |
+| Drilldown.DrilldownOption | as | `AsElementType` | No | `'li'` | Element type to render as. Will be set to `<a>` if href is provided. If the parent is "ul" or "ol", the option is forced to be "li" element. *Important*: `Drilldown` is rendered as `ul` by default so you *have to* change that as well if you want to use this prop. |
 | Drilldown.DrilldownOption | role | `string` | No | `'menuitem'` | The ARIA role of the element |
-| Drilldown.DrilldownOption | renderLabelInfo | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Info content to render after the label. If a function is provided, it has a `props` parameter. |
-| Drilldown.DrilldownOption | renderBeforeLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to render before the label. If a function is provided, it has a `props` parameter. |
-| Drilldown.DrilldownOption | renderAfterLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to render after the label. If a function is provided, it has a `props` parameter. |
+| Drilldown.DrilldownOption | renderLabelInfo | `Renderable<RenderContentProps>` | No | - | Info content to render after the label. If a function is provided, it has a `props` parameter. |
+| Drilldown.DrilldownOption | renderBeforeLabel | `Renderable<OptionsItemRenderProps>` | No | - | Content to render before the label. If a function is provided, it has a `props` parameter. |
+| Drilldown.DrilldownOption | renderAfterLabel | `Renderable<OptionsItemRenderProps>` | No | - | Content to render after the label. If a function is provided, it has a `props` parameter. |
 | Drilldown.DrilldownOption | beforeLabelContentVAlign | `'start' \| 'center' \| 'end'` | No | `'start'` | Sets the vAlign of renderBeforeLabel content |
 | Drilldown.DrilldownOption | afterLabelContentVAlign | `'start' \| 'center' \| 'end'` | No | `'start'` | Sets the vAlign of renderAfterLabel content and renderLabelInfo |
 | Drilldown.DrilldownOption | description | `React.ReactNode \| (() => React.ReactNode)` | No | - | Additional "secondary" description text |
@@ -1521,7 +1521,7 @@ type: embed
 | Drilldown.DrilldownOption | shouldCloseOnClick | `'auto' \| 'always' \| 'never'` | No | `'auto'` | Should close the container menu component, if clicked on the option marked with this prop |
 | Drilldown.DrilldownPage | id | `string` | Yes | - |  |
 | Drilldown.DrilldownPage | children | `PageChildren \| PageChildren[]` | No | - | Children of type: `<Drilldown.Option />`, `<Drilldown.Separator />`, `<Drilldown.Group />` |
-| Drilldown.DrilldownPage | renderTitle | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | The title of the page displayed in the header |
+| Drilldown.DrilldownPage | renderTitle | `Renderable` | No | - | The title of the page displayed in the header |
 | Drilldown.DrilldownPage | renderActionLabel | `React.ReactNode \| (() => React.ReactNode)` | No | - | Label for the optional "action" option in the header (e.g.: "Select all") |
 | Drilldown.DrilldownPage | renderBackButtonLabel | `\| React.ReactNode \| ((prevPageTitle?: React.ReactNode) => React.ReactNode)` | No | `'Back'` | Label for the "back" navigation in the header. If a function is provided, the first parameter of the function is the title of the previous page. |
 | Drilldown.DrilldownPage | onHeaderActionClicked | `(event: React.SyntheticEvent) => void` | No | - | Callback fired when the "action" option is clicked in the header |
@@ -1529,7 +1529,7 @@ type: embed
 | Drilldown.DrilldownPage | withoutHeaderSeparator | `boolean` | No | `false` | Hides the separator under the page header |
 | Drilldown.DrilldownPage | disabled | `boolean` | No | `false` | Is the page disabled |
 | Drilldown.DrilldownSeparator | id | `string` | Yes | - |  |
-| Drilldown.DrilldownSeparator | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | Element type to render as |
+| Drilldown.DrilldownSeparator | as | `AsElementType` | No | - | Element type to render as |
 
 ### Usage
 

@@ -68,7 +68,7 @@ type: example
 |-----------|------|------|----------|---------|-------------|
 | Spinner | delay | `number` | No | - | delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times |
 | Spinner | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `gap="small auto large"`. |
-| Spinner | renderTitle | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Give the spinner a title to be read by screenreaders |
+| Spinner | renderTitle | `Renderable` | No | - | Give the spinner a title to be read by screenreaders |
 | Spinner | size | `'x-small' \| 'small' \| 'medium' \| 'large'` | No | - | Different-sized spinners |
 | Spinner | variant | `'default' \| 'inverse'` | No | - | Different color schemes for use with light or dark backgrounds |
 | Spinner | themeOverride | `ThemeOverrideValue` | No | - |  |

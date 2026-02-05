@@ -252,8 +252,8 @@ type: example
 | DrawerLayout.DrawerTray | shadow | `boolean` | No | `true` | Should the `<DrawerLayout.Tray />` have a shadow |
 | DrawerLayout.DrawerTray | contentRef | `(element: HTMLDivElement \| null) => void` | No | - | Ref function for the `<DrawerLayout.Tray />` content |
 | DrawerLayout.DrawerTray | mountNode | `PositionMountNode` | No | - | An element or a function returning an element to use as the mount node for the `<DrawerLayout.Tray />` when tray is overlaying content |
-| DrawerLayout.DrawerTray | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
-| DrawerLayout.DrawerTray | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<DrawerLayout.Tray />` is open |
+| DrawerLayout.DrawerTray | defaultFocusElement | `UIElement` | No | - | An element or a function returning an element to focus by default |
+| DrawerLayout.DrawerTray | liveRegion | `LiveRegion` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<DrawerLayout.Tray />` is open |
 | DrawerLayout.DrawerTray | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Event fired when the underlying FocusRegion is dismissed in overlay mode. This can happen if: - `shouldCloseOnDocumentClick` is `true` and the user clicks outside the `<DrawerLayout.Tray />` - If `shouldCloseOnEscape` is `true` and the user presses the ESC key. This should be used to close the `<DrawerLayout.Tray />` in these cases |
 | DrawerLayout.DrawerTray | shouldContainFocus | `boolean` | No | `true` |  |
 | DrawerLayout.DrawerTray | shouldReturnFocus | `boolean` | No | `true` |  |

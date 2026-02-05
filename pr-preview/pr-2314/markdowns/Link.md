@@ -268,12 +268,12 @@ type: embed
 | Link | href | `string` | No | - | Sets the link's `href` attribute |
 | Link | color | `'link' \| 'link-inverse'` | No | `'link'` | Designates Link's text color to accommodate light and dark backgrounds |
 | Link | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
-| Link | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element type to render as (will default to `<a>` if href is provided) |
+| Link | as | `AsElementType` | No | - | The element type to render as (will default to `<a>` if href is provided) |
 | Link | role | `string` | No | - | The ARIA role of the element. |
 | Link | forceButtonRole | `boolean` | No | `true` | If the Link has an onClick handler but is not a button element, force ARIA role to be "button". |
 | Link | interaction | `'enabled' \| 'disabled'` | No | `undefined` | Determines if the link is enabled or disabled |
 | Link | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="small auto large"`. |
-| Link | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size. |
+| Link | renderIcon | `Renderable` | No | - | Add an SVG icon to the Link. Do not add icons directly as children. When using Lucide icons, Link will automatically pass the appropriate size prop based on the Link's size. |
 | Link | iconPlacement | `'start' \| 'end'` | No | `'start'` | Place the icon before or after the text in the Link. |
 | Link | display | `'auto' \| 'block' \| 'inline-block' \| 'flex' \| 'inline-flex'` | No | - | Set the CSS display property of the Link element. 'auto' sets no display property. |
 | Link | onBlur | `(event: React.FocusEvent<ViewOwnProps>) => void` | No | - | Fires when the Link loses focus |
@@ -282,7 +282,6 @@ type: embed
 | Link | onMouseEnter | `(event: React.MouseEvent<ViewOwnProps>) => void` | No | - | Fires when the Link is hovered |
 | Link | variant | `'inline' \| 'standalone' \| 'inline-small' \| 'standalone-small'` | No | - | Sets pre-defined values for the component to achieve specific roles for the component - `inline` - `standalone` __Deprecated values:__ - `inline-small` - `standalone-small` |
 | Link | size | `'small' \| 'medium' \| 'large'` | No | - | Sets the size of the link (font size, line height, and icon gap) |
-| Link | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
 

@@ -699,16 +699,16 @@ type: embed
 | Modal | onExiting | `() => void` | No | - | Callback fired as the <Modal /> begins to transition out |
 | Modal | onExited | `(type?: TransitionType) => void` | No | - | Callback fired after the <Modal /> finishes transitioning out |
 | Modal | label | `string` | Yes | - | An accessible label for the `<Modal />` content |
-| Modal | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | The element to render the dialog as, `span` by default |
+| Modal | as | `AsElementType` | No | - | The element to render the dialog as, `span` by default |
 | Modal | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be returned to the trigger when the `<Modal/>` is closed |
 | Modal | shouldCloseOnDocumentClick | `boolean` | No | `true` | Whether the `<Modal/>` should request close when the document is clicked |
 | Modal | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Modal />` is requesting to be closed |
-| Modal | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Modal />` is open |
-| Modal | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | - | An element or a function returning an element to focus by default |
+| Modal | liveRegion | `LiveRegion` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Modal />` is open |
+| Modal | defaultFocusElement | `UIElement` | No | - | An element or a function returning an element to focus by default |
 | Modal.ModalBody | children | `React.ReactNode` | No | - |  |
 | Modal.ModalBody | padding | `Spacing` | No | `'medium'` |  |
 | Modal.ModalBody | elementRef | `(element: UIElement \| null) => void` | No | - |  |
-| Modal.ModalBody | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` |  |
+| Modal.ModalBody | as | `AsElementType` | No | `'div'` |  |
 | Modal.ModalBody | variant | `'default' \| 'inverse'` | No | `'default'` |  |
 | Modal.ModalBody | overflow | `'scroll' \| 'fit'` | No | - |  |
 | Modal.ModalFooter | children | `React.ReactNode` | No | - |  |

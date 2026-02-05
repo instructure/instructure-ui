@@ -261,12 +261,12 @@ type: embed
 | Alert | screenReaderOnly | `boolean` | No | `false` | If the alert should only be visible to screen readers |
 | Alert | timeout | `number` | No | `0` | Milliseconds until the Alert is dismissed automatically |
 | Alert | margin | `Spacing` | No | `'x-small 0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| Alert | renderCloseButtonLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Close button label. Can be a React component |
+| Alert | renderCloseButtonLabel | `Renderable` | No | - | Close button label. Can be a React component |
 | Alert | onDismiss | `() => void` | No | - | Callback after the alert is closed |
 | Alert | transition | `'none' \| 'fade'` | No | `'fade'` | Transition used to make the alert appear and disappear |
 | Alert | open | `boolean` | No | `true` | if open transitions from truthy to falsey, it's a signal to close and unmount the alert. This is necessary to close the alert from the outside and still run the transition. |
 | Alert | hasShadow | `boolean` | No | `true` | If the alert should have a shadow. |
-| Alert | renderCustomIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon. Setting it will override the variant's icon. |
+| Alert | renderCustomIcon | `Renderable` | No | - | An icon, or function that returns an icon. Setting it will override the variant's icon. |
 
 ### Usage
 

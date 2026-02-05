@@ -95,7 +95,7 @@ type: embed
 | SideNavBar.SideNavBarItem | elementRef | `(el: Element \| null) => void` | No | - | The reference to the underlying HTML element |
 | SideNavBar.SideNavBarItem | icon | `React.ReactNode` | Yes | - | The visual to display (ex. an Image, Logo, Avatar, or Icon) |
 | SideNavBar.SideNavBarItem | label | `React.ReactNode` | Yes | - | The text to display for the SideNavBar Link |
-| SideNavBar.SideNavBarItem | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'a'` | The element type to render as (will default to `<a>` if href is provided) |
+| SideNavBar.SideNavBarItem | as | `AsElementType` | No | `'a'` | The element type to render as (will default to `<a>` if href is provided) |
 | SideNavBar.SideNavBarItem | href | `string` | No | - | If the SideNavBarItem goes to a new page, pass an href |
 | SideNavBar.SideNavBarItem | onClick | `(event: React.MouseEvent) => void` | No | - | If the SideNavBarItem does not go to a new page pass an onClick |
 | SideNavBar.SideNavBarItem | selected | `boolean` | No | `false` | Denotes which SideNavBarItem is currently selected |
