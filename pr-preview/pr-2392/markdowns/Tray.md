@@ -107,7 +107,7 @@ type: embed
 | Tray | size | `'x-small' \| 'small' \| 'regular' \| 'medium' \| 'large'` | No | `'small'` | The size (width) of the `<Tray />` when placement is `start` or `end` |
 | Tray | placement | `'top' \| 'bottom' \| 'start' \| 'end' \| 'center'` | No | `'start'` | Placement to determine where the `<Tray />` should display in the viewport |
 | Tray | open | `boolean` | No | `false` | Whether or not the `<Tray />` is open |
-| Tray | defaultFocusElement | `\| Node \| Window \| ReactElement \| Component \| (() => Node \| Window \| null \| undefined) \| null` | No | `null` | An element or a function returning an element to focus by default |
+| Tray | defaultFocusElement | `UIElement` | No | `null` | An element or a function returning an element to focus by default |
 | Tray | contentRef | `(el: HTMLSpanElement \| null) => void` | No | - | A function that returns a reference to the content element |
 | Tray | shouldContainFocus | `boolean` | No | `true` | Whether focus should be contained within the `<Tray/>` when it is open |
 | Tray | shouldReturnFocus | `boolean` | No | `true` | Whether focus should be restored when the `<Tray/>` is closed |
@@ -117,7 +117,7 @@ type: embed
 | Tray | onDismiss | `( event: React.UIEvent \| React.FocusEvent, documentClick?: boolean ) => void` | No | - | Callback fired when the `<Tray />` is requesting to be closed |
 | Tray | mountNode | `Element \| (() => Element \| null) \| null` | No | - | An element or a function returning an element to use as the mount node for the `<Tray />` (defaults to `document.body`) |
 | Tray | insertAt | `'bottom' \| 'top'` | No | `'bottom'` | Insert the element at the 'top' of the mountNode or at the 'bottom' |
-| Tray | liveRegion | `\| (() => (Element \| null)[]) \| (() => Element \| null) \| (Element \| null)[] \| Element \| null` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Tray />` is open |
+| Tray | liveRegion | `LiveRegion` | No | - | An element, function returning an element, or array of elements that will not be hidden from the screen reader when the `<Tray />` is open |
 | Tray | onTransition | `( toState: BaseTransitionStatesType, fromState: BaseTransitionStatesType ) => void` | No | - | Callback fired when the <Tray /> transitions in/out |
 | Tray | onEnter | `() => void` | No | - | Callback fired before the <Tray /> transitions in |
 | Tray | onEntering | `() => void` | No | - | Callback fired as the <Tray /> begins to transition in |

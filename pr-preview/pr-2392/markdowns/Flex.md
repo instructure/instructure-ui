@@ -422,8 +422,8 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Flex | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props will not automatically be set on the children. |
-| Flex | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Flex | children | `Renderable` | No | - | It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props will not automatically be set on the children. |
+| Flex | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Flex | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Flex | height | `string \| number` | No | - | Sets the height of the component's container (optional) |
 | Flex | width | `string \| number` | No | - | Sets the width of the component's container (optional) |
@@ -438,7 +438,7 @@ type: example
 | Flex | wrap | `'wrap' \| 'no-wrap' \| 'wrap-reverse'` | No | `'no-wrap'` | Determines if the Flex.Items should wrap when they exceed their container's width |
 | Flex | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
 | Flex.Item | children | `React.ReactNode` | No | - | The children to render inside the Item |
-| Flex.Item | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
+| Flex.Item | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Flex.Item | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Flex.Item | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Flex.Item | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |

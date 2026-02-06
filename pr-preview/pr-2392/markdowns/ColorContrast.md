@@ -113,6 +113,7 @@ type: example
 | ColorContrast | firstColorLabel | `string` | No | - | The name of the first color which will be compared |
 | ColorContrast | graphicsTextLabel | `string` | Yes | - | Text of the third check (Suggested english text: Graphics text) |
 | ColorContrast | label | `string` | Yes | - | Label of the component |
+| ColorContrast | labelLevel | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | No | - | The heading level for the label. If provided, the label will be rendered as a `<Heading />` instead of `<Text />`. |
 | ColorContrast | largeTextLabel | `string` | Yes | - | Text of the second check (Suggested english text: Large text) |
 | ColorContrast | normalTextLabel | `string` | Yes | - | Text of the first check (Suggested english text: Normal text) |
 | ColorContrast | secondColor | `string` | Yes | - | The second color to compare (HEX code) |
