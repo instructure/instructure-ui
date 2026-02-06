@@ -341,6 +341,10 @@
         "space2xl": {
           "value": "{spacing.space2xl}",
           "type": "spacing"
+        },
+        "spaceNone": {
+          "value": "0",
+          "type": "spacing"
         }
       },
       "gap": {
