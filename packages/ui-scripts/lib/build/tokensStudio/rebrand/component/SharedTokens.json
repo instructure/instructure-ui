@@ -343,7 +343,7 @@
           "type": "spacing"
         },
         "spaceNone": {
-          "value": "0",
+          "value": "0rem",
           "type": "spacing"
         }
       },
