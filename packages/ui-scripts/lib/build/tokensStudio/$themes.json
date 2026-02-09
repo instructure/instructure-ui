@@ -60,7 +60,8 @@
       "rebrand/component/ProgressCircle": "enabled",
       "rebrand/component/TopNavBar": "enabled",
       "rebrand/component/Select": "enabled",
-      "rebrand/component/Pagination": "enabled"
+      "rebrand/component/Pagination": "enabled",
+      "rebrand/component/DrawerLayout": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -2004,7 +2005,10 @@
       "view.stackingAbove": "5546c5f4795ebcb9d5e47ce79b86805267b1ebf8",
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
-      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0"
+      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
+      "drawerLayoutTray.background": "6ac1327244d7ea4dd5bacda44c27c945e81728a9",
+      "drawerLayoutTray.borderColor": "816de5d05984cd257ec3d30ae8f3ca770409fa22",
+      "drawerLayoutTray.borderWidth": "3d0b63c08645cca572e29ed8cde8d6a182f9be9f"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:2",
@@ -2071,7 +2075,8 @@
       "rebrand/component/ProgressCircle": "enabled",
       "rebrand/component/TopNavBar": "enabled",
       "rebrand/component/Select": "enabled",
-      "rebrand/component/Pagination": "enabled"
+      "rebrand/component/Pagination": "enabled",
+      "rebrand/component/DrawerLayout": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -3952,7 +3957,10 @@
       "view.stackingAbove": "5546c5f4795ebcb9d5e47ce79b86805267b1ebf8",
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
-      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0"
+      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
+      "drawerLayoutTray.background": "6ac1327244d7ea4dd5bacda44c27c945e81728a9",
+      "drawerLayoutTray.borderColor": "816de5d05984cd257ec3d30ae8f3ca770409fa22",
+      "drawerLayoutTray.borderWidth": "3d0b63c08645cca572e29ed8cde8d6a182f9be9f"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:3",
@@ -4019,7 +4027,8 @@
       "canvas/component/ProgressCircle": "enabled",
       "canvas/component/TopNavBar": "enabled",
       "canvas/component/Select": "enabled",
-      "canvas/component/Pagination": "enabled"
+      "canvas/component/Pagination": "enabled",
+      "canvas/component/DrawerLayout": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5847,6 +5856,9 @@
       "treeBrowserTreeCollection.borderColor": "99c15459e702b233a0e934de3b3cf2eba9d23cef",
       "treeBrowserTreeCollection.borderWidth": "bdf2f60982ece4a375837781d31a2444ef51b495",
       "treeBrowserTreeCollection.fontFamily": "2528937d98b56d282e9e19a75223e47a052ee6da",
+      "drawerLayoutTray.background": "6ac1327244d7ea4dd5bacda44c27c945e81728a9",
+      "drawerLayoutTray.borderColor": "816de5d05984cd257ec3d30ae8f3ca770409fa22",
+      "drawerLayoutTray.borderWidth": "3d0b63c08645cca572e29ed8cde8d6a182f9be9f",
       "view.fontFamily": "f1d8898b1d1e69fa04f276f16ee2e84313ed600f",
       "view.color": "3171eed7bd4c4d55a243231ae9c1dbfa2e16db7e",
       "view.colorPrimaryInverse": "a881a532c315c6b6c35d8ea870be4b483183b718",
@@ -6032,7 +6044,8 @@
       "canvas/component/ProgressCircle": "enabled",
       "canvas/component/TopNavBar": "enabled",
       "canvas/component/Select": "enabled",
-      "canvas/component/Pagination": "enabled"
+      "canvas/component/Pagination": "enabled",
+      "canvas/component/DrawerLayout": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -7797,6 +7810,9 @@
       "treeBrowserTreeCollection.borderColor": "99c15459e702b233a0e934de3b3cf2eba9d23cef",
       "treeBrowserTreeCollection.borderWidth": "bdf2f60982ece4a375837781d31a2444ef51b495",
       "treeBrowserTreeCollection.fontFamily": "2528937d98b56d282e9e19a75223e47a052ee6da",
+      "drawerLayoutTray.background": "6ac1327244d7ea4dd5bacda44c27c945e81728a9",
+      "drawerLayoutTray.borderColor": "816de5d05984cd257ec3d30ae8f3ca770409fa22",
+      "drawerLayoutTray.borderWidth": "3d0b63c08645cca572e29ed8cde8d6a182f9be9f",
       "view.fontFamily": "f1d8898b1d1e69fa04f276f16ee2e84313ed600f",
       "view.color": "3171eed7bd4c4d55a243231ae9c1dbfa2e16db7e",
       "view.colorPrimaryInverse": "a881a532c315c6b6c35d8ea870be4b483183b718",
