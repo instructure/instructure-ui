@@ -101,6 +101,14 @@
     "paddingHorizontal": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
+    },
+    "highlightedBackground": {
+      "value": "{color.background.interactive.action.tertiary.hover}",
+      "type": "color"
+    },
+    "selectedHighlightedBackground": {
+      "value": "{color.background.interactive.action.primary.hover}",
+      "type": "color"
     }
   },
   "menuSeparator": {
