@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { MenuItemTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { MenuItemProps, MenuItemStyle } from './props'
 
 /**
@@ -36,10 +36,10 @@ import type { MenuItemProps, MenuItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: MenuItemTheme,
+  componentTheme: NewComponentTypes['MenuItem'],
   props: MenuItemProps
 ): MenuItemStyle => {
-  const { type, disabled } = props
+  const { type, disabled, selected } = props
 
   const isRadioOrCheckbox = type === 'checkbox' || type === 'radio'
 
@@ -53,14 +53,14 @@ const generateStyle = (
 
   const roleStyles = isRadioOrCheckbox
     ? {
-        paddingInlineStart: componentTheme.labelPadding
+        paddingInlineEnd: componentTheme.labelPadding
       }
     : {}
 
   const roleIconStyles = isRadioOrCheckbox
     ? {
-        insetInlineStart: componentTheme.iconPadding,
-        insetInlineEnd: 'auto'
+        insetInlineStart: 'auto',
+        insetInlineEnd: componentTheme.iconPadding
       }
     : {}
 
@@ -72,6 +72,23 @@ const generateStyle = (
       }
     : {}
 
+  const selectedStyles = selected
+    ? {
+        background: componentTheme.activeBackground,
+        '[class*="menuItem__label"]': {
+          color: componentTheme.activeLabelColor
+        }
+      }
+    : {}
+
+  const selectedHighlightedStyles = selected
+    ? {
+        background: componentTheme.selectedHighlightedBackground
+      }
+    : {
+        background: componentTheme.highlightedBackground
+      }
+
   const linkStyles = { textDecoration: 'none' }
 
   return {
@@ -80,7 +97,7 @@ const generateStyle = (
       position: 'relative',
       border: 'none',
       outline: 'none',
-      padding: componentTheme.padding,
+      padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`,
       margin: '0',
       width: '100%',
       borderRadius: 'initial',
@@ -101,13 +118,7 @@ const generateStyle = (
       textDecoration: 'none',
       ...roleStyles,
       '&:focus,  &:active,  &:hover': {
-        background: componentTheme.activeBackground,
-        '[class*="menuItem__label"]': {
-          color: componentTheme.activeLabelColor
-        },
-        '[class*="menuItem__icon"]': {
-          color: componentTheme.activeIconColor
-        }
+        ...selectedHighlightedStyles
       },
       //removes extra ff button spacing
       '&::-moz-focus-inner': {
@@ -116,6 +127,7 @@ const generateStyle = (
         border: '0'
       },
       ...disabledStyles,
+      ...selectedStyles,
 
       // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
       '&:is(a)': {
@@ -133,7 +145,6 @@ const generateStyle = (
       top: '0',
       width: '1em',
       height: '100%',
-      color: componentTheme.iconColor,
       ...roleIconStyles,
       ...flyoutIconStyles
     },

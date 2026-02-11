@@ -34,10 +34,9 @@ import {
 
 import { View } from '@instructure/ui-view'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
-import generateComponentTheme from './theme'
 
 import { Item } from './Item'
 import type { OptionsItemProps } from './Item/props'
@@ -59,7 +58,7 @@ category: components/utilities
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles)
 class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 

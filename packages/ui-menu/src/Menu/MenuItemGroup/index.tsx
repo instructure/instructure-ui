@@ -24,7 +24,7 @@
 
 import { ComponentElement, Children, Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import {
   omitProps,
   safeCloneElement,
@@ -39,7 +39,6 @@ import { MenuItemSeparator } from '../MenuItemSeparator'
 import type { MenuSeparatorProps } from '../MenuItemSeparator/props'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
@@ -57,7 +56,7 @@ id: Menu.Group
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   static readonly componentId = 'Menu.Group'
 

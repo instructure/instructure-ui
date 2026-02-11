@@ -41,10 +41,9 @@ import { MenuItemGroup } from './MenuItemGroup'
 import type { MenuGroupProps } from './MenuItemGroup/props'
 import { MenuItemSeparator } from './MenuItemSeparator'
 import type { MenuSeparatorProps } from './MenuItemSeparator/props'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { MenuProps } from './props'
@@ -63,7 +62,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Menu extends Component<MenuProps> {
   static readonly componentId = 'Menu'
   static allowedProps = allowedProps

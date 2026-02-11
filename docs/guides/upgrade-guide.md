@@ -391,6 +391,97 @@ type: embed
 
 ```
 
+### Menu
+
+Icons for checkbox and radio menu items are now positioned on the right side instead of the left.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusBorderStyle",note:"style uses sharedTokens.focusOutline"},
+    {name:"focusBorderWidth",note:"style uses sharedTokens.focusOutline"},
+    {name:"focusBorderColor",note:"style uses sharedTokens.focusOutline"},
+    {name:"focusBorderRadius",note:"style uses sharedTokens.focusOutline"}
+  ]}
+/>
+
+```
+
+#### Menu.Item
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"iconColor",note:""},
+    {name:"activeIconColor",note:""},
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
+
+```
+
+#### Menu.Group
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
+
+```
+
+### Options
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"nestedLabelPadding",note:"split into nestedLabelPaddingVertical and nestedLabelPaddingHorizontal"}
+  ]}
+/>
+
+```
+
+#### Options.Item
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"},
+  ]}
+/>
+
+```
+
+#### Options.Separator
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"margin",note:"split into marginVertical and marginHorizontal"}
+  ]}
+/>
+
+```
+
 ### NumberInput
 
 `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
