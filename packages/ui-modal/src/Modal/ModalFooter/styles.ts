@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ModalFooterTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ModalFooterProps, ModalFooterStyle } from './props'
 
 /**
@@ -32,11 +32,12 @@ import type { ModalFooterProps, ModalFooterStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ModalFooterTheme,
+  componentTheme: NewComponentTypes['ModalFooter'],
   props: ModalFooterProps
 ): ModalFooterStyle => {
   const { variant } = props
@@ -44,11 +45,11 @@ const generateStyle = (
   const backgroundStyle =
     variant === 'inverse'
       ? {
-          background: componentTheme.inverseBackground,
+          background: componentTheme.inverseBackgroundColor,
           borderTop: `${componentTheme.borderWidth} solid ${componentTheme.inverseBorderColor}`
         }
       : {
-          background: componentTheme.background,
+          background: componentTheme.backgroundColor,
           borderTop: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`
         }
 
