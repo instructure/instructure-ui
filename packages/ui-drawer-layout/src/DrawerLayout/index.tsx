@@ -45,7 +45,7 @@ import type {
 import { DrawerTray } from './DrawerTray'
 import type { DrawerLayoutTrayProps } from './DrawerTray/props'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import { allowedProps } from './props'
@@ -67,7 +67,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, null)
+@withStyle(generateStyle)
 @textDirectionContextConsumer()
 class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
   static readonly componentId = 'DrawerLayout'
