@@ -102,7 +102,7 @@
       "type": "spacing"
     },
     "highlightedBackground": {
-      "value": "{color.background.interactive.action.tertiary.hover}",
+      "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
     },
     "selectedHighlightedBackground": {
