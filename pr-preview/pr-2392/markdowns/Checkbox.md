@@ -161,6 +161,29 @@ type: example
 />
 ```
 
+### Error messages
+
+Checkboxes can display error messages using the `messages` prop. This works for both the default checkbox and the toggle variant.
+
+```js
+---
+type: example
+---
+<FormFieldGroup>
+  <Checkbox
+    label="Checkbox"
+    isRequired={true}
+    messages={[{type: 'newError', text: 'Short error message'}]}
+  />
+  <Checkbox
+    variant="toggle"
+    label="Checkbox_toggle"
+    isRequired={true}
+    messages={[{type: 'newError', text: 'Short error message'}]}
+  />
+</FormFieldGroup>
+```
+
 ### Guidelines
 
 ```js
