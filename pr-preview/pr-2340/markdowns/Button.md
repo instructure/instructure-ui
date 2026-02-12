@@ -62,6 +62,19 @@ type: example
 </View>
 ```
 
+There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`.
+
+```js
+---
+type: example
+---
+<View display="block">
+  <Button size="condensedSmall" margin="small">Condensed Small</Button>
+  <Button size="condensedMedium" margin="small">Condensed Medium</Button>
+  <Button size="small" margin="small">Small</Button>
+</View>
+```
+
 ### Rendering icons in Buttons
 
 An icon can be rendered alongside the Button content using the `renderIcon` prop. Use [IconButton](IconButton) instead if your Button only displays an Icon with no other visual content.
@@ -324,7 +337,7 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Button | children | `React.ReactNode` | No | - | Specifies the `Button` children. |
 | Button | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
-| Button | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `Button` |
+| Button | size | `'small' \| 'medium' \| 'large' \| 'condensedSmall' \| 'condensedMedium'` | No | `'medium'` | The size of the `Button` |
 | Button | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
 | Button | as | `AsElementType` | No | `'button'` | The element to render as the component root, `Button` by default. |
 | Button | interaction | `'enabled' \| 'disabled' \| 'readonly'` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |
