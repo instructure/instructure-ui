@@ -108,8 +108,8 @@
 - [Tray](https://instructure.design/markdowns/Tray.md): A slide-out container triggered by click, appearing from top/bottom/start/end of viewport. Used for actionable content that doesn't require a modal overlay. Supports various sizes and placements with accessibility focus management.
 - [TreeBrowser](https://instructure.design/markdowns/TreeBrowser.md): A keyboard-accessible tree structure component for browsing hierarchical content. Supports custom icons, sorting, state management, and customizable node content. Not intended for site navigation.
 - [TruncateText](https://instructure.design/markdowns/TruncateText.md): Component for truncating text content with single or multiple line support. Supports custom ellipsis, truncation position (end or middle), and tooltips for full text accessibility. Not for buttons or navigation items.
-- [ContextView](https://instructure.design/markdowns/ContextView.md): A container that renders inline with an arrow pointing to another element. It displays contextual information without being a popover. Supports padding, text alignment, and margin customization. Often used with components like RangeInput and internally by Popover.
 - [View](https://instructure.design/markdowns/View.md): The foundational visual component providing styling for backgrounds, borders, shadows, positioning, and focus states. Supports visual debugging and semantic HTML elements via the 'as' prop.
+- [ContextView](https://instructure.design/markdowns/ContextView.md): A container that renders inline with an arrow pointing to another element. It displays contextual information without being a popover. Supports padding, text alignment, and margin customization. Often used with components like RangeInput and internally by Popover.
 
 #### utilities
 

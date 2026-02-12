@@ -239,7 +239,7 @@ const Example = () => {
         <Modal.Header>
           <Flex>
             <Flex.Item shouldGrow shouldShrink>
-              <Heading level="h2">
+              <Heading color="inverse" level="h2">
                 <TruncateText>A small image</TruncateText>
               </Heading>
             </Flex.Item>
@@ -574,11 +574,11 @@ class Example extends React.Component {
         >
           <Modal.Header>
             {this.renderCloseButton()}
-            <Heading>This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
+            <Heading color="inverse">This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
           </Modal.Header>
           <WrappedModalBody>
-            <Heading level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
-            <Text lineHeight="double">{lorem.paragraphs(5)}</Text>
+            <Heading color="inverse" level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
+            <Text color="inverse" lineHeight="double">{lorem.paragraphs(5)}</Text>
           </WrappedModalBody>
           <View
             as="div"
