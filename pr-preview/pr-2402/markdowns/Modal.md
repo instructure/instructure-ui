@@ -358,14 +358,10 @@ const Example = () => {
             <Flex.Item shouldGrow shouldShrink>
               <Flex alignItems="center">
                 <Flex.Item margin="0 x-small 0 0">
-                  <SVGIcon
-                    src={iconExample}
-                    size="small"
-                    title="Icon Example"
-                  />
+                  <HeartInstUIIcon size={'xl'} />
                 </Flex.Item>
                 <Flex.Item shouldGrow shouldShrink>
-                  <Heading level="h2">
+                  <Heading color="inverse" level="h2">
                     <TruncateText>This Modal Contains Media</TruncateText>
                   </Heading>
                 </Flex.Item>
@@ -376,7 +372,7 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconPrinterSolid}
+                renderIcon={<PrinterInstUIIcon/>}
                 screenReaderLabel="Print This Image"
                 margin="0 x-small 0 0"
               />
@@ -384,7 +380,7 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconDownloadSolid}
+                renderIcon={<DownloadInstUIIcon/>}
                 screenReaderLabel="Download This Image"
                 margin="0 x-small 0 0"
               />
@@ -392,7 +388,7 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconXSolid}
+                renderIcon={<XInstUIIcon/>}
                 screenReaderLabel="Close"
                 onClick={handleButtonClick}
               />
