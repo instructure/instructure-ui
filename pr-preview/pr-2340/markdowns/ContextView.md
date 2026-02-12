@@ -56,7 +56,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| ContextView | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` |  |
+| ContextView | as | `AsElementType` | No | `'span'` |  |
 | ContextView | elementRef | `(element: Element \| null) => void` | No | `() => {}` |  |
 | ContextView | height | `string \| number` | No | `'auto'` |  |
 | ContextView | width | `string \| number` | No | `'auto'` |  |
@@ -70,7 +70,7 @@ type: example
 | ContextView | debug | `boolean` | No | `false` |  |
 | ContextView | margin | `Spacing` | No | - |  |
 | ContextView | padding | `Spacing` | No | - |  |
-| ContextView | shadow | `Shadow` | No | `'resting'` |  |
+| ContextView | shadow | `Shadow` | No | `'above'` |  |
 | ContextView | stacking | `Stacking` | No | - |  |
 | ContextView | placement | `PlacementPropValues` | No | `'center end'` |  |
 | ContextView | borderColor | `string` | No | - |  |

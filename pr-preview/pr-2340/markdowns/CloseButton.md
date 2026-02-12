@@ -83,11 +83,10 @@ type: embed
 | CloseButton | placement | `'start' \| 'end' \| 'static'` | No | `'static'` | Specifies the placement of the `CloseButton` |
 | CloseButton | offset | `'none' \| 'x-small' \| 'small' \| 'medium'` | No | `'x-small'` | Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container. Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting the `position` of the parent container to `relative`. |
 | CloseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
-| CloseButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `CloseButton` by default. |
+| CloseButton | as | `AsElementType` | No | `'button'` | The element to render as the component root, `CloseButton` by default. |
 | CloseButton | href | `string` | No | - | Specifies an href attribute for the `CloseButton`'s underlying html element. |
-| CloseButton | cursor | `\| 'auto' \| 'default' \| 'none' \| 'context-menu' \| 'help' \| 'pointer' \| 'progress' \| 'wait' \| 'cell' \| 'crosshair' \| 'text' \| 'vertical-text' \| 'alias' \| 'copy' \| 'move' \| 'no-drop' \| 'not-allowed' \| 'grab' \| 'grabbing' \| 'all-scroll' \| 'col-resize' \| 'row-resize' \| 'n-resize' \| 'e-resize' \| 's-resize' \| 'w-resize' \| 'ne-resize' \| 'nw-resize' \| 'se-resize' \| 'sw-resize' \| 'ew-resize' \| 'ns-resize' \| 'nesw-resize' \| 'nwse-resize' \| 'zoom-in' \| 'zoom-out'` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
+| CloseButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the `CloseButton`. |
 | CloseButton | tabIndex | `number` | No | - | Specifies the tabindex of the `CloseButton`. |
-| CloseButton | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
 

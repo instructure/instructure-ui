@@ -25,7 +25,7 @@ type: example
       }}
     >
       <IconButton
-        renderIcon={IconUserSolid}
+        renderIcon={<UserRoundInstUIIcon />}
         screenReaderLabel="Edits"
         withBorder={false}
         withBackground={false}
@@ -38,7 +38,7 @@ type: example
       }}
     >
       <IconButton
-        renderIcon={IconUserSolid}
+        renderIcon={<UserRoundInstUIIcon />}
         screenReaderLabel="Edits"
         withBorder={false}
         withBackground={false}
@@ -136,7 +136,7 @@ type: example
 ---
 const EditButton = () => (
   <IconButton
-    renderIcon={IconUserSolid}
+    renderIcon={<UserRoundInstUIIcon />}
     screenReaderLabel="Edit page"
     withBorder={false}
     withBackground={false}
@@ -290,7 +290,7 @@ type: embed
 | Badge | formatOverflowText | `(count: number, countUntil: number) => string` | No | `(_count: number, countUntil: number) =>
 `${countUntil - 1} +`` |  |
 | Badge | formatOutput | `(formattedCount: string) => React.JSX.Element \| string \| number` | No | - |  |
-| Badge | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - |  |
+| Badge | as | `AsElementType` | No | - |  |
 | Badge | display | `'inline-block' \| 'block'` | No | `'inline-block'` | Specifies the display property of the container. __Use "block" only when the content inside the Badge also has "block" display.__ |
 | Badge | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Badge | placement | `PlacementPropValues` | No | `'top end'` | Supported values are `top start`, `top end`, `end center`, `bottom end`, `bottom start`, and `start center` |

@@ -157,7 +157,7 @@ type: embed
 | Menu.MenuItem | onMouseOver | `(e: React.MouseEvent, args: MenuItem) => void` | No | - |  |
 | Menu.MenuItem | controls | `string` | No | - | the id of the element that the menu item will act upon |
 | Menu.MenuItem | disabled | `boolean` | No | `false` |  |
-| Menu.MenuItem | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | the element type to render as (will default to `<a>` if href is provided) |
+| Menu.MenuItem | as | `AsElementType` | No | - | the element type to render as (will default to `<a>` if href is provided) |
 | Menu.MenuItem | type | `'button' \| 'checkbox' \| 'radio' \| 'flyout'` | No | `'button'` | How this component should be rendered. If it's `checkbox` or `radio` it will display a checkmark based on its own 'selected' state, if it's `flyout` it will render an arrow after the label. |
 | Menu.MenuItem | value | `string \| number` | No | - | Arbitrary value that you can store in this component. Is sent out by the `onSelect` event |
 | Menu.MenuItem | href | `string` | No | - | Value of the `href` prop that will be put on the underlying DOM element. |

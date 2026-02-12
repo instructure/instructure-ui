@@ -19,9 +19,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -36,9 +36,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -52,9 +52,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -68,9 +68,9 @@ type: example
     valueMax={60}
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -89,7 +89,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 ---
 type: example
 ---
-<View background="primary-inverse" as="div">
+<View background="primary-inverse" padding="medium" as="div">
   <ProgressBar
     screenReaderLabel="Loading completion"
     color="primary-inverse"
@@ -97,9 +97,9 @@ type: example
     valueMax={60}
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -126,9 +126,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -143,9 +143,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -160,9 +160,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -177,9 +177,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -194,9 +194,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -229,9 +229,9 @@ type: example
   valueMax={60}
   renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -262,9 +262,9 @@ type: example
   }}
   renderValue={({ valueNow, valueMax }) => {
     return (
-      <Text>
+      <span>
         {Math.round(valueNow / valueMax * 100)}%
-      </Text>
+      </span>
     )
   }}
   valueMax={88}
@@ -358,7 +358,7 @@ const Example = () => {
         valueMax={MAX}
         shouldAnimate={shouldAnimate}
         renderValue={({ valueNow, valueMax }) => {
-          return <Text>{Math.round((valueNow / valueMax) * 100)}%</Text>
+          return <span>{Math.round((valueNow / valueMax) * 100)}%</span>
         }}
         formatScreenReaderValue={({ valueNow, valueMax }) => {
           return Math.round((valueNow / valueMax) * 100) + ' percent'
@@ -393,14 +393,14 @@ type: embed
 | ProgressBar | valueNow | `Values['valueNow']` | No | `0` | Receives the progress of the event |
 | ProgressBar | formatScreenReaderValue | `(values: Values) => string` | No | `({ valueNow, valueMax }: Values) =>
 `${valueNow} / ${valueMax}`` | A function for formatting the text provided to screen readers via `aria-valuenow` |
-| ProgressBar | renderValue | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | A function to format the displayed value. If null the value will not display. Takes `valueNow` and `valueMax` as parameters. |
+| ProgressBar | renderValue | `Renderable<Values>` | No | - | A function to format the displayed value. If null the value will not display. Takes `valueNow` and `valueMax` as parameters. |
 | ProgressBar | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | Controls the overall color scheme of the component |
 | ProgressBar | meterColor | `\| ((values: Values) => ProgressBarMeterColor) \| ProgressBarMeterColor` | No | `({ valueNow, valueMax }: Values) =>
 valueNow / valueMax >= 1 ? 'success' : 'brand'` | Control the color of the progress meter. Defaults to showing theme success color on completion, based on `valueNow` and `valueMax`. |
 | ProgressBar | shouldAnimate | `boolean` | No | `false` | Whether the change of value should have a transition |
 | ProgressBar | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | ProgressBar | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the component's root HTML element |
-| ProgressBar | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'div'` | Set the element type of the component's root |
+| ProgressBar | as | `AsElementType` | No | `'div'` | Set the element type of the component's root |
 | ProgressBar | renderValueInside | `boolean` | No | - | If true, displays the `renderValue` inside the progress meter for customization. Note: This should not be used in most cases. When enabled, ensure `renderValue` is styled for proper legibility and alignment across themes and sizes. |
 
 ### Usage

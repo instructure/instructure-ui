@@ -44,6 +44,10 @@ type: example
     <Text color="primary-inverse">I&#39;m primary-inverse text</Text><br />
     <Text color="secondary-inverse">I&#39;m secondary-inverse text</Text><br />
   </View>
+  <View background="success">
+    <Text color="primary-on">I&#39;m primary-on text</Text><br />
+    <Text color="secondary-on">I&#39;m secondary-on text</Text><br />
+  </View>
 </div>
 ```
 
@@ -199,8 +203,8 @@ Deprecated `lineHeight` values:
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Text | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | the element type to render as |
-| Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'ai-highlight'` | No | - | Color of the text |
+| Text | as | `AsElementType` | No | `'span'` | the element type to render as |
+| Text | color | `\| 'primary' \| 'secondary' \| 'brand' \| 'success' \| 'danger' \| 'warning' \| 'primary-inverse' \| 'secondary-inverse' \| 'primary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'secondary-on' // used on colored surfaces like warning, same color in dark and light themes \| 'ai-highlight'` | No | - | Color of the text |
 | Text | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Text | fontStyle | `'italic' \| 'normal'` | No | - |  |
 | Text | letterSpacing | `'normal' \| 'condensed' \| 'expanded'` | No | `'normal'` |  |

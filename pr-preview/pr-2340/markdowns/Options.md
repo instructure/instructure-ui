@@ -412,26 +412,26 @@ render(<Example />)
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Options | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | Element type to render as |
+| Options | as | `AsElementType` | No | `'span'` | Element type to render as |
 | Options | role | `string` | No | `'list'` | The aria role of the element |
 | Options | elementRef | `(element: Element \| null) => void` | No | `() => {}` | The the actual list element |
-| Options | renderLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | `null` | Content to render as a label. Mostly for when the component is nested |
+| Options | renderLabel | `Renderable` | No | `null` | Content to render as a label. Mostly for when the component is nested |
 | Options | children | `React.ReactNode` | No | `null` |  |
-| Options.Item | children | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - |  |
-| Options.Item | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | Element type to render as. Will be set to `<a>` if href is provided. |
+| Options.Item | children | `Renderable` | No | - |  |
+| Options.Item | as | `AsElementType` | No | `'span'` | Element type to render as. Will be set to `<a>` if href is provided. |
 | Options.Item | variant | `\| 'default' \| 'highlighted' \| 'selected' \| 'disabled' \| 'highlighted-disabled' \| 'selected-highlighted'` | No | `'default'` | The style variant of the item |
 | Options.Item | role | `string` | No | `'listitem'` | The ARIA role of the element |
-| Options.Item | renderBeforeLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to render before the label (if you pass a function, it has the `props` as its parameter) |
-| Options.Item | renderAfterLabel | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Content to render after the label (if you pass a function, it has the `props` as its parameter) |
+| Options.Item | renderBeforeLabel | `Renderable<OptionsItemRenderProps>` | No | - | Content to render before the label (if you pass a function, it has the `props` as its parameter) |
+| Options.Item | renderAfterLabel | `Renderable<OptionsItemRenderProps>` | No | - | Content to render after the label (if you pass a function, it has the `props` as its parameter) |
 | Options.Item | beforeLabelContentVAlign | `'start' \| 'center' \| 'end'` | No | `'center'` | Sets the vAlign of renderBeforeLabel content |
 | Options.Item | afterLabelContentVAlign | `'start' \| 'center' \| 'end'` | No | `'center'` | Sets the vAlign of renderAfterLabel content |
-| Options.Item | description | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | Additional "secondary" description text |
+| Options.Item | description | `Renderable` | No | - | Additional "secondary" description text |
 | Options.Item | descriptionRole | `string` | No | - | The ARIA role of the description element |
 | Options.Item | href | `string` | No | - | Providing href will render the option as `<a>`. |
 | Options.Item | voiceoverRoleBugWorkaround | `boolean` | No | `false` | Sometimes VoiceOver doesn't announce the role of the highlighted item. This prop forces the role to be on the outer element and should only be used when such an issue arises. |
 | Options.Item | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Options.Item | isSelected | `boolean` | No | `false` | Whether or not this option is selected |
-| Options.Separator | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'span'` | Element type to render as |
+| Options.Separator | as | `AsElementType` | No | `'span'` | Element type to render as |
 
 ### Usage
 

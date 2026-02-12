@@ -46,7 +46,7 @@ type: example
       on={['click', 'hover', 'focus']}
     >
       <IconButton
-        renderIcon={IconInfoLine}
+        renderIcon={<InfoInstUIIcon color="baseColor"/>}
         withBackground={false}
         withBorder={false}
         screenReaderLabel="Toggle Tooltip"
@@ -106,9 +106,9 @@ type: example
 ---
 const MyComponent = forwardRef((props, ref) => {
   return (
-    <div {...props} ref={ref} style={{ width: '10rem' }}>
+    <View background="primary" padding='space12' {...props} ref={ref}>
       My custom component
-    </div>
+    </View>
   )
 })
 
@@ -147,10 +147,10 @@ type: embed
 |-----------|------|------|----------|---------|-------------|
 | Tooltip | elementRef | `(element: Element \| null) => void` | No | - | provides a reference to the underlying html root element |
 | Tooltip | children | `React.ReactNode \| TooltipRenderChildren` | Yes | - | A ReactNode or a function that returns a ReactNode with the following params: @param {Boolean} focused - Is the Tooltip trigger focused? @param {Function} getTriggerProps - Props to be spread onto the trigger element |
-| Tooltip | renderTip | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | Yes | - | The content to render in the tooltip |
+| Tooltip | renderTip | `Renderable` | Yes | - | The content to render in the tooltip |
 | Tooltip | isShowingContent | `boolean` | No | - | Whether or not the tooltip content is shown, when controlled |
 | Tooltip | defaultIsShowingContent | `boolean` | No | `false` | Whether or not to show the content by default, when uncontrolled |
-| Tooltip | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | - | the element type to render as (assumes a single child if 'as' is undefined) |
+| Tooltip | as | `AsElementType` | No | - | the element type to render as (assumes a single child if 'as' is undefined) |
 | Tooltip | on | `('click' \| 'hover' \| 'focus') \| ('click' \| 'hover' \| 'focus')[]` | No | - | The action that causes the Content to display (`click`, `hover`, `focus`) |
 | Tooltip | color | `'primary' \| 'primary-inverse'` | No | `'primary'` | The color of the tooltip content |
 | Tooltip | placement | `PlacementPropValues` | No | `'top'` | Specifies where the Tooltip will be placed in relation to the target element. Ex. placement="bottom" will render the Tooltip below the triggering element (Note: if there is not room, it will position opposite. Ex. "top" will automatically switch to "bottom") |

@@ -22,7 +22,7 @@ type: example
 | BaseButton | type | `'button' \| 'submit' \| 'reset'` | No | `'button'` | Specifies the type of the `Button`'s underlying html element. |
 | BaseButton | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | The size of the `Button` |
 | BaseButton | elementRef | `(element: HTMLElement \| null) => void` | No | - | Provides a reference to the `Button`'s underlying html element. |
-| BaseButton | as | `keyof JSX.IntrinsicElements \| ComponentType<P>` | No | `'button'` | The element to render as the component root, `Button` by default. |
+| BaseButton | as | `AsElementType` | No | `'button'` | The element to render as the component root, `Button` by default. |
 | BaseButton | interaction | `InteractionType` | No | `undefined` | Specifies if interaction with the `Button` is enabled, disabled, or readonly. |
 | BaseButton | color | `\| 'primary' \| 'primary-inverse' \| 'secondary' \| 'success' \| 'danger' \| 'ai-primary' \| 'ai-secondary'` | No | `'secondary'` | Specifies the color for the `Button`. |
 | BaseButton | focusColor | `'info' \| 'inverse'` | No | - | Override the `Button`'s default focus outline color. |
@@ -33,14 +33,13 @@ type: example
 | BaseButton | withBorder | `boolean` | No | `true` | Specifies if the `Button` should render with a border. |
 | BaseButton | isCondensed | `boolean` | No | `false` | Designates if the `Button` should render without padding. This option should only be set when `withBorder` and `withBackground` are also set to false. |
 | BaseButton | margin | `Spacing` | No | `'0'` | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
-| BaseButton | cursor | `\| 'auto' \| 'default' \| 'none' \| 'context-menu' \| 'help' \| 'pointer' \| 'progress' \| 'wait' \| 'cell' \| 'crosshair' \| 'text' \| 'vertical-text' \| 'alias' \| 'copy' \| 'move' \| 'no-drop' \| 'not-allowed' \| 'grab' \| 'grabbing' \| 'all-scroll' \| 'col-resize' \| 'row-resize' \| 'n-resize' \| 'e-resize' \| 's-resize' \| 'w-resize' \| 'ne-resize' \| 'nw-resize' \| 'se-resize' \| 'sw-resize' \| 'ew-resize' \| 'ns-resize' \| 'nesw-resize' \| 'nwse-resize' \| 'zoom-in' \| 'zoom-out'` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
+| BaseButton | cursor | `Cursor` | No | `'pointer'` | Specify a mouse cursor to use when hovering over the button. The `pointer` cursor is used by default. |
 | BaseButton | href | `string` | No | - | Specifies an href attribute for the `Button`'s underlying html element. |
 | BaseButton | onClick | `( event: React.KeyboardEvent<ViewProps> \| React.MouseEvent<ViewProps> ) => void` | No | - | Callback fired when the `Button` is clicked. |
 | BaseButton | onKeyDown | `(event: React.KeyboardEvent<ViewProps>) => void` | No | - | Callback fired when the `Button` receives a keydown event. |
-| BaseButton | renderIcon | `\| ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> \| ComponentClass \| ReactNode \| ((data: P) => ReactNode \| Element) \| (() => ReactNode \| Element) \| Element` | No | - | An icon, or function that returns an icon. |
+| BaseButton | renderIcon | `Renderable` | No | - | An icon, or function that returns an icon. |
 | BaseButton | tabIndex | `number` | No | - | Specifies the tabindex of the `Button`. |
 | BaseButton | withFocusOutline | `boolean` | No | - | Manually control if the `Button` should display a focus outline. When left `undefined` (which is the default) the focus outline will display if this component is focusable and receives focus. |
-| BaseButton | to | `string` | No | - | Needed for React Router links @private |
 
 ### Usage
 
