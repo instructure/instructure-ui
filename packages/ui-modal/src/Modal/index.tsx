@@ -49,6 +49,7 @@ import type {
   ModalPropsForPortal,
   ModalPropsForTransition
 } from './props'
+import ModalContext from './ModalContext'
 
 /**
 ---
@@ -83,7 +84,8 @@ class Modal extends Component<ModalProps, ModalState> {
     this.state = {
       transitioning: false,
       open: props.open ?? false,
-      windowHeight: 99999
+      windowHeight: 99999,
+      bodyScrollAriaLabel: undefined
     }
   }
 
@@ -300,13 +302,21 @@ class Modal extends Component<ModalProps, ModalState> {
             onClose
           )}
         >
-          {constrain === 'parent' ? (
-            <span css={this.props.styles?.constrainContext}>
-              {this.renderDialog(passthroughProps)}
-            </span>
-          ) : (
-            this.renderDialog(passthroughProps)
-          )}
+          <ModalContext.Provider
+            value={{
+              bodyScrollAriaLabel: this.state.bodyScrollAriaLabel,
+              setBodyScrollAriaLabel: (txt: string) =>
+                this.setState({ bodyScrollAriaLabel: txt })
+            }}
+          >
+            {constrain === 'parent' ? (
+              <span css={this.props.styles?.constrainContext}>
+                {this.renderDialog(passthroughProps)}
+              </span>
+            ) : (
+              this.renderDialog(passthroughProps)
+            )}
+          </ModalContext.Provider>
         </Transition>
       </Portal>
     )
