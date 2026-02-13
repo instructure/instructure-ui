@@ -191,6 +191,10 @@ type ModalState = {
   transitioning: boolean
   open: boolean
   windowHeight: number
+  /**
+   * The `aria-label` on the Modal's body if it's scrollable.
+   */
+  bodyScrollAriaLabel?: string
 }
 const allowedProps: AllowedPropKeys = [
   'label',
