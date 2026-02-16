@@ -681,6 +681,60 @@
             }
           }
         }
+      },
+      "accent": {
+        "blue": {
+          "value": "{color.blue.blue130}",
+          "type": "color"
+        },
+        "green": {
+          "value": "{color.green.green130}",
+          "type": "color"
+        },
+        "red": {
+          "value": "{color.red.red130}",
+          "type": "color"
+        },
+        "orange": {
+          "value": "{color.orange.orange130}",
+          "type": "color"
+        },
+        "grey": {
+          "value": "{color.grey.grey150}",
+          "type": "color"
+        },
+        "ash": {
+          "value": "{color.grey.grey180}",
+          "type": "color"
+        },
+        "plum": {
+          "value": "{color.plum.plum130}",
+          "type": "color"
+        },
+        "violet": {
+          "value": "{color.violet.violet130}",
+          "type": "color"
+        },
+        "stone": {
+          "value": "{color.stone.stone130}",
+          "type": "color"
+        },
+        "sky": {
+          "value": "{color.sky.sky130}",
+          "type": "color"
+        },
+        "honey": {
+          "value": "{color.honey.honey130}",
+          "type": "color"
+        },
+        "sea": {
+          "value": "{color.sea.sea130}",
+          "type": "color"
+        },
+        "aurora": {
+          "value": "{color.aurora.aurora130}",
+          "type": "color"
+        }
       }
     },
     "text": {
