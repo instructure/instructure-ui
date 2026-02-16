@@ -29,7 +29,7 @@ import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { TopNavBarBreadcrumb } from '../index'
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
 import TopNavBarContext from '../../TopNavBarContext'
 
 let originalMatchMedia: typeof window.matchMedia

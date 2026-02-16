@@ -29,7 +29,7 @@ import { IconWarningLine } from '@instructure/ui-icons'
 import '@testing-library/jest-dom'
 
 import { FormFieldMessages } from '../index'
-import { FormMessage } from '../../FormPropTypes'
+import { FormMessage } from '@instructure/ui-form-field/latest'
 
 describe('<FormFieldMessages />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

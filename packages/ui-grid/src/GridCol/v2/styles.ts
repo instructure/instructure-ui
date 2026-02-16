@@ -23,7 +23,7 @@
  */
 
 import type { NewComponentTypes } from '@instructure/ui-themes'
-import type { GridBreakpoints } from '../GridTypes'
+import type { GridBreakpoints } from '../../utils/v1/GridTypes'
 import type { GridColProps, GridColStyle } from './props'
 
 type BreakPoints = NonNullable<GridBreakpoints>

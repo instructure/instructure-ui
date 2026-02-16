@@ -28,8 +28,8 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { FormFieldLayoutOwnProps } from '../FormFieldLayout/props'
-import type { FormMessage } from '../FormPropTypes'
+import type { FormFieldLayoutOwnProps } from '../../FormFieldLayout/v2/props'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 
 type FormFieldGroupOwnProps = {
   description: React.ReactNode

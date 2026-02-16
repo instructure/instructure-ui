@@ -31,8 +31,8 @@ import {
   pickProps
 } from '@instructure/ui-react-utils'
 
-import { GridCol } from '../GridCol'
-import type { GridColProps } from '../GridCol/props'
+import { GridCol } from '../../GridCol/v2/'
+import type { GridColProps } from '../../GridCol/v2/props'
 
 import { withStyle } from '@instructure/emotion'
 

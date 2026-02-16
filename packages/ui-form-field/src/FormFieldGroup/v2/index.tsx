@@ -24,14 +24,13 @@
 
 import { Component, Children, ReactElement, AriaAttributes } from 'react'
 
-import { Grid } from '@instructure/ui-grid'
+import { Grid } from '@instructure/ui-grid/latest'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
 import { withStyle } from '@instructure/emotion'
 
-import {
-  FormFieldLayout,
-  allowedProps as formFieldLayoutAllowedProps
-} from '../FormFieldLayout'
+import { allowedProps as formFieldLayoutAllowedProps } from '../../FormFieldLayout/v2/props'
+
+import { FormFieldLayout } from '../../FormFieldLayout/v2'
 
 import generateStyle from './styles'
 

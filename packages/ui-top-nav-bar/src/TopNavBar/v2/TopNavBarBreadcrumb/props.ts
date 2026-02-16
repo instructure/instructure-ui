@@ -29,8 +29,8 @@ import { TopNavBarContextType } from '../TopNavBarContext'
 import { ChildrenOfType, OtherHTMLAttributes } from '@instructure/shared-types'
 import TopNavBarBreadcrumb from './index'
 
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
-import type { BreadcrumbProps } from '@instructure/ui-breadcrumb'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
+import type { BreadcrumbProps } from '@instructure/ui-breadcrumb/latest'
 
 type TopNavBarBreadcrumbProps = TopNavBarBreadcrumbOwnProps &
   WithStyleProps<null, TopNavBarBreadcrumbStyle> &

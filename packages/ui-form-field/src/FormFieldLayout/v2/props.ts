@@ -31,7 +31,7 @@ import type {
   Spacing,
   ThemeOverrideValue
 } from '@instructure/emotion'
-import type { FormMessage } from '../FormPropTypes'
+import type { FormMessage } from '@instructure/ui-form-field/latest'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type FormFieldLayoutOwnProps = {

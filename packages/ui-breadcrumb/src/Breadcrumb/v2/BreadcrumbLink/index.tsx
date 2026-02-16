@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { TruncateText } from '@instructure/ui-truncate-text'
-import { Link } from '@instructure/ui-link'
+import { Link } from '@instructure/ui-link/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 

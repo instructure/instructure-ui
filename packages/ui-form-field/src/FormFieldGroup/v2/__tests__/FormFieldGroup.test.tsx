@@ -28,7 +28,7 @@ import { runAxeCheck } from '@instructure/ui-axe-check'
 import '@testing-library/jest-dom'
 
 import { FormFieldGroup } from '../index'
-import { FormMessage } from '../../FormPropTypes'
+import { FormMessage } from '@instructure/ui-form-field/latest'
 
 describe('<FormFieldGroup />', () => {
   let consoleWarningMock: ReturnType<typeof vi.spyOn>

@@ -36,7 +36,7 @@ import type { BreadcrumbProps, BreadcrumbStyle } from './props'
  */
 const generateStyle = (
   componentTheme: NewComponentTypes['Breadcrumb'],
-  props: BreadcrumbProps,
+  props: BreadcrumbProps
 ): BreadcrumbStyle => {
   const { size } = props
 

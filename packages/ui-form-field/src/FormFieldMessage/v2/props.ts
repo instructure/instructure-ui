@@ -23,7 +23,10 @@
  */
 
 import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
-import type { FormMessageType, FormMessageChild } from '../FormPropTypes'
+import type {
+  FormMessageType,
+  FormMessageChild
+} from '@instructure/ui-form-field/latest'
 
 type FormFieldMessageOwnProps = {
   variant?: FormMessageType

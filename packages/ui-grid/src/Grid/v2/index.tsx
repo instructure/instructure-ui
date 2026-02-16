@@ -31,9 +31,9 @@ import {
   pickProps
 } from '@instructure/ui-react-utils'
 
-import { GridRow } from '../GridRow'
-import type { GridRowProps } from '../GridRow/props'
-import { GridCol } from '../GridCol'
+import { GridRow } from '../../GridRow/v2'
+import type { GridRowProps } from '../../GridRow/v2/props'
+import { GridCol } from '../../GridCol/v2'
 
 import { withStyle } from '@instructure/emotion'
 
