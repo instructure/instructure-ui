@@ -30,7 +30,7 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import {
-  withStyleRework as withStyle,
+  withStyleLegacy as withStyle,
   InstUISettingsProvider,
   WithStyleProps
 } from '../index'

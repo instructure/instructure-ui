@@ -26,7 +26,7 @@
 export * from '@emotion/react'
 
 export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyleRework } from './withStyleRework'
+export { withStyleLegacy } from './withStyleLegacy'
 export { getComponentThemeOverride } from './getComponentThemeOverride'
 export { withStyle } from './withStyle'
 export {
@@ -44,7 +44,7 @@ export { useStyle } from './useStyle'
 export { useTheme } from './useTheme'
 
 export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyleRework'
+export type { WithStyleProps } from './withStyleLegacy'
 export type { ThemeOverrideValue } from './useStyle'
 export type {
   SpacingValues,
