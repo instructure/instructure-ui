@@ -27,7 +27,7 @@ import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
-import { Badge } from '@instructure/ui-badge'
+import { Badge } from '@instructure/ui-badge/latest'
 import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
