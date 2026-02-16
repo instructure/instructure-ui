@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import shallowCompare from '../utils/shallowCompare'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'

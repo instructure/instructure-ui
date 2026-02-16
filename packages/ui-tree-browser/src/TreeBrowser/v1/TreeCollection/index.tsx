@@ -24,7 +24,7 @@
 
 import { Component, ContextType, ReactElement, SyntheticEvent } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
 import { TreeButton } from '../TreeButton'

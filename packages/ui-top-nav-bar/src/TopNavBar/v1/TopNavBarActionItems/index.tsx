@@ -32,7 +32,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { Drilldown } from '@instructure/ui-drilldown'
 import { IconMoreLine } from '@instructure/ui-icons'

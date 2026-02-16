@@ -31,7 +31,7 @@ import {
   IconMiniArrowDoubleLine
 } from '@instructure/ui-icons'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

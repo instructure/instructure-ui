@@ -26,7 +26,7 @@ import { Component } from 'react'
 
 import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'

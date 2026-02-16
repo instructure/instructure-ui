@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import type { HSVType } from '@instructure/ui-color-utils'
 
