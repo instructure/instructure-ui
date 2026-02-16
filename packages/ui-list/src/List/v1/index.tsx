@@ -29,7 +29,7 @@ import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 
 import { ListItem } from './ListItem'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

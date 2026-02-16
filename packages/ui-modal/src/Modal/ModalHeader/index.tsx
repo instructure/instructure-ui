@@ -29,7 +29,7 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { CloseButton } from '@instructure/ui-buttons'
 import type { CloseButtonProps } from '@instructure/ui-buttons'

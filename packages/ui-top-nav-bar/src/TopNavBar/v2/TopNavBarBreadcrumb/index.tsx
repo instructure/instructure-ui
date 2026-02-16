@@ -29,7 +29,7 @@ import {
   allowedProps
 } from './props'
 import TopNavBar from '../index'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
 import {
   IconArrowOpenStartLine,

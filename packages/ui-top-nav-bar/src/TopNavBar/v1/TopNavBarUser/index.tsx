@@ -27,7 +27,7 @@ import { Component, Children } from 'react'
 import { error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { TopNavBarContext } from '../TopNavBarContext'
 import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'

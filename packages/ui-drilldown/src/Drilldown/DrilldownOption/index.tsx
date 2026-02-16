@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import { optionsItemThemeGenerator } from '@instructure/ui-options'
 
 import { allowedProps } from './props'

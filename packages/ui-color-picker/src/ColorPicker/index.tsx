@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import {
-  withStyleRework as withStyle,
+  withStyleLegacy as withStyle,
   InstUISettingsProvider
 } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
