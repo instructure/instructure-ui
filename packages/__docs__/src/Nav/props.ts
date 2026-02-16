@@ -23,12 +23,12 @@
  */
 
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
 
 type NavOwnProps = {
-  docs: Record<string, any>
-  sections: Record<string, any>
-  themes?: Record<string, any>
-  icons?: Record<string, any> | null
+  docs: MainDocsData['docs']
+  sections: MainDocsData['sections']
+  themes?: MainDocsData['themes']
   selected?: string
 }
 type PropKeys = keyof NavOwnProps
@@ -37,16 +37,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NavProps = OtherHTMLAttributes<NavOwnProps> & NavOwnProps
 
-const allowedProps: AllowedPropKeys = [
-  'docs',
-  'icons',
-  'sections',
-  'selected',
-  'themes'
-]
+const allowedProps: AllowedPropKeys = ['docs', 'sections', 'selected', 'themes']
 type NavState = {
-  query: any
-  expandedSections: Record<string, any>
+  query: string | RegExp | null
+  expandedSections: Record<string, boolean>
   userToggling: boolean
   queryStr?: string
   announcement: string | null
