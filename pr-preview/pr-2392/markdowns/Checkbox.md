@@ -161,9 +161,9 @@ type: example
 />
 ```
 
-### Error messages
+### Messages
 
-Checkboxes can display error messages using the `messages` prop. This works for both the default checkbox and the toggle variant.
+Checkboxes can display messages using the `messages` prop. This works for both the default checkbox and the toggle variant.
 
 ```js
 ---
@@ -252,6 +252,7 @@ type: embed
 | Checkbox.ToggleFacade | disabled | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | readOnly | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | focused | `boolean` | No | `false` |  |
+| Checkbox.ToggleFacade | hovered | `boolean` | No | `false` |  |
 | Checkbox.ToggleFacade | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
 | Checkbox.ToggleFacade | labelPlacement | `'top' \| 'start' \| 'end'` | No | `'end'` |  |
 | Checkbox.ToggleFacade | invalid | `boolean` | No | - | Indicate if the parent component (`Checkbox`) is invalid to set the style accordingly. |
