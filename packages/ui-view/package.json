@@ -48,19 +48,6 @@
     "access": "public"
   },
   "sideEffects": false,
-  "exportss": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    },
-    "./lib/*": "./lib/*",
-    "./es/*": "./es/*",
-    "./types/*": "./types/*",
-    "./package.json": "./package.json",
-    "./src/*": "./src/*"
-  },
   "exports": {
     ".": {
       "types": "./types/exports/a.d.ts",
