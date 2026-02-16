@@ -35,6 +35,7 @@ import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import { NavToggle } from '../NavToggle'
 import type { NavProps, NavState } from './props'
 import { Alert } from '@instructure/ui-alerts'
+import type { Section } from '../../buildScripts/DataTypes.mjs'
 
 class Nav extends Component<NavProps, NavState> {
   _themeId: string
@@ -63,9 +64,9 @@ class Nav extends Component<NavProps, NavState> {
 
   setExpandedSections = (
     expanded: boolean,
-    sections: NavProps['sections']
-  ): NavProps['sections'] => {
-    const expandedSections: NavProps['sections'] = {}
+    sections: Record<string, boolean | Section>
+  ) => {
+    const expandedSections: Record<string, boolean> = {}
     Object.keys(sections).forEach((sectionId) => {
       expandedSections[sectionId] = expanded
     })
@@ -154,7 +155,9 @@ class Nav extends Component<NavProps, NavState> {
 
   matchQuery(str: string): boolean {
     const { query } = this.state
-    return query && typeof query.test === 'function' ? query.test(str) : true
+    return query && typeof (query as RegExp).test === 'function'
+      ? (query as RegExp).test(str)
+      : true
   }
 
   createNavToggle({
@@ -396,7 +399,7 @@ class Nav extends Component<NavProps, NavState> {
     } else {
       return this.createNavToggle({
         id: sectionId,
-        title: this.props.sections[sectionId].title,
+        title: this.props.sections[sectionId].title || '[no title]',
         children: this.renderSectionChildren(sectionId, markExpanded),
         variant
       })
