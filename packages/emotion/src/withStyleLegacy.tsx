@@ -95,7 +95,7 @@ const defaultValues = {
  * used for old (v11 and eariler) theming system
  * TODO delete when the theme migration is complete
  */
-const withStyleRework = decorator(
+const withStyleLegacy = decorator(
   (
     ComposedComponent: WithStyleComponent,
     generateStyle: GenerateStyle,
@@ -207,6 +207,6 @@ const withStyleRework = decorator(
   }
 )
 
-export default withStyleRework
-export { withStyleRework }
+export default withStyleLegacy
+export { withStyleLegacy }
 export type { WithStyleProps }

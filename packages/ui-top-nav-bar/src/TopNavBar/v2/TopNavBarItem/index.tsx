@@ -36,7 +36,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { warn, error } from '@instructure/console'
 
 import {
-  withStyleRework as withStyle,
+  withStyleLegacy as withStyle,
   InstUISettingsProvider
 } from '@instructure/emotion'
 
