@@ -31,7 +31,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { warn, error } from '@instructure/console'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { Drilldown } from '@instructure/ui-drilldown'
 import { TruncateList } from '@instructure/ui-truncate-list'

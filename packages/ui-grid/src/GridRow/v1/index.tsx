@@ -34,7 +34,7 @@ import {
 import { GridCol } from '../../GridCol/v1/'
 import type { GridColProps } from '../../GridCol/v1/props'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
