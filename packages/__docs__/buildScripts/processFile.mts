@@ -49,13 +49,10 @@ export function processFile(
   let docId: string
   const lowerPath = docData.relativePath.toLowerCase()
   if (docData.id) {
-    // exist if it was in the description at the top
+    // exist if it was in the YAML description at the top
     docId = docData.id
-  } else if (
-    lowerPath.includes(path.sep + 'index.js') ||
-    lowerPath.includes(path.sep + 'index.tsx')
-  ) {
-    docId = path.basename(dirName) // return its folder name
+  } else if (lowerPath.includes(path.sep + 'index.tsx')) {
+    docId = docData.displayName!
   } else if (lowerPath.includes('readme.md')) {
     const folder = path.basename(dirName)
     docId = docData.describes ? folder + '__README' : folder
