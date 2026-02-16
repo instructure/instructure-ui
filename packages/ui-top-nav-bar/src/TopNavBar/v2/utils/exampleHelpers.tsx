@@ -44,7 +44,7 @@ import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBar } from '../index'
 import { elevateIcon } from './exampleSvgFiles'
-import { Breadcrumb } from '@instructure/ui-breadcrumb'
+import { Breadcrumb } from '@instructure/ui-breadcrumb/latest'
 
 type ChildrenFuncProps = {
   currentLayout: TopNavBarContextType['layout']
