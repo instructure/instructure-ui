@@ -242,6 +242,8 @@ type: embed
 | Checkbox | inputRef | `(inputElement: HTMLInputElement \| null) => void` | No | - | A function that provides a reference to the actual underlying input element |
 | Checkbox.CheckboxFacade | children | `React.ReactNode` | Yes | - |  |
 | Checkbox.CheckboxFacade | checked | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | disabled | `boolean` | No | `false` |  |
+| Checkbox.CheckboxFacade | readOnly | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | focused | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | hovered | `boolean` | No | `false` |  |
 | Checkbox.CheckboxFacade | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` |  |
