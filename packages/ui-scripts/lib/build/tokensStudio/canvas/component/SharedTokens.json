@@ -503,6 +503,58 @@
       "aiTextColor": {
         "value": "{color.background.aiText}",
         "type": "color"
+      },
+      "accentAsh": {
+        "value": "{color.background.accent.ash}",
+        "type": "color"
+      },
+      "accentAurora": {
+        "value": "{color.background.accent.aurora}",
+        "type": "color"
+      },
+      "accentBlue": {
+        "value": "{color.background.accent.blue}",
+        "type": "color"
+      },
+      "accentGreen": {
+        "value": "{color.background.accent.green}",
+        "type": "color"
+      },
+      "accentGrey": {
+        "value": "{color.background.accent.grey}",
+        "type": "color"
+      },
+      "accentHoney": {
+        "value": "{color.background.accent.honey}",
+        "type": "color"
+      },
+      "accentOrange": {
+        "value": "{color.background.accent.orange}",
+        "type": "color"
+      },
+      "accentPlum": {
+        "value": "{color.background.accent.plum}",
+        "type": "color"
+      },
+      "accentRed": {
+        "value": "{color.background.accent.red}",
+        "type": "color"
+      },
+      "accentSea": {
+        "value": "{color.background.accent.sea}",
+        "type": "color"
+      },
+      "accentSky": {
+        "value": "{color.background.accent.sky}",
+        "type": "color"
+      },
+      "accentStone": {
+        "value": "{color.background.accent.stone}",
+        "type": "color"
+      },
+      "accentViolet": {
+        "value": "{color.background.accent.violet}",
+        "type": "color"
       }
     },
     "stroke": {
@@ -544,6 +596,58 @@
       },
       "aiBottomGradientColor": {
         "value": "{color.stroke.aiBottomGradient}",
+        "type": "color"
+      },
+      "accentAsh": {
+        "value": "{color.stroke.accent.ash}",
+        "type": "color"
+      },
+      "accentAurora": {
+        "value": "{color.stroke.accent.aurora}",
+        "type": "color"
+      },
+      "accentBlue": {
+        "value": "{color.stroke.accent.blue}",
+        "type": "color"
+      },
+      "accentGreen": {
+        "value": "{color.stroke.accent.green}",
+        "type": "color"
+      },
+      "accentGrey": {
+        "value": "{color.stroke.accent.grey}",
+        "type": "color"
+      },
+      "accentHoney": {
+        "value": "{color.stroke.accent.honey}",
+        "type": "color"
+      },
+      "accentOrange": {
+        "value": "{color.stroke.accent.orange}",
+        "type": "color"
+      },
+      "accentPlum": {
+        "value": "{color.stroke.accent.plum}",
+        "type": "color"
+      },
+      "accentRed": {
+        "value": "{color.stroke.accent.red}",
+        "type": "color"
+      },
+      "accentSea": {
+        "value": "{color.stroke.accent.sea}",
+        "type": "color"
+      },
+      "accentSky": {
+        "value": "{color.stroke.accent.sky}",
+        "type": "color"
+      },
+      "accentStone": {
+        "value": "{color.stroke.accent.stone}",
+        "type": "color"
+      },
+      "accentViolet": {
+        "value": "{color.stroke.accent.violet}",
         "type": "color"
       }
     },
