@@ -774,6 +774,10 @@
     "borderStyle": {
       "value": "solid",
       "type": "other"
+    },
+    "paddingVertical": {
+      "value": "0.5rem",
+      "type": "spacing"
     }
   }
 }
