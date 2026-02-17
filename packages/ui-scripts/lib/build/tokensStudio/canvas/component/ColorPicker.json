@@ -9,7 +9,7 @@
       "type": "color"
     },
     "colorMixerButtonContainerLeftMargin": {
-      "value": "{size.size8}",
+      "value": "0.5rem",
       "type": "spacing"
     },
     "errorIconsRightPadding": {
@@ -21,7 +21,7 @@
       "type": "color"
     },
     "hashMarkContainerLeftPadding": {
-      "value": "{size.size8}",
+      "value": "0.5rem",
       "type": "spacing"
     },
     "hashMarkContainerLineHeight": {

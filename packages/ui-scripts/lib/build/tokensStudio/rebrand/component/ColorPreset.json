@@ -9,7 +9,7 @@
       "type": "other"
     },
     "checkerboardBackgroundSize": {
-      "value": "{size.size8}",
+      "value": "0.5rem",
       "type": "sizing"
     },
     "popoverContentBlockBottomMargin": {
