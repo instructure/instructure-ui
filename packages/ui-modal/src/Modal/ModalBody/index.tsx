@@ -36,6 +36,7 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { ModalBodyProps } from './props'
 import { UIElement } from '@instructure/shared-types'
+import ModalContext from '../ModalContext'
 
 /**
 ---
@@ -120,29 +121,36 @@ class ModalBody extends Component<ModalBodyProps> {
     // TODO rethink, the 'as' prop, likely its not a good idea to allow React
     // components. See INSTUI-4674
     const finalRef = this.getFinalRef(this.ref)
-
+    const hasScrollbar =
+      finalRef &&
+      Math.abs(
+        (finalRef.scrollHeight ?? 0) -
+          (finalRef.getBoundingClientRect()?.height ?? 0)
+      ) > 1
     return (
-      <View
-        {...passthroughProps}
-        display="block"
-        width={isFit ? '100%' : undefined}
-        height={isFit ? '100%' : undefined}
-        elementRef={this.handleRef}
-        as={as}
-        css={this.props.styles?.modalBody}
-        padding={padding}
-        // check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
-        // epsilon tolerance is used to avoid false positives, this is generally safer than Math rounding techniques
-        {...(finalRef &&
-        Math.abs(
-          (finalRef.scrollHeight ?? 0) -
-            (finalRef.getBoundingClientRect()?.height ?? 0)
-        ) > 0.05
-          ? { tabIndex: 0 }
-          : {})}
-      >
-        {children}
-      </View>
+      <ModalContext.Consumer>
+        {(value) => (
+          <View
+            {...passthroughProps}
+            display="block"
+            width={isFit ? '100%' : undefined}
+            height={isFit ? '100%' : undefined}
+            elementRef={this.handleRef}
+            as={as}
+            css={this.props.styles?.modalBody}
+            padding={padding}
+            // check if there is a scrollbar, if so, the element has to be tabbable
+            {...(hasScrollbar
+              ? {
+                  tabIndex: 0,
+                  'aria-label': value.bodyScrollAriaLabel
+                }
+              : {})}
+          >
+            {children}
+          </View>
+        )}
+      </ModalContext.Consumer>
     )
   }
 }
