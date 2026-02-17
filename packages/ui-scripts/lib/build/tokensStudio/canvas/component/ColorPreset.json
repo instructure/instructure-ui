@@ -47,9 +47,7 @@
     "smallSpacing": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
-    }
-  },
-  "colorPicker": {
+    },
     "xxSmallSpacing": {
       "value": "0.375rem",
       "type": "spacing"
