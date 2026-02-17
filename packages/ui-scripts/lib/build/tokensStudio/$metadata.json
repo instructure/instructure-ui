@@ -117,6 +117,7 @@
     "rebrand/component/TopNavBar",
     "rebrand/component/Tray",
     "rebrand/component/TreeBrowser",
+    "rebrand/component/ColorPreset",
     "rebrand/component/View",
     "rebrand/semantic/layout/default",
     "rebrand/semantic/color/rebrandLight",
