@@ -306,6 +306,7 @@ const DateInput2 = forwardRef(
             shouldContainFocus
             shouldReturnFocus
             shouldCloseOnDocumentClick
+            screenReaderLabel={screenReaderLabels.datePickerDialog}
           >
             <Calendar
               withYearPicker={withYearPicker}

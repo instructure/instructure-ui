@@ -18,7 +18,8 @@ describes: DateInput2
             screenReaderLabels={{
               calendarIcon: 'Calendar',
               nextMonthButton: 'Next month',
-              prevMonthButton: 'Previous month'
+              prevMonthButton: 'Previous month',
+              datePickerDialog: 'Date picker'
             }}
             value={this.state.inputValue}
             width="20rem"
@@ -51,7 +52,8 @@ describes: DateInput2
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker'
           }}
           value={inputValue}
           width="20rem"
@@ -100,7 +102,8 @@ const Example = () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker'
         }}
         width="20rem"
         value={value}
@@ -113,7 +116,8 @@ const Example = () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker'
         }}
         width="20rem"
         value={value2}
@@ -127,7 +131,8 @@ const Example = () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month'
+          prevMonthButton: 'Previous month',
+          datePickerDialog: 'Date picker'
         }}
         width="20rem"
         value={value3}
@@ -176,7 +181,8 @@ In the examples above you can see that the `onChange` callback also return a UTC
             screenReaderLabels={{
               calendarIcon: 'Calendar',
               nextMonthButton: 'Next month',
-              prevMonthButton: 'Previous month'
+              prevMonthButton: 'Previous month',
+              datePickerDialog: 'Date picker'
             }}
             value={this.state.inputValue}
             width="20rem"
@@ -214,7 +220,8 @@ In the examples above you can see that the `onChange` callback also return a UTC
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month'
+            prevMonthButton: 'Previous month',
+            datePickerDialog: 'Date picker'
           }}
           value={inputValue}
           width="20rem"
@@ -283,7 +290,8 @@ const Example = () => {
       screenReaderLabels={{
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
-        prevMonthButton: 'Previous month'
+        prevMonthButton: 'Previous month',
+        datePickerDialog: 'Date picker'
       }}
       width="20rem"
       value={value}
@@ -324,7 +332,8 @@ const Example = () => {
       screenReaderLabels={{
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
-        prevMonthButton: 'Previous month'
+        prevMonthButton: 'Previous month',
+        datePickerDialog: 'Date picker'
       }}
       value={inputValue}
       locale="en-us"
