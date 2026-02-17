@@ -61,7 +61,7 @@
       "type": "fontSizes"
     },
     "fontWeight": {
-      "value": "{fontWeight.body.base}",
+      "value": "{fontWeight.body.strong}",
       "type": "fontWeights"
     }
   },
