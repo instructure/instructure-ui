@@ -47,7 +47,7 @@ type CondensedButtonOwnProps = {
   /**
    * The size of the `CondensedButton`
    */
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
 
   /**
    * Provides a reference to the `CondensedButton`'s underlying html element.

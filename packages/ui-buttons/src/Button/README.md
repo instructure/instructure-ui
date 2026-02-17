@@ -63,6 +63,19 @@ type: example
 </View>
 ```
 
+There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`.
+
+```js
+---
+type: example
+---
+<View display="block">
+  <Button size="condensedSmall" margin="small">Condensed Small</Button>
+  <Button size="condensedMedium" margin="small">Condensed Medium</Button>
+  <Button size="small" margin="small">Small</Button>
+</View>
+```
+
 ### Rendering icons in Buttons
 
 An icon can be rendered alongside the Button content using the `renderIcon` prop. Use [IconButton](IconButton) instead if your Button only displays an Icon with no other visual content.
