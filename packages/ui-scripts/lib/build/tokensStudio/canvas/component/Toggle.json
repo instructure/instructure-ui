@@ -206,10 +206,6 @@
       "value": "{color.background.base}",
       "type": "color"
     },
-    "padding": {
-      "value": "{spacing.space2xs}",
-      "type": "spacing"
-    },
     "disabledOpacity": {
       "value": "{opacity.disabled}",
       "type": "opacity"
