@@ -1,6 +1,6 @@
 {
   "name": "@instructure/canvas-theme",
-  "version": "10.29.0",
+  "version": "10.30.0",
   "description": "A theme for Canvas LMS made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,13 +22,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "10.29.0"
+    "@instructure/ui-babel-preset": "10.30.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
-    "@instructure/shared-types": "10.29.0",
-    "@instructure/theme-registry": "10.29.0",
-    "@instructure/ui-themes": "10.29.0"
+    "@instructure/shared-types": "10.30.0",
+    "@instructure/theme-registry": "10.30.0",
+    "@instructure/ui-themes": "10.30.0"
   },
   "publishConfig": {
     "access": "public"
