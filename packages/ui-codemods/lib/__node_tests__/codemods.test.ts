@@ -29,6 +29,7 @@ import renameCanvasThemesCodemod from '../renameCanvasThemesCodemod'
 import renameGetComputedStyleToGetCSSStyleDeclaration from '../renameGetComputedStyleToGetCSSStyleDeclaration'
 import warnTableCaptionMissing from '../warnTableCaptionMissing'
 import warnCodeEditorRemoved from '../warnCodeEditorRemoved'
+import migrateToNewIcons from '../migrateToNewIcons'
 import { type MockInstance, vi } from 'vitest'
 
 describe('test codemods', () => {
@@ -73,5 +74,9 @@ describe('test codemods', () => {
 
   it('test CodeEditor removed warning', async () => {
     runTest(warnCodeEditorRemoved)
+  })
+
+  it('test migrating legacy icons to stroke-based/custom icons', () => {
+    runTest(migrateToNewIcons)
   })
 })

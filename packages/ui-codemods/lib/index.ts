@@ -29,6 +29,7 @@ import { renameCanvasThemes } from './renameCanvasThemesCodemod'
 import renameGetComputedStyleToGetCSSStyleDeclaration from './renameGetComputedStyleToGetCSSStyleDeclaration'
 import warnTableCaptionMissing from './warnTableCaptionMissing'
 import warnCodeEditorRemoved from './warnCodeEditorRemoved'
+import migrateToNewIcons from './migrateToNewIcons'
 
 export {
   updateV10Breaking,
@@ -37,5 +38,8 @@ export {
   renameCanvasThemes,
   renameGetComputedStyleToGetCSSStyleDeclaration,
   warnTableCaptionMissing,
-  warnCodeEditorRemoved
+  warnCodeEditorRemoved,
+  migrateToNewIcons,
+  // Backwards compatibility alias (deprecated)
+  migrateToNewIcons as migrateToLucideIcons
 }

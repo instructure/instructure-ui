@@ -137,10 +137,6 @@ type Glyph = {
   glyphName: string
 }
 
-type MainIconsData = {
-  glyphs: Glyph[]
-}
-
 type MainDocsData = {
   themes: Record<string, { resource: Theme }>
   library: LibraryOptions
@@ -154,6 +150,5 @@ export type {
   LibraryOptions,
   Glyph,
   MainDocsData,
-  MainIconsData,
   JsDocResult
 }

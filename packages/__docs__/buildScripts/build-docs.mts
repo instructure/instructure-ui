@@ -27,12 +27,6 @@ import path from 'path'
 import { getClientProps } from './utils/getClientProps.mjs'
 import { processFile } from './processFile.mjs'
 import fs from 'fs'
-import {
-  canvas,
-  canvasHighContrast,
-  rebrandDark,
-  rebrandLight
-} from '@instructure/ui-themes'
 import type {
   LibraryOptions,
   MainDocsData,
@@ -47,6 +41,10 @@ import { generateAIAccessibleLlmsFile } from './ai-accessible-documentation/gene
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const require = createRequire(import.meta.url)
+
+// Use CommonJS require to load ui-themes to avoid ES module resolution issues
+const { canvas, canvasHighContrast, rebrandDark, rebrandLight } =
+  require('@instructure/ui-themes')
 
 // This needs to be required otherwise TSC will mess up the directory structure
 // in the output directory
@@ -172,13 +170,6 @@ function buildDocs() {
       )
 
       // eslint-disable-next-line no-console
-      console.log('Copying icons data...')
-      fs.copyFileSync(
-        projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
-        buildDir + 'icons-data.json'
-      )
-
-      // eslint-disable-next-line no-console
       console.log('Finished building documentation data')
     })
     .then(() => {
@@ -224,8 +215,8 @@ function processSingleFile(fullPath: string) {
   } else if (fileName === 'README') {
     // if we edit a README, we'll need to add the changes to the components JSON
     let componentIndexFile: string | undefined
-    if (fs.existsSync(path.join(dirName, 'index.tsx'))) {
-      componentIndexFile = path.join(dirName, 'index.tsx')
+    if (fs.existsSync(path.join(dirName, 'wrapLucideIcon.tsx'))) {
+      componentIndexFile = path.join(dirName, 'wrapLucideIcon.tsx')
     } else if (fs.existsSync(dirName + 'index.ts')) {
       componentIndexFile = path.join(dirName, 'index.ts')
     }

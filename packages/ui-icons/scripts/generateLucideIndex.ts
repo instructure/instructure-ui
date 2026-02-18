@@ -25,32 +25,17 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
+import { info, error } from '@instructure/command-utils'
+
+function toPascalCase(kebab: string): string {
+  return kebab
+    .split('-')
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .join('')
+}
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-interface IconMapping {
-  instUI: {
-    line: string
-    solid: string
-  }
-  lucide: {
-    name: string
-  }
-}
-
-interface MappingData {
-  version: string
-  lastUpdated: string
-  mappings: IconMapping[]
-  unmapped?: Array<{
-    instUI: {
-      line: string
-      solid: string
-    }
-    reason: string
-  }>
-}
 
 const HEADER = `/*
  * The MIT License (MIT)
@@ -78,9 +63,14 @@ const HEADER = `/*
 `
 
 async function generateIndex() {
-  const mappingPath = path.join(__dirname, '../lucide/mapping.json')
-  const mappingData: MappingData = JSON.parse(
-    fs.readFileSync(mappingPath, 'utf-8')
+  // Custom icons automatically shadow Lucide icons of the same name.
+  // Derived at build time from svg/Custom/ so it stays in sync automatically.
+  const customSvgDir = path.join(__dirname, '../svg/Custom')
+  const EXCLUDED_ICONS = new Set(
+    fs
+      .readdirSync(customSvgDir)
+      .filter((f) => f.endsWith('.svg'))
+      .map((f) => toPascalCase(f.replace('.svg', '')))
   )
 
   const lucideReact = await import('lucide-react')
@@ -92,34 +82,48 @@ async function generateIndex() {
       value.displayName &&
       !key.endsWith('Icon') &&
       !key.startsWith('Lucide') &&
-      !key.startsWith('create')
+      !key.startsWith('create') &&
+      !EXCLUDED_ICONS.has(key)
     )
   })
 
-  const iconExports = allLucideIcons
-    .map((iconName) => {
-      return `export const ${iconName}InstUIIcon = wrapLucideIcon(Lucide.${iconName})`
-    })
-    .join('\n')
+  // Group exports into batches of 5 per line to reduce file size
+  const ICONS_PER_LINE = 5
+  const iconExportLines: string[] = []
+
+  for (let i = 0; i < allLucideIcons.length; i += ICONS_PER_LINE) {
+    const batch = allLucideIcons.slice(i, i + ICONS_PER_LINE)
+    const exports = batch
+      .map(
+        (iconName) =>
+          `export const ${iconName}InstUIIcon = wrapStrokeIcon(Lucide.${iconName})`
+      )
+      .join('; ')
+    iconExportLines.push(exports)
+  }
+
+  const iconExports = iconExportLines.join('\n')
 
   const content = `${HEADER}
 import * as Lucide from 'lucide-react'
-import { wrapLucideIcon } from './wrapLucideIcon'
+import { wrapLucideIcon as wrapStrokeIcon } from './wrapLucideIcon'
 
-export type { LucideIconWrapperProps } from './wrapLucideIcon/props'
-export { renderIconWithProps } from './IconPropsProvider'
+export type { InstUIIconProps } from '../props'
+export { renderIconWithProps } from '../IconPropsProvider'
 
 ${iconExports}
 `
 
-  const outputPath = path.join(__dirname, '../lucide/index.ts')
-  fs.writeFileSync(outputPath, content, 'utf-8')
+  if (allLucideIcons.length === 0) {
+    throw new Error('No Lucide icons found — check lucide-react import')
+  }
 
-  console.error(`Generated index.ts with ${allLucideIcons.length} icons`)
-  console.error(`Mapped ${mappingData.mappings.length} InstUI icons to Lucide`)
+  const outputPath = path.join(__dirname, '../src/lucide/index.ts')
+  fs.writeFileSync(outputPath, content, 'utf-8')
+  info(`Generated lucide/index.ts with ${allLucideIcons.length} icons`)
 }
 
-generateIndex().catch((error) => {
-  console.error('Error generating index:', error)
+generateIndex().catch((err) => {
+  error('Error generating lucide index:', err)
   process.exit(1)
 })

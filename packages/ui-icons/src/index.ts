@@ -22,5 +22,13 @@
  * SOFTWARE.
  */
 
-// Re-export all generated SVG icons and Lucide icons
+// Main entry point - exports all icons for backwards compatibility
+export * from './lucide'
+export * from './custom'
+
+// Re-export legacy icons from __build__ for backwards compatibility
 export * from './__build__'
+
+// Re-export as namespaces for cases where distinction is needed (e.g., icon gallery)
+export * as CustomIcons from './custom'
+export * as LucideIcons from './lucide'

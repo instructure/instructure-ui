@@ -506,7 +506,16 @@ class Nav extends Component<NavProps, NavState> {
         shouldBlur={true}
       />
     )
-    const matches = [...sections, ...themes, icons]
+    const legacyIcons = (
+      <NavToggle
+        key="Legacy Icons button"
+        summary="Legacy Icons"
+        onToggle={(e: any) => this.handleInternalNavigation('legacy-icons', e)}
+        href="legacy-icons"
+        shouldBlur={true}
+      />
+    )
+    const matches = [...sections, ...themes, icons, legacyIcons]
     const hasMatches = matches.length > 0
     const errorMessage = [
       { text: `No matches for '${this.state.queryStr}'`, type: 'hint' as const }

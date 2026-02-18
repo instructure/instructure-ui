@@ -24,7 +24,6 @@
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
-  MainIconsData,
   MainDocsData,
   ProcessedFile
 } from '../../buildScripts/DataTypes.mts'
@@ -77,7 +76,6 @@ type LayoutSize = 'small' | 'medium' | 'large' | 'x-large'
 type AppState = {
   themeKey?: string
   docsData: MainDocsData | null
-  iconsData: MainIconsData | null
   layout: LayoutSize
   showMenu: boolean
   key?: string
