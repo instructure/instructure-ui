@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.30.0](https://github.com/instructure/instructure-ui/compare/v10.29.0...v10.30.0) (2026-02-18)
+
+
+### Features
+
+* **ui-date-input:** add missing role and aria-label to DateInput2 dialog ([1c459f2](https://github.com/instructure/instructure-ui/commit/1c459f2d7b68f01e0c6878c649459f654bb75778))
+
+
+
+
+
 # [10.29.0](https://github.com/instructure/instructure-ui/compare/v10.26.4...v10.29.0) (2026-01-14)
 
 **Note:** Version bump only for package @instructure/ui-date-input
