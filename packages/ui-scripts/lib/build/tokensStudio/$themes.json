@@ -63,7 +63,8 @@
       "rebrand/component/Pagination": "enabled",
       "rebrand/component/DrawerLayout": "enabled",
       "rebrand/component/ColorPicker": "enabled",
-      "rebrand/component/ColorPreset": "enabled"
+      "rebrand/component/ColorPreset": "enabled",
+      "rebrand/component/ColorIndicator": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -973,6 +974,13 @@
       "contextView.arrowBorderColor": "a939ebcc8304ba648ff59bf81e71fbd349856ca4",
       "contextView.arrowBorderColorInverse": "f4047a0184f2d590b9015d4c41b252a2527d0dad",
       "contextView.borderRadius": "2e5a307bc3013baed317c16915b469dd7c50e326",
+      "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
+      "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
+      "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
+      "colorIndicator.circleIndicatorSize": "9acf88d3e9beedf1edc598cff407a335478d00e4",
+      "colorIndicator.colorIndicatorBorderColor": "5ea96c0070273f5af6e73585c84b2c49e60cdd63",
+      "colorIndicator.rectangleIndicatorSize": "1c3a35b01264737a959c56294846be217dc194f1",
+      "colorIndicator.rectangularIndicatorBorderRadius": "d1805839782ebbecd44d4d3521005a45cfc34df2",
       "colorPicker.checkerboardBackgroundColor": "b9c6e5f697908d62a14a74827cde70ad0036d1de",
       "colorPicker.colorIndicatorBorderColor": "b2967ff97913317cbf99dd7835267fc0de9d8da0",
       "colorPicker.colorMixerButtonContainerLeftMargin": "d553bc1e052f9056a5ccd34ee84dd029a66e2ef7",
@@ -2151,7 +2159,8 @@
       "rebrand/component/Pagination": "enabled",
       "rebrand/component/DrawerLayout": "enabled",
       "rebrand/component/ColorPicker": "enabled",
-      "rebrand/component/ColorPreset": "enabled"
+      "rebrand/component/ColorPreset": "enabled",
+      "rebrand/component/ColorIndicator": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -2998,6 +3007,13 @@
       "contextView.arrowBorderColor": "a939ebcc8304ba648ff59bf81e71fbd349856ca4",
       "contextView.arrowBorderColorInverse": "f4047a0184f2d590b9015d4c41b252a2527d0dad",
       "contextView.borderRadius": "2e5a307bc3013baed317c16915b469dd7c50e326",
+      "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
+      "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
+      "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
+      "colorIndicator.circleIndicatorSize": "9acf88d3e9beedf1edc598cff407a335478d00e4",
+      "colorIndicator.colorIndicatorBorderColor": "5ea96c0070273f5af6e73585c84b2c49e60cdd63",
+      "colorIndicator.rectangleIndicatorSize": "1c3a35b01264737a959c56294846be217dc194f1",
+      "colorIndicator.rectangularIndicatorBorderRadius": "d1805839782ebbecd44d4d3521005a45cfc34df2",
       "colorPicker.checkerboardBackgroundColor": "b9c6e5f697908d62a14a74827cde70ad0036d1de",
       "colorPicker.colorIndicatorBorderColor": "b2967ff97913317cbf99dd7835267fc0de9d8da0",
       "colorPicker.colorMixerButtonContainerLeftMargin": "d553bc1e052f9056a5ccd34ee84dd029a66e2ef7",
@@ -4176,7 +4192,8 @@
       "canvas/component/Pagination": "enabled",
       "canvas/component/DrawerLayout": "enabled",
       "canvas/component/ColorPicker": "enabled",
-      "canvas/component/ColorPreset": "enabled"
+      "canvas/component/ColorPreset": "enabled",
+      "canvas/component/ColorIndicator": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5015,6 +5032,13 @@
       "colorPicker.xLargeFontSize": "eb02f914ac36f0836cf1d9ac3a692a76b9ae0e2c",
       "colorPicker.xSmallSpacing": "d8c4f263c1018c3c1915beb58ee0df5c78a53bc5",
       "colorPicker.xxxSmallSpacing": "3a0fc311f3dc17466425f3743b67af4978dd9015",
+      "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
+      "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
+      "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
+      "colorIndicator.circleIndicatorSize": "9acf88d3e9beedf1edc598cff407a335478d00e4",
+      "colorIndicator.colorIndicatorBorderColor": "5ea96c0070273f5af6e73585c84b2c49e60cdd63",
+      "colorIndicator.rectangleIndicatorSize": "1c3a35b01264737a959c56294846be217dc194f1",
+      "colorIndicator.rectangularIndicatorBorderRadius": "d1805839782ebbecd44d4d3521005a45cfc34df2",
       "colorPreset.checkerboardBackgroundSize": "9f850949298db293446a6041a3ce29bf56e8c259",
       "colorPreset.popoverContentBlockBottomMargin": "4f9156957350e3ce27f725b98e381b525071b51a",
       "colorPreset.popoverContentBlockTopMargin": "be75f5d4b2c931a657935ad20663dca13cb644b9",
@@ -6266,7 +6290,8 @@
       "canvas/component/Pagination": "enabled",
       "canvas/component/DrawerLayout": "enabled",
       "canvas/component/ColorPicker": "enabled",
-      "canvas/component/ColorPreset": "enabled"
+      "canvas/component/ColorPreset": "enabled",
+      "canvas/component/ColorIndicator": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -7042,6 +7067,13 @@
       "colorPicker.xLargeFontSize": "eb02f914ac36f0836cf1d9ac3a692a76b9ae0e2c",
       "colorPicker.xSmallSpacing": "d8c4f263c1018c3c1915beb58ee0df5c78a53bc5",
       "colorPicker.xxxSmallSpacing": "3a0fc311f3dc17466425f3743b67af4978dd9015",
+      "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
+      "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
+      "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
+      "colorIndicator.circleIndicatorSize": "9acf88d3e9beedf1edc598cff407a335478d00e4",
+      "colorIndicator.colorIndicatorBorderColor": "5ea96c0070273f5af6e73585c84b2c49e60cdd63",
+      "colorIndicator.rectangleIndicatorSize": "1c3a35b01264737a959c56294846be217dc194f1",
+      "colorIndicator.rectangularIndicatorBorderRadius": "d1805839782ebbecd44d4d3521005a45cfc34df2",
       "colorPreset.checkerboardBackgroundSize": "9f850949298db293446a6041a3ce29bf56e8c259",
       "colorPreset.popoverContentBlockBottomMargin": "4f9156957350e3ce27f725b98e381b525071b51a",
       "colorPreset.popoverContentBlockTopMargin": "be75f5d4b2c931a657935ad20663dca13cb644b9",
