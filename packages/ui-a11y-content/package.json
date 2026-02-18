@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y-content",
-  "version": "11.5.0",
+  "version": "11.6.0",
   "description": "Utility components that enhance the user experience of those that navigate the web with a screen reader or keyboard.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
