@@ -88,7 +88,7 @@
       "value": "0.5rem",
       "type": "spacing"
     },
-    "popoverFooterColor-copy": {
+    "popoverFooterColor": {
       "value": "{color.background.elevatedSurface.base}",
       "type": "color"
     }
