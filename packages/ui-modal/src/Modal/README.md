@@ -135,7 +135,7 @@ const Example = () => {
           </View>
           <ModalAutoCompleteExample renderLabel="Choose a state" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button onClick={handleButtonClick} margin="0 x-small 0 0">
             Close
           </Button>
@@ -262,7 +262,7 @@ const Example = () => {
             margin="0 auto"
           />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -399,7 +399,7 @@ const Example = () => {
         <Modal.Body padding="none">
           <Img src={avatarSquare} constrain={imageFit} display="block" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={modalSize === 'small' ? 'compact' : 'default'}>
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -489,7 +489,7 @@ const Example = () => {
             <Text>{fpo}</Text>
           </View>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={smallViewport ? 'compact' : 'default'}>
           <Button onClick={toggleOpen} margin="0 x-small 0 0">
             Close
           </Button>

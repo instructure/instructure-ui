@@ -42,6 +42,7 @@ type ModalBodyOwnProps = {
   as?: AsElementType
   variant?: 'default' | 'inverse'
   overflow?: 'scroll' | 'fit'
+  spacing?: 'default' | 'compact'
 }
 
 type PropKeys = keyof ModalBodyOwnProps
@@ -63,7 +64,8 @@ const allowedProps: AllowedPropKeys = [
   'elementRef',
   'as',
   'variant',
-  'overflow'
+  'overflow',
+  'spacing'
 ]
 
 export type { ModalBodyProps, ModalBodyState, ModalBodyStyle }
