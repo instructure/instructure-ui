@@ -134,7 +134,7 @@ const Example = () => {
           </View>
           <ModalAutoCompleteExample renderLabel="Choose a state" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button onClick={handleButtonClick} margin="0 x-small 0 0">
             Close
           </Button>
@@ -261,7 +261,7 @@ const Example = () => {
             margin="0 auto"
           />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -398,7 +398,7 @@ const Example = () => {
         <Modal.Body padding="none">
           <Img src={avatarSquare} constrain={imageFit} display="block" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={modalSize === 'small' ? 'compact' : 'default'}>
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -488,7 +488,7 @@ const Example = () => {
             <Text>{fpo}</Text>
           </View>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={smallViewport ? 'compact' : 'default'}>
           <Button onClick={toggleOpen} margin="0 x-small 0 0">
             Close
           </Button>
@@ -707,8 +707,10 @@ type: embed
 | Modal.ModalBody | as | `AsElementType` | No | `'div'` |  |
 | Modal.ModalBody | variant | `'default' \| 'inverse'` | No | `'default'` |  |
 | Modal.ModalBody | overflow | `'scroll' \| 'fit'` | No | - |  |
+| Modal.ModalBody | spacing | `'default' \| 'compact'` | No | - |  |
 | Modal.ModalFooter | children | `React.ReactNode` | No | - |  |
 | Modal.ModalFooter | variant | `'default' \| 'inverse'` | No | `'default'` |  |
+| Modal.ModalFooter | spacing | `'default' \| 'compact'` | No | - |  |
 | Modal.ModalHeader | children | `React.ReactNode` | No | - |  |
 | Modal.ModalHeader | variant | `'default' \| 'inverse'` | No | `'default'` |  |
 | Modal.ModalHeader | spacing | `'default' \| 'compact'` | No | `'default'` |  |
