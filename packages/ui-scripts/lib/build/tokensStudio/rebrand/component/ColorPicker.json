@@ -75,6 +75,22 @@
     "xxxSmallSpacing": {
       "value": "{spacing.space2xs}",
       "type": "spacing"
+    },
+    "popoverContentBlockBottomMargin": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "popoverContentBlockTopMargin": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "popoverContentBlockTopPadding": {
+      "value": "0.5rem",
+      "type": "spacing"
+    },
+    "popoverFooterColor": {
+      "value": "{color.background.elevatedSurface.base}",
+      "type": "color"
     }
   }
 }
