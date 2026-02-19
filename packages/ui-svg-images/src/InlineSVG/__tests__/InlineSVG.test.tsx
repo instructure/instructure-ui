@@ -128,4 +128,22 @@ describe('<InlineSVG />', () => {
 
     expect(svg).toHaveAttribute('focusable', 'true')
   })
+
+  it('should correctly parse hyphenated attributes like stroke-width', () => {
+    const svgWithHyphenatedAttrs = `<svg stroke-width="2" stroke-linecap="round"><path d="M12 2l3 6"/></svg>`
+    const { container } = render(<InlineSVG src={svgWithHyphenatedAttrs} />)
+    const svg = container.querySelector('svg')
+
+    expect(svg).toHaveAttribute('stroke-width', '2')
+    expect(svg).toHaveAttribute('stroke-linecap', 'round')
+  })
+
+  it('should correctly parse unquoted attribute values (non-standard format)', () => {
+    const svgWithUnquotedAttrs = `<svg stroke=currentColor stroke-width=2><circle cx=12 cy=12 r=10/></svg>`
+    const { container } = render(<InlineSVG src={svgWithUnquotedAttrs} />)
+    const svg = container.querySelector('svg')
+
+    expect(svg).toHaveAttribute('stroke', 'currentColor')
+    expect(svg).toHaveAttribute('stroke-width', '2')
+  })
 })
