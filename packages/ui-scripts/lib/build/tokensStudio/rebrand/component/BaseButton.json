@@ -615,16 +615,8 @@
       "value": "{color.text.interactive.action.tertiary.hover}",
       "type": "color"
     },
-    "dangerActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
-      "type": "text"
-    },
     "dangerBoxShadow": {
       "value": "none",
-      "type": "text"
-    },
-    "dangerGhostActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem rgba(230, 36, 41, 0.28)",
       "type": "text"
     },
     "dangerGhostBackground": {
@@ -655,16 +647,8 @@
       "value": "{lineHeight.label.base}",
       "type": "lineHeights"
     },
-    "primaryActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem #2B7ABC",
-      "type": "text"
-    },
     "primaryBoxShadow": {
       "value": "none",
-      "type": "text"
-    },
-    "primaryGhostActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem rgba(43, 122, 188, 0.28)",
       "type": "text"
     },
     "primaryGhostBackground": {
@@ -675,16 +659,8 @@
       "value": "none",
       "type": "text"
     },
-    "primaryInverseActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
-      "type": "text"
-    },
     "primaryInverseBoxShadow": {
       "value": "none",
-      "type": "text"
-    },
-    "primaryInverseGhostActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem rgba(255, 255, 255, 0.28)",
       "type": "text"
     },
     "primaryInverseGhostBackground": {
@@ -703,20 +679,12 @@
       "value": "none",
       "type": "text"
     },
-    "secondaryActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
-      "type": "text"
-    },
     "secondaryBoxShadow": {
       "value": "none",
       "type": "text"
     },
     "secondaryGhostActiveBackground": {
       "value": "transparent",
-      "type": "text"
-    },
-    "secondaryGhostActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem rgba(39, 53, 64, 0.28)",
       "type": "text"
     },
     "secondaryGhostBackground": {
@@ -735,16 +703,8 @@
       "value": "none",
       "type": "text"
     },
-    "successActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem #FFFFFF",
-      "type": "text"
-    },
     "successBoxShadow": {
       "value": "none",
-      "type": "text"
-    },
-    "successGhostActiveBoxShadow": {
-      "value": "inset 0 0 0.1875rem 0.0625rem rgba(3, 137, 61, 0.28)",
       "type": "text"
     },
     "successGhostBackground": {
