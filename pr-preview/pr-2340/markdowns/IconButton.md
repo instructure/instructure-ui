@@ -8,7 +8,7 @@ It is not recommended to set the size of an icon inside an IconButton. Only use 
 ---
 type: example
 ---
-<IconButton screenReaderLabel="Add User"><IconAddLine /></IconButton>
+<IconButton screenReaderLabel="Add User"><PlusInstUIIcon /></IconButton>
 ```
 
 ### Accessibility
@@ -19,7 +19,7 @@ Because the IconButton visually only renders an icon, a description is necessary
 ---
 type: example
 ---
-<IconButton color="primary" screenReaderLabel="Add blog post"><IconAddLine /></IconButton>
+<IconButton color="primary" screenReaderLabel="Add blog post"><PlusInstUIIcon /></IconButton>
 ```
 
 Using [Tooltip](Tooltip) in conjunction with IconButton can also provide necessary context when the IconButton alone would be insufficient.
@@ -33,7 +33,7 @@ type: example
   on={['hover', 'focus']}
   placement="bottom"
 >
-  <IconButton screenReaderLabel="View user profile"><IconUserLine /></IconButton>
+  <IconButton screenReaderLabel="View user profile"><UserInstUIIcon /></IconButton>
 </Tooltip>
 ```
 
@@ -44,8 +44,8 @@ type: example
 type: example
 ---
 <View display="block">
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><SparklesInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><SparklesInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -58,8 +58,8 @@ The `shape` prop specifies if the IconButton will render as a `rectangle` or `ci
 type: example
 ---
 <View display="block">
-  <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="small"><IconXSolid /></IconButton>
-  <IconButton shape="circle" screenReaderLabel="Delete tag" margin="small"><IconXSolid /></IconButton>
+  <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="small"><XInstUIIcon /></IconButton>
+  <IconButton shape="circle" screenReaderLabel="Delete tag" margin="small"><XInstUIIcon /></IconButton>
 </View>
 ```
 
@@ -74,12 +74,12 @@ type: example
 <View display="block">
   <View display="inline-block" background="primary">
     <IconButton withBackground={false} withBorder={false} screenReaderLabel="Delete tag" margin="large">
-      <IconXSolid />
+      <XInstUIIcon />
     </IconButton>
   </View>
   <View display="inline-block" background="primary-inverse">
     <IconButton withBackground={false} withBorder={false} color="primary-inverse" screenReaderLabel="Delete tag" margin="large">
-      <IconXSolid />
+      <XInstUIIcon />
     </IconButton>
   </View>
 </View>
