@@ -27,10 +27,9 @@ import { Component } from 'react'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { SideNavBarItemProps } from './props'
 import { allowedProps } from './props'
 
@@ -40,7 +39,7 @@ parent: SideNavBar
 id: SideNavBar.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'SideNavBarItem')
 class SideNavBarItem extends Component<SideNavBarItemProps> {
   static readonly componentId = 'SideNavBar.Item'
 

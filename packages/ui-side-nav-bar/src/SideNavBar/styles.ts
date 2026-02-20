@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { SideNavBarTheme } from '@instructure/shared-types'
 import type { SideNavBarProps, SideNavBarState, SideNavBarStyle } from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 
 /**
  * ---
@@ -32,16 +33,30 @@ import type { SideNavBarProps, SideNavBarState, SideNavBarStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: SideNavBarTheme,
-  // @ts-expect-error no props used here
-  props: SideNavBarProps,
+  componentTheme: NewComponentTypes['SideNavBar'],
+  _props: SideNavBarProps,
+  _sharedTokens: SharedTokens,
   state: SideNavBarState
 ): SideNavBarStyle => {
   const { minimized } = state
+
+  const layoutVariants = {
+    minimized: {
+      width: componentTheme.minimizedWidth,
+      margin: componentTheme.minimizedMargin,
+      borderRadius: componentTheme.minimizedBorderRadius
+    },
+    expanded: {
+      width: componentTheme.width,
+      margin: componentTheme.margin,
+      borderRadius: componentTheme.borderRadius
+    }
+  }
 
   return {
     navigation: {
@@ -51,10 +66,10 @@ const generateStyle = (
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
-      width: componentTheme.width,
       height: '100%',
       overflowY: 'auto',
-      ...(minimized ? { width: componentTheme.minimizedWidth } : {})
+      boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow),
+      ...layoutVariants[minimized ? 'minimized' : 'expanded']
     },
     list: {
       label: 'navigation__list',
@@ -64,9 +79,12 @@ const generateStyle = (
     content: {
       label: 'navigation__content',
       listStyleType: 'none',
-      margin: '0',
-      padding: '0',
-      flex: '1 0 auto'
+      margin: componentTheme.contentMargin,
+      padding: 0,
+      display: 'flex',
+      flex: '1 0 auto',
+      flexDirection: 'column',
+      gap: componentTheme.contentGap,
     },
     toggleIcon: {
       fill: componentTheme.fill,

@@ -115,6 +115,8 @@ const determineColorValue = (
     disabledBaseColor: componentTheme.disabledBaseColor,
     disabledOnColor: componentTheme.disabledOnColor,
     dark: componentTheme.dark,
+    sideNavColor: componentTheme.sideNavColor,
+    sideNavActiveColor: componentTheme.sideNavActiveColor,
     ai: undefined, // symbolic token for AI gradient colors, will be returned as gradient values
     navigationPrimaryBaseColor: componentTheme.navigationPrimaryBaseColor,
     navigationPrimaryHoverColor: componentTheme.navigationPrimaryHoverColor,

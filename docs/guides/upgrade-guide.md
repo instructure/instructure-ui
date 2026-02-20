@@ -771,7 +771,62 @@ type: embed
 />
 
 ```
+### SideNavBar
 
+#### SideNavBar
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"margin",note:""},
+    {name:"minimizedMargin",note:""},
+    {name:"contentMargin",note:""},
+    {name:"contentGap",note:""},
+    {name:"boxShadow",note:""},
+    {name:"borderRadius",note:""},
+    {name:"minimizedBorderRadius",note:""},
+
+  ]}
+  removed={[
+    {name:"focusOutlineInnerWidth",note:""},
+    {name:"focusOutlineOuterWidth",note:""},
+    {name:"focusOutlineInnerColor",note:""},
+    {name:"focusOutlineOuterColor",note:""},
+    {name:"marginBottom",note:""},
+  ]}
+/>
+
+```
+
+#### SideNavBarItem
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderRadius",note:""},
+    {name:"iconWrapperHeight",note:""},
+  ]}
+  removed={[
+    {name:"iconColor",note:""},
+    {name:"iconSize",note:""},
+    {name:"selectedIconColor",note:""},
+
+  ]}
+  changed={[
+    {oldName:"innerFocusOutline",newName:"innerFocusOutlineColor",note:""},
+    {oldName:"outerFocusOutline",newName:"outerFocusOutlineColor",note:""},
+    {oldName:"selectedInnerFocusOutline",newName:"selectedInnerFocusOutlineColor",note:""},
+    {oldName:"selectedOuterFocusOutline",newName:"selectedOuterFocusOutlineColor",note:""},
+  ]}
+/>
+
+```
 ### SourceCodeEditor
 
 ```js

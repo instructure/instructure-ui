@@ -24,14 +24,17 @@
 import { Component, Children, ReactElement, isValidElement } from 'react'
 
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { IconMoveStartLine } from '@instructure/ui-icons'
+import {
+  PanelLeftCloseInstUIIcon,
+  PanelLeftOpenInstUIIcon,
+  renderIconWithProps
+} from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { SideNavBarItem } from './SideNavBarItem'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { SideNavBarProps, SideNavBarState } from './props'
 import { allowedProps } from './props'
 
@@ -44,7 +47,7 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
   static readonly componentId = 'SideNavBar'
 
@@ -109,6 +112,17 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
     })
   }
 
+  renderIcon() {
+    const icon = this.minimized
+      ? PanelLeftOpenInstUIIcon
+      : PanelLeftCloseInstUIIcon
+    const iconColor = this.props.selected
+      ? 'sideNavActiveColor'
+      : 'sideNavColor'
+
+    return renderIconWithProps(icon, 'lg', iconColor)
+  }
+
   toggleMessage() {
     return this.state.minimized
       ? this.props.toggleLabel.minimizedLabel
@@ -134,12 +148,7 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
         <SideNavBarItem
           aria-expanded={!this.minimized}
           onClick={this.handleNavToggle}
-          icon={
-            <IconMoveStartLine
-              css={this.props.styles?.toggleIcon}
-              inline={false}
-            />
-          }
+          icon={this.renderIcon()}
           label={
             <ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>
           }

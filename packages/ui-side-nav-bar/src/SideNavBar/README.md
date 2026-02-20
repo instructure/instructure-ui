@@ -8,58 +8,85 @@ A top-level `SideNavBar` component.
 ---
 type: example
 ---
-  <div style={{height: '35rem'}}>
-    <SideNavBar
-      label="Main navigation"
-      toggleLabel={{
-        expandedLabel: 'Minimize SideNavBar',
-        minimizedLabel: 'Expand SideNavBar'
-      }}
-    >
-      <SideNavBar.Item
-        icon={<IconUserLine />}
-        label={<ScreenReaderContent>Home</ScreenReaderContent>}
-        href="#"
-        themeOverride={{
-          backgroundColor: 'red',
-          hoverBackgroundColor: 'blue'
-        }}
-      />
-      <SideNavBar.Item
-        icon={<Avatar name="Ziggy Marley" size="x-small" src={avatarSquare} showBorder="always"/>}
-        label="Account"
-        onClick={() => { this.loadSubNav('account') }}
-      />
-      <SideNavBar.Item
-        icon={<IconAdminLine />}
-        label="Admin"
-        href="#"
-      />
-      <SideNavBar.Item selected
-        icon={<IconDashboardLine />}
-        label="Dashboard"
-        href="#"
-      />
-      <SideNavBar.Item
-        icon={<Badge count={99}
-                     formatOutput={function (formattedCount) {
-                       return (
-                         <AccessibleContent alt={`You have ${formattedCount} unread messages.`}>
-                           {formattedCount}
-                         </AccessibleContent>
-                       )
-                     }}
-        ><IconInboxLine /></Badge>}
-        label="Inbox"
-        href="#"
-      />
-      <SideNavBar.Item
-        icon={<IconUserLine />}
-        label="Supercalifragilistic"
-        href="#"
-      />
-    </SideNavBar>
-  </div>
+  const Example = () => {
+    const [minimized, setMinimized] = React.useState(false)
+
+    return (
+      <div style={{height: '47rem', width: '10rem'}}>
+        <SideNavBar
+          label="Main navigation"
+          toggleLabel={{
+            expandedLabel: 'Minimize SideNavBar',
+            minimizedLabel: 'Expand SideNavBar'
+          }}
+          onMinimized={(_e, isMinimized) => setMinimized(isMinimized)}
+        >
+          <SideNavBar.Item
+            icon={<GlobeInstUIIcon size={minimized ? "small" : "medium"}/>}
+            label={<ScreenReaderContent>Home</ScreenReaderContent>}
+            href="#"
+            themeOverride={{
+              contentPadding: '1em 0.375rem 1em 0.375rem'
+            }}
+          />
+          <SideNavBar.Item
+            icon={<Avatar name="Ziggy Marley" size="x-small" src={avatarSquare} showBorder="always"/>}
+            label="Account"
+            onClick={() => { this.loadSubNav('account') }}
+          />
+          <SideNavBar.Item
+            icon={<ShieldUserInstUIIcon />}
+            label="Admin"
+            href="#"
+          />
+          <SideNavBar.Item selected
+            icon={<LayoutDashboardInstUIIcon />}
+            label="Dashboard"
+            href="#"
+          />
+          <SideNavBar.Item
+            icon={<BookTextInstUIIcon />}
+            label="Courses"
+            href="#"
+          />
+          <SideNavBar.Item
+            icon={<CalendarDaysInstUIIcon />}
+            label="Calendar"
+            href="#"
+          />
+          <SideNavBar.Item
+            icon={
+              <Badge count={99}
+                formatOutput={function (formattedCount) {
+                  return (
+                    <AccessibleContent alt={`You have ${formattedCount} unread messages.`}>
+                      {formattedCount}
+                    </AccessibleContent>
+                  )
+                }}
+              >
+                <InboxInstUIIcon />
+              </Badge>
+            }
+            label="Inbox"
+            href="#"
+          />
+          <SideNavBar.Item
+            icon={<Clock4InstUIIcon />}
+            label="History"
+            href="#"
+          />
+          <SideNavBar.Item
+            icon={<HelpCircleInstUIIcon />}
+            label="Help"
+            href="#"
+          />
+        </SideNavBar>
+      </div>
+    )
+  }
+
+render(<Example />)
 ```
 
 ### Guidelines

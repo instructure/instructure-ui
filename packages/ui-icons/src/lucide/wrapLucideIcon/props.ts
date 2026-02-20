@@ -75,6 +75,8 @@ type IconColorToken =
   | 'disabledBaseColor'
   | 'disabledOnColor'
   | 'dark'
+  | 'sideNavColor'
+  | 'sideNavActiveColor'
   | 'ai' // symbolic token for AI gradient colors, this does not exist in the theme
   | 'navigationPrimaryBaseColor'
   | 'navigationPrimaryHoverColor'

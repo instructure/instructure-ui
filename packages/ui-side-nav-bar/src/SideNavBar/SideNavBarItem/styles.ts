@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { SideNavBarItemTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { SideNavBarItemProps, SideNavBarItemStyle } from './props'
 
 /**
@@ -32,17 +32,19 @@ import type { SideNavBarItemProps, SideNavBarItemStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: SideNavBarItemTheme,
+  componentTheme: NewComponentTypes['SideNavBarItem'],
   props: SideNavBarItemProps
 ): SideNavBarItemStyle => {
   const { selected } = props
 
   return {
     navigationItem: {
+      borderRadius: componentTheme.borderRadius,
       label: 'navigationItem',
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
@@ -60,7 +62,6 @@ const generateStyle = (
       ...(selected
         ? {
             backgroundColor: componentTheme.selectedBackgroundColor,
-            fill: componentTheme.selectedIconColor,
             color: componentTheme.selectedFontColor,
             '&:active, &:hover': {
               backgroundColor: componentTheme.selectedBackgroundColor,
@@ -69,7 +70,7 @@ const generateStyle = (
             },
             '&:focus': {
               backgroundColor: componentTheme.selectedBackgroundColor,
-              boxShadow: `${componentTheme.selectedOuterFocusOutline}, ${componentTheme.selectedInnerFocusOutline}`,
+              boxShadow: `${componentTheme.selectedOuterFocusOutlineColor}, ${componentTheme.selectedInnerFocusOutlineColor}`,
               outline: 'none'
             }
           }
@@ -81,21 +82,23 @@ const generateStyle = (
             },
             '&:hover': {
               transition: 'background-color .3s',
-              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+              backgroundColor: componentTheme.hoverBackgroundColor,
               color: componentTheme.fontColor,
               textDecoration: componentTheme.linkTextDecoration
             },
             '&:focus': {
               backgroundColor: componentTheme.hoverBackgroundColor,
-              boxShadow: `${componentTheme.outerFocusOutline}, ${componentTheme.innerFocusOutline}`,
+              boxShadow: `${componentTheme.outerFocusOutlineColor}, ${componentTheme.innerFocusOutlineColor}`,
               outline: 'none'
             }
           })
     },
     icon: {
       label: 'navigationItem__icon',
-      fontSize: componentTheme.iconSize,
-      fill: componentTheme.iconColor
+      height: componentTheme.iconWrapperHeight,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     label: {
       label: 'navigationItem__label',
