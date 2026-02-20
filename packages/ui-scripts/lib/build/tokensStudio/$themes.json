@@ -68,7 +68,8 @@
       "rebrand/component/ColorContrast": "enabled",
       "rebrand/component/ColorMixer": "enabled",
       "rebrand/component/TruncateText": "enabled",
-      "rebrand/component/AppNav": "enabled"
+      "rebrand/component/AppNav": "enabled",
+      "rebrand/component/Byline": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -2130,7 +2131,16 @@
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
       "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
-      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2"
+      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2",
+      "byline.background": "4f568727051dab90a92f46c2cf83953ecbb799dc",
+      "byline.color": "5a2ba089b77831269d1a08550b54783ecf145a83",
+      "byline.descriptionFontSize": "935f2e2404ce5cf485f846f2770285c31c9a9932",
+      "byline.descriptionFontWeight": "260f0ddb1f23118bc3d08c9dac8b87059632a061",
+      "byline.figureMargin": "3ea597348a408daa94476a62364530f242a83bc7",
+      "byline.fontFamily": "d404af932ad5e1d53bca6a9cf331c8448e44367d",
+      "byline.titleFontSize": "27f616578a0c2ea49a11e571cd68fefff1b8ddea",
+      "byline.titleFontWeight": "68ddff36ce88f593300f4742a6faa1b431b1e413",
+      "byline.titleLineHeight": "6982a87d62e87e181bcc7ac98b53f3cab8a53a7a"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:2",
@@ -2205,7 +2215,8 @@
       "rebrand/component/ColorContrast": "enabled",
       "rebrand/component/ColorMixer": "enabled",
       "rebrand/component/TruncateText": "enabled",
-      "rebrand/component/AppNav": "enabled"
+      "rebrand/component/AppNav": "enabled",
+      "rebrand/component/Byline": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -4204,7 +4215,16 @@
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
       "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
-      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2"
+      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2",
+      "byline.background": "4f568727051dab90a92f46c2cf83953ecbb799dc",
+      "byline.color": "5a2ba089b77831269d1a08550b54783ecf145a83",
+      "byline.descriptionFontSize": "935f2e2404ce5cf485f846f2770285c31c9a9932",
+      "byline.descriptionFontWeight": "260f0ddb1f23118bc3d08c9dac8b87059632a061",
+      "byline.figureMargin": "3ea597348a408daa94476a62364530f242a83bc7",
+      "byline.fontFamily": "d404af932ad5e1d53bca6a9cf331c8448e44367d",
+      "byline.titleFontSize": "27f616578a0c2ea49a11e571cd68fefff1b8ddea",
+      "byline.titleFontWeight": "68ddff36ce88f593300f4742a6faa1b431b1e413",
+      "byline.titleLineHeight": "6982a87d62e87e181bcc7ac98b53f3cab8a53a7a"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:3",
@@ -4279,7 +4299,8 @@
       "canvas/component/ColorContrast": "enabled",
       "canvas/component/ColorMixer": "enabled",
       "canvas/component/TruncateText": "enabled",
-      "canvas/component/AppNav": "enabled"
+      "canvas/component/AppNav": "enabled",
+      "canvas/component/Byline": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5045,6 +5066,15 @@
       "breadcrumb.gapSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
       "breadcrumb.gapMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
       "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
+      "byline.background": "4f568727051dab90a92f46c2cf83953ecbb799dc",
+      "byline.color": "5a2ba089b77831269d1a08550b54783ecf145a83",
+      "byline.descriptionFontSize": "935f2e2404ce5cf485f846f2770285c31c9a9932",
+      "byline.descriptionFontWeight": "260f0ddb1f23118bc3d08c9dac8b87059632a061",
+      "byline.figureMargin": "3ea597348a408daa94476a62364530f242a83bc7",
+      "byline.fontFamily": "d404af932ad5e1d53bca6a9cf331c8448e44367d",
+      "byline.titleFontSize": "27f616578a0c2ea49a11e571cd68fefff1b8ddea",
+      "byline.titleFontWeight": "68ddff36ce88f593300f4742a6faa1b431b1e413",
+      "byline.titleLineHeight": "6982a87d62e87e181bcc7ac98b53f3cab8a53a7a",
       "calendar.background": "5fb372b00fc75ee9bae2d3a34929d96d04ccfc82",
       "calendar.color": "ab04a3b583d56fc92200817e469aa3e1e42be5de",
       "calendar.fontFamily": "5b4fcf9d06fe56aade2f7b22bcf125147d6e4401",
@@ -6418,7 +6448,8 @@
       "canvas/component/ColorContrast": "enabled",
       "canvas/component/ColorMixer": "enabled",
       "canvas/component/TruncateText": "enabled",
-      "canvas/component/AppNav": "enabled"
+      "canvas/component/AppNav": "enabled",
+      "canvas/component/Byline": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -7121,6 +7152,15 @@
       "breadcrumb.gapSm": "473c88172be7bba4d5a3b09c2d913271c55e3f43",
       "breadcrumb.gapMd": "f0e50cde3b699f365c5874ff4bff211dc53fbc0c",
       "breadcrumb.gapLg": "19111d706bb4b2f845628f8a42b075905791883e",
+      "byline.background": "4f568727051dab90a92f46c2cf83953ecbb799dc",
+      "byline.color": "5a2ba089b77831269d1a08550b54783ecf145a83",
+      "byline.descriptionFontSize": "935f2e2404ce5cf485f846f2770285c31c9a9932",
+      "byline.descriptionFontWeight": "260f0ddb1f23118bc3d08c9dac8b87059632a061",
+      "byline.figureMargin": "3ea597348a408daa94476a62364530f242a83bc7",
+      "byline.fontFamily": "d404af932ad5e1d53bca6a9cf331c8448e44367d",
+      "byline.titleFontSize": "27f616578a0c2ea49a11e571cd68fefff1b8ddea",
+      "byline.titleFontWeight": "68ddff36ce88f593300f4742a6faa1b431b1e413",
+      "byline.titleLineHeight": "6982a87d62e87e181bcc7ac98b53f3cab8a53a7a",
       "calendar.background": "5fb372b00fc75ee9bae2d3a34929d96d04ccfc82",
       "calendar.color": "ab04a3b583d56fc92200817e469aa3e1e42be5de",
       "calendar.fontFamily": "5b4fcf9d06fe56aade2f7b22bcf125147d6e4401",
