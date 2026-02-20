@@ -104,10 +104,6 @@
       "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
     },
-    "iconSize": {
-      "value": "1.625rem",
-      "type": "sizing"
-    },
     "lineHeight": {
       "value": "{lineHeight.paragraph.base}",
       "type": "lineHeights"
