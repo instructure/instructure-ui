@@ -267,12 +267,6 @@ export type BaseButtonTheme = {
   aiActiveBoxShadow: string
 }
 
-export type CloseButtonTheme = {
-  offsetMedium: Spacing['medium']
-  offsetSmall: Spacing['small']
-  offsetXSmall: Spacing['xSmall']
-  zIndex: Stacking['above']
-}
 
 export type BylineTheme = {
   fontFamily: Typography['fontFamily']
@@ -1803,7 +1797,7 @@ export interface ThemeVariables {
   Breadcrumb: BreadcrumbTheme
   BaseButton: BaseButtonTheme
   Button: BaseButtonTheme
-  CloseButton: CloseButtonTheme
+  CloseButton: BaseButtonTheme
   CondensedButton: BaseButtonTheme
   IconButton: BaseButtonTheme
   Byline: BylineTheme
