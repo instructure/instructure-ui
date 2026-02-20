@@ -28,10 +28,9 @@ import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
 
 import { allowedProps } from './props'
@@ -42,7 +41,7 @@ import type { CloseButtonProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'BaseButton')
 class CloseButton extends Component<CloseButtonProps> {
   static readonly componentId = 'CloseButton'
 
@@ -104,6 +103,8 @@ class CloseButton extends Component<CloseButtonProps> {
       ...props
     } = this.props
 
+    const themeOverride = this.props.themeOverride
+
     return (
       <span
         {...passthroughProps(props)}
@@ -127,6 +128,7 @@ class CloseButton extends Component<CloseButtonProps> {
           href={href}
           cursor={cursor}
           tabIndex={tabIndex}
+          themeOverride={themeOverride}
           data-cid="CloseButton"
         >
           <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
