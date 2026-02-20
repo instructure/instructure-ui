@@ -66,7 +66,8 @@
       "rebrand/component/ColorPreset": "enabled",
       "rebrand/component/ColorIndicator": "enabled",
       "rebrand/component/ColorContrast": "enabled",
-      "rebrand/component/ColorMixer": "enabled"
+      "rebrand/component/ColorMixer": "enabled",
+      "rebrand/component/TruncateText": "enabled"
     },
     "$figmaStyleReferences": {
       "elevation1": "S:0c22a809359ba629b2e09fde021efd3495cd9543,",
@@ -973,6 +974,7 @@
       "colorContrast.statusWrapperBottomMargin": "60fbf59030e841535c2a5bd707a891d52cdff4f6",
       "colorContrast.successColor": "adc529a125d138dfe91218cc3621634d42c83ebe",
       "colorContrast.width": "978591b57435547493926ecd1bff2fc016235d27",
+      "colorContrast.colorIndicatorLabelColor": "9870d540029aa23d8fb0614773f69da9b22d3ca5",
       "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
       "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
       "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
@@ -2113,7 +2115,8 @@
       "view.stackingAbove": "5546c5f4795ebcb9d5e47ce79b86805267b1ebf8",
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
-      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0"
+      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
+      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:2",
@@ -2186,7 +2189,8 @@
       "rebrand/component/ColorPreset": "enabled",
       "rebrand/component/ColorIndicator": "enabled",
       "rebrand/component/ColorContrast": "enabled",
-      "rebrand/component/ColorMixer": "enabled"
+      "rebrand/component/ColorMixer": "enabled",
+      "rebrand/component/TruncateText": "enabled"
     },
     "$figmaStyleReferences": {
       "avatar.boxShadow": "S:ce597b947227d2e4b1f0fa80d2b7be88a5987dc2,",
@@ -3030,6 +3034,7 @@
       "colorContrast.statusWrapperBottomMargin": "60fbf59030e841535c2a5bd707a891d52cdff4f6",
       "colorContrast.successColor": "adc529a125d138dfe91218cc3621634d42c83ebe",
       "colorContrast.width": "978591b57435547493926ecd1bff2fc016235d27",
+      "colorContrast.colorIndicatorLabelColor": "9870d540029aa23d8fb0614773f69da9b22d3ca5",
       "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
       "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
       "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
@@ -4170,7 +4175,8 @@
       "view.stackingAbove": "5546c5f4795ebcb9d5e47ce79b86805267b1ebf8",
       "view.stackingBelow": "0c305b1ba62841d4bbc28b62893d64c7683fb24a",
       "view.stackingDeepest": "28c1d8760752a39e31aef9e59ebdefc572c2f56a",
-      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0"
+      "view.borderStyle": "17c5727ed0a973c5f12c41bb84ef5b6169b26ae0",
+      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2"
     },
     "$figmaCollectionId": "VariableCollectionId:2374:727",
     "$figmaModeId": "2374:3",
@@ -4243,7 +4249,8 @@
       "canvas/component/ColorPreset": "enabled",
       "canvas/component/ColorIndicator": "enabled",
       "canvas/component/ColorContrast": "enabled",
-      "canvas/component/ColorMixer": "enabled"
+      "canvas/component/ColorMixer": "enabled",
+      "canvas/component/TruncateText": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -5060,6 +5067,7 @@
       "colorContrast.statusWrapperBottomMargin": "60fbf59030e841535c2a5bd707a891d52cdff4f6",
       "colorContrast.successColor": "adc529a125d138dfe91218cc3621634d42c83ebe",
       "colorContrast.width": "978591b57435547493926ecd1bff2fc016235d27",
+      "colorContrast.colorIndicatorLabelColor": "9870d540029aa23d8fb0614773f69da9b22d3ca5",
       "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
       "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
       "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
@@ -6174,6 +6182,7 @@
       "treeBrowserTreeCollection.borderColor": "99c15459e702b233a0e934de3b3cf2eba9d23cef",
       "treeBrowserTreeCollection.borderWidth": "bdf2f60982ece4a375837781d31a2444ef51b495",
       "treeBrowserTreeCollection.fontFamily": "2528937d98b56d282e9e19a75223e47a052ee6da",
+      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2",
       "view.fontFamily": "f1d8898b1d1e69fa04f276f16ee2e84313ed600f",
       "view.color": "3171eed7bd4c4d55a243231ae9c1dbfa2e16db7e",
       "view.colorPrimaryInverse": "a881a532c315c6b6c35d8ea870be4b483183b718",
@@ -6365,7 +6374,8 @@
       "canvas/component/ColorPreset": "enabled",
       "canvas/component/ColorIndicator": "enabled",
       "canvas/component/ColorContrast": "enabled",
-      "canvas/component/ColorMixer": "enabled"
+      "canvas/component/ColorMixer": "enabled",
+      "canvas/component/TruncateText": "enabled"
     },
     "$figmaStyleReferences": {
       "primaryBg": "S:7bfe47b8656807754868fc09a300778c7b28a4ea,",
@@ -7119,6 +7129,7 @@
       "colorContrast.statusWrapperBottomMargin": "60fbf59030e841535c2a5bd707a891d52cdff4f6",
       "colorContrast.successColor": "adc529a125d138dfe91218cc3621634d42c83ebe",
       "colorContrast.width": "978591b57435547493926ecd1bff2fc016235d27",
+      "colorContrast.colorIndicatorLabelColor": "9870d540029aa23d8fb0614773f69da9b22d3ca5",
       "colorIndicator.backgroundSize": "da24aced073b9ff27157d75c029ae48ca5386bae",
       "colorIndicator.borderWidth": "b4da214e4a3887123885a92d011a7d040136b88e",
       "colorIndicator.rectangularIndicatorBorderWidth": "0987f5017ec6bcd096cba5a7dbdd6d2d642c673c",
@@ -8233,6 +8244,7 @@
       "treeBrowserTreeCollection.borderColor": "99c15459e702b233a0e934de3b3cf2eba9d23cef",
       "treeBrowserTreeCollection.borderWidth": "bdf2f60982ece4a375837781d31a2444ef51b495",
       "treeBrowserTreeCollection.fontFamily": "2528937d98b56d282e9e19a75223e47a052ee6da",
+      "truncateText.fontFamily": "ef142f8d5b110c5d71641c0c4041fff579320ce2",
       "view.fontFamily": "f1d8898b1d1e69fa04f276f16ee2e84313ed600f",
       "view.color": "3171eed7bd4c4d55a243231ae9c1dbfa2e16db7e",
       "view.colorPrimaryInverse": "a881a532c315c6b6c35d8ea870be4b483183b718",
