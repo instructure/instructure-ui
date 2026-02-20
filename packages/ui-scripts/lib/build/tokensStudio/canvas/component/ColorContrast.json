@@ -55,6 +55,10 @@
     "width": {
       "value": "17rem",
       "type": "sizing"
+    },
+    "colorIndicatorLabelColor": {
+      "value": "{color.text.base}",
+      "type": "color"
     }
   }
 }
