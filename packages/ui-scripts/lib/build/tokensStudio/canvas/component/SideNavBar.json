@@ -24,6 +24,10 @@
       "value": "5.25rem",
       "type": "sizing"
     },
+    "iconWrapperHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
     "margin": {
       "value": "0rem",
       "type": "spacing"

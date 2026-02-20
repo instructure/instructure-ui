@@ -69,6 +69,10 @@
     "minimizedBorderRadius": {
       "value": "{borderRadius.container.sm}",
       "type": "borderRadius"
+    },
+    "iconWrapperHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
     }
   },
   "sideNavBarItem": {
