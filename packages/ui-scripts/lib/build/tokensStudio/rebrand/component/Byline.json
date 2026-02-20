@@ -13,7 +13,7 @@
       "type": "fontSizes"
     },
     "descriptionFontWeight": {
-      "value": "{fontWeight.regular}",
+      "value": "{fontWeight.body.base}",
       "type": "fontWeights"
     },
     "descriptionLineHeight": {
@@ -33,7 +33,7 @@
       "type": "fontSizes"
     },
     "titleFontWeight": {
-      "value": "{fontWeight.regular}",
+      "value": "{fontWeight.heading.base}",
       "type": "fontWeights"
     },
     "titleLineHeight": {
