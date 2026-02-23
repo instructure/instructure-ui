@@ -32,10 +32,9 @@ import {
   ensureSingleChild
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
 import { allowedProps, TruncateTextState } from './props'
@@ -46,7 +45,7 @@ import type { TruncateTextProps } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   static readonly componentId = 'TruncateText'
 

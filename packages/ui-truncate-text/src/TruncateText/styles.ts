@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TruncateTextTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { TruncateTextStyle } from './props'
 
 /**
@@ -36,7 +36,7 @@ import type { TruncateTextStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TruncateTextTheme
+  componentTheme: NewComponentTypes['TruncateText']
 ): TruncateTextStyle => {
   return {
     truncateText: {
