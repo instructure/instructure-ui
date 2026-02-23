@@ -23,7 +23,7 @@
  */
 
 import '../support/component'
-import { View } from '@instructure/ui'
+import { View } from '@instructure/ui/latest'
 
 describe('<View/>', () => {
   it('should not pass all styles', () => {

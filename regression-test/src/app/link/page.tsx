@@ -31,7 +31,7 @@ import {
   IconUserLine as iul,
   ScreenReaderContent as src,
   TruncateText as tt
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Link = lk as any
 const Text = tx as any

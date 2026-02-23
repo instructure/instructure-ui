@@ -25,7 +25,7 @@
 import { Component, ContextType } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_5'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 

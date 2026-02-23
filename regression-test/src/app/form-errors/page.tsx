@@ -35,7 +35,7 @@ import {
   FileDrop as fd,
   ColorPicker as cp,
   DateTimeInput as dti
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const TextInput = ti as any
 const NumberInput = ni as any

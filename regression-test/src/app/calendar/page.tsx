@@ -23,7 +23,7 @@
  */
 'use client'
 import React from 'react'
-import { Calendar as cl } from '@instructure/ui'
+import { Calendar as cl } from '@instructure/ui/latest'
 
 const Calendar = cl as any
 

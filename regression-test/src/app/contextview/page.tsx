@@ -24,7 +24,11 @@
 
 'use client'
 import React from 'react'
-import { ContextView as cv, Heading as hd, Text as tx } from '@instructure/ui'
+import {
+  ContextView as cv,
+  Heading as hd,
+  Text as tx
+} from '@instructure/ui/latest'
 
 const ContextView = cv as any
 const Heading = hd as any
@@ -69,9 +73,8 @@ export default function ContextViewPage() {
         margin="x-large 0 0"
       >
         This ContextView uses the inverse background and medium padding. Its
-        width prop is set to 30rem, which causes long strings like this to
-        wrap. It also has top margin to separate it from the ContextViews
-        above it.
+        width prop is set to 30rem, which causes long strings like this to wrap.
+        It also has top margin to separate it from the ContextViews above it.
       </ContextView>
     </main>
   )

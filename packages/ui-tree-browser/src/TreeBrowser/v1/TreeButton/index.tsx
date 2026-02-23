@@ -24,7 +24,7 @@
 
 import { Component, ContextType } from 'react'
 
-import { Img } from '@instructure/ui-img'
+import { Img } from '@instructure/ui-img/v11_5'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 

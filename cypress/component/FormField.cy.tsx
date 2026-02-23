@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { FormFieldLayout } from '@instructure/ui'
+import { FormFieldLayout } from '@instructure/ui/latest'
 
 import '../support/component'
 
