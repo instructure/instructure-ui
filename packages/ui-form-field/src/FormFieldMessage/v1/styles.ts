@@ -24,7 +24,7 @@
 
 import type { FormFieldMessageTheme } from '@instructure/shared-types'
 import type { FormFieldMessageProps, FormFieldMessageStyle } from './props'
-import type { FormMessageType } from '@instructure/ui-form-field/latest'
+import type { FormMessageType } from '../../utils/v1/FormPropTypes'
 /**
  * ---
  * private: true

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { AppNav } from '@instructure/ui'
+import { AppNav } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

@@ -39,7 +39,7 @@ export {
   calcFocusOutlineStyles
 } from './styleUtils'
 
-export { useStyleRework } from './useStyleRework'
+export { useStyleLegacy } from './useStyleLegacy'
 export { useStyle } from './useStyle'
 export { useTheme } from './useTheme'
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { useState, useRef } from 'react'
-import { Dialog } from '@instructure/ui'
+import { Dialog } from '@instructure/ui/latest'
 import 'cypress-real-events'
 
 import '../support/component'

@@ -39,7 +39,7 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
 import { withStyleLegacy as withStyle, Global } from '@instructure/emotion'
 
-import { Tray } from '@instructure/ui-tray'
+import { Tray } from '@instructure/ui-tray/v11_5'
 import {
   IconXLine,
   IconHamburgerLine,

@@ -30,7 +30,7 @@ import {
   Heading as hd,
   Link as lk,
   Text as tx
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Byline = bl as any
 const Avatar = av as any

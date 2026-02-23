@@ -25,7 +25,7 @@
 import { Component, Children, isValidElement, ReactElement } from 'react'
 
 import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { withStyle } from '@instructure/emotion'

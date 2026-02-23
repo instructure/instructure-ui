@@ -31,7 +31,7 @@ import {
   IconUserSolid as ius,
   IconUserLine as iul,
   IconSearchLine as isl
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Select = sl as any
 const SimpleSelect = ss as any

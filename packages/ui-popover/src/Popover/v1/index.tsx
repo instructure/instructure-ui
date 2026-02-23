@@ -30,7 +30,7 @@ import {
   parsePlacement,
   mirrorHorizontalPlacement
 } from '@instructure/ui-position'
-import { ContextView, View } from '@instructure/ui-view'
+import { ContextView, View } from '@instructure/ui-view/v11_5'
 import { Dialog } from '@instructure/ui-dialog'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
@@ -55,7 +55,7 @@ import { logError as error } from '@instructure/console'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
-import type { ViewProps, ContextViewProps } from '@instructure/ui-view'
+import type { ViewProps, ContextViewProps } from '@instructure/ui-view/v11_5'
 import type { PositionProps } from '@instructure/ui-position'
 import type { DialogProps } from '@instructure/ui-dialog'
 
@@ -64,8 +64,8 @@ import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import type { PopoverProps, PopoverState } from './props'
-import { allowedProps } from './props'
+import type { PopoverProps, PopoverState } from '../v2/props'
+import { allowedProps } from '../v2/props'
 import type { Renderable } from '@instructure/shared-types'
 /**
 ---

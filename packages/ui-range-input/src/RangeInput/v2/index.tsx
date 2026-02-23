@@ -25,8 +25,8 @@
 import { Component } from 'react'
 
 import { warn } from '@instructure/console'
-import { ContextView } from '@instructure/ui-view'
-import { FormField } from '@instructure/ui-form-field'
+import { ContextView } from '@instructure/ui-view/latest'
+import { FormField } from '@instructure/ui-form-field/latest'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { withStyle } from '@instructure/emotion'
 import {

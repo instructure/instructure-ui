@@ -24,7 +24,7 @@
 
 'use client'
 import React from 'react'
-import { View as vw } from '@instructure/ui'
+import { View as vw } from '@instructure/ui/latest'
 
 const View = vw as any
 

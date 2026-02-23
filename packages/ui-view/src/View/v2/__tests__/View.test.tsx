@@ -28,7 +28,7 @@ import { vi } from 'vitest'
 import type { MockInstance } from 'vitest'
 import '@testing-library/jest-dom'
 
-import { View } from '@instructure/ui-view/v11_6'
+import { View } from '../index'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
 describe('<View />', () => {

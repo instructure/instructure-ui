@@ -24,7 +24,7 @@
 
 import 'cypress-real-events'
 
-import { Drilldown } from '@instructure/ui'
+import { Drilldown } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<DrilldownPage/>', () => {

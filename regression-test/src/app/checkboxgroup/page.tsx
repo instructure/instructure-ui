@@ -28,7 +28,7 @@ import {
   CheckboxGroup as cg,
   FormFieldGroup as ffg,
   ScreenReaderContent as src
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Checkbox = cb as any
 const CheckboxGroup = cg as any

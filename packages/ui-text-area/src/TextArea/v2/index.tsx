@@ -31,7 +31,7 @@ import {
   useCallback,
   useMemo
 } from 'react'
-import { FormField } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field/latest'
 import {
   addEventListener,
   isActiveElement,

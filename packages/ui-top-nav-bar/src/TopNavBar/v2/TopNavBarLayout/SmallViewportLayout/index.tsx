@@ -39,17 +39,17 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
 import { withStyleLegacy as withStyle, Global } from '@instructure/emotion'
 
-import { Tray } from '@instructure/ui-tray'
+import { Tray } from '@instructure/ui-tray/latest'
 import {
   IconXLine,
   IconHamburgerLine,
   IconArrowOpenDownSolid,
   IconArrowOpenUpSolid
 } from '@instructure/ui-icons'
-import { Avatar } from '@instructure/ui-avatar'
+import { Avatar } from '@instructure/ui-avatar/latest'
 import { Dialog } from '@instructure/ui-dialog'
-import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrilldownPageChildren } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
+import type { DrilldownPageChildren } from '@instructure/ui-drilldown/latest'
 
 import { TopNavBarItem } from '../../TopNavBarItem'
 import type { ItemChild, TopNavBarItemProps } from '../../TopNavBarItem/props'

@@ -24,10 +24,10 @@
 
 import { Component } from 'react'
 
-import { TruncateText } from '@instructure/ui-truncate-text'
-import { Link } from '@instructure/ui-link'
+import { TruncateText } from '@instructure/ui-truncate-text/v11_5'
+import { Link } from '@instructure/ui-link/v11_5'
 import { omitProps } from '@instructure/ui-react-utils'
-import { Tooltip } from '@instructure/ui-tooltip'
+import { Tooltip } from '@instructure/ui-tooltip/v11_5'
 
 import { allowedProps } from './props'
 import type { BreadcrumbLinkProps, BreadcrumbLinkState } from './props'

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Flex } from '@instructure/ui'
+import { Flex } from '@instructure/ui/latest'
 
 describe('<Flex.Item/>', () => {
   it('visually reorders items when order prop is set', () => {

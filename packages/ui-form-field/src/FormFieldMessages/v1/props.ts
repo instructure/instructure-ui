@@ -27,7 +27,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type { FormMessage } from '../../utils/v1/FormPropTypes'
 
 type FormFieldMessagesOwnProps = {
   /**

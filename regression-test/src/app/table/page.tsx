@@ -24,7 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Table as tb } from '@instructure/ui'
+import { Table as tb } from '@instructure/ui/latest'
 
 const Table = tb as any
 

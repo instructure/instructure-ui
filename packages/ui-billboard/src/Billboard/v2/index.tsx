@@ -24,8 +24,8 @@
 
 import { Component, MouseEvent } from 'react'
 
-import { Heading } from '@instructure/ui-heading'
-import { View } from '@instructure/ui-view'
+import { Heading } from '@instructure/ui-heading/latest'
+import { View } from '@instructure/ui-view/latest'
 import {
   omitProps,
   callRenderProp,
@@ -39,7 +39,7 @@ import generateStyle from './styles'
 
 import { allowedProps } from './props'
 import type { BillboardProps } from './props'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 // Map Billboard sizes to icon sizes
 const billboardSizeToIconSize = {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { TextInput } from '@instructure/ui'
+import { TextInput } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

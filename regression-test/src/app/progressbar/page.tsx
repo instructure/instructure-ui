@@ -29,7 +29,7 @@ import {
   ProgressCircle as pc,
   View as vw,
   Text as tx
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const ProgressCircle = pc as any
 const ProgressBar = pb as any
@@ -101,7 +101,9 @@ export default function ProgressBarPage() {
             color="primary-inverse"
             valueNow={30}
             valueMax={60}
-            renderValue={({ valueNow, valueMax }: any) => `${Math.round((valueNow / valueMax) * 100)}%`}
+            renderValue={({ valueNow, valueMax }: any) =>
+              `${Math.round((valueNow / valueMax) * 100)}%`
+            }
             formatScreenReaderValue={({ valueNow, valueMax }: any) =>
               Math.round((valueNow / valueMax) * 100) + ' percent'
             }

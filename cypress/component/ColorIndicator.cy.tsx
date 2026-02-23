@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ColorIndicator } from '@instructure/ui'
+import { ColorIndicator } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

@@ -24,7 +24,7 @@
 
 import 'cypress-real-events'
 
-import { ListItem } from '@instructure/ui'
+import { ListItem } from '@instructure/ui/latest'
 import '../support/component'
 
 describe('<ListItem/>', () => {

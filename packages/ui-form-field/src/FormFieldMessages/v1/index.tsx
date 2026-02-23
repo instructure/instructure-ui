@@ -28,7 +28,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
-import { FormFieldMessage } from '@instructure/ui-form-field/latest'
+import { FormFieldMessage } from '../../FormFieldMessage/v1'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

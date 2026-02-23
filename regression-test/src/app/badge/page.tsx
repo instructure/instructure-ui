@@ -32,7 +32,7 @@ import {
   View as vw,
   AccessibleContent as ac,
   ScreenReaderContent as src
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 // alias to avoid TS/SSR friction like other pages
 const Badge = b as any

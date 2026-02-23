@@ -33,7 +33,7 @@ import { warn, error } from '@instructure/console'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
-import { Drilldown } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
 import { TruncateList } from '@instructure/ui-truncate-list'
 
 import { TopNavBarContext } from '../TopNavBarContext'

@@ -25,7 +25,7 @@
 import 'cypress-real-events'
 
 import '../support/component'
-import { DateInput, Calendar } from '@instructure/ui'
+import { DateInput, Calendar } from '@instructure/ui/latest'
 
 const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 

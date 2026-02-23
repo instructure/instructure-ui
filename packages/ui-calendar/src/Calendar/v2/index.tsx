@@ -48,7 +48,7 @@ import { allowedProps } from './props'
 import type { CalendarProps, CalendarState } from './props'
 import { Renderable } from '@instructure/shared-types'
 
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import {
   ChevronLeftInstUIIcon,
   ChevronRightInstUIIcon

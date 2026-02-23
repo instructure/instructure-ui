@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Popover } from '../Popover/v1'
-export type { PopoverOwnProps, PopoverProps } from '../Popover/v1/props'
+export type { PopoverOwnProps, PopoverProps } from '../Popover/v2/props'

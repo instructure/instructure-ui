@@ -24,7 +24,7 @@
 
 'use client'
 import React from 'react'
-import { Img as ig, View as vw } from '@instructure/ui'
+import { Img as ig, View as vw } from '@instructure/ui/latest'
 
 const Img = ig as any
 const View = vw as any

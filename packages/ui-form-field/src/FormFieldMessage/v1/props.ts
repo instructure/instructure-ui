@@ -27,7 +27,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   FormMessageType,
   FormMessageChild
-} from '@instructure/ui-form-field/latest'
+} from '../../utils/v1/FormPropTypes'
 
 type FormFieldMessageOwnProps = {
   variant?: FormMessageType

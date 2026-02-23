@@ -32,8 +32,8 @@ import {
 
 import keycode from 'keycode'
 
-import { View } from '@instructure/ui-view'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 import {
   matchComponentTypes,
   safeCloneElement,

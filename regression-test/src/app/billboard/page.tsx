@@ -29,7 +29,7 @@ import {
   IconUserLine as iul,
   IconGradebookLine as igl,
   IconPlusLine as ipl
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Billboard = bb as any
 const View = vw as any
