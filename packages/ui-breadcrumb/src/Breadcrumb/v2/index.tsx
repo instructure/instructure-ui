@@ -24,7 +24,7 @@
 
 import { isValidElement, Children, Component, ReactElement } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 
 import { withStyle } from '@instructure/emotion'

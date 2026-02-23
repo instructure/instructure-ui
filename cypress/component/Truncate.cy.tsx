@@ -26,7 +26,7 @@ import { expect } from 'chai'
 
 import '../support/component'
 import { within } from '@instructure/ui-utils'
-import truncate from '@instructure/ui-truncate-text/src/TruncateText/utils/truncate'
+import truncate from '@instructure/ui-truncate-text/src/TruncateText/v1/utils/truncate'
 
 describe('truncate', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'

@@ -29,7 +29,7 @@ import { getElementType, omitProps } from '@instructure/ui-react-utils'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/v11_5'
 
 import { TopNavBarContext } from '../TopNavBarContext'
 

@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import { expect } from 'chai'
-import { SourceCodeEditor } from '@instructure/ui'
+import { SourceCodeEditor } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

@@ -30,7 +30,7 @@ import {
   ColorMixer as cm,
   ColorPreset as cp,
   ColorPicker as cpk
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const ColorContrast = cc as any
 const ColorIndicator = ci as any

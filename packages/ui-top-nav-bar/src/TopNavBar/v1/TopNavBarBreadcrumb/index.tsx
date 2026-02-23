@@ -37,7 +37,7 @@ import {
 } from '@instructure/ui-icons'
 import TopNavBarContext from '../TopNavBarContext'
 import { error } from '@instructure/console'
-import { Link } from '@instructure/ui-link'
+import { Link } from '@instructure/ui-link/v11_5'
 
 /**
 ---

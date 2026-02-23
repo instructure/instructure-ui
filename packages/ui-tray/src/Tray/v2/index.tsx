@@ -37,7 +37,7 @@ import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import { allowedProps } from './props'
 import type { TrayProps, TrayState } from './props'
-import { Mask } from '@instructure/ui-overlays'
+import { Mask } from '@instructure/ui-overlays/latest'
 
 /**
 ---

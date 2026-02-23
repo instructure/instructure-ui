@@ -31,7 +31,7 @@ import {
 } from 'react'
 
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 
 import { withStyle } from '@instructure/emotion'
 

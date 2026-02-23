@@ -111,10 +111,28 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
+      "types": "./types/v11_5.d.ts",
+      "import": "./es/v11_5.js",
+      "require": "./lib/v11_5.js",
+      "default": "./es/v11_5.js"
+    },
+    "./v11_5": {
+      "types": "./types/v11_5.d.ts",
+      "import": "./es/v11_5.js",
+      "require": "./lib/v11_5.js",
+      "default": "./es/v11_5.js"
+    },
+    "./v11_6": {
+      "types": "./types/v11_6.d.ts",
+      "import": "./es/v11_6.js",
+      "require": "./lib/v11_6.js",
+      "default": "./es/v11_6.js"
+    },
+    "./latest": {
+      "types": "./types/v11_6.d.ts",
+      "import": "./es/v11_6.js",
+      "require": "./lib/v11_6.js",
+      "default": "./es/v11_6.js"
     },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",

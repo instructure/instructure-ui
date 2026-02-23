@@ -25,8 +25,8 @@
 import { Component, Children, ContextType, type ReactElement } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
-import { SimpleSelect } from '@instructure/ui-simple-select'
-import type { SimpleSelectProps } from '@instructure/ui-simple-select'
+import { SimpleSelect } from '@instructure/ui-simple-select/v11_5'
+import type { SimpleSelectProps } from '@instructure/ui-simple-select/v11_5'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconCheckLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'

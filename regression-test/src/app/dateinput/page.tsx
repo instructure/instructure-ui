@@ -28,7 +28,7 @@ import {
   DateInput as di,
   DateInput2 as di2,
   IconAddLine
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const DateInput = di as any
 const DateInput2 = di2 as any

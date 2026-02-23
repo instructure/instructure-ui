@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { getTextDirection } from '@instructure/ui'
+import { getTextDirection } from '@instructure/ui/latest'
 import '../support/component'
 import 'cypress-real-events'
 

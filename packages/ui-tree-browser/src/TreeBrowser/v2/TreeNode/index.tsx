@@ -24,7 +24,7 @@
 
 import { Component, ContextType } from 'react'
 
-import { Img } from '@instructure/ui-img'
+import { Img } from '@instructure/ui-img/latest'
 import { withStyle } from '@instructure/emotion'
 import { renderIconWithProps } from '@instructure/ui-icons'
 

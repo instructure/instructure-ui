@@ -27,7 +27,7 @@ import {
   Avatar as avv,
   IconGroupLine as igl,
   IconAiSolid
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Avatar = avv as any
 const IconGroupLine = igl as any

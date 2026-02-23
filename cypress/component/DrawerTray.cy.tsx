@@ -27,7 +27,7 @@ import canvas from '@instructure/ui-themes'
 import {
   DrawerLayoutContext,
   DrawerTray
-} from '@instructure/ui-drawer-layout/src/DrawerLayout'
+} from '@instructure/ui-drawer-layout/src/DrawerLayout/v1'
 import { InstUISettingsProvider } from '@instructure/emotion'
 
 describe('<DrawerTray/>', () => {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { SimpleSelect } from '@instructure/ui'
+import { SimpleSelect } from '@instructure/ui/latest'
 import 'cypress-real-events'
 import '../support/component'
 

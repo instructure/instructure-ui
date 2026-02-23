@@ -30,7 +30,7 @@ import {
   RadioInputGroup as rig,
   View as vw,
   ScreenReaderContent as src
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 import {
   BookCheckInstUIIcon as igl,
   XInstUIIcon as ixs,

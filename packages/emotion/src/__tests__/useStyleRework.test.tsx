@@ -31,7 +31,7 @@ import '@testing-library/jest-dom'
 import {
   InstUISettingsProvider,
   WithStyleProps,
-  useStyleRework
+  useStyleLegacy
 } from '../index'
 
 type Props = {
@@ -106,7 +106,7 @@ describe('useStyle', () => {
   const ThemedComponent = ({ inverse = false, themeOverride }: Props) => {
     const [clearBackground, setClearBackground] = useState(false)
 
-    const styles = useStyleRework({
+    const styles = useStyleLegacy({
       generateStyle,
       generateComponentTheme,
       componentId: 'ThemedComponent',

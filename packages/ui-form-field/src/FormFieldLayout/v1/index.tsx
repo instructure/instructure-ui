@@ -31,7 +31,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
-import { FormFieldMessages } from '@instructure/ui-form-field/latest'
+import { FormFieldMessages } from '../../FormFieldMessages/v1'
 import generateStyle from './styles'
 import { allowedProps, FormFieldStyleProps } from './props'
 import type { FormFieldLayoutProps } from './props'

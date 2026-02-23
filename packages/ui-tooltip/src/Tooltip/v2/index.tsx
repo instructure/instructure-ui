@@ -32,8 +32,8 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { Popover } from '@instructure/ui-popover'
-import type { PopoverProps } from '@instructure/ui-popover'
+import { Popover } from '@instructure/ui-popover/latest'
+import type { PopoverProps } from '@instructure/ui-popover/latest'
 import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'

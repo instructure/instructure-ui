@@ -24,7 +24,7 @@
 
 import 'cypress-real-events'
 import '../support/component'
-import { Menu, MenuItem } from '@instructure/ui'
+import { Menu, MenuItem } from '@instructure/ui/latest'
 
 describe('<Menu/>', () => {
   it('should move focus properly', () => {

@@ -28,7 +28,7 @@ import {
   View as vw,
   ScreenReaderContent as src,
   FormFieldGroup as ffg
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Checkbox = cb as any
 const View = vw as any

@@ -25,8 +25,8 @@
 import { Component } from 'react'
 
 import { XInstUIIcon } from '@instructure/ui-icons'
-import { View } from '@instructure/ui-view'
-import type { ViewProps } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
+import type { ViewProps } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { withStyle } from '@instructure/emotion'

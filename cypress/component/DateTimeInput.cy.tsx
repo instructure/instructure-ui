@@ -25,7 +25,7 @@
 import 'cypress-real-events'
 
 import '../support/component'
-import { DateTimeInput } from '@instructure/ui'
+import { DateTimeInput } from '@instructure/ui/latest'
 import { DateTime } from '@instructure/ui-i18n'
 
 describe('<DateInput/>', () => {

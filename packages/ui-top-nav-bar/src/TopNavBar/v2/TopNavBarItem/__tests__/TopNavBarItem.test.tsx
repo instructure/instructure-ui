@@ -31,7 +31,7 @@ import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconSearchLine } from '@instructure/ui-icons'
-import { Drilldown } from '@instructure/ui-drilldown'
+import { Drilldown } from '@instructure/ui-drilldown/latest'
 import { TopNavBarItem } from '../index'
 
 import {

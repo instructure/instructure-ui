@@ -26,7 +26,7 @@ import moment from 'moment-timezone'
 import 'cypress-real-events'
 
 import '../support/component'
-import { TimeSelect } from '@instructure/ui'
+import { TimeSelect } from '@instructure/ui/latest'
 import { DateTime } from '@instructure/ui-i18n'
 
 describe('<TimeSelect/>', () => {

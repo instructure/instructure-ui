@@ -37,7 +37,7 @@ import { Drilldown } from '@instructure/ui-drilldown'
 import type { DrilldownProps } from '@instructure/ui-drilldown'
 import type { PopoverProps } from '@instructure/ui-popover'
 import type { TooltipProps } from '@instructure/ui-tooltip'
-import type { BaseButtonOwnProps } from '@instructure/ui-buttons'
+import type { BaseButtonOwnProps } from '@instructure/ui-buttons/latest'
 import type { ViewOwnProps, ViewProps } from '@instructure/ui-view'
 
 import { TopNavBarContextType } from '../TopNavBarContext'

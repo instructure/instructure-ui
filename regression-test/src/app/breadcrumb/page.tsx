@@ -29,7 +29,7 @@ import {
   IconBankLine as ibl,
   IconClockLine as icl,
   IconPlusLine as ipl
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Breadcrumb = bc as any
 const View = vw as any

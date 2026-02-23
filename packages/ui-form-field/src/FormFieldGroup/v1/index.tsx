@@ -30,7 +30,7 @@ import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { allowedProps as FormFieldLayoutAllowedProps } from '../../FormFieldLayout/v1/props'
 
-import { FormFieldLayout } from '@instructure/ui-form-field/latest'
+import { FormFieldLayout } from '../../FormFieldLayout/v1'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
