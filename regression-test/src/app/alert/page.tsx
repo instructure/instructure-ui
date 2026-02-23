@@ -23,7 +23,7 @@
  */
 'use client'
 import React, { useRef } from 'react'
-import { Alert } from '@instructure/ui'
+import { Alert } from '@instructure/ui/latest'
 
 export default function AlertPage() {
   const variants = ['info', 'success', 'warning', 'error'] as const

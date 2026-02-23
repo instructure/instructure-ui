@@ -33,7 +33,7 @@ import {
 } from '@codemirror/search'
 import { EditorView } from '@codemirror/view'
 import { TextInput } from '@instructure/ui-text-input'
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons/latest'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine,

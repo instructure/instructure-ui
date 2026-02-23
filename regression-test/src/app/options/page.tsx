@@ -30,7 +30,7 @@ import {
   IconArrowOpenEndSolid as iaoes,
   IconCheckSolid as ics,
   IconCheckLine as icl
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Options = op as any
 const View = vw as any

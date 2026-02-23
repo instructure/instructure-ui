@@ -26,7 +26,11 @@ import { expect } from 'chai'
 import 'cypress-real-events'
 
 import '../support/component'
-import { MenuItem, MenuItemGroup, MenuItemSeparator } from '@instructure/ui'
+import {
+  MenuItem,
+  MenuItemGroup,
+  MenuItemSeparator
+} from '@instructure/ui/latest'
 
 describe('<MenuItemGroup />', () => {
   it('updates the selected items when allowMultiple is true', () => {

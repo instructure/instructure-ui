@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Responsive } from '@instructure/ui'
+import { Responsive } from '@instructure/ui/latest'
 import { deepEqual } from '@instructure/ui-utils'
 import '../support/component'
 

@@ -25,7 +25,7 @@
 import React from 'react'
 
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
-import type { FormMessage } from '@instructure/ui-form-field/latest'
+import type { FormMessage } from '../../utils/v1/FormPropTypes'
 import type { Spacing } from '@instructure/emotion'
 
 type FormFieldOwnProps = {

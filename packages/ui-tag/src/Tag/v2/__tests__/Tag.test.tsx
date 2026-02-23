@@ -30,8 +30,8 @@ import { vi } from 'vitest'
 
 import { Tag } from '../index'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import type { ViewProps } from '@instructure/ui-view'
-import { View } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/latest'
 
 const originalOmitViewProps = View.omitViewProps
 

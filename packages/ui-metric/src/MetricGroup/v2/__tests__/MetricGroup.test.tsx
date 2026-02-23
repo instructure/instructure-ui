@@ -28,7 +28,7 @@ import { vi } from 'vitest'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { MetricGroup } from '../index'
-import { Metric } from '@instructure/ui-metric/v11_6'
+import { Metric } from '@instructure/ui-metric/latest'
 
 describe('<MetricGroup />', () => {
   let consoleErrorMock: any
