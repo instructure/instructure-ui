@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { StarsInstUIIcon, renderIconWithProps } from '@instructure/ui-icons'
 

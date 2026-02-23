@@ -35,7 +35,7 @@ import {
   addEventListener,
   getCSSStyleDeclaration
 } from '@instructure/ui-dom-utils'
-import { FormField } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field/v11_5'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 

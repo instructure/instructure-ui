@@ -35,7 +35,7 @@ import {
   IconAiSolid,
   IconAiColoredSolid,
   IconXSolid
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 export default function ButtonPage() {
   const myElementRef = useRef<any>(null)

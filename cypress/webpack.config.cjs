@@ -40,8 +40,30 @@ function getWorkspaceAliases() {
         const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'))
         const pkgName = pkgJson.name
         if (pkgName && pkgName.startsWith('@instructure/')) {
-          // Alias package name to its source directory
-          aliases[pkgName] = pkgPath
+          // Alias subpath exports (e.g., './latest', './v11_6') to source files.
+          // This is needed because the base alias below overrides package.json
+          // exports resolution, so we must handle subpaths explicitly.
+          if (pkgJson.exports) {
+            Object.entries(pkgJson.exports).forEach(([subpath, target]) => {
+              if (subpath.includes('*')) return
+              const importPath = (typeof target === 'object' ? target.import : target) || ''
+              // Map built output path (./es/X.js) back to source (./src/X.ts)
+              const srcPath = importPath.replace(/^\.\/es\//, './src/').replace(/\.js$/, '.ts')
+              const resolved = path.join(pkgPath, srcPath)
+              if (fs.existsSync(resolved)) {
+                if (subpath === '.') {
+                  // Root export: alias the package name directly to the source entry
+                  aliases[`${pkgName}$`] = resolved
+                } else {
+                  aliases[`${pkgName}/${subpath.replace(/^\.\//, '')}`] = resolved
+                }
+              }
+            })
+          }
+          // Fallback: alias package name to its directory (for non-exports packages)
+          if (!aliases[`${pkgName}$`]) {
+            aliases[pkgName] = pkgPath
+          }
           // Also alias deep imports (e.g., '@instructure/ui-button/src/...')
           aliases[`${pkgName}/src`] = path.join(pkgPath, 'src')
         }

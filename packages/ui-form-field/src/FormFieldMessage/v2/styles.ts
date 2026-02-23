@@ -24,7 +24,7 @@
 
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { FormFieldMessageProps, FormFieldMessageStyle } from './props'
-import type { FormMessageType } from '@instructure/ui-form-field/latest'
+import type { FormMessageType } from '../../utils/v1/FormPropTypes'
 
 type StyleParams = {
   variant: FormFieldMessageProps['variant']

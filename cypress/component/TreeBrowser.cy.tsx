@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { TreeBrowser, TreeNode } from '@instructure/ui'
+import { TreeBrowser, TreeNode } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'
@@ -244,7 +244,7 @@ describe('<TreeBrowser/>', () => {
       .focus()
       .should('be.focused')
       .realType('{leftarrow}')
-      
+
     cy.contains('[role="treeitem"]', 'Root Directory').should('be.focused')
     cy.get('[role="treeitem"]').should('have.length', 1)
   })

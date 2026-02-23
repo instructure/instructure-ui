@@ -24,7 +24,7 @@
 
 import '../support/component'
 import 'cypress-real-events'
-import { Img } from '@instructure/ui'
+import { Img } from '@instructure/ui/latest'
 
 const HEIGHT = 32
 const WIDTH = 24

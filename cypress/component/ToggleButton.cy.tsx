@@ -25,7 +25,7 @@
 import 'cypress-real-events'
 
 import '../support/component'
-import { ToggleButton } from '@instructure/ui'
+import { ToggleButton } from '@instructure/ui/latest'
 
 describe('<ToggleButton/>', () => {
   const icon = (

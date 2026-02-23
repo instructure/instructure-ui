@@ -36,7 +36,7 @@ import {
   IconEndLine,
   IconCheckLine,
   AccessibleContent
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Metric = mc as any
 const MetricGroup = mcg as any

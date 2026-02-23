@@ -31,9 +31,9 @@ const alias = {
     import.meta.dirname,
     '../ui-a11y-content/src/'
   ),
-  '@instructure/ui-alerts$': path.resolve(import.meta.dirname, '../ui-alerts/src/'),
-  '@instructure/ui-avatar$': path.resolve(import.meta.dirname, '../ui-avatar/src/'),
-  '@instructure/ui-badge$': path.resolve(import.meta.dirname, '../ui-badge/src/exports/a/'),
+  '@instructure/ui-alerts$': path.resolve(import.meta.dirname, '../ui-alerts/src/exports/a'),
+  '@instructure/ui-avatar$': path.resolve(import.meta.dirname, '../ui-avatar/src/exports/a'),
+  '@instructure/ui-badge$': path.resolve(import.meta.dirname, '../ui-badge/src/exports/a'),
   '@instructure/ui-billboard$': path.resolve(
     import.meta.dirname,
     '../ui-billboard/src/exports/a'
@@ -42,21 +42,21 @@ const alias = {
     import.meta.dirname,
     '../ui-breadcrumb/src/exports/a'
   ),
-  '@instructure/ui-buttons$': path.resolve(import.meta.dirname, '../ui-buttons/src/'),
-  '@instructure/ui-byline$': path.resolve(import.meta.dirname, '../ui-byline/src/'),
+  '@instructure/ui-buttons$': path.resolve(import.meta.dirname, '../ui-buttons/src/exports/a'),
+  '@instructure/ui-byline$': path.resolve(import.meta.dirname, '../ui-byline/src/exports/a'),
   '@instructure/ui-calendar$': path.resolve(import.meta.dirname, '../ui-calendar/src/exports/a'),
-  '@instructure/ui-checkbox$': path.resolve(import.meta.dirname, '../ui-checkbox/src/'),
+  '@instructure/ui-checkbox$': path.resolve(import.meta.dirname, '../ui-checkbox/src/exports/a'),
   '@instructure/ui-color-picker$': path.resolve(
     import.meta.dirname,
-    '../ui-color-picker/src/'
+    '../ui-color-picker/src/exports/a'
   ),
   '@instructure/ui-date-input$': path.resolve(
     import.meta.dirname,
-    '../ui-date-input/src/'
+    '../ui-date-input/src/exports/a'
   ),
   '@instructure/ui-date-time-input$': path.resolve(
     import.meta.dirname,
-    '../ui-date-time-input/src/'
+    '../ui-date-time-input/src/exports/a'
   ),
   '@instructure/ui-decorator$': path.resolve(import.meta.dirname, '../ui-decorator/src/'),
   '@instructure/ui-dialog$': path.resolve(import.meta.dirname, '../ui-dialog/src/'),
@@ -66,13 +66,13 @@ const alias = {
   ),
   '@instructure/ui-drawer-layout$': path.resolve(
     import.meta.dirname,
-    '../ui-drawer-layout/src/'
+    '../ui-drawer-layout/src/exports/a'
   ),
   '@instructure/ui-drilldown$': path.resolve(
     import.meta.dirname,
-    '../ui-drilldown/src/'
+    '../ui-drilldown/src/exports/a'
   ),
-  '@instructure/ui-editable$': path.resolve(import.meta.dirname, '../ui-editable/src/'),
+  '@instructure/ui-editable$': path.resolve(import.meta.dirname, '../ui-editable/src/exports/a'),
   '@instructure/ui-expandable$': path.resolve(
     import.meta.dirname,
     '../ui-expandable/src/'
@@ -93,21 +93,21 @@ const alias = {
   '@instructure/ui-grid$': path.resolve(import.meta.dirname, '../ui-grid/src/exports/a'),
   '@instructure/ui-i18n$': path.resolve(import.meta.dirname, '../ui-i18n/src/'),
   '@instructure/ui-icons$': path.resolve(import.meta.dirname, '../ui-icons/src/'),
-  '@instructure/ui-img$': path.resolve(import.meta.dirname, '../ui-img/src/'),
-  '@instructure/ui-instructure$': path.resolve(import.meta.dirname, '../ui-instructure/src/'),
+  '@instructure/ui-img$': path.resolve(import.meta.dirname, '../ui-img/src/exports/a'),
+  '@instructure/ui-instructure$': path.resolve(import.meta.dirname, '../ui-instructure/src/exports/a'),
   '@instructure/ui-link$': path.resolve(import.meta.dirname, '../ui-link/src/exports/a'),
   '@instructure/ui-list$': path.resolve(import.meta.dirname, '../ui-list/src/exports/a'),
-  '@instructure/ui-menu$': path.resolve(import.meta.dirname, '../ui-menu/src/'),
+  '@instructure/ui-menu$': path.resolve(import.meta.dirname, '../ui-menu/src/exports/a'),
   '@instructure/ui-metric$': path.resolve(import.meta.dirname, '../ui-metric/src/exports/a'),
-  '@instructure/ui-modal$': path.resolve(import.meta.dirname, '../ui-modal/src/'),
+  '@instructure/ui-modal$': path.resolve(import.meta.dirname, '../ui-modal/src/exports/a'),
   '@instructure/ui-motion$': path.resolve(import.meta.dirname, '../ui-motion/src/'),
   '@instructure/ui-navigation$': path.resolve(
     import.meta.dirname,
-    '../ui-navigation/src/'
+    '../ui-navigation/src/exports/a'
   ),
   '@instructure/ui-number-input$': path.resolve(
     import.meta.dirname,
-    '../ui-number-input/src/'
+    '../ui-number-input/src/exports/a'
   ),
   '@instructure/ui-text-area$': path.resolve(
     import.meta.dirname,
@@ -118,12 +118,12 @@ const alias = {
     '../ui-text-input/src/exports/a'
   ),
   '@instructure/ui-options$': path.resolve(import.meta.dirname, '../ui-options/src/'),
-  '@instructure/ui-overlays$': path.resolve(import.meta.dirname, '../ui-overlays/src/'),
+  '@instructure/ui-overlays$': path.resolve(import.meta.dirname, '../ui-overlays/src/exports/a'),
   '@instructure/ui-pagination$': path.resolve(
     import.meta.dirname,
-    '../ui-pagination/src/'
+    '../ui-pagination/src/exports/a'
   ),
-  '@instructure/ui-pages$': path.resolve(import.meta.dirname, '../ui-pages/src/'),
+  '@instructure/ui-pages$': path.resolve(import.meta.dirname, '../ui-pages/src/exports/a'),
   '@instructure/ui-pill$': path.resolve(import.meta.dirname, '../ui-pill/src/exports/a/'),
   '@instructure/ui-popover$': path.resolve(import.meta.dirname, '../ui-popover/src/exports/a'),
   '@instructure/ui-position$': path.resolve(import.meta.dirname, '../ui-position/src/'),
@@ -131,29 +131,29 @@ const alias = {
   '@instructure/ui-progress$': path.resolve(import.meta.dirname, '../ui-progress/src/exports/a'),
   '@instructure/ui-radio-input$': path.resolve(
     import.meta.dirname,
-    '../ui-radio-input/src/'
+    '../ui-radio-input/src/exports/a'
   ),
   '@instructure/ui-range-input$': path.resolve(
     import.meta.dirname,
     '../ui-range-input/src/exports/a'
   ),
-  '@instructure/ui-rating$': path.resolve(import.meta.dirname, '../ui-rating/src/'),
+  '@instructure/ui-rating$': path.resolve(import.meta.dirname, '../ui-rating/src/exports/a'),
   '@instructure/ui-responsive$': path.resolve(
     import.meta.dirname,
-    '../ui-responsive/src/'
+    '../ui-responsive/src/exports/a'
   ),
-  '@instructure/ui-select$': path.resolve(import.meta.dirname, '../ui-select/src/'),
+  '@instructure/ui-select$': path.resolve(import.meta.dirname, '../ui-select/src/exports/a'),
   '@instructure/ui-selectable$': path.resolve(
     import.meta.dirname,
     '../ui-selectable/src/'
   ),
   '@instructure/ui-side-nav-bar$': path.resolve(
     import.meta.dirname,
-    '../ui-side-nav-bar/src/'
+    '../ui-side-nav-bar/src/exports/a'
   ),
   '@instructure/ui-simple-select$': path.resolve(
     import.meta.dirname,
-    '../ui-simple-select/src/'
+    '../ui-simple-select/src/exports/a'
   ),
   '@instructure/ui-source-code-editor$': path.resolve(
     import.meta.dirname,
@@ -170,11 +170,11 @@ const alias = {
   '@instructure/ui-text$': path.resolve(import.meta.dirname, '../ui-text/src/exports/a'),
   '@instructure/ui-time-select$': path.resolve(
     import.meta.dirname,
-    '../ui-time-select/src/'
+    '../ui-time-select/src/exports/a'
   ),
   '@instructure/ui-toggle-details$': path.resolve(
     import.meta.dirname,
-    '../ui-toggle-details/src/'
+    '../ui-toggle-details/src/exports/a'
   ),
   '@instructure/ui-tooltip$': path.resolve(import.meta.dirname, '../ui-tooltip/src/exports/a'),
   '@instructure/ui-top-nav-bar$': path.resolve(
@@ -192,7 +192,7 @@ const alias = {
   ),
   '@instructure/ui-truncate-text$': path.resolve(
     import.meta.dirname,
-    '../ui-truncate-text/src/'
+    '../ui-truncate-text/src/exports/a'
   ),
   '@instructure/ui-utils$': path.resolve(import.meta.dirname, '../ui-utils/src/'),
   '@instructure/ui-view$': path.resolve(import.meta.dirname, '../ui-view/src/exports/a'),

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Alert } from '@instructure/ui'
+import { Alert } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'
