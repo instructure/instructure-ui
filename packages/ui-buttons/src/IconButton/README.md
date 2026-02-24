@@ -78,11 +78,6 @@ type: example
       <XInstUIIcon />
     </IconButton>
   </View>
-  <View display="inline-block" background="primary-inverse">
-    <IconButton withBackground={false} withBorder={false} color="primary-inverse" screenReaderLabel="Delete tag" margin="large">
-      <XInstUIIcon />
-    </IconButton>
-  </View>
 </View>
 ```
 

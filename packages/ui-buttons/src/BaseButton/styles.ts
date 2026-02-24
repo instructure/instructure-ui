@@ -432,7 +432,10 @@ const generateStyle = (
           textDecoration: 'none' /* for links styled as buttons */,
           touchAction: 'manipulation',
           // This sets the focus ring's border radius displayed by the `View`
-          borderRadius: componentTheme.borderRadius,
+          borderRadius:
+            size === 'condensedSmall' || size === 'condensedMedium'
+              ? componentTheme.borderRadiusSm
+              : componentTheme.borderRadius,
           ...shapeVariants[shape!],
           // Prevents vertical stretching in flex parents with fixed height
           // Avoids background/focus ring distortion
@@ -526,11 +529,17 @@ const generateStyle = (
 
       ...(isCondensed && {
         paddingLeft: 0,
-        paddingRight: 0
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        minHeight: 'fit-content'
       }),
       ...((size === 'condensedSmall' || size === 'condensedMedium') && {
         background: 'transparent',
-        borderStyle: 'none'
+        borderStyle: 'none',
+        borderRadius: componentTheme.borderRadiusSm,
+        paddingTop: 0,
+        paddingBottom: 0
       }),
       ...(isDisabled && {
         ...colorVariants[color!].disabled,
