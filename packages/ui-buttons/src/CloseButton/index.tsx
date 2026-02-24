@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { IconXSolid } from '@instructure/ui-icons'
+import { XInstUIIcon } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
@@ -114,7 +114,7 @@ class CloseButton extends Component<CloseButtonProps> {
         }}
       >
         <BaseButton
-          renderIcon={IconXSolid}
+          renderIcon={XInstUIIcon}
           elementRef={this.handleRef}
           interaction={this.interaction}
           type={type}
