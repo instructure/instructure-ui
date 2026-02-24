@@ -41,6 +41,7 @@ import type {
   CheckboxGroupState,
   CheckboxChild
 } from './props'
+import { error } from '@instructure/console'
 
 /**
 ---
@@ -117,6 +118,10 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
 
     return Children.map(children, (child) => {
       if (matchComponentTypes<CheckboxChild>(child, [Checkbox])) {
+        error(
+          typeof child.props.onChange === 'undefined',
+          '[CheckboxGroup] When part of a CheckboxGroup, Checkbox components cannot have their own `onChange` prop.'
+        )
         return safeCloneElement(child, {
           key: `${child.props.name}`,
           name,
