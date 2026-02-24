@@ -32,7 +32,7 @@ type: example
 </View>
 ```
 
-If you need even more customization, note that you can always compose this component using the [IconButton](IconButton) directly. Supply the `renderIcon` prop with [IconXSolid](icons) and set the `withBorder` and `withBackground` props to `false`.
+If you need even more customization, note that you can always compose this component using the [IconButton](IconButton) directly. Supply the `renderIcon` prop with [XInstUIIcon](icons) and set the `withBorder` and `withBackground` props to `false`.
 
 ```js
 ---
@@ -43,7 +43,7 @@ type: example
     <Flex.Item>
       <IconButton
         screenReaderLabel="Close"
-        renderIcon={IconXSolid}
+        renderIcon={XInstUIIcon}
         size="small"
         withBackground={false}
         withBorder={false}
