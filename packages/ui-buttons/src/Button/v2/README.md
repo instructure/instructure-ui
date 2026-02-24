@@ -194,9 +194,6 @@ type: example
   <View display="inline-block" background="primary">
     <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary" margin="small">Click here</Button>
   </View>
-  <View display="inline-block" background="primary-inverse">
-    <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary-inverse" margin="small">Click here</Button>
-  </View>
 </View>
 ```
 
