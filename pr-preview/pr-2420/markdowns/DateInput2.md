@@ -19,8 +19,7 @@ type: example
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month',
-            datePickerDialog: 'Date picker'
+            prevMonthButton: 'Previous month'
           }}
           value={inputValue}
           width="20rem"
@@ -69,8 +68,7 @@ const Example = () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month',
-          datePickerDialog: 'Date picker'
+          prevMonthButton: 'Previous month'
         }}
         width="20rem"
         value={value}
@@ -83,8 +81,7 @@ const Example = () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month',
-          datePickerDialog: 'Date picker'
+          prevMonthButton: 'Previous month'
         }}
         width="20rem"
         value={value2}
@@ -98,8 +95,7 @@ const Example = () => {
         screenReaderLabels={{
           calendarIcon: 'Calendar',
           nextMonthButton: 'Next month',
-          prevMonthButton: 'Previous month',
-          datePickerDialog: 'Date picker'
+          prevMonthButton: 'Previous month'
         }}
         width="20rem"
         value={value3}
@@ -150,8 +146,7 @@ type: example
           screenReaderLabels={{
             calendarIcon: 'Calendar',
             nextMonthButton: 'Next month',
-            prevMonthButton: 'Previous month',
-            datePickerDialog: 'Date picker'
+            prevMonthButton: 'Previous month'
           }}
           value={inputValue}
           width="20rem"
@@ -220,8 +215,7 @@ const Example = () => {
       screenReaderLabels={{
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
-        prevMonthButton: 'Previous month',
-        datePickerDialog: 'Date picker'
+        prevMonthButton: 'Previous month'
       }}
       width="20rem"
       value={value}
@@ -262,8 +256,7 @@ const Example = () => {
       screenReaderLabels={{
         calendarIcon: 'Calendar',
         nextMonthButton: 'Next month',
-        prevMonthButton: 'Previous month',
-        datePickerDialog: 'Date picker'
+        prevMonthButton: 'Previous month'
       }}
       value={inputValue}
       locale="en-us"
@@ -286,7 +279,7 @@ render(<Example />)
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | DateInput2 | renderLabel | `Renderable` | Yes | - | Specifies the input label. |
-| DateInput2 | screenReaderLabels | `{ calendarIcon: string prevMonthButton: string nextMonthButton: string // TODO: Make this field required in the next version. Currently optional to avoid breaking change. datePickerDialog?: string }` | Yes | - | Accessible labels for the calendar button, month navigation buttons, and date picker dialog. |
+| DateInput2 | screenReaderLabels | `{ calendarIcon: string prevMonthButton: string nextMonthButton: string }` | Yes | - |  |
 | DateInput2 | value | `string` | No | - | Specifies the input value. |
 | DateInput2 | placeholder | `string` | No | - | Placeholder text for the input field. If it's left undefined it will display a hint for the date format (like `DD/MM/YYYY`). |
 | DateInput2 | onChange | `( event: React.SyntheticEvent, inputValue: string, utcDateString: string ) => void` | No | - | Callback fired when the input changes. |
