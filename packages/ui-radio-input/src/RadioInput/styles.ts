@@ -24,6 +24,7 @@
 
 import type { RadioInputProps, RadioInputStyle } from './props'
 import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 type StyleParams = {
@@ -51,8 +52,7 @@ const generateStyle = (
   params: StyleParams,
   sharedTokens: SharedTokens
 ): RadioInputStyle => {
-  const { disabled, inline, hovered, size, readOnly } = params
-  const variant = 'simple' // TODO read from params when the toggle variant is ready
+  const { disabled, inline, hovered, size, readOnly, variant, context } = params
 
   // 4*2 states: base, hover, disabled, readonly X none/selected
   const insetSizes = {
@@ -114,6 +114,17 @@ const generateStyle = (
 
   const inputColors = getInputColors()
 
+  const toggleContextBackgrounds: Record<
+    NonNullable<RadioInputProps['context']>,
+    string
+  > = {
+    success: componentTheme.toggleBackgroundSuccess,
+    warning: componentTheme.toggleBackgroundWarning,
+    danger: componentTheme.toggleBackgroundDanger,
+    off: componentTheme.toggleBackgroundOff
+  }
+  const toggleBackground = toggleContextBackgrounds[context ?? 'success']
+
   const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline)
   focusOutline.transition += ', box-shadow 0.2s'
 
@@ -157,6 +168,23 @@ const generateStyle = (
         width: componentTheme.controlSizeLg,
         height: componentTheme.controlSizeLg
       }
+    },
+    toggle: {
+      base: {
+        all: 'initial',
+        boxSizing: 'border-box',
+        // Visually hidden but accessible (screen reader, focus, keyboard)
+        position: 'absolute',
+        opacity: 0.0001 /* selenium cannot find fully transparent elements */,
+        width: '1px',
+        height: '1px',
+        overflow: 'hidden',
+        margin: 0,
+        padding: 0
+      },
+      small: {},
+      medium: {},
+      large: {}
     }
   }
 
@@ -175,9 +203,10 @@ const generateStyle = (
         fontSize: componentTheme.fontSizeLg,
         lineHeight: componentTheme.lineHeightLg
       }
-    }
-    /*toggle: {
+    },
+    toggle: {
       base: {
+        flex: '0 0 auto',
         position: 'relative',
         zIndex: 1,
         textTransform: 'uppercase',
@@ -187,18 +216,33 @@ const generateStyle = (
         lineHeight: 1,
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         minWidth: '0.0625rem',
-
-        [getInputStateSelector('checked')]: {
-          color: componentTheme.toggleHandleText
+        borderRadius: componentTheme.toggleBorderRadius,
+        borderWidth: componentTheme.toggleBorderWidth,
+        borderStyle: 'solid',
+        color: disabled ? componentTheme.labelDisabledColor : toggleBackground,
+        borderColor: disabled
+          ? componentTheme.borderDisabledColor
+          : toggleBackground,
+        background: 'transparent',
+        boxShadow: boxShadowObjectsToCSSString(componentTheme.toggleShadow),
+        'input:checked + &': {
+          color: disabled
+            ? componentTheme.labelDisabledColor
+            : componentTheme.toggleHandleText,
+          background: disabled
+            ? componentTheme.backgroundDisabledColor
+            : toggleBackground
         },
-        [getInputStateSelector('focus')]: {
+        'input:focus-visible + &': {
           textDecoration: 'underline'
         }
       },
       small: {
         fontSize: componentTheme.toggleSmallFontSize,
         height: componentTheme.toggleSmallHeight,
+        padding: '0 0.5rem',
         svg: {
           fontSize: `calc(${componentTheme.toggleSmallFontSize} + 0.375rem)`
         }
@@ -206,6 +250,7 @@ const generateStyle = (
       medium: {
         fontSize: componentTheme.toggleMediumFontSize,
         height: componentTheme.toggleMediumHeight,
+        padding: '0 0.875rem',
         svg: {
           fontSize: `calc(${componentTheme.toggleMediumFontSize} + 0.375rem)`
         }
@@ -213,11 +258,12 @@ const generateStyle = (
       large: {
         fontSize: componentTheme.toggleLargeFontSize,
         height: componentTheme.toggleLargeHeight,
+        padding: '0 1rem',
         svg: {
           fontSize: `calc(${componentTheme.toggleLargeFontSize} + 0.375rem)`
         }
       }
-    }*/
+    }
   }
 
   return {
