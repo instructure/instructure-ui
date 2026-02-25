@@ -57,6 +57,10 @@
     "textColorSelected": {
       "value": "{color.text.accent.ash}",
       "type": "color"
+    },
+    "fontSize": {
+      "value": "1.125rem",
+      "type": "fontSizes"
     }
   }
 }
