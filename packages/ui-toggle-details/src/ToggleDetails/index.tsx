@@ -25,16 +25,15 @@
 import { Component, createRef } from 'react'
 import { Button } from '@instructure/ui-buttons'
 import {
-  IconArrowOpenEndSolid,
-  IconArrowOpenDownSolid
+  ChevronRightInstUIIcon,
+  ChevronDownInstUIIcon
 } from '@instructure/ui-icons'
 import { Expandable } from '@instructure/ui-expandable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 import type { ToggleDetailsProps } from './props'
 import { allowedProps } from './props'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
@@ -45,7 +44,7 @@ import type { ViewProps } from '@instructure/ui-view'
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class ToggleDetails extends Component<ToggleDetailsProps> {
   static readonly componentId = 'ToggleDetails'
   static allowedProps = allowedProps
@@ -54,8 +53,8 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     variant: 'default',
     size: 'medium',
     fluidWidth: false,
-    icon: IconArrowOpenEndSolid,
-    iconExpanded: IconArrowOpenDownSolid,
+    icon: ChevronRightInstUIIcon,
+    iconExpanded: ChevronDownInstUIIcon,
     iconPosition: 'start',
     defaultExpanded: false,
     children: null
@@ -145,10 +144,13 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
 
   renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
+    const iconSize = this.props.size === 'large' ? 'lg' : 'md'
+    const iconColor =
+      this.props.variant === 'filled' ? 'actionSecondaryBaseColor' : 'baseColor'
 
     return this.props.children && Icon ? (
       <span css={this.props.styles?.icon}>
-        <Icon />
+        <Icon size={iconSize} color={iconColor} />
       </span>
     ) : null
   }
