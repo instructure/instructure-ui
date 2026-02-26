@@ -32,7 +32,6 @@ import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 
 import { ModalBody } from '../index'
-import generateComponentTheme from '../theme'
 
 const BODY_TEXT = 'Modal-body-text'
 
@@ -45,7 +44,7 @@ describe('<ModalBody />', () => {
   })
 
   it('should set inverse styles', async () => {
-    const themeVariables = generateComponentTheme(canvas)
+    const themeVariables = canvas.newTheme.components.ModalBody
     const { findByText } = render(
       <ModalBody variant="inverse">{BODY_TEXT}</ModalBody>
     )
@@ -56,7 +55,7 @@ describe('<ModalBody />', () => {
     )
 
     expect(modalBody).toBeInTheDocument()
-    expect(bodyBackground).toBe(themeVariables.inverseBackground)
+    expect(bodyBackground).toBe(themeVariables.inverseBackgroundColor)
   })
 
   it('should set the same width and height as the parent when overflow is set to fit', async () => {

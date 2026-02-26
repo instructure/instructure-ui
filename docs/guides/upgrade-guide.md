@@ -390,6 +390,80 @@ type: embed
 />
 
 ```
+### Modal
+
+#### Modal
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderWidth",note:""},
+    {name:"inverseBorderColor",note:""},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
+#### Modal Body
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"padding",note:""},
+    {name:"paddingCompact",note:""},
+  ]}
+  changed={[
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
+#### Modal Footer
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingCompact",note:""},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
+#### Modal Header
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderWith",note:""},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
 
 ### NumberInput
 

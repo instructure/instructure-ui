@@ -135,7 +135,7 @@ const Example = () => {
           </View>
           <ModalAutoCompleteExample renderLabel="Choose a state" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button onClick={handleButtonClick} margin="0 x-small 0 0">
             Close
           </Button>
@@ -240,7 +240,7 @@ const Example = () => {
         <Modal.Header>
           <Flex>
             <Flex.Item shouldGrow shouldShrink>
-              <Heading level="h2">
+              <Heading color="inverse" level="h2">
                 <TruncateText>A small image</TruncateText>
               </Heading>
             </Flex.Item>
@@ -262,7 +262,7 @@ const Example = () => {
             margin="0 auto"
           />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing="compact">
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -359,14 +359,10 @@ const Example = () => {
             <Flex.Item shouldGrow shouldShrink>
               <Flex alignItems="center">
                 <Flex.Item margin="0 x-small 0 0">
-                  <SVGIcon
-                    src={iconExample}
-                    size="small"
-                    title="Icon Example"
-                  />
+                  <HeartInstUIIcon size={'xl'} />
                 </Flex.Item>
                 <Flex.Item shouldGrow shouldShrink>
-                  <Heading level="h2">
+                  <Heading color="inverse" level="h2">
                     <TruncateText>This Modal Contains Media</TruncateText>
                   </Heading>
                 </Flex.Item>
@@ -377,7 +373,7 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconPrinterSolid}
+                renderIcon={<PrinterInstUIIcon/>}
                 screenReaderLabel="Print This Image"
                 margin="0 x-small 0 0"
               />
@@ -385,7 +381,7 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconDownloadSolid}
+                renderIcon={<DownloadInstUIIcon/>}
                 screenReaderLabel="Download This Image"
                 margin="0 x-small 0 0"
               />
@@ -393,7 +389,7 @@ const Example = () => {
                 color="primary-inverse"
                 withBackground={false}
                 withBorder={false}
-                renderIcon={IconXSolid}
+                renderIcon={<XInstUIIcon/>}
                 screenReaderLabel="Close"
                 onClick={handleButtonClick}
               />
@@ -403,7 +399,7 @@ const Example = () => {
         <Modal.Body padding="none">
           <Img src={avatarSquare} constrain={imageFit} display="block" />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={modalSize === 'small' ? 'compact' : 'default'}>
           <Button
             onClick={handleButtonClick}
             withBackground={false}
@@ -493,7 +489,7 @@ const Example = () => {
             <Text>{fpo}</Text>
           </View>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer spacing={smallViewport ? 'compact' : 'default'}>
           <Button onClick={toggleOpen} margin="0 x-small 0 0">
             Close
           </Button>
@@ -575,11 +571,11 @@ class Example extends React.Component {
         >
           <Modal.Header>
             {this.renderCloseButton()}
-            <Heading>This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
+            <Heading color="inverse">This is a Modal with a Modal.Body wrapped in to a HOC</Heading>
           </Modal.Header>
           <WrappedModalBody>
-            <Heading level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
-            <Text lineHeight="double">{lorem.paragraphs(5)}</Text>
+            <Heading color="inverse" level='h3'>WrappedModalBody inherits the variant and overflow properties automatically</Heading>
+            <Text color="inverse" lineHeight="double">{lorem.paragraphs(5)}</Text>
           </WrappedModalBody>
           <View
             as="div"

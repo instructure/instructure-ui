@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ModalBodyTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ModalBodyProps, ModalBodyStyle } from './props'
 
 /**
@@ -32,19 +32,25 @@ import type { ModalBodyProps, ModalBodyStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ModalBodyTheme,
+  componentTheme: NewComponentTypes['ModalBody'],
   props: ModalBodyProps
 ): ModalBodyStyle => {
-  const { variant } = props
+  const { variant, spacing } = props
+
+  const sizeVariants = {
+    default: { padding: componentTheme.padding },
+    compact: { padding: componentTheme.paddingCompact }
+  }
 
   const backgroundStyle =
     variant === 'inverse'
       ? {
-          background: componentTheme.inverseBackground
+          background: componentTheme.inverseBackgroundColor
         }
       : {}
 
@@ -60,6 +66,7 @@ const generateStyle = (
       '@media (min-height: 20rem)': {
         overflowY: 'auto'
       },
+      ...(spacing ? sizeVariants[spacing] : {}),
       ...backgroundStyle
     }
   }

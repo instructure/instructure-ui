@@ -28,9 +28,8 @@ import { View } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ModalBodyProps } from './props'
@@ -42,7 +41,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'ModalBody')
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
@@ -105,8 +104,16 @@ class ModalBody extends Component<ModalBodyProps> {
   }
 
   render() {
-    const { as, elementRef, overflow, variant, padding, children, ...rest } =
-      this.props
+    const {
+      as,
+      elementRef,
+      overflow,
+      variant,
+      padding,
+      spacing,
+      children,
+      ...rest
+    } = this.props
 
     const passthroughProps = View.omitViewProps(
       omitProps(rest, ModalBody.allowedProps),
@@ -128,7 +135,7 @@ class ModalBody extends Component<ModalBodyProps> {
         elementRef={this.handleRef}
         as={as}
         css={this.props.styles?.modalBody}
-        padding={padding}
+        padding={spacing ? undefined : padding}
         // check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
         // epsilon tolerance is used to avoid scrollbar for rounding errors
         {...(finalRef &&

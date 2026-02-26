@@ -29,7 +29,6 @@ import canvas from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
 
 import { ModalFooter } from '../index'
-import generateComponentTheme from '../theme'
 
 const FOOTER_TEXT = 'Modal-footer-text'
 
@@ -42,7 +41,7 @@ describe('<ModalFooter />', () => {
   })
 
   it('should set inverse styles', async () => {
-    const themeVariables = generateComponentTheme(canvas)
+    const themeVariables = canvas.newTheme.components.ModalFooter
     const { findByText } = render(
       <ModalFooter variant="inverse">{FOOTER_TEXT}</ModalFooter>
     )
@@ -57,7 +56,7 @@ describe('<ModalFooter />', () => {
     )
 
     expect(modalFooter).toBeInTheDocument()
-    expect(footerBackground).toBe(themeVariables.inverseBackground)
+    expect(footerBackground).toBe(themeVariables.inverseBackgroundColor)
     expect(footerBorderColor).toBe(themeVariables.inverseBorderColor)
   })
 })

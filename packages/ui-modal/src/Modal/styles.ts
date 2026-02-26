@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import type { ModalTheme } from '@instructure/shared-types'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { ModalProps, ModalStyle } from './props'
 
 /**
@@ -32,11 +33,12 @@ import type { ModalProps, ModalStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ModalTheme,
+  componentTheme: NewComponentTypes['Modal'],
   props: ModalProps
 ): ModalStyle => {
   const { size, variant, overflow } = props
@@ -79,11 +81,13 @@ const generateStyle = (
   const backgroundStyles =
     variant === 'inverse'
       ? {
-          background: componentTheme.inverseBackground,
+          background: componentTheme.inverseBackgroundColor,
+          border: `${componentTheme.borderWidth} solid ${componentTheme.inverseBorderColor}`,
           color: componentTheme.inverseTextColor
         }
       : {
-          background: componentTheme.background,
+          background: componentTheme.backgroundColor,
+          border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
           color: componentTheme.textColor
         }
 
@@ -96,8 +100,7 @@ const generateStyle = (
       flexDirection: 'column',
       position: 'relative',
       boxSizing: 'border-box',
-      boxShadow: componentTheme.boxShadow,
-      border: `0.0625rem solid ${componentTheme.borderColor}`,
+      boxShadow: boxShadowObjectsToCSSString(componentTheme.boxShadow),
       borderRadius: componentTheme.borderRadius,
       ...sizeStyles[size!],
       ...backgroundStyles

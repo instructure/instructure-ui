@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { ModalHeaderTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   ModalHeaderProps,
   ModalHeaderStyleProps,
@@ -36,12 +36,14 @@ import type {
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} _sharedTokens Shared theme token object (unused)
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ModalHeaderTheme,
+  componentTheme: NewComponentTypes['ModalHeader'],
   props: ModalHeaderProps,
+  _sharedTokens: SharedTokens,
   state: ModalHeaderStyleProps
 ): ModalHeaderStyle => {
   const { variant, spacing } = props
@@ -67,7 +69,7 @@ const generateStyle = (
   const inverseStyle =
     variant === 'inverse'
       ? {
-          background: componentTheme.inverseBackground,
+          background: componentTheme.inverseBackgroundColor,
           borderBottomColor: componentTheme.inverseBorderColor
         }
       : {}
@@ -79,8 +81,8 @@ const generateStyle = (
       label: 'modalHeader',
       boxSizing: 'border-box',
       flex: '0 0 auto',
-      background: componentTheme.background,
-      borderBottomWidth: '0.0625rem',
+      background: componentTheme.backgroundColor,
+      borderBottomWidth: componentTheme.borderWidth,
       borderBottomStyle: 'solid',
       borderBottomColor: componentTheme.borderColor,
       ...sizeVariants[spacing!],
