@@ -22,29 +22,18 @@
  * SOFTWARE.
  */
 
-import type { BaseButtonTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   BaseButtonProps,
   BaseButtonStyleProps,
   BaseButtonStyle
 } from './props'
 
-import { darken, lighten } from '@instructure/ui-color-utils'
-
-/**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
 const generateStyle = (
-  componentTheme: BaseButtonTheme,
-  props: BaseButtonProps,
-  state: BaseButtonStyleProps
+  componentTheme: NewComponentTypes['BaseButton'],
+  params: BaseButtonProps,
+  _sharedTokens: SharedTokens,
+  extraArgs: BaseButtonStyleProps
 ): BaseButtonStyle => {
   const {
     size,
@@ -54,9 +43,17 @@ const generateStyle = (
     withBackground,
     withBorder,
     isCondensed
-  } = props
+  } = params
 
-  const { isDisabled, hasOnlyIconVisible, isEnabled } = state
+  const { isDisabled, hasOnlyIconVisible, isEnabled } = extraArgs
+
+  const gapForSize = {
+    small: componentTheme.gapButtonContentSm,
+    medium: componentTheme.gapButtonContentMd,
+    large: componentTheme.gapButtonContentLg,
+    condensedSmall: componentTheme.gapButtonContentSm,
+    condensedMedium: componentTheme.gapButtonContentSm
+  }
 
   const shapeVariants = {
     circle: { borderRadius: '50%' },
@@ -69,21 +66,12 @@ const generateStyle = (
         fontSize: componentTheme.smallFontSize,
         paddingLeft: componentTheme.smallPaddingHorizontal,
         paddingRight: componentTheme.smallPaddingHorizontal,
+        minHeight: componentTheme.smallHeight,
         ...(hasOnlyIconVisible && {
           paddingLeft: 0,
           paddingRight: 0,
-          height: componentTheme.smallHeight,
           width: componentTheme.smallHeight
         })
-      },
-      children: {
-        paddingTop: componentTheme.smallPaddingTop,
-        paddingBottom: componentTheme.smallPaddingBottom
-      },
-      iconSVG: {
-        fontSize: isCondensed
-          ? componentTheme.smallFontSize
-          : componentTheme.iconSizeSmall
       }
     },
     medium: {
@@ -91,21 +79,12 @@ const generateStyle = (
         fontSize: componentTheme.mediumFontSize,
         paddingLeft: componentTheme.mediumPaddingHorizontal,
         paddingRight: componentTheme.mediumPaddingHorizontal,
+        minHeight: componentTheme.mediumHeight,
         ...(hasOnlyIconVisible && {
           paddingLeft: 0,
           paddingRight: 0,
-          height: componentTheme.mediumHeight,
           width: componentTheme.mediumHeight
         })
-      },
-      children: {
-        paddingTop: componentTheme.mediumPaddingTop,
-        paddingBottom: componentTheme.mediumPaddingBottom
-      },
-      iconSVG: {
-        fontSize: isCondensed
-          ? componentTheme.mediumFontSize
-          : componentTheme.iconSizeMedium
       }
     },
     large: {
@@ -113,21 +92,38 @@ const generateStyle = (
         fontSize: componentTheme.largeFontSize,
         paddingLeft: componentTheme.largePaddingHorizontal,
         paddingRight: componentTheme.largePaddingHorizontal,
+        minHeight: componentTheme.largeHeight,
         ...(hasOnlyIconVisible && {
           paddingLeft: 0,
           paddingRight: 0,
-          height: componentTheme.largeHeight,
           width: componentTheme.largeHeight
         })
-      },
-      children: {
-        paddingTop: componentTheme.largePaddingTop,
-        paddingBottom: componentTheme.largePaddingBottom
-      },
-      iconSVG: {
-        fontSize: isCondensed
-          ? componentTheme.largeFontSize
-          : componentTheme.iconSizeLarge
+      }
+    },
+    condensedSmall: {
+      content: {
+        fontSize: componentTheme.smallFontSize,
+        paddingLeft: componentTheme.smallPaddingHorizontal,
+        paddingRight: componentTheme.smallPaddingHorizontal,
+        height: componentTheme.heightXxs,
+        ...(hasOnlyIconVisible && {
+          paddingLeft: 0,
+          paddingRight: 0,
+          width: componentTheme.heightXxs
+        })
+      }
+    },
+    condensedMedium: {
+      content: {
+        fontSize: componentTheme.smallFontSize,
+        paddingLeft: componentTheme.smallPaddingHorizontal,
+        paddingRight: componentTheme.smallPaddingHorizontal,
+        height: componentTheme.heightXs,
+        ...(hasOnlyIconVisible && {
+          paddingLeft: 0,
+          paddingRight: 0,
+          width: componentTheme.heightXs
+        })
       }
     }
   }
@@ -135,7 +131,7 @@ const generateStyle = (
   const colorVariants = {
     'ai-primary': {
       default: {
-        color: componentTheme.primaryColor,
+        color: componentTheme.aiBaseTextColor,
         background: `
         linear-gradient(to bottom,  ${componentTheme.aiBackgroundTopGradientColor} 0%, ${componentTheme.aiBackgroundBottomGradientColor} 100%) padding-box,
         linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%) border-box`,
@@ -143,42 +139,44 @@ const generateStyle = (
         borderColor: 'transparent',
         boxShadow: componentTheme.primaryBoxShadow
       },
-      active: {},
-      hover: {
+      active: {
         background: `
-          linear-gradient(to bottom, ${darken(
-            componentTheme.aiBackgroundTopGradientColor,
-            10
-          )} 0%, ${darken(
-          componentTheme.aiBackgroundBottomGradientColor,
-          10
-        )} 100%) padding-box,
-  linear-gradient(to bottom, ${darken(
-    componentTheme.aiBorderTopGradientColor,
-    10
-  )} 0%, ${darken(
-          componentTheme.aiBorderBottomGradientColor,
-          10
-        )} 100%) border-box`,
+        linear-gradient(to bottom, ${componentTheme.aiActiveBackgroundTopGradientColor} 0%, ${componentTheme.aiActiveBackgroundBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom, ${componentTheme.aiActiveBorderTopGradientColor} 0%, ${componentTheme.aiActiveBorderBottomGradientColor} 100%) border-box`,
         borderStyle: 'solid',
         borderColor: 'transparent',
+        color: componentTheme.aiActiveTextColor
+      },
+      hover: {
+        background: `
+        linear-gradient(to bottom, ${componentTheme.aiHoverBackgroundTopGradientColor} 0%, ${componentTheme.aiHoverBackgroundBottomGradientColor} 100%) padding-box,
+        linear-gradient(to bottom, ${componentTheme.aiHoverBorderTopGradientColor} 0%, ${componentTheme.aiHoverBorderBottomGradientColor} 100%) border-box`,
+        borderStyle: 'solid',
+        borderColor: 'transparent',
+        color: componentTheme.aiHoverTextColor,
         boxShadow: componentTheme.primaryHoverBoxShadow
+      },
+      disabled: {
+        background: componentTheme.aiDisabledBackgroundColor,
+        borderColor: componentTheme.aiDisabledBorderColor,
+        color: componentTheme.aiDisabledTextColor
       }
     },
     'ai-secondary': {
       default: {
         boxShadow: componentTheme.primaryBoxShadow
       },
-      active: {},
+      active: {
+        background: `
+        linear-gradient(to bottom, ${componentTheme.aiSecondaryActiveBackgroundTopGradientColor} 0%, ${componentTheme.aiSecondaryActiveBackgroundBottomGradientColor} 100%)`
+      },
       hover: {
         background: `
-        linear-gradient(to bottom, ${lighten(
-          componentTheme.aiBackgroundTopGradientColor,
-          70
-        )} 0%, ${lighten(
-          componentTheme.aiBackgroundBottomGradientColor,
-          70
-        )} 100%)`
+        linear-gradient(to bottom, ${componentTheme.aiSecondaryHoverBackgroundTopGradientColor} 0%, ${componentTheme.aiSecondaryHoverBackgroundBottomGradientColor} 100%)`
+      },
+      disabled: {
+        borderColor: componentTheme.aiSecondaryDisabledBorderColor,
+        color: componentTheme.aiSecondaryDisabledTextColor
       }
     },
     primary: withBackground
@@ -191,11 +189,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.primaryActiveBackground,
-            boxShadow: componentTheme.primaryActiveBoxShadow
+            color: componentTheme.primaryActiveTextColor,
+            borderColor: componentTheme.primaryActiveBorderColor
           },
           hover: {
             background: componentTheme.primaryHoverBackground,
-            boxShadow: componentTheme.primaryHoverBoxShadow
+            boxShadow: componentTheme.primaryHoverBoxShadow,
+            color: componentTheme.primaryHoverTextColor,
+            borderColor: componentTheme.primaryHoverBorderColor
+          },
+          disabled: {
+            background: componentTheme.primaryDisabledBackgroundColor,
+            borderColor: componentTheme.primaryDisabledBorderColor,
+            color: componentTheme.primaryDisabledTextColor
           }
         }
       : {
@@ -207,11 +213,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.primaryGhostActiveBackground,
-            boxShadow: componentTheme.primaryGhostActiveBoxShadow
+            color: componentTheme.tertiaryActiveTextColor,
+            borderColor: componentTheme.tertiaryActiveBorderColor
           },
           hover: {
             background: componentTheme.primaryGhostHoverBackground,
-            boxShadow: componentTheme.primaryHoverBoxShadow
+            boxShadow: componentTheme.primaryHoverBoxShadow,
+            color: componentTheme.tertiaryHoverTextColor,
+            borderColor: componentTheme.tertiaryHoverBorderColor
+          },
+          disabled: {
+            background: 'transparent',
+            borderColor: componentTheme.tertiaryDisabledBorderColor,
+            color: componentTheme.tertiaryDisabledTextColor
           }
         },
 
@@ -225,11 +239,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.secondaryActiveBackground,
-            boxShadow: componentTheme.secondaryActiveBoxShadow
+            color: componentTheme.secondaryActiveTextColor,
+            borderColor: componentTheme.secondaryActiveBorderColor
           },
           hover: {
             background: componentTheme.secondaryHoverBackground,
-            boxShadow: componentTheme.secondaryHoverBoxShadow
+            boxShadow: componentTheme.secondaryHoverBoxShadow,
+            color: componentTheme.secondaryHoverTextColor,
+            borderColor: componentTheme.secondaryHoverBorderColor
+          },
+          disabled: {
+            background: componentTheme.secondaryDisabledBackgroundColor,
+            borderColor: componentTheme.secondaryDisabledBorderColor,
+            color: componentTheme.secondaryDisabledTextColor
           }
         }
       : {
@@ -241,11 +263,13 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.secondaryGhostActiveBackground,
-            boxShadow: componentTheme.secondaryGhostActiveBoxShadow
           },
           hover: {
             background: componentTheme.secondaryGhostHoverBackground,
             boxShadow: componentTheme.secondaryGhostHoverBoxShadow
+          },
+          disabled: {
+            background: 'transparent'
           }
         },
 
@@ -259,11 +283,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.primaryInverseActiveBackground,
-            boxShadow: componentTheme.primaryInverseActiveBoxShadow
+            color: componentTheme.primaryOnColorActiveTextColor,
+            borderColor: componentTheme.primaryOnColorActiveBorderColor
           },
           hover: {
             background: componentTheme.primaryInverseHoverBackground,
-            boxShadow: componentTheme.primaryInverseHoverBoxShadow
+            boxShadow: componentTheme.primaryInverseHoverBoxShadow,
+            color: componentTheme.primaryOnColorHoverTextColor,
+            borderColor: componentTheme.primaryOnColorHoverBorderColor
+          },
+          disabled: {
+            background: componentTheme.primaryOnColorDisabledBackgroundColor,
+            borderColor: componentTheme.primaryOnColorDisabledBorderColor,
+            color: componentTheme.primaryOnColorDisabledTextColor
           }
         }
       : {
@@ -275,11 +307,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.primaryInverseGhostActiveBackground,
-            boxShadow: componentTheme.primaryInverseGhostActiveBoxShadow
+            color: componentTheme.secondaryOnColorActiveTextColor,
+            borderColor: componentTheme.secondaryOnColorActiveBorderColor
           },
           hover: {
             background: componentTheme.primaryInverseGhostHoverBackground,
-            boxShadow: componentTheme.primaryInverseGhostHoverBoxShadow
+            boxShadow: componentTheme.primaryInverseGhostHoverBoxShadow,
+            color: componentTheme.secondaryOnColorHoverTextColor,
+            borderColor: componentTheme.secondaryOnColorHoverBorderColor
+          },
+          disabled: {
+            background: 'transparent',
+            borderColor: componentTheme.secondaryOnColorDisabledBorderColor,
+            color: componentTheme.secondaryOnColorDisabledTextColor
           }
         },
 
@@ -293,11 +333,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.successActiveBackground,
-            boxShadow: componentTheme.successActiveBoxShadow
+            color: componentTheme.successActiveTextColor,
+            borderColor: componentTheme.successActiveBorderColor
           },
           hover: {
             background: componentTheme.successHoverBackground,
-            boxShadow: componentTheme.successHoverBoxShadow
+            boxShadow: componentTheme.successHoverBoxShadow,
+            color: componentTheme.successHoverTextColor,
+            borderColor: componentTheme.successHoverBorderColor
+          },
+          disabled: {
+            background: componentTheme.successDisabledBackgroundColor,
+            borderColor: componentTheme.successDisabledBorderColor,
+            color: componentTheme.successDisabledTextColor
           }
         }
       : {
@@ -309,11 +357,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.successGhostActiveBackground,
-            boxShadow: componentTheme.successGhostActiveBoxShadow
+            color: componentTheme.successSecondaryActiveTextColor,
+            borderColor: componentTheme.successSecondaryActiveBorderColor
           },
           hover: {
             background: componentTheme.successGhostHoverBackground,
-            boxShadow: componentTheme.successGhostHoverBoxShadow
+            boxShadow: componentTheme.successGhostHoverBoxShadow,
+            color: componentTheme.successSecondaryHoverTextColor,
+            borderColor: componentTheme.successSecondaryHoverBorderColor
+          },
+          disabled: {
+            background: 'transparent',
+            borderColor: componentTheme.successSecondaryDisabledBorderColor,
+            color: componentTheme.successSecondaryDisabledTextColor
           }
         },
 
@@ -327,11 +383,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.dangerActiveBackground,
-            boxShadow: componentTheme.dangerActiveBoxShadow
+            color: componentTheme.destructiveActiveTextColor,
+            borderColor: componentTheme.destructiveActiveBorderColor
           },
           hover: {
             background: componentTheme.dangerHoverBackground,
-            boxShadow: componentTheme.dangerHoverBoxShadow
+            boxShadow: componentTheme.dangerHoverBoxShadow,
+            color: componentTheme.destructiveHoverTextColor,
+            borderColor: componentTheme.destructiveHoverBorderColor
+          },
+          disabled: {
+            background: componentTheme.destructiveDisabledBackgroundColor,
+            borderColor: componentTheme.destructiveDisabledBorderColor,
+            color: componentTheme.destructiveDisabledTextColor
           }
         }
       : {
@@ -343,11 +407,19 @@ const generateStyle = (
           },
           active: {
             background: componentTheme.dangerGhostActiveBackground,
-            boxShadow: componentTheme.dangerGhostActiveBoxShadow
+            color: componentTheme.destructiveSecondaryActiveTextColor,
+            borderColor: componentTheme.destructiveSecondaryActiveBorderColor
           },
           hover: {
             background: componentTheme.dangerGhostHoverBackground,
-            boxShadow: componentTheme.dangerGhostHoverBoxShadow
+            boxShadow: componentTheme.dangerGhostHoverBoxShadow,
+            color: componentTheme.destructiveSecondaryHoverTextColor,
+            borderColor: componentTheme.destructiveSecondaryHoverBorderColor
+          },
+          disabled: {
+            background: 'transparent',
+            borderColor: componentTheme.destructiveSecondaryDisabledBorderColor,
+            color: componentTheme.destructiveSecondaryDisabledTextColor
           }
         }
   }
@@ -376,23 +448,35 @@ const generateStyle = (
           '&:focus': {
             textDecoration: 'none'
           },
-          '&:active > [class$=-baseButton__content]':
-            colorVariants[color!].active,
           '&:hover > [class$=-baseButton__content]':
             colorVariants[color!].hover,
+          '&:active > [class$=-baseButton__content]':
+            colorVariants[color!].active,
 
           //TODO not the greatest solution. Must be stronger than the same &&& enforcement of <View>
           ...(color === 'ai-secondary'
             ? {
                 '&&&&&&&&&&': {
-                  background: `
-               linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
                   padding: componentTheme.borderWidth,
                   ...(shape !== 'circle'
                     ? {
                         borderRadius: `calc(${componentTheme.borderRadius} + ${componentTheme.borderWidth})`
                       }
-                    : { borderRadius: '50%' })
+                    : { borderRadius: '50%' }),
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    inset: '0',
+                    borderRadius: 'inherit',
+                    padding: componentTheme.borderWidth,
+                    background: `linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
+                    WebkitMask:
+                      'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    maskComposite: 'exclude',
+                    pointerEvents: 'none'
+                  }
                 }
               }
             : {})
@@ -406,7 +490,8 @@ const generateStyle = (
       label: 'baseButton__content',
       boxSizing: 'border-box',
       width: '100%',
-      display: 'block',
+      display: 'flex',
+      alignItems: 'center',
       direction: 'inherit',
       userSelect: 'none',
       transition: 'background 0.2s, transform 0.2s',
@@ -427,10 +512,13 @@ const generateStyle = (
       ...(color === 'ai-secondary'
         ? {
             border: 'none',
-            background: 'white',
+            background: 'transparent',
             transition: 'none'
           }
         : {}),
+
+      paddingTop: componentTheme.paddingVertical,
+      paddingBottom: componentTheme.paddingVertical,
 
       ...sizeVariants[size!].content,
       ...colorVariants[color!].default,
@@ -440,8 +528,13 @@ const generateStyle = (
         paddingLeft: 0,
         paddingRight: 0
       }),
+      ...((size === 'condensedSmall' || size === 'condensedMedium') && {
+        background: 'transparent',
+        borderStyle: 'none'
+      }),
       ...(isDisabled && {
-        opacity: 0.5
+        ...colorVariants[color!].disabled,
+        opacity: componentTheme.opacityDisabled
       }),
       ...(hasOnlyIconVisible && {
         lineHeight: 1
@@ -454,8 +547,7 @@ const generateStyle = (
     children: {
       label: 'baseButton__children',
       display: 'block',
-
-      ...sizeVariants[size!].children,
+      minWidth: 0,
 
       ...(isCondensed && {
         paddingTop: 0,
@@ -463,10 +555,16 @@ const generateStyle = (
       }),
       ...(color === 'ai-secondary'
         ? {
-            background: `
-        linear-gradient(to bottom, ${componentTheme.aiBorderTopGradientColor} 0%, ${componentTheme.aiBorderBottomGradientColor} 100%)`,
-            backgroundClip: 'text',
-            color: 'transparent'
+            ...(isDisabled
+              ? {
+                  color: componentTheme.aiSecondaryDisabledTextColor
+                }
+              : {
+                  background: `
+        linear-gradient(to bottom, ${componentTheme.aiSecondaryTextTopGradientColor} 0%, ${componentTheme.aiSecondaryTextBottomGradientColor} 100%)`,
+                  backgroundClip: 'text',
+                  color: 'transparent'
+                })
           }
         : {})
     },
@@ -474,9 +572,7 @@ const generateStyle = (
     iconSVG: {
       label: 'baseButton__iconSVG',
       display: 'flex',
-      alignItems: 'center',
-
-      ...sizeVariants[size!].iconSVG
+      alignItems: 'center'
     },
 
     childrenLayout: {
@@ -510,9 +606,7 @@ const generateStyle = (
       label: 'baseButton__iconWrapper',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
-      paddingInlineEnd: isCondensed
-        ? componentTheme.iconTextGapCondensed
-        : componentTheme.iconTextGap,
+      paddingInlineEnd: gapForSize[size!],
       flexShrink: 0,
       maxWidth: '100%',
       overflowX: 'visible',

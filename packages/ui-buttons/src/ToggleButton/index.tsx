@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
@@ -122,9 +122,8 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           interaction={interaction}
           aria-pressed={status === 'pressed'}
           data-cid="ToggleButton"
-        >
-          {callRenderProp(renderIcon)}
-        </IconButton>
+          renderIcon={renderIcon}
+        />
       </Tooltip>
     )
   }

@@ -28,11 +28,11 @@ import keycode from 'keycode'
 import {
   getElementType,
   getInteraction,
-  passthroughProps,
-  callRenderProp
+  passthroughProps
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
+import { renderIconWithProps } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 
@@ -41,21 +41,37 @@ import type { ViewProps } from '@instructure/ui-view'
 import { isSafari } from '@instructure/ui-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyles from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { BaseButtonProps, BaseButtonStyleProps } from './props'
+
+const buttonSizeToIconSize = {
+  small: 'sm',
+  medium: 'md',
+  large: 'lg',
+  condensedSmall: 'xs',
+  condensedMedium: 'xs'
+} as const
+
+const buttonColorToIconColor = {
+  'primary': 'inherit',
+  'primary-inverse': 'inherit',
+  'secondary': 'inherit',
+  'success': 'inherit',
+  'danger': 'inherit',
+  'ai-primary': 'inherit',
+  'ai-secondary': 'ai'
+} as const
 
 /**
 ---
 category: components/utilities
 ---
 **/
-
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles)
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 
@@ -201,7 +217,7 @@ class BaseButton extends Component<BaseButtonProps> {
   }
 
   renderChildren() {
-    const { renderIcon, children, styles } = this.props
+    const { renderIcon, children, styles, size, color } = this.props
 
     const wrappedChildren = <span css={styles?.children}>{children}</span>
 
@@ -210,8 +226,12 @@ class BaseButton extends Component<BaseButtonProps> {
     }
 
     const { hasOnlyIconVisible } = this
+    const iconSize = buttonSizeToIconSize[size!]
+    const iconColor = buttonColorToIconColor[color!]
     const wrappedIcon = (
-      <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
+      <span css={styles?.iconSVG}>
+        {renderIconWithProps(renderIcon, iconSize, iconColor)}
+      </span>
     )
 
     const flexChildren = hasOnlyIconVisible ? (

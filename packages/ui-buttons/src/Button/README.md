@@ -39,12 +39,12 @@ There is a specific need for `AI buttons`, which has an icon and gradient colors
 type: example
 ---
 <View display="block">
-  <Button color="ai-primary" renderIcon={IconAiSolid} margin="small">AI Primary</Button>
-  <Button color="ai-secondary" renderIcon={IconAiColoredSolid} margin="small">AI Secondary</Button>
-  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
-  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
-  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><IconAiSolid/></IconButton>
-  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><IconAiColoredSolid/></IconButton>
+  <Button color="ai-primary" renderIcon={SparklesInstUIIcon} margin="small">AI Primary</Button>
+  <Button color="ai-secondary" renderIcon={SparklesInstUIIcon} margin="small">AI Secondary</Button>
+  <IconButton color="ai-primary" screenReaderLabel="AI button" margin="small"><SparklesInstUIIcon/></IconButton>
+  <IconButton  shape='circle' color="ai-secondary" screenReaderLabel="AI button"  margin="small"><SparklesInstUIIcon/></IconButton>
+  <IconButton   shape='circle' color="ai-primary" screenReaderLabel="AI button" margin="small"><SparklesInstUIIcon/></IconButton>
+  <IconButton color="ai-secondary" screenReaderLabel="AI button"  margin="small"><SparklesInstUIIcon/></IconButton>
 </View>
 ```
 
@@ -63,6 +63,19 @@ type: example
 </View>
 ```
 
+There are also two condensed size variants for compact layouts: `condensedSmall` and `condensedMedium`.
+
+```js
+---
+type: example
+---
+<View display="block">
+  <Button size="condensedSmall" margin="small">Condensed Small</Button>
+  <Button size="condensedMedium" margin="small">Condensed Medium</Button>
+  <Button size="small" margin="small">Small</Button>
+</View>
+```
+
 ### Rendering icons in Buttons
 
 An icon can be rendered alongside the Button content using the `renderIcon` prop. Use [IconButton](IconButton) instead if your Button only displays an Icon with no other visual content.
@@ -71,7 +84,7 @@ An icon can be rendered alongside the Button content using the `renderIcon` prop
 ---
 type: example
 ---
-<Button renderIcon={IconAddLine}>Add Item</Button>
+<Button renderIcon={SaveInstUIIcon}>Save</Button>
 ```
 
 ### Text wrapping
@@ -159,7 +172,7 @@ type: example
   withVisualDebug
 >
   <Button
-    renderIcon={IconUserLine}
+    renderIcon={UserInstUIIcon}
     display="block"
     textAlign="center"
     color="success"
@@ -179,10 +192,7 @@ type: example
 ---
 <View display="block">
   <View display="inline-block" background="primary">
-    <Button renderIcon={IconAddLine} withBackground={false} color="primary" margin="small">Click here</Button>
-  </View>
-  <View display="inline-block" background="primary-inverse">
-    <Button renderIcon={IconAddLine} withBackground={false} color="primary-inverse" margin="small">Click here</Button>
+    <Button renderIcon={PlusInstUIIcon} withBackground={false} color="primary" margin="small">Click here</Button>
   </View>
 </View>
 ```
@@ -268,7 +278,7 @@ type: example
                           withBackground={this.state.withBackground}
                           color={this.state.color}
                           themeOverride={overrides}>
-                <IconUserLine />
+                <UserInstUIIcon />
               </IconButton>
             </Flex.Item>
           </Flex>

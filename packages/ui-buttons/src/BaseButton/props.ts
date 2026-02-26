@@ -53,7 +53,7 @@ type BaseButtonOwnProps = {
   /**
    * The size of the `Button`
    */
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'condensedSmall' | 'condensedMedium'
 
   /**
    * Provides a reference to the `Button`'s underlying html element.

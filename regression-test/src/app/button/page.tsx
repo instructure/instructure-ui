@@ -30,11 +30,10 @@ import {
   IconButton,
   View,
   Flex,
-  IconAddLine,
-  IconUserLine,
-  IconAiSolid,
-  IconAiColoredSolid,
-  IconXSolid
+  PlusInstUIIcon,
+  UserInstUIIcon,
+  SparklesInstUIIcon,
+  XInstUIIcon
 } from '@instructure/ui'
 
 export default function ButtonPage() {
@@ -67,7 +66,7 @@ export default function ButtonPage() {
           </Button>
         ))}
       </div>
-      <Button renderIcon={<IconAddLine />}>Icon Button</Button>
+      <Button renderIcon={<PlusInstUIIcon />}>Icon Button</Button>
       <Button disabled>Disabled Button</Button>
       <Button ref={myElementRef}>focused button</Button>
       <CondensedButton>CondensedButton</CondensedButton>
@@ -105,41 +104,41 @@ export default function ButtonPage() {
       </View>
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <IconButton screenReaderLabel="Add User">
-          <IconAddLine />
+          <PlusInstUIIcon />
         </IconButton>
         <IconButton color="primary" screenReaderLabel="Add blog post">
-          <IconAddLine />
+          <PlusInstUIIcon />
         </IconButton>
         <IconButton screenReaderLabel="View user profile">
-          <IconUserLine />
+          <UserInstUIIcon />
         </IconButton>
         <IconButton
           color="ai-primary"
           screenReaderLabel="AI button"
           margin="small"
         >
-          <IconAiSolid />
+          <SparklesInstUIIcon />
         </IconButton>
         <IconButton
           color="ai-secondary"
           screenReaderLabel="AI button"
           margin="small"
         >
-          <IconAiColoredSolid />
+          <SparklesInstUIIcon />
         </IconButton>
         <IconButton
           shape="rectangle"
           screenReaderLabel="Delete tag"
           margin="small"
         >
-          <IconXSolid />
+          <XInstUIIcon />
         </IconButton>
         <IconButton
           shape="circle"
           screenReaderLabel="Delete tag"
           margin="small"
         >
-          <IconXSolid />
+          <XInstUIIcon />
         </IconButton>
         <View display="inline-block" background="primary">
           <IconButton
@@ -148,7 +147,7 @@ export default function ButtonPage() {
             screenReaderLabel="Delete tag"
             margin="large"
           >
-            <IconXSolid />
+            <XInstUIIcon />
           </IconButton>
         </View>
         <View display="inline-block" background="primary-inverse">
@@ -158,7 +157,7 @@ export default function ButtonPage() {
             screenReaderLabel="AI button"
             margin="small"
           >
-            <IconAiColoredSolid />
+            <SparklesInstUIIcon />
           </IconButton>
         </View>
         <View display="inline-block" background="primary-inverse">
@@ -168,7 +167,7 @@ export default function ButtonPage() {
             screenReaderLabel="AI button"
             margin="small"
           >
-            <IconAiSolid />
+            <SparklesInstUIIcon />
           </IconButton>
         </View>
       </div>

@@ -92,6 +92,169 @@ type: embed
 
 ```
 
+### BaseButton / Button / IconButton / CondensedButton
+
+All button components share the same `BaseButton` theme.
+
+- `Button` and `CondensedButton` `size` prop now also accepts `'condensedSmall'` and `'condensedMedium'` values.
+- Icon sizing is no longer controlled by theme variables (`iconSizeSmall`, `iconSizeMedium`, `iconSizeLarge`). Icons are now sized via the `renderIconWithProps` utility.
+- Per-size vertical padding variables (`smallPaddingTop`, `smallPaddingBottom`, etc.) have been replaced by a single `paddingVertical` variable.
+- Active state box-shadow variables have been replaced by explicit border/text color variables for each state.
+- New disabled state variables provide per-color-variant control instead of the previous blanket opacity approach.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingVertical",note:"replaces per-size top/bottom padding"},
+    {name:"gapButtonContentSm",note:"replaces iconTextGapCondensed"},
+    {name:"gapButtonContentMd",note:"replaces iconTextGap"},
+    {name:"gapButtonContentLg",note:"replaces iconTextGap"},
+    {name:"heightXxs",note:"height for condensedSmall size"},
+    {name:"heightXs",note:"height for condensedMedium size"},
+    {name:"borderRadiusFull",note:"full/pill border radius"},
+    {name:"borderRadiusSm",note:"small border radius"},
+    {name:"opacityBase",note:"base opacity value"},
+    {name:"opacityDisabled",note:"disabled state opacity"},
+    {name:"primaryActiveBorderColor",note:""},
+    {name:"primaryActiveTextColor",note:""},
+    {name:"primaryHoverBorderColor",note:""},
+    {name:"primaryHoverTextColor",note:""},
+    {name:"primaryDisabledBackgroundColor",note:""},
+    {name:"primaryDisabledBorderColor",note:""},
+    {name:"primaryDisabledTextColor",note:""},
+    {name:"primaryOnColorActiveBorderColor",note:""},
+    {name:"primaryOnColorActiveTextColor",note:""},
+    {name:"primaryOnColorHoverBorderColor",note:""},
+    {name:"primaryOnColorHoverTextColor",note:""},
+    {name:"primaryOnColorDisabledBackgroundColor",note:""},
+    {name:"primaryOnColorDisabledBorderColor",note:""},
+    {name:"primaryOnColorDisabledTextColor",note:""},
+    {name:"secondaryActiveBorderColor",note:""},
+    {name:"secondaryActiveTextColor",note:""},
+    {name:"secondaryHoverBorderColor",note:""},
+    {name:"secondaryHoverTextColor",note:""},
+    {name:"secondaryDisabledBackgroundColor",note:""},
+    {name:"secondaryDisabledBorderColor",note:""},
+    {name:"secondaryDisabledTextColor",note:""},
+    {name:"secondaryOnColorActiveBorderColor",note:""},
+    {name:"secondaryOnColorActiveTextColor",note:""},
+    {name:"secondaryOnColorHoverBorderColor",note:""},
+    {name:"secondaryOnColorHoverTextColor",note:""},
+    {name:"secondaryOnColorDisabledBorderColor",note:""},
+    {name:"secondaryOnColorDisabledTextColor",note:""},
+    {name:"tertiaryActiveBorderColor",note:""},
+    {name:"tertiaryActiveTextColor",note:""},
+    {name:"tertiaryHoverBorderColor",note:""},
+    {name:"tertiaryHoverTextColor",note:""},
+    {name:"tertiaryDisabledBorderColor",note:""},
+    {name:"tertiaryDisabledTextColor",note:""},
+    {name:"ghostOncolorActiveBackgroundColor",note:""},
+    {name:"ghostOncolorHoverBackgroundColor",note:""},
+    {name:"successActiveBorderColor",note:""},
+    {name:"successActiveTextColor",note:""},
+    {name:"successHoverBorderColor",note:""},
+    {name:"successHoverTextColor",note:""},
+    {name:"successDisabledBackgroundColor",note:""},
+    {name:"successDisabledBorderColor",note:""},
+    {name:"successDisabledTextColor",note:""},
+    {name:"successSecondaryActiveBorderColor",note:""},
+    {name:"successSecondaryActiveTextColor",note:""},
+    {name:"successSecondaryHoverBorderColor",note:""},
+    {name:"successSecondaryHoverTextColor",note:""},
+    {name:"successSecondaryDisabledBorderColor",note:""},
+    {name:"successSecondaryDisabledTextColor",note:""},
+    {name:"destructiveActiveBorderColor",note:""},
+    {name:"destructiveActiveTextColor",note:""},
+    {name:"destructiveHoverBorderColor",note:""},
+    {name:"destructiveHoverTextColor",note:""},
+    {name:"destructiveDisabledBackgroundColor",note:""},
+    {name:"destructiveDisabledBorderColor",note:""},
+    {name:"destructiveDisabledTextColor",note:""},
+    {name:"destructiveSecondaryActiveBorderColor",note:""},
+    {name:"destructiveSecondaryActiveTextColor",note:""},
+    {name:"destructiveSecondaryHoverBorderColor",note:""},
+    {name:"destructiveSecondaryHoverTextColor",note:""},
+    {name:"destructiveSecondaryDisabledBorderColor",note:""},
+    {name:"destructiveSecondaryDisabledTextColor",note:""},
+    {name:"aiBaseTextColor",note:""},
+    {name:"aiActiveTextColor",note:""},
+    {name:"aiHoverTextColor",note:""},
+    {name:"aiActiveBackgroundTopGradientColor",note:""},
+    {name:"aiActiveBackgroundBottomGradientColor",note:""},
+    {name:"aiActiveBorderTopGradientColor",note:""},
+    {name:"aiActiveBorderBottomGradientColor",note:""},
+    {name:"aiHoverBackgroundTopGradientColor",note:""},
+    {name:"aiHoverBackgroundBottomGradientColor",note:""},
+    {name:"aiHoverBorderTopGradientColor",note:""},
+    {name:"aiHoverBorderBottomGradientColor",note:""},
+    {name:"aiDisabledBackgroundColor",note:""},
+    {name:"aiDisabledBorderColor",note:""},
+    {name:"aiDisabledTextColor",note:""},
+    {name:"aiSecondaryActiveBackgroundTopGradientColor",note:""},
+    {name:"aiSecondaryActiveBackgroundBottomGradientColor",note:""},
+    {name:"aiSecondaryHoverBackgroundTopGradientColor",note:""},
+    {name:"aiSecondaryHoverBackgroundBottomGradientColor",note:""},
+    {name:"aiSecondaryDisabledBorderColor",note:""},
+    {name:"aiSecondaryDisabledTextColor",note:""},
+    {name:"aiSecondaryTextTopGradientColor",note:""},
+    {name:"aiSecondaryTextBottomGradientColor",note:""}
+  ]}
+  removed={[
+    {name:"smallPaddingTop",note:"replaced by paddingVertical"},
+    {name:"smallPaddingBottom",note:"replaced by paddingVertical"},
+    {name:"mediumPaddingTop",note:"replaced by paddingVertical"},
+    {name:"mediumPaddingBottom",note:"replaced by paddingVertical"},
+    {name:"largePaddingTop",note:"replaced by paddingVertical"},
+    {name:"largePaddingBottom",note:"replaced by paddingVertical"},
+    {name:"iconSizeSmall",note:"icon sizing now handled via renderIconWithProps"},
+    {name:"iconSizeMedium",note:"icon sizing now handled via renderIconWithProps"},
+    {name:"iconSizeLarge",note:"icon sizing now handled via renderIconWithProps"},
+    {name:"iconTextGap",note:"replaced by gapButtonContentMd / gapButtonContentLg"},
+    {name:"iconTextGapCondensed",note:"replaced by gapButtonContentSm"},
+    {name:"primaryActiveBoxShadow",note:"replaced by primaryActiveBorderColor / primaryActiveTextColor"},
+    {name:"primaryGhostActiveBoxShadow",note:""},
+    {name:"primaryGhostBoxShadow",note:""},
+    {name:"primaryGhostHoverBoxShadow",note:""},
+    {name:"secondaryActiveBoxShadow",note:"replaced by secondaryActiveBorderColor / secondaryActiveTextColor"},
+    {name:"secondaryGhostActiveBoxShadow",note:""},
+    {name:"successActiveBoxShadow",note:"replaced by successActiveBorderColor / successActiveTextColor"},
+    {name:"successGhostActiveBoxShadow",note:""},
+    {name:"dangerActiveBoxShadow",note:"replaced by destructiveActiveBorderColor / destructiveActiveTextColor"},
+    {name:"dangerGhostActiveBoxShadow",note:""},
+    {name:"primaryInverseActiveBoxShadow",note:"replaced by primaryOnColorActiveBorderColor / primaryOnColorActiveTextColor"},
+    {name:"primaryInverseGhostActiveBoxShadow",note:""},
+    {name:"aiActiveBoxShadow",note:"replaced by individual AI active gradient variables"}
+  ]}
+  changed={[
+    {oldName:"iconTextGap",newName:"gapButtonContentMd / gapButtonContentLg",note:"size-specific gap tokens"},
+    {oldName:"iconTextGapCondensed",newName:"gapButtonContentSm",note:""}
+  ]}
+/>
+
+```
+
+### CloseButton
+
+CloseButton no longer has its own theme type. It now uses `BaseButton`'s theme (see above). The old `CloseButtonTheme` variables for offset and z-index have been removed — offsets are now read from shared spacing tokens and z-index is hardcoded.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"offsetMedium",note:"now uses sharedTokens spacing"},
+    {name:"offsetSmall",note:"now uses sharedTokens spacing"},
+    {name:"offsetXSmall",note:"now uses sharedTokens spacing"},
+    {name:"zIndex",note:"hardcoded to 1"}
+  ]}
+/>
+
+```
+
 ### Billboard
 
 ```js
