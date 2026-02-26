@@ -648,6 +648,10 @@
       "accentViolet": {
         "value": "{color.background.accent.violet}",
         "type": "color"
+      },
+      "visualSeparator": {
+        "value": "{color.background.container}",
+        "type": "color"
       }
     },
     "strokeWidth": {
