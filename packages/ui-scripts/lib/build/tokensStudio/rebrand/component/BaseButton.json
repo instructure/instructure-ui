@@ -567,14 +567,6 @@
       "value": "{spacing.spaceXs}",
       "type": "spacing"
     },
-    "ghostOncolorActiveBackgroundColor": {
-      "value": "{color.background.interactive.action.ghost.onColor.hover}",
-      "type": "color"
-    },
-    "ghostOncolorHoverBackgroundColor": {
-      "value": "{color.background.interactive.action.ghost.onColor.hover}",
-      "type": "color"
-    },
     "heightXs": {
       "value": "{size.interactive.height.xs}",
       "type": "sizing"
@@ -644,7 +636,7 @@
       "type": "text"
     },
     "lineHeight": {
-      "value": "{lineHeight.label.base}",
+      "value": "1.125",
       "type": "lineHeights"
     },
     "primaryBoxShadow": {
