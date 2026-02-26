@@ -24,12 +24,11 @@
 
 import { Component } from 'react'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { NumberInput } from '@instructure/ui-number-input'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type {
@@ -43,7 +42,7 @@ parent: Pagination
 id: Pagination.PageInput
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'PaginationPageInput')
 class PaginationPageInput extends Component<
   PaginationPageInputProps,
   PaginationPageInputState

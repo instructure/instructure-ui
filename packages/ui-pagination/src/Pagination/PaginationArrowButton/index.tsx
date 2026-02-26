@@ -28,10 +28,11 @@ import { IconButton } from '@instructure/ui-buttons'
 import { PresentationContent } from '@instructure/ui-a11y-content'
 import { Tooltip } from '@instructure/ui-tooltip'
 import {
-  IconArrowOpenStartSolid,
-  IconArrowOpenEndSolid,
-  IconArrowDoubleStartSolid,
-  IconArrowDoubleEndSolid
+  ChevronLeftInstUIIcon,
+  ChevronRightInstUIIcon,
+  ChevronsLeftInstUIIcon,
+  ChevronsRightInstUIIcon,
+  renderIconWithProps
 } from '@instructure/ui-icons'
 
 import type { PaginationNavigationProps } from './props'
@@ -70,16 +71,22 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
   get Icon() {
     switch (this.props.direction) {
       case 'first':
-        return IconArrowDoubleStartSolid
+        return ChevronsLeftInstUIIcon
       case 'prev':
-        return IconArrowOpenStartSolid
+        return ChevronLeftInstUIIcon
       case 'next':
-        return IconArrowOpenEndSolid
+        return ChevronRightInstUIIcon
       case 'last':
-        return IconArrowDoubleEndSolid
+        return ChevronsRightInstUIIcon
       default:
         return null
     }
+  }
+
+  renderIcon() {
+    const icon = this.Icon
+    if (!icon) return null
+    return renderIconWithProps(icon, 'md', 'baseColor')
   }
 
   render() {
@@ -102,7 +109,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
           margin={this.margin}
           data-cid="PaginationArrowButton"
         >
-          {this.Icon}
+          {this.renderIcon()}
         </IconButton>
       </Tooltip>
     )
