@@ -491,6 +491,54 @@ type: embed
 - Setting `readonly` does not set the low level `<input>` to disabled, but to `readonly`. This also means that the input is still focusable when `readonly`
 - Its DOM structure has been significantly simplified
 
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"backgroundHoverColor",note:""},
+    {name:"backgroundReadonlyColor",note:""},
+    {name:"backgroundDisabledColor",note:""},
+    {name:"borderReadonlyColor",note:""},
+    {name:"borderDisabledColor",note:""},
+    {name:"borderSelectedColor",note:""},
+    {name:"labelHoverColor",note:""},
+    {name:"labelDisabledColor",note:""},
+    {name:"labelReadonlyColor",note:""},
+    {name:"lineHeightSm",note:"replaces the single labelLineHeight token"},
+    {name:"lineHeightMd",note:"replaces the single labelLineHeight token"},
+    {name:"lineHeightLg",note:"replaces the single labelLineHeight token"},
+    {name:"controlVerticalMargin",note:""},
+  ]}
+  removed={[
+    {name:"controlSize",note:""},
+    {name:"focusBorderColor",note:"focus outline is now controlled via sharedTokens"},
+    {name:"focusBorderWidth",note:"focus outline is now controlled via sharedTokens"},
+    {name:"focusBorderStyle",note:"focus outline is now controlled via sharedTokens"},
+    {name:"labelLineHeight",note:"split into size-specific lineHeightSm, lineHeightMd, lineHeightLg"},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"hoverBorderColor",newName:"borderHoverColor",note:""},
+    {oldName:"labelColor",newName:"labelBaseColor",note:""},
+    {oldName:"labelFontFamily",newName:"fontFamily",note:""},
+    {oldName:"labelFontWeight",newName:"fontWeight",note:""},
+    {oldName:"simpleFacadeMarginEnd",newName:"gap",note:""},
+    {oldName:"simpleFacadeSmallSize",newName:"controlSizeSm",note:""},
+    {oldName:"simpleFacadeMediumSize",newName:"controlSizeMd",note:""},
+    {oldName:"simpleFacadeLargeSize",newName:"controlSizeLg",note:""},
+    {oldName:"simpleCheckedInsetSmall",newName:"checkedInsetSm",note:""},
+    {oldName:"simpleCheckedInsetMedium",newName:"checkedInsetMd",note:""},
+    {oldName:"simpleCheckedInsetLarge",newName:"checkedInsetLg",note:""},
+    {oldName:"simpleFontSizeSmall",newName:"fontSizeSm",note:""},
+    {oldName:"simpleFontSizeMedium",newName:"fontSizeMd",note:""},
+    {oldName:"simpleFontSizeLarge",newName:"fontSizeLg",note:""}
+  ]}
+/>
+
+```
+
 ### RadioInputGroup
 
 `error` or `success` messages are no longer displayed when the component is `readOnly` or `disabled`.
