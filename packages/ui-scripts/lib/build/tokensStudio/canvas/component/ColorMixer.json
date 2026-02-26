@@ -87,6 +87,10 @@
     "labelFontWeight": {
       "value": "{fontWeight.body.base}",
       "type": "fontWeights"
+    },
+    "rgbaInputLabel": {
+      "value": "{color.text.base}",
+      "type": "color"
     }
   }
 }
