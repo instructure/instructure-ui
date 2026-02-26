@@ -636,7 +636,7 @@
       "type": "text"
     },
     "lineHeight": {
-      "value": "1.125",
+      "value": "{lineHeight.standalone.base}",
       "type": "lineHeights"
     },
     "primaryBoxShadow": {
