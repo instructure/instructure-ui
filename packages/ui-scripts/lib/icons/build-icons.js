@@ -29,7 +29,7 @@ import getGlyphData from './get-glyph-data.js'
 import generateReactComponents from './generate-react-components.js'
 import generateSvgIndex from './generate-svg-index.js'
 import generateIconFonts from './generate-icon-fonts.js'
-import generateIconsData from './generate-icons-data.js'
+import generateLegacyIconsData from './generate-legacy-icons-data.js'
 import { pathToFileURL } from 'url'
 
 export default {
@@ -121,11 +121,7 @@ export default {
       prefix: 'icon-solid'
     })
 
-    // generate icons-data.json for the docs
-    const iconsData = generateIconsData(glyphs)
-    fs.writeFileSync(
-      `${config.destination}icons-data.json`,
-      JSON.stringify(iconsData)
-    )
+    // generate legacy icons data for documentation
+    generateLegacyIconsData(process.cwd())
   }
 }

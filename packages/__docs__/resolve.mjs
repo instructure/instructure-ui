@@ -92,7 +92,9 @@ const alias = {
   ),
   '@instructure/ui-grid$': path.resolve(import.meta.dirname, '../ui-grid/src/'),
   '@instructure/ui-i18n$': path.resolve(import.meta.dirname, '../ui-i18n/src/'),
-  '@instructure/ui-icons$': path.resolve(import.meta.dirname, '../ui-icons/src/'),
+  // Use built ui-icons to avoid processing 400+ lucide and 80+ custom icon wrappers
+  // Unlike other packages, icons point to /es (built) not /src for faster dev server startup
+  '@instructure/ui-icons$': path.resolve(import.meta.dirname, '../ui-icons/es/'),
   '@instructure/ui-img$': path.resolve(import.meta.dirname, '../ui-img/src/'),
   '@instructure/ui-instructure$': path.resolve(import.meta.dirname, '../ui-instructure/src/'),
   '@instructure/ui-link$': path.resolve(import.meta.dirname, '../ui-link/src/'),
