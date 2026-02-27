@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.6.0](https://github.com/instructure/instructure-ui/compare/v11.5.0...v11.6.0) (2026-02-18)
+
+### Bug Fixes
+
+- **ui-modal:** voiceOver in Chrome treats scrollable modal body as single interactive object preventing line-by-line navigation ([0be3fb1](https://github.com/instructure/instructure-ui/commit/0be3fb1dee541a37c2d38ae6656fd0330f651265))
+
 # [11.5.0](https://github.com/instructure/instructure-ui/compare/v11.4.0...v11.5.0) (2026-02-03)
 
 **Note:** Version bump only for package @instructure/ui-modal

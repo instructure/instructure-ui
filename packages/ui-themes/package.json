@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "11.5.0",
+  "version": "11.6.0",
   "description": "A library of instructure themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",

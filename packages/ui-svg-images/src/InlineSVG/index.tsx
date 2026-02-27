@@ -199,8 +199,10 @@ class InlineSVG extends Component<InlineSVGProps> {
 function parseAttributes(src: InlineSVGProps['src']) {
   const attributes: Record<string, string> = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
-  const namesAndValuesRegExp =
-    /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
+  // Match either quoted or unquoted attribute values
+  // Handles both standard format: attr="value" and non-standard: attr=value
+  // (\S+?) = attribute name, (?:["']([^"']*)["']|(\S+)) = quoted (group 2) OR unquoted (group 3) value
+  const namesAndValuesRegExp = /(\S+?)=(?:["']([^"']*)["']|(\S+))/g
 
   if (typeof src === 'string') {
     const attributesMatches = SVGAttributesRegExp.exec(src)
@@ -211,10 +213,8 @@ function parseAttributes(src: InlineSVGProps['src']) {
 
     while (match != null) {
       if (excludes.indexOf(match[1]) === -1) {
-        attributes[match[1]] =
-          match[2] ||
-          (match[3] ? match[3] : match[4] ? match[4] : match[5]) ||
-          match[1]
+        // match[1] = attribute name, match[2] = quoted value, match[3] = unquoted value
+        attributes[match[1]] = match[2] || match[3]
       }
       match = namesAndValuesRegExp.exec(attributesString)
     }
