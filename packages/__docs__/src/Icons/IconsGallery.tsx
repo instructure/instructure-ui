@@ -56,30 +56,23 @@ type IconTileProps = {
   onClick: (icon: IconInfo) => void
 }
 
-// Get all stroke icons
-const strokeIconNames = Object.keys(LucideIcons).filter((name) =>
-  name.endsWith('InstUIIcon')
-)
-
-// Get all custom icons
-const customIconNames = Object.keys(CustomIcons).filter((name) =>
-  name.endsWith('InstUIIcon')
-)
-
-// Combine all icons with metadata
 const allIcons: IconInfo[] = [
-  ...strokeIconNames.map((name) => ({
-    name,
-    component: (LucideIcons as any)[name],
-    source: 'lucide' as const,
-    importPath: '@instructure/ui-icons'
-  })),
-  ...customIconNames.map((name) => ({
-    name,
-    component: (CustomIcons as any)[name],
-    source: 'custom' as const,
-    importPath: '@instructure/ui-icons'
-  }))
+  ...Object.entries(LucideIcons)
+    .filter(([name]) => name.endsWith('InstUIIcon'))
+    .map(([name, component]) => ({
+      name,
+      component: component as React.ComponentType<any>,
+      source: 'lucide' as const,
+      importPath: '@instructure/ui-icons'
+    })),
+  ...Object.entries(CustomIcons)
+    .filter(([name]) => name.endsWith('InstUIIcon'))
+    .map(([name, component]) => ({
+      name,
+      component: component as React.ComponentType<any>,
+      source: 'custom' as const,
+      importPath: '@instructure/ui-icons'
+    }))
 ]
 
 function getUsageInfo(icon: IconInfo) {
@@ -87,7 +80,7 @@ function getUsageInfo(icon: IconInfo) {
 
 const MyIcon = () => {
   return (
-    <${icon.name} size={'2xl'} color='successColor' />
+    <${icon.name} size="2xl" color="successColor" />
   )
 }`
 }

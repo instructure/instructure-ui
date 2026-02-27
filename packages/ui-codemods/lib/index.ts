@@ -39,7 +39,5 @@ export {
   renameGetComputedStyleToGetCSSStyleDeclaration,
   warnTableCaptionMissing,
   warnCodeEditorRemoved,
-  migrateToNewIcons,
-  // Backwards compatibility alias (deprecated)
-  migrateToNewIcons as migrateToLucideIcons
+  migrateToNewIcons
 }

@@ -21,17 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import fs from 'fs'
 import path from 'path'
 import getGlyphData from './get-glyph-data.js'
 
-export default function generateLegacyIconsData(packageRoot) {
-  const svgDir = path.join(packageRoot, 'svg/')
-  const outputDir = path.join(packageRoot, 'lib/legacy/')
+export default function generateLegacyIconsData() {
+  const svgDir = path.join(process.cwd(), 'svg/')
   const deprecatedMap = {}
   const bidirectionalList = []
 
-  // Get glyph data from SVG files
   const glyphsRaw = getGlyphData(
     svgDir,
     deprecatedMap,
@@ -40,7 +37,7 @@ export default function generateLegacyIconsData(packageRoot) {
   )
 
   // Group by glyphName to merge Line and Solid variants
-  const mergedGlyphs = Object.values(
+  return Object.values(
     glyphsRaw.reduce(
       (acc, { name, glyphName, variant, src, bidirectional, deprecated }) => {
         if (!deprecated) {
@@ -57,14 +54,4 @@ export default function generateLegacyIconsData(packageRoot) {
       {}
     )
   )
-
-  // Create output directory
-  fs.mkdirSync(outputDir, { recursive: true })
-
-  // Write JSON file
-  const outputPath = path.join(outputDir, 'legacy-icons-data.json')
-  fs.writeFileSync(outputPath, JSON.stringify(mergedGlyphs, null, 2), 'utf8')
-
-  console.error(`Generated legacy icons data: ${outputPath}`)
-  console.error(`Total icons: ${mergedGlyphs.length}`)
 }

@@ -12,11 +12,11 @@ TODO add details
 
 ## New icons
 
-InstUI has switched to a new icon set based on [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set (see below).
+InstUI has switched to a new icon set based on [Lucide](https://lucide.dev/icons/). We are still keeping some Instructure-specific icons, like product logos. We have a codemod that will help you migrate your code to the new icon set.
 
-### Stroke-Based Icons Package
+### Lucide Icons Package
 
-InstUI v12 introduces a new icon package **`@instructure/ui-icons`** based on the [Lucide](https://lucide.dev/icons/) icon library, providing 1,900+ stroke-based icons with improved theming and RTL support. The icons are wrapped with `wrapLucideIcon` to integrate with InstUI's theming system while maintaining access to all native icon props.
+InstUI introduces a new icon package **`@instructure/ui-icons`** based on the [Lucide](https://lucide.dev/icons/) icon library, providing 1,900+ stroke-based icons with improved theming and RTL support. The icons are wrapped with `wrapLucideIcon` to integrate with InstUI's theming system while maintaining access to all native icon props.
 
 **Key differences from `SVGIcon`/`InlineSVG`:**
 
@@ -29,7 +29,7 @@ InstUI v12 introduces a new icon package **`@instructure/ui-icons`** based on th
 | **description** | `string` (combined with title)                                                                  | ❌ Removed (use `title` only)                                                                         |
 | **src**         | `string`                                                                                        | ❌ Removed                                                                                            |
 
-The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to stroke-based icons and will be spread onto the nested SVG element.
+The new icons automatically sync with theme changes, support all InstUI color tokens, and provide better TypeScript integration. All standard HTML and SVG attributes can be passed directly to Lucide icons and will be spread onto the nested SVG element.
 
 ## Focus rings
 

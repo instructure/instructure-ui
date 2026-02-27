@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { runCommandSync } from '@instructure/command-utils'
+import { runCommandSync, info } from '@instructure/command-utils'
 import path from 'path'
 import fs from 'fs'
 import process from 'process'
@@ -121,7 +121,19 @@ export default {
       prefix: 'icon-solid'
     })
 
-    // generate legacy icons data for documentation
-    generateLegacyIconsData(process.cwd())
+    // write legacy-icons-data.json for the docs gallery
+    const legacyIconsData = generateLegacyIconsData()
+    const legacyOutputDir = path.join(process.cwd(), 'lib/legacy/')
+    fs.mkdirSync(legacyOutputDir, { recursive: true })
+    const legacyOutputPath = path.join(
+      legacyOutputDir,
+      'legacy-icons-data.json'
+    )
+    fs.writeFileSync(
+      legacyOutputPath,
+      JSON.stringify(legacyIconsData, null, 2),
+      'utf8'
+    )
+    info(`Generated ${legacyOutputPath} (${legacyIconsData.length} icons)`)
   }
 }
