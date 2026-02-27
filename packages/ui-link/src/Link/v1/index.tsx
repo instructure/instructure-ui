@@ -24,7 +24,7 @@
 
 import { Children, Component } from 'react'
 
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
@@ -44,7 +44,7 @@ import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { LinkProps, LinkState, LinkStyleProps } from './props'
 
-import type { ViewOwnProps } from '@instructure/ui-view/v11_5'
+import type { ViewOwnProps } from '@instructure/ui-view/v11_6'
 
 /**
 ---

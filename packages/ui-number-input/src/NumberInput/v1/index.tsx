@@ -25,7 +25,7 @@
 import { Fragment, Component } from 'react'
 import keycode from 'keycode'
 
-import { FormField } from '@instructure/ui-form-field/v11_5'
+import { FormField } from '@instructure/ui-form-field/v11_6'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine

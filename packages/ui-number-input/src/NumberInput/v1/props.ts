@@ -38,7 +38,7 @@ import type {
 import type {
   FormFieldOwnProps,
   FormMessage
-} from '@instructure/ui-form-field/v11_5'
+} from '@instructure/ui-form-field/v11_6'
 import type {
   InteractionType,
   WithDeterministicIdProps

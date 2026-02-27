@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 
-import { IconButton } from '@instructure/ui-buttons/v11_5'
+import { IconButton } from '@instructure/ui-buttons/v11_6'
 import { PresentationContent } from '@instructure/ui-a11y-content'
-import { Tooltip } from '@instructure/ui-tooltip/v11_5'
+import { Tooltip } from '@instructure/ui-tooltip/v11_6'
 import {
   IconArrowOpenStartSolid,
   IconArrowOpenEndSolid,

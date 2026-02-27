@@ -24,7 +24,7 @@
 
 import { Component, Children, ReactElement } from 'react'
 
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 import {
   safeCloneElement,
   withDeterministicId

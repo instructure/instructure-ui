@@ -24,9 +24,9 @@
 
 import { Component } from 'react'
 import keycode from 'keycode'
-import { FormFieldMessages } from '@instructure/ui-form-field/v11_5'
-import type { FormMessage } from '@instructure/ui-form-field/v11_5'
-import { View } from '@instructure/ui-view/v11_5'
+import { FormFieldMessages } from '@instructure/ui-form-field/v11_6'
+import type { FormMessage } from '@instructure/ui-form-field/v11_6'
+import { View } from '@instructure/ui-view/v11_6'
 import {
   callRenderProp,
   passthroughProps,

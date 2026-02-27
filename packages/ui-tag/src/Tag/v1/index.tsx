@@ -25,8 +25,8 @@
 import { Component } from 'react'
 
 import { IconXLine } from '@instructure/ui-icons'
-import { View } from '@instructure/ui-view/v11_5'
-import type { ViewProps } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'

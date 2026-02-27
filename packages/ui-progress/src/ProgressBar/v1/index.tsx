@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
