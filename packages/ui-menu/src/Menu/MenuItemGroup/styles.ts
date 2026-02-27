@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { MenuGroupTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { MenuGroupStyle } from './props'
 
 /**
@@ -35,7 +35,9 @@ import type { MenuGroupStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MenuGroupTheme): MenuGroupStyle => {
+const generateStyle = (
+  componentTheme: NewComponentTypes['MenuGroup']
+): MenuGroupStyle => {
   return {
     menuItemGroup: {
       label: 'menuItemGroup',
@@ -44,7 +46,7 @@ const generateStyle = (componentTheme: MenuGroupTheme): MenuGroupStyle => {
     label: {
       label: 'menuItemGroup__label',
       background: componentTheme.background,
-      padding: componentTheme.padding,
+      padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`,
       display: 'block',
       fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,

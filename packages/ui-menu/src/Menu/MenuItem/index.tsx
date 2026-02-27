@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import keycode from 'keycode'
 
-import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
+import { CheckInstUIIcon, ChevronRightInstUIIcon } from '@instructure/ui-icons'
 import {
   omitProps,
   getElementType,
@@ -34,12 +34,11 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { MenuContext } from '../../MenuContext'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { MenuItemProps, MenuItemState } from './props'
@@ -51,7 +50,7 @@ id: Menu.Item
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class MenuItem extends Component<MenuItemProps, MenuItemState> {
   static readonly componentId = 'Menu.Item'
 
@@ -67,12 +66,16 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   constructor(props: MenuItemProps) {
     super(props)
 
-    if (typeof props.selected === 'undefined') {
-      this.state = {
-        selected: !!props.defaultSelected
-      }
+    const state: MenuItemState = {
+      isHovered: false,
+      isFocused: false
     }
 
+    if (typeof props.selected === 'undefined') {
+      state.selected = !!props.defaultSelected
+    }
+
+    this.state = state
     this.labelId = props.deterministicId!('MenuItem__label')
   }
 
@@ -176,6 +179,31 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
   }
 
+  handleMouseEnter = () => {
+    this.setState({ isHovered: true })
+  }
+
+  handleMouseLeave = () => {
+    this.setState({ isHovered: false })
+  }
+
+  handleFocusEvent = () => {
+    this.setState({ isFocused: true })
+  }
+
+  handleBlurEvent = () => {
+    this.setState({ isFocused: false })
+  }
+
+  getIconColor = () => {
+    const { type } = this.props
+
+    if (type === 'flyout') {
+      return 'baseColor'
+    }
+    return this.selected ? 'inverseColor' : 'baseColor'
+  }
+
   get elementType() {
     return getElementType(MenuItem, this.props)
   }
@@ -211,17 +239,19 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
 
     return (
       <span>
-        {(type === 'checkbox' || type === 'radio') && (
-          <span css={this.props.styles?.icon}>
-            {this.selected && <IconCheckSolid />}
-          </span>
-        )}
         <span css={this.props.styles?.label} id={this.labelId}>
           {children}
         </span>
+        {(type === 'checkbox' || type === 'radio') && (
+          <span css={this.props.styles?.icon}>
+            {this.selected && (
+              <CheckInstUIIcon size="md" color={this.getIconColor()} />
+            )}
+          </span>
+        )}
         {type === 'flyout' && (
           <span css={this.props.styles?.icon}>
-            <IconArrowOpenEndSolid />
+            <ChevronRightInstUIIcon size="md" color={this.getIconColor()} />
           </span>
         )}
         {renderLabelInfo && (
@@ -234,8 +264,17 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
   }
 
   render() {
-    const { disabled, controls, onKeyDown, onKeyUp, type, href, target } =
-      this.props
+    const {
+      disabled,
+      controls,
+      onKeyDown,
+      onKeyUp,
+      onFocus,
+      onBlur,
+      type,
+      href,
+      target
+    } = this.props
 
     const props = omitProps(this.props, MenuItem.allowedProps)
     const ElementType = this.elementType
@@ -263,6 +302,10 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         ref={this.handleRef}
         css={this.props.styles?.menuItem}
         onMouseOver={this.handleMouseOver}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onFocus={createChainedFunction(onFocus, this.handleFocusEvent)}
+        onBlur={createChainedFunction(onBlur, this.handleBlurEvent)}
         data-cid="MenuItem"
       >
         {this.renderContent()}

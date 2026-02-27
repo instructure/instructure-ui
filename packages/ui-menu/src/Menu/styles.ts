@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import type { MenuTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type { MenuStyle, MenuProps } from './props'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 
 /**
  * ---
@@ -36,8 +37,9 @@ import type { MenuStyle, MenuProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: MenuTheme,
-  props: MenuProps
+  componentTheme: NewComponentTypes['Menu'],
+  props: MenuProps,
+  sharedTokens: SharedTokens
 ): MenuStyle => {
   const maxHeight = props.maxHeight
     ? { maxHeight: props.maxHeight, overflow: 'auto' }
@@ -46,7 +48,6 @@ const generateStyle = (
   return {
     menu: {
       label: 'menu',
-      ...maxHeight,
       minWidth: componentTheme.minWidth,
       maxWidth: componentTheme.maxWidth,
       listStyleType: 'none',
@@ -56,26 +57,9 @@ const generateStyle = (
       borderRadius: componentTheme.borderRadius,
       display: 'block',
       position: 'relative',
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: '-0.25rem',
-        left: '-0.25rem',
-        right: '-0.25rem',
-        bottom: '-0.25rem',
-        border: `${componentTheme.focusBorderWidth} ${componentTheme.focusBorderStyle} ${componentTheme.focusBorderColor}`,
-        borderRadius: componentTheme.focusBorderRadius,
-        opacity: 0,
-        transform: 'scale(0.9)',
-        pointerEvents: 'none'
-      },
-      '&:focus': {
-        outline: 'none',
-        '&::before': {
-          opacity: 1,
-          transform: 'scale(1)'
-        }
-      }
+      overflow: 'hidden',
+      ...maxHeight,
+      ...calcFocusOutlineStyles(sharedTokens.focusOutline)
     }
   }
 }

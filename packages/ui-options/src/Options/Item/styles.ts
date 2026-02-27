@@ -24,7 +24,7 @@
 
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
-import type { OptionsItemTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OptionsItemProps, OptionsItemStyle } from './props'
 import { ReactNode } from 'react'
 
@@ -39,7 +39,7 @@ import { ReactNode } from 'react'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: OptionsItemTheme,
+  componentTheme: NewComponentTypes['OptionsItem'],
   props: OptionsItemProps
 ): OptionsItemStyle => {
   const {
@@ -61,7 +61,7 @@ const generateStyle = (
     },
     selected: {
       background: componentTheme.selectedBackground,
-      color: componentTheme.highlightedLabelColor
+      color: componentTheme.selectedLabelColor
     },
     disabled: { cursor: 'not-allowed', opacity: 0.68 },
     'highlighted-disabled': {
@@ -142,7 +142,7 @@ const generateStyle = (
       label: 'optionItem__container',
       display: 'block',
       outline: 'none',
-      padding: componentTheme.padding,
+      padding: `${componentTheme.paddingVertical} ${componentTheme.paddingHorizontal}`,
       ...(containsList && { padding: '0' }),
       ...(hasContentBeforeLabel && {
         paddingInlineEnd: componentTheme.iconPadding,
