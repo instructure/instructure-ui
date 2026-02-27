@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import type { ToggleFacadeTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 import type { ToggleFacadeProps, ToggleFacadeStyle } from './props'
 
 /**
@@ -32,19 +33,21 @@ import type { ToggleFacadeProps, ToggleFacadeStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ToggleFacadeTheme,
-  props: ToggleFacadeProps
+  componentTheme: NewComponentTypes['Toggle'],
+  props: ToggleFacadeProps,
+  sharedTokens: SharedTokens
 ): ToggleFacadeStyle => {
   const { disabled, size, checked, focused, labelPlacement, invalid } = props
 
   const labelPlacementVariants = {
     start: {
       facade: {
-        marginInlineEnd: '0',
+        marginInlineEnd: componentTheme.marginEnd,
         marginInlineStart: componentTheme.marginStart
       },
       label: {
@@ -53,8 +56,7 @@ const generateStyle = (
     },
     end: {
       facade: {
-        marginInlineEnd: componentTheme.marginEnd,
-        marginInlineStart: '0'
+        marginInlineEnd: componentTheme.marginEnd
       },
       label: {}
     },
@@ -69,9 +71,18 @@ const generateStyle = (
   }
 
   const labelSizeVariants = {
-    small: { fontSize: componentTheme.labelFontSizeSmall },
-    medium: { fontSize: componentTheme.labelFontSizeMedium },
-    large: { fontSize: componentTheme.labelFontSizeLarge }
+    small: {
+      fontSize: componentTheme.labelFontSizeSm,
+      lineHeight: componentTheme.labelLineHeightSm
+    },
+    medium: {
+      fontSize: componentTheme.labelFontSizeMd,
+      lineHeight: componentTheme.labelLineHeightMd
+    },
+    large: {
+      fontSize: componentTheme.labelFontSizeLg,
+      lineHeight: componentTheme.labelLineHeightLg
+    }
   }
 
   return {
@@ -83,7 +94,7 @@ const generateStyle = (
     },
     facade: {
       label: 'toggleFacade__facade',
-      background: componentTheme.background,
+      background: componentTheme.toggleBackground,
       borderColor: componentTheme.borderColor,
       cursor: 'pointer',
       display: 'inline-block',
@@ -99,37 +110,21 @@ const generateStyle = (
       height: componentTheme.toggleSize,
       width: `calc(${componentTheme.toggleSize} * 1.5)`,
       ...labelPlacementVariants[labelPlacement!].facade,
+      ...(sharedTokens?.focusOutline
+        ? calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            withFocusOutline: focused
+          })
+        : {}),
 
       ...(checked && {
-        background: componentTheme.checkedBackground,
+        background: componentTheme.checkedBackgroundColor,
         boxShadow: 'none'
       }),
 
       ...(disabled && {
         cursor: 'not-allowed',
         pointerEvents: 'none'
-      }),
-
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: '-0.25rem',
-        left: '-0.25rem',
-        width: 'calc(100% + 0.5rem)',
-        height: 'calc(100% + 0.5rem)',
-        boxSizing: 'border-box',
-        borderRadius: componentTheme.borderRadius,
-        border: `${componentTheme.focusBorderWidth} ${componentTheme.focusBorderStyle} ${componentTheme.focusOutlineColor}`,
-        transition: 'all 0.2s',
-        transform: 'scale(0.75)',
-        opacity: 0,
-        pointerEvents: 'none',
-
-        ...(focused && {
-          transform: 'scale(1)',
-          opacity: 1
-        })
-      }
+      })
     },
 
     icon: {
@@ -176,16 +171,12 @@ const generateStyle = (
             ? componentTheme.checkedIconBorderColor
             : componentTheme.uncheckedIconBorderColor
         }`
-      }
-    },
+      },
 
-    iconSVG: {
-      label: 'toggleFacade__iconSVG',
-      display: 'block',
-      color: componentTheme.uncheckedIconColor,
-      position: 'relative',
-      zIndex: 1,
-      ...(checked && { color: componentTheme.checkedIconColor })
+      '& [class*="lucideIcon"] svg': {
+        position: 'relative',
+        zIndex: 1
+      }
     },
 
     label: {
@@ -195,7 +186,6 @@ const generateStyle = (
       color: componentTheme.labelColor,
       fontFamily: componentTheme.labelFontFamily,
       fontWeight: componentTheme.labelFontWeight,
-      lineHeight: componentTheme.labelLineHeight,
       ...labelSizeVariants[size!],
       ...labelPlacementVariants[labelPlacement!].label
     }

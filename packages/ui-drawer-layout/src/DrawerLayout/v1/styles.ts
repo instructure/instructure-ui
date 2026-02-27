@@ -22,17 +22,26 @@
  * SOFTWARE.
  */
 
-export { Options } from './Options'
-export { Item as OptionItem } from './Options/Item'
-export { Separator as OptionSeparator } from './Options/Separator'
+import type { DrawerLayoutStyle } from './props'
 
-export { optionsThemeGenerator } from './Options/theme'
-export { optionsItemThemeGenerator } from './Options/Item/theme'
-export { optionsSeparatorThemeGenerator } from './Options/Separator/theme'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (): DrawerLayoutStyle => {
+  return {
+    drawerLayout: {
+      label: 'drawerLayout',
+      position: 'relative',
+      height: '100%'
+    }
+  }
+}
 
-export type { OptionsProps } from './Options/props'
-export type {
-  OptionsItemProps,
-  OptionsItemRenderProps
-} from './Options/Item/props'
-export type { OptionsSeparatorProps } from './Options/Separator/props'
+export default generateStyle

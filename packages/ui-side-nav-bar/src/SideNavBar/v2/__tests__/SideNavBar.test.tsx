@@ -68,7 +68,7 @@ describe('<SideNavBar />', () => {
 
     expect(icons.length).toBe(2)
     expect(icons[0]).toHaveAttribute('name', 'IconDashboard')
-    expect(icons[1]).toHaveAttribute('name', 'IconMoveStart')
+    expect(icons[1]).toHaveAttribute('name', 'PanelLeftClose')
 
     expect(nav).toBeInTheDocument()
     expect(nav.tagName).toBe('NAV')

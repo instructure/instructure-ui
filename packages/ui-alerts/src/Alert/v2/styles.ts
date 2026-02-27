@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import type { AlertTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { boxShadowObjectsToCSSString } from '@instructure/ui-themes'
 import type { AlertProps, AlertStyle } from './props'
 
 /**
@@ -36,8 +37,9 @@ import type { AlertProps, AlertStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: AlertTheme,
-  props: AlertProps
+  componentTheme: NewComponentTypes['Alert'],
+  props: AlertProps,
+  sharedTokens: SharedTokens
 ): AlertStyle => {
   const { variant, hasShadow } = props
 
@@ -84,7 +86,11 @@ const generateStyle = (
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
       ...variantStyles[variant!].alert,
-      ...(hasShadow && { boxShadow: componentTheme.boxShadow })
+      ...(hasShadow && {
+        boxShadow: boxShadowObjectsToCSSString(
+          sharedTokens.boxShadow.elevation4
+        )
+      })
     },
     icon: {
       color: componentTheme.iconColor,
@@ -116,7 +122,7 @@ const generateStyle = (
       fontFamily: componentTheme.contentFontFamily,
       fontWeight: componentTheme.contentFontWeight,
       lineHeight: componentTheme.contentLineHeight,
-      padding: componentTheme.contentPadding
+      padding: `${componentTheme.contentPaddingVertical} ${componentTheme.contentPaddingHorizontal}`
     },
     variantScreenReaderLabel: {
       position: 'absolute',

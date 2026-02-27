@@ -33,7 +33,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { Checkbox } from '../../Checkbox/v1'
+import { Checkbox } from '../../Checkbox/v2'
 
 import { allowedProps } from './props'
 import type {

@@ -124,7 +124,9 @@ const allowedProps: AllowedPropKeys = [
   'renderLabelInfo'
 ]
 type MenuItemState = {
-  selected: boolean
+  selected?: boolean
+  isHovered: boolean
+  isFocused: boolean
 }
 export type { MenuItemProps, MenuItemStyle, MenuItemState, OnMenuItemSelect }
 export { allowedProps }

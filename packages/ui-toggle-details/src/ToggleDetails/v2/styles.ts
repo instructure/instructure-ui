@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 
-import type { ToggleDetailsTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
 import type {
   ToggleDetailsProps,
   ToggleDetailsStyleProps,
@@ -43,12 +43,14 @@ const contentAnimation = keyframes`
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens the shared tokens of the component
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ToggleDetailsTheme,
+  componentTheme: NewComponentTypes['ToggleDetails'],
   props: ToggleDetailsProps,
+  sharedTokens: SharedTokens,
   _state: ToggleDetailsStyleProps
 ): ToggleDetailsStyle => {
   const { fluidWidth, iconPosition, size, variant } = props
@@ -74,25 +76,19 @@ const generateStyle = (
     large: { fontSize: componentTheme.fontSizeLarge }
   }
 
-  const iconSizeStyles = {
-    small: { fontSize: componentTheme.smallIconSize },
-    medium: { fontSize: componentTheme.mediumIconSize },
-    large: { fontSize: componentTheme.largeIconSize }
-  }
-
   const indentDetailsStyles =
     iconPosition === 'start' && !fluidWidth
       ? {
           small: {
-            paddingInlineStart: `calc(${componentTheme.smallIconSize} + ${componentTheme.togglePadding})`,
+            paddingInlineStart: `calc(${componentTheme.contentPaddingSmall} + ${componentTheme.togglePadding})`,
             paddingInlineEnd: '0'
           },
           medium: {
-            paddingInlineStart: `calc(${componentTheme.mediumIconSize} + ${componentTheme.togglePadding})`,
+            paddingInlineStart: `calc(${componentTheme.contentPaddingMedium} + ${componentTheme.togglePadding})`,
             paddingInlineEnd: '0'
           },
           large: {
-            paddingInlineStart: `calc(${componentTheme.largeIconSize} + ${componentTheme.togglePadding})`,
+            paddingInlineStart: `calc(${componentTheme.contentPaddingLarge} + ${componentTheme.togglePadding})`,
             paddingInlineEnd: '0'
           }
         }
@@ -106,8 +102,7 @@ const generateStyle = (
     toggleDetails: {
       label: 'toggleDetails',
       fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      lineHeight: componentTheme.lineHeight
+      fontWeight: componentTheme.fontWeight
     },
     summary: {
       label: 'toggleDetails__summary',
@@ -126,6 +121,7 @@ const generateStyle = (
     toggle: {
       label: 'toggleDetails__toggle',
       fontFamily: componentTheme.fontFamily,
+      lineHeight: componentTheme.lineHeight,
       appearance: 'none',
       cursor: 'pointer',
       userSelect: 'none',
@@ -147,7 +143,7 @@ const generateStyle = (
         left: '-0.375rem',
         right: '-0.375rem',
         bottom: '-0.375rem',
-        border: `${componentTheme.toggleBorderWidth} ${componentTheme.toggleBorderStyle} ${componentTheme.toggleFocusBorderColor}`,
+        border: `${componentTheme.toggleBorderWidth} ${componentTheme.toggleBorderStyle} ${sharedTokens.focusOutline.infoColor}`,
         borderRadius: `calc(${componentTheme.toggleBorderRadius} * 1.5)`,
         opacity: 0,
         pointerEvents: 'none'
@@ -163,17 +159,19 @@ const generateStyle = (
     },
     icon: {
       label: 'toggleDetails__icon',
+      display: 'flex',
+      alignItems: 'center',
       '& > svg': {
         display: 'block' /* fix vertical alignment of icon */
       },
-      ...iconPositionStyles[iconPosition!],
-      ...iconSizeStyles[size!]
+      ...iconPositionStyles[iconPosition!]
     },
     details: {
       label: 'toggleDetails__details',
       boxSizing: 'border-box',
       paddingTop: componentTheme.togglePadding,
       color: componentTheme.textColor,
+      lineHeight: componentTheme.lineHeight,
       ...fontSizeStyles[size!],
       ...indentDetailsStyles[size!]
     },

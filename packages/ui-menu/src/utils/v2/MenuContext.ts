@@ -23,7 +23,7 @@
  */
 
 import { createContext } from 'react'
-import { MenuItem } from '../../Menu/v1/MenuItem'
+import { MenuItem } from '../../Menu/v2/MenuItem'
 
 /**
 ---

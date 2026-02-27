@@ -24,13 +24,15 @@
 
 import { Component } from 'react'
 
-import { SVGIcon } from '@instructure/ui-svg-images'
-import { IconCheckMarkSolid } from '@instructure/ui-icons'
+import {
+  CheckInstUIIcon,
+  MinusInstUIIcon,
+  renderIconWithProps
+} from '@instructure/ui-icons'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { CheckboxFacadeProps } from './props'
@@ -40,7 +42,7 @@ import type { CheckboxFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'Checkbox')
 class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static readonly componentId = 'CheckboxFacade'
 
@@ -69,13 +71,9 @@ class CheckboxFacade extends Component<CheckboxFacadeProps> {
 
   renderIcon() {
     if (this.props.indeterminate) {
-      return (
-        <SVGIcon viewBox="0 0 1920 1920" inline={false}>
-          <rect x="140" y="820" width="1640" height="280" />
-        </SVGIcon>
-      )
+      return renderIconWithProps(MinusInstUIIcon, 'sm', 'inverseColor')
     } else if (this.props.checked) {
-      return <IconCheckMarkSolid inline={false} />
+      return renderIconWithProps(CheckInstUIIcon, 'sm', 'inverseColor')
     } else {
       return null
     }

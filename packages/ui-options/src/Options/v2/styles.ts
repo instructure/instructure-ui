@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { OptionsTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OptionsStyle } from './props'
 
 /**
@@ -35,7 +35,9 @@ import type { OptionsStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: OptionsTheme): OptionsStyle => {
+const generateStyle = (
+  componentTheme: NewComponentTypes['Options']
+): OptionsStyle => {
   return {
     options: {
       label: 'options',
@@ -53,7 +55,7 @@ const generateStyle = (componentTheme: OptionsTheme): OptionsStyle => {
       cursor: 'default',
       display: 'block',
       fontWeight: componentTheme.labelFontWeight,
-      padding: componentTheme.nestedLabelPadding
+      padding: `${componentTheme.nestedLabelPaddingVertical} ${componentTheme.nestedLabelPaddingHorizontal}`
     }
   }
 }

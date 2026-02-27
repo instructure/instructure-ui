@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import type { CheckboxFacadeTheme } from '@instructure/shared-types'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import { calcFocusOutlineStyles } from '@instructure/emotion'
 import type { CheckboxFacadeProps, CheckboxFacadeStyle } from './props'
 
 /**
@@ -32,12 +33,14 @@ import type { CheckboxFacadeProps, CheckboxFacadeStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared theme token object
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: CheckboxFacadeTheme,
-  props: CheckboxFacadeProps
+  componentTheme: NewComponentTypes['Checkbox'],
+  props: CheckboxFacadeProps,
+  sharedTokens: SharedTokens
 ): CheckboxFacadeStyle => {
   const { size, checked, focused, hovered, indeterminate, invalid } = props
 
@@ -45,27 +48,28 @@ const generateStyle = (
 
   const sizeVariants = {
     small: {
-      label: { fontSize: componentTheme.labelFontSizeSmall },
+      label: { fontSize: componentTheme.fontSizeSm },
       facade: {
-        fontSize: componentTheme.iconSizeSmall,
-        width: componentTheme.facadeSizeSmall,
-        height: componentTheme.facadeSizeSmall
+        fontSize: componentTheme.fontSizeSm,
+        width: componentTheme.controlSizeSm,
+        height: componentTheme.controlSizeSm,
+        margin: `${componentTheme.controlVerticalMargin} ${componentTheme.gap} 0 0`
       }
     },
     medium: {
-      label: { fontSize: componentTheme.labelFontSizeMedium },
+      label: { fontSize: componentTheme.fontSizeMd },
       facade: {
-        fontSize: componentTheme.iconSizeMedium,
-        width: componentTheme.facadeSizeMedium,
-        height: componentTheme.facadeSizeMedium
+        fontSize: componentTheme.fontSizeMd,
+        width: componentTheme.controlSizeMd,
+        height: componentTheme.controlSizeMd
       }
     },
     large: {
-      label: { fontSize: componentTheme.labelFontSizeLarge },
+      label: { fontSize: componentTheme.fontSizeLg },
       facade: {
-        fontSize: componentTheme.iconSizeLarge,
-        width: componentTheme.facadeSizeLarge,
-        height: componentTheme.facadeSizeLarge
+        fontSize: componentTheme.fontSizeLg,
+        width: componentTheme.controlSizeLg,
+        height: componentTheme.controlSizeLg
       }
     }
   }
@@ -78,8 +82,8 @@ const generateStyle = (
     },
     facade: {
       label: 'checkboxFacade__facade',
-      color: componentTheme.color,
-      background: componentTheme.background,
+      color: '#FFFFFF',
+      background: componentTheme.backgroundColor,
       position: 'relative',
       display: 'flex',
       alignItems: 'center',
@@ -91,51 +95,37 @@ const generateStyle = (
         invalid ? componentTheme.errorBorderColor : componentTheme.borderColor
       }`,
       borderRadius: componentTheme.borderRadius,
-      marginInlineEnd: componentTheme.marginRight,
+      marginInlineEnd: componentTheme.gap,
       marginInlineStart: '0',
-      padding: componentTheme.padding,
       ...sizeVariants[size!].facade,
-
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: '-0.3125rem',
-        bottom: '-0.3125rem',
-        left: '-0.3125rem',
-        right: '-0.3125rem',
-        boxSizing: 'border-box',
-        borderRadius: `calc(${componentTheme.borderRadius} * 1.5)`,
-        border: `${componentTheme.focusBorderWidth} ${componentTheme.focusBorderStyle} ${componentTheme.focusBorderColor}`,
-        transition: 'all 0.2s',
-        transform: 'scale(0.75)',
-        opacity: 0,
-        pointerEvents: 'none',
-        ...(focused && {
-          transform: 'scale(1)',
-          opacity: 1
-        })
-      },
-
+      ...(sharedTokens?.focusOutline
+        ? calcFocusOutlineStyles(sharedTokens.focusOutline, {
+            withFocusOutline: focused
+          })
+        : {}),
       ...(isChecked && {
-        background: componentTheme.checkedBackground,
-        borderColor: componentTheme.checkedBorderColor
+        background: componentTheme.backgroundCheckedColor,
+        borderColor: componentTheme.borderCheckedColor
       }),
-      ...(hovered && {
-        borderColor: componentTheme.hoverBorderColor
-      })
+      ...(!isChecked &&
+        hovered && {
+          background: componentTheme.backgroundHoverColor,
+          borderColor: componentTheme.borderHoverColor
+        })
     },
     label: {
       label: 'checkboxFacade__label',
       flex: '1 1 auto',
+      alignSelf: 'center',
       minWidth: '0.0625rem',
-      color: componentTheme.labelColor,
-      fontFamily: componentTheme.labelFontFamily,
-      fontWeight: componentTheme.labelFontWeight,
-      lineHeight: componentTheme.labelLineHeight,
+      color: componentTheme.labelBaseColor,
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      lineHeight: componentTheme.lineHeight,
       ...sizeVariants[size!].label,
 
       ...(isChecked && {
-        color: componentTheme.checkedLabelColor
+        color: componentTheme.labelBaseColor
       })
     }
   }

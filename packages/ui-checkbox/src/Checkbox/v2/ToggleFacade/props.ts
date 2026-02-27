@@ -48,7 +48,7 @@ type ToggleFacadeProps = ToggleFacadeOwnProps &
   WithStyleProps<ToggleFacadeTheme, ToggleFacadeStyle>
 
 type ToggleFacadeStyle = ComponentStyle<
-  'toggleFacade' | 'facade' | 'icon' | 'iconToggle' | 'iconSVG' | 'label'
+  'toggleFacade' | 'facade' | 'icon' | 'iconToggle' | 'label'
 >
 const allowedProps: AllowedPropKeys = [
   'children',

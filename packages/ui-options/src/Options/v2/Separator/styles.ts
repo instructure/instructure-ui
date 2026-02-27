@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { OptionsSeparatorTheme } from '@instructure/shared-types'
+import type { NewComponentTypes } from '@instructure/ui-themes'
 import type { OptionsSeparatorStyle } from './props'
 
 /**
@@ -36,13 +36,13 @@ import type { OptionsSeparatorStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: OptionsSeparatorTheme
+  componentTheme: NewComponentTypes['OptionsSeparator']
 ): OptionsSeparatorStyle => {
   return {
     separator: {
       label: 'separator',
       height: componentTheme.height,
-      margin: componentTheme.margin,
+      margin: `${componentTheme.marginVertical} ${componentTheme.marginHorizontal}`,
       overflow: 'hidden',
       background: componentTheme.background
     }

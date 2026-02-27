@@ -601,8 +601,6 @@ class Popover extends Component<PopoverProps, PopoverState> {
             {...viewProps}
             borderColor={styles?.borderColor}
             borderRadius={styles?.borderRadius}
-            overflowX="hidden"
-            overflowY="hidden"
           >
             {content}
           </View>

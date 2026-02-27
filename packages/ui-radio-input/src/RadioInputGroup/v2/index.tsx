@@ -33,8 +33,8 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { RadioInput } from '../../RadioInput/v1'
-import type { RadioInputProps } from '../../RadioInput/v1/props'
+import { RadioInput } from '../../RadioInput/v2'
+import type { RadioInputProps } from '../../RadioInput/v2/props'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps } from './props'
