@@ -30,7 +30,7 @@ import {
   ColorMixer as cm,
   ColorPreset as cp,
   ColorPicker as cpk
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const ColorContrast = cc as any
 const ColorIndicator = ci as any
@@ -191,7 +191,10 @@ export default function ColorPickerPage() {
         ColorPreset, and ColorContrast). When opened near the bottom of the
         viewport, the popover should be scrollable.
       </p>
-      <div style={{ marginTop: '50vh' }} data-test-id="colorpicker-scrollable-container">
+      <div
+        style={{ marginTop: '50vh' }}
+        data-test-id="colorpicker-scrollable-container"
+      >
         <ColorPicker
           label="Color"
           placeholderText="Enter HEX"

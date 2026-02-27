@@ -27,6 +27,7 @@
     "@emotion/react": "^11",
     "@instructure/console": "workspace:*",
     "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-decorator": "workspace:*",
     "@instructure/ui-i18n": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",

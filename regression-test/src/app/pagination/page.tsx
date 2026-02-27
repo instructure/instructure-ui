@@ -24,7 +24,7 @@
 
 'use client'
 import React, { useMemo, useState } from 'react'
-import { Pagination as pg, View as vw } from '@instructure/ui'
+import { Pagination as pg, View as vw } from '@instructure/ui/latest'
 
 const Pagination = pg as any
 const View = vw as any

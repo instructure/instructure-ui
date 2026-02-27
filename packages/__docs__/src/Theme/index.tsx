@@ -23,7 +23,7 @@
  */
 
 import React, { Component } from 'react'
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 
 import { px } from '@instructure/ui-utils'
 
@@ -182,7 +182,7 @@ class Theme extends Component<ThemeProps> {
     const subSections = []
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     let baseColors: Primitives | {} = {}
-    const newData = Object.assign({}, data)
+    //const newData = Object.assign({}, data)
     if (name === 'colors' && (data as Colors).primitives) {
       baseColors = (data as Colors).primitives
       this._colorMap = this.mapColors({
@@ -191,6 +191,8 @@ class Theme extends Component<ThemeProps> {
       })
       subSections.push(<ThemeColors colors={baseColors} label="primitives" />)
     }
+    return // TODO fix it, it breaks for new themes
+    /*
     Object.keys(newData).forEach((key) => {
       //primitives are the color palette above
       if (
@@ -202,7 +204,6 @@ class Theme extends Component<ThemeProps> {
       }
       // @ts-ignore TODO type later
       const item = data![key]
-
       if (typeof item === 'object') {
         const subData: Record<string, { text: string; color: string }> = {}
         const subKeys = Object.keys(item) as string[]
@@ -238,20 +239,20 @@ class Theme extends Component<ThemeProps> {
     } else {
       return this.renderTable(name, this.renderRows(data as any))
     }
+    */
   }
 
   render() {
     const sections: React.ReactElement[] = []
 
     const { themeKey, variables } = this.props
-
     const sortedKeys = Object.keys(variables).sort((a, b) =>
       a === 'colors' ? -1 : b === 'colors' ? 1 : 0
     ) as Array<keyof BaseTheme>
     for (const name of sortedKeys) {
       const value = variables[name]
       if (value && typeof value === 'object') {
-        sections.push(this.renderSection(name, value))
+        //sections.push(this.renderSection(name, value))
       }
     }
 
@@ -280,7 +281,7 @@ ${'```javascript\n \
 ---\n \
 type: code\n \
 ---'}
-import { theme } from '${this.props.requirePath}'
+import { ${this.props.themeKey} } from '@instructure/ui-themes'
 const themeOverrides = { colors: { brand: 'red' } }
 
 ReactDOM.render(

@@ -29,24 +29,26 @@ import {
   RadioInput as ri,
   RadioInputGroup as rig,
   View as vw,
-  ScreenReaderContent as src,
-  IconGradebookLine as igl,
-  IconXSolid as ixs,
-  IconUserSolid as ius,
-  IconModuleLine as iml,
-  IconVideoLine as ivl
-} from '@instructure/ui'
+  ScreenReaderContent as src
+} from '@instructure/ui/latest'
+import {
+  BookCheckInstUIIcon as igl,
+  XInstUIIcon as ixs,
+  UserInstUIIcon as ius,
+  BoxesInstUIIcon as iml,
+  PlaySquareInstUIIcon as ivl
+} from '@instructure/ui-icons'
 
 const TreeBrowser = tb as any
 const RadioInput = ri as any
 const RadioInputGroup = rig as any
 const View = vw as any
 const ScreenReaderContent = src as any
-const IconGradebookLine = igl as any
-const IconXSolid = ixs as any
-const IconUserSolid = ius as any
-const IconModuleLine = iml as any
-const IconVideoLine = ivl as any
+const BookCheckInstUIIcon = igl as any
+const XInstUIIcon = ixs as any
+const UserInstUIIcon = ius as any
+const BoxesInstUIIcon = iml as any
+const PlaySquareInstUIIcon = ivl as any
 
 export default function TreeBrowserPage() {
   const [size, setSize] = useState('medium')
@@ -113,9 +115,9 @@ export default function TreeBrowserPage() {
             3: { id: 3, name: 'Juan' }
           }}
           defaultExpanded={[1]}
-          collectionIcon={IconGradebookLine}
-          collectionIconExpanded={IconXSolid}
-          itemIcon={IconUserSolid}
+          collectionIcon={BookCheckInstUIIcon}
+          collectionIconExpanded={XInstUIIcon}
+          itemIcon={UserInstUIIcon}
           rootId={1}
           size="medium"
         />
@@ -133,13 +135,13 @@ export default function TreeBrowserPage() {
             3: { id: 3, name: 'Students' }
           }}
           defaultExpanded={[1]}
-          itemIcon={IconUserSolid}
+          itemIcon={UserInstUIIcon}
           rootId={1}
           size="large"
           getItemProps={({ name, ...props }: any) => {
-            let itemIcon = IconUserSolid
-            if (name === 'Modules') itemIcon = IconModuleLine
-            if (name === 'Videos') itemIcon = IconVideoLine
+            let itemIcon = UserInstUIIcon
+            if (name === 'Modules') itemIcon = BoxesInstUIIcon
+            if (name === 'Videos') itemIcon = PlaySquareInstUIIcon
             return { ...props, itemIcon, name }
           }}
         />

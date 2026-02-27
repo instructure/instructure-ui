@@ -21,14 +21,15 @@
     "build:types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
-  "dependencies": {
-    "@instructure/shared-types": "workspace:*"
-  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
+  },
+  "dependencies": {
+    "@instructure/shared-types": "workspace:*",
+    "@tokens-studio/types": "^0.5.2"
   },
   "publishConfig": {
     "access": "public"

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { TruncateList } from '@instructure/ui'
+import { TruncateList } from '@instructure/ui/latest'
 import { expect } from 'chai'
 
 import '../support/component'

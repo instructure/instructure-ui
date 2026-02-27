@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleForDocs as withStyle } from '../withStyleForDocs'
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
@@ -34,53 +34,69 @@ import generateStyle from './styles'
 import { allowedProps } from './props'
 import type { ComponentThemeProps } from './props'
 
+type ThemeEntry = { name: string; value: string | number }
+
 @withStyle(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
   static allowedProps = allowedProps
 
-  renderValueCell(
-    value: undefined | string | object | number,
-    colorPrimitives: object
-  ) {
+  renderValueCell(value: undefined | string | number) {
     if (!value && value !== 0) {
       return <code>ERROR - possible bug</code>
-    }
-    if (typeof value === 'object') {
-      return <code>{JSON.stringify(value)}</code>
     }
     if (
       value.toString().charAt(0) === '#' ||
       value.toString().substring(0, 3) === 'rgb'
     ) {
-      // find color primitive name from hex value
-      const color = Object.entries(colorPrimitives).find(([, v]) => v === value)
       return (
         <span>
           <View margin="0 xx-small 0 0">
             <ColorSwatch color={value} />
           </View>
-          <code>{color?.[0] ?? value}</code>
+          <code>{value}</code>
         </span>
       )
     }
     return <code>{value}</code>
   }
 
-  renderRows() {
-    const { componentTheme, themeVariables } = this.props
-    const colorPrimitives = themeVariables.colors.primitives
+  /**
+   * Theme objects can be nested, so we need to walk the tree to get all the
+   * keys, e.g., box shadow values
+   */
+  themeToArray(
+    componentTheme: typeof this.props.componentTheme,
+    arr: ThemeEntry[],
+    prefix: string | undefined = undefined
+  ) {
+    for (const key in componentTheme) {
+      if (typeof componentTheme[key] === 'object') {
+        this.themeToArray(componentTheme[key], arr, key)
+      } else if (componentTheme[key] !== undefined) {
+        const name = prefix ? `${prefix}.${key}` : key
+        arr.push({ name: name, value: componentTheme[key] })
+      } else {
+        console.error(
+          `ComponentTheme: Key "${key}" is undefined`,
+          componentTheme
+        )
+      }
+    }
+    return arr
+  }
 
-    return Object.keys(componentTheme)
-      .sort((a, b) => a.localeCompare(b))
-      .map((name) => {
+  renderRows() {
+    const { componentTheme } = this.props
+    const ret = this.themeToArray(componentTheme, [])
+    return ret
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((entry) => {
         return (
-          <Table.Row key={name}>
+          <Table.Row key={entry.name}>
             <Table.Cell>
-              <code>{name}</code>
+              <code>{entry.name}</code>
             </Table.Cell>
-            <Table.Cell>
-              {this.renderValueCell(componentTheme[name], colorPrimitives)}
-            </Table.Cell>
+            <Table.Cell>{this.renderValueCell(entry.value)}</Table.Cell>
           </Table.Row>
         )
       })

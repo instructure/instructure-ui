@@ -54,7 +54,10 @@ const getTheme =
     // we need to clone the ancestor theme not to override it
     let currentTheme
     if (Object.keys(ancestorTheme).length === 0) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (
+        process.env.NODE_ENV !== 'production' ||
+        process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true'
+      ) {
         console.warn(
           'No theme provided for [InstUISettingsProvider], using default `canvas` theme.'
         )
@@ -78,7 +81,10 @@ const getTheme =
       // If the prop passed is not an Object, it will throw an error.
       // We are using this fail-safe here for the non-TS users,
       // because the whole page can break without a theme.
-      if (process.env.NODE_ENV !== 'production') {
+      if (
+        process.env.NODE_ENV !== 'production' ||
+        process.env.GITHUB_PULL_REQUEST_PREVIEW === 'true'
+      ) {
         console.warn(
           'The `theme` property provided to InstUISettingsProvider is not a valid InstUI theme object.\ntheme: ',
           resolvedThemeOrOverride

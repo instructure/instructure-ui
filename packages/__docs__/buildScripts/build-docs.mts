@@ -27,8 +27,12 @@ import path from 'path'
 import { getClientProps } from './utils/getClientProps.mjs'
 import { processFile } from './processFile.mjs'
 import fs from 'fs'
-import { theme as canvasTheme } from '@instructure/canvas-theme'
-import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
+import {
+  canvas,
+  canvasHighContrast,
+  rebrandDark,
+  rebrandLight
+} from '@instructure/ui-themes'
 import type {
   LibraryOptions,
   MainDocsData,
@@ -44,7 +48,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const require = createRequire(import.meta.url)
 
-// This needs to be required otherwise TSC will mess up the directory structure
+// This needs to be required, otherwise TSC will mess up the directory structure
 // in the output directory
 // eslint-disable-next-line @instructure/no-relative-imports
 const rootPackage = require('../../../package.json') // root package.json
@@ -61,16 +65,19 @@ const library: LibraryOptions = {
   scope: '@instructure'
 }
 
+// TODO this misses:
+// ui-react-utils/src/DeterministicIDContext.ts and some others
 const pathsToProcess = [
   // these can be commented out for faster debugging
   'CHANGELOG.md',
-  '**/packages/**/*.md', // package READMEs
+  'CODE_OF_CONDUCT.md',
+  'LICENSE.md',
   '**/docs/**/*.md', // general docs
   '**/src/*.{ts,tsx}', // util src files
-  '**/src/*/*.{ts,tsx}', // component src files
-  '**/src/*/*/*.{ts,tsx}', // child component src files
-  'CODE_OF_CONDUCT.md',
-  'LICENSE.md'
+  // TODO expand this to support new components
+  '**/src/*/v1/*.md', // package READMEs
+  '**/src/*/v1/*.{ts,tsx}', // component src files
+  '**/src/*/v1/*/*.{ts,tsx}' // child component src files
 ]
 
 const pathsToIgnore = [
@@ -99,6 +106,9 @@ const pathsToIgnore = [
   '**/ui-theme-tokens/**',
   '**/ui-test-*/src/**',
   '**/ui-scripts/src/**',
+
+  // large generated files:
+  '**/lucide/**', // Lucide icons directory (large generated file)
 
   // deprecated packages and modules:
   '**/InputModeListener.ts',
@@ -131,18 +141,19 @@ function buildDocs() {
         'Parsing markdown and source files... (' + matches.length + ' files)'
       )
       let docs = matches.map((relativePath) => {
-        // loop trough every source and Readme file
+        // loop through every source and Readme file
         return processSingleFile(path.resolve(relativePath))
       })
       docs = docs.filter(Boolean) // filter out undefined
+
       const themes = parseThemes()
       const clientProps = getClientProps(docs as ProcessedFile[], library)
-      const props: MainDocsData = {
+      const mainDocsData: MainDocsData = {
         ...clientProps,
         themes: themes,
         library
       }
-      const markdownsAndSources = JSON.stringify(props)
+      const markdownsAndSources = JSON.stringify(mainDocsData)
       fs.writeFileSync(
         buildDir + 'markdown-and-sources-data.json',
         markdownsAndSources
@@ -167,7 +178,7 @@ function buildDocs() {
       // eslint-disable-next-line no-console
       console.log('Copying icons data...')
       fs.copyFileSync(
-        projectRoot + '/packages/ui-icons/__build__/icons-data.json',
+        projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
         buildDir + 'icons-data.json'
       )
 
@@ -255,14 +266,10 @@ function tryParseReadme(dirName: string) {
 
 function parseThemes() {
   const parsed: MainDocsData['themes'] = {}
-  parsed[canvasTheme.key] = {
-    resource: canvasTheme,
-    requirePath: '@instructure/canvas-theme'
-  }
-  parsed[canvasHighContrastTheme.key] = {
-    resource: canvasHighContrastTheme,
-    requirePath: '@instructure/canvas-high-contrast-theme'
-  }
+  parsed[canvas.key] = { resource: canvas }
+  parsed[canvasHighContrast.key] = { resource: canvasHighContrast }
+  parsed[rebrandLight.key] = { resource: rebrandLight }
+  parsed[rebrandDark.key] = { resource: rebrandDark }
   return parsed
 }
 

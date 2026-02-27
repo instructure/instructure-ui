@@ -22,6 +22,16 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-axe-check": "workspace:*",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-badge": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "15.0.7",
+    "@testing-library/user-event": "^14.6.1",
+    "vitest": "^3.2.2"
+  },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@instructure/emotion": "workspace:*",
@@ -29,20 +39,9 @@
     "@instructure/ui-a11y-utils": "workspace:*",
     "@instructure/ui-dom-utils": "workspace:*",
     "@instructure/ui-form-field": "workspace:*",
-    "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-react-utils": "workspace:*",
-    "@instructure/ui-tag": "workspace:*"
-  },
-  "devDependencies": {
-    "@instructure/ui-axe-check": "workspace:*",
-    "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-badge": "workspace:*",
-    "@instructure/ui-color-utils": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "15.0.7",
-    "@testing-library/user-event": "^14.6.1",
-    "vitest": "^3.2.2"
+    "@instructure/ui-tag": "workspace:*",
+    "@instructure/ui-themes": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 <=19"
@@ -53,10 +52,28 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
+      "types": "./types/exports/a.d.ts",
+      "import": "./es/exports/a.js",
+      "require": "./lib/exports/a.js",
+      "default": "./es/exports/a.js"
+    },
+    "./v11_6": {
+      "types": "./types/exports/a.d.ts",
+      "import": "./es/exports/a.js",
+      "require": "./lib/exports/a.js",
+      "default": "./es/exports/a.js"
+    },
+    "./v11_7": {
+      "types": "./types/exports/b.d.ts",
+      "import": "./es/exports/b.js",
+      "require": "./lib/exports/b.js",
+      "default": "./es/exports/b.js"
+    },
+    "./latest": {
+      "types": "./types/exports/b.d.ts",
+      "import": "./es/exports/b.js",
+      "require": "./lib/exports/b.js",
+      "default": "./es/exports/b.js"
     },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",

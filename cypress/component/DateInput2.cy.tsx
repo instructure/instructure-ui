@@ -25,7 +25,7 @@ import { useState } from 'react'
 import 'cypress-real-events'
 
 import '../support/component'
-import { DateInput2, ApplyLocale } from '@instructure/ui'
+import { DateInput2, ApplyLocale } from '@instructure/ui/latest'
 import { SinonSpy } from 'cypress/types/sinon'
 
 const TIMEZONES_DST = [
@@ -618,7 +618,10 @@ describe('<DateInput2/>', () => {
 
         cy.get('table').should('be.visible')
 
-        cy.contains('button', dayForSelect).should('be.enabled').click().wait(500)
+        cy.contains('button', dayForSelect)
+          .should('be.enabled')
+          .click()
+          .wait(500)
 
         cy.get('input')
           .invoke('val')

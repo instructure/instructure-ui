@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { combineDataCid } from '@instructure/ui-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

@@ -23,14 +23,10 @@
  */
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type {
-  ComponentTheme,
-  BaseThemeVariables
-} from '@instructure/shared-types'
+import type { ComponentTheme } from '@instructure/shared-types'
 
 type ComponentThemeOwnProps = {
   componentTheme: ComponentTheme
-  themeVariables: BaseThemeVariables
 }
 type PropKeys = keyof ComponentThemeOwnProps
 
@@ -40,7 +36,7 @@ type ComponentThemeProps = ComponentThemeOwnProps &
   WithStyleProps<null, ComponentThemeStyle>
 
 type ComponentThemeStyle = ComponentStyle<'componentTheme'>
-const allowedProps: AllowedPropKeys = ['componentTheme', 'themeVariables']
+const allowedProps: AllowedPropKeys = ['componentTheme']
 
 export { allowedProps }
 export type { ComponentThemeProps, ComponentThemeStyle }

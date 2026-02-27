@@ -135,3 +135,5 @@ export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'
 export { TruncateList } from '@instructure/ui-truncate-list'
 export { canvas, canvasHighContrast } from '@instructure/ui-themes'
+// eslint-disable-next-line no-restricted-imports
+export { V12ChangelogTable } from './src/V12ChangelogTable'

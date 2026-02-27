@@ -25,7 +25,7 @@
 import '../support/component'
 import 'cypress-real-events'
 
-import { Table } from '@instructure/ui'
+import { Table } from '@instructure/ui/latest'
 
 describe('<Table/>', () => {
   const TestTable = ({

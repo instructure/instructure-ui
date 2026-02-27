@@ -46,7 +46,8 @@ const DIRS_TO_DELETE = [
   'tokens',
   '.babel-cache',
   '.cache',
-  'es'
+  'es',
+  'src/themes/newThemes'
 ]
 
 async function deleteDirs(dirs = []) {

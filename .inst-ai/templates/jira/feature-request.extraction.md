@@ -3,6 +3,7 @@
 **Task:** Analyze the conversation and extract entities into a JSON object. Use `null` for missing values.
 
 **Entities:**
+
 - `feature_name`: string | null - The name of the requested feature
 - `requestor_name`: string - Name of the person requesting the feature
 - `business_justification`: string | null - Why this feature is needed

@@ -30,7 +30,7 @@ import {
   Pill as pl,
   IconCheckSolid as ics,
   IconArrowOpenEndSolid as iaoes
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const Drilldown = dd as any
 const Button = btn as any

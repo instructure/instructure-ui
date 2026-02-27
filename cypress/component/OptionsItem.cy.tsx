@@ -25,7 +25,7 @@
 import '../support/component'
 import 'cypress-real-events'
 import { expect } from 'chai'
-import { Options } from '@instructure/ui'
+import { Options } from '@instructure/ui/latest'
 import { IconCheckSolid } from '@instructure/ui-icons'
 
 describe('<OptionsItem/>', () => {

@@ -3,9 +3,9 @@
   "version": "11.6.0",
   "description": "A UI component to communicate concise status.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "module": "./es/index.js",
-  "main": "./lib/index.js",
-  "types": "./types/index.d.ts",
+  "module": "./es/Pill/11_5/index.js",
+  "main": "./lib/Pill/11_5/index.js",
+  "types": "./types/Pill/11_5/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -30,6 +30,7 @@
     "@instructure/ui-react-utils": "workspace:*",
     "@instructure/ui-tooltip": "workspace:*",
     "@instructure/ui-truncate-text": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
     "@instructure/ui-utils": "workspace:*",
     "@instructure/ui-view": "workspace:*"
   },
@@ -39,7 +40,6 @@
     "@instructure/ui-color-utils": "workspace:*",
     "@instructure/ui-icons": "workspace:*",
     "@instructure/ui-scripts": "workspace:*",
-    "@instructure/ui-themes": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "15.0.7",
     "vitest": "^3.2.2"
@@ -53,10 +53,28 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
+      "types": "./types/exports/a.d.ts",
+      "import": "./es/exports/a.js",
+      "require": "./lib/exports/a.js",
+      "default": "./es/exports/a.js"
+    },
+    "./v11_6": {
+      "types": "./types/exports/a.d.ts",
+      "import": "./es/exports/a.js",
+      "require": "./lib/exports/a.js",
+      "default": "./es/exports/a.js"
+    },
+    "./v11_7": {
+      "types": "./types/exports/b.d.ts",
+      "import": "./es/exports/b.js",
+      "require": "./lib/exports/b.js",
+      "default": "./es/exports/b.js"
+    },
+    "./latest": {
+      "types": "./types/exports/b.d.ts",
+      "import": "./es/exports/b.js",
+      "require": "./lib/exports/b.js",
+      "default": "./es/exports/b.js"
     },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",

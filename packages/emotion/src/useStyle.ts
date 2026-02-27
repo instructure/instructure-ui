@@ -24,55 +24,86 @@
 
 import { useTheme } from './useTheme'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
-import type { BaseTheme, ComponentTheme } from '@instructure/shared-types'
+import type {
+  SharedTokens,
+  NewComponentTypes,
+  Theme
+} from '@instructure/ui-themes'
+import type { BaseThemeOrOverride } from './EmotionTypes'
 
 // returns the second parameter of a function
 type SecondParameter<T extends (...args: any) => any> =
   Parameters<T>[1] extends undefined ? never : Parameters<T>[1]
 
-type UseStyleParamsWithTheme<P extends (theme: any, params: any) => any> = {
+type GenerateStyleParams =
+  | ((componentTheme: any, params: any, sharedTokens: SharedTokens) => any)
+  | ((componentTheme: any, params: any) => any)
+  | ((componentTheme: any) => any)
+
+/**
+ * Type for a theme override
+ */
+type ThemeOverrideValue =
+  | Partial<Theme>
+  | ((
+      componentTheme: Theme,
+      currentTheme: NewComponentTypes[keyof NewComponentTypes]
+    ) => Partial<Theme>)
+
+const isNewThemeObject = (obj: BaseThemeOrOverride): obj is Theme => {
+  return typeof (obj as any)?.newTheme === 'object'
+}
+
+/**
+ * new useStyle syntax, use this with v12 themes
+ */
+
+// TODO: improve useStyle to handle generateStyle functions that don't
+// have a theme.
+const useStyle = <P extends GenerateStyleParams>(useStyleParams: {
   generateStyle: P
   params?: SecondParameter<P>
-  generateComponentTheme: (theme: BaseTheme) => ComponentTheme
-  componentId: string
+  // needs to be a string too because it might be a child component
+  componentId: keyof NewComponentTypes | string
+  themeOverride: ThemeOverrideValue | undefined
   displayName?: string
-}
-
-type UseStyleParamsWithoutTheme<P extends (theme: any, params: any) => any> = {
-  generateStyle: P
-  params?: SecondParameter<P>
-  generateComponentTheme?: undefined
-  componentId?: undefined
-  displayName?: undefined
-}
-
-const useStyle = <P extends (theme: any, params: any) => any>(
-  useStyleParams: UseStyleParamsWithTheme<P> | UseStyleParamsWithoutTheme<P>
-): ReturnType<P> => {
-  const {
-    generateStyle,
-    generateComponentTheme,
-    params,
-    componentId,
-    displayName
-  } = useStyleParams
+  //in case of a child component needed to use it's parent's tokens, provide parent's name
+  useTokensFrom?: keyof NewComponentTypes
+}): ReturnType<P> => {
+  const { generateStyle, params, componentId, displayName, themeOverride } =
+    useStyleParams
+  const useTokensFrom = useStyleParams.useTokensFrom
   const theme = useTheme()
-  const baseComponentTheme = generateComponentTheme
-    ? generateComponentTheme(theme as BaseTheme)
-    : {}
 
-  const themeOverride = getComponentThemeOverride(
+  let baseComponentTheme = {}
+  const componentWithTokensId = useTokensFrom ?? componentId
+
+  if (
+    isNewThemeObject(theme) && // TODO: is it possible not to have a theme object here?
+    theme.newTheme.components[componentWithTokensId as keyof NewComponentTypes]
+  ) {
+    baseComponentTheme =
+      theme.newTheme.components[
+        componentWithTokensId as keyof NewComponentTypes
+      ]
+  }
+  const finalOverride = getComponentThemeOverride(
     theme,
-    displayName ? displayName : componentId || '',
-    componentId,
-    params,
+    useTokensFrom ?? displayName ?? componentId ?? '',
+    componentWithTokensId,
+    themeOverride,
     baseComponentTheme
   )
 
-  const componentTheme = { ...baseComponentTheme, ...themeOverride }
+  const componentTheme = { ...baseComponentTheme, ...finalOverride }
 
-  return generateStyle(componentTheme, params ? params : {})
+  return generateStyle(
+    componentTheme,
+    params,
+    (theme as Theme).newTheme.sharedTokens
+  )
 }
 
 export default useStyle
 export { useStyle }
+export type { ThemeOverrideValue }

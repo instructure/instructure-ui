@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Pages, PagesPage } from '@instructure/ui-pages'
-
+import { Pages, PagesPage } from '@instructure/ui/latest'
 import '../support/component'
 import 'cypress-real-events'
 

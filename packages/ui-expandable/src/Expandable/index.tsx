@@ -26,7 +26,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 
 import { allowedProps } from './props'
 import type { ExpandableProps, ExpandableState } from './props'
-import type { ViewProps } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view/latest'
 
 import { withDeterministicId } from '@instructure/ui-react-utils'
 

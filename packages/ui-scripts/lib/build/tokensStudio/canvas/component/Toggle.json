@@ -1,0 +1,214 @@
+{
+  "toggle": {
+    "backgroundColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundHoverColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundDisabledColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "backgroundReadonlyColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "errorBackgroundColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "errorBackgroundHoverColor": {
+      "value": "{color.background.muted}",
+      "type": "color"
+    },
+    "borderColor": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderHoverColor": {
+      "value": "{color.stroke.interactive.input.hover}",
+      "type": "color"
+    },
+    "borderDisabledColor": {
+      "value": "{color.stroke.interactive.input.base}",
+      "type": "color"
+    },
+    "borderReadonlyColor": {
+      "value": "{color.stroke.interactive.input.readonly}",
+      "type": "color"
+    },
+    "errorBorderColor": {
+      "value": "{color.stroke.error}",
+      "type": "color"
+    },
+    "checkedBorderColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderHoverColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderDisabledColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "checkedBorderReadonlyColor": {
+      "value": "{color.stroke.success}",
+      "type": "color"
+    },
+    "borderWidth": {
+      "value": "{borderWidth.sm}",
+      "type": "borderWidth"
+    },
+    "borderRadius": {
+      "value": "{borderRadius.full}",
+      "type": "borderRadius"
+    },
+    "checkedBackgroundColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundHoverColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundDisabledColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "checkedBackgroundReadonlyColor": {
+      "value": "{color.background.success}",
+      "type": "color"
+    },
+    "labelColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "labelDisabledColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    },
+    "uncheckedIconBorderColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconErrorBorderColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconBorderHoverColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconBorderDisabledColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "uncheckedIconBorderReadonlyColor": {
+      "value": "{color.stroke.strong}",
+      "type": "color"
+    },
+    "checkedIconBorderColor": {
+      "value": "{color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "checkedIconBorderHoverColor": {
+      "value": "{color.stroke.interactive.action.success.hover}",
+      "type": "color"
+    },
+    "checkedIconBorderDisabledColor": {
+      "value": "{color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "checkedIconBorderReadonlyColor": {
+      "value": "{color.stroke.interactive.action.success.base}",
+      "type": "color"
+    },
+    "marginStart": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "marginEnd": {
+      "value": "{spacing.spaceMd}",
+      "type": "spacing"
+    },
+    "marginVertical": {
+      "value": "{spacing.spaceSm}",
+      "type": "spacing"
+    },
+    "toggleShadow": {
+      "value": [
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow1}",
+          "y": "{dropShadow.y.elevation1.dropshadow1}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "color": "{color.dropShadow.shadowColor1}",
+          "type": "dropShadow"
+        },
+        {
+          "x": "{dropShadow.x.elevation1.dropshadow2}",
+          "y": "{dropShadow.y.elevation1.dropshadow2}",
+          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
+          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "color": "{color.dropShadow.shadowColor2}",
+          "type": "dropShadow"
+        }
+      ],
+      "type": "boxShadow",
+      "description": "Do not use this for other components"
+    },
+    "toggleSize": {
+      "value": "1.625rem",
+      "type": "sizing"
+    },
+    "toggleWidth": {
+      "value": "2.5rem",
+      "type": "sizing"
+    },
+    "labelFontFamily": {
+      "value": "{fontFamily.base}",
+      "type": "fontFamilies"
+    },
+    "labelFontWeight": {
+      "value": "{fontWeight.body.base}",
+      "type": "fontWeights"
+    },
+    "labelLineHeightMd": {
+      "value": "{lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelLineHeightLg": {
+      "value": "{lineHeight.paragraph.textBase}",
+      "type": "lineHeights"
+    },
+    "labelLineHeightSm": {
+      "value": "{lineHeight.paragraph.textSm}",
+      "type": "lineHeights"
+    },
+    "labelFontSizeSm": {
+      "value": "{fontSize.textSm}",
+      "type": "fontSizes"
+    },
+    "labelFontSizeMd": {
+      "value": "{fontSize.textBase}",
+      "type": "fontSizes"
+    },
+    "labelFontSizeLg": {
+      "value": "{fontSize.textLg}",
+      "type": "fontSizes"
+    },
+    "toggleBackground": {
+      "value": "{color.background.base}",
+      "type": "color"
+    },
+    "disabledOpacity": {
+      "value": "{opacity.disabled}",
+      "type": "opacity"
+    }
+  }
+}

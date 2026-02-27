@@ -16,7 +16,7 @@ import {
   Heading,
   CloseButton,
   Avatar,
-  withStyle,
+  withStyleLegacy as withStyle,
   IconButton,
   IconSearchLine,
   IconArrowOpenDownLine,

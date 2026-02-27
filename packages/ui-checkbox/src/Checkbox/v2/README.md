@@ -1,0 +1,216 @@
+---
+describes: Checkbox
+---
+
+By default, the Checkbox component is a custom styled HTML checkbox. To default the checkbox to checked,
+set the `defaultChecked` prop.
+
+Adjust the size of the checkbox and label text via the `size` prop. The default size is
+`medium`.
+
+```js
+---
+type: example
+---
+<Checkbox label={lorem.sentence()} value="medium" defaultChecked />
+```
+
+The default Checkbox in its disabled state:
+
+```js
+---
+type: example
+---
+<CheckboxGroup
+  defaultValue={['medium']}
+  name="example"
+  description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}
+>
+  <Checkbox label={lorem.sentence()} value="medium" disabled />
+  <Checkbox label={lorem.sentence()} value="small" disabled />
+</CheckboxGroup>
+```
+
+The `indeterminate` property triggers a visual state that handles
+situations where "child" Checkboxes are neither all checked nor all
+unchecked. Note the use of `aria-labelledby` to make the relationship
+between the parent and child Checkboxes clear to screenreader users.
+
+_Note: the `toggle` variant does not support the `indeterminate`
+property._
+
+```js
+---
+type: example
+---
+  const Example = () => {
+    const [value, setValue] = useState(['his111', 'eng203'])
+
+    const updateValue = (valueToUpdate) => {
+      const index = value.indexOf(valueToUpdate)
+      console.log(index)
+      if (index === -1) {
+        setValue([...value, valueToUpdate])
+      } else {
+        setValue([...value.slice(0, index), ...value.slice(index + 1)])
+      }
+    }
+
+    return (
+      <FormFieldGroup
+        description={
+          <ScreenReaderContent>
+            <span id="groupLabel">Courses to edit</span>
+          </ScreenReaderContent>
+        }
+        rowSpacing="small"
+      >
+        <Checkbox
+          aria-labelledby="groupLabel selectAllLabel"
+          label={<span id="selectAllLabel">Select all courses</span>}
+          value="all"
+          onChange={() =>
+            setValue(value.length === 3 ? [] : ['eng203', 'sci101', 'his111'])
+          }
+          checked={value.length === 3}
+          indeterminate={value.length > 0 && value.length < 3}
+        />
+        <View as="div" padding="0 0 0 medium">
+          <Checkbox
+            aria-labelledby="groupLabel eng203Label"
+            label={<span id="eng203Label">English 203</span>}
+            value="eng203"
+            name="courses"
+            onChange={(event) => {
+              updateValue(event.target.value)
+            }}
+            checked={value.indexOf('eng203') !== -1}
+          />
+        </View>
+        <View as="div" padding="0 0 0 medium">
+          <Checkbox
+            aria-labelledby="groupLabel sci101Label"
+            label={<span id="sci101Label">Science 101</span>}
+            value="sci101"
+            name="courses"
+            onChange={(event) => {
+              updateValue(event.target.value)
+            }}
+            checked={value.indexOf('sci101') !== -1}
+          />
+        </View>
+        <View as="div" padding="0 0 0 medium">
+          <Checkbox
+            aria-labelledby="groupLabel hist101Label"
+            label={<span id="hist101Label">History 111</span>}
+            value="his111"
+            name="courses"
+            onChange={(event) => {
+              updateValue(event.target.value)
+            }}
+            checked={value.indexOf('his111') !== -1}
+          />
+        </View>
+      </FormFieldGroup>
+    )
+  }
+
+  render(<Example />)
+```
+
+Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch. For **toggle only** the size prop affects the size of the label and not the actual size of the switch.
+
+```js
+---
+type: example
+---
+<FormFieldGroup description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}>
+  <Checkbox label="Small size" value="small" variant="toggle" size="small" defaultChecked />
+  <Checkbox label="Medium size" value="medium" variant="toggle" />
+  <Checkbox label="Large size" value="large" variant="toggle" size="large" defaultChecked />
+</FormFieldGroup>
+```
+
+To change the label placement for the toggle variety, use the labelPlacement prop. The default
+placement is 'end'.
+
+_Note: the `simple` variant does not support the `labelPlacement`
+property._
+
+```js
+---
+type: example
+---
+<FormFieldGroup description={<ScreenReaderContent>Toggle label examples</ScreenReaderContent>}>
+  <Checkbox label="Top" variant="toggle" labelPlacement="top" defaultChecked />
+  <Checkbox label="Start" variant="toggle" labelPlacement="start" />
+  <Checkbox label="End" variant="toggle" labelPlacement="end" defaultChecked />
+</FormFieldGroup>
+```
+
+You might want to hide the label text when using the toggle switch variant. Do that by wrapping
+the text in the [ScreenReaderContent](ScreenReaderContent) component.
+
+```js
+---
+type: example
+---
+<Checkbox
+  label={<ScreenReaderContent>Screenreader-accessible label</ScreenReaderContent>}
+  value="accessible"
+  variant="toggle"
+/>
+```
+
+### Error messages
+
+Checkboxes can display error messages using the `messages` prop. This works for both the default checkbox and the toggle variant.
+
+```js
+---
+type: example
+---
+<FormFieldGroup>
+  <Checkbox
+    label="Checkbox"
+    isRequired={true}
+    messages={[{type: 'newError', text: 'Short error message'}]}
+  />
+  <Checkbox
+    variant="toggle"
+    label="Checkbox_toggle"
+    isRequired={true}
+    messages={[{type: 'newError', text: 'Short error message'}]}
+  />
+</FormFieldGroup>
+```
+
+### Guidelines
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <Figure.Item>Align to the left side of the label</Figure.Item>
+    <Figure.Item>Use when multiple selections are allowed</Figure.Item>
+    <Figure.Item>Use to save space from toggles</Figure.Item>
+    <Figure.Item>Stack vertically if there is more than two options to select</Figure.Item>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <Figure.Item>Run more than two checkboxes horizontally</Figure.Item>
+  </Figure>
+</Guidelines>
+```
+
+```js
+---
+type: embed
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <Figure.Item>Do not add business logic to `onMouseOver` or `onMouseOut` events. These events are not triggered by keyboard navigation</Figure.Item>
+  </Figure>
+</Guidelines>
+```

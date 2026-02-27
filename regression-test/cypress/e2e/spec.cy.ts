@@ -41,25 +41,28 @@ afterEach(() => {
   })
 })
 
-// log fn taken from https://www.npmjs.com/package/cypress-axe
 function terminalLog(violations: Result[]) {
   cy.task(
     'log',
     `${violations.length} accessibility violation${
       violations.length === 1 ? '' : 's'
-    } ${violations.length === 1 ? 'was' : 'were'} detected`
+    } ${violations.length === 1 ? 'was' : 'were'} detected.`
   )
-  // pluck specific keys to keep the table readable
-  const violationData = violations.map(
-    ({ id, impact, description, nodes }) => ({
+
+  violations.map(({ id, impact, description, nodes }) => {
+    cy.task('table', {
       id,
       impact,
       description,
-      nodes: nodes.length
+      summary: nodes[0].failureSummary
     })
-  )
-
-  cy.task('table', violationData)
+    const ret: any = {}
+    cy.task('log', 'This error happens in the following elements:')
+    nodes.forEach((item, index) => {
+      ret[`${item.target.join(',')}`] = { html: item.html }
+    })
+    cy.task('table', ret)
+  })
 }
 
 const axeOptions: { runOnly: RunOnly } = {
@@ -70,7 +73,7 @@ const axeOptions: { runOnly: RunOnly } = {
 }
 
 describe('visual regression test', () => {
-  it('Metric, Pill, Tag, TimeSelect', () => {
+  it('Metric, Pill, Tag, TimeSelect, Text', () => {
     cy.visit('http://localhost:3000/small-components')
     cy.injectAxe()
     cy.checkA11y('.axe-test', axeOptions, terminalLog)

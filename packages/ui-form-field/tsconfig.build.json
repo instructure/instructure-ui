@@ -16,6 +16,7 @@
     { "path": "../ui-a11y-utils/tsconfig.build.json" },
     { "path": "../ui-grid/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
+    { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../uid/tsconfig.build.json" },
