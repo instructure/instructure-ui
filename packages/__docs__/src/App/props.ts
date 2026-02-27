@@ -26,6 +26,7 @@ import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
   MainIconsData,
   MainDocsData,
+  MinorVersionData,
   ProcessedFile
 } from '../../buildScripts/DataTypes.mts'
 import type { DocDataType } from '../Document/props'
@@ -93,6 +94,10 @@ type AppState = {
   changelogData?: DocData
   // the currently shown document
   currentDocData?: DocData
+  // minor version switching (e.g. v11.5 vs v11.6)
+  minorVersionsData?: MinorVersionData
+  selectedMinorVersion?: string
+  showMinorVersionSelector?: boolean
 }
 
 type ThemeFunctionsClassic = {
