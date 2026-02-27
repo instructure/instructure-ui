@@ -24,7 +24,7 @@
 import { useState } from 'react'
 import 'cypress-real-events'
 
-import { Modal, Tooltip, Button } from '@instructure/ui'
+import { Modal, Tooltip, Button } from '@instructure/ui/latest'
 import { IconInfoLine } from '@instructure/ui-icons'
 import '../support/component'
 
@@ -250,7 +250,7 @@ describe('<Tooltip/>', () => {
       // Verify tooltip is rendered and accessible (avoid Cypress's "covered by" check)
       cy.get(tooltip).should('exist')
       cy.get(tooltip).should('have.css', 'display', 'block')
-      cy.contains('Hello. I\'m a tool tip').should('exist')
+      cy.contains("Hello. I'm a tool tip").should('exist')
 
       cy.get(tooltip)
         .realPress('Escape')

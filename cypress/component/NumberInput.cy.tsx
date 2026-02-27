@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { NumberInput } from '@instructure/ui'
+import { NumberInput } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

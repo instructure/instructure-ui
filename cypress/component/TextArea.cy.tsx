@@ -25,7 +25,7 @@
 import '../support/component'
 import 'cypress-real-events'
 
-import { TextArea } from '@instructure/ui'
+import { TextArea } from '@instructure/ui/latest'
 
 it('should resize if autoGrow is true', () => {
   cy.mount(

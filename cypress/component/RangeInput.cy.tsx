@@ -23,7 +23,7 @@
  */
 
 import { expect } from 'chai'
-import { RangeInput } from '@instructure/ui'
+import { RangeInput } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

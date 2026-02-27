@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ColorPreset } from '@instructure/ui'
+import { ColorPreset } from '@instructure/ui/latest'
 
 import '../support/component'
 import 'cypress-real-events'

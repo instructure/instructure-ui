@@ -155,5 +155,6 @@ export type {
   Glyph,
   MainDocsData,
   MainIconsData,
-  JsDocResult
+  JsDocResult,
+  Section
 }

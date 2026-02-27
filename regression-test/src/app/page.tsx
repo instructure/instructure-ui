@@ -23,7 +23,7 @@
  */
 
 'use client'
-import { Link } from '@instructure/ui'
+import { Link } from '@instructure/ui/latest'
 
 const components = [
   'small-components',

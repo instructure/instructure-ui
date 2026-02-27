@@ -27,7 +27,7 @@ import React, { useRef, useState } from 'react'
 import {
   DateTimeInput as dti,
   ScreenReaderContent as src
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const DateTimeInput = dti as any
 const ScreenReaderContent = src as any
