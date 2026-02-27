@@ -31,7 +31,7 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-import type { Popover } from '@instructure/ui-popover/latest'
+import type { Popover } from '@instructure/ui-popover'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 import { MenuItem } from './MenuItem'

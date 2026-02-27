@@ -28,7 +28,7 @@ import { userEvent } from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { Popover } from '@instructure/ui-popover'
+import { Popover } from '@instructure/ui-popover/latest'
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
 
 describe('<Menu />', () => {

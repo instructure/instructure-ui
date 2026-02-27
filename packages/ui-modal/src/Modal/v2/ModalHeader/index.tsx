@@ -29,17 +29,15 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
-import { CloseButton } from '@instructure/ui-buttons'
-import type { CloseButtonProps } from '@instructure/ui-buttons'
+import { CloseButton } from '@instructure/ui-buttons/latest'
+import type { CloseButtonProps } from '@instructure/ui-buttons/latest'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ModalHeaderProps, ModalHeaderStyleProps } from './props'
-import ModalContext from '../ModalContext'
 
 type CloseButtonChild = ComponentElement<CloseButtonProps, CloseButton>
 
@@ -49,7 +47,7 @@ parent: Modal
 id: Modal.Header
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'ModalHeader')
 class ModalHeader extends Component<ModalHeaderProps> {
   static readonly componentId = 'Modal.Header'
 
@@ -60,34 +58,9 @@ class ModalHeader extends Component<ModalHeaderProps> {
   }
 
   ref: HTMLDivElement | null = null
-  declare context: React.ContextType<typeof ModalContext>
-  static contextType = ModalContext
-
-  /**
-   * Gets all text in a DOM subtree, text under <button> nodes is excluded
-   */
-  getTextExcludingButtons = (root: Node) => {
-    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        return node.parentElement?.closest('button')
-          ? NodeFilter.FILTER_REJECT
-          : NodeFilter.FILTER_ACCEPT
-      }
-    })
-    let text = ''
-    let current
-    while ((current = walker.nextNode())) {
-      text += current.nodeValue
-    }
-    return text
-  }
 
   handleRef = (el: HTMLDivElement | null) => {
     this.ref = el
-    if (el) {
-      const txt = this.getTextExcludingButtons(el)
-      this.context.setBodyScrollAriaLabel?.(txt)
-    }
   }
 
   componentDidMount() {

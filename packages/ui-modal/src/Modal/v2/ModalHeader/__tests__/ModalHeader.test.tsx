@@ -29,7 +29,6 @@ import canvas from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
 
 import { ModalHeader } from '../index'
-import generateComponentTheme from '../theme'
 
 const HEADER_TEXT = 'Modal-footer-text'
 
@@ -42,7 +41,7 @@ describe('<ModalHeader />', () => {
   })
 
   it('should set inverse styles', async () => {
-    const themeVariables = generateComponentTheme(canvas)
+    const themeVariables = canvas.newTheme.components.ModalHeader
     const { findByText } = render(
       <ModalHeader variant="inverse">{HEADER_TEXT}</ModalHeader>
     )
@@ -57,13 +56,13 @@ describe('<ModalHeader />', () => {
     )
 
     expect(modalHeader).toBeInTheDocument()
-    expect(headerBackground).toBe(themeVariables.inverseBackground)
+    expect(headerBackground).toBe(themeVariables.inverseBackgroundColor)
     expect(headerBorderColor).toBe(themeVariables.inverseBorderColor)
   })
 
   describe('spacing prop', () => {
     it('should be correct by default', async () => {
-      const themeVariables = generateComponentTheme(canvas)
+      const themeVariables = canvas.newTheme.components.ModalHeader
       const { findByText } = render(<ModalHeader>{HEADER_TEXT}</ModalHeader>)
       const modalHeader = await findByText(HEADER_TEXT)
 
@@ -75,7 +74,7 @@ describe('<ModalHeader />', () => {
     })
 
     it('should correctly set default spacing', async () => {
-      const themeVariables = generateComponentTheme(canvas)
+      const themeVariables = canvas.newTheme.components.ModalHeader
       const { findByText } = render(
         <ModalHeader spacing="default">{HEADER_TEXT}</ModalHeader>
       )
@@ -89,7 +88,7 @@ describe('<ModalHeader />', () => {
     })
 
     it('should correctly set compact spacing', async () => {
-      const themeVariables = generateComponentTheme(canvas)
+      const themeVariables = canvas.newTheme.components.ModalHeader
       const { findByText } = render(
         <ModalHeader spacing="compact">{HEADER_TEXT}</ModalHeader>
       )

@@ -24,12 +24,15 @@
 
 import { Component } from 'react'
 
-import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
+import {
+  CheckInstUIIcon,
+  XInstUIIcon,
+  renderIconWithProps
+} from '@instructure/ui-icons'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ToggleFacadeProps } from './props'
@@ -39,7 +42,7 @@ import type { ToggleFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'Toggle')
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 
@@ -68,12 +71,12 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
   }
 
   renderIcon() {
-    const { styles, checked } = this.props
+    const { checked } = this.props
 
     if (checked) {
-      return <IconCheckSolid css={styles?.iconSVG} />
+      return renderIconWithProps(CheckInstUIIcon, 'sm', 'successColor')
     } else {
-      return <IconXSolid css={styles?.iconSVG} />
+      return renderIconWithProps(XInstUIIcon, 'sm', 'baseColor')
     }
   }
 

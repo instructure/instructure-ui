@@ -24,7 +24,7 @@
 
 import { Children, Component } from 'react'
 
-import { FormFieldGroup } from '@instructure/ui-form-field'
+import { FormFieldGroup } from '@instructure/ui-form-field/latest'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -33,7 +33,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { Checkbox } from '../Checkbox'
+import { Checkbox } from '../../Checkbox/v2'
 
 import { allowedProps } from './props'
 import type {

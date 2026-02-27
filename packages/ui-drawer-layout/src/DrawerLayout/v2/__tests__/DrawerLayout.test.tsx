@@ -28,8 +28,8 @@ import '@testing-library/jest-dom'
 
 import { DrawerLayout } from '../index'
 import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
-import { Button } from '@instructure/ui-buttons'
-import { View } from '@instructure/ui-view'
+import { Button } from '@instructure/ui-buttons/latest'
+import { View } from '@instructure/ui-view/latest'
 
 describe('<DrawerLayout />', () => {
   it('should render', () => {

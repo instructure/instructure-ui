@@ -30,7 +30,7 @@ import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { CheckboxGroup } from '../index'
 import { CheckboxGroupProps } from '../props'
-import { Checkbox } from '../../Checkbox'
+import { Checkbox } from '../../../Checkbox/v2'
 
 const TEST_NAME = 'test-name'
 const TEST_DESCRIPTION = 'test-description'

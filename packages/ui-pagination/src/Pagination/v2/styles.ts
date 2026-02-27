@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { PaginationTheme } from '@instructure/shared-types'
-import type { PaginationStyle } from './props'
+import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { PaginationStyle, PaginationProps } from './props'
 
 /**
  * ---
@@ -32,10 +32,15 @@ import type { PaginationStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: PaginationTheme): PaginationStyle => {
+const generateStyle = (
+  componentTheme: NewComponentTypes['Pagination'],
+  _props: PaginationProps,
+  _sharedTokens: SharedTokens
+): PaginationStyle => {
   return {
     pageIndicatorList: {
       all: 'unset',

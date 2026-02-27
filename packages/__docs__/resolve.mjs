@@ -117,7 +117,7 @@ const alias = {
     import.meta.dirname,
     '../ui-text-input/src/exports/a'
   ),
-  '@instructure/ui-options$': path.resolve(import.meta.dirname, '../ui-options/src/'),
+  '@instructure/ui-options$': path.resolve(import.meta.dirname, '../ui-options/src/exports/a'),
   '@instructure/ui-overlays$': path.resolve(import.meta.dirname, '../ui-overlays/src/exports/a'),
   '@instructure/ui-pagination$': path.resolve(
     import.meta.dirname,

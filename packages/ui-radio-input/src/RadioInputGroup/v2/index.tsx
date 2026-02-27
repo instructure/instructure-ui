@@ -24,7 +24,7 @@
 
 import { ComponentElement, Children, Component } from 'react'
 
-import { FormFieldGroup } from '@instructure/ui-form-field'
+import { FormFieldGroup } from '@instructure/ui-form-field/latest'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -33,8 +33,8 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { RadioInput } from '../RadioInput'
-import type { RadioInputProps } from '../RadioInput/props'
+import { RadioInput } from '../../RadioInput/v2'
+import type { RadioInputProps } from '../../RadioInput/v2/props'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps } from './props'

@@ -29,18 +29,17 @@ import {
   ReactNode
 } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
 import { PaginationPageInput } from './PaginationPageInput'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import type { PaginationPageProps } from './PaginationButton/props'
 import type { PaginationArrowDirections } from './PaginationArrowButton/props'
@@ -85,7 +84,7 @@ category: components
 ---
 **/
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
 

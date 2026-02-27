@@ -24,18 +24,16 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ModalBodyProps } from './props'
 import { UIElement } from '@instructure/shared-types'
-import ModalContext from '../ModalContext'
 
 /**
 ---
@@ -43,7 +41,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'ModalBody')
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
@@ -118,37 +116,30 @@ class ModalBody extends Component<ModalBodyProps> {
     // TODO rethink, the 'as' prop, likely its not a good idea to allow React
     // components. See INSTUI-4674
     const finalRef = this.getFinalRef(this.ref)
-    const hasScrollbar =
-      finalRef &&
-      Math.abs(
-        (finalRef.scrollHeight ?? 0) -
-          (finalRef.getBoundingClientRect()?.height ?? 0)
-      ) > 1
+
     return (
-      <ModalContext.Consumer>
-        {(value) => (
-          <View
-            {...passthroughProps}
-            display="block"
-            data-cid="ModalBody"
-            width={isFit ? '100%' : undefined}
-            height={isFit ? '100%' : undefined}
-            elementRef={this.handleRef}
-            as={as}
-            css={this.props.styles?.modalBody}
-            padding={padding}
-            // check if there is a scrollbar, if so, the element has to be tabbable
-            {...(hasScrollbar
-              ? {
-                  tabIndex: 0,
-                  'aria-label': value.bodyScrollAriaLabel
-                }
-              : {})}
-          >
-            {children}
-          </View>
-        )}
-      </ModalContext.Consumer>
+      <View
+        {...passthroughProps}
+        display="block"
+        data-cid="ModalBody"
+        width={isFit ? '100%' : undefined}
+        height={isFit ? '100%' : undefined}
+        elementRef={this.handleRef}
+        as={as}
+        css={this.props.styles?.modalBody}
+        padding={padding}
+        // check if there is a scrollbar, if so, the element has to be tabbable to be able to scroll with keyboard only
+        // epsilon tolerance is used to avoid scrollbar for rounding errors
+        {...(finalRef &&
+        Math.abs(
+          (finalRef.scrollHeight ?? 0) -
+            (finalRef.getBoundingClientRect()?.height ?? 0)
+        ) > 1
+          ? { tabIndex: 0 }
+          : {})}
+      >
+        {children}
+      </View>
     )
   }
 }

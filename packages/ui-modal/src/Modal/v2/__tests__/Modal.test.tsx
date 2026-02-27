@@ -30,7 +30,7 @@ import '@testing-library/jest-dom'
 
 import { Modal, ModalHeader, ModalBody, ModalFooter } from '../index'
 import type { ModalProps } from '../props'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 
 //TODO-rework fix breaking tests after migration
 describe.skip('<Modal />', () => {

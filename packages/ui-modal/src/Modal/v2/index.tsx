@@ -31,16 +31,15 @@ import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Dialog } from '@instructure/ui-dialog'
-import { Mask } from '@instructure/ui-overlays'
+import { Mask } from '@instructure/ui-overlays/latest'
 
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type {
@@ -49,7 +48,6 @@ import type {
   ModalPropsForPortal,
   ModalPropsForTransition
 } from './props'
-import ModalContext from './ModalContext'
 
 /**
 ---
@@ -57,7 +55,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Modal extends Component<ModalProps, ModalState> {
   static readonly componentId = 'Modal'
 
@@ -84,8 +82,7 @@ class Modal extends Component<ModalProps, ModalState> {
     this.state = {
       transitioning: false,
       open: props.open ?? false,
-      windowHeight: 99999,
-      bodyScrollAriaLabel: undefined
+      windowHeight: 99999
     }
   }
 
@@ -302,21 +299,13 @@ class Modal extends Component<ModalProps, ModalState> {
             onClose
           )}
         >
-          <ModalContext.Provider
-            value={{
-              bodyScrollAriaLabel: this.state.bodyScrollAriaLabel,
-              setBodyScrollAriaLabel: (txt: string) =>
-                this.setState({ bodyScrollAriaLabel: txt })
-            }}
-          >
-            {constrain === 'parent' ? (
-              <span css={this.props.styles?.constrainContext}>
-                {this.renderDialog(passthroughProps)}
-              </span>
-            ) : (
-              this.renderDialog(passthroughProps)
-            )}
-          </ModalContext.Provider>
+          {constrain === 'parent' ? (
+            <span css={this.props.styles?.constrainContext}>
+              {this.renderDialog(passthroughProps)}
+            </span>
+          ) : (
+            this.renderDialog(passthroughProps)
+          )}
         </Transition>
       </Portal>
     )

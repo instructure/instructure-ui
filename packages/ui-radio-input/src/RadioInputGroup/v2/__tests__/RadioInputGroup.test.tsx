@@ -29,7 +29,7 @@ import { vi } from 'vitest'
 
 import '@testing-library/jest-dom'
 import { runAxeCheck } from '@instructure/ui-axe-check'
-import { RadioInput } from '../../RadioInput'
+import { RadioInput } from '../../../RadioInput/v2'
 import { RadioInputGroup } from '../index'
 
 describe('<RadioInputGroup />', () => {

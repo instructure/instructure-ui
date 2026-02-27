@@ -25,20 +25,19 @@
 import { Component } from 'react'
 import keycode from 'keycode'
 
-import { FormFieldMessages } from '@instructure/ui-form-field'
+import { FormFieldMessages } from '@instructure/ui-form-field/latest'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { CheckboxProps, CheckboxState } from './props'
@@ -56,7 +55,7 @@ tags: toggle, switch
 **/
 
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
 

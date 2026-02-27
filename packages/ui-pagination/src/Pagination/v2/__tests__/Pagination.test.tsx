@@ -29,8 +29,8 @@ import userEvent from '@testing-library/user-event'
 
 import '@testing-library/jest-dom'
 import { Pagination, PaginationButton } from '../index'
-import { View } from '@instructure/ui-view'
-import type { ViewOwnProps } from '@instructure/ui-view'
+import { View } from '@instructure/ui-view/latest'
+import type { ViewOwnProps } from '@instructure/ui-view/latest'
 
 const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((_v, i) => {
