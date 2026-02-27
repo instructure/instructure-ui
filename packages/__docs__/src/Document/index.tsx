@@ -247,15 +247,24 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   renderUsage() {
-    const { esPath, id, displayName, packageName, title } = this.props.doc
+    const { esPath, id, displayName, packageName, title, componentVersion } =
+      this.props.doc
+    const { selectedMinorVersion } = this.props
     const importName = displayName || id
+
+    // For versioned components, show the version-specific import path
+    // e.g. '@instructure/ui-avatar/v11_6' instead of '@instructure/ui-avatar'
+    const versionedPackageName =
+      packageName && componentVersion && selectedMinorVersion
+        ? `${packageName}/${selectedMinorVersion}`
+        : packageName
 
     const example = []
 
-    if (packageName) {
+    if (versionedPackageName) {
       example.push(`\
 /*** ES Modules (with tree shaking) ***/
-import { ${importName} } from '${packageName}'
+import { ${importName} } from '${versionedPackageName}'
 `)
     }
 

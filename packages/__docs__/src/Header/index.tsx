@@ -82,12 +82,82 @@ class Header extends Component<HeaderProps> {
     return window.location.replace(versionToNavigate)
   }
 
+  handleMinorVersionSelect = (
+    _e: React.MouseEvent<any>,
+    updated: (string | number | undefined)[]
+  ) => {
+    const [selectedVersion] = updated
+    if (
+      selectedVersion &&
+      typeof selectedVersion === 'string' &&
+      this.props.onMinorVersionChange
+    ) {
+      this.props.onMinorVersionChange(selectedVersion)
+    }
+  }
+
+  /**
+   * Formats a version key like "v11_5" into display format "v11.5"
+   */
+  formatMinorVersion = (version: string) => {
+    return version.replace('_', '.')
+  }
+
+  renderMinorVersionsBlock = () => {
+    const { minorVersionsData, selectedMinorVersion } = this.props
+    if (
+      !minorVersionsData ||
+      minorVersionsData.libraryVersions.length <= 1
+    ) {
+      return null
+    }
+
+    return (
+      <View display="block" textAlign="center" margin="none none small">
+        <Menu
+          placement="bottom"
+          label="Select minor version"
+          themeOverride={{ minWidth: '10rem' }}
+          trigger={
+            <CondensedButton>
+              <Text size="small">
+                {selectedMinorVersion
+                  ? this.formatMinorVersion(selectedMinorVersion)
+                  : 'Minor version'}
+              </Text>
+              <IconMiniArrowDownLine size="x-small" />
+            </CondensedButton>
+          }
+        >
+          <Menu.Group
+            selected={selectedMinorVersion ? [selectedMinorVersion] : []}
+            onSelect={this.handleMinorVersionSelect}
+            label={
+              <ScreenReaderContent>
+                Select minor version
+              </ScreenReaderContent>
+            }
+          >
+            {minorVersionsData.libraryVersions.map((ver, index) => (
+              <Menu.Item key={index} id={`minor-opt-${index}`} value={ver}>
+                <View textAlign="center" as="div">
+                  {this.formatMinorVersion(ver)}
+                </View>
+              </Menu.Item>
+            ))}
+          </Menu.Group>
+        </Menu>
+      </View>
+    )
+  }
+
   renderVersionsBlock = () => {
     const { versionsData, name, version } = this.props
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
     const currentVersion = versionInPath || latestVersion
+    const majorVersion = version ? version.split('.')[0] : version
 
     return (
       <View display="block" textAlign="center" margin="small none large">
@@ -98,10 +168,10 @@ class Header extends Component<HeaderProps> {
           trigger={
             <CondensedButton>
               <Text size="large">
-                {name && version ? (
+                {name && majorVersion ? (
                   <span>
                     {name}
-                    {version}
+                    {majorVersion}
                   </span>
                 ) : (
                   'Documentation'
@@ -176,11 +246,12 @@ class Header extends Component<HeaderProps> {
               <View display="block" margin="small none none">
                 <Text size="large">
                   {this.props.name}
-                  {this.props.version}
+                  {this.props.version ? this.props.version.split('.')[0] : this.props.version}
                 </Text>
               </View>
             </Link>
           )}
+          {this.renderMinorVersionsBlock()}
         </View>
       </View>
     )

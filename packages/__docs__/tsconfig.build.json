@@ -9,6 +9,7 @@
   "include": [
     "src/**/*",
     "components.ts",
+    "component-overrides.ts",
     "functionalComponentThemes.ts",
     "globals.ts",
     "buildScripts/DataTypes.mts",
