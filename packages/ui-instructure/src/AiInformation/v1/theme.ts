@@ -22,26 +22,37 @@
  * SOFTWARE.
  */
 
-import type { ToggleGroupTheme } from '@instructure/shared-types'
-import type { ToggleGroupProps, ToggleGroupStyle } from './props'
+import type { Theme } from '@instructure/ui-themes'
+import type { AiInformationTheme } from '@instructure/shared-types'
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (
-  componentTheme: ToggleGroupTheme,
-  _props: ToggleGroupProps
-): ToggleGroupStyle => {
+const generateComponentTheme = (theme: Theme): AiInformationTheme => {
+  const { colors, spacing } = theme
+
+  const componentVariables: AiInformationTheme = {
+    bodyPadding: spacing?.paddingCardLarge,
+    headingBottomMargin: spacing?.sectionElements,
+    featureNameBottomMargin: spacing?.moduleElements,
+    permissionLevelTextBottomMargin: spacing?.space8,
+    permissionLevelBottomMargin: spacing?.space8,
+    descriptionBottomMargin: spacing?.space8,
+    permissionLevelsModalTriggerBottomMargin: spacing?.moduleElements,
+    modelNameTextBottomMargin: spacing?.space4,
+    modelNameBottomMargin: spacing?.space4,
+
+    dividerMargin: spacing?.moduleElements,
+    dividerColor: colors?.ui?.surfaceDivider,
+
+    levelColor: colors?.contrasts?.violet5790
+  }
+
   return {
-    borderColor: componentTheme.borderColor
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme
