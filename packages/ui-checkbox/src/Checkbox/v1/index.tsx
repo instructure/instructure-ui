@@ -25,12 +25,12 @@
 import { Component } from 'react'
 import keycode from 'keycode'
 
-import { FormFieldMessages } from '@instructure/ui-form-field/v11_5'
+import { FormFieldMessages } from '@instructure/ui-form-field/v11_6'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 

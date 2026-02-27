@@ -62,13 +62,13 @@
       "require": "./lib/exports/a.js",
       "default": "./es/exports/a.js"
     },
-    "./v11_5": {
+    "./v11_6": {
       "types": "./types/exports/a.d.ts",
       "import": "./es/exports/a.js",
       "require": "./lib/exports/a.js",
       "default": "./es/exports/a.js"
     },
-    "./v11_6": {
+    "./v11_7": {
       "types": "./types/exports/a.d.ts",
       "import": "./es/exports/a.js",
       "require": "./lib/exports/a.js",

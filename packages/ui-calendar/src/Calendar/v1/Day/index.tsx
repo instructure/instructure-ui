@@ -24,8 +24,8 @@
 
 import { Component, MouseEvent, KeyboardEvent } from 'react'
 
-import { View } from '@instructure/ui-view/v11_5'
-import type { ViewProps } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import {
   omitProps,
