@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import type { MinorVersionData } from '../versionData'
+
 type HeaderOwnProps = {
   name: string
   version: string
@@ -29,6 +31,9 @@ type HeaderOwnProps = {
     latestVersion: string
     previousVersions: string[]
   }
+  minorVersionsData?: MinorVersionData
+  selectedMinorVersion?: string
+  onMinorVersionChange?: (version: string) => void
 }
 
 type PropKeys = keyof HeaderOwnProps
@@ -36,7 +41,14 @@ type PropKeys = keyof HeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type HeaderProps = HeaderOwnProps
-const allowedProps: AllowedPropKeys = ['name', 'version', 'versionsData']
+const allowedProps: AllowedPropKeys = [
+  'name',
+  'version',
+  'versionsData',
+  'minorVersionsData',
+  'selectedMinorVersion',
+  'onMinorVersionChange'
+]
 
 export type { HeaderProps }
 export { allowedProps }

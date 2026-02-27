@@ -62,12 +62,17 @@ import { Section } from '../Section'
 import IconsPage from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 
-import { fetchVersionData, versionInPath } from '../versionData'
+import {
+  fetchVersionData,
+  fetchMinorVersionData,
+  versionInPath
+} from '../versionData'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { LoadingScreen } from '../LoadingScreen'
-import * as EveryComponent from '../../components'
+import { getComponentsForVersion } from '../../component-overrides'
+import { updateGlobalsForVersion } from '../../globals'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { allowedProps } from './props'
 import type {
@@ -140,18 +145,34 @@ class App extends Component<AppProps, AppState> {
     this._navRef = createRef()
   }
 
+  getDocsBasePath = () => {
+    const { selectedMinorVersion } = this.state
+    if (selectedMinorVersion) {
+      return `docs/${selectedMinorVersion}/`
+    }
+    return 'docs/'
+  }
+
+  getComponentsForCurrentVersion = (): Record<string, any> => {
+    const { selectedMinorVersion } = this.state
+    return getComponentsForVersion(selectedMinorVersion)
+  }
+
   fetchDocumentData = async (docId: string) => {
-    const result = await fetch('docs/' + docId + '.json', {
+    const basePath = this.getDocsBasePath()
+    const result = await fetch(basePath + docId + '.json', {
       signal: this._controller?.signal
     })
+    if (!result.ok) {
+      throw new Error(`Failed to fetch ${docId}: ${result.status}`)
+    }
     const docData: DocData = await result.json()
+    const everyComp = this.getComponentsForCurrentVersion()
     if (docId.includes('.')) {
       // e.g. 'Calendar.Day', first get 'Calendar' then 'Day'
       const components = docId.split('.')
-      const everyComp = EveryComponent as Record<string, any>
       docData.componentInstance = everyComp[components[0]][components[1]]
     } else {
-      const everyComp = EveryComponent as Record<string, any>
       docData.componentInstance = everyComp[docId]
     }
     return docData
@@ -160,6 +181,59 @@ class App extends Component<AppProps, AppState> {
   fetchVersionData = async (signal: AbortController['signal']) => {
     const versionsData = await fetchVersionData(signal)
     return this.setState({ versionsData })
+  }
+
+  fetchMainDocsData = (url: string, signal: AbortSignal) => {
+    return fetch(url, { signal })
+      .then((response) => response.json())
+      .then((docsData) => {
+        this.setState({
+          docsData,
+          themeKey: Object.keys(docsData.themes)[0]
+        })
+      })
+  }
+
+  handleMinorVersionChange = (newVersion: string) => {
+    // Abort current fetches
+    this._controller?.abort()
+    this._controller = new AbortController()
+    const signal = this._controller.signal
+
+    // Clear current data to show loading screen, update selected version
+    this.setState(
+      {
+        docsData: null,
+        currentDocData: undefined,
+        changelogData: undefined,
+        selectedMinorVersion: newVersion
+      },
+      () => {
+        // Update global component references after state is committed
+        // so globals and state.selectedMinorVersion agree
+        updateGlobalsForVersion(newVersion)
+
+        const errorHandler = (error: Error) => {
+          if (error.name !== 'AbortError') {
+            logError(false, error.message)
+          }
+        }
+        this.fetchMainDocsData(
+          `docs/${newVersion}/markdown-and-sources-data.json`,
+          signal
+        ).catch(errorHandler)
+
+        // Icons are not version-specific; only re-fetch if not already loaded
+        if (!this.state.iconsData) {
+          fetch('icons-data.json', { signal })
+            .then((response) => response.json())
+            .then((iconsData) => {
+              this.setState({ iconsData })
+            })
+            .catch(errorHandler)
+        }
+      }
+    )
   }
 
   mainContentRef = (el: Element | null) => {
@@ -208,11 +282,13 @@ class App extends Component<AppProps, AppState> {
     this._controller = new AbortController()
     const signal = this._controller.signal
 
-    this.fetchVersionData(signal)
-
     const errorHandler = (error: Error) => {
-      logError(error.name === 'AbortError', error.message)
+      if (error.name !== 'AbortError') {
+        logError(false, error.message)
+      }
     }
+
+    this.fetchVersionData(signal).catch(errorHandler)
     document.addEventListener('keydown', this.handleTabKey)
 
     fetch('icons-data.json', { signal })
@@ -221,13 +297,28 @@ class App extends Component<AppProps, AppState> {
         this.setState({ iconsData: iconsData })
       })
       .catch(errorHandler)
-    fetch('markdown-and-sources-data.json', { signal })
-      .then((response) => response.json())
-      .then((docsData) => {
-        this.setState({
-          docsData,
-          themeKey: Object.keys(docsData.themes)[0]
-        })
+
+    // Fetch minor version data, then load docs for the appropriate version
+    fetchMinorVersionData(signal)
+      .then((minorVersionsData) => {
+        if (minorVersionsData && minorVersionsData.libraryVersions.length > 0) {
+          const selectedMinorVersion = minorVersionsData.defaultVersion
+          this.setState(
+            { minorVersionsData, selectedMinorVersion },
+            () => {
+              updateGlobalsForVersion(selectedMinorVersion)
+            }
+          )
+          return this.fetchMainDocsData(
+            `docs/${selectedMinorVersion}/markdown-and-sources-data.json`,
+            signal
+          )
+        }
+        // No minor versions available, fetch from root path
+        return this.fetchMainDocsData(
+          'markdown-and-sources-data.json',
+          signal
+        )
       })
       .catch(errorHandler)
 
@@ -535,21 +626,29 @@ class App extends Component<AppProps, AppState> {
     const currentData = this.state.currentDocData
     if (!currentData || currentData.id !== docId) {
       // load all children and the main doc
-      this.fetchDocumentData(docId).then(async (data) => {
-        if (parents[docId]) {
-          for (const childId of parents[docId].children) {
-            children.push(await this.fetchDocumentData(childId))
+      this.fetchDocumentData(docId)
+        .then(async (data) => {
+          if (parents[docId]) {
+            for (const childId of parents[docId].children) {
+              children.push(await this.fetchDocumentData(childId))
+            }
           }
-        }
-        // eslint-disable-next-line no-param-reassign
-        data.children = children
-        this.setState(
-          {
-            currentDocData: data
-          },
-          this.scrollToElement
-        )
-      })
+          // Guard: check if we are still on the same page
+          if (this.state.key !== docId) return
+          // eslint-disable-next-line no-param-reassign
+          data.children = children
+          this.setState(
+            {
+              currentDocData: data
+            },
+            this.scrollToElement
+          )
+        })
+        .catch((error: Error) => {
+          if (error.name !== 'AbortError') {
+            logError(false, `Failed to fetch document ${docId}: ${error.message}`)
+          }
+        })
       return (
         <View as="div" padding="xx-large 0">
           <LoadingScreen />
@@ -590,6 +689,7 @@ class App extends Component<AppProps, AppState> {
               themeVariables={themeVariables}
               repository={repository}
               layout={layout}
+              selectedMinorVersion={this.state.selectedMinorVersion}
             />
           </Section>
         </View>
@@ -635,9 +735,15 @@ class App extends Component<AppProps, AppState> {
 
   renderChangeLog() {
     if (!this.state.changelogData) {
-      this.fetchDocumentData('CHANGELOG').then((data) => {
-        this.setState({ changelogData: data })
-      })
+      this.fetchDocumentData('CHANGELOG')
+        .then((data) => {
+          this.setState({ changelogData: data })
+        })
+        .catch((error: Error) => {
+          if (error.name !== 'AbortError') {
+            logError(false, `Failed to fetch CHANGELOG: ${error.message}`)
+          }
+        })
       return (
         <View as="div" padding="xx-large 0">
           <LoadingScreen />
@@ -796,6 +902,9 @@ class App extends Component<AppProps, AppState> {
           name={name === 'instructure-ui' ? 'v' : name}
           version={version}
           versionsData={versionsData}
+          minorVersionsData={this.state.minorVersionsData}
+          selectedMinorVersion={this.state.selectedMinorVersion}
+          onMinorVersionChange={this.handleMinorVersionChange}
         />
 
         <Nav

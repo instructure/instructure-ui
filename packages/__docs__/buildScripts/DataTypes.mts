@@ -31,7 +31,7 @@ type ProcessedFile =
   YamlMetaInfo &
   JsDocResult &
   PackagePathData &
-  { title: string, id:string }
+  { title: string, id:string, componentVersion?: string }
 
 type PackagePathData = {
   extension: string
@@ -146,6 +146,16 @@ type MainDocsData = {
   library: LibraryOptions
 } & ParsedDoc
 
+type VersionMapEntry = {
+  exportLetter: string
+  componentVersion: string
+}
+
+type VersionMap = {
+  libraryVersions: string[]
+  mapping: Record<string, Record<string, VersionMapEntry>>
+}
+
 export type {
   ProcessedFile,
   PackagePathData,
@@ -156,5 +166,7 @@ export type {
   MainDocsData,
   MainIconsData,
   JsDocResult,
-  Section
+  Section,
+  VersionMapEntry,
+  VersionMap
 }

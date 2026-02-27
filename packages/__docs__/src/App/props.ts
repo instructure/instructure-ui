@@ -28,6 +28,7 @@ import type {
   MainDocsData,
   ProcessedFile
 } from '../../buildScripts/DataTypes.mts'
+import type { MinorVersionData } from '../versionData'
 import type { DocDataType } from '../Document/props'
 import type { Theme } from '@instructure/ui-themes'
 import type { ThemeVariables } from '@instructure/shared-types'
@@ -93,6 +94,9 @@ type AppState = {
   changelogData?: DocData
   // the currently shown document
   currentDocData?: DocData
+  // minor version switching (e.g. v11.5 vs v11.6)
+  minorVersionsData?: MinorVersionData
+  selectedMinorVersion?: string
 }
 
 type ThemeFunctionsClassic = {
