@@ -33,6 +33,7 @@ import TerserPlugin from 'terser-webpack-plugin'
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
 const GITHUB_PULL_REQUEST_PREVIEW = process.env.GITHUB_PULL_REQUEST_PREVIEW || 'false'
+const PR_NUMBER = process.env.PR_NUMBER
 
 const outputPath = resolvePath(import.meta.dirname, '__build__')
 const resolveAliases = DEBUG ? { resolve } : {}
@@ -53,6 +54,10 @@ const config = merge(baseConfig, {
   output: {
     path: outputPath,
     filename: '[name].js',
+    // PR preview builds are deployed to /pr-preview/pr-<number>/ on GitHub Pages.
+    // Without the correct publicPath, the initial script tags in index.html would
+    // point to '/' and load the production bundle instead of the PR preview's.
+    publicPath: PR_NUMBER ? `/pr-preview/pr-${PR_NUMBER}/` : '/',
   },
   devServer: {
     static: {
