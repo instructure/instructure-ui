@@ -24,8 +24,8 @@
 
 import { Component, MouseEvent } from 'react'
 
-import { Heading } from '@instructure/ui-heading/v11_5'
-import { View } from '@instructure/ui-view/v11_5'
+import { Heading } from '@instructure/ui-heading/v11_6'
+import { View } from '@instructure/ui-view/v11_6'
 import {
   omitProps,
   callRenderProp,
@@ -39,7 +39,7 @@ import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { BillboardProps, HeroIconSize } from './props'
-import type { ViewProps } from '@instructure/ui-view/v11_5'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 
 /**
 ---

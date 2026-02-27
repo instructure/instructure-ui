@@ -37,7 +37,7 @@ import generateStyle from './styles'
 import type { ToggleDetailsProps } from './props'
 import { allowedProps } from './props'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
-import type { ViewProps } from '@instructure/ui-view/v11_5'
+import type { ViewProps } from '@instructure/ui-view/v11_6'
 
 /**
 ---

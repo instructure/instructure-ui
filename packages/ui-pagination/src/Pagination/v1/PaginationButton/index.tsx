@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { BaseButton } from '@instructure/ui-buttons/v11_5'
+import { BaseButton } from '@instructure/ui-buttons/v11_6'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { allowedProps } from './props'

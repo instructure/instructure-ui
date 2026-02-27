@@ -29,7 +29,7 @@ import {
   ReactNode
 } from 'react'
 
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'

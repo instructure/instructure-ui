@@ -38,7 +38,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { allowedProps } from './props'
 import type { TrayProps, TrayState } from './props'
-import { Mask } from '@instructure/ui-overlays/v11_5'
+import { Mask } from '@instructure/ui-overlays/v11_6'
 
 /**
 ---

@@ -24,11 +24,11 @@
 
 import { Children, Component, ReactElement } from 'react'
 
-import { Calendar } from '@instructure/ui-calendar/v11_5'
+import { Calendar } from '@instructure/ui-calendar/v11_6'
 import type {
   CalendarProps,
   CalendarDayProps
-} from '@instructure/ui-calendar/v11_5'
+} from '@instructure/ui-calendar/v11_6'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover/latest'
 import { Selectable } from '@instructure/ui-selectable'
@@ -36,8 +36,8 @@ import type {
   SelectableProps,
   SelectableRender
 } from '@instructure/ui-selectable'
-import { TextInput } from '@instructure/ui-text-input/v11_5'
-import type { TextInputProps } from '@instructure/ui-text-input/v11_5'
+import { TextInput } from '@instructure/ui-text-input/v11_6'
+import type { TextInputProps } from '@instructure/ui-text-input/v11_6'
 import { createChainedFunction } from '@instructure/ui-utils'
 import {
   getInteraction,

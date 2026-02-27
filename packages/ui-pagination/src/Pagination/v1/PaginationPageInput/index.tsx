@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { withStyle } from '@instructure/emotion'
-import { NumberInput } from '@instructure/ui-number-input/v11_5'
+import { NumberInput } from '@instructure/ui-number-input/v11_6'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import generateStyle from './styles'

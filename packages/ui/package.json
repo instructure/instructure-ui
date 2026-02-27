@@ -111,16 +111,10 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./types/v11_5.d.ts",
-      "import": "./es/v11_5.js",
-      "require": "./lib/v11_5.js",
-      "default": "./es/v11_5.js"
-    },
-    "./v11_5": {
-      "types": "./types/v11_5.d.ts",
-      "import": "./es/v11_5.js",
-      "require": "./lib/v11_5.js",
-      "default": "./es/v11_5.js"
+      "types": "./types/v11_6.d.ts",
+      "import": "./es/v11_6.js",
+      "require": "./lib/v11_6.js",
+      "default": "./es/v11_6.js"
     },
     "./v11_6": {
       "types": "./types/v11_6.d.ts",
@@ -128,11 +122,17 @@
       "require": "./lib/v11_6.js",
       "default": "./es/v11_6.js"
     },
+    "./v11_7": {
+      "types": "./types/v11_7.d.ts",
+      "import": "./es/v11_7.js",
+      "require": "./lib/v11_7.js",
+      "default": "./es/v11_7.js"
+    },
     "./latest": {
-      "types": "./types/v11_6.d.ts",
-      "import": "./es/v11_6.js",
-      "require": "./lib/v11_6.js",
-      "default": "./es/v11_6.js"
+      "types": "./types/v11_7.d.ts",
+      "import": "./es/v11_7.js",
+      "require": "./lib/v11_7.js",
+      "default": "./es/v11_7.js"
     },
     "./lib/*": "./lib/*",
     "./es/*": "./es/*",

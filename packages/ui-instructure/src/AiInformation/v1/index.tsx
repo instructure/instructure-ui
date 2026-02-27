@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Popover } from '@instructure/ui-popover/v11_5'
-import { CloseButton } from '@instructure/ui-buttons/v11_5'
-import { Heading } from '@instructure/ui-heading/v11_5'
-import { Text } from '@instructure/ui-text/v11_5'
-import { Link } from '@instructure/ui-link/v11_5'
+import { Popover } from '@instructure/ui-popover/v11_6'
+import { CloseButton } from '@instructure/ui-buttons/v11_6'
+import { Heading } from '@instructure/ui-heading/v11_6'
+import { Text } from '@instructure/ui-text/v11_6'
+import { Link } from '@instructure/ui-link/v11_6'
 import { IconExternalLinkLine } from '@instructure/ui-icons'
 import { useStyleLegacy as useStyle } from '@instructure/emotion'
 import { NutritionFacts } from '../../NutritionFacts/v1'

@@ -24,10 +24,10 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { Tooltip } from '@instructure/ui-tooltip/v11_5'
-import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip/v11_5'
+import { Tooltip } from '@instructure/ui-tooltip/v11_6'
+import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip/v11_6'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
