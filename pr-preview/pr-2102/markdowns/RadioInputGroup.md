@@ -211,7 +211,7 @@ type: example
   description={
     <ScreenReaderContent>Select a fruit</ScreenReaderContent>
   }
-  messages={[{ text: 'Invalid choice', type: 'error' }]}
+  messages={[{ text: 'Invalid choice', type: 'newError' }]}
 >
   <RadioInput label="Apple" value="apple" />
   <RadioInput label="Orange" value="orange" />

@@ -33,11 +33,10 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Metric | textAlign | `'start' \| 'center' \| 'end'` | No | - |  |
+| Metric | textAlign | `'start' \| 'center' \| 'end'` | No | `'center'` |  |
 | Metric | renderLabel | `Renderable` | No | - |  |
 | Metric | renderValue | `Renderable` | No | - |  |
-| Metric | isGroupChild | `boolean` | No | - | Set to true when a child of MetricGroup so the appropriate aria labels get set |
-| Metric | themeOverride | `ThemeOverrideValue` | No | - |  |
+| Metric | isGroupChild | `boolean` | No | `false` | Set to true when a child of MetricGroup so the appropriate aria labels get set |
 
 ### Usage
 

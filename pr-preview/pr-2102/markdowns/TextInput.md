@@ -22,6 +22,95 @@ type: example
 ---
 type: example
 ---
+  class ControlledTextInputExample extends React.Component {
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        value: 'Supertramp',
+        disabled: false,
+        readOnly: false,
+        inline: false,
+        messages: null
+      }
+    }
+
+    handleChange = (e, value) =>
+      this.setState({
+        value,
+        messages: null
+      })
+
+    handleBlur = (e) => {
+      if (this.state.value === 'Supertramp') {
+        this.setState({
+          messages: [
+            {
+              text: `Come on. There's no way your favorite band is really Supertramp.`,
+              type: 'newError'
+            }
+          ]
+        })
+      }
+    }
+
+    toggleDisabled = (e) => this.setState({ disabled: !this.state.disabled })
+    toggleReadOnly = (e) => this.setState({ readOnly: !this.state.readOnly })
+    toggleInline = (e) => this.setState({ inline: !this.state.inline })
+
+    render() {
+      return (
+        <div>
+          <FormFieldGroup
+            description="Controlled TextInput state"
+            layout="columns"
+          >
+            <Checkbox
+              checked={this.state.disabled}
+              label="disabled"
+              onChange={this.toggleDisabled}
+            />
+            <Checkbox
+              checked={this.state.readOnly}
+              label="readOnly"
+              onChange={this.toggleReadOnly}
+            />
+            <Checkbox
+              checked={this.state.inline}
+              label="inline display"
+              onChange={this.toggleInline}
+            />
+          </FormFieldGroup>
+          <View display="block" margin="medium 0 0">
+            <TextInput
+              renderLabel="What is your favorite band?"
+              display={this.state.inline ? 'inline-block' : null}
+              value={this.state.value}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              interaction={
+                this.state.disabled
+                  ? 'disabled'
+                  : this.state.readOnly
+                  ? 'readonly'
+                  : 'enabled'
+              }
+              messages={this.state.messages}
+              renderAfterInput={<SVGIcon src={iconExample} />}
+            />
+          </View>
+        </div>
+      )
+    }
+  }
+
+  render(<ControlledTextInputExample />)
+```
+
+```js
+---
+type: example
+---
   const ControlledTextInputExample = () => {
     const [value, setValue] = useState('Supertramp')
     const [disabled, setDisabled] = useState(false)
@@ -39,7 +128,7 @@ type: example
         setMessages([
           {
             text: "Come on. There's no way your favorite band is really Supertramp.",
-            type: 'error'
+            type: 'newError'
           }
         ])
       }
@@ -82,7 +171,7 @@ type: example
               disabled ? 'disabled' : readOnly ? 'readonly' : 'enabled'
             }
             messages={messages}
-            renderAfterInput={<HeartInstUIIcon />}
+            renderAfterInput={<SVGIcon src={iconExample} />}
           />
         </View>
       </div>
@@ -125,28 +214,28 @@ type: example
                 {this.state.value !== '' && (
                   <Tag
                     text={this.state.value}
-                    margin="xxx-small xx-small xxx-small none"
+                    margin="xxx-small xxx-small xxx-small none"
                     onClick={() => console.log(this.state.value)}
                   />
                 )}
                 <Tag
                   text="Rocky road"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Rocky road')}
                 />
                 <Tag
                   text="Vanilla"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Vanilla')}
                 />
                 <Tag
                   text="Coffee"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Coffee')}
                 />
                 <Tag
                   text="Strawberry"
-                  margin="xxx-small xx-small xxx-small none"
+                  margin="xxx-small xxx-small xxx-small none"
                   onClick={() => console.log('Strawberry')}
                 />
               </>
@@ -158,6 +247,63 @@ type: example
         </View>
       )
     }
+  }
+
+  render(<ExtraContentExample />)
+```
+
+```js
+---
+type: example
+---
+  const ExtraContentExample = () => {
+    const [value, setValue] = useState('')
+
+    const handleChange = (e, value) => setValue(value)
+
+    return (
+      <View as="div">
+        <TextInput
+          renderLabel="What are Paula Panda's favorite ice cream flavors?"
+          value={value}
+          onChange={handleChange}
+          renderBeforeInput={
+            <>
+              {value !== '' && (
+                <Tag
+                  text={value}
+                  margin="xxx-small xxx-small xxx-small none"
+                  onClick={() => console.log(value)}
+                />
+              )}
+              <Tag
+                text="Rocky road"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={() => console.log('Rocky road')}
+              />
+              <Tag
+                text="Vanilla"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={() => console.log('Vanilla')}
+              />
+              <Tag
+                text="Coffee"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={() => console.log('Coffee')}
+              />
+              <Tag
+                text="Strawberry"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={() => console.log('Strawberry')}
+              />
+            </>
+          }
+          renderAfterInput={() => (
+            <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />
+          )}
+        />
+      </View>
+    )
   }
 
   render(<ExtraContentExample />)
@@ -250,66 +396,6 @@ type: example
     />
   </View>
 </View>
-```
-
-You can see here most of the visual states of the component:
-
-```js
----
-type: example
----
-  <Flex gap='medium' direction='column'>
-    <TextInput
-      size="small"
-      renderAfterInput={<AlarmClockInstUIIcon />}
-      renderBeforeInput={<AlarmClockInstUIIcon />}
-      renderLabel='small'
-      placeholder="placeholder"
-    />
-    <TextInput
-      renderAfterInput={<AlarmClockInstUIIcon />}
-      renderBeforeInput={<AlarmClockInstUIIcon />}
-      renderLabel='normal'
-      placeholder="placeholder"
-    />
-    <TextInput
-      size="large"
-      renderAfterInput={<AlarmClockInstUIIcon />}
-      renderBeforeInput={<AlarmClockInstUIIcon />}
-      renderLabel='large'
-      placeholder="placeholder"
-    />
-    <TextInput
-      interaction='disabled'
-      renderLabel='disabled'
-      placeholder="placeholder"
-    />
-    <TextInput
-      interaction='readonly'
-      renderLabel='readonly'
-      placeholder="placeholder"
-    />
-    <TextInput
-      renderLabel='with error message'
-      placeholder="placeholder"
-      messages={[{ text: 'This is an error.', type: 'error' }]}
-    />
-    <TextInput
-      renderLabel='with success message'
-      placeholder="placeholder"
-      messages={[{ text: 'Great success!', type: 'success' }]}
-    />
-    <TextInput
-      renderLabel='large size (default is "medium")'
-      placeholder="placeholder"
-      size='large'
-    />
-    <TextInput
-      renderLabel='small size (default is "medium")'
-      placeholder="placeholder"
-      size='small'
-    />
-  </Flex>
 ```
 
 ### Guidelines

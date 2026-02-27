@@ -434,7 +434,7 @@ type: example
   </View>
   <View focusWithin>
     if the <code>focusWithin</code> prop is <code>true</code>, the View will display the focus ring if any of its descendants receives focus
-    <div tabIndex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
+    <div tabindex="0" role="button" style={{outline: 'none'}}>Tab here to see the focus outline</div>
   </View>
 </Flex>
 ```
@@ -831,8 +831,8 @@ type: example
 | View | focusColor | `'info' \| 'inverse' \| 'success' \| 'danger'` | No | `'info'` | Determines the color of the focus outline |
 | View | shouldAnimateFocus | `boolean` | No | `true` | Determines if the focus ring should animate when it appears |
 | View | withVisualDebug | `boolean` | No | `false` | Activate a dotted outline around the component to make building your layout easier |
-| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `margin="small auto large"`. |
-| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, and Spacing token values, see https://instructure.design/layout-spacing. Apply these values via familiar CSS-like shorthand. For example, `padding="small auto large"`. |
+| View | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
+| View | padding | `Spacing` | No | - | Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `padding="small x-large large"`. |
 | View | borderWidth | `BorderWidth` | No | - | Accepts the familiar CSS shorthand to designate border widths corresponding to edges |
 | View | borderRadius | `BorderRadii` | No | - | Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`). Also accepts valid CSS length values like `1rem` or `12px` |
 | View | shadow | `Shadow` | No | - | Controls the shadow depth for the `<View />` |

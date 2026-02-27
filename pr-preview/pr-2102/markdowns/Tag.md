@@ -89,7 +89,7 @@ This variant is designed to look similar to the surrounding text.
 ---
 type: example
 ---
-<Text as="p">
+<p>
   This is an
   <Tag
     dismissible
@@ -101,7 +101,7 @@ type: example
     variant="inline"
   />
   tag.
-</Text>
+</p>
 ```
 
 ### Guidelines
