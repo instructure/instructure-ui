@@ -33,19 +33,19 @@ export type {
   ScreenReaderContentProps,
   PresentationContentProps
 } from '@instructure/ui-a11y-content'
-export { Alert } from '@instructure/ui-alerts/v11_5'
-export type { AlertProps } from '@instructure/ui-alerts/v11_5'
-export { Avatar } from '@instructure/ui-avatar/v11_5'
-export type { AvatarProps } from '@instructure/ui-avatar/v11_5'
-export { Badge } from '@instructure/ui-badge/v11_5'
-export type { BadgeProps } from '@instructure/ui-badge/v11_5'
-export { Billboard } from '@instructure/ui-billboard/v11_5'
-export type { BillboardProps } from '@instructure/ui-billboard/v11_5'
-export { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb/v11_5'
+export { Alert } from '@instructure/ui-alerts/v11_7'
+export type { AlertProps } from '@instructure/ui-alerts/v11_7'
+export { Avatar } from '@instructure/ui-avatar/v11_7'
+export type { AvatarProps } from '@instructure/ui-avatar/v11_7'
+export { Badge } from '@instructure/ui-badge/v11_7'
+export type { BadgeProps } from '@instructure/ui-badge/v11_7'
+export { Billboard } from '@instructure/ui-billboard/v11_7'
+export type { BillboardProps } from '@instructure/ui-billboard/v11_7'
+export { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb/v11_7'
 export type {
   BreadcrumbProps,
   BreadcrumbLinkProps
-} from '@instructure/ui-breadcrumb/v11_5'
+} from '@instructure/ui-breadcrumb/v11_7'
 export {
   BaseButton,
   Button,
@@ -53,7 +53,7 @@ export {
   CondensedButton,
   IconButton,
   ToggleButton
-} from '@instructure/ui-buttons/v11_5'
+} from '@instructure/ui-buttons/v11_7'
 export type {
   BaseButtonOwnProps,
   ButtonProps,
@@ -62,65 +62,65 @@ export type {
   CloseButtonProps,
   CondensedButtonProps,
   IconButtonProps
-} from '@instructure/ui-buttons/v11_5'
-export { Byline } from '@instructure/ui-byline/v11_5'
-export type { BylineProps } from '@instructure/ui-byline/v11_5'
-export { Calendar, CalendarDay } from '@instructure/ui-calendar/v11_5'
+} from '@instructure/ui-buttons/v11_7'
+export { Byline } from '@instructure/ui-byline/v11_7'
+export type { BylineProps } from '@instructure/ui-byline/v11_7'
+export { Calendar, CalendarDay } from '@instructure/ui-calendar/v11_7'
 export type {
   CalendarDayProps,
   CalendarProps
-} from '@instructure/ui-calendar/v11_5'
+} from '@instructure/ui-calendar/v11_7'
 export {
   Checkbox,
   CheckboxGroup,
   CheckboxFacade,
   ToggleFacade
-} from '@instructure/ui-checkbox/v11_5'
+} from '@instructure/ui-checkbox/v11_7'
 export type {
   CheckboxFacadeProps,
   ToggleFacadeProps,
   CheckboxGroupProps,
   CheckboxProps
-} from '@instructure/ui-checkbox/v11_5'
+} from '@instructure/ui-checkbox/v11_7'
 export {
   ColorPicker,
   ColorMixer,
   ColorPreset,
   ColorContrast,
   ColorIndicator
-} from '@instructure/ui-color-picker/v11_5'
+} from '@instructure/ui-color-picker/v11_7'
 export type {
   ColorContrastProps,
   ColorIndicatorProps,
   ColorMixerProps,
   ColorPickerProps,
   ColorPresetProps
-} from '@instructure/ui-color-picker/v11_5'
-export { DateInput, DateInput2 } from '@instructure/ui-date-input/v11_5'
+} from '@instructure/ui-color-picker/v11_7'
+export { DateInput, DateInput2 } from '@instructure/ui-date-input/v11_7'
 export type {
   DateInputProps,
   DateInput2Props
-} from '@instructure/ui-date-input/v11_5'
-export { DateTimeInput } from '@instructure/ui-date-time-input/v11_5'
+} from '@instructure/ui-date-input/v11_7'
+export { DateTimeInput } from '@instructure/ui-date-time-input/v11_7'
 export { Dialog } from '@instructure/ui-dialog'
 export type { DialogProps } from '@instructure/ui-dialog'
 export {
   DrawerLayout,
   DrawerContent,
   DrawerTray
-} from '@instructure/ui-drawer-layout/v11_5'
+} from '@instructure/ui-drawer-layout/v11_7'
 export type {
   DrawerLayoutProps,
   DrawerLayoutContentProps,
   DrawerLayoutTrayProps
-} from '@instructure/ui-drawer-layout/v11_5'
+} from '@instructure/ui-drawer-layout/v11_7'
 export {
   Drilldown,
   DrilldownGroup,
   DrilldownOption,
   DrilldownPage,
   DrilldownSeparator
-} from '@instructure/ui-drilldown/v11_5'
+} from '@instructure/ui-drilldown/v11_7'
 export type {
   DrilldownGroupChild,
   DrilldownGroupProps,
@@ -132,22 +132,22 @@ export type {
   DrilldownProps,
   DrilldownSeparatorChild,
   DrilldownSeparatorProps
-} from '@instructure/ui-drilldown/v11_5'
-export { Editable, InPlaceEdit } from '@instructure/ui-editable/v11_5'
+} from '@instructure/ui-drilldown/v11_7'
+export { Editable, InPlaceEdit } from '@instructure/ui-editable/v11_7'
 export type {
   EditableProps,
   InPlaceEditProps
-} from '@instructure/ui-editable/v11_5'
+} from '@instructure/ui-editable/v11_7'
 export { Expandable } from '@instructure/ui-expandable'
 export type {
   ExpandableProps,
   RenderExpandable,
   ExpandableToggleProps
 } from '@instructure/ui-expandable'
-export { FileDrop } from '@instructure/ui-file-drop/v11_5'
-export type { FileDropProps } from '@instructure/ui-file-drop/v11_5'
-export { Flex, FlexItem } from '@instructure/ui-flex/v11_5'
-export type { FlexProps, FlexItemProps } from '@instructure/ui-flex/v11_5'
+export { FileDrop } from '@instructure/ui-file-drop/v11_7'
+export type { FileDropProps } from '@instructure/ui-file-drop/v11_7'
+export { Flex, FlexItem } from '@instructure/ui-flex/v11_7'
+export type { FlexProps, FlexItemProps } from '@instructure/ui-flex/v11_7'
 export { Focusable } from '@instructure/ui-focusable'
 export type { FocusableProps } from '@instructure/ui-focusable'
 export {
@@ -157,7 +157,7 @@ export {
   FormFieldMessages,
   FormFieldLayout,
   FormFieldGroup
-} from '@instructure/ui-form-field/v11_5'
+} from '@instructure/ui-form-field/v11_7'
 export type {
   FormFieldGroupProps,
   FormFieldMessageProps,
@@ -168,16 +168,16 @@ export type {
   FormFieldProps,
   FormMessage,
   FormMessageType
-} from '@instructure/ui-form-field/v11_5'
-export { Grid, GridRow, GridCol } from '@instructure/ui-grid/v11_5'
+} from '@instructure/ui-form-field/v11_7'
+export { Grid, GridRow, GridCol } from '@instructure/ui-grid/v11_7'
 export type {
   GridProps,
   GridRowProps,
   GridColProps,
   GridBreakpoints
-} from '@instructure/ui-grid/v11_5'
-export { Heading } from '@instructure/ui-heading/v11_5'
-export type { HeadingProps } from '@instructure/ui-heading/v11_5'
+} from '@instructure/ui-grid/v11_7'
+export { Heading } from '@instructure/ui-heading/v11_7'
+export type { HeadingProps } from '@instructure/ui-heading/v11_7'
 export {
   ApplyLocale,
   TextDirectionContext,
@@ -194,74 +194,74 @@ export type {
   ApplyLocaleProps
 } from '@instructure/ui-i18n'
 export * from '@instructure/ui-icons'
-export { Img } from '@instructure/ui-img/v11_5'
-export type { ImgProps } from '@instructure/ui-img/v11_5'
+export { Img } from '@instructure/ui-img/v11_7'
+export type { ImgProps } from '@instructure/ui-img/v11_7'
 export {
   NutritionFacts,
   DataPermissionLevels,
   AiInformation
-} from '@instructure/ui-instructure/v11_5'
+} from '@instructure/ui-instructure/v11_7'
 export type {
   NutritionFactsProps,
   DataPermissionLevelsProps,
   AiInformationProps
-} from '@instructure/ui-instructure/v11_5'
-export { Link } from '@instructure/ui-link/v11_5'
-export type { LinkProps } from '@instructure/ui-link/v11_5'
+} from '@instructure/ui-instructure/v11_7'
+export { Link } from '@instructure/ui-link/v11_7'
+export type { LinkProps } from '@instructure/ui-link/v11_7'
 export {
   List,
   ListItem,
   InlineList,
   InlineListItem
-} from '@instructure/ui-list/v11_5'
+} from '@instructure/ui-list/v11_7'
 export type {
   ListProps,
   ListItemProps,
   InlineListProps,
   InlineListItemProps
-} from '@instructure/ui-list/v11_5'
+} from '@instructure/ui-list/v11_7'
 export {
   Menu,
   MenuItem,
   MenuItemGroup,
   MenuItemSeparator
-} from '@instructure/ui-menu/v11_5'
+} from '@instructure/ui-menu/v11_7'
 export type {
   MenuProps,
   MenuItemProps,
   MenuGroupProps,
   MenuSeparatorProps
-} from '@instructure/ui-menu/v11_5'
-export { MetricGroup, Metric } from '@instructure/ui-metric/v11_5'
+} from '@instructure/ui-menu/v11_7'
+export { MetricGroup, Metric } from '@instructure/ui-metric/v11_7'
 export type {
   MetricGroupProps,
   MetricProps
-} from '@instructure/ui-metric/v11_5'
+} from '@instructure/ui-metric/v11_7'
 export {
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader
-} from '@instructure/ui-modal/v11_5'
+} from '@instructure/ui-modal/v11_7'
 export type {
   ModalProps,
   ModalBodyProps,
   ModalFooterProps,
   ModalHeaderProps
-} from '@instructure/ui-modal/v11_5'
+} from '@instructure/ui-modal/v11_7'
 export { Transition, BaseTransition } from '@instructure/ui-motion'
 export type {
   TransitionProps,
   TransitionType,
   BaseTransitionStatesType
 } from '@instructure/ui-motion'
-export { AppNav, AppNavItem } from '@instructure/ui-navigation/v11_5'
+export { AppNav, AppNavItem } from '@instructure/ui-navigation/v11_7'
 export type {
   AppNavProps,
   AppNavItemProps
-} from '@instructure/ui-navigation/v11_5'
-export { NumberInput } from '@instructure/ui-number-input/v11_5'
-export type { NumberInputProps } from '@instructure/ui-number-input/v11_5'
+} from '@instructure/ui-navigation/v11_7'
+export { NumberInput } from '@instructure/ui-number-input/v11_7'
+export type { NumberInputProps } from '@instructure/ui-number-input/v11_7'
 export {
   Options,
   OptionSeparator,
@@ -276,23 +276,23 @@ export type {
   OptionsProps,
   OptionsSeparatorProps
 } from '@instructure/ui-options'
-export { Mask, Overlay } from '@instructure/ui-overlays/v11_5'
-export type { MaskProps, OverlayProps } from '@instructure/ui-overlays/v11_5'
-export { Pages, PagesPage } from '@instructure/ui-pages/v11_5'
-export type { PagesPageProps, PagesProps } from '@instructure/ui-pages/v11_5'
-export { Pagination, PaginationButton } from '@instructure/ui-pagination/v11_5'
+export { Mask, Overlay } from '@instructure/ui-overlays/v11_7'
+export type { MaskProps, OverlayProps } from '@instructure/ui-overlays/v11_7'
+export { Pages, PagesPage } from '@instructure/ui-pages/v11_7'
+export type { PagesPageProps, PagesProps } from '@instructure/ui-pages/v11_7'
+export { Pagination, PaginationButton } from '@instructure/ui-pagination/v11_7'
 export type {
   PaginationNavigationProps,
   PaginationPageProps,
   PaginationProps
-} from '@instructure/ui-pagination/v11_5'
-export { Pill } from '@instructure/ui-pill/v11_5'
-export type { PillProps } from '@instructure/ui-pill/v11_5'
-export { Popover } from '@instructure/ui-popover/v11_5'
+} from '@instructure/ui-pagination/v11_7'
+export { Pill } from '@instructure/ui-pill/v11_7'
+export type { PillProps } from '@instructure/ui-pill/v11_7'
+export { Popover } from '@instructure/ui-popover/v11_7'
 export type {
   PopoverProps,
   PopoverOwnProps
-} from '@instructure/ui-popover/v11_5'
+} from '@instructure/ui-popover/v11_7'
 export { Portal } from '@instructure/ui-portal'
 export type { PortalProps, PortalNode } from '@instructure/ui-portal'
 export {
@@ -310,20 +310,20 @@ export type {
   PlacementPropValues,
   PositionMountNode
 } from '@instructure/ui-position'
-export { ProgressBar, ProgressCircle } from '@instructure/ui-progress/v11_5'
+export { ProgressBar, ProgressCircle } from '@instructure/ui-progress/v11_7'
 export type {
   ProgressBarProps,
   ProgressCircleProps
-} from '@instructure/ui-progress/v11_5'
-export { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input/v11_5'
+} from '@instructure/ui-progress/v11_7'
+export { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input/v11_7'
 export type {
   RadioInputProps,
   RadioInputGroupProps
-} from '@instructure/ui-radio-input/v11_5'
-export { RangeInput } from '@instructure/ui-range-input/v11_5'
-export type { RangeInputProps } from '@instructure/ui-range-input/v11_5'
-export { Rating, RatingIcon } from '@instructure/ui-rating/v11_5'
-export type { RatingIconProps, RatingProps } from '@instructure/ui-rating/v11_5'
+} from '@instructure/ui-radio-input/v11_7'
+export { RangeInput } from '@instructure/ui-range-input/v11_7'
+export type { RangeInputProps } from '@instructure/ui-range-input/v11_7'
+export { Rating, RatingIcon } from '@instructure/ui-rating/v11_7'
+export type { RatingIconProps, RatingProps } from '@instructure/ui-rating/v11_7'
 export {
   Responsive,
   ResponsivePropTypes,
@@ -331,7 +331,7 @@ export {
   addMediaQueryMatchListener,
   parseQuery,
   jsonToMediaQuery
-} from '@instructure/ui-responsive/v11_5'
+} from '@instructure/ui-responsive/v11_7'
 export type {
   ResponsiveProps,
   ResponsivePropsObject,
@@ -340,38 +340,38 @@ export type {
   Query,
   ResponsiveByBreakpointProps,
   ValidQueryKey
-} from '@instructure/ui-responsive/v11_5'
-export { Select, SelectGroup, SelectOption } from '@instructure/ui-select/v11_5'
+} from '@instructure/ui-responsive/v11_7'
+export { Select, SelectGroup, SelectOption } from '@instructure/ui-select/v11_7'
 export type {
   SelectOwnProps,
   SelectGroupProps,
   SelectOptionProps,
   SelectProps
-} from '@instructure/ui-select/v11_5'
+} from '@instructure/ui-select/v11_7'
 export { Selectable } from '@instructure/ui-selectable'
 export type {
   SelectableRender,
   SelectableProps
 } from '@instructure/ui-selectable'
-export { SideNavBar, SideNavBarItem } from '@instructure/ui-side-nav-bar/v11_5'
+export { SideNavBar, SideNavBarItem } from '@instructure/ui-side-nav-bar/v11_7'
 export type {
   SideNavBarProps,
   SideNavBarItemProps
-} from '@instructure/ui-side-nav-bar/v11_5'
+} from '@instructure/ui-side-nav-bar/v11_7'
 export {
   SimpleSelect,
   SimpleSelectOption,
   SimpleSelectGroup
-} from '@instructure/ui-simple-select/v11_5'
+} from '@instructure/ui-simple-select/v11_7'
 export type {
   SimpleSelectProps,
   SimpleSelectGroupProps,
   SimpleSelectOptionProps
-} from '@instructure/ui-simple-select/v11_5'
-export { SourceCodeEditor } from '@instructure/ui-source-code-editor/v11_5'
-export type { SourceCodeEditorProps } from '@instructure/ui-source-code-editor/v11_5'
-export { Spinner } from '@instructure/ui-spinner/v11_5'
-export type { SpinnerProps } from '@instructure/ui-spinner/v11_5'
+} from '@instructure/ui-simple-select/v11_7'
+export { SourceCodeEditor } from '@instructure/ui-source-code-editor/v11_7'
+export type { SourceCodeEditorProps } from '@instructure/ui-source-code-editor/v11_7'
+export { Spinner } from '@instructure/ui-spinner/v11_7'
+export type { SpinnerProps } from '@instructure/ui-spinner/v11_7'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export type { InlineSVGProps, SVGIconProps } from '@instructure/ui-svg-images'
 export {
@@ -383,7 +383,7 @@ export {
   TableRow,
   TableColHeader,
   TableRowHeader
-} from '@instructure/ui-table/v11_5'
+} from '@instructure/ui-table/v11_7'
 export type {
   TableBodyProps,
   TableCellProps,
@@ -392,21 +392,21 @@ export type {
   TableHeadProps,
   TableRowHeaderProps,
   TableRowProps
-} from '@instructure/ui-table/v11_5'
-export { Tabs, TabsPanel, TabsTab } from '@instructure/ui-tabs/v11_5'
+} from '@instructure/ui-table/v11_7'
+export { Tabs, TabsPanel, TabsTab } from '@instructure/ui-tabs/v11_7'
 export type {
   TabsTabProps,
   TabsPanelProps,
   TabsProps
-} from '@instructure/ui-tabs/v11_5'
-export { Tag } from '@instructure/ui-tag/v11_5'
-export type { TagProps } from '@instructure/ui-tag/v11_5'
-export { Text } from '@instructure/ui-text/v11_5'
-export type { TextProps } from '@instructure/ui-text/v11_5'
-export { TextArea } from '@instructure/ui-text-area/v11_5'
-export type { TextAreaProps } from '@instructure/ui-text-area/v11_5'
-export { TextInput } from '@instructure/ui-text-input/v11_5'
-export type { TextInputProps } from '@instructure/ui-text-input/v11_5'
+} from '@instructure/ui-tabs/v11_7'
+export { Tag } from '@instructure/ui-tag/v11_7'
+export type { TagProps } from '@instructure/ui-tag/v11_7'
+export { Text } from '@instructure/ui-text/v11_7'
+export type { TextProps } from '@instructure/ui-text/v11_7'
+export { TextArea } from '@instructure/ui-text-area/v11_7'
+export type { TextAreaProps } from '@instructure/ui-text-area/v11_7'
+export { TextInput } from '@instructure/ui-text-input/v11_7'
+export type { TextInputProps } from '@instructure/ui-text-input/v11_7'
 export {
   canvas,
   canvasHighContrast,
@@ -428,21 +428,21 @@ export type {
   DataVisualization,
   UI
 } from '@instructure/ui-themes'
-export { TimeSelect } from '@instructure/ui-time-select/v11_5'
-export type { TimeSelectProps } from '@instructure/ui-time-select/v11_5'
+export { TimeSelect } from '@instructure/ui-time-select/v11_7'
+export type { TimeSelectProps } from '@instructure/ui-time-select/v11_7'
 export {
   ToggleDetails,
   ToggleGroup
-} from '@instructure/ui-toggle-details/v11_5'
+} from '@instructure/ui-toggle-details/v11_7'
 export type {
   ToggleDetailsProps,
   ToggleGroupProps
-} from '@instructure/ui-toggle-details/v11_5'
-export { Tooltip } from '@instructure/ui-tooltip/v11_5'
+} from '@instructure/ui-toggle-details/v11_7'
+export { Tooltip } from '@instructure/ui-tooltip/v11_7'
 export type {
   TooltipProps,
   TooltipRenderChildrenArgs
-} from '@instructure/ui-tooltip/v11_5'
+} from '@instructure/ui-tooltip/v11_7'
 export {
   TopNavBar,
   TopNavBarActionItems,
@@ -452,7 +452,7 @@ export {
   TopNavBarLayout,
   TopNavBarMenuItems,
   TopNavBarUser
-} from '@instructure/ui-top-nav-bar/v11_5'
+} from '@instructure/ui-top-nav-bar/v11_7'
 export type {
   TopNavBarProps,
   TopNavBarOwnProps,
@@ -475,28 +475,28 @@ export type {
   TopNavBarMenuItemsOwnProps,
   TopNavBarUserProps,
   TopNavBarUserOwnProps
-} from '@instructure/ui-top-nav-bar/v11_5'
-export { Tray } from '@instructure/ui-tray/v11_5'
-export type { TrayProps } from '@instructure/ui-tray/v11_5'
+} from '@instructure/ui-top-nav-bar/v11_7'
+export { Tray } from '@instructure/ui-tray/v11_7'
+export type { TrayProps } from '@instructure/ui-tray/v11_7'
 export {
   TreeBrowser,
   TreeNode,
   TreeButton,
   TreeCollection
-} from '@instructure/ui-tree-browser/v11_5'
+} from '@instructure/ui-tree-browser/v11_7'
 export type {
   TreeBrowserButtonProps,
   TreeBrowserProps,
   TreeBrowserCollectionProps,
   TreeBrowserNodeProps
-} from '@instructure/ui-tree-browser/v11_5'
+} from '@instructure/ui-tree-browser/v11_7'
 export { TruncateList } from '@instructure/ui-truncate-list'
 export type { TruncateListProps } from '@instructure/ui-truncate-list'
-export { TruncateText } from '@instructure/ui-truncate-text/v11_5'
-export type { TruncateTextProps } from '@instructure/ui-truncate-text/v11_5'
-export { View, ContextView } from '@instructure/ui-view/v11_5'
+export { TruncateText } from '@instructure/ui-truncate-text/v11_7'
+export type { TruncateTextProps } from '@instructure/ui-truncate-text/v11_7'
+export { View, ContextView } from '@instructure/ui-view/v11_7'
 export type {
   ViewProps,
   ContextViewProps,
   ViewOwnProps
-} from '@instructure/ui-view/v11_5'
+} from '@instructure/ui-view/v11_7'

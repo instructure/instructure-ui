@@ -30,7 +30,7 @@ import {
   parsePlacement,
   mirrorHorizontalPlacement
 } from '@instructure/ui-position'
-import { ContextView, View } from '@instructure/ui-view/v11_5'
+import { ContextView, View } from '@instructure/ui-view/v11_6'
 import { Dialog } from '@instructure/ui-dialog'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
@@ -55,7 +55,7 @@ import { logError as error } from '@instructure/console'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
-import type { ViewProps, ContextViewProps } from '@instructure/ui-view/v11_5'
+import type { ViewProps, ContextViewProps } from '@instructure/ui-view/v11_6'
 import type { PositionProps } from '@instructure/ui-position'
 import type { DialogProps } from '@instructure/ui-dialog'
 
