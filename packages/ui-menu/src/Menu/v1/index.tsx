@@ -25,7 +25,7 @@
 import { ComponentElement, Children, Component, ReactElement } from 'react'
 import keycode from 'keycode'
 
-import { Popover } from '@instructure/ui-popover/latest'
+import { Popover } from '@instructure/ui-popover/v11_5'
 import {
   safeCloneElement,
   matchComponentTypes,

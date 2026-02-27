@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_5'
 import { omitProps } from '@instructure/ui-react-utils'
 import { getCSSStyleDeclaration } from '@instructure/ui-dom-utils'
 

@@ -25,12 +25,12 @@
 import { Component } from 'react'
 import keycode from 'keycode'
 
-import { FormFieldMessages } from '@instructure/ui-form-field/latest'
+import { FormFieldMessages } from '@instructure/ui-form-field/v11_5'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view/latest'
+import { View } from '@instructure/ui-view/v11_5'
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
@@ -185,10 +185,8 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     return isActiveElement(this._input)
   }
 
-  get isError() {
-    return !!this.props.messages?.find(
-      (m) => m.type === 'error' || m.type === 'newError'
-    )
+  get isNewError() {
+    return !!this.props.messages?.find((m) => m.type === 'newError')
   }
 
   get invalid() {
@@ -280,7 +278,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         display="block"
         margin="small 0 0"
         css={
-          this.isError &&
+          this.isNewError &&
           (variant === 'toggle'
             ? styles?.indentedToggleError
             : styles?.indentedError)

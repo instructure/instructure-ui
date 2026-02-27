@@ -24,7 +24,7 @@
 
 import { Children, Component } from 'react'
 
-import { FormFieldGroup } from '@instructure/ui-form-field/latest'
+import { FormFieldGroup } from '@instructure/ui-form-field/v11_5'
 import {
   matchComponentTypes,
   safeCloneElement,

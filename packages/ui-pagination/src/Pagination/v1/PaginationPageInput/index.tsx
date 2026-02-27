@@ -24,8 +24,8 @@
 
 import { Component } from 'react'
 
-import { withStyleLegacy as withStyle } from '@instructure/emotion'
-import { NumberInput } from '@instructure/ui-number-input/latest'
+import { withStyle } from '@instructure/emotion'
+import { NumberInput } from '@instructure/ui-number-input/v11_5'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import generateStyle from './styles'

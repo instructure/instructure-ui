@@ -23,7 +23,7 @@
  */
 
 import { Component, createRef } from 'react'
-import { Button } from '@instructure/ui-buttons/latest'
+import { Button } from '@instructure/ui-buttons/v11_5'
 import {
   IconArrowOpenEndSolid,
   IconArrowOpenDownSolid
@@ -38,7 +38,7 @@ import generateComponentTheme from './theme'
 import type { ToggleDetailsProps } from './props'
 import { allowedProps } from './props'
 import type { ExpandableToggleProps } from '@instructure/ui-expandable'
-import type { ViewProps } from '@instructure/ui-view/latest'
+import type { ViewProps } from '@instructure/ui-view/v11_5'
 
 /**
 ---

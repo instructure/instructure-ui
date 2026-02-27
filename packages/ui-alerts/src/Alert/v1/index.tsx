@@ -31,9 +31,9 @@ import {
   withDeterministicId,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { CloseButton } from '@instructure/ui-buttons/latest'
-import { View } from '@instructure/ui-view/latest'
-import type { ViewOwnProps } from '@instructure/ui-view/latest'
+import { CloseButton } from '@instructure/ui-buttons/v11_5'
+import { View } from '@instructure/ui-view/v11_5'
+import type { ViewOwnProps } from '@instructure/ui-view/v11_5'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
   IconCheckMarkSolid,

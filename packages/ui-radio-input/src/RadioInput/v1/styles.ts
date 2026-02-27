@@ -22,140 +22,173 @@
  * SOFTWARE.
  */
 
+import type { RadioInputTheme } from '@instructure/shared-types'
 import type { RadioInputProps, RadioInputStyle } from './props'
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
-import { calcFocusOutlineStyles } from '@instructure/emotion'
-
-type StyleParams = {
-  disabled: RadioInputProps['disabled']
-  context: RadioInputProps['context']
-  inline: RadioInputProps['inline']
-  hovered: boolean
-  readOnly: RadioInputProps['readOnly']
-  size: RadioInputProps['size']
-  variant: RadioInputProps['variant']
-}
 
 /**
  * ---
  * private: true
  * ---
  * Generates the style object from the theme and provided additional information
- * @param componentTheme The theme variable object.
- * @param params Additional parameters to customize the style.
- * @param sharedTokens Shared token object that stores common values for the theme.
- * @return The final style object, which will be used in the component
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['RadioInput'],
-  params: StyleParams,
-  sharedTokens: SharedTokens
+  componentTheme: RadioInputTheme,
+  props: RadioInputProps
 ): RadioInputStyle => {
-  const { disabled, inline, hovered, size, readOnly } = params
-  const variant = 'simple' // TODO read from params when the toggle variant is ready
+  const { disabled, variant, context, size, inline } = props
 
-  // 4*2 states: base, hover, disabled, readonly X none/selected
-  const insetSizes = {
-    small: componentTheme.checkedInsetSm,
-    medium: componentTheme.checkedInsetMd,
-    large: componentTheme.checkedInsetLg
-  }
-  const labelColors = {
-    // the states here are mutually exclusive
-    color: componentTheme.labelBaseColor,
-    ...(hovered && {
-      color: componentTheme.labelHoverColor
-    }),
-    ...(readOnly && {
-      color: componentTheme.labelReadonlyColor
-    }),
-    ...(disabled && {
-      color: componentTheme.labelDisabledColor
-    })
+  const getInputStateSelector = (state: 'hover' | 'focus' | 'checked') =>
+    `[class$=-radioInput__input]:${state} + [class$=-radioInput__control] &`
+
+  const toggleFacadeContextVariants = {
+    success: { backgroundColor: componentTheme.toggleBackgroundSuccess },
+    danger: { backgroundColor: componentTheme.toggleBackgroundDanger },
+    warning: { backgroundColor: componentTheme.toggleBackgroundWarning },
+    off: { backgroundColor: componentTheme.toggleBackgroundOff }
   }
 
-  // Input colors for different states
-  const getInputColors = () => {
-    if (disabled) {
-      return {
-        background: componentTheme.backgroundDisabledColor,
-        borderColor: componentTheme.borderDisabledColor,
-        checkedBoxShadow: `inset 0 0 0 ${insetSizes[size!]} ${
-          componentTheme.borderDisabledColor
-        }`
-      }
-    }
-    if (readOnly) {
-      return {
-        background: componentTheme.backgroundReadonlyColor,
-        borderColor: componentTheme.borderReadonlyColor,
-        checkedBoxShadow: `inset 0 0 0 ${insetSizes[size!]} ${
-          componentTheme.borderSelectedColor
-        }`
-      }
-    }
-    if (hovered) {
-      return {
-        background: componentTheme.backgroundHoverColor,
-        borderColor: componentTheme.borderHoverColor,
-        checkedBoxShadow: `inset 0 0 0 ${insetSizes[size!]} ${
-          componentTheme.borderSelectedColor
-        }`
-      }
-    }
-    return {
-      background: componentTheme.backgroundColor,
-      borderColor: componentTheme.borderColor,
-      checkedBoxShadow: `inset 0 0 0 ${insetSizes[size!]} ${
-        componentTheme.borderSelectedColor
-      }`
-    }
-  }
-
-  const inputColors = getInputColors()
-
-  const focusOutline = calcFocusOutlineStyles(sharedTokens.focusOutline)
-  focusOutline.transition += ', box-shadow 0.2s'
-
-  const inputVariants = {
+  const facadeVariants = {
     simple: {
       base: {
-        all: 'initial',
         boxSizing: 'border-box',
-        appearance: 'none',
         display: 'block',
         position: 'relative',
-        marginInlineEnd: componentTheme.gap,
+        marginInlineEnd: componentTheme.simpleFacadeMarginEnd,
         marginInlineStart: '0',
         flexShrink: 0,
         minWidth: '1rem',
+        transition: 'all 0.2s ease-out',
         borderRadius: '100%',
-        borderWidth: componentTheme.borderWidth,
-        borderStyle: 'solid',
-        background: inputColors.background,
-        borderColor: inputColors.borderColor,
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        '&:checked': {
-          borderColor: disabled
-            ? componentTheme.borderDisabledColor
-            : componentTheme.borderSelectedColor,
-          boxShadow: inputColors.checkedBoxShadow
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
+        background: componentTheme.background,
+
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: '-0.375rem',
+          left: '-0.375rem',
+          width: 'calc(100% + 0.75rem)',
+          height: 'calc(100% + 0.75rem)',
+          boxSizing: 'border-box',
+          borderRadius: '100%',
+          border: `${componentTheme.focusBorderWidth} ${componentTheme.focusBorderStyle} ${componentTheme.focusBorderColor}`,
+          transition: 'all 0.2s',
+          transform: 'scale(0.75)',
+          opacity: 0,
+          pointerEvents: 'none'
         },
-        marginTop: componentTheme.controlVerticalMargin,
-        marginBottom: componentTheme.controlVerticalMargin,
-        ...focusOutline
+
+        [getInputStateSelector('hover')]: {
+          borderColor: componentTheme.hoverBorderColor
+        },
+        [getInputStateSelector('focus')]: {
+          background: componentTheme.background,
+          '&::before': { transform: 'scale(1)', opacity: 1 }
+        }
       },
       small: {
-        width: componentTheme.controlSizeSm,
-        height: componentTheme.controlSizeSm
+        width: componentTheme.simpleFacadeSmallSize,
+        height: componentTheme.simpleFacadeSmallSize,
+        [getInputStateSelector('checked')]: {
+          background: componentTheme.background,
+          boxShadow: `inset 0 0 0 ${componentTheme.simpleCheckedInsetSmall} ${componentTheme.hoverBorderColor}`,
+          borderColor: componentTheme.hoverBorderColor
+        }
       },
       medium: {
-        width: componentTheme.controlSizeMd,
-        height: componentTheme.controlSizeMd
+        width: componentTheme.simpleFacadeMediumSize,
+        height: componentTheme.simpleFacadeMediumSize,
+        [getInputStateSelector('checked')]: {
+          background: componentTheme.background,
+          boxShadow: `inset 0 0 0 ${componentTheme.simpleCheckedInsetMedium} ${componentTheme.hoverBorderColor}`,
+          borderColor: componentTheme.hoverBorderColor
+        }
       },
       large: {
-        width: componentTheme.controlSizeLg,
-        height: componentTheme.controlSizeLg
+        width: componentTheme.simpleFacadeLargeSize,
+        height: componentTheme.simpleFacadeLargeSize,
+        [getInputStateSelector('checked')]: {
+          background: componentTheme.background,
+          boxShadow: `inset 0 0 0 ${componentTheme.simpleCheckedInsetLarge} ${componentTheme.hoverBorderColor}`,
+          borderColor: componentTheme.hoverBorderColor
+        }
+      }
+    },
+    toggle: {
+      base: {
+        boxSizing: 'border-box',
+        visibility: 'hidden',
+        display: 'block',
+        position: 'absolute',
+        zIndex: 1,
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        boxShadow: componentTheme.toggleShadow,
+        borderRadius: componentTheme.toggleBorderRadius,
+        ...toggleFacadeContextVariants[context!],
+
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: '-0.25rem',
+          left: '-0.25rem',
+          width: 'calc(100% + 0.5rem)',
+          height: 'calc(100% + 0.5rem)',
+          boxSizing: 'border-box',
+          borderRadius: `calc(${componentTheme.toggleBorderRadius} + 0.0625rem)`,
+          border: `${componentTheme.focusBorderWidth} ${componentTheme.focusBorderStyle} ${componentTheme.focusBorderColor}`,
+          transition: 'all 0.2s',
+          transform: 'scale(0.75)',
+          opacity: 0
+        },
+
+        [getInputStateSelector('checked')]: {
+          visibility: 'visible'
+        },
+        [getInputStateSelector('focus')]: {
+          '&::before': { opacity: 1, transform: 'scale(1)' }
+        }
+      },
+      small: {},
+      medium: {},
+      large: {}
+    }
+  }
+
+  const controlVariants = {
+    simple: {
+      base: {
+        display: 'flex',
+        alignItems: 'flex-start'
+      },
+      small: {},
+      medium: {},
+      large: {}
+    },
+    toggle: {
+      base: {
+        display: 'block',
+        userSelect: 'none',
+        boxSizing: 'border-box',
+        position: 'relative'
+      },
+      small: {
+        padding: '0 0.5rem',
+        height: componentTheme.toggleSmallHeight
+      },
+      medium: {
+        padding: '0 0.875rem',
+        height: componentTheme.toggleMediumHeight
+      },
+      large: {
+        padding: '0 1rem',
+        height: componentTheme.toggleLargeHeight
       }
     }
   }
@@ -163,20 +196,11 @@ const generateStyle = (
   const labelVariants = {
     simple: {
       base: {},
-      small: {
-        fontSize: componentTheme.fontSizeSm,
-        lineHeight: componentTheme.lineHeightSm
-      },
-      medium: {
-        fontSize: componentTheme.fontSizeMd,
-        lineHeight: componentTheme.lineHeightMd
-      },
-      large: {
-        fontSize: componentTheme.fontSizeLg,
-        lineHeight: componentTheme.lineHeightLg
-      }
-    }
-    /*toggle: {
+      small: { fontSize: componentTheme.simpleFontSizeSmall },
+      medium: { fontSize: componentTheme.simpleFontSizeMedium },
+      large: { fontSize: componentTheme.simpleFontSizeLarge }
+    },
+    toggle: {
       base: {
         position: 'relative',
         zIndex: 1,
@@ -217,19 +241,31 @@ const generateStyle = (
           fontSize: `calc(${componentTheme.toggleLargeFontSize} + 0.375rem)`
         }
       }
-    }*/
+    }
+  }
+
+  const inputStyles = {
+    padding: '0',
+    margin: '0',
+    fontSize: 'inherit',
+    lineHeight: 'inherit',
+    width: 'auto',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    opacity: 0.0001 /* selenium cannot find fully transparent elements */
   }
 
   return {
     radioInput: {
       label: 'radioInput',
       position: 'relative',
-      display: 'flex',
-      alignItems: 'flex-start',
-      width: inline ? 'auto' : '100%',
+      width: '100%',
+      ...(disabled && { opacity: 0.5 }),
       ...(inline && {
-        display: 'inline-flex',
-        verticalAlign: 'middle'
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        width: 'auto'
       }),
 
       '&:hover': {
@@ -237,22 +273,43 @@ const generateStyle = (
         ...(disabled && { cursor: 'not-allowed' })
       }
     },
+    // this container is added to reduce the clickable area to the size of the radio button and label
+    container: {
+      width: 'fit-content'
+    },
     input: {
       label: 'radioInput__input',
-      ...inputVariants[variant!].base,
-      ...inputVariants[variant!][size!]
+      ...inputStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(input)[type="radio"]': inputStyles,
+      '&:-webkit-any(input)[type="radio"]': inputStyles
+    },
+    control: {
+      label: 'radioInput__control',
+      all: 'initial',
+      // @ts-expect-error defaulting to block
+      display: 'block',
+      direction: 'inherit',
+      textAlign: 'start',
+      ...controlVariants[variant!].base,
+      ...controlVariants[variant!][size!]
+    },
+    facade: {
+      label: 'radioInput__facade',
+      ...facadeVariants[variant!].base,
+      ...facadeVariants[variant!][size!]
     },
     label: {
       label: 'radioInput__label',
-      // flex-grow, flex-shrink, flex-basis
       flex: '1 1 auto',
-      alignSelf: 'center',
-      ...labelColors,
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
+      color: componentTheme.labelColor,
+      fontFamily: componentTheme.labelFontFamily,
+      fontWeight: componentTheme.labelFontWeight,
+      lineHeight: componentTheme.labelLineHeight,
       ...labelVariants[variant!].base,
       ...labelVariants[variant!][size!],
-      cursor: disabled ? 'not-allowed' : 'pointer'
+      cursor: 'default'
     }
   }
 }

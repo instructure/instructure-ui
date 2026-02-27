@@ -31,8 +31,8 @@ import {
 
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
-import { CloseButton } from '@instructure/ui-buttons/latest'
-import type { CloseButtonProps } from '@instructure/ui-buttons/latest'
+import { CloseButton } from '@instructure/ui-buttons'
+import type { CloseButtonProps } from '@instructure/ui-buttons'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

@@ -31,7 +31,7 @@ import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Dialog } from '@instructure/ui-dialog'
-import { Mask } from '@instructure/ui-overlays/latest'
+import { Mask } from '@instructure/ui-overlays/v11_5'
 
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'

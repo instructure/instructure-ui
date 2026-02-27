@@ -92,6 +92,21 @@ type: embed
 
 ```
 
+### Alert
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"boxShadow",note:"now uses sharedTokens.boxShadow.elevation4"},
+    {name:"contentPadding",note:"split into contentPaddingVertical and contentPaddingHorizontal"}
+  ]}
+/>
+
+```
+
 ### Billboard
 
 ```js
@@ -130,6 +145,122 @@ type: embed
     {name:"mediumFontSize",note:"handled in link component"},
     {name:"largeSeparatorFontSize",note:"handled in link component"},
     {name:"largeFontSize",note:"handled in link component"}
+  ]}
+/>
+
+```
+
+### Checkbox
+
+#### Checkbox (simple variant)
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"controlVerticalMargin",note:""},
+    {name:"backgroundHoverColor",note:""},
+    {name:"backgroundReadonlyColor",note:""},
+    {name:"backgroundDisabledColor",note:""},
+    {name:"borderReadonlyColor",note:""},
+    {name:"borderDisabledColor",note:""},
+    {name:"errorBorderColor",note:""},
+    {name:"errorBorderHoverColor",note:""},
+    {name:"borderRadius",note:""},
+    {name:"borderWidth",note:""},
+    {name:"labelHoverColor",note:""},
+    {name:"labelDisabledColor",note:""},
+    {name:"labelReadonlyColor",note:""},
+  ]}
+  removed={[
+    {name:"iconSizeSmall",note:""},
+    {name:"iconSizeMedium",note:""},
+    {name:"iconSizeLarge",note:""},
+    {name:"padding",note:""},
+    {name:"checkedLabelColor",note:""},
+    {name:"color",note:""},
+    {name:"checkErrorInsetWidth",note:"split into new size variants"},
+    {name:"toggleErrorInsetWidth",note:"custom calculation added"},
+  ]}
+  changed={[
+    {oldName:"facadeSizeSmall",newName:"controlSizeSm",note:""},
+    {oldName:"facadeSizeMedium",newName:"controlSizeMd",note:""},
+    {oldName:"facadeSizeLarge",newName:"controlSizeLg",note:""},
+    {oldName:"labelFontSizeSmall",newName:"fontSizeSm",note:""},
+    {oldName:"labelFontSizeMedium",newName:"fontSizeMd",note:""},
+    {oldName:"labelFontSizeLarge",newName:"fontSizeLg",note:""},
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"marginRight",newName:"gap",note:""},
+    {oldName:"checkedBackground",newName:"backgroundCheckedColor",note:""},
+    {oldName:"checkedBorderColor",newName:"borderCheckedColor",note:""},
+    {oldName:"hoverBorderColor",newName:"borderHoverColor",note:""},
+    {oldName:"labelColor",newName:"labelBaseColor",note:""},
+    {oldName:"checkedLabelColor",newName:"labelBaseColor",note:""},
+    {oldName:"labelFontFamily",newName:"fontFamily",note:""},
+    {oldName:"labelFontWeight",newName:"fontWeight",note:""},
+    {oldName:"labelLineHeight",newName:"lineHeight",note:""},
+    {oldName:"requiredInvalidColor",newName:"asteriskColor",note:""},
+  ]}
+/>
+
+```
+
+#### Checkbox (toggle variant)
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"labelLineHeightSm",note:""},
+    {name:"labelLineHeightMd",note:""},
+    {name:"labelLineHeightLg",note:""},
+    {name:"labelDisabledColor",note:""},
+    {name:"backgroundHoverColor",note:""},
+    {name:"backgroundDisabledColor",note:""},
+    {name:"backgroundReadonlyColor",note:""},
+    {name:"errorBackgroundColor",note:""},
+    {name:"errorBackgroundHoverColor",note:""},
+    {name:"borderHoverColor",note:""},
+    {name:"borderDisabledColor",note:""},
+    {name:"borderReadOnlyColor",note:""},
+    {name:"errorBorderColor",note:""},
+    {name:"checkedBorderColor",note:""},
+    {name:"checkedBorderHoverColor",note:""},
+    {name:"checkedBorderDisabledColor",note:""},
+    {name:"checkedBorderReadOnlyColor",note:""},
+    {name:"checkedBackgroundHoverColor",note:""},
+    {name:"checkedBackgroundDisabledColor",note:""},
+    {name:"checkedBackgroundReadonlyColor",note:""},
+    {name:"uncheckedIconErrorBorderColor",note:""},
+    {name:"uncheckedIconBorderHoverColor",note:""},
+    {name:"uncheckedIconBorderDisabledColor",note:""},
+    {name:"uncheckedIconBorderReadonlyColor",note:""},
+    {name:"checkedIconBorderHoverColor",note:""},
+    {name:"checkedIconBorderDisabledColor",note:""},
+    {name:"checkedIconBorderReadonlyColor",note:""},
+    {name:"checkedIconBorderReadonlyColor",note:""},
+    {name:"disabledOpacity",note:""},
+  ]}
+  removed={[
+    {name:"color",note:""},
+    {name:"checkedIconColor",note:""},
+    {name:"uncheckedIconColor",note:""},
+    {name:"focusOutlineColor",note:""},
+    {name:"focusBorderWidth",note:""},
+    {name:"focusBorderStyle",note:""},
+    {name:"focusBorderStyle",note:""},
+    {name:"labelLineHeight",note:"split into new size variants"},
+  ]}
+  changed={[
+    {oldName:"labelFontSizeSmall",newName:"labelFontSizeSm",note:""},
+    {oldName:"labelFontSizeMedium",newName:"labelFontSizeMd",note:""},
+    {oldName:"labelFontSizeLarge",newName:"labelFontSizeLg",note:""},
+    {oldName:"background",newName:"toggleBackground",note:""},
+    {oldName:"checkedBackground",newName:"checkedBackgroundColor",note:""},
   ]}
 />
 
@@ -362,6 +493,55 @@ type: embed
 
 ```
 
+### Menu
+
+Icons for checkbox and radio menu items are now positioned on the right side instead of the left.
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"focusBorderStyle",note:"style uses sharedTokens.focusOutline"},
+    {name:"focusBorderWidth",note:"style uses sharedTokens.focusOutline"},
+    {name:"focusBorderColor",note:"style uses sharedTokens.focusOutline"},
+    {name:"focusBorderRadius",note:"style uses sharedTokens.focusOutline"}
+  ]}
+/>
+
+```
+
+#### Menu.Item
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"iconColor",note:""},
+    {name:"activeIconColor",note:""},
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
+
+```
+
+#### Menu.Group
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"}
+  ]}
+/>
+
+```
+
 ### Metric
 
 ```js
@@ -386,6 +566,79 @@ type: embed
 <V12ChangelogTable
   removed={[
     {name:"lineHeight",note:""}
+  ]}
+/>
+
+```
+
+### Modal
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderWidth",note:""},
+    {name:"inverseBorderColor",note:""},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
+#### Modal Body
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"padding",note:""},
+    {name:"paddingCompact",note:""},
+  ]}
+  changed={[
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
+#### Modal Footer
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"paddingCompact",note:""},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
+  ]}
+/>
+
+```
+
+#### Modal Header
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderWith",note:""},
+  ]}
+  changed={[
+    {oldName:"background",newName:"backgroundColor",note:""},
+    {oldName:"inverseBackground",newName:"inverseBackgroundColor",note:""},
   ]}
 />
 
@@ -418,6 +671,48 @@ type: embed
     {oldName:"largeHeight",newName:"textColor",note:""},
     {oldName:"color",newName:"textColor",note:""},
     {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
+
+```
+
+### Options
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"nestedLabelPadding",note:"split into nestedLabelPaddingVertical and nestedLabelPaddingHorizontal"}
+  ]}
+/>
+
+```
+
+#### Options.Item
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"padding",note:"split into paddingVertical and paddingHorizontal"},
+  ]}
+/>
+
+```
+
+#### Options.Separator
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  removed={[
+    {name:"margin",note:"split into marginVertical and marginHorizontal"}
   ]}
 />
 
@@ -504,6 +799,61 @@ type: embed
 <V12ChangelogTable
   removed={[
     {name:"invalidAsteriskColor",note:""}
+  ]}
+/>
+
+```
+
+### SideNavBar
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"margin",note:""},
+    {name:"minimizedMargin",note:""},
+    {name:"contentMargin",note:""},
+    {name:"contentGap",note:""},
+    {name:"boxShadow",note:""},
+    {name:"borderRadius",note:""},
+    {name:"minimizedBorderRadius",note:""},
+
+  ]}
+  removed={[
+    {name:"focusOutlineInnerWidth",note:""},
+    {name:"focusOutlineOuterWidth",note:""},
+    {name:"focusOutlineInnerColor",note:""},
+    {name:"focusOutlineOuterColor",note:""},
+    {name:"marginBottom",note:""},
+  ]}
+/>
+
+```
+
+#### SideNavBarItem
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  added={[
+    {name:"borderRadius",note:""},
+    {name:"iconWrapperHeight",note:""},
+  ]}
+  removed={[
+    {name:"iconColor",note:""},
+    {name:"iconSize",note:""},
+    {name:"selectedIconColor",note:""},
+
+  ]}
+  changed={[
+    {oldName:"innerFocusOutline",newName:"innerFocusOutlineColor",note:""},
+    {oldName:"outerFocusOutline",newName:"outerFocusOutlineColor",note:""},
+    {oldName:"selectedInnerFocusOutline",newName:"selectedInnerFocusOutlineColor",note:""},
+    {oldName:"selectedOuterFocusOutline",newName:"selectedOuterFocusOutlineColor",note:""},
   ]}
 />
 
@@ -746,6 +1096,22 @@ type: embed
     {oldName:"largeHeight",newName:"textColor",note:""},
     {oldName:"color",newName:"textColor",note:""},
     {oldName:"background",newName:"backgroundColor",note:""}
+  ]}
+/>
+
+```
+
+### ToggleDetails
+
+```js
+---
+type: embed
+---
+<V12ChangelogTable
+  changed={[
+    {oldName:"smallIconSize",newName:"contentPaddingSmall",note:""},
+    {oldName:"mediumIconSize",newName:"contentPaddingMedium",note:""},
+    {oldName:"largeIconSize",newName:"contentPaddingLarge",note:""}
   ]}
 />
 

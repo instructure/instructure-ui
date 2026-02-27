@@ -22,201 +22,151 @@
  * SOFTWARE.
  */
 
-import {
-  useState,
-  useRef,
-  useImperativeHandle,
-  forwardRef,
-  useCallback,
-  useEffect
-} from 'react'
+import { Component } from 'react'
 
-import {
-  passthroughProps,
-  useDeterministicId
-} from '@instructure/ui-react-utils'
+import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import { useStyle } from '@instructure/emotion'
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-import type { RadioInputProps } from './props'
+import type { RadioInputProps, RadioInputState } from './props'
+import { allowedProps } from './props'
 
 /**
 ---
 category: components
 ---
 **/
-const RadioInput = forwardRef<RadioInputHandle, RadioInputProps>(
-  (props, ref) => {
-    const {
-      variant = 'simple',
-      size = 'medium',
-      disabled = false,
-      inline = false,
-      context = 'success',
-      readOnly = false,
-      id: idProp,
-      label,
-      value,
-      name,
-      checked: checkedProp,
-      onClick,
-      onChange,
-      inputRef,
-      themeOverride,
-      ...rest
-    } = props
-    const [hovered, setHovered] = useState(false)
-    // State for uncontrolled mode
-    const [internalChecked, setInternalChecked] = useState(false)
+@withDeterministicId()
+@withStyle(generateStyle, generateComponentTheme)
+class RadioInput extends Component<RadioInputProps, RadioInputState> {
+  static readonly componentId = 'RadioInput'
 
-    // Refs
-    const containerRef = useRef<HTMLDivElement | null>(null)
-    const inputElementRef = useRef<HTMLInputElement | null>(null)
+  static allowedProps = allowedProps
 
-    // Deterministic ID generation
-    const [deterministicId, setDeterministicId] = useState<string | undefined>()
-    const getId = useDeterministicId('RadioInput')
-    useEffect(() => {
-      setDeterministicId(getId())
-    }, [])
-    const id = idProp || deterministicId
+  static defaultProps = {
+    variant: 'simple',
+    size: 'medium',
+    disabled: false,
+    inline: false,
+    context: 'success',
+    readOnly: false
+  }
 
-    // Computed checked value
-    const checked =
-      typeof checkedProp === 'undefined' ? internalChecked : checkedProp
+  ref: Element | null = null
 
-    // Styles - pass props with defaults applied for generateStyle
-    const styles = useStyle({
-      generateStyle,
-      themeOverride,
-      params: {
-        disabled,
-        context,
-        inline,
-        hovered,
-        readOnly,
-        size,
-        variant
-      },
-      componentId: 'RadioInput',
-      displayName: 'RadioInput'
-    })
+  private readonly _defaultId: string
+  private _input: HTMLInputElement | null = null
 
-    // Event handlers
-    const handleInputRef = useCallback(
-      (el: HTMLInputElement | null) => {
-        inputElementRef.current = el
-        if (typeof inputRef === 'function') {
-          inputRef(el)
-        }
-      },
-      [inputRef]
-    )
+  constructor(props: RadioInputProps) {
+    super(props)
 
-    const handleClick: React.MouseEventHandler<HTMLInputElement> = useCallback(
-      (e) => {
-        if (disabled || readOnly) {
-          e.preventDefault()
-          return
-        }
-
-        if (typeof onClick === 'function') {
-          onClick(e)
-        }
-      },
-      [disabled, readOnly, onClick]
-    )
-
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> =
-      useCallback(
-        (e) => {
-          if (disabled || readOnly) {
-            e.preventDefault()
-            return
-          }
-
-          if (typeof checkedProp === 'undefined') {
-            setInternalChecked(!internalChecked)
-          }
-
-          if (typeof onChange === 'function') {
-            onChange(e)
-          }
-        },
-        [disabled, readOnly, checkedProp, internalChecked, onChange]
-      )
-
-    // Expose imperative API via ref
-    useImperativeHandle(
-      ref,
-      () => ({
-        focus: () => {
-          inputElementRef.current?.focus()
-        },
-        get focused() {
-          return isActiveElement(inputElementRef.current)
-        },
-        get checked() {
-          return checked
-        },
-        get id() {
-          return id
-        }
-      }),
-      [checked, id]
-    )
-
-    const handleMouseOver = () => {
-      setHovered(true)
+    if (typeof props.checked === 'undefined') {
+      this.state = {
+        checked: false
+      }
     }
 
-    const handleMouseOut = () => {
-      setHovered(false)
+    this._defaultId = props.deterministicId!()
+  }
+
+  componentDidMount() {
+    this.props.makeStyles?.()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles?.()
+  }
+
+  handleInputRef = (el: HTMLInputElement | null) => {
+    this._input = el
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(el)
+    }
+  }
+
+  handleClick: React.MouseEventHandler<HTMLInputElement> = (e) => {
+    if (this.props.disabled || this.props.readOnly) {
+      e.preventDefault()
+      return
     }
 
-    const passedProps = passthroughProps(rest)
+    if (typeof this.props.onClick === 'function') {
+      this.props.onClick(e)
+    }
+  }
+
+  handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (this.props.disabled || this.props.readOnly) {
+      e.preventDefault()
+      return
+    }
+
+    if (typeof this.props.checked === 'undefined') {
+      this.setState({ checked: !this.state.checked })
+    }
+
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(e)
+    }
+  }
+
+  focus() {
+    this._input?.focus()
+  }
+
+  get id() {
+    return this.props.id || this._defaultId
+  }
+
+  get focused() {
+    return isActiveElement(this._input)
+  }
+
+  get checked() {
+    return typeof this.props.checked === 'undefined'
+      ? this.state.checked
+      : this.props.checked
+  }
+
+  render() {
+    const { disabled, readOnly, label, value, name, styles } = this.props
+
+    const props = omitProps(this.props, RadioInput.allowedProps)
+
     return (
       <div
         css={styles?.radioInput}
         data-cid="RadioInput"
-        ref={containerRef}
-        /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
-        onMouseOver={handleMouseOver}
-        /* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */
-        onMouseOut={handleMouseOut}
+        ref={(el) => {
+          this.ref = el
+        }}
       >
-        <input
-          {...passedProps}
-          id={id}
-          ref={handleInputRef}
-          value={value}
-          name={name}
-          checked={checked}
-          type="radio"
-          css={styles?.input}
-          readOnly={readOnly}
-          disabled={disabled}
-          onChange={handleChange}
-          onClick={handleClick}
-        />
-        <label htmlFor={id} css={styles?.label}>
-          {label}
-        </label>
+        <div css={styles?.container}>
+          <input
+            {...props}
+            id={this.id}
+            ref={this.handleInputRef}
+            value={value}
+            name={name}
+            checked={this.checked}
+            type="radio"
+            css={styles?.input}
+            disabled={disabled || readOnly}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+          />
+          <label css={styles?.control} htmlFor={this.id}>
+            <span css={styles?.facade} aria-hidden="true" />
+            <span css={styles?.label}>{label}</span>
+          </label>
+        </div>
       </div>
     )
   }
-)
-
-RadioInput.displayName = 'RadioInput'
-
-export interface RadioInputHandle {
-  focus: () => void
-  readonly focused: boolean
-  readonly checked: boolean
-  readonly id: string | undefined
 }
 
 export default RadioInput
