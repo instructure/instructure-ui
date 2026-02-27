@@ -24,12 +24,15 @@
 
 import { Component } from 'react'
 
-import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
+import {
+  CheckInstUIIcon,
+  XInstUIIcon,
+  renderIconWithProps
+} from '@instructure/ui-icons'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { ToggleFacadeProps } from './props'
@@ -39,7 +42,7 @@ import type { ToggleFacadeProps } from './props'
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, 'Toggle')
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 
@@ -47,6 +50,7 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
   static defaultProps = {
     checked: false,
     focused: false,
+    hovered: false,
     size: 'medium',
     disabled: false,
     readOnly: false,
@@ -68,12 +72,27 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
   }
 
   renderIcon() {
-    const { styles, checked } = this.props
+    const { disabled, readOnly, checked } = this.props
+
+    const getIconColor = () => {
+      if (disabled) {
+        return 'disabledBaseColor'
+      }
+      if (readOnly) {
+        return 'mutedColor'
+      }
+      if (checked) {
+        return 'successColor'
+      }
+      return 'baseColor'
+    }
+
+    const iconColor = getIconColor()
 
     if (checked) {
-      return <IconCheckSolid css={styles?.iconSVG} />
+      return renderIconWithProps(CheckInstUIIcon, 'sm', iconColor)
     } else {
-      return <IconXSolid css={styles?.iconSVG} />
+      return renderIconWithProps(XInstUIIcon, 'sm', iconColor)
     }
   }
 

@@ -32,13 +32,12 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import { withStyleRework as withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { allowedProps } from './props'
 import type { CheckboxProps, CheckboxState } from './props'
@@ -56,7 +55,7 @@ tags: toggle, switch
 **/
 
 @withDeterministicId()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle)
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
 
@@ -227,6 +226,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
         <ToggleFacade
           disabled={disabled}
           size={size}
+          hovered={hovered}
           focused={focused}
           checked={this.checked}
           readOnly={readOnly}
@@ -249,10 +249,12 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     } else {
       return (
         <CheckboxFacade
+          disabled={disabled}
           size={size}
           hovered={hovered}
           focused={focused}
           checked={this.checked}
+          readOnly={readOnly}
           indeterminate={indeterminate}
           themeOverride={themeOverride as Partial<CheckboxFacadeTheme>}
           invalid={this.invalid}
