@@ -1,0 +1,60 @@
+---
+title: Docs Versioning
+category: Contributor Guides
+order: 7
+---
+
+# Multi-Version Documentation
+
+The docs site supports showing documentation for multiple library minor versions (e.g. v11.5, v11.6). This allows users to switch between versions in the UI and see the correct component implementations and documentation for each.
+
+## How it works
+
+### Build pipeline
+
+1. `buildScripts/utils/buildVersionMap.mts` scans package `exports` fields to discover which library versions exist (e.g. `v11_5`, `v11_6`).
+2. `buildScripts/build-docs.mts` processes all source/markdown files once, then filters them per library version using the version map. Each version gets its own output directory (`__build__/docs/v11_5/`, `__build__/docs/v11_6/`).
+3. A `docs-versions.json` manifest is written with `libraryVersions` and `defaultVersion`.
+
+### Runtime (client)
+
+Versioning is driven by URL-path-based routing. Each page URL includes the version prefix (e.g. `/v11_7/PageName`).
+
+1. On load, the App fetches `docs-versions.json` to discover available minor versions and the default.
+2. The Header renders a minor version dropdown when multiple versions exist.
+3. When the user switches versions:
+   - `updateGlobalsForVersion(version)` in `globals.ts` re-populates the global scope with the correct component implementations (so interactive code examples use the right version).
+   - The App re-fetches `docs/{version}/markdown-and-sources-data.json` for the documentation data.
+4. `getComponentsForVersion(version)` in `versioned-components.ts` returns the full component map for the selected version.
+
+### Versioned components
+
+`packages/__docs__/versioned-components.ts` is a **hand-maintained** file that maps each library version to its component set. It imports from the `@instructure/ui/v11_X` subpath exports and merges them with docs-only components (Guidelines, Figure, ToggleBlockquote, V12ChangelogTable).
+
+When adding a new version, add the import and a new entry in the `versions` record.
+
+## Adding a new library version (e.g. v11_23)
+
+1. **Ensure packages export the new subpath.** Each package that has version-specific code must have a `/v11_23` export in its `package.json` `exports` field.
+2. **Update `versioned-components.ts`** — add the new `@instructure/ui/v11_23` import and a new entry in the `versions` map.
+3. **Run `pnpm run dev` or `pnpm run build:docs`** — the version map is rebuilt automatically during the docs build.
+
+## Introducing a breaking change to a component
+
+If a component (e.g. `Checkbox`) needs a breaking change for v11_23:
+
+1. Add the new implementation under the package's versioned directory (e.g. `packages/ui-checkbox/src/Checkbox/v2/`, or `v3/` if `v2/` already exists).
+2. Update the package's `exports` so `/v11_23` re-exports the new implementation.
+3. Update `versioned-components.ts` if a new version entry is needed.
+4. Run `pnpm run dev` to verify the docs build picks up the new version.
+
+## Key files
+
+| File | Purpose |
+|------|---------|
+| `packages/__docs__/versioned-components.ts` | Hand-maintained version → component map + `getComponentsForVersion()` |
+| `packages/__docs__/globals.ts` | Populates global scope for interactive examples |
+| `packages/__docs__/src/App/index.tsx` | Docs app — handles version switching |
+| `packages/__docs__/src/versionData.ts` | Fetches version manifest at runtime |
+| `packages/__docs__/buildScripts/build-docs.mts` | Build pipeline — generates per-version JSON |
+| `packages/__docs__/buildScripts/utils/buildVersionMap.mts` | Discovers versions from package exports + shared filtering utilities (`isDocIncludedInVersion`, `getPackageShortName`) |
