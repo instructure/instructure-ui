@@ -35,6 +35,7 @@ type DocumentOwnProps = {
   themeVariables?: BaseTheme | NewBaseTheme
   repository?: string
   layout?: 'small' | 'medium' | 'large' | 'x-large'
+  selectedMinorVersion?: string
 }
 
 type PropKeys = keyof DocumentOwnProps
@@ -56,6 +57,7 @@ const allowedProps: AllowedPropKeys = [
   'doc',
   'layout',
   'repository',
+  'selectedMinorVersion',
   'themeVariables'
 ]
 

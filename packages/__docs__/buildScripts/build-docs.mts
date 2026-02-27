@@ -36,9 +36,11 @@ import {
 import type {
   LibraryOptions,
   MainDocsData,
-  ProcessedFile
+  ProcessedFile,
+  VersionMap
 } from './DataTypes.mjs'
 import { getFrontMatter } from './utils/getFrontMatter.mjs'
+import { buildVersionMap, getPackageShortName, isDocIncludedInVersion } from './utils/buildVersionMap.mjs'
 import { createRequire } from 'module'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { generateAIAccessibleMarkdowns } from './ai-accessible-documentation/generate-ai-accessible-markdowns.mjs'
@@ -74,10 +76,12 @@ const pathsToProcess = [
   'LICENSE.md',
   '**/docs/**/*.md', // general docs
   '**/src/*.{ts,tsx}', // util src files
-  // TODO expand this to support new components
-  '**/src/*/v1/*.md', // package READMEs
-  '**/src/*/v1/*.{ts,tsx}', // component src files
-  '**/src/*/v1/*/*.{ts,tsx}' // child component src files
+  '**/src/*/*.md', // non-versioned component READMEs
+  '**/src/*/*.{ts,tsx}', // non-versioned component src files
+  '**/src/*/*/*.{ts,tsx}', // non-versioned child component src files
+  '**/src/*/v*/*.md', // versioned component READMEs
+  '**/src/*/v*/*.{ts,tsx}', // versioned component src files
+  '**/src/*/v*/*/*.{ts,tsx}' // versioned child component src files
 ]
 
 const pathsToIgnore = [
@@ -99,6 +103,11 @@ const pathsToIgnore = [
 
   // ignore index files that just re-export
   '**/src/index.ts',
+
+  // version export mapping files (e.g. src/exports/a.ts, b.ts)
+  '**/src/exports/**',
+  // shared theme token files
+  '**/src/sharedThemeTokens/**',
 
   // packages to ignore:
   '**/canvas-theme/**',
@@ -122,7 +131,26 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   buildDocs()
 }
 
-function buildDocs() {
+/**
+ * Filters processed docs for a specific library version using the version map.
+ * Delegates per-doc inclusion logic to the shared `isDocIncludedInVersion`.
+ */
+function filterDocsForVersion(
+  allDocs: ProcessedFile[],
+  libVersion: string,
+  versionMap: VersionMap
+): ProcessedFile[] {
+  return allDocs.filter((doc) =>
+    isDocIncludedInVersion(
+      versionMap,
+      libVersion,
+      doc.componentVersion,
+      getPackageShortName(doc.relativePath)
+    )
+  )
+}
+
+async function buildDocs() {
   // eslint-disable-next-line no-console
   console.log('Start building application data')
   console.time('docs build time')
@@ -130,87 +158,155 @@ function buildDocs() {
   const { COPY_VERSIONS_JSON = '1' } = process.env
   const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
 
-  // globby needs the posix format
-  const files = pathsToProcess.map((file) => path.posix.join(packagesDir, file))
-  const ignore = pathsToIgnore.map((file) => path.posix.join(packagesDir, file))
-  globby(files, { ignore })
-    .then((matches) => {
-      fs.mkdirSync(buildDir + 'docs/', { recursive: true })
+  try {
+    // Build the version map first
+    // eslint-disable-next-line no-console
+    console.log('Building version map...')
+    const versionMap = await buildVersionMap(projectRoot)
+    // eslint-disable-next-line no-console
+    console.log(
+      `Found library versions: ${versionMap.libraryVersions.join(', ')}`
+    )
+
+    // globby needs the posix format
+    const files = pathsToProcess.map((file) =>
+      path.posix.join(packagesDir, file)
+    )
+    const ignore = pathsToIgnore.map((file) =>
+      path.posix.join(packagesDir, file)
+    )
+    const matches = await globby(files, { ignore })
+
+    fs.mkdirSync(buildDir + 'docs/', { recursive: true })
+    // eslint-disable-next-line no-console
+    console.log(
+      'Parsing markdown and source files... (' + matches.length + ' files)'
+    )
+    const allDocs = matches
+      .map((relativePath) => parseSingleFile(path.resolve(relativePath)))
+      .filter(Boolean) as ProcessedFile[]
+
+    const themes = parseThemes()
+    const { defaultVersion } = versionMap
+
+    // Build per-version output, caching the default version result
+    let defaultMainDocsData: MainDocsData | undefined
+    for (const libVersion of versionMap.libraryVersions) {
+      const versionBuildDir = buildDir + 'docs/' + libVersion + '/'
+      fs.mkdirSync(versionBuildDir, { recursive: true })
+
+      const versionDocs = filterDocsForVersion(allDocs, libVersion, versionMap)
       // eslint-disable-next-line no-console
       console.log(
-        'Parsing markdown and source files... (' + matches.length + ' files)'
+        `Building docs for ${libVersion}: ${versionDocs.length} docs`
       )
-      let docs = matches.map((relativePath) => {
-        // loop through every source and Readme file
-        return processSingleFile(path.resolve(relativePath))
-      })
-      docs = docs.filter(Boolean) // filter out undefined
 
-      const themes = parseThemes()
-      const clientProps = getClientProps(docs as ProcessedFile[], library)
+      const clientProps = getClientProps(versionDocs, library)
       const mainDocsData: MainDocsData = {
         ...clientProps,
-        themes: themes,
+        themes,
         library
       }
-      const markdownsAndSources = JSON.stringify(mainDocsData)
+
+      if (libVersion === defaultVersion) {
+        defaultMainDocsData = mainDocsData
+      }
+
+      // Write markdown-and-sources-data.json for this version
       fs.writeFileSync(
-        buildDir + 'markdown-and-sources-data.json',
-        markdownsAndSources
+        versionBuildDir + 'markdown-and-sources-data.json',
+        JSON.stringify(mainDocsData)
       )
 
-      generateAIAccessibleMarkdowns(
-        buildDir + 'docs/',
-        buildDir + 'markdowns/'
-      )
-
-      const parentOfDocs = path.dirname(buildDir + 'docs/')
-
-      generateAIAccessibleLlmsFile(
-        buildDir + 'markdown-and-sources-data.json',
-        {
-          outputFilePath: path.join(parentOfDocs, 'llms.txt'),
-          baseUrl: 'https://instructure.design/markdowns/',
-          summariesFilePath: path.join(__dirname, '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json')
-        }
-      )
-
-      // eslint-disable-next-line no-console
-      console.log('Copying icons data...')
-      fs.copyFileSync(
-        projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
-        buildDir + 'icons-data.json'
-      )
-
-      // eslint-disable-next-line no-console
-      console.log('Finished building documentation data')
-    })
-    .then(() => {
-      console.timeEnd('docs build time')
-      if (shouldDoTheVersionCopy) {
-        // eslint-disable-next-line no-console
-        console.log('Copying versions.json into __build__ folder')
-        const versionFilePath = path.resolve(__dirname, '..', 'versions.json')
-        const buildDirPath = path.resolve(__dirname, '..', '__build__')
-
-        return fs.promises.copyFile(
-          versionFilePath,
-          `${buildDirPath}/versions.json`
+      // Write individual doc JSONs for this version
+      for (const doc of versionDocs) {
+        fs.writeFileSync(
+          versionBuildDir + doc.id + '.json',
+          JSON.stringify(doc)
         )
       }
-      return undefined
-    })
-    .catch((error: Error) => {
-      throw Error(
-        `Error when generating documentation data: ${error}\n${error.stack}`
+    }
+
+    // Backward-compatible root output (uses default version matching "." export)
+    fs.writeFileSync(
+      buildDir + 'markdown-and-sources-data.json',
+      JSON.stringify(defaultMainDocsData)
+    )
+
+    // Write default version's per-doc JSONs to root docs/ as a backward-compatible
+    // fallback (no version prefix in the path).
+    const defaultVersionDocs = filterDocsForVersion(allDocs, defaultVersion, versionMap)
+    for (const doc of defaultVersionDocs) {
+      fs.writeFileSync(
+        buildDir + 'docs/' + doc.id + '.json',
+        JSON.stringify(doc)
       )
-    })
+    }
+
+    // Write version manifest (client only needs versions + default, not the full map)
+    const docsVersionsManifest = {
+      libraryVersions: versionMap.libraryVersions,
+      defaultVersion
+    }
+    fs.writeFileSync(
+      buildDir + 'docs-versions.json',
+      JSON.stringify(docsVersionsManifest)
+    )
+    // eslint-disable-next-line no-console
+    console.log('Wrote docs-versions.json')
+
+    // Generate AI accessible documentation from default version
+    const defaultVersionDocsDir = buildDir + 'docs/' + defaultVersion + '/'
+    generateAIAccessibleMarkdowns(defaultVersionDocsDir, buildDir + 'markdowns/')
+
+    generateAIAccessibleLlmsFile(
+      buildDir + 'markdown-and-sources-data.json',
+      {
+        outputFilePath: path.join(buildDir, 'llms.txt'),
+        baseUrl: 'https://instructure.design/markdowns/',
+        summariesFilePath: path.join(
+          __dirname,
+          '../buildScripts/ai-accessible-documentation/summaries-for-llms-file.json'
+        )
+      }
+    )
+
+    // eslint-disable-next-line no-console
+    console.log('Copying icons data...')
+    fs.copyFileSync(
+      projectRoot + '/packages/ui-icons/src/__build__/icons-data.json',
+      buildDir + 'icons-data.json'
+    )
+
+    // eslint-disable-next-line no-console
+    console.log('Finished building documentation data')
+
+    console.timeEnd('docs build time')
+
+    if (shouldDoTheVersionCopy) {
+      // eslint-disable-next-line no-console
+      console.log('Copying versions.json into __build__ folder')
+      const versionFilePath = path.resolve(__dirname, '..', 'versions.json')
+      const buildDirPath = path.resolve(__dirname, '..', '__build__')
+
+      await fs.promises.copyFile(
+        versionFilePath,
+        `${buildDirPath}/versions.json`
+      )
+    }
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error : new Error(String(error))
+    throw new Error(
+      `Error when generating documentation data: ${err.message}\n${err.stack}`
+    )
+  }
 }
 
-// This function is also called by Webpack if a file changes
-// TODO this parses some files twice, its needed for the Webpack watcher but not
-// for the full build.
-function processSingleFile(fullPath: string) {
+/**
+ * Parses a single file and returns a ProcessedFile, or undefined if it
+ * should be skipped. Pure parsing — no file writes.
+ */
+function parseSingleFile(fullPath: string) {
   let docObject
   const dirName = path.dirname(fullPath)
   const fileName = path.parse(fullPath).name
@@ -230,7 +326,7 @@ function processSingleFile(fullPath: string) {
     let componentIndexFile: string | undefined
     if (fs.existsSync(path.join(dirName, 'index.tsx'))) {
       componentIndexFile = path.join(dirName, 'index.tsx')
-    } else if (fs.existsSync(dirName + 'index.ts')) {
+    } else if (fs.existsSync(path.join(dirName, 'index.ts'))) {
       componentIndexFile = path.join(dirName, 'index.ts')
     }
     if (componentIndexFile) {
@@ -245,6 +341,15 @@ function processSingleFile(fullPath: string) {
     // documentation .md files, utils ts and tsx files
     docObject = processFile(fullPath, projectRoot, library)
   }
+  return docObject
+}
+
+/**
+ * Parses a file and writes its JSON to the root build dir.
+ * Used by the Webpack watcher for incremental rebuilds.
+ */
+function processSingleFile(fullPath: string) {
+  const docObject = parseSingleFile(fullPath)
   if (!docObject) {
     return
   }
@@ -254,7 +359,7 @@ function processSingleFile(fullPath: string) {
 }
 
 function tryParseReadme(dirName: string) {
-  const readme = path.join(dirName + '/README.md')
+  const readme = path.join(dirName, 'README.md')
   if (fs.existsSync(readme)) {
     const data = fs.readFileSync(readme)
     const frontMatter = getFrontMatter(data)
@@ -273,4 +378,11 @@ function parseThemes() {
   return parsed
 }
 
-export { pathsToProcess, pathsToIgnore, processSingleFile, buildDocs }
+export {
+  pathsToProcess,
+  pathsToIgnore,
+  parseSingleFile,
+  processSingleFile,
+  buildDocs,
+  filterDocsForVersion
+}
