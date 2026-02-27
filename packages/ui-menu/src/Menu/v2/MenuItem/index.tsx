@@ -36,7 +36,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { withStyle } from '@instructure/emotion'
 
-import { MenuContext } from '../../../utils/v2/MenuContext'
+import { MenuContext } from '../../../utils/v1/MenuContext'
 
 import generateStyle from './styles'
 

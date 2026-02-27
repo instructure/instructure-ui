@@ -414,4 +414,30 @@ describe('<DateInput2 />', () => {
     expect(screenreaderMessage).toBeInTheDocument()
     expect(screenreaderMessage).toHaveClass(/screenReaderContent/)
   })
+
+  it('should render date picker dialog with proper role and ARIA label', async () => {
+    const datePickerLabel = 'Date picker'
+
+    render(
+      <DateInput2
+        renderLabel="Choose a date"
+        screenReaderLabels={{
+          calendarIcon: 'Calendar',
+          nextMonthButton: 'Next month',
+          prevMonthButton: 'Previous month',
+          datePickerDialog: datePickerLabel
+        }}
+        value=""
+      />
+    )
+
+    const calendarButton = screen.getByRole('button', { name: 'Calendar' })
+    await userEvent.click(calendarButton)
+
+    await waitFor(() => {
+      const dialog = screen.getByRole('dialog', { name: datePickerLabel })
+      expect(dialog).toBeInTheDocument()
+      expect(dialog).toHaveAttribute('aria-label', datePickerLabel)
+    })
+  })
 })

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-file-drop",
-  "version": "11.5.0",
+  "version": "11.6.0",
   "description": "A flexible facade for an HTML file input",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
