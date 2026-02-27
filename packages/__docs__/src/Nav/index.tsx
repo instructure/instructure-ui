@@ -32,6 +32,7 @@ import { View, ViewOwnProps } from '@instructure/ui-view'
 
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
+import { navigateTo, buildUrl } from '../navigationUtils'
 import { NavToggle } from '../NavToggle'
 import type { NavProps, NavState } from './props'
 import { Alert } from '@instructure/ui-alerts'
@@ -140,17 +141,6 @@ class Nav extends Component<NavProps, NavState> {
         userToggling: true
       }
     })
-  }
-
-  getEffectiveBasePath = () => {
-    const pathname = window.location.pathname
-    // Check if we're in a PR preview (path contains /pr-preview/)
-    const prPreviewMatch = pathname.match(/^(\/pr-preview\/pr-\d+)/)
-    if (prPreviewMatch) {
-      return prPreviewMatch[1]
-    }
-    // Live version - no base path
-    return ''
   }
 
   matchQuery(str: string): boolean {
@@ -274,10 +264,7 @@ class Nav extends Component<NavProps, NavState> {
   handleInternalNavigation = (targetPath: string, e: React.MouseEvent) => {
     e.preventDefault()
     this.removeFocus(e as React.MouseEvent<ViewOwnProps>)
-    const basePath = this.getEffectiveBasePath()
-    const newUrl = basePath ? `${basePath}/${targetPath}` : `/${targetPath}`
-    window.history.pushState({}, '', newUrl)
-    window.dispatchEvent(new PopStateEvent('popstate'))
+    navigateTo(targetPath)
   }
 
   renderDocLink(docId: string) {
@@ -308,7 +295,7 @@ class Nav extends Component<NavProps, NavState> {
         <Link
           onClick={(e: any) => this.handleInternalNavigation(docId, e)}
           display="block"
-          href={`/${docId}`} // Keep href simple
+          href={buildUrl(docId)}
           variant="standalone"
         >
           {docs[docId].title}
@@ -476,7 +463,7 @@ class Nav extends Component<NavProps, NavState> {
               display="block"
               onClick={(e: any) => this.handleInternalNavigation(themeKey, e)}
               variant="standalone"
-              href={`/${themeKey}`}
+              href={buildUrl(themeKey)}
             >
               {themeKey}
             </Link>

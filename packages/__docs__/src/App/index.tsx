@@ -62,12 +62,23 @@ import { Section } from '../Section'
 import IconsPage from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 
-import { fetchVersionData, versionInPath } from '../versionData'
+import {
+  fetchVersionData,
+  fetchMinorVersionData,
+  versionInPath
+} from '../versionData'
+import {
+  parseCurrentUrl,
+  navigateToVersion,
+  getAssetBasePath,
+  MINOR_VERSION_REGEX
+} from '../navigationUtils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { LoadingScreen } from '../LoadingScreen'
-import * as EveryComponent from '../../components'
+import { getComponentsForVersion } from '../../versioned-components'
+import { updateGlobalsForVersion } from '../../globals'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { allowedProps } from './props'
 import type {
@@ -140,18 +151,35 @@ class App extends Component<AppProps, AppState> {
     this._navRef = createRef()
   }
 
+  getDocsBasePath = () => {
+    const base = getAssetBasePath()
+    const { selectedMinorVersion } = this.state
+    if (selectedMinorVersion) {
+      return `${base}/docs/${selectedMinorVersion}/`
+    }
+    return `${base}/docs/`
+  }
+
+  getComponentsForCurrentVersion = (): Record<string, any> => {
+    const { selectedMinorVersion } = this.state
+    return getComponentsForVersion(selectedMinorVersion)
+  }
+
   fetchDocumentData = async (docId: string) => {
-    const result = await fetch('docs/' + docId + '.json', {
+    const basePath = this.getDocsBasePath()
+    const result = await fetch(basePath + docId + '.json', {
       signal: this._controller?.signal
     })
+    if (!result.ok) {
+      throw new Error(`Failed to fetch ${docId}: ${result.status}`)
+    }
     const docData: DocData = await result.json()
+    const everyComp = this.getComponentsForCurrentVersion()
     if (docId.includes('.')) {
       // e.g. 'Calendar.Day', first get 'Calendar' then 'Day'
       const components = docId.split('.')
-      const everyComp = EveryComponent as Record<string, any>
       docData.componentInstance = everyComp[components[0]][components[1]]
     } else {
-      const everyComp = EveryComponent as Record<string, any>
       docData.componentInstance = everyComp[docId]
     }
     return docData
@@ -160,6 +188,60 @@ class App extends Component<AppProps, AppState> {
   fetchVersionData = async (signal: AbortController['signal']) => {
     const versionsData = await fetchVersionData(signal)
     return this.setState({ versionsData })
+  }
+
+  fetchMainDocsData = (url: string, signal: AbortSignal) => {
+    return fetch(url, { signal })
+      .then((response) => response.json())
+      .then((docsData) => {
+        this.setState({
+          docsData,
+          themeKey: Object.keys(docsData.themes)[0]
+        })
+      })
+  }
+
+  handleMinorVersionChange = (newVersion: string) => {
+    // Abort current fetches
+    this._controller?.abort()
+    this._controller = new AbortController()
+    const signal = this._controller.signal
+
+    const errorHandler = (error: Error) => {
+      if (error.name !== 'AbortError') {
+        logError(false, error.message)
+      }
+    }
+
+    // Update globals so code examples render with the correct component references
+    updateGlobalsForVersion(newVersion)
+
+    // Clear current data to show loading screen, update selected version
+    this.setState({
+      docsData: null,
+      currentDocData: undefined,
+      changelogData: undefined,
+      selectedMinorVersion: newVersion,
+      showMinorVersionSelector: true
+    })
+
+    // Update URL to reflect new version
+    navigateToVersion(newVersion)
+
+    this.fetchMainDocsData(
+      `${getAssetBasePath()}/docs/${newVersion}/markdown-and-sources-data.json`,
+      signal
+    ).catch(errorHandler)
+
+    // Icons are not version-specific; only re-fetch if not already loaded
+    if (!this.state.iconsData) {
+      fetch(`${getAssetBasePath()}/icons-data.json`, { signal })
+        .then((response) => response.json())
+        .then((iconsData) => {
+          this.setState({ iconsData })
+        })
+        .catch(errorHandler)
+    }
   }
 
   mainContentRef = (el: Element | null) => {
@@ -208,26 +290,53 @@ class App extends Component<AppProps, AppState> {
     this._controller = new AbortController()
     const signal = this._controller.signal
 
-    this.fetchVersionData(signal)
-
     const errorHandler = (error: Error) => {
-      logError(error.name === 'AbortError', error.message)
+      if (error.name !== 'AbortError') {
+        logError(false, error.message)
+      }
     }
+
+    this.fetchVersionData(signal).catch(errorHandler)
     document.addEventListener('keydown', this.handleTabKey)
 
-    fetch('icons-data.json', { signal })
+    fetch(`${getAssetBasePath()}/icons-data.json`, { signal })
       .then((response) => response.json())
       .then((iconsData) => {
         this.setState({ iconsData: iconsData })
       })
       .catch(errorHandler)
-    fetch('markdown-and-sources-data.json', { signal })
-      .then((response) => response.json())
-      .then((docsData) => {
-        this.setState({
-          docsData,
-          themeKey: Object.keys(docsData.themes)[0]
-        })
+
+    // Detect minor version from URL (e.g. /v11_7/Menu)
+    const { minorVersion: urlMinorVersion } = parseCurrentUrl()
+
+    // Always fetch minor version data to enable the version selector
+    fetchMinorVersionData(signal)
+      .then((minorVersionsData) => {
+        if (
+          minorVersionsData &&
+          minorVersionsData.libraryVersions.length > 0
+        ) {
+          // If URL has a version, use it; otherwise use default
+          const selectedMinorVersion =
+            urlMinorVersion ?? minorVersionsData.defaultVersion
+          // Update globals before fetching docs so renders use correct components
+          updateGlobalsForVersion(selectedMinorVersion)
+          this.setState({
+            minorVersionsData,
+            selectedMinorVersion,
+            // Only show version selector when URL has explicit version
+            showMinorVersionSelector: !!urlMinorVersion
+          })
+          return this.fetchMainDocsData(
+            `${getAssetBasePath()}/docs/${selectedMinorVersion}/markdown-and-sources-data.json`,
+            signal
+          )
+        }
+        // No minor versions available, fetch from root path
+        return this.fetchMainDocsData(
+          `${getAssetBasePath()}/markdown-and-sources-data.json`,
+          signal
+        )
       })
       .catch(errorHandler)
 
@@ -275,24 +384,28 @@ class App extends Component<AppProps, AppState> {
   getPathInfo = () => {
     const { hash, pathname } = window.location
 
-    // Case 1: Old hash-based routing (hash contains the main content)
     const cleanPath = pathname.replace(/^\/+|\/+$/g, '')
-    const pathSegments = cleanPath.split('/')
+    const segments = cleanPath.split('/').filter(Boolean)
 
-    // Check if the pathname is just a base path (ends with slash or has no meaningful final segment)
-    const hasSubstantialPathname =
-      pathSegments.length > 0 &&
-      pathSegments[pathSegments.length - 1] !== '' &&
-      !pathSegments.every((seg) => seg === '')
-
-    // If it's just a base path with no hash, treat as homepage
-    if ((!hasSubstantialPathname || pathname.endsWith('/')) && !hash) {
-      return ['index'] // homepage
+    // Skip PR preview prefix
+    let idx = 0
+    if (
+      segments.length >= 2 &&
+      segments[0] === 'pr-preview' &&
+      segments[1].startsWith('pr-')
+    ) {
+      idx = 2
     }
 
+    // Skip minor version prefix (e.g. v11_7)
+    if (idx < segments.length && MINOR_VERSION_REGEX.test(segments[idx])) {
+      idx++
+    }
+
+    // Hash-based routing (legacy): /#PageName
     if (
+      idx >= segments.length &&
       hash &&
-      (!hasSubstantialPathname || pathname.endsWith('/')) &&
       hash.startsWith('#') &&
       !hash.startsWith('##')
     ) {
@@ -304,22 +417,18 @@ class App extends Component<AppProps, AppState> {
         return [page, id]
       }
     }
-    // Case 2: New clean URL routing (pathname contains the main content)
-    else {
-      if (pathSegments.length > 0 && pathSegments[0] !== '') {
-        // Get the page from the last segment of the path
-        const page = pathSegments[pathSegments.length - 1]
-        // If there's a hash that's not at the beginning (like #Guidelines), use it as ID
-        let id = undefined
-        if (hash && hash.startsWith('##')) {
-          id = decodeURI(hash.replace('##', ''))
-        } else if (hash && !hash.startsWith('#/')) {
-          id = decodeURI(hash.replace('#', ''))
-        }
-        return [page, id]
-      }
+
+    // Clean URL routing: page is next segment after prefixes
+    const page = idx < segments.length ? segments[idx] : 'index'
+
+    let id: string | undefined
+    if (hash && hash.startsWith('##')) {
+      id = decodeURI(hash.replace('##', ''))
+    } else if (hash && !hash.startsWith('#/')) {
+      id = decodeURI(hash.replace('#', ''))
     }
-    return []
+
+    return [page, id]
   }
 
   updateLayout = (matches: QueriesMatching) => {
@@ -339,11 +448,14 @@ class App extends Component<AppProps, AppState> {
 
   updateKey = () => {
     const [page, _id] = this.getPathInfo()
+    const { minorVersion } = parseCurrentUrl()
+
     if (page) {
       this.setState(
         ({ key, showMenu }) => ({
           key: page || 'index',
-          showMenu: this.handleShowTrayOnURLChange(key, showMenu)
+          showMenu: this.handleShowTrayOnURLChange(key, showMenu),
+          showMinorVersionSelector: !!minorVersion
         }),
         this.scrollToElement
       )
@@ -456,7 +568,13 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderThemeSelect() {
-    const themeKeys = Object.keys(this.state.docsData!.themes)
+    const allThemeKeys = Object.keys(this.state.docsData!.themes)
+    const showRebrandThemes =
+      this.state.showMinorVersionSelector &&
+      this.state.selectedMinorVersion !== 'v11_6'
+    const themeKeys = showRebrandThemes
+      ? allThemeKeys
+      : allThemeKeys.filter((key) => !key.startsWith('rebrand'))
     const smallScreen = this.state.layout === 'small'
 
     return themeKeys.length > 1 ? (
@@ -535,21 +653,29 @@ class App extends Component<AppProps, AppState> {
     const currentData = this.state.currentDocData
     if (!currentData || currentData.id !== docId) {
       // load all children and the main doc
-      this.fetchDocumentData(docId).then(async (data) => {
-        if (parents[docId]) {
-          for (const childId of parents[docId].children) {
-            children.push(await this.fetchDocumentData(childId))
+      this.fetchDocumentData(docId)
+        .then(async (data) => {
+          if (parents[docId]) {
+            for (const childId of parents[docId].children) {
+              children.push(await this.fetchDocumentData(childId))
+            }
           }
-        }
-        // eslint-disable-next-line no-param-reassign
-        data.children = children
-        this.setState(
-          {
-            currentDocData: data
-          },
-          this.scrollToElement
-        )
-      })
+          // Guard: check if we are still on the same page
+          if (this.state.key !== docId) return
+          // eslint-disable-next-line no-param-reassign
+          data.children = children
+          this.setState(
+            {
+              currentDocData: data
+            },
+            this.scrollToElement
+          )
+        })
+        .catch((error: Error) => {
+          if (error.name !== 'AbortError') {
+            logError(false, `Failed to fetch document ${docId}: ${error.message}`)
+          }
+        })
       return (
         <View as="div" padding="xx-large 0">
           <LoadingScreen />
@@ -564,13 +690,10 @@ class App extends Component<AppProps, AppState> {
     if (olderVersionsGitBranchMap && versionInPath) {
       legacyGitBranch = olderVersionsGitBranchMap[versionInPath]
     }
-    let themeVariables
-    if (themes[themeKey!].resource.newTheme.components[docId]) {
-      // new theme
-      themeVariables = themes[themeKey!].resource.newTheme
-    } else {
-      themeVariables = themes[themeKey!].resource // old theme
-    }
+    // Always pass the full theme so old-style generateComponentTheme
+    // can access colors, typography, spacing etc.
+    // New-theme components are looked up via themeVariables.newTheme.components
+    const themeVariables = themes[themeKey!].resource
     const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
       <View as="div" padding="x-large none none">
@@ -590,6 +713,7 @@ class App extends Component<AppProps, AppState> {
               themeVariables={themeVariables}
               repository={repository}
               layout={layout}
+              selectedMinorVersion={this.state.selectedMinorVersion}
             />
           </Section>
         </View>
@@ -609,7 +733,7 @@ class App extends Component<AppProps, AppState> {
 
   renderHero() {
     const { library, docs, themes } = this.state.docsData!
-    const { layout } = this.state
+    const { layout, selectedMinorVersion } = this.state
 
     const themeDocs: ParsedDocSummary = {}
 
@@ -625,7 +749,11 @@ class App extends Component<AppProps, AppState> {
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
           repository={library.repository}
-          version={library.version}
+          version={
+            selectedMinorVersion
+              ? selectedMinorVersion.replace('v', '').replace('_', '.')
+              : library.version
+          }
           layout={layout}
           ref={this._heroRef}
         />
@@ -635,9 +763,15 @@ class App extends Component<AppProps, AppState> {
 
   renderChangeLog() {
     if (!this.state.changelogData) {
-      this.fetchDocumentData('CHANGELOG').then((data) => {
-        this.setState({ changelogData: data })
-      })
+      this.fetchDocumentData('CHANGELOG')
+        .then((data) => {
+          this.setState({ changelogData: data })
+        })
+        .catch((error: Error) => {
+          if (error.name !== 'AbortError') {
+            logError(false, `Failed to fetch CHANGELOG: ${error.message}`)
+          }
+        })
       return (
         <View as="div" padding="xx-large 0">
           <LoadingScreen />
@@ -796,6 +930,13 @@ class App extends Component<AppProps, AppState> {
           name={name === 'instructure-ui' ? 'v' : name}
           version={version}
           versionsData={versionsData}
+          minorVersionsData={
+            this.state.showMinorVersionSelector
+              ? this.state.minorVersionsData
+              : undefined
+          }
+          selectedMinorVersion={this.state.selectedMinorVersion}
+          onMinorVersionChange={this.handleMinorVersionChange}
         />
 
         <Nav

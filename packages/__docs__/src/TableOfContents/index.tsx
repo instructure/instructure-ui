@@ -33,6 +33,7 @@ import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { SpacingValues } from '@instructure/emotion'
 
+import { navigateTo } from '../navigationUtils'
 import { allowedProps } from './props'
 import type {
   TableOfContentsProps,
@@ -160,14 +161,7 @@ class TableOfContents extends Component<
             href={`#${data.id}`}
             onClick={(e: any) => {
               e.preventDefault()
-              const pathname = window.location.pathname
-              const prPreviewMatch = pathname.match(/^(\/pr-preview\/pr-\d+)/)
-              const basePath = prPreviewMatch?.[1] || ''
-              const newUrl = basePath
-                ? `${basePath}/${doc.id}#${data.id}`
-                : `/${doc.id}#${data.id}`
-              window.history.pushState({}, '', newUrl)
-              window.dispatchEvent(new PopStateEvent('popstate'))
+              navigateTo(doc.id, { sectionId: data.id })
             }}
           >
             {data.innerText}

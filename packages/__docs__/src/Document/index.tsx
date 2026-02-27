@@ -74,21 +74,24 @@ class Document extends Component<DocumentProps, DocumentState> {
   fetchGenerateComponentTheme = async () => {
     const { doc, themeVariables } = this.props
     let generateTheme
-    if (this.state.selectedDetailsTabId === doc.id) {
-      // @ts-ignore todo type
-      if (this.props.themeVariables.components?.[doc.id]) {
-        // new theme
-        // @ts-ignore todo type
-        generateTheme = this.props.themeVariables.components[doc.id]
-        this.setState({ componentTheme: generateTheme })
-        return
-      } else {
-        // old theme
-        generateTheme = doc?.componentInstance?.generateComponentTheme
-      }
+    // Doc IDs use dot notation (e.g. "Menu.Item") but theme component keys
+    // use PascalCase without dots (e.g. "MenuItem").
+    // New-theme entries are in themeVariables.newTheme.components.
+    const selectedId = this.state.selectedDetailsTabId
+    const themeKey = selectedId?.replace(/\./g, '')
+    // @ts-ignore todo type
+    const newThemeEntry = themeVariables?.newTheme?.components?.[themeKey]
+    if (newThemeEntry) {
+      // new theme - use pre-computed theme object directly
+      this.setState({ componentTheme: newThemeEntry })
+      return
+    }
+    // old theme - use generateComponentTheme function
+    if (selectedId === doc.id) {
+      generateTheme = doc?.componentInstance?.generateComponentTheme
     } else {
       generateTheme = doc?.children?.find(
-        (value) => value.id === this.state.selectedDetailsTabId
+        (value) => value.id === selectedId
       )?.componentInstance?.generateComponentTheme
     }
     if (typeof generateTheme === 'function' && themeVariables) {
@@ -247,15 +250,24 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   renderUsage() {
-    const { esPath, id, displayName, packageName, title } = this.props.doc
+    const { esPath, id, displayName, packageName, title, componentVersion } =
+      this.props.doc
+    const { selectedMinorVersion } = this.props
     const importName = displayName || id
+
+    // For versioned components, show the version-specific import path
+    // e.g. '@instructure/ui-avatar/v11_6' instead of '@instructure/ui-avatar'
+    const versionedPackageName =
+      packageName && componentVersion && selectedMinorVersion
+        ? `${packageName}/${selectedMinorVersion}`
+        : packageName
 
     const example = []
 
-    if (packageName) {
+    if (versionedPackageName) {
       example.push(`\
 /*** ES Modules (with tree shaking) ***/
-import { ${importName} } from '${packageName}'
+import { ${importName} } from '${versionedPackageName}'
 `)
     }
 

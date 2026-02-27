@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*",
-    "components.ts",
+    "versioned-components.ts",
     "functionalComponentThemes.ts",
     "globals.ts",
     "buildScripts/DataTypes.mts",
