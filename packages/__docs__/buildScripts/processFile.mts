@@ -52,7 +52,14 @@ export function processFile(
     // exist if it was in the YAML description at the top
     docId = docData.id
   } else if (lowerPath.includes(path.sep + 'index.tsx')) {
-    docId = docData.displayName!
+    const fallbackId = path.basename(path.dirname(fullPath))
+    if (!docData.displayName && /^v\d+$/.test(fallbackId)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[processFile] Suspicious docId "${fallbackId}" derived from path: ${fullPath}`
+      )
+    }
+    docId = docData.displayName ?? fallbackId
   } else if (lowerPath.includes('readme.md')) {
     const folder = path.basename(dirName)
     docId = docData.describes ? folder + '__README' : folder
@@ -63,5 +70,15 @@ export function processFile(
   if (!docData.title) {
     docData.title = docData.id
   }
+
+  // Extract component version from the file path (e.g. /v1/ or /v2/)
+  const pathSegments = fullPath.split(path.sep)
+  const srcIndex = pathSegments.indexOf('src')
+  const segmentsAfterSrc = srcIndex >= 0 ? pathSegments.slice(srcIndex + 1) : pathSegments
+  const versionSegment = segmentsAfterSrc.find((seg) => /^v\d+$/.test(seg))
+  if (versionSegment) {
+    docData.componentVersion = versionSegment
+  }
+
   return docData
 }
