@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { ComponentElement, Children, Component } from 'react'
+import { ComponentElement, Fragment, Children, Component } from 'react'
 
-import { FormFieldGroup } from '@instructure/ui-form-field/latest'
+import { FormFieldGroup } from '@instructure/ui-form-field/v11_5'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -32,14 +32,20 @@ import {
   pickProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import { RadioInput } from '../../RadioInput/v1'
 import type { RadioInputProps } from '../../RadioInput/v1/props'
 
+import { withStyleLegacy as withStyle } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps } from './props'
 
-type RadioInputChild = ComponentElement<RadioInputProps, any>
+type RadioInputChild = ComponentElement<RadioInputProps, RadioInput>
 
 /**
 ---
@@ -47,6 +53,7 @@ category: components
 ---
 **/
 @withDeterministicId()
+@withStyle(generateStyle, generateComponentTheme)
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
   RadioInputGroupState
@@ -148,13 +155,30 @@ class RadioInputGroup extends Component<
   }
 
   render() {
-    const { variant, layout, description, isRequired } = this.props
+    const { variant, layout, description, isRequired, styles } = this.props
+
+    const descriptionWithRequired = hasVisibleChildren(description) ? (
+      <Fragment>
+        {description}
+        {isRequired && description && (
+          <span
+            css={this.invalid ? styles?.invalidAsterisk : {}}
+            aria-hidden={true}
+          >
+            {' '}
+            *
+          </span>
+        )}
+      </Fragment>
+    ) : (
+      description
+    )
 
     return (
       <FormFieldGroup
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
-        description={description}
+        description={descriptionWithRequired}
         layout={
           layout === 'columns' && variant === 'toggle' ? 'stacked' : layout
         } // toggles already display in cols
@@ -165,7 +189,6 @@ class RadioInputGroup extends Component<
         messagesId={this._messagesId}
         elementRef={this.handleRef}
         role="radiogroup"
-        isRequired={isRequired}
         data-cid="RadioInputGroup"
       >
         {this.renderChildren()}

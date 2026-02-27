@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { Tooltip } from '@instructure/ui-tooltip/latest'
+import { Tooltip } from '@instructure/ui-tooltip/v11_5'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
