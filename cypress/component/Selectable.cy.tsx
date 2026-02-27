@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Selectable } from '@instructure/ui'
+import { Selectable } from '@instructure/ui/latest'
 import { expect } from 'chai'
 import 'cypress-real-events'
 import '../support/component'

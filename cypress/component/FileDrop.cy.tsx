@@ -26,7 +26,7 @@ import { expect } from 'chai'
 import 'cypress-real-events'
 
 import '../support/component'
-import { FileDrop } from '@instructure/ui'
+import { FileDrop } from '@instructure/ui/latest'
 
 describe('<FileDrop/>', () => {
   describe('file-type checking when onDrop', () => {

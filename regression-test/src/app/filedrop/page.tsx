@@ -37,7 +37,7 @@ import {
   IconImageLine as iil,
   IconAnnotateLine as ial,
   IconPdfLine as ipfl
-} from '@instructure/ui'
+} from '@instructure/ui/latest'
 
 const FileDrop = fd as any
 const View = vw as any
