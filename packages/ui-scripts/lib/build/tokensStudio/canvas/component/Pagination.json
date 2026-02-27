@@ -4,5 +4,19 @@
       "value": "{spacing.spaceSm}",
       "type": "spacing"
     }
+  },
+  "paginationPageInput": {
+    "inputWidth": {
+      "value": "4.5rem",
+      "type": "sizing"
+    },
+    "inputSpacing": {
+      "value": "{spacing.spaceXs}",
+      "type": "spacing"
+    },
+    "labelColor": {
+      "value": "{color.text.base}",
+      "type": "color"
+    }
   }
 }

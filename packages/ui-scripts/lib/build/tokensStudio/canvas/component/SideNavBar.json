@@ -72,6 +72,10 @@
     }
   },
   "sideNavBarItem": {
+    "iconWrapperHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
     "borderRadius": {
       "value": "0rem",
       "type": "borderRadius"
@@ -103,10 +107,6 @@
     "hoverBackgroundColor": {
       "value": "{color.background.interactive.action.primary.hover}",
       "type": "color"
-    },
-    "iconSize": {
-      "value": "1.625rem",
-      "type": "sizing"
     },
     "lineHeight": {
       "value": "{lineHeight.paragraph.base}",

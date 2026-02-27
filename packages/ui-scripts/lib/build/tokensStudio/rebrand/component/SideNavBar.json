@@ -43,18 +43,18 @@
     "boxShadow": {
       "value": [
         {
-          "x": "{dropShadow.x.elevation1.dropshadow1}",
-          "y": "{dropShadow.y.elevation1.dropshadow1}",
-          "blur": "{dropShadow.blur.elevation1.dropshadow1}",
-          "spread": "{dropShadow.spread.elevation1.dropshadow1}",
+          "x": "0rem",
+          "y": "0.0625rem",
+          "blur": "0.125rem",
+          "spread": "0rem",
           "color": "{color.dropShadow.shadowColor1}",
           "type": "dropShadow"
         },
         {
-          "x": "{dropShadow.x.elevation1.dropshadow2}",
-          "y": "{dropShadow.y.elevation1.dropshadow2}",
-          "blur": "{dropShadow.blur.elevation1.dropshadow2}",
-          "spread": "{dropShadow.spread.elevation1.dropshadow2}",
+          "x": "0rem",
+          "y": "0.125rem",
+          "blur": "0.25rem",
+          "spread": "0.125rem",
           "color": "{color.dropShadow.shadowColor2}",
           "type": "dropShadow"
         }
@@ -72,6 +72,10 @@
     }
   },
   "sideNavBarItem": {
+    "iconWrapperHeight": {
+      "value": "2.25rem",
+      "type": "sizing"
+    },
     "borderRadius": {
       "value": "{borderRadius.lg}",
       "type": "borderRadius"
@@ -103,10 +107,6 @@
     "hoverBackgroundColor": {
       "value": "{color.background.interactive.action.tertiary.hover}",
       "type": "color"
-    },
-    "iconSize": {
-      "value": "1.625rem",
-      "type": "sizing"
     },
     "lineHeight": {
       "value": "{lineHeight.paragraph.base}",

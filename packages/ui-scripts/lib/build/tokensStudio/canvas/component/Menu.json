@@ -1,13 +1,5 @@
 {
   "menu": {
-    "background": {
-      "value": "{color.background.elevatedSurface.base}",
-      "type": "color"
-    },
-    "borderRadius": {
-      "value": "{borderRadius.sm}",
-      "type": "borderRadius"
-    },
     "maxWidth": {
       "value": "16em",
       "type": "sizing"
@@ -100,6 +92,14 @@
     "paddingHorizontal": {
       "value": "{spacing.spaceMd}",
       "type": "spacing"
+    },
+    "highlightedBackground": {
+      "value": "{color.background.interactive.action.primary.hover}",
+      "type": "color"
+    },
+    "selectedHighlightedBackground": {
+      "value": "{color.background.interactive.action.primary.hover}",
+      "type": "color"
     }
   },
   "menuSeparator": {

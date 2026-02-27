@@ -1,11 +1,4 @@
 {
-  "topNavBar": {
-    "placeholderToken": {
-      "value": "{color.transparentColor}",
-      "type": "color",
-      "description": "TODO: delete this when we fixed the build"
-    }
-  },
   "topNavBarActionItems": {
     "smallViewportActionItemContainerMargin": {
       "value": "3.75rem",
@@ -35,6 +28,10 @@
   "topNavBarBrand": {
     "logoHeight": {
       "value": "2.25rem",
+      "type": "sizing"
+    },
+    "focusOutlineInset": {
+      "value": "-0.25rem",
       "type": "sizing"
     },
     "iconPadding": {
@@ -102,11 +99,11 @@
       "type": "spacing"
     },
     "desktopBackground": {
-      "value": "{color.background.elevatedSurface.base}",
+      "value": "{color.background.inverse}",
       "type": "color"
     },
     "desktopBackgroundInverse": {
-      "value": "{color.background.elevatedSurface.inverse}",
+      "value": "{color.background.muted}",
       "type": "color"
     },
     "desktopFontFamily": {
