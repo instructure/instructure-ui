@@ -46,8 +46,8 @@ type: example
 <ToggleGroup
   toggleLabel="This is the toggle button label for screenreaders"
   summary="This is the summary"
-  iconExpanded={XInstUIIcon}
-  icon={PlusInstUIIcon}
+  iconExpanded={IconXSolid}
+  icon={IconPlusSolid}
 >
   <View display="block" padding="small">Here is the expanded content</View>
 </ToggleGroup>

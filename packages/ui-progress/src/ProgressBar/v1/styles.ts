@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes, SharedTokens } from '@instructure/ui-themes'
+import type { ProgressBarTheme } from '@instructure/shared-types'
 import type { ProgressBarProps, ProgressBarStyle } from './props'
 
 /**
@@ -32,13 +32,12 @@ import type { ProgressBarProps, ProgressBarStyle } from './props'
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} sharedTokens Shared token object that stores common values for the theme.
+ * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ProgressBar'],
-  props: ProgressBarProps,
-  _sharedTokens: SharedTokens
+  componentTheme: ProgressBarTheme,
+  props: ProgressBarProps
 ): ProgressBarStyle => {
   const {
     valueNow = 0,
@@ -80,37 +79,15 @@ const generateStyle = (
 
   const colorVariants = {
     primary: {
-      trackLayout: {
-        background: componentTheme.trackColor,
-        borderWidth: componentTheme.trackBottomBorderWidth,
-        borderStyle: 'solid',
-        borderColor: componentTheme.borderColor
-      },
+      trackLayout: { background: componentTheme.trackColor },
       trackBorder: {
         borderBottomColor: componentTheme.trackBottomBorderColor
-      },
-      value: {
-        color: componentTheme.textColor
-      },
-      htmlProgress: {
-        borderColor: componentTheme.borderColor
       }
     },
     'primary-inverse': {
-      trackLayout: {
-        background: componentTheme.trackColorInverse,
-        borderWidth: componentTheme.trackBottomBorderWidth,
-        borderStyle: 'solid',
-        borderColor: componentTheme.borderColorInverse
-      },
+      trackLayout: { background: componentTheme.trackColorInverse },
       trackBorder: {
         borderBottomColor: componentTheme.trackBottomBorderColorInverse
-      },
-      value: {
-        color: componentTheme.textColorInverse
-      },
-      htmlProgress: {
-        borderColor: componentTheme.borderColorInverse
       }
     }
   }
@@ -163,14 +140,7 @@ const generateStyle = (
       borderBottomWidth: componentTheme.trackBottomBorderWidth,
       borderBottomStyle: 'solid',
       background: 'transparent',
-      // Inner border-radius must be smaller than outer to avoid geometric gaps with nested rounded borders
-      // Formula: inner radius = outer radius - border width
-      borderTopLeftRadius: `calc(${componentTheme.borderRadius} - ${componentTheme.trackBottomBorderWidth})`,
-      borderBottomLeftRadius: `calc(${componentTheme.borderRadius} - ${componentTheme.trackBottomBorderWidth})`,
-      // Negative margin pulls track down so trackLayout's full border overlaps and hides track's bottom border.
-      // When trackLayout border is visible (light/dark themes), it creates a clean full border appearance.
-      // When trackLayout border is transparent (legacy Canvas), track's bottom border remains visible.
-      marginBottom: `calc(-1 * ${componentTheme.trackBottomBorderWidth})`,
+      borderRadius: 'inherit',
 
       ...sizeVariants[size!].track,
       ...colorVariants[color!].trackBorder
@@ -197,8 +167,7 @@ const generateStyle = (
       paddingInlineStart: componentTheme.valuePadding,
       flex: '0 0 5.625rem',
 
-      ...sizeVariants[size!].value,
-      ...colorVariants[color!].value
+      ...sizeVariants[size!].value
     },
 
     htmlProgress: {
@@ -211,9 +180,7 @@ const generateStyle = (
       height: '100%',
       boxSizing: 'border-box',
       zIndex: -1,
-      opacity: 0,
-
-      ...colorVariants[color!].htmlProgress
+      opacity: 0
     }
   }
 }

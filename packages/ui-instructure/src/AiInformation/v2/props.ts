@@ -23,7 +23,8 @@
  */
 import type { ComponentStyle, ThemeOverrideValue } from '@instructure/emotion'
 import type { OtherHTMLAttributes, Renderable } from '@instructure/shared-types'
-import type { NutritionFactsProps, DataPermissionLevelsProps } from '../'
+import type { NutritionFactsProps } from '../../NutritionFacts/v1/props'
+import type { DataPermissionLevelsProps } from '../../DataPermissionLevels/v1/props'
 
 type AiInformationOwnProps = {
   /**

@@ -23,44 +23,21 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import type { TopNavBarLayoutDesktopTheme } from '@instructure/shared-types'
+import { ToggleGroupTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
-  const { colors, stacking, typography, spacing, borders } = theme
+const generateComponentTheme = (theme: Theme): ToggleGroupTheme => {
+  const { colors } = theme
 
-  const componentVariables: TopNavBarLayoutDesktopTheme = {
-    desktopFontSize: typography?.fontSizeMedium,
-    desktopFontFamily: typography?.fontFamily,
-    desktopFontWeight: typography?.fontWeightNormal,
-
-    desktopBackground: colors?.contrasts?.grey100100,
-    desktopBackgroundInverse: colors?.contrasts?.grey1111,
-    desktopBottomBorder: 'none',
-    desktopBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.contrasts?.grey1214}`,
-    desktopHeight: '4rem',
-    desktopZIndex: stacking?.topmost - 1, // -1 so it is below tray/modal/popover/etc TODO find a better solution
-
-    desktopInlinePadding: spacing.small,
-    desktopBrandContainerInlineMargin: `0 ${spacing.medium}`,
-    desktopMenuItemsContainerInlineMargin: `0 ${spacing.large}`,
-    desktopActionItemsContainerInlineMargin: `${spacing.xSmall} 0`,
-    desktopUserContainerInlineMargin: `${spacing.xSmall} 0`,
-
-    desktopUserSeparatorGap: spacing?.xSmall,
-    desktopUserSeparatorHeight: '1.5rem',
-    desktopUserSeparatorWidth: borders?.widthSmall,
-    desktopUserSeparatorColor: colors?.contrasts?.grey1214,
-    desktopUserSeparatorColorInverse: colors?.contrasts?.grey1214
+  const componentVariables: ToggleGroupTheme = {
+    borderColor: colors?.contrasts?.grey3045
   }
-
   return {
     ...componentVariables
   }
 }
-
 export default generateComponentTheme

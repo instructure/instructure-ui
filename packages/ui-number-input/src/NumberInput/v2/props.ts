@@ -34,7 +34,10 @@ import type {
   Spacing,
   ThemeOverrideValue
 } from '@instructure/emotion'
-import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
+import type {
+  FormFieldOwnProps,
+  FormMessage
+} from '@instructure/ui-form-field/latest'
 import type {
   InteractionType,
   WithDeterministicIdProps

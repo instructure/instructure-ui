@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { NewComponentTypes } from '@instructure/ui-themes'
+import type { ToggleGroupTheme } from '@instructure/shared-types'
 import type { ToggleGroupProps, ToggleGroupStyle } from './props'
 
 /**
@@ -36,7 +36,7 @@ import type { ToggleGroupProps, ToggleGroupStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: NewComponentTypes['ToggleGroup'],
+  componentTheme: ToggleGroupTheme,
   _props: ToggleGroupProps
 ): ToggleGroupStyle => {
   return {

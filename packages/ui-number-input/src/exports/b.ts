@@ -21,27 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { createContext } from 'react'
-
-type TopNavBarLayouts = 'desktop' | 'smallViewport'
-
-type TopNavBarContextType = {
-  layout: TopNavBarLayouts
-  inverseColor: boolean
-}
-
-/**
----
-private: true
----
-@module TopNavBarContext
-**/
-const TopNavBarContext = createContext<TopNavBarContextType>({
-  layout: 'desktop',
-  inverseColor: false
-})
-
-export default TopNavBarContext
-export { TopNavBarContext }
-export type { TopNavBarLayouts, TopNavBarContextType }
+export { NumberInput } from '../NumberInput/v2'
+export type { NumberInputProps } from '../NumberInput/v2/props'

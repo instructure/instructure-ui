@@ -22,18 +22,19 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Popover } from '@instructure/ui-popover/latest'
-import { CloseButton } from '@instructure/ui-buttons/latest'
-import { Heading } from '@instructure/ui-heading/latest'
-import { Text } from '@instructure/ui-text/latest'
-import { Link } from '@instructure/ui-link/latest'
-import { ExternalLinkInstUIIcon } from '@instructure/ui-icons'
-import { useStyle } from '@instructure/emotion'
+import { Popover } from '@instructure/ui-popover/v11_5'
+import { CloseButton } from '@instructure/ui-buttons/v11_5'
+import { Heading } from '@instructure/ui-heading/v11_5'
+import { Text } from '@instructure/ui-text/v11_5'
+import { Link } from '@instructure/ui-link/v11_5'
+import { IconExternalLinkLine } from '@instructure/ui-icons'
+import { useStyleLegacy as useStyle } from '@instructure/emotion'
 import { NutritionFacts } from '../../NutritionFacts/v1'
 import { DataPermissionLevels } from '../../DataPermissionLevels/v1'
 
 import { AiInformationProps } from './props'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -59,14 +60,13 @@ const AiInformation = ({
   nutritionFactsFeatureName,
   nutritionFactsData,
   nutritionFactsCloseButtonText,
-  nutritionFactsCloseIconButtonScreenReaderLabel,
-  themeOverride
+  nutritionFactsCloseIconButtonScreenReaderLabel
 }: AiInformationProps) => {
   const [open, setOpen] = useState(false)
 
   const styles = useStyle({
     generateStyle,
-    themeOverride,
+    generateComponentTheme,
     componentId: 'AiInformation',
     displayName: 'AiInformation'
   })
@@ -118,9 +118,10 @@ const AiInformation = ({
                   <div css={styles?.privacyNotice}>
                     <Link
                       href={privacyNoticeUrl}
-                      renderIcon={<ExternalLinkInstUIIcon size="sm" />}
+                      renderIcon={<IconExternalLinkLine />}
                       iconPlacement="end"
                       variant="standalone"
+                      target="_blank"
                     >
                       {privacyNoticeText}
                     </Link>

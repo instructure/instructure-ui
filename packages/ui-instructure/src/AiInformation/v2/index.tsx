@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 import { useState } from 'react'
-import { Popover } from '@instructure/ui-popover'
-import { CloseButton } from '@instructure/ui-buttons'
-import { Heading } from '@instructure/ui-heading'
-import { Text } from '@instructure/ui-text'
-import { Link } from '@instructure/ui-link'
+import { Popover } from '@instructure/ui-popover/latest'
+import { CloseButton } from '@instructure/ui-buttons/latest'
+import { Heading } from '@instructure/ui-heading/latest'
+import { Text } from '@instructure/ui-text/latest'
+import { Link } from '@instructure/ui-link/latest'
 import { ExternalLinkInstUIIcon } from '@instructure/ui-icons'
 import { useStyle } from '@instructure/emotion'
-import { NutritionFacts, DataPermissionLevels } from '../'
+import { NutritionFacts } from '../../NutritionFacts/v1'
+import { DataPermissionLevels } from '../../DataPermissionLevels/v1'
 
 import { AiInformationProps } from './props'
 import generateStyle from './styles'

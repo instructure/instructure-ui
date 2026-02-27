@@ -32,7 +32,7 @@ import {
 } from 'react'
 import keycode from 'keycode'
 
-import { FormField } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field/latest'
 import {
   ChevronUpInstUIIcon,
   ChevronDownInstUIIcon
