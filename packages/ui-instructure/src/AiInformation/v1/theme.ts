@@ -23,21 +23,31 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import type { TopNavBarBrandTheme } from '@instructure/shared-types'
+import type { AiInformationTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): TopNavBarBrandTheme => {
-  const { spacing } = theme
+const generateComponentTheme = (theme: Theme): AiInformationTheme => {
+  const { colors, spacing } = theme
 
-  const componentVariables: TopNavBarBrandTheme = {
-    logoHeight: '2.25rem',
-    logoPadding: spacing.small,
-    iconPadding: spacing.small,
-    focusOutlineInset: '-0.25rem'
+  const componentVariables: AiInformationTheme = {
+    bodyPadding: spacing?.paddingCardLarge,
+    headingBottomMargin: spacing?.sectionElements,
+    featureNameBottomMargin: spacing?.moduleElements,
+    permissionLevelTextBottomMargin: spacing?.space8,
+    permissionLevelBottomMargin: spacing?.space8,
+    descriptionBottomMargin: spacing?.space8,
+    permissionLevelsModalTriggerBottomMargin: spacing?.moduleElements,
+    modelNameTextBottomMargin: spacing?.space4,
+    modelNameBottomMargin: spacing?.space4,
+
+    dividerMargin: spacing?.moduleElements,
+    dividerColor: colors?.ui?.surfaceDivider,
+
+    levelColor: colors?.contrasts?.violet5790
   }
 
   return {

@@ -41,7 +41,7 @@ const Example = () => {
           return (
             <div>
               <View as="div" textAlign="end">
-                <Link variant="standalone" onClick={handleLinkClick}>
+                <Link isWithinText={false} onClick={handleLinkClick}>
                   Go to Page Two
                 </Link>
               </View>
@@ -240,7 +240,7 @@ const Example = () => {
     return (
       <View as="div" margin="small 0">
         <Link
-          variant="standalone"
+          isWithinText={false}
           onClick={() => handleDetailsButtonClick(user.id)}
           elementRef={(el) => {
             usersNavRef.current[user.id] = el
