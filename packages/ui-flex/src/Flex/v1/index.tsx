@@ -30,7 +30,7 @@ import {
   matchComponentTypes,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view/v11_5'
+import { View } from '@instructure/ui-view/v11_6'
 import { withStyleLegacy as withStyle } from '@instructure/emotion'
 
 import { Item } from './Item'

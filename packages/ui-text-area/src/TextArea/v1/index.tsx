@@ -23,7 +23,7 @@
  */
 
 import { Fragment, Component } from 'react'
-import { FormField } from '@instructure/ui-form-field/v11_5'
+import { FormField } from '@instructure/ui-form-field/v11_6'
 import {
   addEventListener,
   isActiveElement,
