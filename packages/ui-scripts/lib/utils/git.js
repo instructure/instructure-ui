@@ -128,7 +128,19 @@ export function resetToCommit(commitish = 'HEAD') {
 }
 
 export function getPreviousReleaseCommit() {
-  return runGitCommand(['rev-list', '--tags', '--skip=1', '--max-count=1'])
+  const headMessage = runGitCommand(['log', '-1', '--pretty=format:%s'])
+  if (headMessage && headMessage.startsWith('chore(release)')) {
+    error('HEAD commit is a release commit, cannot bump version!')
+    process.exit(1)
+  }
+
+  return runGitCommand([
+    'log',
+    '--grep=^chore(release)',
+    '--format=%H',
+    '-n',
+    '1'
+  ])
 }
 
 export function getCurrentReleaseTag() {
@@ -141,5 +153,13 @@ export function getPreviousReleaseTag() {
     '--abbrev=0',
     '--tags',
     getPreviousReleaseCommit()
+  ])
+}
+
+export function getCommitsSinceLastRelease() {
+  return runGitCommand([
+    'log',
+    `${getPreviousReleaseCommit()}..HEAD`,
+    '--no-merges'
   ])
 }

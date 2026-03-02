@@ -110,6 +110,11 @@
   },
   "sideEffects": false,
   "exports": {
+    "./lib/*": "./lib/*",
+    "./es/*": "./es/*",
+    "./types/*": "./types/*",
+    "./package.json": "./package.json",
+    "./src/*": "./src/*",
     ".": {
       "types": "./types/v11_6.d.ts",
       "import": "./es/v11_6.js",
@@ -133,11 +138,6 @@
       "import": "./es/v11_7.js",
       "require": "./lib/v11_7.js",
       "default": "./es/v11_7.js"
-    },
-    "./lib/*": "./lib/*",
-    "./es/*": "./es/*",
-    "./types/*": "./types/*",
-    "./package.json": "./package.json",
-    "./src/*": "./src/*"
+    }
   }
 }
