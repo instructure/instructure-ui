@@ -25,9 +25,22 @@
 import { execSync } from 'node:child_process'
 import pkgUtils from '@instructure/pkg-utils'
 import { error, info } from '@instructure/command-utils'
+import { addNewExportsEntiresToPackageJSONs } from '../utils/addNewExportsEntiresToPackageJSONs.js'
+import { addNewExportFileToMetaPackage } from '../utils/addNewExportFileToMetaPackage.js'
 
-import { commitVersionBump, checkWorkingDirectory } from '../utils/git.js'
+import {
+  commitVersionBump,
+  checkWorkingDirectory,
+  getCommitsSinceLastRelease
+} from '../utils/git.js'
 import { bumpPackages } from '../utils/npm.js'
+
+const calcNextVersionType = () => {
+  if (getCommitsSinceLastRelease().includes('BREAKING CHANGE')) {
+    return 'minor'
+  }
+  return 'patch'
+}
 
 export default {
   command: 'bump',
@@ -48,21 +61,25 @@ export default {
 }
 
 async function bump(packageName, requestedVersion) {
+  const newVersionType = requestedVersion ?? calcNextVersionType()
   checkWorkingDirectory()
 
   let releaseVersion
   try {
-    releaseVersion = await bumpPackages(packageName, requestedVersion)
+    releaseVersion = await bumpPackages(packageName, newVersionType)
     info('📦 Running pnpm install to update pnpm-lock.yaml!')
     execSync('pnpm install', { stdio: 'inherit' })
   } catch (err) {
     error(err)
     process.exit(1)
   }
-
   info(
     `💾  Committing version bump commit for ${packageName} ${releaseVersion}...`
   )
+  if (newVersionType !== 'patch') {
+    await addNewExportsEntiresToPackageJSONs(releaseVersion)
+    await addNewExportFileToMetaPackage(releaseVersion)
+  }
 
   try {
     commitVersionBump(releaseVersion)
