@@ -46,7 +46,7 @@ type: example
       on={['click', 'hover', 'focus']}
     >
       <IconButton
-        renderIcon={<InfoInstUIIcon color="baseColor"/>}
+        renderIcon={IconInfoLine}
         withBackground={false}
         withBorder={false}
         screenReaderLabel="Toggle Tooltip"
@@ -106,9 +106,9 @@ type: example
 ---
 const MyComponent = forwardRef((props, ref) => {
   return (
-    <View background="primary" padding='space12' {...props} ref={ref}>
+    <div {...props} ref={ref} style={{ width: '10rem' }}>
       My custom component
-    </View>
+    </div>
   )
 })
 

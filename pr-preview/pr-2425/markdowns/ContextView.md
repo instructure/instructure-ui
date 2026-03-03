@@ -46,7 +46,9 @@ type: example
     width="30rem"
     margin="x-large 0 0"
   >
+    <Text size="small">
       This ContextView uses the inverse background and medium padding. Its width prop is set to `30rem`, which causes long strings like this to wrap. It also has top margin to separate it from the ContextViews above it.
+    </Text>
   </ContextView>
 </div>
 ```
@@ -70,7 +72,7 @@ type: example
 | ContextView | debug | `boolean` | No | `false` |  |
 | ContextView | margin | `Spacing` | No | - |  |
 | ContextView | padding | `Spacing` | No | - |  |
-| ContextView | shadow | `Shadow` | No | `'above'` |  |
+| ContextView | shadow | `Shadow` | No | `'resting'` |  |
 | ContextView | stacking | `Stacking` | No | - |  |
 | ContextView | placement | `PlacementPropValues` | No | `'center end'` |  |
 | ContextView | borderColor | `string` | No | - |  |

@@ -56,8 +56,8 @@ type: example
             </View>
           </DrawerLayout.Tray>
           <DrawerLayout.Content label="Drawer content example">
-            <View as="div" height="100%" background="primary">
-              <View as="div" padding="x-large" background="primary">
+            <div style={{ background: 'white', height: '100%' }}>
+              <View as="div" padding="x-large">
                 <Heading border="bottom">A simple drawer layout</Heading>
                 <Grid startAt="medium" vAlign="middle" colSpacing="none">
                   <Grid.Row>
@@ -83,7 +83,7 @@ type: example
                   <p>{lorem.paragraph()}</p>
                 </Text>
               </View>
-            </View>
+            </div>
           </DrawerLayout.Content>
         </DrawerLayout>
       </View>
@@ -120,7 +120,6 @@ type: example
               textAlign="center"
               margin="large auto"
               padding="large"
-              background="primary"
             >
               <CloseButton
                 placement="end"
@@ -168,8 +167,8 @@ type: example
                 </View>
               </DrawerLayout.Tray>
               <DrawerLayout.Content label="Drawer content example containing a responsive ">
-                <View as="div" background="primary" height='100%'>
-                  <View as="div" padding="x-large"      background="primary">
+                <div style={{ background: 'white', height: '100%' }}>
+                  <View as="div" padding="x-large">
                     <Heading border="bottom">A nested drawer layout</Heading>
                     <Grid startAt="medium" vAlign="middle" colSpacing="none">
                       <Grid.Row>
@@ -217,7 +216,7 @@ type: example
                       <p>{lorem.paragraph()}</p>
                     </Text>
                   </View>
-                </View>
+                </div>
               </DrawerLayout.Content>
             </DrawerLayout>
           </DrawerLayout.Content>

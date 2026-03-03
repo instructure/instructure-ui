@@ -42,7 +42,7 @@ type: example
     onClick={function () {
       alert('This Billboard was clicked!')
     }}
-    hero={(size) => <UserInstUIIcon size={size} />}
+    hero={(size) => <IconUserLine size={size} />}
   />
 </View>
 ```
@@ -56,7 +56,7 @@ type: example
     margin="large"
     message="Click this link"
     href="http://instructure.com"
-    hero={(size) => <BookCheckInstUIIcon size={size} />}
+    hero={(size) => <IconGradebookLine size={size} />}
   />
 </View>
 ```
@@ -72,7 +72,7 @@ type: example
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <PlusInstUIIcon size={size} />}
+  hero={(size) => <IconPlusLine size={size} />}
 />
 ```
 
@@ -88,7 +88,7 @@ type: example
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <UserInstUIIcon size={size} />}
+  hero={(size) => <IconUserLine size={size} />}
   disabled
 />
 ```
@@ -98,7 +98,7 @@ type: example
 
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
-| Billboard | hero | `React.ReactElement \| ((iconSize?: HeroIconSize) => React.ReactElement)` | No | - | Provide an <Img> component or Instructure Icon for the hero image |
+| Billboard | hero | `React.ReactElement \| ((iconSize: HeroIconSize) => React.ReactElement)` | No | - | Provide an <Img> component or Instructure Icon for the hero image |
 | Billboard | size | `'small' \| 'medium' \| 'large'` | No | `'medium'` | If you're using an icon, this prop will size it. Also sets the font-size of the headline and message. |
 | Billboard | as | `AsElementType` | No | `'span'` | the element type to render as |
 | Billboard | elementRef | `(element: Element \| null) => void` | No | `() => {}` | provides a reference to the underlying html root element |

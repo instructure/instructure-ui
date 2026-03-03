@@ -177,9 +177,9 @@ type: example
       withBorder: false,
       renderIcon:
         type === 'prev' ? (
-          <ChevronLeftInstUIIcon color="baseColor" />
+          <IconArrowOpenStartSolid color="primary" />
         ) : (
-          <ChevronRightInstUIIcon color="baseColor" />
+          <IconArrowOpenEndSolid color="primary" />
         ),
       screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
     })
@@ -250,8 +250,8 @@ the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>,
 
 The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
 [IconButton](IconButton) component with the `size` prop set to
-`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to `ChevronLeftInstUIIcon` or
-`ChevronRightInstUIIcon`.
+`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](icons) or
+[IconArrowOpenEnd](icons).
 
 
 ### Props
