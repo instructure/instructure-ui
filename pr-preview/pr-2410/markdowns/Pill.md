@@ -25,22 +25,29 @@ type: example
   </Pill>
   <Pill
     statusLabel="Status"
-    renderIcon={<CheckInstUIIcon size="sm" />}
+    renderIcon={<IconCheckLine />}
     color="success"
     margin="x-small"
   >
     Checked In
   </Pill>
   <Pill
-    renderIcon={<Clock4InstUIIcon size="sm" />}
+    renderIcon={<IconEndLine />}
+    color="danger"
+    margin="x-small"
+  >
+    Missing
+  </Pill>
+  <Pill
+    renderIcon={<IconClockLine />}
     color="warning"
     margin="x-small"
   >
     Late
   </Pill>
   <Pill
-    renderIcon={<MailInstUIIcon size="sm" />}
-    color="error"
+    renderIcon={<IconMessageLine />}
+    color="alert"
     margin="x-small"
   >
     Notification
@@ -84,7 +91,7 @@ type: embed
 | Component | Prop | Type | Required | Default | Description |
 |-----------|------|------|----------|---------|-------------|
 | Pill | as | `AsElementType` | No | - |  |
-| Pill | color | `'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | No | `'primary'` |  |
+| Pill | color | `'primary' \| 'success' \| 'danger' \| 'info' \| 'warning' \| 'alert'` | No | `'primary'` |  |
 | Pill | elementRef | `(element: Element \| null) => void` | No | - | Provides a reference to the underlying HTML element |
 | Pill | margin | `Spacing` | No | - | Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via familiar CSS-like shorthand. For example: `margin="small auto large"`. |
 | Pill | children | `React.ReactNode` | Yes | - |  |

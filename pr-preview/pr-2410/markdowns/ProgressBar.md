@@ -19,9 +19,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -36,9 +36,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -52,9 +52,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -68,9 +68,9 @@ type: example
     valueMax={60}
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -89,7 +89,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 ---
 type: example
 ---
-<View background="primary-inverse" padding="medium" as="div">
+<View background="primary-inverse" as="div">
   <ProgressBar
     screenReaderLabel="Loading completion"
     color="primary-inverse"
@@ -97,9 +97,9 @@ type: example
     valueMax={60}
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -126,9 +126,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -143,9 +143,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -160,9 +160,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -177,9 +177,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -194,9 +194,9 @@ type: example
     margin="0 0 small"
     renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -229,9 +229,9 @@ type: example
   valueMax={60}
   renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   formatScreenReaderValue={({ valueNow, valueMax }) => {
@@ -262,9 +262,9 @@ type: example
   }}
   renderValue={({ valueNow, valueMax }) => {
     return (
-      <span>
+      <Text>
         {Math.round(valueNow / valueMax * 100)}%
-      </span>
+      </Text>
     )
   }}
   valueMax={88}
@@ -358,7 +358,7 @@ const Example = () => {
         valueMax={MAX}
         shouldAnimate={shouldAnimate}
         renderValue={({ valueNow, valueMax }) => {
-          return <span>{Math.round((valueNow / valueMax) * 100)}%</span>
+          return <Text>{Math.round((valueNow / valueMax) * 100)}%</Text>
         }}
         formatScreenReaderValue={({ valueNow, valueMax }) => {
           return Math.round((valueNow / valueMax) * 100) + ' percent'
